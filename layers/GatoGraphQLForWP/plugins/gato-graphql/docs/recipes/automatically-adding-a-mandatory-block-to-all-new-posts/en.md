@@ -1,10 +1,10 @@
 # Automatically adding a mandatory block to all new posts
 
-Whenever a new post is created, we can use the automation features to modify the content of the post, if required.
+Whenever a new post is created, we can use the automation features to validate and modify the content of the post.
 
-This recipe checks if a certain mandatory block is present in the post and, if it is not, it adds it.
+This recipe checks if a certain mandatory block is present in the post and, whenever missing, it adds it.
 
-## GraphQL query to add a block if missing
+## GraphQL query to add a missing block
 
 <div class="doc-config-highlight" markdown=1>
 
@@ -102,11 +102,10 @@ mutation MaybeInsertCommentsBlock($postId: ID!)
 
 ## Adding hook to execute Persisted Query
 
-Hook into the WordPress action `wp_insert_post`, to execute the Persisted Query via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/):
+This PHP code hooks into WordPress action `wp_insert_post` to execute the Persisted Query (via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
 
 ```php
 use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
-use WP_Post;
 
 add_action(
   'wp_insert_post',
