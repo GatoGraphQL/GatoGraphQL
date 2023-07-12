@@ -1,6 +1,12 @@
 # Sending a daily summary of activity
 
-The following WP-Cron event executes hook `gato_graphql__execute_persisted_query` to send a daily email indicating the number of new comments added to the site:
+We can integrate Gato GraphQL with [WP-Cron](https://developer.wordpress.org/plugins/cron/), as to automate the execution GraphQL queries that perform admin tasks, with some time interval. (The [**Automation**](https://gatographql.com/extensions/automation/) extension is required.)
+
+In this recipe, we set-up WP-Cron to, every 24 hs, execute a GraphQL query that retrieves the number of new comments added to the site, and sends these stats to the desired email account.
+
+## GraphQL query with daily stats of new comments
+
+This GraphQL query sends an email indicating the number of new comments added to the site for several periods of time:
 
 - In the last 24 hs
 - In the last 1 year
@@ -90,10 +96,14 @@ mutation SendDailyStatsByEmailNumberOfComments(
 }
 ```
 
-Then, we schedule the WP-Cron event, either via PHP:
+## Scheduling the execution of the GraphQL query via WP-Cron
+
+We must schedule the WP-Cron event to execute the Gato GraphQL hook `gato_graphql__execute_persisted_query`, passing along the email to send the email to as argument, and the recurrence (daily).
+
+We do this either via PHP:
 
 ```php
-\wp_schedule_event(
+wp_schedule_event(
   time(),
   'daily',
   'gato_graphql__execute_persisted_query',
@@ -114,4 +124,14 @@ Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 - Arguments: `["daily-stats-by-email-number-of-comments",{"to":["admin@mysite.com"]},"SendDailyStatsByEmailNumberOfComments",1]`
 - Recurrence: Once Daily
 
-![New entry in WP-Crontrol](../../../extensions/automation/docs/images/wp-crontrol-entry.png "New entry in WP-Crontrol")
+![New entry in WP-Crontrol](../../../extensions/automation/docs/images/wp-crontrol-entry.png "New entry in WP-Crontrol"){ .width-1024 }
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+The 4th argument passed to the WP-Cron event is the ID of the user that must be logged-in when executing the GraphQL query (in this case, value `1` is the ID of the admin user).
+
+Passing this argument is typically needed when executing mutations, as most of these require a user (with the proper capabilities) to be logged-in.
+
+</div>
