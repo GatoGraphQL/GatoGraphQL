@@ -12,16 +12,16 @@ Some examples of services invoking webhooks include:
 
 With Gato GraphQL, we can create Persisted Queries that act as webhooks:
 
-- The Persisted Query is exposed under its own URL, which must be input as the outgoing webhook into the service
-- It must interpret the incoming payload, and do something with its data
+- Because the Persisted Query is exposed under its own URL, this one can conveniently be input as the target URL for the webhook
+- The Persisted Query can deal with that webhook exclusively
 
-In this recipe, we will create a webhook that receives data from ConvertKit.
+In this recipe, we will create a Persisted Query to interact with ConvertKit.
 
 ## Browsing the webhook documentation
 
 The first step is to read the documentation for the website, and understand what data is sent via the payload.
 
-Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),  subscriber-related events (such as `subscriber.subscriber_unsubscribe`) send a `POST` request to our URL with a JSON payload like this:
+Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),  subscriber-related events send a `POST` request to our URL with a JSON payload like this:
 
 ```json
 {
@@ -43,4 +43,6 @@ Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),
 
 
 ## Executing some action with the data
+
+This GraphQL query deals with the `subscriber.subscriber_unsubscribe` event, sending an email to the person.
 
