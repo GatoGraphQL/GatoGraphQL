@@ -68,6 +68,7 @@ use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
 use WP_Post;
 
 // The GraphQL query, under var `$query`, is the one defined above
+// $query = '...';
 add_action(
   'wp_insert_post',
   function (int $postID, WP_Post $post) use ($query) {
@@ -142,6 +143,7 @@ This PHP code executes the `SendEmail` operation (GraphQL query defined above), 
 
 ```php
 // The GraphQL query, under var `$query`, is the one defined above
+// $query = '...';
 add_action(
   "gato_graphql__executed_query_CreatePost",
   function (Response $response) use ($query) {
