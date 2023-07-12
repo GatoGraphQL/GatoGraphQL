@@ -9,7 +9,10 @@ Some examples of services invoking webhooks include:
 - WooCommerce, when an order is added
 - Microsoft Teams, to receive rich text messages and post in public channels
 
-We can react to events from external services by adding a webhook that points to some Persisted Query on our website.
+With Gato GraphQL, we can create Persisted Queries that act as webhooks:
 
-The Persisted Query must interpret the payload, and do something with its data.
+- The Persisted Query is exposed under its own URL, which must be input as the outgoing webhook into the service
+- It must interpret the incoming payload, and do something with its data
+
+In this recipe, we will provide a webhook to interact with GitHub Actions.
 
