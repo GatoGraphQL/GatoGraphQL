@@ -121,17 +121,20 @@ mutation CreatePost {
 
 🔥 **Tips:**
 
-If we are executing a GraphQL query against a public endpoint (such as the single endpoint), and it creates a post by executing mutation `createPost`, then the GraphQL servers perform the following sequence of steps:
+The GraphQL Server (which is "external", accessed as an API via HTTP) and the Internal GraphQL Server will execute their queries applying their own Schema Configuration, even when their execution is intertwined.
 
-| **GraphQL Server** | **Internal GraphQL Server** |
+For instance, let' say we are executing a GraphQL query against the single endpoint, and it creates a post by executing mutation `createPost`. Then the following sequence of steps takes place:
+
+| **(External) GraphQL Server** | **Internal GraphQL Server** |
 | --- | --- |
-| Execute GraphQL query against single endpoint (using its own Schema Configuration) | _(not active)_ |
-| Create post, trigger `wp_insert_post` | _(not active)_ |
-| _(waiting...)_ | React to hook, spin the internal GraphQL server (using its own Schema Configuration) to execute the query to send an email |
+| Execute GraphQL query against the single endpoint, using its own Schema Configuration | _(not active)_ |
+| Create a post; this triggers `wp_insert_post` | _(not active)_ |
+| _(waiting...)_ | React to `wp_insert_post` hook: Spin the Internal GraphQL server, using its own Schema Configuration |
+| _(waiting...)_ | Execute the query to send an email |
 | _(waiting...)_ | Send email, end of that query |
-| _(waiting...)_ | End execution of server |
+| _(waiting...)_ | Shutdown server |
 | Continue execution of query, end of that query | _(not active)_ |
-| End execution of server | _(not active)_ |
+| Shutdown server | _(not active)_ |
 
 <br/>
 
