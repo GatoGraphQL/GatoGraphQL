@@ -334,6 +334,19 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'sending-a-daily-summary-of-activity',
                 \__('Sending a daily summary of activity', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::AUTOMATION,
+                    ExtensionModuleResolver::EMAIL_SENDER,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'validating-that-a-new-post-contains-a-mandatory-block',
