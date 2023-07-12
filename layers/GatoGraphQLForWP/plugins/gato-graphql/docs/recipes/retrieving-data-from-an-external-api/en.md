@@ -233,7 +233,7 @@ query GetDataFromMailchimp {
     @underJSONObjectProperty(by: { key: "members"})
       @underEachArrayItem
         @underJSONObjectProperty(by: { key: "email_address"})
-          @export(as: "mailchimpListMemberEmails", type: LIST)
+          @export(as: "mailchimpListMemberEmails")
 }
 
 query CombineData
@@ -247,6 +247,12 @@ query CombineData
   }
 }
 ```
+
+Tips:
+
+It is `@export(as: "mailchimpListMemberEmails")` and not `@export(as: "mailchimpListMemberEmails", type: LIST)` because `@underEachArrayItem` respects cardinality
+
+---
 
 Tips: talk about:
 
