@@ -42,6 +42,14 @@ Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),
 
 Because the request is sent via `POST`, we must extract the data from the body of the HTTP request (which is supported via the [**HTTP Request via Schema**](http://localhost:8080/extensions/http-request-via-schema/) extension).
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+If the HTTP request is executed via `GET`, then the Persisted Query can directly [obtain the data items from the URL parameters](https://gatographql.com/guides/use/creating-a-persisted-query/#heading-making-the-persisted-query-dynamic-via-url-params).
+
+</div>
+
 This GraphQL query retrieves the body of the request and converts it to a JSON object. Then it extracts items `"subscriber.first_name"` and `"subscriber.email_address"` from the JSON object, and exports them as dynamic variables:
 
 ```graphql
@@ -67,7 +75,34 @@ query ExtractPayloadData {
 
 🔥 **Tips:**
 
-If the HTTP request is executed via `GET`, then the Persisted Query can directly [obtain the data items from the URL parameters](https://gatographql.com/guides/use/creating-a-persisted-query/#heading-making-the-persisted-query-dynamic-via-url-params).
+The [**HTTP Request via Schema**](http://localhost:8080/extensions/http-request-via-schema/) extension allows us to retrieve all of the current HTTP request data, via the following fields:
+
+- `_httpRequestBody`: Body of the HTTP request
+- `_httpRequestClientHost`: Client host
+- `_httpRequestClientIP`: Client IP address (or `null` if the server is not properly configured)
+- `_httpRequestCookie`: Request cookie value
+- `_httpRequestCookies`: Request cookies
+- `_httpRequestDomain`: Domain of the requested URL
+- `_httpRequestFullURL`: Requested URL (including the query params)
+- `_httpRequestHasCookie`: Does the request contain a certain cookie?
+- `_httpRequestHasHeader`: Does the request contain a certain header?
+- `_httpRequestHasParam`: Does the request contain a certain param?
+- `_httpRequestHeader`: Request header value
+- `_httpRequestHeaders`: Request headers
+- `_httpRequestHost`: Host of the requested URL
+- `_httpRequestMethod`: Request method
+- `_httpRequestStringParam`: Value of a param (passed via POST or GET) of type `?param=value`
+- `_httpRequestStringListParam`: Value of a param (passed via POST or GET) of type `?param[]=value1&param[]=value2`
+- `_httpRequestParams`: Params passed whether via POST or via the URL query
+- `_httpRequestProtocol`: Request protocol
+- `_httpRequestQuery`: Query params string
+- `_httpRequestReferer`: Request referer
+- `_httpRequestRequestTime`: Timestamp of the start of the request
+- `_httpRequestScheme`: Scheme of the requested URL
+- `_httpRequestServerIP`: Server IP address
+- `_httpRequestURL`: Requested URL (without query params)
+- `_httpRequestURLPath`: Asolute path (starting with "/") of the requested URL
+- `_httpRequestUserAgent`: User agent
 
 </div>
 
