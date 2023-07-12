@@ -1,5 +1,8 @@
 # Creating Webhooks (via Persisted Queries)
 
+A webhook is an HTTP-based callback function that allows lightweight, event-driven communication between 2 application programming interfaces (APIs). Webhooks are used by a wide variety of web apps to receive small amounts of data from other apps, but webhooks can also be used to trigger automation workflows in GitOps environments. _([source](https://www.redhat.com/en/topics/automation/what-is-a-webhook))_
+
+
 Eg: Notion/Zapier/IFTTT/GitHub send payloads in the body of the call
 
 If we know these, we can extract their data, and do something with it
