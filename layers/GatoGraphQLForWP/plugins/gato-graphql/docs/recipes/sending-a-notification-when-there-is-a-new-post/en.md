@@ -59,7 +59,7 @@ mutation SendEmail @depends(on: "GetEmailData") {
 
 Let's see next how to trigger the execution of the GraphQL query.
 
-## Option 1: Reacting to WordPress hooks
+## Option 1: Trigger always by reacting to WordPress hooks
 
 We hook into the WordPress core action `wp_insert_post`, retrieve the data from the newly-created post, and execute the GraphQL query defined above against the internal GraphQL server (provided via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
 
@@ -94,7 +94,7 @@ Class `GatoGraphQL\InternalGraphQLServer\GraphQLServer` provides 3 static method
 
 </div>
 
-Please notice that this GraphQL query will be executed whenever hook `wp_insert_post` is triggered. That could come from PHP code in the application:
+This GraphQL query will be executed whenever a new post is created or, to be more precise, whenever PHP function `wp_insert_post` is invoked in the application (as this function triggers hook `wp_insert_post`):
 
 ```php
 $postID = wp_insert_post([
@@ -102,7 +102,7 @@ $postID = wp_insert_post([
 ]);
 ```
 
-But also from a executing another GraphQL query (for instance, against the single endpoint), that executes the `createPost` mutation (as its resolver will call PHP method `wp_insert_post`):
+This is also the case when executing another GraphQL query (for instance, against the single endpoint) that executes the `createPost` mutation, as its resolver (in PHP code) invokes the function `wp_insert_post`:
 
 ```graphql
 mutation CreatePost {
@@ -119,9 +119,7 @@ mutation CreatePost {
 
 🔥 **Tips:**
 
-Executing mutation `createPost` will use the standard `wp_insert_post` method from WordPress, hence it will also trigger hook `wp_insert_post`.
-
-Then, if we are executing a GraphQL query against a public endpoint (such as the single endpoint), and it creates a post, the GraphQL server performs the following sequence of actions:
+If we are executing a GraphQL query against a public endpoint (such as the single endpoint), and it creates a post by executing mutation `createPost`, then the GraphQL servers perform the following sequence of steps:
 
 | GraphQL Server | Internal GraphQL Server |
 | --- | --- |
