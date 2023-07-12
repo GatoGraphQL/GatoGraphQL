@@ -1,6 +1,6 @@
-# Creating Webhooks (via Persisted Queries)
+# Creating Webhooks to interact with external services
 
-A webhook is an HTTP-based callback function that allows lightweight, event-driven communication between 2 application programming interfaces (APIs). Webhooks are used by a wide variety of web apps to receive small amounts of data from other apps, but webhooks can also be used to trigger automation workflows in GitOps environments. _([source](https://www.redhat.com/en/topics/automation/what-is-a-webhook))_
+A webhook is an HTTP-based callback function that an external service calls when it produces an event, passing a payload of data along with it. Webhooks enable these different webapps and services to communicate with each other.
 
 Some examples of websites invoking webhooks, sending along the payload of some action, include:
 
