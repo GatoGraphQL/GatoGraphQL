@@ -378,6 +378,15 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'retrieving-data-from-an-external-api',
                 \__('Retrieving data from an external API', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'combining-user-data-from-different-systems',
