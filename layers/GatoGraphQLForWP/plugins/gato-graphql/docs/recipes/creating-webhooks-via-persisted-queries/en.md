@@ -2,9 +2,9 @@
 
 A webhook is an HTTP-based callback function that an external service calls when it produces an event, passing a payload of data along with it. Webhooks enable these different webapps and services to communicate with each other.
 
-Some examples of websites invoking webhooks, sending along the payload of some action, include:
+Some examples of services invoking webhooks include:
 
-- GitHub, when the repository has a new release
+- GitHub, when a repository has a new release
 - Dropbox, when a document is updated
 - WooCommerce, when an order is added
 - Microsoft Teams, to receive rich text messages and post in public channels
