@@ -67,7 +67,7 @@ query ExtractPayloadData {
 
 🔥 **Tips:**
 
-If the request is executed via `GET`, then the Persisted Query can directly [obtain the data items from the URL parameters](https://gatographql.com/guides/use/creating-a-persisted-query/#heading-making-the-persisted-query-dynamic-via-url-params).
+If the HTTP request is executed via `GET`, then the Persisted Query can directly [obtain the data items from the URL parameters](https://gatographql.com/guides/use/creating-a-persisted-query/#heading-making-the-persisted-query-dynamic-via-url-params).
 
 </div>
 
