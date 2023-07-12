@@ -65,7 +65,7 @@ query ExtractPayloadData {
 
 Once we have extracted the data from the payload, we can execute some action with it.
 
-This GraphQL query deals with the `subscriber.subscriber_unsubscribe` event, sending an email to the person asking for feedback.
+This GraphQL query deals with the `subscriber.subscriber_unsubscribe` event, to send an email to the person who unsubscribed, asking for feedback.
 
 ```graphql
 query CreateEmailMessage
@@ -76,9 +76,9 @@ query CreateEmailMessage
 
 Hey {$subscriberFirstName}, it's sad to let you go!
 
-Be welcome to complete [this form](https://forms.gle/FpXNromWAsZYC1zB8) and let us know if we can do anything to improve.
+Please be welcome to complete [this form](https://forms.gle/FpXNromWAsZYC1zB8) and let us know if there is anything we can do better.
 
-Thanks
+Thanks. Hope to see you back!
 
     """
   )
