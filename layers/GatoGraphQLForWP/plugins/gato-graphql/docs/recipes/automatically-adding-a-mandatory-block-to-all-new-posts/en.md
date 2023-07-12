@@ -16,6 +16,8 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 This GraphQL query checks if the mandatory block `wp:comments` has already been added to the post. If missing, it is added at the bottom of the content.
 
+Save this content as a Persisted Query, with slug `insert-mandatory-comments-block-if-missing`:
+
 ```graphql
 query CheckIfCommentsBlockExists($postId: ID!) {
   posts(
@@ -96,4 +98,24 @@ mutation MaybeInsertCommentsBlock($postId: ID!)
     }
   }
 }
+```
+
+## Adding hook to execute Persisted Query
+
+Hook into the WordPress action `wp_insert_post`, to execute the Persisted Query via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/):
+
+```php
+use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
+use WP_Post;
+
+add_action(
+  'wp_insert_post',
+  fn (int $postID) => GraphQLServer::executePersistedQuery(
+    'insert-mandatory-comments-block-if-missing',
+    [
+      'postId' => $postID
+    ],
+    'MaybeInsertCommentsBlock'
+  )
+);
 ```
