@@ -316,6 +316,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'sending-a-notification-when-there-is-a-new-post',
+                \__('Sending a notification when there is a new post', 'gato-graphql'),
+            ],
+            [
                 'automating-admin-tasks',
                 \__('Automating admin tasks', 'gato-graphql'),
             ],
