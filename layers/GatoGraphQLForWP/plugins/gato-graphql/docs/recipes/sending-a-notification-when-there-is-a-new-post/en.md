@@ -142,7 +142,7 @@ For instance, let' say we are executing a GraphQL query against the single endpo
 
 ## Option 2: Trigger by chaining GraphQL queries
 
-The [**Automation**](http://localhost:8080/extensions/automation/) extension makes the GraphQL Server trigger a hook after completing the execution of a GraphQL query. This allows us to chain GraphQL queries.
+The [**Automation**](https://gatographql.com/extensions/automation/) extension makes the GraphQL Server trigger a hook after completing the execution of a GraphQL query. This allows us to chain GraphQL queries.
 
 This PHP code executes the `SendEmail` operation (GraphQL query defined above), after the GraphQL server has executed some other query with operation `CreatePost` (GraphQL query defined above):
 
@@ -177,12 +177,12 @@ add_action(
 
 🔥 **Tips:**
 
-Chaining GraphQL queries allows to execute a single query, even though many resources were created or updated.
+Chaining GraphQL queries allows us to execute a single query only, even when many resources were mutated.
 
-For instance, this GraphQL query updates many resources:
+For instance, this GraphQL query updates many posts:
 
 ```graphql
-mutation ReplaceOldWithNewDomainInPosts {
+mutation ReplaceDomains {
   posts {
     id
     contentSource
@@ -201,9 +201,13 @@ mutation ReplaceOldWithNewDomainInPosts {
 }
 ```
 
-Then, either one or multiple GraphQL queries will be executed:
+Depending on our strategy, we can trigger the execution of one or multiple additional GraphQL queries:
 
-- If we hook into WordPress action `post_updated`, then a GraphQL query will be executed for every one of the updated posts.
-- If we hook into GraphQL query `ReplaceOldWithNewDomainInPosts`, then only 1 GraphQL query will be executed in total (and it will receive the data for all updated posts).
+| **Hooking into...** | **Triggers number of GraphQL queries...** |
+| --- | --- |
+| `post_updated` (by WordPress core) | One for every updated post |
+| `gato_graphql__executed_query_ReplaceDomains` (by [**Automation**](https://gatographql.com/extensions/automation/) extension) | One in total (it will receive the data for all updated posts) |
+
+<br/>
 
 </div>
