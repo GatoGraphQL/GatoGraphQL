@@ -9,8 +9,7 @@ Some examples of websites invoking webhooks, sending along the payload of some a
 - WooCommerce, when an order is added
 - Microsoft Teams, to receive rich text messages and post in public channels
 
+We can react to events from external services by adding a webhook that points to some Persisted Query on our website.
 
+The Persisted Query must interpret the payload, and do something with its data.
 
-If we know these, we can extract their data, and do something with it
-
-Recipes: design/code the GraphQL queries to react to every know Webhook
