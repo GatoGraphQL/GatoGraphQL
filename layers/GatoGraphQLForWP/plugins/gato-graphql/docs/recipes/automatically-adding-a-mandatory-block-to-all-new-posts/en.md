@@ -17,7 +17,7 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 This GraphQL query checks if the mandatory block `wp:comments` has already been added to the post. If missing, it is added at the bottom of the content.
 
 ```graphql
-query CheckIfBlockExists($postId: ID!) {
+query CheckIfCommentsBlockExists($postId: ID!) {
   posts(
     filter: {
       ids: [$postId]
@@ -30,8 +30,8 @@ query CheckIfBlockExists($postId: ID!) {
     @export(as: "blockExists")
 }
 
-mutation MaybeInsertBlock($postId: ID!)
-  @depends(on: "CheckIfBlockExists")
+mutation MaybeInsertCommentsBlock($postId: ID!)
+  @depends(on: "CheckIfCommentsBlockExists")
   @skip(if: $blockExists)
 {
   post(by: { id: $postId }) {
