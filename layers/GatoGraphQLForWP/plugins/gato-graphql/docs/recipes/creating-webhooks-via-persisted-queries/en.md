@@ -19,9 +19,9 @@ In this recipe, we will create a webhook that receives data from ConvertKit.
 
 ## Browsing the webhook documentation
 
-The first step is to read the documentation for the website, and understand what data is sent in the payload.
+The first step is to read the documentation for the website, and understand what data is sent via the payload.
 
-For instance, [webhooks for subscriber-related events in ConvertKit](https://developers.convertkit.com/#webhooks) send a `POST` request to our URL with a JSON payload like this:
+Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),  subscriber-related events (such as `subscriber.subscriber_unsubscribe`) send a `POST` request to our URL with a JSON payload like this:
 
 ```json
 {
@@ -37,4 +37,10 @@ For instance, [webhooks for subscriber-related events in ConvertKit](https://dev
   }
 }
 ```
+
+## Extracting the data from the payload
+
+
+
+## Executing some action with the data
 
