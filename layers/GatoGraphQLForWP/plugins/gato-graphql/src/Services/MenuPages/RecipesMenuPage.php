@@ -332,10 +332,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'automating-admin-tasks',
-                \__('Automating admin tasks', 'gato-graphql'),
-            ],
-            [
                 'sending-a-daily-summary-of-activity',
                 \__('Sending a daily summary of activity', 'gato-graphql'),
             ],
