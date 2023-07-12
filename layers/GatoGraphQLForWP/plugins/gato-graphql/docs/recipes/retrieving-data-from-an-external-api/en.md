@@ -33,7 +33,7 @@ Response
       "members": [
         {
           "id": "mSjGOg5qSb3dKTxPU9lhRZCxHGug8Mrt",
-          "email_address": "some@email.com",
+          "email_address": "vinesh@yahoo.com",
           "unique_email_id": "KObAXbEO3X",
           "contact_id": "JiCdz5EY67m3PKugW3bRE9VI1WjiBbjq",
           "full_name": "Vinesh Munak",
@@ -147,7 +147,7 @@ Response
         "members": [
           {
             "id": "mSjGOg5qSb3dKTxPU9lhRZCxHGug8Mrt",
-            "email_address": "some@email.com",
+            "email_address": "vinesh@yahoo.com",
             "unique_email_id": "KObAXbEO3X",
             "contact_id": "JiCdz5EY67m3PKugW3bRE9VI1WjiBbjq",
             "full_name": "Vinesh Munak",
@@ -263,3 +263,29 @@ underEachArrayItem
 
 Get the email from the API, get `users` with those emails, print their data.
 
+Response:
+
+```json
+
+{
+  "data": {
+    "mailchimpListMemberEmails": [
+      "vinesh@yahoo.com",
+      "thiago@hotmail.com",
+      // ...
+    ],
+    "users": [
+      {
+        "id": 88,
+        "name": "Vinesh Munak",
+        "email": "vinesh@yahoo.com"
+      },
+      {
+        "id": 705,
+        "name": "Thiago Barbossa",
+        "email": "thiago@hotmail.com"
+      }
+    ]
+  }
+}
+```
