@@ -380,6 +380,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Retrieving data from an external API', 'gato-graphql'),
             ],
             [
+                'combining-user-data-from-different-systems',
+                \__('Combining user data from different systems', 'gato-graphql'),
+            ],
+            [
                 'interacting-with-webapps-and-services',
                 \__('Interacting with webapps and services', 'gato-graphql'),
             ],
@@ -418,10 +422,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 [
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
-            ],
-            [
-                'combining-user-data-from-different-systems',
-                \__('Combining user data from different systems', 'gato-graphql'),
             ],
             [
                 'importing-a-post-from-another-site',
