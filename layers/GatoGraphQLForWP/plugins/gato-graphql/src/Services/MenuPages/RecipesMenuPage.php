@@ -376,8 +376,12 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'interacting-with-3rd-party-service-apis',
-                \__('Interacting with 3rd-party service APIs', 'gato-graphql'),
+                'retrieving-data-from-an-external-api',
+                \__('Retrieving data from an external API', 'gato-graphql'),
+            ],
+            [
+                'interacting-with-webapps-and-services',
+                \__('Interacting with webapps and services', 'gato-graphql'),
             ],
             [
                 'creating-an-api-gateway',
