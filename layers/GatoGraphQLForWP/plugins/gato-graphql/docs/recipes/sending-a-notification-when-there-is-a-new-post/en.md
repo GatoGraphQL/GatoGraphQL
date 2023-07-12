@@ -92,7 +92,32 @@ Class `GatoGraphQL\InternalGraphQLServer\GraphQLServer` provides 3 static method
 - `executeQueryInFile`: Execute a GraphQL query contained in a (`.gql`) file
 - `executePersistedQuery`: Execute a persisted GraphQL query (providing its ID as an int, or slug as a string)
 
----
+</div>
+
+Please notice that this GraphQL query will be executed whenever hook `wp_insert_post` is triggered. That could come from PHP code in the application:
+
+```php
+$postID = wp_insert_post([
+  'post_title' => 'Hello world!'
+]);
+```
+
+But also from a executing another GraphQL query (for instance, against the single endpoint), that executes the `createPost` mutation (as its resolver will call PHP method `wp_insert_post`):
+
+```graphql
+mutation CreatePost {
+  createPost(input: {
+    title: "Hello world!"
+  }) {
+    status
+    postID
+  }
+}
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
 
 Executing mutation `createPost` will use the standard `wp_insert_post` method from WordPress, hence it will also trigger hook `wp_insert_post`.
 
