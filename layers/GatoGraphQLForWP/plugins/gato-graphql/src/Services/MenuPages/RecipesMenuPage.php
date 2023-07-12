@@ -361,10 +361,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            // [
-            //     'converting-content-to-gutenberg-blocks',
-            //      \__('Converting content to Gutenberg blocks', 'gato-graphql'),
-            // ],
             [
                 'persisted-queries-as-webhooks',
                 \__('Persisted Queries as Webhooks', 'gato-graphql'),
