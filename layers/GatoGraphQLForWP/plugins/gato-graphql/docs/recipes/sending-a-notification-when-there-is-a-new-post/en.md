@@ -133,41 +133,13 @@ If we are executing a GraphQL query against a public endpoint (such as the singl
 
 </div>
 
-## Option 2: Chaining GraphQL queries
+## Option 2: Trigger by chaining GraphQL queries
 
-we can listen for the execution of
+The [**Automation**](http://localhost:8080/extensions/automation/) extension makes the GraphQL Server trigger a hook when completing the execution of a GraphQL query. This allows us to chain GraphQL queries.
 
-This PHP code is chaining 2 GraphQL query executions:
+This PHP code executes the `SendEmail` operation (from the same GraphQL query from above), after the GraphQL server has executed some other query with operation `CreatePost` (from the same GraphQL query from above):
 
 ```php
-GraphQLServer::executeQuery(
-  <<<GRAPHQL
-    mutation CreatePost(
-      \$postTitle: String!,
-      \$postContent: String!
-    ) {
-      createPost(input: {
-        title: \$postTitle
-        contentAs: { html: \$postContent }
-      }) {
-        status
-        errors {
-          __typename
-          ...on ErrorPayload {
-            message
-          }
-        }
-        postID
-      }
-    }
-  GRAPHQL,
-  [
-    'postTitle' => 'New post',
-    'postContent' => 'Some content',
-  ],
-  'CreatePost'
-);
-
 add_action(
   "gato_graphql__executed_query_CreatePost",
   function (Response $response) {
@@ -183,31 +155,12 @@ add_action(
 
     $post = get_post($postID);
 
-    // Execute the chained query!
-    GraphQLServer::executeQuery(
-      <<<GRAPHQL
-        mutation SendEmail(
-          \$emailSubject: String!
-          \$emailMessage: String!
-        ) {
-          _sendEmail(
-            input: {
-              to: "admin@site.com"
-              subject: \$emailSubject
-              messageAs: {
-                html: \$emailMessage
-              }
-            }
-          ) {
-            status
-          }
-        }
-      GRAPHQL,
-      [
-        'emailSubject' => sprintf(__("New post: %s"), $post->post_title),
-        'emailMessage' => $post->post_content,
-      ]
-    );
+    $variables = [
+      'postTitle' => $post->post_title,
+      'postContent' => $post->post_content,
+      'postURL' => get_permalink($post->ID),
+    ]
+    GraphQLServer::executeQuery($query, $variables, 'SendEmail');
   }
 );
 ```
