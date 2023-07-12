@@ -66,7 +66,7 @@ We hook into the WordPress core action `wp_insert_post`, retrieve the data from 
 ```php
 use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
 
-// GraphQL query, under var `$query`, is the one defined above
+// The GraphQL query, under var `$query`, is the one defined above
 add_action(
   'wp_insert_post',
   function (int $postID, WP_Post $post) use ($query) {
@@ -135,14 +135,15 @@ If we are executing a GraphQL query against a public endpoint (such as the singl
 
 ## Option 2: Trigger by chaining GraphQL queries
 
-The [**Automation**](http://localhost:8080/extensions/automation/) extension makes the GraphQL Server trigger a hook when completing the execution of a GraphQL query. This allows us to chain GraphQL queries.
+The [**Automation**](http://localhost:8080/extensions/automation/) extension makes the GraphQL Server trigger a hook after completing the execution of a GraphQL query. This allows us to chain GraphQL queries.
 
-This PHP code executes the `SendEmail` operation (from the same GraphQL query from above), after the GraphQL server has executed some other query with operation `CreatePost` (from the same GraphQL query from above):
+This PHP code executes the `SendEmail` operation (GraphQL query defined above), after the GraphQL server has executed some other query with operation `CreatePost` (GraphQL query defined above):
 
 ```php
+// The GraphQL query, under var `$query`, is the one defined above
 add_action(
   "gato_graphql__executed_query_CreatePost",
-  function (Response $response) {
+  function (Response $response) use ($query) {
     /** @var string */
     $responseContent = $response->getContent();
     /** @var array<string,mixed> */
@@ -154,7 +155,6 @@ add_action(
     }
 
     $post = get_post($postID);
-
     $variables = [
       'postTitle' => $post->post_title,
       'postContent' => $post->post_content,
