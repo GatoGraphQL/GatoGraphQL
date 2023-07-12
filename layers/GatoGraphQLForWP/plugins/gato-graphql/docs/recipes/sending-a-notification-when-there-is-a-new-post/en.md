@@ -96,7 +96,7 @@ Class `GatoGraphQL\InternalGraphQLServer\GraphQLServer` provides 3 static method
 
 </div>
 
-This GraphQL query will be executed whenever a new post is created or, to be more precise, whenever PHP function `wp_insert_post` is invoked in the application (as this function triggers hook `wp_insert_post`):
+This GraphQL query will be executed whenever a new post is created or, to be more precise, whenever WordPress function `wp_insert_post` is invoked (as this function triggers hook `wp_insert_post`):
 
 ```php
 $postID = wp_insert_post([
@@ -104,7 +104,7 @@ $postID = wp_insert_post([
 ]);
 ```
 
-This is also the case when executing another GraphQL query (for instance, against the single endpoint) that executes the `createPost` mutation, as its resolver (in PHP code) invokes the function `wp_insert_post`:
+This is also the case when executing another GraphQL query that executes the `createPost` mutation (as its resolver, in PHP code, invokes function `wp_insert_post`):
 
 ```graphql
 mutation CreatePost {
@@ -123,15 +123,17 @@ mutation CreatePost {
 
 If we are executing a GraphQL query against a public endpoint (such as the single endpoint), and it creates a post by executing mutation `createPost`, then the GraphQL servers perform the following sequence of steps:
 
-| GraphQL Server | Internal GraphQL Server |
+| **GraphQL Server** | **Internal GraphQL Server** |
 | --- | --- |
-| Execute GraphQL query against single endpoint (using its own Schema Configuration) | |
-| Create post, trigger `wp_insert_post` | |
-| | React to hook, spin the internal GraphQL server (using its own Schema Configuration) to execute the query to send an email |
-| | Send email, end of that query |
-| | End execution of server |
-| Continue execution of query, end of that query |
-| End execution of server | |
+| Execute GraphQL query against single endpoint (using its own Schema Configuration) | _(not active)_ |
+| Create post, trigger `wp_insert_post` | _(not active)_ |
+| _(waiting...)_ | React to hook, spin the internal GraphQL server (using its own Schema Configuration) to execute the query to send an email |
+| _(waiting...)_ | Send email, end of that query |
+| _(waiting...)_ | End execution of server |
+| Continue execution of query, end of that query | _(not active)_ |
+| End execution of server | _(not active)_ |
+
+<br/>
 
 </div>
 
