@@ -130,6 +130,8 @@ Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
 🔥 **Tips:**
 
-The 4th argument passed to the WP-Cron event is the ID of the user that must be logged-in when executing the GraphQL query (in this case, value `1` is the ID of the admin user). Passing this argument is typically required for executing mutations, as users (and with the right capabilities) must likely need to be logged-in.
+The 4th argument passed to the WP-Cron event is the ID of the user that must be logged-in when executing the GraphQL query (in this case, value `1` is the ID of the admin user).
+
+Passing this argument is typically needed when executing mutations, as most of these require a user (with the proper capabilities) to be logged-in.
 
 </div>
