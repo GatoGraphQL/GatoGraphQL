@@ -28,7 +28,7 @@ query CheckIfCommentsBlockExists($postId: ID!) {
   ) {
     id
   }
-  _notEmpty(value: $__posts)
+  blockExists: _notEmpty(value: $__posts)
     @export(as: "blockExists")
 }
 
