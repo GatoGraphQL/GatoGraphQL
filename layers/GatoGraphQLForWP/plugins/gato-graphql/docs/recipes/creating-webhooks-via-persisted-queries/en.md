@@ -1,4 +1,4 @@
-# Persisted Queries as Webhooks
+# Creating Webhooks (via Persisted Queries)
 
 Eg: Notion/Zapier/IFTTT/GitHub send payloads in the body of the call
 
