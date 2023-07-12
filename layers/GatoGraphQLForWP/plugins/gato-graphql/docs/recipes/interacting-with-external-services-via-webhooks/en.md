@@ -40,7 +40,9 @@ Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),
 
 ## Extracting the data from the payload
 
-This GraphQL query extracts items `"subscriber.first_name"` and `"subscriber.email_address"` from the payload, and exports them as dynamic variables:
+This GraphQL query retrieves the body of the HTTP request (via the [**HTTP Request via Schema**](http://localhost:8080/extensions/http-request-via-schema/) extension) and converts it to a JSON object.
+
+Then it extracts items `"subscriber.first_name"` and `"subscriber.email_address"` from the JSON object, and exports them as dynamic variables:
 
 ```graphql
 query ExtractPayloadData {

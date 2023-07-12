@@ -364,6 +364,15 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'interacting-with-external-services-via-webhooks',
                 \__('Interacting with external services via webhooks', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'interacting-with-3rd-party-service-apis',
