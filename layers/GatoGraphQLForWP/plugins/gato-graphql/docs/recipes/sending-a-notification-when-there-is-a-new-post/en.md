@@ -88,7 +88,9 @@ add_action(
 
 🔥 **Tips:**
 
-Class `GatoGraphQL\InternalGraphQLServer\GraphQLServer` provides 3 static methods to execute queries:
+Class `GatoGraphQL\InternalGraphQLServer\GraphQLServer` is not accessible as an external API. Instead, it is to be used by the application via PHP code, for executing/automating admin tasks via GraphQL queries.
+
+This class provides 3 static methods to execute queries:
 
 - `executeQuery`: Execute a GraphQL query
 - `executeQueryInFile`: Execute a GraphQL query contained in a (`.gql`) file
