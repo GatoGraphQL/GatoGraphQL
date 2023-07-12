@@ -40,9 +40,61 @@ Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),
 
 ## Extracting the data from the payload
 
-
-
 ## Executing some action with the data
 
 This GraphQL query deals with the `subscriber.subscriber_unsubscribe` event, sending an email to the person.
 
+```graphql
+query ExtractPayloadData {
+  body: _httpRequestBody
+  bodyJSONObject: _strDecodeJSONObject(string: $__body)
+
+  subscriberFirstName: _objectProperty(
+    object: $__bodyJSONObject,
+    by: { path: "subscriber.first_name" }
+  )
+    @export(as: "subscriberFirstName")
+  
+  subscriberEmail: _objectProperty(
+    object: $__bodyJSONObject,
+    by: { path: "subscriber.email_address" }
+  )
+    @export(as: "subscriberEmail")
+}
+
+query CreateEmailMessage
+  @depends(on: "ExtractPayloadData")
+{
+  emailMessageTemplate: _strConvertMarkdownToHTML(
+    text: """
+
+Hey {$subscriberFirstName}, it's sad to let you go!
+
+Be welcome to complete [this form](https://forms.gle/FpXNromWAsZYC1zB8) and let us know if we can do anything to improve.
+
+Thanks
+
+    """
+  )
+  emailMessage: _strReplaceMultiple(
+    search: ["{$subscriberFirstName}"],
+    replaceWith: [$subscriberFirstName],
+    in: $__emailMessageTemplate
+  )
+    @export(as: "emailMessage")
+}
+
+mutation SendEmail @depends(on: "CreateEmailMessage") {
+  _sendEmail(
+    input: {
+      to: $subscriberEmail
+      subject: "Would you like to give us feedback on how we can improve?"
+      messageAs: {
+        html: $emailMessage
+      }
+    }
+  ) {
+    status
+  }
+}
+```
