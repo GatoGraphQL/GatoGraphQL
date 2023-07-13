@@ -129,14 +129,27 @@ The end result of applying field `_arrayInnerJoinJSONObjectProperties` will be t
 
 ## Combining datasets from different sources
 
-We can use the previous idea to retrieve data we have stored in multiple external services (accessible via those services REST APIs), and combine these disparate datasets together.
+We can retrieve data we have stored in multiple cloud-based services (accessible via those services' APIs), and combine these disparate datasets together.
 
-Let's say that we use two separate services, which provide:
+For instance, pick any two of these services that might store our user data:
 
-1. Newsletter subscribers' data (including email and language spoken by the person)
-2. User data from a CRM (including email and name)
+- Mailchimp
+- Dropbox
+- GitHub
+- Microsoft Teams
+- Slack
+- Trello
+- Google Drive
+- Your WordPress website
+- Your company's internal applications
+- etc
 
-In this GraphQL query, we access the datasets from these services' REST APIs, and combine it all in a single dataset:
+The GraphQL query below retrieves user data from two hypothetical services:
+
+1. A newsletter system (storing subscribers' data, including their email and spoken language)
+2. A CRM (storing customers' data, including their name and email)
+
+These two separate datasets are then combined into 1, around the shared `email` property:
 
 ```graphql
 query ProvideNewsletterUserData {
