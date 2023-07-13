@@ -666,8 +666,8 @@ The [**Field Value Iteration and Manipulation**](https://gatographql.com/extensi
 
 - `@underArrayItem`: Operate on a specific item from the array
 - `@underJSONObjectProperty`: Operate on a specific entry from the JSON object
-- `@underEachArrayItem`: Operate under all items from the array
-- `@underEachJSONObjectProperty`: Operate under all entries from the JSON object
+- `@underEachArrayItem`: Operate on all items from the array
+- `@underEachJSONObjectProperty`: Operate on all entries from the JSON object
 
 This GraphQL query navigates to each of the `email_address` fields, and exports their value to dynamic variable `$mailchimpListMemberEmails`:
 
