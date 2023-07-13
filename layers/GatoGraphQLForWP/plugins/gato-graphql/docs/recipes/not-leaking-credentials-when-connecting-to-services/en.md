@@ -79,4 +79,35 @@ query {
 
 - The credentials are retrieved from an environment variable `GITHUB_ACCESS_TOKEN`, hence they need not be embedded in the source code
 - Field `githubAccessToken` is `@remove`d, hence it is not printed in the response
-- The `_sendJSONObjectItemHTTPRequest(auth:)` input references dynamic variable `$__githubAccessToken` (provided via the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension), hence if field `_sendJSONObjectItemHTTPRequest` produces an error, the literal string `$__githubAccessToken` will be printed in the error message, not its value
+- The `_sendJSONObjectItemHTTPRequest(auth:)` input references dynamic variable `$__githubAccessToken` (provided via the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension), hence if the field produces an error, it is the literal string `"$__githubAccessToken"` that will be printed in the error message (not its value)
+
+To demonstrate the latter item, if providing the URL of a non-existing repository `"leoloso/NonExisting"`, we get this response (notice `auth: {password: $__githubAccessToken}` in the error message):
+
+```json
+{
+  "errors": [
+    {
+      "message": "Client error: `PATCH https://api.github.com/repos/leoloso/NonExisting` resulted in a `404 Not Found` response:\n{\"message\":\"Not Found\",\"documentation_url\":\"https://docs.github.com/rest/repos/repos#update-a-repository\"}\n",
+      "locations": [
+        {
+          "line": 21,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "_sendJSONObjectItemHTTPRequest(input: {url: \"https://api.github.com/repos/leoloso/NonExisting\", method: PATCH, options: {auth: {password: $__githubAccessToken}, body: \"{\"has_wiki\":false}\"}})",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "_sendJSONObjectItemHTTPRequest(input: {url: \"https://api.github.com/repos/leoloso/NonExisting\", method: PATCH, options: {auth: {password: $__githubAccessToken}, body: \"{\"has_wiki\":false}\"}})",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    }
+  ],
+  "data": {
+    "_sendJSONObjectItemHTTPRequest": null
+  }
+}
+```
