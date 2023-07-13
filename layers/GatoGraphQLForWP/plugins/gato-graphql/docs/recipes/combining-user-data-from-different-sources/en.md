@@ -2,13 +2,17 @@
 
 In the previous recipe, we learnt that we can fetch user data from Mailchimp's REST API and combine it with user data stored in our website.
 
-We can generalize this idea, applying it to any 2 data sources, combining their datasets into one, and then executing some operation with the combined data.
+We can generalize this idea, applying it to any two data sources, combining their datasets into one, and then executing some operation with the combined data.
 
-## Combining two datasets into one
+## Combining datasets from different sources
 
-Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) allows us to combine two datasets into one, given that the elements in both datasets share some common property.
+<div class="doc-highlight" markdown=1>
 
-In this GraphQL query, inputs `source` and `target` are lists of JSON objects which share a common `email` property:
+🔥 **Tips:**
+
+Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) allows us to combine JSON objects that reference the same entity (identifiable via an "index", i.e. a shared property with the same value across them), into a single JSON object containing all properties.
+
+In this GraphQL query, inputs `source` and `target` receive lists of JSON objects which share a common `email` property:
 
 ```graphql
 query {
@@ -78,7 +82,7 @@ query {
 }
 ```
 
-The end result of applying field `_arrayInnerJoinJSONObjectProperties` will be the combination of the two datasets around the shared `"email"` property:
+When the `email` property value is the same in the source and target JSON objects, those objects are then combined in the resulting list:
 
 ```json
 {
@@ -127,7 +131,7 @@ The end result of applying field `_arrayInnerJoinJSONObjectProperties` will be t
 }
 ```
 
-## Combining datasets from different sources
+</div>
 
 We can retrieve data we have stored in multiple cloud-based services (accessible via those services' APIs), and combine these disparate datasets together.
 
