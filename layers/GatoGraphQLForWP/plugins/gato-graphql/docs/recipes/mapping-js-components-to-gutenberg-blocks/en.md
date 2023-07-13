@@ -2,9 +2,9 @@
 
 _(This recipe has been inspired by [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/#preact-example).)_
 
-An example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized components.
+This recipe presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
 
-The following code retrieves post and block metadata from the GraphQL single endpoint, and maps each block into a custom component.
+The following code retrieves post and block data from the GraphQL single endpoint, and maps each block into a custom component.
 
 ```html
 <!DOCTYPE html>
@@ -19,9 +19,12 @@ The following code retrieves post and block metadata from the GraphQL single end
 <script type="module">
   import { h, render } from 'https://esm.sh/preact';
 
-  const endpoint = "https://mysite.com/graphql/";  
+  // Input here your domain, and enable the single endpoint
+  const endpoint = "https://mysite.com/graphql/";
+  // Input here the ID of a post with blocks
+  const postId = 40;
   
-  renderPost(endpoint, 40);
+  renderPost(endpoint, postId);
   
   async function renderPost(endpoint, postId) {
     const data = {
@@ -129,7 +132,7 @@ The following code retrieves post and block metadata from the GraphQL single end
 </html>
 ```
 
-Because Gato GraphQL currently does not deal with CORS, for testing this code from a different domain, please add the following PHP code to your theme's `functions.php` file:
+Because Gato GraphQL currently does not deal with CORS, for testing this code from a different domain to your website (or even as a static `.html` file in your computer), you may need to add the following PHP code to your theme's `functions.php` file:
 
 ```php
 add_filter(
