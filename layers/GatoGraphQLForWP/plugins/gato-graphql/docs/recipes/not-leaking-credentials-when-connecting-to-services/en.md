@@ -23,9 +23,13 @@ query {
 }
 ```
 
+We must never expose our credentials, so we need to take precautions:
 
+**In the GraphQL query:** Credentials must never be embedded in source code, as these will be in plain text, creating a security hazard.
 
-Providing credentials should never be hardcoded in code, hence they should not be part of the GraphQL query.
+**In the GraphQL response:** The field connecting to the API might produce an error (for instance, if the target webserver is down), in which case the GraphQL server will add an error message under entry `errors`; this message could print again the name of the field that failed and its arguments, thus printing the credentials in the response.
+
+**In the server logs:** If credentials are provided via a variable, and these are provided via an URL param, then these will be logged somewhere.
 
 We could provide it as a variable
 
