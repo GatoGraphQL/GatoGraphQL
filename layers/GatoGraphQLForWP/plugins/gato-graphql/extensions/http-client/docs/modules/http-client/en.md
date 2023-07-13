@@ -321,18 +321,20 @@ Executing the following query:
 
 ### Multiple-request fields: `_sendJSONObjectItemHTTPRequests`, `_sendJSONObjectCollectionHTTPRequests`, `_sendGraphQLHTTPRequests` and `_sendHTTPRequests`
 
-These fields work similar to their corresponding non-multiple fields, but they retrieve data from several endpoints at once, either asynchronously (in parallel) or synchronously (one after the other). The responses are placed in a list, in the same order in which the URLs were defined in the `urls` parameter.
+These fields work similar to their corresponding non-multiple fields, but they retrieve data from several endpoints at once, either asynchronously (in parallel) or synchronously (one after the other). The responses are placed in a list, in the same order in which the URLs were defined in the `inputs` argument.
 
 For instance, the following query:
 
 ```graphql
 {
-  weatherForecasts: _sendJSONObjectItemHTTPRequests(
-    urls: [
-      "https://api.weather.gov/gridpoints/TOP/31,80/forecast",
-      "https://api.weather.gov/gridpoints/TOP/41,55/forecast"
-    ]
-  )
+  weatherForecasts: _sendJSONObjectItemHTTPRequests(inputs: [
+    {
+      url: "https://api.weather.gov/gridpoints/TOP/31,80/forecast"
+    },
+    {
+      url: "https://api.weather.gov/gridpoints/TOP/41,55/forecast"
+    }
+  ])
 }
 ```
 
