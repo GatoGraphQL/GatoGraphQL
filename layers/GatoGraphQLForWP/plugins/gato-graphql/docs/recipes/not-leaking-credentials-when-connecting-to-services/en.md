@@ -20,6 +20,8 @@ query {
 }
 ```
 
+Below is an explanation of how this query works.
+
 ## How could credentials be leaked
 
 We often need to provide credentials when connecting to external services.
