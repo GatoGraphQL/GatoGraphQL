@@ -215,6 +215,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'mapping-js-components-to-gutenberg-blocks',
+                \__('Mapping JS components to (Gutenberg) blocks', 'gato-graphql'),
+            ],
+            [
                 'duplicating-a-blog-post',
                 \__('Duplicating a blog post', 'gato-graphql'),
                 [
