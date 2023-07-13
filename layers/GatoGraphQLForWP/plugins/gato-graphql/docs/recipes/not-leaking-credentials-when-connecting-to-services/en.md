@@ -1,32 +1,29 @@
 # Not leaking credentials when connecting to services
 
-We often need to provide credentials when connecting to external services. For instance, GitHub's GraphQL API requires providing an access token `{ GITHUB_ACCESS_TOKEN }`:
+We often need to provide credentials when connecting to external services.
+
+For instance, GitHub's API requires an access token to execute REST endpoints where data is mutated or private:
 
 ```graphql
 query {
-  _sendGraphQLHTTPRequest(input:{
-    endpoint: "https://api.github.com/graphql",
-    query: """    
-      query {
-        repositoryOwner(login: "leoloso") {
-          repositories(first: 3) {
-            nodes {
-              id
-              name
-              description
-            }
-          }
-        }
-      }
-    """,
+  credentialsAreNotRequired: _sendJSONObjectItemHTTPRequest(input:{
+    url: "https://api.github.com/repos/leoloso/PoP"
+  })
+
+  credentialsAreRequired: _sendJSONObjectItemHTTPRequest(input:{
+    url: "https://api.github.com/repos/leoloso/PoP",
+    method: PATCH,
     options: {
       auth: {
-        password: "{ GITHUB_ACCESS_TOKEN }"
-      }
+        password: $githubAccessToken
+      },
+      body: "{\"has_wiki\":false}"
     }
   })
 }
 ```
+
+
 
 Providing credentials should never be hardcoded in code, hence they should not be part of the GraphQL query.
 
