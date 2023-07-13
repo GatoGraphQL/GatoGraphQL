@@ -19,7 +19,7 @@ The following code retrieves post and block data from the GraphQL single endpoin
 
   // Input here your domain, and enable the single endpoint
   const endpoint = "https://mysite.com/graphql/";
-  
+
   // Input here the ID of a post with blocks
   const postId = 40;
   
@@ -61,6 +61,8 @@ The following code retrieves post and block data from the GraphQL single endpoin
       console.log(JSON.stringify(json.errors));
       return;
     }
+
+    // Uncomment here to visualize the GraphQL response
     // console.log(json.data);
 
     const postTitle = json.data.post?.title;
