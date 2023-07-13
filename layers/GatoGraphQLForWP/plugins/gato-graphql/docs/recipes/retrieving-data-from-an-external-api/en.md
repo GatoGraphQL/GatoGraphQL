@@ -174,10 +174,10 @@ The body is now accessible as a JSON object:
 
 [**HTTP Client**](https://gatographql/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
 
-- `_sendJSONObjectItemHTTPRequest`: It retrieves the response for a single JSON object
-- `_sendJSONObjectCollectionHTTPRequest`: It retrieves the response for a collection of JSON objects
+- `_sendJSONObjectItemHTTPRequest`: When the content pertains a single JSON object
+- `_sendJSONObjectCollectionHTTPRequest`: When the content pertains a collection of JSON objects
 
-These fields already convert the response to `JSONObject` or `[JSONObject]`.
+<!-- These fields already convert the response to `JSONObject` or `[JSONObject]`. -->
 
 Adapting the previous query:
 
