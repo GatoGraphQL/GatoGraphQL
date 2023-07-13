@@ -128,3 +128,20 @@ The following code retrieves post and block metadata from the GraphQL single end
 </script>
 </html>
 ```
+
+Because Gato GraphQL currently does not deal with CORS, for testing this code from a different domain, please add the following PHP code to your theme's `functions.php` file:
+
+```php
+add_filter(
+  \PoP\ComponentModel\Engine\EngineHookNames::HEADERS,
+  function (array $headers) {
+    return array_merge(
+      $headers,
+      [
+        'Access-Control-Allow-Origin' => 'null',
+        'Access-Control-Allow-Headers' => 'content-type,content-length,accept',
+      ]
+    );
+  }
+);
+```
