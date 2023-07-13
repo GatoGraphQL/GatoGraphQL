@@ -169,7 +169,7 @@ The body is now accessible as a JSON object:
 }
 ```
 
-## Shortcut for dealing with JSON responses
+## Connecting to REST APIs
 
 [**HTTP Client**](https://gatographql/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
 
