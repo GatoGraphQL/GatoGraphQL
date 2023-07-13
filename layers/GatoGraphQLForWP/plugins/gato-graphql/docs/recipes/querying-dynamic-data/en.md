@@ -8,9 +8,9 @@ Gato GraphQL can further augment WordPress' capabilities to search data via the 
 
 🔥 **Tips:**
 
-Gato GraphQL provides function fields under the concept of [Global fields](https://gatographql.com/guides/special-features/global-fields/): Fields that are accessible under all the types from the GraphQL schema.
+Gato GraphQL provides function fields under the concept of [Global fields](https://gatographql.com/guides/special-features/global-fields/): Fields that are accessible under all the types from the GraphQL schema. (Normal fields in GraphQL, in contrast, are accessible only under some specific type, such as `Post` or `User`).
 
-(Typical fields in GraphQL, in contrast, are accessible only under some specific type, such as `Post` or `User`).
+By convention, global fields in Gato GraphQL start with `_` (and normal fields do not).
 
 The [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension provides many of the most common PHP functions as global fields, including:
 
