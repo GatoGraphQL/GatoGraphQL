@@ -402,8 +402,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'interacting-with-webapps-and-services',
-                \__('Interacting with webapps and services', 'gato-graphql'),
+                'not-leaking-credentials-when-connecting-to-services',
+                \__('Not leaking credentials when connecting to services', 'gato-graphql'),
             ],
             [
                 'creating-an-api-gateway',

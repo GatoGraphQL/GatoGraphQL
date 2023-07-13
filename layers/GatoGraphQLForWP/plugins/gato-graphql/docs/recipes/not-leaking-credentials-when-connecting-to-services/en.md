@@ -1,4 +1,4 @@
-# Interacting with webapps and services
+# Not leaking credentials when connecting to services
 
 ```graphql
 query RetrieveProxyArtifactDownloadURLs
