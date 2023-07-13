@@ -640,7 +640,7 @@ This GraphQL query retrieves weather forecast data for multiple regions:
 
 ## Extracting data from the API response
 
-Back to Mailchimp's API, let's extract the list of all the email addresses from the response. These are contained under the `email_address` field under `members`:
+Back to Mailchimp's API, let's extract the list of all the email addresses from the response. These are contained under the `email_address` property on each item of the `members` list:
 
 ```json
 {
