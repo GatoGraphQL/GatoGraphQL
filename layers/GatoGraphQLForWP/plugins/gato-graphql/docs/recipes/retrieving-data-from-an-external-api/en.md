@@ -289,14 +289,33 @@ This fields accepts those inputs expected by GraphQL (the query, variables and o
 This query connects to [GitHub's GraphQL API](https://docs.github.com/en/graphql) and retrieves the name for the repos for some owner:
 
 ```graphql
-query {
-  _sendJSONObjectItemHTTPRequest(input: {
-    url: "https://us7.api.mailchimp.com/3.0/lists/{LIST_ID}/members",
-    method: GET,
+query ConnectToGitHubAPI($authorizationToken: String!) {
+  _sendGraphQLHTTPRequest(input:{
+    endpoint: "https://api.github.com/graphql",
+    query: """
+    
+query GetRepositoriesByOwner($login: String!) {
+  repositoryOwner(login: $login) {
+    repositories(first: 10) {
+      nodes {
+        id
+        name
+        description
+      }
+    }
+  }
+}
+
+    """,
+    variables: [
+      {
+        name: "login",
+        value: "leoloso"
+      }
+    ],
     options: {
       auth: {
-        username: "{USER}",
-        password: "{API_TOKEN}"
+        password: $authorizationToken
       }
     }
   })
