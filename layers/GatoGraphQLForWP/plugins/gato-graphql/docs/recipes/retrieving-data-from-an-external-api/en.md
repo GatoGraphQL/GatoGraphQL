@@ -39,7 +39,7 @@ query {
 }
 ```
 
-The response to this query is:
+Field `_sendHTTPRequest` returns an object of type `HTTPResponse`. After executing the query, notice that the `body` field (of type `String`) contains the raw content of the response:
 
 ```json
 {
@@ -64,11 +64,7 @@ The response to this query is:
 }
 ```
 
-## Dealing with JSON responses
-
-Field `_sendHTTPRequest` returns an object of type `HTTPResponse`, where the `body` field is of type `String`, containing the raw content of the response.
-
-When the response is a JSON object, we can use global field `_strDecodeJSONObject` (from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) to trasform this content, from `String` to `JSONObject`:
+When the content type of response is `application/json`, we can trasform the raw body content from `String` to `JSONObject` via field `_strDecodeJSONObject` (from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension):
 
 ```graphql
 {
@@ -88,7 +84,7 @@ When the response is a JSON object, we can use global field `_strDecodeJSONObjec
 }
 ```
 
-The response's content is now accessible under a JSON object:
+The HTTP response's content is now accessible as a JSON object:
 
 ```json
 {
