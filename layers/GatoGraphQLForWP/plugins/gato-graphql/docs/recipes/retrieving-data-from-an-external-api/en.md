@@ -729,15 +729,15 @@ This is because whenever `@export` is nested below `@underEachArrayItem` (or `@u
 
 ## Combining data from Mailchimp subscribers and website users
 
-In the website we can store information from the Mailchimp subscribers, using their email address as the common ID between the two applications (Mailchimp and our website).
+Let's say that our Mailchimp subscribers also have a user in our website, and that their email address is the common ID for both applications.
 
-After placing the subscriber emails under dynamic variable `$mailchimpListMemberEmails`, we can fetch those users from our site:
+We can then use the email addresses retrieved from Mailchimp (by now placed under dynamic variable `$mailchimpListMemberEmails`) to fetch the corresponding user data stored in our site:
 
 ```graphql
 query GetUsersUsingMailchimpSubscriberEmails
   @depends(on: "GetDataFromMailchimp")
 {
-  users(filter: { searchBy: { emails: $mailchimpListMemberEmails} } ) {
+  users(filter: { searchBy: { emails: $mailchimpListMemberEmails } } ) {
     id
     name
     email
