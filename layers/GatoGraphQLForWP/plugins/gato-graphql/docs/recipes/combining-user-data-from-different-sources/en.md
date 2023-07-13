@@ -11,7 +11,7 @@ Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Fun
 In this GraphQL query, inputs `source` and `target` are lists of JSON objects which share a common `email` property:
 
 ```graphql
-{
+query {
   _arrayInnerJoinJSONObjectProperties(
     source: [
       {
