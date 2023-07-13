@@ -397,14 +397,14 @@ Back to Mailchimp's API, let's extract the list of all the email addresses from 
 }
 ```
 
-We extract these via the [**Field Value Iteration and Manipulation](http://localhost:8080/extensions/field-value-iteration-and-manipulation/) extension, which provides the following meta directives:
+The [**Field Value Iteration and Manipulation](http://localhost:8080/extensions/field-value-iteration-and-manipulation/) extension provides [composable directives](https://gatographql.com/guides/schema/using-composable-directives/) that iterate over the inner elements of arrays or objects, and apply their nested directive(s) under those elements:
 
-- `@underArrayItem`: Apply the nested directive(s) on a specific item from the array
-- `@underJSONObjectProperty`: Apply the nested directive(s) on a specific entry from the JSON object
-- `@underEachArrayItem`: Apply the nested directive(s) under all items from the array
-- `@underEachJSONObjectProperty`: Apply the nested directive(s) under all entries from the JSON object
+- `@underArrayItem`: Operate on a specific item from the array
+- `@underJSONObjectProperty`: Operate on a specific entry from the JSON object
+- `@underEachArrayItem`: Operate under all items from the array
+- `@underEachJSONObjectProperty`: Operate under all entries from the JSON object
 
-Use:
+This GraphQL query extracts the email addresses by navigating to each of the `email_address` fields, and exporting them to dynamic variable `$mailchimpListMemberEmails`:
 
 ```graphql
 query GetDataFromMailchimp {
@@ -423,7 +423,44 @@ query GetDataFromMailchimp {
         @underJSONObjectProperty(by: { key: "email_address"})
           @export(as: "mailchimpListMemberEmails")
 }
+```
 
+We can visualize the entries by printing the value of the dynamic variable:
+
+```graphql
+query PrintEmailAddresses
+  @depends(on: "GetDataFromMailchimp")
+{
+  mailchimpListMemberEmails: _echo(value: $mailchimpListMemberEmails)
+}
+```
+
+The response is:
+
+```json
+{
+  "data": {
+    "mailchimpListMembersJSONObject": {
+      // ...
+    },
+    "mailchimpListMemberEmails": [
+      "vinesh@yahoo.com",
+      "thiago@hotmail.com",
+      // ...
+    ]
+  }
+}
+```
+
+Tips:
+
+It is `@export(as: "mailchimpListMemberEmails")` and not `@export(as: "mailchimpListMemberEmails", type: LIST)` because `@underEachArrayItem` respects cardinality
+
+## GraphQL query to retrieve users subscribed to Mailchimp account
+
+
+
+```graphql
 query CombineData
   @depends(on: "GetDataFromMailchimp")
 {
@@ -436,18 +473,7 @@ query CombineData
 }
 ```
 
-Tips:
 
-It is `@export(as: "mailchimpListMemberEmails")` and not `@export(as: "mailchimpListMemberEmails", type: LIST)` because `@underEachArrayItem` respects cardinality
-
----
-
-Tips: talk about:
-
-underJSONObjectProperty
-underEachArrayItem
-
-## GraphQL query to retrieve users subscribed to Mailchimp account
 
 Get the email from the API, get `users` with those emails, print their data.
 
