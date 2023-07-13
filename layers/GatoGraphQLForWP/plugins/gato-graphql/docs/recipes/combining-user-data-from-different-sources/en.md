@@ -10,9 +10,11 @@ We can generalize this idea, applying it to any two data sources, combining thei
 
 🔥 **Tips:**
 
-Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) allows us to combine JSON objects that reference the same entity (identifiable via an "index", i.e. a shared property with the same value across them), into a single JSON object containing all properties.
+Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) allows us to combine JSON objects that reference the same entity, into a single JSON object containing all properties.
 
-In this GraphQL query, inputs `source` and `target` receive lists of JSON objects which share a common `email` property:
+The JSON objects in both sources can be identified as referencing the same entity because their "index" property has the same value.
+
+In this GraphQL query, inputs `source` and `target` receive lists of JSON objects which share a common `email` property (and so is used as the "index"):
 
 ```graphql
 query {
