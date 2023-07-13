@@ -1,12 +1,12 @@
 # Combining user data from different sources
 
-In the previous recipe, we learnt that we can fetch user data from Mailchimp's REST API and combine it with our website's user data.
+In the previous recipe, we learnt that we can fetch user data from Mailchimp's REST API and combine it with user data stored in our website.
 
-We can apply this same idea for any 2 data sources, and combine their datasets.
+We can generalize this idea, applying it to any 2 data sources, combining their datasets into one, and then executing some operation with the combined data.
 
 ## Combining two datasets into one
 
-Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) allows to combine two datasets into one, given that the elements in both datasets share some common property.
+Function field `_arrayInnerJoinJSONObjectProperties` (provided by the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) allows us to combine two datasets into one, given that the elements in both datasets share some common property.
 
 In this GraphQL query, inputs `source` and `target` are lists of JSON objects which share a common `email` property:
 
