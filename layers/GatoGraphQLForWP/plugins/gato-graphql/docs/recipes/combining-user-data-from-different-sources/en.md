@@ -137,7 +137,7 @@ When the `email` property value is the same in the source and target JSON object
 
 We can retrieve data we have stored in multiple cloud-based services (accessible via those services' APIs), and combine these disparate datasets together.
 
-For instance, pick any two of these services that might store our user data:
+For instance, pick any two of these services that might store user data:
 
 - Mailchimp
 - Dropbox
@@ -155,7 +155,7 @@ The GraphQL query below combines the datasets from two hypothetical services:
 1. A newsletter system (storing subscribers' data, including their email and spoken language)
 2. A CRM (storing customers' data, including their name and email)
 
-It first retrieves all records from the first service and extracts the emails. Then it uses these emails to generate the endpoint URL for the second service's REST API, as to fetch data for those users only. Finally, it combines both datasets into one, around the shared `email` property:
+It first retrieves all records from the newsletter service and extracts the emails. Then it uses these emails to generate the endpoint URL for the CRM's REST API, as to fetch data for those users only. Finally, it combines both datasets into one, around the shared `email` property:
 
 ```graphql
 query ProvideNewsletterUserData {
