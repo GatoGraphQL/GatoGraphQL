@@ -24,9 +24,7 @@ Below is an explanation of how this query works.
 
 ## How could credentials be leaked
 
-We often need to provide credentials when connecting to external services.
-
-For instance, GitHub's REST API requires an access token for endpoints where data is private or is mutated:
+We often need to provide credentials when connecting to external services. For instance, GitHub's REST API requires an access token for endpoints where data is private or is mutated:
 
 ```graphql
 query {
