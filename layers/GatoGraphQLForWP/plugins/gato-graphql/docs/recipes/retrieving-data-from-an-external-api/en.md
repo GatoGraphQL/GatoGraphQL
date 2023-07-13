@@ -371,6 +371,103 @@ Passing these `variables`:
 }
 ```
 
+## Fetching data from multiple APIs
+
+We can send multiple HTTP requests to different URLs, whether asynchronously (i.e. in parallel) or synchronously (one after the other), fetching data from them all at the same time.
+
+Every one of the HTTP request fields explored above has a corresponding "multiple" field:
+
+- `_sendHTTPRequests`
+- `_sendJSONObjectItemHTTPRequests`
+- `_sendJSONObjectCollectionHTTPRequests`
+- `_sendGraphQLHTTPRequests`
+
+This GraphQL query retrieves weather forecast data for multiple regions:
+
+```graphql
+{
+  _sendJSONObjectItemHTTPRequests(inputs: [
+    {
+      url: "https://api.weather.gov/gridpoints/TOP/31,80/forecast"
+    },
+    {
+      url: "https://api.weather.gov/gridpoints/TOP/41,55/forecast"
+    }
+  ])
+}
+```
+
+...producing:
+
+```json
+{
+  "data": {
+    "_sendJSONObjectItemHTTPRequests": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -97.1089731,
+                39.766826299999998
+              ],
+              [
+                -97.108526900000001,
+                39.744778799999999
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "updated": "2022-03-04T09:39:46+00:00",
+          "units": "us",
+          "forecastGenerator": "BaselineForecastGenerator",
+          "generatedAt": "2022-03-04T10:31:47+00:00",
+          "updateTime": "2022-03-04T09:39:46+00:00",
+          "validTimes": "2022-03-04T03:00:00+00:00/P7DT22H",
+          "elevation": {
+            "unitCode": "wmoUnit:m",
+            "value": 441.95999999999998
+          }
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Polygon",
+          "coordinates": [
+            [
+              [
+                -96.812529900000001,
+                39.218048000000003
+              ],
+              [
+                -96.812148500000006,
+                39.195940300000004
+              ]
+            ]
+          ]
+        },
+        "properties": {
+          "updated": "2022-03-04T09:39:46+00:00",
+          "units": "us",
+          "forecastGenerator": "BaselineForecastGenerator",
+          "generatedAt": "2022-03-04T10:42:26+00:00",
+          "updateTime": "2022-03-04T09:39:46+00:00",
+          "validTimes": "2022-03-04T03:00:00+00:00/P7DT22H",
+          "elevation": {
+            "unitCode": "wmoUnit:m",
+            "value": 409.04160000000002
+          }
+        }
+      }
+    ]
+  }
+}
+```
+
 ## Extracting data from the API response
 
 Back to Mailchimp's API, let's extract the list of all the email addresses from the response. These are contained under the `email_address` field under `members`:
