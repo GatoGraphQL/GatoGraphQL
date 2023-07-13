@@ -395,7 +395,7 @@ Back to Mailchimp's API, let's extract the list of all the email addresses from 
 }
 ```
 
-The [**Field Value Iteration and Manipulation**](http://localhost:8080/extensions/field-value-iteration-and-manipulation/) extension provides [composable directives](https://gatographql.com/guides/schema/using-composable-directives/) that iterate over the inner elements of arrays or objects, and apply their nested directive(s) under those elements:
+The [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension provides [composable directives](https://gatographql.com/guides/schema/using-composable-directives/) that iterate over the inner elements of arrays or objects, and apply their nested directive(s) under those elements:
 
 - `@underArrayItem`: Operate on a specific item from the array
 - `@underJSONObjectProperty`: Operate on a specific entry from the JSON object
@@ -450,9 +450,15 @@ query PrintEmailAddresses
 }
 ```
 
-Tips:
+<div class="doc-highlight" markdown=1>
 
-It is `@export(as: "mailchimpListMemberEmails")` and not `@export(as: "mailchimpListMemberEmails", type: LIST)` because `@underEachArrayItem` respects cardinality
+🔥 **Tips:**
+
+Even though dynamic variable `$mailchimpListMemberEmails` is a list, there was no need to add argument `type: LIST` to `@export`.
+
+This is because `@export` is nested below `@underEachArrayItem`, in which case the [exported value will already be an array](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/#heading-exporting-values-when-iterating-an-array-or-json-object).
+
+</div>
 
 ## GraphQL query to retrieve users subscribed to Mailchimp account
 
