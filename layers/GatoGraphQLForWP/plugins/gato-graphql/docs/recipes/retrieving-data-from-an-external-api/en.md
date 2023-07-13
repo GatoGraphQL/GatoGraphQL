@@ -66,13 +66,13 @@ The response to this query is:
 
 ## Dealing with JSON responses
 
-Field `_sendHTTPRequest` returns an object of type `HTTPResponse`. Its `body` field is a string, containing the raw body content of the response.
+Field `_sendHTTPRequest` returns an object of type `HTTPResponse`, where the `body` field is of type `String`, containing the raw content of the response.
 
 When the response is a JSON object, we can use global field `_strDecodeJSONObject` (from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension) to trasform this content, from `String` to `JSONObject`:
 
 ```graphql
 {
-  mailchimpListMembersHTTPResponse: _sendHTTPRequest(input: {
+  _sendHTTPRequest(input: {
     url: "https://us7.api.mailchimp.com/3.0/lists/{LIST_ID}/members",
     method: GET,
     options: {
@@ -88,24 +88,12 @@ When the response is a JSON object, we can use global field `_strDecodeJSONObjec
 }
 ```
 
-The response to this query is:
+The response's content is now accessible under a JSON object:
 
 ```json
 {
   "data": {
-    "mailchimpListMembersHTTPResponse": {
-      "contentType": "application/json; charset=utf-8",
-      "statusCode": 200,
-      "headers": {
-        "Server": "openresty",
-        "Content-Type": "application/json; charset=utf-8",
-        "Vary": "Accept-Encoding",
-        "X-Request-Id": "79104d0f-41bd-c438-fdc2-87p56s3cx7cd",
-        "Link": "<https://us7.api.mailchimp.com/schema/3.0/Lists/Members/Collection.json>; rel=\"describedBy\"",
-        "Content-Length": "34129",
-        "Date": "Wed, 12 Jul 2023 11:47:29 GMT",
-        "Connection": "keep-alive"
-      },
+    "_sendHTTPRequest": {
       "bodyJSONObject": {
         "members": [
           {
