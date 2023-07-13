@@ -454,9 +454,9 @@ query PrintEmailAddresses
 
 🔥 **Tips:**
 
-Even though dynamic variable `$mailchimpListMemberEmails` is a list, there was no need to add argument `type: LIST` to `@export`.
+Notice that, even though dynamic variable `$mailchimpListMemberEmails` is a list, `@export` does not have argument `type: LIST`.
 
-This is because `@export` is nested below `@underEachArrayItem`, in which case the [exported value will already be an array](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/#heading-exporting-values-when-iterating-an-array-or-json-object).
+This is because whenever `@export` is nested below `@underEachArrayItem` (or `@underEachJSONObjectProperty`), the [exported value will already be an array](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/#heading-exporting-values-when-iterating-an-array-or-json-object).
 
 </div>
 
