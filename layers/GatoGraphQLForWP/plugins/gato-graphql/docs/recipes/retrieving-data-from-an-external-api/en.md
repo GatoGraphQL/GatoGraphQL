@@ -373,8 +373,6 @@ Passing these `variables`:
 
 ## Extracting data from the API response
 
-By now we have seen how to connect to an API. Let's now see how to extract the data items from the response.
-
 Back to Mailchimp's API, let's extract the list of all the email addresses from the response. These are contained under the `email_address` field under `members`:
 
 ```json
@@ -397,14 +395,14 @@ Back to Mailchimp's API, let's extract the list of all the email addresses from 
 }
 ```
 
-The [**Field Value Iteration and Manipulation](http://localhost:8080/extensions/field-value-iteration-and-manipulation/) extension provides [composable directives](https://gatographql.com/guides/schema/using-composable-directives/) that iterate over the inner elements of arrays or objects, and apply their nested directive(s) under those elements:
+The [**Field Value Iteration and Manipulation**](http://localhost:8080/extensions/field-value-iteration-and-manipulation/) extension provides [composable directives](https://gatographql.com/guides/schema/using-composable-directives/) that iterate over the inner elements of arrays or objects, and apply their nested directive(s) under those elements:
 
 - `@underArrayItem`: Operate on a specific item from the array
 - `@underJSONObjectProperty`: Operate on a specific entry from the JSON object
 - `@underEachArrayItem`: Operate under all items from the array
 - `@underEachJSONObjectProperty`: Operate under all entries from the JSON object
 
-This GraphQL query extracts the email addresses by navigating to each of the `email_address` fields, and exporting them to dynamic variable `$mailchimpListMemberEmails`:
+This GraphQL query navigates to each of the `email_address` fields, and exports their value to dynamic variable `$mailchimpListMemberEmails`:
 
 ```graphql
 query GetDataFromMailchimp {
@@ -435,7 +433,7 @@ query PrintEmailAddresses
 }
 ```
 
-The response is:
+...producing:
 
 ```json
 {
