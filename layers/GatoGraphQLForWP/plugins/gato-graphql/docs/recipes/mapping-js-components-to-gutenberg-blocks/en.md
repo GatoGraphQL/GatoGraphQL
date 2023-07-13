@@ -1,8 +1,6 @@
 # Mapping JS components to (Gutenberg) blocks
 
-_(This recipe has been inspired by [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/#preact-example).)_
-
-This recipe presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
+This recipe _(inspired by [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/#preact-example))_ presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
 
 The following code retrieves post and block data from the GraphQL single endpoint, and maps each block into a custom component.
 
@@ -21,6 +19,7 @@ The following code retrieves post and block data from the GraphQL single endpoin
 
   // Input here your domain, and enable the single endpoint
   const endpoint = "https://mysite.com/graphql/";
+  
   // Input here the ID of a post with blocks
   const postId = 40;
   
