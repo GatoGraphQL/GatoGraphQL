@@ -4,9 +4,9 @@ This recipe _(inspired by [`Automattic/vip-block-data-api`](https://github.com/A
 
 <div class="doc-config-highlight" markdown=1>
 
-⚙️ **PHP code alert:**
+⚙️ **PHP code alert (for testing):**
 
-Because Gato GraphQL currently does not deal with CORS, for testing this Preact app from a different domain than your website's (or even as a static `.html` file in your computer), you may need to add the following PHP code to your theme's `functions.php` file:
+If your WordPress site has the [Same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) enabled, in order to test the Preact app below by saving it as a static `.html` file and running it in the browser, add the following PHP code to your theme's `functions.php` file (to avoid CORS erros):
 
 ```php
 add_filter(
