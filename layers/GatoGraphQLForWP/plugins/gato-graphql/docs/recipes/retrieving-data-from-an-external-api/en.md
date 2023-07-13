@@ -416,63 +416,221 @@ This GraphQL query retrieves weather forecast data for multiple regions:
   "data": {
     "_sendJSONObjectItemHTTPRequests": [
       {
+        "@context": [
+          "https://geojson.org/geojson-ld/geojson-context.jsonld",
+          {
+            "@version": "1.1",
+            "wx": "https://api.weather.gov/ontology#",
+            "geo": "http://www.opengis.net/ont/geosparql#",
+            "unit": "http://codes.wmo.int/common/unit/",
+            "@vocab": "https://api.weather.gov/ontology#"
+          }
+        ],
         "type": "Feature",
         "geometry": {
           "type": "Polygon",
           "coordinates": [
             [
               [
-                -97.1089731,
-                39.766826299999998
+                -97.137207,
+                39.7444372
               ],
               [
-                -97.108526900000001,
-                39.744778799999999
+                -97.1367549,
+                39.7223799
+              ],
+              [
+                -97.1080809,
+                39.7227252
+              ],
+              [
+                -97.10852700000001,
+                39.7447825
+              ],
+              [
+                -97.137207,
+                39.7444372
               ]
             ]
           ]
         },
         "properties": {
-          "updated": "2022-03-04T09:39:46+00:00",
+          "updated": "2023-07-13T05:39:07+00:00",
           "units": "us",
           "forecastGenerator": "BaselineForecastGenerator",
-          "generatedAt": "2022-03-04T10:31:47+00:00",
-          "updateTime": "2022-03-04T09:39:46+00:00",
-          "validTimes": "2022-03-04T03:00:00+00:00/P7DT22H",
+          "generatedAt": "2023-07-13T06:44:24+00:00",
+          "updateTime": "2023-07-13T05:39:07+00:00",
+          "validTimes": "2023-07-12T23:00:00+00:00/P7DT2H",
           "elevation": {
             "unitCode": "wmoUnit:m",
-            "value": 441.95999999999998
-          }
+            "value": 456.8952
+          },
+          "periods": [
+            {
+              "number": 1,
+              "name": "Overnight",
+              "startTime": "2023-07-13T01:00:00-05:00",
+              "endTime": "2023-07-13T06:00:00-05:00",
+              "isDaytime": false,
+              "temperature": 68,
+              "temperatureUnit": "F",
+              "temperatureTrend": null,
+              "probabilityOfPrecipitation": {
+                "unitCode": "wmoUnit:percent",
+                "value": null
+              },
+              "dewpoint": {
+                "unitCode": "wmoUnit:degC",
+                "value": 21.666666666666668
+              },
+              "relativeHumidity": {
+                "unitCode": "wmoUnit:percent",
+                "value": 100
+              },
+              "windSpeed": "5 mph",
+              "windDirection": "NE",
+              "icon": "https://api.weather.gov/icons/land/night/few?size=medium",
+              "shortForecast": "Mostly Clear",
+              "detailedForecast": "Mostly clear, with a low around 68. Northeast wind around 5 mph."
+            },
+            {
+              "number": 2,
+              "name": "Thursday",
+              "startTime": "2023-07-13T06:00:00-05:00",
+              "endTime": "2023-07-13T18:00:00-05:00",
+              "isDaytime": true,
+              "temperature": 90,
+              "temperatureUnit": "F",
+              "temperatureTrend": null,
+              "probabilityOfPrecipitation": {
+                "unitCode": "wmoUnit:percent",
+                "value": null
+              },
+              "dewpoint": {
+                "unitCode": "wmoUnit:degC",
+                "value": 21.11111111111111
+              },
+              "relativeHumidity": {
+                "unitCode": "wmoUnit:percent",
+                "value": 100
+              },
+              "windSpeed": "5 to 10 mph",
+              "windDirection": "NE",
+              "icon": "https://api.weather.gov/icons/land/day/sct?size=medium",
+              "shortForecast": "Mostly Sunny",
+              "detailedForecast": "Mostly sunny, with a high near 90. Northeast wind 5 to 10 mph."
+            },
+            // ...
+          ]
         }
       },
       {
+        "@context": [
+          "https://geojson.org/geojson-ld/geojson-context.jsonld",
+          {
+            "@version": "1.1",
+            "wx": "https://api.weather.gov/ontology#",
+            "geo": "http://www.opengis.net/ont/geosparql#",
+            "unit": "http://codes.wmo.int/common/unit/",
+            "@vocab": "https://api.weather.gov/ontology#"
+          }
+        ],
         "type": "Feature",
         "geometry": {
           "type": "Polygon",
           "coordinates": [
             [
               [
-                -96.812529900000001,
-                39.218048000000003
+                -96.8406778,
+                39.1956467
               ],
               [
-                -96.812148500000006,
-                39.195940300000004
+                -96.8402904,
+                39.1735282
+              ],
+              [
+                -96.811767,
+                39.1738261
+              ],
+              [
+                -96.8121485,
+                39.1959446
+              ],
+              [
+                -96.8406778,
+                39.1956467
               ]
             ]
           ]
         },
         "properties": {
-          "updated": "2022-03-04T09:39:46+00:00",
+          "updated": "2023-07-13T05:39:07+00:00",
           "units": "us",
           "forecastGenerator": "BaselineForecastGenerator",
-          "generatedAt": "2022-03-04T10:42:26+00:00",
-          "updateTime": "2022-03-04T09:39:46+00:00",
-          "validTimes": "2022-03-04T03:00:00+00:00/P7DT22H",
+          "generatedAt": "2023-07-13T07:07:02+00:00",
+          "updateTime": "2023-07-13T05:39:07+00:00",
+          "validTimes": "2023-07-12T23:00:00+00:00/P7DT2H",
           "elevation": {
             "unitCode": "wmoUnit:m",
-            "value": 409.04160000000002
-          }
+            "value": 403.86
+          },
+          "periods": [
+            {
+              "number": 1,
+              "name": "Overnight",
+              "startTime": "2023-07-13T02:00:00-05:00",
+              "endTime": "2023-07-13T06:00:00-05:00",
+              "isDaytime": false,
+              "temperature": 69,
+              "temperatureUnit": "F",
+              "temperatureTrend": null,
+              "probabilityOfPrecipitation": {
+                "unitCode": "wmoUnit:percent",
+                "value": null
+              },
+              "dewpoint": {
+                "unitCode": "wmoUnit:degC",
+                "value": 22.22222222222222
+              },
+              "relativeHumidity": {
+                "unitCode": "wmoUnit:percent",
+                "value": 97
+              },
+              "windSpeed": "5 to 10 mph",
+              "windDirection": "NE",
+              "icon": "https://api.weather.gov/icons/land/night/few?size=medium",
+              "shortForecast": "Mostly Clear",
+              "detailedForecast": "Mostly clear, with a low around 69. Northeast wind 5 to 10 mph."
+            },
+            {
+              "number": 2,
+              "name": "Thursday",
+              "startTime": "2023-07-13T06:00:00-05:00",
+              "endTime": "2023-07-13T18:00:00-05:00",
+              "isDaytime": true,
+              "temperature": 93,
+              "temperatureUnit": "F",
+              "temperatureTrend": null,
+              "probabilityOfPrecipitation": {
+                "unitCode": "wmoUnit:percent",
+                "value": null
+              },
+              "dewpoint": {
+                "unitCode": "wmoUnit:degC",
+                "value": 22.22222222222222
+              },
+              "relativeHumidity": {
+                "unitCode": "wmoUnit:percent",
+                "value": 100
+              },
+              "windSpeed": "5 to 10 mph",
+              "windDirection": "NE",
+              "icon": "https://api.weather.gov/icons/land/day/sct?size=medium",
+              "shortForecast": "Mostly Sunny",
+              "detailedForecast": "Mostly sunny, with a high near 93. Northeast wind 5 to 10 mph."
+            },
+            // ...
+          ]
         }
       }
     ]
