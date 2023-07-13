@@ -289,14 +289,18 @@ This fields accepts those inputs expected by GraphQL (the query, variables and o
 This query connects to [GitHub's GraphQL API](https://docs.github.com/en/graphql) and retrieves the name for the repos for some owner:
 
 ```graphql
-query ConnectToGitHubAPI($authorizationToken: String!) {
+query FetchGitHubRepositories(
+  $authorizationToken: String!
+  $login: String!
+  $numberRepos: Int! = 3
+) {
   _sendGraphQLHTTPRequest(input:{
     endpoint: "https://api.github.com/graphql",
     query: """
     
-query GetRepositoriesByOwner($login: String!) {
+query GetRepositoriesByOwner($login: String!, $numberRepos: Int!) {
   repositoryOwner(login: $login) {
-    repositories(first: 10) {
+    repositories(first: $numberRepos) {
       nodes {
         id
         name
@@ -310,7 +314,11 @@ query GetRepositoriesByOwner($login: String!) {
     variables: [
       {
         name: "login",
-        value: "leoloso"
+        value: $login
+      },
+      {
+        name: "numberRepos",
+        value: $numberRepos
       }
     ],
     options: {
@@ -322,82 +330,44 @@ query GetRepositoriesByOwner($login: String!) {
 }
 ```
 
+Passing `variables`:
+
+```json
+{
+  "authorizationToken": "{ GITHUB ACCESS TOKEN }",
+  "login": "leoloso"
+}
+```
+
 ...produces this response:
 
 ```json
 {
   "data": {
-    "_sendJSONObjectItemHTTPRequest": {
-      "members": [
-        {
-          "id": "mSjGOg5qSb3dKTxPU9lhRZCxHGug8Mrt",
-          "email_address": "vinesh@yahoo.com",
-          "unique_email_id": "KObAXbEO3X",
-          "contact_id": "JiCdz5EY67m3PKugW3bRE9VI1WjiBbjq",
-          "full_name": "Vinesh Munak",
-          "web_id": 443344389,
-          "email_type": "html",
-          "status": "subscribed",
-          "consents_to_one_to_one_messaging": true,
-          "merge_fields": {
-            "FNAME": "Vinesh",
-            "LNAME": "Munak",
-            "ADDRESS": {
-              "addr1": "",
-              "addr2": "",
-              "city": "",
-              "state": "",
-              "zip": "",
-              "country": "IN"
-            },
-            "PHONE": "",
-            "BIRTHDAY": ""
-          },
-          "stats": {
-            "avg_open_rate": 0.8,
-            "avg_click_rate": 0.6
-          },
-          "ip_signup": "",
-          "timestamp_signup": "",
-          "ip_opt": "218.115.112.129",
-          "timestamp_opt": "2020-12-31T06:55:17+00:00",
-          "member_rating": 4,
-          "last_changed": "2020-12-31T06:55:17+00:00",
-          "language": "",
-          "vip": false,
-          "email_client": "",
-          "location": {
-            "latitude": 2.18,
-            "longitude": 99.47,
-            "gmtoff": 8,
-            "dstoff": 8,
-            "country_code": "MY",
-            "timezone": "asia/kuala_lumpur",
-            "region": "10"
-          },
-          "source": "Admin Add",
-          "tags_count": 0,
-          "tags": [],
-          "list_id": "9nrwpfj0ou",
-          "_links": [
-            {
-              // ...
-            },
-            // ...
-          ]
-        },
-        {
-          // ...
+    "_sendGraphQLHTTPRequest": {
+      "data": {
+        "repositoryOwner": {
+          "repositories": {
+            "nodes": [
+              {
+                "id": "MDEwOlJlcG9zaXRvcnk2NjcyMTIyNw==",
+                "name": "PoP",
+                "description": "Monorepo of the PoP project, including: a server-side component model in PHP, a GraphQL server, a GraphQL API plugin for WordPress, and a website builder"
+              },
+              {
+                "id": "MDEwOlJlcG9zaXRvcnkxODQ1MzE5NzA=",
+                "name": "PoP-API-WP",
+                "description": "Bootstrap a PoP API for WordPress"
+              },
+              {
+                "id": "MDEwOlJlcG9zaXRvcnkxOTYwOTk0MzQ=",
+                "name": "leoloso.com",
+                "description": "My personal site, based on Hylia (https://hylia.website)"
+              }
+            ]
+          }
         }
-      ],
-      "list_id": "9nrwpfj0ou",
-      "total_items": 4927,
-      "_links": [
-        {
-          // ...
-        },
-        // ...
-      ]
+      }
     }
   }
 }
