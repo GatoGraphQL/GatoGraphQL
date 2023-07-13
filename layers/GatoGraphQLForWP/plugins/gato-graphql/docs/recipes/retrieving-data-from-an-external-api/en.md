@@ -170,7 +170,7 @@ The body is now accessible as a JSON object:
 }
 ```
 
-## Connecting to REST APIs
+## Connecting to a REST API
 
 [**HTTP Client**](https://gatographql/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
 
@@ -277,15 +277,15 @@ query {
 }
 ```
 
-## Connecting to GraphQL APIs
+## Connecting to a GraphQL API
 
-(As the Mailchimp API doesn't support GraphQL, we switch to a different API for this example.)
+<!-- (As the Mailchimp API doesn't support GraphQL, we switch to a different API for this example.) -->
 
 [**HTTP Client**](https://gatographql/extensions/http-client/) also provides a function field to conveniently connect to GraphQL APIs.
 
 Field `_sendGraphQLHTTPRequest` accepts those inputs expected by GraphQL (the query, variables and operation name), executes the GraphQL query against the provided endpoint, and converts the response to `JSONObject`.
 
-This query connects to [GitHub's GraphQL API](https://docs.github.com/en/graphql) and retrieves the list of repos for the provided owner:
+This query connects to [GitHub's GraphQL API](https://docs.github.com/en/graphql) and retrieves the list of repos for the indicated owner:
 
 ```graphql
 query FetchGitHubRepositories(
