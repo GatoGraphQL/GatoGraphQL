@@ -2,7 +2,7 @@
 
 This recipe _(inspired by [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/#preact-example))_ presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
 
-The following code retrieves post and block data from the GraphQL single endpoint, and maps each block into a custom component.
+The GraphQL query contained in the code below retrieves the post's block data as a JSON object (via field `CustomPost.blockDataItems`), and then the JavaScript code maps each block data item into a custom component:
 
 ```html
 <!DOCTYPE html>
