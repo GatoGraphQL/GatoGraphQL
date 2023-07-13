@@ -9,9 +9,7 @@ This recipe demonstrates how to fetch data from an external API, by:
 
 ## Executing an HTTP request
 
-The [docs for Mailchimp's API](https://mailchimp.com/developer/marketing/docs/fundamentals/#connecting-to-the-api) explain that we can connect to it by sending a `GET` request.
-
-Fetching data from the email list's subscribers is done like this:
+The [docs for Mailchimp's API](https://mailchimp.com/developer/marketing/docs/fundamentals/#connecting-to-the-api) explain that we must send a `GET` request against the REST API, to fetch an email list members' data:
 
 ```bash
 curl --request GET \
