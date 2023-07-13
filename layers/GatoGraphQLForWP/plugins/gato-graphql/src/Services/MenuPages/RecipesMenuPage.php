@@ -391,8 +391,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'combining-user-data-from-different-systems',
-                \__('Combining user data from different systems', 'gato-graphql'),
+                'combining-user-data-from-different-sources',
+                \__('Combining user data from different sources', 'gato-graphql'),
             ],
             [
                 'interacting-with-webapps-and-services',

@@ -1,4 +1,4 @@
-# Combining user data from different systems
+# Combining user data from different sources
 
 In the previous recipe, we learnt that we can fetch user data from Mailchimp's REST API and combine it with our website's user data.
 
