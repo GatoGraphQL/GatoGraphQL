@@ -4,7 +4,7 @@ The [**HTTP Client**](https://gatographql/extensions/http-client/) extension all
 
 This recipe demonstrates how to fetch data from an external API. We will connect to Mailchimp's API to retrieve an email list's subscribers, extract their email (and other data), and do something with this data.
 
-## Connecting to Mailchimp's API
+## Executing an HTTP request
 
 The [docs for Mailchimp's API](https://mailchimp.com/developer/marketing/docs/fundamentals/#connecting-to-the-api) explain that we can connect to it by sending a `GET` request.
 
@@ -16,13 +16,11 @@ curl --request GET \
   --user 'username:password'
 ```
 
-## Connecting to an API in Gato GraphQL
-
-We execute the previous HTTP request via global field `_sendHTTPRequest` (provided via the [**HTTP Client**](https://gatographql/extensions/http-client/) extension):
+We execute an HTTP request in Gato GraphQL via global field `_sendHTTPRequest` (provided via the [**HTTP Client**](https://gatographql/extensions/http-client/) extension):
 
 ```graphql
-{
-  mailchimpListMembersHTTPResponse: _sendHTTPRequest(input: {
+query {
+  _sendHTTPRequest(input: {
     url: "https://us7.api.mailchimp.com/3.0/lists/{LIST_ID}/members",
     method: GET,
     options: {
