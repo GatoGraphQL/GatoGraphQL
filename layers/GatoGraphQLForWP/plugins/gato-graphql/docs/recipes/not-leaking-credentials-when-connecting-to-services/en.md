@@ -1,5 +1,27 @@
 # Not leaking credentials when connecting to services
 
+Credentials in this GraphQL query are retrieved from an environment value, and never printed in the response, avoiding security risks:
+
+```graphql
+query {
+  githubAccessToken: _env(name: "GITHUB_ACCESS_TOKEN")
+    @remove
+
+  _sendJSONObjectItemHTTPRequest(input:{
+    url: "https://api.github.com/repos/leoloso/PoP",
+    method: PATCH,
+    options: {
+      auth: {
+        password: $__githubAccessToken
+      },
+      body: "{\"has_wiki\":false}"
+    }
+  })
+}
+```
+
+## Where could credentials be exposed
+
 We often need to provide credentials when connecting to external services.
 
 For instance, GitHub's API requires an access token to execute REST endpoints where data is mutated or private:
@@ -15,7 +37,7 @@ query {
     method: PATCH,
     options: {
       auth: {
-        password: $githubAccessToken
+        password: "{ GITHUB_ACCESS_TOKEN }"
       },
       body: "{\"has_wiki\":false}"
     }
@@ -31,124 +53,30 @@ We must never expose our credentials, so we need to take precautions:
 
 **In the server logs:** If credentials are provided via a variable, and these are provided via an URL param, then these will be logged somewhere.
 
-We could provide it as a variable
+## GraphQL query that avoids leaking credentials
 
-Passing these `variables`:
-
-```json
-{
-  "authorizationToken": "{ GITHUB ACCESS TOKEN }",
-  "login": "leoloso"
-}
-```
-
-
+This GraphQL query passes the credentials to GitHub's API:
 
 ```graphql
-query RetrieveProxyArtifactDownloadURLs
-{
+query {
   githubAccessToken: _env(name: "GITHUB_ACCESS_TOKEN")
-    # This directive will remove this entry from the output
     @remove
 
-  # Create the authorization header to send to GitHub
-  authorizationHeader: _sprintf(
-    string: "Bearer %s",
-    # "Field to Input" feature to access value from the field above
-    values: [$__githubAccessToken]
-  )
-    # Do not print in output
-    @remove
-
-  # Create the authorization header to send to GitHub
-  githubRequestHeaders: _echo(value: [
-    {
-      name: "Accept",
-      value: "application/vnd.github+json"
-    },
-    {
-      name: "Authorization",
-      value: $__authorizationHeader
+  _sendJSONObjectItemHTTPRequest(input:{
+    url: "https://api.github.com/repos/leoloso/PoP",
+    method: PATCH,
+    options: {
+      auth: {
+        password: $__githubAccessToken
+      },
+      body: "{\"has_wiki\":false}"
     }
-  ])
-    # Do not print in output
-    @remove
-    @export(as: "githubRequestHeaders")
-  
-  # Use the field from "Send HTTP Request Fields" to connect to GitHub
-  gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
-    input: {
-      url: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=2",
-      options: {
-        headers: $__githubRequestHeaders
-      }
-    }
-  )
-    # Do not print in output
-    @remove
-  
-  # Finally just extract the URL from within each "artifacts" item
-  gitHubProxyArtifactDownloadURLs: _objectProperty(
-    object: $__gitHubArtifactData,
-    by: {
-      key: "artifacts"
-    }
-  )
-    @underEachArrayItem(passValueOnwardsAs: "artifactItem")
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $artifactItem,
-          by: {
-            key: "archive_download_url"
-          }
-        },
-        setResultInResponse: true
-      )
-    @export(as: "gitHubProxyArtifactDownloadURLs")
-}
-
-query CreateHTTPRequestInputs
-  @depends(on: "RetrieveProxyArtifactDownloadURLs")
-{
-
-  httpRequestInputs: _echo(value: $gitHubProxyArtifactDownloadURLs)
-    @underEachArrayItem(passValueOnwardsAs: "url")
-      @applyField(
-        name: "_objectAddEntry",
-        arguments: {
-          object: {
-            options: {
-              headers: $githubRequestHeaders,
-              allowRedirects: null
-            }
-          },
-          key: "url",
-          value: $url
-        },
-        setResultInResponse: true
-      )
-    @export(as: "httpRequestInputs")
-    @remove
-}
-
-query RetrieveActualArtifactDownloadURLs
-  @depends(on: "CreateHTTPRequestInputs")
-{
-  _sendHTTPRequests(
-    inputs: $httpRequestInputs
-  ) {
-    artifactDownloadURL: header(name: "Location")
-      @export(as: "artifactDownloadURLs")
-  }
-}
-
-query PrintSpaceSeparatedArtifactDownloadURLs
-  @depends(on: "RetrieveActualArtifactDownloadURLs")
-{
-  spaceSeparatedArtifactDownloadURLs: _arrayJoin(
-    array: $artifactDownloadURLs
-    separator: " "
-  )
+  })
 }
 ```
+
+...while avoding leaking the credentials, because:
+
+- The credentials are retrieved from an environment variable `GITHUB_ACCESS_TOKEN`, hence they need not be embedded in the source code
+- Field `githubAccessToken` is `@remove`d, hence it is not printed in the response
+- The `_sendJSONObjectItemHTTPRequest(auth:)` input references dynamic variable `$__githubAccessToken` (provided via the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension), hence if field `_sendJSONObjectItemHTTPRequest` produces an error, the literal string `$__githubAccessToken` will be printed in the error message, not its value
