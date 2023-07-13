@@ -404,6 +404,15 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'not-leaking-credentials-when-connecting-to-services',
                 \__('Not leaking credentials when connecting to services', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'creating-an-api-gateway',
