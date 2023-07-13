@@ -372,9 +372,9 @@ Passing these `variables`:
 }
 ```
 
-## Fetching data from multiple APIs
+## Fetching data from multiple URLs
 
-We can send multiple HTTP requests to different URLs, whether asynchronously (i.e. in parallel) or synchronously (one after the other), fetching data from them all at the same time.
+We can send HTTP requests to multiple URLs, fetching data from all of them at the same time.
 
 Every one of the HTTP request fields explored above has a corresponding "multiple" field:
 
@@ -382,6 +382,17 @@ Every one of the HTTP request fields explored above has a corresponding "multipl
 - `_sendJSONObjectItemHTTPRequests`
 - `_sendJSONObjectCollectionHTTPRequests`
 - `_sendGraphQLHTTPRequests`
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+All these fields have argument `async`, to indicate if to execute the multiple HTTP requests asynchronously or synchronously:
+
+- Asynchronously: The HTTP requests are executed all together, in parallel
+- Synchronously: Each HTTP request is sent out only after the previous one is completed
+
+</div>
 
 This GraphQL query retrieves weather forecast data for multiple regions:
 
