@@ -371,7 +371,38 @@ Passing these `variables`:
 }
 ```
 
-## Extracting list members
+## Extracting data from the API response
+
+By now we have seen how to connect to an API. Let's now see how to extract the data items from the response.
+
+Back to Mailchimp's API, let's extract the list of all the email addresses from the response. These are contained under the `email_address` field under `members`:
+
+```json
+{
+  "data": {
+    "_sendJSONObjectItemHTTPRequest": {
+      "members": [
+        {
+          "email_address": "vinesh@yahoo.com",
+          // ...
+        },
+        {
+          "email_address": "thiago@hotmail.com",
+          // ...
+        },
+        // ...
+      ]
+    }
+  }
+}
+```
+
+We extract these via the [**Field Value Iteration and Manipulation](http://localhost:8080/extensions/field-value-iteration-and-manipulation/) extension, which provides the following meta directives:
+
+- `@underArrayItem`: Apply the nested directive(s) on a specific item from the array
+- `@underJSONObjectProperty`: Apply the nested directive(s) on a specific entry from the JSON object
+- `@underEachArrayItem`: Apply the nested directive(s) under all items from the array
+- `@underEachJSONObjectProperty`: Apply the nested directive(s) under all entries from the JSON object
 
 Use:
 
