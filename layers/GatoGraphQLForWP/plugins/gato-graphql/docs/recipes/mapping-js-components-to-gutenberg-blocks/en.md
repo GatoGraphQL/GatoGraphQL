@@ -132,12 +132,16 @@ The following code retrieves post and block data from the GraphQL single endpoin
 </html>
 ```
 
-Because Gato GraphQL currently does not deal with CORS, for testing this code from a different domain to your website (or even as a static `.html` file in your computer), you may need to add the following PHP code to your theme's `functions.php` file:
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **PHP code alert:**
+
+Because Gato GraphQL currently does not deal with CORS, for testing this Preact app from a different domain than your website's (or even as a static `.html` file in your computer), you may need to add the following PHP code to your theme's `functions.php` file:
 
 ```php
 add_filter(
   \PoP\ComponentModel\Engine\EngineHookNames::HEADERS,
-  function (array $headers) {
+  function (array $headers): array {
     return array_merge(
       $headers,
       [
@@ -148,3 +152,5 @@ add_filter(
   }
 );
 ```
+
+</div>
