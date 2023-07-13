@@ -276,6 +276,114 @@ query {
 }
 ```
 
+## Connecting to GraphQL APIs
+
+[**HTTP Client**](https://gatographql/extensions/http-client/) also provides convenience function fields to connect to a GraphQL API:
+
+- `_sendGraphQLHTTPRequest`: Execute a GraphQL query against the provided endpoint, and retrieve the response as a JSON object
+
+This fields accepts those inputs expected by GraphQL (the query, variables and operation name), and already converts the response to `JSONObject`.
+
+(As the Mailchimp API doesn't support GraphQL, we switch to a different API for this example.)
+
+This query connects to [GitHub's GraphQL API](https://docs.github.com/en/graphql) and retrieves the name for the repos for some owner:
+
+```graphql
+query {
+  _sendJSONObjectItemHTTPRequest(input: {
+    url: "https://us7.api.mailchimp.com/3.0/lists/{LIST_ID}/members",
+    method: GET,
+    options: {
+      auth: {
+        username: "{USER}",
+        password: "{API_TOKEN}"
+      }
+    }
+  })
+}
+```
+
+...produces this response:
+
+```json
+{
+  "data": {
+    "_sendJSONObjectItemHTTPRequest": {
+      "members": [
+        {
+          "id": "mSjGOg5qSb3dKTxPU9lhRZCxHGug8Mrt",
+          "email_address": "vinesh@yahoo.com",
+          "unique_email_id": "KObAXbEO3X",
+          "contact_id": "JiCdz5EY67m3PKugW3bRE9VI1WjiBbjq",
+          "full_name": "Vinesh Munak",
+          "web_id": 443344389,
+          "email_type": "html",
+          "status": "subscribed",
+          "consents_to_one_to_one_messaging": true,
+          "merge_fields": {
+            "FNAME": "Vinesh",
+            "LNAME": "Munak",
+            "ADDRESS": {
+              "addr1": "",
+              "addr2": "",
+              "city": "",
+              "state": "",
+              "zip": "",
+              "country": "IN"
+            },
+            "PHONE": "",
+            "BIRTHDAY": ""
+          },
+          "stats": {
+            "avg_open_rate": 0.8,
+            "avg_click_rate": 0.6
+          },
+          "ip_signup": "",
+          "timestamp_signup": "",
+          "ip_opt": "218.115.112.129",
+          "timestamp_opt": "2020-12-31T06:55:17+00:00",
+          "member_rating": 4,
+          "last_changed": "2020-12-31T06:55:17+00:00",
+          "language": "",
+          "vip": false,
+          "email_client": "",
+          "location": {
+            "latitude": 2.18,
+            "longitude": 99.47,
+            "gmtoff": 8,
+            "dstoff": 8,
+            "country_code": "MY",
+            "timezone": "asia/kuala_lumpur",
+            "region": "10"
+          },
+          "source": "Admin Add",
+          "tags_count": 0,
+          "tags": [],
+          "list_id": "9nrwpfj0ou",
+          "_links": [
+            {
+              // ...
+            },
+            // ...
+          ]
+        },
+        {
+          // ...
+        }
+      ],
+      "list_id": "9nrwpfj0ou",
+      "total_items": 4927,
+      "_links": [
+        {
+          // ...
+        },
+        // ...
+      ]
+    }
+  }
+}
+```
+
 ## Extracting list members
 
 Use:
