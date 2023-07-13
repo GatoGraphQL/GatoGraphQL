@@ -24,15 +24,11 @@ query {
 
 We often need to provide credentials when connecting to external services.
 
-For instance, GitHub's API requires an access token to execute REST endpoints where data is mutated or private:
+For instance, GitHub's REST API requires an access token for endpoints where data is private or is mutated:
 
 ```graphql
 query {
-  credentialsAreNotRequired: _sendJSONObjectItemHTTPRequest(input:{
-    url: "https://api.github.com/repos/leoloso/PoP"
-  })
-
-  credentialsAreRequired: _sendJSONObjectItemHTTPRequest(input:{
+  _sendJSONObjectItemHTTPRequest(input:{
     url: "https://api.github.com/repos/leoloso/PoP",
     method: PATCH,
     options: {
