@@ -426,7 +426,7 @@ query GetDataFromMailchimp {
 We can visualize the entries by printing the value of the dynamic variable:
 
 ```graphql
-query PrintEmailAddresses
+query PrintMailchimpSubscriberEmails
   @depends(on: "GetDataFromMailchimp")
 {
   mailchimpListMemberEmails: _echo(value: $mailchimpListMemberEmails)
@@ -460,15 +460,16 @@ This is because whenever `@export` is nested below `@underEachArrayItem` (or `@u
 
 </div>
 
-## GraphQL query to retrieve users subscribed to Mailchimp account
+## Combining data from Mailchimp subscribers and website users
 
+In the website we can store information from the Mailchimp subscribers, using their email address as the common ID between the two applications (Mailchimp and our website).
 
+After placing the subscriber emails under dynamic variable `$mailchimpListMemberEmails`, we can fetch those users from our site:
 
 ```graphql
-query CombineData
+query GetUsersUsingMailchimpSubscriberEmails
   @depends(on: "GetDataFromMailchimp")
 {
-  mailchimpListMemberEmails: _echo(value: $mailchimpListMemberEmails)
   users(filter: { searchBy: { emails: $mailchimpListMemberEmails} } ) {
     id
     name
@@ -477,21 +478,14 @@ query CombineData
 }
 ```
 
-
-
-Get the email from the API, get `users` with those emails, print their data.
-
-Response:
+The response will be:
 
 ```json
-
 {
   "data": {
-    "mailchimpListMemberEmails": [
-      "vinesh@yahoo.com",
-      "thiago@hotmail.com",
+    "mailchimpListMembersJSONObject": {
       // ...
-    ],
+    },
     "users": [
       {
         "id": 88,
@@ -507,3 +501,5 @@ Response:
   }
 }
 ```
+
+Having retrieved the users, we can apply any desired operation on them (execute a mutation to update their data, send an email, etc).
