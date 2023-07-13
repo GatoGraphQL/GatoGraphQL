@@ -278,15 +278,13 @@ query {
 
 ## Connecting to GraphQL APIs
 
-[**HTTP Client**](https://gatographql/extensions/http-client/) also provides convenience function fields to connect to a GraphQL API:
-
-- `_sendGraphQLHTTPRequest`: Execute a GraphQL query against the provided endpoint, and retrieve the response as a JSON object
-
-This fields accepts those inputs expected by GraphQL (the query, variables and operation name), and already converts the response to `JSONObject`.
-
 (As the Mailchimp API doesn't support GraphQL, we switch to a different API for this example.)
 
-This query connects to [GitHub's GraphQL API](https://docs.github.com/en/graphql) and retrieves the name for the repos for some owner:
+[**HTTP Client**](https://gatographql/extensions/http-client/) also provides a function field to conveniently connect to GraphQL APIs.
+
+Field `_sendGraphQLHTTPRequest` accepts those inputs expected by GraphQL (the query, variables and operation name), executes the GraphQL query against the provided endpoint, and converts the response to `JSONObject`.
+
+This query connects to [GitHub's GraphQL API](https://docs.github.com/en/graphql) and retrieves the list of repos for the provided owner:
 
 ```graphql
 query FetchGitHubRepositories(
@@ -330,7 +328,7 @@ query GetRepositoriesByOwner($login: String!, $numberRepos: Int!) {
 }
 ```
 
-Passing `variables`:
+Passing these `variables`:
 
 ```json
 {
