@@ -49,7 +49,7 @@ We need to be careful and avoid exposing our credentials:
 
 ## GraphQL query that avoids leaking credentials
 
-This GraphQL query passes the credentials to GitHub's API:
+This GraphQL query passes the credentials to GitHub's API while avoding leaking the credentials:
 
 ```graphql
 query {
@@ -69,13 +69,13 @@ query {
 }
 ```
 
-...while avoding leaking the credentials, because:
+This is because:
 
 - The credentials are retrieved from an environment variable `GITHUB_ACCESS_TOKEN`, hence they need not be embedded in the source code
 - Field `githubAccessToken` is `@remove`d, hence it is not printed in the response
-- The `_sendJSONObjectItemHTTPRequest(auth:)` input references dynamic variable `$__githubAccessToken` (provided via the [**Field to Input**](https://gatographql.com/extensions/field-to-input/) extension), hence if the field produces an error, it is the literal string `"$__githubAccessToken"` that will be printed in the error message (not its value)
+- The `_sendJSONObjectItemHTTPRequest(auth:)` input references dynamic variable `$__githubAccessToken`, hence if the field produces an error, it is the literal string `"$__githubAccessToken"` that will be printed in the error message (not its value)
 
-To demonstrate the latter item, if providing the URL of a non-existing repository `"leoloso/NonExisting"`, we get this response (notice `auth: {password: $__githubAccessToken}` in the error message):
+To demonstrate the latter item, providing the URL of a non-existing repository `"leoloso/NonExisting"` to GitHub's API raises an error, and we get this response (notice `auth: {password: $__githubAccessToken}` in the error message):
 
 ```json
 {
