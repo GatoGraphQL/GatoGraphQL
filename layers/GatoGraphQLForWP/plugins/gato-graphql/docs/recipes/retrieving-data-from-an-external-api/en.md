@@ -397,7 +397,7 @@ All these fields have argument `async`, to indicate if to execute the multiple H
 This GraphQL query retrieves weather forecast data for multiple regions:
 
 ```graphql
-{
+query {
   _sendJSONObjectItemHTTPRequests(inputs: [
     {
       url: "https://api.weather.gov/gridpoints/TOP/31,80/forecast"
