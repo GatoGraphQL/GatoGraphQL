@@ -2,6 +2,30 @@
 
 This recipe _(inspired by [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/#preact-example))_ presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
 
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **PHP code alert:**
+
+Because Gato GraphQL currently does not deal with CORS, for testing this Preact app from a different domain than your website's (or even as a static `.html` file in your computer), you may need to add the following PHP code to your theme's `functions.php` file:
+
+```php
+add_filter(
+  \PoP\ComponentModel\Engine\EngineHookNames::HEADERS,
+  function (array $headers): array {
+    return array_merge(
+      $headers,
+      [
+        'Access-Control-Allow-Origin' => 'null',
+        'Access-Control-Allow-Headers' => 'content-type,content-length,accept',
+      ]
+    );
+  }
+);
+```
+
+</div>
+
+
 The GraphQL query contained in the code below retrieves the post's block data as a JSON object (via field `CustomPost.blockDataItems`), and then the JavaScript code maps each block data item into a custom component:
 
 ```html
@@ -133,7 +157,7 @@ The GraphQL query contained in the code below retrieves the post's block data as
 </html>
 ```
 
-The code above produces this HTML from post data:
+Running the application produces the following HTML code from post data:
 
 ```html
 <div class="post">
@@ -153,26 +177,3 @@ The code above produces this HTML from post data:
   </div>
 </div>
 ```
-
-<div class="doc-config-highlight" markdown=1>
-
-⚙️ **PHP code alert:**
-
-Because Gato GraphQL currently does not deal with CORS, for testing this Preact app from a different domain than your website's (or even as a static `.html` file in your computer), you may need to add the following PHP code to your theme's `functions.php` file:
-
-```php
-add_filter(
-  \PoP\ComponentModel\Engine\EngineHookNames::HEADERS,
-  function (array $headers): array {
-    return array_merge(
-      $headers,
-      [
-        'Access-Control-Allow-Origin' => 'null',
-        'Access-Control-Allow-Headers' => 'content-type,content-length,accept',
-      ]
-    );
-  }
-);
-```
-
-</div>
