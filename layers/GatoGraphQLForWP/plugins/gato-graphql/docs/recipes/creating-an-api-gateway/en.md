@@ -14,6 +14,109 @@ Some benefits of using GraphQL Persisted Queries to provide an API gateway are:
 - If some backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
 - The server can store logs of access to the backend services, and extract metrics to enhance analytics
 
+This recipe presents an example of implementing an API gateway via GraphQL Persisted Queries.
+
+## API gateway to access GitHub Action artifacts
+
+This GraphQL query 
+
+```graphql
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
+{
+  githubAccessToken: _env(name: "GITHUB_ACCESS_TOKEN")
+    @remove
+
+  githubArtifactsEndpoint: _sprintf(
+    string: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=%s",
+    values: [$numberArtifacts]
+  )
+    @remove
+
+  # Connect to GitHub
+  gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
+    input: {
+      url: $__githubArtifactsEndpoint,
+      options: {
+        auth: {
+          password: $__githubAccessToken
+        },
+        headers: [
+          {
+            name: "Accept",
+            value: "application/vnd.github+json"
+          }
+        ]
+      }
+    }
+  )
+    @remove
+  
+  # Extract the URL from within each "artifacts" item
+  gitHubProxyArtifactDownloadURLs: _objectProperty(
+    object: $__gitHubArtifactData,
+    by: {
+      key: "artifacts"
+    }
+  )
+    @underEachArrayItem(passValueOnwardsAs: "artifactItem")
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $artifactItem,
+          by: {
+            key: "archive_download_url"
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "gitHubProxyArtifactDownloadURLs")
+}
+
+query CreateHTTPRequestInputs
+  @depends(on: "RetrieveProxyArtifactDownloadURLs")
+{
+  httpRequestInputs: _echo(value: $gitHubProxyArtifactDownloadURLs)
+    @underEachArrayItem(
+      passValueOnwardsAs: "url"
+    )
+      @applyField(
+        name: "_objectAddEntry",
+        arguments: {
+          object: {
+            options: {
+              headers: $githubRequestHeaders,
+              allowRedirects: null
+            }
+          },
+          key: "url",
+          value: $url
+        },
+        setResultInResponse: true
+      )
+    @export(as: "httpRequestInputs")
+    @remove
+}
+
+query RetrieveActualArtifactDownloadURLs
+  @depends(on: "CreateHTTPRequestInputs")
+{
+  _sendHTTPRequests(
+    inputs: $httpRequestInputs
+  ) {
+    artifactDownloadURL: header(name: "Location")
+      @export(as: "artifactDownloadURLs")
+  }
+}
+
+query PrintArtifactDownloadURLsAsList
+  @depends(on: "RetrieveActualArtifactDownloadURLs")
+{
+  artifactDownloadURLs: _echo(value: $artifactDownloadURLs)
+}
+```
+
+
+
 API gateways allow to simplify the logi
 
 
