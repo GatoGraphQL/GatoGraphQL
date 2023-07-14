@@ -13,8 +13,7 @@ These are some benefits of using GraphQL Persisted Queries to provide an API gat
 - Clients do not need to handle connections to backend services, thus simplifying their logic
 - Access to backend services is centralized
 - No credentials are exposed on the client
-- Credentials can be provided to the server via environment variables
-- The response from the service can be transformed into what the client expects
+- The response from the service can be transformed into what the client expects or can handle better
 - If some backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
 - The server can store logs of access to the backend services, and extract metrics to enhance analytics
 
