@@ -14,9 +14,9 @@ Some benefits of using GraphQL Persisted Queries to provide an API gateway are:
 - If some backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
 - The server can store logs of access to the backend services, and extract metrics to enhance analytics
 
-This recipe presents an example of implementing an API gateway via GraphQL Persisted Queries.
+This recipe demonstrates an API gateway that accesses GitHub Action artifacts and extracts their URL to be downloaded, avoiding the need for the client to be signed in to GitHub.
 
-## API gateway to access GitHub Action artifacts
+## GraphQL-powered API gateway to access GitHub Action artifacts
 
 This GraphQL query 
 
