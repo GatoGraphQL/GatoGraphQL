@@ -276,10 +276,7 @@ query RetrieveServiceTokens {
     @export(as: "slackAccessToken")
 
   isGithubAccessTokenMissing: _isEmpty(value: $__githubAccessToken)
-    @export(as: "isGithubAccessTokenMissing")
-  isSlackAccessTokenMissing: _isEmpty(value: $__slackAccessToken)
-    @export(as: "isSlackAccessTokenMissing")
-    
+  isSlackAccessTokenMissing: _isEmpty(value: $__slackAccessToken)    
   isAnyAccessTokenMissing: _or(values: [
     $__isGithubAccessTokenMissing,
     $__isSlackAccessTokenMissing
