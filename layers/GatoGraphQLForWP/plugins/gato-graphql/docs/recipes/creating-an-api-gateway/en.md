@@ -1,5 +1,9 @@
 # Creating an API gateway
 
+An API gateway provides a centralized handling of API communication between clients and services. It receives an application user's request via the GraphQL query, executes fields that fetch data from, or post data to, one or more backend services, gathers the resulsts, and delivers them back to the client in a single response.
+
+
+
 _httpRequestHeaders is super powerful!
   Can for instance implement API gateway
   Passing an auth header for another service
