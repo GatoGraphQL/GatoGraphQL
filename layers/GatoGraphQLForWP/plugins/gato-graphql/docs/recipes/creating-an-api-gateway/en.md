@@ -305,7 +305,9 @@ query RetrieveProxyArtifactDownloadURLs
 
 </div>
 
-## Analysis of the novel elements in the GraphQL query
+## Analysis of the GraphQL query
+
+Here is the description of some novel elements in the GraphQL query.
 
 The endpoint to connect to can be dynamically generated, in this case using `_sprintf`:
 
@@ -323,7 +325,107 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
 }
 ```
 
-After fetching the data from the API, we navigate to each data item `"archive_download_url"` within the JSON object structure, extract that value using field `_objectProperty` (applied via directive `@applyField`), and override the iterated-upon element by passing argument `setResultInResponse: true`:
+The response from the GitHub Actions API is bulky and of no interest to us, so we `@remove` it from the response. However, during development, we disable this directive, as to visualize and understand the shape of the returned JSON object, and identify the data items we need to extract:
+
+```graphql
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
+  @depends(on: "RetrieveGitHubAccessToken")
+{
+  # ...
+
+  # Retrieve Artifact data from GitHub Actions API
+  gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
+    input: {
+      url: $__githubArtifactsEndpoint,
+      options: {
+        auth: {
+          password: $githubAccessToken
+        },
+        headers: [
+          {
+            name: "Accept",
+            value: "application/vnd.github+json"
+          }
+        ]
+      }
+    }
+  )
+    # @remove   <= Disabled to visualize output
+}
+```
+
+The response is:
+
+```json
+{
+  "data": {
+    "gitHubArtifactData": {
+      "total_count": 8344,
+      "artifacts": [
+        {
+          "id": 803739808,
+          "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDg=",
+          "name": "gato-graphql-testing-schema-1.0.0-dev",
+          "size_in_bytes": 62952,
+          "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808",
+          "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808/zip",
+          "expired": false,
+          "created_at": "2023-07-14T06:25:57Z",
+          "updated_at": "2023-07-14T06:25:59Z",
+          "expires_at": "2023-08-13T06:17:15Z",
+          "workflow_run": {
+            "id": 5551097653,
+            "repository_id": 66721227,
+            "head_repository_id": 66721227,
+            "head_branch": "Enable-headers-in-GraphiQL",
+            "head_sha": "31e69ccab2a8d1fdea942e71f7a93ec484bdd9c8"
+          }
+        },
+        {
+          "id": 803739806,
+          "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDY=",
+          "name": "gato-graphql-testing-1.0.0-dev",
+          "size_in_bytes": 123914,
+          "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806",
+          "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806/zip",
+          "expired": false,
+          "created_at": "2023-07-14T06:25:57Z",
+          "updated_at": "2023-07-14T06:25:59Z",
+          "expires_at": "2023-08-13T06:17:11Z",
+          "workflow_run": {
+            "id": 5551097653,
+            "repository_id": 66721227,
+            "head_repository_id": 66721227,
+            "head_branch": "Enable-headers-in-GraphiQL",
+            "head_sha": "31e69ccab2a8d1fdea942e71f7a93ec484bdd9c8"
+          }
+        },
+        {
+          "id": 803739803,
+          "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDM=",
+          "name": "gato-graphql-1.0.0-dev",
+          "size_in_bytes": 33394234,
+          "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803",
+          "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803/zip",
+          "expired": false,
+          "created_at": "2023-07-14T06:25:57Z",
+          "updated_at": "2023-07-14T06:25:59Z",
+          "expires_at": "2023-08-13T06:21:42Z",
+          "workflow_run": {
+            "id": 5551097653,
+            "repository_id": 66721227,
+            "head_repository_id": 66721227,
+            "head_branch": "Enable-headers-in-GraphiQL",
+            "head_sha": "31e69ccab2a8d1fdea942e71f7a93ec484bdd9c8"
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+The data item of our interest is property `"archive_download_url"`. We navigate to each of these data items within the JSON object structure, extract that value using field `_objectProperty` (applied via directive `@applyField`), and override the iterated-upon element by passing argument `setResultInResponse: true`:
 
 ```graphql
 query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
