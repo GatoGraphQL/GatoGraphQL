@@ -311,9 +311,9 @@ query RetrieveProxyArtifactDownloadURLs
 
 </div>
 
-## Step by step description of the GraphQL query
+## Step by step: creating the GraphQL query
 
-Here is the description of how the GraphQL query works.
+Below is the detailed analysis of how the query works.
 
 The endpoint to connect to can be dynamically generated, in this case using `_sprintf`:
 
