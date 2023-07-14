@@ -305,9 +305,7 @@ query RetrieveProxyArtifactDownloadURLs
 
 </div>
 
-## Analysis of novel elements in the GraphQL query
-
-Below is a description of some newly-used fields and strategies.
+## Analysis of the novel elements in the GraphQL query
 
 The endpoint to connect to can be dynamically generated, in this case using `_sprintf`:
 
@@ -357,7 +355,7 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
 
 We connect to all artifact URLs simultaneously by sending multiple HTTP requests asynchronously via field `_sendHTTPRequests`, and then we query the `Location` header from each of them.
 
-We need to provide argument `input` of type `[HTTPRequestInput]` to  `_sendHTTPRequests`. To do this, we iterate each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`) and, for each, we dynamically build a JSON object adding the additional required paramters (headers, authentication, and others).
+We need to provide argument `input` of type `[HTTPRequestInput]` to  `_sendHTTPRequests`. To do this, we iterate each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`) and, for each, we dynamically build a JSON object using field `_objectAddEntry` that contains all the required parameters (headers, authentication, and others) and appends the URL to it (available under dynamic variable `$url`).
 
 The generated list of JSON objects will be coerced to `[HTTPRequestInput]` when passed as argument to `_sendHTTPRequests(input:)`.
 
