@@ -31,7 +31,7 @@ ReactDOM.render(
     fetcher: graphQLFetcher,
     defaultQuery: defaultQuery,
     response: response,
-    headerEditorEnabled: false
+    headerEditorEnabled: true
   }),
   document.getElementById('graphiql')
 );
