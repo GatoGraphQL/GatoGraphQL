@@ -76,42 +76,6 @@ query ValidateAPIResponse
   ) @export(as: "endpointHasErrors")
 }
 
-query FailIfResponseIsNull #($endpoint: String!)
-  @depends(on: "ValidateAPIResponse")
-  @include(if: $isNullExternalData)
-{
-  id
-  # code: _objectProperty(
-  #   object: $externalData,
-  #   by: {
-  #     key: "code"
-  #   }
-  # ) @remove
-  # message: _objectProperty(
-  #   object: $externalData,
-  #   by: {
-  #     key: "message"
-  #   }
-  # ) @remove
-  # errorMessage: _sprintf(
-  #   string: "[%s] %s",
-  #   values: [$__code, $__message]
-  # ) @remove
-  # data: _objectProperty(
-  #   object: $externalData,
-  #   by: {
-  #     key: "data"
-  #   }
-  # ) @remove
-  # _fail(
-  #   message: $__errorMessage
-  #   data: {
-  #     endpoint: $endpoint
-  #     endpointData: $__data
-  #   }
-  # ) @remove
-}
-
 query FailIfExternalAPIHasErrors($endpoint: String!)
   @depends(on: "ValidateAPIResponse")
   @include(if: $endpointHasErrors)
@@ -148,13 +112,12 @@ query FailIfExternalAPIHasErrors($endpoint: String!)
   ) @remove
 }
 
-query ExecuteAll
-  @depends(on: [
-    "FailIfResponseIsNull",
-    "FailIfExternalAPIHasErrors",
-  ])
+query ExecuteSomeOperation
+  @depends(on: "FailIfExternalAPIHasErrors")
+  @skip(if: $endpointHasErrors)
 {
-  again: id
+  # Do something...
+  id
 }
 ```
 
