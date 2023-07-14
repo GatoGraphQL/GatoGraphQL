@@ -27,11 +27,15 @@ Finally it prints all actual URLs, allowing non-authenticated users to download 
 (The recipe end there, but as a continuation, the GraphQL query could then do something with these URLs: send them by email, upload the files by FTP somewhere, install them in an InstaWP site, etc.)
 
 ```graphql
-query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3) {
+query RetrieveGitHubAccessToken {
   githubAccessToken: _env(name: "GITHUB_ACCESS_TOKEN")
     @export(as: "githubAccessToken")
     @remove
+}
 
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
+  @depends(on: "RetrieveGitHubAccessToken")
+{
   githubArtifactsEndpoint: _sprintf(
     string: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=%s",
     values: [$numberArtifacts]
@@ -44,7 +48,7 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3) {
       url: $__githubArtifactsEndpoint,
       options: {
         auth: {
-          password: $__githubAccessToken
+          password: $githubAccessToken
         },
         headers: [
           {
@@ -157,6 +161,129 @@ The response is:
 }
 ```
 
+## Alternative: Obtaining the GitHub credentials from the HTTP request
+
+Instead of storing the GitHub access token in the server, we can allow our users to provide their own credentials.
+
+This GraphQL query adapts the previous one, to extract the incoming header `` and use it to validate against GitHub, or fail if that header was not provided:
+
+```graphql
+query One {
+  githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
+    @export(as: "githubAccessToken")
+  slackAccessToken: _httpRequestHeader(name: "X-Slack-Access-Token")
+    @export(as: "slackAccessToken")
+  hasAllAccessTokens: _and(values: [$__githubAccessToken, $__slackAccessToken])
+    @export(as: "hasAllAccessTokens")
+}
+
+query Two
+  @depends(on: "One")
+  @include(if: $hasAllAccessTokens)
+{
+  # ...
+}
+
+query Three
+  @depends(on: "One")
+  @skip(if: $hasAllAccessTokens)
+{
+  _fail(...)
+}
+
+query Four
+  @depends(on: ["Two", "Three"])
+{
+  
+}
+
+
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3) {
+  githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
+    @export(as: "githubAccessToken")
+    @remove
+
+  githubArtifactsEndpoint: _sprintf(
+    string: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=%s",
+    values: [$numberArtifacts]
+  )
+    @remove
+
+  # Retrieve Artifact data from GitHub Actions API
+  gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
+    input: {
+      url: $__githubArtifactsEndpoint,
+      options: {
+        auth: {
+          password: $__githubAccessToken
+        },
+        headers: [
+          {
+            name: "Accept",
+            value: "application/vnd.github+json"
+          }
+        ]
+      }
+    }
+  )
+    @remove
+  
+  # Extract the URL from within each "artifacts" item
+  gitHubProxyArtifactDownloadURLs: _objectProperty(
+    object: $__gitHubArtifactData,
+    by: {
+      key: "artifacts"
+    }
+  )
+    @underEachArrayItem(passValueOnwardsAs: "artifactItem")
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $artifactItem,
+          by: {
+            key: "archive_download_url"
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "gitHubProxyArtifactDownloadURLs")
+}
+```
+
+Because an API gateway can communicate with multiple services, we extend the idea for all of them:
+
+```graphql
+query One {
+  githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
+    @export(as: "githubAccessToken")
+  slackAccessToken: _httpRequestHeader(name: "X-Slack-Access-Token")
+    @export(as: "slackAccessToken")
+  hasAllAccessTokens: _and(values: [$__githubAccessToken, $__slackAccessToken])
+    @export(as: "hasAllAccessTokens")
+}
+
+query Two
+  @depends(on: "One")
+  @include(if: $hasAllAccessTokens)
+{
+  # ...
+}
+
+query Three
+  @depends(on: "One")
+  @skip(if: $hasAllAccessTokens)
+{
+  _fail(...)
+}
+
+query Four
+  @depends(on: ["Two", "Three"])
+{
+  
+}
+```
+
+
 ## Step by step: creating the GraphQL query
 
 Below is the detailed analysis of how the query works.
@@ -174,30 +301,30 @@ _httpRequestHeaders is super powerful!
   Can for instance implement API gateway
   Passing an auth header for another service
   Eg:
-    Receive header "GitHub-Bearer-Token", forward it to "Bearer-Token"
+    Receive header "X-GitHub-Access-Token", forward it to "Bearer-Token"
 
 Talk about validating the different inputs, provided via headers:
 
 ```graphql
 query One {
-  githubBearerToken: _httpRequestHeader(name: "Github-Bearer-Token")
-    @export(as: "githubBearerToken")
-  slackBearerToken: _httpRequestHeader(name: "Slack-Bearer-Token")
-    @export(as: "slackBearerToken")
-  hasAllBearerTokens: _and(values: [$__githubBearerToken, $__slackBearerToken])
-    @export(as: "hasAllBearerTokens")
+  githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
+    @export(as: "githubAccessToken")
+  slackAccessToken: _httpRequestHeader(name: "X-Slack-Access-Token")
+    @export(as: "slackAccessToken")
+  hasAllAccessTokens: _and(values: [$__githubAccessToken, $__slackAccessToken])
+    @export(as: "hasAllAccessTokens")
 }
 
 query Two
   @depends(on: "One")
-  @include(if: $hasAllBearerTokens)
+  @include(if: $hasAllAccessTokens)
 {
   # ...
 }
 
 query Three
   @depends(on: "One")
-  @skip(if: $hasAllBearerTokens)
+  @skip(if: $hasAllAccessTokens)
 {
   _fail(...)
 }
