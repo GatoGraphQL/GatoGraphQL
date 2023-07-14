@@ -24,6 +24,8 @@ It then accesses each of these proxy URLs (which has the artifact uploaded to a 
 
 Finally it prints all actual URLs, allowing non-authenticated users to download GitHub artifacts.
 
+(The recipe end there, but as a continuation, the GraphQL query could then do something with these URLs: send them by email, upload the files by FTP somewhere, install them in an InstaWP site, etc.)
+
 ```graphql
 query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3) {
   githubAccessToken: _env(name: "GITHUB_ACCESS_TOKEN")
