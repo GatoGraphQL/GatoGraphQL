@@ -65,6 +65,7 @@ This JavaScript code submits a query with variables to the GraphQL server, and p
         'Content-Type': 'application/json',
         'Content-Length': data.length,
       },
+      credentials: 'include',
     }
   );
 
