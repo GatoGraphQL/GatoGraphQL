@@ -174,26 +174,22 @@ We can also allow our users to provide their own GitHub credentials.
 
 This GraphQL query is an adaptation of the previous one, with the following differences:
 
-- Operation `RetrieveGitHubAccessToken` uses the value from incoming header `X-Github-Access-Token` for the credentials
-- Operation `ValidateHasGitHubAccessToken` validates that this header was provided, and `FailIfNoGitHubAccessToken` triggers an error when it does not
-- All remaining operations have directive `@include(if: $hasGithubAccessToken)`, so that they will be executed only if the access token is provided
+- Operation `RetrieveGitHubAccessToken` reads the value from incoming header `X-Github-Access-Token` for the credentials, and indicates if this header was provided via dynamic variable `$hasGithubAccessToken`
+- `FailIfNoGitHubAccessToken` triggers an error when the header was not provided
+- All other operations have been added directive `@include(if: $hasGithubAccessToken)`, so that they will be executed only if the access token is provided
 
 ```graphql
 query RetrieveGitHubAccessToken {
   githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
     @export(as: "githubAccessToken")
     @remove
-}
 
-query ValidateHasGitHubAccessToken
-  @depends(on: "RetrieveGitHubAccessToken")
-{
-  hasGithubAccessToken: _notNull(value: $githubAccessToken)
+  hasGithubAccessToken: _notNull(value: $__githubAccessToken)
     @export(as: "hasGithubAccessToken")
 }
 
 query FailIfNoGitHubAccessToken
-  @depends(on: "ValidateHasGitHubAccessToken")
+  @depends(on: "RetrieveGitHubAccessToken")
   @skip(if: $hasGithubAccessToken)
 {
   _fail(
@@ -202,7 +198,7 @@ query FailIfNoGitHubAccessToken
 }
 
 query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
-  @depends(on: "ValidateHasGitHubAccessToken")
+  @depends(on: "RetrieveGitHubAccessToken")
   @include(if: $hasGithubAccessToken)
 {
   # ...
@@ -266,8 +262,25 @@ When it is not provided, the response will be:
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+These are some benefits of using GraphQL Persisted Queries to provide an API gateway:
+
+- Clients do not need to handle connections to backend services, thus simplifying their logic
+- Access to backend services is centralized
+- No credentials are exposed on the client
+- The response from the service can be transformed into what the client expects or can handle better
+- If some backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
+- The server can store logs of access to the backend services, and extract metrics to enhance analytics
+
+</div>
+
+As an API gateway can communicate with multiple services, we can extend this strategy to get the credentials for all of them:
+
 ```graphql
-query One {
+query RetrieveServiceTokens {
   githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
     @export(as: "githubAccessToken")
   slackAccessToken: _httpRequestHeader(name: "X-Slack-Access-Token")
@@ -277,92 +290,7 @@ query One {
 }
 
 query Two
-  @depends(on: "One")
-  @include(if: $hasAllAccessTokens)
-{
-  # ...
-}
-
-query Three
-  @depends(on: "One")
-  @skip(if: $hasAllAccessTokens)
-{
-  _fail(...)
-}
-
-query Four
-  @depends(on: ["Two", "Three"])
-{
-  
-}
-
-
-query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3) {
-  githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
-    @export(as: "githubAccessToken")
-    @remove
-
-  githubArtifactsEndpoint: _sprintf(
-    string: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=%s",
-    values: [$numberArtifacts]
-  )
-    @remove
-
-  # Retrieve Artifact data from GitHub Actions API
-  gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
-    input: {
-      url: $__githubArtifactsEndpoint,
-      options: {
-        auth: {
-          password: $__githubAccessToken
-        },
-        headers: [
-          {
-            name: "Accept",
-            value: "application/vnd.github+json"
-          }
-        ]
-      }
-    }
-  )
-    @remove
-  
-  # Extract the URL from within each "artifacts" item
-  gitHubProxyArtifactDownloadURLs: _objectProperty(
-    object: $__gitHubArtifactData,
-    by: {
-      key: "artifacts"
-    }
-  )
-    @underEachArrayItem(passValueOnwardsAs: "artifactItem")
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $artifactItem,
-          by: {
-            key: "archive_download_url"
-          }
-        },
-        setResultInResponse: true
-      )
-    @export(as: "gitHubProxyArtifactDownloadURLs")
-}
-```
-
-Because an API gateway can communicate with multiple services, we extend the idea for all of them:
-
-```graphql
-query One {
-  githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
-    @export(as: "githubAccessToken")
-  slackAccessToken: _httpRequestHeader(name: "X-Slack-Access-Token")
-    @export(as: "slackAccessToken")
-  hasAllAccessTokens: _and(values: [$__githubAccessToken, $__slackAccessToken])
-    @export(as: "hasAllAccessTokens")
-}
-
-query Two
-  @depends(on: "One")
+  @depends(on: "RetrieveServiceTokens")
   @include(if: $hasAllAccessTokens)
 {
   # ...
