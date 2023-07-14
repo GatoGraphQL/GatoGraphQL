@@ -175,7 +175,7 @@ We can also allow our users to provide their own GitHub credentials.
 This GraphQL query is an adaptation of the previous one, with the following differences:
 
 - Operation `RetrieveGitHubAccessToken` reads the value from the current HTTP request's header `X-Github-Access-Token` for the credentials, and indicates if this header has not been provided
-- `FailIfNoGitHubAccessToken` triggers an error when the header is missing
+- `FailIfGitHubAccessTokenIsMissing` triggers an error when the header is missing
 - All other operations have been added directive `@skip(if: $isGithubAccessTokenMissing)`, so that they will not be executed the the token is missing
 
 ```graphql
@@ -188,7 +188,7 @@ query RetrieveGitHubAccessToken {
     @export(as: "isGithubAccessTokenMissing")
 }
 
-query FailIfNoGitHubAccessToken
+query FailIfGitHubAccessTokenIsMissing
   @depends(on: "RetrieveGitHubAccessToken")
   @include(if: $isGithubAccessTokenMissing)
 {
@@ -221,7 +221,7 @@ query RetrieveActualArtifactDownloadURLs
 query PrintArtifactDownloadURLsAsList
   @depends(on: [
     "RetrieveActualArtifactDownloadURLs",
-    "FailIfNoGitHubAccessToken"
+    "FailIfGitHubAccessTokenIsMissing"
   ])
   @skip(if: $isGithubAccessTokenMissing)
 {
@@ -247,7 +247,7 @@ When it is not provided, the response will be:
       "extensions": {
         "path": [
           "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
-          "query FailIfNoGitHubAccessToken @depends(on: \"ValidateHasGitHubAccessToken\") @skip(if: $isGithubAccessTokenMissing) { ... }"
+          "query FailIfGitHubAccessTokenIsMissing @depends(on: \"ValidateHasGitHubAccessToken\") @skip(if: $isGithubAccessTokenMissing) { ... }"
         ],
         "type": "QueryRoot",
         "field": "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
