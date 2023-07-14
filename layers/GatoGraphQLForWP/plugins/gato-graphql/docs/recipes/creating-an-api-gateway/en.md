@@ -183,9 +183,11 @@ query ValidateHasGitHubAccessToken
 
 query FailIfNoGitHubAccessToken
   @depends(on: "ValidateHasGitHubAccessToken")
+  @skip(if: $hasGithubAccessToken)
 {
-  hasGithubAccessToken: _notNull(value: $githubAccessToken)
-    @export(as: "hasGithubAccessToken")
+  _fail(
+    message: "Header \"X-Github-Access-Token\" has not been provided"
+  ) @remove
 }
 
 query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
