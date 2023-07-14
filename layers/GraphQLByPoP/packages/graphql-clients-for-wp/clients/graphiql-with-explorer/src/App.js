@@ -161,11 +161,16 @@ if (Object.keys(directiveVersionConstraints).length) {
   })
 }
 
-function fetcher(params: Object): Object {
+function fetcher(params: Object, headerParams: Object): Object {
   let headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
   };
+  if (headerParams != null && headerParams.headers != null) {
+    for (var attrname in headerParams.headers) {
+      headers[attrname] = headerParams.headers[attrname];
+    }
+  }
   // If there is a nonce in the global object, attach it
   const nonce = (window.graphiQLWithExplorerClientForWP && window.graphiQLWithExplorerClientForWP.nonce) ? window.graphiQLWithExplorerClientForWP.nonce : null;
   if (nonce != null) {
