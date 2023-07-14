@@ -165,7 +165,11 @@ The response is:
 
 We can also allow our users to provide their own GitHub credentials.
 
-This GraphQL query adapts operation `RetrieveGitHubAccessToken` from the previous one, to use the value from incoming header `X-Github-Access-Token` for the credentials. If this header was not provided, the query will fail:
+This GraphQL query is an adaptation of the previous one, with the following differences:
+
+- Operation `RetrieveGitHubAccessToken` uses the value from incoming header `X-Github-Access-Token` for the credentials
+- Operation `ValidateHasGitHubAccessToken` validates that this header was provided, and `FailIfNoGitHubAccessToken` triggers an error when it does not
+- All remaining operations have directive `@include(if: $hasGithubAccessToken)`, so that they will be executed only if the access token is provided
 
 ```graphql
 query RetrieveGitHubAccessToken {
@@ -220,9 +224,40 @@ query PrintArtifactDownloadURLsAsList
 {
   # ...
 }
+```
 
+When header `X-Github-Access-Token` is not provided, the response will be:
 
+```json
+{
+  "errors": [
+    {
+      "message": "Header \"X-Github-Access-Token\" has not been provided",
+      "locations": [
+        {
+          "line": 18,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
+          "query FailIfNoGitHubAccessToken @depends(on: \"ValidateHasGitHubAccessToken\") @skip(if: $hasGithubAccessToken) { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
+        "id": "root",
+        "code": "PoPSchema/FailFieldAndDirective@e1"
+      }
+    }
+  ],
+  "data": {
+    "hasGithubAccessToken": false
+  }
+}
+```
 
+```graphql
 query One {
   githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
     @export(as: "githubAccessToken")
