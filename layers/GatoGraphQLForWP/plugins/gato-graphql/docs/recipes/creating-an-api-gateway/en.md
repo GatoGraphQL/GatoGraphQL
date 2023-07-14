@@ -29,7 +29,7 @@ This GraphQL query retrieves the publicly-accessible download URLs for GitHub Ac
 2. It then accesses each of these proxy URLs (which has the artifact uploaded to a public location for a short period of time) and extracts the actual URL from the HTTP response's `Location` header
 3. Finally it prints all publicly-accessible URLs, allowing non-authenticated users to download GitHub artifacts within that window of time
 
-_(The recipe end there, but as a continuation, the GraphQL query could then do something with these URLs: send them by email, upload the files by FTP somewhere, install them in an InstaWP site, etc.)_
+_(The recipe ends here, but as a continuation, the GraphQL query could then do something with these URLs: send them by email, upload the files by FTP somewhere, install them in an InstaWP site, etc.)_
 
 ```graphql
 query RetrieveGitHubAccessToken {
