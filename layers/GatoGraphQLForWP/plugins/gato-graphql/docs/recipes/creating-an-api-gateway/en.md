@@ -1,6 +1,18 @@
 # Creating an API gateway
 
-An API gateway provides a centralized handling of API communication between clients and services. It receives an application user's request via the GraphQL query, executes fields that fetch data from, or post data to, one or more backend services, gathers the resulsts, and delivers them back to the client in a single response.
+An API gateway is a component on our application that provides a centralized handling of API communication between the client and the multiple required services.
+
+The API gateway can be implemented as a GraphQL query executed by the client, which fetches data from, and posts data to, one or more backend services, gathering the results and delivering them back to the client in a single response.
+
+Some benefits of using GraphQL to provide an API gateway are:
+
+- The logic on the client is simplified
+- No credentials are exposed on the client
+- Access to backend services is centralized
+- The GraphQL query can be stored as a Persisted Query
+- If the backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
+
+API gateways allow to simplify the logi
 
 
 
