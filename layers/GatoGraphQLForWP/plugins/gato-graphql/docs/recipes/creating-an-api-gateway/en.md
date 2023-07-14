@@ -270,7 +270,7 @@ When it is not provided, the response will be:
 
 🔥 **Tips:**
 
-We can retrieve from headers the credentials for multiple services used in the API gateway:
+We can retrieve from headers the credentials for multiple services used in the API gateway, while validating that they have all been provided:
 
 ```graphql
 query RetrieveServiceTokens {
@@ -301,9 +301,11 @@ query RetrieveProxyArtifactDownloadURLs
   @depends(on: "RetrieveServiceTokens")
   @skip(if: $isAnyAccessTokenMissing)
 {
+  # Do something
   # ...
 }
 
+# Do something
 # ...
 ```
 
