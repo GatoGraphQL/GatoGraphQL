@@ -280,11 +280,10 @@ query RetrieveServiceTokens {
   isSlackAccessTokenMissing: _isEmpty(value: $__slackAccessToken)
     @export(as: "isSlackAccessTokenMissing")
     
-  areAllAccessTokensProvided: _and(values: [
+  isAnyAccessTokenMissing: _or(values: [
     $__isGithubAccessTokenMissing,
     $__isSlackAccessTokenMissing
   ])
-  isAnyAccessTokenMissing: _not(value: $__areAllAccessTokensProvided)
     @export(as: "isAnyAccessTokenMissing")
 }
 
@@ -293,7 +292,7 @@ query FailIfAnyAccessTokenMissing
   @include(if: $isAnyAccessTokenMissing)
 {
   _fail(
-    message: "All access tokens must be provided"
+    message: "Access tokens for GitHub and Slack must be provided"
   ) @remove
 }
 
