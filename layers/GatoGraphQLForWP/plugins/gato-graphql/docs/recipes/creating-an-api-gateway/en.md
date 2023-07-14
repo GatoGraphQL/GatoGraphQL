@@ -305,9 +305,9 @@ query RetrieveProxyArtifactDownloadURLs
 
 </div>
 
-## Analysis of the GraphQL query
+## Step by step description of the GraphQL query
 
-Here is the description of some novel elements in the GraphQL query.
+Here is the description of how the GraphQL query works.
 
 The endpoint to connect to can be dynamically generated, in this case using `_sprintf`:
 
@@ -566,6 +566,31 @@ Since we commented `@remove`, we can now visualize the generated JSON objects in
       {
         "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2861087Z&urlSigningMethod=HMACV2&urlSignature=0Go8QnkZqIbn0urTQqfbMW4rQtjMfDAR9fSm6fCePjw%3D"
       }
+    ]
+  }
+}
+```
+
+Finally we print the elements we are after, using `_echo`:
+
+```graphql
+query PrintArtifactDownloadURLsAsList
+  @depends(on: "RetrieveActualArtifactDownloadURLs")
+{
+  artifactDownloadURLs: _echo(value: $artifactDownloadURLs)
+}
+```
+
+This will print:
+
+```json
+{
+  "data": {
+    // ...
+    "artifactDownloadURLs": [
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.4998268Z&urlSigningMethod=HMACV2&urlSignature=1c1qNRfD9KFwSuzMjw9tsumq9B5I1c9H4LWgSbR0Kwg%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.4878741Z&urlSigningMethod=HMACV2&urlSignature=htjc1HrmZpbecECpBQnEHhlP7lkqkdyjzATb0vFnzDE%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.5240496Z&urlSigningMethod=HMACV2&urlSignature=YDuHFqweL9m6LIycLsVy0bJJ4zePc4pWkHz8RfjfzCg%3D"
     ]
   }
 }
