@@ -270,7 +270,7 @@ When it is not provided, the response will be:
 
 🔥 **Tips:**
 
-As an API gateway can communicate with multiple services, we can also retrieve the credentials for all of them from the HTTP request:
+We can retrieve from headers the credentials for multiple services used in the API gateway:
 
 ```graphql
 query RetrieveServiceTokens {
