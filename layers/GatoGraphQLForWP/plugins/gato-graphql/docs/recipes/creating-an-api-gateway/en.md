@@ -114,7 +114,7 @@ query RetrieveActualArtifactDownloadURLs
     inputs: $httpRequestInputs
   ) {
     artifactDownloadURL: header(name: "Location")
-      @export(as: "artifactDownloadURLs")
+      @export(as: "artifactDownloadURLs", type: LIST)
   }
 }
 
