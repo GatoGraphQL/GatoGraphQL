@@ -461,9 +461,13 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
 }
 ```
 
-We connect to all artifact URLs simultaneously by sending multiple HTTP requests asynchronously via field `_sendHTTPRequests`, and then we query the `Location` header from each of them.
+We connect to all the extracted artifact URLs simultaneously via field `_sendHTTPRequests` (sending the multiple HTTP requests asynchronously), and we query the `Location` header from each response.
 
-We need to provide argument `input` of type `[HTTPRequestInput]` to  `_sendHTTPRequests`. To do this, we iterate each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`) and, for each, we dynamically build a JSON object using field `_objectAddEntry` that contains all the required parameters (headers, authentication, and others) and appends the URL to it (available under dynamic variable `$url`).
+As field `_sendHTTPRequests` receives argument `input` (of type `[HTTPRequestInput]`), we need to dynamically generate this input, by:
+
+- iterating each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`)
+- dynamically building a JSON object for each of them (using field `_objectAddEntry`) that contains all the required parameters (headers, authentication, and others)
+- appending the URL to this JSON object (available under dynamic variable `$url`)
 
 Notice that we must `@remove` field `httpRequestInputs`, as it contains the GitHub token (under `password: $githubAccessToken`), which we do not want to print. During development, though, we can disable this directive.
 
@@ -513,7 +517,7 @@ query RetrieveActualArtifactDownloadURLs
 }
 ```
 
-Since we commented `@remove`, we can now visualize the generated JSON objects in the output:
+As `@remove` is now commented out, we can now visualize the generated JSON objects in the output:
 
 ```json
 {
