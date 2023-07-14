@@ -482,10 +482,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Synchronizing content across WordPress sites', 'gato-graphql'),
             ],
             [
-                'retrieving-and-downloading-github-artifacts',
-                \__('Retrieving and downloading GitHub Artifacts', 'gato-graphql'),
-            ],
-            [
                 'producing-an-error-if-the-request-entry-does-not-exist',
                 \__('Producing an error if the requested entry does not exist', 'gato-graphql'),
             ],
