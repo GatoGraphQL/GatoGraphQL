@@ -163,11 +163,64 @@ The response is:
 
 ## Alternative: Obtaining the GitHub credentials from the HTTP request
 
-Instead of storing the GitHub access token in the server, we can allow our users to provide their own credentials.
+We can also allow our users to provide their own GitHub credentials.
 
-This GraphQL query adapts the previous one, to extract the incoming header `` and use it to validate against GitHub, or fail if that header was not provided:
+This GraphQL query adapts operation `RetrieveGitHubAccessToken` from the previous one, to use the value from incoming header `X-Github-Access-Token` for the credentials. If this header was not provided, the query will fail:
 
 ```graphql
+query RetrieveGitHubAccessToken {
+  githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
+    @export(as: "githubAccessToken")
+    @remove
+}
+
+query ValidateHasGitHubAccessToken
+  @depends(on: "RetrieveGitHubAccessToken")
+{
+  hasGithubAccessToken: _notNull(value: $githubAccessToken)
+    @export(as: "hasGithubAccessToken")
+}
+
+query FailIfNoGitHubAccessToken
+  @depends(on: "ValidateHasGitHubAccessToken")
+{
+  hasGithubAccessToken: _notNull(value: $githubAccessToken)
+    @export(as: "hasGithubAccessToken")
+}
+
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
+  @depends(on: "ValidateHasGitHubAccessToken")
+  @include(if: $hasGithubAccessToken)
+{
+  # ...
+}
+
+query CreateHTTPRequestInputs
+  @depends(on: "RetrieveProxyArtifactDownloadURLs")
+  @include(if: $hasGithubAccessToken)
+{
+  # ...
+}
+
+query RetrieveActualArtifactDownloadURLs
+  @depends(on: "CreateHTTPRequestInputs")
+  @include(if: $hasGithubAccessToken)
+{
+  # ...
+}
+
+query PrintArtifactDownloadURLsAsList
+  @depends(on: [
+    "RetrieveActualArtifactDownloadURLs",
+    "FailIfNoGitHubAccessToken"
+  ])
+  @include(if: $hasGithubAccessToken)
+{
+  # ...
+}
+
+
+
 query One {
   githubAccessToken: _httpRequestHeader(name: "X-Github-Access-Token")
     @export(as: "githubAccessToken")
