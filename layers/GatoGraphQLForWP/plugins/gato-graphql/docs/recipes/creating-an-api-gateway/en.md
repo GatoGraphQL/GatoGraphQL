@@ -233,7 +233,9 @@ query PrintArtifactDownloadURLsAsList
 }
 ```
 
-When header `X-Github-Access-Token` is not provided, the response will be:
+When the header `X-Github-Access-Token` is provided, the response is the same as above.
+
+When it is not provided, the response will be:
 
 ```json
 {
