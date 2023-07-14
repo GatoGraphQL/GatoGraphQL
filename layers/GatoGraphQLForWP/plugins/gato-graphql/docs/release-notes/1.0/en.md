@@ -1016,6 +1016,12 @@ Now, the Gutenberg template (containing the blocks) is not locked anymore, then 
 
 ![Removing and adding blocks in the Schema Configuration](../../images/schema-configuration-removing-and-adding-blocks.gif)
 
+## GraphiQL clients now accept sending headers
+
+The GraphiQL clients for the admin endpoint, the single endpoint and custom endpoints now accept passing headers:
+
+![GraphiQL with headers](../../images/releases/v1.0/graphiql-with-headers.png)
+
 ## Display warnings in the GraphQL response
 
 The GraphQL response can now display warnings, raised while resolving the GraphQL query, added for instance by field or directive resolvers.
