@@ -14,16 +14,20 @@ Some benefits of using GraphQL Persisted Queries to provide an API gateway are:
 - If some backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
 - The server can store logs of access to the backend services, and extract metrics to enhance analytics
 
-This recipe demonstrates an API gateway that accesses GitHub Action artifacts and extracts their URL to be downloaded, avoiding the need for the client to be signed in to GitHub.
+This recipe demonstrates an API gateway that retrieves the latest artifacts from the GitHub Actions API, and extracts their URL to be downloaded, avoiding the need for the client to be signed in to GitHub.
 
 ## GraphQL-powered API gateway to access GitHub Action artifacts
 
-This GraphQL query 
+This GraphQL query first retrieves the latest artifacts from GitHub Actions, and extracts the proxy URL to access each of them (because only authenticated users can access the artifacts, these URLs do not point to the actual artifact yet).
+
+It then accesses each of these proxy URLs (which has the artifact uploaded to a public location for a short period of time) and extracts the actual URL from the `Location` header.
+
+Finally it prints all actual URLs.
 
 ```graphql
-query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
-{
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3) {
   githubAccessToken: _env(name: "GITHUB_ACCESS_TOKEN")
+    @export(as: "githubAccessToken")
     @remove
 
   githubArtifactsEndpoint: _sprintf(
@@ -32,7 +36,7 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
   )
     @remove
 
-  # Connect to GitHub
+  # Retrieve Artifact data from GitHub Actions API
   gitHubArtifactData: _sendJSONObjectItemHTTPRequest(
     input: {
       url: $__githubArtifactsEndpoint,
@@ -84,7 +88,13 @@ query CreateHTTPRequestInputs
         arguments: {
           object: {
             options: {
-              headers: $githubRequestHeaders,
+              auth: {
+                password: $githubAccessToken
+              },
+              headers: {
+                name: "Accept",
+                value: "application/vnd.github+json"
+              },
               allowRedirects: null
             }
           },
@@ -114,6 +124,13 @@ query PrintArtifactDownloadURLsAsList
   artifactDownloadURLs: _echo(value: $artifactDownloadURLs)
 }
 ```
+
+## Step by step: creating the GraphQL query
+
+Below is the detailed analysis of how the query works.
+
+### ...
+
 
 
 
