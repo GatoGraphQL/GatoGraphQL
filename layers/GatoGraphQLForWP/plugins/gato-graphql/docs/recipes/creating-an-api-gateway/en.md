@@ -305,9 +305,102 @@ query RetrieveProxyArtifactDownloadURLs
 
 </div>
 
-## Step by step: creating the GraphQL query
+## Analysis of novel elements in the GraphQL query
 
-Below is the detailed analysis of how the query works.
+Below is a description of some newly-used fields and strategies.
 
-### ...
+The endpoint to connect to can be dynamically generated, in this case using `_sprintf`:
 
+```graphql
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
+  @depends(on: "RetrieveGitHubAccessToken")
+{
+  githubArtifactsEndpoint: _sprintf(
+    string: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=%s",
+    values: [$numberArtifacts]
+  )
+    @remove
+
+  # ...
+}
+```
+
+After fetching the data from the API, we navigate to each data item `"archive_download_url"` within the JSON object structure, extract that value using field `_objectProperty` (applied via directive `@applyField`), and override the iterated-upon element by passing argument `setResultInResponse: true`:
+
+```graphql
+query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
+  @depends(on: "RetrieveGitHubAccessToken")
+{
+  # ...
+  
+  # Extract the URL from within each "artifacts" item
+  gitHubProxyArtifactDownloadURLs: _objectProperty(
+    object: $__gitHubArtifactData,
+    by: {
+      key: "artifacts"
+    }
+  )
+    @underEachArrayItem(passValueOnwardsAs: "artifactItem")
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $artifactItem,
+          by: {
+            key: "archive_download_url"
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "gitHubProxyArtifactDownloadURLs")
+}
+```
+
+We connect to all artifact URLs simultaneously by sending multiple HTTP requests asynchronously via field `_sendHTTPRequests`, and then we query the `Location` header from each of them.
+
+We need to provide argument `input` of type `[HTTPRequestInput]` to  `_sendHTTPRequests`. To do this, we iterate each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`) and, for each, we dynamically build a JSON object adding the additional required paramters (headers, authentication, and others).
+
+The generated list of JSON objects will be coerced to `[HTTPRequestInput]` when passed as argument to `_sendHTTPRequests(input:)`.
+
+```graphql
+query CreateHTTPRequestInputs
+  @depends(on: "RetrieveProxyArtifactDownloadURLs")
+{
+  httpRequestInputs: _echo(value: $gitHubProxyArtifactDownloadURLs)
+    @underEachArrayItem(
+      passValueOnwardsAs: "url"
+    )
+      @applyField(
+        name: "_objectAddEntry",
+        arguments: {
+          object: {
+            options: {
+              auth: {
+                password: $githubAccessToken
+              },
+              headers: {
+                name: "Accept",
+                value: "application/vnd.github+json"
+              },
+              allowRedirects: null
+            }
+          },
+          key: "url",
+          value: $url
+        },
+        setResultInResponse: true
+      )
+    @export(as: "httpRequestInputs")
+    @remove
+}
+
+query RetrieveActualArtifactDownloadURLs
+  @depends(on: "CreateHTTPRequestInputs")
+{
+  _sendHTTPRequests(
+    inputs: $httpRequestInputs
+  ) {
+    artifactDownloadURL: header(name: "Location")
+      @export(as: "artifactDownloadURLs", type: LIST)
+  }
+}
+```
