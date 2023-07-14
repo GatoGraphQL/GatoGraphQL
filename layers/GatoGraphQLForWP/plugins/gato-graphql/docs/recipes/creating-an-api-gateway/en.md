@@ -170,11 +170,11 @@ The response is:
 
 ## Alternative: Obtaining the GitHub credentials from the HTTP request
 
-We can also allow our users to provide their own GitHub credentials.
+We can also allow our users to provide their own GitHub credentials via header.
 
 This GraphQL query is an adaptation of the previous one, with the following differences:
 
-- Operation `RetrieveGitHubAccessToken` reads the value from the current HTTP request's header `X-Github-Access-Token` for the credentials, and indicates if this header has not been provided
+- Operation `RetrieveGitHubAccessToken` reads and exports the value from the current HTTP request's `X-Github-Access-Token` header, and indicates if this header has not been provided
 - `FailIfGitHubAccessTokenIsMissing` triggers an error when the header is missing (via field `_fail` provided by the [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension)
 - All other operations have been added directive `@skip(if: $isGithubAccessTokenMissing)`, so that they will not be executed the the token is missing
 
@@ -201,6 +201,7 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
   @depends(on: "RetrieveGitHubAccessToken")
   @skip(if: $isGithubAccessTokenMissing)
 {
+  # Do same as before
   # ...
 }
 
@@ -208,6 +209,7 @@ query CreateHTTPRequestInputs
   @depends(on: "RetrieveProxyArtifactDownloadURLs")
   @skip(if: $isGithubAccessTokenMissing)
 {
+  # Do same as before
   # ...
 }
 
@@ -215,6 +217,7 @@ query RetrieveActualArtifactDownloadURLs
   @depends(on: "CreateHTTPRequestInputs")
   @skip(if: $isGithubAccessTokenMissing)
 {
+  # Do same as before
   # ...
 }
 
@@ -225,6 +228,7 @@ query PrintArtifactDownloadURLsAsList
   ])
   @skip(if: $isGithubAccessTokenMissing)
 {
+  # Do same as before
   # ...
 }
 ```
