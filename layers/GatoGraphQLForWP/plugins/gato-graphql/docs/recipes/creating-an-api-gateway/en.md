@@ -174,7 +174,7 @@ We can also allow our users to provide their own GitHub credentials.
 
 This GraphQL query is an adaptation of the previous one, with the following differences:
 
-- Operation `RetrieveGitHubAccessToken` reads the value from incoming header `X-Github-Access-Token` for the credentials, and indicates if this header was missing
+- Operation `RetrieveGitHubAccessToken` reads the value from the current HTTP request's header `X-Github-Access-Token` for the credentials, and indicates if this header has not been provided
 - `FailIfNoGitHubAccessToken` triggers an error when the header is missing
 - All other operations have been added directive `@skip(if: $isGithubAccessTokenMissing)`, so that they will not be executed the the token is missing
 
@@ -184,7 +184,7 @@ query RetrieveGitHubAccessToken {
     @export(as: "githubAccessToken")
     @remove
 
-  isGithubAccessTokenMissing: _isNull(value: $__githubAccessToken)
+  isGithubAccessTokenMissing: _isEmpty(value: $__githubAccessToken)
     @export(as: "isGithubAccessTokenMissing")
 }
 
