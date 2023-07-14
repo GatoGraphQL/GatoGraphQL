@@ -23,7 +23,7 @@ This recipe demonstrates an API gateway that retrieves the latest artifacts from
 
 ## GraphQL-powered API gateway to access GitHub Action artifacts
 
-The GraphQL query below should be [stored as a Persisted Query](https://gatographql.com/guides/use/creating-a-persisted-query/) (with slug `retrieve-public-urls-for-github-actions-artifacts`).
+The GraphQL query below must be [stored as a Persisted Query](https://gatographql.com/guides/use/creating-a-persisted-query/) (for instance, using slug `retrieve-public-urls-for-github-actions-artifacts`).
 
 It retrieves the publicly-accessible download URLs for GitHub Actions artifacts:
 
