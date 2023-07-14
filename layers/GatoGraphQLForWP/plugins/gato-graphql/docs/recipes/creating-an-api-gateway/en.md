@@ -357,6 +357,8 @@ We connect to all artifact URLs simultaneously by sending multiple HTTP requests
 
 We need to provide argument `input` of type `[HTTPRequestInput]` to  `_sendHTTPRequests`. To do this, we iterate each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`) and, for each, we dynamically build a JSON object using field `_objectAddEntry` that contains all the required parameters (headers, authentication, and others) and appends the URL to it (available under dynamic variable `$url`).
 
+Notice that we must `@remove` field `httpRequestInputs`, as it contains the GitHub token (under `password: $githubAccessToken`), which we do not want to print. During development, though, we can disable this directive.
+
 The generated list of JSON objects will be coerced to `[HTTPRequestInput]` when passed as argument to `_sendHTTPRequests(input:)`.
 
 ```graphql
@@ -388,7 +390,7 @@ query CreateHTTPRequestInputs
         setResultInResponse: true
       )
     @export(as: "httpRequestInputs")
-    @remove
+    # @remove   <= Disabled to visualize output
 }
 
 query RetrieveActualArtifactDownloadURLs
@@ -399,6 +401,70 @@ query RetrieveActualArtifactDownloadURLs
   ) {
     artifactDownloadURL: header(name: "Location")
       @export(as: "artifactDownloadURLs", type: LIST)
+  }
+}
+```
+
+Since we commented `@remove`, we can now visualize the generated JSON objects in the output:
+
+```json
+{
+  "data": {
+    "gitHubProxyArtifactDownloadURLs": [
+      // ...
+    ],
+    "httpRequestInputs": [
+      {
+        "options": {
+          "auth": {
+            "password": "ghp_{some_github_access_token}"
+          },
+          "headers": {
+            "name": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          "allowRedirects": null
+        },
+        "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808/zip"
+      },
+      {
+        "options": {
+          "auth": {
+            "password": "ghp_{some_github_access_token}"
+          },
+          "headers": {
+            "name": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          "allowRedirects": null
+        },
+        "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806/zip"
+      },
+      {
+        "options": {
+          "auth": {
+            "password": "ghp_{some_github_access_token}"
+          },
+          "headers": {
+            "name": "Accept",
+            "value": "application/vnd.github+json"
+          },
+          "allowRedirects": null
+        },
+        "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803/zip"
+      }
+    ],
+    "_sendHTTPRequests": [
+      {
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2766840Z&urlSigningMethod=HMACV2&urlSignature=Ype82npdlUlLk4gcGZcBiz80e0ZuvcvnC2rdaSDg9p8%3D"
+      },
+      {
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2961965Z&urlSigningMethod=HMACV2&urlSignature=FdWAh8JXNPJsVIPNuiYN8R7i0vRnN8eCGc57VZDNUEc%3D"
+      },
+      {
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2861087Z&urlSigningMethod=HMACV2&urlSignature=0Go8QnkZqIbn0urTQqfbMW4rQtjMfDAR9fSm6fCePjw%3D"
+      }
+    ]
   }
 }
 ```
