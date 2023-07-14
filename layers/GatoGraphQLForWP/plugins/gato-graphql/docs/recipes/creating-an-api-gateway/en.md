@@ -20,9 +20,9 @@ This recipe demonstrates an API gateway that retrieves the latest artifacts from
 
 This GraphQL query first retrieves the latest artifacts from GitHub Actions, and extracts the proxy URL to access each of them (because only authenticated users can access the artifacts, these URLs do not point to the actual artifact yet).
 
-It then accesses each of these proxy URLs (which has the artifact uploaded to a public location for a short period of time) and extracts the actual URL from the `Location` header.
+It then accesses each of these proxy URLs (which has the artifact uploaded to a public location for a short period of time) and extracts the actual URL from the HTTP response's `Location` header.
 
-Finally it prints all actual URLs.
+Finally it prints all actual URLs, allowing non-authenticated users to download GitHub artifacts.
 
 ```graphql
 query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3) {
