@@ -23,11 +23,13 @@ This recipe demonstrates an API gateway that retrieves the latest artifacts from
 
 ## GraphQL-powered API gateway to access GitHub Action artifacts
 
-This GraphQL query retrieves the publicly-accessible download URLs for GitHub Actions artifacts:
+The GraphQL query below should be [stored as a Persisted Query](https://gatographql.com/guides/use/creating-a-persisted-query/) (with slug `retrieve-public-urls-for-github-actions-artifacts`).
 
-1. It retrieves the latest artifacts from GitHub Actions, and extracts the proxy URL to access each of them. (Because only authenticated users can access the artifacts, these URLs do not point to the actual artifact yet.)
-2. It then accesses each of these proxy URLs (which has the artifact uploaded to a public location for a short period of time) and extracts the actual URL from the HTTP response's `Location` header
-3. Finally it prints all publicly-accessible URLs, allowing non-authenticated users to download GitHub artifacts within that window of time
+It retrieves the publicly-accessible download URLs for GitHub Actions artifacts:
+
+- It first fetches the latest X number of artifacts from GitHub Actions, and extracts the proxy URL to access each of them. (Because only authenticated users can access the artifacts, these URLs do not point to the actual artifact yet.)
+- It then accesses each of these proxy URLs (which has the artifact uploaded to a public location for a short period of time) and extracts the actual URL from the HTTP response's `Location` header
+- Finally it prints all publicly-accessible URLs, allowing non-authenticated users to download GitHub artifacts within that window of time
 
 _(The recipe ends here, but as a continuation, the GraphQL query could then do something with these URLs: send them by email, upload the files by FTP somewhere, install them in an InstaWP site, etc.)_
 
