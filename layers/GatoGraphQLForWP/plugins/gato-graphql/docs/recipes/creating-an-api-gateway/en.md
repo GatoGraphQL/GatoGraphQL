@@ -463,15 +463,15 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
 
 We connect to all the extracted artifact URLs simultaneously via field `_sendHTTPRequests` (sending the multiple HTTP requests asynchronously), and we query the `Location` header from each response.
 
-As field `_sendHTTPRequests` receives argument `input` (of type `[HTTPRequestInput]`), we need to dynamically generate this input, by:
+As field `_sendHTTPRequests` receives argument `input` (of type `[HTTPRequestInput]`), we dynamically generate this input, by:
 
-- iterating each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`)
-- dynamically building a JSON object for each of them (using field `_objectAddEntry`) that contains all the required parameters (headers, authentication, and others)
-- appending the URL to this JSON object (available under dynamic variable `$url`)
+- Iterating each of the artifact URLs (stored under dynamic variable `$gitHubProxyArtifactDownloadURLs`)
+- Dynamically building a JSON object for each of them (using field `_objectAddEntry`) that contains all the required parameters (headers, authentication, and others)
+- Appending the URL to this JSON object (available under dynamic variable `$url`)
 
-Notice that we must `@remove` field `httpRequestInputs`, as it contains the GitHub token (under `password: $githubAccessToken`), which we do not want to print. During development, though, we can disable this directive.
+This list of dynamically-created JSON objects will be coerced to `[HTTPRequestInput]` when passed as argument to `_sendHTTPRequests(input:)`. If our procedure was not right, and any item cannot be coerced to `HTTPRequestInput` (eg: because we did not provide a mandatory property, or provide a non-existing property), then the GraphQL server will produce a coercion error.
 
-The generated list of JSON objects will be coerced to `[HTTPRequestInput]` when passed as argument to `_sendHTTPRequests(input:)`.
+_Notice that we must `@remove` field `httpRequestInputs`, as it contains the GitHub token (under `password: $githubAccessToken`), which we do not want to print in the response. During development, though, we can disable this directive._
 
 ```graphql
 query CreateHTTPRequestInputs
@@ -517,7 +517,7 @@ query RetrieveActualArtifactDownloadURLs
 }
 ```
 
-As `@remove` is now commented out, we can now visualize the generated JSON objects in the output:
+As `@remove` is now commented out, we can now visualize the generated JSON object inputs in the response (under entry `httpRequestInputs`), and then the resulting `Location` header from each HTTP response (under alias `artifactDownloadURL`):
 
 ```json
 {
@@ -581,7 +581,7 @@ As `@remove` is now commented out, we can now visualize the generated JSON objec
 }
 ```
 
-Finally we print the elements we are after, using `_echo`:
+Finally we print all the `artifactDownloadURL` items together as a list (available under dynamic variable `$artifactDownloadURLs`), using `_echo`:
 
 ```graphql
 query PrintArtifactDownloadURLsAsList
