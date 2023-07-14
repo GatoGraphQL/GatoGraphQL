@@ -266,18 +266,7 @@ When it is not provided, the response will be:
 
 🔥 **Tips:**
 
-These are some benefits of using GraphQL Persisted Queries to provide an API gateway:
-
-- Clients do not need to handle connections to backend services, thus simplifying their logic
-- Access to backend services is centralized
-- No credentials are exposed on the client
-- The response from the service can be transformed into what the client expects or can handle better
-- If some backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
-- The server can store logs of access to the backend services, and extract metrics to enhance analytics
-
-</div>
-
-As an API gateway can communicate with multiple services, we can extend this strategy to get the credentials for all of them:
+As an API gateway can communicate with multiple services, we can also retrieve the credentials for all of them from the HTTP request:
 
 ```graphql
 query RetrieveServiceTokens {
@@ -285,31 +274,40 @@ query RetrieveServiceTokens {
     @export(as: "githubAccessToken")
   slackAccessToken: _httpRequestHeader(name: "X-Slack-Access-Token")
     @export(as: "slackAccessToken")
-  hasAllAccessTokens: _and(values: [$__githubAccessToken, $__slackAccessToken])
-    @export(as: "hasAllAccessTokens")
+
+  isGithubAccessTokenMissing: _isEmpty(value: $__githubAccessToken)
+    @export(as: "isGithubAccessTokenMissing")
+  isSlackAccessTokenMissing: _isEmpty(value: $__slackAccessToken)
+    @export(as: "isSlackAccessTokenMissing")
+    
+  areAllAccessTokensProvided: _and(values: [
+    $__isGithubAccessTokenMissing,
+    $__isSlackAccessTokenMissing
+  ])
+  isAnyAccessTokenMissing: _not(value: $__areAllAccessTokensProvided)
+    @export(as: "isAnyAccessTokenMissing")
 }
 
-query Two
+query FailIfAnyAccessTokenMissing
   @depends(on: "RetrieveServiceTokens")
-  @include(if: $hasAllAccessTokens)
+  @include(if: $isAnyAccessTokenMissing)
+{
+  _fail(
+    message: "All access tokens must be provided"
+  ) @remove
+}
+
+query RetrieveProxyArtifactDownloadURLs
+  @depends(on: "RetrieveServiceTokens")
+  @skip(if: $isAnyAccessTokenMissing)
 {
   # ...
 }
 
-query Three
-  @depends(on: "One")
-  @skip(if: $hasAllAccessTokens)
-{
-  _fail(...)
-}
-
-query Four
-  @depends(on: ["Two", "Three"])
-{
-  
-}
+# ...
 ```
 
+</div>
 
 ## Step by step: creating the GraphQL query
 
