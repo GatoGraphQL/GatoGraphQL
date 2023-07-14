@@ -125,6 +125,36 @@ query PrintArtifactDownloadURLsAsList
 }
 ```
 
+The response is:
+
+```json
+{
+  "data": {
+    "gitHubProxyArtifactDownloadURLs": [
+      "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803444209/zip",
+      "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803444208/zip",
+      "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803444207/zip"
+    ],
+    "_sendHTTPRequests": [
+      {
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9351393Z&urlSigningMethod=HMACV2&urlSignature=8v8cDVZKAnkXoN8z1GdjXLz4SCGkpv%2Fl0qjlDArac5M%3D"
+      },
+      {
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9333471Z&urlSigningMethod=HMACV2&urlSignature=ffsyy0p97oeQByMD3X6WKbFyIEbh6nbU%2BFsXKHQHYSM%3D"
+      },
+      {
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9699160Z&urlSigningMethod=HMACV2&urlSignature=gUi%2F39RS7X5YgVZbEu977ufFt1girQKeNI7LP61gxfY%3D"
+      }
+    ],
+    "artifactDownloadURLs": [
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9351393Z&urlSigningMethod=HMACV2&urlSignature=8v8cDVZKAnkXoN8z1GdjXLz4SCGkpv%2Fl0qjlDArac5M%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9333471Z&urlSigningMethod=HMACV2&urlSignature=ffsyy0p97oeQByMD3X6WKbFyIEbh6nbU%2BFsXKHQHYSM%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9699160Z&urlSigningMethod=HMACV2&urlSignature=gUi%2F39RS7X5YgVZbEu977ufFt1girQKeNI7LP61gxfY%3D"
+    ]
+  }
+}
+```
+
 ## Step by step: creating the GraphQL query
 
 Below is the detailed analysis of how the query works.
