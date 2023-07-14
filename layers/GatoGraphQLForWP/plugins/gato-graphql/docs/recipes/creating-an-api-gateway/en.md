@@ -7,10 +7,12 @@ The API gateway can be implemented via GraphQL Persisted Queries stored in the s
 Some benefits of using GraphQL Persisted Queries to provide an API gateway are:
 
 - Clients do not need to handle connections to backend services, thus simplifying their logic
-- No credentials are exposed on the client
 - Access to backend services is centralized
+- No credentials are exposed on the client
 - Credentials can be provided to the server via environment variables
+- The response from the service can be transformed into what the client expects
 - If some backend service is upgraded, the Persisted Query could be adapted without producing breaking changes in the client
+- The server can store logs of access to the backend services, and extract metrics to enhance analytics
 
 API gateways allow to simplify the logi
 
