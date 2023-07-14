@@ -167,13 +167,19 @@ if (Object.keys(directiveVersionConstraints).length) {
 // Defines a GraphQL fetcher using the fetch API. You're not required to
 // use fetch, and could instead implement graphQLFetcher however you like,
 // as long as it returns a Promise or Observable.
-function graphQLFetcher(graphQLParams) {
+function graphQLFetcher(graphQLParams, headerParams) {
+  let headers = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  if (headerParams != null && headerParams.headers != null) {
+    for (var attrname in headerParams.headers) {
+      headers[attrname] = headerParams.headers[attrname];
+    }
+  }
   return fetch(apiURL, {
     method: 'post',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+    headers: headers,
     body: JSON.stringify(graphQLParams),
     credentials: 'include',
   })
