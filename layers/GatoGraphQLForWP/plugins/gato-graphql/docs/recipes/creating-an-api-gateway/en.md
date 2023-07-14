@@ -175,7 +175,7 @@ We can also allow our users to provide their own GitHub credentials.
 This GraphQL query is an adaptation of the previous one, with the following differences:
 
 - Operation `RetrieveGitHubAccessToken` reads the value from the current HTTP request's header `X-Github-Access-Token` for the credentials, and indicates if this header has not been provided
-- `FailIfGitHubAccessTokenIsMissing` triggers an error when the header is missing
+- `FailIfGitHubAccessTokenIsMissing` triggers an error when the header is missing (via field `_fail` provided by the [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension)
 - All other operations have been added directive `@skip(if: $isGithubAccessTokenMissing)`, so that they will not be executed the the token is missing
 
 ```graphql
