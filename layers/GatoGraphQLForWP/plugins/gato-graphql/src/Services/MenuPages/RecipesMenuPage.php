@@ -421,6 +421,21 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'creating-an-api-gateway',
                 \__('Creating an API gateway', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'filtering-data-from-an-external-api',
