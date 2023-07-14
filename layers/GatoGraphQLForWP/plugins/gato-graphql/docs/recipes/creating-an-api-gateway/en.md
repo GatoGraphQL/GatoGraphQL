@@ -174,9 +174,9 @@ We can also allow our users to provide their own GitHub credentials.
 
 This GraphQL query is an adaptation of the previous one, with the following differences:
 
-- Operation `RetrieveGitHubAccessToken` reads the value from incoming header `X-Github-Access-Token` for the credentials, and indicates if this header was provided via dynamic variable `$hasGithubAccessToken`
-- `FailIfNoGitHubAccessToken` triggers an error when the header was not provided
-- All other operations have been added directive `@include(if: $hasGithubAccessToken)`, so that they will be executed only if the access token is provided
+- Operation `RetrieveGitHubAccessToken` reads the value from incoming header `X-Github-Access-Token` for the credentials, and indicates if this header was missing
+- `FailIfNoGitHubAccessToken` triggers an error when the header is missing
+- All other operations have been added directive `@skip(if: $isGithubAccessTokenMissing)`, so that they will not be executed the the token is missing
 
 ```graphql
 query RetrieveGitHubAccessToken {
@@ -184,13 +184,13 @@ query RetrieveGitHubAccessToken {
     @export(as: "githubAccessToken")
     @remove
 
-  hasGithubAccessToken: _notNull(value: $__githubAccessToken)
-    @export(as: "hasGithubAccessToken")
+  isGithubAccessTokenMissing: _isNull(value: $__githubAccessToken)
+    @export(as: "isGithubAccessTokenMissing")
 }
 
 query FailIfNoGitHubAccessToken
   @depends(on: "RetrieveGitHubAccessToken")
-  @skip(if: $hasGithubAccessToken)
+  @include(if: $isGithubAccessTokenMissing)
 {
   _fail(
     message: "Header \"X-Github-Access-Token\" has not been provided"
@@ -199,21 +199,21 @@ query FailIfNoGitHubAccessToken
 
 query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
   @depends(on: "RetrieveGitHubAccessToken")
-  @include(if: $hasGithubAccessToken)
+  @skip(if: $isGithubAccessTokenMissing)
 {
   # ...
 }
 
 query CreateHTTPRequestInputs
   @depends(on: "RetrieveProxyArtifactDownloadURLs")
-  @include(if: $hasGithubAccessToken)
+  @skip(if: $isGithubAccessTokenMissing)
 {
   # ...
 }
 
 query RetrieveActualArtifactDownloadURLs
   @depends(on: "CreateHTTPRequestInputs")
-  @include(if: $hasGithubAccessToken)
+  @skip(if: $isGithubAccessTokenMissing)
 {
   # ...
 }
@@ -223,7 +223,7 @@ query PrintArtifactDownloadURLsAsList
     "RetrieveActualArtifactDownloadURLs",
     "FailIfNoGitHubAccessToken"
   ])
-  @include(if: $hasGithubAccessToken)
+  @skip(if: $isGithubAccessTokenMissing)
 {
   # ...
 }
@@ -247,7 +247,7 @@ When it is not provided, the response will be:
       "extensions": {
         "path": [
           "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
-          "query FailIfNoGitHubAccessToken @depends(on: \"ValidateHasGitHubAccessToken\") @skip(if: $hasGithubAccessToken) { ... }"
+          "query FailIfNoGitHubAccessToken @depends(on: \"ValidateHasGitHubAccessToken\") @skip(if: $isGithubAccessTokenMissing) { ... }"
         ],
         "type": "QueryRoot",
         "field": "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
@@ -257,7 +257,7 @@ When it is not provided, the response will be:
     }
   ],
   "data": {
-    "hasGithubAccessToken": false
+    "isGithubAccessTokenMissing": false
   }
 }
 ```
