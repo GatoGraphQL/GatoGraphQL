@@ -1,0 +1,253 @@
+# Handling errors when connecting to services
+
+REST:
+
+```graphql
+query ConnectToRESTEndpoint($postId: ID!) {
+  endpoint: _sprintf(
+    string: "https://newapi.getpop.org/wp-json/wp/v2/posts/%s/?_fields=id,type,title,date"
+    values: [$postId]
+  ) @remove
+  
+  externalData: _sendJSONObjectItemHTTPRequest(
+    input: {
+      url: $__endpoint
+    }
+  ) @export(as: "externalData")
+
+  requestProducedErrors: _isNull(value: $__externalData)
+    @export(as: "requestProducedErrors")
+    @remove
+}
+
+query ExecuteOperation
+  @depends(on: "ConnectToRESTEndpoint")
+  @skip(if: $requestProducedErrors)
+{
+  # Do something...
+  postTitle: _objectProperty(
+    object: $externalData,
+    by: { path: "title.rendered"}
+  )
+}
+```
+
+with:
+
+      # This will fail because the resource does not exist, producing a 404
+"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date"
+"https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
+
+```json
+{
+  "errors": [
+    {
+      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/8888/?_fields=id,type,title,date` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
+      "locations": [
+        {
+          "line": 6,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+          "query ConnectToRESTEndpoint($postId: ID!) { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null
+  }
+}
+```
+
+or:
+
+```json
+{
+  "data": {
+    "externalData": {
+      "id": 1,
+      "date": "2019-08-02T07:53:57",
+      "type": "post",
+      "title": {
+        "rendered": "Hello world!"
+      }
+    },
+    "postTitle": "Hello world!"
+  }
+}
+```
+
+GraphQL:
+
+```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  defaultResponseHasErrors: _echo(value: false)
+    @export(as: "responseHasErrors")
+    @remove
+  defaultPostIsMissing: _echo(value: false)
+    @export(as: "postIsMissing")
+    @remove
+}
+
+query ConnectToGraphQLAPI($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  externalData: _sendGraphQLHTTPRequest(
+    input: {
+      endpoint: "https://newapi.getpop.org/api/graphql/",
+      # The resource does not exist, but the status is still 200, and the error is in the response
+      query: """
+        query GetPostData($postId: ID!) {
+          post(by: { id : $postId }) {
+            date
+            title
+          }
+        }
+      """,
+      variables: [
+        {
+          name: "postId",
+          value: $postId
+        }
+      ]
+    }
+  ) @export(as: "externalData")
+
+  requestProducedErrors: _isNull(value: $__externalData)
+    @export(as: "requestProducedErrors")
+    @remove
+}
+
+query ValidateResponse
+  @depends(on: "ConnectToGraphQLAPI")
+  @skip(if: $requestProducedErrors)
+{
+  responseHasErrors: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      key: "errors"
+    }
+  )
+    @export(as: "responseHasErrors")
+    @remove
+
+  postExists: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      path: "data.post"
+    }
+  )
+    @remove
+    
+  postIsMissing: _not(value: $__postExists)
+    @export(as: "postIsMissing")
+    @remove
+}
+
+query FailIfResponseHasErrors
+  @depends(on: "ValidateResponse")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @include(if: $responseHasErrors)
+{
+  errors: _objectProperty(
+    object: $externalData,
+    by: {
+      key: "errors"
+    }
+  ) @remove
+
+  _fail(
+    message: "Executing the GraphQL query produced error(s)"
+    data: {
+      errors: $__errors
+    }
+  ) @remove
+}
+
+query ExecuteOperation
+  @depends(on: "FailIfResponseHasErrors")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+{
+  # Do something...
+  postTitle: _objectProperty(
+    object: $externalData,
+    by: { path: "data.post.title" }
+  )
+}
+```
+
+
+
+```json
+{
+  "data": {
+    "externalData": {
+      "data": {
+        "post": {
+          "date": "2019-08-02T07:53:57+00:00",
+          "title": "Hello world!"
+        }
+      }
+    },
+    "postTitle": "Hello world!"
+  }
+}
+```
+
+or if post with ID not exists:
+
+```json
+{
+  "data": {
+    "externalData": {
+      "data": {
+        "post": null
+      }
+    }
+  }
+}
+```
+
+or if webserver is down:
+
+```json
+{
+  "errors": [
+    {
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/api/graphql/",
+      "locations": [
+        {
+          "line": 15,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendGraphQLHTTPRequest(input: {endpoint: \"https://newapi.getpop.org/api/graphql/\", query: \"\n        query GetPostData($postId: ID!) {\n          post(by: { id : $postId }) {\n            date\n            title\n          }\n        }\n      \", variables: [{name: \"postId\", value: $postId}]}) @export(as: \"externalData\")",
+          "query ConnectToGraphQLAPI($postId: ID!) @depends(on: \"InitializeDynamicVariables\") { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendGraphQLHTTPRequest(input: {endpoint: \"https://newapi.getpop.org/api/graphql/\", query: \"\n        query GetPostData($postId: ID!) {\n          post(by: { id : $postId }) {\n            date\n            title\n          }\n        }\n      \", variables: [{name: \"postId\", value: $postId}]}) @export(as: \"externalData\")",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null
+  }
+}
+```

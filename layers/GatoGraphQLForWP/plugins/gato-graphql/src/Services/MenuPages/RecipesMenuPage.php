@@ -419,6 +419,21 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'handling-errors-when-connecting-to-services',
+                \__('Handling errors when connecting to services', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
+            ],
+            [
                 'creating-an-api-gateway',
                 \__('Creating an API gateway', 'gato-graphql'),
                 [
