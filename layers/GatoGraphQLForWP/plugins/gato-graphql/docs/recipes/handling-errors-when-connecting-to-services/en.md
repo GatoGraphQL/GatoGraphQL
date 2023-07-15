@@ -135,9 +135,7 @@ In both cases, there was an additional error in the response:
 }
 ```
 
-This error happens because, after the first error, the dynamic variable `$__externalData` will have value `null`, triggering the second error.
-
-This is not ideal. It's much better to be aware that some error happened and, then, skip executing the rest of the GraphQL query.
+This error happens because, after the first error, the dynamic variable `$__externalData` will have value `null`, triggering the second error. This is not ideal; we'd rather be aware that some error happened and, then, skip executing the rest of the GraphQL query.
 
 In this recipe we will explore how to achieve this.
 
