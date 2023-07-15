@@ -260,9 +260,13 @@ If the Internet connection is down, we get this response:
 }
 ```
 
-### Otherwise
+### Using the errors messages from the REST API response
 
-Previous one expects status code to be 200. Without that expectation, we can retrieve the error message contained in the body:
+The previous query uses field `_sendJSONObjectItemHTTPRequest`, which expects the status code to be `200` (or any other successful code).
+
+However, it is possible for the REST API to return a `404` for a missing resource, and provide a descriptive error message in the JSON response.
+
+We can capture this feedback from the webserver by replacing `_sendJSONObjectItemHTTPRequest` with `_sendHTTPRequest`, and display it in the `errors` entry in the GraphQL response:
 
 ```graphql
 query ExportDefaultDynamicVariables
