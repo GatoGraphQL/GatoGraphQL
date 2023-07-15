@@ -198,7 +198,7 @@ When passing `$postId: 1`, the query is successful, and the response is:
 }
 ```
 
-Passing `$postId: 8888` concerning a non-existent resource, we get this response:
+Passing `$postId: 8888` concerning a non-existent resource, we get this response (notice that there's no `postTitle` in the response, and no second error message):
 
 ```json
 {
