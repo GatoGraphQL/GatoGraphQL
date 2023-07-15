@@ -650,7 +650,7 @@ Now, when passing `$postId: 8888` concerning a non-existent resource, we get thi
 {
   "errors": [
     {
-      "message": "There is no post with ID '88888'",
+      "message": "There is no post with ID '8888'",
       "locations": [
         {
           "line": 95,
@@ -666,7 +666,7 @@ Now, when passing `$postId: 8888` concerning a non-existent resource, we get thi
         "field": "_fail(message: $__errorMessage, data: {id: $postId}) @remove",
         "id": "root",
         "failureData": {
-          "id": 88888
+          "id": 8888
         },
         "code": "PoPSchema/FailFieldAndDirective@e1"
       }
