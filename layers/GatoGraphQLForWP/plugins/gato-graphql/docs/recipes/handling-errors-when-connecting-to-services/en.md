@@ -143,7 +143,12 @@ In this recipe we will explore how to achieve this.
 
 ## Handling errors when connecting to a REST API
 
-This GraphQL query splits the logic into two operations, and executes the second one only if no errors were produced in the first operation:
+This GraphQL query splits the logic into two operations, where:
+
+- The first operation exports dynamic variable `$requestProducedErrors`, indicating if the value of field `_sendJSONObjectItemHTTPRequest` is `null` (in which case, some error occurred)
+- The second operation is `@skip`ped when `$requestProducedErrors` is `true`
+
+This way, the second operation, which contains the logic to execute, is skipped when there was an error fetching the data in the first operation:
 
 ```graphql
 query ConnectToRESTEndpoint($postId: ID!) {
