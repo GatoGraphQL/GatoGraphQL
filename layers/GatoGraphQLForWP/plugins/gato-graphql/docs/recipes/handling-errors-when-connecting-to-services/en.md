@@ -138,7 +138,7 @@ query ValidateAPIResponse
     @remove
 }
 
-query FailIfExternalAPIHasErrors
+query FailIfExternalAPIHasErrors($postId: ID!)
   @depends(on: "ValidateAPIResponse")
   @include(if: $endpointHasErrors)
   @skip(if: $isNullExternalData)
@@ -168,6 +168,7 @@ query FailIfExternalAPIHasErrors
   _fail(
     message: $__errorMessage
     data: {
+      postId: $postId,
       endpointData: $__data
     }
   ) @remove
@@ -182,6 +183,106 @@ query ExecuteSomeOperation
     object: $externalData,
     by: { path: "title.rendered"}
   )
+}
+```
+
+returns:
+
+```json
+{
+  "data": {
+    "externalData": {
+      "contentType": "application/json; charset=UTF-8",
+      "statusCode": 200,
+      "bodyJSONObject": {
+        "id": 1,
+        "date": "2019-08-02T07:53:57",
+        "type": "post",
+        "title": {
+          "rendered": "Hello world!"
+        }
+      }
+    },
+    "postTitle": "Hello world!"
+  }
+}
+```
+
+or with wrong post ID:
+
+```json
+{
+  "errors": [
+    {
+      "message": "[rest_post_invalid_id] Invalid post ID.",
+      "locations": [
+        {
+          "line": 76,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "_fail(message: $__errorMessage, data: {postId: $postId, endpointData: $__data}) @remove",
+          "query FailIfExternalAPIHasErrors($postId: ID!) @depends(on: \"ValidateAPIResponse\") @include(if: $endpointHasErrors) @skip(if: $isNullExternalData) { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "_fail(message: $__errorMessage, data: {postId: $postId, endpointData: $__data}) @remove",
+        "id": "root",
+        "failureData": {
+          "postId": 88888,
+          "endpointData": {
+            "status": 404
+          }
+        },
+        "code": "PoPSchema/FailFieldAndDirective@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": {
+      "contentType": "application/json; charset=UTF-8",
+      "statusCode": 404,
+      "bodyJSONObject": {
+        "code": "rest_post_invalid_id",
+        "message": "Invalid post ID.",
+        "data": {
+          "status": 404
+        }
+      }
+    }
+  }
+}
+```
+
+or if webserver is down:
+
+```json
+{
+  "errors": [
+    {
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date",
+      "locations": [
+        {
+          "line": 17,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendHTTPRequest(input: {url: $__endpoint, method: GET}) { ... }",
+          "query ConnectToAPI($postId: ID!) @depends(on: \"ExportDefaultDynamicVariables\") { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendHTTPRequest(input: {url: $__endpoint, method: GET}) { ... }",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null
+  }
 }
 ```
 
