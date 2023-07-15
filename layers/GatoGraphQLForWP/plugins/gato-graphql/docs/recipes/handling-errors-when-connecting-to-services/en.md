@@ -1,6 +1,6 @@
 # Handling errors when connecting to services
 
-REST:
+## Handling errors when connecting to a REST API
 
 ```graphql
 query ConnectToRESTEndpoint($postId: ID!) {
@@ -85,7 +85,7 @@ or:
 }
 ```
 
-GraphQL:
+## Handling errors when connecting to a GraphQL API
 
 ```graphql
 query InitializeDynamicVariables
