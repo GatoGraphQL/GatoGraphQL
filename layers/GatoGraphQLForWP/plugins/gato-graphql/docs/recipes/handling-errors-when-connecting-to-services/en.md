@@ -442,11 +442,11 @@ When executing the query with variable `$postId: 8888` the resource is missing, 
 
 Validating that no errors happened when executing a GraphQL query is different than for REST. That is because, when querying a missing resource in a GraphQL API, the response will have status code `200` and `null` value for that resource (REST instead returns a `404`).
 
-This GraphQL query validates that no errors happened when executing `_sendGraphQLHTTPRequest` by checking that:
+The GraphQL below validates that no errors happened when executing `_sendGraphQLHTTPRequest` by checking that:
 
 - The response is not `null` (eg: the Internet connection did not go down)
 - The response does not contain the `errors` entry
-- The response contains a `non-null` value under entry `data.post` (i.e. the queried resource exists):
+- The response contains a non-`null` value under entry `data.post` (i.e. the queried resource exists)
 
 ```graphql
 query InitializeDynamicVariables
@@ -550,7 +550,7 @@ query ExecuteOperation
 }
 ```
 
-
+When passing `$postId: 1`, the query is successful, and the response is:
 
 ```json
 {
@@ -568,7 +568,7 @@ query ExecuteOperation
 }
 ```
 
-or if post with ID not exists:
+Passing `$postId: 8888` concerning a non-existent resource, we get this response (notice that there's no `postTitle` in the response, and also no error message):
 
 ```json
 {
@@ -582,7 +582,7 @@ or if post with ID not exists:
 }
 ```
 
-or if webserver is down:
+If the Internet connection is down, we get this response:
 
 ```json
 {
