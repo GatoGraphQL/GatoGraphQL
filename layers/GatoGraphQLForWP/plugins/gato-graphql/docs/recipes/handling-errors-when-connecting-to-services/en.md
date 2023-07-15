@@ -684,14 +684,14 @@ Now, when passing `$postId: 8888` concerning a non-existent resource, we get thi
       "message": "There is no post with ID '8888'",
       "locations": [
         {
-          "line": 95,
+          "line": 96,
           "column": 3
         }
       ],
       "extensions": {
         "path": [
           "_fail(message: $__errorMessage, data: {id: $postId}) @remove",
-          "query FailIfPostNotExists($postId: ID!) @include(if: $postIsMissing) @depends(on: \"ValidateResponse\") { ... }"
+          "query FailIfPostNotExists($postId: ID!) @skip(if: $requestProducedErrors) @include(if: $postIsMissing) @depends(on: \"ValidateResponse\") { ... }"
         ],
         "type": "QueryRoot",
         "field": "_fail(message: $__errorMessage, data: {id: $postId}) @remove",
