@@ -1,29 +1,19 @@
 # Handling errors when connecting to services
 
-
+When connecting to an external API, there
 
 Doing this:
 
 ```graphql
-query ConnectToRESTEndpoint($postId: ID!) {
-  endpoint: _sprintf(
-    string: "https://newapi.getpop.org/wp-json/wp/v2/posts/%s/?_fields=id,type,title,date"
-    values: [$postId]
-  ) @remove
-  
+{
   externalData: _sendJSONObjectItemHTTPRequest(
     input: {
-      url: $__endpoint
+      url: "https://newapi.getpop.org/wp-json/wp/v2/posts/88888/"
     }
-  ) @export(as: "externalData")
-}
-
-query ExecuteOperation
-  @depends(on: "ConnectToRESTEndpoint")
-{
-  # Do something...
+  )
+    
   postTitle: _objectProperty(
-    object: $externalData,
+    object: $__externalData,
     by: { path: "title.rendered"}
   )
 }
@@ -31,24 +21,25 @@ query ExecuteOperation
 
 ...will bubble errors:
 
+
 ```json
 {
   "errors": [
     {
-      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/",
       "locations": [
         {
-          "line": 7,
+          "line": 2,
           "column": 17
         }
       ],
       "extensions": {
         "path": [
-          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
-          "query ConnectToRESTEndpoint($postId: ID!) { ... }"
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+          "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
         "id": "root",
         "code": "PoP/ComponentModel@e1"
       }
@@ -57,19 +48,19 @@ query ExecuteOperation
       "message": "Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null",
       "locations": [
         {
-          "line": 19,
+          "line": 10,
           "column": 13
         }
       ],
       "extensions": {
         "path": [
-          "$externalData",
-          "(object: $externalData)",
-          "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
-          "query ExecuteOperation @depends(on: \"ConnectToRESTEndpoint\") { ... }"
+          "$__externalData",
+          "(object: $__externalData)",
+          "postTitle: _objectProperty(object: $__externalData, by: {path: \"title.rendered\"})",
+          "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
+        "field": "postTitle: _objectProperty(object: $__externalData, by: {path: \"title.rendered\"})",
         "id": "root",
         "code": "gql@5.4.2.1[b]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
@@ -89,20 +80,20 @@ or
 {
   "errors": [
     {
-      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date",
+      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/88888/` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
       "locations": [
         {
-          "line": 7,
+          "line": 2,
           "column": 17
         }
       ],
       "extensions": {
         "path": [
-          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
-          "query ConnectToRESTEndpoint($postId: ID!) { ... }"
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+          "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
         "id": "root",
         "code": "PoP/ComponentModel@e1"
       }
@@ -111,19 +102,19 @@ or
       "message": "Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null",
       "locations": [
         {
-          "line": 19,
+          "line": 10,
           "column": 13
         }
       ],
       "extensions": {
         "path": [
-          "$externalData",
-          "(object: $externalData)",
-          "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
-          "query ExecuteOperation @depends(on: \"ConnectToRESTEndpoint\") { ... }"
+          "$__externalData",
+          "(object: $__externalData)",
+          "postTitle: _objectProperty(object: $__externalData, by: {path: \"title.rendered\"})",
+          "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
+        "field": "postTitle: _objectProperty(object: $__externalData, by: {path: \"title.rendered\"})",
         "id": "root",
         "code": "gql@5.4.2.1[b]",
         "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
@@ -136,6 +127,9 @@ or
   }
 }
 ```
+
+
+
 
 Notice: `Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null`
 
