@@ -177,6 +177,49 @@ The body is now accessible as a JSON object:
 - `_sendJSONObjectItemHTTPRequest`: When the content pertains a single JSON object
 - `_sendJSONObjectCollectionHTTPRequest`: When the content pertains a collection of JSON objects
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+These fields expect the status code of the response to be successful (i.e. in the `200-299` range, such as `200`, `201` or `202`), as it enables them to already return a `JSONObject` containing the decoded-as-JSON body of the response.
+
+When this is not the case, the GraphQL response will contain a corresponding error.
+
+For instance, when fetching a non-existing post from the WP REST API's endpoint  `/wp-json/wp/v2/posts/{postId}/`, the response will be:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/88888/` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
+      "locations": [
+        {
+          "line": 3,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+          "query ConnectToAPI { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null
+  }
+}
+```
+
+If we do not want to treat any non-`200s` status code (such as `302`, `404` or `500`) as an error, we must use the `_sendHTTPRequest` field.
+
+</div>
+
 <!-- These fields already convert the response to `JSONObject` or `[JSONObject]`. -->
 
 Adapting the previous query:
