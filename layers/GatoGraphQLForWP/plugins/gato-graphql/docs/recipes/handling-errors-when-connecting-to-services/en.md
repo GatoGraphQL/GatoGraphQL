@@ -648,6 +648,7 @@ If we want to force adding an error in that situation, we can append the followi
 
 ```graphql
 query FailIfPostNotExists($postId: ID!)
+  @skip(if: $requestProducedErrors)
   @include(if: $postIsMissing)
   @depends(on: "ValidateResponse")
 {
