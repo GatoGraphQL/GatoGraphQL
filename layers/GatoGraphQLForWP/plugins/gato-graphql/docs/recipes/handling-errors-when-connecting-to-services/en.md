@@ -367,6 +367,36 @@ query ExecuteSomeOperation
 }
 ```
 
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+The [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension provides two ways to trigger a custom error:
+
+- Via field `_fail`
+- Via directive `@fail`
+
+While field `_fail` adds the error always, directive `@fail` only whenever the condition under argument `condition` is met. Its default value is `IS_NULL`, meaning that it will be triggered when the field it is applied to has value `null`:
+
+```graphql
+query GetPost($id: ID!) {
+  post(by:{id: $id})
+    @fail(
+      message: "There is no post with the provided ID"
+      data: {
+        id: $id
+      }
+    )
+  {
+    id
+    title
+  }
+}
+```
+
+</div>
+
 When executing the query with variable `$postId: 1` the request is successful, and we obtain:
 
 ```json
