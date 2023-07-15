@@ -46,119 +46,174 @@ fail-if-external-api-has-errors.gql <= Check if to place it on this Recipe, or e
 REST:
 
 ```graphql
-query ConnectToAPI($endpoint: String!) {
+query ConnectToRESTEndpoint($postId: ID!) {
+  endpoint: _sprintf(
+    string: "https://newapi.getpop.org/wp-json/wp/v2/posts/%s/?_fields=id,type,title,date"
+    values: [$postId]
+  ) @remove
+  
   externalData: _sendJSONObjectItemHTTPRequest(
     input: {
-      url: $endpoint
+      url: $__endpoint
     }
   ) @export(as: "externalData")
 
-  isNullExternalData: _isNull(value: $__externalData)
-    @export(as: "isNullExternalData")
+  requestProducedErrors: _isNull(value: $__externalData)
+    @export(as: "requestProducedErrors")
     @remove
 }
 
-query ExecuteSomeOperation
-  @depends(on: "ConnectToAPI")
-  @skip(if: $isNullExternalData)
+query ExecuteOperation
+  @depends(on: "ConnectToRESTEndpoint")
+  @skip(if: $requestProducedErrors)
 {
   # Do something...
   postTitle: _objectProperty(
     object: $externalData,
     by: { path: "title.rendered"}
   )
+}
+```
+
+with:
+
+      # This will fail because the resource does not exist, producing a 404
+"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date"
+"https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
+
+```json
+{
+  "errors": [
+    {
+      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/8888/?_fields=id,type,title,date` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
+      "locations": [
+        {
+          "line": 6,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+          "query ConnectToRESTEndpoint($postId: ID!) { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null
+  }
+}
+```
+
+or:
+
+```json
+{
+  "data": {
+    "externalData": {
+      "id": 1,
+      "date": "2019-08-02T07:53:57",
+      "type": "post",
+      "title": {
+        "rendered": "Hello world!"
+      }
+    },
+    "postTitle": "Hello world!"
+  }
 }
 ```
 
 GraphQL:
 
 ```graphql
-query ExportDefaultDynamicVariables
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
-{
-  defaultEndpointHasErrors: _echo(value: true)
-    @export(as: "endpointHasErrors")
-    @remove
-}
-
-query ConnectToAPI($endpoint: String!)
-  @depends(on: "ExportDefaultDynamicVariables")
-{
-  externalData: _sendJSONObjectItemHTTPRequest(
+query ConnectToGraphQLAPI($postId: ID!) {
+  externalData: _sendGraphQLHTTPRequest(
     input: {
-      url: $endpoint
+      endpoint: "https://newapi.getpop.org/api/graphql/",
+      # The resource does not exist, but the status is still 200, and the error is in the response
+      query: """
+        query GetPostData($postId: ID!) {
+          post(by: { id : $postId }) {
+            date
+            title
+          }
+        }
+      """,
+      variables: [
+        {
+          name: "postId",
+          value: $postId
+        }
+      ]
     }
   ) @export(as: "externalData")
 
-  isNullExternalData: _isNull(value: $__externalData)
-    @export(as: "isNullExternalData")
+  responseHasErrors: _propertyIsSetInJSONObject(
+    object: $__externalData
+    by: {
+      key: "errors"
+    }
+  )
+    @export(as: "responseHasErrors")
     @remove
 }
 
-query ValidateAPIResponse
-  @depends(on: "ConnectToAPI")
-  @skip(if: $isNullExternalData)
+query FailIfResponseHasErrors
+  @depends(on: "ConnectToGraphQLAPI")
+  @include(if: $responseHasErrors)
 {
-  endpointHasErrors: _propertyIsSetInJSONObject(
-    object: $externalData
+  errors: _objectProperty(
+    object: $externalData,
     by: {
-      path: "data.status"
+      key: "errors"
     }
-  ) @export(as: "endpointHasErrors")
-}
+  ) @remove
 
-query FailIfExternalAPIHasErrors($endpoint: String!)
-  @depends(on: "ValidateAPIResponse")
-  @include(if: $endpointHasErrors)
-  @skip(if: $isNullExternalData)
-{
-  code: _objectProperty(
-    object: $externalData,
-    by: {
-      key: "code"
-    }
-  ) @remove
-  message: _objectProperty(
-    object: $externalData,
-    by: {
-      key: "message"
-    }
-  ) @remove
-  errorMessage: _sprintf(
-    string: "[%s] %s",
-    values: [$__code, $__message]
-  ) @remove
-  data: _objectProperty(
-    object: $externalData,
-    by: {
-      key: "data"
-    }
-  ) @remove
   _fail(
-    message: $__errorMessage
+    message: "Executing the GraphQL query produced error(s)"
     data: {
-      endpoint: $endpoint
-      endpointData: $__data
+      errors: $__errors
     }
   ) @remove
 }
 
-query ExecuteSomeOperation
-  @depends(on: "FailIfExternalAPIHasErrors")
-  @skip(if: $endpointHasErrors)
+query ExecuteOperation
+  @depends(on: "FailIfResponseHasErrors")
+  @skip(if: $responseHasErrors)
 {
   # Do something...
   postTitle: _objectProperty(
     object: $externalData,
-    by: { path: "title.rendered"}
+    by: { path: "data.post.title" }
   )
 }
 ```
 
-var
+
 
 ```json
 {
-  "endpoint": "https://newapi.getpop.org/wp-json/wp/v2/posts/8888888888/?_fields=id,type,title,date"
+  "data": {
+    "externalData": {
+      "data": {
+        "post": {
+          "date": "2019-08-02T07:53:57+00:00",
+          "title": "Hello world!"
+        }
+      }
+    },
+    "postTitle": "Hello world!"
+  }
 }
+```
+
+or:
+
+```json
+
 ```
