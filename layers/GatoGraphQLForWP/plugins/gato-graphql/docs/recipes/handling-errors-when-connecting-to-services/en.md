@@ -8,7 +8,7 @@ For instance, consider the following query:
 {
   externalData: _sendJSONObjectItemHTTPRequest(
     input: {
-      url: "https://newapi.getpop.org/wp-json/wp/v2/posts/88888/"
+      url: "https://newapi.getpop.org/wp-json/wp/v2/posts/8888/"
     }
   )
     
@@ -25,7 +25,7 @@ If the Internet connection went down, then field `_sendJSONObjectItemHTTPRequest
 {
   "errors": [
     {
-      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/",
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/8888/",
       "locations": [
         {
           "line": 2,
@@ -34,11 +34,11 @@ If the Internet connection went down, then field `_sendJSONObjectItemHTTPRequest
       ],
       "extensions": {
         "path": [
-          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/8888/\"}) @export(as: \"externalData\")",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/8888/\"}) @export(as: \"externalData\")",
         "id": "root",
         "code": "PoP/ComponentModel@e1"
       }
@@ -79,7 +79,7 @@ If we manage to connect, but the requested resource does not exist, we will get 
 {
   "errors": [
     {
-      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/88888/` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
+      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/8888/` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
       "locations": [
         {
           "line": 2,
@@ -88,11 +88,11 @@ If we manage to connect, but the requested resource does not exist, we will get 
       ],
       "extensions": {
         "path": [
-          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/8888/\"}) @export(as: \"externalData\")",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/\"}) @export(as: \"externalData\")",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: \"https://newapi.getpop.org/wp-json/wp/v2/posts/8888/\"}) @export(as: \"externalData\")",
         "id": "root",
         "code": "PoP/ComponentModel@e1"
       }
@@ -235,7 +235,7 @@ If the Internet connection is down, we get this response:
 {
   "errors": [
     {
-      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date",
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/8888/?_fields=id,type,title,date",
       "locations": [
         {
           "line": 17,
@@ -260,13 +260,17 @@ If the Internet connection is down, we get this response:
 }
 ```
 
-### Using the errors messages from the REST API response
+### Displaying the errors messages from the REST API response
 
 The previous query uses field `_sendJSONObjectItemHTTPRequest`, which expects the status code to be `200` (or any other successful code).
 
 However, it is possible for the REST API to return a `404` for a missing resource, and provide a descriptive error message in the JSON response.
 
-We can capture this feedback from the webserver by replacing `_sendJSONObjectItemHTTPRequest` with `_sendHTTPRequest`, and display it in the `errors` entry in the GraphQL response:
+We can capture this feedback from the webserver by replacing `_sendJSONObjectItemHTTPRequest` with `_sendHTTPRequest`, and display it in the `errors` entry in the GraphQL response.
+
+For instance, when fetching data from a non-existent resource from the WP REST API, it returns a `data.status` entry in the response and an appropriate error message.
+
+This GraphQL query captures and displays this information:
 
 ```graphql
 query ExportDefaultDynamicVariables
@@ -365,7 +369,7 @@ query ExecuteSomeOperation
 }
 ```
 
-returns:
+When executing the query with variable `$postId: 1` the request is successful, and we obtain:
 
 ```json
 {
@@ -387,7 +391,7 @@ returns:
 }
 ```
 
-or with wrong post ID:
+When executing the query with variable `$postId: 8888` the resource is missing, and we obtain:
 
 ```json
 {
@@ -409,7 +413,7 @@ or with wrong post ID:
         "field": "_fail(message: $__errorMessage, data: {postId: $postId, endpointData: $__data}) @remove",
         "id": "root",
         "failureData": {
-          "postId": 88888,
+          "postId": 8888,
           "endpointData": {
             "status": 404
           }
@@ -433,10 +437,6 @@ or with wrong post ID:
   }
 }
 ```
-
-or if webserver is down:
-
-
 
 ## Handling errors when connecting to a GraphQL API
 
