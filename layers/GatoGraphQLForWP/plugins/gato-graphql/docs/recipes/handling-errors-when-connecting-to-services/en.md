@@ -440,6 +440,8 @@ When executing the query with variable `$postId: 8888` the resource is missing, 
 
 ## Handling errors when connecting to a GraphQL API
 
+Validating that no errors happened when executing a GraphQL query is different than for REST. That is because, when querying a missing resource in a GraphQL API, the response will have status code `200` and `null` value for that resource (REST instead returns a `404`).
+
 ```graphql
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
