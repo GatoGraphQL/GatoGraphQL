@@ -1,8 +1,8 @@
 # Handling errors when connecting to services
 
-When connecting to an external API, there
+We can encounter different types of errors when fetching data from an external API.
 
-Doing this:
+For instance, consider the following query:
 
 ```graphql
 {
@@ -19,8 +19,7 @@ Doing this:
 }
 ```
 
-...will bubble errors:
-
+If the Internet connection went down, then field `_sendJSONObjectItemHTTPRequest` will trigger an error:
 
 ```json
 {
@@ -74,7 +73,7 @@ Doing this:
 }
 ```
 
-or
+If we manage to connect, but the requested resource does not exist, we will get a `404`:
 
 ```json
 {
@@ -128,7 +127,19 @@ or
 }
 ```
 
+In both cases, there was an additional error in the response:
 
+```json
+{
+  "message": "Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null" 
+}
+```
+
+This error happens because, after the first error, the dynamic variable `$__externalData` will have value `null`, triggering the second error.
+
+This is not ideal. It's much better to be aware that some error happened and, then, skip executing the rest of the GraphQL query.
+
+In this recipe we will explore how to achieve this.
 
 
 Notice: `Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null`
