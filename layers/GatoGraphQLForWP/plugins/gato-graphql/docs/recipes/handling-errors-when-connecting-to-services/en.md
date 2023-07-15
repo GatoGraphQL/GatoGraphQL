@@ -141,10 +141,9 @@ This is not ideal. It's much better to be aware that some error happened and, th
 
 In this recipe we will explore how to achieve this.
 
-
-Notice: `Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null`
-
 ## Handling errors when connecting to a REST API
+
+This GraphQL query splits the logic into two operations, and executes the second one only if no errors were produced in the first operation:
 
 ```graphql
 query ConnectToRESTEndpoint($postId: ID!) {
@@ -176,11 +175,25 @@ query ExecuteOperation
 }
 ```
 
-with:
+When passing `$postId: 1`, the query is successful, and the response is:
 
-      # This will fail because the resource does not exist, producing a 404
-"https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date"
-"https://newapi.getpop.org/wp-json/wp/v2/posts/1/?_fields=id,type,title,date"
+```json
+{
+  "data": {
+    "externalData": {
+      "id": 1,
+      "date": "2019-08-02T07:53:57",
+      "type": "post",
+      "title": {
+        "rendered": "Hello world!"
+      }
+    },
+    "postTitle": "Hello world!"
+  }
+}
+```
+
+Passing `$postId: 8888` concerning a non-existent resource, we get this response:
 
 ```json
 {
@@ -211,20 +224,33 @@ with:
 }
 ```
 
-or:
+If the Internet connection is down, we get this response:
 
 ```json
 {
-  "data": {
-    "externalData": {
-      "id": 1,
-      "date": "2019-08-02T07:53:57",
-      "type": "post",
-      "title": {
-        "rendered": "Hello world!"
+  "errors": [
+    {
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date",
+      "locations": [
+        {
+          "line": 17,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendHTTPRequest(input: {url: $__endpoint, method: GET}) { ... }",
+          "query ConnectToAPI($postId: ID!) @depends(on: \"ExportDefaultDynamicVariables\") { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendHTTPRequest(input: {url: $__endpoint, method: GET}) { ... }",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
       }
-    },
-    "postTitle": "Hello world!"
+    }
+  ],
+  "data": {
+    "externalData": null
   }
 }
 ```
@@ -401,34 +427,7 @@ or with wrong post ID:
 
 or if webserver is down:
 
-```json
-{
-  "errors": [
-    {
-      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date",
-      "locations": [
-        {
-          "line": 17,
-          "column": 17
-        }
-      ],
-      "extensions": {
-        "path": [
-          "externalData: _sendHTTPRequest(input: {url: $__endpoint, method: GET}) { ... }",
-          "query ConnectToAPI($postId: ID!) @depends(on: \"ExportDefaultDynamicVariables\") { ... }"
-        ],
-        "type": "QueryRoot",
-        "field": "externalData: _sendHTTPRequest(input: {url: $__endpoint, method: GET}) { ... }",
-        "id": "root",
-        "code": "PoP/ComponentModel@e1"
-      }
-    }
-  ],
-  "data": {
-    "externalData": null
-  }
-}
-```
+
 
 ## Handling errors when connecting to a GraphQL API
 
