@@ -85,6 +85,106 @@ or:
 }
 ```
 
+### Otherwise
+
+Previous one expects status code to be 200. Without that expectation, we can retrieve the error message contained in the body:
+
+```graphql
+query ExportDefaultDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  defaultEndpointHasErrors: _echo(value: true)
+    @export(as: "endpointHasErrors")
+    @remove
+}
+
+query ConnectToAPI($postId: ID!)
+  @depends(on: "ExportDefaultDynamicVariables")
+{
+  endpoint: _sprintf(
+    string: "https://newapi.getpop.org/wp-json/wp/v2/posts/%s/?_fields=id,type,title,date"
+    values: [$postId]
+  ) @remove
+  
+  externalData: _sendHTTPRequest(
+    input: {
+      url: $__endpoint,
+      method: GET
+    }
+  ) {    
+    contentType
+    statusCode
+    body @remove
+    bodyJSONObject: _strDecodeJSONObject(string: $__body)
+      @export(as: "externalData")
+  }
+
+  isNullExternalData: _isNull(value: $__externalData)
+    @export(as: "isNullExternalData")
+    @remove
+}
+
+query ValidateAPIResponse
+  @depends(on: "ConnectToAPI")
+  @skip(if: $isNullExternalData)
+{
+  endpointHasErrors: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      path: "data.status"
+    }
+  )
+    @export(as: "endpointHasErrors")
+    @remove
+}
+
+query FailIfExternalAPIHasErrors
+  @depends(on: "ValidateAPIResponse")
+  @include(if: $endpointHasErrors)
+  @skip(if: $isNullExternalData)
+{
+  code: _objectProperty(
+    object: $externalData,
+    by: {
+      key: "code"
+    }
+  ) @remove
+  message: _objectProperty(
+    object: $externalData,
+    by: {
+      key: "message"
+    }
+  ) @remove
+  errorMessage: _sprintf(
+    string: "[%s] %s",
+    values: [$__code, $__message]
+  ) @remove
+  data: _objectProperty(
+    object: $externalData,
+    by: {
+      key: "data"
+    }
+  ) @remove
+  _fail(
+    message: $__errorMessage
+    data: {
+      endpointData: $__data
+    }
+  ) @remove
+}
+
+query ExecuteSomeOperation
+  @depends(on: "FailIfExternalAPIHasErrors")
+  @skip(if: $endpointHasErrors)
+{
+  # Do something...
+  postTitle: _objectProperty(
+    object: $externalData,
+    by: { path: "title.rendered"}
+  )
+}
+```
+
 ## Handling errors when connecting to a GraphQL API
 
 ```graphql
