@@ -609,3 +609,75 @@ If the Internet connection is down, we get this response:
   }
 }
 ```
+
+### Producing an error if the requested resource does not exist
+
+If the GraphQL query above, if the queried post does not exist, it just returns `null` and there's no error entry under `errors`.
+
+If we want to force adding an error in that situation, we can append the following operation, which uses field `_fail` to trigger an error:
+
+```graphql
+query FailIfPostNotExists($postId: ID!)
+  @include(if: $postIsMissing)
+  @depends(on: "ValidateResponse")
+{
+  errorMessage: _sprintf(
+    string: "There is no post with ID '%s'",
+    values: [$postId]
+  ) @remove
+  _fail(
+    message: $__errorMessage
+    data: {
+      id: $postId
+    }
+  ) @remove
+}
+
+query ExecuteOperation
+  @depends(on: [
+    "FailIfResponseHasErrors",
+    "FailIfPostNotExists"
+  ])
+  # ...
+{
+  # ...
+}
+```
+
+Now, when passing `$postId: 8888` concerning a non-existent resource, we get this response:
+
+```json
+{
+  "errors": [
+    {
+      "message": "There is no post with ID '88888'",
+      "locations": [
+        {
+          "line": 95,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "_fail(message: $__errorMessage, data: {id: $postId}) @remove",
+          "query FailIfPostNotExists($postId: ID!) @include(if: $postIsMissing) @depends(on: \"ValidateResponse\") { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "_fail(message: $__errorMessage, data: {id: $postId}) @remove",
+        "id": "root",
+        "failureData": {
+          "id": 88888
+        },
+        "code": "PoPSchema/FailFieldAndDirective@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": {
+      "data": {
+        "post": null
+      }
+    }
+  }
+}
+```
