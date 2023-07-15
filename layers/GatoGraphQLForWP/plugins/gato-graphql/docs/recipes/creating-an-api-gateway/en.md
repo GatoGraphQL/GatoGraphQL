@@ -193,7 +193,7 @@ query FailIfGitHubAccessTokenIsMissing
   @include(if: $isGithubAccessTokenMissing)
 {
   _fail(
-    message: "Header \"X-Github-Access-Token\" has not been provided"
+    message: "Header 'X-Github-Access-Token' has not been provided"
   ) @remove
 }
 
@@ -241,7 +241,7 @@ When it is not provided, the response will be:
 {
   "errors": [
     {
-      "message": "Header \"X-Github-Access-Token\" has not been provided",
+      "message": "Header 'X-Github-Access-Token' has not been provided",
       "locations": [
         {
           "line": 18,
@@ -250,11 +250,11 @@ When it is not provided, the response will be:
       ],
       "extensions": {
         "path": [
-          "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
+          "_fail(message: \"Header 'X-Github-Access-Token' has not been provided\") @remove",
           "query FailIfGitHubAccessTokenIsMissing @depends(on: \"ValidateHasGitHubAccessToken\") @skip(if: $isGithubAccessTokenMissing) { ... }"
         ],
         "type": "QueryRoot",
-        "field": "_fail(message: \"Header \"X-Github-Access-Token\" has not been provided\") @remove",
+        "field": "_fail(message: \"Header 'X-Github-Access-Token' has not been provided\") @remove",
         "id": "root",
         "code": "PoPSchema/FailFieldAndDirective@e1"
       }
