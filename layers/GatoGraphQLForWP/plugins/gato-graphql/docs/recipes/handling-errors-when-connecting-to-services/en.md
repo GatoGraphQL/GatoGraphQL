@@ -372,7 +372,7 @@ query ExecuteSomeOperation
 
 🔥 **Tips:**
 
-The [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension provides two ways to trigger a custom error:
+The [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension provides two ways to add a custom entry under `errors`:
 
 - Via field `_fail`
 - Via directive `@fail`
