@@ -1,5 +1,86 @@
 # Handling errors when connecting to services
 
+Doing this:
+
+```graphql
+query ConnectToRESTEndpoint($postId: ID!) {
+  endpoint: _sprintf(
+    string: "https://newapi.getpop.org/wp-json/wp/v2/posts/%s/?_fields=id,type,title,date"
+    values: [$postId]
+  ) @remove
+  
+  externalData: _sendJSONObjectItemHTTPRequest(
+    input: {
+      url: $__endpoint
+    }
+  ) @export(as: "externalData")
+}
+
+query ExecuteOperation
+  @depends(on: "ConnectToRESTEndpoint")
+{
+  # Do something...
+  postTitle: _objectProperty(
+    object: $externalData,
+    by: { path: "title.rendered"}
+  )
+}
+```
+
+...will bubble errors:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Client error: `GET https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date` resulted in a `404 Not Found` response:\n{\"code\":\"rest_post_invalid_id\",\"message\":\"Invalid post ID.\",\"data\":{\"status\":404}}\n",
+      "locations": [
+        {
+          "line": 7,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+          "query ConnectToRESTEndpoint($postId: ID!) { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    },
+    {
+      "message": "Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null",
+      "locations": [
+        {
+          "line": 19,
+          "column": 13
+        }
+      ],
+      "extensions": {
+        "path": [
+          "$externalData",
+          "(object: $externalData)",
+          "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
+          "query ExecuteOperation @depends(on: \"ConnectToRESTEndpoint\") { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
+        "id": "root",
+        "code": "gql@5.4.2.1[b]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null,
+    "postTitle": null
+  }
+}
+```
+
 ## Handling errors when connecting to a REST API
 
 ```graphql
