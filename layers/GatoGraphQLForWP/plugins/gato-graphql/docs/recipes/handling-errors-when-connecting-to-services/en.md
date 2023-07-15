@@ -1,5 +1,7 @@
 # Handling errors when connecting to services
 
+
+
 Doing this:
 
 ```graphql
@@ -80,6 +82,62 @@ query ExecuteOperation
   }
 }
 ```
+
+or
+
+```json
+{
+  "errors": [
+    {
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/wp-json/wp/v2/posts/88888/?_fields=id,type,title,date",
+      "locations": [
+        {
+          "line": 7,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+          "query ConnectToRESTEndpoint($postId: ID!) { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendJSONObjectItemHTTPRequest(input: {url: $__endpoint}) @export(as: \"externalData\")",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    },
+    {
+      "message": "Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null",
+      "locations": [
+        {
+          "line": 19,
+          "column": 13
+        }
+      ],
+      "extensions": {
+        "path": [
+          "$externalData",
+          "(object: $externalData)",
+          "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
+          "query ExecuteOperation @depends(on: \"ConnectToRESTEndpoint\") { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "postTitle: _objectProperty(object: $externalData, by: {path: \"title.rendered\"})",
+        "id": "root",
+        "code": "gql@5.4.2.1[b]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null,
+    "postTitle": null
+  }
+}
+```
+
+Notice: `Argument 'object' in field '_objectProperty' of type 'QueryRoot' cannot be null`
 
 ## Handling errors when connecting to a REST API
 
