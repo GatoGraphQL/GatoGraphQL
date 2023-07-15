@@ -131,7 +131,20 @@ or:
 GraphQL:
 
 ```graphql
-query ConnectToGraphQLAPI($postId: ID!) {
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  defaultResponseHasErrors: _echo(value: false)
+    @export(as: "responseHasErrors")
+    @remove
+  defaultPostIsMissing: _echo(value: false)
+    @export(as: "postIsMissing")
+    @remove
+}
+
+query ConnectToGraphQLAPI($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+{
   externalData: _sendGraphQLHTTPRequest(
     input: {
       endpoint: "https://newapi.getpop.org/api/graphql/",
@@ -207,6 +220,7 @@ query FailIfResponseHasErrors
 
 query ExecuteOperation
   @depends(on: "FailIfResponseHasErrors")
+  @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
 {
@@ -253,5 +267,30 @@ or if post with ID not exists:
 or if webserver is down:
 
 ```json
-
+{
+  "errors": [
+    {
+      "message": "cURL error 6: Could not resolve host: newapi.getpop.org (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for https://newapi.getpop.org/api/graphql/",
+      "locations": [
+        {
+          "line": 15,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "path": [
+          "externalData: _sendGraphQLHTTPRequest(input: {endpoint: \"https://newapi.getpop.org/api/graphql/\", query: \"\n        query GetPostData($postId: ID!) {\n          post(by: { id : $postId }) {\n            date\n            title\n          }\n        }\n      \", variables: [{name: \"postId\", value: $postId}]}) @export(as: \"externalData\")",
+          "query ConnectToGraphQLAPI($postId: ID!) @depends(on: \"InitializeDynamicVariables\") { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "externalData: _sendGraphQLHTTPRequest(input: {endpoint: \"https://newapi.getpop.org/api/graphql/\", query: \"\n        query GetPostData($postId: ID!) {\n          post(by: { id : $postId }) {\n            date\n            title\n          }\n        }\n      \", variables: [{name: \"postId\", value: $postId}]}) @export(as: \"externalData\")",
+        "id": "root",
+        "code": "PoP/ComponentModel@e1"
+      }
+    }
+  ],
+  "data": {
+    "externalData": null
+  }
+}
 ```
