@@ -43,8 +43,39 @@ query FilterExternalAPIData {
 
 fail-if-external-api-has-errors.gql <= Check if to place it on this Recipe, or elsewhere
 
+REST:
+
 ```graphql
-query ExportDefaultDynamicVariables {
+query ConnectToAPI($endpoint: String!) {
+  externalData: _sendJSONObjectItemHTTPRequest(
+    input: {
+      url: $endpoint
+    }
+  ) @export(as: "externalData")
+
+  isNullExternalData: _isNull(value: $__externalData)
+    @export(as: "isNullExternalData")
+    @remove
+}
+
+query ExecuteSomeOperation
+  @depends(on: "ConnectToAPI")
+  @skip(if: $isNullExternalData)
+{
+  # Do something...
+  postTitle: _objectProperty(
+    object: $externalData,
+    by: { path: "title.rendered"}
+  )
+}
+```
+
+GraphQL:
+
+```graphql
+query ExportDefaultDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
   defaultEndpointHasErrors: _echo(value: true)
     @export(as: "endpointHasErrors")
     @remove
@@ -117,7 +148,10 @@ query ExecuteSomeOperation
   @skip(if: $endpointHasErrors)
 {
   # Do something...
-  id
+  postTitle: _objectProperty(
+    object: $externalData,
+    by: { path: "title.rendered"}
+  )
 }
 ```
 
