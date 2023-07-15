@@ -153,18 +153,41 @@ query ConnectToGraphQLAPI($postId: ID!) {
     }
   ) @export(as: "externalData")
 
+  requestProducedErrors: _isNull(value: $__externalData)
+    @export(as: "requestProducedErrors")
+    @remove
+}
+
+query ValidateResponse
+  @depends(on: "ConnectToGraphQLAPI")
+  @skip(if: $requestProducedErrors)
+{
   responseHasErrors: _propertyIsSetInJSONObject(
-    object: $__externalData
+    object: $externalData
     by: {
       key: "errors"
     }
   )
     @export(as: "responseHasErrors")
     @remove
+
+  postExists: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      path: "data.post"
+    }
+  )
+    @remove
+    
+  postIsMissing: _not(value: $__postExists)
+    @export(as: "postIsMissing")
+    @remove
 }
 
 query FailIfResponseHasErrors
-  @depends(on: "ConnectToGraphQLAPI")
+  @depends(on: "ValidateResponse")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
   @include(if: $responseHasErrors)
 {
   errors: _objectProperty(
@@ -185,6 +208,7 @@ query FailIfResponseHasErrors
 query ExecuteOperation
   @depends(on: "FailIfResponseHasErrors")
   @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
 {
   # Do something...
   postTitle: _objectProperty(
@@ -212,7 +236,21 @@ query ExecuteOperation
 }
 ```
 
-or:
+or if post with ID not exists:
+
+```json
+{
+  "data": {
+    "externalData": {
+      "data": {
+        "post": null
+      }
+    }
+  }
+}
+```
+
+or if webserver is down:
 
 ```json
 
