@@ -266,9 +266,9 @@ However, it is possible for the REST API to return a `404` for a missing resourc
 
 We can capture this feedback from the webserver by replacing `_sendJSONObjectItemHTTPRequest` with `_sendHTTPRequest`, and display it in the `errors` entry in the GraphQL response.
 
-For instance, when fetching data from a non-existent resource from the WP REST API, it returns a `data.status` entry in the response and an appropriate error message.
+For instance, when fetching data from a non-existent resource from the WP REST API, it returns a `data.status` entry in the response and associated data.
 
-This GraphQL query captures and displays this information:
+This GraphQL query captures this data, and explicitly adds an error entry with the response's error code and message, by using field `_fail` (provided by the [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension):
 
 ```graphql
 query ExportDefaultDynamicVariables
