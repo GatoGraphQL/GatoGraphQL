@@ -148,7 +148,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_8_2 => $this->__('Variable \'%s\' must be of Input type, but type \'%s\' is not (UNION, INTERFACE, or OBJECT types are not allowed)', 'graphql-server'),
             self::E_5_8_3 => $this->__('Variable \'%s\' has not been defined in the operation', 'graphql-server'),
             self::E_5_8_4 => $this->__('Variable \'%s\' is not used', 'graphql-server'),
-            self::E_5_8_5 => $this->__('Value is not set for non-nullable variable \'%s\'', 'graphql-server'),
+            self::E_5_8_5 => $this->__('Non-nullable variable \'%s\' has not been provided', 'graphql-server'),
             self::E_6_1_A => $this->__('Operation with name \'%s\' does not exist', 'graphql-server'),
             self::E_6_1_B => $this->__('When the document contains more than one operation, the operation name to execute must be provided', 'graphql-server'),
             self::E_6_1_C => $this->__('The document is empty', 'graphql-server'),

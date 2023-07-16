@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Value is not set for non-nullable variable 'include'",
+            "message": "Non-nullable variable 'include' has not been provided",
             "locations": [
                 {
                     "line": 3,
