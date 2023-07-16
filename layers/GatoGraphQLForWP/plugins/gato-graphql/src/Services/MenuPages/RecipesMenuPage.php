@@ -54,10 +54,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return 'docs/recipes';
     }
 
-    protected function enumerateEntries(): bool
-    {
-        return true;
-    }
+    // protected function enumerateEntries(): bool
+    // {
+    //     return true;
+    // }
 
     protected function hasCollapsibleContent(): bool
     {
