@@ -306,6 +306,26 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
             ],
             [
+                'translating-block-content-in-a-post-to-a-different-language',
+                \__('Translating block content in a post to a different language', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                ],
+                [
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
+            ],
+            [
+                'bulk-translating-block-content-in-multiple-posts-to-a-different-language',
+                \__('Bulk translating block content in multiple posts to a different language', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                ],
+                [
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
+            ],
+            [
                 'sending-emails-with-pleasure',
                 \__('Sending emails with pleasure', 'gato-graphql'),
                 [
@@ -463,26 +483,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'splitting-a-big-db-update-via-recursive-queries',
                 \__('Splitting a big DB update via recursive queries', 'gato-graphql'),
-            ],
-            [
-                'translating-block-content-in-a-post-to-a-different-language',
-                \__('Translating block content in a post to a different language', 'gato-graphql'),
-                [
-                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
-                ],
-                [
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
-                ]
-            ],
-            [
-                'bulk-translating-block-content-in-multiple-posts-to-a-different-language',
-                \__('Bulk translating block content in multiple posts to a different language', 'gato-graphql'),
-                [
-                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
-                ],
-                [
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
-                ]
             ],
             [
                 'importing-a-post-from-another-site',
