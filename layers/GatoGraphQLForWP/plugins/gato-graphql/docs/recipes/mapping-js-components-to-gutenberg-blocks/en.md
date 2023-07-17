@@ -4,23 +4,13 @@ This recipe _(inspired by [`Automattic/vip-block-data-api`](https://github.com/A
 
 <div class="doc-config-highlight" markdown=1>
 
-⚙️ **PHP code alert (for testing):**
+⚙️ **Configuration alert:**
 
-If your WordPress site has the [Same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) enabled, in order to test the Preact app below by saving it as a static `.html` file and running it in the browser, add the following PHP code to your theme's `functions.php` file (to avoid CORS erros):
+In order to run the Preact app below as a static `.html` file in the browser, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Response Headers](https://gatographql.com/guides/schema/adding-custom-headers-to-the-graphql-response/) with the following value:
 
-```php
-add_filter(
-  \PoP\ComponentModel\Engine\EngineHookNames::HEADERS,
-  function (array $headers): array {
-    return array_merge(
-      $headers,
-      [
-        'Access-Control-Allow-Origin' => 'null',
-        'Access-Control-Allow-Headers' => 'content-type,content-length,accept',
-      ]
-    );
-  }
-);
+```
+Access-Control-Allow-Origin: null
+Access-Control-Allow-Headers: content-type,content-length,accept
 ```
 
 </div>
