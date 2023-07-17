@@ -26,8 +26,20 @@ class PluginStaticHelpersTest extends TestCase
     {
         return [
             'only-header-name' => [
-                ['songa'],
-                ['songa' => ''],
+                ['Access-Control-Allow-Origin'],
+                ['Access-Control-Allow-Origin' => ''],
+            ],
+            'header-and-value' => [
+                ['Access-Control-Allow-Origin: null'],
+                ['Access-Control-Allow-Origin' => 'null'],
+            ],
+            'trimming-whitespaces' => [
+                [' Access-Control-Allow-Headers   :    content-type,content-length,accept   '],
+                ['Access-Control-Allow-Headers' => 'content-type,content-length,accept'],
+            ],
+            'more-than-one-separator' => [
+                ['X-Custom-Label: This is my idea: Nothing!'],
+                ['X-Custom-Label' => 'This is my idea: Nothing!'],
             ],
         ];
     }
