@@ -268,7 +268,7 @@ Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 - Arguments: `["daily-stats-by-email-number-of-comments",{"to":["admin@mysite.com"]},"SendDailyStatsByEmailNumberOfComments",1]`
 - Recurrence: Once Daily
 
-<div class="img-width-1024">
+<div class="img-width-1024" markdown=1>
 
 ![New entry in WP-Crontrol](../../images/wp-crontrol-entry.png "New entry in WP-Crontrol")
 
