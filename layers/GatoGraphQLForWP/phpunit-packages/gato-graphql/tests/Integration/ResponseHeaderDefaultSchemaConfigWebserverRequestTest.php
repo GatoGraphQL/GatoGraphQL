@@ -13,7 +13,7 @@ class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResp
     use ResponseHeaderWebserverRequestTestTrait;
     use ModifyPluginSettingsWebserverRequestTestCaseTrait;
 
-    public const MOBILE_APP_SCHEMA_CONFIGURATION_ID = 193;
+    public const WITH_RESPONSE_HEADERS_SCHEMA_CONFIGURATION_ID = 604;
 
     protected function setUp(): void
     {
@@ -44,7 +44,7 @@ class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResp
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return self::MOBILE_APP_SCHEMA_CONFIGURATION_ID;
+        return self::WITH_RESPONSE_HEADERS_SCHEMA_CONFIGURATION_ID;
     }
 
     /**
