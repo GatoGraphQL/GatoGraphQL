@@ -65,6 +65,19 @@ class PluginStaticHelpersTest extends TestCase
                 ['X-Custom-Label: \'This is my idea: Nothing!\''],
                 ['X-Custom-Label' => '\'This is my idea: Nothing!\''],
             ],
+            'many-items' => [
+                [
+                    ':',
+                    'Access-Control-Allow-Origin',
+                    ' Access-Control-Allow-Headers   :    content-type,content-length,accept   ',
+                    'X-Custom-Label: This is my idea: Nothing!',
+                ],
+                [
+                    'Access-Control-Allow-Origin' => '',
+                    'Access-Control-Allow-Headers' => 'content-type,content-length,accept',
+                    'X-Custom-Label' => 'This is my idea: Nothing!',
+                ],
+            ],
         ];
     }
 }
