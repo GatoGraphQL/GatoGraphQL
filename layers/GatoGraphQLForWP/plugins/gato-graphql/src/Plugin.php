@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
-use PoP\Root\Module\ModuleInterface;
+use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
@@ -18,9 +18,12 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Module\ModuleInterface;
 
 class Plugin extends AbstractMainPlugin
 {
+    use UseImageWidthsAssetsTrait;
+
     /**
      * Plugin's namespace
      */
@@ -199,5 +202,19 @@ class Plugin extends AbstractMainPlugin
         return [
             'classic-editor/classic-editor.php',
         ];
+    }
+
+    protected function doBootApplication(): void
+    {
+        parent::doBootApplication();
+
+        /**
+         * Load the image width classes also within the Gutenberg editor,
+         * to be used within the documentation modal windows.
+         */
+        \add_action(
+            'enqueue_block_editor_assets',
+            $this->enqueueImageWidthsAssets(...)
+        );
     }
 }

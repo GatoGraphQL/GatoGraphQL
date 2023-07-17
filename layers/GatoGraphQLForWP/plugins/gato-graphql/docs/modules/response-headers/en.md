@@ -23,8 +23,16 @@ Access-Control-Allow-Origin: null
 Access-Control-Allow-Headers: content-type,content-length,accept
 ```
 
-![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration"){ .width-610 }
+<div class="img-width-610" markdown=1>
+
+![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration")
+
+</div>
 
 Otherwise, the value defined in the Settings page for `Response Headers` is used:
 
-![Providing Response Headers in the Settings](../../images/settings-response-headers.png "Providing Response Headers in the Settings"){ .width-1024 }
+<div class="img-width-1024" markdown=1>
+
+![Providing Response Headers in the Settings](../../images/settings-response-headers.png "Providing Response Headers in the Settings")
+
+</div>

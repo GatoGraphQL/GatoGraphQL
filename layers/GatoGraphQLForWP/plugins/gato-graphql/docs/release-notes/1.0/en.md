@@ -930,11 +930,19 @@ The response headers can be configured in 2 places.
 
 In the Schema Configuration applied to the endpoint under block "Response Headers", by selecting option `"Use custom configuration"` and then providing the desired headers (at one entry per line), with format `{header name}: {header value}`.
 
-![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration"){ .width-610 }
+<div class="img-width-610" markdown=1>
+
+![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration")
+
+</div>
 
 Otherwise, the value defined in the Settings page for `Response Headers` is used:
 
-![Providing Response Headers in the Settings](../../images/settings-response-headers.png "Providing Response Headers in the Settings"){ .width-1024 }
+<div class="img-width-1024" markdown=1>
+
+![Providing Response Headers in the Settings](../../images/settings-response-headers.png "Providing Response Headers in the Settings")
+
+</div>
 
 ## Added field `CustomPost.wpAdminEditURL`
 
