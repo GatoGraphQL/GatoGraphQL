@@ -119,16 +119,21 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if ($condition !== 'any' && $condition !== $moduleRegistry->isModuleEnabled($module)) {
                 continue;
             }
-            // If the environment value has been defined, or the constant in wp-config.php,
-            // then do nothing, since they have priority
-            /** @var string */
-            $envVariable = $mapping['envVariable'];
-            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
-                continue;
-            }
             if (isset($mapping['hookName'])) {
                 $hookName = $mapping['hookName'];
             } else {
+                /**
+                 * Calculate the hookName from the combination of ModuleConfigurationClass + EnvVar.
+                 *
+                 * If the environment value has been defined, or the constant in wp-config.php,
+                 * then do nothing, since they have priority
+                 */
+                /** @var string */
+                $envVariable = $mapping['envVariable'];
+                if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
+                    continue;
+                }
+
                 /** @var class-string<ModuleInterface> */
                 $class = $mapping['class'];
                 $hookName = ModuleConfigurationHelpers::getHookName(
