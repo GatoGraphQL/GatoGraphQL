@@ -22,6 +22,9 @@ class PluginStaticHelpersTest extends TestCase
         );
     }
 
+    /**
+     * @return array<string,mixed[]>
+     */
     public static function provideGetResponseHeadersFromEntries(): array
     {
         return [
