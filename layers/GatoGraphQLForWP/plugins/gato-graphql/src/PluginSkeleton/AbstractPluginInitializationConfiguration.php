@@ -119,17 +119,17 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if ($condition !== 'any' && $condition !== $moduleRegistry->isModuleEnabled($module)) {
                 continue;
             }
-            
+
             /** @var string */
             $option = $mapping['option'];
-            
+
             /** @var callable|null */
             $hookCallback = $mapping['hookCallback'] ?? null;
             if ($hookCallback !== null) {
                 $hookCallback($module, $option);
                 continue;
             }
-            
+
             /**
              * Calculate the hookName from the combination of ModuleConfigurationClass + EnvVar.
              *
@@ -155,7 +155,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
-            
+
             App::addFilter(
                 $hookName,
                 function () use ($userSettingsManager, $optionModule, $option, $callback) {

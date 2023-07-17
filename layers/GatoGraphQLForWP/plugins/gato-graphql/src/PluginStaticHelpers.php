@@ -89,11 +89,11 @@ class PluginStaticHelpers
 
     /**
      * Convert the response header entries, from:
-     * 
+     *
      *   string[] as: `{header name}: {header value}`
      *
      * To:
-     * 
+     *
      *   array<string,string> as: `header name` => `header value`
      *
      * @param string[] $entries `{header name}: {header value}`

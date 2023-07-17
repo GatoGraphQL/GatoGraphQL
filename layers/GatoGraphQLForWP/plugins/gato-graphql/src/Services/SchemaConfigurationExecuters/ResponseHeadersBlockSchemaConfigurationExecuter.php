@@ -49,14 +49,14 @@ class ResponseHeadersBlockSchemaConfigurationExecuter extends AbstractCustomizab
         if ($responseHeaders === []) {
             return;
         }
-        
+
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings
          */
         App::addFilter(
             EngineHookNames::HEADERS,
-            /** 
+            /**
              * @param array<string,string> $headers
              * @return array<string,string>
              */

@@ -52,7 +52,7 @@ class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResp
      */
     public static function provideResponseHeaderEntries(): array
     {
-        return [            
+        return [
             'single-endpoint' => [
                 'graphql/?query={ id }',
                 'content-type,content-length,accept',

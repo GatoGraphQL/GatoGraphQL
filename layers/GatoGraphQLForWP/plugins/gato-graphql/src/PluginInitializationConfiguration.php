@@ -19,7 +19,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModu
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
-use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
@@ -195,7 +194,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             [
                 'module' => SchemaConfigurationFunctionalityModuleResolver::RESPONSE_HEADERS,
                 'option' => ModuleSettingOptions::ENTRIES,
-                'hookCallback' => function(string $module, string $option): void {
+                'hookCallback' => function (string $module, string $option): void {
                     App::addFilter(
                         EngineHookNames::HEADERS,
                         /**

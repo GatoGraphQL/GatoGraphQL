@@ -10,7 +10,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 trait UseDocsMenuPageTrait
 {
     use UseImageWidthsAssetsTrait;
-    
+
     protected function enqueueDocsAssets(): void
     {
         $mainPlugin = PluginApp::getMainPlugin();
