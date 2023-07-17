@@ -53,8 +53,8 @@ class ResponseHeadersBlockSchemaConfigurationExecuter extends AbstractCustomizab
         App::addFilter(
             EngineHookNames::HEADERS,
             /** 
-             * @param string[] $headers
-             * @return string[]
+             * @param array<string,string> $headers
+             * @return array<string,string>
              */
             fn (array $headers): array => array_merge(
                 $headers,
