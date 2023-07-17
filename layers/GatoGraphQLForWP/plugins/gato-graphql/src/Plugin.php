@@ -200,4 +200,44 @@ class Plugin extends AbstractMainPlugin
             'classic-editor/classic-editor.php',
         ];
     }
+
+    protected function doBootApplication(): void
+    {
+        parent::doBootApplication();
+
+        /**
+         * Load the image width classes also within the Gutenberg editor,
+         * to be used within the documentation modal windows.
+         */
+        \add_action(
+            'enqueue_block_editor_assets',
+            function(): void {
+                $mainPlugin = PluginApp::getMainPlugin();
+                $mainPluginURL = $mainPlugin->getPluginURL();
+                $mainPluginVersion = $mainPlugin->getPluginVersion();
+
+                \wp_enqueue_style(
+                    'gato-graphql-image-widths',
+                    $mainPluginURL . 'assets/css/image-widths.css',
+                    array(),
+                    $mainPluginVersion
+                );
+            }
+        );
+
+
+        function wpdocs_enqueue_scripts() {
+
+            $blockPath = '/blocks/index.js';
+            
+            // Enqueue the block index.js file
+            wp_enqueue_script(
+              'example-block', // unique handle
+              get_template_directory_uri() . $blockPath,
+              [ 'wp-blocks', 'wp-element', 'wp-i18n' ], // required dependencies for blocks
+              filemtime( get_template_directory() . $blockPath )
+            );
+          
+          }
+    }
 }
