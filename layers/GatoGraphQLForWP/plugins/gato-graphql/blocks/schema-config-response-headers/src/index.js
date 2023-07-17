@@ -56,9 +56,9 @@ registerBlockType( 'gato-graphql/schema-config-response-headers', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames::ENABLED_CONST
+		 * GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames::ENTRIES
 		 */
-		responseHeaders: {
+		entries: {
 			type: 'array',
 			default: [],
 		},

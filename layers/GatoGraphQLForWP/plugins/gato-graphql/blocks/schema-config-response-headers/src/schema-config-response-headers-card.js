@@ -17,20 +17,20 @@ import {
 
 const SchemaConfigResponseHeadersCard = ( props ) => {
 	const {
-		responseHeaders
+		entries
 	} = props;
 	return (
 		<>
 			<em>{ __('Response Headers', 'gato-graphql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Custom headers to add to the API response for the corresponding endpoint.', 'gato-graphql') }
+				text={ __('Provide custom headers to add to the API response.', 'gato-graphql') }
 			/>
 			<EditableArrayTextareaControl
 				{ ...props }
-				attributeName="responseHeaders"
-				values={ responseHeaders }
-				help={ __('One header per line, with format: "{header name}: {header value}', 'gato-graphql') }
+				attributeName="entries"
+				values={ entries }
+				help={ __('One header per line, with format: `{header name}: {header value}`', 'gato-graphql') }
 				rows='10'
 			/>
 		</>
