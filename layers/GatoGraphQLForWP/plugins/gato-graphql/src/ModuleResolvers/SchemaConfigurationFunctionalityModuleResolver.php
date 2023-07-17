@@ -213,9 +213,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Response Headers', 'gato-graphql'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s<br/><br/>%s<br/>%s',
-                    \__('Provide custom headers to add to the API response.<br/>%s', 'gato-graphql'),
-                    \__('One header per line, with format: <code>{header name}: {header value}</code>', 'gato-graphql'),
+                    '%s<br/>%s',
+                    \__('Provide custom headers to add to the API response. One header per line, with format: <code>{header name}: {header value}</code>', 'gato-graphql'),
                     $defaultValueDesc,
                 ),
                 Properties::TYPE => Properties::TYPE_ARRAY,
