@@ -12,7 +12,7 @@ abstract class AbstractSchemaGlobalFieldsModifyPluginSettingsFixtureEndpointWebs
 {
     protected function getSettingsKey(): string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::DEFAULT_SCHEMA_EXPOSURE;
+        return SchemaConfigurationFunctionalityModuleResolver::OPTION_DEFAULT_SCHEMA_EXPOSURE;
     }
 
     protected function getModuleID(string $dataName): string

@@ -21,7 +21,7 @@ class SchemaPayloadTypesForMutationsModifyPluginSettingsFixtureEndpointWebserver
 
     protected function getSettingsKey(): string
     {
-        return SchemaConfigurationFunctionalityModuleResolver::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
+        return SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
     }
 
     protected function getModuleID(string $dataName): string

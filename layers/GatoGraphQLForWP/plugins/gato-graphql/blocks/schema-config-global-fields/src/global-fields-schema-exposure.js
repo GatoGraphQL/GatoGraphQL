@@ -1,10 +1,10 @@
 /**
- * This value is not defined as GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure::DEFAULT_SCHEMA_EXPOSURE,
+ * This value is not defined as GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure::OPTION_DEFAULT_SCHEMA_EXPOSURE,
  * because the default value is not saved in the entry (it's just null)
  * But it is defined here to keep this value DRY,
  * when declaring the state's default value in index.js
  */
-const DEFAULT_SCHEMA_EXPOSURE = 'default';
+const OPTION_DEFAULT_SCHEMA_EXPOSURE = 'default';
 /**
  * Same value as in GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure::DO_NOT_EXPOSE
  */
@@ -19,7 +19,7 @@ const EXPOSE_IN_ROOT_TYPE_ONLY = 'expose-in-root-type-only';
 const EXPOSE_IN_ALL_TYPES = 'expose-in-all-types';
 
 export {
-    DEFAULT_SCHEMA_EXPOSURE,
+    OPTION_DEFAULT_SCHEMA_EXPOSURE,
     DO_NOT_EXPOSE,
     EXPOSE_IN_ROOT_TYPE_ONLY,
     EXPOSE_IN_ALL_TYPES

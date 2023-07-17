@@ -32,8 +32,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     /**
      * Setting options
      */
-    public final const DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
-    public final const USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE = 'use-payloadable-mutations-default-value';
+    public final const OPTION_DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
+    public final const OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE = 'use-payloadable-mutations-default-value';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -154,7 +154,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::ENTRIES => [],
             ],
             self::GLOBAL_FIELDS => [
-                self::DEFAULT_SCHEMA_EXPOSURE => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
+                self::OPTION_DEFAULT_SCHEMA_EXPOSURE => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
             ],
             self::MULTIFIELD_DIRECTIVES => [
                 ModuleSettingOptions::DEFAULT_VALUE => true,
@@ -163,7 +163,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::DEFAULT_VALUE => true,
             ],
             self::MUTATIONS => [
-                self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
+                self::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
             ],
             self::NESTED_MUTATIONS => [
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
@@ -226,7 +226,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('Expose under the Root type only', 'gato-graphql'),
                 GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('Expose under all types', 'gato-graphql'),
             ];
-            $option = self::DEFAULT_SCHEMA_EXPOSURE;
+            $option = self::OPTION_DEFAULT_SCHEMA_EXPOSURE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
@@ -272,7 +272,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::MUTATIONS) {
-            $option = self::USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
+            $option = self::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
                 Properties::NAME => $this->getSettingOptionName(
