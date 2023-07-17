@@ -40,7 +40,7 @@ class ResponseHeadersBlockSchemaConfigurationExecuter extends AbstractCustomizab
      */
     protected function doExecuteBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
-        $entries = $attributes[BlockAttributeNames::ENTRIES] ?? [];
+        $entries = $schemaConfigBlockDataItem['attrs'][BlockAttributeNames::ENTRIES] ?? [];
         if ($entries === []) {
             return;
         }
