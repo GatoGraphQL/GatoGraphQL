@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -18,6 +19,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModu
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
@@ -191,10 +193,26 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Response headers
             [
-                'hookName' => EngineHookNames::HEADERS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::RESPONSE_HEADERS,
                 'option' => ModuleSettingOptions::ENTRIES,
-                'callback' => fn (array $value) => PluginStaticHelpers::getResponseHeadersFromEntries($value),
+                'hookCallback' => function(string $module, string $option): void {
+                    App::addFilter(
+                        EngineHookNames::HEADERS,
+                        /**
+                         * @param array<string,string> $headers
+                         * @return array<string,string>
+                         */
+                        function (array $headers) use ($module, $option): array {
+                            $userSettingsManager = UserSettingsManagerFacade::getInstance();
+                            $value = $userSettingsManager->getSetting($module, $option);
+                            $value = PluginStaticHelpers::getResponseHeadersFromEntries($value);
+                            return array_merge(
+                                $headers,
+                                $value
+                            );
+                        }
+                    );
+                }
             ],
             // Expose "self" fields in the schema?
             [

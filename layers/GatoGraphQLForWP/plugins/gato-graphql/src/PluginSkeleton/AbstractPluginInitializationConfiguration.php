@@ -119,35 +119,43 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if ($condition !== 'any' && $condition !== $moduleRegistry->isModuleEnabled($module)) {
                 continue;
             }
-            if (isset($mapping['hookName'])) {
-                $hookName = $mapping['hookName'];
-            } else {
-                /**
-                 * Calculate the hookName from the combination of ModuleConfigurationClass + EnvVar.
-                 *
-                 * If the environment value has been defined, or the constant in wp-config.php,
-                 * then do nothing, since they have priority
-                 */
-                /** @var string */
-                $envVariable = $mapping['envVariable'];
-                if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
-                    continue;
-                }
-
-                /** @var class-string<ModuleInterface> */
-                $class = $mapping['class'];
-                $hookName = ModuleConfigurationHelpers::getHookName(
-                    (string)$class,
-                    $envVariable
-                );
-            }
+            
             /** @var string */
             $option = $mapping['option'];
+            
+            /** @var callable|null */
+            $hookCallback = $mapping['hookCallback'] ?? null;
+            if ($hookCallback !== null) {
+                $hookCallback($module, $option);
+                continue;
+            }
+            
+            /**
+             * Calculate the hookName from the combination of ModuleConfigurationClass + EnvVar.
+             *
+             * If the environment value has been defined, or the constant in wp-config.php,
+             * then do nothing, since they have priority
+             */
+            /** @var string */
+            $envVariable = $mapping['envVariable'];
+            if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
+                continue;
+            }
+
+            /** @var class-string<ModuleInterface> */
+            $class = $mapping['class'];
+            $hookName = ModuleConfigurationHelpers::getHookName(
+                (string)$class,
+                $envVariable
+            );
+
             /** @var string */
             $optionModule = $mapping['optionModule'] ?? $module;
+
             // Make explicit it can be null so that PHPStan level 3 doesn't fail
             /** @var callable|null */
             $callback = $mapping['callback'] ?? null;
+            
             App::addFilter(
                 $hookName,
                 function () use ($userSettingsManager, $optionModule, $option, $callback) {
