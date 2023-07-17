@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
-use PoP\Root\Module\ModuleInterface;
+use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
@@ -18,9 +18,12 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+use PoP\Root\Module\ModuleInterface;
 
 class Plugin extends AbstractMainPlugin
 {
+    use UseImageWidthsAssetsTrait;
+
     /**
      * Plugin's namespace
      */
@@ -211,33 +214,7 @@ class Plugin extends AbstractMainPlugin
          */
         \add_action(
             'enqueue_block_editor_assets',
-            function(): void {
-                $mainPlugin = PluginApp::getMainPlugin();
-                $mainPluginURL = $mainPlugin->getPluginURL();
-                $mainPluginVersion = $mainPlugin->getPluginVersion();
-
-                \wp_enqueue_style(
-                    'gato-graphql-image-widths',
-                    $mainPluginURL . 'assets/css/image-widths.css',
-                    array(),
-                    $mainPluginVersion
-                );
-            }
+            $this->enqueueImageWidthsAssets(...)
         );
-
-
-        function wpdocs_enqueue_scripts() {
-
-            $blockPath = '/blocks/index.js';
-            
-            // Enqueue the block index.js file
-            wp_enqueue_script(
-              'example-block', // unique handle
-              get_template_directory_uri() . $blockPath,
-              [ 'wp-blocks', 'wp-element', 'wp-i18n' ], // required dependencies for blocks
-              filemtime( get_template_directory() . $blockPath )
-            );
-          
-          }
     }
 }

@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 
 trait UseDocsMenuPageTrait
 {
+    use UseImageWidthsAssetsTrait;
+    
     protected function enqueueDocsAssets(): void
     {
         $mainPlugin = PluginApp::getMainPlugin();
@@ -20,11 +23,7 @@ trait UseDocsMenuPageTrait
             array(),
             $mainPluginVersion
         );
-        \wp_enqueue_style(
-            'gato-graphql-image-widths',
-            $mainPluginURL . 'assets/css/image-widths.css',
-            array(),
-            $mainPluginVersion
-        );
+
+        $this->enqueueImageWidthsAssets();
     }
 }
