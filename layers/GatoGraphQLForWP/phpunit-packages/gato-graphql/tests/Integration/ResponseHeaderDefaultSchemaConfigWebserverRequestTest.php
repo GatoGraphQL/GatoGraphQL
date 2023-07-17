@@ -8,13 +8,6 @@ use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use PHPUnitForGatoGraphQL\WebserverRequests\AbstractResponseHeaderWebserverRequestTestCase;
 use PHPUnitForGatoGraphQL\WebserverRequests\ModifyPluginSettingsWebserverRequestTestCaseTrait;
 
-/**
- * Before running the test, modify the Default Schema Configuration for endpoints,
- * and validate that the results are different than those on the sibling test
- * for these given endpoints, where they have no Schema Config applied.
- *
- * @see ResponseHeaderWebserverRequestTest.php
- */
 class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResponseHeaderWebserverRequestTestCase
 {
     use ResponseHeaderWebserverRequestTestTrait;
