@@ -46,13 +46,16 @@ class ResponseHeadersBlockSchemaConfigurationExecuter extends AbstractCustomizab
         if ($entries === []) {
             return;
         }
-        /** @var array<string,string> Header name => value */
+
+        /**
+         * Convert the entries from string[] into an array of string => string:
+         *   header name => header value
+         *
+         * @var array<string,string> Header name => value
+         */
         $responseHeaders = [];
         foreach ($entries as $entry) {
             $entry = trim($entry);
-            if ($entry === '') {
-                continue;
-            }
             $separatorPos = strpos($entry, ':');
             if ($separatorPos === false) {
                 $headerName = $entry;
@@ -61,11 +64,15 @@ class ResponseHeadersBlockSchemaConfigurationExecuter extends AbstractCustomizab
                 $headerName = trim(substr($entry, 0, $separatorPos));
                 $headerValue = trim(substr($entry, $separatorPos + strlen(':')));
             }
+            if ($headerName === '') {
+                continue;
+            }
             $responseHeaders[$headerName] = $headerValue;
         }
         if ($responseHeaders === []) {
             return;
         }
+        
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings
