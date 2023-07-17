@@ -93,9 +93,4 @@ class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResp
         ];
         return $responseHeaderEntries;
     }
-
-    protected function getHeaderName(): string
-    {
-        return 'Access-Control-Allow-Headers';
-    }
 }
