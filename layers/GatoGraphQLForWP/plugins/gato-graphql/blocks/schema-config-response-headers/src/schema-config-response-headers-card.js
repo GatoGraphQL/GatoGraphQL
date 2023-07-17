@@ -9,6 +9,7 @@ import { compose, withState } from '@wordpress/compose';
  */
 import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
+	EditableArrayTextareaControl,
 	InfoTooltip,
 	withCard,
 	withCustomizableConfiguration,
