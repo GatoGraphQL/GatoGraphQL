@@ -2559,7 +2559,7 @@ https://wordpress.org/about/
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=604</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-response-headers {"entries":["Access-Control-Allow-Origin: null","Access-Control-Allow-Headers: content-type,content-length,accept"]} /-->]]></content:encoded>
+		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-response-headers {"customizeConfiguration":true,"entries":["Access-Control-Allow-Origin: null","Access-Control-Allow-Headers: content-type,content-length,accept"]} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>604</wp:post_id>
 		<wp:post_date><![CDATA[2023-03-21 05:57:33]]></wp:post_date>
