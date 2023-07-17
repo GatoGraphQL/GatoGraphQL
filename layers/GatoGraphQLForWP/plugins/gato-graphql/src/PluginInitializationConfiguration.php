@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -18,6 +19,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModu
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginManagement\PluginOptionsFormHandler;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractMainPluginInitializationConfiguration;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironment;
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
@@ -60,6 +62,7 @@ use PoPCMSSchema\Users\Module as UsersModule;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPWPSchema\Blocks\Environment as BlocksEnvironment;
 use PoPWPSchema\Blocks\Module as BlocksModule;
+use PoP\ComponentModel\Engine\EngineHookNames;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Module as ComponentModelModule;
@@ -187,6 +190,29 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
                 'option' => ModuleSettingOptions::DEFAULT_VALUE,
+            ],
+            // Response headers
+            [
+                'module' => SchemaConfigurationFunctionalityModuleResolver::RESPONSE_HEADERS,
+                'option' => ModuleSettingOptions::ENTRIES,
+                'hookCallback' => function(string $module, string $option): void {
+                    App::addFilter(
+                        EngineHookNames::HEADERS,
+                        /**
+                         * @param array<string,string> $headers
+                         * @return array<string,string>
+                         */
+                        function (array $headers) use ($module, $option): array {
+                            $userSettingsManager = UserSettingsManagerFacade::getInstance();
+                            $value = $userSettingsManager->getSetting($module, $option);
+                            $value = PluginStaticHelpers::getResponseHeadersFromEntries($value);
+                            return array_merge(
+                                $headers,
+                                $value
+                            );
+                        }
+                    );
+                }
             ],
             // Expose "self" fields in the schema?
             [

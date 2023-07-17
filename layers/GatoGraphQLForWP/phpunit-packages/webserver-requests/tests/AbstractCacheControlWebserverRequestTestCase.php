@@ -4,23 +4,25 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
-abstract class AbstractCacheControlWebserverRequestTestCase extends AbstractWebserverRequestTestCase
+abstract class AbstractCacheControlWebserverRequestTestCase extends AbstractResponseHeaderWebserverRequestTestCase
 {
-    #[\PHPUnit\Framework\Attributes\DataProvider('provideCacheControlEntries')]
-    public function testCacheControl(
-        string $endpoint,
-        string $expectedCacheControlValue,
-    ): void {
-        $client = static::getClient();
-        $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
-        $options = static::getRequestBasicOptions();
-        $response = $client->get(
-            $endpointURL,
-            $options
-        );
+    protected function getHeaderName(): string
+    {
+        return 'Cache-Control';
+    }
 
-        $this->assertEquals(200, $response->getStatusCode());
-        $this->assertStringContainsString($expectedCacheControlValue . ',', $response->getHeaderLine('Cache-Control'));
+    /**
+     * @return array<string,string[]>
+     */
+    final public static function provideResponseHeaderEntries(): array
+    {
+        $responseHeaderEntries = [];
+        foreach (static::provideCacheControlEntries() as $key => $value) {
+            // Append ',' at the end of every cache-control
+            $value[count($value) - 1] .=  ',';
+            $responseHeaderEntries[$key] = $value;
+        }
+        return $responseHeaderEntries;
     }
 
     /**

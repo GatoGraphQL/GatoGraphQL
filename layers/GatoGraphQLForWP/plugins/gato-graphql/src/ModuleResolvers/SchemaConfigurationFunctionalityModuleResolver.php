@@ -19,6 +19,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
 
     public final const SCHEMA_CONFIGURATION = Plugin::NAMESPACE . '\schema-configuration';
     public final const SCHEMA_NAMESPACING = Plugin::NAMESPACE . '\schema-namespacing';
+    public final const RESPONSE_HEADERS = Plugin::NAMESPACE . '\response-headers';
     public final const GLOBAL_FIELDS = Plugin::NAMESPACE . '\global-fields';
     public final const COMPOSABLE_DIRECTIVES = Plugin::NAMESPACE . '\composable-directives';
     public final const MULTIFIELD_DIRECTIVES = Plugin::NAMESPACE . '\multifield-directives';
@@ -58,6 +59,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return [
             self::SCHEMA_CONFIGURATION,
             self::SCHEMA_NAMESPACING,
+            self::RESPONSE_HEADERS,
             self::GLOBAL_FIELDS,
             self::COMPOSABLE_DIRECTIVES,
             self::MULTIFIELD_DIRECTIVES,
@@ -90,6 +92,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Schema Configuration', 'gato-graphql'),
             self::SCHEMA_NAMESPACING => \__('Schema Namespacing', 'gato-graphql'),
+            self::RESPONSE_HEADERS => \__('Response Headers', 'gato-graphql'),
             self::GLOBAL_FIELDS => \__('Global Fields', 'gato-graphql'),
             self::COMPOSABLE_DIRECTIVES => \__('Composable Directives', 'gato-graphql'),
             self::MULTIFIELD_DIRECTIVES => \__('Multi-Field Directives', 'gato-graphql'),
@@ -107,6 +110,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         return match ($module) {
             self::SCHEMA_CONFIGURATION => \__('Customize the schema accessible to different Custom Endpoints and Persisted Queries, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema', 'gato-graphql'),
             self::SCHEMA_NAMESPACING => \__('Automatically namespace types with a vendor/project name, to avoid naming collisions', 'gato-graphql'),
+            self::RESPONSE_HEADERS => \__('Provide custom headers to add to the API response', 'gato-graphql'),
             self::GLOBAL_FIELDS => \__('Fields added to all types in the schema, generally for executing functionality (not retrieving data)', 'gato-graphql'),
             self::COMPOSABLE_DIRECTIVES => \__('Have directives modify the behavior of other directives', 'gato-graphql'),
             self::MULTIFIELD_DIRECTIVES => \__('A single directive can be applied to multiple fields, for performance and extended use cases', 'gato-graphql'),
@@ -145,6 +149,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
         $defaultValues = [
             self::SCHEMA_NAMESPACING => [
                 ModuleSettingOptions::DEFAULT_VALUE => false,
+            ],
+            self::RESPONSE_HEADERS => [
+                ModuleSettingOptions::ENTRIES => [],
             ],
             self::GLOBAL_FIELDS => [
                 self::DEFAULT_SCHEMA_EXPOSURE => GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY,
@@ -195,6 +202,23 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $defaultValueDesc
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif ($module === self::RESPONSE_HEADERS) {
+            $option = ModuleSettingOptions::ENTRIES;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Response Headers', 'gato-graphql'),
+                Properties::DESCRIPTION => sprintf(
+                    '%s<br/>%s',
+                    \__('Provide custom headers to add to the API response. One header per line, with format: <code>{header name}: {header value}</code>', 'gato-graphql'),
+                    $defaultValueDesc,
+                ),
+                Properties::TYPE => Properties::TYPE_ARRAY,
+                Properties::IS_MULTIPLE => true,
             ];
         } elseif ($module === self::GLOBAL_FIELDS) {
             $globalFieldsSchemaExposureValues = [

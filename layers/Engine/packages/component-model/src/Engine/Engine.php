@@ -502,7 +502,8 @@ class Engine implements EngineInterface
         // 3. Prepare the Response
         $response = App::getResponse();
         $response->setContent($outputContent);
-        foreach ($this->getHeaders() as $name => $value) {
+        $headers = $this->getHeaders();
+        foreach ($headers as $name => $value) {
             $response->headers->set($name, $value);
         }
 

@@ -86,4 +86,37 @@ class PluginStaticHelpers
         }
         return SemverWrapper::satisfies($pluginVersion, $versionConstraint);
     }
+
+    /**
+     * Convert the response header entries, from:
+     * 
+     *   string[] as: `{header name}: {header value}`
+     *
+     * To:
+     * 
+     *   array<string,string> as: `header name` => `header value`
+     *
+     * @param string[] $entries `{header name}: {header value}`
+     * @return array<string,string> `Header name` => `Header value`
+     */
+    public static function getResponseHeadersFromEntries(array $entries): array
+    {
+        $responseHeaders = [];
+        foreach ($entries as $entry) {
+            $entry = trim($entry);
+            $separatorPos = strpos($entry, ':');
+            if ($separatorPos === false) {
+                $headerName = $entry;
+                $headerValue = '';
+            } else {
+                $headerName = trim(substr($entry, 0, $separatorPos));
+                $headerValue = trim(substr($entry, $separatorPos + strlen(':')));
+            }
+            if ($headerName === '') {
+                continue;
+            }
+            $responseHeaders[$headerName] = $headerValue;
+        }
+        return $responseHeaders;
+    }
 }
