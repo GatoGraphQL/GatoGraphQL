@@ -56,7 +56,7 @@ class ResponseHeaderDefaultSettingsWebserverRequestTest extends AbstractResponse
      */
     public static function provideResponseHeaderEntries(): array
     {
-        $responseHeaderEntries = [
+        return [
             // These ones have a CCL assigned, hence compare that the value produced is the same
             'mobile-app-ccl-title-field' => [
                 'graphql-query/latest-posts-for-mobile-app/',
@@ -88,6 +88,5 @@ class ResponseHeaderDefaultSettingsWebserverRequestTest extends AbstractResponse
                 sprintf('max-age=%s', 45),
             ],
         ];
-        return $responseHeaderEntries;
     }
 }

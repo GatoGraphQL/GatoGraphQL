@@ -67,7 +67,7 @@ class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResp
      */
     public static function provideResponseHeaderEntries(): array
     {
-        $responseHeaderEntries = [
+        return [
             // These ones have a Schema Config assigned, hence compare that the value produced is the same
             'custom-endpoint-with-empty-schema-config' => [
                 'graphql/with-empty-schema-config/?query={ posts { id title url author { id name url } } }',
@@ -91,6 +91,5 @@ class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResp
                 sprintf('max-age=%s', 45),
             ],
         ];
-        return $responseHeaderEntries;
     }
 }
