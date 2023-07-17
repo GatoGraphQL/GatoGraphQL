@@ -126,12 +126,16 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
             if (getenv($envVariable) !== false || PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
                 continue;
             }
-            /** @var class-string<ModuleInterface> */
-            $class = $mapping['class'];
-            $hookName = ModuleConfigurationHelpers::getHookName(
-                (string)$class,
-                $envVariable
-            );
+            if (isset($mapping['hookName'])) {
+                $hookName = $mapping['hookName'];
+            } else {
+                /** @var class-string<ModuleInterface> */
+                $class = $mapping['class'];
+                $hookName = ModuleConfigurationHelpers::getHookName(
+                    (string)$class,
+                    $envVariable
+                );
+            }
             /** @var string */
             $option = $mapping['option'];
             /** @var string */
