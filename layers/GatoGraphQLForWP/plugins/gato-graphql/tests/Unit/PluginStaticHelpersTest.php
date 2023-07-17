@@ -41,6 +41,14 @@ class PluginStaticHelpersTest extends TestCase
                 ['X-Custom-Label: This is my idea: Nothing!'],
                 ['X-Custom-Label' => 'This is my idea: Nothing!'],
             ],
+            'with-quotes' => [
+                ['X-Custom-Label: "This is my idea: Nothing!"'],
+                ['X-Custom-Label' => '"This is my idea: Nothing!"'],
+            ],
+            'with-quotes-2' => [
+                ['X-Custom-Label: \'This is my idea: Nothing!\''],
+                ['X-Custom-Label' => '\'This is my idea: Nothing!\''],
+            ],
         ];
     }
 }
