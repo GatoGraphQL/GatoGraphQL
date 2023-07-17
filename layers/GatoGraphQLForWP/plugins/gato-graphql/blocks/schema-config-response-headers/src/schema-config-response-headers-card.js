@@ -23,7 +23,7 @@ const SchemaConfigResponseHeadersCard = ( props ) => {
 			<em>{ __('Response Headers', 'gato-graphql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Either have mutations return a payload object type, or directly the mutated entity.', 'gato-graphql') }
+				text={ __('Custom headers to add to the API response for the corresponding endpoint.', 'gato-graphql') }
 			/>
 			<EditableArrayTextareaControl
 				{ ...props }
