@@ -18,7 +18,7 @@ In the Schema Configuration applied to the endpoint under block "Response Header
 
 For instance, provide value:
 
-```
+```apacheconf
 Access-Control-Allow-Origin: null
 Access-Control-Allow-Headers: content-type,content-length,accept
 ```
