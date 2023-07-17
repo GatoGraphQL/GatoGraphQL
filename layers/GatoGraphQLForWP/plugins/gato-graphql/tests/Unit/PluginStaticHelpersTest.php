@@ -25,6 +25,22 @@ class PluginStaticHelpersTest extends TestCase
     public static function provideGetResponseHeadersFromEntries(): array
     {
         return [
+            'empty' => [
+                [''],
+                [],
+            ],
+            'only-whitespaces' => [
+                ['     '],
+                [],
+            ],
+            'only-whitespaces-in-two-sides' => [
+                ['     :      '],
+                [],
+            ],
+            'only-separator' => [
+                [':'],
+                [],
+            ],
             'only-header-name' => [
                 ['Access-Control-Allow-Origin'],
                 ['Access-Control-Allow-Origin' => ''],
