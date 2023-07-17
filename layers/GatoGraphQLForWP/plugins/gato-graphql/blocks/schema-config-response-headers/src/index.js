@@ -16,9 +16,6 @@ import { __ } from '@wordpress/i18n';
  * Application imports
  */
 import EditBlock from './edit';
-import {
-	ATTRIBUTE_VALUE_DEFAULT,
-} from '@gatographql/components';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -61,9 +58,9 @@ registerBlockType( 'gato-graphql/schema-config-response-headers', {
 		 * Same attribute name as defined in
 		 * GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames::ENABLED_CONST
 		 */
-		enabledConst: {
-			type: 'string',
-			default: ATTRIBUTE_VALUE_DEFAULT,
+		responseHeaders: {
+			type: 'array',
+			default: [],
 		},
 	},
 
