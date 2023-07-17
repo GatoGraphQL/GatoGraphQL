@@ -920,6 +920,22 @@ This is to avoid potential breaking changes in the future, when it becomes possi
 
 When that feature is supported, the `contentAs` and `commentAs` oneof input objects will be added a second property: `blocks: [BlockUnion!]!`, and as the mutation will itself not suffer changes, it will not need be deprecated.
 
+## Send custom headers in the GraphQL response
+
+We can now add custom headers to the GraphQL response. This is particularly useful to set the `Access-Control-Allow-Origin` header to avoid issues with CORS.
+
+Response headers are set via the Schema Configuration, allowing us to send different headers for different endpoints. For instance, each endpoint can send the `Access-Control-Allow-Origin` header with the specific domain it is intended to be used with, thus increasing the security of our APIs.
+
+The response headers can be configured in 2 places.
+
+In the Schema Configuration applied to the endpoint under block "Response Headers", by selecting option `"Use custom configuration"` and then providing the desired items, with format `{header name}: {header value}`.
+
+![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration"){ .width-610 }
+
+Otherwise, the value defined in the Settings page for `Response Headers` is used:
+
+![Providing Response Headers in the Settings](../../images/settings-response-headers.png "Providing Response Headers in the Settings"){ .width-1024 }
+
 ## Added field `CustomPost.wpAdminEditURL`
 
 Field `wpAdminEditURL` has been added to all `CustomPost` types (`Post`, `Page`, etc). It retrieves the link to edit the custom post in the wp-admin, or `null` if the visitor does not have the right to edit it.
