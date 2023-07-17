@@ -60,6 +60,7 @@ use PoPCMSSchema\Users\Module as UsersModule;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPWPSchema\Blocks\Environment as BlocksEnvironment;
 use PoPWPSchema\Blocks\Module as BlocksModule;
+use PoP\ComponentModel\Engine\EngineHookNames;
 use PoP\ComponentModel\Environment as ComponentModelEnvironment;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Module as ComponentModelModule;
@@ -187,6 +188,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_NAMESPACING,
                 'option' => ModuleSettingOptions::DEFAULT_VALUE,
+            ],
+            // Response headers
+            [
+                'hookName' => EngineHookNames::HEADERS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::RESPONSE_HEADERS,
+                'option' => ModuleSettingOptions::ENTRIES,
+                'callback' => fn (array $value) => PluginStaticHelpers::getResponseHeadersFromEntries($value),
             ],
             // Expose "self" fields in the schema?
             [
