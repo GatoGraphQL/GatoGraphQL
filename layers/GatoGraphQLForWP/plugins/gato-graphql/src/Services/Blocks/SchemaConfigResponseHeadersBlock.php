@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
-use GatoGraphQL\GatoGraphQL\Constants\ConfigurationDefaultValues;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
 
 class SchemaConfigResponseHeadersBlock extends AbstractSchemaConfigCustomizableConfigurationBlock
