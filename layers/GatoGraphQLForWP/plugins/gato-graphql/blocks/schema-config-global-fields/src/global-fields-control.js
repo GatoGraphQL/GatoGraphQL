@@ -8,7 +8,7 @@ import { RadioControl } from '@wordpress/components';
  * Internal dependencies
  */
 import {
-    DEFAULT_SCHEMA_EXPOSURE,
+    OPTION_DEFAULT_SCHEMA_EXPOSURE,
     DO_NOT_EXPOSE,
     EXPOSE_IN_ROOT_TYPE_ONLY,
     EXPOSE_IN_ALL_TYPES
@@ -25,13 +25,13 @@ const GlobalFieldsControl = ( props ) => {
 		attributes,
 		attributeName,
 		defaultLabel = SETTINGS_VALUE_LABEL,
-		defaultValue = DEFAULT_SCHEMA_EXPOSURE,
+		defaultValue = OPTION_DEFAULT_SCHEMA_EXPOSURE,
 	} = props;
 	const schemaExposure = attributes[ attributeName ] || defaultValue;
 	const options = [
 		{
 			label: defaultLabel,
-			value: DEFAULT_SCHEMA_EXPOSURE,
+			value: OPTION_DEFAULT_SCHEMA_EXPOSURE,
 		},
 		{
 			label: __('Do not expose', 'gato-graphql'),
@@ -63,7 +63,7 @@ const GlobalFieldsControl = ( props ) => {
 			}
 			{ !isSelected && (
 				<div className={ className+'__read'}>
-					{ (schemaExposure == DEFAULT_SCHEMA_EXPOSURE || !optionValues.includes(schemaExposure) ) &&
+					{ (schemaExposure == OPTION_DEFAULT_SCHEMA_EXPOSURE || !optionValues.includes(schemaExposure) ) &&
 						<span>🟡 { __('Default', 'gato-graphql') }</span>
 					}
 					{ (schemaExposure == DO_NOT_EXPOSE) &&
