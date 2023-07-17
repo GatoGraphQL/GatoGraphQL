@@ -11,6 +11,7 @@ import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-l
 import {
 	InfoTooltip,
 	withCard,
+	withCustomizableConfiguration,
 	withEditableOnFocus,
 } from '@gatographql/components';
 
@@ -44,4 +45,5 @@ export default compose( [
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),
+	withCustomizableConfiguration(),
 ] )( SchemaConfigResponseHeadersCard );
