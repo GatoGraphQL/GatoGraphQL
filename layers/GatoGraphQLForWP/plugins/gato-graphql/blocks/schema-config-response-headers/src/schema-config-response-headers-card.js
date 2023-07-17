@@ -18,8 +18,10 @@ import {
 
 const SchemaConfigResponseHeadersCard = ( props ) => {
 	const {
-		entries
+		attributes
 	} = props;
+	const entriesAttributeName = "entries";
+	const entries = attributes[ entriesAttributeName ];
 	return (
 		<>
 			<em>{ __('Response Headers', 'gato-graphql') }</em>
@@ -29,7 +31,7 @@ const SchemaConfigResponseHeadersCard = ( props ) => {
 			/>
 			<EditableArrayTextareaControl
 				{ ...props }
-				attributeName="entries"
+				attributeName={ entriesAttributeName }
 				values={ entries }
 				help={ __('One header per line, with format: `{header name}: {header value}`', 'gato-graphql') }
 				rows='10'
