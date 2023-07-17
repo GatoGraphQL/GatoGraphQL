@@ -40,6 +40,7 @@ class ResponseHeaderDefaultSettingsWebserverRequestTest extends AbstractResponse
     protected function getPluginSettingsNewValue(): mixed
     {
         return [
+            'Access-Control-Allow-Origin: null',
             'Access-Control-Allow-Headers: content-type,content-length,accept',
         ];
     }
