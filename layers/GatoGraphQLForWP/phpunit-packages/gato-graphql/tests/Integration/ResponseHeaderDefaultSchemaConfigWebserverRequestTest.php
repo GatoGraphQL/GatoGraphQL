@@ -37,14 +37,8 @@ class ResponseHeaderDefaultSchemaConfigWebserverRequestTest extends AbstractResp
     protected function getModuleID(string $dataName): string
     {
         return match ($dataName) {
-            'single-endpoint-2'
+            'single-endpoint'
                 => 'gatographql_gatographql_single-endpoint',
-            'persisted-query-without-schema-config'
-                => 'gatographql_gatographql_persisted-queries',
-            'custom-endpoint-without-schema-config',
-            'custom-endpoint-with-empty-schema-config',
-            'website-ccl-nofield-shorter-caching'
-                => 'gatographql_gatographql_custom-endpoints',
             default
                 => '',
         };
