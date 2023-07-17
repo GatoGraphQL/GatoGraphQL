@@ -14,7 +14,7 @@ Configure what custom headers will be added to the GraphQL response, including:
 
 The response headers can be configured in 2 places.
 
-In the Schema Configuration applied to the endpoint under block "Response Headers", by selecting option `"Use custom configuration"` and then providing the desired items, with format `{header name}: {header value}`.
+In the Schema Configuration applied to the endpoint under block "Response Headers", by selecting option `"Use custom configuration"` and then providing the desired headers (at one entry per line), with format `{header name}: {header value}`.
 
 For instance, provide value:
 
