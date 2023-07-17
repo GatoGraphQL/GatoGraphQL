@@ -10,7 +10,6 @@ import { compose, withState } from '@wordpress/compose';
 import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
 	EditableArrayTextareaControl,
-	InfoTooltip,
 	withCard,
 	withCustomizableConfiguration,
 	withEditableOnFocus,
@@ -25,15 +24,11 @@ const SchemaConfigResponseHeadersCard = ( props ) => {
 	return (
 		<>
 			<em>{ __('Response Headers', 'gato-graphql') }</em>
-			<InfoTooltip
-				{ ...props }
-				text={ __('Provide custom headers to add to the API response.', 'gato-graphql') }
-			/>
 			<EditableArrayTextareaControl
 				{ ...props }
 				attributeName={ entriesAttributeName }
 				values={ entries }
-				help={ __('One header per line, with format: `{header name}: {header value}`', 'gato-graphql') }
+				help={ __('Provide custom headers to add to the API response. One header per line, with format: `{header name}: {header value}`', 'gato-graphql') }
 				rows='10'
 			/>
 		</>
