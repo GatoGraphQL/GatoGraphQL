@@ -16,7 +16,13 @@ abstract class AbstractCacheControlWebserverRequestTestCase extends AbstractResp
      */
     final public static function provideResponseHeaderEntries(): array
     {
-        return static::provideCacheControlEntries();
+        $responseHeaderEntries = [];
+        foreach (static::provideCacheControlEntries() as $key => $value) {
+            // Append ',' at the end of every cache-control
+            $value[count($value) - 1] .=  ',';
+            $responseHeaderEntries[$key] = $value;
+        }
+        return $responseHeaderEntries;
     }
 
     /**

@@ -20,7 +20,7 @@ abstract class AbstractResponseHeaderWebserverRequestTestCase extends AbstractWe
         );
 
         $this->assertEquals(200, $response->getStatusCode());
-        $this->assertStringContainsString($expectedResponseHeaderValue . ',', $response->getHeaderLine($this->getHeaderName()));
+        $this->assertStringContainsString($expectedResponseHeaderValue, $response->getHeaderLine($this->getHeaderName()));
     }
 
     abstract protected function getHeaderName(): string;
