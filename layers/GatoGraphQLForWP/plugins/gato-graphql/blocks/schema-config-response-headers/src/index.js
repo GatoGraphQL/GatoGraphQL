@@ -56,6 +56,14 @@ registerBlockType( 'gato-graphql/schema-config-response-headers', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractSchemaConfigCustomizableConfigurationBlock::ATTRIBUTE_NAME_CUSTOMIZE_CONFIGURATION
+		 */
+		customizeConfiguration: {
+			type: 'boolean',
+			default: false,
+		},
+		/**
+		 * Same attribute name as defined in
 		 * GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames::ENTRIES
 		 */
 		entries: {
