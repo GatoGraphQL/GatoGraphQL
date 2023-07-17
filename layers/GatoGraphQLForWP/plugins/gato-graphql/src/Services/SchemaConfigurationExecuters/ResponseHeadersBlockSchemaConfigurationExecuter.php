@@ -42,7 +42,27 @@ class ResponseHeadersBlockSchemaConfigurationExecuter extends AbstractCustomizab
      */
     protected function doExecuteBlockSchemaConfiguration(array $schemaConfigBlockDataItem): void
     {
-        $responseHeaders = $attributes[BlockAttributeNames::ENTRIES] ?? [];
+        $entries = $attributes[BlockAttributeNames::ENTRIES] ?? [];
+        if ($entries === []) {
+            return;
+        }
+        /** @var array<string,string> Header name => value */
+        $responseHeaders = [];
+        foreach ($entries as $entry) {
+            $entry = trim($entry);
+            if ($entry === '') {
+                continue;
+            }
+            $separatorPos = strpos($entry, ':');
+            if ($separatorPos === false) {
+                $headerName = $entry;
+                $headerValue = '';
+            } else {
+                $headerName = trim(substr($entry, 0, $separatorPos));
+                $headerValue = trim(substr($entry, $separatorPos + strlen(':')));
+            }
+            $responseHeaders[$headerName] = $headerValue;
+        }
         if ($responseHeaders === []) {
             return;
         }
