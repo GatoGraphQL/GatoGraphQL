@@ -2108,3 +2108,12 @@ mutation RestorePost($postIDs: ID!)
   }
 }
 ```
+
+Then passing vars:
+
+```json
+{
+  "postIDs": [40, 19],
+  "translateToLang": "fr"
+}
+```
