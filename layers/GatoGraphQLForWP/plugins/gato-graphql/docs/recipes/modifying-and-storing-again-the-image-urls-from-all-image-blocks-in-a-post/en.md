@@ -11,6 +11,14 @@ This recipe modifies the URL of images in the `core/image` blocks in a post:
 
 ## GraphQL query to transform (and store again) the image URLs from all `core/image` blocks in a post
 
+Mutation `updatePost` receives the post's HTML content. Then, we must:
+
+- Retrieve the post's `sourceContent`
+- Apply transformations, replacing the original URLs with the converted URLs
+- Store the adapted content
+
+The transformations will be executed via regex search and replace, with each regex pattern generated dynamically based on the inner HTML content of the block (in this case, the `src` element in the `core/image` block's HTML code). As the block HTML code could contain any of the regex special characters (such as `.`, `+`, `(`, etc), these must be escaped.
+
 ```graphql
 query InitializeEmptyVariables {
   emptyArray: _echo(value: [])
@@ -19,6 +27,7 @@ query InitializeEmptyVariables {
     @export(as: "coreImageURLReplacementsTo")
 }
 
+# Extract all the image URLs from the `core/image` blocks, and export them under `$coreImageURLItems`
 query FetchData($postID: ID!)
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
   @depends(on: "InitializeEmptyVariables")
@@ -44,6 +53,7 @@ query FetchData($postID: ID!)
   }
 }
 
+# Convert the URLs and place the results under `$transformations`
 query TransformData
   @depends(on: "FetchData")
 {  
@@ -63,6 +73,7 @@ query TransformData
     @export(as: "transformations")
 }
 
+# Be
 query EscapeRegexStrings
   @depends(on: "TransformData")
 {  
