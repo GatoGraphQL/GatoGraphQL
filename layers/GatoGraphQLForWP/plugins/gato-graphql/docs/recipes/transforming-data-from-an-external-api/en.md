@@ -282,3 +282,54 @@ query {
         @strUpperCase
 }
 ```
+
+The response is:
+
+```json
+{
+  "data": {
+    "userEntries": [
+      {
+        "email": "abracadabra@ganga.com",
+        "lang": "de"
+      },
+      {
+        "email": "longon@caramanon.com",
+        "lang": "es"
+      },
+      {
+        "email": "rancotanto@parabara.com",
+        "lang": "en"
+      },
+      {
+        "email": "quezarapadon@quebrulacha.net",
+        "lang": "fr"
+      },
+      {
+        "email": "test@test.com",
+        "lang": "de"
+      },
+      {
+        "email": "emilanga@pedrola.com",
+        "lang": "fr"
+      }
+    ],
+    "emails": [
+      "ABRACADABRA@GANGA.COM",
+      "longon@caramanon.com",
+      "RANCOTANTO@PARABARA.COM",
+      "quezarapadon@quebrulacha.net",
+      "TEST@TEST.COM",
+      "emilanga@pedrola.com"
+    ]
+  }
+}
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+
+
+</div>
