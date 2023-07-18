@@ -13,7 +13,7 @@ This recipe modifies the URL of images in the `core/image` blocks in a post:
 
 Mutation `updatePost` receives the post's HTML content. Then, we must:
 
-- Retrieve the post's `sourceContent`
+- Retrieve the post's `contentSource`
 - Apply transformations, replacing the original URLs with the converted URLs
 - Store the adapted content
 
