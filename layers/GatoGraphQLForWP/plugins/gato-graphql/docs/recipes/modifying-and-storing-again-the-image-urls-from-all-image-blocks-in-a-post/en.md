@@ -55,7 +55,7 @@ query TransformData
       @underJSONObjectProperty(by: { key: "to" })
         @underEachArrayItem
           @strRegexReplace(
-            searchRegex: "#^https?://mysite.com/(.*)\.jpg$#",
+            searchRegex: "#^https?://mysite.com/(.*)\\.jpg$#",
             replaceWith: "https://cdn.mysite.com/$1.avif"
         )
     @export(as: "transformations")
