@@ -216,15 +216,10 @@ Directive `@applyField` (provided by the [**Field on Field**](https://gatographq
 
 ## Conditional manipulation
 
-conditional-data-manipulation-in-array.gql
+This GraphQL query extracts the emails from the response of the API, and converts to upper case those ones from users with a special language:
 
 ```graphql
-###################################################################
-# Fetch data from a REST endpoint, extract the emails, and make
-# uppercase those ones from users with a special language.
-###################################################################
-query ExtractEmailsFromAPIAndUpperCaseSpecialOnes
-{
+query {
   # Retrieve data from a REST API endpoint
   userEntries: _sendJSONObjectCollectionHTTPRequest(
     input: {
