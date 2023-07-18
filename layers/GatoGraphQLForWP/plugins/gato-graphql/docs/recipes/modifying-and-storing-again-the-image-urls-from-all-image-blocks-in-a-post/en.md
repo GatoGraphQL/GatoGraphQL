@@ -17,7 +17,10 @@ Mutation `updatePost` receives the post's HTML content. Then, we must:
 - Apply transformations, replacing the original URLs with the converted URLs
 - Store the adapted content
 
-The transformations will be executed via regex search and replace, with each regex pattern generated dynamically based on the inner HTML content of the block (in this case, the `src` element in the `core/image` block's HTML code). As the block HTML code could contain any of the regex special characters (such as `.`, `+`, `(`, etc), these must be escaped.
+The transformations will be executed via regex search and replace, with each regex pattern generated dynamically based on the inner HTML content of the block (in this case, the `src` element in the `core/image` block's HTML code). As such, we must escape characters in both the regex pattern and the replacement string:
+
+- The generated regex patterns could contain any of the regex special characters (such as `.`, `+`, `(`, etc), so these must be escaped
+- The replacements could contain a regex replacement variable (such as `$1`), so these must be escaped
 
 ```graphql
 query InitializeEmptyVariables {
@@ -73,7 +76,7 @@ query TransformData
     @export(as: "transformations")
 }
 
-# Escape the regex patterns
+# Escape the regex patterns and their replacements
 query EscapeRegexStrings
   @depends(on: "TransformData")
 {  
@@ -141,6 +144,7 @@ query EscapeRegexStrings
     @export(as: "escapedRegexTransformations")
 }
 
+# Generate the regex patterns, and assign them to `$coreImageURLReplacementsFrom`
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
 {  
@@ -175,6 +179,7 @@ query CreateRegexReplacements
         )
 }
 
+# Execute the regex search and replace, export the results under `$transformedContentSource`
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
 {  
@@ -188,6 +193,7 @@ query ExecuteRegexReplacements
     @export(as: "transformedContentSource")
 }
 
+# Execute the mutation to update the post
 mutation ModifyAndUpdatePost($postID: ID!)
   @depends(on: "ExecuteRegexReplacements")
 {
