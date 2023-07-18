@@ -293,9 +293,9 @@ The response is:
 
 This example also retrieves data from the REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions`.
 
-This GraphQL query extracts the emails from the response of the API, and converts to upper case those ones from users whose language is English or German.
+The GraphQL query below extracts the emails from the response of the API, and converts to upper case those from users whose language is English or German via the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension):
 
-To achieve this dynamic modification, we use the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension):
+- 
 
 ```graphql
 query {
