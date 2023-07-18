@@ -127,6 +127,73 @@ The response is:
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+[Composable directives](https://gatographql.com/guides/schema/using-composable-directives/) can nest one or more directives within them. When nesting more than one, we indicate this via argument `affectDirectivesUnderPos`, which contains the relative positions from that directive to its nested directives.
+
+In the GraphQL query above, directive `@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension) is a composable directive.
+
+On its first occurrence, it is nesting only one directive, and argument `affectDirectivesUnderPos` can be omitted:
+
+```graphql
+    @underEachArrayItem
+      @underJSONObjectProperty(
+        # ...
+      )
+```
+
+(Btw, notice that `@underJSONObjectProperty` is also a composable directive, nesting the `@default` directive).
+
+On its second occurrence, it is nesting the 4 directives to its right, as indicated by argument `affectDirectivesUnderPos` with value `[1, 2, 3, 4]`:
+
+```graphql
+    @underEachArrayItem(
+      affectDirectivesUnderPos: [1, 2, 3, 4],
+      passValueOnwardsAs: "userListItem"
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $userListItem,
+          by: {
+            key: "name"
+          }
+        },
+        passOnwardsAs: "userName"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $userListItem,
+          by: {
+            key: "url"
+          }
+        },
+        passOnwardsAs: "userURL"
+      )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "<a href=\"%s\">%s</a>",
+          values: [$userURL, $userName]
+        },
+        passOnwardsAs: "userLink"
+      )
+      @applyField(
+        name: "_objectAddEntry",
+        arguments: {
+          object: $userListItem,
+          key: "link",
+          value: $userLink
+        },
+        setResultInResponse: true
+      )
+```
+
+</div>
+
 
 
 conditional-data-manipulation-in-array.gql
