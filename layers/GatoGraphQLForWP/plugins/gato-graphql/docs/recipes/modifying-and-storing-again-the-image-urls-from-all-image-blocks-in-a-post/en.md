@@ -73,7 +73,7 @@ query TransformData
     @export(as: "transformations")
 }
 
-# Be
+# Escape the regex patterns
 query EscapeRegexStrings
   @depends(on: "TransformData")
 {  
