@@ -24,6 +24,10 @@ For instance, REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=
 ]
 ```
 
+This recipe demonstrates a couple of examples to transform this response.
+
+## Adding default values and extra properties to each entry
+
 The GraphQL query below transforms this response by:
 
 - Adding a default URL to those users whose `url` property is empty
@@ -194,7 +198,7 @@ On its second occurrence, it is nesting the 4 directives to its right, as indica
 
 </div>
 
-
+## Conditional manipulation
 
 conditional-data-manipulation-in-array.gql
 
