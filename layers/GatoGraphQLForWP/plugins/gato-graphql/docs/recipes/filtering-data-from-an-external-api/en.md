@@ -74,7 +74,7 @@ query {
 
 🔥 **Tips:**
 
-[Composable directives](https://gatographql.com/guides/schema/using-composable-directives/) can nest 1 or more directives nested within them. When more than 1, we indicate this via argument `affectDirectivesUnderPos`, which contains the relative positions from that directive to its nested directives.
+[Composable directives](https://gatographql.com/guides/schema/using-composable-directives/) can nest one or more directives within them. When nesting more than one, we indicate this via argument `affectDirectivesUnderPos`, which contains the relative positions from that directive to its nested directives.
 
 In the GraphQL query above, composable directive `@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension) is nesting 3 directives:
 
@@ -105,7 +105,7 @@ In the GraphQL query above, composable directive `@underEachArrayItem` (provided
       )
 ```
 
-Notice that `@if` is also a composable directive, nesting 1 item:
+Notice that `@if` is also a composable directive, nesting one item:
 
 ```graphql
       @if(
