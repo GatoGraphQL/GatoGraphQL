@@ -14,7 +14,7 @@ This recipe modifies the URL of images in the `core/image` blocks in a post:
 Mutation `updatePost` receives the post's HTML content. Then, we must:
 
 - Retrieve the post's `contentSource`
-- Apply transformations, replacing the original URLs with the converted URLs
+- Apply transformations to that HTML code, replacing the original URLs with the converted URLs
 - Store the adapted content
 
 The transformations will be executed via regex search and replace, with each regex pattern generated dynamically based on the inner HTML content of the block (in this case, the `src` element in the `core/image` block's HTML code). As such, we must escape characters in both the regex pattern and the replacement string:
