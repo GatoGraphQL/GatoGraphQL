@@ -216,7 +216,7 @@ Directive `@applyField` (provided by the [**Field on Field**](https://gatographq
 
 ## Conditional manipulation
 
-This GraphQL query extracts the emails from the response of the API, and converts to upper case those ones from users with a special language:
+This GraphQL query extracts the emails from the response of the API, and converts to upper case those ones from users with a special language via the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension) :
 
 ```graphql
 query {
@@ -331,6 +331,14 @@ The response is:
 
 🔥 **Tips:**
 
+As the GraphQL query above demonstrates, executing conditional logic in Gato GraphQL can be made dynamic: The condition provided to `@if` (and also to its opposite `@unless`) is evaluated on the queried object.
 
+Hence, you can modify the response for some entity based on conditions from that entity:
+
+- Does the post have comments?
+- Does the comment have responses?
+- Is the user an administrator?
+- Is the tag/category applied to some post?
+- Etc
 
 </div>

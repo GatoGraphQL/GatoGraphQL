@@ -476,8 +476,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'transforming-data-from-an-external-api',
                 \__('Transforming data from an external API', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
