@@ -2,7 +2,11 @@
 
 We can use Gato GraphQL to adapt the response from an external API to anything we need it to be.
 
-For instance, REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url` produces user data, with some users having property `url` empty:
+This recipe demonstrates a couple of examples to transform this response.
+
+## Adding default values and extra properties to each entry
+
+The REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url` produces user data, with some users having property `url` empty:
 
 ```json
 [
@@ -24,11 +28,7 @@ For instance, REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=
 ]
 ```
 
-This recipe demonstrates a couple of examples to transform this response.
-
-## Adding default values and extra properties to each entry
-
-The GraphQL query below transforms the response by:
+The GraphQL query below transforms this response by:
 
 - Adding a default URL to those users whose `url` property is empty
 - Adding a `link` property to each user entry, composed using the user's name and URL values
@@ -216,6 +216,37 @@ Directive `@applyField` (provided by the [**Field on Field**](https://gatographq
 
 ## Conditional manipulation
 
+The REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions` produces a collection of email subscription data, including the subscriber's email and language:
+
+```json
+[
+  {
+    "email": "abracadabra@ganga.com",
+    "lang": "de"
+  },
+  {
+    "email": "longon@caramanon.com",
+    "lang": "es"
+  },
+  {
+    "email": "rancotanto@parabara.com",
+    "lang": "en"
+  },
+  {
+    "email": "quezarapadon@quebrulacha.net",
+    "lang": "fr"
+  },
+  {
+    "email": "test@test.com",
+    "lang": "de"
+  },
+  {
+    "email": "emilanga@pedrola.com",
+    "lang": "fr"
+  }
+]
+```
+
 This GraphQL query extracts the emails from the response of the API, and converts to upper case those ones from users with a special language via the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension) :
 
 ```graphql
@@ -226,7 +257,7 @@ query {
       url: "https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions"
     }
   )
-    # @remove   # <= Uncomment this directive to not print the API data
+    @remove
 
   emails: _echo(value: $__userEntries)
 
@@ -289,32 +320,6 @@ The response is:
 ```json
 {
   "data": {
-    "userEntries": [
-      {
-        "email": "abracadabra@ganga.com",
-        "lang": "de"
-      },
-      {
-        "email": "longon@caramanon.com",
-        "lang": "es"
-      },
-      {
-        "email": "rancotanto@parabara.com",
-        "lang": "en"
-      },
-      {
-        "email": "quezarapadon@quebrulacha.net",
-        "lang": "fr"
-      },
-      {
-        "email": "test@test.com",
-        "lang": "de"
-      },
-      {
-        "email": "emilanga@pedrola.com",
-        "lang": "fr"
-      }
-    ],
     "emails": [
       "ABRACADABRA@GANGA.COM",
       "longon@caramanon.com",

@@ -479,6 +479,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::HTTP_CLIENT,
