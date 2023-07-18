@@ -27,13 +27,13 @@ For instance, REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=
 The GraphQL query below transforms this response by:
 
 - Adding a default URL to those users whose `url` property is empty
-- Adding an additional `link` property to each user entry
+- Adding a `link` property to each user entry, composed using the user's name and URL values
 
 It achieves this by:
 
 - Retrieving data from the external API
 - Iterating over the entries via `@underEachArrayItem`, and using directive `@default` (provided by the [**Field Default Value**](https://gatographql.com/extensions/field-default-value/) extension) to assign a value when that entry is empty
-- Iterating over the entries via `@underEachArrayItem` (again) and, for each, compose the `link` property using other properties from that entry
+- Iterating over the entries via `@underEachArrayItem` (again) and, for each, compose the `link` property using other properties from that entry, and adding it again to that JSON object via field `_objectAddEntry` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
 
 ```graphql
 query {
@@ -95,6 +95,35 @@ query {
         },
         setResultInResponse: true
       )
+}
+```
+
+The response is:
+
+```json
+{
+  "data": {
+    "usersWithLinkAndDefaultURL": [
+      {
+        "id": 1,
+        "name": "leo",
+        "url": "https://leoloso.com",
+        "link": "<a href=\"https://leoloso.com\">leo</a>"
+      },
+      {
+        "id": 7,
+        "name": "Test",
+        "url": "https://mysite.com",
+        "link": "<a href=\"https://mysite.com\">Test</a>"
+      },
+      {
+        "id": 2,
+        "name": "Theme Demos",
+        "url": "https://mysite.com",
+        "link": "<a href=\"https://mysite.com\">Theme Demos</a>"
+      }
+    ]
+  }
 }
 ```
 
