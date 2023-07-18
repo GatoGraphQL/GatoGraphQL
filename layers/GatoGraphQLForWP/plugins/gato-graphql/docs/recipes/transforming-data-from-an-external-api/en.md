@@ -283,9 +283,9 @@ The response is:
 }
 ```
 
-## Conditionally modifying some field value(s)
+## Conditionally modifying field values
 
-This example also retrieves data from the REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions`.
+This example continues on the previous one, plus also converting the format of the emails in the response.
 
 The GraphQL query below extracts the emails from the response of the API, and converts to upper case those from users whose language is English or German via the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension):
 
@@ -376,13 +376,13 @@ The response is:
 
 🔥 **Tips:**
 
-As the GraphQL query above demonstrates, executing conditional logic in Gato GraphQL can be made dynamic: The condition provided to `@if` (and also to its opposite `@unless`) is evaluated on the queried object.
+Executing conditional logic in Gato GraphQL can be made dynamic: By passing a dynamic variable to `@if(condition:)` (and also to `@unless(condition:)`) that was evaluated on the queried object, logic will be executed or not depending on conditions from that entity.
 
-Hence, you can modify the response for some entity based on conditions from that entity:
+This way, we can dynamically modify the response for some entities (and not others), on conditions such as:
 
 - Does the post have comments?
 - Does the comment have responses?
-- Is the user an administrator?
+- Is the user an admin?
 - Is the tag/category applied to some post?
 - Etc
 
