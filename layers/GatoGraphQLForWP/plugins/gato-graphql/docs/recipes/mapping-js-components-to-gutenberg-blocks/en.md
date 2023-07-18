@@ -8,7 +8,7 @@ This recipe _(inspired by [`Automattic/vip-block-data-api`](https://github.com/A
 
 In order to run the Preact app below as a static `.html` file in the browser, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Response Headers](https://gatographql.com/guides/schema/adding-custom-headers-to-the-graphql-response-cors/) with the following value:
 
-```
+```apacheconf
 Access-Control-Allow-Origin: null
 Access-Control-Allow-Headers: content-type,content-length,accept
 ```
