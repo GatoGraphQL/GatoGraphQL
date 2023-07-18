@@ -31,7 +31,7 @@ The GraphQL query below filters out those users where the `url` property is empt
 - Extracting property `url` from each entry, and placing this value under dynamic variable `$websiteURL`
 - Checking if this value is empty, and assigning the result under dynamic variable `$isWebsiteURLEmpty`
 - Applying conditional directive `@if` which, if `$isWebsiteURLEmpty` is `true`, sets the value of that entry as `null`
-- Execute directive `@arrayFilter` to filter out all `null` entries
+- Executing directive `@arrayFilter` to filter out all `null` entries
 
 ```graphql
 query {
