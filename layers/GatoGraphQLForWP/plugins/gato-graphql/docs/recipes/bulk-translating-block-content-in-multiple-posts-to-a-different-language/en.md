@@ -2056,7 +2056,8 @@ mutation TranslatePosts($postIDs: ID!)
       by: {
         key: $__id
       }
-    )update(input: {
+    )
+    update(input: {
       title: $__transformedTitle,
       contentAs: {
         html: $__transformedContentSource
