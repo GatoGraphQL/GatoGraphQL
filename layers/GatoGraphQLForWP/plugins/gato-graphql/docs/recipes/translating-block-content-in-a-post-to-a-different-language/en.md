@@ -1184,4 +1184,3 @@ mutation RestorePost($postID: ID!)
   }
 }
 ```
-
