@@ -2,7 +2,7 @@
 
 If the external API does not allow filtering by a certain property that we need, we can use Gato GraphQL to iterate over the entries in the API response, and remove those ones that do not satifsy our condition.
 
-For instance, retrieving data from REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url` produces:
+For instance, REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url` produces user data, with some users having property `url` empty:
 
 ```json
 [
@@ -24,7 +24,7 @@ For instance, retrieving data from REST API endpoint `newapi.getpop.org/wp-json/
 ]
 ```
 
-Field `url` may be empty for some users. The GraphQL query below filters out those users without a website URL, by:
+The GraphQL query below filters out those users where the `url` property is empty, by:
 
 - Retrieving data from the external API
 - Iterating over the entries via `@underEachArrayItem`, and placing each entry under dynamic variable `$userDataEntry`
