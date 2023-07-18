@@ -251,25 +251,14 @@ This GraphQL query extracts the `email` property from each entry and replaces th
 
 ```graphql
 query {
-  # Retrieve data from a REST API endpoint
-  userEntries: _sendJSONObjectCollectionHTTPRequest(
+  emails: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions"
     }
   )
-    @remove
-
-  emails: _echo(value: $__userEntries)
-
-    # Iterate all the entries, passing every entry
-    # (under the dynamic variable $userEntry)
-    # to each of the next 4 directives
     @underEachArrayItem(
       passValueOnwardsAs: "userEntry"
     )
-
-      # Extract property "email" from the entry
-      # and set it back as the value for that entry
       @applyField(
         name: "_objectProperty"
         arguments: {
@@ -299,22 +288,6 @@ The response is:
   }
 }
 ```
-
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-As the GraphQL query above demonstrates, executing conditional logic in Gato GraphQL can be made dynamic: The condition provided to `@if` (and also to its opposite `@unless`) is evaluated on the queried object.
-
-Hence, you can modify the response for some entity based on conditions from that entity:
-
-- Does the post have comments?
-- Does the comment have responses?
-- Is the user an administrator?
-- Is the tag/category applied to some post?
-- Etc
-
-</div>
 
 ## Conditional manipulation
 
