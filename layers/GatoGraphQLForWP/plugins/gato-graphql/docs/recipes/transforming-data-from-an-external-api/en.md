@@ -28,7 +28,7 @@ This recipe demonstrates a couple of examples to transform this response.
 
 ## Adding default values and extra properties to each entry
 
-The GraphQL query below transforms this response by:
+The GraphQL query below transforms the response by:
 
 - Adding a default URL to those users whose `url` property is empty
 - Adding a `link` property to each user entry, composed using the user's name and URL values
@@ -155,44 +155,23 @@ On its second occurrence, it is nesting the 4 directives to its right, as indica
 ```graphql
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2, 3, 4],
-      passValueOnwardsAs: "userListItem"
+      # ...
     )
       @applyField(
         name: "_objectProperty",
-        arguments: {
-          object: $userListItem,
-          by: {
-            key: "name"
-          }
-        },
-        passOnwardsAs: "userName"
+        # ...
       )
       @applyField(
         name: "_objectProperty",
-        arguments: {
-          object: $userListItem,
-          by: {
-            key: "url"
-          }
-        },
-        passOnwardsAs: "userURL"
+        # ...
       )
       @applyField(
         name: "_sprintf",
-        arguments: {
-          string: "<a href=\"%s\">%s</a>",
-          values: [$userURL, $userName]
-        },
-        passOnwardsAs: "userLink"
+       # ...
       )
       @applyField(
         name: "_objectAddEntry",
-        arguments: {
-          object: $userListItem,
-          key: "link",
-          value: $userLink
-        },
-        setResultInResponse: true
+        # ...
       )
 ```
 
