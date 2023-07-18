@@ -4,7 +4,9 @@ This recipe demonstrates how to translate a post to the desired language, with f
 
 Thanks to the "Blocks" module, we are able to translate the text properties contained within the post's blocks, while not affecting the block structure. The translation is executed via the Google Translate API by applying directive `@strTranslate` (provided by the [**Google Translate**](https://gatographql.com/extensions/google-translate/) extension).
 
-After executing the GraphQL query, we can keep editing the translated blog post in the block editor. Check video [“Translating a blog post with blocks (Gutenberg integration demo)” in Vimeo](https://vimeo.com/836876255):
+After executing the GraphQL query, we can keep editing the translated blog post in the block editor. Check the video:
+
+[Watch “Translating a blog post with blocks (Gutenberg integration demo)” in Vimeo](https://vimeo.com/836876255)
 
 ## GraphQL query to translate a post to a different language
 
