@@ -296,6 +296,35 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'extracting-the-image-urls-from-all-image-blocks-in-a-post',
+                \__('Extracting the image URLs from all Image blocks in a post', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
+            ],
+            [
+                'modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post',
+                \__('Modifying (and storing again) the image URLs from all Image blocks in a post', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
+            ],
+            [
                 'inserting-removing-a-gutenberg-block-in-bulk',
                 \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
                 [
@@ -309,7 +338,13 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'translating-block-content-in-a-post-to-a-different-language',
                 \__('Translating block content in a post to a different language', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
@@ -319,7 +354,12 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'bulk-translating-block-content-in-multiple-posts-to-a-different-language',
                 \__('Bulk translating block content in multiple posts to a different language', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
@@ -532,5 +572,15 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             //      \__('Using the GraphQL server without WordPress', 'gato-graphql'),
             // ],
         ];
+    }
+
+    /**
+     * Enqueue the required assets
+     */
+    protected function enqueueAssets(): void
+    {
+        parent::enqueueAssets();
+
+        $this->enqueueResponsiveVideoContainerAssets();
     }
 }
