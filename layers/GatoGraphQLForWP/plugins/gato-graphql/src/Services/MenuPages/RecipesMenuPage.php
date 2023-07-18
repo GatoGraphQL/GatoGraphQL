@@ -309,7 +309,12 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'translating-block-content-in-a-post-to-a-different-language',
                 \__('Translating block content in a post to a different language', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
