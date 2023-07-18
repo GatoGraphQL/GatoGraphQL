@@ -33,11 +33,11 @@ The GraphQL query below transforms the response by:
 - Adding a default URL to those users whose `url` property is empty
 - Adding a `link` property to each user entry, composed using the user's name and URL values
 
-It achieves this by:
+The strategy employed is:
 
-- Retrieving data from the external API
-- Iterating over the entries via `@underEachArrayItem`, and using directive `@default` (provided by the [**Field Default Value**](https://gatographql.com/extensions/field-default-value/) extension) to assign a value when that entry is empty
-- Iterating over the entries via `@underEachArrayItem` (again) and, for each, compose the `link` property using other properties from that entry, and adding it again to that JSON object via field `_objectAddEntry` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
+- It retrieves data from the external API
+- It iterates over the entries via `@underEachArrayItem`, using directive `@default` (provided by the [**Field Default Value**](https://gatographql.com/extensions/field-default-value/) extension) to assign a value when that entry is empty
+- It iterates over the entries via `@underEachArrayItem` again and, for each, creates a new `link` property and adds it again to the JSON object via field `_objectAddEntry` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
 
 ```graphql
 query {
@@ -137,9 +137,7 @@ The response is:
 
 [Composable directives](https://gatographql.com/guides/schema/using-composable-directives/) can nest one or more directives within them. When nesting more than one, we indicate this via argument `affectDirectivesUnderPos`, which contains the relative positions from that directive to its nested directives.
 
-In the GraphQL query above, directive `@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension) is a composable directive.
-
-On its first occurrence, it is nesting only one directive, and argument `affectDirectivesUnderPos` can be omitted:
+In the GraphQL query above, directive `@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension) is a composable directive. On its first occurrence, it is nesting only one directive, and argument `affectDirectivesUnderPos` can be omitted:
 
 ```graphql
     @underEachArrayItem
@@ -183,9 +181,9 @@ On its second occurrence, it is nesting the 4 directives to its right, as indica
 
 🔥 **Tips:**
 
-Directive `@applyField` (provided by the [**Field on Field**](https://gatographql.com/extensions/field-on-field/) extension) has two ways to handle its output:
+Directive `@applyField` (provided by the [**Field on Field**](https://gatographql.com/extensions/field-on-field/) extension) has two potential destinations for its output:
 
-- Provide argument `passOnwardsAs` to assign the new value to a dynamic variable, from which it can be read by the following nested directives
+- Providing argument `passOnwardsAs: "someVariableName"` will assign the new value to dynamic variable `$someVariableName`, from which it can be read by the upcoming nested directives:
 
 ```graphql
       @applyField(
@@ -200,7 +198,7 @@ Directive `@applyField` (provided by the [**Field on Field**](https://gatographq
       )
 ```
 
-- Provide argument `setResultInResponse: true`, to assign the new value again to the field:
+- Providing argument `setResultInResponse: true` will assign the new value again to the field (hence it will modify the response):
 
 ```graphql
       @applyField(
