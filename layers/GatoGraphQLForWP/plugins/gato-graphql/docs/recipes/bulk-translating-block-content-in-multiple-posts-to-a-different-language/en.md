@@ -4,6 +4,14 @@ The previous recipe demonstrated how to translate a post. This recipe is the equ
 
 ## GraphQL query to translate block content in multiple posts
 
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+
+</div>
+
 This GraphQL query is similar to the one from the previous recipe, but receiving the data for multiple posts as inputs, storing these data separately, executing the translation for all posts all at once, and finally iterating over all the posts, retrieving that post's translations and updating the post.
 
 In order to keep the regex patterns and translations for the posts separate, we use `@export(type: DICTIONARY)` when exporting data via dynamic variables, which keeps the data organized under the corresponding post ID.
@@ -2084,7 +2092,7 @@ Passing these `variables`:
 
 ```json
 {
-  "postID": [40, 19],
+  "postIDs": [40, 19],
   "translateToLang": "es"
 }
 ```
