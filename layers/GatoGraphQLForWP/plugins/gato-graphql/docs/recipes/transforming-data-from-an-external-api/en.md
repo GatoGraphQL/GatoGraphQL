@@ -1,8 +1,6 @@
 # Transforming data from an external API
 
-We can use Gato GraphQL to adapt the response from an external API to anything we need it to be.
-
-This recipe demonstrates a couple of examples to transform this response.
+This recipe demonstrates examples on adapting the response from an external API to anything we need it to be.
 
 ## Adding default values and extra properties to each entry
 
