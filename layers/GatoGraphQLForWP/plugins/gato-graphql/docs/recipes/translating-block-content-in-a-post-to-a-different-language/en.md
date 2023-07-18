@@ -1194,7 +1194,7 @@ mutation TranslatePost($postID: ID!)
 }
 ```
 
-Passing these vars:
+Passing these `variables`:
 
 ```json
 {
@@ -1203,7 +1203,7 @@ Passing these vars:
 }
 ```
 
-...the response is:
+...produces this response:
 
 ```json
 {

@@ -245,6 +245,8 @@ query InitializeEmptyVariables($postIDs: ID!) {
         as: "coreEmbedCaptionReplacementsTo"
         type: DICTIONARY
       )
+
+      @remove
   }
 }
 
@@ -2077,11 +2079,16 @@ mutation TranslatePosts($postIDs: ID!)
 }
 ```
 
-Then passing vars:
+Passing these `variables`:
 
 ```json
 {
-  "postIDs": [40, 19],
-  "translateToLang": "fr"
+  "postID": [40, 19],
+  "translateToLang": "es"
 }
+```
+
+...produces this response:
+
+```json
 ```

@@ -354,7 +354,13 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'bulk-translating-block-content-in-multiple-posts-to-a-different-language',
                 \__('Bulk translating block content in multiple posts to a different language', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
