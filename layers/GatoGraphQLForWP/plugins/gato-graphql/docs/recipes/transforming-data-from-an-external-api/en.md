@@ -50,7 +50,7 @@ query {
           value: "https://mysite.com"
           condition: IS_EMPTY
         )
-        
+
     # Add a new "link" entry on the JSON object
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2, 3, 4],
@@ -241,7 +241,7 @@ The REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions` pr
 ]
 ```
 
-This GraphQL query extracts the `email` property from each entry and replaces the field value with it, allowing use to print only the emails retrieved from the API:
+This GraphQL query prints only the emails from the API response, by extracting the `email` property from each entry and replacing the field value with it:
 
 ```graphql
 query {
