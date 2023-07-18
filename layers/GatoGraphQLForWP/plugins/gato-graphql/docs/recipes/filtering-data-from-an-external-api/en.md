@@ -70,6 +70,22 @@ query {
 }
 ```
 
+The response is:
+
+```json
+{
+  "data": {
+    "usersWithWebsiteURL": [
+      {
+        "id": 1,
+        "name": "leo",
+        "url": "https://leoloso.com"
+      }
+    ]
+  }
+}
+```
+
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
@@ -115,19 +131,3 @@ Notice that `@if` is also a composable directive, nesting one item:
 ```
 
 </div>
-
-The response is:
-
-```json
-{
-  "data": {
-    "usersWithWebsiteURL": [
-      {
-        "id": 1,
-        "name": "leo",
-        "url": "https://leoloso.com"
-      }
-    ]
-  }
-}
-```
