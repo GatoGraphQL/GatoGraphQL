@@ -26,17 +26,14 @@ The REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,ur
 ]
 ```
 
-The GraphQL query below transforms this response, adding a default URL to those users whose `url` property is empty, and adding a `link` property to each user entry (composed using the user's name and URL values), by:
+The GraphQL query below transforms this response:
 
-- Retrieving data from the external API
-- Iterating over the entries via `@underEachArrayItem` and, for each:
-  - Applying directive `@default` (provided by the [**Field Default Value**](https://gatographql.com/extensions/field-default-value/) extension) to assign a value when that entry is empty
-- Iterating over the entries via `@underEachArrayItem` again and, for each:
-  - Creating dynamic variable `$userLink` (containing the value for the new `link` property)
-  - Adding the new property to the JSON object via field `_objectAddEntry` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
+- Adding a default URL to those users whose `url` property is empty
+- Adding a `link` property to each user entry (composed using the user's name and URL values)
 
 ```graphql
 query {
+  # Retrieve data from the external API
   usersWithLinkAndDefaultURL: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url"
@@ -53,6 +50,7 @@ query {
           value: "https://mysite.com"
           condition: IS_EMPTY
         )
+        
     # Add a new "link" entry on the JSON object
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2, 3, 4],
