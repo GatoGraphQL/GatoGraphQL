@@ -2,13 +2,35 @@
 
 This recipe demonstrates translating a post to the desired language, with full support for (Gutenberg) blocks.
 
-Thanks to the "Blocks" module, we are able to translate the text properties contained within the post's blocks, while not affecting the block structure. The translation is executed via the Google Translate API by applying directive `@strTranslate` (provided by the [**Google Translate**](https://gatographql.com/extensions/google-translate/) extension).
+As we've seen in a previous recipe, we are able to modify properties contained within the post's blocks, while not affecting the block structure, and store the content again.
+
+Translation will follow the same idea, applying directive `@strTranslate` (provided by the [**Google Translate**](https://gatographql.com/extensions/google-translate/) extension) which translates content via the Google Translate API.
 
 After executing the GraphQL query, we can keep editing the translated blog post in the block editor. Check the video:
 
 [Watch “Translating a blog post with blocks (Gutenberg integration demo)” in Vimeo](https://vimeo.com/836876255)
 
 ## GraphQL query to translate a post to a different language
+
+This GraphQL query translates the post's title and content. Content is transformed by translating all text properties for the following blocks:
+
+- `core/heading`
+- `core/paragraph`
+- `core/image`
+- `core/button`
+- `core/table`
+- `core/list-item`
+- `core/cover`
+- `core/media-text`
+- `core/verse`
+- `core/quote`
+- `core/pullquote`
+- `core/audio`
+- `core/video`
+- `core/preformatted`
+- `core/embed`
+
+Notice that every text property will have its corresponding regex pattern. In order to support more blocks, you must provide their corresponding regex pattern.i
 
 ```graphql
 query InitializeEmptyVariables {
