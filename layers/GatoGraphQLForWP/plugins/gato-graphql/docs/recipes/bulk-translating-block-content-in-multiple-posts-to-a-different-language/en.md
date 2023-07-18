@@ -619,7 +619,7 @@ query TransformData(
 query EscapeRegexStrings
   @depends(on: "TransformData")
 {  
-  espacedRegexStrings: _echo(value: $transformations)
+  escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty(
       filter: {
         by: {
