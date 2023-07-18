@@ -1,5 +1,13 @@
 # Bulk translating block content in multiple posts to a different language
 
+The previous recipe demonstrated how to translate a post. This recipe is the equivalent, but translating multiple posts at the same time.
+
+## GraphQL query to translate block content in multiple posts
+
+This GraphQL query is similar to the one from the previous recipe, but receiving the data for multiple posts as inputs, storing these data separately, executing the translation for all posts all at once, and finally iterating over all the posts, retrieving that post's translations and updating the post.
+
+In order to keep the regex patterns and translations for the posts separate, we use `@export(type: DICTIONARY)` when exporting data via dynamic variables, which keeps the data organized under the corresponding post ID.
+
 ```graphql
 query InitializeEmptyVariables($postIDs: ID!) {
   emptyVars: posts(filter: { ids: $postIDs } ) {
@@ -2063,7 +2071,7 @@ mutation TranslatePosts($postIDs: ID!)
         id
         title
         contentSource
-      }    
+      }
     }
   }
 }
