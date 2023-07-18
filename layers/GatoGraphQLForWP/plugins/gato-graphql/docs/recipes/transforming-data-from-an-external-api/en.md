@@ -289,40 +289,13 @@ The response is:
 }
 ```
 
-## Conditional manipulation
+## Conditionally modifying some field value(s)
 
-The REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions` produces a collection of email subscription data, including the subscriber's email and language:
+This example also retrieves data from the REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions`.
 
-```json
-[
-  {
-    "email": "abracadabra@ganga.com",
-    "lang": "de"
-  },
-  {
-    "email": "longon@caramanon.com",
-    "lang": "es"
-  },
-  {
-    "email": "rancotanto@parabara.com",
-    "lang": "en"
-  },
-  {
-    "email": "quezarapadon@quebrulacha.net",
-    "lang": "fr"
-  },
-  {
-    "email": "test@test.com",
-    "lang": "de"
-  },
-  {
-    "email": "emilanga@pedrola.com",
-    "lang": "fr"
-  }
-]
-```
+This GraphQL query extracts the emails from the response of the API, and converts to upper case those ones from users whose language is English or German.
 
-This GraphQL query extracts the emails from the response of the API, and converts to upper case those ones from users with a special language via the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension) :
+To achieve this dynamic modification, we use the composable directive `@if` (provided by the [**Conditional Field Manipulation**](https://gatographql.com/extensions/conditional-field-manipulation/) extension):
 
 ```graphql
 query {
