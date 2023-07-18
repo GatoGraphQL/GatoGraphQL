@@ -1,11 +1,13 @@
 # Modifying (and storing again) the image URLs from all Image blocks in a post
 
-In the previous recipe, we learnt how to iterate the inner structure of (Gutenberg) blocks in the post content, and extract desired items. Let's now explore how to transform those items, and store them again in the post.
+In the previous recipe, we learnt that we can iterate the inner structure of (Gutenberg) blocks in the post content, and extract desired items.
 
-This recipe modifies the URL of `.jpg` images in the `core/image` blocks in a post:
+Let's now explore how to transform those items, and store them again in the post.
 
-- Replace `mysite.com` to `cdn.mysite.com`, as to start serving those assets from a CDN
-- Replace `.jpg` with `.avif`
+This recipe modifies the URL of images in the `core/image` blocks in a post:
+
+- Replacing `mysite.com` to `cdn.mysite.com` (as to start serving those assets from a CDN)
+- Replacing `.jpg` with `.avif`
 
 ## GraphQL query to transform (and store again) the image URLs from all `core/image` blocks in a post
 
