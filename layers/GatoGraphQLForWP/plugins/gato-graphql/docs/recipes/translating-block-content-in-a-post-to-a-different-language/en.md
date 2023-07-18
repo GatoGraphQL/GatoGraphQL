@@ -1132,7 +1132,7 @@ query PrepareMetaReplacements
       @export(as: "transformedTitle")
 }
 
-mutation UpdatePost($postID: ID!)
+mutation TranslatePost($postID: ID!)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
@@ -1142,31 +1142,6 @@ mutation UpdatePost($postID: ID!)
     title: $transformedTitle,
     contentAs: {
       html: $transformedContentSource
-    }
-  }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-    post {
-      id
-      title
-      contentSource
-    }    
-  }
-}
-
-mutation RestorePost($postID: ID!)
-  @depends(on: "UpdatePost")
-{
-  restorePost: updatePost(input: {
-    id: $postID,
-    title: $title,
-    contentAs: {
-      html: $contentSource
     }
   }) {
     status

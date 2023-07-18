@@ -2028,7 +2028,7 @@ query PrepareMetaReplacements
     )
 }
 
-mutation UpdatePost($postIDs: ID!)
+mutation TranslatePosts($postIDs: ID!)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
@@ -2050,45 +2050,6 @@ mutation UpdatePost($postIDs: ID!)
       title: $__transformedTitle,
       contentAs: {
         html: $__transformedContentSource
-      }
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        title
-        contentSource
-      }    
-    }
-  }
-}
-
-mutation RestorePost($postIDs: ID!)
-  @depends(on: "UpdatePost")
-{
-  restorePosts: posts(filter: { ids: $postIDs } ) {
-    id
-    contentSource: _objectProperty(
-      object: $contentSource,
-      by: {
-        key: $__id
-      }
-    )
-    title: _objectProperty(
-      object: $title,
-      by: {
-        key: $__id
-      }
-    )
-    update(input: {
-      title: $__title,
-      contentAs: {
-        html: $__contentSource
       }
     }) {
       status
