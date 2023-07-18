@@ -25,6 +25,23 @@ query GetImageBlockImageURLs($postID: ID!) {
           }
           setResultInResponse: true
         )
+      @arrayUnique
+  }
+}
+```
+
+The response is:
+
+```json
+{
+  "data": {
+    "post": {
+      "coreImage": [
+        "https://d.pr/i/fW6V3V+",
+        "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg",
+        "https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png"
+      ]
+    }
   }
 }
 ```
