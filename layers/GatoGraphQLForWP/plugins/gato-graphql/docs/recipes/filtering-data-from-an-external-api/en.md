@@ -34,7 +34,7 @@ Field `url` may be empty for some users. The GraphQL query belos filters out tho
 - Execute directive `@arrayFilter` to filter out all `null` entries
 
 ```graphql
-query FilterExternalAPIData {
+query {
   usersWithWebsiteURL: _sendJSONObjectCollectionHTTPRequest(
     input: {
       url: "https://newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url"
@@ -73,5 +73,15 @@ query FilterExternalAPIData {
 The response is:
 
 ```json
-
+{
+  "data": {
+    "usersWithWebsiteURL": [
+      {
+        "id": 1,
+        "name": "leo",
+        "url": "https://leoloso.com"
+      }
+    ]
+  }
+}
 ```
