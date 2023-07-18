@@ -1,6 +1,110 @@
 # Transforming data from an external API
 
-api-transformation.gql:
+We can use Gato GraphQL to adapt the response from an external API to anything we need it to be.
+
+For instance, REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url` produces user data, with some users having property `url` empty:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "leo",
+    "url": "https://leoloso.com"
+  },
+  {
+    "id": 7,
+    "name": "Test",
+    "url": ""
+  },
+  {
+    "id": 2,
+    "name": "Theme Demos",
+    "url": ""
+  }
+]
+```
+
+The GraphQL query below transforms this response by:
+
+- Adding a default URL to those users whose `url` property is empty
+- Adding an additional `link` property to each user entry
+
+It achieves this by:
+
+- Retrieving data from the external API
+- Iterating over the entries via `@underEachArrayItem`, and using directive `@default` (provided by the [**Field Default Value**](https://gatographql.com/extensions/field-default-value/) extension) to assign a value when that entry is empty
+- Iterating over the entries via `@underEachArrayItem` (again) and, for each, compose the `link` property using other properties from that entry
+
+```graphql
+query {
+  usersWithLinkAndDefaultURL: _sendJSONObjectCollectionHTTPRequest(
+    input: {
+      url: "https://newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,url"
+    }
+  )
+    # Set a default URL for users without any
+    @underEachArrayItem
+      @underJSONObjectProperty(
+        by: {
+          key: "url"
+        }
+      )
+        @default(
+          value: "https://mysite.com"
+          condition: IS_EMPTY
+        )
+    # Add a new "link" entry on the JSON object
+    @underEachArrayItem(
+      affectDirectivesUnderPos: [1, 2, 3, 4],
+      passValueOnwardsAs: "userListItem"
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $userListItem,
+          by: {
+            key: "name"
+          }
+        },
+        passOnwardsAs: "userName"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $userListItem,
+          by: {
+            key: "url"
+          }
+        },
+        passOnwardsAs: "userURL"
+      )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "<a href=\"%s\">%s</a>",
+          values: [$userURL, $userName]
+        },
+        passOnwardsAs: "userLink"
+      )
+      @applyField(
+        name: "_objectAddEntry",
+        arguments: {
+          object: $userListItem,
+          key: "link",
+          value: $userLink
+        },
+        setResultInResponse: true
+      )
+}
+```
+
+
+
+
+
+
+
+---
 
 ```graphql
 query AdaptExternalAPIData {

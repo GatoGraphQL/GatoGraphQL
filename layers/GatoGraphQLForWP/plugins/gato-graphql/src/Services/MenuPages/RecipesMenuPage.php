@@ -473,6 +473,20 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'transforming-data-from-an-external-api',
+                \__('Transforming data from an external API', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
+            ],
+            [
                 'filtering-data-from-an-external-api',
                 \__('Filtering data from an external API', 'gato-graphql'),
                 [
@@ -485,10 +499,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
-            ],
-            [
-                'transforming-data-from-an-external-api',
-                \__('Transforming data from an external API', 'gato-graphql'),
             ],
             [
                 'splitting-a-big-db-update-via-recursive-queries',
