@@ -613,8 +613,7 @@ query TransformData
       @underJSONObjectProperty(by: { key: "to" })
         @underEachJSONObjectProperty
           @underEachArrayItem
-            # @strTranslate(to: $translateToLang)
-            @strUpperCase
+            @strTranslate(to: $translateToLang)
     @export(as: "transformations")
 }
 
