@@ -313,6 +313,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Modifying (and storing again) the image URLs from all Image blocks in a post', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,

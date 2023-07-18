@@ -17,7 +17,7 @@ Mutation `updatePost` receives the post's HTML content. Then, we must:
 - Apply transformations to that HTML code, replacing the original URLs with the converted URLs
 - Store the adapted content
 
-The transformations will be executed via regex search and replace, with each regex pattern generated dynamically based on the inner HTML content of the block (in this case, the `src` element in the `core/image` block's HTML code). As such, we must escape characters in both the regex pattern and the replacement string:
+The transformations will be executed via regex search and replace (via directive `@strRegexReplaceMultiple`), with each regex pattern generated dynamically based on the inner HTML content of the block (in this case, the `src` element in the `core/image` block's HTML code). As such, we must escape characters in both the regex pattern and the replacement string:
 
 - The generated regex patterns could contain any of the regex special characters (such as `.`, `+`, `(`, etc), so these must be escaped
 - The replacements could contain a regex replacement variable (such as `$1`), so these must be escaped
@@ -28,6 +28,7 @@ query InitializeEmptyVariables {
     @export(as: "coreImageURLItems")
     @export(as: "coreImageURLReplacementsFrom")
     @export(as: "coreImageURLReplacementsTo")
+    @remove
 }
 
 # Extract all the image URLs from the `core/image` blocks, and export them under `$coreImageURLItems`
@@ -224,7 +225,6 @@ The response is:
 ```json
 {
   "data": {
-    "emptyArray": [],
     "post": {
       "contentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2008/themes_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->",
       "coreImage": [
