@@ -26,16 +26,14 @@ The REST API endpoint `newapi.getpop.org/wp-json/wp/v2/users/?_fields=id,name,ur
 ]
 ```
 
-The GraphQL query below transforms this response by:
+The GraphQL query below transforms this response, adding a default URL to those users whose `url` property is empty, and adding a `link` property to each user entry (composed using the user's name and URL values), by:
 
-- Adding a default URL to those users whose `url` property is empty
-- Adding a `link` property to each user entry, composed using the user's name and URL values
-
-The strategy employed is:
-
-- It retrieves data from the external API
-- It iterates over the entries via `@underEachArrayItem`, using directive `@default` (provided by the [**Field Default Value**](https://gatographql.com/extensions/field-default-value/) extension) to assign a value when that entry is empty
-- It iterates over the entries via `@underEachArrayItem` again and, for each, creates a new `link` property and adds it again to the JSON object via field `_objectAddEntry` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
+- Retrieving data from the external API
+- Iterating over the entries via `@underEachArrayItem` and, for each:
+  - Applying directive `@default` (provided by the [**Field Default Value**](https://gatographql.com/extensions/field-default-value/) extension) to assign a value when that entry is empty
+- Iterating over the entries via `@underEachArrayItem` again and, for each:
+  - Creating dynamic variable `$userLink` (containing the value for the new `link` property)
+  - Adding the new property to the JSON object via field `_objectAddEntry` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
 
 ```graphql
 query {
