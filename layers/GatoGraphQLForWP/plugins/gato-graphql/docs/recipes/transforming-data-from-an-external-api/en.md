@@ -175,6 +175,45 @@ On its second occurrence, it is nesting the 4 directives to its right, as indica
       )
 ```
 
+<br/>
+
+---
+
+<br/>
+
+🔥 **Tips:**
+
+Directive `@applyField` (provided by the [**Field on Field**](https://gatographql.com/extensions/field-on-field/) extension) has two ways to handle its output:
+
+- Provide argument `passOnwardsAs` to assign the new value to a dynamic variable, from which it can be read by the following nested directives
+
+```graphql
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $userListItem,
+          by: {
+            key: "name"
+          }
+        },
+        passOnwardsAs: "userName"
+      )
+```
+
+- Provide argument `setResultInResponse: true`, to assign the new value again to the field:
+
+```graphql
+      @applyField(
+        name: "_objectAddEntry",
+        arguments: {
+          object: $userListItem,
+          key: "link",
+          value: $userLink
+        },
+        setResultInResponse: true
+      )
+```
+
 </div>
 
 ## Conditional manipulation
