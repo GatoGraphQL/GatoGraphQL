@@ -317,7 +317,7 @@ query FetchData($postID: ID!)
 }
 
 query TransformData(
-  # $translateToLang: String! = "es"
+  $translateToLang: String!
 )
   @depends(on: "FetchData")
 {  

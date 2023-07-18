@@ -525,10 +525,9 @@ query AdaptData
     @export(as: "adaptedFromTitle")
 }
 
-query TransformData
-# (
-#   $translateToLang: String! = "es"
-# )
+query TransformData(
+  $translateToLang: String!
+)
   @depends(on: "AdaptData")
 {
   transformations: _echo(value: {
