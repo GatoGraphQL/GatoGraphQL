@@ -17,10 +17,7 @@ Mutation `updatePost` receives the post's HTML content. Then, we must:
 - Apply transformations to that HTML code, replacing the original URLs with the converted URLs
 - Store the adapted content
 
-The transformations will be executed via regex search and replace (via directive `@strRegexReplaceMultiple`), with each regex pattern generated dynamically based on the inner HTML content of the block (in this case, the `src` element in the `core/image` block's HTML code). As such, we must escape characters in both the regex pattern and the replacement string:
-
-- The generated regex patterns could contain any of the regex special characters (such as `.`, `+`, `(`, etc), so these must be escaped
-- The replacements could contain a regex replacement variable (such as `$1`), so these must be escaped
+The GraphQL query below executes the transformations in the HTML code via directive `@strRegexReplaceMultiple`, with each regex pattern generated dynamically based on the blocks' inner HTML content (in this case, it targets the `src` element in the `core/image` block's HTML code). Because the generated regex patterns could contain any of the regex special characters (such as `.`, `+`, `(`, etc), and the replacements could contain a regex replacement variable (such as `$1`), these must be escaped.
 
 ```graphql
 query InitializeEmptyVariables {
