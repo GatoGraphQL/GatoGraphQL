@@ -1,6 +1,8 @@
 # Filtering data from an external API
 
-api-filtering.gql:
+If the external API does not allow filtering for a certain property that we need, we can use Gato GraphQL to filter the entries in the API response.
+
+In this GraphQL query, we discard all user data entries where the user's website URL is `null`:
 
 ```graphql
 query FilterExternalAPIData {
