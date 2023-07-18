@@ -14,6 +14,16 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 This GraphQL query is similar to the one from the previous recipe, but receiving the data for multiple posts as inputs, storing these data separately, executing the translation for all posts all at once, and finally iterating over all the posts, retrieving that post's translations and updating the post.
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Translating multiple posts in a single GraphQL request provides better results than executing multiple GraphQL requests translating one post each.
+
+That's because we are then able to pass all text to translate (i.e. for all fields and for all posts) to a single `@strTranslate` execution (as demonstrated in the GraphQL query below). Google Translate will then receive more data, that will allow it to provide better outcomes.
+
+</div>
+
 In order to keep the regex patterns and translations for the posts separate, we use `@export(type: DICTIONARY)` when exporting data via dynamic variables, which keeps the data organized under the corresponding post ID.
 
 ```graphql
