@@ -9,9 +9,9 @@ This recipe now demonstrates how to transform those items, and store them again 
 ```graphql
 query InitializeEmptyVariables {
   emptyArray: _echo(value: [])
-    @export(as: "coreImageAltItems")
-    @export(as: "coreImageAltReplacementsFrom")
-    @export(as: "coreImageAltReplacementsTo")
+    @export(as: "coreImageURLItems")
+    @export(as: "coreImageURLReplacementsFrom")
+    @export(as: "coreImageURLReplacementsTo")
 }
 
 query FetchData($postID: ID!)
@@ -30,11 +30,11 @@ query FetchData($postID: ID!)
           by: { key: "attributes" }
         )
           @underJSONObjectProperty(
-            by: { key: "alt" }
+            by: { key: "url" }
             failIfNonExistingKeyOrPath: false
           )
             @export(
-              as: "coreImageAltItems"
+              as: "coreImageURLItems"
             )
   }
 }
@@ -43,9 +43,9 @@ query TransformData
   @depends(on: "FetchData")
 {  
   transformations: _echo(value: {
-    coreImageAlt: {
-      from: $coreImageAltItems,
-      to: $coreImageAltItems,
+    coreImageURL: {
+      from: $coreImageURLItems,
+      to: $coreImageURLItems,
     },
   })
     @underEachJSONObjectProperty
@@ -127,7 +127,7 @@ query CreateRegexReplacements
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
-      by: { key: "coreImageAlt" }
+      by: { key: "coreImageURL" }
       affectDirectivesUnderPos: [1, 5]
     )
       @underJSONObjectProperty(
@@ -140,19 +140,19 @@ query CreateRegexReplacements
           @applyField(
             name: "_sprintf",
             arguments: {
-              string: "#(<!-- wp:image .*?-->\\n?.*<img .*?alt=\\\")%s(\\\".*>.*\\n?<!-- /wp:image -->)#",
+              string: "#(<!-- wp:image .*?-->\\n?.*<img .*?src=\\\")%s(\\\".*>.*\\n?<!-- /wp:image -->)#",
               values: [$value]
             },
             setResultInResponse: true
           )
         @export(
-          as: "coreImageAltReplacementsFrom",
+          as: "coreImageURLReplacementsFrom",
         )
       @underJSONObjectProperty(
         by: { key: "to" }
       )
         @export(
-          as: "coreImageAltReplacementsTo",
+          as: "coreImageURLReplacementsTo",
         )
 }
 
@@ -162,14 +162,14 @@ query ExecuteRegexReplacements
   transformedContentSource: _echo(value: $contentSource)
     @strRegexReplaceMultiple(
       limit: 1,
-      searchRegex: $coreImageAltReplacementsFrom,
-      replaceWith: $coreImageAltReplacementsTo
+      searchRegex: $coreImageURLReplacementsFrom,
+      replaceWith: $coreImageURLReplacementsTo
     )
     
     @export(as: "transformedContentSource")
 }
 
-mutation TranslatePost($postID: ID!)
+mutation ModifyAndUpdatePost($postID: ID!)
   @depends(on: "ExecuteRegexReplacements")
 {
   updatePost(input: {
