@@ -70,6 +70,52 @@ query {
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+[Composable directives](https://gatographql.com/guides/schema/using-composable-directives/) can nest 1 or more directives nested within them. When more than 1, we indicate this via argument `affectDirectivesUnderPos`, which contains the relative positions from that directive to its nested directives.
+
+In the GraphQL query above, composable directive `@underEachArrayItem` is nesting 3 directives:
+
+```graphql
+    @underEachArrayItem(
+      passValueOnwardsAs: "userDataEntry"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $userDataEntry
+          by: {
+            key: "url"
+          }
+        }
+        passOnwardsAs: "websiteURL"
+      )
+      @applyField(
+        name: "_isEmpty"
+        arguments: {
+          value: $websiteURL
+        }
+        passOnwardsAs: "isWebsiteURLEmpty"
+      )
+      @if(
+        condition: $isWebsiteURLEmpty
+      )
+```
+
+Notice that `@if` is also a composable directive, nesting 1 item:
+
+```graphql
+      @if(
+        condition: $isWebsiteURLEmpty
+      )
+        @setNull
+```
+
+</div>
+
 The response is:
 
 ```json
