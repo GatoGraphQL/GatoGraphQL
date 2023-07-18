@@ -538,4 +538,14 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             // ],
         ];
     }
+
+    /**
+     * Enqueue the required assets
+     */
+    protected function enqueueAssets(): void
+    {
+        parent::enqueueAssets();
+
+        $this->enqueueResponsiveVideoContainerAssets();
+    }
 }
