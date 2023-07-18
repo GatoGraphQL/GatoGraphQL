@@ -214,6 +214,108 @@ Directive `@applyField` (provided by the [**Field on Field**](https://gatographq
 
 </div>
 
+## Extracting a specific property from the JSON objects
+
+The REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions` produces a collection of email subscription data, including the subscriber's email and language:
+
+```json
+[
+  {
+    "email": "abracadabra@ganga.com",
+    "lang": "de"
+  },
+  {
+    "email": "longon@caramanon.com",
+    "lang": "es"
+  },
+  {
+    "email": "rancotanto@parabara.com",
+    "lang": "en"
+  },
+  {
+    "email": "quezarapadon@quebrulacha.net",
+    "lang": "fr"
+  },
+  {
+    "email": "test@test.com",
+    "lang": "de"
+  },
+  {
+    "email": "emilanga@pedrola.com",
+    "lang": "fr"
+  }
+]
+```
+
+This GraphQL query extracts the `email` property from each entry and replaces the field value with it, allowing use to print only the emails retrieved from the API:
+
+```graphql
+query {
+  # Retrieve data from a REST API endpoint
+  userEntries: _sendJSONObjectCollectionHTTPRequest(
+    input: {
+      url: "https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions"
+    }
+  )
+    @remove
+
+  emails: _echo(value: $__userEntries)
+
+    # Iterate all the entries, passing every entry
+    # (under the dynamic variable $userEntry)
+    # to each of the next 4 directives
+    @underEachArrayItem(
+      passValueOnwardsAs: "userEntry"
+    )
+
+      # Extract property "email" from the entry
+      # and set it back as the value for that entry
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $userEntry,
+          by: {
+            key: "email"
+          }
+        }
+        setResultInResponse: true
+      )
+}
+```
+
+The response is:
+
+```json
+{
+  "data": {
+    "emails": [
+      "abracadabra@ganga.com",
+      "longon@caramanon.com",
+      "rancotanto@parabara.com",
+      "quezarapadon@quebrulacha.net",
+      "test@test.com",
+      "emilanga@pedrola.com"
+    ]
+  }
+}
+```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+As the GraphQL query above demonstrates, executing conditional logic in Gato GraphQL can be made dynamic: The condition provided to `@if` (and also to its opposite `@unless`) is evaluated on the queried object.
+
+Hence, you can modify the response for some entity based on conditions from that entity:
+
+- Does the post have comments?
+- Does the comment have responses?
+- Is the user an administrator?
+- Is the tag/category applied to some post?
+- Etc
+
+</div>
+
 ## Conditional manipulation
 
 The REST API endpoint `newapi.getpop.org/wp-json/newsletter/v1/subscriptions` produces a collection of email subscription data, including the subscriber's email and language:
