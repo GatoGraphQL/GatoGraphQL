@@ -226,7 +226,7 @@ The response is:
 {
   "data": {
     "post": {
-      "contentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2008/themes_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->",
+      "contentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2008/themes_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2007/email_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->",
       "coreImage": [
         {
           "name": "core/image",
@@ -235,47 +235,61 @@ The response is:
             "url": "http://mysite.com/fs_img/mysite/2008/themes_photo.jpg",
             "alt": ""
           }
+        },
+        {
+          "name": "core/image",
+          "attributes": {
+            "sizeSlug": "large",
+            "url": "http://mysite.com/fs_img/mysite/2007/email_photo.jpg",
+            "alt": ""
+          }
         }
       ]
     },
     "transformations": {
       "coreImageURL": {
         "from": [
-          "http://mysite.com/fs_img/mysite/2008/themes_photo.jpg"
+          "http://mysite.com/fs_img/mysite/2008/themes_photo.jpg",
+          "http://mysite.com/fs_img/mysite/2007/email_photo.jpg"
         ],
         "to": [
-          "https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif"
+          "https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif",
+          "https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif"
         ]
       }
     },
     "escapedRegexStrings": {
       "coreImageURL": {
         "from": [
-          "http://mysite\\.com/fs_img/mysite/2008/themes_photo\\.jpg"
+          "http://mysite\\.com/fs_img/mysite/2008/themes_photo\\.jpg",
+          "http://mysite\\.com/fs_img/mysite/2007/email_photo\\.jpg"
         ],
         "to": [
-          "$1https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif$2"
+          "$1https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif$2",
+          "$1https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif$2"
         ]
       }
     },
     "regexReplacements": {
       "coreImageURL": {
         "from": [
-          "#(<!-- wp:image .*?-->\\n?.*<img .*?src=\\\")http://mysite\\.com/fs_img/mysite/2008/themes_photo\\.jpg(\\\".*>.*\\n?<!-- /wp:image -->)#"
+          "#(<!-- wp:image .*?-->\\n?.*<img .*?src=\\\")http://mysite\\.com/fs_img/mysite/2008/themes_photo\\.jpg(\\\".*>.*\\n?<!-- /wp:image -->)#",
+          "#(<!-- wp:image .*?-->\\n?.*<img .*?src=\\\")http://mysite\\.com/fs_img/mysite/2007/email_photo\\.jpg(\\\".*>.*\\n?<!-- /wp:image -->)#"
         ],
         "to": [
-          "$1https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif$2"
+          "$1https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif$2",
+          "$1https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif$2"
         ]
       }
     },
-    "transformedContentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->",
+    "transformedContentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->",
     "updatePost": {
       "status": "SUCCESS",
       "errors": null,
       "post": {
         "id": 13,
         "title": "Released v0.6, check it out",
-        "contentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->"
+        "contentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->"
       }
     }
   }
