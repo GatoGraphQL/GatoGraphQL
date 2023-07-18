@@ -1,4 +1,4 @@
-# Modifying the image URLs from all Image blocks in a post
+# Modifying (and storing again) the image URLs from all Image blocks in a post
 
 In the previous recipe, we learnt how to iterate the inner structure of (Gutenberg) blocks in the post content, and extract desired items.
 
