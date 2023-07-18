@@ -256,7 +256,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/heading" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.content" }
         )
           @export(
@@ -269,7 +269,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/paragraph" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.content" }
         )
           @export(
@@ -282,7 +282,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/image" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { key: "attributes" }
           affectDirectivesUnderPos: [1, 3]
         )
@@ -322,7 +322,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/table" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { key: "attributes" }
           affectDirectivesUnderPos: [1, 3]
         )
@@ -396,7 +396,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/verse" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.content" }
         )
           @export(
@@ -409,7 +409,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/quote" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.citation" }
         )
           @export(
@@ -422,7 +422,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/pullquote" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { key: "attributes" }
           affectDirectivesUnderPos: [1, 3]
         )
@@ -449,7 +449,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/audio" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.caption" }
         )
           @export(
@@ -462,7 +462,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/video" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.caption" }
         )
           @export(
@@ -475,7 +475,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/preformatted" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.content" }
         )
           @export(
@@ -488,7 +488,7 @@ query FetchData($postIDs: ID!)
       filterBy: { include: "core/embed" }
     )
       @underEachArrayItem
-    		@underJSONObjectProperty(
+        @underJSONObjectProperty(
           by: { path: "attributes.caption" }
         )
           @export(
@@ -705,7 +705,7 @@ query CreateRegexReplacements
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
-    	by: { key: "coreHeadingContent" }
+      by: { key: "coreHeadingContent" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -736,7 +736,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreParagraphContent" }
+      by: { key: "coreParagraphContent" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -767,7 +767,7 @@ query CreateRegexReplacements
   
   
     @underJSONObjectProperty(
-    	by: { key: "coreImageAlt" }
+      by: { key: "coreImageAlt" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -798,7 +798,7 @@ query CreateRegexReplacements
   
   
     @underJSONObjectProperty(
-    	by: { key: "coreImageCaption" }
+      by: { key: "coreImageCaption" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -829,7 +829,7 @@ query CreateRegexReplacements
   
   
     @underJSONObjectProperty(
-    	by: { key: "coreButtonText" }
+      by: { key: "coreButtonText" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -860,7 +860,7 @@ query CreateRegexReplacements
   
   
     @underJSONObjectProperty(
-    	by: { key: "coreTableCaption" }
+      by: { key: "coreTableCaption" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -891,7 +891,7 @@ query CreateRegexReplacements
   
   
     @underJSONObjectProperty(
-    	by: { key: "coreTableBodyCellsContent" }
+      by: { key: "coreTableBodyCellsContent" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -922,7 +922,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreListItemContent" }
+      by: { key: "coreListItemContent" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -953,7 +953,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreCoverAlt" }
+      by: { key: "coreCoverAlt" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -984,7 +984,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreMediaTextAlt" }
+      by: { key: "coreMediaTextAlt" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1015,7 +1015,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreVerseContent" }
+      by: { key: "coreVerseContent" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1046,7 +1046,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreQuoteCitation" }
+      by: { key: "coreQuoteCitation" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1077,7 +1077,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "corePullquoteCitation" }
+      by: { key: "corePullquoteCitation" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1108,7 +1108,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "corePullquoteValue" }
+      by: { key: "corePullquoteValue" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1139,7 +1139,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreAudioCaption" }
+      by: { key: "coreAudioCaption" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1170,7 +1170,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreVideoCaption" }
+      by: { key: "coreVideoCaption" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1201,7 +1201,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "corePreformattedContent" }
+      by: { key: "corePreformattedContent" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
@@ -1232,7 +1232,7 @@ query CreateRegexReplacements
 
 
     @underJSONObjectProperty(
-    	by: { key: "coreEmbedCaption" }
+      by: { key: "coreEmbedCaption" }
       affectDirectivesUnderPos: [1, 6]
     )
       @underJSONObjectProperty(
