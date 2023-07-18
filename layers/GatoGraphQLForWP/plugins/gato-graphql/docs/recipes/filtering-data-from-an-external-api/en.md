@@ -27,10 +27,10 @@ For instance, retrieving data from REST API endpoint `newapi.getpop.org/wp-json/
 Field `url` may be empty for some users. The GraphQL query below filters out those users without a website URL, by:
 
 - Retrieving data from the external API
-- Iterating over the entries via `@underEachArrayItem`, and placing enty entry under dynamic variable `$userDataEntry`
-- Retrieving property `url` from each entry, and assigning this value under dynamic variable `$websiteURL`
+- Iterating over the entries via `@underEachArrayItem`, and placing each entry under dynamic variable `$userDataEntry`
+- Extracting property `url` from each entry, and placing this value under dynamic variable `$websiteURL`
 - Checking if this value is empty, and assigning the result under dynamic variable `$isWebsiteURLEmpty`
-- Applying conditional directive `@if` which, if `$isWebsiteURLEmpty`, sets the value of that entry as `null`
+- Applying conditional directive `@if` which, if `$isWebsiteURLEmpty` is `true`, sets the value of that entry as `null`
 - Execute directive `@arrayFilter` to filter out all `null` entries
 
 ```graphql
@@ -76,7 +76,7 @@ query {
 
 [Composable directives](https://gatographql.com/guides/schema/using-composable-directives/) can nest 1 or more directives nested within them. When more than 1, we indicate this via argument `affectDirectivesUnderPos`, which contains the relative positions from that directive to its nested directives.
 
-In the GraphQL query above, composable directive `@underEachArrayItem` is nesting 3 directives:
+In the GraphQL query above, composable directive `@underEachArrayItem` (provided by the [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) extension) is nesting 3 directives:
 
 ```graphql
     @underEachArrayItem(
