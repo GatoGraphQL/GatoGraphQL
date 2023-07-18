@@ -225,7 +225,8 @@ query {
     input: {
       url: "https://newapi.getpop.org/wp-json/newsletter/v1/subscriptions"
     }
-  ) # @remove   # <= Uncomment this directive to not print the API data
+  )
+    # @remove   # <= Uncomment this directive to not print the API data
 
   emails: _echo(value: $__userEntries)
 
