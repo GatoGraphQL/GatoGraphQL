@@ -296,6 +296,16 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'inserting-removing-a-gutenberg-block-in-bulk',
+                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+            ],
+            [
                 'extracting-the-image-urls-from-all-image-blocks-in-a-post',
                 \__('Extracting the image URLs from all Image blocks in a post', 'gato-graphql'),
                 [
@@ -323,16 +333,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
-            ],
-            [
-                'inserting-removing-a-gutenberg-block-in-bulk',
-                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
-                [
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
             ],
             [
                 'translating-block-content-in-a-post-to-a-different-language',
