@@ -89,7 +89,7 @@ The GraphQL query below executes itself recursively. When first invoked, it:
 - Divides the total number of resources to update into segments (calculated using the provided `$limit` variable)
 - Executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time
 
-The data sent in the HTTP requests that execute the recursive queries (including the URL, body, method and headers) are retrieved from the current HTTP request (via the [**HTTP Request via Schema**](https://gatographql.com/extensions/http-request-via-schema/) extension).
+The GraphQL query is recursive by having the HTTP requests point to the same URL as the current one (plus adding the `$offset` variable for that segment), for which we retrieve the URL (and also the body, method and headers) from the current HTTP request (via the [**HTTP Request via Schema**](https://gatographql.com/extensions/http-request-via-schema/) extension).
 
 Once all resources have been updated, the execution of the GraphQL query reaches the end and terminates:
 
