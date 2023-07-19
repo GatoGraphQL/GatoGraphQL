@@ -209,7 +209,7 @@ query ExecuteAll
 }
 ```
 
-It produces:
+The response is:
 
 ```json
 {
