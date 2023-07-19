@@ -4,7 +4,34 @@ Sometimes we need to execute an update that involves thousands of resources in t
 
 > I find that for a lot of clients I'm working with large sets of data (10,000+ product variations for 1 product, or 13,000+ media files) ... inevitably the clients want to be able to bulk edit lots of things at once - like tag 2000 media files with the same tag.
 
-Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/), Gato GraphQL supports retrieving and updating thousands of resources from the DB via a single GraphQL query. However, depending on the resilience of the system, this single GraphQL execution might put too much load on the DB.
+Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/), Gato GraphQL supports retrieving and updating thousands of resources from the DB via a single GraphQL query:
+
+```graphql
+mutation ReplaceOldWithNewDomainInPosts {
+  posts(pagination: { limit: 3000 }) {
+    id
+    contentSource
+    adaptedContentSource: _strReplace(
+      search: "https://my-old-domain.com"
+      replaceWith: "https://my-new-domain.com"
+      in: $__contentSource
+    )
+    update(input: {
+      contentAs: { html: $__adaptedContentSource }
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+    }
+  }
+}
+```
+
+However, depending on the resilience of the system, this single GraphQL execution might put too much load on the DB.
 
 We can then split the 
 
