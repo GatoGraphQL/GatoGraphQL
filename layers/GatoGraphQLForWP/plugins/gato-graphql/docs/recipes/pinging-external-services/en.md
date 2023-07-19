@@ -1,6 +1,6 @@
 # Pinging external services
 
-We can send an HTTP request to a webserver, passing along data both stored in the website and/or provided via parameters or headers.
+We can ping external services about new resources added to our website, passing along data both stored in the website and/or provided via parameters or headers.
 
 In this query, we retrieve the IDs of the comments added in the last 24 hs and, for each, send a ping to some external service, passing their ID as a parameter in the URL, and forwarding some headers from the current HTTP request:
 
