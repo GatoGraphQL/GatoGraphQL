@@ -30,7 +30,7 @@ This GraphQL query translates the post's title and content. Content is transform
 - `core/preformatted`
 - `core/embed`
 
-Notice that every text property will have its corresponding regex pattern. In order to support more blocks, you must provide their corresponding regex pattern.i
+Notice that every text property will have its corresponding regex pattern. In order to support more blocks, you must provide their corresponding regex pattern.
 
 ```graphql
 query InitializeEmptyVariables {
