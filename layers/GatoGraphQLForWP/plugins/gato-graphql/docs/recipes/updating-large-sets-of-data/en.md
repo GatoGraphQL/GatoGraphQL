@@ -224,7 +224,7 @@ query ExecuteURLs(
 }
 
 # This is the actual execution of the query.
-# In this case, it simply prints a message and the comment IDs for the segment
+# In this case, it simply prints the query variables and the comment IDs for that segment
 query ExecuteQuery(
   $offset: Int
   $limit: Int! = 10
@@ -232,7 +232,7 @@ query ExecuteQuery(
   @depends(on: "ExportExecute")
   @include(if: $executeQuery)
 {
-  message: _sprintf(string: "Executing the query with $offset '%s'", values: [$offset])
+  queryVariables: _sprintf(string: "[$limit: %s, $offset: %s]", values: [$limit, $offset])
   comments(
     pagination: { limit: $limit, offset: $offset }
     sort: { order: ASC, by: ID }
