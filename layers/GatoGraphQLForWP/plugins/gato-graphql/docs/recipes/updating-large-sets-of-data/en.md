@@ -369,6 +369,14 @@ The response is:
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+We can let the DB breath between requests by providing property `delay` (which indicates how many milliseconds to delay before sending the request) under the options to each input passed to field `_sendHTTPRequests`.
+
+</div>
+
 
 
 
