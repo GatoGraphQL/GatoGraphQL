@@ -1,6 +1,6 @@
 # Updating large sets of data
 
-Sometimes we need to update thousands of resources from the DB. For instance, consider the following comment (from a WordPress community online group):
+Sometimes we need to update thousands of resources in a single action, as expressed in the following comment (posted on a community group about WordPress):
 
 > I find that for a lot of clients I'm working with large sets of data (10,000+ product variations for 1 product, or 13,000+ media files) ... inevitably the clients want to be able to bulk edit lots of things at once - like tag 2000 media files with the same tag.
 
