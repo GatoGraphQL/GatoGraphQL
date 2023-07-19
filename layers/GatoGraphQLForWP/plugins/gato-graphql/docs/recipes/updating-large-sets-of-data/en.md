@@ -76,9 +76,7 @@ Because the solution above involves bash scripting, it must be executed via the 
 
 We can replicate the same logic into the GraphQL query itself, thus allowing us to execute it already within WordPress (even already storing it as a GraphQL Persisted Query).
 
-The GraphQL query below executes itself recursively, with the goal of updating thousands of resources in stages, with each stage affecting a handful of resources only, as to not overload the system all at once.
-
-When first invoked, the GraphQL query divides the total number of resources to update into segments (calculated using the provided `$limit` variable), and executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time. Once all resources have been updated, the execution of the GraphQL query reaches the end:
+The GraphQL query below executes itself recursively. When first invoked, it divides the total number of resources to update into segments (calculated using the provided `$limit` variable), and executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time. Once all resources have been updated, the execution of the GraphQL query reaches the end and terminates:
 
 ```graphql
 query ExportExecute(
