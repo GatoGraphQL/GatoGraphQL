@@ -1,4 +1,4 @@
-# Splitting a big DB update via recursive queries
+# Updating large sets of data via recursive queries
 
 This GraphQL query is executed recursively. It automatically calculates the `$limit` and `$offset` variables and passes them to an execution of itself via a new HTTP request, to execute its logic on a subset of all resources. It stops once the GraphQL query logic has been applied on all resources:
 
