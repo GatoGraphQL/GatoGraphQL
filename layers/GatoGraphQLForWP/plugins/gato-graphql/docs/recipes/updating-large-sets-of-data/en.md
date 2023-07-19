@@ -376,38 +376,3 @@ The response is:
 We can let the DB breath between requests by providing property `delay` (which indicates how many milliseconds to delay before sending the request) under the options to each input passed to field `_sendHTTPRequests`.
 
 </div>
-
-
-
-
-In combination with extensions **HTTP Request via Schema** and **Field to Input**, we can retrieve the currently-requested URL when executing a GraphQL custom endpoint or persisted query, add extra parameters, and send another HTTP request to the new URL.
-
-For instance, in this query, we retrieve the IDs of the users in the website and execute a new GraphQL query passing their ID as parameter:
-
-```graphql
-{
-  users {
-    userID: id
-    url: _urlAddParams(
-      url: "https://somewebsite.com/endpoint/user-data",
-      params: {
-        userID: $__userID
-      }
-    )
-    headers: _httpRequestHeaders
-    headerNameValueEntryList: _objectConvertToNameValueEntryList(
-      object: $__headers
-    )
-    _sendHTTPRequest(input: {
-      url: $__url
-      options: {
-        headers: $__headerNameValueEntryList
-      }
-    }) {
-      statusCode
-      contentType
-      body
-    }
-  }
-}
-```
