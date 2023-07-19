@@ -560,6 +560,19 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             [
                 'updating-large-sets-of-data',
                 \__('Updating large sets of data', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'importing-a-post-from-another-site',
