@@ -544,6 +544,19 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'pinging-external-services',
+                \__('Pinging external services', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
+            ],
+            [
                 'updating-large-sets-of-data',
                 \__('Updating large sets of data', 'gato-graphql'),
             ],
