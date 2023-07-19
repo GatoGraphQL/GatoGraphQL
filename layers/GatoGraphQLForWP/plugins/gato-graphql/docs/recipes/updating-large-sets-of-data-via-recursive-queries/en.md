@@ -134,7 +134,9 @@ query ExecuteAll
 }
 ```
 
-## Step by step analysis of the solution
+Below is the step-by-step analysis of how this GraphQL works.
+
+## Updating thousands of resources in bulk
 
 Sometimes we need to execute an update that involves thousands of resources in the DB. For instance, consider the following comment (from a WordPress community online group):
 
