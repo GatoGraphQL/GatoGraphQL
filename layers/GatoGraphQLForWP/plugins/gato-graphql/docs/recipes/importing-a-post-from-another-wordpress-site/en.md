@@ -7,6 +7,8 @@ https://newapi.getpop.org/wp-json/wp/v2/categories?post=1178
 https://newapi.getpop.org/wp-json/wp/v2/tags?post=1178
 https://newapi.getpop.org/wp-json/wp/v2/users/7
 
+Mention that `featuredImageID` cannot be replicated yet
+
 Use:
 
 ```graphql
