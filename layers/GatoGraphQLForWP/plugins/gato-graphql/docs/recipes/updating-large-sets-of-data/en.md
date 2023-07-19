@@ -8,6 +8,14 @@ In this recipe we will explore several ways to tackle this task.
 
 ## Nested Mutations
 
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+
+</div>
+
 Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/), we can retrieve and update thousands of resources from the DB via a single GraphQL query:
 
 ```graphql
