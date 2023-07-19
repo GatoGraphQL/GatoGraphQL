@@ -46,24 +46,15 @@ In this query, we retrieve the IDs of the comments added in the last 24 hs and, 
 If the external service can receive the data for multiple resources, we can collect all of them, and then send a single ping:
 
 ```graphql
-query InitializeDynamicVariables
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
-{
-  commentIDs: _echo(value: [])
-    @export(as: "commentIDs")
-    @remove
-}
-
-query ExportData
-  @depends(on: "InitializeDynamicVariables")
-{
+query ExportData {
   timeNow: _time  
   time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
   date24HsAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time24HsAgo)
 
-  comments(filter: { dateQuery: { after: $__date24HsAgo } } ) {
+  comments(filter: { dateQuery: { after: $__date24HsAgo } } )
+    @export(as: "commentIDs")
+  {
     id
-      @export(as: "commentIDs", type: LIST)
   }
 
   hasComments: _notEmpty(value: $__comments)
