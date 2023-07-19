@@ -131,7 +131,7 @@ query CalculateVars($limit: Int! = 10)
   body: _httpRequestBody
   bodyJSONObject: _strDecodeJSONObject(string: $__body)
     @export(as: "bodyJSONObject")
-  bodyHasVariables: _propertyExistsInJSONObject(
+  bodyHasVariables: _propertyIsSetInJSONObject(
     object: $__bodyJSONObject,
     by: { key: "variables" }
   )
@@ -145,14 +145,15 @@ query GenerateVars
   bodyJSON: _echo(value: $bodyJSONObject)
     @unless(condition: $bodyHasVariables)
       @objectAddEntry(
-        object: $bodyJSONObject,
         key: "variables"
         value: {}
       )
     @export(as: "bodyJSON")
 }
 
-query GenerateRequestInputs
+query GenerateRequestInputs(
+  $timeout: Float
+)
   @depends(on: ["ExportExecute", "GenerateVars"])
   @skip(if: $executeQuery)
 {
@@ -181,6 +182,7 @@ query GenerateRequestInputs
             options: {
               headers: $headersInputList
               json: $itemJSON
+              timeout: $timeout
             }
           }
         },
@@ -189,11 +191,16 @@ query GenerateRequestInputs
     @export(as: "requestInputs")
 }
 
-query ExecuteURLs
+query ExecuteURLs(
+  $async: Boolean = true
+)
   @depends(on: ["ExportExecute", "GenerateRequestInputs"])
   @skip(if: $executeQuery)
 {
-  _sendHTTPRequests(inputs: $requestInputs) {
+  _sendHTTPRequests(
+    async: $async
+    inputs: $requestInputs
+  ) {
     statusCode
     contentType
     body
@@ -226,31 +233,42 @@ The response is:
 {
   "data": {
     "executeQuery": false,
-    "commentCount": 21,
-    "fractionalNumberExecutions": 2.1,
+    "commentCount": 23,
+    "fractionalNumberExecutions": 2.3,
     "numberExecutions": 3,
     "arrayOffsets": [
       0,
       10,
       20
     ],
-    "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
+    "url": "https://gato-graphql-pro.lndo.site/wp-admin/edit.php?page=gato_graphql&action=execute_query",
     "method": "POST",
     "headers": {
       "authorization": "",
       "host": "gato-graphql-pro.lndo.site",
-      "user-agent": "GuzzleHttp\/7",
-      "content-length": "3364",
-      "accept": "application\/json",
-      "content-type": "application\/json",
-      "cookie": "wordpress_test_cookie=WP%20Cookie%20check; wordpress_sec_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wordpress_logged_in_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wp-settings-time-1={REPLACED_FOR_TESTING}",
+      "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0",
+      "content-length": "3795",
+      "accept": "application/json",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en-US,en;q=0.5",
+      "content-type": "application/json",
+      "cookie": "wordpress_sec_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C5bf1851783f5f312d081f92a46c8be78acc2a2c851d110cdf42c6a2307d55e7f; wp-settings-time-1=1686559494; wp-settings-1=libraryContent%3Dbrowse; wordpress_test_cookie=WP%20Cookie%20check; wp_lang=en_US; wordpress_logged_in_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C3f2a6ead97858d262a148681014e890bd26f1f86d18bbc645fdc7894c6b70428",
+      "dnt": "1",
+      "origin": "https://gato-graphql-pro.lndo.site",
+      "referer": "https://gato-graphql-pro.lndo.site/",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin",
+      "sec-gpc": "1",
+      "te": "trailers",
       "x-forwarded-for": "172.19.0.1",
       "x-forwarded-host": "gato-graphql-pro.lndo.site",
       "x-forwarded-port": "443",
       "x-forwarded-proto": "https",
+      "x-forwarded-server": "6de0a38d2bbe",
       "x-lando": "on",
       "x-real-ip": "172.19.0.1",
-      "accept-encoding": "gzip"
+      "x-wp-nonce": "81d45b06d0"
     },
     "headersInputList": [
       {
@@ -263,23 +281,63 @@ The response is:
       },
       {
         "name": "user-agent",
-        "value": "GuzzleHttp\/7"
+        "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0"
       },
       {
         "name": "content-length",
-        "value": "3364"
+        "value": "3795"
       },
       {
         "name": "accept",
-        "value": "application\/json"
+        "value": "application/json"
+      },
+      {
+        "name": "accept-encoding",
+        "value": "gzip, deflate, br"
+      },
+      {
+        "name": "accept-language",
+        "value": "en-US,en;q=0.5"
       },
       {
         "name": "content-type",
-        "value": "application\/json"
+        "value": "application/json"
       },
       {
         "name": "cookie",
-        "value": "wordpress_test_cookie=WP%20Cookie%20check; wordpress_sec_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wordpress_logged_in_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wp-settings-time-1={REPLACED_FOR_TESTING}"
+        "value": "wordpress_sec_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C5bf1851783f5f312d081f92a46c8be78acc2a2c851d110cdf42c6a2307d55e7f; wp-settings-time-1=1686559494; wp-settings-1=libraryContent%3Dbrowse; wordpress_test_cookie=WP%20Cookie%20check; wp_lang=en_US; wordpress_logged_in_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C3f2a6ead97858d262a148681014e890bd26f1f86d18bbc645fdc7894c6b70428"
+      },
+      {
+        "name": "dnt",
+        "value": "1"
+      },
+      {
+        "name": "origin",
+        "value": "https://gato-graphql-pro.lndo.site"
+      },
+      {
+        "name": "referer",
+        "value": "https://gato-graphql-pro.lndo.site/"
+      },
+      {
+        "name": "sec-fetch-dest",
+        "value": "empty"
+      },
+      {
+        "name": "sec-fetch-mode",
+        "value": "cors"
+      },
+      {
+        "name": "sec-fetch-site",
+        "value": "same-origin"
+      },
+      {
+        "name": "sec-gpc",
+        "value": "1"
+      },
+      {
+        "name": "te",
+        "value": "trailers"
       },
       {
         "name": "x-forwarded-for",
@@ -298,6 +356,10 @@ The response is:
         "value": "https"
       },
       {
+        "name": "x-forwarded-server",
+        "value": "6de0a38d2bbe"
+      },
+      {
         "name": "x-lando",
         "value": "on"
       },
@@ -306,24 +368,25 @@ The response is:
         "value": "172.19.0.1"
       },
       {
-        "name": "accept-encoding",
-        "value": "gzip"
+        "name": "x-wp-nonce",
+        "value": "81d45b06d0"
       }
     ],
-    "body": "{\"operationName\":\"ExecuteAll\",\"query\":\"query ExportExecute(\\n  $offset: Int\\n) {\\n  executeQuery: _notNull(value: $offset)\\n    @export(as: \\\"executeQuery\\\")\\n}\\n\\nquery CalculateVars($limit: Int! = 10)\\n  @depends(on: \\\"ExportExecute\\\")\\n  @skip(if: $executeQuery)\\n{\\n  # Calculate the number of HTTP requests to be sent\\n  commentCount\\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\\n  \\n  # Generate a list of the offset\\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\\n    @underEachArrayItem(\\n      passIndexOnwardsAs: \\\"position\\\"\\n    )\\n      @applyField(\\n        name: \\\"_intMultiply\\\"\\n        arguments: {\\n          multiply: $position\\n          with: $limit\\n        }\\n        setResultInResponse: true\\n      )\\n    @export(as: \\\"offsets\\\")\\n\\n  # Vars needed to generate a list of the HTTP Request inputs\\n  url: _httpRequestFullURL\\n    @export(as: \\\"url\\\")\\n  method: _httpRequestMethod\\n    @export(as: \\\"method\\\")\\n  headers: _httpRequestHeaders\\n  headersInputList: _objectConvertToNameValueEntryList(\\n    object: $__headers\\n  )\\n    @export(as: \\\"headersInputList\\\")\\n  body: _httpRequestBody\\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\\n    @export(as: \\\"bodyJSONObject\\\")\\n  bodyHasVariables: _propertyExistsInJSONObject(\\n    object: $__bodyJSONObject,\\n    by: { key: \\\"variables\\\" }\\n  )\\n    @export(as: \\\"bodyHasVariables\\\")\\n}\\n\\nquery GenerateVars\\n  @depends(on: [\\\"ExportExecute\\\", \\\"CalculateVars\\\"])\\n  @skip(if: $executeQuery)\\n{\\n  bodyJSON: _echo(value: $bodyJSONObject)\\n    @unless(condition: $bodyHasVariables)\\n      @objectAddEntry(\\n        object: $bodyJSONObject,\\n        key: \\\"variables\\\"\\n        value: {}\\n      )\\n    @export(as: \\\"bodyJSON\\\")\\n}\\n\\nquery GenerateRequestInputs\\n  @depends(on: [\\\"ExportExecute\\\", \\\"GenerateVars\\\"])\\n  @skip(if: $executeQuery)\\n{\\n  # Generate a list of the HTTP Request inputs (without the offset)\\n  requestInputs: _echo(value: $offsets)\\n    @underEachArrayItem(\\n      passValueOnwardsAs: \\\"requestOffset\\\"\\n      affectDirectivesUnderPos: [1, 2]\\n    )\\n      @applyField(\\n        name: \\\"_objectAddEntry\\\",\\n        arguments: {\\n          object: $bodyJSON\\n          underPath: \\\"variables\\\"\\n          key: \\\"offset\\\"\\n          value: $requestOffset\\n        },\\n        passOnwardsAs: \\\"itemJSON\\\"\\n      )\\n      @applyField(\\n        name: \\\"_echo\\\",\\n        arguments: {\\n          value: {\\n            url: $url\\n            method: $method\\n            options: {\\n              headers: $headersInputList\\n              json: $itemJSON\\n            }\\n          }\\n        },\\n        setResultInResponse: true\\n      )\\n    @export(as: \\\"requestInputs\\\")\\n}\\n\\nquery ExecuteURLs\\n  @depends(on: [\\\"ExportExecute\\\", \\\"GenerateRequestInputs\\\"])\\n  @skip(if: $executeQuery)\\n{\\n  _sendHTTPRequests(inputs: $requestInputs) {\\n    statusCode\\n    contentType\\n    body\\n      @remove\\n    bodyJSON: _strDecodeJSONObject(string: $__body)\\n  }\\n}\\n\\nquery ExecuteQuery(\\n  $offset: Int\\n)\\n  @depends(on: \\\"ExportExecute\\\")\\n  @include(if: $executeQuery)\\n{\\n  message: _sprintf(string: \\\"Executed the query with $offset '%s'\\\", values: [$offset])\\n}\\n\\nquery ExecuteAll\\n  @depends(on: [\\\"ExecuteURLs\\\", \\\"ExecuteQuery\\\"])\\n{\\n}\"}",
+    "body": "{\"query\":\"# When first invoked, we do not pass variable `$offset`\\n# Then `$offset` is `null`, and dynamic variable `$executeQuery` will be `true`\\nquery ExportExecute(\\n  $offset: Int\\n) {\\n  executeQuery: _notNull(value: $offset)\\n    @export(as: \\\"executeQuery\\\")\\n}\\n\\n# Only calculate the segments on the first invocation of the GraphQL query\\nquery CalculateVars($limit: Int! = 10)\\n  @depends(on: \\\"ExportExecute\\\")\\n  @skip(if: $executeQuery)\\n{\\n  # Calculate the number of HTTP requests to be sent\\n  commentCount\\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\\n  \\n  # Generate a list of the offset\\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\\n    @underEachArrayItem(\\n      passIndexOnwardsAs: \\\"position\\\"\\n    )\\n      @applyField(\\n        name: \\\"_intMultiply\\\"\\n        arguments: {\\n          multiply: $position\\n          with: $limit\\n        }\\n        setResultInResponse: true\\n      )\\n    @export(as: \\\"offsets\\\")\\n\\n  # Vars needed to generate a list of the HTTP Request inputs\\n  url: _httpRequestFullURL\\n    @export(as: \\\"url\\\")\\n  method: _httpRequestMethod\\n    @export(as: \\\"method\\\")\\n  headers: _httpRequestHeaders\\n  headersInputList: _objectConvertToNameValueEntryList(\\n    object: $__headers\\n  )\\n    @export(as: \\\"headersInputList\\\")\\n  body: _httpRequestBody\\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\\n    @export(as: \\\"bodyJSONObject\\\")\\n  bodyHasVariables: _propertyIsSetInJSONObject(\\n    object: $__bodyJSONObject,\\n    by: { key: \\\"variables\\\" }\\n  )\\n    @export(as: \\\"bodyHasVariables\\\")\\n}\\n\\nquery GenerateVars\\n  @depends(on: [\\\"ExportExecute\\\", \\\"CalculateVars\\\"])\\n  @skip(if: $executeQuery)\\n{\\n  bodyJSON: _echo(value: $bodyJSONObject)\\n    @unless(condition: $bodyHasVariables)\\n      @objectAddEntry(\\n        key: \\\"variables\\\"\\n        value: {}\\n      )\\n    @export(as: \\\"bodyJSON\\\")\\n}\\n\\nquery GenerateRequestInputs(\\n  $timeout: Float\\n)\\n  @depends(on: [\\\"ExportExecute\\\", \\\"GenerateVars\\\"])\\n  @skip(if: $executeQuery)\\n{\\n  # Generate a list of the HTTP Request inputs (without the offset)\\n  requestInputs: _echo(value: $offsets)\\n    @underEachArrayItem(\\n      passValueOnwardsAs: \\\"requestOffset\\\"\\n      affectDirectivesUnderPos: [1, 2]\\n    )\\n      @applyField(\\n        name: \\\"_objectAddEntry\\\",\\n        arguments: {\\n          object: $bodyJSON\\n          underPath: \\\"variables\\\"\\n          key: \\\"offset\\\"\\n          value: $requestOffset\\n        },\\n        passOnwardsAs: \\\"itemJSON\\\"\\n      )\\n      @applyField(\\n        name: \\\"_echo\\\",\\n        arguments: {\\n          value: {\\n            url: $url\\n            method: $method\\n            options: {\\n              headers: $headersInputList\\n              json: $itemJSON\\n              timeout: $timeout\\n            }\\n          }\\n        },\\n        setResultInResponse: true\\n      )\\n    @export(as: \\\"requestInputs\\\")\\n}\\n\\nquery ExecuteURLs(\\n  $async: Boolean = true\\n)\\n  @depends(on: [\\\"ExportExecute\\\", \\\"GenerateRequestInputs\\\"])\\n  @skip(if: $executeQuery)\\n{\\n  _sendHTTPRequests(\\n    async: $async\\n    inputs: $requestInputs\\n  ) {\\n    statusCode\\n    contentType\\n    body\\n      @remove\\n    bodyJSON: _strDecodeJSONObject(string: $__body)\\n  }\\n}\\n\\n# This is the actual execution of the query.\\n# In this case, it simply prints a message\\nquery ExecuteQuery(\\n  $offset: Int\\n)\\n  @depends(on: \\\"ExportExecute\\\")\\n  @include(if: $executeQuery)\\n{\\n  message: _sprintf(string: \\\"Executed the query with $offset '%s'\\\", values: [$offset])\\n}\\n\\nquery ExecuteAll\\n  @depends(on: [\\\"ExecuteURLs\\\", \\\"ExecuteQuery\\\"])\\n{\\n  id\\n}\",\"variables\":null,\"operationName\":\"ExecuteAll\"}",
     "bodyJSONObject": {
-      "operationName": "ExecuteAll",
-      "query": "query ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyExistsInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        object: $bodyJSONObject,\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(inputs: $requestInputs) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n}"
+      "query": "# When first invoked, we do not pass variable `$offset`\n# Then `$offset` is `null`, and dynamic variable `$executeQuery` will be `true`\nquery ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\n# Only calculate the segments on the first invocation of the GraphQL query\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyIsSetInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs(\n  $timeout: Float\n)\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n              timeout: $timeout\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs(\n  $async: Boolean = true\n)\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(\n    async: $async\n    inputs: $requestInputs\n  ) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\n# This is the actual execution of the query.\n# In this case, it simply prints a message\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n  id\n}",
+      "variables": null,
+      "operationName": "ExecuteAll"
     },
     "bodyHasVariables": false,
     "bodyJSON": {
-      "operationName": "ExecuteAll",
-      "query": "query ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyExistsInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        object: $bodyJSONObject,\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(inputs: $requestInputs) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n}",
-      "variables": {}
+      "query": "# When first invoked, we do not pass variable `$offset`\n# Then `$offset` is `null`, and dynamic variable `$executeQuery` will be `true`\nquery ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\n# Only calculate the segments on the first invocation of the GraphQL query\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyIsSetInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs(\n  $timeout: Float\n)\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n              timeout: $timeout\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs(\n  $async: Boolean = true\n)\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(\n    async: $async\n    inputs: $requestInputs\n  ) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\n# This is the actual execution of the query.\n# In this case, it simply prints a message\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n  id\n}",
+      "variables": {},
+      "operationName": "ExecuteAll"
     },
     "requestInputs": [
       {
-        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
+        "url": "https://gato-graphql-pro.lndo.site/wp-admin/edit.php?page=gato_graphql&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -337,23 +400,63 @@ The response is:
             },
             {
               "name": "user-agent",
-              "value": "GuzzleHttp\/7"
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0"
             },
             {
               "name": "content-length",
-              "value": "3364"
+              "value": "3795"
             },
             {
               "name": "accept",
-              "value": "application\/json"
+              "value": "application/json"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.5"
             },
             {
               "name": "content-type",
-              "value": "application\/json"
+              "value": "application/json"
             },
             {
               "name": "cookie",
-              "value": "wordpress_test_cookie=WP%20Cookie%20check; wordpress_sec_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wordpress_logged_in_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wp-settings-time-1={REPLACED_FOR_TESTING}"
+              "value": "wordpress_sec_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C5bf1851783f5f312d081f92a46c8be78acc2a2c851d110cdf42c6a2307d55e7f; wp-settings-time-1=1686559494; wp-settings-1=libraryContent%3Dbrowse; wordpress_test_cookie=WP%20Cookie%20check; wp_lang=en_US; wordpress_logged_in_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C3f2a6ead97858d262a148681014e890bd26f1f86d18bbc645fdc7894c6b70428"
+            },
+            {
+              "name": "dnt",
+              "value": "1"
+            },
+            {
+              "name": "origin",
+              "value": "https://gato-graphql-pro.lndo.site"
+            },
+            {
+              "name": "referer",
+              "value": "https://gato-graphql-pro.lndo.site/"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-gpc",
+              "value": "1"
+            },
+            {
+              "name": "te",
+              "value": "trailers"
             },
             {
               "name": "x-forwarded-for",
@@ -372,6 +475,10 @@ The response is:
               "value": "https"
             },
             {
+              "name": "x-forwarded-server",
+              "value": "6de0a38d2bbe"
+            },
+            {
               "name": "x-lando",
               "value": "on"
             },
@@ -380,21 +487,22 @@ The response is:
               "value": "172.19.0.1"
             },
             {
-              "name": "accept-encoding",
-              "value": "gzip"
+              "name": "x-wp-nonce",
+              "value": "81d45b06d0"
             }
           ],
           "json": {
-            "operationName": "ExecuteAll",
-            "query": "query ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyExistsInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        object: $bodyJSONObject,\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(inputs: $requestInputs) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n}",
+            "query": "# When first invoked, we do not pass variable `$offset`\n# Then `$offset` is `null`, and dynamic variable `$executeQuery` will be `true`\nquery ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\n# Only calculate the segments on the first invocation of the GraphQL query\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyIsSetInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs(\n  $timeout: Float\n)\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n              timeout: $timeout\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs(\n  $async: Boolean = true\n)\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(\n    async: $async\n    inputs: $requestInputs\n  ) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\n# This is the actual execution of the query.\n# In this case, it simply prints a message\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n  id\n}",
             "variables": {
               "offset": 0
-            }
-          }
+            },
+            "operationName": "ExecuteAll"
+          },
+          "timeout": null
         }
       },
       {
-        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
+        "url": "https://gato-graphql-pro.lndo.site/wp-admin/edit.php?page=gato_graphql&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -408,23 +516,63 @@ The response is:
             },
             {
               "name": "user-agent",
-              "value": "GuzzleHttp\/7"
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0"
             },
             {
               "name": "content-length",
-              "value": "3364"
+              "value": "3795"
             },
             {
               "name": "accept",
-              "value": "application\/json"
+              "value": "application/json"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.5"
             },
             {
               "name": "content-type",
-              "value": "application\/json"
+              "value": "application/json"
             },
             {
               "name": "cookie",
-              "value": "wordpress_test_cookie=WP%20Cookie%20check; wordpress_sec_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wordpress_logged_in_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wp-settings-time-1={REPLACED_FOR_TESTING}"
+              "value": "wordpress_sec_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C5bf1851783f5f312d081f92a46c8be78acc2a2c851d110cdf42c6a2307d55e7f; wp-settings-time-1=1686559494; wp-settings-1=libraryContent%3Dbrowse; wordpress_test_cookie=WP%20Cookie%20check; wp_lang=en_US; wordpress_logged_in_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C3f2a6ead97858d262a148681014e890bd26f1f86d18bbc645fdc7894c6b70428"
+            },
+            {
+              "name": "dnt",
+              "value": "1"
+            },
+            {
+              "name": "origin",
+              "value": "https://gato-graphql-pro.lndo.site"
+            },
+            {
+              "name": "referer",
+              "value": "https://gato-graphql-pro.lndo.site/"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-gpc",
+              "value": "1"
+            },
+            {
+              "name": "te",
+              "value": "trailers"
             },
             {
               "name": "x-forwarded-for",
@@ -443,6 +591,10 @@ The response is:
               "value": "https"
             },
             {
+              "name": "x-forwarded-server",
+              "value": "6de0a38d2bbe"
+            },
+            {
               "name": "x-lando",
               "value": "on"
             },
@@ -451,21 +603,22 @@ The response is:
               "value": "172.19.0.1"
             },
             {
-              "name": "accept-encoding",
-              "value": "gzip"
+              "name": "x-wp-nonce",
+              "value": "81d45b06d0"
             }
           ],
           "json": {
-            "operationName": "ExecuteAll",
-            "query": "query ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyExistsInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        object: $bodyJSONObject,\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(inputs: $requestInputs) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n}",
+            "query": "# When first invoked, we do not pass variable `$offset`\n# Then `$offset` is `null`, and dynamic variable `$executeQuery` will be `true`\nquery ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\n# Only calculate the segments on the first invocation of the GraphQL query\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyIsSetInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs(\n  $timeout: Float\n)\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n              timeout: $timeout\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs(\n  $async: Boolean = true\n)\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(\n    async: $async\n    inputs: $requestInputs\n  ) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\n# This is the actual execution of the query.\n# In this case, it simply prints a message\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n  id\n}",
             "variables": {
               "offset": 10
-            }
-          }
+            },
+            "operationName": "ExecuteAll"
+          },
+          "timeout": null
         }
       },
       {
-        "url": "https:\/\/gato-graphql-pro.lndo.site\/wp-admin\/edit.php?page=gato_graphql&action=execute_query",
+        "url": "https://gato-graphql-pro.lndo.site/wp-admin/edit.php?page=gato_graphql&action=execute_query",
         "method": "POST",
         "options": {
           "headers": [
@@ -479,23 +632,63 @@ The response is:
             },
             {
               "name": "user-agent",
-              "value": "GuzzleHttp\/7"
+              "value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:109.0) Gecko/20100101 Firefox/115.0"
             },
             {
               "name": "content-length",
-              "value": "3364"
+              "value": "3795"
             },
             {
               "name": "accept",
-              "value": "application\/json"
+              "value": "application/json"
+            },
+            {
+              "name": "accept-encoding",
+              "value": "gzip, deflate, br"
+            },
+            {
+              "name": "accept-language",
+              "value": "en-US,en;q=0.5"
             },
             {
               "name": "content-type",
-              "value": "application\/json"
+              "value": "application/json"
             },
             {
               "name": "cookie",
-              "value": "wordpress_test_cookie=WP%20Cookie%20check; wordpress_sec_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wordpress_logged_in_{REPLACED_FOR_TESTING}={REPLACED_FOR_TESTING}; wp-settings-time-1={REPLACED_FOR_TESTING}"
+              "value": "wordpress_sec_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C5bf1851783f5f312d081f92a46c8be78acc2a2c851d110cdf42c6a2307d55e7f; wp-settings-time-1=1686559494; wp-settings-1=libraryContent%3Dbrowse; wordpress_test_cookie=WP%20Cookie%20check; wp_lang=en_US; wordpress_logged_in_f21902903273c44cc3a47d07e23af599=admin%7C1689929320%7C5PQgv3NbUjYFFBovx57njllDKhBac11RVALUBG5vPOA%7C3f2a6ead97858d262a148681014e890bd26f1f86d18bbc645fdc7894c6b70428"
+            },
+            {
+              "name": "dnt",
+              "value": "1"
+            },
+            {
+              "name": "origin",
+              "value": "https://gato-graphql-pro.lndo.site"
+            },
+            {
+              "name": "referer",
+              "value": "https://gato-graphql-pro.lndo.site/"
+            },
+            {
+              "name": "sec-fetch-dest",
+              "value": "empty"
+            },
+            {
+              "name": "sec-fetch-mode",
+              "value": "cors"
+            },
+            {
+              "name": "sec-fetch-site",
+              "value": "same-origin"
+            },
+            {
+              "name": "sec-gpc",
+              "value": "1"
+            },
+            {
+              "name": "te",
+              "value": "trailers"
             },
             {
               "name": "x-forwarded-for",
@@ -514,6 +707,10 @@ The response is:
               "value": "https"
             },
             {
+              "name": "x-forwarded-server",
+              "value": "6de0a38d2bbe"
+            },
+            {
               "name": "x-lando",
               "value": "on"
             },
@@ -522,52 +719,57 @@ The response is:
               "value": "172.19.0.1"
             },
             {
-              "name": "accept-encoding",
-              "value": "gzip"
+              "name": "x-wp-nonce",
+              "value": "81d45b06d0"
             }
           ],
           "json": {
-            "operationName": "ExecuteAll",
-            "query": "query ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyExistsInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        object: $bodyJSONObject,\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(inputs: $requestInputs) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n}",
+            "query": "# When first invoked, we do not pass variable `$offset`\n# Then `$offset` is `null`, and dynamic variable `$executeQuery` will be `true`\nquery ExportExecute(\n  $offset: Int\n) {\n  executeQuery: _notNull(value: $offset)\n    @export(as: \"executeQuery\")\n}\n\n# Only calculate the segments on the first invocation of the GraphQL query\nquery CalculateVars($limit: Int! = 10)\n  @depends(on: \"ExportExecute\")\n  @skip(if: $executeQuery)\n{\n  # Calculate the number of HTTP requests to be sent\n  commentCount\n  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)\n  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)\n  \n  # Generate a list of the offset\n  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)\n    @underEachArrayItem(\n      passIndexOnwardsAs: \"position\"\n    )\n      @applyField(\n        name: \"_intMultiply\"\n        arguments: {\n          multiply: $position\n          with: $limit\n        }\n        setResultInResponse: true\n      )\n    @export(as: \"offsets\")\n\n  # Vars needed to generate a list of the HTTP Request inputs\n  url: _httpRequestFullURL\n    @export(as: \"url\")\n  method: _httpRequestMethod\n    @export(as: \"method\")\n  headers: _httpRequestHeaders\n  headersInputList: _objectConvertToNameValueEntryList(\n    object: $__headers\n  )\n    @export(as: \"headersInputList\")\n  body: _httpRequestBody\n  bodyJSONObject: _strDecodeJSONObject(string: $__body)\n    @export(as: \"bodyJSONObject\")\n  bodyHasVariables: _propertyIsSetInJSONObject(\n    object: $__bodyJSONObject,\n    by: { key: \"variables\" }\n  )\n    @export(as: \"bodyHasVariables\")\n}\n\nquery GenerateVars\n  @depends(on: [\"ExportExecute\", \"CalculateVars\"])\n  @skip(if: $executeQuery)\n{\n  bodyJSON: _echo(value: $bodyJSONObject)\n    @unless(condition: $bodyHasVariables)\n      @objectAddEntry(\n        key: \"variables\"\n        value: {}\n      )\n    @export(as: \"bodyJSON\")\n}\n\nquery GenerateRequestInputs(\n  $timeout: Float\n)\n  @depends(on: [\"ExportExecute\", \"GenerateVars\"])\n  @skip(if: $executeQuery)\n{\n  # Generate a list of the HTTP Request inputs (without the offset)\n  requestInputs: _echo(value: $offsets)\n    @underEachArrayItem(\n      passValueOnwardsAs: \"requestOffset\"\n      affectDirectivesUnderPos: [1, 2]\n    )\n      @applyField(\n        name: \"_objectAddEntry\",\n        arguments: {\n          object: $bodyJSON\n          underPath: \"variables\"\n          key: \"offset\"\n          value: $requestOffset\n        },\n        passOnwardsAs: \"itemJSON\"\n      )\n      @applyField(\n        name: \"_echo\",\n        arguments: {\n          value: {\n            url: $url\n            method: $method\n            options: {\n              headers: $headersInputList\n              json: $itemJSON\n              timeout: $timeout\n            }\n          }\n        },\n        setResultInResponse: true\n      )\n    @export(as: \"requestInputs\")\n}\n\nquery ExecuteURLs(\n  $async: Boolean = true\n)\n  @depends(on: [\"ExportExecute\", \"GenerateRequestInputs\"])\n  @skip(if: $executeQuery)\n{\n  _sendHTTPRequests(\n    async: $async\n    inputs: $requestInputs\n  ) {\n    statusCode\n    contentType\n    body\n      @remove\n    bodyJSON: _strDecodeJSONObject(string: $__body)\n  }\n}\n\n# This is the actual execution of the query.\n# In this case, it simply prints a message\nquery ExecuteQuery(\n  $offset: Int\n)\n  @depends(on: \"ExportExecute\")\n  @include(if: $executeQuery)\n{\n  message: _sprintf(string: \"Executed the query with $offset '%s'\", values: [$offset])\n}\n\nquery ExecuteAll\n  @depends(on: [\"ExecuteURLs\", \"ExecuteQuery\"])\n{\n  id\n}",
             "variables": {
               "offset": 20
-            }
-          }
+            },
+            "operationName": "ExecuteAll"
+          },
+          "timeout": null
         }
       }
     ],
     "_sendHTTPRequests": [
       {
         "statusCode": 200,
-        "contentType": "application\/json",
+        "contentType": "application/json",
         "bodyJSON": {
           "data": {
             "executeQuery": true,
-            "message": "Executed the query with $offset '0'"
+            "message": "Executed the query with $offset '0'",
+            "id": "root"
           }
         }
       },
       {
         "statusCode": 200,
-        "contentType": "application\/json",
+        "contentType": "application/json",
         "bodyJSON": {
           "data": {
             "executeQuery": true,
-            "message": "Executed the query with $offset '10'"
+            "message": "Executed the query with $offset '10'",
+            "id": "root"
           }
         }
       },
       {
         "statusCode": 200,
-        "contentType": "application\/json",
+        "contentType": "application/json",
         "bodyJSON": {
           "data": {
             "executeQuery": true,
-            "message": "Executed the query with $offset '20'"
+            "message": "Executed the query with $offset '20'",
+            "id": "root"
           }
         }
       }
-    ]
+    ],
+    "id": "root"
   }
 }
 ```
