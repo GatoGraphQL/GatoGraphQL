@@ -118,7 +118,8 @@ query CalculateVars($limit: Int! = 10)
       )
     @export(as: "offsets")
 
-  # Vars needed to generate a list of the HTTP Request inputs
+  # Vars needed to generate a list of the HTTP Request inputs,
+  # with many of them retrieved from the current HTTP request data
   url: _httpRequestFullURL
     @export(as: "url")
   method: _httpRequestMethod
@@ -151,6 +152,7 @@ query GenerateVars
     @export(as: "bodyJSON")
 }
 
+# Generate all the HTTPRequestInput objects to send each of the HTTP requests
 query GenerateRequestInputs(
   $timeout: Float
 )
@@ -191,6 +193,7 @@ query GenerateRequestInputs(
     @export(as: "requestInputs")
 }
 
+# Execute all the generated URLs, either asynchronously or not
 query ExecuteURLs(
   $async: Boolean = true
 )
