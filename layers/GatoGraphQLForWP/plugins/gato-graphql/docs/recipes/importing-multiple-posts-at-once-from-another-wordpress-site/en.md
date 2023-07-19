@@ -1,14 +1,125 @@
 # Importing multiple posts at once from another WordPress site
 
-from FB, Twitter, Instagram, Medium or other.
+Use:
 
-Must use Payloadable => false (explain why)
-Explain it's a hack
-Benefit: no need to change the schema:
-    createPost enough
-    no need for createPosts (and createUsers, addComments, etc)
-Mention we will need some new Custom Endpoint just to enable this
-    It's so awesome to have custom endpoints!!!
+```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  postInput: _echo(value: [])
+    @export(as: "postInput")
+    @remove
+}
+
+query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
+  @depends(on: "InitializeDynamicVariables")
+{
+  postsToDuplicate: posts(
+    pagination: {
+      limit : $limit
+      offset: $offset
+    }
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    contentSource
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
+
+    # Already create (and export) the inputs for the mutation
+    postInput: _echo(value: {
+      status: draft,
+      authorID: $__author,
+      categoryIDs: $__categories,
+      contentAs: {
+        html: $__contentSource
+      },
+      excerpt: $__excerpt
+      featuredImageID: $__featuredImage,
+      tagsBy: {
+        ids: $__tags
+      },
+      title: $__title
+    })
+      @export(as: "postInput", type: LIST)
+      @remove
+  }
+}
+
+mutation DuplicatePosts
+  @depends(on: "GetPostsAndExportData")
+{
+  createdPostIDs: _echo(value: $postInput)
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      @applyField(
+        name: "createPost"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPostIDs")
+}
+
+query RetrieveCreatedPosts
+  @depends(on: "DuplicatePosts")
+{
+  createdPosts: posts(
+    filter: {
+      ids: $createdPostIDs,
+      status: [draft]
+    }
+  ) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    contentSource
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
+  }
+}
+```
+
+Before:
 
 ```graphql
 query CreatePostInputs {

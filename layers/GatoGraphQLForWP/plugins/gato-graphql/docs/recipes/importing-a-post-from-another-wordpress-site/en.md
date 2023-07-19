@@ -1,8 +1,110 @@
 # Importing a post from another WordPress site
 
-from FB, Twitter, Instagram, Medium or other.
+Use:
 
-Modify this query! (it's for multiple entries)
+```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  authorID: _echo(value: null)
+    @export(as: "authorID")
+    @remove
+
+  categoryIDs: _echo(value: [])
+    @export(as: "categoryIDs")
+    @remove
+
+  featuredImageID: _echo(value: null)
+    @export(as: "featuredImageID")
+    @remove
+
+  tagIDs: _echo(value: [])
+    @export(as: "tagIDs")
+    @remove
+}
+
+query GetPostAndExportData($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  post(by: { id : $postId }) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id @export(as: "authorID")
+    }
+    categories {
+      id @export(as: "categoryIDs", type: LIST)
+    }
+    contentSource @export(as: "contentSource")
+    excerpt @export(as: "excerpt")
+    featuredImage {
+      id @export(as: "featuredImageID")
+    }
+    tags {
+      id @export(as: "tagIDs", type: LIST)
+    }
+    title @export(as: "title")
+  }
+}
+
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
+{
+  createPost(input: {
+    status: draft,
+    authorID: $authorID,
+    categoryIDs: $categoryIDs,
+    contentAs: {
+      html: $contentSource
+    },
+    excerpt: $excerpt
+    featuredImageID: $featuredImageID,
+    tagsBy: {
+      ids: $tagIDs
+    },
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
+
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      contentSource
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
+    }
+  }
+}
+```
+
+Before:
 
 ```graphql
 query CreatePostInputs {
