@@ -1,4 +1,4 @@
-# Importing a post from another site
+# Importing a post from another WordPress site
 
 from FB, Twitter, Instagram, Medium or other.
 

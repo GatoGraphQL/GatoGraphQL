@@ -1,4 +1,4 @@
-# Importing multiple posts at once from another site
+# Importing multiple posts at once from another WordPress site
 
 from FB, Twitter, Instagram, Medium or other.
 
