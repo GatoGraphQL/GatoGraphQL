@@ -544,8 +544,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'updating-large-sets-of-data-via-recursive-queries',
-                \__('Updating large sets of data via recursive queries', 'gato-graphql'),
+                'updating-large-sets-of-data',
+                \__('Updating large sets of data', 'gato-graphql'),
             ],
             [
                 'importing-a-post-from-another-site',

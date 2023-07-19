@@ -1,4 +1,4 @@
-# Updating large sets of data via recursive queries
+# Updating large sets of data
 
 The GraphQL query below executes itself recursively, with the goal of updating thousands of resources in stages, with each stage affecting a handful of resources only, as to not overload the system all at once.
 
