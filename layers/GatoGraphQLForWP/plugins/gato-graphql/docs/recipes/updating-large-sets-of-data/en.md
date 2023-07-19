@@ -1,150 +1,14 @@
 # Updating large sets of data
 
-The GraphQL query below executes itself recursively, with the goal of updating thousands of resources in stages, with each stage affecting a handful of resources only, as to not overload the system all at once.
-
-When first invoked, the GraphQL query divides the total number of resources to update into segments (calculated using the provided `$limit` variable), and executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time. Once all resources have been updated, the execution of the GraphQL query reaches the end:
-
-```graphql
-query ExportExecute(
-  $offset: Int
-) {
-  executeQuery: _notNull(value: $offset)
-    @export(as: "executeQuery")
-}
-
-query CalculateVars($limit: Int! = 10)
-  @depends(on: "ExportExecute")
-  @skip(if: $executeQuery)
-{
-  # Calculate the number of HTTP requests to be sent
-  commentCount
-  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)
-  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)
-  
-  # Generate a list of the offset
-  arrayOffsets: _arrayPad(array: [], length: $__numberExecutions, value: null)
-    @underEachArrayItem(
-      passIndexOnwardsAs: "position"
-    )
-      @applyField(
-        name: "_intMultiply"
-        arguments: {
-          multiply: $position
-          with: $limit
-        }
-        setResultInResponse: true
-      )
-    @export(as: "offsets")
-
-  # Vars needed to generate a list of the HTTP Request inputs
-  url: _httpRequestFullURL
-    @export(as: "url")
-  method: _httpRequestMethod
-    @export(as: "method")
-  headers: _httpRequestHeaders
-  headersInputList: _objectConvertToNameValueEntryList(
-    object: $__headers
-  )
-    @export(as: "headersInputList")
-  body: _httpRequestBody
-  bodyJSONObject: _strDecodeJSONObject(string: $__body)
-    @export(as: "bodyJSONObject")
-  bodyHasVariables: _propertyExistsInJSONObject(
-    object: $__bodyJSONObject,
-    by: { key: "variables" }
-  )
-    @export(as: "bodyHasVariables")
-}
-
-query GenerateVars
-  @depends(on: ["ExportExecute", "CalculateVars"])
-  @skip(if: $executeQuery)
-{
-  bodyJSON: _echo(value: $bodyJSONObject)
-    @unless(condition: $bodyHasVariables)
-      @objectAddEntry(
-        object: $bodyJSONObject,
-        key: "variables"
-        value: {}
-      )
-    @export(as: "bodyJSON")
-}
-
-query GenerateRequestInputs
-  @depends(on: ["ExportExecute", "GenerateVars"])
-  @skip(if: $executeQuery)
-{
-  # Generate a list of the HTTP Request inputs (without the offset)
-  requestInputs: _echo(value: $offsets)
-    @underEachArrayItem(
-      passValueOnwardsAs: "requestOffset"
-      affectDirectivesUnderPos: [1, 2]
-    )
-      @applyField(
-        name: "_objectAddEntry",
-        arguments: {
-          object: $bodyJSON
-          underPath: "variables"
-          key: "offset"
-          value: $requestOffset
-        },
-        passOnwardsAs: "itemJSON"
-      )
-      @applyField(
-        name: "_echo",
-        arguments: {
-          value: {
-            url: $url
-            method: $method
-            options: {
-              headers: $headersInputList
-              json: $itemJSON
-            }
-          }
-        },
-        setResultInResponse: true
-      )
-    @export(as: "requestInputs")
-}
-
-query ExecuteURLs
-  @depends(on: ["ExportExecute", "GenerateRequestInputs"])
-  @skip(if: $executeQuery)
-{
-  _sendHTTPRequests(inputs: $requestInputs) {
-    statusCode
-    contentType
-    body
-      @remove
-    bodyJSON: _strDecodeJSONObject(string: $__body)
-  }
-}
-
-query ExecuteQuery(
-  $offset: Int
-)
-  @depends(on: "ExportExecute")
-  @include(if: $executeQuery)
-{
-  message: _sprintf(string: "Executed the query with $offset '%s'", values: [$offset])
-}
-
-query ExecuteAll
-  @depends(on: ["ExecuteURLs", "ExecuteQuery"])
-{
-  id
-}
-```
-
-Below is the step-by-step analysis of how this GraphQL works.
-
-## Updating thousands of resources in bulk
-
-Sometimes we need to execute an update that involves thousands of resources in the DB. For instance, consider the following comment (from a WordPress community online group):
+Sometimes we need to update thousands of resources from the DB. For instance, consider the following comment (from a WordPress community online group):
 
 > I find that for a lot of clients I'm working with large sets of data (10,000+ product variations for 1 product, or 13,000+ media files) ... inevitably the clients want to be able to bulk edit lots of things at once - like tag 2000 media files with the same tag.
 
-Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/), Gato GraphQL supports retrieving and updating thousands of resources from the DB via a single GraphQL query:
+In this recipe we will explore several ways to tackle this task.
+
+## Nested Mutations
+
+Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/), we can retrieve and update thousands of resources from the DB via a single GraphQL query:
 
 ```graphql
 mutation ReplaceOldWithNewDomainInPosts {
@@ -208,13 +72,13 @@ for PAGINATION_NUMBER in $(seq 0 $(($PAGINATION_COUNT - 1))); do sleep 1 && echo
 
 ## Executing the GraphQL query recursively
 
-The solution above involves bash scripting. Would it be possible to have that same logic already performed within the GraphQL query itself?
+Because the solution above involves bash scripting, it must be executed via the CLI (or some admin panel or tool), limiting its use.
 
-If executing a single GraphQL query affecting thousands of resources makes the system crash, we can adapt the query to execute itself recursively, affecting a handful of resources each time, until all resources have been updated.
+We can replicate the same logic into the GraphQL query itself, thus allowing us to execute it already within WordPress (even already storing it as a GraphQL Persisted Query).
 
-We can then split the 
+The GraphQL query below executes itself recursively, with the goal of updating thousands of resources in stages, with each stage affecting a handful of resources only, as to not overload the system all at once.
 
-Use query:
+When first invoked, the GraphQL query divides the total number of resources to update into segments (calculated using the provided `$limit` variable), and executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time. Once all resources have been updated, the execution of the GraphQL query reaches the end:
 
 ```graphql
 query ExportExecute(
