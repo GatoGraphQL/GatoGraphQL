@@ -1,5 +1,7 @@
 # Importing a post from another WordPress site
 
+Use: https://newapi.getpop.org/wp-json/wp/v2/posts/1/
+
 Use:
 
 ```graphql

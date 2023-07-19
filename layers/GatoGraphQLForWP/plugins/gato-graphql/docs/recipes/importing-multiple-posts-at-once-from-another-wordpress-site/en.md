@@ -1,5 +1,7 @@
 # Importing multiple posts at once from another WordPress site
 
+Use: https://newapi.getpop.org/wp-json/wp/v2/posts/
+
 Use:
 
 ```graphql
