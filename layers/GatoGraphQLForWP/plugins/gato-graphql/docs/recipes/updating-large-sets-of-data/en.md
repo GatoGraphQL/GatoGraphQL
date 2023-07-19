@@ -76,9 +76,16 @@ Because the solution above involves bash scripting, it must be executed via the 
 
 We can replicate the same logic into the GraphQL query itself, thus allowing us to execute it already within WordPress (even already storing it as a GraphQL Persisted Query).
 
-The GraphQL query below executes itself recursively. When first invoked, it divides the total number of resources to update into segments (calculated using the provided `$limit` variable), and executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time. Once all resources have been updated, the execution of the GraphQL query reaches the end and terminates:
+The GraphQL query below executes itself recursively. When first invoked, it:
+
+- Divides the total number of resources to update into segments (calculated using the provided `$limit` variable)
+- Executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time
+
+Once all resources have been updated, the execution of the GraphQL query reaches the end and terminates:
 
 ```graphql
+# When first invoked, we do not pass variable `$offset`
+# Then `$offset` is `null`, and dynamic variable `$executeQuery` will be `true`
 query ExportExecute(
   $offset: Int
 ) {
@@ -86,6 +93,7 @@ query ExportExecute(
     @export(as: "executeQuery")
 }
 
+# Only calculate the segments on the first invocation of the GraphQL query
 query CalculateVars($limit: Int! = 10)
   @depends(on: "ExportExecute")
   @skip(if: $executeQuery)
@@ -194,6 +202,8 @@ query ExecuteURLs
   }
 }
 
+# This is the actual execution of the query.
+# In this case, it simply prints a message
 query ExecuteQuery(
   $offset: Int
 )
@@ -206,6 +216,7 @@ query ExecuteQuery(
 query ExecuteAll
   @depends(on: ["ExecuteURLs", "ExecuteQuery"])
 {
+  id
 }
 ```
 
@@ -560,6 +571,9 @@ The response is:
   }
 }
 ```
+
+
+
 
 Check timeout/async combinations in recursive-and-iterative-query-with-http-request.gql
 
