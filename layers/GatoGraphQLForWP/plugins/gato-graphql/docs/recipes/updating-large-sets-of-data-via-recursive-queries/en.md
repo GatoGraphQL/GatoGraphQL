@@ -1,6 +1,8 @@
 # Updating large sets of data via recursive queries
 
-The GraphQL query below executes itself recursively. When first invoked, it divides the total number of resources to update into segments (calculated using the provided `$limit` variable), and executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time. Once all resources have been updated, the execution of the GraphQL query reaches the end.
+The GraphQL query below executes itself recursively, with the goal of executing a single GraphQL query in stages, each stage affecting a handful of resources only, as to not overload the system all at once.
+
+When first invoked, the GraphQL query divides the total number of resources to update into segments (calculated using the provided `$limit` variable), and executes itself via a new HTTP request for each of the segments (passing over the corresponding `$offset` as a variable), thus updating only a subset of all resources at a given time. Once all resources have been updated, the execution of the GraphQL query reaches the end.
 
 ```graphql
 query ExportExecute(
@@ -146,7 +148,7 @@ Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-
 
 ```graphql
 mutation ReplaceOldWithNewDomainInPosts {
-  posts(pagination: { limit: 3000 }) {
+  posts(pagination: { limit: 30000 }) {
     id
     contentSource
     adaptedContentSource: _strReplace(
@@ -169,7 +171,9 @@ mutation ReplaceOldWithNewDomainInPosts {
 }
 ```
 
-However, depending on the resilience of the system, this single GraphQL execution might put too much load on the DB.
+However, depending on the resilience of the system, this single GraphQL execution might put too much load on the DB, even making it crash.
+
+
 
 We can then split the 
 
