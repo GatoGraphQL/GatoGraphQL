@@ -380,225 +380,7 @@ We can let the DB breath between requests by providing property `delay` (which i
 
 
 
-Check timeout/async combinations in recursive-and-iterative-query-with-http-request.gql
-
-
-
-Develop also the case of using field `_sendMultipleHTTPRequests` with both async true and false, and only then explain the recursive solution from below.
-
-Recursive solution:
-
-```graphql
-mutation UpdatePosts(
-  $limit: Int! = 10,
-  $offset: Int! = 0,
-  $authorID: ID!
-) {
-  posts(pagination: {
-    limit: $limit,
-    offset: $offset,
-  })
-    @export(as: "postIDs")
-  {
-    update(input: {
-      authorID: $authorID,
-    }) {
-      status
-    }
-  }
-}
-
-query CalculateReachedEnd
-  @depends(on: "UpdatePosts")
-{
-  reachedEnd: _empty(value: $postIDs) @export(as: "reachedEnd")
-}
-
-mutation TriggerRecursion
-  @depends(on: "CalculateReachedEnd")
-  @skip(if: $reachedEnd)
-{
-  nextOffset: _intAdd(add: $limit, to: $offset)
-  # Only available in Persisted Queries.
-  # Mode will always be asynchronous.
-  # Executed in endpoint will throw an error.
-  _recursivelyExecutePersistedQuery(
-    # This value is implicit
-    # persistedQueryID: null,
-    overridingVariables: {
-      offset: $__nextOffset
-    }
-  )
-}
-```
-
-Advanced:
-
-(As there is no `_sendEmail` mutation yet, comment out this code, and re-add it once the mutation is supported)
-
-```graphql
-mutation UpdatePosts(
-  $limit: Int! = 10,
-  $offset: Int! = 0,
-  $authorID: ID!
-) {
-  posts(pagination: {
-    limit: $limit,
-    offset: $offset,
-  })
-    @export(as: "postIDs")
-  {
-    update(input: {
-      authorID: $authorID,
-    }) {
-      status
-    }
-  }
-}
-
-query CalculateReachedEnd
-  @depends(on: "UpdatePosts")
-{
-  reachedEnd: _empty(value: $postIDs) @export(as: "reachedEnd")
-}
-
-mutation TriggerRecursion
-  @depends(on: "CalculateReachedEnd")
-  @skip(if: $reachedEnd)
-{
-  nextOffset: _intAdd(add: $limit, to: $offset)
-  # Only available in Persisted Queries.
-  # Mode will always be asynchronous.
-  # Executed in endpoint will throw an error.
-  _recursivelyExecutePersistedQuery(
-    # This value is implicit
-    # persistedQueryID: null,
-    overridingVariables: {
-      offset: $__nextOffset
-    }
-  )
-}
-
-mutation SendAdminEmail
-  @depends(on: "CalculateReachedEnd")
-  @include(if: $reachedEnd)
-{
-  _sendEmail(body: "done")
-}
-
-query Execute
-  @depends(on: ["TriggerRecursion", "SendAdminEmail"])
-{
-  _echo(value: "Success!")
-}
-```
-
-Iterative solution:
-
-```graphql
-query CalculateVars($limit:Int! = 10) {
-  commentCount
-  fractionalNumberExecutions: _floatDivide(number: $__commentCount, by: $limit)
-    @remove
-  numberExecutions: _floatCeil(number: $__fractionalNumberExecutions)
-    @export(as:"numberExecutions")
-  placeholderArray: _arrayPad(array: [], length: $__numberExecutions, value: "")
-    @remove
-  arrayPositions: _arrayKeys(array: $__placeholderArray)
-    @remove
-  arrayOffsets: _echo(value: $__arrayPositions)
-    @underEachArrayItem(passValueOnwardsAs: "position")
-      @intMultiply(with:$limit)
-    @export(as:"offsets")
-    @remove
-}
-
-query CalculateURLs($limit:Int! = 10)
-  @depends(on:"CalculateVars")
-{
-  urls: _echo(value: $offsets)
-    @underEachArrayItem(passValueOnwardsAs: "offset")
-      @applyField(
-        name: "_sprintf",
-        arguments: {
-          string: "https://gato-graphql-pro.lndo.site/wp-admin/admin.php?page=gato_graphql&query={posts(pagination:{limit:%s,offset:%s}){id}}"
-          values: [$limit, $offset]
-        },
-        setResultInResponse:true
-      )
-    @export(as: "urls")
-}
-
-query CalculateURLInputs
-  @depends(on:"CalculateURLs")
-{
-  urlInputs: _echo(value: $urls)
-    @underEachArrayItem(passValueOnwardsAs: "url")
-      @applyField(
-        name: "_objectAddEntry",
-        arguments: {
-          object: {}
-          key: "url"
-          value: $url
-        },
-        setResultInResponse:true
-      )
-    @export(as: "urlInputs")
-}
-
-query ExecuteURLs
-  @depends(on:"CalculateURLInputs")
-{
-  _sendHTTPRequests(inputs: $urlInputs) {
-    statusCode
-    body
-  }
-}
-```
-
-Use "timeout" to execute query, but don't wait for the response
-  Indicate it will produce an error though
-
-Use "delay" for sleep!!!
-
-```graphql
-{
-  _sendHTTPRequests(
-    async:false,
-    inputs:[
-      {
-        url: "https://newapi.getpop.org/wp-json/wp/v2/users/1/?_fields=id,name,url"
-        options:{
-          # 2 seconds (2000 milliseconds)
-          delay: 2000
-        }
-      },
-      {
-        url: "https://newapi.getpop.org/wp-json/wp/v2/users/2/?_fields=id,name,url"
-        options:{
-          # 2 seconds (2000 milliseconds)
-          delay: 2000
-        }
-      }
-    ]
-  ) {
-    statusCode
-    body
-  }
-}
-```
-
-Also handle errors in any of the iterations. Eg: using @fail
-  Or keep for another guide!?
-
-
-
-
-
-
-Maybe use part of this code:
-
-In combination with extensions **HTTP Request via Schema** and [**Field to Input**](https://gatographql.com/extensions/field-to-input/), we can retrieve the currently-requested URL when executing a GraphQL custom endpoint or persisted query, add extra parameters, and send another HTTP request to the new URL.
+In combination with extensions **HTTP Request via Schema** and **Field to Input**, we can retrieve the currently-requested URL when executing a GraphQL custom endpoint or persisted query, add extra parameters, and send another HTTP request to the new URL.
 
 For instance, in this query, we retrieve the IDs of the users in the website and execute a new GraphQL query passing their ID as parameter:
 
@@ -606,26 +388,22 @@ For instance, in this query, we retrieve the IDs of the users in the website and
 {
   users {
     userID: id
-    url: _httpRequestFullURL
-    method: _httpRequestMethod
-    headers: _httpRequestHeaders
-    body: _httpRequestBody
-    newURL: _urlAddParams(
-      url: $__url,
+    url: _urlAddParams(
+      url: "https://somewebsite.com/endpoint/user-data",
       params: {
         userID: $__userID
       }
     )
-    _sendHTTPRequest(
-      input: {
-        url: $__newURL,
-        method: $__method,
-        options: {
-          headers: $__headers
-          body: $__body
-        }
+    headers: _httpRequestHeaders
+    headerNameValueEntryList: _objectConvertToNameValueEntryList(
+      object: $__headers
+    )
+    _sendHTTPRequest(input: {
+      url: $__url
+      options: {
+        headers: $__headerNameValueEntryList
       }
-    ) {
+    }) {
       statusCode
       contentType
       body

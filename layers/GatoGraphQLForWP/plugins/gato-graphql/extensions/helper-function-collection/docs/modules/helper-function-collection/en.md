@@ -216,7 +216,7 @@ For instance, in this query, we retrieve the IDs of the users in the website and
   users {
     userID: id
     url: _urlAddParams(
-      url: "https://somewebsite/endpoint/user-data",
+      url: "https://somewebsite.com/endpoint/user-data",
       params: {
         userID: $__userID
       }
