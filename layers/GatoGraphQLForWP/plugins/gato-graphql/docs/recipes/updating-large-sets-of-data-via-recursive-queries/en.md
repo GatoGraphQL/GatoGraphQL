@@ -171,9 +171,44 @@ mutation ReplaceOldWithNewDomainInPosts {
 }
 ```
 
-However, depending on the resilience of the system, this single GraphQL execution might put too much load on the DB, even making it crash.
+Depending on the resilience of the system, though, this single GraphQL execution might put too much load on the DB, even making it crash.
 
+## Paginating the execution of the GraphQL query
 
+If updating thousands of resources at once makes the system crash, the solution is simple: Instead of executing the GraphQL just once for thousands of resources, we can execute it hundreds of times for dozens of resources each time.
+
+The following bash scripts first finds out the total number of comments via `commentCount`, then calculates the segments considering env var `$ENTRIES_TO_PROCESS`, and calculates the pagination parameters and calls the GraphQL query for each segment (simply retrieving the comments from that segment):
+
+```bash
+# Get the number of comments in the site
+GRAPHQL_RESPONSE=$(curl
+  -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"query": "{\n  commentCount\n}"}' \
+  https://mysite.com/graphql/)
+
+# Extract the number of comments into a variable
+COMMENT_COUNT=$(echo $GRAPHQL_RESPONSE \
+  | grep -E -o '"commentCount\":([0-9]+)' \
+  | cut -d':' -f2-)
+
+echo "Number of comments: $COMMENT_COUNT"
+
+# How many entries will be processed on each query
+ENTRIES_TO_PROCESS=10
+
+# Calculate how many requests must be triggered
+PAGINATION_COUNT=$(($(($COMMENT_COUNT / $ENTRIES_TO_PROCESS)) + $(($(($COMMENT_COUNT % $ENTRIES_TO_PROCESS)) ? 1 : 0))))
+
+echo "Number of requests to process (at $ENTRIES_TO_PROCESS entries per request): $PAGINATION_COUNT"
+
+# Execute the requests, at one per second
+for PAGINATION_NUMBER in $(seq 0 $(($PAGINATION_COUNT - 1))); do sleep 1 && echo "\n\nPagination number: $PAGINATION_NUMBER\n" && curl --insecure -X POST -H "Content-Type: application/json" -d "{\"query\": \"{ comments(pagination: { limit: $ENTRIES_TO_PROCESS, offset: $(($PAGINATION_NUMBER * $ENTRIES_TO_PROCESS)) }) { id date content } }\"}" https://mysite.com/graphql/ ; done
+```
+
+## Executing the GraphQL query recursively
+
+If executing a single GraphQL query affecting thousands of resources makes the system crash, we can adapt the query to execute itself recursively, affecting a handful of resources each time, until all resources have been updated.
 
 We can then split the 
 
@@ -874,36 +909,9 @@ Also handle errors in any of the iterations. Eg: using @fail
   Or keep for another guide!?
 
 
-Another possibility: via bash.
 
-Paginating content:
 
-```bash
-# Get the number of comments in the site
-GRAPHQL_RESPONSE=$(curl --insecure \
-  -X POST \
-  -H "Content-Type: application/json" \
-  -d '{"query": "{\n  commentCount\n}"}' \
-  https://gato-graphql.lndo.site/graphql/website/)
 
-# Extract the number of comments into a variable
-COMMENT_COUNT=$(echo $GRAPHQL_RESPONSE \
-  | grep -E -o '"commentCount\":([0-9]+)' \
-  | cut -d':' -f2-)
-
-echo "Number of comments: $COMMENT_COUNT"
-
-# How many entries will be processed on each query
-ENTRIES_TO_PROCESS=10
-
-# Calculate how many requests must be triggered
-PAGINATION_COUNT=$(($(($COMMENT_COUNT / $ENTRIES_TO_PROCESS)) + $(($(($COMMENT_COUNT % $ENTRIES_TO_PROCESS)) ? 1 : 0))))
-
-echo "Number of requests to process (at $ENTRIES_TO_PROCESS entries per request): $PAGINATION_COUNT"
-
-# Execute the requests, at one per second
-for PAGINATION_NUMBER in $(seq 0 $(($PAGINATION_COUNT - 1))); do sleep 1 && echo "\n\nPagination number: $PAGINATION_NUMBER\n" && curl --insecure -X POST -H "Content-Type: application/json" -d "{\"query\": \"{ comments(pagination: { limit: $ENTRIES_TO_PROCESS, offset: $(($PAGINATION_NUMBER * $ENTRIES_TO_PROCESS)) }) { id date content } }\"}" https://gato-graphql.lndo.site/graphql/website/ ; done
-```
 
 Maybe use part of this code:
 
