@@ -20,7 +20,7 @@ Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-
 
 ```graphql
 mutation ReplaceOldWithNewDomainInPosts {
-  posts(pagination: { limit: 30000 }) {
+  posts(pagination: { limit: 3000 }) {
     id
     contentSource
     adaptedContentSource: _strReplace(
