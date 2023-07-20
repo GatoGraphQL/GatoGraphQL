@@ -188,13 +188,13 @@ mutation ReplaceDomains {
   posts {
     id
     rawContent
-    adaptedContentSource: _strReplace(
+    adaptedRawContent: _strReplace(
       search: "https://my-old-domain.com"
       replaceWith: "https://my-new-domain.com"
       in: $__rawContent
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource }
+      contentAs: { html: $__adaptedRawContent }
     }) {
       status
       postID

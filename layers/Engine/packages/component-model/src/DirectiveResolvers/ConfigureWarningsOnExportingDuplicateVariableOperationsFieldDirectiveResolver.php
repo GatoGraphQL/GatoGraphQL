@@ -40,7 +40,7 @@ use SplObjectStorage;
  *
  *   ```
  *   {
- *     transformedContentSource: _echo(value: $contentSource)
+ *     transformedRawContent: _echo(value: $contentSource)
  *       @underEachJSONObjectProperty(
  *         passKeyOnwardsAs: "postID"
  *         affectDirectivesUnderPos: [1, 3]

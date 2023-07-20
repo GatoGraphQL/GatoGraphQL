@@ -24,13 +24,13 @@ mutation RemoveBlock
   posts(filter: { ids: $postIDs } ) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
       searchRegex: "#(<!-- wp:columns -->[\\s\\S]+<!-- /wp:columns -->)#",
       replaceWith: ""
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -106,13 +106,13 @@ mutation RemoveBlock
   posts(filter: { ids: $postIDs } ) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
       searchRegex: $regex,
       replaceWith: ""
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {

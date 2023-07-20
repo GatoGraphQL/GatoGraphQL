@@ -30,14 +30,14 @@ mutation InjectBlock(
   ) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
       searchRegex: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
       replaceWith: "$1<!-- mycompany:black-friday-campaign-video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure>\n<!-- /mycompany:black-friday-campaign-video -->",
       limit: 1
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -108,14 +108,14 @@ mutation InjectBlock(
   ) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
       searchRegex: $regex,
       replaceWith: $replaceWith,
       limit: $times
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -166,13 +166,13 @@ mutation RemoveBlock {
   posts(filter: { search: "\"<!-- /mycompany:black-friday-campaign-video -->\"" } ) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
       searchRegex: "#(<!-- mycompany:black-friday-campaign-video -->[\\s\\S]+<!-- /mycompany:black-friday-campaign-video -->)#",
       replaceWith: ""
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -219,13 +219,13 @@ mutation RemoveBlock
   posts(filter: { search: $search } ) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
       searchRegex: $regex,
       replaceWith: ""
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {

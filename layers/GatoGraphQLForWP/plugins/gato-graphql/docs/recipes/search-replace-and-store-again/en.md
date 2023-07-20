@@ -35,12 +35,12 @@ query GetPostData(
       @export(as: "adaptedPostTitle")
 
     rawContent
-    adaptedContentSource: _strReplace(
+    adaptedRawContent: _strReplace(
       search: $replaceFrom
       replaceWith: $replaceTo
       in: $__rawContent
     )
-      @export(as: "adaptedContentSource")
+      @export(as: "adaptedRawContent")
   }
 }
 
@@ -50,7 +50,7 @@ mutation UpdatePost($postId: ID!)
   updatePost(input: {
     id: $postId,
     title: $adaptedPostTitle,
-    contentAs: { html: $adaptedContentSource },
+    contentAs: { html: $adaptedRawContent },
   }) {
     status
     errors {
@@ -98,12 +98,12 @@ query GetPostData(
       @export(as: "adaptedPostTitle")
 
     rawContent
-    adaptedContentSource: _strReplaceMultiple(
+    adaptedRawContent: _strReplaceMultiple(
       search: $replaceFrom
       replaceWith: $replaceTo
       in: $__rawContent
     )
-      @export(as: "adaptedContentSource")
+      @export(as: "adaptedRawContent")
   }
 }
 
@@ -113,7 +113,7 @@ mutation UpdatePost($postId: ID!)
   updatePost(input: {
     id: $postId,
     title: $adaptedPostTitle,
-    contentAs: { html: $adaptedContentSource },
+    contentAs: { html: $adaptedRawContent },
   }) {
     status
     errors {
@@ -150,12 +150,12 @@ query GetPostData($postId: ID!) {
   post(by: { id: $postId }) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       searchRegex: "#\\s+((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
       replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
       in: $__rawContent
     )
-      @export(as: "adaptedContentSource")
+      @export(as: "adaptedRawContent")
   }
 }
 
@@ -164,7 +164,7 @@ mutation UpdatePost($postId: ID!)
 {
   updatePost(input: {
     id: $postId,
-    contentAs: { html: $adaptedContentSource },
+    contentAs: { html: $adaptedRawContent },
   }) {
     status
     errors {
@@ -212,12 +212,12 @@ query GetPostData($postId: ID!) {
   post(by: {id: $postId}) {
     id
     rawContent
-    adaptedContentSource: _strRegexReplace(
+    adaptedRawContent: _strRegexReplace(
       searchRegex: "/<img(\\s+)?([^>]*?\\s+?)?src=([\"'])http:\\/\\/(.*?)/"
       replaceWith: "<img$1$2src=$3https://$4$3"
       in: $__rawContent
     )
-      @export(as: "adaptedContentSource")
+      @export(as: "adaptedRawContent")
   }
 }
 
@@ -226,7 +226,7 @@ mutation UpdatePost($postId: ID!)
 {
   updatePost(input: {
     id: $postId,
-    contentAs: { html: $adaptedContentSource },
+    contentAs: { html: $adaptedRawContent },
   }) {
     status
     errors {

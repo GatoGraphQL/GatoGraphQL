@@ -177,18 +177,18 @@ query CreateRegexReplacements
         )
 }
 
-# Execute the regex search and replace, export the results under `$transformedContentSource`
+# Execute the regex search and replace, export the results under `$transformedRawContent`
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
 {  
-  transformedContentSource: _echo(value: $rawContent)
+  transformedRawContent: _echo(value: $rawContent)
     @strRegexReplaceMultiple(
       limit: 1,
       searchRegex: $coreImageURLReplacementsFrom,
       replaceWith: $coreImageURLReplacementsTo
     )
     
-    @export(as: "transformedContentSource")
+    @export(as: "transformedRawContent")
 }
 
 # Execute the mutation to update the post
@@ -198,7 +198,7 @@ mutation ModifyAndUpdatePost($postID: ID!)
   updatePost(input: {
     id: $postID,
     contentAs: {
-      html: $transformedContentSource
+      html: $transformedRawContent
     }
   }) {
     status
@@ -279,7 +279,7 @@ The response is:
         ]
       }
     },
-    "transformedContentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->",
+    "transformedRawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->",
     "updatePost": {
       "status": "SUCCESS",
       "errors": null,
