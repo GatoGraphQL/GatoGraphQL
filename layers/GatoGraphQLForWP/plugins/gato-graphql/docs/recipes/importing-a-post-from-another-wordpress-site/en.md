@@ -43,7 +43,7 @@ query GetPost($postId: ID!) {
     }
     categories {
       id
-      slug
+      slugPath
     }
     tags {
       id
