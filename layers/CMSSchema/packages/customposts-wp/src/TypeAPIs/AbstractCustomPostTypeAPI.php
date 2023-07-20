@@ -343,6 +343,16 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         return get_the_excerpt($customPost);
     }
 
+    public function getRawExcerpt(string|int|object $customPostObjectOrID): ?string
+    {
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }        
+        return $customPost->post_excerpt;
+    }
+
     /**
      * @return array{0:WP_Post|null,1:null|string|int}
      */
@@ -392,6 +402,17 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         }        
         /** @var WP_Post $customPost */
         return get_the_title($customPost);
+    }
+
+    public function getRawTitle(string|int|object $customPostObjectOrID): ?string
+    {
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }        
+        /** @var WP_Post $customPost */
+        return $customPost->post_title;
     }
 
     public function getContent(string|int|object $customPostObjectOrID): ?string
