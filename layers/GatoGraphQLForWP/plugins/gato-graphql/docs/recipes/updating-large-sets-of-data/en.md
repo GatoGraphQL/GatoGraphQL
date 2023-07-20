@@ -22,11 +22,11 @@ Thanks to [Nested Mutations](https://gatographql.com/guides/schema/using-nested-
 mutation ReplaceOldWithNewDomainInPosts {
   posts(pagination: { limit: 3000 }) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strReplace(
       search: "https://my-old-domain.com"
       replaceWith: "https://my-new-domain.com"
-      in: $__contentSource
+      in: $__rawContent
     )
     update(input: {
       contentAs: { html: $__adaptedContentSource }

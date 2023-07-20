@@ -29,9 +29,9 @@ mutation InjectBlock(
     sort: { by: ID, order: ASC }
   ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+      in: $__rawContent,
       searchRegex: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
       replaceWith: "$1<!-- mycompany:black-friday-campaign-video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure>\n<!-- /mycompany:black-friday-campaign-video -->",
       limit: 1
@@ -48,7 +48,7 @@ mutation InjectBlock(
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -107,9 +107,9 @@ mutation InjectBlock(
     sort: { by: ID, order: ASC }
   ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+      in: $__rawContent,
       searchRegex: $regex,
       replaceWith: $replaceWith,
       limit: $times
@@ -126,7 +126,7 @@ mutation InjectBlock(
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -165,9 +165,9 @@ This GraphQL query searches for all posts containing the custom block, and remov
 mutation RemoveBlock {
   posts(filter: { search: "\"<!-- /mycompany:black-friday-campaign-video -->\"" } ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+      in: $__rawContent,
       searchRegex: "#(<!-- mycompany:black-friday-campaign-video -->[\\s\\S]+<!-- /mycompany:black-friday-campaign-video -->)#",
       replaceWith: ""
     )
@@ -183,7 +183,7 @@ mutation RemoveBlock {
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -218,9 +218,9 @@ mutation RemoveBlock
 {
   posts(filter: { search: $search } ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+      in: $__rawContent,
       searchRegex: $regex,
       replaceWith: ""
     )
@@ -236,7 +236,7 @@ mutation RemoveBlock
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }

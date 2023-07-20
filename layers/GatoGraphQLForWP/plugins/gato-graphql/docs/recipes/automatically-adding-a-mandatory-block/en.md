@@ -38,9 +38,9 @@ mutation MaybeInsertCommentsBlock($postId: ID!)
 {
   post(by: { id: $postId }) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strAppend(
-      after: $__contentSource
+      after: $__rawContent
       append: """
 
 <!-- wp:comments -->
@@ -93,7 +93,7 @@ mutation MaybeInsertCommentsBlock($postId: ID!)
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }

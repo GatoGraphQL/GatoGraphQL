@@ -22,11 +22,11 @@ mutation ReplaceOldWithNewDomainInPosts {
     }
   ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strReplace(
       search: "https://my-old-domain.com"
       replaceWith: "https://my-new-domain.com"
-      in: $__contentSource
+      in: $__rawContent
     )
     update(input: {
       contentAs: { html: $__adaptedContentSource }
@@ -40,7 +40,7 @@ mutation ReplaceOldWithNewDomainInPosts {
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -81,11 +81,11 @@ mutation ReplaceOldWithNewURLInPosts
     sort: { by: ID, order: ASC }
   ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strReplace(
       search: $oldPageURL
       replaceWith: $newPageURL
-      in: $__contentSource
+      in: $__rawContent
     )
     update(input: {
       contentAs: { html: $__adaptedContentSource }
@@ -99,7 +99,7 @@ mutation ReplaceOldWithNewURLInPosts
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }

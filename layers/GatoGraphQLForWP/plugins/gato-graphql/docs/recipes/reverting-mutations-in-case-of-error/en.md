@@ -10,10 +10,10 @@ Remove block by type:
 query CreateVars {
   foundPosts: posts(filter: { search: "\"<!-- /wp:columns -->\"" } ) {
     id @export(as: "postIDs", type: LIST)
-    contentSource
+    rawContent
     originalInputs: _echo(value: {
       id: $__id,
-      contentAs: { html: $__contentSource }
+      contentAs: { html: $__rawContent }
     }) @export(as: "originalInputs")
   }
 }
@@ -23,9 +23,9 @@ mutation RemoveBlock
 {
   posts(filter: { ids: $postIDs } ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+      in: $__rawContent,
       searchRegex: "#(<!-- wp:columns -->[\\s\\S]+<!-- /wp:columns -->)#",
       replaceWith: ""
     )
@@ -41,7 +41,7 @@ mutation RemoveBlock
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -63,7 +63,7 @@ query CheckRestoredPosts
 {
   restoredPosts: posts(filter: { ids: $postIDs } ) {
     id
-    contentSource
+    rawContent
   }
 }
 
@@ -92,10 +92,10 @@ query CreateVars(
   
   foundPosts: posts(filter: { search: $__search } ) {
     id @export(as: "postIDs", type: LIST)
-    contentSource
+    rawContent
     originalInputs: _echo(value: {
       id: $__id,
-      contentAs: { html: $__contentSource }
+      contentAs: { html: $__rawContent }
     }) @export(as: "originalInputs")
   }
 }
@@ -105,9 +105,9 @@ mutation RemoveBlock
 {
   posts(filter: { ids: $postIDs } ) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+      in: $__rawContent,
       searchRegex: $regex,
       replaceWith: ""
     )
@@ -123,7 +123,7 @@ mutation RemoveBlock
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -145,7 +145,7 @@ query CheckRestoredPosts
 {
   restoredPosts: posts(filter: { ids: $postIDs } ) {
     id
-    contentSource
+    rawContent
   }
 }
 

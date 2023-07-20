@@ -34,11 +34,11 @@ query GetPostData(
     )
       @export(as: "adaptedPostTitle")
 
-    contentSource
+    rawContent
     adaptedContentSource: _strReplace(
       search: $replaceFrom
       replaceWith: $replaceTo
-      in: $__contentSource
+      in: $__rawContent
     )
       @export(as: "adaptedContentSource")
   }
@@ -62,7 +62,7 @@ mutation UpdatePost($postId: ID!)
     post {
       id
       title
-      contentSource
+      rawContent
     }
   }
 }
@@ -97,11 +97,11 @@ query GetPostData(
     )
       @export(as: "adaptedPostTitle")
 
-    contentSource
+    rawContent
     adaptedContentSource: _strReplaceMultiple(
       search: $replaceFrom
       replaceWith: $replaceTo
-      in: $__contentSource
+      in: $__rawContent
     )
       @export(as: "adaptedContentSource")
   }
@@ -125,7 +125,7 @@ mutation UpdatePost($postId: ID!)
     post {
       id
       title
-      contentSource
+      rawContent
     }
   }
 }
@@ -149,11 +149,11 @@ This GraphQL query does a regex search and replace to add missing links in the p
 query GetPostData($postId: ID!) {
   post(by: { id: $postId }) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
       searchRegex: "#\\s+((https?)://(\\S*?\\.\\S*?))([\\s)\\[\\]{},;\"\\':<]|\\.\\s|$)#i"
       replaceWith: "<a href=\"$1\" target=\"_blank\">$3</a>$4"
-      in: $__contentSource
+      in: $__rawContent
     )
       @export(as: "adaptedContentSource")
   }
@@ -176,7 +176,7 @@ mutation UpdatePost($postId: ID!)
     post {
       id
       title
-      contentSource
+      rawContent
     }
   }
 }
@@ -211,11 +211,11 @@ This GraphQL query replaces all `http` URLs with `https` in HTML image sources:
 query GetPostData($postId: ID!) {
   post(by: {id: $postId}) {
     id
-    contentSource
+    rawContent
     adaptedContentSource: _strRegexReplace(
       searchRegex: "/<img(\\s+)?([^>]*?\\s+?)?src=([\"'])http:\\/\\/(.*?)/"
       replaceWith: "<img$1$2src=$3https://$4$3"
-      in: $__contentSource
+      in: $__rawContent
     )
       @export(as: "adaptedContentSource")
   }
@@ -238,7 +238,7 @@ mutation UpdatePost($postId: ID!)
     post {
       id
       title
-      contentSource
+      rawContent
     }
   }
 }

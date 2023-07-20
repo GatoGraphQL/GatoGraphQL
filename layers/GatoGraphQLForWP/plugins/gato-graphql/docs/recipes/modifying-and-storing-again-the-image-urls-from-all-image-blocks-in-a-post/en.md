@@ -13,7 +13,7 @@ This recipe modifies the URL of images in the `core/image` blocks in a post:
 
 Mutation `updatePost` receives the post's HTML content. Then, we must:
 
-- Retrieve the post's `contentSource`
+- Retrieve the post's `rawContent`
 - Apply transformations to that HTML code, replacing the original URLs with the converted URLs
 - Store the adapted content
 
@@ -34,8 +34,8 @@ query FetchData($postID: ID!)
   @depends(on: "InitializeEmptyVariables")
 {
   post(by: { id: $postID } ) {
-    contentSource
-      @export(as: "contentSource")
+    rawContent
+      @export(as: "rawContent")
 
     coreImage: blockFlattenedDataItems(
       filterBy: { include: "core/image" }
@@ -181,7 +181,7 @@ query CreateRegexReplacements
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
 {  
-  transformedContentSource: _echo(value: $contentSource)
+  transformedContentSource: _echo(value: $rawContent)
     @strRegexReplaceMultiple(
       limit: 1,
       searchRegex: $coreImageURLReplacementsFrom,
@@ -211,7 +211,7 @@ mutation ModifyAndUpdatePost($postID: ID!)
     post {
       id
       title
-      contentSource
+      rawContent
     }    
   }
 }
@@ -223,7 +223,7 @@ The response is:
 {
   "data": {
     "post": {
-      "contentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2008/themes_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2007/email_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->",
+      "rawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2008/themes_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"http://mysite.com/fs_img/mysite/2007/email_photo.jpg\" alt=\"\"/></figure>\n<!-- /wp:image -->",
       "coreImage": [
         {
           "name": "core/image",
@@ -286,7 +286,7 @@ The response is:
       "post": {
         "id": 13,
         "title": "Released v0.6, check it out",
-        "contentSource": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->"
+        "rawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block.</p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2008/themes_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:image {\"sizeSlug\":\"large\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https://cdn.mysite.com/fs_img/mysite/2007/email_photo.avif\" alt=\"\"/></figure>\n<!-- /wp:image -->"
       }
     }
   }
