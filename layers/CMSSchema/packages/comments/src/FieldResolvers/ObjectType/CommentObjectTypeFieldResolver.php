@@ -306,9 +306,9 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     /**
      * @return string[]
      */
-    public function getSensitiveFieldArgNames(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
+    public function getSensitiveFieldNames(): array
     {
-        $sensitiveFieldArgNames = parent::getSensitiveFieldArgNames($objectTypeResolver, $fieldName);
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatCommentRawContentAsSensitiveData()) {

@@ -174,9 +174,9 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
     /**
      * @return string[]
      */
-    public function getSensitiveFieldArgNames(string $fieldName): array
+    public function getSensitiveFieldNames(): array
     {
-        $sensitiveFieldArgNames = parent::getSensitiveFieldArgNames($fieldName);
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatCustomPostRawContentFieldsAsSensitiveData()) {
