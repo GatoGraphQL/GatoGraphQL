@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bff2f08f8a0b6e22a7b635eabe0ef4ab",
+    "content-hash": "375793f1bd649a70b589861592e3661b",
     "packages": [
         {
             "name": "antecedent/patchwork",
@@ -1037,12 +1037,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/leoloso/BrainFaker.git",
-                "reference": "d162f0b510377007ca96e3d9b650887d910a8d7e"
+                "reference": "b3a43bc505b85c750582e0522c1bb27a33d96415"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/d162f0b510377007ca96e3d9b650887d910a8d7e",
-                "reference": "d162f0b510377007ca96e3d9b650887d910a8d7e",
+                "url": "https://api.github.com/repos/leoloso/BrainFaker/zipball/b3a43bc505b85c750582e0522c1bb27a33d96415",
+                "reference": "b3a43bc505b85c750582e0522c1bb27a33d96415",
                 "shasum": ""
             },
             "require": {
@@ -1098,7 +1098,7 @@
                 "issues": "https://github.com/Brain-WP/BrainFaker/issues",
                 "source": "https://github.com/Brain-WP/BrainFaker"
             },
-            "time": "2022-12-13T04:12:31+00:00"
+            "time": "2023-07-20T08:12:21+00:00"
         },
         {
             "name": "masterminds/html5",

@@ -312,6 +312,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA,
             ],
+            [
+                'class' => CommentsModule::class,
+                'envVariable' => CommentsEnvironment::TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA,
+            ],
             // Media default/max limits
             [
                 'class' => MediaModule::class,
@@ -339,6 +345,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_MENUS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
+            ],
+            [
+                'class' => MenusModule::class,
+                'envVariable' => MenusEnvironment::TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA,
             ],
             // Tag default/max limits
             [
@@ -411,6 +423,18 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
+            ],
+            [
+                'class' => CustomPostsModule::class,
+                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
+            ],
+            [
+                'class' => CustomPostsModule::class,
+                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,
             ],
             [
                 'class' => \PoPWPSchema\CustomPosts\Module::class,

@@ -34,4 +34,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function treatMenuItemRawTitleFieldsAsSensitiveData(): bool
+    {
+        $envVariable = Environment::TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

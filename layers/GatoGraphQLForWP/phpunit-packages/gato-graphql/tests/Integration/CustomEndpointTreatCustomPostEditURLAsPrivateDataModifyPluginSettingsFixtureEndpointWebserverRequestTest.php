@@ -13,7 +13,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\Environment as WebserverRequestsEnvi
  * Then, those fields treated as “sensitive” won't be added to the schema,
  * and the query will produce an error.
  */
-class CustomEndpointTreatEditURLAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatCustomEndpointEditURLAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class CustomEndpointTreatCustomPostEditURLAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatCustomPostEditURLAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected static function getEndpoint(): string
     {

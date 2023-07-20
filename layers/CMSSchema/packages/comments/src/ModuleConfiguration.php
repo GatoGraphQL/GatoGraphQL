@@ -61,6 +61,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function treatCommentRawContentAsSensitiveData(): bool
+    {
+        $envVariable = Environment::TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableCommentsForGenericCustomPosts(): bool
     {
         $envVariable = Environment::ENABLE_COMMENTS_FOR_GENERIC_CUSTOMPOSTS;

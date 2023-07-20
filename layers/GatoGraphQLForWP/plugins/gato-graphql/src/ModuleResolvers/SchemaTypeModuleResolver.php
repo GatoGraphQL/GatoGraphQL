@@ -63,11 +63,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public final const OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT = 'root-comment-list-default-limit';
     public final const OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT = 'custompost-comment-list-default-limit';
     public final const OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA = 'treat-custompost-status-as-sensitive-data';
+    public final const OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA = 'treat-custompost-raw-content-fields-as-sensitive-data';
     public final const OPTION_TREAT_CUSTOMPOST_EDIT_URL_AS_SENSITIVE_DATA = 'treat-custompost-edit-url-as-sensitive-data';
     public final const OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA = 'treat-comment-status-as-sensitive-data';
+    public final const OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA = 'treat-comment-raw-content-as-sensitive-data';
     public final const OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA = 'treat-user-email-as-sensitive-data';
     public final const OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA = 'treat-user-role-as-sensitive-data';
     public final const OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA = 'treat-user-capability-as-sensitive-data';
+    public final const OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA = 'treat-menuitem-raw-title-as-sensitive-data';
 
     /**
      * This comment used to be valid when using `autowire` functions
@@ -667,6 +670,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
                 self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE => false,
                 self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => true,
+                self::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA => true,
                 self::OPTION_TREAT_CUSTOMPOST_EDIT_URL_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_POSTS => [
@@ -696,6 +700,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_MENUS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
                 ModuleSettingOptions::LIST_MAX_LIMIT => $useRestrictiveDefaults ? 100 : -1,
+                self::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA => true,
             ],
             self::SCHEMA_TAGS => [
                 ModuleSettingOptions::LIST_DEFAULT_LIMIT => 10,
@@ -728,6 +733,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT => -1,
                 ModuleSettingOptions::LIST_MAX_LIMIT => -1,
                 self::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA => true,
+                self::OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -875,6 +881,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::DESCRIPTION => sprintf(
                         $sensitiveDataDescPlaceholder,
                         \__('custom post status', 'gato-graphql'),
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+
+                $option = self::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => sprintf(
+                        $sensitiveDataTitlePlaceholder,
+                        \__('custom post raw content fields (<code>rawContent</code>, <code>rawTitle</code> and <code>rawExcerpt</code>)', 'gato-graphql'),
+                    ),
+                    Properties::DESCRIPTION => sprintf(
+                        $sensitiveDataDescPlaceholder,
+                        \__('custom post raw content fields (<code>rawContent</code>, <code>rawTitle</code> and <code>rawExcerpt</code>)', 'gato-graphql'),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
@@ -1097,6 +1121,42 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
                     \__('comment status', 'gato-graphql'),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $sensitiveDataTitlePlaceholder,
+                    \__('comment raw content', 'gato-graphql'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $sensitiveDataDescPlaceholder,
+                    \__('comment raw content', 'gato-graphql'),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif ($module === self::SCHEMA_MENUS) {
+            $option = self::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $sensitiveDataTitlePlaceholder,
+                    \__('menu item raw title', 'gato-graphql'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $sensitiveDataDescPlaceholder,
+                    \__('menu item raw title', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];

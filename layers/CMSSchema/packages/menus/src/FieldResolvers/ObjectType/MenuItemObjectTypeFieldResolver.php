@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Menus\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\Menus\Module;
+use PoPCMSSchema\Menus\ModuleConfiguration;
 use PoPCMSSchema\Menus\ObjectModels\MenuItem;
 use PoPCMSSchema\Menus\RuntimeRegistries\MenuItemRuntimeRegistryInterface;
 use PoPCMSSchema\Menus\TypeResolvers\ObjectType\MenuItemObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -138,6 +141,20 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'parentID',
             'linkRelationship',
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatMenuItemRawTitleFieldsAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'rawTitle';
+        }
+        return $sensitiveFieldArgNames;
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
