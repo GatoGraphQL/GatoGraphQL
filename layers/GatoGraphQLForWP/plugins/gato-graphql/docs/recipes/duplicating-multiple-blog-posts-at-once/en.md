@@ -41,7 +41,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -57,7 +57,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
       authorID: $__author,
       categoryIDs: $__categories,
       contentAs: {
-        html: $__contentSource
+        html: $__rawContent
       },
       excerpt: $__excerpt
       featuredImageID: $__featuredImage,
@@ -110,7 +110,7 @@ query RetrieveCreatedPosts
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -142,7 +142,7 @@ query GetPostAndExportData {
     categories @export(as: "categoryIDs") {
       id
     }
-    contentSource @export(as: "contentSource")
+    rawContent @export(as: "rawContent")
     excerpt @export(as: "excerpt")
     featuredImage @export(as: "featuredImageID") {
       id 
@@ -166,7 +166,7 @@ mutation DuplicatePost
     authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
-      html: $contentSource
+      html: $rawContent
     },
     excerpt: $excerpt
     featuredImageID: $featuredImageID,
@@ -191,7 +191,7 @@ query GetPostAndExportData {
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -206,7 +206,7 @@ query GetPostAndExportData {
       authorID: $__author,
       categoryIDs: $__categories,
       contentAs: {
-        html: $__contentSource
+        html: $__rawContent
       },
       excerpt: $__excerpt
       featuredImageID: $__featuredImage,
@@ -423,7 +423,7 @@ query RetrieveCreatedPosts
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -477,7 +477,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -493,7 +493,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
       authorID: $__author,
       categoryIDs: $__categories,
       contentAs: {
-        html: $__contentSource
+        html: $__rawContent
       },
       excerpt: $__excerpt
       featuredImageID: $__featuredImage,
@@ -546,7 +546,7 @@ query RetrieveCreatedPosts
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id

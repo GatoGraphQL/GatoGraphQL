@@ -44,7 +44,7 @@ query GetPostAndExportData($postId: ID!)
     categories {
       id @export(as: "categoryIDs", type: LIST)
     }
-    contentSource @export(as: "contentSource")
+    rawContent @export(as: "rawContent")
     excerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
@@ -64,7 +64,7 @@ mutation DuplicatePost
     authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
-      html: $contentSource
+      html: $rawContent
     },
     excerpt: $excerpt
     featuredImageID: $featuredImageID,
@@ -94,7 +94,7 @@ mutation DuplicatePost
       categories {
         id
       }
-      contentSource
+      rawContent
       excerpt
       featuredImage {
         id
@@ -132,7 +132,7 @@ query GetPost($postId: ID!) {
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -168,7 +168,7 @@ Executing the query (passing the `$postId` variable), the response may be:
           "id": 2
         }
       ],
-      "contentSource": "<!-- wp:heading -->\n<h2>Verse Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:verse -->\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.</pre>\n<!-- /wp:verse -->\n\n<!-- wp:heading -->\n<h2>Table Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:table {\"className\":\"is-style-stripes\"} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1</td><td>Row 1 Column 2</td></tr><tr><td>Row 2 Column 1</td><td>Row 2 Column 2</td></tr><tr><td>Row 3 Column 1</td><td>Row 3 Column 2</td></tr></tbody></table></figure>\n<!-- /wp:table -->\n\n<!-- wp:heading -->\n<h2>Separator Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:separator -->\n<hr class=\"wp-block-separator\"/>\n<!-- /wp:separator -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Spacer Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:spacer -->\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->",
+      "rawContent": "<!-- wp:heading -->\n<h2>Verse Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:verse -->\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.</pre>\n<!-- /wp:verse -->\n\n<!-- wp:heading -->\n<h2>Table Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:table {\"className\":\"is-style-stripes\"} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1</td><td>Row 1 Column 2</td></tr><tr><td>Row 2 Column 1</td><td>Row 2 Column 2</td></tr><tr><td>Row 3 Column 1</td><td>Row 3 Column 2</td></tr></tbody></table></figure>\n<!-- /wp:table -->\n\n<!-- wp:heading -->\n<h2>Separator Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:separator -->\n<hr class=\"wp-block-separator\"/>\n<!-- /wp:separator -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Spacer Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:spacer -->\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->",
       "excerpt": "Verse Block Write poetry and other literary expressions honoring all spaces and line-breaks. Table Block Row 1 Column 1 Row 1 Column 2 Row 2 Column 1 Row 2 Column 2 Row 3 Column 1 Row 3 Column 2 Separator Block Spacer Block",
       "featuredImage": {
         "id": 362
@@ -215,7 +215,7 @@ query GetPostAndExportData($postId: ID!) {
     categories {
       id @export(as: "categoryIDs", type: LIST)
     }
-    contentSource @export(as: "contentSource")
+    rawContent @export(as: "rawContent")
     excerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
@@ -235,7 +235,7 @@ mutation DuplicatePost
     authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
-      html: $contentSource
+      html: $rawContent
     },
     excerpt: $excerpt
     featuredImageID: $featuredImageID,
@@ -265,7 +265,7 @@ mutation DuplicatePost
       categories {
         id
       }
-      contentSource
+      rawContent
       excerpt
       featuredImage {
         id
@@ -303,7 +303,7 @@ In the response, we can visualize that the fields of the new post are indeed the
           "id": 2
         }
       ],
-      "contentSource": "<!-- wp:heading -->\n<h2>Verse Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:verse -->\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.</pre>\n<!-- /wp:verse -->\n\n<!-- wp:heading -->\n<h2>Table Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:table {\"className\":\"is-style-stripes\"} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1</td><td>Row 1 Column 2</td></tr><tr><td>Row 2 Column 1</td><td>Row 2 Column 2</td></tr><tr><td>Row 3 Column 1</td><td>Row 3 Column 2</td></tr></tbody></table></figure>\n<!-- /wp:table -->\n\n<!-- wp:heading -->\n<h2>Separator Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:separator -->\n<hr class=\"wp-block-separator\"/>\n<!-- /wp:separator -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Spacer Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:spacer -->\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->",
+      "rawContent": "<!-- wp:heading -->\n<h2>Verse Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:verse -->\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.</pre>\n<!-- /wp:verse -->\n\n<!-- wp:heading -->\n<h2>Table Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:table {\"className\":\"is-style-stripes\"} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1</td><td>Row 1 Column 2</td></tr><tr><td>Row 2 Column 1</td><td>Row 2 Column 2</td></tr><tr><td>Row 3 Column 1</td><td>Row 3 Column 2</td></tr></tbody></table></figure>\n<!-- /wp:table -->\n\n<!-- wp:heading -->\n<h2>Separator Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:separator -->\n<hr class=\"wp-block-separator\"/>\n<!-- /wp:separator -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Spacer Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:spacer -->\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->",
       "excerpt": "Verse Block Write poetry and other literary expressions honoring all spaces and line-breaks. Table Block Row 1 Column 1 Row 1 Column 2 Row 2 Column 1 Row 2 Column 2 Row 3 Column 1 Row 3 Column 2 Separator Block Spacer Block",
       "featuredImage": {
         "id": 362
@@ -340,7 +340,7 @@ In the response, we can visualize that the fields of the new post are indeed the
             "id": 2
           }
         ],
-        "contentSource": "<!-- wp:heading -->\n<h2>Verse Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:verse -->\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.</pre>\n<!-- /wp:verse -->\n\n<!-- wp:heading -->\n<h2>Table Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:table {\"className\":\"is-style-stripes\"} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1</td><td>Row 1 Column 2</td></tr><tr><td>Row 2 Column 1</td><td>Row 2 Column 2</td></tr><tr><td>Row 3 Column 1</td><td>Row 3 Column 2</td></tr></tbody></table></figure>\n<!-- /wp:table -->\n\n<!-- wp:heading -->\n<h2>Separator Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:separator -->\n<hr class=\"wp-block-separator\"/>\n<!-- /wp:separator -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Spacer Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:spacer -->\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->",
+        "rawContent": "<!-- wp:heading -->\n<h2>Verse Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:verse -->\n<pre class=\"wp-block-verse\">Write poetry and other literary expressions honoring all spaces and line-breaks.</pre>\n<!-- /wp:verse -->\n\n<!-- wp:heading -->\n<h2>Table Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:table {\"className\":\"is-style-stripes\"} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1</td><td>Row 1 Column 2</td></tr><tr><td>Row 2 Column 1</td><td>Row 2 Column 2</td></tr><tr><td>Row 3 Column 1</td><td>Row 3 Column 2</td></tr></tbody></table></figure>\n<!-- /wp:table -->\n\n<!-- wp:heading -->\n<h2>Separator Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:separator -->\n<hr class=\"wp-block-separator\"/>\n<!-- /wp:separator -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Spacer Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:spacer -->\n<div style=\"height:100px\" aria-hidden=\"true\" class=\"wp-block-spacer\"></div>\n<!-- /wp:spacer -->",
         "excerpt": "Verse Block Write poetry and other literary expressions honoring all spaces and line-breaks. Table Block Row 1 Column 1 Row 1 Column 2 Row 2 Column 1 Row 2 Column 2 Row 3 Column 1 Row 3 Column 2 Separator Block Spacer Block",
         "featuredImage": {
           "id": 362
@@ -477,7 +477,7 @@ query GetPostAndExportData($postId: ID!) {
     categories @export(as: "categoryIDs") {
       id
     }
-    contentSource @export(as: "contentSource")
+    rawContent @export(as: "rawContent")
     excerpt @export(as: "excerpt")
     featuredImage @export(as: "featuredImageID") {
       id 
@@ -497,7 +497,7 @@ mutation DuplicatePost
     authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
-      html: $contentSource
+      html: $rawContent
     },
     excerpt: $excerpt
     featuredImageID: $featuredImageID,
@@ -527,7 +527,7 @@ mutation DuplicatePost
       categories {
         id
       }
-      contentSource
+      rawContent
       excerpt
       featuredImage {
         id
@@ -559,7 +559,7 @@ mutation DuplicatePost
           "id": 1
         }
       ],
-      "contentSource": "<!-- wp:heading -->\n<h2>Audio Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:audio -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3\"></audio></figure>\n<!-- /wp:audio -->\n\n<!-- wp:heading -->\n<h2>Video Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->\n\n<!-- wp:heading -->\n<h2>Custom HTML Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:html -->\n<strong>This is a HTML block.</strong>\n<!-- /wp:html -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Preformatted Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:preformatted -->\n<pre class=\"wp-block-preformatted\">This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are.</pre>\n<!-- /wp:preformatted -->",
+      "rawContent": "<!-- wp:heading -->\n<h2>Audio Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:audio -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3\"></audio></figure>\n<!-- /wp:audio -->\n\n<!-- wp:heading -->\n<h2>Video Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->\n\n<!-- wp:heading -->\n<h2>Custom HTML Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:html -->\n<strong>This is a HTML block.</strong>\n<!-- /wp:html -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Preformatted Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:preformatted -->\n<pre class=\"wp-block-preformatted\">This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are.</pre>\n<!-- /wp:preformatted -->",
       "excerpt": "Audio Block Video Block Custom HTML Block This is a HTML block. Preformatted Block This is some preformatted text. Preformatted text keeps your s p a c e s, tabs andlinebreaks as they are.",
       "featuredImage": null,
       "tags": [],
@@ -581,7 +581,7 @@ mutation DuplicatePost
             "id": 1
           }
         ],
-        "contentSource": "<!-- wp:heading -->\n<h2>Audio Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:audio -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3\"></audio></figure>\n<!-- /wp:audio -->\n\n<!-- wp:heading -->\n<h2>Video Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->\n\n<!-- wp:heading -->\n<h2>Custom HTML Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:html -->\n<strong>This is a HTML block.</strong>\n<!-- /wp:html -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Preformatted Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:preformatted -->\n<pre class=\"wp-block-preformatted\">This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are.</pre>\n<!-- /wp:preformatted -->",
+        "rawContent": "<!-- wp:heading -->\n<h2>Audio Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:audio -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3\"></audio></figure>\n<!-- /wp:audio -->\n\n<!-- wp:heading -->\n<h2>Video Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://archive.org/download/SlowMotionFlame/slomoflame_512kb.mp4\"></video></figure>\n<!-- /wp:video -->\n\n<!-- wp:heading -->\n<h2>Custom HTML Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:html -->\n<strong>This is a HTML block.</strong>\n<!-- /wp:html -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Preformatted Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:preformatted -->\n<pre class=\"wp-block-preformatted\">This is some preformatted text. Preformatted text keeps your s p a c e s, tabs and<br>linebreaks as they are.</pre>\n<!-- /wp:preformatted -->",
         "excerpt": "Audio Block Video Block Custom HTML Block This is a HTML block. Preformatted Block This is some preformatted text. Preformatted text keeps your s p a c e s, tabs andlinebreaks as they are.",
         "featuredImage": null,
         "tags": [],
@@ -685,7 +685,7 @@ query GetPostAndExportData($postId: ID!)
     categories {
       id @export(as: "categoryIDs", type: LIST)
     }
-    contentSource @export(as: "contentSource")
+    rawContent @export(as: "rawContent")
     excerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
@@ -705,7 +705,7 @@ mutation DuplicatePost
     authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
-      html: $contentSource
+      html: $rawContent
     },
     excerpt: $excerpt
     featuredImageID: $featuredImageID,
@@ -735,7 +735,7 @@ mutation DuplicatePost
       categories {
         id
       }
-      contentSource
+      rawContent
       excerpt
       featuredImage {
         id
@@ -828,7 +828,7 @@ query GetPostAndExportData($postId: ID!)
     categories {
       id @export(as: "categoryIDs", type: LIST)
     }
-    contentSource @export(as: "contentSource")
+    rawContent @export(as: "rawContent")
     excerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
@@ -848,7 +848,7 @@ mutation DuplicatePost
     authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
-      html: $contentSource
+      html: $rawContent
     },
     excerpt: $excerpt
     featuredImageID: $featuredImageID,
@@ -878,7 +878,7 @@ mutation DuplicatePost
       categories {
         id
       }
-      contentSource
+      rawContent
       excerpt
       featuredImage {
         id

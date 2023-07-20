@@ -187,14 +187,14 @@ For instance, this GraphQL query updates many posts:
 mutation ReplaceDomains {
   posts {
     id
-    contentSource
-    adaptedContentSource: _strReplace(
+    rawContent
+    adaptedRawContent: _strReplace(
       search: "https://my-old-domain.com"
       replaceWith: "https://my-new-domain.com"
-      in: $__contentSource
+      in: $__rawContent
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource }
+      contentAs: { html: $__adaptedRawContent }
     }) {
       status
       postID

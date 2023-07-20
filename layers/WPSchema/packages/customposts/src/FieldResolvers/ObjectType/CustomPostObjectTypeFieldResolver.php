@@ -67,7 +67,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldNamesToResolve(): array
     {
         return [
-            'contentSource',
             'wpAdminEditURL',
         ];
     }
@@ -89,7 +88,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'contentSource' => $this->__('Retrieve the content in its \'source\' format, including the (Gutenberg) block delimiter HTML comments', 'customposts'),
             'wpAdminEditURL' => $this->__('The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it', 'customposts'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
@@ -98,17 +96,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'contentSource' => $this->getStringScalarTypeResolver(),
             'wpAdminEditURL' => $this->getHTMLScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
-    {
-        return match ($fieldName) {
-            'contentSource' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -121,8 +110,6 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         /** @var WP_Post */
         $customPost = $object;
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'contentSource':
-                return $customPost->post_content;
             case 'wpAdminEditURL':
                 // Validate the user can edit the post
                 if (!App::getState('is-user-logged-in')) {

@@ -652,7 +652,7 @@ query GetPostData(
   post(by: {id: $postId}) {
     id
     title @export(as: "postTitle")
-    contentSource @export(as: "postContent")
+    rawContent @export(as: "postContent")
   }
 }
 
@@ -697,7 +697,7 @@ mutation StoreAdaptedPostData(
     post {
       id
       title
-      contentSource
+      rawContent
     }
   }
 }
@@ -748,7 +748,7 @@ mutation UpdatePost($id: ID!, $postTitle: String)
     post {
       id
       title
-      contentSource
+      rawContent
     }
   }
 }

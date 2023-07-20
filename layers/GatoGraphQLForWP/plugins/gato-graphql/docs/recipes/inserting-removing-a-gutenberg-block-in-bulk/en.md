@@ -29,15 +29,15 @@ mutation InjectBlock(
     sort: { by: ID, order: ASC }
   ) {
     id
-    contentSource
-    adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+    rawContent
+    adaptedRawContent: _strRegexReplace(
+      in: $__rawContent,
       searchRegex: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
       replaceWith: "$1<!-- mycompany:black-friday-campaign-video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure>\n<!-- /mycompany:black-friday-campaign-video -->",
       limit: 1
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -48,7 +48,7 @@ mutation InjectBlock(
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -107,15 +107,15 @@ mutation InjectBlock(
     sort: { by: ID, order: ASC }
   ) {
     id
-    contentSource
-    adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+    rawContent
+    adaptedRawContent: _strRegexReplace(
+      in: $__rawContent,
       searchRegex: $regex,
       replaceWith: $replaceWith,
       limit: $times
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -126,7 +126,7 @@ mutation InjectBlock(
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -165,14 +165,14 @@ This GraphQL query searches for all posts containing the custom block, and remov
 mutation RemoveBlock {
   posts(filter: { search: "\"<!-- /mycompany:black-friday-campaign-video -->\"" } ) {
     id
-    contentSource
-    adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+    rawContent
+    adaptedRawContent: _strRegexReplace(
+      in: $__rawContent,
       searchRegex: "#(<!-- mycompany:black-friday-campaign-video -->[\\s\\S]+<!-- /mycompany:black-friday-campaign-video -->)#",
       replaceWith: ""
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -183,7 +183,7 @@ mutation RemoveBlock {
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }
@@ -218,14 +218,14 @@ mutation RemoveBlock
 {
   posts(filter: { search: $search } ) {
     id
-    contentSource
-    adaptedContentSource: _strRegexReplace(
-      in: $__contentSource,
+    rawContent
+    adaptedRawContent: _strRegexReplace(
+      in: $__rawContent,
       searchRegex: $regex,
       replaceWith: ""
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource },
+      contentAs: { html: $__adaptedRawContent },
     }) {
       status
       errors {
@@ -236,7 +236,7 @@ mutation RemoveBlock
       }
       post {
         id
-        contentSource
+        rawContent
       }
     }
   }

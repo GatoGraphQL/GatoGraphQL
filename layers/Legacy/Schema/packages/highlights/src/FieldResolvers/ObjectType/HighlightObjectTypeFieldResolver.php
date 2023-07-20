@@ -128,7 +128,7 @@ class HighlightObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'title':
             case 'excerpt':
             case 'content':
-                $value = $customPostTypeAPI->getRawContent($highlight);
+                $value = $customPostTypeAPI->getContent($highlight);
                 if ($fieldDataAccessor->getFieldName() === 'title') {
                     return limitString($value, 100);
                 }

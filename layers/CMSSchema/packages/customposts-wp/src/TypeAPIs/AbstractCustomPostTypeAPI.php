@@ -410,21 +410,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
 
-        // Basic content: remove embeds, shortcodes, and tags
-        // Remove unneeded filters, then add them again
-        // @see wp-includes/default-filters.php
-        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
-        $wp_embed = $GLOBALS['wp_embed'];
-        App::removeFilter('the_content', $wp_embed->autoembed(...), 8);
-        App::removeFilter('the_content', wpautop(...));
-
-        // Do not allow HTML tags or shortcodes
-        $ret = strip_shortcodes($customPost->post_content);
-        $ret = \apply_filters('the_content', $ret);
-        \add_filter('the_content', $wp_embed->autoembed(...), 8);
-        \add_filter('the_content', wpautop(...));
-
-        return strip_tags($ret);
+        return $customPost->post_content;
     }
 
     public function getPublishedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string
