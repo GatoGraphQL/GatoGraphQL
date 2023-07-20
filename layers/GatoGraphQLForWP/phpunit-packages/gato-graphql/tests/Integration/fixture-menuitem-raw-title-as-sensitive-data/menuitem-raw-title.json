@@ -1,1 +1,25 @@
-{}
+{
+    "data": {
+        "menu": {
+            "id": 39,
+            "items": [
+                {
+                    "id": 1228,
+                    "rawTitle": ""
+                },
+                {
+                    "id": 1229,
+                    "rawTitle": ""
+                },
+                {
+                    "id": 1230,
+                    "rawTitle": ""
+                },
+                {
+                    "id": 1232,
+                    "rawTitle": ""
+                }
+            ]
+        }
+    }
+}
