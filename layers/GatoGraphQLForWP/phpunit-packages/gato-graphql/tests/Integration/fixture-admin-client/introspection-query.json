@@ -125,7 +125,7 @@
             },
             {
               "name": "content",
-              "description": "Comment's content, in HTML format",
+              "description": "Comment's content",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -367,14 +367,14 @@
             },
             {
               "name": "rawContent",
-              "description": "Comment's content, in raw format",
+              "description": "Comment's content in raw format (as it exists in the database)",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
-                "name": "String!",
+                "name": "HTML!",
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "HTML",
                   "ofType": null
                 }
               },
@@ -1569,7 +1569,7 @@
             },
             {
               "name": "content",
-              "description": "Custom post content, in HTML format",
+              "description": "Custom post content",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -1577,22 +1577,6 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "HTML",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "contentSource",
-              "description": "Retrieve the content in its 'source' format, including the (Gutenberg) block delimiter HTML comments",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "String!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
                   "ofType": null
                 }
               },
@@ -1696,9 +1680,13 @@
               "description": "Custom post excerpt",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1918,7 +1906,39 @@
             },
             {
               "name": "rawContent",
-              "description": "Custom post content, in raw format",
+              "description": "Custom post content in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "HTML!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "HTML",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawExcerpt",
+              "description": "Custom post excerpt in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawTitle",
+              "description": "Custom post title in raw format (as it exists in the database)",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -2164,9 +2184,13 @@
               "description": "Custom post title",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2199,6 +2223,18 @@
                   "name": "URLAbsolutePath",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "wpAdminEditURL",
+              "description": "The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "HTML",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -3649,6 +3685,18 @@
               "deprecationReason": null
             },
             {
+              "name": "rawTitle",
+              "description": "Menu item title in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "self",
               "description": "The same object",
               "args": [],
@@ -4314,7 +4362,7 @@
             },
             {
               "name": "content",
-              "description": "Custom post content, in HTML format",
+              "description": "Custom post content",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -4322,22 +4370,6 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "HTML",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "contentSource",
-              "description": "Retrieve the content in its 'source' format, including the (Gutenberg) block delimiter HTML comments",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "String!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
                   "ofType": null
                 }
               },
@@ -4441,9 +4473,13 @@
               "description": "Custom post excerpt",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -4719,7 +4755,39 @@
             },
             {
               "name": "rawContent",
-              "description": "Custom post content, in raw format",
+              "description": "Custom post content in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "HTML!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "HTML",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawExcerpt",
+              "description": "Custom post excerpt in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawTitle",
+              "description": "Custom post title in raw format (as it exists in the database)",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -4786,9 +4854,13 @@
               "description": "Custom post title",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -4821,6 +4893,18 @@
                   "name": "URLAbsolutePath",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "wpAdminEditURL",
+              "description": "The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "HTML",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -5251,7 +5335,7 @@
             },
             {
               "name": "content",
-              "description": "Custom post content, in HTML format",
+              "description": "Custom post content",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -5259,22 +5343,6 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "HTML",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "contentSource",
-              "description": "Retrieve the content in its 'source' format, including the (Gutenberg) block delimiter HTML comments",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": "String!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
                   "ofType": null
                 }
               },
@@ -5378,9 +5446,13 @@
               "description": "Custom post excerpt",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -5660,7 +5732,39 @@
             },
             {
               "name": "rawContent",
-              "description": "Custom post content, in raw format",
+              "description": "Custom post content in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "HTML!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "HTML",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawExcerpt",
+              "description": "Custom post excerpt in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawTitle",
+              "description": "Custom post title in raw format (as it exists in the database)",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -5864,9 +5968,13 @@
               "description": "Custom post title",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -5899,6 +6007,18 @@
                   "name": "URLAbsolutePath",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "wpAdminEditURL",
+              "description": "The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "HTML",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -15296,7 +15416,7 @@
           "fields": [
             {
               "name": "content",
-              "description": "Custom post content, in HTML format",
+              "description": "Custom post content",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -15407,9 +15527,13 @@
               "description": "Custom post excerpt",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -15523,7 +15647,39 @@
             },
             {
               "name": "rawContent",
-              "description": "Custom post content, in raw format",
+              "description": "Custom post content in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "HTML!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "HTML",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawExcerpt",
+              "description": "Custom post excerpt in raw format (as it exists in the database)",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "rawTitle",
+              "description": "Custom post title in raw format (as it exists in the database)",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -15574,9 +15730,13 @@
               "description": "Custom post title",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null

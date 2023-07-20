@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Comments\FieldResolvers\ObjectType;
 
 use DateTime;
+use PoPCMSSchema\Comments\Module;
+use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
@@ -22,6 +24,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -300,6 +303,20 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         ];
     }
 
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatCommentRawContentAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'rawContent';
+        }
+        return $sensitiveFieldArgNames;
+    }
+
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
@@ -359,8 +376,8 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'content' => $this->__('Comment\'s content, in HTML format', 'pop-comments'),
-            'rawContent' => $this->__('Comment\'s content, in raw format', 'pop-comments'),
+            'content' => $this->__('Comment\'s content', 'pop-comments'),
+            'rawContent' => $this->__('Comment\'s content in raw format (as it exists in the database)', 'pop-comments'),
             'authorName' => $this->__('Comment author\'s name', 'pop-comments'),
             'authorURL' => $this->__('Comment author\'s URL', 'pop-comments'),
             'authorEmail' => $this->__('Comment author\'s email', 'pop-comments'),

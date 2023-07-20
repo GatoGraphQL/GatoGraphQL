@@ -8,23 +8,6 @@
                 "customPosts": [
                     {
                         "__typename": "GenericCustomPost",
-                        "id": 634,
-                        "title": "Recusandae vel deleniti est expedita dolores quasi",
-                        "tags": [
-                            {
-                                "__typename": "GenericTag",
-                                "id": 28,
-                                "name": "Tango"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 29,
-                                "name": "Hip Hop"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
                         "id": 654,
                         "title": "Dummy CPT with blocks",
                         "tags": [
@@ -61,6 +44,23 @@
                         "__typename": "GenericCustomPost",
                         "id": 658,
                         "title": "Dummy CPT with no content",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 28,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 29,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 634,
+                        "title": "Recusandae vel deleniti est expedita dolores quasi",
                         "tags": [
                             {
                                 "__typename": "GenericTag",

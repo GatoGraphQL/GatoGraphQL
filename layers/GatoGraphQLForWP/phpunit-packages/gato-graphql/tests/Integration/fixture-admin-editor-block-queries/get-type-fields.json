@@ -278,9 +278,6 @@
               "name": "content"
             },
             {
-              "name": "contentSource"
-            },
-            {
               "name": "customPostType"
             },
             {
@@ -320,6 +317,12 @@
               "name": "rawContent"
             },
             {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
               "name": "self"
             },
             {
@@ -345,6 +348,9 @@
             },
             {
               "name": "urlPath"
+            },
+            {
+              "name": "wpAdminEditURL"
             }
           ],
           "kind": "OBJECT",
@@ -627,6 +633,9 @@
               "name": "parentID"
             },
             {
+              "name": "rawTitle"
+            },
+            {
               "name": "self"
             },
             {
@@ -715,9 +724,6 @@
               "name": "content"
             },
             {
-              "name": "contentSource"
-            },
-            {
               "name": "customPostType"
             },
             {
@@ -769,6 +775,12 @@
               "name": "rawContent"
             },
             {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
               "name": "self"
             },
             {
@@ -785,6 +797,9 @@
             },
             {
               "name": "urlPath"
+            },
+            {
+              "name": "wpAdminEditURL"
             }
           ],
           "kind": "OBJECT",
@@ -839,9 +854,6 @@
               "name": "content"
             },
             {
-              "name": "contentSource"
-            },
-            {
               "name": "customPostType"
             },
             {
@@ -893,6 +905,12 @@
               "name": "rawContent"
             },
             {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
               "name": "self"
             },
             {
@@ -918,6 +936,9 @@
             },
             {
               "name": "urlPath"
+            },
+            {
+              "name": "wpAdminEditURL"
             }
           ],
           "kind": "OBJECT",
@@ -2326,6 +2347,12 @@
             },
             {
               "name": "rawContent"
+            },
+            {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
             },
             {
               "name": "slug"

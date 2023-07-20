@@ -61,6 +61,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function treatCustomPostRawContentFieldsAsSensitiveData(): bool
+    {
+        $envVariable = Environment::TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     /**
      * @return string[]
      */

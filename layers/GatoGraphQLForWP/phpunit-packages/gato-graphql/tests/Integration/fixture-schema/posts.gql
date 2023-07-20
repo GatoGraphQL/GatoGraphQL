@@ -36,6 +36,8 @@ query {
     # modifiedDateStr(format: "m-d")
     postFormat
     rawContent
+    rawTitle
+    rawExcerpt
     slug
     status
     tagCount

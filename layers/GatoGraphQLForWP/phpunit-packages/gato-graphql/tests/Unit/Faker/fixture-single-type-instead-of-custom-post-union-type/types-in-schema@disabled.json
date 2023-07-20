@@ -50,7 +50,7 @@
                         {
                             "name": "excerpt",
                             "type": {
-                                "name": "String"
+                                "name": "String!"
                             }
                         },
                         {
@@ -90,12 +90,6 @@
                             }
                         },
                         {
-                            "name": "rawContent",
-                            "type": {
-                                "name": "HTML!"
-                            }
-                        },
-                        {
                             "name": "self",
                             "type": {
                                 "name": "Page!"
@@ -116,7 +110,7 @@
                         {
                             "name": "title",
                             "type": {
-                                "name": "String"
+                                "name": "String!"
                             }
                         },
                         {
@@ -800,7 +794,7 @@
                         {
                             "name": "excerpt",
                             "type": {
-                                "name": "String"
+                                "name": "String!"
                             }
                         },
                         {
@@ -822,12 +816,6 @@
                             }
                         },
                         {
-                            "name": "rawContent",
-                            "type": {
-                                "name": "HTML!"
-                            }
-                        },
-                        {
                             "name": "slug",
                             "type": {
                                 "name": "String!"
@@ -842,7 +830,7 @@
                         {
                             "name": "title",
                             "type": {
-                                "name": "String"
+                                "name": "String!"
                             }
                         },
                         {

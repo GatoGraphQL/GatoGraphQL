@@ -18,6 +18,7 @@ class MenuItem
         public readonly string|int|null $parentID,
         public readonly string $label,
         public readonly string $title,
+        public readonly string $rawTitle,
         public readonly string $url,
         public readonly string $description,
         public readonly array $classes,

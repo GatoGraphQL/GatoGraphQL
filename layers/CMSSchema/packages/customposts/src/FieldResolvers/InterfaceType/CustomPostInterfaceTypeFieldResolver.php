@@ -4,15 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\FieldResolvers\InterfaceType;
 
-use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPCMSSchema\CustomPosts\Module;
+use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InterfaceType\CustomPostInterfaceTypeResolver;
@@ -20,6 +13,16 @@ use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTy
 use PoPCMSSchema\SchemaCommons\ComponentProcessors\CommonFilterInputContainerComponentProcessor;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\DateTimeScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractQueryableSchemaInterfaceTypeFieldResolver;
+use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterfaceTypeFieldResolver
 {
@@ -161,9 +164,27 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'modifiedDate',
             'modifiedDateStr',
             'title',
+            'rawTitle',
             'excerpt',
+            'rawExcerpt',
             'customPostType',
         ];
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldArgNames = parent::getSensitiveFieldNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->treatCustomPostRawContentFieldsAsSensitiveData()) {
+            $sensitiveFieldArgNames[] = 'rawContent';
+            $sensitiveFieldArgNames[] = 'rawTitle';
+            $sensitiveFieldArgNames[] = 'rawExcerpt';
+        }
+        return $sensitiveFieldArgNames;
     }
 
     public function getFieldTypeResolver(string $fieldName): ConcreteTypeResolverInterface
@@ -175,7 +196,9 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'modifiedDate'
                 => $this->getDateTimeScalarTypeResolver(),
             'title',
+            'rawTitle',
             'excerpt',
+            'rawExcerpt',
             'dateStr',
             'modifiedDateStr'
                 => $this->getStringScalarTypeResolver(),
@@ -207,6 +230,10 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             case 'modifiedDate':
             case 'modifiedDateStr':
             case 'customPostType':
+            case 'title':
+            case 'rawTitle':
+            case 'excerpt':
+            case 'rawExcerpt':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getFieldTypeModifiers($fieldName);
@@ -218,8 +245,8 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'url' => $this->__('Custom post URL', 'customposts'),
             'urlPath' => $this->__('Custom post URL path', 'customposts'),
             'slug' => $this->__('Custom post slug', 'customposts'),
-            'content' => $this->__('Custom post content, in HTML format', 'customposts'),
-            'rawContent' => $this->__('Custom post content, in raw format', 'customposts'),
+            'content' => $this->__('Custom post content', 'customposts'),
+            'rawContent' => $this->__('Custom post content in raw format (as it exists in the database)', 'customposts'),
             'status' => $this->__('Custom post status', 'customposts'),
             'isStatus' => $this->__('Is the custom post in the given status?', 'customposts'),
             'date' => $this->__('Custom post published date', 'customposts'),
@@ -227,7 +254,9 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'modifiedDate' => $this->__('Custom post modified date', 'customposts'),
             'modifiedDateStr' => $this->__('Custom post modified date, in String format', 'customposts'),
             'title' => $this->__('Custom post title', 'customposts'),
+            'rawTitle' => $this->__('Custom post title in raw format (as it exists in the database)', 'customposts'),
             'excerpt' => $this->__('Custom post excerpt', 'customposts'),
+            'rawExcerpt' => $this->__('Custom post excerpt in raw format (as it exists in the database)', 'customposts'),
             'customPostType' => $this->__('Custom post type', 'customposts'),
             default => parent::getFieldDescription($fieldName),
         };
