@@ -34,7 +34,7 @@ Then this single GraphQL query contains all the data.
 
 Current limitations:
 
-- `categories` is not handling parents!
+<!-- - `categories` is not handling parents! -->
 - can only use `setCategoriesOnPost`, so the cat must exist!
 - `featuredImageID` cannot be replicated yet, as there's no mutation to upload attachments yet
 
