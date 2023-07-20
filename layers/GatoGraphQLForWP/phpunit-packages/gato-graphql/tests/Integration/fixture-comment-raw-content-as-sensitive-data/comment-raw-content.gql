@@ -1,0 +1,6 @@
+{
+  comment(by: { id: 2 }) {
+    id
+    rawContent
+  }
+}
