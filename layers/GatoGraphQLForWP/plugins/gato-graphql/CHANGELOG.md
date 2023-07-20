@@ -19,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added support for the "Multi-Field Directives" custom feature
 - Send custom headers in the GraphQL response
 - Added field `CustomPost.wpAdminEditURL`
+- Added several "raw content" fields, made them all “sensitive”
 - Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
 - Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
 - Mutations `setTagsOnPost`, `createPost` and `updatePost` now receive a oneof input object for tags

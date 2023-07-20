@@ -976,6 +976,18 @@ If we want to expose it always, we can also switch to treating it as a normal fi
 
 ![Settings for the Custom Posts module](../../images/releases/v1.0/settings-customposts.png)
 
+## Added several "raw content" fields, made them all “sensitive”
+
+The following fields were added to the GraphQL schema:
+
+- `CustomPost.rawExcerpt`
+- `CustomPost.rawTitle`
+- `Menu.rawTitle`
+
+"Raw content" fields contain data that may not be considered public (such as the inner HTML code for Gutenberg blocks in `CustomPost.rawContent`).
+
+For this reason, these fields, plus `CustomPost.rawContent` and `Comment.rawContent`, have been marked as a “sensitive” data elements.
+
 ## Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
 
 Mutations `createPost` and `updatePost` can now indicate the author of the post, via the `authorID` input:
