@@ -113,7 +113,7 @@ query FailIfResponseHasErrors
   ) @remove
 }
 
-query ExportInputsForMutation($postId: ID!)
+query ExportInputsForMutation
   @depends(on: "FailIfResponseHasErrors")
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
