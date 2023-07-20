@@ -155,10 +155,32 @@ query ExportInputsForMutation
     @export(as: "postExcerpt")
     @remove
 
-  postFeaturedImageSlug: _objectProperty(
-    object: $__postData,
-    by: { path: "featuredImage.slug" }
+  postFeaturedImageSlug: _echo(
+    value: $__postData
   )
+    @underJSONObjectProperty(
+      affectDirectivesUnderPos: [1, 2, 4],
+      by: { key: "featuredImage"}
+      passOnwardsAs: "featuredImage"
+    )
+      @applyField(
+        name: "_isNotNull",
+        arguments: {
+          value: $featuredImage
+        },
+        passOnwardsAs: "hasFeaturedImage"
+      )
+      @if(condition: $hasFeaturedImage)
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $featuredImage,
+            by: { key: "slug" }
+          },
+          setResultInResponse: true
+        )
+      @unless(condition: $hasFeaturedImage)
+        @setNull
     @export(as: "postFeaturedImageSlug")
     @remove
 
