@@ -37,7 +37,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function treatMenuItemRawTitleFieldsAsSensitiveData(): bool
     {
-        $envVariable = Environment::TREAT_MENU_ITEM_RAW_TITLE_AS_SENSITIVE_DATA;
+        $envVariable = Environment::TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
