@@ -36,6 +36,7 @@ Current limitations:
 
 <!-- - `categories` is not handling parents! -->
 - can only use `setCategoriesOnPost`, so the cat must exist!
+- can only use `setTagsOnPost`, so the tag must exist! (because the slug is not enough to create it, as the name could be in uppercase)
 - `featuredImageID` cannot be replicated yet, as there's no mutation to upload attachments yet
 
 Process with this query:
