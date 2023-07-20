@@ -20,7 +20,7 @@ query ConnectToGraphQLAPI($postId: ID!)
   @depends(on: "InitializeDynamicVariables")
 {
   externalData: _sendGraphQLHTTPRequest(input:{
-    endpoint: "https://gato-graphql-pro.lndo.site/graphql",
+    endpoint: "https://upstreamsite.com/graphql",
     query: """
     
 query GetPost($postId: ID!) {
