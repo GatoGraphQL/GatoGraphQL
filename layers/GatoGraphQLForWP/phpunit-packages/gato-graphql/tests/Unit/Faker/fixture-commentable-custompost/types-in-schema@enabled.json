@@ -81,7 +81,7 @@
                         {
                             "name": "rawContent",
                             "type": {
-                                "name": "String!"
+                                "name": "HTML!"
                             }
                         },
                         {
@@ -141,12 +141,6 @@
                             "name": "content",
                             "type": {
                                 "name": "HTML!"
-                            }
-                        },
-                        {
-                            "name": "contentSource",
-                            "type": {
-                                "name": "String!"
                             }
                         },
                         {
@@ -218,7 +212,7 @@
                         {
                             "name": "rawContent",
                             "type": {
-                                "name": "String!"
+                                "name": "HTML!"
                             }
                         },
                         {
@@ -285,12 +279,6 @@
                             "name": "content",
                             "type": {
                                 "name": "HTML!"
-                            }
-                        },
-                        {
-                            "name": "contentSource",
-                            "type": {
-                                "name": "String!"
                             }
                         },
                         {
@@ -368,7 +356,7 @@
                         {
                             "name": "rawContent",
                             "type": {
-                                "name": "String!"
+                                "name": "HTML!"
                             }
                         },
                         {
@@ -1214,7 +1202,7 @@
                         {
                             "name": "rawContent",
                             "type": {
-                                "name": "String!"
+                                "name": "HTML!"
                             }
                         },
                         {
