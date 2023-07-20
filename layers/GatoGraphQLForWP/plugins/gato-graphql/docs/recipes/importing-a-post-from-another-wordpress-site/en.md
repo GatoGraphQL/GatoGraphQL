@@ -209,8 +209,8 @@ query ExportInputsForMutation($postId: ID!)
 
 mutation ImportPost
   @depends(on: "ExportInputsForMutation")
-  @skip(if: $requestHasErrors)
-  @skip(if: $dataHasErrors)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
 {
   createPost(input: {
