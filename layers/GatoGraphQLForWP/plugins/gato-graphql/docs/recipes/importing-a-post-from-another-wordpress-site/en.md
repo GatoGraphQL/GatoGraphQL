@@ -155,32 +155,29 @@ query ExportInputsForMutation
     @export(as: "postExcerpt")
     @remove
 
-  postFeaturedImageSlug: _echo(
-    value: $__postData
+  postFeaturedImageSlug: _objectProperty(
+    object: $__postData,
+    by: { key: "featuredImage" }
   )
-    @underJSONObjectProperty(
-      affectDirectivesUnderPos: [1, 2, 4],
-      by: { key: "featuredImage"}
-      passOnwardsAs: "featuredImage"
+    @passOnwards(
+      as: "featuredImage"
     )
+    @applyField(
+      name: "_isNotNull",
+      arguments: {
+        value: $featuredImage
+      },
+      passOnwardsAs: "hasFeaturedImage"
+    )
+    @if(condition: $hasFeaturedImage)
       @applyField(
-        name: "_isNotNull",
+        name: "_objectProperty",
         arguments: {
-          value: $featuredImage
+          object: $featuredImage,
+          by: { key: "slug" }
         },
-        passOnwardsAs: "hasFeaturedImage"
+        setResultInResponse: true
       )
-      @if(condition: $hasFeaturedImage)
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $featuredImage,
-            by: { key: "slug" }
-          },
-          setResultInResponse: true
-        )
-      @unless(condition: $hasFeaturedImage)
-        @setNull
     @export(as: "postFeaturedImageSlug")
     @remove
 
@@ -290,6 +287,9 @@ mutation ImportPost
   }
 }
 ```
+
+Add tip on `@passOnwards`!!!
+
 
 Then this single GraphQL query contains all the data.
 
