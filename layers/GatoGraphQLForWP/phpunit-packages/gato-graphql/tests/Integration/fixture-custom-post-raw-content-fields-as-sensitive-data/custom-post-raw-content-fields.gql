@@ -1,0 +1,8 @@
+{
+  post(by: { id: 1 }) {
+    id
+    rawContent
+    rawExcerpt
+    rawTitle
+  }
+}
