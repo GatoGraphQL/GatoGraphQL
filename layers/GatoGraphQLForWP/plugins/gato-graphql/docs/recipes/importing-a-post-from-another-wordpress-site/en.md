@@ -163,7 +163,7 @@ query ExportInputsForMutation
       as: "featuredImage"
     )
     @applyField(
-      name: "_isNotNull",
+      name: "_notNull",
       arguments: {
         value: $featuredImage
       },
@@ -189,7 +189,7 @@ query ExportInputsForMutation
       as: "author"
     )
     @applyField(
-      name: "_isNotNull",
+      name: "_notNull",
       arguments: {
         value: $author
       },
