@@ -12,7 +12,7 @@ Use (https://make.wordpress.org/core/2020/11/05/application-passwords-integratio
 ```bash
 curl \
   --user "USER:PASSWORD" \
-  https://gato-graphql-pro.lndo.site/wp-json/wp/v2/posts/40/?_fields=id,excerpt.rendered,slug,title.raw,author,categories,tags,content.raw&context=edit
+  https://mysite.com/wp-json/wp/v2/posts/40/?_fields=id,excerpt.rendered,slug,title.raw,author,categories,tags,content.raw&context=edit
 ```
 
 nops:
