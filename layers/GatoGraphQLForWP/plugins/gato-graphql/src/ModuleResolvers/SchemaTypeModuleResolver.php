@@ -1032,6 +1032,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     Properties::POSSIBLE_VALUES => $possibleValues,
                     Properties::IS_MULTIPLE => true,
                 ];
+            } elseif ($module === self::SCHEMA_MENUS) {
+                $option = self::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => sprintf(
+                        $sensitiveDataTitlePlaceholder,
+                        \__('menu item raw title', 'gato-graphql'),
+                    ),
+                    Properties::DESCRIPTION => sprintf(
+                        $sensitiveDataDescPlaceholder,
+                        \__('menu item raw title', 'gato-graphql'),
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
             }
         } elseif ($module === self::SCHEMA_BLOCKS) {
             $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
@@ -1139,24 +1157,6 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
                     \__('comment raw content', 'gato-graphql'),
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
-            ];
-        } elseif ($module === self::SCHEMA_MENUS) {
-            $option = self::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => sprintf(
-                    $sensitiveDataTitlePlaceholder,
-                    \__('menu item raw title', 'gato-graphql'),
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    $sensitiveDataDescPlaceholder,
-                    \__('menu item raw title', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
