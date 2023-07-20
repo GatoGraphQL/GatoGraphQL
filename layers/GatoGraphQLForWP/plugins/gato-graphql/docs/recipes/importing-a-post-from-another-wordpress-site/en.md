@@ -11,7 +11,7 @@ query GetPost($postId: ID!) {
     slug
     rawTitle
     rawContent
-    rawExcerpt,
+    rawExcerpt
     author {
       id
       slug
@@ -32,7 +32,11 @@ query GetPost($postId: ID!) {
 
 Then this single GraphQL query contains all the data.
 
-(Notice that `categories` is not handling parents!)
+Current limitations:
+
+- `categories` is not handling parents!
+- can only use `setCategoriesOnPost`, so the cat must exist!
+- `featuredImageID` cannot be replicated yet, as there's no mutation to upload attachments yet
 
 Process with this query:
 
@@ -62,8 +66,6 @@ curl \
 Mention that we could use this, but instead use other way, because of next recipe:
   https://newapi.getpop.org/wp-json/wp/v2/categories?post=1178
   https://newapi.getpop.org/wp-json/wp/v2/tags?post=1178
-
-Mention that `featuredImageID` cannot be replicated yet
 
 Use:
 
