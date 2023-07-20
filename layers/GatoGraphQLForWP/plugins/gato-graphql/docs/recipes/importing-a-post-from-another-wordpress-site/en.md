@@ -44,12 +44,10 @@ query GetPost($postId: ID!) {
     categories {
       id
       slug
-      name
     }
     tags {
       id
       slug
-      name
     }
   }
 }
