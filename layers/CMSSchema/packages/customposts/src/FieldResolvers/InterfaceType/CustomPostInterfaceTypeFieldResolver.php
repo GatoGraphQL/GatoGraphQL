@@ -161,7 +161,9 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'modifiedDate',
             'modifiedDateStr',
             'title',
+            'rawTitle',
             'excerpt',
+            'rawExcerpt',
             'customPostType',
         ];
     }
@@ -175,7 +177,9 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'modifiedDate'
                 => $this->getDateTimeScalarTypeResolver(),
             'title',
+            'rawTitle',
             'excerpt',
+            'rawExcerpt',
             'dateStr',
             'modifiedDateStr'
                 => $this->getStringScalarTypeResolver(),
@@ -227,7 +231,9 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'modifiedDate' => $this->__('Custom post modified date', 'customposts'),
             'modifiedDateStr' => $this->__('Custom post modified date, in String format', 'customposts'),
             'title' => $this->__('Custom post title', 'customposts'),
+            'rawTitle' => $this->__('Custom post title', 'customposts'),
             'excerpt' => $this->__('Custom post excerpt', 'customposts'),
+            'rawExcerpt' => $this->__('Custom post excerpt', 'customposts'),
             'customPostType' => $this->__('Custom post type', 'customposts'),
             default => parent::getFieldDescription($fieldName),
         };
