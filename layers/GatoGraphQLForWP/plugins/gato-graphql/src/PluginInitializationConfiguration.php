@@ -312,6 +312,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA,
             ],
+            [
+                'class' => CommentsModule::class,
+                'envVariable' => CommentsEnvironment::TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_COMMENTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA,
+            ],
             // Media default/max limits
             [
                 'class' => MediaModule::class,

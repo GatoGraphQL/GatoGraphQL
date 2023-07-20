@@ -66,6 +66,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public final const OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA = 'treat-custompost-raw-content-fields-as-sensitive-data';
     public final const OPTION_TREAT_CUSTOMPOST_EDIT_URL_AS_SENSITIVE_DATA = 'treat-custompost-edit-url-as-sensitive-data';
     public final const OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA = 'treat-comment-status-as-sensitive-data';
+    public final const OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA = 'treat-comment-raw-content-as-sensitive-data';
     public final const OPTION_TREAT_USER_EMAIL_AS_SENSITIVE_DATA = 'treat-user-email-as-sensitive-data';
     public final const OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA = 'treat-user-role-as-sensitive-data';
     public final const OPTION_TREAT_USER_CAPABILITY_AS_SENSITIVE_DATA = 'treat-user-capability-as-sensitive-data';
@@ -730,6 +731,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 self::OPTION_CUSTOMPOST_COMMENT_OR_COMMENT_RESPONSE_LIST_DEFAULT_LIMIT => -1,
                 ModuleSettingOptions::LIST_MAX_LIMIT => -1,
                 self::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA => true,
+                self::OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA => true,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -1117,6 +1119,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
                     \__('comment status', 'gato-graphql'),
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => sprintf(
+                    $sensitiveDataTitlePlaceholder,
+                    \__('comment raw content', 'gato-graphql'),
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    $sensitiveDataDescPlaceholder,
+                    \__('comment raw content', 'gato-graphql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
