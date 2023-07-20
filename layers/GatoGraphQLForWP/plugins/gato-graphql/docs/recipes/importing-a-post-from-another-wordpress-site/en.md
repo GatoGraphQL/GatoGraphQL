@@ -1,5 +1,49 @@
 # Importing a post from another WordPress site
 
+## When the origin server exposes a Gato GraphQL endpoint
+
+Use Gato GraphQL on other end, then can execute this GraphQL query:
+
+```graphql
+query GetPost($postId: ID!) {
+  post(by: { id: $postId }) {
+    id
+    slug
+    rawTitle
+    rawContent
+    rawExcerpt,
+    author {
+      id
+      slug
+    }
+    categories {
+      id
+      slug
+      name
+    }
+    tags {
+      id
+      slug
+      name
+    }
+  }
+}
+```
+
+Then this single GraphQL query contains all the data.
+
+(Notice that `categories` is not handling parents!)
+
+Process with this query:
+
+```graphql
+...
+```
+
+## When the origin server exposes WP REST API endpoints
+
+Otherwise can use REST API, but must use context=edit and pass the application password, and make multiple requests.
+
 Use:
 
 https://newapi.getpop.org/wp-json/wp/v2/posts/1178/
@@ -12,7 +56,7 @@ Use (https://make.wordpress.org/core/2020/11/05/application-passwords-integratio
 ```bash
 curl \
   --user "USER:PASSWORD" \
-  https://mysite.com/wp-json/wp/v2/posts/40/?_fields=id,slug,title.raw,content.raw,excerpt.raw,,author,categories,tags&context=edit
+  https://mysite.com/wp-json/wp/v2/posts/40/?_fields=id,slug,title.raw,content.raw,excerpt.raw,author,categories,tags&context=edit
 ```
 
 Mention that we could use this, but instead use other way, because of next recipe:
