@@ -303,13 +303,13 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'rawContent',
             'authorName',
             'dateStr'
                 => $this->getStringScalarTypeResolver(),
             'type'
                 => $this->getCommentTypeEnumTypeResolver(),
-            'content'
+            'content',
+            'rawContent'
                 => $this->getHTMLScalarTypeResolver(),
             'authorURL'
                 => $this->getURLScalarTypeResolver(),

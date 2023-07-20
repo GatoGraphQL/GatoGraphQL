@@ -174,13 +174,13 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             'date',
             'modifiedDate'
                 => $this->getDateTimeScalarTypeResolver(),
-            'rawContent',
             'title',
             'excerpt',
             'dateStr',
             'modifiedDateStr'
                 => $this->getStringScalarTypeResolver(),
-            'content'
+            'content',
+            'rawContent'
                 => $this->getHTMLScalarTypeResolver(),
             'customPostType'
                 => $this->getCustomPostEnumStringScalarTypeResolver(),
