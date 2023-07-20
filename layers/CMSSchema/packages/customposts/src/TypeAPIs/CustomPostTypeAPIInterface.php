@@ -30,7 +30,9 @@ interface CustomPostTypeAPIInterface
     public function getPublishedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string;
     public function getModifiedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string;
     public function getTitle(string|int|object $customPostObjectOrID): ?string;
+    public function getRawTitle(string|int|object $customPostObjectOrID): ?string;
     public function getExcerpt(string|int|object $customPostObjectOrID): ?string;
+    public function getRawExcerpt(string|int|object $customPostObjectOrID): ?string;
     /**
      * Get the custom post with provided ID or, if it doesn't exist, null
      */
