@@ -262,7 +262,9 @@ mutation ImportPost
     excerpt: $postExcerpt
     # authorID: $authorID,
     # featuredImageID: $featuredImageID,
-    # categoryIDs: $categoryIDs,
+    categoriesBy: {
+      slugPaths: $postCategorySlugPaths
+    },
     tagsBy: {
       slugs: $postTagSlugs
     }
