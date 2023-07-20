@@ -15,12 +15,12 @@ abstract class AbstractTreatCommentRawContentAsPrivateDataModifyPluginSettingsFi
 
     protected function getSettingsKey(): string
     {
-        return SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA;
+        return SchemaTypeModuleResolver::OPTION_TREAT_COMMENT_RAW_CONTENT_AS_SENSITIVE_DATA;
     }
 
     protected function getModuleID(string $dataName): string
     {
-        return 'gatographql_gatographql_schema-customposts';
+        return 'gatographql_gatographql_schema-comments';
     }
 
     protected function getPluginSettingsNewValue(): mixed
