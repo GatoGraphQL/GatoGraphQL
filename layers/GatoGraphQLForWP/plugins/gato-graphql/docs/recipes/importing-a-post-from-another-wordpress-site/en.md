@@ -3,9 +3,21 @@
 Use:
 
 https://newapi.getpop.org/wp-json/wp/v2/posts/1178/
-https://newapi.getpop.org/wp-json/wp/v2/categories?post=1178
-https://newapi.getpop.org/wp-json/wp/v2/tags?post=1178
+https://newapi.getpop.org/wp-json/wp/v2/categories/?include=29
+https://newapi.getpop.org/wp-json/wp/v2/tags/?include=79,81,96,105,116
 https://newapi.getpop.org/wp-json/wp/v2/users/7
+
+Use (https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/):
+
+```bash
+curl \
+  --user "USER:PASSWORD" \
+  https://gato-graphql-pro.lndo.site/wp-json/wp/v2/posts/40/?_fields=id,excerpt.rendered,slug,title.raw,author,categories,tags,content.raw&context=edit
+```
+
+nops:
+  https://newapi.getpop.org/wp-json/wp/v2/categories?post=1178
+  https://newapi.getpop.org/wp-json/wp/v2/tags?post=1178
 
 Mention that `featuredImageID` cannot be replicated yet
 
