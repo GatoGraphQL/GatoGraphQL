@@ -205,7 +205,7 @@ query ExportInputsForMutation
     @export(as: "postAuthorSlug")
     @remove
 
-  postCategoryTags: _objectProperty(
+  postTagSlugs: _objectProperty(
     object: $__postData,
     by: { key: "tags" }
   )
