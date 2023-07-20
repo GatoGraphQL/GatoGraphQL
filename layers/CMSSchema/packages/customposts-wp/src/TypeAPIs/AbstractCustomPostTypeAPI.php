@@ -335,8 +335,12 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getExcerpt(string|int|object $customPostObjectOrID): ?string
     {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        return get_the_excerpt($customPostID);
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }        
+        return get_the_excerpt($customPost);
     }
 
     /**
