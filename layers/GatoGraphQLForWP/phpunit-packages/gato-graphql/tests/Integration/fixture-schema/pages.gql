@@ -37,6 +37,8 @@ query {
       title
     }
     rawContent
+    rawTitle
+    rawExcerpt
     slug
     status
     title
