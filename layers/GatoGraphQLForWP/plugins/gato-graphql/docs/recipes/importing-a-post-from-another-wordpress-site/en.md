@@ -45,7 +45,10 @@ Process with this query:
 ...
 ```
 
-## When the origin server exposes WP REST API endpoints
+Cannot do:
+  ## When the origin server exposes WP REST API endpoints
+Then:
+  Explain why as a tip!
 
 Otherwise can use REST API, but must use context=edit and pass the application password, and make multiple requests.
 
