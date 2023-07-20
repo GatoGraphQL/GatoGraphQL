@@ -201,6 +201,21 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     }
 
     /**
+     * @return string[]
+     */
+    public function getSensitiveFieldNames(): array
+    {
+        $sensitiveFieldNames = [];
+        foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
+            $sensitiveFieldNames = array_merge(
+                $sensitiveFieldNames,
+                $interfaceTypeFieldResolver->getSensitiveFieldNames()
+            );
+        }
+        return array_values(array_unique($sensitiveFieldNames));
+    }
+
+    /**
      * Each InterfaceTypeFieldResolver provides a list of fieldNames to the Interface.
      * The Interface may also accept other fieldNames from other InterfaceTypeFieldResolvers.
      * That's why this function is "partially" implemented: the Interface
