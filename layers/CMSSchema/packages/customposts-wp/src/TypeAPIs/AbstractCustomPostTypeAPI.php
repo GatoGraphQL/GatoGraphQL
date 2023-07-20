@@ -389,7 +389,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
         /** @var WP_Post $customPost */
-        return \apply_filters('the_title', $customPost->post_title, $customPostID);
+        return \get_the_title($customPost);
     }
 
     public function getContent(string|int|object $customPostObjectOrID): ?string
