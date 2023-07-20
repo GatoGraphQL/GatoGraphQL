@@ -15,7 +15,7 @@ curl \
   https://mysite.com/wp-json/wp/v2/posts/40/?_fields=id,slug,title.raw,content.raw,excerpt.raw,,author,categories,tags&context=edit
 ```
 
-nops:
+Mention that we could use this, but instead use other way, because of next recipe:
   https://newapi.getpop.org/wp-json/wp/v2/categories?post=1178
   https://newapi.getpop.org/wp-json/wp/v2/tags?post=1178
 
