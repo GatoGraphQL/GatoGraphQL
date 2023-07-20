@@ -205,6 +205,26 @@ query ExportInputsForMutation
     @export(as: "postAuthorSlug")
     @remove
 
+  postCategorySlugPaths: _objectProperty(
+    object: $__postData,
+    by: { key: "categorys" }
+  )
+    @underEachArrayItem(
+      passValueOnwardsAs: "category"
+    )
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $category,
+          by: {
+            key: "slugPath"
+          }
+        }
+        setResultInResponse: true
+      )
+    @export(as: "postCategorySlugPaths")
+    @remove
+
   postTagSlugs: _objectProperty(
     object: $__postData,
     by: { key: "tags" }
