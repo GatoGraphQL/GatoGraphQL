@@ -5,6 +5,24 @@
 Use Gato GraphQL on other end, then can execute this GraphQL query:
 
 ```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  defaultResponseHasErrors: _echo(value: false)
+    @export(as: "responseHasErrors")
+    @remove
+  defaultPostIsMissing: _echo(value: false)
+    @export(as: "postIsMissing")
+    @remove
+}
+
+query ConnectToGraphQLAPI($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  externalData: _sendGraphQLHTTPRequest(input:{
+    endpoint: "https://gato-graphql-pro.lndo.site/graphql",
+    query: """
+    
 query GetPost($postId: ID!) {
   post(by: { id: $postId }) {
     id
@@ -13,6 +31,10 @@ query GetPost($postId: ID!) {
     rawContent
     rawExcerpt
     author {
+      id
+      slug
+    }
+    featuredImage {
       id
       slug
     }
@@ -25,6 +47,220 @@ query GetPost($postId: ID!) {
       id
       slug
       name
+    }
+  }
+}
+
+    """,
+    variables: [
+      {
+        name: "postId",
+        value: $postId
+      }
+    ]
+  })
+    @export(as: "externalData")
+
+  requestProducedErrors: _isNull(value: $__externalData)
+    @export(as: "requestProducedErrors")
+    @remove
+}
+
+query ValidateResponse
+  @depends(on: "ConnectToGraphQLAPI")
+  @skip(if: $requestProducedErrors)
+{
+  responseHasErrors: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      key: "errors"
+    }
+  )
+    @export(as: "responseHasErrors")
+    @remove
+
+  postExists: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      path: "data.post"
+    }
+  )
+    @remove
+    
+  postIsMissing: _not(value: $__postExists)
+    @export(as: "postIsMissing")
+    @remove
+}
+
+query FailIfResponseHasErrors
+  @depends(on: "ValidateResponse")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @include(if: $responseHasErrors)
+{
+  errors: _objectProperty(
+    object: $externalData,
+    by: {
+      key: "errors"
+    }
+  ) @remove
+
+  _fail(
+    message: "Executing the GraphQL query produced error(s)"
+    data: {
+      errors: $__errors
+    }
+  ) @remove
+}
+
+query ExportInputsForMutation($postId: ID!)
+  @depends(on: "FailIfResponseHasErrors")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+{
+  postData: _objectProperty(
+    object: $externalData,
+    by: { path: "data.post" }
+  ) @remove
+
+  postSlug: _objectProperty(
+    object: $__postData,
+    by: { key: "slug" }
+  )
+    @export(as: "postSlug")
+    @remove
+
+  postTitle: _objectProperty(
+    object: $__postData,
+    by: { key: "rawTitle" }
+  )
+    @export(as: "postTitle")
+    @remove
+
+  postContent: _objectProperty(
+    object: $__postData,
+    by: { key: "rawContent" }
+  )
+    @export(as: "postContent")
+    @remove
+
+  postExcerpt: _objectProperty(
+    object: $__postData,
+    by: { key: "rawExcerpt" }
+  )
+    @export(as: "postExcerpt")
+    @remove
+
+  postFeaturedImageSlug: _objectProperty(
+    object: $__postData,
+    by: { path: "featuredImage.slug" }
+  )
+    @export(as: "postFeaturedImageSlug")
+    @remove
+
+  postAuthorSlug: _objectProperty(
+    object: $__postData,
+    by: { path: "author.slug" }
+  )
+    @export(as: "postAuthorSlug")
+    @remove
+
+  postCategorySlugs: _objectProperty(
+    object: $__postData,
+    by: { key: "categories" }
+  )
+    @underEachArrayItem(
+      passValueOnwardsAs: "category"
+    )
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $category,
+          by: {
+            key: "slug"
+          }
+        }
+        setResultInResponse: true
+      )
+    @export(as: "postCategorySlugs")
+    @remove
+
+  postCategoryTags: _objectProperty(
+    object: $__postData,
+    by: { key: "tags" }
+  )
+    @underEachArrayItem(
+      passValueOnwardsAs: "tag"
+    )
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $tag,
+          by: {
+            key: "slug"
+          }
+        }
+        setResultInResponse: true
+      )
+    @export(as: "postTagSlugs")
+    @remove
+}
+
+mutation ImportPost
+  @depends(on: "ExportInputsForMutation")
+  @skip(if: $requestHasErrors)
+  @skip(if: $dataHasErrors)
+  @skip(if: $postIsMissing)
+{
+  createPost(input: {
+    status: draft,
+    slug: $postSlug
+    title: $postTitle
+    contentAs: {
+      html: $postContent
+    },
+    excerpt: $postExcerpt
+    # authorID: $authorID,
+    # featuredImageID: $featuredImageID,
+    # categoryIDs: $categoryIDs,
+    tagsBy: {
+      slugs: $postTagSlugs
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      date
+      status
+
+      slug
+      title
+      content
+      excerpt
+
+      author {
+        id
+        slug
+      }
+      featuredImage {
+        id
+        slug
+      }
+      categories {
+        id
+        slug
+      }
+      tags {
+        id
+        slug
+      }
     }
   }
 }
@@ -98,13 +334,13 @@ query GetPostAndExportData($postId: ID!)
   @depends(on: "InitializeDynamicVariables")
 {
   post(by: { id : $postId }) {
-    # Fields not to be duplicated
+    # Fields not to be imported
     id
     slug
     date
     status
 
-    # Fields to be duplicated
+    # Fields to be imported
     author {
       id @export(as: "authorID")
     }
@@ -148,13 +384,13 @@ mutation DuplicatePost
       }
     }
     post {
-      # Fields not to be duplicated
+      # Fields not to be imported
       id
       slug
       date
       status
 
-      # Fields to be duplicated
+      # Fields to be imported
       author {
         id
       }
