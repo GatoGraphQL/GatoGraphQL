@@ -206,6 +206,7 @@ class MenuItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             // Commented out since this is the default FieldResolver's response
             // case 'label':
             // case 'title':
+            // case 'rawTitle':
             // case 'url':
             // case 'classes':
             // case 'target':
