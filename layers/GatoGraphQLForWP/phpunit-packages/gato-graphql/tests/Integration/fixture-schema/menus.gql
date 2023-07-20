@@ -40,6 +40,7 @@ fragment MenuItemData on MenuItem {
   localURLPath
   label
   title
+  rawTitle
   url
   classes
   target
