@@ -183,29 +183,28 @@ query ExportInputsForMutation
 
   postAuthorSlug: _objectProperty(
     object: $__postData,
-    by: { path: "author.slug" }
+    by: { key: "author" }
   )
-    @export(as: "postAuthorSlug")
-    @remove
-
-  postCategorySlugs: _objectProperty(
-    object: $__postData,
-    by: { key: "categories" }
-  )
-    @underEachArrayItem(
-      passValueOnwardsAs: "category"
+    @passOnwards(
+      as: "author"
     )
+    @applyField(
+      name: "_isNotNull",
+      arguments: {
+        value: $author
+      },
+      passOnwardsAs: "hasAuthor"
+    )
+    @if(condition: $hasAuthor)
       @applyField(
-        name: "_objectProperty"
+        name: "_objectProperty",
         arguments: {
-          object: $category,
-          by: {
-            key: "slug"
-          }
-        }
+          object: $author,
+          by: { key: "slug" }
+        },
         setResultInResponse: true
       )
-    @export(as: "postCategorySlugs")
+    @export(as: "postAuthorSlug")
     @remove
 
   postCategoryTags: _objectProperty(
