@@ -413,6 +413,18 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
             ],
             [
+                'class' => CustomPostsModule::class,
+                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA,
+            ],
+            [
+                'class' => CustomPostsModule::class,
+                'envVariable' => CustomPostsEnvironment::TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_CUSTOMPOST_RAW_CONTENT_FIELDS_AS_SENSITIVE_DATA,
+            ],
+            [
                 'class' => \PoPWPSchema\CustomPosts\Module::class,
                 'envVariable' => \PoPWPSchema\CustomPosts\Environment::TREAT_CUSTOMPOST_EDIT_URL_AS_SENSITIVE_DATA,
                 'module' => SchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTS,
