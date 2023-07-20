@@ -313,6 +313,10 @@ Indicate if number1 > number2.
 
 Indicate if number1 >= number2.
 
+### `_htmlStripTags`
+
+Strip HTML tags.
+
 ### `_if`
 
 If a boolean property is true, execute a field, else, execute another field.
