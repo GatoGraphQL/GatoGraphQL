@@ -22,14 +22,22 @@ By default, the following data elements are treated as “sensitive” (they can
 - `wpAdminEditURL`
 - `hasPassword`
 - `password`
+- `rawContent`
+- `rawTitle`
+- `rawExcerpt`
 
 **Comments:**
 
 - `status`
+- `rawContent`
 
 **Custom Post Mutations:**
 
 - `authorID` input
+
+**Menu Items:**
+
+- `rawTitle`
 
 ## Inspecting the “sensitive” data elements via schema introspection
 
