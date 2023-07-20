@@ -346,6 +346,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'optionModule' => SchemaTypeModuleResolver::SCHEMA_MENUS,
                 'option' => ModuleSettingOptions::LIST_MAX_LIMIT,
             ],
+            [
+                'class' => MenusModule::class,
+                'envVariable' => MenusEnvironment::TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA,
+                'module' => SchemaTypeModuleResolver::SCHEMA_MENUS,
+                'option' => SchemaTypeModuleResolver::OPTION_TREAT_MENUITEM_RAW_TITLE_AS_SENSITIVE_DATA,
+            ],
             // Tag default/max limits
             [
                 'class' => TagsModule::class,
