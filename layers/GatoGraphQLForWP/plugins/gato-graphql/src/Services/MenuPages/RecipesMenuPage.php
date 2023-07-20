@@ -579,10 +579,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 \__('Importing a post from another WordPress site', 'gato-graphql'),
             ],
             [
-                'importing-multiple-posts-at-once-from-another-wordpress-site',
-                \__('Importing multiple posts at once from another WordPress site', 'gato-graphql'),
-            ],
-            [
                 'reverting-mutations-in-case-of-error',
                 \__('Reverting mutations in case of error', 'gato-graphql'),
             ],
