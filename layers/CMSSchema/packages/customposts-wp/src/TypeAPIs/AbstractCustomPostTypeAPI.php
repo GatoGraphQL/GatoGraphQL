@@ -335,8 +335,22 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getExcerpt(string|int|object $customPostObjectOrID): ?string
     {
-        $customPostID = $this->getCustomPostID($customPostObjectOrID);
-        return get_the_excerpt($customPostID);
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+        return get_the_excerpt($customPost);
+    }
+
+    public function getRawExcerpt(string|int|object $customPostObjectOrID): ?string
+    {
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+        return $customPost->post_excerpt;
     }
 
     /**
@@ -381,15 +395,24 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getTitle(string|int|object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
         }
         /** @var WP_Post $customPost */
         return get_the_title($customPost);
+    }
+
+    public function getRawTitle(string|int|object $customPostObjectOrID): ?string
+    {
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
+        if ($customPost === null) {
+            return null;
+        }
+        /** @var WP_Post $customPost */
+        return $customPost->post_title;
     }
 
     public function getContent(string|int|object $customPostObjectOrID): ?string

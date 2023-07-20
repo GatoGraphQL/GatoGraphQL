@@ -155,8 +155,14 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             case 'title':
                 return $customPostTypeAPI->getTitle($customPost);
 
+            case 'rawTitle':
+                return $customPostTypeAPI->getRawTitle($customPost);
+
             case 'excerpt':
                 return $customPostTypeAPI->getExcerpt($customPost);
+
+            case 'rawExcerpt':
+                return $customPostTypeAPI->getRawExcerpt($customPost);
 
             case 'customPostType':
                 /** @var string */

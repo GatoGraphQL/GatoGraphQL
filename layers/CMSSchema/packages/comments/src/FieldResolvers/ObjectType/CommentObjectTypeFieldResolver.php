@@ -359,8 +359,8 @@ class CommentObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'content' => $this->__('Comment\'s content, in HTML format', 'pop-comments'),
-            'rawContent' => $this->__('Comment\'s content, in raw format', 'pop-comments'),
+            'content' => $this->__('Comment\'s content', 'pop-comments'),
+            'rawContent' => $this->__('Comment\'s content in raw format (as it exists in the database)', 'pop-comments'),
             'authorName' => $this->__('Comment author\'s name', 'pop-comments'),
             'authorURL' => $this->__('Comment author\'s URL', 'pop-comments'),
             'authorEmail' => $this->__('Comment author\'s email', 'pop-comments'),
