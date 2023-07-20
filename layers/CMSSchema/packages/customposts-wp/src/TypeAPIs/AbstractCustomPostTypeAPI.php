@@ -385,13 +385,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getTitle(string|int|object $customPostObjectOrID): ?string
     {
-        list(
-            $customPost,
-            $customPostID,
-        ) = $this->getCustomPostObjectAndID($customPostObjectOrID);
+        /** @var WP_Post|null */
+        $customPost = $this->getCustomPostObject($customPostObjectOrID);
         if ($customPost === null) {
             return null;
-        }
+        }        
         /** @var WP_Post $customPost */
         return get_the_title($customPost);
     }
