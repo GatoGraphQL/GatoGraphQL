@@ -260,8 +260,12 @@ mutation ImportPost
       html: $postContent
     },
     excerpt: $postExcerpt
-    # authorID: $authorID,
-    # featuredImageID: $featuredImageID,
+    authorBy: {
+      slug: $postAuthorSlug
+    },
+    featuredImageBy: {
+      slug: $postFeaturedImageSlug
+    },
     categoriesBy: {
       slugPaths: $postCategorySlugPaths
     },
