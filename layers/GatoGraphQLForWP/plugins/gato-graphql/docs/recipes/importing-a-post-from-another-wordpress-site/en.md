@@ -105,7 +105,7 @@ query GetPostAndExportData($postId: ID!)
     categories {
       id @export(as: "categoryIDs", type: LIST)
     }
-    contentSource @export(as: "contentSource")
+    rawContent @export(as: "rawContent")
     excerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
@@ -125,7 +125,7 @@ mutation DuplicatePost
     authorID: $authorID,
     categoryIDs: $categoryIDs,
     contentAs: {
-      html: $contentSource
+      html: $rawContent
     },
     excerpt: $excerpt
     featuredImageID: $featuredImageID,
@@ -155,7 +155,7 @@ mutation DuplicatePost
       categories {
         id
       }
-      contentSource
+      rawContent
       excerpt
       featuredImage {
         id
@@ -269,7 +269,7 @@ query RetrieveCreatedPosts
     # Can't print, because BrainFaker will generate a random ID each time
     # id
     title
-    contentSource
+    rawContent
     status
   }
 }

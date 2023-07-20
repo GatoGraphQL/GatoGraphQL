@@ -39,7 +39,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -55,7 +55,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
       authorID: $__author,
       categoryIDs: $__categories,
       contentAs: {
-        html: $__contentSource
+        html: $__rawContent
       },
       excerpt: $__excerpt
       featuredImageID: $__featuredImage,
@@ -108,7 +108,7 @@ query RetrieveCreatedPosts
     categories {
       id
     }
-    contentSource
+    rawContent
     excerpt
     featuredImage {
       id
@@ -221,7 +221,7 @@ query RetrieveCreatedPosts
     # Can't print, because BrainFaker will generate a random ID each time
     # id
     title
-    contentSource
+    rawContent
     status
   }
 }
