@@ -211,6 +211,10 @@ class CustomPostInterfaceTypeFieldResolver extends AbstractQueryableSchemaInterf
             case 'modifiedDate':
             case 'modifiedDateStr':
             case 'customPostType':
+            case 'title':
+            case 'rawTitle':
+            case 'excerpt':
+            case 'rawExcerpt':
                 return SchemaTypeModifiers::NON_NULLABLE;
         }
         return parent::getFieldTypeModifiers($fieldName);
