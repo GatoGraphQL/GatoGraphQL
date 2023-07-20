@@ -1,0 +1,9 @@
+{
+  menu(by: { id: 39 }) {
+    id
+    items {
+      id
+      rawTitle
+    }
+  }
+}
