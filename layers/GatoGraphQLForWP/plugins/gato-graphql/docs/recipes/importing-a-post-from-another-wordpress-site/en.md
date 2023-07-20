@@ -16,11 +16,14 @@ query InitializeDynamicVariables
     @remove
 }
 
-query ConnectToGraphQLAPI($postId: ID!)
+query ConnectToGraphQLAPI(
+  $upstreamServerGraphQLEndpointURL: String!
+  $postId: ID!
+)
   @depends(on: "InitializeDynamicVariables")
 {
   externalData: _sendGraphQLHTTPRequest(input:{
-    endpoint: "https://upstreamsite.com/graphql",
+    endpoint: $upstreamServerGraphQLEndpointURL,
     query: """
     
 query GetPost($postId: ID!) {
