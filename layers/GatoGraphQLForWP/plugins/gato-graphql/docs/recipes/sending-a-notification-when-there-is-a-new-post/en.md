@@ -57,6 +57,17 @@ mutation SendEmail @depends(on: "GetEmailData") {
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+To send the email in plain text:
+
+- Use input `messageAs: { text: ... }` in the `_sendEmail` mutation
+- Remove the HTML tags from the post's content using global field `_htmlStripTags` (provided by the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension)
+
+</div>
+
 Let's see next how to trigger the execution of the GraphQL query.
 
 ## Option 1: Trigger always by reacting to WordPress hooks
@@ -187,14 +198,14 @@ For instance, this GraphQL query updates many posts:
 mutation ReplaceDomains {
   posts {
     id
-    contentSource
-    adaptedContentSource: _strReplace(
+    rawContent
+    adaptedRawContent: _strReplace(
       search: "https://my-old-domain.com"
       replaceWith: "https://my-new-domain.com"
-      in: $__contentSource
+      in: $__rawContent
     )
     update(input: {
-      contentAs: { html: $__adaptedContentSource }
+      contentAs: { html: $__adaptedRawContent }
     }) {
       status
       postID
