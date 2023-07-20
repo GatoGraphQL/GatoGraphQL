@@ -11,7 +11,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
  * Then, those fields treated as “sensitive” won't be added to the schema,
  * and the query will produce an error.
  */
-class CustomEndpointTreatRawContentFieldsAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatCustomEndpointRawContentFieldsAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class CustomEndpointTreatCustomPostRawContentFieldsAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractTreatCustomEndpointRawContentFieldsAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected static function getEndpoint(): string
     {
