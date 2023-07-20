@@ -1,1 +1,48 @@
-{}
+{
+    "errors": [
+        {
+            "message": "There is no field 'rawTitle' on type 'MenuItem'",
+            "locations": [
+                {
+                    "line": 6,
+                    "column": 7
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "rawTitle",
+                    "items { ... }",
+                    "menu(by: {id: 39}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "MenuItem",
+                "field": "rawTitle",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "menu": {
+            "id": 39,
+            "items": [
+                {
+                    "id": 1228,
+                    "rawTitle": null
+                },
+                {
+                    "id": 1229,
+                    "rawTitle": null
+                },
+                {
+                    "id": 1230,
+                    "rawTitle": null
+                },
+                {
+                    "id": 1232,
+                    "rawTitle": null
+                }
+            ]
+        }
+    }
+}

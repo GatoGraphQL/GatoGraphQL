@@ -209,7 +209,7 @@
                             "name": "rawContent",
                             "extensions": {
                                 "isMutation": false,
-                                "isSensitiveDataElement": false
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },
@@ -856,14 +856,6 @@
                             "args": []
                         },
                         {
-                            "name": "contentSource",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
                             "name": "customPostType",
                             "extensions": {
                                 "isMutation": false,
@@ -1024,7 +1016,23 @@
                             "name": "rawContent",
                             "extensions": {
                                 "isMutation": false,
-                                "isSensitiveDataElement": false
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawExcerpt",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawTitle",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },
@@ -1160,6 +1168,14 @@
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "wpAdminEditURL",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         }
@@ -1948,6 +1964,14 @@
                             "args": []
                         },
                         {
+                            "name": "rawTitle",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "self",
                             "extensions": {
                                 "isMutation": false,
@@ -2302,14 +2326,6 @@
                             "args": []
                         },
                         {
-                            "name": "contentSource",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
                             "name": "customPostType",
                             "extensions": {
                                 "isMutation": false,
@@ -2502,7 +2518,23 @@
                             "name": "rawContent",
                             "extensions": {
                                 "isMutation": false,
-                                "isSensitiveDataElement": false
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawExcerpt",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawTitle",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },
@@ -2551,6 +2583,14 @@
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "wpAdminEditURL",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         }
@@ -2769,14 +2809,6 @@
                             "args": []
                         },
                         {
-                            "name": "contentSource",
-                            "extensions": {
-                                "isMutation": false,
-                                "isSensitiveDataElement": false
-                            },
-                            "args": []
-                        },
-                        {
                             "name": "customPostType",
                             "extensions": {
                                 "isMutation": false,
@@ -2969,7 +3001,23 @@
                             "name": "rawContent",
                             "extensions": {
                                 "isMutation": false,
-                                "isSensitiveDataElement": false
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawExcerpt",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawTitle",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },
@@ -3087,6 +3135,14 @@
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "wpAdminEditURL",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         }
@@ -8158,7 +8214,23 @@
                             "name": "rawContent",
                             "extensions": {
                                 "isMutation": false,
-                                "isSensitiveDataElement": false
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawExcerpt",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "rawTitle",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": true
                             },
                             "args": []
                         },

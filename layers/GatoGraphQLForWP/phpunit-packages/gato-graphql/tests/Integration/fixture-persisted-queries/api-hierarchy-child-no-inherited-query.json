@@ -2,29 +2,33 @@
     "data": {
         "posts": [
             {
-                "id": 40,
-                "slug": "single-post-with-a-lot-of-blocks",
-                "title": "Welcome to a single post full of blocks!",
-                "author": null
-            },
-            {
-                "id": 28,
-                "slug": "http-caching-improves-performance",
-                "title": "HTTP caching improves performance",
-                "author": {
-                    "id": 5,
-                    "username": "author",
-                    "slug": "author"
-                }
-            },
-            {
-                "id": 25,
-                "slug": "public-or-private-api-mode-for-extra-security",
-                "title": "Public or Private API mode, for extra security",
+                "id": 1,
+                "slug": "hello-world",
+                "title": "Hello world!",
                 "author": {
                     "id": 2,
                     "username": "blogger",
                     "slug": "blogger"
+                }
+            },
+            {
+                "id": 13,
+                "slug": "released-v0-6-check-it-out",
+                "title": "Released v0.6, check it out",
+                "author": {
+                    "id": 3,
+                    "username": "subscriber",
+                    "slug": "subscriber"
+                }
+            },
+            {
+                "id": 16,
+                "slug": "working-on-flat-chain-syntax-next",
+                "title": "Working on flat chain syntax next",
+                "author": {
+                    "id": 4,
+                    "username": "contributor",
+                    "slug": "contributor"
                 }
             }
         ]
