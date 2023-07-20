@@ -91,6 +91,8 @@ The GraphQL query below executes itself recursively. When first invoked, it:
 
 The GraphQL query is recursive by having the HTTP requests point to the same URL as the current one (plus adding the `$offset` variable for that segment), for which we retrieve the URL (and also the body, method and headers) from the current HTTP request (via the [**HTTP Request via Schema**](https://gatographql.com/extensions/http-request-via-schema/) extension).
 
+The `$async` argument passed to `_sendHTTPRequests` has been set to `false`, so that the HTTP requests will be executed one after the other. In addition, the optional variable `$delay` allows to indicate how many milliseconds to delay before sending each request.
+
 Once all resources have been updated, the execution of the GraphQL query reaches the end and terminates:
 
 ```graphql
@@ -174,7 +176,8 @@ query GenerateVars
 
 # Generate all the HTTPRequestInput objects to send each of the HTTP requests
 query GenerateRequestInputs(
-  $timeout: Float
+  $timeout: Float,
+  $delay: Int
 )
   @depends(on: ["ExportExecute", "GenerateVars"])
   @skip(if: $executeQuery)
@@ -205,6 +208,7 @@ query GenerateRequestInputs(
               headers: $headersInputList
               json: $itemJSON
               timeout: $timeout
+              delay: $delay
             }
           }
         },
@@ -215,14 +219,12 @@ query GenerateRequestInputs(
 }
 
 # Execute all the generated URLs, either asynchronously or not
-query ExecuteURLs(
-  $async: Boolean = true
-)
+query ExecuteURLs
   @depends(on: ["ExportExecute", "GenerateRequestInputs"])
   @skip(if: $executeQuery)
 {
   _sendHTTPRequests(
-    async: $async
+    async: false
     inputs: $requestInputs
   ) {
     statusCode
@@ -234,7 +236,8 @@ query ExecuteURLs(
 }
 
 # This is the actual execution of the query.
-# In this case, it simply prints the query variables and the comment IDs for that segment
+# In this case, it simply prints the time when it was executed,
+# the provided query variables, and the comment IDs for that segment
 query ExecuteQuery(
   $offset: Int
   $limit: Int! = 10
@@ -242,6 +245,7 @@ query ExecuteQuery(
   @depends(on: "ExportExecute")
   @include(if: $executeQuery)
 {
+  executionTime: _httpRequestRequestTime
   queryVariables: _sprintf(string: "[$limit: %s, $offset: %s]", values: [$limit, $offset])
   comments(
     pagination: { limit: $limit, offset: $offset }
@@ -277,6 +281,7 @@ The response is:
         "contentType": "application/json",
         "bodyJSON": {
           "data": {
+            "executionTime": 1689814467,
             "queryVariables": "[$limit: 10, $offset: 0]",
             "comments": [
               {
@@ -318,6 +323,7 @@ The response is:
         "contentType": "application/json",
         "bodyJSON": {
           "data": {
+            "executionTime": 1689814468,
             "queryVariables": "[$limit: 10, $offset: 10]",
             "comments": [
               {
@@ -359,6 +365,7 @@ The response is:
         "contentType": "application/json",
         "bodyJSON": {
           "data": {
+            "executionTime": 1689814470,
             "queryVariables": "[$limit: 10, $offset: 20]",
             "comments": [
               {
@@ -378,11 +385,3 @@ The response is:
   }
 }
 ```
-
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-We can let the DB breath between requests by providing property `delay` (which indicates how many milliseconds to delay before sending the request) under the options to each input passed to field `_sendHTTPRequests`.
-
-</div>
