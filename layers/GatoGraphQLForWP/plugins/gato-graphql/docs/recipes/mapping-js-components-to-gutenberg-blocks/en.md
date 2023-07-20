@@ -1,6 +1,6 @@
 # Mapping JS components to (Gutenberg) blocks
 
-This recipe _(inspired by [`Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/#preact-example))_ presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
+This recipe presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
 
 <div class="doc-config-highlight" markdown=1>
 
@@ -15,6 +15,7 @@ Access-Control-Allow-Headers: content-type,content-length,accept
 
 </div>
 
+_(The HTML code below is inspired by [the Preact example in `Automattic/vip-block-data-api`](https://github.com/Automattic/vip-block-data-api/#preact-example).)_
 
 The GraphQL query contained in the code below retrieves the post's block data as a JSON object (via field `CustomPost.blockDataItems`), and then the JavaScript code maps each block data item into a custom component:
 
