@@ -494,6 +494,10 @@ Make this section a `@todo`, pointing to the GitHub issues for the missing mutat
 
 Recursive process: have a similar GraphQL query to import users, media items, categories and tags, and invoke them to also import associated resources.
 
+How to do it: Store the "Import User", "Import Category", etc queries as Persisted Queries, and execute them locally via an HTTP request.
+
+Then check again that the resources were indeed created! Otherwise show error and exit.
+
 This code is different, from a previous/deprecated idea! So no need to use!
 
 <!-- ```graphql
