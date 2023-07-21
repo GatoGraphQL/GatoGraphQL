@@ -161,32 +161,6 @@ query ExportInputs
     @export(as: "postExcerpt")
     @remove
 
-  postFeaturedImageSlug: _objectProperty(
-    object: $__postData,
-    by: { key: "featuredImage" }
-  )
-    @passOnwards(
-      as: "featuredImage"
-    )
-    @applyField(
-      name: "_notNull",
-      arguments: {
-        value: $featuredImage
-      },
-      passOnwardsAs: "hasFeaturedImage"
-    )
-    @if(condition: $hasFeaturedImage)
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $featuredImage,
-          by: { key: "slug" }
-        },
-        setResultInResponse: true
-      )
-    @export(as: "postFeaturedImageSlug")
-    @remove
-
   postAuthorSlug: _objectProperty(
     object: $__postData,
     by: { key: "author" }
@@ -211,6 +185,32 @@ query ExportInputs
         setResultInResponse: true
       )
     @export(as: "postAuthorSlug")
+    @remove
+
+  postFeaturedImageSlug: _objectProperty(
+    object: $__postData,
+    by: { key: "featuredImage" }
+  )
+    @passOnwards(
+      as: "featuredImage"
+    )
+    @applyField(
+      name: "_notNull",
+      arguments: {
+        value: $featuredImage
+      },
+      passOnwardsAs: "hasFeaturedImage"
+    )
+    @if(condition: $hasFeaturedImage)
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $featuredImage,
+          by: { key: "slug" }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "postFeaturedImageSlug")
     @remove
 
   postCategorySlugPaths: _objectProperty(
