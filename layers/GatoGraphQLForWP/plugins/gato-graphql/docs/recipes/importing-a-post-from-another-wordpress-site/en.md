@@ -22,7 +22,7 @@ query CheckIfPostExistsLocally($postSlug: String!) {
   ) {
     id
   }
-  
+
   postAlreadyExists: _notNull(value: $__localPost)
     @export(as: "postAlreadyExists")
 }
@@ -52,8 +52,11 @@ query InitializeDynamicVariables
   @skip(if: $postAlreadyExists)
 {
   initVariablesWithFalse: _echo(value: false)
+    @export(as: "requestProducedErrors")
     @export(as: "responseHasErrors")
     @export(as: "postIsMissing")
+    @export(as: "postHasCategories")
+    @export(as: "postHasTags")
     @remove
 
   initVariablesWithNull: _echo(value: null)
@@ -302,6 +305,12 @@ query ExportInputs
     @export(as: "postCategorySlugPaths")
     @remove
 
+  postHasCategories: _notEmpty(
+    value: $__postCategorySlugPaths
+  )
+    @export(as: "postHasCategories")
+    @remove
+
   postTagSlugs: _objectProperty(
     object: $__postData,
     by: { key: "tags" }
@@ -320,6 +329,12 @@ query ExportInputs
         setResultInResponse: true
       )
     @export(as: "postTagSlugs")
+    @remove
+
+  postHasTags: _notEmpty(
+    value: $__postTagSlugs
+  )
+    @export(as: "postHasTags")
     @remove
 }
 
@@ -340,12 +355,16 @@ query ExportExistingResources
     slug @export(as: "existingFeaturedImageSlug")
   }
 
-  existingCategoriesBySlugPath: categories(filter: { slugPaths: $postCategorySlugPaths }) {
+  existingCategoriesBySlugPath: categories(filter: { slugPaths: $postCategorySlugPaths })
+    @include(if: $postHasCategories)
+  {
     id
     slugPath @export(as: "existingCategorySlugPaths", type: LIST)
   }
 
-  existingTagsBySlug: postTags(filter: { slugs: $postTagSlugs }) {
+  existingTagsBySlug: postTags(filter: { slugs: $postTagSlugs })
+    @include(if: $postHasTags)
+  {
     id
     slug @export(as: "existingTagSlugs", type: LIST)
   }
