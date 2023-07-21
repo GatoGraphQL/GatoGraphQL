@@ -451,11 +451,13 @@ Process with this query:
 
 ## When associated resources must also be imported
 
+Make this section a `@todo`, pointing to the GitHub issues for the missing mutations.
+
 Recursive process: have a similar GraphQL query to import users, media items, categories and tags, and invoke them to also import associated resources.
 
-This code is different, from a previous/deprecated idea!
+This code is different, from a previous/deprecated idea! So no need to use!
 
-```graphql
+<!-- ```graphql
 query ExportMissingResources
   @depends(on: "ExportExistingResources")
   @skip(if: $requestProducedErrors)
@@ -585,7 +587,7 @@ query GetMissingResourcesFromGraphQLAPI(
     @export(as: "requestProducedErrors")
     @remove
 }
-```
+``` -->
 
 
 Cannot do:
