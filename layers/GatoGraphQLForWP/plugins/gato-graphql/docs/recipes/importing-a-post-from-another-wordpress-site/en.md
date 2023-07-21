@@ -345,7 +345,7 @@ query ExportMissingResourcesGraphQLQuery
     @if(condition: $isFeaturedImageMissing)
       @strAppend(string:
         """
-        featuredImage(by: { slug: "{$postFeaturedImageSlug}" }) {
+        mediaItem(by: { slug: "{$postFeaturedImageSlug}" }) {
           id
           slug
         }
