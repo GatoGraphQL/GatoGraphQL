@@ -74,7 +74,7 @@ query ConnectToGraphQLAPI(
   $upstreamServerGraphQLEndpointURL: String!
   $postSlug: String!
 )
-  @depends(on: "InitializeDynamicVariables")
+  @depends(on: "FailIfPostAlreadyExistsLocally")
   @skip(if: $postAlreadyExists)
 {
   externalData: _sendGraphQLHTTPRequest(input:{
