@@ -7,7 +7,7 @@
 Directive `@default` accepts two arguments:
 
 1. `value`: the default value, from any scalar type (string, boolean, integer, float or ID).
-2. `condition`: if the field must be null or empty, via enum values `IS_NULL` or `IS_EMPTY`. By default it is null.
+2. `condition`: the condition that must be true to apply the default value, as one of enum values `IS_NULL`, `IS_EMPTY` or `ALWAYS`. By default it is `IS_NULL`.
 
 In the example below, when a post does not have a featured image, field `featuredImage` returns `null`:
 
