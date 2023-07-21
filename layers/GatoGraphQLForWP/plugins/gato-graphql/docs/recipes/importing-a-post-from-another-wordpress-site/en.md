@@ -361,6 +361,8 @@ query FailIfAnyResourceIsMissing
         }
         condition: ALWAYS
       )
+  
+  createPost: _echo(value: null)
 }
 
 mutation ImportPost
