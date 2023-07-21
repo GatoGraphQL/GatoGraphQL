@@ -336,7 +336,7 @@ query ExportMissingResourcesGraphQLQuery
     @if(condition: $isAuthorMissing)
       @strAppend(string:
         """
-        author(by: { slug: "{$postAuthorSlug}" })  {
+        user(by: { slug: "{$postAuthorSlug}" })  {
           id
           slug
         }
