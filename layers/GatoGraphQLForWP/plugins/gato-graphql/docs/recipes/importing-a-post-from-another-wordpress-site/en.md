@@ -154,10 +154,32 @@ query FailIfResponseHasErrors
       errors: $__errors
     }
   ) @remove
+
+  createPost: _echo(value: null)
+}
+
+query FailIfPostNotExists($postSlug: String!)
+  @depends(on: "FailIfResponseHasErrors")
+  @skip(if: $requestProducedErrors)
+  @include(if: $postIsMissing)
+{
+  errorMessage: _sprintf(
+    string: "There is no post with slug '%s' in the origin",
+    values: [$postSlug]
+  ) @remove
+
+  _fail(
+    message: $__errorMessage
+    data: {
+      slug: $postSlug
+    }
+  ) @remove
+  
+  createPost: _echo(value: null)
 }
 
 query ExportInputs
-  @depends(on: "FailIfResponseHasErrors")
+  @depends(on: "FailIfPostNotExists")
   @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
