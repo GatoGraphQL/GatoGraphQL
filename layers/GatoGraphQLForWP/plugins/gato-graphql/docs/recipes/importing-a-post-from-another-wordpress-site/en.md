@@ -26,7 +26,7 @@ query InitializeDynamicVariables
 
 query ConnectToGraphQLAPI(
   $upstreamServerGraphQLEndpointURL: String!
-  $postId: ID!
+  $postSlug: String!
 )
   @depends(on: "InitializeDynamicVariables")
 {
@@ -34,8 +34,8 @@ query ConnectToGraphQLAPI(
     endpoint: $upstreamServerGraphQLEndpointURL,
     query: """
     
-query GetPost($postId: ID!) {
-  post(by: { id: $postId }) {
+query GetPost($postSlug: String!) {
+  post(by: { slug: $postSlug }) {
     id
     slug
     rawTitle
@@ -63,8 +63,8 @@ query GetPost($postId: ID!) {
     """,
     variables: [
       {
-        name: "postId",
-        value: $postId
+        name: "postSlug",
+        value: $postSlug
       }
     ]
   })
@@ -133,12 +133,12 @@ query ExportInputs
     by: { path: "data.post" }
   ) @remove
 
-  postSlug: _objectProperty(
-    object: $__postData,
-    by: { key: "slug" }
-  )
-    @export(as: "postSlug")
-    @remove
+  # postSlug: _objectProperty(
+  #   object: $__postData,
+  #   by: { key: "slug" }
+  # )
+  #   @export(as: "postSlug")
+  #   @remove
 
   postTitle: _objectProperty(
     object: $__postData,
@@ -365,7 +365,9 @@ query FailIfAnyResourceIsMissing
   createPost: _echo(value: null)
 }
 
-mutation ImportPost
+mutation ImportPost(
+  $postSlug: String!
+)
   @depends(on: "FailIfAnyResourceIsMissing")
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
