@@ -272,12 +272,12 @@ query ExportExistingResources
 
   existingCategoriesBySlugPath: categories(filter: { slugPaths: $postCategorySlugPaths }) {
     id
-    slugPath @export(as: "existingCategorySlugPaths")
+    slugPath @export(as: "existingCategorySlugPaths", type: LIST)
   }
 
   existingTagsBySlug: postTags(filter: { slugs: $postTagSlugs }) {
     id
-    slug @export(as: "existingTagSlugs")
+    slug @export(as: "existingTagSlugs", type: LIST)
   }
 }
 
