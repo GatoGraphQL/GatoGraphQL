@@ -354,7 +354,7 @@ query ExportMissingResourcesGraphQLQuery
     @if(condition: $areCategoriesMissing)
       @strAppend(string:
         """
-        categories(filter: { slugPaths: {$postCategorySlugPaths} }) {
+        postCategories(filter: { slugPaths: {$postCategorySlugPaths} }) {
           id
           slugPath
         }
@@ -363,7 +363,7 @@ query ExportMissingResourcesGraphQLQuery
     @if(condition: $areTagsMissing)
       @strAppend(string:
         """
-        tags(filter: { slugs: {$postTagSlugs} }) {
+        postTags(filter: { slugs: {$postTagSlugs} }) {
           id
           slug
         }
