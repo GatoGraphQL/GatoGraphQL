@@ -21,7 +21,7 @@ query FailIfPostAlreadyExistsErrors($postSlug: String!)
 {
   errorMessage: _sprintf(
     string: "Post with slug '%s' already exists locally",
-    value: [$postSlug]
+    values: [$postSlug]
   ) @remove
 
   _fail(
@@ -30,6 +30,8 @@ query FailIfPostAlreadyExistsErrors($postSlug: String!)
       slug: $postSlug
     }
   ) @remove
+
+  createPost: _echo(value: null)
 }
 
 query InitializeDynamicVariables
