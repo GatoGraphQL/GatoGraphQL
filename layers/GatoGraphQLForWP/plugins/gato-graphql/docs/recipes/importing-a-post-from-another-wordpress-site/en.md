@@ -313,7 +313,7 @@ query ExportMissingResources
 
   # Format arrays as strings, to input into query
   missingCategorySlugPathsAsString: _arrayJoin(
-    array: [$__missingCategorySlugPaths]
+    array: $__missingCategorySlugPaths
     separator: "\""
   )
     @strPrepend(
@@ -324,7 +324,7 @@ query ExportMissingResources
     )
     @export(as: "missingCategorySlugPathsAsString")
   missingTagSlugsAsString: _arrayJoin(
-    array: [$__missingTagSlugs]
+    array: $__missingTagSlugs
     separator: "\", \""
   )
     @strPrepend(
