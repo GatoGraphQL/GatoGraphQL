@@ -361,7 +361,6 @@ query FailIfAnyResourceIsMissing
         }
         condition: ALWAYS
       )
-    # @remove
 }
 
 mutation ImportPost
