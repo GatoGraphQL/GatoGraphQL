@@ -21,6 +21,7 @@ class ConditionEnumTypeResolver extends AbstractEnumTypeResolver
         return [
             ConditionEnum::IS_NULL,
             ConditionEnum::IS_EMPTY,
+            ConditionEnum::ALWAYS,
         ];
     }
 }

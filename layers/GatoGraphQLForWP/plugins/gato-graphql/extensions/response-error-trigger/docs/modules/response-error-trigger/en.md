@@ -6,7 +6,7 @@ Explicitly add an error entry to the response to trigger the failure of the Grap
 
 This module adds global field `_fail` and directive `@fail` to the GraphQL schema, which add an entry to the `errors` property in the response.
 
-Field `_fail` adds the error always, and directive `@fail` whenever the condition under argument `condition` is met (either if the field value is null, or empty; by default, it is `IS_NULL`):
+Field `_fail` adds the error always, and directive `@fail` whenever the field value meets the condition under argument `condition` (as one of enum values `IS_NULL`, `IS_EMPTY` or `ALWAYS`; by default it is `IS_NULL`):
 
 ```graphql
 query {
