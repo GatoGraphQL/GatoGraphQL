@@ -321,73 +321,51 @@ query ExportMissingResources
   ) @export(as: "isAnyResourceMissing")
 }
 
-query FailIfAuthorIsMissing
+query FailIfAnyResourceIsMissing
   @depends(on: "ExportMissingResources")
   @skip(if: $requestProducedErrors)
   @skip(if: $postIsMissing)
   @skip(if: $responseHasErrors)
-  @include(if: $isAuthorMissing)
+  @include(if: $isAnyResourceMissing)
 {
-  _fail(
-    message: "Author is missing"
-    data: {
-      authorSlug: $postAuthorSlug
-    }
-  ) @remove
-}
-
-query FailIfFeaturedImageIsMissing
-  @depends(on: "ExportMissingResources")
-  @skip(if: $requestProducedErrors)
-  @skip(if: $postIsMissing)
-  @skip(if: $responseHasErrors)
-  @include(if: $isFeaturedImageMissing)
-{
-  _fail(
-    message: "Featured image is missing"
-    data: {
-      featuredImageSlug: $postFeaturedImageSlug
-    }
-  ) @remove
-}
-
-query FailIfCategoriesAreMissing
-  @depends(on: "ExportMissingResources")
-  @skip(if: $requestProducedErrors)
-  @skip(if: $postIsMissing)
-  @skip(if: $responseHasErrors)
-  @include(if: $areCategoriesMissing)
-{
-  _fail(
-    message: "Categories are missing"
-    data: {
-      missingCategorySlugPaths: $missingCategorySlugPaths
-    }
-  ) @remove
-}
-
-query FailIfTagsAreMissing
-  @depends(on: "ExportMissingResources")
-  @skip(if: $requestProducedErrors)
-  @skip(if: $postIsMissing)
-  @skip(if: $responseHasErrors)
-  @include(if: $areTagsMissing)
-{
-  _fail(
-    message: "Tags are missing"
-    data: {
-      missingTagSlugs: $missingTagSlugs
-    }
-  ) @remove
+  performingValidations: id
+    @if(condition: $isAuthorMissing)
+      @fail(
+        message: "Author is missing"
+        data: {
+          authorSlug: $postAuthorSlug
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $isFeaturedImageMissing)
+      @fail(
+        message: "Featured image is missing"
+        data: {
+          featuredImageSlug: $postFeaturedImageSlug
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $areCategoriesMissing)
+      @fail(
+        message: "Categories are missing"
+        data: {
+          categorySlugPaths: $missingCategorySlugPaths
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $areTagsMissing)
+      @fail(
+        message: "Tags are missing"
+        data: {
+          tagSlugs: $missingTagSlugs
+        }
+        condition: ALWAYS
+      )
+    # @remove
 }
 
 mutation ImportPost
-  @depends(on: [
-    "FailIfAuthorIsMissing",
-    "FailIfFeaturedImageIsMissing",
-    "FailIfCategoriesAreMissing",
-    "FailIfTagsAreMissing",
-  ])
+  @depends(on: "FailIfAnyResourceIsMissing")
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
