@@ -363,6 +363,7 @@ query ExportGraphQLQueryToFetchMissingResources
         user(by: { slug: "{$postAuthorSlug}" })  {
           id
           slug
+          name
         }
         """
       )
@@ -372,6 +373,9 @@ query ExportGraphQLQueryToFetchMissingResources
         mediaItem(by: { slug: "{$postFeaturedImageSlug}" }) {
           id
           slug
+          src
+          width
+          height
         }
         """
       )
@@ -381,6 +385,8 @@ query ExportGraphQLQueryToFetchMissingResources
         postCategories(filter: { slugPaths: {$postCategorySlugPaths} }) {
           id
           slugPath
+          name
+          description
         }
         """
       )
@@ -390,6 +396,8 @@ query ExportGraphQLQueryToFetchMissingResources
         postTags(filter: { slugs: {$postTagSlugs} }) {
           id
           slug
+          name
+          description
         }
         """
       )
