@@ -5,8 +5,35 @@
 Use Gato GraphQL on other end, then can execute this GraphQL query:
 
 ```graphql
+query ValidatePostDoesNotExist($postSlug: String!) {
+  localPost: post(by: { slug: $postSlug }) {
+    id
+  }
+  postAlreadyExists: _notNull(value: $__localPost)
+    @export(as: "postAlreadyExists")
+}
+
+query FailIfPostAlreadyExistsErrors($postSlug: String!)
+  @depends(on: "ValidatePostDoesNotExist")
+  @include(if: $postAlreadyExists)
+{
+  errorMessage: _sprintf(
+    string: "Post with slug '%s' already exists locally",
+    value: [$postSlug]
+  ) @remove
+
+  _fail(
+    message: $__errorMessage
+    data: {
+      slug: $postSlug
+    }
+  ) @remove
+}
+
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
+  @depends(on: "FailIfPostAlreadyExistsErrors")
+  @skip(if: $postAlreadyExists)
 {
   initVariablesWithFalse: _echo(value: false)
     @export(as: "responseHasErrors")
@@ -29,6 +56,7 @@ query ConnectToGraphQLAPI(
   $postSlug: String!
 )
   @depends(on: "InitializeDynamicVariables")
+  @skip(if: $postAlreadyExists)
 {
   externalData: _sendGraphQLHTTPRequest(input:{
     endpoint: $upstreamServerGraphQLEndpointURL,
@@ -77,6 +105,7 @@ query GetPost($postSlug: String!) {
 
 query ValidateResponse
   @depends(on: "ConnectToGraphQLAPI")
+  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
 {
   responseHasErrors: _propertyIsSetInJSONObject(
@@ -103,6 +132,7 @@ query ValidateResponse
 
 query FailIfResponseHasErrors
   @depends(on: "ValidateResponse")
+  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $postIsMissing)
   @include(if: $responseHasErrors)
@@ -124,6 +154,7 @@ query FailIfResponseHasErrors
 
 query ExportInputs
   @depends(on: "FailIfResponseHasErrors")
+  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
@@ -256,6 +287,7 @@ query ExportInputs
 
 query ExportExistingResources
   @depends(on: "ExportInputs")
+  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
@@ -283,6 +315,7 @@ query ExportExistingResources
 
 query ExportMissingResources
   @depends(on: "ExportExistingResources")
+  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
@@ -323,6 +356,7 @@ query ExportMissingResources
 
 query FailIfAnyResourceIsMissing
   @depends(on: "ExportMissingResources")
+  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $postIsMissing)
   @skip(if: $responseHasErrors)
@@ -369,6 +403,7 @@ mutation ImportPost(
   $postSlug: String!
 )
   @depends(on: "FailIfAnyResourceIsMissing")
+  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
