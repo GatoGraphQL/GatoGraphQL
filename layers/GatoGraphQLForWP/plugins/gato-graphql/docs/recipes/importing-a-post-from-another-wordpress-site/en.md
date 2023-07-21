@@ -1,6 +1,6 @@
 # Importing a post from another WordPress site
 
-## When the origin server exposes a Gato GraphQL endpoint
+## When associated resources already exist
 
 Use Gato GraphQL on other end, then can execute this GraphQL query:
 
@@ -311,6 +311,159 @@ query ExportMissingResources
     value: $__missingTagSlugs
   ) @export(as: "areTagsMissing")
 
+  isAnyResourceMissing: _or(
+    values: [
+      $__isAuthorMissing,
+      $__isFeaturedImageMissing,
+      $__areCategoriesMissing,
+      $__areTagsMissing,
+    ]
+  ) @export(as: "isAnyResourceMissing")
+}
+
+query FailIfAnyResourceIsMissing
+  @depends(on: "ExportMissingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $isAnyResourceMissing)
+{
+  performingValidations: id
+    @if(condition: $isAuthorMissing)
+      @fail(
+        message: "Author is missing"
+        data: {
+          authorSlug: $postAuthorSlug
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $isFeaturedImageMissing)
+      @fail(
+        message: "Featured image is missing"
+        data: {
+          featuredImageSlug: $postFeaturedImageSlug
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $areCategoriesMissing)
+      @fail(
+        message: "Categories are missing"
+        data: {
+          categorySlugPaths: $missingCategorySlugPaths
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $areTagsMissing)
+      @fail(
+        message: "Tags are missing"
+        data: {
+          tagSlugs: $missingTagSlugs
+        }
+        condition: ALWAYS
+      )
+  
+  createPost: _echo(value: null)
+}
+
+mutation ImportPost
+  @depends(on: "FailIfAnyResourceIsMissing")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $isAnyResourceMissing)
+{
+  createPost(input: {
+    status: draft,
+    slug: $postSlug
+    title: $postTitle
+    contentAs: {
+      html: $postContent
+    },
+    excerpt: $postExcerpt
+    authorBy: {
+      slug: $postAuthorSlug
+    },
+    featuredImageBy: {
+      slug: $postFeaturedImageSlug
+    },
+    categoriesBy: {
+      slugPaths: $postCategorySlugPaths
+    },
+    tagsBy: {
+      slugs: $postTagSlugs
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      date
+      status
+
+      slug
+      title
+      content
+      excerpt
+
+      author {
+        id
+        slug
+      }
+      featuredImage {
+        id
+        slug
+      }
+      categories {
+        id
+        slug
+      }
+      tags {
+        id
+        slug
+      }
+    }
+  }
+}
+```
+
+Add tip on `@passOnwards`!!!
+
+
+Then this single GraphQL query contains all the data.
+
+Current limitations:
+
+<!-- - `categories` is not handling parents! -->
+- can only use `setCategoriesOnPost`, so the cat must exist!
+- can only use `setTagsOnPost`, so the tag must exist! (because the slug is not enough to create it, as the name could be in uppercase)
+- `featuredImageID` cannot be replicated yet, as there's no mutation to upload attachments yet
+
+Process with this query:
+
+```graphql
+...
+```
+
+## When associated resources must also be imported
+
+Recursive process: have a similar GraphQL query to import users, media items, categories and tags, and invoke them to also import associated resources.
+
+This code is different, from a previous/deprecated idea!
+
+```graphql
+query ExportMissingResources
+  @depends(on: "ExportExistingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+{
+  # ...
+
   # Format arrays as strings, to input into query
   missingCategorySlugPathsAsString: _arrayJoin(
     array: $__missingCategorySlugPaths
@@ -334,15 +487,6 @@ query ExportMissingResources
       string: "\"]"
     )
     @export(as: "missingTagSlugsAsString")
-
-  isAnyResourceMissing: _or(
-    values: [
-      $__isAuthorMissing,
-      $__isFeaturedImageMissing,
-      $__areCategoriesMissing,
-      $__areTagsMissing,
-    ]
-  ) @export(as: "isAnyResourceMissing")
 }
 
 query ExportGraphQLQueryToFetchMissingResources
@@ -441,137 +585,8 @@ query GetMissingResourcesFromGraphQLAPI(
     @export(as: "requestProducedErrors")
     @remove
 }
-
-query FailIfAnyResourceIsMissing
-  @depends(on: "ExportMissingResources")
-  @skip(if: $requestProducedErrors)
-  @skip(if: $postIsMissing)
-  @skip(if: $responseHasErrors)
-  @include(if: $isAnyResourceMissing)
-{
-  performingValidations: id
-    @if(condition: $isAuthorMissing)
-      @fail(
-        message: "Author is missing"
-        data: {
-          authorSlug: $postAuthorSlug
-        }
-        condition: ALWAYS
-      )
-    @if(condition: $isFeaturedImageMissing)
-      @fail(
-        message: "Featured image is missing"
-        data: {
-          featuredImageSlug: $postFeaturedImageSlug
-        }
-        condition: ALWAYS
-      )
-    @if(condition: $areCategoriesMissing)
-      @fail(
-        message: "Categories are missing"
-        data: {
-          categorySlugPaths: $missingCategorySlugPaths
-        }
-        condition: ALWAYS
-      )
-    @if(condition: $areTagsMissing)
-      @fail(
-        message: "Tags are missing"
-        data: {
-          tagSlugs: $missingTagSlugs
-        }
-        condition: ALWAYS
-      )
-  
-  createPost: _echo(value: null)
-}
-
-mutation ImportPost
-  @depends(on: [
-    "GetMissingResourcesFromGraphQLAPI",
-    "FailIfAnyResourceIsMissing",
-  ])
-  @skip(if: $requestProducedErrors)
-  @skip(if: $responseHasErrors)
-  @skip(if: $postIsMissing)
-  @skip(if: $isAnyResourceMissing)
-{
-  createPost(input: {
-    status: draft,
-    slug: $postSlug
-    title: $postTitle
-    contentAs: {
-      html: $postContent
-    },
-    excerpt: $postExcerpt
-    authorBy: {
-      slug: $postAuthorSlug
-    },
-    featuredImageBy: {
-      slug: $postFeaturedImageSlug
-    },
-    categoriesBy: {
-      slugPaths: $postCategorySlugPaths
-    },
-    tagsBy: {
-      slugs: $postTagSlugs
-    }
-  }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-    post {
-      id
-      date
-      status
-
-      slug
-      title
-      content
-      excerpt
-
-      author {
-        id
-        slug
-      }
-      featuredImage {
-        id
-        slug
-      }
-      categories {
-        id
-        slug
-      }
-      tags {
-        id
-        slug
-      }
-    }
-  }
-}
 ```
 
-Add tip on `@passOnwards`!!!
-
-
-Then this single GraphQL query contains all the data.
-
-Current limitations:
-
-<!-- - `categories` is not handling parents! -->
-- can only use `setCategoriesOnPost`, so the cat must exist!
-- can only use `setTagsOnPost`, so the tag must exist! (because the slug is not enough to create it, as the name could be in uppercase)
-- `featuredImageID` cannot be replicated yet, as there's no mutation to upload attachments yet
-
-Process with this query:
-
-```graphql
-...
-```
 
 Cannot do:
   ## When the origin server exposes WP REST API endpoints
