@@ -7,7 +7,31 @@ Mention that the "slug" is the common ID between origin and local websites. Then
 Use Gato GraphQL on other end, then can execute this GraphQL query:
 
 ```graphql
-query CheckIfPostExistsLocally($postSlug: String!) {
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  initVariablesWithFalse: _echo(value: false)
+    @export(as: "requestProducedErrors")
+    @export(as: "responseHasErrors")
+    @export(as: "postIsMissing")
+    @export(as: "postHasCategories")
+    @export(as: "postHasTags")
+    @remove
+
+  initVariablesWithNull: _echo(value: null)
+    @export(as: "existingAuthorSlug")
+    @export(as: "existingFeaturedImageSlug")
+    @remove
+
+  initVariablesWithEmptyArray: _echo(value: [])
+    @export(as: "existingCategorySlugPaths")
+    @export(as: "existingTagSlugs")
+    @remove
+}
+
+query CheckIfPostExistsLocally($postSlug: String!)
+  @depends(on: "InitializeDynamicVariables")
+{
   localPost: post(
     by: { slug: $postSlug }
     status: [
@@ -44,30 +68,6 @@ query FailIfPostAlreadyExistsLocally($postSlug: String!)
   ) @remove
 
   createPost: _echo(value: null)
-}
-
-query InitializeDynamicVariables
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
-  @depends(on: "FailIfPostAlreadyExistsLocally")
-  @skip(if: $postAlreadyExists)
-{
-  initVariablesWithFalse: _echo(value: false)
-    @export(as: "requestProducedErrors")
-    @export(as: "responseHasErrors")
-    @export(as: "postIsMissing")
-    @export(as: "postHasCategories")
-    @export(as: "postHasTags")
-    @remove
-
-  initVariablesWithNull: _echo(value: null)
-    @export(as: "existingAuthorSlug")
-    @export(as: "existingFeaturedImageSlug")
-    @remove
-
-  initVariablesWithEmptyArray: _echo(value: [])
-    @export(as: "existingCategorySlugPaths")
-    @export(as: "existingTagSlugs")
-    @remove
 }
 
 query ConnectToGraphQLAPI(
