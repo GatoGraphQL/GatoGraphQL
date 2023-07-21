@@ -345,7 +345,7 @@ query ExportMissingResources
   ) @export(as: "isAnyResourceMissing")
 }
 
-query ExportMissingResourcesGraphQLQuery
+query ExportGraphQLQueryToFetchMissingResources
   @depends(on: "ExportMissingResources")
   @skip(if: $requestProducedErrors)
   @skip(if: $postIsMissing)
@@ -417,7 +417,7 @@ query ExportMissingResourcesGraphQLQuery
 query GetMissingResourcesFromGraphQLAPI(
   $upstreamServerGraphQLEndpointURL: String!
 )
-  @depends(on: "ExportMissingResourcesGraphQLQuery")
+  @depends(on: "ExportGraphQLQueryToFetchMissingResources")
   @skip(if: $requestProducedErrors)
   @skip(if: $postIsMissing)
   @skip(if: $responseHasErrors)
