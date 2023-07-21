@@ -2,6 +2,8 @@
 
 ## When associated resources already exist
 
+Mention that the "slug" is the common ID between origin and local websites. Then, if the local website already has a post with that same slug, the process is halted.
+
 Use Gato GraphQL on other end, then can execute this GraphQL query:
 
 ```graphql
