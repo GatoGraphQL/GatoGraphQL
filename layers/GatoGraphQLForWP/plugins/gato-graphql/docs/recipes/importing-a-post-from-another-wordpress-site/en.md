@@ -412,16 +412,6 @@ query ExportMissingResourcesGraphQLQuery
       ]
     )
     @export(as: "missingResourcesQuery")
-    
-  externalData: _sendGraphQLHTTPRequest(input:{
-    endpoint: $upstreamServerGraphQLEndpointURL,
-    query: $__query
-  })
-    @export(as: "externalData")
-
-  requestProducedErrors: _isNull(value: $__externalData)
-    @export(as: "requestProducedErrors")
-    @remove
 }
 
 query GetMissingResourcesFromGraphQLAPI(
