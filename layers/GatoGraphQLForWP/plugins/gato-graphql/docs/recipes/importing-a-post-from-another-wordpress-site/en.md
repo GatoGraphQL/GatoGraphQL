@@ -321,6 +321,105 @@ query ExportMissingResources
   ) @export(as: "isAnyResourceMissing")
 }
 
+query ExportMissingResourcesGraphQLQuery
+  @depends(on: "ExportMissingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $isAnyResourceMissing)
+{
+  missingResourcesQuery: _echo(value:
+    """    
+    query GetMissingResources {
+    """
+  )
+    @if(condition: $isAuthorMissing)
+      @strAppend(string:
+        """
+        author(by: { slug: "{$postAuthorSlug}" })  {
+          id
+          slug
+        }
+        """
+      )
+    @if(condition: $isFeaturedImageMissing)
+      @strAppend(string:
+        """
+        featuredImage(by: { slug: "{$postFeaturedImageSlug}" }) {
+          id
+          slug
+        }
+        """
+      )
+    @if(condition: $areCategoriesMissing)
+      @strAppend(string:
+        """
+        categories(filter: { slugPaths: {$postCategorySlugPaths} }) {
+          id
+          slugPath
+        }
+        """
+      )
+    @if(condition: $areTagsMissing)
+      @strAppend(string:
+        """
+        tags(filter: { slugs: {$postTagSlugs} }) {
+          id
+          slug
+        }
+        """
+      )
+    @strAppend(string: 
+      """
+      }
+      """)
+    @strReplaceMultiple(
+      search: [
+        "{$postAuthorSlug}",
+        "{$postFeaturedImageSlug}",
+        "{$postCategorySlugPaths}",
+        "{$postTagSlugs}",
+      ],
+      replaceWith: [
+        $missingAuthorSlug,
+        $missingFeaturedImageSlug,
+        $missingCategorySlugPaths,
+        $missingTagSlugs,
+      ]
+    )
+    @export(as: "missingResourcesQuery")
+    
+  externalData: _sendGraphQLHTTPRequest(input:{
+    endpoint: $upstreamServerGraphQLEndpointURL,
+    query: $__query
+  })
+    @export(as: "externalData")
+
+  requestProducedErrors: _isNull(value: $__externalData)
+    @export(as: "requestProducedErrors")
+    @remove
+}
+
+query GetMissingResourcesFromGraphQLAPI(
+  $upstreamServerGraphQLEndpointURL: String!
+)
+  @depends(on: "ExportMissingResourcesGraphQLQuery")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $isAnyResourceMissing)
+{    
+  missingResourcesData: _sendGraphQLHTTPRequest(input:{
+    endpoint: $upstreamServerGraphQLEndpointURL,
+    query: $missingResourcesQuery
+  })
+    @export(as: "missingResourcesData")
+
+  missingResourcesRequestProducedErrors: _isNull(value: $__missingResourcesData)
+    @export(as: "requestProducedErrors")
+    @remove
+}
+
 query FailIfAnyResourceIsMissing
   @depends(on: "ExportMissingResources")
   @skip(if: $requestProducedErrors)
