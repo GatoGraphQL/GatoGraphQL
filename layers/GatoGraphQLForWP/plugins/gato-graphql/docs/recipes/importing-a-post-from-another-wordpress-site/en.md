@@ -8,7 +8,18 @@ Use Gato GraphQL on other end, then can execute this GraphQL query:
 
 ```graphql
 query CheckIfPostExistsLocally($postSlug: String!) {
-  localPost: post(by: { slug: $postSlug }) {
+  localPost: post(
+    by: { slug: $postSlug }
+    status: [
+      draft,
+      future,
+      inherit,
+      pending,
+      private,
+      publish,
+      trash,
+    ]
+  ) {
     id
   }
   postAlreadyExists: _notNull(value: $__localPost)
