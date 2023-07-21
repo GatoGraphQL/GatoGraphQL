@@ -7,7 +7,7 @@ Mention that the "slug" is the common ID between origin and local websites. Then
 Use Gato GraphQL on other end, then can execute this GraphQL query:
 
 ```graphql
-query ValidatePostDoesNotExist($postSlug: String!) {
+query ValidatePostDoesNotExistLocally($postSlug: String!) {
   localPost: post(by: { slug: $postSlug }) {
     id
   }
@@ -16,7 +16,7 @@ query ValidatePostDoesNotExist($postSlug: String!) {
 }
 
 query FailIfPostAlreadyExistsErrors($postSlug: String!)
-  @depends(on: "ValidatePostDoesNotExist")
+  @depends(on: "ValidatePostDoesNotExistLocally")
   @include(if: $postAlreadyExists)
 {
   errorMessage: _sprintf(
