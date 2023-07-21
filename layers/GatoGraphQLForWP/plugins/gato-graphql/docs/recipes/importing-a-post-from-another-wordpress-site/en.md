@@ -22,6 +22,7 @@ query CheckIfPostExistsLocally($postSlug: String!) {
   ) {
     id
   }
+  
   postAlreadyExists: _notNull(value: $__localPost)
     @export(as: "postAlreadyExists")
 }
