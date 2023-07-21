@@ -260,7 +260,7 @@ query ExportExistingResources
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
 {
-  existingAuthorBySlug: author(by: { slug: $postAuthorSlug }) {
+  existingAuthorBySlug: user(by: { slug: $postAuthorSlug }) {
     id
     slug @export(as: "existingAuthorSlug")
   }
@@ -275,7 +275,7 @@ query ExportExistingResources
     slugPath @export(as: "existingCategorySlugPaths")
   }
 
-  existingTagsBySlug: tags(filter: { slugs: $postTagSlugs }) {
+  existingTagsBySlug: postTags(filter: { slugs: $postTagSlugs }) {
     id
     slug @export(as: "existingTagSlugs")
   }
