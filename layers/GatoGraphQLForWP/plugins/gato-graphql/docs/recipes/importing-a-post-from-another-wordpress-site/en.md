@@ -8,11 +8,19 @@ Use Gato GraphQL on other end, then can execute this GraphQL query:
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  defaultResponseHasErrors: _echo(value: false)
+  initVariablesWithFalse: _echo(value: false)
     @export(as: "responseHasErrors")
-    @remove
-  defaultPostIsMissing: _echo(value: false)
     @export(as: "postIsMissing")
+    @remove
+
+  initVariablesWithNull: _echo(value: null)
+    @export(as: "existingAuthorSlug")
+    @export(as: "existingFeaturedImageSlug")
+    @remove
+
+  initVariablesWithEmptyArray: _echo(value: [])
+    @export(as: "existingCategorySlugPaths")
+    @export(as: "existingTagSlugs")
     @remove
 }
 
@@ -114,7 +122,7 @@ query FailIfResponseHasErrors
   ) @remove
 }
 
-query ExportInputsForMutation
+query ExportInputs
   @depends(on: "FailIfResponseHasErrors")
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
@@ -246,11 +254,144 @@ query ExportInputsForMutation
     @remove
 }
 
-mutation ImportPost
-  @depends(on: "ExportInputsForMutation")
+query ExportExistingResources
+  @depends(on: "ExportInputs")
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
+{
+  existingAuthorBySlug: author(by: { slug: $postAuthorSlug }) {
+    id
+    slug @export(as: "existingAuthorSlug")
+  }
+
+  existingFeaturedImageBySlug: featuredImage(by: { slug: $postFeaturedImageSlug }) {
+    id
+    slug @export(as: "existingFeaturedImageSlug")
+  }
+
+  existingCategoriesBySlugPath: categories(filter: { slugPaths: $postCategorySlugPaths }) {
+    id
+    slugPath @export(as: "existingCategorySlugPaths")
+  }
+
+  existingTagsBySlug: tags(filter: { slugs: $postTagSlugs }) {
+    id
+    slug @export(as: "existingTagSlugs")
+  }
+}
+
+query ExportMissingResources
+  @depends(on: "ExportExistingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+{
+  isAuthorMissing: _notEquals(
+    value1: $postAuthorSlug,
+    value2: $existingAuthorSlug
+  ) @export(as: "isAuthorMissing")
+  
+  isFeaturedImageMissing: _notEquals(
+    value1: $postFeaturedImageSlug,
+    value2: $existingFeaturedImageSlug
+  ) @export(as: "isFeaturedImageMissing")
+
+  missingCategorySlugPaths: _arrayDiff(
+    arrays: [$postCategorySlugPaths, $existingCategorySlugPaths]
+  ) @export(as: "missingCategorySlugPaths")
+  areCategoriesMissing: _notEmpty(
+    value: $__missingCategorySlugPaths
+  ) @export(as: "areCategoriesMissing")
+
+  missingTagSlugs: _arrayDiff(
+    arrays: [$postTagSlugs, $existingTagSlugs]
+  ) @export(as: "missingTagSlugs")
+  areTagsMissing: _notEmpty(
+    value: $__missingTagSlugs
+  ) @export(as: "areTagsMissing")
+
+  isAnyResourceMissing: _or(
+    values: [
+      $__isAuthorMissing,
+      $__isFeaturedImageMissing,
+      $__areCategoriesMissing,
+      $__areTagsMissing,
+    ]
+  ) @export(as: "isAnyResourceMissing")
+}
+
+query FailIfAuthorIsMissing
+  @depends(on: "ExportMissingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $isAuthorMissing)
+{
+  _fail(
+    message: "Author is missing"
+    data: {
+      authorSlug: $postAuthorSlug
+    }
+  ) @remove
+}
+
+query FailIfFeaturedImageIsMissing
+  @depends(on: "ExportMissingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $isFeaturedImageMissing)
+{
+  _fail(
+    message: "Featured image is missing"
+    data: {
+      featuredImageSlug: $postFeaturedImageSlug
+    }
+  ) @remove
+}
+
+query FailIfCategoriesAreMissing
+  @depends(on: "ExportMissingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $areCategoriesMissing)
+{
+  _fail(
+    message: "Categories are missing"
+    data: {
+      missingCategorySlugPaths: $missingCategorySlugPaths
+    }
+  ) @remove
+}
+
+query FailIfTagsAreMissing
+  @depends(on: "ExportMissingResources")
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $areTagsMissing)
+{
+  _fail(
+    message: "Tags are missing"
+    data: {
+      missingTagSlugs: $missingTagSlugs
+    }
+  ) @remove
+}
+
+mutation ImportPost
+  @depends(on: [
+    "FailIfAuthorIsMissing",
+    "FailIfFeaturedImageIsMissing",
+    "FailIfCategoriesAreMissing",
+    "FailIfTagsAreMissing",
+  ])
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $isAnyResourceMissing)
 {
   createPost(input: {
     status: draft,
