@@ -479,7 +479,10 @@ query FailIfAnyResourceIsMissing
 }
 
 mutation ImportPost
-  @depends(on: "FailIfAnyResourceIsMissing")
+  @depends(on: [
+    "GetMissingResourcesFromGraphQLAPI",
+    "FailIfAnyResourceIsMissing",
+  ])
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
