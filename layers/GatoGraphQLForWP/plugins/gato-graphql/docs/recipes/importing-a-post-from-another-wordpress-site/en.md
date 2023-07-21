@@ -311,6 +311,30 @@ query ExportMissingResources
     value: $__missingTagSlugs
   ) @export(as: "areTagsMissing")
 
+  # Format arrays as strings, to input into query
+  missingCategorySlugPathsAsString: _arrayJoin(
+    array: [$__missingCategorySlugPaths]
+    separator: "\""
+  )
+    @strPrepend(
+      string: "[\""
+    )
+    @strAppend(
+      string: "\"]"
+    )
+    @export(as: "missingCategorySlugPathsAsString")
+  missingTagSlugsAsString: _arrayJoin(
+    array: [$__missingTagSlugs]
+    separator: "\", \""
+  )
+    @strPrepend(
+      string: "[\""
+    )
+    @strAppend(
+      string: "\"]"
+    )
+    @export(as: "missingTagSlugsAsString")
+
   isAnyResourceMissing: _or(
     values: [
       $__isAuthorMissing,
@@ -383,8 +407,8 @@ query ExportMissingResourcesGraphQLQuery
       replaceWith: [
         $missingAuthorSlug,
         $missingFeaturedImageSlug,
-        $missingCategorySlugPaths,
-        $missingTagSlugs,
+        $missingCategorySlugPathsAsString,
+        $missingTagSlugsAsString,
       ]
     )
     @export(as: "missingResourcesQuery")
