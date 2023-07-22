@@ -23,6 +23,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
 - Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
 - Mutations `setTagsOnPost`, `createPost` and `updatePost` now receive a oneof input object for tags
+- Mutations `Root.createPost`, `Root.createPost` and `Post.update` now receive the `slug` input
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)

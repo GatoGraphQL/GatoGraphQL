@@ -1020,6 +1020,32 @@ Prior to v1.0, mutations that can set tags on posts received input `tags` with t
 
 Now, they receive "oneof" input `tagsBy` with two properties: `ids` (as `[ID]`) and `slugs` (as `[String]`), so we can use one or the other to define the tags.
 
+## Mutations `Root.createPost`, `Root.createPost` and `Post.update` now receive the `slug` input
+
+Mutations creating/updating a post now also receive a `slug` input:
+
+```graphql
+mutation UpdatePost {
+  updatePost(input: {
+    id: 1
+    slug: "new-slug"
+
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      slug
+    }
+  }
+}
+```
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
