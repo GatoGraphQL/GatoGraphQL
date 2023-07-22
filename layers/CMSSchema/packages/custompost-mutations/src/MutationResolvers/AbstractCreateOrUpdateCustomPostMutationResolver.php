@@ -219,6 +219,9 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         if ($fieldDataAccessor->hasValue(MutationInputProperties::EXCERPT)) {
             $customPostData['excerpt'] = $fieldDataAccessor->getValue(MutationInputProperties::EXCERPT);
         }
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::SLUG)) {
+            $customPostData['slug'] = $fieldDataAccessor->getValue(MutationInputProperties::SLUG);
+        }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $customPostData['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
