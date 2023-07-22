@@ -46,6 +46,10 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
             $query['post_excerpt'] = $query['excerpt'];
             unset($query['excerpt']);
         }
+        if (isset($query['slug'])) {
+            $query['post_name'] = $query['slug'];
+            unset($query['slug']);
+        }
         if (isset($query['title'])) {
             $query['post_title'] = $query['title'];
             unset($query['title']);
