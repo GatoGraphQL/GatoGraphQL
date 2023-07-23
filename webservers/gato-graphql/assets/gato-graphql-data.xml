@@ -65,6 +65,12 @@
 		<wp:category_parent><![CDATA[]]></wp:category_parent>
 		<wp:cat_name><![CDATA[Never used]]></wp:cat_name>
 	</wp:category>
+	<wp:category>
+		<wp:term_id>15</wp:term_id>
+		<wp:category_nicename><![CDATA[special-topic]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[resource]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Special topic]]></wp:cat_name>
+	</wp:category>
 		<wp:category>
 		<wp:term_id>1</wp:term_id>
 		<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
