@@ -194,11 +194,10 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategorySlugPath(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
-        $categorySlugPath = \get_category_parents($catObjectOrID, false, '/', true);
-        if ($categorySlugPath instanceof WP_Error) {
-            return null;
-        }
-        return $categorySlugPath;
+        return $this->getTermSlugPath(
+            $catObjectOrID,
+            $this->getCategoryTaxonomyName(),
+        );
     }
 
     public function getCategoryName(string|int|object $catObjectOrID): ?string

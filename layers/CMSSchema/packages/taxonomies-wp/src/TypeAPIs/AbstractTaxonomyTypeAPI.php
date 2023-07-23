@@ -388,6 +388,33 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $taxonomyTerm->slug;
     }
 
+    protected function getTermSlugPath(
+        string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy,
+    ): ?string {
+        $taxonomyTermID = is_object($taxonomyTermObjectOrID) ? $this->getTaxonomyTermID($taxonomyTermObjectOrID) : $taxonomyTermObjectOrID;
+        $taxonomyTermParentsSlugPath = \get_term_parents_list(
+            $taxonomyTermID,
+            $taxonomy,
+            [
+                'separator' => '/',
+                'link' => false,
+                'format' => 'slug',
+            ]
+        );
+        if ($taxonomyTermParentsSlugPath instanceof WP_Error) {
+            return null;
+        }
+        $taxonomyTermSlug = $this->getTaxonomyTermSlug(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
+        if ($taxonomyTermParentsSlugPath === '') {
+            return $taxonomyTermSlug;
+        }
+        return $taxonomyTermParentsSlugPath . '/' . $taxonomyTermSlug;
+    }
+
     protected function getTaxonomyTermDescription(
         string|int|WP_Term $taxonomyTermObjectOrID,
         string $taxonomy = '',
