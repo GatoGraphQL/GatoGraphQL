@@ -32,6 +32,8 @@
         __typename
         id
         name
+        slug
+        slugPath
       }
     }
   }
