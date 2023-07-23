@@ -405,7 +405,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         if ($taxonomyTermParentsSlugPath instanceof WP_Error) {
             return null;
         }
-        return $taxonomyTermParentsSlugPath;
+        return trim($taxonomyTermParentsSlugPath, '/');
     }
 
     protected function getTaxonomyTermDescription(
