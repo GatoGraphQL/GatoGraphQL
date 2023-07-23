@@ -388,7 +388,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         return $taxonomyTerm->slug;
     }
 
-    protected function getTermSlugPath(
+    protected function getTaxonomyTermSlugPath(
         string|int|WP_Term $taxonomyTermObjectOrID,
         string $taxonomy,
     ): ?string {
