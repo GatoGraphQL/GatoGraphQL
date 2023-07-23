@@ -402,7 +402,9 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
                 'format' => 'slug',
             ]
         );
-        if ($taxonomyTermParentsSlugPath instanceof WP_Error) {
+        if ($taxonomyTermParentsSlugPath === ''
+            || $taxonomyTermParentsSlugPath instanceof WP_Error
+        ) {
             return null;
         }
         return trim($taxonomyTermParentsSlugPath, '/');
