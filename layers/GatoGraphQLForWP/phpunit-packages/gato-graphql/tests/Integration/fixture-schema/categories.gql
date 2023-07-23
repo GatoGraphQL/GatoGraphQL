@@ -60,6 +60,7 @@ fragment CategoryData on Category {
   metaValues(key: "also-not-existing")
   name
   slug
+  slugPath
   url
   urlPath
 }
