@@ -32,6 +32,8 @@
         __typename
         id
         name
+        slug
+        slugPath
       }
     }
   }
@@ -60,6 +62,7 @@ fragment CategoryData on Category {
   metaValues(key: "also-not-existing")
   name
   slug
+  slugPath
   url
   urlPath
 }

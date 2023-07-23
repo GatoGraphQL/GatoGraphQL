@@ -8,6 +8,7 @@ use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\TaxonomiesWP\TypeAPIs\AbstractTaxonomyTypeAPI;
 use PoP\Root\App;
+use WP_Error;
 use WP_Post;
 use WP_Term;
 
@@ -185,6 +186,15 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     {
         /** @var string|int|WP_Term $catObjectOrID */
         return $this->getTaxonomyTermSlug(
+            $catObjectOrID,
+            $this->getCategoryTaxonomyName(),
+        );
+    }
+
+    public function getCategorySlugPath(string|int|object $catObjectOrID): ?string
+    {
+        /** @var string|int|WP_Term $catObjectOrID */
+        return $this->getTaxonomyTermSlugPath(
             $catObjectOrID,
             $this->getCategoryTaxonomyName(),
         );
