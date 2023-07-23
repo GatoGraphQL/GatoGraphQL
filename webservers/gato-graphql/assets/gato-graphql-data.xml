@@ -74,7 +74,7 @@
 	<wp:category>
 		<wp:term_id>16</wp:term_id>
 		<wp:category_nicename><![CDATA[most-special-topic]]></wp:category_nicename>
-		<wp:category_parent><![CDATA[resource]]></wp:category_parent>
+		<wp:category_parent><![CDATA[special-topic]]></wp:category_parent>
 		<wp:cat_name><![CDATA[Most special topic]]></wp:cat_name>
 	</wp:category>
 		<wp:category>
