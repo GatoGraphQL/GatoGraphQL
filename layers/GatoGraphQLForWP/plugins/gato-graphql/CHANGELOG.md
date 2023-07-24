@@ -23,8 +23,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added several "raw content" fields, made them all “sensitive”
 - Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
 - Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
-- Mutations `setTagsOnPost`, `createPost` and `updatePost` now receive a oneof input object for tags
-- Mutations `Root.createPost`, `Root.createPost` and `Post.update` now receive the `slug` input
+- Mutations setting tags and categories on custom posts can now receive IDs or slugs via a oneof input
 - Filter custom posts by `any` status
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings

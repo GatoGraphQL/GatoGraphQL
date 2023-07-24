@@ -46,7 +46,7 @@
   }
 
   postsByTagIDs: posts(
-    filter: { tagIDs: [13, 12] }
+    filter: { tagIDs: [15, 14] }
   ) {
     id
     title

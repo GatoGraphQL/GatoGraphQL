@@ -18,7 +18,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
     /**
      * @param array<string|int> $customPostCategoryIDs
      */
-    protected function validateCategoriesExist(
+    protected function validateCategoriesByIDExist(
         array $customPostCategoryIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -41,6 +41,41 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
                             implode(
                                 $this->__('\', \'', 'custompost-category-mutations'),
                                 $nonExistingCategoryIDs
+                            ),
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    /**
+     * @param array<string|int> $customPostCategorySlugs
+     */
+    protected function validateCategoriesBySlugExist(
+        array $customPostCategorySlugs,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $query = [
+            'slugs' => $customPostCategorySlugs,
+        ];
+        $existingCategorySlugs = $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS]);
+        $nonExistingCategorySlugs = array_values(array_diff(
+            $customPostCategorySlugs,
+            $existingCategorySlugs
+        ));
+        if ($nonExistingCategorySlugs !== []) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            implode(
+                                $this->__('\', \'', 'custompost-category-mutations'),
+                                $nonExistingCategorySlugs
                             ),
                         ]
                     ),

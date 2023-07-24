@@ -270,6 +270,9 @@
           "name": "BlockFilterByInput"
         },
         {
+          "name": "CategoriesByInput"
+        },
+        {
           "name": "CategoryByInput"
         },
         {

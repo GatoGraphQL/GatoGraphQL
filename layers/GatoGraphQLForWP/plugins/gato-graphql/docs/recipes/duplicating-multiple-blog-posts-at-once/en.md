@@ -55,7 +55,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     postInput: _echo(value: {
       status: draft,
       authorID: $__author,
-      categoryIDs: $__categories,
+      categoriesBy: {
+        ids: $__categories
+      },
       contentAs: {
         html: $__rawContent
       },
@@ -164,7 +166,9 @@ mutation DuplicatePost
   createPost(input: {
     status: draft,
     authorID: $authorID,
-    categoryIDs: $categoryIDs,
+    categoriesBy: {
+      ids: $categoryIDs
+    },
     contentAs: {
       html: $rawContent
     },
@@ -204,7 +208,9 @@ query GetPostAndExportData {
     postInput: _echo(value: {
       status: draft,
       authorID: $__author,
-      categoryIDs: $__categories,
+      categoriesBy: {
+        ids: $__categories
+      },
       contentAs: {
         html: $__rawContent
       },
@@ -491,7 +497,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     postInput: _echo(value: {
       status: draft,
       authorID: $__author,
-      categoryIDs: $__categories,
+      categoriesBy: {
+        ids: $__categories
+      },
       contentAs: {
         html: $__rawContent
       },

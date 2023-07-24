@@ -68,18 +68,33 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
-        $this->validateCategoriesExist(
-            $customPostCategoryIDs,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->validateCategoriesByIDExist(
+                $customPostCategoryIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->validateCategoriesBySlugExist(
+                $customPostCategorySlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     protected function canExecuteMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_IDS)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORIES_BY)) {
+            return false;
+        }
+        /** @var stdClass */
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (((array) $categoriesBy) === []) {
             return false;
         }
         // Only for that specific CPT
@@ -100,9 +115,17 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
-        $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
-        $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
+        /** @var stdClass */
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            /** @var array<string|int> */
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID($customPostID, $customPostCategoryIDs, false);
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            /** @var string[] */
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug($customPostID, $customPostCategorySlugs, false);
+        }
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
