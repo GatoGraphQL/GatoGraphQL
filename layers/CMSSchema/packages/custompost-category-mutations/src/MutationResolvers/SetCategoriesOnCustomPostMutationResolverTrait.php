@@ -18,7 +18,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
     /**
      * @param array<string|int> $customPostCategoryIDs
      */
-    protected function validateCategoriesExist(
+    protected function validateCategoriesByIDExist(
         array $customPostCategoryIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,

@@ -71,7 +71,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->validateCategoriesExist(
+            $this->validateCategoriesByIDExist(
                 $customPostCategoryIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,

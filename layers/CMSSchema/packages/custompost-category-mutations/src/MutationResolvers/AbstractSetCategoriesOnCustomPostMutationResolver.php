@@ -117,7 +117,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         );
 
         $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        $this->validateCategoriesExist(
+        $this->validateCategoriesByIDExist(
             $customPostCategoryIDs,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
