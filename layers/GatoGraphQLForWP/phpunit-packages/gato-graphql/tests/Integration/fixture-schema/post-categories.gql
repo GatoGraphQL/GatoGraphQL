@@ -63,6 +63,16 @@
       id
     }
   }
+
+  postsByCategoryByID: postCategory(by: { id: 1 }) {
+    ...PostCategoryData
+  }
+  postsByCategoryBySlug: postCategory(by: { slug: "resource" }) {
+    ...PostCategoryData
+  }
+  
+  postCategoryCount
+  postCategoryNames
 }
 
 fragment PostCategoryData on PostCategory {

@@ -52,6 +52,30 @@
       }
     }
   }
+
+  postCategories: categories(taxonomy: category) {
+    ...CategoryData
+  }
+  postCategoryByID: category(taxonomy: category, by: { id: 1 }) {
+    ...CategoryData
+  }
+  postCategoryBySlug: category(taxonomy: category, by: { slug: "resource" }) {
+    ...CategoryData
+  }
+  postCategoryCount: categoryCount(taxonomy: category)
+  postCategoryNames: categoryNames(taxonomy: category)
+
+  dummyCategories: categories(taxonomy: "dummy-category") {
+    ...CategoryData
+  }
+  dummyCategoryByID: category(taxonomy: "dummy-category", by: { id: 27 }) {
+    ...CategoryData
+  }
+  dummyCategoryBySlug: category(taxonomy: "dummy-category", by: { slug: "nostradamus" }) {
+    ...CategoryData
+  }
+  dummyCategoryCount: categoryCount(taxonomy: "dummy-category")
+  dummyCategoryNames: categoryNames(taxonomy: "dummy-category")
 }
 
 fragment CategoryData on Category {
@@ -70,7 +94,7 @@ fragment CategoryData on Category {
 fragment GenericCategoryData on GenericCategory {
   taxonomy   
   customPostCount
-  customPosts {
+  customPosts(sort: {by: ID, order: ASC}) {
     __typename
     ...CustomPostData
   }
