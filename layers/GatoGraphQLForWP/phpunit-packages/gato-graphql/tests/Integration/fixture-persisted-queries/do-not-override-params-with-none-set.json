@@ -2,17 +2,17 @@
     "data": {
         "postTags": [
             {
-                "id": 13,
+                "id": 15,
                 "slug": "wordpress",
                 "name": "wordpress"
             },
             {
-                "id": 12,
+                "id": 14,
                 "slug": "security",
                 "name": "Security"
             },
             {
-                "id": 11,
+                "id": 13,
                 "slug": "release",
                 "name": "release"
             }
