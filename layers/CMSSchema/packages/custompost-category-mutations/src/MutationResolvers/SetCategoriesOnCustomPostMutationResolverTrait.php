@@ -50,5 +50,40 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         }
     }
 
+    /**
+     * @param array<string|int> $customPostCategorySlugs
+     */
+    protected function validateCategoriesBySlugExist(
+        array $customPostCategorySlugs,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $query = [
+            'slugs' => $customPostCategorySlugs,
+        ];
+        $existingCategorySlugs = $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS]);
+        $nonExistingCategorySlugs = array_values(array_diff(
+            $customPostCategorySlugs,
+            $existingCategorySlugs
+        ));
+        if ($nonExistingCategorySlugs !== []) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            implode(
+                                $this->__('\', \'', 'custompost-category-mutations'),
+                                $nonExistingCategorySlugs
+                            ),
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
     abstract protected function getCategoryTypeAPI(): CategoryTypeAPIInterface;
 }
