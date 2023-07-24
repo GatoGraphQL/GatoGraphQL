@@ -103,6 +103,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'name',
             'description',
             'count',
+            'slugPath',
 
             // Own
             'parent',
@@ -152,6 +153,10 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             case 'slug':
                 /** @var string */
                 return $categoryTypeAPI->getCategorySlug($category);
+
+            case 'slugPath':
+                /** @var string */
+                return $categoryTypeAPI->getCategorySlugPath($category);
 
             case 'description':
                 /** @var string */

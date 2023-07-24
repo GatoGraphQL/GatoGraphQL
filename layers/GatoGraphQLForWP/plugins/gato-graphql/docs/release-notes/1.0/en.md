@@ -944,6 +944,30 @@ Otherwise, the value defined in the Settings page for `Response Headers` is used
 
 </div>
 
+## Added field `Category.slugPath`
+
+Added a new `slugPath` to all `Category` types (such as `PostCategory` and `GenericCategory`), that retrieves the full category slug from the root ancestor all the way down (separated by `/`):
+
+```graphql
+{
+  postCategory(by: { id: 4 }) {
+    slugPath
+  }
+}
+```
+
+For instance, if category with slug `wordpress` has parent category with slug `tech`, the `slugPath` will be:
+
+```json
+{
+  "data": {
+    "postCategory": {
+      "slugPath": "tech/wordpress"
+    }
+  }
+}
+```
+
 ## Added field `CustomPost.wpAdminEditURL`
 
 Field `wpAdminEditURL` has been added to all `CustomPost` types (`Post`, `Page`, etc). It retrieves the link to edit the custom post in the wp-admin, or `null` if the visitor does not have the right to edit it.

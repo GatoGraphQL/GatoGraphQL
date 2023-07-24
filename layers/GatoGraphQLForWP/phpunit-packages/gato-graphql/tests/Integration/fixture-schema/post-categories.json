@@ -4,22 +4,18 @@
             {
                 "childCount": 0,
                 "childNames": [],
-                "count": 5,
+                "count": 4,
                 "description": "",
                 "id": 1,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Uncategorized",
                 "parent": null,
-                "postCount": 5,
+                "postCount": 4,
                 "posts": [
                     {
                         "id": 40,
                         "title": "Welcome to a single post full of blocks!"
-                    },
-                    {
-                        "id": 23,
-                        "title": "GraphQL or REST? Why not both?"
                     },
                     {
                         "id": 21,
@@ -40,8 +36,60 @@
                 "children": []
             },
             {
-                "childCount": 0,
-                "childNames": [],
+                "childCount": 1,
+                "childNames": [
+                    "Most special topic"
+                ],
+                "count": 1,
+                "description": "",
+                "id": 6,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Special topic",
+                "parent": {
+                    "id": 4
+                },
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 23,
+                        "title": "GraphQL or REST? Why not both?"
+                    }
+                ],
+                "slug": "special-topic",
+                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                "urlPath": "\/category\/blog\/resource\/special-topic\/",
+                "children": [
+                    {
+                        "childCount": 0,
+                        "childNames": [],
+                        "count": 1,
+                        "description": "",
+                        "id": 7,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Most special topic",
+                        "parent": {
+                            "id": 6
+                        },
+                        "postCount": 1,
+                        "posts": [
+                            {
+                                "id": 28,
+                                "title": "HTTP caching improves performance"
+                            }
+                        ],
+                        "slug": "most-special-topic",
+                        "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                        "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/"
+                    }
+                ]
+            },
+            {
+                "childCount": 1,
+                "childNames": [
+                    "Special topic"
+                ],
                 "count": 2,
                 "description": "",
                 "id": 4,
@@ -65,7 +113,33 @@
                 "slug": "resource",
                 "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
                 "urlPath": "\/category\/blog\/resource\/",
-                "children": []
+                "children": [
+                    {
+                        "childCount": 1,
+                        "childNames": [
+                            "Most special topic"
+                        ],
+                        "count": 1,
+                        "description": "",
+                        "id": 6,
+                        "metaValue": null,
+                        "metaValues": null,
+                        "name": "Special topic",
+                        "parent": {
+                            "id": 4
+                        },
+                        "postCount": 1,
+                        "posts": [
+                            {
+                                "id": 23,
+                                "title": "GraphQL or REST? Why not both?"
+                            }
+                        ],
+                        "slug": "special-topic",
+                        "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                        "urlPath": "\/category\/blog\/resource\/special-topic\/"
+                    }
+                ]
             },
             {
                 "childCount": 0,
@@ -82,6 +156,30 @@
                 "slug": "never-used",
                 "url": "https:\/\/gato-graphql.lndo.site\/category\/never-used\/",
                 "urlPath": "\/category\/never-used\/",
+                "children": []
+            },
+            {
+                "childCount": 0,
+                "childNames": [],
+                "count": 1,
+                "description": "",
+                "id": 7,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Most special topic",
+                "parent": {
+                    "id": 6
+                },
+                "postCount": 1,
+                "posts": [
+                    {
+                        "id": 28,
+                        "title": "HTTP caching improves performance"
+                    }
+                ],
+                "slug": "most-special-topic",
+                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/",
                 "children": []
             },
             {
@@ -116,8 +214,10 @@
                 "urlPath": "\/category\/blog\/",
                 "children": [
                     {
-                        "childCount": 0,
-                        "childNames": [],
+                        "childCount": 1,
+                        "childNames": [
+                            "Special topic"
+                        ],
                         "count": 2,
                         "description": "",
                         "id": 4,
@@ -181,8 +281,16 @@
                 "name": "Uncategorized"
             },
             {
+                "id": 6,
+                "name": "Special topic"
+            },
+            {
                 "id": 4,
                 "name": "Resource"
+            },
+            {
+                "id": 7,
+                "name": "Most special topic"
             },
             {
                 "id": 3,
@@ -196,8 +304,10 @@
         "post": {
             "categories": [
                 {
-                    "childCount": 0,
-                    "childNames": [],
+                    "childCount": 1,
+                    "childNames": [
+                        "Special topic"
+                    ],
                     "count": 2,
                     "description": "",
                     "id": 4,
@@ -221,7 +331,33 @@
                     "slug": "resource",
                     "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
                     "urlPath": "\/category\/blog\/resource\/",
-                    "children": []
+                    "children": [
+                        {
+                            "childCount": 1,
+                            "childNames": [
+                                "Most special topic"
+                            ],
+                            "count": 1,
+                            "description": "",
+                            "id": 6,
+                            "metaValue": null,
+                            "metaValues": null,
+                            "name": "Special topic",
+                            "parent": {
+                                "id": 4
+                            },
+                            "postCount": 1,
+                            "posts": [
+                                {
+                                    "id": 23,
+                                    "title": "GraphQL or REST? Why not both?"
+                                }
+                            ],
+                            "slug": "special-topic",
+                            "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                            "urlPath": "\/category\/blog\/resource\/special-topic\/"
+                        }
+                    ]
                 },
                 {
                     "childCount": 1,
@@ -255,8 +391,10 @@
                     "urlPath": "\/category\/blog\/",
                     "children": [
                         {
-                            "childCount": 0,
-                            "childNames": [],
+                            "childCount": 1,
+                            "childNames": [
+                                "Special topic"
+                            ],
                             "count": 2,
                             "description": "",
                             "id": 4,
@@ -408,15 +546,6 @@
                 ]
             },
             {
-                "id": 23,
-                "title": "GraphQL or REST? Why not both?",
-                "categories": [
-                    {
-                        "id": 1
-                    }
-                ]
-            },
-            {
                 "id": 21,
                 "title": "Customize the schema for each client",
                 "categories": [
@@ -458,6 +587,78 @@
                     }
                 ]
             }
+        ],
+        "postsByCategoryByID": {
+            "childCount": 0,
+            "childNames": [],
+            "count": 4,
+            "description": "",
+            "id": 1,
+            "metaValue": null,
+            "metaValues": null,
+            "name": "Uncategorized",
+            "parent": null,
+            "postCount": 4,
+            "posts": [
+                {
+                    "id": 40,
+                    "title": "Welcome to a single post full of blocks!"
+                },
+                {
+                    "id": 21,
+                    "title": "Customize the schema for each client"
+                },
+                {
+                    "id": 16,
+                    "title": "Working on flat chain syntax next"
+                },
+                {
+                    "id": 1,
+                    "title": "Hello world!"
+                }
+            ],
+            "slug": "uncategorized",
+            "url": "https:\/\/gato-graphql.lndo.site\/category\/uncategorized\/",
+            "urlPath": "\/category\/uncategorized\/"
+        },
+        "postsByCategoryBySlug": {
+            "childCount": 1,
+            "childNames": [
+                "Special topic"
+            ],
+            "count": 2,
+            "description": "",
+            "id": 4,
+            "metaValue": null,
+            "metaValues": null,
+            "name": "Resource",
+            "parent": {
+                "id": 3
+            },
+            "postCount": 2,
+            "posts": [
+                {
+                    "id": 25,
+                    "title": "Public or Private API mode, for extra security"
+                },
+                {
+                    "id": 19,
+                    "title": "Nested mutations are a must have"
+                }
+            ],
+            "slug": "resource",
+            "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
+            "urlPath": "\/category\/blog\/resource\/"
+        },
+        "postCategoryCount": 7,
+        "postCategoryNames": [
+            "Uncategorized",
+            "Special topic",
+            "Resource",
+            "Never used",
+            "Most special topic",
+            "Blog",
+            "Advanced"
         ]
     }
 }

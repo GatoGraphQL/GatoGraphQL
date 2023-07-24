@@ -65,6 +65,18 @@
 		<wp:category_parent><![CDATA[]]></wp:category_parent>
 		<wp:cat_name><![CDATA[Never used]]></wp:cat_name>
 	</wp:category>
+	<wp:category>
+		<wp:term_id>15</wp:term_id>
+		<wp:category_nicename><![CDATA[special-topic]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[resource]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Special topic]]></wp:cat_name>
+	</wp:category>
+	<wp:category>
+		<wp:term_id>16</wp:term_id>
+		<wp:category_nicename><![CDATA[most-special-topic]]></wp:category_nicename>
+		<wp:category_parent><![CDATA[special-topic]]></wp:category_parent>
+		<wp:cat_name><![CDATA[Most special topic]]></wp:cat_name>
+	</wp:category>
 		<wp:category>
 		<wp:term_id>1</wp:term_id>
 		<wp:category_nicename><![CDATA[uncategorized]]></wp:category_nicename>
@@ -1504,7 +1516,7 @@
 		<wp:post_type><![CDATA[post]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="uncategorized"><![CDATA[Uncategorized]]></category>
+												<category domain="category" nicename="special-topic"><![CDATA[Special topic]]></category>
 			<category domain="post_format" nicename="post-format-aside"><![CDATA[Aside]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[enclosure]]></wp:meta_key>
@@ -1728,6 +1740,7 @@ https://wordpress.org/about/
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
 										<category domain="category" nicename="advanced"><![CDATA[Advanced]]></category>
+										<category domain="category" nicename="most-special-topic"><![CDATA[Most special topic]]></category>
 			<category domain="post_format" nicename="post-format-aside"><![CDATA[Aside]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
