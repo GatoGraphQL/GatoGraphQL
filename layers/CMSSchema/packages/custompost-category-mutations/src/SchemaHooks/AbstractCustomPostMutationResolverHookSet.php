@@ -9,7 +9,6 @@ use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\CategoriesByOneofInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -45,12 +44,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         App::addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             $this->maybeAddInputFieldDescription(...),
-            10,
-            3
-        );
-        App::addFilter(
-            HookNames::INPUT_FIELD_TYPE_MODIFIERS,
-            $this->maybeAddInputFieldTypeModifiers(...),
             10,
             3
         );
@@ -92,18 +85,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             $this->__('The categories to set, of type \'%s\'', 'custompost-category-mutations'),
             $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
         );
-    }
-
-    public function maybeAddInputFieldTypeModifiers(
-        int $inputFieldTypeModifiers,
-        InputObjectTypeResolverInterface $inputObjectTypeResolver,
-        string $inputFieldName,
-    ): int {
-        // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::CATEGORIES_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
-            return $inputFieldTypeModifiers;
-        }
-        return SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
     }
 
     abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
