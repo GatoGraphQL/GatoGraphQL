@@ -6,10 +6,10 @@ namespace PoPCMSSchema\Pages\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
-use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByOneofInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\PathOrPathsFilterInput;
 
-class PageByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeResolver
+class PageByInputObjectTypeResolver extends AbstractCustomPostByOneofInputObjectTypeResolver
 {
     private ?PathOrPathsFilterInput $pathOrPathsFilterInput = null;
 

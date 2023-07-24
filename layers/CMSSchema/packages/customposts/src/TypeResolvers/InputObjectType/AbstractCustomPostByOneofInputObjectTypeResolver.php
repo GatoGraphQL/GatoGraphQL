@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
 
-abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
