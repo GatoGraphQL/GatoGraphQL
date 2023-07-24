@@ -65,10 +65,10 @@
   }
 
   postsByCategoryByID: postCategory(by: { id: 1 }) {
-    ...CategoryData
+    ...PostCategoryData
   }
   postsByCategoryBySlug: postCategory(by: { slug: "resource" }) {
-    ...CategoryData
+    ...PostCategoryData
   }
   
   postCategoryCount
