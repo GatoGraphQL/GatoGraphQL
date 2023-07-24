@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Posts\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByOneofInputObjectTypeResolver;
 
-class PostByInputObjectTypeResolver extends AbstractCustomPostByOneofInputObjectTypeResolver
+class PostByOneofInputObjectTypeResolver extends AbstractCustomPostByOneofInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
