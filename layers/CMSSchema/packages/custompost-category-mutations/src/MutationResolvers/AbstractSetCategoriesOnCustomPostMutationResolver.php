@@ -89,7 +89,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
+        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         $customPostCategoryTypeAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeAPI->setCategories($customPostID, $customPostCategoryIDs, $append);
@@ -116,7 +116,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
+        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         $this->validateCategoriesExist(
             $customPostCategoryIDs,
             $fieldDataAccessor,

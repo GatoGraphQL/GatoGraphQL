@@ -68,7 +68,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
+        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         $this->validateCategoriesExist(
             $customPostCategoryIDs,
             $fieldDataAccessor,
@@ -79,7 +79,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function canExecuteMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_IDS)) {
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORIES_BY)) {
             return false;
         }
         // Only for that specific CPT
@@ -100,7 +100,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_IDS);
+        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
         $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
     }

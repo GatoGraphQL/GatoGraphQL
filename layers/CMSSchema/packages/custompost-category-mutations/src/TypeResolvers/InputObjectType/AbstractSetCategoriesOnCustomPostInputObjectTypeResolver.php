@@ -73,7 +73,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::CATEGORY_IDS => $this->getCategoriesByOneofInputObjectTypeResolver(),
+                MutationInputProperties::CATEGORIES_BY => $this->getCategoriesByOneofInputObjectTypeResolver(),
                 MutationInputProperties::APPEND => $this->getBooleanScalarTypeResolver(),
             ],
         );
@@ -90,7 +90,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
                 $this->__('The ID of the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
-            MutationInputProperties::CATEGORY_IDS => sprintf(
+            MutationInputProperties::CATEGORIES_BY => sprintf(
                 $this->__('The categories to set, of type \'%s\'', 'custompost-category-mutations'),
                 $this->getCategoryTypeResolver()->getMaybeNamespacedTypeName()
             ),
@@ -113,7 +113,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
             MutationInputProperties::APPEND
                 => SchemaTypeModifiers::NON_NULLABLE,
             MutationInputProperties::CUSTOMPOST_ID,
-            MutationInputProperties::CATEGORY_IDS
+            MutationInputProperties::CATEGORIES_BY
                 => SchemaTypeModifiers::MANDATORY,
             default
                 => parent::getInputFieldTypeModifiers($inputFieldName),
