@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostCategories\FieldResolvers\ObjectType;
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\RootCategoriesFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use PoPCMSSchema\PostCategories\TypeResolvers\InputObjectType\PostCategoryByInputObjectTypeResolver;
+use PoPCMSSchema\PostCategories\TypeResolvers\InputObjectType\PostCategoryByOneofInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
@@ -33,7 +33,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
-    private ?PostCategoryByInputObjectTypeResolver $postCategoryByInputObjectTypeResolver = null;
+    private ?PostCategoryByOneofInputObjectTypeResolver $postCategoryByOneofInputObjectTypeResolver = null;
     private ?RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver = null;
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
@@ -90,18 +90,18 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         }
         return $this->postCategoryTypeAPI;
     }
-    final public function setPostCategoryByInputObjectTypeResolver(PostCategoryByInputObjectTypeResolver $postCategoryByInputObjectTypeResolver): void
+    final public function setPostCategoryByOneofInputObjectTypeResolver(PostCategoryByOneofInputObjectTypeResolver $postCategoryByOneofInputObjectTypeResolver): void
     {
-        $this->postCategoryByInputObjectTypeResolver = $postCategoryByInputObjectTypeResolver;
+        $this->postCategoryByOneofInputObjectTypeResolver = $postCategoryByOneofInputObjectTypeResolver;
     }
-    final protected function getPostCategoryByInputObjectTypeResolver(): PostCategoryByInputObjectTypeResolver
+    final protected function getPostCategoryByOneofInputObjectTypeResolver(): PostCategoryByOneofInputObjectTypeResolver
     {
-        if ($this->postCategoryByInputObjectTypeResolver === null) {
-            /** @var PostCategoryByInputObjectTypeResolver */
-            $postCategoryByInputObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryByInputObjectTypeResolver::class);
-            $this->postCategoryByInputObjectTypeResolver = $postCategoryByInputObjectTypeResolver;
+        if ($this->postCategoryByOneofInputObjectTypeResolver === null) {
+            /** @var PostCategoryByOneofInputObjectTypeResolver */
+            $postCategoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryByOneofInputObjectTypeResolver::class);
+            $this->postCategoryByOneofInputObjectTypeResolver = $postCategoryByOneofInputObjectTypeResolver;
         }
-        return $this->postCategoryByInputObjectTypeResolver;
+        return $this->postCategoryByOneofInputObjectTypeResolver;
     }
     final public function setRootCategoriesFilterInputObjectTypeResolver(RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver): void
     {
@@ -215,7 +215,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             'postCategory' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getPostCategoryByInputObjectTypeResolver(),
+                    'by' => $this->getPostCategoryByOneofInputObjectTypeResolver(),
                 ]
             ),
             'postCategories',

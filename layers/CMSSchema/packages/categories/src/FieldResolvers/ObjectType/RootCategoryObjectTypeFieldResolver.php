@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Categories\TypeAPIs\QueryableTaxonomyCategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
-use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryByInputObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\RootCategoriesFilterInputObjectTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\UnionType\CategoryUnionTypeResolver;
@@ -34,7 +34,7 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CategoryUnionTypeResolver $categoryUnionTypeResolver = null;
     private ?QueryableTaxonomyCategoryListTypeAPIInterface $queryableTaxonomyCategoryListTypeAPI = null;
-    private ?CategoryByInputObjectTypeResolver $categoryByInputObjectTypeResolver = null;
+    private ?CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver = null;
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
     private ?RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver = null;
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
@@ -92,18 +92,18 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
         }
         return $this->queryableTaxonomyCategoryListTypeAPI;
     }
-    final public function setCategoryByInputObjectTypeResolver(CategoryByInputObjectTypeResolver $categoryByInputObjectTypeResolver): void
+    final public function setCategoryByOneofInputObjectTypeResolver(CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver): void
     {
-        $this->categoryByInputObjectTypeResolver = $categoryByInputObjectTypeResolver;
+        $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
     }
-    final protected function getCategoryByInputObjectTypeResolver(): CategoryByInputObjectTypeResolver
+    final protected function getCategoryByOneofInputObjectTypeResolver(): CategoryByOneofInputObjectTypeResolver
     {
-        if ($this->categoryByInputObjectTypeResolver === null) {
-            /** @var CategoryByInputObjectTypeResolver */
-            $categoryByInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryByInputObjectTypeResolver::class);
-            $this->categoryByInputObjectTypeResolver = $categoryByInputObjectTypeResolver;
+        if ($this->categoryByOneofInputObjectTypeResolver === null) {
+            /** @var CategoryByOneofInputObjectTypeResolver */
+            $categoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryByOneofInputObjectTypeResolver::class);
+            $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
         }
-        return $this->categoryByInputObjectTypeResolver;
+        return $this->categoryByOneofInputObjectTypeResolver;
     }
     final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
     {
@@ -234,7 +234,7 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
                 $fieldArgNameTypeResolvers,
                 $commonFieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getCategoryByInputObjectTypeResolver(),
+                    'by' => $this->getCategoryByOneofInputObjectTypeResolver(),
                 ]
             ),
             'categories',
