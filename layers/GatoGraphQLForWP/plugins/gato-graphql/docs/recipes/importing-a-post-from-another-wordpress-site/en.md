@@ -24,7 +24,7 @@ query InitializeDynamicVariables
     @remove
 
   initVariablesWithEmptyArray: _echo(value: [])
-    @export(as: "existingCategorySlugPaths")
+    @export(as: "existingCategorySlugs")
     @export(as: "existingTagSlugs")
     @remove
 }
@@ -90,7 +90,7 @@ query GetPost($postSlug: String!) {
     }
     categories {
       id
-      slugPath
+      slug
     }
     tags {
       id
@@ -277,7 +277,7 @@ query ExportInputs
     @export(as: "postFeaturedImageSlug")
     @remove
 
-  postCategorySlugPaths: _objectProperty(
+  postCategorySlugs: _objectProperty(
     object: $__postData,
     by: { key: "categorys" }
   )
@@ -289,16 +289,16 @@ query ExportInputs
         arguments: {
           object: $category,
           by: {
-            key: "slugPath"
+            key: "slug"
           }
         }
         setResultInResponse: true
       )
-    @export(as: "postCategorySlugPaths")
+    @export(as: "postCategorySlugs")
     @remove
 
   postHasCategories: _notEmpty(
-    value: $__postCategorySlugPaths
+    value: $__postCategorySlugs
   )
     @export(as: "postHasCategories")
     @remove
@@ -347,11 +347,11 @@ query ExportExistingResources
     slug @export(as: "existingFeaturedImageSlug")
   }
 
-  existingCategoriesBySlugPath: categories(filter: { slugPaths: $postCategorySlugPaths })
+  existingCategoriesBySlug: categories(filter: { slug: $postCategorySlugs })
     @include(if: $postHasCategories)
   {
     id
-    slugPath @export(as: "existingCategorySlugPaths", type: LIST)
+    slug @export(as: "existingCategorySlugs", type: LIST)
   }
 
   existingTagsBySlug: postTags(filter: { slugs: $postTagSlugs })
@@ -379,11 +379,11 @@ query ExportMissingResources
     value2: $existingFeaturedImageSlug
   ) @export(as: "isFeaturedImageMissing")
 
-  missingCategorySlugPaths: _arrayDiff(
-    arrays: [$postCategorySlugPaths, $existingCategorySlugPaths]
-  ) @export(as: "missingCategorySlugPaths")
+  missingCategorySlugs: _arrayDiff(
+    arrays: [$postCategorySlugs, $existingCategorySlugs]
+  ) @export(as: "missingCategorySlugs")
   areCategoriesMissing: _notEmpty(
-    value: $__missingCategorySlugPaths
+    value: $__missingCategorySlugs
   ) @export(as: "areCategoriesMissing")
 
   missingTagSlugs: _arrayDiff(
@@ -432,7 +432,7 @@ query FailIfAnyResourceIsMissing
       @fail(
         message: "Categories are missing"
         data: {
-          categorySlugPaths: $missingCategorySlugPaths
+          categorySlugs: $missingCategorySlugs
         }
         condition: ALWAYS
       )
@@ -473,7 +473,7 @@ mutation ImportPost(
       slug: $postFeaturedImageSlug
     },
     categoriesBy: {
-      slugPaths: $postCategorySlugPaths
+      slug: $postCategorySlugs
     },
     tagsBy: {
       slugs: $postTagSlugs
@@ -557,8 +557,8 @@ query ExportMissingResources
   # ...
 
   # Format arrays as strings, to input into query
-  missingCategorySlugPathsAsString: _arrayJoin(
-    array: $__missingCategorySlugPaths
+  missingCategorySlugsAsString: _arrayJoin(
+    array: $__missingCategorySlugs
     separator: "\""
   )
     @strPrepend(
@@ -567,7 +567,7 @@ query ExportMissingResources
     @strAppend(
       string: "\"]"
     )
-    @export(as: "missingCategorySlugPathsAsString")
+    @export(as: "missingCategorySlugsAsString")
   missingTagSlugsAsString: _arrayJoin(
     array: $__missingTagSlugs
     separator: "\", \""
@@ -618,9 +618,9 @@ query ExportGraphQLQueryToFetchMissingResources
     @if(condition: $areCategoriesMissing)
       @strAppend(string:
         """
-        postCategories(filter: { slugPaths: {$postCategorySlugPaths} }) {
+        postCategories(filter: { slug: {$postCategorySlugs} }) {
           id
-          slugPath
+          slug
           name
           description
         }
@@ -645,13 +645,13 @@ query ExportGraphQLQueryToFetchMissingResources
       search: [
         "{$postAuthorUsername}",
         "{$postFeaturedImageSlug}",
-        "{$postCategorySlugPaths}",
+        "{$postCategorySlugs}",
         "{$postTagSlugs}",
       ],
       replaceWith: [
         $missingAuthorUsername,
         $missingFeaturedImageSlug,
-        $missingCategorySlugPathsAsString,
+        $missingCategorySlugsAsString,
         $missingTagSlugsAsString,
       ]
     )
