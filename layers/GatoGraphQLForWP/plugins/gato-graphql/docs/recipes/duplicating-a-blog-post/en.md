@@ -62,7 +62,9 @@ mutation DuplicatePost
   createPost(input: {
     status: draft,
     authorID: $authorID,
-    categoryIDs: $categoryIDs,
+    categoriesBy: {
+      ids: $categoryIDs
+    },
     contentAs: {
       html: $rawContent
     },
@@ -233,7 +235,9 @@ mutation DuplicatePost
   createPost(input: {
     status: draft,
     authorID: $authorID,
-    categoryIDs: $categoryIDs,
+    categoriesBy: {
+      ids: $categoryIDs
+    },
     contentAs: {
       html: $rawContent
     },
@@ -495,7 +499,9 @@ mutation DuplicatePost
   createPost(input: {
     status: draft,
     authorID: $authorID,
-    categoryIDs: $categoryIDs,
+    categoriesBy: {
+      ids: $categoryIDs
+    },
     contentAs: {
       html: $rawContent
     },
@@ -703,7 +709,9 @@ mutation DuplicatePost
   createPost(input: {
     status: draft,
     authorID: $authorID,
-    categoryIDs: $categoryIDs,
+    categoriesBy: {
+      ids: $categoryIDs
+    },
     contentAs: {
       html: $rawContent
     },
@@ -846,7 +854,9 @@ mutation DuplicatePost
   createPost(input: {
     status: draft,
     authorID: $authorID,
-    categoryIDs: $categoryIDs,
+    categoriesBy: {
+      ids: $categoryIDs
+    },
     contentAs: {
       html: $rawContent
     },

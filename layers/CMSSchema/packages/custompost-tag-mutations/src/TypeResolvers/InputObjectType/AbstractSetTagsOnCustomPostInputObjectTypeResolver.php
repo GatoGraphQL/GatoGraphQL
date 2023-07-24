@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\TagsByOneofInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -81,6 +82,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
 
     abstract protected function addCustomPostInputField(): bool;
     abstract protected function getEntityName(): string;
+    abstract protected function getTagTypeResolver(): TagObjectTypeResolverInterface;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
@@ -89,7 +91,10 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
                 $this->__('The ID of the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
-            MutationInputProperties::TAGS_BY => $this->__('The tags to set', 'custompost-tag-mutations'),
+            MutationInputProperties::TAGS_BY => sprintf(
+                $this->__('The tags to set, of type \'%s\'', 'custompost-tag-mutations'),
+                $this->getTagTypeResolver()->getMaybeNamespacedTypeName()
+            ),
             MutationInputProperties::APPEND => $this->__('Append the tags to the existing ones?', 'custompost-tag-mutations'),
             default => null,
         };

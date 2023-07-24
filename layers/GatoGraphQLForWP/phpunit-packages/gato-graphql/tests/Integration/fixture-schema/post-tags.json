@@ -4,7 +4,7 @@
             {
                 "count": 2,
                 "description": "",
-                "id": 13,
+                "id": 15,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "wordpress",
@@ -26,7 +26,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 12,
+                "id": 14,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Security",
@@ -44,7 +44,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 11,
+                "id": 13,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "release",
@@ -62,7 +62,7 @@
             {
                 "count": 3,
                 "description": "",
-                "id": 10,
+                "id": 12,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "plugin",
@@ -88,7 +88,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 9,
+                "id": 11,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "ideas",
@@ -106,7 +106,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 8,
+                "id": 10,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "GraphQL",
@@ -124,7 +124,7 @@
             {
                 "count": 4,
                 "description": "",
-                "id": 7,
+                "id": 9,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "features",
@@ -154,7 +154,7 @@
             {
                 "count": 0,
                 "description": "",
-                "id": 14,
+                "id": 16,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Also never used",
@@ -167,7 +167,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 6,
+                "id": 8,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "advanced",
@@ -185,35 +185,35 @@
         ],
         "nonEmptyPostTags": [
             {
-                "id": 13,
+                "id": 15,
                 "name": "wordpress"
             },
             {
-                "id": 12,
+                "id": 14,
                 "name": "Security"
             },
             {
-                "id": 11,
+                "id": 13,
                 "name": "release"
             },
             {
-                "id": 10,
+                "id": 12,
                 "name": "plugin"
             },
             {
-                "id": 9,
+                "id": 11,
                 "name": "ideas"
             },
             {
-                "id": 8,
+                "id": 10,
                 "name": "GraphQL"
             },
             {
-                "id": 7,
+                "id": 9,
                 "name": "features"
             },
             {
-                "id": 6,
+                "id": 8,
                 "name": "advanced"
             }
         ],
@@ -222,7 +222,7 @@
                 {
                     "count": 1,
                     "description": "",
-                    "id": 12,
+                    "id": 14,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "Security",
@@ -240,7 +240,7 @@
                 {
                     "count": 4,
                     "description": "",
-                    "id": 7,
+                    "id": 9,
                     "metaValue": null,
                     "metaValues": null,
                     "name": "features",
@@ -270,48 +270,48 @@
             ],
             "tagsByExcludeIDs": [
                 {
-                    "id": 12
+                    "id": 14
                 },
                 {
-                    "id": 7
+                    "id": 9
                 }
             ],
             "tagsByIds": [],
             "tagsByMetaQuery": [
                 {
-                    "id": 12
+                    "id": 14
                 },
                 {
-                    "id": 7
+                    "id": 9
                 }
             ],
             "tagsBySearch": [
                 {
-                    "id": 12
+                    "id": 14
                 }
             ],
             "tagsBySlugs": [
                 {
-                    "id": 7
+                    "id": 9
                 }
             ],
             "tagsBySortASC": [
                 {
-                    "id": 7,
+                    "id": 9,
                     "name": "features"
                 },
                 {
-                    "id": 12,
+                    "id": 14,
                     "name": "Security"
                 }
             ],
             "tagsBySortDESC": [
                 {
-                    "id": 12,
+                    "id": 14,
                     "name": "Security"
                 },
                 {
-                    "id": 7,
+                    "id": 9,
                     "name": "features"
                 }
             ]
@@ -322,10 +322,10 @@
                 "title": "Public or Private API mode, for extra security",
                 "tags": [
                     {
-                        "id": 12
+                        "id": 14
                     },
                     {
-                        "id": 7
+                        "id": 9
                     }
                 ]
             },
@@ -334,13 +334,13 @@
                 "title": "Nested mutations are a must have",
                 "tags": [
                     {
-                        "id": 13
+                        "id": 15
                     },
                     {
-                        "id": 10
+                        "id": 12
                     },
                     {
-                        "id": 7
+                        "id": 9
                     }
                 ]
             },
@@ -349,16 +349,16 @@
                 "title": "Working on flat chain syntax next",
                 "tags": [
                     {
-                        "id": 13
+                        "id": 15
+                    },
+                    {
+                        "id": 12
                     },
                     {
                         "id": 10
                     },
                     {
-                        "id": 8
-                    },
-                    {
-                        "id": 7
+                        "id": 9
                     }
                 ]
             }

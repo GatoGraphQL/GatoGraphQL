@@ -13,6 +13,9 @@ class MutationInputProperties
      * (post, event, etc)
      */
     public final const CUSTOMPOST_ID = 'id';
-    public final const CATEGORY_IDS = 'categoryIDs';
+    public final const CATEGORIES_BY = 'categoriesBy';
     public final const APPEND = 'append';
+
+    public final const IDS = 'ids';
+    public final const SLUGS = 'slugs';
 }

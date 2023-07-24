@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomP
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\TagsByOneofInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -80,6 +81,11 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::TAGS_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The tags to set', 'custompost-tag-mutations');
+        return sprintf(
+            $this->__('The tags to set, of type \'%s\'', 'custompost-tag-mutations'),
+            $this->getTagTypeResolver()->getMaybeNamespacedTypeName()
+        );
     }
+    
+    abstract protected function getTagTypeResolver(): TagObjectTypeResolverInterface;
 }

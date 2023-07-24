@@ -32,11 +32,11 @@
                 "path": [
                     "\"dummy-category\"",
                     "(taxonomy: \"dummy-category\")",
-                    "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 25}) { ... }",
+                    "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 27}) { ... }",
                     "query { ... }"
                 ],
                 "type": "QueryRoot",
-                "field": "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 25}) { ... }",
+                "field": "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 27}) { ... }",
                 "code": "PoPSchema\/SchemaCommons@e2"
             }
         },
@@ -90,6 +90,11 @@
             },
             {
                 "__typename": "PostCategory",
+                "id": 6,
+                "name": "Special topic"
+            },
+            {
+                "__typename": "PostCategory",
                 "id": 4,
                 "name": "Resource"
             },
@@ -97,6 +102,11 @@
                 "__typename": "PostCategory",
                 "id": 5,
                 "name": "Never used"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 7,
+                "name": "Most special topic"
             },
             {
                 "__typename": "PostCategory",
@@ -114,11 +124,13 @@
             "id": 1,
             "name": "Uncategorized"
         },
-        "postCategoryCount": 5,
+        "postCategoryCount": 7,
         "postCategoryNames": [
             "Uncategorized",
+            "Special topic",
             "Resource",
             "Never used",
+            "Most special topic",
             "Blog",
             "Advanced"
         ],

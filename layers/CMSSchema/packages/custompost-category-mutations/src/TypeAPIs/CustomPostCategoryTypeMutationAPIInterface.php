@@ -9,5 +9,9 @@ interface CustomPostCategoryTypeMutationAPIInterface
     /**
      * @param array<string|int> $categoryIDs
      */
-    public function setCategories(int|string $postID, array $categoryIDs, bool $append = false): void;
+    public function setCategoriesByID(int|string $postID, array $categoryIDs, bool $append = false): void;
+    /**
+     * @param string[] $categorySlugs
+     */
+    public function setCategoriesBySlug(int|string $postID, array $categorySlugs, bool $append = false): void;
 }

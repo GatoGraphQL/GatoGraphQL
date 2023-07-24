@@ -89,17 +89,17 @@
         "dummyCategories": [
             {
                 "__typename": "GenericCategory",
-                "id": 37,
+                "id": 33,
                 "name": "World Cup"
             },
             {
                 "__typename": "GenericCategory",
-                "id": 35,
+                "id": 32,
                 "name": "Unexpected Randomness"
             },
             {
                 "__typename": "GenericCategory",
-                "id": 30,
+                "id": 31,
                 "name": "Perestroika"
             },
             {
@@ -109,30 +109,36 @@
             },
             {
                 "__typename": "GenericCategory",
-                "id": 36,
+                "id": 30,
+                "name": "Nostradamus"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 29,
                 "name": "Capullo"
             },
             {
                 "__typename": "GenericCategory",
-                "id": 32,
+                "id": 28,
                 "name": "Brontosaurus"
             },
             {
                 "__typename": "GenericCategory",
-                "id": 25,
+                "id": 27,
                 "name": "Absolute Brilliance"
             }
         ],
         "dummyCategory": {
             "__typename": "GenericCategory",
-            "id": 25,
+            "id": 27,
             "name": "Absolute Brilliance"
         },
-        "dummyCategoryCount": 7,
+        "dummyCategoryCount": 8,
         "dummyCategoryNames": [
             "World Cup",
             "Unexpected Randomness",
             "Perestroika",
+            "Nostradamus",
             "Nostradamus",
             "Capullo",
             "Brontosaurus",

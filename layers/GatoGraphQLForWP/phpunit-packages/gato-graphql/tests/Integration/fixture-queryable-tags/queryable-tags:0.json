@@ -32,11 +32,11 @@
         "path": [
           "post_format",
           "(taxonomy: post_format)",
-          "postFormat: tag(taxonomy: post_format, by: {id: 22}) { ... }",
+          "postFormat: tag(taxonomy: post_format, by: {id: 25}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postFormat: tag(taxonomy: post_format, by: {id: 22}) { ... }",
+        "field": "postFormat: tag(taxonomy: post_format, by: {id: 25}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -85,53 +85,53 @@
     "postTags": [
       {
         "__typename": "PostTag",
-        "id": 13,
+        "id": 15,
         "name": "wordpress"
       },
       {
         "__typename": "PostTag",
-        "id": 12,
+        "id": 14,
         "name": "Security"
       },
       {
         "__typename": "PostTag",
-        "id": 11,
+        "id": 13,
         "name": "release"
       },
       {
         "__typename": "PostTag",
-        "id": 10,
+        "id": 12,
         "name": "plugin"
       },
       {
         "__typename": "PostTag",
-        "id": 9,
+        "id": 11,
         "name": "ideas"
       },
       {
         "__typename": "PostTag",
-        "id": 8,
+        "id": 10,
         "name": "GraphQL"
       },
       {
         "__typename": "PostTag",
-        "id": 7,
+        "id": 9,
         "name": "features"
       },
       {
         "__typename": "PostTag",
-        "id": 14,
+        "id": 16,
         "name": "Also never used"
       },
       {
         "__typename": "PostTag",
-        "id": 6,
+        "id": 8,
         "name": "advanced"
       }
     ],
     "postTag": {
       "__typename": "PostTag",
-      "id": 13,
+      "id": 15,
       "name": "wordpress"
     },
     "postTagCount": 9,
@@ -149,39 +149,39 @@
     "dummyTags": [
       {
         "__typename": "GenericTag",
-        "id": 28,
+        "id": 37,
         "name": "Tango"
       },
       {
         "__typename": "GenericTag",
-        "id": 31,
+        "id": 39,
         "name": "Rock"
       },
       {
         "__typename": "GenericTag",
-        "id": 27,
+        "id": 36,
         "name": "Jazz"
       },
       {
         "__typename": "GenericTag",
-        "id": 29,
+        "id": 38,
         "name": "Hip Hop"
       },
       {
         "__typename": "GenericTag",
-        "id": 26,
+        "id": 35,
         "name": "Heavy metal"
       },
       {
         "__typename": "GenericTag",
-        "id": 33,
+        "id": 40,
         "name": "Classical"
       }
     ],
     "dummyTag": {
       "__typename": "GenericTag",
-      "id": 33,
-      "name": "Classical"
+      "id": 36,
+      "name": "Jazz"
     },
     "dummyTagCount": 6,
     "dummyTagNames": [

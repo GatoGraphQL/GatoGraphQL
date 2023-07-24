@@ -1106,6 +1106,18 @@
               "deprecationReason": null
             },
             {
+              "name": "slugPath",
+              "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "AnyBuiltInScalar",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "taxonomy",
               "description": "Category taxonomy",
               "args": [],
@@ -6463,6 +6475,18 @@
                   "name": "String",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "slugPath",
+              "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "AnyBuiltInScalar",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -16511,6 +16535,53 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CategoriesByInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "ids",
+              "description": "Input the category IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slugs",
+              "description": "Input the category slugs",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CategoryByInput",
           "description": "Oneof input to specify the property and data to fetch a category",
           "fields": null,
@@ -18964,20 +19035,12 @@
               "defaultValue": null
             },
             {
-              "name": "categoryIDs",
-              "description": "The IDs of the categories to set, of type 'PostCategory'",
+              "name": "categoriesBy",
+              "description": "The categories to set, of type 'PostCategory'",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "CategoriesByInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -19012,6 +19075,16 @@
               "defaultValue": null
             },
             {
+              "name": "slug",
+              "description": "The slug of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "status",
               "description": "The status of the custom post",
               "type": {
@@ -19023,7 +19096,7 @@
             },
             {
               "name": "tagsBy",
-              "description": "The tags to set",
+              "description": "The tags to set, of type 'PostTag'",
               "type": {
                 "kind": "INPUT_OBJECT",
                 "name": "TagsByInput",
@@ -20797,19 +20870,15 @@
               "defaultValue": "false"
             },
             {
-              "name": "categoryIDs",
-              "description": "The IDs of the categories to set, of type 'PostCategory'",
+              "name": "categoriesBy",
+              "description": "The categories to set, of type 'PostCategory'",
               "type": {
                 "kind": "NON_NULL",
-                "name": "[ID]!",
+                "name": "CategoriesByInput!",
                 "ofType": {
-                  "kind": "LIST",
-                  "name": "[ID]",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
+                  "kind": "INPUT_OBJECT",
+                  "name": "CategoriesByInput",
+                  "ofType": null
                 }
               },
               "defaultValue": null
@@ -20908,7 +20977,7 @@
             },
             {
               "name": "tagsBy",
-              "description": "The tags to set",
+              "description": "The tags to set, of type 'PostTag'",
               "type": {
                 "kind": "NON_NULL",
                 "name": "TagsByInput!",
@@ -21049,20 +21118,12 @@
               "defaultValue": null
             },
             {
-              "name": "categoryIDs",
-              "description": "The IDs of the categories to set, of type 'PostCategory'",
+              "name": "categoriesBy",
+              "description": "The categories to set, of type 'PostCategory'",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "CategoriesByInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -21111,6 +21172,16 @@
               "defaultValue": null
             },
             {
+              "name": "slug",
+              "description": "The slug of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
               "name": "status",
               "description": "The status of the custom post",
               "type": {
@@ -21122,7 +21193,7 @@
             },
             {
               "name": "tagsBy",
-              "description": "The tags to set",
+              "description": "The tags to set, of type 'PostTag'",
               "type": {
                 "kind": "INPUT_OBJECT",
                 "name": "TagsByInput",
@@ -22642,6 +22713,12 @@
           "inputFields": null,
           "interfaces": null,
           "enumValues": [
+            {
+              "name": "any",
+              "description": "Any custom post status",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
             {
               "name": "draft",
               "description": "Draft content",

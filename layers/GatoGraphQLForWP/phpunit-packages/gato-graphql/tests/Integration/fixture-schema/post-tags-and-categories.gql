@@ -1,7 +1,7 @@
 {
   postsByIDs: posts(
     filter: {
-      tagIDs: [13, 12]
+      tagIDs: [15, 14]
       categoryIDs: [1, 4]
     }
   ) {
