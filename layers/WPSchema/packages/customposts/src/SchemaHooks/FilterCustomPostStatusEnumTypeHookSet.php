@@ -57,6 +57,7 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
                 CustomPostStatus::FUTURE,
                 CustomPostStatus::PRIVATE,
                 CustomPostStatus::INHERIT,
+                CustomPostStatus::ANY,
                 /**
                  * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
                  *       Until then, this code is commented
@@ -83,6 +84,7 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
                 CustomPostStatus::FUTURE,
                 CustomPostStatus::PRIVATE,
                 CustomPostStatus::INHERIT,
+                CustomPostStatus::ANY,
                 /**
                  * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
                  *       Until then, this code is commented
@@ -104,6 +106,7 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
             CustomPostStatus::FUTURE => $this->__('Future content - custom posts to publish in the future', 'customposts'),
             CustomPostStatus::PRIVATE => $this->__('Private content - not visible to users who are not logged in', 'customposts'),
             CustomPostStatus::INHERIT => $this->__('Used with a child custom post (such as Attachments and Revisions) to determine the actual status from the parent custom post', 'customposts'),
+            CustomPostStatus::ANY => $this->__('Any custom post status', 'customposts'),
             /**
              * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
              *       Until then, this code is commented

@@ -1070,6 +1070,44 @@ mutation UpdatePost {
 }
 ```
 
+## Filter custom posts by `any` status
+
+We can now add value `any` to filter by custom post status. That means that instead of doing this:
+
+```graphql
+{
+  posts(
+    filter: {
+      status: [
+        draft,
+        future,
+        inherit,
+        pending,
+        private,
+        publish,
+        trash,
+      ]
+  }) {
+    id
+    title
+  }
+}
+```
+
+...we can now do this:
+
+```graphql
+{
+  posts(
+    filter: {
+      status: any
+  }) {
+    id
+    title
+  }
+}
+```
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
