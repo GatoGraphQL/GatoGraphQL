@@ -1038,11 +1038,21 @@ If we want to expose it always, we can also switch to treating it as a normal in
 
 ![Settings for the Custom Post User Mutations module](../../images/releases/v1.0/settings-custompost-user-mutations.png)
 
-## Mutations `setTagsOnPost`, `createPost` and `updatePost` now receive a oneof input object for tags
+## Mutations setting tags and categories on custom posts can now receive IDs or slugs via a oneof input
 
-Prior to v1.0, mutations that can set tags on posts received input `tags` with the tag slugs.
+Prior to v1.0, mutations that set tags on custom posts received input `tags` with the tag slugs, and mutations that set categories on custom posts received input `categories` with the category IDs.
 
-Now, they receive "oneof" input `tagsBy` with two properties: `ids` (as `[ID]`) and `slugs` (as `[String]`), so we can use one or the other to define the tags.
+Now, these receive "oneof" inputs `tagsBy` and `categoriesBy` with two properties: `ids` (as `[ID!]`) and `slugs` (as `[String!]`), so we can set tags and categories by either ID or slug.
+
+The list of affected mutations is:
+
+- `Root.setTagsOnPost`
+- `Root.setCategoriesOnPost`
+- `Root.createPost`
+- `Root.updatePost`
+- `Post.update`
+- `CustomPost.setTags`
+- `CustomPost.setCategories`
 
 ## Mutations `Root.createPost`, `Root.createPost` and `Post.update` now receive the `slug` input
 
