@@ -12,7 +12,7 @@ use PoPWPSchema\Blocks\Constants\HookNames;
 use PoPWPSchema\Blocks\ObjectModels\BlockInterface;
 use PoPWPSchema\Blocks\ObjectModels\GeneralBlock;
 use PoPWPSchema\Blocks\TypeHelpers\BlockUnionTypeHelpers;
-use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\BlockFilterByInputObjectTypeResolver;
+use PoPWPSchema\Blocks\TypeResolvers\InputObjectType\BlockFilterByOneofInputObjectTypeResolver;
 use PoP\ComponentModel\FeedbackItemProviders\GenericFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -31,7 +31,7 @@ use stdClass;
 class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?BlockContentParserInterface $blockContentParser = null;
-    private ?BlockFilterByInputObjectTypeResolver $blockFilterByInputObjectTypeResolver = null;
+    private ?BlockFilterByOneofInputObjectTypeResolver $blockFilterByOneofInputObjectTypeResolver = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
 
     final public function setBlockContentParser(BlockContentParserInterface $blockContentParser): void
@@ -47,18 +47,18 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
         }
         return $this->blockContentParser;
     }
-    final public function setBlockFilterByInputObjectTypeResolver(BlockFilterByInputObjectTypeResolver $blockFilterByInputObjectTypeResolver): void
+    final public function setBlockFilterByOneofInputObjectTypeResolver(BlockFilterByOneofInputObjectTypeResolver $blockFilterByOneofInputObjectTypeResolver): void
     {
-        $this->blockFilterByInputObjectTypeResolver = $blockFilterByInputObjectTypeResolver;
+        $this->blockFilterByOneofInputObjectTypeResolver = $blockFilterByOneofInputObjectTypeResolver;
     }
-    final protected function getBlockFilterByInputObjectTypeResolver(): BlockFilterByInputObjectTypeResolver
+    final protected function getBlockFilterByOneofInputObjectTypeResolver(): BlockFilterByOneofInputObjectTypeResolver
     {
-        if ($this->blockFilterByInputObjectTypeResolver === null) {
-            /** @var BlockFilterByInputObjectTypeResolver */
-            $blockFilterByInputObjectTypeResolver = $this->instanceManager->getInstance(BlockFilterByInputObjectTypeResolver::class);
-            $this->blockFilterByInputObjectTypeResolver = $blockFilterByInputObjectTypeResolver;
+        if ($this->blockFilterByOneofInputObjectTypeResolver === null) {
+            /** @var BlockFilterByOneofInputObjectTypeResolver */
+            $blockFilterByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(BlockFilterByOneofInputObjectTypeResolver::class);
+            $this->blockFilterByOneofInputObjectTypeResolver = $blockFilterByOneofInputObjectTypeResolver;
         }
-        return $this->blockFilterByInputObjectTypeResolver;
+        return $this->blockFilterByOneofInputObjectTypeResolver;
     }
     final public function setJSONObjectScalarTypeResolver(JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver): void
     {
@@ -144,7 +144,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 => array_merge(
                     $fieldArgNameTypeResolvers,
                     [
-                        'filterBy' => $this->getBlockFilterByInputObjectTypeResolver(),
+                        'filterBy' => $this->getBlockFilterByOneofInputObjectTypeResolver(),
                     ]
                 ),
             default

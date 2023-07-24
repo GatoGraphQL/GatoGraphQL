@@ -10,7 +10,7 @@ use PoPCMSSchema\Comments\Constants\CommentStatus;
 use PoPCMSSchema\Comments\Module;
 use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
-use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentByInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentsFilterInputObjectTypeResolver;
@@ -41,7 +41,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
-    private ?CommentByInputObjectTypeResolver $commentByInputObjectTypeResolver = null;
+    private ?CommentByOneofInputObjectTypeResolver $commentByOneofInputObjectTypeResolver = null;
     private ?RootCommentsFilterInputObjectTypeResolver $rootCommentsFilterInputObjectTypeResolver = null;
     private ?RootCommentPaginationInputObjectTypeResolver $rootCommentPaginationInputObjectTypeResolver = null;
     private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
@@ -85,18 +85,18 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->commentObjectTypeResolver;
     }
-    final public function setCommentByInputObjectTypeResolver(CommentByInputObjectTypeResolver $commentByInputObjectTypeResolver): void
+    final public function setCommentByOneofInputObjectTypeResolver(CommentByOneofInputObjectTypeResolver $commentByOneofInputObjectTypeResolver): void
     {
-        $this->commentByInputObjectTypeResolver = $commentByInputObjectTypeResolver;
+        $this->commentByOneofInputObjectTypeResolver = $commentByOneofInputObjectTypeResolver;
     }
-    final protected function getCommentByInputObjectTypeResolver(): CommentByInputObjectTypeResolver
+    final protected function getCommentByOneofInputObjectTypeResolver(): CommentByOneofInputObjectTypeResolver
     {
-        if ($this->commentByInputObjectTypeResolver === null) {
-            /** @var CommentByInputObjectTypeResolver */
-            $commentByInputObjectTypeResolver = $this->instanceManager->getInstance(CommentByInputObjectTypeResolver::class);
-            $this->commentByInputObjectTypeResolver = $commentByInputObjectTypeResolver;
+        if ($this->commentByOneofInputObjectTypeResolver === null) {
+            /** @var CommentByOneofInputObjectTypeResolver */
+            $commentByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CommentByOneofInputObjectTypeResolver::class);
+            $this->commentByOneofInputObjectTypeResolver = $commentByOneofInputObjectTypeResolver;
         }
-        return $this->commentByInputObjectTypeResolver;
+        return $this->commentByOneofInputObjectTypeResolver;
     }
     final public function setRootCommentsFilterInputObjectTypeResolver(RootCommentsFilterInputObjectTypeResolver $rootCommentsFilterInputObjectTypeResolver): void
     {
@@ -210,7 +210,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'comment' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getCommentByInputObjectTypeResolver(),
+                    'by' => $this->getCommentByOneofInputObjectTypeResolver(),
                 ]
             ),
             'comments' => array_merge(

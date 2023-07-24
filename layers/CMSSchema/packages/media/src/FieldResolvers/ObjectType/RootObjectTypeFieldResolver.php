@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Media\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByInputObjectTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemSortInputObjectTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\RootMediaItemPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\RootMediaItemsFilterInputObjectTypeResolver;
@@ -31,7 +31,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
-    private ?MediaItemByInputObjectTypeResolver $mediaItemByInputObjectTypeResolver = null;
+    private ?MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver = null;
     private ?RootMediaItemsFilterInputObjectTypeResolver $rootMediaItemsFilterInputObjectTypeResolver = null;
     private ?RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver = null;
     private ?MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver = null;
@@ -75,18 +75,18 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         }
         return $this->mediaObjectTypeResolver;
     }
-    final public function setMediaItemByInputObjectTypeResolver(MediaItemByInputObjectTypeResolver $mediaItemByInputObjectTypeResolver): void
+    final public function setMediaItemByOneofInputObjectTypeResolver(MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver): void
     {
-        $this->mediaItemByInputObjectTypeResolver = $mediaItemByInputObjectTypeResolver;
+        $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
     }
-    final protected function getMediaItemByInputObjectTypeResolver(): MediaItemByInputObjectTypeResolver
+    final protected function getMediaItemByOneofInputObjectTypeResolver(): MediaItemByOneofInputObjectTypeResolver
     {
-        if ($this->mediaItemByInputObjectTypeResolver === null) {
-            /** @var MediaItemByInputObjectTypeResolver */
-            $mediaItemByInputObjectTypeResolver = $this->instanceManager->getInstance(MediaItemByInputObjectTypeResolver::class);
-            $this->mediaItemByInputObjectTypeResolver = $mediaItemByInputObjectTypeResolver;
+        if ($this->mediaItemByOneofInputObjectTypeResolver === null) {
+            /** @var MediaItemByOneofInputObjectTypeResolver */
+            $mediaItemByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(MediaItemByOneofInputObjectTypeResolver::class);
+            $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
         }
-        return $this->mediaItemByInputObjectTypeResolver;
+        return $this->mediaItemByOneofInputObjectTypeResolver;
     }
     final public function setRootMediaItemsFilterInputObjectTypeResolver(RootMediaItemsFilterInputObjectTypeResolver $rootMediaItemsFilterInputObjectTypeResolver): void
     {
@@ -192,7 +192,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'mediaItem' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getMediaItemByInputObjectTypeResolver(),
+                    'by' => $this->getMediaItemByOneofInputObjectTypeResolver(),
                 ]
             ),
             'mediaItems' => array_merge(

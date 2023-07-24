@@ -10,7 +10,7 @@ use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeHelpers\CustomPostUnionTypeHelpers;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostsFilterInputObjectTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostByOneofInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\RootCustomPostsFilterInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -31,21 +31,21 @@ use PoP\Root\App;
  */
 class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListObjectTypeFieldResolver
 {
-    private ?CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver = null;
+    private ?CustomPostByOneofInputObjectTypeResolver $customPostByOneofInputObjectTypeResolver = null;
     private ?RootCustomPostsFilterInputObjectTypeResolver $rootCustomPostsFilterInputObjectTypeResolver = null;
 
-    final public function setCustomPostByInputObjectTypeResolver(CustomPostByInputObjectTypeResolver $customPostByInputObjectTypeResolver): void
+    final public function setCustomPostByOneofInputObjectTypeResolver(CustomPostByOneofInputObjectTypeResolver $customPostByOneofInputObjectTypeResolver): void
     {
-        $this->customPostByInputObjectTypeResolver = $customPostByInputObjectTypeResolver;
+        $this->customPostByOneofInputObjectTypeResolver = $customPostByOneofInputObjectTypeResolver;
     }
-    final protected function getCustomPostByInputObjectTypeResolver(): CustomPostByInputObjectTypeResolver
+    final protected function getCustomPostByOneofInputObjectTypeResolver(): CustomPostByOneofInputObjectTypeResolver
     {
-        if ($this->customPostByInputObjectTypeResolver === null) {
-            /** @var CustomPostByInputObjectTypeResolver */
-            $customPostByInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostByInputObjectTypeResolver::class);
-            $this->customPostByInputObjectTypeResolver = $customPostByInputObjectTypeResolver;
+        if ($this->customPostByOneofInputObjectTypeResolver === null) {
+            /** @var CustomPostByOneofInputObjectTypeResolver */
+            $customPostByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostByOneofInputObjectTypeResolver::class);
+            $this->customPostByOneofInputObjectTypeResolver = $customPostByOneofInputObjectTypeResolver;
         }
-        return $this->customPostByInputObjectTypeResolver;
+        return $this->customPostByOneofInputObjectTypeResolver;
     }
     final public function setRootCustomPostsFilterInputObjectTypeResolver(RootCustomPostsFilterInputObjectTypeResolver $rootCustomPostsFilterInputObjectTypeResolver): void
     {
@@ -115,7 +115,7 @@ class RootCustomPostListObjectTypeFieldResolver extends AbstractCustomPostListOb
             'customPost' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getCustomPostByInputObjectTypeResolver(),
+                    'by' => $this->getCustomPostByOneofInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,

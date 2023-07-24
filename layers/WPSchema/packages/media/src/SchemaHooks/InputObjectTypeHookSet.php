@@ -11,7 +11,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByInputObjectTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByOneofInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
 
 class InputObjectTypeHookSet extends AbstractHookSet
@@ -76,7 +76,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         array $inputFieldNameTypeResolvers,
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): array {
-        if (!($inputObjectTypeResolver instanceof MediaItemByInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof MediaItemByOneofInputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
         return array_merge(
@@ -92,7 +92,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName
     ): ?string {
-        if (!($inputObjectTypeResolver instanceof MediaItemByInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof MediaItemByOneofInputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
@@ -106,7 +106,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
         string $inputFieldName,
     ): ?FilterInputInterface {
-        if (!($inputObjectTypeResolver instanceof MediaItemByInputObjectTypeResolver)) {
+        if (!($inputObjectTypeResolver instanceof MediaItemByOneofInputObjectTypeResolver)) {
             return $inputFieldFilterInput;
         }
         return match ($inputFieldName) {

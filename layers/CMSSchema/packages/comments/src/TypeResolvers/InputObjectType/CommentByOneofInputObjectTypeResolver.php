@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Comments\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInput
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
 
-class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+class CommentByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
@@ -44,12 +44,12 @@ class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObje
 
     public function getTypeName(): string
     {
-        return 'MediaItemByInput';
+        return 'CommentByInput';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the property and data to fetch a media item', 'media');
+        return $this->__('Oneof input to specify the property and data to fetch a comment', 'comments');
     }
 
     /**
@@ -65,7 +65,7 @@ class MediaItemByInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by media item ID', 'users'),
+            'id' => $this->__('Query by comment ID', 'comments'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
