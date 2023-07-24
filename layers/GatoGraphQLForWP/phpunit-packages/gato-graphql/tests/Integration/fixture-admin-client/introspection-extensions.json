@@ -621,6 +621,14 @@
                             "args": []
                         },
                         {
+                            "name": "slugPath",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "taxonomy",
                             "extensions": {
                                 "isMutation": false,
@@ -3358,6 +3366,14 @@
                         },
                         {
                             "name": "slug",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "slugPath",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -8521,6 +8537,31 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CategoriesByInput",
+                    "extensions": {
+                        "elementName": "CategoriesByInput",
+                        "namespacedName": "CategoriesByInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "ids",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "CategoryByInput",
                     "extensions": {
                         "elementName": "CategoryByInput",
@@ -9963,7 +10004,7 @@
                             }
                         },
                         {
-                            "name": "categoryIDs",
+                            "name": "categoriesBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -9982,6 +10023,12 @@
                         },
                         {
                             "name": "featuredImageID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10810,7 +10857,7 @@
                             }
                         },
                         {
-                            "name": "categoryIDs",
+                            "name": "categoriesBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10946,7 +10993,7 @@
                             }
                         },
                         {
-                            "name": "categoryIDs",
+                            "name": "categoriesBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10971,6 +11018,12 @@
                         },
                         {
                             "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -12018,6 +12071,12 @@
                     "fields": null,
                     "inputFields": null,
                     "enumValues": [
+                        {
+                            "name": "any",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
                         {
                             "name": "draft",
                             "extensions": {

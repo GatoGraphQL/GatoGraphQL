@@ -360,6 +360,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CategoriesByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CategoryByInput"
         },
         {

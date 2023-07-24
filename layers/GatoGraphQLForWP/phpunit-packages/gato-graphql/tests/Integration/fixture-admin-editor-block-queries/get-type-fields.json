@@ -228,6 +228,9 @@
               "name": "slug"
             },
             {
+              "name": "slugPath"
+            },
+            {
               "name": "taxonomy"
             },
             {
@@ -992,6 +995,9 @@
             },
             {
               "name": "slug"
+            },
+            {
+              "name": "slugPath"
             },
             {
               "name": "url"
@@ -2477,6 +2483,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Oneof input to filter blocks"
+        },
+        {
+          "name": "CategoriesByInput",
+          "namespacedName": "CategoriesByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
         },
         {
           "name": "CategoryByInput",
