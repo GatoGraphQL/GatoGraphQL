@@ -9,7 +9,7 @@ use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTaxonomyTagListTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\RootTagsFilterInputObjectTypeResolver;
-use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagByInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver;
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
@@ -34,7 +34,7 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TagUnionTypeResolver $tagUnionTypeResolver = null;
     private ?QueryableTaxonomyTagListTypeAPIInterface $queryableTaxonomyTagListTypeAPI = null;
-    private ?TagByInputObjectTypeResolver $tagByInputObjectTypeResolver = null;
+    private ?TagByOneofInputObjectTypeResolver $tagByOneofInputObjectTypeResolver = null;
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
     private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
@@ -92,18 +92,18 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         }
         return $this->queryableTaxonomyTagListTypeAPI;
     }
-    final public function setTagByInputObjectTypeResolver(TagByInputObjectTypeResolver $tagByInputObjectTypeResolver): void
+    final public function setTagByOneofInputObjectTypeResolver(TagByOneofInputObjectTypeResolver $tagByOneofInputObjectTypeResolver): void
     {
-        $this->tagByInputObjectTypeResolver = $tagByInputObjectTypeResolver;
+        $this->tagByOneofInputObjectTypeResolver = $tagByOneofInputObjectTypeResolver;
     }
-    final protected function getTagByInputObjectTypeResolver(): TagByInputObjectTypeResolver
+    final protected function getTagByOneofInputObjectTypeResolver(): TagByOneofInputObjectTypeResolver
     {
-        if ($this->tagByInputObjectTypeResolver === null) {
-            /** @var TagByInputObjectTypeResolver */
-            $tagByInputObjectTypeResolver = $this->instanceManager->getInstance(TagByInputObjectTypeResolver::class);
-            $this->tagByInputObjectTypeResolver = $tagByInputObjectTypeResolver;
+        if ($this->tagByOneofInputObjectTypeResolver === null) {
+            /** @var TagByOneofInputObjectTypeResolver */
+            $tagByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(TagByOneofInputObjectTypeResolver::class);
+            $this->tagByOneofInputObjectTypeResolver = $tagByOneofInputObjectTypeResolver;
         }
-        return $this->tagByInputObjectTypeResolver;
+        return $this->tagByOneofInputObjectTypeResolver;
     }
     final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
     {
@@ -234,7 +234,7 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
                 $fieldArgNameTypeResolvers,
                 $commonFieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getTagByInputObjectTypeResolver(),
+                    'by' => $this->getTagByOneofInputObjectTypeResolver(),
                 ]
             ),
             'tags',

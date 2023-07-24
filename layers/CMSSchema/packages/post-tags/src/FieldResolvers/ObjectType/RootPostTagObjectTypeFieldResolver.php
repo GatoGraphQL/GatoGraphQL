@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTags\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPCMSSchema\PostTags\TypeResolvers\InputObjectType\PostTagByInputObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\InputObjectType\PostTagByOneofInputObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
@@ -33,7 +33,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
-    private ?PostTagByInputObjectTypeResolver $postTagByInputObjectTypeResolver = null;
+    private ?PostTagByOneofInputObjectTypeResolver $postTagByOneofInputObjectTypeResolver = null;
     private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
     private ?RootTagsFilterInputObjectTypeResolver $rootTagsFilterInputObjectTypeResolver = null;
@@ -90,18 +90,18 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         }
         return $this->postTagTypeAPI;
     }
-    final public function setPostTagByInputObjectTypeResolver(PostTagByInputObjectTypeResolver $postTagByInputObjectTypeResolver): void
+    final public function setPostTagByOneofInputObjectTypeResolver(PostTagByOneofInputObjectTypeResolver $postTagByOneofInputObjectTypeResolver): void
     {
-        $this->postTagByInputObjectTypeResolver = $postTagByInputObjectTypeResolver;
+        $this->postTagByOneofInputObjectTypeResolver = $postTagByOneofInputObjectTypeResolver;
     }
-    final protected function getPostTagByInputObjectTypeResolver(): PostTagByInputObjectTypeResolver
+    final protected function getPostTagByOneofInputObjectTypeResolver(): PostTagByOneofInputObjectTypeResolver
     {
-        if ($this->postTagByInputObjectTypeResolver === null) {
-            /** @var PostTagByInputObjectTypeResolver */
-            $postTagByInputObjectTypeResolver = $this->instanceManager->getInstance(PostTagByInputObjectTypeResolver::class);
-            $this->postTagByInputObjectTypeResolver = $postTagByInputObjectTypeResolver;
+        if ($this->postTagByOneofInputObjectTypeResolver === null) {
+            /** @var PostTagByOneofInputObjectTypeResolver */
+            $postTagByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(PostTagByOneofInputObjectTypeResolver::class);
+            $this->postTagByOneofInputObjectTypeResolver = $postTagByOneofInputObjectTypeResolver;
         }
-        return $this->postTagByInputObjectTypeResolver;
+        return $this->postTagByOneofInputObjectTypeResolver;
     }
     final public function setTagPaginationInputObjectTypeResolver(TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver): void
     {
@@ -215,7 +215,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             'postTag' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getPostTagByInputObjectTypeResolver(),
+                    'by' => $this->getPostTagByOneofInputObjectTypeResolver(),
                 ]
             ),
             'postTags',

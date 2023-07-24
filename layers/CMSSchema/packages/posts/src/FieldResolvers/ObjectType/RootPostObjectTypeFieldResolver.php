@@ -8,7 +8,7 @@ use PoPCMSSchema\CustomPosts\ComponentProcessors\CommonCustomPostFilterInputCont
 use PoPCMSSchema\CustomPosts\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
-use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostByOneofInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\Component\Component;
@@ -25,20 +25,20 @@ use PoP\Root\App;
 
 class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolver
 {
-    private ?PostByInputObjectTypeResolver $postByInputObjectTypeResolver = null;
+    private ?PostByOneofInputObjectTypeResolver $postByOneofInputObjectTypeResolver = null;
 
-    final public function setPostByInputObjectTypeResolver(PostByInputObjectTypeResolver $postByInputObjectTypeResolver): void
+    final public function setPostByOneofInputObjectTypeResolver(PostByOneofInputObjectTypeResolver $postByOneofInputObjectTypeResolver): void
     {
-        $this->postByInputObjectTypeResolver = $postByInputObjectTypeResolver;
+        $this->postByOneofInputObjectTypeResolver = $postByOneofInputObjectTypeResolver;
     }
-    final protected function getPostByInputObjectTypeResolver(): PostByInputObjectTypeResolver
+    final protected function getPostByOneofInputObjectTypeResolver(): PostByOneofInputObjectTypeResolver
     {
-        if ($this->postByInputObjectTypeResolver === null) {
-            /** @var PostByInputObjectTypeResolver */
-            $postByInputObjectTypeResolver = $this->instanceManager->getInstance(PostByInputObjectTypeResolver::class);
-            $this->postByInputObjectTypeResolver = $postByInputObjectTypeResolver;
+        if ($this->postByOneofInputObjectTypeResolver === null) {
+            /** @var PostByOneofInputObjectTypeResolver */
+            $postByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(PostByOneofInputObjectTypeResolver::class);
+            $this->postByOneofInputObjectTypeResolver = $postByOneofInputObjectTypeResolver;
         }
-        return $this->postByInputObjectTypeResolver;
+        return $this->postByOneofInputObjectTypeResolver;
     }
 
     /**
@@ -93,7 +93,7 @@ class RootPostObjectTypeFieldResolver extends AbstractPostObjectTypeFieldResolve
             'post' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getPostByInputObjectTypeResolver(),
+                    'by' => $this->getPostByOneofInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,

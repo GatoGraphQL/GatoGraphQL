@@ -2,22 +2,18 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
-use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
 
-abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
-    private ?SlugFilterInput $slugFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -32,19 +28,6 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
         }
         return $this->idScalarTypeResolver;
     }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        if ($this->stringScalarTypeResolver === null) {
-            /** @var StringScalarTypeResolver */
-            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        }
-        return $this->stringScalarTypeResolver;
-    }
     final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
         $this->includeFilterInput = $includeFilterInput;
@@ -58,31 +41,15 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
         }
         return $this->includeFilterInput;
     }
-    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
+
+    public function getTypeName(): string
     {
-        $this->slugFilterInput = $slugFilterInput;
-    }
-    final protected function getSlugFilterInput(): SlugFilterInput
-    {
-        if ($this->slugFilterInput === null) {
-            /** @var SlugFilterInput */
-            $slugFilterInput = $this->instanceManager->getInstance(SlugFilterInput::class);
-            $this->slugFilterInput = $slugFilterInput;
-        }
-        return $this->slugFilterInput;
+        return 'MediaItemByInput';
     }
 
     public function getTypeDescription(): ?string
     {
-        return sprintf(
-            $this->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
-            $this->getTypeDescriptionCustomPostEntity()
-        );
-    }
-
-    protected function getTypeDescriptionCustomPostEntity(): string
-    {
-        return $this->__('a custom post', 'customposts');
+        return $this->__('Oneof input to specify the property and data to fetch a media item', 'media');
     }
 
     /**
@@ -92,15 +59,13 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     {
         return [
             'id' => $this->getIDScalarTypeResolver(),
-            'slug' => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by custom post ID', 'customposts'),
-            'slug' => $this->__('Query by custom post slug', 'customposts'),
+            'id' => $this->__('Query by media item ID', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -109,7 +74,6 @@ abstract class AbstractCustomPostByInputObjectTypeResolver extends AbstractOneof
     {
         return match ($inputFieldName) {
             'id' => $this->getIncludeFilterInput(),
-            'slug' => $this->getSlugFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

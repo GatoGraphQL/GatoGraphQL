@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-class CustomPostByInputObjectTypeResolver extends AbstractCustomPostByInputObjectTypeResolver
+class CustomPostByOneofInputObjectTypeResolver extends AbstractCustomPostByOneofInputObjectTypeResolver
 {
     public function getTypeName(): string
     {

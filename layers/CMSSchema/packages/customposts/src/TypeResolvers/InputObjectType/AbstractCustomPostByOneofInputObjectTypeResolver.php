@@ -2,22 +2,36 @@
 
 declare(strict_types=1);
 
-namespace PoPWPSchema\Blocks\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\SchemaCommons\FilterInputs\ExcludeFilterInput;
-use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
-use PoP\ComponentModel\FilterInputs\FilterInputInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
 
-class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
-    private ?ExcludeFilterInput $excludeFilterInput = null;
+    private ?SlugFilterInput $slugFilterInput = null;
 
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
+    }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
@@ -44,33 +58,31 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
         }
         return $this->includeFilterInput;
     }
-    final public function setExcludeFilterInput(ExcludeFilterInput $excludeFilterInput): void
+    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
     {
-        $this->excludeFilterInput = $excludeFilterInput;
+        $this->slugFilterInput = $slugFilterInput;
     }
-    final protected function getExcludeFilterInput(): ExcludeFilterInput
+    final protected function getSlugFilterInput(): SlugFilterInput
     {
-        if ($this->excludeFilterInput === null) {
-            /** @var ExcludeFilterInput */
-            $excludeFilterInput = $this->instanceManager->getInstance(ExcludeFilterInput::class);
-            $this->excludeFilterInput = $excludeFilterInput;
+        if ($this->slugFilterInput === null) {
+            /** @var SlugFilterInput */
+            $slugFilterInput = $this->instanceManager->getInstance(SlugFilterInput::class);
+            $this->slugFilterInput = $slugFilterInput;
         }
-        return $this->excludeFilterInput;
-    }
-
-    public function getTypeName(): string
-    {
-        return 'BlockFilterByInput';
+        return $this->slugFilterInput;
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to filter blocks', 'blocks');
+        return sprintf(
+            $this->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
+            $this->getTypeDescriptionCustomPostEntity()
+        );
     }
 
-    protected function isOneInputValueMandatory(): bool
+    protected function getTypeDescriptionCustomPostEntity(): string
     {
-        return false;
+        return $this->__('a custom post', 'customposts');
     }
 
     /**
@@ -79,16 +91,16 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'include' => $this->getStringScalarTypeResolver(),
-            'exclude' => $this->getStringScalarTypeResolver(),
+            'id' => $this->getIDScalarTypeResolver(),
+            'slug' => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'include' => $this->__('Names of blocks to be included', 'blocks'),
-            'exclude' => $this->__('Names of blocks to be excluded', 'blocks'),
+            'id' => $this->__('Query by custom post ID', 'customposts'),
+            'slug' => $this->__('Query by custom post slug', 'customposts'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -96,31 +108,9 @@ class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputOb
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'include' => $this->getIncludeFilterInput(),
-            'exclude' => $this->getExcludeFilterInput(),
+            'id' => $this->getIncludeFilterInput(),
+            'slug' => $this->getSlugFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
-        };
-    }
-
-    public function getInputFieldTypeModifiers(string $inputFieldName): int
-    {
-        return match ($inputFieldName) {
-            'include',
-            'exclude'
-                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName)
-        };
-    }
-
-    protected function isOneOfInputPropertyNullable(
-        string $propertyName
-    ): bool {
-        return match ($propertyName) {
-            'include',
-            'exclude'
-                => true,
-            default
-                => parent::isOneOfInputPropertyNullable($propertyName)
         };
     }
 }

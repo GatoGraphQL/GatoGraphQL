@@ -8,7 +8,7 @@ use PoPCMSSchema\CustomPosts\ComponentProcessors\CommonCustomPostFilterInputCont
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\InputObjectType\RootMyPostsFilterInputObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
-use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostByInputObjectTypeResolver;
+use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\InputObjectType\PostPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -36,7 +36,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
-    private ?PostByInputObjectTypeResolver $postByInputObjectTypeResolver = null;
+    private ?PostByOneofInputObjectTypeResolver $postByOneofInputObjectTypeResolver = null;
     private ?RootMyPostsFilterInputObjectTypeResolver $rootMyPostsFilterInputObjectTypeResolver = null;
     private ?PostPaginationInputObjectTypeResolver $postPaginationInputObjectTypeResolver = null;
     private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
@@ -81,18 +81,18 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->postTypeAPI;
     }
-    final public function setPostByInputObjectTypeResolver(PostByInputObjectTypeResolver $postByInputObjectTypeResolver): void
+    final public function setPostByOneofInputObjectTypeResolver(PostByOneofInputObjectTypeResolver $postByOneofInputObjectTypeResolver): void
     {
-        $this->postByInputObjectTypeResolver = $postByInputObjectTypeResolver;
+        $this->postByOneofInputObjectTypeResolver = $postByOneofInputObjectTypeResolver;
     }
-    final protected function getPostByInputObjectTypeResolver(): PostByInputObjectTypeResolver
+    final protected function getPostByOneofInputObjectTypeResolver(): PostByOneofInputObjectTypeResolver
     {
-        if ($this->postByInputObjectTypeResolver === null) {
-            /** @var PostByInputObjectTypeResolver */
-            $postByInputObjectTypeResolver = $this->instanceManager->getInstance(PostByInputObjectTypeResolver::class);
-            $this->postByInputObjectTypeResolver = $postByInputObjectTypeResolver;
+        if ($this->postByOneofInputObjectTypeResolver === null) {
+            /** @var PostByOneofInputObjectTypeResolver */
+            $postByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(PostByOneofInputObjectTypeResolver::class);
+            $this->postByOneofInputObjectTypeResolver = $postByOneofInputObjectTypeResolver;
         }
-        return $this->postByInputObjectTypeResolver;
+        return $this->postByOneofInputObjectTypeResolver;
     }
     final public function setRootMyPostsFilterInputObjectTypeResolver(RootMyPostsFilterInputObjectTypeResolver $rootMyPostsFilterInputObjectTypeResolver): void
     {
@@ -222,7 +222,7 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myPost' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getPostByInputObjectTypeResolver(),
+                    'by' => $this->getPostByOneofInputObjectTypeResolver(),
                 ]
             ),
             'myPosts' => array_merge(
