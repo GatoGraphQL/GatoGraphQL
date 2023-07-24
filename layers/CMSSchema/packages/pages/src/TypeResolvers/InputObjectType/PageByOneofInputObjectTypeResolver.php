@@ -9,7 +9,7 @@ use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\AbstractCustomPostByOneofInputObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\PathOrPathsFilterInput;
 
-class PageByInputObjectTypeResolver extends AbstractCustomPostByOneofInputObjectTypeResolver
+class PageByOneofInputObjectTypeResolver extends AbstractCustomPostByOneofInputObjectTypeResolver
 {
     private ?PathOrPathsFilterInput $pathOrPathsFilterInput = null;
 

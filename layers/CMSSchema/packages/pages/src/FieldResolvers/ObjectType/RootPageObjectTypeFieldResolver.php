@@ -10,7 +10,7 @@ use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeAPIs\PageTypeAPIInterface;
-use PoPCMSSchema\Pages\TypeResolvers\InputObjectType\PageByInputObjectTypeResolver;
+use PoPCMSSchema\Pages\TypeResolvers\InputObjectType\PageByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\InputObjectType\PagePaginationInputObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\InputObjectType\RootPagesFilterInputObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
@@ -38,7 +38,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?PageTypeAPIInterface $pageTypeAPI = null;
-    private ?PageByInputObjectTypeResolver $pageByInputObjectTypeResolver = null;
+    private ?PageByOneofInputObjectTypeResolver $pageByOneofInputObjectTypeResolver = null;
     private ?RootPagesFilterInputObjectTypeResolver $rootPagesFilterInputObjectTypeResolver = null;
     private ?PagePaginationInputObjectTypeResolver $pagePaginationInputObjectTypeResolver = null;
     private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
@@ -82,18 +82,18 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
         }
         return $this->pageTypeAPI;
     }
-    final public function setPageByInputObjectTypeResolver(PageByInputObjectTypeResolver $pageByInputObjectTypeResolver): void
+    final public function setPageByOneofInputObjectTypeResolver(PageByOneofInputObjectTypeResolver $pageByOneofInputObjectTypeResolver): void
     {
-        $this->pageByInputObjectTypeResolver = $pageByInputObjectTypeResolver;
+        $this->pageByOneofInputObjectTypeResolver = $pageByOneofInputObjectTypeResolver;
     }
-    final protected function getPageByInputObjectTypeResolver(): PageByInputObjectTypeResolver
+    final protected function getPageByOneofInputObjectTypeResolver(): PageByOneofInputObjectTypeResolver
     {
-        if ($this->pageByInputObjectTypeResolver === null) {
-            /** @var PageByInputObjectTypeResolver */
-            $pageByInputObjectTypeResolver = $this->instanceManager->getInstance(PageByInputObjectTypeResolver::class);
-            $this->pageByInputObjectTypeResolver = $pageByInputObjectTypeResolver;
+        if ($this->pageByOneofInputObjectTypeResolver === null) {
+            /** @var PageByOneofInputObjectTypeResolver */
+            $pageByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(PageByOneofInputObjectTypeResolver::class);
+            $this->pageByOneofInputObjectTypeResolver = $pageByOneofInputObjectTypeResolver;
         }
-        return $this->pageByInputObjectTypeResolver;
+        return $this->pageByOneofInputObjectTypeResolver;
     }
     final public function setRootPagesFilterInputObjectTypeResolver(RootPagesFilterInputObjectTypeResolver $rootPagesFilterInputObjectTypeResolver): void
     {
@@ -210,7 +210,7 @@ class RootPageObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRe
             'page' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getPageByInputObjectTypeResolver(),
+                    'by' => $this->getPageByOneofInputObjectTypeResolver(),
                 ]
             ),
             'pages' => array_merge(
