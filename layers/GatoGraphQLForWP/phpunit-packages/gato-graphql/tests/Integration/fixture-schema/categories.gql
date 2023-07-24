@@ -40,7 +40,7 @@
 
   customPostsByCategoryIDs: customPosts(
     filter: {
-      categoryIDs: [32, 34]
+      categoryIDs: [28, 33]
       categoryTaxonomy: "dummy-category"
     }
   ) {
