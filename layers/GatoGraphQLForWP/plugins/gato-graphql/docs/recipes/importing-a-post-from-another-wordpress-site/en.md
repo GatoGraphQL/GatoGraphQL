@@ -19,7 +19,7 @@ query InitializeDynamicVariables
     @remove
 
   initVariablesWithNull: _echo(value: null)
-    @export(as: "existingAuthorSlug")
+    @export(as: "existingAuthorUsername")
     @export(as: "existingFeaturedImageSlug")
     @remove
 
@@ -90,7 +90,7 @@ query GetPost($postSlug: String!) {
     rawExcerpt
     author {
       id
-      slug
+      username
     }
     featuredImage {
       id
@@ -233,7 +233,7 @@ query ExportInputs
     @export(as: "postExcerpt")
     @remove
 
-  postAuthorSlug: _objectProperty(
+  postAuthorUsername: _objectProperty(
     object: $__postData,
     by: { key: "author" }
   )
@@ -252,11 +252,11 @@ query ExportInputs
         name: "_objectProperty",
         arguments: {
           object: $author,
-          by: { key: "slug" }
+          by: { key: "username" }
         },
         setResultInResponse: true
       )
-    @export(as: "postAuthorSlug")
+    @export(as: "postAuthorUsername")
     @remove
 
   postFeaturedImageSlug: _objectProperty(
@@ -345,9 +345,9 @@ query ExportExistingResources
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
 {
-  existingAuthorBySlug: user(by: { slug: $postAuthorSlug }) {
+  existingAuthorByUsername: user(by: { username: $postAuthorUsername }) {
     id
-    slug @export(as: "existingAuthorSlug")
+    username @export(as: "existingAuthorUsername")
   }
 
   existingFeaturedImageBySlug: featuredImage(by: { slug: $postFeaturedImageSlug }) {
@@ -378,8 +378,8 @@ query ExportMissingResources
   @skip(if: $postIsMissing)
 {
   isAuthorMissing: _notEquals(
-    value1: $postAuthorSlug,
-    value2: $existingAuthorSlug
+    value1: $postAuthorUsername,
+    value2: $existingAuthorUsername
   ) @export(as: "isAuthorMissing")
   
   isFeaturedImageMissing: _notEquals(
@@ -424,7 +424,7 @@ query FailIfAnyResourceIsMissing
       @fail(
         message: "Author is missing"
         data: {
-          authorSlug: $postAuthorSlug
+          authorUsername: $postAuthorUsername
         }
         condition: ALWAYS
       )
@@ -475,7 +475,7 @@ mutation ImportPost(
     },
     excerpt: $postExcerpt
     authorBy: {
-      slug: $postAuthorSlug
+      username: $postAuthorUsername
     },
     featuredImageBy: {
       slug: $postFeaturedImageSlug
@@ -506,7 +506,7 @@ mutation ImportPost(
 
       author {
         id
-        slug
+        username
       }
       featuredImage {
         id
@@ -604,9 +604,9 @@ query ExportGraphQLQueryToFetchMissingResources
     @if(condition: $isAuthorMissing)
       @strAppend(string:
         """
-        user(by: { slug: "{$postAuthorSlug}" })  {
+        user(by: { username: "{$postAuthorUsername}" })  {
           id
-          slug
+          username
           name
         }
         """
@@ -651,13 +651,13 @@ query ExportGraphQLQueryToFetchMissingResources
       """)
     @strReplaceMultiple(
       search: [
-        "{$postAuthorSlug}",
+        "{$postAuthorUsername}",
         "{$postFeaturedImageSlug}",
         "{$postCategorySlugPaths}",
         "{$postTagSlugs}",
       ],
       replaceWith: [
-        $missingAuthorSlug,
+        $missingAuthorUsername,
         $missingFeaturedImageSlug,
         $missingCategorySlugPathsAsString,
         $missingTagSlugsAsString,
