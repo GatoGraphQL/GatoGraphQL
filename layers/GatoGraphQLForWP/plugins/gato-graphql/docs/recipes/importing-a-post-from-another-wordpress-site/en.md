@@ -34,15 +34,7 @@ query CheckIfPostExistsLocally($postSlug: String!)
 {
   localPost: post(
     by: { slug: $postSlug }
-    status: [
-      draft,
-      future,
-      inherit,
-      pending,
-      private,
-      publish,
-      trash,
-    ]
+    status: any
   ) {
     id
   }
