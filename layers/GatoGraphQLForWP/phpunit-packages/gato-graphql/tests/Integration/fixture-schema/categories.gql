@@ -94,7 +94,7 @@ fragment CategoryData on Category {
 fragment GenericCategoryData on GenericCategory {
   taxonomy   
   customPostCount
-  customPosts {
+  customPosts(sort: {by: ID, order: ASC}) {
     __typename
     ...CustomPostData
   }
