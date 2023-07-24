@@ -12,10 +12,10 @@ use PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInter
 class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterface
 {
     /**
-     * @param array<string|int> $categoryIDs
+     * @param array<string|int> $categorySlugsOrIDs List of category slugs or IDs
      */
-    public function setCategories(int|string $postID, array $categoryIDs, bool $append = false): void
+    public function setCategories(int|string $postID, array $categorySlugsOrIDs, bool $append = false): void
     {
-        \wp_set_post_terms((int)$postID, $categoryIDs, 'category', $append);
+        \wp_set_post_terms((int)$postID, $categorySlugsOrIDs, 'category', $append);
     }
 }
