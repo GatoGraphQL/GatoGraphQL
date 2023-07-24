@@ -117,10 +117,15 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
         /** @var stdClass */
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        $customPostCategorySlugsOrIDs = isset($categoriesBy->{MutationInputProperties::IDS})
-            ? $categoriesBy->{MutationInputProperties::IDS}
-            : $categoriesBy->{MutationInputProperties::SLUGS};
-        $this->getCustomPostCategoryTypeMutationAPI()->setCategories($customPostID, $customPostCategorySlugsOrIDs, false);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            /** @var array<string|int> */
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID($customPostID, $customPostCategoryIDs, false);
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            /** @var string[] */
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug($customPostID, $customPostCategorySlugs, false);
+        }
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

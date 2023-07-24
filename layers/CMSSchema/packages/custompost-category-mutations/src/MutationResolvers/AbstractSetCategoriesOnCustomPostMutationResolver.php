@@ -95,13 +95,17 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         if ($categoriesBy === null || ((array) $categoriesBy) === []) {
             return $customPostID;
         }
-        $postCategorySlugsOrIDs = isset($categoriesBy->{MutationInputProperties::IDS})
-            ? $categoriesBy->{MutationInputProperties::IDS}
-            : $categoriesBy->{MutationInputProperties::SLUGS};
         
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
-        $customPostCategoryTypeAPI = $this->getCustomPostCategoryTypeMutationAPI();
-        $customPostCategoryTypeAPI->setCategories($customPostID, $postCategorySlugsOrIDs, $append);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            /** @var array<string|int> */
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID($customPostID, $customPostCategoryIDs, $append);
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            /** @var string[] */
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug($customPostID, $customPostCategorySlugs, $append);
+        }
         return $customPostID;
     }
 

@@ -12,10 +12,25 @@ use PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInter
 class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterface
 {
     /**
-     * @param array<string|int> $categorySlugsOrIDs List of category slugs or IDs
+     * @param array<string|int> $categoryIDs
      */
-    public function setCategories(int|string $postID, array $categorySlugsOrIDs, bool $append = false): void
+    public function setCategoriesByID(int|string $postID, array $categoryIDs, bool $append = false): void
     {
-        \wp_set_post_terms((int)$postID, $categorySlugsOrIDs, 'category', $append);
+        \wp_set_post_terms((int)$postID, $categoryIDs, 'category', $append);
+    }
+
+    /**
+     * @param string[] $categorySlugs
+     */
+    public function setCategoriesBySlug(int|string $postID, array $categorySlugs, bool $append = false): void
+    {
+        /**
+         * Watch out! Can't use `wp_set_post_terms` because it only accepts
+         * category IDs and not slugs.
+         *
+         * To use this, make sure that categories with the provided slugs exist!
+         * Otherwise, it will create them as terms.
+         */
+        \wp_set_object_terms((int)$postID, $categorySlugs, 'category', $append);
     }
 }
