@@ -68,18 +68,26 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        $this->validateCategoriesExist(
-            $customPostCategoryIDs,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->validateCategoriesExist(
+                $customPostCategoryIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     protected function canExecuteMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
         if (!$fieldDataAccessor->hasValue(MutationInputProperties::CATEGORIES_BY)) {
+            return false;
+        }
+        /** @var stdClass */
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (((array) $categoriesBy) === []) {
             return false;
         }
         // Only for that specific CPT
@@ -100,9 +108,12 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $customPostCategoryIDs = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        $customPostCategoryTypeMutationAPI = $this->getCustomPostCategoryTypeMutationAPI();
-        $customPostCategoryTypeMutationAPI->setCategories($customPostID, $customPostCategoryIDs, false);
+        /** @var stdClass */
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        $customPostCategorySlugsOrIDs = isset($categoriesBy->{MutationInputProperties::IDS})
+            ? $categoriesBy->{MutationInputProperties::IDS}
+            : $categoriesBy->{MutationInputProperties::SLUGS};
+        $this->getCustomPostCategoryTypeMutationAPI()->setCategories($customPostID, $customPostCategorySlugsOrIDs, false);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
