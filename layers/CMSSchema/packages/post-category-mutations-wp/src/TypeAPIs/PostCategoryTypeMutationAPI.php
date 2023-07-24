@@ -26,9 +26,14 @@ class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterfac
     {
         /**
          * Watch out! Can't use `wp_set_post_terms` because it only accepts
-         * category IDs and not slugs.
+         * category IDs and not slugs:
          *
-         * To use this, make sure that categories with the provided slugs exist!
+         *   > Hierarchical taxonomies must always pass IDs rather than names so that
+	     *   > children with the same names but different parents aren't confused.
+         *
+         * @see wp-includes/post.php
+         *
+         * To use this method, make sure that categories with the provided slugs exist!
          * Otherwise, it will create them as terms.
          */
         \wp_set_object_terms((int)$postID, $categorySlugs, 'category', $append);
