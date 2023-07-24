@@ -76,6 +76,13 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->validateCategoriesBySlugExist(
+                $customPostCategorySlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         }
     }
 
