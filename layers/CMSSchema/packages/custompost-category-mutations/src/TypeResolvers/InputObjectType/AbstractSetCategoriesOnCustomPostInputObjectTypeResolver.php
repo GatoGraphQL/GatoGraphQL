@@ -110,10 +110,13 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::APPEND => SchemaTypeModifiers::NON_NULLABLE,
-            MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::CATEGORY_IDS => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::MANDATORY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName),
+            MutationInputProperties::APPEND
+                => SchemaTypeModifiers::NON_NULLABLE,
+            MutationInputProperties::CUSTOMPOST_ID,
+            MutationInputProperties::CATEGORY_IDS
+                => SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 }
