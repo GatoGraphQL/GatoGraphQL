@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInput
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
 
-class CommentByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+class CommentByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
