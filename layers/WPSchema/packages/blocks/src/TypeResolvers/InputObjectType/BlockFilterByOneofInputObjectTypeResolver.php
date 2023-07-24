@@ -12,7 +12,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInput
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-class BlockFilterByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
+class BlockFilterByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
