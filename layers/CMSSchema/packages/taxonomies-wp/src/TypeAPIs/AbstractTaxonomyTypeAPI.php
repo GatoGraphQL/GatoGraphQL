@@ -394,7 +394,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     ): ?string {
         $taxonomyTermID = is_object($taxonomyTermObjectOrID) ? $this->getTaxonomyTermID($taxonomyTermObjectOrID) : $taxonomyTermObjectOrID;
         $taxonomyTermParentsSlugPath = \get_term_parents_list(
-            $taxonomyTermID,
+            (int)$taxonomyTermID,
             $taxonomy,
             [
                 'separator' => '/',
