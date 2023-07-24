@@ -9,20 +9,20 @@ use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\AbstractObjectsFilt
 
 abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObjectsFilterInputObjectTypeResolver
 {
-    private ?UserSearchByInputObjectTypeResolver $userSearchByInputObjectTypeResolver = null;
+    private ?UserSearchByOneofInputObjectTypeResolver $userSearchByOneofInputObjectTypeResolver = null;
 
-    final public function setUserSearchByInputObjectTypeResolver(UserSearchByInputObjectTypeResolver $userSearchByInputObjectTypeResolver): void
+    final public function setUserSearchByOneofInputObjectTypeResolver(UserSearchByOneofInputObjectTypeResolver $userSearchByOneofInputObjectTypeResolver): void
     {
-        $this->userSearchByInputObjectTypeResolver = $userSearchByInputObjectTypeResolver;
+        $this->userSearchByOneofInputObjectTypeResolver = $userSearchByOneofInputObjectTypeResolver;
     }
-    final protected function getUserSearchByInputObjectTypeResolver(): UserSearchByInputObjectTypeResolver
+    final protected function getUserSearchByOneofInputObjectTypeResolver(): UserSearchByOneofInputObjectTypeResolver
     {
-        if ($this->userSearchByInputObjectTypeResolver === null) {
-            /** @var UserSearchByInputObjectTypeResolver */
-            $userSearchByInputObjectTypeResolver = $this->instanceManager->getInstance(UserSearchByInputObjectTypeResolver::class);
-            $this->userSearchByInputObjectTypeResolver = $userSearchByInputObjectTypeResolver;
+        if ($this->userSearchByOneofInputObjectTypeResolver === null) {
+            /** @var UserSearchByOneofInputObjectTypeResolver */
+            $userSearchByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(UserSearchByOneofInputObjectTypeResolver::class);
+            $this->userSearchByOneofInputObjectTypeResolver = $userSearchByOneofInputObjectTypeResolver;
         }
-        return $this->userSearchByInputObjectTypeResolver;
+        return $this->userSearchByOneofInputObjectTypeResolver;
     }
 
     public function getTypeDescription(): ?string
@@ -38,7 +38,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                'searchBy' => $this->getUserSearchByInputObjectTypeResolver(),
+                'searchBy' => $this->getUserSearchByOneofInputObjectTypeResolver(),
             ]
         );
     }
