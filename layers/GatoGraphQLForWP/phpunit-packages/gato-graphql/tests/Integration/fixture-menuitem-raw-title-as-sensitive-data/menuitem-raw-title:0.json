@@ -12,7 +12,7 @@
                 "path": [
                     "rawTitle",
                     "items { ... }",
-                    "menu(by: {id: 39}) { ... }",
+                    "menu(by: {id: 42}) { ... }",
                     "query { ... }"
                 ],
                 "type": "MenuItem",
@@ -24,7 +24,7 @@
     ],
     "data": {
         "menu": {
-            "id": 39,
+            "id": 42,
             "items": [
                 {
                     "id": 1228,
