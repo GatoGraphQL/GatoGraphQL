@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Users\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPCMSSchema\Users\TypeResolvers\InputObjectType\UserByInputObjectTypeResolver;
+use PoPCMSSchema\Users\TypeResolvers\InputObjectType\UserByOneofInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -20,7 +20,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?UserByInputObjectTypeResolver $userByInputObjectTypeResolver = null;
+    private ?UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -35,18 +35,18 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setUserByInputObjectTypeResolver(UserByInputObjectTypeResolver $userByInputObjectTypeResolver): void
+    final public function setUserByOneofInputObjectTypeResolver(UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver): void
     {
-        $this->userByInputObjectTypeResolver = $userByInputObjectTypeResolver;
+        $this->userByOneofInputObjectTypeResolver = $userByOneofInputObjectTypeResolver;
     }
-    final protected function getUserByInputObjectTypeResolver(): UserByInputObjectTypeResolver
+    final protected function getUserByOneofInputObjectTypeResolver(): UserByOneofInputObjectTypeResolver
     {
-        if ($this->userByInputObjectTypeResolver === null) {
-            /** @var UserByInputObjectTypeResolver */
-            $userByInputObjectTypeResolver = $this->instanceManager->getInstance(UserByInputObjectTypeResolver::class);
-            $this->userByInputObjectTypeResolver = $userByInputObjectTypeResolver;
+        if ($this->userByOneofInputObjectTypeResolver === null) {
+            /** @var UserByOneofInputObjectTypeResolver */
+            $userByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(UserByOneofInputObjectTypeResolver::class);
+            $this->userByOneofInputObjectTypeResolver = $userByOneofInputObjectTypeResolver;
         }
-        return $this->userByInputObjectTypeResolver;
+        return $this->userByOneofInputObjectTypeResolver;
     }
 
     /**
@@ -91,7 +91,7 @@ class RootUserObjectTypeFieldResolver extends AbstractUserObjectTypeFieldResolve
             'user' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getUserByInputObjectTypeResolver(),
+                    'by' => $this->getUserByOneofInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
