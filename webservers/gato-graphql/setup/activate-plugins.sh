@@ -5,9 +5,7 @@ if wp plugin is-installed wordpress-importer --path=/app/wordpress; then
 else
     wp plugin install wordpress-importer --activate --path=/app/wordpress
 fi
-if wp plugin is-installed classic-editor --path=/app/wordpress; then
-    wp plugin activate classic-editor --path=/app/wordpress
-else
+if ! wp plugin is-installed classic-editor --path=/app/wordpress; then
     wp plugin install classic-editor --path=/app/wordpress
 fi
 
