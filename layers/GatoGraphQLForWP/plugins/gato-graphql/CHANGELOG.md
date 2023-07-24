@@ -18,6 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added support for the "Composable Directives" custom feature
 - Added support for the "Multi-Field Directives" custom feature
 - Send custom headers in the GraphQL response
+- Added field `Category.slugPath`
 - Added field `CustomPost.wpAdminEditURL`
 - Added several "raw content" fields, made them all “sensitive”
 - Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
