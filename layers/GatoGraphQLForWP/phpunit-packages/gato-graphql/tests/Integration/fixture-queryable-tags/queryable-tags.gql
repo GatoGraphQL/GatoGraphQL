@@ -2,7 +2,7 @@
   postTags: tags(taxonomy: post_tag) {
     ...TagData
   }
-  postTag: tag(taxonomy: post_tag, by: { id: 13 }) {
+  postTag: tag(taxonomy: post_tag, by: { id: 15 }) {
     ...TagData
   }
   postTagCount: tagCount(taxonomy: post_tag)
@@ -11,7 +11,7 @@
   dummyTags: tags(taxonomy: "dummy-tag") {
     ...TagData
   }
-  dummyTag: tag(taxonomy: "dummy-tag", by: { id: 33 }) {
+  dummyTag: tag(taxonomy: "dummy-tag", by: { id: 36 }) {
     ...TagData
   }
   dummyTagCount: tagCount(taxonomy: "dummy-tag")
