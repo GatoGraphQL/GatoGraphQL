@@ -6,10 +6,10 @@
                 "title": "Public or Private API mode, for extra security",
                 "tags": [
                     {
-                        "id": 12
+                        "id": 14
                     },
                     {
-                        "id": 7
+                        "id": 9
                     }
                 ],
                 "categories": [
@@ -29,13 +29,13 @@
                 "title": "Nested mutations are a must have",
                 "tags": [
                     {
-                        "id": 13
+                        "id": 15
                     },
                     {
-                        "id": 10
+                        "id": 12
                     },
                     {
-                        "id": 7
+                        "id": 9
                     }
                 ],
                 "categories": [
@@ -55,16 +55,16 @@
                 "title": "Working on flat chain syntax next",
                 "tags": [
                     {
-                        "id": 13
+                        "id": 15
+                    },
+                    {
+                        "id": 12
                     },
                     {
                         "id": 10
                     },
                     {
-                        "id": 8
-                    },
-                    {
-                        "id": 7
+                        "id": 9
                     }
                 ],
                 "categories": [
