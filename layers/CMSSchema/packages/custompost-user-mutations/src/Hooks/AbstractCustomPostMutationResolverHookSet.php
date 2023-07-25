@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomP
 use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostUserMutations\Module;
 use PoPCMSSchema\CustomPostUserMutations\ModuleConfiguration;
-use PoPCMSSchema\CustomPostUserMutations\TypeResolvers\ObjectType\AuthorByOneofInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostUserMutations\TypeResolvers\InputObjectType\AuthorByOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
