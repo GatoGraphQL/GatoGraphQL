@@ -1613,7 +1613,9 @@ must be transformed like this:
 mutation CreatePost {
   createPost(input: {
     title: "New post"
-    contentAs: { html: "New content" }
+    contentAs: {
+      html: "New content"
+    }
     authorBy: {
       id: 3
     }
