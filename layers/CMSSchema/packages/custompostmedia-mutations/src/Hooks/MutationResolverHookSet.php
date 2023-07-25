@@ -125,20 +125,37 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
+        
         /**
-         * If it has an ID, set the featured image
-         *
-         * @var string|int|null
+         * @var stdClass|null
          */
-        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_BY);
-        if ($featuredImageID !== null) {
-            $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
+        $featuredImageBy = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_BY);
+        if ($featuredImageBy === null) {
+            /**
+             * If is `null` => remove the featured image
+             */
+            $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
             return;
         }
-        /**
-         * If is `null` => remove the featured image
-         */
-        $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
+        $featuredImageID = null;
+        if (isset($featuredImageBy->{InputProperties::ID})) {
+            /** @var string|int */
+            $featuredImageID = $featuredImageBy->{InputProperties::ID};
+        } elseif (isset($featuredImageBy->{InputProperties::SLUG})) {
+            $mediaTypeAPI = $this->getMediaTypeAPI();
+            /** @var string */
+            $featuredImageSlug = $featuredImageBy->{InputProperties::SLUG};
+            $featuredImage = $mediaTypeAPI->getMediaItemBySlug($featuredImageSlug);
+            $featuredImageID = $mediaTypeAPI->getMediaItemID($featuredImage);
+        }
+        if ($featuredImageID === null) {
+            /**
+             * If is `null` => remove the featured image
+             */
+            $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
+            return;
+        }
+        $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
