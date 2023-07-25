@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
+use PoPCMSSchema\Media\Constants\InputProperties;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
@@ -52,8 +56,21 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        $mediaItemID = null;
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
+        $mediaItemBy = $fieldDataAccessor->getValue(MutationInputProperties::MEDIAITEM_BY);
+        if (isset($mediaItemBy->{InputProperties::ID})) {
+            /** @var string|int */
+            $mediaItemID = $mediaItemBy->{InputProperties::ID};
+        } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
+            $mediaTypeAPI = $this->getMediaTypeAPI();
+            /** @var string */
+            $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
+            /** @var object */
+            $mediaItem = $mediaTypeAPI->getMediaItemBySlug($mediaItemSlug);
+            $mediaItemID = $mediaTypeAPI->getMediaItemID($mediaItem);
+        }
+        /** @var string|int $mediaItemID */
         $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
@@ -67,11 +84,36 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
-        $this->validateMediaItemExists(
-            $mediaItemID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        $mediaItemBy = $fieldDataAccessor->getValue(MutationInputProperties::MEDIAITEM_BY);
+        if ($mediaItemBy === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E1,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return;
+        }
+
+        if (isset($mediaItemBy->{InputProperties::ID})) {
+            /** @var string|int */
+            $mediaItemID = $mediaItemBy->{InputProperties::ID};
+            $this->validateMediaItemByIDExists(
+                $mediaItemID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
+            /** @var string */
+            $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
+            $this->validateMediaItemBySlugExists(
+                $mediaItemSlug,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 }

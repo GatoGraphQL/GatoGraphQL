@@ -4,32 +4,32 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\Hooks;
 
-use PoP\Root\App;
+use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType\FeaturedImageByOneofInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomPostInputObjectTypeResolverInterface;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?FeaturedImageByOneofInputObjectTypeResolver $featuredImageByOneofInputObjectTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setFeaturedImageByOneofInputObjectTypeResolver(FeaturedImageByOneofInputObjectTypeResolver $featuredImageByOneofInputObjectTypeResolver): void
     {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->featuredImageByOneofInputObjectTypeResolver = $featuredImageByOneofInputObjectTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getFeaturedImageByOneofInputObjectTypeResolver(): FeaturedImageByOneofInputObjectTypeResolver
     {
-        if ($this->idScalarTypeResolver === null) {
-            /** @var IDScalarTypeResolver */
-            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        if ($this->featuredImageByOneofInputObjectTypeResolver === null) {
+            /** @var FeaturedImageByOneofInputObjectTypeResolver */
+            $featuredImageByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(FeaturedImageByOneofInputObjectTypeResolver::class);
+            $this->featuredImageByOneofInputObjectTypeResolver = $featuredImageByOneofInputObjectTypeResolver;
         }
-        return $this->idScalarTypeResolver;
+        return $this->featuredImageByOneofInputObjectTypeResolver;
     }
 
     protected function init(): void
@@ -60,7 +60,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIDScalarTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_BY] = $this->getFeaturedImageByOneofInputObjectTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
@@ -77,9 +77,9 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $inputFieldName,
     ): ?string {
         // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+        if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The ID of the image to set as featured', 'custompost-mutations');
+        return $this->__('The image to set as featured', 'custompost-mutations');
     }
 }

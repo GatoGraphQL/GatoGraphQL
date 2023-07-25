@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostUserMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Users\Constants\InputProperties;
 use PoPCMSSchema\Users\TypeResolvers\InputObjectType\UserByOneofInputObjectTypeResolver;
+use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 
 class AuthorByOneofInputObjectTypeResolver extends UserByOneofInputObjectTypeResolver
 {
@@ -28,7 +29,12 @@ class AuthorByOneofInputObjectTypeResolver extends UserByOneofInputObjectTypeRes
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
-    
+
+    public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
+    {
+        return null;
+    }
+
     protected function isOneInputValueMandatory(): bool
     {
         return false;

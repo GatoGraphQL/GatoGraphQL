@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInput
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPCMSSchema\Media\Constants\InputProperties;
 
 class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
@@ -88,16 +89,16 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'id' => $this->getIDScalarTypeResolver(),
-            'slug' => $this->getStringScalarTypeResolver(),
+            InputProperties::ID => $this->getIDScalarTypeResolver(),
+            InputProperties::SLUG => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by media item ID', 'media'),
-            'slug' => $this->__('Query by media item slug', 'media'),
+            InputProperties::ID => $this->__('Query by media item ID', 'media'),
+            InputProperties::SLUG => $this->__('Query by media item slug', 'media'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -105,8 +106,8 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'id' => $this->getIncludeFilterInput(),
-            'slug' => $this->getSlugFilterInput(),
+            InputProperties::ID => $this->getIncludeFilterInput(),
+            InputProperties::SLUG => $this->getSlugFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

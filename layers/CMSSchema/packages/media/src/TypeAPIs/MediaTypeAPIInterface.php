@@ -27,14 +27,19 @@ interface MediaTypeAPIInterface
     /**
      * Get the media item with provided ID or, if it doesn't exist, null
      */
-    public function getMediaItem(int|string $id): ?object;
+    public function getMediaItemByID(int|string $id): ?object;
+    /**
+     * Get the media item with provided slug or, if it doesn't exist, null
+     */
+    public function getMediaItemBySlug(string $slug): ?object;
     /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
     public function getMediaItems(array $query, array $options = []): array;
-    public function mediaItemExists(int|string $id): bool;
+    public function mediaItemByIDExists(int|string $id): bool;
+    public function mediaItemBySlugExists(string $slug): bool;
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options

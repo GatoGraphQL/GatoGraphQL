@@ -103,7 +103,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolverBridge extends Ab
         }
 
         if ($featuredimage = $this->getFeaturedimageComponent()) {
-            $mutationData[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID] = $this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage);
+            $mutationData[CustomPostMediaMutationInputProperties::FEATUREDIMAGE_BY]['id'] = $this->getComponentProcessorManager()->getComponentProcessor($featuredimage)->getValue($featuredimage);
         }
 
         if ($this->addReferences()) {

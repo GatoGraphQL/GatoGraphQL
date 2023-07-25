@@ -71,7 +71,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -246,7 +248,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -512,7 +516,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -724,7 +730,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -871,7 +879,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
