@@ -32,7 +32,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The media item ID is missing', 'custompostmedia-mutations'),
+            self::E1 => $this->__('The media item is missing', 'custompostmedia-mutations'),
             self::E2 => $this->__('There is no media item with ID \'%s\'', 'custompostmedia-mutations'),
             self::E3 => $this->__('You must be logged in to set or remove the featured image on custom posts', 'custompost-mutations'),
             self::E4 => $this->__('Setting a featured image is not supported for custom post type \'%s\'', 'custompostmedia-mutations'),

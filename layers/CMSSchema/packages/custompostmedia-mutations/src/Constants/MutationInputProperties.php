@@ -8,6 +8,6 @@ class MutationInputProperties
 {
     public final const INPUT = 'input';
     public final const CUSTOMPOST_ID = 'customPostID';
-    public final const MEDIAITEM_ID = 'mediaItemID';
+    public final const MEDIAITEM_BY = 'mediaItemBy';
     public final const FEATUREDIMAGE_BY = 'featuredImageBy';
 }
