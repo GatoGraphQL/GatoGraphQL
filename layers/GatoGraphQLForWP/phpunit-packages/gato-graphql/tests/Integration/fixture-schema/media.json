@@ -256,6 +256,8 @@
             "id": 362,
             "title": "graphql-api-search-results",
             "slug": "graphql-api-search-results"
-        }
+        },
+        "nonExistingMediaItemById": null,
+        "nonExistingMediaItemBySlug": null
     }
 }
