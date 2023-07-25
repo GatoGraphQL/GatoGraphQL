@@ -584,4 +584,34 @@ This query:
 }
 ```
 
+`@passOnwards` is useful to produce some computation on the value of the field. For instance, in the GraphQL query above, it is used to check if the `user` property is not `null`, before extracting its `username` property (and overriding the field value with it):
+
+```graphql
+  postAuthorUsername: _objectProperty(
+    object: $__postData,
+    by: { key: "author" }
+  )
+    @passOnwards(
+      as: "author"
+    )
+    @applyField(
+      name: "_notNull",
+      arguments: {
+        value: $author
+      },
+      passOnwardsAs: "hasAuthor"
+    )
+    @if(condition: $hasAuthor)
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $author,
+          by: { key: "username" }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "postAuthorUsername")
+    @remove
+```
+
 </div>
