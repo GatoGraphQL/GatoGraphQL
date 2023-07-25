@@ -139,6 +139,8 @@ class MutationResolverHookSet extends AbstractHookSet
             $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
             return;
         }
+
+        $featuredImageID = null;
         if (isset($featuredImageBy->{InputProperties::ID})) {
             /** @var string|int */
             $featuredImageID = $featuredImageBy->{InputProperties::ID};

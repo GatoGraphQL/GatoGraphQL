@@ -123,6 +123,7 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return $customPostData;
         }
+        $authorID = null;
         $userTypeAPI = $this->getUserTypeAPI();
         /** @var stdClass|null */
         $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
