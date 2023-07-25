@@ -417,7 +417,7 @@ query FailIfAnyResourceIsMissing
       @fail(
         message: "Author is missing in local site"
         data: {
-          authorUsername: $postAuthorUsername
+          missingAuthorByUsername: $postAuthorUsername
         }
         condition: ALWAYS
       )
@@ -425,7 +425,7 @@ query FailIfAnyResourceIsMissing
       @fail(
         message: "Featured image is missing in local site"
         data: {
-          featuredImageSlug: $postFeaturedImageSlug
+          missingFeaturedImageBySlug: $postFeaturedImageSlug
         }
         condition: ALWAYS
       )
@@ -433,7 +433,7 @@ query FailIfAnyResourceIsMissing
       @fail(
         message: "Categories are missing in local site"
         data: {
-          categorySlugs: $missingCategorySlugs
+          missingCategoriesBySlug: $missingCategorySlugs
         }
         condition: ALWAYS
       )
@@ -441,7 +441,7 @@ query FailIfAnyResourceIsMissing
       @fail(
         message: "Tags are missing in local site"
         data: {
-          tagSlugs: $missingTagSlugs
+          missingTagBySlug: $missingTagSlugs
         }
         condition: ALWAYS
       )
