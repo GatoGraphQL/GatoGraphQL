@@ -342,7 +342,7 @@ query ExportExistingResources
     username @export(as: "existingAuthorUsername")
   }
 
-  existingFeaturedImageBySlug: featuredImage(by: { slug: $postFeaturedImageSlug }) {
+  existingFeaturedImageBySlug: mediaItem(by: { slug: $postFeaturedImageSlug }) {
     id
     slug @export(as: "existingFeaturedImageSlug")
   }
