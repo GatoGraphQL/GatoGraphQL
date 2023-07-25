@@ -98,10 +98,6 @@ class MutationResolverHookSet extends AbstractHookSet
         }
     }
 
-    /**
-     * Entry "authorID" must either have an ID or `null` to execute
-     * the mutation. Only if not provided, then nothing to do.
-     */
     protected function hasProvidedAuthorInput(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
@@ -113,7 +109,7 @@ class MutationResolverHookSet extends AbstractHookSet
         $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
         return isset($authorBy->{InputProperties::ID})
             || isset($authorBy->{InputProperties::USERNAME})
-            || isset($authorBy->{InputProperties::USERNAME});
+            || isset($authorBy->{InputProperties::EMAIL});
     }
 
     /**
