@@ -64,15 +64,32 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return;
         }
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
-        if ($authorID === null) {
+        $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
+        if ($authorBy === null) {
             return;
         }
-        $this->validateUserExists(
-            $authorID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        if (isset($authorBy->id)) {
+            $authorID = $authorBy->id;
+            $this->validateUserByIDExists(
+                $authorID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($authorBy->username)) {
+            $authorUsername = $authorBy->id;
+            $this->validateUserByUsernameExists(
+                $authorUsername,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($authorBy->username)) {
+            $authorEmail = $authorBy->id;
+            $this->validateUserByEmailExists(
+                $authorEmail,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     /**
@@ -122,7 +139,7 @@ class MutationResolverHookSet extends AbstractHookSet
         };
     }
 
-    public function validateUserExists(
+    protected function validateUserByIDExists(
         string|int $userID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -135,6 +152,48 @@ class MutationResolverHookSet extends AbstractHookSet
                         MutationErrorFeedbackItemProvider::E1,
                         [
                             $userID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateUserByUsernameExists(
+        string $username,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getUserTypeAPI()->getUserByLogin($username) === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
+                        [
+                            $username,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateUserByEmailExists(
+        string $userEmail,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getUserTypeAPI()->getUserByEmail($userEmail) === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            $userEmail,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
