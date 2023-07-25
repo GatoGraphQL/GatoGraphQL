@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\Hooks;
 
-use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\MutationResolvers\SetFeaturedImageOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\Media\Constants\InputProperties;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\Root\Hooks\AbstractHookSet;
+use stdClass;
 
 class MutationResolverHookSet extends AbstractHookSet
 {
@@ -81,15 +83,28 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_BY);
-        if ($featuredImageID === null) {
+        /** @var stdClass|null */
+        $featuredImageBy = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_BY);
+        if ($featuredImageBy === null) {
             return;
         }
-        $this->validateMediaItemExists(
-            $featuredImageID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        if (isset($featuredImageBy->{InputProperties::ID})) {
+            /** @var string|int */
+            $featuredImageID = $featuredImageBy->{InputProperties::ID};
+            $this->validateMediaItemByIDExists(
+                $featuredImageID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($featuredImageBy->{InputProperties::SLUG})) {
+            /** @var string */
+            $featuredImageSlug = $featuredImageBy->{InputProperties::SLUG};
+            $this->validateMediaItemBySlugExists(
+                $featuredImageSlug,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     /**
@@ -139,6 +154,12 @@ class MutationResolverHookSet extends AbstractHookSet
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
+            ] => new MediaItemDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
             ] => new MediaItemDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),

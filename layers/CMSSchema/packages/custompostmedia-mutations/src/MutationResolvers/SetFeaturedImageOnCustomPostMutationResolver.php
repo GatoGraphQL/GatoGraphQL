@@ -5,8 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
@@ -68,7 +71,20 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
         );
 
         $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
-        $this->validateMediaItemExists(
+        if ($mediaItemID === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E1,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return;
+        }
+        
+        $this->validateMediaItemByIDExists(
             $mediaItemID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
