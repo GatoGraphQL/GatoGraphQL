@@ -15,7 +15,12 @@ The resources referenced in the post must all exist locally:
 - The categories
 - (Tags also, however if these do not already exist, they are created together with the post, so it's not an issue)
 
-Slugs are used as the common identifier for resources in the upstream and local sites. If any of the resources does not exist in the local site, the GraphQL query prints an error and halts the import.
+As the common identifier for resources between the upstream and local sites, we use:
+
+- Slugs for categories, tags and media items
+- Usernames for users
+
+If any of the resources does not exist in the local site, the GraphQL query prints an error and halts the import.
 
 ```graphql
 query InitializeDynamicVariables
