@@ -320,6 +320,210 @@ query {
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Connecting to the WP REST API, whether from an external server or from this same site, follows the same procedure.
+
+For instance, this GraphQL query connects to the WP REST API from the local site with `?context=edit` mode (for which it must provide the [application password](https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/) credentials):
+
+```graphql
+query GetPostEditingDataFromRESTAPI(
+  $postId: ID!,
+  $username: String!,
+  $applicationPassword: String!
+) {
+  siteURL: optionValue(name: "siteurl")
+    @remove
+
+  endpoint: _sprintf(
+    string: "%s/wp-json/wp/v2/posts/%d/?context=edit",
+    values: [
+      $__siteURL,
+      $postId,
+    ]
+  )
+    @remove
+
+  _sendJSONObjectItemHTTPRequest(input: {
+    url: $__endpoint,
+    method: GET,
+    options: {
+      auth: {
+        username: $username,
+        password: $applicationPassword
+      }
+    }
+  })
+}
+```
+
+Passing these variables:
+
+```json
+{
+  "postId": 1,
+  "username": "{username}",
+  "applicationPassword": "{application password}"
+}
+```
+
+...the response is:
+
+```json
+{
+  "data": {
+    "_sendJSONObjectItemHTTPRequest": {
+      "id": 1,
+      "date": "2020-04-17T13:06:58",
+      "date_gmt": "2020-04-17T13:06:58",
+      "guid": {
+        "rendered": "https://mysite.com/?p=1",
+        "raw": "https://mysite.com/?p=1"
+      },
+      "modified": "2020-04-17T13:06:58",
+      "modified_gmt": "2020-04-17T13:06:58",
+      "password": "",
+      "slug": "hello-world",
+      "status": "publish",
+      "type": "post",
+      "link": "https://mysite.com/hello-world/",
+      "title": {
+        "raw": "Hello world!",
+        "rendered": "Hello world!"
+      },
+      "content": {
+        "raw": "<!-- wp:paragraph -->\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n<!-- /wp:paragraph -->",
+        "rendered": "\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n",
+        "protected": false,
+        "block_version": 1
+      },
+      "excerpt": {
+        "raw": "",
+        "rendered": "<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n",
+        "protected": false
+      },
+      "author": 2,
+      "featured_media": 0,
+      "comment_status": "open",
+      "ping_status": "open",
+      "sticky": false,
+      "template": "",
+      "format": "standard",
+      "meta": [],
+      "categories": [
+        1
+      ],
+      "tags": [],
+      "permalink_template": "https://mysite.com/%postname%/",
+      "generated_slug": "hello-world",
+      "_links": {
+        "self": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/types/post"
+          }
+        ],
+        "author": [
+          {
+            "embeddable": true,
+            "href": "https://mysite.com/wp-json/wp/v2/users/2"
+          }
+        ],
+        "replies": [
+          {
+            "embeddable": true,
+            "href": "https://mysite.com/wp-json/wp/v2/comments?post=1"
+          }
+        ],
+        "version-history": [
+          {
+            "count": 0,
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1/revisions"
+          }
+        ],
+        "wp:attachment": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/media?parent=1"
+          }
+        ],
+        "wp:term": [
+          {
+            "taxonomy": "category",
+            "embeddable": true,
+            "href": "https://mysite.com/wp-json/wp/v2/categories?post=1"
+          },
+          {
+            "taxonomy": "post_tag",
+            "embeddable": true,
+            "href": "https://mysite.com/wp-json/wp/v2/tags?post=1"
+          }
+        ],
+        "wp:action-publish": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "wp:action-unfiltered-html": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "wp:action-sticky": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "wp:action-assign-author": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "wp:action-create-categories": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "wp:action-assign-categories": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "wp:action-create-tags": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "wp:action-assign-tags": [
+          {
+            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    }
+  }
+}
+```
+
+</div>
+
 ## Connecting to a GraphQL API
 
 <!-- (As the Mailchimp API doesn't support GraphQL, we switch to a different API for this example.) -->
