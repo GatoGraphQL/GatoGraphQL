@@ -60,7 +60,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_ID] = $this->getIDScalarTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::FEATUREDIMAGE_BY] = $this->getIDScalarTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
@@ -77,7 +77,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $inputFieldName,
     ): ?string {
         // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+        if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return $this->__('The ID of the image to set as featured', 'custompost-mutations');

@@ -127,8 +127,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
         }
 
         if ($this->isFeaturedImageMandatory() && (
-            empty($fieldDataAccessor->getValue(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID))
-            || empty($fieldDataAccessor->getValue(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_ID)->id)
+            empty($fieldDataAccessor->getValue(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_BY))
+            || empty($fieldDataAccessor->getValue(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_BY)->id)
         )) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(

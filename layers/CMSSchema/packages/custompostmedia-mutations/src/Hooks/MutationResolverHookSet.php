@@ -81,7 +81,7 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID);
+        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_BY);
         if ($featuredImageID === null) {
             return;
         }
@@ -99,7 +99,7 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function canExecuteMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        return $fieldDataAccessor->hasValue(MutationInputProperties::FEATUREDIMAGE_ID);
+        return $fieldDataAccessor->hasValue(MutationInputProperties::FEATUREDIMAGE_BY);
     }
 
     /**
@@ -115,7 +115,7 @@ class MutationResolverHookSet extends AbstractHookSet
          *
          * @var string|int|null
          */
-        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_ID);
+        $featuredImageID = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_BY);
         if ($featuredImageID !== null) {
             $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
             return;
