@@ -155,6 +155,18 @@ class MutationResolverHookSet extends AbstractHookSet
             ] => new UserDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            ] => new UserDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new UserDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
             default => $errorPayload,
         };
     }
