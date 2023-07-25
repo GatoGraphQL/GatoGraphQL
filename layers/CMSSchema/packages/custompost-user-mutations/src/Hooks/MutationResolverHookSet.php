@@ -16,6 +16,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use stdClass;
 
 class MutationResolverHookSet extends AbstractHookSet
 {
@@ -64,15 +65,36 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return;
         }
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
-        if ($authorID === null) {
+        /** @var stdClass|null */
+        $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
+        if ($authorBy === null) {
             return;
         }
-        $this->validateUserExists(
-            $authorID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        if (isset($authorBy->id)) {
+            /** @var string|int */
+            $authorID = $authorBy->id;
+            $this->validateUserByIDExists(
+                $authorID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($authorBy->username)) {
+            /** @var string */
+            $authorUsername = $authorBy->username;
+            $this->validateUserByUsernameExists(
+                $authorUsername,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($authorBy->email)) {
+            /** @var string */
+            $authorEmail = $authorBy->email;
+            $this->validateUserByEmailExists(
+                $authorEmail,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     /**
@@ -82,7 +104,7 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function hasProvidedAuthorInput(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        return $fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_ID);
+        return $fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_BY);
     }
 
     /**
@@ -96,8 +118,23 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return $customPostData;
         }
-        /** @var string|int */
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
+        $userTypeAPI = $this->getUserTypeAPI();
+        /** @var stdClass|null */
+        $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
+        if (isset($authorBy->id)) {
+            /** @var string|int */
+            $authorID = $authorBy->id;
+        } elseif (isset($authorBy->username)) {
+            /** @var string */
+            $authorUsername = $authorBy->username;
+            $user = $userTypeAPI->getUserByLogin($authorUsername);
+            $authorID = $userTypeAPI->getUserID($user);
+        } elseif (isset($authorBy->email)) {
+            /** @var string */
+            $authorEmail = $authorBy->email;
+            $user = $userTypeAPI->getUserByEmail($authorEmail);
+            $authorID = $userTypeAPI->getUserID($user);
+        }
         $customPostData['author-id'] = $authorID;
         return $customPostData;
     }
@@ -118,11 +155,23 @@ class MutationResolverHookSet extends AbstractHookSet
             ] => new UserDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            ] => new UserDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new UserDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
             default => $errorPayload,
         };
     }
 
-    public function validateUserExists(
+    protected function validateUserByIDExists(
         string|int $userID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -135,6 +184,48 @@ class MutationResolverHookSet extends AbstractHookSet
                         MutationErrorFeedbackItemProvider::E1,
                         [
                             $userID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateUserByUsernameExists(
+        string $username,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getUserTypeAPI()->getUserByLogin($username) === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
+                        [
+                            $username,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateUserByEmailExists(
+        string $userEmail,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getUserTypeAPI()->getUserByEmail($userEmail) === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            $userEmail,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
