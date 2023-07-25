@@ -132,14 +132,17 @@ class MutationResolverHookSet extends AbstractHookSet
         } elseif (isset($authorBy->{InputProperties::USERNAME})) {
             /** @var string */
             $authorUsername = $authorBy->{InputProperties::USERNAME};
+            /** @var object */
             $user = $userTypeAPI->getUserByLogin($authorUsername);
             $authorID = $userTypeAPI->getUserID($user);
         } elseif (isset($authorBy->{InputProperties::EMAIL})) {
             /** @var string */
             $authorEmail = $authorBy->{InputProperties::EMAIL};
+            /** @var object */
             $user = $userTypeAPI->getUserByEmail($authorEmail);
             $authorID = $userTypeAPI->getUserID($user);
         }
+        /** @var string|int $authorID */
         $customPostData['author-id'] = $authorID;
         return $customPostData;
     }

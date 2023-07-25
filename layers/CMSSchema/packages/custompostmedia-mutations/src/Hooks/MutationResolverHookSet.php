@@ -146,6 +146,7 @@ class MutationResolverHookSet extends AbstractHookSet
             $mediaTypeAPI = $this->getMediaTypeAPI();
             /** @var string */
             $featuredImageSlug = $featuredImageBy->{InputProperties::SLUG};
+            /** @var object */
             $featuredImage = $mediaTypeAPI->getMediaItemBySlug($featuredImageSlug);
             $featuredImageID = $mediaTypeAPI->getMediaItemID($featuredImage);
         }

@@ -65,6 +65,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             $mediaTypeAPI = $this->getMediaTypeAPI();
             /** @var string */
             $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
+            /** @var object */
             $mediaItem = $mediaTypeAPI->getMediaItemBySlug($mediaItemSlug);
             $mediaItemID = $mediaTypeAPI->getMediaItemID($mediaItem);
         }
