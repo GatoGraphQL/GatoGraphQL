@@ -40,7 +40,7 @@ abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver exten
     {
         return array_merge(
             [
-                MutationInputProperties::MEDIA_ITEM_ID => $this->getIDScalarTypeResolver(),
+                MutationInputProperties::MEDIAITEM_ID => $this->getIDScalarTypeResolver(),
             ],
             $this->addCustomPostInputField() ? [
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
@@ -54,7 +54,7 @@ abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver exten
     {
         return match ($inputFieldName) {
             MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post', 'custompostmedia-mutations'),
-            MutationInputProperties::MEDIA_ITEM_ID => $this->__('The ID of the image to set as featured', 'custompostmedia-mutations'),
+            MutationInputProperties::MEDIAITEM_ID => $this->__('The ID of the image to set as featured', 'custompostmedia-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -62,7 +62,7 @@ abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver exten
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::MEDIA_ITEM_ID,
+            MutationInputProperties::MEDIAITEM_ID,
             MutationInputProperties::CUSTOMPOST_ID
                 => SchemaTypeModifiers::MANDATORY,
             default

@@ -56,7 +56,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
+        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIAITEM_ID);
         $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $mediaItemID);
         return $customPostID;
     }
@@ -70,7 +70,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIA_ITEM_ID);
+        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::MEDIAITEM_ID);
         if ($mediaItemID === null) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
