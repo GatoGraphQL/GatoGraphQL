@@ -487,6 +487,7 @@ query ExportMutationInputs
   featuredImageMutationInput: _echo(value: {
     slug: $postFeaturedImageSlug
   })
+    @include(if: $postHasFeaturedImage)
     @export(as: "featuredImageMutationInput")
     @remove
 }
