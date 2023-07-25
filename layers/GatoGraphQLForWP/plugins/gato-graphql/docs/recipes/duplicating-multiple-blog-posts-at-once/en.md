@@ -54,7 +54,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     # Already create (and export) the inputs for the mutation
     postInput: _echo(value: {
       status: draft,
-      authorID: $__author,
+      authorBy: {
+        id: $__author
+      },
       categoriesBy: {
         ids: $__categories
       },
@@ -165,7 +167,9 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    authorID: $authorID,
+    authorBy: {
+      id: $authorID
+    },
     categoriesBy: {
       ids: $categoryIDs
     },
@@ -207,7 +211,9 @@ query GetPostAndExportData {
 
     postInput: _echo(value: {
       status: draft,
-      authorID: $__author,
+      authorBy: {
+        id: $__author
+      },
       categoriesBy: {
         ids: $__categories
       },
@@ -280,7 +286,9 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
 [
   {
     "status": "draft",
-    "authorID": "2",
+    "authorBy": {
+      "id": "2"
+    },
     "categoryIDs": [
       1
     ],
@@ -296,7 +304,9 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
   },
   {
     "status": "draft",
-    "authorID": "3",
+    "authorBy": {
+      "id": "3"
+    },
     "categoryIDs": [
       3
     ],
@@ -496,7 +506,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     # Already create (and export) the inputs for the mutation
     postInput: _echo(value: {
       status: draft,
-      authorID: $__author,
+      authorBy: {
+        id: $__author
+      },
       categoriesBy: {
         ids: $__categories
       },

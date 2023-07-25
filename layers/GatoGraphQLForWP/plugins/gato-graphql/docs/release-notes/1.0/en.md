@@ -1012,15 +1012,17 @@ The following fields were added to the GraphQL schema:
 
 For this reason, these fields, plus `CustomPost.rawContent` and `Comment.rawContent`, have been marked as a “sensitive” data elements.
 
-## Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
+## Mutations `createPost` and `updatePost` now have input `authorBy`, as a “sensitive” data element
 
-Mutations `createPost` and `updatePost` can now indicate the author of the post, via the `authorID` input:
+Mutations `createPost` and `updatePost` can now indicate the author of the post, via the `authorBy` input:
 
 ```graphql
 mutation UpdatePostAuthor {
   updatePost(input: {
     id: 1,
-    authorID: 3,
+    authorBy: {
+      id: 3
+    },
   }) {
     status
     post {
@@ -1032,11 +1034,17 @@ mutation UpdatePostAuthor {
 }
 ```
 
-Because modifying a post's author should be done by authorized users only, the `authorID` input has been set as a “sensitive” data element.
+Because modifying a post's author should be done by authorized users only, the `authorBy` input has been set as a “sensitive” data element.
 
 If we want to expose it always, we can also switch to treating it as a normal input, under tab "Custom Post User Mutations" in the Settings page:
 
 ![Settings for the Custom Post User Mutations module](../../images/releases/v1.0/settings-custompost-user-mutations.png)
+
+`authorBy` is a oneof input, allowing us to select the author by any of these properties:
+
+- ID
+- username
+- email
 
 ## Mutations setting tags and categories on custom posts can now receive IDs or slugs via a oneof input
 
@@ -1117,43 +1125,6 @@ We can now add value `any` to filter by custom post status. That means that inst
   }
 }
 ```
-
-## Converted input `authorID` to oneof `authorBy` input in custom post mutations
-
-Mutations `Root.createPost`, `Root.updatePost` and `Post.update` now receive the oneof input `authorBy` (instead of `authorID`) to set the custom post's author:
-
-```graphql
-mutation UpdateAuthor(
-  $postId: ID!
-  $userEmail: Email!
-) {
-  updatePost(input: {
-    id: $postId
-    authorBy: {
-      email: $userEmail
-    }
-  }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-    post {
-      author {
-        email
-      }
-    }
-  }
-}
-```
-
-This way, we can select the author by any of these properties:
-
-- ID
-- username
-- email
 
 ## The Settings page has been re-designed
 
@@ -1587,12 +1558,6 @@ The followng mutations must be updated, passing a "oneof" input object for the c
 - `Root.createPost`
 - `Root.updatePost`
 
-The followng mutations must be updated, passing a "oneof" input object for the author argument, from `authorID` to `authorBy: { id: ... }`:
-
-- `Post.update`
-- `Root.createPost`
-- `Root.updatePost`
-
 For instance, this GraphQL query:
 
 ```graphql
@@ -1600,7 +1565,6 @@ mutation CreatePost {
   createPost(input: {
     title: "New post"
     content: "New content"
-    authorID: 3
   }) {
     status
   }
@@ -1615,9 +1579,6 @@ mutation CreatePost {
     title: "New post"
     contentAs: {
       html: "New content"
-    }
-    authorBy: {
-      id: 3
     }
   }) {
     status

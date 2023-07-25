@@ -22,10 +22,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added field `CustomPost.wpAdminEditURL`
 - Added several "raw content" fields, made them all “sensitive”
 - Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
-- Mutations `createPost` and `updatePost` now have input `authorID`, as a “sensitive” data element
+- Mutations `createPost` and `updatePost` now have input `authorBy`, as a “sensitive” data element
 - Mutations setting tags and categories on custom posts can now receive IDs or slugs via a oneof input
 - Filter custom posts by `any` status
-- Converted input `authorID` to oneof `authorBy` input in custom post mutations
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
