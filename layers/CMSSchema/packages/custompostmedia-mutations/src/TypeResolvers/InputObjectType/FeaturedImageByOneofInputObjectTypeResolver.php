@@ -38,4 +38,16 @@ class FeaturedImageByOneofInputObjectTypeResolver extends MediaItemByOneofInputO
     {
         return false;
     }
+
+    protected function isOneOfInputPropertyNullable(
+        string $propertyName
+    ): bool {
+        return match ($propertyName) {
+            InputProperties::ID,
+            InputProperties::SLUG
+                => true,
+            default
+                => parent::isOneOfInputPropertyNullable($propertyName)
+        };
+    }
 }
