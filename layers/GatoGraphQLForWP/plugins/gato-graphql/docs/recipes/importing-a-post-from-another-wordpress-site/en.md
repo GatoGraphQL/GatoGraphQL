@@ -15,6 +15,8 @@ The resources referenced in the post must all exist:
 
 Slugs are used as the common ID between the upstream and local sites. If any of the resources does not exist in the local site, the GraphQL query prints an error and halts the process.
 
+Alternatively, we could have the GraphQL query also import each of the missing resources, but this depends on mutations to create users and categories, and upload media items, which are not part of the GraphQL schema yet (see issues [#2456](https://github.com/leoloso/PoP/issues/2456), [#2457](https://github.com/leoloso/PoP/issues/2457) and [#2458](https://github.com/leoloso/PoP/issues/2458)).
+
 ```graphql
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
