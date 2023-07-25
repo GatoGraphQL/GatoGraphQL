@@ -21,6 +21,7 @@ query InitializeDynamicVariables
   initVariablesWithNull: _echo(value: null)
     @export(as: "existingAuthorUsername")
     @export(as: "existingFeaturedImageSlug")
+    @export(as: "featuredImageMutationInput")
     @remove
 
   initVariablesWithEmptyArray: _echo(value: [])
@@ -448,10 +449,25 @@ query FailIfAnyResourceIsMissing
   createPost: _echo(value: null)
 }
 
+query ExportMutationInputs
+  @depends(on: "FailIfAnyResourceIsMissing")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $isAnyResourceMissing)
+{
+  featuredImageMutationInput: _echo(value: {
+    slug: $postFeaturedImageSlug
+  })
+    @export(as: "featuredImageMutationInput")
+    @remove
+}
+
 mutation ImportPost(
   $postSlug: String!
 )
-  @depends(on: "FailIfAnyResourceIsMissing")
+  @depends(on: "ExportMutationInputs")
   @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
   @skip(if: $responseHasErrors)
@@ -469,9 +485,7 @@ mutation ImportPost(
     authorBy: {
       username: $postAuthorUsername
     },
-    featuredImageBy: {
-      slug: $postFeaturedImageSlug
-    },
+    featuredImageBy: $featuredImageMutationInput,
     categoriesBy: {
       slugs: $postCategorySlugs
     },
