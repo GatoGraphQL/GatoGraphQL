@@ -16,6 +16,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use stdClass;
 
 class MutationResolverHookSet extends AbstractHookSet
 {
@@ -64,6 +65,7 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return;
         }
+        /** @var stdClass|null */
         $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
         if ($authorBy === null) {
             return;
@@ -116,8 +118,23 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return $customPostData;
         }
-        /** @var string|int */
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
+        $userTypeAPI = $this->getUserTypeAPI();
+        /** @var stdClass|null */
+        $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
+        if (isset($authorBy->id)) {
+            /** @var string|int */
+            $authorID = $authorBy->id;
+        } elseif (isset($authorBy->username)) {
+            /** @var string */
+            $authorUsername = $authorBy->username;
+            $user = $userTypeAPI->getUserByLogin($authorUsername);
+            $authorID = $userTypeAPI->getUserID($user);
+        } elseif (isset($authorBy->username)) {
+            /** @var string */
+            $authorEmail = $authorBy->email;
+            $user = $userTypeAPI->getUserByEmail($authorEmail);
+            $authorID = $userTypeAPI->getUserID($user);
+        }
         $customPostData['author-id'] = $authorID;
         return $customPostData;
     }
