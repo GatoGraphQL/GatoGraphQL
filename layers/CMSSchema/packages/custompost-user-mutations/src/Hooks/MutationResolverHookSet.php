@@ -69,6 +69,7 @@ class MutationResolverHookSet extends AbstractHookSet
             return;
         }
         if (isset($authorBy->id)) {
+            /** @var string|int */
             $authorID = $authorBy->id;
             $this->validateUserByIDExists(
                 $authorID,
@@ -76,14 +77,16 @@ class MutationResolverHookSet extends AbstractHookSet
                 $objectTypeFieldResolutionFeedbackStore,
             );
         } elseif (isset($authorBy->username)) {
-            $authorUsername = $authorBy->id;
+            /** @var string */
+            $authorUsername = $authorBy->username;
             $this->validateUserByUsernameExists(
                 $authorUsername,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         } elseif (isset($authorBy->username)) {
-            $authorEmail = $authorBy->id;
+            /** @var string */
+            $authorEmail = $authorBy->email;
             $this->validateUserByEmailExists(
                 $authorEmail,
                 $fieldDataAccessor,
