@@ -34,7 +34,7 @@ class AuthorByOneofInputObjectTypeResolver extends UserByOneofInputObjectTypeRes
     {
         return null;
     }
-    
+
     protected function isOneInputValueMandatory(): bool
     {
         return false;

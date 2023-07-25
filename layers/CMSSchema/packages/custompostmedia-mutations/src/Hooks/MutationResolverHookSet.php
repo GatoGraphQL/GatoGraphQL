@@ -127,7 +127,7 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        
+
         /**
          * @var stdClass|null
          */

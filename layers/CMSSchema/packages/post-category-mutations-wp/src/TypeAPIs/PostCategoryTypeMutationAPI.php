@@ -29,7 +29,7 @@ class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterfac
          * category IDs and not slugs:
          *
          *   > Hierarchical taxonomies must always pass IDs rather than names so that
-	     *   > children with the same names but different parents aren't confused.
+         *   > children with the same names but different parents aren't confused.
          *
          * @see wp-includes/post.php
          *

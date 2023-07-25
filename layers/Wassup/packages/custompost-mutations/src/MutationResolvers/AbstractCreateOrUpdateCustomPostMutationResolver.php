@@ -126,10 +126,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Upstream
             $errors[] = $this->__('The content cannot be empty', 'pop-application');
         }
 
-        if ($this->isFeaturedImageMandatory() && (
+        if (
+            $this->isFeaturedImageMandatory() && (
             empty($fieldDataAccessor->getValue(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_BY))
             || empty($fieldDataAccessor->getValue(CustomPostMediaMutationInputProperties::FEATUREDIMAGE_BY)->id)
-        )) {
+            )
+        ) {
             // @todo Migrate from string to FeedbackItemProvider
             // $objectTypeFieldResolutionFeedbackStore->addError(
             //     new ObjectTypeFieldResolutionFeedback(

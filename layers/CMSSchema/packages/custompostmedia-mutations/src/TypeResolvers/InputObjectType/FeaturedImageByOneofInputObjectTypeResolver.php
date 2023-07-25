@@ -33,7 +33,7 @@ class FeaturedImageByOneofInputObjectTypeResolver extends MediaItemByOneofInputO
     {
         return null;
     }
-    
+
     protected function isOneInputValueMandatory(): bool
     {
         return false;

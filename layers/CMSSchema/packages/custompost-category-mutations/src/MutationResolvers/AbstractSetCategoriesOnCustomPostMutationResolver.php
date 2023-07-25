@@ -90,13 +90,13 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        
+
         /** @var stdClass|null */
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         if ($categoriesBy === null || ((array) $categoriesBy) === []) {
             return $customPostID;
         }
-        
+
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             /** @var array<string|int> */

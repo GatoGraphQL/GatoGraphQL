@@ -100,7 +100,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
 
         if (isset($mediaItemBy->{InputProperties::ID})) {
             /** @var string|int */
-            $mediaItemID = $mediaItemBy->{InputProperties::ID};        
+            $mediaItemID = $mediaItemBy->{InputProperties::ID};
             $this->validateMediaItemByIDExists(
                 $mediaItemID,
                 $fieldDataAccessor,
@@ -108,7 +108,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             );
         } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
             /** @var string */
-            $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};        
+            $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
             $this->validateMediaItemBySlugExists(
                 $mediaItemSlug,
                 $fieldDataAccessor,
