@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomP
 use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostUserMutations\Module;
 use PoPCMSSchema\CustomPostUserMutations\ModuleConfiguration;
-use PoPCMSSchema\Users\TypeResolvers\InputObjectType\UserByOneofInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostUserMutations\TypeResolvers\InputObjectType\AuthorByOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -18,20 +18,20 @@ use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver = null;
+    private ?AuthorByOneofInputObjectTypeResolver $authorByOneofInputObjectTypeResolver = null;
 
-    final public function setUserByOneofInputObjectTypeResolver(UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver): void
+    final public function setAuthorByOneofInputObjectTypeResolver(AuthorByOneofInputObjectTypeResolver $authorByOneofInputObjectTypeResolver): void
     {
-        $this->userByOneofInputObjectTypeResolver = $userByOneofInputObjectTypeResolver;
+        $this->authorByOneofInputObjectTypeResolver = $authorByOneofInputObjectTypeResolver;
     }
-    final protected function getUserByOneofInputObjectTypeResolver(): UserByOneofInputObjectTypeResolver
+    final protected function getAuthorByOneofInputObjectTypeResolver(): AuthorByOneofInputObjectTypeResolver
     {
-        if ($this->userByOneofInputObjectTypeResolver === null) {
-            /** @var UserByOneofInputObjectTypeResolver */
-            $userByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(UserByOneofInputObjectTypeResolver::class);
-            $this->userByOneofInputObjectTypeResolver = $userByOneofInputObjectTypeResolver;
+        if ($this->authorByOneofInputObjectTypeResolver === null) {
+            /** @var AuthorByOneofInputObjectTypeResolver */
+            $authorByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(AuthorByOneofInputObjectTypeResolver::class);
+            $this->authorByOneofInputObjectTypeResolver = $authorByOneofInputObjectTypeResolver;
         }
-        return $this->userByOneofInputObjectTypeResolver;
+        return $this->authorByOneofInputObjectTypeResolver;
     }
 
     protected function init(): void
@@ -68,7 +68,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::AUTHOR_BY] = $this->getUserByOneofInputObjectTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::AUTHOR_BY] = $this->getAuthorByOneofInputObjectTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
