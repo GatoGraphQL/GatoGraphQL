@@ -59,11 +59,11 @@ These hooks receive the following parameters (in this same order):
 | 1 | ✅ | `$query` for `gato_graphql__execute_query`, or<br/><br/>`$persistedQueryIDOrSlug` for `gato_graphql__execute_persisted_query` | The GraphQL query to execute with `gato_graphql__execute_query`, or<br/><br/>The Persisted Query ID (as an int) or slug (as a string) for `gato_graphql__execute_persisted_query` |
 | 2 | ❌ | `$variables` | GraphQL variables |
 | 3 | ❌ | `$operationName` | The operation name to execute |
-| 4 | ❌ | `$executeAsUserID` | The user to log-in to execute the query |
+| 4 | ❌ | `$executeAsUser` | The user to log-in to execute the query |
 
-The `$executeAsUserID` parameter is needed if the query requires the user to be logged-in, such as when executing a mutation:
+The `$executeAsUser` parameter is needed if the query requires the user to be logged-in, such as when executing a mutation:
 
-- If provided, the user with given ID will be logged-in right before executing the GraphQL query, and logged-out immediately afterwards.
+- If provided, the user with given ID (as an int) or username (as a string) will be logged-in right before executing the GraphQL query, and logged-out immediately afterwards.
 - If not provided, no user will be logged-in when executing the query.
 
 ## Examples
