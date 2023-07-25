@@ -30,6 +30,7 @@ query InitializeDynamicVariables
     @export(as: "requestProducedErrors")
     @export(as: "responseHasErrors")
     @export(as: "postIsMissing")
+    @export(as: "postHasAuthor")
     @export(as: "postHasFeaturedImage")
     @export(as: "postHasCategories")
     @export(as: "postHasTags")
@@ -262,6 +263,12 @@ query ExportInputs
     @export(as: "postAuthorUsername")
     @remove
 
+  postHasAuthor: _notNull(
+    value: $__postAuthorUsername
+  )
+    @export(as: "postHasAuthor")
+    @remove
+
   postFeaturedImageSlug: _objectProperty(
     object: $__postData,
     by: { key: "featuredImage" }
@@ -354,7 +361,9 @@ query ExportExistingResources
   @skip(if: $responseHasErrors)
   @skip(if: $postIsMissing)
 {
-  existingAuthorByUsername: user(by: { username: $postAuthorUsername }) {
+  existingAuthorByUsername: user(by: { username: $postAuthorUsername })
+    @include(if: $postHasAuthor)
+  {
     id
     username @export(as: "existingAuthorUsername")
   }
