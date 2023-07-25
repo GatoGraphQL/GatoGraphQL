@@ -105,7 +105,15 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function hasProvidedAuthorInput(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        return $fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_BY);
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_BY)) {
+            return false;
+        }
+
+        /** @var stdClass|null */
+        $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
+        return isset($authorBy->{InputProperties::ID})
+            || isset($authorBy->{InputProperties::USERNAME})
+            || isset($authorBy->{InputProperties::USERNAME});
     }
 
     /**
