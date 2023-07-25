@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostUserMutations\TypeResolvers\ObjectType;
+namespace PoPCMSSchema\CustomPostUserMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Users\Constants\InputProperties;
 use PoPCMSSchema\Users\TypeResolvers\InputObjectType\UserByOneofInputObjectTypeResolver;
