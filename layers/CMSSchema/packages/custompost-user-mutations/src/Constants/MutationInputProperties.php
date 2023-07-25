@@ -6,5 +6,5 @@ namespace PoPCMSSchema\CustomPostUserMutations\Constants;
 
 class MutationInputProperties
 {
-    public final const AUTHOR_ID = 'authorID';
+    public final const AUTHOR_BY = 'authorBy';
 }

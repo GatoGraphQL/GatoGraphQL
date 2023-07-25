@@ -905,7 +905,7 @@ In order to enable or disable multi-field directives in the schema for some spec
 Prior to v1.0, the following mutation fields received a `content` argument of type `String`, to create/update the content on custom posts:
 
 - `Comment.reply`
-- `CustomPost.update`
+- `Post.update`
 - `Root.createPost`
 - `Root.updatePost`
 
@@ -1117,6 +1117,43 @@ We can now add value `any` to filter by custom post status. That means that inst
   }
 }
 ```
+
+## Converted input `authorID` to oneof `authorBy` input in custom post mutations
+
+Mutations `Root.createPost`, `Root.updatePost` and `Post.update` now receive the oneof input `authorBy` (instead of `authorID`) to set the custom post's author:
+
+```graphql
+mutation UpdateAuthor(
+  $postId: ID!
+  $userEmail: Email!
+) {
+  updatePost(input: {
+    id: $postId
+    authorBy: {
+      email: $userEmail
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      author {
+        email
+      }
+    }
+  }
+}
+```
+
+This way, we can select the author by any of these properties:
+
+- ID
+- username
+- email
 
 ## The Settings page has been re-designed
 
@@ -1541,16 +1578,20 @@ The plugin has upgraded its Symfony dependencies to the latest v6.3, which <a hr
 
 ### Must update mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others)
 
-The followng mutations:
+The followng mutations must be updated, passing a "oneof" input object for the content argument (either `content` or `comment`):
 
 - `Comment.reply`
 - `CustomPost.addComment`
-- `CustomPost.update`
+- `Post.update`
 - `Root.addCommentToCustomPost`
 - `Root.createPost`
 - `Root.updatePost`
 
-must be updated, passing a "oneof" input object for the content argument (either `content` or `comment`).
+The followng mutations must be updated, passing a "oneof" input object for the author argument, from `authorID` to `authorBy: { id: ... }`:
+
+- `Post.update`
+- `Root.createPost`
+- `Root.updatePost`
 
 For instance, this GraphQL query:
 
@@ -1559,6 +1600,7 @@ mutation CreatePost {
   createPost(input: {
     title: "New post"
     content: "New content"
+    authorID: 3
   }) {
     status
   }
@@ -1571,7 +1613,12 @@ must be transformed like this:
 mutation CreatePost {
   createPost(input: {
     title: "New post"
-    contentAs: { html: "New content" }
+    contentAs: {
+      html: "New content"
+    }
+    authorBy: {
+      id: 3
+    }
   }) {
     status
   }
