@@ -9,29 +9,29 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\UpdateCustomP
 use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostUserMutations\Module;
 use PoPCMSSchema\CustomPostUserMutations\ModuleConfiguration;
+use PoPCMSSchema\Users\TypeResolvers\InputObjectType\UserByOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
 {
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setUserByOneofInputObjectTypeResolver(UserByOneofInputObjectTypeResolver $userByOneofInputObjectTypeResolver): void
     {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->userByOneofInputObjectTypeResolver = $userByOneofInputObjectTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getUserByOneofInputObjectTypeResolver(): UserByOneofInputObjectTypeResolver
     {
-        if ($this->idScalarTypeResolver === null) {
-            /** @var IDScalarTypeResolver */
-            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        if ($this->userByOneofInputObjectTypeResolver === null) {
+            /** @var UserByOneofInputObjectTypeResolver */
+            $userByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(UserByOneofInputObjectTypeResolver::class);
+            $this->userByOneofInputObjectTypeResolver = $userByOneofInputObjectTypeResolver;
         }
-        return $this->idScalarTypeResolver;
+        return $this->userByOneofInputObjectTypeResolver;
     }
 
     protected function init(): void
@@ -68,7 +68,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::AUTHOR_BY] = $this->getIDScalarTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::AUTHOR_BY] = $this->getUserByOneofInputObjectTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
@@ -88,7 +88,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::AUTHOR_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The ID of the user', 'custompost-user-mutations');
+        return $this->__('The author of the custom post', 'custompost-user-mutations');
     }
 
     /**
