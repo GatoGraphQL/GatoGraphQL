@@ -209,13 +209,6 @@ query ExportInputs
     by: { path: "data.post" }
   ) @remove
 
-  # postSlug: _objectProperty(
-  #   object: $__postData,
-  #   by: { key: "slug" }
-  # )
-  #   @export(as: "postSlug")
-  #   @remove
-
   postTitle: _objectProperty(
     object: $__postData,
     by: { key: "rawTitle" }
