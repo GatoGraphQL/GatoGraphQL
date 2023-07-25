@@ -68,7 +68,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if (!$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldNameTypeResolvers;
         }
-        $inputFieldNameTypeResolvers[MutationInputProperties::AUTHOR_ID] = $this->getIDScalarTypeResolver();
+        $inputFieldNameTypeResolvers[MutationInputProperties::AUTHOR_BY] = $this->getIDScalarTypeResolver();
         return $inputFieldNameTypeResolvers;
     }
 
@@ -85,7 +85,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         string $inputFieldName,
     ): ?string {
         // Only for the newly added inputFieldName
-        if ($inputFieldName !== MutationInputProperties::AUTHOR_ID || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
+        if ($inputFieldName !== MutationInputProperties::AUTHOR_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
         return $this->__('The ID of the user', 'custompost-user-mutations');
@@ -106,7 +106,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatAuthorInputInCustomPostMutationAsSensitiveData()) {
-            $sensitiveInputFieldNames[] = MutationInputProperties::AUTHOR_ID;
+            $sensitiveInputFieldNames[] = MutationInputProperties::AUTHOR_BY;
         }
         return $sensitiveInputFieldNames;
     }

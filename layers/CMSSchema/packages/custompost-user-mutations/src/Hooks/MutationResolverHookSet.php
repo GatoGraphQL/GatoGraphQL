@@ -64,7 +64,7 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return;
         }
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
+        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
         if ($authorID === null) {
             return;
         }
@@ -82,7 +82,7 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function hasProvidedAuthorInput(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        return $fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_ID);
+        return $fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_BY);
     }
 
     /**
@@ -97,7 +97,7 @@ class MutationResolverHookSet extends AbstractHookSet
             return $customPostData;
         }
         /** @var string|int */
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
+        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
         $customPostData['author-id'] = $authorID;
         return $customPostData;
     }
