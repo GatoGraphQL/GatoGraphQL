@@ -108,8 +108,10 @@ class MutationResolverHookSet extends AbstractHookSet
     }
 
     /**
-     * Entry "featuredImageID" must either have an ID or `null` to execute
-     * the mutation. Only if not provided, then nothing to do.
+     * Entry "featuredImageBy" must either have the input with the
+     * ID or slug, or it must have `null` to execute the mutation.
+     * (i.e. remove the featured image).
+     * Only if not provided, then nothing to do.
      */
     protected function canExecuteMutation(
         FieldDataAccessorInterface $fieldDataAccessor,
