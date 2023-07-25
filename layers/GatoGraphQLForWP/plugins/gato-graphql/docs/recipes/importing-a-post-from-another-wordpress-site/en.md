@@ -279,7 +279,7 @@ query ExportInputs
 
   postCategorySlugs: _objectProperty(
     object: $__postData,
-    by: { key: "categorys" }
+    by: { key: "categories" }
   )
     @underEachArrayItem(
       passValueOnwardsAs: "category"
