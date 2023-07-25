@@ -17,8 +17,6 @@ The resources referenced in the post must all exist locally:
 
 Slugs are used as the common identifier for resources in the upstream and local sites. If any of the resources does not exist in the local site, the GraphQL query prints an error and halts the import.
 
-As an improvement, we can also have the GraphQL query automatically import each of the missing resources, but this depends on several mutations (to create users and categories, and upload media items) which are not part of the GraphQL schema yet (see issues [#2456](https://github.com/leoloso/PoP/issues/2456), [#2457](https://github.com/leoloso/PoP/issues/2457) and [#2458](https://github.com/leoloso/PoP/issues/2458)).
-
 ```graphql
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
@@ -615,3 +613,13 @@ This query:
 ```
 
 </div>
+
+## [WIP] Automatically importing missing resources
+
+The Gato GraphQL schema must be upgraded with mutations to:
+
+- Create/update users ([#2456](https://github.com/leoloso/PoP/issues/2456))
+- Create/update categories ([#2457](https://github.com/leoloso/PoP/issues/2457))
+- Upload media items, or import them from a URL ([#2458](https://github.com/leoloso/PoP/issues/2458))
+
+This is a work in progress. Once these mutations are supported, we can then have the GraphQL query automatically import each of the missing resources.
