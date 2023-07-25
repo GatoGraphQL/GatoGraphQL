@@ -175,7 +175,7 @@ query FailIfResponseHasErrors
   ) @remove
 
   _fail(
-    message: "Executing the GraphQL query produced error(s)"
+    message: "Executing the GraphQL query against the upstream webserver produced error(s)"
     data: {
       errors: $__errors
     }
