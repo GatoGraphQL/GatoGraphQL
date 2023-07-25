@@ -415,7 +415,7 @@ query FailIfAnyResourceIsMissing
   performingValidations: id
     @if(condition: $isAuthorMissing)
       @fail(
-        message: "Author is missing"
+        message: "Author is missing in local site"
         data: {
           authorUsername: $postAuthorUsername
         }
@@ -423,7 +423,7 @@ query FailIfAnyResourceIsMissing
       )
     @if(condition: $isFeaturedImageMissing)
       @fail(
-        message: "Featured image is missing"
+        message: "Featured image is missing in local site"
         data: {
           featuredImageSlug: $postFeaturedImageSlug
         }
@@ -431,7 +431,7 @@ query FailIfAnyResourceIsMissing
       )
     @if(condition: $areCategoriesMissing)
       @fail(
-        message: "Categories are missing"
+        message: "Categories are missing in local site"
         data: {
           categorySlugs: $missingCategorySlugs
         }
@@ -439,7 +439,7 @@ query FailIfAnyResourceIsMissing
       )
     @if(condition: $areTagsMissing)
       @fail(
-        message: "Tags are missing"
+        message: "Tags are missing in local site"
         data: {
           tagSlugs: $missingTagSlugs
         }
