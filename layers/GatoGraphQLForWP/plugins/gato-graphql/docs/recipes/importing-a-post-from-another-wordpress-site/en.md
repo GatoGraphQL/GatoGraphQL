@@ -30,6 +30,7 @@ query InitializeDynamicVariables
     @export(as: "requestProducedErrors")
     @export(as: "responseHasErrors")
     @export(as: "postIsMissing")
+    @export(as: "postHasFeaturedImage")
     @export(as: "postHasCategories")
     @export(as: "postHasTags")
     @remove
@@ -287,6 +288,12 @@ query ExportInputs
     @export(as: "postFeaturedImageSlug")
     @remove
 
+  postHasFeaturedImage: _notNull(
+    value: $__postFeaturedImageSlug
+  )
+    @export(as: "postHasFeaturedImage")
+    @remove
+
   postCategorySlugs: _objectProperty(
     object: $__postData,
     by: { key: "categories" }
@@ -352,7 +359,9 @@ query ExportExistingResources
     username @export(as: "existingAuthorUsername")
   }
 
-  existingFeaturedImageBySlug: mediaItem(by: { slug: $postFeaturedImageSlug }) {
+  existingFeaturedImageBySlug: mediaItem(by: { slug: $postFeaturedImageSlug })
+    @include(if: $postHasFeaturedImage)
+  {
     id
     slug @export(as: "existingFeaturedImageSlug")
   }
