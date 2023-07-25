@@ -347,7 +347,7 @@ query ExportExistingResources
     slug @export(as: "existingFeaturedImageSlug")
   }
 
-  existingCategoriesBySlug: categories(filter: { slugs: $postCategorySlugs })
+  existingCategoriesBySlug: postCategories(filter: { slugs: $postCategorySlugs })
     @include(if: $postHasCategories)
   {
     id
