@@ -1,5 +1,9 @@
 # Importing a post from another WordPress site
 
+This recipe demonstrates how we can import a post from another WordPress site, by connecting to its GraphQL endpoint, fetching the data, and importing it locally.
+
+(Not demonstrated here, but also possible is to connect to its WP REST API endpoints).
+
 ## When associated resources already exist
 
 Mention that the "slug" is the common ID between origin and local websites. Then, if the local website already has a post with that same slug, the process is halted.
