@@ -137,7 +137,6 @@ class MutationResolverHookSet extends AbstractHookSet
             $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
             return;
         }
-        $featuredImageID = null;
         if (isset($featuredImageBy->{InputProperties::ID})) {
             /** @var string|int */
             $featuredImageID = $featuredImageBy->{InputProperties::ID};
@@ -148,13 +147,7 @@ class MutationResolverHookSet extends AbstractHookSet
             $featuredImage = $mediaTypeAPI->getMediaItemBySlug($featuredImageSlug);
             $featuredImageID = $mediaTypeAPI->getMediaItemID($featuredImage);
         }
-        if ($featuredImageID === null) {
-            /**
-             * If is `null` => remove the featured image
-             */
-            $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
-            return;
-        }
+        /** @var string|int $featuredImageID */
         $this->getCustomPostMediaTypeMutationAPI()->setFeaturedImage($customPostID, $featuredImageID);
     }
 
