@@ -42,7 +42,7 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
-            ] => new FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload(
+            ] => new MediaItemDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
