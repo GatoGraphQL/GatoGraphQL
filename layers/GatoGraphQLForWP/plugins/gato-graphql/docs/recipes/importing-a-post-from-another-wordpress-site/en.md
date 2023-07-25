@@ -347,7 +347,7 @@ query ExportExistingResources
     slug @export(as: "existingFeaturedImageSlug")
   }
 
-  existingCategoriesBySlug: categories(filter: { slug: $postCategorySlugs })
+  existingCategoriesBySlug: categories(filter: { slugs: $postCategorySlugs })
     @include(if: $postHasCategories)
   {
     id
@@ -473,7 +473,7 @@ mutation ImportPost(
       slug: $postFeaturedImageSlug
     },
     categoriesBy: {
-      slug: $postCategorySlugs
+      slugs: $postCategorySlugs
     },
     tagsBy: {
       slugs: $postTagSlugs
