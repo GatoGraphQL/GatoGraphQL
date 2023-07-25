@@ -33,7 +33,7 @@ By default, the following data elements are treated as “sensitive” (they can
 
 **Custom Post Mutations:**
 
-- `authorID` input
+- `authorBy` input
 
 **Menu Items:**
 

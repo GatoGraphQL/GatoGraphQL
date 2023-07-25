@@ -49,6 +49,27 @@ query {
     title
     date
   }
+
+  mediaItemById: mediaItem(by: { id: 361 }) {
+    id
+    title
+    slug
+  }
+  mediaItemBySlug: mediaItem(by: { slug: "graphql-api-search-results" }) {
+    id
+    title
+    slug
+  }
+  nonExistingMediaItemById: mediaItem(by: { id: 88888 }) {
+    id
+    title
+    slug
+  }
+  nonExistingMediaItemBySlug: mediaItem(by: { slug: "non-existing" }) {
+    id
+    title
+    slug
+  }
 }
 
 fragment MediaItemData on Media {

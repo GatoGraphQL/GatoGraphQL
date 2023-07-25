@@ -246,6 +246,18 @@
                 "title": "graphql-api-header",
                 "date": "2022-05-25T05:13:32+00:00"
             }
-        ]
+        ],
+        "mediaItemById": {
+            "id": 361,
+            "title": "graphql-api-header",
+            "slug": "graphql-api-header"
+        },
+        "mediaItemBySlug": {
+            "id": 362,
+            "title": "graphql-api-search-results",
+            "slug": "graphql-api-search-results"
+        },
+        "nonExistingMediaItemById": null,
+        "nonExistingMediaItemBySlug": null
     }
 }

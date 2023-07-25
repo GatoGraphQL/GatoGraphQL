@@ -86,6 +86,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             $this->getTagTypeResolver()->getMaybeNamespacedTypeName()
         );
     }
-    
+
     abstract protected function getTagTypeResolver(): TagObjectTypeResolverInterface;
 }

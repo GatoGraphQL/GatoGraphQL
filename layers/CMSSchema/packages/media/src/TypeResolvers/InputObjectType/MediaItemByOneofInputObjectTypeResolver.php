@@ -4,16 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Media\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
+use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
 use PoP\ComponentModel\FilterInputs\FilterInputInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofQueryableInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPCMSSchema\Media\Constants\InputProperties;
 
 class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IncludeFilterInput $includeFilterInput = null;
+    private ?SlugFilterInput $slugFilterInput = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -28,6 +33,19 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
         }
         return $this->idScalarTypeResolver;
     }
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    {
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+    }
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    {
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        }
+        return $this->stringScalarTypeResolver;
+    }
     final public function setIncludeFilterInput(IncludeFilterInput $includeFilterInput): void
     {
         $this->includeFilterInput = $includeFilterInput;
@@ -40,6 +58,19 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
             $this->includeFilterInput = $includeFilterInput;
         }
         return $this->includeFilterInput;
+    }
+    final public function setSlugFilterInput(SlugFilterInput $slugFilterInput): void
+    {
+        $this->slugFilterInput = $slugFilterInput;
+    }
+    final protected function getSlugFilterInput(): SlugFilterInput
+    {
+        if ($this->slugFilterInput === null) {
+            /** @var SlugFilterInput */
+            $slugFilterInput = $this->instanceManager->getInstance(SlugFilterInput::class);
+            $this->slugFilterInput = $slugFilterInput;
+        }
+        return $this->slugFilterInput;
     }
 
     public function getTypeName(): string
@@ -58,14 +89,16 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'id' => $this->getIDScalarTypeResolver(),
+            InputProperties::ID => $this->getIDScalarTypeResolver(),
+            InputProperties::SLUG => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by media item ID', 'users'),
+            InputProperties::ID => $this->__('Query by media item ID', 'media'),
+            InputProperties::SLUG => $this->__('Query by media item slug', 'media'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -73,7 +106,8 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'id' => $this->getIncludeFilterInput(),
+            InputProperties::ID => $this->getIncludeFilterInput(),
+            InputProperties::SLUG => $this->getSlugFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

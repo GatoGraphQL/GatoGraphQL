@@ -54,7 +54,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     # Already create (and export) the inputs for the mutation
     postInput: _echo(value: {
       status: draft,
-      authorID: $__author,
+      authorBy: {
+        id: $__author
+      },
       categoriesBy: {
         ids: $__categories
       },
@@ -62,7 +64,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
         html: $__rawContent
       },
       excerpt: $__excerpt
-      featuredImageID: $__featuredImage,
+      featuredImageBy: {
+        id: $__featuredImage
+      },
       tagsBy: {
         ids: $__tags
       },
@@ -165,7 +169,9 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    authorID: $authorID,
+    authorBy: {
+      id: $authorID
+    },
     categoriesBy: {
       ids: $categoryIDs
     },
@@ -173,7 +179,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -207,7 +215,9 @@ query GetPostAndExportData {
 
     postInput: _echo(value: {
       status: draft,
-      authorID: $__author,
+      authorBy: {
+        id: $__author
+      },
       categoriesBy: {
         ids: $__categories
       },
@@ -215,7 +225,9 @@ query GetPostAndExportData {
         html: $__rawContent
       },
       excerpt: $__excerpt
-      featuredImageID: $__featuredImage,
+      featuredImageBy: {
+        id: $__featuredImage
+      },
       tagsBy: {
         ids: $__tags
       },
@@ -280,7 +292,9 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
 [
   {
     "status": "draft",
-    "authorID": "2",
+    "authorBy": {
+      "id": "2"
+    },
     "categoryIDs": [
       1
     ],
@@ -288,7 +302,9 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
       "html": "<!-- wp:paragraph -->\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n<!-- /wp:paragraph -->"
     },
     "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
-    "featuredImageID": null,
+    "featuredImageBy": {
+      "id": null
+    },
     "tagsBy": {
       "ids": []
     },
@@ -296,7 +312,9 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
   },
   {
     "status": "draft",
-    "authorID": "3",
+    "authorBy": {
+      "id": "3"
+    },
     "categoryIDs": [
       3
     ],
@@ -304,7 +322,9 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
       "html": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2>Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"id\":1755} -->\n<figure class=\"wp-block-image\"><img src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n<!-- /wp:image -->"
     },
     "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
-    "featuredImageID": 361,
+    "featuredImageBy": {
+      "id": 361
+    },
     "tagsBy": {
       "ids": [
         11,
@@ -496,7 +516,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     # Already create (and export) the inputs for the mutation
     postInput: _echo(value: {
       status: draft,
-      authorID: $__author,
+      authorBy: {
+        id: $__author
+      },
       categoriesBy: {
         ids: $__categories
       },
@@ -504,7 +526,9 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
         html: $__rawContent
       },
       excerpt: $__excerpt
-      featuredImageID: $__featuredImage,
+      featuredImageBy: {
+        id: $__featuredImage
+      },
       tagsBy: {
         ids: $__tags
       },

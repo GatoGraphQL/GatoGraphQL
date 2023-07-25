@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostUserMutations\ObjectModels\UserDoesNotExistErrorPayload;
+use PoPCMSSchema\Users\Constants\InputProperties;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -70,25 +71,25 @@ class MutationResolverHookSet extends AbstractHookSet
         if ($authorBy === null) {
             return;
         }
-        if (isset($authorBy->id)) {
+        if (isset($authorBy->{InputProperties::ID})) {
             /** @var string|int */
-            $authorID = $authorBy->id;
+            $authorID = $authorBy->{InputProperties::ID};
             $this->validateUserByIDExists(
                 $authorID,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-        } elseif (isset($authorBy->username)) {
+        } elseif (isset($authorBy->{InputProperties::USERNAME})) {
             /** @var string */
-            $authorUsername = $authorBy->username;
+            $authorUsername = $authorBy->{InputProperties::USERNAME};
             $this->validateUserByUsernameExists(
                 $authorUsername,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-        } elseif (isset($authorBy->email)) {
+        } elseif (isset($authorBy->{InputProperties::EMAIL})) {
             /** @var string */
-            $authorEmail = $authorBy->email;
+            $authorEmail = $authorBy->{InputProperties::EMAIL};
             $this->validateUserByEmailExists(
                 $authorEmail,
                 $fieldDataAccessor,
@@ -97,14 +98,18 @@ class MutationResolverHookSet extends AbstractHookSet
         }
     }
 
-    /**
-     * Entry "authorID" must either have an ID or `null` to execute
-     * the mutation. Only if not provided, then nothing to do.
-     */
     protected function hasProvidedAuthorInput(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): bool {
-        return $fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_BY);
+        if (!$fieldDataAccessor->hasValue(MutationInputProperties::AUTHOR_BY)) {
+            return false;
+        }
+
+        /** @var stdClass|null */
+        $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
+        return isset($authorBy->{InputProperties::ID})
+            || isset($authorBy->{InputProperties::USERNAME})
+            || isset($authorBy->{InputProperties::EMAIL});
     }
 
     /**
@@ -118,23 +123,27 @@ class MutationResolverHookSet extends AbstractHookSet
         if (!$this->hasProvidedAuthorInput($fieldDataAccessor)) {
             return $customPostData;
         }
+        $authorID = null;
         $userTypeAPI = $this->getUserTypeAPI();
         /** @var stdClass|null */
         $authorBy = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_BY);
-        if (isset($authorBy->id)) {
+        if (isset($authorBy->{InputProperties::ID})) {
             /** @var string|int */
-            $authorID = $authorBy->id;
-        } elseif (isset($authorBy->username)) {
+            $authorID = $authorBy->{InputProperties::ID};
+        } elseif (isset($authorBy->{InputProperties::USERNAME})) {
             /** @var string */
-            $authorUsername = $authorBy->username;
+            $authorUsername = $authorBy->{InputProperties::USERNAME};
+            /** @var object */
             $user = $userTypeAPI->getUserByLogin($authorUsername);
             $authorID = $userTypeAPI->getUserID($user);
-        } elseif (isset($authorBy->email)) {
+        } elseif (isset($authorBy->{InputProperties::EMAIL})) {
             /** @var string */
-            $authorEmail = $authorBy->email;
+            $authorEmail = $authorBy->{InputProperties::EMAIL};
+            /** @var object */
             $user = $userTypeAPI->getUserByEmail($authorEmail);
             $authorID = $userTypeAPI->getUserID($user);
         }
+        /** @var string|int $authorID */
         $customPostData['author-id'] = $authorID;
         return $customPostData;
     }

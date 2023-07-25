@@ -178,13 +178,30 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
     /**
      * Get the media item with provided ID or, if it doesn't exist, null
      */
-    public function getMediaItem(int|string $id): ?object
+    public function getMediaItemByID(int|string $id): ?object
     {
         $post = get_post((int)$id);
         if ($post === null || $post->post_type !== 'attachment') {
             return null;
         }
         return $post;
+    }
+
+    /**
+     * Get the media item with provided slug or, if it doesn't exist, null
+     */
+    public function getMediaItemBySlug(string $slug): ?object
+    {
+        $posts = get_posts([
+            'name'           => $slug,
+            'post_type'      => 'attachment',
+            // 'post_status'    => 'publish',
+            'posts_per_page' => 1,
+        ]);
+        if ($posts === []) {
+            return null;
+        }
+        return $posts[0];
     }
 
     /**
@@ -197,9 +214,14 @@ class MediaTypeAPI extends AbstractCustomPostTypeAPI implements MediaTypeAPIInte
         return $this->getCustomPosts($query, $options);
     }
 
-    public function mediaItemExists(int|string $id): bool
+    public function mediaItemByIDExists(int|string $id): bool
     {
-        return $this->getMediaItem($id) !== null;
+        return $this->getMediaItemByID($id) !== null;
+    }
+
+    public function mediaItemBySlugExists(string $slug): bool
+    {
+        return $this->getMediaItemBySlug($slug) !== null;
     }
 
     /**

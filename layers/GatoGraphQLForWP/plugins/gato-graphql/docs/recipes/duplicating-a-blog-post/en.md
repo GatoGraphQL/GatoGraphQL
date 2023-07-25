@@ -61,7 +61,9 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    authorID: $authorID,
+    authorBy: {
+      id: $authorID
+    },
     categoriesBy: {
       ids: $categoryIDs
     },
@@ -69,7 +71,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -234,7 +238,9 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    authorID: $authorID,
+    authorBy: {
+      id: $authorID
+    },
     categoriesBy: {
       ids: $categoryIDs
     },
@@ -242,7 +248,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -498,7 +506,9 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    authorID: $authorID,
+    authorBy: {
+      id: $authorID
+    },
     categoriesBy: {
       ids: $categoryIDs
     },
@@ -506,7 +516,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -708,7 +720,9 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    authorID: $authorID,
+    authorBy: {
+      id: $authorID
+    },
     categoriesBy: {
       ids: $categoryIDs
     },
@@ -716,7 +730,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },
@@ -853,7 +869,9 @@ mutation DuplicatePost
 {
   createPost(input: {
     status: draft,
-    authorID: $authorID,
+    authorBy: {
+      id: $authorID
+    },
     categoriesBy: {
       ids: $categoryIDs
     },
@@ -861,7 +879,9 @@ mutation DuplicatePost
       html: $rawContent
     },
     excerpt: $excerpt
-    featuredImageID: $featuredImageID,
+    featuredImageBy: {
+      id: $featuredImageID
+    },
     tagsBy: {
       ids: $tagIDs
     },

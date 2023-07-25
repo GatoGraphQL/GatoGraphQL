@@ -13,24 +13,12 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 trait SetFeaturedImageOnCustomPostMutationResolverTrait
 {
-    public function validateMediaItemExists(
-        string|int|null $mediaItemID,
+    protected function validateMediaItemByIDExists(
+        string|int $mediaItemID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if ($mediaItemID === null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E1,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return;
-        }
-        if (!$this->getMediaTypeAPI()->mediaItemExists($mediaItemID)) {
+        if (!$this->getMediaTypeAPI()->mediaItemByIDExists($mediaItemID)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -38,6 +26,27 @@ trait SetFeaturedImageOnCustomPostMutationResolverTrait
                         MutationErrorFeedbackItemProvider::E2,
                         [
                             $mediaItemID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateMediaItemBySlugExists(
+        string $mediaItemSlug,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!$this->getMediaTypeAPI()->mediaItemBySlugExists($mediaItemSlug)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E5,
+                        [
+                            $mediaItemSlug,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
