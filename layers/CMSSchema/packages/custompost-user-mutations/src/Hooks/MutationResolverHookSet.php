@@ -86,7 +86,7 @@ class MutationResolverHookSet extends AbstractHookSet
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-        } elseif (isset($authorBy->username)) {
+        } elseif (isset($authorBy->email)) {
             /** @var string */
             $authorEmail = $authorBy->email;
             $this->validateUserByEmailExists(
@@ -129,7 +129,7 @@ class MutationResolverHookSet extends AbstractHookSet
             $authorUsername = $authorBy->username;
             $user = $userTypeAPI->getUserByLogin($authorUsername);
             $authorID = $userTypeAPI->getUserID($user);
-        } elseif (isset($authorBy->username)) {
+        } elseif (isset($authorBy->email)) {
             /** @var string */
             $authorEmail = $authorBy->email;
             $user = $userTypeAPI->getUserByEmail($authorEmail);
