@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
+use PoPCMSSchema\Users\Constants\InputProperties;
 use PoPCMSSchema\Users\FilterInputs\EmailFilterInput;
 use PoPCMSSchema\Users\FilterInputs\UsernameFilterInput;
 use PoPCMSSchema\Users\Module;
@@ -121,9 +122,9 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'id' => $this->getIDScalarTypeResolver(),
-            'username' => $this->getStringScalarTypeResolver(),
-            'email' => $this->getEmailScalarTypeResolver(),
+            InputProperties::ID => $this->getIDScalarTypeResolver(),
+            InputProperties::USERNAME => $this->getStringScalarTypeResolver(),
+            InputProperties::EMAIL => $this->getEmailScalarTypeResolver(),
         ];
     }
 
@@ -136,7 +137,7 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->treatUserEmailAsSensitiveData()) {
-            $sensitiveInputFieldNames[] = 'email';
+            $sensitiveInputFieldNames[] = InputProperties::EMAIL;
         }
         return $sensitiveInputFieldNames;
     }
@@ -144,9 +145,9 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by user ID', 'users'),
-            'username' => $this->__('Query by username', 'users'),
-            'email' => $this->__('Query by email', 'users'),
+            InputProperties::ID => $this->__('Query by user ID', 'users'),
+            InputProperties::USERNAME => $this->__('Query by username', 'users'),
+            InputProperties::EMAIL => $this->__('Query by email', 'users'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -154,9 +155,9 @@ class UserByOneofInputObjectTypeResolver extends AbstractOneofQueryableInputObje
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'id' => $this->getIncludeFilterInput(),
-            'username' => $this->getUsernameFilterInput(),
-            'email' => $this->getEmailFilterInput(),
+            InputProperties::ID => $this->getIncludeFilterInput(),
+            InputProperties::USERNAME => $this->getUsernameFilterInput(),
+            InputProperties::EMAIL => $this->getEmailFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }
