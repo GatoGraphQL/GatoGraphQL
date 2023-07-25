@@ -575,16 +575,22 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'importing-a-post-from-another-site',
-                \__('Importing a post from another site', 'gato-graphql'),
-            ],
-            [
-                'importing-multiple-posts-at-once-from-another-site',
-                \__('Importing multiple posts at once from another site', 'gato-graphql'),
-            ],
-            [
-                'synchronizing-content-across-wordpress-sites',
-                \__('Synchronizing content across WordPress sites', 'gato-graphql'),
+                'importing-a-post-from-another-wordpress-site',
+                \__('Importing a post from another WordPress site', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
             ],
             [
                 'reverting-mutations-in-case-of-error',
