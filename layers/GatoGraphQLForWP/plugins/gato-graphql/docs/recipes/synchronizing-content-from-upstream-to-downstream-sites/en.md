@@ -54,26 +54,22 @@ query GetAllDownstreamDomains
     @export(as: "downstreamDomains")
 }
 
-query FailIfPostAlreadyExistsLocally($postSlug: String!)
-  @depends(on: "CheckIfPostExistsLocally")
-  @include(if: $postAlreadyExists)
+############################################################
+# Attach "/graphql" to the domain, to point to that site's
+# GraphQL single endpoint
+############################################################
+query ExportDownstreamDomainGraphQLEndpoints
+  @depends(on: "GetAllDownstreamDomains")
 {
-  errorMessage: _sprintf(
-    string: "Post with slug '%s' already exists locally",
-    values: [$postSlug]
-  ) @remove
-
-  _fail(
-    message: $__errorMessage
-    data: {
-      slug: $postSlug
-    }
-  ) @remove
-
-  createPost: _echo(value: null)
+  downstreamDomainGraphQLEndpoints: _echo(value: $downstreamDomains)
+    @underEachArrayItem(
+      passValueOnwardsAs: "domain"
+    )
+      @strAppend(string: "/graphql")
+    @export(as: "downstreamDomainGraphQLEndpoints")
 }
 
-query ConnectToGraphQLAPI(
+query ConnectToDownstreamDomains(
   $upstreamServerGraphQLEndpointURL: String!
   $postSlug: String!
 )
