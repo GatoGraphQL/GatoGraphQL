@@ -58,22 +58,22 @@ query GetAllDownstreamDomains
 # Attach "/graphql" to the domain, to point to that site's
 # GraphQL single endpoint
 ############################################################
-query ExportDownstreamDomainGraphQLEndpoints
+query ExportDownstreamGraphQLEndpoints
   @depends(on: "GetAllDownstreamDomains")
 {
-  downstreamDomainGraphQLEndpoints: _echo(value: $downstreamDomains)
+  downstreamGraphQLEndpoints: _echo(value: $downstreamDomains)
     @underEachArrayItem(
       passValueOnwardsAs: "domain"
     )
       @strAppend(string: "/graphql")
-    @export(as: "downstreamDomainGraphQLEndpoints")
+    @export(as: "downstreamGraphQLEndpoints")
 }
 
 query ConnectToDownstreamDomains(
   $upstreamServerGraphQLEndpointURL: String!
   $postSlug: String!
 )
-  @depends(on: "FailIfPostAlreadyExistsLocally")
+  @depends(on: "ExportDownstreamGraphQLEndpoints")
   @skip(if: $postAlreadyExists)
 {
   externalData: _sendGraphQLHTTPRequest(input:{
