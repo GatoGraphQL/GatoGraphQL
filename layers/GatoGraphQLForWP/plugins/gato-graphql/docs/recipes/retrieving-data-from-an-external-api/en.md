@@ -419,103 +419,7 @@ Passing these variables:
       "permalink_template": "https://mysite.com/%postname%/",
       "generated_slug": "hello-world",
       "_links": {
-        "self": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "collection": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts"
-          }
-        ],
-        "about": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/types/post"
-          }
-        ],
-        "author": [
-          {
-            "embeddable": true,
-            "href": "https://mysite.com/wp-json/wp/v2/users/2"
-          }
-        ],
-        "replies": [
-          {
-            "embeddable": true,
-            "href": "https://mysite.com/wp-json/wp/v2/comments?post=1"
-          }
-        ],
-        "version-history": [
-          {
-            "count": 0,
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1/revisions"
-          }
-        ],
-        "wp:attachment": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/media?parent=1"
-          }
-        ],
-        "wp:term": [
-          {
-            "taxonomy": "category",
-            "embeddable": true,
-            "href": "https://mysite.com/wp-json/wp/v2/categories?post=1"
-          },
-          {
-            "taxonomy": "post_tag",
-            "embeddable": true,
-            "href": "https://mysite.com/wp-json/wp/v2/tags?post=1"
-          }
-        ],
-        "wp:action-publish": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "wp:action-unfiltered-html": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "wp:action-sticky": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "wp:action-assign-author": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "wp:action-create-categories": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "wp:action-assign-categories": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "wp:action-create-tags": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "wp:action-assign-tags": [
-          {
-            "href": "https://mysite.com/wp-json/wp/v2/posts/1"
-          }
-        ],
-        "curies": [
-          {
-            "name": "wp",
-            "href": "https://api.w.org/{rel}",
-            "templated": true
-          }
-        ]
+        // ...
       }
     }
   }
@@ -618,6 +522,45 @@ Passing these `variables`:
   }
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+If we must execute the same HTTP request repeatedly, we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
+
+When executing this query twice within a span of 10 seconds (as indicated via argument `@cache(time:)`), the second time will retrieve the cached result; this will make it faster, as it will not connect to the external host:
+
+```graphql
+query ConnectToGitHub($authorizationToken: String!)
+{
+  _sendGraphQLHTTPRequest(input:{
+    endpoint: "https://api.github.com/graphql",
+    query: """    
+{
+  repositoryOwner(login: "leoloso") {
+    url
+  }
+}
+    """,
+    options: {
+      auth: {
+        password: $authorizationToken
+      }
+    }
+  })
+    # Cache the response to disk, indicating for how many seconds
+    @cache(time: 10)
+}
+```
+
+The `@cache` directive:
+
+- Works with any of the fields returning a JSON response, including `_sendJSONObjectItemHTTPRequest` and `_sendGraphQLHTTPRequest`
+- Is independent (i.e. it does not care about the logic of the fields where it is applied), hence it works whether the HTTP request method is `GET` or `POST`
+- It does not work with `_sendHTTPRequest`, as the `HTTPResponse` object it returns is a "transient" object (i.e. it is not stored in the WordPress database), that only lives during the current request
+
+</div>
 
 ## Fetching data from multiple URLs
 
