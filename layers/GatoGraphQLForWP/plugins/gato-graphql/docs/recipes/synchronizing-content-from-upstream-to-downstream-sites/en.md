@@ -69,39 +69,35 @@ query ExportDownstreamGraphQLEndpoints
     @export(as: "downstreamGraphQLEndpoints")
 }
 
-query ConnectToDownstreamDomains(
+query ConnectToDownstreamGraphQLEndpoints(
   $upstreamServerGraphQLEndpointURL: String!
   $postSlug: String!
+  $newPostContent: String!
 )
   @depends(on: "ExportDownstreamGraphQLEndpoints")
-  @skip(if: $postAlreadyExists)
 {
-  externalData: _sendGraphQLHTTPRequest(input:{
+  externalData: _sendGraphQLHTTPRequest(input: {
     endpoint: $upstreamServerGraphQLEndpointURL,
     query: """
     
-query GetPost($postSlug: String!) {
-  post(by: { slug: $postSlug }) {
-    id
-    slug
-    rawTitle
-    rawContent
-    rawExcerpt
-    author {
-      id
-      username
+query UpdatePost(
+  $postSlug: String!
+  $postContent: String!
+) {
+  updatePost(input: {
+    id: $postId,
+    contentAs: { html: $postContent },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
     }
-    featuredImage {
-      id
+    post {
       slug
-    }
-    categories {
-      id
-      slug
-    }
-    tags {
-      id
-      slug
+      rawContent
     }
   }
 }
@@ -122,7 +118,7 @@ query GetPost($postSlug: String!) {
 }
 
 query ValidateResponse
-  @depends(on: "ConnectToGraphQLAPI")
+  @depends(on: "ConnectToDownstreamGraphQLEndpoints")
   @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
 {
