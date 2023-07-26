@@ -44,6 +44,7 @@ query InitializeDynamicVariables
   initVariablesWithFalse: _echo(value: false)
     @export(as: "requestProducedErrors")
     @export(as: "anyErrorProduced")
+    @export(as: "hasDownstreamDomains")
     @remove
 }
 
