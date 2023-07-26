@@ -63,6 +63,10 @@ query GetCustomDownstreamDomains($postSlug: String!)
     hasDefinedCustomDownstreamDomains: _notNull(value: $__customDownstreamDomains)
       @export(as: "hasDefinedCustomDownstreamDomains")
       @remove
+
+    hasCustomDownstreamDomains: _notEmpty(value: $__customDownstreamDomains)
+      @export(as: "hasDownstreamDomains")
+      @remove
   }
 
   isMissingPostInUpstream: _isNull(value: $__post)
@@ -76,6 +80,10 @@ query GetAllDownstreamDomains
 {
   allDownstreamDomains: optionValues(name: "downstreamDomains")
     @export(as: "downstreamDomains")
+
+  hasAllDownstreamDomains: _notEmpty(value: $__allDownstreamDomains)
+    @export(as: "hasDownstreamDomains")
+    @remove
 }
 
 ############################################################
@@ -85,6 +93,7 @@ query GetAllDownstreamDomains
 query ExportDownstreamGraphQLEndpointsAndQuery
   @depends(on: "GetAllDownstreamDomains")
   @skip(if: $isMissingPostInUpstream)
+  @include(if: $hasDownstreamDomains)
 {
   downstreamGraphQLEndpoints: _echo(value: $downstreamDomains)
     @underEachArrayItem(
@@ -136,6 +145,7 @@ query ExportSendGraphQLHTTPRequestInputs(
 )
   @depends(on: "ExportDownstreamGraphQLEndpointsAndQuery")
   @skip(if: $isMissingPostInUpstream)
+  @include(if: $hasDownstreamDomains)
 {
   sendGraphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
     @underEachArrayItem(
@@ -168,6 +178,7 @@ query ExportSendGraphQLHTTPRequestInputs(
 query SendGraphQLHTTPRequests
   @depends(on: "ExportSendGraphQLHTTPRequestInputs")
   @skip(if: $isMissingPostInUpstream)
+  @include(if: $hasDownstreamDomains)
 {
   downstreamGraphQLResponses: _sendGraphQLHTTPRequests(
     inputs: $sendGraphQLHTTPRequestInputs
@@ -184,6 +195,7 @@ query ExportGraphQLResponsesHaveErrors
   @depends(on: "SendGraphQLHTTPRequests")
   @skip(if: $isMissingPostInUpstream)
   @skip(if: $requestProducedErrors)
+  @include(if: $hasDownstreamDomains)
 {
   graphQLResponsesHaveErrors: _echo(value: $downstreamGraphQLResponses)    
     # Check if any GraphQL response has the "errors" entry
@@ -209,6 +221,7 @@ query ValidateGraphQLResponsesHaveErrors
   @depends(on: "ExportGraphQLResponsesHaveErrors")
   @skip(if: $isMissingPostInUpstream)
   @skip(if: $requestProducedErrors)
+  @include(if: $hasDownstreamDomains)
 {
   anyGraphQLResponseHasErrors: _or(values: $graphQLResponsesHaveErrors)
     @export(as: "anyErrorProduced")
@@ -220,6 +233,7 @@ query ExportRevertGraphQLHTTPRequestInputs(
   $previousPostContent: String!
 )
   @depends(on: "ValidateGraphQLResponsesHaveErrors")
+  @include(if: $hasDownstreamDomains)
   @include(if: $anyErrorProduced)
 {
   revertGraphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
@@ -253,6 +267,7 @@ query ExportRevertGraphQLHTTPRequestInputs(
 query RevertGraphQLHTTPRequests
   @depends(on: "ExportRevertGraphQLHTTPRequestInputs")
   @skip(if: $isMissingPostInUpstream)
+  @include(if: $hasDownstreamDomains)
   @include(if: $anyErrorProduced)
 {
   revertGraphQLResponses: _sendGraphQLHTTPRequests(
