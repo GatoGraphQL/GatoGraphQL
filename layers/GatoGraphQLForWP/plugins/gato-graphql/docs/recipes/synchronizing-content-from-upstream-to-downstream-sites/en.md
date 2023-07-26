@@ -11,15 +11,553 @@ This recipe will demonstrate how to implement this architecture, with the upstre
 
 ## GraphQL query to synchronize content from upstream to downstream sites
 
-The GraphQL query below (which is executed on the upstream WordPress site, triggered by the `post_updated` WordPress hook) does the following:
+The GraphQL query below is triggered by the `post_updated` WordPress hook on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites.
+
+(To also add the other properties -tags, categories, author and featured image- check out the previous recipe.)
+
+It does the following:
 
 - It retrieves the content from the updated post
-- It retrieves the meta property `"downstreams"`, which is an array containing the domains of all the downstream sites to distribute the content to; if this item is null, it synchronizes to all sites, provided by option `"downstreams"`
-- It executes an `updatePost` mutation on each of the downstream sites
-- If any downstream site produced an error, the mutation is reverted on all downstreams
+- It retrieves the meta property `"downstreams"`, which is an array containing the domains of the downstream domains which are suitable for that post
+- If the meta property does not exist, it then retrieves option `"downstreams"`, which contains the list of all the downstream domains
+- It executes an `updatePost` mutation on each of the downstream sites, passing the updated content
+- If any downstream site produces an error, the mutation is reverted on all downstreams
 
 ```graphql
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  initVariablesWithFalse: _echo(value: false)
+    @export(as: "requestProducedErrors")
+    @export(as: "responseHasErrors")
+    @export(as: "postIsMissing")
+    @export(as: "postHasAuthor")
+    @export(as: "postHasFeaturedImage")
+    @export(as: "postHasCategories")
+    @export(as: "postHasTags")
+    @remove
 
+  initVariablesWithNull: _echo(value: null)
+    @export(as: "existingAuthorUsername")
+    @export(as: "existingFeaturedImageSlug")
+    @export(as: "featuredImageMutationInput")
+    @remove
+
+  initVariablesWithEmptyArray: _echo(value: [])
+    @export(as: "existingCategorySlugs")
+    @export(as: "existingTagSlugs")
+    @remove
+}
+
+query CheckIfPostExistsLocally($postSlug: String!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  localPost: post(
+    by: { slug: $postSlug }
+    status: any
+  ) {
+    id
+  }
+
+  postAlreadyExists: _notNull(value: $__localPost)
+    @export(as: "postAlreadyExists")
+}
+
+query FailIfPostAlreadyExistsLocally($postSlug: String!)
+  @depends(on: "CheckIfPostExistsLocally")
+  @include(if: $postAlreadyExists)
+{
+  errorMessage: _sprintf(
+    string: "Post with slug '%s' already exists locally",
+    values: [$postSlug]
+  ) @remove
+
+  _fail(
+    message: $__errorMessage
+    data: {
+      slug: $postSlug
+    }
+  ) @remove
+
+  createPost: _echo(value: null)
+}
+
+query ConnectToGraphQLAPI(
+  $upstreamServerGraphQLEndpointURL: String!
+  $postSlug: String!
+)
+  @depends(on: "FailIfPostAlreadyExistsLocally")
+  @skip(if: $postAlreadyExists)
+{
+  externalData: _sendGraphQLHTTPRequest(input:{
+    endpoint: $upstreamServerGraphQLEndpointURL,
+    query: """
+    
+query GetPost($postSlug: String!) {
+  post(by: { slug: $postSlug }) {
+    id
+    slug
+    rawTitle
+    rawContent
+    rawExcerpt
+    author {
+      id
+      username
+    }
+    featuredImage {
+      id
+      slug
+    }
+    categories {
+      id
+      slug
+    }
+    tags {
+      id
+      slug
+    }
+  }
+}
+
+    """,
+    variables: [
+      {
+        name: "postSlug",
+        value: $postSlug
+      }
+    ]
+  })
+    @export(as: "externalData")
+
+  requestProducedErrors: _isNull(value: $__externalData)
+    @export(as: "requestProducedErrors")
+    @remove
+}
+
+query ValidateResponse
+  @depends(on: "ConnectToGraphQLAPI")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+{
+  responseHasErrors: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      key: "errors"
+    }
+  )
+    @export(as: "responseHasErrors")
+    @remove
+
+  postExists: _propertyIsSetInJSONObject(
+    object: $externalData
+    by: {
+      path: "data.post"
+    }
+  )
+    @remove
+    
+  postIsMissing: _not(value: $__postExists)
+    @export(as: "postIsMissing")
+    @remove
+}
+
+query FailIfResponseHasErrors
+  @depends(on: "ValidateResponse")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @include(if: $responseHasErrors)
+{
+  errors: _objectProperty(
+    object: $externalData,
+    by: {
+      key: "errors"
+    }
+  ) @remove
+
+  _fail(
+    message: "Executing the GraphQL query against the upstream webserver produced error(s)"
+    data: {
+      errors: $__errors
+    }
+  ) @remove
+
+  createPost: _echo(value: null)
+}
+
+query FailIfPostNotExists($postSlug: String!)
+  @depends(on: "FailIfResponseHasErrors")
+  @skip(if: $requestProducedErrors)
+  @include(if: $postIsMissing)
+{
+  errorMessage: _sprintf(
+    string: "There is no post with slug '%s' in the origin",
+    values: [$postSlug]
+  ) @remove
+
+  _fail(
+    message: $__errorMessage
+    data: {
+      slug: $postSlug
+    }
+  ) @remove
+  
+  createPost: _echo(value: null)
+}
+
+query ExportInputs
+  @depends(on: "FailIfPostNotExists")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+{
+  postData: _objectProperty(
+    object: $externalData,
+    by: { path: "data.post" }
+  ) @remove
+
+  postTitle: _objectProperty(
+    object: $__postData,
+    by: { key: "rawTitle" }
+  )
+    @export(as: "postTitle")
+    @remove
+
+  postContent: _objectProperty(
+    object: $__postData,
+    by: { key: "rawContent" }
+  )
+    @export(as: "postContent")
+    @remove
+
+  postExcerpt: _objectProperty(
+    object: $__postData,
+    by: { key: "rawExcerpt" }
+  )
+    @export(as: "postExcerpt")
+    @remove
+
+  postAuthorUsername: _objectProperty(
+    object: $__postData,
+    by: { key: "author" }
+  )
+    @passOnwards(
+      as: "author"
+    )
+    @applyField(
+      name: "_notNull",
+      arguments: {
+        value: $author
+      },
+      passOnwardsAs: "hasAuthor"
+    )
+    @if(condition: $hasAuthor)
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $author,
+          by: { key: "username" }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "postAuthorUsername")
+    @remove
+
+  postHasAuthor: _notNull(
+    value: $__postAuthorUsername
+  )
+    @export(as: "postHasAuthor")
+    @remove
+
+  postFeaturedImageSlug: _objectProperty(
+    object: $__postData,
+    by: { key: "featuredImage" }
+  )
+    @passOnwards(
+      as: "featuredImage"
+    )
+    @applyField(
+      name: "_notNull",
+      arguments: {
+        value: $featuredImage
+      },
+      passOnwardsAs: "hasFeaturedImage"
+    )
+    @if(condition: $hasFeaturedImage)
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $featuredImage,
+          by: { key: "slug" }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "postFeaturedImageSlug")
+    @remove
+
+  postHasFeaturedImage: _notNull(
+    value: $__postFeaturedImageSlug
+  )
+    @export(as: "postHasFeaturedImage")
+    @remove
+
+  postCategorySlugs: _objectProperty(
+    object: $__postData,
+    by: { key: "categories" }
+  )
+    @underEachArrayItem(
+      passValueOnwardsAs: "category"
+    )
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $category,
+          by: {
+            key: "slug"
+          }
+        }
+        setResultInResponse: true
+      )
+    @export(as: "postCategorySlugs")
+    @remove
+
+  postHasCategories: _notEmpty(
+    value: $__postCategorySlugs
+  )
+    @export(as: "postHasCategories")
+    @remove
+
+  postTagSlugs: _objectProperty(
+    object: $__postData,
+    by: { key: "tags" }
+  )
+    @underEachArrayItem(
+      passValueOnwardsAs: "tag"
+    )
+      @applyField(
+        name: "_objectProperty"
+        arguments: {
+          object: $tag,
+          by: {
+            key: "slug"
+          }
+        }
+        setResultInResponse: true
+      )
+    @export(as: "postTagSlugs")
+    @remove
+
+  postHasTags: _notEmpty(
+    value: $__postTagSlugs
+  )
+    @export(as: "postHasTags")
+    @remove
+}
+
+query ExportExistingResources
+  @depends(on: "ExportInputs")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+{
+  existingAuthorByUsername: user(by: { username: $postAuthorUsername })
+    @include(if: $postHasAuthor)
+  {
+    id
+    username @export(as: "existingAuthorUsername")
+  }
+
+  existingFeaturedImageBySlug: mediaItem(by: { slug: $postFeaturedImageSlug })
+    @include(if: $postHasFeaturedImage)
+  {
+    id
+    slug @export(as: "existingFeaturedImageSlug")
+  }
+
+  existingCategoriesBySlug: postCategories(filter: { slugs: $postCategorySlugs })
+    @include(if: $postHasCategories)
+  {
+    id
+    slug @export(as: "existingCategorySlugs", type: LIST)
+  }
+
+  existingTagsBySlug: postTags(filter: { slugs: $postTagSlugs })
+    @include(if: $postHasTags)
+  {
+    id
+    slug @export(as: "existingTagSlugs", type: LIST)
+  }
+}
+
+query ExportMissingResources
+  @depends(on: "ExportExistingResources")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+{
+  isAuthorMissing: _notEquals(
+    value1: $postAuthorUsername,
+    value2: $existingAuthorUsername
+  ) @export(as: "isAuthorMissing")
+  
+  isFeaturedImageMissing: _notEquals(
+    value1: $postFeaturedImageSlug,
+    value2: $existingFeaturedImageSlug
+  ) @export(as: "isFeaturedImageMissing")
+
+  missingCategorySlugs: _arrayDiff(
+    arrays: [$postCategorySlugs, $existingCategorySlugs]
+  ) @export(as: "missingCategorySlugs")
+  areCategoriesMissing: _notEmpty(
+    value: $__missingCategorySlugs
+  ) @export(as: "areCategoriesMissing")
+
+  missingTagSlugs: _arrayDiff(
+    arrays: [$postTagSlugs, $existingTagSlugs]
+  ) @export(as: "missingTagSlugs")
+  areTagsMissing: _notEmpty(
+    value: $__missingTagSlugs
+  ) @export(as: "areTagsMissing")
+
+  isAnyResourceMissing: _or(
+    values: [
+      $__isAuthorMissing,
+      $__isFeaturedImageMissing,
+      $__areCategoriesMissing,
+      $__areTagsMissing,
+    ]
+  ) @export(as: "isAnyResourceMissing")
+}
+
+query FailIfAnyResourceIsMissing
+  @depends(on: "ExportMissingResources")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $responseHasErrors)
+  @include(if: $isAnyResourceMissing)
+{
+  performingValidations: id
+    @if(condition: $isAuthorMissing)
+      @fail(
+        message: "Author is missing in local site"
+        data: {
+          missingAuthorByUsername: $postAuthorUsername
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $isFeaturedImageMissing)
+      @fail(
+        message: "Featured image is missing in local site"
+        data: {
+          missingFeaturedImageBySlug: $postFeaturedImageSlug
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $areCategoriesMissing)
+      @fail(
+        message: "Categories are missing in local site"
+        data: {
+          missingCategoriesBySlug: $missingCategorySlugs
+        }
+        condition: ALWAYS
+      )
+    @if(condition: $areTagsMissing)
+      @fail(
+        message: "Tags are missing in local site"
+        data: {
+          missingTagBySlug: $missingTagSlugs
+        }
+        condition: ALWAYS
+      )
+  
+  createPost: _echo(value: null)
+}
+
+query ExportMutationInputs
+  @depends(on: "FailIfAnyResourceIsMissing")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $isAnyResourceMissing)
+{
+  featuredImageMutationInput: _echo(value: {
+    slug: $postFeaturedImageSlug
+  })
+    @include(if: $postHasFeaturedImage)
+    @export(as: "featuredImageMutationInput")
+    @remove
+}
+
+mutation ImportPost(
+  $postSlug: String!
+)
+  @depends(on: "ExportMutationInputs")
+  @skip(if: $postAlreadyExists)
+  @skip(if: $requestProducedErrors)
+  @skip(if: $responseHasErrors)
+  @skip(if: $postIsMissing)
+  @skip(if: $isAnyResourceMissing)
+{
+  createPost(input: {
+    status: draft,
+    slug: $postSlug
+    title: $postTitle
+    contentAs: {
+      html: $postContent
+    },
+    excerpt: $postExcerpt
+    authorBy: {
+      username: $postAuthorUsername
+    },
+    featuredImageBy: $featuredImageMutationInput,
+    categoriesBy: {
+      slugs: $postCategorySlugs
+    },
+    tagsBy: {
+      slugs: $postTagSlugs
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      date
+      status
+
+      slug
+      title
+      content
+      excerpt
+
+      author {
+        id
+        username
+      }
+      featuredImage {
+        id
+        slug
+      }
+      categories {
+        id
+        slug
+      }
+      tags {
+        id
+        slug
+      }
+    }
+  }
+}
 ```
 
 ## Triggering the synchronization via a hook
