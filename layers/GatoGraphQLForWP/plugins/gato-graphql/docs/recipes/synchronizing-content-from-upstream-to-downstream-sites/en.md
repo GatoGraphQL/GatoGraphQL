@@ -89,7 +89,9 @@ query GetAllDownstreamDomains
 # Attach "/graphql" to the domain, to point to that site's
 # GraphQL single endpoint
 ############################################################
-query ExportDownstreamGraphQLEndpointsAndQuery
+query ExportDownstreamGraphQLEndpointsAndQuery(
+  $endpointPath: String! = "/graphql"
+)
   @depends(on: "GetAllDownstreamDomains")
   @skip(if: $isMissingPostInUpstream)
   @include(if: $hasDownstreamDomains)
@@ -98,7 +100,7 @@ query ExportDownstreamGraphQLEndpointsAndQuery
     @underEachArrayItem(
       passValueOnwardsAs: "domain"
     )
-      @strAppend(string: "/graphql")
+      @strAppend(string: $endpointPath)
     @export(as: "downstreamGraphQLEndpoints")
 
   query: _echo(value: """
