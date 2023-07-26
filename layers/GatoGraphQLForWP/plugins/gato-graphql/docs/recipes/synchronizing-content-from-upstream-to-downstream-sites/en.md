@@ -11,13 +11,11 @@ This recipe will demonstrate how to implement this architecture, with the upstre
 
 ## GraphQL query to synchronize content from upstream to downstream sites
 
-The GraphQL query below is triggered by the `post_updated` WordPress hook on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites.
-
-(To also add the other properties -tags, categories, author and featured image- check out the previous recipe.)
+The GraphQL query below (which can be triggered by the `post_updated` WordPress hook) is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites. (The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous recipe.)
 
 It does the following:
 
-- It retrieves the content from the updated post
+- It receives the slug of the updated post, and its new and previous content
 - It retrieves the meta property `"downstreams"`, which is an array containing the domains of the downstream domains which are suitable for that post
 - If the meta property does not exist, it then retrieves option `"downstreams"`, which contains the list of all the downstream domains
 - It executes an `updatePost` mutation on each of the downstream sites, passing the updated content
