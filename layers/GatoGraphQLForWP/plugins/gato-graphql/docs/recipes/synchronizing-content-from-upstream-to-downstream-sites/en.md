@@ -84,7 +84,6 @@ query GetAllDownstreamDomains
   @skip(if: $hasCustomDownstreamDomains)
 {
   allDownstreamDomains: optionValues(name: "downstreamDomains")
-    @default(value: [])
     @export(as: "downstreamDomains")
 }
 
