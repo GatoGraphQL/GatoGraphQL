@@ -174,9 +174,9 @@ The body is now accessible as a JSON object:
 
 🔥 **Tips:**
 
-If connecting to some external host is slow, and we must execute the same HTTP request repeatedly (against the same endpoint, and passing the same inputs), we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
+If we must execute the same HTTP request repeatedly, we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
 
-When executing this query twice within a span of 10 seconds (as indicated via argument `(@cache(time:))`), the second time will be noticeably faster:
+When executing this query twice within a span of 10 seconds (as indicated via argument `(@cache(time:))`), the second time will retrieve the cached result; this will make it faster, as it will not connect to the external host:
 
 ```graphql
 query {
@@ -192,8 +192,7 @@ query {
   })
     @cache(time: 10)
   {
-    body @remove
-    bodyJSONObject: _strDecodeJSONObject(string: $__body)
+    body
   }
 }
 ```
