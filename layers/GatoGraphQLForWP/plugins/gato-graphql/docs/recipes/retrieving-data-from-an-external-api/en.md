@@ -650,6 +650,8 @@ query ConnectToGitHub($authorizationToken: String!)
 }
 ```
 
+Because `@cache` is independent (i.e. it does not care about the fields where it is applied, whether they are HTTP request fields or any other), it works whether the HTTP request method is `GET` or `POST`.
+
 `@cache` works for any of the fields returning a JSON response, including `_sendJSONObjectItemHTTPRequest` and `_sendGraphQLHTTPRequest` (but not `_sendHTTPRequest`).
 
 </div>
