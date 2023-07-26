@@ -593,8 +593,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'reverting-mutations-in-case-of-error',
-                \__('Reverting mutations in case of error', 'gato-graphql'),
+                'synchronizing-content-from-upstream-to-downstream-sites',
+                \__('Synchronizing content from upstream to downstream sites', 'gato-graphql'),
             ],
             [
                 'content-orchestration',
