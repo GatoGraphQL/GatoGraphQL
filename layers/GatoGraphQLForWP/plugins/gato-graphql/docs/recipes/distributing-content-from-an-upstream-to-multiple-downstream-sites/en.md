@@ -19,11 +19,9 @@ _(For the downstream sites only)_ For this GraphQL query to work, the [Schema Co
 
 </div>
 
-The GraphQL query below is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites.
+The GraphQL query below is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites, using the post slug as the common identifier across sites.
 
 (The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous recipe.)
-
-As in the previous recipe, we use the post slug as the common identifier across sites.
 
 The query includes transactional logic, so that whenever the update fails on any downstream site, whether because the HTTP request failed (as when the server is down) or because the GraphQL query produced errors (as if there is no post with the provided slug), the mutation is then reverted on all downstream sites.
 
