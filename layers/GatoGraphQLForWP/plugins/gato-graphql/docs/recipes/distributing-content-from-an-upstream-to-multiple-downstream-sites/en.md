@@ -1,4 +1,4 @@
-# Synchronizing content from upstream to downstream sites
+# Distributing content from an upstream to multiple downstream sites
 
 Let's say that a media company has a network of WordPress sites for different regions, with every news article being published on a site or not only if it's suitable for that region.
 

@@ -593,8 +593,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'synchronizing-content-from-upstream-to-downstream-sites',
-                \__('Synchronizing content from upstream to downstream sites', 'gato-graphql'),
+                'distributing-content-from-an-upstream-to-multiple-downstream-sites',
+                \__('Distributing content from an upstream to multiple downstream sites', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
