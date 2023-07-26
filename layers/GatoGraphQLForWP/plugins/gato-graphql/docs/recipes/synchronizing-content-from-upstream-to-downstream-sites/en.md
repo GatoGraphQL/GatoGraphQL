@@ -46,7 +46,7 @@ query InitializeDynamicVariables
     @remove
 }
 
-query GetPostData($postSlug: String!)
+query GetCustomDownstreamDomains($postSlug: String!)
   @depends(on: "InitializeDynamicVariables")
 {
   post(by: { slug: $postSlug })
@@ -57,18 +57,6 @@ query GetPostData($postSlug: String!)
       }
     )
   {
-    id
-  }
-
-  isMissingPostInUpstream: _isNull(value: $__post)
-    @export(as: "isMissingPostInUpstream")
-}
-
-query GetCustomDownstreamDomains($postSlug: String!)
-  @depends(on: "GetPostData")
-  @skip(if: $isMissingPostInUpstream)
-{
-  post(by: { slug: $postSlug }) {
     customDownstreamDomains: metaValues(key: "downstreamDomains")
       @export(as: "downstreamDomains")
 
@@ -76,6 +64,9 @@ query GetCustomDownstreamDomains($postSlug: String!)
       @export(as: "hasCustomDownstreamDomains")
       @remove
   }
+
+  isMissingPostInUpstream: _isNull(value: $__post)
+    @export(as: "isMissingPostInUpstream")
 }
 
 query GetAllDownstreamDomains
