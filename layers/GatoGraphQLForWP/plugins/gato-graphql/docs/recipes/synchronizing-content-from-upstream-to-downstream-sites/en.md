@@ -86,8 +86,8 @@ query GetAllDownstreamDomains
 }
 
 ############################################################
-# Attach "/graphql" to the domain, to point to that site's
-# GraphQL single endpoint
+# (By default) Append "/graphql" to the domain, to point
+# to that site's GraphQL single endpoint
 ############################################################
 query ExportDownstreamGraphQLEndpointsAndQuery(
   $endpointPath: String! = "/graphql"
