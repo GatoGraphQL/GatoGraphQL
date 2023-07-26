@@ -170,35 +170,6 @@ The body is now accessible as a JSON object:
 }
 ```
 
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-If we must execute the same HTTP request repeatedly, we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
-
-When executing this query twice within a span of 10 seconds (as indicated via argument `(@cache(time:))`), the second time will retrieve the cached result; this will make it faster, as it will not connect to the external host:
-
-```graphql
-query {
-  _sendHTTPRequest(input: {
-    url: "https://us7.api.mailchimp.com/3.0/lists/{LIST_ID}/members",
-    method: GET,
-    options: {
-      auth: {
-        username: "{USER}",
-        password: "{API_TOKEN}"
-      }
-    }
-  })
-    @cache(time: 10)
-  {
-    body
-  }
-}
-```
-
-</div>
-
 ## Connecting to a REST API
 
 [**HTTP Client**](https://gatographql/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
@@ -647,6 +618,47 @@ Passing these `variables`:
   }
 }
 ```
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+If we must execute the same HTTP request repeatedly, we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
+
+When executing this query twice within a span of 10 seconds (as indicated via argument `(@cache(time:))`), the second time will retrieve the cached result; this will make it faster, as it will not connect to the external host:
+
+```graphql
+query ConnectToGitHub($authorizationToken: String!)
+{
+  _sendGraphQLHTTPRequest(input:{
+    endpoint: "https://api.github.com/graphql",
+    query: """    
+{
+  repositoryOwner(login: "leoloso") {
+    repositories(first: 3) {
+      nodes {
+        id
+        name
+        description
+      }
+    }
+  }
+}
+    """,
+    options: {
+      auth: {
+        password: $authorizationToken
+      }
+    }
+  })
+    # Cache the response to disk, indicating for how many seconds
+    @cache(time: 10)
+}
+```
+
+`@cache` works for any of the fields returning a JSON response, including `_sendJSONObjectItemHTTPRequest` and `_sendGraphQLHTTPRequest` (but not `_sendHTTPRequest`).
+
+</div>
 
 ## Fetching data from multiple URLs
 
