@@ -132,7 +132,7 @@ class MutationResolverHookSet extends AbstractHookSet
          * @var stdClass|null
          */
         $featuredImageBy = $fieldDataAccessor->getValue(MutationInputProperties::FEATUREDIMAGE_BY);
-        if ($featuredImageBy === null || (array)$featuredImageBy === []) {
+        if ($featuredImageBy === null) {
             /**
              * If is `null` or {} => remove the featured image
              */
@@ -151,14 +151,19 @@ class MutationResolverHookSet extends AbstractHookSet
             /** @var object */
             $featuredImage = $mediaTypeAPI->getMediaItemBySlug($featuredImageSlug);
             $featuredImageID = $mediaTypeAPI->getMediaItemID($featuredImage);
+        } elseif (
+            property_exists($featuredImageBy, InputProperties::ID)
+            || property_exists($featuredImageBy, InputProperties::SLUG)
+        ) {
+            /**
+             * Passing `featuredImageBy: {id: null}` is supported,
+             * in that case remove the featured image
+             */
+            $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
+            return;
         }
 
-        /**
-         * Passing `featuredImageBy: {id: null}` is supported,
-         * in that case remove the featured image
-         */
         if ($featuredImageID === null) {
-            $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
             return;
         }
 
