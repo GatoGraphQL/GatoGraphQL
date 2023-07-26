@@ -23,6 +23,8 @@ It does the following:
 - It executes an `updatePost` mutation on each of the downstream sites, passing the updated content
 - If any downstream site produces an error, the mutation is reverted on all downstreams
 
+As in the previous recipe, we use the post slug as the common identifier across sites.
+
 ```graphql
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
