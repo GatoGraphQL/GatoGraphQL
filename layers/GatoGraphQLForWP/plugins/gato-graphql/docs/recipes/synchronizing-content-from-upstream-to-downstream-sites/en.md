@@ -231,7 +231,7 @@ query ExportRevertGraphQLHTTPRequestInputs(
         arguments: {
           value: {
             endpoint: $endpoint,
-            query: $__query,
+            query: $query,
             variables: [
               {
                 name: "postSlug",
