@@ -170,6 +170,36 @@ The body is now accessible as a JSON object:
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+If connecting to some external host is slow, and we must execute the same HTTP request repeatedly (against the same endpoint, and passing the same inputs), we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
+
+When executing this query twice within a span of 10 seconds (as indicated via argument `(@cache(time:))`), the second time will be noticeably faster:
+
+```graphql
+query {
+  _sendHTTPRequest(input: {
+    url: "https://us7.api.mailchimp.com/3.0/lists/{LIST_ID}/members",
+    method: GET,
+    options: {
+      auth: {
+        username: "{USER}",
+        password: "{API_TOKEN}"
+      }
+    }
+  })
+    @cache(time: 10)
+  {
+    body @remove
+    bodyJSONObject: _strDecodeJSONObject(string: $__body)
+  }
+}
+```
+
+</div>
+
 ## Connecting to a REST API
 
 [**HTTP Client**](https://gatographql/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
