@@ -198,6 +198,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
@@ -228,6 +229,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
@@ -243,6 +245,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
@@ -256,6 +259,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
@@ -268,6 +272,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
@@ -281,6 +286,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
@@ -293,6 +299,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
@@ -304,6 +311,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
+                ]
             ],
             [
                 'extracting-the-image-urls-from-all-image-blocks-in-a-post',
@@ -354,6 +365,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 'bulk-translating-block-content-in-multiple-posts-to-a-different-language',
                 \__('Bulk translating block content in multiple posts to a different language', 'gato-graphql'),
                 [
+                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
@@ -463,6 +475,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             [
