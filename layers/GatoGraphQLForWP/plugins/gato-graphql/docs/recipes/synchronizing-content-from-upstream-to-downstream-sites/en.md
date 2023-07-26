@@ -93,20 +93,28 @@ query UpdatePost(
   $postSlug: String!
   $postContent: String!
 ) {
-  updatePost(input: {
-    id: $postSlug,
-    contentAs: { html: $postContent },
-  }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
+  post(by: {slug: $postSlug})
+    @fail(
+      message: "There is no post with the provided slug"
+      data: {
+        slug: $postSlug
       }
-    }
-    post {
-      slug
-      rawContent
+    )
+  {
+    update(input: {
+      contentAs: { html: $postContent },
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        slug
+        rawContent
+      }
     }
   }
 }
