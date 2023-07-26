@@ -16,10 +16,10 @@ The GraphQL query below (which can be triggered by the `post_updated` WordPress 
 It does the following:
 
 - It receives the slug of the updated post, and its new and previous content
-- It retrieves the meta property `"downstreams"`, which is an array containing the domains of the downstream domains which are suitable for that post
-- If the meta property does not exist, it then retrieves option `"downstreams"`, which contains the list of all the downstream domains
+- It retrieves the meta property `"downstreamDomains"`, which is an array containing the domains of the downstream sites which are suitable for that post
+- If the meta property does not exist, it then retrieves option `"downstreamDomains"` from the `wp_options` table, which contains the list of all the downstream domains
 - It executes an `updatePost` mutation on each of the downstream sites, passing the updated content
-- If any downstream site produces an error, the mutation is reverted on all downstreams
+- If any downstream site produces an error, the mutation is reverted on all downstream sites
 
 As in the previous recipe, we use the post slug as the common identifier across sites.
 
@@ -27,40 +27,31 @@ As in the previous recipe, we use the post slug as the common identifier across 
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  initVariablesWithFalse: _echo(value: false)
-    @export(as: "requestProducedErrors")
-    @export(as: "responseHasErrors")
-    @export(as: "postIsMissing")
-    @export(as: "postHasAuthor")
-    @export(as: "postHasFeaturedImage")
-    @export(as: "postHasCategories")
-    @export(as: "postHasTags")
-    @remove
-
-  initVariablesWithNull: _echo(value: null)
-    @export(as: "existingAuthorUsername")
-    @export(as: "existingFeaturedImageSlug")
-    @export(as: "featuredImageMutationInput")
-    @remove
-
   initVariablesWithEmptyArray: _echo(value: [])
-    @export(as: "existingCategorySlugs")
-    @export(as: "existingTagSlugs")
+    @export(as: "downstreamDomains")
     @remove
 }
 
-query CheckIfPostExistsLocally($postSlug: String!)
+query GetCustomDownstreamDomains($postSlug: String!)
   @depends(on: "InitializeDynamicVariables")
 {
-  localPost: post(
-    by: { slug: $postSlug }
-    status: any
-  ) {
-    id
-  }
+  post(by: { slug: $postSlug }) {
+    customDownstreamDomains: metaValues(key: "downstreamDomains")
+      @export(as: "downstreamDomains")
 
-  postAlreadyExists: _notNull(value: $__localPost)
-    @export(as: "postAlreadyExists")
+    hasCustomDownstreamDomains: _notEmpty(value: $__customDownstreamDomains)
+      @export(as: "hasCustomDownstreamDomains")
+      @remove
+  }
+}
+
+query GetAllDownstreamDomains
+  @depends(on: "GetCustomDownstreamDomains")
+  @skip(if: $hasCustomDownstreamDomains)
+{
+  allDownstreamDomains: optionValues(name: "downstreamDomains")
+    @default(value: [])
+    @export(as: "downstreamDomains")
 }
 
 query FailIfPostAlreadyExistsLocally($postSlug: String!)
