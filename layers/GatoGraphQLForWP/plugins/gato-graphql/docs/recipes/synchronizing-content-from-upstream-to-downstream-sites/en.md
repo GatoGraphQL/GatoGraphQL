@@ -39,13 +39,25 @@ It does the following:
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  # initVariablesWithFalse: _echo(value: false)
-  #   @export(as: "anyGraphQLResponseHasErrors")
-  #   @remove
+  initVariablesWithFalse: _echo(value: false)
+    @export(as: "hasPost")
+    @remove
+}
+
+query GetPostData($postSlug: String!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  post(by: { slug: $postSlug }) {
+    id
+  }
+
+  isMissingPostInUpstream: _isNull(value: $__post)
+    @export(as: "isMissingPostInUpstream")
 }
 
 query GetCustomDownstreamDomains($postSlug: String!)
-  @depends(on: "InitializeDynamicVariables")
+  @depends(on: "GetPostData")
+  @skip(if: $isMissingPostInUpstream)
 {
   post(by: { slug: $postSlug }) {
     customDownstreamDomains: metaValues(key: "downstreamDomains")
@@ -59,6 +71,7 @@ query GetCustomDownstreamDomains($postSlug: String!)
 
 query GetAllDownstreamDomains
   @depends(on: "GetCustomDownstreamDomains")
+  @skip(if: $isMissingPostInUpstream)
   @skip(if: $hasCustomDownstreamDomains)
 {
   allDownstreamDomains: optionValues(name: "downstreamDomains")
@@ -72,6 +85,7 @@ query GetAllDownstreamDomains
 ############################################################
 query ExportDownstreamGraphQLEndpoints
   @depends(on: "GetAllDownstreamDomains")
+  @skip(if: $isMissingPostInUpstream)
 {
   downstreamGraphQLEndpoints: _echo(value: $downstreamDomains)
     @underEachArrayItem(
@@ -86,6 +100,7 @@ query ExportSendGraphQLHTTPRequestInputs(
   $newPostContent: String!
 )
   @depends(on: "ExportDownstreamGraphQLEndpoints")
+  @skip(if: $isMissingPostInUpstream)
 {
   query: _echo(value: """
     
@@ -153,6 +168,7 @@ query UpdatePost(
 
 query SendGraphQLHTTPRequests
   @depends(on: "ExportSendGraphQLHTTPRequestInputs")
+  @skip(if: $isMissingPostInUpstream)
 {
   downstreamGraphQLResponses: _sendGraphQLHTTPRequests(
     inputs: $sendGraphQLHTTPRequestInputs
@@ -167,6 +183,7 @@ query SendGraphQLHTTPRequests
 
 query ExportGraphQLResponsesHaveErrors
   @depends(on: "SendGraphQLHTTPRequests")
+  @skip(if: $isMissingPostInUpstream)
   @skip(if: $requestProducedErrors)
 {
   graphQLResponsesHaveErrors: _echo(value: $downstreamGraphQLResponses)    
@@ -191,6 +208,7 @@ query ExportGraphQLResponsesHaveErrors
 
 query ValidateGraphQLResponsesHaveErrors
   @depends(on: "ExportGraphQLResponsesHaveErrors")
+  @skip(if: $isMissingPostInUpstream)
   @skip(if: $requestProducedErrors)
 {
   anyGraphQLResponseHasErrors: _or(values: $graphQLResponsesHaveErrors)
@@ -235,6 +253,8 @@ query ExportRevertGraphQLHTTPRequestInputs(
 
 query RevertGraphQLHTTPRequests
   @depends(on: "ExportRevertGraphQLHTTPRequestInputs")
+  @skip(if: $isMissingPostInUpstream)
+  @include(if: $anyErrorProduced)
 {
   revertGraphQLResponses: _sendGraphQLHTTPRequests(
     inputs: $sendGraphQLHTTPRequestInputs
