@@ -609,10 +609,10 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            [
-                'content-orchestration',
-                \__('Content orchestration', 'gato-graphql'),
-            ],
+            // [
+            //     'content-orchestration',
+            //     \__('Content orchestration', 'gato-graphql'),
+            // ],
             // [
             //     'using-the-graphql-server-without-wordpress',
             //      \__('Using the GraphQL server without WordPress', 'gato-graphql'),
