@@ -13,9 +13,9 @@ This recipe will demonstrate how to implement this architecture, with the upstre
 
 <div class="doc-config-highlight" markdown=1>
 
-⚙️ **Configuration alert (for the downstream sites only):**
+⚙️ **Configuration alert:**
 
-For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+_(For the downstream sites only)_ For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
 
 </div>
 
