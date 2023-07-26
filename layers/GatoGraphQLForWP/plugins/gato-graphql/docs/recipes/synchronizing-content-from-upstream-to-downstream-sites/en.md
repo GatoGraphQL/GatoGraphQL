@@ -11,6 +11,14 @@ This recipe will demonstrate how to implement this architecture, with the upstre
 
 ## GraphQL query to synchronize content from upstream to downstream sites
 
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint on each of the downstream sites needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled.
+
+</div>
+
 The GraphQL query below (which can be triggered by the `post_updated` WordPress hook) is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites.
 
 (The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous recipe.)
