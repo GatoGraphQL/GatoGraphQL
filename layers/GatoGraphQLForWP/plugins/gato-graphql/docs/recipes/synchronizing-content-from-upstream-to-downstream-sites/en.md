@@ -69,10 +69,70 @@ query ExportDownstreamGraphQLEndpoints
     @export(as: "downstreamGraphQLEndpoints")
 }
 
-query ConnectToDownstreamGraphQLEndpoints(
-  $upstreamServerGraphQLEndpointURL: String!
+query ExportHTTPRequestInputs(
   $postSlug: String!
   $newPostContent: String!
+)
+  @depends(on: "ExportDownstreamGraphQLEndpoints")
+{
+  query: _echo(value: """
+    
+query UpdatePost(
+  $postSlug: String!
+  $postContent: String!
+) {
+  updatePost(input: {
+    id: $postId,
+    contentAs: { html: $postContent },
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      slug
+      rawContent
+    }
+  }
+}
+
+    """
+  )
+    @export(as: "query")
+
+  graphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
+    @underEachArrayItem(
+      passValueOnwardsAs: "endpoint"
+    )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            endpoint: $endpoint,
+            query: $__query,
+            variables: [
+              {
+                name: "postSlug",
+                value: $postSlug
+              },
+              {
+                name: "postContent",
+                value: $newPostContent
+              }
+            ]
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "graphQLHTTPRequestInputs")
+    @remove
+}
+
+query ConnectToDownstreamGraphQLEndpoints(
+  $upstreamServerGraphQLEndpointURL: String!
 )
   @depends(on: "ExportDownstreamGraphQLEndpoints")
 {
