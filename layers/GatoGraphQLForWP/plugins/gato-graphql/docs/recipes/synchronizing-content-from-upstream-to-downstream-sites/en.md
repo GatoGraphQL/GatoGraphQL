@@ -34,7 +34,7 @@ The query does the following:
 - It receives the slug of the updated post, and its new and previous content
 - It retrieves the meta property `"downstream_domains"`, which is an array containing the domains of the downstream sites which are suitable for that post
 - If the meta property does not exist (i.e. it has value `null`), it then retrieves option `"downstream_domains"` from the `wp_options` table, which contains the list of all the downstream domains
-- It executes an `updatePost` mutation on each of the downstream sites, passing the updated content
+- It logs the user into each of the downstream sites and executes an `updatePost` mutation, passing the updated content (for simplicity, the same `$username` and `$userPassword` will work on all downstream sites)
 - If any downstream site produces an error, the mutation is reverted on all downstream sites
 
 ```graphql
@@ -106,10 +106,21 @@ query ExportDownstreamGraphQLEndpointsAndQuery(
 
   query: _echo(value: """
     
-mutation UpdatePost(
+mutation LoginUserAndUpdatePost(
+  $username: String!
+  $userPassword: String!
   $postSlug: String!
   $postContent: String!
 ) {
+  loginUser(by: {
+    credentials: {
+      usernameOrEmail: $username,
+      password: $userPassword
+    }
+  }) {
+    userID
+  }
+
   post(by: {slug: $postSlug})
     @fail(
       message: "There is no post in the downstream site with the provided slug"
@@ -143,6 +154,8 @@ mutation UpdatePost(
 }
 
 query ExportSendGraphQLHTTPRequestInputs(
+  $username: String!
+  $userPassword: String!
   $postSlug: String!
   $newPostContent: String!
 )
@@ -161,6 +174,14 @@ query ExportSendGraphQLHTTPRequestInputs(
             endpoint: $endpoint,
             query: $query,
             variables: [
+              {
+                name: "username",
+                value: $username
+              },
+              {
+                name: "userPassword",
+                value: $userPassword
+              },
               {
                 name: "postSlug",
                 value: $postSlug
@@ -232,6 +253,8 @@ query ValidateGraphQLResponsesHaveErrors
 }
 
 query ExportRevertGraphQLHTTPRequestInputs(
+  $username: String!
+  $userPassword: String!
   $postSlug: String!
   $previousPostContent: String!
 )
@@ -250,6 +273,14 @@ query ExportRevertGraphQLHTTPRequestInputs(
             endpoint: $endpoint,
             query: $query,
             variables: [
+              {
+                name: "username",
+                value: $username
+              },
+              {
+                name: "userPassword",
+                value: $userPassword
+              },
               {
                 name: "postSlug",
                 value: $postSlug
