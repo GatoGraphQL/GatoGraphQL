@@ -82,7 +82,7 @@ query GetAllDownstreamDomains
 # Attach "/graphql" to the domain, to point to that site's
 # GraphQL single endpoint
 ############################################################
-query ExportDownstreamGraphQLEndpoints
+query ExportDownstreamGraphQLEndpointsAndQuery
   @depends(on: "GetAllDownstreamDomains")
   @skip(if: $isMissingPostInUpstream)
 {
@@ -92,15 +92,7 @@ query ExportDownstreamGraphQLEndpoints
     )
       @strAppend(string: "/graphql")
     @export(as: "downstreamGraphQLEndpoints")
-}
 
-query ExportSendGraphQLHTTPRequestInputs(
-  $postSlug: String!
-  $newPostContent: String!
-)
-  @depends(on: "ExportDownstreamGraphQLEndpoints")
-  @skip(if: $isMissingPostInUpstream)
-{
   query: _echo(value: """
     
 query UpdatePost(
@@ -136,7 +128,15 @@ query UpdatePost(
     """
   )
     @export(as: "query")
+}
 
+query ExportSendGraphQLHTTPRequestInputs(
+  $postSlug: String!
+  $newPostContent: String!
+)
+  @depends(on: "ExportDownstreamGraphQLEndpointsAndQuery")
+  @skip(if: $isMissingPostInUpstream)
+{
   sendGraphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
     @underEachArrayItem(
       passValueOnwardsAs: "endpoint"
@@ -146,7 +146,7 @@ query UpdatePost(
         arguments: {
           value: {
             endpoint: $endpoint,
-            query: $__query,
+            query: $query,
             variables: [
               {
                 name: "postSlug",
