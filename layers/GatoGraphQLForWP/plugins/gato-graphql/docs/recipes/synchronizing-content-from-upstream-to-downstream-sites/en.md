@@ -38,7 +38,17 @@ The query does the following:
 - If any downstream site produces an error, the mutation is reverted on all downstream sites
 
 ```graphql
-query GetPostData($postSlug: String!) {
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  initVariablesWithFalse: _echo(value: false)
+    @export(as: "anyErrorProduced")
+    @remove
+}
+
+query GetPostData($postSlug: String!)
+  @depends(on: "InitializeDynamicVariables")
+{
   post(by: { slug: $postSlug })
     @fail(
       message: "There is no post in the upstream site with the provided slug"
