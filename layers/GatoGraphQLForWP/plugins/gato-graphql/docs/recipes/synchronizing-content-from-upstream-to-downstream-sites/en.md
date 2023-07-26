@@ -106,7 +106,7 @@ query ExportDownstreamGraphQLEndpointsAndQuery(
 
   query: _echo(value: """
     
-query UpdatePost(
+mutation UpdatePost(
   $postSlug: String!
   $postContent: String!
 ) {
