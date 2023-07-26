@@ -42,6 +42,7 @@ query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   initVariablesWithFalse: _echo(value: false)
+    @export(as: "requestProducedErrors")
     @export(as: "anyErrorProduced")
     @remove
 }
