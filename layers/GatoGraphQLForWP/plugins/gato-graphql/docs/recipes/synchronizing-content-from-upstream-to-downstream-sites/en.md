@@ -136,6 +136,7 @@ query UpdatePost(
     """
   )
     @export(as: "query")
+    @remove
 }
 
 query ExportSendGraphQLHTTPRequestInputs(
