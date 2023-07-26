@@ -19,7 +19,7 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 </div>
 
-The GraphQL query below (which can be triggered by the `post_updated` WordPress hook) is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites.
+The GraphQL query below is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites.
 
 (The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous recipe.)
 
@@ -27,7 +27,9 @@ As in the previous recipe, we use the post slug as the common identifier across 
 
 The query includes transactional logic, so that whenever the update fails on any downstream site, whether because the HTTP request failed (as when the server is down) or because the GraphQL query produced errors (as if there is no post with the provided slug), the mutation is then reverted on all downstream sites.
 
-It does the following:
+To revert the state, variable `$previousPostContent` must be provided. We can pass this value by hooking on the `post_updated` WordPress action, upon which the GraphQL query is executed (as explained in a previous recipe).
+
+The query does the following:
 
 - It receives the slug of the updated post, and its new and previous content
 - It retrieves the meta property `"downstreamDomains"`, which is an array containing the domains of the downstream sites which are suitable for that post
