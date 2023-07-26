@@ -11,7 +11,13 @@ This recipe will demonstrate how to implement this architecture, with the upstre
 
 ## GraphQL query to synchronize content from upstream to downstream sites
 
-The GraphQL query below (which can be triggered by the `post_updated` WordPress hook) is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites. (The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous recipe.)
+The GraphQL query below (which can be triggered by the `post_updated` WordPress hook) is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites.
+
+(The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous recipe.)
+
+As in the previous recipe, we use the post slug as the common identifier across sites.
+
+The query includes transactional logic, so that whenever the update fails on any downstream site, whether because the HTTP request failed (as when the server is down) or because the GraphQL query produced errors (as if there is no post with the provided slug), the mutation is then reverted on all downstream sites.
 
 It does the following:
 
@@ -20,8 +26,6 @@ It does the following:
 - If the meta property does not exist, it then retrieves option `"downstreamDomains"` from the `wp_options` table, which contains the list of all the downstream domains
 - It executes an `updatePost` mutation on each of the downstream sites, passing the updated content
 - If any downstream site produces an error, the mutation is reverted on all downstream sites
-
-As in the previous recipe, we use the post slug as the common identifier across sites.
 
 ```graphql
 query InitializeDynamicVariables
@@ -82,7 +86,7 @@ query UpdatePost(
   $postContent: String!
 ) {
   updatePost(input: {
-    id: $postId,
+    id: $postSlug,
     contentAs: { html: $postContent },
   }) {
     status
@@ -219,179 +223,5 @@ query RevertGraphQLHTTPRequests
   revertGraphQLResponses: _sendGraphQLHTTPRequests(
     inputs: $sendGraphQLHTTPRequestInputs
   )
-}
-```
-
-## Triggering the synchronization via a hook
-
-
-
-## Adding a transactional state across all downstream sites
-
-We can also implement a transactional state across all downstream sites, to make sure that they do not get out of sync with each other. To achieve this, , when synchronizing content, if any downstream site fails (for instance, because the server is down), then the mutation is reverted on all other downstream sites.
-
-## Reverting mutations in case of error
-
-Say can also do:
-
-"Testing mutations and restoring the original value"
-
-Remove block by type:
-
-```graphql
-query CreateVars {
-  foundPosts: posts(filter: { search: "\"<!-- /wp:columns -->\"" } ) {
-    id @export(as: "postIDs", type: LIST)
-    rawContent
-    originalInputs: _echo(value: {
-      id: $__id,
-      contentAs: { html: $__rawContent }
-    }) @export(as: "originalInputs")
-  }
-}
-
-mutation RemoveBlock
-  @depends(on: "CreateVars")
-{
-  posts(filter: { ids: $postIDs } ) {
-    id
-    rawContent
-    adaptedRawContent: _strRegexReplace(
-      in: $__rawContent,
-      searchRegex: "#(<!-- wp:columns -->[\\s\\S]+<!-- /wp:columns -->)#",
-      replaceWith: ""
-    )
-    update(input: {
-      contentAs: { html: $__adaptedRawContent },
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        rawContent
-      }
-    }
-  }
-}
-
-mutation RestorePosts
-  @depends(on: "CreateVars")
-{
-  restorePosts: _echo(value: $originalInputs)
-    @underEachArrayItem(passValueOnwardsAs: "input")
-      @applyField(
-        name: "updatePost"
-        arguments: { input: $input }
-      )
-}
-
-query CheckRestoredPosts
-  @depends(on: "CreateVars")
-{
-  restoredPosts: posts(filter: { ids: $postIDs } ) {
-    id
-    rawContent
-  }
-}
-
-query RemoveBlockAndThenRestorePosts
-  @depends(on: ["RemoveBlock", "RestorePosts", "CheckRestoredPosts"])
-{
-  id
-}
-```
-
-Detailed:
-
-```graphql
-query CreateVars(
-  $removeBlockType: String!
-) {
-  regex: _sprintf(
-    string: "#(<!-- %1$s -->[\\s\\S]+<!-- /%1$s -->)#",
-    values: [$removeBlockType]
-  ) @export(as: "regex")
-
-  search: _sprintf(
-    string: "\"<!-- /%1$s -->\"",
-    values: [$removeBlockType]
-  )
-  
-  foundPosts: posts(filter: { search: $__search } ) {
-    id @export(as: "postIDs", type: LIST)
-    rawContent
-    originalInputs: _echo(value: {
-      id: $__id,
-      contentAs: { html: $__rawContent }
-    }) @export(as: "originalInputs")
-  }
-}
-
-mutation RemoveBlock
-  @depends(on: "CreateVars")
-{
-  posts(filter: { ids: $postIDs } ) {
-    id
-    rawContent
-    adaptedRawContent: _strRegexReplace(
-      in: $__rawContent,
-      searchRegex: $regex,
-      replaceWith: ""
-    )
-    update(input: {
-      contentAs: { html: $__adaptedRawContent },
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        rawContent
-      }
-    }
-  }
-}
-
-mutation RestorePosts
-  @depends(on: "CreateVars")
-{
-  restorePosts: _echo(value: $originalInputs)
-    @underEachArrayItem(passValueOnwardsAs: "input")
-      @applyField(
-        name: "updatePost"
-        arguments: { input: $input }
-      )
-}
-
-query CheckRestoredPosts
-  @depends(on: "CreateVars")
-{
-  restoredPosts: posts(filter: { ids: $postIDs } ) {
-    id
-    rawContent
-  }
-}
-
-query RemoveBlockAndThenRestorePosts
-  @depends(on: ["RemoveBlock", "RestorePosts", "CheckRestoredPosts"])
-{
-  id
-}
-```
-
-and vars:
-
-```json
-{
-  "removeBlockType": "wp:columns"
 }
 ```
