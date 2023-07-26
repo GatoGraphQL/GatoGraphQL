@@ -529,7 +529,7 @@ Passing these `variables`:
 
 If we must execute the same HTTP request repeatedly, we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
 
-When executing this query twice within a span of 10 seconds (as indicated via argument `(@cache(time:))`), the second time will retrieve the cached result; this will make it faster, as it will not connect to the external host:
+When executing this query twice within a span of 10 seconds (as indicated via argument `@cache(time:)`), the second time will retrieve the cached result; this will make it faster, as it will not connect to the external host:
 
 ```graphql
 query ConnectToGitHub($authorizationToken: String!)
