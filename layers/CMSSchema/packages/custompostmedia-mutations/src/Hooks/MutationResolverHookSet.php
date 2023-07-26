@@ -156,8 +156,9 @@ class MutationResolverHookSet extends AbstractHookSet
             || property_exists($featuredImageBy, InputProperties::SLUG)
         ) {
             /**
-             * Passing `featuredImageBy: {id: null}` is supported,
-             * in that case remove the featured image
+             * Passing `updatePost(input: { featuredImageBy: {id: null} })`
+             * or `updatePost(input: { featuredImageBy: {slug: null} })`
+             * is supported, in which case the featured image is removed
              */
             $this->getCustomPostMediaTypeMutationAPI()->removeFeaturedImage($customPostID);
             return;
