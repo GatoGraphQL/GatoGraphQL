@@ -10,6 +10,7 @@ The bundle provides extensions to access, iterate and manipulate the field value
 
 - [Conditional Field Manipulation](../../../../../extensions/conditional-field-manipulation/docs/modules/conditional-field-manipulation/en.md)
 - [Field Default Value](../../../../../extensions/field-default-value/docs/modules/field-default-value/en.md)
+- [Field on Field](../../../../../extensions/field-on-field/docs/modules/field-on-field/en.md)
 - [Field Resolution Caching](../../../../../extensions/field-resolution-caching/docs/modules/field-resolution-caching/en.md)
 - [Field Response Removal](../../../../../extensions/field-response-removal/docs/modules/field-response-removal/en.md)
 - [Field To Input](../../../../../extensions/field-to-input/docs/modules/field-to-input/en.md)
