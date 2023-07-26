@@ -259,4 +259,10 @@ query RevertGraphQLHTTPRequests
     inputs: $sendGraphQLHTTPRequestInputs
   )
 }
+
+query ExecuteAll
+  @depends(on: "RevertGraphQLHTTPRequests")
+{
+  id @remove
+}
 ```
