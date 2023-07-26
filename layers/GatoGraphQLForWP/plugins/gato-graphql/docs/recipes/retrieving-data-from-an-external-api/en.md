@@ -650,9 +650,11 @@ query ConnectToGitHub($authorizationToken: String!)
 }
 ```
 
-Because `@cache` is independent (i.e. it does not care about the fields where it is applied, whether they are HTTP request fields or any other), it works whether the HTTP request method is `GET` or `POST`.
+The `@cache` directive:
 
-`@cache` works for any of the fields returning a JSON response, including `_sendJSONObjectItemHTTPRequest` and `_sendGraphQLHTTPRequest` (but not `_sendHTTPRequest`).
+- Works with any of the fields returning a JSON response, including `_sendJSONObjectItemHTTPRequest` and `_sendGraphQLHTTPRequest`
+- Is independent (i.e. it does not care about the logic of the fields where it is applied), hence it works whether the HTTP request method is `GET` or `POST`
+- It does not work with `_sendHTTPRequest`, as the `HTTPResponse` object it returns is a "transient" object (i.e. it is not stored in the WordPress database), that only lives during the current request
 
 </div>
 
