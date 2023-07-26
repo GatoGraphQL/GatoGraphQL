@@ -47,7 +47,14 @@ query InitializeDynamicVariables
 query GetPostData($postSlug: String!)
   @depends(on: "InitializeDynamicVariables")
 {
-  post(by: { slug: $postSlug }) {
+  post(by: { slug: $postSlug })
+    @fail(
+      message: "There is no post in the upstream site with the provided slug"
+      data: {
+        slug: $postSlug
+      }
+    )
+  {
     id
   }
 
@@ -110,7 +117,7 @@ query UpdatePost(
 ) {
   post(by: {slug: $postSlug})
     @fail(
-      message: "There is no post with the provided slug"
+      message: "There is no post in the downstream site with the provided slug"
       data: {
         slug: $postSlug
       }
