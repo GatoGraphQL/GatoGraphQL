@@ -103,6 +103,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 'email-sender',
                 'field-default-value',
                 'field-on-field',
+                'field-resolution-caching',
                 'field-response-removal',
                 'field-to-input',
                 'field-value-iteration-and-manipulation',
@@ -118,7 +119,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             self::CONTENT_TRANSLATION => [
                 'conditional-field-manipulation',
                 'field-on-field',
-                'field-resolution-caching',
                 'field-response-removal',
                 'field-to-input',
                 'field-value-iteration-and-manipulation',

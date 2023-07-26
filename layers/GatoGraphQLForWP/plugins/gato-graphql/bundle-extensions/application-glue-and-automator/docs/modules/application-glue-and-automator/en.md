@@ -21,6 +21,7 @@ All this power comes without endangering your site: An internal GraphQL server i
 - [Email Sender](../../../../../extensions/email-sender/docs/modules/email-sender/en.md)
 - [Field Default Value](../../../../../extensions/field-default-value/docs/modules/field-default-value/en.md)
 - [Field on Field](../../../../../extensions/field-on-field/docs/modules/field-on-field/en.md)
+- [Field Resolution Caching](../../../../../extensions/field-resolution-caching/docs/modules/field-resolution-caching/en.md)
 - [Field Response Removal](../../../../../extensions/field-response-removal/docs/modules/field-response-removal/en.md)
 - [Field To Input](../../../../../extensions/field-to-input/docs/modules/field-to-input/en.md)
 - [Field Value Iteration and Manipulation](../../../../../extensions/field-value-iteration-and-manipulation/docs/modules/field-value-iteration-and-manipulation/en.md)
