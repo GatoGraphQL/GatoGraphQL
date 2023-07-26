@@ -117,7 +117,6 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             ],
             self::CONTENT_TRANSLATION => [
                 'conditional-field-manipulation',
-                'field-default-value',
                 'field-on-field',
                 'field-resolution-caching',
                 'field-response-removal',
