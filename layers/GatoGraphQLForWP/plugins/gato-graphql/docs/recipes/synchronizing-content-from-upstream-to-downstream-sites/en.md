@@ -27,8 +27,8 @@ As in the previous recipe, we use the post slug as the common identifier across 
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  initVariablesWithEmptyArray: _echo(value: [])
-    @export(as: "downstreamDomains")
+  initVariablesWithFalse: _echo(value: false)
+    @export(as: "anyGraphQLResponseHasErrors")
     @remove
 }
 
@@ -103,7 +103,7 @@ query UpdatePost(
   )
     @export(as: "query")
 
-  graphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
+  sendGraphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
     @underEachArrayItem(
       passValueOnwardsAs: "endpoint"
     )
@@ -127,80 +127,68 @@ query UpdatePost(
         },
         setResultInResponse: true
       )
-    @export(as: "graphQLHTTPRequestInputs")
+    @export(as: "sendGraphQLHTTPRequestInputs")
     @remove
 }
 
-query ConnectToDownstreamGraphQLEndpoints(
-  $upstreamServerGraphQLEndpointURL: String!
-)
-  @depends(on: "ExportDownstreamGraphQLEndpoints")
+query ConnectToDownstreamGraphQLEndpoints
+  @depends(on: "ExportHTTPRequestInputs")
 {
-  externalData: _sendGraphQLHTTPRequest(input: {
-    endpoint: $upstreamServerGraphQLEndpointURL,
-    query: """
-    
-query UpdatePost(
-  $postSlug: String!
-  $postContent: String!
-) {
-  updatePost(input: {
-    id: $postId,
-    contentAs: { html: $postContent },
-  }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-    post {
-      slug
-      rawContent
-    }
-  }
-}
+  downstreamGraphQLResponses: _sendGraphQLHTTPRequests(
+    inputs: $sendGraphQLHTTPRequestInputs
+  )
+    @export(as: "downstreamGraphQLResponses")
 
-    """,
-    variables: [
-      {
-        name: "postSlug",
-        value: $postSlug
-      }
-    ]
-  })
-    @export(as: "externalData")
-
-  requestProducedErrors: _isNull(value: $__externalData)
+  requestProducedErrors: _isNull(value: $__downstreamGraphQLResponses)
     @export(as: "requestProducedErrors")
     @remove
 }
 
-query ValidateResponse
+query ValidateGraphQLResponses
   @depends(on: "ConnectToDownstreamGraphQLEndpoints")
-  @skip(if: $postAlreadyExists)
   @skip(if: $requestProducedErrors)
 {
-  responseHasErrors: _propertyIsSetInJSONObject(
+  anyGraphQLResponseHasErrors: _propertyIsSetInJSONObject(
     object: $externalData
     by: {
       key: "errors"
     }
   )
-    @export(as: "responseHasErrors")
+    @export(as: "anyGraphQLResponseHasErrors")
     @remove
+}
 
-  postExists: _propertyIsSetInJSONObject(
-    object: $externalData
-    by: {
-      path: "data.post"
-    }
-  )
-    @remove
-    
-  postIsMissing: _not(value: $__postExists)
-    @export(as: "postIsMissing")
+query ExportHTTPRequestInputs(
+  $postSlug: String!
+  $newPostContent: String!
+)
+  @depends(on: "ExportDownstreamGraphQLEndpoints")
+{
+  revertGraphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
+    @underEachArrayItem(
+      passValueOnwardsAs: "endpoint"
+    )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            endpoint: $endpoint,
+            query: $__query,
+            variables: [
+              {
+                name: "postSlug",
+                value: $postSlug
+              },
+              {
+                name: "postContent",
+                value: $newPostContent
+              }
+            ]
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "revertGraphQLHTTPRequestInputs")
     @remove
 }
 
