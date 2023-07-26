@@ -635,13 +635,7 @@ query ConnectToGitHub($authorizationToken: String!)
     query: """    
 {
   repositoryOwner(login: "leoloso") {
-    repositories(first: 3) {
-      nodes {
-        id
-        name
-        description
-      }
-    }
+    url
   }
 }
     """,
