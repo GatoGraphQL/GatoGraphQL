@@ -14,7 +14,7 @@ This recipe will demonstrate how to implement this architecture, with the upstre
 The GraphQL query below (which is executed on the upstream WordPress site, triggered by the `post_updated` WordPress hook) does the following:
 
 - It retrieves the content from the updated post
-- It retrieves the meta property `"downstreams"`, which is an array containing the domains of all the downstream sites to distribute the content to
+- It retrieves the meta property `"downstreams"`, which is an array containing the domains of all the downstream sites to distribute the content to; if this item is null, it synchronizes to all sites, provided by option `"downstreams"`
 - It executes an `updatePost` mutation on each of the downstream sites
 - If any downstream site produced an error, the mutation is reverted on all downstreams
 
