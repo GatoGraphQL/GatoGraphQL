@@ -33,7 +33,7 @@ The query does the following:
 
 - It receives the slug of the updated post, and its new and previous content
 - It retrieves the meta property `"downstreamDomains"`, which is an array containing the domains of the downstream sites which are suitable for that post
-- If the meta property does not exist, it then retrieves option `"downstreamDomains"` from the `wp_options` table, which contains the list of all the downstream domains
+- If the meta property does not exist (i.e. it has value `null`), it then retrieves option `"downstreamDomains"` from the `wp_options` table, which contains the list of all the downstream domains
 - It executes an `updatePost` mutation on each of the downstream sites, passing the updated content
 - If any downstream site produces an error, the mutation is reverted on all downstream sites
 
@@ -60,8 +60,8 @@ query GetCustomDownstreamDomains($postSlug: String!)
     customDownstreamDomains: metaValues(key: "downstreamDomains")
       @export(as: "downstreamDomains")
 
-    hasCustomDownstreamDomains: _notEmpty(value: $__customDownstreamDomains)
-      @export(as: "hasCustomDownstreamDomains")
+    hasDefinedCustomDownstreamDomains: _notNull(value: $__customDownstreamDomains)
+      @export(as: "hasDefinedCustomDownstreamDomains")
       @remove
   }
 
@@ -72,7 +72,7 @@ query GetCustomDownstreamDomains($postSlug: String!)
 query GetAllDownstreamDomains
   @depends(on: "GetCustomDownstreamDomains")
   @skip(if: $isMissingPostInUpstream)
-  @skip(if: $hasCustomDownstreamDomains)
+  @skip(if: $hasDefinedCustomDownstreamDomains)
 {
   allDownstreamDomains: optionValues(name: "downstreamDomains")
     @export(as: "downstreamDomains")
