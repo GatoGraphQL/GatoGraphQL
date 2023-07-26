@@ -67,7 +67,6 @@ query GetCustomDownstreamDomains($postSlug: String!)
 
     hasCustomDownstreamDomains: _notEmpty(value: $__customDownstreamDomains)
       @export(as: "hasDownstreamDomains")
-      @remove
   }
 
   isMissingPostInUpstream: _isNull(value: $__post)
@@ -84,7 +83,6 @@ query GetAllDownstreamDomains
 
   hasAllDownstreamDomains: _notEmpty(value: $__allDownstreamDomains)
     @export(as: "hasDownstreamDomains")
-    @remove
 }
 
 ############################################################
