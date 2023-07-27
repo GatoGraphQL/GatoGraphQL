@@ -46,11 +46,11 @@ query {
     urlPath
   }
 
-  pagesByAuthorIDs: pages(filter: { authorIDs: 2 }) {
+  pagesByAuthorIDs: pages(filter: { author: { ids: 2 } }) {
     id
     title
   }
-  pagesByAuthorSlug: pages(filter: { authorSlug: "blogger" }) {
+  pagesByAuthorSlug: pages(filter: { author: { slug: "blogger" } }) {
     id
     title
   }
@@ -58,7 +58,7 @@ query {
     id
     title
   }
-  pagesByExcludeAuthorIDs: pages(filter: { excludeAuthorIDs: 2 }) {
+  pagesByExcludeAuthorIDs: pages(filter: { author: { excludeIDs: 2 } }) {
     id
     title
   }
