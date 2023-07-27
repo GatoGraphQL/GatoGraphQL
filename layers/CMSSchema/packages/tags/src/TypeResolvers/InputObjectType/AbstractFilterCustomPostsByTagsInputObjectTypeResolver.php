@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumStringScalarTypeResolver;
+use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\FilterByTaxonomyTermsInputObjectTypeResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -12,21 +13,21 @@ use stdClass;
 
 abstract class AbstractFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver implements FilterCustomPostsByTagsInputObjectTypeResolverInterface
 {
-    private ?FilterByTagsInputObjectTypeResolver $filterByTagsInputObjectTypeResolver = null;
+    private ?FilterByTaxonomyTermsInputObjectTypeResolver $filterByTaxonomyTermsInputObjectTypeResolver = null;
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
-    final public function setFilterByTagsInputObjectTypeResolver(FilterByTagsInputObjectTypeResolver $filterByTagsInputObjectTypeResolver): void
+    final public function setFilterByTaxonomyTermsInputObjectTypeResolver(FilterByTaxonomyTermsInputObjectTypeResolver $filterByTaxonomyTermsInputObjectTypeResolver): void
     {
-        $this->filterByTagsInputObjectTypeResolver = $filterByTagsInputObjectTypeResolver;
+        $this->filterByTaxonomyTermsInputObjectTypeResolver = $filterByTaxonomyTermsInputObjectTypeResolver;
     }
-    final protected function getFilterByTagsInputObjectTypeResolver(): FilterByTagsInputObjectTypeResolver
+    final protected function getFilterByTaxonomyTermsInputObjectTypeResolver(): FilterByTaxonomyTermsInputObjectTypeResolver
     {
-        if ($this->filterByTagsInputObjectTypeResolver === null) {
-            /** @var FilterByTagsInputObjectTypeResolver */
-            $filterByTagsInputObjectTypeResolver = $this->instanceManager->getInstance(FilterByTagsInputObjectTypeResolver::class);
-            $this->filterByTagsInputObjectTypeResolver = $filterByTagsInputObjectTypeResolver;
+        if ($this->filterByTaxonomyTermsInputObjectTypeResolver === null) {
+            /** @var FilterByTaxonomyTermsInputObjectTypeResolver */
+            $filterByTaxonomyTermsInputObjectTypeResolver = $this->instanceManager->getInstance(FilterByTaxonomyTermsInputObjectTypeResolver::class);
+            $this->filterByTaxonomyTermsInputObjectTypeResolver = $filterByTaxonomyTermsInputObjectTypeResolver;
         }
-        return $this->filterByTagsInputObjectTypeResolver;
+        return $this->filterByTaxonomyTermsInputObjectTypeResolver;
     }
     final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
     {
@@ -58,8 +59,8 @@ abstract class AbstractFilterCustomPostsByTagsInputObjectTypeResolver extends Ab
                 'taxonomy' => $this->getTagTaxonomyEnumStringScalarTypeResolver(),
             ] : [],
             [
-                'includeBy' => $this->getFilterByTagsInputObjectTypeResolver(),
-                'excludeBy' => $this->getFilterByTagsInputObjectTypeResolver(),
+                'includeBy' => $this->getFilterByTaxonomyTermsInputObjectTypeResolver(),
+                'excludeBy' => $this->getFilterByTaxonomyTermsInputObjectTypeResolver(),
             ]
         );
     }

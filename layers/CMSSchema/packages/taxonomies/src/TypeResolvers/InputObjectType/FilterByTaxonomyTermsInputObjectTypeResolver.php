@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-class FilterByTagsInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
+class FilterByTaxonomyTermsInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
@@ -44,7 +44,7 @@ class FilterByTagsInputObjectTypeResolver extends AbstractQueryableInputObjectTy
 
     public function getTypeName(): string
     {
-        return 'FilterByTagsInput';
+        return 'FilterByTaxonomyTermsInput';
     }
 
     /**
