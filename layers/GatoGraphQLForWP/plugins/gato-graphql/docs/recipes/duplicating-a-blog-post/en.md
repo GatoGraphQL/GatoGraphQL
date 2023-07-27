@@ -45,14 +45,14 @@ query GetPostAndExportData($postId: ID!)
       id @export(as: "categoryIDs", type: LIST)
     }
     rawContent @export(as: "rawContent")
-    excerpt @export(as: "excerpt")
+    rawExcerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
     }
     tags {
       id @export(as: "tagIDs", type: LIST)
     }
-    title @export(as: "title")
+    rawTitle @export(as: "title")
   }
 }
 
@@ -222,14 +222,14 @@ query GetPostAndExportData($postId: ID!) {
       id @export(as: "categoryIDs", type: LIST)
     }
     rawContent @export(as: "rawContent")
-    excerpt @export(as: "excerpt")
+    rawExcerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
     }
     tags {
       id @export(as: "tagIDs", type: LIST)
     }
-    title @export(as: "title")
+    rawTitle @export(as: "title")
   }
 }
 
@@ -490,14 +490,14 @@ query GetPostAndExportData($postId: ID!) {
       id
     }
     rawContent @export(as: "rawContent")
-    excerpt @export(as: "excerpt")
+    rawExcerpt @export(as: "excerpt")
     featuredImage @export(as: "featuredImageID") {
       id 
     }
     tags @export(as: "tagIDs") {
       id
     }
-    title @export(as: "title")    
+    rawTitle @export(as: "title")    
   }
 }
 
@@ -704,14 +704,14 @@ query GetPostAndExportData($postId: ID!)
       id @export(as: "categoryIDs", type: LIST)
     }
     rawContent @export(as: "rawContent")
-    excerpt @export(as: "excerpt")
+    rawExcerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
     }
     tags {
       id @export(as: "tagIDs", type: LIST)
     }
-    title @export(as: "title")
+    rawTitle @export(as: "title")
   }
 }
 
@@ -853,14 +853,14 @@ query GetPostAndExportData($postId: ID!)
       id @export(as: "categoryIDs", type: LIST)
     }
     rawContent @export(as: "rawContent")
-    excerpt @export(as: "excerpt")
+    rawExcerpt @export(as: "excerpt")
     featuredImage {
       id @export(as: "featuredImageID")
     }
     tags {
       id @export(as: "tagIDs", type: LIST)
     }
-    title @export(as: "title")
+    rawTitle @export(as: "title")
   }
 }
 

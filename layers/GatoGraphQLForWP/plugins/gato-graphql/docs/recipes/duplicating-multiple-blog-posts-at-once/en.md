@@ -149,14 +149,14 @@ query GetPostAndExportData {
       id
     }
     rawContent @export(as: "rawContent")
-    excerpt @export(as: "excerpt")
+    rawExcerpt @export(as: "excerpt")
     featuredImage @export(as: "featuredImageID") {
       id 
     }
     tags @export(as: "tagIDs") {
       id
     }
-    title @export(as: "title")    
+    rawTitle @export(as: "title")    
   }
 }
 ```

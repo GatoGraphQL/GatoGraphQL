@@ -651,7 +651,7 @@ query GetPostData(
 ) {
   post(by: {id: $postId}) {
     id
-    title @export(as: "postTitle")
+    rawTitle @export(as: "postTitle")
     rawContent @export(as: "postContent")
   }
 }
@@ -696,7 +696,7 @@ mutation StoreAdaptedPostData(
     }
     post {
       id
-      title
+      rawTitle
       rawContent
     }
   }
