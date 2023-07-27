@@ -4,46 +4,31 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\SchemaHooks;
 
-use PoP\Root\App;
+use PoPCMSSchema\Users\TypeResolvers\InputObjectType\FilterByAuthorInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
 abstract class AbstractRemoveAuthorInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
     use AddOrRemoveAuthorInputFieldsInputObjectTypeHookSetTrait;
 
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?FilterByAuthorInputObjectTypeResolver $filterByAuthorInputObjectTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setFilterByAuthorInputObjectTypeResolver(FilterByAuthorInputObjectTypeResolver $filterByAuthorInputObjectTypeResolver): void
     {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->filterByAuthorInputObjectTypeResolver = $filterByAuthorInputObjectTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getFilterByAuthorInputObjectTypeResolver(): FilterByAuthorInputObjectTypeResolver
     {
-        if ($this->idScalarTypeResolver === null) {
-            /** @var IDScalarTypeResolver */
-            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        if ($this->filterByAuthorInputObjectTypeResolver === null) {
+            /** @var FilterByAuthorInputObjectTypeResolver */
+            $filterByAuthorInputObjectTypeResolver = $this->instanceManager->getInstance(FilterByAuthorInputObjectTypeResolver::class);
+            $this->filterByAuthorInputObjectTypeResolver = $filterByAuthorInputObjectTypeResolver;
         }
-        return $this->idScalarTypeResolver;
-    }
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
-    {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-    }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
-    {
-        if ($this->stringScalarTypeResolver === null) {
-            /** @var StringScalarTypeResolver */
-            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
-        }
-        return $this->stringScalarTypeResolver;
+        return $this->filterByAuthorInputObjectTypeResolver;
     }
 
     protected function init(): void

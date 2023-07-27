@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\SchemaHooks;
 
+use PoPCMSSchema\Users\TypeResolvers\InputObjectType\FilterByAuthorInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 trait AddOrRemoveAuthorInputFieldsInputObjectTypeHookSetTrait
 {
-    abstract protected function getIDScalarTypeResolver(): IDScalarTypeResolver;
-    abstract protected function getStringScalarTypeResolver(): StringScalarTypeResolver;
+    abstract protected function getFilterByAuthorInputObjectTypeResolver(): FilterByAuthorInputObjectTypeResolver;
 
     /**
      * @return array<string,InputTypeResolverInterface>
@@ -19,9 +17,7 @@ trait AddOrRemoveAuthorInputFieldsInputObjectTypeHookSetTrait
     protected function getAuthorInputFieldNameTypeResolvers(): array
     {
         return [
-            'authorIDs' => $this->getIDScalarTypeResolver(),
-            'authorSlug' => $this->getStringScalarTypeResolver(),
-            'excludeAuthorIDs' => $this->getIDScalarTypeResolver(),
+            'author' => $this->getFilterByAuthorInputObjectTypeResolver(),
         ];
     }
 }
