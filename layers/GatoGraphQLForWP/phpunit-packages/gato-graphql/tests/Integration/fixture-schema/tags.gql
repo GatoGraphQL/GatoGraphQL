@@ -47,6 +47,10 @@
     }
     pagination: {
       limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
     }
   ) {
     id
@@ -69,6 +73,10 @@
     }
     pagination: {
       limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
     }
   ) {
     id
