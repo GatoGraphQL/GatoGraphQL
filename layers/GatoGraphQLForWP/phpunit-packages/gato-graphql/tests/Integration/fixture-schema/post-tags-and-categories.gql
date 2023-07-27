@@ -33,6 +33,9 @@
       categories: {
         includeBy: {
           ids: [1, 4]
+        },
+        excludeBy: {
+          slugs: "advanced"
         }
       }
     }
