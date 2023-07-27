@@ -1126,6 +1126,51 @@ We can now add value `any` to filter by custom post status. That means that inst
 }
 ```
 
+## Related inputs in filters have been grouped under input objects
+
+The `filter` inputs have been reorganized, receiving input objects that group associated data together, for the following fields:
+
+- `posts`
+- `customPosts`
+- `comments`
+
+For instance, before we could filter posts by author via inputs `authorIDs` and `excludeAuthorIDs`. These have now been grouped under a single `author` input object, and renamed as `ids` and `excludeIDs`:
+
+```graphql
+{
+  postsByAuthors: posts(filter: {
+    author: {
+      ids: [5]
+      excludeIDs: [1, 4]
+    }
+  }) {
+    id
+    title
+  }
+}
+```
+
+Similarly, all different properties to filter custom posts by tags and categories have been grouped under a single input object `tags` and `categories` and renamed accordingly:
+
+```graphql
+{
+  customPostsByTagIDs: customPosts(filter: {
+    tags: {
+      includeBy: {
+        ids: [37, 39]
+      }
+      excludeBy: {
+        slugs: ["tech"]
+      }
+      taxonomy: "custom-tag"
+    }
+  }) {
+    id
+    title
+  }
+}
+```
+
 ## The Settings page has been re-designed
 
 Due to the great number of modules in the plugin, the Settings page required several rows to display all tabs, which was not very polished.
@@ -1614,6 +1659,40 @@ mutation UpdateTagsOnPost {
     }
   }) {
     status
+  }
+}
+```
+
+### Must adapt filtering data for `posts`, `customPosts` and `comments`
+
+As filters for `posts`, `customPosts` and `comments` have been reorganized, these must be adapted.
+
+For instance, this query:
+
+```graphql
+{
+  postsByAuthors: posts(filter: {
+    authorIDs: [5]
+    excludeAuthorIDs: [1, 4]
+  }) {
+    id
+    title
+  }
+}
+```
+
+...must be adapted as:
+
+```graphql
+{
+  postsByAuthors: posts(filter: {
+    author: {
+      ids: [5]
+      excludeIDs: [1, 4]
+    }
+  }) {
+    id
+    title
   }
 }
 ```

@@ -25,6 +25,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Mutations `createPost` and `updatePost` now have input `authorBy`, as a “sensitive” data element
 - Mutations setting tags and categories on custom posts can now receive IDs or slugs via a oneof input
 - Filter custom posts by `any` status
+- Related inputs in filters have been grouped under input objects
 - The Settings page has been re-designed, featuring 2-level organization and tabs displayed vertically
 - Reset settings, and choose to use restrictive or non-restrictive default settings
 - Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
@@ -52,6 +53,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Must update mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others)
 - Must update mutations `setTagsOnPost`, `createPost` and `updatePost`
+- Must adapt filtering data for `posts`, `customPosts` and `comments`
 - Non-restrictive Settings values are used by default
 - Env var `ENABLE_UNSAFE_DEFAULTS` has been removed and `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` added in its place, to indicate to use the restrictive Settings values by default
 - Renamed plugin to "Gato GraphQL"
