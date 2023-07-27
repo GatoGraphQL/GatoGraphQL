@@ -1,8 +1,12 @@
 {
   customPostsByIDs: customPosts(
     filter: {
-      tagIDs: [37, 39]
-      tagTaxonomy: "dummy-tag"
+      tags: {
+        includeBy: {
+          ids: [37, 39]
+        }
+        taxonomy: "dummy-tag"
+      }
       categoryIDs: [32, 36]
       categoryTaxonomy: "dummy-category"
     }
@@ -21,8 +25,12 @@
 
   customPostsBySlugAndIDs: customPosts(
     filter: {
-      tagSlugs: "classical"
-      tagTaxonomy: "dummy-tag"
+      tags: {
+        includeBy: {
+          slugs: "classical"
+        }
+        taxonomy: "dummy-tag"
+      }
       categoryIDs: [32, 36]
       categoryTaxonomy: "dummy-category"
     }

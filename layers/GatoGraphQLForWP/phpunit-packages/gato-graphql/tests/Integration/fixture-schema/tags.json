@@ -8,6 +8,23 @@
                 "customPosts": [
                     {
                         "__typename": "GenericCustomPost",
+                        "id": 634,
+                        "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 37,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 38,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
                         "id": 654,
                         "title": "Dummy CPT with blocks",
                         "tags": [
@@ -44,23 +61,6 @@
                         "__typename": "GenericCustomPost",
                         "id": 658,
                         "title": "Dummy CPT with no content",
-                        "tags": [
-                            {
-                                "__typename": "GenericTag",
-                                "id": 37,
-                                "name": "Tango"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 38,
-                                "name": "Hip Hop"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 634,
-                        "title": "Recusandae vel deleniti est expedita dolores quasi",
                         "tags": [
                             {
                                 "__typename": "GenericTag",
@@ -1856,6 +1856,18 @@
                 ]
             },
             {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 38
+                    }
+                ]
+            },
+            {
                 "id": 654,
                 "title": "Dummy CPT with blocks",
                 "tags": [
@@ -1882,18 +1894,6 @@
             {
                 "id": 658,
                 "title": "Dummy CPT with no content",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 38
-                    }
-                ]
-            },
-            {
-                "id": 634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "tags": [
                     {
                         "id": 37
@@ -2119,18 +2119,6 @@
                 ]
             },
             {
-                "id": 634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "hip-hop"
-                    }
-                ]
-            },
-            {
                 "id": 654,
                 "title": "Dummy CPT with blocks",
                 "tags": [
@@ -2157,6 +2145,18 @@
             {
                 "id": 658,
                 "title": "Dummy CPT with no content",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "tags": [
                     {
                         "slug": "tango"

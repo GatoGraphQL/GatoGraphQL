@@ -46,7 +46,7 @@
   }
 
   postsByTagIDs: posts(
-    filter: { tagIDs: [15, 14] }
+    filter: { tags: { includeBy: { ids: [15, 14] } } }
   ) {
     id
     title
@@ -56,7 +56,7 @@
   }
 
   postsByTagSlugs: posts(
-    filter: { tagSlugs: ["release", "plugin"] }
+    filter: { tags: { includeBy: { slugs: ["release", "plugin"] } } }
   ) {
     id
     title
