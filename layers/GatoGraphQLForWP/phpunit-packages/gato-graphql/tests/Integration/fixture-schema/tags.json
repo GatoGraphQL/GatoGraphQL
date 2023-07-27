@@ -2099,6 +2099,71 @@
                 ]
             }
         ],
+        "customPostsExcludeByTagIDs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 2,
+                "title": "Sample Page"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "tags": [
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "tags": []
+            },
+            {
+                "id": 666,
+                "title": "Another Page"
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "tags": []
+            }
+        ],
         "customPostsByTagSlugs": [
             {
                 "id": 613,
@@ -2360,6 +2425,92 @@
                         "slug": "hip-hop"
                     }
                 ]
+            }
+        ],
+        "customPostsExcludeByTagSlugs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 2,
+                "title": "Sample Page"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "tags": [
+                    {
+                        "slug": "classical"
+                    }
+                ]
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "tags": []
+            },
+            {
+                "id": 666,
+                "title": "Another Page"
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "tags": []
+            }
+        ],
+        "customPostsExcludeByTagSlugsOnCPT": [
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "tags": [
+                    {
+                        "slug": "classical"
+                    }
+                ]
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "tags": []
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "tags": []
             }
         ]
     }

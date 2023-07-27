@@ -1846,6 +1846,90 @@
                 "categories": []
             }
         ],
+        "customPostsExcludeByCategorySlugsOnCPT": [
+            {
+                "id": 649,
+                "title": "Nulla numquam totam eaque",
+                "categories": []
+            },
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "categories": [
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 658,
+                "title": "Dummy CPT with no content",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "categories": []
+            },
+            {
+                "id": 641,
+                "title": "Impedit necessitatibus dolor est",
+                "categories": []
+            }
+        ],
         "postCategories": [
             {
                 "count": 4,

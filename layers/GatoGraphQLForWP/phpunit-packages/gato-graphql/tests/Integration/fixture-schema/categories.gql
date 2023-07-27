@@ -113,6 +113,26 @@
       }
     }
   }
+  
+  customPostsExcludeByCategorySlugsOnCPT: customPosts(
+    filter: {
+      customPostTypes: "dummy-cpt"
+      categories: {
+        excludeBy: {
+          slugs: ["capullo"]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
 
   postCategories: categories(taxonomy: category) {
     ...CategoryData
