@@ -4,10 +4,29 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\SchemaHooks;
 
+use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\CustomPostsFilterCustomPostsByTagsInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\FilterCustomPostsByTagsInputObjectTypeResolverInterface;
+
 abstract class AbstractCustomPostAddTagFilterInputObjectTypeHookSet extends AbstractAddTagFilterInputObjectTypeHookSet
 {
-    protected function addTagTaxonomyFilterInput(): bool
+    private ?CustomPostsFilterCustomPostsByTagsInputObjectTypeResolver $customPostsFilterCustomPostsByTagsInputObjectTypeResolver = null;
+
+    final public function setCustomPostsFilterCustomPostsByTagsInputObjectTypeResolver(CustomPostsFilterCustomPostsByTagsInputObjectTypeResolver $customPostsFilterCustomPostsByTagsInputObjectTypeResolver): void
     {
-        return true;
+        $this->customPostsFilterCustomPostsByTagsInputObjectTypeResolver = $customPostsFilterCustomPostsByTagsInputObjectTypeResolver;
+    }
+    final protected function getCustomPostsFilterCustomPostsByTagsInputObjectTypeResolver(): CustomPostsFilterCustomPostsByTagsInputObjectTypeResolver
+    {
+        if ($this->customPostsFilterCustomPostsByTagsInputObjectTypeResolver === null) {
+            /** @var CustomPostsFilterCustomPostsByTagsInputObjectTypeResolver */
+            $customPostsFilterCustomPostsByTagsInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostsFilterCustomPostsByTagsInputObjectTypeResolver::class);
+            $this->customPostsFilterCustomPostsByTagsInputObjectTypeResolver = $customPostsFilterCustomPostsByTagsInputObjectTypeResolver;
+        }
+        return $this->customPostsFilterCustomPostsByTagsInputObjectTypeResolver;
+    }
+
+    protected function getFilterCustomPostsByTagsInputObjectTypeResolver(): FilterCustomPostsByTagsInputObjectTypeResolverInterface
+    {
+        return $this->getCustomPostsFilterCustomPostsByTagsInputObjectTypeResolver();
     }
 }
