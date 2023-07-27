@@ -37,14 +37,14 @@ query {
     }
   }
 
-  customPostsByAuthorIDs: customPosts(filter: { authorIDs: 5 }, sort: { by: ID, order: ASC }) {
+  customPostsByAuthorIDs: customPosts(filter: { author: { ids: 5 } }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id
       title
     }
   }
-  customPostsByAuthorSlug: customPosts(filter: { authorSlug: "blogger" }, sort: { by: ID, order: ASC }) {
+  customPostsByAuthorSlug: customPosts(filter: { author: { slug: "blogger" } }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id
@@ -65,7 +65,7 @@ query {
       title
     }
   }
-  customPostsByExcludeAuthorIDs: customPosts(filter: { excludeAuthorIDs: 4 }, sort: { by: ID, order: ASC }) {
+  customPostsByExcludeAuthorIDs: customPosts(filter: { author: { excludeIDs: 4 } }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id
