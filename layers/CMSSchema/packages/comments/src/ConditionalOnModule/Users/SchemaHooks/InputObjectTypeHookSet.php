@@ -4,92 +4,45 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\ConditionalOnModule\Users\SchemaHooks;
 
-use PoP\ComponentModel\FilterInputs\FilterInputInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\FilterCommentsByCommentAuthorInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\FilterCommentsByCustomPostAuthorInputObjectTypeResolver;
+use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentsFilterInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputs\CustomPostAuthorIDsFilterInput;
-use PoPCMSSchema\Comments\ConditionalOnModule\Users\FilterInputs\ExcludeCustomPostAuthorIDsFilterInput;
-use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentsFilterInputObjectTypeResolver;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\AuthorIDsFilterInput;
-use PoPCMSSchema\Users\ConditionalOnModule\CustomPosts\FilterInputs\ExcludeAuthorIDsFilterInput;
 
 class InputObjectTypeHookSet extends AbstractHookSet
 {
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?CustomPostAuthorIDsFilterInput $customPostAuthorIDsFilterInput = null;
-    private ?ExcludeCustomPostAuthorIDsFilterInput $excludeCustomPostAuthorIDsFilterInput = null;
-    private ?AuthorIDsFilterInput $authorIDsFilterInput = null;
-    private ?ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput = null;
+    private ?FilterCommentsByCommentAuthorInputObjectTypeResolver $filterCommentsByCommentAuthorInputObjectTypeResolver = null;
+    private ?FilterCommentsByCustomPostAuthorInputObjectTypeResolver $filterCommentsByCustomPostAuthorInputObjectTypeResolver = null;
 
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    final public function setFilterCommentsByCommentAuthorInputObjectTypeResolver(FilterCommentsByCommentAuthorInputObjectTypeResolver $filterCommentsByCommentAuthorInputObjectTypeResolver): void
     {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
+        $this->filterCommentsByCommentAuthorInputObjectTypeResolver = $filterCommentsByCommentAuthorInputObjectTypeResolver;
     }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    final protected function getFilterCommentsByCommentAuthorInputObjectTypeResolver(): FilterCommentsByCommentAuthorInputObjectTypeResolver
     {
-        if ($this->idScalarTypeResolver === null) {
-            /** @var IDScalarTypeResolver */
-            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        if ($this->filterCommentsByCommentAuthorInputObjectTypeResolver === null) {
+            /** @var FilterCommentsByCommentAuthorInputObjectTypeResolver */
+            $filterCommentsByCommentAuthorInputObjectTypeResolver = $this->instanceManager->getInstance(FilterCommentsByCommentAuthorInputObjectTypeResolver::class);
+            $this->filterCommentsByCommentAuthorInputObjectTypeResolver = $filterCommentsByCommentAuthorInputObjectTypeResolver;
         }
-        return $this->idScalarTypeResolver;
+        return $this->filterCommentsByCommentAuthorInputObjectTypeResolver;
     }
-    final public function setCustomPostAuthorIDsFilterInput(CustomPostAuthorIDsFilterInput $customPostAuthorIDsFilterInput): void
+    final public function setFilterCommentsByCustomPostAuthorInputObjectTypeResolver(FilterCommentsByCustomPostAuthorInputObjectTypeResolver $filterCommentsByCustomPostAuthorInputObjectTypeResolver): void
     {
-        $this->customPostAuthorIDsFilterInput = $customPostAuthorIDsFilterInput;
+        $this->filterCommentsByCustomPostAuthorInputObjectTypeResolver = $filterCommentsByCustomPostAuthorInputObjectTypeResolver;
     }
-    final protected function getCustomPostAuthorIDsFilterInput(): CustomPostAuthorIDsFilterInput
+    final protected function getFilterCommentsByCustomPostAuthorInputObjectTypeResolver(): FilterCommentsByCustomPostAuthorInputObjectTypeResolver
     {
-        if ($this->customPostAuthorIDsFilterInput === null) {
-            /** @var CustomPostAuthorIDsFilterInput */
-            $customPostAuthorIDsFilterInput = $this->instanceManager->getInstance(CustomPostAuthorIDsFilterInput::class);
-            $this->customPostAuthorIDsFilterInput = $customPostAuthorIDsFilterInput;
+        if ($this->filterCommentsByCustomPostAuthorInputObjectTypeResolver === null) {
+            /** @var FilterCommentsByCustomPostAuthorInputObjectTypeResolver */
+            $filterCommentsByCustomPostAuthorInputObjectTypeResolver = $this->instanceManager->getInstance(FilterCommentsByCustomPostAuthorInputObjectTypeResolver::class);
+            $this->filterCommentsByCustomPostAuthorInputObjectTypeResolver = $filterCommentsByCustomPostAuthorInputObjectTypeResolver;
         }
-        return $this->customPostAuthorIDsFilterInput;
-    }
-    final public function setExcludeCustomPostAuthorIDsFilterInput(ExcludeCustomPostAuthorIDsFilterInput $excludeCustomPostAuthorIDsFilterInput): void
-    {
-        $this->excludeCustomPostAuthorIDsFilterInput = $excludeCustomPostAuthorIDsFilterInput;
-    }
-    final protected function getExcludeCustomPostAuthorIDsFilterInput(): ExcludeCustomPostAuthorIDsFilterInput
-    {
-        if ($this->excludeCustomPostAuthorIDsFilterInput === null) {
-            /** @var ExcludeCustomPostAuthorIDsFilterInput */
-            $excludeCustomPostAuthorIDsFilterInput = $this->instanceManager->getInstance(ExcludeCustomPostAuthorIDsFilterInput::class);
-            $this->excludeCustomPostAuthorIDsFilterInput = $excludeCustomPostAuthorIDsFilterInput;
-        }
-        return $this->excludeCustomPostAuthorIDsFilterInput;
-    }
-    final public function setAuthorIDsFilterInput(AuthorIDsFilterInput $authorIDsFilterInput): void
-    {
-        $this->authorIDsFilterInput = $authorIDsFilterInput;
-    }
-    final protected function getAuthorIDsFilterInput(): AuthorIDsFilterInput
-    {
-        if ($this->authorIDsFilterInput === null) {
-            /** @var AuthorIDsFilterInput */
-            $authorIDsFilterInput = $this->instanceManager->getInstance(AuthorIDsFilterInput::class);
-            $this->authorIDsFilterInput = $authorIDsFilterInput;
-        }
-        return $this->authorIDsFilterInput;
-    }
-    final public function setExcludeAuthorIDsFilterInput(ExcludeAuthorIDsFilterInput $excludeAuthorIDsFilterInput): void
-    {
-        $this->excludeAuthorIDsFilterInput = $excludeAuthorIDsFilterInput;
-    }
-    final protected function getExcludeAuthorIDsFilterInput(): ExcludeAuthorIDsFilterInput
-    {
-        if ($this->excludeAuthorIDsFilterInput === null) {
-            /** @var ExcludeAuthorIDsFilterInput */
-            $excludeAuthorIDsFilterInput = $this->instanceManager->getInstance(ExcludeAuthorIDsFilterInput::class);
-            $this->excludeAuthorIDsFilterInput = $excludeAuthorIDsFilterInput;
-        }
-        return $this->excludeAuthorIDsFilterInput;
+        return $this->filterCommentsByCustomPostAuthorInputObjectTypeResolver;
     }
 
     protected function init(): void
@@ -103,18 +56,6 @@ class InputObjectTypeHookSet extends AbstractHookSet
         App::addFilter(
             HookNames::INPUT_FIELD_DESCRIPTION,
             $this->getInputFieldDescription(...),
-            10,
-            3
-        );
-        App::addFilter(
-            HookNames::INPUT_FIELD_TYPE_MODIFIERS,
-            $this->getInputFieldTypeModifiers(...),
-            10,
-            3
-        );
-        App::addFilter(
-            HookNames::INPUT_FIELD_FILTER_INPUT,
-            $this->getInputFieldFilterInput(...),
             10,
             3
         );
@@ -134,10 +75,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
         return array_merge(
             $inputFieldNameTypeResolvers,
             [
-                'authorIDs' => $this->getIDScalarTypeResolver(),
-                'excludeAuthorIDs' => $this->getIDScalarTypeResolver(),
-                'customPostAuthorIDs' => $this->getIDScalarTypeResolver(),
-                'excludeCustomPostAuthorIDs' => $this->getIDScalarTypeResolver(),
+                'author' => $this->getFilterCommentsByCommentAuthorInputObjectTypeResolver(),
+                'customPostAuthor' => $this->getFilterCommentsByCustomPostAuthorInputObjectTypeResolver(),
             ]
         );
     }
@@ -151,47 +90,9 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'authorIDs' => $this->__('Filter comments from the authors with given IDs', 'comments'),
-            'excludeAuthorIDs' => $this->__('Exclude comments from authors with given IDs', 'comments'),
-            'customPostAuthorIDs' => $this->__('Filter comments added to custom posts from the authors with given IDs', 'comments'),
-            'excludeCustomPostAuthorIDs' => $this->__('Exclude comments added to custom posts from authors with given IDs', 'comments'),
+            'author' => $this->__('Filter comments by author', 'comments'),
+            'customPostAuthor' => $this->__('Filter comments added to custom posts from the given authors', 'comments'),
             default => $inputFieldDescription,
-        };
-    }
-
-    public function getInputFieldTypeModifiers(
-        int $inputFieldTypeModifiers,
-        InputObjectTypeResolverInterface $inputObjectTypeResolver,
-        string $inputFieldName
-    ): int {
-        if (!($inputObjectTypeResolver instanceof RootCommentsFilterInputObjectTypeResolver)) {
-            return $inputFieldTypeModifiers;
-        }
-        return match ($inputFieldName) {
-            'authorIDs',
-            'excludeAuthorIDs',
-            'customPostAuthorIDs',
-            'excludeCustomPostAuthorIDs'
-                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default
-                => $inputFieldTypeModifiers,
-        };
-    }
-
-    public function getInputFieldFilterInput(
-        ?FilterInputInterface $inputFieldFilterInput,
-        InputObjectTypeResolverInterface $inputObjectTypeResolver,
-        string $inputFieldName,
-    ): ?FilterInputInterface {
-        if (!($inputObjectTypeResolver instanceof RootCommentsFilterInputObjectTypeResolver)) {
-            return $inputFieldFilterInput;
-        }
-        return match ($inputFieldName) {
-            'authorIDs' => $this->getAuthorIDsFilterInput(),
-            'excludeAuthorIDs' => $this->getExcludeAuthorIDsFilterInput(),
-            'customPostAuthorIDs' => $this->getCustomPostAuthorIDsFilterInput(),
-            'excludeCustomPostAuthorIDs' => $this->getExcludeCustomPostAuthorIDsFilterInput(),
-            default => $inputFieldFilterInput,
         };
     }
 }
