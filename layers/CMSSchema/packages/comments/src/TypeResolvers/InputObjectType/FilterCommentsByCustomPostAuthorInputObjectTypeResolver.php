@@ -24,5 +24,5 @@ class FilterCommentsByCustomPostAuthorInputObjectTypeResolver extends AbstractFi
     protected function getExcludeAuthorIDsFilteringQueryArgName(): string
     {
         return 'exclude-custompost-author-ids';
-    }   
+    }
 }

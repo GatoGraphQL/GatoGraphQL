@@ -24,5 +24,5 @@ class FilterCommentsByCommentAuthorInputObjectTypeResolver extends AbstractFilte
     protected function getExcludeAuthorIDsFilteringQueryArgName(): string
     {
         return 'exclude-author-ids';
-    } 
+    }
 }
