@@ -55,8 +55,28 @@
     }
   }
 
+  postsExcludeByTagIDs: posts(
+    filter: { tags: { excludeBy: { ids: [15, 14] } } }
+  ) {
+    id
+    title
+    tags {
+      id
+    }
+  }
+
   postsByTagSlugs: posts(
     filter: { tags: { includeBy: { slugs: ["release", "plugin"] } } }
+  ) {
+    id
+    title
+    tags {
+      slug
+    }
+  }
+
+  postsExcludeByTagSlugs: posts(
+    filter: { tags: { excludeBy: { slugs: ["release", "plugin"] } } }
   ) {
     id
     title
