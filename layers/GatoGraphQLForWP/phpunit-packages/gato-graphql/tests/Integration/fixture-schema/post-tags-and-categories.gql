@@ -1,8 +1,16 @@
 {
   postsByIDs: posts(
     filter: {
-      tagIDs: [15, 14]
-      categoryIDs: [1, 4]
+      tags: {
+        includeBy: {
+          ids: [15, 14]
+        }
+      }
+      categories: {
+        includeBy: {
+          ids: [1, 4]
+        }
+      }
     }
   ) {
     id
@@ -17,8 +25,19 @@
 
   postsBySlugAndIDs: posts(
     filter: {
-      tagSlugs: ["release", "plugin"]
-      categoryIDs: [1, 4]
+      tags: {
+        includeBy: {
+          slugs: ["release", "plugin"]
+        }
+      }
+      categories: {
+        includeBy: {
+          ids: [1, 4]
+        },
+        excludeBy: {
+          slugs: "advanced"
+        }
+      }
     }
   ) {
     id

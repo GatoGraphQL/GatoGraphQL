@@ -8,6 +8,23 @@
                 "customPosts": [
                     {
                         "__typename": "GenericCustomPost",
+                        "id": 634,
+                        "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "tags": [
+                            {
+                                "__typename": "GenericTag",
+                                "id": 37,
+                                "name": "Tango"
+                            },
+                            {
+                                "__typename": "GenericTag",
+                                "id": 38,
+                                "name": "Hip Hop"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
                         "id": 654,
                         "title": "Dummy CPT with blocks",
                         "tags": [
@@ -44,23 +61,6 @@
                         "__typename": "GenericCustomPost",
                         "id": 658,
                         "title": "Dummy CPT with no content",
-                        "tags": [
-                            {
-                                "__typename": "GenericTag",
-                                "id": 37,
-                                "name": "Tango"
-                            },
-                            {
-                                "__typename": "GenericTag",
-                                "id": 38,
-                                "name": "Hip Hop"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 634,
-                        "title": "Recusandae vel deleniti est expedita dolores quasi",
                         "tags": [
                             {
                                 "__typename": "GenericTag",
@@ -1838,6 +1838,213 @@
         ],
         "customPostsByTagIDs": [
             {
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 36
+                    },
+                    {
+                        "id": 35
+                    }
+                ]
+            },
+            {
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                "tags": [
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 36
+                    },
+                    {
+                        "id": 38
+                    }
+                ]
+            },
+            {
+                "id": 620,
+                "title": "Dignissimos sed dolore aut",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 36
+                    },
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 622,
+                "title": "Dolore ex et deleniti mollitia",
+                "tags": [
+                    {
+                        "id": 37
+                    }
+                ]
+            },
+            {
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "tags": [
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 36
+                    },
+                    {
+                        "id": 38
+                    },
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 629,
+                "title": "Qui ea incidunt qui",
+                "tags": [
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 38
+                    }
+                ]
+            },
+            {
+                "id": 630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 38
+                    },
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 35
+                    }
+                ]
+            },
+            {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 38
+                    }
+                ]
+            },
+            {
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "tags": [
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 639,
+                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 35
+                    },
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 641,
+                "title": "Impedit necessitatibus dolor est",
+                "tags": [
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 36
+                    },
+                    {
+                        "id": 38
+                    }
+                ]
+            },
+            {
+                "id": 644,
+                "title": "Impedit eaque numquam quas inventore",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 38
+                    },
+                    {
+                        "id": 35
+                    }
+                ]
+            },
+            {
+                "id": 648,
+                "title": "Nostrum consequatur non fugit vel",
+                "tags": [
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 39
+                    },
+                    {
+                        "id": 36
+                    },
+                    {
+                        "id": 35
+                    }
+                ]
+            },
+            {
                 "id": 649,
                 "title": "Nulla numquam totam eaque",
                 "tags": [
@@ -1888,218 +2095,283 @@
                     },
                     {
                         "id": 38
-                    }
-                ]
-            },
-            {
-                "id": 634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 38
-                    }
-                ]
-            },
-            {
-                "id": 636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
-                "tags": [
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 40
-                    }
-                ]
-            },
-            {
-                "id": 639,
-                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 35
-                    },
-                    {
-                        "id": 40
-                    }
-                ]
-            },
-            {
-                "id": 622,
-                "title": "Dolore ex et deleniti mollitia",
-                "tags": [
-                    {
-                        "id": 37
-                    }
-                ]
-            },
-            {
-                "id": 648,
-                "title": "Nostrum consequatur non fugit vel",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 36
-                    },
-                    {
-                        "id": 35
-                    }
-                ]
-            },
-            {
-                "id": 644,
-                "title": "Impedit eaque numquam quas inventore",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 38
-                    },
-                    {
-                        "id": 35
-                    }
-                ]
-            },
-            {
-                "id": 630,
-                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 38
-                    },
-                    {
-                        "id": 40
-                    }
-                ]
-            },
-            {
-                "id": 641,
-                "title": "Impedit necessitatibus dolor est",
-                "tags": [
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 36
-                    },
-                    {
-                        "id": 38
-                    }
-                ]
-            },
-            {
-                "id": 627,
-                "title": "Quis voluptatum tempore veniam est sit",
-                "tags": [
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 36
-                    },
-                    {
-                        "id": 38
-                    },
-                    {
-                        "id": 40
-                    }
-                ]
-            },
-            {
-                "id": 629,
-                "title": "Qui ea incidunt qui",
-                "tags": [
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 38
-                    }
-                ]
-            },
-            {
-                "id": 631,
-                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 35
-                    }
-                ]
-            },
-            {
-                "id": 616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
-                "tags": [
-                    {
-                        "id": 39
-                    },
-                    {
-                        "id": 36
-                    },
-                    {
-                        "id": 38
-                    }
-                ]
-            },
-            {
-                "id": 613,
-                "title": "Dolor facilis repellat pariatur veniam at",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 36
-                    },
-                    {
-                        "id": 35
-                    }
-                ]
-            },
-            {
-                "id": 620,
-                "title": "Dignissimos sed dolore aut",
-                "tags": [
-                    {
-                        "id": 37
-                    },
-                    {
-                        "id": 36
-                    },
-                    {
-                        "id": 40
                     }
                 ]
             }
         ],
+        "customPostsExcludeByTagIDs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
+            },
+            {
+                "id": 2,
+                "title": "Sample Page"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "tags": [
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "tags": []
+            },
+            {
+                "id": 666,
+                "title": "Another Page"
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "tags": []
+            }
+        ],
         "customPostsByTagSlugs": [
+            {
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "heavy-metal"
+                    }
+                ]
+            },
+            {
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                "tags": [
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 620,
+                "title": "Dignissimos sed dolore aut",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ]
+            },
+            {
+                "id": 622,
+                "title": "Dolore ex et deleniti mollitia",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    }
+                ]
+            },
+            {
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "tags": [
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ]
+            },
+            {
+                "id": 629,
+                "title": "Qui ea incidunt qui",
+                "tags": [
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ]
+            },
+            {
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "heavy-metal"
+                    }
+                ]
+            },
+            {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "tags": [
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ]
+            },
+            {
+                "id": 639,
+                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "heavy-metal"
+                    },
+                    {
+                        "slug": "classical"
+                    }
+                ]
+            },
+            {
+                "id": 641,
+                "title": "Impedit necessitatibus dolor est",
+                "tags": [
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    }
+                ]
+            },
+            {
+                "id": 644,
+                "title": "Impedit eaque numquam quas inventore",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "hip-hop"
+                    },
+                    {
+                        "slug": "heavy-metal"
+                    }
+                ]
+            },
+            {
+                "id": 648,
+                "title": "Nostrum consequatur non fugit vel",
+                "tags": [
+                    {
+                        "slug": "tango"
+                    },
+                    {
+                        "slug": "rock"
+                    },
+                    {
+                        "slug": "jazz"
+                    },
+                    {
+                        "slug": "heavy-metal"
+                    }
+                ]
+            },
             {
                 "id": 649,
                 "title": "Nulla numquam totam eaque",
@@ -2115,18 +2387,6 @@
                     },
                     {
                         "slug": "classical"
-                    }
-                ]
-            },
-            {
-                "id": 634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "hip-hop"
                     }
                 ]
             },
@@ -2165,201 +2425,92 @@
                         "slug": "hip-hop"
                     }
                 ]
+            }
+        ],
+        "customPostsExcludeByTagSlugs": [
+            {
+                "id": 1,
+                "title": "Hello world!"
             },
             {
-                "id": 636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "id": 2,
+                "title": "Sample Page"
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out"
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next"
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have"
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client"
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?"
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security"
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
                 "tags": [
-                    {
-                        "slug": "rock"
-                    },
                     {
                         "slug": "classical"
                     }
                 ]
             },
             {
-                "id": 639,
-                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "tags": []
+            },
+            {
+                "id": 666,
+                "title": "Another Page"
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "tags": []
+            }
+        ],
+        "customPostsExcludeByTagSlugsOnCPT": [
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
                 "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "heavy-metal"
-                    },
                     {
                         "slug": "classical"
                     }
                 ]
             },
             {
-                "id": 622,
-                "title": "Dolore ex et deleniti mollitia",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    }
-                ]
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "tags": []
             },
             {
-                "id": 648,
-                "title": "Nostrum consequatur non fugit vel",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "jazz"
-                    },
-                    {
-                        "slug": "heavy-metal"
-                    }
-                ]
-            },
-            {
-                "id": 644,
-                "title": "Impedit eaque numquam quas inventore",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "hip-hop"
-                    },
-                    {
-                        "slug": "heavy-metal"
-                    }
-                ]
-            },
-            {
-                "id": 630,
-                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "hip-hop"
-                    },
-                    {
-                        "slug": "classical"
-                    }
-                ]
-            },
-            {
-                "id": 641,
-                "title": "Impedit necessitatibus dolor est",
-                "tags": [
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "jazz"
-                    },
-                    {
-                        "slug": "hip-hop"
-                    }
-                ]
-            },
-            {
-                "id": 627,
-                "title": "Quis voluptatum tempore veniam est sit",
-                "tags": [
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "jazz"
-                    },
-                    {
-                        "slug": "hip-hop"
-                    },
-                    {
-                        "slug": "classical"
-                    }
-                ]
-            },
-            {
-                "id": 629,
-                "title": "Qui ea incidunt qui",
-                "tags": [
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "hip-hop"
-                    }
-                ]
-            },
-            {
-                "id": 631,
-                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "heavy-metal"
-                    }
-                ]
-            },
-            {
-                "id": 616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
-                "tags": [
-                    {
-                        "slug": "rock"
-                    },
-                    {
-                        "slug": "jazz"
-                    },
-                    {
-                        "slug": "hip-hop"
-                    }
-                ]
-            },
-            {
-                "id": 613,
-                "title": "Dolor facilis repellat pariatur veniam at",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "jazz"
-                    },
-                    {
-                        "slug": "heavy-metal"
-                    }
-                ]
-            },
-            {
-                "id": 620,
-                "title": "Dignissimos sed dolore aut",
-                "tags": [
-                    {
-                        "slug": "tango"
-                    },
-                    {
-                        "slug": "jazz"
-                    },
-                    {
-                        "slug": "classical"
-                    }
-                ]
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "tags": []
             }
         ]
     }

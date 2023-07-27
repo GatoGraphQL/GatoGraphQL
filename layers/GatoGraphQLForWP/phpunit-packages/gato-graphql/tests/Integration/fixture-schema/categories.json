@@ -1598,6 +1598,338 @@
                 ]
             }
         ],
+        "customPostsExcludeByCategoryIDs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 649,
+                "title": "Nulla numquam totam eaque",
+                "categories": []
+            },
+            {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 658,
+                "title": "Dummy CPT with no content",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "categories": []
+            },
+            {
+                "id": 641,
+                "title": "Impedit necessitatibus dolor est",
+                "categories": []
+            }
+        ],
+        "customPostsByCategorySlugs": [
+            {
+                "id": 639,
+                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                "categories": [
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 29
+                    }
+                ]
+            },
+            {
+                "id": 622,
+                "title": "Dolore ex et deleniti mollitia",
+                "categories": [
+                    {
+                        "id": 32
+                    },
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 648,
+                "title": "Nostrum consequatur non fugit vel",
+                "categories": [
+                    {
+                        "id": 33
+                    },
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 29
+                    }
+                ]
+            },
+            {
+                "id": 644,
+                "title": "Impedit eaque numquam quas inventore",
+                "categories": [
+                    {
+                        "id": 33
+                    },
+                    {
+                        "id": 32
+                    },
+                    {
+                        "id": 29
+                    },
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
+                "id": 630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                "categories": [
+                    {
+                        "id": 29
+                    }
+                ]
+            },
+            {
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "categories": [
+                    {
+                        "id": 32
+                    },
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 29
+                    }
+                ]
+            }
+        ],
+        "customPostsExcludeByCategorySlugs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 649,
+                "title": "Nulla numquam totam eaque",
+                "categories": []
+            },
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "categories": [
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 658,
+                "title": "Dummy CPT with no content",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "categories": []
+            }
+        ],
+        "customPostsExcludeByCategorySlugsOnCPT": [
+            {
+                "id": 649,
+                "title": "Nulla numquam totam eaque",
+                "categories": []
+            },
+            {
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "categories": [
+                    {
+                        "id": 28
+                    }
+                ]
+            },
+            {
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "categories": []
+            },
+            {
+                "id": 658,
+                "title": "Dummy CPT with no content",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "categories": [
+                    {
+                        "id": 31
+                    },
+                    {
+                        "id": 27
+                    }
+                ]
+            },
+            {
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "categories": []
+            },
+            {
+                "id": 641,
+                "title": "Impedit necessitatibus dolor est",
+                "categories": []
+            }
+        ],
         "postCategories": [
             {
                 "count": 4,

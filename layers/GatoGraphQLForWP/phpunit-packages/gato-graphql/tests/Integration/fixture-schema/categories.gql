@@ -40,8 +40,89 @@
 
   customPostsByCategoryIDs: customPosts(
     filter: {
-      categoryIDs: [28, 33]
-      categoryTaxonomy: "dummy-category"
+      categories: {
+        includeBy: {
+          ids: [28, 33]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+
+  customPostsExcludeByCategoryIDs: customPosts(
+    filter: {
+      categories: {
+        excludeBy: {
+          ids: [28, 33]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+
+  customPostsByCategorySlugs: customPosts(
+    filter: {
+      categories: {
+        includeBy: {
+          slugs: ["capullo"]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+
+  customPostsExcludeByCategorySlugs: customPosts(
+    filter: {
+      categories: {
+        excludeBy: {
+          slugs: ["capullo"]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+  
+  customPostsExcludeByCategorySlugsOnCPT: customPosts(
+    filter: {
+      customPostTypes: "dummy-cpt"
+      categories: {
+        excludeBy: {
+          slugs: ["capullo"]
+        }
+        taxonomy: "dummy-category"
+      }
     }
   ) {
     id

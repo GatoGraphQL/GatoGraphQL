@@ -76,32 +76,6 @@
         ],
         "postsBySlugAndIDs": [
             {
-                "id": 19,
-                "title": "Nested mutations are a must have",
-                "tags": [
-                    {
-                        "slug": "wordpress"
-                    },
-                    {
-                        "slug": "plugin"
-                    },
-                    {
-                        "slug": "features"
-                    }
-                ],
-                "categories": [
-                    {
-                        "id": 4
-                    },
-                    {
-                        "id": 3
-                    },
-                    {
-                        "id": 2
-                    }
-                ]
-            },
-            {
                 "id": 16,
                 "title": "Working on flat chain syntax next",
                 "tags": [

@@ -38,11 +38,45 @@
 
   customPostsByTagIDs: customPosts(
     filter: {
-      tagIDs: [37, 39]
-      tagTaxonomy: "dummy-tag"
+      tags: {
+        includeBy: {
+          ids: [37, 39]
+        }
+        taxonomy: "dummy-tag"
+      }
     }
     pagination: {
       limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        id
+      }
+    }
+  }
+
+  customPostsExcludeByTagIDs: customPosts(
+    filter: {
+      tags: {
+        excludeBy: {
+          ids: [37, 39]
+        }
+        taxonomy: "dummy-tag"
+      }
+    }
+    pagination: {
+      limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
     }
   ) {
     id
@@ -56,11 +90,72 @@
 
   customPostsByTagSlugs: customPosts(
     filter: {
-      tagSlugs: ["tango", "rock"]
-      tagTaxonomy: "dummy-tag"
+      tags: {
+        includeBy: {
+          slugs: ["tango", "rock"]
+        }
+        taxonomy: "dummy-tag"
+      }
     }
     pagination: {
       limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        slug
+      }
+    }
+  }
+
+  customPostsExcludeByTagSlugs: customPosts(
+    filter: {
+      tags: {
+        excludeBy: {
+          slugs: ["tango", "rock"]
+        }
+        taxonomy: "dummy-tag"
+      }
+    }
+    pagination: {
+      limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(taxonomy: "dummy-tag") {
+        slug
+      }
+    }
+  }
+
+  customPostsExcludeByTagSlugsOnCPT: customPosts(
+    filter: {
+      customPostTypes: "dummy-cpt"
+      tags: {
+        excludeBy: {
+          slugs: ["tango", "rock"]
+        }
+        taxonomy: "dummy-tag"
+      }
+    }
+    pagination: {
+      limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
     }
   ) {
     id

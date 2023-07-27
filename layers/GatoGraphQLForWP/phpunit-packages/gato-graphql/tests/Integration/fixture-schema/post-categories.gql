@@ -55,7 +55,37 @@
   }
 
   postsByCategoryIDs: posts(
-    filter: { categoryIDs: [1, 4] }
+    filter: { categories: { includeBy: { ids: [1, 4] } } }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
+
+  postsExcludeByCategoryIDs: posts(
+    filter: { categories: { excludeBy: { ids: [1, 4] } } }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
+
+  postsByCategorySlugs: posts(
+    filter: { categories: { includeBy: { slugs: ["resource"] } } }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
+
+  postsExcludeByCategorySlugs: posts(
+    filter: { categories: { excludeBy: { slugs: ["resource"] } } }
   ) {
     id
     title

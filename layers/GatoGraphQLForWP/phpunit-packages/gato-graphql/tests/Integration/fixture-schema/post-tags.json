@@ -363,6 +363,55 @@
                 ]
             }
         ],
+        "postsExcludeByTagIDs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
+                "tags": []
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance",
+                "tags": []
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?",
+                "tags": []
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client",
+                "tags": [
+                    {
+                        "id": 11
+                    },
+                    {
+                        "id": 9
+                    },
+                    {
+                        "id": 8
+                    }
+                ]
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out",
+                "tags": [
+                    {
+                        "id": 13
+                    },
+                    {
+                        "id": 12
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "Hello world!",
+                "tags": []
+            }
+        ],
         "postsByTagSlugs": [
             {
                 "id": 19,
@@ -408,6 +457,55 @@
                         "slug": "plugin"
                     }
                 ]
+            }
+        ],
+        "postsExcludeByTagSlugs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
+                "tags": []
+            },
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance",
+                "tags": []
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security",
+                "tags": [
+                    {
+                        "slug": "security"
+                    },
+                    {
+                        "slug": "features"
+                    }
+                ]
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?",
+                "tags": []
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client",
+                "tags": [
+                    {
+                        "slug": "ideas"
+                    },
+                    {
+                        "slug": "features"
+                    },
+                    {
+                        "slug": "advanced"
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "Hello world!",
+                "tags": []
             }
         ]
     }

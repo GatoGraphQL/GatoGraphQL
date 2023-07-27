@@ -49,8 +49,12 @@
                 "parent": {
                     "id": 4
                 },
-                "postCount": 1,
+                "postCount": 2,
                 "posts": [
+                    {
+                        "id": 28,
+                        "title": "HTTP caching improves performance"
+                    },
                     {
                         "id": 23,
                         "title": "GraphQL or REST? Why not both?"
@@ -99,11 +103,19 @@
                 "parent": {
                     "id": 3
                 },
-                "postCount": 2,
+                "postCount": 4,
                 "posts": [
+                    {
+                        "id": 28,
+                        "title": "HTTP caching improves performance"
+                    },
                     {
                         "id": 25,
                         "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 23,
+                        "title": "GraphQL or REST? Why not both?"
                     },
                     {
                         "id": 19,
@@ -128,8 +140,12 @@
                         "parent": {
                             "id": 4
                         },
-                        "postCount": 1,
+                        "postCount": 2,
                         "posts": [
+                            {
+                                "id": 28,
+                                "title": "HTTP caching improves performance"
+                            },
                             {
                                 "id": 23,
                                 "title": "GraphQL or REST? Why not both?"
@@ -194,11 +210,19 @@
                 "metaValues": null,
                 "name": "Blog",
                 "parent": null,
-                "postCount": 3,
+                "postCount": 5,
                 "posts": [
+                    {
+                        "id": 28,
+                        "title": "HTTP caching improves performance"
+                    },
                     {
                         "id": 25,
                         "title": "Public or Private API mode, for extra security"
+                    },
+                    {
+                        "id": 23,
+                        "title": "GraphQL or REST? Why not both?"
                     },
                     {
                         "id": 19,
@@ -227,11 +251,19 @@
                         "parent": {
                             "id": 3
                         },
-                        "postCount": 2,
+                        "postCount": 4,
                         "posts": [
+                            {
+                                "id": 28,
+                                "title": "HTTP caching improves performance"
+                            },
                             {
                                 "id": 25,
                                 "title": "Public or Private API mode, for extra security"
+                            },
+                            {
+                                "id": 23,
+                                "title": "GraphQL or REST? Why not both?"
                             },
                             {
                                 "id": 19,
@@ -317,11 +349,19 @@
                     "parent": {
                         "id": 3
                     },
-                    "postCount": 2,
+                    "postCount": 4,
                     "posts": [
+                        {
+                            "id": 28,
+                            "title": "HTTP caching improves performance"
+                        },
                         {
                             "id": 25,
                             "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 23,
+                            "title": "GraphQL or REST? Why not both?"
                         },
                         {
                             "id": 19,
@@ -346,8 +386,12 @@
                             "parent": {
                                 "id": 4
                             },
-                            "postCount": 1,
+                            "postCount": 2,
                             "posts": [
+                                {
+                                    "id": 28,
+                                    "title": "HTTP caching improves performance"
+                                },
                                 {
                                     "id": 23,
                                     "title": "GraphQL or REST? Why not both?"
@@ -371,11 +415,19 @@
                     "metaValues": null,
                     "name": "Blog",
                     "parent": null,
-                    "postCount": 3,
+                    "postCount": 5,
                     "posts": [
+                        {
+                            "id": 28,
+                            "title": "HTTP caching improves performance"
+                        },
                         {
                             "id": 25,
                             "title": "Public or Private API mode, for extra security"
+                        },
+                        {
+                            "id": 23,
+                            "title": "GraphQL or REST? Why not both?"
                         },
                         {
                             "id": 19,
@@ -404,11 +456,19 @@
                             "parent": {
                                 "id": 3
                             },
-                            "postCount": 2,
+                            "postCount": 4,
                             "posts": [
+                                {
+                                    "id": 28,
+                                    "title": "HTTP caching improves performance"
+                                },
                                 {
                                     "id": 25,
                                     "title": "Public or Private API mode, for extra security"
+                                },
+                                {
+                                    "id": 23,
+                                    "title": "GraphQL or REST? Why not both?"
                                 },
                                 {
                                     "id": 19,
@@ -531,6 +591,18 @@
                 ]
             },
             {
+                "id": 28,
+                "title": "HTTP caching improves performance",
+                "categories": [
+                    {
+                        "id": 7
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
                 "id": 25,
                 "title": "Public or Private API mode, for extra security",
                 "categories": [
@@ -542,6 +614,15 @@
                     },
                     {
                         "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?",
+                "categories": [
+                    {
+                        "id": 6
                     }
                 ]
             },
@@ -575,6 +656,117 @@
                 "categories": [
                     {
                         "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 1,
+                "title": "Hello world!",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            }
+        ],
+        "postsExcludeByCategoryIDs": [
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out",
+                "categories": [
+                    {
+                        "id": 3
+                    }
+                ]
+            }
+        ],
+        "postsByCategorySlugs": [
+            {
+                "id": 28,
+                "title": "HTTP caching improves performance",
+                "categories": [
+                    {
+                        "id": 7
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 25,
+                "title": "Public or Private API mode, for extra security",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            },
+            {
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?",
+                "categories": [
+                    {
+                        "id": 6
+                    }
+                ]
+            },
+            {
+                "id": 19,
+                "title": "Nested mutations are a must have",
+                "categories": [
+                    {
+                        "id": 4
+                    },
+                    {
+                        "id": 3
+                    },
+                    {
+                        "id": 2
+                    }
+                ]
+            }
+        ],
+        "postsExcludeByCategorySlugs": [
+            {
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 21,
+                "title": "Customize the schema for each client",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 16,
+                "title": "Working on flat chain syntax next",
+                "categories": [
+                    {
+                        "id": 1
+                    }
+                ]
+            },
+            {
+                "id": 13,
+                "title": "Released v0.6, check it out",
+                "categories": [
+                    {
+                        "id": 3
                     }
                 ]
             },
@@ -635,11 +827,19 @@
             "parent": {
                 "id": 3
             },
-            "postCount": 2,
+            "postCount": 4,
             "posts": [
+                {
+                    "id": 28,
+                    "title": "HTTP caching improves performance"
+                },
                 {
                     "id": 25,
                     "title": "Public or Private API mode, for extra security"
+                },
+                {
+                    "id": 23,
+                    "title": "GraphQL or REST? Why not both?"
                 },
                 {
                     "id": 19,

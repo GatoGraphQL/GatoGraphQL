@@ -59,7 +59,7 @@ query {
     id
     title
   }
-  postsByCategoryIDs: posts(filter: { categoryIDs: [1] }) {
+  postsByCategoryIDs: posts(filter: { categories: { includeBy: { ids: [1] } } }) {
     id
     title
   }
@@ -103,11 +103,11 @@ query {
     id
     title
   }
-  postsByTagIDs: posts(filter: { tagIDs: [8, 9] }) {
+  postsByTagIDs: posts(filter: { tags: { includeBy: { ids: [8, 9] } } }) {
     id
     title
   }
-  postsByTagSlugs: posts(filter: { tagSlugs: ["plugin", "release"] }) {
+  postsByTagSlugs: posts(filter: { tags: { includeBy: { slugs: ["plugin", "release"] } } }) {
     id
     title
   }

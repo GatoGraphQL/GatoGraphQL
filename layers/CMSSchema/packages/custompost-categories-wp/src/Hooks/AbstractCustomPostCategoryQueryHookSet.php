@@ -40,22 +40,56 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
             $query['category__not_in'] = $query['category-not-in'];
             unset($query['category-not-in']);
         }
-        if (isset($query['category-ids'])) {
-            if (isset($query['category-taxonomy'])) {
-                $query = $this->initializeTaxQuery($query);
-                $query['tax_query'][] = [
-                    'taxonomy' => $query['category-taxonomy'],
-                    'terms' => $query['category-ids']
-                ];
-                unset($query['category-taxonomy']);
-            } else {
-                $query['category__in'] = $query['category-ids'];
-            }
-            unset($query['category-ids']);
-        }
         if (isset($query['category-id'])) {
             $query['cat'] = $query['category-id'];
             unset($query['category-id']);
+        }
+
+        if (
+            isset($query['category-ids'])
+            || isset($query['exclude-category-ids'])
+            || isset($query['category-slugs'])
+            || isset($query['exclude-category-slugs'])
+        ) {
+            $query = $this->initializeTaxQuery($query);
+            $taxonomy = $query['category-taxonomy'] ?? 'category';
+            unset($query['category-taxonomy']);
+
+            if (!empty($query['category-ids'])) {
+                $query['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'terms' => $query['category-ids']
+                ];
+                unset($query['category-ids']);
+            }
+
+            if (!empty($query['exclude-category-ids'])) {
+                $query['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'terms' => $query['exclude-category-ids'],
+                    'operator' => 'NOT IN',
+                ];
+                unset($query['exclude-category-ids']);
+            }
+
+            if (!empty($query['category-slugs'])) {
+                $query['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'terms' => $query['category-slugs'],
+                    'field' => 'slug',
+                ];
+                unset($query['category-slugs']);
+            }
+
+            if (!empty($query['exclude-category-slugs'])) {
+                $query['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'terms' => $query['exclude-category-slugs'],
+                    'field' => 'slug',
+                    'operator' => 'NOT IN',
+                ];
+                unset($query['exclude-category-slugs']);
+            }
         }
 
         $query = $this->convertCustomPostCategoryQuerySpecialCases($query);
@@ -63,8 +97,9 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
         return $query;
     }
 
-
     /**
+     * Use the AND relation for all provided query filters
+     *
      * @param array<string,mixed> $query
      * @return array<string,mixed>
      */

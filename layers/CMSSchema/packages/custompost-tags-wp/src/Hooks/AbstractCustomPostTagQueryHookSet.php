@@ -29,40 +29,51 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
      */
     public function convertCustomPostsQuery(array $query, array $options): array
     {
-        if (isset($query['tag-ids'])) {
-            if (isset($query['tag-taxonomy'])) {
-                $query = $this->initializeTaxQuery($query);
+        if (
+            isset($query['tag-ids'])
+            || isset($query['exclude-tag-ids'])
+            || isset($query['tag-slugs'])
+            || isset($query['exclude-tag-slugs'])
+        ) {
+            $query = $this->initializeTaxQuery($query);
+            $taxonomy = $query['tag-taxonomy'] ?? 'post_tag';
+            unset($query['tag-taxonomy']);
+
+            if (!empty($query['tag-ids'])) {
                 $query['tax_query'][] = [
-                    'taxonomy' => $query['tag-taxonomy'],
+                    'taxonomy' => $taxonomy,
                     'terms' => $query['tag-ids']
                 ];
-                unset($query['tag-taxonomy']);
-            } else {
-                $query['tag__in'] = $query['tag-ids'];
+                unset($query['tag-ids']);
             }
-            unset($query['tag-ids']);
-        }
-        if (isset($query['tag-slugs'])) {
-            if (isset($query['tag-taxonomy'])) {
-                if (!isset($query['tax_query'])) {
-                    $query['tax_query'] = [
-                        [
-                            'relation' => 'AND',
-                        ],
-                    ];
-                } else {
-                    $query['tax_query'][0]['relation'] = 'AND';
-                }
+
+            if (!empty($query['exclude-tag-ids'])) {
                 $query['tax_query'][] = [
-                    'taxonomy' => $query['tag-taxonomy'],
+                    'taxonomy' => $taxonomy,
+                    'terms' => $query['exclude-tag-ids'],
+                    'operator' => 'NOT IN',
+                ];
+                unset($query['exclude-tag-ids']);
+            }
+
+            if (!empty($query['tag-slugs'])) {
+                $query['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
                     'terms' => $query['tag-slugs'],
                     'field' => 'slug',
                 ];
-                unset($query['tag-taxonomy']);
-            } else {
-                $query['tag'] = implode(',', $query['tag-slugs']);
+                unset($query['tag-slugs']);
             }
-            unset($query['tag-slugs']);
+
+            if (!empty($query['exclude-tag-slugs'])) {
+                $query['tax_query'][] = [
+                    'taxonomy' => $taxonomy,
+                    'terms' => $query['exclude-tag-slugs'],
+                    'field' => 'slug',
+                    'operator' => 'NOT IN',
+                ];
+                unset($query['exclude-tag-slugs']);
+            }
         }
 
         $query = $this->convertCustomPostTagQuerySpecialCases($query);
@@ -71,6 +82,8 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
     }
 
     /**
+     * Use the AND relation for all provided query filters
+     *
      * @param array<string,mixed> $query
      * @return array<string,mixed>
      */
