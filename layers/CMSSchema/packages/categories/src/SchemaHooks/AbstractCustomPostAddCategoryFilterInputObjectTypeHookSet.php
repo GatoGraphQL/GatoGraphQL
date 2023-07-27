@@ -4,10 +4,29 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\SchemaHooks;
 
+use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\FilterCustomPostsByCategoriesInputObjectTypeResolverInterface;
+
 abstract class AbstractCustomPostAddCategoryFilterInputObjectTypeHookSet extends AbstractAddCategoryFilterInputObjectTypeHookSet
 {
-    protected function addCategoryTaxonomyFilterInput(): bool
+    private ?CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver = null;
+
+    final public function setCustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver(CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver): void
     {
-        return true;
+        $this->customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver = $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver;
+    }
+    final protected function getCustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver(): CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver
+    {
+        if ($this->customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver === null) {
+            /** @var CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver */
+            $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver::class);
+            $this->customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver = $customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver;
+        }
+        return $this->customPostsFilterCustomPostsByCategoriesInputObjectTypeResolver;
+    }
+
+    protected function getFilterCustomPostsByCategoriesInputObjectTypeResolver(): FilterCustomPostsByCategoriesInputObjectTypeResolverInterface
+    {
+        return $this->getCustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver();
     }
 }
