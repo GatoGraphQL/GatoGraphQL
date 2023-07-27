@@ -29,7 +29,8 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
      */
     public function convertCustomPostsQuery(array $query, array $options): array
     {
-        if (isset($query['tag-ids'])
+        if (
+            isset($query['tag-ids'])
             || isset($query['exclude-tag-ids'])
             || isset($query['tag-slugs'])
             || isset($query['exclude-tag-slugs'])
@@ -45,7 +46,7 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
                 ];
                 unset($query['tag-ids']);
             }
-            
+
             if (!empty($query['exclude-tag-ids'])) {
                 $query['tax_query'][] = [
                     'taxonomy' => $taxonomy,

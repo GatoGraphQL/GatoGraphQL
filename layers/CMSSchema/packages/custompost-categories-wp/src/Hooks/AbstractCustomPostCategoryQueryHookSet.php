@@ -45,7 +45,8 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
             unset($query['category-id']);
         }
 
-        if (isset($query['category-ids'])
+        if (
+            isset($query['category-ids'])
             || isset($query['exclude-category-ids'])
             || isset($query['category-slugs'])
             || isset($query['exclude-category-slugs'])
@@ -61,7 +62,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
                 ];
                 unset($query['category-ids']);
             }
-            
+
             if (!empty($query['exclude-category-ids'])) {
                 $query['tax_query'][] = [
                     'taxonomy' => $taxonomy,
@@ -98,7 +99,7 @@ abstract class AbstractCustomPostCategoryQueryHookSet extends AbstractHookSet
 
     /**
      * Use the AND relation for all provided query filters
-     * 
+     *
      * @param array<string,mixed> $query
      * @return array<string,mixed>
      */

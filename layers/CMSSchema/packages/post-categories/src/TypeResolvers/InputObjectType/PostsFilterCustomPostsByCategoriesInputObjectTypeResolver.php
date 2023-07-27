@@ -10,7 +10,7 @@ use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\AbstractFixedTaxonomyF
 class PostsFilterCustomPostsByCategoriesInputObjectTypeResolver extends AbstractFixedTaxonomyFilterCustomPostsByCategoriesInputObjectTypeResolver
 {
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
-    
+
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
@@ -24,7 +24,7 @@ class PostsFilterCustomPostsByCategoriesInputObjectTypeResolver extends Abstract
         }
         return $this->postCategoryTypeAPI;
     }
-    
+
     public function getTypeName(): string
     {
         return 'FilterPostsByCategoriesInput';

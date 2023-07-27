@@ -10,7 +10,7 @@ use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\AbstractFixedTaxonomyFilterC
 class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFixedTaxonomyFilterCustomPostsByTagsInputObjectTypeResolver
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
-    
+
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
         $this->postTagTypeAPI = $postTagTypeAPI;
@@ -24,7 +24,7 @@ class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFixedT
         }
         return $this->postTagTypeAPI;
     }
-    
+
     public function getTypeName(): string
     {
         return 'FilterPostsByTagsInput';
