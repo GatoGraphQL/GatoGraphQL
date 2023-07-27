@@ -51,11 +51,11 @@ query {
     urlPath
   }
 
-  postsByAuthorIDs: posts(filter: { authorIDs: 5 }) {
+  postsByAuthorIDs: posts(filter: { author: { ids: 5 } }) {
     id
     title
   }
-  postsByAuthorSlug: posts(filter: { authorSlug: "blogger" }) {
+  postsByAuthorSlug: posts(filter: { author: { slug: "blogger" } }) {
     id
     title
   }
@@ -67,7 +67,7 @@ query {
     id
     title
   }
-  postsByExcludeAuthorIDs: posts(filter: { excludeAuthorIDs: 5 }) {
+  postsByExcludeAuthorIDs: posts(filter: { author: { excludeIDs: 5 } }) {
     id
     title
   }
