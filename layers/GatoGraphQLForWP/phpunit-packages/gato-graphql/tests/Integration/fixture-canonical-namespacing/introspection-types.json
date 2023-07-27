@@ -356,6 +356,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "AuthorByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "BlockFilterByInput"
         },
         {
@@ -429,6 +433,42 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "DateQueryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FeaturedImageByInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterByAuthorInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterByTaxonomyTermsInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCommentsByCommentAuthorInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCommentsByCustomPostAuthorInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCustomPostsByCategoriesInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCustomPostsByTagsInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterPostsByCategoriesInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterPostsByTagsInput"
         },
         {
           "kind": "INPUT_OBJECT",

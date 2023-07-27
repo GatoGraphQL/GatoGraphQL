@@ -2478,6 +2478,13 @@
           "description": "Fields with meta values"
         },
         {
+          "name": "AuthorByInput",
+          "namespacedName": "AuthorByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the custom post author"
+        },
+        {
           "name": "BlockFilterByInput",
           "namespacedName": "BlockFilterByInput",
           "fields": null,
@@ -2609,6 +2616,69 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": null
+        },
+        {
+          "name": "FeaturedImageByInput",
+          "namespacedName": "FeaturedImageByInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the custom post's featured image"
+        },
+        {
+          "name": "FilterByAuthorInput",
+          "namespacedName": "FilterByAuthorInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Filter by author"
+        },
+        {
+          "name": "FilterByTaxonomyTermsInput",
+          "namespacedName": "FilterByTaxonomyTermsInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
+        },
+        {
+          "name": "FilterCommentsByCommentAuthorInput",
+          "namespacedName": "FilterCommentsByCommentAuthorInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Filter comments by comment author"
+        },
+        {
+          "name": "FilterCommentsByCustomPostAuthorInput",
+          "namespacedName": "FilterCommentsByCustomPostAuthorInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Filter comments by custom post author"
+        },
+        {
+          "name": "FilterCustomPostsByCategoriesInput",
+          "namespacedName": "FilterCustomPostsByCategoriesInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter custom posts by categories"
+        },
+        {
+          "name": "FilterCustomPostsByTagsInput",
+          "namespacedName": "FilterCustomPostsByTagsInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter custom posts by tags"
+        },
+        {
+          "name": "FilterPostsByCategoriesInput",
+          "namespacedName": "FilterPostsByCategoriesInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter custom posts by categories"
+        },
+        {
+          "name": "FilterPostsByTagsInput",
+          "namespacedName": "FilterPostsByTagsInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter custom posts by tags"
         },
         {
           "name": "LoginCredentialsInput",

@@ -70,12 +70,12 @@
             },
             {
                 "__typename": "GenericCategory",
-                "id": 34,
+                "id": 30,
                 "name": "Nostradamus"
             },
             {
                 "__typename": "GenericCategory",
-                "id": 30,
+                "id": 34,
                 "name": "Nostradamus"
             },
             {

@@ -174,6 +174,9 @@
           "name": "WithMeta"
         },
         {
+          "name": "AuthorByInput"
+        },
+        {
           "name": "BlockFilterByInput"
         },
         {
@@ -229,6 +232,33 @@
         },
         {
           "name": "DateQueryInput"
+        },
+        {
+          "name": "FeaturedImageByInput"
+        },
+        {
+          "name": "FilterByAuthorInput"
+        },
+        {
+          "name": "FilterByTaxonomyTermsInput"
+        },
+        {
+          "name": "FilterCommentsByCommentAuthorInput"
+        },
+        {
+          "name": "FilterCommentsByCustomPostAuthorInput"
+        },
+        {
+          "name": "FilterCustomPostsByCategoriesInput"
+        },
+        {
+          "name": "FilterCustomPostsByTagsInput"
+        },
+        {
+          "name": "FilterPostsByCategoriesInput"
+        },
+        {
+          "name": "FilterPostsByTagsInput"
         },
         {
           "name": "LoginCredentialsInput"

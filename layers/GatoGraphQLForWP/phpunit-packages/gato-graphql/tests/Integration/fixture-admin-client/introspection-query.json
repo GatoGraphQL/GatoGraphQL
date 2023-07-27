@@ -16488,6 +16488,47 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "AuthorByInput",
+          "description": "Oneof input to specify the custom post author",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "email",
+              "description": "Provide author by email",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Email",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "Provide author by ID",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "username",
+              "description": "Provide author by username",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "BlockFilterByInput",
           "description": "Oneof input to filter blocks",
           "fields": null,
@@ -17675,6 +17716,387 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "FeaturedImageByInput",
+          "description": "Oneof input to specify the custom post's featured image",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "Provide featured image by ID",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Query media item by slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterByAuthorInput",
+          "description": "Filter by author",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeIDs",
+              "description": "Get results excluding the ones from authors with given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ids",
+              "description": "Get results from the authors with given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Get results from the authors with given slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterByTaxonomyTermsInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "ids",
+              "description": "Filter by IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slugs",
+              "description": "Filter by slugs",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCommentsByCommentAuthorInput",
+          "description": "Filter comments by comment author",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeIDs",
+              "description": "Get results excluding the ones from authors with given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ids",
+              "description": "Get results from the authors with given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCommentsByCustomPostAuthorInput",
+          "description": "Filter comments by custom post author",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeIDs",
+              "description": "Get results excluding the ones from authors with given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ids",
+              "description": "Get results from the authors with given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCustomPostsByCategoriesInput",
+          "description": "Input to filter custom posts by categories",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeBy",
+              "description": "Retrieve custom posts which do not contain categories",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "includeBy",
+              "description": "Retrieve custom posts which contain categories",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "Category taxonomy",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "CategoryTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "CategoryTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterCustomPostsByTagsInput",
+          "description": "Input to filter custom posts by tags",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeBy",
+              "description": "Retrieve custom posts which do not contain tags",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "includeBy",
+              "description": "Retrieve custom posts which contain tags",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "Tag taxonomy",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "TagTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "TagTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterPostsByCategoriesInput",
+          "description": "Input to filter custom posts by categories",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeBy",
+              "description": "Retrieve custom posts which do not contain categories",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "includeBy",
+              "description": "Retrieve custom posts which contain categories",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "FilterPostsByTagsInput",
+          "description": "Input to filter custom posts by tags",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeBy",
+              "description": "Retrieve custom posts which do not contain tags",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "includeBy",
+              "description": "Retrieve custom posts which contain tags",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByTaxonomyTermsInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "LoginCredentialsInput",
           "description": null,
           "fields": null,
@@ -18116,29 +18538,11 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorIDs",
-              "description": "Get results from the authors with given IDs",
+              "name": "author",
+              "description": "Filter by author",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "authorSlug",
-              "description": "Get results from the authors with given slug",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByAuthorInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -18155,24 +18559,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeAuthorIDs",
-              "description": "Get results excluding the ones from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
                     "ofType": null
                   }
                 }
@@ -18696,38 +19082,22 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorIDs",
-              "description": "Filter comments from the authors with given IDs",
+              "name": "author",
+              "description": "Filter comments by author",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "FilterCommentsByCommentAuthorInput",
+                "ofType": null
               },
               "defaultValue": null
             },
             {
-              "name": "customPostAuthorIDs",
-              "description": "Filter comments added to custom posts from the authors with given IDs",
+              "name": "customPostAuthor",
+              "description": "Filter comments added to custom posts from the given authors",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "FilterCommentsByCustomPostAuthorInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -18807,42 +19177,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeAuthorIDs",
-              "description": "Exclude comments from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeCustomPostAuthorIDs",
-              "description": "Exclude comments added to custom posts from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
                     "ofType": null
                   }
                 }
@@ -19025,11 +19359,11 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorID",
-              "description": "The ID of the user",
+              "name": "authorBy",
+              "description": "The author of the custom post",
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
+                "kind": "INPUT_OBJECT",
+                "name": "AuthorByInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -19065,11 +19399,11 @@
               "defaultValue": null
             },
             {
-              "name": "featuredImageID",
-              "description": "The ID of the image to set as featured",
+              "name": "featuredImageBy",
+              "description": "The image to set as featured",
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
+                "kind": "INPUT_OBJECT",
+                "name": "FeaturedImageByInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -19126,57 +19460,21 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorIDs",
-              "description": "Get results from the authors with given IDs",
+              "name": "author",
+              "description": "Filter by author",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "authorSlug",
-              "description": "Get results from the authors with given slug",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByAuthorInput",
                 "ofType": null
               },
               "defaultValue": null
             },
             {
-              "name": "categoryIDs",
-              "description": "Get results from the categories with given IDs",
+              "name": "categories",
+              "description": "Filter by categories",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "categoryTaxonomy",
-              "description": "Get results from the categories with given taxonomy",
-              "type": {
-                "kind": "SCALAR",
-                "name": "CategoryTaxonomyEnumString",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterCustomPostsByCategoriesInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -19211,24 +19509,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeAuthorIDs",
-              "description": "Get results excluding the ones from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
                     "ofType": null
                   }
                 }
@@ -19338,47 +19618,11 @@
               "defaultValue": "[\"publish\"]"
             },
             {
-              "name": "tagIDs",
-              "description": "Get results from the tags with given IDs",
+              "name": "tags",
+              "description": "Filter by tags",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "tagSlugs",
-              "description": "Get results from the tags with given slug",
-              "type": {
-                "kind": "LIST",
-                "name": "[String!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "String!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "tagTaxonomy",
-              "description": "Get results from the tags with given taxonomy",
-              "type": {
-                "kind": "SCALAR",
-                "name": "TagTaxonomyEnumString",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterCustomPostsByTagsInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -19426,29 +19670,11 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorIDs",
-              "description": "Get results from the authors with given IDs",
+              "name": "author",
+              "description": "Filter by author",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "authorSlug",
-              "description": "Get results from the authors with given slug",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByAuthorInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -19465,24 +19691,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeAuthorIDs",
-              "description": "Get results excluding the ones from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
                     "ofType": null
                   }
                 }
@@ -20095,20 +20303,12 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "categoryIDs",
-              "description": "Get results from the categories with given IDs",
+              "name": "categories",
+              "description": "Filter by categories",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "FilterPostsByCategoriesInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -20251,38 +20451,12 @@
               "defaultValue": "[\"publish\"]"
             },
             {
-              "name": "tagIDs",
-              "description": "Get results from the tags with given IDs",
+              "name": "tags",
+              "description": "Filter by tags",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "tagSlugs",
-              "description": "Get results from the tags with given slug",
-              "type": {
-                "kind": "LIST",
-                "name": "[String!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "String!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "FilterPostsByTagsInput",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -20298,29 +20472,11 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorIDs",
-              "description": "Get results from the authors with given IDs",
+              "name": "author",
+              "description": "Filter by author",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "authorSlug",
-              "description": "Get results from the authors with given slug",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByAuthorInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -20337,24 +20493,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeAuthorIDs",
-              "description": "Get results excluding the ones from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
                     "ofType": null
                   }
                 }
@@ -20521,48 +20659,22 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorIDs",
-              "description": "Get results from the authors with given IDs",
+              "name": "author",
+              "description": "Filter by author",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "authorSlug",
-              "description": "Get results from the authors with given slug",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByAuthorInput",
                 "ofType": null
               },
               "defaultValue": null
             },
             {
-              "name": "categoryIDs",
-              "description": "Get results from the categories with given IDs",
+              "name": "categories",
+              "description": "Filter by categories",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "FilterPostsByCategoriesInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -20578,24 +20690,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeAuthorIDs",
-              "description": "Get results excluding the ones from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
                     "ofType": null
                   }
                 }
@@ -20715,38 +20809,12 @@
               "defaultValue": "[\"publish\"]"
             },
             {
-              "name": "tagIDs",
-              "description": "Get results from the tags with given IDs",
+              "name": "tags",
+              "description": "Filter by tags",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "tagSlugs",
-              "description": "Get results from the tags with given slug",
-              "type": {
-                "kind": "LIST",
-                "name": "[String!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "String!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
+                "kind": "INPUT_OBJECT",
+                "name": "FilterPostsByTagsInput",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -20923,14 +20991,14 @@
               "defaultValue": null
             },
             {
-              "name": "mediaItemID",
-              "description": "The ID of the image to set as featured",
+              "name": "mediaItemBy",
+              "description": "The image to set as featured",
               "type": {
                 "kind": "NON_NULL",
-                "name": "ID!",
+                "name": "MediaItemByInput!",
                 "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
+                  "kind": "INPUT_OBJECT",
+                  "name": "MediaItemByInput",
                   "ofType": null
                 }
               },
@@ -21108,11 +21176,11 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorID",
-              "description": "The ID of the user",
+              "name": "authorBy",
+              "description": "The author of the custom post",
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
+                "kind": "INPUT_OBJECT",
+                "name": "AuthorByInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -21148,11 +21216,11 @@
               "defaultValue": null
             },
             {
-              "name": "featuredImageID",
-              "description": "The ID of the image to set as featured",
+              "name": "featuredImageBy",
+              "description": "The image to set as featured",
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
+                "kind": "INPUT_OBJECT",
+                "name": "FeaturedImageByInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -21332,29 +21400,11 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "authorIDs",
-              "description": "Get results from the authors with given IDs",
+              "name": "author",
+              "description": "Filter by author",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "authorSlug",
-              "description": "Get results from the authors with given slug",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterByAuthorInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -21389,24 +21439,6 @@
                   "ofType": {
                     "kind": "INPUT_OBJECT",
                     "name": "DateQueryInput",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "excludeAuthorIDs",
-              "description": "Get results excluding the ones from authors with given IDs",
-              "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
                     "ofType": null
                   }
                 }
@@ -21773,29 +21805,11 @@
           "fields": null,
           "inputFields": [
             {
-              "name": "categoryIDs",
-              "description": "Get results from the categories with given IDs",
+              "name": "categories",
+              "description": "Filter by categories",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "categoryTaxonomy",
-              "description": "Get results from the categories with given taxonomy",
-              "type": {
-                "kind": "SCALAR",
-                "name": "CategoryTaxonomyEnumString",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterCustomPostsByCategoriesInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -21939,47 +21953,11 @@
               "defaultValue": "[\"publish\"]"
             },
             {
-              "name": "tagIDs",
-              "description": "Get results from the tags with given IDs",
+              "name": "tags",
+              "description": "Filter by tags",
               "type": {
-                "kind": "LIST",
-                "name": "[ID!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "ID!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "tagSlugs",
-              "description": "Get results from the tags with given slug",
-              "type": {
-                "kind": "LIST",
-                "name": "[String!]",
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": "String!",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "String",
-                    "ofType": null
-                  }
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "tagTaxonomy",
-              "description": "Get results from the tags with given taxonomy",
-              "type": {
-                "kind": "SCALAR",
-                "name": "TagTaxonomyEnumString",
+                "kind": "INPUT_OBJECT",
+                "name": "FilterCustomPostsByTagsInput",
                 "ofType": null
               },
               "defaultValue": null
