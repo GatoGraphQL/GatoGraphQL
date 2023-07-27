@@ -560,6 +560,24 @@ The `@cache` directive:
 - Is independent (i.e. it does not care about the logic of the fields where it is applied), hence it works whether the HTTP request method is `GET` or `POST`
 - It does not work with `_sendHTTPRequest`, as the `HTTPResponse` object it returns is a "transient" object (i.e. it is not stored in the WordPress database), that only lives during the current request
 
+<!-- `@cache` will store the value of the field at the moment in which this directive is applied. Then, if there are other directives on the same field, the order matters:
+
+```graphql
+{
+  post(by: {id: 1}) {
+    title1: title
+      # This will cache (and subsequently serve) "Hello world!"
+      @cache
+      @strUpperCase
+
+    title2: title
+      # This will cache (and subsequently serve) "HELLO WORLD!"
+      @strUpperCase
+      @cache
+  }
+}
+``` -->
+
 </div>
 
 ## Fetching data from multiple URLs
