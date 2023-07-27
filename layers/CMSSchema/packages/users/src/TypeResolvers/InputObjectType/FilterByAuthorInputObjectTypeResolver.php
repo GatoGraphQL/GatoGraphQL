@@ -61,7 +61,7 @@ class FilterByAuthorInputObjectTypeResolver extends AbstractQueryableInputObject
         return [
             'ids' => $this->getIDScalarTypeResolver(),
             'slug' => $this->getStringScalarTypeResolver(),
-            'excludeAuthorIDs' => $this->getIDScalarTypeResolver(),
+            'excludeIDs' => $this->getIDScalarTypeResolver(),
         ];
     }
 
