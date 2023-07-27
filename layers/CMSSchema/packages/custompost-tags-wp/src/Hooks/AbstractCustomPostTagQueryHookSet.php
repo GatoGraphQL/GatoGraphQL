@@ -39,14 +39,10 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
             unset($query['tag-taxonomy']);
 
             if (!empty($query['tag-ids'])) {
-                // if (isset($query['tag-taxonomy'])) {
                 $query['tax_query'][] = [
                     'taxonomy' => $taxonomy,
                     'terms' => $query['tag-ids']
                 ];
-                // } else {
-                //     $query['tag__in'] = $query['tag-ids'];
-                // }
                 unset($query['tag-ids']);
             }
             
@@ -60,15 +56,11 @@ abstract class AbstractCustomPostTagQueryHookSet extends AbstractHookSet
             }
 
             if (!empty($query['tag-slugs'])) {
-                // if (isset($query['tag-taxonomy'])) {
                 $query['tax_query'][] = [
                     'taxonomy' => $taxonomy,
                     'terms' => $query['tag-slugs'],
                     'field' => 'slug',
                 ];
-                // } else {
-                //     $query['tag'] = implode(',', $query['tag-slugs']);
-                // }
                 unset($query['tag-slugs']);
             }
 
