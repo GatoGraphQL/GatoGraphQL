@@ -55,14 +55,14 @@
   }
 
   commentsByCommentAuthor: comments(
-    filter: { commentAuthor: { ids: [1, 3] } }
+    filter: { author: { ids: [1, 3] } }
     pagination: { limit: 3 }
     sort: { by: ID, order: ASC }
   ) {
     id
   }
   commentsByExcludeCommentAuthor: comments(
-    filter: { commentAuthor: { excludeIDs: [1, 3] } }
+    filter: { author: { excludeIDs: [1, 3] } }
     pagination: { limit: 3 }
     sort: { by: ID, order: ASC }
   ) {

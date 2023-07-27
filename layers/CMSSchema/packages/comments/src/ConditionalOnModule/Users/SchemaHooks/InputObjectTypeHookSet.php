@@ -75,7 +75,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
         return array_merge(
             $inputFieldNameTypeResolvers,
             [
-                'commentAuthor' => $this->getFilterCommentsByCommentAuthorInputObjectTypeResolver(),
+                'author' => $this->getFilterCommentsByCommentAuthorInputObjectTypeResolver(),
                 'customPostAuthor' => $this->getFilterCommentsByCustomPostAuthorInputObjectTypeResolver(),
             ]
         );
@@ -90,7 +90,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'commentAuthor' => $this->__('Filter comments by author', 'comments'),
+            'author' => $this->__('Filter comments by author', 'comments'),
             'customPostAuthor' => $this->__('Filter comments added to custom posts from the given authors', 'comments'),
             default => $inputFieldDescription,
         };
