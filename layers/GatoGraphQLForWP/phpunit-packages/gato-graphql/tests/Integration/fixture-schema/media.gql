@@ -6,11 +6,11 @@ query {
     ...MediaItemData
   }
 
-  mediaItemsByAuthorIDs: mediaItems(filter: { authorIDs: 2, mimeTypes: "*" }) {
+  mediaItemsByAuthorIDs: mediaItems(filter: { author: { ids: 2 }, mimeTypes: "*" }) {
     id
     title
   }
-  mediaItemsByAuthorSlug: mediaItems(filter: { authorSlug: "blogger", mimeTypes: "*" }) {
+  mediaItemsByAuthorSlug: mediaItems(filter: { author: { slug: "blogger" }, mimeTypes: "*" }) {
     id
     title
   }
@@ -18,7 +18,7 @@ query {
     id
     title
   }
-  mediaItemsByExcludeAuthorIDs: mediaItems(filter: { excludeAuthorIDs: 2, mimeTypes: "*" }) {
+  mediaItemsByExcludeAuthorIDs: mediaItems(filter: { author: { excludeIDs: 2 }, mimeTypes: "*" }) {
     id
     title
   }
