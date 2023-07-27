@@ -31,13 +31,16 @@
     filter: {
       tags: {
         includeBy: {
-          slugs: "classical"
+          slugs: "rock"
         }
         taxonomy: "dummy-tag"
       }
       categories: {
         includeBy: {
           ids: [32, 36]
+        }
+        excludeBy: {
+          slugs: "world-cup"
         }
         taxonomy: "dummy-category"
       }
