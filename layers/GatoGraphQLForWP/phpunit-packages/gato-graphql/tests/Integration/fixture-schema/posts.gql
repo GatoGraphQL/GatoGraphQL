@@ -59,7 +59,7 @@ query {
     id
     title
   }
-  postsByCategoryIDs: posts(filter: { categoryIDs: [1] }) {
+  postsByCategoryIDs: posts(filter: { categories: { includeBy: { ids: [1] } } }) {
     id
     title
   }

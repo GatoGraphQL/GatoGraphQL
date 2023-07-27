@@ -7,8 +7,12 @@
         }
         taxonomy: "dummy-tag"
       }
-      categoryIDs: [32, 36]
-      categoryTaxonomy: "dummy-category"
+      categories: {
+        includeBy: {
+          ids: [32, 36]
+        }
+        taxonomy: "dummy-category"
+      }
     }
   ) {
     id
@@ -31,8 +35,12 @@
         }
         taxonomy: "dummy-tag"
       }
-      categoryIDs: [32, 36]
-      categoryTaxonomy: "dummy-category"
+      categories: {
+        includeBy: {
+          ids: [32, 36]
+        }
+        taxonomy: "dummy-category"
+      }
     }
   ) {
     id

@@ -55,7 +55,7 @@
   }
 
   postsByCategoryIDs: posts(
-    filter: { categoryIDs: [1, 4] }
+    filter: { categories: { includeBy: { ids: [1, 4] } } }
   ) {
     id
     title

@@ -6,7 +6,11 @@
           ids: [15, 14]
         }
       }
-      categoryIDs: [1, 4]
+      categories: {
+        includeBy: {
+          ids: [1, 4]
+        }
+      }
     }
   ) {
     id
@@ -26,7 +30,11 @@
           slugs: ["release", "plugin"]
         }
       }
-      categoryIDs: [1, 4]
+      categories: {
+        includeBy: {
+          ids: [1, 4]
+        }
+      }
     }
   ) {
     id

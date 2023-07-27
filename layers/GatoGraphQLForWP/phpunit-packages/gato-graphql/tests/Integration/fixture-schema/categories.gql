@@ -40,8 +40,12 @@
 
   customPostsByCategoryIDs: customPosts(
     filter: {
-      categoryIDs: [28, 33]
-      categoryTaxonomy: "dummy-category"
+      categories: {
+        includeBy: {
+          ids: [28, 33]
+        }
+        taxonomy: "dummy-category"
+      }
     }
   ) {
     id
