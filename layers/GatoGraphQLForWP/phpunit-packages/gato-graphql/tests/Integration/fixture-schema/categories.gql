@@ -57,6 +57,63 @@
     }
   }
 
+  customPostsExcludeByCategoryIDs: customPosts(
+    filter: {
+      categories: {
+        excludeBy: {
+          ids: [28, 33]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+
+  customPostsByCategorySlugs: customPosts(
+    filter: {
+      categories: {
+        includeBy: {
+          slugs: ["capullo"]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+
+  customPostsExcludeByCategorySlugs: customPosts(
+    filter: {
+      categories: {
+        excludeBy: {
+          slugs: ["capullo"]
+        }
+        taxonomy: "dummy-category"
+      }
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      categories(taxonomy: "dummy-category") {
+        id
+      }
+    }
+  }
+
   postCategories: categories(taxonomy: category) {
     ...CategoryData
   }
