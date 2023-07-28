@@ -71,3 +71,8 @@ The extension provides the following Access Control rules:
 - Grant access only if the user is logged-in or out
 - Grant access only if the user has some role
 - Grant access only if the user has some capability
+
+## Bundles including extension
+
+- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)

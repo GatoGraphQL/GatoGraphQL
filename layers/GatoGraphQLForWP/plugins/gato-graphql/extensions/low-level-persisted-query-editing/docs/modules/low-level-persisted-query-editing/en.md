@@ -33,3 +33,8 @@ This extension `Low-Level Persisted Query Editing` makes all directives to be ap
 As an example, defining Cache Control can then be done directly in the persisted query, by setting directive `@cacheControl` with argument `maxAge` on the field; or Access Control can be defined directly, by adding the corresponding `@validate...` directive directly on the field:
 
 ![Schema-type directives](../../images/schema-type-directives.gif "Schema-type directives")
+
+## Bundles including extension
+
+- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)

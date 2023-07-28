@@ -235,3 +235,8 @@ Define environment variables:
 - `TRANSLATION_DEFAULT_FROM_LANG_CODE`
 - `TRANSLATION_DEFAULT_TO_LANG_CODE`
  -->
+
+## Bundles including extension
+
+- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)

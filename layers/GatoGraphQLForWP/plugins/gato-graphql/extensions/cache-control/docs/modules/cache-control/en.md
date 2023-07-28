@@ -36,3 +36,8 @@ Every Cache Control List contains one or many entries, each of them with the fol
 After creating the Cache Control List, we can have the endpoint use it by editing the corresponding Schema Configuration, and selecting the item from the list under block "Cache Control Lists".
 
 ![Selecting a Cache Control List in the Schema Configuration](../../images/schema-config-cache-control-lists.png "Selecting a Cache Control List in the Schema Configuration")
+
+## Bundles including extension
+
+- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
