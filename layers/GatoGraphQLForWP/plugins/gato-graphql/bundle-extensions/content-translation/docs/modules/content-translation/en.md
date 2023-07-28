@@ -16,3 +16,22 @@ The bundle provides extensions to access, iterate and manipulate the field value
 - [Google Translate](../../../../../extensions/google-translate/docs/modules/google-translate/en.md)
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [PHP Functions in Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
+
+## List of supported recipes
+
+- [Searching WordPress data](../../../../../docs/recipes/searching-wordpress-data/en.md)
+- [Complementing WP-CLI](../../../../../docs/recipes/complementing-wp-cli/en.md)
+- [Injecting multiple resources into WP-CLI](../../../../../docs/recipes/injecting-multiple-resources-into-wp-cli/en.md)
+- [Mapping JS components to (Gutenberg) blocks](../../../../../docs/recipes/mapping-js-components-to-gutenberg-blocks/en.md)
+- [Duplicating a blog post](../../../../../docs/recipes/duplicating-a-blog-post/en.md)
+- [Duplicating multiple blog posts at once](../../../../../docs/recipes/duplicating-multiple-blog-posts-at-once/en.md)
+- [Customizing content for different users](../../../../../docs/recipes/customizing-content-for-different-users/en.md)
+- [Search, replace, and store again](../../../../../docs/recipes/search-replace-and-store-again/en.md)
+- [Adapting content in bulk](../../../../../docs/recipes/adapting-content-in-bulk/en.md)
+- [Site migrations](../../../../../docs/recipes/site-migrations/en.md)
+- [Inserting/Removing a (Gutenberg) block in bulk](../../../../../docs/recipes/inserting-removing-a-gutenberg-block-in-bulk/en.md)
+- [Extracting the image URLs from all Image blocks in a post](../../../../../docs/recipes/extracting-the-image-urls-from-all-image-blocks-in-a-post/en.md)
+- [Modifying (and storing again) the image URLs from all Image blocks in a post](../../../../../docs/recipes/modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post/en.md)
+- [Translating block content in a post to a different language](../../../../../docs/recipes/translating-block-content-in-a-post-to-a-different-language/en.md)
+- [Bulk translating block content in multiple posts to a different language](../../../../../docs/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
+- [Combining user data from different sources](../../../../../docs/recipes/combining-user-data-from-different-sources/en.md)
