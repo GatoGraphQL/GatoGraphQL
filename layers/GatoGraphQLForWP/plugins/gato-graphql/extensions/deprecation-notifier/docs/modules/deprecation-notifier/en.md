@@ -40,3 +40,8 @@ query {
   }
 }
 ```
+
+## Bundles including extension
+
+- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)

@@ -21,3 +21,7 @@ query {
   }
 }
 ```
+
+## Bundles including extension
+
+- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
