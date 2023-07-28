@@ -420,7 +420,11 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 - The [mutation must return the ID of the entity](https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations/) (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
 - [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) must be enabled (as to use field `_echo` inside a `mutation`)
 
-![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'"){.width-640}
+<!-- <div class="img-width-640" markdown=1>
+
+![Schema Configuration 'Mutations: nested + return entity'](../../images/recipes/schema-config-nested-mutations-and-return-entity.png "Schema Configuration 'Mutations: nested + return entity'")
+
+</div> -->
 
 </div>
 
