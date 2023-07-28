@@ -4,10 +4,27 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 
 abstract class AbstractExtensionModuleDocumentationMenuPage extends AbstractModuleDocsMenuPage
 {
+    /**
+     * If opening a Recipe doc in the iframe, do not use tabpanels
+     */
+    protected function useTabpanelForContent(): bool
+    {
+        if (
+            $this->getMenuPageHelper()->isDocumentationScreen()
+            && str_contains(App::query(RequestParams::DOC, ''), '../docs/recipes/')
+        ) {
+            return false;
+        }
+        
+        return parent::useTabpanelForContent();
+    }
+    
     protected function getModuleDoesNotExistErrorMessage(string $module): string
     {
         return sprintf(
