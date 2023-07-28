@@ -23,3 +23,9 @@ This bundle contains extensions to superpower your public APIs:
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 - [Schema Editing Access](../../../../../extensions/schema-editing-access/docs/modules/schema-editing-access/en.md)
+
+## List of supported recipes
+
+- [Searching WordPress data](../../../../../docs/recipes/searching-wordpress-data/en.md)
+- [Complementing WP-CLI](../../../../../docs/recipes/complementing-wp-cli/en.md)
+- [Mapping JS components to (Gutenberg) blocks](../../../../../docs/recipes/mapping-js-components-to-gutenberg-blocks/en.md)
