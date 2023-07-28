@@ -556,3 +556,8 @@ In this query, we generate the API endpoint using the **Field to Input** feature
   }
 }
 ```
+
+## Bundles including extension
+
+- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
