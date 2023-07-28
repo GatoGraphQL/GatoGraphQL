@@ -21,10 +21,10 @@ abstract class AbstractExtensionModuleDocumentationMenuPage extends AbstractModu
         ) {
             return false;
         }
-        
+
         return parent::useTabpanelForContent();
     }
-    
+
     protected function getModuleDoesNotExistErrorMessage(string $module): string
     {
         return sprintf(
