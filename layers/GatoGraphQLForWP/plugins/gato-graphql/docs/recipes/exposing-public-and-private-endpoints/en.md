@@ -20,11 +20,15 @@ In this recipe there is no code, but suggestions on when to use each endpoint.
 
 🔥 **Tips:**
 
-All endpoints are configured via [Schema Configurations]()
+Every endpoint is configured via a [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/), where we define:
 
-You can also [create your own internal endpoint](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/), and pre-define whatever specific configuration required for your blocks (enabling nested mutations, enabling namespacing, defining what CPTs can be queried, or anything else available in the Schema Configuration).
-
-Alternatively, you can create Persisted Queries and retrieve data from them (instead of from an endpoint). Check out how the [client code must be adapted](https://gatographql.com/guides/intro/connecting-to-the-graphql-server-from-a-client/#heading-executing-persisted-queries).
+- Setting the schema as public or private
+- Enabling “sensitive” data elements
+- Namespacing the schema
+- Using nested mutations
+- Granting access to the schema elements via Access Control Lists
+- Setting-up HTTP caching
+- Many others
 
 </div>
 
@@ -41,6 +45,9 @@ building headless sites
 
 ## When to use private private endpoints
 
+You can also [create your own internal endpoint](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/), and pre-define whatever specific configuration required for your blocks (enabling nested mutations, enabling namespacing, defining what CPTs can be queried, or anything else available in the Schema Configuration).
 
 ## When to use Persisted Queries
+
+Alternatively, you can create Persisted Queries and retrieve data from them (instead of from an endpoint). Check out how the [client code must be adapted](https://gatographql.com/guides/intro/connecting-to-the-graphql-server-from-a-client/#heading-executing-persisted-queries).
 
