@@ -179,6 +179,17 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
+                'exposing-public-and-private-endpoints',
+                \__('Exposing Public and Private endpoints', 'gato-graphql'),
+                [
+                    ExtensionModuleResolver::ACCESS_CONTROL,
+                    ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                ],
+                [
+                    BundleExtensionModuleResolver::PUBLIC_API,
+                ]
+            ],
+            [
                 'complementing-wp-cli',
                 \__('Complementing WP-CLI', 'gato-graphql'),
                 [
