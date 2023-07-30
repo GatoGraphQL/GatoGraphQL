@@ -2,7 +2,7 @@
 
 GraphQL is traditionally about exposing a single endpoint, usually under `https://mysite.com/graphql`.
 
-Gato GraphQL expands this notion, allowing us to expose multiple endpoints, each of them tailored to some specific need. For instance, we can expose endpoints:
+Gato GraphQL expands this notion, allowing us to expose multiple custom endpoints, each of them tailored to some specific need. For instance, we can expose endpoints:
 
 - `/mobile-app` and `/website`
 - `/internal` and `/public`
@@ -12,11 +12,15 @@ Gato GraphQL expands this notion, allowing us to expose multiple endpoints, each
 - `/client-A`, `/client-B` and `client-Z`
 - any combination of them
 
+In addition, Gato GraphQL natively supports Persisted Queries, which are endpoints where the query is predefined and stored in the server.
+
 In this recipe there is no code, but suggestions on when to use each endpoint.
 
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
+
+All endpoints are configured via [Schema Configurations]()
 
 You can also [create your own internal endpoint](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/), and pre-define whatever specific configuration required for your blocks (enabling nested mutations, enabling namespacing, defining what CPTs can be queried, or anything else available in the Schema Configuration).
 
@@ -37,4 +41,6 @@ building headless sites
 
 ## When to use private private endpoints
 
+
+## When to use Persisted Queries
 
