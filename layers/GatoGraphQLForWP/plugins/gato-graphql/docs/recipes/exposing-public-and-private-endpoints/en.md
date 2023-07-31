@@ -37,7 +37,7 @@ We can also define a [default Schema Configuration](https://gatographql.com/guid
 
 ## When to use the single endpoint
 
-The [single GraphQL endpoint](https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/) is always public, exposed by default under `/graphql`. It is disabled my default, so the "Single Endpoint" module must be enabled.
+The [single endpoint](https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/) is always public, exposed by default under `/graphql`. It is disabled my default, so the "Single Endpoint" module must be enabled.
 
 <div class="doc-highlight" markdown=1>
 
@@ -60,6 +60,17 @@ This is the case, for instance, for building a headless site (using [Next.js](ht
 
 ## When to use public custom endpoints
 
+[Custom endpoints](https://gatographql.com/guides/use/creating-a-custom-endpoint/) help us manage how all of our endpoints will be used and by who, whether it is by different applications ("mobile" and "website"), teams ("development" and "marketing"), clients ("client-A" and "client-B") and others.
+
+The custom endpoint is exposed under its own slug, by default under `graphql/{custom-endpoint-slug}/`. As such, it offers security through obscurity, as only the intended target should know about this endpoint and its URL.
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+- Alternatively, we can use the [**Access Control**](https://gatographql.com/extensions/access-control/) extension to [restrict access to the endpoint](https://gatographql.com/guides/use/defining-access-control/) based on user roles/capabilities, and enhance it with the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension to check that the [visitor comes from IP `127.0.0.1`](https://gatographql.com/guides/config/restricting-access-by-visitor-ip/).
+
+</div>
 
 
 
@@ -77,9 +88,6 @@ Alternatively, you can create Persisted Queries and retrieve data from them (ins
 
 🔥 **Tips:**
 
-- The single endpoint is (by default) accessible under `graphql/`, and a custom endpoint is (by default) accessible under `graphql/{custom-endpoint-slug}/`
-- The single endpoint is [disabled by default](https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/), so it must be enabled
-- The single endpoint is public; to avoid unintentionally exposing private data, it is advised to enable it only when your website is not accessible to the Internet (eg: the site is on a development laptop, used to build a headless site)
 - Otherwise, it is advised to [create a custom endpoint](https://gatographql.com/guides/use/creating-a-custom-endpoint/), [publish it as `private`](https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints), and pass the cookies added by WordPress (once the user has been authenticated) to `curl` (you can use DevTools to inspect the request headers when in the WordPress dashboard)
 - Alternatively, we can use the [**Access Control**](https://gatographql.com/extensions/access-control/) extension to [restrict access to the endpoint](https://gatographql.com/guides/use/defining-access-control/) based on user roles/capabilities, and enhance it with the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension to check that the [visitor comes from IP `127.0.0.1`](https://gatographql.com/guides/config/restricting-access-by-visitor-ip/).
 
