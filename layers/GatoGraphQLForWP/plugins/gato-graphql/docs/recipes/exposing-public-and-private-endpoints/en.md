@@ -73,7 +73,7 @@ To tighten up the security of the API, we can use the [**Access Control**](https
 - The user is logged-in (or not)
 - The user has some role
 - The user has some capability
-- The visitor comes from an allowed IP (the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension is required)
+- The visitor comes from an allowed IP (via the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension)
 
 Every custom endpoint can have its own Access Control List, thus being accessible only by its specific intended user.
 
