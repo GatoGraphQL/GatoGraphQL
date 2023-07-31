@@ -93,6 +93,18 @@ This method is recommended when the GraphQL endpoint is inteded to be used by th
 
 Persisted queries are similar to REST endpoints, but we use the GraphQL language to compose the query, and we can publish it straight from the wp-admin. There is no need to deploy any PHP code to publish a persisted query.
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Because there is no need to provide the GraphQL query in the request, persisted queries are naturally suited to be accessed via `GET`.
+
+We can benefit from this and [provide HTTP Caching](https://gatographql.com/guides/use/adding-http-caching/) to our API, thus caching the GraphQL response on the client-side or intermediate stages between the client and the server (such as a CDN).
+
+This is accomplished via the [**Cache Control**](https://gatographql.com/extensions/cache-control/) extension, which, based on the configuration provided via Cache Control Lists, automatically calculates and outputs the response's `max-age` value.
+
+</div>
+
 ## When to use private Persisted Queries
 
 ...
