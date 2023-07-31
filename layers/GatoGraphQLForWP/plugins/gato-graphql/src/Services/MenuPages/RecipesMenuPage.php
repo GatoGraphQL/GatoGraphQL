@@ -184,6 +184,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 [
                     ExtensionModuleResolver::ACCESS_CONTROL,
                     ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                    ExtensionModuleResolver::CACHE_CONTROL,
                 ],
                 [
                     BundleExtensionModuleResolver::PUBLIC_API,
