@@ -180,7 +180,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'exposing-public-and-private-endpoints',
-                \__('Exposing Public and Private endpoints', 'gato-graphql'),
+                \__('Exposing public and private endpoints', 'gato-graphql'),
                 [
                     ExtensionModuleResolver::ACCESS_CONTROL,
                     ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,

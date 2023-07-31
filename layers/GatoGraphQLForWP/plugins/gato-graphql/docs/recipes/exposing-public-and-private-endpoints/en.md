@@ -1,4 +1,4 @@
-# Exposing Public and Private endpoints
+# Exposing public and private endpoints
 
 GraphQL is traditionally about exposing a single endpoint, usually under `https://mysite.com/graphql`.
 
