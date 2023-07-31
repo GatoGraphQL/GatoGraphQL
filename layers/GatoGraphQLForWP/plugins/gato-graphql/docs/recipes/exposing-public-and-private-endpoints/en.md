@@ -31,7 +31,7 @@ Endpoints are configured via a [Schema Configuration](https://gatographql.com/gu
 - Setting-up HTTP caching
 - Many others
 
-We can also define a [default Schema Configuration](https://gatographql.com/guides/config/defining-the-default-schema-configuration/).
+If we have a configuration that we want to apply to all or most endpoints, we can define a [default Schema Configuration](https://gatographql.com/guides/config/defining-the-default-schema-configuration/).
 
 </div>
 
