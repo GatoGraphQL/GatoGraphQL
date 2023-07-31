@@ -43,19 +43,19 @@ The [single GraphQL endpoint](https://gatographql.com/guides/config/enabling-and
 
 🔥 **Tips:**
 
-Gato GraphQL is managed via "modules", each of them offering some functionality or extension of the GraphQL schema.
+Gato GraphQL is managed via "modules", each of them offering some functionality or extension of the GraphQL schema, and which [can be enabled and disabled](https://gatographql.com/guides/config/browsing-enabling-and-disabling-modules/) as needed.
 
-[Modules can be enabled and disabled](https://gatographql.com/guides/config/browsing-enabling-and-disabling-modules/) as needed. It is a good practice to disable modules that extend the GraphQL schema (such as modules "Posts", "Users", "Comments", "Blocks", etc) when they are not needed, as to make sure that that data will never be exposed in first place.
+To harden up the security of our API, it is a good practice to disable modules that extend the GraphQL schema (such as modules "Posts", "Users", "Comments", "Blocks", etc) when they are not needed, as to make sure that that data will never be exposed in first place.
 
 In particular, we can disable module "Mutations", thus deactivating all extensions that provide some mutation (such as modules "Post Mutations", "Comment Mutations", etc).
 
 </div>
 
-
-
-building headless sites
+The single endpoint is most useful when the website is not accessible to the Internet, such as when building a headless site, with the WordPress site simply running on a development laptop or behind a firewall.
 
 ## When to use public custom endpoints
+
+
 
 
 ## When to use private private endpoints
@@ -66,3 +66,16 @@ You can also [create your own internal endpoint](https://gatographql.com/guides/
 
 Alternatively, you can create Persisted Queries and retrieve data from them (instead of from an endpoint). Check out how the [client code must be adapted](https://gatographql.com/guides/intro/connecting-to-the-graphql-server-from-a-client/#heading-executing-persisted-queries).
 
+
+
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+- The single endpoint is (by default) accessible under `graphql/`, and a custom endpoint is (by default) accessible under `graphql/{custom-endpoint-slug}/`
+- The single endpoint is [disabled by default](https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/), so it must be enabled
+- The single endpoint is public; to avoid unintentionally exposing private data, it is advised to enable it only when your website is not accessible to the Internet (eg: the site is on a development laptop, used to build a headless site)
+- Otherwise, it is advised to [create a custom endpoint](https://gatographql.com/guides/use/creating-a-custom-endpoint/), [publish it as `private`](https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints), and pass the cookies added by WordPress (once the user has been authenticated) to `curl` (you can use DevTools to inspect the request headers when in the WordPress dashboard)
+- Alternatively, we can use the [**Access Control**](https://gatographql.com/extensions/access-control/) extension to [restrict access to the endpoint](https://gatographql.com/guides/use/defining-access-control/) based on user roles/capabilities, and enhance it with the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension to check that the [visitor comes from IP `127.0.0.1`](https://gatographql.com/guides/config/restricting-access-by-visitor-ip/).
+
+</div>
