@@ -27,7 +27,7 @@ Please read the author's [introduction to Gato GraphQL](https://leoloso.com/post
 
 - WordPress 5.4 or above
 - PHP 8.1+ for development
-- PHP 7.1+ for production -->
+- PHP 7.2+ for production -->
 
 ## Installing the plugin (for production)
 

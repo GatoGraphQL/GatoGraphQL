@@ -152,7 +152,7 @@ Because the external application may have different components installed, it is 
 Requirements:
 
 - PHP 8.1+ for development
-- PHP 7.1+ for production
+- PHP 7.2+ for production
 
 ### Supported PHP features
 
