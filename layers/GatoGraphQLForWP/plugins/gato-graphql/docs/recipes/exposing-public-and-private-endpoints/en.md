@@ -56,11 +56,11 @@ The single endpoint is recommended when:
 - We need to retrieve data to power a single feature, and
 - The WordPress website is not accessible to the open Internet (i.e. it is running on a development laptop, or behind a firewall)
 
-This is the case, for instance, for building a headless site (using [Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.com/), etc).
+This is the case, for instance, for building a headless site (using [Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.com/), or others).
 
 ## When to use public custom endpoints
 
-[Custom endpoints](https://gatographql.com/guides/use/creating-a-custom-endpoint/) are similar to the single endpoint, but we can have many of them, each exposed under its own URL `graphql/{custom-endpoint-slug}/`.
+[Custom endpoints](https://gatographql.com/guides/use/creating-a-custom-endpoint/) are similar to the single endpoint, but we can have many of them, each exposed under its own URL `graphql/{custom-endpoint-slug}/`, with each of them having a different configuration.
 
 Custom endpoints offer security through obscurity, as only the intended target should know about the existence of the custom endpoint and its URL.
 
