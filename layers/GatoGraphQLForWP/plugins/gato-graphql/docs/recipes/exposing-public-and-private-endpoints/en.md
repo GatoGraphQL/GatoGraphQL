@@ -14,13 +14,13 @@ Gato GraphQL expands this notion, allowing us to expose multiple custom endpoint
 
 Gato GraphQL also natively supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server.
 
-In this recipe there is no code, but suggestions on when to use each endpoint.
+In this recipe there is no code, but suggestions on how and when to use each endpoint.
 
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
 
-Every endpoint is configured via a [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/), where we define:
+Endpoints are configured via a [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/), where we define:
 
 - Setting the schema as public or private
 - Enabling “sensitive” data elements
@@ -30,6 +30,8 @@ Every endpoint is configured via a [Schema Configuration](https://gatographql.co
 - Granting access to the schema elements via Access Control Lists
 - Setting-up HTTP caching
 - Many others
+
+We can also define a [default Schema Configuration](https://gatographql.com/guides/config/defining-the-default-schema-configuration/).
 
 </div>
 
