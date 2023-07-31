@@ -89,6 +89,9 @@ This method is recommended when the GraphQL endpoint is inteded to be used by th
 
 ## When to use public Persisted Queries
 
+[Persisted queries](https://gatographql.com/guides/use/creating-a-persisted-query/) are endpoints, each having its own URL, but the GraphQL query is already defined, and stored in the server.
+
+Persisted queries are similar to REST endpoints, but we use the GraphQL language to compose the query, and we can publish it straight from the wp-admin. There is no need to deploy any PHP code to publish a persisted query.
 
 ## When to use private Persisted Queries
 
