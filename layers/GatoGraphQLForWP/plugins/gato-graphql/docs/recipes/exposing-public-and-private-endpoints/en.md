@@ -113,4 +113,6 @@ This is because as all data that needs to be made available for our application 
 
 ## When to use private Persisted Queries
 
-...
+Similar to custom endpoints, persisted queries are CPTs, then we can publish them as `private`, making it accessible only to the logged-in users who have the right to access it.
+
+It is recommended to use these whenever the persisted query is for internal use only, such as storing GraphQL queries for searching WordPress data (as demonstrated in a previous recipe).
