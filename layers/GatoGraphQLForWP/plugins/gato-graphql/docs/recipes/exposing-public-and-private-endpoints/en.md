@@ -97,11 +97,13 @@ Persisted queries are similar to REST endpoints, but we use the GraphQL language
 
 🔥 **Tips:**
 
-Because there is no need to provide the GraphQL query in the request, persisted queries are naturally suited to be accessed via `GET`.
+Because persisted queries do not require passing the GraphQL query in the body of the request, they are naturally suited to be accessed via `GET` instead of `POST`.
 
-We can benefit from this and [provide HTTP Caching](https://gatographql.com/guides/use/adding-http-caching/) to our API, thus caching the GraphQL response on the client-side or intermediate stages between the client and the server (such as a CDN).
+(The single endpoint and custom endpoints can also be accessed via `GET` by appending param `?query={ GraphQL query }` to the endpoint.)
 
-This is accomplished via the [**Cache Control**](https://gatographql.com/extensions/cache-control/) extension, which, based on the configuration provided via Cache Control Lists, automatically calculates and outputs the response's `max-age` value.
+We can benefit from this and make the API faster via standard [HTTP Caching](https://gatographql.com/guides/use/adding-http-caching/), caching the GraphQL response on the client-side or intermediate stages between the client and the server (such as a CDN).
+
+This is accomplished through the [**Cache Control**](https://gatographql.com/extensions/cache-control/) extension, which (with configuration provided via Cache Control Lists) automatically calculates and outputs the response's `max-age` value based on the fields and directives present in the query.
 
 </div>
 
