@@ -5,11 +5,11 @@ GraphQL is traditionally about exposing a single endpoint, usually under `https:
 Gato GraphQL expands this notion, allowing us to expose multiple custom endpoints, each of them tailored to some specific need. For instance, we can expose endpoints:
 
 - `/internal` and `/public`
-- `/mobile-app` and `/website`
+- `/apps/mobile` and `/apps/website`
 - `/clients` and `/visitors`
 - `/development`, `/staging` and `/production`
-- `/development-team`, `/testing-team` and `/marketing-team`
-- `/client-A`, `/client-B` and `client-Z`
+- `/teams/development`, `/teams/testing` and `/teams/marketing`
+- `/clients/A`, `/clients/B` and `clients/Z`
 - any combination of them
 
 Gato GraphQL also natively supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server.
