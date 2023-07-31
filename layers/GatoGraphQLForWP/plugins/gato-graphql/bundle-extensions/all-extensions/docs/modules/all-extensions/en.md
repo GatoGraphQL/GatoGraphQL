@@ -37,6 +37,7 @@ As new extensions are created and released, they will also be added to this bund
 
 - [Searching WordPress data](../../../../../docs/recipes/searching-wordpress-data/en.md)
 - [Querying dynamic data](../../../../../docs/recipes/querying-dynamic-data/en.md)
+- [Exposing public and private endpoints](../../../../../docs/recipes/exposing-public-and-private-endpoints/en.md)
 - [Complementing WP-CLI](../../../../../docs/recipes/complementing-wp-cli/en.md)
 - [Injecting multiple resources into WP-CLI](../../../../../docs/recipes/injecting-multiple-resources-into-wp-cli/en.md)
 - [Feeding data to blocks in the editor](../../../../../docs/recipes/feeding-data-to-blocks-in-the-editor/en.md)
