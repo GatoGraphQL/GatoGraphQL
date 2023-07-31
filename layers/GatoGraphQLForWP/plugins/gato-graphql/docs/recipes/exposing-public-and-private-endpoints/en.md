@@ -4,8 +4,8 @@ GraphQL is traditionally about exposing a single endpoint, usually under `https:
 
 Gato GraphQL expands this notion, allowing us to expose multiple custom endpoints, each of them tailored to some specific need. For instance, we can expose endpoints:
 
-- `/mobile-app` and `/website`
 - `/internal` and `/public`
+- `/mobile-app` and `/website`
 - `/clients` and `/visitors`
 - `/development`, `/staging` and `/production`
 - `/development-team`, `/testing-team` and `/marketing-team`
@@ -47,7 +47,7 @@ Gato GraphQL is managed via "modules", each of them offering some functionality 
 
 To harden up the security of our API, it is a good practice to disable modules that extend the GraphQL schema (such as modules "Posts", "Users", "Comments", "Blocks", etc) when they are not needed, as to make sure that that data will never be exposed in first place.
 
-In particular, if the API is meant only for fetching data (i.e. it is not meant for creating or updating resources), it is a good practice to disable module "Mutations". Doing so will in turn disable all extensions that provide some mutation (such as modules "Post Mutations", "Comment Mutations", etc), and these mutations will never be exposed in the GraphQL schema.
+In particular, if the API is not meant for mutating data (i.e. creating or updating resources), it is a good practice to disable module "Mutations". Doing so will in turn disable all extensions that provide some mutation (such as modules "Post Mutations", "Comment Mutations", etc), and these mutations will never be exposed in the GraphQL schema.
 
 </div>
 
