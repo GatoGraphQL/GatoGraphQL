@@ -89,7 +89,7 @@ This method is recommended when the GraphQL endpoint is inteded to be used by th
 
 ## When to use public Persisted Queries
 
-[Persisted queries](https://gatographql.com/guides/use/creating-a-persisted-query/) are endpoints, each having its own URL, but the GraphQL query is already defined, and stored in the server.
+[Persisted queries](https://gatographql.com/guides/use/creating-a-persisted-query/) are endpoints, each having its own URL, but the GraphQL query is already defined on the server-side, hence the response is also predefined (it can be made dynamic by defining variables, to be satisfied by URL params).
 
 Persisted queries are similar to REST endpoints, but we use the GraphQL language to compose the query, and we can publish it straight from the wp-admin. There is no need to deploy any PHP code to publish a persisted query.
 
@@ -103,7 +103,7 @@ Because persisted queries do not require passing the GraphQL query in the body o
 
 We can benefit from this and make the API faster via standard [HTTP Caching](https://gatographql.com/guides/use/adding-http-caching/), caching the GraphQL response on the client-side or intermediate stages between the client and the server (such as a CDN).
 
-This is accomplished through the [**Cache Control**](https://gatographql.com/extensions/cache-control/) extension, which (with configuration provided via Cache Control Lists) automatically calculates and outputs the response's `max-age` value based on the fields and directives present in the query.
+This is accomplished through the [**Cache Control**](https://gatographql.com/extensions/cache-control/) extension, which automatically calculates and outputs the response's `max-age` value based on the fields and directives present in the query.
 
 </div>
 
@@ -113,6 +113,6 @@ This is because as all data that needs to be made available for our application 
 
 ## When to use private Persisted Queries
 
-Similar to custom endpoints, persisted queries are CPTs, then we can publish them as `private`, making it accessible only to the logged-in users who have the right to access it.
+Similar to custom endpoints, persisted queries are CPTs, then we can publish them as `private` (or `password-protected`), making them accessible only to the logged-in users who have the right to access it and nobody else.
 
-It is recommended to use these whenever the persisted query is for internal use only, such as storing GraphQL queries for searching WordPress data (as demonstrated in a previous recipe).
+It is recommended to use these whenever the query is meant for internal use only, such as when searching WordPress data for our own use (as demonstrated in a previous recipe).
