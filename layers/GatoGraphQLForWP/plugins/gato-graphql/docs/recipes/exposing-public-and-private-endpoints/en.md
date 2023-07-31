@@ -62,13 +62,18 @@ This is the case, for instance, for building a headless site (using [Next.js](ht
 
 [Custom endpoints](https://gatographql.com/guides/use/creating-a-custom-endpoint/) help us manage how all of our endpoints will be used and by who, whether it is by different applications ("mobile" and "website"), teams ("development" and "marketing"), clients ("client-A" and "client-B") and others.
 
-The custom endpoint is exposed under its own slug, by default under `graphql/{custom-endpoint-slug}/`. As such, it offers security through obscurity, as only the intended target should know about this endpoint and its URL.
+The custom endpoint is exposed under its own slug, by default under `graphql/{custom-endpoint-slug}/`. As such, it offers security through obscurity, as only the intended target should know about the existence of this endpoint and its URL.
 
 <div class="doc-highlight" markdown=1>
 
 🔥 **Tips:**
 
-- Alternatively, we can use the [**Access Control**](https://gatographql.com/extensions/access-control/) extension to [restrict access to the endpoint](https://gatographql.com/guides/use/defining-access-control/) based on user roles/capabilities, and enhance it with the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension to check that the [visitor comes from IP `127.0.0.1`](https://gatographql.com/guides/config/restricting-access-by-visitor-ip/).
+To tighten up the security of the API, we can use the [**Access Control**](https://gatographql.com/extensions/access-control/) extension to [grant access to the endpoint](https://gatographql.com/guides/use/defining-access-control/) only when:
+
+- The user is logged-in (or not)
+- The user has some role
+- The user has some capability
+- The visitor comes from an allowed IP (the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension is required)
 
 </div>
 
