@@ -87,17 +87,8 @@ Gato GraphQL implements custom endpoints via Custom Post Types (CPTs). This allo
 
 This method is recommended when the logged-in admin of the site is the only user of the GraphQL endpoint (such as when using GraphQL to execute admin tasks). By completely blocking outside visitors from accessing the endpoint, we will be tightening up the security of the site.
 
-You can also [create your own internal endpoint](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/), and pre-define whatever specific configuration required for your blocks (enabling nested mutations, enabling namespacing, defining what CPTs can be queried, or anything else available in the Schema Configuration).
-
 ## When to use Persisted Queries
 
 Alternatively, you can create Persisted Queries and retrieve data from them (instead of from an endpoint). Check out how the [client code must be adapted](https://gatographql.com/guides/intro/connecting-to-the-graphql-server-from-a-client/#heading-executing-persisted-queries).
 
 
-
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-
-</div>
