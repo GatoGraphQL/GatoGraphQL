@@ -79,7 +79,7 @@ Every custom endpoint can have its own Access Control List, thus being accessibl
 
 </div>
 
-Custom endpoints are recommended when we need to manage and customize accesses to the API, whether it is by different applications ("mobile" and "website"), teams ("development" and "marketing"), clients ("client-A" and "client-B") and others.
+Custom endpoints are recommended when we need to manage and customize accesses to the API, whether it is by different applications, teams, clients, or any other.
 
 ## When to use private custom endpoints
 
