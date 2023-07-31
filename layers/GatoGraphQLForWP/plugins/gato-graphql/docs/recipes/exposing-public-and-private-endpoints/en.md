@@ -81,7 +81,11 @@ Every custom endpoint can have its own Access Control List, thus being accessibl
 
 Custom endpoints are recommended when we need to manage and customize accesses to the API, whether it is by different applications ("mobile" and "website"), teams ("development" and "marketing"), clients ("client-A" and "client-B") and others.
 
-## When to use private private endpoints
+## When to use private custom endpoints
+
+Gato GraphQL implements custom endpoints via Custom Post Types (CPTs). This allows us to [publish the custom endpoint as `private`](https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints), thus making the custom endpoint accessible only to logged-in users who have the right to access that custom post, and nobody else.
+
+This method is recommended when the logged-in admin of the site is the only user of the GraphQL endpoint (such as when using GraphQL to execute admin tasks). By completely blocking outside visitors from accessing the endpoint, we will be tightening up the security of the site.
 
 You can also [create your own internal endpoint](https://gatographql.com/guides/config/creating-custom-internal-endpoints-for-blocks/), and pre-define whatever specific configuration required for your blocks (enabling nested mutations, enabling namespacing, defining what CPTs can be queried, or anything else available in the Schema Configuration).
 
@@ -95,7 +99,5 @@ Alternatively, you can create Persisted Queries and retrieve data from them (ins
 
 🔥 **Tips:**
 
-- Otherwise, it is advised to [create a custom endpoint](https://gatographql.com/guides/use/creating-a-custom-endpoint/), [publish it as `private`](https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints), and pass the cookies added by WordPress (once the user has been authenticated) to `curl` (you can use DevTools to inspect the request headers when in the WordPress dashboard)
-- Alternatively, we can use the [**Access Control**](https://gatographql.com/extensions/access-control/) extension to [restrict access to the endpoint](https://gatographql.com/guides/use/defining-access-control/) based on user roles/capabilities, and enhance it with the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension to check that the [visitor comes from IP `127.0.0.1`](https://gatographql.com/guides/config/restricting-access-by-visitor-ip/).
 
 </div>
