@@ -35,9 +35,21 @@ Every endpoint is configured via a [Schema Configuration](https://gatographql.co
 
 ## When to use the single endpoint
 
-The single GraphQL endpoint is always public, exposed by default under `/graphql`.
+The [single GraphQL endpoint](https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint/) is always public, exposed by default under `/graphql`. It is disabled my default, so the "Single Endpoint" module must be enabled.
 
-should be used when 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+Gato GraphQL is managed via "modules", each of them offering some functionality or extension of the GraphQL schema.
+
+[Modules can be enabled and disabled](https://gatographql.com/guides/config/browsing-enabling-and-disabling-modules/) as needed. It is a good practice to disable modules that extend the GraphQL schema (such as modules "Posts", "Users", "Comments", "Blocks", etc) when they are not needed, as to make sure that that data will never be exposed in first place.
+
+In particular, we can disable module "Mutations", thus deactivating all extensions that provide some mutation (such as modules "Post Mutations", "Comment Mutations", etc).
+
+</div>
+
+
 
 building headless sites
 
