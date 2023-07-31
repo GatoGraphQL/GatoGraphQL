@@ -60,9 +60,9 @@ This is the case, for instance, for building a headless site (using [Next.js](ht
 
 ## When to use public custom endpoints
 
-[Custom endpoints](https://gatographql.com/guides/use/creating-a-custom-endpoint/) help us manage how all of our endpoints will be used and by who, whether it is by different applications ("mobile" and "website"), teams ("development" and "marketing"), clients ("client-A" and "client-B") and others.
+[Custom endpoints](https://gatographql.com/guides/use/creating-a-custom-endpoint/) are similar to the single endpoint, but we can have many of them, each exposed under its own URL `graphql/{custom-endpoint-slug}/`.
 
-The custom endpoint is exposed under its own slug, by default under `graphql/{custom-endpoint-slug}/`. As such, it offers security through obscurity, as only the intended target should know about the existence of this endpoint and its URL.
+Custom endpoints offer security through obscurity, as only the intended target should know about the existence of the custom endpoint and its URL.
 
 <div class="doc-highlight" markdown=1>
 
@@ -75,9 +75,11 @@ To tighten up the security of the API, we can use the [**Access Control**](https
 - The user has some capability
 - The visitor comes from an allowed IP (the [**Access Control: Visitor IP**](https://gatographql.com/extensions/access-control-visitor-ip/) extension is required)
 
+Every custom endpoint can have its own Access Control List, thus being accessible only by its specific intended user.
+
 </div>
 
-
+Custom endpoints are recommended when we need to manage and customize accesses to the API, whether it is by different applications ("mobile" and "website"), teams ("development" and "marketing"), clients ("client-A" and "client-B") and others.
 
 ## When to use private private endpoints
 
