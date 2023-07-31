@@ -107,6 +107,10 @@ This is accomplished through the [**Cache Control**](https://gatographql.com/ext
 
 </div>
 
+It is recommended to use persisted queries whenever possible, as they substantially increase the security of our sites.
+
+This is because as all data that needs to be made available for our application can already be exposed via persisted queries. Then, we can skip exposing the GraphQL single endpoint (or any custom endpoint), thus removing the chance that users could access private data that we left exposed (by mistake or otherwise).
+
 ## When to use private Persisted Queries
 
 ...
