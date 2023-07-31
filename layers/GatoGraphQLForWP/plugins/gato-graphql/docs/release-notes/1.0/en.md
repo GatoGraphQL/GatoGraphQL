@@ -1588,6 +1588,7 @@ The plugin has upgraded its Symfony dependencies to the latest v6.3, which <a hr
 
 ## Breaking changes
 
+- Upgraded minimum PHP version to 7.2
 - Non-restrictive Settings values are used by default
 - Env var `ENABLE_UNSAFE_DEFAULTS` has been removed and `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` added in its place, to indicate to use the restrictive Settings values by default
 - Renamed plugin to "Gato GraphQL"

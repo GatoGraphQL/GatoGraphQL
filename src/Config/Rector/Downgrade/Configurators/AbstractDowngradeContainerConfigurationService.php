@@ -17,7 +17,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     public function configureContainer(): void
     {
         $this->rectorConfig->sets([
-            DowngradeLevelSetList::DOWN_TO_PHP_71,
+            DowngradeLevelSetList::DOWN_TO_PHP_72,
         ]);
 
         /**
@@ -26,11 +26,11 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
          * doesn't handle interfaces, so it doesn't replace `DateTimeInterface`
          * Solution: Create a similar rule
          */
-        // // Must also replace DateTimeInterface::ATOM for PHP 7.1
+        // // Must also replace DateTimeInterface::ATOM for PHP 7.2
         // $this->rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
-        $this->rectorConfig->phpVersion(PhpVersion::PHP_71);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_72);
 
         // Do not change the code, other than the required rules
         $this->rectorConfig->importNames(false, false);

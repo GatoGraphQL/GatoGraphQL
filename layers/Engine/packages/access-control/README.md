@@ -60,13 +60,13 @@ In addition, whenever a validation must be performed to know if the user can acc
 Requirements:
 
 - PHP 8.1+ for development
-- PHP 7.1+ for production
+- PHP 7.2+ for production
 
 ### Supported PHP features
 
 Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
 
-### Preview downgrade to PHP 7.1
+### Preview downgrade to PHP 7.2
 
 Via [Rector](https://github.com/rectorphp/rector) (dry-run mode):
 

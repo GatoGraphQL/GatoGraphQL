@@ -2,7 +2,7 @@ name: gato-graphql-for-prod
 recipe: wordpress
 config:
   webroot: wordpress
-  php: '7.1'
+  php: '7.2'
   ssl: true
 services:
   appserver:

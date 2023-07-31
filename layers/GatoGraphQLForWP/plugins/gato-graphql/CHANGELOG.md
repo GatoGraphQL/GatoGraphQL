@@ -51,6 +51,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
+- Upgraded minimum PHP version to 7.2
 - Must update mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others)
 - Must update mutations `setTagsOnPost`, `createPost` and `updatePost`
 - Must adapt filtering data for `posts`, `customPosts` and `comments`

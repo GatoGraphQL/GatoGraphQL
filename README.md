@@ -62,9 +62,9 @@ Similar to WordPress, it accepts themes.
 <!-- ## Requirements
 
 - PHP 8.1+ for development
-- PHP 7.1+ for production
+- PHP 7.2+ for production
 
-## Install 
+## Install
 
 Clone the monorepo:
 
