@@ -27,5 +27,6 @@ This bundle contains extensions to superpower your public APIs:
 ## List of supported recipes
 
 - [Searching WordPress data](../../../../../docs/recipes/searching-wordpress-data/en.md)
+- [Exposing public and private endpoints](../../../../../docs/recipes/exposing-public-and-private-endpoints/en.md)
 - [Complementing WP-CLI](../../../../../docs/recipes/complementing-wp-cli/en.md)
 - [Mapping JS components to (Gutenberg) blocks](../../../../../docs/recipes/mapping-js-components-to-gutenberg-blocks/en.md)

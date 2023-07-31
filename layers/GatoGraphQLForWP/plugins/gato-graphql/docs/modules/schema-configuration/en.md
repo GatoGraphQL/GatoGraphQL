@@ -12,6 +12,7 @@ Each module can define its configuration through its own block in the Schema Con
 - Enabling “sensitive” data elements
 - Namespacing the schema
 - Using nested mutations
+- Defining response headers
 - Define who can access the schema via Access Control Lists
 - Set-up HTTP caching via Cache Control Lists
 - Many others

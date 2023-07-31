@@ -20,6 +20,7 @@ The bundle provides extensions to access, iterate and manipulate the field value
 ## List of supported recipes
 
 - [Searching WordPress data](../../../../../docs/recipes/searching-wordpress-data/en.md)
+- [Exposing public and private endpoints](../../../../../docs/recipes/exposing-public-and-private-endpoints/en.md)
 - [Complementing WP-CLI](../../../../../docs/recipes/complementing-wp-cli/en.md)
 - [Injecting multiple resources into WP-CLI](../../../../../docs/recipes/injecting-multiple-resources-into-wp-cli/en.md)
 - [Mapping JS components to (Gutenberg) blocks](../../../../../docs/recipes/mapping-js-components-to-gutenberg-blocks/en.md)
