@@ -17,7 +17,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     public function configureContainer(): void
     {
         $this->rectorConfig->sets([
-            DowngradeLevelSetList::DOWN_TO_PHP_71,
+            DowngradeLevelSetList::DOWN_TO_PHP_72,
         ]);
 
         /**
@@ -30,7 +30,7 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
         // $this->rectorConfig->ruleWithConfiguration(RenameClassConstFetchRector::class, [new RenameClassAndConstFetch(DateTimeInterface::class, 'ATOM', PolyfillDateTimeInterface::class, 'ATOM')]);
 
         // is your PHP version different from the one your refactor to? [default: your PHP version]
-        $this->rectorConfig->phpVersion(PhpVersion::PHP_71);
+        $this->rectorConfig->phpVersion(PhpVersion::PHP_72);
 
         // Do not change the code, other than the required rules
         $this->rectorConfig->importNames(false, false);
