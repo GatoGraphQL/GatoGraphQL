@@ -6,6 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -86,6 +87,10 @@ class BulkPluginActivationDeactivationExecuter
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+                continue;
+            }
+            // Do not activate the Bundles, only the Extensions
+            if ($moduleResolver instanceof BundleExtensionModuleResolverInterface) {
                 continue;
             }
             $gatoGraphQLExtensionPluginFiles[] = $moduleResolver->getGatoGraphQLExtensionPluginFile($module);
