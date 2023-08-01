@@ -32,12 +32,6 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 ![Namespacing in Settings](../../images/settings-namespacing-default.png "Namespacing in Settings")
 
-### Namespacing the schema in the Admin clients
-
-Namespacing the schema in the wp-admin can be selected on the Settings. It will be applied on the GraphiQL and Interactive Schema clients, on the configuration in Access/Cache Control Lists, and possibly on other extensions.
-
-![Namespacing in Settings for the Admin](../../images/settings-namespacing-for-admin.png "Namespacing in Settings for the Admin")
-
 ## When to use
 
 If plugins WooCommerce and Easy Digital Downloads both implemented a `Product` type for Gato GraphQL, then we could not normally install both plugins at the same time. The Schema namespacing module helps avert this conflict, because their type names would be converted into `WC_Product` and `EDD_Product` respectively.
