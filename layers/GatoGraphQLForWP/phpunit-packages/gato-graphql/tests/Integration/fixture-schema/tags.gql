@@ -1,5 +1,8 @@
 {
-  tags(taxonomy: "dummy-tag") {
+  tags(
+    taxonomy: "dummy-tag"
+    sort: { by: ID, order: ASC }
+  ) {
     __typename
     ...GenericTagData
     ...TagData
@@ -12,6 +15,7 @@
     pagination: {
       limit: 30
     }
+    sort: { by: ID, order: ASC }
   ) {
     __typename
     ...on CustomPost {
@@ -20,7 +24,10 @@
       customPostType
     }
     ...on GenericCustomPost {
-      tags(taxonomy: "dummy-tag") {
+      tags(
+        taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
         __typename
         id
         name
@@ -56,7 +63,10 @@
     id
     title
     ...on GenericCustomPost {
-      tags(taxonomy: "dummy-tag") {
+      tags(
+        taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
         id
       }
     }
@@ -82,7 +92,10 @@
     id
     title
     ...on GenericCustomPost {
-      tags(taxonomy: "dummy-tag") {
+      tags(
+        taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
         id
       }
     }
@@ -108,7 +121,10 @@
     id
     title
     ...on GenericCustomPost {
-      tags(taxonomy: "dummy-tag") {
+      tags(
+        taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
         slug
       }
     }
@@ -134,7 +150,10 @@
     id
     title
     ...on GenericCustomPost {
-      tags(taxonomy: "dummy-tag") {
+      tags(
+        taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
         slug
       }
     }
@@ -161,7 +180,10 @@
     id
     title
     ...on GenericCustomPost {
-      tags(taxonomy: "dummy-tag") {
+      tags(
+        taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
         slug
       }
     }
@@ -183,7 +205,7 @@ fragment TagData on Tag {
 fragment GenericTagData on GenericTag {
   taxonomy   
   customPostCount
-  customPosts {
+  customPosts(sort: { by: ID, order: ASC }) {
     __typename
     ...CustomPostData
   }
@@ -192,7 +214,10 @@ fragment GenericTagData on GenericTag {
 fragment CustomPostData on CustomPost {
   id
   title
-  tags(taxonomy: "dummy-tag") {
+  tags(
+    taxonomy: "dummy-tag"
+    sort: { by: ID, order: ASC }
+  ) {
     __typename
     ...on Tag {
       id

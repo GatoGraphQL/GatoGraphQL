@@ -4,751 +4,6 @@
             {
                 "__typename": "GenericCategory",
                 "taxonomy": "dummy-category",
-                "customPostCount": 2,
-                "customPosts": [
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 644,
-                        "title": "Impedit eaque numquam quas inventore",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 648,
-                        "title": "Nostrum consequatur non fugit vel",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    }
-                ],
-                "count": 2,
-                "description": "",
-                "id": 33,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "World Cup",
-                "slug": "world-cup",
-                "slugPath": "world-cup",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/world-cup\/",
-                "urlPath": "\/dummy-category\/world-cup\/"
-            },
-            {
-                "__typename": "GenericCategory",
-                "taxonomy": "dummy-category",
-                "customPostCount": 4,
-                "customPosts": [
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 622,
-                        "title": "Dolore ex et deleniti mollitia",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 627,
-                        "title": "Quis voluptatum tempore veniam est sit",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 631,
-                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 644,
-                        "title": "Impedit eaque numquam quas inventore",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            }
-                        ]
-                    }
-                ],
-                "count": 4,
-                "description": "",
-                "id": 32,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Unexpected Randomness",
-                "slug": "unexpected-randomness",
-                "slugPath": "unexpected-randomness",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/unexpected-randomness\/",
-                "urlPath": "\/dummy-category\/unexpected-randomness\/"
-            },
-            {
-                "__typename": "GenericCategory",
-                "taxonomy": "dummy-category",
-                "customPostCount": 7,
-                "customPosts": [
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 616,
-                        "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 629,
-                        "title": "Qui ea incidunt qui",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 634,
-                        "title": "Recusandae vel deleniti est expedita dolores quasi",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 648,
-                        "title": "Nostrum consequatur non fugit vel",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 654,
-                        "title": "Dummy CPT with blocks",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 656,
-                        "title": "Dummy CPT with non-existing block",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 658,
-                        "title": "Dummy CPT with no content",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    }
-                ],
-                "count": 7,
-                "description": "",
-                "id": 31,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Perestroika",
-                "slug": "perestroika",
-                "slugPath": "perestroika",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/perestroika\/",
-                "urlPath": "\/dummy-category\/perestroika\/"
-            },
-            {
-                "__typename": "GenericCategory",
-                "taxonomy": "dummy-category",
-                "customPostCount": 0,
-                "customPosts": [],
-                "count": 0,
-                "description": "",
-                "id": 34,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Nostradamus",
-                "slug": "nostradamus-2",
-                "slugPath": "nostradamus-2",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus-2\/",
-                "urlPath": "\/dummy-category\/nostradamus-2\/"
-            },
-            {
-                "__typename": "GenericCategory",
-                "taxonomy": "dummy-category",
-                "customPostCount": 3,
-                "customPosts": [
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 622,
-                        "title": "Dolore ex et deleniti mollitia",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 627,
-                        "title": "Quis voluptatum tempore veniam est sit",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 639,
-                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    }
-                ],
-                "count": 3,
-                "description": "",
-                "id": 30,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Nostradamus",
-                "slug": "nostradamus",
-                "slugPath": "absolute-brilliance\/brontosaurus\/capullo\/nostradamus",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus\/",
-                "urlPath": "\/dummy-category\/nostradamus\/"
-            },
-            {
-                "__typename": "GenericCategory",
-                "taxonomy": "dummy-category",
-                "customPostCount": 6,
-                "customPosts": [
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 622,
-                        "title": "Dolore ex et deleniti mollitia",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 627,
-                        "title": "Quis voluptatum tempore veniam est sit",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 630,
-                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 639,
-                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 644,
-                        "title": "Impedit eaque numquam quas inventore",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 648,
-                        "title": "Nostrum consequatur non fugit vel",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    }
-                ],
-                "count": 5,
-                "description": "",
-                "id": 29,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Capullo",
-                "slug": "capullo",
-                "slugPath": "absolute-brilliance\/brontosaurus\/capullo",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/capullo\/",
-                "urlPath": "\/dummy-category\/capullo\/"
-            },
-            {
-                "__typename": "GenericCategory",
-                "taxonomy": "dummy-category",
-                "customPostCount": 9,
-                "customPosts": [
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 619,
-                        "title": "Error debitis nulla vel est",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 622,
-                        "title": "Dolore ex et deleniti mollitia",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 627,
-                        "title": "Quis voluptatum tempore veniam est sit",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 629,
-                        "title": "Qui ea incidunt qui",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 630,
-                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 631,
-                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 639,
-                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 644,
-                        "title": "Impedit eaque numquam quas inventore",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 28,
-                                "name": "Brontosaurus"
-                            }
-                        ]
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 648,
-                        "title": "Nostrum consequatur non fugit vel",
-                        "categories": [
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 33,
-                                "name": "World Cup"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
-                            },
-                            {
-                                "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
-                            }
-                        ]
-                    }
-                ],
-                "count": 4,
-                "description": "",
-                "id": 28,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Brontosaurus",
-                "slug": "brontosaurus",
-                "slugPath": "absolute-brilliance\/brontosaurus",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/brontosaurus\/",
-                "urlPath": "\/dummy-category\/brontosaurus\/"
-            },
-            {
-                "__typename": "GenericCategory",
-                "taxonomy": "dummy-category",
                 "customPostCount": 15,
                 "customPosts": [
                     {
@@ -794,8 +49,8 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
+                                "id": 27,
+                                "name": "Absolute Brilliance"
                             },
                             {
                                 "__typename": "GenericCategory",
@@ -804,8 +59,8 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
+                                "id": 32,
+                                "name": "Unexpected Randomness"
                             }
                         ]
                     },
@@ -816,8 +71,8 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
+                                "id": 29,
+                                "name": "Capullo"
                             },
                             {
                                 "__typename": "GenericCategory",
@@ -826,8 +81,8 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
+                                "id": 32,
+                                "name": "Unexpected Randomness"
                             }
                         ]
                     },
@@ -838,8 +93,8 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
+                                "id": 27,
+                                "name": "Absolute Brilliance"
                             },
                             {
                                 "__typename": "GenericCategory",
@@ -848,8 +103,8 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
+                                "id": 31,
+                                "name": "Perestroika"
                             }
                         ]
                     },
@@ -872,8 +127,8 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 32,
-                                "name": "Unexpected Randomness"
+                                "id": 27,
+                                "name": "Absolute Brilliance"
                             },
                             {
                                 "__typename": "GenericCategory",
@@ -882,8 +137,8 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
+                                "id": 32,
+                                "name": "Unexpected Randomness"
                             }
                         ]
                     },
@@ -894,13 +149,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 31,
-                                "name": "Perestroika"
+                                "id": 27,
+                                "name": "Absolute Brilliance"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 27,
-                                "name": "Absolute Brilliance"
+                                "id": 31,
+                                "name": "Perestroika"
                             }
                         ]
                     },
@@ -911,13 +166,13 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 30,
-                                "name": "Nostradamus"
+                                "id": 29,
+                                "name": "Capullo"
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 29,
-                                "name": "Capullo"
+                                "id": 30,
+                                "name": "Nostradamus"
                             }
                         ]
                     }
@@ -932,13 +187,758 @@
                 "slugPath": "absolute-brilliance",
                 "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/absolute-brilliance\/",
                 "urlPath": "\/dummy-category\/absolute-brilliance\/"
+            },
+            {
+                "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
+                "customPostCount": 9,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 619,
+                        "title": "Error debitis nulla vel est",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 622,
+                        "title": "Dolore ex et deleniti mollitia",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 629,
+                        "title": "Qui ea incidunt qui",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 630,
+                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 631,
+                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 639,
+                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    }
+                ],
+                "count": 4,
+                "description": "",
+                "id": 28,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Brontosaurus",
+                "slug": "brontosaurus",
+                "slugPath": "absolute-brilliance\/brontosaurus",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/brontosaurus\/",
+                "urlPath": "\/dummy-category\/brontosaurus\/"
+            },
+            {
+                "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
+                "customPostCount": 6,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 622,
+                        "title": "Dolore ex et deleniti mollitia",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 630,
+                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 639,
+                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    }
+                ],
+                "count": 5,
+                "description": "",
+                "id": 29,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Capullo",
+                "slug": "capullo",
+                "slugPath": "absolute-brilliance\/brontosaurus\/capullo",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/capullo\/",
+                "urlPath": "\/dummy-category\/capullo\/"
+            },
+            {
+                "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
+                "customPostCount": 3,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 622,
+                        "title": "Dolore ex et deleniti mollitia",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 639,
+                        "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            }
+                        ]
+                    }
+                ],
+                "count": 3,
+                "description": "",
+                "id": 30,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Nostradamus",
+                "slug": "nostradamus",
+                "slugPath": "absolute-brilliance\/brontosaurus\/capullo\/nostradamus",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus\/",
+                "urlPath": "\/dummy-category\/nostradamus\/"
+            },
+            {
+                "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
+                "customPostCount": 7,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 616,
+                        "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 629,
+                        "title": "Qui ea incidunt qui",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 634,
+                        "title": "Recusandae vel deleniti est expedita dolores quasi",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 654,
+                        "title": "Dummy CPT with blocks",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 656,
+                        "title": "Dummy CPT with non-existing block",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 658,
+                        "title": "Dummy CPT with no content",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            }
+                        ]
+                    }
+                ],
+                "count": 7,
+                "description": "",
+                "id": 31,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Perestroika",
+                "slug": "perestroika",
+                "slugPath": "perestroika",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/perestroika\/",
+                "urlPath": "\/dummy-category\/perestroika\/"
+            },
+            {
+                "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
+                "customPostCount": 4,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 622,
+                        "title": "Dolore ex et deleniti mollitia",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 627,
+                        "title": "Quis voluptatum tempore veniam est sit",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 30,
+                                "name": "Nostradamus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 631,
+                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 27,
+                                "name": "Absolute Brilliance"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    }
+                ],
+                "count": 4,
+                "description": "",
+                "id": 32,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Unexpected Randomness",
+                "slug": "unexpected-randomness",
+                "slugPath": "unexpected-randomness",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/unexpected-randomness\/",
+                "urlPath": "\/dummy-category\/unexpected-randomness\/"
+            },
+            {
+                "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
+                "customPostCount": 2,
+                "customPosts": [
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 644,
+                        "title": "Impedit eaque numquam quas inventore",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 28,
+                                "name": "Brontosaurus"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 32,
+                                "name": "Unexpected Randomness"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    },
+                    {
+                        "__typename": "GenericCustomPost",
+                        "id": 648,
+                        "title": "Nostrum consequatur non fugit vel",
+                        "categories": [
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 29,
+                                "name": "Capullo"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 31,
+                                "name": "Perestroika"
+                            },
+                            {
+                                "__typename": "GenericCategory",
+                                "id": 33,
+                                "name": "World Cup"
+                            }
+                        ]
+                    }
+                ],
+                "count": 2,
+                "description": "",
+                "id": 33,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "World Cup",
+                "slug": "world-cup",
+                "slugPath": "world-cup",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/world-cup\/",
+                "urlPath": "\/dummy-category\/world-cup\/"
+            },
+            {
+                "__typename": "GenericCategory",
+                "taxonomy": "dummy-category",
+                "customPostCount": 0,
+                "customPosts": [],
+                "count": 0,
+                "description": "",
+                "id": 34,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Nostradamus",
+                "slug": "nostradamus-2",
+                "slugPath": "nostradamus-2",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus-2\/",
+                "urlPath": "\/dummy-category\/nostradamus-2\/"
             }
         ],
         "customPosts": [
             {
                 "__typename": "Post",
-                "id": 40,
-                "title": "Welcome to a single post full of blocks!",
+                "id": 1,
+                "title": "Hello world!",
                 "customPostType": "post",
                 "categories": [
                     {
@@ -951,442 +951,24 @@
                 ]
             },
             {
-                "__typename": "GenericCustomPost",
-                "id": 649,
-                "title": "Nulla numquam totam eaque",
-                "customPostType": "dummy-cpt",
-                "categories": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 619,
-                "title": "Error debitis nulla vel est",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Brontosaurus",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 634,
-                "title": "Recusandae vel deleniti est expedita dolores quasi",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 31,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 654,
-                "title": "Dummy CPT with blocks",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 31,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 656,
-                "title": "Dummy CPT with non-existing block",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 31,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 658,
-                "title": "Dummy CPT with no content",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 31,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 660,
-                "title": "Dummy CPT with non server-side-registered block",
-                "customPostType": "dummy-cpt",
-                "categories": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 680,
-                "title": "Dummy CPT with server-side-registered block",
-                "customPostType": "dummy-cpt",
-                "categories": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 636,
-                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
-                "customPostType": "dummy-cpt",
-                "categories": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 639,
-                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 30,
-                        "name": "Nostradamus",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 29,
-                        "name": "Capullo",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 622,
-                "title": "Dolore ex et deleniti mollitia",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 32,
-                        "name": "Unexpected Randomness",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 30,
-                        "name": "Nostradamus",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 648,
-                "title": "Nostrum consequatur non fugit vel",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 33,
-                        "name": "World Cup",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 31,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 29,
-                        "name": "Capullo",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 644,
-                "title": "Impedit eaque numquam quas inventore",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 33,
-                        "name": "World Cup",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 32,
-                        "name": "Unexpected Randomness",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 29,
-                        "name": "Capullo",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Brontosaurus",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 630,
-                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 29,
-                        "name": "Capullo",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 641,
-                "title": "Impedit necessitatibus dolor est",
-                "customPostType": "dummy-cpt",
-                "categories": []
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 627,
-                "title": "Quis voluptatum tempore veniam est sit",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 32,
-                        "name": "Unexpected Randomness",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 30,
-                        "name": "Nostradamus",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 29,
-                        "name": "Capullo",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 629,
-                "title": "Qui ea incidunt qui",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 31,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Brontosaurus",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 631,
-                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 32,
-                        "name": "Unexpected Randomness",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 28,
-                        "name": "Brontosaurus",
-                        "taxonomy": "dummy-category"
-                    },
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 616,
-                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 31,
-                        "name": "Perestroika",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 613,
-                "title": "Dolor facilis repellat pariatur veniam at",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
-                "__typename": "GenericCustomPost",
-                "id": 620,
-                "title": "Dignissimos sed dolore aut",
-                "customPostType": "dummy-cpt",
-                "categories": [
-                    {
-                        "__typename": "GenericCategory",
-                        "id": 27,
-                        "name": "Absolute Brilliance",
-                        "taxonomy": "dummy-category"
-                    }
-                ]
-            },
-            {
                 "__typename": "Post",
-                "id": 28,
-                "title": "HTTP caching improves performance",
+                "id": 13,
+                "title": "Released v0.6, check it out",
                 "customPostType": "post",
                 "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 7,
-                        "name": "Most special topic",
-                        "slug": "most-special-topic",
-                        "slugPath": "blog\/resource\/special-topic\/most-special-topic"
-                    },
-                    {
-                        "__typename": "PostCategory",
-                        "id": 2,
-                        "name": "Advanced",
-                        "slug": "advanced",
-                        "slugPath": "advanced"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 4,
-                        "name": "Resource",
-                        "slug": "resource",
-                        "slugPath": "blog\/resource"
-                    },
                     {
                         "__typename": "PostCategory",
                         "id": 3,
                         "name": "Blog",
                         "slug": "blog",
                         "slugPath": "blog"
-                    },
-                    {
-                        "__typename": "PostCategory",
-                        "id": 2,
-                        "name": "Advanced",
-                        "slug": "advanced",
-                        "slugPath": "advanced"
                     }
                 ]
             },
             {
                 "__typename": "Post",
-                "id": 23,
-                "title": "GraphQL or REST? Why not both?",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 6,
-                        "name": "Special topic",
-                        "slug": "special-topic",
-                        "slugPath": "blog\/resource\/special-topic"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 21,
-                "title": "Customize the schema for each client",
+                "id": 16,
+                "title": "Working on flat chain syntax next",
                 "customPostType": "post",
                 "categories": [
                     {
@@ -1429,8 +1011,8 @@
             },
             {
                 "__typename": "Post",
-                "id": 16,
-                "title": "Working on flat chain syntax next",
+                "id": 21,
+                "title": "Customize the schema for each client",
                 "customPostType": "post",
                 "categories": [
                     {
@@ -1444,23 +1026,74 @@
             },
             {
                 "__typename": "Post",
-                "id": 13,
-                "title": "Released v0.6, check it out",
+                "id": 23,
+                "title": "GraphQL or REST? Why not both?",
                 "customPostType": "post",
                 "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 6,
+                        "name": "Special topic",
+                        "slug": "special-topic",
+                        "slugPath": "blog\/resource\/special-topic"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 25,
+                "title": "Public or Private API mode, for extra security",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 4,
+                        "name": "Resource",
+                        "slug": "resource",
+                        "slugPath": "blog\/resource"
+                    },
                     {
                         "__typename": "PostCategory",
                         "id": 3,
                         "name": "Blog",
                         "slug": "blog",
                         "slugPath": "blog"
+                    },
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
                     }
                 ]
             },
             {
                 "__typename": "Post",
-                "id": 1,
-                "title": "Hello world!",
+                "id": 28,
+                "title": "HTTP caching improves performance",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 7,
+                        "name": "Most special topic",
+                        "slug": "most-special-topic",
+                        "slugPath": "blog\/resource\/special-topic\/most-special-topic"
+                    },
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 40,
+                "title": "Welcome to a single post full of blocks!",
                 "customPostType": "post",
                 "categories": [
                     {
@@ -1471,6 +1104,373 @@
                         "slugPath": "uncategorized"
                     }
                 ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 613,
+                "title": "Dolor facilis repellat pariatur veniam at",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 616,
+                "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 31,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 619,
+                "title": "Error debitis nulla vel est",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 28,
+                        "name": "Brontosaurus",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 620,
+                "title": "Dignissimos sed dolore aut",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 622,
+                "title": "Dolore ex et deleniti mollitia",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 30,
+                        "name": "Nostradamus",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 32,
+                        "name": "Unexpected Randomness",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 627,
+                "title": "Quis voluptatum tempore veniam est sit",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 29,
+                        "name": "Capullo",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 30,
+                        "name": "Nostradamus",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 32,
+                        "name": "Unexpected Randomness",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 629,
+                "title": "Qui ea incidunt qui",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 28,
+                        "name": "Brontosaurus",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 31,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 29,
+                        "name": "Capullo",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 631,
+                "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 28,
+                        "name": "Brontosaurus",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 32,
+                        "name": "Unexpected Randomness",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 634,
+                "title": "Recusandae vel deleniti est expedita dolores quasi",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 31,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 636,
+                "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
+                "customPostType": "dummy-cpt",
+                "categories": []
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 639,
+                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 29,
+                        "name": "Capullo",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 30,
+                        "name": "Nostradamus",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 641,
+                "title": "Impedit necessitatibus dolor est",
+                "customPostType": "dummy-cpt",
+                "categories": []
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 644,
+                "title": "Impedit eaque numquam quas inventore",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 28,
+                        "name": "Brontosaurus",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 29,
+                        "name": "Capullo",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 32,
+                        "name": "Unexpected Randomness",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 33,
+                        "name": "World Cup",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 648,
+                "title": "Nostrum consequatur non fugit vel",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 29,
+                        "name": "Capullo",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 31,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 33,
+                        "name": "World Cup",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 649,
+                "title": "Nulla numquam totam eaque",
+                "customPostType": "dummy-cpt",
+                "categories": []
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 654,
+                "title": "Dummy CPT with blocks",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 31,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 656,
+                "title": "Dummy CPT with non-existing block",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 31,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 658,
+                "title": "Dummy CPT with no content",
+                "customPostType": "dummy-cpt",
+                "categories": [
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 27,
+                        "name": "Absolute Brilliance",
+                        "taxonomy": "dummy-category"
+                    },
+                    {
+                        "__typename": "GenericCategory",
+                        "id": 31,
+                        "name": "Perestroika",
+                        "taxonomy": "dummy-category"
+                    }
+                ]
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 660,
+                "title": "Dummy CPT with non server-side-registered block",
+                "customPostType": "dummy-cpt",
+                "categories": []
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 680,
+                "title": "Dummy CPT with server-side-registered block",
+                "customPostType": "dummy-cpt",
+                "categories": []
             }
         ],
         "customPostsByCategoryIDs": [
@@ -1488,10 +1488,10 @@
                 "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
                 "categories": [
                     {
-                        "id": 30
+                        "id": 29
                     },
                     {
-                        "id": 29
+                        "id": 30
                     }
                 ]
             },
@@ -1500,13 +1500,13 @@
                 "title": "Dolore ex et deleniti mollitia",
                 "categories": [
                     {
-                        "id": 32
+                        "id": 27
                     },
                     {
                         "id": 30
                     },
                     {
-                        "id": 27
+                        "id": 32
                     }
                 ]
             },
@@ -1515,13 +1515,13 @@
                 "title": "Nostrum consequatur non fugit vel",
                 "categories": [
                     {
-                        "id": 33
+                        "id": 29
                     },
                     {
                         "id": 31
                     },
                     {
-                        "id": 29
+                        "id": 33
                     }
                 ]
             },
@@ -1530,16 +1530,16 @@
                 "title": "Impedit eaque numquam quas inventore",
                 "categories": [
                     {
-                        "id": 33
-                    },
-                    {
-                        "id": 32
+                        "id": 28
                     },
                     {
                         "id": 29
                     },
                     {
-                        "id": 28
+                        "id": 32
+                    },
+                    {
+                        "id": 33
                     }
                 ]
             },
@@ -1557,13 +1557,13 @@
                 "title": "Quis voluptatum tempore veniam est sit",
                 "categories": [
                     {
-                        "id": 32
+                        "id": 29
                     },
                     {
                         "id": 30
                     },
                     {
-                        "id": 29
+                        "id": 32
                     }
                 ]
             },
@@ -1572,13 +1572,13 @@
                 "title": "Qui ea incidunt qui",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
                         "id": 28
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1587,13 +1587,13 @@
                 "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
                 "categories": [
                     {
-                        "id": 32
+                        "id": 27
                     },
                     {
                         "id": 28
                     },
                     {
-                        "id": 27
+                        "id": 32
                     }
                 ]
             }
@@ -1613,10 +1613,10 @@
                 "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1625,10 +1625,10 @@
                 "title": "Dummy CPT with blocks",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1637,10 +1637,10 @@
                 "title": "Dummy CPT with non-existing block",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1649,10 +1649,10 @@
                 "title": "Dummy CPT with no content",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1683,10 +1683,10 @@
                 "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
                 "categories": [
                     {
-                        "id": 30
+                        "id": 29
                     },
                     {
-                        "id": 29
+                        "id": 30
                     }
                 ]
             },
@@ -1695,13 +1695,13 @@
                 "title": "Dolore ex et deleniti mollitia",
                 "categories": [
                     {
-                        "id": 32
+                        "id": 27
                     },
                     {
                         "id": 30
                     },
                     {
-                        "id": 27
+                        "id": 32
                     }
                 ]
             },
@@ -1710,13 +1710,13 @@
                 "title": "Nostrum consequatur non fugit vel",
                 "categories": [
                     {
-                        "id": 33
+                        "id": 29
                     },
                     {
                         "id": 31
                     },
                     {
-                        "id": 29
+                        "id": 33
                     }
                 ]
             },
@@ -1725,16 +1725,16 @@
                 "title": "Impedit eaque numquam quas inventore",
                 "categories": [
                     {
-                        "id": 33
-                    },
-                    {
-                        "id": 32
+                        "id": 28
                     },
                     {
                         "id": 29
                     },
                     {
-                        "id": 28
+                        "id": 32
+                    },
+                    {
+                        "id": 33
                     }
                 ]
             },
@@ -1752,13 +1752,13 @@
                 "title": "Quis voluptatum tempore veniam est sit",
                 "categories": [
                     {
-                        "id": 32
+                        "id": 29
                     },
                     {
                         "id": 30
                     },
                     {
-                        "id": 29
+                        "id": 32
                     }
                 ]
             }
@@ -1787,10 +1787,10 @@
                 "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1799,10 +1799,10 @@
                 "title": "Dummy CPT with blocks",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1811,10 +1811,10 @@
                 "title": "Dummy CPT with non-existing block",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1823,10 +1823,10 @@
                 "title": "Dummy CPT with no content",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1876,10 +1876,10 @@
                 "title": "Dummy CPT with no content",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1888,10 +1888,10 @@
                 "title": "Dummy CPT with non-existing block",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1900,10 +1900,10 @@
                 "title": "Dummy CPT with blocks",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1912,10 +1912,10 @@
                 "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "categories": [
                     {
-                        "id": 31
+                        "id": 27
                     },
                     {
-                        "id": 27
+                        "id": 31
                     }
                 ]
             },
@@ -1944,16 +1944,28 @@
                 "urlPath": "\/category\/uncategorized\/"
             },
             {
-                "count": 1,
+                "count": 3,
                 "description": "",
-                "id": 6,
+                "id": 2,
                 "metaValue": null,
                 "metaValues": null,
-                "name": "Special topic",
-                "slug": "special-topic",
-                "slugPath": "blog\/resource\/special-topic",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
-                "urlPath": "\/category\/blog\/resource\/special-topic\/"
+                "name": "Advanced",
+                "slug": "advanced",
+                "slugPath": "advanced",
+                "url": "https:\/\/gato-graphql.lndo.site\/category\/advanced\/",
+                "urlPath": "\/category\/advanced\/"
+            },
+            {
+                "count": 3,
+                "description": "",
+                "id": 3,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Blog",
+                "slug": "blog",
+                "slugPath": "blog",
+                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/",
+                "urlPath": "\/category\/blog\/"
             },
             {
                 "count": 2,
@@ -1982,6 +1994,18 @@
             {
                 "count": 1,
                 "description": "",
+                "id": 6,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Special topic",
+                "slug": "special-topic",
+                "slugPath": "blog\/resource\/special-topic",
+                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                "urlPath": "\/category\/blog\/resource\/special-topic\/"
+            },
+            {
+                "count": 1,
+                "description": "",
                 "id": 7,
                 "metaValue": null,
                 "metaValues": null,
@@ -1990,30 +2014,6 @@
                 "slugPath": "blog\/resource\/special-topic\/most-special-topic",
                 "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
                 "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/"
-            },
-            {
-                "count": 3,
-                "description": "",
-                "id": 3,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Blog",
-                "slug": "blog",
-                "slugPath": "blog",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/",
-                "urlPath": "\/category\/blog\/"
-            },
-            {
-                "count": 3,
-                "description": "",
-                "id": 2,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Advanced",
-                "slug": "advanced",
-                "slugPath": "advanced",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/advanced\/",
-                "urlPath": "\/category\/advanced\/"
             }
         ],
         "postCategoryByID": {
@@ -2052,76 +2052,16 @@
         ],
         "dummyCategories": [
             {
-                "count": 2,
+                "count": 9,
                 "description": "",
-                "id": 33,
+                "id": 27,
                 "metaValue": null,
                 "metaValues": null,
-                "name": "World Cup",
-                "slug": "world-cup",
-                "slugPath": "world-cup",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/world-cup\/",
-                "urlPath": "\/dummy-category\/world-cup\/"
-            },
-            {
-                "count": 4,
-                "description": "",
-                "id": 32,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Unexpected Randomness",
-                "slug": "unexpected-randomness",
-                "slugPath": "unexpected-randomness",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/unexpected-randomness\/",
-                "urlPath": "\/dummy-category\/unexpected-randomness\/"
-            },
-            {
-                "count": 7,
-                "description": "",
-                "id": 31,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Perestroika",
-                "slug": "perestroika",
-                "slugPath": "perestroika",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/perestroika\/",
-                "urlPath": "\/dummy-category\/perestroika\/"
-            },
-            {
-                "count": 0,
-                "description": "",
-                "id": 34,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Nostradamus",
-                "slug": "nostradamus-2",
-                "slugPath": "nostradamus-2",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus-2\/",
-                "urlPath": "\/dummy-category\/nostradamus-2\/"
-            },
-            {
-                "count": 3,
-                "description": "",
-                "id": 30,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Nostradamus",
-                "slug": "nostradamus",
-                "slugPath": "absolute-brilliance\/brontosaurus\/capullo\/nostradamus",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus\/",
-                "urlPath": "\/dummy-category\/nostradamus\/"
-            },
-            {
-                "count": 5,
-                "description": "",
-                "id": 29,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "Capullo",
-                "slug": "capullo",
-                "slugPath": "absolute-brilliance\/brontosaurus\/capullo",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/capullo\/",
-                "urlPath": "\/dummy-category\/capullo\/"
+                "name": "Absolute Brilliance",
+                "slug": "absolute-brilliance",
+                "slugPath": "absolute-brilliance",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/absolute-brilliance\/",
+                "urlPath": "\/dummy-category\/absolute-brilliance\/"
             },
             {
                 "count": 4,
@@ -2136,16 +2076,76 @@
                 "urlPath": "\/dummy-category\/brontosaurus\/"
             },
             {
-                "count": 9,
+                "count": 5,
                 "description": "",
-                "id": 27,
+                "id": 29,
                 "metaValue": null,
                 "metaValues": null,
-                "name": "Absolute Brilliance",
-                "slug": "absolute-brilliance",
-                "slugPath": "absolute-brilliance",
-                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/absolute-brilliance\/",
-                "urlPath": "\/dummy-category\/absolute-brilliance\/"
+                "name": "Capullo",
+                "slug": "capullo",
+                "slugPath": "absolute-brilliance\/brontosaurus\/capullo",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/capullo\/",
+                "urlPath": "\/dummy-category\/capullo\/"
+            },
+            {
+                "count": 3,
+                "description": "",
+                "id": 30,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Nostradamus",
+                "slug": "nostradamus",
+                "slugPath": "absolute-brilliance\/brontosaurus\/capullo\/nostradamus",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus\/",
+                "urlPath": "\/dummy-category\/nostradamus\/"
+            },
+            {
+                "count": 7,
+                "description": "",
+                "id": 31,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Perestroika",
+                "slug": "perestroika",
+                "slugPath": "perestroika",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/perestroika\/",
+                "urlPath": "\/dummy-category\/perestroika\/"
+            },
+            {
+                "count": 4,
+                "description": "",
+                "id": 32,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Unexpected Randomness",
+                "slug": "unexpected-randomness",
+                "slugPath": "unexpected-randomness",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/unexpected-randomness\/",
+                "urlPath": "\/dummy-category\/unexpected-randomness\/"
+            },
+            {
+                "count": 2,
+                "description": "",
+                "id": 33,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "World Cup",
+                "slug": "world-cup",
+                "slugPath": "world-cup",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/world-cup\/",
+                "urlPath": "\/dummy-category\/world-cup\/"
+            },
+            {
+                "count": 0,
+                "description": "",
+                "id": 34,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "Nostradamus",
+                "slug": "nostradamus-2",
+                "slugPath": "nostradamus-2",
+                "url": "https:\/\/gato-graphql.lndo.site\/dummy-category\/nostradamus-2\/",
+                "urlPath": "\/dummy-category\/nostradamus-2\/"
             }
         ],
         "dummyCategoryByID": {

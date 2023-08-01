@@ -1,5 +1,8 @@
 {
-  categories(taxonomy: "dummy-category") {
+  categories(
+    taxonomy: "dummy-category"
+    sort: { by: ID, order: ASC }
+  ) {
     __typename
     ...GenericCategoryData
     ...CategoryData
@@ -12,6 +15,7 @@
     pagination: {
       limit: 30
     }
+    sort: { by: ID, order: ASC }
   ) {
     __typename
     ...on CustomPost {
@@ -20,7 +24,10 @@
       customPostType
     }
     ...on GenericCustomPost {
-      categories(taxonomy: "dummy-category") {
+      categories(
+        taxonomy: "dummy-category"
+        sort: { by: ID, order: ASC }
+      ) {
         __typename
         id
         name
@@ -51,7 +58,10 @@
     id
     title
     ...on GenericCustomPost {
-      categories(taxonomy: "dummy-category") {
+      categories(
+        taxonomy: "dummy-category"
+        sort: { by: ID, order: ASC }
+      ) {
         id
       }
     }
@@ -70,7 +80,10 @@
     id
     title
     ...on GenericCustomPost {
-      categories(taxonomy: "dummy-category") {
+      categories(
+        taxonomy: "dummy-category"
+        sort: { by: ID, order: ASC }
+      ) {
         id
       }
     }
@@ -89,7 +102,10 @@
     id
     title
     ...on GenericCustomPost {
-      categories(taxonomy: "dummy-category") {
+      categories(
+        taxonomy: "dummy-category"
+        sort: { by: ID, order: ASC }
+      ) {
         id
       }
     }
@@ -108,7 +124,10 @@
     id
     title
     ...on GenericCustomPost {
-      categories(taxonomy: "dummy-category") {
+      categories(
+        taxonomy: "dummy-category"
+        sort: { by: ID, order: ASC }
+      ) {
         id
       }
     }
@@ -128,13 +147,19 @@
     id
     title
     ...on GenericCustomPost {
-      categories(taxonomy: "dummy-category") {
+      categories(
+        taxonomy: "dummy-category"
+        sort: { by: ID, order: ASC }
+      ) {
         id
       }
     }
   }
 
-  postCategories: categories(taxonomy: category) {
+  postCategories: categories(
+    taxonomy: category
+    sort: { by: ID, order: ASC }
+  ) {
     ...CategoryData
   }
   postCategoryByID: category(taxonomy: category, by: { id: 1 }) {
@@ -146,7 +171,10 @@
   postCategoryCount: categoryCount(taxonomy: category)
   postCategoryNames: categoryNames(taxonomy: category)
 
-  dummyCategories: categories(taxonomy: "dummy-category") {
+  dummyCategories: categories(
+    taxonomy: "dummy-category"
+    sort: { by: ID, order: ASC }
+  ) {
     ...CategoryData
   }
   dummyCategoryByID: category(taxonomy: "dummy-category", by: { id: 27 }) {
@@ -184,7 +212,10 @@ fragment GenericCategoryData on GenericCategory {
 fragment CustomPostData on CustomPost {
   id
   title
-  categories(taxonomy: "dummy-category") {
+  categories(
+    taxonomy: "dummy-category"
+    sort: { by: ID, order: ASC }
+  ) {
     __typename
     ...on Category {
       id
