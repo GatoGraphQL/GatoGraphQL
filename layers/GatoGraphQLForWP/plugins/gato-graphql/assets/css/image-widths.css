@@ -2,6 +2,15 @@
  * These are the officially supported widths in the site,
  * so that Retina display images can be resized to half their size
  */
+.img-width-280 img {
+    width: 280px !important;
+}
+.img-width-400 img {
+    width: 400px !important;
+}
+.img-width-430 img {
+    width: 430px !important;
+}
 .img-width-610 img {
     width: 610px !important;
 }
@@ -10,7 +19,4 @@
 }
 .img-width-1024 img {
     width: 1024px !important;
-}
-.img-width-280 img {
-    width: 280px !important;
 }
