@@ -29,7 +29,13 @@ For instance:
 
 The property name to use can be configured in the "Plugin Configuration > Server IP Configuration" tab on the Settings page:
 
-![Configuring the $_SERVER property name to retrieve the client IP](../../images/settings-general-client-ip-address-server-property-name.png "Configuring the $_SERVER property name to retrieve the client IP") -->
+<div class="img-width-1024" markdown=1>
+
+![Configuring the $_SERVER property name to retrieve the client IP](../../images/settings-general-client-ip-address-server-property-name.png "Configuring the $_SERVER property name to retrieve the client IP")
+
+</div>
+
+-->
 
 ### `_httpRequestCookie`
 
