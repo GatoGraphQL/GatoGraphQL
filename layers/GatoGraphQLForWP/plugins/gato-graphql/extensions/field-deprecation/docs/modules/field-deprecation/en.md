@@ -8,7 +8,11 @@ This extension provides a user interface to deprecate fields.
 
 A new "Field Deprecation List" Custom Post Type is added to the site. We can browse its entries on the "Field Deprecation Lists" page in the menu, and click on "Add New Field Deprecation List" to add a new entry in the editor.
 
+<div class="img-width-1024" markdown=1>
+
 ![Field Deprecation Lists](../../images/field-deprecation-lists.png "Field Deprecation Lists")
+
+</div>
 
 ![Field Deprecation List editor](../../images/field-deprecation-list.png "Field Deprecation List editor")
 
