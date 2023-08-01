@@ -107,12 +107,6 @@ With this option, the "duplicated" mutation fields from the `Root` type are kept
 
 Same option as above, but removing the "duplicated" mutation fields from the `Root` type.
 
-### Using nested mutations in the Admin clients
-
-Enabling nested mutations in the wp-admin can be selected on the Settings. It will be applied on the GraphiQL and Interactive Schema clients.
-
-![Settings for nested mutations](../../images/settings-nested-mutations-for-admin.png)
-
 ## Schema configuration
 
 A "Mutation Scheme" section has been added to a Schema Configuration, allowing to enable/disable/configure nested mutations for Custom Endpoints and Persisted Queries on an individual basis.
