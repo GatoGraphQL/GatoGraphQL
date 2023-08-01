@@ -22,7 +22,11 @@ The response's `max-age` value is automatically calculated by the GraphQL engine
 
 A new "Cache Control List" Custom Post Type is added to the site. We can browse its entries on the "Cache Control Lists" page in the menu, and click on "Add New Cache Control List" to add a new entry in the editor.
 
+<div class="img-width-1024" markdown=1>
+
 ![Cache Control Lists](../../images/cache-control-lists.png "Cache Control Lists")
+
+</div>
 
 ![Cache Control List editor](../../images/cache-control-list.png "Cache Control List editor")
 
