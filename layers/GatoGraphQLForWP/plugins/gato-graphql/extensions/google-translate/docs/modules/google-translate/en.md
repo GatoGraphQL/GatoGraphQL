@@ -174,7 +174,11 @@ Then follow one of the methods below to input the value.
 
 Input the API key in the corresponding input in the Settings page, and click on "Save Changes (All)":
 
+<div class="img-width-1024" markdown=1>
+
 ![Setting Google Translate's API key](../../images/settings-google-translate-api-key.png "Setting Google Translate's API key")
+
+</div>
 
 ### In `wp-config.php`
 
@@ -213,7 +217,11 @@ By default, the default `from` value is the language used in WordPress.
 
 Input the `from`/`to` fields in the corresponding input in the Settings page, and click on "Save Changes (All)":
 
+<div class="img-width-1024" markdown=1>
+
 ![Setting the default "from" and "to" languages](../../images/settings-google-translate-from-to-fields.png "Setting the default 'from' and 'to' languages")
+
+</div>
 
 ### In `wp-config.php`
 
