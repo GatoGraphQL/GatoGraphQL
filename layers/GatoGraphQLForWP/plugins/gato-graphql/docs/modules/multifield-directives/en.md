@@ -134,12 +134,16 @@ query GetLoggedInUserNameAndSurname {
 
 To enable or disable multi-field directives in the GraphQL schema, go to the "Multi-Field Directives" module on the Settings page, and tick/untick the checkbox for `Enable multi-field directives?`:
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for Multi-Field Directives](../../images/settings-multifield-directives.png "Settings for Multi-Field Directives")
 
-<!-- @todo Create image settings-multifield-directives.png -->
+</div>
 
 To enable or disable multi-field directives on a specific endpoint, select the desired option in block "Multi-Field Directives" from the corresponding Schema Configuration:
 
+<div class="img-width-610" markdown=1>
+
 ![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png "Multi-Field Directives in the Schema Configuration")
 
-<!-- @todo Create image schema-config-multifield-directives.png -->
+</div>

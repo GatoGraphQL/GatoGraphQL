@@ -172,15 +172,19 @@ This will produce:
 
 To enable or disable composable directives in the GraphQL schema, go to the "Composable Directives" module on the Settings page, and tick/untick the checkbox for `Enable composable directives?`:
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for Composable Directives](../../images/settings-composable-directives.png "Settings for Composable Directives")
 
-<!-- @todo Create image settings-composable-directives.png -->
+</div>
 
 To enable or disable composable directives on a specific endpoint, select the desired option in block "Composable Directives" from the corresponding Schema Configuration:
 
+<div class="img-width-610" markdown=1>
+
 ![Composable Directives in the Schema Configuration](../../images/schema-config-composable-directives.png "Composable Directives in the Schema Configuration")
 
-<!-- @todo Create image schema-config-composable-directives.png -->
+</div>
 
 ## Examples
 

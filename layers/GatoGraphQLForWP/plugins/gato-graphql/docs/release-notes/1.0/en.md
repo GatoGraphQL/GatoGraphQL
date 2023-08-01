@@ -863,9 +863,11 @@ query {
 
 In order to enable or disable composable directives in the schema for some specific endpoint, the Schema Configuration now has a new element "Composable Directives":
 
-<!-- @todo Create image schema-config-composable-directives.png -->
+<div class="img-width-610" markdown=1>
 
 ![Composable Directives in the Schema Configuration](../../images/schema-config-composable-directives.png)
+
+</div>
 
 ## Added support for the "Multi-Field Directives" custom feature
 
@@ -896,9 +898,11 @@ For instance, in the following query, directive `@strTranslate` is applied not o
 
 In order to enable or disable multi-field directives in the schema for some specific endpoint, the Schema Configuration now has a new element "Multi-Field Directives":
 
-<!-- @todo Create image schema-config-multifield-directives.png -->
+<div class="img-width-610" markdown=1>
 
 ![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png)
+
+</div>
 
 ## Mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others) now receive a oneof input object for content
 
