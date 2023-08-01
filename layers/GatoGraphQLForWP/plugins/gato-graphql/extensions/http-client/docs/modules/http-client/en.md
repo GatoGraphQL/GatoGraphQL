@@ -101,14 +101,22 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 Otherwise, the entries defined in the "Send HTTP Request Fields" tab from the Settings will be used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the entries for the Settings](../../images/http-requests-settings-entries.png "Defining the entries for the Settings")
+
+</div>
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
 - **Allow access:** only the configured entries can be accessed, and no other can
 - **Deny access:** the configured entries cannot be accessed, all other entries can
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the access behavior](../../images/http-requests-settings-behavior.png "Defining the access behavior")
+
+</div>
 
 ## When to use each field
 
