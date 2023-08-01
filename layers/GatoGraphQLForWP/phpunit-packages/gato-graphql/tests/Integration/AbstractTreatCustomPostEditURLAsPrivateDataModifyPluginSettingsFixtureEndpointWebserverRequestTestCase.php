@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment as WebserverRequestsEnvironment;
 
 abstract class AbstractTreatCustomPostEditURLAsPrivateDataModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
@@ -26,5 +27,14 @@ abstract class AbstractTreatCustomPostEditURLAsPrivateDataModifyPluginSettingsFi
     protected function getPluginSettingsNewValue(): mixed
     {
         return false;
+    }
+
+    protected function adaptResponseBody(string $responseBody): string
+    {
+        return str_replace(
+            WebserverRequestsEnvironment::getIntegrationTestsWebserverDomain(),
+            'gato-graphql.lndo.site',
+            parent::adaptResponseBody($responseBody)
+        );
     }
 }
