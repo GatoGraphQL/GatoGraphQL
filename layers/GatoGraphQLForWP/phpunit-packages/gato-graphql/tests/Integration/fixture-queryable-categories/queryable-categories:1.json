@@ -4,19 +4,19 @@
             "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
             "locations": [
                 {
-                    "line": 11,
-                    "column": 42
+                    "line": 15,
+                    "column": 16
                 }
             ],
             "extensions": {
                 "path": [
                     "\"dummy-category\"",
                     "(taxonomy: \"dummy-category\")",
-                    "dummyCategories: categories(taxonomy: \"dummy-category\") { ... }",
+                    "dummyCategories: categories(taxonomy: \"dummy-category\", sort: {by: ID, order: ASC}) { ... }",
                     "query { ... }"
                 ],
                 "type": "QueryRoot",
-                "field": "dummyCategories: categories(taxonomy: \"dummy-category\") { ... }",
+                "field": "dummyCategories: categories(taxonomy: \"dummy-category\", sort: {by: ID, order: ASC}) { ... }",
                 "code": "PoPSchema\/SchemaCommons@e2"
             }
         },
@@ -24,7 +24,7 @@
             "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
             "locations": [
                 {
-                    "line": 14,
+                    "line": 20,
                     "column": 38
                 }
             ],
@@ -44,7 +44,7 @@
             "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
             "locations": [
                 {
-                    "line": 17,
+                    "line": 23,
                     "column": 48
                 }
             ],
@@ -64,7 +64,7 @@
             "message": "Value 'dummy-category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'category')",
             "locations": [
                 {
-                    "line": 18,
+                    "line": 24,
                     "column": 48
                 }
             ],
@@ -90,8 +90,13 @@
             },
             {
                 "__typename": "PostCategory",
-                "id": 6,
-                "name": "Special topic"
+                "id": 2,
+                "name": "Advanced"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 3,
+                "name": "Blog"
             },
             {
                 "__typename": "PostCategory",
@@ -105,18 +110,13 @@
             },
             {
                 "__typename": "PostCategory",
+                "id": 6,
+                "name": "Special topic"
+            },
+            {
+                "__typename": "PostCategory",
                 "id": 7,
                 "name": "Most special topic"
-            },
-            {
-                "__typename": "PostCategory",
-                "id": 3,
-                "name": "Blog"
-            },
-            {
-                "__typename": "PostCategory",
-                "id": 2,
-                "name": "Advanced"
             }
         ],
         "postCategory": {

@@ -4,19 +4,19 @@
             "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
-                    "line": 2,
-                    "column": 40
+                    "line": 3,
+                    "column": 15
                 }
             ],
             "extensions": {
                 "path": [
                     "category",
                     "(taxonomy: category)",
-                    "postCategories: categories(taxonomy: category) { ... }",
+                    "postCategories: categories(taxonomy: category, sort: {by: ID, order: ASC}) { ... }",
                     "query { ... }"
                 ],
                 "type": "QueryRoot",
-                "field": "postCategories: categories(taxonomy: category) { ... }",
+                "field": "postCategories: categories(taxonomy: category, sort: {by: ID, order: ASC}) { ... }",
                 "code": "PoPSchema\/SchemaCommons@e2"
             }
         },
@@ -24,7 +24,7 @@
             "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
-                    "line": 5,
+                    "line": 8,
                     "column": 36
                 }
             ],
@@ -44,7 +44,7 @@
             "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
-                    "line": 8,
+                    "line": 11,
                     "column": 46
                 }
             ],
@@ -64,7 +64,7 @@
             "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
             "locations": [
                 {
-                    "line": 9,
+                    "line": 12,
                     "column": 46
                 }
             ],
@@ -89,33 +89,8 @@
         "dummyCategories": [
             {
                 "__typename": "GenericCategory",
-                "id": 33,
-                "name": "World Cup"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 32,
-                "name": "Unexpected Randomness"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 31,
-                "name": "Perestroika"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 34,
-                "name": "Nostradamus"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 30,
-                "name": "Nostradamus"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 29,
-                "name": "Capullo"
+                "id": 27,
+                "name": "Absolute Brilliance"
             },
             {
                 "__typename": "GenericCategory",
@@ -124,8 +99,33 @@
             },
             {
                 "__typename": "GenericCategory",
-                "id": 27,
-                "name": "Absolute Brilliance"
+                "id": 29,
+                "name": "Capullo"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 30,
+                "name": "Nostradamus"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 31,
+                "name": "Perestroika"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 32,
+                "name": "Unexpected Randomness"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 33,
+                "name": "World Cup"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 34,
+                "name": "Nostradamus"
             }
         ],
         "dummyCategory": {

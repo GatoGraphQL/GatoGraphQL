@@ -8,8 +8,13 @@
             },
             {
                 "__typename": "PostCategory",
-                "id": 6,
-                "name": "Special topic"
+                "id": 2,
+                "name": "Advanced"
+            },
+            {
+                "__typename": "PostCategory",
+                "id": 3,
+                "name": "Blog"
             },
             {
                 "__typename": "PostCategory",
@@ -23,18 +28,13 @@
             },
             {
                 "__typename": "PostCategory",
+                "id": 6,
+                "name": "Special topic"
+            },
+            {
+                "__typename": "PostCategory",
                 "id": 7,
                 "name": "Most special topic"
-            },
-            {
-                "__typename": "PostCategory",
-                "id": 3,
-                "name": "Blog"
-            },
-            {
-                "__typename": "PostCategory",
-                "id": 2,
-                "name": "Advanced"
             }
         ],
         "postCategory": {
@@ -55,33 +55,8 @@
         "dummyCategories": [
             {
                 "__typename": "GenericCategory",
-                "id": 33,
-                "name": "World Cup"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 32,
-                "name": "Unexpected Randomness"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 31,
-                "name": "Perestroika"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 30,
-                "name": "Nostradamus"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 34,
-                "name": "Nostradamus"
-            },
-            {
-                "__typename": "GenericCategory",
-                "id": 29,
-                "name": "Capullo"
+                "id": 27,
+                "name": "Absolute Brilliance"
             },
             {
                 "__typename": "GenericCategory",
@@ -90,8 +65,33 @@
             },
             {
                 "__typename": "GenericCategory",
-                "id": 27,
-                "name": "Absolute Brilliance"
+                "id": 29,
+                "name": "Capullo"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 30,
+                "name": "Nostradamus"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 31,
+                "name": "Perestroika"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 32,
+                "name": "Unexpected Randomness"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 33,
+                "name": "World Cup"
+            },
+            {
+                "__typename": "GenericCategory",
+                "id": 34,
+                "name": "Nostradamus"
             }
         ],
         "dummyCategory": {
