@@ -59,14 +59,22 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 Otherwise, the entries defined in the "Environment Fields" tab from the Settings will be used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the entries on the Settings](../../images/environment-fields-settings-entries.png "Defining the entries on the Settings")
+
+</div>
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
 - **Allow access:** only the configured entries can be accessed, and no other can
 - **Deny access:** the configured entries cannot be accessed, all other entries can
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the access behavior](../../images/environment-fields-settings-behavior.png "Defining the access behavior")
+
+</div>
 
 ## Security: Not exposing credentials
 
