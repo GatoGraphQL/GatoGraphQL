@@ -45,14 +45,22 @@ In the Schema Configuration applied to the endpoint, select option `"Use custom 
 
 Otherwise, the entries defined in the "Custom Post Meta" tab from the Settings will be used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the entries in the Settings](../../images/settings-custompost-meta-entries.png "Defining the entries in the Settings")
+
+</div>
 
 There are 2 behaviors, "Allow access" and "Deny access":
 
 - **Allow access:** only the configured entries can be accessed, and no other can
 - **Deny access:** the configured entries cannot be accessed, all other entries can
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining the access behavior](../../images/schema-configuration-custompost-meta-behavior.png "Defining the access behavior")
+
+</div>
 
 ## Performance considerations
 

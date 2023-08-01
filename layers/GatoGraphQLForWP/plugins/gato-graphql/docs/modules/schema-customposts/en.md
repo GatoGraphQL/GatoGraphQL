@@ -103,7 +103,11 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 Otherwise, the value defined under section "Included custom post types" in the Settings page for `Schema Custom Posts` is used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
+
+</div>
 
 ## Additional configuration
 
@@ -112,8 +116,16 @@ Through the Settings page, we can also define:
 - The default number of elements to retrieve (i.e. when field argument `limit` is not set) when querying for a list of any custom post type
 - The maximum number of elements that can be retrieved in a single query execution
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for Custom Post limits](../../images/settings-customposts-limits.png "Settings for Custom Post limits")
+
+</div>
 
 If there is only one type added to `CustomPostUnion` (eg: only `Post`), we can then have the fields that resolve to `CustomPostUnion` be instead resolved to that unique type instead:
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for Custom Posts](../../images/settings-customposts-single-type.png "Settings for Custom Post")
+
+</div>

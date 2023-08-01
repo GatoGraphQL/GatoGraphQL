@@ -78,7 +78,11 @@ _This list contains all the "non-hierarchical" taxonomies which are associated t
 
 Otherwise, the value defined under section "Included tag taxonomies" in the Settings page for `Schema Custom Posts` is used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the allowed tag taxonomies in the Settings](../../images/tags-settings-queryable-taxonomies.png "Selecting the allowed tag taxonomies in the Settings")
+
+</div>
 
 ## Additional configuration
 
@@ -87,4 +91,8 @@ Through the Settings for `Schema Tags`, we can also define:
 - The default number of elements to retrieve (i.e. when field argument `limit` is not set) when querying for a list of any tag taxonomy
 - The maximum number of elements that can be retrieved in a single query execution
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for Tag limits](../../images/settings-tags-limits.png "Settings for Tag limits")
+
+</div>

@@ -78,7 +78,11 @@ _This list contains all the "hierarchical" taxonomies which are associated to qu
 
 Otherwise, the value defined under section "Included category taxonomies" in the Settings page for `Schema Custom Posts` is used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the allowed category taxonomies in the Settings](../../images/categories-settings-queryable-taxonomies.png "Selecting the allowed category taxonomies in the Settings")
+
+</div>
 
 ## Additional configuration
 
@@ -87,4 +91,8 @@ Through the Settings for `Schema Categories`, we can also define:
 - The default number of elements to retrieve (i.e. when field argument `limit` is not set) when querying for a list of any category taxonomy
 - The maximum number of elements that can be retrieved in a single query execution
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for Category limits](../../images/settings-categories-limits.png "Settings for Category limits")
+
+</div>

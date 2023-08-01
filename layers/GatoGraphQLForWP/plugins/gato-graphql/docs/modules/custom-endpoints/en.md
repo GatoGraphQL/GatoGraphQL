@@ -38,7 +38,11 @@ Module `Interactive Schema for Custom Endpoints` must be enabled.
 
 Clicking on the Custom Endpoints link in the menu, it displays the list of all the created custom endpoints:
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom Endpoints in the admin](../../images/custom-endpoints-page.png)
+
+</div>
 
 A custom endpoint is a custom post type (CPT). To create a new custom endpoint, click on button "Add New GraphQL endpoint", which will open the WordPress editor:
 
@@ -54,7 +58,11 @@ Appending `?view=source` to the permalink, it will show the endpoint's configura
 
 By default, the custom endpoint has path `/graphql/`, and this value is configurable through the Settings:
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom endpoint Settings](../../images/settings-custom-endpoints.png)
+
+</div>
 
 ### Schema configuration
 

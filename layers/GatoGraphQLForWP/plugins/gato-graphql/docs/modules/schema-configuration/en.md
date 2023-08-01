@@ -23,11 +23,19 @@ Each module can define its configuration through its own block in the Schema Con
 
 Clicking on the Schema Configurations link in the menu, it displays the list of all of them:
 
+<div class="img-width-1024" markdown=1>
+
 ![Schema Configurations in the admin](../../images/schema-configurations-page.png)
+
+</div>
 
 A schema configuration is a custom post type (CPT). To create a new schema configuration, click on button "Add New Schema Configuration", which will open the WordPress editor:
 
+<div class="img-width-1024" markdown=1>
+
 ![Creating a new Schema Configuration](../../images/new-schema-configuration.png)
+
+</div>
 
 We can optionally remove those configuration blocks which use the corresponding "Default" value from the Settings. The removed block can be added once again via the inserter menu, by clicking on the `+` button at the bottom (please notice that only one instance of each block can be inserted):
 
@@ -43,7 +51,11 @@ Once published, the schema configuration becomes available when editing a Custom
 
 If the Custom Endpoint or Persisted Query has value `"Default"`, then the schema configuration selected in the Settings for the corresponding endpoint, under tabs "Custom Endpoints" or "Persisted Queries", will be used:
 
+<div class="img-width-1024" markdown=1>
+
 ![Default Schema Configuration in the Settings](../../images/settings-default-schema-configuration-for-custom-endpoints.png)
+
+</div>
 
 Opening the schema configuration's permalink in the browser will show its contents (as long as the user is logged-in and the user role has access to it):
 

@@ -201,4 +201,8 @@ Using payload object types for mutations in the schema can be configured as foll
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
+<div class="img-width-1024" markdown=1>
+
 ![Defining if to use payload object types for mutations, in the Settings](../../images/settings-payload-object-types-for-mutations-default.png "Defining if to use payload object types for mutations, in the Settings")
+
+</div>

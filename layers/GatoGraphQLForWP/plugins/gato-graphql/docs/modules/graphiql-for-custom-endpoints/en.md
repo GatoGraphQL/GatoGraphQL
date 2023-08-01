@@ -10,4 +10,8 @@ The GraphiQL client can be opened when editing the Custom Endpoint, under sideba
 
 Likewise, the client can be opened from the Custom Endpoints list page, on link "GraphiQL" when hovering on the entry:
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom endpoint's link to the GraphiQL client in the list](../../images/custom-endpoints-actions-graphiql.png "Custom endpoint's link to the GraphiQL client in the list")
+
+</div>

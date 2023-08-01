@@ -1195,7 +1195,11 @@ Now it is possible to do the switch directly via the UI: The new "Plugin Managem
 
 When creating a Schema Configuration, the new entry contains the whole list of options to configure:
 
+<div class="img-width-1024" markdown=1>
+
 ![New Schema Configuration](../../images/new-schema-configuration.png)
+
+</div>
 
 If we need to configure only a handful of items, displaying all blocks in the editor makes it difficult to visualize.
 

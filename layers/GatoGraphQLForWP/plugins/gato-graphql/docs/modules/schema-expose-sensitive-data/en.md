@@ -85,7 +85,11 @@ The elements listed above can be made public.
 
 In the Settings page, in the corresponding tab for each, there is a checkbox to configure if to treat them as “sensitive” or “normal”:
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
+
+</div>
 
 ## How to use
 
@@ -99,7 +103,11 @@ Exposing “sensitive” data elements in the schema can be configured as follow
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
+<div class="img-width-1024" markdown=1>
+
 ![Expose Sensitive Data in the Schema, in the Settings](../../images/settings-schema-expose-sensitive-data-default.png "Expose Sensitive Data in the Schema, in the Settings")
+
+</div>
 
 ## When to use
 

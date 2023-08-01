@@ -10,4 +10,8 @@ The Interactive schema client can be opened when editing the Custom Endpoint, un
 
 Likewise, the client can be opened from the Custom Endpoints list page, on link "Interactive schema" when hovering on the entry:
 
+<div class="img-width-1024" markdown=1>
+
 ![Custom endpoint's link to the Interactive schema client](../../images/custom-endpoints-actions-interactive-schema.png "Custom endpoint's link to the Interactive schema client")
+
+</div>

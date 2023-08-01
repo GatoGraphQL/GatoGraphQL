@@ -314,7 +314,11 @@ As currently there is only one Block type mapping blocks –`GeneralBlock`– it
 
 We can do this in the Settings page under the Blocks tab, by ticking on option `Use single type instead of union type?`:
 
+<div class="img-width-1024" markdown=1>
+
 ![Configuring to directly retrieve `GeneralBlock` instead of `BlockUnion`](../../images/settings-blocks-single-type.png)
+
+</div>
 
 Then, the GraphQL query is simplified:
 

@@ -141,7 +141,11 @@ Now, `customPosts` can also retrieve data for any CPT that has not been modeled 
 
 The custom post types that can be queried must be explicitly configured in the Settings page, under section "Included custom post types":
 
+<div class="img-width-1024" markdown=1>
+
 ![Selecting the allowed Custom Post Types in the Settings](../../images/customposts-settings-queryable-cpts.png "Selecting the allowed Custom Post Types in the Settings")
+
+</div>
 
 ### Filter custom post fields by tag, category, author and others
 
@@ -1578,7 +1582,11 @@ This means we can now configure the single endpoint:
 
 To configure the single endpoint, go to tab "Schema Configuration" on the Settings page, and select the desired Schema Configuration entry from the dropdown for "Schema Configuration for the Single Endpoint", and click on "Save Changes":
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for the Schema Configuration for the Single Endpoint](../../images/settings-schema-configuration-for-single-endpoint.png)
+
+</div>
 
 ## Display `"causes"` for errors in response
 
@@ -2244,7 +2252,11 @@ From now on, field `User.email` is treated as “sensitive” data. As such, it 
 
 This behavior can be overriden in the Settings page:
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings to treat user email as “sensitive” data](../../images/settings-treat-user-email-as-sensitive-data.png)
+
+</div>
 
 ### Mutations now return a "Payload" type
 

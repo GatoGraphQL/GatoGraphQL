@@ -87,7 +87,11 @@ The persisted query can be executed directly in the browser, since it is accesse
 
 Clicking on the Persisted Queries link in the menu, it displays the list of all the created persisted queries:
 
+<div class="img-width-1024" markdown=1>
+
 ![Persisted Queries in the admin](../../images/persisted-queries-page.png)
+
+</div>
 
 A persisted query is a custom post type (CPT). To create a new persisted query, click on button "Add New GraphQL persisted query", which will open the WordPress editor:
 
@@ -107,7 +111,11 @@ Appending `?view=source` to the permalink, it will show the persisted query and 
 
 By default, the persisted query's endpoint has path `/graphql-query/`, and this value is configurable through the Settings:
 
+<div class="img-width-1024" markdown=1>
+
 ![Persisted query Settings](../../images/settings-persisted-queries.png)
+
+</div>
 
 ### Schema configuration
 

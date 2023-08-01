@@ -30,7 +30,11 @@ Namespacing the schema can be configured as follows, in order of priority:
 
 If the schema configuration has value `"Default"`, it will use the mode defined in the Settings:
 
+<div class="img-width-1024" markdown=1>
+
 ![Namespacing in Settings](../../images/settings-namespacing-default.png "Namespacing in Settings")
+
+</div>
 
 ## When to use
 

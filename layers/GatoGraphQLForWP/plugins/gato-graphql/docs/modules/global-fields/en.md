@@ -95,7 +95,11 @@ To select the general level of exposure of global fields in the GraphQL schema, 
 - Expose under the Root type only _(this is the default value)_
 - Expose under all types
 
+<div class="img-width-1024" markdown=1>
+
 ![Settings for Global Fields](../../images/settings-global-fields.png "Settings for Global Fields")
+
+</div>
 
 To modify the exposure of global fields on different custom endpoints, select the desired option in block "Global Fields" from the corresponding Schema Configuration:
 
