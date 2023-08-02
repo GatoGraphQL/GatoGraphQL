@@ -63,15 +63,15 @@ Do you need an integration with some WordPress plugin? [Let us know](https://gat
 
 = How does Gato GraphQL complement WP-CLI? =
 
-Gato GraphQL can help you query data from the WordPress database, which is then injected into a WP-CLI command (either to select a specific resource, or update an option with some value, or other). Check out recipe [Complementing WP-CLI](http://localhost:8080/recipes/complementing-wp-cli/) for a thorough description on how to do it.
+Gato GraphQL can help you query data from the WordPress database, which is then injected into a WP-CLI command (either to select a specific resource, or update an option with some value, or other). Check out recipe [Complementing WP-CLI](https://gatographql.com/recipes/complementing-wp-cli/) for a thorough description on how to do it.
 
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
-Yes, you can. Check recipe [Mapping JS components to (Gutenberg) blocks](http://localhost:8080/recipes/mapping-js-components-to-gutenberg-blocks/) for an example, and guide [Working with (Gutenberg) blocks](http://localhost:8080/guides/interact/working-with-gutenberg-blocks/) for a thorough description on how to do it.
+Yes, you can. Check recipe [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/recipes/mapping-js-components-to-gutenberg-blocks/) for an example, and guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for a thorough description on how to do it.
 
 = Can I use Gato GraphQL to feed data to my Gutenberg Blocks? =
 
-Yes, you can. Check recipe [Feeding data to blocks in the editor](http://localhost:8080/recipes/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
+Yes, you can. Check recipe [Feeding data to blocks in the editor](https://gatographql.com/recipes/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
 
 = How is Gato GraphQL different than the WP REST API? =
 
@@ -85,13 +85,13 @@ In addition, with Gato GraphQL you can execute tailored GraphQL queries against 
 
 You can use Gato GraphQL to update the data in your database, adapting it from the old site to the new site.
 
-For instance, you can execute a GraphQL query to replace "https://my-old-domain.com" to "https://my-new-domain.com" in the content of all posts (even within Gutenberg block properties). Check recipe [Site migrations](http://localhost:8080/recipes/site-migrations/) to learn how to do this.
+For instance, you can execute a GraphQL query to replace "https://my-old-domain.com" to "https://my-new-domain.com" in the content of all posts (even within Gutenberg block properties). Check recipe [Site migrations](https://gatographql.com/recipes/site-migrations/) to learn how to do this.
 
 = Can Gato GraphQL translate content in the site? =
 
 Yes it can, via the extensions provided by the [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation). With this bundle, you can create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post back to the database.
 
-Check recipes [Translating block content in a post to a different language](http://localhost:8080/recipes/translating-block-content-in-a-post-to-a-different-language/) for a thorough explanation on how to do this, and [Bulk translating block content in multiple posts to a different language](http://localhost:8080/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/) on how to do it in bulk.
+Check recipes [Translating block content in a post to a different language](https://gatographql.com/recipes/translating-block-content-in-a-post-to-a-different-language/) for a thorough explanation on how to do this, and [Bulk translating block content in multiple posts to a different language](https://gatographql.com/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/) on how to do it in bulk.
 
 = How do I execute multiple GraphQL queries in a single request? =
 
@@ -99,37 +99,37 @@ If you have the [**Multiple Query Execution**](https://gatographql.com/extension
 
 This is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data for that mutated entity. With Multiple Query Execution, both queries can be executed together, thus speeding up the application from a reduced latency (which translates in your users waiting less time when interacting with your site).
 
-Multiple Query Execution can also help you connect to an external API, retrieve data from it, and do something with that data, all within a single request. Check out recipe [Creating an API gateway](http://localhost:8080/recipes/creating-an-api-gateway/) for an example.
+Multiple Query Execution can also help you connect to an external API, retrieve data from it, and do something with that data, all within a single request. Check out recipe [Creating an API gateway](https://gatographql.com/recipes/creating-an-api-gateway/) for an example.
 
 = Can Persisted Queries be used as webhooks? =
 
 Yes they can, because a persisted query lives on its own URL, it can extract the payload data (directly if passed as URL params, or using the [**HTTP Request via Schema**](https://gatographql.com/extensions/http-request-via-schema/) extension if passed in the body of the request), and then do something with that data (update a post, add a comment, send a notification, etc).
 
-Check recipe [Interacting with external services via webhooks](http://localhost:8080/recipes/interacting-with-external-services-via-webhooks/) to learn how to do this.
+Check recipe [Interacting with external services via webhooks](https://gatographql.com/recipes/interacting-with-external-services-via-webhooks/) to learn how to do this.
 
 = Can I interact with external services? =
 
 Yes you can, via the [**HTTP Client**](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver, and provides special support to connect to REST and GraphQL APIs.
 
-Check recipe [Retrieving data from an external API](http://localhost:8080/recipes/retrieving-data-from-an-external-api/) to learn about all the new "HTTP client" fields, and examples on how to use them.
+Check recipe [Retrieving data from an external API](https://gatographql.com/recipes/retrieving-data-from-an-external-api/) to learn about all the new "HTTP client" fields, and examples on how to use them.
 
 = Can I execute GraphQL queries internally within my application? =
 
 Yes you can, via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
 
-Check recipe [DRY code for blocks in Javascript and PHP](http://localhost:8080/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
+Check recipe [DRY code for blocks in Javascript and PHP](https://gatographql.com/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
 
 = How can Gato GraphQL help automate tasks? =
 
 If you have the [**Automation**](https://gatographql.com/extensions/automation/) extension, you can trigger a hook when a GraphQL query is resolved (whether it was executed via a public or private endpoint, or internally via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension), and you can use WP-Cron to execute GraphQL queries every some period of time.
 
-This way, you can react to events and do something about them. For instance, whenever a new post is added on the site, you can send a notification by email. Check recipe [Sending a notification when there is a new post](http://localhost:8080/recipes/sending-a-notification-when-there-is-a-new-post/) to learn how to do this.
+This way, you can react to events and do something about them. For instance, whenever a new post is added on the site, you can send a notification by email. Check recipe [Sending a notification when there is a new post](https://gatographql.com/recipes/sending-a-notification-when-there-is-a-new-post/) to learn how to do this.
 
 = How can Gato GraphQL synchronize content across sites? =
 
 We can create GraphQL queries that fetch content from a site, and import that content into another site or even network of sites.
 
-Check recipes [Importing a post from another WordPress site](http://localhost:8080/recipes/importing-a-post-from-another-wordpress-site/) and [Distributing content from an upstream to multiple downstream sites](http://localhost:8080/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/) which explain how to do this.
+Check recipes [Importing a post from another WordPress site](https://gatographql.com/recipes/importing-a-post-from-another-wordpress-site/) and [Distributing content from an upstream to multiple downstream sites](https://gatographql.com/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/) which explain how to do this.
 
 == Screenshots ==
 
