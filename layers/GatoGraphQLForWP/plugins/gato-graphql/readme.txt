@@ -71,9 +71,9 @@ Check out recipe [Complementing WP-CLI](https://gatographql.com/recipes/compleme
 
 With Gato GraphQL, you can create an endpoint which exposes the data from your WordPress site. Then, you can use some framework to build headless sites (based on Next.js, Gatsby, Hugo, or any other) to retrieve the data from the WordPress site, and render the static website.
 
-= Can I fetch Gutenberg block data with Gato GraphQL? =
+= How do I fetch Gutenberg block data with Gato GraphQL? =
 
-Yes, you can. Check recipe [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/recipes/mapping-js-components-to-gutenberg-blocks/) for an example, and guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for a thorough description on how to do it.
+Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and recipe [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/recipes/mapping-js-components-to-gutenberg-blocks/) for an example.
 
 = Can I use Gato GraphQL to feed data to my Gutenberg Blocks? =
 
@@ -83,9 +83,9 @@ Yes, you can. Check recipe [Feeding data to blocks in the editor](https://gatogr
 
 With the WP REST API, you expose data via REST endpoints, created via PHP code. Each endpoint has its own URL, and its data is pre-defined (for the corresponding resources, such as posts, users, etc).
 
-Gato GraphQL also supports creating endpoints with pre-defined data as "Persisted Queries", however these can be created and published directly within the wp-admin, without any PHP code.
+Gato GraphQL supports "Persisted Queries", which are also endpoints with pre-defined data, however these can be created and published directly within the wp-admin, using GraphQL language (and without any PHP code).
 
-In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need and fetching only that. As a result, you can retrieve all needed data in a single request.
+In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need, and fetching only that. As a result, you can retrieve all needed data in a single request.
 
 = Can I use Gato GraphQL to migrate my site? =
 
