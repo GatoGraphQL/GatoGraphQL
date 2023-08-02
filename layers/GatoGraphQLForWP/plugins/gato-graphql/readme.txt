@@ -45,6 +45,13 @@ Gato GraphQL can be augmented via extensions, including:
 - [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/): Adapt the data via standard PHP functions, always within the query
 - Many more
 
+Several extensions have been bundled together, to satisfy the following needs:
+
+- [“All Extensions” Bundle](https://gatographql.com/bundles/all-extensions): All Gato GraphQL extensions in a single bundle
+- [“Application Glue & Automator” Bundle](https://gatographql.com/bundles/application-glue-and-automator): Perform and automate tasks for your application
+- [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation): Translate content using the Google Translate API
+- [“Public API” Bundle](https://gatographql.com/bundles/public-api): Make your public APIs powerful, fast and secure
+
 Browse all bundles and extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
 
 == Frequently Asked Questions ==
