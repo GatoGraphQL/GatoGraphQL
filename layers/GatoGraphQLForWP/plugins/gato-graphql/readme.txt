@@ -101,9 +101,15 @@ This is particularly useful when a first query "mutates" data (eg: it creates a 
 
 Multiple Query Execution can also help you connect to an external API, retrieve data from it, and do something with that data, all within a single request. Check out recipe [Creating an API gateway](http://localhost:8080/recipes/creating-an-api-gateway/) for an example.
 
+= Can I interact with external services? =
+
+Yes you can, via the [**HTTP Client**](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver, and provides special support to connect to REST and GraphQL APIs.
+
+Check recipe [Retrieving data from an external API](http://localhost:8080/recipes/retrieving-data-from-an-external-api/) to learn how to do this.
+
 = Can I execute GraphQL queries internally within my application? =
 
-Yes you can, but you need the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
+Yes you can, via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
 
 Check recipe [DRY code for blocks in Javascript and PHP](http://localhost:8080/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
 
