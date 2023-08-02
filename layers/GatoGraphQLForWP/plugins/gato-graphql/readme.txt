@@ -75,9 +75,9 @@ With Gato GraphQL, you can create an endpoint which exposes the data from your W
 
 Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and recipe [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/recipes/mapping-js-components-to-gutenberg-blocks/) for an example.
 
-= Can I use Gato GraphQL to feed data to my Gutenberg Blocks? =
+= How do I use Gato GraphQL to feed data to my Gutenberg Blocks? =
 
-Yes, you can. Check recipe [Feeding data to blocks in the editor](https://gatographql.com/recipes/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
+Check recipe [Feeding data to blocks in the editor](https://gatographql.com/recipes/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
 
 = How is Gato GraphQL different than the WP REST API? =
 
@@ -117,15 +117,15 @@ Yes they can, because Persisted Queries are exposed under their own URL, they ca
 
 Check recipe [Interacting with external services via webhooks](https://gatographql.com/recipes/interacting-with-external-services-via-webhooks/) to learn how to do this.
 
-= Can I use Gato GraphQL to interact with external services? =
+= How do I use Gato GraphQL to interact with external services? =
 
-Yes you can, via the [HTTP Client](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver (while providing special support to connect to REST and GraphQL APIs).
+You need to have the [HTTP Client](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver (while providing special support to connect to REST and GraphQL APIs).
 
 Check recipe [Retrieving data from an external API](https://gatographql.com/recipes/retrieving-data-from-an-external-api/) to learn about all the available "HTTP client" fields, and examples on how to use them.
 
-= Can I execute GraphQL queries internally within my application? =
+= How do I execute GraphQL queries internally within my application? =
 
-Yes you can, via the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension (which installs a private GraphQL server, to be invoked via PHP code).
+You need to have the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
 
 Check recipe [DRY code for blocks in Javascript and PHP](https://gatographql.com/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
 
