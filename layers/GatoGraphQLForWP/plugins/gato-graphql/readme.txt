@@ -119,6 +119,12 @@ Yes you can, via the [**Internal GraphQL Server**](https://gatographql.com/exten
 
 Check recipe [DRY code for blocks in Javascript and PHP](http://localhost:8080/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
 
+= How can Gato GraphQL help automate tasks? =
+
+If you have the [**Automation**](https://gatographql.com/extensions/automation/) extension, you can trigger a hook when a GraphQL query is resolved (whether it was executed via a public or private endpoint, or internally via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension), and you can use WP-Cron to execute GraphQL queries every some period of time.
+
+This way, you can react to events and do something about them. For instance, whenever a new post is added on the site, you can send a notification by email. Check recipe [Sending a notification when there is a new post](http://localhost:8080/recipes/sending-a-notification-when-there-is-a-new-post/) to learn how to do this.
+
 == Screenshots ==
 
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
