@@ -69,7 +69,7 @@ Check out recipe [Complementing WP-CLI](https://gatographql.com/recipes/compleme
 
 = How do I use Gato GraphQL to build headless sites? =
 
-With Gato GraphQL, you can create an endpoint which exposes the data from your WordPress site. Then, you can use some framework to build headless sites (based on Next.js, Gatsby, Hugo, or any other) to retrieve the data from the WordPress site, and render the static website.
+With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework to build headless sites (based on Next.js, Gatsby, Hugo, or any other) you can retrieve the data from the WordPress site, and render the static website.
 
 = How do I fetch Gutenberg block data with Gato GraphQL? =
 
@@ -97,15 +97,13 @@ Check recipe [Site migrations](https://gatographql.com/recipes/site-migrations/)
 
 = How to translate the content in my site using Gato GraphQL? =
 
-You need the extensions provided by the [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation).
-
-With this bundle, you can create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post's content back to the database.
+The [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation) gives you all the tools needed to create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post's content back to the database.
 
 Check recipes [Translating block content in a post to a different language](https://gatographql.com/recipes/translating-block-content-in-a-post-to-a-different-language/) for a thorough explanation on how to do this, and [Bulk translating block content in multiple posts to a different language](https://gatographql.com/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/) on how to do it in bulk.
 
 = How do I execute multiple GraphQL queries in a single request? =
 
-You need to have the [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension, which allows you to combine multiple GraphQL queries into a single one and execute them all in a single request.
+The [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension allows you to combine multiple GraphQL queries into a single one and execute them all in a single request.
 
 Multiple Query Execution is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data from that mutated entity. As both queries will be executed in a single request, the latency will be lower, and your users will wait less time when interacting with your site. Check recipe [Duplicating a blog post](https://gatographql.com/recipes/duplicating-a-blog-post/) for an example.
 
@@ -119,13 +117,13 @@ Check recipe [Interacting with external services via webhooks](https://gatograph
 
 = How do I use Gato GraphQL to interact with external services? =
 
-You need to have the [HTTP Client](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver (while providing special support to connect to REST and GraphQL APIs).
+The [HTTP Client](https://gatographql/extensions/http-client/) extension adds fields to the GraphQL schema to fetch data from any webserver (while providing special support to connect to REST and GraphQL APIs).
 
 Check recipe [Retrieving data from an external API](https://gatographql.com/recipes/retrieving-data-from-an-external-api/) to learn about all the available "HTTP client" fields, and examples on how to use them.
 
 = How do I execute GraphQL queries internally within my application? =
 
-You need to have the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
+The [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension installs a private GraphQL server, to be invoked via PHP code.
 
 Check recipe [DRY code for blocks in Javascript and PHP](https://gatographql.com/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
 
