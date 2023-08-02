@@ -113,11 +113,11 @@ Multiple Query Execution can also help you connect to an external API, retrieve 
 
 = Can Persisted Queries be used as webhooks? =
 
-Yes they can, because a persisted query lives on its own URL, it can extract the payload data (directly if passed as URL params, or using the [HTTP Request via Schema](https://gatographql.com/extensions/http-request-via-schema/) extension if passed in the body of the request), and then do something with that data (update a post, add a comment, send a notification, etc).
+Yes they can, because Persisted Queries are exposed under their own URL, they can extract the payload data, and then do something with that data (update a post, add a comment, send a notification, etc).
 
 Check recipe [Interacting with external services via webhooks](https://gatographql.com/recipes/interacting-with-external-services-via-webhooks/) to learn how to do this.
 
-= Can I interact with external services? =
+= Can I use Gato GraphQL to interact with external services? =
 
 Yes you can, via the [HTTP Client](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver, and provides special support to connect to REST and GraphQL APIs.
 
