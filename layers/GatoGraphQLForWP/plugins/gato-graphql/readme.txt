@@ -65,7 +65,7 @@ Do you need an integration with some WordPress plugin? [Let us know](https://gat
 
 Gato GraphQL can help you query data from the WordPress database, which is then injected into a WP-CLI command (either to select a specific resource, or update an option with some value, or other). Check out recipe [Complementing WP-CLI](http://localhost:8080/recipes/complementing-wp-cli/) for a thorough description on how to do it.
 
-= Can I fetch block data with Gato GraphQL? =
+= Can I fetch Gutenberg block data with Gato GraphQL? =
 
 Yes, you can. Check recipe [Mapping JS components to (Gutenberg) blocks](http://localhost:8080/recipes/mapping-js-components-to-gutenberg-blocks/) for an example, and guide [Working with (Gutenberg) blocks](http://localhost:8080/guides/interact/working-with-gutenberg-blocks/) for a thorough description on how to do it.
 
