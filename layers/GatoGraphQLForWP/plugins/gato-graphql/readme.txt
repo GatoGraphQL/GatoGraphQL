@@ -129,9 +129,13 @@ Check recipe [DRY code for blocks in Javascript and PHP](https://gatographql.com
 
 = How can Gato GraphQL help automate tasks? =
 
-If you have the [Automation](https://gatographql.com/extensions/automation/) extension, you can trigger a hook when a GraphQL query is resolved (whether it was executed via a public or private endpoint, or internally via the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension), and you can use WP-Cron to execute GraphQL queries every some period of time.
+The [Automation](https://gatographql.com/extensions/automation/) extension triggers an action hook when a GraphQL query is resolved (whether it was executed via a public or private endpoint, or internally via the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension) that you can hook into to execute some custom functionality (and even other GraphQL queries).
 
 This way, you can react to events and do something about them. For instance, whenever a new post is added on the site, you can send a notification by email. Check recipe [Sending a notification when there is a new post](https://gatographql.com/recipes/sending-a-notification-when-there-is-a-new-post/) to learn how to do this.
+
+The Automation extension also provides integration with WP-Cron, allowing you to schedule the execution of GraphQL queries, every some period of time.
+
+For instance, you can retrieve data daily and send yourself a summary via email. Check recipe [Sending a daily summary of activity](https://gatographql.com/recipes/sending-a-daily-summary-of-activity/) to learn how to do this.
 
 = How can Gato GraphQL synchronize content across sites? =
 
