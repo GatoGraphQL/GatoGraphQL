@@ -125,6 +125,12 @@ If you have the [**Automation**](https://gatographql.com/extensions/automation/)
 
 This way, you can react to events and do something about them. For instance, whenever a new post is added on the site, you can send a notification by email. Check recipe [Sending a notification when there is a new post](http://localhost:8080/recipes/sending-a-notification-when-there-is-a-new-post/) to learn how to do this.
 
+= How can Gato GraphQL synchronize content across sites? =
+
+We can create GraphQL queries that fetch content from a site, and import that content into another site or even network of sites.
+
+Check recipes [Importing a post from another WordPress site](http://localhost:8080/recipes/importing-a-post-from-another-wordpress-site/) and [Distributing content from an upstream to multiple downstream sites](http://localhost:8080/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/) which explain how to do this.
+
 == Screenshots ==
 
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
