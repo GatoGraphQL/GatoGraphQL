@@ -71,7 +71,11 @@ Yes, you can. Check recipe [Feeding data to blocks in the editor](http://localho
 
 = How is Gato GraphQL different than the WP REST API? =
 
-Gato GraphQL provides a GraphQL server, to be invoked either externally (via public or private endpoints) or internally (via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension) 
+With the WP REST API, you expose data via REST endpoints, created via PHP code. Each endpoint has its own URL, and its data is pre-defined (for the corresponding resources, such as posts, users, etc).
+
+Gato GraphQL also supports creating endpoints with pre-defined data as "Persisted Queries", however these can be created and published directly within the wp-admin, without any PHP code.
+
+In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need and fetching only that. As a result, you can retrieve all needed data in a single HTTP request.
 
 = Can I execute GraphQL queries internally within my application? =
 
