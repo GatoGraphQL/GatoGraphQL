@@ -46,7 +46,7 @@ Gato GraphQL can be augmented via extensions, including:
 - [**Automation**](https://gatographql.com/extensions/automation/): Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron
 - Many more
 
-Several extensions have been bundled together, to satisfy the following needs:
+Extensions have been bundled together, to satisfy several common use cases:
 
 - [“All Extensions” Bundle](https://gatographql.com/bundles/all-extensions): All Gato GraphQL extensions in a single bundle
 - [“Application Glue & Automator” Bundle](https://gatographql.com/bundles/application-glue-and-automator): Perform and automate tasks for your application
