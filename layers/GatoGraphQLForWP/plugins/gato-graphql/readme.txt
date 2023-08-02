@@ -8,7 +8,7 @@ Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The single tool you need for interacting with all your data in WordPress.
+Interact with all your data in WordPress.
 
 == Description ==
 

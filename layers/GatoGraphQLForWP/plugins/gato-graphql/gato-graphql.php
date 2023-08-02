@@ -2,7 +2,7 @@
 /*
 Plugin Name: Gato GraphQL
 Plugin URI: https://gatographql.com
-Description: Transform your WordPress site into a GraphQL server.
+Description: Interact with all your data in WordPress.
 Version: 1.0.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
