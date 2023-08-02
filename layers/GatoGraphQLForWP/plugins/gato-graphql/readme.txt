@@ -81,6 +81,12 @@ Gato GraphQL also supports creating endpoints with pre-defined data as "Persiste
 
 In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need and fetching only that. As a result, you can retrieve all needed data in a single request.
 
+= Can I use Gato GraphQL to migrate my site? =
+
+You can use Gato GraphQL to update the data in your database, adapting it from the old site to the new site.
+
+For instance, you can execute a GraphQL query to replace "https://my-old-domain.com" to "https://my-new-domain.com" in the content of all posts (even within Gutenberg block properties).
+
 = How do I execute multiple GraphQL queries in a single request? =
 
 If you have the [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) extension, you can combine multiple GraphQL queries into a single one, executing all of them in a single request.
