@@ -43,6 +43,7 @@ Gato GraphQL can be augmented via extensions, including:
 - [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/): Combine and execute multiple queries into a single query
 - [**HTTP Client**](https://gatographql/extensions/http-client/): Interact with external services
 - [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/): Adapt the data via standard PHP functions, always within the query
+- [**Automation**](https://gatographql.com/extensions/automation/): Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron
 - Many more
 
 Several extensions have been bundled together, to satisfy the following needs:
