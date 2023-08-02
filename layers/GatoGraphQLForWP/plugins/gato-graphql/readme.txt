@@ -105,9 +105,9 @@ Check recipes [Translating block content in a post to a different language](http
 
 = How do I execute multiple GraphQL queries in a single request? =
 
-If you have the [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension, you can combine multiple GraphQL queries into a single one and execute them all in a single request.
+You need to have the [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension, which allows you to combine multiple GraphQL queries into a single one and execute them all in a single request.
 
-This is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data from that mutated entity. With Multiple Query Execution, both queries can be executed together. The response will then be faster, and your users will wait less time when interacting with your site. Check recipe [Duplicating a blog post](https://gatographql.com/recipes/duplicating-a-blog-post/) for an example.
+Multiple Query Execution is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data from that mutated entity. As both queries will be executed in a single request, the latency will be lower, and your users will wait less time when interacting with your site. Check recipe [Duplicating a blog post](https://gatographql.com/recipes/duplicating-a-blog-post/) for an example.
 
 Multiple Query Execution can also help you connect to an external API, retrieve data from it, and do something with that data, all within a single request. Check out recipe [Creating an API gateway](https://gatographql.com/recipes/creating-an-api-gateway/) for an example.
 
