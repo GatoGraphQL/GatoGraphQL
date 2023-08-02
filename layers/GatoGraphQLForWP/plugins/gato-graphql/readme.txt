@@ -36,6 +36,14 @@ Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL q
 
 You can create multiple public and private custom endpoints, exposing each of them for your specific target, and assign a private endpoint to feed data to your custom Gutenberg blocks, avoiding the need to maintain REST controllers.
 
+Gato GraphQL can be augmented via extensions, including:
+
+- Augmentation of the GraphQL schema
+- Integrations with popular WordPress plugins
+- Additional functionality
+
+Browse the extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
+
 == Frequently Asked Questions ==
 
 = A question that someone might have =
