@@ -27,14 +27,16 @@ Among others, it allows you to:
 - Interact with cloud services
 - Convert the data from a 3rd-party API into the required format
 - Translate content in the site
-- Update thousands of posts with a single action and no PHP code
+- Update thousands of posts with a single action
 - Insert or remove Gutenberg blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
 
 The plugin's "Recipes" section contains GraphQL queries demonstrating these use cases and many more. Copy the query from a recipe, paste it into the query editor, update it to your needs, publish it, and you're good to go.
 
-Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. Persisted Queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin (without any PHP code at all!), using the GraphQL language. With Persisted Queries you can expose data while making your site super secure, as you will be restricting visitors from accessing your data at their will.
+Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. They are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
+
+With Persisted Queries you can expose data while making your site super secure, as you will be restricting visitors from accessing your data at their will.
 
 You can create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other). You can also create a private endpoint to feed data to your custom Gutenberg blocks, avoiding the need to maintain REST controllers.
 

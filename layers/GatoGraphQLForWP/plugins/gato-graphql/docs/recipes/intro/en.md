@@ -15,7 +15,7 @@ Among others, it allows you to:
 - Interact with cloud services
 - Convert the data from a 3rd-party API into the required format
 - Translate content in the site
-- Update thousands of posts with a single action and no PHP code
+- Update thousands of posts with a single action
 - Insert or remove Gutenberg blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
