@@ -137,8 +137,21 @@ Check recipes [Importing a post from another WordPress site](https://gatographql
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
-2. This is the second screen shot
+1. GraphiQL client to execute queries in the wp-admin
+2. Interactively browse the GraphQL schema, exploring all connections among entities
+3. The GraphiQL client for the single endpoint is exposed to the Internet
+4. Interactively browse the GraphQL schema exposed for the single endpoint
+5. Persisted queries are pre-defined and stored in the server
+6. Requesting a persisted query URL will retrieve its pre-defined GraphQL response
+7. We can create multiple custom endpoints, each for a different target
+8. Endpoints are configured via Schema Configurations
+9. We can create many Schema Configurations, customizing them for different users or applications
+10. Custom endpoints and Persisted queries can be public, private and password-protected
+11. We can configure exactly what custom post types, options and meta keys can be queried
+12. Configure every aspect from the plugin via the Settings page
+13. Modules with different functionalities and schema extensions can be enabled and disabled
+14. Augment the plugin functionality and GraphQL schema via extensions
+15. The Recipes section contains example queries ready to copy/paste and use 
 
 == Changelog ==
 
