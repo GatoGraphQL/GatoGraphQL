@@ -63,7 +63,7 @@ Do you need an integration with some WordPress plugin? [Let us know](https://gat
 
 = How does Gato GraphQL complement WP-CLI? =
 
-Gato GraphQL can help you query data from the WordPress database, which is then injected into a WP-CLI command. Check out recipe [Complementing WP-CLI](http://localhost:8080/recipes/complementing-wp-cli/) for a thorough description on how to do it.
+Gato GraphQL can help you query data from the WordPress database, which is then injected into a WP-CLI command (either to select a specific resource, or update an option with some value, or other). Check out recipe [Complementing WP-CLI](http://localhost:8080/recipes/complementing-wp-cli/) for a thorough description on how to do it.
 
 = Can I fetch block data with Gato GraphQL? =
 
