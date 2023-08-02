@@ -63,11 +63,13 @@ Do you need an integration with some WordPress plugin? [Let us know](https://gat
 
 = How does Gato GraphQL complement WP-CLI? =
 
-Gato GraphQL can help you query data from the WordPress database, which is then injected into a WP-CLI command (either to select a specific resource, or update an option with some value, or other). Check out recipe [Complementing WP-CLI](https://gatographql.com/recipes/complementing-wp-cli/) for a thorough description on how to do it.
+With Gato GraphQL you can query data from the WordPress database, and then inject the results into a WP-CLI command (either to select a specific resource, or update an option with some value, or other).
 
-= Can I use Gato GraphQL to build headless sites? =
+Check out recipe [Complementing WP-CLI](https://gatographql.com/recipes/complementing-wp-cli/) for a thorough description on how to do it.
 
-Yes, you can. With Gato GraphQL, you can create an endpoint which exposes the data from your WordPress site. A framework to build headless sites (based on Next.js, Gatsby, Hugo, or others) can then query the data from your WordPress site, and render the website as static HTML/JS/CSS code.
+= How do I use Gato GraphQL to build headless sites? =
+
+With Gato GraphQL, you can create an endpoint which exposes the data from your WordPress site. Then, you can use some framework to build headless sites (based on Next.js, Gatsby, Hugo, or any other) to retrieve the data from the WordPress site, and render the static website.
 
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
