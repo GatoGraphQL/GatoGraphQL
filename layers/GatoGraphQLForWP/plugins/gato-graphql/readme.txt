@@ -1,10 +1,10 @@
 === Gato GraphQL ===
-Contributors: gatographql,leoloso
+Contributors: gatographql, leoloso
 Tags: graphql, automation, content sync, headless, site migrations, rest api, endpoint, wp-cli, notifications, cloud, translation, gutenberg
-Requires at least: 4.7
-Tested up to: 5.4
-Stable tag: 4.3
-Requires PHP: 7.0
+Requires at least: 5.4
+Tested up to: 6.2
+Stable tag: 1.0
+Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
