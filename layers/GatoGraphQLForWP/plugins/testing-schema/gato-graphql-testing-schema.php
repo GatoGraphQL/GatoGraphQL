@@ -6,8 +6,8 @@ Description: Addition of elements to the GraphQL schema to test the Gato GraphQL
 Version: 1.0.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
-Author: Leonardo Losoviz
-Author URI: https://leoloso.com
+Author: Gato GraphQL
+Author URI: https://gatographql.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Text Domain: gato-graphql-testing-schema
