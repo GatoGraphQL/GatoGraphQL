@@ -95,9 +95,9 @@ For instance, you can execute a query that replaces "https://my-old-domain.com" 
 
 Check recipe [Site migrations](https://gatographql.com/recipes/site-migrations/) to learn how to do this.
 
-= Can Gato GraphQL translate the content in my site? =
+= How to translate the content in my site using Gato GraphQL? =
 
-Yes it can, via the extensions provided by the [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation).
+You need the extensions provided by the [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation).
 
 With this bundle, you can create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post's content back to the database.
 
