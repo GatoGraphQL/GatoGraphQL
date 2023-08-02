@@ -40,12 +40,12 @@ You can create public and private custom endpoints, exposing each of them for so
 
 Gato GraphQL can be augmented via extensions, including:
 
-- [**Access Control**](https://gatographql.com/extensions/access-control/): Grant access to your endpoints (by user being logged-in or not, having some role or capability, and others), field by field
-- [**Cache Control**](https://gatographql.com/extensions/cache-control/): Use HTTP caching to make your APIs faster
-- [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/): Combine and execute multiple queries into a single query
-- [**HTTP Client**](https://gatographql/extensions/http-client/): Interact with external services
-- [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/): Adapt the data via standard PHP functions, always within the query
-- [**Automation**](https://gatographql.com/extensions/automation/): Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron
+- [Access Control](https://gatographql.com/extensions/access-control/): Grant access to your endpoints (by user being logged-in or not, having some role or capability, and others), field by field
+- [Cache Control](https://gatographql.com/extensions/cache-control/): Use HTTP caching to make your APIs faster
+- [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/): Combine and execute multiple queries into a single query
+- [HTTP Client](https://gatographql/extensions/http-client/): Interact with external services
+- [PHP Functions via Schema](https://gatographql.com/extensions/php-functions-via-schema/): Adapt the data via standard PHP functions, always within the query
+- [Automation](https://gatographql.com/extensions/automation/): Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron
 - Many more
 
 Extensions have been bundled together, to satisfy several common use cases:
@@ -99,7 +99,7 @@ Check recipes [Translating block content in a post to a different language](http
 
 = How do I execute multiple GraphQL queries in a single request? =
 
-If you have the [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) extension, you can combine multiple GraphQL queries into a single one, executing all of them in a single request.
+If you have the [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension, you can combine multiple GraphQL queries into a single one, executing all of them in a single request.
 
 This is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data for that mutated entity. With Multiple Query Execution, both queries can be executed together, thus speeding up the application from a reduced latency (which translates in your users waiting less time when interacting with your site).
 
@@ -107,25 +107,25 @@ Multiple Query Execution can also help you connect to an external API, retrieve 
 
 = Can Persisted Queries be used as webhooks? =
 
-Yes they can, because a persisted query lives on its own URL, it can extract the payload data (directly if passed as URL params, or using the [**HTTP Request via Schema**](https://gatographql.com/extensions/http-request-via-schema/) extension if passed in the body of the request), and then do something with that data (update a post, add a comment, send a notification, etc).
+Yes they can, because a persisted query lives on its own URL, it can extract the payload data (directly if passed as URL params, or using the [HTTP Request via Schema](https://gatographql.com/extensions/http-request-via-schema/) extension if passed in the body of the request), and then do something with that data (update a post, add a comment, send a notification, etc).
 
 Check recipe [Interacting with external services via webhooks](https://gatographql.com/recipes/interacting-with-external-services-via-webhooks/) to learn how to do this.
 
 = Can I interact with external services? =
 
-Yes you can, via the [**HTTP Client**](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver, and provides special support to connect to REST and GraphQL APIs.
+Yes you can, via the [HTTP Client](https://gatographql/extensions/http-client/) extension, which adds fields to the GraphQL schema to fetch data from any webserver, and provides special support to connect to REST and GraphQL APIs.
 
 Check recipe [Retrieving data from an external API](https://gatographql.com/recipes/retrieving-data-from-an-external-api/) to learn about all the new "HTTP client" fields, and examples on how to use them.
 
 = Can I execute GraphQL queries internally within my application? =
 
-Yes you can, via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
+Yes you can, via the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
 
 Check recipe [DRY code for blocks in Javascript and PHP](https://gatographql.com/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
 
 = How can Gato GraphQL help automate tasks? =
 
-If you have the [**Automation**](https://gatographql.com/extensions/automation/) extension, you can trigger a hook when a GraphQL query is resolved (whether it was executed via a public or private endpoint, or internally via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension), and you can use WP-Cron to execute GraphQL queries every some period of time.
+If you have the [Automation](https://gatographql.com/extensions/automation/) extension, you can trigger a hook when a GraphQL query is resolved (whether it was executed via a public or private endpoint, or internally via the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension), and you can use WP-Cron to execute GraphQL queries every some period of time.
 
 This way, you can react to events and do something about them. For instance, whenever a new post is added on the site, you can send a notification by email. Check recipe [Sending a notification when there is a new post](https://gatographql.com/recipes/sending-a-notification-when-there-is-a-new-post/) to learn how to do this.
 
