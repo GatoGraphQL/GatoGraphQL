@@ -34,15 +34,13 @@ Among others, it allows you to:
 
 The plugin's "Recipes" section contains GraphQL queries demonstrating these use cases and many more. Copy the query from a recipe, paste it into the query editor, update it to your needs, publish it, and you're good to go.
 
-Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. They are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
-
-With Persisted Queries you can expose data while making your site super secure, as you will be restricting visitors from accessing your data at their will.
+Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. They are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all). They allow you to expose data while making your site super secure, as visitors will be restricted from freely browsing your data.
 
 You can create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other). You can also create a private endpoint to feed data to your custom Gutenberg blocks, avoiding the need to maintain REST controllers.
 
 Gato GraphQL can be augmented via extensions, including:
 
-- [**Access Control**](https://gatographql.com/extensions/access-control/): Grant granular access to your endpoints, field by field
+- [**Access Control**](https://gatographql.com/extensions/access-control/): Grant access to your endpoints (by user being logged-in or not, having some role or capability, and others), field by field
 - [**Cache Control**](https://gatographql.com/extensions/cache-control/): Use HTTP caching to make your APIs faster
 - [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/): Combine and execute multiple queries into a single query
 - [**HTTP Client**](https://gatographql/extensions/http-client/): Interact with external services
