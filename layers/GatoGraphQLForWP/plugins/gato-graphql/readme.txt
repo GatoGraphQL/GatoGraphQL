@@ -57,6 +57,8 @@ Extensions have been bundled together, to satisfy several common use cases:
 
 Browse all bundles and extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
 
+Do you need an integration with some WordPress plugin? [Let us know](https://gatographql.com/request-extension).
+
 == Frequently Asked Questions ==
 
 = Can I use Gato GraphQL with Gutenberg? =
