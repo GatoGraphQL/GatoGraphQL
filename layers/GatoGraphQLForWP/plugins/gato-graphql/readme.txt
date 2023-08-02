@@ -69,6 +69,16 @@ Yes, you can. Check recipe [Mapping JS components to (Gutenberg) blocks](http://
 
 Yes, you can. Check recipe [Feeding data to blocks in the editor](http://localhost:8080/recipes/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
 
+= How is Gato GraphQL different than the WP REST API? =
+
+Gato GraphQL provides a GraphQL server, to be invoked either externally (via public or private endpoints) or internally (via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension) 
+
+= Can I execute GraphQL queries internally within my application? =
+
+Yes you can, but you need the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension, which installs a private GraphQL server, to be invoked via PHP code.
+
+Check recipe [DRY code for blocks in Javascript and PHP](http://localhost:8080/recipes/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
+
 == Screenshots ==
 
 1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Screenshots are stored in the /assets directory.
