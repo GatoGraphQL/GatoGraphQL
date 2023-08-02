@@ -139,9 +139,9 @@ For instance, you can retrieve data daily and send yourself a summary via email.
 
 = How can Gato GraphQL synchronize content across sites? =
 
-We can create GraphQL queries that fetch content from a site, and import that content into another site or even network of sites.
+We can create GraphQL queries that fetch content from a site, and import that content into another site. Check recipe [Importing a post from another WordPress site](https://gatographql.com/recipes/importing-a-post-from-another-wordpress-site/) to learn how to do this.
 
-Check recipes [Importing a post from another WordPress site](https://gatographql.com/recipes/importing-a-post-from-another-wordpress-site/) and [Distributing content from an upstream to multiple downstream sites](https://gatographql.com/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/) which explain how to do this.
+You can even synchronize content across a network of sites, such as from an upstream to multiple downstreams. Check recipe [Distributing content from an upstream to multiple downstream sites](https://gatographql.com/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/) which explains how to do this.
 
 == Screenshots ==
 
