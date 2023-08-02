@@ -61,13 +61,13 @@ Do you need an integration with some WordPress plugin? [Let us know](https://gat
 
 == Frequently Asked Questions ==
 
-= Can I use Gato GraphQL with Gutenberg? =
+= Can I fetch block data with Gato GraphQL? =
 
-An answer to that question.
+Yes, you can. Check recipe [Mapping JS components to (Gutenberg) blocks](http://localhost:8080/recipes/mapping-js-components-to-gutenberg-blocks/) for an example, and guide [Working with (Gutenberg) blocks](http://localhost:8080/guides/interact/working-with-gutenberg-blocks/) for a thorough description on how to do it.
 
-= What about foo bar? =
+= Can I use Gato GraphQL to feed data to my Gutenberg Blocks? =
 
-Answer to foo bar dilemma.
+Yes, you can. Check recipe [Feeding data to blocks in the editor](http://localhost:8080/recipes/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
 
 == Screenshots ==
 
