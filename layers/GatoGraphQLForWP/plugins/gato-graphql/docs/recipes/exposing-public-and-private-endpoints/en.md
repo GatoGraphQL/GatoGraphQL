@@ -56,7 +56,7 @@ The single endpoint is recommended when:
 - We need to retrieve data to power a single feature, and
 - The WordPress website is not accessible to the open Internet (i.e. it is running on a development laptop, or behind a firewall)
 
-This is the case, for instance, for building a headless site (using [Next.js](https://nextjs.org/), [Gatsby](https://www.gatsbyjs.com/), or others).
+This is the case, for instance, for building a headless site (using frameworks such as [Next.js](https://nextjs.org/) or others).
 
 ## When to use public custom endpoints
 
