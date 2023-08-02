@@ -30,11 +30,11 @@ Among others, it allows you to:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-The plugin's "Recipes" section contains plenty of GraphQL queries demonstrating these use cases and many more. Copy the query from a recipe, paste it into the query editor, update it to your needs, publish it, and you're good to go.
+The plugin's "Recipes" section contains GraphQL queries demonstrating these use cases and many more. Copy the query from a recipe, paste it into the query editor, update it to your needs, publish it, and you're good to go.
 
 Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. This is akin to creating WP REST API endpoints, however Persisted Queries are created and published directly within the wp-admin, without any PHP code at all.
 
-You can create multiple public and private custom endpoints, exposing each of them for your specific target, and assign a private endpoint to feed data to your custom Gutenberg blocks, avoiding the need to maintain REST controllers.
+You can create multiple public and private custom endpoints, exposing each of them for your specific target (whether different applications, clients, teams, or other), and assign a private endpoint to feed data to your custom Gutenberg blocks, avoiding the need to maintain REST controllers.
 
 Gato GraphQL can be augmented via extensions, including:
 
@@ -42,6 +42,7 @@ Gato GraphQL can be augmented via extensions, including:
 - Cache Control: Use HTTP caching to make your APIs faster
 - Multiple Query Execution: Combine and execute multiple queries into a single query
 - HTTP Client: Interact with external services
+- PHP Functions: Adapt the data via standard PHP functions, always within the query
 - Much more
 
 Browse all bundles and extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
