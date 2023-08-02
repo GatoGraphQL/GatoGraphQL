@@ -1,6 +1,6 @@
 # Intro
 
-Gato GraphQL is a **tool for interacting with data in your WordPress site** via the [GraphQL language](https://graphql.org/). You can think of it as a Swiss Army Knife for dealing with data in a WordPress site, as it allows to retrieve, manipulate and store again any piece of data, in any desired way.
+Gato GraphQL is a **tool for interacting with data in your WordPress site** via the [GraphQL language](https://graphql.org/). You can think of it as a Swiss Army Knife for dealing with data, as it allows to retrieve, manipulate and store again any piece of data, in any desired way.
 
 Among others, it allows you to:
 
