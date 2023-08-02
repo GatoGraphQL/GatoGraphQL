@@ -38,11 +38,13 @@ You can create multiple public and private custom endpoints, exposing each of th
 
 Gato GraphQL can be augmented via extensions, including:
 
-- Augmentation of the GraphQL schema
-- Integrations with popular WordPress plugins
-- Additional functionality
+- Access Control: Grant granular access to your endpoints, field by field
+- Cache Control: Use HTTP caching to make your APIs faster
+- Multiple Query Execution: Combine and execute multiple queries into a single query
+- HTTP Client: Interact with external services
+- Much more
 
-Browse the extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
+Browse all bundles and extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
 
 == Frequently Asked Questions ==
 
