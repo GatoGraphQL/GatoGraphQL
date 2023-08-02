@@ -95,17 +95,19 @@ For instance, you can execute a query that replaces "https://my-old-domain.com" 
 
 Check recipe [Site migrations](https://gatographql.com/recipes/site-migrations/) to learn how to do this.
 
-= Can Gato GraphQL translate content in the site? =
+= Can Gato GraphQL translate the content in my site? =
 
-Yes it can, via the extensions provided by the [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation). With this bundle, you can create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post back to the database.
+Yes it can, via the extensions provided by the [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation).
+
+With this bundle, you can create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post's content back to the database.
 
 Check recipes [Translating block content in a post to a different language](https://gatographql.com/recipes/translating-block-content-in-a-post-to-a-different-language/) for a thorough explanation on how to do this, and [Bulk translating block content in multiple posts to a different language](https://gatographql.com/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/) on how to do it in bulk.
 
 = How do I execute multiple GraphQL queries in a single request? =
 
-If you have the [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension, you can combine multiple GraphQL queries into a single one, executing all of them in a single request.
+If you have the [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension, you can combine multiple GraphQL queries into a single one and execute them all in a single request.
 
-This is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data for that mutated entity. With Multiple Query Execution, both queries can be executed together, thus speeding up the application from a reduced latency (which translates in your users waiting less time when interacting with your site).
+This is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data from that mutated entity. With Multiple Query Execution, both queries can be executed together. The response will then be faster, and your users will wait less time when interacting with your site. Check recipe [Duplicating a blog post](https://gatographql.com/recipes/duplicating-a-blog-post/) for an example.
 
 Multiple Query Execution can also help you connect to an external API, retrieve data from it, and do something with that data, all within a single request. Check out recipe [Creating an API gateway](https://gatographql.com/recipes/creating-an-api-gateway/) for an example.
 
