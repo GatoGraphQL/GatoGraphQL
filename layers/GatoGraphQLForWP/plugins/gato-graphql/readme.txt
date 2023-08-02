@@ -18,6 +18,7 @@ Among others, it allows you to:
 
 - Query data to create headless sites
 - Expose public and private APIs
+- Map JS components to Gutenberg blocks
 - Synchronize content across sites
 - Automate tasks
 - Complement WP-CLI to execute admin tasks
@@ -26,7 +27,8 @@ Among others, it allows you to:
 - Interact with cloud services
 - Convert the data from a 3rd-party API into the required format
 - Translate content in the site
-- Insert or remove (Gutenberg) blocks in bulk
+- Update thousands of posts with a single action and no PHP code
+- Insert or remove Gutenberg blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
 
@@ -57,7 +59,7 @@ Browse all bundles and extensions in the [Gato GraphQL shop](https://shop.gatogr
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Can I use Gato GraphQL with Gutenberg? =
 
 An answer to that question.
 
