@@ -38,12 +38,12 @@ You can create multiple public and private custom endpoints, exposing each of th
 
 Gato GraphQL can be augmented via extensions, including:
 
-- Access Control: Grant granular access to your endpoints, field by field
-- Cache Control: Use HTTP caching to make your APIs faster
-- Multiple Query Execution: Combine and execute multiple queries into a single query
-- HTTP Client: Interact with external services
-- PHP Functions: Adapt the data via standard PHP functions, always within the query
-- Much more
+- [**Access Control**](https://gatographql.com/extensions/access-control/): Grant granular access to your endpoints, field by field
+- [**Cache Control**](https://gatographql.com/extensions/cache-control/): Use HTTP caching to make your APIs faster
+- [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/): Combine and execute multiple queries into a single query
+- [**HTTP Client**](https://gatographql/extensions/http-client/): Interact with external services
+- [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/): Adapt the data via standard PHP functions, always within the query
+- Many more
 
 Browse all bundles and extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
 
