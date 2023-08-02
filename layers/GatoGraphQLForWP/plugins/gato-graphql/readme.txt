@@ -34,7 +34,7 @@ The plugin's "Recipes" section contains GraphQL queries demonstrating these use 
 
 Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. Persisted Queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin (without any PHP code at all!), using the GraphQL language. With Persisted Queries you can expose data while making your site super secure, as you will be restricting visitors from accessing your data at their will.
 
-You can create multiple public and private custom endpoints, exposing each of them for your specific target (whether different applications, clients, teams, or other), and assign a private endpoint to feed data to your custom Gutenberg blocks, avoiding the need to maintain REST controllers.
+You can create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other). You can also create a private endpoint to feed data to your custom Gutenberg blocks, avoiding the need to maintain REST controllers.
 
 Gato GraphQL can be augmented via extensions, including:
 
