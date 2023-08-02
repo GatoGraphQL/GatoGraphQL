@@ -75,7 +75,15 @@ With the WP REST API, you expose data via REST endpoints, created via PHP code. 
 
 Gato GraphQL also supports creating endpoints with pre-defined data as "Persisted Queries", however these can be created and published directly within the wp-admin, without any PHP code.
 
-In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need and fetching only that. As a result, you can retrieve all needed data in a single HTTP request.
+In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need and fetching only that. As a result, you can retrieve all needed data in a single request.
+
+= How do I execute multiple GraphQL queries in a single request? =
+
+If you have the [**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) extension, you can combine multiple GraphQL queries into a single one, executing all of them in a single request.
+
+This is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data for that mutated entity. With Multiple Query Execution, both queries can be executed together, thus speeding up the application from a reduced latency (which translates in your users waiting less time when interacting with your site).
+
+Multiple Query Execution can also help you connect to an external API, retrieve data from it, and do something with that data, all within a single request. Check out recipe [Creating an API gateway](http://localhost:8080/recipes/creating-an-api-gateway/) for an example.
 
 = Can I execute GraphQL queries internally within my application? =
 
