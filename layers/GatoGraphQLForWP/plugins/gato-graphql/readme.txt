@@ -89,9 +89,11 @@ In addition, with Gato GraphQL you can execute tailored GraphQL queries against 
 
 = Can I use Gato GraphQL to migrate my site? =
 
-You can use Gato GraphQL to update the data in your database, adapting it from the old site to the new site.
+With Gato GraphQL you can execute queries to update data in your database, converting content into what is required for the new site.
 
-For instance, you can execute a GraphQL query to replace "https://my-old-domain.com" to "https://my-new-domain.com" in the content of all posts (even within Gutenberg block properties). Check recipe [Site migrations](https://gatographql.com/recipes/site-migrations/) to learn how to do this.
+For instance, you can execute a query that replaces "https://my-old-domain.com" with "https://my-new-domain.com" in the content of all posts (even within Gutenberg block properties).
+
+Check recipe [Site migrations](https://gatographql.com/recipes/site-migrations/) to learn how to do this.
 
 = Can Gato GraphQL translate content in the site? =
 
