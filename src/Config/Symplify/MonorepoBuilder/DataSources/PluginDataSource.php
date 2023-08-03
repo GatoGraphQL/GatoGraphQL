@@ -23,6 +23,7 @@ class PluginDataSource
                 'plugin_slug' => 'gato-graphql',
                 'main_file' => 'gato-graphql.php',
                 'exclude_files' => implode(' ', [
+                    '.wordpress-org/\*',
                     'dev-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
