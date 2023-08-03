@@ -54,7 +54,7 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
         $this->enqueueReactAssets(true);
         \wp_enqueue_script(
             'gato-graphql-voyager',
-            $mainPluginURL . 'assets/js/vendors/voyager.min.js',
+            $mainPluginURL . 'assets/js/vendors/voyager.standalone.js',
             array('gato-graphql-react-dom'),
             $mainPluginVersion,
             true
