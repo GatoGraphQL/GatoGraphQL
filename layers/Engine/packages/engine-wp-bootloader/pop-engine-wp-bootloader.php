@@ -5,7 +5,6 @@ Version: 0.1
 Description: Bootload the PoP Engine for WordPress
 Plugin URI: https://github.com/getpop/engine-wp-bootloader/
 Author: Gato GraphQL
-Author URI: https://gatographql.com
 */
 
 use PoP\RootWP\AppLoader;
