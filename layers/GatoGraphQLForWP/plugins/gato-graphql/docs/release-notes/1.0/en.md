@@ -1588,6 +1588,10 @@ Now, only Gato GraphQL extension plugins trigger this process.
 
 The plugin has upgraded its Symfony dependencies to the latest v6.3, which <a href="https://symfony.com/blog/new-in-symfony-6-3-performance-improvements" target="_blank">offers performance improvements</a>.
 
+## Upgraded Voyager client to v1.3
+
+Upgraded the Voyager client to [v1.3.0](https://github.com/graphql-kit/graphql-voyager/releases/tag/v1.3.0).
+
 ## Fixed
 
 - Made field `Comment.type` of type `CommentTypeEnum` (previously was `String`)
