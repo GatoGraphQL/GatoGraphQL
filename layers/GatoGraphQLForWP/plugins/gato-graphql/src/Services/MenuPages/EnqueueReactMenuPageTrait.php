@@ -19,14 +19,14 @@ trait EnqueueReactMenuPageTrait
 
         \wp_enqueue_script(
             'gato-graphql-react',
-            $mainPluginURL . 'assets/js/vendors/react.min.js',
+            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/react.production.min.js',
             array(),
             $mainPluginVersion,
             $addInFooter
         );
         \wp_enqueue_script(
             'gato-graphql-react-dom',
-            $mainPluginURL . 'assets/js/vendors/react-dom.min.js',
+            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/react-dom.production.min.js',
             array('gato-graphql-react'),
             $mainPluginVersion,
             $addInFooter

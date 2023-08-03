@@ -45,7 +45,7 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
         );
         \wp_enqueue_style(
             'gato-graphql-voyager',
-            $mainPluginURL . 'assets/css/vendors/voyager.css',
+            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.css',
             array(),
             $mainPluginVersion
         );
@@ -54,7 +54,7 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
         $this->enqueueReactAssets(true);
         \wp_enqueue_script(
             'gato-graphql-voyager',
-            $mainPluginURL . 'assets/js/vendors/voyager.standalone.js',
+            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.standalone.js',
             array('gato-graphql-react-dom'),
             $mainPluginVersion,
             true

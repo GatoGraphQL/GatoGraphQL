@@ -74,7 +74,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
         \wp_enqueue_style(
             'gato-graphql-graphiql',
-            $mainPluginURL . 'assets/css/vendors/graphiql.1.5.7.min.css',
+            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.css',
             array(),
             $mainPluginVersion
         );
@@ -84,7 +84,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
         \wp_enqueue_script(
             'gato-graphql-graphiql',
-            $mainPluginURL . 'assets/js/vendors/graphiql.1.5.7.min.js',
+            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.js',
             array('gato-graphql-react-dom'),
             $mainPluginVersion,
             true
