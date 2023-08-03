@@ -21,7 +21,7 @@
         "getpop/cache-control": "^0.11",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
-        "rector/rector": "^0.17",
+        "rector/rector": "^0.17.8",
         "squizlabs/php_codesniffer": "^3.6"
     },
     "suggest": {
