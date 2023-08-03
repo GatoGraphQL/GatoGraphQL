@@ -4,11 +4,13 @@
 #wpcontent .graphiql-container {
     height: calc(100vh - 32px);
 }
-#wpcontent .graphiql-root {
+#wpcontent .graphiql-root,
+#wpcontent .graphiql-client {
     margin-left: -10px;
 }
 @media (min-width: 783px) {
-    #wpcontent .graphiql-root {
+    #wpcontent .graphiql-root,
+    #wpcontent .graphiql-client {
         margin-left: -20px;
     }
 }
