@@ -19,7 +19,7 @@
     "require-dev": {
         "johnpbloch/wordpress": ">=5.5",
         "phpunit/phpunit": "^10.2",
-        "rector/rector": "^0.17",
+        "rector/rector": "^0.17.8",
         "squizlabs/php_codesniffer": "^3.6",
         "szepeviktor/phpstan-wordpress": "^1.0"
     },
