@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e07ba5548d7d3de12f566e3ad164894",
+    "content-hash": "841ae1ba7224c32997607fc462e10d1e",
     "packages": [
         {
             "name": "antecedent/patchwork",
@@ -5381,16 +5381,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "dev-main",
+            "version": "0.17.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "78e7a43276b4e38d6a357143b24b750e270d208c"
+                "reference": "f4c0627d5e157272cf4783099730ef7241fddb14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/78e7a43276b4e38d6a357143b24b750e270d208c",
-                "reference": "78e7a43276b4e38d6a357143b24b750e270d208c",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/f4c0627d5e157272cf4783099730ef7241fddb14",
+                "reference": "f4c0627d5e157272cf4783099730ef7241fddb14",
                 "shasum": ""
             },
             "require": {
@@ -5403,7 +5403,6 @@
                 "rector/rector-phpunit": "*",
                 "rector/rector-symfony": "*"
             },
-            "default-branch": true,
             "bin": [
                 "bin/rector"
             ],
@@ -5431,7 +5430,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/main"
+                "source": "https://github.com/rectorphp/rector/tree/0.17.10"
             },
             "funding": [
                 {
@@ -5439,7 +5438,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-31T14:21:36+00:00"
+            "time": "2023-08-03T14:19:51+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -7899,8 +7898,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "leoloso/faker": 20,
-        "rector/rector": 20
+        "leoloso/faker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
