@@ -39,7 +39,7 @@ if (!defined('ABSPATH')) {
  *
  * @see https://getcomposer.org/doc/articles/versions.md#stabilities
  */
-$pluginVersion = '1.0.0-dev';
+$pluginVersion = '1.0.0';
 $pluginName = __('Gato GraphQL', 'gato-graphql');
 
 /**
