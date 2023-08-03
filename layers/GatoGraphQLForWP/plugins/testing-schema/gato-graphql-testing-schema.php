@@ -7,7 +7,6 @@ Version: 1.0.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
 Author: Gato GraphQL
-Author URI: https://gatographql.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Text Domain: gato-graphql-testing-schema
