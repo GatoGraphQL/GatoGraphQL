@@ -23,7 +23,7 @@ class ExtensionManager extends AbstractPluginManager
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
     /** @var array<string,string> Extension File => Extension Name */
-    private array $nonActivatedLicenseExtensionFiles = [];
+    private array $nonActivatedLicenseCommercialExtensionFiles = [];
 
     /**
      * Have the extensions organized by their class
@@ -222,7 +222,7 @@ class ExtensionManager extends AbstractPluginManager
          */
         $activatedCommercialExtensionLicensePayloads = $this->getActivatedCommercialExtensionLicensePayloads();
         if (!isset($activatedCommercialExtensionLicensePayloads[$extensionFile])) {
-            $this->nonActivatedLicenseExtensionFiles[$extensionFile] = $extensionName;
+            $this->nonActivatedLicenseCommercialExtensionFiles[$extensionFile] = $extensionName;
             return false;
         }
         return true;
@@ -240,5 +240,13 @@ class ExtensionManager extends AbstractPluginManager
             $this->activatedCommercialExtensionLicensePayloads = get_option(Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS, []);
         }
         return $this->activatedCommercialExtensionLicensePayloads;
+    }
+
+    /**
+     * @return array<string,string> Extension File => Extension Name
+     */
+    public function getNonActivatedLicenseCommercialExtensionFiles(): array
+    {
+        return $this->nonActivatedLicenseCommercialExtensionFiles;
     }
 }
