@@ -212,7 +212,7 @@ class ExtensionManager extends AbstractPluginManager
      * If it has not, also mark the Extension as "inactivated",
      * to show a message to the admin.
      */
-    public function assertLicenseHasBeenActivated(
+    public function assertCommercialLicenseHasBeenActivated(
         string $extensionFile,
         string $extensionName,
     ): bool {
