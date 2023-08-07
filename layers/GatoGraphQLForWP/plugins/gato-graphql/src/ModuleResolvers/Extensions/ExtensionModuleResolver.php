@@ -106,8 +106,8 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::ACCESS_CONTROL => \__('Grant user access to schema elements via Access Control Lists.', 'gato-graphql'),
-            self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to schema elements based on the visitor\'s IP address (Access Control extension is required).', 'gato-graphql'),
+            self::ACCESS_CONTROL => \__('Grant granular access to the schema, based on the user being logged-in (or not), having a certain role or capability, and more.', 'gato-graphql'),
+            self::ACCESS_CONTROL_VISITOR_IP => \__('Grant access to the schema based on the visitor\'s IP address (Access Control extension is required).', 'gato-graphql'),
             self::AUTOMATION => \__('Use GraphQL to automate tasks in your app: Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron. (The Internal GraphQL Server extension is required).', 'gato-graphql'),
             self::CACHE_CONTROL => \__('Provide HTTP Caching for endpoints accessed via GET, with the max-age value automatically calculated from the query.', 'gato-graphql'),
             self::CONDITIONAL_FIELD_MANIPULATION => \__('Apply a directive on a field only if some condition is met.', 'gato-graphql'),
