@@ -26,7 +26,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     /**
      * Setting options
      */
-    public final const OPTION_ACTIVATED_EXTENSION_PAYLOADS = 'activated-extension-payloads';
+    public final const OPTION_EXTENSION_LICENSE_KEYS = 'extension-license-keys';
     public final const OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR = 'use-restrictive-or-not-default-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -132,7 +132,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::ACTIVATE_EXTENSIONS => [
-                self::OPTION_ACTIVATED_EXTENSION_PAYLOADS => [],
+                self::OPTION_EXTENSION_LICENSE_KEYS => [],
             ],
             self::RESET_SETTINGS => [
                 self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useRestrictiveDefaults ? ResetSettingsOptions::RESTRICTIVE : ResetSettingsOptions::NON_RESTRICTIVE,
