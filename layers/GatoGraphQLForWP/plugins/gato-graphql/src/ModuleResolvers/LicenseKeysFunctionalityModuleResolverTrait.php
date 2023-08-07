@@ -28,6 +28,6 @@ trait LicenseKeysFunctionalityModuleResolverTrait
 
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::LICENSE_KEYS;
+        return SettingsCategoryResolver::API_KEYS;
     }
 }
