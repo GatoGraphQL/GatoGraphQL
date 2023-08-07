@@ -38,7 +38,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'gato-graphql'),
             self::SERVER_CONFIGURATION => $this->__('Server Configuration', 'gato-graphql'),
             self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'gato-graphql'),
-            self::LICENSE_KEYS => $this->__('License/API Keys', 'gato-graphql'),
+            self::LICENSE_KEYS => $this->__('API Keys', 'gato-graphql'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'gato-graphql'),
             default => parent::getName($settingsCategory),
         };
