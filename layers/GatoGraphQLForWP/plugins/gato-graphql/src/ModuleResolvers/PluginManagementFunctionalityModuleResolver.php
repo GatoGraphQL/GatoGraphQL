@@ -149,7 +149,19 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        if ($module === self::RESET_SETTINGS) {
+        if ($module === self::ACTIVATE_EXTENSIONS) {
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'activate-extensions'
+                ),
+                Properties::DESCRIPTION => sprintf(
+                    '<p>%s</p>',
+                    \__('There are no Bundles or Extensions installed', 'gato-graphql')
+                ),
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
+        } elseif ($module === self::RESET_SETTINGS) {
             $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
