@@ -28,7 +28,7 @@ class Options
     /**
      * Option name under which to store the License Keys, defined by the user
      */
-    public final const LICENSE_KEYS = 'gato-graphql-license-keys';
+    public final const API_KEYS = 'gato-graphql-api-keys';
     /**
      * Option name for Plugin Management.
      *

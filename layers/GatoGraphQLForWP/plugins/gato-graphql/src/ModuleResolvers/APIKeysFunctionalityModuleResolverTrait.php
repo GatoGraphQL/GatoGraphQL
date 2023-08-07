@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Services\ModuleTypeResolvers\ModuleTypeResolver;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 
-trait LicenseKeysFunctionalityModuleResolverTrait
+trait APIKeysFunctionalityModuleResolverTrait
 {
     /**
      * The priority to display the modules from this resolver in the Modules page.
@@ -28,6 +28,6 @@ trait LicenseKeysFunctionalityModuleResolverTrait
 
     public function getSettingsCategory(string $module): string
     {
-        return SettingsCategoryResolver::LICENSE_KEYS;
+        return SettingsCategoryResolver::API_KEYS;
     }
 }

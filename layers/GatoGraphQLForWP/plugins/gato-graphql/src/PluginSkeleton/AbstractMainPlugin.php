@@ -236,7 +236,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             Options::ENDPOINT_CONFIGURATION,
             Options::SERVER_CONFIGURATION,
             Options::PLUGIN_CONFIGURATION,
-            Options::LICENSE_KEYS,
+            Options::API_KEYS,
             Options::PLUGIN_MANAGEMENT,
         ];
     }
