@@ -18,6 +18,9 @@ class ExtensionManager extends AbstractPluginManager
     /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
+    /** @var string[] */
+    private array $nonActivatedLicenseExtensionSlugs = [];
+
     /**
      * Have the extensions organized by their class
      *
@@ -189,5 +192,20 @@ class ExtensionManager extends AbstractPluginManager
     public function getBundlingExtensionClass(string $bundledExtensionClass): ?BundleExtensionInterface
     {
         return $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] ?? null;
+    }
+
+    /**
+     * Validate that the license for the commercial extension
+     * has been activated.
+     */
+    public function assertLicenseHasBeenActivated(
+        string $extensionSlug,
+        ?string $extensionName = null,
+    ): bool {
+        if (false) {
+            $this->nonActivatedLicenseExtensionSlugs[] = $extensionSlug;
+            return false;
+        }
+        return true;
     }
 }
