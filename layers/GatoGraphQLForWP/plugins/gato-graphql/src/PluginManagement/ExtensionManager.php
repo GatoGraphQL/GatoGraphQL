@@ -22,10 +22,10 @@ class ExtensionManager extends AbstractPluginManager
     /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
-    /** @var array<string,string> Extension File => Extension Name */
+    /** @var array<string,string> Extension Slug => Extension Name */
     private array $nonActivatedLicenseCommercialExtensionFiles = [];
 
-    /** @var array<string,string> Extension File => Extension Name */
+    /** @var array<string,string> Extension Slug => Extension Name */
     private array $activatedLicenseCommercialExtensionFiles = [];
 
     /**
@@ -45,7 +45,7 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * JSON payloads for all bundles/extensions that have been activated
      *
-     * @var array<string,stdClass>|null Extension File => Validated Extension JSON Payload
+     * @var array<string,stdClass>|null Extension Slug => Validated Extension JSON Payload
      */
     private ?array $activatedCommercialExtensionLicensePayloads = null;
 
@@ -216,7 +216,7 @@ class ExtensionManager extends AbstractPluginManager
      * to show a message to the admin.
      */
     public function assertCommercialLicenseHasBeenActivated(
-        string $extensionFile,
+        string $extensionSlug,
         string $extensionName,
     ): bool {
         /**
@@ -224,11 +224,11 @@ class ExtensionManager extends AbstractPluginManager
          * and check if this extension is in it
          */
         $activatedCommercialExtensionLicensePayloads = $this->getActivatedCommercialExtensionLicensePayloads();
-        if (!isset($activatedCommercialExtensionLicensePayloads[$extensionFile])) {
-            $this->nonActivatedLicenseCommercialExtensionFiles[$extensionFile] = $extensionName;
+        if (!isset($activatedCommercialExtensionLicensePayloads[$extensionSlug])) {
+            $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
             return false;
         }
-        $this->activatedLicenseCommercialExtensionFiles[$extensionFile] = $extensionName;
+        $this->activatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
         return true;
     }
 
@@ -236,7 +236,7 @@ class ExtensionManager extends AbstractPluginManager
      * Retrieve the JSON payloads for all bundles/extensions that
      * have been activated.
      *
-     * @return array<string,stdClass> Extension File => Validated Extension JSON Payload
+     * @return array<string,stdClass> Extension Slug => Validated Extension JSON Payload
      */
     protected function getActivatedCommercialExtensionLicensePayloads(): array
     {
@@ -247,7 +247,7 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension File => Extension Name
+     * @return array<string,string> Extension Slug => Extension Name
      */
     public function getNonActivatedLicenseCommercialExtensionFiles(): array
     {
@@ -255,7 +255,7 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension File => Extension Name
+     * @return array<string,string> Extension Slug => Extension Name
      */
     public function getActivatedLicenseCommercialExtensionFiles(): array
     {
