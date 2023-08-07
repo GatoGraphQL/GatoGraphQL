@@ -20,7 +20,7 @@ class ExtensionManager extends AbstractPluginManager
     /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
-    /** @var string[] */
+    /** @var array<string,string> Extension File => Extension Name */
     private array $nonActivatedLicenseExtensionFiles = [];
 
     /**
@@ -202,7 +202,7 @@ class ExtensionManager extends AbstractPluginManager
      */
     public function assertLicenseHasBeenActivated(
         string $extensionFile,
-        ?string $extensionName = null,
+        string $extensionName,
     ): bool {
         /**
          * Retrieve from the DB which licenses have been activated,
@@ -214,7 +214,7 @@ class ExtensionManager extends AbstractPluginManager
             PluginManagementFunctionalityModuleResolver::OPTION_ACTIVATED_EXTENSION_PAYLOADS
         );
         if (!isset($activatedExtensionPayloads[$extensionFile])) {
-            $this->nonActivatedLicenseExtensionFiles[] = $extensionFile;
+            $this->nonActivatedLicenseExtensionFiles[$extensionFile] = $extensionName;
             return false;
         }
         return true;
