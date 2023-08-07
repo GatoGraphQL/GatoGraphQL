@@ -49,5 +49,5 @@ class Options
      * Store the JSON payloads for all bundles/extensions that
      * have been activated
      */
-    public final const ACTIVATED_EXTENSION_PAYLOADS = 'gato-graphql-activated-extension-payloads';
+    public final const ACTIVATED_COMMERCIAL_EXTENSION_PAYLOADS = 'gato-graphql-activated-commercial-extension-payloads';
 }
