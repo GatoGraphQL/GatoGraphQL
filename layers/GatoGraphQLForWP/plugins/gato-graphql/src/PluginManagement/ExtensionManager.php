@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
@@ -202,7 +204,16 @@ class ExtensionManager extends AbstractPluginManager
         string $extensionSlug,
         ?string $extensionName = null,
     ): bool {
-        if (false) {
+        /**
+         * Retrieve from the DB which licenses have been activated,
+         * and check if this extension is in it
+         */
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $activatedExtensionPayloads = $userSettingsManager->getSetting(
+            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+            PluginManagementFunctionalityModuleResolver::OPTION_ACTIVATED_EXTENSION_PAYLOADS
+        );
+        if (!isset($activatedExtensionPayloads[$extensionSlug])) {
             $this->nonActivatedLicenseExtensionSlugs[] = $extensionSlug;
             return false;
         }
