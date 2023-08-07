@@ -6,11 +6,13 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
-use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
+use GatoGraphQL\GatoGraphQL\Settings\Options;
+use stdClass;
+
+use function get_option;
 
 class ExtensionManager extends AbstractPluginManager
 {
@@ -36,6 +38,13 @@ class ExtensionManager extends AbstractPluginManager
      * @var array<string,ExtensionInterface>
      */
     private array $extensionBaseNameInstances = [];
+
+    /**
+     * JSON payloads for all bundles/extensions that have been activated
+     *
+     * @var array<string,stdClass>|null
+     */
+    private ?array $activatedCommercialExtensionLicensePayloads = null;
 
     /**
      * Extensions, organized under their name.
@@ -199,6 +208,9 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * Validate that the license for the commercial extension
      * has been activated.
+     * 
+     * If it has not, also mark the Extension as "inactivated",
+     * to show a message to the admin.
      */
     public function assertLicenseHasBeenActivated(
         string $extensionFile,
@@ -208,15 +220,28 @@ class ExtensionManager extends AbstractPluginManager
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
          */
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        $activatedExtensionPayloads = $userSettingsManager->getSetting(
-            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
-            PluginManagementFunctionalityModuleResolver::OPTION_ACTIVATED_EXTENSION_PAYLOADS
-        );
-        if (!isset($activatedExtensionPayloads[$extensionFile])) {
+        $activatedCommercialExtensionLicensePayloads = $this->getActivatedCommercialExtensionLicensePayloads();
+        if (!isset($activatedCommercialExtensionLicensePayloads[$extensionFile])) {
             $this->nonActivatedLicenseExtensionFiles[$extensionFile] = $extensionName;
             return false;
         }
         return true;
+    }
+
+    /**
+     * Retrieve the JSON payloads for all bundles/extensions that
+     * have been activated.
+     *
+     * Using `get_option` directly because `$userSettingsManager->getSetting`
+     * is not yet available, as the System Boot has not taken place yet.
+     *
+     * @return array<string,stdClass>
+     */
+    protected function getActivatedCommercialExtensionLicensePayloads(): array
+    {
+        if ($this->activatedCommercialExtensionLicensePayloads === null) {
+            $this->activatedCommercialExtensionLicensePayloads = get_option(Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS, []);
+        }
+        return $this->activatedCommercialExtensionLicensePayloads;
     }
 }
