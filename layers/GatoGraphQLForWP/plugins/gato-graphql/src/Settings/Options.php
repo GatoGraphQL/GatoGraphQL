@@ -45,4 +45,9 @@ class Options
      * settings/modules write to the DB
      */
     public final const TIMESTAMPS = 'gato-graphql-timestamps';
+    /**
+     * Store the JSON payloads for all bundles/extensions that
+     * have been activated
+     */
+    public final const ACTIVATED_EXTENSION_PAYLOADS = 'gato-graphql-activated-extension-payloads';
 }
