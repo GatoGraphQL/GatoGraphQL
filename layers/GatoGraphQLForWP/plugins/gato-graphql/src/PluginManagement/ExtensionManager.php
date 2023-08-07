@@ -232,9 +232,6 @@ class ExtensionManager extends AbstractPluginManager
      * Retrieve the JSON payloads for all bundles/extensions that
      * have been activated.
      *
-     * Using `get_option` directly because `$userSettingsManager->getSetting`
-     * is not yet available, as the System Boot has not taken place yet.
-     *
      * @return array<string,stdClass>
      */
     protected function getActivatedCommercialExtensionLicensePayloads(): array
