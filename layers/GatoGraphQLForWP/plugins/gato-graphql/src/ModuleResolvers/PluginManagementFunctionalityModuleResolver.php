@@ -20,6 +20,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     use ModuleResolverTrait;
     use PluginManagementFunctionalityModuleResolverTrait;
 
+    public final const ACTIVATE_EXTENSIONS = Plugin::NAMESPACE . '\activate-extensions';
     public final const RESET_SETTINGS = Plugin::NAMESPACE . '\reset-settings';
 
     /**
@@ -77,6 +78,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getModulesToResolve(): array
     {
         return [
+            self::ACTIVATE_EXTENSIONS,
             self::RESET_SETTINGS,
         ];
     }
@@ -84,22 +86,29 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return match ($module) {
-            self::RESET_SETTINGS => true,
-            default => parent::isPredefinedEnabledOrDisabled($module),
+            self::ACTIVATE_EXTENSIONS,
+            self::RESET_SETTINGS
+                => true,
+            default
+                => parent::isPredefinedEnabledOrDisabled($module),
         };
     }
 
     public function isHidden(string $module): bool
     {
         return match ($module) {
-            self::RESET_SETTINGS => true,
-            default => parent::isHidden($module),
+            self::ACTIVATE_EXTENSIONS,
+            self::RESET_SETTINGS
+                => true,
+            default
+                => parent::isHidden($module),
         };
     }
 
     public function getName(string $module): string
     {
         return match ($module) {
+            self::ACTIVATE_EXTENSIONS => \__('Activate Bundles and Extensions', 'gato-graphql'),
             self::RESET_SETTINGS => \__('Reset Settings', 'gato-graphql'),
             default => $module,
         };
@@ -108,6 +117,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         return match ($module) {
+            self::ACTIVATE_EXTENSIONS => \__('Activate Bundles and Extensions from the Gato GraphQL Shop', 'gato-graphql'),
             self::RESET_SETTINGS => \__('Restore the Gato GraphQL Settings to default values', 'gato-graphql'),
             default => parent::getDescription($module),
         };
