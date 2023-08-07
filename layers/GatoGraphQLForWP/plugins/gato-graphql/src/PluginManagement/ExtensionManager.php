@@ -42,7 +42,7 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * JSON payloads for all bundles/extensions that have been activated
      *
-     * @var array<string,stdClass>|null
+     * @var array<string,stdClass>|null Extension File => Validated Extension JSON Payload
      */
     private ?array $activatedCommercialExtensionLicensePayloads = null;
 
@@ -232,7 +232,7 @@ class ExtensionManager extends AbstractPluginManager
      * Retrieve the JSON payloads for all bundles/extensions that
      * have been activated.
      *
-     * @return array<string,stdClass>
+     * @return array<string,stdClass> Extension File => Validated Extension JSON Payload
      */
     protected function getActivatedCommercialExtensionLicensePayloads(): array
     {
