@@ -21,8 +21,14 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     public function activateLicense(string $licenseKey): stdClass
     {
         $instanceName = $this->getInstanceName();
+        $endpoint = sprintf(
+            '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
+            $this->getAPIBaseURL(),
+            $licenseKey,
+            $instanceName
+        );
         $response = wp_remote_post(
-			"https://api.lemonsqueezy.com/v1/licenses/activate?license_key={$licenseKey}&instance_name={$instanceName}",
+			$endpoint,
 			array(
 				'headers' => array(
 					// 'Authorization' => 'Bearer ' . $api_key,
@@ -49,6 +55,11 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         }
 
 		return $body;
+    }
+
+    protected function getAPIBaseURL(): string
+    {
+        return 'https://api.lemonsqueezy.com';
     }
 
     /**
