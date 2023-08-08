@@ -158,6 +158,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $nonActivatedLicenseCommercialExtensionFiles,
                 $activatedLicenseCommercialExtensionFiles,
             );
+            ksort($keyLabels);
 
             if ($keyLabels !== []) {
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
