@@ -448,10 +448,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * might be deactivated + reactivated (with a different license key)
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
-            $marketplaceProviderCommercialExtensionActivationService->deactivate($licenseKey);
+            $activatedCommercialExtensionLicensePayloads[$extensionSlug] = $marketplaceProviderCommercialExtensionActivationService->deactivate($licenseKey);
         }
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
-            $marketplaceProviderCommercialExtensionActivationService->activate($licenseKey);
+            $activatedCommercialExtensionLicensePayloads[$extensionSlug] = $marketplaceProviderCommercialExtensionActivationService->activate($licenseKey);
         }
         
         // Store the payloads to the DB
