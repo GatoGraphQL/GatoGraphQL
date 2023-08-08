@@ -406,7 +406,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     /**
      * Activate the Gato GraphQL Extensions against the
-     * marketplace provider's API
+     * marketplace provider's API.
+     * 
+     * Every entry in $submittedLicenseKeys is compared against $previousLicenseKeys and,
+     * depending on the value, the license is activated, deactivated, or both:
+     *
+     * - If the license key is empty in both, then nothing to do
+     * - If the license key has not been updated, then nothing to do
+     * - If the license key is new (i.e. it was empty before), then activate it
+     * - If the license key is removed (i.e. it is empty now, non-empty before), then deactivate it
+     * - If the license key has been updated, then deactivate the previous one, and activate the new one
      * 
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
