@@ -469,6 +469,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // License key updated => Do nothing (Deactivate + Activate: already queued above)            
         }
 
+        // Store the payloads from the marketplace provider API
+        $marketplaceProviderAPIResultPayloads = [];
+
         /**
          * First deactivate and then activate licenses, because an extension
          * might be deactivated + reactivated (with a different license key)
@@ -478,7 +481,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
 
-        }        
+        }
+        
+        // Store the payloads to the DB
+        update_option(
+            Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS,
+            $marketplaceProviderAPIResultPayloads
+        );
+            
     }
 
     /**
