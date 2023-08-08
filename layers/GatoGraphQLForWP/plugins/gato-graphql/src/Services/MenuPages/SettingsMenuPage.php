@@ -408,8 +408,50 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * Activate the Gato GraphQL Extensions against the
      * marketplace provider's API.
      * 
+     * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
+     * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
+     */
+    protected function activateOrDeactivateGatoGraphQLCommercialExtensions(
+        array $previousLicenseKeys,
+        array $submittedLicenseKeys,
+    ): void {
+        [
+            $activateLicenseKeys,
+            $deactivateLicenseKeys,
+        ] = $this->getActivateAndDeactivateLicenseKeys(
+            $previousLicenseKeys,
+            $submittedLicenseKeys,
+        );
+
+        // Store the payloads from the marketplace provider API
+        $activatedCommercialExtensionLicensePayloads = [];
+
+        /**
+         * First deactivate and then activate licenses, because an extension
+         * might be deactivated + reactivated (with a different license key)
+         */
+        foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
+
+        }
+        foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
+
+        }
+        
+        // Store the payloads to the DB
+        update_option(
+            Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS,
+            $activatedCommercialExtensionLicensePayloads
+        );
+            
+    }
+
+    /**
+     * Calculate which extensions must be activated, which must be deactivated,
+     * and which must be both.
+     * 
      * Every entry in $submittedLicenseKeys is compared against $previousLicenseKeys and,
-     * depending on the value, the license is activated, deactivated, or both:
+     * depending on both values, either there is nothing to do, or the license is
+     * activated/deactivated/both:
      *
      * - If the license key is empty in both, then nothing to do
      * - If the license key has not been updated, then nothing to do
@@ -419,11 +461,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * 
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
+     * @return array{0:array<string,string>,1:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
      */
-    protected function activateOrDeactivateGatoGraphQLCommercialExtensions(
+    protected function getActivateAndDeactivateLicenseKeys(
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
-    ): void {
+    ): array {
         $deactivateLicenseKeys = [];
         $activateLicenseKeys = [];
 
@@ -469,26 +512,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // License key updated => Do nothing (Deactivate + Activate: already queued above)            
         }
 
-        // Store the payloads from the marketplace provider API
-        $activatedCommercialExtensionLicensePayloads = [];
-
-        /**
-         * First deactivate and then activate licenses, because an extension
-         * might be deactivated + reactivated (with a different license key)
-         */
-        foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
-
-        }
-        foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
-
-        }
-        
-        // Store the payloads to the DB
-        update_option(
-            Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS,
-            $activatedCommercialExtensionLicensePayloads
-        );
-            
+        return [
+            $activateLicenseKeys,
+            $deactivateLicenseKeys,
+        ];
     }
 
     /**
