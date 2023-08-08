@@ -157,8 +157,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $this->restoreDBOptionValuesForNonSubmittedFormSections(
                         $settingsCategory,
                         [
-                            PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-                            PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR,
+                            [
+                                PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
+                                PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR,
+                            ],
                         ],
                         $oldValue,
                         $values,
@@ -173,8 +175,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $this->restoreDBOptionValuesForNonSubmittedFormSections(
                         $settingsCategory,
                         [
-                            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
-                            PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                            [
+                                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                                PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                            ],
                         ],
                         $oldValue,
                         $values,
