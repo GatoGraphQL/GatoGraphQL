@@ -136,4 +136,48 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             $instanceID
         );
     }
+
+    /**
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
+     *
+     * @param array<string,mixed> Payload stored in the DB from when calling the activation endpoint
+     * @return array<string,mixed> Response payload from calling the endpoint
+     */
+    public function validateLicense(
+        string $licenseKey,
+        ?array $activatedCommercialExtensionLicensePayload
+    ): array {
+        if ($activatedCommercialExtensionLicensePayload !== null) {
+            /**
+             * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+             */
+            $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? null;
+        } else {
+            $instanceID = null;
+        }
+        $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
+        $response = wp_remote_post(
+            $endpoint,
+            [
+                'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
+            ]
+        );
+
+        return $this->processResponse($response);
+    }
+
+    /**
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
+     */
+    protected function getValidateLicenseEndpoint(
+        string $licenseKey,
+        ?string $instanceID
+    ): string {
+        return sprintf(
+            '%s/v1/licenses/validate?license_key=%s&instance_id=%s',
+            $this->getLemonSqueezyAPIBaseURL(),
+            $licenseKey,
+            $instanceID ?? ''
+        );
+    }
 }
