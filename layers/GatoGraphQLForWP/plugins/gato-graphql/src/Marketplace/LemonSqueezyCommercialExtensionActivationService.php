@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use PoP\ComponentModel\Misc\GeneralUtils;
-use stdClass;
 use WP_Error;
 
 use function home_url;
@@ -37,6 +36,14 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             ]
         );
 
+        return $this->processResponse($response);
+    }
+
+    /**
+     * @param array<string,mixed>|WP_Error $response
+     */
+    protected function processResponse(array|WP_Error $response): array
+    {
         if ($response instanceof WP_Error) {
             $errorMessage = $response->get_error_message();
             // @todo Process error message
@@ -46,7 +53,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $body = json_decode($response['body'], true);
 
         if (wp_remote_retrieve_response_code($response) !== 200) {
-            $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message($response);
+            $errorMessage = $body['error'] ?? wp_remote_retrieve_response_message($response);
             // @todo Process error message
             return [];
         }
@@ -97,6 +104,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             $licenseKey,
             $instanceID
         );
+
         $response = wp_remote_post(
             $endpoint,
             [
@@ -104,20 +112,6 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             ]
         );
 
-        if ($response instanceof WP_Error) {
-            $errorMessage = $response->get_error_message();
-            // @todo Process error message
-            return [];
-        }
-
-        $body = json_decode($response['body'], true);
-
-        if (wp_remote_retrieve_response_code($response) !== 200) {
-            $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message($response);
-            // @todo Process error message
-            return [];
-        }
-
-        return $body;
+        return $this->processResponse($response);
     }
 }
