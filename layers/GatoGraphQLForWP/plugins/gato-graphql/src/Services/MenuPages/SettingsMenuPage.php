@@ -469,8 +469,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // License key updated => Do nothing (Deactivate + Activate: already queued above)            
         }
 
-        // First deactivate licenses (as an extension might be deactivated + reactivated with a different license key)
-        
+        /**
+         * First deactivate and then activate licenses, because an extension
+         * might be deactivated + reactivated (with a different license key)
+         */
+        foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
+
+        }
+        foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
+
+        }        
     }
 
     /**
