@@ -202,7 +202,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
                     // Retrieve the previously-stored license keys, and the newly-submitted license keys
                     $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
-                    $this->activateOrDeactivateGatoGraphQLCommercialExtensions(
+                    $this->activateDeactivateValidateGatoGraphQLCommercialExtensions(
                         $oldValue[$settingOptionName] ?? [],
                         $values[$settingOptionName] ?? []
                     );
@@ -427,14 +427,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      */
-    protected function activateOrDeactivateGatoGraphQLCommercialExtensions(
+    protected function activateDeactivateValidateGatoGraphQLCommercialExtensions(
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
     ): void {
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
-        ] = $this->calculateLicenseKeysToActivateAndDeactivate(
+        ] = $this->calculateLicenseKeysToActivateDeactivateValidate(
             $previousLicenseKeys,
             $submittedLicenseKeys,
         );
@@ -498,7 +498,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      * @return array{0:array<string,string>,1:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
      */
-    protected function calculateLicenseKeysToActivateAndDeactivate(
+    protected function calculateLicenseKeysToActivateDeactivateValidate(
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
     ): array {
