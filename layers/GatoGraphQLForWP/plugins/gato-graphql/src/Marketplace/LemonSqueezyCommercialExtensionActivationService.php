@@ -39,7 +39,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
         if ($response instanceof WP_Error) {
             $errorMessage = $response->get_error_message();
-            // ...
+            // @todo Process error message
             return [];
         }
 
@@ -47,7 +47,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
         if (wp_remote_retrieve_response_code($response) !== 200) {
             $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message($response);
-            // ...
+            // @todo Process error message
             return [];
         }
 
@@ -106,7 +106,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
         if ($response instanceof WP_Error) {
             $errorMessage = $response->get_error_message();
-            // ...
+            // @todo Process error message
             return [];
         }
 
@@ -114,7 +114,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
         if (wp_remote_retrieve_response_code($response) !== 200) {
             $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message($response);
-            // ...
+            // @todo Process error message
             return [];
         }
 
