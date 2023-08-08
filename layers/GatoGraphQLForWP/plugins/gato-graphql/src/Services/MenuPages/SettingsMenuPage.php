@@ -156,8 +156,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
                     $this->restoreDBOptionValuesForNonSubmittedFormSections(
                         $settingsCategory,
-                        PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
-                        PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR,
+                        [
+                            PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
+                            PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR,
+                        ],
                         $oldValue,
                         $values,
                     );
@@ -170,8 +172,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
                     $this->restoreDBOptionValuesForNonSubmittedFormSections(
                         $settingsCategory,
-                        PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
-                        PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                        [
+                            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                            PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                        ],
                         $oldValue,
                         $values,
                     );
@@ -331,26 +335,32 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * - Remove the clicked button from the form, as to avoid infinite looping here
      * - Override the new values, just for the submitted section
      * 
+     * @param array{0:string,1:string} $moduleOptionItems [0]: module, [1]: option
      * @param array<string,mixed> $oldValue
      * @param array<string,mixed> $values
      */
     protected function restoreDBOptionValuesForNonSubmittedFormSections(
         string $settingsCategory,
-        string $module,
-        string $option,
+        array $moduleOptionItems,
         array $oldValue,
         array $values,
     ): void {
         $dbOptionName = $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
-        $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
-        $settingOptionName = $moduleResolver->getSettingOptionName($module, $option);
+
+        // Always transfer the "last_saved_timestamp" field
+        $storeSubmittedSettingOptionNames = [
+            self::FORM_FIELD_LAST_SAVED_TIMESTAMP,
+        ];
+        foreach ($moduleOptionItems as $moduleOptionItem) {
+            $module = $moduleOptionItem[0];
+            $option = $moduleOptionItem[1];
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+            $settingOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $storeSubmittedSettingOptionNames[] = $settingOptionName;
+        }
 
         $restoredValues = $oldValue;
-        $transferSettingOptionNames = [
-            self::FORM_FIELD_LAST_SAVED_TIMESTAMP,
-            $settingOptionName,
-        ];
-        foreach ($transferSettingOptionNames as $transferSettingOptionName) {
+        foreach ($storeSubmittedSettingOptionNames as $transferSettingOptionName) {
             $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
         }
 
