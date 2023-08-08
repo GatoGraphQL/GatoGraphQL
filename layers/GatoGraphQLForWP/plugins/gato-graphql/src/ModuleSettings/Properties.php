@@ -12,6 +12,8 @@ class Properties
     public final const DESCRIPTION = 'description';
     public final const POSSIBLE_VALUES = 'possibleValues';
     public final const CAN_BE_EMPTY = 'canBeEmpty';
+    // Used for Property Array
+    public final const KEY_LABELS = 'keyLabels';
     // Used for Select inputs
     public final const IS_MULTIPLE = 'isMultiple';
     // Used for Integers
@@ -22,6 +24,7 @@ class Properties
     public final const TYPE_BOOL = 'bool';
     public final const TYPE_INT = 'int';
     public final const TYPE_ARRAY = 'array';
+    public final const TYPE_PROPERTY_ARRAY = 'propertyArray';
     public final const TYPE_NULL = 'null';
     public final const TYPE_HIDDEN = 'hidden';
     public final const CSS_STYLE = 'css-style';

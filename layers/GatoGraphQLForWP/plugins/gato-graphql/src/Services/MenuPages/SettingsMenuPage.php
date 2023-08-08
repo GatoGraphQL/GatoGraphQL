@@ -31,6 +31,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     public final const FORM_ORIGIN = 'form-origin';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
+    public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
 
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
@@ -211,6 +212,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                 $this->printCheckboxField($optionsFormName, $module, $itemSetting);
                                             } elseif ($type === Properties::TYPE_NULL) {
                                                 $this->printLabelField($optionsFormName, $module, $itemSetting);
+                                            } elseif ($type === Properties::TYPE_PROPERTY_ARRAY) {
+                                                $this->printMultiInputField($optionsFormName, $module, $itemSetting);
                                             } else {
                                                 $this->printInputField($optionsFormName, $module, $itemSetting);
                                             }
@@ -683,6 +686,44 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
+     * Display a "Property Array" field as a collection of inputs
+     *
+     * @param array<string,mixed> $itemSetting
+     */
+    protected function printMultiInputField(string $optionsFormName, string $module, array $itemSetting): void
+    {
+        $name = $itemSetting[Properties::NAME];
+        $input = $itemSetting[Properties::INPUT];
+        $value = $this->getOptionValue($module, $input);
+        // If it is multiple, $value is an array.
+        // To simplify, deal always with arrays
+        if (!is_array($value)) {
+            $value = $value === null ? [] : [$value];
+        }
+        $addSpacing = false;
+        if (isset($itemSetting[Properties::DESCRIPTION])) {
+            $addSpacing = true;
+            $description = $itemSetting[Properties::DESCRIPTION];
+            echo $description;
+        }
+        $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
+        foreach ($keyLabels as $key => $label) {
+            $id = $name . '_' . $key;
+            if ($addSpacing) {
+                echo '<br/><br/>';
+            }
+            ?>
+            <label for="<?php echo $id ?>">
+                <?php printf(__('%s:', 'gato-graphql'), $label); ?>
+                <br/>
+                <input name="<?php echo $optionsFormName . '[' . $name . '][' . $key . ']'; ?>" id="<?php echo $id ?>" value="<?php echo $value[$key] ?? '' ?>" type="text">
+            </label>
+            <?php
+            $addSpacing = true;
+        }
+    }
+
+    /**
      * Display a select field.
      *
      * @param array<string,mixed> $itemSetting
@@ -695,7 +736,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         // If it is multiple, $value is an array.
         // To simplify, deal always with arrays
         if (!is_array($value)) {
-            $value = is_null($value) ? [] : [$value];
+            $value = $value === null ? [] : [$value];
         }
         $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
