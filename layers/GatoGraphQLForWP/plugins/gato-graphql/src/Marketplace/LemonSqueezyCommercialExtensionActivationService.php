@@ -8,13 +8,13 @@ use stdClass;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
-    public function activate(string $licenseKey): stdClass
+    public function activateLicense(string $licenseKey): stdClass
     {
         $payload = [];
         return (object) $payload;
     }
 
-    public function deactivate(string $licenseKey): stdClass
+    public function deactivateLicense(string $licenseKey): stdClass
     {
         $payload = [];
         return (object) $payload;

@@ -8,6 +8,6 @@ use stdClass;
 
 interface MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
-    public function activate(string $licenseKey): stdClass;
-    public function deactivate(string $licenseKey): stdClass;
+    public function activateLicense(string $licenseKey): stdClass;
+    public function deactivateLicense(string $licenseKey): stdClass;
 }
