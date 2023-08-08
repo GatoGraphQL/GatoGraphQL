@@ -348,6 +348,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($transferSettingOptionNames as $transferSettingOptionName) {
             $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
         }
+        
         update_option($dbOptionName, $restoredValues);
     }
 
