@@ -23,7 +23,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $instanceName = $this->getInstanceName();
         $endpoint = sprintf(
             '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
-            $this->getAPIBaseURL(),
+            $this->getLemonSqueezyAPIBaseURL(),
             $licenseKey,
             $instanceName
         );
@@ -57,7 +57,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 		return $body;
     }
 
-    protected function getAPIBaseURL(): string
+    protected function getLemonSqueezyAPIBaseURL(): string
     {
         return 'https://api.lemonsqueezy.com';
     }
