@@ -441,8 +441,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         update_option(
             Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS,
             $activatedCommercialExtensionLicensePayloads
-        );
-            
+        );            
     }
 
     /**
