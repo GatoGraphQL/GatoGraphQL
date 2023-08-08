@@ -10,7 +10,6 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
-use stdClass;
 
 use function get_option;
 
@@ -45,7 +44,7 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * JSON payloads for all bundles/extensions that have been activated
      *
-     * @var array<string,stdClass>|null Extension Slug => Validated Extension JSON Payload
+     * @var array<string,array<string,mixed>>|null Extension Slug => Activated API Response Payload
      */
     private ?array $activatedCommercialExtensionLicensePayloads = null;
 
@@ -236,7 +235,7 @@ class ExtensionManager extends AbstractPluginManager
      * Retrieve the JSON payloads for all bundles/extensions that
      * have been activated.
      *
-     * @return array<string,stdClass> Extension Slug => Validated Extension JSON Payload
+     * @return array<string,array<string,mixed>> Extension Slug => Activated API Response Payload
      */
     protected function getActivatedCommercialExtensionLicensePayloads(): array
     {
