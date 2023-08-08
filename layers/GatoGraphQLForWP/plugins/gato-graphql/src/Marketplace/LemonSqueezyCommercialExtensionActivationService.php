@@ -21,8 +21,9 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      */
     public function activateLicense(string $licenseKey): array
     {
+        $endpoint = $this->getActivateLicenseEndpoint($licenseKey);
         $response = wp_remote_post(
-            $this->getActivateLicenseEndpoint($licenseKey),
+            $endpoint,
             [
                 'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
             ]
@@ -110,8 +111,9 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             return [];
         }
         
+        $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
-            $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID),
+            $endpoint,
             [
                 'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
             ]
