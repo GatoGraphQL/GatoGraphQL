@@ -445,6 +445,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
 
+        foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
+            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug] ?? null;
+            $payload = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
+                $licenseKey,
+                $activatedCommercialExtensionLicensePayload,
+            );
+            // @todo Show messages to the admin
+            // ...
+        }
+
         /**
          * First deactivate and then activate licenses, because an extension
          * might be deactivated + reactivated (with a different license key)
@@ -466,6 +476,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // @todo Show messages to the admin
             // ...
         }
+
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             // Store activations in the DB, and show messages to the admin
             $payload = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey);
