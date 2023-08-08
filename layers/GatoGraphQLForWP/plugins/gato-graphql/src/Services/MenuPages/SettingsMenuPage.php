@@ -434,6 +434,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
+            $validateLicenseKeys,
         ] = $this->calculateLicenseKeysToActivateDeactivateValidate(
             $previousLicenseKeys,
             $submittedLicenseKeys,
@@ -489,14 +490,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * activated/deactivated/both:
      *
      * - If the license key is empty in both, then nothing to do
-     * - If the license key has not been updated, then nothing to do
+     * - If the license key has not been updated, then validate it
      * - If the license key is new (i.e. it was empty before), then activate it
      * - If the license key is removed (i.e. it is empty now, non-empty before), then deactivate it
      * - If the license key has been updated, then deactivate the previous one, and activate the new one
      * 
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
-     * @return array{0:array<string,string>,1:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
+     * @return array{0:array<string,string>,1:array<string,string>,2:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys, [2]: $validateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
      */
     protected function calculateLicenseKeysToActivateDeactivateValidate(
         array $previousLicenseKeys,
@@ -504,6 +505,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     ): array {
         $deactivateLicenseKeys = [];
         $activateLicenseKeys = [];
+        $validateLicenseKeys = [];
 
         // Iterate all submitted entries to activate extensions
         foreach ($submittedLicenseKeys as $extensionSlug => $submittedLicenseKey) {
@@ -514,7 +516,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
             $previousLicenseKey = trim($previousLicenseKeys[$extensionSlug] ?? '');
             if ($previousLicenseKey === $submittedLicenseKey) {
-                // License key not updated => Nothing to do
+                // License key not updated => Validate
+                $validateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
                 continue;
             }
             if ($previousLicenseKey === '') {
@@ -536,7 +539,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
             if ($previousLicenseKey === $submittedLicenseKey) {
-                // License key not updated => Nothing to do
+                // License key not updated => Do nothing (Validate: already queued above)            
                 continue;
             }
             if ($submittedLicenseKey === '') {
@@ -550,6 +553,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
+            $validateLicenseKeys,
         ];
     }
 
