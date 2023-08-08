@@ -21,22 +21,28 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      */
     public function activateLicense(string $licenseKey): array
     {
-        $instanceName = $this->getInstanceName();
-        $endpoint = sprintf(
-            '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
-            $this->getLemonSqueezyAPIBaseURL(),
-            $licenseKey,
-            $instanceName
-        );
-
         $response = wp_remote_post(
-            $endpoint,
+            $this->getActivateLicenseEndpoint($licenseKey),
             [
                 'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
             ]
         );
 
         return $this->processResponse($response);
+    }
+
+    /**
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+     */
+    protected function getActivateLicenseEndpoint(string $licenseKey): string
+    {
+        $instanceName = $this->getInstanceName();
+        return sprintf(
+            '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
+            $this->getLemonSqueezyAPIBaseURL(),
+            $licenseKey,
+            $instanceName
+        );
     }
 
     protected function getLemonSqueezyAPIBaseURL(): string
