@@ -317,11 +317,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     /**
      * "Plugin Management Settings": Restore the stored values for the
-     * contiguous (unclicked) sections.
+     * contiguous sections in the form (i.e. the other ones to the 
+     * submitted section where the button was clicked).
+     * 
+     * To restore the values:
      *
-     * - Use the old values
-     * - Remove the button from the form, as to avoid infinite looping here
-     * - Override the new values, just for the section with the clicked-on button
+     * - Use the old values from the hook
+     * - Remove the clicked button from the form, as to avoid infinite looping here
+     * - Override the new values, just for the submitted section
      * 
      * @param array<string,mixed> $oldValue
      * @param array<string,mixed> $values
