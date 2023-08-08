@@ -408,12 +408,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * Activate the Gato GraphQL Extensions against the
      * marketplace provider's API
      * 
-     * @param array<string,string> $previouslyStoredLicenseKeys Key: Extension Slug, Value: License Key
-     * @param array<string,string> $newlySubmittedLicenseKeys Key: Extension Slug, Value: License Key
+     * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
+     * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      */
     protected function activateGatoGraphQLExtensions(
-        array $previouslyStoredLicenseKeys,
-        array $newlySubmittedLicenseKeys,
+        array $previousLicenseKeys,
+        array $submittedLicenseKeys,
     ): void {
     }
 
