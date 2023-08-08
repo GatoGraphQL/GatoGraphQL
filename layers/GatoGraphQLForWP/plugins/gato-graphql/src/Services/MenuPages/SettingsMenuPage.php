@@ -183,8 +183,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         $oldValue,
                         $values,
                     );
-                    
-                    // @todo Complete!
+
+                    // Retrieve the previously-stored license keys, and the newly-submitted license keys
+                    $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
+                    $this->activateGatoGraphQLExtensions(
+                        $oldValue[$settingOptionName] ?? [],
+                        $values[$settingOptionName] ?? []
+                    );
                     return;
                 }
             },
@@ -397,6 +402,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $regenerateContainer = true;
         }
         $this->flushContainer(true, $regenerateContainer);
+    }
+
+    /**
+     * Activate the Gato GraphQL Extensions against the
+     * marketplace provider's API
+     * 
+     * @param array<string,string> $previouslyStoredLicenseKeys Key: Extension Slug, Value: License Key
+     * @param array<string,string> $newlySubmittedLicenseKeys Key: Extension Slug, Value: License Key
+     */
+    protected function activateGatoGraphQLExtensions(
+        array $previouslyStoredLicenseKeys,
+        array $newlySubmittedLicenseKeys,
+    ): void {
     }
 
     /**
