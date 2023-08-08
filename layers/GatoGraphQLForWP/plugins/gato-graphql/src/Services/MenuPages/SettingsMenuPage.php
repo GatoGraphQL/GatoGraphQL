@@ -418,7 +418,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
-        ] = $this->getActivateAndDeactivateLicenseKeys(
+        ] = $this->calculateLicenseKeysToActivateAndDeactivate(
             $previousLicenseKeys,
             $submittedLicenseKeys,
         );
@@ -463,7 +463,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      * @return array{0:array<string,string>,1:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
      */
-    protected function getActivateAndDeactivateLicenseKeys(
+    protected function calculateLicenseKeysToActivateAndDeactivate(
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
     ): array {
