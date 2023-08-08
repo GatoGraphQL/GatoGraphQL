@@ -22,6 +22,8 @@ use PoP\ComponentModel\Constants\FrameworkParams;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
+use function update_option;
+
 /**
  * Settings menu page
  */
@@ -137,7 +139,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * @param array<string,mixed> $values
              * @return array<string,mixed>
              */
-            function (mixed $oldValue, array $values) use ($settingsCategoryRegistry, $settingsCategory): void
+            function (mixed $oldValue, array $values) use ($settingsCategory): void
             {
                 // Make sure the user clicked on the corresponding button
                 if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])
@@ -150,31 +152,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $oldValue = [];
                 }
 
-                $dbOptionName = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
-
                 // If pressed on the "Reset Settings" button...
                 if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
-                    /**
-                     * Restore the stored values for the other sections:
-                     *
-                     * - Use the old values
-                     * - Remove the button from the form, as to avoid infinite looping here
-                     * - Override the new values, just for the section with the clicked-on button
-                     */
-                    $module = PluginManagementFunctionalityModuleResolver::RESET_SETTINGS;
-                    $option = PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR;
-                    $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
-                    $settingOptionName = $moduleResolver->getSettingOptionName($module, $option);
-
-                    $restoredValues = $oldValue;
-                    $transferSettingOptionNames = [
-                        self::FORM_FIELD_LAST_SAVED_TIMESTAMP,
-                        $settingOptionName,
-                    ];
-                    foreach ($transferSettingOptionNames as $transferSettingOptionName) {
-                        $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
-                    }
-                    update_option($dbOptionName, $restoredValues);
+                    $this->restoreDBOptionValuesForNonSubmittedFormSections(
+                        $settingsCategory,
+                        PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
+                        PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR,
+                        $oldValue,
+                        $values,
+                    );
                     
                     $this->resetSettings();
                     return;
@@ -327,6 +313,39 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 }
             }
         );
+    }
+
+    /**
+     * "Plugin Management Settings": Restore the stored values for the
+     * contiguous (unclicked) sections.
+     *
+     * - Use the old values
+     * - Remove the button from the form, as to avoid infinite looping here
+     * - Override the new values, just for the section with the clicked-on button
+     * 
+     * @param array<string,mixed> $oldValue
+     * @param array<string,mixed> $values
+     */
+    protected function restoreDBOptionValuesForNonSubmittedFormSections(
+        string $settingsCategory,
+        string $module,
+        string $option,
+        array $oldValue,
+        array $values,
+    ): void {
+        $dbOptionName = $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
+        $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+        $settingOptionName = $moduleResolver->getSettingOptionName($module, $option);
+
+        $restoredValues = $oldValue;
+        $transferSettingOptionNames = [
+            self::FORM_FIELD_LAST_SAVED_TIMESTAMP,
+            $settingOptionName,
+        ];
+        foreach ($transferSettingOptionNames as $transferSettingOptionName) {
+            $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
+        }
+        update_option($dbOptionName, $restoredValues);
     }
 
     /**
