@@ -39,28 +39,6 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         return $this->processResponse($response);
     }
 
-    /**
-     * @param array<string,mixed>|WP_Error $response
-     */
-    protected function processResponse(array|WP_Error $response): array
-    {
-        if ($response instanceof WP_Error) {
-            $errorMessage = $response->get_error_message();
-            // @todo Process error message
-            return [];
-        }
-
-        $body = json_decode($response['body'], true);
-
-        if (wp_remote_retrieve_response_code($response) !== 200) {
-            $errorMessage = $body['error'] ?? wp_remote_retrieve_response_message($response);
-            // @todo Process error message
-            return [];
-        }
-
-        return $body;
-    }
-
     protected function getLemonSqueezyAPIBaseURL(): string
     {
         return 'https://api.lemonsqueezy.com';
@@ -82,6 +60,28 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     protected function getInstanceName(): string
     {
         return GeneralUtils::getHost(home_url());
+    }
+
+    /**
+     * @param array<string,mixed>|WP_Error $response
+     */
+    protected function processResponse(array|WP_Error $response): array
+    {
+        if ($response instanceof WP_Error) {
+            $errorMessage = $response->get_error_message();
+            // @todo Process error message
+            return [];
+        }
+
+        $body = json_decode($response['body'], true);
+
+        if (wp_remote_retrieve_response_code($response) !== 200) {
+            $errorMessage = $body['error'] ?? wp_remote_retrieve_response_message($response);
+            // @todo Process error message
+            return [];
+        }
+
+        return $body;
     }
 
     /**
