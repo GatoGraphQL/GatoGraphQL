@@ -8,8 +8,10 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
@@ -38,6 +40,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
     private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -86,6 +89,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         return $this->settingsCategoryRegistry;
     }
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    final protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -101,7 +117,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
 
-        $option = $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT);
+        $settingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
+        $option = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory);
         \add_action(
             "update_option_{$option}",
             /**
@@ -120,7 +137,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * @param array<string,mixed> $values
              * @return array<string,mixed>
              */
-            function (mixed $oldValue, array $values): void {
+            function (mixed $oldValue, array $values) use ($settingsCategoryRegistry, $settingsCategory): void
+            {
+                // Make sure the user clicked on the corresponding button
+                if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])
+                    && !isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])
+                ) {
+                    return;
+                }
+
+                if (!is_array($oldValue)) {
+                    $oldValue = [];
+                }
+
+                $dbOptionName = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
+
                 // If pressed on the "Reset Settings" button...
                 if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
                     /**
@@ -130,14 +161,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                      * - Remove the button from the form, as to avoid infinite looping here
                      * - Override the new values, just for the section with the clicked-on button
                      */
-                    // if (!is_array($oldValue)) {
-                    //     $oldValue = [];
-                    // }
+                    $module = PluginManagementFunctionalityModuleResolver::RESET_SETTINGS;
+                    $option = PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR;
+                    $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+                    $settingOptionName = $moduleResolver->getSettingOptionName($module, $option);
+
                     $restoredValues = $oldValue;
-                    $restoredValues[$key] = $values[$key];
-                    $restoredValues[self::FORM_FIELD_LAST_SAVED_TIMESTAMP] = $values[self::FORM_FIELD_LAST_SAVED_TIMESTAMP];
+                    $transferSettingOptionNames = [
+                        self::FORM_FIELD_LAST_SAVED_TIMESTAMP,
+                        $settingOptionName,
+                    ];
+                    foreach ($transferSettingOptionNames as $transferSettingOptionName) {
+                        $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
+                    }
+                    update_option($dbOptionName, $restoredValues);
                     
-                    // @todo Complete!
                     $this->resetSettings();
                     return;
                 }
