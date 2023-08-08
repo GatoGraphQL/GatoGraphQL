@@ -23,6 +23,7 @@ use PoP\ComponentModel\Constants\FrameworkParams;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
+use function get_option;
 use function update_option;
 
 /**
@@ -438,8 +439,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $submittedLicenseKeys,
         );
 
-        // Store the payloads from the marketplace provider API
-        $activatedCommercialExtensionLicensePayloads = [];
+        // For deactivation: Retrieve the existing payloads from the DB
+        $activatedCommercialExtensionLicensePayloads = get_option(Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS, []); 
 
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
 
@@ -448,8 +449,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * might be deactivated + reactivated (with a different license key)
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
+            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug] ?? null;
+            if ($activatedCommercialExtensionLicensePayload === null) {
+                // @todo Show error message to the admin
+                continue;
+            }
             // No need to store deactivations in the DB, but do show messages to the admin
-            $payload = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense($licenseKey);
+            $payload = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
+                $licenseKey,
+                $activatedCommercialExtensionLicensePayload,
+            );
+            if (true) {
+                unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+            }
             // @todo Show messages to the admin
             // ...
         }

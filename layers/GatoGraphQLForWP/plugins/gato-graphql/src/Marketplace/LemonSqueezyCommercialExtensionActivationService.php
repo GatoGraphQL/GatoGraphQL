@@ -29,6 +29,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             $licenseKey,
             $instanceName
         );
+
         $response = wp_remote_post(
             $endpoint,
             [
@@ -39,7 +40,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         if ($response instanceof WP_Error) {
             $errorMessage = $response->get_error_message();
             // ...
-            return (object) [];
+            return [];
         }
 
         $body = json_decode($response['body'], true);
@@ -47,7 +48,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         if (wp_remote_retrieve_response_code($response) !== 200) {
             $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message($response);
             // ...
-            return (object) [];
+            return [];
         }
 
         return $body;
@@ -78,26 +79,18 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
     /**
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
-     * 
+     *
+     * @param array<string,mixed> Payload stored in the DB from when calling the activation endpoint
      * @return array<string,mixed> Response payload from calling the endpoint
      */
-    public function deactivateLicense(string $licenseKey): array
-    {
-        $instanceID = $request->get_param( 'instance_id' );
-        $is_valid      = false;
-        $errorMessage = null;
-        $api_key       = get_option( 'lsq_api_key' );
-
-        if ( empty( $api_key ) ) {
-            return new \WP_REST_Response(
-                array(
-                    'success' => false,
-                    'error'   => __( 'Unauthorized request', 'lemon-squeezy' ),
-                ),
-                401
-            );
-        }
-
+    public function deactivateLicense(
+        string $licenseKey,
+        array $activatedCommercialExtensionLicensePayload
+    ): array {
+        /**
+         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+         */
+        $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? '';
         $endpoint = sprintf(
             '%s/v1/licenses/deactivate?license_key=%s&instance_id=%s',
             $this->getLemonSqueezyAPIBaseURL(),
@@ -111,26 +104,20 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             ]
         );
 
-        if ( ! is_wp_error( $response ) ) {
-            $body = json_decode( $response['body'], true);
-            if ( 200 === wp_remote_retrieve_response_code( $response ) ) {
-                $is_valid = $body['deactivated'];
-            } else {
-                $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message( $response );
-            }
-        } else {
+        if ($response instanceof WP_Error) {
             $errorMessage = $response->get_error_message();
+            // ...
+            return [];
         }
 
-        return new \WP_REST_Response(
-            array(
-                'success' => $is_valid,
-                'error'   => $errorMessage,
-            ),
-            $is_valid ? 200 : 400
-        );
+        $body = json_decode($response['body'], true);
 
-        $payload = [];
-        return (object) $payload;
+        if (wp_remote_retrieve_response_code($response) !== 200) {
+            $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message($response);
+            // ...
+            return [];
+        }
+
+        return $body;
     }
 }
