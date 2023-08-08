@@ -30,6 +30,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     use UseCollapsibleContentMenuPageTrait;
 
     public final const FORM_ORIGIN = 'form-origin';
+    public final const FORM_FIELD_LAST_SAVED_TIMESTAMP = 'last_saved_timestamp';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
 
@@ -104,6 +105,17 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         \add_action(
             "update_option_{$option}",
             /**
+             * Based on which button was pressed, do one or another action:
+             *
+             * - Reset Settings
+             * - Activate Extensions
+             *
+             * Because the form will send all values again, for all sections,
+             * restore the other sections. Otherwise, the user might remove
+             * the License Key from the input, then switch to Reset Settings,
+             * and click there, being completely unaware that the input
+             * will be removed in the DB.             *
+             * 
              * @param array<string,mixed> $oldValue
              * @param array<string,mixed> $values
              * @return array<string,mixed>
@@ -111,12 +123,30 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             function (mixed $oldValue, array $values): void {
                 // If pressed on the "Reset Settings" button...
                 if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    /**
+                     * Restore the stored values for the other sections:
+                     *
+                     * - Use the old values
+                     * - Remove the button from the form, as to avoid infinite looping here
+                     * - Override the new values, just for the section with the clicked-on button
+                     */
+                    // if (!is_array($oldValue)) {
+                    //     $oldValue = [];
+                    // }
+                    $restoredValues = $oldValue;
+                    $restoredValues[$key] = $values[$key];
+                    $restoredValues[self::FORM_FIELD_LAST_SAVED_TIMESTAMP] = $values[self::FORM_FIELD_LAST_SAVED_TIMESTAMP];
+                    
+                    // @todo Complete!
                     $this->resetSettings();
                     return;
                 }
 
                 // If pressed on the "Activate (Extensions)" button...
                 if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
+                    // Restore the stored values for the other sections
+                    // @todo Complete!
+
                     // @todo Complete!
                     return;
                 }
@@ -507,7 +537,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         which makes "update_option_{$option}" not be triggered when there are no changes
                                                         @see wp-includes/option.php
                                                     -->
-                                                    <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo $time ?>">
+                                                    <input type="hidden" name="<?php echo $optionsFormName?>[<?php echo self::FORM_FIELD_LAST_SAVED_TIMESTAMP ?>]" value="<?php echo $time ?>">
                                                     <?php if (RequestHelpers::isRequestingXDebug()) : ?>
                                                         <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_TRIGGER ?>" value="1">
                                                         <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_SESSION_STOP ?>" value="1">
