@@ -4,11 +4,6 @@ services:
         autowire: true
         autoconfigure: true
 
-    # Because this is uses to store Settings only (alongside wp-includes/option.php)
-    # then it can be made available to the System Container only
-    GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface:
-        class: \GatoGraphQL\GatoGraphQL\Marketplace\LemonSqueezyCommercialExtensionActivationService
-
     GatoGraphQL\GatoGraphQL\Container\CompilerPasses\:
         resource: '../src/Container/CompilerPasses/*'
 
