@@ -426,15 +426,31 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     ): void {
         $deactivateLicenseKeys = [];
         $activateLicenseKeys = [];
-        foreach ($submittedLicenseKeys as $extensionSlug => $extensionLicenseKey) {
-            if (isset($previousLicenseKeys[$extensionSlug]) && trim($previousLicenseKeys[$extensionSlug]) === trim($submittedLicenseKeys[$extensionSlug])) {
-                // License key not updated => Nothing to do
+        foreach ($submittedLicenseKeys as $extensionSlug => $submittedLicenseKey) {
+            $submittedLicenseKey = trim($submittedLicenseKey);
+            if ($submittedLicenseKey === '') {
+                // License key not set => Skip
                 continue;
             }
-            if (!isset($previousLicenseKeys[$extensionSlug]) && trim($submittedLicenseKeys[$extensionSlug]) === '') {
-                // License key not set but also empty => Nothing to do
+            if (!isset($previousLicenseKeys[$extensionSlug])) {
+                // License key newly added => Activate
+                $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
                 continue;
             }
+            $previousLicenseKey = trim($previousLicenseKeys[$extensionSlug]);
+            if ($previousLicenseKey === '') {
+                // License key newly added => Activate
+                $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                continue;
+            }
+            if ($previousLicenseKey !== $submittedLicenseKey) {
+                // License key updated => Deactivate + Activate
+                $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+                $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                continue;
+            }
+            // License key not updated => Nothing to do
+            continue;
         }
 
         // First deactivate licenses (as an extension might be deactivated + reactivated with a different license key)
