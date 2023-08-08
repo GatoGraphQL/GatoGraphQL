@@ -104,8 +104,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         \add_action(
             "update_option_{$option}",
             /**
+             * @param array<string,mixed> $oldValue
              * @param array<string,mixed> $values
-             * @param array<string,mixed> $previousValues
              * @return array<string,mixed>
              */
             function (mixed $oldValue, array $values): void {
