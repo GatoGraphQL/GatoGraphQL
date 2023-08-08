@@ -339,32 +339,32 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * - Remove the clicked button from the form, as to avoid infinite looping here
      * - Override the new values, just for the submitted section
      * 
-     * @param array<array{0:string,1:string}> $moduleOptionItems Form items that must be stored in the DB (everything else will be restored), with item format: [0]: module, [1]: option
+     * @param array<array{0:string,1:string}> $formSubmittedModuleOptionItems Form items that must be stored in the DB (everything else will be restored), with item format: [0]: module, [1]: option
      * @param array<string,mixed> $oldValue
      * @param array<string,mixed> $values
      */
     protected function restoreDBOptionValuesForNonSubmittedFormSections(
         string $settingsCategory,
-        array $moduleOptionItems,
+        array $formSubmittedModuleOptionItems,
         array $oldValue,
         array $values,
     ): void {
         $dbOptionName = $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
 
         // Always transfer the "last_saved_timestamp" field
-        $storeSubmittedSettingOptionNames = [
+        $storeSettingOptionNames = [
             self::FORM_FIELD_LAST_SAVED_TIMESTAMP,
         ];
-        foreach ($moduleOptionItems as $moduleOptionItem) {
-            $module = $moduleOptionItem[0];
-            $option = $moduleOptionItem[1];
+        foreach ($formSubmittedModuleOptionItems as $formSubmittedModuleOptionItem) {
+            $module = $formSubmittedModuleOptionItem[0];
+            $option = $formSubmittedModuleOptionItem[1];
             $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
             $settingOptionName = $moduleResolver->getSettingOptionName($module, $option);
-            $storeSubmittedSettingOptionNames[] = $settingOptionName;
+            $storeSettingOptionNames[] = $settingOptionName;
         }
 
         $restoredValues = $oldValue;
-        foreach ($storeSubmittedSettingOptionNames as $transferSettingOptionName) {
+        foreach ($storeSettingOptionNames as $transferSettingOptionName) {
             $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
         }
 
