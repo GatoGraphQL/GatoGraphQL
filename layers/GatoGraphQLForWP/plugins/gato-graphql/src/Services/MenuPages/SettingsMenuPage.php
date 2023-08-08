@@ -470,7 +470,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
 
         // Store the payloads from the marketplace provider API
-        $marketplaceProviderAPIResultPayloads = [];
+        $activatedCommercialExtensionLicensePayloads = [];
 
         /**
          * First deactivate and then activate licenses, because an extension
@@ -486,7 +486,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         // Store the payloads to the DB
         update_option(
             Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS,
-            $marketplaceProviderAPIResultPayloads
+            $activatedCommercialExtensionLicensePayloads
         );
             
     }
