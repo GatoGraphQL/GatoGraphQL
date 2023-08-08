@@ -112,10 +112,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 /**
                  * Check that pressed on the "Reset Settings" button
                  */
-                if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    $this->resetSettings();
                     return;
                 }
-                $this->resetSettings();
             },
             10,
             2
