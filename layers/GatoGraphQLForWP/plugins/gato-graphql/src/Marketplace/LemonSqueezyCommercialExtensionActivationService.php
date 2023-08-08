@@ -100,24 +100,32 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         string $licenseKey,
         array $activatedCommercialExtensionLicensePayload
     ): array {
-        /**
-         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-         */
-        $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? '';
-        $endpoint = sprintf(
-            '%s/v1/licenses/deactivate?license_key=%s&instance_id=%s',
-            $this->getLemonSqueezyAPIBaseURL(),
-            $licenseKey,
-            $instanceID
-        );
-
         $response = wp_remote_post(
-            $endpoint,
+            $this->getDeactivateLicenseEndpoint($licenseKey, $activatedCommercialExtensionLicensePayload),
             [
                 'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
             ]
         );
 
         return $this->processResponse($response);
+    }
+
+    /**
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
+     */
+    protected function getDeactivateLicenseEndpoint(
+        string $licenseKey,
+        array $activatedCommercialExtensionLicensePayload
+    ): string {
+        /**
+         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+         */
+        $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? '';
+        return sprintf(
+            '%s/v1/licenses/deactivate?license_key=%s&instance_id=%s',
+            $this->getLemonSqueezyAPIBaseURL(),
+            $licenseKey,
+            $instanceID
+        );
     }
 }
