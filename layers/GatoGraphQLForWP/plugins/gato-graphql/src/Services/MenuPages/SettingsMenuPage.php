@@ -109,11 +109,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * @return array<string,mixed>
              */
             function (mixed $oldValue, array $values): void {
-                /**
-                 * Check that pressed on the "Reset Settings" button
-                 */
+                // If pressed on the "Reset Settings" button...
                 if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
                     $this->resetSettings();
+                    return;
+                }
+
+                // If pressed on the "Activate (Extensions)" button...
+                if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
+                    // @todo Complete!
                     return;
                 }
             },
