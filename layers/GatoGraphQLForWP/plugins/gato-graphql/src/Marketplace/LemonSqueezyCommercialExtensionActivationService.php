@@ -17,8 +17,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 {
     /**
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+     *
+     * @return array<string,mixed> Response payload from calling the endpoint
      */
-    public function activateLicense(string $licenseKey): stdClass
+    public function activateLicense(string $licenseKey): array
     {
         $instanceName = $this->getInstanceName();
         $endpoint = sprintf(
@@ -40,10 +42,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             return (object) [];
         }
 
-        $body = json_decode($response['body'], false);
+        $body = json_decode($response['body'], true);
 
         if (wp_remote_retrieve_response_code($response) !== 200) {
-            $errorMessage = isset($body->error) ? $body->error : wp_remote_retrieve_response_message($response);
+            $errorMessage = isset($body['error']) ? $body['error'] : wp_remote_retrieve_response_message($response);
             // ...
             return (object) [];
         }
@@ -76,8 +78,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
     /**
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
+     * 
+     * @return array<string,mixed> Response payload from calling the endpoint
      */
-    public function deactivateLicense(string $licenseKey): stdClass
+    public function deactivateLicense(string $licenseKey): array
     {
         $instanceID = $request->get_param( 'instance_id' );
         $is_valid      = false;
