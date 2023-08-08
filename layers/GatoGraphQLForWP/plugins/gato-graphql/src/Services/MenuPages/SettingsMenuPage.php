@@ -426,31 +426,47 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     ): void {
         $deactivateLicenseKeys = [];
         $activateLicenseKeys = [];
+
+        // Iterate all submitted entries to activate extensions
         foreach ($submittedLicenseKeys as $extensionSlug => $submittedLicenseKey) {
             $submittedLicenseKey = trim($submittedLicenseKey);
             if ($submittedLicenseKey === '') {
                 // License key not set => Skip
                 continue;
             }
-            if (!isset($previousLicenseKeys[$extensionSlug])) {
-                // License key newly added => Activate
-                $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+            $previousLicenseKey = trim($previousLicenseKeys[$extensionSlug] ?? '');
+            if ($previousLicenseKey === $submittedLicenseKey) {
+                // License key not updated => Nothing to do
                 continue;
             }
-            $previousLicenseKey = trim($previousLicenseKeys[$extensionSlug]);
             if ($previousLicenseKey === '') {
                 // License key newly added => Activate
                 $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
                 continue;
             }
-            if ($previousLicenseKey !== $submittedLicenseKey) {
-                // License key updated => Deactivate + Activate
-                $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
-                $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+            // License key updated => Deactivate + Activate
+            $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+            $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+        }
+
+        // Iterate all previous entries to deactivate extensions
+        foreach ($previousLicenseKeys as $extensionSlug => $previousLicenseKey) {
+            $previousLicenseKey = trim($previousLicenseKey);
+            $submittedLicenseKey = trim($submittedLicenseKeys[$extensionSlug]);
+            if ($previousLicenseKey === '') {
+                // License key not previously set => Skip
                 continue;
             }
-            // License key not updated => Nothing to do
-            continue;
+            if ($previousLicenseKey === $submittedLicenseKey) {
+                // License key not updated => Nothing to do
+                continue;
+            }
+            if ($submittedLicenseKey === '') {
+                // License key newly removed => Deactivate
+                $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+                continue;
+            }
+            // License key updated => Do nothing (Deactivate + Activate: already queued above)            
         }
 
         // First deactivate licenses (as an extension might be deactivated + reactivated with a different license key)
