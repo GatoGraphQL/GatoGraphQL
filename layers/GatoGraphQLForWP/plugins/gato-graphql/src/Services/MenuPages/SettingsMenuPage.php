@@ -168,9 +168,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
                 // If pressed on the "Activate (Extensions)" button...
                 if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
-                    // Restore the stored values for the other sections
-                    // @todo Complete!
-
+                    $this->restoreDBOptionValuesForNonSubmittedFormSections(
+                        $settingsCategory,
+                        PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                        PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                        $oldValue,
+                        $values,
+                    );
+                    
                     // @todo Complete!
                     return;
                 }
@@ -348,7 +353,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($transferSettingOptionNames as $transferSettingOptionName) {
             $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
         }
-        
+
         update_option($dbOptionName, $restoredValues);
     }
 
