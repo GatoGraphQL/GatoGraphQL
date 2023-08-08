@@ -186,7 +186,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
                     // Retrieve the previously-stored license keys, and the newly-submitted license keys
                     $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
-                    $this->activateGatoGraphQLExtensions(
+                    $this->activateGatoGraphQLCommercialExtensions(
                         $oldValue[$settingOptionName] ?? [],
                         $values[$settingOptionName] ?? []
                     );
@@ -411,7 +411,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      */
-    protected function activateGatoGraphQLExtensions(
+    protected function activateGatoGraphQLCommercialExtensions(
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
     ): void {
