@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Constants\ResetSettingsOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
@@ -26,7 +27,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     /**
      * Setting options
      */
-    public final const OPTION_EXTENSION_LICENSE_KEYS = 'extension-license-keys';
+    public final const OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS = 'commercial-extension-license-keys';
     public final const OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR = 'use-restrictive-or-not-default-behavior';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
@@ -132,7 +133,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultValues = [
             self::ACTIVATE_EXTENSIONS => [
-                self::OPTION_EXTENSION_LICENSE_KEYS => [],
+                self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS => [],
             ],
             self::RESET_SETTINGS => [
                 self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useRestrictiveDefaults ? ResetSettingsOptions::RESTRICTIVE : ResetSettingsOptions::NON_RESTRICTIVE,
@@ -150,17 +151,67 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::ACTIVATE_EXTENSIONS) {
-            $moduleSettings[] = [
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    'activate-extensions'
-                ),
-                Properties::DESCRIPTION => sprintf(
-                    '<p>%s</p>',
-                    \__('There are no Bundles or Extensions installed', 'gato-graphql')
-                ),
-                Properties::TYPE => Properties::TYPE_NULL,
-            ];
+            $extensionManager = PluginApp::getExtensionManager();
+            $nonActivatedLicenseCommercialExtensionFiles = $extensionManager->getNonActivatedLicenseCommercialExtensionFiles();
+            $activatedLicenseCommercialExtensionFiles = $extensionManager->getActivatedLicenseCommercialExtensionFiles();
+            $keyLabels = array_merge(
+                $nonActivatedLicenseCommercialExtensionFiles,
+                $activatedLicenseCommercialExtensionFiles,
+            );
+
+            if ($keyLabels !== []) {
+                $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => \__('License keys from the Gato GraphQL Shop', 'gato-graphql'),
+                    Properties::DESCRIPTION => \__('Enter the license keys for the bundles/extensions, and click on "Activate":', 'gato-graphql'),
+                    Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
+                    Properties::KEY_LABELS => $keyLabels,
+                ];
+                /**
+                 * Have the activate button name be sent as part of the form
+                 */
+                $activateButtonName = sprintf(
+                    '%s[%s]',
+                    $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT),
+                    SettingsMenuPage::ACTIVATE_EXTENSIONS_BUTTON_ID
+                );
+                /**
+                 * Use `function_exists` because, when pressing on
+                 * the button it will call options.php,
+                 * and the function will not have been loaded yet!
+                 */
+                $activateExtensionsButtonsHTML = '';
+                if (function_exists('get_submit_button')) {
+                    $activateExtensionsButtonsHTML = get_submit_button(
+                        \__('Activate', 'gato-graphql'),
+                        'primary',
+                        $activateButtonName,
+                        false
+                    );
+                }
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'activate-extensions-button'
+                    ),
+                    Properties::DESCRIPTION => $activateExtensionsButtonsHTML,
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+            } else {
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'activate-extensions'
+                    ),
+                    Properties::DESCRIPTION => \__('There are no Bundles or Extensions installed', 'gato-graphql'),
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+            }
         } elseif ($module === self::RESET_SETTINGS) {
             $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
             $resetSettingsButtonsHTML = sprintf(
