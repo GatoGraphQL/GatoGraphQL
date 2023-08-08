@@ -339,7 +339,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * - Remove the clicked button from the form, as to avoid infinite looping here
      * - Override the new values, just for the submitted section
      * 
-     * @param array{0:string,1:string} $moduleOptionItems [0]: module, [1]: option
+     * @param array<array{0:string,1:string}> $moduleOptionItems Form items that must be stored in the DB (everything else will be restored), with item format: [0]: module, [1]: option
      * @param array<string,mixed> $oldValue
      * @param array<string,mixed> $values
      */
