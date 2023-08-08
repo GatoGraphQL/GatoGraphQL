@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -43,6 +44,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -103,6 +105,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
+    }
+    final public function setMarketplaceProviderCommercialExtensionActivationService(MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService): void
+    {
+        $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
+    }
+    final protected function getMarketplaceProviderCommercialExtensionActivationService(): MarketplaceProviderCommercialExtensionActivationServiceInterface
+    {
+        if ($this->marketplaceProviderCommercialExtensionActivationService === null) {
+            /** @var MarketplaceProviderCommercialExtensionActivationServiceInterface */
+            $marketplaceProviderCommercialExtensionActivationService = $this->instanceManager->getInstance(MarketplaceProviderCommercialExtensionActivationServiceInterface::class);
+            $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
+        }
+        return $this->marketplaceProviderCommercialExtensionActivationService;
     }
 
     public function getMenuPageSlug(): string
@@ -426,15 +441,17 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         // Store the payloads from the marketplace provider API
         $activatedCommercialExtensionLicensePayloads = [];
 
+        $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
+
         /**
          * First deactivate and then activate licenses, because an extension
          * might be deactivated + reactivated (with a different license key)
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
-
+            $marketplaceProviderCommercialExtensionActivationService->deactivate($licenseKey);
         }
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
-
+            $marketplaceProviderCommercialExtensionActivationService->activate($licenseKey);
         }
         
         // Store the payloads to the DB
