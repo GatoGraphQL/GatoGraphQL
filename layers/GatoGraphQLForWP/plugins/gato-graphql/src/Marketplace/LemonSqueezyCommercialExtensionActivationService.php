@@ -100,8 +100,18 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         string $licenseKey,
         array $activatedCommercialExtensionLicensePayload
     ): array {
+        /**
+         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+         */
+        $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? null;
+        if ($instanceID === null) {
+            $errorMessage = '';
+            // @todo Process error message
+            return [];
+        }
+        
         $response = wp_remote_post(
-            $this->getDeactivateLicenseEndpoint($licenseKey, $activatedCommercialExtensionLicensePayload),
+            $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID),
             [
                 'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
             ]
@@ -115,12 +125,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      */
     protected function getDeactivateLicenseEndpoint(
         string $licenseKey,
-        array $activatedCommercialExtensionLicensePayload
+        string $instanceID
     ): string {
-        /**
-         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-         */
-        $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? '';
         return sprintf(
             '%s/v1/licenses/deactivate?license_key=%s&instance_id=%s',
             $this->getLemonSqueezyAPIBaseURL(),
