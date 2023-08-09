@@ -582,7 +582,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         update_option(
             Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
             $commercialExtensionActivatedLicenseEntries
-        );            
+        );
+        
+        // Because extensions will be activated/deactivated, flush the service container
+        $this->flushContainer(true, true);
     }
 
     /**
