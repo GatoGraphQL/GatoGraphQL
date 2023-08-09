@@ -83,7 +83,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         /**
          * @var string|null
          */
-        $error = $body['license_key']['error'];
+        $error = $body['error'];
         if ($error !== null) {
             throw new LicenseOperationNotSuccessfulException($error);
         }
