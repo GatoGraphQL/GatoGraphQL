@@ -13,9 +13,6 @@ use function wp_remote_retrieve_response_message;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
-    /**
-     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-     */
     public function activateLicense(string $licenseKey, string $instanceName): ActivateLicenseAPIResponseProperties
     {
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
@@ -48,18 +45,28 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             );
         }
 
-        /** @var string */
+        /**
+         * Extract properties from the response.
+         *
+         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+         *
+         * @var string
+         */
         $status = $body['license_key']['status'];
         /** @var string */
         $instanceID = $body['instance']['id'];
+        /** @var string */
+        $activationUsage = $body['license_key']['activation_usage'];
+        /** @var string */
+        $activationLimit = $body['license_key']['activation_limit'];
         return new ActivateLicenseAPIResponseProperties(
             $body,
             $status,
             null,
             sprintf(
                 \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
-                $body['license_key']['activation_usage'] ?? '',
-                $body['license_key']['activation_limit'] ?? '',
+                $activationUsage,
+                $activationLimit,
             ),
             $instanceID
         );
