@@ -24,10 +24,10 @@ class ExtensionManager extends AbstractPluginManager
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
     /** @var array<string,string> Extension Slug => Extension Name */
-    private array $nonActivatedLicenseCommercialExtensionFiles = [];
+    private array $nonActivatedLicenseCommercialExtensions = [];
 
     /** @var array<string,string> Extension Slug => Extension Name */
-    private array $activatedLicenseCommercialExtensionFiles = [];
+    private array $activatedLicenseCommercialExtensions = [];
 
     /**
      * Have the extensions organized by their class
@@ -226,7 +226,7 @@ class ExtensionManager extends AbstractPluginManager
          */
         $commercialExtensionActivatedLicenseEntries = $this->getCommercialExtensionActivatedLicenseEntries();
         if (!isset($commercialExtensionActivatedLicenseEntries[$extensionSlug])) {
-            $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
+            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
             return false;
         }
 
@@ -245,10 +245,10 @@ class ExtensionManager extends AbstractPluginManager
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
         ])) {
-            $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
+            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
             return false;
         }
-        $this->activatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
+        $this->activatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
         return true;
     }
 
@@ -269,16 +269,16 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * @return array<string,string> Extension Slug => Extension Name
      */
-    public function getNonActivatedLicenseCommercialExtensionFiles(): array
+    public function getNonActivatedLicenseCommercialExtensions(): array
     {
-        return $this->nonActivatedLicenseCommercialExtensionFiles;
+        return $this->nonActivatedLicenseCommercialExtensions;
     }
 
     /**
      * @return array<string,string> Extension Slug => Extension Name
      */
-    public function getActivatedLicenseCommercialExtensionFiles(): array
+    public function getActivatedLicenseCommercialExtensions(): array
     {
-        return $this->activatedLicenseCommercialExtensionFiles;
+        return $this->activatedLicenseCommercialExtensions;
     }
 }

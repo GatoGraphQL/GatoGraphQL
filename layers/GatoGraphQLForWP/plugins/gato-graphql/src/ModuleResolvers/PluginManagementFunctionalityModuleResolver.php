@@ -152,11 +152,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $moduleSettings = parent::getSettings($module);
         if ($module === self::ACTIVATE_EXTENSIONS) {
             $extensionManager = PluginApp::getExtensionManager();
-            $nonActivatedLicenseCommercialExtensionFiles = $extensionManager->getNonActivatedLicenseCommercialExtensionFiles();
-            $activatedLicenseCommercialExtensionFiles = $extensionManager->getActivatedLicenseCommercialExtensionFiles();
+            $nonActivatedLicenseCommercialExtensions = $extensionManager->getNonActivatedLicenseCommercialExtensions();
+            $activatedLicenseCommercialExtensions = $extensionManager->getActivatedLicenseCommercialExtensions();
             $keyLabels = array_merge(
-                $nonActivatedLicenseCommercialExtensionFiles,
-                $activatedLicenseCommercialExtensionFiles,
+                $nonActivatedLicenseCommercialExtensions,
+                $activatedLicenseCommercialExtensions,
             );
 
             if ($keyLabels !== []) {
