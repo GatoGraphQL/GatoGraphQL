@@ -22,63 +22,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     public function activateLicense(string $licenseKey, string $instanceName): LicenseOperationAPIResponseProperties
     {
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
-        $response = wp_remote_post(
-            $endpoint,
-            [
-                'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
-            ]
-        );
-
-        if ($response instanceof WP_Error) {
-            return new LicenseOperationAPIResponseProperties(
-                null,
-                null,
-                $response->get_error_message(),
-                null,
-                null,
-            );
-        }
-
-        $body = json_decode($response['body'], true);
-
-        /**
-         * Extract properties from the response.
-         *
-         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-         *
-         * @var string|null
-         */
-        $error = $body['license_key']['error'];
-        if ($error !== null) {
-            return new LicenseOperationAPIResponseProperties(
-                $body,
-                $body['license_key']['status'] ?? null,
-                $error,
-                null,
-                $body['instance']['id'] ?? null,
-            );
-        }
-
-        /** @var string */
-        $status = $body['license_key']['status'];
-        $status = $this->convertStatus($status);
-        /** @var string */
-        $instanceID = $body['instance']['id'];
-        /** @var string */
-        $activationUsage = $body['license_key']['activation_usage'];
-        /** @var string */
-        $activationLimit = $body['license_key']['activation_limit'];
-        return new LicenseOperationAPIResponseProperties(
-            $body,
-            $status,
-            null,
-            sprintf(
-                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
-                $activationUsage,
-                $activationLimit,
-            ),
-            $instanceID,
-        );
+        return $this->handleLicenseOperation($endpoint, null);
     }
 
     /**
