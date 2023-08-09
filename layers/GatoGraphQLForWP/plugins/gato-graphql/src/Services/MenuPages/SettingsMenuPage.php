@@ -484,7 +484,24 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             // Store activations in the DB, and show messages to the admin
             $payload = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
-            $activatedCommercialExtensionLicensePayloads[$extensionSlug] = $payload->toArray();
+            if ($payload->isSuccessful()) {
+                /** @var string */
+                $status = $payload->status;
+                /** @var array<string,mixed> */
+                $apiResponsePayload = $payload->apiResponsePayload;
+                $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
+                    'apiResponsePayload' => $apiResponsePayload,
+                    'status' => $status,
+                ];
+                // @todo Show success messages to the admin
+                /** @var string */
+                $successMessage = $payload->successMessage;
+            } else {
+                unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+                // @todo Show error messages to the admin
+                /** @var string */
+                $errorMessage = $payload->errorMessage;
+            }
             // @todo Show messages to the admin
             // ...
         }

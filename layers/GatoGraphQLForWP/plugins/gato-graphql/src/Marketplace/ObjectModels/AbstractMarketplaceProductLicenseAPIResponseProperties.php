@@ -17,6 +17,11 @@ abstract class AbstractMarketplaceProductLicenseAPIResponseProperties implements
     ) {
     }
 
+    public function isSuccessful(): bool
+    {
+        return $this->errorMessage === null;
+    }
+
     /**
      * @return array<string,mixed>
      */
