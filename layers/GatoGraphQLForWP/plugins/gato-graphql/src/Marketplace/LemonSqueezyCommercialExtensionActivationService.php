@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivateLicenseAPIResponseProperties;
+use RuntimeException;
 use WP_Error;
 
 use function wp_remote_post;
@@ -55,6 +57,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
         /** @var string */
         $status = $body['license_key']['status'];
+        $status = $this->convertStatus($status);
         /** @var string */
         $instanceID = $body['instance']['id'];
         /** @var string */
@@ -100,6 +103,28 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         return [
             'Accept' => 'application/json',
         ];
+    }
+
+    /**
+     * Convert the status: from the value used by LemonSqueezy,
+     * to the constants used by Gato GraphQL
+     *
+     * @see https://docs.lemonsqueezy.com/guides/tutorials/license-keys#license-key-statuses
+     */
+    protected function convertStatus(string $status): string
+    {
+        return match($status) {
+            'inactive' => LicenseStatus::INACTIVE,
+            'active' => LicenseStatus::ACTIVE,
+            'expired' => LicenseStatus::EXPIRED,
+            'disabled' => LicenseStatus::DISABLED,
+            default => new RuntimeException(
+                sprintf(
+                    \__('Unsupported license status \'%s\'', 'gato-graphql'),
+                    $status
+                )
+            ),
+        };
     }
 
     /**
