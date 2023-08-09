@@ -17,4 +17,7 @@ class MarketplaceProductLicenseProperties
 
     /** After executing an operation against the Marketplace Provider's API, store the response */
     public final const API_RESPONSE_PAYLOAD = 'apiResponsePayload';
+
+    /** If the operation failed, keep the reason why */
+    public final const ERROR = 'error';
 }
