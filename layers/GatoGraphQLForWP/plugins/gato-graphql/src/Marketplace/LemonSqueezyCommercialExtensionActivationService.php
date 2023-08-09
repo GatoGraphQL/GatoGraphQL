@@ -6,9 +6,11 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivateLicenseAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\DeactivateLicenseAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ValidateLicenseAPIResponseProperties;
+
 use RuntimeException;
 use WP_Error;
-
 use function wp_remote_post;
 use function wp_remote_retrieve_response_code;
 use function wp_remote_retrieve_response_message;
@@ -149,15 +151,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         return $body;
     }
 
-    /**
-     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
-     *
-     * @return array<string,mixed> Response payload from calling the endpoint
-     */
     public function deactivateLicense(
         string $licenseKey,
         string $instanceID
-    ): array {        
+    ): DeactivateLicenseAPIResponseProperties {        
         $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
             $endpoint,
@@ -184,16 +181,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         );
     }
 
-    /**
-     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
-     *
-     * @param array<string,mixed> Payload stored in the DB from when calling the activation endpoint
-     * @return array<string,mixed> Response payload from calling the endpoint
-     */
     public function validateLicense(
         string $licenseKey,
         ?string $instanceID
-    ): array {
+    ): ValidateLicenseAPIResponseProperties {
         $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
             $endpoint,

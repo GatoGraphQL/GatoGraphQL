@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivateLicenseAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\DeactivateLicenseAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ValidateLicenseAPIResponseProperties;
 
 interface MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
@@ -13,19 +15,13 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
         string $instanceName
     ): ActivateLicenseAPIResponseProperties;
 
-    /**
-     * @return array<string,mixed> Response payload from calling the endpoint
-     */
     public function deactivateLicense(
         string $licenseKey,
         string $instanceID
-    ): array;
+    ): DeactivateLicenseAPIResponseProperties;
 
-    /**
-     * @return array<string,mixed> Response payload from calling the endpoint
-     */
     public function validateLicense(
         string $licenseKey,
         ?string $instanceID
-    ): array;
+    ): ValidateLicenseAPIResponseProperties;
 }
