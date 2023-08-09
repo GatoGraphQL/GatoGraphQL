@@ -482,7 +482,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
 
             $successMessage = sprintf(
-                \__('Validation status: License for "%s" is active. You have %s/%s instances activated.', 'gato-graphql'),
+                \__('Status: License for "%s" is active. You have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
@@ -527,7 +527,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
 
             $successMessage = sprintf(
-                \__('License for "%s" for this instance has been deactivated. You now have %s/%s instances activated.', 'gato-graphql'),
+                \__('Deactivating license for "%s" succeeded. You now have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
@@ -565,7 +565,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
 
             $successMessage = sprintf(
-                \__('License for "%s" is active. You have %s/%s instances activated.', 'gato-graphql'),
+                \__('Activating license for "%s" succeeded. You have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
