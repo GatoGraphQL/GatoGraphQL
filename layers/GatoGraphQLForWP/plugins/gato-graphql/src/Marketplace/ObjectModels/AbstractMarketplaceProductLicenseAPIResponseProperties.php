@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels;
 
-abstract class AbstractMarketplaceProductLicenseAPIResponseProperties implements MarketplaceProductLicenseAPIResponsePropertiesInterface
+abstract class AbstractMarketplaceProductLicenseAPIResponseProperties
 {
     /**
      * @param array<string,mixed>|null $apiResponsePayload
@@ -20,18 +20,5 @@ abstract class AbstractMarketplaceProductLicenseAPIResponseProperties implements
     public function isSuccessful(): bool
     {
         return $this->errorMessage === null;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    public function toArray(): array
-    {
-        return [
-            'apiResponsePayload' => $this->apiResponsePayload,
-            'status' => $this->status,
-            'errorMessage' => $this->errorMessage,
-            'successMessage' => $this->successMessage,
-        ];
     }
 }

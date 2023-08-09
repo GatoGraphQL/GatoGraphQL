@@ -23,15 +23,4 @@ class ActivateLicenseAPIResponseProperties extends AbstractMarketplaceProductLic
             $successMessage,
         );
     }
-
-    /**
-     * @return array<string,mixed>
-     */
-    public function toArray(): array
-    {
-        return [
-            ...parent::toArray(),
-            'instanceID' => $this->instanceID,
-        ];
-    }
 }
