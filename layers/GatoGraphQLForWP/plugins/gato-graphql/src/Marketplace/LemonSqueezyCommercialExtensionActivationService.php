@@ -35,16 +35,6 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
         $body = json_decode($response['body'], true);
 
-        if (wp_remote_retrieve_response_code($response) !== 200) {
-            return new ActivateLicenseAPIResponseProperties(
-                $body,
-                null,
-                $body['error'] ?? \__('Unspecified error', 'gato-graphql'),
-                null,
-                null
-            );
-        }
-
         /**
          * Extract properties from the response.
          *
