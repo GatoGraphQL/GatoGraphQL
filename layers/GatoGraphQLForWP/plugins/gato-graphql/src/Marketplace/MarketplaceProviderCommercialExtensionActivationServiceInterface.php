@@ -9,7 +9,10 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
     /**
      * @return array<string,mixed> Response payload from calling the endpoint
      */
-    public function activateLicense(string $licenseKey): array;
+    public function activateLicense(
+        string $licenseKey,
+        string $instanceName
+    ): array;
 
     /**
      * @param array<string,mixed> Payload stored in the DB from when calling the activation endpoint

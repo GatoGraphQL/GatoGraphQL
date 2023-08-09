@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
-use PoP\ComponentModel\Misc\GeneralUtils;
 use WP_Error;
 
-use function home_url;
 use function wp_remote_post;
 use function wp_remote_retrieve_response_code;
 use function wp_remote_retrieve_response_message;
@@ -19,9 +17,9 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      *
      * @return array<string,mixed> Response payload from calling the endpoint
      */
-    public function activateLicense(string $licenseKey): array
+    public function activateLicense(string $licenseKey, string $instanceName): array
     {
-        $endpoint = $this->getActivateLicenseEndpoint($licenseKey);
+        $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
         $response = wp_remote_post(
             $endpoint,
             [
@@ -35,9 +33,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     /**
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
      */
-    protected function getActivateLicenseEndpoint(string $licenseKey): string
+    protected function getActivateLicenseEndpoint(string $licenseKey, string $instanceName): string
     {
-        $instanceName = $this->getInstanceName();
         return sprintf(
             '%s/v1/licenses/activate?license_key=%s&instance_name=%s',
             $this->getLemonSqueezyAPIBaseURL(),
@@ -59,14 +56,6 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         return [
             'Accept' => 'application/json',
         ];
-    }
-
-    /**
-     * Use the site's domain as the instance name in Lemon Squeezy
-     */
-    protected function getInstanceName(): string
-    {
-        return GeneralUtils::getHost(home_url());
     }
 
     /**

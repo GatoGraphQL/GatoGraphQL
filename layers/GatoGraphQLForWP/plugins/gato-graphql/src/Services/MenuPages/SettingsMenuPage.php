@@ -20,10 +20,12 @@ use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 
 use function get_option;
+use function home_url;
 use function update_option;
 
 /**
@@ -477,9 +479,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // ...
         }
 
+        $instanceName = $this->getInstanceName();
+
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             // Store activations in the DB, and show messages to the admin
-            $payload = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey);
+            $payload = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             $activatedCommercialExtensionLicensePayloads[$extensionSlug] = $payload;
             // @todo Show messages to the admin
             // ...
@@ -566,6 +570,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $deactivateLicenseKeys,
             $validateLicenseKeys,
         ];
+    }
+
+    /**
+     * Use the site's domain as the instance name
+     */
+    protected function getInstanceName(): string
+    {
+        return GeneralUtils::getHost(home_url());
     }
 
     /**
