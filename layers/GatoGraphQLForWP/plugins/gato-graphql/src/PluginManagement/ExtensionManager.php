@@ -24,10 +24,10 @@ class ExtensionManager extends AbstractPluginManager
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
     /** @var array<string,string> Extension Slug => Extension Name */
-    private array $nonActivatedLicenseCommercialExtensions = [];
+    private array $nonActivatedLicenseCommercialExtensionSlugProductNames = [];
 
     /** @var array<string,string> Extension Slug => Extension Name */
-    private array $activatedLicenseCommercialExtensions = [];
+    private array $activatedLicenseCommercialExtensionSlugProductNames = [];
 
     /** @var array<string,string>|null Extension Slug => Extension Name */
     private ?array $commercialExtensionSlugNames = null;
@@ -234,7 +234,7 @@ class ExtensionManager extends AbstractPluginManager
          */
         $commercialExtensionActivatedLicenseEntries = $this->getCommercialExtensionActivatedLicenseEntries();
         if (!isset($commercialExtensionActivatedLicenseEntries[$extensionSlug])) {
-            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
+            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
 
@@ -253,7 +253,7 @@ class ExtensionManager extends AbstractPluginManager
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
         ])) {
-            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
+            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
 
@@ -264,12 +264,12 @@ class ExtensionManager extends AbstractPluginManager
          */
         $productName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME];
         if ($productName !== $extensionProductName) {
-            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
+            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
 
         // Everything is good!
-        $this->activatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
+        $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
         return true;
     }
 
@@ -290,17 +290,17 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * @return array<string,string> Extension Slug => Extension Name
      */
-    public function getNonActivatedLicenseCommercialExtensions(): array
+    public function getNonActivatedLicenseCommercialExtensionSlugProductNames(): array
     {
-        return $this->nonActivatedLicenseCommercialExtensions;
+        return $this->nonActivatedLicenseCommercialExtensionSlugProductNames;
     }
 
     /**
      * @return array<string,string> Extension Slug => Extension Name
      */
-    public function getActivatedLicenseCommercialExtensions(): array
+    public function getActivatedLicenseCommercialExtensionSlugProductNames(): array
     {
-        return $this->activatedLicenseCommercialExtensions;
+        return $this->activatedLicenseCommercialExtensionSlugProductNames;
     }
 
     /**
@@ -310,8 +310,8 @@ class ExtensionManager extends AbstractPluginManager
     {
         if ($this->commercialExtensionSlugNames === null) {
             $this->commercialExtensionSlugNames = array_merge(
-                $this->getNonActivatedLicenseCommercialExtensions(),
-                $this->getActivatedLicenseCommercialExtensions(),
+                $this->getNonActivatedLicenseCommercialExtensionSlugProductNames(),
+                $this->getActivatedLicenseCommercialExtensionSlugProductNames(),
             );
             ksort($this->commercialExtensionSlugNames);
         }
