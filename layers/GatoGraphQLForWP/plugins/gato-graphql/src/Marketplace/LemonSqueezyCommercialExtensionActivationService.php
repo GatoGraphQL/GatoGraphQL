@@ -99,14 +99,14 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             /** @var string */
             $instanceID = $body['instance']['id'];
         }
-        /** @var string */
-        $activationUsage = $body['license_key']['activation_usage'];
-        /** @var string */
-        $activationLimit = $body['license_key']['activation_limit'];
+        $activationUsage = (int) $body['license_key']['activation_usage'];
+        $activationLimit = (int) $body['license_key']['activation_limit'];
         return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
             $instanceID,
+            $activationUsage,
+            $activationLimit,
         );
     }
 
