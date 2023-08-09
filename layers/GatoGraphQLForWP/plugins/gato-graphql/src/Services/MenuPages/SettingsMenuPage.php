@@ -453,7 +453,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $licenseOperationAPIResponseProperties = null;
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
-            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug] ?? null;
+            /** @var array<string,mixed> */
+            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug];
             /** @var string */
             $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID];
             try {
@@ -488,27 +489,37 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * might be deactivated + reactivated (with a different license key)
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
-            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug] ?? null;
-            if ($activatedCommercialExtensionLicensePayload === null) {
-                // @todo Show error message to the admin
-                continue;
-            }
-            $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID] ?? null;
-            if ($instanceID === null) {
-                // @todo Process error message
+            /** @var array<string,mixed> */
+            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug];
+            /** @var string */
+            $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID];
+            try {
+                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
+                    $licenseKey,
+                    $instanceID,
+                );
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationError(
+                    $activatedCommercialExtensionLicensePayloads,
+                    $extensionSlug,
+                    $e,
+                );
                 continue;
             }
 
-            // No need to store deactivations in the DB, but do show messages to the admin
-            $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
-                $licenseKey,
-                $instanceID,
+            $successMessage = sprintf(
+                \__('License for this instance has been deactivated. You now have %s/%s instances activated.', 'gato-graphql'),
+                $licenseOperationAPIResponseProperties->activationUsage,
+                $licenseOperationAPIResponseProperties->activationLimit,
             );
-            if (true) {
-                unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
-            }
-            // @todo Show messages to the admin
-            // ...
+            $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationSuccess(
+                $activatedCommercialExtensionLicensePayloads,
+                $extensionSlug,
+                $licenseOperationAPIResponseProperties,
+                $successMessage,
+            );
+            // Do not store deactivated instances
+            unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
         }
 
         $instanceName = $this->getInstanceName();
@@ -545,6 +556,18 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );            
     }
 
+    /**
+     * If there was an HTTPRequest error, then do not unset the stored
+     * payload in the DB.
+     *
+     * If there was a LicenseOperation error, that means the instance
+     * does not exist, or some other problem, and hence deactivate the
+     * instance.
+     * 
+     * Show an error message to the admin.
+     *
+     * @param array<string,mixed> $activatedCommercialExtensionLicensePayloads
+     */
     protected function handleLicenseOperationError(
         array $activatedCommercialExtensionLicensePayloads,
         string $extensionSlug,
@@ -561,6 +584,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return $activatedCommercialExtensionLicensePayloads;
     }
 
+    /**
+     * Add the payload entry to be stored in the DB, and show a success
+     * message to the admin.
+     *
+     * @param array<string,mixed> $activatedCommercialExtensionLicensePayloads
+     */
     protected function handleLicenseOperationSuccess(
         array $activatedCommercialExtensionLicensePayloads,
         string $extensionSlug,
