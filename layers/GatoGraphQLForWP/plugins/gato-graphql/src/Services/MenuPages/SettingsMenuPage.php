@@ -437,33 +437,50 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
     ): void {
+        /** @var array<string,mixed> */
+        $activatedCommercialExtensionLicensePayloads = get_option(Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS, []); 
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
             $validateLicenseKeys,
         ] = $this->calculateLicenseKeysToActivateDeactivateValidate(
+            $activatedCommercialExtensionLicensePayloads,
             $previousLicenseKeys,
             $submittedLicenseKeys,
         );
 
-        // For deactivation: Retrieve the existing payloads from the DB
-        $activatedCommercialExtensionLicensePayloads = get_option(Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS, []); 
-
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
+        $licenseOperationAPIResponseProperties = null;
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
             $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug] ?? null;
-            $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID] ?? null;
-            if ($instanceID === null) {
-                // @todo Process error message
+            /** @var string */
+            $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID];
+            try {
+                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
+                    $licenseKey,
+                    $instanceID,
+                );
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationError(
+                    $activatedCommercialExtensionLicensePayloads,
+                    $extensionSlug,
+                    $e,
+                );
                 continue;
             }
-            $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
-                $licenseKey,
-                $activatedCommercialExtensionLicensePayload,
+
+            $successMessage = sprintf(
+                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
+                $licenseOperationAPIResponseProperties->activationUsage,
+                $licenseOperationAPIResponseProperties->activationLimit,
             );
-            // @todo Show messages to the admin
-            // ...
+            $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationSuccess(
+                $activatedCommercialExtensionLicensePayloads,
+                $extensionSlug,
+                $licenseOperationAPIResponseProperties,
+                $successMessage,
+            );
         }
 
         /**
@@ -495,10 +512,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
 
         $instanceName = $this->getInstanceName();
-
+        
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
-            // Store activations in the DB, and show messages to the admin
-            $licenseOperationAPIResponseProperties = null;
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
@@ -507,7 +522,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $extensionSlug,
                     $e,
                 );
-
                 continue;
             }
 
@@ -579,11 +593,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * - If the license key is removed (i.e. it is empty now, non-empty before), then deactivate it
      * - If the license key has been updated, then deactivate the previous one, and activate the new one
      * 
+     * @param array<string,mixed> $activatedCommercialExtensionLicensePayloads
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      * @return array{0:array<string,string>,1:array<string,string>,2:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys, [2]: $validateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
      */
     protected function calculateLicenseKeysToActivateDeactivateValidate(
+        array $activatedCommercialExtensionLicensePayloads,
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
     ): array {
@@ -598,10 +614,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 // License key not set => Skip
                 continue;
             }
+            $hasExtensionBeenActivated = isset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
             $previousLicenseKey = trim($previousLicenseKeys[$extensionSlug] ?? '');
             if ($previousLicenseKey === $submittedLicenseKey) {
-                // License key not updated => Validate
-                $validateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                if ($hasExtensionBeenActivated) {
+                    // License key not updated => Validate
+                    $validateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                } else {
+                    // The previous license had (for some reason) not be activated => Activate
+                    $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                }
                 continue;
             }
             if ($previousLicenseKey === '') {
@@ -610,7 +632,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
             // License key updated => Deactivate + Activate
-            $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+            if ($hasExtensionBeenActivated) {
+                $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+            }
             $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
         }
 
@@ -627,8 +651,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
             if ($submittedLicenseKey === '') {
-                // License key newly removed => Deactivate
-                $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+                if ($hasExtensionBeenActivated) {
+                    // License key newly removed => Deactivate
+                    $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+                }
                 continue;
             }
             // License key updated => Do nothing (Deactivate + Activate: already queued above)            
