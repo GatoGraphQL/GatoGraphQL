@@ -50,8 +50,20 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          *
          * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
          *
-         * @var string
+         * @var string|null
          */
+        $error = $body['license_key']['error'];
+        if ($error !== null) {
+            return new ActivateLicenseAPIResponseProperties(
+                $body,
+                $body['license_key']['status'] ?? null,
+                $error,
+                null,
+                $body['instance']['id'] ?? null
+            );
+        }
+
+        /** @var string */
         $status = $body['license_key']['status'];
         /** @var string */
         $instanceID = $body['instance']['id'];
