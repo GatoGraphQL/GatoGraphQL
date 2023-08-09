@@ -91,7 +91,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         /** @var string */
         $status = $body['license_key']['status'];
         $status = $this->convertStatus($status);
-        // Just for the /activate endpoint
+        /**
+         * For the /activate endpoint, retrieve the instance ID from the response,
+         * otherwise we already have it
+         */
         if ($instanceID === null) {
             /** @var string */
             $instanceID = $body['instance']['id'];
@@ -103,12 +106,6 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
-            null,
-            sprintf(
-                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
-                $activationUsage,
-                $activationLimit,
-            ),
             $instanceID,
         );
     }
