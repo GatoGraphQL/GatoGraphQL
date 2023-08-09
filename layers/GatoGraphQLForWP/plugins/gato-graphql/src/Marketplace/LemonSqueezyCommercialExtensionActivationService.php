@@ -152,23 +152,12 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     /**
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
      *
-     * @param array<string,mixed> Payload stored in the DB from when calling the activation endpoint
      * @return array<string,mixed> Response payload from calling the endpoint
      */
     public function deactivateLicense(
         string $licenseKey,
-        array $activatedCommercialExtensionLicensePayload
-    ): array {
-        /**
-         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-         */
-        $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? null;
-        if ($instanceID === null) {
-            $errorMessage = '';
-            // @todo Process error message
-            return [];
-        }
-        
+        string $instanceID
+    ): array {        
         $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
             $endpoint,
@@ -203,16 +192,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      */
     public function validateLicense(
         string $licenseKey,
-        ?array $activatedCommercialExtensionLicensePayload
+        ?string $instanceID
     ): array {
-        if ($activatedCommercialExtensionLicensePayload !== null) {
-            /**
-             * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-             */
-            $instanceID = $activatedCommercialExtensionLicensePayload['instance']['id'] ?? null;
-        } else {
-            $instanceID = null;
-        }
         $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
             $endpoint,

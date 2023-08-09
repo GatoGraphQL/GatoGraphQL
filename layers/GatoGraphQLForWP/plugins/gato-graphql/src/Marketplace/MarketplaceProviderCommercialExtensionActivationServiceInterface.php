@@ -14,20 +14,18 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
     ): ActivateLicenseAPIResponseProperties;
 
     /**
-     * @param array<string,mixed> Payload stored in the DB from when calling the activation endpoint
      * @return array<string,mixed> Response payload from calling the endpoint
      */
     public function deactivateLicense(
         string $licenseKey,
-        array $activatedCommercialExtensionLicensePayload
+        string $instanceID
     ): array;
 
     /**
-     * @param array<string,mixed> Payload stored in the DB from when calling the activation endpoint
      * @return array<string,mixed> Response payload from calling the endpoint
      */
     public function validateLicense(
         string $licenseKey,
-        ?array $activatedCommercialExtensionLicensePayload
+        ?string $instanceID
     ): array;
 }
