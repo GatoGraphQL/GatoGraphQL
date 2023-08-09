@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\ObjectModels;
+namespace GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels;
 
-class ActivateMarketplaceProductLicenseProperties extends AbstractMarketplaceProductLicenseProperties
+class ActivateLicenseAPIResponseProperties extends AbstractMarketplaceProductLicenseAPIResponseProperties
 {
     /**
-     * @param array<string,mixed> $apiResponsePayload
+     * @param array<string,mixed>|null $apiResponsePayload
      */
     public function __construct(
-        array $apiResponsePayload,
+        ?array $apiResponsePayload,
         ?string $status,
         ?string $errorMessage,
         ?string $successMessage,
