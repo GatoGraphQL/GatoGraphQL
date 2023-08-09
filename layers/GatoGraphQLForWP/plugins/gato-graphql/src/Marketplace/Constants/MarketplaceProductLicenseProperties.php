@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace\Constants;
 
-class MarketplaceProductLicenseProperties
+class LicenseProperties
 {
     /** After executing an operation against the Marketplace Provider's API, store the response */
     public final const API_RESPONSE_PAYLOAD = 'apiResponsePayload';

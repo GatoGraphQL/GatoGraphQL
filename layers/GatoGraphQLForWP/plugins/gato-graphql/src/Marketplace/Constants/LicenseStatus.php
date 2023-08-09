@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace\Constants;
 
-class MarketplaceProductLicenseStatus
+class LicenseStatus
 {
     /** The license key is valid but has no activations */
     public final const INACTIVE = 'inactive';
