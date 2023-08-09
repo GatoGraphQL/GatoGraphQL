@@ -22,6 +22,6 @@ interface MarketplaceProviderCommercialExtensionActivationServiceInterface
 
     public function validateLicense(
         string $licenseKey,
-        ?string $instanceID
+        string $instanceID
     ): ValidateLicenseAPIResponseProperties;
 }

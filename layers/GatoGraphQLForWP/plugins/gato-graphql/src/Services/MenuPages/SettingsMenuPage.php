@@ -451,6 +451,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
             $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug] ?? null;
             $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID] ?? null;
+            if ($instanceID === null) {
+                // @todo Process error message
+                continue;
+            }
             $payload = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                 $licenseKey,
                 $activatedCommercialExtensionLicensePayload,
@@ -469,9 +473,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 // @todo Show error message to the admin
                 continue;
             }
-            /**
-             * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-             */
             $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID] ?? null;
             if ($instanceID === null) {
                 // @todo Process error message

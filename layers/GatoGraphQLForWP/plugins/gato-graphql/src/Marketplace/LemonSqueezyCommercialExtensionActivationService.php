@@ -8,12 +8,10 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivateLicenseAPIResponseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\DeactivateLicenseAPIResponseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ValidateLicenseAPIResponseProperties;
-
 use RuntimeException;
 use WP_Error;
+
 use function wp_remote_post;
-use function wp_remote_retrieve_response_code;
-use function wp_remote_retrieve_response_message;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
@@ -33,7 +31,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
                 null,
                 $response->get_error_message(),
                 null,
-                null
+                null,
             );
         }
 
@@ -53,7 +51,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
                 $body['license_key']['status'] ?? null,
                 $error,
                 null,
-                $body['instance']['id'] ?? null
+                $body['instance']['id'] ?? null,
             );
         }
 
@@ -75,7 +73,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
                 $activationUsage,
                 $activationLimit,
             ),
-            $instanceID
+            $instanceID,
         );
     }
 
@@ -129,28 +127,6 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         };
     }
 
-    /**
-     * @param array<string,mixed>|WP_Error $response
-     */
-    protected function processResponse(array|WP_Error $response): array
-    {
-        if ($response instanceof WP_Error) {
-            $errorMessage = $response->get_error_message();
-            // @todo Process error message
-            return [];
-        }
-
-        $body = json_decode($response['body'], true);
-
-        if (wp_remote_retrieve_response_code($response) !== 200) {
-            $errorMessage = $body['error'] ?? wp_remote_retrieve_response_message($response);
-            // @todo Process error message
-            return [];
-        }
-
-        return $body;
-    }
-
     public function deactivateLicense(
         string $licenseKey,
         string $instanceID
@@ -163,7 +139,51 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             ]
         );
 
-        return $this->processResponse($response);
+        if ($response instanceof WP_Error) {
+            return new DeactivateLicenseAPIResponseProperties(
+                null,
+                null,
+                $response->get_error_message(),
+                null,
+            );
+        }
+
+        $body = json_decode($response['body'], true);
+
+        /**
+         * Extract properties from the response.
+         *
+         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
+         *
+         * @var string|null
+         */
+        $error = $body['license_key']['error'];
+        if ($error !== null) {
+            return new DeactivateLicenseAPIResponseProperties(
+                $body,
+                $body['license_key']['status'] ?? null,
+                $error,
+                null,
+            );
+        }
+
+        /** @var string */
+        $status = $body['license_key']['status'];
+        $status = $this->convertStatus($status);
+        /** @var string */
+        $activationUsage = $body['license_key']['activation_usage'];
+        /** @var string */
+        $activationLimit = $body['license_key']['activation_limit'];
+        return new DeactivateLicenseAPIResponseProperties(
+            $body,
+            $status,
+            null,
+            sprintf(
+                \__('License for this instance has been deactivated. You now have %s/%s instances activated.', 'gato-graphql'),
+                $activationUsage,
+                $activationLimit,
+            ),
+        );
     }
 
     /**
@@ -183,7 +203,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
     public function validateLicense(
         string $licenseKey,
-        ?string $instanceID
+        string $instanceID
     ): ValidateLicenseAPIResponseProperties {
         $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
@@ -193,7 +213,53 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             ]
         );
 
-        return $this->processResponse($response);
+        if ($response instanceof WP_Error) {
+            return new ValidateLicenseAPIResponseProperties(
+                null,
+                null,
+                $response->get_error_message(),
+                null,
+            );
+        }
+
+        $body = json_decode($response['body'], true);
+
+        /**
+         * Extract properties from the response.
+         *
+         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
+         *
+         * @var string|null
+         */
+        $error = $body['license_key']['error'];
+        if ($error !== null) {
+            return new ValidateLicenseAPIResponseProperties(
+                $body,
+                $body['license_key']['status'] ?? null,
+                $error,
+                null,
+            );
+        }
+
+        /** @var string */
+        $status = $body['license_key']['status'];
+        $status = $this->convertStatus($status);
+        /** @var string */
+        $instanceID = $body['instance']['id'];
+        /** @var string */
+        $activationUsage = $body['license_key']['activation_usage'];
+        /** @var string */
+        $activationLimit = $body['license_key']['activation_limit'];
+        return new ValidateLicenseAPIResponseProperties(
+            $body,
+            $status,
+            null,
+            sprintf(
+                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
+                $activationUsage,
+                $activationLimit,
+            ),
+        );
     }
 
     /**
@@ -201,13 +267,13 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      */
     protected function getValidateLicenseEndpoint(
         string $licenseKey,
-        ?string $instanceID
+        string $instanceID
     ): string {
         return sprintf(
             '%s/v1/licenses/validate?license_key=%s&instance_id=%s',
             $this->getLemonSqueezyAPIBaseURL(),
             $licenseKey,
-            $instanceID ?? ''
+            $instanceID
         );
     }
 }
