@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels;
 
 use PoP\Root\Exception\ShouldNotHappenException;
 
-abstract class AbstractMarketplaceProductLicenseAPIResponseProperties
+class LicenseOperationAPIResponseProperties
 {
     /**
      * @param array<string,mixed>|null $apiResponsePayload
@@ -16,6 +16,7 @@ abstract class AbstractMarketplaceProductLicenseAPIResponseProperties
         public readonly ?string $status,
         public readonly ?string $errorMessage,
         public readonly ?string $successMessage,
+        public readonly ?string $instanceID,
     ) {
         if ($errorMessage === null) {
             if ($successMessage === null) {
@@ -31,6 +32,11 @@ abstract class AbstractMarketplaceProductLicenseAPIResponseProperties
             if ($status === null) {
                 throw new ShouldNotHappenException(
                     \__('Must provide the status for a successful operation', 'gato-graphql')
+                );
+            }
+            if ($instanceID === null) {
+                throw new ShouldNotHappenException(
+                    \__('Must provide the instance ID for a successful operation', 'gato-graphql')
                 );
             }
         } else {

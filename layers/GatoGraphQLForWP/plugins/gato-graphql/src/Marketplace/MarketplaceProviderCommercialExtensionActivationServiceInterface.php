@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivateLicenseAPIResponseProperties;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\DeactivateLicenseAPIResponseProperties;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ValidateLicenseAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
 
 interface MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
     public function activateLicense(
         string $licenseKey,
         string $instanceName
-    ): ActivateLicenseAPIResponseProperties;
+    ): LicenseOperationAPIResponseProperties;
 
     public function deactivateLicense(
         string $licenseKey,
         string $instanceID
-    ): DeactivateLicenseAPIResponseProperties;
+    ): LicenseOperationAPIResponseProperties;
 
     public function validateLicense(
         string $licenseKey,
         string $instanceID
-    ): ValidateLicenseAPIResponseProperties;
+    ): LicenseOperationAPIResponseProperties;
 }

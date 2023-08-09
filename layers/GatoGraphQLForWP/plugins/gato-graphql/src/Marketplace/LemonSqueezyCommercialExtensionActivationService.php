@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivateLicenseAPIResponseProperties;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\DeactivateLicenseAPIResponseProperties;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ValidateLicenseAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
 use RuntimeException;
 use WP_Error;
 
@@ -15,7 +13,7 @@ use function wp_remote_post;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
-    public function activateLicense(string $licenseKey, string $instanceName): ActivateLicenseAPIResponseProperties
+    public function activateLicense(string $licenseKey, string $instanceName): LicenseOperationAPIResponseProperties
     {
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
         $response = wp_remote_post(
@@ -26,7 +24,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         );
 
         if ($response instanceof WP_Error) {
-            return new ActivateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 null,
                 null,
                 $response->get_error_message(),
@@ -46,7 +44,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          */
         $error = $body['license_key']['error'];
         if ($error !== null) {
-            return new ActivateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 $body,
                 $body['license_key']['status'] ?? null,
                 $error,
@@ -64,7 +62,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $activationUsage = $body['license_key']['activation_usage'];
         /** @var string */
         $activationLimit = $body['license_key']['activation_limit'];
-        return new ActivateLicenseAPIResponseProperties(
+        return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
             null,
@@ -114,10 +112,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      * 
      * @param array<string,mixed>|WP_Error $response
      */
-    protected function processResponse(array|WP_Error $response): ActivateLicenseAPIResponseProperties
+    protected function processResponse(array|WP_Error $response): LicenseOperationAPIResponseProperties
     {
         if ($response instanceof WP_Error) {
-            return new ActivateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 null,
                 null,
                 $response->get_error_message(),
@@ -133,7 +131,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          */
         $error = $body['license_key']['error'];
         if ($error !== null) {
-            return new ActivateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 $body,
                 $body['license_key']['status'] ?? null,
                 $error,
@@ -151,7 +149,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $activationUsage = $body['license_key']['activation_usage'];
         /** @var string */
         $activationLimit = $body['license_key']['activation_limit'];
-        return new ActivateLicenseAPIResponseProperties(
+        return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
             null,
@@ -189,7 +187,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     public function deactivateLicense(
         string $licenseKey,
         string $instanceID
-    ): DeactivateLicenseAPIResponseProperties {        
+    ): LicenseOperationAPIResponseProperties {        
         $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
             $endpoint,
@@ -199,11 +197,12 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         );
 
         if ($response instanceof WP_Error) {
-            return new DeactivateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 null,
                 null,
                 $response->get_error_message(),
                 null,
+                $instanceID,
             );
         }
 
@@ -218,11 +217,12 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          */
         $error = $body['license_key']['error'];
         if ($error !== null) {
-            return new DeactivateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 $body,
                 $body['license_key']['status'] ?? null,
                 $error,
                 null,
+                $instanceID,
             );
         }
 
@@ -233,7 +233,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $activationUsage = $body['license_key']['activation_usage'];
         /** @var string */
         $activationLimit = $body['license_key']['activation_limit'];
-        return new DeactivateLicenseAPIResponseProperties(
+        return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
             null,
@@ -242,6 +242,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
                 $activationUsage,
                 $activationLimit,
             ),
+            $instanceID,
         );
     }
 
@@ -263,7 +264,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     public function validateLicense(
         string $licenseKey,
         string $instanceID
-    ): ValidateLicenseAPIResponseProperties {
+    ): LicenseOperationAPIResponseProperties {
         $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
         $response = wp_remote_post(
             $endpoint,
@@ -273,11 +274,12 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         );
 
         if ($response instanceof WP_Error) {
-            return new ValidateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 null,
                 null,
                 $response->get_error_message(),
                 null,
+                $instanceID,
             );
         }
 
@@ -292,11 +294,12 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          */
         $error = $body['license_key']['error'];
         if ($error !== null) {
-            return new ValidateLicenseAPIResponseProperties(
+            return new LicenseOperationAPIResponseProperties(
                 $body,
                 $body['license_key']['status'] ?? null,
                 $error,
                 null,
+                $instanceID,
             );
         }
 
@@ -309,7 +312,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $activationUsage = $body['license_key']['activation_usage'];
         /** @var string */
         $activationLimit = $body['license_key']['activation_limit'];
-        return new ValidateLicenseAPIResponseProperties(
+        return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
             null,
@@ -318,6 +321,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
                 $activationUsage,
                 $activationLimit,
             ),
+            $instanceID,
         );
     }
 
