@@ -553,12 +553,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // Do not store deactivated instances
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
-
-        $instanceName = $this->getInstanceName();
         
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var string */
             $extensionName = $commercialExtensionSlugNames[$extensionSlug];
+            $instanceName = $this->getInstanceName($extensionSlug);
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
@@ -777,11 +776,18 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * Use the site's domain as the instance name
+     * Use as the instance name:
+     *
+     * - The site's domain: to understand on what domain it was installed
+     * - Extension slug: to make sure the right license key was provided
      */
-    protected function getInstanceName(): string
+    protected function getInstanceName(string $extensionSlug): string
     {
-        return GeneralUtils::getHost(home_url());
+        return sprintf(
+            '%s (%s)',
+            GeneralUtils::getHost(home_url()),
+            $extensionSlug
+        );
     }
 
     /**
