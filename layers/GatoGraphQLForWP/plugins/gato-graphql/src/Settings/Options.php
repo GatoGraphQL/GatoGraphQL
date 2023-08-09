@@ -46,8 +46,8 @@ class Options
      */
     public final const TIMESTAMPS = 'gato-graphql-timestamps';
     /**
-     * Store the JSON payloads for all bundles/extensions that
+     * Store the license data for all bundles/extensions that
      * have been activated
      */
-    public final const ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS = 'gato-graphql-activated-commercial-extension-license-payloads';
+    public final const COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES = 'gato-graphql-commercial-extension-activated-license-entries';
 }

@@ -438,13 +438,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         array $submittedLicenseKeys,
     ): void {
         /** @var array<string,mixed> */
-        $activatedCommercialExtensionLicensePayloads = get_option(Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS, []); 
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []); 
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
             $validateLicenseKeys,
         ] = $this->calculateLicenseKeysToActivateDeactivateValidate(
-            $activatedCommercialExtensionLicensePayloads,
+            $commercialExtensionActivatedLicenseEntries,
             $previousLicenseKeys,
             $submittedLicenseKeys,
         );
@@ -454,17 +454,17 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var array<string,mixed> */
-            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug];
+            $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
-            $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID];
+            $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                     $licenseKey,
                     $instanceID,
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
-                $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationError(
-                    $activatedCommercialExtensionLicensePayloads,
+                $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
+                    $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
                     $e,
                 );
@@ -476,8 +476,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
             );
-            $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationSuccess(
-                $activatedCommercialExtensionLicensePayloads,
+            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
+                $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
                 $licenseOperationAPIResponseProperties,
                 $successMessage,
@@ -490,17 +490,17 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var array<string,mixed> */
-            $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug];
+            $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
-            $instanceID = $activatedCommercialExtensionLicensePayload[LicenseProperties::INSTANCE_ID];
+            $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
                     $licenseKey,
                     $instanceID,
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
-                $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationError(
-                    $activatedCommercialExtensionLicensePayloads,
+                $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
+                    $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
                     $e,
                 );
@@ -512,14 +512,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
             );
-            $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationSuccess(
-                $activatedCommercialExtensionLicensePayloads,
+            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
+                $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
                 $licenseOperationAPIResponseProperties,
                 $successMessage,
             );
             // Do not store deactivated instances
-            unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+            unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
 
         $instanceName = $this->getInstanceName();
@@ -528,8 +528,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
-                $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationError(
-                    $activatedCommercialExtensionLicensePayloads,
+                $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
+                    $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
                     $e,
                 );
@@ -541,8 +541,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
             );
-            $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationSuccess(
-                $activatedCommercialExtensionLicensePayloads,
+            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
+                $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
                 $licenseOperationAPIResponseProperties,
                 $successMessage,
@@ -551,8 +551,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         
         // Store the payloads to the DB
         update_option(
-            Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS,
-            $activatedCommercialExtensionLicensePayloads
+            Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
+            $commercialExtensionActivatedLicenseEntries
         );            
     }
 
@@ -566,37 +566,37 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * 
      * Show an error message to the admin.
      *
-     * @param array<string,mixed> $activatedCommercialExtensionLicensePayloads
+     * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
      */
     protected function handleLicenseOperationError(
-        array $activatedCommercialExtensionLicensePayloads,
+        array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
         HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
     ): array {
         if ($e instanceof LicenseOperationNotSuccessfulException) {
-            unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+            unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
 
         $errorMessage = $e->getMessage();
         // @todo Show error messages to the admin
         // ...
 
-        return $activatedCommercialExtensionLicensePayloads;
+        return $commercialExtensionActivatedLicenseEntries;
     }
 
     /**
      * Add the payload entry to be stored in the DB, and show a success
      * message to the admin.
      *
-     * @param array<string,mixed> $activatedCommercialExtensionLicensePayloads
+     * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
      */
     protected function handleLicenseOperationSuccess(
-        array $activatedCommercialExtensionLicensePayloads,
+        array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
         LicenseOperationAPIResponseProperties $licenseOperationAPIResponseProperties,
         string $successMessage,
     ): array {
-        $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
+        $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
             LicenseProperties::API_RESPONSE_PAYLOAD => $licenseOperationAPIResponseProperties->apiResponsePayload,
             LicenseProperties::STATUS => $licenseOperationAPIResponseProperties->status,
             LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
@@ -605,7 +605,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         // @todo Show success messages to the admin
         // ...
 
-        return $activatedCommercialExtensionLicensePayloads;
+        return $commercialExtensionActivatedLicenseEntries;
     }
 
     /**
@@ -622,13 +622,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * - If the license key is removed (i.e. it is empty now, non-empty before), then deactivate it
      * - If the license key has been updated, then deactivate the previous one, and activate the new one
      * 
-     * @param array<string,mixed> $activatedCommercialExtensionLicensePayloads
+     * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      * @return array{0:array<string,string>,1:array<string,string>,2:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys, [2]: $validateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
      */
     protected function calculateLicenseKeysToActivateDeactivateValidate(
-        array $activatedCommercialExtensionLicensePayloads,
+        array $commercialExtensionActivatedLicenseEntries,
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
     ): array {
@@ -643,7 +643,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 // License key not set => Skip
                 continue;
             }
-            $hasExtensionBeenActivated = isset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+            $hasExtensionBeenActivated = isset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
             $previousLicenseKey = trim($previousLicenseKeys[$extensionSlug] ?? '');
             if ($previousLicenseKey === $submittedLicenseKey) {
                 if ($hasExtensionBeenActivated) {

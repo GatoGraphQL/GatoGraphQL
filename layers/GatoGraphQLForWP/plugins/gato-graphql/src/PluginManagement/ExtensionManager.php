@@ -44,11 +44,11 @@ class ExtensionManager extends AbstractPluginManager
     private array $extensionBaseNameInstances = [];
 
     /**
-     * JSON payloads for all bundles/extensions that have been activated
+     * License data for all bundles/extensions that have been activated
      *
-     * @var array<string,array<string,mixed>>|null Extension Slug => Activated API Response Payload
+     * @var array<string,array<string,mixed>>|null Extension Slug => Activated License data item
      */
-    private ?array $activatedCommercialExtensionLicensePayloads = null;
+    private ?array $commercialExtensionActivatedLicenseEntries = null;
 
     /**
      * Extensions, organized under their name.
@@ -224,8 +224,8 @@ class ExtensionManager extends AbstractPluginManager
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
          */
-        $activatedCommercialExtensionLicensePayloads = $this->getActivatedCommercialExtensionLicensePayloads();
-        if (!isset($activatedCommercialExtensionLicensePayloads[$extensionSlug])) {
+        $commercialExtensionActivatedLicenseEntries = $this->getCommercialExtensionActivatedLicenseEntries();
+        if (!isset($commercialExtensionActivatedLicenseEntries[$extensionSlug])) {
             $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
             return false;
         }
@@ -238,9 +238,9 @@ class ExtensionManager extends AbstractPluginManager
          * 
          * @var array<string,mixed>
          */
-        $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug];
+        $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
         /** @var string */
-        $licenseStatus = $activatedCommercialExtensionLicensePayload[LicenseProperties::STATUS];
+        $licenseStatus = $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS];
         if (!in_array($licenseStatus, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
@@ -253,17 +253,17 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * Retrieve the JSON payloads for all bundles/extensions that
+     * Retrieve the license data for all bundles/extensions that
      * have been activated.
      *
-     * @return array<string,array<string,mixed>> Extension Slug => Activated API Response Payload
+     * @return array<string,array<string,mixed>> Extension Slug => Activated License data item
      */
-    protected function getActivatedCommercialExtensionLicensePayloads(): array
+    protected function getCommercialExtensionActivatedLicenseEntries(): array
     {
-        if ($this->activatedCommercialExtensionLicensePayloads === null) {
-            $this->activatedCommercialExtensionLicensePayloads = get_option(Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS, []);
+        if ($this->commercialExtensionActivatedLicenseEntries === null) {
+            $this->commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
         }
-        return $this->activatedCommercialExtensionLicensePayloads;
+        return $this->commercialExtensionActivatedLicenseEntries;
     }
 
     /**
