@@ -110,8 +110,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
      */
-    protected function handleLicenseOperation(string $endpoint): LicenseOperationAPIResponseProperties
-    {
+    protected function handleLicenseOperation(
+        string $endpoint,
+        ?string $instanceID
+    ): LicenseOperationAPIResponseProperties {
         $response = wp_remote_post(
             $endpoint,
             [
@@ -148,8 +150,11 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         /** @var string */
         $status = $body['license_key']['status'];
         $status = $this->convertStatus($status);
-        /** @var string */
-        $instanceID = $body['instance']['id'];
+        // Just for the /activate endpoint
+        if ($instanceID === null) {
+            /** @var string */
+            $instanceID = $body['instance']['id'];
+        }
         /** @var string */
         $activationUsage = $body['license_key']['activation_usage'];
         /** @var string */
