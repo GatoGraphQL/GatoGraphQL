@@ -456,6 +456,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             return;
         }
 
+        // Keep the original values, to only flush the container if these have changed
+        $originalCommercialExtensionActivatedLicenseEntries = $commercialExtensionActivatedLicenseEntries;
+
         $extensionManager = PluginApp::getExtensionManager();
         $commercialExtensionSlugNames = $extensionManager->getCommercialExtensionSlugNames();
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
@@ -592,7 +595,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
         
         // Because extensions will be activated/deactivated, flush the service container
-        $this->flushContainer(true, true);
+        if ($originalCommercialExtensionActivatedLicenseEntries !== $commercialExtensionActivatedLicenseEntries) {
+            $this->flushContainer(true, true);
+        }
     }
 
     /**
