@@ -15,6 +15,10 @@ use function wp_remote_post;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
+    /**
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     */
     public function activateLicense(string $licenseKey, string $instanceName): LicenseOperationAPIResponseProperties
     {
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
@@ -187,6 +191,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         };
     }
 
+    /**
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     */
     public function deactivateLicense(
         string $licenseKey,
         string $instanceID
@@ -264,6 +272,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         );
     }
 
+    /**
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
+     */
     public function validateLicense(
         string $licenseKey,
         string $instanceID
