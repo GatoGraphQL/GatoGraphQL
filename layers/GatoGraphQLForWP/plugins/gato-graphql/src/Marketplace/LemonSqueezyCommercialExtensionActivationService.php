@@ -9,8 +9,8 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulExcept
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
 use RuntimeException;
-
 use WP_Error;
+
 use function wp_remote_post;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
@@ -103,7 +103,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 
         $activationUsage = (int) $body['license_key']['activation_usage'];
         $activationLimit = (int) $body['license_key']['activation_limit'];
-        
+
         return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
@@ -144,61 +144,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         string $instanceID
     ): LicenseOperationAPIResponseProperties {        
         $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
-        $response = wp_remote_post(
-            $endpoint,
-            [
-                'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
-            ]
-        );
-
-        if ($response instanceof WP_Error) {
-            return new LicenseOperationAPIResponseProperties(
-                null,
-                null,
-                $response->get_error_message(),
-                null,
-                $instanceID,
-            );
-        }
-
-        $body = json_decode($response['body'], true);
-
-        /**
-         * Extract properties from the response.
-         *
-         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
-         *
-         * @var string|null
-         */
-        $error = $body['license_key']['error'];
-        if ($error !== null) {
-            return new LicenseOperationAPIResponseProperties(
-                $body,
-                $body['license_key']['status'] ?? null,
-                $error,
-                null,
-                $instanceID,
-            );
-        }
-
-        /** @var string */
-        $status = $body['license_key']['status'];
-        $status = $this->convertStatus($status);
-        /** @var string */
-        $activationUsage = $body['license_key']['activation_usage'];
-        /** @var string */
-        $activationLimit = $body['license_key']['activation_limit'];
-        return new LicenseOperationAPIResponseProperties(
-            $body,
-            $status,
-            null,
-            sprintf(
-                \__('License for this instance has been deactivated. You now have %s/%s instances activated.', 'gato-graphql'),
-                $activationUsage,
-                $activationLimit,
-            ),
-            $instanceID,
-        );
+        return $this->handleLicenseOperation($endpoint, $instanceID);
     }
 
     /**
@@ -225,63 +171,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         string $instanceID
     ): LicenseOperationAPIResponseProperties {
         $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
-        $response = wp_remote_post(
-            $endpoint,
-            [
-                'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
-            ]
-        );
-
-        if ($response instanceof WP_Error) {
-            return new LicenseOperationAPIResponseProperties(
-                null,
-                null,
-                $response->get_error_message(),
-                null,
-                $instanceID,
-            );
-        }
-
-        $body = json_decode($response['body'], true);
-
-        /**
-         * Extract properties from the response.
-         *
-         * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
-         *
-         * @var string|null
-         */
-        $error = $body['license_key']['error'];
-        if ($error !== null) {
-            return new LicenseOperationAPIResponseProperties(
-                $body,
-                $body['license_key']['status'] ?? null,
-                $error,
-                null,
-                $instanceID,
-            );
-        }
-
-        /** @var string */
-        $status = $body['license_key']['status'];
-        $status = $this->convertStatus($status);
-        /** @var string */
-        $instanceID = $body['instance']['id'];
-        /** @var string */
-        $activationUsage = $body['license_key']['activation_usage'];
-        /** @var string */
-        $activationLimit = $body['license_key']['activation_limit'];
-        return new LicenseOperationAPIResponseProperties(
-            $body,
-            $status,
-            null,
-            sprintf(
-                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
-                $activationUsage,
-                $activationLimit,
-            ),
-            $instanceID,
-        );
+        return $this->handleLicenseOperation($endpoint, $instanceID);
     }
 
     /**
