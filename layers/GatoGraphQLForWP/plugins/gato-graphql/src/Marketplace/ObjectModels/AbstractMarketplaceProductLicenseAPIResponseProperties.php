@@ -16,4 +16,17 @@ abstract class AbstractMarketplaceProductLicenseAPIResponseProperties
         public readonly ?string $successMessage,
     ) {
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'apiResponsePayload' => $this->apiResponsePayload,
+            'status' => $this->status,
+            'errorMessage' => $this->errorMessage,
+            'successMessage' => $this->successMessage,
+        ];
+    }
 }
