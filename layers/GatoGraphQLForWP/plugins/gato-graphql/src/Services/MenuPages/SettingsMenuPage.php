@@ -468,7 +468,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
-                    \__('Validating license for "%s": %s', 'gato-graphql'),
+                    \__('Validating license for "%s" produced error: %s', 'gato-graphql'),
                     $extensionName,
                     $e->getMessage()
                 );
@@ -513,7 +513,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
-                    \__('Deactivating license for "%s": %s', 'gato-graphql'),
+                    \__('Deactivating license for "%s" produced error: %s', 'gato-graphql'),
                     $extensionName,
                     $e->getMessage()
                 );
@@ -551,7 +551,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
-                    \__('Activating license for "%s": %s', 'gato-graphql'),
+                    \__('Activating license for "%s" produced error: %s', 'gato-graphql'),
                     $extensionName,
                     $e->getMessage()
                 );
