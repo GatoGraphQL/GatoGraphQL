@@ -229,13 +229,20 @@ class ExtensionManager extends AbstractPluginManager
             $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
             return false;
         }
-        /** @var array<string,mixed> */
+
+        /**
+         * Check that the license status is valid to use the plugin:
+         *
+         * - Active: Plugin has been activated, is currently within subscription period
+         * - Expired: Subscription has expired, but users can keep using the plugin
+         * 
+         * @var array<string,mixed>
+         */
         $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug];
         /** @var string */
         $licenseStatus = $activatedCommercialExtensionLicensePayload[LicenseProperties::STATUS];
         if (!in_array($licenseStatus, [
             LicenseStatus::ACTIVE,
-            // Allow users to keep using the plugin after their subscription has expired
             LicenseStatus::EXPIRED,
         ])) {
             $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
