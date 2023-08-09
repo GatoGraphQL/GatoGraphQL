@@ -48,16 +48,20 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             );
         }
 
+        /** @var string */
+        $status = $body['license_key']['status'];
+        /** @var string */
+        $instanceID = $body['instance']['id'];
         return new ActivateLicenseAPIResponseProperties(
             $body,
-            $body['license_key']['status'] ?? null,
+            $status,
             null,
             sprintf(
                 \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
                 $body['license_key']['activation_usage'] ?? '',
                 $body['license_key']['activation_limit'] ?? '',
             ),
-            $body['instance']['id'] ?? null
+            $instanceID
         );
     }
 
