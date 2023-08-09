@@ -152,8 +152,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $moduleSettings = parent::getSettings($module);
         if ($module === self::ACTIVATE_EXTENSIONS) {
             $extensionManager = PluginApp::getExtensionManager();
-            $commercialExtensionSlugNames = $extensionManager->getCommercialExtensionSlugNames();
-            if ($commercialExtensionSlugNames !== []) {
+            $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
+            if ($commercialExtensionSlugProductNames !== []) {
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -164,7 +164,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::TITLE => \__('License keys from the Gato GraphQL Shop', 'gato-graphql'),
                     Properties::DESCRIPTION => \__('Enter the license keys for the bundles/extensions, and click on "Activate":', 'gato-graphql'),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
-                    Properties::KEY_LABELS => $commercialExtensionSlugNames,
+                    Properties::KEY_LABELS => $commercialExtensionSlugProductNames,
                 ];
                 /**
                  * Have the activate button name be sent as part of the form

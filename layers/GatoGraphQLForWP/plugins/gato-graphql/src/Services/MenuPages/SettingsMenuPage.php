@@ -460,13 +460,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $originalCommercialExtensionActivatedLicenseEntries = $commercialExtensionActivatedLicenseEntries;
 
         $extensionManager = PluginApp::getExtensionManager();
-        $commercialExtensionSlugNames = $extensionManager->getCommercialExtensionSlugNames();
+        $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
         $licenseOperationAPIResponseProperties = null;
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var string */
-            $extensionName = $commercialExtensionSlugNames[$extensionSlug];
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
             /** @var array<string,mixed> */
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
@@ -512,7 +512,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var string */
-            $extensionName = $commercialExtensionSlugNames[$extensionSlug];
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
             /** @var array<string,mixed> */
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
@@ -556,7 +556,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var string */
-            $extensionName = $commercialExtensionSlugNames[$extensionSlug];
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
             $instanceName = $this->getInstanceName($extensionSlug);
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);

@@ -30,7 +30,7 @@ class ExtensionManager extends AbstractPluginManager
     private array $activatedLicenseCommercialExtensionSlugProductNames = [];
 
     /** @var array<string,string>|null Extension Slug => Extension Name */
-    private ?array $commercialExtensionSlugNames = null;
+    private ?array $commercialExtensionSlugProductNames = null;
 
     /**
      * Have the extensions organized by their class
@@ -306,15 +306,15 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * @return array<string,string> Extension Slug => Extension Name
      */
-    public function getCommercialExtensionSlugNames(): array
+    public function getCommercialExtensionSlugProductNames(): array
     {
-        if ($this->commercialExtensionSlugNames === null) {
-            $this->commercialExtensionSlugNames = array_merge(
+        if ($this->commercialExtensionSlugProductNames === null) {
+            $this->commercialExtensionSlugProductNames = array_merge(
                 $this->getNonActivatedLicenseCommercialExtensionSlugProductNames(),
                 $this->getActivatedLicenseCommercialExtensionSlugProductNames(),
             );
-            ksort($this->commercialExtensionSlugNames);
+            ksort($this->commercialExtensionSlugProductNames);
         }
-        return $this->commercialExtensionSlugNames;
+        return $this->commercialExtensionSlugProductNames;
     }
 }
