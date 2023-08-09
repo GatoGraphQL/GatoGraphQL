@@ -24,10 +24,10 @@ use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
-
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+
 use function get_option;
 use function home_url;
 use function update_option;
@@ -551,7 +551,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $successMessage,
             );
         }
-        
+
         // Store the payloads to the DB
         update_option(
             Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
@@ -582,12 +582,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         // Show the error message to the admin
         $errorMessage = $e->getMessage();
-        \add_action('admin_notices', function () use ($errorMessage) {
-            printf(
-                '<div class="notice notice-error is-dismissible"><p>%s</p></div>',
-                $errorMessage
-            );
-        });
+        add_settings_error(
+            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+            'license_activation_' . $extensionSlug,
+            $errorMessage,
+            'error'
+        );
 
         return $commercialExtensionActivatedLicenseEntries;
     }
@@ -611,12 +611,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ];
 
         // Show the success message to the admin
-        \add_action('admin_notices', function () use ($successMessage) {
-            printf(
-                '<div class="notice notice-success is-dismissible"><p>%s</p></div>',
-                $successMessage
-            );
-        });
+        add_settings_error(
+            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+            'license_activation_' . $extensionSlug,
+            $successMessage,
+            'success'
+        );
 
         return $commercialExtensionActivatedLicenseEntries;
     }
