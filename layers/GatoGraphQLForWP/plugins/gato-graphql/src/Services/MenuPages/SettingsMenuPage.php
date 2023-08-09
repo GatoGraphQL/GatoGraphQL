@@ -577,9 +577,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
 
+        // Show the error message to the admin
         $errorMessage = $e->getMessage();
-        // @todo Show error messages to the admin
-        // ...
+        \add_action('admin_notices', function () use ($errorMessage) {
+            printf(
+                '<div class="notice notice-error is-dismissible"><p>%s</p></div>',
+                $errorMessage
+            );
+        });
 
         return $commercialExtensionActivatedLicenseEntries;
     }
@@ -602,8 +607,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
         ];
 
-        // @todo Show success messages to the admin
-        // ...
+        // Show the success message to the admin
+        \add_action('admin_notices', function () use ($successMessage) {
+            printf(
+                '<div class="notice notice-success is-dismissible"><p>%s</p></div>',
+                $successMessage
+            );
+        });
 
         return $commercialExtensionActivatedLicenseEntries;
     }
