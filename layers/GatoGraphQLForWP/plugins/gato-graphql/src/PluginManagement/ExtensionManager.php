@@ -23,13 +23,13 @@ class ExtensionManager extends AbstractPluginManager
     /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
 
-    /** @var array<string,string> Extension Slug => Extension Name */
+    /** @var array<string,string> Extension Slug => Extension Product Name */
     private array $nonActivatedLicenseCommercialExtensionSlugProductNames = [];
 
-    /** @var array<string,string> Extension Slug => Extension Name */
+    /** @var array<string,string> Extension Slug => Extension Product Name */
     private array $activatedLicenseCommercialExtensionSlugProductNames = [];
 
-    /** @var array<string,string>|null Extension Slug => Extension Name */
+    /** @var array<string,string>|null Extension Slug => Extension Product Name */
     private ?array $commercialExtensionSlugProductNames = null;
 
     /**
@@ -288,7 +288,7 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension Slug => Extension Name
+     * @return array<string,string> Extension Slug => Extension Product Name
      */
     public function getNonActivatedLicenseCommercialExtensionSlugProductNames(): array
     {
@@ -296,7 +296,7 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension Slug => Extension Name
+     * @return array<string,string> Extension Slug => Extension Product Name
      */
     public function getActivatedLicenseCommercialExtensionSlugProductNames(): array
     {
@@ -304,7 +304,7 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
-     * @return array<string,string> Extension Slug => Extension Name
+     * @return array<string,string> Extension Slug => Extension Product Name
      */
     public function getCommercialExtensionSlugProductNames(): array
     {
