@@ -605,6 +605,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     ): array {
         if ($e instanceof LicenseOperationNotSuccessfulException) {
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
+            $type = 'error';
+        } else {
+            $type = 'warning';
         }
 
         // Show the error message to the admin
@@ -612,7 +615,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
             'license_activation_' . $extensionSlug,
             $errorMessage,
-            'error'
+            $type
         );
 
         return $commercialExtensionActivatedLicenseEntries;
