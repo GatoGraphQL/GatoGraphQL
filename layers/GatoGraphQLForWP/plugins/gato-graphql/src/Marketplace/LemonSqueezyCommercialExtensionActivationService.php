@@ -106,6 +106,65 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     }
 
     /**
+     * Process the API response for the /activate, /deactivate and /validate endpoints.
+     *
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
+     * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
+     * 
+     * @param array<string,mixed>|WP_Error $response
+     */
+    protected function processResponse(array|WP_Error $response): ActivateLicenseAPIResponseProperties
+    {
+        if ($response instanceof WP_Error) {
+            return new ActivateLicenseAPIResponseProperties(
+                null,
+                null,
+                $response->get_error_message(),
+                null,
+                null,
+            );
+        }
+
+        $body = json_decode($response['body'], true);
+
+        /**
+         * @var string|null
+         */
+        $error = $body['license_key']['error'];
+        if ($error !== null) {
+            return new ActivateLicenseAPIResponseProperties(
+                $body,
+                $body['license_key']['status'] ?? null,
+                $error,
+                null,
+                $body['instance']['id'] ?? null,
+            );
+        }
+
+        /** @var string */
+        $status = $body['license_key']['status'];
+        $status = $this->convertStatus($status);
+        /** @var string */
+        $instanceID = $body['instance']['id'];
+        /** @var string */
+        $activationUsage = $body['license_key']['activation_usage'];
+        /** @var string */
+        $activationLimit = $body['license_key']['activation_limit'];
+        return new ActivateLicenseAPIResponseProperties(
+            $body,
+            $status,
+            null,
+            sprintf(
+                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
+                $activationUsage,
+                $activationLimit,
+            ),
+            $instanceID,
+        );
+    }
+
+    /**
      * Convert the status: from the value used by LemonSqueezy,
      * to the constants used by Gato GraphQL
      *
