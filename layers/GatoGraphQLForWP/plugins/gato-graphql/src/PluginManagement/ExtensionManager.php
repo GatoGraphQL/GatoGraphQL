@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
@@ -224,6 +226,18 @@ class ExtensionManager extends AbstractPluginManager
          */
         $activatedCommercialExtensionLicensePayloads = $this->getActivatedCommercialExtensionLicensePayloads();
         if (!isset($activatedCommercialExtensionLicensePayloads[$extensionSlug])) {
+            $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
+            return false;
+        }
+        /** @var array<string,mixed> */
+        $activatedCommercialExtensionLicensePayload = $activatedCommercialExtensionLicensePayloads[$extensionSlug];
+        /** @var string */
+        $licenseStatus = $activatedCommercialExtensionLicensePayload[LicenseProperties::STATUS];
+        if (!in_array($licenseStatus, [
+            LicenseStatus::ACTIVE,
+            // Allow users to keep using the plugin after their subscription has expired
+            LicenseStatus::EXPIRED,
+        ])) {
             $this->nonActivatedLicenseCommercialExtensionFiles[$extensionSlug] = $extensionName;
             return false;
         }
