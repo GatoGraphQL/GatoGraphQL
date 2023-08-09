@@ -91,6 +91,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         /** @var string */
         $status = $body['license_key']['status'];
         $status = $this->convertStatus($status);
+
         /**
          * For the /activate endpoint, retrieve the instance ID from the response,
          * otherwise we already have it
@@ -99,8 +100,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             /** @var string */
             $instanceID = $body['instance']['id'];
         }
+
         $activationUsage = (int) $body['license_key']['activation_usage'];
         $activationLimit = (int) $body['license_key']['activation_limit'];
+        
         return new LicenseOperationAPIResponseProperties(
             $body,
             $status,
