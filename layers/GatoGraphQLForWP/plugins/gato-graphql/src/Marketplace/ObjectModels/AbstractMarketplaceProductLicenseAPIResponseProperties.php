@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels;
 
-abstract class AbstractMarketplaceProductLicenseAPIResponseProperties
+abstract class AbstractMarketplaceProductLicenseAPIResponseProperties implements MarketplaceProductLicenseAPIResponsePropertiesInterface
 {
     /**
      * @param array<string,mixed>|null $apiResponsePayload
