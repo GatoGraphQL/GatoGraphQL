@@ -449,6 +449,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $submittedLicenseKeys,
         );
 
+        if ($activateLicenseKeys === []
+            && $deactivateLicenseKeys === []
+            && $validateLicenseKeys === []
+        ) {
+            return;
+        }
+
         $extensionManager = PluginApp::getExtensionManager();
         $commercialExtensionSlugNames = $extensionManager->getCommercialExtensionSlugNames();
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
