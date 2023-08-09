@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -23,8 +24,8 @@ use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
-use PoP\ComponentModel\Misc\GeneralUtils;
 
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use function get_option;
@@ -457,7 +458,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 // @todo Process error message
                 continue;
             }
-            $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
+            $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                 $licenseKey,
                 $activatedCommercialExtensionLicensePayload,
             );
@@ -482,7 +483,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
 
             // No need to store deactivations in the DB, but do show messages to the admin
-            $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
+            $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
                 $licenseKey,
                 $instanceID,
             );
@@ -497,32 +498,29 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             // Store activations in the DB, and show messages to the admin
-            $apiResponseProperties = null;
+            $licenseOperationAPIResponseProperties = null;
             try {
-                $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
+                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
-                if ($e instanceof LicenseOperationNotSuccessfulException) {
-                    unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
-                }
-
-                $errorMessage = $e->getMessage();
-                // @todo Show error messages to the admin
-                // ...
+                $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationError(
+                    $activatedCommercialExtensionLicensePayloads,
+                    $extensionSlug,
+                    $e,
+                );
 
                 continue;
             }
 
-            $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
-                LicenseProperties::API_RESPONSE_PAYLOAD => $apiResponseProperties->apiResponsePayload,
-                LicenseProperties::STATUS => $apiResponseProperties->status,
-                LicenseProperties::INSTANCE_ID => $apiResponseProperties->instanceID,
-            ];
-
-            // @todo Show success messages to the admin
             $successMessage = sprintf(
                 \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
-                $apiResponseProperties->activationUsage,
-                $apiResponseProperties->activationLimit,
+                $licenseOperationAPIResponseProperties->activationUsage,
+                $licenseOperationAPIResponseProperties->activationLimit,
+            );
+            $activatedCommercialExtensionLicensePayloads = $this->handleLicenseOperationSuccess(
+                $activatedCommercialExtensionLicensePayloads,
+                $extensionSlug,
+                $licenseOperationAPIResponseProperties,
+                $successMessage,
             );
         }
         
@@ -531,6 +529,40 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             Options::ACTIVATED_COMMERCIAL_EXTENSION_LICENSE_PAYLOADS,
             $activatedCommercialExtensionLicensePayloads
         );            
+    }
+
+    protected function handleLicenseOperationError(
+        array $activatedCommercialExtensionLicensePayloads,
+        string $extensionSlug,
+        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
+    ): array {
+        if ($e instanceof LicenseOperationNotSuccessfulException) {
+            unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+        }
+
+        $errorMessage = $e->getMessage();
+        // @todo Show error messages to the admin
+        // ...
+
+        return $activatedCommercialExtensionLicensePayloads;
+    }
+
+    protected function handleLicenseOperationSuccess(
+        array $activatedCommercialExtensionLicensePayloads,
+        string $extensionSlug,
+        LicenseOperationAPIResponseProperties $licenseOperationAPIResponseProperties,
+        string $successMessage,
+    ): array {
+        $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
+            LicenseProperties::API_RESPONSE_PAYLOAD => $licenseOperationAPIResponseProperties->apiResponsePayload,
+            LicenseProperties::STATUS => $licenseOperationAPIResponseProperties->status,
+            LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
+        ];
+
+        // @todo Show success messages to the admin
+        // ...
+
+        return $activatedCommercialExtensionLicensePayloads;
     }
 
     /**
