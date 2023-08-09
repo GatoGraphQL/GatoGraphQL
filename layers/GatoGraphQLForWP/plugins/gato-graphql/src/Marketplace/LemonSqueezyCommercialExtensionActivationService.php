@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivateLicenseAPIResponseProperties;
 use WP_Error;
 
 use function wp_remote_post;
@@ -14,10 +15,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
 {
     /**
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
-     *
-     * @return array<string,mixed> Response payload from calling the endpoint
      */
-    public function activateLicense(string $licenseKey, string $instanceName): array
+    public function activateLicense(string $licenseKey, string $instanceName): ActivateLicenseAPIResponseProperties
     {
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
         $response = wp_remote_post(
@@ -27,7 +26,39 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             ]
         );
 
-        return $this->processResponse($response);
+        if ($response instanceof WP_Error) {
+            return new ActivateLicenseAPIResponseProperties(
+                null,
+                null,
+                $response->get_error_message(),
+                null,
+                null
+            );
+        }
+
+        $body = json_decode($response['body'], true);
+
+        if (wp_remote_retrieve_response_code($response) !== 200) {
+            return new ActivateLicenseAPIResponseProperties(
+                $body,
+                null,
+                $body['error'] ?? \__('Unspecified error', 'gato-graphql'),
+                null,
+                null
+            );
+        }
+
+        return new ActivateLicenseAPIResponseProperties(
+            $body,
+            $body['license_key']['status'] ?? null,
+            null,
+            sprintf(
+                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
+                $body['license_key']['activation_usage'] ?? '',
+                $body['license_key']['activation_limit'] ?? '',
+            ),
+            $body['instance']['id'] ?? null
+        );
     }
 
     /**
