@@ -655,6 +655,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             LicenseProperties::API_RESPONSE_PAYLOAD => $licenseOperationAPIResponseProperties->apiResponsePayload,
             LicenseProperties::STATUS => $licenseOperationAPIResponseProperties->status,
             LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
+            LicenseProperties::PRODUCT_NAME => $licenseOperationAPIResponseProperties->productName,
         ];
 
         // Show the success message to the admin

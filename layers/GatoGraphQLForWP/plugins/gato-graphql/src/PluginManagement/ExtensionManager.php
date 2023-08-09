@@ -233,16 +233,16 @@ class ExtensionManager extends AbstractPluginManager
             return false;
         }
 
+        /** @var array<string,mixed> */
+        $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
+        
         /**
          * Check that the license status is valid to use the plugin:
          *
          * - Active: Plugin has been activated, is currently within subscription period
          * - Expired: Subscription has expired, but users can keep using the plugin
          * 
-         * @var array<string,mixed>
-         */
-        $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
-        /** @var string */
+         * @var string */
         $licenseStatus = $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS];
         if (!in_array($licenseStatus, [
             LicenseStatus::ACTIVE,
@@ -251,6 +251,19 @@ class ExtensionManager extends AbstractPluginManager
             $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
             return false;
         }
+
+        /**
+         * Make sure the activated plugin is the corresponding one to the license.
+         *
+         * @var string
+         */
+        $productName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME];
+        if ($productName !== $extensionName) {
+            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
+            return false;
+        }
+
+        // Everything is good!
         $this->activatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
         return true;
     }
