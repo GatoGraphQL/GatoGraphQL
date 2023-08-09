@@ -455,7 +455,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 // @todo Process error message
                 continue;
             }
-            $payload = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
+            $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                 $licenseKey,
                 $activatedCommercialExtensionLicensePayload,
             );
@@ -480,7 +480,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
 
             // No need to store deactivations in the DB, but do show messages to the admin
-            $payload = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
+            $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
                 $licenseKey,
                 $instanceID,
             );
@@ -495,14 +495,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             // Store activations in the DB, and show messages to the admin
-            $payload = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
-            if ($payload->isSuccessful()) {
+            $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
+            if ($apiResponseProperties->isSuccessful()) {
                 /** @var array<string,mixed> */
-                $apiResponsePayload = $payload->apiResponsePayload;
+                $apiResponsePayload = $apiResponseProperties->apiResponsePayload;
                 /** @var string */
-                $status = $payload->status;
+                $status = $apiResponseProperties->status;
                 /** @var string */
-                $instanceID = $payload->instanceID;
+                $instanceID = $apiResponseProperties->instanceID;
                 $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
                     LicenseProperties::API_RESPONSE_PAYLOAD => $apiResponsePayload,
                     LicenseProperties::STATUS => $status,
@@ -510,12 +510,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 ];
                 // @todo Show success messages to the admin
                 /** @var string */
-                $successMessage = $payload->successMessage;
+                $successMessage = $apiResponseProperties->successMessage;
             } else {
                 unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
                 // @todo Show error messages to the admin
                 /** @var string */
-                $errorMessage = $payload->errorMessage;
+                $errorMessage = $apiResponseProperties->errorMessage;
             }
             // @todo Show messages to the admin
             // ...
