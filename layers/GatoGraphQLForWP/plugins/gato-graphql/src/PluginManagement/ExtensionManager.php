@@ -29,6 +29,9 @@ class ExtensionManager extends AbstractPluginManager
     /** @var array<string,string> Extension Slug => Extension Name */
     private array $activatedLicenseCommercialExtensions = [];
 
+    /** @var array<string,string>|null Extension Slug => Extension Name */
+    private ?array $commercialExtensionSlugNames = null;
+
     /**
      * Have the extensions organized by their class
      *
@@ -280,5 +283,20 @@ class ExtensionManager extends AbstractPluginManager
     public function getActivatedLicenseCommercialExtensions(): array
     {
         return $this->activatedLicenseCommercialExtensions;
+    }
+
+    /**
+     * @return array<string,string> Extension Slug => Extension Name
+     */
+    public function getCommercialExtensionSlugNames(): array
+    {
+        if ($this->commercialExtensionSlugNames === null) {
+            $this->commercialExtensionSlugNames = array_merge(
+                $this->getNonActivatedLicenseCommercialExtensions(),
+                $this->getActivatedLicenseCommercialExtensions(),
+            );
+            ksort($this->commercialExtensionSlugNames);
+        }
+        return $this->commercialExtensionSlugNames;
     }
 }
