@@ -719,6 +719,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
             if ($submittedLicenseKey === '') {
+                $hasExtensionBeenActivated = isset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
                 if ($hasExtensionBeenActivated) {
                     // License key newly removed => Deactivate
                     $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
