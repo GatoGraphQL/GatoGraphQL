@@ -262,8 +262,8 @@ class ExtensionManager extends AbstractPluginManager
          *
          * @var string
          */
-        $productName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME];
-        if ($productName !== $extensionProductName) {
+        $licenseProductName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME];
+        if ($licenseProductName !== $extensionProductName) {
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
