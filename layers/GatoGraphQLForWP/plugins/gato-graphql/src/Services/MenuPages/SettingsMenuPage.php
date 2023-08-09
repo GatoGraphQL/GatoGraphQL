@@ -8,6 +8,8 @@ use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -22,9 +24,9 @@ use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
 use PoP\ComponentModel\Misc\GeneralUtils;
+
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
-
 use function get_option;
 use function home_url;
 use function update_option;
@@ -495,30 +497,33 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             // Store activations in the DB, and show messages to the admin
-            $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
-            if ($apiResponseProperties->isSuccessful()) {
-                /** @var array<string,mixed> */
-                $apiResponsePayload = $apiResponseProperties->apiResponsePayload;
-                /** @var string */
-                $status = $apiResponseProperties->status;
-                /** @var string */
-                $instanceID = $apiResponseProperties->instanceID;
-                $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
-                    LicenseProperties::API_RESPONSE_PAYLOAD => $apiResponsePayload,
-                    LicenseProperties::STATUS => $status,
-                    LicenseProperties::INSTANCE_ID => $instanceID,
-                ];
-                // @todo Show success messages to the admin
-                /** @var string */
-                $successMessage = $apiResponseProperties->successMessage;
-            } else {
-                unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+            $apiResponseProperties = null;
+            try {
+                $apiResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                if ($e instanceof LicenseOperationNotSuccessfulException) {
+                    unset($activatedCommercialExtensionLicensePayloads[$extensionSlug]);
+                }
+
+                $errorMessage = $e->getMessage();
                 // @todo Show error messages to the admin
-                /** @var string */
-                $errorMessage = $apiResponseProperties->errorMessage;
+                // ...
+
+                continue;
             }
-            // @todo Show messages to the admin
-            // ...
+
+            $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
+                LicenseProperties::API_RESPONSE_PAYLOAD => $apiResponseProperties->apiResponsePayload,
+                LicenseProperties::STATUS => $apiResponseProperties->status,
+                LicenseProperties::INSTANCE_ID => $apiResponseProperties->instanceID,
+            ];
+
+            // @todo Show success messages to the admin
+            $successMessage = sprintf(
+                \__('License is active. You have %s/%s instances activated.', 'gato-graphql'),
+                $apiResponseProperties->activationUsage,
+                $apiResponseProperties->activationLimit,
+            );
         }
         
         // Store the payloads to the DB
