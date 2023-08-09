@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Constants\MarketplaceProductLicenseProperties;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
@@ -485,13 +486,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // Store activations in the DB, and show messages to the admin
             $payload = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             if ($payload->isSuccessful()) {
-                /** @var string */
-                $status = $payload->status;
                 /** @var array<string,mixed> */
                 $apiResponsePayload = $payload->apiResponsePayload;
+                /** @var string */
+                $status = $payload->status;
+                /** @var string */
+                $instanceID = $payload->instanceID;
                 $activatedCommercialExtensionLicensePayloads[$extensionSlug] = [
-                    'apiResponsePayload' => $apiResponsePayload,
-                    'status' => $status,
+                    MarketplaceProductLicenseProperties::API_RESPONSE_PAYLOAD => $apiResponsePayload,
+                    MarketplaceProductLicenseProperties::STATUS => $status,
+                    MarketplaceProductLicenseProperties::INSTANCE_ID => $instanceID,
                 ];
                 // @todo Show success messages to the admin
                 /** @var string */
