@@ -500,6 +500,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
                 $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
+                $extensionName,
                 $licenseOperationAPIResponseProperties,
                 $successMessage,
             );
@@ -545,6 +546,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
                 $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
+                $extensionName,
                 $licenseOperationAPIResponseProperties,
                 $successMessage,
             );
@@ -583,6 +585,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
                 $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
+                $extensionName,
                 $licenseOperationAPIResponseProperties,
                 $successMessage,
             );
@@ -648,6 +651,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function handleLicenseOperationSuccess(
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
+        string $extensionName,
         LicenseOperationAPIResponseProperties $licenseOperationAPIResponseProperties,
         string $successMessage,
     ): array {
@@ -665,6 +669,20 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $successMessage,
             'success'
         );
+
+        if ($licenseOperationAPIResponseProperties->productName !== $extensionName) {
+            // Show the success message to the admin
+            add_settings_error(
+                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                'license_activation_' . $extensionSlug,
+                sprintf(
+                    \__('The purchased license key is for extension "%s", but was instead provided for "%s". Please use the right license keys to properly enable the extensions. Contact the Gato GraphQL team if you need support.'),
+                    $licenseOperationAPIResponseProperties->productName,
+                    $extensionName
+                ),
+                'warning'
+            );
+        }
 
         return $commercialExtensionActivatedLicenseEntries;
     }
