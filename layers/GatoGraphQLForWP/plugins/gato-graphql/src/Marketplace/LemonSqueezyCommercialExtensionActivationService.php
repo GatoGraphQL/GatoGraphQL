@@ -109,11 +109,16 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
-     * 
-     * @param array<string,mixed>|WP_Error $response
      */
-    protected function processResponse(array|WP_Error $response): LicenseOperationAPIResponseProperties
+    protected function handleLicenseOperation(string $endpoint): LicenseOperationAPIResponseProperties
     {
+        $response = wp_remote_post(
+            $endpoint,
+            [
+                'headers' => $this->getLemonSqueezyAPIBaseHeaders(),
+            ]
+        );
+
         if ($response instanceof WP_Error) {
             return new LicenseOperationAPIResponseProperties(
                 null,
