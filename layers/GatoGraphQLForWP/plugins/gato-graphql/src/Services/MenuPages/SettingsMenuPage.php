@@ -467,9 +467,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $instanceID,
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $errorMessage = sprintf(
+                    \__('Validating license for "%s" produced error: %s', 'gato-graphql'),
+                    $extensionName,
+                    $e->getMessage()
+                );
                 $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
                     $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
+                    $errorMessage,
                     $e,
                 );
                 continue;
@@ -506,9 +512,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $instanceID,
                 );
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $errorMessage = sprintf(
+                    \__('Deactivating license for "%s" produced error: %s', 'gato-graphql'),
+                    $extensionName,
+                    $e->getMessage()
+                );
                 $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
                     $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
+                    $errorMessage,
                     $e,
                 );
                 continue;
@@ -538,9 +550,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $errorMessage = sprintf(
+                    \__('Activating license for "%s" produced error: %s', 'gato-graphql'),
+                    $extensionName,
+                    $e->getMessage()
+                );
                 $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
                     $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
+                    $errorMessage,
                     $e,
                 );
                 continue;
@@ -582,6 +600,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function handleLicenseOperationError(
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
+        string $errorMessage,
         HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
     ): array {
         if ($e instanceof LicenseOperationNotSuccessfulException) {
@@ -589,7 +608,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
 
         // Show the error message to the admin
-        $errorMessage = $e->getMessage();
         add_settings_error(
             PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
             'license_activation_' . $extensionSlug,
