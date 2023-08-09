@@ -449,10 +449,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $submittedLicenseKeys,
         );
 
+        $extensionManager = PluginApp::getExtensionManager();
+        $commercialExtensionSlugNames = $extensionManager->getCommercialExtensionSlugNames();
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
         $licenseOperationAPIResponseProperties = null;
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
+            /** @var string */
+            $extensionName = $commercialExtensionSlugNames[$extensionSlug];
             /** @var array<string,mixed> */
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
@@ -473,7 +477,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
             $successMessage = sprintf(
                 \__('Validation status: License for "%s" is active. You have %s/%s instances activated.', 'gato-graphql'),
-                $extensionSlug,
+                $extensionName,
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
             );
@@ -490,6 +494,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * might be deactivated + reactivated (with a different license key)
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
+            /** @var string */
+            $extensionName = $commercialExtensionSlugNames[$extensionSlug];
             /** @var array<string,mixed> */
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
@@ -510,7 +516,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
             $successMessage = sprintf(
                 \__('License for "%s" for this instance has been deactivated. You now have %s/%s instances activated.', 'gato-graphql'),
-                $extensionSlug,
+                $extensionName,
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
             );
@@ -527,6 +533,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $instanceName = $this->getInstanceName();
         
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
+            /** @var string */
+            $extensionName = $commercialExtensionSlugNames[$extensionSlug];
             try {
                 $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
@@ -540,7 +548,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
             $successMessage = sprintf(
                 \__('License for "%s" is active. You have %s/%s instances activated.', 'gato-graphql'),
-                $extensionSlug,
+                $extensionName,
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
             );
