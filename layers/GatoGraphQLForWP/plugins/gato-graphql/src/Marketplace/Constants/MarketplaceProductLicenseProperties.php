@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Constants;
+namespace GatoGraphQL\GatoGraphQL\Marketplace\Constants;
 
 class MarketplaceProductLicenseProperties
 {
