@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
 use RuntimeException;
-use WP_Error;
 
+use WP_Error;
 use function wp_remote_post;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
@@ -109,6 +111,9 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-activate
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-deactivate
      * @see https://docs.lemonsqueezy.com/help/licensing/license-api#post-v1-licenses-validate
+     *
+     * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
+     * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
     protected function handleLicenseOperation(
         string $endpoint,
@@ -122,13 +127,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         );
 
         if ($response instanceof WP_Error) {
-            return new LicenseOperationAPIResponseProperties(
-                null,
-                null,
-                $response->get_error_message(),
-                null,
-                null,
-            );
+            throw new HTTPRequestNotSuccessfulException($response->get_error_message());
         }
 
         $body = json_decode($response['body'], true);
@@ -138,13 +137,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          */
         $error = $body['license_key']['error'];
         if ($error !== null) {
-            return new LicenseOperationAPIResponseProperties(
-                $body,
-                $body['license_key']['status'] ?? null,
-                $error,
-                null,
-                $body['instance']['id'] ?? null,
-            );
+            throw new LicenseOperationNotSuccessfulException($error);
         }
 
         /** @var string */
