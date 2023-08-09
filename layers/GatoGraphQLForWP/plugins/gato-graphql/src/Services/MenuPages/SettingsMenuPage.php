@@ -588,6 +588,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             );
         }
 
+        // Do not flush container or update DB if there are no changes
+        if ($originalCommercialExtensionActivatedLicenseEntries === $commercialExtensionActivatedLicenseEntries) {
+            return;
+        }
+
         // Store the payloads to the DB
         update_option(
             Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
@@ -595,9 +600,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         );
         
         // Because extensions will be activated/deactivated, flush the service container
-        if ($originalCommercialExtensionActivatedLicenseEntries !== $commercialExtensionActivatedLicenseEntries) {
-            $this->flushContainer(true, true);
-        }
+        $this->flushContainer(true, true);
     }
 
     /**
