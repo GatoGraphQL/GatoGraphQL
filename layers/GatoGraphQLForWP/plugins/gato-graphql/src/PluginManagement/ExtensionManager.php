@@ -218,10 +218,15 @@ class ExtensionManager extends AbstractPluginManager
      * 
      * If it has not, also mark the Extension as "inactivated",
      * to show a message to the admin.
+     * 
+     * Please notice that it receives the $extensionProductName,
+     * which is EXACTLY the same name as registered in the
+     * Gato GraphQL Shop. This name is used as an identifier, to
+     * validate that the license key belongs to the right extension.
      */
     public function assertCommercialLicenseHasBeenActivated(
         string $extensionSlug,
-        string $extensionName,
+        string $extensionProductName,
     ): bool {
         /**
          * Retrieve from the DB which licenses have been activated,
@@ -229,7 +234,7 @@ class ExtensionManager extends AbstractPluginManager
          */
         $commercialExtensionActivatedLicenseEntries = $this->getCommercialExtensionActivatedLicenseEntries();
         if (!isset($commercialExtensionActivatedLicenseEntries[$extensionSlug])) {
-            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
+            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
             return false;
         }
 
@@ -248,7 +253,7 @@ class ExtensionManager extends AbstractPluginManager
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
         ])) {
-            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
+            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
             return false;
         }
 
@@ -258,13 +263,13 @@ class ExtensionManager extends AbstractPluginManager
          * @var string
          */
         $productName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME];
-        if ($productName !== $extensionName) {
-            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
+        if ($productName !== $extensionProductName) {
+            $this->nonActivatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
             return false;
         }
 
         // Everything is good!
-        $this->activatedLicenseCommercialExtensions[$extensionSlug] = $extensionName;
+        $this->activatedLicenseCommercialExtensions[$extensionSlug] = $extensionProductName;
         return true;
     }
 
