@@ -226,14 +226,14 @@ class ExtensionManager extends AbstractPluginManager
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
          */
-        $commercialExtensionActivatedLicenseEntryProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseEntryProperties();
-        if (!isset($commercialExtensionActivatedLicenseEntryProperties[$extensionSlug])) {
+        $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
+        if (!isset($commercialExtensionActivatedLicenseObjectProperties[$extensionSlug])) {
             $this->showAdminWarningNotice($extensionProductName);
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
 
-        $extensionCommercialExtensionActivatedLicenseEntryProperties = $commercialExtensionActivatedLicenseEntryProperties[$extensionSlug];
+        $extensionCommercialExtensionActivatedLicenseObjectProperties = $commercialExtensionActivatedLicenseObjectProperties[$extensionSlug];
 
         /**
          * Check that the license status is valid to use the plugin:
@@ -248,7 +248,7 @@ class ExtensionManager extends AbstractPluginManager
          * is ever replaced.
          */
         if (
-            !in_array($extensionCommercialExtensionActivatedLicenseEntryProperties->status, [
+            !in_array($extensionCommercialExtensionActivatedLicenseObjectProperties->status, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
             ])
@@ -266,7 +266,7 @@ class ExtensionManager extends AbstractPluginManager
          *
          * @var string
          */
-        if ($extensionCommercialExtensionActivatedLicenseEntryProperties->productName !== $extensionProductName) {
+        if ($extensionCommercialExtensionActivatedLicenseObjectProperties->productName !== $extensionProductName) {
             $this->showAdminWarningNotice(
                 $extensionProductName,
                 __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gato-graphql')
