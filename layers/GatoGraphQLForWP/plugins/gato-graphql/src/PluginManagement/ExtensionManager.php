@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
@@ -12,8 +13,10 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleR
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
 use function get_option;
 
@@ -282,12 +285,24 @@ class ExtensionManager extends AbstractPluginManager
         return true;
     }
 
+    /**
+     * Unless we are in the Settings page, show a warning about activating the extension
+     */
     protected function showAdminWarningNotice(
         string $extensionProductName,
         ?string $messagePlaceholder = null,
     ): void {
         $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gato-graphql');
         \add_action('admin_notices', function () use ($extensionProductName, $messagePlaceholder) {
+            /**
+             * Do not print the warnings in the Settings page
+             */
+            $instanceManager = InstanceManagerFacade::getInstance();
+            /** @var SettingsMenuPage */
+            $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
+            if (App::query('page') === $settingsMenuPage->getScreenID()) {
+                return;
+            }
             $activateExtensionsSettingsURL = AdminHelpers::getSettingsPageTabURL(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS);
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
