@@ -282,7 +282,7 @@ class ExtensionManager extends AbstractPluginManager
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
-                    __('<strong>Gato GraphQL - %s</strong>: Please <a href="%s">enter the license key in <code>Settings > Plugin Management > Activate Bundles and Extensions</code></a> to enable it.', 'gato-graphql'),
+                    __('<strong>Gato GraphQL - %s</strong>: Please <a href="%s">enter the license key in <code>Settings > Plugin Management > Activate Bundles and Extensions</code></a> to enable the extension.', 'gato-graphql'),
                     $extensionProductName,
                     '#',
                 )
