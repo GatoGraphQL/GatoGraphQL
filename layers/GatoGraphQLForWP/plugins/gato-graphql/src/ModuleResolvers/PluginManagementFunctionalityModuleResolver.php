@@ -158,8 +158,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $handlingLicenseMessageItems = [
                     \__('Adding a license key will <strong>activate the extension</strong>', 'gato-graphql'),
                     \__('Removing an existing license key will <strong>deactivate the extension</strong>', 'gato-graphql'),
-                    \__('Updating the license key will first <strong>deactivate the extension</strong> (with the previous license key) and then <strong>activate the extension</strong> (with the new license key)', 'gato-graphql'),
-                    \__('Not updating the license key will <strong>validate the status of the extension</strong>', 'gato-graphql'),
+                    \__('Updating a license key will first <strong>deactivate the extension</strong> (using the previous license key) and then <strong>activate the extension</strong> again (using the new license key)', 'gato-graphql'),
+                    \__('Not updating a license key will <strong>validate the status of the extension</strong>', 'gato-graphql'),
                 ];
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
                 $moduleSettings[] = [
