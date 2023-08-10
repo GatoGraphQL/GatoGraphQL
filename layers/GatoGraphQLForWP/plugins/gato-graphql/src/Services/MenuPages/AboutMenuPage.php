@@ -53,8 +53,17 @@ class AboutMenuPage extends AbstractDocsMenuPage
             );
         }
 
-        $extensionLicenseItems = [];
+        /**
+         * Input dynamic content into the form in the generated HTML.
+         * Generate the "Attached extension license data", and extract
+         * an instance of customer name/email for those fields.
+         */
         $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
+        if ($commercialExtensionActivatedLicenseObjectProperties === []) {
+            return $content;
+        }
+
+        $extensionLicenseItems = [];
         foreach ($commercialExtensionActivatedLicenseObjectProperties as $extensionCommercialExtensionActivatedLicenseObjectProperties) {
             $extensionLicenseItems[] = implode(
                 PHP_EOL,
@@ -78,9 +87,6 @@ class AboutMenuPage extends AbstractDocsMenuPage
             ]
         );
 
-        /**
-         * Input dynamic content into the form in the generated HTML
-         */
         $replacements = [];
         $textInputValueInjections = [
             'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
