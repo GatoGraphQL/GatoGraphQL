@@ -55,7 +55,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
 
         $extensionLicenseItems = [];
         $licenseOperationAPIResponseProperties = SettingsHelpers::getLicenseOperationAPIResponseProperties();
-        foreach ($$licenseOperationAPIResponseProperties as $extensionLicenseOperationAPIResponseProperties) {
+        foreach ($licenseOperationAPIResponseProperties as $extensionLicenseOperationAPIResponseProperties) {
             $extensionLicenseItems[] = sprintf(
                 '%s%s%s%s%s%s%s%s%s',
                 'License Key: ' . $extensionLicenseOperationAPIResponseProperties->licenseKey,
