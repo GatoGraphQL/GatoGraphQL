@@ -69,20 +69,6 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
-  <label for="field-domain">Extensions license data <em>(pre-filled and read-only)</em>:</label>
-  <br/>
-  <textarea
-    id="field-extensions-license-data"
-    name="extensions-license-data"
-    rows="5"
-    cols="100"
-    required=""
-    aria-required="true"
-    readonly
-  >{extensions-license-data}</textarea>
-
-  <br/><br/>
-
   <label for="field-message">Message:</label>
   <br/>
   <textarea
@@ -97,11 +83,25 @@ Send your message to the Gato GraphQL Support team:
     autocapitalize="sentences"
   ></textarea>
   
-  <br/>
+  <br/><br/>
 
   <button type="submit" class="button">
     Send message
   </button>
+
+  <br/><br/>
+
+  <label for="field-domain"><em>Attached extension license data</em>:</label>
+  <br/>
+  <textarea
+    id="field-extensions-license-data"
+    name="extensions-license-data"
+    rows="5"
+    cols="100"
+    required=""
+    aria-required="true"
+    readonly
+  >{extensions-license-data}</textarea>
 </form>
 
 </div>
