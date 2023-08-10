@@ -6,6 +6,9 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace\Constants;
 
 class LicenseProperties
 {
+    /** The license key used to activate the extension */
+    public final const LICENSE_KEY = 'licenseKey';
+
     /** After executing an operation against the Marketplace Provider's API, store the response */
     public final const API_RESPONSE_PAYLOAD = 'apiResponsePayload';
 

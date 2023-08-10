@@ -10,6 +10,7 @@ class LicenseOperationAPIResponseProperties
      * @param array<string,mixed> $apiResponsePayload
      */
     public function __construct(
+        public readonly string $licenseKey,
         public readonly array $apiResponsePayload,
         public readonly string $status,
         public readonly string $instanceID,
