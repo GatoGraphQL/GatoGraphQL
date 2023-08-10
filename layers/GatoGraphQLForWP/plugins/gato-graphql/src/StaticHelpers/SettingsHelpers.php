@@ -20,7 +20,7 @@ class SettingsHelpers
      *
      * @return LicenseOperationAPIResponseProperties[]
      */
-    public static function getCommercialExtensionActivatedLicenseEntries(): array
+    public static function getLicenseOperationAPIResponseProperties(): array
     {
         if (self::$licenseOperationAPIResponseProperties === null) {
             $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
