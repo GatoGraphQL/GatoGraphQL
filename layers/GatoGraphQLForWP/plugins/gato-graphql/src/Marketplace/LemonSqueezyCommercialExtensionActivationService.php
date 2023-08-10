@@ -127,6 +127,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         return match($status) {
             'active' => LicenseStatus::ACTIVE,
             'expired' => LicenseStatus::EXPIRED,
+            'inactive' => LicenseStatus::INACTIVE,
+            'disabled' => LicenseStatus::DISABLED,
             default => LicenseStatus::OTHER,
         };
     }
