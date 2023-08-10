@@ -227,7 +227,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         'activate-extensions'
                     ),
                     Properties::TITLE => \__('Activate Licenses', 'gato-graphql'),
-                    Properties::DESCRIPTION => \__('There are no Bundles or Extensions installed', 'gato-graphql'),
+                    Properties::DESCRIPTION => \__('<em>There are no Bundles or Extensions installed</em>', 'gato-graphql'),
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
             }
