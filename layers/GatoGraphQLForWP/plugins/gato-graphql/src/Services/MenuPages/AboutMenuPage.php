@@ -63,6 +63,8 @@ class AboutMenuPage extends AbstractDocsMenuPage
             return $content;
         }
 
+        $customerName = '';
+        $customerEmail = '';
         $extensionLicenseItems = [];
         foreach ($commercialExtensionActivatedLicenseObjectProperties as $extensionCommercialExtensionActivatedLicenseObjectProperties) {
             $extensionLicenseItems[] = implode(
@@ -75,6 +77,8 @@ class AboutMenuPage extends AbstractDocsMenuPage
                     'Status: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->status,
                 ]
             );
+            $customerName = $extensionCommercialExtensionActivatedLicenseObjectProperties->customerName;
+            $customerEmail = $extensionCommercialExtensionActivatedLicenseObjectProperties->customerEmail;
         }
         $extensionsLicenseData = implode(
             PHP_EOL . PHP_EOL,
@@ -89,7 +93,8 @@ class AboutMenuPage extends AbstractDocsMenuPage
 
         $replacements = [];
         $textInputValueInjections = [
-            'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
+            'placeholder="Pedro Rivas"' => $customerName,
+            'placeholder="pedro@yahoo.com"' => $customerEmail,
         ];
         foreach ($textInputValueInjections as $search => $valueInject) {
             $replacements[$search] = sprintf(
