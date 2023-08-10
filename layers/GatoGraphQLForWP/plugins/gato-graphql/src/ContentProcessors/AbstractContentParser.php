@@ -4,15 +4,18 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
+use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
+
+use function sanitize_title;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -286,6 +289,9 @@ abstract class AbstractContentParser implements ContentParserInterface
         $firstTagPos = strpos($htmlContent, '<' . $tag . '>');
         // Check if there is any <h2>
         if ($firstTagPos !== false) {
+            // If passing a tab, focus on that one, if the tab exists
+            $tab = App::query(RequestParams::TAB);
+
             // Content before the first <h2> does not go within any tab
             $contentStarter = substr(
                 $htmlContent,
@@ -298,21 +304,27 @@ abstract class AbstractContentParser implements ContentParserInterface
                 $tag
             );
             $headers = [];
+            $headerNames = [];
+            $tabbedPanelPlaceholder = '<div id="%s" class="tab-content" style="display: %s;">';
             $panelContent = preg_replace_callback(
                 $regex,
-                function (array $matches) use (&$headers): string {
+                function (array $matches) use (&$headers, &$headerNames, $tab, $tabbedPanelPlaceholder): string {
                     $isFirstTab = empty($headers);
                     if (!$isFirstTab) {
                         $tabbedPanel = '</div>';
                     } else {
                         $tabbedPanel = '';
                     }
-                    $headers[] = $matches[1];
+                    $header = $matches[1];
+                    $headers[] = $header;
+                    $headerName = sanitize_title($header);
+                    $headerNames[] = $headerName;
+                    $isActiveTab = $tab === null ? $isFirstTab : $headerName === $tab;
                     /** @var string */
                     return $tabbedPanel . sprintf(
-                        '<div id="doc-panel-%s" class="tab-content" style="display: %s;">',
-                        count($headers),
-                        $isFirstTab ? 'block' : 'none'
+                        $tabbedPanelPlaceholder,
+                        $headerName,
+                        $isActiveTab ? 'block' : 'none'
                     );// . $matches[0];
                 },
                 substr(
@@ -321,15 +333,62 @@ abstract class AbstractContentParser implements ContentParserInterface
                 )
             ) . '</div>';
 
+            /**
+             * Only now we have all the headerNames.
+             * Check if the passed ?tab=... does indeed exist.
+             * If it does not, make the first tab as active.
+             */
+            if ($tab !== null && !in_array($tab, $headerNames)) {
+                $panelContent = str_replace(
+                    sprintf(
+                        $tabbedPanelPlaceholder,
+                        $headerNames[0],
+                        'none'
+                    ),
+                    sprintf(
+                        $tabbedPanelPlaceholder,
+                        $headerNames[0],
+                        'block'
+                    ),
+                    $panelContent
+                );
+            }
+
             // Create the tabs
             $panelTabs = '';
             $headersCount = count($headers);
+
+            // If passing a tab, focus on that one, if the tab exists
+            if ($tab !== null && in_array($tab, $headerNames)) {
+                $activeHeaderName = $tab;
+            } else {
+                $activeHeaderName = $headerNames[0];
+            }
+
+            // This page URL
+            $url = admin_url(sprintf(
+                'admin.php?page=%s',
+                esc_attr(App::request('page') ?? App::query('page', ''))
+            ));
+
             for ($i = 0; $i < $headersCount; $i++) {
-                $isFirstTab = $i === 0;
+                $headerName = $headerNames[$i];
+                /**
+                 * Also add the tab to the URL, not because it is needed,
+                 * but because we can then "Open in new tab" and it will
+                 * be focused already on that item.
+                 */
+                $headerURL = sprintf(
+                    '%1$s&%2$s=%3$s',
+                    $url,
+                    RequestParams::TAB,
+                    $headerName
+                );
                 $panelTabs .= sprintf(
-                    '<a href="#doc-panel-%s" class="nav-tab %s">%s</a>',
-                    $i + 1,
-                    $isFirstTab ? 'nav-tab-active' : '',
+                    '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
+                    '#' . $headerName,
+                    $headerURL,
+                    $headerName === $activeHeaderName ? 'nav-tab-active' : '',
                     $headers[$i]
                 );
             }
