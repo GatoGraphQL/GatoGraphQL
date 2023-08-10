@@ -682,9 +682,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
                 'license_activation_' . $extensionSlug,
                 sprintf(
-                    \__('The purchased license key is for extension "%s", but was instead provided for "%s". Please use the right license keys to properly enable the extensions. Contact the Gato GraphQL team if you need support.'),
+                    \__('The license provided for "%s" must instead be used for "%s". Please use the right license key to enable the extension. Contact the Gato GraphQL team if you need support.'),
+                    $extensionName,
                     $licenseOperationAPIResponseProperties->productName,
-                    $extensionName
                 ),
                 'warning'
             );
