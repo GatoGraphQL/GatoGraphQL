@@ -15,6 +15,8 @@ use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
 
+use function sanitize_title;
+
 abstract class AbstractContentParser implements ContentParserInterface
 {
     use BasicServiceTrait;
@@ -299,20 +301,24 @@ abstract class AbstractContentParser implements ContentParserInterface
                 $tag
             );
             $headers = [];
+            $headerNames = [];
             $panelContent = preg_replace_callback(
                 $regex,
-                function (array $matches) use (&$headers): string {
+                function (array $matches) use (&$headers, &$headerNames): string {
                     $isFirstTab = empty($headers);
                     if (!$isFirstTab) {
                         $tabbedPanel = '</div>';
                     } else {
                         $tabbedPanel = '';
                     }
-                    $headers[] = $matches[1];
+                    $header = $matches[1];
+                    $headers[] = $header;
+                    $headerName = sanitize_title($header);
+                    $headerNames[] = $headerName;
                     /** @var string */
                     return $tabbedPanel . sprintf(
-                        '<div id="doc-panel-%s" class="tab-content" style="display: %s;">',
-                        count($headers),
+                        '<div id="%s" class="tab-content" style="display: %s;">',
+                        $headerName,
                         $isFirstTab ? 'block' : 'none'
                     );// . $matches[0];
                 },
@@ -325,13 +331,6 @@ abstract class AbstractContentParser implements ContentParserInterface
             // Create the tabs
             $panelTabs = '';
             $headersCount = count($headers);
-            $headerNames = [];
-            for ($i = 0; $i < $headersCount; $i++) {
-                $headerNames[$i] = sprintf(
-                    'doc-panel-%s',
-                    $i + 1
-                );
-            }
 
             // If passing a tab, focus on that one, if the tab exists
             $tab = App::query(RequestParams::TAB);
