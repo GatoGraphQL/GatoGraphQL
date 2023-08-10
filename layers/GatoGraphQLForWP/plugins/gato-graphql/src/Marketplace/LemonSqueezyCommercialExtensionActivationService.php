@@ -146,8 +146,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $activationLimit = (int) $body['license_key']['activation_limit'];
 
         return new LicenseOperationAPIResponseProperties(
-            $body,
             $licenseKey,
+            $body,
             $status,
             $instanceID,
             $instanceName,

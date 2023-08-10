@@ -659,6 +659,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         string $successMessage,
     ): array {
         $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
+            LicenseProperties::LICENSE_KEY => $licenseOperationAPIResponseProperties->licenseKey,
             LicenseProperties::API_RESPONSE_PAYLOAD => $licenseOperationAPIResponseProperties->apiResponsePayload,
             LicenseProperties::STATUS => $licenseOperationAPIResponseProperties->status,
             LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
