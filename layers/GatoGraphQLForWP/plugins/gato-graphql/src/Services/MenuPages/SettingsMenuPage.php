@@ -463,7 +463,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $extensionManager = PluginApp::getExtensionManager();
         $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
         $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
-        $licenseOperationAPIResponseProperties = null;
+        $activatedLicenseProperties = null;
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var string */
@@ -473,7 +473,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             /** @var string */
             $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
             try {
-                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
+                $activatedLicenseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
                     $licenseKey,
                     $instanceID,
                 );
@@ -495,15 +495,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $successMessage = sprintf(
                 \__('The license for "%s" has status "%s". You have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
-                $licenseOperationAPIResponseProperties->status,
-                $licenseOperationAPIResponseProperties->activationUsage,
-                $licenseOperationAPIResponseProperties->activationLimit,
+                $activatedLicenseProperties->status,
+                $activatedLicenseProperties->activationUsage,
+                $activatedLicenseProperties->activationLimit,
             );
             $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
                 $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
                 $extensionName,
-                $licenseOperationAPIResponseProperties,
+                $activatedLicenseProperties,
                 $successMessage,
             );
         }
@@ -520,7 +520,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             /** @var string */
             $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
             try {
-                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
+                $activatedLicenseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
                     $licenseKey,
                     $instanceID,
                 );
@@ -542,14 +542,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $successMessage = sprintf(
                 \__('Deactivating license for "%s" succeeded. You now have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
-                $licenseOperationAPIResponseProperties->activationUsage,
-                $licenseOperationAPIResponseProperties->activationLimit,
+                $activatedLicenseProperties->activationUsage,
+                $activatedLicenseProperties->activationLimit,
             );
             $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
                 $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
                 $extensionName,
-                $licenseOperationAPIResponseProperties,
+                $activatedLicenseProperties,
                 $successMessage,
             );
             // Do not store deactivated instances
@@ -561,7 +561,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
             $instanceName = $this->getInstanceName($extensionSlug);
             try {
-                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
+                $activatedLicenseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
             } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
                 $errorMessage = sprintf(
                     \__('Activating license for "%s" produced error: %s', 'gato-graphql'),
@@ -580,14 +580,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $successMessage = sprintf(
                 \__('Activating license for "%s" succeeded. You have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
-                $licenseOperationAPIResponseProperties->activationUsage,
-                $licenseOperationAPIResponseProperties->activationLimit,
+                $activatedLicenseProperties->activationUsage,
+                $activatedLicenseProperties->activationLimit,
             );
             $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
                 $commercialExtensionActivatedLicenseEntries,
                 $extensionSlug,
                 $extensionName,
-                $licenseOperationAPIResponseProperties,
+                $activatedLicenseProperties,
                 $successMessage,
             );
         }
@@ -655,36 +655,36 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
         string $extensionName,
-        ActivatedLicenseProperties $licenseOperationAPIResponseProperties,
+        ActivatedLicenseProperties $activatedLicenseProperties,
         string $successMessage,
     ): array {
         $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
-            LicenseProperties::LICENSE_KEY => $licenseOperationAPIResponseProperties->licenseKey,
-            LicenseProperties::API_RESPONSE_PAYLOAD => $licenseOperationAPIResponseProperties->apiResponsePayload,
-            LicenseProperties::STATUS => $licenseOperationAPIResponseProperties->status,
-            LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
+            LicenseProperties::LICENSE_KEY => $activatedLicenseProperties->licenseKey,
+            LicenseProperties::API_RESPONSE_PAYLOAD => $activatedLicenseProperties->apiResponsePayload,
+            LicenseProperties::STATUS => $activatedLicenseProperties->status,
+            LicenseProperties::INSTANCE_ID => $activatedLicenseProperties->instanceID,
             /**
              * The instance name is generated by the plugin, hence there is no need
              * to store it in the DB. However, it is also stored to pre-populate
              * the "Support" form, to help the Gato GraphQL team understand what
              * extensions are being used.
              */
-            LicenseProperties::INSTANCE_NAME => $licenseOperationAPIResponseProperties->instanceName,
+            LicenseProperties::INSTANCE_NAME => $activatedLicenseProperties->instanceName,
             /**
              * The product name is stored as to validate that the license key
              * provided in the Settings belongs to the right extension.
              *
              * @see `assertCommercialLicenseHasBeenActivated` in class `ExtensionManager`
              */
-            LicenseProperties::PRODUCT_NAME => $licenseOperationAPIResponseProperties->productName,
-            LicenseProperties::ACTIVATION_USAGE => $licenseOperationAPIResponseProperties->activationUsage,
-            LicenseProperties::ACTIVATION_LIMIT => $licenseOperationAPIResponseProperties->activationLimit,
+            LicenseProperties::PRODUCT_NAME => $activatedLicenseProperties->productName,
+            LicenseProperties::ACTIVATION_USAGE => $activatedLicenseProperties->activationUsage,
+            LicenseProperties::ACTIVATION_LIMIT => $activatedLicenseProperties->activationLimit,
             /**
              * The customer name and email are stored as to pre-populate
              * the "Support" form
              */
-            LicenseProperties::CUSTOMER_NAME => $licenseOperationAPIResponseProperties->customerName,
-            LicenseProperties::CUSTOMER_EMAIL => $licenseOperationAPIResponseProperties->customerEmail,
+            LicenseProperties::CUSTOMER_NAME => $activatedLicenseProperties->customerName,
+            LicenseProperties::CUSTOMER_EMAIL => $activatedLicenseProperties->customerEmail,
         ];
 
         // Show the success message to the admin
@@ -695,7 +695,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             'success'
         );
 
-        if ($licenseOperationAPIResponseProperties->productName !== $extensionName) {
+        if ($activatedLicenseProperties->productName !== $extensionName) {
             // Show the success message to the admin
             add_settings_error(
                 PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
@@ -703,7 +703,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 sprintf(
                     \__('The license key provided for "%1$s" is meant to be used with "%2$s". As such, "%1$s" has not been enabled. Please use the right license key to enable it. Be welcome to contact the Gato GraphQL Support team for help.'),
                     $extensionName,
-                    $licenseOperationAPIResponseProperties->productName,
+                    $activatedLicenseProperties->productName,
                 ),
                 'error'
             );

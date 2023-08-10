@@ -13,7 +13,7 @@ class SettingsHelpers
     /**
      * @var array<string,ActivatedLicenseProperties>|null Extension Slug => License Data
      */
-    private static ?array $licenseOperationAPIResponseProperties = null;
+    private static ?array $activatedLicenseProperties = null;
 
     /**
      * Retrieve the license properties for all activated extensions
@@ -22,11 +22,11 @@ class SettingsHelpers
      */
     public static function getActivatedLicenseProperties(): array
     {
-        if (self::$licenseOperationAPIResponseProperties === null) {
+        if (self::$activatedLicenseProperties === null) {
             $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
-            self::$licenseOperationAPIResponseProperties = [];
+            self::$activatedLicenseProperties = [];
             foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
-                self::$licenseOperationAPIResponseProperties[$extensionSlug] = new ActivatedLicenseProperties(
+                self::$activatedLicenseProperties[$extensionSlug] = new ActivatedLicenseProperties(
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::LICENSE_KEY],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::API_RESPONSE_PAYLOAD],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS],
@@ -40,6 +40,6 @@ class SettingsHelpers
                 );
             }
         }
-        return self::$licenseOperationAPIResponseProperties;
+        return self::$activatedLicenseProperties;
     }
 }

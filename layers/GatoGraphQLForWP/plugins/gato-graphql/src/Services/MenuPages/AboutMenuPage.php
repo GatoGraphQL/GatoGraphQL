@@ -54,8 +54,8 @@ class AboutMenuPage extends AbstractDocsMenuPage
         }
 
         $extensionLicenseItems = [];
-        $licenseOperationAPIResponseProperties = SettingsHelpers::getActivatedLicenseProperties();
-        foreach ($licenseOperationAPIResponseProperties as $extensionActivatedLicenseProperties) {
+        $activatedLicenseProperties = SettingsHelpers::getActivatedLicenseProperties();
+        foreach ($activatedLicenseProperties as $extensionActivatedLicenseProperties) {
             $extensionLicenseItems[] = implode(
                 PHP_EOL,
                 [

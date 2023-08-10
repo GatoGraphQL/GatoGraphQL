@@ -226,14 +226,14 @@ class ExtensionManager extends AbstractPluginManager
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
          */
-        $licenseOperationAPIResponseProperties = SettingsHelpers::getActivatedLicenseProperties();
-        if (!isset($licenseOperationAPIResponseProperties[$extensionSlug])) {
+        $activatedLicenseProperties = SettingsHelpers::getActivatedLicenseProperties();
+        if (!isset($activatedLicenseProperties[$extensionSlug])) {
             $this->showAdminWarningNotice($extensionProductName);
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
 
-        $extensionActivatedLicenseProperties = $licenseOperationAPIResponseProperties[$extensionSlug];
+        $extensionActivatedLicenseProperties = $activatedLicenseProperties[$extensionSlug];
 
         /**
          * Check that the license status is valid to use the plugin:
