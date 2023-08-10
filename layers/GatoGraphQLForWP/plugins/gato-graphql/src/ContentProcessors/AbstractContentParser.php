@@ -340,12 +340,30 @@ abstract class AbstractContentParser implements ContentParserInterface
                 $activeHeaderName = $headerNames[0];
             }
 
+            // This page URL
+            $url = admin_url(sprintf(
+                'admin.php?page=%s',
+                esc_attr(App::request('page') ?? App::query('page', ''))
+            ));
+
             for ($i = 0; $i < $headersCount; $i++) {
+                $headerName = $headerNames[$i];
+                /**
+                 * Also add the tab to the URL, not because it is needed,
+                 * but because we can then "Open in new tab" and it will
+                 * be focused already on that item.
+                 */
+                $headerURL = sprintf(
+                    '%1$s&%2$s=%3$s',
+                    $url,
+                    RequestParams::TAB,
+                    $headerName
+                );
                 $panelTabs .= sprintf(
                     '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                    '#' . $headerNames[$i],
-                    '#',
-                    $headerNames[$i] === $activeHeaderName ? 'nav-tab-active' : '',
+                    '#' . $headerName,
+                    $headerURL,
+                    $headerName === $activeHeaderName ? 'nav-tab-active' : '',
                     $headers[$i]
                 );
             }
