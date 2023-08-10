@@ -12,6 +12,8 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -739,10 +741,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             'admin_body_class',
             function (string $classes): string {
                 $extensions = PluginApp::getExtensionManager()->getExtensions();
+                if ($extensions === []) {
+                    return $classes;
+                }
+
+                /** @var array<string,mixed> */
+                $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
                 foreach ($extensions as $extension) {
                     if (!$extension->isCommercial()) {
                         continue;
                     }
+                    // Check that the extension has "active" status
+                    $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extension->getPluginSlug()] ?? null;
+                    if ($commercialExtensionActivatedLicenseEntry === null) {
+                        continue;
+                    }
+                    $status = $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS];
+                    if ($status !== LicenseStatus::ACTIVE) {
+                        continue;
+                    }
+                    // The extension is registered and active!
                     return $classes . ' is-gato-graphql-customer';
                 }
                 return $classes;
