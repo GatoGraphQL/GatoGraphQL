@@ -185,7 +185,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             ),
                             \__('(Show details: When are extensions activated, deactivated or validated?)')
                         ),
-                        \__('Please enter the license keys for the bundles/extensions purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gato-graphql'),
+                        \__('Enter the license keys for the bundles/extensions purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gato-graphql'),
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                     Properties::KEY_LABELS => $commercialExtensionSlugProductNames,
