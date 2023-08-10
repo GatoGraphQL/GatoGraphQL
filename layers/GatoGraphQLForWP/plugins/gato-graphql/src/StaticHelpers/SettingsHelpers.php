@@ -5,28 +5,28 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 
 class SettingsHelpers
 {
     /**
-     * @var array<string,LicenseOperationAPIResponseProperties>|null Extension Slug => License Data
+     * @var array<string,CommercialExtensionActivatedLicenseObjectProperties>|null Extension Slug => License Data
      */
-    private static ?array $licenseOperationAPIResponseProperties = null;
+    private static ?array $commercialExtensionActivatedLicenseObjectProperties = null;
 
     /**
      * Retrieve the license properties for all activated extensions
      *
-     * @return array<string,LicenseOperationAPIResponseProperties> Extension Slug => License Data
+     * @return array<string,CommercialExtensionActivatedLicenseObjectProperties> Extension Slug => License Data
      */
-    public static function getLicenseOperationAPIResponseProperties(): array
+    public static function getCommercialExtensionActivatedLicenseObjectProperties(): array
     {
-        if (self::$licenseOperationAPIResponseProperties === null) {
+        if (self::$commercialExtensionActivatedLicenseObjectProperties === null) {
             $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
-            self::$licenseOperationAPIResponseProperties = [];
+            self::$commercialExtensionActivatedLicenseObjectProperties = [];
             foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
-                self::$licenseOperationAPIResponseProperties[$extensionSlug] = new LicenseOperationAPIResponseProperties(
+                self::$commercialExtensionActivatedLicenseObjectProperties[$extensionSlug] = new CommercialExtensionActivatedLicenseObjectProperties(
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::LICENSE_KEY],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::API_RESPONSE_PAYLOAD],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS],
@@ -40,6 +40,6 @@ class SettingsHelpers
                 );
             }
         }
-        return self::$licenseOperationAPIResponseProperties;
+        return self::$commercialExtensionActivatedLicenseObjectProperties;
     }
 }
