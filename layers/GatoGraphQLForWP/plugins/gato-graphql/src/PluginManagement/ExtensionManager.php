@@ -252,13 +252,23 @@ class ExtensionManager extends AbstractPluginManager
          * - Active: Plugin has been activated, is currently within subscription period
          * - Expired: Subscription has expired, but users can keep using the plugin
          * 
-         * @var string */
+         * Notice: With LemonSqueezy as the Marketplace provider, this code will
+         * in practice never be invoked, as both the "invalid" and "disabled" status
+         * will also produce an "error" in the response, and so the entry will not
+         * be stored in the DB. But keep this code for if the Marketplace Provider
+         * is ever replaced.
+         * 
+         * @var string
+         */
         $licenseStatus = $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS];
         if (!in_array($licenseStatus, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
         ])) {
-            $this->showAdminWarningNotice($extensionProductName);
+            $this->showAdminWarningNotice(
+                $extensionProductName,
+                __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gato-graphql')
+            );
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
