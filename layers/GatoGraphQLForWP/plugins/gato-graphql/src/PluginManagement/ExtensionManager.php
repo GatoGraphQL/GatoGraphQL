@@ -256,6 +256,7 @@ class ExtensionManager extends AbstractPluginManager
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
         ])) {
+            $this->showAdminWarningNotice($extensionProductName);
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
