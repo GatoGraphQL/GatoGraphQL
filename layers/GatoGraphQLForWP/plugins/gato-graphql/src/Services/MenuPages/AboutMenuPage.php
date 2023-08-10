@@ -59,7 +59,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $extensionLicenseItems = [];
         /** @var array<string,mixed> */
         $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
-        foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
+        foreach ($commercialExtensionActivatedLicenseEntries as $commercialExtensionActivatedLicenseEntry) {
             $extensionLicenseItems[] = sprintf(
                 '%s%s%s%s%s%s%s',
                 'Extension: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME],
