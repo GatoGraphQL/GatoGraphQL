@@ -268,6 +268,9 @@ class ExtensionManager extends AbstractPluginManager
          */
         $licenseProductName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME];
         if ($licenseProductName !== $extensionProductName) {
+            $this->showAdminWarningNotice(
+                $extensionProductName,
+            );
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
@@ -277,15 +280,28 @@ class ExtensionManager extends AbstractPluginManager
         return true;
     }
 
-    protected function showAdminWarningNotice(string $extensionProductName): void
-    {
-        \add_action('admin_notices', function () use ($extensionProductName) {
+    protected function showAdminWarningNotice(
+        string $extensionProductName,
+        ?string $messagePlaceholder = null,
+    ): void {
+        $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gato-graphql');
+        \add_action('admin_notices', function () use ($extensionProductName, $messagePlaceholder) {
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
-                    __('<strong>Gato GraphQL - %s</strong>: Please <a href="%s">enter the license key in <code>Settings > Plugin Management > Activate Extensions</code></a> to enable it.', 'gato-graphql'),
+                    __('<strong>Gato GraphQL - %s</strong>: %s.', 'gato-graphql'),
                     $extensionProductName,
-                    '#',
+                    sprintf(
+                        $messagePlaceholder,
+                        '#',
+                        sprintf(
+                            '<code>%s > %s > %s</code>',
+                            \__('Settings', 'gato-graphql'),
+                            \__('Plugin Management', 'gato-graphql'),
+                            \__('Activate Extensions', 'gato-graphql'),
+
+                        )
+                    )
                 )
             );
         });
