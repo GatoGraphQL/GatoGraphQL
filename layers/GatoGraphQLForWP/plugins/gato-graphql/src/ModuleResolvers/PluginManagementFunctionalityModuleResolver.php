@@ -154,6 +154,13 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $extensionManager = PluginApp::getExtensionManager();
             $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
             if ($commercialExtensionSlugProductNames !== []) {
+                $ulPlaceholder = \__('<ul><li>%s</li></ul>', 'gato-graphql');
+                $handlingLicenseMessageItems = [
+                    \__('Adding a license key will <strong>activate the extension</strong>', 'gato-graphql'),
+                    \__('Removing an existing license key will <strong>deactivate the extension</strong>', 'gato-graphql'),
+                    \__('Updating the license key will first <strong>deactivate the extension</strong> (with the previous license key) and then <strong>activate the extension</strong> (with the new license key)', 'gato-graphql'),
+                    \__('Not updating the license key will <strong>validate the status of the extension</strong>', 'gato-graphql'),
+                ];
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -165,7 +172,17 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
                         $this->getCollapsible(
-                            \__('@todo'),
+                            sprintf(
+                                '%s%s',
+                                \__('When clicking on <strong>Activate Licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:'),
+                                sprintf(
+                                    $ulPlaceholder,
+                                    implode(
+                                        \__('</li><li>', 'gato-graphql'),
+                                        $handlingLicenseMessageItems
+                                    )
+                                ),
+                            ),
                             \__('(Show details: When are extensions activated, deactivated or validated?)')
                         ),
                         \__('Please enter the license keys for the bundles/extensions purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gato-graphql'),
