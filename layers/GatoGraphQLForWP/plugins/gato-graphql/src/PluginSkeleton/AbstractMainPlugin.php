@@ -12,13 +12,13 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
@@ -745,19 +745,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return $classes;
                 }
 
-                /** @var array<string,mixed> */
-                $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+                $licenseOperationAPIResponseProperties = SettingsHelpers::getLicenseOperationAPIResponseProperties();
                 foreach ($extensions as $extension) {
                     if (!$extension->isCommercial()) {
                         continue;
                     }
                     // Check that the extension has "active" status
-                    $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extension->getPluginSlug()] ?? null;
-                    if ($commercialExtensionActivatedLicenseEntry === null) {
+                    $extensionLicenseOperationAPIResponseProperties = $licenseOperationAPIResponseProperties[$extension->getPluginSlug()] ?? null;
+                    if ($extensionLicenseOperationAPIResponseProperties === null) {
                         continue;
                     }
-                    $status = $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS];
-                    if ($status !== LicenseStatus::ACTIVE) {
+                    if ($extensionLicenseOperationAPIResponseProperties->status !== LicenseStatus::ACTIVE) {
                         continue;
                     }
                     // The extension is registered and active!
