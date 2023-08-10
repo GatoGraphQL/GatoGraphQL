@@ -236,6 +236,7 @@ class ExtensionManager extends AbstractPluginManager
          */
         $commercialExtensionActivatedLicenseEntries = $this->getCommercialExtensionActivatedLicenseEntries();
         if (!isset($commercialExtensionActivatedLicenseEntries[$extensionSlug])) {
+            $this->showAdminWarningNotice($extensionProductName);
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
@@ -273,6 +274,20 @@ class ExtensionManager extends AbstractPluginManager
         // Everything is good!
         $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
         return true;
+    }
+
+    protected function showAdminWarningNotice(string $extensionProductName): void
+    {
+        \add_action('admin_notices', function () use ($extensionProductName) {
+            printf(
+                '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+                sprintf(
+                    __('Thanks for purchasing a license for the <strong>%s</strong> extension for <strong>Gato GraphQL</strong>. Please <a href="%s">enter the license key in <code>Settings > Plugin Management > Activate Bundles and Extensions</code></a> to enable it.', 'gato-graphql'),
+                    $extensionProductName,
+                    '#',
+                )
+            );
+        });
     }
 
     /**
