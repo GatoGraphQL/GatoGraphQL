@@ -29,6 +29,11 @@ interface PluginInterface
     public function getPluginBaseName(): string;
 
     /**
+     * Plugin slug
+     */
+    public function getPluginSlug(): string;
+
+    /**
      * Plugin main file
      */
     public function getPluginFile(): string;
