@@ -226,14 +226,14 @@ class ExtensionManager extends AbstractPluginManager
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
          */
-        $licenseOperationAPIResponseProperties = SettingsHelpers::getLicenseOperationAPIResponseProperties();
+        $licenseOperationAPIResponseProperties = SettingsHelpers::getActivatedLicenseProperties();
         if (!isset($licenseOperationAPIResponseProperties[$extensionSlug])) {
             $this->showAdminWarningNotice($extensionProductName);
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
 
-        $extensionLicenseOperationAPIResponseProperties = $licenseOperationAPIResponseProperties[$extensionSlug];
+        $extensionActivatedLicenseProperties = $licenseOperationAPIResponseProperties[$extensionSlug];
 
         /**
          * Check that the license status is valid to use the plugin:
@@ -248,7 +248,7 @@ class ExtensionManager extends AbstractPluginManager
          * is ever replaced.
          */
         if (
-            !in_array($extensionLicenseOperationAPIResponseProperties->status, [
+            !in_array($extensionActivatedLicenseProperties->status, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
             ])
@@ -266,7 +266,7 @@ class ExtensionManager extends AbstractPluginManager
          *
          * @var string
          */
-        if ($extensionLicenseOperationAPIResponseProperties->productName !== $extensionProductName) {
+        if ($extensionActivatedLicenseProperties->productName !== $extensionProductName) {
             $this->showAdminWarningNotice(
                 $extensionProductName,
                 __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gato-graphql')

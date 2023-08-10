@@ -745,17 +745,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return $classes;
                 }
 
-                $licenseOperationAPIResponseProperties = SettingsHelpers::getLicenseOperationAPIResponseProperties();
+                $licenseOperationAPIResponseProperties = SettingsHelpers::getActivatedLicenseProperties();
                 foreach ($extensions as $extension) {
                     if (!$extension->isCommercial()) {
                         continue;
                     }
                     // Check that the extension has "active" status
-                    $extensionLicenseOperationAPIResponseProperties = $licenseOperationAPIResponseProperties[$extension->getPluginSlug()] ?? null;
-                    if ($extensionLicenseOperationAPIResponseProperties === null) {
+                    $extensionActivatedLicenseProperties = $licenseOperationAPIResponseProperties[$extension->getPluginSlug()] ?? null;
+                    if ($extensionActivatedLicenseProperties === null) {
                         continue;
                     }
-                    if ($extensionLicenseOperationAPIResponseProperties->status !== LicenseStatus::ACTIVE) {
+                    if ($extensionActivatedLicenseProperties->status !== LicenseStatus::ACTIVE) {
                         continue;
                     }
                     // The extension is registered and active!

@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Marketplace;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivatedLicenseProperties;
 use WP_Error;
 
 use function wp_remote_post;
@@ -18,7 +18,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
      */
-    public function activateLicense(string $licenseKey, string $instanceName): LicenseOperationAPIResponseProperties
+    public function activateLicense(string $licenseKey, string $instanceName): ActivatedLicenseProperties
     {
         $endpoint = $this->getActivateLicenseEndpoint($licenseKey, $instanceName);
         return $this->handleLicenseOperation($endpoint, $licenseKey, null);
@@ -66,7 +66,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         string $endpoint,
         string $licenseKey,
         ?string $instanceID
-    ): LicenseOperationAPIResponseProperties {
+    ): ActivatedLicenseProperties {
         $response = wp_remote_post(
             $endpoint,
             [
@@ -145,7 +145,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $activationUsage = (int) $body['license_key']['activation_usage'];
         $activationLimit = (int) $body['license_key']['activation_limit'];
 
-        return new LicenseOperationAPIResponseProperties(
+        return new ActivatedLicenseProperties(
             $licenseKey,
             $body,
             $status,
@@ -183,7 +183,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     public function deactivateLicense(
         string $licenseKey,
         string $instanceID
-    ): LicenseOperationAPIResponseProperties {
+    ): ActivatedLicenseProperties {
         $endpoint = $this->getDeactivateLicenseEndpoint($licenseKey, $instanceID);
         return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
     }
@@ -210,7 +210,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     public function validateLicense(
         string $licenseKey,
         string $instanceID
-    ): LicenseOperationAPIResponseProperties {
+    ): ActivatedLicenseProperties {
         $endpoint = $this->getValidateLicenseEndpoint($licenseKey, $instanceID);
         return $this->handleLicenseOperation($endpoint, $licenseKey, $instanceID);
     }

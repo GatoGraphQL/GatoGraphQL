@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
-use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\ActivatedLicenseProperties;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -655,7 +655,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
         string $extensionName,
-        LicenseOperationAPIResponseProperties $licenseOperationAPIResponseProperties,
+        ActivatedLicenseProperties $licenseOperationAPIResponseProperties,
         string $successMessage,
     ): array {
         $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
