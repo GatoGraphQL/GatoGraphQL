@@ -6,9 +6,16 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
+use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
+
+use function get_option;
 
 class ExtensionManager extends AbstractPluginManager
 {
@@ -17,6 +24,15 @@ class ExtensionManager extends AbstractPluginManager
 
     /** @var array<string,BundleExtensionInterface> */
     private array $bundledExtensionClassBundlingExtensionClasses = [];
+
+    /** @var array<string,string> Extension Slug => Extension Product Name */
+    private array $nonActivatedLicenseCommercialExtensionSlugProductNames = [];
+
+    /** @var array<string,string> Extension Slug => Extension Product Name */
+    private array $activatedLicenseCommercialExtensionSlugProductNames = [];
+
+    /** @var array<string,string>|null Extension Slug => Extension Product Name */
+    private ?array $commercialExtensionSlugProductNames = null;
 
     /**
      * Have the extensions organized by their class
@@ -31,6 +47,13 @@ class ExtensionManager extends AbstractPluginManager
      * @var array<string,ExtensionInterface>
      */
     private array $extensionBaseNameInstances = [];
+
+    /**
+     * License data for all bundles/extensions that have been activated
+     *
+     * @var array<string,array<string,mixed>>|null Extension Slug => Activated License data item
+     */
+    private ?array $commercialExtensionActivatedLicenseEntries = null;
 
     /**
      * Extensions, organized under their name.
@@ -189,5 +212,170 @@ class ExtensionManager extends AbstractPluginManager
     public function getBundlingExtensionClass(string $bundledExtensionClass): ?BundleExtensionInterface
     {
         return $this->bundledExtensionClassBundlingExtensionClasses[$bundledExtensionClass] ?? null;
+    }
+
+    /**
+     * Validate that the license for the commercial extension
+     * has been activated.
+     *
+     * If it has not, also mark the Extension as "inactivated",
+     * to show a message to the admin.
+     *
+     * Please notice that it receives the $extensionProductName,
+     * which is EXACTLY the same name as registered in the
+     * Gato GraphQL Shop. This name is used as an identifier, to
+     * validate that the license key belongs to the right extension.
+     *
+     * @param string $extensionProductName The EXACT name as the product is stored in the Gato GraphQL Shop (i.e. in the Marketplace Provider's system)
+     */
+    public function assertCommercialLicenseHasBeenActivated(
+        string $extensionSlug,
+        string $extensionProductName,
+    ): bool {
+        /**
+         * Retrieve from the DB which licenses have been activated,
+         * and check if this extension is in it
+         */
+        $commercialExtensionActivatedLicenseEntries = $this->getCommercialExtensionActivatedLicenseEntries();
+        if (!isset($commercialExtensionActivatedLicenseEntries[$extensionSlug])) {
+            $this->showAdminWarningNotice($extensionProductName);
+            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+            return false;
+        }
+
+        /** @var array<string,mixed> */
+        $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
+
+        /**
+         * Check that the license status is valid to use the plugin:
+         *
+         * - Active: Plugin has been activated, is currently within subscription period
+         * - Expired: Subscription has expired, but users can keep using the plugin
+         *
+         * Notice: With LemonSqueezy as the Marketplace provider, this code will
+         * in practice never be invoked, as both the "invalid" and "disabled" status
+         * will also produce an "error" in the response, and so the entry will not
+         * be stored in the DB. But keep this code for if the Marketplace Provider
+         * is ever replaced.
+         *
+         * @var string
+         */
+        $licenseStatus = $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS];
+        if (
+            !in_array($licenseStatus, [
+            LicenseStatus::ACTIVE,
+            LicenseStatus::EXPIRED,
+            ])
+        ) {
+            $this->showAdminWarningNotice(
+                $extensionProductName,
+                __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gato-graphql')
+            );
+            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+            return false;
+        }
+
+        /**
+         * Make sure the activated plugin is the corresponding one to the license.
+         *
+         * @var string
+         */
+        $licenseProductName = $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME];
+        if ($licenseProductName !== $extensionProductName) {
+            $this->showAdminWarningNotice(
+                $extensionProductName,
+                __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gato-graphql')
+            );
+            $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+            return false;
+        }
+
+        // Everything is good!
+        $this->activatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
+        return true;
+    }
+
+    /**
+     * Unless we are in the Settings page, show a warning about activating the extension
+     */
+    protected function showAdminWarningNotice(
+        string $extensionProductName,
+        ?string $messagePlaceholder = null,
+    ): void {
+        $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gato-graphql');
+        \add_action('admin_notices', function () use ($extensionProductName, $messagePlaceholder) {
+            // /**
+            //  * Do not print the warnings in the Settings page
+            //  */
+            // $instanceManager = InstanceManagerFacade::getInstance();
+            // /** @var SettingsMenuPage */
+            // $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
+            // if (App::query('page') === $settingsMenuPage->getScreenID()) {
+            //     return;
+            // }
+            $activateExtensionsSettingsURL = AdminHelpers::getSettingsPageTabURL(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS);
+            printf(
+                '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
+                sprintf(
+                    __('<strong>Gato GraphQL - %s</strong>: %s.', 'gato-graphql'),
+                    $extensionProductName,
+                    sprintf(
+                        $messagePlaceholder,
+                        $activateExtensionsSettingsURL,
+                        sprintf(
+                            '<code>%s > %s > %s</code>',
+                            \__('Settings', 'gato-graphql'),
+                            \__('Plugin Management', 'gato-graphql'),
+                            \__('Activate Extensions', 'gato-graphql'),
+                        )
+                    )
+                )
+            );
+        });
+    }
+
+    /**
+     * Retrieve the license data for all bundles/extensions that
+     * have been activated.
+     *
+     * @return array<string,array<string,mixed>> Extension Slug => Activated License data item
+     */
+    protected function getCommercialExtensionActivatedLicenseEntries(): array
+    {
+        if ($this->commercialExtensionActivatedLicenseEntries === null) {
+            $this->commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        }
+        return $this->commercialExtensionActivatedLicenseEntries;
+    }
+
+    /**
+     * @return array<string,string> Extension Slug => Extension Product Name
+     */
+    public function getNonActivatedLicenseCommercialExtensionSlugProductNames(): array
+    {
+        return $this->nonActivatedLicenseCommercialExtensionSlugProductNames;
+    }
+
+    /**
+     * @return array<string,string> Extension Slug => Extension Product Name
+     */
+    public function getActivatedLicenseCommercialExtensionSlugProductNames(): array
+    {
+        return $this->activatedLicenseCommercialExtensionSlugProductNames;
+    }
+
+    /**
+     * @return array<string,string> Extension Slug => Extension Product Name
+     */
+    public function getCommercialExtensionSlugProductNames(): array
+    {
+        if ($this->commercialExtensionSlugProductNames === null) {
+            $this->commercialExtensionSlugProductNames = array_merge(
+                $this->getNonActivatedLicenseCommercialExtensionSlugProductNames(),
+                $this->getActivatedLicenseCommercialExtensionSlugProductNames(),
+            );
+            ksort($this->commercialExtensionSlugProductNames);
+        }
+        return $this->commercialExtensionSlugProductNames;
     }
 }

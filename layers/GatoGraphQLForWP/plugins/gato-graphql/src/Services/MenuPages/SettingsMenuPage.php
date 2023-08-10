@@ -7,9 +7,16 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
+use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
+use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
@@ -17,8 +24,13 @@ use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\ComponentModel\Module as ComponentModelModule;
 use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+
+use function get_option;
+use function home_url;
+use function update_option;
 
 /**
  * Settings menu page
@@ -30,6 +42,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     use UseCollapsibleContentMenuPageTrait;
 
     public final const FORM_ORIGIN = 'form-origin';
+    public final const FORM_FIELD_LAST_SAVED_TIMESTAMP = 'last_saved_timestamp';
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
 
@@ -37,6 +50,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?SettingsNormalizerInterface $settingsNormalizer = null;
     private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -85,6 +100,32 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         return $this->settingsCategoryRegistry;
     }
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    final protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
+    }
+    final public function setMarketplaceProviderCommercialExtensionActivationService(MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService): void
+    {
+        $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
+    }
+    final protected function getMarketplaceProviderCommercialExtensionActivationService(): MarketplaceProviderCommercialExtensionActivationServiceInterface
+    {
+        if ($this->marketplaceProviderCommercialExtensionActivationService === null) {
+            /** @var MarketplaceProviderCommercialExtensionActivationServiceInterface */
+            $marketplaceProviderCommercialExtensionActivationService = $this->instanceManager->getInstance(MarketplaceProviderCommercialExtensionActivationServiceInterface::class);
+            $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
+        }
+        return $this->marketplaceProviderCommercialExtensionActivationService;
+    }
 
     public function getMenuPageSlug(): string
     {
@@ -100,22 +141,79 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
         $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
 
-        $option = $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT);
+        $settingsCategory = SettingsCategoryResolver::PLUGIN_MANAGEMENT;
+        $option = $settingsCategoryRegistry->getSettingsCategoryResolver($settingsCategory)->getOptionsFormName($settingsCategory);
         \add_action(
             "update_option_{$option}",
             /**
+             * Based on which button was pressed, do one or another action:
+             *
+             * - Reset Settings
+             * - Activate Extensions
+             *
+             * Because the form will send all values again, for all sections,
+             * restore the other sections. Otherwise, the user might remove
+             * the License Key from the input, then switch to Reset Settings,
+             * and click there, being completely unaware that the input
+             * will be removed in the DB.             *
+             *
+             * @param array<string,mixed> $oldValue
              * @param array<string,mixed> $values
-             * @param array<string,mixed> $previousValues
              * @return array<string,mixed>
              */
-            function (mixed $oldValue, array $values): void {
-                /**
-                 * Check that pressed on the "Reset Settings" button
-                 */
-                if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+            function (mixed $oldValue, array $values) use ($settingsCategory): void {
+                // Make sure the user clicked on the corresponding button
+                if (
+                    !isset($values[self::RESET_SETTINGS_BUTTON_ID])
+                    && !isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])
+                ) {
                     return;
                 }
-                $this->resetSettings();
+
+                if (!is_array($oldValue)) {
+                    $oldValue = [];
+                }
+
+                // If pressed on the "Reset Settings" button...
+                if (isset($values[self::RESET_SETTINGS_BUTTON_ID])) {
+                    $this->restoreDBOptionValuesForNonSubmittedFormSections(
+                        $settingsCategory,
+                        [
+                            [
+                                PluginManagementFunctionalityModuleResolver::RESET_SETTINGS,
+                                PluginManagementFunctionalityModuleResolver::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR,
+                            ],
+                        ],
+                        $oldValue,
+                        $values,
+                    );
+
+                    $this->resetSettings();
+                    return;
+                }
+
+                // If pressed on the "Activate (Extensions)" button...
+                if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
+                    $this->restoreDBOptionValuesForNonSubmittedFormSections(
+                        $settingsCategory,
+                        [
+                            [
+                                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                                PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                            ],
+                        ],
+                        $oldValue,
+                        $values,
+                    );
+
+                    // Retrieve the previously-stored license keys, and the newly-submitted license keys
+                    $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
+                    $this->activateDeactivateValidateGatoGraphQLCommercialExtensions(
+                        $oldValue[$settingOptionName] ?? [],
+                        $values[$settingOptionName] ?? []
+                    );
+                    return;
+                }
             },
             10,
             2
@@ -258,6 +356,49 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
+     * "Plugin Management Settings": Restore the stored values for the
+     * contiguous sections in the form (i.e. the other ones to the
+     * submitted section where the button was clicked).
+     *
+     * To restore the values:
+     *
+     * - Use the old values from the hook
+     * - Remove the clicked button from the form, as to avoid infinite looping here
+     * - Override the new values, just for the submitted section
+     *
+     * @param array<array{0:string,1:string}> $formSubmittedModuleOptionItems Form items that must be stored in the DB (everything else will be restored), with item format: [0]: module, [1]: option
+     * @param array<string,mixed> $oldValue
+     * @param array<string,mixed> $values
+     */
+    protected function restoreDBOptionValuesForNonSubmittedFormSections(
+        string $settingsCategory,
+        array $formSubmittedModuleOptionItems,
+        array $oldValue,
+        array $values,
+    ): void {
+        $dbOptionName = $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
+
+        // Always transfer the "last_saved_timestamp" field
+        $storeSettingOptionNames = [
+            self::FORM_FIELD_LAST_SAVED_TIMESTAMP,
+        ];
+        foreach ($formSubmittedModuleOptionItems as $formSubmittedModuleOptionItem) {
+            $module = $formSubmittedModuleOptionItem[0];
+            $option = $formSubmittedModuleOptionItem[1];
+            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+            $settingOptionName = $moduleResolver->getSettingOptionName($module, $option);
+            $storeSettingOptionNames[] = $settingOptionName;
+        }
+
+        $restoredValues = $oldValue;
+        foreach ($storeSettingOptionNames as $transferSettingOptionName) {
+            $restoredValues[$transferSettingOptionName] = $values[$transferSettingOptionName];
+        }
+
+        update_option($dbOptionName, $restoredValues);
+    }
+
+    /**
      * Delete the Settings and flush
      */
     protected function resetSettings(): void
@@ -283,6 +424,393 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $regenerateContainer = true;
         }
         $this->flushContainer(true, $regenerateContainer);
+    }
+
+    /**
+     * Activate the Gato GraphQL Extensions against the
+     * marketplace provider's API.
+     *
+     * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
+     * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
+     */
+    protected function activateDeactivateValidateGatoGraphQLCommercialExtensions(
+        array $previousLicenseKeys,
+        array $submittedLicenseKeys,
+    ): void {
+        /** @var array<string,mixed> */
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        [
+            $activateLicenseKeys,
+            $deactivateLicenseKeys,
+            $validateLicenseKeys,
+        ] = $this->calculateLicenseKeysToActivateDeactivateValidate(
+            $commercialExtensionActivatedLicenseEntries,
+            $previousLicenseKeys,
+            $submittedLicenseKeys,
+        );
+
+        if (
+            $activateLicenseKeys === []
+            && $deactivateLicenseKeys === []
+            && $validateLicenseKeys === []
+        ) {
+            return;
+        }
+
+        // Keep the original values, to only flush the container if these have changed
+        $originalCommercialExtensionActivatedLicenseEntries = $commercialExtensionActivatedLicenseEntries;
+
+        $extensionManager = PluginApp::getExtensionManager();
+        $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
+        $marketplaceProviderCommercialExtensionActivationService = $this->getMarketplaceProviderCommercialExtensionActivationService();
+        $licenseOperationAPIResponseProperties = null;
+
+        foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
+            /** @var string */
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
+            /** @var array<string,mixed> */
+            $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
+            /** @var string */
+            $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
+            try {
+                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->validateLicense(
+                    $licenseKey,
+                    $instanceID,
+                );
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $errorMessage = sprintf(
+                    \__('Validating license for "%s" produced error: %s', 'gato-graphql'),
+                    $extensionName,
+                    $e->getMessage()
+                );
+                $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
+                    $commercialExtensionActivatedLicenseEntries,
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                );
+                continue;
+            }
+
+            $successMessage = sprintf(
+                \__('The license for "%s" has status "%s". You have %s/%s instances activated.', 'gato-graphql'),
+                $extensionName,
+                $licenseOperationAPIResponseProperties->status,
+                $licenseOperationAPIResponseProperties->activationUsage,
+                $licenseOperationAPIResponseProperties->activationLimit,
+            );
+            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
+                $commercialExtensionActivatedLicenseEntries,
+                $extensionSlug,
+                $extensionName,
+                $licenseOperationAPIResponseProperties,
+                $successMessage,
+            );
+        }
+
+        /**
+         * First deactivate and then activate licenses, because an extension
+         * might be deactivated + reactivated (with a different license key)
+         */
+        foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
+            /** @var string */
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
+            /** @var array<string,mixed> */
+            $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
+            /** @var string */
+            $instanceID = $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID];
+            try {
+                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->deactivateLicense(
+                    $licenseKey,
+                    $instanceID,
+                );
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $errorMessage = sprintf(
+                    \__('Deactivating license for "%s" produced error: %s', 'gato-graphql'),
+                    $extensionName,
+                    $e->getMessage()
+                );
+                $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
+                    $commercialExtensionActivatedLicenseEntries,
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                );
+                continue;
+            }
+
+            $successMessage = sprintf(
+                \__('Deactivating license for "%s" succeeded. You now have %s/%s instances activated.', 'gato-graphql'),
+                $extensionName,
+                $licenseOperationAPIResponseProperties->activationUsage,
+                $licenseOperationAPIResponseProperties->activationLimit,
+            );
+            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
+                $commercialExtensionActivatedLicenseEntries,
+                $extensionSlug,
+                $extensionName,
+                $licenseOperationAPIResponseProperties,
+                $successMessage,
+            );
+            // Do not store deactivated instances
+            unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
+        }
+
+        foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
+            /** @var string */
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
+            $instanceName = $this->getInstanceName($extensionSlug);
+            try {
+                $licenseOperationAPIResponseProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
+            } catch (HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e) {
+                $errorMessage = sprintf(
+                    \__('Activating license for "%s" produced error: %s', 'gato-graphql'),
+                    $extensionName,
+                    $e->getMessage()
+                );
+                $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
+                    $commercialExtensionActivatedLicenseEntries,
+                    $extensionSlug,
+                    $errorMessage,
+                    $e,
+                );
+                continue;
+            }
+
+            $successMessage = sprintf(
+                \__('Activating license for "%s" succeeded. You have %s/%s instances activated.', 'gato-graphql'),
+                $extensionName,
+                $licenseOperationAPIResponseProperties->activationUsage,
+                $licenseOperationAPIResponseProperties->activationLimit,
+            );
+            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
+                $commercialExtensionActivatedLicenseEntries,
+                $extensionSlug,
+                $extensionName,
+                $licenseOperationAPIResponseProperties,
+                $successMessage,
+            );
+        }
+
+        // Do not flush container or update DB if there are no changes
+        if ($originalCommercialExtensionActivatedLicenseEntries === $commercialExtensionActivatedLicenseEntries) {
+            return;
+        }
+
+        // Store the payloads to the DB
+        update_option(
+            Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
+            $commercialExtensionActivatedLicenseEntries
+        );
+
+        // Because extensions will be activated/deactivated, flush the service container
+        $this->flushContainer(true, true);
+    }
+
+    /**
+     * If there was an HTTPRequest error, then do not unset the stored
+     * payload in the DB.
+     *
+     * If there was a LicenseOperation error, that means the instance
+     * does not exist, or some other problem, and hence deactivate the
+     * instance.
+     *
+     * Show an error message to the admin.
+     *
+     * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
+     * @return array<string,mixed>
+     */
+    protected function handleLicenseOperationError(
+        array $commercialExtensionActivatedLicenseEntries,
+        string $extensionSlug,
+        string $errorMessage,
+        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
+    ): array {
+        if ($e instanceof LicenseOperationNotSuccessfulException) {
+            unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
+            $type = 'error';
+        } else {
+            $type = 'warning';
+        }
+
+        // Show the error message to the admin
+        add_settings_error(
+            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+            'license_activation_' . $extensionSlug,
+            $errorMessage,
+            $type
+        );
+
+        return $commercialExtensionActivatedLicenseEntries;
+    }
+
+    /**
+     * Add the payload entry to be stored in the DB, and show a success
+     * message to the admin.
+     *
+     * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
+     * @return array<string,mixed>
+     */
+    protected function handleLicenseOperationSuccess(
+        array $commercialExtensionActivatedLicenseEntries,
+        string $extensionSlug,
+        string $extensionName,
+        LicenseOperationAPIResponseProperties $licenseOperationAPIResponseProperties,
+        string $successMessage,
+    ): array {
+        $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
+            LicenseProperties::API_RESPONSE_PAYLOAD => $licenseOperationAPIResponseProperties->apiResponsePayload,
+            LicenseProperties::STATUS => $licenseOperationAPIResponseProperties->status,
+            LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
+            /**
+             * The instance name is generated by the plugin, hence there is no need
+             * to store it in the DB. However, it is also stored to pre-populate
+             * the "Support" form, to help the Gato GraphQL team understand what
+             * extensions are being used.
+             */
+            LicenseProperties::INSTANCE_NAME => $licenseOperationAPIResponseProperties->instanceName,
+            /**
+             * The product name is stored as to validate that the license key
+             * provided in the Settings belongs to the right extension.
+             *
+             * @see `assertCommercialLicenseHasBeenActivated` in class `ExtensionManager`
+             */
+            LicenseProperties::PRODUCT_NAME => $licenseOperationAPIResponseProperties->productName,
+            /**
+             * The customer name and email are stored as to pre-populate
+             * the "Support" form
+             */
+            LicenseProperties::CUSTOMER_NAME => $licenseOperationAPIResponseProperties->customerName,
+            LicenseProperties::CUSTOMER_EMAIL => $licenseOperationAPIResponseProperties->customerEmail,
+        ];
+
+        // Show the success message to the admin
+        add_settings_error(
+            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+            'license_activation_' . $extensionSlug,
+            $successMessage,
+            'success'
+        );
+
+        if ($licenseOperationAPIResponseProperties->productName !== $extensionName) {
+            // Show the success message to the admin
+            add_settings_error(
+                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                'license_activation_' . $extensionSlug,
+                sprintf(
+                    \__('The license key provided for "%1$s" is meant to be used with "%2$s". As such, "%1$s" has not been enabled. Please use the right license key to enable it. Be welcome to contact the Gato GraphQL Support team for help.'),
+                    $extensionName,
+                    $licenseOperationAPIResponseProperties->productName,
+                ),
+                'error'
+            );
+        }
+
+        return $commercialExtensionActivatedLicenseEntries;
+    }
+
+    /**
+     * Calculate which extensions must be activated, which must be deactivated,
+     * and which must be both.
+     *
+     * Every entry in $submittedLicenseKeys is compared against $previousLicenseKeys and,
+     * depending on both values, either there is nothing to do, or the license is
+     * activated/deactivated/both:
+     *
+     * - If the license key is empty in both, then nothing to do
+     * - If the license key has not been updated, then validate it
+     * - If the license key is new (i.e. it was empty before), then activate it
+     * - If the license key is removed (i.e. it is empty now, non-empty before), then deactivate it
+     * - If the license key has been updated, then deactivate the previous one, and activate the new one
+     *
+     * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
+     * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
+     * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
+     * @return array{0:array<string,string>,1:array<string,string>,2:array<string,string>} [0]: $activateLicenseKeys, [1]: $deactivateLicenseKeys, [2]: $validateLicenseKeys], with array items as: Key: Extension Slug, Value: License Key
+     */
+    protected function calculateLicenseKeysToActivateDeactivateValidate(
+        array $commercialExtensionActivatedLicenseEntries,
+        array $previousLicenseKeys,
+        array $submittedLicenseKeys,
+    ): array {
+        $deactivateLicenseKeys = [];
+        $activateLicenseKeys = [];
+        $validateLicenseKeys = [];
+
+        // Iterate all submitted entries to activate extensions
+        foreach ($submittedLicenseKeys as $extensionSlug => $submittedLicenseKey) {
+            $submittedLicenseKey = trim($submittedLicenseKey);
+            if ($submittedLicenseKey === '') {
+                // License key not set => Skip
+                continue;
+            }
+            $hasExtensionBeenActivated = isset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
+            $previousLicenseKey = trim($previousLicenseKeys[$extensionSlug] ?? '');
+            if ($previousLicenseKey === $submittedLicenseKey) {
+                if ($hasExtensionBeenActivated) {
+                    // License key not updated => Validate
+                    $validateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                } else {
+                    // The previous license had (for some reason) not be activated => Activate
+                    $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                }
+                continue;
+            }
+            if ($previousLicenseKey === '') {
+                // License key newly added => Activate
+                $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+                continue;
+            }
+            // License key updated => Deactivate + Activate
+            if ($hasExtensionBeenActivated) {
+                $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+            }
+            $activateLicenseKeys[$extensionSlug] = $submittedLicenseKey;
+        }
+
+        // Iterate all previous entries to deactivate extensions
+        foreach ($previousLicenseKeys as $extensionSlug => $previousLicenseKey) {
+            $previousLicenseKey = trim($previousLicenseKey);
+            $submittedLicenseKey = trim($submittedLicenseKeys[$extensionSlug]);
+            if ($previousLicenseKey === '') {
+                // License key not previously set => Skip
+                continue;
+            }
+            if ($previousLicenseKey === $submittedLicenseKey) {
+                // License key not updated => Do nothing (Validate: already queued above)
+                continue;
+            }
+            if ($submittedLicenseKey === '') {
+                $hasExtensionBeenActivated = isset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
+                if ($hasExtensionBeenActivated) {
+                    // License key newly removed => Deactivate
+                    $deactivateLicenseKeys[$extensionSlug] = $previousLicenseKey;
+                }
+                continue;
+            }
+            // License key updated => Do nothing (Deactivate + Activate: already queued above)
+        }
+
+        return [
+            $activateLicenseKeys,
+            $deactivateLicenseKeys,
+            $validateLicenseKeys,
+        ];
+    }
+
+    /**
+     * Use as the instance name:
+     *
+     * - The site's domain: to understand on what domain it was installed
+     * - Extension slug: to make sure the right license key was provided
+     */
+    protected function getInstanceName(string $extensionSlug): string
+    {
+        return sprintf(
+            '%s (%s)',
+            GeneralUtils::getHost(home_url()),
+            $extensionSlug
+        );
     }
 
     /**
@@ -503,7 +1031,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         which makes "update_option_{$option}" not be triggered when there are no changes
                                                         @see wp-includes/option.php
                                                     -->
-                                                    <input type="hidden" name="<?php echo $optionsFormName?>[last_saved_timestamp]" value="<?php echo $time ?>">
+                                                    <input type="hidden" name="<?php echo $optionsFormName?>[<?php echo self::FORM_FIELD_LAST_SAVED_TIMESTAMP ?>]" value="<?php echo $time ?>">
                                                     <?php if (RequestHelpers::isRequestingXDebug()) : ?>
                                                         <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_TRIGGER ?>" value="1">
                                                         <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_SESSION_STOP ?>" value="1">
@@ -714,7 +1242,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
             ?>
             <label for="<?php echo $id ?>">
-                <?php printf(__('%s:', 'gato-graphql'), $label); ?>
+                <?php printf(__('<strong>%s</strong>:', 'gato-graphql'), $label); ?>
                 <br/>
                 <input name="<?php echo $optionsFormName . '[' . $name . '][' . $key . ']'; ?>" id="<?php echo $id ?>" value="<?php echo $value[$key] ?? '' ?>" type="text">
             </label>
