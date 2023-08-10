@@ -289,6 +289,9 @@ abstract class AbstractContentParser implements ContentParserInterface
         $firstTagPos = strpos($htmlContent, '<' . $tag . '>');
         // Check if there is any <h2>
         if ($firstTagPos !== false) {
+            // If passing a tab, focus on that one, if the tab exists
+            $tab = App::query(RequestParams::TAB);
+            
             // Content before the first <h2> does not go within any tab
             $contentStarter = substr(
                 $htmlContent,
@@ -302,9 +305,10 @@ abstract class AbstractContentParser implements ContentParserInterface
             );
             $headers = [];
             $headerNames = [];
+            $tabbedPanelPlaceholder = '<div id="%s" class="tab-content" style="display: %s;">';
             $panelContent = preg_replace_callback(
                 $regex,
-                function (array $matches) use (&$headers, &$headerNames): string {
+                function (array $matches) use (&$headers, &$headerNames, $tab, $tabbedPanelPlaceholder): string {
                     $isFirstTab = empty($headers);
                     if (!$isFirstTab) {
                         $tabbedPanel = '</div>';
@@ -315,11 +319,12 @@ abstract class AbstractContentParser implements ContentParserInterface
                     $headers[] = $header;
                     $headerName = sanitize_title($header);
                     $headerNames[] = $headerName;
+                    $isActiveTab = $tab === null ? $isFirstTab : $headerName === $tab;
                     /** @var string */
                     return $tabbedPanel . sprintf(
-                        '<div id="%s" class="tab-content" style="display: %s;">',
+                        $tabbedPanelPlaceholder,
                         $headerName,
-                        $isFirstTab ? 'block' : 'none'
+                        $isActiveTab ? 'block' : 'none'
                     );// . $matches[0];
                 },
                 substr(
@@ -328,12 +333,32 @@ abstract class AbstractContentParser implements ContentParserInterface
                 )
             ) . '</div>';
 
+            /**
+             * Only now we have all the headerNames.
+             * Check if the passed ?tab=... does indeed exist.
+             * If it does not, make the first tab as active.
+             */
+            if ($tab !== null && !in_array($tab, $headerNames)) {
+                $panelContent = str_replace(
+                    sprintf(
+                        $tabbedPanelPlaceholder,
+                        $headerNames[0],
+                        'none'
+                    ),
+                    sprintf(
+                        $tabbedPanelPlaceholder,
+                        $headerNames[0],
+                        'block'
+                    ),
+                    $panelContent
+                );
+            }
+
             // Create the tabs
             $panelTabs = '';
             $headersCount = count($headers);
 
             // If passing a tab, focus on that one, if the tab exists
-            $tab = App::query(RequestParams::TAB);
             if ($tab !== null && in_array($tab, $headerNames)) {
                 $activeHeaderName = $tab;
             } else {
