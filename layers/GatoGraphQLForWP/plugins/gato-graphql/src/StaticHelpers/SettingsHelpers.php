@@ -11,21 +11,22 @@ use GatoGraphQL\GatoGraphQL\Settings\Options;
 class SettingsHelpers
 {
     /**
-     * @var LicenseOperationAPIResponseProperties[]|null
+     * @var array<string,LicenseOperationAPIResponseProperties>|null Extension Slug => License Data
      */
     private static ?array $licenseOperationAPIResponseProperties = null;
 
     /**
      * Retrieve the license properties for all activated extensions
      *
-     * @return LicenseOperationAPIResponseProperties[]
+     * @return array<string,LicenseOperationAPIResponseProperties> Extension Slug => License Data
      */
     public static function getLicenseOperationAPIResponseProperties(): array
     {
         if (self::$licenseOperationAPIResponseProperties === null) {
             $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
-            self::$licenseOperationAPIResponseProperties = array_map(
-                fn (array $commercialExtensionActivatedLicenseEntry) => new LicenseOperationAPIResponseProperties(
+            self::$licenseOperationAPIResponseProperties = [];
+            foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
+                self::$licenseOperationAPIResponseProperties[$extensionSlug] = new LicenseOperationAPIResponseProperties(
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::LICENSE_KEY],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::API_RESPONSE_PAYLOAD],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS],
@@ -36,9 +37,8 @@ class SettingsHelpers
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::ACTIVATION_LIMIT],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::CUSTOMER_NAME],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::CUSTOMER_EMAIL],
-                ),
-                $commercialExtensionActivatedLicenseEntries
-            );
+                );
+            }
         }
         return self::$licenseOperationAPIResponseProperties;
     }
