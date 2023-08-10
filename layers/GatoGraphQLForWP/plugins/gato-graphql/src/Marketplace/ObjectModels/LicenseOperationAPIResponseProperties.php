@@ -11,6 +11,7 @@ class LicenseOperationAPIResponseProperties
      */
     public function __construct(
         public readonly array $apiResponsePayload,
+        public readonly string $licenseKey,
         public readonly string $status,
         public readonly string $instanceID,
         public readonly string $instanceName,
