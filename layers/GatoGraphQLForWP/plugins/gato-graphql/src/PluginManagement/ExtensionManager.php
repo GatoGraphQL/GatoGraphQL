@@ -272,6 +272,7 @@ class ExtensionManager extends AbstractPluginManager
         if ($licenseProductName !== $extensionProductName) {
             $this->showAdminWarningNotice(
                 $extensionProductName,
+                __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gato-graphql')
             );
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
