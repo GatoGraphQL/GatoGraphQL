@@ -110,7 +110,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::ACTIVATE_EXTENSIONS => \__('Activate Bundles and Extensions', 'gato-graphql'),
+            self::ACTIVATE_EXTENSIONS => \__('Activate Extensions', 'gato-graphql'),
             self::RESET_SETTINGS => \__('Reset Settings', 'gato-graphql'),
             default => $module,
         };
@@ -169,7 +169,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Activate Licenses', 'gato-graphql'),
+                    Properties::TITLE => \__('Activate Extension Licenses', 'gato-graphql'),
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
                         $this->getCollapsible(
@@ -227,7 +227,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $module,
                         'activate-extensions'
                     ),
-                    Properties::TITLE => \__('Activate Licenses', 'gato-graphql'),
+                    Properties::TITLE => \__('Activate Extension Licenses', 'gato-graphql'),
                     Properties::DESCRIPTION => \__('<em>There are no Bundles or Extensions from the Gato GraphQL Shop installed</em>', 'gato-graphql'),
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
