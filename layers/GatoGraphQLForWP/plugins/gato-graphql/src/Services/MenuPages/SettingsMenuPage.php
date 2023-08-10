@@ -492,8 +492,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
 
             $successMessage = sprintf(
-                \__('Status: License for "%s" is active. You have %s/%s instances activated.', 'gato-graphql'),
+                \__('The license for "%s" has status "%s". You have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
+                $licenseOperationAPIResponseProperties->status,
                 $licenseOperationAPIResponseProperties->activationUsage,
                 $licenseOperationAPIResponseProperties->activationLimit,
             );
