@@ -161,8 +161,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('License keys from the Gato GraphQL Shop', 'gato-graphql'),
-                    Properties::DESCRIPTION => \__('Enter the license keys for the bundles/extensions, and click on "Activate":', 'gato-graphql'),
+                    Properties::TITLE => \__('Activate Licenses', 'gato-graphql'),
+                    Properties::DESCRIPTION => \__('Please enter the license keys for the bundles/extensions purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gato-graphql'),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                     Properties::KEY_LABELS => $commercialExtensionSlugProductNames,
                 ];
@@ -182,7 +182,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $activateExtensionsButtonsHTML = '';
                 if (function_exists('get_submit_button')) {
                     $activateExtensionsButtonsHTML = get_submit_button(
-                        \__('Activate', 'gato-graphql'),
+                        \__('Activate Licenses (or Deactivate/Validate)', 'gato-graphql'),
                         'primary',
                         $activateButtonName,
                         false
