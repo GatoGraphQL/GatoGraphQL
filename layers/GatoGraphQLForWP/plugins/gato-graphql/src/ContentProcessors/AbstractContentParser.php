@@ -291,7 +291,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         if ($firstTagPos !== false) {
             // If passing a tab, focus on that one, if the tab exists
             $tab = App::query(RequestParams::TAB);
-            
+
             // Content before the first <h2> does not go within any tab
             $contentStarter = substr(
                 $htmlContent,
