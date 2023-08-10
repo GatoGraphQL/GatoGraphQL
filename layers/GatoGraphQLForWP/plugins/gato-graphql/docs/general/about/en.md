@@ -69,17 +69,17 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
-  <label for="field-domain">Domain:</label>
+  <label for="field-domain">Extensions license data <em>(pre-filled and read-only)</em>:</label>
   <br/>
-  <input
-    type="text"
-    name="domain"
-    id="field-domain"
+  <textarea
+    id="field-extensions-license-data"
+    name="extensions-license-data"
+    rows="5"
+    cols="100"
     required=""
     aria-required="true"
-    placeholder="mydomain.com"
-    autocomplete="domain"
-  />
+    readonly
+  >{extensions-license-data}</textarea>
 
   <br/><br/>
 

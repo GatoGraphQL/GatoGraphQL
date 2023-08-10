@@ -52,18 +52,34 @@ class AboutMenuPage extends AbstractDocsMenuPage
             );
         }
 
+        $extensionsLicenseData = sprintf(
+            '%s%s%s%s',
+            'Domain:',
+            PHP_EOL,
+            GeneralUtils::getHost(\home_url()),
+            PHP_EOL . PHP_EOL,
+        );
+
         /**
          * Input dynamic content into the form in the generated HTML
          */
-        $valueInjections = [
-            'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
-            'placeholder="mydomain.com"' => GeneralUtils::getHost(\home_url()),
-        ];
         $replacements = [];
-        foreach ($valueInjections as $search => $valueInject) {
+        $textInputValueInjections = [
+            'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
+        ];
+        foreach ($textInputValueInjections as $search => $valueInject) {
             $replacements[$search] = sprintf(
                 '%s value="%s"',
                 $search,
+                $valueInject
+            );
+        }
+        $textareaInputValueInjections = [
+            '{extensions-license-data}' => $extensionsLicenseData,
+        ];
+        foreach ($textareaInputValueInjections as $search => $valueInject) {
+            $replacements[$search . '</textarea>'] = sprintf(
+                '%s</textarea>',
                 $valueInject
             );
         }
