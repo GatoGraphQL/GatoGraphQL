@@ -8,7 +8,6 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\LicenseOperationAPIResponseProperties;
-use RuntimeException;
 use WP_Error;
 
 use function wp_remote_post;
@@ -126,16 +125,9 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
     protected function convertStatus(string $status): string
     {
         return match($status) {
-            'inactive' => LicenseStatus::INACTIVE,
             'active' => LicenseStatus::ACTIVE,
             'expired' => LicenseStatus::EXPIRED,
-            'disabled' => LicenseStatus::DISABLED,
-            default => new RuntimeException(
-                sprintf(
-                    \__('Unsupported license status \'%s\'', 'gato-graphql'),
-                    $status
-                )
-            ),
+            default => LicenseStatus::OTHER,
         };
     }
 
