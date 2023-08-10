@@ -6,12 +6,9 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
-
-use function get_option;
 
 /**
  * About menu page
@@ -57,20 +54,19 @@ class AboutMenuPage extends AbstractDocsMenuPage
         }
 
         $extensionLicenseItems = [];
-        /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
-        foreach ($commercialExtensionActivatedLicenseEntries as $commercialExtensionActivatedLicenseEntry) {
+        $licenseOperationAPIResponseProperties = SettingsHelpers::getLicenseOperationAPIResponseProperties();
+        foreach ($$licenseOperationAPIResponseProperties as $extensionLicenseOperationAPIResponseProperties) {
             $extensionLicenseItems[] = sprintf(
                 '%s%s%s%s%s%s%s%s%s',
-                'License Key: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::LICENSE_KEY],
+                'License Key: ' . $extensionLicenseOperationAPIResponseProperties->licenseKey,
                 PHP_EOL,
-                'Extension: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME],
+                'Extension: ' . $extensionLicenseOperationAPIResponseProperties->productName,
                 PHP_EOL,
-                'Instance Name: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME],
+                'Instance Name: ' . $extensionLicenseOperationAPIResponseProperties->instanceName,
                 PHP_EOL,
-                'Instance ID: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID],
+                'Instance ID: ' . $extensionLicenseOperationAPIResponseProperties->instanceID,
                 PHP_EOL,
-                'Status: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS],
+                'Status: ' . $extensionLicenseOperationAPIResponseProperties->status,
             );
         }
         $extensionsLicenseData = sprintf(
