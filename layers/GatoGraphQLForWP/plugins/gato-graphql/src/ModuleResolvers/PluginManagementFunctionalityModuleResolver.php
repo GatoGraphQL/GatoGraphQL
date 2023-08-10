@@ -155,7 +155,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $extensionManager = PluginApp::getExtensionManager();
             $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
             if ($commercialExtensionSlugProductNames !== []) {
-                $ulPlaceholder = \__('<ul><li>%s</li></ul>', 'gato-graphql');
+                $ulPlaceholder = '<ul><li>%s</li></ul>';
                 $handlingLicenseMessageItems = [
                     \__('Adding a license key will <strong>activate the extension</strong>', 'gato-graphql'),
                     \__('Removing an existing license key will <strong>deactivate the extension</strong>', 'gato-graphql'),
@@ -179,7 +179,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 sprintf(
                                     $ulPlaceholder,
                                     implode(
-                                        \__('</li><li>', 'gato-graphql'),
+                                        '</li><li>',
                                         $handlingLicenseMessageItems
                                     )
                                 ),

@@ -81,7 +81,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             return $entryContent;
         }
 
-        $messageExtensionPlaceholder = \__('<ul><li>%s</li></ul>', 'gato-graphql');
+        $messageExtensionPlaceholder = '<ul><li>%s</li></ul>';
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
@@ -104,7 +104,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     sprintf(
                         $messageExtensionPlaceholder,
                         implode(
-                            \__('</li><li>', 'gato-graphql'),
+                            '</li><li>',
                             $extensionHTMLItems
                         )
                     ),
