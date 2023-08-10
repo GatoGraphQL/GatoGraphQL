@@ -56,27 +56,26 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $extensionLicenseItems = [];
         $licenseOperationAPIResponseProperties = SettingsHelpers::getLicenseOperationAPIResponseProperties();
         foreach ($licenseOperationAPIResponseProperties as $extensionLicenseOperationAPIResponseProperties) {
-            $extensionLicenseItems[] = sprintf(
-                '%s%s%s%s%s%s%s%s%s',
-                'License Key: ' . $extensionLicenseOperationAPIResponseProperties->licenseKey,
+            $extensionLicenseItems[] = implode(
                 PHP_EOL,
-                'Extension: ' . $extensionLicenseOperationAPIResponseProperties->productName,
-                PHP_EOL,
-                'Instance Name: ' . $extensionLicenseOperationAPIResponseProperties->instanceName,
-                PHP_EOL,
-                'Instance ID: ' . $extensionLicenseOperationAPIResponseProperties->instanceID,
-                PHP_EOL,
-                'Status: ' . $extensionLicenseOperationAPIResponseProperties->status,
+                [
+                    'License Key: ' . $extensionLicenseOperationAPIResponseProperties->licenseKey,
+                    'Extension: ' . $extensionLicenseOperationAPIResponseProperties->productName,
+                    'Instance Name: ' . $extensionLicenseOperationAPIResponseProperties->instanceName,
+                    'Instance ID: ' . $extensionLicenseOperationAPIResponseProperties->instanceID,
+                    'Status: ' . $extensionLicenseOperationAPIResponseProperties->status,
+                ]
             );
         }
-        $extensionsLicenseData = sprintf(
-            '%s%s%s',
-            'Domain: ' . GeneralUtils::getHost(\home_url()),
+        $extensionsLicenseData = implode(
             PHP_EOL . PHP_EOL,
-            implode(
-                PHP_EOL . PHP_EOL,
-                $extensionLicenseItems
-            )
+            [
+                'Domain: ' . GeneralUtils::getHost(\home_url()),
+                implode(
+                    PHP_EOL . PHP_EOL,
+                    $extensionLicenseItems
+                ),
+            ]
         );
 
         /**
