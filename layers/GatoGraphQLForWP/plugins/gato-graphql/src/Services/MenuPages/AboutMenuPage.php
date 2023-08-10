@@ -6,8 +6,12 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Settings\Options;
 use PoP\ComponentModel\Misc\GeneralUtils;
+
+use function get_option;
 
 /**
  * About menu page
@@ -52,18 +56,53 @@ class AboutMenuPage extends AbstractDocsMenuPage
             );
         }
 
+        $extensionLicenseItems = [];
+        /** @var array<string,mixed> */
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
+            $extensionLicenseItems[] = sprintf(
+                '%s%s%s%s%s%s%s%s%s',
+                'Extension Slug: ' . $extensionSlug,
+                PHP_EOL,
+                'Product Name: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME],
+                PHP_EOL,
+                'Instance Name: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME],
+                PHP_EOL,
+                'Instance ID: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID],
+                PHP_EOL,
+                'Status: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS],
+            );
+        }
+        $extensionsLicenseData = sprintf(
+            '%s%s%s',
+            'Domain: ' . GeneralUtils::getHost(\home_url()),
+            PHP_EOL . PHP_EOL,
+            implode(
+                PHP_EOL . PHP_EOL,
+                $extensionLicenseItems
+            )
+        );
+
         /**
          * Input dynamic content into the form in the generated HTML
          */
-        $valueInjections = [
-            'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
-            'placeholder="mydomain.com"' => GeneralUtils::getHost(\home_url()),
-        ];
         $replacements = [];
-        foreach ($valueInjections as $search => $valueInject) {
+        $textInputValueInjections = [
+            'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
+        ];
+        foreach ($textInputValueInjections as $search => $valueInject) {
             $replacements[$search] = sprintf(
                 '%s value="%s"',
                 $search,
+                $valueInject
+            );
+        }
+        $textareaInputValueInjections = [
+            '{extensions-license-data}' => $extensionsLicenseData,
+        ];
+        foreach ($textareaInputValueInjections as $search => $valueInject) {
+            $replacements[$search . '</textarea>'] = sprintf(
+                '%s</textarea>',
                 $valueInject
             );
         }

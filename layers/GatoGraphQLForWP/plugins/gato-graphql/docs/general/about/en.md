@@ -69,26 +69,12 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
-  <label for="field-domain">Domain:</label>
-  <br/>
-  <input
-    type="text"
-    name="domain"
-    id="field-domain"
-    required=""
-    aria-required="true"
-    placeholder="mydomain.com"
-    autocomplete="domain"
-  />
-
-  <br/><br/>
-
   <label for="field-message">Message:</label>
   <br/>
   <textarea
     id="field-message"
     name="message"
-    rows="5"
+    rows="10"
     cols="100"
     placeholder="What do you need support with?"
     required=""
@@ -97,11 +83,25 @@ Send your message to the Gato GraphQL Support team:
     autocapitalize="sentences"
   ></textarea>
   
-  <br/>
+  <br/><br/>
 
   <button type="submit" class="button">
     Send message
   </button>
+
+  <br/><br/><hr/><br/>
+
+  <label for="field-domain"><em>Attached extension license data</em>:</label>
+  <br/>
+  <textarea
+    id="field-extensions-license-data"
+    name="extensions-license-data"
+    rows="5"
+    cols="100"
+    required=""
+    aria-required="true"
+    readonly
+  >{extensions-license-data}</textarea>
 </form>
 
 </div>
