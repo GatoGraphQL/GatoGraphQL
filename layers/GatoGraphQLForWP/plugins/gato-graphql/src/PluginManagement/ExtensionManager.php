@@ -5,20 +5,16 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
-use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
-use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
-use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
-
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
+
 use function get_option;
 
 class ExtensionManager extends AbstractPluginManager
@@ -292,23 +288,7 @@ class ExtensionManager extends AbstractPluginManager
     ): void {
         $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gato-graphql');
         \add_action('admin_notices', function () use ($extensionProductName, $messagePlaceholder) {
-            $instanceManager = InstanceManagerFacade::getInstance();
-            $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
-            /**
-             * @var SettingsMenuPage
-             */
-            $settingsMenuPage = $instanceManager->getInstance(SettingsMenuPage::class);
-            $moduleRegistry = ModuleRegistryFacade::getInstance();
-            $activateExtensionsModuleResolver = $moduleRegistry->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS);
-            $activateExtensionsCategory = $activateExtensionsModuleResolver->getSettingsCategory(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS);
-            $activateExtensionsSettingsURL = \admin_url(sprintf(
-                'admin.php?page=%s&%s=%s&%s=%s',
-                $settingsMenuPage->getScreenID(),
-                RequestParams::CATEGORY,
-                $settingsCategoryRegistry->getSettingsCategoryResolver($activateExtensionsCategory)->getID($activateExtensionsCategory),
-                RequestParams::MODULE,
-                $activateExtensionsModuleResolver->getID(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)
-            ));
+            $activateExtensionsSettingsURL = AdminHelpers::getSettingsPageTabURL(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS);
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
