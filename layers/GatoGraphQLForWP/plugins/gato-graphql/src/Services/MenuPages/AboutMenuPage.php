@@ -53,8 +53,19 @@ class AboutMenuPage extends AbstractDocsMenuPage
             );
         }
 
-        $extensionLicenseItems = [];
+        /**
+         * Input dynamic content into the form in the generated HTML.
+         * Generate the "Attached extension license data", and extract
+         * an instance of customer name/email for those fields.
+         */
         $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
+        if ($commercialExtensionActivatedLicenseObjectProperties === []) {
+            return $content;
+        }
+
+        $customerName = '';
+        $customerEmail = '';
+        $extensionLicenseItems = [];
         foreach ($commercialExtensionActivatedLicenseObjectProperties as $extensionCommercialExtensionActivatedLicenseObjectProperties) {
             $extensionLicenseItems[] = implode(
                 PHP_EOL,
@@ -66,6 +77,8 @@ class AboutMenuPage extends AbstractDocsMenuPage
                     'Status: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->status,
                 ]
             );
+            $customerName = $extensionCommercialExtensionActivatedLicenseObjectProperties->customerName;
+            $customerEmail = $extensionCommercialExtensionActivatedLicenseObjectProperties->customerEmail;
         }
         $extensionsLicenseData = implode(
             PHP_EOL . PHP_EOL,
@@ -78,12 +91,10 @@ class AboutMenuPage extends AbstractDocsMenuPage
             ]
         );
 
-        /**
-         * Input dynamic content into the form in the generated HTML
-         */
         $replacements = [];
         $textInputValueInjections = [
-            'placeholder="pedro@yahoo.com"' => \get_option('admin_email', ''),
+            'placeholder="Pedro Rivas"' => $customerName,
+            'placeholder="pedro@yahoo.com"' => $customerEmail,
         ];
         foreach ($textInputValueInjections as $search => $valueInject) {
             $replacements[$search] = sprintf(
