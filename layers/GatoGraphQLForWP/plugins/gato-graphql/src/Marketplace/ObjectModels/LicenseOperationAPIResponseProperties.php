@@ -15,6 +15,8 @@ class LicenseOperationAPIResponseProperties
         public readonly string $instanceID,
         public readonly string $instanceName,
         public readonly string $productName,
+        public readonly string $customerName,
+        public readonly string $customerEmail,
         public readonly int $activationUsage,
         public readonly int $activationLimit,
     ) {

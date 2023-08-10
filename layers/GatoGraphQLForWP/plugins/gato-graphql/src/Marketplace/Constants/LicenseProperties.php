@@ -20,4 +20,10 @@ class LicenseProperties
 
     /** The name of the product for the license */
     public final const PRODUCT_NAME = 'productName';
+
+    /** The name of the customer who purchased for the license */
+    public final const CUSTOMER_NAME = 'customerName';
+
+    /** The email of the customer who purchased for the license */
+    public final const CUSTOMER_EMAIL = 'customerEmail';
 }
