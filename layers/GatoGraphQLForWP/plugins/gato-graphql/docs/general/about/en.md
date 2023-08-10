@@ -74,7 +74,7 @@ Send your message to the Gato GraphQL Support team:
   <textarea
     id="field-message"
     name="message"
-    rows="5"
+    rows="10"
     cols="100"
     placeholder="What do you need support with?"
     required=""
@@ -89,7 +89,7 @@ Send your message to the Gato GraphQL Support team:
     Send message
   </button>
 
-  <br/><br/>
+  <br/><br/><hr/><br/>
 
   <label for="field-domain"><em>Attached extension license data</em>:</label>
   <br/>
