@@ -217,15 +217,15 @@ class ExtensionManager extends AbstractPluginManager
     /**
      * Validate that the license for the commercial extension
      * has been activated.
-     * 
+     *
      * If it has not, also mark the Extension as "inactivated",
      * to show a message to the admin.
-     * 
+     *
      * Please notice that it receives the $extensionProductName,
      * which is EXACTLY the same name as registered in the
      * Gato GraphQL Shop. This name is used as an identifier, to
      * validate that the license key belongs to the right extension.
-     * 
+     *
      * @param string $extensionProductName The EXACT name as the product is stored in the Gato GraphQL Shop (i.e. in the Marketplace Provider's system)
      */
     public function assertCommercialLicenseHasBeenActivated(
@@ -245,26 +245,28 @@ class ExtensionManager extends AbstractPluginManager
 
         /** @var array<string,mixed> */
         $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
-        
+
         /**
          * Check that the license status is valid to use the plugin:
          *
          * - Active: Plugin has been activated, is currently within subscription period
          * - Expired: Subscription has expired, but users can keep using the plugin
-         * 
+         *
          * Notice: With LemonSqueezy as the Marketplace provider, this code will
          * in practice never be invoked, as both the "invalid" and "disabled" status
          * will also produce an "error" in the response, and so the entry will not
          * be stored in the DB. But keep this code for if the Marketplace Provider
          * is ever replaced.
-         * 
+         *
          * @var string
          */
         $licenseStatus = $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS];
-        if (!in_array($licenseStatus, [
+        if (
+            !in_array($licenseStatus, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
-        ])) {
+            ])
+        ) {
             $this->showAdminWarningNotice(
                 $extensionProductName,
                 __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gato-graphql')
@@ -325,7 +327,6 @@ class ExtensionManager extends AbstractPluginManager
                             \__('Settings', 'gato-graphql'),
                             \__('Plugin Management', 'gato-graphql'),
                             \__('Activate Extensions', 'gato-graphql'),
-
                         )
                     )
                 )

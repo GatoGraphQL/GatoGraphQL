@@ -156,15 +156,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * the License Key from the input, then switch to Reset Settings,
              * and click there, being completely unaware that the input
              * will be removed in the DB.             *
-             * 
+             *
              * @param array<string,mixed> $oldValue
              * @param array<string,mixed> $values
              * @return array<string,mixed>
              */
-            function (mixed $oldValue, array $values) use ($settingsCategory): void
-            {
+            function (mixed $oldValue, array $values) use ($settingsCategory): void {
                 // Make sure the user clicked on the corresponding button
-                if (!isset($values[self::RESET_SETTINGS_BUTTON_ID])
+                if (
+                    !isset($values[self::RESET_SETTINGS_BUTTON_ID])
                     && !isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])
                 ) {
                     return;
@@ -187,7 +187,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                         $oldValue,
                         $values,
                     );
-                    
+
                     $this->resetSettings();
                     return;
                 }
@@ -357,15 +357,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
 
     /**
      * "Plugin Management Settings": Restore the stored values for the
-     * contiguous sections in the form (i.e. the other ones to the 
+     * contiguous sections in the form (i.e. the other ones to the
      * submitted section where the button was clicked).
-     * 
+     *
      * To restore the values:
      *
      * - Use the old values from the hook
      * - Remove the clicked button from the form, as to avoid infinite looping here
      * - Override the new values, just for the submitted section
-     * 
+     *
      * @param array<array{0:string,1:string}> $formSubmittedModuleOptionItems Form items that must be stored in the DB (everything else will be restored), with item format: [0]: module, [1]: option
      * @param array<string,mixed> $oldValue
      * @param array<string,mixed> $values
@@ -429,7 +429,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Activate the Gato GraphQL Extensions against the
      * marketplace provider's API.
-     * 
+     *
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
      */
@@ -438,7 +438,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         array $submittedLicenseKeys,
     ): void {
         /** @var array<string,mixed> */
-        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []); 
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
         [
             $activateLicenseKeys,
             $deactivateLicenseKeys,
@@ -449,7 +449,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $submittedLicenseKeys,
         );
 
-        if ($activateLicenseKeys === []
+        if (
+            $activateLicenseKeys === []
             && $deactivateLicenseKeys === []
             && $validateLicenseKeys === []
         ) {
@@ -554,7 +555,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             // Do not store deactivated instances
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
-        
+
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
             /** @var string */
             $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
@@ -601,7 +602,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES,
             $commercialExtensionActivatedLicenseEntries
         );
-        
+
         // Because extensions will be activated/deactivated, flush the service container
         $this->flushContainer(true, true);
     }
@@ -613,7 +614,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * If there was a LicenseOperation error, that means the instance
      * does not exist, or some other problem, and hence deactivate the
      * instance.
-     * 
+     *
      * Show an error message to the admin.
      *
      * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
@@ -673,7 +674,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * provided in the Settings belongs to the right extension.
              *
              * @see `assertCommercialLicenseHasBeenActivated` in class `ExtensionManager`
-             */ 
+             */
             LicenseProperties::PRODUCT_NAME => $licenseOperationAPIResponseProperties->productName,
             /**
              * The customer name and email are stored as to pre-populate
@@ -711,7 +712,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     /**
      * Calculate which extensions must be activated, which must be deactivated,
      * and which must be both.
-     * 
+     *
      * Every entry in $submittedLicenseKeys is compared against $previousLicenseKeys and,
      * depending on both values, either there is nothing to do, or the license is
      * activated/deactivated/both:
@@ -721,7 +722,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * - If the license key is new (i.e. it was empty before), then activate it
      * - If the license key is removed (i.e. it is empty now, non-empty before), then deactivate it
      * - If the license key has been updated, then deactivate the previous one, and activate the new one
-     * 
+     *
      * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
      * @param array<string,string> $previousLicenseKeys Key: Extension Slug, Value: License Key
      * @param array<string,string> $submittedLicenseKeys Key: Extension Slug, Value: License Key
@@ -776,7 +777,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
             if ($previousLicenseKey === $submittedLicenseKey) {
-                // License key not updated => Do nothing (Validate: already queued above)            
+                // License key not updated => Do nothing (Validate: already queued above)
                 continue;
             }
             if ($submittedLicenseKey === '') {
@@ -787,7 +788,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 }
                 continue;
             }
-            // License key updated => Do nothing (Deactivate + Activate: already queued above)            
+            // License key updated => Do nothing (Deactivate + Activate: already queued above)
         }
 
         return [
