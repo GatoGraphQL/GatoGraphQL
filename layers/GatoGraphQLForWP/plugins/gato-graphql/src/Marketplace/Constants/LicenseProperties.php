@@ -15,6 +15,9 @@ class LicenseProperties
     /** After activating a license, what's its ID in the Marketplace Provider system */
     public final const INSTANCE_ID = 'instanceID';
 
+    /** The instance where the license is activated */
+    public final const INSTANCE_NAME = 'instanceName';
+
     /** The name of the product for the license */
     public final const PRODUCT_NAME = 'productName';
 }

@@ -101,6 +101,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         }
 
         /** @var string */
+        $instanceName = $body['instance']['name'];
+        /** @var string */
         $productName = $body['meta']['product_name'];
 
         $activationUsage = (int) $body['license_key']['activation_usage'];
@@ -110,6 +112,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             $body,
             $status,
             $instanceID,
+            $instanceName,
             $productName,
             $activationUsage,
             $activationLimit,

@@ -659,6 +659,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             LicenseProperties::API_RESPONSE_PAYLOAD => $licenseOperationAPIResponseProperties->apiResponsePayload,
             LicenseProperties::STATUS => $licenseOperationAPIResponseProperties->status,
             LicenseProperties::INSTANCE_ID => $licenseOperationAPIResponseProperties->instanceID,
+            LicenseProperties::INSTANCE_NAME => $licenseOperationAPIResponseProperties->instanceName,
             /**
              * The product name is stored as to validate that the license key
              * provided in the Settings belongs to the right extension.

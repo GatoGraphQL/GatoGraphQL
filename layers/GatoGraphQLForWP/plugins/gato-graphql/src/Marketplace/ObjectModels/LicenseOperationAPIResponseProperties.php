@@ -13,6 +13,7 @@ class LicenseOperationAPIResponseProperties
         public readonly array $apiResponsePayload,
         public readonly string $status,
         public readonly string $instanceID,
+        public readonly string $instanceName,
         public readonly string $productName,
         public readonly int $activationUsage,
         public readonly int $activationLimit,
