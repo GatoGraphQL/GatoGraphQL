@@ -617,6 +617,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * Show an error message to the admin.
      *
      * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
+     * @return array<string,mixed>
      */
     protected function handleLicenseOperationError(
         array $commercialExtensionActivatedLicenseEntries,
@@ -647,6 +648,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      * message to the admin.
      *
      * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
+     * @return array<string,mixed>
      */
     protected function handleLicenseOperationSuccess(
         array $commercialExtensionActivatedLicenseEntries,

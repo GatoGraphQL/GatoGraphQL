@@ -221,7 +221,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::DESCRIPTION => $activateExtensionsButtonsHTML,
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
-            } elseif ($showNoCommercialExtensionsInstalledMessage) {
+            } elseif ($showNoCommercialExtensionsInstalledMessage) { // @phpstan-ignore-line
                 $moduleSettings[] = [
                     Properties::NAME => $this->getSettingOptionName(
                         $module,
