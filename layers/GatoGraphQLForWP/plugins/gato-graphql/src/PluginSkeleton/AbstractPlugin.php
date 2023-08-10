@@ -16,6 +16,7 @@ abstract class AbstractPlugin implements PluginInterface
     protected ?PluginInfoInterface $pluginInfo = null;
 
     protected string $pluginBaseName;
+    protected string $pluginSlug;
     protected string $pluginName;
 
     public function __construct(
@@ -25,6 +26,7 @@ abstract class AbstractPlugin implements PluginInterface
         protected ?string $commitHash = null, /** Useful for development to regenerate the container when testing the generated plugin */
     ) {
         $this->pluginBaseName = \plugin_basename($pluginFile);
+        $this->pluginSlug = dirname($this->pluginBaseName);
         $this->pluginName = $pluginName ?? $this->pluginBaseName;
 
         // Have the Plugin set its own info on the corresponding PluginInfo
@@ -45,6 +47,14 @@ abstract class AbstractPlugin implements PluginInterface
     public function getPluginBaseName(): string
     {
         return $this->pluginBaseName;
+    }
+
+    /**
+     * Plugin slug
+     */
+    public function getPluginSlug(): string
+    {
+        return $this->pluginSlug;
     }
 
     /**
