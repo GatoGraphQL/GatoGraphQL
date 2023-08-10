@@ -151,6 +151,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         $moduleSettings = parent::getSettings($module);
         if ($module === self::ACTIVATE_EXTENSIONS) {
+            $showNoCommercialExtensionsInstalledMessage = false;
             $extensionManager = PluginApp::getExtensionManager();
             $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
             if ($commercialExtensionSlugProductNames !== []) {
@@ -220,14 +221,14 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::DESCRIPTION => $activateExtensionsButtonsHTML,
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
-            } else {
+            } elseif ($showNoCommercialExtensionsInstalledMessage) {
                 $moduleSettings[] = [
                     Properties::NAME => $this->getSettingOptionName(
                         $module,
                         'activate-extensions'
                     ),
                     Properties::TITLE => \__('Activate Licenses', 'gato-graphql'),
-                    Properties::DESCRIPTION => \__('<em>There are no Bundles or Extensions installed</em>', 'gato-graphql'),
+                    Properties::DESCRIPTION => \__('<em>There are no Bundles or Extensions from the Gato GraphQL Shop installed</em>', 'gato-graphql'),
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
             }
