@@ -263,8 +263,6 @@ class ExtensionManager extends AbstractPluginManager
 
         /**
          * Make sure the activated plugin is the corresponding one to the license.
-         *
-         * @var string
          */
         if ($extensionCommercialExtensionActivatedLicenseObjectProperties->productName !== $extensionProductName) {
             $this->showAdminWarningNotice(

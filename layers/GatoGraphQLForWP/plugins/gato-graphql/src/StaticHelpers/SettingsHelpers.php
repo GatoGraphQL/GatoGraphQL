@@ -23,6 +23,7 @@ class SettingsHelpers
     public static function getCommercialExtensionActivatedLicenseObjectProperties(): array
     {
         if (self::$commercialExtensionActivatedLicenseObjectProperties === null) {
+            /** @var array<string,mixed> */
             $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
             self::$commercialExtensionActivatedLicenseObjectProperties = [];
             foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
