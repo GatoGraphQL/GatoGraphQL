@@ -4,15 +4,16 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
+use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
+use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 
 abstract class AbstractContentParser implements ContentParserInterface
 {
@@ -324,12 +325,28 @@ abstract class AbstractContentParser implements ContentParserInterface
             // Create the tabs
             $panelTabs = '';
             $headersCount = count($headers);
+            $headerNames = [];
             for ($i = 0; $i < $headersCount; $i++) {
-                $isFirstTab = $i === 0;
+                $headerNames[$i] = sprintf(
+                    'doc-panel-%s',
+                    $i + 1
+                );
+            }
+
+            // If passing a tab, focus on that one, if the tab exists
+            $tab = App::query(RequestParams::TAB);
+            if ($tab !== null && in_array($tab, $headerNames)) {
+                $activeHeaderName = $tab;
+            } else {
+                $activeHeaderName = $headerNames[0];
+            }
+
+            for ($i = 0; $i < $headersCount; $i++) {
                 $panelTabs .= sprintf(
-                    '<a href="#doc-panel-%s" class="nav-tab %s">%s</a>',
-                    $i + 1,
-                    $isFirstTab ? 'nav-tab-active' : '',
+                    '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
+                    '#' . $headerNames[$i],
+                    '#',
+                    $headerNames[$i] === $activeHeaderName ? 'nav-tab-active' : '',
                     $headers[$i]
                 );
             }
