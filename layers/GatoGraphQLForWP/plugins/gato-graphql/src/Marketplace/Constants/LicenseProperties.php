@@ -24,6 +24,12 @@ class LicenseProperties
     /** The name of the product for the license */
     public final const PRODUCT_NAME = 'productName';
 
+    /** The number of instances that have been activated with the license key */
+    public final const ACTIVATION_USAGE = 'activationUsage';
+
+    /** The number of instances that can be activated with the license key */
+    public final const ACTIVATION_LIMIT = 'activationLimit';
+
     /** The name of the customer who purchased for the license */
     public final const CUSTOMER_NAME = 'customerName';
 
