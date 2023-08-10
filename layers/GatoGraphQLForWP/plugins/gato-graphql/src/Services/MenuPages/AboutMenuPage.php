@@ -54,16 +54,16 @@ class AboutMenuPage extends AbstractDocsMenuPage
         }
 
         $extensionLicenseItems = [];
-        $activatedLicenseProperties = SettingsHelpers::getActivatedLicenseProperties();
-        foreach ($activatedLicenseProperties as $extensionActivatedLicenseProperties) {
+        $commercialExtensionActivatedLicenseEntryProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseEntryProperties();
+        foreach ($commercialExtensionActivatedLicenseEntryProperties as $extensionCommercialExtensionActivatedLicenseEntryProperties) {
             $extensionLicenseItems[] = implode(
                 PHP_EOL,
                 [
-                    'License Key: ' . $extensionActivatedLicenseProperties->licenseKey,
-                    'Extension: ' . $extensionActivatedLicenseProperties->productName,
-                    'Instance Name: ' . $extensionActivatedLicenseProperties->instanceName,
-                    'Instance ID: ' . $extensionActivatedLicenseProperties->instanceID,
-                    'Status: ' . $extensionActivatedLicenseProperties->status,
+                    'License Key: ' . $extensionCommercialExtensionActivatedLicenseEntryProperties->licenseKey,
+                    'Extension: ' . $extensionCommercialExtensionActivatedLicenseEntryProperties->productName,
+                    'Instance Name: ' . $extensionCommercialExtensionActivatedLicenseEntryProperties->instanceName,
+                    'Instance ID: ' . $extensionCommercialExtensionActivatedLicenseEntryProperties->instanceID,
+                    'Status: ' . $extensionCommercialExtensionActivatedLicenseEntryProperties->status,
                 ]
             );
         }

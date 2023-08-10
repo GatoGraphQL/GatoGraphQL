@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels;
 
-class ActivatedLicenseProperties
+class CommercialExtensionActivatedLicenseEntryProperties
 {
     /**
      * @param array<string,mixed> $apiResponsePayload

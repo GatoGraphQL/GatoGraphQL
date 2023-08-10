@@ -226,14 +226,14 @@ class ExtensionManager extends AbstractPluginManager
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
          */
-        $activatedLicenseProperties = SettingsHelpers::getActivatedLicenseProperties();
-        if (!isset($activatedLicenseProperties[$extensionSlug])) {
+        $commercialExtensionActivatedLicenseEntryProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseEntryProperties();
+        if (!isset($commercialExtensionActivatedLicenseEntryProperties[$extensionSlug])) {
             $this->showAdminWarningNotice($extensionProductName);
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
         }
 
-        $extensionActivatedLicenseProperties = $activatedLicenseProperties[$extensionSlug];
+        $extensionCommercialExtensionActivatedLicenseEntryProperties = $commercialExtensionActivatedLicenseEntryProperties[$extensionSlug];
 
         /**
          * Check that the license status is valid to use the plugin:
@@ -248,7 +248,7 @@ class ExtensionManager extends AbstractPluginManager
          * is ever replaced.
          */
         if (
-            !in_array($extensionActivatedLicenseProperties->status, [
+            !in_array($extensionCommercialExtensionActivatedLicenseEntryProperties->status, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
             ])
@@ -266,7 +266,7 @@ class ExtensionManager extends AbstractPluginManager
          *
          * @var string
          */
-        if ($extensionActivatedLicenseProperties->productName !== $extensionProductName) {
+        if ($extensionCommercialExtensionActivatedLicenseEntryProperties->productName !== $extensionProductName) {
             $this->showAdminWarningNotice(
                 $extensionProductName,
                 __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gato-graphql')
