@@ -80,16 +80,45 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $body = json_decode($response['body'], true);
 
         /**
+         * Check the "status" first, and only then the "error",
+         * because "expired" is a valid state for Gato GraphQL,
+         * but this also produces an error in LemonSqueezy
+         * 
          * @var string|null
          */
+        $status = $body['license_key']['status'];
+        /** @var string|null */
         $error = $body['error'];
-        if ($error !== null) {
+        if ($status === null) {
+            /** @var string $error */
             throw new LicenseOperationNotSuccessfulException($error);
         }
 
-        /** @var string */
-        $status = $body['license_key']['status'];
         $status = $this->convertStatus($status);
+        if (!in_array($status, [
+            LicenseStatus::ACTIVE,
+            LicenseStatus::EXPIRED,
+        ])) {
+            /** @var string $error */
+            throw new LicenseOperationNotSuccessfulException($error);
+        }
+
+        /**
+         * Throw an "error" from the response, unless:
+         * 
+         * - The license is "expired", and
+         * - The license had been previously activated (i.e. there's an instance ID)
+         *
+         * The last item is important as ["instance"]["id"] is not sent in case of error
+         */
+        if ($error !== null
+            && (
+                $status !== LicenseStatus::EXPIRED
+                || $instanceID === null
+            )
+        ) {
+            throw new LicenseOperationNotSuccessfulException($error);
+        }
 
         /**
          * For the /activate endpoint, retrieve the instance ID from the response,
