@@ -62,6 +62,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         foreach ($commercialExtensionActivatedLicenseEntries as $commercialExtensionActivatedLicenseEntry) {
             $extensionLicenseItems[] = sprintf(
                 '%s%s%s%s%s%s%s',
+                'License Key: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::LICENSE_KEY],
                 'Extension: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::PRODUCT_NAME],
                 PHP_EOL,
                 'Instance Name: ' . $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME],
