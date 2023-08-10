@@ -686,7 +686,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $extensionName,
                     $licenseOperationAPIResponseProperties->productName,
                 ),
-                'warning'
+                'error'
             );
         }
 
