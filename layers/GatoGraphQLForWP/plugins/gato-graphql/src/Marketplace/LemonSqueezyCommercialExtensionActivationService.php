@@ -8,12 +8,17 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
+use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
 use function wp_remote_post;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
+    use BasicServiceTrait;
+
     /**
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
@@ -122,6 +127,32 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             )
         ) {
             throw new LicenseOperationNotSuccessfulException($error);
+        }
+
+        /**
+         * If the license is on the Gato GraphQL Shop on Test mode,
+         * then only enable it for the extension in DEV.
+         *
+         * @var bool
+         */
+        $isTestMode = $body['license_key']['test_mode'];
+        /**
+         * Notice that we validate "-dev" against the main Gato GraphQL
+         * plugin and not against the extension, but it still works
+         * because these are the same.
+         *
+         * @see method `assertIsValid` in `ExtensionManager`
+         */
+        $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
+        $isExtensionOnDevelopmentMode = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion);
+        if ($isTestMode && !$isExtensionOnDevelopmentMode) {
+            throw new LicenseOperationNotSuccessfulException(
+                $this->__('The license is for test mode, but the extension is not on development mode', 'gato-graphql'),
+            );
+        } elseif (!$isTestMode && $isExtensionOnDevelopmentMode) {
+            throw new LicenseOperationNotSuccessfulException(
+                $this->__('The license is not for test mode, but the extension is on development mode', 'gato-graphql'),
+            );
         }
 
         /**
