@@ -10,12 +10,15 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulE
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
+use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
 use function wp_remote_post;
 
 class LemonSqueezyCommercialExtensionActivationService implements MarketplaceProviderCommercialExtensionActivationServiceInterface
 {
+    use BasicServiceTrait;
+
     /**
      * @throws HTTPRequestNotSuccessfulException If the connection to the Marketplace Provider API failed
      * @throws LicenseOperationNotSuccessfulException If the Marketplace Provider API produced an error for the provided data
@@ -143,9 +146,13 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         $isExtensionOnDevelopmentMode = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion);
         if ($isTestMode && !$isExtensionOnDevelopmentMode) {
-
+            throw new LicenseOperationNotSuccessfulException(
+                $this->__('The license is for test mode, but the extension is not on development mode', 'gato-graphql'),
+            );
         } elseif (!$isTestMode && $isExtensionOnDevelopmentMode) {
-            
+            throw new LicenseOperationNotSuccessfulException(
+                $this->__('The license is not for test mode, but the extension is on development mode', 'gato-graphql'),
+            );
         }
 
         /**
