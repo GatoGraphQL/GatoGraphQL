@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 
+use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use function get_file_data;
 
 class PluginStaticHelpers
@@ -22,7 +23,7 @@ class PluginStaticHelpers
     public static function getGitHubRepoDocsRootPathURL(): string
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
-        $tag = str_ends_with($mainPluginVersion, '-dev')
+        $tag = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
             ? 'master'
             : $mainPluginVersion;
         return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/gato-graphql/';
