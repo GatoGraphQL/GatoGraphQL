@@ -83,6 +83,17 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             throw new HTTPRequestNotSuccessfulException($response->get_error_message());
         }
 
+        /**
+         * Skip this check, because LemonSqueezy might return a 400 when
+         * the activation is not successful, but we want to capture the
+         * error message below.
+         */
+        // $responseCode = wp_remote_retrieve_response_code($response);
+        // if ($responseCode !== 200) {
+        //     $errorMessage = wp_remote_retrieve_response_message($response);
+        //     throw new HTTPRequestNotSuccessfulException($errorMessage);
+        // }
+
         $body = json_decode($response['body'], true);
 
         /**
