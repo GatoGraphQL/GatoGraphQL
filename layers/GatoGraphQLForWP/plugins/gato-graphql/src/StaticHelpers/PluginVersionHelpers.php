@@ -11,7 +11,7 @@ class PluginVersionHelpers
      * attached to it.
      *
      * This is useful because:
-     * 
+     *
      * - We can have different testing/production licenses for the
      * Marketplace, and validate that the license is validated against
      * the corresponding plugin only.
