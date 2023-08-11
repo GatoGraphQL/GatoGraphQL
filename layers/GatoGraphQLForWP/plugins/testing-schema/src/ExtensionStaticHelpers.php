@@ -11,7 +11,7 @@ class ExtensionStaticHelpers
     public static function getGitHubRepoDocsRootPathURL(): string
     {
         $extensionPluginVersion = PluginApp::getExtension(GatoGraphQLExtension::class)->getPluginVersion();
-        $tag = str_ends_with($extensionPluginVersion, '-dev')
+        $tag = \GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
             ? 'master'
             : $extensionPluginVersion;
         return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
