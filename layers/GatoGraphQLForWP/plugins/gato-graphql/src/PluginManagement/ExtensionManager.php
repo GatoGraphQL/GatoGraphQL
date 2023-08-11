@@ -12,6 +12,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 
 class ExtensionManager extends AbstractPluginManager
@@ -161,6 +162,37 @@ class ExtensionManager extends AbstractPluginManager
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,
                     $mainPlugin->getPluginVersion(),
+                )
+            );
+            return false;
+        }
+
+        /**
+         * Validate that if the main plugin is "-dev", then the extension also is.
+         * This is useful to issue licenses for the Marketplace by testing/production,
+         * and validate the the corresponding extension is installed.
+         */
+        $errorMessagePlaceholder = __('Plugin <strong>%s</strong> is on "%s" mode, but Extension <strong>%s</strong> is on "%s" mode. They must both be the same. The extension has not been loaded.', 'gato-graphql');
+        if (PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion) && !PluginVersionHelpers::isDevelopmentVersion($extensionVersion)) {
+            $this->printAdminNoticeErrorMessage(
+                sprintf(
+                    $errorMessagePlaceholder,
+                    $mainPlugin->getPluginName(),
+                    'development',
+                    $extensionName ?? $extensionClass,
+                    'production',
+                )
+            );
+            return false;
+        }
+        if (!PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion) && PluginVersionHelpers::isDevelopmentVersion($extensionVersion)) {
+            $this->printAdminNoticeErrorMessage(
+                sprintf(
+                    $errorMessagePlaceholder,
+                    $mainPlugin->getPluginName(),
+                    'production',
+                    $extensionName ?? $extensionClass,
+                    'development',
                 )
             );
             return false;
