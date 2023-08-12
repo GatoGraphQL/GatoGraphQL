@@ -83,13 +83,13 @@ class ExtensionListTable extends AbstractExtensionListTable
     public function getPluginInstallActionLabel(array $plugin): string
     {
         if ($plugin['gato_extension_is_bundle']) {
-            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
-                return sprintf(
-                    '%s%s',
-                    \__('Get All Extensions', 'gato-graphql'),
-                    HTMLCodes::OPEN_IN_NEW_WINDOW
-                );
-            }
+            // if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
+            //     return sprintf(
+            //         '%s%s',
+            //         \__('Get All Extensions', 'gato-graphql'),
+            //         HTMLCodes::OPEN_IN_NEW_WINDOW
+            //     );
+            // }
             return sprintf(
                 '%s%s',
                 \__('Get Bundle', 'gato-graphql'),
