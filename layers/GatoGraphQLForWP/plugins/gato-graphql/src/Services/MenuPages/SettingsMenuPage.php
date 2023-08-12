@@ -972,13 +972,16 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 'display: %s;',
                                 $settingsCategoryID === $activeCategoryID ? 'block' : 'none'
                             );
+                            $categorySettingsItems = $this->getCategorySettingsItems(
+                                $settingsCategory,
+                                $settingsItems,
+                            );
+                            if ($categorySettingsItems === []) {
+                                continue;
+                            }
                             ?>
                             <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
                             <?php
-                                $categorySettingsItems = $this->getCategorySettingsItems(
-                                    $settingsCategory,
-                                    $settingsItems,
-                                );
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
                                 // If passing a tab, focus on that one, if the module exists
