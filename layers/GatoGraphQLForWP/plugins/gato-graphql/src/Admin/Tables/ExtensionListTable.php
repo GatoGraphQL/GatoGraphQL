@@ -44,6 +44,7 @@ class ExtensionListTable extends AbstractExtensionListTable
         $items = [];
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $modules = $moduleRegistry->getAllModules(true, false, false);
+        $wordPressPluginAPIUnneededRequiredEntries = $this->getWordPressPluginAPIUnneededRequiredEntries();
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
@@ -58,6 +59,8 @@ class ExtensionListTable extends AbstractExtensionListTable
                 'icons' => [
                     'default' => $moduleResolver->getLogoURL($module),
                 ],
+
+                ...$wordPressPluginAPIUnneededRequiredEntries,
 
                 /**
                  * These are custom properties, not required by the upstream class,
@@ -75,6 +78,37 @@ class ExtensionListTable extends AbstractExtensionListTable
             $items[] = $item;
         }
         return $this->combineExtensionItemsWithCommonPluginData($items);
+    }
+
+    /**
+     * These entries are not printed in the screen, however they
+     * are read by class-wp-plugin-install-list-table.php,
+     * hence they must always be added.
+     *
+     * @see wp-admin/includes/class-wp-plugin-install-list-table.php
+     * @see http://api.wordpress.org/plugins/info/1.2/?action=query_plugins&per_page=1
+     *
+     * @return array<string,mixed>
+     */
+    protected function getWordPressPluginAPIUnneededRequiredEntries(): array
+    {
+        return [
+            'rating' => 100,
+            'ratings' => [
+                '5' => 10000,
+                '4' => 0,
+                '3' => 0,
+                '2' => 0,
+                '1' => 0
+            ],
+            'num_ratings' => 10000,
+            'support_threads' => 0,
+            'support_threads_resolved' => 0,
+            'active_installs' => 1000000,
+            'downloaded' => 1000000,
+            'last_updated' => '2023-08-06 8:25am GMT',
+            'added' => '2023-08-06',
+        ];
     }
 
     /**
