@@ -46,9 +46,9 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
         return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-back-long.png';
     }
 
-    public function getSlug(string $module): string
+    public function getGatoGraphQLExtensionSlug(string $module): string
     {
-        return parent::getSlug($module) . '-bundle';
+        return parent::getGatoGraphQLExtensionSlug($module) . '-bundle';
     }
 
     /**
@@ -57,7 +57,7 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     final public function getGatoGraphQLBundledExtensionSlugs(string $module): array
     {
         return array_map(
-            $this->addGatoGraphQLPrefixToSlug(...),
+            $this->addGatoGraphQLPrefixAndBundleSuffixToSlug(...),
             $this->getBundledExtensionSlugs($module)
         );
     }
@@ -68,13 +68,13 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     final public function getGatoGraphQLBundledBundleExtensionSlugs(string $module): array
     {
         return array_map(
-            $this->addGatoGraphQLPrefixToSlug(...),
+            $this->addGatoGraphQLPrefixAndBundleSuffixToSlug(...),
             $this->getBundledBundleExtensionSlugs($module)
         );
     }
 
-    protected function addGatoGraphQLPrefixToSlug(string $extensionSlug): string
+    protected function addGatoGraphQLPrefixAndBundleSuffixToSlug(string $bundleExtensionSlug): string
     {
-        return 'gato-graphql-' . $extensionSlug;
+        return 'gato-graphql-' . $bundleExtensionSlug . '-bundle';
     }
 }
