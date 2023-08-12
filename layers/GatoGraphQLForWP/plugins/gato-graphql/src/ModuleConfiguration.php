@@ -157,6 +157,20 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     /**
      * @todo Change the URL to the final one
      */
+    public function getGatoGraphQLExtensionsPageURL(): string
+    {
+        $envVariable = Environment::GATO_GRAPHQL_EXTENSIONS_PAGE_URL;
+        $defaultValue = 'https://gatographql.com/extensions';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
+    /**
+     * @todo Change the URL to the final one
+     */
     public function getGatoGraphQLRequestExtensionPageURL(): string
     {
         $envVariable = Environment::GATO_GRAPHQL_REQUEST_EXTENSION_PAGE_URL;
