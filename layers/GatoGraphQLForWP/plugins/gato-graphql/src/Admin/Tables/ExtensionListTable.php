@@ -70,6 +70,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 /** @var BundleExtensionModuleResolverInterface */
                 $bundleExtensionModuleResolver = $moduleResolver;
                 $item['gato_extension_bundled_extension_slugs'] = $bundleExtensionModuleResolver->getGatoGraphQLBundledExtensionSlugs($module);
+                $item['gato_extension_bundled_bundle_extension_slugs'] = $bundleExtensionModuleResolver->getGatoGraphQLBundledBundleExtensionSlugs($module);
             }
             $items[] = $item;
         }
@@ -77,28 +78,20 @@ class ExtensionListTable extends AbstractExtensionListTable
     }
 
     /**
+     * Allow to change the title for extensions active via a bundle
+     *
      * @param array<string,mixed> $plugin
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
-        if ($plugin['gato_extension_is_bundle']) {
-            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
-                return sprintf(
-                    '%s%s',
-                    \__('Get All Extensions', 'gato-graphql'),
-                    HTMLCodes::OPEN_IN_NEW_WINDOW
-                );
-            }
-            return sprintf(
+        // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
+        $extensionActionLabel = $plugin['gato_extension_is_bundle']
+            ? sprintf(
                 '%s%s',
                 \__('Get Bundle', 'gato-graphql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
-            );
-        }
-        /**
-         * Allow to change the title for extensions active via a bundle
-         */
-        $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
+            )
+            : parent::getPluginInstallActionLabel($plugin);
         return sprintf(
             <<<HTML
                 <span class="gato-graphql-extension-action-label">%s</span>
@@ -192,11 +185,18 @@ class ExtensionListTable extends AbstractExtensionListTable
 
             /**
              * Replace classname "plugin-card-non-installed" with
-             * "plugin-card-bundler-active" in the bundled extensions.
+             * "plugin-card-bundler-active" in the bundled extensions,
+             * and in the bundled bundle extensions.
+             *
+             * This will change the style of the already-active items,
+             * and disable the "Get Extension" and "Get Bundle" buttons.
              *
              * @var string[]
              */
-            $bundledExtensionSlugs = $plugin['gato_extension_bundled_extension_slugs'];
+            $bundledExtensionSlugs = array_merge(
+                $plugin['gato_extension_bundled_extension_slugs'],
+                $plugin['gato_extension_bundled_bundle_extension_slugs']
+            );
             foreach ($bundledExtensionSlugs as $bundledExtensionSlug) {
                 $pluginCardClassname = 'plugin-card-' . sanitize_html_class($bundledExtensionSlug);
                 $pos = strpos($html, $pluginCardClassname . ' plugin-card-non-installed');

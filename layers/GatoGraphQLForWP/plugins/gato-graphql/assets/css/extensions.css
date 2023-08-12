@@ -41,13 +41,13 @@
  */
 .plugin-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 6px 20px 0 rgba(0, 0, 0, 0.11);
-    background-color: rgba(250, 215, 225, 0.15);
+    background-color: rgba(250, 215, 225, 0.10);
 }
 .plugin-card.plugin-card-extension-bundle {
-    background-color: rgba(199, 232, 184, 0.15);
+    background-color: rgba(199, 232, 184, 0.10);
 }
 .plugin-card.plugin-card-highlight {
-    background-color: rgba(240, 230, 140, 0.15);
+    background-color: rgba(240, 230, 140, 0.10);
 }
 /**
  * Add a background-color to all extensions

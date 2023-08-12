@@ -144,4 +144,22 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             default => [],
         };
     }
+
+    /**
+     * @return string[]
+     */
+    public function getBundledBundleExtensionSlugs(string $module): array
+    {
+        return match ($module) {
+            // "All Extensions" bundles all other bundles
+            self::ALL_EXTENSIONS => array_map(
+                $this->getSlug(...),
+                array_diff(
+                    $this->getModulesToResolve(),
+                    [$module]
+                )
+            ),
+            default => [],
+        };
+    }
 }
