@@ -701,9 +701,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         return $commercialExtensionActivatedLicenseEntries;
     }
 
-    /**
-     * @return array<string,mixed>
-     */
     protected function showAdminMessagesOnLicenseOperationSuccess(
         string $extensionSlug,
         string $extensionName,
