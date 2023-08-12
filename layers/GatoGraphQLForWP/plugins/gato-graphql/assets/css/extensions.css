@@ -41,6 +41,13 @@
  */
 .plugin-card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 6px 20px 0 rgba(0, 0, 0, 0.11);
+    background-color: rgba(250, 215, 225, 0.15);
+}
+.plugin-card.plugin-card-extension-bundle {
+    background-color: rgba(199, 232, 184, 0.15);
+}
+.plugin-card.plugin-card-highlight {
+    background-color: rgba(240, 230, 140, 0.15);
 }
 /**
  * Add a background-color to all extensions
@@ -48,15 +55,15 @@
 .plugin-card.plugin-card-non-installed {
     /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=); */
     border-color: #df97d7;
-    background-color: #fad7e1;
+    background-color: rgb(250, 215, 225);
 }
 .plugin-card.plugin-card-non-installed.plugin-card-extension-bundle {
     border-color: darkturquoise;
-    background-color: #c7e8b8;
+    background-color: rgb(199, 232, 184);
 }
 .plugin-card.plugin-card-non-installed.plugin-card-highlight {
     border-color: darksalmon;
-    background-color: khaki;
+    background-color: rgb(240, 230, 140);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.24);
 }
 
