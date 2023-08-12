@@ -177,16 +177,14 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         }
 
         /**
-         * For the /activate endpoint, retrieve the instance ID from the response,
-         * otherwise we already have it
+         * For the /activate endpoint, retrieve the instance ID from the response.         *
+         * For the /deactivate endpoint, there will be no "instance" entry.
+         * 
+         * @var string|null
          */
-        if ($instanceID === null) {
-            /** @var string */
-            $instanceID = $body['instance']['id'];
-        }
-
-        /** @var string */
-        $instanceName = $body['instance']['name'];
+        $instanceID = $body['instance']['id'] ?? null;
+        /** @var string|null */
+        $instanceName = $body['instance']['name'] ?? null;
         /** @var string */
         $productName = $body['meta']['product_name'];
         /** @var string */
