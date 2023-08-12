@@ -151,11 +151,14 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getBundledBundleExtensionSlugs(string $module): array
     {
         return match ($module) {
-            self::ALL_EXTENSIONS => [
-                $this->getGatoGraphQLExtensionSlug(self::APPLICATION_GLUE_AND_AUTOMATOR),
-                $this->getGatoGraphQLExtensionSlug(self::CONTENT_TRANSLATION),
-                $this->getGatoGraphQLExtensionSlug(self::PUBLIC_API),
-            ],
+            // "All Extensions" bundles all other bundles
+            self::ALL_EXTENSIONS => array_map(
+                $this->getGatoGraphQLExtensionSlug(...),
+                array_diff(
+                    $this->getModulesToResolve(),
+                    $module
+                )
+            ),
             default => [],
         };
     }
