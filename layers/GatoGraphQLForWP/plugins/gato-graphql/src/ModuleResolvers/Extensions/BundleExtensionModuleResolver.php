@@ -144,4 +144,19 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             default => [],
         };
     }
+
+    /**
+     * @return string[]
+     */
+    public function getBundledBundleExtensionSlugs(string $module): array
+    {
+        return match ($module) {
+            self::ALL_EXTENSIONS => [
+                $this->getGatoGraphQLExtensionSlug(self::APPLICATION_GLUE_AND_AUTOMATOR),
+                $this->getGatoGraphQLExtensionSlug(self::CONTENT_TRANSLATION),
+                $this->getGatoGraphQLExtensionSlug(self::PUBLIC_API),
+            ],
+            default => [],
+        };
+    }
 }
