@@ -156,7 +156,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 $this->getGatoGraphQLExtensionSlug(...),
                 array_diff(
                     $this->getModulesToResolve(),
-                    $module
+                    [$module]
                 )
             ),
             default => [],
