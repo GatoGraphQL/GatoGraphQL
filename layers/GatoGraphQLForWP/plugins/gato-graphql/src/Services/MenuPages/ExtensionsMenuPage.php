@@ -135,8 +135,8 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
-            __('Extensions add functionality and expand the GraphQL schema. Browse and get extensions on the <a href="%1$s" target="%2$s">Gato GraphQL shop%3$s</a>.', 'gato-graphql'),
-            $moduleConfiguration->getPROPluginShopURL(),
+            __('Extensions add functionality and expand the GraphQL schema. Browse all bundles and extensions on the <a href="%1$s" target="%2$s">Gato GraphQL website%3$s</a>.', 'gato-graphql'),
+            $moduleConfiguration->getGatoGraphQLExtensionsPageURL(),
             '_blank',
             HTMLCodes::OPEN_IN_NEW_WINDOW,
         );
