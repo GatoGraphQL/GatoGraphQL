@@ -539,21 +539,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
 
+            // Do not store deactivated instances
+            unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
+
             $successMessage = sprintf(
                 \__('Deactivating license for "%s" succeeded. You now have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
                 $commercialExtensionActivatedLicenseObjectProperties->activationUsage,
                 $commercialExtensionActivatedLicenseObjectProperties->activationLimit,
             );
-            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
-                $commercialExtensionActivatedLicenseEntries,
+            $this->showAdminMessagesOnLicenseOperationSuccess(
                 $extensionSlug,
                 $extensionName,
                 $commercialExtensionActivatedLicenseObjectProperties,
                 $successMessage,
             );
-            // Do not store deactivated instances
-            unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
         }
 
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
@@ -687,6 +687,25 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             LicenseProperties::CUSTOMER_EMAIL => $commercialExtensionActivatedLicenseObjectProperties->customerEmail,
         ];
 
+        $this->showAdminMessagesOnLicenseOperationSuccess(
+            $extensionSlug,
+            $extensionName,
+            $commercialExtensionActivatedLicenseObjectProperties,
+            $successMessage,
+        );
+
+        return $commercialExtensionActivatedLicenseEntries;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function showAdminMessagesOnLicenseOperationSuccess(
+        string $extensionSlug,
+        string $extensionName,
+        CommercialExtensionActivatedLicenseObjectProperties $commercialExtensionActivatedLicenseObjectProperties,
+        string $successMessage,
+    ): void {
         // Show the success message to the admin
         add_settings_error(
             PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
@@ -695,21 +714,21 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             'success'
         );
 
-        if ($commercialExtensionActivatedLicenseObjectProperties->productName !== $extensionName) {
-            // Show the success message to the admin
-            add_settings_error(
-                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
-                'license_activation_' . $extensionSlug,
-                sprintf(
-                    \__('The license key provided for "%1$s" is meant to be used with "%2$s". As such, "%1$s" has not been enabled. Please use the right license key to enable it.<br/>If you need help, send an email to support@gatographql.com (providing the purchased license keys).'),
-                    $extensionName,
-                    $commercialExtensionActivatedLicenseObjectProperties->productName,
-                ),
-                'error'
-            );
+        if ($commercialExtensionActivatedLicenseObjectProperties->productName === $extensionName) {
+            return;
         }
 
-        return $commercialExtensionActivatedLicenseEntries;
+        // Show the error message to the admin
+        add_settings_error(
+            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+            'license_activation_' . $extensionSlug,
+            sprintf(
+                \__('The license key provided for "%1$s" is meant to be used with "%2$s". As such, "%1$s" has not been enabled. Please use the right license key to enable it.<br/>If you need help, send an email to support@gatographql.com (providing the purchased license keys).'),
+                $extensionName,
+                $commercialExtensionActivatedLicenseObjectProperties->productName,
+            ),
+            'error'
+        );
     }
 
     /**
