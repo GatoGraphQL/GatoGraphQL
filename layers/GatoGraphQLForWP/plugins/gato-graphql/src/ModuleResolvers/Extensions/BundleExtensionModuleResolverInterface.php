@@ -11,6 +11,9 @@ interface BundleExtensionModuleResolverInterface extends ExtensionModuleResolver
      */
     public function getBundledExtensionSlugs(string $module): array;
     /**
+     * These are the bundled Extension Bundles! For instance, the
+     * "All Extensions" bundle bundles all other bundles.
+     *
      * @return string[]
      */
     public function getBundledBundleExtensionSlugs(string $module): array;
