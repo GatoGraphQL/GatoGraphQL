@@ -192,7 +192,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
-            Environment::PRO_PLUGIN_SHOP_URL,
+            Environment::GATO_GRAPHQL_WEBSITE_URL,
+            Environment::GATO_GRAPHQL_REQUEST_EXTENSION_PAGE_URL,
+            Environment::GATO_GRAPHQL_EXTENSIONS_PAGE_URL,
             Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
             default
