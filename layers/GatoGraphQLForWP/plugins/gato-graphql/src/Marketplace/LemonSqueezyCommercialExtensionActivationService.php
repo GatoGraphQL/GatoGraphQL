@@ -185,6 +185,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $instanceID = $body['instance']['id'] ?? null;
         /** @var string|null */
         $instanceName = $body['instance']['name'] ?? null;
+        
         /** @var string */
         $productName = $body['meta']['product_name'];
         /** @var string */
