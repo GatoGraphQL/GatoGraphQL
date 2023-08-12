@@ -72,8 +72,8 @@ class AboutMenuPage extends AbstractDocsMenuPage
                 [
                     'License Key: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->licenseKey,
                     'Extension: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->productName,
-                    'Instance Name: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->instanceName,
-                    'Instance ID: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->instanceID,
+                    'Instance Name: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->instanceName ?? '',
+                    'Instance ID: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->instanceID ?? '',
                     'Status: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->status,
                 ]
             );
