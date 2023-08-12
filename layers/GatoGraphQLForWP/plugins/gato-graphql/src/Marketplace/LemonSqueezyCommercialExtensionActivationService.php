@@ -118,7 +118,8 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          * and no error, then don't throw error. When status is
          * "disabled" it will also bring an error, then throw it.
          */
-        if ($error !== null
+        if (
+            $error !== null
             && !in_array($status, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
@@ -179,7 +180,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         /**
          * For the /activate endpoint, retrieve the instance ID from the response.         *
          * For the /deactivate endpoint, there will be no "instance" entry.
-         * 
+         *
          * @var string|null
          */
         $instanceID = $body['instance']['id'] ?? null;
@@ -192,7 +193,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          */
         $activationUsage = (int) ($body['license_key']['activation_usage'] ?? 0);
         $activationLimit = (int) ($body['license_key']['activation_limit'] ?? 0);
-        
+
         /** @var string */
         $productName = $body['meta']['product_name'];
         /** @var string */
