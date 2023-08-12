@@ -196,6 +196,9 @@ class ExtensionListTable extends AbstractExtensionListTable
              * "plugin-card-bundler-active" in the bundled extensions,
              * and in the bundled bundle extensions.
              *
+             * This will change the style of the already-active items,
+             * and disable the "Get Extension" and "Get Bundle" buttons.
+             *
              * @var string[]
              */
             $bundledExtensionSlugs = array_merge(
