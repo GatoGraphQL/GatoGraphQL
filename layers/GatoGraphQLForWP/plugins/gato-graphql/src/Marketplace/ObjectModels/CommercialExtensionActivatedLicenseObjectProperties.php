@@ -17,9 +17,9 @@ class CommercialExtensionActivatedLicenseObjectProperties
         public readonly string $status,
         public readonly ?string $instanceID,
         public readonly ?string $instanceName,
-        public readonly string $productName,
         public readonly int $activationUsage,
         public readonly int $activationLimit,
+        public readonly string $productName,
         public readonly string $customerName,
         public readonly string $customerEmail,
     ) {

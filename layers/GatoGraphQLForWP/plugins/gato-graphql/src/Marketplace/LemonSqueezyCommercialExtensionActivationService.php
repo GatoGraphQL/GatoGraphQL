@@ -206,9 +206,9 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
             $status,
             $instanceID,
             $instanceName,
-            $productName,
             $activationUsage,
             $activationLimit,
+            $productName,
             $customerName,
             $customerEmail,
         );

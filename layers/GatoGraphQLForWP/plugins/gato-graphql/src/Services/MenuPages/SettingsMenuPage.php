@@ -681,6 +681,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * extensions are being used.
              */
             LicenseProperties::INSTANCE_NAME => $instanceName,
+            LicenseProperties::ACTIVATION_USAGE => $commercialExtensionActivatedLicenseObjectProperties->activationUsage,
+            LicenseProperties::ACTIVATION_LIMIT => $commercialExtensionActivatedLicenseObjectProperties->activationLimit,
             /**
              * The product name is stored as to validate that the license key
              * provided in the Settings belongs to the right extension.
@@ -688,8 +690,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              * @see `assertCommercialLicenseHasBeenActivated` in class `ExtensionManager`
              */
             LicenseProperties::PRODUCT_NAME => $commercialExtensionActivatedLicenseObjectProperties->productName,
-            LicenseProperties::ACTIVATION_USAGE => $commercialExtensionActivatedLicenseObjectProperties->activationUsage,
-            LicenseProperties::ACTIVATION_LIMIT => $commercialExtensionActivatedLicenseObjectProperties->activationLimit,
             /**
              * The customer name and email are stored as to pre-populate
              * the "Support" form
