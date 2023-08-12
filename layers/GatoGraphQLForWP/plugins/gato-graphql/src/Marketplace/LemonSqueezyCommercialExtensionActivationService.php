@@ -193,8 +193,12 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         /** @var string */
         $customerEmail = $body['meta']['customer_email'];
 
-        $activationUsage = (int) $body['license_key']['activation_usage'];
-        $activationLimit = (int) $body['license_key']['activation_limit'];
+        /**
+         * These should always be provided, but just in case there's
+         * no "license_key" in the response, default it to `0`.
+         */
+        $activationUsage = (int) $body['license_key']['activation_usage'] ?? 0;
+        $activationLimit = (int) $body['license_key']['activation_limit'] ?? 0;
 
         return new CommercialExtensionActivatedLicenseObjectProperties(
             $licenseKey,
