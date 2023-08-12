@@ -57,7 +57,7 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     final public function getGatoGraphQLBundledExtensionSlugs(string $module): array
     {
         return array_map(
-            $this->addGatoGraphQLPrefixAndBundleSuffixToSlug(...),
+            fn (string $extensionSlug) => 'gato-graphql-' . $extensionSlug,
             $this->getBundledExtensionSlugs($module)
         );
     }
@@ -68,13 +68,8 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     final public function getGatoGraphQLBundledBundleExtensionSlugs(string $module): array
     {
         return array_map(
-            $this->addGatoGraphQLPrefixAndBundleSuffixToSlug(...),
+            fn (string $bundleExtensionSlug) => 'gato-graphql-' . $bundleExtensionSlug . '-bundle',
             $this->getBundledBundleExtensionSlugs($module)
         );
-    }
-
-    protected function addGatoGraphQLPrefixAndBundleSuffixToSlug(string $bundleExtensionSlug): string
-    {
-        return 'gato-graphql-' . $bundleExtensionSlug . '-bundle';
     }
 }
