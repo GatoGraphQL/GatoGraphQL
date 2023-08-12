@@ -70,6 +70,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 /** @var BundleExtensionModuleResolverInterface */
                 $bundleExtensionModuleResolver = $moduleResolver;
                 $item['gato_extension_bundled_extension_slugs'] = $bundleExtensionModuleResolver->getGatoGraphQLBundledExtensionSlugs($module);
+                $item['gato_extension_bundled_bundle_extension_slugs'] = $bundleExtensionModuleResolver->getGatoGraphQLBundledBundleExtensionSlugs($module);
             }
             $items[] = $item;
         }
