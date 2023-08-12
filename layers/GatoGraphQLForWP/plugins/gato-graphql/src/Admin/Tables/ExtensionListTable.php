@@ -78,28 +78,20 @@ class ExtensionListTable extends AbstractExtensionListTable
     }
 
     /**
+     * Allow to change the title for extensions active via a bundle
+     *
      * @param array<string,mixed> $plugin
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
-        if ($plugin['gato_extension_is_bundle']) {
-            // if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_EXTENSIONS) {
-            //     return sprintf(
-            //         '%s%s',
-            //         \__('Get All Extensions', 'gato-graphql'),
-            //         HTMLCodes::OPEN_IN_NEW_WINDOW
-            //     );
-            // }
-            return sprintf(
+        // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
+        $extensionActionLabel = $plugin['gato_extension_is_bundle']
+            ? sprintf(
                 '%s%s',
                 \__('Get Bundle', 'gato-graphql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
-            );
-        }
-        /**
-         * Allow to change the title for extensions active via a bundle
-         */
-        $extensionActionLabel = parent::getPluginInstallActionLabel($plugin);
+            )
+            : parent::getPluginInstallActionLabel($plugin);
         return sprintf(
             <<<HTML
                 <span class="gato-graphql-extension-action-label">%s</span>
