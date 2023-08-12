@@ -492,6 +492,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
 
+            $commercialExtensionActivatedLicenseEntries = $this->addCommercialExtensionActivatedLicenseEntry(
+                $commercialExtensionActivatedLicenseEntries,
+                $extensionSlug,
+                $commercialExtensionActivatedLicenseObjectProperties,
+            );
+
             $successMessage = sprintf(
                 \__('The license for "%s" has status "%s". You have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
@@ -499,8 +505,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 $commercialExtensionActivatedLicenseObjectProperties->activationUsage,
                 $commercialExtensionActivatedLicenseObjectProperties->activationLimit,
             );
-            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
-                $commercialExtensionActivatedLicenseEntries,
+            $this->showAdminMessagesOnLicenseOperationSuccess(
                 $extensionSlug,
                 $extensionName,
                 $commercialExtensionActivatedLicenseObjectProperties,
@@ -577,14 +582,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 continue;
             }
 
+            $commercialExtensionActivatedLicenseEntries = $this->addCommercialExtensionActivatedLicenseEntry(
+                $commercialExtensionActivatedLicenseEntries,
+                $extensionSlug,
+                $commercialExtensionActivatedLicenseObjectProperties,
+            );
+
             $successMessage = sprintf(
                 \__('Activating license for "%s" succeeded. You have %s/%s instances activated.', 'gato-graphql'),
                 $extensionName,
                 $commercialExtensionActivatedLicenseObjectProperties->activationUsage,
                 $commercialExtensionActivatedLicenseObjectProperties->activationLimit,
             );
-            $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationSuccess(
-                $commercialExtensionActivatedLicenseEntries,
+            $this->showAdminMessagesOnLicenseOperationSuccess(
                 $extensionSlug,
                 $extensionName,
                 $commercialExtensionActivatedLicenseObjectProperties,
@@ -645,18 +655,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * Add the payload entry to be stored in the DB, and show a success
-     * message to the admin.
+     * Add the payload entry to be stored in the DB.
      *
      * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
      * @return array<string,mixed>
      */
-    protected function handleLicenseOperationSuccess(
+    protected function addCommercialExtensionActivatedLicenseEntry(
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
-        string $extensionName,
         CommercialExtensionActivatedLicenseObjectProperties $commercialExtensionActivatedLicenseObjectProperties,
-        string $successMessage,
     ): array {
         $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
             LicenseProperties::LICENSE_KEY => $commercialExtensionActivatedLicenseObjectProperties->licenseKey,
@@ -686,13 +693,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             LicenseProperties::CUSTOMER_NAME => $commercialExtensionActivatedLicenseObjectProperties->customerName,
             LicenseProperties::CUSTOMER_EMAIL => $commercialExtensionActivatedLicenseObjectProperties->customerEmail,
         ];
-
-        $this->showAdminMessagesOnLicenseOperationSuccess(
-            $extensionSlug,
-            $extensionName,
-            $commercialExtensionActivatedLicenseObjectProperties,
-            $successMessage,
-        );
 
         return $commercialExtensionActivatedLicenseEntries;
     }
