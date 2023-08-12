@@ -46,9 +46,9 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
         return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-back-long.png';
     }
 
-    public function getGatoGraphQLExtensionSlug(string $module): string
+    public function getSlug(string $module): string
     {
-        return parent::getGatoGraphQLExtensionSlug($module) . '-bundle';
+        return parent::getSlug($module) . '-bundle';
     }
 
     /**
