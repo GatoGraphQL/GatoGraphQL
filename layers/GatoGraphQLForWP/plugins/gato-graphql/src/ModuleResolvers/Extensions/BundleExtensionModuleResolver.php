@@ -153,7 +153,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         return match ($module) {
             // "All Extensions" bundles all other bundles
             self::ALL_EXTENSIONS => array_map(
-                $this->getGatoGraphQLExtensionSlug(...),
+                $this->getSlug(...),
                 array_diff(
                     $this->getModulesToResolve(),
                     [$module]
