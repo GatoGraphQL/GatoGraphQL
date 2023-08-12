@@ -103,7 +103,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          *
          * @var string|null
          */
-        $status = $body['license_key']['status'];
+        $status = $body['license_key']['status'] ?? null;
         /** @var string|null */
         $error = $body['error'];
         if ($status === null) {
@@ -112,8 +112,14 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         }
 
         $status = $this->convertStatus($status);
-        if (
-            !in_array($status, [
+
+        /**
+         * Deactivating the license may bring status "inactive"
+         * and no error, then don't throw error. When status is
+         * "disabled" it will also bring an error, then throw it.
+         */
+        if ($error !== null
+            && !in_array($status, [
             LicenseStatus::ACTIVE,
             LicenseStatus::EXPIRED,
             ])
@@ -141,6 +147,10 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         }
 
         /**
+         * By now, either $error is null, or it's for the "expired" status.
+         * In either case, all properties below will be set in the response,
+         * so no need to do ?? null.
+         *
          * If the license is on the Gato GraphQL Shop on Test mode,
          * then only enable it for the extension in DEV.
          *
