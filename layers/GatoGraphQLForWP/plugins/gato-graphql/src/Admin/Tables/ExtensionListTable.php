@@ -193,11 +193,15 @@ class ExtensionListTable extends AbstractExtensionListTable
 
             /**
              * Replace classname "plugin-card-non-installed" with
-             * "plugin-card-bundler-active" in the bundled extensions.
+             * "plugin-card-bundler-active" in the bundled extensions,
+             * and in the bundled bundle extensions.
              *
              * @var string[]
              */
-            $bundledExtensionSlugs = $plugin['gato_extension_bundled_extension_slugs'];
+            $bundledExtensionSlugs = array_merge(
+                $plugin['gato_extension_bundled_extension_slugs'],
+                $plugin['gato_extension_bundled_bundle_extension_slugs']
+            );
             foreach ($bundledExtensionSlugs as $bundledExtensionSlug) {
                 $pluginCardClassname = 'plugin-card-' . sanitize_html_class($bundledExtensionSlug);
                 $pos = strpos($html, $pluginCardClassname . ' plugin-card-non-installed');
