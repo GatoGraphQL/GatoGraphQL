@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/user-roles",
     "type": "library",
     "description": "Adds support for user roles",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "user-roles"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "user-roles"],
     "homepage": "https://github.com/PoPCMSSchema/user-roles",
     "license": "GPL-2.0-or-later",
     "authors": [

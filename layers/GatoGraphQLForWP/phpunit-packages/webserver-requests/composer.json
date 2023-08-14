@@ -2,7 +2,7 @@
     "name": "phpunit-for-gatographql/webserver-requests",
     "type": "library",
     "description": "Test the response from requests against a webserver using PHPUnit and Guzzle",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "guzzle", "phpunit"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "guzzle", "phpunit"],
     "homepage": "https://github.com/PHPUnitForGatoGraphQL/webserver-requests",
     "license": "GPL-2.0-or-later",
     "authors": [

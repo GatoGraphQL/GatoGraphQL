@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/post-categories-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Categories\"",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "post-categories-wp"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "post-categories-wp"],
     "homepage": "https://github.com/PoPCMSSchema/post-categories-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

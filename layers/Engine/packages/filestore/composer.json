@@ -2,7 +2,7 @@
     "name": "getpop/filestore",
     "type": "library",
     "description": "Base classes to save files to disk, read them and reference them through an URL",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "file", "store"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "file", "store"],
     "homepage": "https://github.com/getpop/filestore",
     "license": "GPL-2.0-or-later",
     "authors": [

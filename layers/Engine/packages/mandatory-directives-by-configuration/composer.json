@@ -2,7 +2,7 @@
     "name": "getpop/mandatory-directives-by-configuration",
     "type": "library",
     "description": "Set configurable mandatory directives for fields and directives",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "MandatoryDirectivesByConfiguration"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "MandatoryDirectivesByConfiguration"],
     "homepage": "https://github.com/getpop/mandatory-directives-by-configuration",
     "license": "GPL-2.0-or-later",
     "authors": [

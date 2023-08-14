@@ -1,7 +1,7 @@
 {
     "name": "pop-backbone/wp-data-parser",
     "description": "Fork of the WordPress Importer plugin, to enable providing WordPress data to seed PHPUnit tests",
-    "keywords": ["Gato", "GraphQL", "PHP", "WordPress", "data", "PHPUnit"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "WordPress", "data", "PHPUnit"],
     "homepage": "https://github.com/PoPBackbone/wp-data-parser",
     "type": "library",
     "license": "GPL-2.0-or-later",

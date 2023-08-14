@@ -2,7 +2,7 @@
     "name": "getpop/definitions-emoji",
     "type": "library",
     "description": "Provides definitions using emojis",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "definitions-emoji"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "definitions-emoji"],
     "homepage": "https://github.com/getpop/definitions-emoji",
     "license": "GPL-2.0-or-later",
     "authors": [

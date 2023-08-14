@@ -2,7 +2,7 @@
     "name": "getpop/site-wp",
     "type": "library",
     "description": "Implementation for WordPress of package Site",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "site", "WordPress"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "site", "WordPress"],
     "homepage": "https://github.com/getpop/site-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

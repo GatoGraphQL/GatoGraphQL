@@ -2,7 +2,7 @@
     "name": "gatographql/external-dependency-wrappers",
     "type": "library",
     "description": "Wrap classes from 3rd-party dependencies which must be accessed by Gato GraphQL, so they can be scoped (package `gatographql/gatographql` is not scoped)",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "external-dependency-wrappers"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "external-dependency-wrappers"],
     "homepage": "https://github.com/GatoGraphQL/external-dependency-wrappers",
     "license": "GPL-2.0-or-later",
     "authors": [

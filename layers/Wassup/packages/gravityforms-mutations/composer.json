@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/gravityforms-mutations",
     "type": "library",
     "description": "Adds support for mutations with plugin Gravity Forms",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "gravityforms-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "gravityforms-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/gravityforms-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

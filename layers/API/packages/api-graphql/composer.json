@@ -2,7 +2,7 @@
     "name": "pop-api/api-graphql",
     "type": "library",
     "description": "Extended/Upgraded implementation of GraphQL, implemented on PHP, based on the PoP API",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "API", "graphql"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "API", "graphql"],
     "homepage": "https://github.com/PoP-PoPAPI/api-graphql",
     "license": "GPL-2.0-or-later",
     "authors": [

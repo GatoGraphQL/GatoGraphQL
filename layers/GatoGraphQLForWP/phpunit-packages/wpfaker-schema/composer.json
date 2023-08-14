@@ -2,7 +2,7 @@
     "name": "phpunit-for-gatographql/wpfaker-schema",
     "type": "library",
     "description": "Utilities to execute PHPUnit for Gato GraphQL",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "wpfaker", "phpunit"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "wpfaker", "phpunit"],
     "homepage": "https://github.com/PHPUnitForGatoGraphQL/wpfaker-schema",
     "license": "GPL-2.0-or-later",
     "authors": [

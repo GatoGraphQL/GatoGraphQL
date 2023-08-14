@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/commentmeta",
     "type": "library",
     "description": "Adds support for comment meta",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "commentmeta"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "commentmeta"],
     "homepage": "https://github.com/PoPCMSSchema/commentmeta",
     "license": "GPL-2.0-or-later",
     "authors": [

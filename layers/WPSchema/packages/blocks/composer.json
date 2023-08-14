@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/blocks",
     "type": "library",
     "description": "Integration of Gutenberg blocks into the GraphQL schema",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "blocks"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "blocks"],
     "homepage": "https://github.com/PoPWPSchema/blocks",
     "license": "GPL-2.0-or-later",
     "authors": [

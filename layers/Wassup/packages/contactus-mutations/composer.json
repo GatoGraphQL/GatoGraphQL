@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/contactus-mutations",
     "type": "library",
     "description": "Adds mutations for the \"contact us\" functionality",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "contactus-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "contactus-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/contactus-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

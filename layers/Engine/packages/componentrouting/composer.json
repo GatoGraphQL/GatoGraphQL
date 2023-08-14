@@ -2,7 +2,7 @@
     "name": "getpop/componentrouting",
     "type": "library",
     "description": "Configure and obtain what module will be added to the component hierarchy at each level, based on the attributes from the request",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "componentrouting"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "componentrouting"],
     "homepage": "https://github.com/getpop/componentrouting",
     "license": "GPL-2.0-or-later",
     "authors": [

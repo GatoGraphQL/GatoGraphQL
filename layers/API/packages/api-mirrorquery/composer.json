@@ -2,7 +2,7 @@
     "name": "pop-api/api-mirrorquery",
     "type": "library",
     "description": "Mirror the query in the API response",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "api-mirrorquery"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "api-mirrorquery"],
     "homepage": "https://github.com/PoP-PoPAPI/api-mirrorquery",
     "license": "GPL-2.0-or-later",
     "authors": [

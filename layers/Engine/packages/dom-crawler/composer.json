@@ -2,7 +2,7 @@
     "name": "getpop/dom-crawler",
     "type": "library",
     "description": "Crawl the DOM (the HTML Document Object Model)",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "dom-crawler"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "dom-crawler"],
     "homepage": "https://github.com/getpop/dom-crawler",
     "license": "GPL-2.0-or-later",
     "authors": [

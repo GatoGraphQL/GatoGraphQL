@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/page-mutations",
     "type": "library",
     "description": "Adds support for page mutations",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "page-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "page-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/page-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

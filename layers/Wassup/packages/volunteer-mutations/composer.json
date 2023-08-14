@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/volunteer-mutations",
     "type": "library",
     "description": "Adds mutations for volunteering functionality",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "volunteer-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "volunteer-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/volunteer-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

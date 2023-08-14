@@ -2,7 +2,7 @@
     "name": "pop-schema/http-requests",
     "type": "library",
     "description": "Handle HTTP requests",
-    "keywords": ["Gato", "PRO", "http-requests"],
+    "keywords": ["Gato", "GatoGraphQL", "PRO", "http-requests"],
     "homepage": "https://github.com/PoPSchema/http-requests",
     "license": "GPL-2.0-or-later",
     "authors": [

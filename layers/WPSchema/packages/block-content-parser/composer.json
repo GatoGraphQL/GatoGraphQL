@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/block-content-parser",
     "type": "library",
     "description": "Parse a custom post and retrieve the content from its (Gutenberg) blocks",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "block-content-parser"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "block-content-parser"],
     "homepage": "https://github.com/PoPWPSchema/block-content-parser",
     "license": "GPL-2.0-or-later",
     "authors": [

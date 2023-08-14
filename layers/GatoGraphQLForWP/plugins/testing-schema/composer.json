@@ -2,7 +2,7 @@
     "name": "gatographql/testing-schema",
     "type": "wordpress-plugin",
     "description": "Addition of elements to the GraphQL schema to test the Gato GraphQL plugin",
-    "keywords": ["Gato", "WordPress", "GraphQL", "API"],
+    "keywords": ["Gato", "GatoGraphQL", "WordPress", "GraphQL", "API"],
     "homepage": "https://github.com/GatoGraphQL/testing-schema",
     "license": "GPL-2.0-or-later",
     "authors": [

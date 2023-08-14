@@ -2,7 +2,7 @@
     "name": "getpop/spa",
     "type": "library",
     "description": "Single-Page Application for PoP",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "single-page application", "spa"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "single-page application", "spa"],
     "homepage": "https://github.com/getpop/spa",
     "license": "GPL-2.0-or-later",
     "authors": [

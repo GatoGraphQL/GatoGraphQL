@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/comment-mutations",
     "type": "library",
     "description": "Adds support for comment mutations",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "comment-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "comment-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/comment-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

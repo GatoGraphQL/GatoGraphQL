@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/custompost-user-mutations",
     "type": "library",
     "description": "Integration for users with custom post mutations",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-user-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-user-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-user-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

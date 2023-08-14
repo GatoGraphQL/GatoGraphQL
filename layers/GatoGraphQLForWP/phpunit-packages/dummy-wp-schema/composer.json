@@ -2,7 +2,7 @@
     "name": "phpunit-for-gatographql/dummy-wp-schema",
     "type": "library",
     "description": "Dummy schema resolvers for testing with PHPUnit under (faked) WordPress",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "dummy", "schema"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "dummy", "schema"],
     "homepage": "https://github.com/PHPUnitForGatoGraphQL/dummy-wp-schema",
     "license": "GPL-2.0-or-later",
     "authors": [

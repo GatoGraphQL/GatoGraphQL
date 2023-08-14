@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/custompostlink-mutations",
     "type": "library",
     "description": "Adds support for custom post link mutations",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompostlink-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompostlink-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/custompostlink-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

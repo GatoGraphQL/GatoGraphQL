@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/system-mutations",
     "type": "library",
     "description": "Adds support for system mutations",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "system-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "system-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/system-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/usermeta",
     "type": "library",
     "description": "Adds support for user meta",
-    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "usermeta"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "usermeta"],
     "homepage": "https://github.com/PoPCMSSchema/usermeta",
     "license": "GPL-2.0-or-later",
     "authors": [

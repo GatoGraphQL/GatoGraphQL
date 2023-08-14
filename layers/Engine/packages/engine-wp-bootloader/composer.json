@@ -2,7 +2,7 @@
     "name": "getpop/engine-wp-bootloader",
     "type": "wordpress-muplugin",
     "description": "PoP Engine Bootloader for WordPress",
-    "keywords": ["Gato", "GraphQL", "PHP", "pop", "engine", "WordPress", "bootloader"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "pop", "engine", "WordPress", "bootloader"],
     "homepage": "https://github.com/getpop/engine-wp-bootloader",
     "license": "GPL-2.0-or-later",
     "authors": [
