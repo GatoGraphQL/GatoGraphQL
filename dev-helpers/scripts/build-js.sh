@@ -94,15 +94,15 @@ maybeRunCommandInTargetDirectory(){
 # if the target folder exists
 maybeRunCommandInEveryTargetDirectory(){
     # Packages: used by Blocks/Editor Scripts
-    TARGET_DIR="$PLUGIN_DIR/packages/"
+    TARGET_DIR="$PLUGIN_DIR/packages"
     maybeRunCommandInTargetDirectory
 
     # Blocks
-    TARGET_DIR="$PLUGIN_DIR/blocks/"
+    TARGET_DIR="$PLUGIN_DIR/blocks"
     maybeRunCommandInTargetDirectory
 
     # Editor Scripts
-    TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
+    TARGET_DIR="$PLUGIN_DIR/editor-scripts"
     maybeRunCommandInTargetDirectory
 }
 
@@ -113,7 +113,7 @@ for plugin_folder in ./*
 do
     # Make sure it is a directory
     if [ -d "$plugin_folder" ]; then
-        PLUGIN_DIR="$BASE_DIR/$plugin_folder/"
+        PLUGIN_DIR="$BASE_DIR/$plugin_folder"
         maybeRunCommandInEveryTargetDirectory
     fi
 done
