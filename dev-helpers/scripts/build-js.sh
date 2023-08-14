@@ -24,7 +24,7 @@ function fail {
 # Inputs
 # ----------------------------------------------------------------------
 # Must pass the path to the plugin root as first arg to the script
-PLUGIN_DIR="$PWD/$1"
+BASE_DIR="$PWD/$1"
 # Pass the command to execute:
 # - BUILD_PROD: run `npm build` for all blocks
 # - COMPILE_DEV: run `npm start` for all blocks in a new tab
@@ -32,7 +32,7 @@ PLUGIN_DIR="$PWD/$1"
 COMMAND="$2"
 ########################################################################
 
-if [ -z "$PLUGIN_DIR" ]; then
+if [ -z "$BASE_DIR" ]; then
     fail "The path to the plugin directory is missing; pass it as first argument to the script"
 fi
 
@@ -43,13 +43,13 @@ fi
 # Show message
 if [ $COMMAND = "BUILD_PROD" ]
 then
-    echo "Building all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
+    echo "Building all JS packages, blocks and editor scripts in path '$BASE_DIR'"
 elif [ $COMMAND = "COMPILE_DEV" ]
 then
-    echo "Compiling all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'. Using `ttab` to open multiple tabs. See: https://www.npmjs.com/package/ttab"
+    echo "Compiling all JS packages, blocks and editor scripts in path '$BASE_DIR'. Using `ttab` to open multiple tabs. See: https://www.npmjs.com/package/ttab"
 elif [ $COMMAND = "INSTALL_DEPS" ]
 then
-    echo "Installing dependencies for all JS packages, blocks and editor scripts in path '$PLUGIN_DIR'"
+    echo "Installing dependencies for all JS packages, blocks and editor scripts in path '$BASE_DIR'"
 fi
 
 # Function `runCommand` will run the selected command
@@ -90,15 +90,33 @@ maybeRunCommandInTargetDirectory(){
     fi
 }
 
-# Packages: used by Blocks/Editor Scripts
-TARGET_DIR="$PLUGIN_DIR/packages/"
-maybeRunCommandInTargetDirectory
+# Function `maybeRunCommandInTargetDirectory` will invoke `runCommand`
+# if the target folder exists
+maybeRunCommandInEveryTargetDirectory(){
+    # Packages: used by Blocks/Editor Scripts
+    TARGET_DIR="$PLUGIN_DIR/packages/"
+    maybeRunCommandInTargetDirectory
 
-# Blocks
-TARGET_DIR="$PLUGIN_DIR/blocks/"
-maybeRunCommandInTargetDirectory
+    # Blocks
+    TARGET_DIR="$PLUGIN_DIR/blocks/"
+    maybeRunCommandInTargetDirectory
 
-# Editor Scripts
-TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
-maybeRunCommandInTargetDirectory
+    # Editor Scripts
+    TARGET_DIR="$PLUGIN_DIR/editor-scripts/"
+    maybeRunCommandInTargetDirectory
+}
+
+cd "$BASE_DIR"
+CURRENT_DIR=$( pwd )
+echo "In folder '$CURRENT_DIR'"
+for plugin_folder in ./*
+do
+    # Make sure it is a directory
+    if [ -d "$plugin_folder" ]; then
+        PLUGIN_DIR="$BASE_DIR/$plugin_folder/"
+        maybeRunCommandInEveryTargetDirectory
+    fi
+done
+
+
 
