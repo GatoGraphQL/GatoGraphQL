@@ -68,7 +68,7 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGatoGraphqlSchemaConfigSchemaCategories';
+config.output.jsonpFunction = 'webpackJsonpGatographqlSchemaConfigSchemaCategories';
 // ------------------------------------------------------
 
 module.exports = config;
