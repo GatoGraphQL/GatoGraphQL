@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultCustomPostTypes = window.gatoGraphqlSchemaConfigSchemaCustomposts.defaultCustomPostTypes;
+const defaultCustomPostTypes = window.gatographqlSchemaConfigSchemaCustomposts.defaultCustomPostTypes;
 
 /**
  * Every block starts by registering a new block type definition.
@@ -97,7 +97,7 @@ registerBlockType( 'gatographql/schema-config-schema-customposts', {
 	 * @return {WPElement} Element to render.
 	 */
 	edit(props) {
-		const possibleCustomPostTypes = window.gatoGraphqlSchemaConfigSchemaCustomposts.possibleCustomPostTypes;
+		const possibleCustomPostTypes = window.gatographqlSchemaConfigSchemaCustomposts.possibleCustomPostTypes;
 		return <EditBlock
 			possibleCustomPostTypes={ possibleCustomPostTypes }
 			{ ...props }

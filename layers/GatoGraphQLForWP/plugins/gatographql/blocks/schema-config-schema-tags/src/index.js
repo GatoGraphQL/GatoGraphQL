@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultTagTaxonomies = window.gatoGraphqlSchemaConfigSchemaTags.defaultTagTaxonomies;
+const defaultTagTaxonomies = window.gatographqlSchemaConfigSchemaTags.defaultTagTaxonomies;
 
 /**
  * Every block starts by registering a new block type definition.
@@ -97,7 +97,7 @@ registerBlockType( 'gatographql/schema-config-schema-tags', {
 	 * @return {WPElement} Element to render.
 	 */
 	edit(props) {
-		const possibleTagTaxonomies = window.gatoGraphqlSchemaConfigSchemaTags.possibleTagTaxonomies;
+		const possibleTagTaxonomies = window.gatographqlSchemaConfigSchemaTags.possibleTagTaxonomies;
 		return <EditBlock
 			possibleTagTaxonomies={ possibleTagTaxonomies }
 			{ ...props }

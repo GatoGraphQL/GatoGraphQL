@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 
-const defaultCategoryTaxonomies = window.gatoGraphqlSchemaConfigSchemaCategories.defaultCategoryTaxonomies;
+const defaultCategoryTaxonomies = window.gatographqlSchemaConfigSchemaCategories.defaultCategoryTaxonomies;
 
 /**
  * Every block starts by registering a new block type definition.
@@ -97,7 +97,7 @@ registerBlockType( 'gatographql/schema-config-schema-categories', {
 	 * @return {WPElement} Element to render.
 	 */
 	edit(props) {
-		const possibleCategoryTaxonomies = window.gatoGraphqlSchemaConfigSchemaCategories.possibleCategoryTaxonomies;
+		const possibleCategoryTaxonomies = window.gatographqlSchemaConfigSchemaCategories.possibleCategoryTaxonomies;
 		return <EditBlock
 			possibleCategoryTaxonomies={ possibleCategoryTaxonomies }
 			{ ...props }

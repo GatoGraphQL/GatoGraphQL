@@ -2,7 +2,7 @@
  * Path to load the lazy chunks on the fly
  * @see https://v4.webpack.js.org/guides/public-path/#on-the-fly
  */
-__webpack_public_path__ = window.gatoGraphqlPersistedQueryEndpointApiHierarchy?.publicPath;
+__webpack_public_path__ = window.gatographqlPersistedQueryEndpointApiHierarchy?.publicPath;
 
 /**
  * Read the content from a Markdown file in a given language, and return it as HTML
@@ -30,8 +30,8 @@ const getMarkdownContent = ( fileName, lang ) => {
  * @param {string|null} lang The language to translate to. If none provided, get it from the localized data
  */
 const getMarkdownContentOrUseDefault = ( fileName, defaultLang, lang ) => {
-	lang = lang || window.gatoGraphqlPersistedQueryEndpointApiHierarchy?.localeLang
-	defaultLang = defaultLang || window.gatoGraphqlPersistedQueryEndpointApiHierarchy?.defaultLang
+	lang = lang || window.gatographqlPersistedQueryEndpointApiHierarchy?.localeLang
+	defaultLang = defaultLang || window.gatographqlPersistedQueryEndpointApiHierarchy?.defaultLang
 	return getMarkdownContent( fileName, lang )
 		.catch(err => getMarkdownContent( fileName, defaultLang ) )
 }

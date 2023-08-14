@@ -14,7 +14,7 @@ class StringConversionTest extends AbstractTestCase
         $stringConversion = $this->getService(StringConversion::class);
 
         $this->assertSame(
-            'gatoGraphqlSchemaConfigOptions',
+            'gatographqlSchemaConfigOptions',
             $stringConversion->dashesToCamelCase(
                 'gatographql-schema-config-options'
             )
