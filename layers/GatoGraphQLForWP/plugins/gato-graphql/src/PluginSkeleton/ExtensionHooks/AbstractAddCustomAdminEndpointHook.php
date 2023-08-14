@@ -35,7 +35,7 @@ abstract class AbstractAddCustomAdminEndpointHook
      * Name of the endpointGroup to support, to provide
      * in the endpoint URL:
      *
-     * wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=${endpointGroupName}
+     * wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=${endpointGroupName}
      */
     abstract protected function getAdminEndpointGroup(): string;
 

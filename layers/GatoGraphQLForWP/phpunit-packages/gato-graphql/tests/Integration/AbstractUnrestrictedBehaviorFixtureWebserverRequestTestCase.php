@@ -33,8 +33,8 @@ abstract class AbstractUnrestrictedBehaviorFixtureWebserverRequestTestCase exten
      */
     final public static function provideEndpointEntries(): array
     {
-        $accessGrantedEndpoint = 'wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=pluginOwnUse';
-        $accessForbiddenEndpoint = 'wp-admin/edit.php?page=gato_graphql&action=execute_query';
+        $accessGrantedEndpoint = 'wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=pluginOwnUse';
+        $accessForbiddenEndpoint = 'wp-admin/edit.php?page=gatographql&action=execute_query';
 
         $fixtureFolder = static::getFixtureFolder();
         $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(

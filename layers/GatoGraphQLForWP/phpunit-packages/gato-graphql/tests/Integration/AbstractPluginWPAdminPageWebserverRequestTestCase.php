@@ -61,7 +61,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      */
     protected static function getPluginMenuName(): string
     {
-        return 'gato_graphql';
+        return 'gatographql';
     }
 
     /**

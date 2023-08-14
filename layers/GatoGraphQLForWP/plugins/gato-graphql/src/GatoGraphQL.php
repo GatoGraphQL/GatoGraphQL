@@ -26,7 +26,7 @@ class GatoGraphQL
      * Obtain the URL of the private wp-admin endpoint
      * (which powers the GraphiQL/Interactive Schema clients):
      *
-     *   /wp-admin/edit.php?page=gato_graphql&action=execute_query
+     *   /wp-admin/edit.php?page=gatographql&action=execute_query
      *
      * This endpoint is affected by the configuration selected in the
      * Settings page, for the selected Schema Configuration for the
@@ -42,7 +42,7 @@ class GatoGraphQL
      * WordPress block editor (allowing any application, theme
      * or plugin to use GraphQL to fetch data for their blocks):
      *
-     *   /wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor
+     *   /wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor
      *
      * This endpoint is NOT affected by the configuration selected in the
      * Settings page; it has a pre-defined non-restrictive configuration,
@@ -57,7 +57,7 @@ class GatoGraphQL
     /**
      * Obtain a custom private wp-admin endpoint:
      *
-     *   /wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group={customEndpointGroup}
+     *   /wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group={customEndpointGroup}
      *
      * This custom endpoint must be defined and configured via PHP code,
      * allowing the developer to expose a private endpoint that has a

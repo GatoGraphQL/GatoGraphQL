@@ -1283,7 +1283,7 @@ An internal GraphQL endpoint, called `blockEditor`, has been made accessible wit
 It is accessible under URL:
 
 ```
-https://mysite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor
+https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor
 ```
 
 This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.`
@@ -1296,7 +1296,7 @@ Inspecting the source code in the wp-admin, you will find the following HTML:
 
 ```html
 <script type="text/javascript">
-var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://mysite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=blockEditor"
+var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor"
 </script>
 ```
 
@@ -1371,7 +1371,7 @@ add_action('plugins_loaded', function () {
 Finally, the endpoint is accessed by replacing param `endpoint_group` with the chosen name:
 
 ```
-https://mysite.com/wp-admin/edit.php?page=gato_graphql&action=execute_query&endpoint_group=accessMyPortfolioData
+https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=accessMyPortfolioData
 ```
 
 ## Endpoints: Use 🟢 (green) to denote "public", 🟡 (yellow) to denote "private"

@@ -236,7 +236,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
 
         /**
          * Add the "Endpoint Categories" link to the menu.
-         * Adding `"show_in_menu" => true` or `"show_in_menu" => "gato_graphql"`
+         * Adding `"show_in_menu" => true` or `"show_in_menu" => "gatographql"`
          * doesn't work, so we must use a hack.
          *
          * @see https://stackoverflow.com/questions/48632394/wordpress-add-custom-taxonomy-to-custom-menu

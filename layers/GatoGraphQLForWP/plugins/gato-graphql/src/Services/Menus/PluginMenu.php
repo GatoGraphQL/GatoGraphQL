@@ -29,7 +29,7 @@ class PluginMenu extends AbstractMenu
 
     public function getName(): string
     {
-        return 'gato_graphql';
+        return 'gatographql';
     }
 
     public function addMenuPage(): void
