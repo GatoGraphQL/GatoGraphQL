@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { registerStore } from '@wordpress/data';
+import { select, registerStore } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -32,6 +32,14 @@ export const storeConfig = {
 	resolvers,
 };
 
-const store = registerStore( MODULE_KEY, storeConfig );
+/**
+ * Because this store is in a component, this logic will be called from each
+ * of the blocks containing this component, and so the store could be registered
+ * multiple times and show an error in the console.
+ *
+ * To avoid this, first check if the store already exists. If not, only then
+ * register it.
+ */
+const store = select( MODULE_KEY ) || registerStore( MODULE_KEY, storeConfig );
 
 export default store;
