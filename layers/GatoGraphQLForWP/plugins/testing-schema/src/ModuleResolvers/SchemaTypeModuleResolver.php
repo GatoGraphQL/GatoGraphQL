@@ -45,7 +45,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_TESTING => \__('Schema Testing', 'gato-graphql-testing-schema'),
+            self::SCHEMA_TESTING => \__('Schema Testing', 'gatographql-testing-schema'),
             default => $module,
         };
     }
@@ -53,7 +53,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_TESTING => \__('Addition of elements to the GraphQL schema to test the Gato GraphQL plugin', 'gato-graphql-testing-schema'),
+            self::SCHEMA_TESTING => \__('Addition of elements to the GraphQL schema to test the Gato GraphQL plugin', 'gatographql-testing-schema'),
             default => parent::getDescription($module),
         };
     }

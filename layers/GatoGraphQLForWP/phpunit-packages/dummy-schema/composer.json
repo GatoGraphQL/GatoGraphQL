@@ -1,5 +1,5 @@
 {
-    "name": "phpunit-for-gato-graphql/dummy-schema",
+    "name": "phpunit-for-gatographql/dummy-schema",
     "type": "library",
     "description": "Dummy schema resolvers for testing with PHPUnit",
     "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "dummy", "schema"],

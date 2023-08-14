@@ -1,0 +1,17 @@
+name: gatographql-for-prod
+recipe: wordpress
+config:
+  webroot: wordpress
+  php: '7.2'
+  ssl: true
+services:
+  appserver:
+    scanner:
+      retry: 10
+      okCodes:
+        - 200
+        - 301
+  database:
+    portforward: true
+env_file:
+  - defaults.local.env

@@ -16,7 +16,7 @@ General utilities for the plugin, not dependent on WordPress
 Via Composer
 
 ``` bash
-composer require gato-graphql/plugin-utils
+composer require gatographql/plugin-utils
 ```
 
 ## Development
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/gato-graphql/plugin-utils.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/gatographql/plugin-utils.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/gato-graphql/plugin-utils/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gato-graphql/plugin-utils.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/gato-graphql/plugin-utils.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/gato-graphql/plugin-utils.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/gatographql/plugin-utils/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/gatographql/plugin-utils.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/gatographql/plugin-utils.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/gatographql/plugin-utils.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/gato-graphql/plugin-utils
-[link-travis]: https://travis-ci.org/gato-graphql/plugin-utils
-[link-scrutinizer]: https://scrutinizer-ci.com/g/gato-graphql/plugin-utils/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/gato-graphql/plugin-utils
-[link-downloads]: https://packagist.org/packages/gato-graphql/plugin-utils
+[link-packagist]: https://packagist.org/packages/gatographql/plugin-utils
+[link-travis]: https://travis-ci.org/gatographql/plugin-utils
+[link-scrutinizer]: https://scrutinizer-ci.com/g/gatographql/plugin-utils/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/gatographql/plugin-utils
+[link-downloads]: https://packagist.org/packages/gatographql/plugin-utils
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

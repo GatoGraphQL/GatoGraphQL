@@ -253,7 +253,7 @@ REST, GraphQL and PoP native compare like this:
 <tr><th>Is data normalized?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Support for configuration values?</th><td>No</td><td>No</td><td>Yes</td></tr>
 <tr><th>Cacheable on server-side?</th><td>Yes</td><td>No</td><td>Yes</td></tr>
-<tr><th>Open to DoS attack?</th><td>No</td><td><a href="https://blog.apollographql.com/securing-your-gato-graphql-from-malicious-queries-16130a324a6b">Yes</a></td><td>No</td></tr>
+<tr><th>Open to DoS attack?</th><td>No</td><td><a href="https://blog.apollographql.com/securing-your-gatographql-from-malicious-queries-16130a324a6b">Yes</a></td><td>No</td></tr>
 <tr><th>Compatible with the other APIs</th><td>No</td><td>No</a></td><td>Yes</td></tr>
 </table>
 - - >

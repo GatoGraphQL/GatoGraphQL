@@ -1,0 +1,104 @@
+/**
+ * Make all items have the same height
+ */
+.gatographql-list-table  #the-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+.gatographql-list-table .plugin-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/**
+ * Hide elements on the bottom part of the extension items on the table,
+ * as they contain unneeded information
+ */
+.plugin-card-bottom > .column-rating,
+.plugin-card-bottom > .column-updated,
+.plugin-card-bottom > .column-downloaded
+{
+    display: none;
+}
+.plugin-card-bottom > .column-compatibility
+{
+    width: auto;
+}
+
+/**
+ * Actually, hide not-really-needed elements:
+ * - WordPress compatibility???
+ * - Plugin owner
+ */
+/* .plugin-card-bottom, */
+.plugin-card-top p.authors {
+    display: none;
+}
+
+/**
+ * Add a shadow and dotted background to all plugin cards
+ */
+.plugin-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 6px 20px 0 rgba(0, 0, 0, 0.11);
+    background-color: rgba(250, 215, 225, 0.10);
+}
+.plugin-card.plugin-card-extension-bundle {
+    background-color: rgba(199, 232, 184, 0.10);
+}
+.plugin-card.plugin-card-highlight {
+    background-color: rgba(240, 230, 140, 0.10);
+}
+/**
+ * Add a background-color to all extensions
+ */
+.plugin-card.plugin-card-non-installed {
+    /* background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=); */
+    border-color: #df97d7;
+    background-color: rgb(250, 215, 225);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-extension-bundle {
+    border-color: darkturquoise;
+    background-color: rgb(199, 232, 184);
+}
+.plugin-card.plugin-card-non-installed.plugin-card-highlight {
+    border-color: darksalmon;
+    background-color: rgb(240, 230, 140);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25), 0 6px 20px 0 rgba(0, 0, 0, 0.24);
+}
+
+.plugin-card.plugin-card-artificially-added {
+    border-color: #3fe1d8;
+    background-color: #b2f4f7;
+    border-style: dashed;
+}
+
+.plugin-card-top-request-extension .plugin-icon {
+    top: 0;
+}
+.plugin-card.plugin-card-extension-bundle.plugin-card-not-highlight .plugin-icon {
+    height: auto;
+    top: 10px;
+}
+
+/**
+ * If a bundler is installed, change the style of the bundled extensions too
+ */
+.plugin-card.plugin-card-bundler-active .plugin-action-buttons > li:first-child > a {
+    pointer-events: none;
+    /* opacity: 0.4; */
+
+    /* Same styles as class "button-disabled" */
+    color: #a7aaad !important;
+    border-color: #dcdcde !important;
+    background: #f6f7f7 !important;
+    box-shadow: none !important;
+    cursor: default;
+    transform: none !important;
+}
+.plugin-card.plugin-card-bundler-active .gatographql-extension-bundle-action-label {
+    display: block !important;
+}
+.plugin-card.plugin-card-bundler-active .gatographql-extension-action-label {
+    display: none;
+}

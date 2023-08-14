@@ -10,7 +10,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests\Constants;
  * included there, hence its values are hardcoded. Update
  * with caution!
  *
- * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Plugin.php
+ * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Plugin.php
  *
  * @todo Create a new package to make it DRY
  */

@@ -27,7 +27,7 @@ abstract class AbstractModuleDocWebserverRequestTestCase extends AbstractWPAdmin
     }
 
     /**
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/ModuleResolvers/HasMarkdownDocumentationModuleResolverTrait.php function `getDocumentation`
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/HasMarkdownDocumentationModuleResolverTrait.php function `getDocumentation`
      */
     protected function getModuleDocErrorMessage(): string
     {

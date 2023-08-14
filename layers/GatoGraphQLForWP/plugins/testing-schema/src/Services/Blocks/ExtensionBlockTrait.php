@@ -15,6 +15,6 @@ trait ExtensionBlockTrait
 
     protected function getBlockNamespace(): string
     {
-        return 'gato-graphql';
+        return 'gatographql';
     }
 }

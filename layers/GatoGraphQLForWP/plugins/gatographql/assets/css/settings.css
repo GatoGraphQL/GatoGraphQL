@@ -1,0 +1,30 @@
+/**
+ * Fix for header padding in table in
+ * "Settings => Plugin Management => Reset Settings"
+ */
+.gatographql-settings-section .form-table th {
+    padding-left: 10px;
+}
+
+/* .gatographql-settings-section input[type="color"], */
+/* .gatographql-settings-section input[type="date"],
+.gatographql-settings-section input[type="datetime-local"],
+.gatographql-settings-section input[type="datetime"], */
+.gatographql-settings-section input[type="email"],
+/* .gatographql-settings-section input[type="month"], */
+/* .gatographql-settings-section input[type="number"], */
+.gatographql-settings-section input[type="password"],
+.gatographql-settings-section input[type="search"],
+/* .gatographql-settings-section input[type="tel"], */
+.gatographql-settings-section input[type="text"],
+/* .gatographql-settings-section input[type="time"], */
+.gatographql-settings-section input[type="url"],
+/* .gatographql-settings-section input[type="week"], */
+.gatographql-settings-section select,
+.gatographql-settings-section textarea {
+    width: -moz-available;
+}
+
+.settings-info {
+    color: darkcyan;
+}

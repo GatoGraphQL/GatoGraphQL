@@ -52,7 +52,7 @@ class SchemaObjectTypeDataLoader extends AbstractUseObjectDictionaryObjectTypeDa
     {
         if ($id !== Schema::ID) {
             throw new ShouldNotHappenException(sprintf(
-                $this->__('The Schema object data must be unique, so must not create object with ID "%s"', 'gato-graphql'),
+                $this->__('The Schema object data must be unique, so must not create object with ID "%s"', 'gatographql'),
                 $id
             ));
         }

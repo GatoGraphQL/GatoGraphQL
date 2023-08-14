@@ -16,7 +16,7 @@ Dummy schema resolvers for testing with PHPUnit under (faked) WordPress
 Via Composer
 
 ``` bash
-composer require phpunit-for-gato-graphql/dummy-wp-schema
+composer require phpunit-for-gatographql/dummy-wp-schema
 ```
 
 ## Development
@@ -103,17 +103,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gato-graphql/dummy-wp-schema.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gatographql/dummy-wp-schema.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/phpunit-for-gato-graphql/dummy-wp-schema/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gato-graphql/dummy-wp-schema.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gato-graphql/dummy-wp-schema.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gato-graphql/dummy-wp-schema.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phpunit-for-gatographql/dummy-wp-schema/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gatographql/dummy-wp-schema.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gatographql/dummy-wp-schema.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gatographql/dummy-wp-schema.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/phpunit-for-gato-graphql/dummy-wp-schema
-[link-travis]: https://travis-ci.org/phpunit-for-gato-graphql/dummy-wp-schema
-[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/dummy-wp-schema/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/dummy-wp-schema
-[link-downloads]: https://packagist.org/packages/phpunit-for-gato-graphql/dummy-wp-schema
+[link-packagist]: https://packagist.org/packages/phpunit-for-gatographql/dummy-wp-schema
+[link-travis]: https://travis-ci.org/phpunit-for-gatographql/dummy-wp-schema
+[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gatographql/dummy-wp-schema/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gatographql/dummy-wp-schema
+[link-downloads]: https://packagist.org/packages/phpunit-for-gatographql/dummy-wp-schema
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

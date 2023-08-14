@@ -148,7 +148,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
     /**
      * To visualize the list of all the modules, and find the "moduleID":
      *
-     * @see https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/modules
+     * @see https://gatographql.lndo.site/wp-json/gatographql/v1/admin/modules
      */
     abstract protected function getModuleID(string $dataName): string;
 }

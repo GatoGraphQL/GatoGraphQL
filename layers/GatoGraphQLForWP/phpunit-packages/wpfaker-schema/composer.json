@@ -1,5 +1,5 @@
 {
-    "name": "phpunit-for-gato-graphql/wpfaker-schema",
+    "name": "phpunit-for-gatographql/wpfaker-schema",
     "type": "library",
     "description": "Utilities to execute PHPUnit for Gato GraphQL",
     "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "wpfaker", "phpunit"],

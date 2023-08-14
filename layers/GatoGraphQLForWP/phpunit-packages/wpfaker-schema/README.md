@@ -16,7 +16,7 @@ Utilities to execute PHPUnit for Gato GraphQL
 Via Composer
 
 ``` bash
-composer require phpunit-for-gato-graphql/wpfaker-schema
+composer require phpunit-for-gatographql/wpfaker-schema
 ```
 
 ## Development
@@ -111,17 +111,17 @@ If you discover any security related issues, please email leo@getpop.org instead
 
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gato-graphql/wpfaker-schema.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/phpunit-for-gatographql/wpfaker-schema.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-GPLv2-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/phpunit-for-gato-graphql/wpfaker-schema/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gato-graphql/wpfaker-schema.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gato-graphql/wpfaker-schema.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gato-graphql/wpfaker-schema.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/phpunit-for-gatographql/wpfaker-schema/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/phpunit-for-gatographql/wpfaker-schema.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/phpunit-for-gatographql/wpfaker-schema.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/phpunit-for-gatographql/wpfaker-schema.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/phpunit-for-gato-graphql/wpfaker-schema
-[link-travis]: https://travis-ci.org/phpunit-for-gato-graphql/wpfaker-schema
-[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/wpfaker-schema/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gato-graphql/wpfaker-schema
-[link-downloads]: https://packagist.org/packages/phpunit-for-gato-graphql/wpfaker-schema
+[link-packagist]: https://packagist.org/packages/phpunit-for-gatographql/wpfaker-schema
+[link-travis]: https://travis-ci.org/phpunit-for-gatographql/wpfaker-schema
+[link-scrutinizer]: https://scrutinizer-ci.com/g/phpunit-for-gatographql/wpfaker-schema/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/phpunit-for-gatographql/wpfaker-schema
+[link-downloads]: https://packagist.org/packages/phpunit-for-gatographql/wpfaker-schema
 [link-author]: https://github.com/leoloso
 [link-contributors]: ../../../../../../contributors

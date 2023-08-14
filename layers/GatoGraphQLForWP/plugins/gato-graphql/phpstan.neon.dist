@@ -1,7 +1,0 @@
-parameters:
-    # bootstrapFiles:
-    #     - gato-graphql.php
-    level: 8
-    paths:
-        - src/
-        - tests/

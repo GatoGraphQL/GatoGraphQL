@@ -19,9 +19,9 @@ class PluginDataSource
         return [
             // Gato GraphQL
             [
-                'path' => 'layers/GatoGraphQLForWP/plugins/gato-graphql',
-                'plugin_slug' => 'gato-graphql',
-                'main_file' => 'gato-graphql.php',
+                'path' => 'layers/GatoGraphQLForWP/plugins/gatographql',
+                'plugin_slug' => 'gatographql',
+                'main_file' => 'gatographql.php',
                 'exclude_files' => implode(' ', [
                     '.wordpress-org/\*',
                     'dev-helpers/\*',
@@ -32,15 +32,15 @@ class PluginDataSource
                     sprintf($excludeJSBlockFilesPlaceholder, 'packages'),
                 ]),
                 'dist_repo_organization' => 'GatoGraphQL',
-                'dist_repo_name' => 'gato-graphql-dist',
+                'dist_repo_name' => 'gatographql-dist',
                 'additional_rector_configs' => [
-                    $this->rootDir . '/config/rector/downgrade/gato-graphql/chained-rules/rector-arrowfunction-mixedtype.php',
-                    $this->rootDir . '/config/rector/downgrade/gato-graphql/chained-rules/rector-arrowfunction-uniontype.php',
+                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-mixedtype.php',
+                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-uniontype.php',
                 ],
-                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/gato-graphql/rector.php',
+                'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/gatographql/rector.php',
                 'scoping' => [
-                    'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-gato-graphql.inc.php',
-                    'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-gato-graphql.php',
+                    'phpscoper_config' => $this->rootDir . '/ci/scoping/scoper-gatographql.inc.php',
+                    'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-gatographql.php',
                 ],
                 'bashScripts' => [
                     'after_downgrade_code' => 'ci/downgrade/after_downgrade_code.sh',
@@ -50,23 +50,23 @@ class PluginDataSource
             // Gato GraphQL - Testing Schema <= To run integration tests
             [
                 'path' => 'layers/GatoGraphQLForWP/plugins/testing-schema',
-                'plugin_slug' => 'gato-graphql-testing-schema',
-                'main_file' => 'gato-graphql-testing-schema.php',
+                'plugin_slug' => 'gatographql-testing-schema',
+                'main_file' => 'gatographql-testing-schema.php',
                 'exclude_files' => implode(' ', [
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                 ]),
                 'dist_repo_organization' => 'GatoGraphQL',
-                'dist_repo_name' => 'gato-graphql-testing-schema-dist',
+                'dist_repo_name' => 'gatographql-testing-schema-dist',
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing-schema/rector.php',
             ],
 
             // Gato GraphQL - Testing <= To run integration tests with InstaWP
             [
-                'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing',
-                'plugin_slug' => 'gato-graphql-testing',
-                'main_file' => 'gato-graphql-testing.php',
+                'path' => 'layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing',
+                'plugin_slug' => 'gatographql-testing',
+                'main_file' => 'gatographql-testing.php',
                 'dist_repo_organization' => 'GatoGraphQL',
-                'dist_repo_name' => 'gato-graphql-testing-dist',
+                'dist_repo_name' => 'gatographql-testing-dist',
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing/rector.php',
             ],
 
@@ -74,11 +74,11 @@ class PluginDataSource
             // @todo Re-enable when the demo is actually complete
             // [
             //     'path' => 'layers/GatoGraphQLForWP/plugins/extension-demo',
-            //     'plugin_slug' => 'gato-graphql-extension-demo',
-            //     'main_file' => 'gato-graphql-extension-demo.php',
+            //     'plugin_slug' => 'gatographql-extension-demo',
+            //     'main_file' => 'gatographql-extension-demo.php',
             //     'exclude_files' => 'docs/images/\*',
             //     'dist_repo_organization' => 'GatoGraphQL',
-            //     'dist_repo_name' => 'gato-graphql-extension-demo-dist',
+            //     'dist_repo_name' => 'gatographql-extension-demo-dist',
             //     'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/extension-demo/rector.php',
             // ],
         ];

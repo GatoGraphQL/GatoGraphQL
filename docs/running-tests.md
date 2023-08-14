@@ -10,8 +10,8 @@ composer test
 
 Integration tests are executed:
 
-- against the Lando webserver, under `https://gato-graphql.lndo.site`
-- asserting some response based on the initial set of data, as imported via `gato-graphql-data.xml`
+- against the Lando webserver, under `https://gatographql.lndo.site`
+- asserting some response based on the initial set of data, as imported via `gatographql-data.xml`
 
 When the Lando webserver is not running, integration tests are skipped.
 
