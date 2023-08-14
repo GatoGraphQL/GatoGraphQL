@@ -85,6 +85,7 @@ maybeRunCommandInTargetDirectory(){
     then
         cd "$TARGET_DIR"
         runCommand
+        cd ..
     else
         echo "Directory '$TARGET_DIR' does not exist"
     fi
@@ -107,8 +108,7 @@ maybeRunCommandInEveryTargetDirectory(){
 }
 
 cd "$BASE_DIR"
-CURRENT_DIR=$( pwd )
-echo "In folder '$CURRENT_DIR'"
+echo "In folder '$BASE_DIR'"
 for plugin_folder in ./*
 do
     # Make sure it is a directory
