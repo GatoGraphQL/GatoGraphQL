@@ -35,7 +35,9 @@ export const storeConfig = {
 /**
  * Because this store is in a component, this logic will be called from each
  * of the blocks containing this component, and so the store could be registered
- * multiple times and show an error in the console.
+ * multiple times and show an error in the console:
+ *
+ * > Store "gatographql/components" is already registered. data.min.js:2:19277
  *
  * To avoid this, first check if the store already exists. If not, only then
  * register it.
