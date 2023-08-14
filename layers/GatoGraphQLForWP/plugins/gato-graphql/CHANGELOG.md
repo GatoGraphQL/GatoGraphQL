@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to `gato-graphql` will be documented in this file.
+All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
@@ -418,7 +418,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Point GitHub Updater to GatoGraphQL/gato-graphql-dist
+- Point GitHub Updater to GatoGraphQL/gatographql-dist
 
 ## 0.7.5 to 0.7.6 - 2021-01-09
 

@@ -47,7 +47,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     public function getItemSingularName(): string
     {
-        return \__('Module', 'gato-graphql');
+        return \__('Module', 'gatographql');
     }
 
     /**
@@ -55,7 +55,7 @@ class ModuleListTable extends AbstractItemListTable
      */
     public function getItemPluralName(): string
     {
-        return \__('Modules', 'gato-graphql');
+        return \__('Modules', 'gatographql');
     }
 
     /**
@@ -157,7 +157,7 @@ class ModuleListTable extends AbstractItemListTable
             '<a href="%s" class="%s">%s</a>',
             $url,
             $currentViews === [] ? 'current' : '',
-            \__('All', 'gato-graphql')
+            \__('All', 'gatographql')
         );
 
         // Entries for every module type: retrieve the moduleType from all modules
@@ -246,7 +246,7 @@ class ModuleListTable extends AbstractItemListTable
                         \esc_url($url),
                         'thickbox open-plugin-details-modal',
                         \esc_attr($item['name']),
-                        \__('View details', 'gato-graphql')
+                        \__('View details', 'gatographql')
                     );
                 }
                 return sprintf(
@@ -263,7 +263,7 @@ class ModuleListTable extends AbstractItemListTable
                 /** @var DependedOnInactiveWordPressPlugin[] */
                 $dependsOnInactivePlugins = $item['depends-on-inactive-plugins'];
                 if (!$dependedModuleLists && !$dependsOnActivePlugins && !$dependsOnInactivePlugins) {
-                    return \__('-', 'gato-graphql');
+                    return \__('-', 'gatographql');
                 }
 
                 $moduleItems = [];
@@ -291,7 +291,7 @@ class ModuleListTable extends AbstractItemListTable
                             if ($moduleRegistry->isInverseDependency($dependedModule)) {
                                 // Revert to the normal module
                                 $dependedModule = $moduleRegistry->getInverseDependency($dependedModule);
-                                $after = \__('⇠ as disabled', 'gato-graphql');
+                                $after = \__('⇠ as disabled', 'gatographql');
                             }
                             $moduleResolver = $moduleRegistry->getModuleResolver($dependedModule);
                             return sprintf(
@@ -306,11 +306,11 @@ class ModuleListTable extends AbstractItemListTable
                     if (count($dependedModuleListNames) >= 2) {
                         $lastElem = array_pop($dependedModuleListNames);
                         $commaElems = implode(
-                            \__(', ', 'gato-graphql'),
+                            \__(', ', 'gatographql'),
                             $dependedModuleListNames
                         );
                         $moduleItems[] = sprintf(
-                            \__('%s or %s', 'gato-graphql'),
+                            \__('%s or %s', 'gatographql'),
                             $commaElems,
                             $lastElem
                         );
@@ -327,7 +327,7 @@ class ModuleListTable extends AbstractItemListTable
                     $dependedPluginHTML = $this->getDependedPluginHTML($dependedPlugin);
                     if ($dependedPlugin->versionConstraint !== null) {
                         $dependedPluginHTML = sprintf(
-                            \__('%s (version constraint: <code>%s</code>)', 'gato-graphql'),
+                            \__('%s (version constraint: <code>%s</code>)', 'gatographql'),
                             $dependedPluginHTML,
                             $dependedPlugin->versionConstraint
                         );
@@ -357,7 +357,7 @@ class ModuleListTable extends AbstractItemListTable
             case 'enabled':
                 return \sprintf(
                     '<span role="img" aria-label="%s">%s</span>',
-                    $item['is-enabled'] ? \__('Yes', 'gato-graphql') : \__('No', 'gato-graphql'),
+                    $item['is-enabled'] ? \__('Yes', 'gatographql') : \__('No', 'gatographql'),
                     $item['is-enabled'] ? '✅' : '❌'
                 );
         }
@@ -436,10 +436,10 @@ class ModuleListTable extends AbstractItemListTable
                     ModuleListTableAction::ACTION_DISABLE,
                     $item['id'],
                     $nonce,
-                    \__('Disable', 'gato-graphql')
+                    \__('Disable', 'gatographql')
                 );
             } else {
-                $actions['enabled'] = \__('Enabled', 'gato-graphql');
+                $actions['enabled'] = \__('Enabled', 'gatographql');
             }
 
             // Maybe add settings links
@@ -469,7 +469,7 @@ class ModuleListTable extends AbstractItemListTable
                             $item['id']
                         ))
                     ),
-                    \__('Settings', 'gato-graphql')
+                    \__('Settings', 'gatographql')
                 );
             }
         } elseif ($item['can-be-enabled']) {
@@ -480,14 +480,14 @@ class ModuleListTable extends AbstractItemListTable
                 ModuleListTableAction::ACTION_ENABLE,
                 $item['id'],
                 $nonce,
-                \__('Enable', 'gato-graphql')
+                \__('Enable', 'gatographql')
             );
         } else {
             // Not enabled and can't be enabled, mention requirements not met
             // Not enabled for "striped" table style because, without a link, color contrast is not good:
             // gray font color over gray background
             // if ($this->usePluginTableStyle()) {
-            $actions['disabled'] = \__('Disabled', 'gato-graphql');
+            $actions['disabled'] = \__('Disabled', 'gatographql');
             // }
         }
         return $actions;
@@ -525,21 +525,21 @@ class ModuleListTable extends AbstractItemListTable
         return array_merge(
             [
                 'cb' => '<input type="checkbox" />',
-                'name' => \__('Module', 'gato-graphql'),
+                'name' => \__('Module', 'gatographql'),
             ],
             $this->usePluginTableStyle() ?
                 [] :
                 [
-                    'enabled' => \__('Enabled', 'gato-graphql'),
+                    'enabled' => \__('Enabled', 'gatographql'),
                 ],
             [
-                'desc' => \__('Description', 'gato-graphql'),
+                'desc' => \__('Description', 'gatographql'),
                 'depends-on' => sprintf(
-                    \__('%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s', 'gato-graphql'),
-                    \__('Depends on:', 'gato-graphql'),
-                    \__('▹ active module', 'gato-graphql'),
-                    \__('☑︎ active plugin', 'gato-graphql'),
-                    \__('☒ inactive plugin', 'gato-graphql'),
+                    \__('%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s', 'gatographql'),
+                    \__('Depends on:', 'gatographql'),
+                    \__('▹ active module', 'gatographql'),
+                    \__('☑︎ active plugin', 'gatographql'),
+                    \__('☒ inactive plugin', 'gatographql'),
                 ),
             ]
         );
@@ -554,8 +554,8 @@ class ModuleListTable extends AbstractItemListTable
     public function get_bulk_actions()
     {
         return [
-            ModuleListTableAction::ACTION_ENABLE => \__('Enable', 'gato-graphql'),
-            ModuleListTableAction::ACTION_DISABLE => \__('Disable', 'gato-graphql'),
+            ModuleListTableAction::ACTION_ENABLE => \__('Enable', 'gatographql'),
+            ModuleListTableAction::ACTION_DISABLE => \__('Disable', 'gatographql'),
         ];
     }
 
@@ -689,7 +689,7 @@ class ModuleListTable extends AbstractItemListTable
          * Fix the issues with the WP List Table
          */
         \wp_enqueue_style(
-            'gato-graphql-module-list-table',
+            'gatographql-module-list-table',
             $mainPluginURL . 'assets/css/module-list-table.css',
             array(),
             $mainPluginVersion

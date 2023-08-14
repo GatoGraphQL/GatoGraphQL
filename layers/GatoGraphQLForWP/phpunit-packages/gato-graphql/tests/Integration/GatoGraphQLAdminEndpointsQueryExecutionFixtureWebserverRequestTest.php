@@ -12,7 +12,7 @@ use PoP\ComponentModel\Misc\GeneralUtils;
  * Test the Admin Endpoints provided by class `GatoGraphQL`
  * are the expected ones.
  *
- * @see layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/src/Executers/GatoGraphQLAdminEndpointsTestExecuter.php
+ * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Executers/GatoGraphQLAdminEndpointsTestExecuter.php
  */
 class GatoGraphQLAdminEndpointsQueryExecutionFixtureWebserverRequestTest extends AbstractEndpointWebserverRequestTestCase
 {
@@ -34,7 +34,7 @@ class GatoGraphQLAdminEndpointsQueryExecutionFixtureWebserverRequestTest extends
     public static function provideEndpointEntries(): array
     {
         return [
-            'gato-graphql-admin-endpoints' => [
+            'gatographql-admin-endpoints' => [
                 'application/json',
                 static::getGraphQLExpectedResponse(),
                 static::getEndpoint(),

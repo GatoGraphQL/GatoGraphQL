@@ -24,13 +24,13 @@ trait UseTabpanelMenuPageTrait
          * Add tabs to the documentation
          */
         \wp_enqueue_style(
-            'gato-graphql-tabpanel',
+            'gatographql-tabpanel',
             $mainPluginURL . 'assets/css/tabpanel.css',
             array(),
             $mainPluginVersion
         );
         \wp_enqueue_script(
-            'gato-graphql-tabpanel',
+            'gatographql-tabpanel',
             $mainPluginURL . 'assets/js/tabpanel.js',
             array('jquery'),
             $mainPluginVersion

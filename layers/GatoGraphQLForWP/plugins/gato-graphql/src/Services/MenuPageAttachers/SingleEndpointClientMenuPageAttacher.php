@@ -46,7 +46,7 @@ class SingleEndpointClientMenuPageAttacher extends AbstractPluginMenuPageAttache
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT)) {
             $clientPath = $moduleConfiguration->getGraphiQLClientEndpoint();
             $submenu[$menuName][] = [
-                __('🟢 GraphiQL (public)', 'gato-graphql'),
+                __('🟢 GraphiQL (public)', 'gatographql'),
                 'read',
                 home_url($clientPath),
             ];
@@ -55,7 +55,7 @@ class SingleEndpointClientMenuPageAttacher extends AbstractPluginMenuPageAttache
         if ($this->getModuleRegistry()->isModuleEnabled(ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT)) {
             $clientPath = $moduleConfiguration->getVoyagerClientEndpoint();
             $submenu[$menuName][] = [
-                __('🟢 Schema (public)', 'gato-graphql'),
+                __('🟢 Schema (public)', 'gatographql'),
                 'read',
                 home_url($clientPath),
             ];

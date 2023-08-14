@@ -22,13 +22,13 @@ trait PrettyprintCodePageTrait
 
         // Commented out Prettify
         // \wp_enqueue_style(
-        //     'gato-graphql-prettyprint',
+        //     'gatographql-prettyprint',
         //     $mainPluginURL . 'assets/css/vendors/code-prettify/desert.css',
         //     array(),
         //     $mainPluginVersion
         // );
         // \wp_enqueue_script(
-        //     'gato-graphql-prettyprint',
+        //     'gatographql-prettyprint',
         //     $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js',
         //     array(),
         //     $mainPluginVersion,

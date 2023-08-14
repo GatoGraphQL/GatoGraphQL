@@ -70,7 +70,7 @@ class SchemaConfigSchemaTagsBlock extends AbstractSchemaConfigCustomizableConfig
         $values = $attributes[self::ATTRIBUTE_NAME_INCLUDED_TAG_TAXONOMIES] ?? [];
         return sprintf(
             '<p><strong>%s</strong></p>%s',
-            $this->__('Included tag taxonomies', 'gato-graphql'),
+            $this->__('Included tag taxonomies', 'gatographql'),
             $values ?
                 sprintf(
                     '<ul><li><code>%s</code></li></ul>',
@@ -78,14 +78,14 @@ class SchemaConfigSchemaTagsBlock extends AbstractSchemaConfigCustomizableConfig
                 ) :
                 sprintf(
                     '<p><em>%s</em></p>',
-                    \__('(not set)', 'gato-graphql')
+                    \__('(not set)', 'gatographql')
                 )
         );
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Tags', 'gato-graphql');
+        return \__('Tags', 'gatographql');
     }
 
     /**

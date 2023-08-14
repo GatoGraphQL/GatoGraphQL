@@ -1,9 +1,9 @@
 {
-    "name": "gato-graphql/gato-graphql",
+    "name": "gatographql/gatographql",
     "type": "wordpress-plugin",
     "description": "Gato GraphQL",
     "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "WordPress", "GraphQL", "API"],
-    "homepage": "https://github.com/GatoGraphQL/gato-graphql",
+    "homepage": "https://github.com/GatoGraphQL/gatographql",
     "license": "GPL-2.0-or-later",
     "authors": [
         {
@@ -18,8 +18,8 @@
         "getpop/guzzle-http": "^0.11",
         "getpop/mandatory-directives-by-configuration": "^0.11",
         "getpop/markdown-convertor": "^0.11",
-        "gato-graphql/external-dependency-wrappers": "^0.11",
-        "gato-graphql/plugin-utils": "^0.11",
+        "gatographql/external-dependency-wrappers": "^0.11",
+        "gatographql/plugin-utils": "^0.11",
         "graphql-by-pop/graphql-clients-for-wp": "^0.11",
         "graphql-by-pop/graphql-endpoint-for-wp": "^0.11",
         "graphql-by-pop/graphql-server": "^0.11",
@@ -86,7 +86,7 @@
     "scripts": {
         "build-server": [
             "Composer\\Config::disableProcessTimeout",
-            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gato-graphql-dev",
+            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gatographql-dev",
             "@start-server"
         ],
         "start-server": [

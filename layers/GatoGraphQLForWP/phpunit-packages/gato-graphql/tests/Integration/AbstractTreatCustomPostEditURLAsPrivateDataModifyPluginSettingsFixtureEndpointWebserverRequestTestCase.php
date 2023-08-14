@@ -33,7 +33,7 @@ abstract class AbstractTreatCustomPostEditURLAsPrivateDataModifyPluginSettingsFi
     {
         return str_replace(
             WebserverRequestsEnvironment::getIntegrationTestsWebserverDomain(),
-            'gato-graphql.lndo.site',
+            'gatographql.lndo.site',
             parent::adaptResponseBody($responseBody)
         );
     }

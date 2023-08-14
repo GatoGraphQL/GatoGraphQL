@@ -12,7 +12,7 @@ trait CollapsibleContentPrinterTrait
     ): string {
         return sprintf(
             '<a href="#" type="button" class="collapsible">%s</a><span class="collapsible-content">%s</span>',
-            $showDetailsLabel ?? \__('Show details', 'gato-graphql'),
+            $showDetailsLabel ?? \__('Show details', 'gatographql'),
             $content
         );
     }

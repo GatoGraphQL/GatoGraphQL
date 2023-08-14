@@ -33,33 +33,33 @@ const SchemaConfigExposeSensitiveDataCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Expose “sensitive” data elements in the schema', 'gato-graphql'),
+			label: __('Expose “sensitive” data elements in the schema', 'gatographql'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not expose “sensitive” data elements', 'gato-graphql'),
+			label: __('Do not expose “sensitive” data elements', 'gatographql'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Expose “sensitive” data elements in the schema?', 'gato-graphql') }</em>
+			<em>{ __('Expose “sensitive” data elements in the schema?', 'gatographql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Expose “sensitive” data elements in the GraphQL schema (such as field "Root.roles", field arg "Root.posts(status:)", and others), which provide access to potentially private user data', 'gato-graphql') }
+				text={ __('Expose “sensitive” data elements in the GraphQL schema (such as field "Root.roles", field arg "Root.posts(status:)", and others), which provide access to potentially private user data', 'gatographql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-						<span>🟡 { __('Default', 'gato-graphql') }</span>
+						<span>🟡 { __('Default', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Expose “sensitive” data elements in the schema', 'gato-graphql') }</span>
+						<span>✅ { __('Expose “sensitive” data elements in the schema', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Do not expose “sensitive” data elements', 'gato-graphql') }</span>
+						<span>❌ { __('Do not expose “sensitive” data elements', 'gatographql') }</span>
 					}
 				</>
 			) }
@@ -82,8 +82,8 @@ const SchemaConfigExposeSensitiveDataCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Expose Sensitive Data in the Schema', 'gato-graphql'),
-		className: 'gato-graphql-schema-expose-sensitive-data',
+		header: __('Expose Sensitive Data in the Schema', 'gatographql'),
+		className: 'gatographql-schema-expose-sensitive-data',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

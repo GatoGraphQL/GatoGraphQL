@@ -19,7 +19,7 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 	return (
 		<SchemaConfigMetaCard
 			{ ...props }
-			labelEntity={ __('custom posts', 'gato-graphql') }
+			labelEntity={ __('custom posts', 'gatographql') }
 			labelExampleItem='_edit_last'
 			labelExampleEntries={
 				[
@@ -35,8 +35,8 @@ const SchemaConfigCustomPostMetaCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Custom Post Meta', 'gato-graphql'),
-		className: 'gato-graphql-custompost-meta',
+		header: __('Custom Post Meta', 'gatographql'),
+		className: 'gatographql-custompost-meta',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

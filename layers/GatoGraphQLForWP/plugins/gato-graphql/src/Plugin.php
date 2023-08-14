@@ -122,7 +122,7 @@ class Plugin extends AbstractMainPlugin
                 '<p>%s</p>' .
                 '</div>',
                 sprintf(
-                    __('Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'gato-graphql'),
+                    __('Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'gatographql'),
                     $this->pluginVersion,
                     $releaseNotesURL,
                     'thickbox open-plugin-details-modal',

@@ -56,7 +56,7 @@ class GatoGraphQLAdminEndpointsTestExecuter
                 continue;
             }
             $this->outputArtificialErrorAsJSONResponse(sprintf(
-                \__('Admin endpoint "%s" is expected, but "%s" is returned instead', 'gato-graphql-testing'),
+                \__('Admin endpoint "%s" is expected, but "%s" is returned instead', 'gatographql-testing'),
                 $expectedEndpoint,
                 $methodEndpoint
             ));

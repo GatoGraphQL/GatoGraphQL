@@ -57,7 +57,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
     }
 
     /**
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/Menus/PluginMenu.php function `getName`
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Menus/PluginMenu.php function `getName`
      */
     protected static function getPluginMenuName(): string
     {
@@ -69,7 +69,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      * These are under function `getMenuPageSlug` from `MenuPageInterface`,
      * such as `AboutMenuPage`.
      *
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/MenuPages/AboutMenuPage.php
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php
      *
      * @return string[]
      */
@@ -85,7 +85,7 @@ abstract class AbstractPluginWPAdminPageWebserverRequestTestCase extends Abstrac
      * These are under function `getCustomPostType` from `CustomPostTypeInterface`,
      * such as `GraphQLPersistedQueryEndpointCustomPostType`.
      *
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php
      *
      * @return string[]
      */

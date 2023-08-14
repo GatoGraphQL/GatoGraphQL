@@ -27,21 +27,21 @@ const EndpointGraphiQL = ( props ) => {
 	} = props;
 	return (
 		<div className={ `${ className }__graphiql_enabled` }>
-			<em>{ __('Expose GraphiQL client?', 'gato-graphql') }</em>
+			<em>{ __('Expose GraphiQL client?', 'gatographql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Publicly available under /{endpoint-slug}/?view=graphiql', 'gato-graphql') }
+				text={ __('Publicly available under /{endpoint-slug}/?view=graphiql', 'gatographql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
-					{ isEnabled ? `✅ ${ __('Yes', 'gato-graphql') }` : `❌ ${ __('No', 'gato-graphql') }` }
+					{ isEnabled ? `✅ ${ __('Yes', 'gatographql') }` : `❌ ${ __('No', 'gatographql') }` }
 				</>
 			) }
 			{ isSelected &&
 				<ToggleControl
 					{ ...props }
-					label={ isEnabled ? __('Yes', 'gato-graphql') : __('No', 'gato-graphql') }
+					label={ isEnabled ? __('Yes', 'gatographql') : __('No', 'gatographql') }
 					checked={ isEnabled }
 					onChange={ newValue => setAttributes( {
 						isEnabled: newValue,
@@ -55,7 +55,7 @@ const EndpointGraphiQL = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('GraphiQL', 'gato-graphql'),
+		header: __('GraphiQL', 'gatographql'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

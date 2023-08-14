@@ -91,8 +91,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public function getName(string $module): string
     {
         return match ($module) {
-            self::GENERAL => \__('General', 'gato-graphql'),
-            self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'gato-graphql'),
+            self::GENERAL => \__('General', 'gatographql'),
+            self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'gatographql'),
             default => $module,
         };
     }
@@ -100,8 +100,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::GENERAL => \__('General options for the plugin', 'gato-graphql'),
-            self::SERVER_IP_CONFIGURATION => \__('Configure retrieving the Client IP depending on the platform/environment', 'gato-graphql'),
+            self::GENERAL => \__('General options for the plugin', 'gatographql'),
+            self::SERVER_IP_CONFIGURATION => \__('Configure retrieving the Client IP depending on the platform/environment', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -139,8 +139,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Display admin notice with release notes?', 'gato-graphql'),
-                Properties::DESCRIPTION => \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?', 'gato-graphql'),
+                Properties::TITLE => \__('Display admin notice with release notes?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
@@ -151,8 +151,8 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Organize these settings under tabs?', 'gato-graphql'),
-                Properties::DESCRIPTION => \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied.', 'gato-graphql'),
+                Properties::TITLE => \__('Organize these settings under tabs?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied.', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
@@ -167,17 +167,17 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('$_SERVER property name to retrieve the client IP', 'gato-graphql'),
+                    Properties::TITLE => \__('$_SERVER property name to retrieve the client IP', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s<ul>%s</ul>',
-                        \__('The visitor\'s IP address is retrieved from under the <code>$_SERVER</code> global variable, by default under property <code>\'REMOTE_ADDR\'</code>; depending on the platform or hosting provider, a different property may need to be used.', 'gato-graphql'),
-                        \__('For instance:', 'gato-graphql'),
+                        \__('The visitor\'s IP address is retrieved from under the <code>$_SERVER</code> global variable, by default under property <code>\'REMOTE_ADDR\'</code>; depending on the platform or hosting provider, a different property may need to be used.', 'gatographql'),
+                        \__('For instance:', 'gatographql'),
                         '<li>' . implode(
                             '</li><li>',
                             [
-                                \__('Cloudflare might use <code>\'HTTP_CF_CONNECTING_IP\'</code>', 'gato-graphql'),
-                                \__('AWS might use <code>\'HTTP_X_FORWARDED_FOR\'</code>', 'gato-graphql'),
-                                \__('others', 'gato-graphql'),
+                                \__('Cloudflare might use <code>\'HTTP_CF_CONNECTING_IP\'</code>', 'gatographql'),
+                                \__('AWS might use <code>\'HTTP_X_FORWARDED_FOR\'</code>', 'gatographql'),
+                                \__('others', 'gatographql'),
                             ]
                         ) . '</li>'
                     ),

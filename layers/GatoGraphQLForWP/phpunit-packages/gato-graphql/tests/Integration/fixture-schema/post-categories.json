@@ -31,7 +31,7 @@
                     }
                 ],
                 "slug": "uncategorized",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/uncategorized\/",
+                "url": "https:\/\/gatographql.lndo.site\/category\/uncategorized\/",
                 "urlPath": "\/category\/uncategorized\/",
                 "children": []
             },
@@ -61,7 +61,7 @@
                     }
                 ],
                 "slug": "special-topic",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/",
                 "urlPath": "\/category\/blog\/resource\/special-topic\/",
                 "children": [
                     {
@@ -84,7 +84,7 @@
                             }
                         ],
                         "slug": "most-special-topic",
-                        "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
                         "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/"
                     }
                 ]
@@ -123,7 +123,7 @@
                     }
                 ],
                 "slug": "resource",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
                 "urlPath": "\/category\/blog\/resource\/",
                 "children": [
                     {
@@ -152,7 +152,7 @@
                             }
                         ],
                         "slug": "special-topic",
-                        "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/",
                         "urlPath": "\/category\/blog\/resource\/special-topic\/"
                     }
                 ]
@@ -170,7 +170,7 @@
                 "postCount": 0,
                 "posts": [],
                 "slug": "never-used",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/never-used\/",
+                "url": "https:\/\/gatographql.lndo.site\/category\/never-used\/",
                 "urlPath": "\/category\/never-used\/",
                 "children": []
             },
@@ -194,7 +194,7 @@
                     }
                 ],
                 "slug": "most-special-topic",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
                 "urlPath": "\/category\/blog\/resource\/special-topic\/most-special-topic\/",
                 "children": []
             },
@@ -234,7 +234,7 @@
                     }
                 ],
                 "slug": "blog",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/",
+                "url": "https:\/\/gatographql.lndo.site\/category\/blog\/",
                 "urlPath": "\/category\/blog\/",
                 "children": [
                     {
@@ -271,7 +271,7 @@
                             }
                         ],
                         "slug": "resource",
-                        "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
+                        "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
                         "urlPath": "\/category\/blog\/resource\/"
                     }
                 ]
@@ -302,7 +302,7 @@
                     }
                 ],
                 "slug": "advanced",
-                "url": "https:\/\/gato-graphql.lndo.site\/category\/advanced\/",
+                "url": "https:\/\/gatographql.lndo.site\/category\/advanced\/",
                 "urlPath": "\/category\/advanced\/",
                 "children": []
             }
@@ -369,7 +369,7 @@
                         }
                     ],
                     "slug": "resource",
-                    "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
+                    "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
                     "urlPath": "\/category\/blog\/resource\/",
                     "children": [
                         {
@@ -398,7 +398,7 @@
                                 }
                             ],
                             "slug": "special-topic",
-                            "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/special-topic\/",
+                            "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/",
                             "urlPath": "\/category\/blog\/resource\/special-topic\/"
                         }
                     ]
@@ -439,7 +439,7 @@
                         }
                     ],
                     "slug": "blog",
-                    "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/",
+                    "url": "https:\/\/gatographql.lndo.site\/category\/blog\/",
                     "urlPath": "\/category\/blog\/",
                     "children": [
                         {
@@ -476,7 +476,7 @@
                                 }
                             ],
                             "slug": "resource",
-                            "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
+                            "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
                             "urlPath": "\/category\/blog\/resource\/"
                         }
                     ]
@@ -507,7 +507,7 @@
                         }
                     ],
                     "slug": "advanced",
-                    "url": "https:\/\/gato-graphql.lndo.site\/category\/advanced\/",
+                    "url": "https:\/\/gatographql.lndo.site\/category\/advanced\/",
                     "urlPath": "\/category\/advanced\/",
                     "children": []
                 }
@@ -810,7 +810,7 @@
                 }
             ],
             "slug": "uncategorized",
-            "url": "https:\/\/gato-graphql.lndo.site\/category\/uncategorized\/",
+            "url": "https:\/\/gatographql.lndo.site\/category\/uncategorized\/",
             "urlPath": "\/category\/uncategorized\/"
         },
         "postsByCategoryBySlug": {
@@ -847,7 +847,7 @@
                 }
             ],
             "slug": "resource",
-            "url": "https:\/\/gato-graphql.lndo.site\/category\/blog\/resource\/",
+            "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/",
             "urlPath": "\/category\/blog\/resource\/"
         },
         "postCategoryCount": 7,

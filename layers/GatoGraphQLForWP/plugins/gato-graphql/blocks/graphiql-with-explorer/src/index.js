@@ -27,7 +27,7 @@ import { blockTypeSettings } from '../../graphiql/src/block-type-settings';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql/graphiql', {
+registerBlockType( 'gatographql/graphiql', {
     /**
      * Shared settings
      */

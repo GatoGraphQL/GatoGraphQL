@@ -49,7 +49,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         if ($content === null) {
             return sprintf(
                 '<p>%s</p>',
-                \__('Oops, there was a problem loading the page', 'gato-graphql')
+                \__('Oops, there was a problem loading the page', 'gatographql')
             );
         }
 
@@ -136,7 +136,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_style(
-            'gato-graphql-about',
+            'gatographql-about',
             $mainPluginURL . 'assets/css/about.css',
             array(),
             $mainPluginVersion

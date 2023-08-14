@@ -17,7 +17,7 @@ abstract class AbstractMainPluginDowngradeContainerConfigurationService extends 
          *
          * "PHP Warning:  Use of undefined constant ABSPATH -
          * assumed 'ABSPATH' (this will throw an Error in a future version of PHP)
-         * in .../gato-graphql/vendor/wordpress/wordpress/wp-admin/includes/class-wp-upgrader.php
+         * in .../gatographql/vendor/wordpress/wordpress/wp-admin/includes/class-wp-upgrader.php
          * on line 13"
          */
         /** Define ABSPATH as this file's directory */

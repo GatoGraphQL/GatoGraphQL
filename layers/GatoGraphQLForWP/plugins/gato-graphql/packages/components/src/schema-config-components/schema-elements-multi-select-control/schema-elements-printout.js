@@ -63,7 +63,7 @@ const TypeFieldPrintoutBody = ( props ) => {
 		// referenting a removed item. For instance, having saved entry `QueryableObject.slug` and
 		// then renaming interface `QueryableObject` to `Queryable`, the entry must be considered stale
 		if (typeFieldEntry == undefined) {
-			const undefinedEntry = __( '(Undefined entries)', 'gato-graphql')
+			const undefinedEntry = __( '(Undefined entries)', 'gatographql')
 			combinedTypeFieldNames[ undefinedEntry ] = combinedTypeFieldNames[ undefinedEntry ] || [];
 			combinedTypeFieldNames[ undefinedEntry ].push( typeField );
 		}
@@ -183,10 +183,10 @@ const SchemaElementsPrintout = ( props ) => {
 		operations,
 		globalFields,
 		directives,
-		operationHeader = __('Operations', 'gato-graphql'),
-		typeFieldHeader = __('Fields', 'gato-graphql'),
-		globalFieldHeader = __('Global Fields', 'gato-graphql'),
-		directiveHeader = __('Directives', 'gato-graphql'),
+		operationHeader = __('Operations', 'gatographql'),
+		typeFieldHeader = __('Fields', 'gatographql'),
+		globalFieldHeader = __('Global Fields', 'gatographql'),
+		directiveHeader = __('Directives', 'gatographql'),
 	} = props;
 	return (
 		<Card { ...props }>
@@ -249,7 +249,7 @@ export default compose( [
 			getTypeFields,
 			hasRetrievedTypeFields,
 			getRetrievingTypeFieldsErrorMessage,
-		} = select ( 'gato-graphql/components' );
+		} = select ( 'gatographql/components' );
 		/**
 		 * Convert typeFields object, from this structure:
 		 * [{type:"Type", fields:["field1", "field2",...]},...]

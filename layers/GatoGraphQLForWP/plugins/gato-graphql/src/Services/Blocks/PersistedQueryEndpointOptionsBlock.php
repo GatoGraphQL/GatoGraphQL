@@ -82,7 +82,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         $blockContent .= sprintf(
             $blockContentPlaceholder,
-            \__('Accept variables as URL params:', 'gato-graphql'),
+            \__('Accept variables as URL params:', 'gatographql'),
             $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? true)
         );
 

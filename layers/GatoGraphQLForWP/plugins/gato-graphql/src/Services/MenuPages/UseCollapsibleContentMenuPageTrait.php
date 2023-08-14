@@ -24,13 +24,13 @@ trait UseCollapsibleContentMenuPageTrait
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_script(
-            'gato-graphql-collapse',
+            'gatographql-collapse',
             $mainPluginURL . 'assets/js/collapse.js',
             array('jquery'),
             $mainPluginVersion
         );
         \wp_enqueue_style(
-            'gato-graphql-collapse',
+            'gatographql-collapse',
             $mainPluginURL . 'assets/css/collapse.css',
             array(),
             $mainPluginVersion

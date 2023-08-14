@@ -44,7 +44,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
     protected function getHeader(): string
     {
-        return \__('Gato GraphQL — Extensions', 'gato-graphql');
+        return \__('Gato GraphQL — Extensions', 'gatographql');
     }
 
     protected function hasViews(): bool
@@ -54,7 +54,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 
     protected function getScreenOptionLabel(): string
     {
-        return \__('Extensions', 'gato-graphql');
+        return \__('Extensions', 'gatographql');
     }
 
     /**
@@ -106,7 +106,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
          * is easier than editing the PHP code
          */
         \wp_enqueue_style(
-            'gato-graphql-extensions',
+            'gatographql-extensions',
             $mainPluginURL . 'assets/css/extensions.css',
             array(),
             $mainPluginVersion
@@ -120,7 +120,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         printf(
             '<p>%s</p>',
             sprintf(
-                __('%s <a href="%s" class="button">Switch to the <strong>Extension Docs</strong> view</a>', 'gato-graphql'),
+                __('%s <a href="%s" class="button">Switch to the <strong>Extension Docs</strong> view</a>', 'gatographql'),
                 $this->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',
@@ -135,7 +135,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
-            __('Extensions add functionality and expand the GraphQL schema. Browse all bundles and extensions on the <a href="%1$s" target="%2$s">Gato GraphQL website%3$s</a>.', 'gato-graphql'),
+            __('Extensions add functionality and expand the GraphQL schema. Browse all bundles and extensions on the <a href="%1$s" target="%2$s">Gato GraphQL website%3$s</a>.', 'gatographql'),
             $moduleConfiguration->getGatoGraphQLExtensionsPageURL(),
             '_blank',
             HTMLCodes::OPEN_IN_NEW_WINDOW,

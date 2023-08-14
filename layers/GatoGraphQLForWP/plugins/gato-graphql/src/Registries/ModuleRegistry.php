@@ -136,7 +136,7 @@ class ModuleRegistry implements ModuleRegistryInterface
     {
         if (!isset($this->moduleResolversByModule[$module])) {
             throw new ModuleNotExistsException(sprintf(
-                \__('Module \'%s\' does not exist', 'gato-graphql'),
+                \__('Module \'%s\' does not exist', 'gatographql'),
                 $module
             ));
         }

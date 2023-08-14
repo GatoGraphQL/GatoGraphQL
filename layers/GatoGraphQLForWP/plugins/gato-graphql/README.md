@@ -17,7 +17,7 @@ This plugin is the implementation for WordPress of [GraphQL by PoP](https://grap
 
 <!-- ## Why
 
-Please read the author's [introduction to Gato GraphQL](https://leoloso.com/posts/introducing-the-gato-graphql-for-wordpress/), which describes:
+Please read the author's [introduction to Gato GraphQL](https://leoloso.com/posts/introducing-the-gatographql-for-wordpress/), which describes:
 
 - How does it compare with the existing solutions: WP REST API and WPGraphQL
 - An overview of all its features
@@ -31,11 +31,11 @@ Please read the author's [introduction to Gato GraphQL](https://leoloso.com/post
 
 ## Installing the plugin (for production)
 
-👀 Instructions: [Installing Gato GraphQL](https://github.com/leoloso/PoP/blob/master/docs/installing-gato-graphql-for-wordpress.md).
+👀 Instructions: [Installing Gato GraphQL](https://github.com/leoloso/PoP/blob/master/docs/installing-gatographql-for-wordpress.md).
 
 ## Development
 
-<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/gato-graphql`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/gato-graphql). -->
+<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/gatographql`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/gatographql). -->
 
 👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
 
@@ -159,7 +159,7 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 - [YouTube video: Gato GraphQL demo](https://youtu.be/LnyNyT2RwwI)
 - [Making GraphQL Work In WordPress](https://www.smashingmagazine.com/2021/04/making-graphql-work-in-wordpress/)
 - [Rendering the WordPress philosophy in GraphQL](https://css-tricks.com/rendering-the-wordpress-philosophy-in-graphql/)
-- [Comparing Gato GraphQL vs WPGraphQL](https://gatographql.com/blog/gato-graphql-vs-wpgraphql-the-fight/)
+- [Comparing Gato GraphQL vs WPGraphQL](https://gatographql.com/blog/gatographql-vs-wpgraphql-the-fight/)
 
 <details>
 
@@ -185,7 +185,7 @@ Explanation of how the codebase is split into granular packages, to enable CMS-a
 
 Description of how the plugin is scoped:
 
-- [Gato GraphQL is now scoped, thanks to PHP-Scoper!](https://gatographql.com/blog/gato-graphql-is-now-scoped-thanks-to-php-scoper/)
+- [Gato GraphQL is now scoped, thanks to PHP-Scoper!](https://gatographql.com/blog/gatographql-is-now-scoped-thanks-to-php-scoper/)
 
 ### GraphQL by PoP documentation
 
@@ -299,22 +299,22 @@ If you discover any security related issues, please email leo@getpop.org instead
 GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/GatoGraphQL/gato-graphql/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/gato-graphql.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/gato-graphql.svg?style=flat-square
-[ico-release]: https://img.shields.io/github/release/GatoGraphQL/gato-graphql.svg
-[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/gato-graphql/total.svg
+[ico-travis]: https://img.shields.io/travis/GatoGraphQL/gatographql/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/gatographql.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/gatographql.svg?style=flat-square
+[ico-release]: https://img.shields.io/github/release/GatoGraphQL/gatographql.svg
+[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/gatographql/total.svg
 
-[link-travis]: https://travis-ci.com/github/GatoGraphQL/gato-graphql
-[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/gato-graphql
-[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql/releases/
-[link-release]: https://GitHub.com/GatoGraphQL/gato-graphql/releases/
-[link-downloads]: https://GitHub.com/GatoGraphQL/gato-graphql/releases/
+[link-travis]: https://travis-ci.com/github/GatoGraphQL/gatographql
+[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/gatographql/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/gatographql
+[link-downloads]: https://GitHub.com/GatoGraphQL/gatographql/releases/
+[link-release]: https://GitHub.com/GatoGraphQL/gatographql/releases/
+[link-downloads]: https://GitHub.com/GatoGraphQL/gatographql/releases/
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 
-[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip
+[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip
 
 
 <!--

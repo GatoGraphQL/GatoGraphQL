@@ -47,7 +47,7 @@ Then, in our application on the client side (such as JavaScript with a headless 
 const maybeGetErrorMessage = (response) => {
   if (response.errors && response.errors.length) {
     return sprintf(
-      __(`The API produced the following error(s): "%s"`, 'gato-graphql'),
+      __(`The API produced the following error(s): "%s"`, 'gatographql'),
       response.errors.map(error => error.message).join( __('", "') )
     );
   }

@@ -38,12 +38,12 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageTitle(): string
     {
-        return \__('Gato GraphQL - Recipes', 'gato-graphql');
+        return \__('Gato GraphQL - Recipes', 'gatographql');
     }
 
     protected function getContentID(): string
     {
-        return 'gato-graphql-recipes';
+        return 'gatographql-recipes';
     }
 
     /**
@@ -91,13 +91,13 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         $messageBundleExtensionPlaceholder = sprintf(
             '<hr/><em>%s</em>',
             count($entryExtensionModules) === 1
-                ? \__('(It is included in %s)', 'gato-graphql')
-                : \__('(They are all included in %s)', 'gato-graphql')
+                ? \__('(It is included in %s)', 'gatographql')
+                : \__('(They are all included in %s)', 'gatographql')
         );
 
         $messageHTML = sprintf(
-            \__('<strong>🔗 %s</strong>: %s', 'gato-graphql'),
-            \__('Extensions referenced in this recipe', 'gato-graphql'),
+            \__('<strong>🔗 %s</strong>: %s', 'gatographql'),
+            \__('Extensions referenced in this recipe', 'gatographql'),
             $this->getCollapsible(
                 sprintf(
                     '%s%s',
@@ -111,7 +111,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                     sprintf(
                         $messageBundleExtensionPlaceholder,
                         implode(
-                            \__(', ', 'gato-graphql'),
+                            \__(', ', 'gatographql'),
                             $bundleExtensionHTMLItems
                         )
                     )
@@ -142,7 +142,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             /** @var ExtensionModuleResolverInterface */
             $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryExtensionModule);
             $extensionHTMLItems[] = sprintf(
-                \__('<strong><a href="%s" target="%s">%s%s</a></strong>', 'gato-graphql'),
+                \__('<strong><a href="%s" target="%s">%s%s</a></strong>', 'gatographql'),
                 $extensionModuleResolver->getWebsiteURL($entryExtensionModule),
                 '_blank',
                 $extensionModuleResolver->getName($entryExtensionModule),
@@ -160,15 +160,15 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         return [
             [
                 'intro',
-                \__('Intro', 'gato-graphql'),
+                \__('Intro', 'gatographql'),
             ],
             [
                 'searching-wordpress-data',
-                \__('Searching WordPress data', 'gato-graphql'),
+                \__('Searching WordPress data', 'gatographql'),
             ],
             [
                 'querying-dynamic-data',
-                \__('Querying dynamic data', 'gato-graphql'),
+                \__('Querying dynamic data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
@@ -180,7 +180,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'exposing-public-and-private-endpoints',
-                \__('Exposing public and private endpoints', 'gato-graphql'),
+                \__('Exposing public and private endpoints', 'gatographql'),
                 [
                     ExtensionModuleResolver::ACCESS_CONTROL,
                     ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
@@ -192,11 +192,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'complementing-wp-cli',
-                \__('Complementing WP-CLI', 'gato-graphql')
+                \__('Complementing WP-CLI', 'gatographql')
             ],
             [
                 'injecting-multiple-resources-into-wp-cli',
-                \__('Injecting multiple resources into WP-CLI', 'gato-graphql'),
+                \__('Injecting multiple resources into WP-CLI', 'gatographql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
@@ -208,11 +208,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'feeding-data-to-blocks-in-the-editor',
-                \__('Feeding data to blocks in the editor', 'gato-graphql'),
+                \__('Feeding data to blocks in the editor', 'gatographql'),
             ],
             [
                 'dry-code-for-blocks-in-javascript-and-php',
-                \__('DRY code for blocks in Javascript and PHP', 'gato-graphql'),
+                \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
                 [
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
                 ],
@@ -222,11 +222,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'mapping-js-components-to-gutenberg-blocks',
-                \__('Mapping JS components to (Gutenberg) blocks', 'gato-graphql'),
+                \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
             ],
             [
                 'duplicating-a-blog-post',
-                \__('Duplicating a blog post', 'gato-graphql'),
+                \__('Duplicating a blog post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -239,7 +239,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'duplicating-multiple-blog-posts-at-once',
-                \__('Duplicating multiple blog posts at once', 'gato-graphql'),
+                \__('Duplicating multiple blog posts at once', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -255,7 +255,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'customizing-content-for-different-users',
-                \__('Customizing content for different users', 'gato-graphql'),
+                \__('Customizing content for different users', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -269,7 +269,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'search-replace-and-store-again',
-                \__('Search, replace, and store again', 'gato-graphql'),
+                \__('Search, replace, and store again', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -282,7 +282,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'adapting-content-in-bulk',
-                \__('Adapting content in bulk', 'gato-graphql'),
+                \__('Adapting content in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -296,7 +296,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'site-migrations',
-                \__('Site migrations', 'gato-graphql'),
+                \__('Site migrations', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -309,7 +309,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'inserting-removing-a-gutenberg-block-in-bulk',
-                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gato-graphql'),
+                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -323,7 +323,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'extracting-the-image-urls-from-all-image-blocks-in-a-post',
-                \__('Extracting the image URLs from all Image blocks in a post', 'gato-graphql'),
+                \__('Extracting the image URLs from all Image blocks in a post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
@@ -336,7 +336,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post',
-                \__('Modifying (and storing again) the image URLs from all Image blocks in a post', 'gato-graphql'),
+                \__('Modifying (and storing again) the image URLs from all Image blocks in a post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -352,7 +352,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'translating-block-content-in-a-post-to-a-different-language',
-                \__('Translating block content in a post to a different language', 'gato-graphql'),
+                \__('Translating block content in a post to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -368,7 +368,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'bulk-translating-block-content-in-multiple-posts-to-a-different-language',
-                \__('Bulk translating block content in multiple posts to a different language', 'gato-graphql'),
+                \__('Bulk translating block content in multiple posts to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -384,7 +384,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'sending-emails-with-pleasure',
-                \__('Sending emails with pleasure', 'gato-graphql'),
+                \__('Sending emails with pleasure', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -398,7 +398,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'sending-a-notification-when-there-is-a-new-post',
-                \__('Sending a notification when there is a new post', 'gato-graphql'),
+                \__('Sending a notification when there is a new post', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -414,7 +414,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'sending-a-daily-summary-of-activity',
-                \__('Sending a daily summary of activity', 'gato-graphql'),
+                \__('Sending a daily summary of activity', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -431,7 +431,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'automatically-adding-a-mandatory-block',
-                \__('Automatically adding a mandatory block', 'gato-graphql'),
+                \__('Automatically adding a mandatory block', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
@@ -444,7 +444,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'interacting-with-external-services-via-webhooks',
-                \__('Interacting with external services via webhooks', 'gato-graphql'),
+                \__('Interacting with external services via webhooks', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -458,7 +458,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'retrieving-data-from-an-external-api',
-                \__('Retrieving data from an external API', 'gato-graphql'),
+                \__('Retrieving data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -474,7 +474,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'combining-user-data-from-different-sources',
-                \__('Combining user data from different sources', 'gato-graphql'),
+                \__('Combining user data from different sources', 'gatographql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
@@ -486,7 +486,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'not-leaking-credentials-when-connecting-to-services',
-                \__('Not leaking credentials when connecting to services', 'gato-graphql'),
+                \__('Not leaking credentials when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -499,7 +499,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'handling-errors-when-connecting-to-services',
-                \__('Handling errors when connecting to services', 'gato-graphql'),
+                \__('Handling errors when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -514,7 +514,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'creating-an-api-gateway',
-                \__('Creating an API gateway', 'gato-graphql'),
+                \__('Creating an API gateway', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -533,7 +533,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'transforming-data-from-an-external-api',
-                \__('Transforming data from an external API', 'gato-graphql'),
+                \__('Transforming data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
@@ -550,7 +550,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'filtering-data-from-an-external-api',
-                \__('Filtering data from an external API', 'gato-graphql'),
+                \__('Filtering data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -564,7 +564,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'pinging-external-services',
-                \__('Pinging external services', 'gato-graphql'),
+                \__('Pinging external services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -578,7 +578,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'updating-large-sets-of-data',
-                \__('Updating large sets of data', 'gato-graphql'),
+                \__('Updating large sets of data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -595,7 +595,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'importing-a-post-from-another-wordpress-site',
-                \__('Importing a post from another WordPress site', 'gato-graphql'),
+                \__('Importing a post from another WordPress site', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -613,7 +613,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             [
                 'distributing-content-from-an-upstream-to-multiple-downstream-sites',
-                \__('Distributing content from an upstream to multiple downstream sites', 'gato-graphql'),
+                \__('Distributing content from an upstream to multiple downstream sites', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -630,11 +630,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             ],
             // [
             //     'content-orchestration',
-            //     \__('Content orchestration', 'gato-graphql'),
+            //     \__('Content orchestration', 'gatographql'),
             // ],
             // [
             //     'using-the-graphql-server-without-wordpress',
-            //      \__('Using the GraphQL server without WordPress', 'gato-graphql'),
+            //      \__('Using the GraphQL server without WordPress', 'gatographql'),
             // ],
         ];
     }

@@ -172,28 +172,28 @@ abstract class AbstractControlBlock extends AbstractBlock
         if ($this->enableOperations()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
-                __('Operations', 'gato-graphql'),
+                __('Operations', 'gatographql'),
                 $operationContent,
             );
         }
         if ($this->enableTypeFields()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
-                __('Fields', 'gato-graphql'),
+                __('Fields', 'gatographql'),
                 $fieldTypeContent,
             );
         }
         if ($this->enableGlobalFields()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
-                __('Global Fields', 'gato-graphql'),
+                __('Global Fields', 'gatographql'),
                 $globalFieldContent,
             );
         }
         if ($this->enableDirectives()) {
             $blockDataContent .= sprintf(
                 $blockDataPlaceholder,
-                __('Directives', 'gato-graphql'),
+                __('Directives', 'gatographql'),
                 $directiveContent,
             );
         }
@@ -226,11 +226,11 @@ EOT;
 
     protected function getBlockDataTitle(): string
     {
-        return \__('Select schema elements', 'gato-graphql');
+        return \__('Select schema elements', 'gatographql');
     }
     protected function getBlockContentTitle(): string
     {
-        return \__('Configuration:', 'gato-graphql');
+        return \__('Configuration:', 'gatographql');
     }
     /**
      * @param array<string,mixed> $attributes

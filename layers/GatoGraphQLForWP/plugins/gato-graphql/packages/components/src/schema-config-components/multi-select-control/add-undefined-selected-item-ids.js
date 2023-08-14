@@ -17,7 +17,7 @@ const AddUndefinedSelectedItemIDs = withSelect(
 		return {
 			items: items.concat(undefinedSelectedItemIDs.map( undefinedSelectedItemID => (
 				{
-					group: __('Undefined elements', 'gato-graphql'),
+					group: __('Undefined elements', 'gatographql'),
 					groupKind: 'undefined',
 					title: getLabelForNotFoundElement(undefinedSelectedItemID),
 					value: undefinedSelectedItemID,

@@ -60,7 +60,7 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
     public function getName(string $module): string
     {
         return match ($module) {
-            self::API_HIERARCHY => \__('API Hierarchy', 'gato-graphql'),
+            self::API_HIERARCHY => \__('API Hierarchy', 'gatographql'),
             default => $module,
         };
     }
@@ -68,7 +68,7 @@ class EndpointConfigurationFunctionalityModuleResolver extends AbstractFunctiona
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::API_HIERARCHY => \__('Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties', 'gato-graphql'),
+            self::API_HIERARCHY => \__('Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties', 'gatographql'),
             default => parent::getDescription($module),
         };
     }

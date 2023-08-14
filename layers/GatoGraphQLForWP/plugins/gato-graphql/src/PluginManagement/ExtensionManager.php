@@ -64,7 +64,7 @@ class ExtensionManager extends AbstractPluginManager
         if (!isset($this->extensionClassInstances[$extensionClass])) {
             throw new ExtensionNotRegisteredException(
                 sprintf(
-                    \__('The extension with class \'%s\' has not been registered yet', 'gato-graphql'),
+                    \__('The extension with class \'%s\' has not been registered yet', 'gatographql'),
                     $extensionClass
                 )
             );
@@ -130,12 +130,12 @@ class ExtensionManager extends AbstractPluginManager
             $installedExtensionVersion = $this->extensionClassInstances[$extensionClass]->getPluginVersion();
             $errorMessage = $installedExtensionVersion === $extensionVersion && $this->isExtensionBundled($extensionClass)
                 ? sprintf(
-                    __('Extension <strong>%s</strong> with version <code>%s</code> is already installed. Are both the extension and a bundle containing the extension being installed? If so, please keep the bundle only.', 'gato-graphql'),
+                    __('Extension <strong>%s</strong> with version <code>%s</code> is already installed. Are both the extension and a bundle containing the extension being installed? If so, please keep the bundle only.', 'gatographql'),
                     $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
                     $extensionVersion,
                 )
                 : sprintf(
-                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'gato-graphql'),
+                    __('Extension <strong>%s</strong> is already installed with version <code>%s</code>, so version <code>%s</code> has not been loaded. Please deactivate all versions, remove the older version, and activate again the latest version of the plugin.', 'gatographql'),
                     $extensionName ?? $this->extensionClassInstances[$extensionClass]->getPluginName(),
                     $installedExtensionVersion,
                     $extensionVersion,
@@ -157,7 +157,7 @@ class ExtensionManager extends AbstractPluginManager
         ) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
-                    __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'gato-graphql'),
+                    __('Extension <strong>%s</strong> requires plugin <strong>%s</strong> to satisfy version constraint <code>%s</code>, but the current version <code>%s</code> does not. The extension has not been loaded.', 'gatographql'),
                     $extensionName ?? $extensionClass,
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,
@@ -172,7 +172,7 @@ class ExtensionManager extends AbstractPluginManager
          * This is useful to issue licenses for the Marketplace by testing/production,
          * and validate the the corresponding extension is installed.
          */
-        $errorMessagePlaceholder = __('Plugin <strong>%s</strong> is on "%s" mode, but Extension <strong>%s</strong> is on "%s" mode. They must both be the same. The extension has not been loaded.', 'gato-graphql');
+        $errorMessagePlaceholder = __('Plugin <strong>%s</strong> is on "%s" mode, but Extension <strong>%s</strong> is on "%s" mode. They must both be the same. The extension has not been loaded.', 'gatographql');
         if (PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion) && !PluginVersionHelpers::isDevelopmentVersion($extensionVersion)) {
             $this->printAdminNoticeErrorMessage(
                 sprintf(
@@ -287,7 +287,7 @@ class ExtensionManager extends AbstractPluginManager
         ) {
             $this->showAdminWarningNotice(
                 $extensionProductName,
-                __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gato-graphql')
+                __('The license is invalid. Please <a href="%s">enter a new license key in %s</a> to enable it', 'gatographql')
             );
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
@@ -299,7 +299,7 @@ class ExtensionManager extends AbstractPluginManager
         if ($extensionCommercialExtensionActivatedLicenseObjectProperties->productName !== $extensionProductName) {
             $this->showAdminWarningNotice(
                 $extensionProductName,
-                __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gato-graphql')
+                __('The provided license key belongs to a different extension. Please <a href="%s">enter the right license key in %s</a> to enable it', 'gatographql')
             );
             $this->nonActivatedLicenseCommercialExtensionSlugProductNames[$extensionSlug] = $extensionProductName;
             return false;
@@ -317,7 +317,7 @@ class ExtensionManager extends AbstractPluginManager
         string $extensionProductName,
         ?string $messagePlaceholder = null,
     ): void {
-        $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gato-graphql');
+        $messagePlaceholder ??= __('Please <a href="%s">enter the license key in %s</a> to enable it', 'gatographql');
         \add_action('admin_notices', function () use ($extensionProductName, $messagePlaceholder) {
             // /**
             //  * Do not print the warnings in the Settings page
@@ -332,16 +332,16 @@ class ExtensionManager extends AbstractPluginManager
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
-                    __('<strong>Gato GraphQL - %s</strong>: %s.', 'gato-graphql'),
+                    __('<strong>Gato GraphQL - %s</strong>: %s.', 'gatographql'),
                     $extensionProductName,
                     sprintf(
                         $messagePlaceholder,
                         $activateExtensionsSettingsURL,
                         sprintf(
                             '<code>%s > %s > %s</code>',
-                            \__('Settings', 'gato-graphql'),
-                            \__('Plugin Management', 'gato-graphql'),
-                            \__('Activate Extensions', 'gato-graphql'),
+                            \__('Settings', 'gatographql'),
+                            \__('Plugin Management', 'gatographql'),
+                            \__('Activate Extensions', 'gatographql'),
                         )
                     )
                 )

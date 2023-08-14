@@ -33,33 +33,33 @@ const SchemaConfigSelfFieldsCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Expose "self" fields in the schema', 'gato-graphql'),
+			label: __('Expose "self" fields in the schema', 'gatographql'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not expose self fields', 'gato-graphql'),
+			label: __('Do not expose self fields', 'gatographql'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Expose self fields in the schema?', 'gato-graphql') }</em>
+			<em>{ __('Expose self fields in the schema?', 'gatographql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Expose "self" fields in the GraphQL schema (such as "Post.self" and "User.self"), which can help give a particular shape to the GraphQL response', 'gato-graphql') }
+				text={ __('Expose "self" fields in the GraphQL schema (such as "Post.self" and "User.self"), which can help give a particular shape to the GraphQL response', 'gatographql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-						<span>🟡 { __('Default', 'gato-graphql') }</span>
+						<span>🟡 { __('Default', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Expose "self" fields', 'gato-graphql') }</span>
+						<span>✅ { __('Expose "self" fields', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Do not expose self fields', 'gato-graphql') }</span>
+						<span>❌ { __('Do not expose self fields', 'gatographql') }</span>
 					}
 				</>
 			) }
@@ -82,8 +82,8 @@ const SchemaConfigSelfFieldsCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Self Fields', 'gato-graphql'),
-		className: 'gato-graphql-schema-self-fields',
+		header: __('Self Fields', 'gatographql'),
+		className: 'gatographql-schema-self-fields',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

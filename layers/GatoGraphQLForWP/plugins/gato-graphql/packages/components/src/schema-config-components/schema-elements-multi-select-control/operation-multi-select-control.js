@@ -17,7 +17,7 @@ import AddUndefinedSelectedItemIDs from '../multi-select-control/add-undefined-s
  */
 const items = SUPPORTED_OPERATION_TYPES.map( operation => (
 	{
-		group: __('Operations', 'gato-graphql'),
+		group: __('Operations', 'gatographql'),
 		title: operation,
 		value: operation,
 	}

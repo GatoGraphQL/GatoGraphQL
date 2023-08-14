@@ -20,22 +20,22 @@ const SchemaElementsTabPanel = ( props ) => {
 	const tabs = [
 		...( enableOperations ? [ {
 			name: 'tabOperations',
-			title: __('Operations', 'gato-graphql'),
+			title: __('Operations', 'gatographql'),
 			className: 'tab tab-operations',
 		} ] : [] ),
 		...( enableTypeFields ? [ {
 			name: 'tabTypeFields',
-			title: __('Fields', 'gato-graphql'),
+			title: __('Fields', 'gatographql'),
 			className: 'tab tab-fields tab-standard-fields',
 		} ] : [] ),
 		...( enableGlobalFields ? [ {
 			name: 'tabGlobalFields',
-			title: __('Global Fields', 'gato-graphql'),
+			title: __('Global Fields', 'gatographql'),
 			className: 'tab tab-fields tab-global-fields',
 		} ] : [] ),
 		...( enableDirectives ? [ {
 			name: 'tabDirectives',
-			title: __('Directives', 'gato-graphql'),
+			title: __('Directives', 'gatographql'),
 			className: 'tab tab-directives',
 		} ] : [] ),
 	]

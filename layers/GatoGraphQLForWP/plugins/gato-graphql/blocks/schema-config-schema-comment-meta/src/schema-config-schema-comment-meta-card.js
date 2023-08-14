@@ -19,7 +19,7 @@ const SchemaConfigCommentMetaCard = ( props ) => {
 	return (
 		<SchemaConfigMetaCard
 			{ ...props }
-			labelEntity={ __('comments', 'gato-graphql') }
+			labelEntity={ __('comments', 'gatographql') }
 			labelExampleItem='description'
 			labelExampleEntries={
 				[
@@ -35,8 +35,8 @@ const SchemaConfigCommentMetaCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Comment Meta', 'gato-graphql'),
-		className: 'gato-graphql-comment-meta',
+		header: __('Comment Meta', 'gatographql'),
+		className: 'gatographql-comment-meta',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

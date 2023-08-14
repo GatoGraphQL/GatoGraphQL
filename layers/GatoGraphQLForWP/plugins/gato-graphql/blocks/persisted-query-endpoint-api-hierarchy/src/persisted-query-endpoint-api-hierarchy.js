@@ -17,8 +17,8 @@ import {
 } from '@gatographql/components';
 import { getMarkdownContentOrUseDefault } from './markdown-loader';
 
-const getViewBooleanLabel = ( value ) => value ? `✅ ${ __('Yes', 'gato-graphql') }` : `❌ ${ __('No', 'gato-graphql') }`
-const getEditBooleanLabel = ( value ) => value ? __('Yes', 'gato-graphql') : __('No', 'gato-graphql')
+const getViewBooleanLabel = ( value ) => value ? `✅ ${ __('Yes', 'gatographql') }` : `❌ ${ __('No', 'gatographql') }`
+const getEditBooleanLabel = ( value ) => value ? __('Yes', 'gatographql') : __('No', 'gatographql')
 
 const PersistedQueryEndpointAPIHierarchy = ( props ) => {
 	const {
@@ -31,14 +31,14 @@ const PersistedQueryEndpointAPIHierarchy = ( props ) => {
 			inheritQuery,
 		}
 	} = props;
-	const inheritQueryTitle = __('Inherit query from ancestor(s)?', 'gato-graphql')
+	const inheritQueryTitle = __('Inherit query from ancestor(s)?', 'gatographql')
 	return (
 		<>
 			{/* If this post has a parent, then allow to inherit query/variables */ }
 			{
 				! queryPostParent && (
 					<div className={ `${ className }__inherit_query` }>
-						<em>{ __('This section is enabled when selecting an item from the "Parent GraphQL persisted query" dropdown, in the Page Attributes box.', 'gato-graphql') }</em>
+						<em>{ __('This section is enabled when selecting an item from the "Parent GraphQL persisted query" dropdown, in the Page Attributes box.', 'gatographql') }</em>
 					</div>
 				)
 			}
@@ -79,7 +79,7 @@ const PersistedQueryEndpointAPIHierarchy = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('API Hierarchy', 'gato-graphql'),
+		header: __('API Hierarchy', 'gatographql'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withSelect( ( select ) => {

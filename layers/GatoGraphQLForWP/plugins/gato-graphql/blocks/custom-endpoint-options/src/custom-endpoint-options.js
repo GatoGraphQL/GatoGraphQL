@@ -26,17 +26,17 @@ const CustomEndpointOptions = ( props ) => {
 	} = props;
 	return (
 		<div className={ `${ className }__enabled` }>
-			<em>{ __('Enabled?', 'gato-graphql') }</em>
+			<em>{ __('Enabled?', 'gatographql') }</em>
 			{ !isSelected && (
 				<>
 					<br />
-					{ isEnabled ? `✅ ${ __('Yes', 'gato-graphql') }` : `❌ ${ __('No', 'gato-graphql') }` }
+					{ isEnabled ? `✅ ${ __('Yes', 'gatographql') }` : `❌ ${ __('No', 'gatographql') }` }
 				</>
 			) }
 			{ isSelected &&
 				<ToggleControl
 					{ ...props }
-					label={ isEnabled ? __('Yes', 'gato-graphql') : __('No', 'gato-graphql') }
+					label={ isEnabled ? __('Yes', 'gatographql') : __('No', 'gatographql') }
 					checked={ isEnabled }
 					onChange={ newValue => setAttributes( {
 						isEnabled: newValue,
@@ -50,7 +50,7 @@ const CustomEndpointOptions = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Custom Endpoint Options', 'gato-graphql'),
+		header: __('Custom Endpoint Options', 'gatographql'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

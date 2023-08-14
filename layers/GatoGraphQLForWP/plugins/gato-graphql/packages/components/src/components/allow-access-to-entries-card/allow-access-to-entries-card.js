@@ -30,16 +30,16 @@ const AllowAccessToEntriesCard = ( props ) => {
 	const behavior = attributes[ behaviorAttributeName ];
 	const options = [
 		{
-			label: __('Allow access', 'gato-graphql'),
+			label: __('Allow access', 'gatographql'),
 			value: ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
 		},
 		{
-			label: __('Deny access', 'gato-graphql'),
+			label: __('Deny access', 'gatographql'),
 			value: ATTRIBUTE_VALUE_BEHAVIOR_DENY,
 		},
 	];
-	const entriesLabelDescRegex = __('Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).', 'gato-graphql');
-	const entriesLabelDescExamples = __('For example, "%1$s" is matched by any of the following entries: %2$s.', 'gato-graphql')
+	const entriesLabelDescRegex = __('Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).', 'gatographql');
+	const entriesLabelDescExamples = __('For example, "%1$s" is matched by any of the following entries: %2$s.', 'gatographql')
 		.replace('%1$s', labelExampleItem)
 		.replace(
 			'%2$s',
@@ -61,19 +61,19 @@ const AllowAccessToEntriesCard = ( props ) => {
 				/>
 			</div>
 			<div>
-				<em>{ __('Behavior:', 'gato-graphql') }</em>
+				<em>{ __('Behavior:', 'gatographql') }</em>
 				<InfoTooltip
 					{ ...props }
-					text={ __('If "Allow access" is selected, only the configured entries can be accessed, and no other can; with "Deny access", the reverse applies', 'gato-graphql') }
+					text={ __('If "Allow access" is selected, only the configured entries can be accessed, and no other can; with "Deny access", the reverse applies', 'gatographql') }
 				/>
 				{ !isSelected && (
 					<>
 						<br />
 						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_ALLOW &&
-							<span>✅ { __('Allow access', 'gato-graphql') }</span>
+							<span>✅ { __('Allow access', 'gatographql') }</span>
 						}
 						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_DENY &&
-							<span>❌ { __('Deny access', 'gato-graphql') }</span>
+							<span>❌ { __('Deny access', 'gatographql') }</span>
 						}
 					</>
 				) }

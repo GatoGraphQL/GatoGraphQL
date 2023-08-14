@@ -22,12 +22,12 @@ import EditBlock from './edit';
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql/endpoint-voyager', {
+registerBlockType( 'gatographql/endpoint-voyager', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Voyager client for the GraphQL endpoint', 'gato-graphql' ),
+	title: __( 'Voyager client for the GraphQL endpoint', 'gatographql' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -35,14 +35,14 @@ registerBlockType( 'gato-graphql/endpoint-voyager', {
 	 */
 	description: __(
 		'Provide access to the Voyager client for the GraphQL endpoint',
-		'gato-graphql'
+		'gatographql'
 	),
 
 	/**
 	 * Blocks are grouped into categories to help users browse and discover them.
 	 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
 	 */
-	category: 'gato-graphql-endpoint',
+	category: 'gatographql-endpoint',
 
 	/**
 	 * An icon property should be specified to make it easier to identify a block.

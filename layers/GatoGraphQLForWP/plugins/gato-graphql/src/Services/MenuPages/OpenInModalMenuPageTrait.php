@@ -26,7 +26,7 @@ trait OpenInModalMenuPageTrait
          * Hide the menus
          */
         \wp_enqueue_style(
-            'gato-graphql-hide-admin-bar',
+            'gatographql-hide-admin-bar',
             $mainPluginURL . 'assets/css/hide-admin-bar.css',
             array(),
             $mainPluginVersion
@@ -36,7 +36,7 @@ trait OpenInModalMenuPageTrait
          * Styles for content within the modal window
          */
         \wp_enqueue_style(
-            'gato-graphql-modal-window-content',
+            'gatographql-modal-window-content',
             $mainPluginURL . 'assets/css/modal-window-content.css',
             array(),
             $mainPluginVersion

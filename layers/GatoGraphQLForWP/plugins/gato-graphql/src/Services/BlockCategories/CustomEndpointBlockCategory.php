@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustom
 
 class CustomEndpointBlockCategory extends AbstractBlockCategory
 {
-    public final const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'gato-graphql-endpoint';
+    public final const CUSTOM_ENDPOINT_BLOCK_CATEGORY = 'gatographql-endpoint';
 
     private ?GraphQLCustomEndpointCustomPostType $graphQLCustomEndpointCustomPostType = null;
 
@@ -51,6 +51,6 @@ class CustomEndpointBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategoryTitle(): string
     {
-        return __('GraphQL custom endpoint', 'gato-graphql');
+        return __('GraphQL custom endpoint', 'gatographql');
     }
 }

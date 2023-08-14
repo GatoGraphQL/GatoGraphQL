@@ -47,7 +47,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getNoItemsSelectedLabel(): string
     {
         $envVariable = Environment::NO_ITEMS_SELECTED_LABEL;
-        $defaultValue = \__('(none selected)', 'gato-graphql');
+        $defaultValue = \__('(none selected)', 'gatographql');
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
@@ -61,7 +61,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function getSettingsValueLabel(): string
     {
         $envVariable = Environment::SETTINGS_VALUE_LABEL;
-        $defaultValue = \__('🟡 Default', 'gato-graphql');
+        $defaultValue = \__('🟡 Default', 'gatographql');
 
         return $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,

@@ -19,7 +19,7 @@ const SchemaConfigTaxonomyMetaCard = ( props ) => {
 	return (
 		<SchemaConfigMetaCard
 			{ ...props }
-			labelEntity={ __('taxonomies', 'gato-graphql') }
+			labelEntity={ __('taxonomies', 'gatographql') }
 			labelExampleItem='description'
 			labelExampleEntries={
 				[
@@ -35,8 +35,8 @@ const SchemaConfigTaxonomyMetaCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Taxonomy Meta', 'gato-graphql'),
-		className: 'gato-graphql-taxonomy-meta',
+		header: __('Taxonomy Meta', 'gatographql'),
+		className: 'gatographql-taxonomy-meta',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

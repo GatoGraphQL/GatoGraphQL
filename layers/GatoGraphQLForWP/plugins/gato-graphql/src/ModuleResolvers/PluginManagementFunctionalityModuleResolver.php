@@ -110,8 +110,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::ACTIVATE_EXTENSIONS => \__('Activate Extensions', 'gato-graphql'),
-            self::RESET_SETTINGS => \__('Reset Settings', 'gato-graphql'),
+            self::ACTIVATE_EXTENSIONS => \__('Activate Extensions', 'gatographql'),
+            self::RESET_SETTINGS => \__('Reset Settings', 'gatographql'),
             default => $module,
         };
     }
@@ -119,8 +119,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::ACTIVATE_EXTENSIONS => \__('Activate Bundles and Extensions from the Gato GraphQL Shop', 'gato-graphql'),
-            self::RESET_SETTINGS => \__('Restore the Gato GraphQL Settings to default values', 'gato-graphql'),
+            self::ACTIVATE_EXTENSIONS => \__('Activate Bundles and Extensions from the Gato GraphQL Shop', 'gatographql'),
+            self::RESET_SETTINGS => \__('Restore the Gato GraphQL Settings to default values', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -157,10 +157,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             if ($commercialExtensionSlugProductNames !== []) {
                 $ulPlaceholder = '<ul><li>%s</li></ul>';
                 $handlingLicenseMessageItems = [
-                    \__('Adding a license key will <strong>activate the extension</strong>', 'gato-graphql'),
-                    \__('Removing an existing license key will <strong>deactivate the extension</strong>', 'gato-graphql'),
-                    \__('Updating a license key will first <strong>deactivate the extension</strong> (using the previous license key) and then <strong>activate the extension</strong> again (using the new license key)', 'gato-graphql'),
-                    \__('Not updating a license key will <strong>validate the status of the extension</strong>', 'gato-graphql'),
+                    \__('Adding a license key will <strong>activate the extension</strong>', 'gatographql'),
+                    \__('Removing an existing license key will <strong>deactivate the extension</strong>', 'gatographql'),
+                    \__('Updating a license key will first <strong>deactivate the extension</strong> (using the previous license key) and then <strong>activate the extension</strong> again (using the new license key)', 'gatographql'),
+                    \__('Not updating a license key will <strong>validate the status of the extension</strong>', 'gatographql'),
                 ];
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
                 $moduleSettings[] = [
@@ -169,10 +169,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Activate Extension Licenses', 'gato-graphql'),
+                    Properties::TITLE => \__('Activate Extension Licenses', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
-                        \__('Enter the license keys for the bundles/extensions purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gato-graphql'),
+                        \__('Enter the license keys for the bundles/extensions purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
                         $this->getCollapsible(
                             sprintf(
                                 '%s%s',
@@ -207,7 +207,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $activateExtensionsButtonsHTML = '';
                 if (function_exists('get_submit_button')) {
                     $activateExtensionsButtonsHTML = get_submit_button(
-                        \__('Activate Licenses (or Deactivate/Validate)', 'gato-graphql'),
+                        \__('Activate Licenses (or Deactivate/Validate)', 'gatographql'),
                         'primary',
                         $activateButtonName,
                         false
@@ -227,8 +227,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         $module,
                         'activate-extensions'
                     ),
-                    Properties::TITLE => \__('Activate Extension Licenses', 'gato-graphql'),
-                    Properties::DESCRIPTION => \__('<em>There are no Bundles or Extensions from the Gato GraphQL Shop installed</em>', 'gato-graphql'),
+                    Properties::TITLE => \__('Activate Extension Licenses', 'gatographql'),
+                    Properties::DESCRIPTION => \__('<em>There are no Bundles or Extensions from the Gato GraphQL Shop installed</em>', 'gatographql'),
                     Properties::TYPE => Properties::TYPE_NULL,
                 ];
             }
@@ -236,22 +236,22 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
             $resetSettingsButtonsHTML = sprintf(
                 <<<HTML
-                    <a href="#" class="button secondary gato-graphql-show-settings-items">
+                    <a href="#" class="button secondary gatographql-show-settings-items">
                         %1\$s
                     </a>
                 HTML,
-                \__('Show options to reset the Settings', 'gato-graphql')
+                \__('Show options to reset the Settings', 'gatographql')
             );
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
                     'reset-settings-button'
                 ),
-                Properties::TITLE => \__('Reset the Gato GraphQL Settings?', 'gato-graphql'),
+                Properties::TITLE => \__('Reset the Gato GraphQL Settings?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
                     sprintf(
-                        \__('Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code>) to their default values.', 'gato-graphql'),
+                        \__('Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code>) to their default values.', 'gatographql'),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SCHEMA_CONFIGURATION)->getName(SettingsCategoryResolver::SCHEMA_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::ENDPOINT_CONFIGURATION)->getName(SettingsCategoryResolver::ENDPOINT_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SERVER_CONFIGURATION)->getName(SettingsCategoryResolver::SERVER_CONFIGURATION),
@@ -269,67 +269,67 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
-                    \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'gato-graphql'),
-                    \__('Feature', 'gato-graphql'),
-                    \__('Non-restrictive behavior', 'gato-graphql'),
-                    \__('Restrictive behavior', 'gato-graphql'),
+                    \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'gatographql'),
+                    \__('Feature', 'gatographql'),
+                    \__('Non-restrictive behavior', 'gatographql'),
+                    \__('Restrictive behavior', 'gatographql'),
                     implode(
                         '</tr><tr>',
                         [
                             // '<td>' . implode(
                             //     '</td><td>',
                             //     [
-                            //         \__('Single endpoint', 'gato-graphql'),
-                            //         \__('Enabled', 'gato-graphql'),
-                            //         \__('Disabled', 'gato-graphql'),
+                            //         \__('Single endpoint', 'gatographql'),
+                            //         \__('Enabled', 'gatographql'),
+                            //         \__('Disabled', 'gatographql'),
                             //     ]
                             // ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('“Sensitive” data fields', 'gato-graphql'),
-                                    \__('Added to the schema', 'gato-graphql'),
-                                    \__('Not added to the schema', 'gato-graphql'),
+                                    \__('“Sensitive” data fields', 'gatographql'),
+                                    \__('Added to the schema', 'gatographql'),
+                                    \__('Not added to the schema', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Settings from <code>wp_options</code>', 'gato-graphql'),
-                                    \__('All options are queryable', 'gato-graphql'),
-                                    \__('Only a few predefined options are queryable', 'gato-graphql'),
+                                    \__('Settings from <code>wp_options</code>', 'gatographql'),
+                                    \__('All options are queryable', 'gatographql'),
+                                    \__('Only a few predefined options are queryable', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Meta (posts, users, comments, taxonomies)', 'gato-graphql'),
-                                    \__('All keys are queryable', 'gato-graphql'),
-                                    \__('No keys are queryable', 'gato-graphql'),
+                                    \__('Meta (posts, users, comments, taxonomies)', 'gatographql'),
+                                    \__('All keys are queryable', 'gatographql'),
+                                    \__('No keys are queryable', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Max limit to query entities (posts, users, etc)', 'gato-graphql'),
-                                    \__('Unlimited', 'gato-graphql'),
-                                    \__('Limited', 'gato-graphql'),
+                                    \__('Max limit to query entities (posts, users, etc)', 'gatographql'),
+                                    \__('Unlimited', 'gatographql'),
+                                    \__('Limited', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Environment Fields', 'gato-graphql'),
-                                    \__('All environment variables and PHP constants are queryable', 'gato-graphql'),
-                                    \__('No environment variables or PHP constants are queryable', 'gato-graphql'),
+                                    \__('Environment Fields', 'gatographql'),
+                                    \__('All environment variables and PHP constants are queryable', 'gatographql'),
+                                    \__('No environment variables or PHP constants are queryable', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
-                                    \__('Send HTTP Request Fields', 'gato-graphql'),
-                                    \__('All URLs can be requested', 'gato-graphql'),
-                                    \__('No URL can be requested', 'gato-graphql'),
+                                    \__('Send HTTP Request Fields', 'gatographql'),
+                                    \__('All URLs can be requested', 'gatographql'),
+                                    \__('No URL can be requested', 'gatographql'),
                                 ]
                             ) . '</td>',
                         ]
@@ -348,12 +348,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p>',
-                    \__('Choose if to use restrictive or non-restrictive default settings.', 'gato-graphql'),
+                    \__('Choose if to use restrictive or non-restrictive default settings.', 'gatographql'),
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    ResetSettingsOptions::RESTRICTIVE => \__('Use the restrictive default behavior for the Settings', 'gato-graphql'),
-                    ResetSettingsOptions::NON_RESTRICTIVE => \__('Use the non-restrictive default behavior for the Settings', 'gato-graphql'),
+                    ResetSettingsOptions::RESTRICTIVE => \__('Use the restrictive default behavior for the Settings', 'gatographql'),
+                    ResetSettingsOptions::NON_RESTRICTIVE => \__('Use the non-restrictive default behavior for the Settings', 'gatographql'),
                 ],
                 Properties::CSS_STYLE => 'display: none;',
             ];
@@ -373,7 +373,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $confirmResetSettingsButtonsHTML = '';
             if (function_exists('get_submit_button')) {
                 $confirmResetSettingsButtonsHTML = get_submit_button(
-                    \__('Confirm: Reset Settings', 'gato-graphql'),
+                    \__('Confirm: Reset Settings', 'gatographql'),
                     'primary',
                     $resetButtonName,
                     false

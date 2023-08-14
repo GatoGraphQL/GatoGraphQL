@@ -55,7 +55,7 @@ class GraphiQLClientEndpointAnnotator extends AbstractClientEndpointAnnotator im
                 ),
                 /* translators: %s: Post title. */
                 \esc_attr(\sprintf(\__('GraphiQL &#8220;%s&#8221;'), $title)),
-                __('GraphiQL', 'gato-graphql')
+                __('GraphiQL', 'gatographql')
             );
         }
     }

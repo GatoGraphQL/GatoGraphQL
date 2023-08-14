@@ -122,17 +122,17 @@ class ExtensionListTable extends AbstractExtensionListTable
         $extensionActionLabel = $plugin['gato_extension_is_bundle']
             ? sprintf(
                 '%s%s',
-                \__('Get Bundle', 'gato-graphql'),
+                \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             )
             : parent::getPluginInstallActionLabel($plugin);
         return sprintf(
             <<<HTML
-                <span class="gato-graphql-extension-action-label">%s</span>
-                <span class="gato-graphql-extension-bundle-action-label" style="display: none;">%s</span>
+                <span class="gatographql-extension-action-label">%s</span>
+                <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
             HTML,
             $extensionActionLabel,
-            \__('Active (via Bundle)', 'gato-graphql')
+            \__('Active (via Bundle)', 'gatographql')
         );
     }
 
@@ -184,7 +184,7 @@ class ExtensionListTable extends AbstractExtensionListTable
         return array_merge(
             parent::get_table_classes(),
             [
-                'gato-graphql-list-table',
+                'gatographql-list-table',
             ]
         );
     }

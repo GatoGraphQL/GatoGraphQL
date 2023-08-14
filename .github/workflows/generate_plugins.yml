@@ -115,7 +115,7 @@ jobs:
             # For instance, several plugins replace "pop-schema/schema-commons", producing
             # the following error message:
             #
-            #   > Only one of these can be installed: pop-schema/schema-commons[dev-master], gato-graphql-pro/php-constants-and-environment-variables-via-schema[dev-master], gato-graphql-pro/helper-function-collection[dev-master]. [gato-graphql-pro/php-constants-and-environment-variables-via-schema, gato-graphql-pro/helper-function-collection] replace pop-schema/schema-commons and thus cannot coexist with it.
+            #   > Only one of these can be installed: pop-schema/schema-commons[dev-master], gatographql-pro/php-constants-and-environment-variables-via-schema[dev-master], gatographql-pro/helper-function-collection[dev-master]. [gatographql-pro/php-constants-and-environment-variables-via-schema, gatographql-pro/helper-function-collection] replace pop-schema/schema-commons and thus cannot coexist with it.
             #
             # As a solution, when generating the bundle plugin, remove all the "replace" entries
             # in the composer.json for the included plugins, and move them to the bundle composer.json

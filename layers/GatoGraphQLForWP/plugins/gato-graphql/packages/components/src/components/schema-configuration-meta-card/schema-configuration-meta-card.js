@@ -15,9 +15,9 @@ const SchemaConfigMetaCard = ( props ) => {
 	return (
 		<AllowAccessToEntriesCard
 			{ ...props }
-			entriesHeader={ __('Meta keys:', 'gato-graphql') }
+			entriesHeader={ __('Meta keys:', 'gatographql') }
 			entriesLabelDescIntro={
-				__('List of all the meta keys, to either allow or deny access to, when querying fields `metaValue` and `metaValues` on %s (one entry per line).', 'gato-graphql')
+				__('List of all the meta keys, to either allow or deny access to, when querying fields `metaValue` and `metaValues` on %s (one entry per line).', 'gatographql')
 					.replace('%s', labelEntity)
 			}
 		/>

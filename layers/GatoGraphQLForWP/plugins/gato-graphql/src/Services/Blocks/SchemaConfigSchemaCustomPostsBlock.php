@@ -70,7 +70,7 @@ class SchemaConfigSchemaCustomPostsBlock extends AbstractSchemaConfigCustomizabl
         $values = $attributes[self::ATTRIBUTE_NAME_INCLUDED_CUSTOM_POST_TYPES] ?? [];
         return sprintf(
             '<p><strong>%s</strong></p>%s',
-            $this->__('Included custom post types', 'gato-graphql'),
+            $this->__('Included custom post types', 'gatographql'),
             $values ?
                 sprintf(
                     '<ul><li><code>%s</code></li></ul>',
@@ -78,14 +78,14 @@ class SchemaConfigSchemaCustomPostsBlock extends AbstractSchemaConfigCustomizabl
                 ) :
                 sprintf(
                     '<p><em>%s</em></p>',
-                    \__('(not set)', 'gato-graphql')
+                    \__('(not set)', 'gatographql')
                 )
         );
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Custom Posts', 'gato-graphql');
+        return \__('Custom Posts', 'gatographql');
     }
 
     /**

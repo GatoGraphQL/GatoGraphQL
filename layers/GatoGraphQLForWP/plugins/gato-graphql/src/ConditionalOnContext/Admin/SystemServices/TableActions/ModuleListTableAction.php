@@ -60,13 +60,13 @@ class ModuleListTableAction extends AbstractListTableAction
              */
             if (!empty($this->mutatedModuleIDs)) {
                 if (count($this->mutatedModuleIDs) === 1 && $this->mutatedEnabled) {
-                    $message = \__('Module enabled successfully', 'gato-graphql');
+                    $message = \__('Module enabled successfully', 'gatographql');
                 } elseif (count($this->mutatedModuleIDs) > 1 && $this->mutatedEnabled) {
-                    $message = \__('Modules enabled successfully', 'gato-graphql');
+                    $message = \__('Modules enabled successfully', 'gatographql');
                 } elseif (count($this->mutatedModuleIDs) === 1 && !$this->mutatedEnabled) {
-                    $message = \__('Module disabled successfully', 'gato-graphql');
+                    $message = \__('Module disabled successfully', 'gatographql');
                 } elseif (count($this->mutatedModuleIDs) > 1 && !$this->mutatedEnabled) {
-                    $message = \__('Modules disabled successfully', 'gato-graphql');
+                    $message = \__('Modules disabled successfully', 'gatographql');
                 }
             }
         } else {
@@ -78,7 +78,7 @@ class ModuleListTableAction extends AbstractListTableAction
             $isBulkAction = in_array(App::request('action'), $actions) || in_array(App::request('action2'), $actions);
             $isSingleAction = in_array($this->currentAction(), $actions);
             if ($isBulkAction || $isSingleAction) {
-                $message = \__('Operation successful', 'gato-graphql');
+                $message = \__('Operation successful', 'gatographql');
             }
         }
         if ($message) {
@@ -132,7 +132,7 @@ class ModuleListTableAction extends AbstractListTableAction
                     App::query('page', '')
                 ));
                 \wp_die(sprintf(
-                    __('This URL is either stale or not valid. Please <a href="%s">click here to reload the page</a>, and try again', 'gato-graphql'),
+                    __('This URL is either stale or not valid. Please <a href="%s">click here to reload the page</a>, and try again', 'gatographql'),
                     $noParamsCurrentURL
                 ));
             }

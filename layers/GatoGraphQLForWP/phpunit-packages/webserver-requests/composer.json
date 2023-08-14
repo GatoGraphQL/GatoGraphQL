@@ -1,5 +1,5 @@
 {
-    "name": "phpunit-for-gato-graphql/webserver-requests",
+    "name": "phpunit-for-gatographql/webserver-requests",
     "type": "library",
     "description": "Test the response from requests against a webserver using PHPUnit and Guzzle",
     "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "guzzle", "phpunit"],

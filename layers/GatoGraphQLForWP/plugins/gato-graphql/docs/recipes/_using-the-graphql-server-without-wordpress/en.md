@@ -28,8 +28,8 @@ $rootDir = dirname(__DIR__, 2);
 /** @var string|false */
 $useGeneratedPluginsAsStandaloneCode = getenv('USE_GENERATED_PLUGINS_AS_STANDALONE_CODE');
 if ($useGeneratedPluginsAsStandaloneCode === 'true') {
-    $prodWebserverDir = $rootDir . '/webservers/gato-graphql-pro-for-prod';
-    require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/gato-graphql/vendor/scoper-autoload.php');
+    $prodWebserverDir = $rootDir . '/webservers/gatographql-pro-for-prod';
+    require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/gatographql/vendor/scoper-autoload.php');
     // Here must add all of the independent extensions to load
     // require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/http-client/vendor/scoper-autoload.php');
     // require_once ($prodWebserverDir . '/wordpress/wp-content/plugins/http-request-via-schema/vendor/scoper-autoload.php');

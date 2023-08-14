@@ -18,7 +18,7 @@ trait UseDocsMenuPageTrait
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_style(
-            'gato-graphql-docs',
+            'gatographql-docs',
             $mainPluginURL . 'assets/css/docs.css',
             array(),
             $mainPluginVersion

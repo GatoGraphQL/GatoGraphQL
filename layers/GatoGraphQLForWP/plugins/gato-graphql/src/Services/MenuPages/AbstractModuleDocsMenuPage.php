@@ -94,7 +94,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
     protected function getModuleCannotBeEmpty(): string
     {
         return sprintf(
-            \__('URL param \'%s\' cannot be empty', 'gato-graphql'),
+            \__('URL param \'%s\' cannot be empty', 'gatographql'),
             RequestParams::MODULE
         );
     }
@@ -102,7 +102,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
     protected function getModuleDoesNotExistErrorMessage(string $module): string
     {
         return sprintf(
-            \__('Oops, module \'%s\' does not exist', 'gato-graphql'),
+            \__('Oops, module \'%s\' does not exist', 'gatographql'),
             $module
         );
     }
@@ -112,7 +112,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
         ModuleResolverInterface $moduleResolver,
     ): string {
         return sprintf(
-            \__('Oops, module \'%s\' has no documentation', 'gato-graphql'),
+            \__('Oops, module \'%s\' has no documentation', 'gatographql'),
             $moduleResolver->getName($module)
         );
     }

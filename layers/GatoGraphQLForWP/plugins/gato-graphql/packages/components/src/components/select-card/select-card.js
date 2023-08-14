@@ -10,7 +10,7 @@ import { EditableSelect } from '../editable-select';
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		className: 'gato-graphql-select-card',
+		className: 'gatographql-select-card',
 	} ),
 	withCard(),
 ] )( EditableSelect );

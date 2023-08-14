@@ -50,7 +50,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersist
      */
     protected function getCustomPostTypeName(): string
     {
-        return \__('GraphQL persisted query endpoint', 'gato-graphql');
+        return \__('GraphQL persisted query endpoint', 'gatographql');
     }
 
     /**
@@ -60,7 +60,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersist
      */
     protected function getCustomPostTypePluralNames(bool $titleCase): string
     {
-        return \__('GraphQL Persisted Queries', 'gato-graphql');
+        return \__('GraphQL Persisted Queries', 'gatographql');
     }
 
     /**
@@ -79,7 +79,7 @@ class GraphQLPersistedQueryEndpointCustomPostType extends AbstractGraphQLPersist
         return array_merge(
             parent::getCustomPostTypeLabels($name_uc, $names_uc, $names_lc),
             array(
-                'all_items' => \__('Persisted Queries', 'gato-graphql'),
+                'all_items' => \__('Persisted Queries', 'gatographql'),
             )
         );
     }

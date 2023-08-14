@@ -40,7 +40,7 @@ use function serialize_blocks;
  *   -X POST \
  *   -H "Content-Type: application/json" \
  *   -d '{"jsonEncodedBlockAttributeValues": "{\"mutationScheme\":\"nested\"}"}' \
- *   https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/cpt-block-attributes/191/gato-graphql/schema-config-mutation-scheme
+ *   https://gatographql.lndo.site/wp-json/gatographql/v1/admin/cpt-block-attributes/191/gatographql/schema-config-mutation-scheme
  * ```
  */
 class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
@@ -100,7 +100,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                         Params::BLOCK_NAMESPACE => $this->getBlockNamespaceParamArgs(),
                         Params::BLOCK_ID => $this->getBlockIDParamArgs(),
                         Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES => [
-                            'description' => __('JSON-encoded array of [\'block attribute\' => \'value\']', 'gato-graphql-testing'),
+                            'description' => __('JSON-encoded array of [\'block attribute\' => \'value\']', 'gatographql-testing'),
                             'type' => 'string',
                             'required' => true,
                         ],
@@ -116,7 +116,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected function getCustomPostIDParamArgs(): array
     {
         return [
-            'description' => __('Custom Post ID', 'gato-graphql-testing'),
+            'description' => __('Custom Post ID', 'gatographql-testing'),
             'type' => 'integer',
             'required' => true,
             'validate_callback' => $this->validateCustomPost(...),
@@ -129,7 +129,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected function getBlockNamespaceParamArgs(): array
     {
         return [
-            'description' => __('Block namespace', 'gato-graphql-testing'),
+            'description' => __('Block namespace', 'gatographql-testing'),
             'type' => 'string',
             'required' => true,
         ];
@@ -141,7 +141,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
     protected function getBlockIDParamArgs(): array
     {
         return [
-            'description' => __('Block ID, composed as "blockName:number", where ":number" defaults to ":0" (i.e. either first or only block with that name)', 'gato-graphql-testing'),
+            'description' => __('Block ID, composed as "blockName:number", where ":number" defaults to ":0" (i.e. either first or only block with that name)', 'gatographql-testing'),
             'type' => 'string',
             'required' => true,
         ];
@@ -167,7 +167,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         if ($customPostID <= 0) {
             return new WP_Error(
                 'rest_post_invalid_id',
-                __('Invalid custom post ID', 'gato-graphql-testing'),
+                __('Invalid custom post ID', 'gatographql-testing'),
                 [
                     Params::STATE => [
                         Params::CUSTOM_POST_ID => $customPostID,
@@ -181,7 +181,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 'rest_post_invalid_id',
                 sprintf(
-                    __('There is no custom post with ID \'%s\'', 'gato-graphql-testing'),
+                    __('There is no custom post with ID \'%s\'', 'gatographql-testing'),
                     $customPostID
                 ),
                 [
@@ -197,10 +197,10 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 'rest_post_invalid_id',
                 sprintf(
-                    __('Custom post is of unsupported custom post type \'%s\' (supported custom post types are: \'%s\')', 'gato-graphql-testing'),
+                    __('Custom post is of unsupported custom post type \'%s\' (supported custom post types are: \'%s\')', 'gatographql-testing'),
                     $post->post_type,
                     implode(
-                        __('\', \'', 'gato-graphql-testing'),
+                        __('\', \'', 'gatographql-testing'),
                         $supportedCustomPostTypes
                     )
                 ),
@@ -353,7 +353,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('There is no block with name \'%s\'', 'gato-graphql-testing'),
+                    __('There is no block with name \'%s\'', 'gatographql-testing'),
                     $blockNamespacedName
                 ),
                 $errorData
@@ -362,7 +362,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
         return new WP_Error(
             '1',
             sprintf(
-                __('There is no block with name \'%s\' on position \'%s\'', 'gato-graphql-testing'),
+                __('There is no block with name \'%s\' on position \'%s\'', 'gatographql-testing'),
                 $blockNamespacedName,
                 $blockPosition
             ),
@@ -467,7 +467,7 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
                 return new WP_Error(
                     '1',
                     sprintf(
-                        __('Property \'%s\' is not JSON-encoded properly', 'gato-graphql-testing'),
+                        __('Property \'%s\' is not JSON-encoded properly', 'gatographql-testing'),
                         Params::JSON_ENCODED_BLOCK_ATTRIBUTE_VALUES,
                     ),
                     [
@@ -532,11 +532,11 @@ class CPTBlockAttributesAdminRESTController extends AbstractAdminRESTController
             $response->status = ResponseStatus::SUCCESS;
             $response->message = $blockPosition === 0
                 ? sprintf(
-                    __('Attributes for block \'%s\' have been updated successfully', 'gato-graphql-testing'),
+                    __('Attributes for block \'%s\' have been updated successfully', 'gatographql-testing'),
                     $blockNamespacedName,
                 )
                 : sprintf(
-                    __('Attributes for block \'%s\' on position \'%s\' have been updated successfully', 'gato-graphql-testing'),
+                    __('Attributes for block \'%s\' on position \'%s\' have been updated successfully', 'gatographql-testing'),
                     $blockNamespacedName,
                     $blockPosition
                 );

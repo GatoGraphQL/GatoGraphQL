@@ -226,7 +226,7 @@ class WPDataModelProvider implements WPDataModelProviderInterface
          * restrict the taxonomies to the previous CPT values stored
          * in the DB. That's why this value can be provided from outside.
          *
-         * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/ModuleResolvers/SchemaTypeModuleResolver.php method `getSettingsDefaultValue`
+         * @see layers/GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php method `getSettingsDefaultValue`
          *
          * In particular: when clicking on "Reset Settings" and all CPTs are
          * exposed, all tags/categories must also be exposed, and not those

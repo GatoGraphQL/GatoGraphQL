@@ -27,6 +27,6 @@ class ExposeGraphiQLClientOnCustomEndpointCPTBlockAttributesFixtureEndpointWebse
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'gato-graphql/endpoint-graphiql';
+        return 'gatographql/endpoint-graphiql';
     }
 }

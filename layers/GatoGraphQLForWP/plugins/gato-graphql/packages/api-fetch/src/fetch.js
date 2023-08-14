@@ -23,8 +23,8 @@ const fetchGraphQLQuery = (endpointURL, query, variables) => {
 	 */
 	if (!endpointURL || !query) {
 		const errorMessage = !endpointURL ?
-			__('No endpoint provided to execute the GraphQL query', 'gato-graphql')
-			: __('No GraphQL query provided', 'gato-graphql');
+			__('No endpoint provided to execute the GraphQL query', 'gatographql')
+			: __('No GraphQL query provided', 'gatographql');
 		return  {
 			errors: [ {
 				message: errorMessage
@@ -45,7 +45,7 @@ const fetchGraphQLQuery = (endpointURL, query, variables) => {
 			 */
 			err => err.response.status == 500 ? {
 				errors: [ {
-					message: `${ __('[Internal Server Error (500)]:', 'gato-graphql') } ${ err.response.message }`
+					message: `${ __('[Internal Server Error (500)]:', 'gatographql') } ${ err.response.message }`
 				} ],
 			} : err.response
 		);

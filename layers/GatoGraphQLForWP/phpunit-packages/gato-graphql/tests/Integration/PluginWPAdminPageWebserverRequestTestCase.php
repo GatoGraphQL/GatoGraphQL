@@ -18,7 +18,7 @@ class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPag
      * These are under function `getMenuPageSlug` from `MenuPageInterface`,
      * such as `AboutMenuPage`.
      *
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/MenuPages/AboutMenuPage.php
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php
      *
      * @return string[]
      */
@@ -41,7 +41,7 @@ class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPag
      * These are under function `getCustomPostType` from `CustomPostTypeInterface`,
      * such as `GraphQLPersistedQueryEndpointCustomPostType`.
      *
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/GraphQLPersistedQueryEndpointCustomPostType.php
      *
      * @return string[]
      */

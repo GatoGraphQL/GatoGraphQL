@@ -1,5 +1,5 @@
 {
-    "name": "gato-graphql/plugin-utils",
+    "name": "gatographql/plugin-utils",
     "type": "library",
     "description": "General utilities for the plugin, not dependent on WordPress",
     "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "plugin-utils"],

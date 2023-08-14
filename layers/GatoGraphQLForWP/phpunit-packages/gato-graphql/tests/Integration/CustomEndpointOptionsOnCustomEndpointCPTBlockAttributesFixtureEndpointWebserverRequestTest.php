@@ -37,7 +37,7 @@ class CustomEndpointOptionsOnCustomEndpointCPTBlockAttributesFixtureEndpointWebs
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'gato-graphql/custom-endpoint-options';
+        return 'gatographql/custom-endpoint-options';
     }
 
     /**

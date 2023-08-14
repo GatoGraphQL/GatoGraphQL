@@ -23,12 +23,12 @@ trait CommonModuleResolverTrait
         $applicableItems ??= $this->getDefaultValueApplicableItems($blockTitle);
         return $this->getSettingsInfoContent(
             sprintf(
-                \__('%s %s', 'gato-graphql'),
-                \__('This is the default value for the schema configuration.', 'gato-graphql'),
+                \__('%s %s', 'gatographql'),
+                \__('This is the default value for the schema configuration.', 'gatographql'),
                 $this->getCollapsible(
                     sprintf(
                         '<br/>%s<ul><li>%s</li></ul>',
-                        \__('It will be used whenever:', 'gato-graphql'),
+                        \__('It will be used whenever:', 'gatographql'),
                         implode(
                             '</li><li>',
                             $applicableItems
@@ -45,19 +45,19 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueApplicableItems(string $blockTitle): array
     {
         return [
-            \__('The endpoint does not have a Schema Configuration assigned to it', 'gato-graphql'),
-            \__('The endpoint has Schema Configuration <code>"None"</code> assigned to it', 'gato-graphql'),
+            \__('The endpoint does not have a Schema Configuration assigned to it', 'gatographql'),
+            \__('The endpoint has Schema Configuration <code>"None"</code> assigned to it', 'gatographql'),
             sprintf(
-                \__('Block <code>%s</code> has not been added to the selected Schema Configuration', 'gato-graphql'),
+                \__('Block <code>%s</code> has not been added to the selected Schema Configuration', 'gatographql'),
                 $blockTitle
             ),
-            \__('The block in the Schema Configuration has value <code>"Default"</code>', 'gato-graphql')
+            \__('The block in the Schema Configuration has value <code>"Default"</code>', 'gatographql')
         ];
     }
 
     protected function getPressCtrlToSelectMoreThanOneOptionLabel(): string
     {
-        return \__('Press <code>ctrl</code> or <code>shift</code> keys to select more than one.', 'gato-graphql');
+        return \__('Press <code>ctrl</code> or <code>shift</code> keys to select more than one.', 'gatographql');
     }
 
     protected function getSettingsInfoContent(string $content): string

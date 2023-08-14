@@ -27,13 +27,13 @@
 
 <channel>
 	<title>Gato GraphQL</title>
-	<link>https://gato-graphql.lndo.site</link>
+	<link>https://gatographql.lndo.site</link>
 	<description>Just another WordPress site</description>
 	<pubDate>Thu, 26 May 2022 12:42:55 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
-	<wp:base_site_url>https://gato-graphql.lndo.site</wp:base_site_url>
-	<wp:base_blog_url>https://gato-graphql.lndo.site</wp:base_blog_url>
+	<wp:base_site_url>https://gatographql.lndo.site</wp:base_site_url>
+	<wp:base_blog_url>https://gatographql.lndo.site</wp:base_blog_url>
 
 		<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[blogger]]></wp:author_login><wp:author_email><![CDATA[blogger@test.com]]></wp:author_email><wp:author_display_name><![CDATA[Blogger Davenport]]></wp:author_display_name><wp:author_first_name><![CDATA[Blogger]]></wp:author_first_name><wp:author_last_name><![CDATA[Davenport]]></wp:author_last_name></wp:author>
 	<wp:author><wp:author_id>3</wp:author_id><wp:author_login><![CDATA[subscriber]]></wp:author_login><wp:author_email><![CDATA[subscriber@test.com]]></wp:author_email><wp:author_display_name><![CDATA[Subscriber Bennett]]></wp:author_display_name><wp:author_first_name><![CDATA[Subscriber]]></wp:author_first_name><wp:author_last_name><![CDATA[Bennett]]></wp:author_last_name></wp:author>
@@ -176,18 +176,18 @@
 
 		<item>
 		<title><![CDATA[Home posts widget]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/website/home-posts-widget/</link>
+		<link>https://gatographql.lndo.site/graphql-query/website/home-posts-widget/</link>
 		<pubDate>Tue, 05 Jan 2021 02:10:47 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=5</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=5</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(\n    pagination: { limit: $limit },\n    sort: { by: ID, order: ASC }\n  ) {\n    id\n    slug\n    title\n    author {\n      id\n      username\n      slug\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(\n    pagination: { limit: $limit },\n    sort: { by: ID, order: ASC }\n  ) {\n    id\n    slug\n    title\n    author {\n      id\n      username\n      slug\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":-2} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>5</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-05 02:10:47]]></wp:post_date>
@@ -208,18 +208,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Home user widget]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/website/home-user-widget/</link>
+		<link>https://gatographql.lndo.site/graphql-query/website/home-user-widget/</link>
 		<pubDate>Tue, 28 Jul 2020 11:05:44 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">http://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=8</guid>
+		<guid isPermaLink="false">http://gatographql.lndo.site/?post_type=graphql-query&#038;p=8</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query MyQuery($limit: Int) {\n  users(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    displayName\n    websiteURL\n    email\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query MyQuery($limit: Int) {\n  users(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    displayName\n    websiteURL\n    email\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":-2} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>12</wp:post_id>
 		<wp:post_date><![CDATA[2020-07-28 11:05:44]]></wp:post_date>
@@ -244,18 +244,18 @@
 							</item>
 					<item>
 		<title><![CDATA[Home tag widget]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/website/home-tag-widget/</link>
+		<link>https://gatographql.lndo.site/graphql-query/website/home-tag-widget/</link>
 		<pubDate>Sat, 12 Dec 2020 04:27:17 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=44</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=44</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query MyQuery($limit: Int = 5) {\n  postTags(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    name\n  }\n}\n"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query MyQuery($limit: Int = 5) {\n  postTags(pagination: {\n    limit: $limit\n  }) {\n    id\n    slug\n    name\n  }\n}\n"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":-2} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[Data for the "tags" widget for the homepage]]></excerpt:encoded>
 		<wp:post_id>44</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:27:17]]></wp:post_date>
@@ -280,10 +280,10 @@
 							</item>
 					<item>
 		<title><![CDATA[Wildcard schema config]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/wildcard-schema-config/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/wildcard-schema-config/</link>
 		<pubDate>Thu, 21 Apr 2022 06:26:40 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=270</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=270</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -304,18 +304,18 @@
 														</item>
 					<item>
 		<title><![CDATA[With grandparent]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/website/home-tag-widget/with-grandparent/</link>
+		<link>https://gatographql.lndo.site/graphql-query/website/home-tag-widget/with-grandparent/</link>
 		<pubDate>Sat, 12 Dec 2021 06:27:17 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=46</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=46</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":270} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":270} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>46</wp:post_id>
 		<wp:post_date><![CDATA[2021-12-12 06:27:17]]></wp:post_date>
@@ -336,18 +336,18 @@
 						</item>
 					<item>
 		<title><![CDATA[Latest posts for mobile app]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/latest-posts-for-mobile-app/</link>
+		<link>https://gatographql.lndo.site/graphql-query/latest-posts-for-mobile-app/</link>
 		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=65</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=65</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(\n    pagination: { limit: $limit },\n    sort: { by: ID, order: ASC }\n  ) {\n    date\n    excerpt\n    slug\n    title\n    tags {\n      name\n    }\n    author {\n      displayName\n      slug\n      id\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query MyQuery($limit: Int) {\n  posts(\n    pagination: { limit: $limit },\n    sort: { by: ID, order: ASC }\n  ) {\n    date\n    excerpt\n    slug\n    title\n    tags {\n      name\n    }\n    author {\n      displayName\n      slug\n      id\n    }\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":193} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>65</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
@@ -372,18 +372,18 @@
 							</item>
 					<item>
 		<title><![CDATA[Mobile app]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/mobile-app/</link>
+		<link>https://gatographql.lndo.site/graphql/mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 06:55:24 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=176</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=176</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":193} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>176</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 06:55:24]]></wp:post_date>
@@ -403,18 +403,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Website]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/website/</link>
+		<link>https://gatographql.lndo.site/graphql/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:04:56 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=196</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=196</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":191} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>196</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:04:56]]></wp:post_date>
@@ -434,18 +434,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Back-end (for DEV)]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/back-end-for-dev/</link>
+		<link>https://gatographql.lndo.site/graphql/back-end-for-dev/</link>
 		<pubDate>Thu, 07 Jan 2021 07:05:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=198</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=198</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>198</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:05:20]]></wp:post_date>
@@ -466,18 +466,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Website]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/website/</link>
+		<link>https://gatographql.lndo.site/graphql-query/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:06:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=200</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=200</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":191} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options {"isEnabled":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"isEnabled":false} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[Group containing persisted queries for the website, applying an overarching schema configuration]]></excerpt:encoded>
 		<wp:post_id>200</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:06:20]]></wp:post_date>
@@ -496,18 +496,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Customers]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/customers/</link>
+		<link>https://gatographql.lndo.site/graphql/customers/</link>
 		<pubDate>Tue, 19 Apr 2022 06:58:09 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=227</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=227</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options {"isEnabled":false} /-->
+<!-- wp:gatographql/custom-endpoint-options {"isEnabled":false} /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[Group containing all our customers, with a top-level schema configuration]]></excerpt:encoded>
 		<wp:post_id>227</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 06:58:09]]></wp:post_date>
@@ -530,18 +530,18 @@
 							</item>
 					<item>
 		<title><![CDATA[Pengüin Books]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/customers/penguin-books/</link>
+		<link>https://gatographql.lndo.site/graphql/customers/penguin-books/</link>
 		<pubDate>Tue, 19 Apr 2022 06:59:30 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=229</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=229</guid>
 		<description></description>
-		<content:encoded><![CDATA[<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":592} /-->
+		<content:encoded><![CDATA[<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":592} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql {"isEnabled":false} /-->
+<!-- wp:gatographql/endpoint-graphiql {"isEnabled":false} /-->
 
-<!-- wp:gato-graphql/endpoint-voyager {"isEnabled":false} /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager {"isEnabled":false} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>229</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 06:59:30]]></wp:post_date>
@@ -562,18 +562,18 @@
 														</item>
 					<item>
 		<title><![CDATA[User account]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/user-account/</link>
+		<link>https://gatographql.lndo.site/graphql-query/user-account/</link>
 		<pubDate>Tue, 19 Apr 2022 07:29:37 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=237</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=237</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query GetUserAccountData(\n  $userID: ID!\n  $limit: Int\n) {\n  user(by: {\n    id: $userID\n  }) {\n    name\n    email\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022userID\u0022: 2,\n  \u0022limit\u0022: 2\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query GetUserAccountData(\n  $userID: ID!\n  $limit: Int\n) {\n  user(by: {\n    id: $userID\n  }) {\n    name\n    email\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022userID\u0022: 2,\n  \u0022limit\u0022: 2\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration /-->
+<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>237</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 07:29:37]]></wp:post_date>
@@ -598,18 +598,18 @@
 							</item>
 					<item>
 		<title><![CDATA[Full data]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/user-account/full-data/</link>
+		<link>https://gatographql.lndo.site/graphql-query/user-account/full-data/</link>
 		<pubDate>Tue, 19 Apr 2022 07:31:42 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=240</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=240</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"variables":"{\n  \u0022limit\u0022: 5\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration /-->
+<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy {"inheritQuery":true} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>240</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-19 07:31:42]]></wp:post_date>
@@ -630,18 +630,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Unrestricted schema]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/unrestricted-schema/</link>
+		<link>https://gatographql.lndo.site/graphql/unrestricted-schema/</link>
 		<pubDate>Fri, 06 May 2022 10:22:48 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=306</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=306</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":304} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":304} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>306</wp:post_id>
 		<wp:post_date><![CDATA[2022-05-06 10:22:48]]></wp:post_date>
@@ -662,18 +662,18 @@
 														</item>
 														<item>
 		<title><![CDATA[Draft custom endpoint]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/draft-custom-endpoint/</link>
+		<link>https://gatographql.lndo.site/graphql/draft-custom-endpoint/</link>
 		<pubDate>Fri, 06 May 2022 10:22:48 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=308</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=308</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":304} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":304} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>308</wp:post_id>
 		<wp:post_date><![CDATA[2022-05-06 10:22:48]]></wp:post_date>
@@ -692,18 +692,18 @@
 														</item>
 														<item>
 		<title><![CDATA[Private custom endpoint]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/private-custom-endpoint/</link>
+		<link>https://gatographql.lndo.site/graphql/private-custom-endpoint/</link>
 		<pubDate>Fri, 06 May 2022 10:22:48 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=310</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=310</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>310</wp:post_id>
 		<wp:post_date><![CDATA[2022-05-06 10:22:48]]></wp:post_date>
@@ -722,18 +722,18 @@
 														</item>
 														<item>
 		<title><![CDATA[Password-protected custom endpoint]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/password-protected-custom-endpoint/</link>
+		<link>https://gatographql.lndo.site/graphql/password-protected-custom-endpoint/</link>
 		<pubDate>Fri, 06 May 2022 10:22:48 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=312</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=312</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>312</wp:post_id>
 		<wp:post_date><![CDATA[2022-05-06 10:22:48]]></wp:post_date>
@@ -752,18 +752,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Nested mutations]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/nested-mutations/</link>
+		<link>https://gatographql.lndo.site/graphql/nested-mutations/</link>
 		<pubDate>Wed, 05 Oct 2022 06:47:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=590</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=590</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":588} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":588} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>590</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:42]]></wp:post_date>
@@ -784,18 +784,18 @@
 														</item>
 					<item>
 		<title><![CDATA[With empty schema config]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/with-empty-schema-config/</link>
+		<link>https://gatographql.lndo.site/graphql/with-empty-schema-config/</link>
 		<pubDate>Wed, 05 Oct 2022 06:47:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=596</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=596</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":594} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":594} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>596</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:42]]></wp:post_date>
@@ -816,18 +816,18 @@
 														</item>
 					<item>
 		<title><![CDATA[With schema config "None"]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/with-schema-config-none/</link>
+		<link>https://gatographql.lndo.site/graphql/with-schema-config-none/</link>
 		<pubDate>Wed, 05 Oct 2022 06:47:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=598</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=598</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":-1} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":-1} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>598</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:42]]></wp:post_date>
@@ -848,12 +848,12 @@
 														</item>
 					<item>
 		<title><![CDATA[Non-payloadable mutations]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/non-payloadable-mutations/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/non-payloadable-mutations/</link>
 		<pubDate>Wed, 05 Oct 2022 06:47:18 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=600</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=600</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->]]></content:encoded>
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>600</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:18]]></wp:post_date>
@@ -872,18 +872,18 @@
 														</item>
 					<item>
 		<title><![CDATA[Non-payloadable mutations]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/non-payloadable-mutations/</link>
+		<link>https://gatographql.lndo.site/graphql/non-payloadable-mutations/</link>
 		<pubDate>Wed, 05 Oct 2022 06:47:42 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=590</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=590</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":600} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":600} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>602</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:42]]></wp:post_date>
@@ -904,10 +904,10 @@
 														</item>
 														<item>
 		<title><![CDATA[Hello world!]]></title>
-		<link>https://gato-graphql.lndo.site/hello-world/</link>
+		<link>https://gatographql.lndo.site/hello-world/</link>
 		<pubDate>Sun, 17 Apr 2020 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=1</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
@@ -931,10 +931,10 @@
 						</item>
 					<item>
 		<title><![CDATA[Sample Page]]></title>
-		<link>https://gato-graphql.lndo.site/sample-page/</link>
+		<link>https://gatographql.lndo.site/sample-page/</link>
 		<pubDate>Sun, 17 Apr 2020 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?page_id=2</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=2</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:</p>
@@ -953,7 +953,7 @@
 <!-- /wp:quote -->
 
 <!-- wp:paragraph -->
-<p>As a new WordPress user, you should go to <a href="https://gato-graphql.lndo.site/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
+<p>As a new WordPress user, you should go to <a href="https://gatographql.lndo.site/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>2</wp:post_id>
@@ -977,12 +977,12 @@
 							</item>
 					<item>
 		<title><![CDATA[Privacy Policy]]></title>
-		<link>https://gato-graphql.lndo.site/?page_id=3</link>
+		<link>https://gatographql.lndo.site/?page_id=3</link>
 		<pubDate>Sun, 17 Apr 2020 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?page_id=3</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=3</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:heading --><h2>Who we are</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Our website address is: https://gato-graphql.lndo.site.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Comments</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Media</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Cookies</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Embedded content from other websites</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Who we share your data with</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>How long we retain your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>What rights you have over your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Where we send your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p><!-- /wp:paragraph -->]]></content:encoded>
+		<content:encoded><![CDATA[<!-- wp:heading --><h2>Who we are</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Our website address is: https://gatographql.lndo.site.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Comments</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Media</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Cookies</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you visit our login page, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Embedded content from other websites</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Who we share your data with</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you request a password reset, your IP address will be included in the reset email.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>How long we retain your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue.</p><!-- /wp:paragraph --><!-- wp:paragraph --><p>For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>What rights you have over your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes.</p><!-- /wp:paragraph --><!-- wp:heading --><h2>Where we send your data</h2><!-- /wp:heading --><!-- wp:paragraph --><p><strong class="privacy-policy-tutorial">Suggested text: </strong>Visitor comments may be checked through an automated spam detection service.</p><!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>3</wp:post_id>
 		<wp:post_date><![CDATA[2020-04-17 13:06:58]]></wp:post_date>
@@ -1005,10 +1005,10 @@
 							</item>
 					<item>
 		<title><![CDATA[Another Page]]></title>
-		<link>https://gato-graphql.lndo.site/sample-page/</link>
+		<link>https://gatographql.lndo.site/sample-page/</link>
 		<pubDate>Sun, 17 Aug 2020 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?page_id=666</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=666</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:</p>
@@ -1027,7 +1027,7 @@
 <!-- /wp:quote -->
 
 <!-- wp:paragraph -->
-<p>As a new WordPress user, you should go to <a href="https://gato-graphql.lndo.site/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
+<p>As a new WordPress user, you should go to <a href="https://gatographql.lndo.site/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>666</wp:post_id>
@@ -1051,10 +1051,10 @@
 							</item>
 					<item>
 		<title><![CDATA[Released v0.6, check it out]]></title>
-		<link>https://gato-graphql.lndo.site/released-v0-6-check-it-out/</link>
+		<link>https://gatographql.lndo.site/released-v0-6-check-it-out/</link>
 		<pubDate>Sat, 12 Dec 2020 03:56:13 +0000</pubDate>
 		<dc:creator><![CDATA[subscriber]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=13</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=13</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>
@@ -1101,7 +1101,7 @@
 			<wp:comment_id>2</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 03:56:32]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 03:56:32]]></wp:comment_date_gmt>
@@ -1115,7 +1115,7 @@
 			<wp:comment_id>3</wp:comment_id>
 			<wp:comment_author><![CDATA[contributor]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[contributor@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 03:57:14]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 03:57:14]]></wp:comment_date_gmt>
@@ -1128,10 +1128,10 @@
 					</item>
 					<item>
 		<title><![CDATA[Working on flat chain syntax next]]></title>
-		<link>https://gato-graphql.lndo.site/working-on-flat-chain-syntax-next/</link>
+		<link>https://gatographql.lndo.site/working-on-flat-chain-syntax-next/</link>
 		<pubDate>Sat, 12 Dec 2020 03:59:07 +0000</pubDate>
 		<dc:creator><![CDATA[contributor]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=16</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=16</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Image Block (Wide)</h2>
@@ -1193,10 +1193,10 @@
 							</item>
 					<item>
 		<title><![CDATA[Nested mutations are a must have]]></title>
-		<link>https://gato-graphql.lndo.site/nested-mutations-are-a-must-have/</link>
+		<link>https://gatographql.lndo.site/nested-mutations-are-a-must-have/</link>
 		<pubDate>Sat, 12 Dec 2020 04:00:36 +0000</pubDate>
 		<dc:creator><![CDATA[editor]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=19</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=19</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:gallery {"linkTo":"none","className":"alignnone"} -->
 <figure class="wp-block-gallery columns-3 is-cropped alignnone"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/zd7Ehu+" alt="" data-id="1706" class="wp-image-1706"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/jXLtzZ+" alt="" data-id="1705" class="wp-image-1705"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/VhP9ud+" alt="" data-id="1704" class="wp-image-1704"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/HB0qXg+" alt="" data-id="1703" class="wp-image-1703"/></figure></li><li class="blocks-gallery-item"><figure><img src="https://d.pr/i/5cHfcd+" alt="" data-id="1699" class="wp-image-1699"/></figure></li></ul></figure>
@@ -1257,7 +1257,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":361,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg" alt="" class="wp-image-361"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg" alt="" class="wp-image-361"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -1267,7 +1267,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":362,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="" class="wp-image-362"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="" class="wp-image-362"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
@@ -1303,10 +1303,10 @@
 							</item>
 					<item>
 		<title><![CDATA[Customize the schema for each client]]></title>
-		<link>https://gato-graphql.lndo.site/customize-the-schema-for-each-client/</link>
+		<link>https://gatographql.lndo.site/customize-the-schema-for-each-client/</link>
 		<pubDate>Sat, 12 Dec 2020 04:02:18 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=21</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=21</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Text Column Block</h2>
@@ -1396,7 +1396,7 @@
 			<wp:comment_id>4</wp:comment_id>
 			<wp:comment_author><![CDATA[editor]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[editor@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:02:44]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:02:44]]></wp:comment_date_gmt>
@@ -1410,7 +1410,7 @@
 			<wp:comment_id>5</wp:comment_id>
 			<wp:comment_author><![CDATA[author]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[author@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:08]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:08]]></wp:comment_date_gmt>
@@ -1424,7 +1424,7 @@
 			<wp:comment_id>6</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:18]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:18]]></wp:comment_date_gmt>
@@ -1438,7 +1438,7 @@
 			<wp:comment_id>7</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:35]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:35]]></wp:comment_date_gmt>
@@ -1452,7 +1452,7 @@
 			<wp:comment_id>8</wp:comment_id>
 			<wp:comment_author><![CDATA[subscriber]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[subscriber@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:03:43]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:03:43]]></wp:comment_date_gmt>
@@ -1465,10 +1465,10 @@
 					</item>
 					<item>
 		<title><![CDATA[GraphQL or REST? Why not both?]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-or-rest-you-can-have-both/</link>
+		<link>https://gatographql.lndo.site/graphql-or-rest-you-can-have-both/</link>
 		<pubDate>Sat, 12 Dec 2020 04:04:54 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=23</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=23</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Audio Block</h2>
@@ -1539,10 +1539,10 @@ video/mp4
 							</item>
 					<item>
 		<title><![CDATA[Public or Private API mode, for extra security]]></title>
-		<link>https://gato-graphql.lndo.site/public-or-private-api-mode-for-extra-security/</link>
+		<link>https://gatographql.lndo.site/public-or-private-api-mode-for-extra-security/</link>
 		<pubDate>Sat, 12 Dec 2020 04:06:52 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=25</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=25</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Verse Block</h2>
@@ -1612,7 +1612,7 @@ video/mp4
 			<wp:comment_id>9</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:07:13]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:13]]></wp:comment_date_gmt>
@@ -1626,7 +1626,7 @@ video/mp4
 			<wp:comment_id>10</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:07:26]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:26]]></wp:comment_date_gmt>
@@ -1640,7 +1640,7 @@ video/mp4
 			<wp:comment_id>12</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:07:36]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:36]]></wp:comment_date_gmt>
@@ -1654,7 +1654,7 @@ video/mp4
 			<wp:comment_id>14</wp:comment_id>
 			<wp:comment_author><![CDATA[blogger]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[blogger@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:07:46]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:07:46]]></wp:comment_date_gmt>
@@ -1667,10 +1667,10 @@ video/mp4
 					</item>
 					<item>
 		<title><![CDATA[HTTP caching improves performance]]></title>
-		<link>https://gato-graphql.lndo.site/http-caching-improves-performance/</link>
+		<link>https://gatographql.lndo.site/http-caching-improves-performance/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[author]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=28</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=28</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Categories Block</h2>
@@ -1754,7 +1754,7 @@ https://wordpress.org/about/
 			<wp:comment_id>11</wp:comment_id>
 			<wp:comment_author><![CDATA[subscriber]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[subscriber@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:09:36]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:09:36]]></wp:comment_date_gmt>
@@ -1767,10 +1767,10 @@ https://wordpress.org/about/
 					</item>
 					<item>
 		<title><![CDATA[Trashed Post]]></title>
-		<link>https://gato-graphql.lndo.site/trashed-post/</link>
+		<link>https://gatographql.lndo.site/trashed-post/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[author]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=30</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=30</guid>
 		<description></description>
 		<content:encoded><![CDATA[Trashed post for testing comments with Integration Tests]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1801,7 +1801,7 @@ https://wordpress.org/about/
 			<wp:comment_id>41</wp:comment_id>
 			<wp:comment_author><![CDATA[subscriber]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[subscriber@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.2]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:09:36]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:09:36]]></wp:comment_date_gmt>
@@ -1813,10 +1813,10 @@ https://wordpress.org/about/
 							</wp:comment>
 					</item><item>
 		<title><![CDATA[Trashed Page]]></title>
-		<link>https://gato-graphql.lndo.site/trashed-page/</link>
+		<link>https://gatographql.lndo.site/trashed-page/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[editor]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=34</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=34</guid>
 		<description></description>
 		<content:encoded><![CDATA[Trashed page for testing comments with Integration Tests]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1845,7 +1845,7 @@ https://wordpress.org/about/
 			<wp:comment_id>45</wp:comment_id>
 			<wp:comment_author><![CDATA[author]]></wp:comment_author>
 			<wp:comment_author_email><![CDATA[author@test.com]]></wp:comment_author_email>
-			<wp:comment_author_url>http://gato-graphql.lndo.site</wp:comment_author_url>
+			<wp:comment_author_url>http://gatographql.lndo.site</wp:comment_author_url>
 			<wp:comment_author_IP><![CDATA[172.20.0.100]]></wp:comment_author_IP>
 			<wp:comment_date><![CDATA[2020-12-12 04:09:36]]></wp:comment_date>
 			<wp:comment_date_gmt><![CDATA[2020-12-12 04:09:36]]></wp:comment_date_gmt>
@@ -1858,40 +1858,40 @@ https://wordpress.org/about/
 					</item>
 					<item>
 		<title><![CDATA[Website]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/website/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/website/</link>
 		<pubDate>Thu, 07 Jan 2021 07:03:18 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=191</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=191</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
 
-<!-- wp:gato-graphql/schema-config-mutation-scheme /-->
+<!-- wp:gatographql/schema-config-mutation-scheme /-->
 
-<!-- wp:gato-graphql/schema-config-namespacing /-->
+<!-- wp:gatographql/schema-config-namespacing /-->
 
-<!-- wp:gato-graphql/schema-config-self-fields /-->
+<!-- wp:gatographql/schema-config-self-fields /-->
 
-<!-- wp:gato-graphql/schema-config-payload-types-for-mutations /-->
+<!-- wp:gatographql/schema-config-payload-types-for-mutations /-->
 
-<!-- wp:gato-graphql/schema-config-schema-customposts /-->
+<!-- wp:gatographql/schema-config-schema-customposts /-->
 
-<!-- wp:gato-graphql/schema-config-schema-tags /-->
+<!-- wp:gatographql/schema-config-schema-tags /-->
 
-<!-- wp:gato-graphql/schema-config-schema-categories /-->
+<!-- wp:gatographql/schema-config-schema-categories /-->
 
-<!-- wp:gato-graphql/schema-config-schema-settings /-->
+<!-- wp:gatographql/schema-config-schema-settings /-->
 
-<!-- wp:gato-graphql/schema-config-schema-custompost-meta /-->
+<!-- wp:gatographql/schema-config-schema-custompost-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-user-meta /-->
+<!-- wp:gatographql/schema-config-schema-user-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-comment-meta /-->
+<!-- wp:gatographql/schema-config-schema-comment-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
+<!-- wp:gatographql/schema-config-schema-taxonomy-meta /-->
 
-<!-- wp:gato-graphql/schema-config-multifield-directives /-->
+<!-- wp:gatographql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql/schema-config-composable-directives /-->]]></content:encoded>
+<!-- wp:gatographql/schema-config-composable-directives /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>191</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:03:18]]></wp:post_date>
@@ -1910,40 +1910,40 @@ https://wordpress.org/about/
 														</item>
 					<item>
 		<title><![CDATA[Mobile app]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/mobile-app/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/mobile-app/</link>
 		<pubDate>Thu, 07 Jan 2021 07:03:47 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=193</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-expose-sensitive-data /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data /-->
 
-<!-- wp:gato-graphql/schema-config-mutation-scheme /-->
+<!-- wp:gatographql/schema-config-mutation-scheme /-->
 
-<!-- wp:gato-graphql/schema-config-namespacing /-->
+<!-- wp:gatographql/schema-config-namespacing /-->
 
-<!-- wp:gato-graphql/schema-config-self-fields /-->
+<!-- wp:gatographql/schema-config-self-fields /-->
 
-<!-- wp:gato-graphql/schema-config-payload-types-for-mutations /-->
+<!-- wp:gatographql/schema-config-payload-types-for-mutations /-->
 
-<!-- wp:gato-graphql/schema-config-schema-customposts /-->
+<!-- wp:gatographql/schema-config-schema-customposts /-->
 
-<!-- wp:gato-graphql/schema-config-schema-tags /-->
+<!-- wp:gatographql/schema-config-schema-tags /-->
 
-<!-- wp:gato-graphql/schema-config-schema-categories /-->
+<!-- wp:gatographql/schema-config-schema-categories /-->
 
-<!-- wp:gato-graphql/schema-config-schema-settings /-->
+<!-- wp:gatographql/schema-config-schema-settings /-->
 
-<!-- wp:gato-graphql/schema-config-schema-custompost-meta /-->
+<!-- wp:gatographql/schema-config-schema-custompost-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-user-meta /-->
+<!-- wp:gatographql/schema-config-schema-user-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-comment-meta /-->
+<!-- wp:gatographql/schema-config-schema-comment-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
+<!-- wp:gatographql/schema-config-schema-taxonomy-meta /-->
 
-<!-- wp:gato-graphql/schema-config-multifield-directives /-->
+<!-- wp:gatographql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql/schema-config-composable-directives /-->]]></content:encoded>
+<!-- wp:gatographql/schema-config-composable-directives /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>193</wp:post_id>
 		<wp:post_date><![CDATA[2021-01-07 07:03:47]]></wp:post_date>
@@ -1962,10 +1962,10 @@ https://wordpress.org/about/
 														</item>
 					<item>
 		<title><![CDATA[Custom Styles]]></title>
-		<link>https://gato-graphql.lndo.site/wp-global-styles-twentytwentytwo/</link>
+		<link>https://gatographql.lndo.site/wp-global-styles-twentytwentytwo/</link>
 		<pubDate>Mon, 18 Apr 2022 06:14:12 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/wp-global-styles-twentytwentytwo/</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-global-styles-twentytwentytwo/</guid>
 		<description></description>
 		<content:encoded><![CDATA[{"version": 2, "isGlobalStylesUserThemeJSON": true }]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1987,18 +1987,18 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Logged-in user account]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/logged-in-user-account/</link>
+		<link>https://gatographql.lndo.site/graphql-query/logged-in-user-account/</link>
 		<pubDate>Thu, 21 Apr 2022 08:15:00 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=272</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=272</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query GetUserAccountData(\n  $limit: Int\n) {\n  me {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query GetUserAccountData(\n  $limit: Int\n) {\n  me {\n    name\n    posts(pagination: {\n      limit: $limit\n    }) {\n      id\n      title\n    }\n  }\n}","variables":"{\n  \u0022limit\u0022: 2\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration /-->
+<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>272</wp:post_id>
 		<wp:post_date><![CDATA[2022-04-21 08:15:00]]></wp:post_date>
@@ -2019,18 +2019,18 @@ https://wordpress.org/about/
 														</item>
 														<item>
 		<title><![CDATA[Pending persisted query]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/pending-persisted-query/</link>
+		<link>https://gatographql.lndo.site/graphql-query/pending-persisted-query/</link>
 		<pubDate>Sat, 12 Dec 2020 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=274</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=274</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"{ id }"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"{ id }"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":193} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>274</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:51:20]]></wp:post_date>
@@ -2053,18 +2053,18 @@ https://wordpress.org/about/
 							</item>
 							<item>
 		<title><![CDATA[Comments from this month]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/comments-from-this-month/</link>
+		<link>https://gatographql.lndo.site/graphql-query/comments-from-this-month/</link>
 		<pubDate>Sat, 12 Dec 2019 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=276</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=276</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"{\n  comments(\n    filter: { dateQuery: { month: 12 } }\n    sort: { by: ID, order: ASC }\n    pagination: { limit: 3 }\n  ) {\n    id\n    date\n    content\n    customPostID\n  }\n}\n"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"{\n  comments(\n    filter: { dateQuery: { month: 12 } }\n    sort: { by: ID, order: ASC }\n    pagination: { limit: 3 }\n  ) {\n    id\n    date\n    content\n    customPostID\n  }\n}\n"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":193} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":193} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>276</wp:post_id>
 		<wp:post_date><![CDATA[2019-12-12 04:51:20]]></wp:post_date>
@@ -2084,18 +2084,18 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Posts created this month]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/posts-created-this-month/</link>
+		<link>https://gatographql.lndo.site/graphql-query/posts-created-this-month/</link>
 		<pubDate>Sat, 12 Nov 2019 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=278</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=278</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query GetPosts($limit: Int!) {\n  posts(\n    filter: { dateQuery: { month: 12 } }\n    sort: { by: ID, order: ASC }\n    pagination: { limit: $limit }\n  ) {\n    id\n    title\n    date\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query GetPosts($limit: Int!) {\n  posts(\n    filter: { dateQuery: { month: 12 } }\n    sort: { by: ID, order: ASC }\n    pagination: { limit: $limit }\n  ) {\n    id\n    title\n    date\n  }\n}\n","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":191} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>278</wp:post_id>
 		<wp:post_date><![CDATA[2019-11-12 04:51:20]]></wp:post_date>
@@ -2116,18 +2116,18 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Customer Data]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/customer-data/</link>
+		<link>https://gatographql.lndo.site/graphql-query/customer-data/</link>
 		<pubDate>Sat, 12 Oct 2019 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=280</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=280</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":191} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options {"isEnabled":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"isEnabled":false} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>280</wp:post_id>
 		<wp:post_date><![CDATA[2019-10-12 04:51:20]]></wp:post_date>
@@ -2148,18 +2148,18 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Users registered this month]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/customer-data/users-registered-this-month/</link>
+		<link>https://gatographql.lndo.site/graphql-query/customer-data/users-registered-this-month/</link>
 		<pubDate>Sat, 12 Sep 2019 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=282</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=282</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"{\n  users(\n    filter: {\n      roles: [\"subscriber\"]\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    name\n  }\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"{\n  users(\n    filter: {\n      roles: [\"subscriber\"]\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: 3\n    }\n  ) {\n    id\n    name\n  }\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":-2} /-->
+<!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>282</wp:post_id>
 		<wp:post_date><![CDATA[2019-09-12 04:51:20]]></wp:post_date>
@@ -2181,18 +2181,18 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Trending Tags]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-query/trending-tags/</link>
+		<link>https://gatographql.lndo.site/graphql-query/trending-tags/</link>
 		<pubDate>Sat, 12 Aug 2019 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=284</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=284</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"query GetTags($limit: Int) {\n  postTags(\n    filter: {\n      hideEmpty: true\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: $limit\n    }\n  ) {\n    id\n    name\n  }\n}","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"query GetTags($limit: Int) {\n  postTags(\n    filter: {\n      hideEmpty: true\n    },\n    sort: {\n      by: ID,\n      order: ASC\n    },\n    pagination: {\n      limit: $limit\n    }\n  ) {\n    id\n    name\n  }\n}","variables":"{\n  \u0022limit\u0022: 3\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration /-->
+<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>284</wp:post_id>
 		<wp:post_date><![CDATA[2019-08-12 04:51:20]]></wp:post_date>
@@ -2214,18 +2214,18 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Draft persisted query]]></title>
-		<link>https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=286</link>
+		<link>https://gatographql.lndo.site/?post_type=graphql-query&#038;p=286</link>
 		<pubDate>Sat, 12 Jul 2019 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=286</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=286</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"{\n  id\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"{\n  id\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration /-->
+<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>286</wp:post_id>
 		<wp:post_date><![CDATA[2019-07-12 04:51:20]]></wp:post_date>
@@ -2247,18 +2247,18 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Password-protected persisted query]]></title>
-		<link>https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=288</link>
+		<link>https://gatographql.lndo.site/?post_type=graphql-query&#038;p=288</link>
 		<pubDate>Sat, 12 Jul 2019 04:51:20 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-query&#038;p=288</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-query&#038;p=288</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/graphiql {"query":"{\n  id\n}"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/graphiql {"query":"{\n  id\n}"} /-->
 
-<!-- wp:gato-graphql/schema-configuration /-->
+<!-- wp:gatographql/schema-configuration /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-options /-->
+<!-- wp:gatographql/persisted-query-endpoint-options /-->
 
-<!-- wp:gato-graphql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
+<!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>288</wp:post_id>
 		<wp:post_date><![CDATA[2019-07-12 04:51:20]]></wp:post_date>
@@ -2280,40 +2280,40 @@ https://wordpress.org/about/
 						</item>
 					<item>
 		<title><![CDATA[Unrestricted schema]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/unrestricted-schema/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/unrestricted-schema/</link>
 		<pubDate>Fri, 06 May 2022 10:21:47 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=304</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=304</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-expose-sensitive-data {"enabledConst":"enabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data {"enabledConst":"enabled"} /-->
 
-<!-- wp:gato-graphql/schema-config-mutation-scheme /-->
+<!-- wp:gatographql/schema-config-mutation-scheme /-->
 
-<!-- wp:gato-graphql/schema-config-namespacing /-->
+<!-- wp:gatographql/schema-config-namespacing /-->
 
-<!-- wp:gato-graphql/schema-config-self-fields /-->
+<!-- wp:gatographql/schema-config-self-fields /-->
 
-<!-- wp:gato-graphql/schema-config-payload-types-for-mutations /-->
+<!-- wp:gatographql/schema-config-payload-types-for-mutations /-->
 
-<!-- wp:gato-graphql/schema-config-schema-customposts /-->
+<!-- wp:gatographql/schema-config-schema-customposts /-->
 
-<!-- wp:gato-graphql/schema-config-schema-tags /-->
+<!-- wp:gatographql/schema-config-schema-tags /-->
 
-<!-- wp:gato-graphql/schema-config-schema-categories /-->
+<!-- wp:gatographql/schema-config-schema-categories /-->
 
-<!-- wp:gato-graphql/schema-config-schema-settings /-->
+<!-- wp:gatographql/schema-config-schema-settings /-->
 
-<!-- wp:gato-graphql/schema-config-schema-custompost-meta /-->
+<!-- wp:gatographql/schema-config-schema-custompost-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-user-meta /-->
+<!-- wp:gatographql/schema-config-schema-user-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-comment-meta /-->
+<!-- wp:gatographql/schema-config-schema-comment-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
+<!-- wp:gatographql/schema-config-schema-taxonomy-meta /-->
 
-<!-- wp:gato-graphql/schema-config-multifield-directives /-->
+<!-- wp:gatographql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql/schema-config-composable-directives /-->]]></content:encoded>
+<!-- wp:gatographql/schema-config-composable-directives /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>304</wp:post_id>
 		<wp:post_date><![CDATA[2022-05-06 10:21:47]]></wp:post_date>
@@ -2332,10 +2332,10 @@ https://wordpress.org/about/
 														</item>
 														<item>
 		<title><![CDATA[graphql-api-header]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-api-header/</link>
+		<link>https://gatographql.lndo.site/graphql-api-header/</link>
 		<pubDate>Thu, 26 May 2022 05:13:32 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public.jpg</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public.jpg</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2365,40 +2365,40 @@ https://wordpress.org/about/
 							</item>
 					<item>
 		<title><![CDATA[Nested mutations]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/nested-mutations/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/nested-mutations/</link>
 		<pubDate>Wed, 05 Oct 2022 06:47:18 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=588</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=588</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-expose-sensitive-data /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data /-->
 
-<!-- wp:gato-graphql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
+<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
 
-<!-- wp:gato-graphql/schema-config-namespacing /-->
+<!-- wp:gatographql/schema-config-namespacing /-->
 
-<!-- wp:gato-graphql/schema-config-self-fields /-->
+<!-- wp:gatographql/schema-config-self-fields /-->
 
-<!-- wp:gato-graphql/schema-config-payload-types-for-mutations /-->
+<!-- wp:gatographql/schema-config-payload-types-for-mutations /-->
 
-<!-- wp:gato-graphql/schema-config-schema-customposts /-->
+<!-- wp:gatographql/schema-config-schema-customposts /-->
 
-<!-- wp:gato-graphql/schema-config-schema-tags /-->
+<!-- wp:gatographql/schema-config-schema-tags /-->
 
-<!-- wp:gato-graphql/schema-config-schema-categories /-->
+<!-- wp:gatographql/schema-config-schema-categories /-->
 
-<!-- wp:gato-graphql/schema-config-schema-settings /-->
+<!-- wp:gatographql/schema-config-schema-settings /-->
 
-<!-- wp:gato-graphql/schema-config-schema-custompost-meta /-->
+<!-- wp:gatographql/schema-config-schema-custompost-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-user-meta /-->
+<!-- wp:gatographql/schema-config-schema-user-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-comment-meta /-->
+<!-- wp:gatographql/schema-config-schema-comment-meta /-->
 
-<!-- wp:gato-graphql/schema-config-schema-taxonomy-meta /-->
+<!-- wp:gatographql/schema-config-schema-taxonomy-meta /-->
 
-<!-- wp:gato-graphql/schema-config-multifield-directives /-->
+<!-- wp:gatographql/schema-config-multifield-directives /-->
 
-<!-- wp:gato-graphql/schema-config-composable-directives /-->]]></content:encoded>
+<!-- wp:gatographql/schema-config-composable-directives /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>588</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:18]]></wp:post_date>
@@ -2416,10 +2416,10 @@ https://wordpress.org/about/
 		<wp:is_sticky>0</wp:is_sticky>
 														</item><item>
 		<title><![CDATA[graphql-api-search-results]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-api-search-results/</link>
+		<link>https://gatographql.lndo.site/graphql-api-search-results/</link>
 		<pubDate>Thu, 26 May 2022 05:13:35 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema.png</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema.png</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2449,10 +2449,10 @@ https://wordpress.org/about/
 							</item>
 					<item>
 		<title><![CDATA[LICENSE]]></title>
-		<link>https://gato-graphql.lndo.site/license/</link>
+		<link>https://gatographql.lndo.site/license/</link>
 		<pubDate>Thu, 26 May 2022 13:01:16 +0000</pubDate>
 		<dc:creator><![CDATA[author]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/wp-content/uploads/2022/05/LICENSE.txt</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/LICENSE.txt</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2482,10 +2482,10 @@ https://wordpress.org/about/
 							</item>
 					<item>
 		<title><![CDATA[Funny-Dog]]></title>
-		<link>https://gato-graphql.lndo.site/single-post-with-a-lot-of-blocks/funny-dog/</link>
+		<link>https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/funny-dog/</link>
 		<pubDate>Thu, 15 Jun 2023 04:24:00 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2515,16 +2515,16 @@ https://wordpress.org/about/
 							</item>
 					<item>
 		<title><![CDATA[Client access]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/client-access/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/client-access/</link>
 		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=592</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=592</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-expose-sensitive-data {"enabledConst":"disabled"} /-->
 
-<!-- wp:gato-graphql/schema-config-schema-customposts {"customizeConfiguration":true,"includedCustomPostTypes":["post"]} /-->
+<!-- wp:gatographql/schema-config-schema-customposts {"customizeConfiguration":true,"includedCustomPostTypes":["post"]} /-->
 
-<!-- wp:gato-graphql/schema-config-schema-custompost-meta {"customizeConfiguration":true,"entries":["/client_(.*)/"],"behavior":"allow"} /-->]]></content:encoded>
+<!-- wp:gatographql/schema-config-schema-custompost-meta {"customizeConfiguration":true,"entries":["/client_(.*)/"],"behavior":"allow"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>592</wp:post_id>
 		<wp:post_date><![CDATA[2023-03-21 05:57:33]]></wp:post_date>
@@ -2543,10 +2543,10 @@ https://wordpress.org/about/
 														</item>
 					<item>
 		<title><![CDATA[Empty schema config]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/empty-schema-config/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/empty-schema-config/</link>
 		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=594</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=594</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2567,12 +2567,12 @@ https://wordpress.org/about/
 														</item>
 					<item>
 		<title><![CDATA[With Response Headers]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/with-response-headers/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/with-response-headers/</link>
 		<pubDate>Tue, 21 Mar 2023 05:57:33 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=604</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=604</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-response-headers {"customizeConfiguration":true,"entries":["Access-Control-Allow-Origin: null","Access-Control-Allow-Headers: content-type,content-length,accept"]} /-->]]></content:encoded>
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-response-headers {"customizeConfiguration":true,"entries":["Access-Control-Allow-Origin: null","Access-Control-Allow-Headers: content-type,content-length,accept"]} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>604</wp:post_id>
 		<wp:post_date><![CDATA[2023-03-21 05:57:33]]></wp:post_date>
@@ -2591,10 +2591,10 @@ https://wordpress.org/about/
 														</item>
 					<item>
 		<title><![CDATA[Welcome to a single post full of blocks!]]></title>
-		<link>https://gato-graphql.lndo.site/single-post-with-a-lot-of-blocks/</link>
+		<link>https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/</link>
 		<pubDate>Mon, 12 Jun 2023 09:20:44 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?p=1242</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1242</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>When I look back on my past and think how much time I wasted on nothing, how much time has been lost in futilities, errors, laziness, incapacity to live; how little I appreciated it, how many times I sinned against my heart and soul-then my heart bleeds. <strong>Life is a gift, life is happiness, every minute can be an eternity of happiness</strong>. (<a href="https://www.azquotes.com/author/4085-Fyodor_Dostoevsky" target="_blank" rel="noopener">Quote by Fyodor Dostoevsky</a>)<br></p>
@@ -2638,8 +2638,8 @@ https://wordpress.org/about/
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:cover {"url":"https://gato-graphql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg","id":1080,"dimRatio":50,"isDark":false} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1080" alt="Dog not caring about anything" src="https://gato-graphql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
+<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg","id":1080,"dimRatio":50,"isDark":false} -->
+<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1080" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">See if I care</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
@@ -2678,8 +2678,8 @@ https://wordpress.org/about/
 <!-- /wp:column -->
 
 <!-- wp:column -->
-<div class="wp-block-column"><!-- wp:media-text {"mediaId":362,"mediaLink":"https://gato-graphql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
-<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gato-graphql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="In red are the entities with a transformed name" class="wp-image-362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
+<div class="wp-block-column"><!-- wp:media-text {"mediaId":362,"mediaLink":"https://gatographql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="In red are the entities with a transformed name" class="wp-image-362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
 <p>This is the schema</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:media-text --></div>
@@ -2842,18 +2842,18 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 							</item>
 					<item>
 		<title><![CDATA[Mutations: nested + return entity]]></title>
-		<link>https://gato-graphql.lndo.site/graphql/mutations-nested-return-entity/</link>
+		<link>https://gatographql.lndo.site/graphql/mutations-nested-return-entity/</link>
 		<pubDate>Fri, 07 Jul 2023 09:02:13 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-endpoint&#038;p=1224</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-endpoint&#038;p=1224</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-configuration {"schemaConfiguration":1222} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-configuration {"schemaConfiguration":1222} /-->
 
-<!-- wp:gato-graphql/custom-endpoint-options /-->
+<!-- wp:gatographql/custom-endpoint-options /-->
 
-<!-- wp:gato-graphql/endpoint-graphiql /-->
+<!-- wp:gatographql/endpoint-graphiql /-->
 
-<!-- wp:gato-graphql/endpoint-voyager /-->]]></content:encoded>
+<!-- wp:gatographql/endpoint-voyager /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1224</wp:post_id>
 		<wp:post_date><![CDATA[2023-07-07 09:02:13]]></wp:post_date>
@@ -2872,14 +2872,14 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 														</item>
 					<item>
 		<title><![CDATA[Mutations: nested + return entity]]></title>
-		<link>https://gato-graphql.lndo.site/graphql-schemaconfig/mutations-nested-return-entity/</link>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/mutations-nested-return-entity/</link>
 		<pubDate>Fri, 07 Jul 2023 08:59:59 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
-		<guid isPermaLink="false">https://gato-graphql.lndo.site/?post_type=graphql-schemaconfig&#038;p=1222</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=1222</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gato-graphql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->
 
-<!-- wp:gato-graphql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->]]></content:encoded>
+<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1222</wp:post_id>
 		<wp:post_date><![CDATA[2023-07-07 08:59:59]]></wp:post_date>

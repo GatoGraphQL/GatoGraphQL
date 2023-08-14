@@ -18,16 +18,16 @@ trait EnqueueReactMenuPageTrait
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_script(
-            'gato-graphql-react',
+            'gatographql-react',
             $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/react.production.min.js',
             array(),
             $mainPluginVersion,
             $addInFooter
         );
         \wp_enqueue_script(
-            'gato-graphql-react-dom',
+            'gatographql-react-dom',
             $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/react-dom.production.min.js',
-            array('gato-graphql-react'),
+            array('gatographql-react'),
             $mainPluginVersion,
             $addInFooter
         );

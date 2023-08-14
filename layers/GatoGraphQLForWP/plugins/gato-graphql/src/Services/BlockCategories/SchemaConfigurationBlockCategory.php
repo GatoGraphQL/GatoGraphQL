@@ -8,7 +8,7 @@ use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationC
 
 class SchemaConfigurationBlockCategory extends AbstractBlockCategory
 {
-    public final const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'gato-graphql-schema-config';
+    public final const SCHEMA_CONFIGURATION_BLOCK_CATEGORY = 'gatographql-schema-config';
 
     private ?GraphQLSchemaConfigurationCustomPostType $graphQLSchemaConfigurationCustomPostType = null;
 
@@ -51,6 +51,6 @@ class SchemaConfigurationBlockCategory extends AbstractBlockCategory
      */
     protected function getBlockCategoryTitle(): string
     {
-        return __('Schema Configuration for GraphQL', 'gato-graphql');
+        return __('Schema Configuration for GraphQL', 'gatographql');
     }
 }

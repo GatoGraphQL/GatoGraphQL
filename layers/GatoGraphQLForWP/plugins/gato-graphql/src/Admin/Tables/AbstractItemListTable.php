@@ -64,7 +64,7 @@ abstract class AbstractItemListTable extends WP_List_Table implements ItemListTa
          * Fix the issues with the WP List Table
          */
         \wp_enqueue_style(
-            'gato-graphql-wp-list-table-fix',
+            'gatographql-wp-list-table-fix',
             $mainPluginURL . 'assets/css/wp-list-table-fix.css',
             array(),
             $mainPluginVersion
@@ -79,7 +79,7 @@ abstract class AbstractItemListTable extends WP_List_Table implements ItemListTa
      */
     public function no_items()
     {
-        _e('No items found.', 'gato-graphql');
+        _e('No items found.', 'gatographql');
     }
 
     /**
@@ -95,7 +95,7 @@ abstract class AbstractItemListTable extends WP_List_Table implements ItemListTa
         return array_merge(
             parent::get_table_classes(),
             [
-                'gato-graphql-list-table',
+                'gatographql-list-table',
             ]
         );
     }

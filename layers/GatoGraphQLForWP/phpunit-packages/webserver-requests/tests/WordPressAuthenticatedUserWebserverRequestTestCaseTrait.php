@@ -19,7 +19,7 @@ trait WordPressAuthenticatedUserWebserverRequestTestCaseTrait
     /**
      * To login a user in WordPress, request the following URL by POST:
      *
-     *   curl 'https://gato-graphql.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
+     *   curl 'https://gatographql.lndo.site/wp-login.php' -i -X POST -H 'Content-Type: application/x-www-form-urlencoded' --data-raw 'log=admin&pwd=admin'
      */
     protected static function getWebserverPingURL(): string
     {

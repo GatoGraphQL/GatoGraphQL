@@ -169,11 +169,11 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
         $isExtensionOnDevelopmentMode = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion);
         if ($isTestMode && !$isExtensionOnDevelopmentMode) {
             throw new LicenseOperationNotSuccessfulException(
-                $this->__('The license is for test mode, but the extension is not on development mode', 'gato-graphql'),
+                $this->__('The license is for test mode, but the extension is not on development mode', 'gatographql'),
             );
         } elseif (!$isTestMode && $isExtensionOnDevelopmentMode) {
             throw new LicenseOperationNotSuccessfulException(
-                $this->__('The license is not for test mode, but the extension is on development mode', 'gato-graphql'),
+                $this->__('The license is not for test mode, but the extension is on development mode', 'gatographql'),
             );
         }
 

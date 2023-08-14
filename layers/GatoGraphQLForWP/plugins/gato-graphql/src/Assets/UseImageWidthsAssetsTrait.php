@@ -15,7 +15,7 @@ trait UseImageWidthsAssetsTrait
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_style(
-            'gato-graphql-image-widths',
+            'gatographql-image-widths',
             $mainPluginURL . 'assets/css/image-widths.css',
             array(),
             $mainPluginVersion

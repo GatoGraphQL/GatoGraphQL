@@ -16,7 +16,7 @@ const InfoModalButton = ( props ) => {
 		icon = "editor-help",
 		variant = "tertiary",
 		isSmall = true,
-		className = "gato-graphql-info-modal-button"
+		className = "gatographql-info-modal-button"
 	} = props;
 	const [ isOpen, setOpen ] = useState( false );
 	return (

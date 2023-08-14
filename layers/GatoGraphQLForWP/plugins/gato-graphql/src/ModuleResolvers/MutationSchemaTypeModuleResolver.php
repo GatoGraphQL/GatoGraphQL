@@ -181,17 +181,17 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_USER_STATE_MUTATIONS => \__('User State Mutations', 'gato-graphql'),
-            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Custom Post Mutations', 'gato-graphql'),
-            self::SCHEMA_PAGE_MUTATIONS => \__('Page Mutations', 'gato-graphql'),
-            self::SCHEMA_POST_MUTATIONS => \__('Post Mutations', 'gato-graphql'),
-            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'gato-graphql'),
-            self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Page Media Mutations', 'gato-graphql'),
-            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'gato-graphql'),
-            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Custom Post User Mutations', 'gato-graphql'),
-            self::SCHEMA_POST_TAG_MUTATIONS => \__('Post Tag Mutations', 'gato-graphql'),
-            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Post Category Mutations', 'gato-graphql'),
-            self::SCHEMA_COMMENT_MUTATIONS => \__('Comment Mutations', 'gato-graphql'),
+            self::SCHEMA_USER_STATE_MUTATIONS => \__('User State Mutations', 'gatographql'),
+            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Custom Post Mutations', 'gatographql'),
+            self::SCHEMA_PAGE_MUTATIONS => \__('Page Mutations', 'gatographql'),
+            self::SCHEMA_POST_MUTATIONS => \__('Post Mutations', 'gatographql'),
+            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Custom Post Media Mutations', 'gatographql'),
+            self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Page Media Mutations', 'gatographql'),
+            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'gatographql'),
+            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Custom Post User Mutations', 'gatographql'),
+            self::SCHEMA_POST_TAG_MUTATIONS => \__('Post Tag Mutations', 'gatographql'),
+            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Post Category Mutations', 'gatographql'),
+            self::SCHEMA_COMMENT_MUTATIONS => \__('Comment Mutations', 'gatographql'),
             default => $module,
         };
     }
@@ -199,17 +199,17 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_USER_STATE_MUTATIONS => \__('Have the user log-in, and be able to perform mutations', 'gato-graphql'),
-            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Base functionality to mutate custom posts', 'gato-graphql'),
-            self::SCHEMA_PAGE_MUTATIONS => \__('Execute mutations on pages', 'gato-graphql'),
-            self::SCHEMA_POST_MUTATIONS => \__('Execute mutations on posts', 'gato-graphql'),
-            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on custom posts', 'gato-graphql'),
-            self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Execute mutations concerning media items on pages', 'gato-graphql'),
-            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on posts', 'gato-graphql'),
-            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Input user data when creating/updating custom posts', 'gato-graphql'),
-            self::SCHEMA_POST_TAG_MUTATIONS => \__('Add tags to posts', 'gato-graphql'),
-            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Add categories to posts', 'gato-graphql'),
-            self::SCHEMA_COMMENT_MUTATIONS => \__('Create comments', 'gato-graphql'),
+            self::SCHEMA_USER_STATE_MUTATIONS => \__('Have the user log-in, and be able to perform mutations', 'gatographql'),
+            self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Base functionality to mutate custom posts', 'gatographql'),
+            self::SCHEMA_PAGE_MUTATIONS => \__('Execute mutations on pages', 'gatographql'),
+            self::SCHEMA_POST_MUTATIONS => \__('Execute mutations on posts', 'gatographql'),
+            self::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on custom posts', 'gatographql'),
+            self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Execute mutations concerning media items on pages', 'gatographql'),
+            self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on posts', 'gatographql'),
+            self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Input user data when creating/updating custom posts', 'gatographql'),
+            self::SCHEMA_POST_TAG_MUTATIONS => \__('Add tags to posts', 'gatographql'),
+            self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Add categories to posts', 'gatographql'),
+            self::SCHEMA_COMMENT_MUTATIONS => \__('Create comments', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -256,8 +256,8 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getSettings(string $module): array
     {
         $moduleSettings = parent::getSettings($module);
-        $sensitiveDataTitlePlaceholder = \__('Treat the %s as “sensitive” data', 'gato-graphql');
-        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gato-graphql');
+        $sensitiveDataTitlePlaceholder = \__('Treat the %s as “sensitive” data', 'gatographql');
+        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gatographql');
         if ($module === self::SCHEMA_CUSTOMPOST_USER_MUTATIONS) {
             $option = self::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
@@ -268,11 +268,11 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
-                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gato-graphql'),
+                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gatographql'),
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
-                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gato-graphql'),
+                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gatographql'),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];

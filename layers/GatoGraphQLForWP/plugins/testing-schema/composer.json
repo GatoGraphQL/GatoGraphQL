@@ -1,5 +1,5 @@
 {
-    "name": "gato-graphql/testing-schema",
+    "name": "gatographql/testing-schema",
     "type": "wordpress-plugin",
     "description": "Addition of elements to the GraphQL schema to test the Gato GraphQL plugin",
     "keywords": ["WordPress", "GraphQL", "API"],

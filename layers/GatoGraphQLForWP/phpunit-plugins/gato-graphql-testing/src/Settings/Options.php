@@ -13,5 +13,5 @@ class Options
      * Option name to store a flag for the REST API, to indicate to
      * execute `flush_rewrite_rules` in the upcoming request.
      */
-    public final const FLUSH_REWRITE_RULES = 'gato-graphql-flush-rewrite-rules';
+    public final const FLUSH_REWRITE_RULES = 'gatographql-flush-rewrite-rules';
 }

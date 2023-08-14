@@ -19,7 +19,7 @@ const SchemaConfigUserMetaCard = ( props ) => {
 	return (
 		<SchemaConfigMetaCard
 			{ ...props }
-			labelEntity={ __('users', 'gato-graphql') }
+			labelEntity={ __('users', 'gatographql') }
 			labelExampleItem='last_name'
 			labelExampleEntries={
 				[
@@ -35,8 +35,8 @@ const SchemaConfigUserMetaCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('User Meta', 'gato-graphql'),
-		className: 'gato-graphql-user-meta',
+		header: __('User Meta', 'gatographql'),
+		className: 'gatographql-user-meta',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

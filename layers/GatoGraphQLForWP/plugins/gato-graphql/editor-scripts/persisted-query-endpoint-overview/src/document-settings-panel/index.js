@@ -13,7 +13,7 @@ const DOCUMENT_SETTINGS_PANEL_NAME = 'persisted-query-endpoint-overview-panel';
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Persisted Query Endpoint Overview', 'gato-graphql') }
+        title={ __('Persisted Query Endpoint Overview', 'gatographql') }
     >
         <PersistedQueryEndpointOverview />
     </PluginDocumentSettingPanel>

@@ -44,6 +44,6 @@ class SchemaExposeSensitiveDataOnSchemaConfigurationCPTBlockAttributesFixtureEnd
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'gato-graphql/schema-config-expose-sensitive-data';
+        return 'gatographql/schema-config-expose-sensitive-data';
     }
 }

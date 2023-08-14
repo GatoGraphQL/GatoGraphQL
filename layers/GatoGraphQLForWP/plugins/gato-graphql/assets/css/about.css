@@ -1,9 +1,9 @@
 .show-for-customers {
     display: none;
 }
-body.is-gato-graphql-customer .show-for-customers {
+body.is-gatographql-customer .show-for-customers {
     display: block;
 }
-body.is-gato-graphql-customer .hide-for-customers {
+body.is-gatographql-customer .hide-for-customers {
     display: none;
 }

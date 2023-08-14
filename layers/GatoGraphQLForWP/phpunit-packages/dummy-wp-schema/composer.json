@@ -1,5 +1,5 @@
 {
-    "name": "phpunit-for-gato-graphql/dummy-wp-schema",
+    "name": "phpunit-for-gatographql/dummy-wp-schema",
     "type": "library",
     "description": "Dummy schema resolvers for testing with PHPUnit under (faked) WordPress",
     "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "dummy", "schema"],

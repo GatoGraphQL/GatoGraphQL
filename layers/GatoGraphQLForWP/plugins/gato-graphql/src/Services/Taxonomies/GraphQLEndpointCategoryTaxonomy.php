@@ -50,7 +50,7 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
 
     public function getTaxonomyName(bool $titleCase = true): string
     {
-        return $titleCase ? \__('GraphQL Endpoint Category', 'gato-graphql') : \__('GraphQL endpoint category', 'gato-graphql');
+        return $titleCase ? \__('GraphQL Endpoint Category', 'gatographql') : \__('GraphQL endpoint category', 'gatographql');
     }
 
     /**
@@ -58,7 +58,7 @@ class GraphQLEndpointCategoryTaxonomy extends AbstractCategory
      */
     public function getTaxonomyPluralNames(bool $titleCase = true): string
     {
-        return $titleCase ? \__('Endpoint Categories', 'gato-graphql') : \__('endpoint categories', 'gato-graphql');
+        return $titleCase ? \__('Endpoint Categories', 'gatographql') : \__('endpoint categories', 'gatographql');
     }
 
     /**

@@ -18,7 +18,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         ?>
         <div id="graphiql" class="graphiql-client">
             <p>
-                <?php echo __('Loading...', 'gato-graphql') ?>
+                <?php echo __('Loading...', 'gatographql') ?>
                 <!--span class="spinner is-active" style="float: none;"></span-->
             </p>
         </div>
@@ -50,7 +50,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_style(
-            'gato-graphql-graphiql-client',
+            'gatographql-graphiql-client',
             $mainPluginURL . 'assets/css/graphiql-client.css',
             array(),
             $mainPluginVersion
@@ -73,7 +73,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $mainPluginVersion = $mainPlugin->getPluginVersion();
 
         \wp_enqueue_style(
-            'gato-graphql-graphiql',
+            'gatographql-graphiql',
             $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.css',
             array(),
             $mainPluginVersion
@@ -83,23 +83,23 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         $this->enqueueReactAssets(true);
 
         \wp_enqueue_script(
-            'gato-graphql-graphiql',
+            'gatographql-graphiql',
             $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/graphiql/assets/vendors/graphiql.1.5.7.min.js',
-            array('gato-graphql-react-dom'),
+            array('gatographql-react-dom'),
             $mainPluginVersion,
             true
         );
         \wp_enqueue_script(
-            'gato-graphql-graphiql-client',
+            'gatographql-graphiql-client',
             $mainPluginURL . 'assets/js/graphiql-client.js',
-            array('gato-graphql-graphiql'),
+            array('gatographql-graphiql'),
             $mainPluginVersion,
             true
         );
 
         // Load data into the script
         \wp_localize_script(
-            'gato-graphql-graphiql-client',
+            'gatographql-graphiql-client',
             'graphQLByPoPGraphiQLSettings',
             array_merge(
                 [
@@ -125,7 +125,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
     protected function getResponse(): string
     {
         return '';
-        // return \__('Click the "Execute Query" button, or press Ctrl+Enter (Command+Enter in Mac)', 'gato-graphql');
+        // return \__('Click the "Execute Query" button, or press Ctrl+Enter (Command+Enter in Mac)', 'gatographql');
     }
 
     protected function getDefaultQuery(): string

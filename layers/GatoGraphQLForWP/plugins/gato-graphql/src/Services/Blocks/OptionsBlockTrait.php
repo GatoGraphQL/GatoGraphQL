@@ -17,9 +17,9 @@ trait OptionsBlockTrait
     protected function getBooleanLabel(bool $value): string
     {
         if ($value) {
-            return \__('✅ Yes', 'gato-graphql');
+            return \__('✅ Yes', 'gatographql');
         }
-        return \__('❌ No', 'gato-graphql');
+        return \__('❌ No', 'gatographql');
     }
 
     /**
@@ -28,8 +28,8 @@ trait OptionsBlockTrait
     protected function getEnabledDisabledLabels(): array
     {
         return [
-            BlockAttributeValues::ENABLED => \__('✅ Yes', 'gato-graphql'),
-            BlockAttributeValues::DISABLED => \__('❌ No', 'gato-graphql'),
+            BlockAttributeValues::ENABLED => \__('✅ Yes', 'gatographql'),
+            BlockAttributeValues::DISABLED => \__('❌ No', 'gatographql'),
         ];
     }
 }

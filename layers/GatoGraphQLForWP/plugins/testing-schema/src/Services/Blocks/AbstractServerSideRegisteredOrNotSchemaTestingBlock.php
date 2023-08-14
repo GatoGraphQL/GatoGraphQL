@@ -26,8 +26,8 @@ abstract class AbstractServerSideRegisteredOrNotSchemaTestingBlock extends Abstr
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            \__('This is a block for testing the schema', 'gato-graphql-testing-schema'),
-            \__('In particular, to test field <code>CustomPost.blocks</code>, to see that blocks not registered on the server-side display a warning when parsed.', 'gato-graphql-testing-schema'),
+            \__('This is a block for testing the schema', 'gatographql-testing-schema'),
+            \__('In particular, to test field <code>CustomPost.blocks</code>, to see that blocks not registered on the server-side display a warning when parsed.', 'gatographql-testing-schema'),
         );
 
         $blockContentPlaceholder = <<<EOT
@@ -40,7 +40,7 @@ abstract class AbstractServerSideRegisteredOrNotSchemaTestingBlock extends Abstr
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
-            \__('Gato GraphQL: Block for testing the schema', 'gato-graphql-testing-schema'),
+            \__('Gato GraphQL: Block for testing the schema', 'gatographql-testing-schema'),
             $blockContent
         );
     }

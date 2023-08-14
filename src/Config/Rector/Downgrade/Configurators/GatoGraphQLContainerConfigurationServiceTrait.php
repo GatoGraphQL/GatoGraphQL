@@ -8,6 +8,6 @@ trait GatoGraphQLContainerConfigurationServiceTrait
 {
     protected function getPluginRelativePath(): string
     {
-        return 'layers/GatoGraphQLForWP/plugins/gato-graphql';
+        return 'layers/GatoGraphQLForWP/plugins/gatographql';
     }
 }

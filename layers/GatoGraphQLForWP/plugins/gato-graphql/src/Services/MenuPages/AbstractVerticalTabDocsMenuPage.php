@@ -35,7 +35,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
                 $activeEntryName = $tab;
             }
         }
-        $class = 'wrap vertical-tabs gato-graphql-tabpanel';
+        $class = 'wrap vertical-tabs gatographql-tabpanel';
 
         $markdownContent = sprintf(
             <<<HTML
@@ -65,7 +65,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             // Enumerate the entries
             $entryTitle = $this->enumerateEntries()
                 ? sprintf(
-                    \__('%s. %s', 'gato-graphql'),
+                    \__('%s. %s', 'gatographql'),
                     $i + 1,
                     $entryTitle
                 )
@@ -112,7 +112,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             ) ?? sprintf(
                 '<p>%s</p>',
                 sprintf(
-                    \__('Oops, there was a problem loading entry "%s"', 'gato-graphql'),
+                    \__('Oops, there was a problem loading entry "%s"', 'gatographql'),
                     $entryTitle
                 )
             );
@@ -176,7 +176,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
     protected function getContentID(): string
     {
-        return 'gato-graphql-vertical-tab-docs';
+        return 'gatographql-vertical-tab-docs';
     }
 
     /**

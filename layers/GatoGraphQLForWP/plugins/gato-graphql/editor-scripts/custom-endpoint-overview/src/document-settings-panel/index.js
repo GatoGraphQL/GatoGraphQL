@@ -13,7 +13,7 @@ const DOCUMENT_SETTINGS_PANEL_NAME = 'custom-endpoint-overview-panel';
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Custom Endpoint Overview', 'gato-graphql') }
+        title={ __('Custom Endpoint Overview', 'gatographql') }
     >
         <CustomEndpointOverview />
     </PluginDocumentSettingPanel>

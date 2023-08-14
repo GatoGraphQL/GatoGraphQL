@@ -1,7 +1,7 @@
 jQuery( document ).ready( function($){
-    $('.gato-graphql-settings-section a.gato-graphql-show-settings-items').on('click', function(e){
+    $('.gatographql-settings-section a.gatographql-show-settings-items').on('click', function(e){
         e.preventDefault();
-        settingsSection = $(this).closest('.gato-graphql-settings-section');
-        settingsSection.find('.gato-graphql-settings-item').show();
+        settingsSection = $(this).closest('.gatographql-settings-section');
+        settingsSection.find('.gatographql-settings-item').show();
     });
 });

@@ -10,6 +10,6 @@ if ! wp plugin is-installed classic-editor --path=/app/wordpress; then
 fi
 
 # Activate own plugins
-wp plugin activate gato-graphql --path=/app/wordpress
-wp plugin activate gato-graphql-testing-schema --path=/app/wordpress
-wp plugin activate gato-graphql-testing --path=/app/wordpress
+wp plugin activate gatographql --path=/app/wordpress
+wp plugin activate gatographql-testing-schema --path=/app/wordpress
+wp plugin activate gatographql-testing --path=/app/wordpress

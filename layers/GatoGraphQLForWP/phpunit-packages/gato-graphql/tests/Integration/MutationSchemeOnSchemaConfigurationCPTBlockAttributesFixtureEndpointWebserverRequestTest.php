@@ -44,6 +44,6 @@ class MutationSchemeOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebser
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'gato-graphql/schema-config-mutation-scheme';
+        return 'gatographql/schema-config-mutation-scheme';
     }
 }

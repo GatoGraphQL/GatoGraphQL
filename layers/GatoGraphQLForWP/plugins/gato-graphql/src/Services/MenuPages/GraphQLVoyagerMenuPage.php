@@ -16,7 +16,7 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
     public function print(): void
     {
         ?>
-        <div id="voyager" class="voyager-client"><?php echo __('Loading...', 'gato-graphql') ?></div>
+        <div id="voyager" class="voyager-client"><?php echo __('Loading...', 'gatographql') ?></div>
         <?php
     }
 
@@ -38,13 +38,13 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
 
         // CSS
         \wp_enqueue_style(
-            'gato-graphql-voyager-client',
+            'gatographql-voyager-client',
             $mainPluginURL . 'assets/css/voyager-client.css',
             array(),
             $mainPluginVersion
         );
         \wp_enqueue_style(
-            'gato-graphql-voyager',
+            'gatographql-voyager',
             $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.css',
             array(),
             $mainPluginVersion
@@ -53,23 +53,23 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
         // JS: execute them all in the footer
         $this->enqueueReactAssets(true);
         \wp_enqueue_script(
-            'gato-graphql-voyager',
+            'gatographql-voyager',
             $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.standalone.js',
-            array('gato-graphql-react-dom'),
+            array('gatographql-react-dom'),
             $mainPluginVersion,
             true
         );
         \wp_enqueue_script(
-            'gato-graphql-voyager-client',
+            'gatographql-voyager-client',
             $mainPluginURL . 'assets/js/voyager-client.js',
-            array('gato-graphql-voyager'),
+            array('gatographql-voyager'),
             $mainPluginVersion,
             true
         );
 
         // Load data into the script
         \wp_localize_script(
-            'gato-graphql-voyager-client',
+            'gatographql-voyager-client',
             'graphQLByPoPGraphiQLSettings',
             array(
                 'nonce' => \wp_create_nonce('wp_rest'),

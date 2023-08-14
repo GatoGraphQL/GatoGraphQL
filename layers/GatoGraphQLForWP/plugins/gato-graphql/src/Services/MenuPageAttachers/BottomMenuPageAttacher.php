@@ -307,8 +307,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Modules', 'gato-graphql'),
-                __('Modules', 'gato-graphql'),
+                __('Modules', 'gatographql'),
+                __('Modules', 'gatographql'),
                 'manage_options',
                 $modulesMenuPage->getScreenID(),
                 $callable
@@ -325,8 +325,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Extensions', 'gato-graphql'),
-                __('Extensions', 'gato-graphql'),
+                __('Extensions', 'gatographql'),
+                __('Extensions', 'gatographql'),
                 'manage_options',
                 $extensionsMenuPage->getScreenID(),
                 $callable
@@ -349,8 +349,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             if (
                 $hookName = \add_submenu_page(
                     $menuName,
-                    __('Extension Docs', 'gato-graphql'),
-                    __('Extension Docs', 'gato-graphql'),
+                    __('Extension Docs', 'gatographql'),
+                    __('Extension Docs', 'gatographql'),
                     'manage_options',
                     $extensionDocsMenuPage->getScreenID(),
                     $callable
@@ -363,8 +363,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Settings', 'gato-graphql'),
-                __('Settings', 'gato-graphql'),
+                __('Settings', 'gatographql'),
+                __('Settings', 'gatographql'),
                 'manage_options',
                 $this->getSettingsMenuPage()->getScreenID(),
                 [$this->getSettingsMenuPage(), 'print']
@@ -381,8 +381,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('Recipes', 'gato-graphql'),
-                __('Recipes', 'gato-graphql'),
+                __('Recipes', 'gatographql'),
+                __('Recipes', 'gatographql'),
                 $schemaEditorAccessCapability,
                 $recipesMenuPage->getScreenID(),
                 $callable
@@ -401,8 +401,8 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         if (
             $hookName = \add_submenu_page(
                 $menuName,
-                __('About Gato GraphQL', 'gato-graphql'),
-                __('About Gato GraphQL', 'gato-graphql'),
+                __('About Gato GraphQL', 'gatographql'),
+                __('About Gato GraphQL', 'gatographql'),
                 'manage_options',
                 $aboutMenuPage->getScreenID(),
                 [$aboutMenuPage, 'print']

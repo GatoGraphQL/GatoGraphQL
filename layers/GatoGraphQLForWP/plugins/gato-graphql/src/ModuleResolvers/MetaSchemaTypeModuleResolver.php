@@ -171,10 +171,10 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     public function getName(string $module): string
     {
         return match ($module) {
-            self::SCHEMA_CUSTOMPOST_META => \__('Custom Post Meta', 'gato-graphql'),
-            self::SCHEMA_USER_META => \__('User Meta', 'gato-graphql'),
-            self::SCHEMA_COMMENT_META => \__('Comment Meta', 'gato-graphql'),
-            self::SCHEMA_TAXONOMY_META => \__('Taxonomy Meta', 'gato-graphql'),
+            self::SCHEMA_CUSTOMPOST_META => \__('Custom Post Meta', 'gatographql'),
+            self::SCHEMA_USER_META => \__('User Meta', 'gatographql'),
+            self::SCHEMA_COMMENT_META => \__('Comment Meta', 'gatographql'),
+            self::SCHEMA_TAXONOMY_META => \__('Taxonomy Meta', 'gatographql'),
             default => $module,
         };
     }
@@ -183,19 +183,19 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_CUSTOMPOST_META => sprintf(
-                \__('Query meta values from custom posts (such as type <code>%1$s</code>)', 'gato-graphql'),
+                \__('Query meta values from custom posts (such as type <code>%1$s</code>)', 'gatographql'),
                 $this->getPostObjectTypeResolver()->getTypeName()
             ),
             self::SCHEMA_USER_META => sprintf(
-                \__('Query meta values from users (for type <code>%1$s</code>)', 'gato-graphql'),
+                \__('Query meta values from users (for type <code>%1$s</code>)', 'gatographql'),
                 $this->getUserObjectTypeResolver()->getTypeName()
             ),
             self::SCHEMA_COMMENT_META => sprintf(
-                \__('Query meta values from comments (for type <code>%1$s</code>)', 'gato-graphql'),
+                \__('Query meta values from comments (for type <code>%1$s</code>)', 'gatographql'),
                 $this->getCommentObjectTypeResolver()->getTypeName()
             ),
             self::SCHEMA_TAXONOMY_META => sprintf(
-                \__('Query meta values for taxonomies (such as types <code>%1$s</code> and <code>%2$s</code>)', 'gato-graphql'),
+                \__('Query meta values for taxonomies (such as types <code>%1$s</code> and <code>%2$s</code>)', 'gatographql'),
                 $this->getPostTagObjectTypeResolver()->getTypeName(),
                 $this->getPostCategoryObjectTypeResolver()->getTypeName()
             ),
@@ -239,15 +239,15 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                 self::SCHEMA_TAXONOMY_META,
             ])
         ) {
-            $entriesTitle = \__('Meta keys', 'gato-graphql');
-            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s (one entry per line).', 'gato-graphql');
-            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gato-graphql');
-            $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'gato-graphql');
+            $entriesTitle = \__('Meta keys', 'gatographql');
+            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s (one entry per line).', 'gatographql');
+            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gatographql');
+            $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'gatographql');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
             $moduleDescriptions = [
                 self::SCHEMA_CUSTOMPOST_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gato-graphql'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
                     sprintf(
                         $metaKeyDesc,
                         'custom posts'
@@ -271,7 +271,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultValueDesc,
                 ),
                 self::SCHEMA_USER_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gato-graphql'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
                     sprintf(
                         $metaKeyDesc,
                         'users'
@@ -295,7 +295,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultValueDesc,
                 ),
                 self::SCHEMA_COMMENT_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gato-graphql'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
                     sprintf(
                         $metaKeyDesc,
                         'comments'
@@ -319,7 +319,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $defaultValueDesc,
                 ),
                 self::SCHEMA_TAXONOMY_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gato-graphql'),
+                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
                     sprintf(
                         $metaKeyDesc,
                         'taxonomies (tags and categories)'
@@ -362,17 +362,17 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Behavior', 'gato-graphql'),
+                Properties::TITLE => \__('Behavior', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     '%s %s%s',
-                    \__('Are the entries being allowed or denied access to?', 'gato-graphql'),
-                    \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gato-graphql'),
+                    \__('Are the entries being allowed or denied access to?', 'gatographql'),
+                    \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gatographql'),
                     $defaultValueDesc,
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    Behaviors::ALLOW => \__('Allow access', 'gato-graphql'),
-                    Behaviors::DENY => \__('Deny access', 'gato-graphql'),
+                    Behaviors::ALLOW => \__('Allow access', 'gatographql'),
+                    Behaviors::DENY => \__('Deny access', 'gatographql'),
                 ],
             ];
         }

@@ -1,5 +1,5 @@
 {
-    "name": "leoloso/gato-graphql-dev",
+    "name": "leoloso/gatographql-dev",
     "description": "Gato GraphQL",
     "homepage": "https://gatographql.com",
     "license": "GPL-2.0-or-later",
@@ -39,7 +39,7 @@
         "ssh-server": "lando ssh",
         "build-server": [
             "Composer\\Config::disableProcessTimeout",
-            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gato-graphql",
+            "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gatographql",
             "@update-deps",
             "@start-server",
             "@install-site"
@@ -63,10 +63,10 @@
         "create-users": "lando composer create-users-within-container",
         "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
         "update-deps": [
-            "@symlink-vendor-for-gato-graphql-plugin",
-            "@symlink-vendor-for-gato-graphql-testing-schema-plugin",
-            "@symlink-vendor-for-gato-graphql-testing-plugin",
-            "@symlink-vendor-for-gato-graphql-extension-demo"
+            "@symlink-vendor-for-gatographql-plugin",
+            "@symlink-vendor-for-gatographql-testing-schema-plugin",
+            "@symlink-vendor-for-gatographql-testing-plugin",
+            "@symlink-vendor-for-gatographql-extension-demo"
         ],
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
@@ -80,35 +80,35 @@
             "lando rebuild appserver -y"
         ],
         "stop-server": "lando stop",
-        "symlink-vendor-for-gato-graphql-plugin": [
-            "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/gato-graphql/composer.json', '../../layers/GatoGraphQLForWP/plugins/gato-graphql/composer.local.json');\"",
-            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/plugins/gato-graphql/composer.local.json",
-            "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/plugins/gato-graphql"
+        "symlink-vendor-for-gatographql-plugin": [
+            "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/gatographql/composer.json', '../../layers/GatoGraphQLForWP/plugins/gatographql/composer.local.json');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/plugins/gatographql/composer.local.json",
+            "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/plugins/gatographql"
         ],
-        "symlink-vendor-for-gato-graphql-testing-schema-plugin": [
+        "symlink-vendor-for-gatographql-testing-schema-plugin": [
             "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/testing-schema/composer.json', '../../layers/GatoGraphQLForWP/plugins/testing-schema/composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/plugins/testing-schema/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/plugins/testing-schema"
         ],
-        "symlink-vendor-for-gato-graphql-testing-plugin": [
-            "php -r \"copy('../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/composer.json', '../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/composer.local.json');\"",
-            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing/composer.local.json",
-            "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing"
+        "symlink-vendor-for-gatographql-testing-plugin": [
+            "php -r \"copy('../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/composer.json', '../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/composer.local.json');\"",
+            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/composer.local.json",
+            "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing"
         ],
-        "symlink-vendor-for-gato-graphql-extension-demo": [
+        "symlink-vendor-for-gatographql-extension-demo": [
             "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/extension-demo/composer.json', '../../layers/GatoGraphQLForWP/plugins/extension-demo/composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/plugins/extension-demo/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/plugins/extension-demo"
         ],
         "optimize-autoloader": [
-            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/plugins/gato-graphql",
-            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing",
+            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/plugins/gatographql",
+            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing",
             "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/plugins/extension-demo",
             "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/plugins/testing-schema"
         ],
         "deoptimize-autoloader": [
-            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/plugins/gato-graphql",
-            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gato-graphql-testing",
+            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/plugins/gatographql",
+            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing",
             "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/plugins/extension-demo",
             "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/plugins/testing-schema"
         ],
@@ -138,13 +138,13 @@
             "@delete-settings"
         ],
         "delete-settings": [
-            "lando wp option delete gato-graphql-schema-configuration --path=wordpress",
-            "lando wp option delete gato-graphql-endpoint-configuration --path=wordpress",
-            "lando wp option delete gato-graphql-plugin-configuration --path=wordpress",
-            "lando wp option delete gato-graphql-plugin-management --path=wordpress",
+            "lando wp option delete gatographql-schema-configuration --path=wordpress",
+            "lando wp option delete gatographql-endpoint-configuration --path=wordpress",
+            "lando wp option delete gatographql-plugin-configuration --path=wordpress",
+            "lando wp option delete gatographql-plugin-management --path=wordpress",
             "@purge-cache"
         ],
-        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"wordpress/wp-content/gato-graphql/cache\" || true",
+        "purge-cache": "@php ../shared/composer-scripts/purge-cache.php \"wordpress/wp-content/gatographql/cache\" || true",
         "server-info": "lando info"
     }
 }

@@ -25,7 +25,7 @@
                 "slug": "hello-world",
                 "status": "publish",
                 "title": "Hello world!",
-                "url": "https:\/\/gato-graphql.lndo.site\/hello-world\/",
+                "url": "https:\/\/gatographql.lndo.site\/hello-world\/",
                 "urlPath": "\/hello-world\/"
             },
             {
@@ -37,22 +37,22 @@
                 },
                 "commentCount": 0,
                 "comments": [],
-                "content": "\n<p>This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote\"><p>Hi there! I&#8217;m a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin&#8217; caught in the rain.)<\/p><\/blockquote>\n\n\n\n<p>&#8230;or something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n\n\n\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gato-graphql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n",
+                "content": "\n<p>This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote\"><p>Hi there! I&#8217;m a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin&#8217; caught in the rain.)<\/p><\/blockquote>\n\n\n\n<p>&#8230;or something like this:<\/p>\n\n\n\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n\n\n\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gatographql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n",
                 "customPostType": "page",
                 "date": "2020-04-17T13:06:58+00:00",
                 "dateStr": "April 17, 2020",
-                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gato-graphql.lndo.site\/single-post-with-a-lot-of-blocks\/\">Continue reading <span class=\"screen-reader-text\">Welcome to a single post full of blocks!<\/span><\/a>",
+                "excerpt": "This is an example page. It&#8217;s different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this: Hi there! I&#8217;m a bike messenger&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/single-post-with-a-lot-of-blocks\/\">Continue reading <span class=\"screen-reader-text\">Welcome to a single post full of blocks!<\/span><\/a>",
                 "featuredImage": null,
                 "hasComments": false,
                 "hasFeaturedImage": false,
                 "id": 2,
                 "isStatus": false,
                 "metaValue": null,
-                "rawContent": "<!-- wp:paragraph -->\n<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>...or something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gato-graphql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n<!-- \/wp:paragraph -->",
+                "rawContent": "<!-- wp:paragraph -->\n<p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>Hi there! I'm a bike messenger by day, aspiring actor by night, and this is my website. I live in Los Angeles, have a great dog named Jack, and I like pi&#241;a coladas. (And gettin' caught in the rain.)<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>...or something like this:<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:quote -->\n<blockquote class=\"wp-block-quote\"><p>The XYZ Doohickey Company was founded in 1971, and has been providing quality doohickeys to the public ever since. Located in Gotham City, XYZ employs over 2,000 people and does all kinds of awesome things for the Gotham community.<\/p><\/blockquote>\n<!-- \/wp:quote -->\n\n<!-- wp:paragraph -->\n<p>As a new WordPress user, you should go to <a href=\"https:\/\/gatographql.lndo.site\/wp-admin\/\">your dashboard<\/a> to delete this page and create new pages for your content. Have fun!<\/p>\n<!-- \/wp:paragraph -->",
                 "slug": "sample-page",
                 "status": "publish",
                 "title": "Sample Page",
-                "url": "https:\/\/gato-graphql.lndo.site\/sample-page\/",
+                "url": "https:\/\/gatographql.lndo.site\/sample-page\/",
                 "urlPath": "\/sample-page\/"
             },
             {
@@ -75,7 +75,7 @@
                 "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
                 "featuredImage": {
                     "id": 361,
-                    "src": "https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/graphql-voyager-public.jpg"
                 },
                 "hasComments": true,
                 "hasFeaturedImage": true,
@@ -86,7 +86,7 @@
                 "slug": "released-v0-6-check-it-out",
                 "status": "publish",
                 "title": "Released v0.6, check it out",
-                "url": "https:\/\/gato-graphql.lndo.site\/released-v0-6-check-it-out\/",
+                "url": "https:\/\/gatographql.lndo.site\/released-v0-6-check-it-out\/",
                 "urlPath": "\/released-v0-6-check-it-out\/"
             }
         ],
@@ -420,7 +420,7 @@
             "__typename": "GenericCustomPost",
             "id": 619,
             "title": "Error debitis nulla vel est",
-            "content": "<hr>\n<hr>\n<h1>Laudantium distinctio blanditiis et et voluptas. Nobis maxime et ab ut laboriosam provident<\/h1>\n<ul>\n<li>Nisi dolorem<\/li>\n<li>Dolorum<\/li>\n<\/ul>\n<p><!--more--><br \/>\n<img decoding=\"async\" class=\"alignleft\" alt=\"Illum neque aliquam fuga dolor ea voluptas\" src=\"https:\/\/gato-graphql.lndo.site\/wp-content\/uploads\/2022\/12\/c08092fd-0c80-38d0-a678-61e938599f7d.jpg\"><\/p>\n",
+            "content": "<hr>\n<hr>\n<h1>Laudantium distinctio blanditiis et et voluptas. Nobis maxime et ab ut laboriosam provident<\/h1>\n<ul>\n<li>Nisi dolorem<\/li>\n<li>Dolorum<\/li>\n<\/ul>\n<p><!--more--><br \/>\n<img decoding=\"async\" class=\"alignleft\" alt=\"Illum neque aliquam fuga dolor ea voluptas\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/12\/c08092fd-0c80-38d0-a678-61e938599f7d.jpg\"><\/p>\n",
             "customPostType": "dummy-cpt"
         }
     }

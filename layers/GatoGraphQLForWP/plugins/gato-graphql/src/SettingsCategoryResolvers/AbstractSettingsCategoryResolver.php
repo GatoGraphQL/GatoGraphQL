@@ -24,7 +24,7 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
     {
         throw new ImpossibleToHappenException(
             sprintf(
-                $this->__('Unsupported Settings Category \'%s\'', 'gato-graphql'),
+                $this->__('Unsupported Settings Category \'%s\'', 'gatographql'),
                 $settingsCategory
             )
         );
@@ -34,7 +34,7 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
     {
         throw new ImpossibleToHappenException(
             sprintf(
-                $this->__('Unsupported Settings Category \'%s\'', 'gato-graphql'),
+                $this->__('Unsupported Settings Category \'%s\'', 'gatographql'),
                 $settingsCategory
             )
         );
@@ -45,7 +45,7 @@ abstract class AbstractSettingsCategoryResolver implements SettingsCategoryResol
      * of the option name in the DB, or otherwise doing `register_setting`
      * in SettingsMenuPage does not work (for some reason, $values is null).
      *
-     * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/Services/MenuPages/SettingsMenuPage.php
+     * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php
      */
     final public function getOptionsFormName(string $settingsCategory): string
     {

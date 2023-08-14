@@ -45,6 +45,6 @@ class SchemaSelfFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebs
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'gato-graphql/schema-config-self-fields';
+        return 'gatographql/schema-config-self-fields';
     }
 }

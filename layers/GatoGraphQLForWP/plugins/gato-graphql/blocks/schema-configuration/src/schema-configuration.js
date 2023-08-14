@@ -30,7 +30,7 @@ const SchemaConfigurationSelectCard = ( props ) => {
 	 * Title to use when the element's title is empty.
 	 * (This may not happen: WordPress might then set it as "Untitled")
 	 */
-	const noTitleLabel = __('(No title)', 'gato-graphql');
+	const noTitleLabel = __('(No title)', 'gatographql');
 
 	/**
 	 * React Select expects an object with this format:
@@ -53,18 +53,18 @@ const SchemaConfigurationSelectCard = ( props ) => {
 	const metaOptions = ( enableInheritFromParent ?
 		[
 			{
-				label: `🛑 ${ __('Inherit from parent', 'gato-graphql') }`,
+				label: `🛑 ${ __('Inherit from parent', 'gatographql') }`,
 				value: ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
 			}
 		]
 		: []
 	).concat([
 		{
-			label: `🟡 ${ __('Default', 'gato-graphql') }`,
+			label: `🟡 ${ __('Default', 'gatographql') }`,
 			value: ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
 		},
 		{
-			label: `❌ ${ __('None', 'gato-graphql') }`,
+			label: `❌ ${ __('None', 'gatographql') }`,
 			value: ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE,
 		},
 	])
@@ -153,7 +153,7 @@ const SchemaConfigurationSelectCard = ( props ) => {
 
 export default compose( [
 	withState( {
-		header: __('Schema configuration', 'gato-graphql'),
+		header: __('Schema configuration', 'gatographql'),
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withSelect( ( select ) => {
@@ -161,7 +161,7 @@ export default compose( [
 			getSchemaConfigurations,
 			hasRetrievedSchemaConfigurations,
 			getRetrievingSchemaConfigurationsErrorMessage,
-		} = select ( 'gato-graphql/schema-configuration' );
+		} = select ( 'gatographql/schema-configuration' );
 		return {
 			schemaConfigurations: getSchemaConfigurations(),
 			hasRetrievedItems: hasRetrievedSchemaConfigurations(),

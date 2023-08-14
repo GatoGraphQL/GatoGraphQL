@@ -33,7 +33,7 @@ class PluginEnvironment
     /**
      * If the cache dir is provided by either environment variable
      * or constant in wp-config.php, use it.
-     * Otherwise, set the default to wp-content/gato-graphql/cache
+     * Otherwise, set the default to wp-content/gatographql/cache
      */
     public static function getCacheDir(): string
     {
@@ -46,9 +46,9 @@ class PluginEnvironment
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }
 
-        return $baseCacheDir . \DIRECTORY_SEPARATOR . 'gato-graphql' . \DIRECTORY_SEPARATOR . 'cache';
+        return $baseCacheDir . \DIRECTORY_SEPARATOR . 'gatographql' . \DIRECTORY_SEPARATOR . 'cache';
 
-        // This is under wp-content/plugins/gato-graphql/cache
+        // This is under wp-content/plugins/gatographql/cache
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
 }

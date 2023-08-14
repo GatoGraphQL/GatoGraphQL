@@ -35,7 +35,7 @@ class SchemaConfigResponseHeadersBlock extends AbstractSchemaConfigCustomizableC
         $values = $attributes[BlockAttributeNames::ENTRIES] ?? [];
         return sprintf(
             '<p><strong>%s</strong></p>%s',
-            $this->__('Custom headers to add to the API response', 'gato-graphql'),
+            $this->__('Custom headers to add to the API response', 'gatographql'),
             $values ?
                 sprintf(
                     '<ul><li><code>%s</code></li></ul>',
@@ -43,14 +43,14 @@ class SchemaConfigResponseHeadersBlock extends AbstractSchemaConfigCustomizableC
                 ) :
                 sprintf(
                     '<p><em>%s</em></p>',
-                    \__('(not set)', 'gato-graphql')
+                    \__('(not set)', 'gatographql')
                 )
         );
     }
 
     protected function getBlockTitle(): string
     {
-        return \__('Response Headers', 'gato-graphql');
+        return \__('Response Headers', 'gatographql');
     }
 
     /**

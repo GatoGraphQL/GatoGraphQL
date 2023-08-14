@@ -42,6 +42,6 @@ class AllowedCustomPostMetaOnSchemaConfigurationCPTBlockAttributesFixtureEndpoin
 
     protected function getBlockNamespacedID(string $dataName): string
     {
-        return 'gato-graphql/schema-config-schema-custompost-meta';
+        return 'gatographql/schema-config-schema-custompost-meta';
     }
 }

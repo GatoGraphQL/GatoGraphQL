@@ -33,33 +33,33 @@ const SchemaConfigPayloadTypesForMutationsCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Use payload types for mutations', 'gato-graphql'),
+			label: __('Use payload types for mutations', 'gatographql'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not use payload types for mutations (i.e. return the mutated entity)', 'gato-graphql'),
+			label: __('Do not use payload types for mutations (i.e. return the mutated entity)', 'gatographql'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Use payload types for mutations in the schema?', 'gato-graphql') }</em>
+			<em>{ __('Use payload types for mutations in the schema?', 'gatographql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Either have mutations return a payload object type, or directly the mutated entity.', 'gato-graphql') }
+				text={ __('Either have mutations return a payload object type, or directly the mutated entity.', 'gatographql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-						<span>🟡 { __('Default', 'gato-graphql') }</span>
+						<span>🟡 { __('Default', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Use payload types for mutations', 'gato-graphql') }</span>
+						<span>✅ { __('Use payload types for mutations', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Do not use payload types for mutations (i.e. return the mutated entity)', 'gato-graphql') }</span>
+						<span>❌ { __('Do not use payload types for mutations (i.e. return the mutated entity)', 'gatographql') }</span>
 					}
 				</>
 			) }
@@ -82,8 +82,8 @@ const SchemaConfigPayloadTypesForMutationsCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Payload Types for Mutations', 'gato-graphql'),
-		className: 'gato-graphql-mutations',
+		header: __('Payload Types for Mutations', 'gatographql'),
+		className: 'gatographql-mutations',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

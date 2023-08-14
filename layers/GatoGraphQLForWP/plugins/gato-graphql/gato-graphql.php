@@ -9,9 +9,9 @@ Requires PHP: 8.1
 Author: Gato GraphQL
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-Text Domain: gato-graphql
+Text Domain: gatographql
 Domain Path: /languages
-GitHub Plugin URI: GatoGraphQL/gato-graphql-dist
+GitHub Plugin URI: GatoGraphQL/gatographql-dist
 */
 
 use GatoGraphQL\GatoGraphQL\Plugin;
@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
  * @see https://github.com/leoloso/PoP/issues/2051
  */
 // add_action('init', function (): void {
-//     load_plugin_textdomain('gato-graphql', false, plugin_basename(__FILE__) . '/languages');
+//     load_plugin_textdomain('gatographql', false, plugin_basename(__FILE__) . '/languages');
 // });
 
 /**
@@ -39,7 +39,7 @@ if (!defined('ABSPATH')) {
  * @see https://getcomposer.org/doc/articles/versions.md#stabilities
  */
 $pluginVersion = '1.0.0-dev';
-$pluginName = __('Gato GraphQL', 'gato-graphql');
+$pluginName = __('Gato GraphQL', 'gatographql');
 
 /**
  * If the plugin is already registered, print an error and halt loading

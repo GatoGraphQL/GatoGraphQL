@@ -1,6 +1,6 @@
 # Installing Gato GraphQL
 
-These are the several ways to install the [Gato GraphQL](../layers/GatoGraphQLForWP/plugins/gato-graphql) plugin.
+These are the several ways to install the [Gato GraphQL](../layers/GatoGraphQLForWP/plugins/gatographql) plugin.
 
 ## Requirements
 
@@ -32,18 +32,18 @@ Add the following configuration to your `composer.json`:
 ```json
 {
     "require": {
-        "gato-graphql/gato-graphql": "^1"
+        "gatographql/gatographql": "^1"
     },
     "minimum-stability": "dev",
     "repositories": [
         {
             "type": "package",
             "package": {
-                "name": "gato-graphql/gato-graphql",
+                "name": "gatographql/gatographql",
                 "type": "wordpress-plugin",
                 "version": "1",
                 "dist": {
-                    "url": "https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip",
+                    "url": "https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip",
                     "type": "zip"
                 },
                 "require": {
@@ -67,11 +67,11 @@ Add the following configuration to your `composer.json`:
 To install via [WP-CLI](http://wp-cli.org/), execute this command:
 
 ```bash
-wp plugin install --activate https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip
+wp plugin install --activate https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip
 ```
 
 ## GitHub Updater
 
 This plugin support automatic updating via the [GitHub Updater](https://github.com/afragen/github-updater).
 
-[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gato-graphql.zip
+[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip

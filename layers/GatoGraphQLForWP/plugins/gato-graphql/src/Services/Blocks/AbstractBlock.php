@@ -349,7 +349,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
          * then register the block only if we are on any of those CPTs.
          * Otherwise, the block would be registered but the category is not,
          * printing error console such as:
-         * > The block "gato-graphql/schema-configuration" must have a registered category.
+         * > The block "gatographql/schema-configuration" must have a registered category.
          */
         if (\is_admin()) {
             if ($customPostTypes = $this->getAllowedPostTypes()) {
@@ -381,7 +381,7 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
         if (!file_exists($script_asset_path)) {
             throw new Error(
                 sprintf(
-                    \__('You need to run `npm start` or `npm run build` for the "%s" block first.', 'gato-graphql'),
+                    \__('You need to run `npm start` or `npm run build` for the "%s" block first.', 'gatographql'),
                     $blockFullName
                 )
             );

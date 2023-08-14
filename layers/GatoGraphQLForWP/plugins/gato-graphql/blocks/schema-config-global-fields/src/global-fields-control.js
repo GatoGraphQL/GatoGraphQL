@@ -34,15 +34,15 @@ const GlobalFieldsControl = ( props ) => {
 			value: OPTION_DEFAULT_SCHEMA_EXPOSURE,
 		},
 		{
-			label: __('Do not expose', 'gato-graphql'),
+			label: __('Do not expose', 'gatographql'),
 			value: DO_NOT_EXPOSE,
 		},
 		{
-			label: __('Expose under the Root type only', 'gato-graphql'),
+			label: __('Expose under the Root type only', 'gatographql'),
 			value: EXPOSE_IN_ROOT_TYPE_ONLY,
 		},
 		{
-			label: __('Expose under all types', 'gato-graphql'),
+			label: __('Expose under all types', 'gatographql'),
 			value: EXPOSE_IN_ALL_TYPES,
 		},
 	];
@@ -64,16 +64,16 @@ const GlobalFieldsControl = ( props ) => {
 			{ !isSelected && (
 				<div className={ className+'__read'}>
 					{ (schemaExposure == OPTION_DEFAULT_SCHEMA_EXPOSURE || !optionValues.includes(schemaExposure) ) &&
-						<span>🟡 { __('Default', 'gato-graphql') }</span>
+						<span>🟡 { __('Default', 'gatographql') }</span>
 					}
 					{ (schemaExposure == DO_NOT_EXPOSE) &&
-						<span>⚫️ { __('Do not expose', 'gato-graphql') }</span>
+						<span>⚫️ { __('Do not expose', 'gatographql') }</span>
 					}
 					{ (schemaExposure == EXPOSE_IN_ROOT_TYPE_ONLY) &&
-						<span>🔵 { __('Expose under the Root type only', 'gato-graphql') }</span>
+						<span>🔵 { __('Expose under the Root type only', 'gatographql') }</span>
 					}
 					{ (schemaExposure == EXPOSE_IN_ALL_TYPES) &&
-						<span>⚪️ { __('Expose under all types', 'gato-graphql') }</span>
+						<span>⚪️ { __('Expose under all types', 'gatographql') }</span>
 					}
 				</div>
 			) }

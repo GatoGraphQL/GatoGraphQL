@@ -53,12 +53,12 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getPageTitle(): string
     {
-        return \__('Gato GraphQL - Extension Docs', 'gato-graphql');
+        return \__('Gato GraphQL - Extension Docs', 'gatographql');
     }
 
     protected function getContentID(): string
     {
-        return 'gato-graphql-extension-docs';
+        return 'gatographql-extension-docs';
     }
 
     /**
@@ -88,7 +88,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         return sprintf(
             '<p>%s</p>',
             sprintf(
-                __('%s <a href="%s" class="button">Switch to the <strong>Extensions</strong> view</a></span>', 'gato-graphql'),
+                __('%s <a href="%s" class="button">Switch to the <strong>Extensions</strong> view</a></span>', 'gatographql'),
                 $extensionsMenuPage->getHeaderMessage(),
                 \admin_url(sprintf(
                     'admin.php?page=%s',
@@ -158,14 +158,14 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
         return sprintf(
-            \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gato-graphql'),
+            \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gatographql'),
             $entryTitle,
             $entryModuleResolver->getWebsiteURL($entryModule),
             '_blank',
-            \__('Open in shop', 'gato-graphql'),
+            \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? \__('get bundle', 'gato-graphql')
-                : \__('get extension', 'gato-graphql'),
+                ? \__('get bundle', 'gatographql')
+                : \__('get extension', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }

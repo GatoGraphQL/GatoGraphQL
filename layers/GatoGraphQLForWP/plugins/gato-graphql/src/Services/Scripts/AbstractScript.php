@@ -190,7 +190,7 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
         if (!file_exists($script_asset_path)) {
             throw new Error(
                 sprintf(
-                    \__('You need to run `npm start` or `npm run build` for the "%s" script first.', 'gato-graphql'),
+                    \__('You need to run `npm start` or `npm run build` for the "%s" script first.', 'gatographql'),
                     $scriptName
                 )
             );

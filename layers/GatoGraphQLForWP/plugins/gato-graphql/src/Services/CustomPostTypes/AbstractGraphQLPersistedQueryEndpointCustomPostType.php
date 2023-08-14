@@ -80,7 +80,7 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
      */
     protected function getExecuteActionLabel(): string
     {
-        return __('Execute query', 'gato-graphql');
+        return __('Execute query', 'gatographql');
     }
 
     /**

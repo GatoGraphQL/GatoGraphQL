@@ -28,7 +28,7 @@ abstract class AbstractExtensionModuleDocumentationMenuPage extends AbstractModu
     protected function getModuleDoesNotExistErrorMessage(string $module): string
     {
         return sprintf(
-            \__('Oops, extension \'%s\' does not exist', 'gato-graphql'),
+            \__('Oops, extension \'%s\' does not exist', 'gatographql'),
             $module
         );
     }
@@ -38,7 +38,7 @@ abstract class AbstractExtensionModuleDocumentationMenuPage extends AbstractModu
         ModuleResolverInterface $moduleResolver,
     ): string {
         return sprintf(
-            \__('Oops, extension \'%s\' has no documentation', 'gato-graphql'),
+            \__('Oops, extension \'%s\' has no documentation', 'gatographql'),
             $moduleResolver->getName($module)
         );
     }

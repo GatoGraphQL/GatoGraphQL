@@ -8,6 +8,6 @@ abstract class AbstractSchemaConfigSchemaMetaBlock extends AbstractSchemaConfigS
 {
     protected function getRenderBlockLabel(): string
     {
-        return $this->__('Meta keys', 'gato-graphql');
+        return $this->__('Meta keys', 'gatographql');
     }
 }

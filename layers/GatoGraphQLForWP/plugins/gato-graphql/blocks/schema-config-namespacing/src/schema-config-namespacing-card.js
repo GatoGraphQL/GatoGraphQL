@@ -33,33 +33,33 @@ const SchemaConfigNamespacingCard = ( props ) => {
 			value: ATTRIBUTE_VALUE_DEFAULT,
 		},
 		{
-			label: __('Use namespacing', 'gato-graphql'),
+			label: __('Use namespacing', 'gatographql'),
 			value: ATTRIBUTE_VALUE_ENABLED,
 		},
 		{
-			label: __('Do not use namespacing', 'gato-graphql'),
+			label: __('Do not use namespacing', 'gatographql'),
 			value: ATTRIBUTE_VALUE_DISABLED,
 		},
 	];
 	const optionValues = options.map( option => option.value );
 	return (
 		<>
-			<em>{ __('Namespace Types?', 'gato-graphql') }</em>
+			<em>{ __('Namespace Types?', 'gatographql') }</em>
 			<InfoTooltip
 				{ ...props }
-				text={ __('Add a unique namespace to types to avoid conflicts', 'gato-graphql') }
+				text={ __('Add a unique namespace to types to avoid conflicts', 'gatographql') }
 			/>
 			{ !isSelected && (
 				<>
 					<br />
 					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
-						<span>🟡 { __('Default', 'gato-graphql') }</span>
+						<span>🟡 { __('Default', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
-						<span>✅ { __('Use namespacing', 'gato-graphql') }</span>
+						<span>✅ { __('Use namespacing', 'gatographql') }</span>
 					}
 					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
-						<span>❌ { __('Do not use namespacing', 'gato-graphql') }</span>
+						<span>❌ { __('Do not use namespacing', 'gatographql') }</span>
 					}
 				</>
 			) }
@@ -82,8 +82,8 @@ const SchemaConfigNamespacingCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Namespacing', 'gato-graphql'),
-		className: 'gato-graphql-namespacing',
+		header: __('Namespacing', 'gatographql'),
+		className: 'gatographql-namespacing',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

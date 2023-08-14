@@ -645,7 +645,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * For the Standard GraphQL Server there is no need, as it will
              * already produce this state from the AppStateProvider.
              *
-             * @see layers/GatoGraphQLForWP/plugins/gato-graphql/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
+             * @see layers/GatoGraphQLForWP/plugins/gatographql/src/State/AbstractGraphQLEndpointExecuterAppStateProvider.php
              *
              * Please notice: Setting the AppState as needed by GraphQL here
              * means that the InternalGraphQLServer is configured to always
@@ -714,9 +714,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
                 $errorMessage = sprintf(
                     '%s%s',
-                    __('<p><em>(This message is visible only by the admin.)</em></p>', 'gato-graphql'),
+                    __('<p><em>(This message is visible only by the admin.)</em></p>', 'gatographql'),
                     sprintf(
-                        __('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'gato-graphql'),
+                        __('<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>', 'gatographql'),
                         $this->pluginName,
                         $inititalizationException->getMessage(),
                         $inititalizationException->getTraceAsString()
@@ -759,7 +759,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         continue;
                     }
                     // The extension is registered and active!
-                    return $classes . ' is-gato-graphql-customer';
+                    return $classes . ' is-gatographql-customer';
                 }
                 return $classes;
             }

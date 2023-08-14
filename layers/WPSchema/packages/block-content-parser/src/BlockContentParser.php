@@ -210,7 +210,7 @@ class BlockContentParser implements BlockContentParserInterface
             // return new WP_Error('vip-block-data-api-invalid-params', 'Cannot provide blocks to exclude and include at the same time', [ 'status' => 400 ]);
             return new WP_Error(
                 'vip-block-data-api-invalid-params',
-                \__('Cannot provide blocks to exclude and include at the same time', 'gato-graphql'),
+                \__('Cannot provide blocks to exclude and include at the same time', 'gatographql'),
                 [ 'status' => 400 ]
             );
         }
@@ -227,10 +227,10 @@ class BlockContentParser implements BlockContentParserInterface
             // ]);
             $error_message = join(' ', [
                 sprintf(
-                    \__('Error parsing post ID %d: This post does not appear to contain block content.', 'gato-graphql'),
+                    \__('Error parsing post ID %d: This post does not appear to contain block content.', 'gatographql'),
                     $post_id
                 ),
-                \__('This fields is designed to parse Gutenberg blocks and can not read classic editor content.', 'gato-graphql'),
+                \__('This fields is designed to parse Gutenberg blocks and can not read classic editor content.', 'gatographql'),
             ]);
 
             return new WP_Error('vip-block-data-api-no-blocks', $error_message, [ 'status' => 400 ]);

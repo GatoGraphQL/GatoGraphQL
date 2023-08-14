@@ -100,7 +100,7 @@ abstract class AbstractSchemaConfigCustomPostListBlock extends AbstractSchemaCon
                 $postContentElems[] = \sprintf(
                     '<code>%s</code>',
                     \sprintf(
-                        \__('Undefined item with ID %s', 'gato-graphql'),
+                        \__('Undefined item with ID %s', 'gatographql'),
                         $notFoundPostID
                     )
                 );

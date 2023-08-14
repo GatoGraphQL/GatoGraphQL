@@ -15,7 +15,7 @@ import controls from './controls';
 /**
  * Module Constants
  */
-const MODULE_KEY = 'gato-graphql/components';
+const MODULE_KEY = 'gatographql/components';
 
 /**
  * Block editor data store configuration.

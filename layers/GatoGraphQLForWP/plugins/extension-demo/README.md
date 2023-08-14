@@ -27,4 +27,4 @@ The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP),
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
 [link-author]: https://github.com/leoloso
-[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gato-graphql-extension-demo.zip
+[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gatographql-extension-demo.zip

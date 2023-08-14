@@ -113,7 +113,7 @@ class GraphiQLWithExplorer extends Component {
 		const parsedQuery = parse(/*this.state.query*/query || "");
 
 		if (!parsedQuery) {
-			console.error(__('Couldn\'t parse query document', 'gato-graphql'));
+			console.error(__('Couldn\'t parse query document', 'gatographql'));
 			return null;
 		}
 
@@ -216,23 +216,23 @@ class GraphiQLWithExplorer extends Component {
 						<GraphiQL.Toolbar>
 							<GraphiQL.Button
 								onClick={ () => this._graphiql.handlePrettifyQuery() }
-								label={ __('Prettify', 'gato-graphql') }
-								title={ __('Prettify Query (Shift-Ctrl-P)', 'gato-graphql') }
+								label={ __('Prettify', 'gatographql') }
+								title={ __('Prettify Query (Shift-Ctrl-P)', 'gatographql') }
 							/>
 							<GraphiQL.Button
 								onClick={ () => this._graphiql.handleCopyQuery() }
-								title={ __('Copy Query (Shift-Ctrl-C)', 'gato-graphql') }
-								label={ __('Copy', 'gato-graphql') }
+								title={ __('Copy Query (Shift-Ctrl-C)', 'gatographql') }
+								label={ __('Copy', 'gatographql') }
 							/>
 							<GraphiQL.Button
 								onClick={ () => this._graphiql.handleToggleHistory() }
-								label={ __('History', 'gato-graphql') }
-								title={ __('Show History', 'gato-graphql') }
+								label={ __('History', 'gatographql') }
+								title={ __('Show History', 'gatographql') }
 							/>
 							<GraphiQL.Button
 								onClick={ this._handleToggleExplorer }
-								label={ __('Explorer', 'gato-graphql') }
-								title={ __('Toggle Explorer', 'gato-graphql') }
+								label={ __('Explorer', 'gatographql') }
+								title={ __('Toggle Explorer', 'gatographql') }
 							/>
 						</GraphiQL.Toolbar>
 					</GraphiQL>

@@ -117,11 +117,11 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getName(string $module): string
     {
         return match ($module) {
-            self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'gato-graphql'),
-            self::WELCOME_GUIDES => \__('Welcome Guides', 'gato-graphql'),
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional Gato GraphQL Documentation', 'gato-graphql'),
-            self::CUSTOM_ENDPOINT_OVERVIEW => \__('Custom Endpoint Overview', 'gato-graphql'),
-            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Persisted Query Endpoint Overview', 'gato-graphql'),
+            self::EXCERPT_AS_DESCRIPTION => \__('Excerpt as Description', 'gatographql'),
+            self::WELCOME_GUIDES => \__('Welcome Guides', 'gatographql'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Additional Gato GraphQL Documentation', 'gatographql'),
+            self::CUSTOM_ENDPOINT_OVERVIEW => \__('Custom Endpoint Overview', 'gatographql'),
+            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Persisted Query Endpoint Overview', 'gatographql'),
             default => $module,
         };
     }
@@ -129,15 +129,15 @@ class UserInterfaceFunctionalityModuleResolver extends AbstractFunctionalityModu
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::EXCERPT_AS_DESCRIPTION => \__('Provide a description of the different entities (Custom Endpoints, Persisted Queries, and others) through their excerpt', 'gato-graphql'),
+            self::EXCERPT_AS_DESCRIPTION => \__('Provide a description of the different entities (Custom Endpoints, Persisted Queries, and others) through their excerpt', 'gatographql'),
             self::WELCOME_GUIDES => sprintf(
-                \__('Display welcome guides which demonstrate how to use the plugin\'s different functionalities. <em>It requires WordPress version \'%s\' or above, or Gutenberg version \'%s\' or above</em>', 'gato-graphql'),
+                \__('Display welcome guides which demonstrate how to use the plugin\'s different functionalities. <em>It requires WordPress version \'%s\' or above, or Gutenberg version \'%s\' or above</em>', 'gatographql'),
                 '5.5',
                 '8.2'
             ),
-            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the Gato GraphQL', 'gato-graphql'),
-            self::CUSTOM_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Custom Endpoint', 'gato-graphql'),
-            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Persisted Query Endpoint', 'gato-graphql'),
+            self::SCHEMA_CONFIGURATION_ADDITIONAL_DOCUMENTATION => \__('Documentation on using the Gato GraphQL', 'gatographql'),
+            self::CUSTOM_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Custom Endpoint', 'gatographql'),
+            self::PERSISTED_QUERY_ENDPOINT_OVERVIEW => \__('Sidebar component displaying Properties for a Persisted Query Endpoint', 'gatographql'),
             default => parent::getDescription($module),
         };
     }

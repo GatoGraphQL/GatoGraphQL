@@ -8,7 +8,7 @@ Requires PHP: 8.1
 Author: Gato GraphQL
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-Text Domain: gato-graphql-testing
+Text Domain: gatographql-testing
 Domain Path: /languages
 */
 
@@ -43,8 +43,8 @@ add_action(
                 _e(sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
-                        __('Functionality in plugin <strong>%s</strong> can only be enabled during development or testing.', 'gato-graphql-testing'),
-                        __('Gato GraphQL - Testing', 'gato-graphql-testing')
+                        __('Functionality in plugin <strong>%s</strong> can only be enabled during development or testing.', 'gatographql-testing'),
+                        __('Gato GraphQL - Testing', 'gatographql-testing')
                     )
                 ));
             });

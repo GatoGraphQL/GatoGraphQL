@@ -23,7 +23,7 @@ class ModulesMenuPage extends AbstractItemListTableMenuPage
 
     protected function getHeader(): string
     {
-        return \__('Gato GraphQL — Modules', 'gato-graphql');
+        return \__('Gato GraphQL — Modules', 'gatographql');
     }
 
     protected function hasViews(): bool
@@ -33,7 +33,7 @@ class ModulesMenuPage extends AbstractItemListTableMenuPage
 
     protected function getScreenOptionLabel(): string
     {
-        return \__('Modules', 'gato-graphql');
+        return \__('Modules', 'gatographql');
     }
 
     /**

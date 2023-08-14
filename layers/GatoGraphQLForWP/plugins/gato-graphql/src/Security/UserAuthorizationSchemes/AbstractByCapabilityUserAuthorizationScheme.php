@@ -19,7 +19,7 @@ abstract class AbstractByCapabilityUserAuthorizationScheme extends AbstractUserA
     public function getDescription(): string
     {
         return sprintf(
-            \__('Users with capability: "%s"', 'gato-graphql'),
+            \__('Users with capability: "%s"', 'gatographql'),
             $this->getSchemaEditorAccessCapability()
         );
     }

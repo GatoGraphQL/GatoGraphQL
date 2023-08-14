@@ -49,7 +49,7 @@ trait DocMenuPageTrait
         if ($count > $relativePathDirLevels) {
             return sprintf(
                 '<p>%s</p>',
-                \__('Path is not reachable', 'gato-graphql')
+                \__('Path is not reachable', 'gatographql')
             );
         }
 
@@ -72,7 +72,7 @@ trait DocMenuPageTrait
         ) ?? sprintf(
             '<p>%s</p>',
             sprintf(
-                \__('Page \'%s\' does not exist', 'gato-graphql'),
+                \__('Page \'%s\' does not exist', 'gatographql'),
                 $doc
             )
         );

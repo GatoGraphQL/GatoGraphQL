@@ -48,7 +48,7 @@ trait HasMarkdownDocumentationModuleResolverTrait
             $markdownFilename,
         ) ?? sprintf(
             '<p>%s</p>',
-            \__('Oops, the documentation for this module is not available', 'gato-graphql')
+            \__('Oops, the documentation for this module is not available', 'gatographql')
         );
     }
 

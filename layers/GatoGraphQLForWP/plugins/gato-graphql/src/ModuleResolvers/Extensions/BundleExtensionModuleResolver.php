@@ -29,12 +29,12 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
 
     public function getName(string $module): string
     {
-        $placeholder = \__('“%s” Bundle', 'gato-graphql');
+        $placeholder = \__('“%s” Bundle', 'gatographql');
         return match ($module) {
-            self::ALL_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gato-graphql')),
-            self::APPLICATION_GLUE_AND_AUTOMATOR => sprintf($placeholder, \__('Application Glue & Automator', 'gato-graphql')),
-            self::CONTENT_TRANSLATION => sprintf($placeholder, \__('Content Translation', 'gato-graphql')),
-            self::PUBLIC_API => sprintf($placeholder, \__('Public API', 'gato-graphql')),
+            self::ALL_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
+            self::APPLICATION_GLUE_AND_AUTOMATOR => sprintf($placeholder, \__('Application Glue & Automator', 'gatographql')),
+            self::CONTENT_TRANSLATION => sprintf($placeholder, \__('Content Translation', 'gatographql')),
+            self::PUBLIC_API => sprintf($placeholder, \__('Public API', 'gatographql')),
             default => $module,
         };
     }
@@ -42,10 +42,10 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin. As new extensions are created and released, they will also be added to this bundle.', 'gato-graphql'),
-            self::APPLICATION_GLUE_AND_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gato-graphql'),
-            self::CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gato-graphql'),
-            self::PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gato-graphql'),
+            self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin. As new extensions are created and released, they will also be added to this bundle.', 'gatographql'),
+            self::APPLICATION_GLUE_AND_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gatographql'),
+            self::CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gatographql'),
+            self::PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gatographql'),
             default => parent::getDescription($module),
         };
     }

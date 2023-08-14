@@ -28,7 +28,7 @@ class SchemaConfigSchemaCommentMetaBlock extends AbstractSchemaConfigSchemaMetaB
 
     protected function getBlockTitle(): string
     {
-        return \__('Comment Meta', 'gato-graphql');
+        return \__('Comment Meta', 'gatographql');
     }
 
     /**

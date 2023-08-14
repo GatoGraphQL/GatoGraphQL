@@ -18,7 +18,7 @@ const TypeFieldMultiSelectControl = compose( [
 			getTypeFields,
 			hasRetrievedTypeFields,
 			getRetrievingTypeFieldsErrorMessage,
-		} = select ( 'gato-graphql/components' );
+		} = select ( 'gatographql/components' );
 		/**
 		 * Convert typeFields object, from this structure:
 		 * [{type:"Type", fields:["field1", "field2",...]},...]

@@ -150,19 +150,19 @@ The response is:
     ],
     "_sendHTTPRequests": [
       {
-        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9351393Z&urlSigningMethod=HMACV2&urlSignature=8v8cDVZKAnkXoN8z1GdjXLz4SCGkpv%2Fl0qjlDArac5M%3D"
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gatographql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9351393Z&urlSigningMethod=HMACV2&urlSignature=8v8cDVZKAnkXoN8z1GdjXLz4SCGkpv%2Fl0qjlDArac5M%3D"
       },
       {
-        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9333471Z&urlSigningMethod=HMACV2&urlSignature=ffsyy0p97oeQByMD3X6WKbFyIEbh6nbU%2BFsXKHQHYSM%3D"
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gatographql-testing-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9333471Z&urlSigningMethod=HMACV2&urlSignature=ffsyy0p97oeQByMD3X6WKbFyIEbh6nbU%2BFsXKHQHYSM%3D"
       },
       {
-        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9699160Z&urlSigningMethod=HMACV2&urlSignature=gUi%2F39RS7X5YgVZbEu977ufFt1girQKeNI7LP61gxfY%3D"
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gatographql-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9699160Z&urlSigningMethod=HMACV2&urlSignature=gUi%2F39RS7X5YgVZbEu977ufFt1girQKeNI7LP61gxfY%3D"
       }
     ],
     "artifactDownloadURLs": [
-      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9351393Z&urlSigningMethod=HMACV2&urlSignature=8v8cDVZKAnkXoN8z1GdjXLz4SCGkpv%2Fl0qjlDArac5M%3D",
-      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9333471Z&urlSigningMethod=HMACV2&urlSignature=ffsyy0p97oeQByMD3X6WKbFyIEbh6nbU%2BFsXKHQHYSM%3D",
-      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9699160Z&urlSigningMethod=HMACV2&urlSignature=gUi%2F39RS7X5YgVZbEu977ufFt1girQKeNI7LP61gxfY%3D"
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gatographql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9351393Z&urlSigningMethod=HMACV2&urlSignature=8v8cDVZKAnkXoN8z1GdjXLz4SCGkpv%2Fl0qjlDArac5M%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gatographql-testing-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9333471Z&urlSigningMethod=HMACV2&urlSignature=ffsyy0p97oeQByMD3X6WKbFyIEbh6nbU%2BFsXKHQHYSM%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53473/signedartifactscontent?artifactName=gatographql-1.0.0-dev&urlExpires=2023-07-14T03%3A31%3A00.9699160Z&urlSigningMethod=HMACV2&urlSignature=gUi%2F39RS7X5YgVZbEu977ufFt1girQKeNI7LP61gxfY%3D"
     ]
   }
 }
@@ -371,7 +371,7 @@ The response is:
         {
           "id": 803739808,
           "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDg=",
-          "name": "gato-graphql-testing-schema-1.0.0-dev",
+          "name": "gatographql-testing-schema-1.0.0-dev",
           "size_in_bytes": 62952,
           "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808",
           "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808/zip",
@@ -390,7 +390,7 @@ The response is:
         {
           "id": 803739806,
           "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDY=",
-          "name": "gato-graphql-testing-1.0.0-dev",
+          "name": "gatographql-testing-1.0.0-dev",
           "size_in_bytes": 123914,
           "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806",
           "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806/zip",
@@ -409,7 +409,7 @@ The response is:
         {
           "id": 803739803,
           "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDM=",
-          "name": "gato-graphql-1.0.0-dev",
+          "name": "gatographql-1.0.0-dev",
           "size_in_bytes": 33394234,
           "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803",
           "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803/zip",
@@ -568,13 +568,13 @@ As `@remove` is now commented out, we can now visualize the generated JSON objec
     ],
     "_sendHTTPRequests": [
       {
-        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2766840Z&urlSigningMethod=HMACV2&urlSignature=Ype82npdlUlLk4gcGZcBiz80e0ZuvcvnC2rdaSDg9p8%3D"
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gatographql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2766840Z&urlSigningMethod=HMACV2&urlSignature=Ype82npdlUlLk4gcGZcBiz80e0ZuvcvnC2rdaSDg9p8%3D"
       },
       {
-        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2961965Z&urlSigningMethod=HMACV2&urlSignature=FdWAh8JXNPJsVIPNuiYN8R7i0vRnN8eCGc57VZDNUEc%3D"
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gatographql-testing-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2961965Z&urlSigningMethod=HMACV2&urlSignature=FdWAh8JXNPJsVIPNuiYN8R7i0vRnN8eCGc57VZDNUEc%3D"
       },
       {
-        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2861087Z&urlSigningMethod=HMACV2&urlSignature=0Go8QnkZqIbn0urTQqfbMW4rQtjMfDAR9fSm6fCePjw%3D"
+        "artifactDownloadURL": "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gatographql-1.0.0-dev&urlExpires=2023-07-14T07%3A26%3A47.2861087Z&urlSigningMethod=HMACV2&urlSignature=0Go8QnkZqIbn0urTQqfbMW4rQtjMfDAR9fSm6fCePjw%3D"
       }
     ]
   }
@@ -598,9 +598,9 @@ This will print:
   "data": {
     // ...
     "artifactDownloadURLs": [
-      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.4998268Z&urlSigningMethod=HMACV2&urlSignature=1c1qNRfD9KFwSuzMjw9tsumq9B5I1c9H4LWgSbR0Kwg%3D",
-      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-testing-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.4878741Z&urlSigningMethod=HMACV2&urlSignature=htjc1HrmZpbecECpBQnEHhlP7lkqkdyjzATb0vFnzDE%3D",
-      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gato-graphql-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.5240496Z&urlSigningMethod=HMACV2&urlSignature=YDuHFqweL9m6LIycLsVy0bJJ4zePc4pWkHz8RfjfzCg%3D"
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gatographql-testing-schema-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.4998268Z&urlSigningMethod=HMACV2&urlSignature=1c1qNRfD9KFwSuzMjw9tsumq9B5I1c9H4LWgSbR0Kwg%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gatographql-testing-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.4878741Z&urlSigningMethod=HMACV2&urlSignature=htjc1HrmZpbecECpBQnEHhlP7lkqkdyjzATb0vFnzDE%3D",
+      "https://pipelines.actions.githubusercontent.com/serviceHosts/a6be3ecc-6518-4aaa-b5ec-232be0438a37/_apis/pipelines/1/runs/53479/signedartifactscontent?artifactName=gatographql-1.0.0-dev&urlExpires=2023-07-14T07%3A37%3A42.5240496Z&urlSigningMethod=HMACV2&urlSignature=YDuHFqweL9m6LIycLsVy0bJJ4zePc4pWkHz8RfjfzCg%3D"
     ]
   }
 }

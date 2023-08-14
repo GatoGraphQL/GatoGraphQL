@@ -350,7 +350,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 true
             ),
             [
-                'description' => \__('Description', 'gato-graphql'),
+                'description' => \__('Description', 'gatographql'),
             ],
             array_slice(
                 $columns,
@@ -729,16 +729,16 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         return array(
             'name'               => $names_uc,
             'singular_name'      => $name_uc,
-            'add_new'            => sprintf(\__('Add New %s', 'gato-graphql'), $name_uc),
-            'add_new_item'       => sprintf(\__('Add New %s', 'gato-graphql'), $name_uc),
-            'edit_item'          => sprintf(\__('Edit %s', 'gato-graphql'), $name_uc),
-            'new_item'           => sprintf(\__('New %s', 'gato-graphql'), $name_uc),
-            'all_items'          => $names_uc,//sprintf(\__('All %s', 'gato-graphql'), $names_uc),
-            'view_item'          => sprintf(\__('View %s', 'gato-graphql'), $name_uc),
-            'search_items'       => sprintf(\__('Search %s', 'gato-graphql'), $names_uc),
-            'not_found'          => sprintf(\__('No %s found', 'gato-graphql'), $names_lc),
-            'not_found_in_trash' => sprintf(\__('No %s found in Trash', 'gato-graphql'), $names_lc),
-            'parent_item_colon'  => sprintf(\__('Parent %s:', 'gato-graphql'), $name_uc),
+            'add_new'            => sprintf(\__('Add New %s', 'gatographql'), $name_uc),
+            'add_new_item'       => sprintf(\__('Add New %s', 'gatographql'), $name_uc),
+            'edit_item'          => sprintf(\__('Edit %s', 'gatographql'), $name_uc),
+            'new_item'           => sprintf(\__('New %s', 'gatographql'), $name_uc),
+            'all_items'          => $names_uc,//sprintf(\__('All %s', 'gatographql'), $names_uc),
+            'view_item'          => sprintf(\__('View %s', 'gatographql'), $name_uc),
+            'search_items'       => sprintf(\__('Search %s', 'gatographql'), $names_uc),
+            'not_found'          => sprintf(\__('No %s found', 'gatographql'), $names_lc),
+            'not_found_in_trash' => sprintf(\__('No %s found in Trash', 'gatographql'), $names_lc),
+            'parent_item_colon'  => sprintf(\__('Parent %s:', 'gatographql'), $name_uc),
         );
     }
 

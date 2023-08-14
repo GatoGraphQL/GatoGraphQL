@@ -44,10 +44,10 @@ const SchemaConfigCustomPostsCard = ( props ) => {
 		<>
 			<div>
 				<span>
-					<em>{ __('Included custom post types:', 'gato-graphql') }</em>
+					<em>{ __('Included custom post types:', 'gatographql') }</em>
 					<InfoTooltip
 						{ ...props }
-						text={ __('Select the custom post types that can be queried. A custom post type will be represented by its own type in the schema if available (such as Post or Page) or, otherwise, via GenericCustomPost.', 'gato-graphql') }
+						text={ __('Select the custom post types that can be queried. A custom post type will be represented by its own type in the schema if available (such as Post or Page) or, otherwise, via GenericCustomPost.', 'gatographql') }
 					/>
 				</span>
 				<EditableSelect
@@ -64,8 +64,8 @@ const SchemaConfigCustomPostsCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Custom Posts', 'gato-graphql'),
-		className: 'gato-graphql-customposts',
+		header: __('Custom Posts', 'gatographql'),
+		className: 'gatographql-customposts',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

@@ -24,12 +24,12 @@ const defaultBehavior = window.gatoGraphqlSchemaConfigSchemaTaxonomyMeta.default
  *
  * @see https://developer.wordpress.org/block-editor/developers/block-api/#registering-a-block
  */
-registerBlockType( 'gato-graphql/schema-config-schema-taxonomy-meta', {
+registerBlockType( 'gatographql/schema-config-schema-taxonomy-meta', {
 	/**
 	 * This is the display title for your block, which can be translated with `i18n` functions.
 	 * The block inserter will show this name.
 	 */
-	title: __( 'Taxonomy Meta', 'gato-graphql' ),
+	title: __( 'Taxonomy Meta', 'gatographql' ),
 
 	/**
 	 * This is a short description for your block, can be translated with `i18n` functions.
@@ -37,14 +37,14 @@ registerBlockType( 'gato-graphql/schema-config-schema-taxonomy-meta', {
 	 */
 	description: __(
 		'Configure taxonomy meta options in the Schema Configuration',
-		'gato-graphql'
+		'gatographql'
 	),
 
 	/**
 	 * Blocks are grouped into categories to help users browse and discover them.
 	 * The categories provided by core are `common`, `embed`, `formatting`, `layout` and `widgets`.
 	 */
-	category: 'gato-graphql-schema-config',
+	category: 'gatographql-schema-config',
 
 	/**
 	 * An icon property should be specified to make it easier to identify a block.

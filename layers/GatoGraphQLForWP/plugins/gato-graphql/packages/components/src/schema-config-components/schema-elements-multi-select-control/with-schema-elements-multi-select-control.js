@@ -31,9 +31,9 @@ const withSchemaElementsMultiSelectControl = () => createHigherOrderComponent(
 		if (! enableOperations && ! enableTypeFields && ! enableGlobalFields && ! enableDirectives) {
 			throw 'At least 1 option must be enabled: [operations, type fields, global fields, directives]';
 		}
-		const className = 'gato-graphql-multi-select-control-list';
-		const leftSideLabel = selectLabel || __('Select schema elements:', 'gato-graphql');
-		const rightSideLabel = configurationLabel || __('Configuration:', 'gato-graphql');
+		const className = 'gatographql-multi-select-control-list';
+		const leftSideLabel = selectLabel || __('Select schema elements:', 'gatographql');
+		const rightSideLabel = configurationLabel || __('Configuration:', 'gatographql');
 		return (
 			<div className={ className }>
 				<div className={ className+'__items' }>

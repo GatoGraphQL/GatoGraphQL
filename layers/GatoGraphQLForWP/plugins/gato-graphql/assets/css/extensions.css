@@ -1,11 +1,11 @@
 /**
  * Make all items have the same height
  */
-.gato-graphql-list-table  #the-list {
+.gatographql-list-table  #the-list {
     display: flex;
     flex-wrap: wrap;
 }
-.gato-graphql-list-table .plugin-card {
+.gatographql-list-table .plugin-card {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -96,9 +96,9 @@
     cursor: default;
     transform: none !important;
 }
-.plugin-card.plugin-card-bundler-active .gato-graphql-extension-bundle-action-label {
+.plugin-card.plugin-card-bundler-active .gatographql-extension-bundle-action-label {
     display: block !important;
 }
-.plugin-card.plugin-card-bundler-active .gato-graphql-extension-action-label {
+.plugin-card.plugin-card-bundler-active .gatographql-extension-action-label {
     display: none;
 }

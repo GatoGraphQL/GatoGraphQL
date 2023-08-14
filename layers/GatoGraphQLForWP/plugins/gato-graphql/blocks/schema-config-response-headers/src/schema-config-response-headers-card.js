@@ -23,12 +23,12 @@ const SchemaConfigResponseHeadersCard = ( props ) => {
 	const entries = attributes[ entriesAttributeName ];
 	return (
 		<>
-			<em>{ __('Response Headers', 'gato-graphql') }</em>
+			<em>{ __('Response Headers', 'gatographql') }</em>
 			<EditableArrayTextareaControl
 				{ ...props }
 				attributeName={ entriesAttributeName }
 				values={ entries }
-				help={ __('Provide custom headers to add to the API response. One header per line, with format: `{header name}: {header value}`', 'gato-graphql') }
+				help={ __('Provide custom headers to add to the API response. One header per line, with format: `{header name}: {header value}`', 'gatographql') }
 				rows='10'
 			/>
 		</>
@@ -38,8 +38,8 @@ const SchemaConfigResponseHeadersCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Response Headers', 'gato-graphql'),
-		className: 'gato-graphql-response-headers',
+		header: __('Response Headers', 'gatographql'),
+		className: 'gatographql-response-headers',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

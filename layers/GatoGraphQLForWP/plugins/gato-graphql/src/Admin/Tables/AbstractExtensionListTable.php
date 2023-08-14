@@ -191,7 +191,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     {
         return sprintf(
             '%s%s',
-            \__('Get Extension', 'gato-graphql'),
+            \__('Get Extension', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }
@@ -205,7 +205,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         if (isset($this->error)) {
             parent::no_items();
         } else { ?>
-            <div class="no-plugin-results"><?php _e('Ooops something went wrong: No extensions found. Please contact the admin.', 'gato-graphql'); ?></div>
+            <div class="no-plugin-results"><?php _e('Ooops something went wrong: No extensions found. Please contact the admin.', 'gatographql'); ?></div>
             <?php
         }
     }
@@ -350,11 +350,11 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
 
         return sprintf(
             $additionalItemHTMLPlaceholder,
-            \__('Missing an Extension?', 'gato-graphql'),
+            \__('Missing an Extension?', 'gatographql'),
             $alternativeGatoGraphQLLogoURL,
             $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
-            \__('Request an Extension', 'gato-graphql'),
-            \__('Needing an integration with a 3rd-party plugin? Let us know, and we can work on an extension.', 'gato-graphql'),
+            \__('Request an Extension', 'gatographql'),
+            \__('Needing an integration with a 3rd-party plugin? Let us know, and we can work on an extension.', 'gatographql'),
             \__('Supporting the needs of your app via <strong>Gato GraphQL</strong>'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );

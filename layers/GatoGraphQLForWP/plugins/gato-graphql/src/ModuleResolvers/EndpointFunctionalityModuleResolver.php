@@ -158,10 +158,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     public function getName(string $module): string
     {
         return match ($module) {
-            self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'gato-graphql'),
-            self::SINGLE_ENDPOINT => \__('Single Endpoint', 'gato-graphql'),
-            self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'gato-graphql'),
-            self::PERSISTED_QUERIES => \__('Persisted Queries', 'gato-graphql'),
+            self::PRIVATE_ENDPOINT => \__('Private Endpoint', 'gatographql'),
+            self::SINGLE_ENDPOINT => \__('Single Endpoint', 'gatographql'),
+            self::CUSTOM_ENDPOINTS => \__('Custom Endpoints', 'gatographql'),
+            self::PERSISTED_QUERIES => \__('Persisted Queries', 'gatographql'),
             default => $module,
         };
     }
@@ -172,15 +172,15 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
         return match ($module) {
             self::PRIVATE_ENDPOINT => \sprintf(
-                \__('Private GraphQL endpoint, accessible only within the wp-admin, under <code>%s</code>', 'gato-graphql'),
+                \__('Private GraphQL endpoint, accessible only within the wp-admin, under <code>%s</code>', 'gatographql'),
                 $this->getEndpointHelpers()->getAdminGraphQLEndpoint()
             ),
             self::SINGLE_ENDPOINT => \sprintf(
-                \__('Expose the single GraphQL endpoint under <code>%s</code>', 'gato-graphql'),
+                \__('Expose the single GraphQL endpoint under <code>%s</code>', 'gatographql'),
                 $moduleConfiguration->getGatoGraphQLEndpoint()
             ),
-            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'gato-graphql'),
-            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'gato-graphql'),
+            self::CUSTOM_ENDPOINTS => \__('Expose different subsets of the schema for different targets, such as users (clients, employees, etc), applications (website, mobile app, etc), context (weekday, weekend, etc), and others', 'gatographql'),
+            self::PERSISTED_QUERIES => \__('Expose predefined responses through a custom URL, akin to using GraphQL queries to publish REST endpoints', 'gatographql'),
             default => parent::getDescription($module)
         };
     }
@@ -251,8 +251,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Endpoint path', 'gato-graphql'),
-                Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'gato-graphql'),
+                Properties::TITLE => \__('Endpoint path', 'gatographql'),
+                Properties::DESCRIPTION => \__('URL path to expose the single GraphQL endpoint', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module === self::CUSTOM_ENDPOINTS) {
@@ -263,8 +263,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Endpoint base slug', 'gato-graphql'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'gato-graphql'),
+                Properties::TITLE => \__('Endpoint base slug', 'gatographql'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Custom Endpoint', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module === self::PERSISTED_QUERIES) {
@@ -275,8 +275,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Endpoint base slug', 'gato-graphql'),
-                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'gato-graphql'),
+                Properties::TITLE => \__('Endpoint base slug', 'gatographql'),
+                Properties::DESCRIPTION => \__('URL base slug to expose the Persisted Query', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }
@@ -290,10 +290,10 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                 self::PERSISTED_QUERIES,
             ]) && $this->getModuleRegistry()->isModuleEnabled(SchemaConfigurationFunctionalityModuleResolver::SCHEMA_CONFIGURATION)
         ) {
-            $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gato-graphql');
+            $defaultDescriptionPlaceholder = \__('Schema Configuration to use in %s which have option <code>"Default"</code> selected', 'gatographql');
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    \__('Schema Configuration to use in the private endpoint <code>%1$s</code>.<br/><br/>The private endpoint powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%5$s</a>.', 'gato-graphql'),
+                    \__('Schema Configuration to use in the private endpoint <code>%1$s</code>.<br/><br/>The private endpoint powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%5$s</a>.', 'gatographql'),
                     ltrim(
                         GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
                         '/'
@@ -314,20 +314,20 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     )),
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 ),
-                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gato-graphql'),
+                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gatographql'),
                 self::CUSTOM_ENDPOINTS => sprintf(
                     $defaultDescriptionPlaceholder,
-                    \__('Custom Endpoints', 'gato-graphql')
+                    \__('Custom Endpoints', 'gatographql')
                 ),
                 self::PERSISTED_QUERIES => sprintf(
                     $defaultDescriptionPlaceholder,
-                    \__('Persisted Queries', 'gato-graphql')
+                    \__('Persisted Queries', 'gatographql')
                 ),
                 default => '',
             };
             // Build all the possible values by fetching all the Schema Configuration posts
             $possibleValues = [
-                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'gato-graphql'),
+                ModuleSettingOptionValues::NO_VALUE_ID => \__('None', 'gatographql'),
             ];
             foreach ($this->getSchemaConfigurationCustomPosts() as $customPost) {
                 $possibleValues[$customPost->ID] = $customPost->post_title;
@@ -343,8 +343,8 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     self::PRIVATE_ENDPOINT,
                     self::SINGLE_ENDPOINT,
                 ])
-                    ? \__('Schema Configuration', 'gato-graphql')
-                    : \__('Default Schema Configuration', 'gato-graphql'),
+                    ? \__('Schema Configuration', 'gatographql')
+                    : \__('Default Schema Configuration', 'gatographql'),
                 Properties::DESCRIPTION => $description,
                 Properties::TYPE => Properties::TYPE_INT,
                 // Fetch all Schema Configurations from the DB

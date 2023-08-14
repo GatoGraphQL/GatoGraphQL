@@ -44,10 +44,10 @@ const SchemaConfigCategoriesCard = ( props ) => {
 		<>
 			<div>
 				<span>
-					<em>{ __('Included category taxonomies:', 'gato-graphql') }</em>
+					<em>{ __('Included category taxonomies:', 'gatographql') }</em>
 					<InfoTooltip
 						{ ...props }
-						text={ __('Select the category taxonomies that can be queried. A category taxonomy will be represented by its own type in the schema if available (such as PostCategory) or, otherwise, via GenericCategory.', 'gato-graphql') }
+						text={ __('Select the category taxonomies that can be queried. A category taxonomy will be represented by its own type in the schema if available (such as PostCategory) or, otherwise, via GenericCategory.', 'gatographql') }
 					/>
 				</span>
 				<EditableSelect
@@ -64,8 +64,8 @@ const SchemaConfigCategoriesCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Categories', 'gato-graphql'),
-		className: 'gato-graphql-categories',
+		header: __('Categories', 'gatographql'),
+		className: 'gatographql-categories',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

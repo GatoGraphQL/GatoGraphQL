@@ -21,7 +21,7 @@ trait ResponsiveVideoContainerMenuPageTrait
          * Styles for content within the modal window
          */
         \wp_enqueue_style(
-            'gato-graphql-responsive-video-container',
+            'gatographql-responsive-video-container',
             $mainPluginURL . 'assets/css/responsive-video-container.css',
             array(),
             $mainPluginVersion

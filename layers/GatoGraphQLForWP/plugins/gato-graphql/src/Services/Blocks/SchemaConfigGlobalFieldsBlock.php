@@ -45,15 +45,15 @@ class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigBlock
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
 
         $schemaExposureLabels = [
-            GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('⚫️ Do not expose', 'gato-graphql'),
-            GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('🔵 Expose under the Root type only', 'gato-graphql'),
-            GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('⚪️ Expose under all types', 'gato-graphql'),
+            GlobalFieldsSchemaExposure::DO_NOT_EXPOSE => \__('⚫️ Do not expose', 'gatographql'),
+            GlobalFieldsSchemaExposure::EXPOSE_IN_ROOT_TYPE_ONLY => \__('🔵 Expose under the Root type only', 'gatographql'),
+            GlobalFieldsSchemaExposure::EXPOSE_IN_ALL_TYPES => \__('⚪️ Expose under all types', 'gatographql'),
         ];
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $blockContent = sprintf(
             $blockContentPlaceholder,
-            \__('Schema exposure:', 'gato-graphql'),
+            \__('Schema exposure:', 'gatographql'),
             $schemaExposureLabels[$attributes[self::ATTRIBUTE_NAME_SCHEMA_EXPOSURE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
@@ -67,7 +67,7 @@ class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigBlock
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
             $className . '__title',
-            \__('Global Fields', 'gato-graphql'),
+            \__('Global Fields', 'gatographql'),
             $blockContent
         );
     }

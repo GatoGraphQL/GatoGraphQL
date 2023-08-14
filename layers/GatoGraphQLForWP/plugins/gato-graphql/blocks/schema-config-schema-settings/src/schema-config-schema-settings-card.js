@@ -19,9 +19,9 @@ const SchemaConfigSettingsCard = ( props ) => {
 	return (
 		<AllowAccessToEntriesCard
 			{ ...props }
-			entriesHeader={ __('Settings entries:', 'gato-graphql') }
+			entriesHeader={ __('Settings entries:', 'gatographql') }
 			entriesLabelDescIntro={
-				__('List of all the option names, to either allow or deny access to, when querying fields `optionValue`, `optionValues` and `optionObjectValue` (one entry per line).', 'gato-graphql')
+				__('List of all the option names, to either allow or deny access to, when querying fields `optionValue`, `optionValues` and `optionObjectValue` (one entry per line).', 'gatographql')
 			}
 			labelExampleItem='siteurl'
 			labelExampleEntries={
@@ -38,8 +38,8 @@ const SchemaConfigSettingsCard = ( props ) => {
 export default compose( [
 	withEditableOnFocus(),
 	withState( {
-		header: __('Settings', 'gato-graphql'),
-		className: 'gato-graphql-settings',
+		header: __('Settings', 'gatographql'),
+		className: 'gatographql-settings',
 		getMarkdownContentCallback: getModuleDocMarkdownContentOrUseDefault
 	} ),
 	withCard(),

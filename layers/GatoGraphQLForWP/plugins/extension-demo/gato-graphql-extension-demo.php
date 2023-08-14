@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Gato GraphQL - Extension Demo
-Plugin URI: https://github.com/GatoGraphQL/gato-graphql-extension-demo-dist
+Plugin URI: https://github.com/GatoGraphQL/gatographql-extension-demo-dist
 Description: Demonstration of extending the GraphQL schema, for Gato GraphQL
 Version: 1.0.0-dev
 Requires at least: 5.4
@@ -9,7 +9,7 @@ Requires PHP: 8.1
 Author: Gato GraphQL
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
-Text Domain: gato-graphql-extension-demo
+Text Domain: gatographql-extension-demo
 Domain Path: /languages
 */
 
@@ -28,7 +28,7 @@ if (!defined('ABSPATH')) {
  * @see https://github.com/leoloso/PoP/issues/2051
  */
 // \add_action('init', function (): void {
-//     load_plugin_textdomain('gato-graphql-extension-demo', false, plugin_basename(__FILE__) . '/languages');
+//     load_plugin_textdomain('gatographql-extension-demo', false, plugin_basename(__FILE__) . '/languages');
 // });
 
 /**
@@ -45,7 +45,7 @@ add_action(
          * @see https://getcomposer.org/doc/articles/versions.md#stabilities
          */
         $extensionVersion = '1.0.0-dev';
-        $extensionName = \__('Gato GraphQL - Extension Demo', 'gato-graphql-extension-demo');
+        $extensionName = \__('Gato GraphQL - Extension Demo', 'gatographql-extension-demo');
         $mainPluginVersionConstraint = '^1.0';
         
         /**
@@ -56,8 +56,8 @@ add_action(
                 _e(sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
-                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gato-graphql-extension-demo'),
-                        __('Gato GraphQL', 'gato-graphql-extension-demo'),
+                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gatographql-extension-demo'),
+                        __('Gato GraphQL', 'gatographql-extension-demo'),
                         $extensionName
                     )
                 ));

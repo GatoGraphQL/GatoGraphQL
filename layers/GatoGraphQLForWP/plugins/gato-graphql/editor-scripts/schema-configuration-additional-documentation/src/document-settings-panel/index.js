@@ -52,20 +52,20 @@ const implicitFeaturesDocEntries = [
 const DocumentSettingsPanel = () => (
     <PluginDocumentSettingPanel
         name={ DOCUMENT_SETTINGS_PANEL_NAME }
-        title={ __('Additional Gato GraphQL Documentation', 'gato-graphql') }
+        title={ __('Additional Gato GraphQL Documentation', 'gatographql') }
     >
-        {/* <p>{ __('Docs for additional features in Gato GraphQL:', 'gato-graphql') }</p> */}
+        {/* <p>{ __('Docs for additional features in Gato GraphQL:', 'gatographql') }</p> */}
         <p>
             {
                 implicitFeaturesDocEntries.map( ( entry ) =>
                     <div>
                             <MarkdownInfoModalButton
                             text={ entry[0] }
-                            title={ __(`Documentation for: "${ entry[0] }"`, 'gato-graphql') }
+                            title={ __(`Documentation for: "${ entry[0] }"`, 'gatographql') }
                             pageFilename={ entry[1] }
                             getMarkdownContentCallback={ getImplicitFeaturesDocMarkdownContentOrUseDefault }
                             isSmall={ false }
-                            className="gato-graphql-info-modal-button text-wrap"
+                            className="gatographql-info-modal-button text-wrap"
                         />
                     </div>
                 )

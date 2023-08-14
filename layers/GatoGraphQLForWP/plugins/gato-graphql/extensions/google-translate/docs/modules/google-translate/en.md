@@ -35,8 +35,8 @@ For instance, this query translates the post's `title` and `excerpt` fields from
       {
         "enTitle": "Explaining the privacy policy",
         "frTitle": "Expliquer la politique de confidentialité",
-        "enExcerpt": "Our privacy policy is at https://gato-graphql-pro.lndo.site/privacy/, and we are based in Carimano.",
-        "frExcerpt": "Notre politique de confidentialité se trouve sur https://gato-graphql-pro.lndo.site/privacy/, et nous sommes basés à Carimano."
+        "enExcerpt": "Our privacy policy is at https://gatographql-pro.lndo.site/privacy/, and we are based in Carimano.",
+        "frExcerpt": "Notre politique de confidentialité se trouve sur https://gatographql-pro.lndo.site/privacy/, et nous sommes basés à Carimano."
       },
       {
         "enTitle": "HTTP caching improves performance",

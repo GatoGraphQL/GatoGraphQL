@@ -35,9 +35,9 @@ const EndpointGuideButton = ( props ) => {
 	const {
 		guideName,
 		buttonLabel = guideName ? sprintf(
-			__('→ Open Guide: “%s”', 'gato-graphql'),
+			__('→ Open Guide: “%s”', 'gatographql'),
 			guideName
-		) : __('→ Open Guide', 'gato-graphql'),
+		) : __('→ Open Guide', 'gatographql'),
 	} = props;
 	const [ isOpen, setOpen ] = useState( false );
 	return (

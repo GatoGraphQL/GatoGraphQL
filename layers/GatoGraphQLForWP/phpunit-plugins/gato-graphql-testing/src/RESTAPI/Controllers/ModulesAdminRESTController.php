@@ -30,7 +30,7 @@ use function rest_url;
  *   -X POST \
  *   -H "Content-Type: application/json" \
  *   -d '{"state": "enabled"}' \
- *   https://gato-graphql.lndo.site/wp-json/gato-graphql/v1/admin/modules/gatographql_gatographql_graphiql-for-single-endpoint/
+ *   https://gatographql.lndo.site/wp-json/gatographql/v1/admin/modules/gatographql_gatographql_graphiql-for-single-endpoint/
  * ```
  */
 class ModulesAdminRESTController extends AbstractAdminRESTController
@@ -91,8 +91,8 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
             return new WP_Error(
                 '1',
                 sprintf(
-                    __('Parameter \'state\' can only have one of these values: \'%s\'', 'gato-graphql-testing'),
-                    implode(__('\', \'', 'gato-graphql-testing'), self::MODULE_STATES)
+                    __('Parameter \'state\' can only have one of these values: \'%s\'', 'gatographql-testing'),
+                    implode(__('\', \'', 'gatographql-testing'), self::MODULE_STATES)
                 ),
                 [
                     Params::STATE => $value,
@@ -242,12 +242,12 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
                 $this->enqueueFlushRewriteRules();
 
                 $successMessage = sprintf(
-                    __('Module \'%s\' has been updated successfully', 'gato-graphql-testing'),
+                    __('Module \'%s\' has been updated successfully', 'gatographql-testing'),
                     $module
                 );
             } else {
                 $successMessage = sprintf(
-                    __('No updates were performed for module \'%s\'', 'gato-graphql-testing'),
+                    __('No updates were performed for module \'%s\'', 'gatographql-testing'),
                     $module
                 );
             }

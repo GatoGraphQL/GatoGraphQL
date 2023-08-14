@@ -1,4 +1,4 @@
-name: gato-graphql-for-prod
+name: gatographql-for-prod
 recipe: wordpress
 config:
   webroot: wordpress
