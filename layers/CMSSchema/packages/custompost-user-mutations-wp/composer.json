@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/custompost-user-mutations-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post User Mutations\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-user-mutations-wp"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-user-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-user-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "getpop/resources",
     "type": "library",
     "description": "Resources for the website (CSS, JS files)",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "resources"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "resources"],
     "homepage": "https://github.com/getpop/resources",
     "license": "GPL-2.0-or-later",
     "authors": [

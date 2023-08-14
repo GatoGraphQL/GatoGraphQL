@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/stance-mutations",
     "type": "library",
     "description": "Adds support for stance mutations",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "stance-mutations"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "stance-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/stance-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/user-state-mutations",
     "type": "library",
     "description": "Adds support for user state mutations",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "user-state-mutations"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "user-state-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/user-state-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

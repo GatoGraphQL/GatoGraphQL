@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/comment-mutations",
     "type": "library",
     "description": "Adds support for comment mutations",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "comment-mutations"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "comment-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/comment-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

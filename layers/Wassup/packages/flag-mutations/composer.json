@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/flag-mutations",
     "type": "library",
     "description": "Adds mutations for flagging functionality",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "flag-mutations"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "flag-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/flag-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

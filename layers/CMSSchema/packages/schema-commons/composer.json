@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/schema-commons",
     "type": "library",
     "description": "Code shared by the schema packages",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "schema-commons"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "schema-commons"],
     "homepage": "https://github.com/PoPCMSSchema/schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [

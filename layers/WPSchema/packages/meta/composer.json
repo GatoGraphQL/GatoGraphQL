@@ -2,7 +2,7 @@
     "name": "pop-wp-schema/meta",
     "type": "library",
     "description": "WordPress-specific Meta data model",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "meta"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "meta"],
     "homepage": "https://github.com/PoPWPSchema/meta",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/settings",
     "type": "library",
     "description": "Fetch settings from the site",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "settings"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "settings"],
     "homepage": "https://github.com/PoPCMSSchema/settings",
     "license": "GPL-2.0-or-later",
     "authors": [

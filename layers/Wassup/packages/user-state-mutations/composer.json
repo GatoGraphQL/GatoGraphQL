@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/user-state-mutations",
     "type": "library",
     "description": "Adds mutations related to user state",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "user-state-mutations"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "user-state-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/user-state-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

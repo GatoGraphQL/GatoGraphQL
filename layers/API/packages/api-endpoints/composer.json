@@ -2,7 +2,7 @@
     "name": "pop-api/api-endpoints",
     "type": "library",
     "description": "Utilities for implementing API endpoints",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "api-endpoints"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "api-endpoints"],
     "homepage": "https://github.com/PoP-PoPAPI/api-endpoints",
     "license": "GPL-2.0-or-later",
     "authors": [

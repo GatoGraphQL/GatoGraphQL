@@ -2,7 +2,7 @@
     "name": "pop-schema/extended-schema-commons",
     "type": "library",
     "description": "Code shared by the schema packages",
-    "keywords": ["extended-schema-commons"],
+    "keywords": ["Gato", "extended-schema-commons"],
     "homepage": "https://github.com/PoPSchema/extended-schema-commons",
     "license": "GPL-2.0-or-later",
     "authors": [

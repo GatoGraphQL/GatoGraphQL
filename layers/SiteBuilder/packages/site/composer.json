@@ -2,7 +2,7 @@
     "name": "getpop/site",
     "type": "library",
     "description": "Create a component-based website",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "site"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "site"],
     "homepage": "https://github.com/getpop/site",
     "license": "GPL-2.0-or-later",
     "authors": [

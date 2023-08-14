@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/user-avatars",
     "type": "library",
     "description": "Adds support for user avatars",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "user-avatars"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "user-avatars"],
     "homepage": "https://github.com/PoPCMSSchema/user-avatars",
     "license": "GPL-2.0-or-later",
     "authors": [

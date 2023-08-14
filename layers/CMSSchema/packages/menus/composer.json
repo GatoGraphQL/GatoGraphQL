@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/menus",
     "type": "library",
     "description": "Adds support for menus",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "menus"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "menus"],
     "homepage": "https://github.com/PoPCMSSchema/menus",
     "license": "GPL-2.0-or-later",
     "authors": [

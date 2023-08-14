@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/user-avatars-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"User Avatars\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "user-avatars-wp"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "user-avatars-wp"],
     "homepage": "https://github.com/PoPCMSSchema/user-avatars-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

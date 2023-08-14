@@ -2,7 +2,7 @@
     "name": "getpop/access-control",
     "type": "library",
     "description": "Access Control for schema elements",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "AccessControl"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "AccessControl"],
     "homepage": "https://github.com/getpop/access-control",
     "license": "GPL-2.0-or-later",
     "authors": [

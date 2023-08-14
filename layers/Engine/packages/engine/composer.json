@@ -2,7 +2,7 @@
     "name": "getpop/engine",
     "type": "library",
     "description": "Engine for PoP",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "engine"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "engine"],
     "homepage": "https://github.com/getpop/engine",
     "license": "GPL-2.0-or-later",
     "authors": [

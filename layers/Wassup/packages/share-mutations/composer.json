@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/share-mutations",
     "type": "library",
     "description": "Adds mutations for sharing functionality",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "share-mutations"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "share-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/share-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

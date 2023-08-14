@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/custompost-tags-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post Tags\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-tags-wp"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-tags-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-tags-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "getpop/engine-wp",
     "type": "library",
     "description": "Implementation of PoP Engine for WordPress",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "engine", "WordPress"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "engine", "WordPress"],
     "homepage": "https://github.com/getpop/engine-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

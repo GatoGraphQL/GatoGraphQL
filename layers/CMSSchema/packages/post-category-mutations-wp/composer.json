@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/post-category-mutations-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Category Mutations\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "post-category-mutations-wp"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "post-category-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/post-category-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

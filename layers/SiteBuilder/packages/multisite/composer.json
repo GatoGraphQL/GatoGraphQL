@@ -2,7 +2,7 @@
     "name": "getpop/multisite",
     "type": "library",
     "description": "Multisite",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "multisite"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "multisite"],
     "homepage": "https://github.com/getpop/multisite",
     "license": "GPL-2.0-or-later",
     "authors": [

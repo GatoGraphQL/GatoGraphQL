@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/commentmeta-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Comment Meta\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "commentmeta-wp"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "commentmeta-wp"],
     "homepage": "https://github.com/PoPCMSSchema/commentmeta-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -2,7 +2,7 @@
     "name": "pop-sites-wassup/contactuser-mutations",
     "type": "library",
     "description": "Adds mutations for the \"contact user\" functionality",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "contactuser-mutations"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "contactuser-mutations"],
     "homepage": "https://github.com/PoPSites-Wassup/contactuser-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

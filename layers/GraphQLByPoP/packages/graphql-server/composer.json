@@ -2,7 +2,7 @@
     "name": "graphql-by-pop/graphql-server",
     "type": "library",
     "description": "GraphQL server in PHP, implemented through the PoP API",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "graphql", "server"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "graphql", "server"],
     "homepage": "https://github.com/GraphQLByPoP/graphql-server",
     "license": "GPL-2.0-or-later",
     "authors": [

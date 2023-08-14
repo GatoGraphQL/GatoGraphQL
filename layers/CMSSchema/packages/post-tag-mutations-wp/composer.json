@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/post-tag-mutations-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Post Tag Mutations\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "post-tag-mutations-wp"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "post-tag-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/post-tag-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

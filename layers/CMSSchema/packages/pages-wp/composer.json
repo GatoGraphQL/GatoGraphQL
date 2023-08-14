@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/pages-wp",
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Pages\"",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "pages-wp"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "pages-wp"],
     "homepage": "https://github.com/PoPCMSSchema/pages-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

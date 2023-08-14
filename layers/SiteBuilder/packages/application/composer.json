@@ -2,7 +2,7 @@
     "name": "getpop/application",
     "type": "library",
     "description": "Create a component-based application",
-    "keywords": ["GraphQL", "PHP", "Gato", "GatoGraphQL", "application"],
+    "keywords": ["Gato", "GraphQL", "PHP", "Gato", "GatoGraphQL", "application"],
     "homepage": "https://github.com/getpop/application",
     "license": "GPL-2.0-or-later",
     "authors": [
