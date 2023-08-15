@@ -184,7 +184,7 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 
 ## Monorepo documentation
 
-`leoloso/PoP` is a monorepo containing several projects. Check [Monorepo_README.md](Monorepo_README.md) for documentation.
+`leoloso/PoP` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
 
 ## Standards
 
