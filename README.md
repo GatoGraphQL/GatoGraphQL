@@ -107,7 +107,8 @@ Requirements:
 
 ## Development
 
-Check instructions in: [Setting-up the development environment](docs/development-environment.md).
+- [Setting-up the development environment](docs/development-environment.md)
+- [Running tests](docs/running-tests.md)
 
 ### Supported PHP features
 
