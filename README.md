@@ -111,7 +111,7 @@ Check instructions in: [Setting-up the development environment](docs/development
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features](docs/supported-php-features.md)
+Check the list of [Supported PHP features](docs/supported-php-features.md).
 
 ### Gutenberg JS builds
 
