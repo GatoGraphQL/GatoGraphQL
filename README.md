@@ -86,7 +86,7 @@ The Recipes section contains example queries ready to copy/paste and use:
 
 ![The Recipes section contains example queries ready to copy/paste and use](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-15.png)
 
-## Installing the plugin (for production)
+## Installing the Gato GraphQL plugin in WordPress
 
 Check instructions in: [Installing Gato GraphQL](docs/installing-gatographql-for-wordpress.md).
 
