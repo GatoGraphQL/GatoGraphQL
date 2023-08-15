@@ -88,7 +88,7 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 
 ## Monorepo documentation
 
-Check [Monorepo_README.md](Monorepo_README.md).
+`leoloso/PoP` is a monorepo containing several projects. Check [Monorepo_README.md](Monorepo_README.md) for documentation.
 
 ## Standards
 
