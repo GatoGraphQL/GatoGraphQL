@@ -2,12 +2,6 @@
 
 The Gato GraphQL Monorepo contains several projects.
 
-![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/leoloso/PoP/issues/2253 --><!-- ![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
-![Downgrade PHP tests](https://github.com/leoloso/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
-![Scoping tests](https://github.com/leoloso/PoP/actions/workflows/scoping_tests.yml/badge.svg)
-![Generate plugins](https://github.com/leoloso/PoP/actions/workflows/generate_plugins.yml/badge.svg)
-<!-- ![PHPStan](https://github.com/leoloso/PoP/actions/workflows/phpstan.yml/badge.svg) -->
-
 ## Gato GraphQL for WordPress
 
 <p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo.png"/></p>

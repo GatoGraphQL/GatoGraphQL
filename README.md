@@ -1,5 +1,11 @@
 <p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo.png"/></p>
 
+![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/leoloso/PoP/issues/2253 --><!-- ![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
+![Downgrade PHP tests](https://github.com/leoloso/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
+![Scoping tests](https://github.com/leoloso/PoP/actions/workflows/scoping_tests.yml/badge.svg)
+![Generate plugins](https://github.com/leoloso/PoP/actions/workflows/generate_plugins.yml/badge.svg)
+<!-- ![PHPStan](https://github.com/leoloso/PoP/actions/workflows/phpstan.yml/badge.svg) -->
+
 # Gato GraphQL
 
 Gato GraphQL is a **tool for interacting with data in your WordPress site**. You can think of it as a Swiss Army Knife for dealing with data, as it allows to retrieve, manipulate and store again any piece of data, in any desired way, using the [GraphQL language](https://graphql.org/).
@@ -262,19 +268,8 @@ If you discover any security related issues, please email leo@getpop.org instead
 GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/GatoGraphQL/gatographql/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/GatoGraphQL/gatographql.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/GatoGraphQL/gatographql.svg?style=flat-square
-[ico-release]: https://img.shields.io/github/release/GatoGraphQL/gatographql.svg
-[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/gatographql/total.svg
+[ico-release]: https://img.shields.io/github/release/GatoGraphQL/PoP.svg
+[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/PoP/total.svg
 
-[link-travis]: https://travis-ci.com/github/GatoGraphQL/gatographql
-[link-scrutinizer]: https://scrutinizer-ci.com/g/GatoGraphQL/gatographql/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/GatoGraphQL/gatographql
-[link-downloads]: https://GitHub.com/GatoGraphQL/gatographql/releases/
-[link-release]: https://GitHub.com/GatoGraphQL/gatographql/releases/
-[link-downloads]: https://GitHub.com/GatoGraphQL/gatographql/releases/
-[link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
-
 [latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip
