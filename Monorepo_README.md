@@ -19,18 +19,18 @@ The Gato GraphQL Monorepo contains several projects.
 - [Plugin source code](layers/GatoGraphQLForWP/plugins/gatographql)
 - [Development](docs/development-environment.md)
 
-<!-- Plugins can extend the GraphQL schema, to fetch their own data.
+Plugins can extend the GraphQL schema, to fetch their own data.
 
-- [Extension demo source code](layers/GatoGraphQLForWP/plugins/extension-demo) -->
+- [Extension demo source code](layers/GatoGraphQLForWP/plugins/extension-demo)
 
-<!-- ## GraphQL By PoP
+## GraphQL By PoP
 
 <p align="center"><img src="https://graphql-by-pop.com/assets/superheroes.png" width="450" /></p>
 
 **GraphQL by PoP** is a CMS-agnostic GraphQL server in PHP.
 
 - Website: [graphql-by-pop.com](https://graphql-by-pop.com)
-- [Source code](layers/GraphQLByPoP) -->
+- [Source code](layers/GraphQLByPoP)
 
 ## PoP - set of PHP components
 
@@ -47,7 +47,7 @@ The Gato GraphQL Monorepo contains several projects.
   - [WPSchema](layers/WPSchema): WordPress-specific schema elements.
   - [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
 
-<!-- ## Site Builder (WIP)
+## Site Builder (WIP)
 
 **Site Builder** is a set of PHP components to build a website using PoP's component-model architecture.
 
@@ -55,7 +55,7 @@ The Gato GraphQL Monorepo contains several projects.
 
 Similar to WordPress, it accepts themes.
 
-- [Wassup](layers/Wassup): theme powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org) -->
+- [Wassup](layers/Wassup): theme powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)
 
 ---
 
