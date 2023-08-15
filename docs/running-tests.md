@@ -1,12 +1,20 @@
 # Running tests
 
-Both unit tests and integration tests are executed together, when running:
+## Unit tests
+
+Run:
 
 ```bash
-composer test
+composer unit-test
 ```
 
 ## Integration tests
+
+Run:
+
+```bash
+composer integration-test
+```
 
 Integration tests are executed:
 
@@ -15,7 +23,7 @@ Integration tests are executed:
 
 When the Lando webserver is not running, integration tests are skipped.
 
-If some entry from the DB has been edited (eg: a persisted query) and some integration test fails, you can regenerate the DB (with the initial set of data) by running:
+If the data in the WordPress DB is different from the initial data set, integration tests may fail. In that case, regenerate the DB (with the initial set of data) by running:
 
 ```bash
 composer reset-db

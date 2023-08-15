@@ -2,40 +2,17 @@
 
 # Gato GraphQL
 
-<!--
-[![Build Status][ico-travis]][link-travis]
-[![Quality Score][ico-code-quality]][link-code-quality]
-[![Software License][ico-license]](LICENSE.md) -->
-<!-- [![GitHub release][ico-release]][link-release] -->
-<!-- [![Github all releases][ico-downloads]][link-downloads] -->
-
 Transform your WordPress site into a modern GraphQL server: [gatographql.com](https://gatographql.com).
 
 ![The interactive schema visualizer](docs/images/interactive-schema.png)
 
 This plugin is the implementation for WordPress of [GraphQL by PoP](https://graphql-by-pop.com/), a CMS-agnostic GraphQL server in PHP.
 
-<!-- ## Why
-
-Please read the author's [introduction to Gato GraphQL](https://leoloso.com/posts/introducing-the-gatographql-for-wordpress/), which describes:
-
-- How does it compare with the existing solutions: WP REST API and WPGraphQL
-- An overview of all its features
-- Q&A -->
-
-<!-- ## Requirements
-
-- WordPress 5.4 or above
-- PHP 8.1+ for development
-- PHP 7.2+ for production -->
-
 ## Installing the plugin (for production)
 
 👀 Instructions: [Installing Gato GraphQL](https://github.com/leoloso/PoP/blob/master/docs/installing-gatographql-for-wordpress.md).
 
 ## Development
-
-<!-- The source code is hosted on the [`leoloso/PoP` monorepo](https://github.com/leoloso/PoP), under [`GatoGraphQLForWP/plugins/gatographql`](https://github.com/leoloso/PoP/tree/master/layers/GatoGraphQLForWP/plugins/gatographql). -->
 
 👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
 
@@ -48,47 +25,6 @@ Check the list of [Supported PHP features](https://github.com/leoloso/PoP/blob/m
 Compiled JavaScript code (such as all files under a block's `build/` folder) is added to the repo, but only as compiled for production, i.e. after running `npm run build`.
 
 Code compiled for development, i.e. after running `npm start`, cannot be commited/pushed to the repo.
-
-<!-- ### Building static sites
-
-Gato GraphQL provides non-restrictive default settings, which simplify the configuration for building "static" sites.
-
-This is how the restrictive and non-restrictive default behaviors compare:
-
-| Feature | Restrictive behavior | Non-restrictive behavior |
-| --- | --- | --- |
-| Single endpoint | Disabled | Enabled |
-| “Sensitive” data fields | Not added to the schema | Added to the schema |
-| Settings from `wp_options` | Only a few predefined options are queryable | All options are queryable |
-| Meta (posts, users, comments, taxonomies) | No keys are queryable | All keys are queryable |
-| Max limit to query entities (posts, users, etc) | Limited | Unlimited |
-| Environment Fields | No environment variables or PHP constants are queryable | All environment variables and PHP constants are queryable |
-| Send HTTP Request Fields | No URL can be requested | All URLs can be requested |
-
-In development, to enable restrictive defaults, execute:
-
-```bash
-composer enable-restrictive-defaults
-```
-
-On a site in production, set in `wp-config.php`:
-
-```php
-define( 'GATO_GRAPHQL_SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR', true );
-```
-
-Or define this same key/value as an environment variable. -->
-
-<!-- ### CMS-agnosticism
-
-Even though this plugin is already the implementation for WordPress, it is recommended to develop components following the [CMS-agnostic method employed by GraphQL by PoP](https://graphql-by-pop.com/docs/architecture/cms-agnosticism.html), so that they can benefit from architectural optimizations and future developments.
-
-In particular, support for serverless PHP (a feature which is [on the roadmap](https://graphql-by-pop.com/docs/roadmap/serverless-wordpress.html)) may require to decouple the codebase from WordPress.
-
-This method requires the code for the component to be divided into 2 separate packages:
-
-- A CMS-agnostic package, containing the business code and generic contracts, but without using any WordPress code (eg: [posts](https://github.com/PoPSchema/posts))
-- A CMS-specific package, containing the implementation of the contracts for WordPress (eg: [posts-wp](https://github.com/PoPSchema/posts-wp)) -->
 
 ## Modules
 
@@ -315,46 +251,3 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [link-author]: https://github.com/leoloso
 
 [latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip
-
-
-<!--
-
-## Composer merge plugin
-
-Add into `composer.json`:
-
-```json
-{
-    "require-dev": {
-        "wikimedia/composer-merge-plugin": "dev-feature/composer-v2"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/mcaskill/composer-merge-plugin.git"
-        }
-    ],
-    "extra": {
-        "merge-plugin": {
-            "include": [
-                "composer.local.json"
-            ],
-            "recurse": true,
-            "replace": false,
-            "ignore-duplicates": false,
-            "merge-dev": true,
-            "merge-extra": false,
-            "merge-extra-deep": false,
-            "merge-scripts": false
-        }
-    }
-}
-```
-
-Add into .gitignore:
-
-```
-composer.local.json
-```
-
--->
