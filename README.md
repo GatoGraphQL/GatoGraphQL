@@ -86,6 +86,10 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 
 </details>
 
+## Monorepo documentation
+
+Check [Monorepo_README.md](Monorepo_README.md).
+
 ## Standards
 
 [PSR-1](https://www.php-fig.org/psr/psr-1), [PSR-4](https://www.php-fig.org/psr/psr-4) and [PSR-12](https://www.php-fig.org/psr/psr-12).
