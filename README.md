@@ -59,26 +59,6 @@ Similar to WordPress, it accepts themes.
 
 ---
 
-<!-- ## Requirements
-
-- PHP 8.1+ for development
-- PHP 7.2+ for production
-
-## Install
-
-Clone the monorepo:
-
-```bash
-git clone https://github.com/leoloso/PoP.git
-```
-
-And then install the dependencies, via Composer
-
-```bash
-$ cd PoP
-$ composer install
-``` -->
-
 ## Table of Contents
 
 1. [Setting-up the development environment](docs/development-environment.md)
