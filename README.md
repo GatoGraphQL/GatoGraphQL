@@ -1,6 +1,6 @@
-# PoP
+# Gato GraphQL Monorepo
 
-PoP is a monorepo containing several projects.
+The Gato GraphQL Monorepo contains several projects.
 
 ![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/leoloso/PoP/issues/2253 --><!-- ![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
 ![Downgrade PHP tests](https://github.com/leoloso/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
@@ -8,7 +8,7 @@ PoP is a monorepo containing several projects.
 ![Generate plugins](https://github.com/leoloso/PoP/actions/workflows/generate_plugins.yml/badge.svg)
 <!-- ![PHPStan](https://github.com/leoloso/PoP/actions/workflows/phpstan.yml/badge.svg) -->
 
-## The Gato GraphQL plugin for WordPress
+## Gato GraphQL for WordPress
 
 <p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo.png"/></p>
 
@@ -19,9 +19,9 @@ PoP is a monorepo containing several projects.
 - [Plugin source code](layers/GatoGraphQLForWP/plugins/gatographql)
 - [Development](docs/development-environment.md)
 
-Plugins can extend the GraphQL schema, to fetch their own data.
+<!-- Plugins can extend the GraphQL schema, to fetch their own data.
 
-- [Extension demo source code](layers/GatoGraphQLForWP/plugins/extension-demo)
+- [Extension demo source code](layers/GatoGraphQLForWP/plugins/extension-demo) -->
 
 ## GraphQL By PoP
 
