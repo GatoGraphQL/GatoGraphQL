@@ -1,4 +1,4 @@
-<p align="center"><img src="https://graphql-api.com/assets/graphql-api-logo-with-name.png" width="450" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo.png"/></p>
 
 # Gato GraphQL
 

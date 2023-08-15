@@ -1,6 +1,4 @@
-<p align="center"><img src="https://graphql-api.com/assets/graphql-api-logo-with-name.png" width="450" /></p>
-
-# Gato GraphQL layer
+# Gato GraphQL for WordPress layer
 
 Transform your WordPress site into a modern GraphQL server: [gatographql.com](https://gatographql.com).
 
