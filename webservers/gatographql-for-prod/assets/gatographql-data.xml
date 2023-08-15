@@ -1257,7 +1257,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":361,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public-1024x622.jpg" alt="" class="wp-image-361"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-1024x622.jpg" alt="" class="wp-image-361"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -1267,7 +1267,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":362,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="" class="wp-image-362"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-suki-1024x598.png" alt="" class="wp-image-362"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
@@ -2335,7 +2335,7 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/graphql-api-header/</link>
 		<pubDate>Thu, 26 May 2022 05:13:32 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/graphql-voyager-public.jpg</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo.png</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2353,14 +2353,14 @@ https://wordpress.org/about/
 		<wp:post_type><![CDATA[attachment]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[https://graphql-api.com/assets/features/graphql-voyager-public.jpg]]></wp:attachment_url>
+						<wp:attachment_url><![CDATA[https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo.png]]></wp:attachment_url>
 											<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[2022/05/graphql-voyager-public.jpg]]></wp:meta_value>
+		<wp:meta_value><![CDATA[2022/05/GatoGraphQL-logo.png]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:6:{s:5:"width";i:1291;s:6:"height";i:784;s:4:"file";s:34:"2022/06/graphql-voyager-public.jpg";s:8:"filesize";i:192180;s:5:"sizes";a:4:{s:6:"medium";a:5:{s:4:"file";s:34:"graphql-voyager-public-300x182.jpg";s:5:"width";i:300;s:6:"height";i:182;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:12601;}s:5:"large";a:5:{s:4:"file";s:35:"graphql-voyager-public-1024x622.jpg";s:5:"width";i:1024;s:6:"height";i:622;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:97030;}s:9:"thumbnail";a:5:{s:4:"file";s:34:"graphql-voyager-public-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:6101;}s:12:"medium_large";a:5:{s:4:"file";s:34:"graphql-voyager-public-768x466.jpg";s:5:"width";i:768;s:6:"height";i:466;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:60271;}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+		<wp:meta_value><![CDATA[a:6:{s:5:"width";i:1291;s:6:"height";i:784;s:4:"file";s:34:"2022/06/GatoGraphQL-logo.png";s:8:"filesize";i:192180;s:5:"sizes";a:4:{s:6:"medium";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-300x182.jpg";s:5:"width";i:300;s:6:"height";i:182;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:12601;}s:5:"large";a:5:{s:4:"file";s:35:"GatoGraphQL-logo-1024x622.jpg";s:5:"width";i:1024;s:6:"height";i:622;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:97030;}s:9:"thumbnail";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:6101;}s:12:"medium_large";a:5:{s:4:"file";s:34:"GatoGraphQL-logo-768x466.jpg";s:5:"width";i:768;s:6:"height";i:466;s:9:"mime-type";s:10:"image/jpeg";s:8:"filesize";i:60271;}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -2419,7 +2419,7 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/graphql-api-search-results/</link>
 		<pubDate>Thu, 26 May 2022 05:13:35 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema.png</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-suki.png</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2437,14 +2437,14 @@ https://wordpress.org/about/
 		<wp:post_type><![CDATA[attachment]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[https://graphql-api.com/assets/guides/namespaced-interactive-schema.png]]></wp:attachment_url>
+						<wp:attachment_url><![CDATA[https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo-suki.png]]></wp:attachment_url>
 											<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[2022/05/namespaced-interactive-schema.png]]></wp:meta_value>
+		<wp:meta_value><![CDATA[2022/05/GatoGraphQL-logo-suki.png]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:6:{s:5:"width";i:2600;s:6:"height";i:1400;s:4:"file";s:41:"2022/06/namespaced-interactive-schema.png";s:8:"filesize";i:438485;s:5:"sizes";a:6:{s:6:"medium";a:5:{s:4:"file";s:41:"namespaced-interactive-schema-300x162.png";s:5:"width";i:300;s:6:"height";i:162;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:29147;}s:5:"large";a:5:{s:4:"file";s:42:"namespaced-interactive-schema-1024x551.png";s:5:"width";i:1024;s:6:"height";i:551;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:194993;}s:9:"thumbnail";a:5:{s:4:"file";s:41:"namespaced-interactive-schema-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:13452;}s:12:"medium_large";a:5:{s:4:"file";s:41:"namespaced-interactive-schema-768x414.png";s:5:"width";i:768;s:6:"height";i:414;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:127976;}s:9:"1536x1536";a:5:{s:4:"file";s:42:"namespaced-interactive-schema-1536x827.png";s:5:"width";i:1536;s:6:"height";i:827;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:350291;}s:9:"2048x2048";a:5:{s:4:"file";s:43:"namespaced-interactive-schema-2048x1103.png";s:5:"width";i:2048;s:6:"height";i:1103;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:527274;}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+		<wp:meta_value><![CDATA[a:6:{s:5:"width";i:2600;s:6:"height";i:1400;s:4:"file";s:41:"2022/06/GatoGraphQL-logo-suki.png";s:8:"filesize";i:438485;s:5:"sizes";a:6:{s:6:"medium";a:5:{s:4:"file";s:41:"GatoGraphQL-logo-suki-300x162.png";s:5:"width";i:300;s:6:"height";i:162;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:29147;}s:5:"large";a:5:{s:4:"file";s:42:"GatoGraphQL-logo-suki-1024x551.png";s:5:"width";i:1024;s:6:"height";i:551;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:194993;}s:9:"thumbnail";a:5:{s:4:"file";s:41:"GatoGraphQL-logo-suki-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:13452;}s:12:"medium_large";a:5:{s:4:"file";s:41:"GatoGraphQL-logo-suki-768x414.png";s:5:"width";i:768;s:6:"height";i:414;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:127976;}s:9:"1536x1536";a:5:{s:4:"file";s:42:"GatoGraphQL-logo-suki-1536x827.png";s:5:"width";i:1536;s:6:"height";i:827;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:350291;}s:9:"2048x2048";a:5:{s:4:"file";s:43:"GatoGraphQL-logo-suki-2048x1103.png";s:5:"width";i:2048;s:6:"height";i:1103;s:9:"mime-type";s:9:"image/png";s:8:"filesize";i:527274;}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -2679,7 +2679,7 @@ https://wordpress.org/about/
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:media-text {"mediaId":362,"mediaLink":"https://gatographql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
-<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/namespaced-interactive-schema-1024x598.png" alt="In red are the entities with a transformed name" class="wp-image-362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-suki-1024x598.png" alt="In red are the entities with a transformed name" class="wp-image-362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
 <p>This is the schema</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:media-text --></div>
