@@ -22,7 +22,69 @@ With Gato GraphQL, you can:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-Check out the [Recipes section in gatographql.com](https://gatographql.com/recipes/intro) to browse actual GraphQL query examples to implement these use cases.
+Check out the [Recipes section in gatographql.com](https://gatographql.com/recipes/intro) to browse examples demonstrating these use cases.
+
+## Screenshots
+
+GraphiQL client to execute queries in the wp-admin:
+
+![GraphiQL client to execute queries in the wp-admin](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-1.png)
+
+Interactively browse the GraphQL schema, exploring all connections among entities:
+
+![Interactively browse the GraphQL schema, exploring all connections among entities](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-2.png)
+
+The GraphiQL client for the single endpoint is exposed to the Internet:
+
+![The GraphiQL client for the single endpoint is exposed to the Internet](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-3.png)
+
+Interactively browse the GraphQL schema exposed for the single endpoint:
+
+![Interactively browse the GraphQL schema exposed for the single endpoint](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-4.png)
+
+Persisted queries are pre-defined and stored in the server:
+
+![Persisted queries are pre-defined and stored in the server](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-5.png)
+
+Requesting a persisted query URL will retrieve its pre-defined GraphQL response:
+
+![Requesting a persisted query URL will retrieve its pre-defined GraphQL response](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-6.png)
+
+We can create multiple custom endpoints, each for a different target:
+
+![We can create multiple custom endpoints, each for a different target](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-7.png)
+
+Endpoints are configured via Schema Configurations:
+
+![Endpoints are configured via Schema Configurations](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-8.png)
+
+We can create many Schema Configurations, customizing them for different users or applications:
+
+![We can create many Schema Configurations, customizing them for different users or applications](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-9.png)
+
+Custom endpoints and Persisted queries can be public, private and password-protected:
+
+![Custom endpoints and Persisted queries can be public, private and password-protected](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-10.png)
+
+We can configure exactly what custom post types, options and meta keys can be queried:
+
+![We can configure exactly what custom post types, options and meta keys can be queried](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-11.png)
+
+Configure every aspect from the plugin via the Settings page:
+
+![Configure every aspect from the plugin via the Settings page](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-12.png)
+
+Modules with different functionalities and schema extensions can be enabled and disabled:
+
+![Modules with different functionalities and schema extensions can be enabled and disabled](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-13.png)
+
+Augment the plugin functionality and GraphQL schema via extensions:
+
+![Augment the plugin functionality and GraphQL schema via extensions](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-14.png)
+
+The Recipes section contains example queries ready to copy/paste and use:
+
+![The Recipes section contains example queries ready to copy/paste and use](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-15.png)
 
 ## Installing the plugin (for production)
 
