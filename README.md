@@ -2,9 +2,27 @@
 
 # Gato GraphQL
 
-Transform your WordPress site into a modern GraphQL server: [gatographql.com](https://gatographql.com).
+Gato GraphQL is a **tool for interacting with data in your WordPress site**. You can think of it as a Swiss Army Knife for dealing with data, as it allows to retrieve, manipulate and store again any piece of data, in any desired way, using the [GraphQL language](https://graphql.org/).
 
-![The interactive schema visualizer](layers/GatoGraphQLForWP/plugins/gatographql/docs/images/interactive-schema.png)
+With Gato GraphQL, you can:
+
+- Query data to create headless sites
+- Expose public and private APIs
+- Map JS components to Gutenberg blocks
+- Synchronize content across sites
+- Automate tasks
+- Complement WP-CLI to execute admin tasks
+- Search/replace content for site migrations
+- Send notifications when something happens (new post published, new comment added, etc)
+- Interact with cloud services
+- Convert the data from a 3rd-party API into the required format
+- Translate content in the site
+- Update thousands of posts with a single action
+- Insert or remove Gutenberg blocks in bulk
+- Validate that a new post contains a mandatory block
+- And much more...
+
+Check out the [Recipes section in gatographql.com](https://gatographql.com/recipes/intro) to browse actual GraphQL query examples to implement these use cases.
 
 ## Installing the plugin (for production)
 
