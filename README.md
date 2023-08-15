@@ -22,7 +22,7 @@ With Gato GraphQL, you can:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-Check out the [Recipes section in gatographql.com](https://gatographql.com/recipes/intro) which demonstrates examples for these use cases.
+Check out the [Recipes section in gatographql.com](https://gatographql.com/recipes/intro) which demonstrates how to implement these use cases using the plugin.
 
 ## Screenshots
 
