@@ -88,7 +88,22 @@ The Recipes section contains example queries ready to copy/paste and use:
 
 ## Installing the Gato GraphQL plugin in WordPress
 
-Check instructions in: [Installing Gato GraphQL](docs/installing-gatographql-for-wordpress.md).
+_For alternative installation methods, check [Installing Gato GraphQL](docs/installing-gatographql-for-wordpress.md)._
+
+Download the latest release of the plugin<!-- @todo Fix when plugin released in wp.org [the latest release of the plugin][latest-release-url]--> as a .zip file.
+
+Then, in the WordPress admin:
+
+- Go to `Plugins => Add New`
+- Click on `Upload Plugin`
+- Select the .zip file
+- Click on `Install Now` (it may take a few minutes)
+- Once installed, click on `Activate`
+
+Requirements:
+
+- WordPress 5.4+
+- PHP 7.2+
 
 ## Development
 

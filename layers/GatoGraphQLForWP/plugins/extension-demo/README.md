@@ -2,7 +2,7 @@
 
 Demonstration of extending the GraphQL schema, for Gato GraphQL
 
-## Install
+<!-- ## Install
 
 Download [the latest release of the plugin][latest-release-url] as a .zip file.
 
@@ -12,7 +12,7 @@ Then, in the WordPress admin:
 - Click on `Upload Plugin`
 - Select the .zip file
 - Click on `Install Now`
-- Once installed, click on `Activate`
+- Once installed, click on `Activate` -->
 
 ## Development
 

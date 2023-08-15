@@ -9,7 +9,7 @@ These are the several ways to install the [Gato GraphQL](../layers/GatoGraphQLFo
 
 ## Plugin
 
-Download [the latest release of the plugin][latest-release-url] as a .zip file.
+Download the latest release of the plugin<!-- @todo Fix when plugin released in wp.org [the latest release of the plugin][latest-release-url]--> as a .zip file.
 
 Then, in the WordPress admin:
 
