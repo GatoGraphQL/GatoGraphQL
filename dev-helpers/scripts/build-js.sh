@@ -56,7 +56,8 @@ fi
 # on all folders in the current directory
 runCommand(){
     CURRENT_DIR=$( pwd )
-    echo "In folder '$CURRENT_DIR'"
+    cd $TARGET_DIR
+    echo "In folder '$TARGET_DIR'"
     for file in ./*
     do
         # Make sure it is a directory
@@ -76,6 +77,7 @@ runCommand(){
             cd ..
         fi
     done
+    cd $CURRENT_DIR
 }
 
 # Function `maybeRunCommandInTargetDirectory` will invoke `runCommand`
@@ -83,9 +85,7 @@ runCommand(){
 maybeRunCommandInTargetDirectory(){
     if [[ -d "$TARGET_DIR" ]]
     then
-        cd "$TARGET_DIR"
         runCommand
-        cd ..
     else
         echo "Directory '$TARGET_DIR' does not exist"
     fi
@@ -108,7 +108,7 @@ maybeRunCommandInEveryTargetDirectory(){
 }
 
 cd "$BASE_DIR"
-echo "In folder '$BASE_DIR'"
+echo "In base folder '$BASE_DIR'"
 for plugin_folder in ./*
 do
     # Make sure it is a directory
