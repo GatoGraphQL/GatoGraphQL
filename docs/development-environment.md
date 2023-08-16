@@ -19,7 +19,7 @@ These are the instructions on how to set-up a local development environment.
 Clone the monorepo:
 
 ```bash
-git clone https://github.com/GatoGraphQL/PoP.git
+git clone https://github.com/GatoGraphQL/GatoGraphQL.git
 ```
 
 Install the dependencies, via Composer:

@@ -1,10 +1,10 @@
-<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo.png"/></p>
+<p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/master/assets/GatoGraphQL-logo.png"/></p>
 
-![Unit tests](https://github.com/GatoGraphQL/PoP/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/GatoGraphQL/PoP/issues/2253 --><!-- ![Integration tests](https://github.com/GatoGraphQL/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
-![Downgrade PHP tests](https://github.com/GatoGraphQL/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
-![Scoping tests](https://github.com/GatoGraphQL/PoP/actions/workflows/scoping_tests.yml/badge.svg)
-![Generate plugins](https://github.com/GatoGraphQL/PoP/actions/workflows/generate_plugins.yml/badge.svg)
-<!-- ![PHPStan](https://github.com/GatoGraphQL/PoP/actions/workflows/phpstan.yml/badge.svg) -->
+![Unit tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2253 --><!-- ![Integration tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/integration_tests.yml/badge.svg) -->
+![Downgrade PHP tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/downgrade_php_tests.yml/badge.svg)
+![Scoping tests](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/scoping_tests.yml/badge.svg)
+![Generate plugins](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/generate_plugins.yml/badge.svg)
+<!-- ![PHPStan](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/phpstan.yml/badge.svg) -->
 
 # Gato GraphQL
 
@@ -190,7 +190,7 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 
 ## Monorepo documentation
 
-`GatoGraphQL/PoP` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
+`GatoGraphQL/GatoGraphQL` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
 
 ## Standards
 
@@ -247,11 +247,11 @@ composer preview-code-downgrade
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/GatoGraphQL/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
@@ -268,8 +268,8 @@ If you discover any security related issues, please email leo@getpop.org instead
 GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 
 [ico-license]: https://img.shields.io/badge/license-GPL%20(%3E%3D%202)-brightgreen.svg?style=flat-square
-[ico-release]: https://img.shields.io/github/release/GatoGraphQL/PoP.svg
-[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/PoP/total.svg
+[ico-release]: https://img.shields.io/github/release/GatoGraphQL/GatoGraphQL.svg
+[ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/GatoGraphQL/total.svg
 
 [link-author]: https://github.com/leoloso
-[latest-release-url]: https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql.zip
+[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/latest/download/gatographql.zip

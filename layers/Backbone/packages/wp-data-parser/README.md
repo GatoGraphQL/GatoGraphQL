@@ -21,7 +21,7 @@ composer require pop-backbone/wp-data-parser
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/PoP), under [`Backbone/packages/wp-data-parser`](https://github.com/GatoGraphQL/PoP/tree/master/layers/Backbone/packages/wp-data-parser).
+The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Backbone/packages/wp-data-parser`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Backbone/packages/wp-data-parser).
 
 ## Description
 

@@ -26,7 +26,7 @@ class PluginStaticHelpers
         $tag = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
             ? 'master'
             : $mainPluginVersion;
-        return 'https://raw.githubusercontent.com/GatoGraphQL/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/gatographql/';
+        return 'https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/' . $tag . '/layers/GatoGraphQLForWP/plugins/gatographql/';
     }
 
     /**

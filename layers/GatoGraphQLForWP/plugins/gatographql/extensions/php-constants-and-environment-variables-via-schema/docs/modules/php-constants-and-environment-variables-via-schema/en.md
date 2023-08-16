@@ -128,7 +128,7 @@ For instance, the following query connects to the GitHub REST API using a privat
   # Use the field from "Send HTTP Request Fields" to connect to GitHub
   gitHubArtifactData: _sendJSONObjectCollectionHTTPRequest(
     input: {
-      url: "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts",
+      url: "https://api.github.com/repos/GatoGraphQL/GatoGraphQL/actions/artifacts",
       options: {
         headers: [
           {

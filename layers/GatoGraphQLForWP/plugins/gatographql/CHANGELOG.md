@@ -64,7 +64,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Performance issue where elements to resolve AST were duplicated ([#2039](https://github.com/GatoGraphQL/PoP/pull/2039))
+- Performance issue where elements to resolve AST were duplicated ([#2039](https://github.com/GatoGraphQL/GatoGraphQL/pull/2039))
 
 ## 0.10.0 - 16/02/2013
 
@@ -285,7 +285,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Schema Configuration for the Single Endpoint
 - Display `"causes"` for errors in response ([#893](https://github.com/graphql/graphql-spec/issues/893))
 - Sort fields and connections together, alphabetically
-- The entities from the WordPress data model are not namespaced anymore ([#990](https://github.com/GatoGraphQL/PoP/pull/990))
+- The entities from the WordPress data model are not namespaced anymore ([#990](https://github.com/GatoGraphQL/GatoGraphQL/pull/990))
 - Split options into 2 entries, "Default value for Schema Configuration" and "Apply on Admin clients", for the following settings:
   - Namespacing
   - Nested mutations
@@ -313,7 +313,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/GatoGraphQL/PoP/pull/972))
+- Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/GatoGraphQL/GatoGraphQL/pull/972))
 
 ### Improvements in Development and Testing
 
