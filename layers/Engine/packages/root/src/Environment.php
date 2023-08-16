@@ -79,7 +79,7 @@ class Environment
      * 1. `true` => throw an exception
      * 2. `false` => ignore, and simply use no cache
      *
-     * @see https://github.com/leoloso/PoP/issues/350
+     * @see https://github.com/GatoGraphQL/PoP/issues/350
      */
     public static function throwExceptionIfCacheSetupError(): bool
     {

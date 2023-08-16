@@ -49,7 +49,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
          * Component Model Cache is currently broken,
          * hence do not enable this functionality.
          *
-         * @see https://github.com/leoloso/PoP/issues/1614
+         * @see https://github.com/GatoGraphQL/PoP/issues/1614
          */
         return false;
         /** @phpstan-ignore-next-line */

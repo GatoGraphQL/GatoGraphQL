@@ -21,7 +21,7 @@ PoP is components all the way down. Each component is implemented partly in the 
 
 PoP relies on contracts to interact with the underlying CMS or framework, where all logic resides. As such, it is CMS-agnostic, and it can work with any PHP-based CMS or framework (WordPress, Symfony, Laravel, Joomla, Drupal). 
 
-<!-- So far only the [contracts for WordPress](https://github.com/leoloso/PoP-API-WP) have been implemented, but extending it to any other platform is very simple: Only all the [repos ending on `"-wp"`](https://github.com/getpop?utf8=%E2%9C%93&q=-wp&type=&language=), which contain the implementation of the contracts for WordPress, need be re-implemented. -->
+<!-- So far only the [contracts for WordPress](https://github.com/GatoGraphQL/PoP-API-WP) have been implemented, but extending it to any other platform is very simple: Only all the [repos ending on `"-wp"`](https://github.com/getpop?utf8=%E2%9C%93&q=-wp&type=&language=), which contain the implementation of the contracts for WordPress, need be re-implemented. -->
 
 ### No creeping business logic
 
@@ -79,7 +79,7 @@ PoP's architecture attempts to achieve the following goals:
 
 Follow the instructions in:
 
-- [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP)
+- [PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP)
 
 (Other projects coming soon...) -->
 
@@ -588,20 +588,20 @@ The following articles concern how different features in PoP were implemented:
 <!--
 ## 🔥 Become involved!
 
-Contributors are welcome! Please check [PoP in PHP](https://github.com/leoloso/PoP-PHP) to see what we need help with. If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀❤️.
+Contributors are welcome! Please check [PoP in PHP](https://github.com/GatoGraphQL/PoP-PHP) to see what we need help with. If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀❤️.
 -->
 <!--
 ### We are looking for help with...
 
 **Codebase Migration**
 
-[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
+[PoP in PHP](https://github.com/GatoGraphQL/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/GatoGraphQL/PoP-PHP#codebase-migration).
 -->
 
 <!--
 ## Want to contribute?
 
-Anybody willing to can become involved in the development of PoP. If there is any new development you are interested in implementing, such as integration with this or that plugin, please let us know and we'll be able to assist you. In addition, check the [issues tagged with "help wanted"](https://github.com/leoloso/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22), we will be very happy if you can tackle any of them.
+Anybody willing to can become involved in the development of PoP. If there is any new development you are interested in implementing, such as integration with this or that plugin, please let us know and we'll be able to assist you. In addition, check the [issues tagged with "help wanted"](https://github.com/GatoGraphQL/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22), we will be very happy if you can tackle any of them.
 
 For more info or have a chat, just [contact us](https://getpop.org/en/contact-us/).
 -->
@@ -672,7 +672,7 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 
 We are currently creating scripts to automate the installation process, we expect them to be ready around mid-October 2018.
 
-Until then, we provide a zip file including all code (PoP, WordPress and plugins), and a database dump from the [GetPoP Demo website](https://demo.getpop.org/), to set-up this same site in a quick-and-dirty manner in your localhost. Download the files and read the installation instructions [here](https://github.com/leoloso/PoP/blob/master/install/getpop-demo/install.md).
+Until then, we provide a zip file including all code (PoP, WordPress and plugins), and a database dump from the [GetPoP Demo website](https://demo.getpop.org/), to set-up this same site in a quick-and-dirty manner in your localhost. Download the files and read the installation instructions [here](https://github.com/GatoGraphQL/PoP/blob/master/install/getpop-demo/install.md).
 
 ## Configuration
 
@@ -777,7 +777,7 @@ To allow the website's service-worker.js be able to cache content coming from th
 
 ## Optimization
 
-_**Important:** Similar to the installation process, there is room for improvement for the optimization process. If you would like to help us, please [check here](https://github.com/leoloso/PoP/issues/49)._
+_**Important:** Similar to the installation process, there is room for improvement for the optimization process. If you would like to help us, please [check here](https://github.com/GatoGraphQL/PoP/issues/49)._
 
 PoP allows to mangle, minify and bundle together all required .css, .js and .tmpl.js files (suitable for PROD environment), both at the plug-in and website levels:
 
@@ -822,7 +822,7 @@ The `minify.sh` script copies all files to minimize under folder `POP_APP_MIN_FO
 
 We are looking for developers who want to become involved. Check here the issues we need your help with:
 
-https://github.com/leoloso/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
+https://github.com/GatoGraphQL/PoP/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22
 
 ### Many thanks to BrowserStack!
 

@@ -44,7 +44,7 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
   @depends(on: "RetrieveGitHubAccessToken")
 {
   githubArtifactsEndpoint: _sprintf(
-    string: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=%s",
+    string: "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts?per_page=%s",
     values: [$numberArtifacts]
   )
     @remove
@@ -144,9 +144,9 @@ The response is:
 {
   "data": {
     "gitHubProxyArtifactDownloadURLs": [
-      "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803444209/zip",
-      "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803444208/zip",
-      "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803444207/zip"
+      "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803444209/zip",
+      "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803444208/zip",
+      "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803444207/zip"
     ],
     "_sendHTTPRequests": [
       {
@@ -322,7 +322,7 @@ query RetrieveProxyArtifactDownloadURLs($numberArtifacts: Int! = 3)
   @depends(on: "RetrieveGitHubAccessToken")
 {
   githubArtifactsEndpoint: _sprintf(
-    string: "https://api.github.com/repos/leoloso/PoP/actions/artifacts?per_page=%s",
+    string: "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts?per_page=%s",
     values: [$numberArtifacts]
   )
     @remove
@@ -373,8 +373,8 @@ The response is:
           "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDg=",
           "name": "gatographql-testing-schema-1.0.0-dev",
           "size_in_bytes": 62952,
-          "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808",
-          "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808/zip",
+          "url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739808",
+          "archive_download_url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739808/zip",
           "expired": false,
           "created_at": "2023-07-14T06:25:57Z",
           "updated_at": "2023-07-14T06:25:59Z",
@@ -392,8 +392,8 @@ The response is:
           "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDY=",
           "name": "gatographql-testing-1.0.0-dev",
           "size_in_bytes": 123914,
-          "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806",
-          "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806/zip",
+          "url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739806",
+          "archive_download_url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739806/zip",
           "expired": false,
           "created_at": "2023-07-14T06:25:57Z",
           "updated_at": "2023-07-14T06:25:59Z",
@@ -411,8 +411,8 @@ The response is:
           "node_id": "MDg6QXJ0aWZhY3Q4MDM3Mzk4MDM=",
           "name": "gatographql-1.0.0-dev",
           "size_in_bytes": 33394234,
-          "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803",
-          "archive_download_url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803/zip",
+          "url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739803",
+          "archive_download_url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739803/zip",
           "expired": false,
           "created_at": "2023-07-14T06:25:57Z",
           "updated_at": "2023-07-14T06:25:59Z",
@@ -537,7 +537,7 @@ As `@remove` is now commented out, we can now visualize the generated JSON objec
           },
           "allowRedirects": null
         },
-        "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739808/zip"
+        "url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739808/zip"
       },
       {
         "options": {
@@ -550,7 +550,7 @@ As `@remove` is now commented out, we can now visualize the generated JSON objec
           },
           "allowRedirects": null
         },
-        "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739806/zip"
+        "url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739806/zip"
       },
       {
         "options": {
@@ -563,7 +563,7 @@ As `@remove` is now commented out, we can now visualize the generated JSON objec
           },
           "allowRedirects": null
         },
-        "url": "https://api.github.com/repos/leoloso/PoP/actions/artifacts/803739803/zip"
+        "url": "https://api.github.com/repos/GatoGraphQL/PoP/actions/artifacts/803739803/zip"
       }
     ],
     "_sendHTTPRequests": [

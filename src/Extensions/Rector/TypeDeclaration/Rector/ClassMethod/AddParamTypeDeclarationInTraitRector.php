@@ -33,7 +33,7 @@ use Webmozart\Assert\Assert;
  * But the same modification is not being done in vendor/symfony/cache/Traits/AbstractAdapterTrait.php
  * So apply this change manually
  *
- * @see https://github.com/leoloso/PoP/issues/597#issue-855005786
+ * @see https://github.com/GatoGraphQL/PoP/issues/597#issue-855005786
  */
 final class AddParamTypeDeclarationInTraitRector extends AbstractRector implements ConfigurableRectorInterface
 {

@@ -8,7 +8,7 @@ query {
     @remove
 
   _sendJSONObjectItemHTTPRequest(input:{
-    url: "https://api.github.com/repos/leoloso/PoP",
+    url: "https://api.github.com/repos/GatoGraphQL/PoP",
     method: PATCH,
     options: {
       auth: {
@@ -29,7 +29,7 @@ We often need to provide credentials when connecting to external services. For i
 ```graphql
 query {
   _sendJSONObjectItemHTTPRequest(input:{
-    url: "https://api.github.com/repos/leoloso/PoP",
+    url: "https://api.github.com/repos/GatoGraphQL/PoP",
     method: PATCH,
     options: {
       auth: {
@@ -57,7 +57,7 @@ query {
     @remove
 
   _sendJSONObjectItemHTTPRequest(input:{
-    url: "https://api.github.com/repos/leoloso/PoP",
+    url: "https://api.github.com/repos/GatoGraphQL/PoP",
     method: PATCH,
     options: {
       auth: {

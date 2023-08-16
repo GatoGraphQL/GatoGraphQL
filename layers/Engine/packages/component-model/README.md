@@ -21,7 +21,7 @@ composer require getpop/component-model
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`Engine/packages/component-model`](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/component-model).
+The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/PoP), under [`Engine/packages/component-model`](https://github.com/GatoGraphQL/PoP/tree/master/layers/Engine/packages/component-model).
 
 ## Usage
 
@@ -1490,7 +1490,7 @@ The dataloader must also implement the following functions:
 - `getFieldprocessor`: return the name of the [ObjectTypeFieldResolver](#fieldprocessor) that will handle the data-fields for all objects returned by the dataloader
 - `getDatabaseKey`: return the object type under which objects returned by the dataloader will be stored under `databases` in the JSON response
 
-For instance, a [dataloader fetching posts](https://github.com/leoloso/PoP/blob/master/pop-cmsmodel/library/dataload/dataloaders/dataloader-post-base.php) will implement these functions like this:
+For instance, a [dataloader fetching posts](https://github.com/GatoGraphQL/PoP/blob/master/pop-cmsmodel/library/dataload/dataloaders/dataloader-post-base.php) will implement these functions like this:
 
 ```php
 function getDatabaseKey() 
@@ -2001,7 +2001,7 @@ Requirements:
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
+Check the list of [Supported PHP features in `GatoGraphQL/PoP`](https://github.com/GatoGraphQL/PoP/blob/master/docs/supported-php-features.md)
 
 ### Preview downgrade to PHP 7.2
 
@@ -2049,11 +2049,11 @@ composer analyse
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 

@@ -10,15 +10,15 @@ This plugin is the implementation for WordPress of [GraphQL by PoP](https://grap
 
 ## Installing the plugin (for production)
 
-👀 Instructions: [Installing Gato GraphQL](https://github.com/leoloso/PoP/blob/master/docs/installing-gatographql-for-wordpress.md).
+👀 Instructions: [Installing Gato GraphQL](https://github.com/GatoGraphQL/PoP/blob/master/docs/installing-gatographql-for-wordpress.md).
 
 ## Development
 
-👀 Instructions: [Setting-up the development environment](https://github.com/leoloso/PoP/blob/master/docs/development-environment.md).
+👀 Instructions: [Setting-up the development environment](https://github.com/GatoGraphQL/PoP/blob/master/docs/development-environment.md).
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
+Check the list of [Supported PHP features](https://github.com/GatoGraphQL/PoP/blob/master/docs/supported-php-features.md)
 
 ### Gutenberg JS builds
 
@@ -214,11 +214,11 @@ composer preview-code-downgrade
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
@@ -250,4 +250,4 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 
-[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip
+[latest-release-url]: https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql.zip

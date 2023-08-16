@@ -9,7 +9,7 @@ The Gato GraphQL Monorepo contains several projects.
 **Gato GraphQL** is a forward-looking and powerful GraphQL server for WordPress.
 
 - Website: [gatographql.com](https://gatographql.com)
-- [Download](https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip)
+- [Download](https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql.zip)
 - [Plugin source code](layers/GatoGraphQLForWP/plugins/gatographql)
 - [Development](docs/development-environment.md)
 
@@ -109,7 +109,7 @@ composer preview-code-downgrade
 
 ## Report issues
 
-Use the [issue tracker](https://github.com/leoloso/PoP/issues) to report a bug or request a new feature for all packages in the monorepo.
+Use the [issue tracker](https://github.com/GatoGraphQL/PoP/issues) to report a bug or request a new feature for all packages in the monorepo.
 
 ## Contributing
 

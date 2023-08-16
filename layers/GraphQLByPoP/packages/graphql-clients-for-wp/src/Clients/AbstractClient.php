@@ -52,7 +52,7 @@ abstract class AbstractClient extends AbstractEndpointHandler
          *   Conditional query tags do not work before the query is run.
          *   Before then, they always return false.
          *
-         * @see https://github.com/leoloso/PoP/issues/710
+         * @see https://github.com/GatoGraphQL/PoP/issues/710
          */
         \add_action(
             'init',

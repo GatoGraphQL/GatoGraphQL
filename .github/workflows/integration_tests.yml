@@ -1,7 +1,7 @@
 name: Integration tests
 on:
     # @todo Re-enable executing integration tests for PROD in CI
-    # @see https://github.com/leoloso/PoP/issues/2253
+    # @see https://github.com/GatoGraphQL/PoP/issues/2253
     # workflow_run:
     #     workflows: [Generate plugins]
     #     types:

@@ -77,7 +77,7 @@ abstract class AbstractBlock extends AbstractTransientObject implements BlockInt
              *
              * @todo If `WP_Block_Parser_Block` ever retrieves the original HTML source, then improve this solution
              *
-             * @see https://github.com/leoloso/PoP/issues/2346
+             * @see https://github.com/GatoGraphQL/PoP/issues/2346
              */
             $this->contentSource = serialize_block($this->getSerializeBlockData($this->blockItem));
         }
