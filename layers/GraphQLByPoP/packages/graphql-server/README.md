@@ -29,7 +29,7 @@ composer require graphql-by-pop/graphql-server
 
 To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/PoP-PoPAPI/api#enable-pretty-permalinks)
 
-<!-- > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented). -->
+<!-- > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented). -->
 
 <!--
 ### Enable pretty permalinks

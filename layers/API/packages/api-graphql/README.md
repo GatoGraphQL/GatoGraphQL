@@ -25,7 +25,7 @@ The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/P
 
 To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/PoP-PoPAPI/api#enable-pretty-permalinks)
 
-> Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
+> Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
 
 <!--
 Add the following code in the `.htaccess` file to enable API endpoint `/api/graphql/`:

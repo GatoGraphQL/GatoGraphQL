@@ -21,7 +21,7 @@ PoP is components all the way down. Each component is implemented partly in the 
 
 PoP relies on contracts to interact with the underlying CMS or framework, where all logic resides. As such, it is CMS-agnostic, and it can work with any PHP-based CMS or framework (WordPress, Symfony, Laravel, Joomla, Drupal). 
 
-<!-- So far only the [contracts for WordPress](https://github.com/GatoGraphQL/PoP-API-WP) have been implemented, but extending it to any other platform is very simple: Only all the [repos ending on `"-wp"`](https://github.com/getpop?utf8=%E2%9C%93&q=-wp&type=&language=), which contain the implementation of the contracts for WordPress, need be re-implemented. -->
+<!-- So far only the [contracts for WordPress](https://github.com/leoloso/PoP-API-WP) have been implemented, but extending it to any other platform is very simple: Only all the [repos ending on `"-wp"`](https://github.com/getpop?utf8=%E2%9C%93&q=-wp&type=&language=), which contain the implementation of the contracts for WordPress, need be re-implemented. -->
 
 ### No creeping business logic
 
@@ -79,7 +79,7 @@ PoP's architecture attempts to achieve the following goals:
 
 Follow the instructions in:
 
-- [PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP)
+- [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP)
 
 (Other projects coming soon...) -->
 
@@ -588,14 +588,14 @@ The following articles concern how different features in PoP were implemented:
 <!--
 ## 🔥 Become involved!
 
-Contributors are welcome! Please check [PoP in PHP](https://github.com/GatoGraphQL/PoP-PHP) to see what we need help with. If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀❤️.
+Contributors are welcome! Please check [PoP in PHP](https://github.com/leoloso/PoP-PHP) to see what we need help with. If either you want to get involved, or simply find out more about PoP, simply [send Leo an email](mailto:leo@getpop.org) or [tweet](https://twitter.com/losoviz) 😀❤️.
 -->
 <!--
 ### We are looking for help with...
 
 **Codebase Migration**
 
-[PoP in PHP](https://github.com/GatoGraphQL/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/GatoGraphQL/PoP-PHP#codebase-migration).
+[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
 -->
 
 <!--

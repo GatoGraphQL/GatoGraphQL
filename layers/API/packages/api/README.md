@@ -15,7 +15,7 @@ Convert the application into a powerful API. Install the [Gato GraphQL](https://
 
 ### Installing a fully-working API
 
-Follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
+Follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
 
 ### Installing this library
 
@@ -1766,7 +1766,7 @@ GNU General Public License v2 (or later). Please see [License File](LICENSE.md) 
 
 
 <!--
-> **Note:** The usage below belong to [PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
+> **Note:** The usage below belong to [PoP API for WordPress](https://github.com/leoloso/PoP-API-WP). Other configurations (eg: for other CMSs, to set-up a website instead of an API, and others) are coming soon.
 
 For the **REST-compatible API**, add parameter `datastructure=rest` to the endpoint URL. 
 
