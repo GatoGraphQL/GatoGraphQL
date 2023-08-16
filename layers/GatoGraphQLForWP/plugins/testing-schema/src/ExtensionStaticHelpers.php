@@ -15,6 +15,6 @@ class ExtensionStaticHelpers
         $tag = PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
             ? 'master'
             : $extensionPluginVersion;
-        return 'https://raw.githubusercontent.com/leoloso/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
+        return 'https://raw.githubusercontent.com/GatoGraphQL/PoP/' . $tag . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
     }
 }

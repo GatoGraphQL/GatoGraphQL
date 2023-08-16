@@ -102,7 +102,7 @@ trait ClientTrait
 
         /**
          * Must remove the protocol, or we might get an error with status 406
-         * @see https://github.com/leoloso/PoP/issues/436
+         * @see https://github.com/GatoGraphQL/PoP/issues/436
          *
          * @var string
          */

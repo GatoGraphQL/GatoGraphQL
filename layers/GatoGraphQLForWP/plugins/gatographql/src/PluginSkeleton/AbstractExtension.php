@@ -21,7 +21,7 @@ use PoP\Root\Module\ModuleInterface;
  *
  * Then, the activation is done when registering the extension.
  *
- * @see https://github.com/leoloso/PoP/blob/bccf2f0/layers/GatoGraphQLForWP/plugins/extension-demo/gatographql-extension-demo.php#L73-L77
+ * @see https://github.com/GatoGraphQL/PoP/blob/bccf2f0/layers/GatoGraphQLForWP/plugins/extension-demo/gatographql-extension-demo.php#L73-L77
  */
 abstract class AbstractExtension extends AbstractPlugin implements ExtensionInterface
 {

@@ -29,7 +29,7 @@ composer require graphql-by-pop/graphql-server
 
 To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/PoP-PoPAPI/api#enable-pretty-permalinks)
 
-<!-- > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented). -->
+<!-- > Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented). -->
 
 <!--
 ### Enable pretty permalinks
@@ -57,7 +57,7 @@ RewriteRule ^api/graphql/?$ /?scheme=api&datastructure=graphql [L,P,QSA]
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`GraphQLByPoP/packages/graphql-server`](https://github.com/leoloso/PoP/tree/master/layers/GraphQLByPoP/packages/graphql-server).
+The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/PoP), under [`GraphQLByPoP/packages/graphql-server`](https://github.com/GatoGraphQL/PoP/tree/master/layers/GraphQLByPoP/packages/graphql-server).
 
 ## Usage
 
@@ -122,7 +122,7 @@ Requirements:
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
+Check the list of [Supported PHP features in `GatoGraphQL/PoP`](https://github.com/GatoGraphQL/PoP/blob/master/docs/supported-php-features.md)
 
 ### Preview downgrade to PHP 7.2
 
@@ -170,11 +170,11 @@ composer analyse
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 

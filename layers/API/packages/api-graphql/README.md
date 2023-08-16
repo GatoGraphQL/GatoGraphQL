@@ -21,11 +21,11 @@ composer require pop-api/api-graphql
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/leoloso/PoP), under [`API/packages/api-graphql`](https://github.com/leoloso/PoP/tree/master/layers/API/packages/api-graphql).
+The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/PoP), under [`API/packages/api-graphql`](https://github.com/GatoGraphQL/PoP/tree/master/layers/API/packages/api-graphql).
 
 To enable pretty API endpoint `/api/graphql/`, follow the instructions [here](https://github.com/PoP-PoPAPI/api#enable-pretty-permalinks)
 
-> Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/leoloso/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
+> Note: if you wish to install a fully-working API, please follow the instructions under [Bootstrap a PoP API for WordPress](https://github.com/GatoGraphQL/PoP-API-WP) (even though CMS-agnostic, only the WordPress adapters have been presently implemented).
 
 <!--
 Add the following code in the `.htaccess` file to enable API endpoint `/api/graphql/`:
@@ -139,7 +139,7 @@ Please refer to package [API](https://github.com/PoP-PoPAPI/api), on which the G
 
 <!-- ## Everything from the API layer, adapted to GraphQL
 
-The [API](https://github.com/leoloso/PoP/tree/master/layers/API/) layer provides plenty of features, based on the [field-query](https://github.com/leoloso/PoP/tree/master/layers/Engine/packages/field-query) syntax.
+The [API](https://github.com/GatoGraphQL/PoP/tree/master/layers/API/) layer provides plenty of features, based on the [field-query](https://github.com/GatoGraphQL/PoP/tree/master/layers/Engine/packages/field-query) syntax.
 
 This package adapts all those features to GraphQL. -->
 
@@ -149,11 +149,11 @@ Namespaces ([proposed to be added to the GraphQL spec](https://github.com/graphq
 
 This is how the normal schema looks like in the GraphQL Voyager:
 
-![Interactive schema](https://raw.githubusercontent.com/leoloso/PoP/97b3b048d7c68da4f10ab1dcb31c0215cc6cc526/layers/API/packages/api-graphql/assets/images/normal-interactive-schema.png)
+![Interactive schema](https://raw.githubusercontent.com/GatoGraphQL/PoP/97b3b048d7c68da4f10ab1dcb31c0215cc6cc526/layers/API/packages/api-graphql/assets/images/normal-interactive-schema.png)
 
 This is how it looks in its namespaced version:
 
-![Namespaced interactive schema](https://raw.githubusercontent.com/leoloso/PoP/97b3b048d7c68da4f10ab1dcb31c0215cc6cc526/layers/API/packages/api-graphql/assets/images/namespaced-interactive-schema.png)
+![Namespaced interactive schema](https://raw.githubusercontent.com/GatoGraphQL/PoP/97b3b048d7c68da4f10ab1dcb31c0215cc6cc526/layers/API/packages/api-graphql/assets/images/namespaced-interactive-schema.png)
 
 ### Field/directive-based versioning
 
@@ -186,7 +186,7 @@ Requirements:
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features in `leoloso/PoP`](https://github.com/leoloso/PoP/blob/master/docs/supported-php-features.md)
+Check the list of [Supported PHP features in `GatoGraphQL/PoP`](https://github.com/GatoGraphQL/PoP/blob/master/docs/supported-php-features.md)
 
 ### Preview downgrade to PHP 7.2
 
@@ -234,11 +234,11 @@ composer analyse
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 

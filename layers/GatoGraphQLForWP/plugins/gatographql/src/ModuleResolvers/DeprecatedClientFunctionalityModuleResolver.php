@@ -13,7 +13,7 @@ use GatoGraphQL\GatoGraphQL\Plugin;
  * This module will be removed once GraphiQL v3.0, with the GraphiQL Explorer
  * already integrated, is released.
  *
- * @see https://github.com/leoloso/PoP/issues/1902
+ * @see https://github.com/GatoGraphQL/PoP/issues/1902
  */
 class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -84,7 +84,7 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
      * Since this functionality is already built and working,
      * simply hide it.
      *
-     * @see https://github.com/leoloso/PoP/issues/1902
+     * @see https://github.com/GatoGraphQL/PoP/issues/1902
      */
     public function isHidden(string $module): bool
     {
@@ -102,7 +102,7 @@ class DeprecatedClientFunctionalityModuleResolver extends AbstractFunctionalityM
      * Since this functionality is already built and working,
      * simply hide it.
      *
-     * @see https://github.com/leoloso/PoP/issues/1902
+     * @see https://github.com/GatoGraphQL/PoP/issues/1902
      */
     public function areSettingsHidden(string $module): bool
     {

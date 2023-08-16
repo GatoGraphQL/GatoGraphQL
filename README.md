@@ -1,10 +1,10 @@
 <p align="center"><img src="https://raw.githubusercontent.com/GatoGraphQL/PoP/master/assets/GatoGraphQL-logo.png"/></p>
 
-![Unit tests](https://github.com/leoloso/PoP/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/leoloso/PoP/issues/2253 --><!-- ![Integration tests](https://github.com/leoloso/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
-![Downgrade PHP tests](https://github.com/leoloso/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
-![Scoping tests](https://github.com/leoloso/PoP/actions/workflows/scoping_tests.yml/badge.svg)
-![Generate plugins](https://github.com/leoloso/PoP/actions/workflows/generate_plugins.yml/badge.svg)
-<!-- ![PHPStan](https://github.com/leoloso/PoP/actions/workflows/phpstan.yml/badge.svg) -->
+![Unit tests](https://github.com/GatoGraphQL/PoP/actions/workflows/unit_tests.yml/badge.svg)<!-- @todo Re-enable executing integration tests for PROD in CI --><!-- @see https://github.com/GatoGraphQL/PoP/issues/2253 --><!-- ![Integration tests](https://github.com/GatoGraphQL/PoP/actions/workflows/integration_tests.yml/badge.svg) -->
+![Downgrade PHP tests](https://github.com/GatoGraphQL/PoP/actions/workflows/downgrade_php_tests.yml/badge.svg)
+![Scoping tests](https://github.com/GatoGraphQL/PoP/actions/workflows/scoping_tests.yml/badge.svg)
+![Generate plugins](https://github.com/GatoGraphQL/PoP/actions/workflows/generate_plugins.yml/badge.svg)
+<!-- ![PHPStan](https://github.com/GatoGraphQL/PoP/actions/workflows/phpstan.yml/badge.svg) -->
 
 # Gato GraphQL
 
@@ -190,7 +190,7 @@ These articles explain the integration with Gutenberg (the WordPress editor).
 
 ## Monorepo documentation
 
-`leoloso/PoP` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
+`GatoGraphQL/PoP` is a monorepo containing the several layers required for Gato GraphQL. Check [Monorepo_README.md](Monorepo_README.md) for documentation of the different projects.
 
 ## Standards
 
@@ -247,11 +247,11 @@ composer preview-code-downgrade
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/leoloso/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/leoloso/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
@@ -272,4 +272,4 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/PoP/total.svg
 
 [link-author]: https://github.com/leoloso
-[latest-release-url]: https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip
+[latest-release-url]: https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql.zip

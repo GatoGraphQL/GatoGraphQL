@@ -348,6 +348,6 @@ To receive notifications on the current status, you can [subscribe to the newsle
 
 ## Run into issues?
 
-If you have any problem installing or running `v0.8`, please create an issue in [github.com/leoloso/PoP/issues](https://github.com/leoloso/PoP/issues).
+If you have any problem installing or running `v0.8`, please create an issue in [github.com/GatoGraphQL/PoP/issues](https://github.com/GatoGraphQL/PoP/issues).
 
 👋

@@ -13,15 +13,15 @@ fi
 if wp plugin is-installed gatographql --path=/app/wordpress; then
     wp plugin activate gatographql --path=/app/wordpress
 else
-    wp plugin install https://github.com/leoloso/PoP/releases/latest/download/gatographql.zip --force --activate --path=/app/wordpress
+    wp plugin install https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql.zip --force --activate --path=/app/wordpress
 fi
 if wp plugin is-installed gatographql-testing-schema --path=/app/wordpress; then
     wp plugin activate gatographql-testing-schema --path=/app/wordpress
 else
-    wp plugin install https://github.com/leoloso/PoP/releases/latest/download/gatographql-testing-schema.zip --force --activate --path=/app/wordpress
+    wp plugin install https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql-testing-schema.zip --force --activate --path=/app/wordpress
 fi
 if wp plugin is-installed gatographql-testing --path=/app/wordpress; then
     wp plugin activate gatographql-testing --path=/app/wordpress
 else
-    wp plugin install https://github.com/leoloso/PoP/releases/latest/download/gatographql-testing.zip --force --activate --path=/app/wordpress
+    wp plugin install https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql-testing.zip --force --activate --path=/app/wordpress
 fi

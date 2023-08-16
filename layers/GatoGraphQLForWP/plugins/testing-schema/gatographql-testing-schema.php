@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Gato GraphQL - Testing Schema
-Plugin URI: https://github.com/leoloso/PoP
+Plugin URI: https://github.com/GatoGraphQL/PoP
 Description: Addition of elements to the GraphQL schema to test the Gato GraphQL plugin
 Version: 1.0.0-dev
 Requires at least: 5.4
@@ -25,7 +25,7 @@ if (!defined('ABSPATH')) {
 /**
  * Load translations
  * @todo Re-enable when an actual translation (*.po/*.mo) is provided
- * @see https://github.com/leoloso/PoP/issues/2051
+ * @see https://github.com/GatoGraphQL/PoP/issues/2051
  */
 // \add_action('init', function (): void {
 //     load_plugin_textdomain('gatographql-testing-schema', false, plugin_basename(__FILE__) . '/languages');
