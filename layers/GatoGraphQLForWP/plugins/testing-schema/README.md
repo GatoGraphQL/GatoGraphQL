@@ -16,7 +16,7 @@ Then, in the WordPress admin:
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`GatoGraphQLForWP/plugins/testing-schema`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/plugins/testing-schema).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`GatoGraphQLForWP/plugins/testing-schema`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/plugins/testing-schema).
 
 ## Credits
 

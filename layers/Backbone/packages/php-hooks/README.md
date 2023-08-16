@@ -21,7 +21,7 @@ composer require pop-backbone/php-hooks
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Backbone/packages/php-hooks`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Backbone/packages/php-hooks).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Backbone/packages/php-hooks`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Backbone/packages/php-hooks).
 
 ## PHP-Hooks (Original README)
 

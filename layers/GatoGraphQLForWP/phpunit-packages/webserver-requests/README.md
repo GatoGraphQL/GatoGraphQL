@@ -21,7 +21,7 @@ composer require phpunit-for-gatographql/webserver-requests
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`GatoGraphQLForWP/phpunit-packages/webserver-requests`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/phpunit-packages/webserver-requests).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`GatoGraphQLForWP/phpunit-packages/webserver-requests`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/phpunit-packages/webserver-requests).
 
 ## Usage
 
@@ -90,11 +90,11 @@ composer analyse
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/GatoGraphQL/issues).
+To report a bug or request a new feature please do it on the [GatoGraphQL monorepo issue tracker](https://github.com/GatoGraphQL/GatoGraphQL/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL) (where the source code for this package is hosted).
+We welcome contributions for this package on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
