@@ -11,15 +11,15 @@ This extension is composed of:
 
 When the GraphQL server resolves a query, it triggers the following action hooks with the GraphQL response:
 
-1. `gato_graphql__executed_query_{$operationName}` (only if the GraphQL operation to execute was provided)
-2. `gato_graphql__executed_query`
+1. `gatographql__executed_query_{$operationName}` (only if the GraphQL operation to execute was provided)
+2. `gatographql__executed_query`
 
 The action hooks that are triggered are:
 
 ```php
 // Triggered only if the GraphQL operation to execute was provided
 do_action(
-  "gato_graphql__executed_query_{$operationName}",
+  "gatographql__executed_query_{$operationName}",
   $response,
   $isInternalExecution,
   $query,
@@ -28,7 +28,7 @@ do_action(
 
 // Triggered always
 do_action(
-  'gato_graphql__executed_query',
+  'gatographql__executed_query',
   $response,
   $isInternalExecution,
   $operationName,
@@ -49,14 +49,14 @@ The parameters passed are:
 
 The following action hooks are provided, to be invoked from within [WP-Cron](https://developer.wordpress.org/plugins/cron/):
 
-1. `gato_graphql__execute_query`
-2. `gato_graphql__execute_persisted_query`
+1. `gatographql__execute_query`
+2. `gatographql__execute_persisted_query`
 
 These hooks receive the following parameters (in this same order):
 
 | # | Mandatory? | Param | Description |
 | --- | --- | --- | --- |
-| 1 | ✅ | `$query` for `gato_graphql__execute_query`, or<br/><br/>`$persistedQueryIDOrSlug` for `gato_graphql__execute_persisted_query` | The GraphQL query to execute with `gato_graphql__execute_query`, or<br/><br/>The Persisted Query ID (as an int) or slug (as a string) for `gato_graphql__execute_persisted_query` |
+| 1 | ✅ | `$query` for `gatographql__execute_query`, or<br/><br/>`$persistedQueryIDOrSlug` for `gatographql__execute_persisted_query` | The GraphQL query to execute with `gatographql__execute_query`, or<br/><br/>The Persisted Query ID (as an int) or slug (as a string) for `gatographql__execute_persisted_query` |
 | 2 | ❌ | `$variables` | GraphQL variables |
 | 3 | ❌ | `$operationName` | The operation name to execute |
 | 4 | ❌ | `$executeAsUser` | The user to log-in to execute the query |
@@ -109,7 +109,7 @@ GraphQLServer::executeQuery(
 );
 
 add_action(
-  "gato_graphql__executed_query_CreatePost",
+  "gatographql__executed_query_CreatePost",
   function (Response $response) {
     /** @var string */
     $responseContent = $response->getContent();
@@ -154,7 +154,7 @@ add_action(
 
 ### WP-Cron
 
-The following WP-Cron event executes hook `gato_graphql__execute_persisted_query` to send a daily email indicating the number of new comments added to the site:
+The following WP-Cron event executes hook `gatographql__execute_persisted_query` to send a daily email indicating the number of new comments added to the site:
 
 - In the last 24 hs
 - In the last 1 year
@@ -250,7 +250,7 @@ Then, we schedule the WP-Cron event, either via PHP:
 \wp_schedule_event(
   time(),
   'daily',
-  'gato_graphql__execute_persisted_query',
+  'gatographql__execute_persisted_query',
   [
     'daily-stats-by-email-number-of-comments',
     [
@@ -264,7 +264,7 @@ Then, we schedule the WP-Cron event, either via PHP:
 
 Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
-- Hook name: `gato_graphql__execute_persisted_query`
+- Hook name: `gatographql__execute_persisted_query`
 - Arguments: `["daily-stats-by-email-number-of-comments",{"to":["admin@mysite.com"]},"SendDailyStatsByEmailNumberOfComments",1]`
 - Recurrence: Once Daily
 

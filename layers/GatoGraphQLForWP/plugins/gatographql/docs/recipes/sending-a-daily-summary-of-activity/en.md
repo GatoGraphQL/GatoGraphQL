@@ -98,7 +98,7 @@ mutation SendDailyStatsByEmailNumberOfComments(
 
 ## Scheduling the execution of the GraphQL query via WP-Cron
 
-We must schedule the WP-Cron event to execute the Gato GraphQL hook `gato_graphql__execute_persisted_query`, passing along the email to send the email to as argument, and the recurrence (daily).
+We must schedule the WP-Cron event to execute the Gato GraphQL hook `gatographql__execute_persisted_query`, passing along the email to send the email to as argument, and the recurrence (daily).
 
 We do this either via PHP:
 
@@ -106,7 +106,7 @@ We do this either via PHP:
 wp_schedule_event(
   time(),
   'daily',
-  'gato_graphql__execute_persisted_query',
+  'gatographql__execute_persisted_query',
   [
     'daily-stats-by-email-number-of-comments',
     [
@@ -120,7 +120,7 @@ wp_schedule_event(
 
 Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
-- Hook name: `gato_graphql__execute_persisted_query`
+- Hook name: `gatographql__execute_persisted_query`
 - Arguments: `["daily-stats-by-email-number-of-comments",{"to":["admin@mysite.com"]},"SendDailyStatsByEmailNumberOfComments",1]`
 - Recurrence: Once Daily
 

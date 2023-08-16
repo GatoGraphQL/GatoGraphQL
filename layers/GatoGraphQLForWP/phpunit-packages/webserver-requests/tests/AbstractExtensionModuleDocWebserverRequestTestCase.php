@@ -10,7 +10,7 @@ abstract class AbstractExtensionModuleDocWebserverRequestTestCase extends Abstra
 {
     protected static function getModuleEndpoint(string $module): string
     {
-        $page = 'gato_graphql_extensions';
+        $page = 'gatographql_extensions';
         return sprintf(
             'wp-admin/admin.php?page=%s&%s=%s&%s=%s',
             $page,

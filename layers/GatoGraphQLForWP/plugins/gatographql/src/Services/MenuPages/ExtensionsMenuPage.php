@@ -19,7 +19,7 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
 {
     use OpenInModalTriggerMenuPageTrait;
 
-    public final const SCREEN_OPTION_NAME = 'gato_graphql_extensions_per_page';
+    public final const SCREEN_OPTION_NAME = 'gatographql_extensions_per_page';
 
     private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
 

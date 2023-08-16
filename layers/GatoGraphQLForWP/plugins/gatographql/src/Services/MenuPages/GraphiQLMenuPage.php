@@ -28,7 +28,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
     /**
      * Override, because this is the default page, so it is invoked
      * with the menu slug wp-admin/admin.php?page=gatographql,
-     * and not the menu page slug wp-admin/admin.php?page=gato_graphql_graphiql
+     * and not the menu page slug wp-admin/admin.php?page=gatographql_graphiql
      */
     public function getScreenID(): string
     {

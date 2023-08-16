@@ -163,7 +163,7 @@ This PHP code executes the `SendEmail` operation (GraphQL query defined above), 
 // The GraphQL query, under var `$query`, is the one defined above
 // $query = '...';
 add_action(
-  "gato_graphql__executed_query_CreatePost",
+  "gatographql__executed_query_CreatePost",
   function (Response $response) use ($query) {
     /** @var string */
     $responseContent = $response->getContent();
@@ -219,7 +219,7 @@ Depending on our strategy, we can trigger the execution of one or multiple addit
 | **Hooking into...** | **Triggers number of GraphQL queries...** |
 | --- | --- |
 | `post_updated` (by WordPress core) | One for every updated post |
-| `gato_graphql__executed_query_ReplaceDomains` (by [**Automation**](https://gatographql.com/extensions/automation/) extension) | One in total (it will receive the data for all updated posts) |
+| `gatographql__executed_query_ReplaceDomains` (by [**Automation**](https://gatographql.com/extensions/automation/) extension) | One in total (it will receive the data for all updated posts) |
 
 <br/>
 

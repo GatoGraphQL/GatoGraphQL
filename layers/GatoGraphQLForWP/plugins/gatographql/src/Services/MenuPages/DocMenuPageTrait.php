@@ -39,7 +39,7 @@ trait DocMenuPageTrait
          * Move any potential "../" relative path from
          * $filename to $relativePathDir.
          *
-         * Eg: Links to release-notes .md files in wp-admin/admin.php?page=gato_graphql_about
+         * Eg: Links to release-notes .md files in wp-admin/admin.php?page=gatographql_about
          */
         while (str_starts_with($filename, '../')) {
             $filename = substr($filename, 3);
