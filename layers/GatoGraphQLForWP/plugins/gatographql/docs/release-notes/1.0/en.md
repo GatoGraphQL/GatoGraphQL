@@ -12,7 +12,7 @@ Here's a description of all the changes.
 
 _This integration is based on <a href="https://github.com/Automattic/vip-block-data-api/" target="_blank">`Automattic/vip-block-data-api`</a>. My deepest gratitude to this project's contributors, as their contribution has also benefitted Gato GraphQL. ❤️_
 
-_🔗 The following is a short description of the feature. Please check the [Blocks module documentation](https://github.com/GatoGraphQL/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/schema-blocks/en.md) for a more thorough description._
+_🔗 The following is a short description of the feature. Please check the [Blocks module documentation](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/schema-blocks/en.md) for a more thorough description._
 
 The newly-added "Blocks" module adds `Block` types to the GraphQL schema, retrieved via the following fields added to all `CustomPost` types (such as `Post` and `Page`):
 
@@ -758,7 +758,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 
 <!-- _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._ -->
 
-_🔗 The following is a short description of the feature. Please check the [Global Fields module documentation](https://github.com/GatoGraphQL/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/global-fields/en.md) for a more thorough description._
+_🔗 The following is a short description of the feature. Please check the [Global Fields module documentation](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/global-fields/en.md) for a more thorough description._
 
 The GraphQL schema exposes types, such as `Post`, `User` and `Comment`, and the fields available for every type, such as `Post.title`, `User.name` and `Comment.responses`. These fields deal with "data", as they retrieve some specific piece of data from an entity.
 
@@ -799,7 +799,7 @@ In order to configure the level of exposure of global fields in the schema, the 
 
 <!-- _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._ -->
 
-_🔗 The following is a short description of the feature. Please check the [Composable Directives module documentation](https://github.com/GatoGraphQL/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/composable-directives/en.md) for a more thorough description._
+_🔗 The following is a short description of the feature. Please check the [Composable Directives module documentation](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/composable-directives/en.md) for a more thorough description._
 
 This feature allows directives to execute complex functionalities, by composing other directives inside. A directive that composes another directive is called a "meta" directive.
 
@@ -873,7 +873,7 @@ In order to enable or disable composable directives in the schema for some speci
 
 <!-- _⚠️ This is a custom feature offered by Gato GraphQL (i.e. it is not mandated by the GraphQL spec)._ -->
 
-_🔗 The following is a short description of the feature. Please check the [Multi-Field Directives module documentation](https://github.com/GatoGraphQL/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/multifield-directives/en.md) for a more thorough description._
+_🔗 The following is a short description of the feature. Please check the [Multi-Field Directives module documentation](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/modules/multifield-directives/en.md) for a more thorough description._
 
 This feature allows directives to be applied to multiple fields, instead of only one. When enabled, an argument `affectAdditionalFieldsUnderPos` is added to all directives, to indicate the relative positions of the additional fields on which to apply the directive.
 
@@ -918,7 +918,7 @@ Similarly, these mutation fields received a `comment` argument of type `String`:
 - `CustomPost.addComment`
 - `Root.addCommentToCustomPost`
 
-These `content` and `comment` arguments have now been renamed to `contentAs` and `commentAs` respectively, and converted into a ["oneof" input object](https://github.com/GatoGraphQL/PoP/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/implicit-features/oneof-input-object/en.md) that contains a single property: `html: HTML!`.
+These `content` and `comment` arguments have now been renamed to `contentAs` and `commentAs` respectively, and converted into a ["oneof" input object](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/docs/implicit-features/oneof-input-object/en.md) that contains a single property: `html: HTML!`.
 
 This is to avoid potential breaking changes in the future, when it becomes possible to also create and update custom posts and comments by passing their `Block` data (instead of the single blob of HTML data).
 

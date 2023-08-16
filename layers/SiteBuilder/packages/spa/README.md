@@ -20,7 +20,7 @@ composer require getpop/spa
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/PoP), under [`SiteBuilder/packages/spa`](https://github.com/GatoGraphQL/PoP/tree/master/layers/SiteBuilder/packages/spa).
+The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`SiteBuilder/packages/spa`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/SiteBuilder/packages/spa).
 
 ## Usage
 
@@ -41,7 +41,7 @@ Requirements:
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features in `GatoGraphQL/PoP`](https://github.com/GatoGraphQL/PoP/blob/master/docs/supported-php-features.md)
+Check the list of [Supported PHP features in `GatoGraphQL/GatoGraphQL`](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/docs/supported-php-features.md)
 
 ### Preview downgrade to PHP 7.2
 
@@ -89,11 +89,11 @@ composer analyse
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/GatoGraphQL/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 

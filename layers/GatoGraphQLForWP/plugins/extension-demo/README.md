@@ -16,7 +16,7 @@ Then, in the WordPress admin:
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/PoP), under [`GatoGraphQLForWP/plugins/extension-demo`](https://github.com/GatoGraphQL/PoP/tree/master/layers/GatoGraphQLForWP/plugins/extension-demo).
+The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`GatoGraphQLForWP/plugins/extension-demo`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/plugins/extension-demo).
 
 ## Credits
 
@@ -27,4 +27,4 @@ The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/P
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
 [link-author]: https://github.com/leoloso
-[latest-release-url]: https://github.com/GatoGraphQL/PoP/releases/latest/download/gatographql-extension-demo.zip
+[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/latest/download/gatographql-extension-demo.zip

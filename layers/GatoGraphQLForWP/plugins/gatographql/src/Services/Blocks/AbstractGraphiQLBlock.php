@@ -104,7 +104,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
          *
          * When fixed, uncomment the code below.
          *
-         * @see https://github.com/GatoGraphQL/PoP/issues/251
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/251
          */
         return '';
     //     return <<<EOT

@@ -1016,7 +1016,7 @@ Support for custom [scalar types](https://graphql.org/learn/schema/#scalar-types
 
 Custom scalars allow you to better represent your data, whether for getting an input via a field argument, or printing a customized output in the response.
 
-(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/PoP/blob/a882ddf1300ee915b96683fbdf56f09be2ea0447/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php).)
+(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/GatoGraphQL/blob/a882ddf1300ee915b96683fbdf56f09be2ea0447/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType/EmailScalarTypeResolver.php).)
 
 ### Implementation of standard custom scalar types
 
@@ -1029,7 +1029,7 @@ Several standard custom scalar types have been implemented, so they are readily-
 - `URL`
 - `URLAbsolutePath`
 
-You can browse their source code [here](https://github.com/GatoGraphQL/PoP/tree/b2d60e9a7ee886c7bd4cadbcae17f259b0c86f6c/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType).
+You can browse their source code [here](https://github.com/GatoGraphQL/GatoGraphQL/tree/b2d60e9a7ee886c7bd4cadbcae17f259b0c86f6c/layers/Schema/packages/schema-commons/src/TypeResolvers/ScalarType).
 
 ### Implementation of `Numeric` scalar
 
@@ -1062,7 +1062,7 @@ Enums are a special kind of scalar that is restricted to a particular set of all
 - Validate that any arguments of this type are one of the allowed values
 - Communicate through the type system that a field will always be one of a finite set of values
 
-(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/PoP/blob/c320cb1a4e5db48c5045cb37b66506b4a4a9a695/layers/Schema/packages/comments/src/TypeResolvers/EnumType/CommentStatusEnumTypeResolver.php).)
+(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/GatoGraphQL/blob/c320cb1a4e5db48c5045cb37b66506b4a4a9a695/layers/Schema/packages/comments/src/TypeResolvers/EnumType/CommentStatusEnumTypeResolver.php).)
 
 ### Implementation of several enum types
 
@@ -1114,7 +1114,7 @@ query EnumStringTypePossibleValues {
 }
 ```
 
-(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/PoP/blob/d60ce3e2f299cc7cb17d43b4a464862878e60bd5/layers/CMSSchema/packages/customposts/src/TypeResolvers/EnumType/CustomPostEnumStringScalarTypeResolver.php).)
+(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/GatoGraphQL/blob/d60ce3e2f299cc7cb17d43b4a464862878e60bd5/layers/CMSSchema/packages/customposts/src/TypeResolvers/EnumType/CustomPostEnumStringScalarTypeResolver.php).)
 
 ### Implementation of several "Enum String" types
 
@@ -1131,7 +1131,7 @@ In addition, the GraphQL server now also supports [input types](https://graphql.
 
 Input objects allow you to pass complex objects as inputs to fields, which is particularly useful for mutations.
 
-(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/PoP/blob/accfd9954aa6b26b9d38c39580764b1a38e0f539/layers/Schema/packages/posts/src/TypeResolvers/InputObjectType/RootPostsFilterInputObjectTypeResolver.php).)
+(Here is the [source code for an example implementation](https://github.com/GatoGraphQL/GatoGraphQL/blob/accfd9954aa6b26b9d38c39580764b1a38e0f539/layers/Schema/packages/posts/src/TypeResolvers/InputObjectType/RootPostsFilterInputObjectTypeResolver.php).)
 
 ### Implementation of several input object types
 
@@ -1954,7 +1954,7 @@ The underlying GraphQL server powering the plugin can now be installed and execu
 
 This opens the doors to using the GraphQL API with other frameworks (eg: Laravel), and on any PHP environment, whether WordPress is available or not (such as when executing a Continous Integration task).
 
-This plugin itself benefits from this feature: the unit tests in the repo are being [executed in GitHub Actions](https://github.com/GatoGraphQL/PoP/actions/workflows/unit_tests.yml) (yet there's no instance of WordPress running). As an example, [this PHPUnit test](https://github.com/GatoGraphQL/PoP/blob/b6cc58227a06bc2e58b5d31da0d3fdaeec7eacad/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/WPFakerFixtureQueryExecutionGraphQLServerTest.php) asserts that [this GraphQL query](https://github.com/GatoGraphQL/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/fixture/success/query.gql) produces [this response](https://github.com/GatoGraphQL/PoP/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/fixture/success/query.json).
+This plugin itself benefits from this feature: the unit tests in the repo are being [executed in GitHub Actions](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/unit_tests.yml) (yet there's no instance of WordPress running). As an example, [this PHPUnit test](https://github.com/GatoGraphQL/GatoGraphQL/blob/b6cc58227a06bc2e58b5d31da0d3fdaeec7eacad/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/WPFakerFixtureQueryExecutionGraphQLServerTest.php) asserts that [this GraphQL query](https://github.com/GatoGraphQL/GatoGraphQL/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/fixture/success/query.gql) produces [this response](https://github.com/GatoGraphQL/GatoGraphQL/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/fixture/success/query.json).
 
 ## Browse documentation when editing a Schema Configuration, Custom Endpoint and Persisted Query
 
@@ -1966,11 +1966,11 @@ All the blocks shown when editing a Schema Configuration, Custom Endpoint and Pe
 
 ## Fixed issues
 
-- Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/GatoGraphQL/PoP/pull/972))
+- Fixed newlines removed from GraphQL query after refreshing browser ([#972](https://github.com/GatoGraphQL/GatoGraphQL/pull/972))
 
 ## Improvements in Development and Testing
 
-The [development code and process](https://github.com/GatoGraphQL/PoP) underwent numerous improvements:
+The [development code and process](https://github.com/GatoGraphQL/GatoGraphQL) underwent numerous improvements:
 
 - Created several hundred new unit and integration tests
 - Upgraded all code to PHPStan's level 8
@@ -2304,7 +2304,7 @@ Since `v0.9`, the following modules are not included anymore in the GraphQL API 
 
 The GraphiQL Explorer module is still present in the plugin, but now it's hidden, so it can't be disabled or configured anymore.
 
-This is in preparation for the [switch to v2.0 of GraphiQL](https://github.com/GatoGraphQL/PoP/issues/1902), which already provides a plugin to support the Explorer. When this issue is completed, the standard GraphiQL client will already include the Explorer, and so a dedicated module will make no sense anymore and will then be removed.
+This is in preparation for the [switch to v2.0 of GraphiQL](https://github.com/GatoGraphQL/GatoGraphQL/issues/1902), which already provides a plugin to support the Explorer. When this issue is completed, the standard GraphiQL client will already include the Explorer, and so a dedicated module will make no sense anymore and will then be removed.
 
 ### Settings for several modules must be set again
 

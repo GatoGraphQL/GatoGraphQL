@@ -635,8 +635,8 @@ This query:
 
 The Gato GraphQL schema must be upgraded with mutations to:
 
-- Create/update users ([#2456](https://github.com/GatoGraphQL/PoP/issues/2456))
-- Create/update categories ([#2457](https://github.com/GatoGraphQL/PoP/issues/2457))
-- Upload media items, or import them from a URL ([#2458](https://github.com/GatoGraphQL/PoP/issues/2458))
+- Create/update users ([#2456](https://github.com/GatoGraphQL/GatoGraphQL/issues/2456))
+- Create/update categories ([#2457](https://github.com/GatoGraphQL/GatoGraphQL/issues/2457))
+- Upload media items, or import them from a URL ([#2458](https://github.com/GatoGraphQL/GatoGraphQL/issues/2458))
 
 This is a work in progress. Once these mutations are supported, we can then have the GraphQL query automatically import each of the missing resources.

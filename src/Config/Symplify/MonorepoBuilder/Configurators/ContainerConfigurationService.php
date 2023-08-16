@@ -74,7 +74,7 @@ class ContainerConfigurationService
          * Additional downgrade Rector configs:
          * Hack to fix bugs
          * @see https://github.com/rectorphp/rector/issues/5962
-         * @see https://github.com/GatoGraphQL/PoP/issues/597#issue-855005786
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/597#issue-855005786
          */
         if ($downgradeRectorConfig = $this->getDowngradeRectorDataSource($this->rootDirectory)) {
             $parameters->set(

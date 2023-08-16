@@ -103,7 +103,7 @@ location ~ ^(.*)/api/(rest|graphql)/?$ {
 
 ## Development
 
-The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/PoP), under [`API/packages/api`](https://github.com/GatoGraphQL/PoP/tree/master/layers/API/packages/api).
+The source code is hosted on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`API/packages/api`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/API/packages/api).
 
 ## Usage
 
@@ -1124,7 +1124,7 @@ The example below defines and accesses a list of all services required by the ap
 ```less
 /?query=
   echo([
-    github: "https://api.github.com/repos/GatoGraphQL/PoP",
+    github: "https://api.github.com/repos/GatoGraphQL/GatoGraphQL",
     weather: "https://api.weather.gov/zones/forecast/MOZ028/forecast",
     photos: "https://picsum.photos/v2/list"
   ])@meshServices|
@@ -1151,7 +1151,7 @@ The example below defines and accesses a list of all services required by the ap
   ])@contentMesh
 ```
 
-<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5Bgithub:%22https://api.github.com/repos/GatoGraphQL/PoP%22,weather:%22https://api.weather.gov/zones/forecast/MOZ028/forecast%22,photos:%22https://picsum.photos/v2/list%22%5D)@meshServices%7CgetAsyncJSON(getSelfProp(%{self}%,meshServices))@meshServiceData%7Cecho(%5BweatherForecast:extract(getSelfProp(%{self}%,meshServiceData),weather.properties.periods),photoGalleryURLs:extract(getSelfProp(%{self}%,meshServiceData),photos.url),githubMeta:echo(%5Bdescription:extract(getSelfProp(%{self}%,meshServiceData),github.description),starCount:extract(getSelfProp(%{self}%,meshServiceData),github.stargazers_count)%5D)%5D)@contentMesh">View query results</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=echo(%5Bgithub:%22https://api.github.com/repos/GatoGraphQL/GatoGraphQL%22,weather:%22https://api.weather.gov/zones/forecast/MOZ028/forecast%22,photos:%22https://picsum.photos/v2/list%22%5D)@meshServices%7CgetAsyncJSON(getSelfProp(%{self}%,meshServices))@meshServiceData%7Cecho(%5BweatherForecast:extract(getSelfProp(%{self}%,meshServiceData),weather.properties.periods),photoGalleryURLs:extract(getSelfProp(%{self}%,meshServiceData),photos.url),githubMeta:echo(%5Bdescription:extract(getSelfProp(%{self}%,meshServiceData),github.description),starCount:extract(getSelfProp(%{self}%,meshServiceData),github.stargazers_count)%5D)%5D)@contentMesh">View query results</a>
 
 ### One-graph ready
 
@@ -1679,7 +1679,7 @@ Requirements:
 
 ### Supported PHP features
 
-Check the list of [Supported PHP features in `GatoGraphQL/PoP`](https://github.com/GatoGraphQL/PoP/blob/master/docs/supported-php-features.md)
+Check the list of [Supported PHP features in `GatoGraphQL/GatoGraphQL`](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/docs/supported-php-features.md)
 
 ### Preview downgrade to PHP 7.2
 
@@ -1727,11 +1727,11 @@ composer analyse
 
 ## Report issues
 
-To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/PoP/issues).
+To report a bug or request a new feature please do it on the [PoP monorepo issue tracker](https://github.com/GatoGraphQL/GatoGraphQL/issues).
 
 ## Contributing
 
-We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/PoP) (where the source code for this package is hosted).
+We welcome contributions for this package on the [PoP monorepo](https://github.com/GatoGraphQL/GatoGraphQL) (where the source code for this package is hosted).
 
 Please see [CONTRIBUTING](CONTRIBUTING.md) and [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) for details.
 
@@ -1770,7 +1770,7 @@ GNU General Public License v2 (or later). Please see [License File](LICENSE.md) 
 
 For the **REST-compatible API**, add parameter `datastructure=rest` to the endpoint URL. 
 
-For the **GraphQL-compatible API**, add parameter `datastructure=graphql` to the endpoint URL, and parameter `query` with the fields to retrieve (using a [custom dot notation](https://github.com/GatoGraphQL/PoP#defining-what-data-to-fetch-through-fields)) from the list of fields defined below. In addition, a field may have [arguments](https://github.com/GatoGraphQL/PoP#field-arguments) to modify its results.
+For the **GraphQL-compatible API**, add parameter `datastructure=graphql` to the endpoint URL, and parameter `query` with the fields to retrieve (using a [custom dot notation](https://github.com/GatoGraphQL/GatoGraphQL#defining-what-data-to-fetch-through-fields)) from the list of fields defined below. In addition, a field may have [arguments](https://github.com/GatoGraphQL/GatoGraphQL#field-arguments) to modify its results.
 
 For the **PoP native API**, add parameter `query` to the endpoint URL, similar to GraphQL.
 
