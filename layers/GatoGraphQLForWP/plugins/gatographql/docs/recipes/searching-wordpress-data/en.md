@@ -135,9 +135,13 @@ query {
       dateQuery: {
         after: "2020-07-01"
       },
-      tagSlugs: [
-        "wordpress"
-      ]
+      tags: {
+        includeBy: {
+          slugs: [
+            "wordpress"
+          ]
+        }
+      }
     }
   ) {
     id
