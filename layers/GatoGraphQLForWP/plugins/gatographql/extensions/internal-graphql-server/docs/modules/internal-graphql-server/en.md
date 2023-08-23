@@ -126,6 +126,9 @@ We hook into the WordPress core action `wp_insert_post`, retrieve the data from 
 add_action(
   'wp_insert_post',
   function (int $postID, WP_Post $post) {
+    if ($post->post_status === 'auto-draft') {
+      return;
+    }
     // Check the contents of the query below
     $query = ' ... ';
     $variables = [

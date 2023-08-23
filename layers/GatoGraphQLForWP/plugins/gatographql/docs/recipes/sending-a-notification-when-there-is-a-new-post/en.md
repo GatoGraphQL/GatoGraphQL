@@ -83,6 +83,9 @@ use WP_Post;
 add_action(
   'wp_insert_post',
   function (int $postID, WP_Post $post) use ($query) {
+    if ($post->post_status === 'auto-draft') {
+      return;
+    }
     $variables = [
       'postTitle' => $post->post_title,
       'postContent' => $post->post_content,
