@@ -106,15 +106,23 @@ This PHP code hooks into WordPress action `wp_insert_post` to execute the Persis
 
 ```php
 use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
+use WP_Post;
 
 add_action(
   'wp_insert_post',
-  fn (int $postID) => GraphQLServer::executePersistedQuery(
-    'insert-mandatory-comments-block-if-missing',
-    [
-      'postId' => $postID
-    ],
-    'MaybeInsertCommentsBlock'
-  )
+  function (int $postID, WP_Post $post): void {
+    if ($post->post_status === 'auto-draft') {
+      return;
+    }
+    GraphQLServer::executePersistedQuery(
+      'insert-mandatory-comments-block-if-missing',
+      [
+        'postId' => $postID,
+      ],
+      'MaybeInsertCommentsBlock'
+    );
+  },
+  10,
+  2
 );
 ```
