@@ -15,7 +15,7 @@ In the previous recipe (which explained how to connect to the GraphQL server fro
 
 ```js
 const response = await fetch(endpoint, {
-  body: JSON.stringify({
+  body: JSON.stringify( {
     query: `
       query {
         posts {
@@ -28,7 +28,7 @@ const response = await fetch(endpoint, {
         }
       }
     `
-  )
+  } )
 } );
 ```
 
@@ -74,9 +74,9 @@ import graphQLQuery from './graphql-documents/fetch-posts-with-author.gql';
 // ...
 
 const response = await fetch(endpoint, {
-  body: JSON.stringify({
+  body: JSON.stringify( {
     query: graphQLQuery
-  )
+  } )
 } );
 ```
 
