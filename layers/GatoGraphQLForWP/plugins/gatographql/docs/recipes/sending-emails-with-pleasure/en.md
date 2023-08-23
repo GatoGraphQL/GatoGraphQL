@@ -227,7 +227,11 @@ mutation {
   users {
     email
     displayName
-    remainingCredits: metaValue(key: "credits")
+    credits: metaValue(key: "credits")
+    
+    # If the user does not have meta entry "credits", use `0` credits
+    hasNoCreditsEntry: _isNull(value: $__credits)
+    remainingCredits: _if(condition: $__hasNoCreditsEntry, then: 0, else: $__credits)
 
     emailMessageTemplate: _strConvertMarkdownToHTML(
       text: """
