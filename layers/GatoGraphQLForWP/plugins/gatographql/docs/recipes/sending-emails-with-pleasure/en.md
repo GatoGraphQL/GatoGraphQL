@@ -236,11 +236,11 @@ mutation {
     emailMessageTemplate: _strConvertMarkdownToHTML(
       text: """
 
-        Hello %s,
+Hello %s,
 
-        Your have **%s remaining credits** in your account.
+Your have **%s remaining credits** in your account.
 
-        Would you like to [buy more](%s)?
+Would you like to [buy more](%s)?
 
       """
     )
