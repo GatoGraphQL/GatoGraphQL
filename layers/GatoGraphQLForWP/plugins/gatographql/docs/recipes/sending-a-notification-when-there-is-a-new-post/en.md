@@ -90,7 +90,7 @@ add_action(
       'postTitle' => $post->post_title,
       'postContent' => $post->post_content,
       'postURL' => get_permalink($post->ID),
-    ],
+    ];
     GraphQLServer::executeQuery($query, $variables, 'SendEmail');
   },
   10,
@@ -183,7 +183,7 @@ add_action(
       'postTitle' => $post->post_title,
       'postContent' => $post->post_content,
       'postURL' => get_permalink($post->ID),
-    ],
+    ];
     GraphQLServer::executeQuery($query, $variables, 'SendEmail');
   }
 );

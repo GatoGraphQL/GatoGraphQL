@@ -136,7 +136,7 @@ add_action(
     $variables = [
       'postTitle' => $post->post_title,
       'postContent' => $post->post_content,
-    ],
+    ];
     GraphQLServer::executeQuery($query, $variables, 'SendEmail');
   },
   10,
