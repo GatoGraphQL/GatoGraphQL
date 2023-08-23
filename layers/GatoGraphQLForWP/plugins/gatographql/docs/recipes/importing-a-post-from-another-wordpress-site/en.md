@@ -414,19 +414,19 @@ query ExportMissingResources
     value: $__missingCategorySlugs
   ) @export(as: "areCategoriesMissing")
 
-  missingTagSlugs: _arrayDiff(
-    arrays: [$postTagSlugs, $existingTagSlugs]
-  ) @export(as: "missingTagSlugs")
-  areTagsMissing: _notEmpty(
-    value: $__missingTagSlugs
-  ) @export(as: "areTagsMissing")
+  # missingTagSlugs: _arrayDiff(
+  #   arrays: [$postTagSlugs, $existingTagSlugs]
+  # ) @export(as: "missingTagSlugs")
+  # areTagsMissing: _notEmpty(
+  #   value: $__missingTagSlugs
+  # ) @export(as: "areTagsMissing")
 
   isAnyResourceMissing: _or(
     values: [
       $__isAuthorMissing,
       $__isFeaturedImageMissing,
       $__areCategoriesMissing,
-      $__areTagsMissing,
+      # $__areTagsMissing,
     ]
   ) @export(as: "isAnyResourceMissing")
 }
@@ -464,14 +464,14 @@ query FailIfAnyResourceIsMissing
         }
         condition: ALWAYS
       )
-    @if(condition: $areTagsMissing)
-      @fail(
-        message: "Tags are missing in local site"
-        data: {
-          missingTagBySlug: $missingTagSlugs
-        }
-        condition: ALWAYS
-      )
+    # @if(condition: $areTagsMissing)
+    #   @fail(
+    #     message: "Tags are missing in local site"
+    #     data: {
+    #       missingTagBySlug: $missingTagSlugs
+    #     }
+    #     condition: ALWAYS
+    #   )
   
   createPost: _echo(value: null)
 }
