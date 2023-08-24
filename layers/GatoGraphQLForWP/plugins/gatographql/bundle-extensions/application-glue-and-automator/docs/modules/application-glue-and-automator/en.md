@@ -30,8 +30,8 @@ All this power comes without endangering your site: An internal GraphQL server i
 - [HTTP Request Schema](../../../../../extensions/http-request-via-schema/docs/modules/http-request-via-schema/en.md)
 - [Internal GraphQL Server](../../../../../extensions/internal-graphql-server/docs/modules/internal-graphql-server/en.md)
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
-- [PHP Constants and Environment in Schema](../../../../../extensions/php-constants-and-environment-variables-via-schema/docs/modules/php-constants-and-environment-variables-via-schema/en.md)
-- [PHP Functions in Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
+- [PHP Constants and Environment via Schema](../../../../../extensions/php-constants-and-environment-variables-via-schema/docs/modules/php-constants-and-environment-variables-via-schema/en.md)
+- [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 
 ## List of supported recipes

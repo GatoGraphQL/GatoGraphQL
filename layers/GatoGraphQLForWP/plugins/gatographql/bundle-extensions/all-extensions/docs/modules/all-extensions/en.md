@@ -28,8 +28,8 @@ As new extensions are created and released, they will also be added to this bund
 - [Internal GraphQL Server](../../../../../extensions/internal-graphql-server/docs/modules/internal-graphql-server/en.md)
 - [Low-Level Persisted Query Editing](../../../../../extensions/low-level-persisted-query-editing/docs/modules/low-level-persisted-query-editing/en.md)
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
-- [PHP Constants and Environment in Schema](../../../../../extensions/php-constants-and-environment-variables-via-schema/docs/modules/php-constants-and-environment-variables-via-schema/en.md)
-- [PHP Functions in Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
+- [PHP Constants and Environment via Schema](../../../../../extensions/php-constants-and-environment-variables-via-schema/docs/modules/php-constants-and-environment-variables-via-schema/en.md)
+- [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 - [Schema Editing Access](../../../../../extensions/schema-editing-access/docs/modules/schema-editing-access/en.md)
 

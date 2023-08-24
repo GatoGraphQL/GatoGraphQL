@@ -15,7 +15,7 @@ The bundle provides extensions to access, iterate and manipulate the field value
 - [Field Value Iteration and Manipulation](../../../../../extensions/field-value-iteration-and-manipulation/docs/modules/field-value-iteration-and-manipulation/en.md)
 - [Google Translate](../../../../../extensions/google-translate/docs/modules/google-translate/en.md)
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
-- [PHP Functions in Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
+- [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 
 ## List of supported recipes
 
