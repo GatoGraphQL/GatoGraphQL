@@ -1282,7 +1282,7 @@ An internal GraphQL endpoint, called `blockEditor`, has been made accessible wit
 
 It is accessible under URL:
 
-```
+```apacheconf
 https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor
 ```
 
@@ -1370,7 +1370,7 @@ add_action('plugins_loaded', function () {
 
 Finally, the endpoint is accessed by replacing param `endpoint_group` with the chosen name:
 
-```
+```apacheconf
 https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=accessMyPortfolioData
 ```
 

@@ -10,7 +10,7 @@ Because blocks are used within the context of the WordPress editor, the user is 
 
 This internal `blockEditor` endpoint is accessible under:
 
-```
+```apacheconf
 https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor
 ```
 
