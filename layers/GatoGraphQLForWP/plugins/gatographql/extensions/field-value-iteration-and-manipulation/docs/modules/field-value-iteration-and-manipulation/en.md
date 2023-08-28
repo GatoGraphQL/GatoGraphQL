@@ -618,3 +618,18 @@ query {
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
+
+## Recipes using extension
+
+- [Duplicating multiple blog posts at once](../../../../../docs/recipes/duplicating-multiple-blog-posts-at-once/en.md)
+- [Retrieving structured data from blocks](../../../../../docs/recipes/retrieving-structured-data-from-blocks/en.md)
+- [Modifying (and storing again) the image URLs from all Image blocks in a post](../../../../../docs/recipes/modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post/en.md)
+- [Translating block content in a post to a different language](../../../../../docs/recipes/translating-block-content-in-a-post-to-a-different-language/en.md)
+- [Bulk translating block content in multiple posts to a different language](../../../../../docs/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
+- [Retrieving data from an external API](../../../../../docs/recipes/retrieving-data-from-an-external-api/en.md)
+- [Creating an API gateway](../../../../../docs/recipes/creating-an-api-gateway/en.md)
+- [Transforming data from an external API](../../../../../docs/recipes/transforming-data-from-an-external-api/en.md)
+- [Filtering data from an external API](../../../../../docs/recipes/filtering-data-from-an-external-api/en.md)
+- [Updating large sets of data](../../../../../docs/recipes/updating-large-sets-of-data/en.md)
+- [Importing a post from another WordPress site](../../../../../docs/recipes/importing-a-post-from-another-wordpress-site/en.md)
+- [Distributing content from an upstream to multiple downstream sites](../../../../../docs/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)
