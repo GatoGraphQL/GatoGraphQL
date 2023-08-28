@@ -45,3 +45,7 @@ After creating the Cache Control List, we can have the endpoint use it by editin
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
+
+## Recipes using extension
+
+- [Exposing public and private endpoints](../../../../../docs/recipes/exposing-public-and-private-endpoints/en.md)
