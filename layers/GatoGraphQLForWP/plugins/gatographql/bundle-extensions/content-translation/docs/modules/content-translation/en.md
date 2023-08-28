@@ -31,7 +31,7 @@ The bundle provides extensions to access, iterate and manipulate the field value
 - [Adapting content in bulk](../../../../../docs/recipes/adapting-content-in-bulk/en.md)
 - [Site migrations](../../../../../docs/recipes/site-migrations/en.md)
 - [Inserting/Removing a (Gutenberg) block in bulk](../../../../../docs/recipes/inserting-removing-a-gutenberg-block-in-bulk/en.md)
-- [Extracting the image URLs from all Image blocks in a post](../../../../../docs/recipes/extracting-the-image-urls-from-all-image-blocks-in-a-post/en.md)
+- [Retrieving structured data from blocks](../../../../../docs/recipes/retrieving-structured-data-from-blocks/en.md)
 - [Modifying (and storing again) the image URLs from all Image blocks in a post](../../../../../docs/recipes/modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post/en.md)
 - [Translating block content in a post to a different language](../../../../../docs/recipes/translating-block-content-in-a-post-to-a-different-language/en.md)
 - [Bulk translating block content in multiple posts to a different language](../../../../../docs/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)

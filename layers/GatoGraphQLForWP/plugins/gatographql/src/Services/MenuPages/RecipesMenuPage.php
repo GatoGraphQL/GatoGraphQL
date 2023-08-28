@@ -322,8 +322,8 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'extracting-the-image-urls-from-all-image-blocks-in-a-post',
-                \__('Extracting the image URLs from all Image blocks in a post', 'gatographql'),
+                'retrieving-structured-data-from-blocks',
+                \__('Retrieving structured data from blocks', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
