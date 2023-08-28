@@ -192,3 +192,10 @@ query GetExternalAPIData
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
+
+## Recipes using extension
+
+- [Handling errors when connecting to services](../../../../../docs/recipes/handling-errors-when-connecting-to-services/en.md)
+- [Creating an API gateway](../../../../../docs/recipes/creating-an-api-gateway/en.md)
+- [Importing a post from another WordPress site](../../../../../docs/recipes/importing-a-post-from-another-wordpress-site/en.md)
+- [Distributing content from an upstream to multiple downstream sites](../../../../../docs/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)

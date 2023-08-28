@@ -111,3 +111,10 @@ query {
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
+
+## Recipes using extension
+
+- [Bulk translating block content in multiple posts to a different language](../../../../../docs/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
+- [Transforming data from an external API](../../../../../docs/recipes/transforming-data-from-an-external-api/en.md)
+- [Filtering data from an external API](../../../../../docs/recipes/filtering-data-from-an-external-api/en.md)
+- [Importing a post from another WordPress site](../../../../../docs/recipes/importing-a-post-from-another-wordpress-site/en.md)

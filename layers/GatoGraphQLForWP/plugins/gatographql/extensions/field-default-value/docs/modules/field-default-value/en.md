@@ -63,3 +63,7 @@ By using `@default`, we can then retrieve some default image:
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
+
+## Recipes using extension
+
+- [Transforming data from an external API](../../../../../docs/recipes/transforming-data-from-an-external-api/en.md)
