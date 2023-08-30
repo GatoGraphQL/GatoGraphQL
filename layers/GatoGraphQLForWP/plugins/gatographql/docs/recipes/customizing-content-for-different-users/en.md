@@ -21,8 +21,8 @@ query ExportConditionalVariables
   me {
     roleNames @remove
     isAdminUser: _inArray(
-        value: "administrator",
-        array: $__roleNames
+      value: "administrator",
+      array: $__roleNames
     )
       @export(as: "isAdminUser")
   }
@@ -120,8 +120,8 @@ query
   me {
     roleNames
     isAdminUser: _inArray(
-        value: "administrator",
-        array: $__roleNames
+      value: "administrator",
+      array: $__roleNames
     )
       @export(as: "isAdminUser")
   }
@@ -227,8 +227,8 @@ query ExportConditionalVariables
   me {
     roleNames @remove
     isAdminUser: _inArray(
-        value: "administrator",
-        array: $__roleNames
+      value: "administrator",
+      array: $__roleNames
     )
       @export(as: "isAdminUser")
   }
