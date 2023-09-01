@@ -112,7 +112,7 @@ $block = [
     $file = __DIR__ . '/blocks/my-block/graphql-documents/fetch-posts-with-author.gql';
 
     // Execute the query against the internal server
-    $response = \GatoGraphQL\InternalGraphQLServer\GatoGraphQL::executeQueryInFile($file);
+    $response = \GatoGraphQL\InternalGraphQLServer\GraphQLServer::executeQueryInFile($file);
 
     // Get the content and decode it
     $responseContent = json_decode($response->getContent(), true);
