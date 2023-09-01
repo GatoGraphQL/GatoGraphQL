@@ -155,11 +155,12 @@ You can even synchronize content across a network of sites, such as from an upst
 8. Endpoints are configured via Schema Configurations
 9. We can create many Schema Configurations, customizing them for different users or applications
 10. Custom endpoints and Persisted queries can be public, private and password-protected
-11. We can configure exactly what custom post types, options and meta keys can be queried
-12. Configure every aspect from the plugin via the Settings page
-13. Modules with different functionalities and schema extensions can be enabled and disabled
-14. Augment the plugin functionality and GraphQL schema via extensions
-15. The Recipes section contains example queries ready to copy/paste and use 
+11. Manage custom endpoints and persisted queries by adding categories to them
+12. We can configure exactly what custom post types, options and meta keys can be queried
+13. Configure every aspect from the plugin via the Settings page
+14. Modules with different functionalities and schema extensions can be enabled and disabled
+15. Augment the plugin functionality and GraphQL schema via extensions
+16. The Recipes section contains example queries ready to copy/paste and use 
 
 == Changelog ==
 

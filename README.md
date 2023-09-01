@@ -72,25 +72,29 @@ Custom endpoints and Persisted queries can be public, private and password-prote
 
 ![Custom endpoints and Persisted queries can be public, private and password-protected](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-10.png)
 
+Manage custom endpoints and persisted queries by adding categories to them:
+
+![Manage custom endpoints and persisted queries by adding categories to them](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-11.png)
+
 We can configure exactly what custom post types, options and meta keys can be queried:
 
-![We can configure exactly what custom post types, options and meta keys can be queried](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-11.png)
+![We can configure exactly what custom post types, options and meta keys can be queried](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-12.png)
 
 Configure every aspect from the plugin via the Settings page:
 
-![Configure every aspect from the plugin via the Settings page](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-12.png)
+![Configure every aspect from the plugin via the Settings page](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-13.png)
 
 Modules with different functionalities and schema extensions can be enabled and disabled:
 
-![Modules with different functionalities and schema extensions can be enabled and disabled](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-13.png)
+![Modules with different functionalities and schema extensions can be enabled and disabled](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-14.png)
 
 Augment the plugin functionality and GraphQL schema via extensions:
 
-![Augment the plugin functionality and GraphQL schema via extensions](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-14.png)
+![Augment the plugin functionality and GraphQL schema via extensions](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-15.png)
 
 The Recipes section contains example queries ready to copy/paste and use:
 
-![The Recipes section contains example queries ready to copy/paste and use](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-15.png)
+![The Recipes section contains example queries ready to copy/paste and use](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-16.png)
 
 ## Installing the Gato GraphQL plugin in WordPress
 
