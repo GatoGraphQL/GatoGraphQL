@@ -60,11 +60,13 @@ class GraphQLServer {
 To execute a GraphQL query and obtain the response content:
 
 ```php
+use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
+
 // Provide the GraphQL query
 $query = "{ ... }";
 
 // Execute the query against the internal server
-$response = GatoGraphQL::executeQuery($query);
+$response = GraphQLServer::executeQuery($query);
 
 // Get the content and decode it
 $responseContent = json_decode($response->getContent(), true);
@@ -110,7 +112,7 @@ Then there is a hook on `wp_insert_post` that executes some query against the in
 ```php
 add_action(
   "wp_insert_post",
-  fn (int $post_id) => GatoGraphQL::executeQuery("...", ["postID" => $post_id])
+  fn (int $post_id) => GraphQLServer::executeQuery("...", ["postID" => $post_id])
 );
 ```
 
