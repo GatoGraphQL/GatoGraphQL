@@ -123,6 +123,8 @@ return [
                     $content
                 );
             }
+
+            $fileFolder = dirname($filePath);
             /**
              * Symfony Polyfill packages.
              * The bootstrap*.php files must register functions under the global namespace,
@@ -144,9 +146,17 @@ return [
                     'vendor/symfony/polyfill-php80/Resources/stubs/Stringable.php',
                     'vendor/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
                     'vendor/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+                    'vendor/symfony/polyfill-php83/Resources/stubs/DateError.php',
                 ]
             );
-            $isSymfonyPolyfillFileWithGlobalClass = in_array($filePath, $symfonyPolyfillFilesWithGlobalClass);
+            $symfonyPolyfillFoldersWithGlobalClass = array_map(
+                convertRelativeToFullPath(...),
+                [
+                    'vendor/symfony/polyfill-php83/Resources/stubs',
+                ]
+            );
+            $isSymfonyPolyfillFileWithGlobalClass = in_array($filePath, $symfonyPolyfillFilesWithGlobalClass)
+                || in_array($fileFolder, $symfonyPolyfillFoldersWithGlobalClass);
             if (
                 $isSymfonyPolyfillFileWithGlobalClass
                 || preg_match($pattern, $filePath)
