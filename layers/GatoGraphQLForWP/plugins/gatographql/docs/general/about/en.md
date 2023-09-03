@@ -32,8 +32,8 @@ _Support is provided to current customers of any Gato GraphQL product (bundles, 
 
 Send your message to the Gato GraphQL Support team:
 
-<form action="https://gatographql.com/thank-you" method="POST" name="contact" target="_blank">
-  <input type="hidden" name="form-name" value="contact" />
+<form action="https://gatographql.com/support/success" method="POST" name="support" target="_blank">
+  <input type="hidden" name="form-name" value="support" />
 
   <label for="field-name">Your name:</label>
   <br/>
