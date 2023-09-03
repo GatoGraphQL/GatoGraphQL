@@ -43,6 +43,7 @@ class PluginDataSource
                     'rector_test_config' => $this->rootDir . '/ci/scoping/rector-test-scoping-gatographql.php',
                 ],
                 'bashScripts' => [
+                    'before_downgrade_code' => 'ci/downgrade/before_downgrade_code.sh',
                     'after_downgrade_code' => 'ci/downgrade/after_downgrade_code.sh',
                 ],
             ],
