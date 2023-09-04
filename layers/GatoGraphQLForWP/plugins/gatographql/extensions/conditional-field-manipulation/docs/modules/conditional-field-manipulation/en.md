@@ -1,6 +1,6 @@
 # Conditional Field Manipulation
 
-Apply a directive on a field only if some condition is met.
+Addition of meta directives `@if` and `@unless` to the GraphQL schema, to conditionally execute a nested directive on the field.
 
 <!-- ## Description
 

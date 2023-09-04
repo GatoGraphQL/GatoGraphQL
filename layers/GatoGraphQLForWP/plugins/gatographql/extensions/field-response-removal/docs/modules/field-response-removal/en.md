@@ -1,6 +1,6 @@
 # Field Response Removal
 
-Remove the output of a field from the response.
+Addition of the `@remove` directive to the GraphQL schema, which removes the output of a field from the response.
 
 ## Description
 

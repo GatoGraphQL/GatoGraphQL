@@ -1,6 +1,6 @@
 # Field on Field
 
-Manipulate the value of a field by applying some other field on it.
+`@applyField` directive, to execute a certain field on the resolved field's value
 
 ## Description
 

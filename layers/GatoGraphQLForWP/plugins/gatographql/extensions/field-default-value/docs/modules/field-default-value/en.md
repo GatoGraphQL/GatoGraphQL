@@ -1,6 +1,6 @@
 # Field Default Value
 
-Set a field to some default value (whenever it is `null` or empty).
+`@default` directive, to set a value to null or empty fields.
 
 ## Description
 
