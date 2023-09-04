@@ -8,6 +8,4 @@
 #
 ########################################################################
 
-# Bug in Symfony Polyfill PHP 8.3: #[\SensitiveParameter] is available since PHP 8.2, but loaded on 8.1
-# @see https://github.com/symfony/polyfill/issues/445
-sed -i -e 's/\#\[\\SensitiveParameter\]//' vendor/symfony/polyfill-php83/bootstrap81.php
+# Nothing here...
