@@ -114,7 +114,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::DEPRECATION_NOTIFIER => \__('Send deprecations in the response to the query (and not only when doing introspection).', 'gatographql'),
             self::EMAIL_SENDER => \__('Send emails via global mutation <code>_sendEmail</code>.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
-            self::FIELD_DEFAULT_VALUE => \__('Set a field to some default value, whenever it is <code>null</code> or empty.', 'gatographql'),
+            self::FIELD_DEFAULT_VALUE => \__('Set a field to some default value (whenever it is <code>null</code> or empty).', 'gatographql'),
             self::FIELD_DEPRECATION => \__('Deprecate fields, and explain how to replace them, through a user interface.', 'gatographql'),
             self::FIELD_ON_FIELD => \__('Manipulate the value of a field by applying some other field on it.', 'gatographql'),
             self::FIELD_RESOLUTION_CACHING => \__('Cache and retrieve the response for expensive field operations.', 'gatographql'),
