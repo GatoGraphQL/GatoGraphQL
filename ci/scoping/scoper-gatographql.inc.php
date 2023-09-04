@@ -168,6 +168,13 @@ return [
                     $content
                 );
 
+                // Remove the namespace from all the `function_exists` in bootstrap.php
+                $content = str_replace(
+                    sprintf("function_exists('%s\\\\", $prefix),
+                    "function_exists('",
+                    $content
+                );
+
                 // Comment out the class_alias too
                 if ($isSymfonyPolyfillFileWithGlobalClass) {
                     $content = str_replace(
