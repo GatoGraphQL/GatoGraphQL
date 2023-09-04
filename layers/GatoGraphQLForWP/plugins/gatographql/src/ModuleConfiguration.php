@@ -126,9 +126,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    /**
-     * @todo Change the URL to the final one
-     */
     public function getGatoGraphQLWebsiteURL(): string
     {
         $envVariable = Environment::GATO_GRAPHQL_WEBSITE_URL;
@@ -140,9 +137,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    /**
-     * @todo Change the URL to the final one
-     */
     public function getGatoGraphQLExtensionsPageURL(): string
     {
         $envVariable = Environment::GATO_GRAPHQL_EXTENSIONS_PAGE_URL;
