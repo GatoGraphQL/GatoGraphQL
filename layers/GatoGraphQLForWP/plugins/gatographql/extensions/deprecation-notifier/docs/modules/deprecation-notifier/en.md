@@ -1,6 +1,6 @@
 # Deprecation Notifier
 
-Send deprecations in the response to the query (and not only when doing introspection), under the top-level entry `extensions`.
+Send deprecations in the response to the query (and not only when doing introspection).
 
 ## Description
 
