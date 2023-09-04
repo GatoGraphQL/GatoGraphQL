@@ -57,6 +57,7 @@ class SkipDowngradeTestPathsDataSource
             'vendor/symfony/polyfill-intl-idn/bootstrap80.php',
             'vendor/symfony/polyfill-intl-normalizer/bootstrap80.php',
             'vendor/symfony/polyfill-mbstring/bootstrap80.php',
+            'vendor/symfony/polyfill-php83/bootstrap81.php',
             'vendor/symfony/service-contracts/Test/',
             'vendor/symfony/string/Slugger/AsciiSlugger.php',
         ];
