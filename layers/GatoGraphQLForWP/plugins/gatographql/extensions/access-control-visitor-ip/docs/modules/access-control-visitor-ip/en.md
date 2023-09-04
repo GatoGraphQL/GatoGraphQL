@@ -1,6 +1,6 @@
 # Access Control: Visitor IP
 
-Access Control rule "Visitor IP", to grant access to the selected schema elements based on the visitor coming from an allowed IP address.
+Grant access to the schema based on the visitor's IP address (Access Control extension is required).
 
 ## Description
 
