@@ -127,7 +127,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::HTTP_REQUEST_VIA_SCHEMA => \__('Addition of fields to retrieve the current HTTP request data.', 'gatographql'),
             self::INTERNAL_GRAPHQL_SERVER => \__('Execute GraphQL queries directly within your application, using PHP code.', 'gatographql'),
             self::LOW_LEVEL_PERSISTED_QUERY_EDITING => \__('Make normally-hidden directives (which inject some functionality into the GraphQL server) visible when editing a persisted query.', 'gatographql'),
-            self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and making sure they are executed in the requested order.', 'gatographql'),
+            self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and executing them in the requested order.', 'gatographql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('Query the value from an environment variable or PHP constant.', 'gatographql'),
             self::PHP_FUNCTIONS_VIA_SCHEMA => \__('Manipulate the field output using standard programming language functions available in PHP.', 'gatographql'),
             self::RESPONSE_ERROR_TRIGGER => \__('Explicitly add an error entry to the response to trigger the failure of the GraphQL request (whenever a field does not meet the expected conditions).', 'gatographql'),
