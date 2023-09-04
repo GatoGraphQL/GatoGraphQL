@@ -131,6 +131,12 @@ jobs:
                     composer install --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+            # before_downgrade_code.sh => Hacks to fix the codebase in preparation of the Rector downgrade
+            -   name: Custom bash script to fix items in the code in preparation for the Rector downgrade
+                run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}"
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}
+
             # additional_rector_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
             -   name: Downgrade code for production (to PHP 7.2)
                 run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
