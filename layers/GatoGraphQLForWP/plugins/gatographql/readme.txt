@@ -55,7 +55,7 @@ Extensions have been bundled together, to satisfy several common use cases:
 - [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation): Translate content using the Google Translate API
 - [“Public API” Bundle](https://gatographql.com/bundles/public-api): Make your public APIs powerful, fast and secure
 
-Browse all bundles and extensions in the [Gato GraphQL shop](https://shop.gatographql.com).
+Browse all bundles and extensions on the [Gato GraphQL website](https://gatographql.com/extensions).
 
 Do you need an integration with some WordPress plugin? [Let us know](https://github.com/GatoGraphQL/GatoGraphQLExtensions/discussions).
 
