@@ -1,6 +1,6 @@
 # Access Control
 
-Manage access to the GraphQL schema through Access Control Lists.
+Grant granular access to the schema, based on the user being logged-in (or not), having a certain role or capability, and more.
 
 ## Description
 
