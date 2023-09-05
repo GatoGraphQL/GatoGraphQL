@@ -13,7 +13,7 @@ use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterfa
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
 
-abstract class AbstractConvertVersionInPluginVersionReleaseWorker implements ReleaseWorkerInterface
+abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements ReleaseWorkerInterface
 {
     /** @var string[] */
     protected array $pluginFiles;

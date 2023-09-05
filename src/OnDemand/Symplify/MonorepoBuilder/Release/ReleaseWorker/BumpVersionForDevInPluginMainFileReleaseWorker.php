@@ -11,7 +11,7 @@ use PoP\PoP\Monorepo\MonorepoMetadata;
  * Update the plugin version to the new one and add "-dev" again,
  * and bump the version constraint too
  */
-final class BumpVersionForDevInPluginVersionReleaseWorker extends AbstractConvertVersionInPluginVersionReleaseWorker
+final class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVersionInPluginMainFileReleaseWorker
 {
     public function work(Version $version): void
     {

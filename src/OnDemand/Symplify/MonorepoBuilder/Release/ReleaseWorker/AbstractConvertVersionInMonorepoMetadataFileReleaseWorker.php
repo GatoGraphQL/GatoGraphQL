@@ -9,7 +9,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\MonorepoMetadataVersionUti
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 
-abstract class AbstractConvertVersionInMonorepoMetadataVersionReleaseWorker implements ReleaseWorkerInterface
+abstract class AbstractConvertVersionInMonorepoMetadataFileReleaseWorker implements ReleaseWorkerInterface
 {
     protected string $monorepoMetadataFile;
 

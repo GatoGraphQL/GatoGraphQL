@@ -8,16 +8,17 @@ use PharIo\Version\Version;
 use PoP\PoP\Monorepo\MonorepoMetadata;
 
 /**
- * Remove "-dev" from the MonorepoMetadata version
+ * Update the MonorepoMetadata version to the new one, and add "-dev" again
  */
-final class ConvertVersionForProdMonorepoMetadataVersionReleaseWorker extends AbstractConvertVersionInMonorepoMetadataVersionReleaseWorker
+final class BumpVersionForDevInMonorepoMetadataFileReleaseWorker extends AbstractConvertVersionInMonorepoMetadataFileReleaseWorker
 {
     public function work(Version $version): void
     {
-        $devVersion = $this->monorepoMetadataVersionUtils->getDevVersion();
+        $nextDevVersion = $this->versionUtils->getNextVersion($version) . '-dev';
+        // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
         $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [
-            '/\'' . preg_quote($devVersion) . '\'/' => '\'' . $prodVersion . '\'',
+            '/\'' . preg_quote($prodVersion) . '\'/' => '\'' . $nextDevVersion . '\'',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [
@@ -29,6 +30,6 @@ final class ConvertVersionForProdMonorepoMetadataVersionReleaseWorker extends Ab
 
     public function getDescription(Version $version): string
     {
-        return 'Remove "-dev" from the MonorepoMetadata version';
+        return 'Bump the plugin to the next version, addding again "-dev" in it, in the MonorepoMetadata version';
     }
 }

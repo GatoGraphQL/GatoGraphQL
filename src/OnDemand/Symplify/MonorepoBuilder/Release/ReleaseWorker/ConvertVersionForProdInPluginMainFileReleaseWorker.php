@@ -10,7 +10,7 @@ use PoP\PoP\Monorepo\MonorepoMetadata;
 /**
  * Remove "-dev" from the plugin version
  */
-final class ConvertVersionForProdInPluginVersionReleaseWorker extends AbstractConvertVersionInPluginVersionReleaseWorker
+final class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractConvertVersionInPluginMainFileReleaseWorker
 {
     public function work(Version $version): void
     {
