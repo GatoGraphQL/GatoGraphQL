@@ -10,9 +10,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSys
 use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
-use Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
-use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class RemoveDevStringInPluginVersionReleaseWorker implements ReleaseWorkerInterface
 {
@@ -21,7 +19,6 @@ final class RemoveDevStringInPluginVersionReleaseWorker implements ReleaseWorker
 
     public function __construct(
         private ProcessRunner $processRunner,
-        ParameterProvider $parameterProvider,
         private FileContentReplacerSystem $fileContentReplacerSystem,
     ) {
         $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
