@@ -9,7 +9,7 @@ use PharIo\Version\Version;
 /**
  * Remove "-dev" from the plugin version
  */
-final class ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker extends AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
+class ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker extends AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
 {
     public function work(Version $version): void
     {

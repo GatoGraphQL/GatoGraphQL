@@ -10,7 +10,7 @@ use PoP\PoP\Monorepo\MonorepoStaticHelpers;
 /**
  * Point to GitHub's master image URLs in the compiled Markdown files
  */
-final class RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker extends AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWorker
+class RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker extends AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWorker
 {
     public function work(Version $version): void
     {

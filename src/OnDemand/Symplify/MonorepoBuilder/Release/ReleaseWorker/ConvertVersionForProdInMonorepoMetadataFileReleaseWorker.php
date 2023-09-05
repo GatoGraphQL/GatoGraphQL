@@ -9,7 +9,7 @@ use PharIo\Version\Version;
 /**
  * Remove "-dev" from the MonorepoMetadata version
  */
-final class ConvertVersionForProdInMonorepoMetadataFileReleaseWorker extends AbstractConvertVersionInMonorepoMetadataFileReleaseWorker
+class ConvertVersionForProdInMonorepoMetadataFileReleaseWorker extends AbstractConvertVersionInMonorepoMetadataFileReleaseWorker
 {
     public function work(Version $version): void
     {

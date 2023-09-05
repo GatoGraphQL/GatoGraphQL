@@ -9,7 +9,7 @@ use PharIo\Version\Version;
 /**
  * Bump to the next plugin version adding "-dev"
  */
-final class BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker extends AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
+class BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker extends AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
 {
     public function work(Version $version): void
     {

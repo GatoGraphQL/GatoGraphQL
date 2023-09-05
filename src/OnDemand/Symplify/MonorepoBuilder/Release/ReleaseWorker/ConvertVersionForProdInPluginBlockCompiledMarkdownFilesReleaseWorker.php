@@ -10,7 +10,7 @@ use PoP\PoP\Monorepo\MonorepoStaticHelpers;
 /**
  * Point to GitHub's tagged image URLs in the compiled Markdown files
  */
-final class ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker extends AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWorker
+class ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker extends AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWorker
 {
     public function work(Version $version): void
     {

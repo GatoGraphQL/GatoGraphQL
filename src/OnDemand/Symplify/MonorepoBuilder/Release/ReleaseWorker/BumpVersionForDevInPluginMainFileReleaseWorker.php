@@ -10,7 +10,7 @@ use PharIo\Version\Version;
  * Update the plugin version to the new one and add "-dev" again,
  * and bump the version constraint too
  */
-final class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVersionInPluginMainFileReleaseWorker
+class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVersionInPluginMainFileReleaseWorker
 {
     public function work(Version $version): void
     {

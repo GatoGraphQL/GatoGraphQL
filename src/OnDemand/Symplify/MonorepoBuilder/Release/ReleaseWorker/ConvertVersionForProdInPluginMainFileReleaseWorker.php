@@ -9,7 +9,7 @@ use PharIo\Version\Version;
 /**
  * Remove "-dev" from the plugin version
  */
-final class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractConvertVersionInPluginMainFileReleaseWorker
+class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractConvertVersionInPluginMainFileReleaseWorker
 {
     public function work(Version $version): void
     {
