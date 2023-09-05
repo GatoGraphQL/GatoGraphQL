@@ -14,9 +14,8 @@ final class ConvertVersionForProdInMonorepoMetadataFileReleaseWorker extends Abs
     public function work(Version $version): void
     {
         // Use the incoming provided version, so it also works for a downstream monorepo
-        $devVersion = $this->monorepoMetadataVersionUtils->getDevVersion();
         $replacements = [
-            '/\'' . preg_quote($devVersion) . '\'/' => '\'' . $version->getVersionString() . '\'',
+            "/ VERSION = '.*';/" => " VERSION = '" . $version->getVersionString() . "';",
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [
