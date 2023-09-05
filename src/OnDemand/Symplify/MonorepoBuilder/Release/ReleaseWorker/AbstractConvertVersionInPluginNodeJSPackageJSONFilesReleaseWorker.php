@@ -8,7 +8,6 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSourceAccessors\PluginDataSource
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\NodeJSPackageFinder;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\NodeJSPackageJSONUpdater;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\MonorepoMetadataVersionUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
@@ -22,7 +21,6 @@ abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
     public function __construct(
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,
-        protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
         protected NodeJSPackageJSONUpdater $nodeJSPackageDependencyUpdater,
         private NodeJSPackageFinder $nodeJSPackageFinder,
     ) {

@@ -7,7 +7,6 @@ namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSourceAccessors\PluginDataSourceAccessor;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\MonorepoMetadataVersionUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
@@ -21,7 +20,6 @@ abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements Re
         protected FileContentReplacerSystem $fileContentReplacerSystem,
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,
-        protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
     ) {
         $pluginDataSource = $this->getPluginDataSource();
         $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
