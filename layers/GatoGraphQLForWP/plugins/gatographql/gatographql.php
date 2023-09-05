@@ -37,6 +37,10 @@ if (!defined('ABSPATH')) {
  * Use a stability suffix as supported by Composer.
  *
  * @see https://getcomposer.org/doc/articles/versions.md#stabilities
+ * 
+ * Important: Do not modify the formatting of this PHP code!
+ * A regex will search for this exact pattern, to update the
+ * version in the ReleaseWorker when deploying for PROD.
  */
 $pluginVersion = '1.0.0-dev';
 $pluginName = __('Gato GraphQL', 'gatographql');
