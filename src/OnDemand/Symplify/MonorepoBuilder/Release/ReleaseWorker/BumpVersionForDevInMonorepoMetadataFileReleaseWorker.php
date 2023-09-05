@@ -29,6 +29,6 @@ class BumpVersionForDevInMonorepoMetadataFileReleaseWorker extends AbstractConve
 
     public function getDescription(Version $version): string
     {
-        return 'Bump the plugin to the next version, addding again "-dev" in it, in the MonorepoMetadata version';
+        return 'Bump the plugin to the next version, adding again "-dev" in it, in the MonorepoMetadata version';
     }
 }

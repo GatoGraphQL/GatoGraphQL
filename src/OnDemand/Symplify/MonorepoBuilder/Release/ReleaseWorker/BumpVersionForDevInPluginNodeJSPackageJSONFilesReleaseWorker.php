@@ -22,6 +22,6 @@ class BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker extends Abstr
 
     public function getDescription(Version $version): string
     {
-        return 'Bump the package.json file to the next version, addding again "-dev" in it';
+        return 'Bump the package.json file to the next version, adding again "-dev" in it';
     }
 }

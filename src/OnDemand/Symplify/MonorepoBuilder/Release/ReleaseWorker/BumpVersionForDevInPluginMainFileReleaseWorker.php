@@ -33,6 +33,6 @@ class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVers
 
     public function getDescription(Version $version): string
     {
-        return 'Bump the plugin to the next version, addding again "-dev" in it, in the plugin main file';
+        return 'Bump the plugin to the next version, adding again "-dev" in it, in the plugin main file';
     }
 }
