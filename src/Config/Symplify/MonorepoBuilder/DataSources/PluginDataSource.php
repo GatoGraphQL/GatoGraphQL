@@ -11,7 +11,7 @@ class PluginDataSource
     }
 
     /**
-     * To be used by the RemoveDevStringInPluginVersionReleaseWorker to
+     * To be used by the ConvertVersionForProdInPluginVersionReleaseWorker to
      * remove the "-dev" string in the plugin file versions when releasing
      * for PROD.
      *

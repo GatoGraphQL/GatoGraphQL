@@ -5,36 +5,38 @@ declare(strict_types=1);
 namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 
 use PharIo\Version\Version;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
 use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
+use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 
 /**
- * Remove "-dev" from the MonorepoMetadata version
+ * Remove "-dev" from the plugin version
  */
-final class RemoveDevStringInMonorepoMetadataVersionReleaseWorker implements ReleaseWorkerInterface
+final class ConvertVersionForProdInPluginVersionReleaseWorker implements ReleaseWorkerInterface
 {
+    /** @var string[] */
+    private array $pluginFiles;
+
     public function __construct(
+        private ProcessRunner $processRunner,
         private FileContentReplacerSystem $fileContentReplacerSystem,
     ) {
+        $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
+        $this->pluginFiles = $pluginDataSource->getPluginFiles();
     }
 
     public function work(Version $version): void
     {
-        $file = dirname(__DIR__, 6) . '/src/Monorepo/MonorepoMetadata.php';
         $replacements = [
             '/\b' . preg_quote(MonorepoMetadata::VERSION) . '\b/' => substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev')),
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles(
-            [
-                $file,
-            ],
-            $replacements,
-        );
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginFiles, $replacements);
     }
 
     public function getDescription(Version $version): string
     {
-        return 'Remove "-dev" from the MonorepoMetadata version';
+        return 'Remove "-dev" from the plugin version in the plugin main file';
     }
 }
