@@ -25,8 +25,13 @@ abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements Re
         protected UpstreamVersionUtils $upstreamVersionUtils,
         protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
     ) {
-        $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
+        $pluginDataSource = $this->getPluginDataSource();
         $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
         $this->pluginMainFiles = $pluginDataSourceAccessor->getPluginMainFiles();
+    }
+
+    protected function getPluginDataSource(): PluginDataSource
+    {
+        return new PluginDataSource(dirname(__DIR__, 6));
     }
 }

@@ -26,7 +26,7 @@ abstract class AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWo
         protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
         protected BlockCompiledMarkdownFileFinder $blockCompiledMarkdownFileFinder,
     ) {
-        $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
+        $pluginDataSource = $this->getPluginDataSource();
         $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
         $folders = $pluginDataSourceAccessor->getPluginNodeJSPackageDirectories();
         $compiledMarkdownFileInfos = $this->blockCompiledMarkdownFileFinder->findCompiledMarkdownFileInfos($folders);
@@ -34,5 +34,10 @@ abstract class AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWo
             fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath(),
             $compiledMarkdownFileInfos
         );
+    }
+
+    protected function getPluginDataSource(): PluginDataSource
+    {
+        return new PluginDataSource(dirname(__DIR__, 6));
     }
 }

@@ -28,9 +28,14 @@ abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
         protected NodeJSPackageJSONUpdater $nodeJSPackageDependencyUpdater,
         private NodeJSPackageFinder $nodeJSPackageFinder,
     ) {
-        $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
+        $pluginDataSource = $this->getPluginDataSource();
         $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
         $folders = $pluginDataSourceAccessor->getPluginNodeJSPackageDirectories();
         $this->pluginNodeJSPackageJSONSmartFileInfos = $this->nodeJSPackageFinder->findPackageJSONFileInfos($folders);
+    }
+
+    protected function getPluginDataSource(): PluginDataSource
+    {
+        return new PluginDataSource(dirname(__DIR__, 6));
     }
 }
