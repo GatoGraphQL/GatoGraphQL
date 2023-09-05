@@ -27,23 +27,7 @@ final class FileContentReplacerSystem
         array $files,
         array $patternReplacements
     ): void {
-        $smartFileInfos = array_map(
-            fn (string $file) => new SmartFileInfo($file),
-            $files
-        );
-        $this->replaceContentInSmartFileInfos($smartFileInfos, $patternReplacements);
-    }
-
-    /**
-     * @param SmartFileInfo[] $smartFileInfos
-     * @param array<string,string> $patternReplacements a regex pattern to search, and its replacement
-     */
-    public function replaceContentInSmartFileInfos(
-        array $smartFileInfos,
-        array $patternReplacements
-    ): void {
-        foreach ($smartFileInfos as $smartFileInfo) {
-            $file = $smartFileInfo->getRealPath();
+        foreach ($files as $file) {
             $fileContent = $this->smartFileSystem->readFile($file);
             foreach ($patternReplacements as $pattern => $replacement) {
                 $fileContent = Strings::replace(
@@ -54,5 +38,20 @@ final class FileContentReplacerSystem
             }
             $this->smartFileSystem->dumpFile($file, $fileContent);
         }
+    }
+
+    /**
+     * @param SmartFileInfo[] $smartFileInfos
+     * @param array<string,string> $patternReplacements a regex pattern to search, and its replacement
+     */
+    public function replaceContentInSmartFileInfos(
+        array $smartFileInfos,
+        array $patternReplacements
+    ): void {
+        $files = array_map(
+            fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath(),
+            $smartFileInfos
+        );
+        $this->replaceContentInFiles($files, $patternReplacements);
     }
 }
