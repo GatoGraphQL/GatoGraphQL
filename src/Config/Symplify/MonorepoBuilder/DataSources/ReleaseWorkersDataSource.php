@@ -35,8 +35,8 @@ class ReleaseWorkersDataSource
             // Remove "-dev" from the version
             ConvertVersionForProdInPluginMainFileReleaseWorker::class,
             ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker::class,
-            ConvertVersionForProdInMonorepoMetadataFileReleaseWorker::class,
             ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker::class,
+            ConvertVersionForProdInMonorepoMetadataFileReleaseWorker::class,
             
             // Default workers
             UpdateReplaceReleaseWorker::class,
@@ -48,8 +48,8 @@ class ReleaseWorkersDataSource
             UpdateBranchAliasReleaseWorker::class,
 
             // Add "-dev" again to the version
-            RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker::class,
             BumpVersionForDevInMonorepoMetadataFileReleaseWorker::class,
+            RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker::class,
             BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker::class,
             BumpVersionForDevInPluginMainFileReleaseWorker::class,
             
