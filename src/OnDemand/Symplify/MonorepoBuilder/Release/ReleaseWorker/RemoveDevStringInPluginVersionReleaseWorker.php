@@ -30,7 +30,7 @@ final class RemoveDevStringInPluginVersionReleaseWorker implements ReleaseWorker
     public function work(Version $version): void
     {
         $replacements = [
-            '/' . preg_quote(MonorepoMetadata::VERSION) . '/' => substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev')),
+            '/\b' . preg_quote(MonorepoMetadata::VERSION) . '\b/' => substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev')),
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginFiles, $replacements);
     }
