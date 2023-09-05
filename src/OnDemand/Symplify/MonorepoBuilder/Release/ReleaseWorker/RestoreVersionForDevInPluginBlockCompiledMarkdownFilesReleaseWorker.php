@@ -24,6 +24,6 @@ final class RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker 
 
     public function getDescription(Version $version): string
     {
-        return 'Point to GitHub\'s tagged image URLs in the compiled Markdown files in all blocks';
+        return 'Point to GitHub\'s master image URLs in the compiled Markdown files in all blocks';
     }
 }

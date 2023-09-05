@@ -17,7 +17,7 @@ final class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractC
         $replacements = [
             // WordPress plugin header
             '/Version:\s+[a-z0-9.-]+/' => 'Version: ' . $prodVersion,
-            // Gato GraphQL plugin version in a variable
+            // Gato GraphQL plugin/extension version
             "/" . preg_quote('$pluginVersion') . " = '[a-z0-9.-]+';/" => "\$pluginVersion = '$prodVersion';",
             "/" . preg_quote('$extensionVersion') . " = '[a-z0-9.-]+';/" => "\$extensionVersion = '$prodVersion';",
         ];
