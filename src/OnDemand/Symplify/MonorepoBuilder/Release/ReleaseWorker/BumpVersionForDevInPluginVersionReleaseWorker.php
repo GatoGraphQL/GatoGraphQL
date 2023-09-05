@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 
 use PharIo\Version\Version;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSourceAccessors\PluginDataSourceAccessor;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
@@ -26,7 +27,8 @@ final class BumpVersionForDevInPluginVersionReleaseWorker implements ReleaseWork
         private VersionUtils $versionUtils
     ) {
         $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
-        $this->pluginFiles = $pluginDataSource->getPluginFiles();
+        $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
+        $this->pluginFiles = $pluginDataSourceAccessor->getPluginFiles();
     }
 
     public function work(Version $version): void

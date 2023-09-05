@@ -10,20 +10,9 @@ class PluginDataSource
     {
     }
 
-    /**
-     * To be used by the ConvertVersionForProdInPluginVersionReleaseWorker to
-     * remove the "-dev" string in the plugin file versions when releasing
-     * for PROD.
-     *
-     * @return string[]
-     */
-    public function getPluginFiles(): array
+    public function getRootDir(): string
     {
-        $files = [];
-        foreach ($this->getPluginConfigEntries() as $pluginConfigEntry) {
-            $files[] = $this->rootDir . '/' . $pluginConfigEntry['path'] . '/' . $pluginConfigEntry['main_file'];
-        }
-        return $files;
+        return $this->rootDir;
     }
 
     /**
