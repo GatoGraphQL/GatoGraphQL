@@ -19,8 +19,8 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker implements ReleaseWorkerInterface
 {
-    /** @var string[] */
-    protected array $pluginNodeJSPackageJSONFiles;
+    /** @var SmartFileInfo[] */
+    protected array $pluginNodeJSPackageJSONSmartFileInfos;
 
     public function __construct(
         protected ProcessRunner $processRunner,
@@ -42,8 +42,8 @@ abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
             ->sortByName();
 
         $directorySmartFileInfos = $this->finderSanitizer->sanitize($finder);
-        $this->pluginNodeJSPackageJSONFiles = array_map(
-            fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath() . '/package.json',
+        $this->pluginNodeJSPackageJSONSmartFileInfos = array_map(
+            fn (SmartFileInfo $smartFileInfo) => new SmartFileInfo($smartFileInfo->getRealPath() . '/package.json'),
             $directorySmartFileInfos
         );
     }
