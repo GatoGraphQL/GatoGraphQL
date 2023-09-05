@@ -10,7 +10,6 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSys
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\MonorepoMetadataVersionUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
 
 abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements ReleaseWorkerInterface
@@ -19,7 +18,6 @@ abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements Re
     protected array $pluginMainFiles;
 
     public function __construct(
-        protected ProcessRunner $processRunner,
         protected FileContentReplacerSystem $fileContentReplacerSystem,
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,

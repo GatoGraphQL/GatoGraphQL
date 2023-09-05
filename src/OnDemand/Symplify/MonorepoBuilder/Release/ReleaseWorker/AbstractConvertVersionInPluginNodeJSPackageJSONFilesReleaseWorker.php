@@ -11,7 +11,6 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\NodeJSPackageJSONUpdater;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\MonorepoMetadataVersionUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
@@ -21,7 +20,6 @@ abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
     protected array $pluginNodeJSPackageJSONSmartFileInfos;
 
     public function __construct(
-        protected ProcessRunner $processRunner,
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,
         protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
