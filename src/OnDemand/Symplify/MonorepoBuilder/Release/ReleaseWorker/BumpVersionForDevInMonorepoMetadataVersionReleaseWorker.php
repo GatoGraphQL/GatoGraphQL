@@ -14,9 +14,11 @@ final class BumpVersionForDevInMonorepoMetadataVersionReleaseWorker extends Abst
 {
     public function work(Version $version): void
     {
-        $nextVersionInString = $this->versionUtils->getNextVersion($version);
+        $nextDevVersion = $this->versionUtils->getNextVersion($version) . '-dev';
+        // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
+        $prodVersion = substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'));
         $replacements = [
-            '/\b' . preg_quote(substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'))) . '\b/' => $nextVersionInString . '-dev',
+            '/\'' . preg_quote($prodVersion) . '\'/' => $nextDevVersion,
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [

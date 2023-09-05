@@ -14,8 +14,11 @@ final class ConvertVersionForProdMonorepoMetadataVersionReleaseWorker extends Ab
 {
     public function work(Version $version): void
     {
+        // The MonorepoMetadata version currently contains "-dev" at the end
+        $devVersion = MonorepoMetadata::VERSION;
+        $prodVersion = substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'));
         $replacements = [
-            '/\b' . preg_quote(MonorepoMetadata::VERSION) . '\b/' => substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev')),
+            '/\'' . preg_quote($devVersion) . '\'/' => '\'' . $prodVersion . '\'',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [

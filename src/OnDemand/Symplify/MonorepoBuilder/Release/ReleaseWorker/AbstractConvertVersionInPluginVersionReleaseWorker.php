@@ -10,6 +10,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSys
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
+use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
 
 abstract class AbstractConvertVersionInPluginVersionReleaseWorker implements ReleaseWorkerInterface
 {
@@ -19,7 +20,8 @@ abstract class AbstractConvertVersionInPluginVersionReleaseWorker implements Rel
     public function __construct(
         protected ProcessRunner $processRunner,
         protected FileContentReplacerSystem $fileContentReplacerSystem,
-        protected VersionUtils $versionUtils
+        protected VersionUtils $versionUtils,
+        protected UpstreamVersionUtils $upstreamVersionUtils
     ) {
         $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
         $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);

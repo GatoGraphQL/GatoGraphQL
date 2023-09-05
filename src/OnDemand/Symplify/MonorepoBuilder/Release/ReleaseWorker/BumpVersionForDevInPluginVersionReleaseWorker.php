@@ -15,9 +15,15 @@ final class BumpVersionForDevInPluginVersionReleaseWorker extends AbstractConver
 {
     public function work(Version $version): void
     {
+        $nextDevVersion = $this->versionUtils->getNextVersion($version) . '-dev';
+        // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
+        $prodVersion = substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'));
         $replacements = [
-            '/\b' . preg_quote(substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'))) . '\b/' => $this->versionUtils->getNextVersion($version) . '-dev',
-            // Bump the version constraint
+            // WordPress plugin header
+            '/Version:\s+' . preg_quote($prodVersion) . '/' => 'Version: ' . $nextDevVersion,
+            // Gato GraphQL plugin version (in a variable)
+            '/\'' . preg_quote($prodVersion) . '\'/' => $nextDevVersion,
+            // Main Gato GraphQL plugin version constraint (in a variable)
             '/\'' . preg_quote($this->upstreamVersionUtils->getRequiredFormat($version)) . '\'/' => '\'' . $this->upstreamVersionUtils->getRequiredNextFormat($version) . '\'',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginFiles, $replacements);

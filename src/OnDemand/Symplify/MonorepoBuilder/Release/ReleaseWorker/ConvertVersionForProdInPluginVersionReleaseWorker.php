@@ -14,8 +14,14 @@ final class ConvertVersionForProdInPluginVersionReleaseWorker extends AbstractCo
 {
     public function work(Version $version): void
     {
+        // The MonorepoMetadata version currently contains "-dev" at the end
+        $devVersion = MonorepoMetadata::VERSION;
+        $prodVersion = substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'));
         $replacements = [
-            '/\b' . preg_quote(MonorepoMetadata::VERSION) . '\b/' => substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev')),
+            // WordPress plugin header
+            '/Version:\s+' . preg_quote($devVersion) . '/' => 'Version: ' . $prodVersion,
+            // Gato GraphQL plugin version in a variable
+            '/\'' . preg_quote($devVersion) . '\'/' => '\'' . $prodVersion . '\'',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginFiles, $replacements);
     }
