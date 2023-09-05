@@ -12,9 +12,14 @@ use PoP\PoP\Monorepo\MonorepoMetadata;
  *
  * This helper helps abstract these, and always access the required
  * DEV or PROD version.
+ *
+ * @deprecated Using the incoming version instead, so the same logic also works on a downstream monorepo
  */
 final class MonorepoMetadataVersionUtils
 {
+    /**
+     * @deprecated
+     */
     public function getDevVersion(): string
     {
         if (str_ends_with(MonorepoMetadata::VERSION, '-dev')) {
@@ -22,7 +27,10 @@ final class MonorepoMetadataVersionUtils
         }
         return MonorepoMetadata::VERSION . '-dev';
     }
-    
+
+    /**
+     * @deprecated
+     */
     public function getProdVersion(): string
     {
         if (str_ends_with(MonorepoMetadata::VERSION, '-dev')) {

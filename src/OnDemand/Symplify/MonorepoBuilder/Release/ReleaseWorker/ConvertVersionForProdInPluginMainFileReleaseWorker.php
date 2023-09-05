@@ -13,13 +13,13 @@ final class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractC
 {
     public function work(Version $version): void
     {
-        $devVersion = $this->monorepoMetadataVersionUtils->getDevVersion();
         $prodVersion = $version->getVersionString();
         $replacements = [
             // WordPress plugin header
             '/Version:\s+[a-z0-9.-]+/' => 'Version: ' . $prodVersion,
             // Gato GraphQL plugin version in a variable
-            '/\'' . preg_quote($devVersion) . '\'/' => '\'' . $prodVersion . '\'',
+            "/" . preg_quote('$pluginVersion') . " = '[a-z0-9.-]+';/" => "\$pluginVersion = '$prodVersion';",
+            "/" . preg_quote('$extensionVersion') . " = '[a-z0-9.-]+';/" => "\$extensionVersion = '$prodVersion';",
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginMainFiles, $replacements);
     }
