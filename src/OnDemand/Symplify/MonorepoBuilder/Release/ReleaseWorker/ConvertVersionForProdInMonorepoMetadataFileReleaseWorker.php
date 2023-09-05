@@ -15,7 +15,7 @@ final class ConvertVersionForProdInMonorepoMetadataFileReleaseWorker extends Abs
     {
         // Use the incoming provided version, so it also works for a downstream monorepo
         $replacements = [
-            "/ VERSION = '.*';/" => " VERSION = '" . $version->getVersionString() . "';",
+            "/ VERSION = '[a-z0-9.-]*';/" => " VERSION = '" . $version->getVersionString() . "';",
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [
