@@ -20,7 +20,7 @@ final class BumpVersionForDevInPluginVersionReleaseWorker extends AbstractConver
         $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [
             // WordPress plugin header
-            '/Version:\s+' . preg_quote($prodVersion) . '/' => 'Version: ' . $nextDevVersion,
+            '/\bVersion:\s+' . preg_quote($prodVersion) . '\b/' => 'Version: ' . $nextDevVersion,
             // Gato GraphQL plugin version (in a variable)
             '/\'' . preg_quote($prodVersion) . '\'/' => '\'' . $nextDevVersion . '\'',
             // Main Gato GraphQL plugin version constraint (in a variable)
