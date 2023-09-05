@@ -10,7 +10,6 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSys
 use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
-use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class RemoveDevStringInPluginVersionReleaseWorker implements ReleaseWorkerInterface
 {
