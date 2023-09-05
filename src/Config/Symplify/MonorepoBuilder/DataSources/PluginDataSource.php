@@ -11,6 +11,22 @@ class PluginDataSource
     }
 
     /**
+     * To be used by the RemoveDevStringInPluginVersionReleaseWorker to
+     * remove the "-dev" string in the plugin file versions when releasing
+     * for PROD.
+     *
+     * @return string[]
+     */
+    public function getPluginFiles(): array
+    {
+        $files = [];
+        foreach ($this->getPluginConfigEntries() as $pluginConfigEntry) {
+            $files[] = $this->rootDir . '/' . $pluginConfigEntry['path'] . '/' . $pluginConfigEntry['main_file'];
+        }
+        return $files;
+    }
+
+    /**
      * @return array<array<mixed>
      */
     public function getPluginConfigEntries(): array
