@@ -8,7 +8,6 @@ use PharIo\Version\Version;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
 use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
-use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 
 /**
  * Remove "-dev" from the MonorepoMetadata version
@@ -16,7 +15,6 @@ use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 final class RemoveDevStringInMonorepoMetadataVersionReleaseWorker implements ReleaseWorkerInterface
 {
     public function __construct(
-        private ProcessRunner $processRunner,
         private FileContentReplacerSystem $fileContentReplacerSystem,
     ) {
     }
