@@ -8,15 +8,17 @@ use PharIo\Version\Version;
 use PoP\PoP\Monorepo\MonorepoMetadata;
 
 /**
- * Update the plugin version to the new one, and add "-dev" again
+ * Update the plugin version to the new one and add "-dev" again,
+ * and bump the version constraint too
  */
 final class BumpVersionForDevInPluginVersionReleaseWorker extends AbstractConvertVersionInPluginVersionReleaseWorker
 {
     public function work(Version $version): void
     {
-        $nextVersionInString = $this->versionUtils->getNextVersion($version);
         $replacements = [
-            '/\b' . preg_quote(substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'))) . '\b/' => $nextVersionInString . '-dev',
+            '/\b' . preg_quote(substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'))) . '\b/' => $this->versionUtils->getNextVersion($version) . '-dev',
+            // Bump the version constraint
+            '/\'' . preg_quote($this->upstreamVersionUtils->getRequiredFormat($version)) . '\'/' => '\'' . $this->upstreamVersionUtils->getRequiredNextFormat($version) . '\'',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginFiles, $replacements);
     }
