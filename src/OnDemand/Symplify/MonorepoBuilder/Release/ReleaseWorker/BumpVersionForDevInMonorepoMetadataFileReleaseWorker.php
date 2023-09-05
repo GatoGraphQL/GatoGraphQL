@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 
 use PharIo\Version\Version;
-use PoP\PoP\Monorepo\MonorepoMetadata;
 
 /**
  * Update the MonorepoMetadata version to the new one, and add "-dev" again
