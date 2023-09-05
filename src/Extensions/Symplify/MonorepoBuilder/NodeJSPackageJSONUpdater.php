@@ -7,7 +7,7 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder;
 use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
-final class NodeJSPackageDependencyUpdater
+final class NodeJSPackageJSONUpdater
 {
     public function __construct(private JsonFileManager $jsonFileManager)
     {

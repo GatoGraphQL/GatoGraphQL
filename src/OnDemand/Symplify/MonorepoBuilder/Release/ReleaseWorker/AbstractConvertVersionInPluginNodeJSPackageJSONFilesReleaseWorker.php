@@ -6,7 +6,7 @@ namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSourceAccessors\PluginDataSourceAccessor;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\NodeJSPackageDependencyUpdater;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\NodeJSPackageJSONUpdater;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\MonorepoMetadataVersionUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
@@ -28,7 +28,7 @@ abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,
         protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
-        protected NodeJSPackageDependencyUpdater $nodeJSPackageDependencyUpdater,
+        protected NodeJSPackageJSONUpdater $nodeJSPackageDependencyUpdater,
         private FinderSanitizer $finderSanitizer,
     ) {
         $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
