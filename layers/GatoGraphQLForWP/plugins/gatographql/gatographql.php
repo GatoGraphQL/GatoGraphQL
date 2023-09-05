@@ -41,6 +41,8 @@ if (!defined('ABSPATH')) {
  * Important: Do not modify the formatting of this PHP code!
  * A regex will search for this exact pattern, to update the
  * version in the ReleaseWorker when deploying for PROD.
+ *
+ * @see src/OnDemand/Symplify/MonorepoBuilder/Release/ReleaseWorker/ConvertVersionForProdInPluginMainFileReleaseWorker.php
  */
 $pluginVersion = '1.0.0-dev';
 $pluginName = __('Gato GraphQL', 'gatographql');

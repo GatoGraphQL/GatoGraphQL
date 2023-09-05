@@ -43,6 +43,8 @@ add_action(
          * Use a stability suffix as supported by Composer.
          *
          * @see https://getcomposer.org/doc/articles/versions.md#stabilities
+         *
+         * @see src/OnDemand/Symplify/MonorepoBuilder/Release/ReleaseWorker/ConvertVersionForProdInPluginMainFileReleaseWorker.php
          */
         $extensionVersion = '1.0.0-dev';
         $extensionName = \__('Gato GraphQL - Testing Schema', 'gatographql-testing-schema');
