@@ -15,10 +15,9 @@ final class ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker
     public function work(Version $version): void
     {
         $gitHubRepoDocsRootURL = MonorepoStaticHelpers::getGitHubRepoDocsRootURL();
-        $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [
             // Change the image src (pointing to GitHub) from master to the tag 
-            '#' . preg_quote($gitHubRepoDocsRootURL . '/master/') . '#' => $gitHubRepoDocsRootURL . '/' . $prodVersion . '/',
+            '#' . preg_quote($gitHubRepoDocsRootURL . '/master/') . '#' => $gitHubRepoDocsRootURL . '/' . $version->getVersionString() . '/',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginBlockCompiledMarkdownFiles, $replacements);
     }

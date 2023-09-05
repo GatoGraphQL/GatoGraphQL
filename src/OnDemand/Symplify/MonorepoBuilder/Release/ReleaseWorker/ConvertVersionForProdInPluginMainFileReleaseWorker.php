@@ -14,7 +14,7 @@ final class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractC
     public function work(Version $version): void
     {
         $devVersion = $this->monorepoMetadataVersionUtils->getDevVersion();
-        $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
+        $prodVersion = $version->getVersionString();
         $replacements = [
             // WordPress plugin header
             '/\bVersion:\s+' . preg_quote($devVersion) . '\b/' => 'Version: ' . $prodVersion,

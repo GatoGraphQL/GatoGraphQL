@@ -15,9 +15,8 @@ final class BumpVersionForDevInMonorepoMetadataFileReleaseWorker extends Abstrac
     {
         $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
         // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
-        $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [
-            '/\'' . preg_quote($prodVersion) . '\'/' => '\'' . $nextDevVersion . '\'',
+            '/\'' . preg_quote($version->getVersionString()) . '\'/' => '\'' . $nextDevVersion . '\'',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [

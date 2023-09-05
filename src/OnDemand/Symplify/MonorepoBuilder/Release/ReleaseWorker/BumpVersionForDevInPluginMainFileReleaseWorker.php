@@ -17,7 +17,7 @@ final class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConve
     {
         $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
         // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
-        $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
+        $prodVersion = $version->getVersionString();
         $replacements = [
             // WordPress plugin header
             '/\bVersion:\s+' . preg_quote($prodVersion) . '\b/' => 'Version: ' . $nextDevVersion,

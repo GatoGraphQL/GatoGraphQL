@@ -13,7 +13,7 @@ final class ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker ext
 {
     public function work(Version $version): void
     {
-        $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
+        $prodVersion = $version->getVersionString();
         $this->nodeJSPackageDependencyUpdater->updatePackageJSONFileInfosWithVersion(
             $this->pluginNodeJSPackageJSONSmartFileInfos,
             $prodVersion
