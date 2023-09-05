@@ -16,7 +16,7 @@ use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
 abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements ReleaseWorkerInterface
 {
     /** @var string[] */
-    protected array $pluginFiles;
+    protected array $pluginMainFiles;
 
     public function __construct(
         protected ProcessRunner $processRunner,
@@ -27,6 +27,6 @@ abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements Re
     ) {
         $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));
         $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
-        $this->pluginFiles = $pluginDataSourceAccessor->getPluginFiles();
+        $this->pluginMainFiles = $pluginDataSourceAccessor->getPluginMainFiles();
     }
 }

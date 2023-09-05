@@ -15,7 +15,7 @@ class PluginDataSourceAccessor
     /**
      * @return string[]
      */
-    public function getPluginFiles(): array
+    public function getPluginMainFiles(): array
     {
         $files = [];
         foreach ($this->pluginDataSource->getPluginConfigEntries() as $pluginConfigEntry) {

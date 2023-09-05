@@ -22,7 +22,7 @@ final class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractC
             // Gato GraphQL plugin version in a variable
             '/\'' . preg_quote($devVersion) . '\'/' => '\'' . $prodVersion . '\'',
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginFiles, $replacements);
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginMainFiles, $replacements);
     }
 
     public function getDescription(Version $version): string
