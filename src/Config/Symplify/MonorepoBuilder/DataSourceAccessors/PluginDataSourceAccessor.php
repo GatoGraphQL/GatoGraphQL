@@ -23,4 +23,27 @@ class PluginDataSourceAccessor
         }
         return $files;
     }
+
+    /**
+     * @return string[]
+     */
+    public function getPluginNodeJSPackageDirectories(): array
+    {
+        $possiblePackageFolders = [
+            'blocks',
+            'editor-scripts',
+            'packages',
+        ];
+        $directories = [];
+        foreach ($this->pluginDataSource->getPluginConfigEntries() as $pluginConfigEntry) {
+            foreach ($possiblePackageFolders as $packageFolder) {
+                $folder = $this->pluginDataSource->getRootDir() . '/' . $pluginConfigEntry['path'] . '/' . $packageFolder;
+                if (!file_exists($folder)) {
+                    continue;
+                }
+                $directories[] = $folder;
+            }
+        }
+        return $directories;
+    }
 }
