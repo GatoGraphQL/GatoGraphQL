@@ -18,6 +18,11 @@ abstract class AbstractConvertVersionInMonorepoMetadataFileReleaseWorker impleme
         protected VersionUtils $versionUtils,
         protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
     ) {
-        $this->monorepoMetadataFile = dirname(__DIR__, 6) . '/src/Monorepo/MonorepoMetadata.php';
+        $this->monorepoMetadataFile = $this->getMonorepoMetadataFile();
+    }
+
+    protected function getMonorepoMetadataFile(): string
+    {
+        return dirname(__DIR__, 6) . '/src/Monorepo/MonorepoMetadata.php';
     }
 }
