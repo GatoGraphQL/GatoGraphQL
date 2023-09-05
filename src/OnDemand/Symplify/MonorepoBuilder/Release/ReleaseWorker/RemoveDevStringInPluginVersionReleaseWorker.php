@@ -11,6 +11,9 @@ use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 
+/**
+ * Remove "-dev" from the plugin version
+ */
 final class RemoveDevStringInPluginVersionReleaseWorker implements ReleaseWorkerInterface
 {
     /** @var string[] */
@@ -24,9 +27,6 @@ final class RemoveDevStringInPluginVersionReleaseWorker implements ReleaseWorker
         $this->pluginFiles = $pluginDataSource->getPluginFiles();
     }
 
-    /**
-     * Remove "-dev" from the plugin version
-     */
     public function work(Version $version): void
     {
         $replacements = [
