@@ -16,9 +16,9 @@ final class BumpVersionForDevInMonorepoMetadataVersionReleaseWorker extends Abst
     {
         $nextDevVersion = $this->versionUtils->getNextVersion($version) . '-dev';
         // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
-        $prodVersion = substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'));
+        $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [
-            '/\'' . preg_quote($prodVersion) . '\'/' => $nextDevVersion,
+            '/\'' . preg_quote($prodVersion) . '\'/' => '\'' . $nextDevVersion . '\'',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [

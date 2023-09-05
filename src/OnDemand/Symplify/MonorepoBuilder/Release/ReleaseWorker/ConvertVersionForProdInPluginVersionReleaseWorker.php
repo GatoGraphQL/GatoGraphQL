@@ -14,9 +14,8 @@ final class ConvertVersionForProdInPluginVersionReleaseWorker extends AbstractCo
 {
     public function work(Version $version): void
     {
-        // The MonorepoMetadata version currently contains "-dev" at the end
-        $devVersion = MonorepoMetadata::VERSION;
-        $prodVersion = substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev'));
+        $devVersion = $this->monorepoMetadataVersionUtils->getDevVersion();
+        $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [
             // WordPress plugin header
             '/Version:\s+' . preg_quote($devVersion) . '/' => 'Version: ' . $prodVersion,
