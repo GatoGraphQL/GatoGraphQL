@@ -6,11 +6,11 @@ namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSourceAccessors\PluginDataSourceAccessor;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\NodeJSPackageDependencyUpdater;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\MonorepoMetadataVersionUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symfony\Component\Finder\Finder;
-use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Release\Process\ProcessRunner;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
@@ -28,7 +28,7 @@ abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,
         protected MonorepoMetadataVersionUtils $monorepoMetadataVersionUtils,
-        protected JsonFileManager $jsonFileManager,
+        protected NodeJSPackageDependencyUpdater $nodeJSPackageDependencyUpdater,
         private FinderSanitizer $finderSanitizer,
     ) {
         $pluginDataSource = new PluginDataSource(dirname(__DIR__, 6));

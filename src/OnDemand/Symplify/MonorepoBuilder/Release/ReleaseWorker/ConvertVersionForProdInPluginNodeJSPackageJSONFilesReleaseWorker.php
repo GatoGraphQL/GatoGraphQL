@@ -14,12 +14,10 @@ final class ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker ext
     public function work(Version $version): void
     {
         $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
-
-        foreach ($this->pluginNodeJSPackageJSONSmartFileInfos as $smartFileInfo) {
-            $json = $this->jsonFileManager->loadFromFileInfo($smartFileInfo);
-            $json['version'] = $prodVersion;
-            $this->jsonFileManager->printJsonToFileInfo($json, $smartFileInfo);
-        }
+        $this->nodeJSPackageDependencyUpdater->updatePackageJSONFileInfosWithVersion(
+            $this->pluginNodeJSPackageJSONSmartFileInfos,
+            $prodVersion
+        );
     }
 
     public function getDescription(Version $version): string
