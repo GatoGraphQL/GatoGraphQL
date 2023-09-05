@@ -5,29 +5,21 @@ declare(strict_types=1);
 namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 
 use PharIo\Version\Version;
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
 use PoP\PoP\Monorepo\MonorepoMetadata;
-use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 
 /**
  * Remove "-dev" from the MonorepoMetadata version
  */
-final class ConvertVersionForProdMonorepoMetadataVersionReleaseWorker implements ReleaseWorkerInterface
+final class ConvertVersionForProdMonorepoMetadataVersionReleaseWorker extends AbstractConvertVersionInMonorepoMetadataVersionReleaseWorker
 {
-    public function __construct(
-        private FileContentReplacerSystem $fileContentReplacerSystem,
-    ) {
-    }
-
     public function work(Version $version): void
     {
-        $file = dirname(__DIR__, 6) . '/src/Monorepo/MonorepoMetadata.php';
         $replacements = [
             '/\b' . preg_quote(MonorepoMetadata::VERSION) . '\b/' => substr(MonorepoMetadata::VERSION, 0, strlen(MonorepoMetadata::VERSION) - strlen('-dev')),
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [
-                $file,
+                $this->monorepoMetadataFile,
             ],
             $replacements,
         );
