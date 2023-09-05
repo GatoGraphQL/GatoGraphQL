@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 
 use PharIo\Version\Version;
+use PoP\PoP\Monorepo\MonorepoStaticHelpers;
 
 /**
  * Point to GitHub's master image URLs in the compiled Markdown files
@@ -13,10 +14,11 @@ final class RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker 
 {
     public function work(Version $version): void
     {
+        $gitHubRepoDocsRootURL = MonorepoStaticHelpers::getGitHubRepoDocsRootURL();
         $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [
             // Change the image src (pointing to GitHub) from the tag back to master
-            '#' . preg_quote('https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/' . $prodVersion . '/') . '#' => 'https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/master/',
+            '#' . preg_quote($gitHubRepoDocsRootURL . '/' . $prodVersion . '/') . '#' => $gitHubRepoDocsRootURL . '/master/',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginBlockCompiledMarkdownFiles, $replacements);
     }
