@@ -15,7 +15,7 @@ final class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConve
 {
     public function work(Version $version): void
     {
-        $nextDevVersion = $this->versionUtils->getNextVersion($version) . '-dev';
+        $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
         // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
         $prodVersion = $this->monorepoMetadataVersionUtils->getProdVersion();
         $replacements = [

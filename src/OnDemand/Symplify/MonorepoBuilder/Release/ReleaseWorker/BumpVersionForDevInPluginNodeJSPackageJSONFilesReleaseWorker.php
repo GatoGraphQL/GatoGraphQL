@@ -13,7 +13,7 @@ final class BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker extends
 {
     public function work(Version $version): void
     {
-        $nextDevVersion = $this->versionUtils->getNextVersion($version) . '-dev';
+        $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
         $this->nodeJSPackageDependencyUpdater->updatePackageJSONFileInfosWithVersion(
             $this->pluginNodeJSPackageJSONSmartFileInfos,
             $nextDevVersion

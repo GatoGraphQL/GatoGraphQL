@@ -25,4 +25,9 @@ final class VersionUtils
             strlen('^')
         ) . '.0';
     }
+
+    public function getNextDevVersion(Version | string $version): string
+    {
+        return $this->getNextVersion($version) . '-dev';
+    }
 }
