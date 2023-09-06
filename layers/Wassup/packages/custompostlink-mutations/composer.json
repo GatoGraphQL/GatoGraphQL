@@ -182,7 +182,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-sites-wassup/custompost-mutations": "^1.0.2"
+        "pop-sites-wassup/custompost-mutations": "^1.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -208,7 +208,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     },
     "config": {
