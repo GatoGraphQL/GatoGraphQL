@@ -43,6 +43,12 @@ add_action(
          * Use a stability suffix as supported by Composer.
          *
          * @see https://getcomposer.org/doc/articles/versions.md#stabilities
+         * 
+         * Important: Do not modify the formatting of this PHP code!
+         * A regex will search for this exact pattern, to update the
+         * version in the ReleaseWorker when deploying for PROD.
+         *
+         * @see src/OnDemand/Symplify/MonorepoBuilder/Release/ReleaseWorker/ConvertVersionForProdInPluginMainFileReleaseWorker.php
          */
         $extensionVersion = '1.0.0-dev';
         $extensionName = \__('Gato GraphQL - Extension Demo', 'gatographql-extension-demo');

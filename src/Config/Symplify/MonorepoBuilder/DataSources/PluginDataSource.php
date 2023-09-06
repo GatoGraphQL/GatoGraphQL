@@ -4,10 +4,17 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 
+use PoP\PoP\Monorepo\MonorepoMetadata;
+
 class PluginDataSource
 {
     public function __construct(protected string $rootDir)
     {
+    }
+
+    public function getRootDir(): string
+    {
+        return $this->rootDir;
     }
 
     /**
@@ -16,7 +23,7 @@ class PluginDataSource
     public function getPluginConfigEntries(): array
     {
         $excludeJSBlockFilesPlaceholder = $this->getExcludeJSBlockFilesPlaceholder();
-        return [
+        $pluginConfigEntries = [
             // Gato GraphQL
             [
                 'path' => 'layers/GatoGraphQLForWP/plugins/gatographql',
@@ -83,6 +90,12 @@ class PluginDataSource
             //     'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/extension-demo/rector.php',
             // ],
         ];
+
+        foreach ($pluginConfigEntries as &$pluginConfigEntry) {
+            $pluginConfigEntry['version'] = MonorepoMetadata::VERSION;
+        }
+
+        return $pluginConfigEntries;
     }
 
     protected function getExcludeJSBlockFilesPlaceholder(): string

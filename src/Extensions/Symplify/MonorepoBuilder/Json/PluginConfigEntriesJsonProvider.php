@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
-use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
@@ -28,11 +27,18 @@ final class PluginConfigEntriesJsonProvider
     public function providePluginConfigEntries(bool $scopedOnly = false): array
     {
         /**
-         * Validate that all required entries have been provided
+         * Validate that all required entries have been provided.
+         *
+         * The version is mandatory, and can't use a default one,
+         * as to allow a downstream monorepo to use the same script
+         * and pass the "current" version when deploying to PROD
+         * (i.e. after a new version has been produced for the
+         * upstream monorepo).
          */
         $requiredEntries = [
             'path',
             'plugin_slug',
+            'version',
             'main_file',
             'dist_repo_organization',
             'dist_repo_name',
@@ -83,7 +89,7 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['zip_file'] ??= sprintf(
                 '%s-%s',
                 $entryConfig['plugin_slug'],
-                $entryConfig['version'] ??= MonorepoMetadata::VERSION
+                $entryConfig['version']
             );
 
             // If it doens't specify a branch, use "master" by default

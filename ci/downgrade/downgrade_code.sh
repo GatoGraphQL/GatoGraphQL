@@ -127,6 +127,7 @@ vendor/bin/rector process $paths --config=$rector_config --ansi $rector_options
 if [ -n "$additional_rector_configs" ]; then
     for rector_config in $additional_rector_configs
     do
+        note "Running additional Rector downgrade config: $rector_config"
         vendor/bin/rector process --config=$rector_config --ansi $rector_options
     done
 fi
