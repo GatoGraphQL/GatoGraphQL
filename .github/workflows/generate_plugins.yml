@@ -227,8 +227,8 @@ jobs:
                 if: github.event_name == 'release'
 
             -   name: Create release plugin as .zip file (containing a root folder with the plugin name)
-                run: zip -X -r $GITHUB_WORKSPACE/build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip $GITHUB_WORKSPACE/build/dist-plugin
-                working-directory: ${{ matrix.pluginConfig.path }}
+                run: zip -X -r $GITHUB_WORKSPACE/build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip .
+                working-directory: build/dist-plugin
                 if: github.event_name == 'release'
 
             -   name: Upload to release
