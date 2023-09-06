@@ -13,6 +13,7 @@ use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersi
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInPluginMainFileReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker;
+use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateCurrentBranchAliasReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualConflictsReleaseWorker;
@@ -37,6 +38,12 @@ class ReleaseWorkersDataSource
             ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker::class,
             ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker::class,
             ConvertVersionForProdInMonorepoMetadataFileReleaseWorker::class,
+
+            /**
+             * When doing a major release, the current alias must also be updated,
+             * or otherwise there'll be conflicts with the "conflict" entries.
+             */
+            UpdateCurrentBranchAliasReleaseWorker::class,
 
             // Default workers
             UpdateReplaceReleaseWorker::class,
