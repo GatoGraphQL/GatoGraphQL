@@ -24,6 +24,10 @@ final class BlockCompiledMarkdownFileFinder
     public function findCompiledMarkdownFileInfos(
         array $folders,
     ): array {
+        if ($folders === []) {
+            return [];
+        }
+        
         // First find all the build folders
         $finder = new Finder();
         $finder->in($folders)
@@ -31,6 +35,10 @@ final class BlockCompiledMarkdownFileFinder
             ->depth(0)
             ->sortByName();
         $directorySmartFileInfos = $this->finderSanitizer->sanitize($finder);
+        if ($directorySmartFileInfos === []) {
+            return [];
+        }
+        
         $buildDirectories = array_map(
             fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath() . '/build',
             $directorySmartFileInfos

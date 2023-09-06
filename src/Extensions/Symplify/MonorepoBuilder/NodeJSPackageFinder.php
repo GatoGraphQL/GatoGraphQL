@@ -22,6 +22,10 @@ final class NodeJSPackageFinder
     public function findPackageJSONFileInfos(
         array $folders,
     ): array {
+        if ($folders === []) {
+            return [];
+        }
+        
         $finder = new Finder();
         $finder->in($folders)
             ->directories()
