@@ -222,10 +222,19 @@ jobs:
     #   Only when doing a release
     ###########################################################################
 
+            -   name: Create release folder
+                run: mkdir build/release-plugin
+                if: github.event_name == 'release'
+
+            -   name: Create release plugin as .zip file (containing a root folder with the plugin name)
+                run: zip -X -r $GITHUB_WORKSPACE/build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip $GITHUB_WORKSPACE/build/dist-plugin
+                working-directory: ${{ matrix.pluginConfig.path }}
+                if: github.event_name == 'release'
+
             -   name: Upload to release
                 uses: softprops/action-gh-release@v1
                 with:
-                    files: build/${{ matrix.pluginConfig.zip_file }}.zip
+                    files: build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 if: github.event_name == 'release'
