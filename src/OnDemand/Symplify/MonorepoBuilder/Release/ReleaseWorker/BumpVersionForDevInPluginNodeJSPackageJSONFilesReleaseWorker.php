@@ -15,7 +15,7 @@ class BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker extends Abstr
     {
         $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
         $this->nodeJSPackageDependencyUpdater->updatePackageJSONFileInfosWithVersion(
-            $this->pluginNodeJSPackageJSONSmartFileInfos,
+            $this->getPluginNodeJSPackageJSONSmartFileInfos(),
             $nextDevVersion
         );
     }

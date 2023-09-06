@@ -15,8 +15,8 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker implements ReleaseWorkerInterface
 {
-    /** @var SmartFileInfo[] */
-    protected array $pluginNodeJSPackageJSONSmartFileInfos;
+    /** @var SmartFileInfo[]|null */
+    private ?array $pluginNodeJSPackageJSONSmartFileInfos = null;
 
     public function __construct(
         protected VersionUtils $versionUtils,
@@ -24,10 +24,20 @@ abstract class AbstractConvertVersionInPluginNodeJSPackageJSONFilesReleaseWorker
         protected NodeJSPackageJSONUpdater $nodeJSPackageDependencyUpdater,
         private NodeJSPackageFinder $nodeJSPackageFinder,
     ) {
-        $pluginDataSource = $this->getPluginDataSource();
-        $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
-        $folders = $pluginDataSourceAccessor->getPluginNodeJSPackageDirectories();
-        $this->pluginNodeJSPackageJSONSmartFileInfos = $this->nodeJSPackageFinder->findPackageJSONFileInfos($folders);
+    }
+
+    /**
+     * @return SmartFileInfo[]
+     */
+    protected function getPluginNodeJSPackageJSONSmartFileInfos(): array
+    {
+        if ($this->pluginNodeJSPackageJSONSmartFileInfos === null) {
+            $pluginDataSource = $this->getPluginDataSource();
+            $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
+            $folders = $pluginDataSourceAccessor->getPluginNodeJSPackageDirectories();
+            $this->pluginNodeJSPackageJSONSmartFileInfos = $this->nodeJSPackageFinder->findPackageJSONFileInfos($folders);
+        }
+        return $this->pluginNodeJSPackageJSONSmartFileInfos;
     }
 
     protected function getPluginDataSource(): PluginDataSource

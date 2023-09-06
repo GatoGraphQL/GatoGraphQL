@@ -19,7 +19,7 @@ class ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker exten
             // Change the image src (pointing to GitHub) from master to the tag
             '#' . preg_quote($gitHubRepoDocsRootURL . '/master/') . '#' => $gitHubRepoDocsRootURL . '/' . $version->getVersionString() . '/',
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginBlockCompiledMarkdownFiles, $replacements);
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginBlockCompiledMarkdownFiles(), $replacements);
     }
 
     public function getDescription(Version $version): string

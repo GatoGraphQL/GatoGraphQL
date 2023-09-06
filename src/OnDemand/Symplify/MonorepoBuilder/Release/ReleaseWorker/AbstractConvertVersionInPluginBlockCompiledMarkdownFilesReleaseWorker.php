@@ -15,8 +15,8 @@ use Symplify\SmartFileSystem\SmartFileInfo;
 
 abstract class AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWorker implements ReleaseWorkerInterface
 {
-    /** @var string[] */
-    protected array $pluginBlockCompiledMarkdownFiles;
+    /** @var string[]|null */
+    private ?array $pluginBlockCompiledMarkdownFiles = null;
 
     public function __construct(
         protected FileContentReplacerSystem $fileContentReplacerSystem,
@@ -24,14 +24,24 @@ abstract class AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWo
         protected UpstreamVersionUtils $upstreamVersionUtils,
         protected BlockCompiledMarkdownFileFinder $blockCompiledMarkdownFileFinder,
     ) {
-        $pluginDataSource = $this->getPluginDataSource();
-        $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
-        $folders = $pluginDataSourceAccessor->getPluginNodeJSPackageDirectories();
-        $compiledMarkdownFileInfos = $this->blockCompiledMarkdownFileFinder->findCompiledMarkdownFileInfos($folders);
-        $this->pluginBlockCompiledMarkdownFiles = array_map(
-            fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath(),
-            $compiledMarkdownFileInfos
-        );
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getPluginBlockCompiledMarkdownFiles(): array
+    {
+        if ($this->pluginBlockCompiledMarkdownFiles === null) {
+            $pluginDataSource = $this->getPluginDataSource();
+            $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
+            $folders = $pluginDataSourceAccessor->getPluginNodeJSPackageDirectories();
+            $compiledMarkdownFileInfos = $this->blockCompiledMarkdownFileFinder->findCompiledMarkdownFileInfos($folders);
+            $this->pluginBlockCompiledMarkdownFiles = array_map(
+                fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath(),
+                $compiledMarkdownFileInfos
+            );
+        }
+        return $this->pluginBlockCompiledMarkdownFiles;
     }
 
     protected function getPluginDataSource(): PluginDataSource

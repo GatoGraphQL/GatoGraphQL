@@ -13,17 +13,27 @@ use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
 
 abstract class AbstractConvertVersionInPluginMainFileReleaseWorker implements ReleaseWorkerInterface
 {
-    /** @var string[] */
-    protected array $pluginMainFiles;
+    /** @var string[]|null */
+    private ?array $pluginMainFiles = null;
 
     public function __construct(
         protected FileContentReplacerSystem $fileContentReplacerSystem,
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,
     ) {
-        $pluginDataSource = $this->getPluginDataSource();
-        $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
-        $this->pluginMainFiles = $pluginDataSourceAccessor->getPluginMainFiles();
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getPluginMainFiles(): array
+    {
+        if ($this->pluginMainFiles === null) {
+            $pluginDataSource = $this->getPluginDataSource();
+            $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
+            $this->pluginMainFiles = $pluginDataSourceAccessor->getPluginMainFiles();
+        }
+        return $this->pluginMainFiles;
     }
 
     protected function getPluginDataSource(): PluginDataSource

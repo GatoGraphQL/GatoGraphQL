@@ -21,7 +21,7 @@ class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractConvert
             "/" . preg_quote('$pluginVersion') . " = '[a-z0-9.-]+';/" => "\$pluginVersion = '$prodVersion';",
             "/" . preg_quote('$extensionVersion') . " = '[a-z0-9.-]+';/" => "\$extensionVersion = '$prodVersion';",
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginMainFiles, $replacements);
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginMainFiles(), $replacements);
     }
 
     public function getDescription(Version $version): string

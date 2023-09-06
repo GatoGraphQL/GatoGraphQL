@@ -28,7 +28,7 @@ class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVers
             // Main Gato GraphQL plugin version constraint (in a variable)
             "/" . preg_quote('$mainPluginVersionConstraint') . " = '[0-9.^]+';/" => "\$mainPluginVersionConstraint = '$requiredNextDevVersion';",
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles($this->pluginMainFiles, $replacements);
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginMainFiles(), $replacements);
     }
 
     public function getDescription(Version $version): string

@@ -15,7 +15,7 @@ class ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker extends A
     {
         $prodVersion = $version->getVersionString();
         $this->nodeJSPackageDependencyUpdater->updatePackageJSONFileInfosWithVersion(
-            $this->pluginNodeJSPackageJSONSmartFileInfos,
+            $this->getPluginNodeJSPackageJSONSmartFileInfos(),
             $prodVersion
         );
     }
