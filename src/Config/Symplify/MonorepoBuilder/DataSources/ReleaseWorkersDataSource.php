@@ -37,7 +37,7 @@ class ReleaseWorkersDataSource
             ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker::class,
             ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker::class,
             ConvertVersionForProdInMonorepoMetadataFileReleaseWorker::class,
-            
+
             // Default workers
             UpdateReplaceReleaseWorker::class,
             SetCurrentMutualConflictsReleaseWorker::class,
@@ -52,7 +52,7 @@ class ReleaseWorkersDataSource
             RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker::class,
             BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker::class,
             BumpVersionForDevInPluginMainFileReleaseWorker::class,
-            
+
             // Default workers
             PushNextDevReleaseWorker::class,
         ];

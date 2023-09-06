@@ -14,7 +14,7 @@ class BumpVersionForDevInMonorepoMetadataFileReleaseWorker extends AbstractConve
     public function work(Version $version): void
     {
         $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
-        
+
         // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
         $replacements = [
             "/ VERSION = '[a-z0-9.-]+';/" => " VERSION = '" . $nextDevVersion . "';",

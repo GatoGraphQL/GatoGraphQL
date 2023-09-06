@@ -28,7 +28,7 @@ final class PluginConfigEntriesJsonProvider
     {
         /**
          * Validate that all required entries have been provided.
-         * 
+         *
          * The version is mandatory, and can't use a default one,
          * as to allow a downstream monorepo to use the same script
          * and pass the "current" version when deploying to PROD
