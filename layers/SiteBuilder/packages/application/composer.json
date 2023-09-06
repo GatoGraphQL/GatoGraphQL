@@ -179,10 +179,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model-configuration": "^1.0.4",
-        "getpop/definitionpersistence": "^1.0.4",
-        "getpop/definitions-emoji": "^1.0.4",
-        "pop-api/api": "^1.0.4"
+        "getpop/component-model-configuration": "^1.1",
+        "getpop/definitionpersistence": "^1.1",
+        "getpop/definitions-emoji": "^1.1",
+        "pop-api/api": "^1.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -208,7 +208,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     },
     "config": {

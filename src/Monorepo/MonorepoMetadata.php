@@ -13,5 +13,5 @@ final class MonorepoMetadata
      * A regex will search for this exact pattern, to update the
      * version in the ReleaseWorker when deploying for PROD.
      */
-    final public const VERSION = '1.0.4';
+    final public const VERSION = '1.1.0-dev';
 }
