@@ -25,7 +25,7 @@ final class NodeJSPackageFinder
         if ($folders === []) {
             return [];
         }
-        
+
         $finder = new Finder();
         $finder->in($folders)
             ->directories()
