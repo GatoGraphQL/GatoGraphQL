@@ -13,6 +13,8 @@ class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractConvert
 {
     public function work(Version $version): void
     {
+        $requiredCurrentDevVersion = $this->versionUtils->getRequiredCurrentFormat($version);
+
         $prodVersion = $version->getVersionString();
         $replacements = [
             // WordPress plugin header
@@ -20,6 +22,8 @@ class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractConvert
             // Gato GraphQL plugin/extension version
             "/" . preg_quote('$pluginVersion') . " = '[a-z0-9.-]+';/" => "\$pluginVersion = '$prodVersion';",
             "/" . preg_quote('$extensionVersion') . " = '[a-z0-9.-]+';/" => "\$extensionVersion = '$prodVersion';",
+            // Main Gato GraphQL plugin version constraint
+            "/" . preg_quote('$mainPluginVersionConstraint') . " = '[0-9.^]+';/" => "\$mainPluginVersionConstraint = '$requiredCurrentDevVersion';",
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginMainFiles(), $replacements);
     }

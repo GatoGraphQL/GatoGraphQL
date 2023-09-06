@@ -25,7 +25,7 @@ class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVers
             // Gato GraphQL plugin/extension version
             "/" . preg_quote('$pluginVersion') . " = '[a-z0-9.-]+';/" => "\$pluginVersion = '$nextDevVersion';",
             "/" . preg_quote('$extensionVersion') . " = '[a-z0-9.-]+';/" => "\$extensionVersion = '$nextDevVersion';",
-            // Main Gato GraphQL plugin version constraint (in a variable)
+            // Main Gato GraphQL plugin version constraint
             "/" . preg_quote('$mainPluginVersionConstraint') . " = '[0-9.^]+';/" => "\$mainPluginVersionConstraint = '$requiredNextDevVersion';",
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginMainFiles(), $replacements);

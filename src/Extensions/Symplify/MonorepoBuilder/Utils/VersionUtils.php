@@ -37,6 +37,14 @@ final class VersionUtils
         return $this->getNextVersion($version) . '-dev';
     }
 
+    public function getRequiredCurrentFormat(Version | string $version): string
+    {
+        $version = $this->normalizeVersion($version);
+        $minor = $this->getCurrentMinorNumber($version);
+
+        return '^' . $version->getMajor()->getValue() . '.' . $minor;
+    }
+
     public function getCurrentAliasFormat(Version | string $version): string
     {
         $version = $this->normalizeVersion($version);
