@@ -43,8 +43,13 @@
                     "unfiltered_html",
                     "upload_files"
                 ],
-                "customPostCount": 4,
+                "customPostCount": 5,
                 "customPosts": [
+                    {
+                        "__typename": "Post",
+                        "id": 40,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     {
                         "__typename": "GenericCustomPost",
                         "id": 622,
@@ -81,8 +86,12 @@
                 "name": "Editor Smith",
                 "nicename": "editor",
                 "nickname": "editor",
-                "postCount": 1,
+                "postCount": 2,
                 "posts": [
+                    {
+                        "id": 40,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     {
                         "id": 19,
                         "title": "Nested mutations are a must have"
