@@ -695,35 +695,35 @@ By setting the status of the Custom Endpoint or Persisted Query as `private`, th
 
 For instance, we can create private Persisted Queries that help manage the application, such as retrieving data to create reports with our metrics.
 
-![Private Persisted Query](../../images/private-persisted-query.png)
+![Private Persisted Query](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/private-persisted-query.png)
 
 ### Password-protected endpoints
 
 If we create a Custom Endpoint or Persisted Query for a specific client, we can now assign a password to it, to provide an additional level of security that only that client will access the endpoint.
 
-![Password-protected Custom Endpoint](../../images/password-protected-custom-endpoint.png)
+![Password-protected Custom Endpoint](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/password-protected-custom-endpoint.png)
 
 When first accessing a password-protected endpoint (whether accessing the endpoint directly, or its GraphiQL or Interactive Schema clients), we encounter a screen requesting the password:
 
-![Password-protected Custom Endpoint: First access](../../images/password-protected-custom-endpoint-unauthorized.png)
+![Password-protected Custom Endpoint: First access](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/password-protected-custom-endpoint-unauthorized.png)
 
 Once the password is provided and validated, only then the user will access the intended endpoint or client:
 
-![Password-protected Custom Endpoint: After authorization](../../images/password-protected-custom-endpoint-authorized.png)
+![Password-protected Custom Endpoint: After authorization](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/password-protected-custom-endpoint-authorized.png)
 
 ## Browse and install Gato GraphQL extensions
 
 An Extensions page has been added, to browse the available (commercial) Gato GraphQL extensions:
 
-![Extensions page](../../images/releases/v1.0/extensions-page.png)
+![Extensions page](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/extensions-page.png)
 
 Clicking on an Extension's title, it opens a modal window with documentation:
 
-![Extension modal with documentation](../../images/releases/v1.0/extension-modal.png)
+![Extension modal with documentation](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/extension-modal.png)
 
 Clicking on "Switch to the Extension Docs view", we can browse the documentation for all extensions more easily:
 
-![Extension Docs page](../../images/releases/v1.0/extension-docs-page.png)
+![Extension Docs page](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/extension-docs-page.png)
 
 ## Browse Recipes, providing examples of GraphQL queries for different use cases
 
@@ -731,17 +731,17 @@ A new Recipes page has been added to the menu.
 
 It provides examples of GraphQL queries for plenty of use cases. These can help us visualize what's doable with Gato GraphQL, and we can copy these queries and paste them into our applications to achieve our goals faster.
 
-![Recipes page](../../images/releases/v1.0/recipes-page.png)
+![Recipes page](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/recipes-page.png)
 
 ## Browse "Additional Documentation" when editing a Schema Configuration
 
 Documentation for additional features in the Gato GraphQL can now be browsed when editing a Schema Configuration CPT, on the editor's sidebar:
 
-![Additional Documentation in Schema Configuration CPT](../../images/releases/v1.0/schema-configuration-additional-documentation.png)
+![Additional Documentation in Schema Configuration CPT](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/schema-configuration-additional-documentation.png)
 
 When clicking on any of the links, a modal window is displayed with the corresponding documentation:
 
-![Modal window with documentation](../../images/releases/v1.0/schema-configuration-additional-documentation-modal.png)
+![Modal window with documentation](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/schema-configuration-additional-documentation-modal.png)
 
 ## Inspect properties when editing Custom Endpoints and Persisted Query Endpoints
 
@@ -752,7 +752,7 @@ A sidebar component has been added to the editor for Custom Endpoints and Persis
 - Its GraphiQL client (for the Custom Endpoint)
 - Its interactive schema client (for the Custom Endpoint)
 
-![Custom Endpoint Overview](../../images/custom-endpoint-overview.png)
+![Custom Endpoint Overview](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/custom-endpoint-overview.png)
 
 ## Added support for the "Global Fields" custom feature
 
@@ -793,7 +793,7 @@ With the "Global Fields" feature, after indicating that a field is "global" in t
 
 In order to configure the level of exposure of global fields in the schema, the Schema Configuration now has a new element "Global Fields":
 
-![Global Fields in the Schema Configuration](../../images/schema-config-global-fields.png)
+![Global Fields in the Schema Configuration](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/schema-config-global-fields.png)
 
 ## Added support for the "Composable Directives" custom feature
 
@@ -865,7 +865,7 @@ In order to enable or disable composable directives in the schema for some speci
 
 <div class="img-width-610" markdown=1>
 
-![Composable Directives in the Schema Configuration](../../images/schema-config-composable-directives.png)
+![Composable Directives in the Schema Configuration](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/schema-config-composable-directives.png)
 
 </div>
 
@@ -900,7 +900,7 @@ In order to enable or disable multi-field directives in the schema for some spec
 
 <div class="img-width-610" markdown=1>
 
-![Multi-Field Directives in the Schema Configuration](../../images/schema-config-multifield-directives.png)
+![Multi-Field Directives in the Schema Configuration](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/schema-config-multifield-directives.png)
 
 </div>
 
@@ -936,7 +936,7 @@ In the Schema Configuration applied to the endpoint under block "Response Header
 
 <div class="img-width-610" markdown=1>
 
-![Providing Response Headers in the Schema Configuration](../../images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration")
+![Providing Response Headers in the Schema Configuration](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/schema-configuration-response-headers.png "Providing Response Headers in the Schema Configuration")
 
 </div>
 
@@ -944,7 +944,7 @@ Otherwise, the value defined in the Settings page for `Response Headers` is used
 
 <div class="img-width-1024" markdown=1>
 
-![Providing Response Headers in the Settings](../../images/settings-response-headers.png "Providing Response Headers in the Settings")
+![Providing Response Headers in the Settings](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/settings-response-headers.png "Providing Response Headers in the Settings")
 
 </div>
 
@@ -1002,7 +1002,7 @@ This field has been marked as a “sensitive” data element, and so it will be 
 
 If we want to expose it always, we can also switch to treating it as a normal field, under tab "Custom Posts" in the Settings page:
 
-![Settings for the Custom Posts module](../../images/releases/v1.0/settings-customposts.png)
+![Settings for the Custom Posts module](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/settings-customposts.png)
 
 ## Added several "raw content" fields, made them all “sensitive”
 
@@ -1042,7 +1042,7 @@ Because modifying a post's author should be done by authorized users only, the `
 
 If we want to expose it always, we can also switch to treating it as a normal input, under tab "Custom Post User Mutations" in the Settings page:
 
-![Settings for the Custom Post User Mutations module](../../images/releases/v1.0/settings-custompost-user-mutations.png)
+![Settings for the Custom Post User Mutations module](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/settings-custompost-user-mutations.png)
 
 `authorBy` is a oneof input, allowing us to select the author by any of these properties:
 
@@ -1066,7 +1066,7 @@ The list of affected mutations is:
 - `CustomPost.setTags`
 - `CustomPost.setCategories`
 
-## Mutations `Root.createPost`, `Root.createPost` and `Post.update` now receive the `slug` input
+## Mutations `Root.createPost`, `Root.updatePost` and `Post.update` now receive the `slug` input
 
 Mutations creating/updating a post now also receive a `slug` input:
 
@@ -1181,7 +1181,7 @@ Due to the great number of modules in the plugin, the Settings page required sev
 
 Now, the Settings page organizes all modules into 2 levels, and displays tabs vertically, making it easier to browse them:
 
-![Settings page](../../images/releases/v1.0/settings-page.png)
+![Settings page](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/settings-page.png)
 
 ## Reset settings, and choose to use the restrictive or non-restrictive default settings
 
@@ -1193,7 +1193,7 @@ The plugin has provided restrictive and non-restrictive default behaviors for th
 
 Now it is possible to do the switch directly via the UI: The new "Plugin Management" tab in the Settings Page has an item "Reset Settings" which restores the default settings values, and allows to decide if to use the restrictive or the non-restrictive default behaviors.
 
-![Reset Settings page](../../images/releases/v1.0/reset-settings-page.png)
+![Reset Settings page](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/reset-settings-page.png)
 
 ## Configuration blocks in the the Schema Configuration CPT editor can be removed (and added again)
 
@@ -1201,7 +1201,7 @@ When creating a Schema Configuration, the new entry contains the whole list of o
 
 <div class="img-width-1024" markdown=1>
 
-![New Schema Configuration](../../images/new-schema-configuration.png)
+![New Schema Configuration](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/new-schema-configuration.png)
 
 </div>
 
@@ -1209,13 +1209,13 @@ If we need to configure only a handful of items, displaying all blocks in the ed
 
 Now, the Gutenberg template (containing the blocks) is not locked anymore, then we can delete the blocks that we don't need. And if we need to add a block again, it can be done from the inserter (notice that every block can only be added once):
 
-![Removing and adding blocks in the Schema Configuration](../../images/schema-configuration-removing-and-adding-blocks.gif)
+![Removing and adding blocks in the Schema Configuration](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/schema-configuration-removing-and-adding-blocks.gif)
 
 ## GraphiQL clients now accept sending headers
 
 The GraphiQL clients for the admin endpoint, the single endpoint and custom endpoints now accept passing headers:
 
-![GraphiQL with headers](../../images/releases/v1.0/graphiql-with-headers.png)
+![GraphiQL with headers](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/graphiql-with-headers.png)
 
 ## Display warnings in the GraphQL response
 
@@ -1383,13 +1383,13 @@ The interface uses the following emojis to denote if an endpoint is public or pr
 
 Examples are the menu navigation (when the single endpoint is enabled), and the "Overview" panels in the Custom Endpoint and Persisted Query editors.
 
-![Menu navigation, with different emojis for public/private endpoints](../../images/releases/v1.0/public-private-endpoint-emojis-in-menu.png "Menu navigation, with different emojis for public/private endpoints")
+![Menu navigation, with different emojis for public/private endpoints](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/public-private-endpoint-emojis-in-menu.png "Menu navigation, with different emojis for public/private endpoints")
 
 ## Sort the Schema Configuration entries by name
 
 In the Custom Endpoint and Persisted Query editors, the Schema Configuration entries are now sorted by name:
 
-![Selecting a Schema Configuration](../../images/releases/v1.0/select-schema-configuration.png)
+![Selecting a Schema Configuration](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/select-schema-configuration.png)
 
 ## Configure returning a payload object or the mutated entity for mutations
 
@@ -1502,7 +1502,7 @@ If the user doesn't have the permission to edit posts, we will receive:
 
 As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadUnion` and `ErrorPayload` types added, the GraphQL schema will have a bigger size:
 
-![GraphQL schema with payload object types for mutations](../../images/mutations-using-payload-object-types.png "GraphQL schema with payload object types for mutations")
+![GraphQL schema with payload object types for mutations](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/mutations-using-payload-object-types.png "GraphQL schema with payload object types for mutations")
 
 ### Mutated entity
 
@@ -1563,7 +1563,7 @@ We must notice that, as a result, the top-level `errors` entry will contain not 
 
 Because there are no additional types added, the GraphQL schema will look leaner:
 
-![GraphQL schema without payload object types for mutations](../../images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
+![GraphQL schema without payload object types for mutations](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/mutations-not-using-payload-object-types.png "GraphQL schema without payload object types for mutations")
 
 ## Added "State" and "Schema Configuration" columns to tables for Custom Endpoints and Persisted Queries
 
@@ -1572,7 +1572,7 @@ The tables for the Custom Endpoint and Persisted Query CPTs now display two new 
 - "State", showing if entries are enabled or disabled
 - "Schema Configuration", providing a link to the corresponding schema configuration (if any)
 
-![State column in CPTs table](../../images/releases/v1.0/new-columns-in-cpts-table.png)
+![State column in CPTs table](https://github.com/leoloso/PoP/blob/2e536e616a44717a07256ddaf89a094e3686036d/layers/GatoGraphQLForWP/plugins/gatographql/docs/images/releases/v1.0/new-columns-in-cpts-table.png)
 
 ## Saving the Settings is faster, as it does not regenerate the service container anymore
 
