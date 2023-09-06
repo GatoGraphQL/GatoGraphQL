@@ -100,7 +100,7 @@ The Recipes section contains example queries ready to copy/paste and use:
 
 _For alternative installation methods, check [Installing Gato GraphQL](docs/installing-gatographql-for-wordpress.md)._
 
-Download the latest release of the plugin<!-- @todo Fix when plugin released in wp.org [the latest release of the plugin][latest-release-url]--> as a .zip file.
+Download [the latest release of the plugin][latest-release-url] as a .zip file.
 
 Then, in the WordPress admin:
 
