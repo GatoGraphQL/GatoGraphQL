@@ -223,9 +223,9 @@ jobs:
     ###########################################################################
 
             -   name: Upload to release
-                uses: JasonEtco/upload-to-release@master
+                uses: softprops/action-gh-release@v1
                 with:
-                    args: build/${{ matrix.pluginConfig.zip_file }}.zip application/zip
+                    files: build/${{ matrix.pluginConfig.zip_file }}.zip
                 env:
                     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 if: github.event_name == 'release'
