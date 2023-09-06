@@ -181,9 +181,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^1.0.5",
+        "getpop/engine": "^1.1",
         "leoloso/faker": "dev-master",
-        "pop-backbone/wp-data-parser": "^1.0.5"
+        "pop-backbone/wp-data-parser": "^1.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -209,7 +209,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     },
     "config": {
