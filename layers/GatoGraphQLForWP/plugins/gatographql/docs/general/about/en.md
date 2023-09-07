@@ -65,6 +65,21 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
+  <input
+    type="text"
+    name="subject"
+    id="field-subject"
+    required=""
+    aria-required="true"
+    placeholder="Subject..."
+    autocorrect="off"
+    autocapitalize="none"
+    spellcheck="true"
+    data-remove-prefix="true"
+  />
+
+  <br/><br/>
+
   <label for="field-message">Message:</label>
   <br/>
   <textarea
@@ -72,7 +87,7 @@ Send your message to the Gato GraphQL Support team:
     name="message"
     rows="10"
     cols="100"
-    placeholder="What do you need support with?"
+    placeholder="Your message..."
     required=""
     aria-required="true"
     spellcheck="true"
