@@ -24,7 +24,7 @@ Interact with all your data in WordPress.
 
 <div class="hide-for-customers" markdown=1>
 
-_Support is provided to current customers of any Gato GraphQL product (bundles, extensions, or any other)._
+_Support is provided to customers of any Gato GraphQL product (bundles or extensions) with an active license._
 
 </div>
 
