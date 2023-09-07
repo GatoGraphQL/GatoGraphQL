@@ -65,6 +65,8 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
+  <label for="field-subject">Subject:</label>
+  <br/>
   <input
     type="text"
     name="subject"
