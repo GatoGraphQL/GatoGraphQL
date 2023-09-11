@@ -19,11 +19,11 @@ Then, in the WordPress admin:
 - Click on `Install Now` (it may take a few minutes)
 - Once installed, click on `Activate`
 
-### Timeout in Nginx?
+<!-- ### Timeout in Nginx?
 
 Nginx has a time limit to process the response from the PHP backend, and installing large WordPress plugins may exceed the default time limit.
 
-If when installing the plugin you get a "504 Gateway Timeout" error, or an entry `"upstream timed out (110: Connection timed out) while reading upstream"` in the log, increase the timeout to `300` seconds in the Nginx config, as [explained here](https://wordpress.org/support/topic/504-gateway-time-out-504-gateway-time-out-nginx/#post-13423918).
+If when installing the plugin you get a "504 Gateway Timeout" error, or an entry `"upstream timed out (110: Connection timed out) while reading upstream"` in the log, increase the timeout to `300` seconds in the Nginx config, as [explained here](https://wordpress.org/support/topic/504-gateway-time-out-504-gateway-time-out-nginx/#post-13423918). -->
 
 ## Composer
 
