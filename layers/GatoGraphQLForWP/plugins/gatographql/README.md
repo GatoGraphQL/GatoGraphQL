@@ -250,4 +250,4 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [link-contributors]: ../../../../../../contributors
 [link-author]: https://github.com/leoloso
 
-[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.5/gatographql-1.0.5.zip
+[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.6/gatographql-1.0.6.zip

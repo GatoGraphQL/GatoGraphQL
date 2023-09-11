@@ -276,4 +276,4 @@ GPLv2 or later. Please see [License File](LICENSE.md) for more information.
 [ico-downloads]: https://img.shields.io/github/downloads/GatoGraphQL/GatoGraphQL/total.svg
 
 [link-author]: https://github.com/leoloso
-[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.5/gatographql-1.0.5.zip
+[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.6/gatographql-1.0.6.zip
