@@ -19,7 +19,7 @@ class GatoGraphQLAdminEndpointsTestExecuter
             return;
         }
         /** @var string[] $actions */
-        if (!in_array(Actions::TEST_GATO_GRAPHQL_ADMIN_ENDPOINTS, $actions)) {
+        if (!in_array(Actions::TEST_GATOGRAPHQL_ADMIN_ENDPOINTS, $actions)) {
             return;
         }
 

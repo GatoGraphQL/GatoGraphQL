@@ -182,10 +182,10 @@ Input the API key in the corresponding input in the Settings page, and click on 
 
 ### In `wp-config.php`
 
-Add constant `GATO_GRAPHQL_GOOGLE_TRANSLATE_API_KEY` in `wp-config.php`:
+Add constant `GATOGRAPHQL_GOOGLE_TRANSLATE_API_KEY` in `wp-config.php`:
 
 ```php
-define( 'GATO_GRAPHQL_GOOGLE_TRANSLATE_API_KEY', '{your API key}' );
+define( 'GATOGRAPHQL_GOOGLE_TRANSLATE_API_KEY', '{your API key}' );
 ```
 
 ### By environment variable
@@ -227,13 +227,13 @@ Input the `from`/`to` fields in the corresponding input in the Settings page, an
 
 Add constants in `wp-config.php`:
 
-- `GATO_GRAPHQL_TRANSLATION_DEFAULT_FROM_LANG_CODE`
-- `GATO_GRAPHQL_TRANSLATION_DEFAULT_TO_LANG_CODE`
+- `GATOGRAPHQL_TRANSLATION_DEFAULT_FROM_LANG_CODE`
+- `GATOGRAPHQL_TRANSLATION_DEFAULT_TO_LANG_CODE`
 
 For instance:
 
 ```php
-define( 'GATO_GRAPHQL_TRANSLATION_DEFAULT_TO_LANG_CODE', 'fr' );
+define( 'GATOGRAPHQL_TRANSLATION_DEFAULT_TO_LANG_CODE', 'fr' );
 ```
 
 ### By environment variable

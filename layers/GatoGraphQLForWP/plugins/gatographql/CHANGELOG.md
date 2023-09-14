@@ -33,7 +33,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Display warnings in the GraphQL response
 - Implementation of standard custom scalar types
 - Added internal endpoints to feed data to (Gutenberg) blocks
-  - Added JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` with URL of internal `blockEditor` endpoint
+  - Added JS variable `GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` with URL of internal `blockEditor` endpoint
 - Create custom internal endpoints to feed data to (Gutenberg) blocks
 - Endpoints: Use 🟢 (green) to denote "public", 🟡 (yellow) to denote "private"
 - Sort the Schema Configuration entries by name
@@ -363,8 +363,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Introduced scalar type `AnyScalar`, representing any of the built-in scalars (`String`, `Int`, `Boolean`, `Float` and `ID`)
 - Cache is saved under the `wp-content`
 - Split the GraphQL endpoint for accessing data for the WordPress editor into two:
-  1. `GATO_GRAPHQL_ADMIN_CONFIGURABLESCHEMA_ENDPOINT`
-  2. `GATO_GRAPHQL_ADMIN_FIXEDSCHEMA_ENDPOINT`
+  1. `GATOGRAPHQL_ADMIN_CONFIGURABLESCHEMA_ENDPOINT`
+  2. `GATOGRAPHQL_ADMIN_FIXEDSCHEMA_ENDPOINT`
 - Option to display the Settings page in long form, or using tabs
 - Further support of field types in the schema:
   - Lists with non-null items (`[String!]`)

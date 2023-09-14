@@ -128,7 +128,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function getGatoGraphQLWebsiteURL(): string
     {
-        $envVariable = Environment::GATO_GRAPHQL_WEBSITE_URL;
+        $envVariable = Environment::GATOGRAPHQL_WEBSITE_URL;
         $defaultValue = 'https://gatographql.com';
 
         return $this->retrieveConfigurationValueOrUseDefault(
@@ -139,7 +139,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function getGatoGraphQLExtensionsPageURL(): string
     {
-        $envVariable = Environment::GATO_GRAPHQL_EXTENSIONS_PAGE_URL;
+        $envVariable = Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL;
         $defaultValue = 'https://gatographql.com/extensions';
 
         return $this->retrieveConfigurationValueOrUseDefault(
@@ -150,7 +150,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function getGatoGraphQLRequestExtensionPageURL(): string
     {
-        $envVariable = Environment::GATO_GRAPHQL_REQUEST_EXTENSION_PAGE_URL;
+        $envVariable = Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL;
         $defaultValue = 'https://github.com/GatoGraphQL/GatoGraphQLExtensions/discussions';
 
         return $this->retrieveConfigurationValueOrUseDefault(
@@ -183,9 +183,9 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     protected function enableHook(string $envVariable): bool
     {
         return match ($envVariable) {
-            Environment::GATO_GRAPHQL_WEBSITE_URL,
-            Environment::GATO_GRAPHQL_REQUEST_EXTENSION_PAGE_URL,
-            Environment::GATO_GRAPHQL_EXTENSIONS_PAGE_URL,
+            Environment::GATOGRAPHQL_WEBSITE_URL,
+            Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
+            Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,
             Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
             default

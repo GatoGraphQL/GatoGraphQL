@@ -21,7 +21,7 @@ class GatoGraphQLAdminEndpointsQueryExecutionFixtureWebserverRequestTest extends
         return GeneralUtils::addQueryArgs(
             [
                 'actions' => [
-                    Actions::TEST_GATO_GRAPHQL_ADMIN_ENDPOINTS,
+                    Actions::TEST_GATOGRAPHQL_ADMIN_ENDPOINTS,
                 ],
             ],
             'graphql/'

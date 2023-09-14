@@ -1288,15 +1288,15 @@ https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpo
 
 This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.`
 
-### Added JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` with URL of internal `blockEditor` endpoint
+### Added JS variable `GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` with URL of internal `blockEditor` endpoint
 
-A new global JS variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` prints the URL for the `blockEditor` endpoint in the wp-admin editor, for all users who can access the GraphQL schema. This makes it easier to point to this endpoint within the block's JavaScript code.
+A new global JS variable `GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT` prints the URL for the `blockEditor` endpoint in the wp-admin editor, for all users who can access the GraphQL schema. This makes it easier to point to this endpoint within the block's JavaScript code.
 
 Inspecting the source code in the wp-admin, you will find the following HTML:
 
 ```html
 <script type="text/javascript">
-var GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor"
+var GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT = "https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpoint_group=blockEditor"
 </script>
 ```
 
