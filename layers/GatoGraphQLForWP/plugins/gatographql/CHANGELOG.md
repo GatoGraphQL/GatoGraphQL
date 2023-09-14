@@ -4,7 +4,13 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 1.0.0 - DATE
+## 1.1.0 - DATE
+
+### Fixed
+
+- Constants in `wp-config.php` must start with `GATOGRAPHQL_` (previously was `GATO_GRAPHQL_`)
+
+## 1.0.0 - 07/09/23
 
 ### Improvements
 
@@ -60,13 +66,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Env var `ENABLE_UNSAFE_DEFAULTS` has been removed and `SETTINGS_OPTION_ENABLE_RESTRICTIVE_DEFAULT_BEHAVIOR` added in its place, to indicate to use the restrictive Settings values by default
 - Renamed plugin to "Gato GraphQL"
 
-## 0.10.2 - 24/02/2013
+## 0.10.2 - 24/02/2023
 
 ### Fixed
 
 - Performance issue where elements to resolve AST were duplicated ([#2039](https://github.com/GatoGraphQL/GatoGraphQL/pull/2039))
 
-## 0.10.0 - 16/02/2013
+## 0.10.0 - 16/02/2023
 
 ### Added
 
@@ -85,13 +91,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Modified value for `allow` behavior option in settings
 
-## 0.9.9 - 16/01/2013
+## 0.9.9 - 16/01/2023
 
 ### Enhancement
 
 - Improved query-resolution performance (by caching method results in PHP)
 
-## 0.9.3 - 12/01/2013
+## 0.9.3 - 12/01/2023
 
 ### GraphQL schema upgrade
 
