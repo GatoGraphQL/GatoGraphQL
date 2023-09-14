@@ -185,7 +185,7 @@ Input the API key in the corresponding input in the Settings page, and click on 
 Add constant `GATO_GRAPHQL_GOOGLE_TRANSLATE_API_KEY` in `wp-config.php`:
 
 ```php
-define( 'GATO_GRAPHQL_GOOGLE_TRANSLATE_API_KEY', 'your API key' );
+define( 'GATO_GRAPHQL_GOOGLE_TRANSLATE_API_KEY', '{your API key}' );
 ```
 
 ### By environment variable
