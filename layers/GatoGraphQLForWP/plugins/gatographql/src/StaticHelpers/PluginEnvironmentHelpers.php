@@ -30,6 +30,6 @@ class PluginEnvironmentHelpers
      */
     public static function getWPConfigConstantName(string $envVariable): string
     {
-        return 'GATO_GRAPHQL_' . $envVariable;
+        return 'GATOGRAPHQL_' . $envVariable;
     }
 }

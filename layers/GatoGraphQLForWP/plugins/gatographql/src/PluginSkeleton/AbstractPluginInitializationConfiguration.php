@@ -27,7 +27,7 @@ use function apply_filters;
  * To set the value for properties, it uses this order:
  *
  * 1. Retrieve it as an environment value, if defined
- * 2. Retrieve as a constant `GATO_GRAPHQL_...` from wp-config.php, if defined
+ * 2. Retrieve as a constant `GATOGRAPHQL_...` from wp-config.php, if defined
  * 3. Retrieve it from the user settings, if stored
  * 4. Use the default value
  *
@@ -76,7 +76,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
                 $hookName,
                 /**
                  * Override the value of an environment variable if it has been definedas a constant
-                 * in wp-config.php, with the environment name prepended with "GATO_GRAPHQL_"
+                 * in wp-config.php, with the environment name prepended with "GATOGRAPHQL_"
                  */
                 function ($value) use ($envVariable) {
                     if (PluginEnvironmentHelpers::isWPConfigConstantDefined($envVariable)) {
