@@ -1,0 +1,3 @@
+[submodule "submodules/ExtensionStarter"]
+	path = submodules/ExtensionStarter
+	url = https://github.com/GatoGraphQL/ExtensionStarter
