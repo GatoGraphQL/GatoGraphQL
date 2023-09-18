@@ -1,10 +1,10 @@
 {
-    "name": "leoloso/pop",
+    "name": "GatoGraphQL/GatoGraphQL",
     "authors": [
         {
             "name": "Leonardo Losoviz",
             "email": "leo@getpop.org",
-            "homepage": "https://getpop.org"
+            "homepage": "https://gatographql.com"
         }
     ],
     "homepage": "https://github.com/GatoGraphQL/GatoGraphQL",
@@ -41,7 +41,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.5",
-        "johnpbloch/wordpress": ">=5.5",
+        "johnpbloch/wordpress": "^6.3",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^0.18",
