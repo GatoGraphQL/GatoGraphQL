@@ -215,15 +215,15 @@
         "sort-packages": true
     },
     "replace": {
-        "getpop/component-model": "^0.11",
-        "getpop/componentrouting": "^0.11",
-        "getpop/definitions": "^0.11",
-        "getpop/engine": "^0.11",
-        "getpop/loosecontracts": "^0.11",
-        "getpop/mandatory-directives-by-configuration": "^0.11",
-        "getpop/root": "^0.11",
-        "pop-cms-schema/schema-commons": "^0.11",
-        "pop-schema/schema-commons": "^0.11"
+        "getpop/component-model": "self.version",
+        "getpop/componentrouting": "self.version",
+        "getpop/definitions": "self.version",
+        "getpop/engine": "self.version",
+        "getpop/loosecontracts": "self.version",
+        "getpop/mandatory-directives-by-configuration": "self.version",
+        "getpop/root": "self.version",
+        "pop-cms-schema/schema-commons": "self.version",
+        "pop-schema/schema-commons": "self.version"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
