@@ -1,5 +1,6 @@
 {
-    "name": "gatographql/gatographql",
+    "name": "gatographql/gatographql-monorepo",
+    "description": "Interact with all your data in WordPress using GraphQL ",
     "authors": [
         {
             "name": "Leonardo Losoviz",
@@ -721,7 +722,7 @@
         "destroy-server": "Destroy the Lando webserver with the 'Gato GraphQL' demo site",
         "reset-db": "Resets the WordPress database",
         "install-site": "Installs the WordPress site",
-        "import data": "Imports pre-defined data into the DB (posts, users, CPTs, etc)",
+        "import-data": "Imports pre-defined data into the DB (posts, users, CPTs, etc)",
         "update-deps": "Update the Composer dependencies for the 'Gato GraphQL' demo site",
         "optimize-autoloader": "Optimizes the Composer autoloaders for all the plugins installed in the webserver",
         "deoptimize-autoloader": "Removes the optimization of the Composer autoloaders for all the plugins installed in the webserver",
