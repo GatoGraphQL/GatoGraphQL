@@ -11,6 +11,7 @@ services:
       okCodes:
         - 200
         - 301
+        - 302
   database:
     portforward: true
 env_file:

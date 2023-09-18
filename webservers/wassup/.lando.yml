@@ -17,6 +17,7 @@ services:
       okCodes:
         - 200
         - 301
+        - 302
     overrides:
       environment:
         XDEBUG_MODE: ''
