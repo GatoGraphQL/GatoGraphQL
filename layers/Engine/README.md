@@ -1,4 +1,4 @@
-![PoP](https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
+![PoP](https://assets-demo.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png)
 
 # PoP Engine
 
