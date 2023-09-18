@@ -185,7 +185,7 @@
         "pop-cms-schema/schema-commons": "^1.1"
     },
     "require-dev": {
-        "johnpbloch/wordpress": ">=5.5",
+        "johnpbloch/wordpress": "^6.3",
         "phpunit/phpunit": "^10.2",
         "pop-cms-schema/user-state-wp": "^1.1",
         "rector/rector": "^0.18",
