@@ -57,7 +57,7 @@ Extensions have been bundled together, to satisfy several common use cases:
 
 Browse all bundles and extensions on the [Gato GraphQL website](https://gatographql.com/extensions).
 
-Do you need an integration with some WordPress plugin? [Let us know](https://github.com/GatoGraphQL/GatoGraphQLExtensions/discussions).
+Do you need an integration with some WordPress plugin? [Let us know](https://github.com/GatoGraphQL/ExtensionsPlanningAndTracking/discussions).
 
 == Frequently Asked Questions ==
 
