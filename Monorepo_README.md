@@ -32,7 +32,7 @@ Plugins can extend the GraphQL schema, to fetch their own data.
 
 **PoP** is a set of libraries which provide a server-side component model in PHP, and the foundation to implement applications with it.
 
-- Website: [getpop.org](https://getpop.org)
+<!-- - Website: [getpop.org](https://getpop.org) -->
 - Source code:
   - [Backbone](layers/Backbone): Libraries providing the architectural scaffolding.
   - [Engine](layers/Engine): The engine of the application.
