@@ -190,7 +190,6 @@
         "pop-wp-schema/commentmeta": "<1.0.6",
         "pop-wp-schema/users": "<1.0.6",
         "pop-wp-schema/menus": "<1.0.6",
-        "pop-wp-schema/block-metadata-for-wp": "<1.0.6",
         "pop-wp-schema/block-content-parser": "<1.0.6",
         "pop-wp-schema/pages": "<1.0.6",
         "pop-wp-schema/custompostmeta": "<1.0.6",

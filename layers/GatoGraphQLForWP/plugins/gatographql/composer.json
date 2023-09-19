@@ -196,7 +196,6 @@
         "pop-sites-wassup/custompostlink-mutations": "<1.0.6",
         "pop-wp-schema/meta": "<1.0.6",
         "pop-wp-schema/schema-commons": "<1.0.6",
-        "pop-wp-schema/block-metadata-for-wp": "<1.0.6",
         "pop-wp-schema/block-content-parser": "<1.0.6"
     },
     "autoload": {
