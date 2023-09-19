@@ -16,7 +16,7 @@ use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class MergePhpstanCommand extends AbstractSymplifyCommand
 {
-    protected string $level;
+    protected string|int $level;
     
     public function __construct(
         private PHPStanNeonContentProvider $phpstanNeonContentProvider,
