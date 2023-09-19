@@ -27,7 +27,6 @@ class SkipDowngradeTestPathsDataSource
     protected function getSkipDowngradeTestProjectPaths(): array
     {
         return [
-            'layers/Legacy/',
             'layers/GatoGraphQLForWP/phpunit-packages/',
         ];
     }

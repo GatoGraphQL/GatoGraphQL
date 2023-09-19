@@ -27,8 +27,6 @@ class PackageOrganizationDataSource
             'layers/GraphQLByPoP/clients' => 'GraphQLByPoP',
             'layers/GraphQLByPoP/packages' => 'GraphQLByPoP',
             'layers/Schema/packages' => 'PoPSchema',
-            'layers/SiteBuilder/packages' => 'getpop',
-            'layers/Wassup/packages' => 'PoPSites-Wassup',
             'layers/WPSchema/packages' => 'PoPWPSchema',
         ];
     }
