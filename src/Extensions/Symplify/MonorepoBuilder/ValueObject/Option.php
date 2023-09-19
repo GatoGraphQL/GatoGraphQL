@@ -45,14 +45,6 @@ final class Option
     /**
      * @var string
      */
-    public final const SKIP_UNMIGRATED = 'skip-unmigrated';
-    /**
-     * @var string
-     */
-    public final const UNMIGRATED_FAILING_PACKAGES = 'unmigrated-failing-packages';
-    /**
-     * @var string
-     */
     public final const LEVEL = 'level';
     /**
      * @var string
