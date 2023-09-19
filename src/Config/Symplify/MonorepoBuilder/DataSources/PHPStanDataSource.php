@@ -10,13 +10,4 @@ class PHPStanDataSource
     {
         return 8;
     }
-
-    /**
-     * @return string[]
-     */
-    public function getUnmigratedFailingPackages(): array
-    {
-        return [
-        ];
-    }
 }
