@@ -598,7 +598,7 @@
         "release-patch": "monorepo-builder release patch --config=config/monorepo-builder/release.php --ansi",
         "release-minor": "monorepo-builder release minor --config=config/monorepo-builder/release.php --ansi",
         "release-major": "monorepo-builder release major --config=config/monorepo-builder/release.php --ansi",
-        "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --skip-unmigrated --ansi",
+        "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --ansi",
         "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi",
         "upgrade-to-phpunit-10": "rector process --config=config/rector/upgrades/phpunit-10/rector.php --ansi",
         "remove-unused-imports": "php-cs-fixer fix --config=.php-cs-fixer.dist.php",
