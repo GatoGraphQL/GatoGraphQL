@@ -17,7 +17,6 @@ class PHPStanDataSource
     public function getUnmigratedFailingPackages(): array
     {
         return [
-            'layers/WPSchema/packages/block-metadata-for-wp',
         ];
     }
 }
