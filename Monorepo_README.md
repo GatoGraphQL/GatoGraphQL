@@ -41,16 +41,6 @@ Plugins can extend the GraphQL schema, to fetch their own data.
   - [WPSchema](layers/WPSchema): WordPress-specific schema elements.
   - [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
 
-## Site Builder (WIP)
-
-**Site Builder** is a set of PHP components to build a website using PoP's component-model architecture.
-
-- [Source code](layers/SiteBuilder)
-
-Similar to WordPress, it accepts themes.
-
-- [Wassup](layers/Wassup): theme powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)
-
 ---
 
 ## Table of Contents
