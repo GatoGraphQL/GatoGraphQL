@@ -186,8 +186,8 @@
             "PoP\\MarkdownConvertor\\": "layers/Engine/packages/markdown-convertor/src",
             "PoP\\PoP\\": "src",
             "PoP\\RootWP\\": "layers/Engine/packages/root-wp/src",
-            "PoP\\Root\\": "layers/Engine/packages/root/src",
-            
+            "PoP\\Root\\": "layers/Engine/packages/root/src"
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -321,8 +321,8 @@
             "PoP\\MandatoryDirectivesByConfiguration\\": "layers/Engine/packages/mandatory-directives-by-configuration/tests",
             "PoP\\MarkdownConvertor\\": "layers/Engine/packages/markdown-convertor/tests",
             "PoP\\RootWP\\": "layers/Engine/packages/root-wp/tests",
-            "PoP\\Root\\": "layers/Engine/packages/root/tests",
-            
+            "PoP\\Root\\": "layers/Engine/packages/root/tests"
+        }
     },
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress"
