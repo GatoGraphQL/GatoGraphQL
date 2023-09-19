@@ -12,16 +12,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
-use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class SourcePackagesCommand extends AbstractSymplifyCommand
 {
     public function __construct(
         private SourcePackagesProvider $sourcePackagesProvider,
-        ParameterProvider $parameterProvider,
     ) {
         parent::__construct();
-        $this->unmigratedFailingPackages = $parameterProvider->provideArrayParameter(Option::UNMIGRATED_FAILING_PACKAGES);
     }
 
     protected function configure(): void

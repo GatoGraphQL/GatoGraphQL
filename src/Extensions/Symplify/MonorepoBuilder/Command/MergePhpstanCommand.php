@@ -22,7 +22,6 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
         ParameterProvider $parameterProvider,
     ) {
         parent::__construct();
-        $this->unmigratedFailingPackages = $parameterProvider->provideArrayParameter(Option::UNMIGRATED_FAILING_PACKAGES);
         $this->level = $parameterProvider->provideParameter(Option::LEVEL);
     }
 
