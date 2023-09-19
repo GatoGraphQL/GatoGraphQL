@@ -21,7 +21,7 @@ composer require pop-wp-schema/block-metadata-for-wp
 
 ## Development
 
-The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`Schema/packages/block-metadata-for-wp`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/Schema/packages/block-metadata-for-wp).
+The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoGraphQL/GatoGraphQL), under [`WPSchema/packages/block-metadata-for-wp`](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/WPSchema/packages/block-metadata-for-wp).
 
 ## Usage
 
