@@ -12,7 +12,6 @@ includes:
     - layers/API/packages/api-mirrorquery/phpstan.neon.dist
     - layers/API/packages/api-rest/phpstan.neon.dist
     - layers/WPSchema/packages/block-content-parser/phpstan.neon.dist
-    - layers/WPSchema/packages/block-metadata-for-wp/phpstan.neon.dist
     - layers/WPSchema/packages/blocks/phpstan.neon.dist
     - layers/Engine/packages/cache-control/phpstan.neon.dist
     - layers/CMSSchema/packages/categories/phpstan.neon.dist

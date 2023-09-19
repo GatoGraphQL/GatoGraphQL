@@ -16,13 +16,14 @@ use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class MergePhpstanCommand extends AbstractSymplifyCommand
 {
+    protected string $level;
+    
     public function __construct(
         private PHPStanNeonContentProvider $phpstanNeonContentProvider,
         private NeonFilePrinter $neonFilePrinter,
         ParameterProvider $parameterProvider,
     ) {
         parent::__construct();
-        $this->unmigratedFailingPackages = $parameterProvider->provideArrayParameter(Option::UNMIGRATED_FAILING_PACKAGES);
         $this->level = $parameterProvider->provideParameter(Option::LEVEL);
     }
 
@@ -37,19 +38,11 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
             'Path to dump monorepo PHPStan config file',
             getcwd() . DIRECTORY_SEPARATOR . 'phpstan.neon'
         );
-        $this->addOption(
-            Option::SKIP_UNMIGRATED,
-            null,
-            InputOption::VALUE_NONE,
-            'Skip the not-yet-migrated to PSR-4 packages.'
-        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        // If --skip-unmigrated, fetch the list of failing unmigrated packages
-        $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
-        $packagesToSkip = $skipUnmigrated ? $this->unmigratedFailingPackages : [];
+        $packagesToSkip = [];
 
         $neonFileContent = $this->phpstanNeonContentProvider->provideContent($packagesToSkip, $this->level);
 

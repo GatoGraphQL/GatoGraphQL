@@ -112,10 +112,6 @@ class ContainerConfigurationService
          */
         if ($phpStanConfig = $this->getPHPStanDataSource()) {
             $parameters->set(
-                CustomOption::UNMIGRATED_FAILING_PACKAGES,
-                $phpStanConfig->getUnmigratedFailingPackages()
-            );
-            $parameters->set(
                 CustomOption::LEVEL,
                 $phpStanConfig->getLevel()
             );
