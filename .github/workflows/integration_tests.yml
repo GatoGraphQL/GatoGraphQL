@@ -1,11 +1,9 @@
-name: Integration tests
+name: Integration tests (InstaWP)
 on:
-    # @todo Re-enable executing integration tests for PROD in CI
-    # @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2253
-    # workflow_run:
-    #     workflows: [Generate plugins]
-    #     types:
-    #         - completed
+    workflow_run:
+        workflows: [Generate plugins]
+        types:
+            - completed
 env:
     CHECKOUT_SUBMODULES: ""
 
