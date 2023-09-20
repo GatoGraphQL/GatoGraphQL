@@ -150,7 +150,7 @@
     },
     "type": "library",
     "description": "Handle HTTP requests",
-    "keywords": ["Gato", "GatoGraphQL", "PRO", "http-requests"],
+    "keywords": ["Gato", "GatoGraphQL", "http-requests"],
     "homepage": "https://github.com/PoPSchema/http-requests",
     "license": "GPL-2.0-or-later",
     "authors": [
