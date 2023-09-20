@@ -27,4 +27,4 @@ The source code is hosted on the [GatoGraphQL monorepo](https://github.com/GatoG
 GNU General Public License v2 (or later). Please see [License File](LICENSE.md) for more information.
 
 [link-author]: https://github.com/leoloso
-[latest-release-url]: https://github.com/leoloso/PRO/releases/latest/download/gatographql-testing-schema.zip
+[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/latest/download/gatographql-testing-schema.zip
