@@ -50,7 +50,7 @@ jobs:
                     echo "[Packages in diff] $(echo $packages_in_diff | tr '\n' ' ')"
                     filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / --filter=/g')"
                     echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php $(echo $filter_arg))" >> $GITHUB_OUTPUT
-                    echo "git_main_branch=$(vendor/bin/monorepo-builder env-var GIT_MAIN_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_main_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
 
