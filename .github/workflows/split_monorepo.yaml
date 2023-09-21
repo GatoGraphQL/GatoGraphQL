@@ -10,7 +10,7 @@ env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-    provide_packages_json:
+    provide_data:
         name: Provide data
         # see json juggling: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-6
         # see https://stackoverflow.com/a/62953566/1348344
@@ -43,7 +43,6 @@ jobs:
             # 2. Extract 4 first layers only (for package path) and get unique entries
             # 3. Add --filter= in between entries
             -   id: output_data
-                name: Calculate matrix for packages
                 run: |
                     quote=\'
                     clean_diff="$(echo "${{ env.GIT_DIFF }}" | sed -e s/$quote//g)"
@@ -51,19 +50,25 @@ jobs:
                     echo "[Packages in diff] $(echo $packages_in_diff | tr '\n' ' ')"
                     filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / --filter=/g')"
                     echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php $(echo $filter_arg))" >> $GITHUB_OUTPUT
+                    echo "git_main_branch=$(vendor/bin/monorepo-builder env-var GIT_MAIN_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
 
         # this step is needed, so the output gets to the next defined job
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
+            git_main_branch: ${{ steps.output_data.outputs.git_main_branch }}
+            git_user_name: ${{ steps.output_data.outputs.git_user_name }}
+            git_user_email: ${{ steps.output_data.outputs.git_user_email }}
 
     split_monorepo:
-        needs: provide_packages_json
-        if: needs.provide_packages_json.outputs.matrix != '[]'
+        needs: provide_data
+        if: needs.provide_data.outputs.matrix != '[]'
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
-                package: ${{fromJson(needs.provide_packages_json.outputs.matrix)}}
+                package: ${{fromJson(needs.provide_data.outputs.matrix)}}
 
         name: Monorepo Split of ${{ matrix.package.name }} (${{ matrix.package.path }})
 
@@ -79,9 +84,9 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
-                    branch: 'master'
+                    branch: "${{ needs.provide_data.outputs.git_main_branch }}"
                     package-directory: '${{ matrix.package.path }}'
                     split-repository-organization: '${{ matrix.package.organization }}'
                     split-repository-name: '${{ matrix.package.name }}'
-                    user-name: "leoloso"
-                    user-email: "leo@getpop.org"
+                    user-name: "${{ needs.provide_data.outputs.git_user_name }}"
+                    user-email: "${{ needs.provide_data.outputs.git_user_email }}"
