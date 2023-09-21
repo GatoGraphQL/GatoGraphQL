@@ -33,14 +33,14 @@ jobs:
             -   id: output_data
                 run: |
                     echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php)" >> $GITHUB_OUTPUT
-                    echo "git_main_branch=$(vendor/bin/monorepo-builder env-var GIT_MAIN_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
 
         # this step is needed, so the output gets to the next defined job
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
-            git_main_branch: ${{ steps.output_data.outputs.git_main_branch }}
+            git_base_branch: ${{ steps.output_data.outputs.git_base_branch }}
             git_user_name: ${{ steps.output_data.outputs.git_user_name }}
             git_user_email: ${{ steps.output_data.outputs.git_user_email }}
 
@@ -72,7 +72,7 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
-                    branch: "${{ needs.provide_data.outputs.git_main_branch }}"
+                    branch: "${{ needs.provide_data.outputs.git_base_branch }}"
                     package-directory: '${{ matrix.package.path }}'
                     split-repository-organization: '${{ matrix.package.organization }}'
                     split-repository-name: '${{ matrix.package.name }}'
