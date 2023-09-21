@@ -92,8 +92,8 @@ final class PluginConfigEntriesJsonProvider
                 $entryConfig['version']
             );
 
-            // If it doens't specify a branch, use "master" by default
-            $entryConfig['dist_repo_branch'] ??= 'master';
+            // If it doens't specify a branch, use "main" by default
+            $entryConfig['dist_repo_branch'] ??= 'main';
 
             // Merge all rector configs as a string
             $entryConfig['additional_rector_configs'] = implode(' ', $entryConfig['additional_rector_configs'] ?? []);

@@ -14,4 +14,8 @@ final class MonorepoMetadata
      * version in the ReleaseWorker when deploying for PROD.
      */
     final public const VERSION = '1.1.0-dev';
+
+    final public const GIT_MAIN_BRANCH = 'master';
+    final public const GIT_USER_NAME = 'leoloso';
+    final public const GIT_USER_EMAIL = 'leo@getpop.org';
 }
