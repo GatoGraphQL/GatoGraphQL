@@ -13,6 +13,8 @@ class EditorHelpers
      *
      * phpcs:disable Generic.PHP.DisallowRequestSuperglobal
      * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable
+     * phpcs:disable WordPress.Security.NonceVerification.Recommended
+     * phpcs:disable WordPress.Security.NonceVerification.Missing
      */
     public function getEditingCustomPostType(): ?string
     {
