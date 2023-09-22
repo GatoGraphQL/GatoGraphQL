@@ -93,7 +93,7 @@ abstract class AbstractViewPersistedQueryEndpointSourceEndpointExecuter extends 
                         PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $graphQLQueryPostAttributesEntry->query,
                         // To render the variables in the block, they must be json_encoded
                         PersistedQueryEndpointGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $graphQLQueryPostAttributesEntry->variables !== []
-                            ? (string)json_encode($graphQLQueryPostAttributesEntry->variables)
+                            ? (string)\wp_json_encode($graphQLQueryPostAttributesEntry->variables)
                             : []
                     ];
                     // Add the new rendering to the output, and a description for each

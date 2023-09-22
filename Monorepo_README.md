@@ -28,11 +28,11 @@ Plugins can extend the GraphQL schema, to fetch their own data.
 
 ## PoP - set of PHP components
 
-<p align="center"><img src="https://assets.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png" width="450" /></p>
+<p align="center"><img src="https://assets-demo.getpop.org/wp-content/themes/getpop/img/pop-logo-horizontal.png" width="450" /></p>
 
 **PoP** is a set of libraries which provide a server-side component model in PHP, and the foundation to implement applications with it.
 
-- Website: [getpop.org](https://getpop.org)
+<!-- - Website: [getpop.org](https://getpop.org) -->
 - Source code:
   - [Backbone](layers/Backbone): Libraries providing the architectural scaffolding.
   - [Engine](layers/Engine): The engine of the application.
@@ -41,31 +41,20 @@ Plugins can extend the GraphQL schema, to fetch their own data.
   - [WPSchema](layers/WPSchema): WordPress-specific schema elements.
   - [API](layers/API): Packages to access the schema data through an API, including REST and GraphQL.
 
-## Site Builder (WIP)
-
-**Site Builder** is a set of PHP components to build a website using PoP's component-model architecture.
-
-- [Source code](layers/SiteBuilder)
-
-Similar to WordPress, it accepts themes.
-
-- [Wassup](layers/Wassup): theme powering sites [MESYM](https://www.mesym.com) and [TPP Debate](https://my.tppdebate.org)
-
 ---
 
 ## Table of Contents
 
 1. [Setting-up the development environment](docs/development-environment.md)
 2. [Running tests](docs/running-tests.md)
-3. [Repo visualization](docs/repo-visualization.md)
-4. [Layer dependency graph](docs/layer-dependency-graph.md)
-5. [Supported PHP features](docs/supported-php-features.md)
-6. [How is the GraphQL server CMS-agnostic](docs/cms-agnosticism.md)
-7. [Why are there so many packages in the repo](docs/splitting-packages.md)
-8. [Why a monorepo](docs/why-monorepo.md)
-9. [How transpiling works](docs/how-transpiling-works.md)
-10. [How scoping works](docs/how-scoping-works.md)
-11. [Installing Gato GraphQL](docs/installing-gatographql-for-wordpress.md)
+3. [Layer dependency graph](docs/layer-dependency-graph.md)
+4. [Supported PHP features](docs/supported-php-features.md)
+5. [How is the GraphQL server CMS-agnostic](docs/cms-agnosticism.md)
+6. [Why are there so many packages in the repo](docs/splitting-packages.md)
+7. [Why a monorepo](docs/why-monorepo.md)
+8. [How transpiling works](docs/how-transpiling-works.md)
+9. [How scoping works](docs/how-scoping-works.md)
+10. [Installing Gato GraphQL](docs/installing-gatographql-for-wordpress.md)
 
 ## Standards
 

@@ -9,7 +9,7 @@ env:
     CHECKOUT_SUBMODULES: ""
 
 jobs:
-    provide_packages_json_tagged:
+    provide_data:
         name: Provide data
         # see json juggling: https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-6
         # see https://stackoverflow.com/a/62953566/1348344
@@ -30,23 +30,27 @@ jobs:
 
             -   uses: "ramsey/composer-install@v2"
 
-            # get package json list
             -   id: output_data
-                name: Calculate matrix for packages
                 run: |
                     echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php)" >> $GITHUB_OUTPUT
+                    echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
 
         # this step is needed, so the output gets to the next defined job
         outputs:
             matrix: ${{ steps.output_data.outputs.matrix }}
+            git_base_branch: ${{ steps.output_data.outputs.git_base_branch }}
+            git_user_name: ${{ steps.output_data.outputs.git_user_name }}
+            git_user_email: ${{ steps.output_data.outputs.git_user_email }}
 
     split_monorepo_tagged:
-        needs: provide_packages_json_tagged
+        needs: provide_data
         runs-on: ubuntu-latest
         strategy:
             fail-fast: false
             matrix:
-                package: ${{fromJson(needs.provide_packages_json_tagged.outputs.matrix)}}
+                package: ${{fromJson(needs.provide_data.outputs.matrix)}}
 
         name: Split with tag - ${{ matrix.package.name }} (${{ matrix.package.path }})
 
@@ -68,10 +72,10 @@ jobs:
                 env:
                     GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
                 with:
-                    branch: 'master'
+                    branch: "${{ needs.provide_data.outputs.git_base_branch }}"
                     package-directory: '${{ matrix.package.path }}'
                     split-repository-organization: '${{ matrix.package.organization }}'
                     split-repository-name: '${{ matrix.package.name }}'
                     tag: ${{ steps.previous_tag.outputs.tag }}
-                    user-name: "leoloso"
-                    user-email: "leo@getpop.org"
+                    user-name: "${{ needs.provide_data.outputs.git_user_name }}"
+                    user-email: "${{ needs.provide_data.outputs.git_user_email }}"

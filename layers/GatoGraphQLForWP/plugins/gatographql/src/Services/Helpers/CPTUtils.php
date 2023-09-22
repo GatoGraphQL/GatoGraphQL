@@ -13,6 +13,6 @@ class CPTUtils
      */
     public function getCustomPostDescription(WP_Post $post): string
     {
-        return strip_tags($post->post_excerpt);
+        return \wp_strip_all_tags($post->post_excerpt);
     }
 }

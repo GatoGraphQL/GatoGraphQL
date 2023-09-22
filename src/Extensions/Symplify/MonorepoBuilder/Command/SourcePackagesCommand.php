@@ -12,16 +12,13 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
-use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
 final class SourcePackagesCommand extends AbstractSymplifyCommand
 {
     public function __construct(
         private SourcePackagesProvider $sourcePackagesProvider,
-        ParameterProvider $parameterProvider,
     ) {
         parent::__construct();
-        $this->unmigratedFailingPackages = $parameterProvider->provideArrayParameter(Option::UNMIGRATED_FAILING_PACKAGES);
     }
 
     protected function configure(): void
@@ -39,12 +36,6 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             null,
             InputOption::VALUE_NONE,
             'Skip the non-PSR-4 packages.'
-        );
-        $this->addOption(
-            Option::SKIP_UNMIGRATED,
-            null,
-            InputOption::VALUE_NONE,
-            'Skip the not-yet-migrated to PSR-4 packages.'
         );
         $this->addOption(
             Option::SUBFOLDER,
@@ -67,9 +58,7 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
         $asJSON = (bool) $input->getOption(Option::JSON);
         $psr4Only = (bool) $input->getOption(Option::PSR4_ONLY);
 
-        // If --skip-unmigrated, fetch the list of failing unmigrated packages
-        $skipUnmigrated = (bool) $input->getOption(Option::SKIP_UNMIGRATED);
-        $packagesToSkip = $skipUnmigrated ? $this->unmigratedFailingPackages : [];
+        $packagesToSkip = [];
 
         /** @var string[] $subfolders */
         $subfolders = $input->getOption(Option::SUBFOLDER);

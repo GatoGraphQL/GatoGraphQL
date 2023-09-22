@@ -7,7 +7,7 @@
         {
             "name": "Leonardo Losoviz",
             "email": "leo@getpop.org",
-            "homepage": "https://getpop.org"
+            "homepage": "https://gatographql.com"
         }
     ],
     "minimum-stability": "dev",
@@ -38,7 +38,6 @@
         "pop-cms-schema/user-roles-wp": "dev-master",
         "pop-cms-schema/user-state-mutations-wp": "dev-master",
         "pop-cms-schema/user-state-wp": "dev-master",
-        "pop-wp-schema/block-metadata-for-wp": "dev-master",
         "pop-wp-schema/blocks": "dev-master",
         "pop-wp-schema/commentmeta": "dev-master",
         "pop-wp-schema/custompostmeta": "dev-master",

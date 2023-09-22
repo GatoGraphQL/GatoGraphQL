@@ -139,8 +139,6 @@ jobs:
             # Test everything, including Composer dependencies which (supposedly)
             # do not require downgrading
             # Use a PHP Linter. If PHP is not valid, it will throw an error
-            # Exclude layers/Legacy/ which is not part of any project,
-            # and DOES contain PHP 8.1 (it's not being downgraded)
             -   name: Run PHP Parallel Lint on PHP 7.2
                 run: php-parallel-lint/parallel-lint layers/ vendor/ --exclude ${{ needs.provide_data.outputs.skip_downgrade_test_paths }} --exclude ${{ needs.provide_data.outputs.exclude_package_tests }}
 

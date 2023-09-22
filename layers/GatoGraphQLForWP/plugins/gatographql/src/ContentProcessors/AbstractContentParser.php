@@ -173,6 +173,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 ));
             }
         }
+        // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
         $fileContent = file_get_contents($file);
         if ($fileContent === false) {
             throw new ContentNotExistsException(sprintf(

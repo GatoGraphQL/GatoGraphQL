@@ -57,10 +57,14 @@ jobs:
                     echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json --config=config/monorepo-builder/plugin-config-entries-json.php)" >> $GITHUB_OUTPUT
                     echo "retention_days_for_generated_plugins=$(vendor/bin/monorepo-builder env-var RETENTION_DAYS_FOR_GENERATED_PLUGINS --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "local_package_owners=$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
             retention_days: ${{ steps.output_data.outputs.retention_days_for_generated_plugins }}
             local_package_owners: ${{ steps.output_data.outputs.local_package_owners }}
+            git_user_name: ${{ steps.output_data.outputs.git_user_name }}
+            git_user_email: ${{ steps.output_data.outputs.git_user_email }}
 
     # Build plugin => downgrade => (maybe) scope => (maybe) upload to release and deploy to dist repo
     process:
@@ -202,7 +206,7 @@ jobs:
     ###########################################################################
 
             -   name: Create plugin as zip
-                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* vendor/**/phpstan.neon vendor/**/phpstan.neon.dist vendor/**/composer.json vendor/**/README.md vendor/**/LICENSE.md vendor/**/CHANGELOG.md tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
+                run: zip -X -r $GITHUB_WORKSPACE/build/${{ matrix.pluginConfig.zip_file }}.zip . -x *.git* node_modules/\* .* "*/\.*" *.md phpstan.neon *.dist composer.* vendor/**/phpstan.neon vendor/**/phpstan.neon.dist vendor/**/phpunit.xml.dist vendor/**/composer.json vendor/**/README.md vendor/**/LICENSE.md vendor/**/CHANGELOG.md tests/\* **/tests/\* ${{ matrix.pluginConfig.exclude_files }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Uncompress plugin zip contents into new folder
@@ -253,7 +257,7 @@ jobs:
                     split-repository-organization: ${{ matrix.pluginConfig.dist_repo_organization }}
                     split-repository-name: ${{ matrix.pluginConfig.dist_repo_name }}
                     tag: ${{ steps.previous_tag.outputs.tag }}
-                    user-name: "leoloso"
-                    user-email: "leo@getpop.org"
+                    user-name: "${{ needs.provide_data.outputs.git_user_name }}"
+                    user-email: "${{ needs.provide_data.outputs.git_user_email }}"
                 if: github.event_name == 'release'
 

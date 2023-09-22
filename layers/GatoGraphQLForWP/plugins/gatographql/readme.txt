@@ -3,7 +3,7 @@ Contributors: gatographql, leoloso
 Tags: graphql, automation, content sync, headless, site migrations, rest api, endpoint, wp-cli, notifications, cloud, translation, gutenberg
 Requires at least: 5.4
 Tested up to: 6.3
-Stable tag: 1.0.0
+Stable tag: 1.0.7
 Requires PHP: 7.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -12,7 +12,7 @@ Interact with all your data in WordPress.
 
 == Description ==
 
-Gato GraphQL is a **tool for interacting with data in your WordPress site**. You can think of it as a Swiss Army Knife for dealing with data, as it allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the [GraphQL language](https://graphql.org/).
+Gato GraphQL is a **tool for interacting with data in your WordPress site**. You can think of it as a Swiss Army knife for dealing with data, as it allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the [GraphQL language](https://graphql.org/).
 
 With Gato GraphQL, you can:
 
@@ -57,7 +57,7 @@ Extensions have been bundled together, to satisfy several common use cases:
 
 Browse all bundles and extensions on the [Gato GraphQL website](https://gatographql.com/extensions).
 
-Do you need an integration with some WordPress plugin? [Let us know](https://github.com/GatoGraphQL/GatoGraphQLExtensions/discussions).
+Do you need an integration with some WordPress plugin? [Let us know](https://github.com/GatoGraphQL/ExtensionsPlanningAndTracking/discussions).
 
 == Frequently Asked Questions ==
 
