@@ -15,6 +15,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\ReleaseWorkersDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\SkipDowngradeTestPathsDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option as CustomOption;
+use PoP\PoP\Monorepo\MonorepoMetadata;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ServicesConfigurator;
 use Symplify\MonorepoBuilder\ValueObject\Option;
@@ -31,6 +32,8 @@ class ContainerConfigurationService
     public function configureContainer(): void
     {
         $parameters = $this->containerConfigurator->parameters();
+
+        $parameters->set(Option::DEFAULT_BRANCH_NAME, MonorepoMetadata::GIT_BASE_BRANCH);
 
         /**
          * Packages handled by the monorepo
