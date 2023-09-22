@@ -6,11 +6,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.1.0 - DATE
 
+
+
+## 1.0.7 - 22/09/2023
+
 ### Fixed
 
 - Constants in `wp-config.php` must start with `GATOGRAPHQL_` (previously was `GATO_GRAPHQL_`)
 
-## 1.0.0 - 07/09/23
+## 1.0.0/1.0.6 - 07/09/23
 
 ### Improvements
 
