@@ -32,7 +32,7 @@ npm run start
 yarn start
 ```
 
-Your browser will automatically open to localhost:3000 with the explorer open.
+Your browser will automatically open to http://localhost:3000 with the explorer open.
 
 ## Live demo
 
