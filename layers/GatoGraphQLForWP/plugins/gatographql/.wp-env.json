@@ -7,6 +7,6 @@
 	"testsPort": 8089,
 	"config": {
         "WP_DEBUG_DISPLAY": true,
-        "GATO_GRAPHQL_APPLICATION_ENVIRONMENT": "development"
+        "GATOGRAPHQL_APPLICATION_ENVIRONMENT": "development"
 	}
 }

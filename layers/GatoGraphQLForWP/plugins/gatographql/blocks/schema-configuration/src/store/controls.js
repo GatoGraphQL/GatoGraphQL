@@ -9,7 +9,7 @@ import { fetchGraphQLQuery } from '@gatographql/api-fetch';
 const controls = {
 	RECEIVE_SCHEMA_CONFIGURATIONS( action ) {
 		return fetchGraphQLQuery(
-			GATO_GRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT,
+			GATOGRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT,
 			action.query
 		);
 	},

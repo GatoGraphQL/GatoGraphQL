@@ -16,7 +16,7 @@ https://mysite.com/wp-admin/edit.php?page=gatographql&action=execute_query&endpo
 
 This endpoint has a pre-defined configuration (i.e. it does not have the user preferences from the plugin applied to it), so its behavior is consistent.
 
-Conveniently, we can also point to JavaScript global variable `GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT`, which contains the endpoint URL.
+Conveniently, we can also point to JavaScript global variable `GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT`, which contains the endpoint URL.
 
 <div class="doc-highlight" markdown=1>
 
@@ -56,7 +56,7 @@ This JavaScript code submits a query with variables to the GraphQL server, and p
   };
 
   const response = await fetch(
-    GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT,
+    GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT,
     {
       method: 'post',
       body: JSON.stringify(data),
@@ -147,7 +147,7 @@ async function main() {
     }
   `
 
-  const data = await request(GATO_GRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT, query)
+  const data = await request(GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT, query)
   console.log(data)
 }
 ```
