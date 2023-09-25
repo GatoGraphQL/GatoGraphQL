@@ -35,8 +35,10 @@ jobs:
             -   id: output_data
                 run: |
                     echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json --config=config/monorepo-builder/plugin-config-entries-json.php --scoped-only)" >> $GITHUB_OUTPUT
+                    echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
+            git_base_branch: ${{ steps.output_data.outputs.git_base_branch }}
 
     main:
         needs: provide_data
@@ -69,7 +71,7 @@ jobs:
             # https://github.com/symplify/symplify/issues/2773
             -   name: Localize package paths
                 run: |
-                    vendor/bin/monorepo-builder custom-bump-interdependency --config=config/monorepo-builder/custom-bump-interdependency.php "dev-master"
+                    vendor/bin/monorepo-builder custom-bump-interdependency --config=config/monorepo-builder/custom-bump-interdependency.php "dev-${{ needs.provide_data.outputs.git_base_branch }}"
                     vendor/bin/monorepo-builder localize-composer-paths --config=config/monorepo-builder/localize-composer-paths.php ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
             -   name: Install release dependencies for PROD
