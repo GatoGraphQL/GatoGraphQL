@@ -57,12 +57,14 @@ jobs:
                     echo "plugin_config_entries=$(vendor/bin/monorepo-builder plugin-config-entries-json --config=config/monorepo-builder/plugin-config-entries-json.php)" >> $GITHUB_OUTPUT
                     echo "retention_days_for_generated_plugins=$(vendor/bin/monorepo-builder env-var RETENTION_DAYS_FOR_GENERATED_PLUGINS --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "local_package_owners=$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)" >> $GITHUB_OUTPUT
+                    echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
         outputs:
             plugin_config_entries: ${{ steps.output_data.outputs.plugin_config_entries }}
             retention_days: ${{ steps.output_data.outputs.retention_days_for_generated_plugins }}
             local_package_owners: ${{ steps.output_data.outputs.local_package_owners }}
+            git_base_branch: ${{ steps.output_data.outputs.git_base_branch }}
             git_user_name: ${{ steps.output_data.outputs.git_user_name }}
             git_user_email: ${{ steps.output_data.outputs.git_user_email }}
 
@@ -108,7 +110,7 @@ jobs:
             # https://github.com/symplify/symplify/issues/2773
             -   name: Localize package paths
                 run: |
-                    vendor/bin/monorepo-builder custom-bump-interdependency --config=config/monorepo-builder/custom-bump-interdependency.php "dev-master"
+                    vendor/bin/monorepo-builder custom-bump-interdependency --config=config/monorepo-builder/custom-bump-interdependency.php "dev-${{ needs.provide_data.outputs.git_base_branch }}"
                     vendor/bin/monorepo-builder localize-composer-paths --config=config/monorepo-builder/localize-composer-paths.php ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
             ###########################################################################

@@ -44,7 +44,7 @@ final class CustomDependencyUpdater
         string $version,
         bool $updateMinimumStabilityIfDev = true
     ): void {
-        // If the version is "dev-master" or "dev-main", make sure to add the minimum-stability entry
+        // If the version is for DEV (i.e. "dev-master" or "dev-main"), make sure to add the minimum-stability entry
         $isDevVersion = str_starts_with($version, 'dev-');
 
         foreach ($smartFileInfos as $packageComposerFileInfo) {
@@ -54,7 +54,6 @@ final class CustomDependencyUpdater
             $json = $this->processSection($json, $packageReplacements, $version, ComposerJsonSection::REQUIRE_DEV);
             $json = $this->processSection($json, $packageReplacements, $version, ComposerJsonSection::REPLACE);
 
-            // If the version is "dev-master" or "dev-main", make sure to add the minimum-stability entry
             if ($updateMinimumStabilityIfDev && $isDevVersion) {
                 $json[ComposerJsonSection::MINIMUM_STABILITY] = 'dev';
                 $json[ComposerJsonSection::PREFER_STABLE] = true;
