@@ -210,7 +210,5 @@
         "getpop/engine": "self.version",
         "getpop/loosecontracts": "self.version",
         "getpop/root": "self.version"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

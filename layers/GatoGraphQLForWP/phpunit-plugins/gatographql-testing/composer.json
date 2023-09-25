@@ -183,7 +183,5 @@
         "pop-wp-schema/pages": "<1.0.7",
         "pop-wp-schema/custompostmeta": "<1.0.7",
         "pop-wp-schema/media": "<1.0.7"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

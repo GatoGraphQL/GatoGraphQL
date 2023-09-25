@@ -648,7 +648,5 @@
         "remove-unused-imports": "Remove unused `use` imports",
         "build-js": "Build all JS packages, blocks and editor scripts from Gato GraphQL",
         "install-deps-build-js": "Build all JS packages, blocks and editor scripts from Gato GraphQL, installing all dependencies from npm"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

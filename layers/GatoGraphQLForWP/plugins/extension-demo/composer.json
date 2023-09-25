@@ -204,7 +204,5 @@
         "getpop/root": "self.version",
         "pop-cms-schema/schema-commons": "self.version",
         "pop-schema/schema-commons": "self.version"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }

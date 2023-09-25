@@ -222,7 +222,5 @@
             "johnpbloch/wordpress-core-installer": true,
             "oomphinc/composer-installers-extender": true
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
