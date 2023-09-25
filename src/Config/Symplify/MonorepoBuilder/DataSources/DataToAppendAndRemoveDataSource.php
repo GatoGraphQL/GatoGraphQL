@@ -60,10 +60,6 @@ class DataToAppendAndRemoveDataSource
     public function getDataToRemove(): array
     {
         return [
-            'require-dev' => [
-                // 'phpunit/phpunit' => '*',
-                'wpackagist-plugin/block-metadata' => '*',
-            ],
             // 'minimum-stability' => 'dev',
             // 'prefer-stable' => true,
         ];
