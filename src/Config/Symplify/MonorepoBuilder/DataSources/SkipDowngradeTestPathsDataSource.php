@@ -40,7 +40,14 @@ class SkipDowngradeTestPathsDataSource
             // This library is used for testing the source; it is added under "require" so it must be excluded
             'vendor/fakerphp/faker/',
             'vendor/michelf/php-markdown/test/',
-            'vendor/nikic/fast-route/test/',
+            /**
+             * Gato GraphQL plugin: This code is commented out as it is
+             * not needed anymore, because package `brain/cortex`
+             * is not loaded
+             *
+             * @see layers/Engine/packages/root-wp/src/Module.php
+             */            
+            // 'vendor/nikic/fast-route/test/',
             'vendor/psr/log/Psr/Log/Test/',
             'vendor/symfony/cache/DataCollector/CacheDataCollector.php',
             'vendor/symfony/cache/DoctrineProvider.php',

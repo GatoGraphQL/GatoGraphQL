@@ -61,7 +61,14 @@ return [
                 // Exclude libraries
                 '#symfony/deprecation-contracts/#',
                 // Exclude tests from libraries
-                '#nikic/fast-route/test/#',
+                /**
+                 * Gato GraphQL plugin: This code is commented out as it is
+                 * not needed anymore, because package `brain/cortex`
+                 * is not loaded
+                 *
+                 * @see layers/Engine/packages/root-wp/src/Module.php
+                 */
+                // '#nikic/fast-route/test/#',
                 '#psr/log/Psr/Log/Test/#',
                 '#symfony/dom-crawler/Test/#',
                 '#symfony/http-foundation/Test/#',
@@ -105,28 +112,27 @@ return [
     'patchers' => [
         function (string $filePath, string $prefix, string $content): string {
             /**
-             * File vendor/nikic/fast-route/src/bootstrap.php has this code:
-             *
-             * if (\strpos($class, 'FastRoute\\') === 0) {
-             *   $name = \substr($class, \strlen('FastRoute'));
-             *
-             * Fix it
-             */
-            if ($filePath === convertRelativeToFullPath('vendor/nikic/fast-route/src/bootstrap.php')) {
-                return str_replace(
-                    ["'FastRoute\\\\'", "'FastRoute'"],
-                    [sprintf("'%s\\\\FastRoute\\\\'", $prefix), sprintf("'%s\\\\FastRoute'", $prefix)],
-                    $content
-                );
-            }
-
-            /**
              * Gato GraphQL plugin: This code is commented out as it is
              * not needed anymore, because package `brain/cortex`
              * is not loaded
              *
              * @see layers/Engine/packages/root-wp/src/Module.php
-             */
+             */            
+            // /**
+            //  * File vendor/nikic/fast-route/src/bootstrap.php has this code:
+            //  *
+            //  * if (\strpos($class, 'FastRoute\\') === 0) {
+            //  *   $name = \substr($class, \strlen('FastRoute'));
+            //  *
+            //  * Fix it
+            //  */
+            // if ($filePath === convertRelativeToFullPath('vendor/nikic/fast-route/src/bootstrap.php')) {
+            //     return str_replace(
+            //         ["'FastRoute\\\\'", "'FastRoute'"],
+            //         [sprintf("'%s\\\\FastRoute\\\\'", $prefix), sprintf("'%s\\\\FastRoute'", $prefix)],
+            //         $content
+            //     );
+            // }
             // /**
             //  * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
             //  * Avoid it!
