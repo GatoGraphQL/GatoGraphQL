@@ -17,7 +17,7 @@ class BumpVersionForDevInMonorepoMetadataFileReleaseWorker extends AbstractConve
 
         // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
         $replacements = [
-            "/(\s+)const(\s+)VERSION(\s+)?=(\s+)?'[a-z0-9.-]+'(\s+)?;/" => " const VERSION = '" . $nextDevVersion . "';",
+            "/(\s+)const(\s+)VERSION(\s+)?=(\s+)?['\"][a-z0-9.-]+['\"](\s+)?;/" => " const VERSION = '" . $nextDevVersion . "';",
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles(
             [
