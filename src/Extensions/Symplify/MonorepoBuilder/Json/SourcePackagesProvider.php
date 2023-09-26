@@ -31,7 +31,7 @@ final class SourcePackagesProvider
             $packages = array_values(array_filter(
                 $packages,
                 function (CustomPackage $package): bool {
-                    return $package->hasTests();
+                    return $package->hasSrc();
                 }
             ));
         }

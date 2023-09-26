@@ -72,7 +72,11 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             $sourcePackagePaths = [];
             foreach ($sourcePackages as $sourcePackage) {
                 foreach ($subfolders as $subfolder) {
-                    $sourcePackagePaths[] = $sourcePackage . DIRECTORY_SEPARATOR . $subfolder;
+                    $sourcePackageSubfolder = $sourcePackage . DIRECTORY_SEPARATOR . $subfolder;
+                    if (!file_exists($sourcePackageSubfolder)) {
+                        continue;
+                    }
+                    $sourcePackagePaths[] = $sourcePackageSubfolder;
                 }
             }
         } else {
