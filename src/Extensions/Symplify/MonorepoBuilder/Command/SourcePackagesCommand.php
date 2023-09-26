@@ -56,7 +56,6 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
-        $psr4Only = (bool) $input->getOption(Option::PSR4_ONLY);
 
         $packagesToSkip = [];
 
@@ -65,7 +64,7 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
         /** @var string[] $fileFilter */
         $fileFilter = $input->getOption(Option::FILTER);
 
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($psr4Only, $packagesToSkip, $fileFilter);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($packagesToSkip, $fileFilter);
 
         // Point to some subfolder?
         if ($subfolders !== []) {

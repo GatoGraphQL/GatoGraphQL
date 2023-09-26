@@ -22,19 +22,10 @@ final class SourcePackagesProvider
      * @return string[]
      */
     public function provideSourcePackages(
-        bool $psr4Only = false,
         array $packagesToSkip = [],
         array $fileListFilter = []
     ): array {
         $packages = $this->customPackageProvider->provide();
-        if ($psr4Only) {
-            $packages = array_values(array_filter(
-                $packages,
-                function (CustomPackage $package): bool {
-                    return $package->hasTests();
-                }
-            ));
-        }
         // Operate with package paths from now on
         $packages = array_map(
             function (CustomPackage $package): string {
