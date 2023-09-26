@@ -55,7 +55,7 @@ abstract class AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWo
         return new PluginDataSource(dirname(__DIR__, 6));
     }
 
-    protected function getGitHubUserContentProjectURL(): string
+    protected function getGitHubRepoDocsRootURL(): string
     {
         return MonorepoStaticHelpers::getGitHubRepoDocsRootURL();
     }
