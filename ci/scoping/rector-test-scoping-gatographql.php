@@ -18,10 +18,11 @@ return static function (RectorConfig $rectorConfig): void {
 
     $monorepoDir = dirname(__DIR__, 2);
     $pluginDir = $monorepoDir . '/layers/GatoGraphQLForWP/plugins/gatographql';
+    $autoloadFile = $pluginDir . '/vendor/scoper-autoload.php';
 
     // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:
     $rectorConfig->bootstrapFiles([
-        $pluginDir . '/vendor/scoper-autoload.php',
+        $autoloadFile,
         $pluginDir . '/vendor/jrfnl/php-cast-to-type/cast-to-type.php',
         $pluginDir . '/vendor/jrfnl/php-cast-to-type/class.cast-to-type.php',
     ]);
@@ -34,6 +35,9 @@ return static function (RectorConfig $rectorConfig): void {
     // files to skip
     $rectorConfig->skip([
         '*/tests/*',
+
+        // Starting from Rector v0.18.2, processing this file might throw errors, then skip it
+        $autoloadFile,
 
         // The Gato GraphQL plugin does not require the REST package
         // So ignore all code depending on it, or it throws error:
