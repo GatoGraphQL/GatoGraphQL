@@ -46,7 +46,7 @@ class SkipDowngradeTestPathsDataSource
              * is not loaded
              *
              * @see layers/Engine/packages/root-wp/src/Module.php
-             */            
+             */
             // 'vendor/nikic/fast-route/test/',
             'vendor/psr/log/Psr/Log/Test/',
             'vendor/symfony/cache/DataCollector/CacheDataCollector.php',
