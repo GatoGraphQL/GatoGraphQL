@@ -9,6 +9,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\BlockCompiledMarkdownFileFinder;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSystem;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
+use PoP\PoP\Monorepo\MonorepoStaticHelpers;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
 use Symplify\MonorepoBuilder\ValueObject\Option;
@@ -52,5 +53,10 @@ abstract class AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWo
     protected function getPluginDataSource(): PluginDataSource
     {
         return new PluginDataSource(dirname(__DIR__, 6));
+    }
+
+    protected function getGitHubUserContentProjectURL(): string
+    {
+        return MonorepoStaticHelpers::getGitHubRepoDocsRootURL();
     }
 }
