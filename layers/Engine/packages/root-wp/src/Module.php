@@ -79,6 +79,27 @@ class Module extends AbstractModule
             return;
         }
 
+        /**
+         * Gato GraphQL plugin:
+         * This code is never reached, because `enablePassingRoutingStateViaRequest`
+         * is false. To optimize the plugin, library `brain/cortex` has been removed
+         * from `composer.json` (that's why this class below is not found).
+         *
+         * Cortex is needed for the SiteBuilder or REST API module, as these
+         * require a routing system.
+         *
+         * @see https://github.com/GatoGraphQL/SiteBuilder
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/API/packages/api-rest
+         *
+         * To use them, the following package must be added to the `require`
+         * section in `composer.json`:
+         *
+         *   ```
+         *   "require": {
+         *     "brain/cortex": "1.0.0-alpha.9"
+         *   }
+         *   ```
+         */
         Cortex::boot();
     }
 }

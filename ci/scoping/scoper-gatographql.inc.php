@@ -69,10 +69,17 @@ return [
                 '#michelf/php-markdown/test/#',
             ])
             ->in(convertRelativeToFullPath('vendor')),
-        Finder::create()->append([
-            convertRelativeToFullPath('vendor/getpop/root-wp/src/Module.php'),
-            convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
-        ])
+        /**
+         * Gato GraphQL plugin: This code is commented out as it is
+         * not needed anymore, because package `brain/cortex`
+         * is not loaded
+         *
+         * @see layers/Engine/packages/root-wp/src/Module.php
+         */
+        // Finder::create()->append([
+        //     convertRelativeToFullPath('vendor/getpop/root-wp/src/Module.php'),
+        //     convertRelativeToFullPath('vendor/getpop/root-wp/src/Hooks/SetupCortexRoutingHookSet.php'),
+        // ])
     ],
     'exclude-namespaces' => [
         // Own namespaces
@@ -112,17 +119,25 @@ return [
                     $content
                 );
             }
+
             /**
-             * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
-             * Avoid it!
+             * Gato GraphQL plugin: This code is commented out as it is
+             * not needed anymore, because package `brain/cortex`
+             * is not loaded
+             *
+             * @see layers/Engine/packages/root-wp/src/Module.php
              */
-            if (str_starts_with($filePath, convertRelativeToFullPath('vendor/brain/cortex/'))) {
-                return str_replace(
-                    sprintf("\\%s\\WP", $prefix),
-                    "\\WP",
-                    $content
-                );
-            }
+            // /**
+            //  * Brain/Cortex is prefixing classes \WP and \WP_Rewrite
+            //  * Avoid it!
+            //  */
+            // if (str_starts_with($filePath, convertRelativeToFullPath('vendor/brain/cortex/'))) {
+            //     return str_replace(
+            //         sprintf("\\%s\\WP", $prefix),
+            //         "\\WP",
+            //         $content
+            //     );
+            // }
 
             $fileFolder = dirname($filePath);
             /**
