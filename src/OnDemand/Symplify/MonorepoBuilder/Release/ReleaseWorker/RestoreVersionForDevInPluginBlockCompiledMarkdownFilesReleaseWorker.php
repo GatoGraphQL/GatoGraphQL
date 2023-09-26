@@ -17,7 +17,7 @@ class RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker extend
         $gitHubRepoDocsRootURL = MonorepoStaticHelpers::getGitHubRepoDocsRootURL();
         $replacements = [
             // Change the image src (pointing to GitHub) from the tag back to master
-            '#' . preg_quote($gitHubRepoDocsRootURL . '/' . $version->getVersionString() . '/') . '#' => $gitHubRepoDocsRootURL . '/master/',
+            '#' . preg_quote($gitHubRepoDocsRootURL . '/' . $version->getVersionString() . '/') . '#' => $gitHubRepoDocsRootURL . '/' . $this->branchName . '/',
         ];
         $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginBlockCompiledMarkdownFiles(), $replacements);
     }

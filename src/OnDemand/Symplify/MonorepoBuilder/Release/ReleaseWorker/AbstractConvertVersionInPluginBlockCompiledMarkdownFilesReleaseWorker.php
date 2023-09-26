@@ -11,19 +11,24 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile\FileContentReplacerSys
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\VersionUtils;
 use Symplify\MonorepoBuilder\Release\Contract\ReleaseWorker\ReleaseWorkerInterface;
 use Symplify\MonorepoBuilder\Utils\VersionUtils as UpstreamVersionUtils;
+use Symplify\MonorepoBuilder\ValueObject\Option;
+use Symplify\PackageBuilder\Parameter\ParameterProvider;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 abstract class AbstractConvertVersionInPluginBlockCompiledMarkdownFilesReleaseWorker implements ReleaseWorkerInterface
 {
     /** @var string[]|null */
     private ?array $pluginBlockCompiledMarkdownFiles = null;
+    protected string $branchName;
 
     public function __construct(
         protected FileContentReplacerSystem $fileContentReplacerSystem,
         protected VersionUtils $versionUtils,
         protected UpstreamVersionUtils $upstreamVersionUtils,
         protected BlockCompiledMarkdownFileFinder $blockCompiledMarkdownFileFinder,
+        ParameterProvider $parameterProvider
     ) {
+        $this->branchName = $parameterProvider->provideStringParameter(Option::DEFAULT_BRANCH_NAME);
     }
 
     /**
