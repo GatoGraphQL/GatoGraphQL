@@ -41,7 +41,7 @@ class SetupCortexRoutingHookSet extends AbstractHookSet
             return;
         }
 
-        \add_action(
+        App::addAction(
             'cortex.routes',
             $this->setupCortex(...),
             1
