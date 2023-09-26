@@ -49,7 +49,14 @@ return static function (RectorConfig $rectorConfig): void {
         // $pluginDir . '/vendor/getpop/migrate-*',
         // $pluginDir . '/vendor/pop-schema/migrate-*',
         // Exclude tests from libraries
-        $pluginDir . '/vendor/nikic/fast-route/test/*',
+        /**
+         * Gato GraphQL plugin: This code is commented out as it is
+         * not needed anymore, because package `brain/cortex`
+         * is not loaded
+         *
+         * @see layers/Engine/packages/root-wp/src/Module.php
+         */
+        // $pluginDir . '/vendor/nikic/fast-route/test/*',
         $pluginDir . '/vendor/psr/log/Psr/Log/Test/*',
         $pluginDir . '/vendor/symfony/dom-crawler/Test/*',
         $pluginDir . '/vendor/symfony/http-foundation/Test/*',
