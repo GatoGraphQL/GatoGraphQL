@@ -41,6 +41,11 @@ class SetupCortexRoutingHookSet extends AbstractHookSet
             return;
         }
 
+        /**
+         * Gato GraphQL plugin: This code is never reached!
+         *
+         * @see layers/Engine/packages/root-wp/src/Module.php
+         */
         App::addAction(
             'cortex.routes',
             $this->setupCortex(...),
