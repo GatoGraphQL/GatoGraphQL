@@ -76,7 +76,7 @@
             "PoPAPI\\API\\": "layers/API/packages/api/src",
             "PoPAPI\\GraphQLAPI\\": "layers/API/packages/api-graphql/src",
             "PoPAPI\\RESTAPI\\": "layers/API/packages/api-rest/src",
-            "PoPBackbone\\PHPHooks\\": "layers/Backbone/packages/php-hooks/src",
+            "PoPBackbone\\PHPHooks\\": "layers/Backbone/packages/php-hooks/upstream-src",
             "PoPBackbone\\WPDataParser\\": "layers/Backbone/packages/wp-data-parser/src",
             "PoPCMSSchema\\CategoriesWP\\": "layers/CMSSchema/packages/categories-wp/src",
             "PoPCMSSchema\\Categories\\": "layers/CMSSchema/packages/categories/src",
