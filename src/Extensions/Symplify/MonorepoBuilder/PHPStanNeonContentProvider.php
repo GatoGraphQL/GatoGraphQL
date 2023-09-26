@@ -36,7 +36,7 @@ final class PHPStanNeonContentProvider
      */
     public function provideContent(array $packagesToSkip = [], string|int $level = 'max'): string
     {
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages(true, $packagesToSkip);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($packagesToSkip);
 
         $phpStanNeon = [
             self::PARAMETERS => [
