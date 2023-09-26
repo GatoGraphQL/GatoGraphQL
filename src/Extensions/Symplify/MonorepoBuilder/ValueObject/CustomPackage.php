@@ -35,6 +35,12 @@ final class CustomPackage
         return file_exists($expectedTestsDirectory);
     }
 
+    public function hasSrc(): bool
+    {
+        $expectedSrcDirectory = $this->rootDirectoryFileInfo->getRealPath() . DIRECTORY_SEPARATOR . 'src';
+        return file_exists($expectedSrcDirectory);
+    }
+
     public function getShortName(): string
     {
         return $this->shortName;
