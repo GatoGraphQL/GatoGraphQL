@@ -18,4 +18,7 @@ final class MonorepoMetadata
     final public const GIT_BASE_BRANCH = 'master';
     final public const GIT_USER_NAME = 'leoloso';
     final public const GIT_USER_EMAIL = 'leo@getpop.org';
+
+    final public const GITHUB_REPO_OWNER = 'GatoGraphQL';
+    final public const GITHUB_REPO_NAME = 'GatoGraphQL';
 }
