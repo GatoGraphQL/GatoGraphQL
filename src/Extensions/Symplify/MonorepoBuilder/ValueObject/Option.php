@@ -41,10 +41,6 @@ final class Option
     /**
      * @var string
      */
-    public final const PSR4_ONLY = 'psr4-only';
-    /**
-     * @var string
-     */
     public final const LEVEL = 'level';
     /**
      * @var string

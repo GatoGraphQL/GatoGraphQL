@@ -32,12 +32,6 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Print with encoded JSON format.'
         );
         $this->addOption(
-            Option::PSR4_ONLY,
-            null,
-            InputOption::VALUE_NONE,
-            'Skip the non-PSR-4 packages.'
-        );
-        $this->addOption(
             Option::SUBFOLDER,
             null,
             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
