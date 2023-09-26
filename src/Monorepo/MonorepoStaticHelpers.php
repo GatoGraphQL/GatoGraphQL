@@ -8,6 +8,10 @@ class MonorepoStaticHelpers
 {
     public static function getGitHubRepoDocsRootURL(): string
     {
-        return 'https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL';
+        return sprintf(
+            'https://raw.githubusercontent.com/%s/%s',
+            MonorepoMetadata::GITHUB_REPO_OWNER,
+            MonorepoMetadata::GITHUB_REPO_NAME
+        );
     }
 }
