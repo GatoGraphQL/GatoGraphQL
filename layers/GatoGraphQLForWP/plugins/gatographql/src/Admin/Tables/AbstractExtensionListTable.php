@@ -41,17 +41,17 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
      */
     public function prepare_items()
     {
-        add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
-        add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
-        add_filter('plugins_api', $this->overridePluginsAPI(...));
-        add_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
-        add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX, 2);
+        \add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
+        \add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        \add_filter('plugins_api', $this->overridePluginsAPI(...));
+        \add_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
+        \add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX, 2);
         parent::prepare_items();
-        remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX);
-        remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
-        remove_filter('plugins_api', $this->overridePluginsAPI(...));
-        remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
-        remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
+        \remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), PHP_INT_MAX);
+        \remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
+        \remove_filter('plugins_api', $this->overridePluginsAPI(...));
+        \remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        \remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
     }
 
     /**

@@ -54,12 +54,12 @@ trait DocMenuPageTrait
         }
 
         // Enable "/" in the filename
-        add_filter(
+        \add_filter(
             'sanitize_file_name_chars',
             $this->enableSpecialCharsForSanitization(...)
         );
         $doc = \sanitize_file_name($filename);
-        remove_filter(
+        \remove_filter(
             'sanitize_file_name_chars',
             $this->enableSpecialCharsForSanitization(...)
         );

@@ -192,17 +192,17 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             );
         }
         // Add the custom columns to the post type
-        add_filter(
+        \add_filter(
             "manage_{$customPostType}_posts_columns",
             $this->setTableColumns(...)
         );
-        add_action(
+        \add_action(
             "manage_{$customPostType}_posts_custom_column",
             $this->resolveCustomColumn(...),
             10,
             2
         );
-        add_action(
+        \add_action(
             "restrict_manage_posts",
             $this->restrictManageCustomPosts(...),
             10,
