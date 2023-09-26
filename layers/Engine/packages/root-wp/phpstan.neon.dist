@@ -2,3 +2,20 @@ parameters:
 	level: 8
 	paths:
 		- src
+	ignoreErrors:
+		- 
+			message: '#Parameter \$routes of method PoP\\RootWP\\Hooks\\SetupCortexRoutingHookSet::setupCortex\(\) has invalid type Brain\\Cortex\\Route\\RouteCollectionInterface\.#'
+			path: src/Hooks/SetupCortexRoutingHookSet.php
+			count: 2
+		- 
+			message: '#Parameter \$routes of method PoP\\RootWP\\Hooks\\SetupCortexRoutingHookSet::setupCortex\(\) has invalid type Brain\\Cortex\\Route\\RouteInterface\.#'
+			path: src/Hooks/SetupCortexRoutingHookSet.php
+		- 
+			message: '#Call to method addRoute\(\) on an unknown class Brain\\Cortex\\Route\\RouteCollectionInterface\.#'
+			path: src/Hooks/SetupCortexRoutingHookSet.php
+		- 
+			message: '#Instantiated class Brain\\Cortex\\Route\\QueryRoute not found\.#'
+			path: src/Hooks/SetupCortexRoutingHookSet.php
+		- 
+			message: '#Call to static method boot\(\) on an unknown class Brain\\Cortex\.#'
+			path: src/Module.php
