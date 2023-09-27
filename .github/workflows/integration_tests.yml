@@ -1,9 +1,9 @@
 name: Integration tests (InstaWP)
-# on:
-#     workflow_run:
-#         workflows: [Generate plugins]
-#         types:
-#             - completed
+on:
+    workflow_run:
+        workflows: [Generate plugins]
+        types:
+            - completed
 env:
     CHECKOUT_SUBMODULES: ""
 
