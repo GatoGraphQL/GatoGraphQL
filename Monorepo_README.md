@@ -15,7 +15,7 @@ The Gato GraphQL Monorepo contains several projects.
 
 Plugins can extend the GraphQL schema, to fetch their own data.
 
-- [Extension demo source code](layers/GatoGraphQLForWP/plugins/extension-demo)
+- [Gato GraphQL extension starter](https://github.com/GatoGraphQL/ExtensionStarter)
 
 ## GraphQL By PoP
 
