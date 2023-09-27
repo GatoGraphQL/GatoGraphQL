@@ -159,6 +159,18 @@ jobs:
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' ${{ matrix.pluginConfig.main_file }}
                 working-directory: ${{ matrix.pluginConfig.path }}
 
+            -   name: Check if readme.txt exists
+                uses: andstor/file-existence-action@v2
+                id: check_readme_exists
+                with:
+                    files: "${{ matrix.pluginConfig.path }}/readme.txt"
+
+            -   name: Replace PHP version in plugin readme file
+                run: |
+                    sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' readme.txt
+                if: steps.check_readme_exists.outputs.files_exists == 'true'
+                working-directory: ${{ matrix.pluginConfig.path }}
+
             # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
             -   name: Append the the commit hash to the plugin/extension version
                 run: |
