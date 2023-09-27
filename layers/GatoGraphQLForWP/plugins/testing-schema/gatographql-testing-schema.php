@@ -69,8 +69,8 @@ add_action(
                 _e(sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
-                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gatographql-extension-demo'),
-                        __('Gato GraphQL', 'gatographql-extension-demo'),
+                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gatographql-testing-schema'),
+                        __('Gato GraphQL', 'gatographql-testing-schema'),
                         $extensionName
                     )
                 ));

@@ -77,18 +77,6 @@ class PluginDataSource
                 'dist_repo_name' => 'gatographql-testing-dist',
                 'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/testing/rector.php',
             ],
-
-            // Gato GraphQL - Extension Demo
-            // @todo Re-enable when the demo is actually complete
-            // [
-            //     'path' => 'layers/GatoGraphQLForWP/plugins/extension-demo',
-            //     'plugin_slug' => 'gatographql-extension-demo',
-            //     'main_file' => 'gatographql-extension-demo.php',
-            //     'exclude_files' => 'docs/images/\*',
-            //     'dist_repo_organization' => 'GatoGraphQLForWordPress',
-            //     'dist_repo_name' => 'gatographql-extension-demo-dist',
-            //     'rector_downgrade_config' => $this->rootDir . '/config/rector/downgrade/extension-demo/rector.php',
-            // ],
         ];
 
         foreach ($pluginConfigEntries as &$pluginConfigEntry) {

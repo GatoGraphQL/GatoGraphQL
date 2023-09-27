@@ -53,7 +53,6 @@
     },
     "autoload": {
         "psr-4": {
-            "GatoGraphQL\\ExtensionDemo\\": "layers/GatoGraphQLForWP/plugins/extension-demo/src",
             "GatoGraphQL\\ExternalDependencyWrappers\\": "layers/GatoGraphQLForWP/packages/external-dependency-wrappers/src",
             "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gatographql/src",
             "GatoGraphQL\\PluginUtils\\": "layers/GatoGraphQLForWP/packages/plugin-utils/src",
@@ -189,7 +188,6 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "GatoGraphQL\\ExtensionDemo\\": "layers/GatoGraphQLForWP/plugins/extension-demo/tests",
             "GatoGraphQL\\ExternalDependencyWrappers\\": "layers/GatoGraphQLForWP/packages/external-dependency-wrappers/tests",
             "GatoGraphQL\\GatoGraphQL\\": "layers/GatoGraphQLForWP/plugins/gatographql/tests",
             "GatoGraphQL\\PluginUtils\\": "layers/GatoGraphQLForWP/packages/plugin-utils/tests",
@@ -339,7 +337,6 @@
         }
     ],
     "replace": {
-        "gatographql/extension-demo": "1.0.8",
         "gatographql/external-dependency-wrappers": "1.0.8",
         "gatographql/gatographql": "1.0.8",
         "gatographql/plugin-utils": "1.0.8",
