@@ -161,9 +161,7 @@ jobs:
 
             -   name: Replace PHP version in plugin readme file
                 run: |
-                    if [[ test -f readme.txt ]]; then
-                        sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' readme.txt
-                    fi                    
+                    [[ test -f readme.txt ]] && sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' readme.txt
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             # Add the commit hash to the plugin version, to regenerate the container when testing the generated plugin
