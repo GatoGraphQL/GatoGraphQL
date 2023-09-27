@@ -43,7 +43,7 @@ Add the following configuration to your `composer.json`:
                 "type": "wordpress-plugin",
                 "version": "1",
                 "dist": {
-                    "url": "https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.8/gatographql-1.0.8.zip",
+                    "url": "https://gatographql.com/releases/latest",
                     "type": "zip"
                 },
                 "require": {
@@ -67,11 +67,11 @@ Add the following configuration to your `composer.json`:
 To install via [WP-CLI](http://wp-cli.org/), execute this command:
 
 ```bash
-wp plugin install --activate https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.8/gatographql-1.0.8.zip
+wp plugin install --activate https://gatographql.com/releases/latest
 ```
 
 ## GitHub Updater
 
 This plugin support automatic updating via the [GitHub Updater](https://github.com/afragen/github-updater).
 
-[latest-release-url]: https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.8/gatographql-1.0.8.zip
+[latest-release-url]: https://gatographql.com/releases/latest
