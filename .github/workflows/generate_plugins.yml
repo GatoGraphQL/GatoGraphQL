@@ -154,13 +154,9 @@ jobs:
                 if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}
             ################################################################################
 
-            -   name: Replace PHP version in plugin main file
+            -   name: Replace PHP version in plugin files
                 run: |
                     sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' ${{ matrix.pluginConfig.main_file }}
-                working-directory: ${{ matrix.pluginConfig.path }}
-
-            -   name: Replace PHP version in plugin readme file
-                run: |
                     [ -f readme.txt ] && sed -i 's/Requires PHP: 8.1/Requires PHP: 7.2/' readme.txt
                 working-directory: ${{ matrix.pluginConfig.path }}
 
