@@ -163,7 +163,7 @@ class LemonSqueezyCommercialExtensionActivationService implements MarketplacePro
          * plugin and not against the extension, but it still works
          * because these are the same.
          *
-         * @see method `assertIsValid` in `ExtensionManager`
+         * @see method `assertIsSameEnvironmentAsMainPlugin` in `ExtensionManager`
          */
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         $isExtensionOnDevelopmentMode = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion);

@@ -167,11 +167,25 @@ class ExtensionManager extends AbstractPluginManager
             return false;
         }
 
+        return true;
+    }
+
+    /**
+     * Validate that if the main plugin is "-dev", then the extension also is.
+     * This is useful to issue licenses for the Marketplace by testing/production,
+     * and validate that the corresponding extension is installed.
+     */
+    public function assertIsSameEnvironmentAsMainPlugin(
+        string $extensionClass,
+        string $extensionVersion,
+        ?string $extensionName = null,
+    ): bool {
         /**
-         * Validate that if the main plugin is "-dev", then the extension also is.
-         * This is useful to issue licenses for the Marketplace by testing/production,
-         * and validate the the corresponding extension is installed.
+         * Validate that the required version of the Gato GraphQL for WP plugin is installed.
          */
+        $mainPlugin = PluginApp::getMainPluginManager()->getPlugin();
+        $mainPluginVersion = $mainPlugin->getPluginVersion();
+
         $errorMessagePlaceholder = __('Plugin <strong>%s</strong> is on "%s" mode, but Extension <strong>%s</strong> is on "%s" mode. They must both be the same. The extension has not been loaded.', 'gatographql');
         if (PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion) && !PluginVersionHelpers::isDevelopmentVersion($extensionVersion)) {
             $this->printAdminNoticeErrorMessage(
