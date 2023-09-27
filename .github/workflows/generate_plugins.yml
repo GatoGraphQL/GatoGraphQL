@@ -163,8 +163,7 @@ jobs:
                 uses: andstor/file-existence-action@v2
                 id: check_readme_exists
                 with:
-                    files: "readme.txt"
-                working-directory: ${{ matrix.pluginConfig.path }}
+                    files: "${{ matrix.pluginConfig.path }}/readme.txt"
 
             -   name: Replace PHP version in plugin readme file
                 run: |
