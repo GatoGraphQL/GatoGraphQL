@@ -1,7 +1,0 @@
-parameters:
-    bootstrapFiles:
-        - gatographql-extension-demo.php
-    level: 8
-    paths:
-        - src/
-        - tests/
