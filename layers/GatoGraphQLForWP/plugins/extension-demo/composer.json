@@ -162,10 +162,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-schema/schema-commons": "^1.0.8"
+        "pop-schema/schema-commons": "^1.1"
     },
     "require-dev": {
-        "gatographql/gatographql": "^1.0.8",
+        "gatographql/gatographql": "^1.1",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
         "squizlabs/php_codesniffer": "^3.6"
@@ -188,7 +188,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0-dev"
+            "dev-master": "1.1-dev"
         }
     },
     "config": {
