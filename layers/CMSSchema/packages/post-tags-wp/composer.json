@@ -104,7 +104,6 @@
         "phpunit-for-gatographql/dummy-wp-schema": "<1.0.8",
         "phpunit-for-gatographql/gatographql": "<1.0.8",
         "phpunit-for-gatographql/gatographql-testing": "<1.0.8",
-        "gatographql/extension-demo": "<1.0.8",
         "gatographql/testing-schema": "<1.0.8",
         "gatographql/gatographql": "<1.0.8",
         "graphql-by-pop/graphiql": "<1.0.8",
