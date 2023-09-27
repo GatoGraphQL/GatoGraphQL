@@ -27,6 +27,22 @@ class PluginDataSourceAccessor
     /**
      * @return string[]
      */
+    public function getPluginReadmeFiles(): array
+    {
+        $files = [];
+        foreach ($this->pluginDataSource->getPluginConfigEntries() as $pluginConfigEntry) {
+            $readmeFile = $this->pluginDataSource->getRootDir() . '/' . $pluginConfigEntry['path'] . '/readme.txt';
+            if (!file_exists($readmeFile)) {
+                continue;
+            }
+            $files[] = $readmeFile;
+        }
+        return $files;
+    }
+
+    /**
+     * @return string[]
+     */
     public function getPluginNodeJSPackageDirectories(): array
     {
         $directories = [];
