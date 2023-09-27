@@ -63,8 +63,7 @@
         "update-deps": [
             "@symlink-vendor-for-gatographql-plugin",
             "@symlink-vendor-for-gatographql-testing-schema-plugin",
-            "@symlink-vendor-for-gatographql-testing-plugin",
-            "@symlink-vendor-for-gatographql-extension-demo"
+            "@symlink-vendor-for-gatographql-testing-plugin"
         ],
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
@@ -93,21 +92,14 @@
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/composer.local.json",
             "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing"
         ],
-        "symlink-vendor-for-gatographql-extension-demo": [
-            "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/extension-demo/composer.json', '../../layers/GatoGraphQLForWP/plugins/extension-demo/composer.local.json');\"",
-            "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/plugins/extension-demo/composer.local.json",
-            "COMPOSER=composer.local.json composer update --no-dev --working-dir=../../layers/GatoGraphQLForWP/plugins/extension-demo"
-        ],
         "optimize-autoloader": [
             "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/plugins/gatographql",
             "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing",
-            "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/plugins/extension-demo",
             "COMPOSER=composer.local.json composer dump-autoload --optimize --working-dir=../../layers/GatoGraphQLForWP/plugins/testing-schema"
         ],
         "deoptimize-autoloader": [
             "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/plugins/gatographql",
             "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing",
-            "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/plugins/extension-demo",
             "COMPOSER=composer.local.json composer dump-autoload --working-dir=../../layers/GatoGraphQLForWP/plugins/testing-schema"
         ],
         "log-server-errors": [
