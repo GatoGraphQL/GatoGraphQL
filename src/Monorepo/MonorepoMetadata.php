@@ -14,7 +14,7 @@ final class MonorepoMetadata
      * version when creating a new release
      * (i.e. via `composer release-major|minor|patch`).
      */
-    final public const VERSION = '1.0.9';
+    final public const VERSION = '1.1.0-dev';
 
     final public const GIT_BASE_BRANCH = 'master';
     final public const GIT_USER_NAME = 'leoloso';
