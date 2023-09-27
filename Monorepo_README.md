@@ -9,7 +9,7 @@ The Gato GraphQL Monorepo contains several projects.
 **Gato GraphQL** is a forward-looking and powerful GraphQL server for WordPress.
 
 - Website: [gatographql.com](https://gatographql.com)
-- [Download](https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.6/gatographql-1.0.6.zip)
+- [Download](https://github.com/GatoGraphQL/GatoGraphQL/releases/download/1.0.8/gatographql-1.0.8.zip)
 - [Plugin source code](layers/GatoGraphQLForWP/plugins/gatographql)
 - [Development](docs/development-environment.md)
 
