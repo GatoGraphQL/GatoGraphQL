@@ -17,7 +17,7 @@ class ConvertStableTagVersionForProdInPluginReadmeFileReleaseWorker extends Abst
         $replacements = [
             '/Stable tag:\s+[a-z0-9.-]+/' => 'Stable tag: ' . $prodVersion,
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginMainFiles(), $replacements);
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginReadmeFiles(), $replacements);
     }
 
     public function getDescription(Version $version): string

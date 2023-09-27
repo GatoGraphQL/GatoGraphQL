@@ -26,12 +26,12 @@ abstract class AbstractConvertStableTagVersionInPluginReadmeFileReleaseWorker im
     /**
      * @return string[]
      */
-    protected function getPluginMainFiles(): array
+    protected function getPluginReadmeFiles(): array
     {
         if ($this->pluginReadmeFiles === null) {
             $pluginDataSource = $this->getPluginDataSource();
             $pluginDataSourceAccessor = new PluginDataSourceAccessor($pluginDataSource);
-            $this->pluginReadmeFiles = $pluginDataSourceAccessor->getPluginMainFiles();
+            $this->pluginReadmeFiles = $pluginDataSourceAccessor->getPluginReadmeFiles();
         }
         return $this->pluginReadmeFiles;
     }
