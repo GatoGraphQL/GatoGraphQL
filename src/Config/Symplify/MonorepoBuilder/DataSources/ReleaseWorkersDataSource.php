@@ -7,11 +7,12 @@ namespace PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\BumpVersionForDevInMonorepoMetadataFileReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\BumpVersionForDevInPluginMainFileReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\BumpVersionForDevInPluginNodeJSPackageJSONFilesReleaseWorker;
-use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\GuardOnDefaultBranchReleaseWorker;
+use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertStableTagVersionForProdInPluginReadmeFileReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInMonorepoMetadataFileReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInPluginMainFileReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker;
+use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\GuardOnDefaultBranchReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateCurrentBranchAliasReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
@@ -35,6 +36,7 @@ class ReleaseWorkersDataSource
 
             // Remove "-dev" from the version
             ConvertVersionForProdInPluginMainFileReleaseWorker::class,
+            ConvertStableTagVersionForProdInPluginReadmeFileReleaseWorker::class,
             ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker::class,
             ConvertVersionForProdInPluginBlockCompiledMarkdownFilesReleaseWorker::class,
             ConvertVersionForProdInMonorepoMetadataFileReleaseWorker::class,
