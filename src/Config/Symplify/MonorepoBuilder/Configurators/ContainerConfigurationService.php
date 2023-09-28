@@ -38,7 +38,7 @@ class ContainerConfigurationService
         /**
          * Packages handled by the monorepo
          */
-        if ($packageOrganizationConfig = $this->getPackageOrganizationDataSource($this->rootDirectory)) {
+        if ($packageOrganizationConfig = $this->getPackageOrganizationDataSource()) {
             $parameters->set(
                 CustomOption::PACKAGE_ORGANIZATIONS,
                 $packageOrganizationConfig->getPackagePathOrganizations()
