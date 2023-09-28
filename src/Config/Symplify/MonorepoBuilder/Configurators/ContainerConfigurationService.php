@@ -66,7 +66,7 @@ class ContainerConfigurationService
         /**
          * Skip files from testing for downgrades
          */
-        if ($skipDowngradeTestFilesConfig = $this->getSkipDowngradeTestPathsDataSource($this->rootDirectory)) {
+        if ($skipDowngradeTestFilesConfig = $this->getSkipDowngradeTestPathsDataSource()) {
             $parameters->set(
                 CustomOption::SKIP_DOWNGRADE_TEST_FILES,
                 $skipDowngradeTestFilesConfig->getSkipDowngradeTestPaths()
