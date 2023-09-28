@@ -2,6 +2,7 @@ parameters:
     level: 8
 
 includes:
+    - phpstan.neon.dist
     - layers/Engine/packages/access-control/phpstan.neon.dist
     - layers/API/packages/api/phpstan.neon.dist
     - layers/API/packages/api-clients/phpstan.neon.dist
