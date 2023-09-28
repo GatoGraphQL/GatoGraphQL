@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
+use Rector\Core\Contract\Rector\RectorInterface;
 use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeCovariantReturnTypeRector;
 
 /**
@@ -19,6 +20,10 @@ use Rector\DowngradePhp74\Rector\ClassMethod\DowngradeCovariantReturnTypeRector;
  */
 abstract class AbstractCovariantReturnTypeChainedRuleContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
 {
+    /**
+     * @return string[]
+     * @phpstan-return array<class-string<RectorInterface>>
+     */
     protected function getRectorRuleClasses(): array
     {
         return [
