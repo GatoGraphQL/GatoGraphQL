@@ -18,7 +18,7 @@ class PluginDataSource
     }
 
     /**
-     * @return array<array<mixed>
+     * @return array<array<mixed>>
      */
     public function getPluginConfigEntries(): array
     {
