@@ -15,7 +15,6 @@ final class NodeJSPackageJSONUpdater
 
     /**
      * @param SmartFileInfo[] $smartFileInfos
-     * @param string[] $packageNames
      */
     public function updatePackageJSONFileInfosWithVersion(
         array $smartFileInfos,

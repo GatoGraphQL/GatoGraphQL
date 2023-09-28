@@ -18,6 +18,7 @@ final class SourcePackagesProvider
 
     /**
      * To find out if it's PSR-4, check if the package has tests.
+     * @param string[] $packagesToSkip
      * @param string[] $fileListFilter
      * @return string[]
      */

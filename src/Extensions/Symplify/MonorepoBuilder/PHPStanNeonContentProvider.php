@@ -33,8 +33,9 @@ final class PHPStanNeonContentProvider
 
     /**
      * Merge all common includes together, and all paths to package configs
+     * @param string[] $packagesToSkip
      */
-    public function provideContent(array $packagesToSkip = [], string|int $level = 'max'): string
+    public function provideContent(array $packagesToSkip = [], string|int $level = 'max', bool $includeRoot = true): string
     {
         $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages(true, $packagesToSkip);
 
@@ -42,7 +43,7 @@ final class PHPStanNeonContentProvider
             self::PARAMETERS => [
                 self::LEVEL => $level,
             ],
-            self::INCLUDES_KEY => $this->provideIncludes($sourcePackages),
+            self::INCLUDES_KEY => $this->provideIncludes($sourcePackages, $includeRoot),
         ];
 
         return $this->neonPrinter->printNeon($phpStanNeon);
@@ -55,9 +56,12 @@ final class PHPStanNeonContentProvider
      * @param string[] $sourcePackages
      * @return string[]
      */
-    private function provideIncludes(array $sourcePackages): array
+    private function provideIncludes(array $sourcePackages, bool $includeRoot): array
     {
         $phpstanConfigIncludes = [];
+        if ($includeRoot) {
+            $phpstanConfigIncludes[] = 'phpstan.neon.dist';
+        }
         foreach ($sourcePackages as $package) {
             $packagePHPStanConfigFilePath = $package . DIRECTORY_SEPARATOR . 'phpstan.neon';
             if (!file_exists($packagePHPStanConfigFilePath)) {

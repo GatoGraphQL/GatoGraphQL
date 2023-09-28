@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
+use Rector\Core\Contract\Rector\RectorInterface;
 use Rector\Core\ValueObject\PhpVersion;
 
 /**
@@ -32,6 +33,7 @@ abstract class AbstractChainedRuleContainerConfigurationService extends Abstract
 
     /**
      * @return string[]
+     * @phpstan-return array<class-string<RectorInterface>>
      */
     abstract protected function getRectorRuleClasses(): array;
 

@@ -44,7 +44,7 @@ final class MergePhpstanCommand extends AbstractSymplifyCommand
     {
         $packagesToSkip = [];
 
-        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($packagesToSkip, $this->level);
+        $neonFileContent = $this->phpstanNeonContentProvider->provideContent($packagesToSkip, $this->level, true);
 
         $outputFilePath = (string) $input->getOption(Option::OUTPUT_FILE);
         $this->neonFilePrinter->printContentToOutputFile($neonFileContent, $outputFilePath);
