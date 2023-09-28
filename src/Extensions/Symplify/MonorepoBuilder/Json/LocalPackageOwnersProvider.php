@@ -19,7 +19,6 @@ final class LocalPackageOwnersProvider
 
     /**
      * To find out if it's PSR-4, check if the package has tests.
-     * @param string[] $fileListFilter
      * @return string[]
      */
     public function provideLocalPackageOwners(): array
