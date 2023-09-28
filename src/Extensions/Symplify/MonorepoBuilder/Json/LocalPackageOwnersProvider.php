@@ -32,7 +32,9 @@ final class LocalPackageOwnersProvider
         );
 
         // Include also the Root Composer!
-        $packageNames[] = $this->composerJsonProvider->getRootComposerJson()->getName();
+        /** @var string */
+        $rootPackageName = $this->composerJsonProvider->getRootComposerJson()->getName();
+        $packageNames[] = $rootPackageName;
 
         // Extrac the owner, and return unique
         return array_values(array_unique(array_map(
