@@ -11,7 +11,7 @@ use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 final class InstaWPConfigEntriesJsonProvider
 {
     /**
-     * @var array<string,string>
+     * @var array<array<string,string>>
      */
     private array $instaWPConfigEntries = [];
 
