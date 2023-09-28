@@ -33,6 +33,7 @@ final class PHPStanNeonContentProvider
 
     /**
      * Merge all common includes together, and all paths to package configs
+     * @param string[] $packagesToSkip
      */
     public function provideContent(array $packagesToSkip = [], string|int $level = 'max', bool $includeRoot = true): string
     {
