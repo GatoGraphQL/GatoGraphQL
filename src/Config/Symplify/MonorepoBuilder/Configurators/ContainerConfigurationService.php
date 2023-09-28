@@ -79,7 +79,7 @@ class ContainerConfigurationService
          * @see https://github.com/rectorphp/rector/issues/5962
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/597#issue-855005786
          */
-        if ($downgradeRectorConfig = $this->getDowngradeRectorDataSource($this->rootDirectory)) {
+        if ($downgradeRectorConfig = $this->getDowngradeRectorDataSource()) {
             $parameters->set(
                 CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS,
                 $downgradeRectorConfig->getAdditionalDowngradeRectorFiles()
@@ -90,7 +90,7 @@ class ContainerConfigurationService
          * Additional plugins to install in the webserver (eg: InstaWP)
          * for executing integration tests
          */
-        if ($additionalIntegrationTestPluginsConfig = $this->getAdditionalIntegrationTestPluginsDataSource($this->rootDirectory)) {
+        if ($additionalIntegrationTestPluginsConfig = $this->getAdditionalIntegrationTestPluginsDataSource()) {
             $parameters->set(
                 CustomOption::ADDITIONAL_INTEGRATION_TEST_PLUGINS,
                 $additionalIntegrationTestPluginsConfig->getAdditionalIntegrationTestPlugins()
@@ -137,7 +137,7 @@ class ContainerConfigurationService
         /**
          * InstaWP config
          */
-        if ($instaWPConfig = $this->getInstaWPConfigDataSource($this->rootDirectory)) {
+        if ($instaWPConfig = $this->getInstaWPConfigDataSource()) {
             $parameters->set(
                 CustomOption::INSTAWP_CONFIG_ENTRIES,
                 $instaWPConfig->getInstaWPConfigEntries()
