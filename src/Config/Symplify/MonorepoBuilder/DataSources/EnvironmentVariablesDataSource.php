@@ -21,7 +21,7 @@ class EnvironmentVariablesDataSource
     public function getEnvironmentVariables(): array
     {
         return [
-            self::GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE => false,
+            self::GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE => (string) false,
             self::RETENTION_DAYS_FOR_GENERATED_PLUGINS => (string) 30,
             self::INSTAWP_INSTANCE_SLEEPING_TIME => (string) 120,
             self::GIT_BASE_BRANCH => MonorepoMetadata::GIT_BASE_BRANCH,
