@@ -11,7 +11,7 @@ class InstaWPConfigDataSource
     }
 
     /**
-     * @return array<array<mixed>
+     * @return array<array<mixed>>
      */
     public function getInstaWPConfigEntries(): array
     {
