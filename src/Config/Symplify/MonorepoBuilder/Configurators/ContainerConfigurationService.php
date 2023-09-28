@@ -56,7 +56,7 @@ class ContainerConfigurationService
         /**
          * Plugins to generate
          */
-        if ($pluginConfig = $this->getPluginDataSource($this->rootDirectory)) {
+        if ($pluginConfig = $this->getPluginDataSource()) {
             $parameters->set(
                 CustomOption::PLUGIN_CONFIG_ENTRIES,
                 $pluginConfig->getPluginConfigEntries()
