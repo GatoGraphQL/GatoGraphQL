@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\SmartFile;
 
 use Nette\Utils\Strings;
-use Symplify\SmartFileSystem\FileSystemGuard;
 use Symplify\SmartFileSystem\Finder\SmartFinder;
 use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SmartFileSystem\SmartFileSystem;
@@ -14,7 +13,6 @@ final class FileContentReplacerSystem
 {
     public function __construct(
         private SmartFileSystem $smartFileSystem,
-        private FileSystemGuard $fileSystemGuard,
         private SmartFinder $smartFinder,
     ) {
     }
