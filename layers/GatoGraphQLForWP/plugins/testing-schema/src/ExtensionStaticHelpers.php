@@ -11,7 +11,11 @@ class ExtensionStaticHelpers
 {
     public static function getGitHubRepoDocsRootURL(): string
     {
-        return 'https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL';
+        return sprintf(
+            'https://raw.githubusercontent.com/%s/%s',
+            ExtensionMetadata::GITHUB_REPO_OWNER,
+            ExtensionMetadata::GITHUB_REPO_NAME
+        );
     }
 
     public static function getGitHubRepoDocsRootPathURL(): string
