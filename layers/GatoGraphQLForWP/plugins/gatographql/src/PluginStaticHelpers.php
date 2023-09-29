@@ -20,13 +20,22 @@ class PluginStaticHelpers
      */
     private static ?array $activeWordPressPluginSlugs = null;
 
+    public static function getGitHubRepoDocsRootURL(): string
+    {
+        return sprintf(
+            'https://raw.githubusercontent.com/%s/%s',
+            PluginMetadata::GITHUB_REPO_OWNER,
+            PluginMetadata::GITHUB_REPO_NAME
+        );
+    }
+
     public static function getGitHubRepoDocsRootPathURL(): string
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         $tag = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
-            ? 'master'
+            ? PluginMetadata::GIT_BASE_BRANCH
             : $mainPluginVersion;
-        return 'https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/' . $tag . '/layers/GatoGraphQLForWP/plugins/gatographql/';
+        return static::getGitHubRepoDocsRootURL() . '/' . $tag . '/layers/GatoGraphQLForWP/plugins/gatographql/';
     }
 
     /**
