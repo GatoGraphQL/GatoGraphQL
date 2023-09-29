@@ -1,4 +1,4 @@
-const extensionMetadataConfig = require("./extension-metadata.config")
+const extensionMetadataConfig = require("./plugin-metadata.config")
 
 module.exports.getGitHubRepoDocsRootURL = function () {
     return `https://raw.githubusercontent.com/${ extensionMetadataConfig.GITHUB_REPO_OWNER }/${ extensionMetadataConfig.GITHUB_REPO_NAME }`;
