@@ -29,13 +29,17 @@ class PluginStaticHelpers
         );
     }
 
-    public static function getGitHubRepoDocsRootPathURL(): string
+    public static function getStablePackageTagForCurrentVersion(): string
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
-        $tag = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
+        return PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
             ? PluginMetadata::GIT_BASE_BRANCH
             : $mainPluginVersion;
-        return static::getGitHubRepoDocsRootURL() . '/' . $tag . '/layers/GatoGraphQLForWP/plugins/gatographql/';
+    }
+
+    public static function getGitHubRepoDocsRootPathURL(): string
+    {
+        return static::getGitHubRepoDocsRootURL() . '/' . static::getStablePackageTagForCurrentVersion() . '/layers/GatoGraphQLForWP/plugins/gatographql/';
     }
 
     /**
