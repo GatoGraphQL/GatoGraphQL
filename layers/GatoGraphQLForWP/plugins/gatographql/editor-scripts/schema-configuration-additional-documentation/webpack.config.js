@@ -4,9 +4,9 @@
 const ANY_IMPLICIT_FEATURE = 'any-built-in-scalar';
 
 const IMPLICIT_FEATURES_DOCS_PATH = `docs/implicit-features/`;
-const NPM_PACKAGE_VERSION = process.env.npm_package_version;
-const PACKAGE_TAG = NPM_PACKAGE_VERSION.endsWith('-dev') ? 'master' : NPM_PACKAGE_VERSION;
-const GITHUB_BASE_URL = `https://raw.githubusercontent.com/GatoGraphQL/GatoGraphQL/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/gatographql`
+const ExtensionMetadataHelpers = require("./extension-metadata.helpers")
+const PACKAGE_TAG = ExtensionMetadataHelpers.getStablePackageTagForCurrentVersion();
+const GITHUB_BASE_URL = `${ ExtensionMetadataHelpers.getGitHubRepoDocsRootURL() }/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/gatographql`
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? `${ GITHUB_BASE_URL }/${ IMPLICIT_FEATURES_DOCS_PATH }/${ ANY_IMPLICIT_FEATURE }`
 	: null;
