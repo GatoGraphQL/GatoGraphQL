@@ -18,12 +18,16 @@ class ExtensionStaticHelpers
         );
     }
 
-    public static function getGitHubRepoDocsRootPathURL(): string
+    public static function getStablePackageTagForCurrentVersion(): string
     {
         $extensionPluginVersion = PluginApp::getExtension(GatoGraphQLExtension::class)->getPluginVersion();
-        $tag = PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
+        return PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
             ? ExtensionMetadata::GIT_BASE_BRANCH
             : $extensionPluginVersion;
-        return static::getGitHubRepoDocsRootURL() . '/' . $tag . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
+    }
+
+    public static function getGitHubRepoDocsRootPathURL(): string
+    {
+        return static::getGitHubRepoDocsRootURL() . '/' . static::getStablePackageTagForCurrentVersion() . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
     }
 }
