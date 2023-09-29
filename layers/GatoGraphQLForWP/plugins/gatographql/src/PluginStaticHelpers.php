@@ -29,7 +29,7 @@ class PluginStaticHelpers
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         $tag = PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
-            ? 'master'
+            ? PluginMetadata::GIT_BASE_BRANCH
             : $mainPluginVersion;
         return static::getGitHubRepoDocsRootURL() . '/' . $tag . '/layers/GatoGraphQLForWP/plugins/gatographql/';
     }
