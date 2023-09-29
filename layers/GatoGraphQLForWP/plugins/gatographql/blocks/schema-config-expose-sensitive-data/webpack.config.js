@@ -5,9 +5,9 @@ const MODULE = 'schema-expose-sensitive-data';
 
 
 const MODULE_DOCS_PATH = `docs/modules/${ MODULE }/`;
-const ExtensionMetadataHelpers = require("./extension-metadata.helpers")
-const PACKAGE_TAG = ExtensionMetadataHelpers.getStablePackageTagForCurrentVersion();
-const GITHUB_BASE_URL = `${ ExtensionMetadataHelpers.getGitHubRepoDocsRootURL() }/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/gatographql`
+const PluginMetadataHelpers = require("./extension-metadata.helpers")
+const PACKAGE_TAG = PluginMetadataHelpers.getStablePackageTagForCurrentVersion();
+const GITHUB_BASE_URL = `${ PluginMetadataHelpers.getGitHubRepoDocsRootURL() }/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/gatographql`
 const BASE_URL = process.env.NODE_ENV === 'production'
 	? `${ GITHUB_BASE_URL }/${ MODULE_DOCS_PATH }`
 	: null;
