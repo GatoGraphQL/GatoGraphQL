@@ -32,6 +32,8 @@ class PluginDataSource
                 'exclude_files' => implode(' ', [
                     '.wordpress-org/\*',
                     'dev-helpers/\*',
+                    'block-config/\*',
+                    'block-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
