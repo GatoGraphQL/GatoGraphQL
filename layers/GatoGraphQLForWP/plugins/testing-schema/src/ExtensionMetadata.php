@@ -6,7 +6,7 @@ namespace GatoGraphQL\TestingSchema;
 
 final class ExtensionMetadata
 {
-    final public const DOC_IMAGE_HOSTING_GIT_BASE_BRANCH = 'master';
-    final public const DOC_IMAGE_HOSTING_GITHUB_REPO_OWNER = 'GatoGraphQL';
-    final public const DOC_IMAGE_HOSTING_GITHUB_REPO_NAME = 'GatoGraphQL';
+    final public const DOCSGIT_BASE_BRANCH = 'master';
+    final public const DOCSGITHUB_REPO_OWNER = 'GatoGraphQL';
+    final public const DOCSGITHUB_REPO_NAME = 'GatoGraphQL';
 }
