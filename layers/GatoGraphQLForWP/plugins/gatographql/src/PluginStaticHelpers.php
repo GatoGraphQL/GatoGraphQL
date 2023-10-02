@@ -39,7 +39,7 @@ class PluginStaticHelpers
 
     public static function getGitHubRepoDocsRootPathURL(): string
     {
-        return static::getGitHubRepoDocsRootURL() . '/' . static::getGitHubRepoDocsBranchOrTag() . '/layers/GatoGraphQLForWP/plugins/gatographql/';
+        return static::getGitHubRepoDocsRootURL() . '/' . static::getGitHubRepoDocsBranchOrTag() . '/layers/GatoGraphQLForWP/plugins/gatographql';
     }
 
     /**
