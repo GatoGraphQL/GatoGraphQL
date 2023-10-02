@@ -28,6 +28,6 @@ class ExtensionStaticHelpers
 
     public static function getGitHubRepoDocsRootPathURL(): string
     {
-        return static::getGitHubRepoDocsRootURL() . '/' . static::getGitHubRepoDocsBranchOrTag() . '/layers/GatoGraphQLForWP/plugins/testing-schema';
+        return self::getGitHubRepoDocsRootURL() . '/' . self::getGitHubRepoDocsBranchOrTag() . '/layers/GatoGraphQLForWP/plugins/testing-schema';
     }
 }
