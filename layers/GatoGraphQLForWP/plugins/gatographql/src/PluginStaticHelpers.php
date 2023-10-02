@@ -24,22 +24,22 @@ class PluginStaticHelpers
     {
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
-            PluginMetadata::GITHUB_REPO_OWNER,
-            PluginMetadata::GITHUB_REPO_NAME
+            PluginMetadata::DOCS_GITHUB_REPO_OWNER,
+            PluginMetadata::DOCS_GITHUB_REPO_NAME
         );
     }
 
-    public static function getStablePackageTagForCurrentVersion(): string
+    public static function getGitHubRepoDocsBranchOrTag(): string
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
-            ? PluginMetadata::GIT_BASE_BRANCH
+            ? PluginMetadata::DOCS_GIT_BASE_BRANCH
             : $mainPluginVersion;
     }
 
     public static function getGitHubRepoDocsRootPathURL(): string
     {
-        return static::getGitHubRepoDocsRootURL() . '/' . static::getStablePackageTagForCurrentVersion() . '/layers/GatoGraphQLForWP/plugins/gatographql/';
+        return static::getGitHubRepoDocsRootURL() . '/' . static::getGitHubRepoDocsBranchOrTag() . '/layers/GatoGraphQLForWP/plugins/gatographql/';
     }
 
     /**

@@ -13,21 +13,21 @@ class ExtensionStaticHelpers
     {
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
-            ExtensionMetadata::GITHUB_REPO_OWNER,
-            ExtensionMetadata::GITHUB_REPO_NAME
+            ExtensionMetadata::DOCS_GITHUB_REPO_OWNER,
+            ExtensionMetadata::DOCS_GITHUB_REPO_NAME
         );
     }
 
-    public static function getStablePackageTagForCurrentVersion(): string
+    public static function getGitHubRepoDocsBranchOrTag(): string
     {
         $extensionPluginVersion = PluginApp::getExtension(GatoGraphQLExtension::class)->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
-            ? ExtensionMetadata::GIT_BASE_BRANCH
+            ? ExtensionMetadata::DOCS_GIT_BASE_BRANCH
             : $extensionPluginVersion;
     }
 
     public static function getGitHubRepoDocsRootPathURL(): string
     {
-        return static::getGitHubRepoDocsRootURL() . '/' . static::getStablePackageTagForCurrentVersion() . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
+        return static::getGitHubRepoDocsRootURL() . '/' . static::getGitHubRepoDocsBranchOrTag() . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
     }
 }
