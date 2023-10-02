@@ -185,7 +185,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         $pathURL = \trailingslashit($this->baseURL . $this->docsFolder) . $relativePathDir . $filename . '/';
         // Include the images from the GitHub repo, unless we are in DEV
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
-            $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsRootPathURL . $this->docsFolder) . $relativePathDir . $filename . '/';
+            $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsRootPathURL . '/' . $this->docsFolder) . $relativePathDir . $filename . '/';
         }
         return $this->processHTMLContent($htmlContent, $pathURL, $options);
     }
