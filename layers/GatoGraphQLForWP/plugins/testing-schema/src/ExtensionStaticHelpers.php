@@ -18,7 +18,7 @@ class ExtensionStaticHelpers
         );
     }
 
-    public static function getStablePackageTagForCurrentVersion(): string
+    public static function getGitHubRepoDocsBranchOrTag(): string
     {
         $extensionPluginVersion = PluginApp::getExtension(GatoGraphQLExtension::class)->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
@@ -28,6 +28,6 @@ class ExtensionStaticHelpers
 
     public static function getGitHubRepoDocsRootPathURL(): string
     {
-        return static::getGitHubRepoDocsRootURL() . '/' . static::getStablePackageTagForCurrentVersion() . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
+        return static::getGitHubRepoDocsRootURL() . '/' . static::getGitHubRepoDocsBranchOrTag() . '/layers/GatoGraphQLForWP/plugins/testing-schema/';
     }
 }
