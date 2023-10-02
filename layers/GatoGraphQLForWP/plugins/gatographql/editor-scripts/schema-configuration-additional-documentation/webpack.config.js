@@ -4,7 +4,7 @@
 const ANY_IMPLICIT_FEATURE = 'any-built-in-scalar';
 
 const IMPLICIT_FEATURES_DOCS_PATH = `docs/implicit-features/`;
-const PluginMetadataHelpers = require("./plugin-metadata.helpers")
+const PluginMetadataHelpers = require("../../block-helpers/plugin-metadata.helpers")
 const PACKAGE_TAG = PluginMetadataHelpers.getGitHubRepoDocsBranchOrTag();
 const GITHUB_BASE_URL = `${ PluginMetadataHelpers.getGitHubRepoDocsRootURL() }/${ PACKAGE_TAG }/layers/GatoGraphQLForWP/plugins/gatographql`
 const BASE_URL = process.env.NODE_ENV === 'production'
