@@ -9,7 +9,7 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 
 class ExtensionStaticHelpers
 {
-    public static function getGitHubRepoDocsRootURL(): string
+    private static function getGitHubRepoDocsRootURL(): string
     {
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
@@ -18,7 +18,7 @@ class ExtensionStaticHelpers
         );
     }
 
-    public static function getGitHubRepoDocsBranchOrTag(): string
+    private static function getGitHubRepoDocsBranchOrTag(): string
     {
         $extensionPluginVersion = PluginApp::getExtension(GatoGraphQLExtension::class)->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
