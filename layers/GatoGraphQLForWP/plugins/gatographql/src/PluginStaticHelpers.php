@@ -33,7 +33,7 @@ class PluginStaticHelpers
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
-            ? PluginMetadata::GIT_BASE_BRANCH
+            ? PluginMetadata::DOC_IMAGE_HOSTING_GIT_BASE_BRANCH
             : $mainPluginVersion;
     }
 

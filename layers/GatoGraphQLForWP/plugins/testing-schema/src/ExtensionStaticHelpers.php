@@ -22,7 +22,7 @@ class ExtensionStaticHelpers
     {
         $extensionPluginVersion = PluginApp::getExtension(GatoGraphQLExtension::class)->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
-            ? ExtensionMetadata::GIT_BASE_BRANCH
+            ? ExtensionMetadata::DOC_IMAGE_HOSTING_GIT_BASE_BRANCH
             : $extensionPluginVersion;
     }
 

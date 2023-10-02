@@ -6,5 +6,5 @@ module.exports.getGitHubRepoDocsRootURL = function () {
 
 module.exports.getStablePackageTagForCurrentVersion = function () {
     const NPM_PACKAGE_VERSION = process.env.npm_package_version;
-    return NPM_PACKAGE_VERSION.endsWith('-dev') ? PluginMetadataConfig.GIT_BASE_BRANCH : NPM_PACKAGE_VERSION;
+    return NPM_PACKAGE_VERSION.endsWith('-dev') ? PluginMetadataConfig.DOC_IMAGE_HOSTING_GIT_BASE_BRANCH : NPM_PACKAGE_VERSION;
 }
