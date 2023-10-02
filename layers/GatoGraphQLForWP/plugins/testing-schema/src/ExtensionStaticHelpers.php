@@ -14,7 +14,7 @@ class ExtensionStaticHelpers
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
             ExtensionMetadata::DOC_IMAGE_HOSTING_GITHUB_REPO_OWNER,
-            ExtensionMetadata::GITHUB_REPO_NAME
+            ExtensionMetadata::DOC_IMAGE_HOSTING_GITHUB_REPO_NAME
         );
     }
 

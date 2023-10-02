@@ -25,7 +25,7 @@ class PluginStaticHelpers
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
             PluginMetadata::DOC_IMAGE_HOSTING_GITHUB_REPO_OWNER,
-            PluginMetadata::GITHUB_REPO_NAME
+            PluginMetadata::DOC_IMAGE_HOSTING_GITHUB_REPO_NAME
         );
     }
 

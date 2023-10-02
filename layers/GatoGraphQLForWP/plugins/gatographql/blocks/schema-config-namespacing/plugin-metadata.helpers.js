@@ -1,7 +1,7 @@
 const PluginMetadataConfig = require("./plugin-metadata.config")
 
 module.exports.getGitHubRepoDocsRootURL = function () {
-    return `https://raw.githubusercontent.com/${ PluginMetadataConfig.DOC_IMAGE_HOSTING_GITHUB_REPO_OWNER }/${ PluginMetadataConfig.GITHUB_REPO_NAME }`;
+    return `https://raw.githubusercontent.com/${ PluginMetadataConfig.DOC_IMAGE_HOSTING_GITHUB_REPO_OWNER }/${ PluginMetadataConfig.DOC_IMAGE_HOSTING_GITHUB_REPO_NAME }`;
 }
 
 module.exports.getStablePackageTagForCurrentVersion = function () {
