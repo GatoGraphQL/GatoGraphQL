@@ -24,8 +24,8 @@ class PluginStaticHelpers
     {
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
-            PluginMetadata::DOCSGITHUB_REPO_OWNER,
-            PluginMetadata::DOCSGITHUB_REPO_NAME
+            PluginMetadata::DOCS_GITHUB_REPO_OWNER,
+            PluginMetadata::DOCS_GITHUB_REPO_NAME
         );
     }
 
@@ -33,7 +33,7 @@ class PluginStaticHelpers
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
-            ? PluginMetadata::DOCSGIT_BASE_BRANCH
+            ? PluginMetadata::DOCS_GIT_BASE_BRANCH
             : $mainPluginVersion;
     }
 

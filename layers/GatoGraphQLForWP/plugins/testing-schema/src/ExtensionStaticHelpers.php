@@ -13,8 +13,8 @@ class ExtensionStaticHelpers
     {
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
-            ExtensionMetadata::DOCSGITHUB_REPO_OWNER,
-            ExtensionMetadata::DOCSGITHUB_REPO_NAME
+            ExtensionMetadata::DOCS_GITHUB_REPO_OWNER,
+            ExtensionMetadata::DOCS_GITHUB_REPO_NAME
         );
     }
 
@@ -22,7 +22,7 @@ class ExtensionStaticHelpers
     {
         $extensionPluginVersion = PluginApp::getExtension(GatoGraphQLExtension::class)->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($extensionPluginVersion)
-            ? ExtensionMetadata::DOCSGIT_BASE_BRANCH
+            ? ExtensionMetadata::DOCS_GIT_BASE_BRANCH
             : $extensionPluginVersion;
     }
 

@@ -1,3 +1,3 @@
-module.exports.DOCSGIT_BASE_BRANCH = 'master'
-module.exports.DOCSGITHUB_REPO_OWNER = 'GatoGraphQL';
-module.exports.DOCSGITHUB_REPO_NAME = 'GatoGraphQL';
+module.exports.DOCS_GIT_BASE_BRANCH = 'master'
+module.exports.DOCS_GITHUB_REPO_OWNER = 'GatoGraphQL';
+module.exports.DOCS_GITHUB_REPO_NAME = 'GatoGraphQL';
