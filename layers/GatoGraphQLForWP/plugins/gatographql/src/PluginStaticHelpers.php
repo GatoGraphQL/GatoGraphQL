@@ -20,7 +20,7 @@ class PluginStaticHelpers
      */
     private static ?array $activeWordPressPluginSlugs = null;
 
-    public static function getGitHubRepoDocsRootURL(): string
+    private static function getGitHubRepoDocsRootURL(): string
     {
         return sprintf(
             'https://raw.githubusercontent.com/%s/%s',
@@ -29,7 +29,7 @@ class PluginStaticHelpers
         );
     }
 
-    public static function getGitHubRepoDocsBranchOrTag(): string
+    private static function getGitHubRepoDocsBranchOrTag(): string
     {
         $mainPluginVersion = PluginApp::getMainPlugin()->getPluginVersion();
         return PluginVersionHelpers::isDevelopmentVersion($mainPluginVersion)
