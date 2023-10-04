@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Command;
 
-use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SkipMonorepoSplitPackagesJsonProvider;
+use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json\SkipMonorepoSplitPackagesProvider;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 
-final class SkipMonorepoSplitPackagesJsonCommand extends AbstractSymplifyCommand
+final class SkipMonorepoSplitPackagesCommand extends AbstractSymplifyCommand
 {
-    public function __construct(private SkipMonorepoSplitPackagesJsonProvider $skipMonorepoSplitPackagesJsonProvider)
+    public function __construct(private SkipMonorepoSplitPackagesProvider $skipMonorepoSplitPackagesProvider)
     {
         parent::__construct();
     }
@@ -25,7 +25,7 @@ final class SkipMonorepoSplitPackagesJsonCommand extends AbstractSymplifyCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $skipMonorepoSplitPackages = $this->skipMonorepoSplitPackagesJsonProvider->provideSkipMonorepoSplitPackages();
+        $skipMonorepoSplitPackages = $this->skipMonorepoSplitPackagesProvider->provideSkipMonorepoSplitPackages();
 
         $this->symfonyStyle->writeln(implode(' ', $skipMonorepoSplitPackages));
 

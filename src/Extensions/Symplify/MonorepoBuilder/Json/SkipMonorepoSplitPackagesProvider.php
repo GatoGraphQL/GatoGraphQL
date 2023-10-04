@@ -9,7 +9,7 @@ use PoP\PoP\Extensions\Symplify\MonorepoBuilder\Utils\PackageUtils;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
-final class SkipMonorepoSplitPackagesJsonProvider
+final class SkipMonorepoSplitPackagesProvider
 {
     /**
      * @var string[]
