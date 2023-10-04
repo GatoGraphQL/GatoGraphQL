@@ -25,7 +25,7 @@ final class PackageUtils
     /**
      * @param string[] $pathListFilter
      */
-    public function isPackageInPathList(string $package, array $pathListFilter): bool
+    public function doesPackageContainAnyPath(string $package, array $pathListFilter): bool
     {
         $matchingPaths = array_filter(
             $pathListFilter,

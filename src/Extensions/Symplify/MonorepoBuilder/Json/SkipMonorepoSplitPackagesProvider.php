@@ -33,7 +33,7 @@ final class SkipMonorepoSplitPackagesProvider
         $packages = $this->customPackageProvider->provide();
         foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
-            if ($this->skipMonorepoSplitPackages !== [] && !$this->packageUtils->isPackageInPathList($packageRelativePath, $this->skipMonorepoSplitPackages)) {
+            if ($this->skipMonorepoSplitPackages !== [] && !$this->packageUtils->doesPackageContainAnyPath($packageRelativePath, $this->skipMonorepoSplitPackages)) {
                 continue;
             }
             $packageEntries[] = $packageRelativePath;
