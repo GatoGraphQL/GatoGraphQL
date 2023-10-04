@@ -23,12 +23,12 @@ final class PackageUtils
     }
 
     /**
-     * @param string[] $pathListFilter
+     * @param string[] $paths
      */
-    public function doesPackageContainAnyPath(string $package, array $pathListFilter): bool
+    public function doesPackageContainAnyPath(string $package, array $paths): bool
     {
         $matchingPaths = array_filter(
-            $pathListFilter,
+            $paths,
             fn (string $path) => str_starts_with($package, $path)
         );
         return count($matchingPaths) > 0;
