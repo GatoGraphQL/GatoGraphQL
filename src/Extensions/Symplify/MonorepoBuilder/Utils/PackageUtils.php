@@ -15,11 +15,11 @@ final class PackageUtils
         // file `api-clients/README.md` produces not just `api-clients`
         // but also `api`
         $package .= str_ends_with($package, '/') ? '' : '/';
-        $matchingPackages = array_filter(
+        $matchingFiles = array_filter(
             $fileListFilter,
             fn (string $file) => str_starts_with($file, $package)
         );
-        return count($matchingPackages) > 0;
+        return count($matchingFiles) > 0;
     }
 
     /**
@@ -27,10 +27,10 @@ final class PackageUtils
      */
     public function isPackageInPathList(string $package, array $pathListFilter): bool
     {
-        $matchingPackages = array_filter(
+        $matchingPaths = array_filter(
             $pathListFilter,
-            fn (string $file) => str_starts_with($file, $package)
+            fn (string $path) => str_starts_with($package, $path)
         );
-        return count($matchingPackages) > 0;
+        return count($matchingPaths) > 0;
     }
 }
