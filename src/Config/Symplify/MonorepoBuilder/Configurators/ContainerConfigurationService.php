@@ -9,6 +9,7 @@ use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DataToAppendAndRemoveDat
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\DowngradeRectorDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\EnvironmentVariablesDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\InstaWPConfigDataSource;
+use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\MonorepoSplitPackageDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PHPStanDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PackageOrganizationDataSource;
 use PoP\PoP\Config\Symplify\MonorepoBuilder\DataSources\PluginDataSource;
@@ -50,6 +51,16 @@ class ContainerConfigurationService
             $parameters->set(
                 Option::PACKAGE_DIRECTORIES_EXCLUDES,
                 $packageOrganizationConfig->getPackageDirectoryExcludes()
+            );
+        }
+
+        /**
+         * Packages not to do the monorepo split
+         */
+        if ($skipMonorepoSplitPackageConfig = $this->getMonorepoSplitPackageDataSource()) {
+            $parameters->set(
+                CustomOption::SKIP_MONOREPO_SPLIT_PACKAGES,
+                $skipMonorepoSplitPackageConfig->getSkipMonorepoSplitPackagePaths()
             );
         }
 
@@ -161,6 +172,11 @@ class ContainerConfigurationService
     protected function getPackageOrganizationDataSource(): ?PackageOrganizationDataSource
     {
         return new PackageOrganizationDataSource($this->rootDirectory);
+    }
+
+    protected function getMonorepoSplitPackageDataSource(): ?MonorepoSplitPackageDataSource
+    {
+        return new MonorepoSplitPackageDataSource($this->rootDirectory);
     }
 
     protected function getPluginDataSource(): ?PluginDataSource

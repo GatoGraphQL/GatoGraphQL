@@ -27,14 +27,20 @@ final class PackageEntriesJsonProvider
 
     /**
      * @param string[] $fileListFilter
+     * @param string[] $excludePackageRelativePaths
      * @return array<array<string,string>>
      */
-    public function providePackageEntries(array $fileListFilter = []): array
-    {
+    public function providePackageEntries(
+        array $fileListFilter = [],
+        array $excludePackageRelativePaths = [],
+    ): array {
         $packageEntries = [];
         $packages = $this->customPackageProvider->provide();
         foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
+            if (in_array($packageRelativePath, $excludePackageRelativePaths)) {
+                continue;
+            }
             // If provided, filter the packages to the ones containing the list of files.
             // Useful to launch GitHub runners to split modified packages only
             if ($fileListFilter !== [] && !$this->packageUtils->isPackageInFileList($packageRelativePath, $fileListFilter)) {

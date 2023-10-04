@@ -15,10 +15,22 @@ final class PackageUtils
         // file `api-clients/README.md` produces not just `api-clients`
         // but also `api`
         $package .= str_ends_with($package, '/') ? '' : '/';
-        $matchingPackages = array_filter(
+        $matchingFiles = array_filter(
             $fileListFilter,
             fn (string $file) => str_starts_with($file, $package)
         );
-        return count($matchingPackages) > 0;
+        return count($matchingFiles) > 0;
+    }
+
+    /**
+     * @param string[] $paths
+     */
+    public function doesPackageContainAnyPath(string $package, array $paths): bool
+    {
+        $matchingPaths = array_filter(
+            $paths,
+            fn (string $path) => str_starts_with($package, $path)
+        );
+        return count($matchingPaths) > 0;
     }
 }

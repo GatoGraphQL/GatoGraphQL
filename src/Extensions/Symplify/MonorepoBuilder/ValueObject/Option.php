@@ -13,6 +13,10 @@ final class Option
     /**
      * @var string
      */
+    public final const SKIP_MONOREPO_SPLIT_PACKAGES = 'skip-monorepo-split-packages';
+    /**
+     * @var string
+     */
     public final const PLUGIN_CONFIG_ENTRIES = 'plugin-config-entries';
     /**
      * @var string
@@ -54,6 +58,10 @@ final class Option
      * @var string
      */
     public final const FILTER = 'filter';
+    /**
+     * @var string
+     */
+    public final const EXCLUDE_PACKAGE_PATH = 'exclude-package-path';
     /**
      * @var string
      */
