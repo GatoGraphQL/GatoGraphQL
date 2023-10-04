@@ -13,7 +13,7 @@ final class Option
     /**
      * @var string
      */
-    public final const SKIP_MONOREPO_SPLIT_PACKAGES = 'skip-monorepo-split-packages';
+    public final const SKIP_MONOREPO_SPLIT_PACKAGE_PATHS = 'skip-monorepo-split-package-paths';
     /**
      * @var string
      */

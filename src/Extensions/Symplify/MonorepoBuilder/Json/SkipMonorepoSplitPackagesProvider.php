@@ -14,14 +14,14 @@ final class SkipMonorepoSplitPackagesProvider
     /**
      * @var string[]
      */
-    private array $skipMonorepoSplitPackages = [];
+    private array $skipMonorepoSplitPackagePaths = [];
 
     public function __construct(
         private CustomPackageProvider $customPackageProvider,
         ParameterProvider $parameterProvider,
         private PackageUtils $packageUtils
     ) {
-        $this->skipMonorepoSplitPackages = $parameterProvider->provideArrayParameter(Option::SKIP_MONOREPO_SPLIT_PACKAGES);
+        $this->skipMonorepoSplitPackagePaths = $parameterProvider->provideArrayParameter(Option::SKIP_MONOREPO_SPLIT_PACKAGE_PATHS);
     }
 
     /**
@@ -29,7 +29,7 @@ final class SkipMonorepoSplitPackagesProvider
      */
     public function provideSkipMonorepoSplitPackages(): array
     {
-        if ($this->skipMonorepoSplitPackages === []) {
+        if ($this->skipMonorepoSplitPackagePaths === []) {
             return [];
         }
 
@@ -37,7 +37,7 @@ final class SkipMonorepoSplitPackagesProvider
         $packages = $this->customPackageProvider->provide();
         foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
-            if (!$this->packageUtils->doesPackageContainAnyPath($packageRelativePath, $this->skipMonorepoSplitPackages)) {
+            if (!$this->packageUtils->doesPackageContainAnyPath($packageRelativePath, $this->skipMonorepoSplitPackagePaths)) {
                 continue;
             }
             $packageEntries[] = $packageRelativePath;

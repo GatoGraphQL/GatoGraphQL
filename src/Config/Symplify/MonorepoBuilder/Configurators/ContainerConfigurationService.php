@@ -59,7 +59,7 @@ class ContainerConfigurationService
          */
         if ($skipMonorepoSplitPackageConfig = $this->getMonorepoSplitPackageDataSource()) {
             $parameters->set(
-                CustomOption::SKIP_MONOREPO_SPLIT_PACKAGES,
+                CustomOption::SKIP_MONOREPO_SPLIT_PACKAGE_PATHS,
                 $skipMonorepoSplitPackageConfig->getSkipMonorepoSplitPackagePaths()
             );
         }
