@@ -42,10 +42,10 @@ final class CustomDependencyUpdater
         array $smartFileInfos,
         array $packageReplacements,
         string $version,
-        bool $updateMinimumStabilityIfDev = true
+        // bool $updateMinimumStabilityIfDev = true
     ): void {
-        // If the version is for DEV (i.e. "dev-master" or "dev-main"), make sure to add the minimum-stability entry
-        $isDevVersion = str_starts_with($version, 'dev-');
+        // // If the version is for DEV (i.e. "dev-master" or "dev-main"), make sure to add the minimum-stability entry
+        // $isDevVersion = str_starts_with($version, 'dev-');
 
         foreach ($smartFileInfos as $packageComposerFileInfo) {
             $json = $this->jsonFileManager->loadFromFileInfo($packageComposerFileInfo);
@@ -54,10 +54,10 @@ final class CustomDependencyUpdater
             $json = $this->processSection($json, $packageReplacements, $version, ComposerJsonSection::REQUIRE_DEV);
             $json = $this->processSection($json, $packageReplacements, $version, ComposerJsonSection::REPLACE);
 
-            if ($updateMinimumStabilityIfDev && $isDevVersion) {
-                $json[ComposerJsonSection::MINIMUM_STABILITY] = 'dev';
-                $json[ComposerJsonSection::PREFER_STABLE] = true;
-            }
+            // if ($updateMinimumStabilityIfDev && $isDevVersion) {
+            //     $json[ComposerJsonSection::MINIMUM_STABILITY] = 'dev';
+            //     $json[ComposerJsonSection::PREFER_STABLE] = true;
+            // }
 
             $this->jsonFileManager->printJsonToFileInfo($json, $packageComposerFileInfo);
         }
