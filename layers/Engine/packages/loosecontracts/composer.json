@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Loose Contracts: a method to \"code against interfaces, not implementations\" for strings such as option names, hook names, etc",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "loosecontracts"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "loosecontracts"],
     "homepage": "https://github.com/getpop/loosecontracts",
     "license": "GPL-2.0-or-later",
     "authors": [

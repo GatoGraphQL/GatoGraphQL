@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Adds support to query single objects (users, posts, etc) in the request",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "queriedobject"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "queriedobject"],
     "homepage": "https://github.com/PoPCMSSchema/queriedobject",
     "license": "GPL-2.0-or-later",
     "authors": [

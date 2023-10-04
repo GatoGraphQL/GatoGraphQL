@@ -146,7 +146,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post Mutations\"",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-mutations-wp"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "custompost-mutations-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-mutations-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

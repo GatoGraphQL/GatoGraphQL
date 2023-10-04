@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Adds support for comment meta",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "commentmeta"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "commentmeta"],
     "homepage": "https://github.com/PoPCMSSchema/commentmeta",
     "license": "GPL-2.0-or-later",
     "authors": [

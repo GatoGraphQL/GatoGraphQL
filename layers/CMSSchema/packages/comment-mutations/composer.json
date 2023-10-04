@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Adds support for comment mutations",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "comment-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "comment-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/comment-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

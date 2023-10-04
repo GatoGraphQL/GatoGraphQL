@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Create REST endpoints in the PoP API",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "API", "REST", "api-rest"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "API", "REST", "api-rest"],
     "homepage": "https://github.com/PoP-PoPAPI/api-rest",
     "license": "GPL-2.0-or-later",
     "authors": [

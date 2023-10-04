@@ -2,7 +2,7 @@
     "name": "pop-cms-schema/tags",
     "type": "library",
     "description": "Adds support for tags",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "tags"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "tags"],
     "homepage": "https://github.com/PoPCMSSchema/tags",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Posts\"",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "posts-wp"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "posts-wp"],
     "homepage": "https://github.com/PoPCMSSchema/posts-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

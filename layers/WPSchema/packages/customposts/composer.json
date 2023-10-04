@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "WordPress-specific Custom Post data model",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "customposts"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "WP", "customposts"],
     "homepage": "https://github.com/PoPWPSchema/customposts",
     "license": "GPL-2.0-or-later",
     "authors": [

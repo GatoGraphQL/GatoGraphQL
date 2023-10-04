@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "General utilities for the plugin, not dependent on WordPress",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "plugin-utils"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "plugin-utils"],
     "homepage": "https://github.com/GatoGraphQL/plugin-utils",
     "license": "GPL-2.0-or-later",
     "authors": [

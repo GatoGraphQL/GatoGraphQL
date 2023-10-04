@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Base functionality to add categories to custom posts",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-category-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "custompost-category-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-category-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

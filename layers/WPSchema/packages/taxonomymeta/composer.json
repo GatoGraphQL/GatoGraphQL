@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "WordPress-specific Taxonomy Meta data model",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "taxonomymeta"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "WP", "taxonomymeta"],
     "homepage": "https://github.com/PoPWPSchema/taxonomymeta",
     "license": "GPL-2.0-or-later",
     "authors": [

@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Queried Object\"",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "queriedobject-wp"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "queriedobject-wp"],
     "homepage": "https://github.com/PoPCMSSchema/queriedobject-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

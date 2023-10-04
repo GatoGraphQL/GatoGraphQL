@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Custom Post Tags\"",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "custompost-tags-wp"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "custompost-tags-wp"],
     "homepage": "https://github.com/PoPCMSSchema/custompost-tags-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

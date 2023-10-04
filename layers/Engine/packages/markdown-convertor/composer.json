@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Convert Markdown to HTML",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "markdown-convertor"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "markdown-convertor"],
     "homepage": "https://github.com/getpop/markdown-convertor",
     "license": "GPL-2.0-or-later",
     "authors": [

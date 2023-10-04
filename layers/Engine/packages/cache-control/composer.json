@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Add HTTP caching to the response",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "cache-control"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "cache-control"],
     "homepage": "https://github.com/getpop/cache-control",
     "license": "GPL-2.0-or-later",
     "authors": [

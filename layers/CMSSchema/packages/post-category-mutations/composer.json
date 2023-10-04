@@ -147,7 +147,7 @@
     },
     "type": "library",
     "description": "Add categories to posts",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "post-category-mutations"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "post-category-mutations"],
     "homepage": "https://github.com/PoPCMSSchema/post-category-mutations",
     "license": "GPL-2.0-or-later",
     "authors": [

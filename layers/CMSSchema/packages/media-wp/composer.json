@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Media\"",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "media-wp"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "media-wp"],
     "homepage": "https://github.com/PoPCMSSchema/media-wp",
     "license": "GPL-2.0-or-later",
     "authors": [

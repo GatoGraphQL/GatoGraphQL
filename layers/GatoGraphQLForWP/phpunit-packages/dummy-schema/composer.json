@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Dummy schema resolvers for testing with PHPUnit",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "dummy", "schema"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "dummy", "schema"],
     "homepage": "https://github.com/PHPUnitForGatoGraphQL/dummy-schema",
     "license": "GPL-2.0-or-later",
     "authors": [

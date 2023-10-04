@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Adds support for user roles",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "user-roles"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "user-roles"],
     "homepage": "https://github.com/PoPCMSSchema/user-roles",
     "license": "GPL-2.0-or-later",
     "authors": [

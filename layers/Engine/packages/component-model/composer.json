@@ -146,7 +146,7 @@
     },
     "type": "library",
     "description": "Component model for PoP, over which the component-based architecture is based",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "component-model"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "component-model"],
     "homepage": "https://github.com/getpop/component-model",
     "license": "GPL-2.0-or-later",
     "authors": [

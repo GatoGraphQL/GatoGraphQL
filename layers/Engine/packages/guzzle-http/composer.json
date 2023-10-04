@@ -149,7 +149,7 @@
     },
     "type": "library",
     "description": "Provide (scoped) access to Guzzle HTTP",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "guzzle-http"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "guzzle-http"],
     "homepage": "https://github.com/getpop/guzzle-http",
     "license": "GPL-2.0-or-later",
     "authors": [

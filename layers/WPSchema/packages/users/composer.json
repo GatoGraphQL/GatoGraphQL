@@ -148,7 +148,7 @@
     },
     "type": "library",
     "description": "WordPress-specific User data model",
-    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "Gato", "GatoGraphQL", "WP", "users"],
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "WP", "users"],
     "homepage": "https://github.com/PoPWPSchema/users",
     "license": "GPL-2.0-or-later",
     "authors": [
