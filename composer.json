@@ -319,6 +319,8 @@
             "PoP\\Root\\": "layers/Engine/packages/root/tests"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress"
     },

@@ -46,6 +46,8 @@
         "pop-wp-schema/taxonomymeta": "dev-master",
         "pop-wp-schema/usermeta": "dev-master"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
