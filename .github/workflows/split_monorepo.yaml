@@ -49,7 +49,7 @@ jobs:
                     packages_in_diff="$(echo $clean_diff | grep -E -o 'layers/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/[A-Za-z0-9_\-]*/' | sort -u)"
                     echo "[Packages in diff] $(echo $packages_in_diff | tr '\n' ' ')"
                     filter_arg="--filter=$(echo $packages_in_diff | sed -e 's/ / --filter=/g')"
-                    exclude_package_paths="$(vendor/bin/monorepo-builder skip-monorepo-split-packages GIT_BASE_BRANCH --config=config/monorepo-builder/skip-monorepo-split-packages.php)"
+                    exclude_package_paths="$(vendor/bin/monorepo-builder skip-monorepo-split-packages --config=config/monorepo-builder/skip-monorepo-split-packages.php)"
                     exclude_package_path_arg="--exclude-package-path=$(echo $exclude_package_paths | sed -e 's/ / --exclude-package-path=/g')"
                     echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php $(echo $filter_arg) $(echo $exclude_package_path_arg))" >> $GITHUB_OUTPUT
                     echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT

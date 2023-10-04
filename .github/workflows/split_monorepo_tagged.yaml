@@ -32,7 +32,9 @@ jobs:
 
             -   id: output_data
                 run: |
-                    echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php)" >> $GITHUB_OUTPUT
+                    exclude_package_paths="$(vendor/bin/monorepo-builder skip-monorepo-split-packages --config=config/monorepo-builder/skip-monorepo-split-packages.php)"
+                    exclude_package_path_arg="--exclude-package-path=$(echo $exclude_package_paths | sed -e 's/ / --exclude-package-path=/g')"
+                    echo "matrix=$(vendor/bin/monorepo-builder package-entries-json --config=config/monorepo-builder/package-entries-json.php $(echo $exclude_package_path_arg))" >> $GITHUB_OUTPUT
                     echo "git_base_branch=$(vendor/bin/monorepo-builder env-var GIT_BASE_BRANCH --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_name=$(vendor/bin/monorepo-builder env-var GIT_USER_NAME --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
                     echo "git_user_email=$(vendor/bin/monorepo-builder env-var GIT_USER_EMAIL --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
