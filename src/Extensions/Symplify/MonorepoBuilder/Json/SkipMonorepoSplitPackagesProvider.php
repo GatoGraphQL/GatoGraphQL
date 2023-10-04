@@ -33,10 +33,10 @@ final class SkipMonorepoSplitPackagesProvider
         $packages = $this->customPackageProvider->provide();
         foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
-            if ($this->skipMonorepoSplitPackages !== [] && !$this->packageUtils->isPackageInFileList($packageRelativePath, $this->skipMonorepoSplitPackages)) {
+            if ($this->skipMonorepoSplitPackages !== [] && !$this->packageUtils->isPackageInPathList($packageRelativePath, $this->skipMonorepoSplitPackages)) {
                 continue;
             }
-            $packageEntries[] = $package;
+            $packageEntries[] = $packageRelativePath;
         }
 
         return $packageEntries;

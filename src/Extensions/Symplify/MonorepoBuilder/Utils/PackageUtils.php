@@ -21,4 +21,16 @@ final class PackageUtils
         );
         return count($matchingPackages) > 0;
     }
+
+    /**
+     * @param string[] $pathListFilter
+     */
+    public function isPackageInPathList(string $package, array $pathListFilter): bool
+    {
+        $matchingPackages = array_filter(
+            $pathListFilter,
+            fn (string $file) => str_starts_with($file, $package)
+        );
+        return count($matchingPackages) > 0;
+    }
 }
