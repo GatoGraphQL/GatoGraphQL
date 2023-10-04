@@ -31,14 +31,26 @@ final class PackageEntriesJsonCommand extends AbstractSymplifyCommand
             'Filter the packages to those from the list of files. Useful to split monorepo on modified packages only',
             []
         );
+        $this->addOption(
+            Option::EXCLUDE_PACKAGE_PATH,
+            null,
+            InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
+            'Exclude the packages with the provided relative paths. Useful to not split monorepo on packages without their own repo',
+            []
+        );
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var string[] $fileFilter */
         $fileFilter = $input->getOption(Option::FILTER);
+        /** @var string[] $excludePackagePaths */
+        $excludePackagePaths = $input->getOption(Option::EXCLUDE_PACKAGE_PATH);
 
-        $packageEntries = $this->packageEntriesJsonProvider->providePackageEntries($fileFilter);
+        $packageEntries = $this->packageEntriesJsonProvider->providePackageEntries(
+            $fileFilter,
+            $excludePackagePaths,
+        );
 
         // must be without spaces, otherwise it breaks GitHub Actions json
         $json = Json::encode($packageEntries);

@@ -57,6 +57,10 @@ final class Option
     /**
      * @var string
      */
+    public final const EXCLUDE_PACKAGE_PATH = 'exclude-package-path';
+    /**
+     * @var string
+     */
     public final const OUTPUT_FILE = 'output-file';
     /**
      * @var string
