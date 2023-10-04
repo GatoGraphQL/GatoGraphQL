@@ -29,11 +29,15 @@ final class SkipMonorepoSplitPackagesProvider
      */
     public function provideSkipMonorepoSplitPackages(): array
     {
+        if ($this->skipMonorepoSplitPackages === []) {
+            return [];
+        }
+
         $packageEntries = [];
         $packages = $this->customPackageProvider->provide();
         foreach ($packages as $package) {
             $packageRelativePath = $package->getRelativePath();
-            if ($this->skipMonorepoSplitPackages !== [] && !$this->packageUtils->doesPackageContainAnyPath($packageRelativePath, $this->skipMonorepoSplitPackages)) {
+            if (!$this->packageUtils->doesPackageContainAnyPath($packageRelativePath, $this->skipMonorepoSplitPackages)) {
                 continue;
             }
             $packageEntries[] = $packageRelativePath;
