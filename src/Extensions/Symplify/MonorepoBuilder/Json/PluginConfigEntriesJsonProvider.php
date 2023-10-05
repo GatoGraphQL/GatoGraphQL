@@ -40,8 +40,8 @@ final class PluginConfigEntriesJsonProvider
             'plugin_slug',
             'version',
             'main_file',
-            'dist_repo_organization',
-            'dist_repo_name',
+            // 'dist_repo_organization',
+            // 'dist_repo_name',
             'rector_downgrade_config',
         ];
         /**
@@ -94,6 +94,10 @@ final class PluginConfigEntriesJsonProvider
 
             // If it doens't specify a branch, use "main" by default
             $entryConfig['dist_repo_branch'] ??= 'main';
+
+            // If not provided, the "Publish to DIST repo" will not be executed
+            $entryConfig['dist_repo_organization'] ??= '';
+            $entryConfig['dist_repo_name'] ??= '';
 
             // Merge all rector configs as a string
             $entryConfig['additional_rector_configs'] = implode(' ', $entryConfig['additional_rector_configs'] ?? []);

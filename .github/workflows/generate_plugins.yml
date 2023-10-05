@@ -273,5 +273,5 @@ jobs:
                     tag: ${{ steps.previous_tag.outputs.tag }}
                     user-name: "${{ needs.provide_data.outputs.git_user_name }}"
                     user-email: "${{ needs.provide_data.outputs.git_user_email }}"
-                if: github.event_name == 'release'
+                if: ${{ github.event_name == 'release' && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
 
