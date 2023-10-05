@@ -24,6 +24,7 @@ class BumpVersionForDevInMonorepoMetadataFileReleaseWorker extends AbstractConve
                 $this->monorepoMetadataFile,
             ],
             $replacements,
+            true,
         );
     }
 
