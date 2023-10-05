@@ -25,7 +25,7 @@ class ConvertVersionForProdInPluginMainFileReleaseWorker extends AbstractConvert
             // Main Gato GraphQL plugin version constraint
             "/" . preg_quote('$mainPluginVersionConstraint') . " = '[0-9.^]+';/" => "\$mainPluginVersionConstraint = '$requiredCurrentDevVersion';",
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginMainFiles(), $replacements);
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginMainFiles(), $replacements, true);
     }
 
     public function getDescription(Version $version): string

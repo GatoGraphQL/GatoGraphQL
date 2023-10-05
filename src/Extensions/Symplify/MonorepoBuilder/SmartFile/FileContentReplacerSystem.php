@@ -21,16 +21,25 @@ final class FileContentReplacerSystem
      */
     public function replaceContentInFiles(
         array $files,
-        array $patternReplacements
+        array $patternReplacements,
+        bool $useRegex
     ): void {
         foreach ($files as $file) {
             $fileContent = $this->smartFileSystem->readFile($file);
             foreach ($patternReplacements as $pattern => $replacement) {
-                $fileContent = Strings::replace(
-                    $fileContent,
-                    $pattern,
-                    $replacement
-                );
+                if ($useRegex) {
+                    $fileContent = Strings::replace(
+                        $fileContent,
+                        $pattern,
+                        $replacement
+                    );
+                } else {
+                    $fileContent = str_replace(
+                        $pattern,
+                        $replacement,
+                        $fileContent
+                    );
+                }
             }
             $this->smartFileSystem->dumpFile($file, $fileContent);
         }
@@ -42,12 +51,13 @@ final class FileContentReplacerSystem
      */
     public function replaceContentInSmartFileInfos(
         array $smartFileInfos,
-        array $patternReplacements
+        array $patternReplacements,
+        bool $useRegex
     ): void {
         $files = array_map(
             fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath(),
             $smartFileInfos
         );
-        $this->replaceContentInFiles($files, $patternReplacements);
+        $this->replaceContentInFiles($files, $patternReplacements, $useRegex);
     }
 }

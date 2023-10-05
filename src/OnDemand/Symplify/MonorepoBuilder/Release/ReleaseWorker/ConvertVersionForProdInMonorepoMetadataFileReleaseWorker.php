@@ -22,6 +22,7 @@ class ConvertVersionForProdInMonorepoMetadataFileReleaseWorker extends AbstractC
                 $this->monorepoMetadataFile,
             ],
             $replacements,
+            true,
         );
     }
 
