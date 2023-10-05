@@ -17,25 +17,25 @@ final class FileContentReplacerSystem
 
     /**
      * @param string[] $files
-     * @param array<string,string> $patternReplacements a regex pattern to search, and its replacement
+     * @param array<string,string> $stringOrRegexPatternReplacements a string or regex pattern to search, and its replacement
      */
     public function replaceContentInFiles(
         array $files,
-        array $patternReplacements,
+        array $stringOrRegexPatternReplacements,
         bool $useRegex
     ): void {
         foreach ($files as $file) {
             $fileContent = $this->smartFileSystem->readFile($file);
-            foreach ($patternReplacements as $pattern => $replacement) {
+            foreach ($stringOrRegexPatternReplacements as $stringOrRegexPattern => $replacement) {
                 if ($useRegex) {
                     $fileContent = Strings::replace(
                         $fileContent,
-                        $pattern,
+                        $stringOrRegexPattern,
                         $replacement
                     );
                 } else {
                     $fileContent = str_replace(
-                        $pattern,
+                        $stringOrRegexPattern,
                         $replacement,
                         $fileContent
                     );
@@ -47,17 +47,17 @@ final class FileContentReplacerSystem
 
     /**
      * @param SmartFileInfo[] $smartFileInfos
-     * @param array<string,string> $patternReplacements a regex pattern to search, and its replacement
+     * @param array<string,string> $stringOrRegexPatternReplacements a string or regex pattern to search, and its replacement
      */
     public function replaceContentInSmartFileInfos(
         array $smartFileInfos,
-        array $patternReplacements,
+        array $stringOrRegexPatternReplacements,
         bool $useRegex
     ): void {
         $files = array_map(
             fn (SmartFileInfo $smartFileInfo) => $smartFileInfo->getRealPath(),
             $smartFileInfos
         );
-        $this->replaceContentInFiles($files, $patternReplacements, $useRegex);
+        $this->replaceContentInFiles($files, $stringOrRegexPatternReplacements, $useRegex);
     }
 }
