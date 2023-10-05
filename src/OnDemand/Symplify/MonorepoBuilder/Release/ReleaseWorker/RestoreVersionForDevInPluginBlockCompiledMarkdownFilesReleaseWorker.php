@@ -16,9 +16,9 @@ class RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker extend
         $gitHubRepoDocsRootURL = $this->getGitHubRepoDocsRootURL();
         $replacements = [
             // Change the image src (pointing to GitHub) from the tag back to master
-            '#' . preg_quote($gitHubRepoDocsRootURL . '/' . $version->getVersionString() . '/') . '#' => $gitHubRepoDocsRootURL . '/' . $this->branchName . '/',
+            $gitHubRepoDocsRootURL . '/' . $version->getVersionString() . '/' => $gitHubRepoDocsRootURL . '/' . $this->branchName . '/',
         ];
-        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginBlockCompiledMarkdownFiles(), $replacements, true);
+        $this->fileContentReplacerSystem->replaceContentInFiles($this->getPluginBlockCompiledMarkdownFiles(), $replacements, false);
     }
 
     public function getDescription(Version $version): string
