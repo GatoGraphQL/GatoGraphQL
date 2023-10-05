@@ -34,10 +34,6 @@ class GatoGraphQLContainerConfigurationService extends AbstractMainPluginDowngra
                 $this->pluginDir . '/vendor/boxuk/wp-muplugin-loader/*',
 
                 // These are skipped in the .sh since it's faster
-                // // All the "migrate" folders
-                // $this->pluginDir . '/vendor/getpop/migrate-*/*',
-                // $this->pluginDir . '/vendor/pop-schema/migrate-*/*',
-                // $this->pluginDir . '/vendor/graphql-by-pop/migrate-*/*',
                 // // For local dependencies, skip the tests
                 // $this->pluginDir . '/vendor/getpop/*/tests/*',
                 // $this->pluginDir . '/vendor/pop-schema/*/tests/*',

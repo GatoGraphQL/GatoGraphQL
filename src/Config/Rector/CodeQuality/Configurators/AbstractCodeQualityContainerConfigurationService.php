@@ -63,7 +63,6 @@ abstract class AbstractCodeQualityContainerConfigurationService extends Abstract
         return [
             '*/vendor/*',
             '*/node_modules/*',
-            '*/migrate-*',
         ];
     }
 }

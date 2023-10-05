@@ -49,9 +49,6 @@ return static function (RectorConfig $rectorConfig): void {
         // This library is used for testing the source; it is added under "require" so it must be excluded
         $pluginDir . '/vendor/fakerphp/faker/*',
 
-        // // Exclude migrate libraries
-        // $pluginDir . '/vendor/getpop/migrate-*',
-        // $pluginDir . '/vendor/pop-schema/migrate-*',
         // Exclude tests from libraries
         /**
          * Gato GraphQL plugin: This code is commented out as it is

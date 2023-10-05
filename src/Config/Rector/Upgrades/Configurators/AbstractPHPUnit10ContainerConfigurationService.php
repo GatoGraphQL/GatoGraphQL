@@ -60,7 +60,6 @@ abstract class AbstractPHPUnit10ContainerConfigurationService extends AbstractCo
         return [
             '*/vendor/*',
             '*/node_modules/*',
-            '*/migrate-*',
         ];
     }
 }
