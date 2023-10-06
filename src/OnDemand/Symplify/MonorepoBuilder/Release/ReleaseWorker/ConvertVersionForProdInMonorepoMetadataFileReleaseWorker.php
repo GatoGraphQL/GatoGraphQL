@@ -7,7 +7,7 @@ namespace PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker;
 use PharIo\Version\Version;
 
 /**
- * Remove "-dev" from the MonorepoMetadata version
+ * Set the PROD version (release tag) on the MonorepoMetadata (and remove "-dev")
  */
 class ConvertVersionForProdInMonorepoMetadataFileReleaseWorker extends AbstractConvertVersionInMonorepoMetadataFileReleaseWorker
 {
@@ -28,6 +28,6 @@ class ConvertVersionForProdInMonorepoMetadataFileReleaseWorker extends AbstractC
 
     public function getDescription(Version $version): string
     {
-        return 'Remove "-dev" from the MonorepoMetadata version';
+        return 'Set the PROD version (release tag) on the MonorepoMetadata (and remove "-dev")';
     }
 }
