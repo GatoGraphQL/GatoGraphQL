@@ -17,8 +17,6 @@
             "PoPBackbone\\PHPHooks\\": "upstream-src"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "1.1-dev"
@@ -160,5 +158,7 @@
         "pop-wp-schema/pages": "<1.0.9",
         "pop-wp-schema/custompostmeta": "<1.0.9",
         "pop-wp-schema/media": "<1.0.9"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

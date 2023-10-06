@@ -170,8 +170,6 @@
         "fix-style": "phpcbf src tests",
         "analyse": "phpstan analyse"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
@@ -180,5 +178,7 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
