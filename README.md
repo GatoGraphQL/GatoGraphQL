@@ -115,6 +115,10 @@ Requirements:
 - WordPress 5.4+
 - PHP 7.2+
 
+## Extending the GraphQL schema
+
+Check [`GatoGraphQL/ExtensionStarter`](https://github.com/GatoGraphQL/ExtensionStarter).
+
 ## Development
 
 - [Setting-up the development environment](docs/development-environment.md)
