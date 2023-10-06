@@ -7,12 +7,14 @@ namespace PoP\PoP\Monorepo;
 final class MonorepoMetadata
 {
     /**
-     * Modify this const when bumping the code to a new version.
+     * This const will reflect the current version of the monorepo.
      *
      * Important: This code is read-only! A ReleaseWorker
      * will search for this pattern using a regex, to update the
      * version when creating a new release
      * (i.e. via `composer release-major|minor|patch`).
+     *
+     * @gatographql-readonly-code
      */
     final public const VERSION = '1.1.0-dev';
 

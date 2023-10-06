@@ -43,6 +43,8 @@ if (!defined('ABSPATH')) {
  * version in the ReleaseWorker when deploying for PROD.
  *
  * @see src/OnDemand/Symplify/MonorepoBuilder/Release/ReleaseWorker/ConvertVersionForProdInPluginMainFileReleaseWorker.php
+ *
+ * @gatographql-readonly-code
  */
 $pluginVersion = '1.1.0-dev';
 $pluginName = __('Gato GraphQL', 'gatographql');
@@ -66,6 +68,8 @@ if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsV
  * Important: Do not modify this code!
  * It will be replaced in the CI to append "#{commit hash}"
  * when generating the plugin. 
+ *
+ * @gatographql-readonly-code
  */
 $commitHash = null;
 

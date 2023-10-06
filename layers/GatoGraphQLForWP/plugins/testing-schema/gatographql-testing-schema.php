@@ -49,6 +49,8 @@ add_action(
          * version in the ReleaseWorker when deploying for PROD.
          *
          * @see src/OnDemand/Symplify/MonorepoBuilder/Release/ReleaseWorker/ConvertVersionForProdInPluginMainFileReleaseWorker.php
+         *
+         * @gatographql-readonly-code
          */
         $extensionVersion = '1.1.0-dev';
         $extensionName = \__('Gato GraphQL - Testing Schema', 'gatographql-testing-schema');
@@ -58,6 +60,8 @@ add_action(
          * version in the ReleaseWorker when deploying for PROD.
          *
          * @see src/OnDemand/Symplify/MonorepoBuilder/Release/ReleaseWorker/BumpVersionForDevInPluginMainFileReleaseWorker.php
+         *
+         * @gatographql-readonly-code
          */
         $mainPluginVersionConstraint = '^1.1';
         
@@ -99,7 +103,9 @@ add_action(
          *
          * Important: Do not modify this code!
          * It will be replaced in the CI to append "#{commit hash}"
-         * when generating the plugin. 
+         * when generating the plugin.
+         *
+         * @gatographql-readonly-code
          */
         $commitHash = null;
 
