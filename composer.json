@@ -534,6 +534,7 @@
         "init-server-prod": "composer init-server -d webservers/gatographql-for-prod",
         "start-server": "composer start-server -d webservers/gatographql",
         "destroy-server": "composer destroy-server -d webservers/gatographql",
+        "destroy-server-prod": "composer destroy-server -d webservers/gatographql-for-prod",
         "reset-db": [
             "Composer\\Config::disableProcessTimeout",
             "composer reset-db -d webservers/gatographql"
@@ -622,6 +623,7 @@
         "init-server": "Alias of 'start-server",
         "start-server": "Start the Lando webserver with the 'Gato GraphQL' demo site, for development",
         "destroy-server": "Destroy the Lando webserver with the 'Gato GraphQL' demo site",
+        "destroy-server-prod": "Destroy the Lando webserver with the 'Gato GraphQL' demo site for PROD",
         "reset-db": "Resets the WordPress database",
         "install-site": "Installs the WordPress site",
         "import-data": "Imports pre-defined data into the DB (posts, users, CPTs, etc)",
