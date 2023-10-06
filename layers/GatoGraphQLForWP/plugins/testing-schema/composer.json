@@ -177,8 +177,6 @@
         "fix-style": "phpcbf src tests",
         "phpstan": "phpstan analyse -l 8 src tests"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "extra": {
         "branch-alias": {
             "dev-master": "1.1-dev"
@@ -197,5 +195,7 @@
         "getpop/engine": "self.version",
         "getpop/loosecontracts": "self.version",
         "getpop/root": "self.version"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
