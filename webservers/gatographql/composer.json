@@ -16,9 +16,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
         "installer-paths": {
             "wordpress/wp-content/mu-plugins/{$name}/": [
                 "type:wordpress-muplugin"

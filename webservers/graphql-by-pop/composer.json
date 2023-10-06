@@ -49,9 +49,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
         "installer-types": [
             "graphiql-client",
             "graphql-voyager"
