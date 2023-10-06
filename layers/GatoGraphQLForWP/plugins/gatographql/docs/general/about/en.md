@@ -16,6 +16,10 @@ Interact with all your data in WordPress.
 
 **GitHub:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
 
+<br/>
+
+**Extension Starter:** [github.com/GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter)
+
 </p>
 
 </div>
