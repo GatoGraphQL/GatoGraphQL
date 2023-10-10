@@ -40,6 +40,7 @@
             "Composer\\Config::disableProcessTimeout",
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gatographql-for-prod",
             "@start-server",
+            "sleep 5",
             "@install-site"
         ],
         "init-server": "@start-server",

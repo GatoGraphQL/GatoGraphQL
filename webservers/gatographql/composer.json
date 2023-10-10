@@ -39,6 +39,7 @@
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gatographql",
             "@update-deps",
             "@start-server",
+            "sleep 5",
             "@install-site"
         ],
         "init-server": "@start-server",
