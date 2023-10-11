@@ -571,10 +571,6 @@
             "Composer\\Config::disableProcessTimeout",
             "composer rebuild-app-and-server -d webservers/gatographql"
         ],
-        "rebuild-app-and-server-prod": [
-            "Composer\\Config::disableProcessTimeout",
-            "composer rebuild-app-and-server -d webservers/gatographql-for-prod"
-        ],
         "stop-server": "composer stop-server -d webservers/gatographql",
         "stop-server-prod": "composer stop-server -d webservers/gatographql-for-prod",
         "enable-caching": "composer enable-caching -d webservers/gatographql",

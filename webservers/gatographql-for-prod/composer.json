@@ -63,7 +63,6 @@
             "Composer\\Config::disableProcessTimeout",
             "lando rebuild appserver -y"
         ],
-        "rebuild-app-and-server": "@rebuild-server",
         "stop-server": "lando stop",
         "log-server-errors": [
             "Composer\\Config::disableProcessTimeout",
