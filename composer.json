@@ -641,6 +641,8 @@
         "log-server-errors": "Show (on real time) the errors from the Lando webserver",
         "log-server-warnings": "Show (on real time) the warnings from the Lando webserver",
         "rebuild-app-and-server": "Update the App dependencies (from Composer) and rebuild the Lando webserver",
+        "rebuild-server": "Rebuild the Lando webserver",
+        "rebuild-server-prod": "Rebuild the Lando webserver for PROD",
         "stop-server": "Stop the Lando webserver",
         "stop-server-prod": "Stop the Lando webserver for PROD",
         "enable-caching": "Enable caching for the 'Gato GraphQL' in DEV",
