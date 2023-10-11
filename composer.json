@@ -618,7 +618,7 @@
         "test": "Execute PHPUnit tests",
         "unit-test": "Execute unit tests (PHPUnit)",
         "integration-test": "Execute integration tests (PHPUnit)",
-        "debug": "Debug PHPUnit tests",
+        "debug": "Run and debug PHPUnit tests",
         "check-style": "Validate PSR-12 coding standards (via phpcs)",
         "fix-style": "Fix PSR-12 coding standards (via phpcbf)",
         "analyse": "Run PHPStan static analysis of the code",
