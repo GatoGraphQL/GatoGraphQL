@@ -508,11 +508,11 @@
             "phpunit --filter='Integration' --log-junit=phpunit-test-results.xml --order-by=defects --stop-on-error --stop-on-failure",
             "@deoptimize-autoloader"
         ],
-        "prod-integration-test": [
+        "integration-test-prod": [
             "Composer\\Config::disableProcessTimeout",
             "INTEGRATION_TESTS_WEBSERVER_DOMAIN=gatographql-for-prod.lndo.site phpunit --filter='Integration'"
         ],
-        "stopping-prod-integration-test": [
+        "stopping-integration-test-prod": [
             "Composer\\Config::disableProcessTimeout",
             "INTEGRATION_TESTS_WEBSERVER_DOMAIN=gatographql-for-prod.lndo.site phpunit --filter='Integration' --log-junit=phpunit-test-results.xml --order-by=defects --stop-on-error --stop-on-failure"
         ],
