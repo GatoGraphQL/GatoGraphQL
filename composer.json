@@ -540,6 +540,7 @@
         "init-server": "composer init-server -d webservers/gatographql",
         "init-server-prod": "composer init-server -d webservers/gatographql-for-prod",
         "start-server": "composer start-server -d webservers/gatographql",
+        "start-server-prod": "composer start-server -d webservers/gatographql-for-prod",
         "destroy-server": "composer destroy-server -d webservers/gatographql",
         "destroy-server-prod": "composer destroy-server -d webservers/gatographql-for-prod",
         "reset-db": [
@@ -632,6 +633,7 @@
         "build-server-prod": "Initialize the Lando webserver with the 'Gato GraphQL' demo site, for production. To be executed only the first time",
         "init-server": "Alias of 'start-server",
         "start-server": "Start the Lando webserver with the 'Gato GraphQL' demo site, for development",
+        "start-server-prod": "Start the Lando webserver for PROD with the 'Gato GraphQL' demo site, for development",
         "destroy-server": "Destroy the Lando webserver with the 'Gato GraphQL' demo site",
         "destroy-server-prod": "Destroy the Lando webserver with the 'Gato GraphQL' demo site for PROD",
         "reset-db": "Resets the WordPress database",
