@@ -561,6 +561,10 @@
             "Composer\\Config::disableProcessTimeout",
             "composer log-server-errors -d webservers/gatographql"
         ],
+        "log-server-errors-prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer log-server-errors -d webservers/gatographql-for-prod"
+        ],
         "log-server-warnings": [
             "Composer\\Config::disableProcessTimeout",
             "composer log-server-warnings -d webservers/gatographql"
@@ -643,6 +647,7 @@
         "optimize-autoloader": "Optimizes the Composer autoloaders for all the plugins installed in the webserver",
         "deoptimize-autoloader": "Removes the optimization of the Composer autoloaders for all the plugins installed in the webserver",
         "log-server-errors": "Show (on real time) the errors from the Lando webserver",
+        "log-server-errors-prod": "Show (on real time) the errors from the Lando webserver for PROD",
         "log-server-warnings": "Show (on real time) the warnings from the Lando webserver",
         "rebuild-app-and-server": "Update the App dependencies (from Composer) and rebuild the Lando webserver",
         "rebuild-server": "Rebuild the Lando webserver",
