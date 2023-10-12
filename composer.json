@@ -569,6 +569,10 @@
             "Composer\\Config::disableProcessTimeout",
             "composer log-server-warnings -d webservers/gatographql"
         ],
+        "log-server-warnings-prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer log-server-warnings -d webservers/gatographql-for-prod"
+        ],
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "composer rebuild-server -d webservers/gatographql"
@@ -649,6 +653,7 @@
         "log-server-errors": "Show (on real time) the errors from the Lando webserver",
         "log-server-errors-prod": "Show (on real time) the errors from the Lando webserver for PROD",
         "log-server-warnings": "Show (on real time) the warnings from the Lando webserver",
+        "log-server-warnings-prod": "Show (on real time) the warnings from the Lando webserver for PROD",
         "rebuild-app-and-server": "Update the App dependencies (from Composer) and rebuild the Lando webserver",
         "rebuild-server": "Rebuild the Lando webserver",
         "rebuild-server-prod": "Rebuild the Lando webserver for PROD",
