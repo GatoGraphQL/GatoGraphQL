@@ -108,7 +108,7 @@ The Recipes section contains example queries ready to copy/paste and use:
 
 ### Recommended to use
 
-- [XDebug](https://xdebug.org/) (integrated out of the box when using [VSCode](https://code.visualstudio.com/))
+- [XDebug](https://xdebug.org/) (integrated out of the box when using [VSCode](https://code.visualstudio.com/) and the [PHP Debug](https://marketplace.visualstudio.com/items?itemName=xdebug.php-debug) addon for VSCode)
 
 ## Install for Development
 
