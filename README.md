@@ -294,7 +294,9 @@ Run:
 composer rebuild-app-and-server
 ```
 
-## Release the plugins for PROD
+## Releasing the plugins for PROD
+
+_(This is done by the [admin of the repo][link-author].)_
 
 The monorepo includes scripts that completely automate the process of releasing the plugins in the monorepo.
 
