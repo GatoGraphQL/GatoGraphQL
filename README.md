@@ -100,7 +100,7 @@ The Recipes section contains example queries ready to copy/paste and use:
 
 </details>
 
-## Requirements
+## Development Requirements
 
 - PHP 8.1
 - [Lando](https://lando.dev/)
@@ -110,7 +110,7 @@ The Recipes section contains example queries ready to copy/paste and use:
 
 - [XDebug](https://xdebug.org/) (integrated out of the box when using [VSCode](https://code.visualstudio.com/))
 
-## Install
+## Install for Development
 
 Follow these steps:
 
