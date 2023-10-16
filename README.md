@@ -623,7 +623,7 @@ Requirements:
 
 ## Extending the GraphQL schema
 
-Create an extension for Gato GraphQL using [`GatoGraphQL/ExtensionStarter`](https://github.com/GatoGraphQL/GatoGraphQL).
+Create an extension for Gato GraphQL using [`GatoGraphQL/ExtensionStarter`](https://github.com/GatoGraphQL/ExtensionStarter).
 
 ## Development
 
