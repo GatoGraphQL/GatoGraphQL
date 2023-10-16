@@ -600,7 +600,7 @@ composer list
 
 </details>
 
-## Installing the Gato GraphQL plugin in WordPress
+<!-- ## Installing the Gato GraphQL plugin in WordPress
 
 _For alternative installation methods, check [Installing Gato GraphQL](docs/installing-gatographql-for-wordpress.md)._
 
@@ -617,7 +617,7 @@ Then, in the WordPress admin:
 Requirements:
 
 - WordPress 5.4+
-- PHP 7.2+
+- PHP 7.2+ -->
 
 ## Extending the GraphQL schema
 
@@ -625,8 +625,8 @@ Create an extension for Gato GraphQL using [`GatoGraphQL/ExtensionStarter`](http
 
 ## Development
 
-- [Setting-up the development environment](docs/development-environment.md)
-- [Running tests](docs/running-tests.md)
+<!-- - [Setting-up the development environment](docs/development-environment.md)
+- [Running tests](docs/running-tests.md) -->
 
 ### Supported PHP features
 
