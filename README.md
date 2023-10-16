@@ -30,7 +30,9 @@ With Gato GraphQL, you can:
 
 Check out the [Recipes section in gatographql.com](https://gatographql.com/recipes/intro) which demonstrates how to implement these use cases using the plugin.
 
-## Screenshots
+<details>
+
+<summary>View screenshots</summary>
 
 GraphiQL client to execute queries in the wp-admin:
 
@@ -95,6 +97,8 @@ Augment the plugin functionality and GraphQL schema via extensions:
 The Recipes section contains example queries ready to copy/paste and use:
 
 ![The Recipes section contains example queries ready to copy/paste and use](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-16.png)
+
+</details>
 
 ## Installing the Gato GraphQL plugin in WordPress
 
