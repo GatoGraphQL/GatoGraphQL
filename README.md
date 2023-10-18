@@ -376,7 +376,7 @@ Using WP-CLI, to test the released version `0.1.0`, run:
 
 ```bash
 $ cd webservers/gatographql-for-prod
-$ lando wp plugin install https://github.com/GatoGraphQL/GatoGraphQL/releases/latest/download/gatographql-0.1.0.zip --force --activate --path=/app/wordpress
+$ lando wp plugin install https://github.com/GatoGraphQL/GatoGraphQL/releases/latest/download/gatographql-0.1.0.zip --force --activate
 $ cd ../..
 ```
 
