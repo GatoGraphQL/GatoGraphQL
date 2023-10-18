@@ -1,5 +1,5 @@
 #!/bin/sh
-if wp core is-installed --path=/app/wordpress; then
+if wp core is-installed; then
     echo "WordPress is already installed"
     exit
 fi

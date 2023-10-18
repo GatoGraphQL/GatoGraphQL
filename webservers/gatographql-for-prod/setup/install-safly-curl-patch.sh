@@ -14,5 +14,5 @@ DIR=/app/wordpress/wp-content/plugins/safly-curl-patch
 if [ ! -d "$DIR" ]; then
     echo "Installing SaFly Curl Patch in WordPress"
     mv safly-curl-patch /app/wordpress/wp-content/plugins/
-    wp plugin activate safly-curl-patch --path=/app/wordpress
+    wp plugin activate safly-curl-patch
 fi
