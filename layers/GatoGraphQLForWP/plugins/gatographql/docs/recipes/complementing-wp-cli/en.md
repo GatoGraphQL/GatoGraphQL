@@ -141,7 +141,7 @@ GRAPHQL_QUERY='
     }
   }
 '
-GRAPHQL_BODY="{\"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
+GRAPHQL_BODY="{\"query\": \"$(echo $GRAPHQL_QUERY | sed '/^#/d' | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
@@ -183,7 +183,7 @@ Then, we read the contents of this file using `cat`:
 
 ```bash
 GRAPHQL_QUERY=$(cat find-user-with-spanish-locale.gql)
-GRAPHQL_BODY="{\"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
+GRAPHQL_BODY="{\"query\": \"$(echo $GRAPHQL_QUERY | sed '/^#/d' | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \

@@ -132,7 +132,7 @@ When executing the query, the dictionary in the body of the request must indicat
 
 ```bash
 GRAPHQL_QUERY=$(cat find-multiple-users-with-spanish-locale.gql)
-GRAPHQL_BODY="{\"operationName\": \"FormatAndPrintData\", \"query\": \"$(echo $GRAPHQL_QUERY | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
+GRAPHQL_BODY="{\"operationName\": \"FormatAndPrintData\", \"query\": \"$(echo $GRAPHQL_QUERY | sed '/^#/d' | tr '\n' ' ' | sed 's/"/\\"/g')\"}"
 GRAPHQL_RESPONSE=$(curl \
   -X POST \
   -H "Content-Type: application/json" \
