@@ -1,6 +1,8 @@
 {
   existingValue: optionValue(name: "siteurl")
   nonExistingValue: optionValue(name: "nonExisting")
+  existingArray: optionValues(name: "active_plugins")
   nonExistingArray: optionValues(name: "nonExisting")
+  existingObject: optionObjectValue(name: "wp_user_roles")
   nonExistingObject: optionObjectValue(name: "nonExisting")
 }
