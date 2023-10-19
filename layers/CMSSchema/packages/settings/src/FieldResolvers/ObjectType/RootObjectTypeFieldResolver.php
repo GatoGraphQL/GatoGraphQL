@@ -210,7 +210,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return null;
                 }
                 if ($fieldDataAccessor->getFieldName() === 'optionValues') {
-                    return (array) $value;
+                    // Make sure keys are ints, not strings, otherwise it's an object
+                    return array_values($value);
                 }
                 if ($fieldDataAccessor->getFieldName() === 'optionObjectValue') {
                     return (object) $value;
