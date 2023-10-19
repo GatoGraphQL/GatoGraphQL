@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Return `String` in fields `Root.optionValue` and `WithMetaValue.metaValue`
+- Return `String` in fields `Root.optionValue` and `WithMeta.metaValue`
 
 ## 1.0.7 - 22/09/2023
 

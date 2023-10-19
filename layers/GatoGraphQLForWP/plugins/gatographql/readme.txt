@@ -164,6 +164,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.0.10 =
+* Return `String` in fields `Root.optionValue` and `WithMeta.metaValue`
+
 = 1.0 =
 * Plugin is released! Refer to the [changelog in the plugin's repo](https://github.com/GatoGraphQL/GatoGraphQL/blob/master/layers/GatoGraphQLForWP/plugins/gatographql/CHANGELOG.md) for a thorough description of all changes
 
