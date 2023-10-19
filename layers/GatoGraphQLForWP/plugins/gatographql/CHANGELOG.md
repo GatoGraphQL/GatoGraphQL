@@ -4,9 +4,11 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 1.1.0 - DATE
+## 1.0.10 - DATE
 
+### Improvements
 
+- Return `String` in fields `Root.optionValue` and `WithMetaValue.metaValue`
 
 ## 1.0.7 - 22/09/2023
 
