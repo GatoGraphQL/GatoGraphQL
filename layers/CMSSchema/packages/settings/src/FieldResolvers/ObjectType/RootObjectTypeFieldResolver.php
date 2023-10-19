@@ -115,11 +115,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'optionValue',
-            'optionValues'
-                => $this->getAnyBuiltInScalarScalarTypeResolver(),
-            'optionObjectValue'
-                => $this->getJSONObjectScalarTypeResolver(),
+            'optionValue' => $this->getStringScalarTypeResolver(),
+            'optionValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
+            'optionObjectValue' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -212,7 +210,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return null;
                 }
                 if ($fieldDataAccessor->getFieldName() === 'optionValues') {
-                    return (array) $value;
+                    // Make sure keys are ints, not strings, otherwise it's an object
+                    return array_values($value);
                 }
                 if ($fieldDataAccessor->getFieldName() === 'optionObjectValue') {
                     return (object) $value;
