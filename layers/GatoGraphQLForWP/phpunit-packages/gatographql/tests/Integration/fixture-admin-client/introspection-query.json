@@ -316,7 +316,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1008,7 +1008,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1803,7 +1803,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -2513,7 +2513,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -4640,7 +4640,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -5613,7 +5613,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -6300,7 +6300,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -6636,7 +6636,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -8172,7 +8172,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -10623,7 +10623,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -12991,7 +12991,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -16397,7 +16397,7 @@
               ],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "String",
                 "ofType": null
               },
               "isDeprecated": false,

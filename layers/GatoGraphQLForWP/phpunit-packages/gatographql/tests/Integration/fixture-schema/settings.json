@@ -6,7 +6,6 @@
             "gatographql-testing-schema/gatographql-testing-schema.php",
             "gatographql-testing/gatographql-testing.php",
             "gatographql/gatographql.php",
-            "safly-curl-patch/SaFly-Curl-Patch.php",
             "wordpress-importer/wordpress-importer.php"
         ],
         "nonExistingArray": null,
