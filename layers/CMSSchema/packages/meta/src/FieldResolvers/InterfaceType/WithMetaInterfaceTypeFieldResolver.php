@@ -9,13 +9,28 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\AbstractInterfaceTypeFieldResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\Meta\TypeResolvers\InterfaceType\WithMetaInterfaceTypeResolver;
 
 class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
 {
+    private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
+    final public function setAnyBuiltInScalarScalarTypeResolver(AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver): void
+    {
+        $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+    }
+    final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
+    {
+        if ($this->anyBuiltInScalarScalarTypeResolver === null) {
+            /** @var AnyBuiltInScalarScalarTypeResolver */
+            $anyBuiltInScalarScalarTypeResolver = $this->instanceManager->getInstance(AnyBuiltInScalarScalarTypeResolver::class);
+            $this->anyBuiltInScalarScalarTypeResolver = $anyBuiltInScalarScalarTypeResolver;
+        }
+        return $this->anyBuiltInScalarScalarTypeResolver;
+    }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
@@ -54,7 +69,7 @@ class WithMetaInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResol
     {
         return match ($fieldName) {
             'metaValue' => $this->getStringScalarTypeResolver(),
-            'metaValues' => $this->getStringScalarTypeResolver(),
+            'metaValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
             default => parent::getFieldTypeResolver($fieldName),
         };
     }
