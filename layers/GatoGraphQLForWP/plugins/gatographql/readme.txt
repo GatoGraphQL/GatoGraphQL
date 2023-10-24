@@ -164,6 +164,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.0.11 =
+* The `operationName` param can be obtained from the URL even when doing `POST`
+
 = 1.0.10 =
 * Return `String` in fields `Root.optionValue` and `WithMeta.metaValue`
 
