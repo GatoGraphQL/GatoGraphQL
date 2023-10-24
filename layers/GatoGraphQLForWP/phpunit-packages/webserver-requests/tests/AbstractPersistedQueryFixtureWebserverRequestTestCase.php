@@ -26,7 +26,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
      * Additional properties (such as the params)
      * must be provided via code.
      *
-     * @return array<string,array<string|array<string,mixed>>>
+     * @return array<string,array<string|array<string,mixed>|null>>
      */
     final public static function provideEndpointEntries(): array
     {
@@ -94,7 +94,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
         return [];
     }
 
-    protected static function getOperationName(string $dataName): string
+    protected static function getOperationName(string $dataName): ?string
     {
         return '';
     }
