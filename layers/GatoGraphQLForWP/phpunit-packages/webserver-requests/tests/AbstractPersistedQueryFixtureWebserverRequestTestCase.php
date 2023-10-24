@@ -94,7 +94,7 @@ abstract class AbstractPersistedQueryFixtureWebserverRequestTestCase extends Abs
         return [];
     }
 
-    protected static function getOperationName(string $dataName): string
+    protected static function getOperationName(string $dataName): ?string
     {
         return '';
     }
