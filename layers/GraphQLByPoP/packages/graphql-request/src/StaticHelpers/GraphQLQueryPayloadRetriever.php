@@ -40,14 +40,8 @@ class GraphQLQueryPayloadRetriever
             }
             if (isset($json->operationName)) {
                 $payload['operationName'] = $json->operationName;
-            } elseif (App::query('operationName') !== null) {
-                /**
-                 * ?operationName=... can be passed as a GET param in the URL,
-                 * eg: to execute a Persisted Query while still passing a body via POST
-                 */
-                $payload['operationName'] = App::query('operationName');
-            }
-            return $payload;
+            }            
+            return static::maybeAddOperationNameFromGet($payload);
         }
 
         // Retrieve the entries from POST
@@ -60,11 +54,19 @@ class GraphQLQueryPayloadRetriever
             }
             $payload[$entry] = App::request($entry);
         }
+        return static::maybeAddOperationNameFromGet($payload);
+    }
+
+    /**
+     * ?operationName=... can be passed as a GET param in the URL,
+     * eg: to execute a Persisted Query while still passing a body via POST
+     *
+     * @param array<string,mixed> $payload
+     * @return array<string,mixed>
+     */
+    protected static function maybeAddOperationNameFromGet(array $payload): array
+    {
         if (!isset($payload['operationName']) && App::query('operationName') !== null) {
-            /**
-             * ?operationName=... can be passed as a GET param in the URL,
-             * eg: to execute a Persisted Query while still passing a body via POST
-             */
             $payload['operationName'] = App::query('operationName');
         }
         return $payload;
