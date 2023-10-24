@@ -60,6 +60,13 @@ class GraphQLQueryPayloadRetriever
             }
             $payload[$entry] = App::request($entry);
         }
+        if (!isset($payload['operationName']) && App::query('operationName') !== null) {
+            /**
+             * ?operationName=... can be passed as a GET param in the URL,
+             * eg: to execute a Persisted Query while still passing a body via POST
+             */
+            $payload['operationName'] = App::query('operationName');
+        }
         return $payload;
     }
 }
