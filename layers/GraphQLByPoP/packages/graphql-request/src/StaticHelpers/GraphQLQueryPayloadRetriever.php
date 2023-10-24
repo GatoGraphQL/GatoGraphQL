@@ -40,7 +40,7 @@ class GraphQLQueryPayloadRetriever
             }
             if (isset($json->operationName)) {
                 $payload['operationName'] = $json->operationName;
-            } elseif (isset(App::query('operationName'))) {
+            } elseif (App::query('operationName') !== null) {
                 /**
                  * ?operationName=... can be passed as a GET param in the URL,
                  * eg: to execute a Persisted Query while still passing a body via POST
