@@ -40,7 +40,7 @@ class GraphQLQueryPayloadRetriever
             }
             if (isset($json->operationName)) {
                 $payload['operationName'] = $json->operationName;
-            }            
+            }
             return static::maybeAddOperationNameFromGet($payload);
         }
 
