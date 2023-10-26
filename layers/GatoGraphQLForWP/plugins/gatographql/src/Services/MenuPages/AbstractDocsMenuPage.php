@@ -50,13 +50,13 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
             $this->getMenuPageHelper()->isDocumentationScreen()
             && App::query(RequestParams::DOC, '') !== ''
         ) {
-            $content = $this->getDocumentationContentToPrint();
+            $content_safe = $this->getDocumentationContentToPrint();
         }
         ?>
         <div
             class="<?php echo implode(' ', $this->getDivClassNames()) ?>"
         >
-            <?php echo $content ?? $this->getContentToPrint() ?>
+            <?php echo $content_safe ?? $this->getContentToPrint() ?>
         </div>
         <?php
     }
