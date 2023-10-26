@@ -1272,7 +1272,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             }
             ?>
             <label for="<?php echo $id ?>">
-                <?php printf(__('<strong>%s</strong>:', 'gatographql'), $label); ?>
+                <strong><?php echo $label; ?></strong>
                 <br/>
                 <input name="<?php echo $optionsFormName . '[' . $name . '][' . $key . ']'; ?>" id="<?php echo $id ?>" value="<?php echo $value[$key] ?? '' ?>" type="text">
             </label>
