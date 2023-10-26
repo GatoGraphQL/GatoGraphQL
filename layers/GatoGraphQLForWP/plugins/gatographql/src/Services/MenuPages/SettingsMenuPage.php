@@ -1259,8 +1259,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $addSpacing = false;
         if (isset($itemSetting[Properties::DESCRIPTION])) {
             $addSpacing = true;
-            $description = $itemSetting[Properties::DESCRIPTION];
-            echo $description;
+            $description_safe = $itemSetting[Properties::DESCRIPTION];
+            echo $description_safe;
         }
         $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
         foreach ($keyLabels as $key => $label) {
