@@ -166,6 +166,7 @@ You can even synchronize content across a network of sites, such as from an upst
 
 = 1.0.12 =
 * Recipes: Replace `mysite.com` with the site domain
+* Added recipe: Automatically sending newsletter subscribers from InstaWP to Mailchimp
 
 = 1.0.11 =
 * The `operationName` param can be obtained from the URL even when doing `POST`
