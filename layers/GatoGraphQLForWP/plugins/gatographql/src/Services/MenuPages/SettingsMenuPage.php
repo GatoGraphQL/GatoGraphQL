@@ -1316,7 +1316,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <select
                     name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : '')); ?>"
                     id="<?php echo \esc_attr($name); ?>"
-                    <?php if ($isMultiple): ?>
+                    <?php if ($isMultiple) : ?>
                         multiple="multiple"
                         size="10"
                     <?php endif; ?>
@@ -1324,7 +1324,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
                     <option
                         value="<?php echo \esc_attr($optionValue) ?>"
-                        <?php if (in_array($optionValue, $value)): ?>
+                        <?php if (in_array($optionValue, $value)) : ?>
                             selected="selected"
                         <?php endif; ?>
                     >
