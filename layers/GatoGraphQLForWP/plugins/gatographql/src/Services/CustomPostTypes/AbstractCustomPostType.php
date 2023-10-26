@@ -436,7 +436,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     protected function printTaxonomyDropdowns(TaxonomyInterface $taxonomy): void
     {
-        // global $cat;
         $post_type = $this->getCustomPostType();
 
         /**
@@ -466,9 +465,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'name'            => $taxonomyName,
                 'value_field'     => 'slug',
             );
-
-            echo '<label class="screen-reader-text" for="' . $taxonomyName . '">' . $taxonomyObject->labels->filter_by_item . '</label>';
-
+            ?>
+            <label class="screen-reader-text" for="<?php echo \esc_attr($taxonomyName) ?> "><?php echo \esc_html($taxonomyObject->labels->filter_by_item) ?></label>
+            <?php
             wp_dropdown_categories($dropdown_options);
         }
     }
