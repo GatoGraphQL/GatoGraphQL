@@ -258,7 +258,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 if ($post === null) {
                     break;
                 }
-                echo $this->isEndpointEnabled($post)
+                echo \esc_html($this->isEndpointEnabled($post)
                     ? sprintf(
                         \__('✅ %s', 'gatographql'),
                         \__('Enabled', 'gatographql')
@@ -266,7 +266,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     : sprintf(
                         \__('❌ %s', 'gatographql'),
                         \__('Disabled', 'gatographql')
-                    );
+                    ));
                 break;
             case 'schema-config':
                 /** @var string */
