@@ -1296,7 +1296,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if (!is_array($value)) {
             $value = $value === null ? [] : [$value];
         }
-        $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
+        $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         ?>
@@ -1309,7 +1309,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     </option>
                 <?php endforeach ?>
                 </select>
-                <?php echo $label; ?>
+                <?php echo $label_safe; ?>
             </label>
         <?php
     }
@@ -1325,11 +1325,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $input = $itemSetting[Properties::INPUT];
         // This must be an array
         $value = $this->getOptionValue($module, $input);
-        $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
+        $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         ?>
             <label for="<?php echo $name; ?>">
                 <textarea name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="50"><?php echo implode("\n", $value) ?></textarea>
-                <?php echo $label; ?>
+                <?php echo $label_safe; ?>
             </label>
         <?php
     }
