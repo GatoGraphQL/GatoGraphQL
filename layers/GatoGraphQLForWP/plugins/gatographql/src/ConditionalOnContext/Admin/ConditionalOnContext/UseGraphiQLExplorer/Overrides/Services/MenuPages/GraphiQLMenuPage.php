@@ -42,17 +42,17 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         // Extract the HTML inside <body>
         $matches = [];
         preg_match('/<body([^>]+)?>(.*?)<\/body>/s', $htmlContent, $matches);
-        $bodyHTMLContent = $matches[2];
+        $bodyHTMLContent_safe = $matches[2];
         // Remove all JS/CSS assets, since they are enqueued
-        $bodyHTMLContent = preg_replace(
+        $bodyHTMLContent_safe = preg_replace(
             [
                 '/<link[^>]*>(.*)<\/link>"/s',
                 '/<script[^>]*>(.*)<\/script>/s',
             ],
             '',
-            $bodyHTMLContent
+            $bodyHTMLContent_safe
         );
-        echo $bodyHTMLContent;
+        echo $bodyHTMLContent_safe;
     }
 
     /**
