@@ -1309,7 +1309,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         ?>
             <label for="<?php echo \esc_attr($name); ?>">
-                <select name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo \esc_attr($name); ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
+                <select
+                    name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']' . ($isMultiple ? '[]' : ''); ?>"
+                    id="<?php echo \esc_attr($name); ?>"
+                    <?php if ($isMultiple): ?>
+                        multiple="multiple"
+                        size="10"
+                    <?php endif; ?>
+                >
                 <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
                     <?php $maybeSelected = in_array($optionValue, $value) ? 'selected="selected"' : ''; ?>
                     <option value="<?php echo $optionValue ?>" <?php echo $maybeSelected ?>>
