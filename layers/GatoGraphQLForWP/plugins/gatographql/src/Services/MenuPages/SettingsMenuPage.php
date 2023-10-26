@@ -905,7 +905,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
         if (!$settingsItems) {
-            _e('There are no items to be configured', 'gatographql');
+            esc_html_e('There are no items to be configured', 'gatographql');
             return;
         }
 
