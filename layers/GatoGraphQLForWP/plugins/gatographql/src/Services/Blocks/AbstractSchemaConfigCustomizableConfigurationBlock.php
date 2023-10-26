@@ -27,18 +27,7 @@ abstract class AbstractSchemaConfigCustomizableConfigurationBlock extends Abstra
                 : sprintf('🟢 %s', $this->__('Use custom configuration', 'gatographql'))
         );
 
-        $blockContentPlaceholder = <<<EOT
-            <div class="customizable-configuration %s">
-                <div class="customizable-configuration-header">
-                    <h3 class="%s">%s</h3>
-                    %s
-                </div>
-                <hr/>
-                <div class="customizable-configuration-body" style="%s">
-                    %s
-                </div>
-            </div>
-        EOT;
+        $blockContentPlaceholder = '<div class="customizable-configuration %s"><div class="customizable-configuration-header"><h3 class="%s">%s</h3>%s</div><hr/><div class="customizable-configuration-body" style="%s">%s</div></div>';
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),

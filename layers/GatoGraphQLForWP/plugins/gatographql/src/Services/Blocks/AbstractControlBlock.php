@@ -198,18 +198,7 @@ abstract class AbstractControlBlock extends AbstractBlock
             );
         }
 
-        $blockContentPlaceholder = <<<EOT
-        <div class="%s">
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        </div>
-EOT;
+        $blockContentPlaceholder = '<div class="%s"><div class="%s"><h3 class="%s">%s</h3>%s</div><div class="%s"><h3 class="%s">%s</h3>%s</div></div>';
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
