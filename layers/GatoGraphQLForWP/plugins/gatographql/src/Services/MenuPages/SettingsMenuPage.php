@@ -974,12 +974,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 continue;
                             }
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
-                            printf(
-                                '<a href="#%s" class="nav-tab %s">%s</a>',
-                                $settingsCategoryID,
-                                $settingsCategoryID === $activeCategoryID ? 'nav-tab-active' : '',
-                                $settingsCategoryResolver->getName($settingsCategory)
-                            );
+                            ?>
+                                <a
+                                    href="#<?php echo \esc_attr($settingsCategoryID) ?>"
+                                    class="nav-tab <?php echo \esc_attr($settingsCategoryID === $activeCategoryID ? 'nav-tab-active' : '') ?>"
+                                >
+                                    <?php echo \esc_html($settingsCategoryResolver->getName($settingsCategory)) ?>
+                                </a>
+                            <?php
                         }
                         ?>
                     </h2>
@@ -1035,13 +1037,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         RequestParams::MODULE,
                                                         $item['id']
                                                     );
-                                                    printf(
-                                                        '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                                                        '#' . $item['id'],
-                                                        $settingsURL,
-                                                        $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
-                                                        $item['name']
-                                                    );
+                                                    ?>
+                                                        <a
+                                                            data-tab-target="#<?php echo \esc_attr($item['id']) ?>"
+                                                            href="<?php echo \esc_url($settingsURL) ?>"
+                                                            class="nav-tab <?php echo esc_attr($item['id'] === $activeModuleID ? 'nav-tab-active' : '') ?>"
+                                                        >
+                                                            <?php echo \esc_html($item['name']) ?>
+                                                        </a>
+                                                    <?php
                                                 }
                                                 ?>
                                             </h2>
