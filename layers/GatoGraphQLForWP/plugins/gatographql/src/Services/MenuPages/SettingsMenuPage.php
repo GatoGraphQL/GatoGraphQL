@@ -1235,7 +1235,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
         ?>
             <label for="<?php echo \esc_attr($name); ?>">
-                <input name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>" id="<?php echo \esc_attr($name); ?>" value="<?php echo \esc_attr($value); ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
+                <input name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>" id="<?php echo \esc_attr($name); ?>" value="<?php echo \esc_attr($value); ?>" <?php echo $isNumber ? ('type="number" step="1"' . ($minNumber !== null ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
                 <?php echo $label_safe; ?>
             </label>
         <?php
