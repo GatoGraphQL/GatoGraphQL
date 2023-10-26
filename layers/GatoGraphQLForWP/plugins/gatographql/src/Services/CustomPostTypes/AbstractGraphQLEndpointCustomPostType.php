@@ -276,11 +276,11 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     $post_id,
                 );
                 if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-                    _e('"None" selected', 'gatographql');
+                    esc_html_e('"None" selected', 'gatographql');
                     break;
                 }
                 if ($schemaConfigurationID === null) {
-                    _e('(None)', 'gatographql');
+                    esc_html_e('(None)', 'gatographql');
                     break;
                 }
                 /** @var WP_Post */
