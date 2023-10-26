@@ -1308,8 +1308,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         ?>
-            <label for="<?php echo $name; ?>">
-                <select name="<?php echo $optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo $name; ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
+            <label for="<?php echo \esc_attr($name); ?>">
+                <select name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo \esc_attr($name); ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
                 <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
                     <?php $maybeSelected = in_array($optionValue, $value) ? 'selected="selected"' : ''; ?>
                     <option value="<?php echo $optionValue ?>" <?php echo $maybeSelected ?>>
