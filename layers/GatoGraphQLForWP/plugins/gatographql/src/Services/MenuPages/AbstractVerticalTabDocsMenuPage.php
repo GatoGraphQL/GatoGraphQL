@@ -37,14 +37,14 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         $class = 'wrap vertical-tabs gatographql-tabpanel';
 
         $markdownContent = sprintf(
-            <<<HTML
+            '
             <div id="%s" class="%s">
                 <h1>%s</h1>
                 %s
                 <div class="nav-tab-container">
                     <!-- Tabs -->
                     <h2 class="nav-tab-wrapper">
-            HTML,
+            ',
             $this->getContentID(),
             $class,
             $this->getPageTitle(),
@@ -91,10 +91,10 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             );
         }
 
-        $markdownContent .= <<<HTML
+        $markdownContent .= '
                     </h2>
                     <div class="nav-tab-content">
-        HTML;
+        ';
 
         foreach ($entries as $entry) {
             $entryName = $entry[0];
@@ -123,12 +123,12 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
             $entryID = $this->getEntryID($entryName);
             $markdownContent .= sprintf(
-                <<<HTML
+                '
                     <div id="%s" class="%s" style="%s">
                         <h2 class="doc-title">%s</h2><hr/>
                         %s
                     </div>
-                HTML,
+                ',
                 $entryID,
                 'tab-content',
                 sprintf(
@@ -146,11 +146,11 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             );
         }
 
-        $markdownContent .= <<<HTML
+        $markdownContent .= '
                 </div> <!-- class="nav-tab-content" -->
             </div> <!-- class="nav-tab-container" -->
         </div>
-        HTML;
+        ';
         return $markdownContent;
     }
 

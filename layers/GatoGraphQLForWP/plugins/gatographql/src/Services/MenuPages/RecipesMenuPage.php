@@ -135,11 +135,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         );
 
         return sprintf(
-            <<<HTML
-                <div class="%s">
-                    %s
-                </div>
-            HTML,
+            '<div class="%s">%s</div>',
             'extension-highlight',
             $messageHTML,
         ) . $entryContent;

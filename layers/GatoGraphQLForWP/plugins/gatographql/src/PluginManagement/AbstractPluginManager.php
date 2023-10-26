@@ -10,11 +10,7 @@ abstract class AbstractPluginManager
     {
         \add_action('admin_notices', function () use ($errorMessage): void {
             printf(
-                <<<HTML
-                    <div class="notice notice-error">
-                        <p>%s</p>
-                    </div>
-                HTML,
+                '<div class="notice notice-error"><p>%s</p></div>',
                 $errorMessage
             );
         });
