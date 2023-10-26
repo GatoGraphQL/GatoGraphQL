@@ -155,16 +155,6 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         return $markdownContent;
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    protected function getMarkdownContentOptions(): array
-    {
-        return [
-            ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
-        ];
-    }
-
     protected function getEntryID(string $entryName): string
     {
         return str_replace([':', ' ', '/', '.'], '_', $entryName);

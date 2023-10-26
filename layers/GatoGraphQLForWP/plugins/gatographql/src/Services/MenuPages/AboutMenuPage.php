@@ -115,15 +115,13 @@ class AboutMenuPage extends AbstractDocsMenuPage
         return $content;
     }
 
-    /**
-     * @return array<string,mixed>
-     */
-    protected function getMarkdownContentOptions(): array
-    {
-        return [
-            ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
-        ];
-    }
+    // /**
+    //  * @return array<string,mixed>
+    //  */
+    // protected function getMarkdownContentOptions(): array
+    // {
+    //     return parent::getMarkdownContentOptions();
+    // }
 
     /**
      * Enqueue the required assets
