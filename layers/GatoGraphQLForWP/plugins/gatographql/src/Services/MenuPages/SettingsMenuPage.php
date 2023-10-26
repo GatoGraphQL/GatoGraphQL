@@ -1193,7 +1193,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $description_safe = $itemSetting[Properties::DESCRIPTION] ?? '';
         ?>
             <label for="<?php echo \esc_attr($name); ?>">
-                <input type="checkbox" name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>" id="<?php echo \esc_attr($name); ?>" value="1" <?php checked(1, $value); ?> />
+                <input type="checkbox" name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>" id="<?php echo \esc_attr($name); ?>" value="1" <?php checked(1, $value); ?> />
                 <?php echo $description_safe; ?>
             </label>
         <?php
@@ -1231,7 +1231,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ?>
             <label for="<?php echo \esc_attr($name); ?>">
                 <input
-                    name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>"
+                    name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>"
                     id="<?php echo \esc_attr($name); ?>"
                     value="<?php echo \esc_attr($value); ?>"
                     <?php if ($isNumber) { ?>
@@ -1282,7 +1282,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             <label for="<?php echo \esc_attr($id) ?>">
                 <strong><?php echo \esc_html($label); ?></strong>
                 <br/>
-                <input name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . '][' . \esc_attr($key) . ']'; ?>" id="<?php echo \esc_attr($id) ?>" value="<?php echo \esc_html($value[$key] ?? '') ?>" type="text">
+                <input name="<?php echo \esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>" id="<?php echo \esc_attr($id) ?>" value="<?php echo \esc_html($value[$key] ?? '') ?>" type="text">
             </label>
             <?php
             $addSpacing = true;
@@ -1310,7 +1310,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ?>
             <label for="<?php echo \esc_attr($name); ?>">
                 <select
-                    name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']' . ($isMultiple ? '[]' : ''); ?>"
+                    name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : '')); ?>"
                     id="<?php echo \esc_attr($name); ?>"
                     <?php if ($isMultiple): ?>
                         multiple="multiple"
@@ -1347,7 +1347,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         ?>
             <label for="<?php echo \esc_attr($name); ?>">
-                <textarea name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>" id="<?php echo \esc_attr($name); ?>" rows="10" cols="50"><?php echo \esc_html(implode("\n", $value)) ?></textarea>
+                <textarea name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>" id="<?php echo \esc_attr($name); ?>" rows="10" cols="50"><?php echo \esc_html(implode("\n", $value)) ?></textarea>
                 <?php echo $label_safe; ?>
             </label>
         <?php
