@@ -225,12 +225,12 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             return;
         }
 
-        $html = $this->adaptDisplayRowsHTML($html);
+        $html_safe = $this->adaptDisplayRowsHTML($html);
         if ($this->addArtificialRequestAnExtensionPluginItem()) {
-            $html .= $this->getArtificialRequestAnExtensionPluginItem();
+            $html_safe .= $this->getArtificialRequestAnExtensionPluginItem();
         }
 
-        echo $html;
+        echo $html_safe;
     }
 
     /**
