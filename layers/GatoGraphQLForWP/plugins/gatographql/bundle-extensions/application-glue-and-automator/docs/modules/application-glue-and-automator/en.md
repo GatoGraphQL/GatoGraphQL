@@ -69,3 +69,4 @@ All this power comes without endangering your site: An internal GraphQL server i
 - [Updating large sets of data](../../../../../docs/recipes/updating-large-sets-of-data/en.md)
 - [Importing a post from another WordPress site](../../../../../docs/recipes/importing-a-post-from-another-wordpress-site/en.md)
 - [Distributing content from an upstream to multiple downstream sites](../../../../../docs/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)
+- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/recipes/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)

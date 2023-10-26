@@ -284,3 +284,4 @@ query {
 - [Interacting with external services via webhooks](../../../../../docs/recipes/interacting-with-external-services-via-webhooks/en.md)
 - [Creating an API gateway](../../../../../docs/recipes/creating-an-api-gateway/en.md)
 - [Updating large sets of data](../../../../../docs/recipes/updating-large-sets-of-data/en.md)
+- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/recipes/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)

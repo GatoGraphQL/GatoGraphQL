@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Recipes: Replace `mysite.com` with the site domain
+- Added recipe: Automatically sending newsletter subscribers from InstaWP to Mailchimp
 
 ## 1.0.11 - 24/10/2023
 

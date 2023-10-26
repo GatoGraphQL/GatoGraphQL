@@ -627,17 +627,16 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
                 ]
             ],
             [
-                'distributing-content-from-an-upstream-to-multiple-downstream-sites',
-                \__('Distributing content from an upstream to multiple downstream sites', 'gatographql'),
+                'automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp',
+                \__('Automatically sending newsletter subscribers from InstaWP to Mailchimp', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ],
                 [
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
