@@ -79,7 +79,7 @@ abstract class AbstractItemListTable extends WP_List_Table implements ItemListTa
      */
     public function no_items()
     {
-        _e('No items found.', 'gatographql');
+        esc_html_e('No items found.', 'gatographql');
     }
 
     /**
