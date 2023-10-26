@@ -89,18 +89,6 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
             return null;
         }
 
-        // Commented out Prettify
-        // // $scriptSrc = 'https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js'
-        // $mainPluginURL = \GatoGraphQL\GatoGraphQL\PluginApp::getMainPlugin()->getPluginURL();
-        // $scriptSrc = $mainPluginURL . 'assets/js/vendors/code-prettify/run_prettify.js';
-        // /**
-        //  * Prettyprint the code
-        //  */
-        // $content .= sprintf(
-        //     '<script src="%s"></script>',
-        //     $scriptSrc
-        // );
-
         /**
          * Using highlight.js
          *
