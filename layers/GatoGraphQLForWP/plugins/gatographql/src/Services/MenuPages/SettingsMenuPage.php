@@ -1266,7 +1266,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         foreach ($keyLabels as $key => $label) {
             $id = $name . '_' . $key;
             if ($addSpacing) {
-                echo '<br/><br/>';
+                ?>
+                <br/><br/>
+                <?php
             }
             ?>
             <label for="<?php echo $id ?>">
