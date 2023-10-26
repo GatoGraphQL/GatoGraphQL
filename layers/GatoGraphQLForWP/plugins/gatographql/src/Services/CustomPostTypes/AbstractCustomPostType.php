@@ -366,7 +366,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         );
     }
 
-    // Add the data to the custom columns for the book post type:
+    // Add the data to the custom columns for the custom post type:
     public function resolveCustomColumn(string $column, int $post_id): void
     {
         switch ($column) {
@@ -378,7 +378,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 if ($post === null) {
                     break;
                 }
-                echo $this->getCPTUtils()->getCustomPostDescription($post);
+                echo \esc_html($this->getCPTUtils()->getCustomPostDescription($post));
                 break;
         }
     }
