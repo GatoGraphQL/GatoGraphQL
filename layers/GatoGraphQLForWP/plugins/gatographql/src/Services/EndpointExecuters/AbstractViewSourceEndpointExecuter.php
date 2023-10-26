@@ -94,37 +94,14 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
          *
          * @see https://highlightjs.org/usage/
          */
-        $linkTagPlaceholder = '<link rel="stylesheet" href="%s">';
-        $scriptTagPlaceholder = '<script src="%s"></script>';
         $mainPluginURL = PluginApp::getMainPlugin()->getPluginURL();
-        $content .= sprintf(
-            $linkTagPlaceholder,
-            $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css'
-        );
-        $content .= sprintf(
-            $scriptTagPlaceholder,
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/highlight.min.js'
-        );
-        $content .= sprintf(
-            $scriptTagPlaceholder,
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/graphql.min.js'
-        );
-        $content .= sprintf(
-            $scriptTagPlaceholder,
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/json.min.js'
-        );
-        $content .= sprintf(
-            $scriptTagPlaceholder,
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/bash.min.js'
-        );
-        $content .= sprintf(
-            $scriptTagPlaceholder,
-            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/xml.min.js'
-        );
-        $content .= sprintf(
-            $scriptTagPlaceholder,
-            $mainPluginURL . 'assets/js/run_highlight.js'
-        );
+        wp_enqueue_style('highlight-theme', $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css');
+        wp_enqueue_script('highlight-script', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/highlight.min.js');
+        wp_enqueue_script('highlight-language-graphql', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/graphql.min.js');
+        wp_enqueue_script('highlight-language-json', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/json.min.js');
+        wp_enqueue_script('highlight-language-bash', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/bash.min.js');
+        wp_enqueue_script('highlight-language-xml', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/xml.min.js');
+        wp_enqueue_script('highlight-script-run', $mainPluginURL . 'assets/js/run_highlight.js');
 
         return $content;
     }
