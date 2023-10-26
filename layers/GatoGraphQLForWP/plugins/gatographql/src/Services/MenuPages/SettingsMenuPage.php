@@ -1085,7 +1085,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         }
                                                         ?>
                                                         <div id="<?php echo \esc_attr($item['id']) ?>" class="gatographql-settings-section <?php echo \esc_attr($sectionClass) ?>" style="<?php echo \esc_attr($sectionStyle) ?>">
-                                                            <?php echo $title ?>
+                                                            <?php echo wp_kses($title, ['h2', 'br', 'hr']) ?>
                                                             <table class="form-table">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
@@ -1198,7 +1198,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ?>
             <label for="<?php echo $name; ?>">
                 <input type="checkbox" name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
-                <?\php esc_attr(echo $itemSetting[Properties::DESCR)IPTION] ?? ''; ?>
+                <?php echo \esc_attr($itemSetting[Properties::DESCRIPTION] ?? ''); ?>
             </label>
         <?php
     }
@@ -1211,7 +1211,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     protected function printLabelField(string $optionsFormName, string $module, array $itemSetting): void
     {
         ?>
-            <?\php esc_attr(echo $itemSetting[Properties::DESCR)IPTION] ?? ''; ?>
+            <?php echo \esc_attr($itemSetting[Properties::DESCRIPTION] ?? ''); ?>
         <?php
     }
 
