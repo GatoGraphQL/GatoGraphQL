@@ -52,11 +52,13 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
         ) {
             $content_safe = $this->getDocumentationContentToPrint();
         }
+
+        $content_safe = $content_safe ?? $this->getContentToPrint();
         ?>
         <div
             class="<?php echo implode(' ', $this->getDivClassNames()) ?>"
         >
-            <?php echo $content_safe ?? $this->getContentToPrint() ?>
+            <?php echo $content_safe ?>
         </div>
         <?php
     }
