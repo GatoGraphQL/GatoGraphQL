@@ -18,8 +18,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         ?>
         <div id="graphiql" class="graphiql-client">
             <p>
-                <?php echo __('Loading...', 'gatographql') ?>
-                <!--span class="spinner is-active" style="float: none;"></span-->
+                <?php esc_html_e('Loading...', 'gatographql') ?>
             </p>
         </div>
         <?php
