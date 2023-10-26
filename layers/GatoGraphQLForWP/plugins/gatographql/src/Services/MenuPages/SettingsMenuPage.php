@@ -1346,8 +1346,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $value = $this->getOptionValue($module, $input);
         $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         ?>
-            <label for="<?php echo $name; ?>">
-                <textarea name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="50"><?php echo implode("\n", $value) ?></textarea>
+            <label for="<?php echo \esc_attr($name); ?>">
+                <textarea name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>" id="<?php echo \esc_attr($name); ?>" rows="10" cols="50"><?php echo implode("\n", $value) ?></textarea>
                 <?php echo $label_safe; ?>
             </label>
         <?php
