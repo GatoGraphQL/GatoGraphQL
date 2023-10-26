@@ -270,7 +270,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             return;
         }
 
-        $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
+        /**
+         * Print the JS code after asset 'wp-blocks' as
+         * it is always printed in the Block Editor (any such
+         * script will do)
+         */
+        $jsScriptCode = 'var %s = "%s";';
         $endpointHelpers = $this->getEndpointHelpers();
 
         /**
@@ -281,11 +286,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * - Schema namespaced or not
          * - etc
          */
-        \printf(
-            $scriptTag,
+        wp_add_inline_script('wp-blocks', \sprintf(
+            $jsScriptCode,
             'GATOGRAPHQL_ADMIN_ENDPOINT',
             $endpointHelpers->getAdminGraphQLEndpoint()
-        );
+        ));
 
         /**
          * The endpoint against which to execute GraphQL queries on the WordPress editor,
@@ -297,11 +302,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * - Nested mutations enabled, without removing the redundant fields in the Root
          * - No namespacing
          */
-        \printf(
-            $scriptTag,
+        wp_add_inline_script('wp-blocks', \sprintf(
+            $jsScriptCode,
             'GATOGRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
             $endpointHelpers->getAdminPluginOwnUseGraphQLEndpoint()
-        );
+        ));
     }
 
     public function getEnablingModule(): ?string
