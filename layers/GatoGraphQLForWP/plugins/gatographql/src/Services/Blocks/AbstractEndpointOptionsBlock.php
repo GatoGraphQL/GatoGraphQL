@@ -25,12 +25,7 @@ abstract class AbstractEndpointOptionsBlock extends AbstractBlock
     {
         // Append "-front" because this style must be used only on the client, not on the admin
         $className = $this->getBlockClassName() . '-front';
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
+        $blockContentPlaceholder = '<div class="%s"><h3 class="%s">%s</h3>%s</div>';
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),

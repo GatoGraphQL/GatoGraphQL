@@ -70,12 +70,7 @@ class EndpointVoyagerBlock extends AbstractBlock implements EndpointEditorBlockS
             $this->getBooleanLabel($attributes[BlockAttributeNames::IS_ENABLED] ?? true)
         );
 
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
+        $blockContentPlaceholder = '<div class="%s"><h3 class="%s">%s</h3>%s</div>';
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),
