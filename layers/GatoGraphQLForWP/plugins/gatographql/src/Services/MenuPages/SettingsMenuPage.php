@@ -1227,7 +1227,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
-        $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
+        $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         $isNumber = isset($itemSetting[Properties::TYPE]) && $itemSetting[Properties::TYPE] === Properties::TYPE_INT;
         $minNumber = null;
         if ($isNumber) {
@@ -1236,7 +1236,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         ?>
             <label for="<?php echo $name; ?>">
                 <input name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
-                <?php echo $label; ?>
+                <?php echo $label_safe; ?>
             </label>
         <?php
     }
