@@ -626,12 +626,13 @@ class ModuleListTable extends AbstractItemListTable
                 $this->getTableStyleRowClassnames($item),
                 $arrayItem['is-enabled'] ? 'active' : 'inactive'
             );
-            echo sprintf(
-                '<tr class="%s">',
-                $classnames
-            );
-            $this->single_row_columns($item);
-            echo '</tr>';
+            ?>
+                <tr class="<?php echo \esc_attr($classnames) ?>">
+                <?php
+                    $this->single_row_columns($item);
+                ?>
+                </tr>
+            <?php
         } else {
             parent::single_row($item);
         }
