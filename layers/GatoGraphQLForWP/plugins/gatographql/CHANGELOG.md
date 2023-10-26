@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.12 - DATE
 
+### Improvements
+
+- Recipes: Replace `mysite.com` with the site domain
+
 ## 1.0.11 - 24/10/2023
 
 ### Improvements

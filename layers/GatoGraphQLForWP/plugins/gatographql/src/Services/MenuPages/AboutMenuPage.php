@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
@@ -41,9 +40,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $content = $this->getMarkdownContent(
             'about',
             'general',
-            [
-                ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
-            ]
+            $this->getMarkdownContentOptions()
         );
 
         if ($content === null) {

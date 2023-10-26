@@ -238,6 +238,7 @@ abstract class AbstractContentParser implements ContentParserInterface
                 ContentParserOptions::EMBED_VIDEOS => true,
                 ContentParserOptions::HIGHLIGHT_CODE => true,
                 ContentParserOptions::TAB_CONTENT => false,
+                ContentParserOptions::REPLACEMENTS => [],
             ],
             $options
         );
@@ -277,6 +278,14 @@ abstract class AbstractContentParser implements ContentParserInterface
         // Convert the <h2> into tabs
         if ($options[ContentParserOptions::TAB_CONTENT] ?? null) {
             $htmlContent = $this->tabContent($htmlContent);
+        }
+        /**
+         * Replace strings in the code
+         * @var array<string,string>
+         */
+        $replacements = $options[ContentParserOptions::REPLACEMENTS] ?? [];
+        if ($replacements !== []) {
+            $htmlContent = str_replace(array_keys($replacements), array_values($replacements), $htmlContent);
         }
         return $htmlContent;
     }

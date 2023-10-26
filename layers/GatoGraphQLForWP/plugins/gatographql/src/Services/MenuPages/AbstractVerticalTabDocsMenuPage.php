@@ -6,7 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
-use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractDocsMenuPage;
 
@@ -106,9 +105,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             $entryContent = $this->getMarkdownContent(
                 $entryName,
                 $entryRelativePathDir,
-                [
-                    ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
-                ]
+                $this->getMarkdownContentOptions()
             ) ?? sprintf(
                 '<p>%s</p>',
                 sprintf(
