@@ -66,9 +66,7 @@ trait DocMenuPageTrait
         return $this->getMarkdownContent(
             $doc,
             $relativePathDir,
-            [
-                ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
-            ]
+            $this->getMarkdownContentOptions()
         ) ?? sprintf(
             '<p>%s</p>',
             sprintf(
@@ -76,6 +74,16 @@ trait DocMenuPageTrait
                 $doc
             )
         );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getMarkdownContentOptions(): array
+    {
+        return [
+            ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
+        ];
     }
 
     abstract protected function useTabpanelForContent(): bool;

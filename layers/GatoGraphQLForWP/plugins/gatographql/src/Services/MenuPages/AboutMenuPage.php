@@ -41,9 +41,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $content = $this->getMarkdownContent(
             'about',
             'general',
-            [
-                ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
-            ]
+            $this->getMarkdownContentOptions()
         );
 
         if ($content === null) {
@@ -115,6 +113,16 @@ class AboutMenuPage extends AbstractDocsMenuPage
         $content = str_replace(array_keys($replacements), array_values($replacements), $content);
 
         return $content;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getMarkdownContentOptions(): array
+    {
+        return [
+            ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
+        ];
     }
 
     /**

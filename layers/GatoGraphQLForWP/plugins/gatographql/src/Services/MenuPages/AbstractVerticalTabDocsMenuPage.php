@@ -106,9 +106,7 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
             $entryContent = $this->getMarkdownContent(
                 $entryName,
                 $entryRelativePathDir,
-                [
-                    ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
-                ]
+                $this->getMarkdownContentOptions()
             ) ?? sprintf(
                 '<p>%s</p>',
                 sprintf(
@@ -155,6 +153,16 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
         </div>
         HTML;
         return $markdownContent;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getMarkdownContentOptions(): array
+    {
+        return [
+            ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
+        ];
     }
 
     protected function getEntryID(string $entryName): string
