@@ -1318,9 +1318,13 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     <?php endif; ?>
                 >
                 <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
-                    <?php $maybeSelected = in_array($optionValue, $value) ? 'selected="selected"' : ''; ?>
-                    <option value="<?php echo \esc_attr($optionValue) ?>" <?php echo $maybeSelected ?>>
-                        <?php echo $optionLabel ?>
+                    <option
+                        value="<?php echo \esc_attr($optionValue) ?>"
+                        <?php if (in_array($optionValue, $value)): ?>
+                            selected="selected"
+                        <?php endif; ?>
+                    >
+                        <?php echo \esc_html($optionLabel) ?>
                     </option>
                 <?php endforeach ?>
                 </select>
