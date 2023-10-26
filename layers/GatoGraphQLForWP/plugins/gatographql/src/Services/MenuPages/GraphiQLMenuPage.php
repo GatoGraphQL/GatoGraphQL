@@ -130,7 +130,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
     protected function getDefaultQuery(): string
     {
-        return <<<EOT
+        return '
             # Welcome to GraphiQL
             #
             # GraphiQL is an in-browser tool for writing, validating, and
@@ -176,6 +176,6 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
               }
             }
 
-            EOT;
+            ';
     }
 }
