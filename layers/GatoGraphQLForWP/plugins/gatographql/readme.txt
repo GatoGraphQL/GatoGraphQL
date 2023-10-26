@@ -171,6 +171,7 @@ You can even synchronize content across a network of sites, such as from an upst
 == Changelog ==
 
 = 1.0.12 =
+* Adapted the plugin following the assessment by the WordPress Plugin Review team.
 * Recipes: Replace `mysite.com` with the site domain
 * Added recipe: Automatically sending newsletter subscribers from InstaWP to Mailchimp
 
