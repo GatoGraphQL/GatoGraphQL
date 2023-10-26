@@ -285,8 +285,10 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 }
                 /** @var WP_Post */
                 $schemaConfiguration = get_post($schemaConfigurationID);
+                /** @var string */
+                $schemaConfigurationURL = get_edit_post_link($schemaConfigurationID);
                 ?>
-                    <a href="<?php echo \esc_attr(get_edit_post_link($schemaConfigurationID)) ?>">
+                    <a href="<?php echo \esc_url($schemaConfigurationURL) ?>">
                         <?php echo \esc_html($schemaConfiguration->post_title) ?>
                     </a>
                 <?php

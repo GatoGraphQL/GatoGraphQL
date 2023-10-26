@@ -1061,7 +1061,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         which makes "update_option_{$option}" not be triggered when there are no changes
                                                         @see wp-includes/option.php
                                                     -->
-                                                    <input type="hidden" name="<?php echo \esc_attr($optionsFormName)?>[<?php echo \esc_attr(self::FORM_FIELD_LAST_SAVED_TIMESTAMP) ?>]" value="<?php echo \esc_attr($time) ?>">
+                                                    <input type="hidden" name="<?php echo \esc_attr($optionsFormName)?>[<?php echo \esc_attr(self::FORM_FIELD_LAST_SAVED_TIMESTAMP) ?>]" value="<?php echo \esc_attr((string)$time) ?>">
                                                     <?php if (RequestHelpers::isRequestingXDebug()) : ?>
                                                         <input type="hidden" name="<?php echo \esc_attr(FrameworkParams::XDEBUG_TRIGGER) ?>" value="1">
                                                         <input type="hidden" name="<?php echo \esc_attr(FrameworkParams::XDEBUG_SESSION_STOP) ?>" value="1">
