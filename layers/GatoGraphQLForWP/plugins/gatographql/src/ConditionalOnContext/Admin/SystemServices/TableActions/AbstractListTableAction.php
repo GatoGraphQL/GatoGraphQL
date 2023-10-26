@@ -30,11 +30,11 @@ abstract class AbstractListTableAction extends AbstractAutomaticallyInstantiated
         }
 
         if (isset($_REQUEST['action']) && -1 != $_REQUEST['action']) {
-            return $_REQUEST['action'];
+            return sanitize_text_field($_REQUEST['action']);
         }
 
         if (isset($_REQUEST['action2']) && -1 != $_REQUEST['action2']) {
-            return $_REQUEST['action2'];
+            return sanitize_text_field($_REQUEST['action2']);
         }
 
         return false;

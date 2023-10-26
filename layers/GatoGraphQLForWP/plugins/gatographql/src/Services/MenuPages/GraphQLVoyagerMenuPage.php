@@ -16,7 +16,11 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
     public function print(): void
     {
         ?>
-        <div id="voyager" class="voyager-client"><?php echo __('Loading...', 'gatographql') ?></div>
+        <div id="voyager" class="voyager-client">
+            <p>
+                <?php esc_html_e('Loading...', 'gatographql') ?>
+            </p>
+        </div>
         <?php
     }
 

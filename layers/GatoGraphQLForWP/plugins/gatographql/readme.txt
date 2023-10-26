@@ -59,6 +59,12 @@ Browse all bundles and extensions on the [Gato GraphQL website](https://gatograp
 
 Do you need an integration with some WordPress plugin? [Let us know](https://github.com/GatoGraphQL/ExtensionsPlanningAndTracking/discussions).
 
+== Source code ==
+
+The source code for the plugin is in GitHub repo [GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL).
+
+This JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plugins/gatographql/blocks](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/plugins/gatographql/blocks).
+
 == Frequently Asked Questions ==
 
 = How does Gato GraphQL complement WP-CLI? =
@@ -165,6 +171,7 @@ You can even synchronize content across a network of sites, such as from an upst
 == Changelog ==
 
 = 1.0.12 =
+* Adapted the plugin following the assessment by the WordPress Plugin Review team.
 * Recipes: Replace `mysite.com` with the site domain
 * Added recipe: Automatically sending newsletter subscribers from InstaWP to Mailchimp
 

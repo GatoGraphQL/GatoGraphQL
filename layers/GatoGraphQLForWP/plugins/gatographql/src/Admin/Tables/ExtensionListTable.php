@@ -127,10 +127,10 @@ class ExtensionListTable extends AbstractExtensionListTable
             )
             : parent::getPluginInstallActionLabel($plugin);
         return sprintf(
-            <<<HTML
+            '
                 <span class="gatographql-extension-action-label">%s</span>
                 <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
-            HTML,
+            ',
             $extensionActionLabel,
             \__('Active (via Bundle)', 'gatographql')
         );

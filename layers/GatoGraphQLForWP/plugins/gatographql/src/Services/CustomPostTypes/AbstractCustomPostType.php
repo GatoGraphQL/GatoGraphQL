@@ -270,7 +270,12 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
             return;
         }
 
-        $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
+        /**
+         * Print the JS code after asset 'wp-blocks' as
+         * it is always printed in the Block Editor (any such
+         * script will do)
+         */
+        $jsScriptCode = 'var %s = "%s";';
         $endpointHelpers = $this->getEndpointHelpers();
 
         /**
@@ -281,11 +286,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * - Schema namespaced or not
          * - etc
          */
-        \printf(
-            $scriptTag,
+        wp_add_inline_script('wp-blocks', \sprintf(
+            $jsScriptCode,
             'GATOGRAPHQL_ADMIN_ENDPOINT',
             $endpointHelpers->getAdminGraphQLEndpoint()
-        );
+        ));
 
         /**
          * The endpoint against which to execute GraphQL queries on the WordPress editor,
@@ -297,11 +302,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * - Nested mutations enabled, without removing the redundant fields in the Root
          * - No namespacing
          */
-        \printf(
-            $scriptTag,
+        wp_add_inline_script('wp-blocks', \sprintf(
+            $jsScriptCode,
             'GATOGRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT',
             $endpointHelpers->getAdminPluginOwnUseGraphQLEndpoint()
-        );
+        ));
     }
 
     public function getEnablingModule(): ?string
@@ -361,7 +366,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
         );
     }
 
-    // Add the data to the custom columns for the book post type:
+    // Add the data to the custom columns for the custom post type:
     public function resolveCustomColumn(string $column, int $post_id): void
     {
         switch ($column) {
@@ -373,7 +378,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 if ($post === null) {
                     break;
                 }
-                echo $this->getCPTUtils()->getCustomPostDescription($post);
+                echo \esc_html($this->getCPTUtils()->getCustomPostDescription($post));
                 break;
         }
     }
@@ -431,7 +436,6 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     protected function printTaxonomyDropdowns(TaxonomyInterface $taxonomy): void
     {
-        // global $cat;
         $post_type = $this->getCustomPostType();
 
         /**
@@ -461,9 +465,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'name'            => $taxonomyName,
                 'value_field'     => 'slug',
             );
-
-            echo '<label class="screen-reader-text" for="' . $taxonomyName . '">' . $taxonomyObject->labels->filter_by_item . '</label>';
-
+            ?>
+            <label class="screen-reader-text" for="<?php echo \esc_attr($taxonomyName) ?>">
+                <?php echo \esc_html($taxonomyObject->labels->filter_by_item) ?>
+            </label>
+            <?php
             wp_dropdown_categories($dropdown_options);
         }
     }

@@ -62,16 +62,21 @@ class PrintEndpointInEditorHookSet extends AbstractHookSet
             return;
         }
 
-        $scriptTag = '<script type="text/javascript">var %s = "%s"</script>';
+        /**
+         * Print the JS code after asset 'wp-blocks' as
+         * it is always printed in the Block Editor (any such
+         * script will do)
+         */
+        $jsScriptCode = 'var %s = "%s";';
 
         /**
          * Endpoint to allow developers to feed data to their Gutenberg blocks,
          * with pre-defined config (avoiding the user preferences from the plugin).
          */
-        \printf(
-            $scriptTag,
+        wp_add_inline_script('wp-blocks', \sprintf(
+            $jsScriptCode,
             'GATOGRAPHQL_BLOCK_EDITOR_ADMIN_ENDPOINT',
             $this->getEndpointHelpers()->getAdminBlockEditorGraphQLEndpoint()
-        );
+        ));
     }
 }

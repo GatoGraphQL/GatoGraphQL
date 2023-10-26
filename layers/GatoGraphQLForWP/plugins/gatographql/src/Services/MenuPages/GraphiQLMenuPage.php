@@ -18,8 +18,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
         ?>
         <div id="graphiql" class="graphiql-client">
             <p>
-                <?php echo __('Loading...', 'gatographql') ?>
-                <!--span class="spinner is-active" style="float: none;"></span-->
+                <?php esc_html_e('Loading...', 'gatographql') ?>
             </p>
         </div>
         <?php
@@ -130,7 +129,7 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
 
     protected function getDefaultQuery(): string
     {
-        return <<<EOT
+        return '
             # Welcome to GraphiQL
             #
             # GraphiQL is an in-browser tool for writing, validating, and
@@ -176,6 +175,6 @@ class GraphiQLMenuPage extends AbstractPluginMenuPage
               }
             }
 
-            EOT;
+            ';
     }
 }

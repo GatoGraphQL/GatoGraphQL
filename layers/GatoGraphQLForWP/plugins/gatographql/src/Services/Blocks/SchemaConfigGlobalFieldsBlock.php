@@ -57,12 +57,7 @@ class SchemaConfigGlobalFieldsBlock extends AbstractSchemaConfigBlock
             $schemaExposureLabels[$attributes[self::ATTRIBUTE_NAME_SCHEMA_EXPOSURE] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
+        $blockContentPlaceholder = '<div class="%s"><h3 class="%s">%s</h3>%s</div>';
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),

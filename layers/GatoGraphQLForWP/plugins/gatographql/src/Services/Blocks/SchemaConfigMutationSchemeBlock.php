@@ -55,12 +55,7 @@ class SchemaConfigMutationSchemeBlock extends AbstractSchemaConfigBlock
             $mutationSchemeLabels[$attributes[self::ATTRIBUTE_NAME_MUTATION_SCHEME] ?? ''] ?? $moduleConfiguration->getSettingsValueLabel()
         );
 
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
+        $blockContentPlaceholder = '<div class="%s"><h3 class="%s">%s</h3>%s</div>';
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),

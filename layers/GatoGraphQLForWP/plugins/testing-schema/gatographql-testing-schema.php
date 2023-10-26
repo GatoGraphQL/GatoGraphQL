@@ -70,14 +70,15 @@ add_action(
          */
         if (!class_exists(Plugin::class)) {
             \add_action('admin_notices', function () use ($extensionName) {
-                _e(sprintf(
+                $adminNotice_safe = sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
                         __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gatographql-testing-schema'),
                         __('Gato GraphQL', 'gatographql-testing-schema'),
                         $extensionName
                     )
-                ));
+                );
+                echo $adminNotice_safe;
             });
             return;
         }

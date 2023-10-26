@@ -258,7 +258,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                 if ($post === null) {
                     break;
                 }
-                echo $this->isEndpointEnabled($post)
+                echo \esc_html($this->isEndpointEnabled($post)
                     ? sprintf(
                         \__('✅ %s', 'gatographql'),
                         \__('Enabled', 'gatographql')
@@ -266,7 +266,7 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     : sprintf(
                         \__('❌ %s', 'gatographql'),
                         \__('Disabled', 'gatographql')
-                    );
+                    ));
                 break;
             case 'schema-config':
                 /** @var string */
@@ -276,20 +276,22 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
                     $post_id,
                 );
                 if ($schemaConfigurationID === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-                    _e('"None" selected', 'gatographql');
+                    esc_html_e('"None" selected', 'gatographql');
                     break;
                 }
                 if ($schemaConfigurationID === null) {
-                    _e('(None)', 'gatographql');
+                    esc_html_e('(None)', 'gatographql');
                     break;
                 }
                 /** @var WP_Post */
                 $schemaConfiguration = get_post($schemaConfigurationID);
-                printf(
-                    '<a href="%s">%s</a>',
-                    get_edit_post_link($schemaConfigurationID),
-                    $schemaConfiguration->post_title
-                );
+                /** @var string */
+                $schemaConfigurationURL = get_edit_post_link($schemaConfigurationID);
+                ?>
+                    <a href="<?php echo \esc_url($schemaConfigurationURL) ?>">
+                        <?php echo \esc_html($schemaConfiguration->post_title) ?>
+                    </a>
+                <?php
                 break;
             default:
                 parent::resolveCustomColumn($column, $post_id);

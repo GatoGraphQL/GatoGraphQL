@@ -30,12 +30,7 @@ abstract class AbstractServerSideRegisteredOrNotSchemaTestingBlock extends Abstr
             \__('In particular, to test field <code>CustomPost.blocks</code>, to see that blocks not registered on the server-side display a warning when parsed.', 'gatographql-testing-schema'),
         );
 
-        $blockContentPlaceholder = <<<EOT
-            <div class="%s">
-                <h3 class="%s">%s</h3>
-                %s
-            </div>
-        EOT;
+        $blockContentPlaceholder = '<div class="%s"><h3 class="%s">%s</h3>%s</div>';
         return sprintf(
             $blockContentPlaceholder,
             $className . ' ' . $this->getAlignClassName(),

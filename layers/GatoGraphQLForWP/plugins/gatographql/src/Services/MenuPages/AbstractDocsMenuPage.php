@@ -40,7 +40,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
 
     public function print(): void
     {
-        $content = null;
+        $content_safe = null;
 
         /**
          * If passing the doc via ?doc=... already print it.
@@ -50,13 +50,15 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
             $this->getMenuPageHelper()->isDocumentationScreen()
             && App::query(RequestParams::DOC, '') !== ''
         ) {
-            $content = $this->getDocumentationContentToPrint();
+            $content_safe = $this->getDocumentationContentToPrint();
         }
+
+        $content_safe = $content_safe ?? $this->getContentToPrint();
         ?>
         <div
-            class="<?php echo implode(' ', $this->getDivClassNames()) ?>"
+            class="<?php echo \esc_attr(implode(' ', $this->getDivClassNames())) ?>"
         >
-            <?php echo $content ?? $this->getContentToPrint() ?>
+            <?php echo $content_safe ?>
         </div>
         <?php
     }

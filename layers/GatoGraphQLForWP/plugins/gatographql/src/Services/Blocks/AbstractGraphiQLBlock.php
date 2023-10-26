@@ -107,7 +107,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/251
          */
         return '';
-    //     return <<<EOT
+    //     return '
     //         # Welcome to GraphiQL
     //         #
     //         # GraphiQL is an in-browser tool for writing, validating, and
@@ -133,7 +133,7 @@ abstract class AbstractGraphiQLBlock extends AbstractBlock
     //         #   Ctrl-Enter (or press the play button above)
     //         #
 
-    //         EOT;
+    //         ';
     }
 
     /**

@@ -117,17 +117,18 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         parent::printHeader();
 
-        printf(
-            '<p>%s</p>',
-            sprintf(
-                __('%s <a href="%s" class="button">Switch to the <strong>Extension Docs</strong> view</a>', 'gatographql'),
-                $this->getHeaderMessage(),
-                \admin_url(sprintf(
-                    'admin.php?page=%s',
-                    $this->getExtensionDocsMenuPage()->getScreenID()
-                )),
-            )
-        );
+        $headerMessage_safe = $this->getHeaderMessage();
+        $extensionDocsURL = \admin_url(sprintf(
+            'admin.php?page=%s',
+            $this->getExtensionDocsMenuPage()->getScreenID()
+        ));
+        $label_safe = __('Switch to the <strong>Extension Docs</strong> view', 'gatographql');
+        ?>
+            <p>
+                <?php echo $headerMessage_safe ?>
+                <a href="<?php echo esc_url($extensionDocsURL) ?>" class="button"><?php echo $label_safe ?></a>
+            </p>
+        <?php
     }
 
     public function getHeaderMessage(): string

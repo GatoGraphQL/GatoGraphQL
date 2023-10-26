@@ -53,7 +53,7 @@ class ModuleListTableAction extends AbstractListTableAction
     {
         // If processes, `maybeProcessAction` has already been executed,
         // so we have the results to show in the admin notice
-        $message = '';
+        $message = null;
         if ($this->processed) {
             /**
              * Executing at the beginning (in Plugin.php): Add a precise message
@@ -81,13 +81,12 @@ class ModuleListTableAction extends AbstractListTableAction
                 $message = \__('Operation successful', 'gatographql');
             }
         }
-        if ($message) {
-            _e(sprintf(
-                '<div class="notice notice-success is-dismissible">' .
-                    '<p>%s</p>' .
-                '</div>',
-                $message
-            ));
+        if ($message !== null) {
+            ?>
+                <div class="notice notice-success is-dismissible">
+                    <p><?php echo \esc_html($message) ?></p>
+                </div>
+            <?php
         }
     }
 

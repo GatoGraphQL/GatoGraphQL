@@ -298,8 +298,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                                     $cssStyle = $itemSetting[Properties::CSS_STYLE] ?? '';
                                     ?>
-                                        <div id="section-<?php echo $itemSetting[Properties::NAME] ?>" class="gatographql-settings-item" <?php if (!empty($cssStyle)) :
-                                            ?>style="<?php echo $cssStyle ?>"<?php
+                                        <div id="section-<?php echo \esc_attr($itemSetting[Properties::NAME]) ?>" class="gatographql-settings-item" <?php if (!empty($cssStyle)) :
+                                            ?>style="<?php echo \esc_attr($cssStyle) ?>"<?php
                                                          endif; ?>>
                                             <?php
                                             if (!empty($possibleValues)) {
@@ -905,7 +905,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     {
         $settingsItems = $this->getSettingsNormalizer()->getAllSettingsItems();
         if (!$settingsItems) {
-            _e('There are no items to be configured', 'gatographql');
+            esc_html_e('There are no items to be configured', 'gatographql');
             return;
         }
 
@@ -958,7 +958,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                 class="wrap gatographql-tabpanel"
                 data-tab-content-target="#gatographql-primary-settings-nav-tab-content > .tab-content"
             >
-                <h1><?php \_e('Gato GraphQL — Settings', 'gatographql'); ?></h1>
+                <h1><?php \esc_html_e('Gato GraphQL — Settings', 'gatographql'); ?></h1>
                 <?php \settings_errors(); ?>
                 <div class="nav-tab-container">
                     <!-- Tabs -->
@@ -974,12 +974,14 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 continue;
                             }
                             $settingsCategoryID = $settingsCategoryResolver->getID($settingsCategory);
-                            printf(
-                                '<a href="#%s" class="nav-tab %s">%s</a>',
-                                $settingsCategoryID,
-                                $settingsCategoryID === $activeCategoryID ? 'nav-tab-active' : '',
-                                $settingsCategoryResolver->getName($settingsCategory)
-                            );
+                            ?>
+                                <a
+                                    href="#<?php echo \esc_attr($settingsCategoryID) ?>"
+                                    class="nav-tab <?php echo \esc_attr($settingsCategoryID === $activeCategoryID ? 'nav-tab-active' : '') ?>"
+                                >
+                                    <?php echo \esc_html($settingsCategoryResolver->getName($settingsCategory)) ?>
+                                </a>
+                            <?php
                         }
                         ?>
                     </h2>
@@ -1000,7 +1002,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 continue;
                             }
                             ?>
-                            <div id="<?php echo $settingsCategoryID ?>" class="tab-content" style="<?php echo $sectionStyle ?>">
+                            <div id="<?php echo \esc_attr($settingsCategoryID) ?>" class="tab-content" style="<?php echo \esc_attr($sectionStyle) ?>">
                             <?php
                                 // By default, focus on the first module
                                 $activeModuleID = $categorySettingsItems[0]['id'];
@@ -1015,7 +1017,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                 }
                             }
                             ?>
-                                <div class="<?php echo $class ?>">
+                                <div class="<?php echo \esc_attr($class) ?>">
                                     <?php if ($printModuleSettingsWithTabs) : ?>
                                         <div class="nav-tab-container">
                                             <!-- Tabs -->
@@ -1035,13 +1037,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         RequestParams::MODULE,
                                                         $item['id']
                                                     );
-                                                    printf(
-                                                        '<a data-tab-target="%s" href="%s" class="nav-tab %s">%s</a>',
-                                                        '#' . $item['id'],
-                                                        $settingsURL,
-                                                        $item['id'] === $activeModuleID ? 'nav-tab-active' : '',
-                                                        $item['name']
-                                                    );
+                                                    ?>
+                                                        <a
+                                                            data-tab-target="#<?php echo \esc_attr($item['id']) ?>"
+                                                            href="<?php echo \esc_url($settingsURL) ?>"
+                                                            class="nav-tab <?php echo esc_attr($item['id'] === $activeModuleID ? 'nav-tab-active' : '') ?>"
+                                                        >
+                                                            <?php echo \esc_html($item['name']) ?>
+                                                        </a>
+                                                    <?php
                                                 }
                                                 ?>
                                             </h2>
@@ -1049,7 +1053,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                     <?php endif; ?>
                                                 <form method="post" action="options.php">
                                                     <!-- Artificial input as flag that the form belongs to this plugin -->
-                                                    <input type="hidden" name="<?php echo self::FORM_ORIGIN ?>" value="<?php echo $optionsFormName ?>" />
+                                                    <input type="hidden" name="<?php echo \esc_attr(self::FORM_ORIGIN) ?>" value="<?php echo \esc_attr($optionsFormName) ?>" />
                                                     <!--
                                                         Artificial input to trigger the update of the form always, as to always purge the container/operational cache
                                                         (eg: to include 3rd party extensions in the service container, or new Gutenberg blocks)
@@ -1057,10 +1061,10 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         which makes "update_option_{$option}" not be triggered when there are no changes
                                                         @see wp-includes/option.php
                                                     -->
-                                                    <input type="hidden" name="<?php echo $optionsFormName?>[<?php echo self::FORM_FIELD_LAST_SAVED_TIMESTAMP ?>]" value="<?php echo $time ?>">
+                                                    <input type="hidden" name="<?php echo \esc_attr($optionsFormName)?>[<?php echo \esc_attr(self::FORM_FIELD_LAST_SAVED_TIMESTAMP) ?>]" value="<?php echo \esc_attr((string)$time) ?>">
                                                     <?php if (RequestHelpers::isRequestingXDebug()) : ?>
-                                                        <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_TRIGGER ?>" value="1">
-                                                        <input type="hidden" name="<?php echo FrameworkParams::XDEBUG_SESSION_STOP ?>" value="1">
+                                                        <input type="hidden" name="<?php echo \esc_attr(FrameworkParams::XDEBUG_TRIGGER) ?>" value="1">
+                                                        <input type="hidden" name="<?php echo \esc_attr(FrameworkParams::XDEBUG_SESSION_STOP) ?>" value="1">
                                                     <?php endif; ?>
                                                     <!-- Panels -->
                                                     <?php
@@ -1068,15 +1072,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                     \settings_fields($optionsFormName);
                                                     foreach ($categorySettingsItems as $item) {
                                                         $sectionStyle = '';
-                                                        $title = $printModuleSettingsWithTabs
-                                                            ? sprintf(
-                                                                '<h2>%s</h2><hr/>',
-                                                                $item['name']
-                                                            ) : sprintf(
-                                                                '<br/><h2 id="%s">%s</h2>',
-                                                                $item['id'],
-                                                                $item['name']
-                                                            );
                                                         if ($printModuleSettingsWithTabs) {
                                                             $sectionStyle = sprintf(
                                                                 'display: %s;',
@@ -1084,8 +1079,12 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                             );
                                                         }
                                                         ?>
-                                                        <div id="<?php echo $item['id'] ?>" class="gatographql-settings-section <?php echo $sectionClass ?>" style="<?php echo $sectionStyle ?>">
-                                                            <?php echo $title ?>
+                                                        <div id="<?php echo \esc_attr($item['id']) ?>" class="gatographql-settings-section <?php echo \esc_attr($sectionClass) ?>" style="<?php echo \esc_attr($sectionStyle) ?>">
+                                                            <?php if ($printModuleSettingsWithTabs) { ?>
+                                                                <h2><?php echo \esc_html($item['name']) ?></h2><hr/>
+                                                            <?php } else { ?>
+                                                                <br/><h2 id="<?php echo \esc_attr($item['id']) ?>"><?php echo \esc_html($item['name']) ?></h2>
+                                                            <?php } ?>
                                                             <table class="form-table">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
@@ -1195,10 +1194,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
+        $description_safe = $itemSetting[Properties::DESCRIPTION] ?? '';
         ?>
-            <label for="<?php echo $name; ?>">
-                <input type="checkbox" name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
-                <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
+            <label for="<?php echo \esc_attr($name); ?>">
+                <input type="checkbox" name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>" id="<?php echo \esc_attr($name); ?>" value="1" <?php checked(1, $value); ?> />
+                <?php echo $description_safe; ?>
             </label>
         <?php
     }
@@ -1210,8 +1210,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function printLabelField(string $optionsFormName, string $module, array $itemSetting): void
     {
+        $description_safe = $itemSetting[Properties::DESCRIPTION] ?? '';
         ?>
-            <?php echo $itemSetting[Properties::DESCRIPTION] ?? ''; ?>
+            <?php echo $description_safe; ?>
         <?php
     }
 
@@ -1225,16 +1226,29 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
-        $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
+        $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         $isNumber = isset($itemSetting[Properties::TYPE]) && $itemSetting[Properties::TYPE] === Properties::TYPE_INT;
         $minNumber = null;
         if ($isNumber) {
             $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
         }
         ?>
-            <label for="<?php echo $name; ?>">
-                <input name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
-                <?php echo $label; ?>
+            <label for="<?php echo \esc_attr($name); ?>">
+                <input
+                    name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>"
+                    id="<?php echo \esc_attr($name); ?>"
+                    value="<?php echo \esc_attr($value); ?>"
+                    <?php if ($isNumber) { ?>
+                        type="number"
+                        step="1"
+                        <?php if ($minNumber !== null) { ?>
+                            min="<?php echo \esc_attr($minNumber) ?>"
+                        <?php } ?>
+                    <?php } else { ?>
+                        type="text"
+                    <?php } ?>
+                />
+                <?php echo $label_safe; ?>
             </label>
         <?php
     }
@@ -1257,20 +1271,22 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $addSpacing = false;
         if (isset($itemSetting[Properties::DESCRIPTION])) {
             $addSpacing = true;
-            $description = $itemSetting[Properties::DESCRIPTION];
-            echo $description;
+            $description_safe = $itemSetting[Properties::DESCRIPTION];
+            echo $description_safe;
         }
         $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
         foreach ($keyLabels as $key => $label) {
             $id = $name . '_' . $key;
             if ($addSpacing) {
-                echo '<br/><br/>';
+                ?>
+                <br/><br/>
+                <?php
             }
             ?>
-            <label for="<?php echo $id ?>">
-                <?php printf(__('<strong>%s</strong>:', 'gatographql'), $label); ?>
+            <label for="<?php echo \esc_attr($id) ?>">
+                <strong><?php echo \esc_html($label); ?></strong>
                 <br/>
-                <input name="<?php echo $optionsFormName . '[' . $name . '][' . $key . ']'; ?>" id="<?php echo $id ?>" value="<?php echo $value[$key] ?? '' ?>" type="text">
+                <input name="<?php echo \esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>" id="<?php echo \esc_attr($id) ?>" value="<?php echo \esc_html($value[$key] ?? '') ?>" type="text">
             </label>
             <?php
             $addSpacing = true;
@@ -1292,20 +1308,31 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if (!is_array($value)) {
             $value = $value === null ? [] : [$value];
         }
-        $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
+        $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         $isMultiple = $itemSetting[Properties::IS_MULTIPLE] ?? false;
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         ?>
-            <label for="<?php echo $name; ?>">
-                <select name="<?php echo $optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : ''); ?>" id="<?php echo $name; ?>" <?php echo $isMultiple ? 'multiple="multiple" size="10"' : ''; ?>>
+            <label for="<?php echo \esc_attr($name); ?>">
+                <select
+                    name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : '')); ?>"
+                    id="<?php echo \esc_attr($name); ?>"
+                    <?php if ($isMultiple) : ?>
+                        multiple="multiple"
+                        size="10"
+                    <?php endif; ?>
+                >
                 <?php foreach ($possibleValues as $optionValue => $optionLabel) : ?>
-                    <?php $maybeSelected = in_array($optionValue, $value) ? 'selected="selected"' : ''; ?>
-                    <option value="<?php echo $optionValue ?>" <?php echo $maybeSelected ?>>
-                        <?php echo $optionLabel ?>
+                    <option
+                        value="<?php echo \esc_attr($optionValue) ?>"
+                        <?php if (in_array($optionValue, $value)) : ?>
+                            selected="selected"
+                        <?php endif; ?>
+                    >
+                        <?php echo \esc_html($optionLabel) ?>
                     </option>
                 <?php endforeach ?>
                 </select>
-                <?php echo $label; ?>
+                <?php echo $label_safe; ?>
             </label>
         <?php
     }
@@ -1321,11 +1348,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $input = $itemSetting[Properties::INPUT];
         // This must be an array
         $value = $this->getOptionValue($module, $input);
-        $label = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
+        $label_safe = isset($itemSetting[Properties::DESCRIPTION]) ? '<br/>' . $itemSetting[Properties::DESCRIPTION] : '';
         ?>
-            <label for="<?php echo $name; ?>">
-                <textarea name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" rows="10" cols="50"><?php echo implode("\n", $value) ?></textarea>
-                <?php echo $label; ?>
+            <label for="<?php echo \esc_attr($name); ?>">
+                <textarea name="<?php echo \esc_attr($optionsFormName . '[' . $name . ']'); ?>" id="<?php echo \esc_attr($name); ?>" rows="10" cols="50"><?php echo \esc_html(implode("\n", $value)) ?></textarea>
+                <?php echo $label_safe; ?>
             </label>
         <?php
     }

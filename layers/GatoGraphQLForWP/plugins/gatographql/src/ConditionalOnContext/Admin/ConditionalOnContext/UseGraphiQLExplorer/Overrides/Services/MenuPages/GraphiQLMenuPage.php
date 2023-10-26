@@ -42,17 +42,17 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
         // Extract the HTML inside <body>
         $matches = [];
         preg_match('/<body([^>]+)?>(.*?)<\/body>/s', $htmlContent, $matches);
-        $bodyHTMLContent = $matches[2];
+        $bodyHTMLContent_safe = $matches[2];
         // Remove all JS/CSS assets, since they are enqueued
-        $bodyHTMLContent = preg_replace(
+        $bodyHTMLContent_safe = preg_replace(
             [
                 '/<link[^>]*>(.*)<\/link>"/s',
                 '/<script[^>]*>(.*)<\/script>/s',
             ],
             '',
-            $bodyHTMLContent
+            $bodyHTMLContent_safe
         );
-        echo $bodyHTMLContent;
+        echo $bodyHTMLContent_safe;
     }
 
     /**
@@ -74,7 +74,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 
         // Print the HTML from the Client
         $htmlContent = $this->getGraphiQLWithExplorerClientHTML();
-        // Extract the JS/CSS assets, from either the <head> or the <head>
+        // Extract the JS/CSS assets
         $matches = [];
         preg_match_all('/<link[^>]+href="([^">]+)"/s', $htmlContent, $matches);
         $cssFileURLs = $matches[1];

@@ -27,7 +27,7 @@ abstract class AbstractTableMenuPage extends AbstractPluginMenuPage
         }
         ?>
         <div class="wrap">
-            <h1><?php echo $this->getHeader() ?></h1>
+            <h1><?php echo \esc_html($this->getHeader()) ?></h1>
             <?php $this->printHeader() ?>
             <?php $this->printBody() ?>
         </div>

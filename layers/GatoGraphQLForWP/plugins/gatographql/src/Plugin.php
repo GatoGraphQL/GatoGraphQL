@@ -117,9 +117,9 @@ class Plugin extends AbstractMainPlugin
                 RequestParams::MODULE,
                 $generalSettingsModuleResolver->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
             ));
-            _e(sprintf(
+            $adminNotice_safe = sprintf(
                 '<div class="notice notice-success is-dismissible">' .
-                '<p>%s</p>' .
+                    '<p>%s</p>' .
                 '</div>',
                 sprintf(
                     __('Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'gatographql'),
@@ -128,7 +128,8 @@ class Plugin extends AbstractMainPlugin
                     'thickbox open-plugin-details-modal',
                     $generalSettingsURL
                 )
-            ));
+            );
+            echo $adminNotice_safe;
         });
     }
 
