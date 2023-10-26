@@ -33,7 +33,7 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
-            '%s/bundles/%s',
+            '%s/bundles/%s/',
             $moduleConfiguration->getGatoGraphQLWebsiteURL(),
             $this->getSlug($module)
         );
