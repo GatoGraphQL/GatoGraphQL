@@ -1197,8 +1197,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $value = $this->getOptionValue($module, $input);
         $description_safe = $itemSetting[Properties::DESCRIPTION] ?? '';
         ?>
-            <label for="<?php echo $name; ?>">
-                <input type="checkbox" name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
+            <label for="<?php echo \esc_attr($name); ?>">
+                <input type="checkbox" name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>" id="<?php echo \esc_attr($name); ?>" value="1" <?php checked(1, $value); ?> />
                 <?php echo $description_safe; ?>
             </label>
         <?php
@@ -1234,8 +1234,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
         }
         ?>
-            <label for="<?php echo $name; ?>">
-                <input name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="<?php echo $value; ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
+            <label for="<?php echo \esc_attr($name); ?>">
+                <input name="<?php echo \esc_attr($optionsFormName) . '[' . \esc_attr($name) . ']'; ?>" id="<?php echo \esc_attr($name); ?>" value="<?php echo \esc_attr($value); ?>" <?php echo $isNumber ? ('type="number" step="1"' . (!is_null($minNumber) ? ' min="' . $minNumber . '"' : '')) : 'type="text"' ?>/>
                 <?php echo $label_safe; ?>
             </label>
         <?php
