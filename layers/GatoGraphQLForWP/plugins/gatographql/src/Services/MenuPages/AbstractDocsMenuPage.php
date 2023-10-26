@@ -40,7 +40,7 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
 
     public function print(): void
     {
-        $content = null;
+        $content_safe = null;
 
         /**
          * If passing the doc via ?doc=... already print it.
