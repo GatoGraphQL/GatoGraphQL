@@ -31,8 +31,8 @@ class EditorHelpers
         }
         $typenow = null;
         if ('post-new.php' === $pagenow) {
-            if (isset($_REQUEST['post_type']) && \post_type_exists($_REQUEST['post_type'])) {
-                $typenow = $_REQUEST['post_type'];
+            if (isset($_REQUEST['post_type']) && \post_type_exists(sanitize_text_field($_REQUEST['post_type']))) {
+                $typenow = sanitize_text_field($_REQUEST['post_type']);
             };
         } elseif ('post.php' === $pagenow) {
             $post_id = null;
