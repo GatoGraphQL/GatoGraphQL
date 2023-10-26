@@ -282,7 +282,7 @@ abstract class AbstractContentParser implements ContentParserInterface
         /**
          * Replace strings in the code
          * @var array<string,string>
-         */ 
+         */
         $replacements = $options[ContentParserOptions::REPLACEMENTS] ?? [];
         if ($replacements !== []) {
             $htmlContent = str_replace(array_keys($replacements), array_values($replacements), $htmlContent);
