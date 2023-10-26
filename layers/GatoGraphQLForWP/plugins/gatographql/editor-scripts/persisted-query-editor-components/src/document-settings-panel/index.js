@@ -9,7 +9,6 @@ import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
  */
 import { MarkdownGuideButton } from '@gatographql/components';
 import { getMarkdownContentOrUseDefault } from '../markdown-loader';
-// import PersistedQueryEndpointGuideButton from './guide-for-css-tricks-article';
 
 /**
  * Constants to customize
