@@ -39,6 +39,13 @@ query MaybeCreateContactOnMailchimp
 }
 ```
 
+And define in `wp-config.php`:
+
+```php
+define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
+define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
+```
+
 ## Step by step analysis of the GraphQL query
 
 Read blog posts:
