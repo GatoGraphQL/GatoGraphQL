@@ -117,7 +117,7 @@ class Plugin extends AbstractMainPlugin
                 RequestParams::MODULE,
                 $generalSettingsModuleResolver->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
             ));
-            printf(
+            $adminNotice_safe = sprintf(
                 '<div class="notice notice-success is-dismissible">' .
                     '<p>%s</p>' .
                 '</div>',
@@ -129,6 +129,7 @@ class Plugin extends AbstractMainPlugin
                     $generalSettingsURL
                 )
             );
+            echo $adminNotice_safe;
         });
     }
 
