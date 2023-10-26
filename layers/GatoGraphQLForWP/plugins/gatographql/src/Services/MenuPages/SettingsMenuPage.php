@@ -1068,15 +1068,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                     \settings_fields($optionsFormName);
                                                     foreach ($categorySettingsItems as $item) {
                                                         $sectionStyle = '';
-                                                        $title = $printModuleSettingsWithTabs
-                                                            ? sprintf(
-                                                                '<h2>%s</h2><hr/>',
-                                                                $item['name']
-                                                            ) : sprintf(
-                                                                '<br/><h2 id="%s">%s</h2>',
-                                                                $item['id'],
-                                                                $item['name']
-                                                            );
                                                         if ($printModuleSettingsWithTabs) {
                                                             $sectionStyle = sprintf(
                                                                 'display: %s;',
@@ -1085,7 +1076,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                                                         }
                                                         ?>
                                                         <div id="<?php echo \esc_attr($item['id']) ?>" class="gatographql-settings-section <?php echo \esc_attr($sectionClass) ?>" style="<?php echo \esc_attr($sectionStyle) ?>">
-                                                            <?php echo wp_kses($title, ['h2', 'br', 'hr']) ?>
+                                                            <?php if ($printModuleSettingsWithTabs) { ?>
+                                                                <h2><?php echo \esc_html($item['name']) ?></h2><hr/>
+                                                            <?php } else { ?>
+                                                                <br/><h2 id="<?php echo \esc_attr($item['id']) ?>"><?php echo \esc_html($item['name']) ?></h2>
+                                                            <?php } ?>
                                                             <table class="form-table">
                                                                 <?php \do_settings_fields($optionsFormName, $this->getOptionsFormModuleSectionName($optionsFormName, $item['id'])) ?>
                                                             </table>
