@@ -205,7 +205,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         if (isset($this->error)) {
             parent::no_items();
         } else { ?>
-            <div class="no-plugin-results"><?php _e('Ooops something went wrong: No extensions found. Please contact the admin.', 'gatographql'); ?></div>
+            <div class="no-plugin-results"><?php \esc_html_e('Ooops something went wrong: No extensions found. Please contact the admin.', 'gatographql'); ?></div>
             <?php
         }
     }
