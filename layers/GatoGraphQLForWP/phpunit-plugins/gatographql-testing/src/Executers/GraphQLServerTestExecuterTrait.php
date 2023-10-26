@@ -64,7 +64,7 @@ trait GraphQLServerTestExecuterTrait
         ));
         /** @var string */
         $jsonResponse = json_encode($json);
-        _e($jsonResponse);
+        echo $jsonResponse;
         exit;
     }
 }
