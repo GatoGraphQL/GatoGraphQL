@@ -75,10 +75,11 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function getMarkdownContentOptions(): array
     {
+        $siteURL = str_replace(['https://', 'http://'], '', \get_site_url());
         return [
             ...parent::getMarkdownContentOptions(),
             ContentParserOptions::REPLACEMENTS => [
-                'https://mysite.com' => \get_site_url(),
+                'mysite.com' => $siteURL,
             ],
         ];
     }
