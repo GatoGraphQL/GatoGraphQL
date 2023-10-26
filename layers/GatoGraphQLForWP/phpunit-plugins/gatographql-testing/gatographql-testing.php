@@ -40,13 +40,13 @@ add_action(
          */
         if (!PluginHelpers::enablePlugin()) {
             \add_action('admin_notices', function () {
-                _e(sprintf(
+                printf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
                         __('Functionality in plugin <strong>%s</strong> can only be enabled during development or testing.', 'gatographql-testing'),
                         __('Gato GraphQL - Testing', 'gatographql-testing')
                     )
-                ));
+                );
             });
             return;
         }

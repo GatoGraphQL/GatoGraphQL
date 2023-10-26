@@ -722,10 +722,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         $inititalizationException->getTraceAsString()
                     )
                 );
-                _e(sprintf(
+                printf(
                     '<div class="notice notice-error">%s</div>',
                     $errorMessage
-                ));
+                );
             }
         );
     }

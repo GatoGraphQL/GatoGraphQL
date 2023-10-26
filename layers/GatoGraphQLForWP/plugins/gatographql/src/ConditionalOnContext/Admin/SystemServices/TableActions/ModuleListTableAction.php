@@ -82,12 +82,12 @@ class ModuleListTableAction extends AbstractListTableAction
             }
         }
         if ($message) {
-            _e(sprintf(
+            printf(
                 '<div class="notice notice-success is-dismissible">' .
                     '<p>%s</p>' .
                 '</div>',
                 $message
-            ));
+            );
         }
     }
 

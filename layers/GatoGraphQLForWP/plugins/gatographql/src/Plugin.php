@@ -117,7 +117,7 @@ class Plugin extends AbstractMainPlugin
                 RequestParams::MODULE,
                 $generalSettingsModuleResolver->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
             ));
-            _e(sprintf(
+            printf(
                 '<div class="notice notice-success is-dismissible">' .
                 '<p>%s</p>' .
                 '</div>',
@@ -128,7 +128,7 @@ class Plugin extends AbstractMainPlugin
                     'thickbox open-plugin-details-modal',
                     $generalSettingsURL
                 )
-            ));
+            );
         });
     }
 
