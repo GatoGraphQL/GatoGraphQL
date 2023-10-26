@@ -4,6 +4,14 @@ We can extend the previous recipe, to duplicate multiple posts with a single Gra
 
 ## GraphQL query to duplicate multiple posts at once
 
+<div class="doc-config-highlight" markdown=1>
+
+⚙️ **Configuration alert:**
+
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+
+</div>
+
 This GraphQL query duplicates the posts retrieved via the provided `$limit` and `$offset` variables:
 
 ```graphql
