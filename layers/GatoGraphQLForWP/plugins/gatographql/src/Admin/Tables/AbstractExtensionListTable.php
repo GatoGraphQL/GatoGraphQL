@@ -309,35 +309,35 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     protected function getArtificialRequestAnExtensionPluginItem(): string
     {
         // Add an additional item
-        $additionalItemHTMLPlaceholder = <<<HTML
+        $additionalItemHTMLPlaceholder = '
             <div class="plugin-card plugin-card-artificially-added">
                 <div class="plugin-card-top plugin-card-top-request-extension">
                     <div class="name column-name">
                         <h3>
-                            %1\$s
-                            <img src="%2\$s" class="plugin-icon" alt="">
+                            %1$s
+                            <img src="%2$s" class="plugin-icon" alt="">
                         </h3>
                     </div>
                     <div class="action-links">
                         <ul class="plugin-action-buttons">
                             <li>
-                                <a class="install-now button" href="%3\$s" aria-label="%1\$s" target="_blank">
-                                    %4\$s%7\$s
+                                <a class="install-now button" href="%3$s" aria-label="%1$s" target="_blank">
+                                    %4$s%7$s
                                 </a>
                             </li>
                         </ul>
                     </div>
                     <div class="desc column-description">
-                        <p>%5\$s</p>
+                        <p>%5$s</p>
                     </div>
                 </div>
                 <div class="plugin-card-bottom">
                     <div class="column-compatibility">
-                        %6\$s
+                        %6$s
                     </div>
                 </div>
             </div>
-        HTML;
+        ';
 
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
