@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
@@ -67,6 +68,19 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
     protected function getDocsFolder(): string
     {
         return '';
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getMarkdownContentOptions(): array
+    {
+        return [
+            ...parent::getMarkdownContentOptions(),
+            ContentParserOptions::REPLACEMENTS => [
+                'https://mysite.com' => \get_site_url(),
+            ],
+        ];
     }
 
     /**
