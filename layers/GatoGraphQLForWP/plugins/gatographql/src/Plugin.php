@@ -118,9 +118,7 @@ class Plugin extends AbstractMainPlugin
                 $generalSettingsModuleResolver->getID(PluginGeneralSettingsFunctionalityModuleResolver::GENERAL)
             ));
             printf(
-                '<div class="notice notice-success is-dismissible">' .
-                '<p>%s</p>' .
-                '</div>',
+                '<div class="notice notice-success is-dismissible"><p>%s</p></div>',
                 sprintf(
                     __('Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</code>. <strong><a href="%s" class="%s">Check out what\'s new</a></strong> | <a href="%s">Disable this admin notice in the Settings</a>', 'gatographql'),
                     $this->pluginVersion,
