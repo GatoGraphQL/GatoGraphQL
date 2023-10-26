@@ -114,15 +114,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
 
         return $content;
     }
-
-    // /**
-    //  * @return array<string,mixed>
-    //  */
-    // protected function getMarkdownContentOptions(): array
-    // {
-    //     return parent::getMarkdownContentOptions();
-    // }
-
+    
     /**
      * Enqueue the required assets
      */
