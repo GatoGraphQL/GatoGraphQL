@@ -466,7 +466,9 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
                 'value_field'     => 'slug',
             );
             ?>
-            <label class="screen-reader-text" for="<?php echo \esc_attr($taxonomyName) ?> "><?php echo \esc_html($taxonomyObject->labels->filter_by_item) ?></label>
+            <label class="screen-reader-text" for="<?php echo \esc_attr($taxonomyName) ?>">
+                <?php echo \esc_html($taxonomyObject->labels->filter_by_item) ?>
+            </label>
             <?php
             wp_dropdown_categories($dropdown_options);
         }
