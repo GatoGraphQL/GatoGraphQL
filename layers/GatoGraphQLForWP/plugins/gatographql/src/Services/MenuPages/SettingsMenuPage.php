@@ -1195,10 +1195,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $name = $itemSetting[Properties::NAME];
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
+        $description_safe = $itemSetting[Properties::DESCRIPTION] ?? '';
         ?>
             <label for="<?php echo $name; ?>">
                 <input type="checkbox" name="<?php echo $optionsFormName . '[' . $name . ']'; ?>" id="<?php echo $name; ?>" value="1" <?php checked(1, $value); ?> />
-                <?php echo \esc_attr($itemSetting[Properties::DESCRIPTION] ?? ''); ?>
+                <?php echo $description_safe; ?>
             </label>
         <?php
     }
@@ -1210,8 +1211,9 @@ class SettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function printLabelField(string $optionsFormName, string $module, array $itemSetting): void
     {
+        $description_safe = $itemSetting[Properties::DESCRIPTION] ?? '';
         ?>
-            <?php echo \esc_attr($itemSetting[Properties::DESCRIPTION] ?? ''); ?>
+            <?php echo $description_safe; ?>
         <?php
     }
 
