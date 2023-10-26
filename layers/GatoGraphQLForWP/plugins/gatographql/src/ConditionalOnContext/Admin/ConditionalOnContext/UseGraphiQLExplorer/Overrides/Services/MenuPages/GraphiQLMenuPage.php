@@ -74,7 +74,7 @@ class GraphiQLMenuPage extends UpstreamGraphiQLMenuPage
 
         // Print the HTML from the Client
         $htmlContent = $this->getGraphiQLWithExplorerClientHTML();
-        // Extract the JS/CSS assets, from either the <head> or the <head>
+        // Extract the JS/CSS assets
         $matches = [];
         preg_match_all('/<link[^>]+href="([^">]+)"/s', $htmlContent, $matches);
         $cssFileURLs = $matches[1];
