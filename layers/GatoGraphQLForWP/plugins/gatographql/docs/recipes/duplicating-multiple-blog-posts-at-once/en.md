@@ -8,7 +8,10 @@ We can extend the previous recipe, to duplicate multiple posts with a single Gra
 
 ⚙️ **Configuration alert:**
 
-For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled
+For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
+
+- In block [Payload Types for Mutations](https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations/), select "Do not use Payload Types for Mutations (i.e. return the mutated entity)" (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
+- In block [Mutation Scheme](https://gatographql.com/guides/schema/using-nested-mutations/), select any of the two "Enable Nested Mutations" options (as to use field `_echo` inside a `mutation`)
 
 </div>
 
@@ -418,17 +421,6 @@ mutation DuplicatePosts
     @export(as: "createdPostIDs")
 }
 ```
-
-<div class="doc-config-highlight" markdown=1>
-
-⚙️ **Configuration alert:**
-
-For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
-
-- In block [Payload Types for Mutations](https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations/), select "Do not use Payload Types for Mutations (i.e. return the mutated entity)" (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
-- In block [Mutation Scheme](https://gatographql.com/guides/schema/using-nested-mutations/), select any of the two "Enable Nested Mutations" options (as to use field `_echo` inside a `mutation`)
-
-</div>
 
 Finally, we can use dynamic variable `$createdPostIDs` to retrieve the data for the newly-created posts:
 
