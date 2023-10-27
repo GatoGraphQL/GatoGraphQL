@@ -170,6 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.0.14 =
+* Configuration alert in recipe "Duplicating multiple blog posts at once"
+
 = 1.0.13 =
 * Fixed passing dynamic variables 2 levels down
 * Fixed not opening link in modal window when current page is in a modal window

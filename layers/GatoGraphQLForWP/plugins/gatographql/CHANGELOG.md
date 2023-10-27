@@ -4,8 +4,14 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 1.0.14 - DATE
+## 1.0.15 - DATE
 
+
+## 1.0.14 - 29/10/2013
+
+### Fixed
+
+- Configuration alert in recipe "Duplicating multiple blog posts at once"
 
 ## 1.0.13 - 29/10/2013
 
