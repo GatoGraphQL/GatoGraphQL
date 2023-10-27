@@ -188,7 +188,26 @@ class ObjectResolvedDynamicVariablesService implements ObjectResolvedDynamicVari
             return;
         }
 
-        $objectResolvedDynamicVariables[$toField] = $objectResolvedDynamicVariables[$fromField];
+        /** @var array<string|int,array<string,mixed>> */
+        $fromObjectDynamicVariableNameValues = $objectResolvedDynamicVariables[$fromField];
+
+        /**
+         * Watch out! Do not override any state set in the toField!
+         */
+        if ($objectResolvedDynamicVariables->contains($toField)) {
+            /** @var array<string|int,array<string,mixed>> */
+            $toObjectDynamicVariableNameValues = $objectResolvedDynamicVariables[$toField];
+            /** @var string|int $objectID */
+            foreach ($fromObjectDynamicVariableNameValues as $objectID => $dynamicVariableNameValues) {
+                $toObjectDynamicVariableNameValues[$objectID] = array_merge(
+                    $toObjectDynamicVariableNameValues[$objectID] ?? [],
+                    $dynamicVariableNameValues
+                );
+            }
+            $objectResolvedDynamicVariables[$toField] = $toObjectDynamicVariableNameValues;
+        } else {
+            $objectResolvedDynamicVariables[$toField] = $objectResolvedDynamicVariables[$fromField];
+        }
 
         // Override the state
         $appStateManager = App::getAppStateManager();
