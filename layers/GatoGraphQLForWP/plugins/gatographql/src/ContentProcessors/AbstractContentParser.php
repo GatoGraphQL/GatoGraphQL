@@ -464,22 +464,33 @@ abstract class AbstractContentParser implements ContentParserInterface
                     $doc = substr($doc, 0, $langPos);
                 }
 
+                $openInModal = true;
+
+                $elementURLParams = [
+                    RequestParams::TAB => RequestParams::TAB_DOCS,
+                    RequestParams::DOC => $doc,
+                ];
+                if ($openInModal) {
+                    $elementURLParams['TB_iframe'] = 'true';
+                }
+
                 // The URL is the current one, plus attr to open the .md file
                 // in a modal window
                 $elementURL = \add_query_arg(
-                    [
-                        RequestParams::TAB => RequestParams::TAB_DOCS,
-                        RequestParams::DOC => $doc,
-                        'TB_iframe' => 'true',
-                    ],
+                    $elementURLParams,
                     $this->getRequestHelperService()->getRequestedFullURL()
                 );
+
                 /** @var string */
                 $link = str_replace(
                     "href=\"{$matches[1]}.md\"",
                     "href=\"{$elementURL}\"",
                     $matches[0]
                 );
+                if (!$openInModal) {
+                    return $link;
+                }
+
                 // Must also add some classnames
                 $classnames = 'thickbox open-plugin-details-modal';
                 // 1. If there are classes already
