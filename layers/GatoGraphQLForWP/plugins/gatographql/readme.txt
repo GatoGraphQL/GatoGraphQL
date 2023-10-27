@@ -173,6 +173,7 @@ You can even synchronize content across a network of sites, such as from an upst
 = 1.0.13 =
 * Fixed passing dynamic variables 2 levels down
 * Added scalar type `AnyScalar`
+* Added documentation for new field `_arrayGenerateAllCombinationsOfItems` from the "Helper Function Collection" extension
 
 = 1.0.12 =
 * Adapted the plugin following the assessment by the WordPress Plugin Review team.

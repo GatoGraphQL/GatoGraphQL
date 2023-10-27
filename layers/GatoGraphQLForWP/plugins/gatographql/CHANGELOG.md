@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Scalar type `AnyScalar`
+- Documentation for new field `_arrayGenerateAllCombinationsOfItems` from the "Helper Function Collection" extension
 
 ### Fixed
 
