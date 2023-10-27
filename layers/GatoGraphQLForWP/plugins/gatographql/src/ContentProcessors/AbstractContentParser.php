@@ -439,11 +439,13 @@ abstract class AbstractContentParser implements ContentParserInterface
      * Whenever a link points to a .md file, convert it
      * so it works also within the plugin
      */
-    protected function convertMarkdownLinks(string $htmlContent): string
-    {
+    protected function convertMarkdownLinks(
+        string $htmlContent,
+        bool $openInModal = true,
+    ): string {
         return (string)preg_replace_callback(
             '/<a.*href="(.*?)\.md".*?>/',
-            function (array $matches): string {
+            function (array $matches) use ($openInModal): string {
                 // If the element has an absolute route, then no need
                 if ($this->isAbsoluteURL($matches[1]) || $this->isMailto($matches[1])) {
                     return $matches[0];
@@ -463,8 +465,6 @@ abstract class AbstractContentParser implements ContentParserInterface
                 if ($langPos !== false) {
                     $doc = substr($doc, 0, $langPos);
                 }
-
-                $openInModal = true;
 
                 $elementURLParams = [
                     RequestParams::TAB => RequestParams::TAB_DOCS,
