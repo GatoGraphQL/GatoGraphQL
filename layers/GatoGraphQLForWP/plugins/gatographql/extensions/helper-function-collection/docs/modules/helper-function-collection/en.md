@@ -205,6 +205,82 @@ This query:
 }
 ```
 
+### `_arrayGenerateAllCombinationsOfItems`
+
+Combine the elements in the arrays, extracting one item from each array and merging it with all others, under the corresponding label.
+
+This query:
+
+```graphql
+{
+  dataCombinations: _arrayGenerateAllCombinationsOfItems(labelItems: [
+    {
+      label: "person",
+      items: ["Sam", "Eric"]
+    },
+    {
+      label: "location",
+      items: ["Paris", "Rome"]
+    },
+    {
+      label: "meal",
+      items: ["Pasta", "Bagel"]
+    }
+  ])
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "dataCombinations": [
+      {
+        "person": "Sam",
+        "location": "Paris",
+        "meal": "Pasta"
+      },
+      {
+        "person": "Sam",
+        "location": "Paris",
+        "meal": "Bagel"
+      },
+      {
+        "person": "Sam",
+        "location": "Rome",
+        "meal": "Pasta"
+      },
+      {
+        "person": "Sam",
+        "location": "Rome",
+        "meal": "Bagel"
+      },
+      {
+        "person": "Eric",
+        "location": "Paris",
+        "meal": "Pasta"
+      },
+      {
+        "person": "Eric",
+        "location": "Paris",
+        "meal": "Bagel"
+      },
+      {
+        "person": "Eric",
+        "location": "Rome",
+        "meal": "Pasta"
+      },
+      {
+        "person": "Eric",
+        "location": "Rome",
+        "meal": "Bagel"
+      }
+    ]
+  }
+}
+```
+
 ## Examples
 
 In combination with extensions **HTTP Request via Schema** and **Field to Input**, we can retrieve the currently-requested URL when executing a GraphQL custom endpoint or persisted query, add extra parameters, and send another HTTP request to the new URL.
