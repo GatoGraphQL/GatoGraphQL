@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.13 - DATE
 
+### Added
 
+- Scalar type `AnyScalar`
 
 ## 1.0.12 - 26/10/2023
 
