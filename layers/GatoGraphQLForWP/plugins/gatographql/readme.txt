@@ -173,6 +173,7 @@ You can even synchronize content across a network of sites, such as from an upst
 = 1.0.13 =
 * Fixed passing dynamic variables 2 levels down
 * Fixed not opening link in modal window when current page is in a modal window
+* Fixed the newsletter form "action" attribute
 * Added scalar type `AnyScalar`
 * Added documentation for new field `_arrayGenerateAllCombinationsOfItems` from the "Helper Function Collection" extension
 

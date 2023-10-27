@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Passing dynamic variables 2 levels down
 - Do not open link in modal window when current page is in a modal window
+- Newsletter form "action" attribute
 
 ## 1.0.12 - 26/10/2023
 

@@ -132,9 +132,9 @@ Subscribe to our newsletter and receive timely updates concerning:
 - Updated documentation
 - Announcements
 
-<form action="https://graphql-api.us7.list-manage.com/subscribe/post?u=0dc2e614635ab3af220b3a78c&amp;id=bdfd6885fe" method="POST" name="mc-embedded-subscribe-form" target="_blank">
-  <label for="field-EMAIL">Email:</label>
-  <input type="email" name="EMAIL" id="field-EMAIL" required="" aria-required="true" placeholder="john@doe.com" autocomplete="email">
+<form action="https://shop.gatographql.com/email-subscribe/external" method="POST" target="_blank">
+  <label for="field-email">Email:</label>
+  <input type="email" name="email" id="field-email" required="" aria-required="true" placeholder="john@doe.com" autocomplete="email">
   <button type="submit" class="button">Subscribe</button>
 </form>
 
