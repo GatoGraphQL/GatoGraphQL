@@ -244,7 +244,8 @@ abstract class AbstractContentParser implements ContentParserInterface
         );
         // Convert Markdown links: execute before appending path to anchors
         if ($options[ContentParserOptions::SUPPORT_MARKDOWN_LINKS] ?? null) {
-            $htmlContent = $this->convertMarkdownLinks($htmlContent);
+            $openInModal = $options[ContentParserOptions::OPEN_MARKDOWN_LINKS_IN_MODAL] ?? true;
+            $htmlContent = $this->convertMarkdownLinks($htmlContent, $openInModal);
         }
         // Open external links in new tab
         if ($options[ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB] ?? null) {
