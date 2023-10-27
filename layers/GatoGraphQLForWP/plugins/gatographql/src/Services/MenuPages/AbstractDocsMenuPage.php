@@ -100,6 +100,15 @@ abstract class AbstractDocsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
+     * If the current page has been opened in a modal,
+     * then do not further open links in yet a new modal.
+     */
+    protected function openMarkdownLinksInModal(): bool
+    {
+        return !$this->openInModalWindow();
+    }
+
+    /**
      * Enqueue the required assets and initialize the localized scripts
      */
     protected function enqueueAssets(): void

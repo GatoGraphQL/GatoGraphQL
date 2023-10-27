@@ -83,8 +83,11 @@ trait DocMenuPageTrait
     {
         return [
             ContentParserOptions::TAB_CONTENT => $this->useTabpanelForContent(),
+            ContentParserOptions::OPEN_MARKDOWN_LINKS_IN_MODAL => $this->openMarkdownLinksInModal(),
         ];
     }
+
+    abstract protected function openMarkdownLinksInModal(): bool;
 
     abstract protected function useTabpanelForContent(): bool;
 

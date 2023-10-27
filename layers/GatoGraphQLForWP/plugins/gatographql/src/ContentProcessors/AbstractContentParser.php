@@ -244,7 +244,8 @@ abstract class AbstractContentParser implements ContentParserInterface
         );
         // Convert Markdown links: execute before appending path to anchors
         if ($options[ContentParserOptions::SUPPORT_MARKDOWN_LINKS] ?? null) {
-            $htmlContent = $this->convertMarkdownLinks($htmlContent);
+            $openInModal = $options[ContentParserOptions::OPEN_MARKDOWN_LINKS_IN_MODAL] ?? true;
+            $htmlContent = $this->convertMarkdownLinks($htmlContent, $openInModal);
         }
         // Open external links in new tab
         if ($options[ContentParserOptions::OPEN_EXTERNAL_LINKS_IN_NEW_TAB] ?? null) {
@@ -439,11 +440,13 @@ abstract class AbstractContentParser implements ContentParserInterface
      * Whenever a link points to a .md file, convert it
      * so it works also within the plugin
      */
-    protected function convertMarkdownLinks(string $htmlContent): string
-    {
+    protected function convertMarkdownLinks(
+        string $htmlContent,
+        bool $openInModal = true,
+    ): string {
         return (string)preg_replace_callback(
             '/<a.*href="(.*?)\.md".*?>/',
-            function (array $matches): string {
+            function (array $matches) use ($openInModal): string {
                 // If the element has an absolute route, then no need
                 if ($this->isAbsoluteURL($matches[1]) || $this->isMailto($matches[1])) {
                     return $matches[0];
@@ -464,22 +467,31 @@ abstract class AbstractContentParser implements ContentParserInterface
                     $doc = substr($doc, 0, $langPos);
                 }
 
+                $elementURLParams = [
+                    RequestParams::TAB => RequestParams::TAB_DOCS,
+                    RequestParams::DOC => $doc,
+                ];
+                if ($openInModal) {
+                    $elementURLParams['TB_iframe'] = 'true';
+                }
+
                 // The URL is the current one, plus attr to open the .md file
                 // in a modal window
                 $elementURL = \add_query_arg(
-                    [
-                        RequestParams::TAB => RequestParams::TAB_DOCS,
-                        RequestParams::DOC => $doc,
-                        'TB_iframe' => 'true',
-                    ],
+                    $elementURLParams,
                     $this->getRequestHelperService()->getRequestedFullURL()
                 );
+
                 /** @var string */
                 $link = str_replace(
                     "href=\"{$matches[1]}.md\"",
                     "href=\"{$elementURL}\"",
                     $matches[0]
                 );
+                if (!$openInModal) {
+                    return $link;
+                }
+
                 // Must also add some classnames
                 $classnames = 'thickbox open-plugin-details-modal';
                 // 1. If there are classes already
