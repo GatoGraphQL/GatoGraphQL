@@ -171,6 +171,7 @@ You can even synchronize content across a network of sites, such as from an upst
 == Changelog ==
 
 = 1.0.13 =
+* Fixed passing dynamic variables 2 levels down
 * Added scalar type `AnyScalar`
 
 = 1.0.12 =

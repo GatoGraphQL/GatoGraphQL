@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Scalar type `AnyScalar`
 
+### Fixed
+
+- Passing dynamic variables 2 levels down
+
 ## 1.0.12 - 26/10/2023
 
 ### Fixed
