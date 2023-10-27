@@ -402,7 +402,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                                 $object,
                                 $id,
                                 $key,
-                                true,
+                                false, // For the key, do NOT serialize the value! Because the fieldTypeModifiers apply to the value, not to the key
                                 $passKeyOnwardsAs,
                                 [$arrayItemField],
                                 $keyArgument,
