@@ -248,7 +248,8 @@ class App extends Component<{}, State> {
 
   componentDidMount() {
     fetcher({
-      query: getIntrospectionQuery()
+      query: getIntrospectionQuery(),
+      operationName: ""
     }).then(result => {
       const editor = this._graphiql.getQueryEditor();
       editor.setOption("extraKeys", {
