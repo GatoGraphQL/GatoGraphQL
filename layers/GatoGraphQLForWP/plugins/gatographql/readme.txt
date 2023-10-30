@@ -170,6 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.0.15 =
+* Fixed: Executing introspection query failed in GraphiQL client when passing ?operationName=...
+
 = 1.0.14 =
 * Configuration alert in recipe "Duplicating multiple blog posts at once"
 
