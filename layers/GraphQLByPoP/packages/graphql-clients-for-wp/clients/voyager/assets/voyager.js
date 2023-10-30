@@ -100,7 +100,7 @@ function introspectionProvider(query) {
   return fetch(apiURL, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({query: query}),
+    body: JSON.stringify({query: query, operationName: ""}),
   }).then(response => response.json());
 }
 

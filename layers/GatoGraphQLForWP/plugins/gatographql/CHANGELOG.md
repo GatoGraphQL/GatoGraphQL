@@ -4,8 +4,13 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 1.0.15 - DATE
+## 1.0.16 - DATE
 
+## 1.0.15 - 30/10/2013
+
+### Fixed
+
+- Executing introspection query failed in GraphiQL client when passing ?operationName=...
 
 ## 1.0.14 - 29/10/2013
 

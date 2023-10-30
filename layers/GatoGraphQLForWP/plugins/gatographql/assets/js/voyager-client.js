@@ -8,7 +8,7 @@ function introspectionProvider(query) {
       'Content-Type': 'application/json',
       'X-WP-Nonce': nonce
     },
-    body: JSON.stringify({query: query}),
+    body: JSON.stringify({query: query, operationName: ""}),
   }).then(response => response.json());
 }
 
