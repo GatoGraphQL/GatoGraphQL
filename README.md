@@ -557,7 +557,6 @@ composer list
 | `improve-code-quality` | Improve code quality (via Rector) |
 | `init-server` | Alias of 'start-server |
 | `init-server-prod` | Runs the init-server-prod script as defined in composer.json |
-| `initialize-project` | Initialize the project, replacing the extension starter data with your own data |
 | `install-deps-build-js` | Install all dependencies from npm to build the JS packages, blocks and editor scripts for all plugins in the Gato GraphQL - Extension Starter repo |
 | `install-site` | Installs the WordPress site |
 | `install-site-prod` | Installs the WordPress site in the PROD server |
