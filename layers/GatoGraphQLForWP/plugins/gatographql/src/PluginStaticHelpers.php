@@ -91,6 +91,11 @@ class PluginStaticHelpers
         string $pluginFile,
         string $versionConstraint
     ): bool {
+        // Use "*" to mean "any version" (so it's always allowed)
+        if ($versionConstraint === '*') {
+            return true;
+        }
+        
         $pluginDir = dirname(PluginApp::getMainPlugin()->getPluginDir());
         $pluginAbsolutePathFile = $pluginDir . '/' . $pluginFile;
         $pluginData = get_file_data($pluginAbsolutePathFile, array('Version'), 'plugin');
