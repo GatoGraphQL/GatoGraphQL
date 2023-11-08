@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.16 - DATE
 
+### Improvements
+
+- Tested with WordPress 6.4 ("Tested up to: 6.4")
+
 ## 1.0.15 - 30/10/2013
 
 ### Fixed
