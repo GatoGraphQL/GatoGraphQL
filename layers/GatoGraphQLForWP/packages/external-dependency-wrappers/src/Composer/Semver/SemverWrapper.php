@@ -17,9 +17,14 @@ class SemverWrapper
 {
     /**
      * Determine if given version satisfies given constraints.
+     *
+     * Use "*" to mean "any version"
      */
     public static function satisfies(string $version, string $constraints): bool
     {
+        if ($constraints === '*') {
+            return true;
+        }
         return Semver::satisfies($version, $constraints);
     }
 }
