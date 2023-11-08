@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: graphql, automation, content sync, headless, site migrations, rest api, endpoint, wp-cli, notifications, cloud, translation, gutenberg
 Requires at least: 5.4
-Tested up to: 6.3
+Tested up to: 6.4
 Stable tag: 1.0.15
 Requires PHP: 8.1
 License: GPLv2 or later
