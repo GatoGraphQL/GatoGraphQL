@@ -12,6 +12,3 @@ composer.lock
 .lando.local.yml
 composer.local.json
 composer.local.lock
-# VSCode
-/.vscode/
-!/.vscode/launch.json
