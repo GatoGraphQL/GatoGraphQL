@@ -19,7 +19,7 @@ class SemverHelperService implements SemverHelperServiceInterface
         if ($constraints === '*') {
             return true;
         }
-        
+
         /**
          * If passing a wrong value to validate against
          * (eg: "saraza" instead of "1.0.0"),
