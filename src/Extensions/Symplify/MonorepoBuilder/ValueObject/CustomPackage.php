@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject;
 
 use Nette\Utils\Strings;
+use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
 use Symplify\SmartFileSystem\SmartFileInfo;
 
 final class CustomPackage
@@ -13,7 +14,11 @@ final class CustomPackage
     private string $shortName;
     private string $shortDirectory;
 
+    /**
+     * @param array<string,mixed> $json
+     */
     public function __construct(
+        private array $json,
         private string $name,
         SmartFileInfo $composerJsonFileInfo
     ) {
@@ -39,6 +44,15 @@ final class CustomPackage
     {
         $expectedSrcDirectory = $this->rootDirectoryFileInfo->getRealPath() . DIRECTORY_SEPARATOR . 'src';
         return file_exists($expectedSrcDirectory);
+    }
+
+    /**
+     * A Composer package that loads "johnpbloch/wordpress" in the
+     * "require-dev" section is considered a WordPress package
+     */
+    public function isWordPress(): bool
+    {
+        return isset($this->json[ComposerJsonSection::REQUIRE_DEV]['johnpbloch/wordpress']);
     }
 
     public function getShortName(): string

@@ -49,6 +49,10 @@ final class Option
     /**
      * @var string
      */
+    public final const WP_ONLY = 'wp-only';
+    /**
+     * @var string
+     */
     public final const LEVEL = 'level';
     /**
      * @var string

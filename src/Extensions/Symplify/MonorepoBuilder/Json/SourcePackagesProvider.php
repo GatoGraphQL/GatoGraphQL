@@ -24,6 +24,7 @@ final class SourcePackagesProvider
      */
     public function provideSourcePackages(
         bool $psr4Only = false,
+        bool $wpOnly = false,
         array $packagesToSkip = [],
         array $fileListFilter = []
     ): array {
@@ -33,6 +34,14 @@ final class SourcePackagesProvider
                 $packages,
                 function (CustomPackage $package): bool {
                     return $package->hasSrc();
+                }
+            ));
+        }
+        if ($wpOnly) {
+            $packages = array_values(array_filter(
+                $packages,
+                function (CustomPackage $package): bool {
+                    return $package->isWordPress();
                 }
             ));
         }

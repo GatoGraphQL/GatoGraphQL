@@ -6,8 +6,8 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Package;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\CustomPackage;
 use Symplify\ComposerJsonManipulator\FileSystem\JsonFileManager;
+use Symplify\ComposerJsonManipulator\ValueObject\ComposerJsonSection;
 use Symplify\MonorepoBuilder\FileSystem\ComposerJsonProvider;
-use Symplify\SmartFileSystem\SmartFileInfo;
 use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class CustomPackageProvider
@@ -35,8 +35,10 @@ final class CustomPackageProvider
     {
         $packages = [];
         foreach ($this->composerJsonProvider->getPackagesComposerFileInfos() as $packagesComposerFileInfo) {
-            $packageName = $this->detectNameFromFileInfo($packagesComposerFileInfo);
-            $packages[] = new CustomPackage($packageName, $packagesComposerFileInfo);
+            /** @var array<string,mixed> */
+            $json = $this->jsonFileManager->loadFromFileInfo($packagesComposerFileInfo);
+            $packageName = $this->getPackageName($json);
+            $packages[] = new CustomPackage($json, $packageName, $packagesComposerFileInfo);
         }
 
         usort($packages, function (CustomPackage $firstPackage, CustomPackage $secondPackage): int {
@@ -46,14 +48,15 @@ final class CustomPackageProvider
         return $packages;
     }
 
-    private function detectNameFromFileInfo(SmartFileInfo $smartFileInfo): string
+    /**
+     * @param array<string,mixed> $json
+     */
+    private function getPackageName(array $json): string
     {
-        $json = $this->jsonFileManager->loadFromFileInfo($smartFileInfo);
-
-        if (! isset($json['name'])) {
+        if (! isset($json[ComposerJsonSection::NAME])) {
             throw new ShouldNotHappenException();
         }
 
-        return (string) $json['name'];
+        return (string) $json[ComposerJsonSection::NAME];
     }
 }
