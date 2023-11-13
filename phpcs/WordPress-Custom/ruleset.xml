@@ -51,7 +51,7 @@
 	</rule> -->
 
 	<!-- Verify that everything in the global namespace is prefixed. -->
-	<!-- <rule ref="WordPress.NamingConventions.PrefixAllGlobals"/> -->
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals"/>
 
 	<!-- Validates post type slugs for valid characters, length and reserved keywords. -->
 	<rule ref="WordPress.NamingConventions.ValidPostTypeSlug"/>
