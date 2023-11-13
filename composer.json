@@ -41,7 +41,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^3.5",
-        "johnpbloch/wordpress": "^6.3",
+        "johnpbloch/wordpress": "^6.4",
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^0.18",
@@ -49,7 +49,8 @@
         "squizlabs/php_codesniffer": "^3.6",
         "symfony/var-dumper": "^6.0",
         "symplify/monorepo-builder": "^10.2.2",
-        "szepeviktor/phpstan-wordpress": "^1.0"
+        "szepeviktor/phpstan-wordpress": "^1.0",
+        "wp-coding-standards/wpcs": "^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -516,7 +517,9 @@
         ],
         "debug": "XDEBUG_TRIGGER=1 phpunit",
         "check-style": "php -d memory_limit=512M vendor/bin/phpcs -n src $(monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --subfolder=src --subfolder=tests)",
+        "check-style-wp": "php -d memory_limit=512M vendor/bin/phpcs --standard=phpcs/WordPress-Custom/ruleset.xml -n $(monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --wp-only --subfolder=src --subfolder=tests)",
         "fix-style": "php -d memory_limit=512M vendor/bin/phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --subfolder=src --subfolder=tests)",
+        "fix-style-wp": "php -d memory_limit=512M vendor/bin/phpcbf --standard=phpcs/WordPress-Custom/ruleset.xml -n src $(monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --wp-only --subfolder=src --subfolder=tests)",
         "analyse": "phpstan analyse --memory-limit 1G --ansi",
         "preview-src-downgrade": "rector process $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src) --config=config/rector/downgrade/monorepo/rector.php --ansi --dry-run || true",
         "preview-vendor-downgrade": "ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run \"\" \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\" || true",
@@ -628,7 +631,9 @@
         "integration-test": "Execute integration tests (PHPUnit)",
         "debug": "Run and debug PHPUnit tests",
         "check-style": "Validate PSR-12 coding standards (via phpcs)",
+        "check-style-wp": "Validate WordPress custom rules coding standards (via phpcs)",
         "fix-style": "Fix PSR-12 coding standards (via phpcbf)",
+        "fix-style-wp": "Fix WordPress custom rules coding standards (via phpcbf)",
         "analyse": "Run PHPStan static analysis of the code",
         "preview-src-downgrade": "Run Rector in 'dry-run' mode to preview how the src/ folder will be downgraded to PHP 7.2",
         "preview-vendor-downgrade": "Run Rector in 'dry-run' mode to preview how the vendor/ folder will be downgraded to PHP 7.2",

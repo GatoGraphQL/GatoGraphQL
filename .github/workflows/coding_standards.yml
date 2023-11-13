@@ -29,9 +29,11 @@ jobs:
             -   id: output_data
                 run: |
                     echo "package_code_paths=$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --subfolder=src --subfolder=tests)" >> $GITHUB_OUTPUT
+                    echo "wp_package_code_paths=$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --wp-only --subfolder=src --subfolder=tests)" >> $GITHUB_OUTPUT
 
         outputs:
             package_code_paths: ${{ steps.output_data.outputs.package_code_paths }}
+            wp_package_code_paths: ${{ steps.output_data.outputs.wp_package_code_paths }}
 
     main:
         needs: provide_data
@@ -56,4 +58,7 @@ jobs:
 
             -   name: Run PHP Code Sniffer
                 run: vendor/bin/phpcs -n src ${{ needs.provide_data.outputs.package_code_paths }}
+
+            -   name: Run PHP Code Sniffer for WordPress packages
+                run: vendor/bin/phpcs --standard=phpcs/WordPress-Custom/ruleset.xml -n src ${{ needs.provide_data.outputs.wp_package_code_paths }}
 

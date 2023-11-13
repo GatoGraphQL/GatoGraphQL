@@ -38,6 +38,12 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
             'Skip the non-PSR-4 packages.'
         );
         $this->addOption(
+            Option::WP_ONLY,
+            null,
+            InputOption::VALUE_NONE,
+            'Skip the non-WordPress packages.'
+        );
+        $this->addOption(
             Option::SUBFOLDER,
             null,
             InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY,
@@ -57,6 +63,7 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
     {
         $asJSON = (bool) $input->getOption(Option::JSON);
         $psr4Only = (bool) $input->getOption(Option::PSR4_ONLY);
+        $wpOnly = (bool) $input->getOption(Option::WP_ONLY);
 
         $packagesToSkip = [];
 
@@ -65,7 +72,12 @@ final class SourcePackagesCommand extends AbstractSymplifyCommand
         /** @var string[] $fileFilter */
         $fileFilter = $input->getOption(Option::FILTER);
 
-        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages($psr4Only, $packagesToSkip, $fileFilter);
+        $sourcePackages = $this->sourcePackagesProvider->provideSourcePackages(
+            $psr4Only,
+            $wpOnly,
+            $packagesToSkip,
+            $fileFilter
+        );
 
         // Point to some subfolder?
         if ($subfolders !== []) {

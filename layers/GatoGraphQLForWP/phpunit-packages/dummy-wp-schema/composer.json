@@ -150,11 +150,13 @@
         "pop-wp-schema/posts": "^1.1"
     },
     "require-dev": {
-        "johnpbloch/wordpress": "^6.3",
+        "johnpbloch/wordpress": "^6.4",
+        "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^0.18",
         "squizlabs/php_codesniffer": "^3.6",
-        "szepeviktor/phpstan-wordpress": "^1.0"
+        "szepeviktor/phpstan-wordpress": "^1.0",
+        "wp-coding-standards/wpcs": "^3.0"
     },
     "autoload": {
         "psr-4": {
