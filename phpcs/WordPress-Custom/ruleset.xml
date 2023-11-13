@@ -13,15 +13,15 @@
 		 https://github.com/WordPress/WordPress-Coding-Standards/issues/73 -->
 	<rule ref="WordPress.Security.NonceVerification"/>
 
-	<!-- <rule ref="WordPress.PHP.DevelopmentFunctions"/> -->
-	<!-- <rule ref="WordPress.PHP.DiscouragedPHPFunctions"/> -->
-	<!-- <rule ref="WordPress.WP.DeprecatedFunctions"/> -->
-	<!-- <rule ref="WordPress.WP.DeprecatedClasses"/> -->
-	<!-- <rule ref="WordPress.WP.DeprecatedParameters"/> -->
-	<!-- <rule ref="WordPress.WP.DeprecatedParameterValues"/> -->
-	<!-- <rule ref="WordPress.WP.AlternativeFunctions"/> -->
-	<!-- <rule ref="WordPress.WP.DiscouragedConstants"/> -->
-	<!-- <rule ref="WordPress.WP.DiscouragedFunctions"/> -->
+	<rule ref="WordPress.PHP.DevelopmentFunctions"/>
+	<rule ref="WordPress.PHP.DiscouragedPHPFunctions"/>
+	<rule ref="WordPress.WP.DeprecatedFunctions"/>
+	<rule ref="WordPress.WP.DeprecatedClasses"/>
+	<rule ref="WordPress.WP.DeprecatedParameters"/>
+	<rule ref="WordPress.WP.DeprecatedParameterValues"/>
+	<rule ref="WordPress.WP.AlternativeFunctions"/>
+	<rule ref="WordPress.WP.DiscouragedConstants"/>
+	<rule ref="WordPress.WP.DiscouragedFunctions"/>
 
 	<!-- Verify that capabilities are being used correctly. -->
 	<!-- <rule ref="WordPress.WP.Capabilities"/> -->
