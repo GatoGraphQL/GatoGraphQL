@@ -35,7 +35,11 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "johnpbloch/wordpress-core-installer": true
+        }
     },
     "conflict": {
         "pop-api/api-rest": "<1.0.15",
