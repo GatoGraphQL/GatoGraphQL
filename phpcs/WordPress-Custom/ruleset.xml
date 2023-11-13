@@ -54,27 +54,27 @@
 	<!-- <rule ref="WordPress.NamingConventions.PrefixAllGlobals"/> -->
 
 	<!-- Validates post type slugs for valid characters, length and reserved keywords. -->
-	<!-- <rule ref="WordPress.NamingConventions.ValidPostTypeSlug"/> -->
+	<rule ref="WordPress.NamingConventions.ValidPostTypeSlug"/>
 
 	<!-- https://github.com/WordPress/WordPress-Coding-Standards/issues/1157 -->
-	<!-- <rule ref="WordPress.Security.PluginMenuSlug"/> -->
-	<!-- <rule ref="WordPress.WP.CronInterval"/> -->
-	<!-- <rule ref="WordPress.WP.PostsPerPage"/> -->
+	<rule ref="WordPress.Security.PluginMenuSlug"/>
+	<rule ref="WordPress.WP.CronInterval"/>
+	<rule ref="WordPress.WP.PostsPerPage"/>
 
 	<!-- Verify some regex best practices.
 		 https://github.com/WordPress/WordPress-Coding-Standards/issues/1371 -->
-	<!-- <rule ref="WordPress.PHP.PregQuoteDelimiter"/> -->
+	<rule ref="WordPress.PHP.PregQuoteDelimiter"/>
 
 	<!-- The Core ruleset respects the PHP allowed functions list. For `Extra` the sniff is stricter.
 		 https://github.com/WordPress/WordPress-Coding-Standards/pull/1450 -->
-	<!-- <rule ref="WordPress.PHP.NoSilencedErrors">
+	<rule ref="WordPress.PHP.NoSilencedErrors">
 		<properties>
 			<property name="usePHPFunctionsList" value="false"/>
 		</properties>
-	</rule> -->
+	</rule>
 
 	<!-- Prevent some typical mistakes people make accidentally.
 		 https://github.com/WordPress/WordPress-Coding-Standards/pull/1777 -->
-	<!-- <rule ref="WordPress.CodeAnalysis.EscapedNotTranslated"/> -->
+	<rule ref="WordPress.CodeAnalysis.EscapedNotTranslated"/>
 
 </ruleset>
