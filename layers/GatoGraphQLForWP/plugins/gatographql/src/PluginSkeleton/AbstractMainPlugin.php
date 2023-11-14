@@ -327,8 +327,18 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Operations to do when activating/deactivating plugins
          */
-        add_action('activate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
-        add_action('deactivate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
+        add_action(
+            'activate_plugin',
+            function (string $pluginFile): void {
+                $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+            }
+        );
+        add_action(
+            'deactivate_plugin',
+            function (string $pluginFile): void {
+                $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+            }
+        );
         add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
 
         add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
