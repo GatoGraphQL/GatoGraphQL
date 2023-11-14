@@ -497,16 +497,41 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations', 'gatographql'),
-			'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->',
+			// 'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->',
+			'post_content' => serialize_blocks(
+                [
+                    'blockName' => 'gatographql/schema-config-mutation-scheme',
+                    'innerContent' => [],
+                    'attrs' => [
+                        'mutationScheme' => 'nested',
+                    ]
+                ]
+            ),
         ]);
 
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations + Entity as payload type', 'gatographql'),
-			'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
+// 			'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
 
-<!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->',
+// <!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->',
+            'post_content' => serialize_blocks(
+                [
+                    'blockName' => 'gatographql/schema-config-mutation-scheme',
+                    'innerContent' => [],
+                    'attrs' => [
+                        'mutationScheme' => 'nested',
+                    ]
+                ],
+                [
+                    'blockName' => 'gatographql/schema-config-payload-types-for-mutations',
+                    'innerContent' => [],
+                    'attrs' => [
+                        'enabledConst' => 'disabled',
+                    ]
+                ],
+            ),
         ]);
 
 
