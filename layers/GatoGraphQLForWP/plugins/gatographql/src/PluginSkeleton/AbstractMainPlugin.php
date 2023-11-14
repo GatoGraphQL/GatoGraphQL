@@ -134,17 +134,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * (eg: "Events Manager", required by "Gato GraphQL - Events Manager")
      * the container must be regenerated.
      */
-    public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): void
+    public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): bool
     {
         if (in_array($pluginFile, $this->getDependentOnPluginFiles())) {
             $this->purgeContainer();
-            return;
+            return true;
         }
 
         $extensionManager = PluginApp::getExtensionManager();
         if (in_array($pluginFile, $extensionManager->getInactiveExtensionsDependedUponPluginFiles())) {
             $this->purgeContainer();
-            return;
+            return true;
         }
 
         /**
@@ -159,9 +159,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
             ) {
                 $this->purgeContainer();
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     /**
@@ -182,7 +184,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
         /** @var string $pluginFile */
         foreach($options['plugins'] as $pluginFile) {
-            $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+            $purgedContainer = $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+            if ($purgedContainer) {
+                return;
+            }
         }
     }
 
