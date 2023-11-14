@@ -18,18 +18,20 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Root\Helpers\ClassHelpers;
 
+use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use WP_Upgrader;
 use function __;
@@ -488,10 +490,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
         
-        // @todo Complete with installing Schema Configurations
         $instanceManager = InstanceManagerFacade::getInstance();
+        
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+
+        /** @var SchemaConfigMutationSchemeBlock */
+        $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
+        
 
         /**
          * Insert content:
@@ -499,10 +505,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          *   <!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
          */
         $nestedMutationsBlockData = [
-            'blockName' => 'gatographql/schema-config-mutation-scheme',
+            'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
             'innerContent' => [],
             'attrs' => [
-                'mutationScheme' => 'nested',
+                SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
             ]
         ];
         $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
