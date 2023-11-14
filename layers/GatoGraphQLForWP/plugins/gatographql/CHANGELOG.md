@@ -4,15 +4,16 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 1.0.16 - DATE
-
-### Fixed
-
-- Purge container when autoupdating a depended-upon plugin
+## 1.1.0 - DATE
 
 ### Improvements
 
 - Tested with WordPress 6.4 ("Tested up to: 6.4")
+- Install initial data: Persisted Queries for common admin tasks
+
+### Fixed
+
+- Purge container when autoupdating a depended-upon plugin
 
 ## 1.0.15 - 30/10/2013
 

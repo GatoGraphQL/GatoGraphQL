@@ -170,7 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
-= 1.0.16 =
+= 1.1.0 =
+* Tested with WordPress 6.4 ("Tested up to: 6.4")
+* Install initial data: Persisted Queries for common admin tasks
 * Purge container when autoupdating a depended-upon plugin
 
 = 1.0.15 =
