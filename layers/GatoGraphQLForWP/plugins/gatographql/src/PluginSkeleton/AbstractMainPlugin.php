@@ -429,12 +429,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         $justUpdatedExtensions,
                     ): void {
                         if ($isMainPluginJustFirstTimeActivated) {
-                            $this->pluginJustInstalledAndActivated();
+                            $this->pluginJustFirstTimeActivated();
                         } elseif ($isMainPluginJustUpdated) {
                             $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName]);
                         }
                         foreach ($justActivatedExtensions as $extensionBaseName => $extensionInstance) {
-                            $extensionInstance->pluginJustInstalledAndActivated();
+                            $extensionInstance->pluginJustFirstTimeActivated();
                         }
                         foreach ($justUpdatedExtensions as $extensionBaseName => $extensionInstance) {
                             $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName]);
