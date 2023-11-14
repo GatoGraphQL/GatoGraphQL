@@ -493,13 +493,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
 
-        $postData = [
+        $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-			'post_title' => \__('Multiple Query Execution', 'gatographql'),
-			'post_content' => '',
-        ];
-		$multipleQueryExecutionSchemaConfigurationCustomPostID = \wp_insert_post($postData);
+			'post_title' => \__('Nested mutations', 'gatographql'),
+			'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->',
+        ]);
+
+        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
+			'post_status' => 'publish',
+			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+			'post_title' => \__('Nested mutations + Entity as payload type', 'gatographql'),
+			'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
+
+<!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->',
+        ]);
 
 
         // @todo Complete with installing Persisted Queries
