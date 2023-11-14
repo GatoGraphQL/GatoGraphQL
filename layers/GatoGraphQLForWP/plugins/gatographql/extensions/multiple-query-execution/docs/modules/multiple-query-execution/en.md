@@ -595,7 +595,7 @@ Producing:
 
 ## Execution in Persisted Queries
 
-When a GraphQL query contains multiple operations in a Persisted Query, we must invoke the corresponding endpoint passing URL param `?operationName=...` with the name of the first operation to execute.
+When a GraphQL query contains multiple operations in a Persisted Query, we can invoke the corresponding endpoint passing URL param `?operationName=...` with the name of the operation to execute; otherwise, the last operation will be executed.
 
 For instance, to execute operation `GetPostsContainingString` in a Persisted Query with endpoint `/graphql-query/posts-with-user-name/`, we must invoke:
 
