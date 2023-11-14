@@ -26,6 +26,7 @@ use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+use WP_Upgrader;
 
 use function __;
 use function add_action;
@@ -160,6 +161,28 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $this->purgeContainer();
                 return;
             }
+        }
+    }
+
+    /**
+     * When updating a plugin from the wp-admin Updates screen,
+     * purge the container to avoid the plugin being inactive,
+     * yet the compiled container still loads its code.
+     *
+     * @param array<string,mixed> $options
+     * 
+     * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
+     */
+    public function maybeRegenerateContainerWhenPluginUpdated(
+        WP_Upgrader $upgrader_object,
+        array $options,
+    ): void {
+        if ($options['action'] !== 'update' || $options['type'] !== 'plugin') {
+            return;
+        }
+        /** @var string $pluginFile */
+        foreach($options['plugins'] as $pluginFile) {
+            $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
         }
     }
 
@@ -302,6 +325,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action('activate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
         add_action('deactivate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
         add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
+
+        add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
