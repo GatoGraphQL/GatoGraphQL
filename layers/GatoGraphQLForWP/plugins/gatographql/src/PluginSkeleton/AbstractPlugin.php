@@ -365,7 +365,8 @@ abstract class AbstractPlugin implements PluginInterface
     }
 
     /**
-     * Execute logic after the plugin/extension has just been activated (for first time)
+     * Execute logic after the plugin/extension has just been activated
+     * (for first time)
      */
     public function pluginJustFirstTimeActivated(): void
     {

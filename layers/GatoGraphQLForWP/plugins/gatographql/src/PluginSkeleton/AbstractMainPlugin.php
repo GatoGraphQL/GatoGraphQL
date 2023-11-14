@@ -461,13 +461,27 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Create persisted queries with common admin tasks
+     * Execute logic after the plugin/extension has just been activated
+     * (for first time)
      */
     public function pluginJustFirstTimeActivated(): void
     {
         parent::pluginJustFirstTimeActivated();
 
-        // @todo Complete with installing persisted queries
+        $this->installInitialData();
+    }
+
+    /**
+     * Install initial data:
+     * 
+     * - Persisted Queries with common admin tasks
+     */
+    protected function installInitialData(): void
+    {
+        // @todo Complete with installing Schema Configurations
+
+
+        // @todo Complete with installing Persisted Queries
     }
 
     /**
