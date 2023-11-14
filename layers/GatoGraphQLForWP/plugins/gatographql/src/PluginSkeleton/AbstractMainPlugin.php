@@ -172,7 +172,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * yet the compiled container still loads its code.
      *
      * @param array<string,mixed> $options
-     * 
+     *
      * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
      */
     public function maybeRegenerateContainerWhenPluginUpdated(
@@ -183,7 +183,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
         /** @var string $pluginFile */
-        foreach($options['plugins'] as $pluginFile) {
+        foreach ($options['plugins'] as $pluginFile) {
             $purgedContainer = $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
             if ($purgedContainer) {
                 return;
