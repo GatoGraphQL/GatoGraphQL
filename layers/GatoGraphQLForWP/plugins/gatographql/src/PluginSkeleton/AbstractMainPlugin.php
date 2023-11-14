@@ -379,8 +379,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
-                $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
-                $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->getPluginVersionWithCommitHash();
+                $isMainPluginJustInstalled = !isset($storedPluginVersions[$this->pluginBaseName]);
+                $isMainPluginJustUpdated = !$isMainPluginJustInstalled && $storedPluginVersions[$this->pluginBaseName] !== $this->getPluginVersionWithCommitHash();
 
                 // Check if any extension has been activated or updated
                 $justActivatedExtensions = [];
@@ -395,7 +395,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
                 // If there were no changes, nothing to do
                 if (
-                    !$isMainPluginJustActivated
+                    !$isMainPluginJustInstalled
                     && !$isMainPluginJustUpdated
                     && $justActivatedExtensions === []
                     && $justUpdatedExtensions === []
@@ -421,13 +421,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 add_action(
                     PluginAppHooks::INITIALIZE_APP,
                     function () use (
-                        $isMainPluginJustActivated,
+                        $isMainPluginJustInstalled,
                         $isMainPluginJustUpdated,
                         $storedPluginVersions,
                         $justActivatedExtensions,
                         $justUpdatedExtensions,
                     ): void {
-                        if ($isMainPluginJustActivated) {
+                        if ($isMainPluginJustInstalled) {
                             $this->pluginJustActivated();
                         } elseif ($isMainPluginJustUpdated) {
                             $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName]);
