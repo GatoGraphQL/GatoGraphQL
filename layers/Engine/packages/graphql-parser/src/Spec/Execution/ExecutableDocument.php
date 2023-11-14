@@ -108,7 +108,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
             $operationCount = count($operations);
             if ($operationCount > 1) {
                 $lastOperation = $operations[$operationCount - 1];
-                
+
                 /**
                  * Check if the last operation is to be used
                  * when no ?operationName=... is provided
