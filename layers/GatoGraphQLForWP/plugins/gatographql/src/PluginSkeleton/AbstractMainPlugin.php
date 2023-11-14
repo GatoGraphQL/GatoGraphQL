@@ -9,6 +9,8 @@ use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Exception\IOExcepti
 use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppThread;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
+use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
@@ -19,6 +21,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -29,8 +32,8 @@ use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
-use PoP\Root\Facades\Instances\InstanceManagerFacade;
 
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use WP_Upgrader;
@@ -494,9 +497,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
-
         /** @var SchemaConfigMutationSchemeBlock */
         $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
+        /** @var SchemaConfigPayloadTypesForMutationsBlock */
+        $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
         
 
         /**
@@ -528,10 +532,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          *   <!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->
          */
         $entityAsPayloadTypeBlockData = [
-            'blockName' => 'gatographql/schema-config-payload-types-for-mutations',
+            'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
             'innerContent' => [],
             'attrs' => [
-                'enabledConst' => 'disabled',
+                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
             ]
         ];
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
