@@ -537,7 +537,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-			'post_title' => \__('Nested mutations + Entity as payload type', 'gatographql'),
+			'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
             'post_content' => serialize_blocks([
                 $nestedMutationsBlockData,
                 $entityAsPayloadTypeBlockData,
