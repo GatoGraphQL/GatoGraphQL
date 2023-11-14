@@ -493,8 +493,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
         
-        $instanceManager = InstanceManagerFacade::getInstance();
-        
+        $instanceManager = InstanceManagerFacade::getInstance();        
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
         /** @var SchemaConfigMutationSchemeBlock */
@@ -502,7 +501,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var SchemaConfigPayloadTypesForMutationsBlock */
         $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
         
-
         /**
          * Insert content:
          *
