@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.0.16 - DATE
 
+### Fixed
+
+- Purge container when autoupdating a depended-upon plugin
+
 ### Improvements
 
 - Tested with WordPress 6.4 ("Tested up to: 6.4")
