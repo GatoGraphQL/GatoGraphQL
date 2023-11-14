@@ -11,7 +11,7 @@ interface PluginInterface
     /**
      * Execute logic after the plugin/extension has just been activated
      */
-    public function pluginJustActivated(): void;
+    public function pluginJustInstalledAndActivated(): void;
 
     /**
      * Execute logic after the plugin/extension has just been updated
