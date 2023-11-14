@@ -461,6 +461,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * Create persisted queries with common admin tasks
+     */
+    public function pluginJustFirstTimeActivated(): void
+    {
+        parent::pluginJustFirstTimeActivated();
+
+        // @todo Complete with installing persisted queries
+    }
+
+    /**
      * There are three stages for the main plugin, and for each extension plugin:
      * `setup`, `initialize` and `boot`.
      *
