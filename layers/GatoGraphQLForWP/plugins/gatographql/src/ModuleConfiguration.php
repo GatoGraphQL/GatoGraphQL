@@ -177,6 +177,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function installInitialData(): bool
+    {
+        $envVariable = Environment::INSTALL_INITIAL_DATA;
+        $defaultValue = true;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     /**
      * These values are pre-defined.
      */
@@ -186,7 +199,8 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             Environment::GATOGRAPHQL_WEBSITE_URL,
             Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
             Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,
-            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
+            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER,
+            Environment::INSTALL_INITIAL_DATA
                 => false,
             default
                 => parent::enableHook($envVariable),

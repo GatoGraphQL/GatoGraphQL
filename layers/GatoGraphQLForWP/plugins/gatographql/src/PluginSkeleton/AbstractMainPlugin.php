@@ -13,6 +13,8 @@ use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFacto
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -468,7 +470,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         parent::pluginJustFirstTimeActivated();
 
-        $this->installInitialData();
+        $this->maybeInstallInitialData();
     }
 
     /**
@@ -476,8 +478,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * 
      * - Persisted Queries with common admin tasks
      */
-    protected function installInitialData(): void
+    protected function maybeInstallInitialData(): void
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->installInitialData()) {
+            return;
+        }
+        
         // @todo Complete with installing Schema Configurations
 
 
