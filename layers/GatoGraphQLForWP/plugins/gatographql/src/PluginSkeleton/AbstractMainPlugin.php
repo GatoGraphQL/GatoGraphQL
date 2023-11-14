@@ -493,6 +493,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
 
+        /**
+         * Insert content:
+         *
+         *   <!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
+         */
         $nestedMutationsBlockData = [
             'blockName' => 'gatographql/schema-config-mutation-scheme',
             'innerContent' => [],
@@ -504,12 +509,18 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations', 'gatographql'),
-			// 'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->',
 			'post_content' => serialize_blocks([
                 $nestedMutationsBlockData,
             ]),
         ]);
 
+        /**
+         * Insert content:
+         *
+         *   <!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
+         * 
+         *   <!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->
+         */
         $entityAsPayloadTypeBlockData = [
             'blockName' => 'gatographql/schema-config-payload-types-for-mutations',
             'innerContent' => [],
@@ -521,9 +532,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations + Entity as payload type', 'gatographql'),
-// 			'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
-
-// <!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->',
             'post_content' => serialize_blocks([
                 $nestedMutationsBlockData,
                 $entityAsPayloadTypeBlockData,
