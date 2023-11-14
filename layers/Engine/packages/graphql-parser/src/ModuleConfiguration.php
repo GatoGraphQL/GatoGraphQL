@@ -77,7 +77,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     public function useLastOperationInDocumentForMultipleQueryExecutionWhenOperationNameNotProvided(): bool
     {
         $envVariable = Environment::USE_LAST_OPERATION_IN_DOCUMENT_FOR_MULTIPLE_QUERY_EXECUTION_WHEN_OPERATION_NAME_NOT_PROVIDED;
-        $defaultValue = true;
+        $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
 
         return $this->retrieveConfigurationValueOrUseDefault(
