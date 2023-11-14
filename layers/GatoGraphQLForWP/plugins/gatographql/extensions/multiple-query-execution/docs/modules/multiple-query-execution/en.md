@@ -79,7 +79,7 @@ query GetPostsContainingString @depends(on: "GetLoggedInUserName") {
 
 ## `@depends`
 
-When the GraphQL Document contains multiple operations, we must provide URL param `?operationName=` to indicate to the server which one to execute.
+When the GraphQL document contains multiple operations, we must provide URL param `?operationName=` to indicate to the server which one to execute.
 
 Starting from this initial operation, the server will collect all operations to execute, which are defined by adding directive `depends(on: [...])`, and execute them in the corresponding order respecting the dependencies.
 
