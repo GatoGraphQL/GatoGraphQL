@@ -26,6 +26,7 @@ use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+use WP_Upgrader;
 
 use function __;
 use function add_action;
@@ -133,17 +134,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * (eg: "Events Manager", required by "Gato GraphQL - Events Manager")
      * the container must be regenerated.
      */
-    public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): void
+    public function maybeRegenerateContainerWhenPluginActivatedOrDeactivated(string $pluginFile): bool
     {
         if (in_array($pluginFile, $this->getDependentOnPluginFiles())) {
             $this->purgeContainer();
-            return;
+            return true;
         }
 
         $extensionManager = PluginApp::getExtensionManager();
         if (in_array($pluginFile, $extensionManager->getInactiveExtensionsDependedUponPluginFiles())) {
             $this->purgeContainer();
-            return;
+            return true;
         }
 
         /**
@@ -158,6 +159,33 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 || in_array($pluginFile, $extensionInstance->getDependentOnPluginFiles())
             ) {
                 $this->purgeContainer();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * When updating a plugin from the wp-admin Updates screen,
+     * purge the container to avoid the plugin being inactive,
+     * yet the compiled container still loads its code.
+     *
+     * @param array<string,mixed> $options
+     *
+     * @see https://developer.wordpress.org/reference/hooks/upgrader_process_complete/
+     */
+    public function maybeRegenerateContainerWhenPluginUpdated(
+        WP_Upgrader $upgrader_object,
+        array $options,
+    ): void {
+        if ($options['action'] !== 'update' || $options['type'] !== 'plugin') {
+            return;
+        }
+        /** @var string $pluginFile */
+        foreach ($options['plugins'] as $pluginFile) {
+            $purgedContainer = $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+            if ($purgedContainer) {
                 return;
             }
         }
@@ -299,9 +327,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Operations to do when activating/deactivating plugins
          */
-        add_action('activate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
-        add_action('deactivate_plugin', $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated(...));
+        add_action(
+            'activate_plugin',
+            function (string $pluginFile): void {
+                $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+            }
+        );
+        add_action(
+            'deactivate_plugin',
+            function (string $pluginFile): void {
+                $this->maybeRegenerateContainerWhenPluginActivatedOrDeactivated($pluginFile);
+            }
+        );
         add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
+
+        add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
