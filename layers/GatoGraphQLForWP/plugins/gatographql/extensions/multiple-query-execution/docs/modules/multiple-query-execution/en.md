@@ -79,7 +79,7 @@ query GetPostsContainingString @depends(on: "GetLoggedInUserName") {
 
 ## `@depends`
 
-When the GraphQL Document contains multiple operations, we must provide URL param `?operationName=` to indicate to the server which one to execute.
+When the GraphQL document contains multiple operations, we indicate to the server which one to execute via URL param `?operationName=...`; otherwise, the last operation will be executed.
 
 Starting from this initial operation, the server will collect all operations to execute, which are defined by adding directive `depends(on: [...])`, and execute them in the corresponding order respecting the dependencies.
 
@@ -595,7 +595,7 @@ Producing:
 
 ## Execution in Persisted Queries
 
-When a GraphQL query contains multiple operations in a Persisted Query, we must invoke the corresponding endpoint passing URL param `?operationName=...` with the name of the first operation to execute.
+When a GraphQL query contains multiple operations in a Persisted Query, we can invoke the corresponding endpoint passing URL param `?operationName=...` with the name of the operation to execute; otherwise, the last operation will be executed.
 
 For instance, to execute operation `GetPostsContainingString` in a Persisted Query with endpoint `/graphql-query/posts-with-user-name/`, we must invoke:
 
