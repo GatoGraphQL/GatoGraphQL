@@ -170,6 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.0.16 =
+* Purge container when autoupdating a depended-upon plugin
+
 = 1.0.15 =
 * Fixed: Executing introspection query failed in GraphiQL client when passing ?operationName=...
 
