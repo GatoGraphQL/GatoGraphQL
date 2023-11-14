@@ -502,9 +502,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
         
         /**
-         * Insert content:
-         *
-         *   <!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
+         * First create the Schema Configurations
          */
         $nestedMutationsBlockData = [
             'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
@@ -547,7 +545,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ]);
 
 
+        /**
+         * Then create the parent Persisted Queries to organize them
+         */
         // @todo Complete with installing Persisted Queries
+
+        /**
+         * Finally create the Persisted Queries
+         */        
     }
 
     /**
