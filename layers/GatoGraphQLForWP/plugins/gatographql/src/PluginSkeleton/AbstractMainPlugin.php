@@ -493,22 +493,30 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
 
+        $nestedMutationsBlockData = [
+            'blockName' => 'gatographql/schema-config-mutation-scheme',
+            'innerContent' => [],
+            'attrs' => [
+                'mutationScheme' => 'nested',
+            ]
+        ];
         $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations', 'gatographql'),
 			// 'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->',
-			'post_content' => serialize_blocks(
-                [
-                    'blockName' => 'gatographql/schema-config-mutation-scheme',
-                    'innerContent' => [],
-                    'attrs' => [
-                        'mutationScheme' => 'nested',
-                    ]
-                ]
-            ),
+			'post_content' => serialize_blocks([
+                $nestedMutationsBlockData,
+            ]),
         ]);
 
+        $entityAsPayloadTypeBlockData = [
+            'blockName' => 'gatographql/schema-config-payload-types-for-mutations',
+            'innerContent' => [],
+            'attrs' => [
+                'enabledConst' => 'disabled',
+            ]
+        ];
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
@@ -516,22 +524,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 // 			'post_content' => '<!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
 
 // <!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->',
-            'post_content' => serialize_blocks(
-                [
-                    'blockName' => 'gatographql/schema-config-mutation-scheme',
-                    'innerContent' => [],
-                    'attrs' => [
-                        'mutationScheme' => 'nested',
-                    ]
-                ],
-                [
-                    'blockName' => 'gatographql/schema-config-payload-types-for-mutations',
-                    'innerContent' => [],
-                    'attrs' => [
-                        'enabledConst' => 'disabled',
-                    ]
-                ],
-            ),
+            'post_content' => serialize_blocks([
+                $nestedMutationsBlockData,
+                $entityAsPayloadTypeBlockData,
+            ]),
         ]);
 
 
