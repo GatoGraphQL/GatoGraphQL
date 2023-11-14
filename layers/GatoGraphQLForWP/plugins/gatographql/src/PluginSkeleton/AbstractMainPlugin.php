@@ -18,6 +18,7 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
@@ -26,10 +27,11 @@ use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
+
 use PoP\Root\Module\ModuleInterface;
 use WP_Upgrader;
-
 use function __;
 use function add_action;
 use function do_action;
@@ -487,6 +489,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
         
         // @todo Complete with installing Schema Configurations
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLSchemaConfigurationCustomPostType */
+        $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+
+        $postData = [
+			'post_status' => 'publish',
+			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+			'post_title' => \__('Multiple Query Execution', 'gatographql'),
+			'post_content' => '',
+        ];
+		$multipleQueryExecutionSchemaConfigurationCustomPostID = \wp_insert_post($postData);
 
 
         // @todo Complete with installing Persisted Queries
