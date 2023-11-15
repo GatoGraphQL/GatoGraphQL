@@ -519,14 +519,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $nestedMutationsBlockData,
             ]),
         ]);
-
-        /**
-         * Insert content:
-         *
-         *   <!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->
-         * 
-         *   <!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->
-         */
         $entityAsPayloadTypeBlockData = [
             'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
             'innerContent' => [],
