@@ -10,16 +10,20 @@
 # @see https://gatographql.com/blog/instawp-gatographql/
 #
 # ----------------------------------------------------------------------
-# Requirements
-# ----------------------------------------------------------------------
-# Extensions:
-#   Field Response Removal, Field to Input, Http Client, Http Request via
-#   Schema, Multiple Query Execution, PHP Constants and Environment
-#   Variables via Schema, PHP Functions via Schema, Response Error Trigger
+# Required Extensions:
+#   - Field Response Removal
+#   - Field to Input
+#   - Http Client
+#   - Http Request via Schema
+#   - Multiple Query Execution
+#   - PHP Constants and Environment
+#   - Variables via Schema
+#   - PHP Functions via Schema
+#   - Response Error Trigger
 #
-# Or any of these Bundles:
-#   Application Glue & Automator, All Extensions
-#
+# These Extensions are all included in any of these Bundles:
+#   - Application Glue & Automator
+#   - All Extensions
 ########################################################################
 
 query HasSubscribedToNewsletter {
