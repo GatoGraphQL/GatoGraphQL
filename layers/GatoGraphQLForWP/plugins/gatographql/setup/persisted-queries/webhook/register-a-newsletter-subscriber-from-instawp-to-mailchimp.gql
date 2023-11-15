@@ -8,6 +8,8 @@
 #   define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
 #   define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
 #
+# @see https://gatographql.com/blog/instawp-gatographql/
+#
 ########################################################################
 
 query HasSubscribedToNewsletter {
