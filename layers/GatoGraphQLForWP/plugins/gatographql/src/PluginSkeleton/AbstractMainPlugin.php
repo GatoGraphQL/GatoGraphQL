@@ -760,33 +760,37 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_parent' => $adminAncestorPersistedQueryCustomPostID,
             ]
         );
+        $sublevelAncestorPersistedQueryBlocks = [
+            [
+                'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                'innerContent' => [],
+            ],
+            [
+                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                'innerContent' => [],
+                'atts' => [
+                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
+                ],
+            ],
+            [
+                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                'innerContent' => [],
+                'attrs' => [
+                    BlockAttributeNames::IS_ENABLED => false,
+                ]
+            ],
+            [
+                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                'innerContent' => [],
+            ],
+        ];
         $adminReportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Report', 'gatographql'),
                 'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
                 'tax_input' => $adminReportPersistedQueryTaxInputData,
-                'post_content' => serialize_blocks([
-                    [
-                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                        'innerContent' => [],
-                    ],
-                    [
-                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'innerContent' => [],
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                        'innerContent' => [],
-                        'attrs' => [
-                            BlockAttributeNames::IS_ENABLED => false,
-                        ]
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                        'innerContent' => [],
-                    ],
-                ]),
+                'post_content' => serialize_blocks($sublevelAncestorPersistedQueryBlocks),
             ]
         ));
 
