@@ -2,7 +2,8 @@
 # This GraphQL query captures the email from the visitors who ticked
 # the "Subscribe to mailing list" checkbox from InstaWP (when creating
 # a new sandbox site), and subscribes this email to a Mailchimp list.
-# Define in `wp-config.php`:#
+#
+# Define in `wp-config.php`:
 #
 #   define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
 #   define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
