@@ -521,7 +521,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the Schema Configurations
          */
-        $nestedMutationsBlockData = [
+        $nestedMutationsBlockDataItem = [
             'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
             'attrs' => [
                 SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
@@ -532,10 +532,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations', 'gatographql'),
 			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                $nestedMutationsBlockData,
+                $nestedMutationsBlockDataItem,
             ])),
         ]);
-        $entityAsPayloadTypeBlockData = [
+        $entityAsPayloadTypeBlockDataItem = [
             'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
             'attrs' => [
                 BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
@@ -546,8 +546,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
             'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                $nestedMutationsBlockData,
-                $entityAsPayloadTypeBlockData,
+                $nestedMutationsBlockDataItem,
+                $entityAsPayloadTypeBlockDataItem,
             ])),
         ]);
 
@@ -754,7 +754,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_parent' => $adminAncestorPersistedQueryCustomPostID,
             ]
         );
-        $sublevelAncestorPersistedQueryBlocks = [
+        $sublevelAncestorPersistedQueryBlockDataItems = [
             [
                 'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
             ],
@@ -780,7 +780,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_title' => \__('Report', 'gatographql'),
                 'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
                 'tax_input' => $adminReportPersistedQueryTaxInputData,
-                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlocks)),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
 
@@ -793,11 +793,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * @param array<array<string,mixed>> $blocks
      * @return array<array<string,mixed>>
      */
-    protected function addInnerContentToBlockAtts(array $blocks): array
+    protected function addInnerContentToBlockAtts(array $blockDataItems): array
     {
         return array_map(
-            fn (array $block) => [...$block, 'innerContent' => []],
-            $blocks
+            fn (array $blockDataItem) => [...$blockDataItem, 'innerContent' => []],
+            $blockDataItems
         );
     }
 
