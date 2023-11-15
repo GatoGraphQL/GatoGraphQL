@@ -774,12 +774,86 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
             ],
         ];
+
         $adminReportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Report', 'gatographql'),
                 'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
                 'tax_input' => $adminReportPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+        $adminTransformAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Transform', 'gatographql'),
+                'post_excerpt' => \__('Queries to transform data', 'gatographql'),
+                'tax_input' => $adminTransformPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+        $adminImportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Import', 'gatographql'),
+                'post_excerpt' => \__('Queries to import data', 'gatographql'),
+                'tax_input' => $adminImportPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+        $adminNotifyAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Notify', 'gatographql'),
+                'post_excerpt' => \__('Queries to send notifications', 'gatographql'),
+                'tax_input' => $adminNotifyPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+        $adminAutomateAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Automate', 'gatographql'),
+                'post_excerpt' => \__('Queries executed via automation', 'gatographql'),
+                'tax_input' => $adminAutomatePersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+
+        $adminFetchAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Fetch', 'gatographql'),
+                'post_excerpt' => \__('Queries to fetch data from an external service', 'gatographql'),
+                'tax_input' => $adminFetchPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+        $adminGatewayAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Gateway', 'gatographql'),
+                'post_excerpt' => \__('Queries to process and adapt API data', 'gatographql'),
+                'tax_input' => $adminGatewayPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+        $adminSyncAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Sync', 'gatographql'),
+                'post_excerpt' => \__('Queries to synchronize data across sites', 'gatographql'),
+                'tax_input' => $adminSyncPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
+        $adminWebhookAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Webhook', 'gatographql'),
+                'post_excerpt' => \__('Queries acting as webhooks, to process incoming data from an external service', 'gatographql'),
+                'tax_input' => $adminWebhookPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
