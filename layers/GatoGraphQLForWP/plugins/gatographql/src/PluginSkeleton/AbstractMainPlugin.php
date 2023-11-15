@@ -573,6 +573,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
         }
 
+        $webhookPersistedQueryTaxInputData = [
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [],
+        ];
+        $webhookEndpointCategory = \wp_insert_term(
+            \__('Webhook', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            [
+                'description' => \__('Process data from external services', 'gatographql'),
+            ]
+        );
+        if (!($webhookEndpointCategory instanceof WP_Error)) {
+            $webhookEndpointCategoryID = $webhookEndpointCategory['term_id'];
+            $webhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
+        }
+
         // $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
         // $reportEndpointCategory = \wp_insert_term(
         //     \__('Report', 'gatographql'),
@@ -898,12 +913,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
-        $adminWebhookAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+        $webhookAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Webhook', 'gatographql'),
                 'post_excerpt' => \__('Queries acting as webhooks, to process incoming data from an external service', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminWebhookPersistedQueryTaxInputData,
+                'tax_input' => $webhookPersistedQueryTaxInputData, //$adminWebhookPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
