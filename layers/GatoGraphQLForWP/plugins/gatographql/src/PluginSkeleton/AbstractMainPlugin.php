@@ -641,7 +641,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]),
             ]
         ));
-        // adminAncestorPersistedQueryCustomPostID
         $adminReportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
