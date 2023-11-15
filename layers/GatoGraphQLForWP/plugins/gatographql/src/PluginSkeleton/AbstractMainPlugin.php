@@ -602,6 +602,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $webhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
         }
 
+        // @todo Remove commented code
         // $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
         // $reportEndpointCategory = \wp_insert_term(
         //     \__('Report', 'gatographql'),
@@ -974,7 +975,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         /**
          * Create the Persisted Queries
-         */        
+         */
+        // @todo Complete with installing Persisted Queries
+        
     }
 
     /**
