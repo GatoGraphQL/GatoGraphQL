@@ -1011,7 +1011,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function readGraphQLPersistedQuery(string $relativeFilePath): string
     {
-        $rootFolder = dirname(__DIR__, 3);
+        $rootFolder = dirname(__DIR__, 2);
         $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
         $persistedQueryFile = $persistedQueriesFolder . '/' . $relativeFilePath . '.gql';
         $query = $this->readFile($persistedQueryFile);
