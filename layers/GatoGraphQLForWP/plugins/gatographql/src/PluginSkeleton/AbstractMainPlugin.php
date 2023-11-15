@@ -760,7 +760,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ],
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                'atts' => [
+                'attrs' => [
                     EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
                 ],
             ],
