@@ -532,9 +532,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations', 'gatographql'),
-			'post_content' => serialize_blocks([
+			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                 $nestedMutationsBlockData,
-            ]),
+            ])),
         ]);
         $entityAsPayloadTypeBlockData = [
             'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
@@ -547,10 +547,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
-            'post_content' => serialize_blocks([
+            'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                 $nestedMutationsBlockData,
                 $entityAsPayloadTypeBlockData,
-            ]),
+            ])),
         ]);
 
 
@@ -730,27 +730,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_title' => \__('Admin', 'gatographql'),
                 'post_excerpt' => \__('Execute admin tasks', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData,
-                'post_content' => serialize_blocks([
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                        'innerContent' => [],
                     ],
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'innerContent' => [],
                     ],
                     [
                         'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                        'innerContent' => [],
                         'attrs' => [
                             BlockAttributeNames::IS_ENABLED => false,
                         ]
                     ],
                     [
                         'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                        'innerContent' => [],
                     ],
-                ]),
+                ])),
             ]
         ));
 
@@ -763,25 +759,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $sublevelAncestorPersistedQueryBlocks = [
             [
                 'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                'innerContent' => [],
             ],
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                'innerContent' => [],
                 'atts' => [
                     EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
                 ],
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                'innerContent' => [],
                 'attrs' => [
                     BlockAttributeNames::IS_ENABLED => false,
                 ]
             ],
             [
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                'innerContent' => [],
             ],
         ];
         $adminReportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
@@ -790,13 +782,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_title' => \__('Report', 'gatographql'),
                 'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
                 'tax_input' => $adminReportPersistedQueryTaxInputData,
-                'post_content' => serialize_blocks($sublevelAncestorPersistedQueryBlocks),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlocks)),
             ]
         ));
 
         /**
          * Create the Persisted Queries
          */        
+    }
+
+    /**
+     * @param array<array<string,mixed>> $blocks
+     * @return array<array<string,mixed>>
+     */
+    protected function addInnerContentToBlockAtts(array $blocks): array
+    {
+        return array_map(
+            fn (array $block) => [...$block, 'innerContent' => []],
+            $blocks
+        );
     }
 
     /**
