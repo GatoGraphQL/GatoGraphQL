@@ -10,7 +10,7 @@
 #
 # @see https://gatographql.com/blog/instawp-gatographql/
 #
-# ----------------------------------------------------------------------
+# *********************************************************************
 # Required Extensions:
 #   - Field Response Removal
 #   - Field to Input
