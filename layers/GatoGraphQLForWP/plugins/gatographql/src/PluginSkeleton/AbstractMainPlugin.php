@@ -820,6 +820,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
+        $adminAutomateAncestorPersistedQueryOptions = array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_parent' => $adminAutomateAncestorPersistedQueryCustomPostID,
+            ]
+        );
+        $adminAutomateNotifyAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAutomateAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Notify', 'gatographql'),
+                'post_excerpt' => \__('Queries to send notifications via automation', 'gatographql'),
+                'tax_input' => [
+                    $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
+                        ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                        ...$adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                    ]))
+                ],
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+            ]
+        ));
 
         $adminFetchAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
             $adminAncestorPersistedQueryOptions,
