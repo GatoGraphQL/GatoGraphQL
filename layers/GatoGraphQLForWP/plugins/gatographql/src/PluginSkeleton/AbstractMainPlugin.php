@@ -560,6 +560,40 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var GraphQLEndpointCategoryTaxonomy */
         $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
 
+        $adminPersistedQueryTaxInputData = [
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [],
+        ];
+        $adminEndpointCategoryOptions = [];
+        $adminEndpointCategory = \wp_insert_term(
+            \__('Admin', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            [
+                'description' => \__('Internal admin tasks', 'gatographql'),
+            ]
+        );
+        if (!($adminEndpointCategory instanceof WP_Error)) {
+            $adminEndpointCategoryID = $adminEndpointCategory['term_id'];
+            $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
+            $adminEndpointCategoryOptions['parent'] = $adminEndpointCategoryID;
+        }
+
+        $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        $adminReportEndpointCategory = \wp_insert_term(
+            \__('Report', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            array_merge(
+                $adminEndpointCategoryOptions,
+                [
+                    'description' => \__('Visualize data', 'gatographql'),
+                ]
+            )
+        );
+        if (!($adminReportEndpointCategory instanceof WP_Error)) {
+            $adminReportEndpointCategoryID = $adminReportEndpointCategory['term_id'];
+            $adminReportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminReportEndpointCategoryID;
+        }
+
+
         /**
          * Then create the ancestor Persisted Queries to organize them
          */
@@ -574,23 +608,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $adminEndpointCategory = \wp_insert_term(
-            \__('Admin', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Internal admin tasks', 'gatographql'),
-            ]
-        );
-        if ($adminEndpointCategory instanceof WP_Error) {
-            $adminPersistedQueryTaxInputData = [];
-        } else {
-            $adminEndpointCategoryID = $adminEndpointCategory['term_id'];
-            $adminPersistedQueryTaxInputData = [
-                $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [
-                    $adminEndpointCategoryID,
-                ],
-            ];
-        }
         $adminPersistedQueryOptions = [
 			'post_status' => 'private',
 			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
@@ -600,6 +617,36 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Admin', 'gatographql'),
                 'post_excerpt' => \__('Execute admin tasks', 'gatographql'),
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'innerContent' => [],
+                    ],
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'innerContent' => [],
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                        'innerContent' => [],
+                        'attrs' => [
+                            BlockAttributeNames::IS_ENABLED => false,
+                        ]
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                        'innerContent' => [],
+                    ],
+                ]),
+            ]
+        ));
+        // adminAncestorPersistedQueryCustomPostID
+        $adminReportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Report', 'gatographql'),
+                'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks([
                     [
