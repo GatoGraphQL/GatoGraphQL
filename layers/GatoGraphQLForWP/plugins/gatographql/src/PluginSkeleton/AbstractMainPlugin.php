@@ -721,6 +721,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminSyncPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminSyncEndpointCategoryID;
         }
 
+        $adminWebhookPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        $adminWebhookEndpointCategory = \wp_insert_term(
+            \__('Webhook', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            array_merge(
+                $adminEndpointCategoryOptions,
+                [
+                    'description' => \__('Process incoming data via Webhooks', 'gatographql'),
+                ]
+            )
+        );
+        if (!($adminWebhookEndpointCategory instanceof WP_Error)) {
+            $adminWebhookEndpointCategoryID = $adminWebhookEndpointCategory['term_id'];
+            $adminWebhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminWebhookEndpointCategoryID;
+        }
+
 
         /**
          * Then create the ancestor Persisted Queries to organize them
