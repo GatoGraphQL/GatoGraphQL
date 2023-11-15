@@ -913,8 +913,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
+        
+        
+        $webhookPersistedQueryOptions = [
+			'post_status' => 'publish',
+			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+        ];
         $webhookAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
-            $adminAncestorPersistedQueryOptions,
+            $webhookPersistedQueryOptions,
             [
                 'post_title' => \__('Webhook', 'gatographql'),
                 'post_excerpt' => \__('Queries acting as webhooks, to process incoming data from an external service', 'gatographql'),
@@ -922,6 +928,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
+        $webhookAncestorPersistedQueryOptions = array_merge(
+            $webhookPersistedQueryOptions,
+            [
+                'post_parent' => $webhookAncestorPersistedQueryCustomPostID,
+            ]
+        );
 
         /**
          * Create the Persisted Queries
