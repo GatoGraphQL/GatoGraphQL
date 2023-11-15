@@ -484,7 +484,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         parent::pluginJustFirstTimeActivated();
 
-        $this->maybeInstallInitialData();
+        /**
+         * Taxonomies are registered on "init", hence must insert
+         * data only after that.
+         *
+         * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
+         */
+        \add_action(
+            'init',
+            $this->maybeInstallInitialData(...),
+            PHP_INT_MAX
+        );
     }
 
     /**
