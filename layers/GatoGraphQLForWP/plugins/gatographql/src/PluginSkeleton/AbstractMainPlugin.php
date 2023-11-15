@@ -579,7 +579,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
 
         $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminReportEndpointCategory = \wp_insert_term(
+        $reportEndpointCategory = \wp_insert_term(
             \__('Report', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -589,13 +589,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminReportEndpointCategory instanceof WP_Error)) {
-            $adminReportEndpointCategoryID = $adminReportEndpointCategory['term_id'];
-            $adminReportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminReportEndpointCategoryID;
+        if (!($reportEndpointCategory instanceof WP_Error)) {
+            $reportEndpointCategoryID = $reportEndpointCategory['term_id'];
+            $adminReportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $reportEndpointCategoryID;
         }
 
         $adminTransformPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminTransformEndpointCategory = \wp_insert_term(
+        $transformEndpointCategory = \wp_insert_term(
             \__('Transform', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -605,13 +605,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminTransformEndpointCategory instanceof WP_Error)) {
-            $adminTransformEndpointCategoryID = $adminTransformEndpointCategory['term_id'];
-            $adminTransformPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminTransformEndpointCategoryID;
+        if (!($transformEndpointCategory instanceof WP_Error)) {
+            $transformEndpointCategoryID = $transformEndpointCategory['term_id'];
+            $adminTransformPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $transformEndpointCategoryID;
         }
 
         $adminImportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminImportEndpointCategory = \wp_insert_term(
+        $importEndpointCategory = \wp_insert_term(
             \__('Import', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -621,13 +621,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminImportEndpointCategory instanceof WP_Error)) {
-            $adminImportEndpointCategoryID = $adminImportEndpointCategory['term_id'];
-            $adminImportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminImportEndpointCategoryID;
+        if (!($importEndpointCategory instanceof WP_Error)) {
+            $importEndpointCategoryID = $importEndpointCategory['term_id'];
+            $adminImportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $importEndpointCategoryID;
         }
 
         $adminNotifyPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminNotifyEndpointCategory = \wp_insert_term(
+        $notifyEndpointCategory = \wp_insert_term(
             \__('Notify', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -637,13 +637,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminNotifyEndpointCategory instanceof WP_Error)) {
-            $adminNotifyEndpointCategoryID = $adminNotifyEndpointCategory['term_id'];
-            $adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminNotifyEndpointCategoryID;
+        if (!($notifyEndpointCategory instanceof WP_Error)) {
+            $notifyEndpointCategoryID = $notifyEndpointCategory['term_id'];
+            $adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $notifyEndpointCategoryID;
         }
 
         $adminAutomatePersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminAutomateEndpointCategory = \wp_insert_term(
+        $automateEndpointCategory = \wp_insert_term(
             \__('Automate', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -653,13 +653,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminAutomateEndpointCategory instanceof WP_Error)) {
-            $adminAutomateEndpointCategoryID = $adminAutomateEndpointCategory['term_id'];
-            $adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminAutomateEndpointCategoryID;
+        if (!($automateEndpointCategory instanceof WP_Error)) {
+            $automateEndpointCategoryID = $automateEndpointCategory['term_id'];
+            $adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $automateEndpointCategoryID;
         }
 
         $adminDispatchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminDispatchEndpointCategory = \wp_insert_term(
+        $dispatchEndpointCategory = \wp_insert_term(
             \__('Dispatch', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -669,13 +669,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminDispatchEndpointCategory instanceof WP_Error)) {
-            $adminDispatchEndpointCategoryID = $adminDispatchEndpointCategory['term_id'];
-            $adminDispatchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminDispatchEndpointCategoryID;
+        if (!($dispatchEndpointCategory instanceof WP_Error)) {
+            $dispatchEndpointCategoryID = $dispatchEndpointCategory['term_id'];
+            $adminDispatchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $dispatchEndpointCategoryID;
         }
 
         $adminFetchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminFetchEndpointCategory = \wp_insert_term(
+        $fetchEndpointCategory = \wp_insert_term(
             \__('Fetch', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -685,13 +685,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminFetchEndpointCategory instanceof WP_Error)) {
-            $adminFetchEndpointCategoryID = $adminFetchEndpointCategory['term_id'];
-            $adminFetchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminFetchEndpointCategoryID;
+        if (!($fetchEndpointCategory instanceof WP_Error)) {
+            $fetchEndpointCategoryID = $fetchEndpointCategory['term_id'];
+            $adminFetchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $fetchEndpointCategoryID;
         }
 
         $adminGatewayPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminGatewayEndpointCategory = \wp_insert_term(
+        $gatewayEndpointCategory = \wp_insert_term(
             \__('Gateway', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -701,13 +701,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminGatewayEndpointCategory instanceof WP_Error)) {
-            $adminGatewayEndpointCategoryID = $adminGatewayEndpointCategory['term_id'];
-            $adminGatewayPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminGatewayEndpointCategoryID;
+        if (!($gatewayEndpointCategory instanceof WP_Error)) {
+            $gatewayEndpointCategoryID = $gatewayEndpointCategory['term_id'];
+            $adminGatewayPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $gatewayEndpointCategoryID;
         }
 
         $adminSyncPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminSyncEndpointCategory = \wp_insert_term(
+        $syncEndpointCategory = \wp_insert_term(
             \__('Sync', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -717,13 +717,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminSyncEndpointCategory instanceof WP_Error)) {
-            $adminSyncEndpointCategoryID = $adminSyncEndpointCategory['term_id'];
-            $adminSyncPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminSyncEndpointCategoryID;
+        if (!($syncEndpointCategory instanceof WP_Error)) {
+            $syncEndpointCategoryID = $syncEndpointCategory['term_id'];
+            $adminSyncPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $syncEndpointCategoryID;
         }
 
         $adminWebhookPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $adminWebhookEndpointCategory = \wp_insert_term(
+        $webhookEndpointCategory = \wp_insert_term(
             \__('Webhook', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             array_merge(
@@ -733,9 +733,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]
             )
         );
-        if (!($adminWebhookEndpointCategory instanceof WP_Error)) {
-            $adminWebhookEndpointCategoryID = $adminWebhookEndpointCategory['term_id'];
-            $adminWebhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminWebhookEndpointCategoryID;
+        if (!($webhookEndpointCategory instanceof WP_Error)) {
+            $webhookEndpointCategoryID = $webhookEndpointCategory['term_id'];
+            $adminWebhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
         }
 
 
