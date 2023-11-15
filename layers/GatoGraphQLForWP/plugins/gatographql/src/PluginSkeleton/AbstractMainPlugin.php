@@ -42,6 +42,7 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+use WP_Error;
 use WP_Upgrader;
 use function __;
 use function add_action;
@@ -563,18 +564,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $adminEndpointCategoryID = \wp_insert_term(
+        $adminEndpointCategory = \wp_insert_term(
             \__('Admin', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             [
                 'description' => \__('Execute admin tasks', 'gatographql'),
             ]
         );
-        $adminPersistedQueryTaxInputData = [
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [
-                $adminEndpointCategoryID,
-            ],
-        ];
+        if ($adminEndpointCategory instanceof WP_Error) {
+            $adminPersistedQueryTaxInputData = [];
+        } else {
+            $adminEndpointCategoryID = $adminEndpointCategory['term_id'];
+            $adminPersistedQueryTaxInputData = [
+                $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [
+                    $adminEndpointCategoryID,
+                ],
+            ];
+        }
         $adminAncestorPersistedQueryCustomPostID = \wp_insert_post([
 			'post_status' => 'private',
 			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
