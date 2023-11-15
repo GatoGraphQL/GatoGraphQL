@@ -574,7 +574,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if (!($adminEndpointCategory instanceof WP_Error)) {
             $adminEndpointCategoryID = $adminEndpointCategory['term_id'];
             $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
-            $adminEndpointCategoryOptions['parent'] = $adminEndpointCategoryID;
+            // Uncomment this line to create categories with "Admin" as parent
+            // $adminEndpointCategoryOptions['parent'] = $adminEndpointCategoryID;
         }
 
         $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
