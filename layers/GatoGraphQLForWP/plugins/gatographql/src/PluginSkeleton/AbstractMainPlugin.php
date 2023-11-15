@@ -983,7 +983,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readGraphQLPersistedQuery('webhook/register-a-newsletter-subscriber-from-instawp-to-mailchimp'),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readGraphQLPersistedQueryAndAdaptForBlock('webhook/register-a-newsletter-subscriber-from-instawp-to-mailchimp'),
                         ],
                     ],
                     [
@@ -1007,6 +1007,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         // @todo Complete with installing Persisted Queries
         
+    }
+
+    protected function readGraphQLPersistedQueryAndAdaptForBlock(string $relativeFilePath): string
+    {
+        return str_replace(
+            PHP_EOL,
+            '\\n',
+            $this->readGraphQLPersistedQuery($relativeFilePath)
+        );
     }
 
     protected function readGraphQLPersistedQuery(string $relativeFilePath): string
