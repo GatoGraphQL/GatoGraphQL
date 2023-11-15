@@ -931,6 +931,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $webhookAncestorPersistedQueryOptions = array_merge(
             $webhookPersistedQueryOptions,
             [
+                'post_status' => 'draft', // They are public => don't publish them!
                 'post_parent' => $webhookAncestorPersistedQueryCustomPostID,
             ]
         );
