@@ -591,34 +591,39 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ],
             ];
         }
-        $adminAncestorPersistedQueryCustomPostID = \wp_insert_post([
+        $adminPersistedQueryOptions = [
 			'post_status' => 'private',
 			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-			'post_title' => \__('Admin', 'gatographql'),
-			'post_excerpt' => \__('Execute admin tasks', 'gatographql'),
-            'tax_input' => $adminPersistedQueryTaxInputData,
-            'post_content' => serialize_blocks([
-                [
-                    'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                    'innerContent' => [],
-                ],
-                [
-                    'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                    'innerContent' => [],
-                ],
-                [
-                    'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                    'innerContent' => [],
-                    'attrs' => [
-                        BlockAttributeNames::IS_ENABLED => false,
-                    ]
-                ],
-                [
-                    'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                    'innerContent' => [],
-                ],
-            ]),
-        ]);
+        ];
+        $adminAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Admin', 'gatographql'),
+                'post_excerpt' => \__('Execute admin tasks', 'gatographql'),
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'innerContent' => [],
+                    ],
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'innerContent' => [],
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                        'innerContent' => [],
+                        'attrs' => [
+                            BlockAttributeNames::IS_ENABLED => false,
+                        ]
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                        'innerContent' => [],
+                    ],
+                ]),
+            ]
+        ));
 
         /**
          * Finally create the Persisted Queries
