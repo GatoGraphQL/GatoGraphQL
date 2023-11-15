@@ -523,7 +523,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         $nestedMutationsBlockData = [
             'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
-            'innerContent' => [],
             'attrs' => [
                 SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
             ]
@@ -538,7 +537,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ]);
         $entityAsPayloadTypeBlockData = [
             'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
-            'innerContent' => [],
             'attrs' => [
                 BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
             ]
