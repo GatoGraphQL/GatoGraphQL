@@ -519,7 +519,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
         
         /**
-         * First create the Schema Configurations
+         * Create the Schema Configurations
          */
         $nestedMutationsBlockData = [
             'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
@@ -707,7 +707,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
 
         /**
-         * Then create the ancestor Persisted Queries to organize them
+         * Create the ancestor Persisted Queries for organization
          */
         /** @var GraphQLPersistedQueryEndpointCustomPostType */
         $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
@@ -784,7 +784,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ));
 
         /**
-         * Finally create the Persisted Queries
+         * Create the Persisted Queries
          */        
     }
 
