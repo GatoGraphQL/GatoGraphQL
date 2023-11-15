@@ -521,11 +521,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the Schema Configurations
          */
+        $nestedMutationsBlockDataItem = [
+            'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
+            'attrs' => [
+                SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
+            ]
+        ];
         $adminSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Admin', 'gatographql'),
-			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
+			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                $nestedMutationsBlockDataItem,
+            ])),
         ]);
         $webhookSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
@@ -533,12 +541,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_title' => \__('Webhook', 'gatographql'),
 			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
         ]);
-        $nestedMutationsBlockDataItem = [
-            'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
-            'attrs' => [
-                SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
-            ]
-        ];
         $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
