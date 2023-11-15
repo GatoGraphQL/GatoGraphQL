@@ -2,13 +2,23 @@
 # This GraphQL query captures the email from the visitors who ticked
 # the "Subscribe to mailing list" checkbox from InstaWP (when creating
 # a new sandbox site), and subscribes this email to a Mailchimp list.
-# Define in `wp-config.php`:
-#
+# Define in `wp-config.php`:#
 #
 #   define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
 #   define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
 #
 # @see https://gatographql.com/blog/instawp-gatographql/
+#
+# ----------------------------------------------------------------------
+# Requirements
+# ----------------------------------------------------------------------
+# Extensions:
+#   Field Response Removal, Field to Input, Http Client, Http Request via
+#   Schema, Multiple Query Execution, PHP Constants and Environment
+#   Variables via Schema, PHP Functions via Schema, Response Error Trigger
+#
+# Or any of these Bundles:
+#   Application Glue & Automator, All Extensions
 #
 ########################################################################
 
