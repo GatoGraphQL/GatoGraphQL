@@ -20,6 +20,7 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractGraphiQLBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
@@ -972,6 +973,80 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_parent' => $webhookAncestorPersistedQueryCustomPostID,
             ]
         );
+        \wp_insert_post(array_merge(
+            $webhookAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('[InstaWP] Register a newsletter subscriber to Mailchimp', 'gatographql'),
+                'tax_input' => $webhookPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY =>
+<<<GRAPHQL
+########################################################################
+# This GraphQL query captures the email from the visitors who ticked
+# the "Subscribe to mailing list" checkbox from InstaWP (when creating
+# a new sandbox site), and subscribes this email to a Mailchimp list.
+# Define in `wp-config.php`:
+#
+#
+#   define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
+#   define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
+#
+########################################################################
+query HasSubscribedToNewsletter {
+  hasSubscriberOptin: _httpRequestHasParam(name: "marketing_optin")
+  subscriberOptin: _httpRequestStringParam(name: "marketing_optin")
+  isNotSubscriberOptinNAValue: _notEquals(value1: \$__subscriberOptin, value2: "NA")
+  subscribedToNewsletter: _and(values: [\$__hasSubscriberOptin, \$__isNotSubscriberOptinNAValue])
+    @export(as: "subscribedToNewsletter")
+}
+
+query MaybeCreateContactOnMailchimp
+   @depends(on: "HasSubscribedToNewsletter")
+   @include(if: \$subscribedToNewsletter)
+{
+  subscriberEmail: _httpRequestStringParam(name: "email")
+  
+  mailchimpUsername: _env(name: "MAILCHIMP_API_CREDENTIALS_USERNAME")
+    @remove
+  mailchimpPassword: _env(name: "MAILCHIMP_API_CREDENTIALS_PASSWORD")
+    @remove
+  
+  mailchimpListMembersJSONObject: _sendJSONObjectItemHTTPRequest(input: {
+    url: "https://us7.api.mailchimp.com/3.0/lists/{listCode}/members",
+    method: POST,
+    options: {
+      auth: {
+        username: \$__mailchimpUsername,
+        password: \$__mailchimpPassword
+      },
+      json: {
+        email_address: \$__subscriberEmail,
+        status: "subscribed"
+      }
+    }
+  })
+}
+GRAPHQL,
+                        ],
+                    ],
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
+                        ],
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                    ],
+                ])),
+            ]
+        ));
 
         /**
          * Create the Persisted Queries
