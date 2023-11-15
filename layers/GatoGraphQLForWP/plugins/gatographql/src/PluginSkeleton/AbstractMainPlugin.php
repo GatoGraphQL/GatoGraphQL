@@ -563,7 +563,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $adminPersistedQueryTaxInputData = [
             $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [],
         ];
-        $adminEndpointCategoryOptions = [];
         $adminEndpointCategory = \wp_insert_term(
             \__('Admin', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -574,20 +573,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if (!($adminEndpointCategory instanceof WP_Error)) {
             $adminEndpointCategoryID = $adminEndpointCategory['term_id'];
             $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
-            // Uncomment this line to create categories with "Admin" as parent
-            // $adminEndpointCategoryOptions['parent'] = $adminEndpointCategoryID;
         }
 
         $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
         $reportEndpointCategory = \wp_insert_term(
             \__('Report', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Visualize data', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Visualize data', 'gatographql'),
+            ]
         );
         if (!($reportEndpointCategory instanceof WP_Error)) {
             $reportEndpointCategoryID = $reportEndpointCategory['term_id'];
@@ -598,12 +592,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $transformEndpointCategory = \wp_insert_term(
             \__('Transform', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Transform data', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Transform data', 'gatographql'),
+            ]
         );
         if (!($transformEndpointCategory instanceof WP_Error)) {
             $transformEndpointCategoryID = $transformEndpointCategory['term_id'];
@@ -614,12 +605,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $importEndpointCategory = \wp_insert_term(
             \__('Import', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Import data', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Import data', 'gatographql'),
+            ]
         );
         if (!($importEndpointCategory instanceof WP_Error)) {
             $importEndpointCategoryID = $importEndpointCategory['term_id'];
@@ -630,12 +618,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $notifyEndpointCategory = \wp_insert_term(
             \__('Notify', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Send notifications', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Send notifications', 'gatographql'),
+            ]
         );
         if (!($notifyEndpointCategory instanceof WP_Error)) {
             $notifyEndpointCategoryID = $notifyEndpointCategory['term_id'];
@@ -646,12 +631,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $automateEndpointCategory = \wp_insert_term(
             \__('Automate', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Automations', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Automations', 'gatographql'),
+            ]
         );
         if (!($automateEndpointCategory instanceof WP_Error)) {
             $automateEndpointCategoryID = $automateEndpointCategory['term_id'];
@@ -662,12 +644,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $dispatchEndpointCategory = \wp_insert_term(
             \__('Dispatch', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Send data to services', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Send data to services', 'gatographql'),
+            ]
         );
         if (!($dispatchEndpointCategory instanceof WP_Error)) {
             $dispatchEndpointCategoryID = $dispatchEndpointCategory['term_id'];
@@ -678,12 +657,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $fetchEndpointCategory = \wp_insert_term(
             \__('Fetch', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Fetch data from services', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Fetch data from services', 'gatographql'),
+            ]
         );
         if (!($fetchEndpointCategory instanceof WP_Error)) {
             $fetchEndpointCategoryID = $fetchEndpointCategory['term_id'];
@@ -694,12 +670,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $gatewayEndpointCategory = \wp_insert_term(
             \__('Gateway', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('API Gateway', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('API Gateway', 'gatographql'),
+            ]
         );
         if (!($gatewayEndpointCategory instanceof WP_Error)) {
             $gatewayEndpointCategoryID = $gatewayEndpointCategory['term_id'];
@@ -710,12 +683,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $syncEndpointCategory = \wp_insert_term(
             \__('Sync', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Synchronize data across sites', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Synchronize data across sites', 'gatographql'),
+            ]
         );
         if (!($syncEndpointCategory instanceof WP_Error)) {
             $syncEndpointCategoryID = $syncEndpointCategory['term_id'];
@@ -726,12 +696,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $webhookEndpointCategory = \wp_insert_term(
             \__('Webhook', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            array_merge(
-                $adminEndpointCategoryOptions,
-                [
-                    'description' => \__('Process incoming data via Webhooks', 'gatographql'),
-                ]
-            )
+            [
+                'description' => \__('Process incoming data via Webhooks', 'gatographql'),
+            ]
         );
         if (!($webhookEndpointCategory instanceof WP_Error)) {
             $webhookEndpointCategoryID = $webhookEndpointCategory['term_id'];
