@@ -24,6 +24,7 @@ use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigExposeSensitiveDataBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
@@ -36,8 +37,8 @@ use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStatePro
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
-use PoP\Root\AppLoader as ImmediateAppLoader;
 
+use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
@@ -513,6 +514,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+        /** @var SchemaConfigExposeSensitiveDataBlock */
+        $schemaConfigExposeSensitiveDataBlock = $instanceManager->getInstance(SchemaConfigExposeSensitiveDataBlock::class);
         /** @var SchemaConfigMutationSchemeBlock */
         $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
         /** @var SchemaConfigPayloadTypesForMutationsBlock */
@@ -521,6 +524,34 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the Schema Configurations
          */
+        $adminBlockDataItem = [
+            'blockName' => $schemaConfigExposeSensitiveDataBlock->getBlockFullName(),
+            'attrs' => [
+                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::ENABLED,
+            ]
+        ];
+        $adminSchemaConfigurationCustomPostID = \wp_insert_post([
+			'post_status' => 'publish',
+			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+			'post_title' => \__('Admin', 'gatographql'),
+			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                $adminBlockDataItem,
+            ])),
+        ]);
+        $webhookBlockDataItem = [
+            'blockName' => $schemaConfigExposeSensitiveDataBlock->getBlockFullName(),
+            'attrs' => [
+                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::ENABLED,
+            ]
+        ];
+        $webhookSchemaConfigurationCustomPostID = \wp_insert_post([
+			'post_status' => 'publish',
+			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+			'post_title' => \__('Webhook', 'gatographql'),
+			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                $webhookBlockDataItem,
+            ])),
+        ]);
         $nestedMutationsBlockDataItem = [
             'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
             'attrs' => [
@@ -749,6 +780,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     ],
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $adminSchemaConfigurationCustomPostID,
+                        ],
                     ],
                     [
                         'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
@@ -924,8 +958,27 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Webhook', 'gatographql'),
                 'post_excerpt' => \__('Queries acting as webhooks, to process incoming data from an external service', 'gatographql'),
-                'tax_input' => $webhookPersistedQueryTaxInputData, //$adminWebhookPersistedQueryTaxInputData,
-                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
+                'tax_input' => $webhookPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                    ],
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $webhookSchemaConfigurationCustomPostID,
+                        ],
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                        'attrs' => [
+                            BlockAttributeNames::IS_ENABLED => false,
+                        ]
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                    ],
+                ])),
             ]
         ));
         $webhookAncestorPersistedQueryOptions = array_merge(
