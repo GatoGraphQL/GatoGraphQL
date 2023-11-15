@@ -24,7 +24,6 @@ use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock;
-use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigExposeSensitiveDataBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
@@ -514,8 +513,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
-        /** @var SchemaConfigExposeSensitiveDataBlock */
-        $schemaConfigExposeSensitiveDataBlock = $instanceManager->getInstance(SchemaConfigExposeSensitiveDataBlock::class);
         /** @var SchemaConfigMutationSchemeBlock */
         $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
         /** @var SchemaConfigPayloadTypesForMutationsBlock */
@@ -524,33 +521,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the Schema Configurations
          */
-        $adminBlockDataItem = [
-            'blockName' => $schemaConfigExposeSensitiveDataBlock->getBlockFullName(),
-            'attrs' => [
-                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::ENABLED,
-            ]
-        ];
         $adminSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Admin', 'gatographql'),
-			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                $adminBlockDataItem,
-            ])),
+			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
         ]);
-        $webhookBlockDataItem = [
-            'blockName' => $schemaConfigExposeSensitiveDataBlock->getBlockFullName(),
-            'attrs' => [
-                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::ENABLED,
-            ]
-        ];
         $webhookSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Webhook', 'gatographql'),
-			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                $webhookBlockDataItem,
-            ])),
+			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
         ]);
         $nestedMutationsBlockDataItem = [
             'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
