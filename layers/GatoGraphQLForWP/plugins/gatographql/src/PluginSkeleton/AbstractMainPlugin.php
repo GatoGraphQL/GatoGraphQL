@@ -28,6 +28,7 @@ use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
@@ -36,8 +37,8 @@ use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
-use PoP\Root\Environment as RootEnvironment;
 
+use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
@@ -543,6 +544,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
 
         /**
+         * Create Endpoint Categories
+         */
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+
+        /**
          * Then create the ancestor Persisted Queries to organize them
          */
         /** @var GraphQLPersistedQueryEndpointCustomPostType */
@@ -555,10 +562,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
+
+        $adminEndpointCategoryID = \wp_insert_term(
+            \__('Admin', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            [
+                'description' => \__('Execute admin tasks', 'gatographql'),
+            ]
+        );
+        $adminPersistedQueryTaxInputData = [
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [
+                $adminEndpointCategoryID,
+            ],
+        ];
         $adminAncestorPersistedQueryCustomPostID = \wp_insert_post([
 			'post_status' => 'private',
 			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
 			'post_title' => \__('Admin', 'gatographql'),
+			'post_excerpt' => \__('Execute admin tasks', 'gatographql'),
+            'tax_input' => $adminPersistedQueryTaxInputData,
             'post_content' => serialize_blocks([
                 [
                     'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
