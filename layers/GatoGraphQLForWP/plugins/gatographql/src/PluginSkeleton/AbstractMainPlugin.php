@@ -595,7 +595,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'private',
 			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
 			'post_title' => \__('Admin', 'gatographql'),
-			'post_excerpt' => \__('Execute admin tasks', 'gatographql'),
+			'post_excerpt' => \__('Internal admin tasks', 'gatographql'),
             'tax_input' => $adminPersistedQueryTaxInputData,
             'post_content' => serialize_blocks([
                 [
