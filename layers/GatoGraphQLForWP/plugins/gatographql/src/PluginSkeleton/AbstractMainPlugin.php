@@ -43,6 +43,7 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+use RuntimeException;
 use WP_Error;
 use WP_Upgrader;
 use function __;
@@ -976,60 +977,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $webhookAncestorPersistedQueryOptions,
             [
-                'post_title' => \__('[InstaWP] Register a newsletter subscriber to Mailchimp', 'gatographql'),
+                'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                 'tax_input' => $webhookPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY =>
-<<<GRAPHQL
-########################################################################
-# This GraphQL query captures the email from the visitors who ticked
-# the "Subscribe to mailing list" checkbox from InstaWP (when creating
-# a new sandbox site), and subscribes this email to a Mailchimp list.
-# Define in `wp-config.php`:
-#
-#
-#   define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
-#   define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
-#
-########################################################################
-query HasSubscribedToNewsletter {
-  hasSubscriberOptin: _httpRequestHasParam(name: "marketing_optin")
-  subscriberOptin: _httpRequestStringParam(name: "marketing_optin")
-  isNotSubscriberOptinNAValue: _notEquals(value1: \$__subscriberOptin, value2: "NA")
-  subscribedToNewsletter: _and(values: [\$__hasSubscriberOptin, \$__isNotSubscriberOptinNAValue])
-    @export(as: "subscribedToNewsletter")
-}
-
-query MaybeCreateContactOnMailchimp
-   @depends(on: "HasSubscribedToNewsletter")
-   @include(if: \$subscribedToNewsletter)
-{
-  subscriberEmail: _httpRequestStringParam(name: "email")
-  
-  mailchimpUsername: _env(name: "MAILCHIMP_API_CREDENTIALS_USERNAME")
-    @remove
-  mailchimpPassword: _env(name: "MAILCHIMP_API_CREDENTIALS_PASSWORD")
-    @remove
-  
-  mailchimpListMembersJSONObject: _sendJSONObjectItemHTTPRequest(input: {
-    url: "https://us7.api.mailchimp.com/3.0/lists/{listCode}/members",
-    method: POST,
-    options: {
-      auth: {
-        username: \$__mailchimpUsername,
-        password: \$__mailchimpPassword
-      },
-      json: {
-        email_address: \$__subscriberEmail,
-        status: "subscribed"
-      }
-    }
-  })
-}
-GRAPHQL,
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readGraphQLPersistedQuery('webhook/register-a-newsletter-subscriber-from-instawp-to-mailchimp'),
                         ],
                     ],
                     [
@@ -1053,6 +1007,30 @@ GRAPHQL,
          */
         // @todo Complete with installing Persisted Queries
         
+    }
+
+    protected function readGraphQLPersistedQuery(string $relativeFilePath): string
+    {
+        $rootFolder = dirname(__DIR__, 3);
+        $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
+        $persistedQueryFile = $persistedQueriesFolder . '/' . $relativeFilePath . '.gql';
+        $query = $this->readFile($persistedQueryFile);
+        return str_replace(
+            PHP_EOL,
+            '\\n',
+            $query
+        );
+    }
+
+    protected function readFile(string $filePath): string
+    {
+        $query = file_get_contents($filePath);
+        if ($query === false) {
+            throw new RuntimeException(
+                sprintf('Loading GraphQL query file \'%s\' failed', $query)
+            );
+        }
+        return $query;
     }
 
     /**
