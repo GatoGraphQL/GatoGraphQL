@@ -625,6 +625,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminImportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminImportEndpointCategoryID;
         }
 
+        $adminNotifyPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        $adminNotifyEndpointCategory = \wp_insert_term(
+            \__('Notify', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            array_merge(
+                $adminEndpointCategoryOptions,
+                [
+                    'description' => \__('Send notifications', 'gatographql'),
+                ]
+            )
+        );
+        if (!($adminNotifyEndpointCategory instanceof WP_Error)) {
+            $adminNotifyEndpointCategoryID = $adminNotifyEndpointCategory['term_id'];
+            $adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminNotifyEndpointCategoryID;
+        }
+
 
         /**
          * Then create the ancestor Persisted Queries to organize them
