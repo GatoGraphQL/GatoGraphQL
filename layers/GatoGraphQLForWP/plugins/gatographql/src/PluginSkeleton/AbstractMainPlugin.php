@@ -555,6 +555,32 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
+        $adminAncestorPersistedQueryCustomPostID = \wp_insert_post([
+			'post_status' => 'publish',
+			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+			'post_title' => \__('Admin', 'gatographql'),
+            'post_content' => serialize_blocks([
+                [
+                    'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                    'innerContent' => [],
+                ],
+                [
+                    'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                    'innerContent' => [],
+                ],
+                [
+                    'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                    'innerContent' => [],
+                    'attrs' => [
+                        BlockAttributeNames::IS_ENABLED => false,
+                    ]
+                ],
+                [
+                    'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                    'innerContent' => [],
+                ],
+            ]),
+        ]);
 
         /**
          * Finally create the Persisted Queries
