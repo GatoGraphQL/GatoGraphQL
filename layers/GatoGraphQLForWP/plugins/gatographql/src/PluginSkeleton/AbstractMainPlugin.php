@@ -573,135 +573,135 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
         }
 
-        $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $reportEndpointCategory = \wp_insert_term(
-            \__('Report', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Visualize data', 'gatographql'),
-            ]
-        );
-        if (!($reportEndpointCategory instanceof WP_Error)) {
-            $reportEndpointCategoryID = $reportEndpointCategory['term_id'];
-            $adminReportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $reportEndpointCategoryID;
-        }
+        // $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $reportEndpointCategory = \wp_insert_term(
+        //     \__('Report', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Visualize data', 'gatographql'),
+        //     ]
+        // );
+        // if (!($reportEndpointCategory instanceof WP_Error)) {
+        //     $reportEndpointCategoryID = $reportEndpointCategory['term_id'];
+        //     $adminReportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $reportEndpointCategoryID;
+        // }
 
-        $adminTransformPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $transformEndpointCategory = \wp_insert_term(
-            \__('Transform', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Transform data', 'gatographql'),
-            ]
-        );
-        if (!($transformEndpointCategory instanceof WP_Error)) {
-            $transformEndpointCategoryID = $transformEndpointCategory['term_id'];
-            $adminTransformPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $transformEndpointCategoryID;
-        }
+        // $adminTransformPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $transformEndpointCategory = \wp_insert_term(
+        //     \__('Transform', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Transform data', 'gatographql'),
+        //     ]
+        // );
+        // if (!($transformEndpointCategory instanceof WP_Error)) {
+        //     $transformEndpointCategoryID = $transformEndpointCategory['term_id'];
+        //     $adminTransformPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $transformEndpointCategoryID;
+        // }
 
-        $adminImportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $importEndpointCategory = \wp_insert_term(
-            \__('Import', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Import data', 'gatographql'),
-            ]
-        );
-        if (!($importEndpointCategory instanceof WP_Error)) {
-            $importEndpointCategoryID = $importEndpointCategory['term_id'];
-            $adminImportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $importEndpointCategoryID;
-        }
+        // $adminImportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $importEndpointCategory = \wp_insert_term(
+        //     \__('Import', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Import data', 'gatographql'),
+        //     ]
+        // );
+        // if (!($importEndpointCategory instanceof WP_Error)) {
+        //     $importEndpointCategoryID = $importEndpointCategory['term_id'];
+        //     $adminImportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $importEndpointCategoryID;
+        // }
 
-        $adminNotifyPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $notifyEndpointCategory = \wp_insert_term(
-            \__('Notify', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Send notifications', 'gatographql'),
-            ]
-        );
-        if (!($notifyEndpointCategory instanceof WP_Error)) {
-            $notifyEndpointCategoryID = $notifyEndpointCategory['term_id'];
-            $adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $notifyEndpointCategoryID;
-        }
+        // $adminNotifyPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $notifyEndpointCategory = \wp_insert_term(
+        //     \__('Notify', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Send notifications', 'gatographql'),
+        //     ]
+        // );
+        // if (!($notifyEndpointCategory instanceof WP_Error)) {
+        //     $notifyEndpointCategoryID = $notifyEndpointCategory['term_id'];
+        //     $adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $notifyEndpointCategoryID;
+        // }
 
-        $adminAutomatePersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $automateEndpointCategory = \wp_insert_term(
-            \__('Automate', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Automations', 'gatographql'),
-            ]
-        );
-        if (!($automateEndpointCategory instanceof WP_Error)) {
-            $automateEndpointCategoryID = $automateEndpointCategory['term_id'];
-            $adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $automateEndpointCategoryID;
-        }
+        // $adminAutomatePersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $automateEndpointCategory = \wp_insert_term(
+        //     \__('Automate', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Automations', 'gatographql'),
+        //     ]
+        // );
+        // if (!($automateEndpointCategory instanceof WP_Error)) {
+        //     $automateEndpointCategoryID = $automateEndpointCategory['term_id'];
+        //     $adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $automateEndpointCategoryID;
+        // }
 
-        $adminDispatchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $dispatchEndpointCategory = \wp_insert_term(
-            \__('Dispatch', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Send data to services', 'gatographql'),
-            ]
-        );
-        if (!($dispatchEndpointCategory instanceof WP_Error)) {
-            $dispatchEndpointCategoryID = $dispatchEndpointCategory['term_id'];
-            $adminDispatchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $dispatchEndpointCategoryID;
-        }
+        // $adminDispatchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $dispatchEndpointCategory = \wp_insert_term(
+        //     \__('Dispatch', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Send data to services', 'gatographql'),
+        //     ]
+        // );
+        // if (!($dispatchEndpointCategory instanceof WP_Error)) {
+        //     $dispatchEndpointCategoryID = $dispatchEndpointCategory['term_id'];
+        //     $adminDispatchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $dispatchEndpointCategoryID;
+        // }
 
-        $adminFetchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $fetchEndpointCategory = \wp_insert_term(
-            \__('Fetch', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Fetch data from services', 'gatographql'),
-            ]
-        );
-        if (!($fetchEndpointCategory instanceof WP_Error)) {
-            $fetchEndpointCategoryID = $fetchEndpointCategory['term_id'];
-            $adminFetchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $fetchEndpointCategoryID;
-        }
+        // $adminFetchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $fetchEndpointCategory = \wp_insert_term(
+        //     \__('Fetch', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Fetch data from services', 'gatographql'),
+        //     ]
+        // );
+        // if (!($fetchEndpointCategory instanceof WP_Error)) {
+        //     $fetchEndpointCategoryID = $fetchEndpointCategory['term_id'];
+        //     $adminFetchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $fetchEndpointCategoryID;
+        // }
 
-        $adminGatewayPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $gatewayEndpointCategory = \wp_insert_term(
-            \__('Gateway', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('API Gateway', 'gatographql'),
-            ]
-        );
-        if (!($gatewayEndpointCategory instanceof WP_Error)) {
-            $gatewayEndpointCategoryID = $gatewayEndpointCategory['term_id'];
-            $adminGatewayPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $gatewayEndpointCategoryID;
-        }
+        // $adminGatewayPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $gatewayEndpointCategory = \wp_insert_term(
+        //     \__('Gateway', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('API Gateway', 'gatographql'),
+        //     ]
+        // );
+        // if (!($gatewayEndpointCategory instanceof WP_Error)) {
+        //     $gatewayEndpointCategoryID = $gatewayEndpointCategory['term_id'];
+        //     $adminGatewayPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $gatewayEndpointCategoryID;
+        // }
 
-        $adminSyncPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $syncEndpointCategory = \wp_insert_term(
-            \__('Sync', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Synchronize data across sites', 'gatographql'),
-            ]
-        );
-        if (!($syncEndpointCategory instanceof WP_Error)) {
-            $syncEndpointCategoryID = $syncEndpointCategory['term_id'];
-            $adminSyncPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $syncEndpointCategoryID;
-        }
+        // $adminSyncPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $syncEndpointCategory = \wp_insert_term(
+        //     \__('Sync', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Synchronize data across sites', 'gatographql'),
+        //     ]
+        // );
+        // if (!($syncEndpointCategory instanceof WP_Error)) {
+        //     $syncEndpointCategoryID = $syncEndpointCategory['term_id'];
+        //     $adminSyncPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $syncEndpointCategoryID;
+        // }
 
-        $adminWebhookPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
-        $webhookEndpointCategory = \wp_insert_term(
-            \__('Webhook', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Process incoming data via Webhooks', 'gatographql'),
-            ]
-        );
-        if (!($webhookEndpointCategory instanceof WP_Error)) {
-            $webhookEndpointCategoryID = $webhookEndpointCategory['term_id'];
-            $adminWebhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
-        }
+        // $adminWebhookPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $webhookEndpointCategory = \wp_insert_term(
+        //     \__('Webhook', 'gatographql'),
+        //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+        //     [
+        //         'description' => \__('Process incoming data via Webhooks', 'gatographql'),
+        //     ]
+        // );
+        // if (!($webhookEndpointCategory instanceof WP_Error)) {
+        //     $webhookEndpointCategoryID = $webhookEndpointCategory['term_id'];
+        //     $adminWebhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
+        // }
 
 
         /**
@@ -780,7 +780,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Report', 'gatographql'),
                 'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
-                'tax_input' => $adminReportPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminReportPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -789,7 +789,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Transform', 'gatographql'),
                 'post_excerpt' => \__('Queries to transform data', 'gatographql'),
-                'tax_input' => $adminTransformPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminTransformPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -798,7 +798,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Import', 'gatographql'),
                 'post_excerpt' => \__('Queries to import data', 'gatographql'),
-                'tax_input' => $adminImportPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminImportPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -807,7 +807,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Notify', 'gatographql'),
                 'post_excerpt' => \__('Queries to send notifications', 'gatographql'),
-                'tax_input' => $adminNotifyPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminNotifyPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -816,7 +816,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Automate', 'gatographql'),
                 'post_excerpt' => \__('Queries executed via automation', 'gatographql'),
-                'tax_input' => $adminAutomatePersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminAutomatePersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -831,12 +831,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Notify', 'gatographql'),
                 'post_excerpt' => \__('Queries to send notifications via automation', 'gatographql'),
-                'tax_input' => [
-                    $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
-                        ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
-                        ...$adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
-                    ]))
-                ],
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                // 'tax_input' => [
+                //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
+                //         ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                //         ...$adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                //     ]))
+                // ],
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -845,12 +846,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Transform', 'gatographql'),
                 'post_excerpt' => \__('Queries to transform data via automation', 'gatographql'),
-                'tax_input' => [
-                    $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
-                        ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
-                        ...$adminTransformPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
-                    ]))
-                ],
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                // 'tax_input' => [
+                //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
+                //         ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                //         ...$adminTransformPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                //     ]))
+                // ],
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -859,12 +861,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Dispatch', 'gatographql'),
                 'post_excerpt' => \__('Queries to send data to services via automation', 'gatographql'),
-                'tax_input' => [
-                    $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
-                        ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
-                        ...$adminDispatchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
-                    ]))
-                ],
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                // 'tax_input' => [
+                //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
+                //         ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                //         ...$adminDispatchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
+                //     ]))
+                // ],
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -873,7 +876,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Fetch', 'gatographql'),
                 'post_excerpt' => \__('Queries to fetch data from an external service', 'gatographql'),
-                'tax_input' => $adminFetchPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminFetchPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -882,7 +885,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Gateway', 'gatographql'),
                 'post_excerpt' => \__('Queries to process and adapt API data', 'gatographql'),
-                'tax_input' => $adminGatewayPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminGatewayPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -891,7 +894,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Sync', 'gatographql'),
                 'post_excerpt' => \__('Queries to synchronize data across sites', 'gatographql'),
-                'tax_input' => $adminSyncPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminSyncPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -900,7 +903,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Webhook', 'gatographql'),
                 'post_excerpt' => \__('Queries acting as webhooks, to process incoming data from an external service', 'gatographql'),
-                'tax_input' => $adminWebhookPersistedQueryTaxInputData,
+                'tax_input' => $adminPersistedQueryTaxInputData, //$adminWebhookPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
