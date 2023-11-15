@@ -753,12 +753,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ]),
             ]
         ));
-        $adminReportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+
+        $adminAncestorPersistedQueryOptions = array_merge(
             $adminPersistedQueryOptions,
+            [
+                'post_parent' => $adminAncestorPersistedQueryCustomPostID,
+            ]
+        );
+        $adminReportAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
+            $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Report', 'gatographql'),
                 'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminReportPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
