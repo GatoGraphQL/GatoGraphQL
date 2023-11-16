@@ -184,7 +184,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
     protected function getEntries(): array
     {
         $entries = [];
-        foreach ($this->getRecipeDataProvider()->getRecipeDataItems() as $recipeSlug => $recipeDataItem) {
+        foreach ($this->getRecipeDataProvider()->getRecipeSlugDataItems() as $recipeSlug => $recipeDataItem) {
             $entries[] = [
                 $recipeSlug,
                 ...$recipeDataItem

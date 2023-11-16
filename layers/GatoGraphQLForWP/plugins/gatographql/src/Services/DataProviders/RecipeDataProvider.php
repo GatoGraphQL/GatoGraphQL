@@ -12,7 +12,7 @@ class RecipeDataProvider
     /**
      * @return array<string,array{0:string,1?:string[],2?:string[]}> Key: recipe file slug, Value: [0] => title, [1] => array of extensions, [2] => array of bundles
      */
-    public function getRecipeDataItems(): array
+    public function getRecipeSlugDataItems(): array
     {
         return [
             'intro' => [
