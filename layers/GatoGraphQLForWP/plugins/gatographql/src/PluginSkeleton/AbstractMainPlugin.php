@@ -500,7 +500,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         \add_action(
             'init',
-            $this->maybeInstallInitialData(...),
+            $this->maybeInstallPluginSetupData(...),
             PHP_INT_MAX
         );
     }
@@ -521,7 +521,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \add_action(
             'init',
             function () use ($previousVersion): void {
-                $this->maybeInstallInitialData($previousVersion);
+                $this->maybeInstallPluginSetupData($previousVersion);
             },
             PHP_INT_MAX
         );
@@ -530,11 +530,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Install the initial plugin data
      */
-    protected function maybeInstallInitialData(?string $previousVersion = null): void
+    protected function maybeInstallPluginSetupData(?string $previousVersion = null): void
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->installInitialData()) {
+        if (!$moduleConfiguration->installPluginSetupData()) {
             return;
         }
 
@@ -552,7 +552,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
 
         \set_transient($transientName, true, 30);
-        $this->installInitialData($previousVersion);
+        $this->installPluginSetupData($previousVersion);
         \delete_transient($transientName);        
     }
 
@@ -562,10 +562,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * - $previousVersion = null => Activating the plugin for first time
      * - $previousVersion >= someVersion => Updating to a new version that has data to install
      */
-    protected function installInitialData(?string $previousVersion = null): void
+    protected function installPluginSetupData(?string $previousVersion = null): void
     {
         $versionCallbacks = [
-            '1.1' => $this->installInitialDataMinorVersion1Dot1(...),
+            '1.1' => $this->installPluginSetupDataMinorVersion1Dot1(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -578,7 +578,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Install initial data for v1.1
      */
-    protected function installInitialDataMinorVersion1Dot1(): void
+    protected function installPluginSetupDataMinorVersion1Dot1(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
