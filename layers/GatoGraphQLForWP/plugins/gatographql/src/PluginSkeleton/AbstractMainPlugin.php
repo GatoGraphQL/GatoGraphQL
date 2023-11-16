@@ -1011,9 +1011,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function readGraphQLPersistedQueryAndAdaptForBlock(string $relativeFilePath): string
     {
-        return $this->adaptGraphQLPersistedQueryForBlock(
-            $this->readGraphQLPersistedQuery($relativeFilePath)
-        );
+        $graphQLPersistedQuery = $this->readGraphQLPersistedQuery($relativeFilePath);
+        $graphQLPersistedQuery = $this->adaptGraphQLPersistedQueryForBlock($graphQLPersistedQuery);
+        return $graphQLPersistedQuery;
     }
 
     /**
