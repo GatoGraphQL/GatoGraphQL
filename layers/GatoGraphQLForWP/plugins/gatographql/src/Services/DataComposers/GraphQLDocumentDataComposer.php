@@ -37,10 +37,18 @@ class GraphQLDocumentDataComposer
                 )
             );
         }
-        return str_replace(
-            '',
-            '',
-            $graphQLDocument
+        $headerRequirementsSectionItems = [
+            '# *********************************************************************',
+        ];
+        return substr(
+            $graphQLDocument,
+            0,
+            $pos
+        )
+        . implode(PHP_EOL, $headerRequirementsSectionItems)
+        . substr(
+            $graphQLDocument,
+            $pos
         );
     }
 
