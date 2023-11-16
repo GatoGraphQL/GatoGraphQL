@@ -1011,6 +1011,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function readGraphQLPersistedQueryAndAdaptForBlock(string $relativeFilePath): string
     {
+        return $this->adaptGraphQLPersistedQueryForBlock(
+            $this->readGraphQLPersistedQuery($relativeFilePath)
+        );
+    }
+
+    /**
+     * Escape characters to display them correctly inside the client in the block
+     */
+    protected function adaptGraphQLPersistedQueryForBlock(string $graphQLPersistedQuery): string
+    {
         return str_replace(
             [
                 PHP_EOL,
@@ -1020,7 +1030,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 '\\n',
                 '\"',
             ],
-            $this->readGraphQLPersistedQuery($relativeFilePath)
+            $graphQLPersistedQuery
         );
     }
 
