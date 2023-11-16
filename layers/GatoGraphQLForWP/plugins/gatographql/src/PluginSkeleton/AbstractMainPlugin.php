@@ -17,7 +17,8 @@ use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFacto
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -533,6 +534,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function maybeInstallPluginSetupData(?string $previousVersion = null): void
     {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->installPluginSetupData()) {
+            return;
+        }
+
         /**
          * Use a transient to make sure that only one instance
          * will install the data. Otherwise, two WP REST API
@@ -543,22 +550,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $transient = \get_transient($transientName);
         if ($transient !== false) {
             // Another instance is executing this code right now
-            return;
-        }
-
-        /**
-         * Check if the functionality is enabled in the Settings.
-         *
-         * Watch out! This code is executed after the code above because
-         * otherwise `get_transient` always returns "1" for some reason...
-         */
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
-        if (
-            !$userSettingsManager->getSetting(
-                PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
-                PluginGeneralSettingsFunctionalityModuleResolver::OPTION_INSTALL_PLUGIN_SETUP_DATA
-            )
-        ) {
             return;
         }
 
