@@ -1002,7 +1002,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $webhookAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
-                'post_excerpt' => \__('Setup this persisted query as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox, and send it straight to a Mailchimp list.', 'gatographql'),
+                'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. Read https://gatographql.com/blog/instawp-gatographql/ for more information.', 'gatographql'),
                 'tax_input' => $webhookPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
