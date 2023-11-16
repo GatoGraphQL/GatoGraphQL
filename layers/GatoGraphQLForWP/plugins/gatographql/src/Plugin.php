@@ -98,7 +98,7 @@ class Plugin extends AbstractMainPlugin
                 RequestParams::TAB_DOCS,
                 RequestParams::DOC,
                 sprintf(
-                    'release-notes/%s',
+                    '../../release-notes/%s',
                     $minorReleaseVersion
                 )
             ));
