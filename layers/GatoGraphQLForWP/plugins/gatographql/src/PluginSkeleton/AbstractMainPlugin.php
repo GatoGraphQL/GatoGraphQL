@@ -502,9 +502,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * Execute logic after the plugin/extension has just been updated
+     */
+    public function pluginJustUpdated(string $storedVersion): void
+    {
+        parent::pluginJustUpdated($storedVersion);
+
+        /**
+         * Taxonomies are registered on "init", hence must insert
+         * data only after that.
+         *
+         * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
+         */
+        \add_action(
+            'init',
+            function () use ($storedVersion): void {
+                $this->maybeInstallInitialData($storedVersion);
+            },
+            PHP_INT_MAX
+        );
+    }
+
+    /**
      * Install the initial plugin data
      */
-    protected function maybeInstallInitialData(): void
+    protected function maybeInstallInitialData(?string $previousVersion = null): void
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -524,8 +546,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             // Another instance is executing this code right now
             return;
         }
+
         \set_transient($transientName, true, 30);
-        $this->installInitialData();
+        $this->installInitialData($previousVersion);
         \delete_transient($transientName);        
     }
 
@@ -534,7 +557,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * 
      * - Persisted Queries with common admin tasks
      */
-    protected function installInitialData(): void
+    protected function installInitialData(?string $previousVersion = null): void
+    {
+        if ($previousVersion === null || $previousVersion < '1.1') {
+            $this->installInitialDataMinorVersion1Dot1();
+        }
+    }
+
+    /**
+     * Install initial data for v1.1+
+     */
+    protected function installInitialDataMinorVersion1Dot1(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
