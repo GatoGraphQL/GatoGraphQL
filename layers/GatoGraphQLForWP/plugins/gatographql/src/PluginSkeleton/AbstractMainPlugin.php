@@ -1041,12 +1041,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $rootFolder = dirname(__DIR__, 2);
         $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
         $persistedQueryFile = $persistedQueriesFolder . '/' . $relativeFilePath . '.gql';
-        $query = $this->readFile($persistedQueryFile);
-        return str_replace(
-            PHP_EOL,
-            '\\n',
-            $query
-        );
+        return $this->readFile($persistedQueryFile);
     }
 
     protected function readFile(string $filePath): string
