@@ -38,6 +38,7 @@ class GraphQLDocumentDataComposer
             );
         }
         $headerRequirementsSectionItems = [
+            '',
             '*********************************************************************',
         ];
         return substr(
