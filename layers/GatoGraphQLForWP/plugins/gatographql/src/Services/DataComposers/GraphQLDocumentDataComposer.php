@@ -76,7 +76,7 @@ class GraphQLDocumentDataComposer
                 )
             );
         }
-        
+
         $headerRequirementsSectionItems = [
             '*********************************************************************',
             '',
@@ -91,7 +91,7 @@ class GraphQLDocumentDataComposer
         }
         
         $headerRequirementsSectionItems[] = '';
-        $headerRequirementsSectionItems[] = 'These Extensions are all included in any of these Bundles:';
+        $headerRequirementsSectionItems[] = \__('These Extensions are all included in any of these Bundles:', 'gatographql');
         
         foreach ($requiredBundles as $bundle) {
             $headerRequirementsSectionItems[] = sprintf(
