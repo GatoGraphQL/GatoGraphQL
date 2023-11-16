@@ -983,7 +983,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readGraphQLPersistedQueryAndAdaptForBlock('webhook/register-a-newsletter-subscriber-from-instawp-to-mailchimp'),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readGraphQLPersistedQueryAndAdaptForBlock(
+                                'webhook/register-a-newsletter-subscriber-from-instawp-to-mailchimp',
+                                'automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp'
+                            ),
                         ],
                     ],
                     [
@@ -1009,8 +1012,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         
     }
 
-    protected function readGraphQLPersistedQueryAndAdaptForBlock(string $relativeFilePath): string
-    {
+    /**
+     * @param string|null $recipeFileSlug The name of the recipe .md file, same as in RecipeDataProvider
+     */
+    protected function readGraphQLPersistedQueryAndAdaptForBlock(
+        string $relativeFilePath,
+        ?string $recipeFileSlug = null
+    ): string {
         $graphQLPersistedQuery = $this->readGraphQLPersistedQuery($relativeFilePath);
         $graphQLPersistedQuery = $this->adaptGraphQLPersistedQueryForBlock($graphQLPersistedQuery);
         return $graphQLPersistedQuery;
