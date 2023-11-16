@@ -11,12 +11,14 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleReso
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
 
 class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
 {
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?RecipeDataProvider $recipeDataProvider = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -30,6 +32,19 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
+    }
+    final public function setRecipeDataProvider(RecipeDataProvider $recipeDataProvider): void
+    {
+        $this->recipeDataProvider = $recipeDataProvider;
+    }
+    final protected function getRecipeDataProvider(): RecipeDataProvider
+    {
+        if ($this->recipeDataProvider === null) {
+            /** @var RecipeDataProvider */
+            $recipeDataProvider = $this->instanceManager->getInstance(RecipeDataProvider::class);
+            $this->recipeDataProvider = $recipeDataProvider;
+        }
+        return $this->recipeDataProvider;
     }
 
     public function getMenuPageSlug(): string
