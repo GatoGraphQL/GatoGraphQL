@@ -177,19 +177,6 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function installPluginSetupData(): bool
-    {
-        $envVariable = Environment::INSTALL_PLUGIN_SETUP_DATA;
-        $defaultValue = true;
-        $callback = EnvironmentValueHelpers::toBool(...);
-
-        return $this->retrieveConfigurationValueOrUseDefault(
-            $envVariable,
-            $defaultValue,
-            $callback,
-        );
-    }
-
     /**
      * These values are pre-defined.
      */
@@ -199,8 +186,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             Environment::GATOGRAPHQL_WEBSITE_URL,
             Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL,
             Environment::GATOGRAPHQL_EXTENSIONS_PAGE_URL,
-            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER,
-            Environment::INSTALL_PLUGIN_SETUP_DATA
+            Environment::USE_SCHEMA_CONFIGURATION_IN_INTERNAL_GRAPHQL_SERVER
                 => false,
             default
                 => parent::enableHook($envVariable),
