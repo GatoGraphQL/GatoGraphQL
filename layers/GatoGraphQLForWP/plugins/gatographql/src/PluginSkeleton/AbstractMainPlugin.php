@@ -564,8 +564,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     protected function installInitialData(?string $previousVersion = null): void
     {
-        if ($previousVersion === null || SemverWrapper::satisfies($previousVersion, '< 1.1')) {
-            $this->installInitialDataMinorVersion1Dot1();
+        $versionCallbacks = [
+            '1.1' => $this->installInitialDataMinorVersion1Dot1(...),
+        ];
+        foreach ($versionCallbacks as $version => $callback) {
+            if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
+                continue;
+            }
+            $callback();
         }
     }
 
