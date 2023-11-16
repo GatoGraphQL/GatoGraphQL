@@ -39,6 +39,7 @@ class GraphQLDocumentDataComposer
         }
         $headerRequirementsSectionItems = [
             '*********************************************************************',
+            '',
         ];
         $headerRequirementsSectionItems[] = '';
         return substr(
@@ -53,6 +54,7 @@ class GraphQLDocumentDataComposer
                 $headerRequirementsSectionItems
             )
         )
+        . PHP_EOL
         . substr(
             $graphQLDocument,
             $pos
