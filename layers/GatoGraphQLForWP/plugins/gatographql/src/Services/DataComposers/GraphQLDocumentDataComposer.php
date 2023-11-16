@@ -6,6 +6,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\DataComposers;
 
 class GraphQLDocumentDataComposer
 {
+    public const GRAPHQL_DOCUMENT_HEADER_SEPARATOR = '########################################################################';
+    
     /**
      * Append the required extensions and bundles to the header
      * in the persisted query.
