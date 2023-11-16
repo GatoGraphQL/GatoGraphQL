@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\DataComposers;
 
+use RuntimeException;
+
 class GraphQLDocumentDataComposer
 {
     public const GRAPHQL_DOCUMENT_HEADER_SEPARATOR = '########################################################################';
-    
+
     /**
      * Append the required extensions and bundles to the header
      * in the persisted query.
@@ -16,6 +18,25 @@ class GraphQLDocumentDataComposer
         string $graphQLDocument,
         string $recipeFileSlug,
     ): string {
+        /**
+         * Find the last instance of the header separator
+         * (there will normally be two instances)
+         */
+        $pos = strrpos(
+            $graphQLDocument,
+            self::GRAPHQL_DOCUMENT_HEADER_SEPARATOR
+        );
+        if ($pos === false) {
+            // There is no header => throw error!
+            throw new RuntimeException(
+                sprintf(
+                    \__('There is no header in GraphQL document for recipe "%s": %s%s'),
+                    $recipeFileSlug,
+                    PHP_EOL,
+                    $graphQLDocument
+                )
+            );
+        }
         return str_replace(
             '',
             '',
