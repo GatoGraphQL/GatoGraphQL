@@ -152,10 +152,12 @@ class GraphQLDocumentDataComposer
             [
                 PHP_EOL,
                 '"',
+                '&',
             ],
             [
                 '\\n',
                 '\"',
+                '\&',
             ],
             $graphQLDocument
         );
