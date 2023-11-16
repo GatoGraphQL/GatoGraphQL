@@ -1022,7 +1022,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $graphQLPersistedQuery = $this->readGraphQLPersistedQuery($relativeFilePath);
         $graphQLPersistedQuery = $this->adaptGraphQLPersistedQueryForBlock($graphQLPersistedQuery);
         if ($recipeFileSlug !== null) {
-            $graphQLPersistedQuery = $this->addRequiredBundlesAndExtensionsToGraphQLPersistedQueryHeader($graphQLPersistedQuery);
+            $graphQLPersistedQuery = $this->addRequiredBundlesAndExtensionsToGraphQLPersistedQueryHeader(
+                $graphQLPersistedQuery,
+                $recipeFileSlug,
+            );
         }
         return $graphQLPersistedQuery;
     }
