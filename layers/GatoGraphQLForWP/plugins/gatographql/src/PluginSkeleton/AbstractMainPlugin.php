@@ -425,6 +425,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
 
+                $previousPluginVersions = $storedPluginVersions;
+
                 // Recalculate the updated entry and update on the DB
                 $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
                 foreach (array_merge($justFirstTimeActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
@@ -445,6 +447,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     function () use (
                         $isMainPluginJustFirstTimeActivated,
                         $isMainPluginJustUpdated,
+                        $previousPluginVersions,
                         $storedPluginVersions,
                         $justFirstTimeActivatedExtensions,
                         $justUpdatedExtensions,
@@ -452,13 +455,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         if ($isMainPluginJustFirstTimeActivated) {
                             $this->pluginJustFirstTimeActivated();
                         } elseif ($isMainPluginJustUpdated) {
-                            $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName]);
+                            $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName], $previousPluginVersions[$this->pluginBaseName]);
                         }
                         foreach ($justFirstTimeActivatedExtensions as $extensionBaseName => $extensionInstance) {
                             $extensionInstance->pluginJustFirstTimeActivated();
                         }
                         foreach ($justUpdatedExtensions as $extensionBaseName => $extensionInstance) {
-                            $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName]);
+                            $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName], $previousPluginVersions[$extensionBaseName]);
                         }
                     },
                     PluginLifecyclePriorities::AFTER_EVERYTHING
@@ -505,9 +508,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Execute logic after the plugin/extension has just been updated
      */
-    public function pluginJustUpdated(string $storedVersion): void
+    public function pluginJustUpdated(string $newVersion, string $previousVersion): void
     {
-        parent::pluginJustUpdated($storedVersion);
+        parent::pluginJustUpdated($newVersion, $previousVersion);
 
         /**
          * Taxonomies are registered on "init", hence must insert
@@ -517,8 +520,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         \add_action(
             'init',
-            function () use ($storedVersion): void {
-                $this->maybeInstallInitialData($storedVersion);
+            function () use ($previousVersion): void {
+                $this->maybeInstallInitialData($previousVersion);
             },
             PHP_INT_MAX
         );

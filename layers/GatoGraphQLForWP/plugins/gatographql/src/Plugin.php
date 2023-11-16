@@ -32,9 +32,9 @@ class Plugin extends AbstractMainPlugin
     /**
      * Show an admin notice with a link to the latest release notes
      */
-    public function pluginJustUpdated(string $storedVersion): void
+    public function pluginJustUpdated(string $newVersion, string $previousVersion): void
     {
-        parent::pluginJustUpdated($storedVersion);
+        parent::pluginJustUpdated($newVersion, $previousVersion);
 
         // Do not execute when doing Ajax, since we can't show the one-time
         // admin notice to the user then
@@ -53,8 +53,8 @@ class Plugin extends AbstractMainPlugin
             return;
         }
         // Show admin notice only when updating MAJOR or MINOR versions. No need for PATCH versions
-        $currentMinorReleaseVersion = $this->getMinorReleaseVersion($this->pluginVersion);
-        $previousMinorReleaseVersion = $this->getMinorReleaseVersion($storedVersion);
+        $currentMinorReleaseVersion = $this->getMinorReleaseVersion($newVersion);
+        $previousMinorReleaseVersion = $this->getMinorReleaseVersion($previousVersion);
         if ($currentMinorReleaseVersion === $previousMinorReleaseVersion) {
             return;
         }
