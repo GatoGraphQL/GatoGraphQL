@@ -9,8 +9,6 @@ use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\Module as GatoGraphQLModule;
-use GatoGraphQL\GatoGraphQL\Environment as GatoGraphQLEnvironment;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\ClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\DeprecatedClientFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
@@ -106,8 +104,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             // Install Plugin Setup Data
             [
-                'class' => GatoGraphQLModule::class,
-                'envVariable' => GatoGraphQLEnvironment::INSTALL_PLUGIN_SETUP_DATA,
+                'class' => Module::class,
+                'envVariable' => Environment::INSTALL_PLUGIN_SETUP_DATA,
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_INSTALL_PLUGIN_SETUP_DATA,
             ],
@@ -645,6 +643,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
         return [
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::INSTALL_PLUGIN_SETUP_DATA,
+            ],
             [
                 'class' => Module::class,
                 'envVariable' => Environment::ADD_EXCERPT_AS_DESCRIPTION,
