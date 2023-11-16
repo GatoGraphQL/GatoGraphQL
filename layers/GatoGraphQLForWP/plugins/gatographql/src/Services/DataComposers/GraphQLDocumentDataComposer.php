@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\DataComposers;
 
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
 use PoP\Root\Services\BasicServiceTrait;
 use RuntimeException;
@@ -14,8 +17,22 @@ class GraphQLDocumentDataComposer
     
     public const GRAPHQL_DOCUMENT_HEADER_SEPARATOR = '########################################################################';
 
+    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?RecipeDataProvider $recipeDataProvider = null;
 
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    final protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
+    }
     final public function setRecipeDataProvider(RecipeDataProvider $recipeDataProvider): void
     {
         $this->recipeDataProvider = $recipeDataProvider;
@@ -51,11 +68,12 @@ class GraphQLDocumentDataComposer
                 )
             );
         }
-        $requiredExtensions = $recipeDataItem[1] ?? [];
-        if ($requiredExtensions === []) {
+        $requiredExtensionModules = $recipeDataItem[1] ?? [];
+        if ($requiredExtensionModules === []) {
             return $graphQLDocument;
         }
-        $requiredBundles = $recipeDataItem[2] ?? [];
+        $requiredBundleModules = $recipeDataItem[2] ?? [];
+        $requiredBundleModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
 
         /**
          * Find the last instance of the header separator
@@ -83,20 +101,24 @@ class GraphQLDocumentDataComposer
             \__('Required Extensions:', 'gatographql'),
         ];
 
-        foreach ($requiredExtensions as $extension) {
+        foreach ($requiredExtensionModules as $extensionModule) {
+            /** @var ExtensionModuleResolverInterface */
+            $extensionModuleResolver = $this->getModuleRegistry()->getModuleResolver($extensionModule);
             $headerRequirementsSectionItems[] = sprintf(
                 \__('  - %s', 'gatographql'),
-                $extension
+                $extensionModuleResolver->getName($extensionModule)
             );
         }
         
         $headerRequirementsSectionItems[] = '';
         $headerRequirementsSectionItems[] = \__('These Extensions are all included in any of these Bundles:', 'gatographql');
         
-        foreach ($requiredBundles as $bundle) {
+        foreach ($requiredBundleModules as $bundleModule) {
+            /** @var ExtensionModuleResolverInterface */
+            $bundleModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleModule);
             $headerRequirementsSectionItems[] = sprintf(
                 \__('  - %s', 'gatographql'),
-                $bundle
+                $bundleModuleResolver->getName($bundleModule)
             );
         }
         
