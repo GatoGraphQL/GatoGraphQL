@@ -29,6 +29,7 @@ use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
+use GatoGraphQL\GatoGraphQL\Services\DataComposers\GraphQLDocumentDataComposer;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -36,8 +37,8 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
-use PoP\RootWP\StateManagers\HookManager;
 
+use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
@@ -1020,47 +1021,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ?string $recipeFileSlug = null
     ): string {
         $graphQLPersistedQuery = $this->readGraphQLPersistedQuery($relativeFilePath);
-        $graphQLPersistedQuery = $this->adaptGraphQLPersistedQueryForBlock($graphQLPersistedQuery);
+
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLDocumentDataComposer */
+        $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
+
+        $graphQLPersistedQuery = $graphQLDocumentDataComposer->encodeGraphQLDocumentForOutput($graphQLPersistedQuery);
         if ($recipeFileSlug !== null) {
-            $graphQLPersistedQuery = $this->addRequiredBundlesAndExtensionsToGraphQLPersistedQueryHeader(
+            $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
                 $graphQLPersistedQuery,
                 $recipeFileSlug,
             );
         }
         return $graphQLPersistedQuery;
-    }
-
-    /**
-     * Append the required extensions and bundles to the header
-     * in the persisted query.
-     */
-    protected function addRequiredBundlesAndExtensionsToGraphQLPersistedQueryHeader(
-        string $graphQLPersistedQuery,
-        string $recipeFileSlug,
-    ): string {
-        return str_replace(
-            '',
-            '',
-            $graphQLPersistedQuery
-        );
-    }
-
-    /**
-     * Escape characters to display them correctly inside the client in the block
-     */
-    protected function adaptGraphQLPersistedQueryForBlock(string $graphQLPersistedQuery): string
-    {
-        return str_replace(
-            [
-                PHP_EOL,
-                '"',
-            ],
-            [
-                '\\n',
-                '\"',
-            ],
-            $graphQLPersistedQuery
-        );
     }
 
     protected function readGraphQLPersistedQuery(string $relativeFilePath): string
