@@ -4,24 +4,25 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\DataProviders;
 
+use GatoGraphQL\GatoGraphQL\Constants\Recipes;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 
 class RecipeDataProvider
-{
+{    
     /**
      * @return array<string,array{0:string,1?:string[],2?:string[]}> Key: recipe file slug, Value: [0] => title, [1] => array of extensions, [2] => array of bundles
      */
     public function getRecipeSlugDataItems(): array
     {
         return [
-            'intro' => [
+            Recipes::INTRO => [
                 \__('Intro', 'gatographql'),
             ],
-            'searching-wordpress-data' => [
+            Recipes::SEARCHING_WORDPRESS_DATA => [
                 \__('Searching WordPress data', 'gatographql'),
             ],
-            'querying-dynamic-data' => [
+            Recipes::QUERYING_DYNAMIC_DATA => [
                 \__('Querying dynamic data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -32,7 +33,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'exposing-public-and-private-endpoints' => [
+            Recipes::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
                 \__('Exposing public and private endpoints', 'gatographql'),
                 [
                     ExtensionModuleResolver::ACCESS_CONTROL,
@@ -43,10 +44,10 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::PUBLIC_API,
                 ]
             ],
-            'complementing-wp-cli' => [
+            Recipes::COMPLEMENTING_WP_CLI => [
                 \__('Complementing WP-CLI', 'gatographql')
             ],
-            'injecting-multiple-resources-into-wp-cli' => [
+            Recipes::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
                 \__('Injecting multiple resources into WP-CLI', 'gatographql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -57,10 +58,10 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'feeding-data-to-blocks-in-the-editor' => [
+            Recipes::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
                 \__('Feeding data to blocks in the editor', 'gatographql'),
             ],
-            'dry-code-for-blocks-in-javascript-and-php' => [
+            Recipes::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
                 \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
                 [
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
@@ -69,10 +70,10 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'mapping-js-components-to-gutenberg-blocks' => [
+            Recipes::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
                 \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
             ],
-            'duplicating-a-blog-post' => [
+            Recipes::DUPLICATING_A_BLOG_POST => [
                 \__('Duplicating a blog post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -84,7 +85,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'duplicating-multiple-blog-posts-at-once' => [
+            Recipes::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE => [
                 \__('Duplicating multiple blog posts at once', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -99,7 +100,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'customizing-content-for-different-users' => [
+            Recipes::CUSTOMIZING_CONTENT_FOR_DIFFERENT_USERS => [
                 \__('Customizing content for different users', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -112,7 +113,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'search-replace-and-store-again' => [
+            Recipes::SEARCH_REPLACE_AND_STORE_AGAIN => [
                 \__('Search, replace, and store again', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -124,7 +125,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'adapting-content-in-bulk' => [
+            Recipes::ADAPTING_CONTENT_IN_BULK => [
                 \__('Adapting content in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -137,7 +138,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'site-migrations' => [
+            Recipes::SITE_MIGRATIONS => [
                 \__('Site migrations', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -149,7 +150,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'inserting-removing-a-gutenberg-block-in-bulk' => [
+            Recipes::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK => [
                 \__('Inserting/Removing a (Gutenberg) block in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -162,7 +163,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'retrieving-structured-data-from-blocks' => [
+            Recipes::RETRIEVING_STRUCTURED_DATA_FROM_BLOCKS => [
                 \__('Retrieving structured data from blocks', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -174,7 +175,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post' => [
+            Recipes::MODIFYING_AND_STORING_AGAIN_THE_IMAGE_URLS_FROM_ALL_IMAGE_BLOCKS_IN_A_POST => [
                 \__('Modifying (and storing again) the image URLs from all Image blocks in a post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -189,7 +190,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'translating-block-content-in-a-post-to-a-different-language' => [
+            Recipes::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
                 \__('Translating block content in a post to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -204,7 +205,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'bulk-translating-block-content-in-multiple-posts-to-a-different-language' => [
+            Recipes::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
                 \__('Bulk translating block content in multiple posts to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -219,7 +220,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'sending-emails-with-pleasure' => [
+            Recipes::SENDING_EMAILS_WITH_PLEASURE => [
                 \__('Sending emails with pleasure', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -232,7 +233,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'sending-a-notification-when-there-is-a-new-post' => [
+            Recipes::SENDING_A_NOTIFICATION_WHEN_THERE_IS_A_NEW_POST => [
                 \__('Sending a notification when there is a new post', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
@@ -247,7 +248,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'sending-a-daily-summary-of-activity' => [
+            Recipes::SENDING_A_DAILY_SUMMARY_OF_ACTIVITY => [
                 \__('Sending a daily summary of activity', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
@@ -263,7 +264,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'automatically-adding-a-mandatory-block' => [
+            Recipes::AUTOMATICALLY_ADDING_A_MANDATORY_BLOCK => [
                 \__('Automatically adding a mandatory block', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -275,7 +276,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'interacting-with-external-services-via-webhooks' => [
+            Recipes::INTERACTING_WITH_EXTERNAL_SERVICES_VIA_WEBHOOKS => [
                 \__('Interacting with external services via webhooks', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -288,7 +289,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'retrieving-data-from-an-external-api' => [
+            Recipes::RETRIEVING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Retrieving data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
@@ -303,7 +304,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'combining-user-data-from-different-sources' => [
+            Recipes::COMBINING_USER_DATA_FROM_DIFFERENT_SOURCES => [
                 \__('Combining user data from different sources', 'gatographql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -314,7 +315,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
-            'not-leaking-credentials-when-connecting-to-services' => [
+            Recipes::NOT_LEAKING_CREDENTIALS_WHEN_CONNECTING_TO_SERVICES => [
                 \__('Not leaking credentials when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -326,7 +327,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'handling-errors-when-connecting-to-services' => [
+            Recipes::HANDLING_ERRORS_WHEN_CONNECTING_TO_SERVICES => [
                 \__('Handling errors when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -340,7 +341,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'creating-an-api-gateway' => [
+            Recipes::CREATING_AN_API_GATEWAY => [
                 \__('Creating an API gateway', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -358,7 +359,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'transforming-data-from-an-external-api' => [
+            Recipes::TRANSFORMING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Transforming data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -374,7 +375,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'filtering-data-from-an-external-api' => [
+            Recipes::FILTERING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Filtering data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -387,7 +388,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'pinging-external-services' => [
+            Recipes::PINGING_EXTERNAL_SERVICES => [
                 \__('Pinging external services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -400,7 +401,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'updating-large-sets-of-data' => [
+            Recipes::UPDATING_LARGE_SETS_OF_DATA => [
                 \__('Updating large sets of data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -416,7 +417,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'importing-a-post-from-another-wordpress-site' => [
+            Recipes::IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE => [
                 \__('Importing a post from another WordPress site', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -433,7 +434,7 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            'automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp' => [
+            Recipes::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP => [
                 \__('Automatically sending newsletter subscribers from InstaWP to Mailchimp', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
