@@ -564,7 +564,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * The plugin's setup data will be installed if:
      *
      * - $previousVersion = null => Activating the plugin for first time
-     * - $previousVersion >= someVersion => Updating to a new version that has data to install
+     * - $previousVersion < someVersion => Updating to a new version that has data to install
      */
     protected function installPluginSetupData(?string $previousVersion = null): void
     {
