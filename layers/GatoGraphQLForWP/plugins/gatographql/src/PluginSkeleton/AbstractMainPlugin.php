@@ -1054,7 +1054,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $query = file_get_contents($filePath);
         if ($query === false) {
             throw new RuntimeException(
-                sprintf('Loading GraphQL query file \'%s\' failed', $query)
+                sprintf('Loading file \'%s\' failed', $query)
             );
         }
         return $query;
