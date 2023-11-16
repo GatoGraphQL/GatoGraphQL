@@ -557,7 +557,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Install initial data, if:
+     * Install the plugin's setup data, if:
      *
      * - $previousVersion = null => Activating the plugin for first time
      * - $previousVersion >= someVersion => Updating to a new version that has data to install
@@ -575,9 +575,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
     }
 
-    /**
-     * Install initial data for v1.1
-     */
     protected function installPluginSetupDataForVersion1Dot1(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
