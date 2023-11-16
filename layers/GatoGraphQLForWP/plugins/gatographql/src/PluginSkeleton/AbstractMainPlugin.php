@@ -1032,7 +1032,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * Append the required extensions and bundles to the header
-     * in the persisted query
+     * in the persisted query.
      */
     protected function addRequiredBundlesAndExtensionsToGraphQLPersistedQueryHeader(
         string $graphQLPersistedQuery,
