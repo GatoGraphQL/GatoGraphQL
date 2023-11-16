@@ -984,7 +984,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readGraphQLPersistedQueryAndAdaptForBlock(
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'webhook/register-a-newsletter-subscriber-from-instawp-to-mailchimp',
                                 'automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp'
                             ),
@@ -1016,11 +1016,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * @param string|null $recipeFileSlug The name of the recipe .md file, same as in RecipeDataProvider
      */
-    protected function readGraphQLPersistedQueryAndAdaptForBlock(
+    protected function readSetupGraphQLPersistedQueryAndEncodeForOutput(
         string $relativeFilePath,
         ?string $recipeFileSlug = null
     ): string {
-        $graphQLPersistedQuery = $this->readGraphQLPersistedQuery($relativeFilePath);
+        $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
 
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDocumentDataComposer */
@@ -1036,7 +1036,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         return $graphQLPersistedQuery;
     }
 
-    protected function readGraphQLPersistedQuery(string $relativeFilePath): string
+    protected function readSetupGraphQLPersistedQuery(string $relativeFilePath): string
     {
         $rootFolder = dirname(__DIR__, 2);
         $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
