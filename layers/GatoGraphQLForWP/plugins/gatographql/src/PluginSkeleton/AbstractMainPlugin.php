@@ -565,7 +565,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function installPluginSetupData(?string $previousVersion = null): void
     {
         $versionCallbacks = [
-            '1.1' => $this->installPluginSetupDataMinorVersion1Dot1(...),
+            '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -578,7 +578,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     /**
      * Install initial data for v1.1
      */
-    protected function installPluginSetupDataMinorVersion1Dot1(): void
+    protected function installPluginSetupDataForVersion1Dot1(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
