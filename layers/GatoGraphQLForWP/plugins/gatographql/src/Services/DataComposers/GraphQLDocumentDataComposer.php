@@ -16,7 +16,7 @@ class GraphQLDocumentDataComposer
      */
     public function addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
         string $graphQLDocument,
-        string $recipeFileSlug,
+        string $recipeSlug,
     ): string {
         /**
          * Find the last instance of the header separator
@@ -31,7 +31,7 @@ class GraphQLDocumentDataComposer
             throw new RuntimeException(
                 sprintf(
                     \__('There is no header in GraphQL document for recipe "%s": %s%s'),
-                    $recipeFileSlug,
+                    $recipeSlug,
                     PHP_EOL,
                     $graphQLDocument
                 )

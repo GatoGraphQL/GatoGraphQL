@@ -1015,21 +1015,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * @param string|null $recipeFileSlug The name of the recipe .md file, same as in RecipeDataProvider
+     * @param string|null $recipeSlug The slug of the recipe's .md file, same as in RecipeDataProvider
      */
     protected function readSetupGraphQLPersistedQueryAndEncodeForOutput(
         string $relativeFilePath,
-        ?string $recipeFileSlug = null
+        ?string $recipeSlug = null
     ): string {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDocumentDataComposer */
         $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
 
         $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-        if ($recipeFileSlug !== null) {
+        if ($recipeSlug !== null) {
             $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
                 $graphQLPersistedQuery,
-                $recipeFileSlug,
+                $recipeSlug,
             );
         }
         $graphQLPersistedQuery = $graphQLDocumentDataComposer->encodeGraphQLDocumentForOutput($graphQLPersistedQuery);
