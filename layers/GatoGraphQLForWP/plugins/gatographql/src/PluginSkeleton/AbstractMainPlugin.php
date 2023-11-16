@@ -518,7 +518,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * requests happening simultaneously might both execute
          * this logic
          */
-        $transientName = 'gatographql-install-initial-data';
+        $transientName = 'gatographql-installing-initial-data';
         $transient = \get_transient($transientName);
         if ($transient !== false) {
             // Another instance is executing this code right now
