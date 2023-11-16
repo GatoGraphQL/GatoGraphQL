@@ -9,7 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Tested with WordPress 6.4 ("Tested up to: 6.4")
-- Install initial data: Persisted Queries for common admin tasks
+- Install setup data: Persisted Queries for common admin tasks
 
 ### Fixed
 
