@@ -38,7 +38,6 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use GraphQLByPoP\GraphQLServer\AppStateProviderServices\GraphQLServerAppStateProviderServiceInterface;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\RootWP\AppLoader as WPDeferredAppLoader;
-
 use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
@@ -48,6 +47,7 @@ use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
 use WP_Upgrader;
+
 use function __;
 use function add_action;
 use function do_action;
