@@ -502,9 +502,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Install initial data:
-     * 
-     * - Persisted Queries with common admin tasks
+     * Install the initial plugin data
      */
     protected function maybeInstallInitialData(): void
     {
@@ -527,8 +525,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             return;
         }
         \set_transient($transientName, true, 30);
-        
-        
+        $this->installInitialData();
+        \delete_transient($transientName);        
+    }
+
+    /**
+     * Install initial data:
+     * 
+     * - Persisted Queries with common admin tasks
+     */
+    protected function installInitialData(): void
+    {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
@@ -1025,10 +1032,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the Persisted Queries
          */
-        // @todo Complete with installing Persisted Queries
-
-
-        \delete_transient($transientName);        
+        // @todo Complete with installing Persisted Queries    
     }
 
     /**
