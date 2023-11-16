@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use Exception;
+use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Exception\IOException;
 use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GatoGraphQL\GatoGraphQL\App;
@@ -46,8 +47,8 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
-use WP_Upgrader;
 
+use WP_Upgrader;
 use function __;
 use function add_action;
 use function do_action;
@@ -553,19 +554,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Install initial data:
-     * 
-     * - Persisted Queries with common admin tasks
+     * Install initial data, if:
+     *
+     * - Activating the plugin for first time
+     * - Updating to a new version with data to install
      */
     protected function installInitialData(?string $previousVersion = null): void
     {
-        if ($previousVersion === null || $previousVersion < '1.1') {
+        if ($previousVersion === null || SemverWrapper::satisfies($previousVersion, '< 1.1')) {
             $this->installInitialDataMinorVersion1Dot1();
         }
     }
 
     /**
-     * Install initial data for v1.1+
+     * Install initial data for v1.1
      */
     protected function installInitialDataMinorVersion1Dot1(): void
     {
