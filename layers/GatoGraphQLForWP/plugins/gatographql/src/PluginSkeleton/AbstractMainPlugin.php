@@ -1051,13 +1051,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function readFile(string $filePath): string
     {
-        $query = file_get_contents($filePath);
-        if ($query === false) {
+        $file = file_get_contents($filePath);
+        if ($file === false) {
             throw new RuntimeException(
-                sprintf('Loading file \'%s\' failed', $query)
+                sprintf('Loading file \'%s\' failed', $file)
             );
         }
-        return $query;
+        return $file;
     }
 
     /**
