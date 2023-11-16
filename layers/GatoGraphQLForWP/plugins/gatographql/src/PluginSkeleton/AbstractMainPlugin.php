@@ -513,6 +513,21 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if (!$moduleConfiguration->installInitialData()) {
             return;
         }
+
+        /**
+         * Use a transient to make sure that only one instance
+         * will install the data. Otherwise, two WP REST API
+         * requests happening simultaneously might both execute
+         * this logic
+         */
+        $transientName = 'gatographql-install-initial-data';
+        $transient = \get_transient($transientName);
+        if ($transient !== false) {
+            // Another instance is executing this code right now
+            return;
+        }
+        \set_transient($transientName, true, 30);
+        
         
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
@@ -1011,7 +1026,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * Create the Persisted Queries
          */
         // @todo Complete with installing Persisted Queries
-        
+
+
+        \delete_transient($transientName);        
     }
 
     /**
