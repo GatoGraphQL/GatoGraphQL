@@ -38,14 +38,20 @@ class GraphQLDocumentDataComposer
             );
         }
         $headerRequirementsSectionItems = [
-            '# *********************************************************************',
+            '*********************************************************************',
         ];
         return substr(
             $graphQLDocument,
             0,
             $pos
         )
-        . implode(PHP_EOL, $headerRequirementsSectionItems)
+        . implode(
+            PHP_EOL,
+            array_map(
+                fn (string $item) => '# ' . $item,
+                $headerRequirementsSectionItems
+            )
+        )
         . substr(
             $graphQLDocument,
             $pos
