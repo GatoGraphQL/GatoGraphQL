@@ -1021,19 +1021,18 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         string $relativeFilePath,
         ?string $recipeFileSlug = null
     ): string {
-        $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDocumentDataComposer */
         $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
 
-        $graphQLPersistedQuery = $graphQLDocumentDataComposer->encodeGraphQLDocumentForOutput($graphQLPersistedQuery);
+        $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
         if ($recipeFileSlug !== null) {
             $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
                 $graphQLPersistedQuery,
                 $recipeFileSlug,
             );
         }
+        $graphQLPersistedQuery = $graphQLDocumentDataComposer->encodeGraphQLDocumentForOutput($graphQLPersistedQuery);
         return $graphQLPersistedQuery;
     }
 
