@@ -1068,7 +1068,18 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID,
+                        ],
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                    ]
                 ])),
             ]
         ));
