@@ -6,6 +6,10 @@ namespace PoPSchema\DirectiveCommons\DirectiveResolvers;
 
 use PoPSchema\DirectiveCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPSchema\DirectiveCommons\ObjectModels\TypedDataValidationPayload;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\HTMLScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLAbsolutePathScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -27,6 +31,10 @@ abstract class AbstractTransformStringFieldValueFieldDirectiveResolver extends A
             IDScalarTypeResolver::class,
             AnyBuiltInScalarScalarTypeResolver::class,
             AnyStringScalarScalarTypeResolver::class,
+            EmailScalarTypeResolver::class,
+            HTMLScalarTypeResolver::class,
+            URLAbsolutePathScalarTypeResolver::class,
+            URLScalarTypeResolver::class,
         ];
     }
 
