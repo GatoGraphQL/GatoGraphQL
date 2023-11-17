@@ -23,12 +23,16 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\AbstractGraphiQLBlock;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\CustomEndpointOptionsBlock;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointGraphiQLBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointSchemaConfigurationBlock;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\EndpointVoyagerBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointAPIHierarchyBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\DataComposers\GraphQLDocumentDataComposer;
@@ -44,11 +48,11 @@ use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
+
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
 use WP_Upgrader;
-
 use function __;
 use function add_action;
 use function do_action;
@@ -645,7 +649,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var GraphQLEndpointCategoryTaxonomy */
         $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
 
-        $adminPersistedQueryTaxInputData = [
+        $adminEndpointTaxInputData = [
             $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [],
         ];
         $adminEndpointCategory = \wp_insert_term(
@@ -657,7 +661,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         if (!($adminEndpointCategory instanceof WP_Error)) {
             $adminEndpointCategoryID = $adminEndpointCategory['term_id'];
-            $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
+            $adminEndpointTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
         }
 
         $webhookPersistedQueryTaxInputData = [
@@ -675,8 +679,52 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $webhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
         }
 
+        /**
+         * Create custom endpoint
+         */
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $graphQLCustomEndpointCustomPostType = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+        /** @var CustomEndpointOptionsBlock */
+        $customEndpointOptionsBlock = $instanceManager->getInstance(CustomEndpointOptionsBlock::class);
+        /** @var EndpointGraphiQLBlock */
+        $endpointGraphiQLBlock = $instanceManager->getInstance(EndpointGraphiQLBlock::class);
+        /** @var EndpointVoyagerBlock */
+        $endpointVoyagerBlock = $instanceManager->getInstance(EndpointVoyagerBlock::class);
+                
+        $adminCustomEndpointOptions = [
+			'post_status' => 'private',
+			'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
+        ];
+        \wp_insert_post(array_merge(
+            $adminCustomEndpointOptions,
+            [
+                'post_title' => \__('Nested mutations', 'gatographql'),
+                'post_excerpt' => \__('Client to execute queries including nested mutations', 'gatographql'),
+                'tax_input' => $adminEndpointTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID,
+                        ],
+                    ],
+                    [
+                        'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
+                    ],
+                    [
+                        'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
+                    ],
+                    [
+                        'blockName' => $endpointVoyagerBlock->getBlockFullName(),
+                    ]
+                ])),
+            ]
+        ));
+
         // @todo Remove commented code
-        // $adminReportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminReportPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $reportEndpointCategory = \wp_insert_term(
         //     \__('Report', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -689,7 +737,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminReportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $reportEndpointCategoryID;
         // }
 
-        // $adminTransformPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminTransformPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $transformEndpointCategory = \wp_insert_term(
         //     \__('Transform', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -702,7 +750,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminTransformPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $transformEndpointCategoryID;
         // }
 
-        // $adminImportPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminImportPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $importEndpointCategory = \wp_insert_term(
         //     \__('Import', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -715,7 +763,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminImportPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $importEndpointCategoryID;
         // }
 
-        // $adminNotifyPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminNotifyPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $notifyEndpointCategory = \wp_insert_term(
         //     \__('Notify', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -728,7 +776,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminNotifyPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $notifyEndpointCategoryID;
         // }
 
-        // $adminAutomatePersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminAutomatePersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $automateEndpointCategory = \wp_insert_term(
         //     \__('Automate', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -741,7 +789,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $automateEndpointCategoryID;
         // }
 
-        // $adminDispatchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminDispatchPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $dispatchEndpointCategory = \wp_insert_term(
         //     \__('Dispatch', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -754,7 +802,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminDispatchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $dispatchEndpointCategoryID;
         // }
 
-        // $adminFetchPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminFetchPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $fetchEndpointCategory = \wp_insert_term(
         //     \__('Fetch', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -767,7 +815,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminFetchPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $fetchEndpointCategoryID;
         // }
 
-        // $adminGatewayPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminGatewayPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $gatewayEndpointCategory = \wp_insert_term(
         //     \__('Gateway', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -780,7 +828,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminGatewayPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $gatewayEndpointCategoryID;
         // }
 
-        // $adminSyncPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminSyncPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $syncEndpointCategory = \wp_insert_term(
         //     \__('Sync', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -793,7 +841,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     $adminSyncPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $syncEndpointCategoryID;
         // }
 
-        // $adminWebhookPersistedQueryTaxInputData = $adminPersistedQueryTaxInputData;
+        // $adminWebhookPersistedQueryTaxInputData = $adminEndpointTaxInputData;
         // $webhookEndpointCategory = \wp_insert_term(
         //     \__('Webhook', 'gatographql'),
         //     $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
@@ -814,8 +862,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         /** @var PersistedQueryEndpointGraphiQLBlock */
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
-        /** @var EndpointSchemaConfigurationBlock */
-        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
         /** @var PersistedQueryEndpointOptionsBlock */
         $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
@@ -830,7 +876,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Admin', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Execute admin tasks', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -886,7 +932,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Report', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to visualize data', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminReportPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminReportPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -895,7 +941,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Transform', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to transform data', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminTransformPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminTransformPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -904,7 +950,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Import', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to import data', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminImportPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminImportPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -913,7 +959,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Notify', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to send notifications', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminNotifyPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminNotifyPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -922,7 +968,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Automate', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries executed via automation', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminAutomatePersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminAutomatePersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -937,7 +983,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Notify', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to send notifications via automation', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 // 'tax_input' => [
                 //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
                 //         ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
@@ -952,7 +998,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Transform', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to transform data via automation', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 // 'tax_input' => [
                 //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
                 //         ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
@@ -967,7 +1013,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Dispatch', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to send data to services via automation', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 // 'tax_input' => [
                 //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
                 //         ...$adminAutomatePersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()],
@@ -982,7 +1028,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Fetch', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to fetch data from an external service', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminFetchPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminFetchPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -991,7 +1037,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Gateway', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to process and adapt API data', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminGatewayPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminGatewayPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -1000,7 +1046,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Sync', 'gatographql'),
                 'post_excerpt' => \__('[Collection] Queries to synchronize data across sites', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData, //$adminSyncPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData, //$adminSyncPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
@@ -1031,7 +1077,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Duplicate post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1051,7 +1097,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Bulk duplicate posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1085,7 +1131,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Replace strings in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1108,7 +1154,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Bulk replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminPersistedQueryTaxInputData,
+                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
