@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Tested with WordPress 6.4 ("Tested up to: 6.4")
+- Added `AnyStringScalar` wildcard scalar type
 
 ## 1.0.15 - 30/10/2013
 
