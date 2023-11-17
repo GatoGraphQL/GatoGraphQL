@@ -6,13 +6,14 @@ namespace PoPSchema\DirectiveCommons\DirectiveResolvers;
 
 use PoPSchema\DirectiveCommons\FeedbackItemProviders\FeedbackItemProvider;
 use PoPSchema\DirectiveCommons\ObjectModels\TypedDataValidationPayload;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\AnyStringScalarScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 abstract class AbstractTransformStringFieldValueFieldDirectiveResolver extends AbstractTransformTypedFieldValueFieldDirectiveResolver
 {
@@ -25,6 +26,7 @@ abstract class AbstractTransformStringFieldValueFieldDirectiveResolver extends A
             StringScalarTypeResolver::class,
             IDScalarTypeResolver::class,
             AnyBuiltInScalarScalarTypeResolver::class,
+            AnyStringScalarScalarTypeResolver::class,
         ];
     }
 
