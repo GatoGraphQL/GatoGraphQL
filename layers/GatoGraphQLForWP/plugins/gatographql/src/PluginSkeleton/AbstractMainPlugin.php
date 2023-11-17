@@ -1040,9 +1040,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                 'admin/duplicate-post',
                                 Recipes::DUPLICATING_A_BLOG_POST,
                             ),
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
                                 'admin/duplicate-post',
-                                Recipes::DUPLICATING_A_BLOG_POST,
                             ),
                         ],
                     ],
@@ -1063,6 +1062,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/bulk-duplicate-posts',
                                 Recipes::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/bulk-duplicate-posts',
                             ),
                         ],
                     ],
