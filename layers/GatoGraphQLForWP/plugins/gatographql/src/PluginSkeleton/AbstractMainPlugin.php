@@ -885,7 +885,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Report', 'gatographql'),
-                'post_excerpt' => \__('Queries to visualize data', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to visualize data', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminReportPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
@@ -894,7 +894,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Transform', 'gatographql'),
-                'post_excerpt' => \__('Queries to transform data', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to transform data', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminTransformPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
@@ -903,7 +903,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Import', 'gatographql'),
-                'post_excerpt' => \__('Queries to import data', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to import data', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminImportPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
@@ -912,7 +912,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Notify', 'gatographql'),
-                'post_excerpt' => \__('Queries to send notifications', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to send notifications', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminNotifyPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
@@ -921,7 +921,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Automate', 'gatographql'),
-                'post_excerpt' => \__('Queries executed via automation', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries executed via automation', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminAutomatePersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
@@ -936,7 +936,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAutomateAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Notify', 'gatographql'),
-                'post_excerpt' => \__('Queries to send notifications via automation', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to send notifications via automation', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData,
                 // 'tax_input' => [
                 //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
@@ -951,7 +951,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAutomateAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Transform', 'gatographql'),
-                'post_excerpt' => \__('Queries to transform data via automation', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to transform data via automation', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData,
                 // 'tax_input' => [
                 //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
@@ -966,7 +966,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAutomateAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Dispatch', 'gatographql'),
-                'post_excerpt' => \__('Queries to send data to services via automation', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to send data to services via automation', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData,
                 // 'tax_input' => [
                 //     $graphQLEndpointCategoryTaxonomy->getTaxonomy() => array_values(array_unique([
@@ -981,7 +981,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Fetch', 'gatographql'),
-                'post_excerpt' => \__('Queries to fetch data from an external service', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to fetch data from an external service', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminFetchPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
@@ -990,7 +990,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Gateway', 'gatographql'),
-                'post_excerpt' => \__('Queries to process and adapt API data', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to process and adapt API data', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminGatewayPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
@@ -999,7 +999,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Sync', 'gatographql'),
-                'post_excerpt' => \__('Queries to synchronize data across sites', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Queries to synchronize data across sites', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData, //$adminSyncPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
