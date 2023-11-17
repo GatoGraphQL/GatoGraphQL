@@ -694,7 +694,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $adminCustomEndpointOptions = [
 			'post_status' => 'private',
 			'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
-        ];
+        ];     
         $adminAncestorCustomEndpointCustomPostID = \wp_insert_post(array_merge(
             $adminCustomEndpointOptions,
             [
@@ -723,8 +723,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
-        \wp_insert_post(array_merge(
+        $adminAncestorCustomEndpointOptions = array_merge(
             $adminCustomEndpointOptions,
+            [
+                'post_parent' => $adminAncestorCustomEndpointCustomPostID,
+            ]
+        );   
+        \wp_insert_post(array_merge(
+            $adminAncestorCustomEndpointOptions,
             [
                 'post_title' => \__('Nested mutations', 'gatographql'),
                 'post_excerpt' => \__('Private client to execute queries that need nested mutations', 'gatographql'),
