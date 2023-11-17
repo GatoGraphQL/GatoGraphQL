@@ -163,8 +163,21 @@ class GraphQLDocumentDataComposer
         );
     }
 
+    /**
+     * Escape characters to display them correctly inside the client in the block
+     */
     public function encodeGraphQLVariablesJSONForOutput(string $graphQLVariablesJSON): string
     {
-        return $graphQLVariablesJSON;
+        return str_replace(
+            [
+                PHP_EOL,
+                '"',
+            ],
+            [
+                '\\n',
+                '\"',
+            ],
+            $graphQLVariablesJSON
+        );
     }
 }
