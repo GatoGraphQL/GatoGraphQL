@@ -695,6 +695,34 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'private',
 			'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
         ];
+        $adminAncestorCustomEndpointCustomPostID = \wp_insert_post(array_merge(
+            $adminCustomEndpointOptions,
+            [
+                'post_title' => \__('Admin', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Execute admin tasks', 'gatographql'),
+                'tax_input' => $adminEndpointTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $adminSchemaConfigurationCustomPostID,
+                        ],
+                    ],
+                    [
+                        'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
+                        'attrs' => [
+                            BlockAttributeNames::IS_ENABLED => false,
+                        ],
+                    ],
+                    [
+                        'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
+                    ],
+                    [
+                        'blockName' => $endpointVoyagerBlock->getBlockFullName(),
+                    ],
+                ])),
+            ]
+        ));
         \wp_insert_post(array_merge(
             $adminCustomEndpointOptions,
             [
@@ -889,7 +917,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
                         'attrs' => [
                             BlockAttributeNames::IS_ENABLED => false,
-                        ]
+                        ],
                     ],
                     [
                         'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
@@ -1207,7 +1235,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
                         'attrs' => [
                             BlockAttributeNames::IS_ENABLED => false,
-                        ]
+                        ],
                     ],
                     [
                         'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
