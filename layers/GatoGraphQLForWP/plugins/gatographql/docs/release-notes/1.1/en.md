@@ -10,6 +10,12 @@ The plugin has been tested with WordPress 6.4, and the corresponding entry in th
 
 @todo Complete "Install Commonly Used Persisted Queries"
 
+## Added `AnyStringScalar` wildcard scalar type
+
+A new wildcard scalar type `AnyStringScalar` has been introduced, to represent every scalar type that is represented via a string (eg: `HTML`, `Email`, etc).
+
+This is to enable directives performing operations on strings (such as `@strReplace`) to accept being applied to any of these fields.
+
 ## Purge container when autoupdating a depended-upon plugin
 
 When executing a plugin update from the WP dashboard, if the plugin is a dependency by a Gato GraphQL extension, then the service container will be purged. This avoid a potential exception thrown when the plugin's new version has incompatible code with the previous version.
