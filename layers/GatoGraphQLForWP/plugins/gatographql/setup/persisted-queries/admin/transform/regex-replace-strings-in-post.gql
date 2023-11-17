@@ -25,7 +25,7 @@ query GetPostData(
 ) {
   post(by: { id: $postId }) {
     title
-    adaptedPostTitle: _strRegexReplace(
+    adaptedPostTitle: _strRegexReplaceMultiple(
       searchRegex: $searchRegex
       replaceWith: $replaceWith
       in: $__title
@@ -33,7 +33,7 @@ query GetPostData(
       @export(as: "adaptedPostTitle")
 
     rawContent
-    adaptedRawContent: _strRegexReplace(
+    adaptedRawContent: _strRegexReplaceMultiple(
       searchRegex: $searchRegex
       replaceWith: $replaceWith
       in: $__rawContent
