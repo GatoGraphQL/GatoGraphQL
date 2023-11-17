@@ -1,8 +1,18 @@
 ########################################################################
-# This GraphQL query duplicates the posts retrieved via the provided
-# `$limit` and `$offset` variables
 #
-# @see https://gatographql.com/recipes/duplicating-multiple-blog-posts-at-once/
+# This Persisted GraphQL query duplicates the posts retrieved via the
+# provided `$limit` and `$offset` variables (sorted by ascending ID).
+#
+# *********************************************************************
+# 
+# (Optional) URL params:
+#   - limit: Number of posts to duplicate
+#   - offset: Position of the first item
+# 
+# *********************************************************************
+#
+# More info:
+#   - https://gatographql.com/recipes/duplicating-multiple-blog-posts-at-once/
 #
 ########################################################################
 
