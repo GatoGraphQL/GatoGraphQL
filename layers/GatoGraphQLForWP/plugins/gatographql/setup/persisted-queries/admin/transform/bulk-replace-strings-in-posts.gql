@@ -48,7 +48,7 @@ query AdaptDataForMutationInput
   @depends(on: "TransformAndExportData")
 {
   postInputs: _echo(value: $postAdaptedSources)
-    @underEachArrayItem(
+    @underEachJSONObjectProperty(
       passValueOnwardsAs: "adaptedSource",
       affectDirectivesUnderPos: [1, 2, 3, 4]
     )
