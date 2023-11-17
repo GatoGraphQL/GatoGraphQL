@@ -10,7 +10,7 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 </div>
 
-The GraphQL query below retrieves the data for the multiple posts, executes a search and replace on the `title`, `content` and `excerpt` fields for each of them, and exports a single dynamic variable `$postInputs` with all the results as a dictionary, with format:
+The GraphQL query below retrieves the data for the multiple posts, executes a search and replace on the `title`, `content` and `excerpt` fields for each of them, adapts these as inputs to the mutation, and exports a single dynamic variable `$postInputs` with all the results as a dictionary, with format:
 
 ```json
 {
