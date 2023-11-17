@@ -1199,7 +1199,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $file = file_get_contents($filePath);
         if ($file === false) {
             throw new RuntimeException(
-                sprintf('Loading file \'%s\' failed', $file)
+                sprintf('Loading file \'%s\' failed', $filePath)
             );
         }
         return $file;
