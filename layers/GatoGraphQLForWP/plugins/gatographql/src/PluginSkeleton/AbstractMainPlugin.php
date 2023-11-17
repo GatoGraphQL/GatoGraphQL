@@ -608,9 +608,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 			'post_status' => 'publish',
 			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
 			'post_title' => \__('Admin', 'gatographql'),
-			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                $nestedMutationsBlockDataItem,
-            ])),
+			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
         ]);
         $webhookSchemaConfigurationCustomPostID = \wp_insert_post([
 			'post_status' => 'publish',
