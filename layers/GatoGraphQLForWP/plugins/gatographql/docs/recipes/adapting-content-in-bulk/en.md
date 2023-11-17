@@ -35,26 +35,81 @@ query TransformAndExportData(
     pagination: { limit: $limit, offset: $offset }
     sort: { by: ID, order: ASC }
   ) {
-    title
-    excerpt
+    rawTitle
+    rawContent
+    rawExcerpt
       @strReplaceMultiple(
         search: $replaceFrom
         replaceWith: $replaceTo
-        affectAdditionalFieldsUnderPos: 1
+        affectAdditionalFieldsUnderPos: [1, 2]
       )
       @deferredExport(
-        as: "postInputs"
+        as: "postAdaptedSources"
         type: DICTIONARY
-        affectAdditionalFieldsUnderPos: 1
+        affectAdditionalFieldsUnderPos: [1, 2]
       )
   }
+}
+
+query AdaptDataForMutationInput
+  @depends(on: "TransformAndExportData")
+{
+  postInputs: _echo(value: $postAdaptedSources)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "adaptedSource",
+      affectDirectivesUnderPos: [1, 2, 3, 4]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $adaptedSource,
+          by: {
+            key: "rawTitle"
+          }
+        },
+        passOnwardsAs: "adaptedTitle"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $adaptedSource,
+          by: {
+            key: "rawExcerpt"
+          }
+        },
+        passOnwardsAs: "adaptedExcerpt"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $adaptedSource,
+          by: {
+            key: "rawContent"
+          }
+        },
+        passOnwardsAs: "adaptedContent"
+      )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            title: $adaptedTitle,
+            excerpt: $adaptedExcerpt,
+            contentAs: {
+              html: $adaptedContent
+            }
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "postInputs")
 }
 
 mutation UpdatePost(
   $limit: Int! = 5,
   $offset: Int! = 0
 )
-  @depends(on: "TransformAndExportData")
+  @depends(on: "AdaptDataForMutationInput")
 {
   adaptedPosts: posts(
     pagination: { limit: $limit, offset: $offset }
