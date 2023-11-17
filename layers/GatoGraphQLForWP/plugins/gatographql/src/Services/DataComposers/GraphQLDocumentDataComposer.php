@@ -16,6 +16,7 @@ class GraphQLDocumentDataComposer
     use BasicServiceTrait;
     
     public const GRAPHQL_DOCUMENT_HEADER_SEPARATOR = '########################################################################';
+    public const GRAPHQL_DOCUMENT_INNER_SEPARATOR = '*********************************************************************';
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?RecipeDataProvider $recipeDataProvider = null;
@@ -96,7 +97,7 @@ class GraphQLDocumentDataComposer
         }
 
         $headerRequirementsSectionItems = [
-            '*********************************************************************',
+            self::GRAPHQL_DOCUMENT_INNER_SEPARATOR,
             '',
             \__('Required Extensions:', 'gatographql'),
         ];
