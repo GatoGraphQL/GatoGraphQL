@@ -174,6 +174,7 @@ You can even synchronize content across a network of sites, such as from an upst
 * Tested with WordPress 6.4 ("Tested up to: 6.4")
 * Install initial data: Persisted Queries for common admin tasks
 * Purge container when autoupdating a depended-upon plugin
+* Added `AnyStringScalar` wildcard scalar type
 
 = 1.0.15 =
 * Fixed: Executing introspection query failed in GraphiQL client when passing ?operationName=...

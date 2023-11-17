@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Tested with WordPress 6.4 ("Tested up to: 6.4")
 - Install setup data: Persisted Queries for common admin tasks
+- Added `AnyStringScalar` wildcard scalar type
 
 ### Fixed
 
