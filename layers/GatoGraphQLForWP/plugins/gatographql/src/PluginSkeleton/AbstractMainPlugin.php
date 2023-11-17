@@ -699,7 +699,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminCustomEndpointOptions,
             [
                 'post_title' => \__('Nested mutations', 'gatographql'),
-                'post_excerpt' => \__('Client to execute queries including nested mutations', 'gatographql'),
+                'post_excerpt' => \__('Private client to execute queries that need nested mutations', 'gatographql'),
                 'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
