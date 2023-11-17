@@ -1004,6 +1004,68 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($sublevelAncestorPersistedQueryBlockDataItems)),
             ]
         ));
+
+        $useAncestorSchemaConfigurationPersistedQueryBlocks = [
+            [
+                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                'attrs' => [
+                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
+                ],
+            ],
+            [
+                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+            ]
+        ];
+
+        $adminTransformAncestorPersistedQueryOptions = array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_parent' => $adminTransformAncestorPersistedQueryCustomPostID,
+            ]
+        );
+        \wp_insert_post(array_merge(
+            $adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Duplicate post', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/duplicate-post',
+                                Recipes::DUPLICATING_A_BLOG_POST,
+                            ),
+                        ],
+                    ],
+                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
+        \wp_insert_post(array_merge(
+            $adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Bulk duplicate posts', 'gatographql'),
+                'post_excerpt' => \__('Duplicate multiple posts at once', 'gatographql'),
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/bulk-duplicate-posts',
+                                Recipes::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE,
+                            ),
+                        ],
+                    ],
+                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
         
         
         $webhookPersistedQueryOptions = [
@@ -1061,18 +1123,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    [
-                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
-                        ],
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                    ],
+                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
