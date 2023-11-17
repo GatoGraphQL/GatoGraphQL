@@ -829,7 +829,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminPersistedQueryOptions,
             [
                 'post_title' => \__('Admin', 'gatographql'),
-                'post_excerpt' => \__('Execute admin tasks', 'gatographql'),
+                'post_excerpt' => \__('[Collection] Execute admin tasks', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
