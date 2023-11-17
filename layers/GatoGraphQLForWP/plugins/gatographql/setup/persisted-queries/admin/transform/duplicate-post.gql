@@ -1,6 +1,5 @@
 ########################################################################
-# This GraphQL query duplicates the posts retrieved via the provided
-# `$limit` and `$offset` variables
+# This GraphQL query duplicates the post indicated by variable `$postId`
 #
 # @see https://gatographql.com/recipes/duplicating-a-blog-post/
 #
@@ -9,24 +8,27 @@
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  postInput: _echo(value: [])
-    @export(as: "postInput")
+  authorID: _echo(value: null)
+    @export(as: "authorID")
+    @remove
+
+  categoryIDs: _echo(value: [])
+    @export(as: "categoryIDs")
+    @remove
+
+  featuredImageID: _echo(value: null)
+    @export(as: "featuredImageID")
+    @remove
+
+  tagIDs: _echo(value: [])
+    @export(as: "tagIDs")
     @remove
 }
 
-query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
+query GetPostAndExportData($postId: ID!)
   @depends(on: "InitializeDynamicVariables")
 {
-  postsToDuplicate: posts(
-    pagination: {
-      limit : $limit
-      offset: $offset
-    }
-    sort: {
-      by: ID,
-      order: ASC
-    }
-  ) {
+  post(by: { id : $postId }) {
     # Fields not to be duplicated
     id
     slug
@@ -35,94 +37,76 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 
     # Fields to be duplicated
     author {
-      id
+      id @export(as: "authorID")
     }
     categories {
-      id
+      id @export(as: "categoryIDs", type: LIST)
     }
-    rawContent
-    excerpt
+    rawContent @export(as: "rawContent")
+    rawExcerpt @export(as: "excerpt")
     featuredImage {
-      id
+      id @export(as: "featuredImageID")
     }
     tags {
-      id
+      id @export(as: "tagIDs", type: LIST)
     }
-    title
-
-    # Already create (and export) the inputs for the mutation
-    postInput: _echo(value: {
-      status: draft,
-      authorBy: {
-        id: $__author
-      },
-      categoriesBy: {
-        ids: $__categories
-      },
-      contentAs: {
-        html: $__rawContent
-      },
-      excerpt: $__excerpt
-      featuredImageBy: {
-        id: $__featuredImage
-      },
-      tagsBy: {
-        ids: $__tags
-      },
-      title: $__title
-    })
-      @export(as: "postInput", type: LIST)
-      @remove
+    rawTitle @export(as: "title")
   }
 }
 
-mutation DuplicatePosts
-  @depends(on: "GetPostsAndExportData")
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
 {
-  createdPostIDs: _echo(value: $postInput)
-    @underEachArrayItem(
-      passValueOnwardsAs: "input"
-    )
-      @applyField(
-        name: "createPost"
-        arguments: {
-          input: $input
-        },
-        setResultInResponse: true
-      )
-    @export(as: "createdPostIDs")
-}
-
-query RetrieveCreatedPosts
-  @depends(on: "DuplicatePosts")
-{
-  createdPosts: posts(
-    filter: {
-      ids: $createdPostIDs,
-      status: [draft]
-    }
-  ) {
-    # Fields not to be duplicated
-    id
-    slug
-    date
+  createPost(input: {
+    status: draft,
+    authorBy: {
+      id: $authorID
+    },
+    categoriesBy: {
+      ids: $categoryIDs
+    },
+    contentAs: {
+      html: $rawContent
+    },
+    excerpt: $excerpt
+    featuredImageBy: {
+      id: $featuredImageID
+    },
+    tagsBy: {
+      ids: $tagIDs
+    },
+    title: $title
+  }) {
     status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
 
-    # Fields to be duplicated
-    author {
-      id
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      rawContent
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
     }
-    categories {
-      id
-    }
-    rawContent
-    excerpt
-    featuredImage {
-      id
-    }
-    tags {
-      id
-    }
-    title
   }
 }
