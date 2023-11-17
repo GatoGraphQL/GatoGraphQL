@@ -28,8 +28,8 @@ In the `mutation` operation, each of these entries is then retrieved via `_objec
 query TransformAndExportData(
   $limit: Int! = 5,
   $offset: Int! = 0,
-  $replaceFrom: String!
-  $replaceTo: String!
+  $replaceFrom: [String!]!
+  $replaceTo: [String!]!
 ) {
   posts: posts(
     pagination: { limit: $limit, offset: $offset }
