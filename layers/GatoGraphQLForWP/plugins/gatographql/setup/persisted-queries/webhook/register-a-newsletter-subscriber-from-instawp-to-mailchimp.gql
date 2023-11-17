@@ -6,10 +6,8 @@
 #
 # *********************************************************************
 # 
-# Required PHP code:
-#
-#   Define in `wp-config.php`:
-#
+# Required PHP code:#
+#   - Define in `wp-config.php`:#
 #     define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
 #     define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
 # 
