@@ -1215,6 +1215,29 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+        \wp_insert_post(array_merge(
+            $adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Regex replace strings in post', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
+                'tax_input' => $adminEndpointTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/regex-replace-strings-in-post',
+                                Recipes::SEARCH_REPLACE_AND_STORE_AGAIN,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/transform/regex-replace-strings-in-post',
+                            ),
+                        ],
+                    ],
+                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
         
         
         $webhookPersistedQueryOptions = [

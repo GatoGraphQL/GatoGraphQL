@@ -1,0 +1,8 @@
+{
+  "searchRegex": [
+    "//"
+  ],
+  "replaceWith": [
+    "$1"
+  ]
+}
