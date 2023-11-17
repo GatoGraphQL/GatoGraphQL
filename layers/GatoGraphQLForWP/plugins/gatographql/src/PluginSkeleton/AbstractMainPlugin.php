@@ -1238,6 +1238,40 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+        \wp_insert_post(array_merge(
+            $adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Bulk regex replace strings in posts', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
+                'tax_input' => $adminEndpointTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/bulk-regex-replace-strings-in-posts',
+                                Recipes::ADAPTING_CONTENT_IN_BULK,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/transform/bulk-regex-replace-strings-in-posts',
+                            ),
+                        ],
+                    ],
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID,
+                        ],
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+                    ],
+                    [
+                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+                    ]
+                ])),
+            ]
+        ));
         
         
         $webhookPersistedQueryOptions = [
