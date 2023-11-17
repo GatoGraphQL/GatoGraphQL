@@ -1040,6 +1040,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                 'admin/transform/duplicate-post',
                                 Recipes::DUPLICATING_A_BLOG_POST,
                             ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/transform/duplicate-post',
+                            ),
                         ],
                     ],
                     ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
