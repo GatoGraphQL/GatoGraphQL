@@ -1050,7 +1050,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Bulk duplicate posts', 'gatographql'),
-                'post_excerpt' => \__('Duplicate multiple posts at once', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
                 'tax_input' => $adminPersistedQueryTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1077,6 +1077,29 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
                     ]
+                ])),
+            ]
+        ));
+        \wp_insert_post(array_merge(
+            $adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Replace strings in post', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
+                'tax_input' => $adminPersistedQueryTaxInputData,
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/replace-strings-in-post',
+                                Recipes::SEARCH_REPLACE_AND_STORE_AGAIN,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/transform/replace-strings-in-post',
+                            ),
+                        ],
+                    ],
+                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
