@@ -162,4 +162,9 @@ class GraphQLDocumentDataComposer
             $graphQLDocument
         );
     }
+
+    public function encodeGraphQLVariablesJSONForOutput(string $graphQLVariablesJSON): string
+    {
+        return $graphQLVariablesJSON;
+    }
 }

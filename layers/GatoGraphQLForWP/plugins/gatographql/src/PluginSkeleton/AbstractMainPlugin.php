@@ -1040,6 +1040,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                 'admin/duplicate-post',
                                 Recipes::DUPLICATING_A_BLOG_POST,
                             ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/duplicate-post',
+                                Recipes::DUPLICATING_A_BLOG_POST,
+                            ),
                         ],
                     ],
                     ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
@@ -1158,9 +1162,33 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function readSetupGraphQLPersistedQuery(string $relativeFilePath): string
     {
+        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'gql');
+        return $this->readFile($persistedQueryFile);
+    }
+
+    protected function getSetupGraphQLPersistedQueryFilePath(
+        string $relativeFilePath,
+        string $extension,
+    ): string {
         $rootFolder = dirname(__DIR__, 2);
         $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
-        $persistedQueryFile = $persistedQueriesFolder . '/' . $relativeFilePath . '.gql';
+        return $persistedQueriesFolder . '/' . $relativeFilePath . '.' . $extension;
+    }
+
+    protected function readSetupGraphQLVariablesJSONAndEncodeForOutput(string $relativeFilePath): string
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLDocumentDataComposer */
+        $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
+
+        $graphQLVariablesJSON = $this->readSetupGraphQLVariablesJSON($relativeFilePath);
+        $graphQLVariablesJSON = $graphQLDocumentDataComposer->encodeGraphQLVariablesJSONForOutput($graphQLVariablesJSON);
+        return $graphQLVariablesJSON;
+    }
+
+    protected function readSetupGraphQLVariablesJSON(string $relativeFilePath): string
+    {
+        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'json');
         return $this->readFile($persistedQueryFile);
     }
 
