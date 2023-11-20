@@ -1466,27 +1466,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function getAdminEndpointCategoryID(): ?int
     {
         $slug = 'admin';
-        $adminEndpointCategoryID = $this->getEndpointCategoryID($slug);
-        if ($adminEndpointCategoryID !== null) {
-            return $adminEndpointCategoryID;
+        $endpointCategoryID = $this->getEndpointCategoryID($slug);
+        if ($endpointCategoryID !== null) {
+            return $endpointCategoryID;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
-        
-        $adminEndpointCategory = \wp_insert_term(
+        return $this->createEndpointCategoryID(
+            $slug,
             \__('Admin', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'slug' => $slug,
-                'description' => \__('Internal admin tasks', 'gatographql'),
-            ]
+            \__('Internal admin tasks', 'gatographql'),
         );
-        if (!($adminEndpointCategory instanceof WP_Error)) {
-            return $adminEndpointCategory['term_id'];
-        }
-        return null;
     }
 
     protected function getEndpointCategoryID(string $slug): ?int
@@ -1527,27 +1516,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function getWebhookEndpointCategoryID(): ?int
     {
         $slug = 'webhook';
-        $adminEndpointCategoryID = $this->getEndpointCategoryID($slug);
-        if ($adminEndpointCategoryID !== null) {
-            return $adminEndpointCategoryID;
+        $endpointCategoryID = $this->getEndpointCategoryID($slug);
+        if ($endpointCategoryID !== null) {
+            return $endpointCategoryID;
         }
 
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
-        
-        $adminEndpointCategory = \wp_insert_term(
+        return $this->createEndpointCategoryID(
+            $slug,
             \__('Webhook', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'slug' => $slug,
-                'description' => \__('Process data from external services', 'gatographql'),
-            ]
+            \__('Process data from external services', 'gatographql'),
         );
-        if (!($adminEndpointCategory instanceof WP_Error)) {
-            return $adminEndpointCategory['term_id'];
-        }
-        return null;
     }
 
     /**
