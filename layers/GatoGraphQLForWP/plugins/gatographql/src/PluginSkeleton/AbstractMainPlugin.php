@@ -655,15 +655,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
         $adminEndpointCategoryID = $this->getAdminEndpointCategoryID();
         if ($adminEndpointCategoryID !== null) {
-            $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
+            $adminEndpointTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
         }
 
-        $webhookPersistedQueryTaxInputData = [
+        $webhookEndpointTaxInputData = [
             $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [],
         ];
         $webhookEndpointCategoryID = $this->getWebhookEndpointCategoryID();
         if ($webhookEndpointCategoryID !== null) {
-            $webhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
+            $webhookEndpointTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
         }
 
         /**
@@ -1388,7 +1388,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     [
         //         'post_title' => \__('Webhook', 'gatographql'),
         //         'post_excerpt' => \__('Queries acting as webhooks, to process incoming data from an external service', 'gatographql'),
-        //         'tax_input' => $webhookPersistedQueryTaxInputData,
+        //         'tax_input' => $webhookEndpointTaxInputData,
         //         'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
         //             [
         //                 'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1427,7 +1427,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                 'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. More info: gatographql.com/blog/instawp-gatographql', 'gatographql'),
-                'tax_input' => $webhookPersistedQueryTaxInputData,
+                'tax_input' => $webhookEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
