@@ -1465,26 +1465,42 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function getAdminEndpointCategoryID(): ?int
     {
+        $slug = 'admin';
+        $adminEndpointCategoryID = $this->getEndpointCategoryID($slug);
+        if ($adminEndpointCategoryID !== null) {
+            return $adminEndpointCategoryID;
+        }
+
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLEndpointCategoryTaxonomy */
         $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
-
-        /** @var WP_Term|false */
-        $adminCategoryTerm = \get_term_by('slug', 'admin', $graphQLEndpointCategoryTaxonomy->getTaxonomy());
-        if ($adminCategoryTerm instanceof WP_Term) {
-            return $adminCategoryTerm->term_id;
-        }
         
         $adminEndpointCategory = \wp_insert_term(
             \__('Admin', 'gatographql'),
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
             [
+                'slug' => $slug,
                 'description' => \__('Internal admin tasks', 'gatographql'),
             ]
         );
         if (!($adminEndpointCategory instanceof WP_Error)) {
             return $adminEndpointCategory['term_id'];
         }
+        return null;
+    }
+
+    protected function getEndpointCategoryID(string $slug): ?int
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+
+        /** @var WP_Term|false */
+        $endpointCategoryTerm = \get_term_by('slug', $slug, $graphQLEndpointCategoryTaxonomy->getTaxonomy());
+        if ($endpointCategoryTerm instanceof WP_Term) {
+            return $endpointCategoryTerm->term_id;
+        }
+
         return null;
     }
 
