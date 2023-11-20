@@ -51,10 +51,13 @@ class GraphQLDocumentDataComposer
     /**
      * Append the required extensions and bundles to the header
      * in the persisted query.
+     *
+     * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the recipe)
      */
     public function addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
         string $graphQLDocument,
         string $recipeSlug,
+        ?array $skipExtensionModules = null
     ): string {
         /**
          * Check if there are required extensions for the recipe
@@ -72,6 +75,12 @@ class GraphQLDocumentDataComposer
         $requiredExtensionModules = $recipeDataItem[1] ?? [];
         if ($requiredExtensionModules === []) {
             return $graphQLDocument;
+        }
+        if ($skipExtensionModules !== null) {
+            $requiredExtensionModules = array_values(array_diff(
+                $requiredExtensionModules,
+                $skipExtensionModules
+            ));
         }
         $requiredBundleModules = $recipeDataItem[2] ?? [];
         $requiredBundleModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;

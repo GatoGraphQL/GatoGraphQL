@@ -19,6 +19,7 @@ use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -47,8 +48,8 @@ use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-use PoP\Root\Helpers\ClassHelpers;
 
+use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
@@ -1345,6 +1346,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/transform/bulk-replace-post-slug-in-posts',
                                 Recipes::SITE_MIGRATIONS,
+                                [
+                                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                                ]
                             ),
                         ],
                     ],
@@ -1422,10 +1426,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * @param string|null $recipeSlug The slug of the recipe's .md file, same as in RecipeDataProvider
+     * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the recipe)
      */
     protected function readSetupGraphQLPersistedQueryAndEncodeForOutput(
         string $relativeFilePath,
-        ?string $recipeSlug = null
+        ?string $recipeSlug = null,
+        ?array $skipExtensionModules = null
     ): string {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLDocumentDataComposer */
@@ -1436,6 +1442,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
                 $graphQLPersistedQuery,
                 $recipeSlug,
+                $skipExtensionModules,
             );
         }
         $graphQLPersistedQuery = $graphQLDocumentDataComposer->encodeGraphQLDocumentForOutput($graphQLPersistedQuery);
