@@ -1,0 +1,46 @@
+########################################################################
+#
+# This Persisted GraphQL query  first filters all posts containing
+# "https://my-old-domain.com" in its content, and replaces this string
+# with "https://my-new-domain.com"
+#
+# *********************************************************************
+# 
+# More info:
+#   - https://gatographql.com/recipes/site-migrations/
+#
+########################################################################
+
+mutation ReplaceOldWithNewDomainInPosts {
+  posts(
+    filter: {
+      search: "https://my-old-domain.com"
+    },
+    pagination: {
+      limit: -1
+    }
+  ) {
+    id
+    rawContent
+    adaptedRawContent: _strReplace(
+      search: "https://my-old-domain.com"
+      replaceWith: "https://my-new-domain.com"
+      in: $__rawContent
+    )
+    update(input: {
+      contentAs: { html: $__adaptedRawContent }
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        id
+        rawContent
+      }
+    }
+  }
+}
