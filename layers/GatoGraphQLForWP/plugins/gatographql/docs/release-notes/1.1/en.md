@@ -41,7 +41,11 @@ Several private persisted queries are already created by the plugin, handling co
 
 An option to enable/disable the installation of the setup data (i.e. the predefined custom endpoints and persisted queries described above) has been added to the Settings page, under "Plugin Configuration > General > Plugin setup: Install Persisted Queries for common admin tasks?":
 
-![]()
+<div class="img-width-1024" markdown=1>
+
+![Manage installing setup data in the Settings](../../images/settings-plugin-setup-data.png)
+
+</div>
 
 Alternatively, we can define this value in `wp-config.php`:
 
