@@ -37,6 +37,18 @@ Several private persisted queries are already created by the plugin, handling co
 - Import a post from another WordPress site
 - (Webhook for InstaWP) Register a new subscriber on Mailchimp (change status from `"draft"` to `"publish` to enable it)
 
+## Added Settings to enable or disable installing the setup data
+
+An option to enable/disable the installation of the setup data (i.e. the predefined custom endpoints and persisted queries described above) has been added to the Settings page, under "Plugin Configuration > General > Plugin setup: Install Persisted Queries for common admin tasks?":
+
+![]()
+
+Alternatively, we can define this value in `wp-config.php`:
+
+```php
+define( 'GATOGRAPHQL_INSTALL_PLUGIN_SETUP_DATA', false );
+```
+
 ## Added `AnyStringScalar` wildcard scalar type
 
 A new wildcard scalar type `AnyStringScalar` has been introduced, to represent every scalar type that is represented via a string (eg: `HTML`, `Email`, etc).
