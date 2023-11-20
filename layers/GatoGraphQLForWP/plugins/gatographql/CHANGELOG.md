@@ -9,7 +9,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Tested with WordPress 6.4 ("Tested up to: 6.4")
-- Install setup data: Persisted Queries for common admin tasks
+- Install setup data: Private "Nested mutations" Custom Endpoint
+- Install setup data: Private Persisted Queries for common admin tasks
 - Added `AnyStringScalar` wildcard scalar type
 
 ### Fixed

@@ -6,7 +6,13 @@ Here's a description of all the changes.
 
 The plugin has been tested with WordPress 6.4, and the corresponding entry in the plugin's header (`"Tested up to"`) has been updated.
 
-## Install setup data: Persisted Queries for common admin tasks
+## Install setup data: Private "Nested mutations" Custom Endpoint
+
+A "Nested mutations" custom endpoint is already created by the plugin, with a "private" status (i.e. it is accessible only within the wp-admin).
+
+This makes it convenient to compose and execute queries that make use of nested mutations (such as for doing bulk updates) for our internal tasks.
+
+## Install setup data: Private Persisted Queries for common admin tasks
 
 @todo Complete "Install Commonly Used Persisted Queries"
 
