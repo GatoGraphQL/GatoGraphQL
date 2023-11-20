@@ -1518,10 +1518,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $description
             ]
         );
-        if (!($endpointCategoryTerm instanceof WP_Error)) {
-            return $endpointCategoryTerm['term_id'];
+        if ($endpointCategoryTerm instanceof WP_Error) {
+            return null;
         }
-        return null;
+        return $endpointCategoryTerm['term_id'];
     }
 
     protected function getWebhookEndpointCategoryID(): ?int
