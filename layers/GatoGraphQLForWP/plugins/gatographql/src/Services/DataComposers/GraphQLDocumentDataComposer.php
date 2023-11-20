@@ -160,14 +160,20 @@ class GraphQLDocumentDataComposer
     {
         return str_replace(
             [
+                '\\',
                 PHP_EOL,
                 '"',
                 '&',
+                '<',
+                '>',
             ],
             [
+                '\\\\',
                 '\\n',
                 '\"',
                 '\&',
+                '\<',
+                '\>',
             ],
             $graphQLDocument
         );
