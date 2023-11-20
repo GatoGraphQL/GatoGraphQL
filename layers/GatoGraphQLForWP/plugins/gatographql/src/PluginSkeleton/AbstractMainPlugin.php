@@ -48,12 +48,13 @@ use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
+use WP_Term;
 use WP_Upgrader;
+
 use function __;
 use function add_action;
 use function do_action;
@@ -1460,6 +1461,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * Create the Persisted Queries
          */
         // @todo Complete with installing Persisted Queries    
+    }
+
+    protected function getAdminEndpointCategoryID(): ?int
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+
+        /** @var WP_Term|false */
+        $adminCategoryTerm = \get_term_by('slug', 'admin', $graphQLEndpointCategoryTaxonomy->getTaxonomy());
+        if ($adminCategoryTerm instanceof WP_Term) {
+            return $adminCategoryTerm->term_id;
+        }
+        
+        $adminEndpointCategory = \wp_insert_term(
+            \__('Admin', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            [
+                'description' => \__('Internal admin tasks', 'gatographql'),
+            ]
+        );
+        if (!($adminEndpointCategory instanceof WP_Error)) {
+            return $adminEndpointCategory['term_id'];
+        }
+        return null;
     }
 
     /**
