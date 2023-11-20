@@ -1100,14 +1100,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ];
 
-        $adminTransformAncestorPersistedQueryOptions = array_merge(
-            $adminPersistedQueryOptions,
-            [
-                // 'post_parent' => $adminTransformAncestorPersistedQueryCustomPostID,
-            ]
-        );
+        // $adminTransformAncestorPersistedQueryOptions = array_merge(
+        //     $adminPersistedQueryOptions,
+        //     [
+        //         // 'post_parent' => $adminTransformAncestorPersistedQueryCustomPostID,
+        //     ]
+        // );
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Duplicate post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1127,7 +1127,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Bulk duplicate posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1161,7 +1161,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Replace strings in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1184,7 +1184,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Bulk replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1218,7 +1218,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Regex replace strings in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1241,7 +1241,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Bulk regex replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1275,7 +1275,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Add missing links in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1295,7 +1295,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Replace "http" with "https" in image sources in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1315,7 +1315,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Bulk replace domain in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1346,7 +1346,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Bulk replace post slug in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
