@@ -1127,7 +1127,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
-                'post_title' => \__('Bulk duplicate posts', 'gatographql'),
+                'post_title' => \__('Duplicate posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
                 'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -1135,11 +1135,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                'admin/transform/bulk-duplicate-posts',
+                                'admin/transform/duplicate-posts',
                                 Recipes::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE,
                             ),
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
-                                'admin/transform/bulk-duplicate-posts',
+                                'admin/transform/duplicate-posts',
                             ),
                         ],
                     ],
@@ -1184,7 +1184,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
-                'post_title' => \__('Bulk replace strings in posts', 'gatographql'),
+                'post_title' => \__('Replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
                 'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -1192,11 +1192,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                'admin/transform/bulk-replace-strings-in-posts',
+                                'admin/transform/replace-strings-in-posts',
                                 Recipes::ADAPTING_CONTENT_IN_BULK,
                             ),
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
-                                'admin/transform/bulk-replace-strings-in-posts',
+                                'admin/transform/replace-strings-in-posts',
                             ),
                         ],
                     ],
@@ -1241,7 +1241,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
-                'post_title' => \__('Bulk regex replace strings in posts', 'gatographql'),
+                'post_title' => \__('Regex replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
                 'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -1249,11 +1249,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                'admin/transform/bulk-regex-replace-strings-in-posts',
+                                'admin/transform/regex-replace-strings-in-posts',
                                 Recipes::ADAPTING_CONTENT_IN_BULK,
                             ),
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
-                                'admin/transform/bulk-regex-replace-strings-in-posts',
+                                'admin/transform/regex-replace-strings-in-posts',
                             ),
                         ],
                     ],
@@ -1315,7 +1315,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
-                'post_title' => \__('Bulk replace domain in posts', 'gatographql'),
+                'post_title' => \__('Replace domain in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
                 'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -1323,7 +1323,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                'admin/transform/bulk-replace-domain-in-posts',
+                                'admin/transform/replace-domain-in-posts',
                                 Recipes::SITE_MIGRATIONS,
                             ),
                         ],
@@ -1346,7 +1346,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
             [
-                'post_title' => \__('Bulk replace post slug in posts', 'gatographql'),
+                'post_title' => \__('Replace post slug in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
                 'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -1354,7 +1354,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                'admin/transform/bulk-replace-post-slug-in-posts',
+                                'admin/transform/replace-post-slug-in-posts',
                                 Recipes::SITE_MIGRATIONS,
                                 [
                                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
