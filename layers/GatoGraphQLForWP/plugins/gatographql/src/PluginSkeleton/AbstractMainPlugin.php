@@ -1108,6 +1108,20 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
             ]
         ];
+        $nestedMutationsSchemaConfigurationPersistedQueryBlocks = [
+            [
+                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                'attrs' => [
+                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
+                ],
+            ],
+            [
+                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+            ]
+        ];
 
         // $adminTransformAncestorPersistedQueryOptions = array_merge(
         //     $adminPersistedQueryOptions,
@@ -1207,18 +1221,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    [
-                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                        ],
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                    ]
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1262,18 +1265,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    [
-                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                        ],
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                    ]
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1330,18 +1322,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    [
-                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                        ],
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                    ]
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1363,18 +1344,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    [
-                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                        ],
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                    ]
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1396,18 +1366,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    [
-                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                        'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                        ],
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-                    ]
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
