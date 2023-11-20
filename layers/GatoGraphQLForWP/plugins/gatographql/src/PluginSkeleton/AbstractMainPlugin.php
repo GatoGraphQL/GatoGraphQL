@@ -1361,8 +1361,24 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                                 'admin/transform/insert-block-in-posts',
                                 Recipes::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK,
                             ),
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
-                                'admin/transform/insert-block-in-posts',
+                        ],
+                    ],
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Remove block from posts', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/remove-block-from-posts',
+                                Recipes::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK,
                             ),
                         ],
                     ],
