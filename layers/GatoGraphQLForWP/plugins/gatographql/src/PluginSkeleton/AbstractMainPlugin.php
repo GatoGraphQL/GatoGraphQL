@@ -1085,12 +1085,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     ]
         // ));
 
-        $useAncestorSchemaConfigurationPersistedQueryBlocks = [
+        // $useAncestorSchemaConfigurationPersistedQueryBlocks = [
+        //     [
+        //         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+        //         // 'attrs' => [
+        //         //     EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
+        //         // ],
+        //     ],
+        //     [
+        //         'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+        //     ],
+        //     [
+        //         'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+        //     ]
+        // ];
+        $schemaConfigurationPersistedQueryBlocks = [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                // 'attrs' => [
-                //     EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT,
-                // ],
             ],
             [
                 'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
@@ -1122,7 +1133,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    ...$schemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1179,7 +1190,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    ...$schemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1236,7 +1247,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    ...$schemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1290,7 +1301,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    ...$schemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1310,7 +1321,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    ...$schemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1440,7 +1451,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    ...$schemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
