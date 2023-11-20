@@ -1446,6 +1446,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Posts by thumbnail', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/report/posts-by-thumbnail',
+                                Recipes::SEARCHING_WORDPRESS_DATA,
+                            ),
+                        ],
+                    ],
+                    ...$schemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
         
         
         // $webhookPersistedQueryOptions = [
