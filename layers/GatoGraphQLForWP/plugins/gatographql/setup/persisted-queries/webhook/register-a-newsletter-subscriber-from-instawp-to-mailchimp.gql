@@ -1,0 +1,54 @@
+########################################################################
+#
+# This GraphQL query captures the email from the visitors who ticked
+# the "Subscribe to mailing list" checkbox from InstaWP (when creating
+# a new sandbox site), and subscribes this email to a Mailchimp list.
+#
+# *********************************************************************
+# 
+# Required PHP code:#
+#   - Define in `wp-config.php`:#
+#     define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
+#     define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
+# 
+# *********************************************************************
+#
+# More info:
+#   - https://gatographql.com/blog/instawp-gatographql/
+#
+########################################################################
+
+query HasSubscribedToNewsletter {
+  hasSubscriberOptin: _httpRequestHasParam(name: "marketing_optin")
+  subscriberOptin: _httpRequestStringParam(name: "marketing_optin")
+  isNotSubscriberOptinNAValue: _notEquals(value1: $__subscriberOptin, value2: "NA")
+  subscribedToNewsletter: _and(values: [$__hasSubscriberOptin, $__isNotSubscriberOptinNAValue])
+    @export(as: "subscribedToNewsletter")
+}
+
+query MaybeCreateContactOnMailchimp
+   @depends(on: "HasSubscribedToNewsletter")
+   @include(if: $subscribedToNewsletter)
+{
+  subscriberEmail: _httpRequestStringParam(name: "email")
+  
+  mailchimpUsername: _env(name: "MAILCHIMP_API_CREDENTIALS_USERNAME")
+    @remove
+  mailchimpPassword: _env(name: "MAILCHIMP_API_CREDENTIALS_PASSWORD")
+    @remove
+  
+  mailchimpListMembersJSONObject: _sendJSONObjectItemHTTPRequest(input: {
+    url: "https://us7.api.mailchimp.com/3.0/lists/{listCode}/members",
+    method: POST,
+    options: {
+      auth: {
+        username: $__mailchimpUsername,
+        password: $__mailchimpPassword
+      },
+      json: {
+        email_address: $__subscriberEmail,
+        status: "subscribed"
+      }
+    }
+  })
+}

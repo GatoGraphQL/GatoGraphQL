@@ -102,6 +102,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
             ],
+            // Install Plugin Setup Data
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::INSTALL_PLUGIN_SETUP_DATA,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_INSTALL_PLUGIN_SETUP_DATA,
+            ],
             // GraphQL single endpoint slug
             [
                 'class' => GraphQLEndpointForWPModule::class,
@@ -636,6 +643,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
         return [
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::INSTALL_PLUGIN_SETUP_DATA,
+            ],
             [
                 'class' => Module::class,
                 'envVariable' => Environment::ADD_EXCERPT_AS_DESCRIPTION,

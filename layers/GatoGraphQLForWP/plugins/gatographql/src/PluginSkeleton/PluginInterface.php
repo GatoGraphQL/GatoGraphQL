@@ -9,14 +9,14 @@ interface PluginInterface
     public function setup(): void;
 
     /**
-     * Execute logic after the plugin/extension has just been activated
+     * Execute logic after the plugin/extension has just been activated (for first time)
      */
-    public function pluginJustActivated(): void;
+    public function pluginJustFirstTimeActivated(): void;
 
     /**
      * Execute logic after the plugin/extension has just been updated
      */
-    public function pluginJustUpdated(string $storedVersion): void;
+    public function pluginJustUpdated(string $newVersion, string $previousVersion): void;
 
     /**
      * Plugin name

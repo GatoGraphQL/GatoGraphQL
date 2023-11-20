@@ -2364,8 +2364,8 @@ https://wordpress.org/about/
 		</wp:postmeta>
 							</item>
 					<item>
-		<title><![CDATA[Nested mutations]]></title>
-		<link>https://gatographql.lndo.site/graphql-schemaconfig/nested-mutations/</link>
+		<title><![CDATA[Nested mutations config]]></title>
+		<link>https://gatographql.lndo.site/graphql-schemaconfig/nested-mutations-config/</link>
 		<pubDate>Wed, 05 Oct 2022 06:47:18 +0000</pubDate>
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=588</guid>
@@ -2407,7 +2407,7 @@ https://wordpress.org/about/
 		<wp:post_modified_gmt><![CDATA[2022-10-05 06:47:18]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[nested-mutations]]></wp:post_name>
+		<wp:post_name><![CDATA[nested-mutations-config]]></wp:post_name>
 		<wp:status><![CDATA[publish]]></wp:status>
 		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>

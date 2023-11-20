@@ -4,16 +4,19 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 1.0.16 - DATE
-
-### Fixed
-
-- Purge container when autoupdating a depended-upon plugin
+## 1.1.0 - DATE
 
 ### Improvements
 
 - Tested with WordPress 6.4 ("Tested up to: 6.4")
+- Install setup data: Private "Nested mutations" Custom Endpoint
+- Install setup data: Private Persisted Queries for common admin tasks
+- Added Settings to enable or disable installing the setup data
 - Added `AnyStringScalar` wildcard scalar type
+
+### Fixed
+
+- Purge container when autoupdating a depended-upon plugin
 
 ## 1.0.15 - 30/10/2013
 

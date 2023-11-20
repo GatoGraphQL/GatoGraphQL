@@ -1,0 +1,51 @@
+########################################################################
+#
+# This Persisted GraphQL query retrieves all posts that have a
+# thumbnail, and those that do not
+#
+# *********************************************************************
+#
+# More info:
+#   - https://gatographql.com/recipes/searching-wordpress-data/
+#
+########################################################################
+
+query {
+  postsWithThumbnail: posts(
+    filter: {
+      metaQuery: {
+        key: "_thumbnail_id",
+        compareBy: {
+          key: {
+            operator: EXISTS
+          }
+        }
+      }
+    },
+    pagination: { limit: -1 }
+  ) {
+    id
+    title
+    featuredImage {
+      id
+      src
+    }
+  }
+
+  postsWithoutThumbnail: posts(
+    filter: {
+      metaQuery: {
+        key: "_thumbnail_id",
+        compareBy: {
+          key: {
+            operator: NOT_EXISTS
+          }
+        }
+      }
+    },
+    pagination: { limit: -1 }
+  ) {
+    id
+    title
+  }
+}
