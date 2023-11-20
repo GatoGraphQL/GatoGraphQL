@@ -1137,6 +1137,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ];
 
+        /**
+         * Create the Persisted Queries
+         */
+
         // $adminTransformAncestorPersistedQueryOptions = array_merge(
         //     $adminPersistedQueryOptions,
         //     [
@@ -1587,11 +1591,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
-
-        /**
-         * Create the Persisted Queries
-         */
-        // @todo Complete with installing Persisted Queries    
     }
 
     protected function getAdminEndpointCategoryID(): ?int
