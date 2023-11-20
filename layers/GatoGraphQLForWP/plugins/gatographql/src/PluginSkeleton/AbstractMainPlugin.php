@@ -627,6 +627,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $nestedMutationsBlockDataItem,
             ])),
         ]);
+        if ($nestedMutationsSchemaConfigurationCustomPostID instanceof WP_Error) {
+            $nestedMutationsSchemaConfigurationCustomPostID = null;
+        }
         $entityAsPayloadTypeBlockDataItem = [
             'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
             'attrs' => [
@@ -642,6 +645,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $entityAsPayloadTypeBlockDataItem,
             ])),
         ]);
+        if ($nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID instanceof WP_Error) {
+            $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = null;
+        }
 
 
         /**
@@ -730,7 +736,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                         'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID,
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
                     [
@@ -1147,7 +1153,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                         'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID,
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
                     [
@@ -1202,7 +1208,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                         'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID,
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
                     [
@@ -1257,7 +1263,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                         'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID,
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
                     [
@@ -1325,7 +1331,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                         'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID,
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
                     [
@@ -1358,7 +1364,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                         'attrs' => [
-                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID,
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
                     [
