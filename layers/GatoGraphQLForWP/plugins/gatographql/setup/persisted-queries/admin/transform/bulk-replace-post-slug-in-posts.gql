@@ -17,20 +17,20 @@
 ########################################################################
 
 query ExportData(
-  $oldPageSlug: String!
-  $newPageSlug: String!
+  $oldPostSlug: String!
+  $newPostSlug: String!
 ) {
   siteURL: optionValue(name: "siteurl")
 
-  oldPageURL: _strAppend(
+  oldPostURL: _strAppend(
     after: $__siteURL,
-    append: $oldPageSlug
-  ) @export(as: "oldPageURL")
+    append: $oldPostSlug
+  ) @export(as: "oldPostURL")
 
-  newPageURL: _strAppend(
+  newPostURL: _strAppend(
     after: $__siteURL,
-    append: $newPageSlug
-  ) @export(as: "newPageURL")
+    append: $newPostSlug
+  ) @export(as: "newPostURL")
 }
 
 mutation ReplaceOldWithNewURLInPosts
@@ -38,7 +38,7 @@ mutation ReplaceOldWithNewURLInPosts
 {
   posts(
     filter: {
-      search: $oldPageURL
+      search: $oldPostURL
     },
     pagination: {
       limit: -1
@@ -47,8 +47,8 @@ mutation ReplaceOldWithNewURLInPosts
     id
     rawContent
     adaptedRawContent: _strReplace(
-      search: $oldPageURL
-      replaceWith: $newPageURL
+      search: $oldPostURL
+      replaceWith: $newPostURL
       in: $__rawContent
     )
     update(input: {
