@@ -1,0 +1,70 @@
+########################################################################
+#
+# After changing the slug of a post or page, execute this Persisted
+# GraphQL query to convert all content to point to the new URL.
+#
+# *********************************************************************
+# 
+# URL params:
+#   - oldPostSlug: The old post or page slug
+#   - newPostSlug: The new post or page slug
+#
+# *********************************************************************
+# 
+# More info:
+#   - https://gatographql.com/recipes/site-migrations/#heading-adapting-content-to-a-new-post-or-page-url
+#
+########################################################################
+
+query ExportData(
+  $oldPageSlug: String!
+  $newPageSlug: String!
+) {
+  siteURL: optionValue(name: "siteurl")
+
+  oldPageURL: _strAppend(
+    after: $__siteURL,
+    append: $oldPageSlug
+  ) @export(as: "oldPageURL")
+
+  newPageURL: _strAppend(
+    after: $__siteURL,
+    append: $newPageSlug
+  ) @export(as: "newPageURL")
+}
+
+mutation ReplaceOldWithNewURLInPosts
+  @depends(on: "ExportData")
+{
+  posts(
+    filter: {
+      search: $oldPageURL
+    },
+    pagination: {
+      limit: -1
+    }
+  ) {
+    id
+    rawContent
+    adaptedRawContent: _strReplace(
+      search: $oldPageURL
+      replaceWith: $newPageURL
+      in: $__rawContent
+    )
+    update(input: {
+      contentAs: { html: $__adaptedRawContent }
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        id
+        rawContent
+      }
+    }
+  }
+}
