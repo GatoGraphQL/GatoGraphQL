@@ -893,6 +893,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $adminPersistedQueryOptions = [
 			'post_status' => 'private',
 			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $adminEndpointTaxInputData,
         ];
         // $adminAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
         //     $adminPersistedQueryOptions,
@@ -1111,7 +1112,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Duplicate post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1131,7 +1131,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Duplicate posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1165,7 +1164,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Replace strings in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1188,7 +1186,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1222,7 +1219,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Regex replace strings in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1245,7 +1241,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Regex replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1279,7 +1274,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Add missing links in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1299,7 +1293,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Replace "http" with "https" in image sources in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1319,7 +1312,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Replace domain in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1350,7 +1342,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             [
                 'post_title' => \__('Replace post slug in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1423,13 +1414,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $webhookPersistedQueryOptions = [
             'post_status' => 'draft', // They are public => don't publish them!
 			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $webhookEndpointTaxInputData,
         ];
         \wp_insert_post(array_merge(
             $webhookPersistedQueryOptions,//$webhookAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                 'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. More info: gatographql.com/blog/instawp-gatographql', 'gatographql'),
-                'tax_input' => $webhookEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
