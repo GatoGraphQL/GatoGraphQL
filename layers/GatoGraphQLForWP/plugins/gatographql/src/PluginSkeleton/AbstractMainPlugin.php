@@ -1408,6 +1408,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            [
+                'post_title' => \__('Translate posts', 'gatographql'),
+                // 'post_excerpt' => \__('', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/translate-posts',
+                                Recipes::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE,
+                            ),
+                        ],
+                    ],
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
         
         
         // $webhookPersistedQueryOptions = [
