@@ -653,30 +653,16 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $adminEndpointTaxInputData = [
             $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [],
         ];
-        $adminEndpointCategory = \wp_insert_term(
-            \__('Admin', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Internal admin tasks', 'gatographql'),
-            ]
-        );
-        if (!($adminEndpointCategory instanceof WP_Error)) {
-            $adminEndpointCategoryID = $adminEndpointCategory['term_id'];
-            $adminEndpointTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
+        $adminEndpointCategoryID = $this->getAdminEndpointCategoryID();
+        if ($adminEndpointCategoryID !== null) {
+            $adminPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $adminEndpointCategoryID;
         }
 
         $webhookPersistedQueryTaxInputData = [
             $graphQLEndpointCategoryTaxonomy->getTaxonomy() => [],
         ];
-        $webhookEndpointCategory = \wp_insert_term(
-            \__('Webhook', 'gatographql'),
-            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
-            [
-                'description' => \__('Process data from external services', 'gatographql'),
-            ]
-        );
-        if (!($webhookEndpointCategory instanceof WP_Error)) {
-            $webhookEndpointCategoryID = $webhookEndpointCategory['term_id'];
+        $webhookEndpointCategoryID = $this->getWebhookEndpointCategoryID();
+        if ($webhookEndpointCategoryID !== null) {
             $webhookPersistedQueryTaxInputData[$graphQLEndpointCategoryTaxonomy->getTaxonomy()][] = $webhookEndpointCategoryID;
         }
 
