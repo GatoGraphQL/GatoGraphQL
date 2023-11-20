@@ -33,7 +33,10 @@
         "allow-plugins": {}
     },
     "scripts": {
-        "ssh-server": "lando ssh",
+        "ssh-server": [
+            "Composer\\Config::disableProcessTimeout",
+            "lando ssh"
+        ],
         "build-server": [
             "Composer\\Config::disableProcessTimeout",
             "lando init --source remote --remote-url https://wordpress.org/latest.tar.gz --recipe wordpress --webroot wordpress --name gatographql",
