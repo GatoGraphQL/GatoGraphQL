@@ -1504,6 +1504,32 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         return null;
     }
 
+    protected function getWebhookEndpointCategoryID(): ?int
+    {
+        $slug = 'webhook';
+        $adminEndpointCategoryID = $this->getEndpointCategoryID($slug);
+        if ($adminEndpointCategoryID !== null) {
+            return $adminEndpointCategoryID;
+        }
+
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+        
+        $adminEndpointCategory = \wp_insert_term(
+            \__('Webhook', 'gatographql'),
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            [
+                'slug' => $slug,
+                'description' => \__('Process data from external services', 'gatographql'),
+            ]
+        );
+        if (!($adminEndpointCategory instanceof WP_Error)) {
+            return $adminEndpointCategory['term_id'];
+        }
+        return null;
+    }
+
     /**
      * @param string|null $recipeSlug The slug of the recipe's .md file, same as in RecipeDataProvider
      * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the recipe)
