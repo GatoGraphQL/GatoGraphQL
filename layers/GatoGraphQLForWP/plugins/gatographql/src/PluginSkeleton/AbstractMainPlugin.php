@@ -1359,7 +1359,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/transform/insert-block-in-posts',
-                                Recipes::ADAPTING_CONTENT_IN_BULK,
+                                Recipes::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK,
                             ),
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
                                 'admin/transform/insert-block-in-posts',
