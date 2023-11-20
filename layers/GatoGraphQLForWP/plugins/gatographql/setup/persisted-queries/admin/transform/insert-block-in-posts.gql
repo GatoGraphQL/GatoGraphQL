@@ -21,7 +21,7 @@
 
 query CreateRegex(
   $searchBlockType: String! = "wp:paragraph"
-  $injectAfterBlockCount: Int = 1!
+  $injectAfterBlockCount: Int! = 1
   $injectBlockMarkup: String!
 ) {
   endingBlockMarkup: _sprintf(
