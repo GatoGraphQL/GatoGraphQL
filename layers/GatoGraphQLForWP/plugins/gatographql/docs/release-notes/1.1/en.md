@@ -14,7 +14,28 @@ This makes it convenient to compose and execute queries that make use of nested 
 
 ## Install setup data: Private Persisted Queries for common admin tasks
 
-@todo Complete "Install Commonly Used Persisted Queries"
+Several private persisted queries are already created by the plugin, handling common admin tasks:
+
+- Fetch posts by thumbnail
+- Fetch users by locale
+- Fetch comments by period
+- Fetch images in `core/image` blocks
+- Duplicate post
+- Duplicate posts in bulk
+- Replace strings in post
+- Replace string in posts in bulk
+- Regex replace strings in post
+- Regex replace string in posts in bulk
+- Add missing links in post
+- Replace `http` with `https` in post
+- Replace and old domain with a new domain in posts in bulk
+- Replace an old post slug with a new post slug in posts in bulk
+- Insert a block in posts in bulk
+- Remove a block from posts in bulk
+- Translate post
+- Translate posts in bulk
+- Import a post from another WordPress site
+- (Webhook for InstaWP) Register a new subscriber on Mailchimp
 
 ## Added `AnyStringScalar` wildcard scalar type
 
