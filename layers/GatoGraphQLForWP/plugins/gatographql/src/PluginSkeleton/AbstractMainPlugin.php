@@ -628,7 +628,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $nestedMutationsBlockDataItem,
             ])),
         ]);
-        if ($nestedMutationsSchemaConfigurationCustomPostID instanceof WP_Error) {
+        if ($nestedMutationsSchemaConfigurationCustomPostID === 0) {
             $nestedMutationsSchemaConfigurationCustomPostID = null;
         }
         $entityAsPayloadTypeBlockDataItem = [
@@ -647,7 +647,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $entityAsPayloadTypeBlockDataItem,
             ])),
         ]);
-        if ($nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID instanceof WP_Error) {
+        if ($nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID === 0) {
             $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = null;
         }
 
@@ -1727,7 +1727,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * @param array<array<string,mixed>> $blocks
+     * @param array<array<string,mixed>> $blockDataItems
      * @return array<array<string,mixed>>
      */
     protected function addInnerContentToBlockAtts(array $blockDataItems): array
