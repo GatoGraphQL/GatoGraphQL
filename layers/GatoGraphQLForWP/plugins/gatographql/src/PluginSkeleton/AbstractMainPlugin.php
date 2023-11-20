@@ -561,14 +561,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         \set_transient($transientName, true, 30);
         $this->installPluginSetupData($previousVersion);
-        \delete_transient($transientName);        
+        \delete_transient($transientName);
     }
 
     /**
      * Provide the installation in stages, version by version, to
      * be able to execute it both when installing/activating the plugin,
      * or updating it to a new version with setup data.
-     * 
+     *
      * The plugin's setup data will be installed if:
      *
      * - $previousVersion = null => Activating the plugin for first time
@@ -596,7 +596,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
         /** @var SchemaConfigPayloadTypesForMutationsBlock */
         $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
-        
+
         /**
          * Create the Schema Configurations
          */
@@ -608,23 +608,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
         // @todo Remove commented code
         // $adminSchemaConfigurationCustomPostID = \wp_insert_post([
-		// 	'post_status' => 'publish',
-		// 	'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-		// 	'post_title' => \__('Admin', 'gatographql'),
-		// 	'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
+        //  'post_status' => 'publish',
+        //  'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+        //  'post_title' => \__('Admin', 'gatographql'),
+        //  'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
         // ]);
         // $webhookSchemaConfigurationCustomPostID = \wp_insert_post([
-		// 	'post_status' => 'publish',
-		// 	'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-		// 	'post_title' => \__('Webhook', 'gatographql'),
-		// 	'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
+        //  'post_status' => 'publish',
+        //  'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+        //  'post_title' => \__('Webhook', 'gatographql'),
+        //  'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([])),
         // ]);
         $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
-			'post_status' => 'publish',
+            'post_status' => 'publish',
             // 'post_name' => 'nested-mutations', // Predefined slug to search/delete when installing .xml data in server
-			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-			'post_title' => \__('Nested mutations', 'gatographql'),
-			'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            'post_title' => \__('Nested mutations', 'gatographql'),
+            'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                 $nestedMutationsBlockDataItem,
             ])),
         ]);
@@ -638,10 +638,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ];
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
-			'post_status' => 'publish',
+            'post_status' => 'publish',
             // 'post_name' => 'nested-mutations-entity-as-mutation-payload-type', // Predefined slug to search/delete when installing .xml data in server
-			'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-			'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
+            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
             'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                 $nestedMutationsBlockDataItem,
                 $entityAsPayloadTypeBlockDataItem,
@@ -689,12 +689,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $endpointGraphiQLBlock = $instanceManager->getInstance(EndpointGraphiQLBlock::class);
         /** @var EndpointVoyagerBlock */
         $endpointVoyagerBlock = $instanceManager->getInstance(EndpointVoyagerBlock::class);
-                
+
         $adminCustomEndpointOptions = [
-			'post_status' => 'private',
-			'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
+            'post_status' => 'private',
+            'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
             'tax_input' => $adminEndpointTaxInputData,
-        ];     
+        ];
         // $adminAncestorCustomEndpointCustomPostID = \wp_insert_post(array_merge(
         //     $adminCustomEndpointOptions,
         //     [
@@ -730,7 +730,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     ]
         // );
         \wp_insert_post(array_merge(
-            $adminCustomEndpointOptions,//$adminAncestorCustomEndpointOptions,
+            $adminCustomEndpointOptions, //$adminAncestorCustomEndpointOptions,
             [
                 'post_title' => \__('Nested mutations', 'gatographql'),
                 'post_excerpt' => \__('Private client to execute queries that need nested mutations', 'gatographql'),
@@ -899,8 +899,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
         $adminPersistedQueryOptions = [
-			'post_status' => 'private',
-			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'post_status' => 'private',
+            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
             'tax_input' => $adminEndpointTaxInputData,
         ];
         // $adminAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
@@ -1148,7 +1148,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //     ]
         // );
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Duplicate post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1167,7 +1167,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Duplicate posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1189,7 +1189,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Replace strings in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1211,7 +1211,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1233,7 +1233,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Regex replace strings in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1255,7 +1255,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Regex replace strings in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1277,7 +1277,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Add missing links in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1296,7 +1296,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Replace "http" with "https" in image sources in post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1315,7 +1315,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Replace domain in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1334,7 +1334,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Replace post slug in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1356,7 +1356,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Insert block in posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1375,7 +1375,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Remove block from posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1394,7 +1394,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Translate post', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1413,7 +1413,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Translate posts', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1432,7 +1432,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Import post from WordPress site', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1451,7 +1451,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Fetch posts by thumbnail', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1470,7 +1470,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Fetch users by locale', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1489,7 +1489,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Fetch comments by period', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1508,7 +1508,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
         \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,//$adminTransformAncestorPersistedQueryOptions,
+            $adminPersistedQueryOptions, //$adminTransformAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Fetch image URLs in blocks', 'gatographql'),
                 // 'post_excerpt' => \__('', 'gatographql'),
@@ -1526,11 +1526,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
-        
-        
+
+
         // $webhookPersistedQueryOptions = [
-		// 	'post_status' => 'publish',
-		// 	'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+        //  'post_status' => 'publish',
+        //  'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
         // ];
         // $webhookAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
         //     $webhookPersistedQueryOptions,
@@ -1569,11 +1569,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // );
         $webhookPersistedQueryOptions = [
             'post_status' => 'draft', // They are public => don't publish them!
-			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
             'tax_input' => $webhookEndpointTaxInputData,
         ];
         \wp_insert_post(array_merge(
-            $webhookPersistedQueryOptions,//$webhookAncestorPersistedQueryOptions,
+            $webhookPersistedQueryOptions, //$webhookAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                 'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. More info: gatographql.com/blog/instawp-gatographql', 'gatographql'),
@@ -1628,7 +1628,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLEndpointCategoryTaxonomy */
         $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
-        
+
         $endpointCategoryTerm = \wp_insert_term(
             $name,
             $graphQLEndpointCategoryTaxonomy->getTaxonomy(),

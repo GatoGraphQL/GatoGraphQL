@@ -14,7 +14,7 @@ use RuntimeException;
 class GraphQLDocumentDataComposer
 {
     use BasicServiceTrait;
-    
+
     public const GRAPHQL_DOCUMENT_HEADER_SEPARATOR = '########################################################################';
     public const GRAPHQL_DOCUMENT_INNER_SEPARATOR = '*********************************************************************';
 
@@ -119,10 +119,10 @@ class GraphQLDocumentDataComposer
                 $extensionModuleResolver->getName($extensionModule)
             );
         }
-        
+
         $headerRequirementsSectionItems[] = '';
         $headerRequirementsSectionItems[] = \__('These Extensions are all included in any of these Bundles:', 'gatographql');
-        
+
         foreach ($requiredBundleModules as $bundleModule) {
             /** @var ExtensionModuleResolverInterface */
             $bundleModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleModule);
@@ -131,7 +131,7 @@ class GraphQLDocumentDataComposer
                 $bundleModuleResolver->getName($bundleModule)
             );
         }
-        
+
         $headerRequirementsSectionItems[] = '';
 
         return substr(
