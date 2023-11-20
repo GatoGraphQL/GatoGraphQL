@@ -35,7 +35,7 @@ Several private persisted queries are already created by the plugin, handling co
 - Translate post
 - Translate posts in bulk
 - Import a post from another WordPress site
-- (Webhook for InstaWP) Register a new subscriber on Mailchimp
+- (Webhook for InstaWP) Register a new subscriber on Mailchimp (change status from `"draft"` to `"publish` to enable it)
 
 ## Added `AnyStringScalar` wildcard scalar type
 
