@@ -16,7 +16,7 @@
 #
 ########################################################################
 
-query(
+query FetchUsersByLocale(
   $localeRegex: String!
 ) {
   usersByLocale: users(filter: { metaQuery: {
