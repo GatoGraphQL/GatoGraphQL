@@ -1381,10 +1381,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ));
         
         
-        $webhookPersistedQueryOptions = [
-			'post_status' => 'publish',
-			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-        ];
+        // $webhookPersistedQueryOptions = [
+		// 	'post_status' => 'publish',
+		// 	'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+        // ];
         // $webhookAncestorPersistedQueryCustomPostID = \wp_insert_post(array_merge(
         //     $webhookPersistedQueryOptions,
         //     [
@@ -1413,15 +1413,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //         ])),
         //     ]
         // ));
-        $webhookAncestorPersistedQueryOptions = array_merge(
-            $webhookPersistedQueryOptions,
-            [
-                'post_status' => 'draft', // They are public => don't publish them!
-                // 'post_parent' => $webhookAncestorPersistedQueryCustomPostID,
-            ]
-        );
+        // $webhookAncestorPersistedQueryOptions = array_merge(
+        //     $webhookPersistedQueryOptions,
+        //     [
+        //         'post_status' => 'draft', // They are public => don't publish them!
+        //         // 'post_parent' => $webhookAncestorPersistedQueryCustomPostID,
+        //     ]
+        // );
+        $webhookPersistedQueryOptions = [
+            'post_status' => 'draft', // They are public => don't publish them!
+			'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+        ];
         \wp_insert_post(array_merge(
-            $webhookAncestorPersistedQueryOptions,
+            $webhookPersistedQueryOptions,//$webhookAncestorPersistedQueryOptions,
             [
                 'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                 'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. More info: gatographql.com/blog/instawp-gatographql', 'gatographql'),
