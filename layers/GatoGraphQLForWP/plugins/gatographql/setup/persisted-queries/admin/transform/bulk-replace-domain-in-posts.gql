@@ -6,15 +6,24 @@
 #
 # *********************************************************************
 # 
+# URL params:
+#   - oldDomain: The old domain
+#   - newDomain: The new domain
+#
+# *********************************************************************
+# 
 # More info:
 #   - https://gatographql.com/recipes/site-migrations/
 #
 ########################################################################
 
-mutation ReplaceOldWithNewDomainInPosts {
+mutation ReplaceOldWithNewDomainInPosts(
+  $oldDomain: String!,
+  $newDomain: String!
+) {
   posts(
     filter: {
-      search: "https://my-old-domain.com"
+      search: $oldDomain
     },
     pagination: {
       limit: -1
@@ -23,8 +32,8 @@ mutation ReplaceOldWithNewDomainInPosts {
     id
     rawContent
     adaptedRawContent: _strReplace(
-      search: "https://my-old-domain.com"
-      replaceWith: "https://my-new-domain.com"
+      search: $oldDomain
+      replaceWith: $newDomain
       in: $__rawContent
     )
     update(input: {
