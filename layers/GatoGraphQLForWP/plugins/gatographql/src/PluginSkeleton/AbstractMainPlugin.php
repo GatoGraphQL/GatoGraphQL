@@ -685,6 +685,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $adminCustomEndpointOptions = [
 			'post_status' => 'private',
 			'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $adminEndpointTaxInputData,
         ];     
         // $adminAncestorCustomEndpointCustomPostID = \wp_insert_post(array_merge(
         //     $adminCustomEndpointOptions,
@@ -714,18 +715,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         //         ])),
         //     ]
         // ));
-        $adminAncestorCustomEndpointOptions = array_merge(
-            $adminCustomEndpointOptions,
-            [
-                // 'post_parent' => $adminAncestorCustomEndpointCustomPostID,
-            ]
-        );
+        // $adminAncestorCustomEndpointOptions = array_merge(
+        //     $adminCustomEndpointOptions,
+        //     [
+        //         // 'post_parent' => $adminAncestorCustomEndpointCustomPostID,
+        //     ]
+        // );
         \wp_insert_post(array_merge(
-            $adminAncestorCustomEndpointOptions,
+            $adminCustomEndpointOptions,//$adminAncestorCustomEndpointOptions,
             [
                 'post_title' => \__('Nested mutations', 'gatographql'),
                 'post_excerpt' => \__('Private client to execute queries that need nested mutations', 'gatographql'),
-                'tax_input' => $adminEndpointTaxInputData,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
