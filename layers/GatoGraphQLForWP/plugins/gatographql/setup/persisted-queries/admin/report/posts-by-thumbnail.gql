@@ -21,7 +21,8 @@ query {
           }
         }
       }
-    }
+    },
+    pagination: { limit: -1 }
   ) {
     id
     title
@@ -41,7 +42,8 @@ query {
           }
         }
       }
-    }
+    },
+    pagination: { limit: -1 }
   ) {
     id
     title

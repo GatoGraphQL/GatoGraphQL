@@ -19,15 +19,18 @@
 query FetchUsersByLocale(
   $localeRegex: String!
 ) {
-  usersByLocale: users(filter: { metaQuery: {
-    key: "locale",
-    compareBy: {
-      stringValue: {
-        value: $localeRegex
-        operator: REGEXP
+  usersByLocale: users(
+    filter: { metaQuery: {
+      key: "locale",
+      compareBy: {
+        stringValue: {
+          value: $localeRegex
+          operator: REGEXP
+        }
       }
-    }
-  }}) {
+    }},
+    pagination: { limit: -1 }
+  ) {
     id
     name
     locale: metaValue(key: "locale")
