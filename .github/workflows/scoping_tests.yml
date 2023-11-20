@@ -82,7 +82,7 @@ jobs:
                 run: |
                     composer global config minimum-stability dev
                     composer global config prefer-stable true
-                    composer global require humbug/php-scoper
+                    composer global require humbug/php-scoper:0.18.4
 
             # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
             # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
