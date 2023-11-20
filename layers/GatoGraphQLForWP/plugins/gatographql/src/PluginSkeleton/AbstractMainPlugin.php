@@ -1504,6 +1504,26 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         return null;
     }
 
+    protected function createEndpointCategoryID(string $slug, string $name, string $description): ?int
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+        
+        $endpointCategoryTerm = \wp_insert_term(
+            $name,
+            $graphQLEndpointCategoryTaxonomy->getTaxonomy(),
+            [
+                'slug' => $slug,
+                $description
+            ]
+        );
+        if (!($endpointCategoryTerm instanceof WP_Error)) {
+            return $endpointCategoryTerm['term_id'];
+        }
+        return null;
+    }
+
     protected function getWebhookEndpointCategoryID(): ?int
     {
         $slug = 'webhook';
