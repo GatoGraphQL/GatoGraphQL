@@ -99,8 +99,9 @@ mutation LoginUserAndUpdatePost(
         }
       }
       post {
+        title
         slug
-        rawContent
+        content
       }
     }
   }
@@ -121,8 +122,8 @@ mutation LoginUserAndUpdatePost(
     }
     post {
       title
-      content
       slug
+      content
     }
   }
 }
