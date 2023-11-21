@@ -17,6 +17,7 @@
 # URL params:
 #   - postIds: List of IDs of the posts to translate
 #   - translateToLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - update: Indicate if to update each post, or create a new one
 #
 # *********************************************************************
 # 
