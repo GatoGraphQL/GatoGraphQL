@@ -40,9 +40,10 @@ set -e
 rector_config="$1"
 rector_options="$2"
 composer_working_dir="$3"
-additional_rector_after_configs="$4"
-local_package_owners="$5"
-target_php_version="$6"
+additional_rector_before_configs="$4"
+additional_rector_after_configs="$5"
+local_package_owners="$6"
+target_php_version="$7"
 
 default_composer_working_dir="."
 
@@ -63,6 +64,16 @@ fi
 ########################################################################
 # Logic
 # ----------------------------------------------------------------------
+
+# Execute additional rector configs
+# They must be self contained, already including all the src/ folders to downgrade
+if [ -n "$additional_rector_before_configs" ]; then
+    for rector_config in $additional_rector_before_configs
+    do
+        note "[Before] Running additional Rector downgrade config: $rector_config"
+        vendor/bin/rector process --config=$rector_config --ansi $rector_options
+    done
+fi
 
 packages_to_downgrade=()
 package_paths=()
@@ -121,7 +132,7 @@ vendor/bin/rector process $paths --config=$rector_config --ansi $rector_options
 if [ -n "$additional_rector_after_configs" ]; then
     for rector_config in $additional_rector_after_configs
     do
-        note "Running additional Rector downgrade config: $rector_config"
+        note "[After] Running additional Rector downgrade config: $rector_config"
         vendor/bin/rector process --config=$rector_config --ansi $rector_options
     done
 fi
