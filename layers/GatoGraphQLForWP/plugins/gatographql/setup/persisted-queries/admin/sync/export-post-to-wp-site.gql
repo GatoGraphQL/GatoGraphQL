@@ -4,7 +4,8 @@
 # into some downstream WordPress site.
 #
 # The Gato GraphQL plugin (free version) must be installed on the
-# downstream website.
+# downstream website. It must expose an endpoint with "Nested mutations"
+# enabled.
 #
 # The `$update` parameter indicates if to create or update a post in
 # the downstream site.
