@@ -19,7 +19,8 @@
 #   - core/preformatted
 #   - core/embed
 #
-# The translation will be saved as a new post, with the translated slug.
+# The translation will be saved as a new post with status "draft",
+# using the translated slug.
 #
 # *********************************************************************
 # 
@@ -1172,12 +1173,12 @@ mutation TranslatePost($postId: ID!)
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
 ]) {
-  updatePost(input: {
-    id: $postId,
+  createPost(input: {
     title: $transformedTitle,
     contentAs: {
       html: $transformedRawContent
-    }
+    },
+    status: draft
   }) {
     status
     errors {
@@ -1189,6 +1190,7 @@ mutation TranslatePost($postId: ID!)
     post {
       id
       title
+      slug
       rawContent
     }    
   }
