@@ -92,7 +92,7 @@ class ContainerConfigurationService
          */
         if ($downgradeRectorConfig = $this->getDowngradeRectorDataSource()) {
             $parameters->set(
-                CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS,
+                CustomOption::ADDITIONAL_DOWNGRADE_RECTOR_AFTER_CONFIGS,
                 $downgradeRectorConfig->getAdditionalDowngradeRectorAfterFiles()
             );
         }

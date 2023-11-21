@@ -22,7 +22,7 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
         ParameterProvider $parameterProvider
     ) {
         parent::__construct();
-        $this->additionalDowngradeRectorConfigs = $parameterProvider->provideArrayParameter(Option::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS);
+        $this->additionalDowngradeRectorConfigs = $parameterProvider->provideArrayParameter(Option::ADDITIONAL_DOWNGRADE_RECTOR_AFTER_CONFIGS);
     }
 
     protected function configure(): void
