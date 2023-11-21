@@ -25,6 +25,10 @@ final class Option
     /**
      * @var string
      */
+    public final const ADDITIONAL_DOWNGRADE_RECTOR_BEFORE_CONFIGS = 'additional-downgrade-rector-before-configs';
+    /**
+     * @var string
+     */
     public final const ADDITIONAL_DOWNGRADE_RECTOR_AFTER_CONFIGS = 'additional-downgrade-rector-after-configs';
     /**
      * @var string
