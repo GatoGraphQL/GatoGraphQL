@@ -98,7 +98,7 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function getPluginVersionWithCommitHash(): string
     {
-        return $this->pluginVersion . ($this->commitHash ? '#' . $this->commitHash : $this->commitHash);
+        return $this->pluginVersion . (!empty($this->commitHash) ? '#' . $this->commitHash : '');
     }
 
     /**
