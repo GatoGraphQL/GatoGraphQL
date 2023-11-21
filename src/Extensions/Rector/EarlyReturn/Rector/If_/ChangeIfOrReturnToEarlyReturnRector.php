@@ -45,14 +45,14 @@ final class ChangeIfOrReturnToEarlyReturnRector extends AbstractRector
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition('Changes if && to early return', [
+        return new RuleDefinition('Changes if || return to early return', [
             new CodeSample(
                 <<<'CODE_SAMPLE'
 class SomeClass
 {
     public function canDrive(Car $car)
     {
-        if ($car->hasWheels && $car->hasFuel) {
+        if ($car->hasWheels || $car->hasFuel) {
             return true;
         }
 
@@ -67,15 +67,15 @@ class SomeClass
 {
     public function canDrive(Car $car)
     {
-        if (! $car->hasWheels) {
-            return false;
+        if ($car->hasWheels) {
+            return true;
         }
 
-        if (! $car->hasFuel) {
-            return false;
+        if ($car->hasFuel) {
+            return true;
         }
 
-        return true;
+        return false;
     }
 }
 CODE_SAMPLE
