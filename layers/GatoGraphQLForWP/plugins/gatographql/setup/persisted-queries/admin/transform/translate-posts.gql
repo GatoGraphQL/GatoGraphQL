@@ -2090,3 +2090,21 @@ mutation TranslatePosts(
     }
   }
 }
+
+query RetrieveCreatedPosts(
+  $update: Boolean! = false
+)
+  @depends(on: "TranslatePosts")
+  @include(if: $update)
+{
+  createdPosts: posts(
+    filter: {
+      ids: $createdPostIDs,
+      status: [draft]
+    }
+  ) {
+    id
+    title
+    rawContent
+  }
+}
