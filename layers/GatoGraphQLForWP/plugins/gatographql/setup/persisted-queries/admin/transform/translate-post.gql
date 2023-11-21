@@ -1168,11 +1168,15 @@ query PrepareMetaReplacements
       @export(as: "transformedTitle")
 }
 
-mutation TranslatePost($postId: ID!)
+mutation TranslatePost(
+  $postId: ID!
+  $update: Boolean! = false
+)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
   ]
+  @skip(if: $update)
 ) {
   createPost(input: {
     title: $transformedTitle,
