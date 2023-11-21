@@ -149,7 +149,7 @@ mutation LoginUserAndUpdatePost(
     @remove
 }
 
-query ExportSendGraphQLHTTPRequestInputs(
+query SendGraphQLHTTPRequest(
   $downstreamServerGraphQLEndpointURL: String!
   $update: Boolean! = false
   $username: String!
@@ -192,110 +192,4 @@ query ExportSendGraphQLHTTPRequestInputs(
       ]
     }
   )
-    @export(as: "downstreamGraphQLResponse")
-
-  requestProducedErrors: _isNull(value: $__downstreamGraphQLResponse)
-    @export(as: "requestProducedErrors")
-    @export(as: "anyErrorProduced")
-    @remove
-}
-
-query ExportGraphQLResponsesHaveErrors
-  @depends(on: "SendGraphQLHTTPRequests")
-  @skip(if: $isMissingPostInUpstream)
-  @skip(if: $requestProducedErrors)
-  @include(if: $hasDownstreamDomains)
-{
-  graphQLResponsesHaveErrors: _echo(value: $downstreamGraphQLResponse)    
-    # Check if any GraphQL response has the "errors" entry
-    @underEachArrayItem(
-      passValueOnwardsAs: "response"
-      affectDirectivesUnderPos: [1, 2]
-    )
-      @applyField(
-        name: "_propertyIsSetInJSONObject"
-        arguments: {
-          object: $response
-          by: {
-            key: "errors"
-          }
-        }
-        setResultInResponse: true
-      )
-    @export(as: "graphQLResponsesHaveErrors")
-    @remove
-}
-
-query ValidateGraphQLResponsesHaveErrors
-  @depends(on: "ExportGraphQLResponsesHaveErrors")
-  @skip(if: $isMissingPostInUpstream)
-  @skip(if: $requestProducedErrors)
-  @include(if: $hasDownstreamDomains)
-{
-  anyGraphQLResponseHasErrors: _or(values: $graphQLResponsesHaveErrors)
-    @export(as: "anyErrorProduced")
-    @remove
-}
-
-query ExportRevertGraphQLHTTPRequestInputs(
-  $username: String!
-  $userPassword: String!
-  $postSlug: String!
-  $previousPostContent: String!
-)
-  @depends(on: "ValidateGraphQLResponsesHaveErrors")
-  @include(if: $hasDownstreamDomains)
-  @include(if: $anyErrorProduced)
-{
-  revertGraphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
-    @underEachArrayItem(
-      passValueOnwardsAs: "endpoint"
-    )
-      @applyField(
-        name: "_echo",
-        arguments: {
-          value: {
-            endpoint: $endpoint,
-            query: $query,
-            variables: [
-              {
-                name: "username",
-                value: $username
-              },
-              {
-                name: "userPassword",
-                value: $userPassword
-              },
-              {
-                name: "postSlug",
-                value: $postSlug
-              },
-              {
-                name: "postContent",
-                value: $previousPostContent
-              }
-            ]
-          }
-        },
-        setResultInResponse: true
-      )
-    @export(as: "revertGraphQLHTTPRequestInputs")
-    @remove
-}
-
-query RevertGraphQLHTTPRequests
-  @depends(on: "ExportRevertGraphQLHTTPRequestInputs")
-  @skip(if: $isMissingPostInUpstream)
-  @include(if: $hasDownstreamDomains)
-  @include(if: $anyErrorProduced)
-{
-  revertGraphQLResponses: _sendGraphQLHTTPRequests(
-    inputs: $sendGraphQLHTTPRequestInputs
-  )
-}
-
-query ExecuteAll
-  @depends(on: "RevertGraphQLHTTPRequests")
-{
-  id @remove
 }
