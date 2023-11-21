@@ -2049,7 +2049,10 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslatePosts($postIds: ID!)
+mutation TranslatePosts(
+  $postIds: ID!
+  $update: Boolean! = false
+)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
