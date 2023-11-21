@@ -42,6 +42,9 @@ class PluginDataSource
                 ]),
                 'dist_repo_organization' => 'GatoGraphQLForWordPress',
                 'dist_repo_name' => 'gatographql-dist',
+                'additional_rector_configs_before' => [
+                    $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
+                ],
                 'additional_rector_configs_after' => [
                     $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-mixedtype.php',
                     $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-uniontype.php',
