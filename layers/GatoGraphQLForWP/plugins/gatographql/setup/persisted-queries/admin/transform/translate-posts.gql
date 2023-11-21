@@ -4,8 +4,11 @@
 # once (in bulk), while executing a single call to the Google Translate
 # API containing all text to translate from all the posts.
 #
-# Each translation will be saved as a new post with status "draft",
-# using the translated slug.
+# Depending on the `$update` parameter, each translation will either
+# be saved as:
+#
+#   - false (default): A new post (using the translated slug) with "draft" status
+#   - true: The same post
 #
 # See Persisted Query "Translate post" for additional documentation.
 #

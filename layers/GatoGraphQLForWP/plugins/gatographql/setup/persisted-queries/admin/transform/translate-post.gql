@@ -19,9 +19,10 @@
 #   - core/preformatted
 #   - core/embed
 #
-# Depending on the `$update` parameter, the translation will either be saved as:
+# Depending on the `$update` parameter, the translation will either
+# be saved as:
 #
-#   - false (default): A new post, with status "draft", and using the translated slug
+#   - false (default): A new post (using the translated slug) with "draft" status
 #   - true: The same post
 #
 # *********************************************************************
