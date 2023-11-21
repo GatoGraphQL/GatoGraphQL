@@ -4,6 +4,9 @@
 # once (in bulk), while executing a single call to the Google Translate
 # API containing all text to translate from all the posts.
 #
+# Each translation will be saved as a new post with status "draft",
+# using the translated slug.
+#
 # See Persisted Query "Translate post" for additional documentation.
 #
 # *********************************************************************
