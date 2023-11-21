@@ -86,12 +86,6 @@ mutation LoginUserAndUpdatePost(
 
   post(by: {slug: $postSlug})
     @include(if: $update)
-    @fail(
-      message: "There is no post in the downstream site with the provided slug"
-      data: {
-        slug: $postSlug
-      }
-    )
   {
     update(input: {
       title: $postTitle,
