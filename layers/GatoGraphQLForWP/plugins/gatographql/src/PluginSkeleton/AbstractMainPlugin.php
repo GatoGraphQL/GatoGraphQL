@@ -1432,7 +1432,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
+                    ...$nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks,//...$useAncestorSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));

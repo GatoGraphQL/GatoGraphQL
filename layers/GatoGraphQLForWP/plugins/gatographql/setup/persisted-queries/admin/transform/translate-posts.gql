@@ -2083,18 +2083,9 @@ mutation TranslatePosts(
         html: $__transformedRawContent
       }
     }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        title
-        rawContent
-      }
+      id
+      title
+      rawContent
     }
   }
 }
