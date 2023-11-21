@@ -31,6 +31,7 @@ jobs:
                     echo "exclude_package_tests=$(vendor/bin/monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=tests | sed -e 's/ / --exclude /g')" >> $GITHUB_OUTPUT
                     echo "skip_downgrade_test_paths=$(vendor/bin/monorepo-builder skip-downgrade-test-paths --config=config/monorepo-builder/skip-downgrade-test-paths.php | sed -e 's/ / --exclude /g')" >> $GITHUB_OUTPUT
                     echo "generate_artifact_with_downgraded_code=$(vendor/bin/monorepo-builder env-var GENERATE_ARTIFACT_WITH_DOWNGRADED_CODE --config=config/monorepo-builder/env-var.php)" >> $GITHUB_OUTPUT
+                    echo "additional_downgrade_rector_before_configs=$(vendor/bin/monorepo-builder additional-downgrade-rector-before-configs --config=config/monorepo-builder/additional-downgrade-rector-before-configs.php)" >> $GITHUB_OUTPUT
                     echo "additional_downgrade_rector_after_configs=$(vendor/bin/monorepo-builder additional-downgrade-rector-after-configs --config=config/monorepo-builder/additional-downgrade-rector-after-configs.php)" >> $GITHUB_OUTPUT
                     echo "local_package_owners=$(vendor/bin/monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)" >> $GITHUB_OUTPUT
 
@@ -39,6 +40,7 @@ jobs:
             exclude_package_tests: ${{ steps.output_data.outputs.exclude_package_tests }}
             skip_downgrade_test_paths: ${{ steps.output_data.outputs.skip_downgrade_test_paths }}
             generate_artifact: ${{ steps.output_data.outputs.generate_artifact_with_downgraded_code }}
+            additional_downgrade_rector_before_configs: ${{ steps.output_data.outputs.additional_downgrade_rector_before_configs }}
             additional_downgrade_rector_after_configs: ${{ steps.output_data.outputs.additional_downgrade_rector_after_configs }}
             local_package_owners: ${{ steps.output_data.outputs.local_package_owners }}
 
@@ -74,7 +76,7 @@ jobs:
             # Pass param "additional_rector_after_configs" to fix bug
             # @see https://github.com/rectorphp/rector/issues/5962
             -   name: Dependencies - Downgrade PHP code via Rector
-                run: ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php "" "" "${{ needs.provide_data.outputs.additional_downgrade_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
+                run: ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php "" "" "${{ needs.provide_data.outputs.additional_downgrade_rector_before_configs }}" "${{ needs.provide_data.outputs.additional_downgrade_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
 
             # after_downgrade_code.sh => Hacks to fix the codebase whenever Rector cannot handle it
             -   name: Custom bash script to fix items in the code that Rector cannot handle
@@ -95,7 +97,7 @@ jobs:
                 if: github.event_name == 'push'
 
             -   name: (Again) Dependencies - Downgrade PHP code via Rector
-                run: ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run "" "${{ needs.provide_data.outputs.additional_downgrade_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
+                run: ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run "" "${{ needs.provide_data.outputs.additional_downgrade_rector_before_configs }}" "${{ needs.provide_data.outputs.additional_downgrade_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
                 if: github.event_name == 'push'
             ################################################################################
 
