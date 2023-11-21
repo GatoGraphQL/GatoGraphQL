@@ -9,7 +9,7 @@ use Rector\Set\Contract\SetListInterface;
 /**
  * @api
  */
-final class CustomDowngradeLevelSetList implements SetListInterface
+final class CustomDowngradeSetList implements SetListInterface
 {
     /**
      * @var string
