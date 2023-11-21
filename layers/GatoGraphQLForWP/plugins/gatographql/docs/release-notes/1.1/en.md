@@ -35,6 +35,7 @@ Several private persisted queries are already created by the plugin, handling co
 - Translate post
 - Translate posts in bulk
 - Import a post from another WordPress site
+- Export a post into another WordPress site
 - (Webhook for InstaWP) Register a new subscriber on Mailchimp (change status from `"draft"` to `"publish` to enable it)
 
 ## Added Settings to enable or disable installing the setup data
