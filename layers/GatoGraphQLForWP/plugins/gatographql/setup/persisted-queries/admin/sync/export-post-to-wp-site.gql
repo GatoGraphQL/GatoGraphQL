@@ -56,7 +56,10 @@ query CheckHasPost($postSlug: String!)
       }
     )
   {
-    id
+    rawTitle
+      @export(as: "postTitle")
+    rawContent
+      @export(as: "postContent")
   }
 
   isMissingPostInUpstream: _isNull(value: $__post)
@@ -152,8 +155,6 @@ query ExportSendGraphQLHTTPRequestInputs(
   $username: String!
   $userPassword: String!
   $postSlug: String!
-  $newPostTitle: String!
-  $newPostContent: String!
 )
   @depends(on: "ExportDownstreamGraphQLQuery")
   @skip(if: $isMissingPostInUpstream)
@@ -182,11 +183,11 @@ query ExportSendGraphQLHTTPRequestInputs(
         },
         {
           name: "postTitle",
-          value: $newPostTitle
+          value: $postTitle
         },
         {
           name: "postContent",
-          value: $newPostContent
+          value: $postContent
         }
       ]
     }
