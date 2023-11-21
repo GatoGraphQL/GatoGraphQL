@@ -8,7 +8,7 @@ use Rector\Set\ValueObject\DowngradeLevelSetList;
 use Rector\Set\ValueObject\DowngradeSetList;
 
 return static function (RectorConfig $rectorConfig): void {
-    // @todo Add GitHub issue explaining problem
+    // @see https://github.com/rectorphp/rector/issues/8321
     $rectorConfig->rules([
         ChangeIfOrReturnToEarlyReturnRector::class,
     ]);
