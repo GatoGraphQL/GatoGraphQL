@@ -23,7 +23,7 @@
 # *********************************************************************
 # 
 # URL params:
-#   - postSlug: The slug of the post to import
+#   - postSlug: The slug of the post to export
 #   - downstreamServerGraphQLEndpointURL: The GraphQL endpoint on the downstream WordPress site
 #   - username: Credentials on the downstream WordPress site
 #   - userPassword: Credentials on the downstream WordPress site
@@ -45,7 +45,7 @@ query InitializeDynamicVariables
     @remove
 }
 
-query GetCustomDownstreamDomains($postSlug: String!)
+query CheckHasPost($postSlug: String!)
   @depends(on: "InitializeDynamicVariables")
 {
   post(by: { slug: $postSlug })
@@ -56,57 +56,31 @@ query GetCustomDownstreamDomains($postSlug: String!)
       }
     )
   {
-    customDownstreamDomains: metaValues(key: "downstream_domains")
-      @export(as: "downstreamDomains")
-
-    hasDefinedCustomDownstreamDomains: _notNull(value: $__customDownstreamDomains)
-      @export(as: "hasDefinedCustomDownstreamDomains")
-      @remove
-
-    hasCustomDownstreamDomains: _notEmpty(value: $__customDownstreamDomains)
-      @export(as: "hasDownstreamDomains")
+    id
   }
 
   isMissingPostInUpstream: _isNull(value: $__post)
     @export(as: "isMissingPostInUpstream")
 }
 
-query GetAllDownstreamDomains
-  @depends(on: "GetCustomDownstreamDomains")
-  @skip(if: $isMissingPostInUpstream)
-  @skip(if: $hasDefinedCustomDownstreamDomains)
-{
-  allDownstreamDomains: optionValues(name: "downstream_domains")
-    @export(as: "downstreamDomains")
-
-  hasAllDownstreamDomains: _notEmpty(value: $__allDownstreamDomains)
-    @export(as: "hasDownstreamDomains")
-}
-
 ############################################################
 # (By default) Append "/graphql" to the domain, to point
 # to that site's GraphQL single endpoint
 ############################################################
-query ExportDownstreamGraphQLEndpointsAndQuery(
-  $endpointPath: String! = "/graphql"
+query ExportDownstreamGraphQLQuery(
+  $update: Boolean! = false
 )
-  @depends(on: "GetAllDownstreamDomains")
+  @depends(on: "CheckHasPost")
   @skip(if: $isMissingPostInUpstream)
-  @include(if: $hasDownstreamDomains)
 {
-  downstreamGraphQLEndpoints: _echo(value: $downstreamDomains)
-    @underEachArrayItem(
-      passValueOnwardsAs: "domain"
-    )
-      @strAppend(string: $endpointPath)
-    @export(as: "downstreamGraphQLEndpoints")
-
   query: _echo(value: """
 
 mutation LoginUserAndUpdatePost(
+  $update: Boolean! = false
   $username: String!
   $userPassword: String!
   $postSlug: String!
+  $postTitle: String!
   $postContent: String!
 ) {
   loginUser(by: {
@@ -119,6 +93,7 @@ mutation LoginUserAndUpdatePost(
   }
 
   post(by: {slug: $postSlug})
+    @include(if: $update)
     @fail(
       message: "There is no post in the downstream site with the provided slug"
       data: {
@@ -127,6 +102,7 @@ mutation LoginUserAndUpdatePost(
     )
   {
     update(input: {
+      title: $postTitle,
       contentAs: { html: $postContent },
     }) {
       status
@@ -142,6 +118,26 @@ mutation LoginUserAndUpdatePost(
       }
     }
   }
+
+  createPost(input: {
+    title: $postTitle,
+    slug: $postSlug,
+    contentAs: { html: $postContent },
+  })
+    @skip(if: $update)
+  {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      slug
+      rawContent
+    }
+  }
 }
 
     """
@@ -151,62 +147,53 @@ mutation LoginUserAndUpdatePost(
 }
 
 query ExportSendGraphQLHTTPRequestInputs(
+  $downstreamServerGraphQLEndpointURL: String!
+  $update: Boolean! = false
   $username: String!
   $userPassword: String!
   $postSlug: String!
+  $newPostTitle: String!
   $newPostContent: String!
 )
-  @depends(on: "ExportDownstreamGraphQLEndpointsAndQuery")
+  @depends(on: "ExportDownstreamGraphQLQuery")
   @skip(if: $isMissingPostInUpstream)
   @include(if: $hasDownstreamDomains)
 {
-  sendGraphQLHTTPRequestInputs: _echo(value: $downstreamGraphQLEndpoints)
-    @underEachArrayItem(
-      passValueOnwardsAs: "endpoint"
-    )
-      @applyField(
-        name: "_echo",
-        arguments: {
-          value: {
-            endpoint: $endpoint,
-            query: $query,
-            variables: [
-              {
-                name: "username",
-                value: $username
-              },
-              {
-                name: "userPassword",
-                value: $userPassword
-              },
-              {
-                name: "postSlug",
-                value: $postSlug
-              },
-              {
-                name: "postContent",
-                value: $newPostContent
-              }
-            ]
-          }
+  _sendGraphQLHTTPRequest(
+    input: {
+      endpoint: $downstreamServerGraphQLEndpointURL,
+      query: $query,
+      variables: [
+        {
+          name: "update",
+          value: $update
         },
-        setResultInResponse: true
-      )
-    @export(as: "sendGraphQLHTTPRequestInputs")
-    @remove
-}
-
-query SendGraphQLHTTPRequests
-  @depends(on: "ExportSendGraphQLHTTPRequestInputs")
-  @skip(if: $isMissingPostInUpstream)
-  @include(if: $hasDownstreamDomains)
-{
-  downstreamGraphQLResponses: _sendGraphQLHTTPRequests(
-    inputs: $sendGraphQLHTTPRequestInputs
+        {
+          name: "username",
+          value: $username
+        },
+        {
+          name: "userPassword",
+          value: $userPassword
+        },
+        {
+          name: "postSlug",
+          value: $postSlug
+        },
+        {
+          name: "postTitle",
+          value: $newPostTitle
+        },
+        {
+          name: "postContent",
+          value: $newPostContent
+        }
+      ]
+    }
   )
-    @export(as: "downstreamGraphQLResponses")
+    @export(as: "downstreamGraphQLResponse")
 
-  requestProducedErrors: _isNull(value: $__downstreamGraphQLResponses)
+  requestProducedErrors: _isNull(value: $__downstreamGraphQLResponse)
     @export(as: "requestProducedErrors")
     @export(as: "anyErrorProduced")
     @remove
@@ -218,7 +205,7 @@ query ExportGraphQLResponsesHaveErrors
   @skip(if: $requestProducedErrors)
   @include(if: $hasDownstreamDomains)
 {
-  graphQLResponsesHaveErrors: _echo(value: $downstreamGraphQLResponses)    
+  graphQLResponsesHaveErrors: _echo(value: $downstreamGraphQLResponse)    
     # Check if any GraphQL response has the "errors" entry
     @underEachArrayItem(
       passValueOnwardsAs: "response"
