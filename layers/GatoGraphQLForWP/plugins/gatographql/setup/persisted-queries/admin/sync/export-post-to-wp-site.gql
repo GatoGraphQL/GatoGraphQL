@@ -35,18 +35,7 @@
 #
 ########################################################################
 
-query InitializeDynamicVariables
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
-{
-  initVariablesWithFalse: _echo(value: false)
-    @export(as: "requestProducedErrors")
-    @export(as: "anyErrorProduced")
-    @export(as: "hasDownstreamDomains")
-    @remove
-}
-
 query CheckHasPost($postSlug: String!)
-  @depends(on: "InitializeDynamicVariables")
 {
   post(by: { slug: $postSlug })
     @fail(
@@ -158,7 +147,6 @@ query SendGraphQLHTTPRequest(
 )
   @depends(on: "ExportDownstreamGraphQLQuery")
   @skip(if: $isMissingPostInUpstream)
-  @include(if: $hasDownstreamDomains)
 {
   _sendGraphQLHTTPRequest(
     input: {
