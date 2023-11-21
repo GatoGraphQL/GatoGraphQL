@@ -19,14 +19,17 @@
 #   - core/preformatted
 #   - core/embed
 #
-# The translation will be saved as a new post with status "draft",
-# using the translated slug.
+# Depending on the `$update` parameter, the translation will either be saved as:
+#
+#   - false (default): A new post, with status "draft", and using the translated slug
+#   - true: The same post
 #
 # *********************************************************************
 # 
 # URL params:
 #   - postId: ID of the post to translate
 #   - translateToLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - update: Indicate if to update the post, or create a new one
 #
 # *********************************************************************
 # 
