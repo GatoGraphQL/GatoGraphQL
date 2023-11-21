@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-class MonorepoChangeIfOrToEarlyReturnChainedRuleContainerConfigurationService extends AbstractChangeIfOrToEarlyReturnChainedRuleContainerConfigurationService
+class MonorepoChangeIfOrReturnToEarlyReturnChainedRuleContainerConfigurationService extends AbstractChangeIfOrReturnToEarlyReturnChainedRuleContainerConfigurationService
 {
     protected function getPaths(): array
     {

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\MonorepoChangeIfOrToEarlyReturnChainedRuleContainerConfigurationService;
+use PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules\MonorepoChangeIfOrReturnToEarlyReturnChainedRuleContainerConfigurationService;
 use Rector\Config\RectorConfig;
 
 return static function (RectorConfig $rectorConfig): void {
-    $containerConfigurationService = new MonorepoChangeIfOrToEarlyReturnChainedRuleContainerConfigurationService(
+    $containerConfigurationService = new MonorepoChangeIfOrReturnToEarlyReturnChainedRuleContainerConfigurationService(
         $rectorConfig,
         dirname(__DIR__, 5)
     );

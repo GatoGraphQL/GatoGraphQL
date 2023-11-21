@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\PoP\Config\Rector\Downgrade\Configurators\ChainedRules;
 
-use PoP\PoP\Extensions\Rector\EarlyReturn\Rector\If_\ChangeIfOrToEarlyReturnRector;
+use PoP\PoP\Extensions\Rector\EarlyReturn\Rector\If_\ChangeIfOrReturnToEarlyReturnRector;
 use Rector\Core\Contract\Rector\RectorInterface;
 
-abstract class AbstractChangeIfOrToEarlyReturnChainedRuleContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
+abstract class AbstractChangeIfOrReturnToEarlyReturnChainedRuleContainerConfigurationService extends AbstractChainedRuleContainerConfigurationService
 {
     /**
      * @return string[]
@@ -16,7 +16,7 @@ abstract class AbstractChangeIfOrToEarlyReturnChainedRuleContainerConfigurationS
     protected function getRectorRuleClasses(): array
     {
         return [
-            ChangeIfOrToEarlyReturnRector::class,
+            ChangeIfOrReturnToEarlyReturnRector::class,
         ];
     }
 }

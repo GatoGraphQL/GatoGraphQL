@@ -31,7 +31,7 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 /**
  * @see \Rector\Tests\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector\ChangeAndIfToEarlyReturnRectorTest
  */
-final class ChangeIfOrToEarlyReturnRector extends AbstractRector
+final class ChangeIfOrReturnToEarlyReturnRector extends AbstractRector
 {
     public function __construct(
         private readonly IfManipulator $ifManipulator,
