@@ -13,7 +13,7 @@ class DowngradeRectorDataSource
     /**
      * @return string[]
      */
-    public function getAdditionalDowngradeRectorFiles(): array
+    public function getAdditionalDowngradeRectorAfterFiles(): array
     {
         return [
             $this->rootDir . '/config/rector/downgrade/monorepo/chained-rules/rector-arrowfunction-mixedtype.php',
