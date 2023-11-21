@@ -13,6 +13,8 @@ use PoP\Root\Module\ModuleInterface;
 
 abstract class AbstractPlugin implements PluginInterface
 {
+    public const PLUGIN_VERSION_COMMIT_HASH_IDENTIFIER = '#';
+
     protected ?PluginInfoInterface $pluginInfo = null;
 
     protected string $pluginBaseName;
@@ -98,7 +100,7 @@ abstract class AbstractPlugin implements PluginInterface
      */
     public function getPluginVersionWithCommitHash(): string
     {
-        return $this->pluginVersion . (!empty($this->commitHash) ? '#' . $this->commitHash : '');
+        return $this->pluginVersion . (!empty($this->commitHash) ? self::PLUGIN_VERSION_COMMIT_HASH_IDENTIFIER . $this->commitHash : '');
     }
 
     /**
