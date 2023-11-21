@@ -19,6 +19,8 @@
 #   - core/preformatted
 #   - core/embed
 #
+# The translation will be saved as a new post, with the translated slug.
+#
 # *********************************************************************
 # 
 # URL params:
