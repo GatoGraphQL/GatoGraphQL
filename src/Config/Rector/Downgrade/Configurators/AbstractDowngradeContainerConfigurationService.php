@@ -11,13 +11,15 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
 use PoP\PoP\Extensions\Rector\Set\ValueObject\CustomDowngradeSetList;
 use Rector\Core\ValueObject\PhpVersion;
+use Rector\Set\ValueObject\DowngradeLevelSetList;
 
 abstract class AbstractDowngradeContainerConfigurationService extends AbstractContainerConfigurationService
 {
     public function configureContainer(): void
     {
         $this->rectorConfig->sets([
-            CustomDowngradeSetList::DOWN_TO_PHP_72,
+            CustomDowngradeSetList::BEFORE_DOWNGRADE,
+            DowngradeLevelSetList::DOWN_TO_PHP_72,
         ]);
 
         /**
