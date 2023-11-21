@@ -25,7 +25,7 @@
 #
 ########################################################################
 
-query InitializeEmptyVariables($postIds: ID!) {
+query InitializeEmptyVariables($postIds: [ID!]!) {
   emptyVars: posts(filter: { ids: $postIds } ) {
     emptyArray: _echo(value: [])
       @export(
@@ -264,7 +264,7 @@ query InitializeEmptyVariables($postIds: ID!) {
   }
 }
 
-query FetchData($postIds: ID!)
+query FetchData($postIds: [ID!]!)
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
   @depends(on: "InitializeEmptyVariables")
 {
@@ -2053,7 +2053,7 @@ query PrepareMetaReplacements
 }
 
 mutation TranslatePosts(
-  $postIds: ID!
+  $postIds: [ID!]!
   $update: Boolean! = false
 )
   @depends(on: [
