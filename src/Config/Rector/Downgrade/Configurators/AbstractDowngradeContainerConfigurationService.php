@@ -9,6 +9,7 @@ namespace PoP\PoP\Config\Rector\Downgrade\Configurators;
 // use Rector\Renaming\Rector\ClassConstFetch\RenameClassConstFetchRector;
 // use Rector\Renaming\ValueObject\RenameClassAndConstFetch;
 use PoP\PoP\Config\Rector\Configurators\AbstractContainerConfigurationService;
+use PoP\PoP\Extensions\Rector\EarlyReturn\Rector\If_\ChangeIfOrReturnToEarlyReturnRector;
 use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeLevelSetList;
 
@@ -16,6 +17,10 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
 {
     public function configureContainer(): void
     {
+        // @todo Add GitHub issue explaining problem
+        $this->rectorConfig->rules([
+            ChangeIfOrReturnToEarlyReturnRector::class,
+        ]);
         $this->rectorConfig->sets([
             DowngradeLevelSetList::DOWN_TO_PHP_72,
         ]);
