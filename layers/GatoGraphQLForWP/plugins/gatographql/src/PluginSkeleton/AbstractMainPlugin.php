@@ -529,6 +529,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \add_action(
             'init',
             function () use ($previousVersion): void {
+                // The version could contain the hash commit. Remove it!
+                $commitHashPos = strpos($previousVersion, self::PLUGIN_VERSION_COMMIT_HASH_IDENTIFIER);
+                if ($commitHashPos !== false) {
+                    $previousVersion = substr($previousVersion, 0, $commitHashPos);
+                }
                 $this->maybeInstallPluginSetupData($previousVersion);
             },
             PHP_INT_MAX
