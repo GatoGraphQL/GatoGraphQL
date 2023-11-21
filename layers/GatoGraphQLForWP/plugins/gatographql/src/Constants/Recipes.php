@@ -44,5 +44,6 @@ class Recipes
     public const PINGING_EXTERNAL_SERVICES = 'pinging-external-services';
     public const UPDATING_LARGE_SETS_OF_DATA = 'updating-large-sets-of-data';
     public const IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE = 'importing-a-post-from-another-wordpress-site';
+    public const DISTRIBUTING_CONTENT_FROM_AN_UPSTREAM_TO_MULTIPLE_DOWNSTREAM_SITES = 'distributing-content-from-an-upstream-to-multiple-downstream-sites';
     public const AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP = 'automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp';
 }

@@ -434,6 +434,22 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
+            Recipes::DISTRIBUTING_CONTENT_FROM_AN_UPSTREAM_TO_MULTIPLE_DOWNSTREAM_SITES => [
+                \__('Distributing content from an upstream to multiple downstream sites', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                    ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
+            ],
             Recipes::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP => [
                 \__('Automatically sending newsletter subscribers from InstaWP to Mailchimp', 'gatographql'),
                 [
