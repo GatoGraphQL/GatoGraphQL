@@ -18,7 +18,8 @@ abstract class AbstractDowngradeContainerConfigurationService extends AbstractCo
     public function configureContainer(): void
     {
         $this->rectorConfig->sets([
-            CustomDowngradeSetList::BEFORE_DOWNGRADE,
+            // When this is enabled, generating the plugin in GitHub takes more than 30 min!
+            // CustomDowngradeSetList::BEFORE_DOWNGRADE,
             DowngradeLevelSetList::DOWN_TO_PHP_72,
         ]);
 
