@@ -11,7 +11,7 @@ use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
-final class AdditionalDowngradeRectorConfigsAfterCommand extends AbstractSymplifyCommand
+final class AdditionalDowngradeRectorAfterConfigsCommand extends AbstractSymplifyCommand
 {
     /**
      * @var array<string,string>
