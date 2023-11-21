@@ -6,24 +6,13 @@
 # The Gato GraphQL plugin (free version) must be installed on the
 # downstream website.
 #
-# The resources referenced in the post must all exist in the downstream:
-#
-#   - The author
-#   - The featured image (if any)
-#   - The categories
-#   - (Tags also, however if these do not already exist, they are created together with the post, so it's not an issue)
-#
-# As the common identifier for resources between the upstream and downstream sites, we use:
-#
-#   - Slugs for categories, tags and media items
-#   - Usernames for users
-#
-# If any of the resources does not exist in the downstream site, the GraphQL query prints an error and halts the import.
+# If updating the post, the common identifier between the upstream
+# and downstream sites is the post slug.
 #
 # *********************************************************************
 # 
 # URL params:
-#   - postSlug: The slug of the post to export
+#   - postSlug: The slug of the post to export. In case of update, the post in the downstream site needs to have the same post slug
 #   - downstreamServerGraphQLEndpointURL: The GraphQL endpoint on the downstream WordPress site
 #   - username: Credentials on the downstream WordPress site
 #   - userPassword: Credentials on the downstream WordPress site
