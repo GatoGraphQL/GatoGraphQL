@@ -4,7 +4,7 @@
 # into some downstream WordPress site.
 #
 # The Gato GraphQL plugin (free version) must be installed on the
-# downstream website too.
+# downstream website.
 #
 # The resources referenced in the post must all exist in the downstream:
 #

@@ -4,7 +4,7 @@
 # WordPress site into our local WordPress site.
 #
 # The Gato GraphQL plugin (free version) must be installed on the
-# upstream website too.
+# upstream website.
 #
 # The resources referenced in the post must all exist locally:
 #
