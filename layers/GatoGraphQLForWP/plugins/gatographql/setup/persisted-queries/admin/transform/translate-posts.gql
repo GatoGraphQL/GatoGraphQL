@@ -4,12 +4,6 @@
 # once (in bulk), while executing a single call to the Google Translate
 # API containing all text to translate from all the posts.
 #
-# Depending on the `$update` parameter, each translation will either
-# be saved as:
-#
-#   - false (default): A new post (using the translated slug) with "draft" status
-#   - true: The same post
-#
 # See Persisted Query "Translate post" for additional documentation.
 #
 # *********************************************************************
@@ -25,7 +19,7 @@
 #
 ########################################################################
 
-query InitializeEmptyVariables($postIds: [ID!]!) {
+query InitializeEmptyVariables($postIds: ID!) {
   emptyVars: posts(filter: { ids: $postIds } ) {
     emptyArray: _echo(value: [])
       @export(
@@ -264,7 +258,7 @@ query InitializeEmptyVariables($postIds: [ID!]!) {
   }
 }
 
-query FetchData($postIds: [ID!]!)
+query FetchData($postIds: ID!)
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
   @depends(on: "InitializeEmptyVariables")
 {
@@ -2052,18 +2046,12 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslatePosts(
-  $postIds: [ID!]!
-  $update: Boolean! = false
-)
+mutation TranslatePosts($postIds: ID!)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
-  ]
-) {
-  updatePosts: posts(filter: { ids: $postIds } )
-    @include(if: $update)
-  {
+]) {
+  updatePosts: posts(filter: { ids: $postIds } ) {
     id
     transformedRawContent: _objectProperty(
       object: $transformedRawContent,
