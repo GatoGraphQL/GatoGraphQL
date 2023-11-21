@@ -1176,7 +1176,6 @@ mutation TranslatePost(
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
   ]
-  @skip(if: $update)
 ) {
   createPost(input: {
     title: $transformedTitle,
@@ -1184,7 +1183,9 @@ mutation TranslatePost(
       html: $transformedRawContent
     },
     status: draft
-  }) {
+  })
+    @skip(if: $update)
+  {
     status
     errors {
       __typename
@@ -1196,6 +1197,29 @@ mutation TranslatePost(
       id
       title
       slug
+      rawContent
+    }    
+  }
+
+  updatePost(input: {
+    id: $postId,
+    title: $transformedTitle,
+    contentAs: {
+      html: $transformedRawContent
+    }
+  })
+    @include(if: $update)
+  {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
       rawContent
     }    
   }
