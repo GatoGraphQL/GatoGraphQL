@@ -31,15 +31,10 @@ final class ChangeIfOrReturnToEarlyReturnRector extends AbstractRector
                 <<<'CODE_SAMPLE'
 class SomeClass
 {
-    public function canDrive(Car $newCar)
+    public function canDrive(Car $car)
     {
-        foreach ($cars as $car) {
-            if ($car->hasWheels() || $car->hasFuel()) {
-                return true;
-            }
-
-            $car->setWheel($newCar->wheel);
-            $car->setFuel($newCar->fuel);
+        if ($car->hasWheels() || $car->hasFuel()) {
+            return true;
         }
         return false;
     }
@@ -50,20 +45,15 @@ CODE_SAMPLE
                 <<<'CODE_SAMPLE'
 class SomeClass
 {
-    public function canDrive(Car $newCar)
+    public function canDrive(Car $car)
     {
-        foreach ($cars as $car) {
-            if ($car->hasWheels()) {
-                return true;
-            }
-            if ($car->hasFuel()) {
-                return true;
-            }
-
-            $car->setWheel($newCar->wheel);
-            $car->setFuel($newCar->fuel);
-            return false;
+        if ($car->hasWheels()) {
+            return true;
         }
+        if ($car->hasFuel()) {
+            return true;
+        }
+        return false;
     }
 }
 CODE_SAMPLE
