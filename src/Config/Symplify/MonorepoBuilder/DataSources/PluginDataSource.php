@@ -45,7 +45,7 @@ class PluginDataSource
                 'additional_rector_configs_before' => [
                     $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-change-if-or-return-earlyreturn.php',
                 ],
-                'additional_rector_configs_after' => [
+                'additional_rector_after_configs' => [
                     $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-mixedtype.php',
                     $this->rootDir . '/config/rector/downgrade/gatographql/chained-rules/rector-arrowfunction-uniontype.php',
                 ],
