@@ -6,56 +6,41 @@ namespace PoP\PoP\Extensions\Rector\EarlyReturn\Rector\If_;
 
 use PhpParser\Node;
 use PhpParser\Node\Expr;
-use PhpParser\Node\Expr\BinaryOp\BooleanAnd;
-use PhpParser\Node\Expr\Closure;
-use PhpParser\Node\Stmt;
-use PhpParser\Node\Stmt\Break_;
-use PhpParser\Node\Stmt\ClassMethod;
-use PhpParser\Node\Stmt\Continue_;
-use PhpParser\Node\Stmt\Foreach_;
-use PhpParser\Node\Stmt\Function_;
+use PhpParser\Node\Expr\BinaryOp\BooleanOr;
 use PhpParser\Node\Stmt\If_;
-use PhpParser\Node\Stmt\Namespace_;
 use PhpParser\Node\Stmt\Return_;
 use Rector\Core\NodeManipulator\IfManipulator;
-use Rector\Core\PhpParser\Node\CustomNode\FileWithoutNamespace;
 use Rector\Core\Rector\AbstractRector;
-use Rector\EarlyReturn\NodeAnalyzer\IfAndAnalyzer;
-use Rector\EarlyReturn\NodeAnalyzer\SimpleScalarAnalyzer;
-use Rector\EarlyReturn\NodeFactory\InvertedIfFactory;
-use Rector\NodeCollector\BinaryOpConditionsCollector;
-use Rector\NodeNestingScope\ContextAnalyzer;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
 use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
 
 /**
- * @see \Rector\Tests\EarlyReturn\Rector\If_\ChangeAndIfToEarlyReturnRector\ChangeAndIfToEarlyReturnRectorTest
+ * @see \Rector\Tests\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector\ChangeOrIfContinueToMultiContinueRectorTest
  */
 final class ChangeIfOrReturnToEarlyReturnRector extends AbstractRector
 {
     public function __construct(
-        private readonly IfManipulator $ifManipulator,
-        private readonly InvertedIfFactory $invertedIfFactory,
-        private readonly ContextAnalyzer $contextAnalyzer,
-        private readonly BinaryOpConditionsCollector $binaryOpConditionsCollector,
-        private readonly SimpleScalarAnalyzer $simpleScalarAnalyzer,
-        private readonly IfAndAnalyzer $ifAndAnalyzer,
+        private readonly IfManipulator $ifManipulator
     ) {
     }
 
     public function getRuleDefinition(): RuleDefinition
     {
-        return new RuleDefinition('Changes if || return to early return', [
+        return new RuleDefinition('Changes if || to early return', [
             new CodeSample(
                 <<<'CODE_SAMPLE'
 class SomeClass
 {
-    public function canDrive(Car $car)
+    public function canDrive(Car $newCar)
     {
-        if ($car->hasWheels || $car->hasFuel) {
-            return true;
-        }
+        foreach ($cars as $car) {
+            if ($car->hasWheels() || $car->hasFuel()) {
+                return true;
+            }
 
+            $car->setWheel($newCar->wheel);
+            $car->setFuel($newCar->fuel);
+        }
         return false;
     }
 }
@@ -65,17 +50,20 @@ CODE_SAMPLE
                 <<<'CODE_SAMPLE'
 class SomeClass
 {
-    public function canDrive(Car $car)
+    public function canDrive(Car $newCar)
     {
-        if ($car->hasWheels) {
-            return true;
-        }
+        foreach ($cars as $car) {
+            if ($car->hasWheels()) {
+                return true;
+            }
+            if ($car->hasFuel()) {
+                return true;
+            }
 
-        if ($car->hasFuel) {
-            return true;
+            $car->setWheel($newCar->wheel);
+            $car->setFuel($newCar->fuel);
+            return false;
         }
-
-        return false;
     }
 }
 CODE_SAMPLE
@@ -88,177 +76,83 @@ CODE_SAMPLE
      */
     public function getNodeTypes(): array
     {
-        return [
-            ClassMethod::class,
-            Function_::class,
-            Foreach_::class,
-            Closure::class,
-            FileWithoutNamespace::class,
-            Namespace_::class,
-        ];
+        return [If_::class];
     }
 
     /**
-     * @param Stmt\ClassMethod|Stmt\Function_|Stmt\Foreach_|Expr\Closure|FileWithoutNamespace|Stmt\Namespace_ $node
+     * @param If_ $node
+     * @return null|If_[]
      */
-    public function refactor(Node $node): ?Node
+    public function refactor(Node $node): ?array
     {
-        $stmts = (array) $node->stmts;
-        if ($stmts === []) {
+        if (! $this->ifManipulator->isIfWithOnly($node, Return_::class)) {
             return null;
         }
 
-        $newStmts = [];
-
-        foreach ($stmts as $key => $stmt) {
-            if (! $stmt instanceof If_) {
-                // keep natural original order
-                $newStmts[] = $stmt;
-                continue;
-            }
-
-            $nextStmt = $stmts[$key + 1] ?? null;
-
-            if ($this->shouldSkip($stmt, $nextStmt)) {
-                $newStmts[] = $stmt;
-                continue;
-            }
-
-            if ($nextStmt instanceof Return_) {
-                if ($this->ifAndAnalyzer->isIfStmtExprUsedInNextReturn($stmt, $nextStmt)) {
-                    continue;
-                }
-
-                if ($nextStmt->expr instanceof BooleanAnd) {
-                    continue;
-                }
-            }
-
-            /** @var BooleanAnd $expr */
-            $expr = $stmt->cond;
-            $booleanAndConditions = $this->binaryOpConditionsCollector->findConditions($expr, BooleanAnd::class);
-            $afterStmts = [];
-
-            if (! $nextStmt instanceof Return_) {
-                $afterStmts[] = $stmt->stmts[0];
-
-                $node->stmts = [
-                    ...$newStmts,
-                    ...$this->processReplaceIfs($stmt, $booleanAndConditions, new Return_(), $afterStmts, $nextStmt),
-                ];
-
-                return $node;
-            }
-
-            // remove next node
-            unset($newStmts[$key + 1]);
-
-            $afterStmts[] = $stmt->stmts[0];
-
-            $ifNextReturnClone = $stmt->stmts[0] instanceof Return_
-                ? clone $stmt->stmts[0]
-                : new Return_();
-
-            if ($this->isInLoopWithoutContinueOrBreak($stmt)) {
-                $afterStmts[] = new Return_();
-            }
-
-            $changedStmts = $this->processReplaceIfs(
-                $stmt,
-                $booleanAndConditions,
-                $ifNextReturnClone,
-                $afterStmts,
-                $nextStmt
-            );
-
-            // update stmts
-            $node->stmts = [...$newStmts, ...$changedStmts];
-
-            return $node;
+        if (! $node->cond instanceof BooleanOr) {
+            return null;
         }
 
-        return null;
-    }
-
-    private function isInLoopWithoutContinueOrBreak(If_ $if): bool
-    {
-        if (! $this->contextAnalyzer->isInLoop($if)) {
-            return false;
-        }
-
-        if ($if->stmts[0] instanceof Continue_) {
-            return false;
-        }
-
-        return ! $if->stmts[0] instanceof Break_;
+        return $this->processMultiIfReturn($node);
     }
 
     /**
-     * @param Expr[] $conditions
-     * @param Stmt[] $afters
-     * @return Stmt[]
+     * @return null|If_[]
      */
-    private function processReplaceIfs(
-        If_ $if,
-        array $conditions,
-        Return_ $ifNextReturn,
-        array $afters,
-        ?Stmt $nextStmt
-    ): array {
-        $ifs = $this->invertedIfFactory->createFromConditions($if, $conditions, $ifNextReturn, $nextStmt);
-        $this->mirrorComments($ifs[0], $if);
+    private function processMultiIfReturn(If_ $if): ?array
+    {
+        $node = clone $if;
+        /** @var Return_ $return */
+        $return = $if->stmts[0];
+        $ifs = $this->createMultipleIfs($if->cond, $return, []);
 
-        $result = [...$ifs, ...$afters];
-        if ($if->stmts[0] instanceof Return_) {
-            return $result;
+        // ensure ifs not removed by other rules
+        if ($ifs === []) {
+            return null;
         }
 
-        if (! $ifNextReturn->expr instanceof Expr) {
-            return $result;
-        }
-
-        if ($this->contextAnalyzer->isInLoop($if)) {
-            return $result;
-        }
-
-        return [...$result, $ifNextReturn];
+        $this->mirrorComments($ifs[0], $node);
+        return $ifs;
     }
 
-    private function shouldSkip(If_ $if, ?Stmt $nexStmt): bool
+    /**
+     * @param If_[] $ifs
+     * @return If_[]
+     */
+    private function createMultipleIfs(Expr $expr, Return_ $return, array $ifs): array
     {
-        if (! $this->ifManipulator->isIfWithOnlyOneStmt($if)) {
-            return true;
+        while ($expr instanceof BooleanOr) {
+            $ifs = [...$ifs, ...$this->collectLeftBooleanOrToIfs($expr, $return, $ifs)];
+            $ifs[] = new If_($expr->right, [
+                'stmts' => [$return],
+            ]);
+
+            $expr = $expr->right;
         }
 
-        if (! $if->cond instanceof BooleanAnd) {
-            return true;
-        }
+        $lastContinueIf = new If_($expr, [
+            'stmts' => [$return],
+        ]);
 
-        if (! $this->ifManipulator->isIfWithoutElseAndElseIfs($if)) {
-            return true;
-        }
-
-        // is simple return? skip it
-        $onlyStmt = $if->stmts[0];
-        if ($onlyStmt instanceof Return_ && $onlyStmt->expr instanceof Expr && $this->simpleScalarAnalyzer->isSimpleScalar(
-            $onlyStmt->expr
-        )) {
-            return true;
-        }
-
-        if ($this->ifAndAnalyzer->isIfAndWithInstanceof($if->cond)) {
-            return true;
-        }
-
-        return ! $this->isLastIfOrBeforeLastReturn($nexStmt);
+        // the + is on purpose here, to keep only single continue as last
+        return $ifs + [$lastContinueIf];
     }
 
-    private function isLastIfOrBeforeLastReturn(?Stmt $nextStmt): bool
+    /**
+     * @param If_[] $ifs
+     * @return If_[]
+     */
+    private function collectLeftBooleanOrToIfs(BooleanOr $booleanOr, Return_ $return, array $ifs): array
     {
-        if (! $nextStmt instanceof Stmt) {
-            return true;
+        $left = $booleanOr->left;
+        if (! $left instanceof BooleanOr) {
+            $if = new If_($left, [
+                'stmts' => [$return],
+            ]);
+
+            return [$if];
         }
 
-        return $nextStmt instanceof Return_;
+        return $this->createMultipleIfs($left, $return, $ifs);
     }
 }
