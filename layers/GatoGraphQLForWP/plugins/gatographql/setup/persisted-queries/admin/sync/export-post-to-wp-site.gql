@@ -84,7 +84,7 @@ mutation LoginUserAndUpdatePost(
     userID
   }
 
-  post(by: {slug: $postSlug})
+  post(by: {slug: $postSlug}, status: [publish, draft])
     @include(if: $update)
   {
     update(input: {
