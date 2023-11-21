@@ -16,13 +16,13 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
     /**
      * @var array<string,string>
      */
-    private array $additionalDowngradeRectorConfigs = [];
+    private array $additionalDowngradeRectorAfterConfigs = [];
 
     public function __construct(
         ParameterProvider $parameterProvider
     ) {
         parent::__construct();
-        $this->additionalDowngradeRectorConfigs = $parameterProvider->provideArrayParameter(Option::ADDITIONAL_DOWNGRADE_RECTOR_AFTER_CONFIGS);
+        $this->additionalDowngradeRectorAfterConfigs = $parameterProvider->provideArrayParameter(Option::ADDITIONAL_DOWNGRADE_RECTOR_AFTER_CONFIGS);
     }
 
     protected function configure(): void
@@ -34,9 +34,9 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $additionalDowngradeRectorConfigs = implode(' ', $this->additionalDowngradeRectorConfigs);
+        $additionalDowngradeRectorAfterConfigs = implode(' ', $this->additionalDowngradeRectorAfterConfigs);
 
-        $this->symfonyStyle->writeln($additionalDowngradeRectorConfigs);
+        $this->symfonyStyle->writeln($additionalDowngradeRectorAfterConfigs);
 
         return self::SUCCESS;
     }
