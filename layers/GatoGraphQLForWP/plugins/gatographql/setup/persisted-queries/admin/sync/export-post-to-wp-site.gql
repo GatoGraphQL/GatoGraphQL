@@ -6,12 +6,16 @@
 # The Gato GraphQL plugin (free version) must be installed on the
 # downstream website.
 #
+# The `$update` parameter indicates if to create or update a post in
+# the downstream site.
+#
 # If updating the post, the common identifier between the upstream
 # and downstream sites is the post slug.
 #
 # *********************************************************************
 # 
 # URL params:
+#   - update: Indicate if to update the post, or create a new one
 #   - postSlug: The slug of the post to export. In case of update, the post in the downstream site needs to have the same post slug
 #   - downstreamServerGraphQLEndpointURL: The GraphQL endpoint on the downstream WordPress site
 #   - username: Credentials on the downstream WordPress site
