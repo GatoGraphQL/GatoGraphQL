@@ -13,6 +13,16 @@ class DowngradeRectorDataSource
     /**
      * @return string[]
      */
+    public function getAdditionalDowngradeRectorBeforeFiles(): array
+    {
+        return [
+            $this->rootDir . '/config/rector/downgrade/monorepo/chained-rules/rector-change-if-or-return-earlyreturn.php',
+        ];
+    }
+
+    /**
+     * @return string[]
+     */
     public function getAdditionalDowngradeRectorAfterFiles(): array
     {
         return [
