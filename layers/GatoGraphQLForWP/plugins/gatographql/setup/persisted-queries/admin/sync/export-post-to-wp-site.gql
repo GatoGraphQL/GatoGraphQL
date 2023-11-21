@@ -120,8 +120,9 @@ mutation LoginUserAndUpdatePost(
       }
     }
     post {
+      title
+      content
       slug
-      rawContent
     }
   }
 }
