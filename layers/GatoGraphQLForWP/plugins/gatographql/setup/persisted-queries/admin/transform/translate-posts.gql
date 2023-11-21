@@ -2053,7 +2053,8 @@ mutation TranslatePosts($postIds: ID!)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
-]) {
+  ]
+) {
   updatePosts: posts(filter: { ids: $postIds } ) {
     id
     transformedRawContent: _objectProperty(
