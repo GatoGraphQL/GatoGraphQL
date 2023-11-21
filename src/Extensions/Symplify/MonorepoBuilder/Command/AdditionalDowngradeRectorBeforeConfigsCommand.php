@@ -11,18 +11,18 @@ use Symplify\PackageBuilder\Console\Command\AbstractSymplifyCommand;
 use Symplify\PackageBuilder\Console\Command\CommandNaming;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
 
-final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyCommand
+final class AdditionalDowngradeRectorBeforeConfigsCommand extends AbstractSymplifyCommand
 {
     /**
      * @var array<string,string>
      */
-    private array $additionalDowngradeRectorConfigs = [];
+    private array $additionalDowngradeRectorBeforeConfigs = [];
 
     public function __construct(
         ParameterProvider $parameterProvider
     ) {
         parent::__construct();
-        $this->additionalDowngradeRectorConfigs = $parameterProvider->provideArrayParameter(Option::ADDITIONAL_DOWNGRADE_RECTOR_CONFIGS);
+        $this->additionalDowngradeRectorBeforeConfigs = $parameterProvider->provideArrayParameter(Option::ADDITIONAL_DOWNGRADE_RECTOR_BEFORE_CONFIGS);
     }
 
     protected function configure(): void
@@ -34,9 +34,9 @@ final class AdditionalDowngradeRectorConfigsCommand extends AbstractSymplifyComm
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $additionalDowngradeRectorConfigs = implode(' ', $this->additionalDowngradeRectorConfigs);
+        $additionalDowngradeRectorBeforeConfigs = implode(' ', $this->additionalDowngradeRectorBeforeConfigs);
 
-        $this->symfonyStyle->writeln($additionalDowngradeRectorConfigs);
+        $this->symfonyStyle->writeln($additionalDowngradeRectorBeforeConfigs);
 
         return self::SUCCESS;
     }

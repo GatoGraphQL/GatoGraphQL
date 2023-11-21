@@ -170,6 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.1.1 =
+* Fixed bug on the caching component (a downgraded `reset` method was called on a non array)
+
 = 1.1.0 =
 * Tested with WordPress 6.4 ("Tested up to: 6.4")
 * Install initial data: Persisted Queries for common admin tasks

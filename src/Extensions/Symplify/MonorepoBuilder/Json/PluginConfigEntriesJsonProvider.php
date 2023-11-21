@@ -100,7 +100,8 @@ final class PluginConfigEntriesJsonProvider
             $entryConfig['dist_repo_name'] ??= '';
 
             // Merge all rector configs as a string
-            $entryConfig['additional_rector_configs'] = implode(' ', $entryConfig['additional_rector_configs'] ?? []);
+            $entryConfig['additional_rector_before_configs'] = implode(' ', $entryConfig['additional_rector_before_configs'] ?? []);
+            $entryConfig['additional_rector_after_configs'] = implode(' ', $entryConfig['additional_rector_after_configs'] ?? []);
 
             // Automatically set the entries for conditional checks in GitHub Actions
             $entryConfig['scope'] = isset($entryConfig['scoping']);

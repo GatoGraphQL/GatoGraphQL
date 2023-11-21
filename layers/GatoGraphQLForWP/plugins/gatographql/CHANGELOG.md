@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.1.1 - DATE
 
+### Fixed
+
+- Bug on the caching component (a downgraded `reset` method was called on a non array)
+
 ## 1.1.0 - 20/11/2013
 
 ### Improvements
