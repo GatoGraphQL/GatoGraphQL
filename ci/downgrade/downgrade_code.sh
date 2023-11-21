@@ -68,10 +68,10 @@ fi
 # Execute additional rector configs
 # They must be self contained, already including all the src/ folders to downgrade
 if [ -n "$additional_rector_before_configs" ]; then
-    for rector_config in $additional_rector_before_configs
+    for rector_before_config in $additional_rector_before_configs
     do
-        note "[Before] Running additional Rector downgrade config: $rector_config"
-        vendor/bin/rector process --config=$rector_config --ansi $rector_options
+        note "[Before] Running additional Rector downgrade config: $rector_before_config"
+        vendor/bin/rector process --config=$rector_before_config --ansi $rector_options
     done
 fi
 
@@ -130,9 +130,9 @@ vendor/bin/rector process $paths --config=$rector_config --ansi $rector_options
 # Execute additional rector configs
 # They must be self contained, already including all the src/ folders to downgrade
 if [ -n "$additional_rector_after_configs" ]; then
-    for rector_config in $additional_rector_after_configs
+    for rector_after_config in $additional_rector_after_configs
     do
-        note "[After] Running additional Rector downgrade config: $rector_config"
-        vendor/bin/rector process --config=$rector_config --ansi $rector_options
+        note "[After] Running additional Rector downgrade config: $rector_after_config"
+        vendor/bin/rector process --config=$rector_after_config --ansi $rector_options
     done
 fi
