@@ -65,16 +65,6 @@ fi
 # Logic
 # ----------------------------------------------------------------------
 
-# Execute additional rector configs
-# They must be self contained, already including all the src/ folders to downgrade
-if [ -n "$additional_rector_before_configs" ]; then
-    for rector_before_config in $additional_rector_before_configs
-    do
-        note "[Before] Running additional Rector downgrade config: $rector_before_config"
-        vendor/bin/rector process --config=$rector_before_config --ansi $rector_options
-    done
-fi
-
 packages_to_downgrade=()
 package_paths=()
 rootPackage=$(composer info -s -N --working-dir=$composer_working_dir)
@@ -120,6 +110,16 @@ if [ -n "$PACKAGES" ]; then
 else
     note "No packages to downgrade"
     exit 0
+fi
+
+# Execute additional rector configs
+# They must be self contained, already including all the src/ folders to downgrade
+if [ -n "$additional_rector_before_configs" ]; then
+    for rector_before_config in $additional_rector_before_configs
+    do
+        note "[Before] Running additional Rector downgrade config: $rector_before_config"
+        vendor/bin/rector process --config=$rector_before_config --ansi $rector_options
+    done
 fi
 
 # Execute the downgrade
