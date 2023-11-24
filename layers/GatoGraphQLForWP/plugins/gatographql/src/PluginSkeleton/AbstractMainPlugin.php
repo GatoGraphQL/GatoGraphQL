@@ -614,7 +614,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
         $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
             'post_status' => 'publish',
-            // 'post_name' => 'nested-mutations', // Predefined slug to search/delete when installing .xml data in server
+            'post_name' => 'nested-mutations', // Predefine slug to retrieve this CPT's ID on future updates
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             'post_title' => \__('Nested mutations', 'gatographql'),
             'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -632,7 +632,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
             'post_status' => 'publish',
-            // 'post_name' => 'nested-mutations-entity-as-mutation-payload-type', // Predefined slug to search/delete when installing .xml data in server
+            'post_name' => 'nested-mutations-entity-as-mutation-payload-type', // Predefine slug to retrieve this CPT's ID on future updates
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
             'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
