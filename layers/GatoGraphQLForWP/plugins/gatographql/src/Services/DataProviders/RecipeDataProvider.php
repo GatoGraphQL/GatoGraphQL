@@ -359,6 +359,13 @@ class RecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
+            Recipes::TRANSLATING_CONTENT_FROM_URL => [
+                \__('Translating content from URL', 'gatographql'),
+                [
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                ]
+            ],
             Recipes::TRANSFORMING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Transforming data from an external API', 'gatographql'),
                 [

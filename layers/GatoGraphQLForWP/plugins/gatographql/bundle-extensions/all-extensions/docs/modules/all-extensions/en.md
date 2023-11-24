@@ -64,6 +64,7 @@ As new extensions are created and released, they will also be added to this bund
 - [Not leaking credentials when connecting to services](../../../../../docs/recipes/not-leaking-credentials-when-connecting-to-services/en.md)
 - [Handling errors when connecting to services](../../../../../docs/recipes/handling-errors-when-connecting-to-services/en.md)
 - [Creating an API gateway](../../../../../docs/recipes/creating-an-api-gateway/en.md)
+- [Translating content from URL](../../../../../docs/recipes/translating-content-from-url/en.md)
 - [Transforming data from an external API](../../../../../docs/recipes/transforming-data-from-an-external-api/en.md)
 - [Filtering data from an external API](../../../../../docs/recipes/filtering-data-from-an-external-api/en.md)
 - [Pinging external services](../../../../../docs/recipes/pinging-external-services/en.md)

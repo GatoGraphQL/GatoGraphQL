@@ -1,6 +1,6 @@
 # Retrieving data from an external API
 
-The [**HTTP Client**](https://gatographql/extensions/http-client/) extension allows us to execute HTTP requests against a webserver.
+The [**HTTP Client**](https://gatographql.com/extensions/http-client/) extension allows us to execute HTTP requests against a webserver.
 
 This recipe demonstrates how to fetch data from an external API, by:
 
@@ -19,7 +19,7 @@ curl --request GET \
 
 Let's replicate this in Gato GraphQL.
 
-We execute an HTTP request via global field `_sendHTTPRequest` (provided via the [**HTTP Client**](https://gatographql/extensions/http-client/) extension):
+We execute an HTTP request via global field `_sendHTTPRequest` (provided via the [**HTTP Client**](https://gatographql.com/extensions/http-client/) extension):
 
 ```graphql
 query {
@@ -172,7 +172,7 @@ The body is now accessible as a JSON object:
 
 ## Connecting to a REST API
 
-[**HTTP Client**](https://gatographql/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
+[**HTTP Client**](https://gatographql.com/extensions/http-client/) also provides function fields that already handle responses of content-type `application/json`, making these suitable for connecting to REST APIs:
 
 - `_sendJSONObjectItemHTTPRequest`: When the content pertains a single JSON object
 - `_sendJSONObjectCollectionHTTPRequest`: When the content pertains a collection of JSON objects
@@ -432,7 +432,7 @@ Passing these variables:
 
 <!-- (As the Mailchimp API doesn't support GraphQL, we switch to a different API for this example.) -->
 
-[**HTTP Client**](https://gatographql/extensions/http-client/) also provides a function field to conveniently connect to GraphQL APIs.
+[**HTTP Client**](https://gatographql.com/extensions/http-client/) also provides a function field to conveniently connect to GraphQL APIs.
 
 Field `_sendGraphQLHTTPRequest` accepts those inputs expected by GraphQL (the query, variables and operation name), executes the GraphQL query against the provided endpoint, and converts the response to `JSONObject`.
 
@@ -527,7 +527,7 @@ Passing these `variables`:
 
 🔥 **Tips:**
 
-If we must execute the same HTTP request repeatedly, we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
+If we must execute the same HTTP request repeatedly, we can use the `@cache` directive (provided by the [**Field Resolution Caching**](https://gatographql.com/extensions/field-resolution-caching/)) to store the result in disk for a requested amount of time, thus speeding up the query resolution.
 
 When executing this query twice within a span of 10 seconds (as indicated via argument `@cache(time:)`), the second time will retrieve the cached result; this will make it faster, as it will not connect to the external host:
 

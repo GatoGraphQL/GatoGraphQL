@@ -39,6 +39,7 @@ class Recipes
     public const NOT_LEAKING_CREDENTIALS_WHEN_CONNECTING_TO_SERVICES = 'not-leaking-credentials-when-connecting-to-services';
     public const HANDLING_ERRORS_WHEN_CONNECTING_TO_SERVICES = 'handling-errors-when-connecting-to-services';
     public const CREATING_AN_API_GATEWAY = 'creating-an-api-gateway';
+    public const TRANSLATING_CONTENT_FROM_URL = 'translating-content-from-url';
     public const TRANSFORMING_DATA_FROM_AN_EXTERNAL_API = 'transforming-data-from-an-external-api';
     public const FILTERING_DATA_FROM_AN_EXTERNAL_API = 'filtering-data-from-an-external-api';
     public const PINGING_EXTERNAL_SERVICES = 'pinging-external-services';
