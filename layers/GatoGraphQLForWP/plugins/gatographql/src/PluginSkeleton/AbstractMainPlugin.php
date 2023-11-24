@@ -645,7 +645,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
 
         $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
-        $webhookEndpointTaxInputData = $this->getWebhookEndpointTaxInputData();
 
         /**
          * Create custom endpoint
@@ -695,8 +694,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the ancestor Persisted Queries for organization
          */
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         /** @var PersistedQueryEndpointGraphiQLBlock */
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
         /** @var PersistedQueryEndpointOptionsBlock */
@@ -1117,11 +1114,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             ]
         ));
 
-        $webhookPersistedQueryOptions = [
-            'post_status' => 'draft', // They are public => don't publish them!
-            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-            'tax_input' => $webhookEndpointTaxInputData,
-        ];
+        $webhookPersistedQueryOptions = $this->getWebhookPersistedQueryOptions();
         \wp_insert_post(array_merge(
             $webhookPersistedQueryOptions,
             [
@@ -1204,6 +1197,24 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             'post_status' => 'private',
             'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
             'tax_input' => $adminEndpointTaxInputData,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getWebhookPersistedQueryOptions(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        $webhookEndpointTaxInputData = $this->getWebhookEndpointTaxInputData();
+
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
+        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        return [
+            'post_status' => 'draft', // They are public => don't publish them!
+            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $webhookEndpointTaxInputData,
         ];
     }
 
