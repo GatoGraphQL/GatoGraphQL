@@ -704,11 +704,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $adminPersistedQueryOptions = [
-            'post_status' => 'private',
-            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-            'tax_input' => $adminEndpointTaxInputData,
-        ];
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $schemaConfigurationPersistedQueryBlocks = [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
@@ -1203,11 +1199,27 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         return $webhookEndpointTaxInputData;
     }
 
-    protected function installPluginSetupDataForVersion1Dot2(): void
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getAdminPersistedQueryOptions(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
         $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
+
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
+        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        return [
+            'post_status' => 'private',
+            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $adminEndpointTaxInputData,
+        ];
+    }
+
+    protected function installPluginSetupDataForVersion1Dot2(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
 
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
@@ -1215,8 +1227,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the ancestor Persisted Queries for organization
          */
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         /** @var PersistedQueryEndpointGraphiQLBlock */
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
         /** @var PersistedQueryEndpointOptionsBlock */
@@ -1224,11 +1234,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $adminPersistedQueryOptions = [
-            'post_status' => 'private',
-            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-            'tax_input' => $adminEndpointTaxInputData,
-        ];
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $schemaConfigurationPersistedQueryBlocks = [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
