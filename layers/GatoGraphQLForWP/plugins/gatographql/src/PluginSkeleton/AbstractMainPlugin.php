@@ -1046,6 +1046,27 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_title' => \__('Translate content from URL', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/translate-content-from-url',
+                                Recipes::TRANSLATING_CONTENT_FROM_URL,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/transform/translate-content-from-url',
+                            ),
+                        ],
+                    ],
+                    ...$schemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
                 'post_title' => \__('Import post from WordPress site', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
