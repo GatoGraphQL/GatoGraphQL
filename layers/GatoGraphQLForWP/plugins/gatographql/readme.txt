@@ -43,7 +43,7 @@ Gato GraphQL can be augmented via extensions, including:
 - [Access Control](https://gatographql.com/extensions/access-control/): Grant access to your endpoints (by user being logged-in or not, having some role or capability, and others), field by field
 - [Cache Control](https://gatographql.com/extensions/cache-control/): Use HTTP caching to make your APIs faster
 - [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/): Combine and execute multiple queries into a single query
-- [HTTP Client](https://gatographql/extensions/http-client/): Interact with external services
+- [HTTP Client](https://gatographql.com/extensions/http-client/): Interact with external services
 - [PHP Functions via Schema](https://gatographql.com/extensions/php-functions-via-schema/): Adapt the data via standard PHP functions, always within the query
 - [Automation](https://gatographql.com/extensions/automation/): Execute queries when some event happens, chain queries, and schedule and trigger queries via WP-Cron
 - Many more
@@ -123,7 +123,7 @@ Check recipe [Interacting with external services via webhooks](https://gatograph
 
 = How do I use Gato GraphQL to interact with external services? =
 
-The [HTTP Client](https://gatographql/extensions/http-client/) extension adds fields to the GraphQL schema to fetch data from any webserver (while providing special support to connect to REST and GraphQL APIs).
+The [HTTP Client](https://gatographql.com/extensions/http-client/) extension adds fields to the GraphQL schema to fetch data from any webserver (while providing special support to connect to REST and GraphQL APIs).
 
 Check recipe [Retrieving data from an external API](https://gatographql.com/recipes/retrieving-data-from-an-external-api/) to learn about all the available "HTTP client" fields, and examples on how to use them.
 
