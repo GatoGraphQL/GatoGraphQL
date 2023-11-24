@@ -12,7 +12,7 @@ query TranslateContent(
   $fromLang: String!
   $toLang: String!
 ) {
-  _sendHTTPRequest(input:{
+  _sendHTTPRequest(input: {
     url: $url,
     method: GET
   }) {
