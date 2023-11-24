@@ -644,30 +644,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = null;
         }
 
-
-        /**
-         * Create Endpoint Categories
-         */
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
-
-        $endpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy->getTaxonomy();
-
-        $adminEndpointTaxInputData = [
-            $endpointCategoryTaxonomy => [],
-        ];
-        $adminEndpointCategoryID = $this->getAdminEndpointCategoryID();
-        if ($adminEndpointCategoryID !== null) {
-            $adminEndpointTaxInputData[$endpointCategoryTaxonomy][] = $adminEndpointCategoryID;
-        }
-
-        $webhookEndpointTaxInputData = [
-            $endpointCategoryTaxonomy => [],
-        ];
-        $webhookEndpointCategoryID = $this->getWebhookEndpointCategoryID();
-        if ($webhookEndpointCategoryID !== null) {
-            $webhookEndpointTaxInputData[$endpointCategoryTaxonomy][] = $webhookEndpointCategoryID;
-        }
+        $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
+        $webhookEndpointTaxInputData = $this->getWebhookEndpointTaxInputData();
 
         /**
          * Create custom endpoint
@@ -1179,7 +1157,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ));
     }
 
-    protected function installPluginSetupDataForVersion1Dot2(): void
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getAdminEndpointTaxInputData(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
@@ -1195,6 +1176,38 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if ($adminEndpointCategoryID !== null) {
             $adminEndpointTaxInputData[$endpointCategoryTaxonomy][] = $adminEndpointCategoryID;
         }
+
+        return $adminEndpointTaxInputData;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getWebhookEndpointTaxInputData(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+
+        $endpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy->getTaxonomy();
+
+        $webhookEndpointTaxInputData = [
+            $endpointCategoryTaxonomy => [],
+        ];
+        $webhookEndpointCategoryID = $this->getWebhookEndpointCategoryID();
+        if ($webhookEndpointCategoryID !== null) {
+            $webhookEndpointTaxInputData[$endpointCategoryTaxonomy][] = $webhookEndpointCategoryID;
+        }
+
+        return $webhookEndpointTaxInputData;
+    }
+
+    protected function installPluginSetupDataForVersion1Dot2(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
 
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
