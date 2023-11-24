@@ -705,7 +705,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
-        $schemaConfigurationPersistedQueryBlocks = [
+        $defaultSchemaConfigurationPersistedQueryBlocks = [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
             ],
@@ -762,7 +762,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -804,7 +804,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -846,7 +846,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -885,7 +885,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -903,7 +903,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -996,7 +996,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1032,7 +1032,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1050,7 +1050,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1068,7 +1068,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1086,7 +1086,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1104,7 +1104,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1122,7 +1122,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1147,7 +1147,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1235,7 +1235,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
-        $schemaConfigurationPersistedQueryBlocks = [
+        $defaultSchemaConfigurationPersistedQueryBlocks = [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
             ],
@@ -1263,7 +1263,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
