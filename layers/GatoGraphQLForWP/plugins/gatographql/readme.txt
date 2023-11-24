@@ -172,6 +172,7 @@ You can even synchronize content across a network of sites, such as from an upst
 
 = 1.1.2 =
 * In predefined persisted queries "Translate post" and "Translate posts", added `failIfNonExistingKeyOrPath: false` when selecting a block's `attributes.{something}` property (as it may sometimes not be defined)
+* In predefined persisted query "Import post from WordPress site", added status `any` to select the post
 
 = 1.1.1 =
 * Fixed bug on the caching component (a downgraded `reset` method was called on a non array)

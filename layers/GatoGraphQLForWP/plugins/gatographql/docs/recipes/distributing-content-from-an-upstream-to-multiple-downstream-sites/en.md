@@ -49,7 +49,7 @@ query InitializeDynamicVariables
 query GetCustomDownstreamDomains($postSlug: String!)
   @depends(on: "InitializeDynamicVariables")
 {
-  post(by: { slug: $postSlug })
+  post(by: { slug: $postSlug }, status: any)
     @fail(
       message: "There is no post in the upstream site with the provided slug"
       data: {
