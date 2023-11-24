@@ -644,13 +644,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = null;
         }
 
-        $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
-
         /**
          * Create custom endpoint
          */
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $graphQLCustomEndpointCustomPostType = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
         /** @var CustomEndpointOptionsBlock */
@@ -660,11 +656,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var EndpointVoyagerBlock */
         $endpointVoyagerBlock = $instanceManager->getInstance(EndpointVoyagerBlock::class);
 
-        $adminCustomEndpointOptions = [
-            'post_status' => 'private',
-            'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
-            'tax_input' => $adminEndpointTaxInputData,
-        ];
+        $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         \wp_insert_post(array_merge(
             $adminCustomEndpointOptions,
             [
@@ -1215,6 +1207,24 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             'post_status' => 'draft', // They are public => don't publish them!
             'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
             'tax_input' => $webhookEndpointTaxInputData,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getAdminCustomEndpointOptions(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
+
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $graphQLCustomEndpointCustomPostType = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        return [
+            'post_status' => 'private',
+            'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $adminEndpointTaxInputData,
         ];
     }
 
