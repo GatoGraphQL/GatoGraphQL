@@ -1151,7 +1151,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
-        
+
         $webhookPersistedQueryOptions = [
             'post_status' => 'draft', // They are public => don't publish them!
             'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
