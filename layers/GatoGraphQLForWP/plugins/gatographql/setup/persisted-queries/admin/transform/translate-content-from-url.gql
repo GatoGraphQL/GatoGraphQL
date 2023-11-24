@@ -1,0 +1,34 @@
+########################################################################
+#
+# This Persisted GraphQL query translates the content from the provided URL
+#
+# *********************************************************************
+# 
+# URL params:
+#   - url: The URL with the content to translate
+#   - fromLang: The language code to translate from, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - toLang: The language code to translate from, from Google Translate
+#
+# *********************************************************************
+# 
+# More info:
+#   - https://gatographql.com/recipes/translating-content-from-url/
+#
+########################################################################
+
+query TranslateContent(
+  $url: URL!
+  $fromLang: String!
+  $toLang: String!
+) {
+  _sendHTTPRequest(input: {
+    url: $url,
+    method: GET
+  }) {
+    body
+    translated: body @strTranslate(
+      from: $fromLang
+      to: $toLang
+    )
+  }
+}

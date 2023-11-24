@@ -583,6 +583,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $versionCallbacks = [
             '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
+            '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -613,7 +614,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
         $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
             'post_status' => 'publish',
-            // 'post_name' => 'nested-mutations', // Predefined slug to search/delete when installing .xml data in server
+            'post_name' => 'nested-mutations', // Predefine slug to retrieve this CPT's ID on future updates
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             'post_title' => \__('Nested mutations', 'gatographql'),
             'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -631,7 +632,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
             'post_status' => 'publish',
-            // 'post_name' => 'nested-mutations-entity-as-mutation-payload-type', // Predefined slug to search/delete when installing .xml data in server
+            'post_name' => 'nested-mutations-entity-as-mutation-payload-type', // Predefine slug to retrieve this CPT's ID on future updates
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
             'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -643,50 +644,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = null;
         }
 
-
-        /**
-         * Create Endpoint Categories
-         */
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
-
-        $endpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy->getTaxonomy();
-
-        $adminEndpointTaxInputData = [
-            $endpointCategoryTaxonomy => [],
-        ];
-        $adminEndpointCategoryID = $this->getAdminEndpointCategoryID();
-        if ($adminEndpointCategoryID !== null) {
-            $adminEndpointTaxInputData[$endpointCategoryTaxonomy][] = $adminEndpointCategoryID;
-        }
-
-        $webhookEndpointTaxInputData = [
-            $endpointCategoryTaxonomy => [],
-        ];
-        $webhookEndpointCategoryID = $this->getWebhookEndpointCategoryID();
-        if ($webhookEndpointCategoryID !== null) {
-            $webhookEndpointTaxInputData[$endpointCategoryTaxonomy][] = $webhookEndpointCategoryID;
-        }
-
         /**
          * Create custom endpoint
          */
-        /** @var GraphQLCustomEndpointCustomPostType */
-        $graphQLCustomEndpointCustomPostType = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-        /** @var CustomEndpointOptionsBlock */
-        $customEndpointOptionsBlock = $instanceManager->getInstance(CustomEndpointOptionsBlock::class);
-        /** @var EndpointGraphiQLBlock */
-        $endpointGraphiQLBlock = $instanceManager->getInstance(EndpointGraphiQLBlock::class);
-        /** @var EndpointVoyagerBlock */
-        $endpointVoyagerBlock = $instanceManager->getInstance(EndpointVoyagerBlock::class);
 
-        $adminCustomEndpointOptions = [
-            'post_status' => 'private',
-            'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
-            'tax_input' => $adminEndpointTaxInputData,
-        ];
+        $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
+        $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         \wp_insert_post(array_merge(
             $adminCustomEndpointOptions,
             [
@@ -699,15 +664,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
-                    [
-                        'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $endpointVoyagerBlock->getBlockFullName(),
-                    ]
+                    ...$defaultCustomEndpointBlocks
                 ])),
             ]
         ));
@@ -716,8 +673,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /**
          * Create the ancestor Persisted Queries for organization
          */
-        /** @var GraphQLPersistedQueryEndpointCustomPostType */
-        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
         /** @var PersistedQueryEndpointGraphiQLBlock */
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
         /** @var PersistedQueryEndpointOptionsBlock */
@@ -725,22 +680,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $adminPersistedQueryOptions = [
-            'post_status' => 'private',
-            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-            'tax_input' => $adminEndpointTaxInputData,
-        ];
-        $schemaConfigurationPersistedQueryBlocks = [
-            [
-                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-            ],
-            [
-                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-            ],
-            [
-                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-            ]
-        ];
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
@@ -787,7 +728,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -829,7 +770,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -871,7 +812,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -910,7 +851,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -928,7 +869,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1021,7 +962,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1057,7 +998,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1075,7 +1016,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1093,7 +1034,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1111,7 +1052,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1129,7 +1070,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
@@ -1147,16 +1088,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
 
-        $webhookPersistedQueryOptions = [
-            'post_status' => 'draft', // They are public => don't publish them!
-            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-            'tax_input' => $webhookEndpointTaxInputData,
-        ];
+        $webhookPersistedQueryOptions = $this->getWebhookPersistedQueryOptions();
         \wp_insert_post(array_merge(
             $webhookPersistedQueryOptions,
             [
@@ -1172,7 +1109,194 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getAdminEndpointTaxInputData(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+
+        $endpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy->getTaxonomy();
+
+        $adminEndpointTaxInputData = [
+            $endpointCategoryTaxonomy => [],
+        ];
+        $adminEndpointCategoryID = $this->getAdminEndpointCategoryID();
+        if ($adminEndpointCategoryID !== null) {
+            $adminEndpointTaxInputData[$endpointCategoryTaxonomy][] = $adminEndpointCategoryID;
+        }
+
+        return $adminEndpointTaxInputData;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getWebhookEndpointTaxInputData(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+
+        $endpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy->getTaxonomy();
+
+        $webhookEndpointTaxInputData = [
+            $endpointCategoryTaxonomy => [],
+        ];
+        $webhookEndpointCategoryID = $this->getWebhookEndpointCategoryID();
+        if ($webhookEndpointCategoryID !== null) {
+            $webhookEndpointTaxInputData[$endpointCategoryTaxonomy][] = $webhookEndpointCategoryID;
+        }
+
+        return $webhookEndpointTaxInputData;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getAdminPersistedQueryOptions(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
+
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
+        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        return [
+            'post_status' => 'private',
+            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $adminEndpointTaxInputData,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getWebhookPersistedQueryOptions(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        $webhookEndpointTaxInputData = $this->getWebhookEndpointTaxInputData();
+
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
+        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        return [
+            'post_status' => 'draft', // They are public => don't publish them!
+            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $webhookEndpointTaxInputData,
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getAdminCustomEndpointOptions(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        $adminEndpointTaxInputData = $this->getAdminEndpointTaxInputData();
+
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $graphQLCustomEndpointCustomPostType = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+        return [
+            'post_status' => 'private',
+            'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $adminEndpointTaxInputData,
+        ];
+    }
+
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getDefaultCustomEndpointBlocks(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var CustomEndpointOptionsBlock */
+        $customEndpointOptionsBlock = $instanceManager->getInstance(CustomEndpointOptionsBlock::class);
+        /** @var EndpointGraphiQLBlock */
+        $endpointGraphiQLBlock = $instanceManager->getInstance(EndpointGraphiQLBlock::class);
+        /** @var EndpointVoyagerBlock */
+        $endpointVoyagerBlock = $instanceManager->getInstance(EndpointVoyagerBlock::class);
+
+        return [
+            [
+                'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $endpointVoyagerBlock->getBlockFullName(),
+            ]
+        ];
+    }
+
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getDefaultSchemaConfigurationPersistedQueryBlocks(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+
+        /** @var PersistedQueryEndpointOptionsBlock */
+        $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+        /** @var PersistedQueryEndpointAPIHierarchyBlock */
+        $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
+
+        return [
+            [
+                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+            ]
+        ];
+    }
+
+    protected function installPluginSetupDataForVersion1Dot2(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Translate content from URL', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/translate-content-from-url',
+                                Recipes::TRANSLATING_CONTENT_FROM_URL,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/transform/translate-content-from-url',
+                            ),
+                        ],
+                    ],
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
