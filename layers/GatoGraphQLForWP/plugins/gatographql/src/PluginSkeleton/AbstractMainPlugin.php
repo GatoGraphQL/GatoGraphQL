@@ -1276,7 +1276,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         /** @var PersistedQueryEndpointGraphiQLBlock */
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
-        
+
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         \wp_insert_post(array_merge(
