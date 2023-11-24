@@ -128,6 +128,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreHeadingContentItems"
@@ -140,6 +141,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreParagraphContentItems"
@@ -177,6 +179,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.text" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreButtonTextItems"
@@ -222,6 +225,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreListItemContentItems"
@@ -234,6 +238,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.alt" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreCoverAltItems"
@@ -246,6 +251,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.mediaAlt" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreMediaTextAltItems"
@@ -258,6 +264,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreVerseContentItems"
@@ -270,6 +277,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.citation" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreQuoteCitationItems"
@@ -307,6 +315,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreAudioCaptionItems"
@@ -319,6 +328,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreVideoCaptionItems"
@@ -331,6 +341,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "corePreformattedContentItems"
@@ -343,6 +354,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
         )
           @export(
             as: "coreEmbedCaptionItems"
