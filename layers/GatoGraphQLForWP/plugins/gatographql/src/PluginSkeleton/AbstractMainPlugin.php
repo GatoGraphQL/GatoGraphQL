@@ -705,17 +705,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
-        $defaultSchemaConfigurationPersistedQueryBlocks = [
-            [
-                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-            ],
-            [
-                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-            ],
-            [
-                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-            ]
-        ];
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
@@ -1217,25 +1207,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
     }
 
-    protected function installPluginSetupDataForVersion1Dot2(): void
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getDefaultSchemaConfigurationPersistedQueryBlocks(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
 
-        /**
-         * Create the ancestor Persisted Queries for organization
-         */
-        /** @var PersistedQueryEndpointGraphiQLBlock */
-        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
         /** @var PersistedQueryEndpointOptionsBlock */
         $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
-        $defaultSchemaConfigurationPersistedQueryBlocks = [
+        return [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
             ],
@@ -1246,6 +1233,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
             ]
         ];
+    }
+
+    protected function installPluginSetupDataForVersion1Dot2(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+        
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
