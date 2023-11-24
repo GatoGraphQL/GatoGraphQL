@@ -649,13 +649,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-        /** @var CustomEndpointOptionsBlock */
-        $customEndpointOptionsBlock = $instanceManager->getInstance(CustomEndpointOptionsBlock::class);
-        /** @var EndpointGraphiQLBlock */
-        $endpointGraphiQLBlock = $instanceManager->getInstance(EndpointGraphiQLBlock::class);
-        /** @var EndpointVoyagerBlock */
-        $endpointVoyagerBlock = $instanceManager->getInstance(EndpointVoyagerBlock::class);
 
+        $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
         $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         \wp_insert_post(array_merge(
             $adminCustomEndpointOptions,
@@ -669,15 +664,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                         ],
                     ],
-                    [
-                        'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
-                    ],
-                    [
-                        'blockName' => $endpointVoyagerBlock->getBlockFullName(),
-                    ]
+                    ...$defaultCustomEndpointBlocks
                 ])),
             ]
         ));
@@ -1225,6 +1212,33 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             'post_status' => 'private',
             'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
             'tax_input' => $adminEndpointTaxInputData,
+        ];
+    }
+
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getDefaultCustomEndpointBlocks(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var CustomEndpointOptionsBlock */
+        $customEndpointOptionsBlock = $instanceManager->getInstance(CustomEndpointOptionsBlock::class);
+        /** @var EndpointGraphiQLBlock */
+        $endpointGraphiQLBlock = $instanceManager->getInstance(EndpointGraphiQLBlock::class);
+        /** @var EndpointVoyagerBlock */
+        $endpointVoyagerBlock = $instanceManager->getInstance(EndpointVoyagerBlock::class);
+
+        return [
+            [
+                'blockName' => $customEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $endpointGraphiQLBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $endpointVoyagerBlock->getBlockFullName(),
+            ]
         ];
     }
 
