@@ -583,6 +583,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $versionCallbacks = [
             '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
+            '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -1046,27 +1047,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
-                'post_title' => \__('Translate content from URL', 'gatographql'),
-                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                    [
-                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                        'attrs' => [
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                'admin/transform/translate-content-from-url',
-                                Recipes::TRANSLATING_CONTENT_FROM_URL,
-                            ),
-                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
-                                'admin/transform/translate-content-from-url',
-                            ),
-                        ],
-                    ],
-                    ...$schemaConfigurationPersistedQueryBlocks,
-                ])),
-            ]
-        ));
-        \wp_insert_post(array_merge(
-            $adminPersistedQueryOptions,
-            [
                 'post_title' => \__('Import post from WordPress site', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1190,6 +1170,77 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'webhook/register-a-newsletter-subscriber-from-instawp-to-mailchimp',
                                 Recipes::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP,
+                            ),
+                        ],
+                    ],
+                    ...$schemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
+    }
+
+    protected function installPluginSetupDataForVersion1Dot2(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var GraphQLEndpointCategoryTaxonomy */
+        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
+
+        $endpointCategoryTaxonomy = $graphQLEndpointCategoryTaxonomy->getTaxonomy();
+
+        $adminEndpointTaxInputData = [
+            $endpointCategoryTaxonomy => [],
+        ];
+        $adminEndpointCategoryID = $this->getAdminEndpointCategoryID();
+        if ($adminEndpointCategoryID !== null) {
+            $adminEndpointTaxInputData[$endpointCategoryTaxonomy][] = $adminEndpointCategoryID;
+        }
+
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+
+        /**
+         * Create the ancestor Persisted Queries for organization
+         */
+        /** @var GraphQLPersistedQueryEndpointCustomPostType */
+        $graphQLPersistedQueryEndpointCustomPostType = $instanceManager->getInstance(GraphQLPersistedQueryEndpointCustomPostType::class);
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+        /** @var PersistedQueryEndpointOptionsBlock */
+        $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+        /** @var PersistedQueryEndpointAPIHierarchyBlock */
+        $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
+
+        $adminPersistedQueryOptions = [
+            'post_status' => 'private',
+            'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
+            'tax_input' => $adminEndpointTaxInputData,
+        ];
+        $schemaConfigurationPersistedQueryBlocks = [
+            [
+                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+            ]
+        ];
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Translate content from URL', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/translate-content-from-url',
+                                Recipes::TRANSLATING_CONTENT_FROM_URL,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/transform/translate-content-from-url',
                             ),
                         ],
                     ],
