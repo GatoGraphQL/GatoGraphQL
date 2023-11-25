@@ -54,7 +54,69 @@ It has been added to the Recipes section too, under "Translating content from UR
 
 ## Added `XML` scalar type
 
-@todo Complete desc for XML scalar
+We can now input XML strings via the new `XML` scalar type, which will validate the correctness of the XML string.
+
+For instance, this query:
+
+```graphql
+{
+  _strDecodeXMLAsJSON(xml: """<?xml version="1.0" encoding="UTF-8"?>
+  <body>
+    <message>Hello world!</message>
+  </body>
+  """)
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "body": {
+      "message": "Hello world!"
+    }
+  }
+}
+```
+
+Whereas this query:
+
+```graphql
+{
+  _strDecodeXMLAsJSON(xml: """<?xml version="1.0" encoding="UTF-8"?>
+  <body>
+    <message>Hello world!</message>
+  """)
+}
+```
+
+...will produce:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Cannot cast value '<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n  <body>\n  <message>Hello world!<\/message>\n  ' for type 'XML'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 31
+        }
+      ],
+      "extensions": {
+        "field": "_strDecodeXMLAsJSON(xml: \"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n  <body>\n  <message>Hello world!<\/message>\n  \")",
+        "problems": [
+          "Premature end of data in tag body line 2\n"
+        ]
+      }
+    }
+  ],
+  "data": {
+    "_strDecodeXMLAsJSON": null
+  }
+}
+```
 
 ## Fixed
 
