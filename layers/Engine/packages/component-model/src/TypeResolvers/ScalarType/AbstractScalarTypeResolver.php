@@ -145,10 +145,14 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
         );
     }
 
+    /**
+     * @param array<string,mixed> $extensions
+     */
     protected function addDefaultError(
         mixed $inputValue,
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        array $extensions = [],
     ): void {
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
@@ -161,6 +165,7 @@ abstract class AbstractScalarTypeResolver extends AbstractTypeResolver implement
                     ]
                 ),
                 $astNode,
+                $extensions,
             ),
         );
     }
