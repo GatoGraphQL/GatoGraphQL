@@ -34,6 +34,13 @@ class XMLScalarTypeResolver extends AbstractScalarTypeResolver
         AstInterface $astNode,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int|float|bool|object|null {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        $this->validateIsString($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+        
+        /** @var string $inputValue */
         \libxml_use_internal_errors(true);
         $parsed = \simplexml_load_string($inputValue);
         if ($parsed === false) {
