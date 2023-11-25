@@ -39,19 +39,37 @@ class XMLScalarTypeResolver extends AbstractScalarTypeResolver
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
-        
         /** @var string $inputValue */
-        \libxml_use_internal_errors(true);
-        $parsed = \simplexml_load_string($inputValue);
-        if ($parsed === false) {
-            $errorMessages = [];
-            foreach(libxml_get_errors() as $error) {
-                $errorMessages[] = $error->message;
-            }
-            $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore, ['problems' => $errorMessages]);
-            \libxml_clear_errors();
+
+        $this->validateIsXML($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
+
         return $inputValue;
+    }
+
+    final protected function validateIsXML(
+        string $inputValue,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        \libxml_use_internal_errors(true);
+        $parsed = \simplexml_load_string($inputValue);
+        if ($parsed !== false) {
+            return;
+        }
+
+        $errorMessages = [];
+        foreach(libxml_get_errors() as $error) {
+            $errorMessages[] = $error->message;
+        }
+        $this->addDefaultError(
+            $inputValue,
+            $astNode,
+            $objectTypeFieldResolutionFeedbackStore,
+            ['problems' => $errorMessages]
+        );
+        \libxml_clear_errors();
     }
 }
