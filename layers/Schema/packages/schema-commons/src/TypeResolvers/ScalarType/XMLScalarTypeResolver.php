@@ -61,7 +61,7 @@ class XMLScalarTypeResolver extends AbstractScalarTypeResolver
         }
 
         $errorMessages = [];
-        foreach(libxml_get_errors() as $error) {
+        foreach (libxml_get_errors() as $error) {
             $errorMessages[] = $error->message;
         }
         $this->addDefaultError(
