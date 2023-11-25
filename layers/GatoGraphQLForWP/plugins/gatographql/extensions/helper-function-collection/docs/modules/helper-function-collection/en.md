@@ -102,6 +102,36 @@ mutation SendEmail @depends(on: "GetEmailData") {
 }
 ```
 
+### `_strDecodeXMLAsJSON`
+
+Decode an XML string as JSON.
+
+This method can help process an XML string, such as an RSS feed, by converting it into a JSON object which can be manipulated by several fields in Gato GraphQL.
+
+This query:
+
+```graphql
+{
+  _strDecodeXMLAsJSON(xml: """<?xml version="1.0" encoding="UTF-8"?>
+  <body>
+    <message>Hello world!</message>
+  </body>
+  """)
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "_strDecodeXMLAsJSON": {
+      "message": "Hello world!"
+    }
+  }
+}
+```
+
 ### `_urlAddParams`
 
 Adds params to a URL.
