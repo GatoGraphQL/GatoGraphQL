@@ -73,7 +73,7 @@ For instance, this query:
 ```json
 {
   "data": {
-    "body": {
+    "_strDecodeXMLAsJSON": {
       "message": "Hello world!"
     }
   }
