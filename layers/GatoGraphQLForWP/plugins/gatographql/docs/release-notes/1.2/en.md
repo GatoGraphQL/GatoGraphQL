@@ -52,6 +52,10 @@ For instance, passing the [URL of some Markdown file in a GitHub repo](https://r
 
 It has been added to the Recipes section too, under "Translating content from URL".
 
+## Added `XML` scalar type
+
+@todo Complete desc for XML scalar
+
 ## Fixed
 
 - In predefined persisted queries "Translate post" and "Translate posts", added `failIfNonExistingKeyOrPath: false` when selecting a block's `attributes.{something}` property (as it may sometimes not be defined)

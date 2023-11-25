@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Recipe "Translating content from URL"
 - Predefined Persisted Query "Translate content from URL"
+- `XML` scalar type
 
 ### Fixed
 
