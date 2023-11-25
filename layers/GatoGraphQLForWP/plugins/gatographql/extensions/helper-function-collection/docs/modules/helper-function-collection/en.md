@@ -113,9 +113,26 @@ This query:
 ```graphql
 {
   _strDecodeXMLAsJSON(xml: """<?xml version="1.0" encoding="UTF-8"?>
-  <body>
-    <message>Hello world!</message>
-  </body>
+<bookstore>  
+  <book category="COOKING">  
+    <title lang="en">Everyday Italian</title>  
+    <author>Giada De Laurentiis</author>  
+    <year>2005</year>  
+    <price>30.00</price>  
+  </book>  
+  <book category="CHILDREN">  
+    <title lang="en">Harry Potter</title>  
+    <author>J K. Rowling</author>  
+    <year>2005</year>  
+    <price>29.99</price>  
+  </book>  
+  <book category="WEB">  
+    <title lang="en">Learning XML</title>  
+    <author>Erik T. Ray</author>  
+    <year>2003</year>  
+    <price>39.95</price>  
+  </book>  
+</bookstore>
   """)
 }
 ```
@@ -126,7 +143,40 @@ This query:
 {
   "data": {
     "_strDecodeXMLAsJSON": {
-      "message": "Hello world!"
+      "bookstore": {
+        "book": [
+          {
+            "@category": "COOKING",
+            "title": {
+              "@lang": "en",
+              "_": "Everyday Italian"
+            },
+            "author": "Giada De Laurentiis",
+            "year": "2005",
+            "price": "30.00"
+          },
+          {
+            "@category": "CHILDREN",
+            "title": {
+              "@lang": "en",
+              "_": "Harry Potter"
+            },
+            "author": "J K. Rowling",
+            "year": "2005",
+            "price": "29.99"
+          },
+          {
+            "@category": "WEB",
+            "title": {
+              "@lang": "en",
+              "_": "Learning XML"
+            },
+            "author": "Erik T. Ray",
+            "year": "2003",
+            "price": "39.95"
+          }
+        ]
+      }
     }
   }
 }
