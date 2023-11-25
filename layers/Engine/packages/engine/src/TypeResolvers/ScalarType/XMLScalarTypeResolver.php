@@ -37,7 +37,11 @@ class XMLScalarTypeResolver extends AbstractScalarTypeResolver
         \libxml_use_internal_errors(true);
         $parsed = \simplexml_load_string($inputValue);
         if ($parsed === false) {
-            $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+            $errorMessages = [];
+            foreach(libxml_get_errors() as $error) {
+                $errorMessages[] = $error->message;
+            }
+            $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore, ['problems' => $errorMessages]);
             \libxml_clear_errors();
             return null;
         }
