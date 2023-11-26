@@ -95,7 +95,7 @@ mutation ImportPostFromRSSFeed
   createPost(input: {
     status: draft,
     authorBy: {
-      slug: $existingAuthorUsername
+      username: $existingAuthorUsername
     },
     contentAs: {
       html: $content
