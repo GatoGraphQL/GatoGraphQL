@@ -23,7 +23,7 @@ query InitializeDynamicVariables
   #   @remove
 }
 
-query GetPostAndExportData($postId: ID!)
+query GetPostFromRSSFeedAndExportData
   @depends(on: "InitializeDynamicVariables")
 {
   _sendHTTPRequest(input: {
@@ -80,8 +80,8 @@ query GetPostAndExportData($postId: ID!)
   }
 }
 
-mutation DuplicatePost
-  @depends(on: "GetPostAndExportData")
+mutation CreatePost
+  @depends(on: "GetPostFromRSSFeedAndExportData")
 {
   createPost(input: {
     status: draft,
