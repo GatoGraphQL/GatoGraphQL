@@ -16,18 +16,6 @@ query InitializeDynamicVariables
   authorSlug: _echo(value: null)
     @export(as: "authorSlug")
     @remove
-
-  # categorySlugs: _echo(value: [])
-  #   @export(as: "categorySlugs")
-  #   @remove
-
-  # featuredImageID: _echo(value: null)
-  #   @export(as: "featuredImageID")
-  #   @remove
-
-  # tagSlugs: _echo(value: [])
-  #   @export(as: "tagSlugs")
-  #   @remove
 }
 
 query GetPostAndExportData($postId: ID!)
@@ -92,11 +80,6 @@ query GetPostAndExportData($postId: ID!)
       }
     )
       @export(as: "title")
-
-    # This item does not exist on the RSS feed
-    # featuredImage {
-    #   id @export(as: "featuredImageID")
-    # }
   }
 }
 
