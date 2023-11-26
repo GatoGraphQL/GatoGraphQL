@@ -10,21 +10,7 @@
 #
 ########################################################################
 
-query InitializeDynamicVariables
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
-{
-  authorSlug: _echo(value: null)
-    @export(as: "authorSlug")
-    @remove
-
-  # Commented out, because item "category" in the RSS feed contains both categories and tags!
-  # categorySlugs: _echo(value: [])
-  #   @export(as: "categorySlugs")
-  #   @remove
-}
-
 query GetPostFromRSSFeedAndExportData
-  @depends(on: "InitializeDynamicVariables")
 {
   _sendHTTPRequest(input: {
     url: $url,
@@ -39,13 +25,13 @@ query GetPostFromRSSFeedAndExportData
     )
 
     # Fields to be imported
-    authorSlug: _objectProperty(
+    authorUsername: _objectProperty(
       object: $__rssJSON,
       by: {
         path: "rss.channel.item.dc:creator"
       }
     )
-      @export(as: "authorSlug")
+      @export(as: "authorUsername")
 
     # categorySlugs: _objectProperty(
     #   object: $__rssJSON,
@@ -80,27 +66,40 @@ query GetPostFromRSSFeedAndExportData
   }
 }
 
-mutation CreatePost
+# If the author's username exists in this site, keep it
+# Otherwise, use "admin"
+query CheckAuthorExistsOrChange(
+  $adminUsername: String! = "admin"
+)
   @depends(on: "GetPostFromRSSFeedAndExportData")
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  existingUserByUsername: user(by: { username: $authorUsername })
+  {
+    id
+    username
+  }
+  existingUserByUsernameOrLocal: user(by: { username: $authorUsername })
+    @default(value: $adminUsername)
+  {
+    id
+       @export(as: "authorID")
+    username
+  }
+}
+
+mutation CreatePost
+  @depends(on: "CheckAuthorExistsOrChange")
 {
   createPost(input: {
     status: draft,
     authorBy: {
-      slug: $authorSlug
-    },
-    categoriesBy: {
-      slugs: $categorySlugs
+      id: $authorID
     },
     contentAs: {
       html: $content
     },
     excerpt: $excerpt
-    featuredImageBy: {
-      id: $featuredImageID
-    },
-    tagsBy: {
-      slugs: $tagSlugs
-    },
     title: $title
   }) {
     status
@@ -111,27 +110,17 @@ mutation CreatePost
       }
     }
     post {
-      # Fields not to be duplicated
       id
       slug
       date
       status
 
-      # Fields to be duplicated
       author {
         id
-      }
-      categories {
-        id
+        username
       }
       content
       excerpt
-      featuredImage {
-        id
-      }
-      tags {
-        id
-      }
       title
     }
   }
