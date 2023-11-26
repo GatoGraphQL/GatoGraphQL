@@ -80,13 +80,13 @@ query CheckAuthorExistsOrChange(
     id
     username
   }
-  existingUserByUsernameOrLocal: user(by: { username: $authorUsername })
-    @default(value: $adminUsername)
-  {
-    id
-      @export(as: "authorID")
-    username
-  }
+  userExists: _notNull(value: $__existingUserByUsername)
+  username: _if(
+    condition: $__userExists,
+    then: $authorUsername,
+    else: $adminUsername
+  )
+    @export(as: "existingAuthorUsername")
 }
 
 mutation ImportPostFromRSSFeed
@@ -95,7 +95,7 @@ mutation ImportPostFromRSSFeed
   createPost(input: {
     status: draft,
     authorBy: {
-      id: $authorID
+      slug: $existingAuthorUsername
     },
     contentAs: {
       html: $content
