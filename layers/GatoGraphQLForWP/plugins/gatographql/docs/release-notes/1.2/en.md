@@ -166,6 +166,44 @@ mutation ImportPostFromRSSFeed
 }
 ```
 
+## Added predefined Persisted Query "Fetch post links"
+
+The new predefined Persisted Query "Fetch post links" finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
+
+For instance, it may produce this response:
+
+```json
+{
+  "data": {
+    "posts": [
+      {
+        "id": 1435,
+        "title": "Citations from famous authors",
+        "links": [
+          {
+            "href": "https://www.azquotes.com/author/4085-Fyodor_Dostoevsky",
+            "text": "Quote by Fyodor Dostoevsky"
+          },
+          {
+            "href": "https://www.azquotes.com/author/14706-Leo_Tolstoy",
+            "text": "Quote by Leon Tolstoi"
+          },
+          {
+            "href": "https://www.azquotes.com/author/15138-Voltaire",
+            "text": "Quote by Voltaire"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "title": "Hello world!",
+        "links": []
+      }
+    ]
+  }
+}
+```
+
 ## Added `XML` scalar type
 
 We can now input XML strings via the new `XML` scalar type, which will validate the correctness of the XML string.
