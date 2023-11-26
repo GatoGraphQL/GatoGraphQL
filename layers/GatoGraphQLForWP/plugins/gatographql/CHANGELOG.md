@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Recipe "Translating content from URL"
 - Predefined Persisted Query "Translate content from URL"
 - Predefined Persisted Query "Import post from WordPress RSS feed"
+- Predefined Persisted Query "Fetch post links"
 
 ### Fixed
 
