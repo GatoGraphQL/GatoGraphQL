@@ -88,7 +88,7 @@ query CheckAuthorExistsOrChange(
   }
 }
 
-mutation CreatePost
+mutation ImportPostFromRSSFeed
   @depends(on: "CheckAuthorExistsOrChange")
 {
   createPost(input: {
