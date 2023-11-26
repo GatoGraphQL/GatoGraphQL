@@ -1332,7 +1332,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/report/post-links',
-                                VirtualRecipes::RETRIEVE_POST_LINKS,
+                                VirtualRecipes::FETCH_POST_LINKS,
                             ),
                         ],
                     ],

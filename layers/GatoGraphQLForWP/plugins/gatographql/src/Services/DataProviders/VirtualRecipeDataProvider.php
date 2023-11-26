@@ -29,7 +29,7 @@ class VirtualRecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
-            VirtualRecipes::RETRIEVE_POST_LINKS => [
+            VirtualRecipes::FETCH_POST_LINKS => [
                 \__('Retrieving post links', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
