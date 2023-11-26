@@ -80,7 +80,6 @@ query CheckAuthorExistsOrChange(
   $adminUsername: String! = "admin"
 )
   @depends(on: "GetPostFromRSSFeedAndExportData")
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   existingUserByUsername: user(by: { username: $authorUsername })
   {
