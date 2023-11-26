@@ -52,6 +52,120 @@ For instance, passing the [URL of some Markdown file in a GitHub repo](https://r
 
 It has been added to the Recipes section too, under "Translating content from URL".
 
+## Added predefined Persisted Query "Import post from WordPress RSS feed"
+
+The following GraphQL reads the WordPress RSS feed for a post, and imports it into the local site. It has been added to Gato GraphQL as a predefined Persisted Query, with title "Import post from WordPress RSS feed":
+
+```graphql
+query GetPostFromRSSFeedAndExportData(
+  $url: URL!
+) {
+  _sendHTTPRequest(input: {
+    url: $url,
+    method: GET
+  }) {
+    body
+    rssJSON: _strDecodeXMLAsJSON(
+      xml: $__body
+      alwaysArrayTagNames: [
+        "category",
+      ],
+    )
+
+    authorUsername: _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.dc:creator"
+      }
+    )
+      @export(as: "authorUsername")
+
+    content:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.content:encoded"
+      }
+    )
+      @export(as: "content")
+
+    excerpt:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.description"
+      }
+    )
+      @export(as: "excerpt")
+
+    title:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.title"
+      }
+    )
+      @export(as: "title")
+  }
+}
+
+# If the author's username exists in this site, keep it
+# Otherwise, use "admin"
+query CheckAuthorExistsOrChange(
+  $adminUsername: String! = "admin"
+)
+  @depends(on: "GetPostFromRSSFeedAndExportData")
+{
+  existingUserByUsername: user(by: { username: $authorUsername })
+  {
+    id
+    username
+  }
+  userExists: _notNull(value: $__existingUserByUsername)
+  username: _if(
+    condition: $__userExists,
+    then: $authorUsername,
+    else: $adminUsername
+  )
+    @export(as: "existingAuthorUsername")
+}
+
+mutation ImportPostFromRSSFeed
+  @depends(on: "CheckAuthorExistsOrChange")
+{
+  createPost(input: {
+    status: draft,
+    authorBy: {
+      username: $existingAuthorUsername
+    },
+    contentAs: {
+      html: $content
+    },
+    excerpt: $excerpt
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      slug
+      date
+      status
+
+      author {
+        id
+        username
+      }
+      content
+      excerpt
+      title
+    }
+  }
+}
+```
+
 ## Added `XML` scalar type
 
 We can now input XML strings via the new `XML` scalar type, which will validate the correctness of the XML string.
