@@ -1,11 +1,11 @@
 ########################################################################
 #
-# This Persisted GraphQL query imports a post from some a WordPress RSS feed.
+# This Persisted GraphQL query imports a post from a WordPress RSS feed.
 #
 # *********************************************************************
 # 
 # URL params:
-#   - url: WordPress single post RSS URL. It usually is the blog post URL + appending "/feed/rss/?withoutcomments=1"
+#   - url: URL of the WordPress single post's RSS feed. It usually is the blog post URL + "/feed/rss/?withoutcomments=1"
 #       eg: https://newapi.getpop.org/blogroll/a-tale-of-two-cities-teaser/feed/rss/?withoutcomments=1
 #
 ########################################################################
