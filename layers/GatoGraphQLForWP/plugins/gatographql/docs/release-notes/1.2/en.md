@@ -54,7 +54,7 @@ It has been added to the Recipes section too, under "Translating content from UR
 
 ## Added predefined Persisted Query "Import post from WordPress RSS feed"
 
-The following GraphQL reads the WordPress RSS feed for a post, and imports it into the local site. It has been added to Gato GraphQL as a predefined Persisted Query, with title "Import post from WordPress RSS feed":
+The new predefined Persisted Query "Import post from WordPress RSS feed" reads the WordPress RSS feed for a post, and imports it into the local site:
 
 ```graphql
 query GetPostFromRSSFeedAndExportData(
