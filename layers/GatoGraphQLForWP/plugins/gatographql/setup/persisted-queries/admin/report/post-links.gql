@@ -5,12 +5,6 @@
 # It finds all `<a href="(...)">(...)</a>` strings in all posts, and
 # lists them down in the response as `{ href: (...), text: (...) }`.
 #
-# *********************************************************************
-# 
-# URL params:
-#   - localeRegex: The regex to identify the locale
-#       eg: "es_[A-Z]+" for the Spanish locale (es_AR for Argentina, es_ES for Spain, etc)
-#
 ########################################################################
 
 query GetPostLinks {
