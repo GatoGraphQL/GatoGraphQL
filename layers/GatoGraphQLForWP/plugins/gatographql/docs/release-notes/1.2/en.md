@@ -153,7 +153,6 @@ mutation ImportPostFromRSSFeed
       slug
       date
       status
-
       author {
         id
         username
