@@ -84,7 +84,7 @@ query CheckAuthorExistsOrChange(
     @default(value: $adminUsername)
   {
     id
-       @export(as: "authorID")
+      @export(as: "authorID")
     username
   }
 }
