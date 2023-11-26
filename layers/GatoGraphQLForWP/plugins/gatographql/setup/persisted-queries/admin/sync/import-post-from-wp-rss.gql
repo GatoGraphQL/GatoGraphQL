@@ -10,8 +10,9 @@
 #
 ########################################################################
 
-query GetPostFromRSSFeedAndExportData
-{
+query GetPostFromRSSFeedAndExportData(
+  $url: URL!
+) {
   _sendHTTPRequest(input: {
     url: $url,
     method: GET
