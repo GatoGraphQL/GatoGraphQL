@@ -1,0 +1,32 @@
+########################################################################
+#
+# This Persisted GraphQL query displays all links added to all posts.
+#
+# *********************************************************************
+# 
+# URL params:
+#   - localeRegex: The regex to identify the locale
+#       eg: "es_[A-Z]+" for the Spanish locale (es_AR for Argentina, es_ES for Spain, etc)
+#
+########################################################################
+
+query FetchUsersByLocale(
+  $localeRegex: String!
+) {
+  usersByLocale: users(
+    filter: { metaQuery: {
+      key: "locale",
+      compareBy: {
+        stringValue: {
+          value: $localeRegex
+          operator: REGEXP
+        }
+      }
+    }},
+    pagination: { limit: -1 }
+  ) {
+    id
+    name
+    locale: metaValue(key: "locale")
+  }
+}
