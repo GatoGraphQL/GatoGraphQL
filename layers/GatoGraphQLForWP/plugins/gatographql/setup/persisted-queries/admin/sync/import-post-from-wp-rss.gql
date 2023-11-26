@@ -1,0 +1,158 @@
+########################################################################
+#
+# This Persisted GraphQL query imports a post from some a WordPress RSS feed.
+#
+# *********************************************************************
+# 
+# URL params:
+#   - url: WordPress single post RSS URL. It usually is the blog post URL + appending "/feed/rss/?withoutcomments=1"
+#       eg: https://newapi.getpop.org/blogroll/a-tale-of-two-cities-teaser/feed/rss/?withoutcomments=1
+#
+########################################################################
+
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  authorSlug: _echo(value: null)
+    @export(as: "authorSlug")
+    @remove
+
+  # categorySlugs: _echo(value: [])
+  #   @export(as: "categorySlugs")
+  #   @remove
+
+  # featuredImageID: _echo(value: null)
+  #   @export(as: "featuredImageID")
+  #   @remove
+
+  # tagSlugs: _echo(value: [])
+  #   @export(as: "tagSlugs")
+  #   @remove
+}
+
+query GetPostAndExportData($postId: ID!)
+  @depends(on: "InitializeDynamicVariables")
+{
+  _sendHTTPRequest(input: {
+    url: $url,
+    method: GET
+  }) {
+    body
+    rssJSON: _strDecodeXMLAsJSON(
+      xml: $__body
+      alwaysArrayTagNames: [
+        "category",
+      ],
+    )
+
+    # Fields to be imported
+    authorSlug: _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.dc:creator"
+      }
+    )
+      @export(as: "authorSlug")
+
+    # Commented out, because item "category" in the RSS feed contains both categories and tags!
+    # categorySlugs: _objectProperty(
+    #   object: $__rssJSON,
+    #   by: {
+    #     path: "rss.channel.item.category"
+    #   }
+    # )    
+    # This item does not exist on the RSS feed
+    # tagSlugs: _objectProperty(
+    #   object: $__rssJSON,
+    #   by: {
+    #     path: "rss.channel.item.tag"
+    #   }
+    # )
+
+    content:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.content:encoded"
+      }
+    )
+      @export(as: "content")
+
+    excerpt:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.description"
+      }
+    )
+      @export(as: "excerpt")
+
+    title:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.title"
+      }
+    )
+      @export(as: "title")
+
+    # This item does not exist on the RSS feed
+    # featuredImage {
+    #   id @export(as: "featuredImageID")
+    # }
+  }
+}
+
+mutation DuplicatePost
+  @depends(on: "GetPostAndExportData")
+{
+  createPost(input: {
+    status: draft,
+    authorBy: {
+      slug: $authorSlug
+    },
+    categoriesBy: {
+      slugs: $categorySlugs
+    },
+    contentAs: {
+      html: $content
+    },
+    excerpt: $excerpt
+    featuredImageBy: {
+      id: $featuredImageID
+    },
+    tagsBy: {
+      slugs: $tagSlugs
+    },
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
+
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      content
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
+    }
+  }
+}
