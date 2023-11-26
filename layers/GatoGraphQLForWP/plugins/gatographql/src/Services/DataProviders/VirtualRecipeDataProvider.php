@@ -29,6 +29,19 @@ class VirtualRecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
+            VirtualRecipes::RETRIEVE_POST_LINKS => [
+                \__('Retrieving post links', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
+            ],
         ];
     }
 }
