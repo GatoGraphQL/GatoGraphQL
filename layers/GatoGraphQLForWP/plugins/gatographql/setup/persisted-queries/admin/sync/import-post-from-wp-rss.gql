@@ -17,6 +17,7 @@ query InitializeDynamicVariables
     @export(as: "authorSlug")
     @remove
 
+  # Commented out, because item "category" in the RSS feed contains both categories and tags!
   # categorySlugs: _echo(value: [])
   #   @export(as: "categorySlugs")
   #   @remove
@@ -46,7 +47,6 @@ query GetPostAndExportData($postId: ID!)
     )
       @export(as: "authorSlug")
 
-    # Commented out, because item "category" in the RSS feed contains both categories and tags!
     # categorySlugs: _objectProperty(
     #   object: $__rssJSON,
     #   by: {
