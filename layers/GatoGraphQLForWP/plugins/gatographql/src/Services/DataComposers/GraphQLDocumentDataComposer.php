@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleReso
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
+use GatoGraphQL\GatoGraphQL\Services\DataProviders\VirtualRecipeDataProvider;
 use PoP\Root\Services\BasicServiceTrait;
 use RuntimeException;
 
@@ -20,6 +21,7 @@ class GraphQLDocumentDataComposer
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?RecipeDataProvider $recipeDataProvider = null;
+    private ?VirtualRecipeDataProvider $virtualRecipeDataProvider = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -47,6 +49,19 @@ class GraphQLDocumentDataComposer
         }
         return $this->recipeDataProvider;
     }
+    final public function setVirtualRecipeDataProvider(VirtualRecipeDataProvider $virtualRecipeDataProvider): void
+    {
+        $this->virtualRecipeDataProvider = $virtualRecipeDataProvider;
+    }
+    final protected function getVirtualRecipeDataProvider(): VirtualRecipeDataProvider
+    {
+        if ($this->virtualRecipeDataProvider === null) {
+            /** @var VirtualRecipeDataProvider */
+            $virtualRecipeDataProvider = $this->instanceManager->getInstance(VirtualRecipeDataProvider::class);
+            $this->virtualRecipeDataProvider = $virtualRecipeDataProvider;
+        }
+        return $this->virtualRecipeDataProvider;
+    }
 
     /**
      * Append the required extensions and bundles to the header
@@ -62,7 +77,10 @@ class GraphQLDocumentDataComposer
         /**
          * Check if there are required extensions for the recipe
          */
-        $recipeSlugDataItems = $this->getRecipeDataProvider()->getRecipeSlugDataItems();
+        $recipeSlugDataItems = [
+            ...$this->getRecipeDataProvider()->getRecipeSlugDataItems(),
+            ...$this->getVirtualRecipeDataProvider()->getRecipeSlugDataItems(),
+        ];
         $recipeDataItem = $recipeSlugDataItems[$recipeSlug] ?? null;
         if ($recipeDataItem === null) {
             throw new RuntimeException(
