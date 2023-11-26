@@ -16,6 +16,10 @@ query InitializeDynamicVariables
   authorSlug: _echo(value: null)
     @export(as: "authorSlug")
     @remove
+
+  # categorySlugs: _echo(value: [])
+  #   @export(as: "categorySlugs")
+  #   @remove
 }
 
 query GetPostAndExportData($postId: ID!)
@@ -47,13 +51,6 @@ query GetPostAndExportData($postId: ID!)
     #   object: $__rssJSON,
     #   by: {
     #     path: "rss.channel.item.category"
-    #   }
-    # )    
-    # This item does not exist on the RSS feed
-    # tagSlugs: _objectProperty(
-    #   object: $__rssJSON,
-    #   by: {
-    #     path: "rss.channel.item.tag"
     #   }
     # )
 
