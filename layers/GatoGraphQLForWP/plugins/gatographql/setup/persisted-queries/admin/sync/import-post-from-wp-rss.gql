@@ -2,6 +2,13 @@
 #
 # This Persisted GraphQL query imports a post from a WordPress RSS feed.
 #
+# It imports the title, content and excerpt of the post.
+# If the author with that username exists locally, it uses it,
+# otherwise it replaces it with "admin".
+# It doesn't import the featured image, as it doesn't appear in the RSS.
+# It doesn't import categories or tags, as these are mixed under the
+# same "category" entry in the RSS.
+#
 # *********************************************************************
 # 
 # URL params:
