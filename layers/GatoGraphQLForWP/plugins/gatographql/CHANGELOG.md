@@ -8,10 +8,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Recipe "Translating content from URL"
-- Predefined Persisted Query "Translate content from URL"
 - `XML` scalar type
 - Added documentation for new field `_strDecodeXMLAsJSON` from the Helper Function Collection extension
+- Recipe "Translating content from URL"
+- Predefined Persisted Query "Translate content from URL"
+- Predefined Persisted Query "Import post from WordPress RSS feed"
 
 ### Fixed
 
