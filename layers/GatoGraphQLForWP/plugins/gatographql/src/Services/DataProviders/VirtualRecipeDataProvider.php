@@ -32,10 +32,11 @@ class VirtualRecipeDataProvider
             VirtualRecipes::RETRIEVE_POST_LINKS => [
                 \__('Retrieving post links', 'gatographql'),
                 [
+                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
-                    ExtensionModuleResolver::HTTP_CLIENT,
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ],
                 [
