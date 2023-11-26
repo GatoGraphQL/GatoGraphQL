@@ -13,6 +13,7 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
 use GatoGraphQL\GatoGraphQL\Constants\Recipes;
+use GatoGraphQL\GatoGraphQL\Constants\VirtualRecipes;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
@@ -53,8 +54,8 @@ use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
 use WP_Term;
-use WP_Upgrader;
 
+use WP_Upgrader;
 use function __;
 use function add_action;
 use function do_action;
@@ -1310,7 +1311,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/sync/import-post-from-wp-rss-feed',
-                                Recipes::IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE,
+                                VirtualRecipes::IMPORTING_A_POST_FROM_WORDPRESS_RSS_FEED,
                             ),
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
                                 'admin/sync/import-post-from-wp-rss-feed',
