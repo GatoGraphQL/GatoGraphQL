@@ -13,7 +13,7 @@
 #
 ########################################################################
 
-query GetPostData {
+query GetPostLinks {
   posts(pagination: { limit: -1 }) {
     id
     title
