@@ -182,6 +182,66 @@ This query:
 }
 ```
 
+### `_strParseCSV`
+
+Parse a CSV string into a list of JSON objects.
+
+This field will take a CSV as input, and convert it into a format that can be extracted, iterated and manipulated using other function fields.
+
+For instance, this query:
+
+```graphql
+{
+  _strParseCSV(
+    string: """Year,Make,Model,Description,Price
+1997,Ford,E350,"ac, abs, moon",3000.00
+1999,Chevy,"Venture ""Extended Edition"" (2008)","",4900.00
+1999,Chevy,"Venture ""Extended Edition, Very Large"" (2008)","",5000.00
+1996,Jeep,Grand Cherokee,"MUST SELL!
+air, moon roof, loaded",4799.00"""
+  )
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "_strParseCSV": [
+      {
+        "Year": "1997",
+        "Make": "Ford",
+        "Model": "E350",
+        "Description": "ac, abs, moon",
+        "Price": "3000.00"
+      },
+      {
+        "Year": "1999",
+        "Make": "Chevy",
+        "Model": "Venture \"Extended Edition\" (2008)",
+        "Description": "",
+        "Price": "4900.00"
+      },
+      {
+        "Year": "1999",
+        "Make": "Chevy",
+        "Model": "Venture \"Extended Edition, Very Large\" (2008)",
+        "Description": "",
+        "Price": "5000.00"
+      },
+      {
+        "Year": "1996",
+        "Make": "Jeep",
+        "Model": "Grand Cherokee",
+        "Description": "MUST SELL!\nair, moon roof, loaded",
+        "Price": "4799.00"
+      }
+    ]
+  }
+}
+```
+
 ### `_urlAddParams`
 
 Adds params to a URL.
