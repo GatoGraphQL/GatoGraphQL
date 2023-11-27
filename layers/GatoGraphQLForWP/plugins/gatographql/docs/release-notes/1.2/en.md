@@ -269,6 +269,12 @@ Whereas this query:
 }
 ```
 
+## Improved documentation
+
+- Added documentation for new fields from the [Helper Function Collection](https://gatographql.com/extensions/helper-function-collection/) extension:
+  - `_strDecodeXMLAsJSON`
+  - `_strParseCSV`
+
 ## Fixed
 
 - In predefined persisted queries "Translate post" and "Translate posts", added `failIfNonExistingKeyOrPath: false` when selecting a block's `attributes.{something}` property (as it may sometimes not be defined)
