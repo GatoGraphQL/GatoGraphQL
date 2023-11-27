@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - `XML` scalar type
 - Documentation for new field `_strDecodeXMLAsJSON` from the Helper Function Collection extension
+- Documentation for new field `_strParseCSV` from the Helper Function Collection extension
 - Recipe "Translating content from URL"
 - Predefined Persisted Query "Translate content from URL"
 - Predefined Persisted Query "Import post from WordPress RSS feed"
