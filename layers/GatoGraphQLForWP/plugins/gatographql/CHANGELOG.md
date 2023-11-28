@@ -12,6 +12,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Documentation for new field `_strDecodeXMLAsJSON` from the Helper Function Collection extension
 - Documentation for new field `_strParseCSV` from the Helper Function Collection extension
 - Recipe "Translating content from URL"
+- Persisted Queries "Translate post (Classic editor)" and "Translate posts (Classic editor)"
 - Predefined Persisted Query "Translate content from URL"
 - Predefined Persisted Query "Import post from WordPress RSS feed"
 - Predefined Persisted Query "Import posts from CSV"
@@ -21,7 +22,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - In predefined persisted queries "Translate post" and "Translate posts", added `failIfNonExistingKeyOrPath: false` when selecting a block's `attributes.{something}` property (as it may sometimes not be defined)
 - In predefined persisted query "Import post from WordPress site", added status `any` to select the post
-- Renamed persisted query "Translate post" to "Translate post with blocks", and "Translate posts" to "Translate posts with blocks"
+- Renamed persisted query "Translate post" to "Translate post (Gutenberg)", and "Translate posts" to "Translate posts (Gutenberg)"
 
 ## 1.1.1 - 21/11/2013
 

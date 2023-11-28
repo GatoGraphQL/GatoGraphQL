@@ -54,9 +54,38 @@ For instance, passing the [URL of some Markdown file in a GitHub repo](https://r
 
 It has been added to the Recipes section too, under "Translating content from URL".
 
+### Translate post (Classic editor), and Translate posts (Classic editor)
+
+There already were persisted queries "Translate post" and "Translate posts" (in bulk), which deal with translating all the properties inside the Gutenberg blocks in the post.
+
+These have been duly renamed as "Translate post (Gutenberg)" and "Translate posts (Gutenberg)", and new persisted queries have been added to translate content for the Classic editor:
+
+- **Translate post (Classic editor)**: Translate a single post
+- **Translate posts (Classic editor)**: Translate multiple posts, in bulk
+
+All these queries translate content by calling the Google Translate API, sending all the data within a single request.
+
+Then, if using query "Translate posts (Classic editor)" to translate 5 posts, all data (title, content and excerpt) for all 5 posts is sent all together, providing a rich context that produces a greater accuracy in the translation.
+
+For instance, after translating this post from English to Chinese:
+
+<div class="img-width-1024" markdown=1>
+
+![Created posts from CSV](../../images/releases/v1.2/post-before-translation.png)
+
+</div>
+
+...it became this:
+
+<div class="img-width-1024" markdown=1>
+
+![Created posts from CSV](../../images/releases/v1.2/post-after-translation.png)
+
+</div>
+
 ### Import post from WordPress RSS feed
 
-It reads the WordPress RSS feed for a post, and creates a new post with its data.
+Point to the WordPress RSS feed for a post, and create a new post with its data.
 
 For instance, the query will parse the following RSS feed for a single post (normally accessible under `https://mysite.com/post-slug/feed/rss/?withoutcomments=1`):
 
@@ -106,7 +135,7 @@ For instance, the query will parse the following RSS feed for a single post (nor
 
 ### Import posts from CSV
 
-It reads a CSV, and creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
+Provide a CSV to creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
 
 For instance, the CSV below will create 3 posts:
 
@@ -142,7 +171,7 @@ After executing the query, we get the results:
 
 ### Fetch post links
 
-It finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
+Find all links (i.e. `<a href="(...)">(...)</a>` strings) in all posts, and lists them down in the response as a JSON object, with properties `{ href: (...), text: (...) }`.
 
 For instance, it may produce this response:
 
@@ -254,4 +283,4 @@ Whereas this query:
 
 - In predefined persisted queries "Translate post" and "Translate posts", added `failIfNonExistingKeyOrPath: false` when selecting a block's `attributes.{something}` property (as it may sometimes not be defined)
 - In predefined persisted query "Import post from WordPress site", added status `any` to select the post
-- Renamed persisted query "Translate post" to "Translate post with blocks", and "Translate posts" to "Translate posts with blocks"
+- Renamed persisted query "Translate post" to "Translate post (Gutenberg)", and "Translate posts" to "Translate posts (Gutenberg)"

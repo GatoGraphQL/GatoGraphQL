@@ -1,12 +1,12 @@
 ########################################################################
 #
-# This Persisted GraphQL query translates translates multiple posts at
-# once (in bulk), while executing a single call to the Google Translate
+# This Persisted GraphQL query translates multiple posts at once
+# (in bulk), while executing a single call to the Google Translate
 # API containing all text to translate from all the posts.
 #
 # The translation for each post will be saved under the same post.
 #
-# See Persisted Query "Translate post with blocks" for additional
+# See Persisted Query "Translate post (Gutenberg)" for additional
 # documentation.
 #
 # *********************************************************************

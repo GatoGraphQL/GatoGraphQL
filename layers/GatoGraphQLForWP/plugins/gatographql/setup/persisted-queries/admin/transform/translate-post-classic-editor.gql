@@ -1,0 +1,106 @@
+########################################################################
+#
+# This Persisted GraphQL query translates a "Classic editor" post to
+# the desired language.
+#
+# Depending on the `$update` parameter, the translation will either
+# be saved as:
+#
+#   - false (default): A new post (using the translated slug) with "draft" status
+#   - true: The same post
+#
+# *********************************************************************
+# 
+# URL params:
+#   - postId: ID of the post to translate
+#   - translateToLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - update: Indicate if to update the post, or create a new one
+#
+########################################################################
+
+query FetchData($postId: ID!)
+{
+  post(by: { id: $postId } ) {
+    title
+    rawContent
+    rawExcerpt
+      @export(
+        as: "dataToTranslate",
+        affectAdditionalFieldsUnderPos: [1, 2]
+      )
+  }
+}
+
+query TranslateData(
+  $translateToLang: String!
+)
+  @depends(on: "FetchData")
+{  
+  translations: _echo(value: $dataToTranslate)
+    @underEachJSONObjectProperty
+      @strTranslate(to: $translateToLang)
+    @underJSONObjectProperty(by: { key: "title" })
+      @export(as: "translatedTitle")
+    @underJSONObjectProperty(by: { key: "rawContent" })
+      @export(as: "translatedRawContent")
+    @underJSONObjectProperty(by: { key: "rawExcerpt" })
+      @export(as: "translatedRawExcerpt")
+}
+
+mutation TranslatePost(
+  $postId: ID!
+  $update: Boolean! = false
+)
+  @depends(on: "TranslateData")
+{
+  createPost(input: {
+    title: $translatedTitle,
+    contentAs: {
+      html: $translatedRawContent
+    },
+    excerpt: $translatedRawExcerpt,
+    status: draft
+  })
+    @skip(if: $update)
+  {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      slug
+      rawContent
+      rawExcerpt
+    }    
+  }
+
+  updatePost(input: {
+    id: $postId,
+    title: $translatedTitle,
+    contentAs: {
+      html: $translatedRawContent
+    },
+    excerpt: $translatedRawExcerpt
+  })
+    @include(if: $update)
+  {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      rawContent
+      rawExcerpt
+    }    
+  }
+}
