@@ -85,7 +85,7 @@ For instance, after translating this post from English to Chinese:
 
 ### Import post from WordPress RSS feed
 
-It reads the WordPress RSS feed for a post, and creates a new post with its data.
+Point to the WordPress RSS feed for a post, and create a new post with its data.
 
 For instance, the query will parse the following RSS feed for a single post (normally accessible under `https://mysite.com/post-slug/feed/rss/?withoutcomments=1`):
 
@@ -135,7 +135,7 @@ For instance, the query will parse the following RSS feed for a single post (nor
 
 ### Import posts from CSV
 
-It reads a CSV, and creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
+Provide a CSV to creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
 
 For instance, the CSV below will create 3 posts:
 
@@ -171,7 +171,7 @@ After executing the query, we get the results:
 
 ### Fetch post links
 
-It finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
+Find all links (i.e. `<a href="(...)">(...)</a>` strings) in all posts, and lists them down in the response as a JSON object, with properties `{ href: (...), text: (...) }`.
 
 For instance, it may produce this response:
 
