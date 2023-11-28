@@ -26,6 +26,8 @@ query FetchData($postId: ID!)
       @export(as: "title")
     rawContent
       @export(as: "rawContent")
+    rawExcerpt
+      @export(as: "rawExcerpt")
   }
 }
 
@@ -36,8 +38,8 @@ query TransformData(
 {  
   transformations: _echo(value: {
     meta: {
-      from: ["", ""],
-      to: [$title, $rawContent],
+      from: ["", "", ""],
+      to: [$title, $rawContent, $rawExcerpt],
     }
   })
     @underEachJSONObjectProperty
@@ -58,6 +60,8 @@ query PrepareMetaReplacements
       @export(as: "transformedTitle")
     @underArrayItem(index: 1)
       @export(as: "transformedRawContent")
+    @underArrayItem(index: 2)
+      @export(as: "transformedRawExcerpt")
 }
 
 mutation TranslatePost(
@@ -71,6 +75,7 @@ mutation TranslatePost(
     contentAs: {
       html: $transformedRawContent
     },
+    excerpt: $transformedRawExcerpt,
     status: draft
   })
     @skip(if: $update)
@@ -87,6 +92,7 @@ mutation TranslatePost(
       title
       slug
       rawContent
+      rawExcerpt
     }    
   }
 
@@ -95,7 +101,8 @@ mutation TranslatePost(
     title: $transformedTitle,
     contentAs: {
       html: $transformedRawContent
-    }
+    },
+    excerpt: $transformedRawExcerpt
   })
     @include(if: $update)
   {
@@ -110,6 +117,7 @@ mutation TranslatePost(
       id
       title
       rawContent
+      rawExcerpt
     }    
   }
 }
