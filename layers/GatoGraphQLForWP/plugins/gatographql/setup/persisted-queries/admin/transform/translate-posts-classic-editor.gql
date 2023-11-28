@@ -20,114 +20,96 @@
 query FetchData($postIds: [ID!]!)
 {
   posts(filter: { ids: $postIds } ) {
-    id
     title
-      @export(as: "title", type: DICTIONARY)
-    # rawContent
-    #   @export(as: "rawContent", type: DICTIONARY)
+    rawContent
+    rawExcerpt
+      @export(
+        as: "dataToTranslate",
+        affectAdditionalFieldsUnderPos: [1, 2]
+        type: DICTIONARY
+      )
   }
 }
 
-query AdaptData
-  @depends(on: "FetchData")
-{
-  adaptedToTitle: _echo(value: $title)
-    @underEachJSONObjectProperty(
-      passValueOnwardsAs: "value"
-    )
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: [$value]
-        }
-        setResultInResponse: true
-      )
-    @export(as: "adaptedToTitle")
-  adaptedFromTitle: _echo(value: $title)
-    @underEachJSONObjectProperty
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: [""]
-        }
-        setResultInResponse: true
-      )
-    @export(as: "adaptedFromTitle")
-}
-
-query TransformData(
+query TranslateData(
   $translateToLang: String!
 )
-  @depends(on: "AdaptData")
-{
-  transformations: _echo(value: {
-    meta: {
-      from: $adaptedFromTitle,
-      to: $adaptedToTitle,
-    }
-  })
+  @depends(on: "FetchData")
+{  
+  translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty
-      @underJSONObjectProperty(by: { key: "to" })
-        @underEachJSONObjectProperty
-          @underEachArrayItem
-            @strTranslate(to: $translateToLang)
-    @export(as: "transformations")
+      @underEachJSONObjectProperty
+        @strTranslate(to: $translateToLang)
+    @export(as: "translatedData")
 }
 
-query PrepareMetaReplacements
-  @depends(on: "TransformData")
+query GenerateMutationInputs
+  @depends(on: "FetchData")
 {  
-  transformedMeta: _echo(value: $title)
+  postInputs: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
-      affectDirectivesUnderPos: [1, 2, 3]
+      passValueOnwardsAs: "postTranslatedData"
+      affectDirectivesUnderPos: [1, 2, 3, 4]
     )
       @applyField(
-        name: "_sprintf",
+        name: "_objectProperty",
         arguments: {
-          string: "meta.to.%s",
-          values: [$postID]
-        }
-        passOnwardsAs: "titlePath"
+          object: $postTranslatedData,
+          by: {
+            key: "title",
+          }
+        },
+        passOnwardsAs: "postTranslatedTitle"
       )
       @applyField(
         name: "_objectProperty",
         arguments: {
-          object: $transformations
-          by: { path: $titlePath }
-        }
-        passOnwardsAs: "transformedPostTitleAsArray"
+          object: $postTranslatedData,
+          by: {
+            key: "rawExcerpt",
+          }
+        },
+        passOnwardsAs: "postTranslatedRawExcerpt"
       )
       @applyField(
-        name: "_arrayItem",
+        name: "_objectProperty",
         arguments: {
-          array: $transformedPostTitleAsArray
-          position: 0
-        }
+          object: $postTranslatedData,
+          by: {
+            key: "rawContent",
+          }
+        },
+        passOnwardsAs: "postTranslatedRawContent"
+      )
+      # Already create (and export) the inputs for the mutation
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            title: $postTranslatedTitle,
+            excerpt: $postTranslatedRawExcerpt,
+            contentAs: {
+              html: $postTranslatedRawContent
+            }
+          }
+        },
         setResultInResponse: true
       )
-    @export(
-      as: "transformedTitle"
-    )
+    @export(as: "postInputs")
 }
 
-mutation TranslatePosts($postIds: [ID!]!)
-  @depends(on: "PrepareMetaReplacements")
+mutation TranslatedDataAndUpdatePosts($postIds: [ID!]!)
+  @depends(on: "TranslateData")
 {
   updatePosts: posts(filter: { ids: $postIds } ) {
     id
-    transformedTitle: _objectProperty(
-      object: $transformedTitle,
+    postInput: _objectProperty(
+      object: $postInputs,
       by: {
         key: $__id
       }
     )
-    update(input: {
-      title: $__transformedTitle,
-      # contentAs: {
-      #   html: $__transformedRawContent
-      # }
-    }) {
+    update(input: $__postInput) {
       status
       errors {
         __typename
@@ -138,7 +120,8 @@ mutation TranslatePosts($postIds: [ID!]!)
       post {
         id
         title
-        # rawContent
+        rawExcerpt
+        rawContent
       }
     }
   }
