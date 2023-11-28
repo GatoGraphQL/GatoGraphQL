@@ -41,9 +41,7 @@ query GetPostsFromCSVAndExportData(
     csv: _strParseCSV(
       string: $__body
     )
-    postInputs: _strParseCSV(
-      string: $__csv
-    )
+    postInputs: _echo(value: $__csv)
       @underEachArrayItem(
         passValueOnwardsAs: "csvPostEntry"
         affectDirectivesUnderPos: [1, 2, 3, 4, 5]
@@ -107,10 +105,11 @@ query GetPostsFromCSVAndExportData(
           setResultInResponse: true
         )
       @export(as: "postInputs")
+  }
 }
 
 mutation CreatePostsFromCSVEntries
-  @depends(on: "GetPostsAndExportData")
+  @depends(on: "GetPostsFromCSVAndExportData")
 {
   createdPostIDs: _echo(value: $postInputs)
     @underEachArrayItem(
@@ -126,7 +125,7 @@ mutation CreatePostsFromCSVEntries
     @export(as: "createdPostIDs")
 }
 
-query RetrieveCreatedPosts
+query CreatePostsFromCSVEntriesAndRetrieve
   @depends(on: "CreatePostsFromCSVEntries")
 {
   createdPosts: posts(
