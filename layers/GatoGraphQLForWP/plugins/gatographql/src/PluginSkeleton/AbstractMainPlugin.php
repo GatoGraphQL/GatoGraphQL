@@ -1204,12 +1204,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-
         /** @var PersistedQueryEndpointOptionsBlock */
         $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
+        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();        
         return [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
@@ -1391,7 +1391,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
 
-        /** @var WP_Term|false */
+        /** @var array<string|int> */
         $schemaConfigurations = \get_posts([
             'name' => $slug,
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
