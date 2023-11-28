@@ -1,6 +1,6 @@
 {
     "name": "server-side-registered-block-schema-testing",
-    "version": "1.2.0-dev",
+    "version": "1.2.0",
     "description": "Block for testing the schema",
     "author": "Leonardo Losoviz",
     "license": "MIT",
