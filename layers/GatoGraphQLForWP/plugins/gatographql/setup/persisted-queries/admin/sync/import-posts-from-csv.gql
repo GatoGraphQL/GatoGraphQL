@@ -1,0 +1,130 @@
+########################################################################
+#
+# This Persisted GraphQL query imports posts from a CSV.
+#
+# It creates a new post with the title, content and excerpt of each post.
+# If the author with that username exists locally, it uses it,
+# otherwise it replaces it with "admin".
+#
+# *********************************************************************
+# 
+# URL params:
+#   - url: URL of the CSV
+#
+########################################################################
+
+query GetPostsFromCSVAndExportData(
+  $url: URL!
+) {
+  _sendHTTPRequest(input: {
+    url: $url,
+    method: GET
+  }) {
+    body
+    rssJSON: _strDecodeXMLAsJSON(
+      xml: $__body
+      alwaysArrayTagNames: [
+        "category",
+      ],
+    )
+
+    # Fields to be imported
+    authorUsername: _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.dc:creator"
+      }
+    )
+      @export(as: "authorUsername")
+
+    # categorySlugs: _objectProperty(
+    #   object: $__rssJSON,
+    #   by: {
+    #     path: "rss.channel.item.category"
+    #   }
+    # )
+
+    content:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.content:encoded"
+      }
+    )
+      @export(as: "content")
+
+    excerpt:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.description"
+      }
+    )
+      @export(as: "excerpt")
+
+    title:  _objectProperty(
+      object: $__rssJSON,
+      by: {
+        path: "rss.channel.item.title"
+      }
+    )
+      @export(as: "title")
+  }
+}
+
+# If the author's username exists in this site, keep it
+# Otherwise, use "admin"
+query CheckAuthorExistsOrChange(
+  $adminUsername: String! = "admin"
+)
+  @depends(on: "GetPostsFromCSVAndExportData")
+{
+  existingUserByUsername: user(by: { username: $authorUsername })
+  {
+    id
+    username
+  }
+  userExists: _notNull(value: $__existingUserByUsername)
+  username: _if(
+    condition: $__userExists,
+    then: $authorUsername,
+    else: $adminUsername
+  )
+    @export(as: "existingAuthorUsername")
+}
+
+mutation ImportPostFromRSSFeed
+  @depends(on: "CheckAuthorExistsOrChange")
+{
+  createPost(input: {
+    status: draft,
+    authorBy: {
+      username: $existingAuthorUsername
+    },
+    contentAs: {
+      html: $content
+    },
+    excerpt: $excerpt
+    title: $title
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      slug
+      date
+      status
+
+      author {
+        id
+        username
+      }
+      content
+      excerpt
+      title
+    }
+  }
+}
