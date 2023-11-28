@@ -23,10 +23,10 @@ query InitializeDynamicVariables
 
 query GetPostsFromCSVAndExportData(
   $url: URL!
-  $titleColumn: String! = "title"
-  $excerptColumn: String! = "excerpt"
-  $contentColumn: String! = "content"
-  $authorUsernameColumn: String! = "author"
+  $titleColumn: String! = "Title"
+  $excerptColumn: String! = "Excerpt"
+  $contentColumn: String! = "Content"
+  $authorUsernameColumn: String! = "Author"
 )
   @depends(on: "InitializeDynamicVariables")
 {
@@ -147,61 +147,6 @@ query RetrieveCreatedPosts
 }
 
 
-
-
-query GetPostsFromCSVAndExportData(
-  $url: URL!
-) {
-  _sendHTTPRequest(input: {
-    url: $url,
-    method: GET
-  }) {
-    body
-    csv: _strParseCSV(
-      string: $__body
-    )
-
-    # Fields to be imported
-    authorUsername: _objectProperty(
-      object: $__rssJSON,
-      by: {
-        path: "rss.channel.item.dc:creator"
-      }
-    )
-      @export(as: "authorUsername")
-
-    # categorySlugs: _objectProperty(
-    #   object: $__rssJSON,
-    #   by: {
-    #     path: "rss.channel.item.category"
-    #   }
-    # )
-
-    content:  _objectProperty(
-      object: $__rssJSON,
-      by: {
-        path: "rss.channel.item.content:encoded"
-      }
-    )
-      @export(as: "content")
-
-    excerpt:  _objectProperty(
-      object: $__rssJSON,
-      by: {
-        path: "rss.channel.item.description"
-      }
-    )
-      @export(as: "excerpt")
-
-    title:  _objectProperty(
-      object: $__rssJSON,
-      by: {
-        path: "rss.channel.item.title"
-      }
-    )
-      @export(as: "title")
-  }
-}
 
 # If the author's username exists in this site, keep it
 # Otherwise, use "admin"
