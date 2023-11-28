@@ -29,6 +29,21 @@ class VirtualRecipeDataProvider
                     BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
+            VirtualRecipes::IMPORTING_POSTS_FROM_A_CSV => [
+                \__('Importing posts from a CSV', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ],
+                [
+                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
+                ]
+            ],
             VirtualRecipes::FETCH_POST_LINKS => [
                 \__('Retrieving post links', 'gatographql'),
                 [

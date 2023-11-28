@@ -2,9 +2,11 @@
 
 Here's a description of all the changes.
 
-## Added predefined Persisted Query "Translate content from URL"
+## Added several predefined Persisted Queries
 
-A new predefined Persisted Query has been added: "Translating content from URL".
+The following Persisted Queries, to execute common admin tasks, are now provided:
+
+### Translate content from URL
 
 Given a URL as input, its language, and what language to translate it to, fetches the content from the URL and performs the translation using Google Translate:
 
@@ -52,9 +54,11 @@ For instance, passing the [URL of some Markdown file in a GitHub repo](https://r
 
 It has been added to the Recipes section too, under "Translating content from URL".
 
-## Added predefined Persisted Query "Import post from WordPress RSS feed"
+### Import post from WordPress RSS feed
 
-The new predefined Persisted Query "Import post from WordPress RSS feed" reads the WordPress RSS feed for a post, and imports it into the local site:
+It reads the WordPress RSS feed for a post, and creates a new post with its data.
+
+The query is this one:
 
 ```graphql
 query GetPostFromRSSFeedAndExportData(
@@ -165,9 +169,45 @@ mutation ImportPostFromRSSFeed
 }
 ```
 
-## Added predefined Persisted Query "Fetch post links"
+### Import posts from CSV
 
-The new predefined Persisted Query "Fetch post links" finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
+It reads a CSV, and creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
+
+For instance, the CSV below will create 3 posts:
+
+```csv
+Title,Excerpt,Content,Author
+Multi-channelled optimal interface,Inventore iste velit et expedita ipsa dolor,"<!-- wp:paragraph -->
+<p>Inventore iste velit et expedita ipsa dolor. Optio suscipit qui id harum corporis dignissimos.</p>
+<!-- /wp:paragraph -->",admin
+Ergonomic motivating parallelism,Consequuntur velit quasi assumenda,"<!-- wp:paragraph -->
+<p>Consequuntur velit quasi assumenda. Eum non saepe est. Ut dolorem harum eveniet eaque nemo impedit. Voluptatem commodi modi sed sed animi voluptatem.</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {""id"":5,""sizeSlug"":""large""} -->
+<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/2023/09/wordpress0.jpg"" alt="""" class=""wp-image-5""/></figure>
+<!-- /wp:image -->
+<!-- wp:image {""id"":7,""sizeSlug"":""large""} -->
+<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/2023/09/wordpress2.jpg"" alt="""" class=""wp-image-7""/></figure>
+<!-- /wp:image -->",admin
+Down-sized solution-oriented securedline,Ipsam minima qui asperiores dolorum unde voluptas quia voluptate,"<!-- wp:paragraph -->
+<p>Ipsam minima qui asperiores dolorum unde voluptas quia voluptate. Incidunt omnis cumque beatae quo deleniti ex. Praesentium nihil et consectetur neque commodi tempora ipsa adipisci. Praesentium perferendis sint est.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Et aut fuga aliquam consequuntur dolore sunt ut ut. Quibusdam in voluptas vitae quia eaque. Eligendi dolorum dolorem vitae et vitae et ut.</p>
+<!-- /wp:paragraph -->",admin
+```
+
+After executing the query, we get the results:
+
+<div class="img-width-1024" markdown=1>
+
+![Created posts from CSV](../../images/releases/v1.2/import-posts-from-csv.png)
+
+</div>
+
+### Fetch post links
+
+It finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
 
 For instance, it may produce this response:
 

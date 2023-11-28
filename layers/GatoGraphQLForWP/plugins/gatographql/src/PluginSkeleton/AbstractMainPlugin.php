@@ -597,60 +597,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function installPluginSetupDataForVersion1Dot1(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
-        /** @var SchemaConfigMutationSchemeBlock */
-        $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
-        /** @var SchemaConfigPayloadTypesForMutationsBlock */
-        $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
-
-        /**
-         * Create the Schema Configurations
-         */
-        $nestedMutationsBlockDataItem = [
-            'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
-            'attrs' => [
-                SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
-            ]
-        ];
-        $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
-            'post_status' => 'publish',
-            'post_name' => 'nested-mutations', // Predefine slug to retrieve this CPT's ID on future updates
-            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-            'post_title' => \__('Nested mutations', 'gatographql'),
-            'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                $nestedMutationsBlockDataItem,
-            ])),
-        ]);
-        if ($nestedMutationsSchemaConfigurationCustomPostID === 0) {
-            $nestedMutationsSchemaConfigurationCustomPostID = null;
-        }
-        $entityAsPayloadTypeBlockDataItem = [
-            'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
-            'attrs' => [
-                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
-            ]
-        ];
-        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = \wp_insert_post([
-            'post_status' => 'publish',
-            'post_name' => 'nested-mutations-entity-as-mutation-payload-type', // Predefine slug to retrieve this CPT's ID on future updates
-            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-            'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
-            'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                $nestedMutationsBlockDataItem,
-                $entityAsPayloadTypeBlockDataItem,
-            ])),
-        ]);
-        if ($nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID === 0) {
-            $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = null;
-        }
 
         /**
          * Create custom endpoint
          */
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-
+        
+        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();        
         $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
         $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         \wp_insert_post(array_merge(
@@ -676,41 +630,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         /** @var PersistedQueryEndpointGraphiQLBlock */
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
-        /** @var PersistedQueryEndpointOptionsBlock */
-        $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
-        /** @var PersistedQueryEndpointAPIHierarchyBlock */
-        $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
-
+        
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
-        $nestedMutationsSchemaConfigurationPersistedQueryBlocks = [
-            [
-                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                'attrs' => [
-                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                ],
-            ],
-            [
-                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-            ],
-            [
-                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-            ]
-        ];
-        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks = [
-            [
-                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                'attrs' => [
-                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                ],
-            ],
-            [
-                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
-            ],
-            [
-                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
-            ]
-        ];
+        $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
+        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks();
 
         /**
          * Create the Persisted Queries
@@ -1271,6 +1195,69 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         ];
     }
 
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getNestedMutationsSchemaConfigurationPersistedQueryBlocks(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+        /** @var PersistedQueryEndpointOptionsBlock */
+        $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+        /** @var PersistedQueryEndpointAPIHierarchyBlock */
+        $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
+
+        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();        
+        return [
+            [
+                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                'attrs' => [
+                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
+                ],
+            ],
+            [
+                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+            ]
+        ];
+    }
+
+    /**
+     * @return array<array<string,mixed>>
+     */
+    protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+        /** @var PersistedQueryEndpointOptionsBlock */
+        $persistedQueryEndpointOptionsBlock = $instanceManager->getInstance(PersistedQueryEndpointOptionsBlock::class);
+        /** @var PersistedQueryEndpointAPIHierarchyBlock */
+        $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
+
+        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID();
+
+        return [
+            [
+                'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                'attrs' => [
+                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
+                ],
+            ],
+            [
+                'blockName' => $persistedQueryEndpointOptionsBlock->getBlockFullName(),
+            ],
+            [
+                'blockName' => $persistedQueryEndpointAPIHierarchyBlock->getBlockFullName(),
+            ]
+        ];
+    }
+
     protected function installPluginSetupDataForVersion1Dot2(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
@@ -1322,6 +1309,28 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks();
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Import posts from CSV', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/sync/import-posts-from-csv',
+                                VirtualRecipes::IMPORTING_POSTS_FROM_A_CSV,
+                            ),
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                'admin/sync/import-posts-from-csv',
+                            ),
+                        ],
+                    ],
+                    ...$nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
@@ -1340,6 +1349,121 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+    }
+
+    protected function getNestedMutationsSchemaConfigurationCustomPostID(): ?int
+    {
+        $slug = 'nested-mutations';
+        $schemaConfigurationID = $this->getSchemaConfigurationID($slug);
+        if ($schemaConfigurationID !== null) {
+            return $schemaConfigurationID;
+        }
+
+        $nestedMutationsBlockDataItem = $this->getNestedMutationsBlockDataItem();
+        return $this->createSchemaConfigurationID(
+            $slug,
+            \__('Nested mutations', 'gatographql'),
+            [
+                $nestedMutationsBlockDataItem,
+            ]
+        );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getNestedMutationsBlockDataItem(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var SchemaConfigMutationSchemeBlock */
+        $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
+
+       return [
+            'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
+            'attrs' => [
+                SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
+            ]
+        ];
+    }
+
+    protected function getSchemaConfigurationID(string $slug): ?int
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLSchemaConfigurationCustomPostType */
+        $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+
+        /** @var array<string|int> */
+        $schemaConfigurations = \get_posts([
+            'name' => $slug,
+            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            'post_status' => 'publish',
+            'numberposts' => 1,
+            'fields' => 'ids',
+        ]);
+        if (isset($schemaConfigurations[0])) {
+            return (int) $schemaConfigurations[0];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param array<array<string,mixed>> $blockDataItems
+     */
+    protected function createSchemaConfigurationID(string $slug, string $title, array $blockDataItems): ?int
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var GraphQLSchemaConfigurationCustomPostType */
+        $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
+
+        $schemaConfigurationCustomPostID = \wp_insert_post([
+            'post_status' => 'publish',
+            'post_name' => $slug,
+            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
+            'post_title' => $title,
+            'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($blockDataItems))
+        ]);
+        if ($schemaConfigurationCustomPostID === 0) {
+            return null;
+        }
+        return $schemaConfigurationCustomPostID;
+    }
+
+    protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID(): ?int
+    {
+        $slug = 'nested-mutations-entity-as-mutation-payload-type';
+        $schemaConfigurationID = $this->getSchemaConfigurationID($slug);
+        if ($schemaConfigurationID !== null) {
+            return $schemaConfigurationID;
+        }
+
+        $nestedMutationsBlockDataItem = $this->getNestedMutationsBlockDataItem();
+        $entityAsPayloadTypeBlockDataItem = $this->getEntityAsPayloadTypeBlockDataItem();
+        return $this->createSchemaConfigurationID(
+            $slug,
+            \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
+            [
+                $nestedMutationsBlockDataItem,
+                $entityAsPayloadTypeBlockDataItem,
+            ]
+        );
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getEntityAsPayloadTypeBlockDataItem(): array
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var SchemaConfigPayloadTypesForMutationsBlock */
+        $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
+
+       return [
+            'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
+            'attrs' => [
+                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
+            ]
+        ];
     }
 
     protected function getAdminEndpointCategoryID(): ?int
