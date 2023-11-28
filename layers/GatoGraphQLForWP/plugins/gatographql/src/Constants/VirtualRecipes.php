@@ -10,5 +10,6 @@ namespace GatoGraphQL\GatoGraphQL\Constants;
 class VirtualRecipes
 {
     public const IMPORTING_A_POST_FROM_WORDPRESS_RSS_FEED = 'importing-a-post-from-wordpress-rss-feed';
+    public const IMPORTING_POSTS_FROM_A_CSV = 'importing-posts-from-a-csv';
     public const FETCH_POST_LINKS = 'fetch-post-links';
 }
