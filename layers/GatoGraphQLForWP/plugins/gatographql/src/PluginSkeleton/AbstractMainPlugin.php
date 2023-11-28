@@ -1352,7 +1352,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
-                'post_title' => \__('Translate post (for classic editor)', 'gatographql'),
+                'post_title' => \__('Translate post (Classic editor)', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1371,7 +1371,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
-                'post_title' => \__('Translate posts (for classic editor)', 'gatographql'),
+                'post_title' => \__('Translate posts (Classic editor)', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
