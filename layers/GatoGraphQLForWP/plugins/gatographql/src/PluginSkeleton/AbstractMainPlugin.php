@@ -1309,6 +1309,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks();
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
@@ -1326,7 +1327,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                             ),
                         ],
                     ],
-                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ...$nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
