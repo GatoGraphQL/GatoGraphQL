@@ -599,16 +599,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $instanceManager = InstanceManagerFacade::getInstance();
 
         /**
-         * Create the Schema Configurations
-         */
-        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();        
-
-        /**
          * Create custom endpoint
          */
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-
+        
+        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();        
         $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
         $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         \wp_insert_post(array_merge(
