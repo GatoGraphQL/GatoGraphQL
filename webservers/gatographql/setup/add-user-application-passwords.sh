@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "Adding Application Passwords for users"
 # # These are the already-encoded meta entries for the following application passwords:
 # # - user: 1 (username: "admin")

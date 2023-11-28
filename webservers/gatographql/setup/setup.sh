@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 if wp core is-installed; then
     echo "WordPress is already installed"
     exit

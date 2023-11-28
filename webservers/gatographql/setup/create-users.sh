@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "Creating users"
 # Create users
 wp user create blogger blogger@test.com --role=editor --user_pass=11111111 --first_name=Blogger --last_name=Davenport --user_registered="1982-06-29-17-48-20"

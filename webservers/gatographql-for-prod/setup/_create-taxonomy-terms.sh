@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "Creating taxonomy terms"
 # Create terms for "post_format"
 # @see https://wordpress.org/support/article/post-formats/#backwards-compatibility
