@@ -21,13 +21,13 @@
 query FetchData($postId: ID!)
 {
   post(by: { id: $postId } ) {
-    id
     title
-      @export(as: "title")
     rawContent
-      @export(as: "rawContent")
     rawExcerpt
-      @export(as: "rawExcerpt")
+      @export(
+        as: "dataToTranslate",
+        affectAdditionalFieldsUnderPos: [1, 2]
+      )
   }
 }
 
@@ -36,32 +36,24 @@ query TransformData(
 )
   @depends(on: "FetchData")
 {  
-  transformations: _echo(value: {
-    meta: {
-      from: ["", "", ""],
-      to: [$title, $rawContent, $rawExcerpt],
-    }
-  })
+  translations: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty
-      @underJSONObjectProperty(by: { key: "to" })
-        @underEachArrayItem
-          @strTranslate(to: $translateToLang)
-    @export(as: "transformations")
+      @strTranslate(to: $translateToLang)
+    @underJSONObjectProperty(by: { key: "title" })
+      @export(as: "translatedTitle")
+    @underJSONObjectProperty(by: { key: "rawContent" })
+      @export(as: "translatedRawContent")
+    @underJSONObjectProperty(by: { key: "rawExcerpt" })
+      @export(as: "translatedRawExcerpt")
 }
 
 query PrepareMetaReplacements
   @depends(on: "TransformData")
 {  
-  transformedMeta: _objectProperty(
-    object: $transformations,
+  translatedMeta: _objectProperty(
+    object: $translations,
     by: { path: "meta.to" }
   )
-    @underArrayItem(index: 0)
-      @export(as: "transformedTitle")
-    @underArrayItem(index: 1)
-      @export(as: "transformedRawContent")
-    @underArrayItem(index: 2)
-      @export(as: "transformedRawExcerpt")
 }
 
 mutation TranslatePost(
@@ -71,11 +63,11 @@ mutation TranslatePost(
   @depends(on: "PrepareMetaReplacements")
 {
   createPost(input: {
-    title: $transformedTitle,
+    title: $translatedTitle,
     contentAs: {
-      html: $transformedRawContent
+      html: $translatedRawContent
     },
-    excerpt: $transformedRawExcerpt,
+    excerpt: $translatedRawExcerpt,
     status: draft
   })
     @skip(if: $update)
@@ -98,11 +90,11 @@ mutation TranslatePost(
 
   updatePost(input: {
     id: $postId,
-    title: $transformedTitle,
+    title: $translatedTitle,
     contentAs: {
-      html: $transformedRawContent
+      html: $translatedRawContent
     },
-    excerpt: $transformedRawExcerpt
+    excerpt: $translatedRawExcerpt
   })
     @include(if: $update)
   {
