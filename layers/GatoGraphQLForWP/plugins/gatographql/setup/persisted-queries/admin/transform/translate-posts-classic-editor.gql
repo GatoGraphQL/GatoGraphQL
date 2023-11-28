@@ -98,7 +98,7 @@ query GenerateMutationInputs
     @export(as: "postInputs")
 }
 
-mutation TranslatedDataAndUpdatePosts($postIds: [ID!]!)
+mutation TranslateDataInPosts($postIds: [ID!]!)
   @depends(on: "TranslateData")
 {
   updatePosts: posts(filter: { ids: $postIds } ) {
