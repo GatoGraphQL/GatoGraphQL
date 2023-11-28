@@ -67,13 +67,21 @@ All these queries translate content by calling the Google Translate API, sending
 
 Then, if using query "Translate posts (Classic editor)" to translate 5 posts, all data (title, content and excerpt) for all 5 posts is sent all together, providing a rich context that produces a greater accuracy in the translation.
 
-For instance, after translating this post to Chinese:
+For instance, after translating this post from English to Chinese:
 
+<div class="img-width-1024" markdown=1>
 
+![Created posts from CSV](../../images/releases/v1.2/post-before-translation.png)
+
+</div>
 
 ...it became this:
 
+<div class="img-width-1024" markdown=1>
 
+![Created posts from CSV](../../images/releases/v1.2/post-after-translation.png)
+
+</div>
 
 ### Import post from WordPress RSS feed
 
