@@ -132,28 +132,17 @@ query RetrieveCreatedPosts
       status: [draft]
     }
   ) {
-    # Fields not to be duplicated
     id
     slug
     date
     status
-
-    # Fields to be duplicated
+    title
+    excerpt
+    content
     author {
       id
+      username
     }
-    categories {
-      id
-    }
-    rawContent
-    excerpt
-    featuredImage {
-      id
-    }
-    tags {
-      id
-    }
-    title
   }
 }
 
