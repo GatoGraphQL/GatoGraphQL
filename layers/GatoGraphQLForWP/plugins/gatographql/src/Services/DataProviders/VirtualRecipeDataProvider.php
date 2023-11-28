@@ -47,9 +47,6 @@ class VirtualRecipeDataProvider
             VirtualRecipes::TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE => [
                 \__('Translating "Classic editor" post to a different language', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
-                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
-                    ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -62,8 +59,8 @@ class VirtualRecipeDataProvider
             VirtualRecipes::BULK_TRANSLATING_CLASSIC_EDITOR_POSTS_TO_A_DIFFERENT_LANGUAGE => [
                 \__('Bulk translating "Classic editor" posts to a different language', 'gatographql'),
                 [
-                    ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
