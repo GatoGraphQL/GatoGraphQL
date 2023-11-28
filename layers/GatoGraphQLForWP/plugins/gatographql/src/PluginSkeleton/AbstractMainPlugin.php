@@ -1359,7 +1359,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/transform/translate-post-classic-editor',
-                                Recipes::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE,
+                                VirtualRecipes::TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE,
                             ),
                         ],
                     ],
@@ -1378,7 +1378,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/transform/translate-posts-classic-editor',
-                                Recipes::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE,
+                                VirtualRecipes::BULK_TRANSLATING_CLASSIC_EDITOR_POSTS_TO_A_DIFFERENT_LANGUAGE,
                             ),
                         ],
                     ],
