@@ -13,6 +13,153 @@
 #
 ########################################################################
 
+query InitializeDynamicVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  postInputs: _echo(value: [])
+    @export(as: "postInputs")
+    @remove
+}
+
+query GetPostsFromCSVAndExportData(
+  $url: URL!
+  $titleColumn: String! = "title"
+  $excerptColumn: String! = "excerpt"
+  $contentColumn: String! = "content"
+  $authorUsernameColumn: String! = "author"
+)
+  @depends(on: "InitializeDynamicVariables")
+{
+  _sendHTTPRequest(input: {
+    url: $url,
+    method: GET
+  }) {
+    body
+    csv: _strParseCSV(
+      string: $__body
+    )
+    postInputs: _strParseCSV(
+      string: $__csv
+    )
+      @underEachArrayItem(
+        passValueOnwardsAs: "csvPostEntry"
+        affectDirectivesUnderPos: [1, 2, 3, 4, 5]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $csvPostEntry,
+            by: {
+              key: $titleColumn,
+            }
+          },
+          passOnwardsAs: "postTitle"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $csvPostEntry,
+            by: {
+              key: $excerptColumn,
+            }
+          },
+          passOnwardsAs: "postExcerpt"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $csvPostEntry,
+            by: {
+              key: $contentColumn,
+            }
+          },
+          passOnwardsAs: "postContent"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $csvPostEntry,
+            by: {
+              key: $authorUsernameColumn,
+            }
+          },
+          passOnwardsAs: "postAuthorUsername"
+        )
+        # Already create (and export) the inputs for the mutation
+        @applyField(
+          name: "_echo",
+          arguments: {
+            value: {
+              status: draft,
+              title: $postTitle,
+              excerpt: $postExcerpt,
+              contentAs: {
+                html: $postContent
+              },
+              authorBy: {
+                username: $postAuthorUsername
+              }
+            }
+          },
+          setResultInResponse: true
+        )
+      @export(as: "postInputs")
+}
+
+mutation CreatePostsFromCSVEntries
+  @depends(on: "GetPostsAndExportData")
+{
+  createdPostIDs: _echo(value: $postInputs)
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      @applyField(
+        name: "createPost"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPostIDs")
+}
+
+query RetrieveCreatedPosts
+  @depends(on: "CreatePostsFromCSVEntries")
+{
+  createdPosts: posts(
+    filter: {
+      ids: $createdPostIDs,
+      status: [draft]
+    }
+  ) {
+    # Fields not to be duplicated
+    id
+    slug
+    date
+    status
+
+    # Fields to be duplicated
+    author {
+      id
+    }
+    categories {
+      id
+    }
+    rawContent
+    excerpt
+    featuredImage {
+      id
+    }
+    tags {
+      id
+    }
+    title
+  }
+}
+
+
+
+
 query GetPostsFromCSVAndExportData(
   $url: URL!
 ) {
@@ -21,11 +168,8 @@ query GetPostsFromCSVAndExportData(
     method: GET
   }) {
     body
-    rssJSON: _strDecodeXMLAsJSON(
-      xml: $__body
-      alwaysArrayTagNames: [
-        "category",
-      ],
+    csv: _strParseCSV(
+      string: $__body
     )
 
     # Fields to be imported
