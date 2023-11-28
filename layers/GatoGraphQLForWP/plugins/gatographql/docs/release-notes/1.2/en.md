@@ -54,6 +54,22 @@ For instance, passing the [URL of some Markdown file in a GitHub repo](https://r
 
 It has been added to the Recipes section too, under "Translating content from URL".
 
+### Translate post (Classic editor), and Translate posts (Classic editor)
+
+There already were persisted queries "Translate post" and "Translate posts" (in bulk), which deal with translating the properties inside Gutenberg blocks.
+
+These have been duly renamed as "Translate post (Gutenberg)" and "Translate posts (Gutenberg)", and new persisted queries have been added to translate content for the Classic editor.
+
+Both persisted queries execute the translation against Google Translate, sending all the data within a single request. Then, if translating 5 posts at the same time with the new "Translate posts (Classic editor)" query, then all data (title, content and excerpt) for all 5 posts is sent all together, making the context as good as it can get, and producing a greater translation accuracy.
+
+For instance, after translating this post to Chinese:
+
+
+
+...it became this:
+
+
+
 ### Import post from WordPress RSS feed
 
 It reads the WordPress RSS feed for a post, and creates a new post with its data.
