@@ -227,7 +227,7 @@ services:
       - a2enmod proxy proxy_http
     run:
       - >-
-        SITE_NAME=graphql-by-pop SITE_TITLE="GraphQL by PoP" /bin/sh
+        SITE_NAME=graphql-by-pop SITE_TITLE="GraphQL by PoP" /bin/bash
         /app/setup/setup.sh
 env_file:
   - defaults.env

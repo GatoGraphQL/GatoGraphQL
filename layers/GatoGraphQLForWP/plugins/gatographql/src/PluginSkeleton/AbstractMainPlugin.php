@@ -1353,6 +1353,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function getNestedMutationsSchemaConfigurationCustomPostID(): ?int
     {
+        // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
         $slug = 'nested-mutations';
         $schemaConfigurationID = $this->getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
@@ -1431,6 +1432,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID(): ?int
     {
+        // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
         $slug = 'nested-mutations-entity-as-mutation-payload-type';
         $schemaConfigurationID = $this->getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {

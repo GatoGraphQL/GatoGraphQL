@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo Adding options for Gato GraphQL Integration tests
 
 SITE_DOMAIN=$(wp option get siteurl)

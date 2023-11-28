@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo "Creating menus"
 # Create menus
 wp menu create "Top Menu"

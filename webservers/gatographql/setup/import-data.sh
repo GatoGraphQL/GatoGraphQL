@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Delete the uploads folder, to avoid duplicated images appending "-1" on the filename
 UPLOADS_DIR=/app/wordpress/wp-content/uploads
 if [ -d "$UPLOADS_DIR" ]; then

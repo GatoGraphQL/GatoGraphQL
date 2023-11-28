@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #Fix for https://github.com/lando/lando/issues/2913
 FILE=/tmp/safly-curl-patch.1.0.0.zip
 if [ ! -f "$FILE" ]; then

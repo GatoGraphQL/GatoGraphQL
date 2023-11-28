@@ -1,2 +1,2 @@
-#!/bin/sh
+#!/bin/bash
 wp plugin activate engine-wp-bootloader

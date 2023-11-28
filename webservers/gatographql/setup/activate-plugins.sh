@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Download and maybe activate external plugins
 if wp plugin is-installed wordpress-importer; then
     wp plugin activate wordpress-importer

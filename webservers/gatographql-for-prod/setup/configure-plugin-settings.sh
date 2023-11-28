@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 echo Configuring the Gato GraphQL plugin settings
 echo Enabling modules for DEV
 
