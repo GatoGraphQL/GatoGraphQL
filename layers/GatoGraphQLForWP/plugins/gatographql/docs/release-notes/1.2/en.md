@@ -2,9 +2,11 @@
 
 Here's a description of all the changes.
 
-## Added predefined Persisted Query "Translate content from URL"
+## Added several predefined Persisted Queries
 
-A new predefined Persisted Query has been added: "Translating content from URL".
+The following Persisted Queries, to execute common admin tasks, are now provided:
+
+### Translate content from URL
 
 Given a URL as input, its language, and what language to translate it to, fetches the content from the URL and performs the translation using Google Translate:
 
@@ -52,9 +54,9 @@ For instance, passing the [URL of some Markdown file in a GitHub repo](https://r
 
 It has been added to the Recipes section too, under "Translating content from URL".
 
-## Added predefined Persisted Query "Import post from WordPress RSS feed"
+### Import post from WordPress RSS feed
 
-The new predefined Persisted Query "Import post from WordPress RSS feed" reads the WordPress RSS feed for a post, and creates a new post with its data.
+It reads the WordPress RSS feed for a post, and creates a new post with its data.
 
 The query is this one:
 
@@ -167,9 +169,9 @@ mutation ImportPostFromRSSFeed
 }
 ```
 
-## Added predefined Persisted Query "Import posts from CSV"
+### Import posts from CSV
 
-The new predefined Persisted Query "Import posts from CSV" reads a CSV, and creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
+It reads a CSV, and creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
 
 For instance, the CSV below will create 3 posts:
 
@@ -203,9 +205,9 @@ After executing the query, we get the results:
 
 </div>
 
-## Added predefined Persisted Query "Fetch post links"
+### Fetch post links
 
-The new predefined Persisted Query "Fetch post links" finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
+It finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
 
 For instance, it may produce this response:
 
