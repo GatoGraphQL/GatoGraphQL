@@ -81,7 +81,6 @@ query GenerateMutationInputs
         },
         passOnwardsAs: "postTranslatedRawContent"
       )
-      # Already create (and export) the inputs for the mutation
       @applyField(
         name: "_echo",
         arguments: {
