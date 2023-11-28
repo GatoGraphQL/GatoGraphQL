@@ -44,7 +44,7 @@ query TranslateData(
 }
 
 query GenerateMutationInputs
-  @depends(on: "FetchData")
+  @depends(on: "TranslateData")
 {  
   postInputs: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
@@ -99,7 +99,7 @@ query GenerateMutationInputs
 }
 
 mutation TranslateDataInPosts($postIds: [ID!]!)
-  @depends(on: "TranslateData")
+  @depends(on: "GenerateMutationInputs")
 {
   updatePosts: posts(filter: { ids: $postIds } ) {
     id
