@@ -108,6 +108,7 @@ mutation TranslateDataInPosts($postIds: [ID!]!)
         key: $__id
       }
     )
+      @remove
     update(input: $__postInput) {
       status
       errors {
