@@ -21,7 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - In predefined persisted queries "Translate post" and "Translate posts", added `failIfNonExistingKeyOrPath: false` when selecting a block's `attributes.{something}` property (as it may sometimes not be defined)
 - In predefined persisted query "Import post from WordPress site", added status `any` to select the post
-- Renamed persisted query "Translate post" to "Translate post with blocks", and "Translate posts" to "Translate posts with blocks"
+- Renamed persisted query "Translate post" to "Translate post (with blocks)", and "Translate posts" to "Translate posts (with blocks)"
 
 ## 1.1.1 - 21/11/2013
 
