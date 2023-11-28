@@ -165,6 +165,42 @@ mutation ImportPostFromRSSFeed
 }
 ```
 
+## Added predefined Persisted Query "Import posts from CSV"
+
+The new predefined Persisted Query "Import posts from CSV" reads a CSV, and creates posts (as `draft`) with the corresponding data for each entry (the title, excerpt, content, and author).
+
+For instance, the CSV below will create 3 posts:
+
+```csv
+Title,Excerpt,Content,Author
+Multi-channelled optimal interface,Inventore iste velit et expedita ipsa dolor,"<!-- wp:paragraph -->
+<p>Inventore iste velit et expedita ipsa dolor. Optio suscipit qui id harum corporis dignissimos.</p>
+<!-- /wp:paragraph -->",admin
+Ergonomic motivating parallelism,Consequuntur velit quasi assumenda,"<!-- wp:paragraph -->
+<p>Consequuntur velit quasi assumenda. Eum non saepe est. Ut dolorem harum eveniet eaque nemo impedit. Voluptatem commodi modi sed sed animi voluptatem.</p>
+<!-- /wp:paragraph -->
+<!-- wp:image {""id"":5,""sizeSlug"":""large""} -->
+<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/2023/09/wordpress0.jpg"" alt="""" class=""wp-image-5""/></figure>
+<!-- /wp:image -->
+<!-- wp:image {""id"":7,""sizeSlug"":""large""} -->
+<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/2023/09/wordpress2.jpg"" alt="""" class=""wp-image-7""/></figure>
+<!-- /wp:image -->",admin
+Down-sized solution-oriented securedline,Ipsam minima qui asperiores dolorum unde voluptas quia voluptate,"<!-- wp:paragraph -->
+<p>Ipsam minima qui asperiores dolorum unde voluptas quia voluptate. Incidunt omnis cumque beatae quo deleniti ex. Praesentium nihil et consectetur neque commodi tempora ipsa adipisci. Praesentium perferendis sint est.</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph -->
+<p>Et aut fuga aliquam consequuntur dolore sunt ut ut. Quibusdam in voluptas vitae quia eaque. Eligendi dolorum dolorem vitae et vitae et ut.</p>
+<!-- /wp:paragraph -->",admin
+```
+
+After executing the query, we get the results:
+
+<div class="img-width-1024" markdown=1>
+
+![Created posts from CSV](../../images/releases/v1.2/import-posts-from-csv.png)
+
+</div>
+
 ## Added predefined Persisted Query "Fetch post links"
 
 The new predefined Persisted Query "Fetch post links" finds all `<a href="(...)">(...)</a>` strings in all posts, and lists them down in the response as `{ href: (...), text: (...) }`.
