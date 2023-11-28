@@ -175,6 +175,7 @@ You can even synchronize content across a network of sites, such as from an upst
 * Added documentation for new field `_strDecodeXMLAsJSON` from the Helper Function Collection extension
 * Added documentation for new field `_strParseCSV` from the Helper Function Collection extension
 * Added recipe "Translating content from URL"
+* Added predefined Persisted Queries "Translate post (Classic editor)" and "Translate posts (Classic editor)"
 * Added predefined Persisted Query "Translate content from URL"
 * Added predefined Persisted Query "Import post from WordPress RSS feed"
 * Added predefined Persisted Query "Import posts from CSV"
