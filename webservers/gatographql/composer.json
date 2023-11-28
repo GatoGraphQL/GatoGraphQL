@@ -58,11 +58,11 @@
             "@install-site"
         ],
         "install-site": "lando composer install-site-within-container",
-        "install-site-within-container": "/bin/sh /app/setup/setup.sh",
+        "install-site-within-container": "/bin/bash /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
-        "import-data-within-container": "/bin/sh /app/setup/import-data.sh",
+        "import-data-within-container": "/bin/bash /app/setup/import-data.sh",
         "create-users": "lando composer create-users-within-container",
-        "create-users-within-container": "/bin/sh /app/setup/create-users.sh",
+        "create-users-within-container": "/bin/bash /app/setup/create-users.sh",
         "update-deps": [
             "@symlink-vendor-for-gatographql-plugin",
             "@symlink-vendor-for-gatographql-testing-schema-plugin",
