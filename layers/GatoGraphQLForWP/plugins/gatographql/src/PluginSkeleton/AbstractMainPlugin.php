@@ -1584,7 +1584,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     protected function readSetupGraphQLVariablesJSON(string $relativeFilePath): string
     {
-        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'json');
+        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'var.json');
         return $this->readFile($persistedQueryFile);
     }
 
