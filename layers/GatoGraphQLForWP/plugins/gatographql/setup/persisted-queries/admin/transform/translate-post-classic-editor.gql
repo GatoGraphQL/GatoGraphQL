@@ -31,7 +31,7 @@ query FetchData($postId: ID!)
   }
 }
 
-query TransformData(
+query TranslateData(
   $translateToLang: String!
 )
   @depends(on: "FetchData")
@@ -47,20 +47,11 @@ query TransformData(
       @export(as: "translatedRawExcerpt")
 }
 
-query PrepareMetaReplacements
-  @depends(on: "TransformData")
-{  
-  translatedMeta: _objectProperty(
-    object: $translations,
-    by: { path: "meta.to" }
-  )
-}
-
 mutation TranslatePost(
   $postId: ID!
   $update: Boolean! = false
 )
-  @depends(on: "PrepareMetaReplacements")
+  @depends(on: "TranslateData")
 {
   createPost(input: {
     title: $translatedTitle,
