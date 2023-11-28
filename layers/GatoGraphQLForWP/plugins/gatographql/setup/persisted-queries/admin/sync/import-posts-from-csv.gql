@@ -3,7 +3,7 @@
 # This Persisted GraphQL query imports posts from a CSV.
 #
 # It creates a new post with the title, excerpt, content and author
-# of each post.
+# (provided via username) of each post.
 #
 # The names of the fields are provided via vars, with default values
 # "Title", "Excerpt", "Content" and "Author" respectively.
@@ -31,10 +31,10 @@
 # 
 # URL params:
 #   - url: URL of the CSV
-#   - titleColumn: Column name (on the CSV header). Default: "Title"
-#   - excerptColumn: Column name (on the CSV header). Default: "Excerpt"
-#   - contentColumn: Column name (on the CSV header). Default: "Content"
-#   - authorUsernameColumn: Column name (on the CSV header). Default: "Author"
+#   - titleColumn: Column name (on the CSV header) for the post's title. Default: "Title"
+#   - excerptColumn: Column name (on the CSV header) for the post's excerpt. Default: "Excerpt"
+#   - contentColumn: Column name (on the CSV header) for the post's content. Default: "Content"
+#   - authorUsernameColumn: Column name (on the CSV header) for the post author's username. Default: "Author"
 #
 ########################################################################
 
