@@ -603,8 +603,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         /** @var EndpointSchemaConfigurationBlock */
         $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-        
-        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();        
+
+        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();
         $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
         $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         \wp_insert_post(array_merge(
@@ -630,7 +630,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         /** @var PersistedQueryEndpointGraphiQLBlock */
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
-        
+
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
@@ -1209,7 +1209,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();        
+        $nestedMutationsSchemaConfigurationCustomPostID = $this->getNestedMutationsSchemaConfigurationCustomPostID();
         return [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
@@ -1378,7 +1378,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var SchemaConfigMutationSchemeBlock */
         $schemaConfigMutationSchemeBlock = $instanceManager->getInstance(SchemaConfigMutationSchemeBlock::class);
 
-       return [
+        return [
             'blockName' => $schemaConfigMutationSchemeBlock->getBlockFullName(),
             'attrs' => [
                 SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME => MutationSchemes::NESTED_WITH_REDUNDANT_ROOT_FIELDS,
@@ -1458,7 +1458,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var SchemaConfigPayloadTypesForMutationsBlock */
         $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
 
-       return [
+        return [
             'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
             'attrs' => [
                 BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
