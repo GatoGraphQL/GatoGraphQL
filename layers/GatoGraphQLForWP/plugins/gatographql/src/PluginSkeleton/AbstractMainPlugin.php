@@ -1415,17 +1415,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
 
-        $nestedMutationsSchemaConfigurationCustomPostID = \wp_insert_post([
+        $schemaConfigurationCustomPostID = \wp_insert_post([
             'post_status' => 'publish',
             'post_name' => $slug,
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
             'post_title' => $title,
             'post_content' => serialize_blocks($this->addInnerContentToBlockAtts($blockDataItems))
         ]);
-        if ($nestedMutationsSchemaConfigurationCustomPostID === 0) {
+        if ($schemaConfigurationCustomPostID === 0) {
             return null;
         }
-        return $nestedMutationsSchemaConfigurationCustomPostID;
+        return $schemaConfigurationCustomPostID;
     }
 
     protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID(): ?int
