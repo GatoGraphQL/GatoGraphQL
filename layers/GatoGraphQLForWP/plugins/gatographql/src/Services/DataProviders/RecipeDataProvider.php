@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\DataProviders;
 
 use GatoGraphQL\GatoGraphQL\Constants\Recipes;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 
 class RecipeDataProvider
@@ -28,9 +27,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
@@ -39,9 +35,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::ACCESS_CONTROL,
                     ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                     ExtensionModuleResolver::CACHE_CONTROL,
-                ],
-                [
-                    BundleExtensionModuleResolver::PUBLIC_API,
                 ]
             ],
             Recipes::COMPLEMENTING_WP_CLI => [
@@ -52,10 +45,6 @@ class RecipeDataProvider
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
@@ -65,9 +54,6 @@ class RecipeDataProvider
                 \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
                 [
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
@@ -79,10 +65,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE => [
@@ -94,10 +76,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::CUSTOMIZING_CONTENT_FOR_DIFFERENT_USERS => [
@@ -107,10 +85,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::SEARCH_REPLACE_AND_STORE_AGAIN => [
@@ -119,10 +93,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::ADAPTING_CONTENT_IN_BULK => [
@@ -132,10 +102,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::SITE_MIGRATIONS => [
@@ -144,10 +110,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK => [
@@ -157,10 +119,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::RETRIEVING_STRUCTURED_DATA_FROM_BLOCKS => [
@@ -169,10 +127,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::MODIFYING_AND_STORING_AGAIN_THE_IMAGE_URLS_FROM_ALL_IMAGE_BLOCKS_IN_A_POST => [
@@ -184,10 +138,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
@@ -200,9 +150,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
@@ -215,9 +162,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::SENDING_EMAILS_WITH_PLEASURE => [
@@ -228,9 +172,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::SENDING_A_NOTIFICATION_WHEN_THERE_IS_A_NEW_POST => [
@@ -243,9 +184,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::SENDING_A_DAILY_SUMMARY_OF_ACTIVITY => [
@@ -259,9 +197,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::AUTOMATICALLY_ADDING_A_MANDATORY_BLOCK => [
@@ -271,9 +206,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::INTERACTING_WITH_EXTERNAL_SERVICES_VIA_WEBHOOKS => [
@@ -284,9 +216,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::RETRIEVING_DATA_FROM_AN_EXTERNAL_API => [
@@ -299,9 +228,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::COMBINING_USER_DATA_FROM_DIFFERENT_SOURCES => [
@@ -309,10 +235,6 @@ class RecipeDataProvider
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             Recipes::NOT_LEAKING_CREDENTIALS_WHEN_CONNECTING_TO_SERVICES => [
@@ -322,9 +244,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::HANDLING_ERRORS_WHEN_CONNECTING_TO_SERVICES => [
@@ -336,9 +255,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::CREATING_AN_API_GATEWAY => [
@@ -354,9 +270,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::TRANSLATING_CONTENT_FROM_URL => [
@@ -377,9 +290,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::FILTERING_DATA_FROM_AN_EXTERNAL_API => [
@@ -390,9 +300,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::PINGING_EXTERNAL_SERVICES => [
@@ -403,9 +310,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::UPDATING_LARGE_SETS_OF_DATA => [
@@ -419,9 +323,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE => [
@@ -436,9 +337,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::DISTRIBUTING_CONTENT_FROM_AN_UPSTREAM_TO_MULTIPLE_DOWNSTREAM_SITES => [
@@ -452,9 +350,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             Recipes::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP => [
@@ -467,9 +362,6 @@ class RecipeDataProvider
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             // 'content-orchestration' => [
