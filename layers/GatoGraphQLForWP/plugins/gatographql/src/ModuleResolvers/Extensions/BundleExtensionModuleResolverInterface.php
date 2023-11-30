@@ -20,6 +20,14 @@ interface BundleExtensionModuleResolverInterface extends ExtensionModuleResolver
     /**
      * @return string[]
      */
+    public function getBundledExtensionModules(string $module): array;
+    /**
+     * @return string[]
+     */
+    public function getBundledBundleExtensionModules(string $module): array;
+    /**
+     * @return string[]
+     */
     public function getGatoGraphQLBundledExtensionSlugs(string $module): array;
     /**
      * @return string[]

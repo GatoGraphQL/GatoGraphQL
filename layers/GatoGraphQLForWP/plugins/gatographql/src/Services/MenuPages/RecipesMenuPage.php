@@ -7,9 +7,9 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
 
 class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
@@ -18,6 +18,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?RecipeDataProvider $recipeDataProvider = null;
+    private ?BundleExtensionAggregator $bundleExtensionAggregator = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -44,6 +45,19 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             $this->recipeDataProvider = $recipeDataProvider;
         }
         return $this->recipeDataProvider;
+    }
+    final public function setBundleExtensionAggregator(BundleExtensionAggregator $bundleExtensionAggregator): void
+    {
+        $this->bundleExtensionAggregator = $bundleExtensionAggregator;
+    }
+    final protected function getBundleExtensionAggregator(): BundleExtensionAggregator
+    {
+        if ($this->bundleExtensionAggregator === null) {
+            /** @var BundleExtensionAggregator */
+            $bundleExtensionAggregator = $this->instanceManager->getInstance(BundleExtensionAggregator::class);
+            $this->bundleExtensionAggregator = $bundleExtensionAggregator;
+        }
+        return $this->bundleExtensionAggregator;
     }
 
     public function getMenuPageSlug(): string
@@ -115,7 +129,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
         $entryBundleExtensionModules = $entry[3] ?? [];
-        $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
         $messageBundleExtensionPlaceholder = sprintf(
             '<hr/><em>%s</em>',
@@ -178,15 +191,23 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string,2?:string[],3?:string[]}> Value: [0] => recipe file slug, [1] => title, [2] => array of extensions, [3] => array of bundles
+     * @return array<array{0:string,1:string,2?:string[],3?:string[]}> Value: [0] => recipe file slug, [1] => title, [2] => array of extension modules, [3] => array of bundle modules
      */
     protected function getEntries(): array
     {
+        $bundleExtensionAggregator = $this->getBundleExtensionAggregator();
         $entries = [];
         foreach ($this->getRecipeDataProvider()->getRecipeSlugDataItems() as $recipeSlug => $recipeDataItem) {
+            /** @var string */
+            $recipeTitle = $recipeDataItem[0];
+            /** @var string[] */
+            $recipeExtensionModules = $recipeDataItem[1] ?? [];
+            $recipeBundleModules = $recipeExtensionModules === [] ? [] : $bundleExtensionAggregator->getBundleModulesComprisingAllExtensionModules($recipeExtensionModules);
             $entries[] = [
                 $recipeSlug,
-                ...$recipeDataItem
+                $recipeTitle,
+                $recipeExtensionModules,
+                $recipeBundleModules,
             ];
         }
         return $entries;

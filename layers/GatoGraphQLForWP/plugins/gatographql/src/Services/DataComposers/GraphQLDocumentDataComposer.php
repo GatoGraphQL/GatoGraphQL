@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\DataComposers;
 
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\VirtualRecipeDataProvider;
 use PoP\Root\Services\BasicServiceTrait;
@@ -22,6 +22,7 @@ class GraphQLDocumentDataComposer
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?RecipeDataProvider $recipeDataProvider = null;
     private ?VirtualRecipeDataProvider $virtualRecipeDataProvider = null;
+    private ?BundleExtensionAggregator $bundleExtensionAggregator = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -62,6 +63,19 @@ class GraphQLDocumentDataComposer
         }
         return $this->virtualRecipeDataProvider;
     }
+    final public function setBundleExtensionAggregator(BundleExtensionAggregator $bundleExtensionAggregator): void
+    {
+        $this->bundleExtensionAggregator = $bundleExtensionAggregator;
+    }
+    final protected function getBundleExtensionAggregator(): BundleExtensionAggregator
+    {
+        if ($this->bundleExtensionAggregator === null) {
+            /** @var BundleExtensionAggregator */
+            $bundleExtensionAggregator = $this->instanceManager->getInstance(BundleExtensionAggregator::class);
+            $this->bundleExtensionAggregator = $bundleExtensionAggregator;
+        }
+        return $this->bundleExtensionAggregator;
+    }
 
     /**
      * Append the required extensions and bundles to the header
@@ -100,8 +114,7 @@ class GraphQLDocumentDataComposer
                 $skipExtensionModules
             ));
         }
-        $requiredBundleModules = $recipeDataItem[2] ?? [];
-        $requiredBundleModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
+        $requiredBundleModules = $this->getBundleExtensionAggregator()->getBundleModulesComprisingAllExtensionModules($requiredExtensionModules);
 
         /**
          * Find the last instance of the header separator
