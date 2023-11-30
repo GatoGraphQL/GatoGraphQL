@@ -66,98 +66,13 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     /**
      * @return string[]
      */
-    public function getBundledExtensionSlugs(string $module): array
-    {
-        return match ($module) {
-            self::ALL_EXTENSIONS => [
-                'access-control',
-                'access-control-visitor-ip',
-                'automation',
-                'cache-control',
-                'conditional-field-manipulation',
-                'deprecation-notifier',
-                'email-sender',
-                'events-manager',
-                'field-default-value',
-                'field-deprecation',
-                'field-on-field',
-                'field-resolution-caching',
-                'field-response-removal',
-                'field-to-input',
-                'field-value-iteration-and-manipulation',
-                'google-translate',
-                'helper-function-collection',
-                'http-client',
-                'http-request-via-schema',
-                'internal-graphql-server',
-                'low-level-persisted-query-editing',
-                'multiple-query-execution',
-                'php-constants-and-environment-variables-via-schema',
-                'php-functions-via-schema',
-                'response-error-trigger',
-                'schema-editing-access',
-            ],
-            self::APPLICATION_GLUE_AND_AUTOMATOR => [
-                'automation',
-                'conditional-field-manipulation',
-                'email-sender',
-                'field-default-value',
-                'field-on-field',
-                'field-resolution-caching',
-                'field-response-removal',
-                'field-to-input',
-                'field-value-iteration-and-manipulation',
-                'helper-function-collection',
-                'http-client',
-                'http-request-via-schema',
-                'internal-graphql-server',
-                'multiple-query-execution',
-                'php-constants-and-environment-variables-via-schema',
-                'php-functions-via-schema',
-                'response-error-trigger',
-            ],
-            self::CONTENT_TRANSLATION => [
-                'conditional-field-manipulation',
-                'field-on-field',
-                'field-response-removal',
-                'field-to-input',
-                'field-value-iteration-and-manipulation',
-                'google-translate',
-                'multiple-query-execution',
-                'php-functions-via-schema',
-            ],
-            self::PUBLIC_API => [
-                'access-control',
-                'access-control-visitor-ip',
-                'cache-control',
-                'conditional-field-manipulation',
-                'deprecation-notifier',
-                'field-default-value',
-                'field-deprecation',
-                'field-to-input',
-                'field-value-iteration-and-manipulation',
-                'low-level-persisted-query-editing',
-                'multiple-query-execution',
-                'response-error-trigger',
-                'schema-editing-access',
-            ],
-            default => [],
-        };
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getBundledBundleExtensionSlugs(string $module): array
+    public function getBundledBundleExtensionModules(string $module): array
     {
         return match ($module) {
             // "All Extensions" bundles all other bundles
-            self::ALL_EXTENSIONS => array_map(
-                $this->getSlug(...),
-                array_diff(
-                    $this->getModulesToResolve(),
-                    [$module]
-                )
+            self::ALL_EXTENSIONS => array_diff(
+                $this->getModulesToResolve(),
+                [$module]
             ),
             default => [],
         };
