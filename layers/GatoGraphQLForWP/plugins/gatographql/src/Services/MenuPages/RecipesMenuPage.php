@@ -130,7 +130,6 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
         $entryBundleExtensionModules = $entry[3] ?? [];
-        $entryBundleExtensionModules[] = BundleExtensionModuleResolver::ALL_EXTENSIONS;
         $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
         $messageBundleExtensionPlaceholder = sprintf(
             '<hr/><em>%s</em>',
