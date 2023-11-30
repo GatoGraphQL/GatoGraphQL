@@ -13,6 +13,7 @@ class BundleExtensionAggregator
     use BasicServiceTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?ModuleAggregator $moduleAggregator = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -27,6 +28,19 @@ class BundleExtensionAggregator
         }
         return $this->moduleRegistry;
     }
+    final public function setModuleAggregator(ModuleAggregator $moduleAggregator): void
+    {
+        $this->moduleAggregator = $moduleAggregator;
+    }
+    final protected function getModuleAggregator(): ModuleAggregator
+    {
+        if ($this->moduleAggregator === null) {
+            /** @var ModuleAggregator */
+            $moduleAggregator = $this->instanceManager->getInstance(ModuleAggregator::class);
+            $this->moduleAggregator = $moduleAggregator;
+        }
+        return $this->moduleAggregator;
+    }
 
     /**
      * Given a bunch of extensions, retrieve all bundles that
@@ -40,7 +54,8 @@ class BundleExtensionAggregator
     ): array {
         $extensionBundleModules = [];
 
-        foreach ($this->getAllBundleModules() as $bundleModule) {
+        $bundleModules = $this->getModuleAggregator()->getAllModulesOfClass(BundleExtensionModuleResolverInterface::class);
+        foreach ($bundleModules as $bundleModule) {
             /** @var BundleExtensionModuleResolverInterface */
             $bundleModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleModule);
             $bundledExtensionModules = $bundleModuleResolver->getBundledExtensionModules($bundleModule);
@@ -51,27 +66,5 @@ class BundleExtensionAggregator
         }
 
         return $extensionBundleModules;
-    }
-
-    /**
-     * Produce the list of all the Gato GraphQL Bundle modules
-     *
-     * @return string[]
-     */
-    public function getAllBundleModules(): array
-    {
-        $modules = $this->getModuleRegistry()->getAllModules();
-        $bundleModules = [];
-        foreach ($modules as $module) {
-            $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
-            if (!($moduleResolver instanceof BundleExtensionModuleResolverInterface)) {
-                continue;
-            }
-            $bundleModules = [
-                ...$bundleModules,
-                ...$moduleResolver->getModulesToResolve(),
-            ];
-        }
-        return $bundleModules;
     }
 }
