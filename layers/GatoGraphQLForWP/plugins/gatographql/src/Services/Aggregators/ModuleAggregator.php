@@ -31,7 +31,6 @@ class ModuleAggregator
      * Produce the list of all the modules for some class
      *
      * @return string[]
-     * @phpstan-return class-string<ModuleResolverInterface>
      */
     public function getAllModulesOfClass(string $class): array
     {
