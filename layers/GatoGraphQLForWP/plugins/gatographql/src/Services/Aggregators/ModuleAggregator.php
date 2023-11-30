@@ -41,10 +41,7 @@ class ModuleAggregator
             if (!\is_a($moduleResolver, $class, true)) {
                 continue;
             }
-            $modules = [
-                ...$modules,
-                ...$moduleResolver->getModulesToResolve(),
-            ];
+            $modules[] = $module;
         }
         return $modules;
     }
