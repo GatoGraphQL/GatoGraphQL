@@ -207,11 +207,9 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             $recipeBundleModules = $recipeExtensionModules === [] ? [] : $bundleExtensionAggregator->getBundleModulesComprisingAllExtensionModules($recipeExtensionModules);
             $entries[] = [
                 $recipeSlug,
-                [
-                    $recipeTitle,
-                    $recipeExtensionModules,
-                    $recipeBundleModules,
-                ]
+                $recipeTitle,
+                $recipeExtensionModules,
+                $recipeBundleModules,
             ];
         }
         return $entries;
