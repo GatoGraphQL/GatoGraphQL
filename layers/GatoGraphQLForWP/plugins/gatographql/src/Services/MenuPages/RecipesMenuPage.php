@@ -178,7 +178,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
     }
 
     /**
-     * @return array<array{0:string,1:string,2?:string[],3?:string[]}> Value: [0] => recipe file slug, [1] => title, [2] => array of extensions, [3] => array of bundles
+     * @return array<array{0:string,1:string,2?:string[],3?:string[]}> Value: [0] => recipe file slug, [1] => title, [2] => array of extension modules, [3] => array of bundle modules
      */
     protected function getEntries(): array
     {
