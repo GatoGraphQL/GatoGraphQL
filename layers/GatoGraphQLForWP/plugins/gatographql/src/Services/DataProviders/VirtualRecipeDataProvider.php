@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\DataProviders;
 
 use GatoGraphQL\GatoGraphQL\Constants\VirtualRecipes;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 
 class VirtualRecipeDataProvider
@@ -24,9 +23,6 @@ class VirtualRecipeDataProvider
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             VirtualRecipes::IMPORTING_POSTS_FROM_A_CSV => [
@@ -39,9 +35,6 @@ class VirtualRecipeDataProvider
                     ExtensionModuleResolver::HTTP_CLIENT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
             VirtualRecipes::TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE => [
@@ -51,9 +44,6 @@ class VirtualRecipeDataProvider
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             VirtualRecipes::BULK_TRANSLATING_CLASSIC_EDITOR_POSTS_TO_A_DIFFERENT_LANGUAGE => [
@@ -66,9 +56,6 @@ class VirtualRecipeDataProvider
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::CONTENT_TRANSLATION,
                 ]
             ],
             VirtualRecipes::FETCH_POST_LINKS => [
@@ -80,9 +67,6 @@ class VirtualRecipeDataProvider
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ],
-                [
-                    BundleExtensionModuleResolver::APPLICATION_GLUE_AND_AUTOMATOR,
                 ]
             ],
         ];
