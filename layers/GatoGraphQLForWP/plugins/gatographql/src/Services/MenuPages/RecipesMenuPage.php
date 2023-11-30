@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentR
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
 
 class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
@@ -18,6 +19,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?RecipeDataProvider $recipeDataProvider = null;
+    private ?BundleExtensionAggregator $bundleExtensionAggregator = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -44,6 +46,19 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
             $this->recipeDataProvider = $recipeDataProvider;
         }
         return $this->recipeDataProvider;
+    }
+    final public function setBundleExtensionAggregator(BundleExtensionAggregator $bundleExtensionAggregator): void
+    {
+        $this->bundleExtensionAggregator = $bundleExtensionAggregator;
+    }
+    final protected function getBundleExtensionAggregator(): BundleExtensionAggregator
+    {
+        if ($this->bundleExtensionAggregator === null) {
+            /** @var BundleExtensionAggregator */
+            $bundleExtensionAggregator = $this->instanceManager->getInstance(BundleExtensionAggregator::class);
+            $this->bundleExtensionAggregator = $bundleExtensionAggregator;
+        }
+        return $this->bundleExtensionAggregator;
     }
 
     public function getMenuPageSlug(): string
@@ -182,11 +197,21 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function getEntries(): array
     {
+        $bundleExtensionAggregator = $this->getBundleExtensionAggregator();
         $entries = [];
         foreach ($this->getRecipeDataProvider()->getRecipeSlugDataItems() as $recipeSlug => $recipeDataItem) {
+            /** @var string */
+            $recipeTitle = $recipeDataItem[0];
+            /** @var string[] */
+            $recipeExtensionModules = $recipeDataItem[1];
+            $recipeBundleModules = $bundleExtensionAggregator->getBundleModulesComprisingAllExtensionModules($recipeExtensionModules);
             $entries[] = [
                 $recipeSlug,
-                ...$recipeDataItem
+                [
+                    $recipeTitle,
+                    $recipeExtensionModules,
+                    $recipeBundleModules,
+                ]
             ];
         }
         return $entries;
