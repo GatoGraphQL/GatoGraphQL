@@ -38,7 +38,28 @@ class BundleExtensionAggregator
     public function getBundleModulesComprisingAllExtensionModules(
         array $extensionModules
     ): array {
-        // Obtain the list of all the Gato GraphQL Bundles
+        $extensionBundleModules = [];
+
+        foreach ($this->getAllBundleModules() as $bundleModule) {
+            /** @var BundleExtensionModuleResolverInterface */
+            $bundleModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleModule);
+            $bundledExtensionModules = $bundleModuleResolver->getBundledExtensionModules($bundleModule);
+            if (array_diff($extensionModules, $bundledExtensionModules) !== []) {
+                continue;
+            }
+            $extensionBundleModules[] = $bundleModule;
+        }
+
+        return $extensionBundleModules;
+    }
+
+    /**
+     * Produce the list of all the Gato GraphQL Bundle modules
+     *
+     * @return string[]
+     */
+    public function getAllBundleModules(): array
+    {
         $modules = $this->getModuleRegistry()->getAllModules();
         $bundleModules = [];
         foreach ($modules as $module) {
@@ -51,19 +72,6 @@ class BundleExtensionAggregator
                 ...$moduleResolver->getModulesToResolve(),
             ];
         }
-
-        $extensionBundleModules = [];
-
-        foreach ($bundleModules as $bundleModule) {
-            /** @var BundleExtensionModuleResolverInterface */
-            $bundleModuleResolver = $this->getModuleRegistry()->getModuleResolver($bundleModule);
-            $bundledExtensionModules = $bundleModuleResolver->getBundledExtensionModules($bundleModule);
-            if (array_diff($extensionModules, $bundledExtensionModules) !== []) {
-                continue;
-            }
-            $extensionBundleModules[] = $bundleModule;
-        }
-
-        return $extensionBundleModules;
+        return $bundleModules;
     }
 }
