@@ -52,6 +52,10 @@ class BundleExtensionAggregator
     public function getBundleModulesComprisingAllExtensionModules(
         array $extensionModules
     ): array {
+        if ($extensionModules === []) {
+            return [];
+        }
+        
         $extensionBundleModules = [];
 
         $bundleModules = $this->getModuleAggregator()->getAllModulesOfClass(BundleExtensionModuleResolverInterface::class);
