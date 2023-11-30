@@ -79,7 +79,7 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     final public function getBundledExtensionSlugs(string $module): array
     {
         return array_map(
-            $this->getSlug(...),
+            fn (string $extensionModule) => $this->getModuleRegistry()->getModuleResolver($extensionModule)->getSlug($extensionModule),
             $this->getBundledExtensionModules($module)
         );
     }
@@ -90,7 +90,7 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
     final public function getBundledBundleExtensionSlugs(string $module): array
     {
         return array_map(
-            $this->getSlug(...),
+            fn (string $extensionModule) => $this->getModuleRegistry()->getModuleResolver($extensionModule)->getSlug($extensionModule),
             $this->getBundledBundleExtensionModules($module)
         );
     }
