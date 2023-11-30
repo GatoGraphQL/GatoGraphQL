@@ -66,6 +66,88 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     /**
      * @return string[]
      */
+    public function getBundledExtensionModules(string $module): array
+    {
+        return match ($module) {
+            self::ALL_EXTENSIONS => [
+                ExtensionModuleResolver::ACCESS_CONTROL,
+                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                ExtensionModuleResolver::AUTOMATION,
+                ExtensionModuleResolver::CACHE_CONTROL,
+                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
+                ExtensionModuleResolver::EMAIL_SENDER,
+                ExtensionModuleResolver::EVENTS_MANAGER,
+                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                ExtensionModuleResolver::FIELD_DEPRECATION,
+                ExtensionModuleResolver::FIELD_ON_FIELD,
+                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
+                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                ExtensionModuleResolver::FIELD_TO_INPUT,
+                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                ExtensionModuleResolver::HTTP_CLIENT,
+                ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
+            ],
+            self::APPLICATION_GLUE_AND_AUTOMATOR => [
+                ExtensionModuleResolver::AUTOMATION,
+                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::EMAIL_SENDER,
+                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                ExtensionModuleResolver::FIELD_ON_FIELD,
+                ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
+                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                ExtensionModuleResolver::FIELD_TO_INPUT,
+                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                ExtensionModuleResolver::HTTP_CLIENT,
+                ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
+                ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
+                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+            ],
+            self::CONTENT_TRANSLATION => [
+                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::FIELD_ON_FIELD,
+                ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                ExtensionModuleResolver::FIELD_TO_INPUT,
+                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+            ],
+            self::PUBLIC_API => [
+                ExtensionModuleResolver::ACCESS_CONTROL,
+                ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+                ExtensionModuleResolver::CACHE_CONTROL,
+                ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
+                ExtensionModuleResolver::DEPRECATION_NOTIFIER,
+                ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                ExtensionModuleResolver::FIELD_DEPRECATION,
+                ExtensionModuleResolver::FIELD_TO_INPUT,
+                ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+                ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
+                ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
+            ],
+            default => [],
+        };
+    }
+
+    /**
+     * @return string[]
+     */
     public function getBundledBundleExtensionModules(string $module): array
     {
         return match ($module) {
