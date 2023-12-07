@@ -6,11 +6,11 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use PHPUnitForGatoGraphQL\WebserverRequests\AbstractPersistedQueryFixtureWebserverRequestTestCase;
 
-class POSTMethodParamsViaGETPersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFixtureWebserverRequestTestCase
+class PassParamsViaGETOrNotPersistedQueryFixtureWebserverRequestTest extends AbstractPersistedQueryFixtureWebserverRequestTestCase
 {
     protected static function getFixtureFolder(): string
     {
-        return __DIR__ . '/fixture-persisted-queries-post-method-params-via-get';
+        return __DIR__ . '/fixture-persisted-queries-pass-params-via-get-or-not';
     }
 
     protected static function getEndpoint(string $dataName): string
