@@ -11,3 +11,7 @@ For instance:
 ```bash
 curl -X POST https://mysite.com/graphql-query/register-a-newsletter-subscriber-from-instawp-to-mailchimp/?mailchimpDataCenterCode=us1&mailchimpAudienceID=88888888
 ```
+
+## Fixed
+
+- Component docs displayed in the editor were not included in the plugin
