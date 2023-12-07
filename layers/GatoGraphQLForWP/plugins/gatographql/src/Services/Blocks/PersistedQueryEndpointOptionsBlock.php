@@ -14,7 +14,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
 {
     use MainPluginBlockTrait;
 
-    public final const ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS = 'acceptVariablesAsURLParams';
+    public final const ATTRIBUTE_NAME_DO_URL_PARAMS_OVERRIDE_GRAPHQL_VARIABLES = 'doURLParamsOverrideGraphQLVariables';
 
     private ?PersistedQueryEndpointBlockCategory $persistedQueryEndpointBlockCategory = null;
 
@@ -82,8 +82,8 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         $blockContent .= sprintf(
             $blockContentPlaceholder,
-            \__('Accept variables as URL params:', 'gatographql'),
-            $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? true)
+            \__('Do URL params override variables?', 'gatographql'),
+            $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_DO_URL_PARAMS_OVERRIDE_GRAPHQL_VARIABLES] ?? true)
         );
 
         return $blockContent;

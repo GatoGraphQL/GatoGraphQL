@@ -217,7 +217,7 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
 
 <!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -253,7 +253,7 @@
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":-2} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
 
 <!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[Data for the "tags" widget for the homepage]]></excerpt:encoded>
@@ -2093,7 +2093,7 @@ https://wordpress.org/about/
 
 <!-- wp:gatographql/schema-configuration {"schemaConfiguration":191} /-->
 
-<!-- wp:gatographql/persisted-query-endpoint-options {"acceptVariablesAsURLParams":false} /-->
+<!-- wp:gatographql/persisted-query-endpoint-options {"doURLParamsOverrideGraphQLVariables":false} /-->
 
 <!-- wp:gatographql/persisted-query-endpoint-api-hierarchy /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>

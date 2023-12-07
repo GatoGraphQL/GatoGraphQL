@@ -64,9 +64,9 @@ registerBlockType( 'gatographql/persisted-query-endpoint-options', {
 		},
 		/**
 		 * Same attribute name as defined in
-		 * GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_DO_URL_PARAMS_OVERRIDE_GRAPHQL_VARIABLES
 		 */
-		acceptVariablesAsURLParams: {
+		doURLParamsOverrideGraphQLVariables: {
 			type: 'boolean',
 			default: true,
 		},

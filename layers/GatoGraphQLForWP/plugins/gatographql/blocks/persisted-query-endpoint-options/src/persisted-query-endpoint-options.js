@@ -27,10 +27,10 @@ const PersistedQueryEndpointOptions = ( props ) => {
 		attributes:
 		{
 			isEnabled,
-			acceptVariablesAsURLParams,
+			doURLParamsOverrideGraphQLVariables,
 		}
 	} = props;
-	const variablesAsURLParamsTitle = __('Accept variables as URL params?', 'gatographql')
+	const variablesAsURLParamsTitle = __('Do URL params override variables?', 'gatographql')
 	return (
 		<>
 			<div className={ `${ className }__enabled` }>
@@ -58,23 +58,23 @@ const PersistedQueryEndpointOptions = ( props ) => {
 				{ isSelected && (
 					<MarkdownInfoModalButton
 						title={ variablesAsURLParamsTitle }
-						pageFilename="variables-as-url-params"
+						pageFilename="do-url-params-override-graphql-variables"
 						getMarkdownContentCallback={ getMarkdownContentOrUseDefault }
 					/>
 				) }
 				{ !isSelected && (
 					<>
 						<br />
-						{ getViewBooleanLabel( acceptVariablesAsURLParams ) }
+						{ getViewBooleanLabel( doURLParamsOverrideGraphQLVariables ) }
 					</>
 				) }
 				{ isSelected &&
 					<ToggleControl
 						{ ...props }
-						label={ getEditBooleanLabel( acceptVariablesAsURLParams ) }
-						checked={ acceptVariablesAsURLParams }
+						label={ getEditBooleanLabel( doURLParamsOverrideGraphQLVariables ) }
+						checked={ doURLParamsOverrideGraphQLVariables }
 						onChange={ newValue => setAttributes( {
-							acceptVariablesAsURLParams: newValue,
+							doURLParamsOverrideGraphQLVariables: newValue,
 						} ) }
 					/>
 				}
