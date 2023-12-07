@@ -170,6 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.3.0 =
+* Pass data via URL params in persisted query "Register a newsletter subscriber from InstaWP to Mailchimp"
+
 = 1.2.0 =
 * Added `XML` scalar type
 * Added documentation for new field `_strDecodeXMLAsJSON` from the Helper Function Collection extension
