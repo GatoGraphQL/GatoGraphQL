@@ -1,0 +1,24 @@
+{
+    "errors": [
+        {
+            "message": "Non-nullable variable 'slug' has not been provided",
+            "locations": [
+                {
+                    "line": 2,
+                    "column": 20
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "$slug",
+                    "{slug: $slug}",
+                    "(by: {slug: $slug})",
+                    "post(by: {slug: $slug}) { ... }",
+                    "query GetPostBySlug($slug: String!) { ... }"
+                ],
+                "code": "gql@5.8.5",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-All-Variable-Usages-are-Allowed"
+            }
+        }
+    ]
+}
