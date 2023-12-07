@@ -161,7 +161,7 @@ Once the password is provided and validated, only then the user will access the 
 
 ### Making the persisted query dynamic via URL params
 
-If the query makes use of variables, and option "Accept variables as URL params?" is enabled, then the values of the variables can be set via URL param when executing the persisted query.
+The value for each variable can be set via a URL param (with the variable name) when executing the persisted query. If option "Do URL params override variables?" is enabled, then the URL param will take priority. Otherwise, the value defined in the variables dictionary will take priority (if any).
 
 For instance, in this query, the number of results is controlled via variable `$limit`, with a default value of 3:
 
@@ -197,7 +197,7 @@ These inputs in the body of the editor are shipped with the plugin (more inputs 
 </tr>
 <tr>
   <td><strong>Options</strong></td>
-  <td>Customize the behavior of the persisted query: <ul><li><strong>Enabled?:</strong> If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li><strong>Accept variables as URL params?:</strong> Allow URL params to override the values for variables defined in the GraphiQL client</li></ul></td>
+  <td>Customize the behavior of the persisted query: <ul><li><strong>Enabled?:</strong> If the persisted query is enabled.<br/>It's useful to disable a persisted query it's a parent query in an API hierarchy</li><li><strong>Do URL params override variables?:</strong> Allow URL params to override the values for variables defined in the GraphiQL client</li></ul></td>
 </tr>
 <tr>
   <td><strong>API Hierarchy:</strong></td>
