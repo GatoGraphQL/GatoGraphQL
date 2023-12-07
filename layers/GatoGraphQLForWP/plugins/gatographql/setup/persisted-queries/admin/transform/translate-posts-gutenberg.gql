@@ -13,7 +13,7 @@
 # 
 # URL params:
 #   - postIds: List of IDs of the posts to translate
-#   - translateToLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
 #
 # *********************************************************************
 # 
@@ -559,7 +559,7 @@ query AdaptData
 }
 
 query TransformData(
-  $translateToLang: String!
+  $toLang: String!
 )
   @depends(on: "AdaptData")
 {
@@ -645,7 +645,7 @@ query TransformData(
       @underJSONObjectProperty(by: { key: "to" })
         @underEachJSONObjectProperty
           @underEachArrayItem
-            @strTranslate(to: $translateToLang)
+            @strTranslate(to: $toLang)
     @export(as: "transformations")
 }
 

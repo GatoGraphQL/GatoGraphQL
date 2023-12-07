@@ -13,7 +13,7 @@
 # 
 # URL params:
 #   - postIds: List of IDs of the posts to translate
-#   - translateToLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
 #
 ########################################################################
 
@@ -32,14 +32,14 @@ query FetchData($postIds: [ID!]!)
 }
 
 query TranslateData(
-  $translateToLang: String!
+  $toLang: String!
 )
   @depends(on: "FetchData")
 {  
   translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty
       @underEachJSONObjectProperty
-        @strTranslate(to: $translateToLang)
+        @strTranslate(to: $toLang)
     @export(as: "translatedData")
 }
 
