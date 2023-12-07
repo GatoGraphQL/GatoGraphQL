@@ -30,7 +30,7 @@ const PersistedQueryEndpointOptions = ( props ) => {
 			acceptVariablesAsURLParams,
 		}
 	} = props;
-	const variablesAsURLParamsTitle = __('Accept variables as URL params?', 'gatographql')
+	const variablesAsURLParamsTitle = __('Do URL params override variables?', 'gatographql')
 	return (
 		<>
 			<div className={ `${ className }__enabled` }>
