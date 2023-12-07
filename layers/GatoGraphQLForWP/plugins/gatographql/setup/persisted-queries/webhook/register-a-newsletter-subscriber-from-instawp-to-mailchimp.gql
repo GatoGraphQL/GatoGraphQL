@@ -6,10 +6,16 @@
 #
 # *********************************************************************
 # 
-# Required PHP code:#
-#   - Define in `wp-config.php`:#
+# Required PHP code:
+#   - Define in `wp-config.php`:
 #     define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
 #     define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
+#
+# Required updates to the query:
+#   - Replace `{dc}` with the data center of your account on Mailchimp,
+#     and `{listCode}` with the code of the Mailchimp's list to which
+#     to subscribe the email.
+#     See: https://mailchimp.com/developer/marketing/docs/fundamentals/#api-structure
 # 
 # *********************************************************************
 #
@@ -38,7 +44,7 @@ query MaybeCreateContactOnMailchimp
     @remove
   
   mailchimpListMembersJSONObject: _sendJSONObjectItemHTTPRequest(input: {
-    url: "https://us7.api.mailchimp.com/3.0/lists/{listCode}/members",
+    url: "https://{dc}.api.mailchimp.com/3.0/lists/{listCode}/members",
     method: POST,
     options: {
       auth: {
