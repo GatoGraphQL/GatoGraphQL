@@ -11,7 +11,10 @@ query HasSubscribedToNewsletter {
     @export(as: "subscribedToNewsletter")
 }
 
-query MaybeCreateContactOnMailchimp
+query MaybeSubscribeEmailOnMailchimpList(
+  $mailchimpDataCenterCode: String!
+  $mailchimpAudienceID: String!
+)
    @depends(on: "HasSubscribedToNewsletter")
    @include(if: $subscribedToNewsletter)
 {
@@ -22,8 +25,13 @@ query MaybeCreateContactOnMailchimp
   mailchimpPassword: _env(name: "MAILCHIMP_API_CREDENTIALS_PASSWORD")
     @remove
   
+  mailchimpAPIEndpoint: _sprintf(
+    string: "https://%s.api.mailchimp.com/3.0/lists/%s/members",
+    values: [$mailchimpDataCenterCode, $mailchimpAudienceID]
+  )
+  
   mailchimpListMembersJSONObject: _sendJSONObjectItemHTTPRequest(input: {
-    url: "https://us7.api.mailchimp.com/3.0/lists/{listCode}/members",
+    url: $__mailchimpAPIEndpoint,
     method: POST,
     options: {
       auth: {
