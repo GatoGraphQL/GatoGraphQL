@@ -82,7 +82,7 @@ class PersistedQueryEndpointOptionsBlock extends AbstractEndpointOptionsBlock im
         $blockContentPlaceholder = '<p><strong>%s</strong></p><p>%s</p>';
         $blockContent .= sprintf(
             $blockContentPlaceholder,
-            \__('Accept variables as URL params:', 'gatographql'),
+            \__('Do URL params override variables?', 'gatographql'),
             $this->getBooleanLabel($attributes[self::ATTRIBUTE_NAME_DO_URL_PARAMS_OVERRIDE_GRAPHQL_VARIABLES] ?? true)
         );
 
