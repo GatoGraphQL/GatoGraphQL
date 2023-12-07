@@ -142,7 +142,8 @@ Subscribe to our newsletter and receive timely updates concerning:
 
 New features released on each version:
 
-- **[1.3](../../release-notes/1.3/en.md)** (current)
+- **[1.4](../../release-notes/1.4/en.md)** (current)
+- [1.3](../../release-notes/1.3/en.md)
 - [1.2](../../release-notes/1.2/en.md)
 - [1.1](../../release-notes/1.1/en.md)
 - [1.0](../../release-notes/1.0/en.md)
