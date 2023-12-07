@@ -18,9 +18,9 @@ config.resolve.alias['@moduleDocs'] = path.resolve(process.cwd(), `../../${ MODU
 const highlight = require('highlight.js');
 
 /**
- * Resolve folder docs/ as @docs
+ * Resolve folder docs/ as @componentDocs
  */
-config.resolve.alias['@docs'] = path.resolve(process.cwd(), 'docs/')
+config.resolve.alias['@componentDocs'] = path.resolve(process.cwd(), 'docs/')
 
 // ---------------------------------------------
 // Consider for webpack v5, to generate the bundle containing all docs per language

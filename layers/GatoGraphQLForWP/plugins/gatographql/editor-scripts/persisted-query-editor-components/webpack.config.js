@@ -7,7 +7,7 @@ const config = require( '@wordpress/scripts/config/webpack.config' );
  */
 langs = ['en']
 langs.forEach( lang => config.entry[`docs-${ lang }`] = path.resolve( process.cwd(), `docs/${ lang }`, 'index.js' ) )
-config.resolve.alias['@docs'] = path.resolve(process.cwd(), 'docs/')
+config.resolve.alias['@componentDocs'] = path.resolve(process.cwd(), 'docs/')
 
 // ---------------------------------------------
 // Uncomment for webpack v5, to not duplicate the content of the docs inside build/index.js

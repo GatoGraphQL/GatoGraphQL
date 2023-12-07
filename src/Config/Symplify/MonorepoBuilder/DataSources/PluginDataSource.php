@@ -95,6 +95,11 @@ class PluginDataSource
     protected function getExcludeJSBlockFilesPlaceholder(): string
     {
         return implode(' ', [
+            /**
+             * Notice that this line also targets build/docs.
+             * To avoid those files being excluded, in webpack.config.js
+             * those docs are treated as @componentDocs
+             */
             '%1$s/*/docs/\*',
             '%1$s/*/graphql-documents/\*',
             '%1$s/*/src/\*',

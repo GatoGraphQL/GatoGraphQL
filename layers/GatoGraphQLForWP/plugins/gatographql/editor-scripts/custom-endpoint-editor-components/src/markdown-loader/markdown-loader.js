@@ -6,7 +6,7 @@
  * @param {string} lang The language folder from which to retrieve the Markdown file
  */
 const getMarkdownContent = ( fileName, lang ) => {
-	return import( /* webpackMode: "eager" */ `@docs/${ lang }/${ fileName }.md` )
+	return import( /* webpackMode: "eager" */ `@componentDocs/${ lang }/${ fileName }.md` )
 		.then(obj => obj.default)
 		// .then( ( { default: _ } ) )
 }
