@@ -1,5 +1,8 @@
 {
     "data": {
-        "post": null
+        "post": {
+            "id": 1,
+            "title": "Hello world!"
+        }
     }
 }

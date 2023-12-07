@@ -19,7 +19,7 @@ class POSTMethodParamsViaGETPersistedQueryFixtureWebserverRequestTest extends Ab
             'by-post-not-passing-params'
                 => 'graphql-query/persisted-query-executed-via-post-passing-params-via-get/',
             'by-post-passing-params-via-get'
-                => 'graphql-query/persisted-query-executed-via-post-passing-params-via-get/?slug=non-existing',
+                => 'graphql-query/persisted-query-executed-via-post-passing-params-via-get/?slug=hello-world',
             default => parent::getEndpoint($dataName),
         };
     }
