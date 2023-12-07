@@ -27,7 +27,7 @@ const PersistedQueryEndpointOptions = ( props ) => {
 		attributes:
 		{
 			isEnabled,
-			acceptVariablesAsURLParams,
+			doURLParamsOverrideGraphQLVariables,
 		}
 	} = props;
 	const variablesAsURLParamsTitle = __('Do URL params override variables?', 'gatographql')
@@ -65,16 +65,16 @@ const PersistedQueryEndpointOptions = ( props ) => {
 				{ !isSelected && (
 					<>
 						<br />
-						{ getViewBooleanLabel( acceptVariablesAsURLParams ) }
+						{ getViewBooleanLabel( doURLParamsOverrideGraphQLVariables ) }
 					</>
 				) }
 				{ isSelected &&
 					<ToggleControl
 						{ ...props }
-						label={ getEditBooleanLabel( acceptVariablesAsURLParams ) }
-						checked={ acceptVariablesAsURLParams }
+						label={ getEditBooleanLabel( doURLParamsOverrideGraphQLVariables ) }
+						checked={ doURLParamsOverrideGraphQLVariables }
 						onChange={ newValue => setAttributes( {
-							acceptVariablesAsURLParams: newValue,
+							doURLParamsOverrideGraphQLVariables: newValue,
 						} ) }
 					/>
 				}
