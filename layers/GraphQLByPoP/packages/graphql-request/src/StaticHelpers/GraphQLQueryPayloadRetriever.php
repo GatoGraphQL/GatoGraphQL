@@ -72,7 +72,7 @@ class GraphQLQueryPayloadRetriever
         if (!isset($payload['operationName']) && App::query('operationName') !== null) {
             $payload['operationName'] = App::query('operationName');
         }
-        foreach (App::getRequest()->request->all() as $variableName => $variableValue) {
+        foreach (App::getRequest()->query->all() as $variableName => $variableValue) {
             if (isset($payload['variables'][$variableName])) {
                 continue;
             }
