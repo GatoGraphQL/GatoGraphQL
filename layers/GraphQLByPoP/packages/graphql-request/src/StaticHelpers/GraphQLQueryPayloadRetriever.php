@@ -41,7 +41,7 @@ class GraphQLQueryPayloadRetriever
             if (isset($json->operationName)) {
                 $payload['operationName'] = $json->operationName;
             }
-            return static::maybeAddOperationNameFromGet($payload);
+            return static::maybeAddPayloadDataFromGET($payload);
         }
 
         // Retrieve the entries from POST
@@ -54,7 +54,7 @@ class GraphQLQueryPayloadRetriever
             }
             $payload[$entry] = App::request($entry);
         }
-        return static::maybeAddOperationNameFromGet($payload);
+        return static::maybeAddPayloadDataFromGET($payload);
     }
 
     /**
@@ -64,7 +64,7 @@ class GraphQLQueryPayloadRetriever
      * @param array<string,mixed> $payload
      * @return array<string,mixed>
      */
-    protected static function maybeAddOperationNameFromGet(array $payload): array
+    protected static function maybeAddPayloadDataFromGET(array $payload): array
     {
         if (!isset($payload['operationName']) && App::query('operationName') !== null) {
             $payload['operationName'] = App::query('operationName');
