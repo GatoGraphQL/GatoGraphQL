@@ -4,7 +4,7 @@ Here's a description of all the changes.
 
 ## Read `GET` variables when executing Persisted Queries via `POST`
 
-When executing a Persisted Query via `POST`, do still retrieve variables passed via GET.
+When executing a Persisted Query via `POST`, do still accept variables passed via GET.
 
 For instance:
 
