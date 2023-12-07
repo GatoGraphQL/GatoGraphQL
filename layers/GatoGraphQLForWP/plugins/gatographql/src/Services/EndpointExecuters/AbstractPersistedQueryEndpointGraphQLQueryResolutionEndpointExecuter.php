@@ -57,6 +57,6 @@ abstract class AbstractPersistedQueryEndpointGraphQLQueryResolutionEndpointExecu
         }
 
         // `true` is the default option in Gutenberg, so it's not saved to the DB!
-        return $optionsBlockDataItem['attrs'][PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_ACCEPT_VARIABLES_AS_URL_PARAMS] ?? $default;
+        return $optionsBlockDataItem['attrs'][PersistedQueryEndpointOptionsBlock::ATTRIBUTE_NAME_DO_URL_PARAMS_OVERRIDE_GRAPHQL_VARIABLES] ?? $default;
     }
 }
