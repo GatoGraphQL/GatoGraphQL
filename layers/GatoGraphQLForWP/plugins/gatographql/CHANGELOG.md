@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Read `GET` variables when executing Persisted Queries via `POST`
 - Pass data via URL params in persisted query "Register a newsletter subscriber from InstaWP to Mailchimp"
 
 ## 1.2.0 - 28/11/2013
