@@ -58,7 +58,7 @@ const PersistedQueryEndpointOptions = ( props ) => {
 				{ isSelected && (
 					<MarkdownInfoModalButton
 						title={ variablesAsURLParamsTitle }
-						pageFilename="variables-as-url-params"
+						pageFilename="do-url-params-override-graphql-variables"
 						getMarkdownContentCallback={ getMarkdownContentOrUseDefault }
 					/>
 				) }
