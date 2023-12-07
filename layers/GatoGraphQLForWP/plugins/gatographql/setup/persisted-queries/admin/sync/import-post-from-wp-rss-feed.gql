@@ -77,7 +77,7 @@ query GetPostFromRSSFeedAndExportData(
 # If the author's username exists in this site, keep it
 # Otherwise, use "admin"
 query CheckAuthorExistsOrChange(
-  $adminUsername: String! = "admin"
+  $defaultAuthorUsername: String! = "admin"
 )
   @depends(on: "GetPostFromRSSFeedAndExportData")
 {
@@ -90,7 +90,7 @@ query CheckAuthorExistsOrChange(
   username: _if(
     condition: $__userExists,
     then: $authorUsername,
-    else: $adminUsername
+    else: $defaultAuthorUsername
   )
     @export(as: "existingAuthorUsername")
 }
