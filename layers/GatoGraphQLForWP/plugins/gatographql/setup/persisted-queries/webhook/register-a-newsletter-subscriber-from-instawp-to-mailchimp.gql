@@ -15,7 +15,7 @@
 # 
 # URL params:
 #   - mailchimpDataCenterCode: Code for the data center of your account on Mailchimp (See: https://mailchimp.com/developer/marketing/docs/fundamentals/#api-structure)
-#   - mailchimpListCode: Code of the list on Mailchimp to which to subscribe the email
+#   - mailchimpAudienceID: Audience ID for the list on Mailchimp to which to subscribe the email
 #
 # *********************************************************************
 #
@@ -32,9 +32,9 @@ query HasSubscribedToNewsletter {
     @export(as: "subscribedToNewsletter")
 }
 
-query MaybeRegisterEmailOnMailchimpList(
+query MaybeSubscribeEmailOnMailchimpList(
   $mailchimpDataCenterCode: String!
-  $mailchimpListCode: String!
+  $mailchimpAudienceID: String!
 )
    @depends(on: "HasSubscribedToNewsletter")
    @include(if: $subscribedToNewsletter)
@@ -48,7 +48,7 @@ query MaybeRegisterEmailOnMailchimpList(
   
   mailchimpAPIEndpoint: _sprintf(
     string: "https://%s.api.mailchimp.com/3.0/lists/%s/members",
-    values: [$mailchimpDataCenterCode, $mailchimpListCode]
+    values: [$mailchimpDataCenterCode, $mailchimpAudienceID]
   )
   
   mailchimpListMembersJSONObject: _sendJSONObjectItemHTTPRequest(input: {
