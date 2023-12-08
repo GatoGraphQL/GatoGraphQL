@@ -6,7 +6,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - oldDomain: The old domain
 #   - newDomain: The new domain
 #

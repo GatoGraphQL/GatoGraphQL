@@ -13,7 +13,7 @@
 # 
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - mailchimpDataCenterCode: Code for the data center of your account on Mailchimp (See: https://mailchimp.com/developer/marketing/docs/fundamentals/#api-structure)
 #   - mailchimpAudienceID: Audience ID for the list on Mailchimp to which to subscribe the email
 #

@@ -5,7 +5,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - oldPostSlug: The old post or page slug
 #   - newPostSlug: The new post or page slug
 #

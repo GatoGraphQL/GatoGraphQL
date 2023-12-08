@@ -6,7 +6,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - postId: The ID of the post to do the search and replace
 #   - replaceFrom: The list of strings to search
 #   - replaceTo: The list of strings to replace with

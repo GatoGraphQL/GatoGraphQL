@@ -6,7 +6,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - searchBlockType: After what block type to insert the new block ("wp:paragraph" by default)
 #   - injectAfterBlockCount: After how many occurrences of the block to search will the new block be placed
 #   - injectBlockMarkup: The HTML for the block to insert

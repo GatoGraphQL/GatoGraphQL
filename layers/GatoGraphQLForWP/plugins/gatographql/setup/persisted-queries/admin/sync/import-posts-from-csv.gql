@@ -45,7 +45,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - url: URL of the CSV
 #   - titleColumn: Column name (on the CSV header) for the post's title. Default: "Title"
 #   - excerptColumn: Column name (on the CSV header) for the post's excerpt. Default: "Excerpt"

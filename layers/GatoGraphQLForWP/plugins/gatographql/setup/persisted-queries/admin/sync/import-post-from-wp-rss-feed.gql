@@ -11,7 +11,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - url: URL of the WordPress single post's RSS feed. It usually is the blog post URL + "/feed/rss/?withoutcomments=1"
 #       eg: https://newapi.getpop.org/blogroll/a-tale-of-two-cities-teaser/feed/rss/?withoutcomments=1
 #   - defaultAuthorUsername: Author username of the imported post, to be used whenever the username on the RSS feed does not exist on the local site

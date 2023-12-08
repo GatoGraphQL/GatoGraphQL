@@ -22,7 +22,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - upstreamServerGraphQLEndpointURL: The GraphQL endpoint on the upstream WordPress site
 #   - postSlug: The slug of the post to import
 # 

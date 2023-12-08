@@ -6,7 +6,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - limit: Number of posts to update
 #   - offset: Position of the first post to update
 #   - searchRegex: The list of regex to search

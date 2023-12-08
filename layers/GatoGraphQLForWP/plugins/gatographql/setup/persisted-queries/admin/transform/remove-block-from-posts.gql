@@ -5,7 +5,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - removeBlockType: The HTML for the block to insert
 #       eg: mycompany:black-friday-campaign-video
 #

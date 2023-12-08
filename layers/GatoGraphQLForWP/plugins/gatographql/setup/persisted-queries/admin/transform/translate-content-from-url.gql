@@ -4,7 +4,7 @@
 #
 # *********************************************************************
 # 
-# URL params:
+# Variables:
 #   - url: The URL with the content to translate
 #   - fromLang: The language code to translate from, from Google Translate (https://cloud.google.com/translate/docs/languages)
 #   - toLang: The language code to translate from, from Google Translate
