@@ -76,7 +76,7 @@ query GetPostFromRSSFeedAndExportData(
 }
 
 # If the author's username exists in this site, keep it
-# Otherwise, use "admin"
+# Otherwise, use the default one
 query CheckAuthorExistsOrChange(
   $defaultAuthorUsername: String! = "admin"
 )
