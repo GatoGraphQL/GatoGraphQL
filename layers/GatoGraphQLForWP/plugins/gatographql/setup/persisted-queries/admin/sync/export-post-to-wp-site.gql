@@ -50,10 +50,6 @@ query CheckHasPost($postSlug: String!)
     @export(as: "isMissingPostInUpstream")
 }
 
-############################################################
-# (By default) Append "/graphql" to the domain, to point
-# to that site's GraphQL single endpoint
-############################################################
 query ExportDownstreamGraphQLQuery
   @depends(on: "CheckHasPost")
   @skip(if: $isMissingPostInUpstream)
