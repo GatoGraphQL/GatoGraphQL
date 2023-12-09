@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Added "Request headers" to GraphiQL clients on public/private endpoint, and custom endpoints
+- Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 
 ## 1.3.0 - 07/12/2013
 
