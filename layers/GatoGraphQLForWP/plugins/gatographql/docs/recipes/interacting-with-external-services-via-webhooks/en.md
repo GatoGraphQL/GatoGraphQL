@@ -21,7 +21,7 @@ In this recipe, we will create a Persisted Query to interact with ConvertKit.
 
 The first step is to read the documentation for the website, and understand what data is sent via the payload.
 
-Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks),  subscriber-related events send a `POST` request to our URL with a JSON payload like this:
+Analysing [webhooks in ConvertKit](https://developers.convertkit.com/#webhooks), subscriber-related events send a `POST` request to our URL with a JSON payload like this:
 
 ```json
 {
