@@ -170,6 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.4.0 =
+* Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
+
 = 1.3.0 =
 * Read `GET` variables when executing Persisted Queries via `POST`
 * Pass data via URL params in persisted query "Register a newsletter subscriber from InstaWP to Mailchimp"
