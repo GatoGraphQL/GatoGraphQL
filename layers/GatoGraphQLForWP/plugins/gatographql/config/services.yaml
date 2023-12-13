@@ -37,6 +37,9 @@ services:
     GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\PersistedQueryEndpointAnnotatorRegistry
 
+    GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Log\Logger
+
     GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*
 
