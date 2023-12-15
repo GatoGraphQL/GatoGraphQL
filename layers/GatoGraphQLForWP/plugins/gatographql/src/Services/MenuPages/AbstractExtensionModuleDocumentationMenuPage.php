@@ -17,7 +17,7 @@ abstract class AbstractExtensionModuleDocumentationMenuPage extends AbstractModu
     {
         if (
             $this->getMenuPageHelper()->isDocumentationScreen()
-            && str_contains(App::query(RequestParams::DOC, ''), '../docs/recipes/')
+            && str_contains(App::query(RequestParams::DOC, ''), '../docs/tutorial/')
         ) {
             return false;
         }

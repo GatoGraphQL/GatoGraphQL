@@ -462,6 +462,6 @@ For instance, in this query, we retrieve the IDs of the users in the website and
 
 ## Recipes using extension
 
-- [Sending emails with pleasure](../../../../../docs/recipes/sending-emails-with-pleasure/en.md)
-- [Sending a notification when there is a new post](../../../../../docs/recipes/sending-a-notification-when-there-is-a-new-post/en.md)
-- [Sending a daily summary of activity](../../../../../docs/recipes/sending-a-daily-summary-of-activity/en.md)
+- [Sending emails with pleasure](../../../../../docs/tutorial/sending-emails-with-pleasure/en.md)
+- [Sending a notification when there is a new post](../../../../../docs/tutorial/sending-a-notification-when-there-is-a-new-post/en.md)
+- [Sending a daily summary of activity](../../../../../docs/tutorial/sending-a-daily-summary-of-activity/en.md)

@@ -80,7 +80,7 @@ class RecipesMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function getEntryRelativePathDir(array $entry): string
     {
-        return 'docs/recipes';
+        return 'docs/tutorial';
     }
 
     // protected function enumerateEntries(): bool

@@ -87,4 +87,4 @@ The extension provides the following Access Control rules:
 
 ## Recipes using extension
 
-- [Exposing public and private endpoints](../../../../../docs/recipes/exposing-public-and-private-endpoints/en.md)
+- [Exposing public and private endpoints](../../../../../docs/tutorial/exposing-public-and-private-endpoints/en.md)

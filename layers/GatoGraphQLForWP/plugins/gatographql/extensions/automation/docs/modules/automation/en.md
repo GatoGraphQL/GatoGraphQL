@@ -281,5 +281,5 @@ Or via the [WP-Crontrol](https://wordpress.org/plugins/wp-crontrol/) plugin:
 
 ## Recipes using extension
 
-- [Sending a notification when there is a new post](../../../../../docs/recipes/sending-a-notification-when-there-is-a-new-post/en.md)
-- [Sending a daily summary of activity](../../../../../docs/recipes/sending-a-daily-summary-of-activity/en.md)
+- [Sending a notification when there is a new post](../../../../../docs/tutorial/sending-a-notification-when-there-is-a-new-post/en.md)
+- [Sending a daily summary of activity](../../../../../docs/tutorial/sending-a-daily-summary-of-activity/en.md)

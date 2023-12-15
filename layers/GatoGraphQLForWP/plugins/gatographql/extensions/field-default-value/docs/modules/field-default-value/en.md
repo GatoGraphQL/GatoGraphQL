@@ -66,4 +66,4 @@ By using `@default`, we can then retrieve some default image:
 
 ## Recipes using extension
 
-- [Transforming data from an external API](../../../../../docs/recipes/transforming-data-from-an-external-api/en.md)
+- [Transforming data from an external API](../../../../../docs/tutorial/transforming-data-from-an-external-api/en.md)

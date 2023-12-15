@@ -251,6 +251,6 @@ Define environment variables:
 
 ## Recipes using extension
 
-- [Translating block content in a post to a different language](../../../../../docs/recipes/translating-block-content-in-a-post-to-a-different-language/en.md)
-- [Bulk translating block content in multiple posts to a different language](../../../../../docs/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
-- [Translating content from URL](../../../../../docs/recipes/translating-content-from-url/en.md)
+- [Translating block content in a post to a different language](../../../../../docs/tutorial/translating-block-content-in-a-post-to-a-different-language/en.md)
+- [Bulk translating block content in multiple posts to a different language](../../../../../docs/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
+- [Translating content from URL](../../../../../docs/tutorial/translating-content-from-url/en.md)

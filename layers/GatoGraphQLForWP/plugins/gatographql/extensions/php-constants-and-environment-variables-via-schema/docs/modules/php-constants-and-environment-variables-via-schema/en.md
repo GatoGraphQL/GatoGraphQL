@@ -156,7 +156,7 @@ In this query, fields `githubAccessToken` and `authorizationHeader` (which conta
 
 ## Recipes using extension
 
-- [Querying dynamic data](../../../../../docs/recipes/querying-dynamic-data/en.md)
-- [Not leaking credentials when connecting to services](../../../../../docs/recipes/not-leaking-credentials-when-connecting-to-services/en.md)
-- [Creating an API gateway](../../../../../docs/recipes/creating-an-api-gateway/en.md)
-- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/recipes/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)
+- [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
+- [Not leaking credentials when connecting to services](../../../../../docs/tutorial/not-leaking-credentials-when-connecting-to-services/en.md)
+- [Creating an API gateway](../../../../../docs/tutorial/creating-an-api-gateway/en.md)
+- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/tutorial/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)

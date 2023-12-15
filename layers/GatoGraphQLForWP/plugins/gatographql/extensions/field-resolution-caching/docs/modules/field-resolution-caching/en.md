@@ -47,4 +47,4 @@ query {
 
 ## Recipes using extension
 
-- [Retrieving data from an external API](../../../../../docs/recipes/retrieving-data-from-an-external-api/en.md)
+- [Retrieving data from an external API](../../../../../docs/tutorial/retrieving-data-from-an-external-api/en.md)
