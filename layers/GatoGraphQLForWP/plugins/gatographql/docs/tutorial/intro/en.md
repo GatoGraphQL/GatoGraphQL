@@ -1,12 +1,11 @@
 # Intro
 
-Gato GraphQL is a **tool for interacting with data in your WordPress site**. You can think of it as a Swiss Army knife for dealing with data, as it allows to retrieve, manipulate and store again any piece of data, in any desired way, using the [GraphQL language](https://graphql.org/).
+Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way.
 
-With Gato GraphQL, you can:
+Among others, you can use it to:
 
 - Query data to create headless sites
 - Expose public and private APIs
-- Map JS components to Gutenberg blocks
 - Synchronize content across sites
 - Automate tasks
 - Complement WP-CLI to execute admin tasks
@@ -15,11 +14,12 @@ With Gato GraphQL, you can:
 - Interact with cloud services
 - Convert the data from a 3rd-party API into the required format
 - Translate content in the site
-- Update thousands of posts with a single action
-- Insert or remove Gutenberg blocks in bulk
+- Insert or remove (Gutenberg) blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
 
-The links in this section demonstrate GraphQL queries to achieve each objective that you can easily copy and paste in your application, or in the GraphiQL client to play with it.
+This tutorial explains how to achieve all of these objectives, one by one, by exploring all the elements from the GraphQL schema (the types, fields, directives, etc).
 
-By reading these recipes, you will also learn several use cases and best practices for Gato GraphQL.
+Lessons are incremental, focusing on some new element from the GraphQL schema, and building upon all items introduced in the previous lessons. Hence, the lessons are better read in the given order.
+
+By the last lesson, you will have a thorough understanding of all the distinctive features of Gato GraphQL, and how to benefit from them.
