@@ -64,7 +64,7 @@ class GatoGraphQL
      * specific configuration, defined via code, to power the application,
      * theme or plugin.
      *
-     * See the Recipes section to learn how to define a custom private endpoint.
+     * See the Tutorial section to learn how to define a custom private endpoint.
      */
     final public static function getAdminCustomEndpoint(string $endpointGroup): string
     {

@@ -192,9 +192,9 @@ mutation SendEmail @depends(on: "GetEmailData") {
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
-- [DRY code for blocks in Javascript and PHP](../../../../../docs/recipes/dry-code-for-blocks-in-javascript-and-php/en.md)
-- [Sending a notification when there is a new post](../../../../../docs/recipes/sending-a-notification-when-there-is-a-new-post/en.md)
-- [Sending a daily summary of activity](../../../../../docs/recipes/sending-a-daily-summary-of-activity/en.md)
-- [Automatically adding a mandatory block](../../../../../docs/recipes/automatically-adding-a-mandatory-block/en.md)
+- [DRY code for blocks in Javascript and PHP](../../../../../docs/tutorial/dry-code-for-blocks-in-javascript-and-php/en.md)
+- [Sending a notification when there is a new post](../../../../../docs/tutorial/sending-a-notification-when-there-is-a-new-post/en.md)
+- [Sending a daily summary of activity](../../../../../docs/tutorial/sending-a-daily-summary-of-activity/en.md)
+- [Automatically adding a mandatory block](../../../../../docs/tutorial/automatically-adding-a-mandatory-block/en.md)

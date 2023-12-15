@@ -45,6 +45,6 @@ query {
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
-- [Retrieving data from an external API](../../../../../docs/recipes/retrieving-data-from-an-external-api/en.md)
+- [Retrieving data from an external API](../../../../../docs/tutorial/retrieving-data-from-an-external-api/en.md)

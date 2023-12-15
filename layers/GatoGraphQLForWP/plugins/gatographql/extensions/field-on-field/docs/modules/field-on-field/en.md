@@ -147,16 +147,16 @@ Together with the **Data Iteration Meta Directives** extension, convert the firs
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
-- [Duplicating multiple blog posts at once](../../../../../docs/recipes/duplicating-multiple-blog-posts-at-once/en.md)
-- [Retrieving structured data from blocks](../../../../../docs/recipes/retrieving-structured-data-from-blocks/en.md)
-- [Modifying (and storing again) the image URLs from all Image blocks in a post](../../../../../docs/recipes/modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post/en.md)
-- [Translating block content in a post to a different language](../../../../../docs/recipes/translating-block-content-in-a-post-to-a-different-language/en.md)
-- [Bulk translating block content in multiple posts to a different language](../../../../../docs/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
-- [Creating an API gateway](../../../../../docs/recipes/creating-an-api-gateway/en.md)
-- [Transforming data from an external API](../../../../../docs/recipes/transforming-data-from-an-external-api/en.md)
-- [Filtering data from an external API](../../../../../docs/recipes/filtering-data-from-an-external-api/en.md)
-- [Updating large sets of data](../../../../../docs/recipes/updating-large-sets-of-data/en.md)
-- [Importing a post from another WordPress site](../../../../../docs/recipes/importing-a-post-from-another-wordpress-site/en.md)
-- [Distributing content from an upstream to multiple downstream sites](../../../../../docs/recipes/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)
+- [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)
+- [Retrieving structured data from blocks](../../../../../docs/tutorial/retrieving-structured-data-from-blocks/en.md)
+- [Modifying (and storing again) the image URLs from all Image blocks in a post](../../../../../docs/tutorial/modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post/en.md)
+- [Translating block content in a post to a different language](../../../../../docs/tutorial/translating-block-content-in-a-post-to-a-different-language/en.md)
+- [Bulk translating block content in multiple posts to a different language](../../../../../docs/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
+- [Creating an API gateway](../../../../../docs/tutorial/creating-an-api-gateway/en.md)
+- [Transforming data from an external API](../../../../../docs/tutorial/transforming-data-from-an-external-api/en.md)
+- [Filtering data from an external API](../../../../../docs/tutorial/filtering-data-from-an-external-api/en.md)
+- [Updating large sets of data](../../../../../docs/tutorial/updating-large-sets-of-data/en.md)
+- [Importing a post from another WordPress site](../../../../../docs/tutorial/importing-a-post-from-another-wordpress-site/en.md)
+- [Distributing content from an upstream to multiple downstream sites](../../../../../docs/tutorial/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)

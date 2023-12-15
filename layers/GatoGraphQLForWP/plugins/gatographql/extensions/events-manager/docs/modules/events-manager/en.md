@@ -26,4 +26,4 @@ query {
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 
-<!-- ## Recipes using extension -->
+<!-- ## Tutorial lessons referencing extension -->

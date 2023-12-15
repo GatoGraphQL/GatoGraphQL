@@ -15,7 +15,7 @@ use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationC
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphQLVoyagerMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\GraphiQLMenuPage;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
@@ -41,7 +41,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
     private ?EndpointHelpers $endpointHelpers = null;
     private ?GraphiQLMenuPage $graphiQLMenuPage = null;
     private ?GraphQLVoyagerMenuPage $graphQLVoyagerMenuPage = null;
-    private ?RecipesMenuPage $recipesMenuPage = null;
+    private ?TutorialMenuPage $tutorialMenuPage = null;
 
     final public function setMarkdownContentParser(MarkdownContentParserInterface $markdownContentParser): void
     {
@@ -108,18 +108,18 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
         }
         return $this->graphQLVoyagerMenuPage;
     }
-    final public function setRecipesMenuPage(RecipesMenuPage $recipesMenuPage): void
+    final public function setTutorialMenuPage(TutorialMenuPage $tutorialMenuPage): void
     {
-        $this->recipesMenuPage = $recipesMenuPage;
+        $this->tutorialMenuPage = $tutorialMenuPage;
     }
-    final protected function getRecipesMenuPage(): RecipesMenuPage
+    final protected function getTutorialMenuPage(): TutorialMenuPage
     {
-        if ($this->recipesMenuPage === null) {
-            /** @var RecipesMenuPage */
-            $recipesMenuPage = $this->instanceManager->getInstance(RecipesMenuPage::class);
-            $this->recipesMenuPage = $recipesMenuPage;
+        if ($this->tutorialMenuPage === null) {
+            /** @var TutorialMenuPage */
+            $tutorialMenuPage = $this->instanceManager->getInstance(TutorialMenuPage::class);
+            $this->tutorialMenuPage = $tutorialMenuPage;
         }
-        return $this->recipesMenuPage;
+        return $this->tutorialMenuPage;
     }
 
     /**
@@ -308,7 +308,7 @@ class EndpointFunctionalityModuleResolver extends AbstractFunctionalityModuleRes
                     )),
                     \admin_url(sprintf(
                         'admin.php?page=%s&%s=%s',
-                        $this->getRecipesMenuPage()->getScreenID(),
+                        $this->getTutorialMenuPage()->getScreenID(),
                         RequestParams::TAB,
                         'feeding-data-to-blocks-in-the-editor'
                     )),

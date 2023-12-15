@@ -112,9 +112,9 @@ query {
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
-- [Bulk translating block content in multiple posts to a different language](../../../../../docs/recipes/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
-- [Transforming data from an external API](../../../../../docs/recipes/transforming-data-from-an-external-api/en.md)
-- [Filtering data from an external API](../../../../../docs/recipes/filtering-data-from-an-external-api/en.md)
-- [Importing a post from another WordPress site](../../../../../docs/recipes/importing-a-post-from-another-wordpress-site/en.md)
+- [Bulk translating block content in multiple posts to a different language](../../../../../docs/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
+- [Transforming data from an external API](../../../../../docs/tutorial/transforming-data-from-an-external-api/en.md)
+- [Filtering data from an external API](../../../../../docs/tutorial/filtering-data-from-an-external-api/en.md)
+- [Importing a post from another WordPress site](../../../../../docs/tutorial/importing-a-post-from-another-wordpress-site/en.md)

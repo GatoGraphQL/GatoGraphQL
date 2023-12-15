@@ -32,4 +32,4 @@ After creating the Field Deprecation List, we can have the Custom Endpoint and P
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
 
-<!-- ## Recipes using extension -->
+<!-- ## Tutorial lessons referencing extension -->

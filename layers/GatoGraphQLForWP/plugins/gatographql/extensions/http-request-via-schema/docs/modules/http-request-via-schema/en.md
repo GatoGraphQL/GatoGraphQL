@@ -279,9 +279,9 @@ query {
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
-- [Interacting with external services via webhooks](../../../../../docs/recipes/interacting-with-external-services-via-webhooks/en.md)
-- [Creating an API gateway](../../../../../docs/recipes/creating-an-api-gateway/en.md)
-- [Updating large sets of data](../../../../../docs/recipes/updating-large-sets-of-data/en.md)
-- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/recipes/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)
+- [Interacting with external services via webhooks](../../../../../docs/tutorial/interacting-with-external-services-via-webhooks/en.md)
+- [Creating an API gateway](../../../../../docs/tutorial/creating-an-api-gateway/en.md)
+- [Updating large sets of data](../../../../../docs/tutorial/updating-large-sets-of-data/en.md)
+- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/tutorial/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)

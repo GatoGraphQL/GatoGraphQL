@@ -28,6 +28,10 @@ Same for custom endpoints:
 
 (GraphiQL clients on Persisted queries do not have this addition.)
 
+## Improvements
+
+- Renamed "Recipes" as "Tutorial"
+
 ## Fixed
 
 - HTML codes were printed in select inputs in the WordPress editor, they have now been removed
