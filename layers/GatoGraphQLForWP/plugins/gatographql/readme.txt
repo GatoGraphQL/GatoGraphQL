@@ -105,7 +105,7 @@ Check recipe [Site migrations](https://gatographql.com/tutorial/site-migrations/
 
 The [“Content Translation” Bundle](https://gatographql.com/bundles/content-translation) gives you all the tools needed to create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post's content back to the database.
 
-Check recipes [Translating block content in a post to a different language](https://gatographql.com/tutorial/translating-block-content-in-a-post-to-a-different-language/) for a thorough explanation on how to do this, and [Bulk translating block content in multiple posts to a different language](https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/) on how to do it in bulk.
+Check tutorial lesson [Translating block content in a post to a different language](https://gatographql.com/tutorial/translating-block-content-in-a-post-to-a-different-language/) for a thorough explanation on how to do this, and [Bulk translating block content in multiple posts to a different language](https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/) on how to do it in bulk.
 
 = How do I execute multiple GraphQL queries in a single request? =
 

@@ -30,7 +30,7 @@ class PluginWPAdminPageWebserverRequestTestCase extends AbstractPluginWPAdminPag
             'extensions',
             'graphiql',
             'modules',
-            'recipes',
+            'tutorial',
             'settings',
             'voyager',
         ];
