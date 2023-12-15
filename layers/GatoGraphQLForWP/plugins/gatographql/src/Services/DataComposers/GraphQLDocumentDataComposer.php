@@ -85,22 +85,22 @@ class GraphQLDocumentDataComposer
      */
     public function addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
         string $graphQLDocument,
-        string $recipeSlug,
+        string $tutorialLessonSlug,
         ?array $skipExtensionModules = null
     ): string {
         /**
          * Check if there are required extensions for the tutorial lesson
          */
-        $recipeSlugDataItems = [
+        $tutorialLessonSlugDataItems = [
             ...$this->getTutorialLessonDataProvider()->getTutorialLessonSlugDataItems(),
             ...$this->getVirtualTutorialLessonDataProvider()->getTutorialLessonSlugDataItems(),
         ];
-        $recipeDataItem = $recipeSlugDataItems[$recipeSlug] ?? null;
+        $recipeDataItem = $tutorialLessonSlugDataItems[$tutorialLessonSlug] ?? null;
         if ($recipeDataItem === null) {
             throw new RuntimeException(
                 sprintf(
                     \__('There is no tutorial lesson with slug "%s"', 'gatographql'),
-                    $recipeSlug
+                    $tutorialLessonSlug
                 )
             );
         }
@@ -129,7 +129,7 @@ class GraphQLDocumentDataComposer
             throw new RuntimeException(
                 sprintf(
                     \__('There is no header in GraphQL document for tutorial lesson "%s": %s%s'),
-                    $recipeSlug,
+                    $tutorialLessonSlug,
                     PHP_EOL,
                     $graphQLDocument
                 )

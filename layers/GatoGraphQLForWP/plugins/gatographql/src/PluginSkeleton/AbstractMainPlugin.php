@@ -1572,12 +1572,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * @param string|null $recipeSlug The slug of the tutorial lesson's .md file, same as in TutorialLessonDataProvider
+     * @param string|null $tutorialLessonSlug The slug of the tutorial lesson's .md file, same as in TutorialLessonDataProvider
      * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the tutorial lesson)
      */
     protected function readSetupGraphQLPersistedQueryAndEncodeForOutput(
         string $relativeFilePath,
-        ?string $recipeSlug = null,
+        ?string $tutorialLessonSlug = null,
         ?array $skipExtensionModules = null
     ): string {
         $instanceManager = InstanceManagerFacade::getInstance();
@@ -1585,10 +1585,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
 
         $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-        if ($recipeSlug !== null) {
+        if ($tutorialLessonSlug !== null) {
             $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
                 $graphQLPersistedQuery,
-                $recipeSlug,
+                $tutorialLessonSlug,
                 $skipExtensionModules,
             );
         }
