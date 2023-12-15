@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\ModuleResolverInterface;
 abstract class AbstractExtensionModuleDocumentationMenuPage extends AbstractModuleDocsMenuPage
 {
     /**
-     * If opening a Recipe doc in the iframe, do not use tabpanels
+     * If opening a Tutorial lesson doc in the iframe, do not use tabpanels
      */
     protected function useTabpanelForContent(): bool
     {
