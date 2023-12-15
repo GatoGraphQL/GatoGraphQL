@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.4.0 - DATE
 
+### Added
+
+- Predefined custom endpoint "Nested mutations + Entity as mutation payload type"
+
 ### Improvements
 
 - Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
