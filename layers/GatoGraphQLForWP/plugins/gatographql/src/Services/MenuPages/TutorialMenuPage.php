@@ -62,7 +62,7 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
 
     public function getMenuPageSlug(): string
     {
-        return 'recipes';
+        return 'tutorial';
     }
 
     protected function getPageTitle(): string
@@ -72,7 +72,7 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
 
     protected function getContentID(): string
     {
-        return 'gatographql-recipes';
+        return 'gatographql-tutorial';
     }
 
     /**

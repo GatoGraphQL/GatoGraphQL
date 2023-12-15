@@ -33,7 +33,7 @@ As new extensions are created and released, they will also be added to this bund
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 - [Schema Editing Access](../../../../../extensions/schema-editing-access/docs/modules/schema-editing-access/en.md)
 
-## List of supported recipes
+## Tutorial lessons powered by the “All Extensions” Bundle
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
