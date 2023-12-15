@@ -7,8 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\Services\DataComposers;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
-use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
-use GatoGraphQL\GatoGraphQL\Services\DataProviders\VirtualRecipeDataProvider;
+use GatoGraphQL\GatoGraphQL\Services\DataProviders\TutorialLessonDataProvider;
+use GatoGraphQL\GatoGraphQL\Services\DataProviders\VirtualTutorialLessonDataProvider;
 use PoP\Root\Services\BasicServiceTrait;
 use RuntimeException;
 
@@ -20,8 +20,8 @@ class GraphQLDocumentDataComposer
     public const GRAPHQL_DOCUMENT_INNER_SEPARATOR = '*********************************************************************';
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?RecipeDataProvider $recipeDataProvider = null;
-    private ?VirtualRecipeDataProvider $virtualRecipeDataProvider = null;
+    private ?TutorialLessonDataProvider $tutorialLessonDataProvider = null;
+    private ?VirtualTutorialLessonDataProvider $virtualTutorialLessonDataProvider = null;
     private ?BundleExtensionAggregator $bundleExtensionAggregator = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
@@ -37,31 +37,31 @@ class GraphQLDocumentDataComposer
         }
         return $this->moduleRegistry;
     }
-    final public function setRecipeDataProvider(RecipeDataProvider $recipeDataProvider): void
+    final public function setTutorialLessonDataProvider(TutorialLessonDataProvider $tutorialLessonDataProvider): void
     {
-        $this->recipeDataProvider = $recipeDataProvider;
+        $this->tutorialLessonDataProvider = $tutorialLessonDataProvider;
     }
-    final protected function getRecipeDataProvider(): RecipeDataProvider
+    final protected function getTutorialLessonDataProvider(): TutorialLessonDataProvider
     {
-        if ($this->recipeDataProvider === null) {
-            /** @var RecipeDataProvider */
-            $recipeDataProvider = $this->instanceManager->getInstance(RecipeDataProvider::class);
-            $this->recipeDataProvider = $recipeDataProvider;
+        if ($this->tutorialLessonDataProvider === null) {
+            /** @var TutorialLessonDataProvider */
+            $tutorialLessonDataProvider = $this->instanceManager->getInstance(TutorialLessonDataProvider::class);
+            $this->tutorialLessonDataProvider = $tutorialLessonDataProvider;
         }
-        return $this->recipeDataProvider;
+        return $this->tutorialLessonDataProvider;
     }
-    final public function setVirtualRecipeDataProvider(VirtualRecipeDataProvider $virtualRecipeDataProvider): void
+    final public function setVirtualTutorialLessonDataProvider(VirtualTutorialLessonDataProvider $virtualTutorialLessonDataProvider): void
     {
-        $this->virtualRecipeDataProvider = $virtualRecipeDataProvider;
+        $this->virtualTutorialLessonDataProvider = $virtualTutorialLessonDataProvider;
     }
-    final protected function getVirtualRecipeDataProvider(): VirtualRecipeDataProvider
+    final protected function getVirtualTutorialLessonDataProvider(): VirtualTutorialLessonDataProvider
     {
-        if ($this->virtualRecipeDataProvider === null) {
-            /** @var VirtualRecipeDataProvider */
-            $virtualRecipeDataProvider = $this->instanceManager->getInstance(VirtualRecipeDataProvider::class);
-            $this->virtualRecipeDataProvider = $virtualRecipeDataProvider;
+        if ($this->virtualTutorialLessonDataProvider === null) {
+            /** @var VirtualTutorialLessonDataProvider */
+            $virtualTutorialLessonDataProvider = $this->instanceManager->getInstance(VirtualTutorialLessonDataProvider::class);
+            $this->virtualTutorialLessonDataProvider = $virtualTutorialLessonDataProvider;
         }
-        return $this->virtualRecipeDataProvider;
+        return $this->virtualTutorialLessonDataProvider;
     }
     final public function setBundleExtensionAggregator(BundleExtensionAggregator $bundleExtensionAggregator): void
     {
@@ -92,8 +92,8 @@ class GraphQLDocumentDataComposer
          * Check if there are required extensions for the tutorial lesson
          */
         $recipeSlugDataItems = [
-            ...$this->getRecipeDataProvider()->getRecipeSlugDataItems(),
-            ...$this->getVirtualRecipeDataProvider()->getRecipeSlugDataItems(),
+            ...$this->getTutorialLessonDataProvider()->getTutorialLessonSlugDataItems(),
+            ...$this->getVirtualTutorialLessonDataProvider()->getTutorialLessonSlugDataItems(),
         ];
         $recipeDataItem = $recipeSlugDataItems[$recipeSlug] ?? null;
         if ($recipeDataItem === null) {

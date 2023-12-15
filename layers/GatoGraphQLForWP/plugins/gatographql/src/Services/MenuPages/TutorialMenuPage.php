@@ -10,14 +10,14 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentR
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
-use GatoGraphQL\GatoGraphQL\Services\DataProviders\RecipeDataProvider;
+use GatoGraphQL\GatoGraphQL\Services\DataProviders\TutorialLessonDataProvider;
 
 class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
 {
     use NoDocsFolderPluginMarkdownContentRetrieverTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?RecipeDataProvider $recipeDataProvider = null;
+    private ?TutorialLessonDataProvider $tutorialLessonDataProvider = null;
     private ?BundleExtensionAggregator $bundleExtensionAggregator = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
@@ -33,18 +33,18 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
         }
         return $this->moduleRegistry;
     }
-    final public function setRecipeDataProvider(RecipeDataProvider $recipeDataProvider): void
+    final public function setTutorialLessonDataProvider(TutorialLessonDataProvider $tutorialLessonDataProvider): void
     {
-        $this->recipeDataProvider = $recipeDataProvider;
+        $this->tutorialLessonDataProvider = $tutorialLessonDataProvider;
     }
-    final protected function getRecipeDataProvider(): RecipeDataProvider
+    final protected function getTutorialLessonDataProvider(): TutorialLessonDataProvider
     {
-        if ($this->recipeDataProvider === null) {
-            /** @var RecipeDataProvider */
-            $recipeDataProvider = $this->instanceManager->getInstance(RecipeDataProvider::class);
-            $this->recipeDataProvider = $recipeDataProvider;
+        if ($this->tutorialLessonDataProvider === null) {
+            /** @var TutorialLessonDataProvider */
+            $tutorialLessonDataProvider = $this->instanceManager->getInstance(TutorialLessonDataProvider::class);
+            $this->tutorialLessonDataProvider = $tutorialLessonDataProvider;
         }
-        return $this->recipeDataProvider;
+        return $this->tutorialLessonDataProvider;
     }
     final public function setBundleExtensionAggregator(BundleExtensionAggregator $bundleExtensionAggregator): void
     {
@@ -197,7 +197,7 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
     {
         $bundleExtensionAggregator = $this->getBundleExtensionAggregator();
         $entries = [];
-        foreach ($this->getRecipeDataProvider()->getRecipeSlugDataItems() as $recipeSlug => $recipeDataItem) {
+        foreach ($this->getTutorialLessonDataProvider()->getTutorialLessonSlugDataItems() as $recipeSlug => $recipeDataItem) {
             /** @var string */
             $recipeTitle = $recipeDataItem[0];
             /** @var string[] */

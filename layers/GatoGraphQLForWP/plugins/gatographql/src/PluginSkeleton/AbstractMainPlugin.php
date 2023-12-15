@@ -1572,7 +1572,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * @param string|null $recipeSlug The slug of the tutorial lesson's .md file, same as in RecipeDataProvider
+     * @param string|null $recipeSlug The slug of the tutorial lesson's .md file, same as in TutorialLessonDataProvider
      * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the tutorial lesson)
      */
     protected function readSetupGraphQLPersistedQueryAndEncodeForOutput(
