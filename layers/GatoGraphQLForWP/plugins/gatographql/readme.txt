@@ -166,7 +166,7 @@ You can even synchronize content across a network of sites, such as from an upst
 13. Configure every aspect from the plugin via the Settings page
 14. Modules with different functionalities and schema extensions can be enabled and disabled
 15. Augment the plugin functionality and GraphQL schema via extensions
-16. The Recipes section contains example queries ready to copy/paste and use 
+16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
 
