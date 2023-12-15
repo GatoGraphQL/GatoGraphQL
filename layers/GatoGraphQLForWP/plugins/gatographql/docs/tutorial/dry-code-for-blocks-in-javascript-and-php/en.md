@@ -103,6 +103,18 @@ class GraphQLServer {
 }
 ```
 
+<div class="doc-highlight" markdown=1>
+
+🔥 **Tips:**
+
+The static methods from class `GraphQLServer` offered by the Internal GraphQL Server are:
+
+- `executeQuery`: Execute a GraphQL query
+- `executeQueryInFile`: Execute a GraphQL query contained in a (`.gql`) file
+- `executePersistedQuery`: Execute a persisted GraphQL query (providing its ID as an int, or slug as a string)
+
+</div>
+
 By invoking this method passing the `.gql` file created earlier on, we retrieve the data when rendering the dynamic block:
 
 ```php
