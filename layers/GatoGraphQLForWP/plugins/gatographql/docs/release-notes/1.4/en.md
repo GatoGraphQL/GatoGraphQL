@@ -2,6 +2,12 @@
 
 Here's a description of all the changes.
 
+## Added predefined custom endpoint "Nested mutations + Entity as mutation payload type"
+
+The new predefined custom endpoint "Nested mutations + Entity as mutation payload type", installed as `private`, is useful for executing queries that create resources in bulk.
+
+For instance, the "Import posts from CSV" persisted query would need to be run on that client.
+
 ## Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 
 The GraphiQL client on the single public and private GraphQL endpoints now have the "Request headers" input:
