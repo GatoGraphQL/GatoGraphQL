@@ -172,6 +172,7 @@ You can even synchronize content across a network of sites, such as from an upst
 
 = 1.4.0 =
 * Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
+* Fixed HTML codes were printed in select inputs in the WordPress editor, now removed
 
 = 1.3.0 =
 * Read `GET` variables when executing Persisted Queries via `POST`
