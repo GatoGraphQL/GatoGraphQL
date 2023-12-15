@@ -95,8 +95,8 @@ class GraphQLDocumentDataComposer
             ...$this->getTutorialLessonDataProvider()->getTutorialLessonSlugDataItems(),
             ...$this->getVirtualTutorialLessonDataProvider()->getTutorialLessonSlugDataItems(),
         ];
-        $recipeDataItem = $tutorialLessonSlugDataItems[$tutorialLessonSlug] ?? null;
-        if ($recipeDataItem === null) {
+        $tutorialLessonDataItem = $tutorialLessonSlugDataItems[$tutorialLessonSlug] ?? null;
+        if ($tutorialLessonDataItem === null) {
             throw new RuntimeException(
                 sprintf(
                     \__('There is no tutorial lesson with slug "%s"', 'gatographql'),
@@ -104,7 +104,7 @@ class GraphQLDocumentDataComposer
                 )
             );
         }
-        $requiredExtensionModules = $recipeDataItem[1] ?? [];
+        $requiredExtensionModules = $tutorialLessonDataItem[1] ?? [];
         if ($requiredExtensionModules === []) {
             return $graphQLDocument;
         }
