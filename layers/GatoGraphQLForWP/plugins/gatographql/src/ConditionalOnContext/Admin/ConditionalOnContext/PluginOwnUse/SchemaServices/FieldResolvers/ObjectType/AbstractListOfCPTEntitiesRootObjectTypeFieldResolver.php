@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostsWP\Constants\QueryOptions;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostPaginationInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\CustomPostSortInputObjectTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType\RootPredefinedCustomPostsFilterInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions as SchemaCommonsQueryOptions;
@@ -30,6 +31,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostPaginationInputObjectTypeResolver $customPostPaginationInputObjectTypeResolver = null;
     private ?CustomPostSortInputObjectTypeResolver $customPostSortInputObjectTypeResolver = null;
+    private ?RootPredefinedCustomPostsFilterInputObjectTypeResolver $rootPredefinedCustomPostsFilterInputObjectTypeResolver = null;
 
     final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
     {
@@ -83,6 +85,19 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
         }
         return $this->customPostSortInputObjectTypeResolver;
     }
+    final public function setRootPredefinedCustomPostsFilterInputObjectTypeResolver(RootPredefinedCustomPostsFilterInputObjectTypeResolver $rootPredefinedCustomPostsFilterInputObjectTypeResolver): void
+    {
+        $this->rootPredefinedCustomPostsFilterInputObjectTypeResolver = $rootPredefinedCustomPostsFilterInputObjectTypeResolver;
+    }
+    final protected function getRootPredefinedCustomPostsFilterInputObjectTypeResolver(): RootPredefinedCustomPostsFilterInputObjectTypeResolver
+    {
+        if ($this->rootPredefinedCustomPostsFilterInputObjectTypeResolver === null) {
+            /** @var RootPredefinedCustomPostsFilterInputObjectTypeResolver */
+            $rootPredefinedCustomPostsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootPredefinedCustomPostsFilterInputObjectTypeResolver::class);
+            $this->rootPredefinedCustomPostsFilterInputObjectTypeResolver = $rootPredefinedCustomPostsFilterInputObjectTypeResolver;
+        }
+        return $this->rootPredefinedCustomPostsFilterInputObjectTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -118,6 +133,7 @@ abstract class AbstractListOfCPTEntitiesRootObjectTypeFieldResolver extends Abst
             [
                 'pagination' => $this->getCustomPostPaginationInputObjectTypeResolver(),
                 'sort' => $this->getCustomPostSortInputObjectTypeResolver(),
+                'filter' => $this->getRootPredefinedCustomPostsFilterInputObjectTypeResolver(),
             ]
         );
     }

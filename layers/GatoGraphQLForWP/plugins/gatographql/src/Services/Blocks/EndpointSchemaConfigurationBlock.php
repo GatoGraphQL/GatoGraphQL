@@ -123,7 +123,7 @@ class EndpointSchemaConfigurationBlock extends AbstractBlock implements Persiste
             $schemaConfigurationContent = \__('Inherit from parent', 'gatographql');
         } elseif ($schemaConfigurationID > 0) {
             $schemaConfigurationObject = \get_post($schemaConfigurationID);
-            if (!is_null($schemaConfigurationObject)) {
+            if ($schemaConfigurationObject !== null) {
                 $schemaConfigurationDescription = $this->getCPTUtils()->getCustomPostDescription($schemaConfigurationObject);
                 $permalink = \get_permalink($schemaConfigurationObject->ID);
                 $schemaConfigurationContent = ($permalink ?

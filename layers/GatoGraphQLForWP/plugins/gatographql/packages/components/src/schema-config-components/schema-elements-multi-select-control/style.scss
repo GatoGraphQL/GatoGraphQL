@@ -25,7 +25,6 @@
 
 @media (min-width: #{ ($break-small) }) {
 	.gatographql-multi-select-control-list {
-
 		&__item_data {
 			display: grid;
 			grid-template-columns: 50% 1fr;
