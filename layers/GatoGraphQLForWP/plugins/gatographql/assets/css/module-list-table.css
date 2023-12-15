@@ -160,6 +160,19 @@
     border-color: #00d2a5;
 }
 
+.plugins .active.module-server td,
+.plugins .active.module-server th,
+.subsubsub a.module-type-server {
+    background-color: #fefef7;
+}
+.plugin-update-tr.active.module-server td,
+.plugins .active.module-server th.check-column {
+    border-left-color: #c8d200;
+}
+.subsubsub a.module-type-server {
+    border-color: #cbd200;
+}
+
 .plugins .active.module-performance td,
 .plugins .active.module-performance th,
 .subsubsub a.module-type-performance {
