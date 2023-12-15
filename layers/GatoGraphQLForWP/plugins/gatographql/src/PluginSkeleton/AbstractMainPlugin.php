@@ -585,6 +585,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $versionCallbacks = [
             '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
             '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
+            '1.4' => $this->installPluginSetupDataForVersion1Dot4(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -1996,5 +1997,36 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 return $classes;
             }
         );
+    }
+
+    protected function installPluginSetupDataForVersion1Dot4(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /**
+         * Create custom endpoint
+         */
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+
+        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID();
+        $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
+        $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
+        \wp_insert_post(array_merge(
+            $adminCustomEndpointOptions,
+            [
+                'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
+                'post_excerpt' => \__('Private client to execute queries that create resources in bulk', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                        'attrs' => [
+                            EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
+                        ],
+                    ],
+                    ...$defaultCustomEndpointBlocks
+                ])),
+            ]
+        ));
     }
 }
