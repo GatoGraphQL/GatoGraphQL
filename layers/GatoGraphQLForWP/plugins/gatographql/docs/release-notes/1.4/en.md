@@ -21,3 +21,7 @@ Same for custom endpoints:
 </div>
 
 (GraphiQL clients on Persisted queries do not have this addition.)
+
+## Fixed
+
+- HTML codes were printed in select inputs in the WordPress editor, they have now been removed
