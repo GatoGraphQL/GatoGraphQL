@@ -15,7 +15,7 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\RecipesMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
@@ -34,7 +34,7 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
     private ?ExtensionsMenuPage $extensionsMenuPage = null;
     private ?ReleaseNotesAboutMenuPage $releaseNotesAboutMenuPage = null;
     private ?ExtensionDocsMenuPage $extensionDocsMenuPage = null;
-    private ?RecipesMenuPage $recipesMenuPage = null;
+    private ?TutorialMenuPage $tutorialMenuPage = null;
     private ?AboutMenuPage $aboutMenuPage = null;
     private ?GraphQLEndpointCategoryTaxonomy $graphQLEndpointCategoryTaxonomy = null;
 
@@ -181,18 +181,18 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
         }
         return $this->extensionDocsMenuPage;
     }
-    final public function setRecipesMenuPage(RecipesMenuPage $recipesMenuPage): void
+    final public function setTutorialMenuPage(TutorialMenuPage $tutorialMenuPage): void
     {
-        $this->recipesMenuPage = $recipesMenuPage;
+        $this->tutorialMenuPage = $tutorialMenuPage;
     }
-    final protected function getRecipesMenuPage(): RecipesMenuPage
+    final protected function getTutorialMenuPage(): TutorialMenuPage
     {
-        if ($this->recipesMenuPage === null) {
-            /** @var RecipesMenuPage */
-            $recipesMenuPage = $this->instanceManager->getInstance(RecipesMenuPage::class);
-            $this->recipesMenuPage = $recipesMenuPage;
+        if ($this->tutorialMenuPage === null) {
+            /** @var TutorialMenuPage */
+            $tutorialMenuPage = $this->instanceManager->getInstance(TutorialMenuPage::class);
+            $this->tutorialMenuPage = $tutorialMenuPage;
         }
-        return $this->recipesMenuPage;
+        return $this->tutorialMenuPage;
     }
     final public function setAboutMenuPage(AboutMenuPage $aboutMenuPage): void
     {
@@ -373,22 +373,22 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
-        $recipesMenuPage = $this->getRecipesMenuPage();
+        $tutorialMenuPage = $this->getTutorialMenuPage();
         /**
          * @var callable
          */
-        $callable = [$recipesMenuPage, 'print'];
+        $callable = [$tutorialMenuPage, 'print'];
         if (
             $hookName = \add_submenu_page(
                 $menuName,
                 __('Tutorial', 'gatographql'),
                 __('Tutorial', 'gatographql'),
                 $schemaEditorAccessCapability,
-                $recipesMenuPage->getScreenID(),
+                $tutorialMenuPage->getScreenID(),
                 $callable
             )
         ) {
-            $recipesMenuPage->setHookName($hookName);
+            $tutorialMenuPage->setHookName($hookName);
         }
 
         /**
