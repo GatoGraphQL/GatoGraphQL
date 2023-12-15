@@ -4,7 +4,7 @@ query GetSchemaConfigurations {
         sort: { by: TITLE, order: ASC }
     ) {
         id
-        title
+        rawTitle
         # excerpt
     }
 }
