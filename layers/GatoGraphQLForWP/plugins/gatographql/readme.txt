@@ -32,7 +32,7 @@ With Gato GraphQL, you can:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-The plugin's "Recipes" section contains GraphQL queries demonstrating these use cases and many more. Copy the query from a recipe, paste it into the query editor, update it to your needs, publish it, and you're good to go.
+The plugin's "Tutorial" section explains how to achieve all of these objectives, one by one, by exploring all the elements from the GraphQL schema (the types, fields, directives, etc).
 
 Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. They are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all). They allow you to expose data while making your site super secure, as visitors will be restricted from freely browsing your data.
 
