@@ -197,11 +197,11 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
     {
         $bundleExtensionAggregator = $this->getBundleExtensionAggregator();
         $entries = [];
-        foreach ($this->getTutorialLessonDataProvider()->getTutorialLessonSlugDataItems() as $recipeSlug => $recipeDataItem) {
+        foreach ($this->getTutorialLessonDataProvider()->getTutorialLessonSlugDataItems() as $recipeSlug => $tutorialLessonDataItem) {
             /** @var string */
-            $recipeTitle = $recipeDataItem[0];
+            $recipeTitle = $tutorialLessonDataItem[0];
             /** @var string[] */
-            $recipeExtensionModules = $recipeDataItem[1] ?? [];
+            $recipeExtensionModules = $tutorialLessonDataItem[1] ?? [];
             $recipeBundleModules = $recipeExtensionModules === [] ? [] : $bundleExtensionAggregator->getBundleModulesComprisingAllExtensionModules($recipeExtensionModules);
             $entries[] = [
                 $recipeSlug,
