@@ -173,6 +173,19 @@
     border-color: #9700d2;
 }
 
+.plugins .active.module-automation td,
+.plugins .active.module-automation th,
+.subsubsub a.module-type-automation {
+    background-color: #f9fef7;
+}
+.plugin-update-tr.active.module-automation td,
+.plugins .active.module-automation th.check-column {
+    border-left-color: #00d25f;
+}
+.subsubsub a.module-type-automation {
+    border-color: #00d235;
+}
+
 .plugins .active.module-endpoint td,
 .plugins .active.module-endpoint th,
 .subsubsub a.module-type-endpoint {
