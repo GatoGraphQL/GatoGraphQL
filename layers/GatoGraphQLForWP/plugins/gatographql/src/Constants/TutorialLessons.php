@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Constants;
 
 /**
- * Recipe Markdown folder slugs, such as "searching-wordpress-data/en.md"
+ * Tutorial lessons Markdown folder slugs, such as
+ * "searching-wordpress-data/en.md"
  */
-class Recipes
+class TutorialLessons
 {
     public const INTRO = 'intro';
     public const SEARCHING_WORDPRESS_DATA = 'searching-wordpress-data';

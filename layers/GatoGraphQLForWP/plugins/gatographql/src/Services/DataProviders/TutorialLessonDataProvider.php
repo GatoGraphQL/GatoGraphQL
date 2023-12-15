@@ -4,24 +4,24 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\DataProviders;
 
-use GatoGraphQL\GatoGraphQL\Constants\Recipes;
+use GatoGraphQL\GatoGraphQL\Constants\TutorialLessons;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 
-class RecipeDataProvider
+class TutorialLessonDataProvider
 {
     /**
      * @return array<string,array{0:string,1?:string[],2?:string[]}> Key: recipe file slug, Value: [0] => title, [1] => array of extension modules
      */
-    public function getRecipeSlugDataItems(): array
+    public function getTutorialLessonSlugDataItems(): array
     {
         return [
-            Recipes::INTRO => [
+            TutorialLessons::INTRO => [
                 \__('Intro', 'gatographql'),
             ],
-            Recipes::SEARCHING_WORDPRESS_DATA => [
+            TutorialLessons::SEARCHING_WORDPRESS_DATA => [
                 \__('Searching WordPress data', 'gatographql'),
             ],
-            Recipes::QUERYING_DYNAMIC_DATA => [
+            TutorialLessons::QUERYING_DYNAMIC_DATA => [
                 \__('Querying dynamic data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -29,7 +29,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
+            TutorialLessons::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
                 \__('Exposing public and private endpoints', 'gatographql'),
                 [
                     ExtensionModuleResolver::ACCESS_CONTROL,
@@ -37,29 +37,29 @@ class RecipeDataProvider
                     ExtensionModuleResolver::CACHE_CONTROL,
                 ]
             ],
-            Recipes::COMPLEMENTING_WP_CLI => [
+            TutorialLessons::COMPLEMENTING_WP_CLI => [
                 \__('Complementing WP-CLI', 'gatographql')
             ],
-            Recipes::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
+            TutorialLessons::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
                 \__('Injecting multiple resources into WP-CLI', 'gatographql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
+            TutorialLessons::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
                 \__('Feeding data to blocks in the editor', 'gatographql'),
             ],
-            Recipes::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
+            TutorialLessons::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
                 \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
                 [
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
                 ]
             ],
-            Recipes::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
+            TutorialLessons::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
                 \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
             ],
-            Recipes::DUPLICATING_A_BLOG_POST => [
+            TutorialLessons::DUPLICATING_A_BLOG_POST => [
                 \__('Duplicating a blog post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -67,7 +67,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE => [
+            TutorialLessons::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE => [
                 \__('Duplicating multiple blog posts at once', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -78,7 +78,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::CUSTOMIZING_CONTENT_FOR_DIFFERENT_USERS => [
+            TutorialLessons::CUSTOMIZING_CONTENT_FOR_DIFFERENT_USERS => [
                 \__('Customizing content for different users', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -87,7 +87,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::SEARCH_REPLACE_AND_STORE_AGAIN => [
+            TutorialLessons::SEARCH_REPLACE_AND_STORE_AGAIN => [
                 \__('Search, replace, and store again', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -95,7 +95,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::ADAPTING_CONTENT_IN_BULK => [
+            TutorialLessons::ADAPTING_CONTENT_IN_BULK => [
                 \__('Adapting content in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -104,7 +104,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::SITE_MIGRATIONS => [
+            TutorialLessons::SITE_MIGRATIONS => [
                 \__('Site migrations', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -112,7 +112,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK => [
+            TutorialLessons::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK => [
                 \__('Inserting/Removing a (Gutenberg) block in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -121,7 +121,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::RETRIEVING_STRUCTURED_DATA_FROM_BLOCKS => [
+            TutorialLessons::RETRIEVING_STRUCTURED_DATA_FROM_BLOCKS => [
                 \__('Retrieving structured data from blocks', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -129,7 +129,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::MODIFYING_AND_STORING_AGAIN_THE_IMAGE_URLS_FROM_ALL_IMAGE_BLOCKS_IN_A_POST => [
+            TutorialLessons::MODIFYING_AND_STORING_AGAIN_THE_IMAGE_URLS_FROM_ALL_IMAGE_BLOCKS_IN_A_POST => [
                 \__('Modifying (and storing again) the image URLs from all Image blocks in a post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -140,7 +140,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
+            TutorialLessons::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
                 \__('Translating block content in a post to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -152,7 +152,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
+            TutorialLessons::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
                 \__('Bulk translating block content in multiple posts to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -164,7 +164,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::SENDING_EMAILS_WITH_PLEASURE => [
+            TutorialLessons::SENDING_EMAILS_WITH_PLEASURE => [
                 \__('Sending emails with pleasure', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -174,7 +174,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::SENDING_A_NOTIFICATION_WHEN_THERE_IS_A_NEW_POST => [
+            TutorialLessons::SENDING_A_NOTIFICATION_WHEN_THERE_IS_A_NEW_POST => [
                 \__('Sending a notification when there is a new post', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
@@ -186,7 +186,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::SENDING_A_DAILY_SUMMARY_OF_ACTIVITY => [
+            TutorialLessons::SENDING_A_DAILY_SUMMARY_OF_ACTIVITY => [
                 \__('Sending a daily summary of activity', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
@@ -199,7 +199,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::AUTOMATICALLY_ADDING_A_MANDATORY_BLOCK => [
+            TutorialLessons::AUTOMATICALLY_ADDING_A_MANDATORY_BLOCK => [
                 \__('Automatically adding a mandatory block', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -208,7 +208,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::INTERACTING_WITH_EXTERNAL_SERVICES_VIA_WEBHOOKS => [
+            TutorialLessons::INTERACTING_WITH_EXTERNAL_SERVICES_VIA_WEBHOOKS => [
                 \__('Interacting with external services via webhooks', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -218,7 +218,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::RETRIEVING_DATA_FROM_AN_EXTERNAL_API => [
+            TutorialLessons::RETRIEVING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Retrieving data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
@@ -230,14 +230,14 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::COMBINING_USER_DATA_FROM_DIFFERENT_SOURCES => [
+            TutorialLessons::COMBINING_USER_DATA_FROM_DIFFERENT_SOURCES => [
                 \__('Combining user data from different sources', 'gatographql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::NOT_LEAKING_CREDENTIALS_WHEN_CONNECTING_TO_SERVICES => [
+            TutorialLessons::NOT_LEAKING_CREDENTIALS_WHEN_CONNECTING_TO_SERVICES => [
                 \__('Not leaking credentials when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -246,7 +246,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                 ]
             ],
-            Recipes::HANDLING_ERRORS_WHEN_CONNECTING_TO_SERVICES => [
+            TutorialLessons::HANDLING_ERRORS_WHEN_CONNECTING_TO_SERVICES => [
                 \__('Handling errors when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -257,7 +257,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
-            Recipes::CREATING_AN_API_GATEWAY => [
+            TutorialLessons::CREATING_AN_API_GATEWAY => [
                 \__('Creating an API gateway', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -272,14 +272,14 @@ class RecipeDataProvider
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
-            Recipes::TRANSLATING_CONTENT_FROM_URL => [
+            TutorialLessons::TRANSLATING_CONTENT_FROM_URL => [
                 \__('Translating content from URL', 'gatographql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                     ExtensionModuleResolver::HTTP_CLIENT,
                 ]
             ],
-            Recipes::TRANSFORMING_DATA_FROM_AN_EXTERNAL_API => [
+            TutorialLessons::TRANSFORMING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Transforming data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -292,7 +292,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::FILTERING_DATA_FROM_AN_EXTERNAL_API => [
+            TutorialLessons::FILTERING_DATA_FROM_AN_EXTERNAL_API => [
                 \__('Filtering data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -302,7 +302,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::PINGING_EXTERNAL_SERVICES => [
+            TutorialLessons::PINGING_EXTERNAL_SERVICES => [
                 \__('Pinging external services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -312,7 +312,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::UPDATING_LARGE_SETS_OF_DATA => [
+            TutorialLessons::UPDATING_LARGE_SETS_OF_DATA => [
                 \__('Updating large sets of data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -325,7 +325,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            Recipes::IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE => [
+            TutorialLessons::IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE => [
                 \__('Importing a post from another WordPress site', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -339,7 +339,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
-            Recipes::DISTRIBUTING_CONTENT_FROM_AN_UPSTREAM_TO_MULTIPLE_DOWNSTREAM_SITES => [
+            TutorialLessons::DISTRIBUTING_CONTENT_FROM_AN_UPSTREAM_TO_MULTIPLE_DOWNSTREAM_SITES => [
                 \__('Distributing content from an upstream to multiple downstream sites', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -352,7 +352,7 @@ class RecipeDataProvider
                     ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ]
             ],
-            Recipes::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP => [
+            TutorialLessons::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP => [
                 \__('Automatically sending newsletter subscribers from InstaWP to Mailchimp', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
