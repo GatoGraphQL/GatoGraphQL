@@ -28,7 +28,7 @@ With Gato GraphQL, you can:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-Check out the [Recipes section in gatographql.com](https://gatographql.com/tutorial/intro) which demonstrates how to implement these use cases using the plugin.
+Check out the [Tutorial section in gatographql.com](https://gatographql.com/tutorial/intro) which demonstrates how to implement these use cases using the plugin.
 
 <details>
 
@@ -94,9 +94,9 @@ Augment the plugin functionality and GraphQL schema via extensions:
 
 ![Augment the plugin functionality and GraphQL schema via extensions](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-15.png)
 
-The Recipes section contains example queries ready to copy/paste and use:
+The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema:
 
-![The Recipes section contains example queries ready to copy/paste and use](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-16.png)
+![The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema](layers/GatoGraphQLForWP/plugins/gatographql/.wordpress-org/screenshot-16.png)
 
 </details>
 
