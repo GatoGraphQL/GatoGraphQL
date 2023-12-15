@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
 
+### Fixed
+
+- HTML codes were printed in select inputs in the WordPress editor, now removed
+
 ## 1.3.0 - 07/12/2013
 
 ### Improvements

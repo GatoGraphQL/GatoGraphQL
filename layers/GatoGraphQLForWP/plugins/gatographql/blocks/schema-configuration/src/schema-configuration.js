@@ -36,12 +36,12 @@ const SchemaConfigurationSelectCard = ( props ) => {
 	 * React Select expects an object with this format:
 	 * { value: ..., label: ... },
 	 * Convert the schemaConfigurations array to this structure:
-	 * [{label:"schemaConfiguration.title",value:"schemaConfiguration.id"},...]
+	 * [{label:"schemaConfiguration.rawTitle",value:"schemaConfiguration.id"},...]
 	 */
 	const schemaConfigurationOptions = schemaConfigurations.map( schemaConfiguration => (
 		{
-			// label: `→ ${ schemaConfiguration.title }`,
-			label: schemaConfiguration.title || noTitleLabel,
+			// label: `→ ${ schemaConfiguration.rawTitle }`,
+			label: schemaConfiguration.rawTitle || noTitleLabel,
 			value: schemaConfiguration.id,
 		}
 	) );
