@@ -179,7 +179,7 @@ query RetrieveGitHubActionArtifacts(
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Duplicating a blog post](../../../../../docs/tutorial/duplicating-a-blog-post/en.md)
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)

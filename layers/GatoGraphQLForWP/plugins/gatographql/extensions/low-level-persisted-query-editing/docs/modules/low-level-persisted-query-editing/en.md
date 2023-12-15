@@ -39,4 +39,4 @@ As an example, defining Cache Control can then be done directly in the persisted
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
 
-<!-- ## Recipes using extension -->
+<!-- ## Tutorial lessons referencing extension -->

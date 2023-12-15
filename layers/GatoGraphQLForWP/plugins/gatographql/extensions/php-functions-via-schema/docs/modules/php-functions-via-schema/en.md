@@ -872,7 +872,7 @@ query {
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
 - [Injecting multiple resources into WP-CLI](../../../../../docs/tutorial/injecting-multiple-resources-into-wp-cli/en.md)

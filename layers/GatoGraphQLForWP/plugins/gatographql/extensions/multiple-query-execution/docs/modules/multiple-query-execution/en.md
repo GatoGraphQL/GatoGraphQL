@@ -920,7 +920,7 @@ query ExecuteAllAddCommentOperations
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Injecting multiple resources into WP-CLI](../../../../../docs/tutorial/injecting-multiple-resources-into-wp-cli/en.md)
 - [Duplicating a blog post](../../../../../docs/tutorial/duplicating-a-blog-post/en.md)

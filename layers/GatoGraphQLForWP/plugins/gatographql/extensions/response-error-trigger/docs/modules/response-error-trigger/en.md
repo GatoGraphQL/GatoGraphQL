@@ -193,7 +193,7 @@ query GetExternalAPIData
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Handling errors when connecting to services](../../../../../docs/tutorial/handling-errors-when-connecting-to-services/en.md)
 - [Creating an API gateway](../../../../../docs/tutorial/creating-an-api-gateway/en.md)

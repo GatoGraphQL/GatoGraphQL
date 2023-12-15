@@ -147,7 +147,7 @@ Together with the **Data Iteration Meta Directives** extension, convert the firs
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)
 - [Retrieving structured data from blocks](../../../../../docs/tutorial/retrieving-structured-data-from-blocks/en.md)

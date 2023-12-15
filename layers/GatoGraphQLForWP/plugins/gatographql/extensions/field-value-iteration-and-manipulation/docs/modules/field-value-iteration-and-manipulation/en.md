@@ -619,7 +619,7 @@ query {
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)
 - [Retrieving structured data from blocks](../../../../../docs/tutorial/retrieving-structured-data-from-blocks/en.md)

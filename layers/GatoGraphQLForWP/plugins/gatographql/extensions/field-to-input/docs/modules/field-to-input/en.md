@@ -289,7 +289,7 @@ query {
 - [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
 - [“Public API” Bundle](../../../../../bundle-extensions/public-api/docs/modules/public-api/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)

@@ -460,7 +460,7 @@ For instance, in this query, we retrieve the IDs of the users in the website and
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 
-## Recipes using extension
+## Tutorial lessons referencing extension
 
 - [Sending emails with pleasure](../../../../../docs/tutorial/sending-emails-with-pleasure/en.md)
 - [Sending a notification when there is a new post](../../../../../docs/tutorial/sending-a-notification-when-there-is-a-new-post/en.md)
