@@ -4,7 +4,7 @@ Sometimes we need to update thousands of resources in a single action, as expres
 
 > I find that for a lot of clients I'm working with large sets of data (10,000+ product variations for 1 product, or 13,000+ media files) ... inevitably the clients want to be able to bulk edit lots of things at once - like tag 2000 media files with the same tag.
 
-In this recipe we will explore ways to tackle this task.
+In this tutorial lesson we will explore ways to tackle this task.
 
 ## Nested Mutations
 

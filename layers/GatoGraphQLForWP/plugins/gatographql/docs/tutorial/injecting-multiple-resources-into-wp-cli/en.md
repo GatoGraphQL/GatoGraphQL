@@ -1,6 +1,6 @@
 # Injecting multiple resources into WP-CLI
 
-In the previous recipe, we only retrieved (and injected into WP-CLI) a single user ID. Now, let's retrieve multiple user IDs while executing a single GraphQL query.
+In the previous tutorial lesson, we only retrieved (and injected into WP-CLI) a single user ID. Now, let's retrieve multiple user IDs while executing a single GraphQL query.
 
 In this GraphQL query:
 

@@ -2,7 +2,7 @@
 
 The [**HTTP Client**](https://gatographql.com/extensions/http-client/) extension allows us to execute HTTP requests against a webserver.
 
-This recipe demonstrates how to fetch data from an external API, by:
+This tutorial lesson demonstrates how to fetch data from an external API, by:
 
 - Retrieving the members of an email list from Mailchimp's REST API, extracting their emails, and doing something with this data
 - Retrieving repositories from GitHub's GraphQL API

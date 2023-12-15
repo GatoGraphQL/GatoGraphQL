@@ -19,7 +19,7 @@ These are some benefits of using GraphQL Persisted Queries to provide an API gat
 
 </div>
 
-This recipe demonstrates an API gateway that retrieves the latest artifacts from the GitHub Actions API, and extracts their URL to be downloaded, avoiding the need for the client to be signed in to GitHub.
+This tutorial lesson demonstrates an API gateway that retrieves the latest artifacts from the GitHub Actions API, and extracts their URL to be downloaded, avoiding the need for the client to be signed in to GitHub.
 
 ## GraphQL-powered API gateway to access GitHub Action artifacts
 
@@ -31,7 +31,7 @@ It retrieves the publicly-accessible download URLs for GitHub Actions artifacts:
 - It then accesses each of these proxy URLs (which has the artifact uploaded to a public location for a short period of time) and extracts the actual URL from the HTTP response's `Location` header
 - Finally it prints all publicly-accessible URLs, allowing non-authenticated users to download GitHub artifacts within that window of time
 
-_(The recipe ends here, but as a continuation, the GraphQL query could then do something with these URLs: send them by email, upload the files by FTP somewhere, install them in an InstaWP site, etc.)_
+_(The tutorial lesson ends here, but as a continuation, the GraphQL query could then do something with these URLs: send them by email, upload the files by FTP somewhere, install them in an InstaWP site, etc.)_
 
 ```graphql
 query RetrieveGitHubAccessToken {

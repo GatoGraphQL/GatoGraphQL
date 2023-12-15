@@ -7,7 +7,7 @@ For this situation, it makes sense to implement an architecture where:
 - All content is published to (and edited in) a single upstream WordPress site, which acts as the single source of truth for content
 - Suitable content is distributed to (but not edited in) each of the regional downstream WordPress sites
 
-This recipe will demonstrate how to implement this architecture, with the upstream WordPress site needing to have the relevant Gato GraphQL extensions active, while the downstream sites need only have the free Gato GraphQL plugin.
+This tutorial lesson will demonstrate how to implement this architecture, with the upstream WordPress site needing to have the relevant Gato GraphQL extensions active, while the downstream sites need only have the free Gato GraphQL plugin.
 
 ## GraphQL query to synchronize content from upstream to downstream sites
 
@@ -21,11 +21,11 @@ _(For the downstream sites only)_ For this GraphQL query to work, the [Schema Co
 
 The GraphQL query below is executed on the upstream WordPress site, to synchronize the content of the updated post to the relevant downstream sites, using the post slug as the common identifier across sites.
 
-(The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous recipe.)
+(The query can be adapted to also synchronize the other properties -tags, categories, author and featured image-, as explained in the previous tutorial lesson.)
 
 The query includes transactional logic, so that whenever the update fails on any downstream site, whether because the HTTP request failed (as when the server is down) or because the GraphQL query produced errors (as if there is no post with the provided slug), the mutation is then reverted on all downstream sites.
 
-To revert the state, variable `$previousPostContent` must be provided. We can pass this value by hooking on the `post_updated` WordPress action, upon which the GraphQL query is executed (as explained in a previous recipe).
+To revert the state, variable `$previousPostContent` must be provided. We can pass this value by hooking on the `post_updated` WordPress action, upon which the GraphQL query is executed (as explained in a previous lesson).
 
 The query does the following:
 

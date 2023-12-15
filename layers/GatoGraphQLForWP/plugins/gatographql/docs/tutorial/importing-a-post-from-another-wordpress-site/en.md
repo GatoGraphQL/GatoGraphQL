@@ -1,6 +1,6 @@
 # Importing a post from another WordPress site
 
-This recipe demonstrates how we can keep WordPress sites in sync, by importing a post from some WordPress site into our local WordPress site.
+This tutorial lesson demonstrates how we can keep WordPress sites in sync, by importing a post from some WordPress site into our local WordPress site.
 
 ## GraphQL query to import a post from another WordPress site
 

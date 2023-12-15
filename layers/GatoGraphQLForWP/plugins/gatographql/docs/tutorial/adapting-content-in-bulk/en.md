@@ -1,6 +1,6 @@
 # Adapting content in bulk
 
-This recipe adapts content in bulk, updating the title and excerpt for multiple posts with a single GraphQL request.
+This tutorial lesson adapts content in bulk, updating the title and excerpt for multiple posts with a single GraphQL request.
 
 <div class="doc-config-highlight" markdown=1>
 

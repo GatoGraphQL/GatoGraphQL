@@ -2,7 +2,7 @@
 
 Gato GraphQL can help us automate tasks in the application, such as sending a notification email to the admin when there is a new post.
 
-In this recipe we will explore two ways to achieve this.
+In this tutorial lesson we will explore two ways to achieve this.
 
 ## GraphQL query to send a notification email to the admin
 

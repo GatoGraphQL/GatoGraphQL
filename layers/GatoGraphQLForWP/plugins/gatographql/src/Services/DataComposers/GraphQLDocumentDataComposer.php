@@ -81,7 +81,7 @@ class GraphQLDocumentDataComposer
      * Append the required extensions and bundles to the header
      * in the persisted query.
      *
-     * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the recipe)
+     * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the tutorial lesson)
      */
     public function addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
         string $graphQLDocument,
@@ -89,7 +89,7 @@ class GraphQLDocumentDataComposer
         ?array $skipExtensionModules = null
     ): string {
         /**
-         * Check if there are required extensions for the recipe
+         * Check if there are required extensions for the tutorial lesson
          */
         $recipeSlugDataItems = [
             ...$this->getRecipeDataProvider()->getRecipeSlugDataItems(),
@@ -99,7 +99,7 @@ class GraphQLDocumentDataComposer
         if ($recipeDataItem === null) {
             throw new RuntimeException(
                 sprintf(
-                    \__('There is no recipe with slug "%s"', 'gatographql'),
+                    \__('There is no tutorial lesson with slug "%s"', 'gatographql'),
                     $recipeSlug
                 )
             );
@@ -128,7 +128,7 @@ class GraphQLDocumentDataComposer
             // There is no header => throw error!
             throw new RuntimeException(
                 sprintf(
-                    \__('There is no header in GraphQL document for recipe "%s": %s%s'),
+                    \__('There is no header in GraphQL document for tutorial lesson "%s": %s%s'),
                     $recipeSlug,
                     PHP_EOL,
                     $graphQLDocument

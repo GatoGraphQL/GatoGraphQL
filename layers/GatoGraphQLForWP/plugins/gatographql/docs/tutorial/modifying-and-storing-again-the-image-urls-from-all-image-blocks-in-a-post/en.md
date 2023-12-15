@@ -1,10 +1,10 @@
 # Modifying (and storing again) the image URLs from all Image blocks in a post
 
-In the previous recipe, we learnt that we can iterate the inner structure of (Gutenberg) blocks in the post content, and extract desired items.
+In the previous tutorial lesson, we learnt that we can iterate the inner structure of (Gutenberg) blocks in the post content, and extract desired items.
 
 Let's now explore how to transform those items, and store them again in the post.
 
-This recipe modifies the URL of images in the `core/image` blocks in a post:
+This lesson modifies the URL of images in the `core/image` blocks in a post:
 
 - Replacing `mysite.com` to `cdn.mysite.com` (as to start serving those assets from a CDN)
 - Replacing `.jpg` with `.avif`

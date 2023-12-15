@@ -1,6 +1,6 @@
 # Transforming data from an external API
 
-This recipe demonstrates examples on adapting the response from an external API to anything we need it to be.
+This tutorial lesson demonstrates examples on adapting the response from an external API to anything we need it to be.
 
 ## Adding default values and extra properties to each entry
 

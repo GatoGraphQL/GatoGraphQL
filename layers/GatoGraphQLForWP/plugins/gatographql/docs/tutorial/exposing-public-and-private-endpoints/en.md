@@ -14,7 +14,7 @@ Gato GraphQL expands this notion, allowing us to expose multiple custom endpoint
 
 Gato GraphQL also natively supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server.
 
-This recipe presents suggestions on how and when to use each endpoint.
+This tutorial lesson presents suggestions on how and when to use each endpoint.
 
 <div class="doc-highlight" markdown=1>
 
@@ -115,4 +115,4 @@ This is because as all data that needs to be made available for our application 
 
 Similar to custom endpoints, persisted queries are CPTs, then we can publish them as `private` (or `password-protected`), making them accessible only to the logged-in users who have the right to access it and nobody else.
 
-It is recommended to use these whenever the query is meant for internal use only, such as when searching WordPress data for our own use (as demonstrated in a previous recipe).
+It is recommended to use these whenever the query is meant for internal use only, such as when searching WordPress data for our own use (as demonstrated in a previous lesson).

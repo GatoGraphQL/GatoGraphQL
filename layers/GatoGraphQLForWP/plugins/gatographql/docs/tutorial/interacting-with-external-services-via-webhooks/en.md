@@ -15,7 +15,7 @@ With Gato GraphQL, we can create Persisted Queries that act as webhooks:
 - Because the Persisted Query is exposed under its own URL, it can be used as the target for the webhook
 - Every Persisted Query can deal exclusively with some specific webhook
 
-In this recipe, we will create a Persisted Query to interact with ConvertKit.
+In this tutorial lesson, we will create a Persisted Query to interact with ConvertKit.
 
 ## Browsing the webhook documentation
 

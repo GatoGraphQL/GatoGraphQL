@@ -10,7 +10,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
 class VirtualTutorialLessonDataProvider
 {
     /**
-     * @return array<string,array{0:string,1?:string[],2?:string[]}> Key: recipe file slug, Value: [0] => title, [1] => array of extension modules
+     * @return array<string,array{0:string,1?:string[],2?:string[]}> Key: tutorial lesson file slug, Value: [0] => title, [1] => array of extension modules
      */
     public function getTutorialLessonSlugDataItems(): array
     {

@@ -1,8 +1,8 @@
 # Translating block content in a post to a different language
 
-This recipe demonstrates translating a post to the desired language, with full support for (Gutenberg) blocks.
+This tutorial lesson demonstrates translating a post to the desired language, with full support for (Gutenberg) blocks.
 
-As we've seen in a previous recipe, we are able to modify properties contained within the post's blocks, while not affecting the block structure, and store the content again.
+As we've seen in a previous lesson, we are able to modify properties contained within the post's blocks, while not affecting the block structure, and store the content again.
 
 Translation will follow the same idea, applying directive `@strTranslate` (provided by the [**Google Translate**](https://gatographql.com/extensions/google-translate/) extension) which translates content via the Google Translate API.
 

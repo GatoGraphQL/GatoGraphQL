@@ -1,6 +1,6 @@
 # Bulk translating block content in multiple posts to a different language
 
-The previous recipe demonstrated how to translate a post. This recipe is the equivalent but translating multiple posts at once (in bulk), while executing a single call to the Google Translate API containing all text to translate from all the posts.
+The previous tutorial lesson demonstrated how to translate a post. This lesson is the equivalent but translating multiple posts at once (in bulk), while executing a single call to the Google Translate API containing all text to translate from all the posts.
 
 <div class="doc-highlight" markdown=1>
 
@@ -22,7 +22,7 @@ For this GraphQL query to work, the [Schema Configuration](https://gatographql.c
 
 </div>
 
-This GraphQL query is similar to the one from the previous recipe, but receiving the data for multiple posts as inputs, storing these data separately, executing the translation for all posts all at once, and finally iterating over all the posts, retrieving that post's translations and updating the post.
+This GraphQL query is similar to the one from the previous tutorial lesson, but receiving the data for multiple posts as inputs, storing these data separately, executing the translation for all posts all at once, and finally iterating over all the posts, retrieving that post's translations and updating the post.
 
 In order to keep the regex patterns and translations for the posts separate, we use `@export(type: DICTIONARY)` when exporting data via dynamic variables, which keeps the data organized under the corresponding post ID.
 

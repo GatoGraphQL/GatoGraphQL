@@ -1,6 +1,6 @@
 # Sending emails (with pleasure)
 
-This recipe demonstrates several capabilities by Gato GraphQL to send emails.
+This tutorial lesson demonstrates several capabilities by Gato GraphQL to send emails.
 
 ## Sending emails
 

@@ -1,6 +1,6 @@
 # Mapping JS components to (Gutenberg) blocks
 
-This recipe presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
+This tutorial lesson presents an example [Preact](https://preactjs.com/) app that queries for block data and maps it into customized JavaScript components.
 
 <div class="doc-config-highlight" markdown=1>
 

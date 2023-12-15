@@ -1,6 +1,6 @@
 # Search, replace, and store again
 
-This recipe provides examples of content adaptations involving search and replace, and then storing the resource back to the DB. It requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension.
+This tutorial lesson provides examples of content adaptations involving search and replace, and then storing the resource back to the DB. It requires the [**PHP Functions via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension.
 
 <div class="doc-highlight" markdown=1>
 

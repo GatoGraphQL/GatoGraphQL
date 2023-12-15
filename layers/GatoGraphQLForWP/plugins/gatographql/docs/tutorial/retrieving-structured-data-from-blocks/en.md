@@ -8,7 +8,7 @@ In addition, as the block's attributes now become widely accessible (outside of 
 
 This allows us to treat blocks as the single source of truth for all our content, and distribute it across different mediums and apps following the [COPE (“Create Once, Publish Everywhere”) strategy](https://www.smashingmagazine.com/2019/10/create-once-publish-everywhere-wordpress/).
 
-This recipe demonstrates how to retrieve the image URLs from all `core/image` blocks in a post.
+This tutorial lesson demonstrates how to retrieve the image URLs from all `core/image` blocks in a post.
 
 ## Extracting the image URLs from all `core/image` blocks in a post
 

@@ -1,6 +1,6 @@
 # Combining user data from different sources
 
-In the previous recipe, we learnt that we can fetch user data from Mailchimp's REST API and combine it with user data stored in our website.
+In the previous tutorial lesson, we learnt that we can fetch user data from Mailchimp's REST API and combine it with user data stored in our website.
 
 We can generalize this idea, applying it to any two data sources, combining their datasets into one, and then executing some operation with the combined data.
 

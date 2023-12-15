@@ -19,13 +19,13 @@ This script repeatedly creates a menu item and sets its ID as parent to another 
 wp menu item add-custom bottom-menu "Child menu item" https://bbc.com --parent-id=$(wp menu item add-post bottom-menu 1 --title="Parent menu item" --parent-id=$(wp menu item add-post bottom-menu 1 --title="Most ancestor menu item" --porcelain) --porcelain)
 ```
 
-As we learnt in the previous recipe, Gato GraphQL can augment WordPress capabilities for searching for data. As such, we can also use Gato GraphQL to find the data we need, and inject it into WP-CLI.
+As we learnt in the previous tutorial lesson, Gato GraphQL can augment WordPress capabilities for searching for data. As such, we can also use Gato GraphQL to find the data we need, and inject it into WP-CLI.
 
 The following queries will demonstrate how to do that.
 
 ## Executing a GraphQL query from the terminal
 
-Let's use the GraphQL query from the previous recipe, to find users with the Spanish locale, and execute a WP-CLI command on that user.
+Let's use the GraphQL query from the previous lesson, to find users with the Spanish locale, and execute a WP-CLI command on that user.
 
 We first limit the result to only 1 user (via `pagination: { limit: 1 }`):
 

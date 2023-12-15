@@ -2,7 +2,7 @@
 
 Whenever a new post is created, we can use the automation features to validate and modify the content of the post.
 
-This recipe checks if a certain mandatory block is present in the post and, whenever missing, it adds it.
+This tutorial lesson checks if a certain mandatory block is present in the post and, whenever missing, it adds it.
 
 ## GraphQL query to add a missing block
 

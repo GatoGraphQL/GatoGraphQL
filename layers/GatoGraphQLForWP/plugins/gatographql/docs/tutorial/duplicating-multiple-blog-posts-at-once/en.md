@@ -1,6 +1,6 @@
 # Duplicating multiple blog posts at once
 
-We can extend the previous recipe, to duplicate multiple posts with a single GraphQL request.
+We can extend the previous tutorial lesson, to duplicate multiple posts with a single GraphQL request.
 
 ## GraphQL query to duplicate multiple posts at once
 
@@ -144,9 +144,9 @@ query RetrieveCreatedPosts
 
 Below is the detailed analysis of how the query works.
 
-### Extending the "Duplicating a blog post" recipe
+### Extending the "Duplicating a blog post" tutorial lesson
 
-The previous recipe employs the following strategy (on the GraphQL query of the second approach):
+The previous lesson employs the following strategy (on the GraphQL query of the second approach):
 
 1. Export the resource IDs from the fields (including connection fields):
 

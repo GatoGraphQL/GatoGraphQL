@@ -11,7 +11,7 @@ With Gato GraphQL and extensions, it is possible to make this logic DRY, having 
 
 ## Storing GraphQL queries in `.gql` files
 
-In the previous recipe (which explained how to connect to the GraphQL server from the client), the GraphQL query to be executed was embedded within the JavaScript code:
+In the previous tutorial lesson (which explained how to connect to the GraphQL server from the client), the GraphQL query to be executed was embedded within the JavaScript code:
 
 ```js
 const response = await fetch(endpoint, {
