@@ -32,7 +32,7 @@ Same for custom endpoints:
 
 The page "Recipes" has been renamed to "Tutorial", to better represent its nature. (At the same time, the new ["Queries Library" section at gatographql.com](https://gatographql.com/library/) demonstrates GraphQL queries to solve common use cases.)
 
-An option to hide the Tutorial section has been added to the Settings page, under "Plugin Configuration > General > Hide the Tutorial page?":
+An option to hide the Tutorial section has been added to the Settings page, under "Plugin Configuration > General > Hide Tutorial page?":
 
 <div class="img-width-1024" markdown=1>
 
