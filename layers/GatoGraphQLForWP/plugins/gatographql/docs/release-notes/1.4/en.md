@@ -40,6 +40,12 @@ An option to hide the Tutorial section has been added to the Settings page, unde
 
 </div>
 
+Alternatively, we can define this value in `wp-config.php`:
+
+```php
+define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
+```
+
 ## Fixed
 
 - HTML codes were printed in select inputs in the WordPress editor, they have now been removed
