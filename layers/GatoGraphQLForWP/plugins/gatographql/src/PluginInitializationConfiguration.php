@@ -102,6 +102,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::SERVER_IP_CONFIGURATION,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME,
             ],
+            // Hide menu page?
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_HIDE_TUTORIAL_PAGE,
+            ],
             // Install Plugin Setup Data
             [
                 'class' => Module::class,
@@ -643,6 +650,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
     protected function getEnvVariablesToWPConfigConstantsMapping(): array
     {
         return [
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+            ],
             [
                 'class' => Module::class,
                 'envVariable' => Environment::INSTALL_PLUGIN_SETUP_DATA,

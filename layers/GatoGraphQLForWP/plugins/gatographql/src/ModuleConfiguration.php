@@ -177,6 +177,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function hideTutorialPage(): bool
+    {
+        $envVariable = Environment::HIDE_TUTORIAL_PAGE;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function installPluginSetupData(): bool
     {
         $envVariable = Environment::INSTALL_PLUGIN_SETUP_DATA;
