@@ -36,7 +36,7 @@ An option to hide the Tutorial section has been added to the Settings page, unde
 
 <div class="img-width-1024" markdown=1>
 
-![Manage installing setup data in the Settings](../../images/settings-hide-tutorial-page.png)
+![Hiding the Tutorial page in the Settings](../../images/settings-hide-tutorial-page.png)
 
 </div>
 
