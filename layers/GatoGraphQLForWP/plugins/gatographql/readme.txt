@@ -173,7 +173,7 @@ You can even synchronize content across a network of sites, such as from an upst
 = 1.4.0 =
 * Added predefined custom endpoint "Nested mutations + Entity as mutation payload type"
 * Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
-* Renamed "Recipes" as "Tutorial"
+* Renamed page "Recipes" to "Tutorial", and added settings to hide it
 * Fixed HTML codes were printed in select inputs in the WordPress editor, now removed
 
 = 1.3.0 =

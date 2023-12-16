@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPageAttachers;
 
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
@@ -15,9 +17,9 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\MenuPageInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModuleDocumentationMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
-use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ReleaseNotesAboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
+use GatoGraphQL\GatoGraphQL\Services\MenuPages\TutorialMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use PoP\Root\App;
 
@@ -373,22 +375,26 @@ class BottomMenuPageAttacher extends AbstractPluginMenuPageAttacher
             $this->getSettingsMenuPage()->setHookName($hookName);
         }
 
-        $tutorialMenuPage = $this->getTutorialMenuPage();
-        /**
-         * @var callable
-         */
-        $callable = [$tutorialMenuPage, 'print'];
-        if (
-            $hookName = \add_submenu_page(
-                $menuName,
-                __('Tutorial', 'gatographql'),
-                __('Tutorial', 'gatographql'),
-                $schemaEditorAccessCapability,
-                $tutorialMenuPage->getScreenID(),
-                $callable
-            )
-        ) {
-            $tutorialMenuPage->setHookName($hookName);
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->hideTutorialPage()) {
+            $tutorialMenuPage = $this->getTutorialMenuPage();
+            /**
+             * @var callable
+             */
+            $callable = [$tutorialMenuPage, 'print'];
+            if (
+                $hookName = \add_submenu_page(
+                    $menuName,
+                    __('Tutorial', 'gatographql'),
+                    __('Tutorial', 'gatographql'),
+                    $schemaEditorAccessCapability,
+                    $tutorialMenuPage->getScreenID(),
+                    $callable
+                )
+            ) {
+                $tutorialMenuPage->setHookName($hookName);
+            }
         }
 
         /**
