@@ -28,9 +28,17 @@ Same for custom endpoints:
 
 (GraphiQL clients on Persisted queries do not have this addition.)
 
-## Improvements
+## Renamed page "Recipes" to "Tutorial", and added settings to hide it
 
-- Renamed "Recipes" as "Tutorial"
+The page "Recipes" has been renamed to "Tutorial", to better represent its nature. (At the same time, the new ["Queries Library" section at gatographql.com](https://gatographql.com/library/) demonstrates GraphQL queries to solve common use cases.)
+
+An option to hide the Tutorial section has been added to the Settings page, under "Plugin Configuration > General > Hide the Tutorial page?":
+
+<div class="img-width-1024" markdown=1>
+
+![Manage installing setup data in the Settings](../../images/settings-hide-tutorial-page.png)
+
+</div>
 
 ## Fixed
 

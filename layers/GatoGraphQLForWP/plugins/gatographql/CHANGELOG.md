@@ -13,7 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
-- Renamed "Recipes" as "Tutorial"
+- Renamed page "Recipes" to "Tutorial", and added settings to hide it
 
 ### Fixed
 
