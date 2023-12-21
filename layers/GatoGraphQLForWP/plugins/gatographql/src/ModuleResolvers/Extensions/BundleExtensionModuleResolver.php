@@ -288,22 +288,32 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 [$module]
             ),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
-                // @todo New bundle
+                self::WORDPRESS_CONTENT_TRANSLATION,
             ],
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
-                // @todo New bundle
+                self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC,
+                self::WORDPRESS_CONTENT_TRANSFORMER,
+                self::WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS,
             ],
             self::WORDPRESS_AS_API_GATEWAY => [
-                // @todo New bundle
+                self::WORDPRESS_CONTENT_TRANSFORMER,
+                self::WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS,
             ],
             self::WORDPRESS_AUTOMATOR => [
-                // @todo New bundle
+                self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
+                self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC,
+                self::WORDPRESS_CONTENT_TRANSFORMER,
+                self::WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS,
             ],
             self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => [
-                // @todo New bundle
+                self::WORDPRESS_CONTENT_TRANSFORMER,
             ],
             self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => [
-                // @todo New bundle
+                self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC,
+                self::WORDPRESS_CONTENT_TRANSFORMER,
             ],
             default => [],
         };
