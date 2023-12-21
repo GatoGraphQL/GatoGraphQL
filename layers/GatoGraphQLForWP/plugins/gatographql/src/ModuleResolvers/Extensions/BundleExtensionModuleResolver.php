@@ -32,9 +32,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         $placeholder = \__('“%s” Bundle', 'gatographql');
         return match ($module) {
             self::ALL_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
-            self::WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Application Glue & Automator', 'gatographql')),
-            self::WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Content Translation', 'gatographql')),
-            self::WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Public API', 'gatographql')),
+            self::WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('WordPress Automator', 'gatographql')),
+            self::WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('WordPress Content Translation', 'gatographql')),
+            self::WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('WordPress Public API', 'gatographql')),
             default => $module,
         };
     }
