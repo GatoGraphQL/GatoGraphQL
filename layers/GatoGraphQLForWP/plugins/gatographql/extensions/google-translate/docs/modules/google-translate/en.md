@@ -275,7 +275,7 @@ Define environment variables:
 ## Bundles including extension
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
-- [“WordPress Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
+- [“WordPress Content Translation” Bundle](../../../../../bundle-extensions/wordpress-content-translation/docs/modules/wordpress-content-translation/en.md)
 
 ## Tutorial lessons referencing extension
 
