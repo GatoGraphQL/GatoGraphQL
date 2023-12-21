@@ -12,7 +12,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
     public const APPLICATION_GLUE_AND_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\application-glue-and-automator';
     public const CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\content-translation';
-    public const PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\public-api';
+    public const PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-public-api';
 
     /**
      * @return string[]
