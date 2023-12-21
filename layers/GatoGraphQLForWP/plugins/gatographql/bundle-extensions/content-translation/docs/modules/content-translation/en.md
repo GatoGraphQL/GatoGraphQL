@@ -1,4 +1,4 @@
-# “Content Translation” Bundle
+# “WordPress Content Translation” Bundle
 
 Translate your content into over 100 languages using the [Google Translate API](https://cloud.google.com/translate/).
 
@@ -17,7 +17,7 @@ The bundle provides extensions to access, iterate and manipulate the field value
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 
-## Tutorial lessons powered by the “Content Translation” Bundle
+## Tutorial lessons powered by the “WordPress Content Translation” Bundle
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Exposing public and private endpoints](../../../../../docs/tutorial/exposing-public-and-private-endpoints/en.md)
