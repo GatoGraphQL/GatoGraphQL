@@ -51,7 +51,7 @@ Gato GraphQL can be augmented via extensions, including:
 Extensions have been bundled together, to satisfy several common use cases:
 
 - [“All Extensions” Bundle](https://gatographql.com/bundles/all-extensions): All Gato GraphQL extensions in a single bundle
-- [“WordPress Automator” Bundle](https://gatographql.com/bundles/application-glue-and-automator): Perform and automate tasks for your application
+- [“WordPress Automator” Bundle](https://gatographql.com/bundles/wordpress-automator): Perform and automate tasks for your application
 - [“WordPress Content Translation” Bundle](https://gatographql.com/bundles/wordpress-content-translation): Translate content using the Google Translate API
 - [“WordPress Public API” Bundle](https://gatographql.com/bundles/wordpress-public-api): Make your public APIs powerful, fast and secure
 

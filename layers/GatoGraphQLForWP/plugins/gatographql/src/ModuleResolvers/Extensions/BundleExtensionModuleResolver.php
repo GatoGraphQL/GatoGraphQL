@@ -10,7 +10,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
-    public const APPLICATION_GLUE_AND_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\application-glue-and-automator';
+    public const APPLICATION_GLUE_AND_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-automator';
     public const CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-translation';
     public const PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-public-api';
 

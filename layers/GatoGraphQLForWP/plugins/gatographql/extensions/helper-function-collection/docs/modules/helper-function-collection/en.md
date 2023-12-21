@@ -458,7 +458,7 @@ For instance, in this query, we retrieve the IDs of the users in the website and
 ## Bundles including extension
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
-- [“WordPress Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
+- [“WordPress Automator” Bundle](../../../../../bundle-extensions/wordpress-automator/docs/modules/wordpress-automator/en.md)
 
 ## Tutorial lessons referencing extension
 
