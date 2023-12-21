@@ -46,6 +46,10 @@ Alternatively, we can define this value in `wp-config.php`:
 define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
 ```
 
+## Improvements
+
+- Renamed bundles
+
 ## Fixed
 
 - HTML codes were printed in select inputs in the WordPress editor, they have now been removed
