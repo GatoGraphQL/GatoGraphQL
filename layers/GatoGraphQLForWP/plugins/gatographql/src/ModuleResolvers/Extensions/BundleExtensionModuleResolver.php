@@ -287,6 +287,24 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 $this->getModulesToResolve(),
                 [$module]
             ),
+            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
+                // @todo New bundle
+            ],
+            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
+                // @todo New bundle
+            ],
+            self::WORDPRESS_AS_API_GATEWAY => [
+                // @todo New bundle
+            ],
+            self::WORDPRESS_AUTOMATOR => [
+                // @todo New bundle
+            ],
+            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => [
+                // @todo New bundle
+            ],
+            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => [
+                // @todo New bundle
+            ],
             default => [],
         };
     }
