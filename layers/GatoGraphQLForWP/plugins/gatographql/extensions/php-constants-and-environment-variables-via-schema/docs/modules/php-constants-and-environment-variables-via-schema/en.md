@@ -152,7 +152,7 @@ In this query, fields `githubAccessToken` and `authorizationHeader` (which conta
 ## Bundles including extension
 
 - [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
-- [“Application Glue & Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
+- [“WordPress Automator” Bundle](../../../../../bundle-extensions/application-glue-and-automator/docs/modules/application-glue-and-automator/en.md)
 
 ## Tutorial lessons referencing extension
 
