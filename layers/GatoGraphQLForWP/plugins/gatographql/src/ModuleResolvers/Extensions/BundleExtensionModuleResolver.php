@@ -10,9 +10,9 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
     public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
-    public const APPLICATION_GLUE_AND_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-automator';
-    public const CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-translation';
-    public const PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-public-api';
+    public const WORDPRESS_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-automator';
+    public const WORDPRESS_CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-translation';
+    public const WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-public-api';
 
     /**
      * @return string[]
@@ -21,9 +21,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return [
             self::ALL_EXTENSIONS,
-            self::APPLICATION_GLUE_AND_AUTOMATOR,
-            self::CONTENT_TRANSLATION,
-            self::PUBLIC_API,
+            self::WORDPRESS_AUTOMATOR,
+            self::WORDPRESS_CONTENT_TRANSLATION,
+            self::WORDPRESS_PUBLIC_API,
         ];
     }
 
@@ -32,9 +32,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
         $placeholder = \__('“%s” Bundle', 'gatographql');
         return match ($module) {
             self::ALL_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
-            self::APPLICATION_GLUE_AND_AUTOMATOR => sprintf($placeholder, \__('Application Glue & Automator', 'gatographql')),
-            self::CONTENT_TRANSLATION => sprintf($placeholder, \__('Content Translation', 'gatographql')),
-            self::PUBLIC_API => sprintf($placeholder, \__('Public API', 'gatographql')),
+            self::WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Application Glue & Automator', 'gatographql')),
+            self::WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Content Translation', 'gatographql')),
+            self::WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Public API', 'gatographql')),
             default => $module,
         };
     }
@@ -43,9 +43,9 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return match ($module) {
             self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin. As new extensions are created and released, they will also be added to this bundle.', 'gatographql'),
-            self::APPLICATION_GLUE_AND_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gatographql'),
-            self::CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gatographql'),
-            self::PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gatographql'),
+            self::WORDPRESS_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gatographql'),
+            self::WORDPRESS_CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gatographql'),
+            self::WORDPRESS_PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -97,7 +97,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
-            self::APPLICATION_GLUE_AND_AUTOMATOR => [
+            self::WORDPRESS_AUTOMATOR => [
                 ExtensionModuleResolver::AUTOMATION,
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::EMAIL_SENDER,
@@ -116,7 +116,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::CONTENT_TRANSLATION => [
+            self::WORDPRESS_CONTENT_TRANSLATION => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
                 ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -126,7 +126,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             ],
-            self::PUBLIC_API => [
+            self::WORDPRESS_PUBLIC_API => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 ExtensionModuleResolver::CACHE_CONTROL,
