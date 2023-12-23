@@ -34,7 +34,7 @@ All this power comes without endangering your site: An internal GraphQL server i
 - [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 
-## Tutorial lessons powered by the “Tailored WordPress Automator” Bundle
+<!-- ## Tutorial lessons powered by the “Tailored WordPress Automator” Bundle
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
@@ -69,4 +69,4 @@ All this power comes without endangering your site: An internal GraphQL server i
 - [Updating large sets of data](../../../../../docs/tutorial/updating-large-sets-of-data/en.md)
 - [Importing a post from another WordPress site](../../../../../docs/tutorial/importing-a-post-from-another-wordpress-site/en.md)
 - [Distributing content from an upstream to multiple downstream sites](../../../../../docs/tutorial/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)
-- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/tutorial/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)
+- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/tutorial/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md) -->

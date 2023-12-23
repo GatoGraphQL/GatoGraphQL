@@ -17,7 +17,7 @@ The bundle provides extensions to access, iterate and manipulate the field value
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 
-## Tutorial lessons powered by the “Simplest WordPress Content Translation” Bundle
+<!-- ## Tutorial lessons powered by the “Simplest WordPress Content Translation” Bundle
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Exposing public and private endpoints](../../../../../docs/tutorial/exposing-public-and-private-endpoints/en.md)
@@ -35,4 +35,4 @@ The bundle provides extensions to access, iterate and manipulate the field value
 - [Modifying (and storing again) the image URLs from all Image blocks in a post](../../../../../docs/tutorial/modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post/en.md)
 - [Translating block content in a post to a different language](../../../../../docs/tutorial/translating-block-content-in-a-post-to-a-different-language/en.md)
 - [Bulk translating block content in multiple posts to a different language](../../../../../docs/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
-- [Combining user data from different sources](../../../../../docs/tutorial/combining-user-data-from-different-sources/en.md)
+- [Combining user data from different sources](../../../../../docs/tutorial/combining-user-data-from-different-sources/en.md) -->

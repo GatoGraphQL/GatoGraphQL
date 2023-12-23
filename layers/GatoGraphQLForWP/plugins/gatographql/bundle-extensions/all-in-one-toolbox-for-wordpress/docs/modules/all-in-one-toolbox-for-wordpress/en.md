@@ -33,7 +33,7 @@ As new extensions are created and released, they will also be added to this bund
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 - [Schema Editing Access](../../../../../extensions/schema-editing-access/docs/modules/schema-editing-access/en.md)
 
-## Tutorial lessons powered by the “All in One Toolbox for WordPress” Bundle
+<!-- ## Tutorial lessons powered by the “All in One Toolbox for WordPress” Bundle
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
@@ -71,4 +71,4 @@ As new extensions are created and released, they will also be added to this bund
 - [Updating large sets of data](../../../../../docs/tutorial/updating-large-sets-of-data/en.md)
 - [Importing a post from another WordPress site](../../../../../docs/tutorial/importing-a-post-from-another-wordpress-site/en.md)
 - [Distributing content from an upstream to multiple downstream sites](../../../../../docs/tutorial/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)
-- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/tutorial/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md)
+- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/tutorial/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md) -->
