@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
@@ -128,14 +131,26 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
 
         $extensionHTMLItems = $this->getExtensionHTMLItems($entryExtensionModules);
 
-        $entryBundleExtensionModules = $entry[3] ?? [];
-        $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
-        $messageBundleExtensionPlaceholder = sprintf(
-            '<hr/><em>%s</em>',
-            count($entryExtensionModules) === 1
-                ? \__('(It is included in %s)', 'gatographql')
-                : \__('(They are all included in %s)', 'gatographql')
-        );
+        $messageBundleExtensionContent = '';
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->showBundlesContainingReferencedExtensionsOnTutorial()) {
+            $entryBundleExtensionModules = $entry[3] ?? [];
+            $bundleExtensionHTMLItems = $this->getExtensionHTMLItems($entryBundleExtensionModules);
+            $messageBundleExtensionPlaceholder = sprintf(
+                '<hr/><em>%s</em>',
+                count($entryExtensionModules) === 1
+                    ? \__('(It is included in %s)', 'gatographql')
+                    : \__('(They are all included in %s)', 'gatographql')
+            );
+            $messageBundleExtensionContent = sprintf(
+                $messageBundleExtensionPlaceholder,
+                implode(
+                    \__(', ', 'gatographql'),
+                    $bundleExtensionHTMLItems
+                )
+            );
+        }
 
         $messageHTML = sprintf(
             \__('<strong>🔗 %s</strong>: %s', 'gatographql'),
@@ -150,13 +165,7 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
                             $extensionHTMLItems
                         )
                     ),
-                    sprintf(
-                        $messageBundleExtensionPlaceholder,
-                        implode(
-                            \__(', ', 'gatographql'),
-                            $bundleExtensionHTMLItems
-                        )
-                    )
+                    $messageBundleExtensionContent
                 )
             )
         );
