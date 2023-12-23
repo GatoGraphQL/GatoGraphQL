@@ -36,7 +36,7 @@ As an example, defining Cache Control can then be done directly in the persisted
 
 ## Bundles including extension
 
-- [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-in-one-toolbox-for-wordpress/docs/modules/all-in-one-toolbox-for-wordpress/en.md)
 - [“Responsible WordPress Public API” Bundle](../../../../../bundle-extensions/responsible-wordpress-public-api/docs/modules/responsible-wordpress-public-api/en.md)
 
 <!-- ## Tutorial lessons referencing extension -->
