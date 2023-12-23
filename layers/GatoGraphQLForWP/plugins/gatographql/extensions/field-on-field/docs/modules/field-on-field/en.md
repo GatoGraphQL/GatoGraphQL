@@ -145,7 +145,7 @@ Together with the **Data Iteration Meta Directives** extension, convert the firs
 
 - [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
 - [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)
-- [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/wordpress-content-translation/docs/modules/wordpress-content-translation/en.md)
+- [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/simplest-wordpress-content-translation/docs/modules/simplest-wordpress-content-translation/en.md)
 
 ## Tutorial lessons referencing extension
 
