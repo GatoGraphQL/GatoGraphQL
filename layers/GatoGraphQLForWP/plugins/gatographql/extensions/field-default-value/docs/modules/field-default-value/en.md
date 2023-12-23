@@ -64,6 +64,6 @@ By using `@default`, we can then retrieve some default image:
 - [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)
 - [“Responsible WordPress Public API” Bundle](../../../../../bundle-extensions/responsible-wordpress-public-api/docs/modules/responsible-wordpress-public-api/en.md)
 
-## Tutorial lessons referencing extension
+<!-- ## Tutorial lessons referencing extension
 
-- [Transforming data from an external API](../../../../../docs/tutorial/transforming-data-from-an-external-api/en.md)
+- [Transforming data from an external API](../../../../../docs/tutorial/transforming-data-from-an-external-api/en.md) -->
