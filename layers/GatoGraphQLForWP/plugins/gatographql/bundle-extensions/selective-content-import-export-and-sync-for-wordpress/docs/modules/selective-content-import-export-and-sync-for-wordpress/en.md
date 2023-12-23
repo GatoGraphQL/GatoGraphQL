@@ -10,7 +10,7 @@
 - [Field Response Removal](../../../../../extensions/field-response-removal/docs/modules/field-response-removal/en.md)
 - [Field To Input](../../../../../extensions/field-to-input/docs/modules/field-to-input/en.md)
 - [Field Value Iteration and Manipulation](../../../../../extensions/field-value-iteration-and-manipulation/docs/modules/field-value-iteration-and-manipulation/en.md)
-- [Helper Functions Schema](../../../../../extensions/helper-function-collection/docs/modules/helper-function-collection/en.md)
+- [Helper Function Collection](../../../../../extensions/helper-function-collection/docs/modules/helper-function-collection/en.md)
 - [HTTP Client](../../../../../extensions/http-client/docs/modules/http-client/en.md)
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [PHP Constants and Environment via Schema](../../../../../extensions/php-constants-and-environment-variables-via-schema/docs/modules/php-constants-and-environment-variables-via-schema/en.md)
