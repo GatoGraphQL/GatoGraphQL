@@ -9,17 +9,17 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
-    public const ALL_EXTENSIONS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
+    public const ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\all-extensions';
     public const AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE = Plugin::NAMESPACE . '\\bundle-extensions\\automated-content-translation-and-sync-for-wordpress-multisite';
     public const PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\private-graphql-server-for-wordpress';
-    public const WORDPRESS_AS_API_GATEWAY = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-as-api-gateway';
-    public const WORDPRESS_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-automator';
-    public const WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-import-export-and-sync';
-    public const WORDPRESS_CONTENT_TRANSFORMER = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-transformer';
-    public const WORDPRESS_CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-translation';
-    public const WORDPRESS_EMAIL_NOTIFICATIONS = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-email-notifications';
-    public const WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-public-api';
-    public const WORDPRESS_REMOTE_REQUEST_AND_PROCESS = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-remote-request-and-process';
+    public const BETTER_WORDPRESS_WEBHOOKS = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-as-api-gateway';
+    public const TAILORED_WORDPRESS_AUTOMATOR = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-automator';
+    public const SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-import-export-and-sync';
+    public const EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-transformer';
+    public const SIMPLEST_WORDPRESS_CONTENT_TRANSLATION = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-content-translation';
+    public const UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-email-notifications';
+    public const RESPONSIBLE_WORDPRESS_PUBLIC_API = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-public-api';
+    public const VERSATILE_WORDPRESS_REQUEST_API = Plugin::NAMESPACE . '\\bundle-extensions\\wordpress-remote-request-and-process';
 
     /**
      * @return string[]
@@ -27,17 +27,17 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getModulesToResolve(): array
     {
         return [
-            self::ALL_EXTENSIONS,
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE,
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
-            self::WORDPRESS_AS_API_GATEWAY,
-            self::WORDPRESS_AUTOMATOR,
-            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC,
-            self::WORDPRESS_CONTENT_TRANSFORMER,
-            self::WORDPRESS_CONTENT_TRANSLATION,
-            self::WORDPRESS_EMAIL_NOTIFICATIONS,
-            self::WORDPRESS_PUBLIC_API,
-            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS,
+            self::BETTER_WORDPRESS_WEBHOOKS,
+            self::TAILORED_WORDPRESS_AUTOMATOR,
+            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
+            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
+            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+            self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
+            self::VERSATILE_WORDPRESS_REQUEST_API,
         ];
     }
 
@@ -45,17 +45,17 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         $placeholder = \__('“%s” Bundle', 'gatographql');
         return match ($module) {
-            self::ALL_EXTENSIONS => sprintf($placeholder, \__('All in One Toolbox for WordPress', 'gatographql')),
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => sprintf($placeholder, \__('All in One Toolbox for WordPress', 'gatographql')),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => sprintf($placeholder, \__('Automated Content Translation & Sync for WordPress Multisite', 'gatographql')),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Private GraphQL Server for WordPress', 'gatographql')),
-            self::WORDPRESS_AS_API_GATEWAY => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
-            self::WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Tailored WordPress Automator', 'gatographql')),
-            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
-            self::WORDPRESS_CONTENT_TRANSFORMER => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
-            self::WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Simplest WordPress Content Translation', 'gatographql')),
-            self::WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Unhindered WordPress Email Notifications', 'gatographql')),
-            self::WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),
-            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
+            self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
+            self::TAILORED_WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Tailored WordPress Automator', 'gatographql')),
+            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
+            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
+            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Simplest WordPress Content Translation', 'gatographql')),
+            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Unhindered WordPress Email Notifications', 'gatographql')),
+            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),
+            self::VERSATILE_WORDPRESS_REQUEST_API => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
             default => $module,
         };
     }
@@ -63,17 +63,17 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::ALL_EXTENSIONS => \__('All of Gato GraphQL extensions, in a single plugin. As new extensions are created and released, they will also be added to this bundle.', 'gatographql'),
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => \__('All of Gato GraphQL extensions, in a single plugin. As new extensions are created and released, they will also be added to this bundle.', 'gatographql'),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => \__('@todo New bundle', 'gatographql'),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('@todo New bundle', 'gatographql'),
-            self::WORDPRESS_AS_API_GATEWAY => \__('@todo New bundle', 'gatographql'),
-            self::WORDPRESS_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gatographql'),
-            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => \__('@todo New bundle', 'gatographql'),
-            self::WORDPRESS_CONTENT_TRANSFORMER => \__('@todo New bundle', 'gatographql'),
-            self::WORDPRESS_CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gatographql'),
-            self::WORDPRESS_EMAIL_NOTIFICATIONS => \__('@todo New bundle', 'gatographql'),
-            self::WORDPRESS_PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gatographql'),
-            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => \__('@todo New bundle', 'gatographql'),
+            self::BETTER_WORDPRESS_WEBHOOKS => \__('@todo New bundle', 'gatographql'),
+            self::TAILORED_WORDPRESS_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gatographql'),
+            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => \__('@todo New bundle', 'gatographql'),
+            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('@todo New bundle', 'gatographql'),
+            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gatographql'),
+            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => \__('@todo New bundle', 'gatographql'),
+            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gatographql'),
+            self::VERSATILE_WORDPRESS_REQUEST_API => \__('@todo New bundle', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -86,7 +86,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getLogoURL(string $module): string
     {
         return match ($module) {
-            self::ALL_EXTENSIONS => PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png',
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => PluginApp::getMainPlugin()->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-face.png',
             default => parent::getLogoURL($module),
         };
     }
@@ -97,7 +97,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getBundledExtensionModules(string $module): array
     {
         return match ($module) {
-            self::ALL_EXTENSIONS => [
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 ExtensionModuleResolver::AUTOMATION,
@@ -158,7 +158,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::WORDPRESS_AS_API_GATEWAY => [
+            self::BETTER_WORDPRESS_WEBHOOKS => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
@@ -176,7 +176,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::WORDPRESS_AUTOMATOR => [
+            self::TAILORED_WORDPRESS_AUTOMATOR => [
                 ExtensionModuleResolver::AUTOMATION,
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::EMAIL_SENDER,
@@ -195,7 +195,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => [
+            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -211,7 +211,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
             ],
-            self::WORDPRESS_CONTENT_TRANSFORMER => [
+            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -221,7 +221,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             ],
-            self::WORDPRESS_CONTENT_TRANSLATION => [
+            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
                 ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -231,7 +231,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             ],
-            self::WORDPRESS_EMAIL_NOTIFICATIONS => [
+            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => [
                 ExtensionModuleResolver::EMAIL_SENDER,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
                 ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -241,7 +241,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
             ],
-            self::WORDPRESS_PUBLIC_API => [
+            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => [
                 ExtensionModuleResolver::ACCESS_CONTROL,
                 ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
                 ExtensionModuleResolver::CACHE_CONTROL,
@@ -256,7 +256,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::RESPONSE_ERROR_TRIGGER,
                 ExtensionModuleResolver::SCHEMA_EDITING_ACCESS,
             ],
-            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => [
+            self::VERSATILE_WORDPRESS_REQUEST_API => [
                 ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                 ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                 ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -283,37 +283,37 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         return match ($module) {
             // "All in One Toolbox for WordPress" bundles all other bundles
-            self::ALL_EXTENSIONS => array_diff(
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => array_diff(
                 $this->getModulesToResolve(),
                 [$module]
             ),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => [
-                self::WORDPRESS_CONTENT_TRANSLATION,
+                self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
             ],
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => [
-                self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC,
-                self::WORDPRESS_CONTENT_TRANSFORMER,
-                self::WORDPRESS_EMAIL_NOTIFICATIONS,
-                self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS,
+                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
+                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
-            self::WORDPRESS_AS_API_GATEWAY => [
-                self::WORDPRESS_CONTENT_TRANSFORMER,
-                self::WORDPRESS_EMAIL_NOTIFICATIONS,
-                self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS,
+            self::BETTER_WORDPRESS_WEBHOOKS => [
+                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
-            self::WORDPRESS_AUTOMATOR => [
+            self::TAILORED_WORDPRESS_AUTOMATOR => [
                 self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
-                self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC,
-                self::WORDPRESS_CONTENT_TRANSFORMER,
-                self::WORDPRESS_EMAIL_NOTIFICATIONS,
-                self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS,
+                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
+                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::VERSATILE_WORDPRESS_REQUEST_API,
             ],
-            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => [
-                self::WORDPRESS_CONTENT_TRANSFORMER,
+            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => [
+                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
             ],
-            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => [
-                self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC,
-                self::WORDPRESS_CONTENT_TRANSFORMER,
+            self::VERSATILE_WORDPRESS_REQUEST_API => [
+                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
+                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
             ],
             default => [],
         };
