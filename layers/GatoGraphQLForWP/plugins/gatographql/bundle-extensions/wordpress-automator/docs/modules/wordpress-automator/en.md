@@ -1,4 +1,4 @@
-# “WordPress Automator” Bundle
+# “Tailored WordPress Automator” Bundle
 
 This bundles gives you a toolbox for interacting with your data, and create workflows to automate tasks:
 
@@ -34,7 +34,7 @@ All this power comes without endangering your site: An internal GraphQL server i
 - [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 
-## Tutorial lessons powered by the “WordPress Automator” Bundle
+## Tutorial lessons powered by the “Tailored WordPress Automator” Bundle
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)

@@ -60,9 +60,9 @@ By using `@default`, we can then retrieve some default image:
 
 ## Bundles including extension
 
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
-- [“WordPress Automator” Bundle](../../../../../bundle-extensions/wordpress-automator/docs/modules/wordpress-automator/en.md)
-- [“WordPress Public API” Bundle](../../../../../bundle-extensions/wordpress-public-api/docs/modules/wordpress-public-api/en.md)
+- [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
+- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/wordpress-automator/docs/modules/wordpress-automator/en.md)
+- [“Responsible WordPress Public API” Bundle](../../../../../bundle-extensions/wordpress-public-api/docs/modules/wordpress-public-api/en.md)
 
 ## Tutorial lessons referencing extension
 

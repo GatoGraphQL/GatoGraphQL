@@ -45,17 +45,17 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         $placeholder = \__('“%s” Bundle', 'gatographql');
         return match ($module) {
-            self::ALL_EXTENSIONS => sprintf($placeholder, \__('All Extensions', 'gatographql')),
+            self::ALL_EXTENSIONS => sprintf($placeholder, \__('All in One Toolbox for WordPress', 'gatographql')),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => sprintf($placeholder, \__('Automated Content Translation & Sync for WordPress Multisite', 'gatographql')),
             self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => sprintf($placeholder, \__('Private GraphQL Server for WordPress', 'gatographql')),
-            self::WORDPRESS_AS_API_GATEWAY => sprintf($placeholder, \__('WordPress as API Gateway', 'gatographql')),
-            self::WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('WordPress Automator', 'gatographql')),
-            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => sprintf($placeholder, \__('WordPress Content Import, Export & Sync', 'gatographql')),
-            self::WORDPRESS_CONTENT_TRANSFORMER => sprintf($placeholder, \__('WordPress Content Transformer', 'gatographql')),
-            self::WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('WordPress Content Translation', 'gatographql')),
-            self::WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('WordPress Email Notifications', 'gatographql')),
-            self::WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('WordPress Public API', 'gatographql')),
-            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => sprintf($placeholder, \__('WordPress Remote Request & Process', 'gatographql')),
+            self::WORDPRESS_AS_API_GATEWAY => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
+            self::WORDPRESS_AUTOMATOR => sprintf($placeholder, \__('Tailored WordPress Automator', 'gatographql')),
+            self::WORDPRESS_CONTENT_IMPORT_EXPORT_AND_SYNC => sprintf($placeholder, \__('Selective Content Import, Export & Sync for WordPress', 'gatographql')),
+            self::WORDPRESS_CONTENT_TRANSFORMER => sprintf($placeholder, \__('Easy WordPress Bulk Transform & Update', 'gatographql')),
+            self::WORDPRESS_CONTENT_TRANSLATION => sprintf($placeholder, \__('Simplest WordPress Content Translation', 'gatographql')),
+            self::WORDPRESS_EMAIL_NOTIFICATIONS => sprintf($placeholder, \__('Unhindered WordPress Email Notifications', 'gatographql')),
+            self::WORDPRESS_PUBLIC_API => sprintf($placeholder, \__('Responsible WordPress Public API', 'gatographql')),
+            self::WORDPRESS_REMOTE_REQUEST_AND_PROCESS => sprintf($placeholder, \__('Versatile WordPress Request API', 'gatographql')),
             default => $module,
         };
     }
@@ -282,7 +282,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getBundledBundleExtensionModules(string $module): array
     {
         return match ($module) {
-            // "All Extensions" bundles all other bundles
+            // "All in One Toolbox for WordPress" bundles all other bundles
             self::ALL_EXTENSIONS => array_diff(
                 $this->getModulesToResolve(),
                 [$module]
