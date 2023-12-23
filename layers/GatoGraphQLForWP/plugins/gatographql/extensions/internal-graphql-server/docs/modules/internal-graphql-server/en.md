@@ -190,7 +190,7 @@ mutation SendEmail @depends(on: "GetEmailData") {
 ## Bundles including extension
 
 - [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
-- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/wordpress-automator/docs/modules/wordpress-automator/en.md)
+- [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)
 
 ## Tutorial lessons referencing extension
 
