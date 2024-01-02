@@ -4,11 +4,11 @@ Use GraphQL as a tool to internally power your application, whether for your cus
 
 This bundle provides an internal GraphQL server, that makes it possible to fetch data within PHP code, without accessing any endpoint (whether public or private). This allows you to simplify your functionality, making use of GraphQL to fetch and mutate data.
 
-Check the documentation for the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension, to learn more.
+Read the documentation for the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension, to learn more.
 
 In addition, fetching data to render dynamic blocks can become DRY: The same GraphQL query can be executed for both the WordPress editor (via JS code) and the back-end when accessing the single post (via PHP code).
 
-Check tutorial lesson [DRY code for blocks in Javascript and PHP](https://gatographql.com/tutorial/dry-code-for-blocks-in-javascript-and-php/), to learn more.
+Read tutorial lesson [DRY code for blocks in Javascript and PHP](https://gatographql.com/tutorial/dry-code-for-blocks-in-javascript-and-php/), to learn more.
 
 ## List of bundled extensions
 

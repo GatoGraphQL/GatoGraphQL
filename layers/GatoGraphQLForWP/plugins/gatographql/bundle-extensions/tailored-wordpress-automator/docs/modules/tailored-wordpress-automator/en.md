@@ -21,7 +21,7 @@ Some automation tasks you can execute are:
 - Send a welcome email to new users
 - Many more...
 
-Check the documentation for the [Automation](https://gatographql.com/extensions/automation/) extension to learn more.
+Read the documentation for the [Automation](https://gatographql.com/extensions/automation/) extension to learn more.
 
 ## List of bundled extensions
 
