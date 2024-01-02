@@ -1,6 +1,10 @@
 # “Automated Content Translation & Sync for WordPress Multisite” Bundle
 
-@todo New bundle
+This bundle automates the process of translating all content from a master site, into a WordPress multisite where each language corresponds to a language.
+
+Whenever a new post is published on the master site, it is automatically translated (into any of 130 languages using the <a href="https://cloud.google.com/translate/" target="_blank">Google Translate API</a>) directly within the corresponding language site in the WordPress multisite.
+
+The translation is then edited within the language site, directly within the WordPress editor. Both the Classic Editor and Gutenberg are supported.
 
 ## List of bundled extensions
 
