@@ -8,6 +8,8 @@ This bundle provides functionality to import content using different formats:
 
 This allows you to import posts from another WordPress site via GraphQL or the REST API, from any non-WordPress site that has an API, from a WordPress RSS feed, or from Excel or Google Sheets (or other) by first exporting their data as CSV.
 
+Read tutorial lesson [Importing a post from another WordPress site](https://gatographql.com/tutorial/retrieving-data-from-an-external-api/) to see an example.
+
 You can also export data into another WordPress site, for instance to synchronize content from a master site to multiple downstream sites in a WordPress multisite.
 
 Importing/exporting data is granular and selective: Instead of generating a single database dump containing all data, you get to choose what entries are to be imported or exported, and how they are mapped between the source and destination.
