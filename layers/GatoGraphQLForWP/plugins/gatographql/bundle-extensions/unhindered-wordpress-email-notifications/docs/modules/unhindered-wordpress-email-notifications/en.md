@@ -1,6 +1,14 @@
 # “Unhindered WordPress Emails Notifications” Bundle
 
-@todo New bundle
+Send personalized emails to your users, containing data corresponding to each. Send email notifications to the site's admin. Or send emails to any address.
+
+Send emails in bulk, with a single GraphQL query. Do not be constrained in what data can be added  to the email: If it can be retrieved via GraphQL (eg: user data, post data, metadata, or other), it can be added to the email.
+
+Emails can be composed using Markdown, and be based on templates containing variables, which are dynamically replaced with data.
+
+The email functionality uses WordPress function `wp_mail`, hence any email configuration (such as the SMTP provider) is applied.
+
+Check the documentation for the [Email Sender](https://gatographql.com/extensions/email-sender/) extension to learn more.
 
 ## List of bundled extensions
 
