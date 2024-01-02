@@ -2,12 +2,14 @@
 
 Automate tasks in your site:
 
-- When uploading an image to the Media Manager, if it has no description, call the OpenAI API and generate a caption for that image
+- When uploading an image, if it has no description, call the OpenAI API and generate a caption for that image
 - If a published post has no thumbnail, automatically create an image with generative AI using the post's title as the prompt, and set it as a post's featured image
 - Check if a newly-published post contains some mandatory block and, if not, add it
-- Post new images to Instagram
+- Post newly-uploaded images to Instagram
 - Send a daily summary of activity in the site to your email
-- Send a notification whenever a new comment is added
+- Send a "happy birthday" email to your users
+- Send yourself a reminder to contact a customer, two weeks after a product was sold
+- Send a notification to users when their comment was replied to
 - Send a welcome email to new users
 - Many more...
 
