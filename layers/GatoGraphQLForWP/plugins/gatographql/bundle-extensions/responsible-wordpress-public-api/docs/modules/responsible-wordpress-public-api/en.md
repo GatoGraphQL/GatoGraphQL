@@ -4,6 +4,7 @@ If you need to expose data via a public API in your WordPress site, while being 
 
 You will be able to:
 
+- Render your WordPress site in headless mode, using the JS framework of your choice
 - Give access to your clients to their own data
 - Power applications (mobile app, newsletter, etc) fetching data from your WordPress site
 - Create a single source of truth for all your content, editing content in a master site only, from which it is distributed to multiple downstream sites
