@@ -11,6 +11,8 @@ Use GraphQL for data-centric operations, executed in bulk on hundreds of posts o
 - Update metadata
 - Much more
 
+Read tutorial lesson [Search, replace, and store again](https://gatographql.com/tutorial/search-replace-and-store-again/) for some examples of transformations.
+
 GraphQL provides the power of WP-CLI, but making it available already within the wp-admin, without having to produce and deploy PHP code. It helps you save plenty of time too: While crafting a bespoke PHP script could take hours (including development, testing to make sure the PHP script doesn't produce errors on production, and deployment), crafting a GraphQL query will barely take minutes.
 
 And that's for a single transformation; multiply this saving for each needed transformation that may be needed throughout the year, and the overall savings in time can be truly extraordinary.
