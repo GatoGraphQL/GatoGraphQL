@@ -1,6 +1,19 @@
 # “Easy WordPress Bulk Transform & Update” Bundle
 
-@todo New bundle
+Use GraphQL for data-centric operations, executed in bulk on hundreds of posts on your site with a single operation:
+
+- Replace a string with another string
+- Insert a block in all posts
+- Replace a thumbnail with another one
+- Convert image URLs to source them through a CDN
+- Add missing links
+- Upload external resources to your WordPress Media Library and reference them locally
+- Update metadata
+- Much more
+
+GraphQL provides the power of WP-CLI, while helping you save plenty of time: While crafting a bespoke PHP script to execute the needed transformation could take hours (including development, testing to make sure the PHP script doesn't produce errors on production, and deployment), crafting a GraphQL query, already within the wp-admin, will barely take minutes.
+
+And that's for a single transformation; multiply this saving for each needed transformation that may be needed throughout the year, and the overall savings in time can be truly extraordinary.
 
 ## List of bundled extensions
 
