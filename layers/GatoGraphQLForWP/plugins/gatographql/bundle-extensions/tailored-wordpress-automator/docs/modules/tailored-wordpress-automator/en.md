@@ -21,7 +21,7 @@ Some automation tasks you can execute are:
 - Send a welcome email to new users
 - Many more...
 
-Read the documentation for the [Automation](https://gatographql.com/extensions/automation/) extension to learn more.
+Read tutorial lesson [Sending a daily summary of activity](https://gatographql.com/tutorial/sending-a-daily-summary-of-activity/) for an example of using WP-Cron to automate sending a daily activity email to the admin.
 
 ## List of bundled extensions
 
