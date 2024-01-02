@@ -1,6 +1,6 @@
 # “Simplest WordPress Content Translation” Bundle
 
-Translate your content into over 135 languages using the [Google Translate API](https://cloud.google.com/translate/).
+Translate your content into over 130 languages using the [Google Translate API](https://cloud.google.com/translate/).
 
 The bundle provides extensions to access, iterate and manipulate the field value. With these, in addition to translating the whole blog post, you can also translate attributes deep within the (Gutenberg) block's structure, and then keep editing the content in the block editor!
 

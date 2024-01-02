@@ -1,6 +1,6 @@
 # Google Translate
 
-Directive `@strTranslate` to translate a field value to over 135 languages using the Google Translate API.
+Directive `@strTranslate` to translate a field value to over 130 languages using the Google Translate API.
 
 ## Description
 
