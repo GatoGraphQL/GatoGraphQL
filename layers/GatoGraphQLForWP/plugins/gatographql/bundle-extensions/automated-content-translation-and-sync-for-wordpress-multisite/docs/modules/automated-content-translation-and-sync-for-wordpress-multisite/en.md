@@ -2,9 +2,23 @@
 
 This bundle automates the process of translating all content from a master site, into a WordPress multisite where each language corresponds to a language.
 
-Whenever a new post is published on the master site, it is automatically translated (into any of 130 languages using the <a href="https://cloud.google.com/translate/" target="_blank">Google Translate API</a>) directly within the corresponding language site in the WordPress multisite.
+Whenever a new post is published on the master site, it is automatically translated using the <a href="https://cloud.google.com/translate/" target="_blank">Google Translate API</a> (into over 130 languages), directly within the corresponding language site in the WordPress multisite.
 
-The translation is then edited within the language site, directly within the WordPress editor. Both the Classic Editor and Gutenberg are supported.
+Both the Classic Editor and Gutenberg are supported: You can translate the whole HTML content in the post, and also translate each one of the attributes in all blocks in the post, even deep within each block's structure.
+
+The translation workflow is executed like this:
+
+- Set-up the automation process, to be triggered when a new post is published
+- The triggered query will call the Google Translate API to translate the content
+- A new post on the corresponding language site will be created, containing the translation
+
+After this, the translation can be fixed directly within the corresponding language site, in the WordPress editor.
+
+Notice that you don't need to copy/paste strings, saving you plenty of time!
+
+A single call to the Google Translate API can already send all the content to translate. As a consequence, the context provided to Google Translate will be large, producing a higher quality translation.
+
+There are no extra tables added to the DB, and no extra language columns or meta fields that would require inner joins. As such, the speed to query the database will not be affected.
 
 ## List of bundled extensions
 

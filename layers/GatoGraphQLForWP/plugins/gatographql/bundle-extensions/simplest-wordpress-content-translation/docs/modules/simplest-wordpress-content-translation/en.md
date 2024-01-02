@@ -2,7 +2,20 @@
 
 Translate your content into over 130 languages using the [Google Translate API](https://cloud.google.com/translate/).
 
-The bundle provides extensions to access, iterate and manipulate the field value. With these, in addition to translating the whole blog post, you can also translate attributes deep within the (Gutenberg) block's structure, and then keep editing the content in the block editor!
+Both the Classic Editor and Gutenberg are supported: You can translate the whole HTML content in the post, and also translate each one of the attributes in all blocks in the post, even deep within each block's structure.
+
+The translation functionality is as simple as it can get:
+
+- Call the Google Translate API to translate the content
+- Edit the post once again in the WordPress editor, and fix the translation
+
+Notice that you don't need to copy/paste strings, saving you plenty of time!
+
+A single call to the Google Translate API can already send all the content to translate, not only for a single post, but even for dozens of posts at a time! As a consequence, the context provided to Google Translate will be large, producing a higher quality translation.
+
+There are no extra tables added to the DB, and no extra language columns or meta fields that would require inner joins. As such, the speed to query the database will not be affected.
+
+Check this video on translating all blocks in a post:
 
 [Watch “Translating a blog post with blocks (Gutenberg integration demo)” in Vimeo](https://vimeo.com/836876255)
 
