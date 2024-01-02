@@ -63,17 +63,17 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => \__('All of Gato GraphQL extensions, in a single plugin. As new extensions are created and released, they will also be added to this bundle.', 'gatographql'),
-            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => \__('@todo New bundle', 'gatographql'),
-            self::BETTER_WORDPRESS_WEBHOOKS => \__('@todo New bundle', 'gatographql'),
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('@todo New bundle', 'gatographql'),
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('@todo New bundle', 'gatographql'),
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Expose your public APIs in a secure manner, make them faster through caching, leverage tools to access data, and evolve the schema.', 'gatographql'),
-            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => \__('@todo New bundle', 'gatographql'),
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => \__('Translate content via the Google Translate API, even within the deep structure of (Gutenberg) blocks.', 'gatographql'),
-            self::TAILORED_WORDPRESS_AUTOMATOR => \__('Keep content in sync, help migrate websites, send notifications, interact with 3rd-party services and APIs, create automation workflows, and more.', 'gatographql'),
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => \__('@todo New bundle', 'gatographql'),
-            self::VERSATILE_WORDPRESS_REQUEST_API => \__('@todo New bundle', 'gatographql'),
+            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => \__('Achieve all superpowers: All of Gato GraphQL extensions, in a single plugin.', 'gatographql'),
+            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => \__('Automatically create a translation of a newly-published post using the Google Translate API, for every translated site on a WordPress multisite', 'gatographql'),
+            self::BETTER_WORDPRESS_WEBHOOKS => \__('Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin', 'gatographql'),
+            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE => \__('Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB', 'gatographql'),
+            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS => \__('Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint', 'gatographql'),
+            self::RESPONSIBLE_WORDPRESS_PUBLIC_API => \__('Enhance your public APIs with additional layers of security, speed, power, schema evolution and control.', 'gatographql'),
+            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS => \__('Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site', 'gatographql'),
+            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION => \__('Translate your content into over 100 languages using the Google Translate API, without adding extra tables or inner joins to the DB.', 'gatographql'),
+            self::TAILORED_WORDPRESS_AUTOMATOR => \__('Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more).', 'gatographql'),
+            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS => \__('Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email', 'gatographql'),
+            self::VERSATILE_WORDPRESS_REQUEST_API => \__('Interact with any external API and cloud service, posting and fetching data to/from them', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
