@@ -1,18 +1,25 @@
 # “Tailored WordPress Automator” Bundle
 
-This bundles gives you a toolbox for interacting with your data, and create workflows to automate tasks:
+Automate tasks in your site:
 
-- Keep content in sync, whether within the same site, or across multiple WordPress sites
-- Help migrate websites from one domain to another
-- Validate that a newly-published blog post contains mandatory blocks
+- When uploading an image to the Media Manager, if it has no description, call the OpenAI API and generate a caption for that image
+- If a published post has no thumbnail, automatically create an image with generative AI using the post's title as the prompt, and set it as a post's featured image
+- Check if a newly-published post contains some mandatory block and, if not, add it
+- Post new images to Instagram
+- Send a daily summary of activity in the site to your email
 - Send a notification whenever a new comment is added
 - Send a welcome email to new users
-- Do a bulk replace of one (Gutenberg) block with another
-- Interact with cloud services
-- Convert data from 3rd-party APIs into the required format
 - Many more...
 
-All this power comes without endangering your site: An internal GraphQL server is provided, so you don't need to expose an endpoint over the Internet just to execute your own admin tasks.
+The automation action is done by executing a GraphQL persisted query, triggered by:
+
+- Scheduling a WP-Cron event
+- Reacting to a WordPress hook
+- Chaining after the completion of a previous GraphQL persisted query
+
+Check the documentation for the [Automation](https://gatographql.com/extensions/automation/) extension to learn more.
+
+As these GraphQL persisted queries can be set as `private`, these tasks will only be executed internally (i.e. they are not exposed to the Internet).
 
 ## List of bundled extensions
 
