@@ -1,6 +1,12 @@
 # “Versatile WordPress Request API” Bundle
 
-@todo New bundle
+This bundle provides an HTTP client to connect your WordPress site with the wider web, fetching data from any external API, posting data to popular platforms, or interacting with any service.
+
+Check the documentation for the [HTTP Client](https://gatographql.com/extensions/http-client/) extension to learn more.
+
+You can provide authentication methods that leave no traces behind, in any log, keeping your credentials secure.
+
+Check tutorial lesson [Not leaking credentials when connecting to services](https://gatographql.com/tutorial/not-leaking-credentials-when-connecting-to-services/) to learn how to accomplish this.
 
 ## List of bundled extensions
 
