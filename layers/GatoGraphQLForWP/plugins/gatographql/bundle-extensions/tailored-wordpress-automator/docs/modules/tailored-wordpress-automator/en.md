@@ -1,6 +1,14 @@
 # “Tailored WordPress Automator” Bundle
 
-Automate tasks in your site:
+Automate tasks in your site. The automation action is done by executing a GraphQL persisted query, triggered by:
+
+- Scheduling a WP-Cron event
+- Reacting to a WordPress hook
+- Chaining after the completion of a previous GraphQL persisted query
+
+As these GraphQL persisted queries can be set as `private`, these tasks will only be executed internally (i.e. they are not exposed to the Internet).
+
+Some automation tasks you can execute are:
 
 - When uploading an image, if it has no description, call the OpenAI API and generate a caption for that image
 - If a published post has no thumbnail, automatically create an image with generative AI using the post's title as the prompt, and set it as a post's featured image
@@ -13,15 +21,7 @@ Automate tasks in your site:
 - Send a welcome email to new users
 - Many more...
 
-The automation action is done by executing a GraphQL persisted query, triggered by:
-
-- Scheduling a WP-Cron event
-- Reacting to a WordPress hook
-- Chaining after the completion of a previous GraphQL persisted query
-
 Check the documentation for the [Automation](https://gatographql.com/extensions/automation/) extension to learn more.
-
-As these GraphQL persisted queries can be set as `private`, these tasks will only be executed internally (i.e. they are not exposed to the Internet).
 
 ## List of bundled extensions
 
