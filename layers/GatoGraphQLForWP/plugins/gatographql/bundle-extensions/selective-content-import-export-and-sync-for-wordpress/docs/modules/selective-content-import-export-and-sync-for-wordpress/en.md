@@ -14,6 +14,8 @@ Importing/exporting data is granular and selective: Instead of generating a sing
 
 You can also dynamically create posts based on customized data structures: Provide a CSV file with any desired columns (eg: `"Image URL 1"`, `"Image URL 2"`, and so on), provide an HTML template containing variables for each of the columns on the CSV (eg: `${imageURL1}`, `${imageURL2}` and so on), and the post will then be created with the custom format.
 
+Both the Classic Editor and Gutenberg are supported.
+
 ## List of bundled extensions
 
 - [Conditional Field Manipulation](../../../../../extensions/conditional-field-manipulation/docs/modules/conditional-field-manipulation/en.md)
