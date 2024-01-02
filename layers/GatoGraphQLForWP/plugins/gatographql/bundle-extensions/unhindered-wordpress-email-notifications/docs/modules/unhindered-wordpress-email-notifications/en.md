@@ -8,7 +8,7 @@ Emails can be composed using Markdown, and be based on templates containing vari
 
 The email functionality uses WordPress function `wp_mail`, hence any email configuration (such as the SMTP provider) is applied.
 
-Read the documentation for the [Email Sender](https://gatographql.com/extensions/email-sender/) extension to learn more.
+Read tutorial lesson [Sending emails with pleasure](https://gatographql.com/tutorial/sending-emails-with-pleasure/) to learn more.
 
 ## List of bundled extensions
 
