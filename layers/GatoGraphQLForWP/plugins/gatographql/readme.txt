@@ -122,47 +122,15 @@ For instance, you can execute a query that replaces "https://my-old-domain.com" 
 
 Check tutorial lesson [Site migrations](https://gatographql.com/tutorial/site-migrations/) to learn how to do this.
 
-= How to translate the content in my site using Gato GraphQL? =
-
-The [“WordPress Content Translation” Bundle](https://gatographql.com/bundles/wordpress-content-translation) gives you all the tools needed to create a GraphQL query that extracts text properties from Gutenberg blocks, translates them to another language using the Google Translate API, and then stores the post's content back to the database.
-
-Check tutorial lesson [Translating block content in a post to a different language](https://gatographql.com/tutorial/translating-block-content-in-a-post-to-a-different-language/) for a thorough explanation on how to do this, and [Bulk translating block content in multiple posts to a different language](https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/) on how to do it in bulk.
-
-= How do I execute multiple GraphQL queries in a single request? =
-
-The [Multiple Query Execution](https://gatographql.com/extensions/multiple-query-execution/) extension allows you to combine multiple GraphQL queries into a single one and execute them all in a single request.
-
-Multiple Query Execution is particularly useful when a first query "mutates" data (eg: it creates a new post), and then a second query needs to fetch data from that mutated entity. As both queries will be executed in a single request, the latency will be lower, and your users will wait less time when interacting with your site. Check tutorial lesson [Duplicating a blog post](https://gatographql.com/tutorial/duplicating-a-blog-post/) for an example.
-
-Multiple Query Execution can also help you connect to an external API, retrieve data from it, and do something with that data, all within a single request. Check out tutorial lesson [Creating an API gateway](https://gatographql.com/tutorial/creating-an-api-gateway/) for an example.
-
 = Can Persisted Queries be used as webhooks? =
 
 Yes they can, because Persisted Queries are exposed under their own URL, they can extract the payload data, and then do something with that data (update a post, add a comment, send a notification, etc).
 
 Check tutorial lesson [Interacting with external services via webhooks](https://gatographql.com/tutorial/interacting-with-external-services-via-webhooks/) to learn how to do this.
 
-= How do I use Gato GraphQL to interact with external services? =
+= Can I use Gato GraphQL to interact with external services? =
 
-The [HTTP Client](https://gatographql.com/extensions/http-client/) extension adds fields to the GraphQL schema to fetch data from any webserver (while providing special support to connect to REST and GraphQL APIs).
-
-Check tutorial lesson [Retrieving data from an external API](https://gatographql.com/tutorial/retrieving-data-from-an-external-api/) to learn about all the available "HTTP client" fields, and examples on how to use them.
-
-= How do I execute GraphQL queries internally within my application? =
-
-The [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension installs a private GraphQL server, to be invoked via PHP code.
-
-Check tutorial lesson [DRY code for blocks in Javascript and PHP](https://gatographql.com/tutorial/dry-code-for-blocks-in-javascript-and-php/) for an example on fetching data to render Gutenberg blocks on the server-side.
-
-= How can Gato GraphQL help automate tasks? =
-
-The [Automation](https://gatographql.com/extensions/automation/) extension triggers an action hook when a GraphQL query is resolved (whether it was executed via a public or private endpoint, or internally via the [Internal GraphQL Server](https://gatographql.com/extensions/internal-graphql-server/) extension) that you can hook into to execute some custom functionality (and even other GraphQL queries).
-
-This way, you can react to events and do something about them. For instance, whenever a new post is added on the site, you can send a notification by email. Check tutorial lesson [Sending a notification when there is a new post](https://gatographql.com/tutorial/sending-a-notification-when-there-is-a-new-post/) to learn how to do this.
-
-The Automation extension also provides integration with WP-Cron, allowing you to schedule the execution of GraphQL queries, every some period of time.
-
-For instance, you can retrieve data daily and send yourself a summary via email. Check tutorial lesson [Sending a daily summary of activity](https://gatographql.com/tutorial/sending-a-daily-summary-of-activity/) to learn how to do this.
+Yes, you can. Check tutorial lesson [Retrieving data from an external API](https://gatographql.com/tutorial/retrieving-data-from-an-external-api/) to see examples on how to do this.
 
 = How can Gato GraphQL synchronize content across sites? =
 
