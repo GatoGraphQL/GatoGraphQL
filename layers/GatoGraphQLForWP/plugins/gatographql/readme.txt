@@ -48,13 +48,13 @@ Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL q
 
 You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks (avoiding the need to maintain REST controllers).
 
-Browse the [Queries Library in gatographql.com](https://gatographql.com/library/) for ready-to-use queries for your WordPress site. (The more popular queries are already created as Persisted Queries when installing the plugin.) The library is constantly growing, with new queries added every week.
+Browse the [Queries Library in gatographql.com](https://gatographql.com/library/) for ready-to-use queries for your WordPress site. (The more popular queries are already created as Persisted Queries when installing the plugin.) The library is regularly growing, with new queries added week by week.
 
 === Augment Gato GraphQL via extensions ===
 
 Provide additional functionality and expand the GraphQL schema via [extensions](https://gatographql.com/extensions/). They can be purchased and installed independently, or via [bundles](https://gatographql.com/bundles/) that contain all needed extensions to satisfy some common use case.
 
-The **[“All in One Toolbox for WordPress” Bundle](https://gatographql.com/bundles/all-in-one-toolbox-for-wordpress/)** contains all of Gato GraphQL extensions, in a single plugin. Hence, it supports all promoted features and use cases.
+The **[“All in One Toolbox for WordPress” Bundle](https://gatographql.com/bundles/all-in-one-toolbox-for-wordpress/)** contains all of Gato GraphQL extensions, thus supporting all promoted features and use cases.
 
 The bundles for specific use cases are:
 
@@ -78,9 +78,7 @@ The bundles for specific use cases are:
 
 **[“Versatile WordPress Request API” Bundle](https://gatographql.com/bundles/versatile-wordpress-request-api/)**: Interact with any external API and cloud service, posting and fetching data to/from them.
 
-
-
-Do you need an integration with some WordPress plugin? [Let us know](https://github.com/GatoGraphQL/ExtensionsPlanningAndTracking/discussions).
+The Gato GraphQL team is constantly working on new extensions and bundles. If you need some missing functionality, or an integration with some WordPress plugin, [let us know](https://github.com/GatoGraphQL/ExtensionsPlanningAndTracking/discussions) and we'll work on it.
 
 == Source code ==
 
