@@ -88,6 +88,10 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Frequently Asked Questions ==
 
+= Can I extend the GraphQL schema with my custom types and fields? =
+
+Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter) to create an extension, and follow the documentation there.
+
 = How does Gato GraphQL complement WP-CLI? =
 
 With Gato GraphQL you can query data from the WordPress database, and then inject the results into a WP-CLI command (either to select a specific resource, or update an option with some value, or other).
