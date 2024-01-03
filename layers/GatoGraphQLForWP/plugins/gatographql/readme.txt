@@ -1,6 +1,6 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
-Tags: graphql, automation, content sync, import, export, headless, migration, rest api, endpoint, wp-cli, wget, translation
+Tags: graphql, automation, notifications, import, export, headless, webhook, rest api, search replace, wp-cli, wget, translation
 Requires at least: 5.4
 Tested up to: 6.4
 Stable tag: 1.3.1
