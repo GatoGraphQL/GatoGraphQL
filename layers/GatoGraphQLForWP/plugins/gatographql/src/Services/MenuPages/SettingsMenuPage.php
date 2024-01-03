@@ -466,8 +466,17 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         $commercialExtensionActivatedLicenseObjectProperties = null;
 
         foreach ($validateLicenseKeys as $extensionSlug => $licenseKey) {
-            /** @var string */
-            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
+            /**
+             * If the extensionName is empty, that means that a previously-activated
+             * bundle has been deactivated, with the license still in the DB.
+             * In that case, do nothing.
+             *
+             * @var string
+             */
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug] ?? '';
+            if ($extensionName === '') {
+                continue;
+            }
             /** @var array<string,mixed> */
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
@@ -518,8 +527,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
          * might be deactivated + reactivated (with a different license key)
          */
         foreach ($deactivateLicenseKeys as $extensionSlug => $licenseKey) {
-            /** @var string */
-            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
+            /**
+             * Make sure the bundle is active. If not, do nothing.
+             *
+             * @var string
+             */
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug] ?? '';
+            if ($extensionName === '') {
+                continue;
+            }
             /** @var array<string,mixed> */
             $commercialExtensionActivatedLicenseEntry = $commercialExtensionActivatedLicenseEntries[$extensionSlug];
             /** @var string */
@@ -562,8 +578,15 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         }
 
         foreach ($activateLicenseKeys as $extensionSlug => $licenseKey) {
-            /** @var string */
-            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug];
+            /**
+             * Make sure the bundle is active. If not, do nothing.
+             *
+             * @var string
+             */
+            $extensionName = $commercialExtensionSlugProductNames[$extensionSlug] ?? '';
+            if ($extensionName === '') {
+                continue;
+            }
             $instanceName = $this->getInstanceName($extensionSlug);
             try {
                 $commercialExtensionActivatedLicenseObjectProperties = $marketplaceProviderCommercialExtensionActivationService->activateLicense($licenseKey, $instanceName);
