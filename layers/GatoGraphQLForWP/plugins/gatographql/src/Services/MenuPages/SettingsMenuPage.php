@@ -794,11 +794,11 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         // Iterate all previous entries to deactivate extensions
         foreach ($previousLicenseKeys as $extensionSlug => $previousLicenseKey) {
             $previousLicenseKey = trim($previousLicenseKey);
-            $submittedLicenseKey = trim($submittedLicenseKeys[$extensionSlug]);
             if ($previousLicenseKey === '') {
                 // License key not previously set => Skip
                 continue;
             }
+            $submittedLicenseKey = trim($submittedLicenseKeys[$extensionSlug] ?? '');
             if ($previousLicenseKey === $submittedLicenseKey) {
                 // License key not updated => Do nothing (Validate: already queued above)
                 continue;
