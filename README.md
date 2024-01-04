@@ -723,16 +723,16 @@ composer fix-style
 
 ## Release notes
 
-- **[1.4](docs/release-notes/1.4/en.md)** (current)
-- [1.3](docs/release-notes/1.3/en.md)
-- [1.2](docs/release-notes/1.2/en.md)
-- [1.1](docs/release-notes/1.1/en.md)
-- [1.0](docs/release-notes/1.0/en.md)
-- [0.10](docs/release-notes/0.10/en.md)
-- [0.9](docs/release-notes/0.9/en.md)
-- [0.8](docs/release-notes/0.8/en.md)
-- [0.7](docs/release-notes/0.7/en.md)
-- [0.6](docs/release-notes/0.6/en.md)
+- **[1.4](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/1.4/en.md)** (current)
+- [1.3](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/1.3/en.md)
+- [1.2](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/1.2/en.md)
+- [1.1](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/1.1/en.md)
+- [1.0](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/1.0/en.md)
+- [0.10](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.10/en.md)
+- [0.9](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.9/en.md)
+- [0.8](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.8/en.md)
+- [0.7](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.7/en.md)
+- [0.6](layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/0.6/en.md)
 
 ## Change log
 
