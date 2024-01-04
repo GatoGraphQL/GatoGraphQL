@@ -46,6 +46,21 @@ Alternatively, we can define this value in `wp-config.php`:
 define( 'GATOGRAPHQL_HIDE_TUTORIAL_PAGE', true );
 ```
 
+## Improvements
+
+- Renamed existing bundles:
+  - “Application Glue & Automator” Bundle => “Tailored WordPress Automator” Bundle
+  - “Content Translation” Bundle => “Simplest WordPress Content Translation” Bundle
+  - “Public API” Bundle => “Responsible WordPress Public API” Bundle
+- Added documentation for new bundles:
+  - “Automated Content Translation & Sync for WordPress Multisite” Bundle
+  - “Better WordPress Webhooks” Bundle
+  - “Easy WordPress Bulk Transform & Update” Bundle
+  - “Private GraphQL Server for WordPress” Bundle
+  - “Selective Content Import, Export & Sync for WordPress” Bundle
+  - “Unhindered WordPress Email Notifications” Bundle
+  - “Versatile WordPress Request API” Bundle
+
 ## Fixed
 
 - HTML codes were printed in select inputs in the WordPress editor, they have now been removed

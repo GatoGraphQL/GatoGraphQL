@@ -12,7 +12,7 @@ interface BundleExtensionModuleResolverInterface extends ExtensionModuleResolver
     public function getBundledExtensionSlugs(string $module): array;
     /**
      * These are the bundled Extension Bundles! For instance, the
-     * "All Extensions" bundle bundles all other bundles.
+     * "All in One Toolbox for WordPress" bundle bundles all other bundles.
      *
      * @return string[]
      */

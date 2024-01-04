@@ -203,6 +203,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function showBundlesContainingReferencedExtensionsOnTutorial(): bool
+    {
+        $envVariable = Environment::SHOW_BUNDLES_CONTAINING_REFERENCED_EXTENSIONS_ON_TUTORIAL;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     /**
      * These values are pre-defined.
      */

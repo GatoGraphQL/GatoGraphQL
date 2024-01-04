@@ -1,6 +1,6 @@
 # Google Translate
 
-Directive `@strTranslate` to translate a field value to over 100 languages using the Google Translate API.
+Directive `@strTranslate` to translate a field value to over 130 languages using the Google Translate API.
 
 ## Description
 
@@ -274,11 +274,12 @@ Define environment variables:
 
 ## Bundles including extension
 
-- [“All Extensions” Bundle](../../../../../bundle-extensions/all-extensions/docs/modules/all-extensions/en.md)
-- [“Content Translation” Bundle](../../../../../bundle-extensions/content-translation/docs/modules/content-translation/en.md)
+- [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-in-one-toolbox-for-wordpress/docs/modules/all-in-one-toolbox-for-wordpress/en.md)
+- [“Automated Content Translation & Sync for WordPress Multisite” Bundle](../../../../../bundle-extensions/automated-content-translation-and-sync-for-wordpress-multisite/docs/modules/automated-content-translation-and-sync-for-wordpress-multisite/en.md)
+- [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/simplest-wordpress-content-translation/docs/modules/simplest-wordpress-content-translation/en.md)
 
-## Tutorial lessons referencing extension
+<!-- ## Tutorial lessons referencing extension
 
 - [Translating block content in a post to a different language](../../../../../docs/tutorial/translating-block-content-in-a-post-to-a-different-language/en.md)
 - [Bulk translating block content in multiple posts to a different language](../../../../../docs/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
-- [Translating content from URL](../../../../../docs/tutorial/translating-content-from-url/en.md)
+- [Translating content from URL](../../../../../docs/tutorial/translating-content-from-url/en.md) -->
