@@ -50,7 +50,7 @@ With persisted queries, you can have the great user experience of GraphQL, while
 
 You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks (avoiding the need to maintain WP REST API controllers).
 
-Browse the [Queries Library in gatographql.com](https://gatographql.com/library/) for ready-to-use queries for your WordPress site. (The more popular queries are already created as Persisted Queries when installing the plugin.) The library is growing constantly, with new queries added on a regular basis.
+Browse the [Queries Library](https://gatographql.com/library/) for ready-to-use queries for your WordPress site. (The more popular queries are already created as Persisted Queries when installing the plugin.) The library is growing constantly, with new queries added on a regular basis.
 
 === Augment Gato GraphQL via extensions ===
 
