@@ -2035,6 +2035,28 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
-        
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Send email to admin about post', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/notify/send-email-to-admin-about-post',
+                                VirtualTutorialLessons::SEND_EMAIL_TO_ADMIN_ABOUT_POST,
+                            ),
+                        ],
+                    ],
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
     }
 }
