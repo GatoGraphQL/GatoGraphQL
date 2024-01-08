@@ -84,7 +84,7 @@ The bundles for specific use cases are:
 
 👉🏽 [“Versatile WordPress Request API” Bundle](https://gatographql.com/bundles/versatile-wordpress-request-api/): Interact with any external API and cloud service, posting and fetching data to/from them.
 
-The Gato GraphQL team is continually working on new extensions and bundles. If you need an integration with some WordPress plugin, or some missing functionality, [let us know](https://github.com/GatoGraphQL/ExtensionsPlanningAndTracking/discussions) and we'll work on it.
+The Gato GraphQL team is continually working on new extensions and bundles. If you need an integration with some WordPress plugin, or some missing functionality, [let us know](https://gatographql.com/contact/) and we'll work on it.
 
 == Source code ==
 
