@@ -261,7 +261,7 @@ jobs:
                 uses: "WyriHaximus/github-action-get-previous-tag@master"
                 if: github.event_name == 'release'
 
-            -   name: Add files for DIST repo
+            -   name: Include additional folders for DIST repo
                 run: cp -R ${{ matrix.pluginConfig.include_folders_for_dist_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
                 working-directory: ${{ matrix.pluginConfig.path }}
                 if: ${{ matrix.pluginConfig.include_folders_for_dist_repo != '' && github.event_name == 'release' && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
