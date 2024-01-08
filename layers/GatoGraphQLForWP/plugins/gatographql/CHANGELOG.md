@@ -6,6 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.6.0 - DATE
 
+## 1.5.1 - 08/01/2024
+
+### Improvements
+
+- Description on readme.txt (for the WordPress plugin directory)
+
 ## 1.5.0 - 08/01/2024
 
 ### Automatically deploy plugin to WordPress plugin directory SVN
