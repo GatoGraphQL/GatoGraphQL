@@ -59,6 +59,9 @@ class PluginDataSource
                     'after_downgrade_code' => 'ci/downgrade/after_downgrade_code.sh',
                 ],
                 'include_folders_for_dist_repo' => implode(' ', [
+                    // Copy the GitHub Actions workflow to deploy plugin to SVN
+                    '.github',
+                    // Copy all assets for the plugin directory
                     '.wordpress-org',
                 ]),
             ],
