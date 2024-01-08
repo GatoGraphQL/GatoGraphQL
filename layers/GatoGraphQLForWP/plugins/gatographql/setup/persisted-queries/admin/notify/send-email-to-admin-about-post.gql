@@ -1,8 +1,15 @@
 ########################################################################
 #
 # This Persisted GraphQL query sends an email to the admin user,
-# passing the data of a new post. It is useful to trigger with
-# automation, to notify of the creation of a new post on the site.
+# passing the contents of a new post.
+# 
+# It is useful to trigger with automation, to notify of the creation
+# of a new post on the site.
+#
+# *********************************************************************
+# 
+# Variables:
+#   - postId: ID of the post
 #
 # *********************************************************************
 #
@@ -11,11 +18,17 @@
 #
 ########################################################################
 
-query GetEmailData(
-  $postTitle: String!,
-  $postContent: String!
-  $postURL: URL!
-) {
+query GetPostAndExportData($postId: ID!) {
+  post(by: { id : $postId }) {
+    content @export(as: "postContent")
+    title @export(as: "postTitle")
+    url @export(as: "postURL")
+  }
+}
+
+query GetEmailData
+  @depends(on: "GetPostAndExportData")
+{
   adminEmail: optionValue(name: "admin_email")
     @export(as: "adminEmail")
 
