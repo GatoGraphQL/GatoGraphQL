@@ -586,6 +586,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
             '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
             '1.4' => $this->installPluginSetupDataForVersion1Dot4(...),
+            '1.5' => $this->installPluginSetupDataForVersion1Dot5(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -2028,5 +2029,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+    }
+
+    protected function installPluginSetupDataForVersion1Dot5(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        
     }
 }
