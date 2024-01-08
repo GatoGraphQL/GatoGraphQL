@@ -52,9 +52,11 @@ You can also create public and private custom endpoints, exposing each of them f
 
 Browse the [Queries Library](https://gatographql.com/library/) for ready-to-use queries for your WordPress site. (The more popular queries are already created as Persisted Queries when installing the plugin.) The library is growing constantly, with new queries added on a regular basis.
 
-=== Augment Gato GraphQL via extensions ===
+=== Augment Gato GraphQL via bundles and extensions ===
 
-Provide additional functionality and expand the GraphQL schema via [extensions](https://gatographql.com/extensions/). They can be purchased and installed independently, or via [bundles](https://gatographql.com/bundles/) that contain all needed extensions to satisfy some common use case.
+[Extensions](https://gatographql.com/extensions/) provide additional functionality and expand the GraphQL schema.
+
+[Bundles](https://gatographql.com/bundles/) are predefined sets of extensions that satisfy some common use case.
 
 The **[“All in One Toolbox for WordPress” Bundle](https://gatographql.com/bundles/all-in-one-toolbox-for-wordpress/)** contains all of Gato GraphQL extensions, thus supporting all promoted features and use cases.
 
