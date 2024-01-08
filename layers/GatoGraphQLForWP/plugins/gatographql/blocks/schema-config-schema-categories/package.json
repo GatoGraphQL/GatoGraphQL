@@ -1,6 +1,6 @@
 {
     "name": "schema-config-schema-categories",
-    "version": "1.6.0-dev",
+    "version": "1.5.1",
     "description": "Configure allowed category taxonomies in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
