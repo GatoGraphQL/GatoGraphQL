@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Automatically deploy plugin to WordPress plugin directory SVN!
 - Added video to documentation for bundle
 
 ## 1.4.0 - 04/01/2014
