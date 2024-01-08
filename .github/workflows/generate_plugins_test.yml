@@ -20,14 +20,9 @@
 # - Upload the .zip file as an artifact to the action (this step is possibly optional)
 # - Upload the .zip file as a release, for download
 ####################################################################################
-name: Generate plugins
+name: Generate plugins Test
 on:
-    release:
-        types: [published]
-    push:
-        branches:
-            - master
-    # pull_request: null
+    pull_request: null
 
 env:
     CHECKOUT_SUBMODULES: ""
@@ -137,21 +132,21 @@ jobs:
                     composer install --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
 
-            # before_downgrade_code.sh => Hacks to fix the codebase in preparation of the Rector downgrade
-            -   name: Custom bash script to fix items in the code in preparation for the Rector downgrade
-                run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}"
-                working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}
+            # # before_downgrade_code.sh => Hacks to fix the codebase in preparation of the Rector downgrade
+            # -   name: Custom bash script to fix items in the code in preparation for the Rector downgrade
+            #     run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}"
+            #     working-directory: ${{ matrix.pluginConfig.path }}
+            #     if: ${{ matrix.pluginConfig.bashScripts.before_downgrade_code }}
 
-            # additional_rector_after_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
-            -   name: Downgrade code for production (to PHP 7.2)
-                run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_before_configs }}" "${{ matrix.pluginConfig.additional_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
+            # # additional_rector_after_configs => Hack to fix bug: https://github.com/rectorphp/rector/issues/5962
+            # -   name: Downgrade code for production (to PHP 7.2)
+            #     run: ci/downgrade/downgrade_code.sh "${{ matrix.pluginConfig.rector_downgrade_config }}" "" "${{ matrix.pluginConfig.path }}" "${{ matrix.pluginConfig.additional_rector_before_configs }}" "${{ matrix.pluginConfig.additional_rector_after_configs }}" "${{ needs.provide_data.outputs.local_package_owners }}"
 
-            # after_downgrade_code.sh => Hacks to fix the codebase whenever Rector cannot handle it
-            -   name: Custom bash script to fix items in the code that Rector cannot handle
-                run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}"
-                working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}
+            # # after_downgrade_code.sh => Hacks to fix the codebase whenever Rector cannot handle it
+            # -   name: Custom bash script to fix items in the code that Rector cannot handle
+            #     run: "$GITHUB_WORKSPACE/${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}"
+            #     working-directory: ${{ matrix.pluginConfig.path }}
+            #     if: ${{ matrix.pluginConfig.bashScripts.after_downgrade_code }}
             ################################################################################
 
             -   name: Replace PHP version in plugin main file
@@ -186,34 +181,34 @@ jobs:
     #   Only execute when enabled by configuration
     ###########################################################################
 
-            -   name: Install PHP-Scoper
-                run: |
-                    composer global config minimum-stability dev
-                    composer global config prefer-stable true
-                    composer global require humbug/php-scoper
-                if: ${{ matrix.pluginConfig.scope }}
+            # -   name: Install PHP-Scoper
+            #     run: |
+            #         composer global config minimum-stability dev
+            #         composer global config prefer-stable true
+            #         composer global require humbug/php-scoper
+            #     if: ${{ matrix.pluginConfig.scope }}
 
-            # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
-            # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
-            -   name: Scope plugin into separate folder
-                run: ~/.composer/vendor/bin/php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config }} --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin/vendor --ansi --no-interaction
-                working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scope }}
+            # # (Current situation) If the scoped results correspond to vendor/ only, we must do "--output-dir ../prefixed-plugin/vendor"
+            # # (Not happening now) If they also include src/, we must do "--output-dir ../prefixed-plugin"
+            # -   name: Scope plugin into separate folder
+            #     run: ~/.composer/vendor/bin/php-scoper add-prefix --config=${{ matrix.pluginConfig.scoping.phpscoper_config }} --output-dir $GITHUB_WORKSPACE/build/prefixed-plugin/vendor --ansi --no-interaction
+            #     working-directory: ${{ matrix.pluginConfig.path }}
+            #     if: ${{ matrix.pluginConfig.scope }}
 
-            -   name: Copy scoped code back to source folder
-                run: rsync -av build/prefixed-plugin/ ${{ matrix.pluginConfig.path }} --quiet
-                if: ${{ matrix.pluginConfig.scope }}
+            # -   name: Copy scoped code back to source folder
+            #     run: rsync -av build/prefixed-plugin/ ${{ matrix.pluginConfig.path }} --quiet
+            #     if: ${{ matrix.pluginConfig.scope }}
 
-            -   name: Regenerate autoloader
-                run: composer dumpautoload --optimize --classmap-authoritative --ansi
-                working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scope }}
+            # -   name: Regenerate autoloader
+            #     run: composer dumpautoload --optimize --classmap-authoritative --ansi
+            #     working-directory: ${{ matrix.pluginConfig.path }}
+            #     if: ${{ matrix.pluginConfig.scope }}
 
-            -   name: Use Scoper autoload in plugin main file
-                run: |
-                    sed -i 's/autoload.php/scoper-autoload.php/' ${{ matrix.pluginConfig.main_file }}
-                working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.scope }}
+            # -   name: Use Scoper autoload in plugin main file
+            #     run: |
+            #         sed -i 's/autoload.php/scoper-autoload.php/' ${{ matrix.pluginConfig.main_file }}
+            #     working-directory: ${{ matrix.pluginConfig.path }}
+            #     if: ${{ matrix.pluginConfig.scope }}
 
     ###########################################################################
     # Generate plugin, and Upload as artifact
@@ -228,12 +223,12 @@ jobs:
                 with:
                     args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
 
-            -   name: Upload plugin zip as artifact
-                uses: actions/upload-artifact@v3
-                with:
-                    name: ${{ matrix.pluginConfig.zip_file }}
-                    path: build/dist-plugin/
-                    retention-days: ${{ needs.provide_data.outputs.retention_days }}
+            # -   name: Upload plugin zip as artifact
+            #     uses: actions/upload-artifact@v3
+            #     with:
+            #         name: ${{ matrix.pluginConfig.zip_file }}
+            #         path: build/dist-plugin/
+            #         retention-days: ${{ needs.provide_data.outputs.retention_days }}
 
     ###########################################################################
     # Upload and Deploy
@@ -242,29 +237,30 @@ jobs:
 
             -   name: Create release folder
                 run: mkdir build/release-plugin
-                if: github.event_name == 'release'
+                # if: github.event_name == 'release'
 
             -   name: Create release plugin as .zip file (containing a root folder with the plugin name)
                 run: zip -X -r $GITHUB_WORKSPACE/build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip .
                 working-directory: build/dist-plugin
-                if: github.event_name == 'release'
+                # if: github.event_name == 'release'
 
-            -   name: Upload to release
-                uses: softprops/action-gh-release@v1
-                with:
-                    files: build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip
-                env:
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                if: github.event_name == 'release'
+            # -   name: Upload to release
+            #     uses: softprops/action-gh-release@v1
+            #     with:
+            #         files: build/release-plugin/${{ matrix.pluginConfig.zip_file }}.zip
+            #     env:
+            #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            #     if: github.event_name == 'release'
 
-            -   id: previous_tag
-                uses: "WyriHaximus/github-action-get-previous-tag@master"
-                if: github.event_name == 'release'
+            # -   id: previous_tag
+            #     uses: "WyriHaximus/github-action-get-previous-tag@master"
+            #     if: github.event_name == 'release'
 
             -   name: Include (previously excluded) folders for DIST repo
                 run: cp -R ${{ matrix.pluginConfig.include_folders_for_dist_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
                 working-directory: ${{ matrix.pluginConfig.path }}
-                if: ${{ matrix.pluginConfig.include_folders_for_dist_repo != '' && github.event_name == 'release' && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                # if: ${{ matrix.pluginConfig.include_folders_for_dist_repo != '' && github.event_name == 'release' && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                if: ${{ matrix.pluginConfig.include_folders_for_dist_repo != '' }}
 
             -   name: Publish to DIST repo
                 uses: symplify/monorepo-split-github-action@1.1
@@ -275,8 +271,8 @@ jobs:
                     package-directory: 'build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}'
                     split-repository-organization: ${{ matrix.pluginConfig.dist_repo_organization }}
                     split-repository-name: ${{ matrix.pluginConfig.dist_repo_name }}
-                    tag: ${{ steps.previous_tag.outputs.tag }}
+                    # tag: ${{ steps.previous_tag.outputs.tag }}
                     user-name: "${{ needs.provide_data.outputs.git_user_name }}"
                     user-email: "${{ needs.provide_data.outputs.git_user_email }}"
-                if: ${{ github.event_name == 'release' && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
+                # if: ${{ github.event_name == 'release' && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
 
