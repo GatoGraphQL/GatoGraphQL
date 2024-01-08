@@ -257,7 +257,7 @@ jobs:
             #     if: github.event_name == 'release'
 
             -   name: Include (previously excluded) folders for DIST repo
-                run: rsync -av ${{ matrix.pluginConfig.include_folders_for_dist_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }} --quiet
+                run: sudo rsync -av ${{ matrix.pluginConfig.include_folders_for_dist_repo }} $GITHUB_WORKSPACE/build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }} --quiet
                 working-directory: ${{ matrix.pluginConfig.path }}
                 # if: ${{ matrix.pluginConfig.include_folders_for_dist_repo != '' && github.event_name == 'release' && matrix.pluginConfig.dist_repo_organization && matrix.pluginConfig.dist_repo_name }}
                 if: ${{ matrix.pluginConfig.include_folders_for_dist_repo != '' }}
