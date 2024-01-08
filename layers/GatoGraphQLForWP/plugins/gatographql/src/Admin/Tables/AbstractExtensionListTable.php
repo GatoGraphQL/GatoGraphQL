@@ -123,7 +123,24 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
     protected function getCommonPluginData(): array
     {
         $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
+
+        /**
+         * Watch out! Cannot assign the main plugin version because
+         * it produces a bug:
+         *
+         * If Gato GraphQL v1.5 is installed, and a bundle v1.4
+         * is installed, then page Extensions will not show the
+         * bundle as having the "Active" button, and also all
+         * included extensions as being "Active (via Bundle)".
+         *
+         * This happens because `install_plugin_install_status`
+         * keeps `$status` as `"install"`, and it must be
+         * `"newer_installed"` to add the expected button
+         * to Install/Activate the extension.
+         */
+        // $mainPluginVersion = $mainPlugin->getPluginVersion();
+        // $extensionPluginVersion = $mainPluginVersion;
+        $extensionPluginVersion = '';
 
         /**
          * @see https://developer.wordpress.org/reference/functions/get_plugin_data/
@@ -131,7 +148,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         $gatoGraphQLPluginData = get_plugin_data($mainPlugin->getPluginFile());
 
         return [
-            'version' => $mainPluginVersion,
+            'version' => $extensionPluginVersion,
             'author' => sprintf(
                 '<a href="%s">%s</a>',
                 $gatoGraphQLPluginData['AuthorURI'],

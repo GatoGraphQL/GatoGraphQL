@@ -6,6 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.6.0 - DATE
 
+## 1.5.2 - 08/01/2024
+
+### Fixed
+
+- Active bundle or extension, with different version than main plugin, did not show "Active" button in Extensions page
+
 ## 1.5.1 - 08/01/2024
 
 ### Improvements
