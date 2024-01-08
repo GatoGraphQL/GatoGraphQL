@@ -2058,5 +2058,24 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ])),
             ]
         ));
+        $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Add the comments block to a post', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/add-comments-block-to-post',
+                                VirtualTutorialLessons::ADD_COMMENTS_BLOCK_TO_POST,
+                            ),
+                        ],
+                    ],
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
     }
 }
