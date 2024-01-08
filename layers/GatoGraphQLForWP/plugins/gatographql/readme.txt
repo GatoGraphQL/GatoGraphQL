@@ -169,6 +169,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.5.2 =
+* Active bundle or extension, with different version than main plugin, did not show "Active" button in Extensions page
+
 = 1.5.1 =
 * Improved description on readme.txt (for the WordPress plugin directory)
 
