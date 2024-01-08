@@ -2062,7 +2062,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
-                'post_title' => \__('Add the comments block to a post', 'gatographql'),
+                'post_title' => \__('Add comments block to post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),

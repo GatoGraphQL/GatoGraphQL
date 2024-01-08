@@ -80,7 +80,7 @@ class VirtualTutorialLessonDataProvider
                 ]
             ],
             VirtualTutorialLessons::ADD_COMMENTS_BLOCK_TO_POST => [
-                \__('Add the comments block to a post', 'gatographql'),
+                \__('Add comments block to post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
