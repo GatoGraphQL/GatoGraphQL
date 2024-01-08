@@ -169,6 +169,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.5.1 =
+* Improved description on readme.txt (for the WordPress plugin directory)
+
 = 1.5.0 =
 * Added video to documentation for bundle
 * Added new predefined persisted queries: "Send email to admin about post" and "Add comments block to post"
