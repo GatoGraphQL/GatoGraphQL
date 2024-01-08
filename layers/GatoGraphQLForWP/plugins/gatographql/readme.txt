@@ -44,7 +44,9 @@ Among others, you can use it to:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-Gato GraphQL supports Persisted Queries, which are endpoints where the GraphQL query is predefined and stored in the server. They are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all). They allow you to expose data while making your site super secure, as visitors will be restricted from freely browsing your data.
+Gato GraphQL supports Persisted Queries out of the box. Persisted queries are similar to WP REST API endpoints, however they created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
+
+With persisted queries, you can have the great user experience of GraphQL, while having the security from a REST API, limiting clients and visitors to only query the data that you have defined in advance.
 
 You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks (avoiding the need to maintain REST controllers).
 
