@@ -58,6 +58,9 @@ class PluginDataSource
                     'before_downgrade_code' => 'ci/downgrade/before_downgrade_code.sh',
                     'after_downgrade_code' => 'ci/downgrade/after_downgrade_code.sh',
                 ],
+                'include_folders_for_dist_repo' => implode(' ', [
+                    '.wordpress-org',
+                ]),
             ],
 
             // Gato GraphQL - Testing Schema <= To run integration tests

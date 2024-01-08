@@ -113,6 +113,9 @@ final class PluginConfigEntriesJsonProvider
             // Hacks to be executed on the plugin
             $entryConfig['bashScripts'] ??= [];
 
+            // Copy folder .wordpress-org to the DIST repo
+            $entryConfig['include_folders_for_dist_repo'] ??= '';
+
             $pluginConfigEntries[] = $entryConfig;
         }
 
