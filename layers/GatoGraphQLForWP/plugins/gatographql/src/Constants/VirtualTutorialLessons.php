@@ -15,4 +15,6 @@ class VirtualTutorialLessons
     public const TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE = 'translating-classic-editor-post-to-a-different-language';
     public const BULK_TRANSLATING_CLASSIC_EDITOR_POSTS_TO_A_DIFFERENT_LANGUAGE = 'bulk-translating-classic-editor-posts-to-a-different-language';
     public const FETCH_POST_LINKS = 'fetch-post-links';
+    public const SEND_EMAIL_TO_ADMIN_ABOUT_POST = 'send-email-to-admin-about-post';
+    public const ADD_COMMENTS_BLOCK_TO_POST = 'add-comments-block-to-post';
 }

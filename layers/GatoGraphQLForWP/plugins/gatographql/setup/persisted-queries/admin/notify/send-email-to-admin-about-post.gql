@@ -1,0 +1,72 @@
+########################################################################
+#
+# This Persisted GraphQL query sends an email to the admin user,
+# passing the contents of a new post.
+# 
+# It is useful to trigger with automation, to notify of the creation
+# of a new post on the site.
+#
+# *********************************************************************
+# 
+# Variables:
+#   - postId: ID of the post
+#
+# *********************************************************************
+#
+# More info:
+#   - https://gatographql.com/library/send-email-to-the-admin-notifying-of-a-new-post/
+#
+########################################################################
+
+query GetPostAndExportData($postId: ID!) {
+  post(by: { id : $postId }) {
+    content @export(as: "postContent")
+    title @export(as: "postTitle")
+    url @export(as: "postURL")
+  }
+}
+
+query GetEmailData
+  @depends(on: "GetPostAndExportData")
+{
+  adminEmail: optionValue(name: "admin_email")
+    @export(as: "adminEmail")
+
+  emailMessageTemplate: _strConvertMarkdownToHTML(
+    text: """
+
+There is a [new post on the site]({$postURL}):
+
+**{$postTitle}**:
+
+{$postContent}
+
+    """
+  )
+  emailMessage: _strReplaceMultiple(
+    search: ["{$postTitle}", "{$postContent}", "{$postURL}"],
+    replaceWith: [$postTitle, $postContent, $postURL],
+    in: $__emailMessageTemplate
+  )
+    @export(as: "emailMessage")
+
+  emailSubject: _sprintf(
+    string: "New post: \"%s\"",
+    values: [$postTitle]
+  )
+    @export(as: "emailSubject")
+}
+
+mutation SendEmail @depends(on: "GetEmailData") {
+  _sendEmail(
+    input: {
+      to: $adminEmail
+      subject: $emailSubject
+      messageAs: {
+        html: $emailMessage
+      }
+    }
+  ) {
+    status
+  }
+}

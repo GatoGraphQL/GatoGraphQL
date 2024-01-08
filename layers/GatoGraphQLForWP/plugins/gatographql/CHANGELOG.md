@@ -6,10 +6,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.5.0 - DATE
 
+### Automatically deploy plugin to WordPress plugin directory SVN
+
+Whenever creating a new release of the Gato GraphQL plugin, automatically deploy it to the WordPress plugin directory SVN (via [`10up/action-wordpress-plugin-deploy`](https://github.com/10up/action-wordpress-plugin-deploy)).
+
 ### Improvements
 
-- Automatically deploy plugin to WordPress plugin directory SVN!
 - Added video to documentation for bundle
+- Added new predefined persisted queries:
+  - "Send email to admin about post"
+  - "Add comments block to post"
 
 ## 1.4.0 - 04/01/2014
 

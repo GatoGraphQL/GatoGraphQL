@@ -586,6 +586,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
             '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
             '1.4' => $this->installPluginSetupDataForVersion1Dot4(...),
+            '1.5' => $this->installPluginSetupDataForVersion1Dot5(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -2025,6 +2026,54 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         ],
                     ],
                     ...$defaultCustomEndpointBlocks
+                ])),
+            ]
+        ));
+    }
+
+    protected function installPluginSetupDataForVersion1Dot5(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Send email to admin about post', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/notify/send-email-to-admin-about-post',
+                                VirtualTutorialLessons::SEND_EMAIL_TO_ADMIN_ABOUT_POST,
+                            ),
+                        ],
+                    ],
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
+        $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Add comments block to post', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/transform/add-comments-block-to-post',
+                                VirtualTutorialLessons::ADD_COMMENTS_BLOCK_TO_POST,
+                            ),
+                        ],
+                    ],
+                    ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
