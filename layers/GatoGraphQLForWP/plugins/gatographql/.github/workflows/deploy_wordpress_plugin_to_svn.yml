@@ -1,3 +1,4 @@
+# See: https://github.com/10up/action-wordpress-plugin-deploy#deploy-on-pushing-a-new-tag
 name: Deploy to WordPress.org Plugin Directory (SVN)
 on:
   push:
