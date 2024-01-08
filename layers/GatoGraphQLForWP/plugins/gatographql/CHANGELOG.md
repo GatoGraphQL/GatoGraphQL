@@ -10,6 +10,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Automatically deploy plugin to WordPress plugin directory SVN!
 - Added video to documentation for bundle
+- Added new predefined persisted queries:
+  - "Send email to admin about post"
+  - "Add the comments block to a post"
 
 ## 1.4.0 - 04/01/2014
 

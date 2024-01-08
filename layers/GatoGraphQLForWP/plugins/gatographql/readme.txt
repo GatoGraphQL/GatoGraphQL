@@ -163,6 +163,10 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.5.0 =
+* Added video to documentation for bundle
+* Added new predefined persisted queries: "Send email to admin about post" and "Add the comments block to a post"
+
 = 1.4.0 =
 * Added predefined custom endpoint "Nested mutations + Entity as mutation payload type"
 * Added "Request headers" to GraphiQL clients on single public/private endpoint, and custom endpoints
