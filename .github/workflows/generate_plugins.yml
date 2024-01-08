@@ -27,7 +27,7 @@ on:
     push:
         branches:
             - master
-    pull_request: null
+    # pull_request: null
 
 env:
     CHECKOUT_SUBMODULES: ""
