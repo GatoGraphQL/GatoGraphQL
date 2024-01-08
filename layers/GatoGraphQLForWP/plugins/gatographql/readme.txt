@@ -56,31 +56,33 @@ Browse the [Queries Library](https://gatographql.com/library/) for ready-to-use 
 
 [Extensions](https://gatographql.com/extensions/) provide additional functionality and expand the GraphQL schema.
 
-[Bundles](https://gatographql.com/bundles/) are predefined sets of extensions that satisfy some common use case.
+[Bundles](https://gatographql.com/bundles/) are sets of extensions that satisfy predefined use cases.
 
-The **[“All in One Toolbox for WordPress” Bundle](https://gatographql.com/bundles/all-in-one-toolbox-for-wordpress/)** contains all of Gato GraphQL extensions, thus supporting all promoted features and use cases.
+The bundle containing all extensions is:
+
+👉🏽 **[“All in One Toolbox for WordPress” Bundle](https://gatographql.com/bundles/all-in-one-toolbox-for-wordpress/)**: As it contains all of Gato GraphQL extensions, it supports all promoted features and use cases.
 
 The bundles for specific use cases are:
 
-**[“Automated Content Translation & Sync for WordPress Multisite” Bundle](https://gatographql.com/bundles/automated-content-translation-and-sync-for-wordpress-multisite/)**: Automatically create a translation of a newly-published post using the Google Translate API, for every language site on a WordPress multisite.
+👉🏽 [“Automated Content Translation & Sync for WordPress Multisite” Bundle](https://gatographql.com/bundles/automated-content-translation-and-sync-for-wordpress-multisite/): Automatically create a translation of a newly-published post using the Google Translate API, for every language site on a WordPress multisite.
 
-**[“Better WordPress Webhooks” Bundle](https://gatographql.com/bundles/better-wordpress-webhooks/)**: Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin.
+👉🏽 [“Better WordPress Webhooks” Bundle](https://gatographql.com/bundles/better-wordpress-webhooks/): Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin.
 
-**[“Easy WordPress Bulk Transform & Update” Bundle](https://gatographql.com/bundles/easy-wordpress-bulk-transform-and-update/)**: Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB.
+👉🏽 [“Easy WordPress Bulk Transform & Update” Bundle](https://gatographql.com/bundles/easy-wordpress-bulk-transform-and-update/): Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB.
 
-**[“Private GraphQL Server for WordPress” Bundle](https://gatographql.com/bundles/private-graphql-server-for-wordpress/)**: Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint.
+👉🏽 [“Private GraphQL Server for WordPress” Bundle](https://gatographql.com/bundles/private-graphql-server-for-wordpress/): Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint.
 
-**[“Responsible WordPress Public API” Bundle](https://gatographql.com/bundles/responsible-wordpress-public-api/)**: Enhance your public APIs with additional layers of security, speed, power, schema evolution and control.
+👉🏽 [“Responsible WordPress Public API” Bundle](https://gatographql.com/bundles/responsible-wordpress-public-api/): Enhance your public APIs with additional layers of security, speed, power, schema evolution and control.
 
-**[“Selective Content Import, Export & Sync for WordPress” Bundle](https://gatographql.com/bundles/selective-content-import-export-and-sync-for-wordpress/)**: Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site.
+👉🏽 [“Selective Content Import, Export & Sync for WordPress” Bundle](https://gatographql.com/bundles/selective-content-import-export-and-sync-for-wordpress/): Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site.
 
-**[“Simplest WordPress Content Translation” Bundle](https://gatographql.com/bundles/simplest-wordpress-content-translation/)**: Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB.
+👉🏽 [“Simplest WordPress Content Translation” Bundle](https://gatographql.com/bundles/simplest-wordpress-content-translation/): Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB.
 
-**[“Tailored WordPress Automator” Bundle](https://gatographql.com/bundles/tailored-wordpress-automator/)**: Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more.
+👉🏽 [“Tailored WordPress Automator” Bundle](https://gatographql.com/bundles/tailored-wordpress-automator/): Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more.
 
-**[“Unhindered WordPress Email Notifications” Bundle](https://gatographql.com/bundles/unhindered-wordpress-email-notifications/)**: Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email.
+👉🏽 [“Unhindered WordPress Email Notifications” Bundle](https://gatographql.com/bundles/unhindered-wordpress-email-notifications/): Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email.
 
-**[“Versatile WordPress Request API” Bundle](https://gatographql.com/bundles/versatile-wordpress-request-api/)**: Interact with any external API and cloud service, posting and fetching data to/from them.
+👉🏽 [“Versatile WordPress Request API” Bundle](https://gatographql.com/bundles/versatile-wordpress-request-api/): Interact with any external API and cloud service, posting and fetching data to/from them.
 
 The Gato GraphQL team is continually working on new extensions and bundles. If you need an integration with some WordPress plugin, or some missing functionality, [let us know](https://github.com/GatoGraphQL/ExtensionsPlanningAndTracking/discussions) and we'll work on it.
 
