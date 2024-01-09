@@ -6,6 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.6.0 - DATE
 
+## 1.5.3 - 09/01/2024
+
+### Fixed
+
+- Point the "Missing an extension?" link to the Contact us page
+
 ## 1.5.2 - 08/01/2024
 
 ### Fixed
