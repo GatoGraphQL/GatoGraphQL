@@ -78,7 +78,7 @@ The bundles for specific use cases are:
 
 👉🏽 [“Simplest WordPress Content Translation” Bundle](https://gatographql.com/bundles/simplest-wordpress-content-translation/): Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB.
 
-👉🏽 [“Tailored WordPress Automator” Bundle](https://gatographql.com/bundles/tailored-wordpress-automator/): Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more.
+👉🏽 [“Tailored WordPress Automator” Bundle](https://gatographql.com/bundles/tailored-wordpress-automator/): Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more).
 
 👉🏽 [“Unhindered WordPress Email Notifications” Bundle](https://gatographql.com/bundles/unhindered-wordpress-email-notifications/): Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email.
 
