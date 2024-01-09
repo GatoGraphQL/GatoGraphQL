@@ -11,6 +11,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Point the "Missing an extension?" link to the Contact us page
+- Add link to bundles on the Extensions page
+- Fixed typo in readme.txt
 
 ## 1.5.2 - 08/01/2024
 

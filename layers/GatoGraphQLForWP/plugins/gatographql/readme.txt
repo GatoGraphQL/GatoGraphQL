@@ -171,6 +171,8 @@ You can even synchronize content across a network of sites, such as from an upst
 
 = 1.5.3 =
 * Point the "Missing an extension?" link to the Contact us page
+* Add link to bundles on the Extensions page
+* Fixed typo in readme.txt
 
 = 1.5.2 =
 * Active bundle or extension, with different version than main plugin, did not show "Active" button in Extensions page
