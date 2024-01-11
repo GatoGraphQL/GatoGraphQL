@@ -1,6 +1,6 @@
 {
     "name": "endpoint-graphiql",
-    "version": "1.6.0-dev",
+    "version": "1.5.5",
     "description": "Configure the GraphQL endpoint",
     "author": "Leonardo Losoviz",
     "license": "MIT",
