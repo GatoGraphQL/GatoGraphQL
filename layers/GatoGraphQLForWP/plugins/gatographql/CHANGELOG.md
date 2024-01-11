@@ -6,6 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.6.0 - DATE
 
+## 1.5.4 - 11/01/2024
+
+### Fixed
+
+- Bug in resolver where innerBlocks is not set
+
 ## 1.5.3 - 09/01/2024
 
 ### Fixed
