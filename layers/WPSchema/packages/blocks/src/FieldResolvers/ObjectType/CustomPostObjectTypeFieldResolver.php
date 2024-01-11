@@ -285,7 +285,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     $blockDataItem = array_shift($stack);
 
                     /** @var stdClass[]|null */
-                    $blockDataItemInnerBlocks = $blockDataItem->innerBlocks;
+                    $blockDataItemInnerBlocks = $blockDataItem->innerBlocks ?? null;
                     unset($blockDataItem->innerBlocks);
 
                     if ($blockDataItemInnerBlocks !== null) {
