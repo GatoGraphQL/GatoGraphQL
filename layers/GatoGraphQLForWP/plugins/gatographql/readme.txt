@@ -169,6 +169,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.5.4 =
+* Fixed bug in resolver where innerBlocks is not set
+
 = 1.5.3 =
 * Point the "Missing an extension?" link to the Contact us page
 * Add link to bundles on the Extensions page
