@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
+use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
@@ -19,8 +20,8 @@ use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-use PoP\Root\Services\BasicServiceTrait;
 
+use PoP\Root\Services\BasicServiceTrait;
 use function get_option;
 use function home_url;
 use function update_option;
@@ -35,6 +36,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
+    private ?ContainerManagerInterface $containerManager = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -108,6 +110,19 @@ class LicenseValidationService implements LicenseValidationServiceInterface
             $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
         }
         return $this->marketplaceProviderCommercialExtensionActivationService;
+    }
+    final public function setContainerManager(ContainerManagerInterface $containerManager): void
+    {
+        $this->containerManager = $containerManager;
+    }
+    final protected function getContainerManager(): ContainerManagerInterface
+    {
+        if ($this->containerManager === null) {
+            /** @var ContainerManagerInterface */
+            $containerManager = $this->instanceManager->getInstance(ContainerManagerInterface::class);
+            $this->containerManager = $containerManager;
+        }
+        return $this->containerManager;
     }
 
     /**
@@ -321,7 +336,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         );
 
         // Because extensions will be activated/deactivated, flush the service container
-        $this->flushContainer(true, true);
+        $this->getContainerManager()->flushContainer(true, true);
     }
 
     /**
