@@ -17,7 +17,9 @@ use GatoGraphQL\GatoGraphQL\Constants\VirtualTutorialLessons;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
@@ -53,9 +55,9 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
+
 use WP_Term;
 use WP_Upgrader;
-
 use function __;
 use function add_action;
 use function do_action;
@@ -539,6 +541,46 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PHP_INT_MAX
         );
+
+        /**
+         * Validate the commercial extensions
+         */
+        \add_action(
+            'init',
+            function (): void {
+                // To validate the licenses, simply pass the existing licenses
+                $commercialExtensionActivatedLicenseKeys = $this->getCommercialExtensionActivatedLicenseKeys();
+                if ($commercialExtensionActivatedLicenseKeys === []) {
+                    return;
+                }
+
+                $instanceManager = InstanceManagerFacade::getInstance();
+                /** @var LicenseValidationServiceInterface */
+                $licenseValidationService = $instanceManager->getInstance(LicenseValidationServiceInterface::class);
+
+                $licenseValidationService->activateDeactivateValidateGatoGraphQLCommercialExtensions(
+                    $commercialExtensionActivatedLicenseKeys,
+                    $commercialExtensionActivatedLicenseKeys
+                );
+            },
+            PHP_INT_MAX
+        );
+    }
+
+    /**
+     * @return array<string,string> Key: extension slug, Value: License key
+     */
+    protected function getCommercialExtensionActivatedLicenseKeys(): array
+    {
+        $commercialExtensionActivatedLicenseKeys = [];
+
+        /** @var array<string,mixed> */
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
+            $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
+        }
+
+        return $commercialExtensionActivatedLicenseKeys;
     }
 
     /**
