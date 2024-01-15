@@ -295,13 +295,22 @@ class LicenseValidationService implements LicenseValidationServiceInterface
             $type = 'warning';
         }
 
-        // Show the error message to the admin
-        add_settings_error(
-            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
-            'license_activation_' . $extensionSlug,
-            $errorMessage,
-            $type
-        );
+        /**
+         * Show the error message to the admin.
+         * 
+         * Watch out! This function only works in the Settings page,
+         * but this method could also be called elsewhere
+         * (eg: when validating the licenses when the main
+         * plugin is updated)
+         */
+        if (function_exists('add_settings_error')) {
+            add_settings_error(
+                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                'license_activation_' . $extensionSlug,
+                $errorMessage,
+                $type
+            );
+        }
 
         return $commercialExtensionActivatedLicenseEntries;
     }
@@ -359,6 +368,16 @@ class LicenseValidationService implements LicenseValidationServiceInterface
         CommercialExtensionActivatedLicenseObjectProperties $commercialExtensionActivatedLicenseObjectProperties,
         string $successMessage,
     ): void {
+        /**
+         * Watch out! This function only works in the Settings page,
+         * but this method could also be called elsewhere
+         * (eg: when validating the licenses when the main
+         * plugin is updated)
+         */
+        if (!function_exists('add_settings_error')) {
+            return;
+        }
+
         // Show the success message to the admin
         add_settings_error(
             PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
