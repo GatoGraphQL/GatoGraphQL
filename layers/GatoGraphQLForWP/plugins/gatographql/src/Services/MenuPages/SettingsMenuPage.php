@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
-use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
@@ -44,7 +43,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
     private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
     private ?ContainerManagerInterface $containerManager = null;
 
@@ -107,19 +105,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
-    }
-    final public function setMarketplaceProviderCommercialExtensionActivationService(MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService): void
-    {
-        $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
-    }
-    final protected function getMarketplaceProviderCommercialExtensionActivationService(): MarketplaceProviderCommercialExtensionActivationServiceInterface
-    {
-        if ($this->marketplaceProviderCommercialExtensionActivationService === null) {
-            /** @var MarketplaceProviderCommercialExtensionActivationServiceInterface */
-            $marketplaceProviderCommercialExtensionActivationService = $this->instanceManager->getInstance(MarketplaceProviderCommercialExtensionActivationServiceInterface::class);
-            $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
-        }
-        return $this->marketplaceProviderCommercialExtensionActivationService;
     }
     final public function setLicenseValidationService(LicenseValidationServiceInterface $licenseValidationService): void
     {
