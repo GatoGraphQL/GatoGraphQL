@@ -23,7 +23,7 @@ class ContainerManager implements ContainerManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
-    
+
     public function flushContainer(
         bool $flushRewriteRules,
         ?bool $regenerateContainer,

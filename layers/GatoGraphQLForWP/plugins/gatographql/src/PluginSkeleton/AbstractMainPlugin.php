@@ -543,7 +543,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
 
         $this->revalidateCommercialExtensionActivatedLicenses();
-        
     }
 
     /**
@@ -558,11 +557,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         if ($commercialExtensionActivatedLicenseKeys === []) {
             return;
         }
-        
+
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var LicenseValidationServiceInterface */
         $licenseValidationService = $instanceManager->getInstance(LicenseValidationServiceInterface::class);
-        
+
         $licenseValidationService->validateGatoGraphQLCommercialExtensions(
             $commercialExtensionActivatedLicenseKeys
         );

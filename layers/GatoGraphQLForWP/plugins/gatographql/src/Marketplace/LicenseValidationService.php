@@ -297,7 +297,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 
         /**
          * Show the error message to the admin.
-         * 
+         *
          * Watch out! This function only works in the Settings page,
          * but this method could also be called elsewhere
          * (eg: when validating the licenses when the main
