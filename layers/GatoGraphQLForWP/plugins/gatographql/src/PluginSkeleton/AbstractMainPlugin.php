@@ -555,7 +555,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function revalidateCommercialExtensionActivatedLicenses(): void
     {
         $commercialExtensionActivatedLicenseKeys = $this->getCommercialExtensionActivatedLicenseKeys();
-        if ($commercialExtensionActivatedLicenseKeys !== []) {
+        if ($commercialExtensionActivatedLicenseKeys === []) {
             return;
         }
         
