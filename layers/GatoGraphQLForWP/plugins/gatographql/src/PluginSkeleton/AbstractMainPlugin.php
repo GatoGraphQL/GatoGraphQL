@@ -542,28 +542,31 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PHP_INT_MAX
         );
 
-        /**
-         * Validate the commercial extensions
-         */
-        \add_action(
-            'init',
-            function (): void {
-                // To validate the licenses, simply pass the existing licenses
-                $commercialExtensionActivatedLicenseKeys = $this->getCommercialExtensionActivatedLicenseKeys();
-                if ($commercialExtensionActivatedLicenseKeys === []) {
-                    return;
-                }
+        $this->revalidateCommercialExtensions();
+        
+    }
 
-                $instanceManager = InstanceManagerFacade::getInstance();
-                /** @var LicenseValidationServiceInterface */
-                $licenseValidationService = $instanceManager->getInstance(LicenseValidationServiceInterface::class);
-
-                $licenseValidationService->activateDeactivateValidateGatoGraphQLCommercialExtensions(
-                    $commercialExtensionActivatedLicenseKeys,
-                    $commercialExtensionActivatedLicenseKeys
-                );
-            },
-            PHP_INT_MAX
+    /**
+     * Execute a /validate operation for all existing
+     * licenses on the site. If any license has been
+     * disabled, the corresponding extension will also
+     * be disabled.
+     */
+    protected function revalidateCommercialExtensions(): void
+    {
+        $commercialExtensionActivatedLicenseKeys = $this->getCommercialExtensionActivatedLicenseKeys();
+        if ($commercialExtensionActivatedLicenseKeys !== []) {
+            return;
+        }
+        
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var LicenseValidationServiceInterface */
+        $licenseValidationService = $instanceManager->getInstance(LicenseValidationServiceInterface::class);
+        
+        // To validate the licenses, simply pass the existing licenses
+        $licenseValidationService->activateDeactivateValidateGatoGraphQLCommercialExtensions(
+            $commercialExtensionActivatedLicenseKeys,
+            $commercialExtensionActivatedLicenseKeys
         );
     }
 
