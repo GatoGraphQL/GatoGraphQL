@@ -55,6 +55,21 @@ class LicenseValidationService implements LicenseValidationServiceInterface
     }
 
     /**
+     * Re-validate the Gato GraphQL Extensions against the
+     * marketplace provider's API.
+     *
+     * @param array<string,string> $activeLicenseKeys Key: Extension Slug, Value: License Key
+     */
+    public function validateGatoGraphQLCommercialExtensions(
+        array $activeLicenseKeys,
+    ): void {
+        $this->activateDeactivateValidateGatoGraphQLCommercialExtensions(
+            $activeLicenseKeys,
+            $activeLicenseKeys,
+        );
+    }
+
+    /**
      * Activate the Gato GraphQL Extensions against the
      * marketplace provider's API.
      *

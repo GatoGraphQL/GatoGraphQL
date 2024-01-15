@@ -563,9 +563,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         /** @var LicenseValidationServiceInterface */
         $licenseValidationService = $instanceManager->getInstance(LicenseValidationServiceInterface::class);
         
-        // To validate the licenses, simply pass the existing licenses
-        $licenseValidationService->activateDeactivateValidateGatoGraphQLCommercialExtensions(
-            $commercialExtensionActivatedLicenseKeys,
+        $licenseValidationService->validateGatoGraphQLCommercialExtensions(
             $commercialExtensionActivatedLicenseKeys
         );
     }
