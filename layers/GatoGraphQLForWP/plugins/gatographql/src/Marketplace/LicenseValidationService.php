@@ -5,23 +5,17 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Marketplace;
 
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
-use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
-use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
-use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Misc\GeneralUtils;
-
 use PoP\Root\Services\BasicServiceTrait;
+
 use function get_option;
 use function home_url;
 use function update_option;
@@ -30,74 +24,9 @@ class LicenseValidationService implements LicenseValidationServiceInterface
 {
     use BasicServiceTrait;
 
-    private ?UserSettingsManagerInterface $userSettingsManager = null;
-    private ?SettingsNormalizerInterface $settingsNormalizer = null;
-    private ?PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver = null;
-    private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
-    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?ContainerManagerInterface $containerManager = null;
 
-    public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
-    {
-        $this->userSettingsManager = $userSettingsManager;
-    }
-    protected function getUserSettingsManager(): UserSettingsManagerInterface
-    {
-        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
-    }
-    final public function setSettingsNormalizer(SettingsNormalizerInterface $settingsNormalizer): void
-    {
-        $this->settingsNormalizer = $settingsNormalizer;
-    }
-    final protected function getSettingsNormalizer(): SettingsNormalizerInterface
-    {
-        if ($this->settingsNormalizer === null) {
-            /** @var SettingsNormalizerInterface */
-            $settingsNormalizer = $this->instanceManager->getInstance(SettingsNormalizerInterface::class);
-            $this->settingsNormalizer = $settingsNormalizer;
-        }
-        return $this->settingsNormalizer;
-    }
-    final public function setPluginGeneralSettingsFunctionalityModuleResolver(PluginGeneralSettingsFunctionalityModuleResolver $PluginGeneralSettingsFunctionalityModuleResolver): void
-    {
-        $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
-    }
-    final protected function getPluginGeneralSettingsFunctionalityModuleResolver(): PluginGeneralSettingsFunctionalityModuleResolver
-    {
-        if ($this->PluginGeneralSettingsFunctionalityModuleResolver === null) {
-            /** @var PluginGeneralSettingsFunctionalityModuleResolver */
-            $PluginGeneralSettingsFunctionalityModuleResolver = $this->instanceManager->getInstance(PluginGeneralSettingsFunctionalityModuleResolver::class);
-            $this->PluginGeneralSettingsFunctionalityModuleResolver = $PluginGeneralSettingsFunctionalityModuleResolver;
-        }
-        return $this->PluginGeneralSettingsFunctionalityModuleResolver;
-    }
-    final public function setSettingsCategoryRegistry(SettingsCategoryRegistryInterface $settingsCategoryRegistry): void
-    {
-        $this->settingsCategoryRegistry = $settingsCategoryRegistry;
-    }
-    final protected function getSettingsCategoryRegistry(): SettingsCategoryRegistryInterface
-    {
-        if ($this->settingsCategoryRegistry === null) {
-            /** @var SettingsCategoryRegistryInterface */
-            $settingsCategoryRegistry = $this->instanceManager->getInstance(SettingsCategoryRegistryInterface::class);
-            $this->settingsCategoryRegistry = $settingsCategoryRegistry;
-        }
-        return $this->settingsCategoryRegistry;
-    }
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
-    {
-        $this->moduleRegistry = $moduleRegistry;
-    }
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        if ($this->moduleRegistry === null) {
-            /** @var ModuleRegistryInterface */
-            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-            $this->moduleRegistry = $moduleRegistry;
-        }
-        return $this->moduleRegistry;
-    }
     final public function setMarketplaceProviderCommercialExtensionActivationService(MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService): void
     {
         $this->marketplaceProviderCommercialExtensionActivationService = $marketplaceProviderCommercialExtensionActivationService;
