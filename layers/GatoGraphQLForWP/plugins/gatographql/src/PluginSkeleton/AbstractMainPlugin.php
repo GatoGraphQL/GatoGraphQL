@@ -542,7 +542,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             PHP_INT_MAX
         );
 
-        $this->revalidateCommercialExtensions();
+        $this->revalidateCommercialExtensionLicenses();
         
     }
 
@@ -552,7 +552,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * disabled, the corresponding extension will also
      * be disabled.
      */
-    protected function revalidateCommercialExtensions(): void
+    protected function revalidateCommercialExtensionLicenses(): void
     {
         $commercialExtensionActivatedLicenseKeys = $this->getCommercialExtensionActivatedLicenseKeys();
         if ($commercialExtensionActivatedLicenseKeys !== []) {
