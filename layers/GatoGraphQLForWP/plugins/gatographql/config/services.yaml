@@ -40,6 +40,12 @@ services:
     GatoGraphQL\GatoGraphQL\Log\LoggerInterface:
         class: \GatoGraphQL\GatoGraphQL\Log\Logger
 
+    GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface:
+        class: \GatoGraphQL\GatoGraphQL\Container\ContainerManager
+
+    GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationService
+
     GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*
 

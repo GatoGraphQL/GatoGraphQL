@@ -17,7 +17,9 @@ use GatoGraphQL\GatoGraphQL\Constants\VirtualTutorialLessons;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolver;
@@ -539,6 +541,46 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             },
             PHP_INT_MAX
         );
+
+        $this->revalidateCommercialExtensionActivatedLicenses();
+    }
+
+    /**
+     * Execute a /validate operation for all existing
+     * licenses on the site. If any license has been
+     * disabled, the corresponding extension will also
+     * be disabled.
+     */
+    protected function revalidateCommercialExtensionActivatedLicenses(): void
+    {
+        $commercialExtensionActivatedLicenseKeys = $this->getCommercialExtensionActivatedLicenseKeys();
+        if ($commercialExtensionActivatedLicenseKeys === []) {
+            return;
+        }
+
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var LicenseValidationServiceInterface */
+        $licenseValidationService = $instanceManager->getInstance(LicenseValidationServiceInterface::class);
+
+        $licenseValidationService->validateGatoGraphQLCommercialExtensions(
+            $commercialExtensionActivatedLicenseKeys
+        );
+    }
+
+    /**
+     * @return array<string,string> Key: extension slug, Value: License key
+     */
+    protected function getCommercialExtensionActivatedLicenseKeys(): array
+    {
+        $commercialExtensionActivatedLicenseKeys = [];
+
+        /** @var array<string,mixed> */
+        $commercialExtensionActivatedLicenseEntries = get_option(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES, []);
+        foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $extensionLicenseProperties) {
+            $commercialExtensionActivatedLicenseKeys[$extensionSlug] = $extensionLicenseProperties[LicenseProperties::LICENSE_KEY];
+        }
+
+        return $commercialExtensionActivatedLicenseKeys;
     }
 
     /**
