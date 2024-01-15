@@ -55,9 +55,9 @@ use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Error;
-
 use WP_Term;
 use WP_Upgrader;
+
 use function __;
 use function add_action;
 use function do_action;
