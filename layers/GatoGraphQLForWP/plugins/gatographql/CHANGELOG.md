@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.6.0 - DATE
 
+### Improvements
+
+- Validate the license keys when updating the plugin
+
 ## 1.5.4 - 11/01/2024
 
 ### Fixed

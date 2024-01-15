@@ -169,6 +169,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 1.6.0 =
+* Validate the license keys when updating the plugin
+
 = 1.5.4 =
 * Fixed bug in resolver where innerBlocks is not set
 
