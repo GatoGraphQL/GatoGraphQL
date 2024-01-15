@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\Marketplace\MarketplaceProviderCommercialExtensionActivationServiceInterface;
@@ -21,9 +22,7 @@ use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Constants\FrameworkParams;
-use PoP\ComponentModel\Module as ComponentModelModule;
 
-use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
 use function update_option;
 
 /**
@@ -47,6 +46,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?MarketplaceProviderCommercialExtensionActivationServiceInterface $marketplaceProviderCommercialExtensionActivationService = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
+    private ?ContainerManagerInterface $containerManager = null;
 
     public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
     {
@@ -133,6 +133,19 @@ class SettingsMenuPage extends AbstractPluginMenuPage
             $this->licenseValidationService = $licenseValidationService;
         }
         return $this->licenseValidationService;
+    }
+    final public function setContainerManager(ContainerManagerInterface $containerManager): void
+    {
+        $this->containerManager = $containerManager;
+    }
+    final protected function getContainerManager(): ContainerManagerInterface
+    {
+        if ($this->containerManager === null) {
+            /** @var ContainerManagerInterface */
+            $containerManager = $this->instanceManager->getInstance(ContainerManagerInterface::class);
+            $this->containerManager = $containerManager;
+        }
+        return $this->containerManager;
     }
 
     public function getMenuPageSlug(): string
@@ -265,7 +278,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
              */
             \add_action(
                 "update_option_{$option}",
-                fn () => $this->flushContainer(
+                fn () => $this->getContainerManager()->flushContainer(
                     $flushRewriteRules,
                     $regenerateContainer,
                 )
@@ -431,7 +444,7 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         if ($doesPluginConfigurationSettingsAffectTheServiceContainer) { // @phpstan-ignore-line
             $regenerateContainer = true;
         }
-        $this->flushContainer(true, $regenerateContainer);
+        $this->getContainerManager()->flushContainer(true, $regenerateContainer);
     }
 
     /**
@@ -443,36 +456,6 @@ class SettingsMenuPage extends AbstractPluginMenuPage
         string $settingsCategory,
     ): array {
         return $this->getSettingsNormalizer()->normalizeSettingsByCategory($values, $settingsCategory);
-    }
-
-    protected function flushContainer(
-        bool $flushRewriteRules,
-        ?bool $regenerateContainer,
-    ): void {
-        if ($flushRewriteRules) {
-            \flush_rewrite_rules();
-        }
-
-        /**
-         * Update the timestamp, and maybe regenerate
-         * the service container.
-         */
-        if ($regenerateContainer === null) {
-            /**
-             * The System/Application Service Containers need to be regenerated
-             * when updating the plugin Settings only if Services can be added
-             * or not to the Container based on the context.
-             *
-             * @var ComponentModelModuleConfiguration
-             */
-            $moduleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
-            $regenerateContainer = $moduleConfiguration->supportDefiningServicesInTheContainerBasedOnTheContext();
-        }
-        if ($regenerateContainer) {
-            $this->getUserSettingsManager()->storeContainerTimestamp();
-        } else {
-            $this->getUserSettingsManager()->storeOperationalTimestamp();
-        }
     }
 
     protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
