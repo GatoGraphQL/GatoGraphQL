@@ -111,7 +111,6 @@
         "pop-cms-schema/customposts": "<1.5.5",
         "pop-cms-schema/categories-wp": "<1.5.5",
         "pop-cms-schema/meta": "<1.5.5",
-        "pop-cms-schema/comment-mutations": "<1.5.5",
         "pop-cms-schema/schema-commons": "<1.5.5",
         "pop-cms-schema/tags": "<1.5.5",
         "pop-cms-schema/usermeta-wp": "<1.5.5",
