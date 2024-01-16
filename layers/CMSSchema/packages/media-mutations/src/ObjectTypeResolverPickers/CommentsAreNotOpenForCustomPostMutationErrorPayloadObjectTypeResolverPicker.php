@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\CustomPostAddCommentMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -17,7 +16,6 @@ class CommentsAreNotOpenForCustomPostMutationErrorPayloadObjectTypeResolverPicke
     {
         return [
             RootAddCommentToCustomPostMutationErrorPayloadUnionTypeResolver::class,
-            CustomPostAddCommentMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
