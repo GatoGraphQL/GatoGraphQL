@@ -6,12 +6,12 @@ namespace GatoGraphQL\GatoGraphQL\Constants;
 
 /**
  * Tutorial lessons Markdown folder slugs, such as
- * "searching-wordpress-data/en.md"
+ * "duplicating-a-blog-post/en.md"
  */
 class TutorialLessons
 {
     public const INTRO = 'intro';
-    public const SEARCHING_WORDPRESS_DATA = 'searching-wordpress-data';
+    // public const SEARCHING_WORDPRESS_DATA = 'searching-wordpress-data';
     public const QUERYING_DYNAMIC_DATA = 'querying-dynamic-data';
     // public const EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS = 'exposing-public-and-private-endpoints';
     // public const COMPLEMENTING_WP_CLI = 'complementing-wp-cli';

@@ -3,11 +3,6 @@
 # This Persisted GraphQL query retrieves all posts that have a
 # thumbnail, and those that do not
 #
-# *********************************************************************
-#
-# More info:
-#   - https://gatographql.com/tutorial/searching-wordpress-data/
-#
 ########################################################################
 
 query {
