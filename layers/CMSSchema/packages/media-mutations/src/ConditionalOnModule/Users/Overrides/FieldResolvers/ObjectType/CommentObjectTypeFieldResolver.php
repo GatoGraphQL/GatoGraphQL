@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\Users\Overrides\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\MediaMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType\AddCommentToCustomPostObjectTypeFieldResolverTrait;
+use PoPCMSSchema\MediaMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType\CreateMediaItemObjectTypeFieldResolverTrait;
 use PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType\CommentObjectTypeFieldResolver as UpstreamCommentObjectTypeFieldResolver;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -13,7 +13,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResolver
 {
-    use AddCommentToCustomPostObjectTypeFieldResolverTrait;
+    use CreateMediaItemObjectTypeFieldResolverTrait;
 
     private ?UserTypeAPIInterface $userTypeAPI = null;
 

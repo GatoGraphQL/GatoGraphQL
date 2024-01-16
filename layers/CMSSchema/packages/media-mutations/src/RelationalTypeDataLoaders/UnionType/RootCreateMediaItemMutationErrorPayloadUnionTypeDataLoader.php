@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
+namespace PoPCMSSchema\MediaMutations\RelationalTypeDataLoaders\UnionType;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\RootCreateMediaItemMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\RootCreateMediaItemMutationErrorPayloadUnionTypeResolver;
-use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
-use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class RootCreateMediaItemMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
+class RootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
 {
     private ?RootCreateMediaItemMutationErrorPayloadUnionTypeResolver $rootCreateMediaItemMutationErrorPayloadUnionTypeResolver = null;
 
@@ -28,17 +26,7 @@ class RootCreateMediaItemMutationPayloadErrorsFieldTransientOperationPayloadObje
         return $this->rootCreateMediaItemMutationErrorPayloadUnionTypeResolver;
     }
 
-    /**
-     * @return array<class-string<ObjectTypeResolverInterface>>
-     */
-    public function getObjectTypeResolverClassesToAttachTo(): array
-    {
-        return [
-            RootCreateMediaItemMutationPayloadObjectTypeResolver::class,
-        ];
-    }
-
-    protected function getErrorsFieldFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
+    protected function getUnionTypeResolver(): UnionTypeResolverInterface
     {
         return $this->getRootCreateMediaItemMutationErrorPayloadUnionTypeResolver();
     }

@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType;
 
-class RootAddCommentToCustomPostMutationPayloadObjectTypeResolver extends AbstractCommentMutationPayloadObjectTypeResolver
+class RootCreateMediaItemMutationPayloadObjectTypeResolver extends AbstractCommentMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootAddCommentToCustomPostMutationPayload';
+        return 'RootCreateMediaItemMutationPayload';
     }
 
     public function getTypeDescription(): ?string

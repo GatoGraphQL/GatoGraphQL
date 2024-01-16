@@ -10,7 +10,7 @@ use PoPCMSSchema\MediaMutations\ModuleConfiguration;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
-trait AddCommentToCustomPostObjectTypeFieldResolverTrait
+trait CreateMediaItemObjectTypeFieldResolverTrait
 {
     abstract protected function getUserTypeAPI(): UserTypeAPIInterface;
 

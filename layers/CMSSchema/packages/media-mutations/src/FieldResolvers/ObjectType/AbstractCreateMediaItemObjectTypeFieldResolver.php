@@ -7,8 +7,8 @@ namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Module;
 use PoPCMSSchema\MediaMutations\ModuleConfiguration;
-use PoPCMSSchema\MediaMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
-use PoPCMSSchema\MediaMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
+use PoPCMSSchema\MediaMutations\MutationResolvers\CreateMediaItemMutationResolver;
+use PoPCMSSchema\MediaMutations\MutationResolvers\PayloadableCreateMediaItemMutationResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\CustomPostAddCommentInputObjectTypeResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\CustomPostAddCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\FieldResolvers\ObjectType\MaybeCommentableCustomPostObjectTypeFieldResolverTrait;
@@ -23,15 +23,15 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractCreateMediaItemObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MaybeCommentableCustomPostObjectTypeFieldResolverTrait;
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
-    private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
+    private ?CreateMediaItemMutationResolver $addCommentToCustomPostMutationResolver = null;
     private ?CustomPostAddCommentInputObjectTypeResolver $customPostAddCommentInputObjectTypeResolver = null;
     private ?CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver = null;
-    private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
+    private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
@@ -47,15 +47,15 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
         }
         return $this->commentObjectTypeResolver;
     }
-    final public function setAddCommentToCustomPostMutationResolver(AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver): void
+    final public function setCreateMediaItemMutationResolver(CreateMediaItemMutationResolver $addCommentToCustomPostMutationResolver): void
     {
         $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
     }
-    final protected function getAddCommentToCustomPostMutationResolver(): AddCommentToCustomPostMutationResolver
+    final protected function getCreateMediaItemMutationResolver(): CreateMediaItemMutationResolver
     {
         if ($this->addCommentToCustomPostMutationResolver === null) {
-            /** @var AddCommentToCustomPostMutationResolver */
-            $addCommentToCustomPostMutationResolver = $this->instanceManager->getInstance(AddCommentToCustomPostMutationResolver::class);
+            /** @var CreateMediaItemMutationResolver */
+            $addCommentToCustomPostMutationResolver = $this->instanceManager->getInstance(CreateMediaItemMutationResolver::class);
             $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
         }
         return $this->addCommentToCustomPostMutationResolver;
@@ -86,18 +86,18 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
         }
         return $this->customPostAddCommentMutationPayloadObjectTypeResolver;
     }
-    final public function setPayloadableAddCommentToCustomPostMutationResolver(PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver): void
+    final public function setPayloadableCreateMediaItemMutationResolver(PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver): void
     {
-        $this->payloadableAddCommentToCustomPostMutationResolver = $payloadableAddCommentToCustomPostMutationResolver;
+        $this->payloadableCreateMediaItemMutationResolver = $payloadableCreateMediaItemMutationResolver;
     }
-    final protected function getPayloadableAddCommentToCustomPostMutationResolver(): PayloadableAddCommentToCustomPostMutationResolver
+    final protected function getPayloadableCreateMediaItemMutationResolver(): PayloadableCreateMediaItemMutationResolver
     {
-        if ($this->payloadableAddCommentToCustomPostMutationResolver === null) {
-            /** @var PayloadableAddCommentToCustomPostMutationResolver */
-            $payloadableAddCommentToCustomPostMutationResolver = $this->instanceManager->getInstance(PayloadableAddCommentToCustomPostMutationResolver::class);
-            $this->payloadableAddCommentToCustomPostMutationResolver = $payloadableAddCommentToCustomPostMutationResolver;
+        if ($this->payloadableCreateMediaItemMutationResolver === null) {
+            /** @var PayloadableCreateMediaItemMutationResolver */
+            $payloadableCreateMediaItemMutationResolver = $this->instanceManager->getInstance(PayloadableCreateMediaItemMutationResolver::class);
+            $this->payloadableCreateMediaItemMutationResolver = $payloadableCreateMediaItemMutationResolver;
         }
-        return $this->payloadableAddCommentToCustomPostMutationResolver;
+        return $this->payloadableCreateMediaItemMutationResolver;
     }
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -216,8 +216,8 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
         $usePayloadableMediaMutations = $moduleConfiguration->usePayloadableMediaMutations();
         return match ($fieldName) {
             'addComment' => $usePayloadableMediaMutations
-                ? $this->getPayloadableAddCommentToCustomPostMutationResolver()
-                : $this->getAddCommentToCustomPostMutationResolver(),
+                ? $this->getPayloadableCreateMediaItemMutationResolver()
+                : $this->getCreateMediaItemMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }

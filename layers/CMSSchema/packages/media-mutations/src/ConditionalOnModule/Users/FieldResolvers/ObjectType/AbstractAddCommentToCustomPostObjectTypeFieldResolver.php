@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\Users\FieldResolvers\O
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType\AbstractAddCommentToCustomPostObjectTypeFieldResolver as UpstreamAbstractAddCommentToCustomPostObjectTypeFieldResolver;
+use PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType\AbstractCreateMediaItemObjectTypeFieldResolver as UpstreamAbstractCreateMediaItemObjectTypeFieldResolver;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 
 /**
@@ -15,9 +15,9 @@ use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
  * no need really, as Users will already exist for Mutations packages.
  * It's done like this just to organize the code better.
  */
-abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends UpstreamAbstractAddCommentToCustomPostObjectTypeFieldResolver
+abstract class AbstractCreateMediaItemObjectTypeFieldResolver extends UpstreamAbstractCreateMediaItemObjectTypeFieldResolver
 {
-    use AddCommentToCustomPostObjectTypeFieldResolverTrait;
+    use CreateMediaItemObjectTypeFieldResolverTrait;
 
     private ?UserTypeAPIInterface $userTypeAPI = null;
 

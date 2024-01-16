@@ -28,7 +28,7 @@ use stdClass;
 /**
  * Add a comment to a custom post. The user may be logged-in or not
  */
-class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
+class CreateMediaItemMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 

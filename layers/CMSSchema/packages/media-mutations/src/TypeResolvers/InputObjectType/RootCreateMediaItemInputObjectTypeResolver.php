@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
-class RootAddCommentToCustomPostInputObjectTypeResolver extends AbstractAddCommentToCustomPostInputObjectTypeResolver
+class RootCreateMediaItemInputObjectTypeResolver extends AbstractCreateMediaItemInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootAddCommentToCustomPostInput';
+        return 'RootCreateMediaItemInput';
     }
 
     public function getTypeDescription(): ?string
