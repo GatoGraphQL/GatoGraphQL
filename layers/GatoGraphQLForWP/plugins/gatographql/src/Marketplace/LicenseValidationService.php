@@ -322,11 +322,7 @@ class LicenseValidationService implements LicenseValidationServiceInterface
             return;
         }
 
-        if ($e instanceof LicenseOperationNotSuccessfulException) {
-            $type = 'error';
-        } else {
-            $type = 'warning';
-        }
+        $type = $e instanceof LicenseOperationNotSuccessfulException ? 'error' : 'warning';
         add_settings_error(
             PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
             'license_activation_' . $extensionSlug,
