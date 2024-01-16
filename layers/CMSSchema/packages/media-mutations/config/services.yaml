@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\MediaMutations\ComponentProcessors\:
+        resource: '../src/ComponentProcessors/*'
+
+    PoPCMSSchema\MediaMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'

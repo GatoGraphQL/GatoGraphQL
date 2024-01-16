@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\MediaMutations\ConditionalOnModule\Users\Overrides\FieldResolvers\:
+        resource: '../../../../src/ConditionalOnModule/Users/Overrides/FieldResolvers/*'
+
