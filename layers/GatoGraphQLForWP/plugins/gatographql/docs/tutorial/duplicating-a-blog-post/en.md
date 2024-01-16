@@ -203,7 +203,7 @@ With the [**Multiple Query Execution**](https://gatographql.com/extensions/multi
 
 🔥 **Tips:**
 
-**Multiple Query Execution** allows us to [execute complex functionality within a single request](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/), and better organize the logic by splitting the GraphQL document into a series a logical/atomic units:
+[**Multiple Query Execution**](https://gatographql.com/extensions/multiple-query-execution/) allows us to [execute complex functionality within a single request](https://gatographql.com/guides/schema/executing-multiple-queries-concurrently/), and better organize the logic by splitting the GraphQL document into a series a logical/atomic units:
 
 - There is no limit in how many operations can be added to the pipeline
 - Any operation can declare more than one dependency:
