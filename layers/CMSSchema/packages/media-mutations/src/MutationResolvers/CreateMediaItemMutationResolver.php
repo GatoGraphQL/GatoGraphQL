@@ -257,7 +257,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
 
     protected function additionals(string|int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction(HookNames::ADD_COMMENT, $comment_id, $fieldDataAccessor);
+        App::doAction(HookNames::CREATE_MEDIA_ITEM, $comment_id, $fieldDataAccessor);
     }
 
     /**
