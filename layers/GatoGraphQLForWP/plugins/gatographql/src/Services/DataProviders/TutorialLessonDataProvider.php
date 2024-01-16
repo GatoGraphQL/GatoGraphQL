@@ -29,14 +29,14 @@ class TutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            TutorialLessons::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
-                \__('Exposing public and private endpoints', 'gatographql'),
-                [
-                    ExtensionModuleResolver::ACCESS_CONTROL,
-                    ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-                    ExtensionModuleResolver::CACHE_CONTROL,
-                ]
-            ],
+            // TutorialLessons::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
+            //     \__('Exposing public and private endpoints', 'gatographql'),
+            //     [
+            //         ExtensionModuleResolver::ACCESS_CONTROL,
+            //         ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+            //         ExtensionModuleResolver::CACHE_CONTROL,
+            //     ]
+            // ],
             TutorialLessons::COMPLEMENTING_WP_CLI => [
                 \__('Complementing WP-CLI', 'gatographql')
             ],

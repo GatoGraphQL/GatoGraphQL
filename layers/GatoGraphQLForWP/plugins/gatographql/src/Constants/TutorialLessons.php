@@ -13,7 +13,7 @@ class TutorialLessons
     public const INTRO = 'intro';
     public const SEARCHING_WORDPRESS_DATA = 'searching-wordpress-data';
     public const QUERYING_DYNAMIC_DATA = 'querying-dynamic-data';
-    public const EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS = 'exposing-public-and-private-endpoints';
+    // public const EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS = 'exposing-public-and-private-endpoints';
     public const COMPLEMENTING_WP_CLI = 'complementing-wp-cli';
     public const INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI = 'injecting-multiple-resources-into-wp-cli';
     public const FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR = 'feeding-data-to-blocks-in-the-editor';

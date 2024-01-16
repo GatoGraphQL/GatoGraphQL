@@ -47,7 +47,6 @@ Read tutorial lesson [Sending a daily summary of activity](https://gatographql.c
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
-- [Exposing public and private endpoints](../../../../../docs/tutorial/exposing-public-and-private-endpoints/en.md)
 - [Complementing WP-CLI](../../../../../docs/tutorial/complementing-wp-cli/en.md)
 - [Injecting multiple resources into WP-CLI](../../../../../docs/tutorial/injecting-multiple-resources-into-wp-cli/en.md)
 - [Feeding data to blocks in the editor](../../../../../docs/tutorial/feeding-data-to-blocks-in-the-editor/en.md)
