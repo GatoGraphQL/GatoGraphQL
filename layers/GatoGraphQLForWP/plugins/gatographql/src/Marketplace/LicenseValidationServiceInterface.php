@@ -16,6 +16,7 @@ interface LicenseValidationServiceInterface
     public function activateDeactivateValidateGatoGraphQLCommercialExtensions(
         array $previousLicenseKeys,
         array $submittedLicenseKeys,
+        ?string $formSettingName = null,
     ): void;
 
     /**
@@ -26,5 +27,6 @@ interface LicenseValidationServiceInterface
      */
     public function validateGatoGraphQLCommercialExtensions(
         array $activeLicenseKeys,
+        ?string $formSettingName = null,
     ): void;
 }
