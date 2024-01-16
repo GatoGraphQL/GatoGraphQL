@@ -40,13 +40,13 @@ class TutorialLessonDataProvider
             TutorialLessons::COMPLEMENTING_WP_CLI => [
                 \__('Complementing WP-CLI', 'gatographql')
             ],
-            TutorialLessons::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
-                \__('Injecting multiple resources into WP-CLI', 'gatographql'),
-                [
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ]
-            ],
+            // TutorialLessons::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
+            //     \__('Injecting multiple resources into WP-CLI', 'gatographql'),
+            //     [
+            //         ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+            //         ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+            //     ]
+            // ],
             // TutorialLessons::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
             //     \__('Feeding data to blocks in the editor', 'gatographql'),
             // ],
