@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootMyCommentsFilterInputObjectTypeResolver;
-use PoPCMSSchema\Comments\TypeAPIs\MediaTypeAPIInterface;
-use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentByOneofInputObjectTypeResolver;
-use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
-use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\RootCommentPaginationInputObjectTypeResolver;
-use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootMyMediaFilterInputObjectTypeResolver;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByOneofInputObjectTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemSortInputObjectTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\InputObjectType\RootMediaItemPaginationInputObjectTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
@@ -33,11 +33,11 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
-    private ?CommentByOneofInputObjectTypeResolver $commentByOneofInputObjectTypeResolver = null;
-    private ?RootMyCommentsFilterInputObjectTypeResolver $rootMyCommentsFilterInputObjectTypeResolver = null;
-    private ?RootCommentPaginationInputObjectTypeResolver $rootCommentPaginationInputObjectTypeResolver = null;
-    private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
+    private ?MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver = null;
+    private ?RootMyMediaFilterInputObjectTypeResolver $rootMyMediaFilterInputObjectTypeResolver = null;
+    private ?RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver = null;
+    private ?MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
@@ -66,70 +66,70 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->intScalarTypeResolver;
     }
-    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
-    final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        if ($this->commentObjectTypeResolver === null) {
-            /** @var CommentObjectTypeResolver */
-            $commentObjectTypeResolver = $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
-            $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        if ($this->mediaObjectTypeResolver === null) {
+            /** @var MediaObjectTypeResolver */
+            $mediaObjectTypeResolver = $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+            $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         }
-        return $this->commentObjectTypeResolver;
+        return $this->mediaObjectTypeResolver;
     }
-    final public function setCommentByOneofInputObjectTypeResolver(CommentByOneofInputObjectTypeResolver $commentByOneofInputObjectTypeResolver): void
+    final public function setMediaItemByOneofInputObjectTypeResolver(MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver): void
     {
-        $this->commentByOneofInputObjectTypeResolver = $commentByOneofInputObjectTypeResolver;
+        $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
     }
-    final protected function getCommentByOneofInputObjectTypeResolver(): CommentByOneofInputObjectTypeResolver
+    final protected function getMediaItemByOneofInputObjectTypeResolver(): MediaItemByOneofInputObjectTypeResolver
     {
-        if ($this->commentByOneofInputObjectTypeResolver === null) {
-            /** @var CommentByOneofInputObjectTypeResolver */
-            $commentByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CommentByOneofInputObjectTypeResolver::class);
-            $this->commentByOneofInputObjectTypeResolver = $commentByOneofInputObjectTypeResolver;
+        if ($this->mediaItemByOneofInputObjectTypeResolver === null) {
+            /** @var MediaItemByOneofInputObjectTypeResolver */
+            $mediaItemByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(MediaItemByOneofInputObjectTypeResolver::class);
+            $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
         }
-        return $this->commentByOneofInputObjectTypeResolver;
+        return $this->mediaItemByOneofInputObjectTypeResolver;
     }
-    final public function setRootMyCommentsFilterInputObjectTypeResolver(RootMyCommentsFilterInputObjectTypeResolver $rootMyCommentsFilterInputObjectTypeResolver): void
+    final public function setRootMyMediaFilterInputObjectTypeResolver(RootMyMediaFilterInputObjectTypeResolver $rootMyMediaFilterInputObjectTypeResolver): void
     {
-        $this->rootMyCommentsFilterInputObjectTypeResolver = $rootMyCommentsFilterInputObjectTypeResolver;
+        $this->rootMyMediaFilterInputObjectTypeResolver = $rootMyMediaFilterInputObjectTypeResolver;
     }
-    final protected function getRootMyCommentsFilterInputObjectTypeResolver(): RootMyCommentsFilterInputObjectTypeResolver
+    final protected function getRootMyMediaFilterInputObjectTypeResolver(): RootMyMediaFilterInputObjectTypeResolver
     {
-        if ($this->rootMyCommentsFilterInputObjectTypeResolver === null) {
-            /** @var RootMyCommentsFilterInputObjectTypeResolver */
-            $rootMyCommentsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootMyCommentsFilterInputObjectTypeResolver::class);
-            $this->rootMyCommentsFilterInputObjectTypeResolver = $rootMyCommentsFilterInputObjectTypeResolver;
+        if ($this->rootMyMediaFilterInputObjectTypeResolver === null) {
+            /** @var RootMyMediaFilterInputObjectTypeResolver */
+            $rootMyMediaFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootMyMediaFilterInputObjectTypeResolver::class);
+            $this->rootMyMediaFilterInputObjectTypeResolver = $rootMyMediaFilterInputObjectTypeResolver;
         }
-        return $this->rootMyCommentsFilterInputObjectTypeResolver;
+        return $this->rootMyMediaFilterInputObjectTypeResolver;
     }
-    final public function setRootCommentPaginationInputObjectTypeResolver(RootCommentPaginationInputObjectTypeResolver $rootCommentPaginationInputObjectTypeResolver): void
+    final public function setRootMediaItemPaginationInputObjectTypeResolver(RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver): void
     {
-        $this->rootCommentPaginationInputObjectTypeResolver = $rootCommentPaginationInputObjectTypeResolver;
+        $this->rootMediaItemPaginationInputObjectTypeResolver = $rootMediaItemPaginationInputObjectTypeResolver;
     }
-    final protected function getRootCommentPaginationInputObjectTypeResolver(): RootCommentPaginationInputObjectTypeResolver
+    final protected function getRootMediaItemPaginationInputObjectTypeResolver(): RootMediaItemPaginationInputObjectTypeResolver
     {
-        if ($this->rootCommentPaginationInputObjectTypeResolver === null) {
-            /** @var RootCommentPaginationInputObjectTypeResolver */
-            $rootCommentPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(RootCommentPaginationInputObjectTypeResolver::class);
-            $this->rootCommentPaginationInputObjectTypeResolver = $rootCommentPaginationInputObjectTypeResolver;
+        if ($this->rootMediaItemPaginationInputObjectTypeResolver === null) {
+            /** @var RootMediaItemPaginationInputObjectTypeResolver */
+            $rootMediaItemPaginationInputObjectTypeResolver = $this->instanceManager->getInstance(RootMediaItemPaginationInputObjectTypeResolver::class);
+            $this->rootMediaItemPaginationInputObjectTypeResolver = $rootMediaItemPaginationInputObjectTypeResolver;
         }
-        return $this->rootCommentPaginationInputObjectTypeResolver;
+        return $this->rootMediaItemPaginationInputObjectTypeResolver;
     }
-    final public function setCommentSortInputObjectTypeResolver(CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver): void
+    final public function setMediaItemSortInputObjectTypeResolver(MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver): void
     {
-        $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
+        $this->mediaItemSortInputObjectTypeResolver = $mediaItemSortInputObjectTypeResolver;
     }
-    final protected function getCommentSortInputObjectTypeResolver(): CommentSortInputObjectTypeResolver
+    final protected function getMediaItemSortInputObjectTypeResolver(): MediaItemSortInputObjectTypeResolver
     {
-        if ($this->commentSortInputObjectTypeResolver === null) {
-            /** @var CommentSortInputObjectTypeResolver */
-            $commentSortInputObjectTypeResolver = $this->instanceManager->getInstance(CommentSortInputObjectTypeResolver::class);
-            $this->commentSortInputObjectTypeResolver = $commentSortInputObjectTypeResolver;
+        if ($this->mediaItemSortInputObjectTypeResolver === null) {
+            /** @var MediaItemSortInputObjectTypeResolver */
+            $mediaItemSortInputObjectTypeResolver = $this->instanceManager->getInstance(MediaItemSortInputObjectTypeResolver::class);
+            $this->mediaItemSortInputObjectTypeResolver = $mediaItemSortInputObjectTypeResolver;
         }
-        return $this->commentSortInputObjectTypeResolver;
+        return $this->mediaItemSortInputObjectTypeResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -161,20 +161,20 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldNamesToResolve(): array
     {
         return [
-            'myComment',
-            'myCommentCount',
-            'myComments',
+            'myMediaItem',
+            'myMediaItemCount',
+            'myMediaItems',
         ];
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'myCommentCount'
+            'myMediaItemCount'
                 => $this->getIntScalarTypeResolver(),
-            'myComments',
-            'myComment'
-                => $this->getCommentObjectTypeResolver(),
+            'myMediaItems',
+            'myMediaItem'
+                => $this->getMediaObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -183,9 +183,9 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'myCommentCount'
+            'myMediaItemCount'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'myComments'
+            'myMediaItems'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -195,9 +195,9 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myComment' => $this->__('Comment by the logged-in user on the site with a specific ID', 'pop-comments'),
-            'myCommentCount' => $this->__('Number of comments by the logged-in user on the site', 'pop-comments'),
-            'myComments' => $this->__('Comments by the logged-in user on the site', 'pop-comments'),
+            'myMediaItem' => $this->__('MediaItem by the logged-in user on the site with a specific ID', 'pop-mediaItems'),
+            'myMediaItemCount' => $this->__('Number of mediaItems by the logged-in user on the site', 'pop-mediaItems'),
+            'myMediaItems' => $this->__('MediaItems by the logged-in user on the site', 'pop-mediaItems'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -209,24 +209,24 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
         return match ($fieldName) {
-            'myComment' => array_merge(
+            'myMediaItem' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'by' => $this->getCommentByOneofInputObjectTypeResolver(),
+                    'by' => $this->getMediaItemByOneofInputObjectTypeResolver(),
                 ]
             ),
-            'myComments' => array_merge(
+            'myMediaItems' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootMyCommentsFilterInputObjectTypeResolver(),
-                    'pagination' => $this->getRootCommentPaginationInputObjectTypeResolver(),
-                    'sort' => $this->getCommentSortInputObjectTypeResolver(),
+                    'filter' => $this->getRootMyMediaFilterInputObjectTypeResolver(),
+                    'pagination' => $this->getRootMediaItemPaginationInputObjectTypeResolver(),
+                    'sort' => $this->getMediaItemSortInputObjectTypeResolver(),
                 ]
             ),
-            'myCommentCount' => array_merge(
+            'myMediaItemCount' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootMyCommentsFilterInputObjectTypeResolver(),
+                    'filter' => $this->getRootMyMediaFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
@@ -236,7 +236,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['myComment' => 'by'] => SchemaTypeModifiers::MANDATORY,
+            ['myMediaItem' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -254,13 +254,13 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             ]
         );
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'myCommentCount':
-                return $this->getMediaTypeAPI()->getCommentCount($query);
-            case 'myComments':
-                return $this->getMediaTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
-            case 'myComment':
-                if ($comments = $this->getMediaTypeAPI()->getComments($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
-                    return $comments[0];
+            case 'myMediaItemCount':
+                return $this->getMediaTypeAPI()->getMediaItemCount($query);
+            case 'myMediaItems':
+                return $this->getMediaTypeAPI()->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+            case 'myMediaItem':
+                if ($mediaItems = $this->getMediaTypeAPI()->getMediaItems($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
+                    return $mediaItems[0];
                 }
                 return null;
         }
