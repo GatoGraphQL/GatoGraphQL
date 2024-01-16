@@ -110,6 +110,10 @@ services:
           ../../layers/CMSSchema/packages/media-wp:/app/vendor/pop-cms-schema/media-wp
         - '../../layers/CMSSchema/packages/media:/app/vendor/pop-cms-schema/media'
         - >-
+          ../../layers/CMSSchema/packages/media-mutations-wp:/app/vendor/pop-cms-schema/media-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/media-mutations:/app/vendor/pop-cms-schema/media-mutations
+        - >-
           ../../layers/CMSSchema/packages/menus-wp:/app/vendor/pop-cms-schema/menus-wp
         - '../../layers/CMSSchema/packages/menus:/app/vendor/pop-cms-schema/menus'
         - '../../layers/CMSSchema/packages/meta:/app/vendor/pop-cms-schema/meta'
