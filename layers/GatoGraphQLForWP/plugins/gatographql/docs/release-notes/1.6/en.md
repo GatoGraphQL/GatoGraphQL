@@ -3,3 +3,4 @@
 ## Improvements
 
 - Validate the license keys when updating the plugin
+- Simplified the Tutorial section

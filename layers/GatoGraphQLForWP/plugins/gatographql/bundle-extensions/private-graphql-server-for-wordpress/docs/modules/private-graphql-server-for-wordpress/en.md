@@ -8,7 +8,7 @@ Read tutorial lesson [Sending a notification when there is a new post](https://g
 
 In addition, fetching data to render dynamic blocks can become DRY: The same GraphQL query can be executed for both the WordPress editor (via JS code) and the back-end when accessing the single post (via PHP code).
 
-Read tutorial lesson [DRY code for blocks in Javascript and PHP](https://gatographql.com/tutorial/dry-code-for-blocks-in-javascript-and-php/), to learn more.
+<!-- Read tutorial lesson [DRY code for blocks in Javascript and PHP](https://gatographql.com/tutorial/dry-code-for-blocks-in-javascript-and-php/), to learn more. -->
 
 ## List of bundled extensions
 
