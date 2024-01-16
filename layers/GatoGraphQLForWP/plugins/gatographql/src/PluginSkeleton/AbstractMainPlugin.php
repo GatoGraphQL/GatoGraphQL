@@ -999,7 +999,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/report/posts-by-thumbnail',
-                                // TutorialLessons::SEARCHING_WORDPRESS_DATA,
+                                TutorialLessons::SEARCHING_WORDPRESS_DATA,
                             ),
                         ],
                     ],
@@ -1017,7 +1017,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                 'admin/report/users-by-locale',
-                                // TutorialLessons::SEARCHING_WORDPRESS_DATA,
+                                TutorialLessons::SEARCHING_WORDPRESS_DATA,
                             ),
                         ],
                     ],

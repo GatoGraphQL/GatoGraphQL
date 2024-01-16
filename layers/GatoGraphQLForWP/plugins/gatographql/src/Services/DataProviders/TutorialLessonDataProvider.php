@@ -18,9 +18,9 @@ class TutorialLessonDataProvider
             TutorialLessons::INTRO => [
                 \__('Intro', 'gatographql'),
             ],
-            // TutorialLessons::SEARCHING_WORDPRESS_DATA => [
-            //     \__('Searching WordPress data', 'gatographql'),
-            // ],
+            TutorialLessons::SEARCHING_WORDPRESS_DATA => [
+                \__('Searching WordPress data', 'gatographql'),
+            ],
             TutorialLessons::QUERYING_DYNAMIC_DATA => [
                 \__('Querying dynamic data', 'gatographql'),
                 [

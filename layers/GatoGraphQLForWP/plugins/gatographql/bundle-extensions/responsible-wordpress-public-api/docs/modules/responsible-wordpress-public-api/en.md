@@ -38,3 +38,7 @@ With the provided extensions in this bundle, creating and configuring public end
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [Response Error Trigger](../../../../../extensions/response-error-trigger/docs/modules/response-error-trigger/en.md)
 - [Schema Editing Access](../../../../../extensions/schema-editing-access/docs/modules/schema-editing-access/en.md)
+
+<!-- ## Tutorial lessons powered by the “Responsible WordPress Public API” Bundle
+
+- [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)

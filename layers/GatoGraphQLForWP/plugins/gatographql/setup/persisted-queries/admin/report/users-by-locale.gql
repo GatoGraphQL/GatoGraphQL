@@ -9,6 +9,11 @@
 #   - localeRegex: The regex to identify the locale
 #       eg: "es_[A-Z]+" for the Spanish locale (es_AR for Argentina, es_ES for Spain, etc)
 #
+# *********************************************************************
+#
+# More info:
+#   - https://gatographql.com/tutorial/searching-wordpress-data/
+#
 ########################################################################
 
 query FetchUsersByLocale(

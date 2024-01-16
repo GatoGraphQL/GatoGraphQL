@@ -45,6 +45,7 @@ Read tutorial lesson [Sending a daily summary of activity](https://gatographql.c
 
 <!-- ## Tutorial lessons powered by the “Tailored WordPress Automator” Bundle
 
+- [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
 - [Duplicating a blog post](../../../../../docs/tutorial/duplicating-a-blog-post/en.md)
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)
