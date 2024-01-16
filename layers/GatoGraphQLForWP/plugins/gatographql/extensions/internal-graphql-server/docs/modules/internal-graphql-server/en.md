@@ -196,7 +196,6 @@ mutation SendEmail @depends(on: "GetEmailData") {
 
 <!-- ## Tutorial lessons referencing extension
 
-- [DRY code for blocks in Javascript and PHP](../../../../../docs/tutorial/dry-code-for-blocks-in-javascript-and-php/en.md)
 - [Sending a notification when there is a new post](../../../../../docs/tutorial/sending-a-notification-when-there-is-a-new-post/en.md)
 - [Sending a daily summary of activity](../../../../../docs/tutorial/sending-a-daily-summary-of-activity/en.md)
 - [Automatically adding a mandatory block](../../../../../docs/tutorial/automatically-adding-a-mandatory-block/en.md) -->

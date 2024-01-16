@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Validate the license keys when updating the plugin
+- Simplified the Tutorial section
 
 ## 1.5.4 - 11/01/2024
 

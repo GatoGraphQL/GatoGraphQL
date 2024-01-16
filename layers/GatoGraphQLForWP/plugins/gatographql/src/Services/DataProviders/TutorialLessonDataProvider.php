@@ -29,36 +29,36 @@ class TutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            TutorialLessons::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
-                \__('Exposing public and private endpoints', 'gatographql'),
-                [
-                    ExtensionModuleResolver::ACCESS_CONTROL,
-                    ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
-                    ExtensionModuleResolver::CACHE_CONTROL,
-                ]
-            ],
-            TutorialLessons::COMPLEMENTING_WP_CLI => [
-                \__('Complementing WP-CLI', 'gatographql')
-            ],
-            TutorialLessons::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
-                \__('Injecting multiple resources into WP-CLI', 'gatographql'),
-                [
-                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
-                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
-                ]
-            ],
-            TutorialLessons::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
-                \__('Feeding data to blocks in the editor', 'gatographql'),
-            ],
-            TutorialLessons::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
-                \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
-                [
-                    ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                ]
-            ],
-            TutorialLessons::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
-                \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
-            ],
+            // TutorialLessons::EXPOSING_PUBLIC_AND_PRIVATE_ENDPOINTS => [
+            //     \__('Exposing public and private endpoints', 'gatographql'),
+            //     [
+            //         ExtensionModuleResolver::ACCESS_CONTROL,
+            //         ExtensionModuleResolver::ACCESS_CONTROL_VISITOR_IP,
+            //         ExtensionModuleResolver::CACHE_CONTROL,
+            //     ]
+            // ],
+            // TutorialLessons::COMPLEMENTING_WP_CLI => [
+            //     \__('Complementing WP-CLI', 'gatographql')
+            // ],
+            // TutorialLessons::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
+            //     \__('Injecting multiple resources into WP-CLI', 'gatographql'),
+            //     [
+            //         ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+            //         ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+            //     ]
+            // ],
+            // TutorialLessons::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
+            //     \__('Feeding data to blocks in the editor', 'gatographql'),
+            // ],
+            // TutorialLessons::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
+            //     \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
+            //     [
+            //         ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+            //     ]
+            // ],
+            // TutorialLessons::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
+            //     \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
+            // ],
             TutorialLessons::DUPLICATING_A_BLOG_POST => [
                 \__('Duplicating a blog post', 'gatographql'),
                 [

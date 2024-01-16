@@ -33,10 +33,6 @@ Check this video on translating all blocks in a post:
 <!-- ## Tutorial lessons powered by the “Simplest WordPress Content Translation” Bundle
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
-- [Exposing public and private endpoints](../../../../../docs/tutorial/exposing-public-and-private-endpoints/en.md)
-- [Complementing WP-CLI](../../../../../docs/tutorial/complementing-wp-cli/en.md)
-- [Injecting multiple resources into WP-CLI](../../../../../docs/tutorial/injecting-multiple-resources-into-wp-cli/en.md)
-- [Mapping JS components to (Gutenberg) blocks](../../../../../docs/tutorial/mapping-js-components-to-gutenberg-blocks/en.md)
 - [Duplicating a blog post](../../../../../docs/tutorial/duplicating-a-blog-post/en.md)
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)
 - [Customizing content for different users](../../../../../docs/tutorial/customizing-content-for-different-users/en.md)

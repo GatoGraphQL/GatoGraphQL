@@ -882,7 +882,6 @@ query {
 <!-- ## Tutorial lessons referencing extension
 
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
-- [Injecting multiple resources into WP-CLI](../../../../../docs/tutorial/injecting-multiple-resources-into-wp-cli/en.md)
 - [Duplicating a blog post](../../../../../docs/tutorial/duplicating-a-blog-post/en.md)
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)
 - [Customizing content for different users](../../../../../docs/tutorial/customizing-content-for-different-users/en.md)
