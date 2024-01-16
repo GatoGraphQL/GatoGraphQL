@@ -17,7 +17,7 @@ class TutorialLessons
     public const COMPLEMENTING_WP_CLI = 'complementing-wp-cli';
     public const INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI = 'injecting-multiple-resources-into-wp-cli';
     public const FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR = 'feeding-data-to-blocks-in-the-editor';
-    public const DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP = 'dry-code-for-blocks-in-javascript-and-php';
+    // public const DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP = 'dry-code-for-blocks-in-javascript-and-php';
     public const MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS = 'mapping-js-components-to-gutenberg-blocks';
     public const DUPLICATING_A_BLOG_POST = 'duplicating-a-blog-post';
     public const DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE = 'duplicating-multiple-blog-posts-at-once';

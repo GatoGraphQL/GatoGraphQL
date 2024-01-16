@@ -50,12 +50,12 @@ class TutorialLessonDataProvider
             TutorialLessons::FEEDING_DATA_TO_BLOCKS_IN_THE_EDITOR => [
                 \__('Feeding data to blocks in the editor', 'gatographql'),
             ],
-            TutorialLessons::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
-                \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
-                [
-                    ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
-                ]
-            ],
+            // TutorialLessons::DRY_CODE_FOR_BLOCKS_IN_JAVASCRIPT_AND_PHP => [
+            //     \__('DRY code for blocks in Javascript and PHP', 'gatographql'),
+            //     [
+            //         ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
+            //     ]
+            // ],
             TutorialLessons::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
                 \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
             ],
