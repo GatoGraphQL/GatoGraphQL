@@ -216,7 +216,8 @@ class SettingsMenuPage extends AbstractPluginMenuPage
                     $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
                     $this->getLicenseValidationService()->activateDeactivateValidateGatoGraphQLCommercialExtensions(
                         $oldValue[$settingOptionName] ?? [],
-                        $values[$settingOptionName] ?? []
+                        $values[$settingOptionName] ?? [],
+                        PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
                     );
                     return;
                 }
