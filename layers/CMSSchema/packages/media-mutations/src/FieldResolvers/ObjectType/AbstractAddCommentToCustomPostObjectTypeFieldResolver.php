@@ -32,7 +32,7 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
     private ?CustomPostAddCommentInputObjectTypeResolver $customPostAddCommentInputObjectTypeResolver = null;
     private ?CustomPostAddCommentMutationPayloadObjectTypeResolver $customPostAddCommentMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
-    private ?MediaTypeAPIInterface $commentTypeAPI = null;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
@@ -99,18 +99,18 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
         }
         return $this->payloadableAddCommentToCustomPostMutationResolver;
     }
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $commentTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
-        $this->commentTypeAPI = $commentTypeAPI;
+        $this->mediaTypeAPI = $mediaTypeAPI;
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        if ($this->commentTypeAPI === null) {
+        if ($this->mediaTypeAPI === null) {
             /** @var MediaTypeAPIInterface */
-            $commentTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
-            $this->commentTypeAPI = $commentTypeAPI;
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
         }
-        return $this->commentTypeAPI;
+        return $this->mediaTypeAPI;
     }
 
     /**

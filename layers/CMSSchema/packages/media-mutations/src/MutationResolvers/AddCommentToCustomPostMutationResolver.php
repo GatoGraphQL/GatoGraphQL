@@ -32,37 +32,37 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    private ?MediaTypeAPIInterface $commentTypeAPI = null;
-    private ?MediaTypeMutationAPIInterface $commentTypeMutationAPI = null;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
 
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $commentTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
-        $this->commentTypeAPI = $commentTypeAPI;
+        $this->mediaTypeAPI = $mediaTypeAPI;
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        if ($this->commentTypeAPI === null) {
+        if ($this->mediaTypeAPI === null) {
             /** @var MediaTypeAPIInterface */
-            $commentTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
-            $this->commentTypeAPI = $commentTypeAPI;
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
         }
-        return $this->commentTypeAPI;
+        return $this->mediaTypeAPI;
     }
-    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $commentTypeMutationAPI): void
+    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
     {
-        $this->commentTypeMutationAPI = $commentTypeMutationAPI;
+        $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
     }
     final protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface
     {
-        if ($this->commentTypeMutationAPI === null) {
+        if ($this->mediaTypeMutationAPI === null) {
             /** @var MediaTypeMutationAPIInterface */
-            $commentTypeMutationAPI = $this->instanceManager->getInstance(MediaTypeMutationAPIInterface::class);
-            $this->commentTypeMutationAPI = $commentTypeMutationAPI;
+            $mediaTypeMutationAPI = $this->instanceManager->getInstance(MediaTypeMutationAPIInterface::class);
+            $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
         }
-        return $this->commentTypeMutationAPI;
+        return $this->mediaTypeMutationAPI;
     }
     final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
     {

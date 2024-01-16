@@ -33,7 +33,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
 {
     use WithLimitFieldArgResolverTrait;
 
-    private ?MediaTypeAPIInterface $commentTypeAPI = null;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?CommentByOneofInputObjectTypeResolver $commentByOneofInputObjectTypeResolver = null;
@@ -42,18 +42,18 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?CommentSortInputObjectTypeResolver $commentSortInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $commentTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
-        $this->commentTypeAPI = $commentTypeAPI;
+        $this->mediaTypeAPI = $mediaTypeAPI;
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        if ($this->commentTypeAPI === null) {
+        if ($this->mediaTypeAPI === null) {
             /** @var MediaTypeAPIInterface */
-            $commentTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
-            $this->commentTypeAPI = $commentTypeAPI;
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
         }
-        return $this->commentTypeAPI;
+        return $this->mediaTypeAPI;
     }
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {

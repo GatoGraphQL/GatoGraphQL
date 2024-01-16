@@ -24,25 +24,25 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?MediaTypeAPIInterface $commentTypeAPI = null;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
     private ?CommentReplyInputObjectTypeResolver $commentReplyInputObjectTypeResolver = null;
     private ?CommentReplyMutationPayloadObjectTypeResolver $commentReplyMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
 
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $commentTypeAPI): void
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
-        $this->commentTypeAPI = $commentTypeAPI;
+        $this->mediaTypeAPI = $mediaTypeAPI;
     }
     final protected function getMediaTypeAPI(): MediaTypeAPIInterface
     {
-        if ($this->commentTypeAPI === null) {
+        if ($this->mediaTypeAPI === null) {
             /** @var MediaTypeAPIInterface */
-            $commentTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
-            $this->commentTypeAPI = $commentTypeAPI;
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
         }
-        return $this->commentTypeAPI;
+        return $this->mediaTypeAPI;
     }
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
