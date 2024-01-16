@@ -37,9 +37,9 @@ class TutorialLessonDataProvider
             //         ExtensionModuleResolver::CACHE_CONTROL,
             //     ]
             // ],
-            TutorialLessons::COMPLEMENTING_WP_CLI => [
-                \__('Complementing WP-CLI', 'gatographql')
-            ],
+            // TutorialLessons::COMPLEMENTING_WP_CLI => [
+            //     \__('Complementing WP-CLI', 'gatographql')
+            // ],
             // TutorialLessons::INJECTING_MULTIPLE_RESOURCES_INTO_WP_CLI => [
             //     \__('Injecting multiple resources into WP-CLI', 'gatographql'),
             //     [

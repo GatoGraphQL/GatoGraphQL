@@ -102,7 +102,7 @@ Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://gith
 
 With Gato GraphQL you can query data from the WordPress database, and then inject the results into a WP-CLI command (either to select a specific resource, or update an option with some value, or other).
 
-Check out tutorial lesson [Complementing WP-CLI](https://gatographql.com/tutorial/complementing-wp-cli/) for a thorough description on how to do it.
+Check out tutorial lesson [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli/) for a thorough description on how to do it.
 
 = How do I use Gato GraphQL to build headless sites? =
 
