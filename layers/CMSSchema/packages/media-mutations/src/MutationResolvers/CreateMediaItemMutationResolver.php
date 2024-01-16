@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MediaMutations\Exception\CommentCRUDMutationException;
+use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\Module;
 use PoPCMSSchema\MediaMutations\ModuleConfiguration;
@@ -309,7 +309,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
     }
 
     /**
-     * @throws CommentCRUDMutationException In case of error
+     * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $comment_data
      */
     protected function insertComment(array $comment_data): string|int

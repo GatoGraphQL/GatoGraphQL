@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MediaMutations\Exception;
 
 use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 
-final class CommentCRUDMutationException extends AbstractPayloadClientException
+final class MediaItemCRUDMutationException extends AbstractPayloadClientException
 {
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
-use PoPCMSSchema\MediaMutations\Exception\CommentCRUDMutationException;
+use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentAuthorEmailIsMissingErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentAuthorNameIsMissingErrorPayload;
@@ -53,7 +53,7 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
-        } catch (CommentCRUDMutationException $commentCRUDMutationException) {
+        } catch (MediaItemCRUDMutationException $commentCRUDMutationException) {
             return $this->createFailureObjectMutationPayload(
                 [
                     $this->createGenericErrorPayloadFromPayloadClientException($commentCRUDMutationException),

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutationsWP\TypeAPIs;
 
 use PoP\Root\Services\BasicServiceTrait;
-use PoPCMSSchema\MediaMutations\Exception\CommentCRUDMutationException;
+use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 
 /**
@@ -16,7 +16,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     use BasicServiceTrait;
 
     /**
-     * @throws CommentCRUDMutationException In case of error
+     * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $comment_data
      */
     public function insertComment(array $comment_data): string|int
@@ -60,7 +60,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
         $commentID = \wp_insert_comment($comment_data);
         if ($commentID === false) {
-            throw new CommentCRUDMutationException(
+            throw new MediaItemCRUDMutationException(
                 $this->__('Could not create the comment', 'media-mutations-wp')
             );
         }
