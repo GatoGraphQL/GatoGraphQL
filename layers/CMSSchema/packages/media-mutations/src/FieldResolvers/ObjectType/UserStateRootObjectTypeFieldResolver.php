@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootMyCommentsFilterInputObjectTypeResolver;
-use PoPCMSSchema\Comments\ComponentProcessors\SingleCommentFilterInputContainerComponentProcessor;
 use PoPCMSSchema\Comments\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\InputObjectType\CommentSortInputObjectTypeResolver;
@@ -16,7 +15,6 @@ use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
-use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -201,14 +199,6 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myCommentCount' => $this->__('Number of comments by the logged-in user on the site', 'pop-comments'),
             'myComments' => $this->__('Comments by the logged-in user on the site', 'pop-comments'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
-    }
-
-    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?Component
-    {
-        return match ($fieldName) {
-            'myComment' => new Component(SingleCommentFilterInputContainerComponentProcessor::class, SingleCommentFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_COMMENT_STATUS),
-            default => parent::getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName),
         };
     }
 
