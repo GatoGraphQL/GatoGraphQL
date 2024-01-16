@@ -124,6 +124,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
                 $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
                     $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
+                    $e,
+                );
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
                     $errorMessage,
                     $e,
                 );
@@ -183,6 +187,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
                 $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
                     $commercialExtensionActivatedLicenseEntries,
                     $extensionSlug,
+                    $e,
+                );
+                $this->showAdminMessagesOnLicenseOperationError(
+                    $extensionSlug,
                     $errorMessage,
                     $e,
                 );
@@ -227,6 +235,10 @@ class LicenseValidationService implements LicenseValidationServiceInterface
                 );
                 $commercialExtensionActivatedLicenseEntries = $this->handleLicenseOperationError(
                     $commercialExtensionActivatedLicenseEntries,
+                    $extensionSlug,
+                    $e,
+                );
+                $this->showAdminMessagesOnLicenseOperationError(
                     $extensionSlug,
                     $errorMessage,
                     $e,
@@ -277,23 +289,26 @@ class LicenseValidationService implements LicenseValidationServiceInterface
      * does not exist, or some other problem, and hence deactivate the
      * instance.
      *
-     * Show an error message to the admin.
-     *
      * @param array<string,mixed> $commercialExtensionActivatedLicenseEntries
      * @return array<string,mixed>
      */
     protected function handleLicenseOperationError(
         array $commercialExtensionActivatedLicenseEntries,
         string $extensionSlug,
-        string $errorMessage,
         HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
     ): array {
         if ($e instanceof LicenseOperationNotSuccessfulException) {
             unset($commercialExtensionActivatedLicenseEntries[$extensionSlug]);
-            $type = 'error';
-        } else {
-            $type = 'warning';
         }
+
+        return $commercialExtensionActivatedLicenseEntries;
+    }
+
+    protected function showAdminMessagesOnLicenseOperationError(
+        string $extensionSlug,
+        string $errorMessage,
+        HTTPRequestNotSuccessfulException | LicenseOperationNotSuccessfulException $e,
+    ): void {
 
         /**
          * Show the error message to the admin.
@@ -303,16 +318,21 @@ class LicenseValidationService implements LicenseValidationServiceInterface
          * (eg: when validating the licenses when the main
          * plugin is updated)
          */
-        if (function_exists('add_settings_error')) {
-            add_settings_error(
-                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
-                'license_activation_' . $extensionSlug,
-                $errorMessage,
-                $type
-            );
+        if (!function_exists('add_settings_error')) {
+            return;
         }
 
-        return $commercialExtensionActivatedLicenseEntries;
+        if ($e instanceof LicenseOperationNotSuccessfulException) {
+            $type = 'error';
+        } else {
+            $type = 'warning';
+        }
+        add_settings_error(
+            PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+            'license_activation_' . $extensionSlug,
+            $errorMessage,
+            $type
+        );
     }
 
     /**
