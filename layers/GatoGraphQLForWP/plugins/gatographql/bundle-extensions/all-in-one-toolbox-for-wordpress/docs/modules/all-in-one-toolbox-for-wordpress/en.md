@@ -50,7 +50,6 @@ As new extensions are created and released, they will also be added to this bund
 - [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
 - [Complementing WP-CLI](../../../../../docs/tutorial/complementing-wp-cli/en.md)
 - [Injecting multiple resources into WP-CLI](../../../../../docs/tutorial/injecting-multiple-resources-into-wp-cli/en.md)
-- [Feeding data to blocks in the editor](../../../../../docs/tutorial/feeding-data-to-blocks-in-the-editor/en.md)
 - [Mapping JS components to (Gutenberg) blocks](../../../../../docs/tutorial/mapping-js-components-to-gutenberg-blocks/en.md)
 - [Duplicating a blog post](../../../../../docs/tutorial/duplicating-a-blog-post/en.md)
 - [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)

@@ -114,7 +114,7 @@ Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/int
 
 = How do I use Gato GraphQL to feed data to my Gutenberg Blocks? =
 
-Check tutorial lesson [Feeding data to blocks in the editor](https://gatographql.com/tutorial/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
+Check tutorial lesson [Feeding data to blocks in the editor](https://gatographql.com/guides/code/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
 
 = How is Gato GraphQL different than the WP REST API? =
 
