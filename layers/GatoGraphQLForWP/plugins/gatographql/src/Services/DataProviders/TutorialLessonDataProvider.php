@@ -56,9 +56,9 @@ class TutorialLessonDataProvider
             //         ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
             //     ]
             // ],
-            TutorialLessons::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
-                \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
-            ],
+            // TutorialLessons::MAPPING_JS_COMPONENTS_TO_GUTENBERG_BLOCKS => [
+            //     \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
+            // ],
             TutorialLessons::DUPLICATING_A_BLOG_POST => [
                 \__('Duplicating a blog post', 'gatographql'),
                 [

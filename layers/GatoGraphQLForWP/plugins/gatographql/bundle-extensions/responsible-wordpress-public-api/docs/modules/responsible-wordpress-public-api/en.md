@@ -43,4 +43,3 @@ With the provided extensions in this bundle, creating and configuring public end
 
 - [Searching WordPress data](../../../../../docs/tutorial/searching-wordpress-data/en.md)
 - [Complementing WP-CLI](../../../../../docs/tutorial/complementing-wp-cli/en.md)
-- [Mapping JS components to (Gutenberg) blocks](../../../../../docs/tutorial/mapping-js-components-to-gutenberg-blocks/en.md) -->
