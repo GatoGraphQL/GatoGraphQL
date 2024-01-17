@@ -6,7 +6,6 @@ namespace PoPCMSSchema\MediaMutations;
 
 use PoP\Root\Module\ModuleInterface;
 use PoP\Root\Module\AbstractModule;
-use PoPCMSSchema\Users\Module as UsersModule;
 
 class Module extends AbstractModule
 {
@@ -21,7 +20,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
-            \PoPCMSSchema\Comments\Module::class,
+            \PoPCMSSchema\Media\Module::class,
             \PoPCMSSchema\UserStateMutations\Module::class,
         ];
     }

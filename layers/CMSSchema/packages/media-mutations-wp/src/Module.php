@@ -26,7 +26,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPCMSSchema\MediaMutations\Module::class,
-            \PoPCMSSchema\CommentsWP\Module::class,
+            \PoPCMSSchema\MediaWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
