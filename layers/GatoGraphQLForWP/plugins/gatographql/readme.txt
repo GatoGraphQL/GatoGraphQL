@@ -112,7 +112,7 @@ With Gato GraphQL you can create an endpoint that exposes the data from your Wor
 
 Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks/) for an example.
 
-= How do I use Gato GraphQL to feed data to my Gutenberg Blocks? =
+= How do I use Gato GraphQL to feed data to my Gutenberg blocks? =
 
 Check tutorial lesson [Feeding data to blocks in the editor](https://gatographql.com/guides/code/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
 
