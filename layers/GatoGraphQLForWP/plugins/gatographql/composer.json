@@ -28,6 +28,7 @@
         "pop-cms-schema/custompost-user-mutations-wp": "^1.6",
         "pop-cms-schema/custompostmedia-mutations-wp": "^1.6",
         "pop-cms-schema/custompostmedia-wp": "^1.6",
+        "pop-cms-schema/media-mutations-wp": "^1.6",
         "pop-cms-schema/page-mutations": "^1.6",
         "pop-cms-schema/pagemedia-mutations": "^1.6",
         "pop-cms-schema/post-categories-wp": "^1.6",
