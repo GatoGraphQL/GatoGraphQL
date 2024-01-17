@@ -41,7 +41,6 @@
         "pop-cms-schema/user-avatars-wp": "^1.6",
         "pop-cms-schema/user-roles-wp": "^1.6",
         "pop-cms-schema/user-state-mutations-wp": "^1.6",
-        "pop-cms-schema/user-state-wp": "^1.6",
         "pop-schema/directive-commons": "^1.6",
         "pop-schema/extended-schema-commons": "^1.6",
         "pop-schema/http-requests": "^1.6",

@@ -145,7 +145,7 @@
         "pop-cms-schema/custompost-mutations-wp": "^1.6",
         "pop-cms-schema/post-categories-wp": "^1.6",
         "pop-cms-schema/post-category-mutations": "^1.6",
-        "pop-cms-schema/user-state-wp": "^1.6"
+        "pop-cms-schema/user-state-mutations-wp": "^1.6"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.4",
