@@ -151,7 +151,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         }
 
         // Either provide the customPostID, or retrieve it from the parent comment
-        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID) && !$fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID)) {
+        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID) && !$fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -182,7 +182,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             }
         }
         // Make sure the custom post exists
-        if ($customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID)) {
+        if ($customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID)) {
             if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -275,7 +275,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
              */
             'content' => $commentAs->{MutationInputProperties::HTML},
             'parent' => $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID),
-            'customPostID' => $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID),
+            'customPostID' => $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID),
         ];
         /**
          * Override with the user's properties
