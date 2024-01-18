@@ -4,21 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
-use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
@@ -33,27 +30,11 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
     private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
     private ?UserTypeAPIInterface $userTypeAPI = null;
-    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
-    private ?RequestHelperServiceInterface $requestHelperService = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?NameResolverInterface $nameResolver = null;
 
-    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
-    {
-        $this->mediaTypeAPI = $mediaTypeAPI;
-    }
-    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
-    {
-        if ($this->mediaTypeAPI === null) {
-            /** @var MediaTypeAPIInterface */
-            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
-            $this->mediaTypeAPI = $mediaTypeAPI;
-        }
-        return $this->mediaTypeAPI;
-    }
     final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
     {
         $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
@@ -79,32 +60,6 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             $this->userTypeAPI = $userTypeAPI;
         }
         return $this->userTypeAPI;
-    }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
-    {
-        $this->customPostTypeAPI = $customPostTypeAPI;
-    }
-    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
-    {
-        if ($this->customPostTypeAPI === null) {
-            /** @var CustomPostTypeAPIInterface */
-            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
-            $this->customPostTypeAPI = $customPostTypeAPI;
-        }
-        return $this->customPostTypeAPI;
-    }
-    final public function setRequestHelperService(RequestHelperServiceInterface $requestHelperService): void
-    {
-        $this->requestHelperService = $requestHelperService;
-    }
-    final protected function getRequestHelperService(): RequestHelperServiceInterface
-    {
-        if ($this->requestHelperService === null) {
-            /** @var RequestHelperServiceInterface */
-            $requestHelperService = $this->instanceManager->getInstance(RequestHelperServiceInterface::class);
-            $this->requestHelperService = $requestHelperService;
-        }
-        return $this->requestHelperService;
     }
     final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
     {
