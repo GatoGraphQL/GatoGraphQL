@@ -73,8 +73,8 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         array $mediaItemData
     ): string|int {
 		$fileData = [
-            'name' => basename($file),
-            'type' => !empty($mediaItemData['mimeType']) ? $mediaItemData['mimeType']: \wp_check_filetype($file),
+            'name' => \sanitize_file_name(basename($file)),
+            'type' => !empty($mediaItemData['mimeType']) ? $mediaItemData['mimeType'] : \wp_check_filetype($file),
             'tmp_name' => $file,
             'error' => 0,
             'size' => filesize($file),
