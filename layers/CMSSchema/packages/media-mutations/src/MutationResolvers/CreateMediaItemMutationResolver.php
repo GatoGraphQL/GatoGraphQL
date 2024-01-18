@@ -10,7 +10,7 @@ use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemP
 use PoPCMSSchema\MediaMutations\Module;
 use PoPCMSSchema\MediaMutations\ModuleConfiguration;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
-use PoPCMSSchema\Comments\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
