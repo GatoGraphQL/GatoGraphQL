@@ -126,6 +126,12 @@ class MutationResolverHookSet extends AbstractHookSet
             10,
             2
         );
+        App::addFilter(
+            HookNames::GET_CREATE_MEDIA_ITEM_DATA,
+            $this->addCreateMediaItemData(...),
+            10,
+            2
+        );
         // App::addAction(
         //     HookNames::EXECUTE_CREATE_OR_UPDATE,
         //     $this->maybeSetOrRemoveFeaturedImage(...),
@@ -166,6 +172,23 @@ class MutationResolverHookSet extends AbstractHookSet
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+    }
+
+    /**
+     * @param array<string,mixed> $mediaItemData
+     * @return array<string,mixed>
+     */
+    public function addCreateMediaItemData(
+        array $mediaItemData,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array {
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        if ($customPostID === null) {
+            return $mediaItemData;
+        }
+
+        $mediaItemData['customPostID'] = $customPostID;
+        return $mediaItemData;
     }
 
     // /**

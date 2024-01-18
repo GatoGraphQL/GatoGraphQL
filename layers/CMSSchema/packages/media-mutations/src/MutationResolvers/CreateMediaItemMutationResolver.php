@@ -244,9 +244,9 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         );
     }
 
-    protected function additionals(string|int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additionals(string|int $mediaItemID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction(HookNames::CREATE_MEDIA_ITEM, $comment_id, $fieldDataAccessor);
+        App::doAction(HookNames::CREATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
     }
 
     /**
@@ -254,56 +254,31 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
      */
     protected function getMediaItemData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        /** @var stdClass */
-        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
-        $comment_data = [
-            'authorIP' => $this->getRequestHelperService()->getClientIPAddress(),
-            'agent' => App::server('HTTP_USER_AGENT'),
-            /**
-             * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
-             */
-            'content' => $from->{MutationInputProperties::HTML},
-            'parent' => $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID),
-            'customPostID' => $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID),
+        $mediaItemData = [
+            'authorID' => $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID),
+            'title' => $fieldDataAccessor->getValue(MutationInputProperties::TITLE),
+            'slug' => $fieldDataAccessor->getValue(MutationInputProperties::SLUG),
+            'caption' => $fieldDataAccessor->getValue(MutationInputProperties::CAPTION),
+            'description' => $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION),
+            'mimeType' => $fieldDataAccessor->getValue(MutationInputProperties::MIME_TYPE),
         ];
-        /**
-         * Override with the user's properties
-         */
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
-            $currentUserID = App::getState('current-user-id');
-            $comment_data['userID'] = $currentUserID;
-            $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($currentUserID);
-            $comment_data['authorEmail'] = $this->getUserTypeAPI()->getUserEmail($currentUserID);
-            $comment_data['authorURL'] = $this->getUserTypeAPI()->getUserWebsiteURL($currentUserID);
-        } else {
-            if ($currentUserID = App::getState('current-user-id')) {
-                $comment_data['userID'] = $currentUserID;
-            }
-            $comment_data['author'] = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_NAME);
-            $comment_data['authorEmail'] = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_EMAIL);
-            $comment_data['authorURL'] = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_URL);
-        }
 
-        // If the parent comment is provided and the custom post is not,
-        // then retrieve it from there
-        if ($comment_data['parent'] && !$comment_data['customPostID']) {
-            /** @var object */
-            $parentComment = $this->getMediaTypeAPI()->getComment($comment_data['parent']);
-            $comment_data['customPostID'] = $this->getMediaTypeAPI()->getCommentPostID($parentComment);
-        }
+        // Inject custom post ID, etc
+        $mediaItemData = App::applyFilters(HookNames::GET_CREATE_MEDIA_ITEM_DATA, $mediaItemData, $fieldDataAccessor);
 
-        return $comment_data;
+        return $mediaItemData;
     }
 
     /**
      * @throws MediaItemCRUDMutationException In case of error
-     * @param array<string,mixed> $comment_data
+     * @param array<string,mixed> $mediaItemData
      */
-    protected function insertComment(array $comment_data): string|int
+    protected function insertComment(array $mediaItemData): string|int
     {
-        return $this->getMediaTypeMutationAPI()->insertComment($comment_data);
+        /** @var stdClass */
+        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
+
+        return $this->getMediaTypeMutationAPI()->insertComment($mediaItemData);
     }
 
     /**
@@ -313,12 +288,12 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $comment_data = $this->getMediaItemData($fieldDataAccessor);
-        $comment_id = $this->insertComment($comment_data);
+        $mediaItemData = $this->getMediaItemData($fieldDataAccessor);
+        $mediaItemID = $this->insertComment($mediaItemData);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionals($comment_id, $fieldDataAccessor);
+        $this->additionals($mediaItemID, $fieldDataAccessor);
 
-        return $comment_id;
+        return $mediaItemID;
     }
 }
