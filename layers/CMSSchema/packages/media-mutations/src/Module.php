@@ -21,6 +21,7 @@ class Module extends AbstractModule
     {
         return [
             \PoPCMSSchema\Media\Module::class,
+            \PoPCMSSchema\UserRoles\Module::class,
             \PoPCMSSchema\UserStateMutations\Module::class,
         ];
     }
