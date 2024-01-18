@@ -44,11 +44,16 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         $uploadedFilename = $uploadedFile['file'];
         
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
+        $customPostID = 0;
+        if (isset($mediaItemData['customPostID'])) {
+            $customPostID = $mediaItemData['customPostID'];
+            unset($mediaItemData['customPostID']);
+        }
         
         $mediaItemIDOrError = \wp_insert_attachment(
             $mediaItemData,
             $uploadedFilename,
-            $mediaItemData['customPostID'] ?? 0,
+            $customPostID,
             true
         );
         
