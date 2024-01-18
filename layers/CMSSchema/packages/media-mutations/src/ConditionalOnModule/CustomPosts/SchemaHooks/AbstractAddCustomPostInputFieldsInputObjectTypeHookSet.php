@@ -10,6 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPosts\Constants\MutationInputProperties;
 
 abstract class AbstractAddCustomPostInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {
@@ -59,7 +60,7 @@ abstract class AbstractAddCustomPostInputFieldsInputObjectTypeHookSet extends Ab
         return array_merge(
             $inputFieldNameTypeResolvers,
             [
-                'customPostID' => $this->getIDScalarTypeResolver(),
+                MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ]
         );
     }
@@ -77,7 +78,7 @@ abstract class AbstractAddCustomPostInputFieldsInputObjectTypeHookSet extends Ab
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'customPostID' => $this->__('Custom post under which to upload the attachment', 'media-mutations'),
+            MutationInputProperties::CUSTOMPOST_ID => $this->__('Custom post under which to upload the attachment', 'media-mutations'),
             default => $inputFieldDescription,
         };
     }
