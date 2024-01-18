@@ -19,9 +19,43 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     public function createMediaItemFromURL(string $url, array $mediaItemData): string|int
     {
-        // @todo Implement
-        $filename = '';
-        $body = '';
+        $tempFileOrError = \download_url($url);
+
+        if (\is_wp_error($tempFileOrError)) {
+            /** @var WP_Error */
+            $wpError = $tempFileOrError;
+            throw new MediaItemCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+
+        $tempFile = $tempFileOrError;
+
+        $fileData = [
+            'name' => basename($url),
+            'type' => !empty($mediaItemData['mimeType']) ? $mediaItemData['mimeType']: \wp_check_filetype($tempFile),
+            'tmp_name' => $tempFile,
+            'error' => 0,
+            'size' => filesize($tempFile),
+        ];
+
+        $uploadedFile = \wp_handle_sideload(
+            $fileData,
+            [
+                'test_form' => false,
+            ]
+        );
+
+        if (isset($uploadedFile['error'])) {
+            /** @var string */
+            $errorMessage = $uploadedFile['error'];
+            throw new MediaItemCRUDMutationException(
+                $errorMessage
+            );
+        }
+
+        $filename = $uploadedFile['file'];
+        $body = $uploadedFile['content'];
         return $this->createMediaItemFromContents($filename, $body, $mediaItemData);
     }
 
@@ -64,6 +98,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
                 $wpError->get_error_message()
             );
         }
+
         $mediaItemID = $mediaItemIDOrError;
         return $mediaItemID;
     }
