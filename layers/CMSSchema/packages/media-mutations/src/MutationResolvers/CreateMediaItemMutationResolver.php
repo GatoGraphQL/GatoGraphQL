@@ -196,9 +196,22 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             }
         }
 
-        // If providing the author...
+        // If providing the author, check that the user exists
         if ($authorID !== null) {
-            // Check this user exists
+            if ($this->getUserTypeAPI()->getUserByID($authorID) === null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E6,
+                            [
+                                $authorID,
+                            ]
+                        ),
+                        $field,
+                    )
+                );
+            }
         }
         
         // Make sure the custom post exists
