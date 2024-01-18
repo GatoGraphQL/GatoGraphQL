@@ -10,8 +10,6 @@ use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\LooseContracts\LooseContractSet;
-use PoPCMSSchema\MediaMutations\Module;
-use PoPCMSSchema\MediaMutations\ModuleConfiguration;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
@@ -273,12 +271,28 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
      * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $mediaItemData
      */
-    protected function insertComment(array $mediaItemData): string|int
-    {
+    protected function createMediaItem(
+        array $mediaItemData,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int {
         /** @var stdClass */
         $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
 
-        return $this->getMediaTypeMutationAPI()->insertComment($mediaItemData);
+        if (isset($from->{MutationInputProperties::URL})) {
+            /** @var string */
+            $url = $from->{MutationInputProperties::URL};
+            return $this->getMediaTypeMutationAPI()->createMediaItemFromURL($url, $mediaItemData);
+        }
+
+        /** @var stdClass */
+        $contents = $from->{MutationInputProperties::CONTENTS};
+
+        return $this->getMediaTypeMutationAPI()->createMediaItemFromContents(
+            $contents->{MutationInputProperties::FILENAME},
+            $contents->{MutationInputProperties::BODY},
+            $mediaItemData
+        );
     }
 
     /**
@@ -289,9 +303,14 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $mediaItemData = $this->getMediaItemData($fieldDataAccessor);
-        $mediaItemID = $this->insertComment($mediaItemData);
 
-        // Allow for additional operations (eg: set Action categories)
+        $mediaItemID = $this->createMediaItem(
+            $mediaItemData,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        // Allow for additional operations
         $this->additionals($mediaItemID, $fieldDataAccessor);
 
         return $mediaItemID;

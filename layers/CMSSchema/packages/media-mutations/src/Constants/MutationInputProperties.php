@@ -17,4 +17,7 @@ class MutationInputProperties
 
     public final const URL = 'url';
     public final const CONTENTS = 'contents';
+
+    public final const FILENAME = 'filename';
+    public final const BODY = 'body';
 }
