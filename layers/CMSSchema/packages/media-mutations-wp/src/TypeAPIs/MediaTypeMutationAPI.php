@@ -19,6 +19,8 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     public function createMediaItemFromURL(string $url, array $mediaItemData): string|int
     {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+
         $tempFileOrError = \download_url($url);
 
         if (\is_wp_error($tempFileOrError)) {
@@ -65,6 +67,8 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     public function createMediaItemFromContents(string $filename, string $body, array $mediaItemData): string|int
     {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+
         $uploadedFile = \wp_upload_bits($filename, null, $body);
         if (isset($uploadedFile['error'])) {
             /** @var string */
