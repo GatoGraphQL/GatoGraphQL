@@ -7,63 +7,91 @@ namespace PoPCMSSchema\MediaMutationsWP\TypeAPIs;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
+use WP_Error;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
 class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 {
     use BasicServiceTrait;
 
     /**
      * @throws MediaItemCRUDMutationException In case of error
-     * @param array<string,mixed> $comment_data
+     * @param array<string,mixed> $mediaItemData
      */
-    public function insertComment(array $comment_data): string|int
+    public function createMediaItemFromURL(string $url, array $mediaItemData): string|int
     {
-        // Convert the parameters
-        if (isset($comment_data['userID'])) {
-            $comment_data['user_id'] = $comment_data['userID'];
-            unset($comment_data['userID']);
-        }
-        if (isset($comment_data['author'])) {
-            $comment_data['comment_author'] = $comment_data['author'];
-            unset($comment_data['author']);
-        }
-        if (isset($comment_data['authorEmail'])) {
-            $comment_data['comment_author_email'] = $comment_data['authorEmail'];
-            unset($comment_data['authorEmail']);
-        }
-        if (isset($comment_data['authorURL'])) {
-            $comment_data['comment_author_url'] = $comment_data['authorURL'];
-            unset($comment_data['authorURL']);
-        }
-        if (isset($comment_data['authorIP'])) {
-            $comment_data['comment_author_IP'] = $comment_data['authorIP'];
-            unset($comment_data['authorIP']);
-        }
-        if (isset($comment_data['agent'])) {
-            $comment_data['comment_agent'] = $comment_data['agent'];
-            unset($comment_data['agent']);
-        }
-        if (isset($comment_data['content'])) {
-            $comment_data['comment_content'] = $comment_data['content'];
-            unset($comment_data['content']);
-        }
-        if (isset($comment_data['parent'])) {
-            $comment_data['comment_parent'] = $comment_data['parent'];
-            unset($comment_data['parent']);
-        }
-        if (isset($comment_data['customPostID'])) {
-            $comment_data['comment_post_ID'] = $comment_data['customPostID'];
-            unset($comment_data['customPostID']);
-        }
-        $commentID = \wp_insert_comment($comment_data);
-        if ($commentID === false) {
+        // @todo Implement
+        $filename = '';
+        $body = '';
+        return $this->createMediaItemFromContents($filename, $body, $mediaItemData);
+    }
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     * @param array<string,mixed> $mediaItemData
+     */
+    public function createMediaItemFromContents(string $filename, string $body, array $mediaItemData): string|int
+    {
+        $uploadedFile = \wp_upload_bits($filename, null, $body);
+        if (isset($uploadedFile['error'])) {
+            /** @var string */
+            $errorMessage = $uploadedFile['error'];
             throw new MediaItemCRUDMutationException(
-                $this->__('Could not create the comment', 'media-mutations-wp')
+                $errorMessage
             );
         }
-        return $commentID;
+
+        /** @var string */
+        $uploadedFilename = $uploadedFile['file'];
+        
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
+        
+        $mediaItemIDOrError = \wp_insert_attachment(
+            $mediaItemData,
+            $uploadedFilename,
+            $mediaItemData['customPostID'] ?? 0,
+            true
+        );
+        
+        if (\is_wp_error($mediaItemIDOrError)) {
+            /** @var WP_Error */
+            $wpError = $mediaItemIDOrError;
+            throw new MediaItemCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+        $mediaItemID = $mediaItemIDOrError;
+        return $mediaItemID;
+    }
+
+    /**
+     * @param array<string,mixed> $mediaItemData
+     */
+    protected function convertMediaItemCreationArgs(array $mediaItemData): array
+    {
+        if (isset($mediaItemData['authorID'])) {
+            $mediaItemData['post_author'] = $mediaItemData['authorID'];
+            unset($mediaItemData['authorID']);
+        }
+        if (isset($mediaItemData['title'])) {
+            $mediaItemData['post_title'] = $mediaItemData['title'];
+            unset($mediaItemData['title']);
+        }
+        if (isset($mediaItemData['slug'])) {
+            $mediaItemData['post_name'] = $mediaItemData['slug'];
+            unset($mediaItemData['slug']);
+        }
+        if (isset($mediaItemData['caption'])) {
+            $mediaItemData['post_excerpt'] = $mediaItemData['caption'];
+            unset($mediaItemData['caption']);
+        }
+        if (isset($mediaItemData['description'])) {
+            $mediaItemData['post_content'] = $mediaItemData['description'];
+            unset($mediaItemData['description']);
+        }
+        if (isset($mediaItemData['mimeType'])) {
+            $mediaItemData['post_mime_type'] = $mediaItemData['mimeType'];
+            unset($mediaItemData['mimeType']);
+        }
+        return $mediaItemData;
     }
 }
