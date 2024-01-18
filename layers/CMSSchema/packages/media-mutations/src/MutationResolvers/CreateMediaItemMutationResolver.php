@@ -187,7 +187,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 MutationErrorFeedbackItemProvider::class,
-                                MutationErrorFeedbackItemProvider::E2,
+                                MutationErrorFeedbackItemProvider::E5,
                             ),
                             $fieldDataAccessor->getField(),
                         )
