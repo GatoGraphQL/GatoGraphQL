@@ -45,12 +45,10 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     public function createMediaItemFromContents(string $filename, string $body, array $mediaItemData): string|int
     {
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-
-        $uploadedFileOrError = \wp_upload_bits($filename, null, $body);
+		$uploadedFileOrError = \wp_upload_bits($filename, null, $body);
         if (isset($uploadedFileOrError['error'])) {
             /** @var string */
-            $errorMessage = $uploadedFile['error'];
+            $errorMessage = $uploadedFileOrError['error'];
             throw new MediaItemCRUDMutationException(
                 $errorMessage
             );
