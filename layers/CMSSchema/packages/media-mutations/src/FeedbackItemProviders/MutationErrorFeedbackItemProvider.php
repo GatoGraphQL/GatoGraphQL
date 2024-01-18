@@ -14,7 +14,6 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E3 = 'e3';
     public final const E4 = 'e4';
     public final const E5 = 'e5';
-    public final const E6 = 'e6';
 
     /**
      * @return string[]
@@ -27,7 +26,6 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3,
             self::E4,
             self::E5,
-            self::E6,
         ];
     }
 
@@ -36,10 +34,9 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
         return match ($code) {
             self::E1 => $this->__('You must be logged in to upload files', 'media-mutations'),
             self::E2 => $this->__('You don\'t have permission to upload files', 'media-mutations'),
-            self::E3 => $this->__('There is no custom post with ID \'%s\'', 'media-mutations'),
-            self::E4 => $this->__('The attachment source (as URL or contents) is empty', 'media-mutations'),
-            self::E5 => $this->__('You don\'t have permission to upload files for other users', 'media-mutations'),
-            self::E6 => $this->__('There is no user with ID \'%s\'', 'media-mutations'),
+            self::E3 => $this->__('The attachment source (as URL or contents) is empty', 'media-mutations'),
+            self::E4 => $this->__('You don\'t have permission to upload files for other users', 'media-mutations'),
+            self::E4 => $this->__('There is no user with ID \'%s\'', 'media-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

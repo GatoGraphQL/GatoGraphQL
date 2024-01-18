@@ -187,7 +187,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                         new ObjectTypeFieldResolutionFeedback(
                             new FeedbackItemResolution(
                                 MutationErrorFeedbackItemProvider::class,
-                                MutationErrorFeedbackItemProvider::E5,
+                                MutationErrorFeedbackItemProvider::E4,
                             ),
                             $fieldDataAccessor->getField(),
                         )
@@ -203,27 +203,9 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E6,
+                            MutationErrorFeedbackItemProvider::E5,
                             [
                                 $authorID,
-                            ]
-                        ),
-                        $field,
-                    )
-                );
-            }
-        }
-        
-        // Make sure the custom post exists
-        if ($customPostParentID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID)) {
-            if (!$this->getCustomPostTypeAPI()->customPostExists($customPostParentID)) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E3,
-                            [
-                                $customPostParentID,
                             ]
                         ),
                         $field,
@@ -239,12 +221,19 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E4,
+                        MutationErrorFeedbackItemProvider::E3,
                     ),
                     $field,
                 )
             );
         }
+
+        // Allow components to inject their own validations
+        App::doAction(
+            HookNames::VALIDATE_CREATE_MEDIA_ITEM,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
@@ -263,17 +252,17 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
     /**
      * @return array<string,mixed>
      */
-    protected function getCommentData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getMediaItemData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         /** @var stdClass */
-        $commentAs = $fieldDataAccessor->getValue(MutationInputProperties::COMMENT_AS);
+        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
         $comment_data = [
             'authorIP' => $this->getRequestHelperService()->getClientIPAddress(),
             'agent' => App::server('HTTP_USER_AGENT'),
             /**
              * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
              */
-            'content' => $commentAs->{MutationInputProperties::HTML},
+            'content' => $from->{MutationInputProperties::HTML},
             'parent' => $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID),
             'customPostID' => $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID),
         ];
@@ -324,7 +313,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $comment_data = $this->getCommentData($fieldDataAccessor);
+        $comment_data = $this->getMediaItemData($fieldDataAccessor);
         $comment_id = $this->insertComment($comment_data);
 
         // Allow for additional operations (eg: set Action categories)

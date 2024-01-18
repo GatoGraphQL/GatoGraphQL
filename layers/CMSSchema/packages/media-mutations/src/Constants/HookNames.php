@@ -6,5 +6,6 @@ namespace PoPCMSSchema\MediaMutations\Constants;
 
 class HookNames
 {
-    public const CREATE_MEDIA_ITEM = __CLASS__ . ':createMediaItem';
+    public final const CREATE_MEDIA_ITEM = __CLASS__ . ':createMediaItem';
+    public final const VALIDATE_CREATE_MEDIA_ITEM = __CLASS__ . ':validateCreateMediaItem';
 }
