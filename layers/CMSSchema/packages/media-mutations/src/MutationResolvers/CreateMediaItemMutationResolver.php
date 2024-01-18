@@ -4,25 +4,28 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\MediaMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\MediaMutations\Module;
 use PoPCMSSchema\MediaMutations\ModuleConfiguration;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use stdClass;
 
 /**
@@ -37,6 +40,8 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?RequestHelperServiceInterface $requestHelperService = null;
+    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
+    private ?NameResolverInterface $nameResolver = null;
 
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -103,6 +108,32 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         }
         return $this->requestHelperService;
     }
+    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
+    {
+        $this->userRoleTypeAPI = $userRoleTypeAPI;
+    }
+    final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
+    {
+        if ($this->userRoleTypeAPI === null) {
+            /** @var UserRoleTypeAPIInterface */
+            $userRoleTypeAPI = $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
+            $this->userRoleTypeAPI = $userRoleTypeAPI;
+        }
+        return $this->userRoleTypeAPI;
+    }
+    final public function setNameResolver(NameResolverInterface $nameResolver): void
+    {
+        $this->nameResolver = $nameResolver;
+    }
+    final protected function getNameResolver(): NameResolverInterface
+    {
+        if ($this->nameResolver === null) {
+            /** @var NameResolverInterface */
+            $nameResolver = $this->instanceManager->getInstance(NameResolverInterface::class);
+            $this->nameResolver = $nameResolver;
+        }
+        return $this->nameResolver;
+    }
 
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -119,6 +150,26 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                     $field,
                 )
             );
+        } else {
+            // Validate the user has the needed capability
+            $userID = App::getState('current-user-id');
+            $uploadFilesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY);
+            if (
+                !$this->getUserRoleTypeAPI()->userCan(
+                    $userID,
+                    $uploadFilesCapability
+                )
+            ) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E2,
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
+                );
+            }
         }
         
         // Make sure the custom post exists
@@ -128,7 +179,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E7,
+                            MutationErrorFeedbackItemProvider::E3,
                             [
                                 $customPostParentID,
                             ]
@@ -146,7 +197,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E5,
+                        MutationErrorFeedbackItemProvider::E4,
                     ),
                     $field,
                 )
