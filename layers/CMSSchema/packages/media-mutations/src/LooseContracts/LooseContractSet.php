@@ -9,7 +9,7 @@ use PoP\LooseContracts\AbstractLooseContractSet;
 class LooseContractSet extends AbstractLooseContractSet
 {
     public final const NAME_UPLOAD_FILES_CAPABILITY = 'popcms:capability:uploadFiles';
-    public final const NAME_EDIT_OTHER_USERS_CUSTOMPOSTS_CAPABILITY = 'popcms:capability:editOtherUsersCustomPosts';
+    public final const NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY = 'popcms:capability:uploadFilesForOtherUsers';
     /**
      * @return string[]
      */
@@ -17,7 +17,7 @@ class LooseContractSet extends AbstractLooseContractSet
     {
         return [
             self::NAME_UPLOAD_FILES_CAPABILITY,
-            self::NAME_EDIT_OTHER_USERS_CUSTOMPOSTS_CAPABILITY,
+            self::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY,
         ];
     }
 }

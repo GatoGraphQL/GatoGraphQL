@@ -176,11 +176,11 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
 
             // Validate the user has the needed capability to upload files for other people
             if ($authorID !== null && $authorID !== $currentUserID) {
-                $editOtherUsersCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_OTHER_USERS_CUSTOMPOSTS_CAPABILITY);
+                $uploadFilesForOtherUsersCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY);
                 if (
                     !$this->getUserRoleTypeAPI()->userCan(
                         $currentUserID,
-                        $editOtherUsersCustomPostsCapability
+                        $uploadFilesForOtherUsersCapability
                     )
                 ) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
