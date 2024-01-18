@@ -11,7 +11,7 @@ use PoPCMSSchema\MediaMutations\MutationResolvers\CreateMediaItemMutationResolve
 use PoPCMSSchema\MediaMutations\MutationResolvers\PayloadableCreateMediaItemMutationResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootCreateMediaItemInputObjectTypeResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\RootCreateMediaItemMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -25,24 +25,24 @@ use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
+    private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CreateMediaItemMutationResolver $createMediaItemMutationResolver = null;
     private ?RootCreateMediaItemInputObjectTypeResolver $rootCreateMediaItemInputObjectTypeResolver = null;
     private ?RootCreateMediaItemMutationPayloadObjectTypeResolver $rootCreateMediaItemMutationPayloadObjectTypeResolver = null;
     private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
 
-    final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
+    final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
-        $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
     }
-    final protected function getCommentObjectTypeResolver(): CommentObjectTypeResolver
+    final protected function getMediaObjectTypeResolver(): MediaObjectTypeResolver
     {
-        if ($this->commentObjectTypeResolver === null) {
-            /** @var CommentObjectTypeResolver */
-            $commentObjectTypeResolver = $this->instanceManager->getInstance(CommentObjectTypeResolver::class);
-            $this->commentObjectTypeResolver = $commentObjectTypeResolver;
+        if ($this->mediaObjectTypeResolver === null) {
+            /** @var MediaObjectTypeResolver */
+            $mediaObjectTypeResolver = $this->instanceManager->getInstance(MediaObjectTypeResolver::class);
+            $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
         }
-        return $this->commentObjectTypeResolver;
+        return $this->mediaObjectTypeResolver;
     }
     final public function setCreateMediaItemMutationResolver(CreateMediaItemMutationResolver $createMediaItemMutationResolver): void
     {
@@ -190,7 +190,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             };
         }
         return match ($fieldName) {
-            'createMediaItem' => $this->getCommentObjectTypeResolver(),
+            'createMediaItem' => $this->getMediaObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
