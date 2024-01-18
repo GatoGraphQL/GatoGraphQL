@@ -37,7 +37,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E1 => $this->__('You must be logged in to upload files', 'media-mutations'),
             self::E2 => $this->__('You don\'t have permission to upload files', 'media-mutations'),
             self::E3 => $this->__('There is no custom post with ID \'%s\'', 'media-mutations'),
-            self::E4 => $this->__('The attachment source (URL/contents) is empty', 'media-mutations'),
+            self::E4 => $this->__('The attachment source (as URL or contents) is empty', 'media-mutations'),
             self::E5 => $this->__('You don\'t have permission to upload files for other users', 'media-mutations'),
             self::E6 => $this->__('There is no user with ID \'%s\'', 'media-mutations'),
             default => parent::getMessagePlaceholder($code),
