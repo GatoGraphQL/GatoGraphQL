@@ -21,44 +21,22 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 
-        $tempFileOrError = \download_url($url);
+        $downloadedFileOrError = \download_url($url);
 
-        if (\is_wp_error($tempFileOrError)) {
+        if (\is_wp_error($downloadedFileOrError)) {
             /** @var WP_Error */
-            $wpError = $tempFileOrError;
+            $wpError = $downloadedFileOrError;
             throw new MediaItemCRUDMutationException(
                 $wpError->get_error_message()
             );
         }
 
-        $tempFile = $tempFileOrError;
+        $downloadedFile = $downloadedFileOrError;
 
-        $fileData = [
-            'name' => basename($url),
-            'type' => !empty($mediaItemData['mimeType']) ? $mediaItemData['mimeType']: \wp_check_filetype($tempFile),
-            'tmp_name' => $tempFile,
-            'error' => 0,
-            'size' => filesize($tempFile),
-        ];
-
-        $uploadedFile = \wp_handle_sideload(
-            $fileData,
-            [
-                'test_form' => false,
-            ]
+        return $this->createMediaItemFromLocalFile(
+            $downloadedFile,
+            $mediaItemData,
         );
-
-        if (isset($uploadedFile['error'])) {
-            /** @var string */
-            $errorMessage = $uploadedFile['error'];
-            throw new MediaItemCRUDMutationException(
-                $errorMessage
-            );
-        }
-
-        $filename = $uploadedFile['file'];
-        $body = $uploadedFile['content'];
-        return $this->createMediaItemFromContents($filename, $body, $mediaItemData);
     }
 
     /**
@@ -69,7 +47,48 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     {
 		require_once ABSPATH . 'wp-admin/includes/file.php';
 
-        $uploadedFile = \wp_upload_bits($filename, null, $body);
+        $uploadedFileOrError = \wp_upload_bits($filename, null, $body);
+        if (isset($uploadedFileOrError['error'])) {
+            /** @var string */
+            $errorMessage = $uploadedFile['error'];
+            throw new MediaItemCRUDMutationException(
+                $errorMessage
+            );
+        }
+
+        $uploadedFile = $uploadedFileOrError;
+        
+        /** @var string */
+        $file = $uploadedFile['file'];
+        return $this->createMediaItemFromLocalFile(
+            $file,
+            $mediaItemData,
+        );
+    }
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     * @param array<string,mixed> $mediaItemData
+     */
+    protected function createMediaItemFromLocalFile(
+        string $file,
+        array $mediaItemData
+    ): string|int {
+		$fileData = [
+            'name' => basename($file),
+            'type' => !empty($mediaItemData['mimeType']) ? $mediaItemData['mimeType']: \wp_check_filetype($file),
+            'tmp_name' => $file,
+            'error' => 0,
+            'size' => filesize($file),
+        ];
+
+        $uploadedFile = \wp_handle_sideload(
+            $fileData,
+            [
+                'test_form' => false,
+            ]
+        );
+
         if (isset($uploadedFile['error'])) {
             /** @var string */
             $errorMessage = $uploadedFile['error'];
