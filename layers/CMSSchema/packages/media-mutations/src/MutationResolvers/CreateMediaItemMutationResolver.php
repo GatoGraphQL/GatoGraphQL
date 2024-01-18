@@ -111,38 +111,27 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         $field = $fieldDataAccessor->getField();
 
         // Check that the user is logged-in
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
-            $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
-            if ($errorFeedbackItemResolution !== null) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        $errorFeedbackItemResolution,
-                        $field,
-                    )
-                );
-                return;
-            }
-        } elseif ($moduleConfiguration->requireCommenterNameAndEmail()) {
-            // Validate if the commenter's name and email are mandatory
-            if (!$fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_NAME)) {
+        $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
+        if ($errorFeedbackItemResolution !== null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $errorFeedbackItemResolution,
+                    $field,
+                )
+            );
+        }
+        
+        // Make sure the custom post exists
+        if ($customPostParentID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID)) {
+            if (!$this->getCustomPostTypeAPI()->customPostExists($customPostParentID)) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
                             MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E2,
-                        ),
-                        $field,
-                    )
-                );
-            }
-            if (!$fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_EMAIL)) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E3,
+                            MutationErrorFeedbackItemProvider::E7,
+                            [
+                                $customPostParentID,
+                            ]
                         ),
                         $field,
                     )
@@ -150,91 +139,9 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             }
         }
 
-        // Either provide the customPostID, or retrieve it from the parent comment
-        if (!$fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID) && !$fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E4,
-                    ),
-                    $field,
-                )
-            );
-        }
-        // Make sure the parent comment exists
-        // Either provide the customPostID, or retrieve it from the parent comment
-        if ($parentCommentID = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_COMMENT_ID)) {
-            $parentComment = $this->getMediaTypeAPI()->getComment($parentCommentID);
-            if ($parentComment === null) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E6,
-                            [
-                                $parentCommentID,
-                            ]
-                        ),
-                        $field,
-                    )
-                );
-            }
-        }
-        // Make sure the custom post exists
-        if ($customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_PARENT_ID)) {
-            if (!$this->getCustomPostTypeAPI()->customPostExists($customPostID)) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E7,
-                            [
-                                $customPostID,
-                            ]
-                        ),
-                        $field,
-                    )
-                );
-            } else {
-                // Validate the corresponding CPT supports comments
-                /** @var string */
-                $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
-                if (!$this->getMediaTypeAPI()->doesCustomPostTypeSupportComments($customPostType)) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                MutationErrorFeedbackItemProvider::class,
-                                MutationErrorFeedbackItemProvider::E8,
-                                [
-                                    $customPostType,
-                                ]
-                            ),
-                            $field,
-                        )
-                    );
-                } elseif (!$this->getMediaTypeAPI()->areCommentsOpen($customPostID)) {
-                    $objectTypeFieldResolutionFeedbackStore->addError(
-                        new ObjectTypeFieldResolutionFeedback(
-                            new FeedbackItemResolution(
-                                MutationErrorFeedbackItemProvider::class,
-                                MutationErrorFeedbackItemProvider::E9,
-                                [
-                                    $customPostID
-                                ]
-                            ),
-                            $field,
-                        )
-                    );
-                }
-            }
-        }
         /** @var stdClass */
-        $commentAs = $fieldDataAccessor->getValue(MutationInputProperties::COMMENT_AS);
-        /**
-         * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
-         */
-        if (!$commentAs->{MutationInputProperties::HTML}) {
+        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
+        if (!$from->{MutationInputProperties::URL} && !$from->{MutationInputProperties::CONTENTS}) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
