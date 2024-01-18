@@ -34,7 +34,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You are not logged in', 'user-state-mutations'),
+            self::E1 => $this->__('You must be logged in to upload files', 'media-mutations'),
             self::E2 => $this->__('You don\'t have permission to upload files', 'media-mutations'),
             self::E3 => $this->__('There is no custom post with ID \'%s\'', 'media-mutations'),
             self::E4 => $this->__('The attachment source (URL/contents) is empty', 'media-mutations'),
