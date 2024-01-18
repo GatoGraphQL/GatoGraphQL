@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPosts\Hooks\:
+    PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\Hooks\:
         resource: '../../../src/ConditionalOnModule/CustomPosts/Hooks/*'

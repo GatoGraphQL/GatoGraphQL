@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPosts\SchemaHooks;
+namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\SchemaHooks;
 
 use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootCreateMediaItemInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;

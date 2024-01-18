@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/CustomPostMutations/SchemaHooks/*'

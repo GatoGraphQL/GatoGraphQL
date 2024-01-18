@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPosts\SchemaHooks;
+namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\SchemaHooks;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPosts\Constants\MutationInputProperties;
+use PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\Constants\MutationInputProperties;
 
 abstract class AbstractAddCustomPostInputFieldsInputObjectTypeHookSet extends AbstractHookSet
 {

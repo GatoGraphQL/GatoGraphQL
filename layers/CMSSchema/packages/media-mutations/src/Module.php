@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations;
 
-use PoPCMSSchema\CustomPosts\Module as CustomPostsModule;
+use PoPCMSSchema\CustomPostMutations\Module as CustomPostMutationsModule;
 use PoP\ComponentModel\App;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Module\AbstractModule;
@@ -35,7 +35,7 @@ class Module extends AbstractModule
     public function getDependedConditionalModuleClasses(): array
     {
         return [
-            CustomPostsModule::class,
+            CustomPostMutationsModule::class,
         ];
     }
 
@@ -52,12 +52,12 @@ class Module extends AbstractModule
         $this->initSchemaServices(dirname(__DIR__), $skipSchema);
 
         try {
-            if (class_exists(CustomPostsModule::class) && App::getModule(CustomPostsModule::class)->isEnabled()) {
-                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPosts');
+            if (class_exists(CustomPostMutationsModule::class) && App::getModule(CustomPostMutationsModule::class)->isEnabled()) {
+                $this->initServices(dirname(__DIR__), '/ConditionalOnModule/CustomPostMutations');
                 $this->initSchemaServices(
                     dirname(__DIR__),
-                    $skipSchema || in_array(CustomPostsModule::class, $skipSchemaModuleClasses),
-                    '/ConditionalOnModule/CustomPosts'
+                    $skipSchema || in_array(CustomPostMutationsModule::class, $skipSchemaModuleClasses),
+                    '/ConditionalOnModule/CustomPostMutations'
                 );
             }
         } catch (ComponentNotExistsException) {

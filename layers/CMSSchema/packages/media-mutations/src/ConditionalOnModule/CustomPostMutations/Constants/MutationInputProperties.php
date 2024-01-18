@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPosts\Constants;
+namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\Constants;
 
 class MutationInputProperties
 {
