@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface:
         class: \PoPCMSSchema\MediaMutationsWP\TypeAPIs\MediaTypeMutationAPI
+
+    PoPCMSSchema\MediaMutationsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'

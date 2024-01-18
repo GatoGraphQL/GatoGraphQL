@@ -9,3 +9,6 @@ services:
 
     PoPCMSSchema\MediaMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
+
+    PoPCMSSchema\MediaMutations\LooseContracts\:
+        resource: '../src/LooseContracts/*'
