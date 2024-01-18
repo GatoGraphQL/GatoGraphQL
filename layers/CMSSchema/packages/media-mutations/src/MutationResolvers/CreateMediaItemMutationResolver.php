@@ -141,6 +141,9 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
     ): void {
         $field = $fieldDataAccessor->getField();
 
+        /** @var int|string|null */
+        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
+
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
@@ -151,12 +154,12 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                 )
             );
         } else {
-            // Validate the user has the needed capability
-            $userID = App::getState('current-user-id');
+            // Validate the user has the needed capability to upload files
+            $currentUserID = App::getState('current-user-id');
             $uploadFilesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY);
             if (
                 !$this->getUserRoleTypeAPI()->userCan(
-                    $userID,
+                    $currentUserID,
                     $uploadFilesCapability
                 )
             ) {
@@ -170,6 +173,32 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                     )
                 );
             }
+
+            // Validate the user has the needed capability to upload files for other people
+            if ($authorID !== null && $authorID !== $currentUserID) {
+                $editOtherUsersCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_OTHER_USERS_CUSTOMPOSTS_CAPABILITY);
+                if (
+                    !$this->getUserRoleTypeAPI()->userCan(
+                        $currentUserID,
+                        $editOtherUsersCustomPostsCapability
+                    )
+                ) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                MutationErrorFeedbackItemProvider::class,
+                                MutationErrorFeedbackItemProvider::E2,
+                            ),
+                            $fieldDataAccessor->getField(),
+                        )
+                    );
+                }
+            }
+        }
+
+        // If providing the author...
+        if ($authorID !== null) {
+            // Check this user exists
         }
         
         // Make sure the custom post exists
@@ -241,14 +270,14 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->mustUserBeLoggedInToAddComment()) {
-            $userID = App::getState('current-user-id');
-            $comment_data['userID'] = $userID;
-            $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($userID);
-            $comment_data['authorEmail'] = $this->getUserTypeAPI()->getUserEmail($userID);
-            $comment_data['authorURL'] = $this->getUserTypeAPI()->getUserWebsiteURL($userID);
+            $currentUserID = App::getState('current-user-id');
+            $comment_data['userID'] = $currentUserID;
+            $comment_data['author'] = $this->getUserTypeAPI()->getUserDisplayName($currentUserID);
+            $comment_data['authorEmail'] = $this->getUserTypeAPI()->getUserEmail($currentUserID);
+            $comment_data['authorURL'] = $this->getUserTypeAPI()->getUserWebsiteURL($currentUserID);
         } else {
-            if ($userID = App::getState('current-user-id')) {
-                $comment_data['userID'] = $userID;
+            if ($currentUserID = App::getState('current-user-id')) {
+                $comment_data['userID'] = $currentUserID;
             }
             $comment_data['author'] = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_NAME);
             $comment_data['authorEmail'] = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_EMAIL);
