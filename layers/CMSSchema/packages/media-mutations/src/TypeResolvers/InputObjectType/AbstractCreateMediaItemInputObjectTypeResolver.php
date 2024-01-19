@@ -127,7 +127,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
-        return match ($inputFieldName) {
+        $inputFieldDescription = match ($inputFieldName) {
             MutationInputProperties::FROM => $this->__('Source for the file', 'media-mutations'),
             MutationInputProperties::AUTHOR_ID => $this->__('The ID of the author', 'media-mutations'),
             MutationInputProperties::TITLE => $this->__('Attachment title', 'media-mutations'),
@@ -137,6 +137,15 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::MIME_TYPE => $this->__('Attachment\'s mime type', 'media-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
+
+        // Inject custom post ID, etc
+        $inputFieldDescription = App::applyFilters(
+            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
+            $inputFieldDescription,
+            $inputFieldName,
+        );
+
+        return $inputFieldDescription;
     }
 
     public function getInputFieldTypeModifiers(string $inputFieldName): int

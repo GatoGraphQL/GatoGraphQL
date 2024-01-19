@@ -112,6 +112,12 @@ class MutationResolverHookSet extends AbstractHookSet
             HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $this->getInputFieldNameTypeResolvers(...)
         );
+        App::addFilter(
+            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
+            $this->getInputFieldDescription(...),
+            10,
+            2
+        );
     }
 
     public function maybeValidateCustomPost(
@@ -168,5 +174,15 @@ class MutationResolverHookSet extends AbstractHookSet
     ): array {
         $inputFieldNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->getIDScalarTypeResolver();
         return $inputFieldNameTypeResolvers;
+    }
+
+    public function getInputFieldDescription(
+        string $inputFieldDescription,
+        string $inputFieldName
+    ): ?string {
+        return match ($inputFieldName) {
+            MutationInputProperties::CUSTOMPOST_ID => $this->__('ID of the custom post under which to upload the attachment', 'media-mutations'),
+            default => $inputFieldDescription,
+        };
     }
 }
