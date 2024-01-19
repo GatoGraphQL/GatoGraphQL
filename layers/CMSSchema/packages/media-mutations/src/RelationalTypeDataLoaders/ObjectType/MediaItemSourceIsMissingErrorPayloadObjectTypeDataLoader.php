@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\MediaMutations\ObjectModels\CommentAuthorEmailIsMissingErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemSourceIsMissingErrorPayload;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryObjectTypeDataLoader;
 
-class CommentAuthorEmailIsMissingErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
+class MediaItemSourceIsMissingErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
 {
     protected function getObjectClass(): string
     {
-        return CommentAuthorEmailIsMissingErrorPayload::class;
+        return MediaItemSourceIsMissingErrorPayload::class;
     }
 }

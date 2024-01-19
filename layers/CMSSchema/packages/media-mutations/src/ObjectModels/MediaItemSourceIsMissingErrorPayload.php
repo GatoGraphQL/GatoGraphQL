@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MediaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class CommentAuthorEmailIsMissingErrorPayload extends AbstractErrorPayload
+final class MediaItemSourceIsMissingErrorPayload extends AbstractErrorPayload
 {
 }
