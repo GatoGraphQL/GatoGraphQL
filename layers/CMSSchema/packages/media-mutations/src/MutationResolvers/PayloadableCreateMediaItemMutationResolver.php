@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentAuthorEmailIsMissingErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\CommentAuthorNameIsMissingErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentParentCommentDoesNotExistErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentsAreNotOpenForCustomPostErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentsAreNotSupportedByCustomPostTypeErrorPayload;
@@ -94,7 +94,7 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
-            ] => new CommentAuthorNameIsMissingErrorPayload(
+            ] => new UserHasNoPermissionToUploadFilesErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
