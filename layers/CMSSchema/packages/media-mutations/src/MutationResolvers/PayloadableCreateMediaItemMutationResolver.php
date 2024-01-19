@@ -10,7 +10,7 @@ use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemSourceIsMissingErrorPayloa
 use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentsAreNotOpenForCustomPostErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\CommentsAreNotSupportedByCustomPostTypeErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
@@ -111,8 +111,8 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E8,
-            ] => new CommentsAreNotSupportedByCustomPostTypeErrorPayload(
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new UserDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [

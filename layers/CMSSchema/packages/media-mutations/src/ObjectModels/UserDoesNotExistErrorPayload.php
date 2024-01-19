@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MediaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class CommentsAreNotSupportedByCustomPostTypeErrorPayload extends AbstractErrorPayload
+final class UserDoesNotExistErrorPayload extends AbstractErrorPayload
 {
 }
