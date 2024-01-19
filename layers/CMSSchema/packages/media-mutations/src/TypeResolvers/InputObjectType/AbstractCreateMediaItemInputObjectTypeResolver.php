@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\Root\App;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Module;
 use PoPCMSSchema\MediaMutations\ModuleConfiguration;
-use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType\AllowedMimeTypeEnumStringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
+use PoP\Root\App;
 
 abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
@@ -23,6 +24,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CommentAsOneofInputObjectTypeResolver $commentAsOneofInputObjectTypeResolver = null;
+    private ?AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -89,30 +91,33 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
         }
         return $this->commentAsOneofInputObjectTypeResolver;
     }
+    final public function setAllowedMimeTypeEnumStringScalarTypeResolver(AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver): void
+    {
+        $this->allowedMimeTypeEnumStringScalarTypeResolver = $allowedMimeTypeEnumStringScalarTypeResolver;
+    }
+    final protected function getAllowedMimeTypeEnumStringScalarTypeResolver(): AllowedMimeTypeEnumStringScalarTypeResolver
+    {
+        if ($this->allowedMimeTypeEnumStringScalarTypeResolver === null) {
+            /** @var AllowedMimeTypeEnumStringScalarTypeResolver */
+            $allowedMimeTypeEnumStringScalarTypeResolver = $this->instanceManager->getInstance(AllowedMimeTypeEnumStringScalarTypeResolver::class);
+            $this->allowedMimeTypeEnumStringScalarTypeResolver = $allowedMimeTypeEnumStringScalarTypeResolver;
+        }
+        return $this->allowedMimeTypeEnumStringScalarTypeResolver;
+    }
 
     /**
      * @return array<string,InputTypeResolverInterface>
      */
     public function getInputFieldNameTypeResolvers(): array
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return array_merge(
-            [
-                MutationInputProperties::COMMENT_AS => $this->getCommentAsOneofInputObjectTypeResolver(),
-            ],
-            $this->addCustomPostInputField() ? [
-                MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
-            ] : [],
-            $this->addParentCommentInputField() ? [
-                MutationInputProperties::PARENT_COMMENT_ID => $this->getIDScalarTypeResolver(),
-            ] : [],
-            !$moduleConfiguration->mustUserBeLoggedInToAddComment() ? [
-                MutationInputProperties::AUTHOR_NAME => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::AUTHOR_EMAIL => $this->getEmailScalarTypeResolver(),
-                MutationInputProperties::AUTHOR_URL => $this->getURLScalarTypeResolver(),
-            ] : [],
-        );
+        return [
+            MutationInputProperties::AUTHOR_ID => $this->getIDScalarTypeResolver(),
+            MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::CAPTION => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
+        ];
     }
 
     abstract protected function addCustomPostInputField(): bool;
