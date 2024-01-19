@@ -150,11 +150,18 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
 
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
-        return match ($inputFieldName) {
-            MutationInputProperties::COMMENT_AS => SchemaTypeModifiers::MANDATORY,
-            MutationInputProperties::PARENT_COMMENT_ID => $this->isParentCommentInputFieldMandatory() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE,
-            MutationInputProperties::CUSTOMPOST_ID => SchemaTypeModifiers::MANDATORY,
+        $inputFieldTypeModifiers = match ($inputFieldName) {
+            MutationInputProperties::FROM => SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
+
+        // Inject custom post ID, etc
+        $inputFieldTypeModifiers = App::applyFilters(
+            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_TYPE_MODIFIERS,
+            $inputFieldTypeModifiers,
+            $inputFieldName,
+        );
+
+        return $inputFieldTypeModifiers;
     }
 }
