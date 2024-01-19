@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\Hooks;
 
+use PoPCMSSchema\CustomPostMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateOrUpdateCustomPostMutationResolverTrait;
+use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -118,6 +122,12 @@ class MutationResolverHookSet extends AbstractHookSet
             10,
             2
         );
+        App::addFilter(
+            HookNames::ERROR_PAYLOAD,
+            $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+            10,
+            2
+        );
     }
 
     public function maybeValidateCustomPost(
@@ -183,6 +193,26 @@ class MutationResolverHookSet extends AbstractHookSet
         return match ($inputFieldName) {
             MutationInputProperties::CUSTOMPOST_ID => $this->__('ID of the custom post under which to upload the attachment', 'media-mutations'),
             default => $inputFieldDescription,
+        };
+    }
+
+    public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
+        ErrorPayloadInterface $errorPayload,
+        FeedbackItemResolution $feedbackItemResolution
+    ): ErrorPayloadInterface {
+        return match (
+            [
+            $feedbackItemResolution->getFeedbackProviderServiceClass(),
+            $feedbackItemResolution->getCode()
+            ]
+        ) {
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
+            ] => new CustomPostDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            default => $errorPayload,
         };
     }
 }
