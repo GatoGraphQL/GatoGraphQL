@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootMyMediaFilterInputObjectTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootMyMediaItemsFilterInputObjectTypeResolver;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByOneofInputObjectTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemSortInputObjectTypeResolver;
@@ -35,7 +35,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver = null;
-    private ?RootMyMediaFilterInputObjectTypeResolver $rootMyMediaFilterInputObjectTypeResolver = null;
+    private ?RootMyMediaItemsFilterInputObjectTypeResolver $rootMyMediaItemsFilterInputObjectTypeResolver = null;
     private ?RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver = null;
     private ?MediaItemSortInputObjectTypeResolver $mediaItemSortInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
@@ -92,18 +92,18 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
         }
         return $this->mediaItemByOneofInputObjectTypeResolver;
     }
-    final public function setRootMyMediaFilterInputObjectTypeResolver(RootMyMediaFilterInputObjectTypeResolver $rootMyMediaFilterInputObjectTypeResolver): void
+    final public function setRootMyMediaItemsFilterInputObjectTypeResolver(RootMyMediaItemsFilterInputObjectTypeResolver $rootMyMediaItemsFilterInputObjectTypeResolver): void
     {
-        $this->rootMyMediaFilterInputObjectTypeResolver = $rootMyMediaFilterInputObjectTypeResolver;
+        $this->rootMyMediaItemsFilterInputObjectTypeResolver = $rootMyMediaItemsFilterInputObjectTypeResolver;
     }
-    final protected function getRootMyMediaFilterInputObjectTypeResolver(): RootMyMediaFilterInputObjectTypeResolver
+    final protected function getRootMyMediaItemsFilterInputObjectTypeResolver(): RootMyMediaItemsFilterInputObjectTypeResolver
     {
-        if ($this->rootMyMediaFilterInputObjectTypeResolver === null) {
-            /** @var RootMyMediaFilterInputObjectTypeResolver */
-            $rootMyMediaFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootMyMediaFilterInputObjectTypeResolver::class);
-            $this->rootMyMediaFilterInputObjectTypeResolver = $rootMyMediaFilterInputObjectTypeResolver;
+        if ($this->rootMyMediaItemsFilterInputObjectTypeResolver === null) {
+            /** @var RootMyMediaItemsFilterInputObjectTypeResolver */
+            $rootMyMediaItemsFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootMyMediaItemsFilterInputObjectTypeResolver::class);
+            $this->rootMyMediaItemsFilterInputObjectTypeResolver = $rootMyMediaItemsFilterInputObjectTypeResolver;
         }
-        return $this->rootMyMediaFilterInputObjectTypeResolver;
+        return $this->rootMyMediaItemsFilterInputObjectTypeResolver;
     }
     final public function setRootMediaItemPaginationInputObjectTypeResolver(RootMediaItemPaginationInputObjectTypeResolver $rootMediaItemPaginationInputObjectTypeResolver): void
     {
@@ -218,7 +218,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myMediaItems' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootMyMediaFilterInputObjectTypeResolver(),
+                    'filter' => $this->getRootMyMediaItemsFilterInputObjectTypeResolver(),
                     'pagination' => $this->getRootMediaItemPaginationInputObjectTypeResolver(),
                     'sort' => $this->getMediaItemSortInputObjectTypeResolver(),
                 ]
@@ -226,7 +226,7 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
             'myMediaItemCount' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootMyMediaFilterInputObjectTypeResolver(),
+                    'filter' => $this->getRootMyMediaItemsFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
