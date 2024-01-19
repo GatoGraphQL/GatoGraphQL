@@ -7,8 +7,6 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType\AllowedMimeTypeEnumStringScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
@@ -19,8 +17,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
-    private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
-    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CreateMediaItemFromOneofInputObjectTypeResolver $createMediaItemFromOneofInputObjectTypeResolver = null;
     private ?AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver = null;
@@ -37,32 +33,6 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             $this->idScalarTypeResolver = $idScalarTypeResolver;
         }
         return $this->idScalarTypeResolver;
-    }
-    final public function setEmailScalarTypeResolver(EmailScalarTypeResolver $emailScalarTypeResolver): void
-    {
-        $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-    }
-    final protected function getEmailScalarTypeResolver(): EmailScalarTypeResolver
-    {
-        if ($this->emailScalarTypeResolver === null) {
-            /** @var EmailScalarTypeResolver */
-            $emailScalarTypeResolver = $this->instanceManager->getInstance(EmailScalarTypeResolver::class);
-            $this->emailScalarTypeResolver = $emailScalarTypeResolver;
-        }
-        return $this->emailScalarTypeResolver;
-    }
-    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
-    {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
-    {
-        if ($this->urlScalarTypeResolver === null) {
-            /** @var URLScalarTypeResolver */
-            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
-            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        }
-        return $this->urlScalarTypeResolver;
     }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
