@@ -111,12 +111,6 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E7,
-            ] => new CustomPostDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E8,
             ] => new CommentsAreNotSupportedByCustomPostTypeErrorPayload(
                 $feedbackItemResolution->getMessage(),
