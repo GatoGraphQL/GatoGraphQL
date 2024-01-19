@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MediaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class CommentParentCommentDoesNotExistErrorPayload extends AbstractErrorPayload
+final class UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload extends AbstractErrorPayload
 {
 }

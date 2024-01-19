@@ -8,7 +8,7 @@ use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemSourceIsMissingErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\CommentParentCommentDoesNotExistErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentsAreNotOpenForCustomPostErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\CommentsAreNotSupportedByCustomPostTypeErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPayload;
@@ -105,8 +105,8 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E6,
-            ] => new CommentParentCommentDoesNotExistErrorPayload(
+                MutationErrorFeedbackItemProvider::E4,
+            ] => new UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
