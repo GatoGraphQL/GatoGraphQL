@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\AbstractCommentMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\AbstractMediaItemMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class CommentMutationTransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractTransientEntityOperationPayloadObjectTypeFieldResolver
+class MediaItemMutationTransientEntityOperationPayloadObjectTypeFieldResolver extends AbstractTransientEntityOperationPayloadObjectTypeFieldResolver
 {
     protected function getObjectIDFieldName(): string
     {
-        return 'commentID';
+        return 'mediaItemID';
     }
 
     /**
@@ -21,7 +21,7 @@ class CommentMutationTransientEntityOperationPayloadObjectTypeFieldResolver exte
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCommentMutationPayloadObjectTypeResolver::class,
+            AbstractMediaItemMutationPayloadObjectTypeResolver::class,
         ];
     }
 }

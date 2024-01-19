@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType;
 
-class RootCreateMediaItemMutationPayloadObjectTypeResolver extends AbstractCommentMutationPayloadObjectTypeResolver
+class RootCreateMediaItemMutationPayloadObjectTypeResolver extends AbstractMediaItemMutationPayloadObjectTypeResolver
 {
     public function getTypeName(): string
     {

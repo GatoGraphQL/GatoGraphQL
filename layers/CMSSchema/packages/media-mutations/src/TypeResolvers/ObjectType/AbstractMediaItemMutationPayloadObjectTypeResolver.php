@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType;
 
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeResolver;
 
-abstract class AbstractCommentMutationPayloadObjectTypeResolver extends AbstractObjectMutationPayloadObjectTypeResolver
+abstract class AbstractMediaItemMutationPayloadObjectTypeResolver extends AbstractObjectMutationPayloadObjectTypeResolver
 {
 }
