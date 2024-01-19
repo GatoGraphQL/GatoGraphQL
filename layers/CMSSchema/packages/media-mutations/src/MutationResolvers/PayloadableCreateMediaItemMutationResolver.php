@@ -4,16 +4,18 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
+use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemSourceIsMissingErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -113,10 +115,15 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             ] => new UserDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            default => new GenericErrorPayload(
-                $feedbackItemResolution->getMessage(),
-                $feedbackItemResolution->getNamespacedCode(),
-            ),
+            // Allow components to inject their own validations
+            default => App::applyFilters(
+                HookNames::ERROR_PAYLOAD,
+                new GenericErrorPayload(
+                    $feedbackItemResolution->getMessage(),
+                    $feedbackItemResolution->getNamespacedCode(),
+                ),
+                $feedbackItemResolution,
+            )
         };
     }
 }
