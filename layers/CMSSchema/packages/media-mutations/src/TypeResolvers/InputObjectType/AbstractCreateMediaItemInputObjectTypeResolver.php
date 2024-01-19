@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MediaMutations\Module;
-use PoPCMSSchema\MediaMutations\ModuleConfiguration;
 use PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType\AllowedMimeTypeEnumStringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
@@ -15,7 +13,6 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeReso
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\Root\App;
 
 abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
@@ -23,7 +20,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
     private ?EmailScalarTypeResolver $emailScalarTypeResolver = null;
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?CommentAsOneofInputObjectTypeResolver $commentAsOneofInputObjectTypeResolver = null;
+    private ?CreateMediaItemFromOneofInputObjectTypeResolver $createMediaItemFromOneofInputObjectTypeResolver = null;
     private ?AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
@@ -78,18 +75,18 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setCommentAsOneofInputObjectTypeResolver(CommentAsOneofInputObjectTypeResolver $commentAsOneofInputObjectTypeResolver): void
+    final public function setCreateMediaItemFromOneofInputObjectTypeResolver(CreateMediaItemFromOneofInputObjectTypeResolver $createMediaItemFromOneofInputObjectTypeResolver): void
     {
-        $this->commentAsOneofInputObjectTypeResolver = $commentAsOneofInputObjectTypeResolver;
+        $this->createMediaItemFromOneofInputObjectTypeResolver = $createMediaItemFromOneofInputObjectTypeResolver;
     }
-    final protected function getCommentAsOneofInputObjectTypeResolver(): CommentAsOneofInputObjectTypeResolver
+    final protected function getCreateMediaItemFromOneofInputObjectTypeResolver(): CreateMediaItemFromOneofInputObjectTypeResolver
     {
-        if ($this->commentAsOneofInputObjectTypeResolver === null) {
-            /** @var CommentAsOneofInputObjectTypeResolver */
-            $commentAsOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CommentAsOneofInputObjectTypeResolver::class);
-            $this->commentAsOneofInputObjectTypeResolver = $commentAsOneofInputObjectTypeResolver;
+        if ($this->createMediaItemFromOneofInputObjectTypeResolver === null) {
+            /** @var CreateMediaItemFromOneofInputObjectTypeResolver */
+            $createMediaItemFromOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CreateMediaItemFromOneofInputObjectTypeResolver::class);
+            $this->createMediaItemFromOneofInputObjectTypeResolver = $createMediaItemFromOneofInputObjectTypeResolver;
         }
-        return $this->commentAsOneofInputObjectTypeResolver;
+        return $this->createMediaItemFromOneofInputObjectTypeResolver;
     }
     final public function setAllowedMimeTypeEnumStringScalarTypeResolver(AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver): void
     {
@@ -111,6 +108,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
+            MutationInputProperties::FROM => $this->getCreateMediaItemFromOneofInputObjectTypeResolver(),
             MutationInputProperties::AUTHOR_ID => $this->getIDScalarTypeResolver(),
             MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
             MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
@@ -119,10 +117,6 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
         ];
     }
-
-    abstract protected function addCustomPostInputField(): bool;
-    abstract protected function addParentCommentInputField(): bool;
-    abstract protected function isParentCommentInputFieldMandatory(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
