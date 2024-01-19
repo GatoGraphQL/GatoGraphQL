@@ -12,6 +12,8 @@ use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -24,6 +26,7 @@ class MutationResolverHookSet extends AbstractHookSet
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -77,6 +80,19 @@ class MutationResolverHookSet extends AbstractHookSet
         }
         return $this->customPostTypeMutationAPI;
     }
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
+    }
 
     protected function init(): void
     {
@@ -91,6 +107,10 @@ class MutationResolverHookSet extends AbstractHookSet
             $this->addCreateMediaItemData(...),
             10,
             2
+        );
+        App::addFilter(
+            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            $this->getInputFieldNameTypeResolvers(...)
         );
     }
 
@@ -137,5 +157,16 @@ class MutationResolverHookSet extends AbstractHookSet
 
         $mediaItemData['customPostID'] = $customPostID;
         return $mediaItemData;
+    }
+
+    /**
+     * @param array<string,InputTypeResolverInterface> $inputFieldNameTypeResolvers
+     * @return array<string,InputTypeResolverInterface>
+     */
+    public function getInputFieldNameTypeResolvers(
+        array $inputFieldNameTypeResolvers,
+    ): array {
+        $inputFieldNameTypeResolvers[MutationInputProperties::CUSTOMPOST_ID] = $this->getIDScalarTypeResolver();
+        return $inputFieldNameTypeResolvers;
     }
 }

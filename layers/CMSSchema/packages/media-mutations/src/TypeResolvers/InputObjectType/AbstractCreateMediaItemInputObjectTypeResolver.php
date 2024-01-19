@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
+use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType\AllowedMimeTypeEnumStringScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\EmailScalarTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -107,7 +109,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
      */
     public function getInputFieldNameTypeResolvers(): array
     {
-        return [
+        $inputFieldNameTypeResolvers = [
             MutationInputProperties::FROM => $this->getCreateMediaItemFromOneofInputObjectTypeResolver(),
             MutationInputProperties::AUTHOR_ID => $this->getIDScalarTypeResolver(),
             MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
@@ -116,6 +118,11 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
             MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
         ];
+
+        // Inject custom post ID, etc
+        $inputFieldNameTypeResolvers = App::applyFilters(HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS, $inputFieldNameTypeResolvers);
+
+        return $inputFieldNameTypeResolvers;
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
