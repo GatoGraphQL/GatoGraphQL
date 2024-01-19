@@ -195,9 +195,9 @@ class UserStateRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myMediaItem' => $this->__('MediaItem by the logged-in user on the site with a specific ID', 'pop-mediaItems'),
-            'myMediaItemCount' => $this->__('Number of mediaItems by the logged-in user on the site', 'pop-mediaItems'),
-            'myMediaItems' => $this->__('MediaItems by the logged-in user on the site', 'pop-mediaItems'),
+            'myMediaItem' => $this->__('Media item by the logged-in user on the site with a specific ID', 'media-mutations'),
+            'myMediaItemCount' => $this->__('Number of media items by the logged-in user on the site', 'media-mutations'),
+            'myMediaItems' => $this->__('Media items by the logged-in user on the site', 'media-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
