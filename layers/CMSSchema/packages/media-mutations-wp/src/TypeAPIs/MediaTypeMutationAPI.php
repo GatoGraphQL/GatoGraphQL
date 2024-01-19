@@ -72,9 +72,21 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $file,
         array $mediaItemData
     ): string|int {
+        $mimeType = $mediaItemData['mimeType'] ?? null;
+        if (empty($mimeType)) {
+            // Get the mime type from the file, and check it's allowed
+            $mimeTypeCheck = \wp_check_filetype(sanitize_file_name($file));
+            if (!$mimeTypeCheck['type']) {
+                throw new MediaItemCRUDMutationException(
+                    $this->__('The file\'s mime type is not allowed', 'media-mutations')
+                );
+            }
+            $mimeType = $mimeTypeCheck['type'];
+        }
+        
 		$fileData = [
             'name' => \sanitize_file_name(basename($file)),
-            'type' => !empty($mediaItemData['mimeType']) ? $mediaItemData['mimeType'] : \wp_check_filetype($file),
+            'type' => $mimeType,
             'tmp_name' => $file,
             'error' => 0,
             'size' => filesize($file),
