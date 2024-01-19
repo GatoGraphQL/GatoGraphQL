@@ -23,9 +23,6 @@ use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
 use stdClass;
 
-/**
- * Add a comment to a custom post. The user may be logged-in or not
- */
 class CreateMediaItemMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
