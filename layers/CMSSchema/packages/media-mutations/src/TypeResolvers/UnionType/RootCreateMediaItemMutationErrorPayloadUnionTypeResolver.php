@@ -32,7 +32,7 @@ class RootCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractC
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when uploading a file', 'media-mutations');
+        return $this->__('Union of \'Error Payload\' types when uploading an attachment', 'media-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
