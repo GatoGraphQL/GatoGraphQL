@@ -128,12 +128,13 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::COMMENT_AS => $this->__('The comment to add', 'media-mutations'),
-            MutationInputProperties::PARENT_COMMENT_ID => $this->__('The ID of the parent comment', 'media-mutations'),
-            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post to add a comment to', 'media-mutations'),
-            MutationInputProperties::AUTHOR_NAME => $this->__('The comment author\'s name', 'media-mutations'),
-            MutationInputProperties::AUTHOR_EMAIL => $this->__('The comment author\'s email', 'media-mutations'),
-            MutationInputProperties::AUTHOR_URL => $this->__('The comment author\'s site URL', 'media-mutations'),
+            MutationInputProperties::FROM => $this->__('Source for the file', 'media-mutations'),
+            MutationInputProperties::AUTHOR_ID => $this->__('The ID of the author', 'media-mutations'),
+            MutationInputProperties::TITLE => $this->__('Attachment title', 'media-mutations'),
+            MutationInputProperties::SLUG => $this->__('Attachment slug', 'media-mutations'),
+            MutationInputProperties::CAPTION => $this->__('Attachment caption', 'media-mutations'),
+            MutationInputProperties::DESCRIPTION => $this->__('Attachment description', 'media-mutations'),
+            MutationInputProperties::MIME_TYPE => $this->__('Attachment\'s mime type', 'media-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }
