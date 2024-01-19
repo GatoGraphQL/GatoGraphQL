@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\UnionType;
 
 use PoPSchema\SchemaCommons\TypeResolvers\UnionType\AbstractErrorPayloadUnionTypeResolver;
 
-abstract class AbstractCommentMutationErrorPayloadUnionTypeResolver extends AbstractErrorPayloadUnionTypeResolver
+abstract class AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractErrorPayloadUnionTypeResolver
 {
 }

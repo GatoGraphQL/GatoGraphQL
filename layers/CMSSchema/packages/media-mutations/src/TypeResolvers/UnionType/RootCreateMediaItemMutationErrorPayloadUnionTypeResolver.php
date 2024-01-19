@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\UnionType;
 use PoPCMSSchema\MediaMutations\RelationalTypeDataLoaders\UnionType\RootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class RootCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractCommentMutationErrorPayloadUnionTypeResolver
+class RootCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver
 {
     private ?RootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader $rootCreateMediaItemMutationErrorPayloadUnionTypeDataLoader = null;
 
@@ -32,7 +32,7 @@ class RootCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractC
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when adding a comment to a custom post', 'media-mutations');
+        return $this->__('Union of \'Error Payload\' types when uploading a file', 'media-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
