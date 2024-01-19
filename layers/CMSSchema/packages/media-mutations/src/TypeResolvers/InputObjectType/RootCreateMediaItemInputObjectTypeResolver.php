@@ -13,21 +13,6 @@ class RootCreateMediaItemInputObjectTypeResolver extends AbstractCreateMediaItem
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to add a comment to a custom post', 'media-mutations');
-    }
-
-    protected function addCustomPostInputField(): bool
-    {
-        return true;
-    }
-
-    protected function addParentCommentInputField(): bool
-    {
-        return true;
-    }
-
-    protected function isParentCommentInputFieldMandatory(): bool
-    {
-        return false;
+        return $this->__('Input to upload an attachment', 'media-mutations');
     }
 }
