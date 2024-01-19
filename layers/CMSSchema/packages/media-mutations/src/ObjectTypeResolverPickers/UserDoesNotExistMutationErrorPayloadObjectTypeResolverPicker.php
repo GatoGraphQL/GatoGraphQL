@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\RootCreateMediaItemMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class UserDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserDoesNotExistMutationErrorPayloadObjectTypeResolverPicker
@@ -15,7 +15,7 @@ class UserDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends Abstr
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            RootCreateMediaItemMutationErrorPayloadUnionTypeResolver::class,
+            AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

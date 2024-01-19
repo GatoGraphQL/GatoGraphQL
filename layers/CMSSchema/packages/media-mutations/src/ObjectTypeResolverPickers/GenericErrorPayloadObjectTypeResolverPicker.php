@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractCommentMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver;
 use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractGenericErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -16,7 +16,7 @@ class GenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPa
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCommentMutationErrorPayloadUnionTypeResolver::class,
+            AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
