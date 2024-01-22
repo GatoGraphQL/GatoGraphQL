@@ -116,6 +116,8 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             $mediaItemData['title'] = sanitize_file_name(basename($uploadedFilename));
         }
 
+        $mediaItemData['mimeType'] = $mimeType;
+
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
         
         $mediaItemIDOrError = \wp_insert_attachment(
