@@ -112,11 +112,11 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             unset($mediaItemData['customPostID']);
         }
         
-        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
-
-        if (empty($mediaItemData['post_title'])) {
-            $mediaItemData['post_title'] = sanitize_file_name(basename($uploadedFilename));
+        if (empty($mediaItemData['title'])) {
+            $mediaItemData['title'] = sanitize_file_name(basename($uploadedFilename));
         }
+
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
         
         $mediaItemIDOrError = \wp_insert_attachment(
             $mediaItemData,
