@@ -136,6 +136,21 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $mediaItemID = $mediaItemIDOrError;
+
+        /**
+         * Update the image metadata, including the dimensions
+         * to generate the thumbnails
+         */
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+        
+        $mediaItemMetaData = \wp_generate_attachment_metadata($mediaItemID, $file);
+        \wp_update_attachment_metadata($mediaItemID, $mediaItemMetaData);
+        
+        $altText = $mediaItemMetaData['altText'] ?? null;
+        if (!empty($altText)) {
+            \update_post_meta($mediaItemID, '_wp_attachment_image_alt', $altText);
+        }
+        
         return $mediaItemID;
     }
 
