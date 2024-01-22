@@ -90,7 +90,11 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
         ];
 
         // Inject custom post ID, etc
-        $inputFieldNameTypeResolvers = App::applyFilters(HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS, $inputFieldNameTypeResolvers);
+        $inputFieldNameTypeResolvers = App::applyFilters(
+            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            $inputFieldNameTypeResolvers,
+            $this,
+        );
 
         return $inputFieldNameTypeResolvers;
     }
@@ -113,6 +117,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
             $inputFieldDescription,
             $inputFieldName,
+            $this,
         );
 
         return $inputFieldDescription;
@@ -130,6 +135,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_TYPE_MODIFIERS,
             $inputFieldTypeModifiers,
             $inputFieldName,
+            $this,
         );
 
         return $inputFieldTypeModifiers;
