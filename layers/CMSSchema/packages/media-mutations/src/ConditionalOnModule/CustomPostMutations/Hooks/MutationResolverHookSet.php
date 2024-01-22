@@ -187,7 +187,7 @@ class MutationResolverHookSet extends AbstractHookSet
     }
 
     public function getInputFieldDescription(
-        string $inputFieldDescription,
+        ?string $inputFieldDescription,
         string $inputFieldName
     ): ?string {
         return match ($inputFieldName) {
