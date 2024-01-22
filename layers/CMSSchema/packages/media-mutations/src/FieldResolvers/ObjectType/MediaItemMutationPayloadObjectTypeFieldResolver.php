@@ -40,7 +40,7 @@ class MediaItemMutationPayloadObjectTypeFieldResolver extends AbstractObjectMuta
 
     protected function getObjectFieldName(): string
     {
-        return 'comment';
+        return 'mediaItem';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface

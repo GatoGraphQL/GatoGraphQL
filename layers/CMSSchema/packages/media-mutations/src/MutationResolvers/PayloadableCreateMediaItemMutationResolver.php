@@ -46,17 +46,17 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             )->getID();
         }
 
-        $commentID = null;
+        $mediaItemID = null;
         try {
             /** @var string|int */
-            $commentID = parent::executeMutation(
+            $mediaItemID = parent::executeMutation(
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
-        } catch (MediaItemCRUDMutationException $commentCRUDMutationException) {
+        } catch (MediaItemCRUDMutationException $mediaItemCRUDMutationException) {
             return $this->createFailureObjectMutationPayload(
                 [
-                    $this->createGenericErrorPayloadFromPayloadClientException($commentCRUDMutationException),
+                    $this->createGenericErrorPayloadFromPayloadClientException($mediaItemCRUDMutationException),
                 ]
             )->getID();
         }
@@ -67,12 +67,12 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 ),
-                $commentID
+                $mediaItemID
             )->getID();
         }
 
-        /** @var string|int $commentID */
-        return $this->createSuccessObjectMutationPayload($commentID)->getID();
+        /** @var string|int $mediaItemID */
+        return $this->createSuccessObjectMutationPayload($mediaItemID)->getID();
     }
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
