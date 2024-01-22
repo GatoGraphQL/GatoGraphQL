@@ -105,13 +105,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         /** @var string */
         $uploadedFilename = $uploadedFile['file'];
-        
-        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
+
         $customPostID = 0;
         if (isset($mediaItemData['customPostID'])) {
             $customPostID = $mediaItemData['customPostID'];
             unset($mediaItemData['customPostID']);
         }
+        
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
 
         if (empty($mediaItemData['post_title'])) {
             $mediaItemData['post_title'] = sanitize_file_name(basename($uploadedFilename));
