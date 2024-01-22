@@ -143,7 +143,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
          */
         require_once ABSPATH . 'wp-admin/includes/image.php';
         
-        $mediaItemMetaData = \wp_generate_attachment_metadata($mediaItemID, $file);
+        $mediaItemMetaData = \wp_generate_attachment_metadata($mediaItemID, $uploadedFilename);
         \wp_update_attachment_metadata($mediaItemID, $mediaItemMetaData);
         
         $altText = $mediaItemMetaData['altText'] ?? null;
