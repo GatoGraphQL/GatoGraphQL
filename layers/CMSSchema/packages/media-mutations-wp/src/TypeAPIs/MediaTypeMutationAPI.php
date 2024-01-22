@@ -32,7 +32,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $downloadedFile = $downloadedFileOrError;
-        $mimeType = $this->getFileMimeTypeOrThrowError($url);
+        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($url);
 
         return $this->createMediaItemFromLocalFile(
             $downloadedFile,
@@ -58,7 +58,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $uploadedFile = $uploadedFileOrError;
-        $mimeType = $this->getFileMimeTypeOrThrowError($filename);
+        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
         
         /** @var string */
         $file = $uploadedFile['file'];
