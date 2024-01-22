@@ -32,9 +32,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $downloadedFile = $downloadedFileOrError;
+        $mimeType = $this->getFileMimeTypeOrThrowError($url);
 
         return $this->createMediaItemFromLocalFile(
             $downloadedFile,
+            basename($url),
+            $mimeType,
             $mediaItemData,
         );
     }
@@ -55,11 +58,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $uploadedFile = $uploadedFileOrError;
+        $mimeType = $this->getFileMimeTypeOrThrowError($filename);
         
         /** @var string */
         $file = $uploadedFile['file'];
         return $this->createMediaItemFromLocalFile(
             $file,
+            basename($file),
+            $mimeType,
             $mediaItemData,
         );
     }
@@ -70,22 +76,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     protected function createMediaItemFromLocalFile(
         string $file,
+        string $filename,
+        string $mimeType,
         array $mediaItemData
-    ): string|int {
-        $mimeType = $mediaItemData['mimeType'] ?? null;
-        if (empty($mimeType)) {
-            // Get the mime type from the file, and check it's allowed
-            $mimeTypeCheck = \wp_check_filetype(sanitize_file_name($file));
-            if (!$mimeTypeCheck['type']) {
-                throw new MediaItemCRUDMutationException(
-                    $this->__('The file\'s mime type is not allowed', 'media-mutations')
-                );
-            }
-            $mimeType = $mimeTypeCheck['type'];
-        }
-        
+    ): string|int {        
 		$fileData = [
-            'name' => \sanitize_file_name(basename($file)),
+            'name' => \sanitize_file_name($filename),
             'type' => $mimeType,
             'tmp_name' => $file,
             'error' => 0,
@@ -134,6 +130,23 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         $mediaItemID = $mediaItemIDOrError;
         return $mediaItemID;
+    }
+
+    /**
+     * @throws MediaItemCRUDMutationException If the mime type is not allowed
+     */
+    protected function getFileMimeTypeOrThrowError(string $filename): string
+    {
+        // Get the mime type from the file, and check it's allowed
+        $mimeTypeCheck = \wp_check_filetype(sanitize_file_name(basename($filename)));
+        if (!$mimeTypeCheck['type']) {
+            throw new MediaItemCRUDMutationException(
+                $this->__('The file\'s mime type is not allowed', 'media-mutations')
+            );
+        }
+        /** @var string */
+        $mimeType = $mimeTypeCheck['type'];
+        return $mimeType;
     }
 
     /**
