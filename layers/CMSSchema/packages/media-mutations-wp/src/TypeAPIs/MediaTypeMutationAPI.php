@@ -97,6 +97,8 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $mimeType,
         array $mediaItemData
     ): string|int {        
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+
 		$fileData = [
             'name' => \sanitize_file_name($filename),
             'type' => $mimeType,
