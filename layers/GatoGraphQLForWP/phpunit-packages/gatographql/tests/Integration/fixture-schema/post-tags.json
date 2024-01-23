@@ -44,7 +44,7 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 1113,
+                "id": 13,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "release",
@@ -154,7 +154,7 @@
             {
                 "count": 0,
                 "description": "",
-                "id": 1116,
+                "id": 16,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Also never used",
@@ -193,7 +193,7 @@
                 "name": "Security"
             },
             {
-                "id": 1113,
+                "id": 13,
                 "name": "release"
             },
             {
@@ -399,7 +399,7 @@
                 "title": "Released v0.6, check it out",
                 "tags": [
                     {
-                        "id": 1113
+                        "id": 13
                     },
                     {
                         "id": 12
