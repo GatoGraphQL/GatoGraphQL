@@ -2,6 +2,7 @@
 wp config set WP_DEBUG true --raw
 wp config set WP_DEBUG_DISPLAY false --raw
 wp rewrite structure '/%postname%/' --hard
+wp option update uploads_use_yearmonth_folders '0'
 cp /app/assets/.htaccess /app/wordpress
 cp /app/assets/phpinfo.php /app/wordpress
 cp /app/assets/favicon.ico /app/wordpress
