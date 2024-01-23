@@ -1,3 +1,5 @@
 {
-    "url": "https://gatographql.lndo.site/license.txt"
+    "url": "https://gatographql.lndo.site/license.txt",
+    "slug": "customized-slug-for-license",
+    "title": "This file has a customized slug"
 }

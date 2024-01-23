@@ -1,3 +1,5 @@
 {
-    "url": "https://gatographql.lndo.site/wp-admin/images/loading.gif"
+    "url": "https://gatographql.lndo.site/wp-admin/images/loading.gif",
+    "customPostID": 1,
+    "description": "Description for the loading gif image"
 }
