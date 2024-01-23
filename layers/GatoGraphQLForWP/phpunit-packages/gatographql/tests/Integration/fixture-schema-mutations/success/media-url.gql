@@ -47,6 +47,10 @@ mutation TestCreateMediaItemFromURL(
       ...MediaItemData
     }
   }
+
+  logoutUser {
+    status
+  }
 }
 
 fragment MediaItemData on Media {
