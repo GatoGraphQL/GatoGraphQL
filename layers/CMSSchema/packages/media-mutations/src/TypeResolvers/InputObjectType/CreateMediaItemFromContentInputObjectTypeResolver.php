@@ -6,6 +6,7 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType\AllowedMimeTypeEnumStringScalarTypeResolver;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -62,6 +63,17 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
             MutationInputProperties::BODY => $this->getStringScalarTypeResolver(),
             MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
         ];
+    }
+
+    public function getInputFieldTypeModifiers(string $inputFieldName): int
+    {
+        return match ($inputFieldName) {
+            MutationInputProperties::FILENAME,
+            MutationInputProperties::BODY
+                => SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName),
+        };
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
