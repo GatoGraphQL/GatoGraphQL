@@ -132,6 +132,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreateMediaItemMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootCreatePostMutationPayload"
         },
         {
@@ -181,6 +185,14 @@
         {
           "kind": "OBJECT",
           "name": "UserDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserHasNoPermissionToUploadFilesErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -241,6 +253,10 @@
         {
           "kind": "OBJECT",
           "name": "__Type"
+        },
+        {
+          "kind": "SCALAR",
+          "name": "AllowedMimeTypeEnumString"
         },
         {
           "kind": "SCALAR",
@@ -397,6 +413,14 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "CommentSortInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CreateMediaItemFromContentInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CreateMediaItemFromInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -564,6 +588,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateMediaItemInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreatePostInput"
         },
         {
@@ -593,6 +621,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootMyCustomPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMyMediaItemsFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -789,6 +821,10 @@
         {
           "kind": "UNION",
           "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreateMediaItemMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",

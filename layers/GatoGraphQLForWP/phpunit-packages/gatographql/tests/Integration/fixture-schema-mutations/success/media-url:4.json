@@ -1,0 +1,31 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "altText": "Some alternative info about this file that is a .txt file",
+                "author": {
+                    "id": 6,
+                    "name": "Editor Smith"
+                },
+                "caption": "",
+                "description": "",
+                "height": null,
+                "mimeType": "text\/plain",
+                "sizes": null,
+                "slug": "customized-slug-for-license",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/license.txt",
+                "title": "This file has a customized slug",
+                "width": null
+            }
+        },
+        "logoutUser": {
+          "status": "SUCCESS"
+        }
+    }
+}

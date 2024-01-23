@@ -27,7 +27,7 @@ class Module extends AbstractModule
         return [
             \PoPCMSSchema\CustomPostMutations\Module::class,
             \PoPCMSSchema\CustomPostsWP\Module::class,
-            \PoPCMSSchema\UserStateWP\Module::class,
+            \PoPCMSSchema\UserStateMutationsWP\Module::class,
             \PoPCMSSchema\UserRolesWP\Module::class,
         ];
     }

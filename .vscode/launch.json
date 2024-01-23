@@ -65,6 +65,8 @@
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/customposts": "${workspaceFolder}/layers/CMSSchema/packages/customposts",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/media-wp": "${workspaceFolder}/layers/CMSSchema/packages/media-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/media": "${workspaceFolder}/layers/CMSSchema/packages/media",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/media-mutations-wp": "${workspaceFolder}/layers/CMSSchema/packages/media-mutations-wp",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/media-mutations": "${workspaceFolder}/layers/CMSSchema/packages/media-mutations",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/menus-wp": "${workspaceFolder}/layers/CMSSchema/packages/menus-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/menus": "${workspaceFolder}/layers/CMSSchema/packages/menus",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/meta": "${workspaceFolder}/layers/CMSSchema/packages/meta",

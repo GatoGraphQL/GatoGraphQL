@@ -662,6 +662,9 @@
               "name": "addCommentToCustomPost"
             },
             {
+              "name": "createMediaItem"
+            },
+            {
               "name": "createPost"
             },
             {
@@ -1148,6 +1151,15 @@
               "name": "myCustomPosts"
             },
             {
+              "name": "myMediaItem"
+            },
+            {
+              "name": "myMediaItemCount"
+            },
+            {
+              "name": "myMediaItems"
+            },
+            {
               "name": "myPost"
             },
             {
@@ -1273,6 +1285,9 @@
               "name": "comments"
             },
             {
+              "name": "createMediaItem"
+            },
+            {
               "name": "createPost"
             },
             {
@@ -1343,6 +1358,15 @@
             },
             {
               "name": "myCustomPosts"
+            },
+            {
+              "name": "myMediaItem"
+            },
+            {
+              "name": "myMediaItemCount"
+            },
+            {
+              "name": "myMediaItems"
             },
             {
               "name": "myPost"
@@ -1475,6 +1499,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of adding a comment to a custom post"
+        },
+        {
+          "name": "RootCreateMediaItemMutationPayload",
+          "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "mediaItem"
+            },
+            {
+              "name": "mediaItemID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of uploading an attachment"
         },
         {
           "name": "RootCreatePostMutationPayload",
@@ -1799,14 +1843,36 @@
         },
         {
           "name": "UserDoesNotExistErrorPayload",
-          "namespacedName": "UserDoesNotExistErrorPayload",
+          "namespacedName": "PoPCMSSchema_MediaMutations_UserDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"
             }
           ],
           "kind": "OBJECT",
-          "description": "Error payload for: \"The requested media item does not exist\""
+          "description": "Error payload for: \"The user does not exist\""
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesErrorPayload",
+          "namespacedName": "PoPCMSSchema_MediaMutations_UserHasNoPermissionToUploadFilesErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to upload files\""
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+          "namespacedName": "PoPCMSSchema_MediaMutations_UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to upload files for other users\""
         },
         {
           "name": "UserIsLoggedInErrorPayload",
@@ -2146,6 +2212,13 @@
           ],
           "kind": "OBJECT",
           "description": "Representation of each GraphQL type in the graph"
+        },
+        {
+          "name": "AllowedMimeTypeEnumString",
+          "namespacedName": "PoPCMSSchema_MediaMutations_AllowedMimeTypeEnumString",
+          "fields": null,
+          "kind": "SCALAR",
+          "description": "Allowed mime types for uploading files, with possible values: `\"application\/java\"`, `\"application\/javascript\"`, `\"application\/msword\"`, `\"application\/octet-stream\"`, `\"application\/octet-stream\"`, `\"application\/onenote\"`, `\"application\/oxps\"`, `\"application\/pdf\"`, `\"application\/rar\"`, `\"application\/rtf\"`, `\"application\/ttaf+xml\"`, `\"application\/vnd.apple.keynote\"`, `\"application\/vnd.apple.numbers\"`, `\"application\/vnd.apple.pages\"`, `\"application\/vnd.ms-access\"`, `\"application\/vnd.ms-excel\"`, `\"application\/vnd.ms-excel.addin.macroEnabled.12\"`, `\"application\/vnd.ms-excel.sheet.binary.macroEnabled.12\"`, `\"application\/vnd.ms-excel.sheet.macroEnabled.12\"`, `\"application\/vnd.ms-excel.template.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint\"`, `\"application\/vnd.ms-powerpoint.addin.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.presentation.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.slide.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.slideshow.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.template.macroEnabled.12\"`, `\"application\/vnd.ms-project\"`, `\"application\/vnd.ms-word.document.macroEnabled.12\"`, `\"application\/vnd.ms-word.template.macroEnabled.12\"`, `\"application\/vnd.ms-write\"`, `\"application\/vnd.ms-xpsdocument\"`, `\"application\/vnd.oasis.opendocument.chart\"`, `\"application\/vnd.oasis.opendocument.database\"`, `\"application\/vnd.oasis.opendocument.formula\"`, `\"application\/vnd.oasis.opendocument.graphics\"`, `\"application\/vnd.oasis.opendocument.presentation\"`, `\"application\/vnd.oasis.opendocument.spreadsheet\"`, `\"application\/vnd.oasis.opendocument.text\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.presentation\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.slide\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.slideshow\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.template\"`, `\"application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"`, `\"application\/vnd.openxmlformats-officedocument.spreadsheetml.template\"`, `\"application\/vnd.openxmlformats-officedocument.wordprocessingml.document\"`, `\"application\/vnd.openxmlformats-officedocument.wordprocessingml.template\"`, `\"application\/wordperfect\"`, `\"application\/x-7z-compressed\"`, `\"application\/x-gzip\"`, `\"application\/x-tar\"`, `\"application\/zip\"`, `\"audio\/aac\"`, `\"audio\/flac\"`, `\"audio\/midi\"`, `\"audio\/mpeg\"`, `\"audio\/ogg\"`, `\"audio\/wav\"`, `\"audio\/x-matroska\"`, `\"audio\/x-ms-wax\"`, `\"audio\/x-ms-wma\"`, `\"audio\/x-realaudio\"`, `\"image\/bmp\"`, `\"image\/gif\"`, `\"image\/heic\"`, `\"image\/jpeg\"`, `\"image\/png\"`, `\"image\/tiff\"`, `\"image\/webp\"`, `\"image\/x-icon\"`, `\"text\/calendar\"`, `\"text\/css\"`, `\"text\/csv\"`, `\"text\/html\"`, `\"text\/plain\"`, `\"text\/richtext\"`, `\"text\/tab-separated-values\"`, `\"text\/vtt\"`, `\"video\/3gpp\"`, `\"video\/3gpp2\"`, `\"video\/avi\"`, `\"video\/divx\"`, `\"video\/mp4\"`, `\"video\/mpeg\"`, `\"video\/ogg\"`, `\"video\/quicktime\"`, `\"video\/webm\"`, `\"video\/x-flv\"`, `\"video\/x-matroska\"`, `\"video\/x-ms-asf\"`, `\"video\/x-ms-wm\"`, `\"video\/x-ms-wmv\"`, `\"video\/x-ms-wmx\"`."
         },
         {
           "name": "AnyBuiltInScalar",
@@ -2555,6 +2628,20 @@
           "description": "Input to sort custom posts"
         },
         {
+          "name": "CreateMediaItemFromContentInput",
+          "namespacedName": "PoPCMSSchema_MediaMutations_CreateMediaItemFromContentInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Provide the data to create and upload the attachment"
+        },
+        {
+          "name": "CreateMediaItemFromInput",
+          "namespacedName": "PoPCMSSchema_MediaMutations_CreateMediaItemFromInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
+        },
+        {
           "name": "CustomPostByInput",
           "namespacedName": "CustomPostByInput",
           "fields": null,
@@ -2842,6 +2929,13 @@
           "description": "Input to filter comments"
         },
         {
+          "name": "RootCreateMediaItemInput",
+          "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to upload an attachment"
+        },
+        {
           "name": "RootCreatePostInput",
           "namespacedName": "RootCreatePostInput",
           "fields": null,
@@ -2896,6 +2990,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter the logged-in user's custom posts"
+        },
+        {
+          "name": "RootMyMediaItemsFilterInput",
+          "namespacedName": "PoPCMSSchema_MediaMutations_RootMyMediaItemsFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter the logged-in user's media items"
         },
         {
           "name": "RootMyPostsFilterInput",
@@ -3239,6 +3340,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when adding a comment to a custom post"
+        },
+        {
+          "name": "RootCreateMediaItemMutationErrorPayloadUnion",
+          "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when uploading an attachment"
         },
         {
           "name": "RootCreatePostMutationErrorPayloadUnion",

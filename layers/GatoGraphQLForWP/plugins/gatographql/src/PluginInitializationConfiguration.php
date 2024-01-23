@@ -1045,6 +1045,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             MutationSchemaTypeModuleResolver::SCHEMA_POST_MUTATIONS => [
                 \PoPCMSSchema\PostMutations\Module::class,
             ],
+            MutationSchemaTypeModuleResolver::SCHEMA_MEDIA_MUTATIONS => [
+                \PoPCMSSchema\MediaMutations\Module::class,
+                \PoPCMSSchema\MediaMutationsWP\Module::class,
+            ],
             MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOSTMEDIA_MUTATIONS => [
                 \PoPCMSSchema\CustomPostMediaMutations\Module::class,
                 \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,

@@ -2040,6 +2040,21 @@
                             ]
                         },
                         {
+                            "name": "createMediaItem",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPost",
                             "extensions": {
                                 "isMutation": true,
@@ -4109,6 +4124,63 @@
                             ]
                         },
                         {
+                            "name": "myMediaItem",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "by",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myMediaItemCount",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myMediaItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "pagination",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "myPost",
                             "extensions": {
                                 "isMutation": false,
@@ -4907,6 +4979,21 @@
                             ]
                         },
                         {
+                            "name": "createMediaItem",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPost",
                             "extensions": {
                                 "isMutation": true,
@@ -5282,6 +5369,63 @@
                         },
                         {
                             "name": "myCustomPosts",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "pagination",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myMediaItem",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "by",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myMediaItemCount",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myMediaItems",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6019,6 +6163,51 @@
                         },
                         {
                             "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateMediaItemMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreateMediaItemMutationPayload",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "mediaItem",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "mediaItemID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6905,7 +7094,49 @@
                     "name": "UserDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "UserDoesNotExistErrorPayload",
-                        "namespacedName": "UserDoesNotExistErrorPayload",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_UserDoesNotExistErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "UserHasNoPermissionToUploadFilesErrorPayload",
+                    "extensions": {
+                        "elementName": "UserHasNoPermissionToUploadFilesErrorPayload",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_UserHasNoPermissionToUploadFilesErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+                    "extensions": {
+                        "elementName": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -7733,6 +7964,111 @@
                             "args": []
                         }
                     ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "AllowedMimeTypeEnumString",
+                    "extensions": {
+                        "elementName": "AllowedMimeTypeEnumString",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_AllowedMimeTypeEnumString",
+                        "possibleValues": [
+                            "application\/java",
+                            "application\/javascript",
+                            "application\/msword",
+                            "application\/octet-stream",
+                            "application\/octet-stream",
+                            "application\/onenote",
+                            "application\/oxps",
+                            "application\/pdf",
+                            "application\/rar",
+                            "application\/rtf",
+                            "application\/ttaf+xml",
+                            "application\/vnd.apple.keynote",
+                            "application\/vnd.apple.numbers",
+                            "application\/vnd.apple.pages",
+                            "application\/vnd.ms-access",
+                            "application\/vnd.ms-excel",
+                            "application\/vnd.ms-excel.addin.macroEnabled.12",
+                            "application\/vnd.ms-excel.sheet.binary.macroEnabled.12",
+                            "application\/vnd.ms-excel.sheet.macroEnabled.12",
+                            "application\/vnd.ms-excel.template.macroEnabled.12",
+                            "application\/vnd.ms-powerpoint",
+                            "application\/vnd.ms-powerpoint.addin.macroEnabled.12",
+                            "application\/vnd.ms-powerpoint.presentation.macroEnabled.12",
+                            "application\/vnd.ms-powerpoint.slide.macroEnabled.12",
+                            "application\/vnd.ms-powerpoint.slideshow.macroEnabled.12",
+                            "application\/vnd.ms-powerpoint.template.macroEnabled.12",
+                            "application\/vnd.ms-project",
+                            "application\/vnd.ms-word.document.macroEnabled.12",
+                            "application\/vnd.ms-word.template.macroEnabled.12",
+                            "application\/vnd.ms-write",
+                            "application\/vnd.ms-xpsdocument",
+                            "application\/vnd.oasis.opendocument.chart",
+                            "application\/vnd.oasis.opendocument.database",
+                            "application\/vnd.oasis.opendocument.formula",
+                            "application\/vnd.oasis.opendocument.graphics",
+                            "application\/vnd.oasis.opendocument.presentation",
+                            "application\/vnd.oasis.opendocument.spreadsheet",
+                            "application\/vnd.oasis.opendocument.text",
+                            "application\/vnd.openxmlformats-officedocument.presentationml.presentation",
+                            "application\/vnd.openxmlformats-officedocument.presentationml.slide",
+                            "application\/vnd.openxmlformats-officedocument.presentationml.slideshow",
+                            "application\/vnd.openxmlformats-officedocument.presentationml.template",
+                            "application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                            "application\/vnd.openxmlformats-officedocument.spreadsheetml.template",
+                            "application\/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                            "application\/vnd.openxmlformats-officedocument.wordprocessingml.template",
+                            "application\/wordperfect",
+                            "application\/x-7z-compressed",
+                            "application\/x-gzip",
+                            "application\/x-tar",
+                            "application\/zip",
+                            "audio\/aac",
+                            "audio\/flac",
+                            "audio\/midi",
+                            "audio\/mpeg",
+                            "audio\/ogg",
+                            "audio\/wav",
+                            "audio\/x-matroska",
+                            "audio\/x-ms-wax",
+                            "audio\/x-ms-wma",
+                            "audio\/x-realaudio",
+                            "image\/bmp",
+                            "image\/gif",
+                            "image\/heic",
+                            "image\/jpeg",
+                            "image\/png",
+                            "image\/tiff",
+                            "image\/webp",
+                            "image\/x-icon",
+                            "text\/calendar",
+                            "text\/css",
+                            "text\/csv",
+                            "text\/html",
+                            "text\/plain",
+                            "text\/richtext",
+                            "text\/tab-separated-values",
+                            "text\/vtt",
+                            "video\/3gpp",
+                            "video\/3gpp2",
+                            "video\/avi",
+                            "video\/divx",
+                            "video\/mp4",
+                            "video\/mpeg",
+                            "video\/ogg",
+                            "video\/quicktime",
+                            "video\/webm",
+                            "video\/x-flv",
+                            "video\/x-matroska",
+                            "video\/x-ms-asf",
+                            "video\/x-ms-wm",
+                            "video\/x-ms-wmv",
+                            "video\/x-ms-wmx"
+                        ],
+                        "isOneOf": false
+                    },
+                    "fields": null,
                     "inputFields": null,
                     "enumValues": null
                 },
@@ -8815,6 +9151,56 @@
                         },
                         {
                             "name": "order",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "CreateMediaItemFromContentInput",
+                    "extensions": {
+                        "elementName": "CreateMediaItemFromContentInput",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_CreateMediaItemFromContentInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "body",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "filename",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "CreateMediaItemFromInput",
+                    "extensions": {
+                        "elementName": "CreateMediaItemFromInput",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_CreateMediaItemFromInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "contents",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "url",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -10238,6 +10624,73 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateMediaItemInput",
+                    "extensions": {
+                        "elementName": "RootCreateMediaItemInput",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "altText",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "authorID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "caption",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "customPostID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "from",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "mimeType",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreatePostInput",
                     "extensions": {
                         "elementName": "RootCreatePostInput",
@@ -10694,6 +11147,49 @@
                         },
                         {
                             "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootMyMediaItemsFilterInput",
+                    "extensions": {
+                        "elementName": "RootMyMediaItemsFilterInput",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_RootMyMediaItemsFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "dateQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excludeIDs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "ids",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "mimeTypes",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "search",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -12935,6 +13431,18 @@
                     "extensions": {
                         "elementName": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
                         "namespacedName": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateMediaItemMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreateMediaItemMutationErrorPayloadUnion",
+                        "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },

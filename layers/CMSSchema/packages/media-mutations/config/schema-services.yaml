@@ -1,0 +1,22 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\MediaMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\MediaMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
+    PoPCMSSchema\MediaMutations\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
+
+    PoPCMSSchema\MediaMutations\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\MediaMutations\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'

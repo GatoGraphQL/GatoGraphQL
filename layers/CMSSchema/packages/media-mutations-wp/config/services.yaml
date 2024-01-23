@@ -1,0 +1,11 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface:
+        class: \PoPCMSSchema\MediaMutationsWP\TypeAPIs\MediaTypeMutationAPI
+
+    PoPCMSSchema\MediaMutationsWP\LooseContracts\:
+        resource: '../src/LooseContracts/*'

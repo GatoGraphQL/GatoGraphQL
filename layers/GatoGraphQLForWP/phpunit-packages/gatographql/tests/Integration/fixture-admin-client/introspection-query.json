@@ -3809,6 +3809,37 @@
               "deprecationReason": null
             },
             {
+              "name": "createMediaItem",
+              "description": "Upload an attachment",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to upload an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateMediaItemInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateMediaItemInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateMediaItemMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateMediaItemMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPost",
               "description": "Create a post",
               "args": [
@@ -7994,6 +8025,115 @@
               "deprecationReason": null
             },
             {
+              "name": "myMediaItem",
+              "description": "Media item by the logged-in user on the site with a specific ID",
+              "args": [
+                {
+                  "name": "by",
+                  "description": "Oneof input to specify the property and data to fetch a media item",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "MediaItemByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "MediaItemByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Media",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myMediaItemCount",
+              "description": "Number of media items by the logged-in user on the site",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's media items",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyMediaItemsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myMediaItems",
+              "description": "Media items by the logged-in user on the site",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's media items",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyMediaItemsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate media items",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMediaItemPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "MediaItemSortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[Media!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[Media!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "Media!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Media",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "myPost",
               "description": "Retrieve a single post by the logged-in user",
               "args": [
@@ -9616,6 +9756,37 @@
               "deprecationReason": null
             },
             {
+              "name": "createMediaItem",
+              "description": "Upload an attachment",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to upload an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateMediaItemInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateMediaItemInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateMediaItemMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateMediaItemMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPost",
               "description": "Create a post",
               "args": [
@@ -10436,6 +10607,115 @@
                     "ofType": {
                       "kind": "UNION",
                       "name": "CustomPostUnion",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myMediaItem",
+              "description": "Media item by the logged-in user on the site with a specific ID",
+              "args": [
+                {
+                  "name": "by",
+                  "description": "Oneof input to specify the property and data to fetch a media item",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "MediaItemByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "MediaItemByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Media",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myMediaItemCount",
+              "description": "Number of media items by the logged-in user on the site",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's media items",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyMediaItemsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myMediaItems",
+              "description": "Media items by the logged-in user on the site",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's media items",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyMediaItemsFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate media items",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMediaItemPaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "MediaItemSortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[Media!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[Media!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "Media!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Media",
                       "ofType": null
                     }
                   }
@@ -11886,6 +12166,77 @@
                     "ofType": null
                   }
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreateMediaItemMutationPayload",
+          "description": "Payload of uploading an attachment",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootCreateMediaItemMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootCreateMediaItemMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootCreateMediaItemMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "mediaItem",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Media",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "mediaItemID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -13467,7 +13818,73 @@
         {
           "kind": "OBJECT",
           "name": "UserDoesNotExistErrorPayload",
-          "description": "Error payload for: \"The requested media item does not exist\"",
+          "description": "Error payload for: \"The user does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserHasNoPermissionToUploadFilesErrorPayload",
+          "description": "Error payload for: \"The user has no permission to upload files\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+          "description": "Error payload for: \"The user has no permission to upload files for other users\"",
           "fields": [
             {
               "name": "message",
@@ -14977,6 +15394,16 @@
         },
         {
           "kind": "SCALAR",
+          "name": "AllowedMimeTypeEnumString",
+          "description": "Allowed mime types for uploading files, with possible values: `\"application\/java\"`, `\"application\/javascript\"`, `\"application\/msword\"`, `\"application\/octet-stream\"`, `\"application\/octet-stream\"`, `\"application\/onenote\"`, `\"application\/oxps\"`, `\"application\/pdf\"`, `\"application\/rar\"`, `\"application\/rtf\"`, `\"application\/ttaf+xml\"`, `\"application\/vnd.apple.keynote\"`, `\"application\/vnd.apple.numbers\"`, `\"application\/vnd.apple.pages\"`, `\"application\/vnd.ms-access\"`, `\"application\/vnd.ms-excel\"`, `\"application\/vnd.ms-excel.addin.macroEnabled.12\"`, `\"application\/vnd.ms-excel.sheet.binary.macroEnabled.12\"`, `\"application\/vnd.ms-excel.sheet.macroEnabled.12\"`, `\"application\/vnd.ms-excel.template.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint\"`, `\"application\/vnd.ms-powerpoint.addin.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.presentation.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.slide.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.slideshow.macroEnabled.12\"`, `\"application\/vnd.ms-powerpoint.template.macroEnabled.12\"`, `\"application\/vnd.ms-project\"`, `\"application\/vnd.ms-word.document.macroEnabled.12\"`, `\"application\/vnd.ms-word.template.macroEnabled.12\"`, `\"application\/vnd.ms-write\"`, `\"application\/vnd.ms-xpsdocument\"`, `\"application\/vnd.oasis.opendocument.chart\"`, `\"application\/vnd.oasis.opendocument.database\"`, `\"application\/vnd.oasis.opendocument.formula\"`, `\"application\/vnd.oasis.opendocument.graphics\"`, `\"application\/vnd.oasis.opendocument.presentation\"`, `\"application\/vnd.oasis.opendocument.spreadsheet\"`, `\"application\/vnd.oasis.opendocument.text\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.presentation\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.slide\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.slideshow\"`, `\"application\/vnd.openxmlformats-officedocument.presentationml.template\"`, `\"application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"`, `\"application\/vnd.openxmlformats-officedocument.spreadsheetml.template\"`, `\"application\/vnd.openxmlformats-officedocument.wordprocessingml.document\"`, `\"application\/vnd.openxmlformats-officedocument.wordprocessingml.template\"`, `\"application\/wordperfect\"`, `\"application\/x-7z-compressed\"`, `\"application\/x-gzip\"`, `\"application\/x-tar\"`, `\"application\/zip\"`, `\"audio\/aac\"`, `\"audio\/flac\"`, `\"audio\/midi\"`, `\"audio\/mpeg\"`, `\"audio\/ogg\"`, `\"audio\/wav\"`, `\"audio\/x-matroska\"`, `\"audio\/x-ms-wax\"`, `\"audio\/x-ms-wma\"`, `\"audio\/x-realaudio\"`, `\"image\/bmp\"`, `\"image\/gif\"`, `\"image\/heic\"`, `\"image\/jpeg\"`, `\"image\/png\"`, `\"image\/tiff\"`, `\"image\/webp\"`, `\"image\/x-icon\"`, `\"text\/calendar\"`, `\"text\/css\"`, `\"text\/csv\"`, `\"text\/html\"`, `\"text\/plain\"`, `\"text\/richtext\"`, `\"text\/tab-separated-values\"`, `\"text\/vtt\"`, `\"video\/3gpp\"`, `\"video\/3gpp2\"`, `\"video\/avi\"`, `\"video\/divx\"`, `\"video\/mp4\"`, `\"video\/mpeg\"`, `\"video\/ogg\"`, `\"video\/quicktime\"`, `\"video\/webm\"`, `\"video\/x-flv\"`, `\"video\/x-matroska\"`, `\"video\/x-ms-asf\"`, `\"video\/x-ms-wm\"`, `\"video\/x-ms-wmv\"`, `\"video\/x-ms-wmx\"`.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
           "name": "AnyBuiltInScalar",
           "description": "Wildcard type representing any of GraphQL's built-in types (String, Int, Boolean, Float or ID)",
           "fields": null,
@@ -15939,6 +16366,16 @@
             {
               "kind": "OBJECT",
               "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserHasNoPermissionToUploadFilesErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
               "ofType": null
             },
             {
@@ -16977,6 +17414,76 @@
                 "ofType": null
               },
               "defaultValue": "\"DESC\""
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CreateMediaItemFromContentInput",
+          "description": "Provide the data to create and upload the attachment",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "body",
+              "description": "File body",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "filename",
+              "description": "File name",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CreateMediaItemFromInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "contents",
+              "description": "Create the attachment by passing the file name and body",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CreateMediaItemFromContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "url",
+              "description": "Upload the attachment from a URL",
+              "type": {
+                "kind": "SCALAR",
+                "name": "URL",
+                "ofType": null
+              },
+              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -19354,6 +19861,111 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateMediaItemInput",
+          "description": "Input to upload an attachment",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "altText",
+              "description": "Image alternative information",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "authorID",
+              "description": "The ID of the author",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "caption",
+              "description": "Attachment caption",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "customPostID",
+              "description": "Custom post under which to upload the attachment",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "description",
+              "description": "Attachment description",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "from",
+              "description": "Source for the file",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "CreateMediaItemFromInput!",
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "CreateMediaItemFromInput",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "mimeType",
+              "description": "Attachment mime type",
+              "type": {
+                "kind": "SCALAR",
+                "name": "AllowedMimeTypeEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Attachment slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "title",
+              "description": "Attachment title",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreatePostInput",
           "description": "Input to update a custom post",
           "fields": null,
@@ -20290,6 +20902,99 @@
                 }
               },
               "defaultValue": "[\"publish\"]"
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMyMediaItemsFilterInput",
+          "description": "Input to filter the logged-in user's media items",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "dateQuery",
+              "description": "Filter comments based on date",
+              "type": {
+                "kind": "LIST",
+                "name": "[DateQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "DateQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DateQueryInput",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excludeIDs",
+              "description": "Exclude elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ids",
+              "description": "Limit results to elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "mimeTypes",
+              "description": "Filter comments based on type",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": "[\"image\"]"
+            },
+            {
+              "name": "search",
+              "description": "Search for comments containing the given string",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
             }
           ],
           "interfaces": null,
@@ -23452,6 +24157,47 @@
             {
               "kind": "OBJECT",
               "name": "GenericErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreateMediaItemMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when uploading an attachment",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserHasNoPermissionToUploadFilesErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
               "ofType": null
             }
           ]

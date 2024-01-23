@@ -1,0 +1,25 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "InvalidUsernameErrorPayload"
+                }
+            ]
+        },
+        "createMediaItem": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "UserIsNotLoggedInErrorPayload",
+                    "message": "You must be logged in to upload files"
+                }
+            ],
+            "mediaItem": null
+        },
+        "logoutUser": {
+          "status": "FAILURE"
+        }
+    }
+}

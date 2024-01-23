@@ -170,6 +170,9 @@ You can even synchronize content across a network of sites, such as from an upst
 == Changelog ==
 
 = 1.6.0 =
+* Added new module Media Mutations
+* Added mutation `createMediaItem`
+* Added fields `myMediaItemCount`, `myMediaItems` and `myMediaItem`
 * Validate the license keys when updating the plugin
 * Simplified the Tutorial section
 

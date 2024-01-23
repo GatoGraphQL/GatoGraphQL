@@ -1,0 +1,21 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "GenericErrorPayload",
+                    "message": "Not Found"
+                }
+            ],
+            "mediaItem": null
+        },
+        "logoutUser": {
+          "status": "SUCCESS"
+        }
+    }
+}
