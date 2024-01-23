@@ -49,7 +49,7 @@ fragment MediaItemData on Media {
   # modifiedDateStr
   sizes
   # slug
-  src
+  # src
   srcSet
   title
   # url
