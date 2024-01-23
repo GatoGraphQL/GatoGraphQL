@@ -16,8 +16,8 @@
                 "mimeType": "image\/png",
                 "sizes": "(max-width: 520px) 100vw, 520px",
                 "slug": "graphql-api-header",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png",
-                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png 520w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-300x110.png 300w",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.png",
+                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.png 520w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.png 300w",
                 "title": "graphql-api-header",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-header\/",
                 "urlPath": "\/graphql-api-header\/",
@@ -38,8 +38,8 @@
                 "mimeType": "image\/png",
                 "sizes": "(max-width: 500px) 100vw, 500px",
                 "slug": "graphql-api-search-results",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki.png",
-                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki.png 500w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki-300x300.png 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki-150x150.png 150w",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.png",
+                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.png 500w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-300x300.png 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-150x150.png 150w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-search-results\/",
                 "urlPath": "\/graphql-api-search-results\/",
@@ -47,7 +47,10 @@
             },
             {
                 "altText": "",
-                "author": null,
+                "author": {
+                    "id": 4,
+                    "name": "Contributor Johnson"
+                },
                 "caption": "",
                 "date": "2023-06-15T04:24:00+00:00",
                 "dateStr": "June 15",
@@ -57,11 +60,11 @@
                 "mimeType": "image\/jpeg",
                 "sizes": "(max-width: 1600px) 100vw, 1600px",
                 "slug": "funny-dog",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2023\/06\/Funny-Dog.jpg",
-                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2023\/06\/Funny-Dog.jpg 1600w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2023\/06\/Funny-Dog-300x225.jpg 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2023\/06\/Funny-Dog-1024x768.jpg 1024w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2023\/06\/Funny-Dog-768x576.jpg 768w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2023\/06\/Funny-Dog-1536x1152.jpg 1536w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2023\/06\/Funny-Dog-1568x1176.jpg 1568w",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
+                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg 1600w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-300x225.jpg 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1024x768.jpg 1024w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-768x576.jpg 768w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1536x1152.jpg 1536w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1568x1176.jpg 1568w",
                 "title": "Funny-Dog",
-                "url": "https:\/\/gatographql.lndo.site\/funny-dog\/",
-                "urlPath": "\/funny-dog\/",
+                "url": "https:\/\/gatographql.lndo.site\/single-post-with-a-lot-of-blocks\/funny-dog\/",
+                "urlPath": "\/single-post-with-a-lot-of-blocks\/funny-dog\/",
                 "width": 1600
             }
         ],
@@ -81,8 +84,8 @@
                 "mimeType": "image\/png",
                 "sizes": "(max-width: 520px) 100vw, 520px",
                 "slug": "graphql-api-header",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png",
-                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png 520w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-300x110.png 300w",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.png",
+                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.png 520w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-300x110.png 300w",
                 "title": "graphql-api-header",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-header\/",
                 "urlPath": "\/graphql-api-header\/",
@@ -103,8 +106,8 @@
                 "mimeType": "image\/png",
                 "sizes": "(max-width: 500px) 100vw, 500px",
                 "slug": "graphql-api-search-results",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki.png",
-                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki.png 500w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki-300x300.png 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki-150x150.png 150w",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.png",
+                "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki.png 500w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-300x300.png 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-150x150.png 150w",
                 "title": "graphql-api-search-results",
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-search-results\/",
                 "urlPath": "\/graphql-api-search-results\/",
@@ -125,7 +128,7 @@
                 "mimeType": "text\/plain",
                 "sizes": null,
                 "slug": "license",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/LICENSE.txt",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/LICENSE.txt",
                 "srcSet": null,
                 "title": "LICENSE",
                 "url": "https:\/\/gatographql.lndo.site\/license\/",
@@ -165,26 +168,86 @@
         ],
         "mediaItemsByExcludeAuthorIDs": [
             {
-                "id": 1380,
-                "title": "Funny-Dog"
+                "id": 1571,
+                "title": "license.txt"
             },
             {
-                "id": 1363,
-                "title": "LICENSE"
+                "id": 1570,
+                "title": "This file has a customized slug"
+            },
+            {
+                "id": 1569,
+                "title": "loading.gif"
+            },
+            {
+                "id": 1568,
+                "title": "browser.png"
+            },
+            {
+                "id": 1567,
+                "title": "readme.html"
+            },
+            {
+                "id": 1566,
+                "title": "\/hello.world.html"
+            },
+            {
+                "id": 1565,
+                "title": "\/hello\/world.html"
+            },
+            {
+                "id": 1564,
+                "title": "hello\/world.html"
+            },
+            {
+                "id": 1563,
+                "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html"
+            },
+            {
+                "id": 1562,
+                "title": "hello-world.html"
             }
         ],
         "mediaItemsByExcludeIDs": [
             {
-                "id": 1380,
-                "title": "Funny-Dog"
+                "id": 1571,
+                "title": "license.txt"
             },
             {
-                "id": 1363,
-                "title": "LICENSE"
+                "id": 1570,
+                "title": "This file has a customized slug"
             },
             {
-                "id": 1362,
-                "title": "graphql-api-search-results"
+                "id": 1569,
+                "title": "loading.gif"
+            },
+            {
+                "id": 1568,
+                "title": "browser.png"
+            },
+            {
+                "id": 1567,
+                "title": "readme.html"
+            },
+            {
+                "id": 1566,
+                "title": "\/hello.world.html"
+            },
+            {
+                "id": 1565,
+                "title": "\/hello\/world.html"
+            },
+            {
+                "id": 1564,
+                "title": "hello\/world.html"
+            },
+            {
+                "id": 1563,
+                "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html"
+            },
+            {
+                "id": 1562,
+                "title": "hello-world.html"
             }
         ],
         "mediaItemsByIds": [
@@ -199,8 +262,44 @@
         ],
         "mediaItemsByMimeTypes": [
             {
-                "id": 1363,
-                "title": "LICENSE"
+                "id": 1570,
+                "title": "This file has a customized slug"
+            },
+            {
+                "id": 1567,
+                "title": "readme.html"
+            },
+            {
+                "id": 1566,
+                "title": "\/hello.world.html"
+            },
+            {
+                "id": 1565,
+                "title": "\/hello\/world.html"
+            },
+            {
+                "id": 1564,
+                "title": "hello\/world.html"
+            },
+            {
+                "id": 1563,
+                "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html"
+            },
+            {
+                "id": 1561,
+                "title": "hello-world.html"
+            },
+            {
+                "id": 1560,
+                "title": "hello-world.html"
+            },
+            {
+                "id": 1559,
+                "title": "import-posts.csv"
+            },
+            {
+                "id": 1558,
+                "title": "hello-world.txt"
             }
         ],
         "mediaItemsBySearch": [
@@ -225,26 +324,26 @@
                 "date": "2022-05-25T05:13:35+00:00"
             },
             {
-                "id": 1380,
-                "title": "Funny-Dog",
-                "date": "2023-06-15T04:24:00+00:00"
+                "id": 1382,
+                "title": "Funny-Dog-again",
+                "date": "2022-06-15T04:24:00+00:00"
             }
         ],
         "mediaItemsSortedDESC": [
             {
-                "id": 1380,
-                "title": "Funny-Dog",
-                "date": "2023-06-15T04:24:00+00:00"
+                "id": 1569,
+                "title": "loading.gif",
+                "date": "2024-01-23T11:16:09+00:00"
             },
             {
-                "id": 1362,
-                "title": "graphql-api-search-results",
-                "date": "2022-05-25T05:13:35+00:00"
+                "id": 1568,
+                "title": "browser.png",
+                "date": "2024-01-23T11:16:08+00:00"
             },
             {
-                "id": 1361,
-                "title": "graphql-api-header",
-                "date": "2022-05-25T05:13:32+00:00"
+                "id": 1562,
+                "title": "hello-world.html",
+                "date": "2024-01-23T11:16:06+00:00"
             }
         ],
         "mediaItemById": {
