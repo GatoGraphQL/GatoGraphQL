@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType\AllowedMimeTypeEnumStringScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -14,7 +13,6 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -28,19 +26,6 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
-    }
-    final public function setAllowedMimeTypeEnumStringScalarTypeResolver(AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver): void
-    {
-        $this->allowedMimeTypeEnumStringScalarTypeResolver = $allowedMimeTypeEnumStringScalarTypeResolver;
-    }
-    final protected function getAllowedMimeTypeEnumStringScalarTypeResolver(): AllowedMimeTypeEnumStringScalarTypeResolver
-    {
-        if ($this->allowedMimeTypeEnumStringScalarTypeResolver === null) {
-            /** @var AllowedMimeTypeEnumStringScalarTypeResolver */
-            $allowedMimeTypeEnumStringScalarTypeResolver = $this->instanceManager->getInstance(AllowedMimeTypeEnumStringScalarTypeResolver::class);
-            $this->allowedMimeTypeEnumStringScalarTypeResolver = $allowedMimeTypeEnumStringScalarTypeResolver;
-        }
-        return $this->allowedMimeTypeEnumStringScalarTypeResolver;
     }
 
     public function getTypeName(): string
