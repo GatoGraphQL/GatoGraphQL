@@ -6,6 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 1.6.0 - DATE
 
+### Added
+
 ### Improvements
 
 - Validate the license keys when updating the plugin
