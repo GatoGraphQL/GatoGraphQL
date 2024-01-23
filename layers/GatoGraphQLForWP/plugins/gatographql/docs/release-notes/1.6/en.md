@@ -16,7 +16,7 @@ Mutation `createMediaItem` allows uploading files to the Media Library. It offer
 Running this query:
 
 ```graphql
-mutation TestCreateMediaItemFromURL {
+mutation CreateMediaItems {
   fromURL: createMediaItem(input:{
     from: {
       url: "https://gatographql.com/assets/GatoGraphQL-logo.png"
@@ -50,6 +50,7 @@ mutation TestCreateMediaItemFromURL {
         filename: "hello-world.html"
       }
     }
+    title: "Hello world!"
   }) {
     mediaItemID
     status
@@ -78,6 +79,36 @@ fragment MediaItemData on Media {
 ...will produce:
 
 ```json
+{
+  "data": {
+    "fromURL": {
+      "mediaItemID": 1380,
+      "status": "SUCCESS",
+      "errors": null,
+      "mediaItem": {
+        "altText": "This is the Gato GraphQL logo",
+        "caption": "Gato GraphQL logo",
+        "mimeType": "image/png",
+        "slug": "gatographql-logo-png",
+        "src": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.png",
+        "title": "GatoGraphQL-logo.png"
+      }
+    },
+    "directlyByContents": {
+      "mediaItemID": 1381,
+      "status": "SUCCESS",
+      "errors": null,
+      "mediaItem": {
+        "altText": "",
+        "caption": "",
+        "mimeType": "text/html",
+        "slug": "hello-world-html",
+        "src": "https://gatographql.lndo.site/wp-content/uploads/hello-world.html",
+        "title": "Hello world!"
+      }
+    }
+  }
+}
 ```
 
 ### Fields `myMediaItemCount`, `myMediaItems` and `myMediaItem`
