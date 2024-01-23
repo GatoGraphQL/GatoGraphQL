@@ -14,7 +14,8 @@
                 "height": 16,
                 "mimeType": "image\/gif",
                 "sizes": "(max-width: 16px) 100vw, 16px",
-                "srcSet": null,
+                "slug": "loading-gif",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/loading.gif",
                 "title": "loading.gif",
                 "width": 16
             }

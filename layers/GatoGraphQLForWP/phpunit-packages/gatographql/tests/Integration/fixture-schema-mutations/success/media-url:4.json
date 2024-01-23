@@ -14,7 +14,8 @@
                 "height": null,
                 "mimeType": "text\/plain",
                 "sizes": null,
-                "srcSet": null,
+                "slug": "customized-slug-for-license",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/license.txt",
                 "title": "This file has a customized slug",
                 "width": null
             }
