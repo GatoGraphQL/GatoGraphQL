@@ -11,7 +11,7 @@ query GetMediaItems {
     ...MediaItemData
   }
 
-  myMediaItem(by: { id: 1082 }) {
+  myMediaItem(by: { id: 1382 }) {
     ...MediaItemData
   }
 

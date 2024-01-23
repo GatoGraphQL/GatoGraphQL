@@ -2518,7 +2518,7 @@ https://wordpress.org/about/
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1080</wp:post_id>
+		<wp:post_id>1380</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-15 04:24:00]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2023-06-15 04:24:00]]></wp:post_date_gmt>
 		<wp:post_modified><![CDATA[2023-06-15 04:24:00]]></wp:post_modified>
@@ -2551,7 +2551,7 @@ https://wordpress.org/about/
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>1082</wp:post_id>
+		<wp:post_id>1382</wp:post_id>
 		<wp:post_date><![CDATA[2022-06-15 04:24:00]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-06-15 04:24:00]]></wp:post_date_gmt>
 		<wp:post_modified><![CDATA[2022-06-15 04:24:00]]></wp:post_modified>
@@ -2700,8 +2700,8 @@ https://wordpress.org/about/
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg","id":1080,"dimRatio":50,"isDark":false} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1080" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
+<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg","id":1380,"dimRatio":50,"isDark":false} -->
+<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">See if I care</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->

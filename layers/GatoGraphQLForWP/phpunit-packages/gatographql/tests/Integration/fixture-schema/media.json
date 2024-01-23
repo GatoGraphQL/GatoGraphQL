@@ -53,7 +53,7 @@
                 "dateStr": "June 15",
                 "description": "",
                 "height": 1200,
-                "id": 1080,
+                "id": 1380,
                 "mimeType": "image\/jpeg",
                 "sizes": "(max-width: 1600px) 100vw, 1600px",
                 "slug": "funny-dog",
@@ -165,7 +165,7 @@
         ],
         "mediaItemsByExcludeAuthorIDs": [
             {
-                "id": 1080,
+                "id": 1380,
                 "title": "Funny-Dog"
             },
             {
@@ -175,7 +175,7 @@
         ],
         "mediaItemsByExcludeIDs": [
             {
-                "id": 1080,
+                "id": 1380,
                 "title": "Funny-Dog"
             },
             {
@@ -225,14 +225,14 @@
                 "date": "2022-05-25T05:13:35+00:00"
             },
             {
-                "id": 1080,
+                "id": 1380,
                 "title": "Funny-Dog",
                 "date": "2023-06-15T04:24:00+00:00"
             }
         ],
         "mediaItemsSortedDESC": [
             {
-                "id": 1080,
+                "id": 1380,
                 "title": "Funny-Dog",
                 "date": "2023-06-15T04:24:00+00:00"
             },
