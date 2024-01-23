@@ -260,7 +260,7 @@
     "data": {
         "posts": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "blocks": [
                     {
@@ -1906,7 +1906,7 @@
                 ]
             },
             {
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance",
                 "blocks": [
                     {
@@ -2216,7 +2216,7 @@
                 ]
             },
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "blocks": [
                     {
@@ -2543,7 +2543,7 @@
                 ]
             },
             {
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?",
                 "blocks": [
                     {
@@ -2753,7 +2753,7 @@
                 ]
             },
             {
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client",
                 "blocks": [
                     {
@@ -3043,7 +3043,7 @@
                 ]
             },
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "blocks": [
                     {
@@ -3807,7 +3807,7 @@
             }
         ],
         "includeBlockFilter1": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/heading",
@@ -3903,7 +3903,7 @@
             ]
         },
         "includeBlockFilter2": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/heading",
@@ -4051,7 +4051,7 @@
             ]
         },
         "includeBlockFilter3": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/heading",
@@ -4406,7 +4406,7 @@
             ]
         },
         "includeBlockFilter4": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/heading",
@@ -4538,7 +4538,7 @@
             ]
         },
         "excludeBlockFilter1": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/gallery",
@@ -5097,7 +5097,7 @@
             ]
         },
         "excludeBlockFilter2": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/gallery",
@@ -5340,7 +5340,7 @@
             ]
         },
         "excludeBlockFilter3": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/gallery",
@@ -5547,7 +5547,7 @@
             ]
         },
         "excludeBlockFilter4": {
-            "id": 19,
+            "id": 1119,
             "blocks": [
                 {
                     "name": "core\/gallery",
@@ -7558,7 +7558,7 @@
             ]
         },
         "singleLevelBlockPost": {
-            "id": 28,
+            "id": 1128,
             "title": "HTTP caching improves performance",
             "blocks": [
                 {
@@ -7868,7 +7868,7 @@
             ]
         },
         "multiLevelBlockPost": {
-            "id": 40,
+            "id": 1140,
             "title": "Welcome to a single post full of blocks!",
             "blocks": [
                 {

@@ -25,7 +25,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             }
                         ]
@@ -98,7 +98,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -132,7 +132,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -200,7 +200,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             }
                         ]
@@ -261,7 +261,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -295,7 +295,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -329,7 +329,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -374,7 +374,7 @@
                 ],
                 "count": 4,
                 "description": "",
-                "id": 28,
+                "id": 1128,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Brontosaurus",
@@ -468,7 +468,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -629,7 +629,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -802,7 +802,7 @@
                             },
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -819,7 +819,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -863,7 +863,7 @@
                         "categories": [
                             {
                                 "__typename": "GenericCategory",
-                                "id": 28,
+                                "id": 1128,
                                 "name": "Brontosaurus"
                             },
                             {
@@ -952,7 +952,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out",
                 "customPostType": "post",
                 "categories": [
@@ -967,7 +967,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "customPostType": "post",
                 "categories": [
@@ -982,7 +982,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "customPostType": "post",
                 "categories": [
@@ -1011,7 +1011,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client",
                 "customPostType": "post",
                 "categories": [
@@ -1026,7 +1026,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?",
                 "customPostType": "post",
                 "categories": [
@@ -1041,7 +1041,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "customPostType": "post",
                 "categories": [
@@ -1070,7 +1070,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance",
                 "customPostType": "post",
                 "categories": [
@@ -1092,7 +1092,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "customPostType": "post",
                 "categories": [
@@ -1141,7 +1141,7 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 28,
+                        "id": 1128,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     }
@@ -1227,7 +1227,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 28,
+                        "id": 1128,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
@@ -1267,7 +1267,7 @@
                     },
                     {
                         "__typename": "GenericCategory",
-                        "id": 28,
+                        "id": 1128,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
@@ -1341,7 +1341,7 @@
                 "categories": [
                     {
                         "__typename": "GenericCategory",
-                        "id": 28,
+                        "id": 1128,
                         "name": "Brontosaurus",
                         "taxonomy": "dummy-category"
                     },
@@ -1479,7 +1479,7 @@
                 "title": "Error debitis nulla vel est",
                 "categories": [
                     {
-                        "id": 28
+                        "id": 1128
                     }
                 ]
             },
@@ -1530,7 +1530,7 @@
                 "title": "Impedit eaque numquam quas inventore",
                 "categories": [
                     {
-                        "id": 28
+                        "id": 1128
                     },
                     {
                         "id": 29
@@ -1575,7 +1575,7 @@
                         "id": 27
                     },
                     {
-                        "id": 28
+                        "id": 1128
                     },
                     {
                         "id": 31
@@ -1590,7 +1590,7 @@
                         "id": 27
                     },
                     {
-                        "id": 28
+                        "id": 1128
                     },
                     {
                         "id": 32
@@ -1600,7 +1600,7 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
             {
@@ -1725,7 +1725,7 @@
                 "title": "Impedit eaque numquam quas inventore",
                 "categories": [
                     {
-                        "id": 28
+                        "id": 1128
                     },
                     {
                         "id": 29
@@ -1765,7 +1765,7 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
             {
@@ -1778,7 +1778,7 @@
                 "title": "Error debitis nulla vel est",
                 "categories": [
                     {
-                        "id": 28
+                        "id": 1128
                     }
                 ]
             },
@@ -1857,7 +1857,7 @@
                 "title": "Error debitis nulla vel est",
                 "categories": [
                     {
-                        "id": 28
+                        "id": 1128
                     }
                 ]
             },
@@ -2066,7 +2066,7 @@
             {
                 "count": 4,
                 "description": "",
-                "id": 28,
+                "id": 1128,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Brontosaurus",

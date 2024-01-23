@@ -114,7 +114,7 @@
       },
       {
         "__typename": "GenericTag",
-        "id": 40,
+        "id": 1140,
         "name": "Classical"
       }
     ],
@@ -135,7 +135,7 @@
     "postFormats": [
       {
         "__typename": "GenericTag",
-        "id": 25,
+        "id": 1125,
         "name": "Link"
       },
       {
@@ -145,13 +145,13 @@
       },
       {
         "__typename": "GenericTag",
-        "id": 23,
+        "id": 1123,
         "name": "Aside"
       }
     ],
     "postFormat": {
       "__typename": "GenericTag",
-      "id": 25,
+      "id": 1125,
       "name": "Link"
     },
     "postFormatCount": 3,

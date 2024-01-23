@@ -95,7 +95,7 @@
       },
       {
         "__typename": "PostTag",
-        "id": 13,
+        "id": 1113,
         "name": "release"
       },
       {
@@ -120,7 +120,7 @@
       },
       {
         "__typename": "PostTag",
-        "id": 16,
+        "id": 1116,
         "name": "Also never used"
       },
       {
@@ -153,7 +153,7 @@
     "postFormats": [
       {
         "__typename": "GenericTag",
-        "id": 25,
+        "id": 1125,
         "name": "Link"
       },
       {
@@ -163,13 +163,13 @@
       },
       {
         "__typename": "GenericTag",
-        "id": 23,
+        "id": 1123,
         "name": "Aside"
       }
     ],
     "postFormat": {
       "__typename": "GenericTag",
-      "id": 25,
+      "id": 1125,
       "name": "Link"
     },
     "postFormatCount": 3,

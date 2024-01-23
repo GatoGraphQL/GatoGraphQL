@@ -95,7 +95,7 @@
       },
       {
         "__typename": "PostTag",
-        "id": 13,
+        "id": 1113,
         "name": "release"
       },
       {
@@ -120,7 +120,7 @@
       },
       {
         "__typename": "PostTag",
-        "id": 16,
+        "id": 1116,
         "name": "Also never used"
       },
       {
@@ -174,7 +174,7 @@
       },
       {
         "__typename": "GenericTag",
-        "id": 40,
+        "id": 1140,
         "name": "Classical"
       }
     ],

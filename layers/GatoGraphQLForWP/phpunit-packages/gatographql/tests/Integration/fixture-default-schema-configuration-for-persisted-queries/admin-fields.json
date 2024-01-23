@@ -27,11 +27,11 @@
             "email": null,
             "posts": [
                 {
-                    "id": 25,
+                    "id": 1125,
                     "title": "Public or Private API mode, for extra security"
                 },
                 {
-                    "id": 23,
+                    "id": 1123,
                     "title": "GraphQL or REST? Why not both?"
                 }
             ]

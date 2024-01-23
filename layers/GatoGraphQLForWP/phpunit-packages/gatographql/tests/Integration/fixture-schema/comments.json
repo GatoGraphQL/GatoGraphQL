@@ -14,7 +14,7 @@
                     "authorURL": "http:\/\/gatographql.lndo.site",
                     "content": "<p>How many endpoints can create?<\/p>\n",
                     "customPost": {
-                        "id": 21,
+                        "id": 1121,
                         "title": "Customize the schema for each client"
                     },
                     "customPostID": 21,
@@ -41,7 +41,7 @@
                             "authorURL": "http:\/\/gatographql.lndo.site",
                             "content": "<p>As many as you want!<\/p>\n",
                             "customPost": {
-                                "id": 21,
+                                "id": 1121,
                                 "title": "Customize the schema for each client"
                             },
                             "customPostID": 21,
@@ -72,7 +72,7 @@
                     "authorURL": "http:\/\/gatographql.lndo.site",
                     "content": "<p>Will the fields be shown or hidden when the user is denied access?<\/p>\n",
                     "customPost": {
-                        "id": 21,
+                        "id": 1121,
                         "title": "Customize the schema for each client"
                     },
                     "customPostID": 21,
@@ -99,7 +99,7 @@
                             "authorURL": "http:\/\/gatographql.lndo.site",
                             "content": "<p>That can be configured, as either &#8220;public&#8221; or &#8220;private&#8221; API mode<\/p>\n",
                             "customPost": {
-                                "id": 21,
+                                "id": 1121,
                                 "title": "Customize the schema for each client"
                             },
                             "customPostID": 21,
@@ -199,7 +199,7 @@
                 "id": 8
             },
             {
-                "id": 13
+                "id": 1113
             }
         ],
         "commentsByExcludeCommentAuthor": [

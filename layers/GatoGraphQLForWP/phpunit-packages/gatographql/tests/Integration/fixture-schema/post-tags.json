@@ -11,11 +11,11 @@
                 "postCount": 2,
                 "posts": [
                     {
-                        "id": 19,
+                        "id": 1119,
                         "title": "Nested mutations are a must have"
                     },
                     {
-                        "id": 16,
+                        "id": 1116,
                         "title": "Working on flat chain syntax next"
                     }
                 ],
@@ -33,7 +33,7 @@
                 "postCount": 1,
                 "posts": [
                     {
-                        "id": 25,
+                        "id": 1125,
                         "title": "Public or Private API mode, for extra security"
                     }
                 ],
@@ -44,14 +44,14 @@
             {
                 "count": 1,
                 "description": "",
-                "id": 13,
+                "id": 1113,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "release",
                 "postCount": 1,
                 "posts": [
                     {
-                        "id": 13,
+                        "id": 1113,
                         "title": "Released v0.6, check it out"
                     }
                 ],
@@ -69,15 +69,15 @@
                 "postCount": 3,
                 "posts": [
                     {
-                        "id": 19,
+                        "id": 1119,
                         "title": "Nested mutations are a must have"
                     },
                     {
-                        "id": 16,
+                        "id": 1116,
                         "title": "Working on flat chain syntax next"
                     },
                     {
-                        "id": 13,
+                        "id": 1113,
                         "title": "Released v0.6, check it out"
                     }
                 ],
@@ -95,7 +95,7 @@
                 "postCount": 1,
                 "posts": [
                     {
-                        "id": 21,
+                        "id": 1121,
                         "title": "Customize the schema for each client"
                     }
                 ],
@@ -113,7 +113,7 @@
                 "postCount": 1,
                 "posts": [
                     {
-                        "id": 16,
+                        "id": 1116,
                         "title": "Working on flat chain syntax next"
                     }
                 ],
@@ -131,19 +131,19 @@
                 "postCount": 4,
                 "posts": [
                     {
-                        "id": 25,
+                        "id": 1125,
                         "title": "Public or Private API mode, for extra security"
                     },
                     {
-                        "id": 21,
+                        "id": 1121,
                         "title": "Customize the schema for each client"
                     },
                     {
-                        "id": 19,
+                        "id": 1119,
                         "title": "Nested mutations are a must have"
                     },
                     {
-                        "id": 16,
+                        "id": 1116,
                         "title": "Working on flat chain syntax next"
                     }
                 ],
@@ -154,7 +154,7 @@
             {
                 "count": 0,
                 "description": "",
-                "id": 16,
+                "id": 1116,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Also never used",
@@ -174,7 +174,7 @@
                 "postCount": 1,
                 "posts": [
                     {
-                        "id": 21,
+                        "id": 1121,
                         "title": "Customize the schema for each client"
                     }
                 ],
@@ -193,7 +193,7 @@
                 "name": "Security"
             },
             {
-                "id": 13,
+                "id": 1113,
                 "name": "release"
             },
             {
@@ -229,7 +229,7 @@
                     "postCount": 1,
                     "posts": [
                         {
-                            "id": 25,
+                            "id": 1125,
                             "title": "Public or Private API mode, for extra security"
                         }
                     ],
@@ -247,19 +247,19 @@
                     "postCount": 4,
                     "posts": [
                         {
-                            "id": 25,
+                            "id": 1125,
                             "title": "Public or Private API mode, for extra security"
                         },
                         {
-                            "id": 21,
+                            "id": 1121,
                             "title": "Customize the schema for each client"
                         },
                         {
-                            "id": 19,
+                            "id": 1119,
                             "title": "Nested mutations are a must have"
                         },
                         {
-                            "id": 16,
+                            "id": 1116,
                             "title": "Working on flat chain syntax next"
                         }
                     ],
@@ -318,7 +318,7 @@
         },
         "postsByTagIDs": [
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "tags": [
                     {
@@ -330,7 +330,7 @@
                 ]
             },
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "tags": [
                     {
@@ -345,7 +345,7 @@
                 ]
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "tags": [
                     {
@@ -365,22 +365,22 @@
         ],
         "postsExcludeByTagIDs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "tags": []
             },
             {
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance",
                 "tags": []
             },
             {
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?",
                 "tags": []
             },
             {
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client",
                 "tags": [
                     {
@@ -395,11 +395,11 @@
                 ]
             },
             {
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out",
                 "tags": [
                     {
-                        "id": 13
+                        "id": 1113
                     },
                     {
                         "id": 12
@@ -414,7 +414,7 @@
         ],
         "postsByTagSlugs": [
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "tags": [
                     {
@@ -429,7 +429,7 @@
                 ]
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "tags": [
                     {
@@ -447,7 +447,7 @@
                 ]
             },
             {
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out",
                 "tags": [
                     {
@@ -461,17 +461,17 @@
         ],
         "postsExcludeByTagSlugs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "tags": []
             },
             {
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance",
                 "tags": []
             },
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "tags": [
                     {
@@ -483,12 +483,12 @@
                 ]
             },
             {
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?",
                 "tags": []
             },
             {
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client",
                 "tags": [
                     {

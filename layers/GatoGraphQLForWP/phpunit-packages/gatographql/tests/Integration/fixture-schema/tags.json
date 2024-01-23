@@ -67,7 +67,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -148,7 +148,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -230,7 +230,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -257,7 +257,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -333,7 +333,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -393,7 +393,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -432,7 +432,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -493,7 +493,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -629,7 +629,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -673,7 +673,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -855,7 +855,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -899,7 +899,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -938,7 +938,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1041,7 +1041,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1069,7 +1069,7 @@
                         "tags": [
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1091,7 +1091,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1118,7 +1118,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1145,7 +1145,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1162,7 +1162,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1184,7 +1184,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1211,7 +1211,7 @@
                             },
                             {
                                 "__typename": "GenericTag",
-                                "id": 40,
+                                "id": 1140,
                                 "name": "Classical"
                             }
                         ]
@@ -1219,7 +1219,7 @@
                 ],
                 "count": 7,
                 "description": "",
-                "id": 40,
+                "id": 1140,
                 "metaValue": null,
                 "metaValues": null,
                 "name": "Classical",
@@ -1238,13 +1238,13 @@
             },
             {
                 "__typename": "Post",
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out",
                 "customPostType": "post",
                 "tags": [
                     {
                         "__typename": "PostTag",
-                        "id": 13,
+                        "id": 1113,
                         "name": "release"
                     },
                     {
@@ -1256,7 +1256,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "customPostType": "post",
                 "tags": [
@@ -1284,7 +1284,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "customPostType": "post",
                 "tags": [
@@ -1307,7 +1307,7 @@
             },
             {
                 "__typename": "Post",
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client",
                 "customPostType": "post",
                 "tags": [
@@ -1330,14 +1330,14 @@
             },
             {
                 "__typename": "Post",
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?",
                 "customPostType": "post",
                 "tags": []
             },
             {
                 "__typename": "Post",
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "customPostType": "post",
                 "tags": [
@@ -1355,14 +1355,14 @@
             },
             {
                 "__typename": "Post",
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance",
                 "customPostType": "post",
                 "tags": []
             },
             {
                 "__typename": "Post",
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "customPostType": "post",
                 "tags": []
@@ -1427,7 +1427,7 @@
                 "tags": [
                     {
                         "__typename": "GenericTag",
-                        "id": 40,
+                        "id": 1140,
                         "name": "Classical",
                         "taxonomy": "dummy-tag"
                     }
@@ -1453,7 +1453,7 @@
                     },
                     {
                         "__typename": "GenericTag",
-                        "id": 40,
+                        "id": 1140,
                         "name": "Classical",
                         "taxonomy": "dummy-tag"
                     }
@@ -1499,7 +1499,7 @@
                     },
                     {
                         "__typename": "GenericTag",
-                        "id": 40,
+                        "id": 1140,
                         "name": "Classical",
                         "taxonomy": "dummy-tag"
                     }
@@ -1551,7 +1551,7 @@
                     },
                     {
                         "__typename": "GenericTag",
-                        "id": 40,
+                        "id": 1140,
                         "name": "Classical",
                         "taxonomy": "dummy-tag"
                     }
@@ -1617,7 +1617,7 @@
                     },
                     {
                         "__typename": "GenericTag",
-                        "id": 40,
+                        "id": 1140,
                         "name": "Classical",
                         "taxonomy": "dummy-tag"
                     }
@@ -1643,7 +1643,7 @@
                     },
                     {
                         "__typename": "GenericTag",
-                        "id": 40,
+                        "id": 1140,
                         "name": "Classical",
                         "taxonomy": "dummy-tag"
                     }
@@ -1765,7 +1765,7 @@
                     },
                     {
                         "__typename": "GenericTag",
-                        "id": 40,
+                        "id": 1140,
                         "name": "Classical",
                         "taxonomy": "dummy-tag"
                     }
@@ -1888,7 +1888,7 @@
                         "id": 37
                     },
                     {
-                        "id": 40
+                        "id": 1140
                     }
                 ]
             },
@@ -1915,7 +1915,7 @@
                         "id": 39
                     },
                     {
-                        "id": 40
+                        "id": 1140
                     }
                 ]
             },
@@ -1945,7 +1945,7 @@
                         "id": 39
                     },
                     {
-                        "id": 40
+                        "id": 1140
                     }
                 ]
             },
@@ -1984,7 +1984,7 @@
                         "id": 39
                     },
                     {
-                        "id": 40
+                        "id": 1140
                     }
                 ]
             },
@@ -1999,7 +1999,7 @@
                         "id": 37
                     },
                     {
-                        "id": 40
+                        "id": 1140
                     }
                 ]
             },
@@ -2068,7 +2068,7 @@
                         "id": 39
                     },
                     {
-                        "id": 40
+                        "id": 1140
                     }
                 ]
             },
@@ -2119,35 +2119,35 @@
                 "title": "Sample Page"
             },
             {
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out"
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next"
             },
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have"
             },
             {
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client"
             },
             {
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?"
             },
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security"
             },
             {
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance"
             },
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
             {
@@ -2155,7 +2155,7 @@
                 "title": "Error debitis nulla vel est",
                 "tags": [
                     {
-                        "id": 40
+                        "id": 1140
                     }
                 ]
             },
@@ -2447,35 +2447,35 @@
                 "title": "Sample Page"
             },
             {
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out"
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next"
             },
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have"
             },
             {
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client"
             },
             {
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?"
             },
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security"
             },
             {
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance"
             },
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
             {
