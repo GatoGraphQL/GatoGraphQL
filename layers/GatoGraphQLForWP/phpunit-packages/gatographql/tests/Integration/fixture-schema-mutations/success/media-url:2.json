@@ -1,5 +1,9 @@
 {
     "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
         "createMediaItem": {
             "status": "SUCCESS",
             "errors": null,
