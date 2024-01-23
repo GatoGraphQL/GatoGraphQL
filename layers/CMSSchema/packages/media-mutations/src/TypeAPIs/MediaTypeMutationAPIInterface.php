@@ -17,5 +17,10 @@ interface MediaTypeMutationAPIInterface
      * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $mediaItemData
      */
-    public function createMediaItemFromContents(string $filename, string $body, array $mediaItemData): string|int;
+    public function createMediaItemFromContents(
+        string $filename,
+        string $body,
+        ?string $mimeType,
+        array $mediaItemData,
+    ): string|int;
 }

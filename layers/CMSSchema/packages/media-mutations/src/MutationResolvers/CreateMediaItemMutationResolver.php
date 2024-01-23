@@ -210,7 +210,6 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             'slug' => $fieldDataAccessor->getValue(MutationInputProperties::SLUG),
             'caption' => $fieldDataAccessor->getValue(MutationInputProperties::CAPTION),
             'description' => $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION),
-            'mimeType' => $fieldDataAccessor->getValue(MutationInputProperties::MIME_TYPE),
         ];
 
         // Inject custom post ID, etc
@@ -242,7 +241,8 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         return $this->getMediaTypeMutationAPI()->createMediaItemFromContents(
             $contents->{MutationInputProperties::FILENAME},
             $contents->{MutationInputProperties::BODY},
-            $mediaItemData
+            $contents->{MutationInputProperties::MIME_TYPE},
+            $mediaItemData,
         );
     }
 

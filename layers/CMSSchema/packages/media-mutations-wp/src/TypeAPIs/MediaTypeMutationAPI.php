@@ -32,7 +32,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $downloadedFile = $downloadedFileOrError;
-        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($url);
+        $mimeType = $this->getFileMimeTypeOrThrowError($url);
 
         $mediaItemID = $this->createMediaItemFromLocalFile(
             $downloadedFile,
@@ -50,8 +50,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $mediaItemData
      */
-    public function createMediaItemFromContents(string $filename, string $body, array $mediaItemData): string|int
-    {
+    public function createMediaItemFromContents(
+        string $filename,
+        string $body,
+        ?string $mimeType,
+        array $mediaItemData,
+    ): string|int {
 		$uploadedFileOrError = \wp_upload_bits($filename, null, $body);
         if (isset($uploadedFileOrError['error'])) {
             /** @var string */
@@ -62,7 +66,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $uploadedFile = $uploadedFileOrError;
-        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
+        $mimeType ??= $this->getFileMimeTypeOrThrowError($filename);
         
         /** @var string */
         $file = $uploadedFile['file'];
