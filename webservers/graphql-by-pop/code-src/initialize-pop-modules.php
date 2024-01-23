@@ -8,6 +8,7 @@ App::stockAndInitializeModuleClasses([
     \GraphQLByPoP\GraphQLServer\Module::class,
     \PoPAPI\RESTAPI\Module::class,
     \PoPCMSSchema\CommentMutationsWP\Module::class,
+    \PoPCMSSchema\MediaMutationsWP\Module::class,
     \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
     \PoPCMSSchema\CustomPostMediaWP\Module::class,
     \PoPCMSSchema\CustomPostUserMutationsWP\Module::class,

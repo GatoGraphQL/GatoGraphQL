@@ -52,6 +52,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPCMSSchema\CustomPostMediaMutations\Module::class,
             \PoPCMSSchema\CustomPostUserMutations\Module::class,
             \PoPCMSSchema\CustomPostUserMutationsWP\Module::class,
+            \PoPCMSSchema\MediaMutations\Module::class,
             \PoPCMSSchema\PageMediaMutations\Module::class,
             \PoPCMSSchema\PostMediaMutations\Module::class,
             \PoPCMSSchema\CustomPostMeta\Module::class,
