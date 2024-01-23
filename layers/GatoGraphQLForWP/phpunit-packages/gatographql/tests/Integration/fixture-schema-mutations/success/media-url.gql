@@ -54,7 +54,7 @@ fragment MediaItemData on Media {
   src
   srcSet
   title
-  url
-  urlPath
+  # url
+  # urlPath
   width
 }
