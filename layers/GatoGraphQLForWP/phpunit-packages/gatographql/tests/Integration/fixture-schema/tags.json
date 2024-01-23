@@ -2133,10 +2133,6 @@
                 "tags": []
             },
             {
-                "id": 666,
-                "title": "Another Page"
-            },
-            {
                 "id": 680,
                 "title": "Dummy CPT with server-side-registered block",
                 "tags": []
@@ -2172,6 +2168,10 @@
             {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 1666,
+                "title": "Another Page"
             }
         ],
         "customPostsByTagSlugs": [
@@ -2461,10 +2461,6 @@
                 "tags": []
             },
             {
-                "id": 666,
-                "title": "Another Page"
-            },
-            {
                 "id": 680,
                 "title": "Dummy CPT with server-side-registered block",
                 "tags": []
@@ -2500,6 +2496,10 @@
             {
                 "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 1666,
+                "title": "Another Page"
             }
         ],
         "customPostsExcludeByTagSlugsOnCPT": [
