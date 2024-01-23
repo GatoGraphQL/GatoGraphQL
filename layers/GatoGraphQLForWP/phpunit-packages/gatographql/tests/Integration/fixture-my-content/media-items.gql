@@ -14,6 +14,14 @@ query GetMediaItems {
   myMediaItem(by: { id: 1082}) {
     ...MediaItemData
   }
+
+  notMine: myMediaItem(by: { id: 363 }) {
+    ...MediaItemData
+  }
+
+  nonExisting: myMediaItem(by: { id: 8888 }) {
+    ...MediaItemData
+  }
 }
 
 fragment MediaItemData on Media {
