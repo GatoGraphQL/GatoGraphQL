@@ -91,6 +91,15 @@
                         "name": "myCustomPosts"
                     },
                     {
+                        "name": "myMediaItem"
+                    },
+                    {
+                        "name": "myMediaItemCount"
+                    },
+                    {
+                        "name": "myMediaItems"
+                    },
+                    {
                         "name": "myPost"
                     },
                     {
