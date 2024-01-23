@@ -34,7 +34,7 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Provide the file name and body to upload the attachment', 'media-mutations');
+        return $this->__('Provide the data to create and upload the attachment', 'media-mutations');
     }
 
     /**
