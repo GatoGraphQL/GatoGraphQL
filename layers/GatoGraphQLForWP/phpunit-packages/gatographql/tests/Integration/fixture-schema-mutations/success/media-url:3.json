@@ -23,6 +23,9 @@
                 "title": "loading.gif",
                 "width": 16
             }
+        },
+        "logoutUser": {
+          "status": "SUCCESS"
         }
     }
 }

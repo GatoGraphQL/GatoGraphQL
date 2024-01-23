@@ -23,6 +23,9 @@
                 "title": "license.txt",
                 "width": null
             }
+        },
+        "logoutUser": {
+          "status": "SUCCESS"
         }
     }
 }

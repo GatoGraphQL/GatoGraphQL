@@ -23,6 +23,9 @@
                 "title": "browser.png",
                 "width": 364
             }
+        },
+        "logoutUser": {
+          "status": "SUCCESS"
         }
     }
 }

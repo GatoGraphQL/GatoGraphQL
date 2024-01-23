@@ -23,6 +23,9 @@
                 "title": "import-posts.csv",
                 "width": null
             }
+        },
+        "logoutUser": {
+          "status": "SUCCESS"
         }
     }
 }

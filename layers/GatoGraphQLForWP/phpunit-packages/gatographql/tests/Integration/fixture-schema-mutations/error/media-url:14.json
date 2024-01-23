@@ -26,6 +26,9 @@
             "status": "SUCCESS",
             "errors": null
         },
-        "createMediaItem": null
+        "createMediaItem": null,
+        "logoutUser": {
+          "status": "SUCCESS"
+        }
     }
 }
