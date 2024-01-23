@@ -52,7 +52,7 @@ fragment MediaItemData on Media {
   sizes
   slug
   src
-  srcSet
+  # srcSet
   title
   # url
   # urlPath
