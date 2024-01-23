@@ -1,0 +1,41 @@
+query GetMediaItems {
+  me {
+    slug
+  }
+  
+  myMediaItemCount
+
+  myMediaItems(pagination: {
+    limit: 3
+  }) {
+    ...MediaItemData
+  }
+
+  myMediaItem(by: { id: 1082}) {
+    ...MediaItemData
+  }
+}
+
+fragment MediaItemData on Media {
+  altText
+  author {
+    slug
+  } 
+  caption
+  date
+  dateStr(format: "F j")
+  description
+  height
+  id
+  mimeType
+  modifiedDate
+  modifiedDateStr
+  sizes
+  slug
+  src
+  srcSet
+  title
+  url
+  urlPath
+  width
+}
