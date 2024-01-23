@@ -10,4 +10,22 @@ class SchemaMutationsFixtureEndpointWebserverRequestTest extends AbstractAdminCl
     {
         return __DIR__ . '/fixture-schema-mutations';
     }
+
+    /**
+     * Because the slug and url can change if the same file
+     * has been uploaded multiple times, remove the counter
+     * number from the file name.
+     */
+    protected function adaptResponseBody(string $responseBody): string
+    {
+        return preg_replace(
+            [
+                '/("slug"\: ?)"([a-z-]*)(-[0-9]*)(.*)?"/',
+            ],
+            [
+                '$1"$2$4"',
+            ],
+            $responseBody
+        );
+    }
 }

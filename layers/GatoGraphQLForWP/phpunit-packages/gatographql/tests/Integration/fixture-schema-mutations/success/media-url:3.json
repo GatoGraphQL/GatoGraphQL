@@ -1,1 +1,23 @@
-{}
+{
+    "data": {
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "altText": "Some alternative info about this file that image",
+                "author": {
+                    "id": 1,
+                    "name": "admin"
+                },
+                "caption": "",
+                "description": "Description for the loading gif image",
+                "height": 16,
+                "mimeType": "image\/gif",
+                "sizes": "(max-width: 16px) 100vw, 16px",
+                "srcSet": null,
+                "title": "loading.gif",
+                "width": 16
+            }
+        }
+    }
+}

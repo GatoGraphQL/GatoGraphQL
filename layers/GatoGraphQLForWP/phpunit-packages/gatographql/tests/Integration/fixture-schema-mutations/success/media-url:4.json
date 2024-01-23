@@ -1,1 +1,23 @@
-{}
+{
+    "data": {
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "altText": "Some alternative info about this file that is a .txt file",
+                "author": {
+                    "id": 1,
+                    "name": "admin"
+                },
+                "caption": "",
+                "description": "",
+                "height": null,
+                "mimeType": "text\/plain",
+                "sizes": null,
+                "srcSet": null,
+                "title": "This file has a customized slug",
+                "width": null
+            }
+        }
+    }
+}

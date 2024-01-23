@@ -50,11 +50,11 @@ fragment MediaItemData on Media {
   # modifiedDate
   # modifiedDateStr
   sizes
-  # slug
-  # src
-  # srcSet
+  slug
+  src
+  srcSet
   title
-  # url
-  # urlPath
+  url
+  urlPath
   width
 }
