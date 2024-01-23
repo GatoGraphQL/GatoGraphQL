@@ -24,8 +24,8 @@
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
                 "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg 1600w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-300x225.jpg 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1024x768.jpg 1024w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-768x576.jpg 768w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1536x1152.jpg 1536w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1568x1176.jpg 1568w",
                 "title": "Funny-Dog",
-                "url": "https:\/\/gatographql.lndo.site\/funny-dog\/",
-                "urlPath": "\/funny-dog\/",
+                "url": "https:\/\/gatographql.lndo.site\/single-post-with-a-lot-of-blocks\/funny-dog\/",
+                "urlPath": "\/single-post-with-a-lot-of-blocks\/funny-dog\/",
                 "width": 1600
             },
             {
@@ -47,8 +47,8 @@
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1.jpg",
                 "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1.jpg 1600w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-300x225.jpg 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-1024x768.jpg 1024w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-768x576.jpg 768w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-1536x1152.jpg 1536w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-1568x1176.jpg 1568w",
                 "title": "Funny-Dog-again",
-                "url": "https:\/\/gatographql.lndo.site\/funny-dog-again\/",
-                "urlPath": "\/funny-dog-again\/",
+                "url": "https:\/\/gatographql.lndo.site\/single-post-with-a-lot-of-blocks\/funny-dog-again\/",
+                "urlPath": "\/single-post-with-a-lot-of-blocks\/funny-dog-again\/",
                 "width": 1600
             }
         ],
@@ -71,8 +71,8 @@
             "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1.jpg",
             "srcSet": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1.jpg 1600w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-300x225.jpg 300w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-1024x768.jpg 1024w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-768x576.jpg 768w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-1536x1152.jpg 1536w, https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog-1-1568x1176.jpg 1568w",
             "title": "Funny-Dog-again",
-            "url": "https:\/\/gatographql.lndo.site\/funny-dog-again\/",
-            "urlPath": "\/funny-dog-again\/",
+            "url": "https:\/\/gatographql.lndo.site\/single-post-with-a-lot-of-blocks\/funny-dog-again\/",
+            "urlPath": "\/single-post-with-a-lot-of-blocks\/funny-dog-again\/",
             "width": 1600
         },
         "notMine": null,
