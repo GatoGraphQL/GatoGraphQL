@@ -62,7 +62,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         array $mediaItemData,
     ): string|int {
 		$uploadedFileOrError = \wp_upload_bits($filename, null, $body);
-        if (isset($uploadedFileOrError['error'])) {
+        if ($uploadedFileOrError['error'] ?? false) {
             /** @var string */
             $errorMessage = $uploadedFileOrError['error'];
             throw new MediaItemCRUDMutationException(

@@ -1,0 +1,79 @@
+mutation TestCreateMediaItemFromContents(
+  $username: String! = "editor",
+  $body: String!,
+  $filename: String!,
+  $mimeType: String,
+  $authorID: ID,
+  $caption: String,
+  $customPostID: ID,
+  $description: String,
+  $slug: String,
+  $title: String,
+  $altText: String,
+) {
+  loginUser(by: {
+    credentials: {
+      usernameOrEmail: $username,
+      password: "11111111"
+    }
+  }) {
+    status
+    errors {
+      __typename
+    }
+  }
+
+  createMediaItem(input:{
+    from: {
+      contents: {
+        body: $body
+        filename: $filename
+        mimeType: $mimeType
+      }
+    }
+    authorID: $authorID
+    caption: $caption
+    customPostID: $customPostID
+    description: $description
+    slug: $slug
+    title: $title
+    altText: $altText
+  }) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+}
+
+fragment MediaItemData on Media {
+  altText
+  author {
+    id
+    name
+  } 
+  caption
+  # date
+  # dateStr(format: "F j")
+  description
+  height
+  # id
+  mimeType
+  # modifiedDate
+  # modifiedDateStr
+  sizes
+  slug
+  src
+  # srcSet
+  title
+  # url
+  # urlPath
+  width
+}
