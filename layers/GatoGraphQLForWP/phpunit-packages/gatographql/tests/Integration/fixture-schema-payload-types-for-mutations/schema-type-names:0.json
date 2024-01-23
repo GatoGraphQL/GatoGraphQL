@@ -99,6 +99,9 @@
           "name": "RootAddCommentToCustomPostMutationPayload"
         },
         {
+          "name": "RootCreateMediaItemMutationPayload"
+        },
+        {
           "name": "RootCreatePostMutationPayload"
         },
         {
@@ -136,6 +139,12 @@
         },
         {
           "name": "UserDoesNotExistErrorPayload"
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesErrorPayload"
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload"
         },
         {
           "name": "UserIsLoggedInErrorPayload"
@@ -181,6 +190,9 @@
         },
         {
           "name": "__Type"
+        },
+        {
+          "name": "AllowedMimeTypeEnumString"
         },
         {
           "name": "AnyBuiltInScalar"
@@ -298,6 +310,12 @@
         },
         {
           "name": "CommentSortInput"
+        },
+        {
+          "name": "CreateMediaItemFromContentInput"
+        },
+        {
+          "name": "CreateMediaItemFromInput"
         },
         {
           "name": "CustomPostByInput"
@@ -423,6 +441,9 @@
           "name": "RootCommentsFilterInput"
         },
         {
+          "name": "RootCreateMediaItemInput"
+        },
+        {
           "name": "RootCreatePostInput"
         },
         {
@@ -445,6 +466,9 @@
         },
         {
           "name": "RootMyCustomPostsFilterInput"
+        },
+        {
+          "name": "RootMyMediaItemsFilterInput"
         },
         {
           "name": "RootMyPostsFilterInput"
@@ -592,6 +616,9 @@
         },
         {
           "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootCreateMediaItemMutationErrorPayloadUnion"
         },
         {
           "name": "RootCreatePostMutationErrorPayloadUnion"

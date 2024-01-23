@@ -2,7 +2,7 @@
     "data": {
         "postsByIDs": [
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "tags": [
                     {
@@ -25,7 +25,7 @@
                 ]
             },
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "tags": [
                     {
@@ -51,7 +51,7 @@
                 ]
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "tags": [
                     {
@@ -76,7 +76,7 @@
         ],
         "postsBySlugAndIDs": [
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "tags": [
                     {

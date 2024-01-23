@@ -71,7 +71,7 @@ query {
     id
     title
   }
-  postsByExcludeIDs: posts(filter: { excludeIDs: [1, 28] }) {
+  postsByExcludeIDs: posts(filter: { excludeIDs: [1, 1128] }) {
     id
     title
   }
@@ -79,7 +79,7 @@ query {
     id
     title
   }
-  postsByIds: posts(filter: { ids: [1, 28] }) {
+  postsByIds: posts(filter: { ids: [1, 1128] }) {
     id
     title
   }

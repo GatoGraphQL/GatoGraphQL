@@ -11,11 +11,11 @@ query GetMediaItems {
     ...MediaItemData
   }
 
-  myMediaItem(by: { id: 1082 }) {
+  myMediaItem(by: { id: 1382 }) {
     ...MediaItemData
   }
 
-  notMine: myMediaItem(by: { id: 363 }) {
+  notMine: myMediaItem(by: { id: 1363 }) {
     ...MediaItemData
   }
 

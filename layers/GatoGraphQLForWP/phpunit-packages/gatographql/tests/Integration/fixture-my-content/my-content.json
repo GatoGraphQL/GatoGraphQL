@@ -2,14 +2,14 @@
     "data": {
         "myPosts": [
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next"
             }
         ],
         "myCustomPosts": [
             {
                 "__typename": "Post",
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next"
             }
         ],

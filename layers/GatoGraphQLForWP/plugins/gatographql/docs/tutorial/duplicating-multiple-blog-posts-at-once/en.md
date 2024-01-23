@@ -334,7 +334,7 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
     },
     "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
     "featuredImageBy": {
-      "id": 361
+      "id": 1361
     },
     "tagsBy": {
       "ids": [

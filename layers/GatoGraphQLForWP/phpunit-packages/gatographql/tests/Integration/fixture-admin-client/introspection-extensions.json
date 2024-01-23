@@ -6185,7 +6185,7 @@
                     "name": "RootCreateMediaItemMutationPayload",
                     "extensions": {
                         "elementName": "RootCreateMediaItemMutationPayload",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemMutationPayload",
+                        "namespacedName": "RootCreateMediaItemMutationPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -7094,7 +7094,7 @@
                     "name": "UserDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "UserDoesNotExistErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_UserDoesNotExistErrorPayload",
+                        "namespacedName": "UserDoesNotExistErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -7115,7 +7115,7 @@
                     "name": "UserHasNoPermissionToUploadFilesErrorPayload",
                     "extensions": {
                         "elementName": "UserHasNoPermissionToUploadFilesErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_UserHasNoPermissionToUploadFilesErrorPayload",
+                        "namespacedName": "UserHasNoPermissionToUploadFilesErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -7136,7 +7136,7 @@
                     "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
                     "extensions": {
                         "elementName": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+                        "namespacedName": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -7971,7 +7971,7 @@
                     "name": "AllowedMimeTypeEnumString",
                     "extensions": {
                         "elementName": "AllowedMimeTypeEnumString",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_AllowedMimeTypeEnumString",
+                        "namespacedName": "AllowedMimeTypeEnumString",
                         "possibleValues": [
                             "application\/java",
                             "application\/javascript",
@@ -9162,7 +9162,7 @@
                     "name": "CreateMediaItemFromContentInput",
                     "extensions": {
                         "elementName": "CreateMediaItemFromContentInput",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_CreateMediaItemFromContentInput",
+                        "namespacedName": "CreateMediaItemFromContentInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -9187,7 +9187,7 @@
                     "name": "CreateMediaItemFromInput",
                     "extensions": {
                         "elementName": "CreateMediaItemFromInput",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_CreateMediaItemFromInput",
+                        "namespacedName": "CreateMediaItemFromInput",
                         "possibleValues": null,
                         "isOneOf": true
                     },
@@ -10627,7 +10627,7 @@
                     "name": "RootCreateMediaItemInput",
                     "extensions": {
                         "elementName": "RootCreateMediaItemInput",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemInput",
+                        "namespacedName": "RootCreateMediaItemInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -11158,7 +11158,7 @@
                     "name": "RootMyMediaItemsFilterInput",
                     "extensions": {
                         "elementName": "RootMyMediaItemsFilterInput",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_RootMyMediaItemsFilterInput",
+                        "namespacedName": "RootMyMediaItemsFilterInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -13442,7 +13442,7 @@
                     "name": "RootCreateMediaItemMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootCreateMediaItemMutationErrorPayloadUnion",
-                        "namespacedName": "PoPCMSSchema_MediaMutations_RootCreateMediaItemMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreateMediaItemMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },

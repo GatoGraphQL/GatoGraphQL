@@ -14,15 +14,15 @@
                 "postCount": 4,
                 "posts": [
                     {
-                        "id": 40,
+                        "id": 1140,
                         "title": "Welcome to a single post full of blocks!"
                     },
                     {
-                        "id": 21,
+                        "id": 1121,
                         "title": "Customize the schema for each client"
                     },
                     {
-                        "id": 16,
+                        "id": 1116,
                         "title": "Working on flat chain syntax next"
                     },
                     {
@@ -52,11 +52,11 @@
                 "postCount": 2,
                 "posts": [
                     {
-                        "id": 28,
+                        "id": 1128,
                         "title": "HTTP caching improves performance"
                     },
                     {
-                        "id": 23,
+                        "id": 1123,
                         "title": "GraphQL or REST? Why not both?"
                     }
                 ],
@@ -79,7 +79,7 @@
                         "postCount": 1,
                         "posts": [
                             {
-                                "id": 28,
+                                "id": 1128,
                                 "title": "HTTP caching improves performance"
                             }
                         ],
@@ -106,19 +106,19 @@
                 "postCount": 4,
                 "posts": [
                     {
-                        "id": 28,
+                        "id": 1128,
                         "title": "HTTP caching improves performance"
                     },
                     {
-                        "id": 25,
+                        "id": 1125,
                         "title": "Public or Private API mode, for extra security"
                     },
                     {
-                        "id": 23,
+                        "id": 1123,
                         "title": "GraphQL or REST? Why not both?"
                     },
                     {
-                        "id": 19,
+                        "id": 1119,
                         "title": "Nested mutations are a must have"
                     }
                 ],
@@ -143,11 +143,11 @@
                         "postCount": 2,
                         "posts": [
                             {
-                                "id": 28,
+                                "id": 1128,
                                 "title": "HTTP caching improves performance"
                             },
                             {
-                                "id": 23,
+                                "id": 1123,
                                 "title": "GraphQL or REST? Why not both?"
                             }
                         ],
@@ -189,7 +189,7 @@
                 "postCount": 1,
                 "posts": [
                     {
-                        "id": 28,
+                        "id": 1128,
                         "title": "HTTP caching improves performance"
                     }
                 ],
@@ -213,23 +213,23 @@
                 "postCount": 5,
                 "posts": [
                     {
-                        "id": 28,
+                        "id": 1128,
                         "title": "HTTP caching improves performance"
                     },
                     {
-                        "id": 25,
+                        "id": 1125,
                         "title": "Public or Private API mode, for extra security"
                     },
                     {
-                        "id": 23,
+                        "id": 1123,
                         "title": "GraphQL or REST? Why not both?"
                     },
                     {
-                        "id": 19,
+                        "id": 1119,
                         "title": "Nested mutations are a must have"
                     },
                     {
-                        "id": 13,
+                        "id": 1113,
                         "title": "Released v0.6, check it out"
                     }
                 ],
@@ -254,19 +254,19 @@
                         "postCount": 4,
                         "posts": [
                             {
-                                "id": 28,
+                                "id": 1128,
                                 "title": "HTTP caching improves performance"
                             },
                             {
-                                "id": 25,
+                                "id": 1125,
                                 "title": "Public or Private API mode, for extra security"
                             },
                             {
-                                "id": 23,
+                                "id": 1123,
                                 "title": "GraphQL or REST? Why not both?"
                             },
                             {
-                                "id": 19,
+                                "id": 1119,
                                 "title": "Nested mutations are a must have"
                             }
                         ],
@@ -289,15 +289,15 @@
                 "postCount": 3,
                 "posts": [
                     {
-                        "id": 28,
+                        "id": 1128,
                         "title": "HTTP caching improves performance"
                     },
                     {
-                        "id": 25,
+                        "id": 1125,
                         "title": "Public or Private API mode, for extra security"
                     },
                     {
-                        "id": 19,
+                        "id": 1119,
                         "title": "Nested mutations are a must have"
                     }
                 ],
@@ -352,19 +352,19 @@
                     "postCount": 4,
                     "posts": [
                         {
-                            "id": 28,
+                            "id": 1128,
                             "title": "HTTP caching improves performance"
                         },
                         {
-                            "id": 25,
+                            "id": 1125,
                             "title": "Public or Private API mode, for extra security"
                         },
                         {
-                            "id": 23,
+                            "id": 1123,
                             "title": "GraphQL or REST? Why not both?"
                         },
                         {
-                            "id": 19,
+                            "id": 1119,
                             "title": "Nested mutations are a must have"
                         }
                     ],
@@ -389,11 +389,11 @@
                             "postCount": 2,
                             "posts": [
                                 {
-                                    "id": 28,
+                                    "id": 1128,
                                     "title": "HTTP caching improves performance"
                                 },
                                 {
-                                    "id": 23,
+                                    "id": 1123,
                                     "title": "GraphQL or REST? Why not both?"
                                 }
                             ],
@@ -418,23 +418,23 @@
                     "postCount": 5,
                     "posts": [
                         {
-                            "id": 28,
+                            "id": 1128,
                             "title": "HTTP caching improves performance"
                         },
                         {
-                            "id": 25,
+                            "id": 1125,
                             "title": "Public or Private API mode, for extra security"
                         },
                         {
-                            "id": 23,
+                            "id": 1123,
                             "title": "GraphQL or REST? Why not both?"
                         },
                         {
-                            "id": 19,
+                            "id": 1119,
                             "title": "Nested mutations are a must have"
                         },
                         {
-                            "id": 13,
+                            "id": 1113,
                             "title": "Released v0.6, check it out"
                         }
                     ],
@@ -459,19 +459,19 @@
                             "postCount": 4,
                             "posts": [
                                 {
-                                    "id": 28,
+                                    "id": 1128,
                                     "title": "HTTP caching improves performance"
                                 },
                                 {
-                                    "id": 25,
+                                    "id": 1125,
                                     "title": "Public or Private API mode, for extra security"
                                 },
                                 {
-                                    "id": 23,
+                                    "id": 1123,
                                     "title": "GraphQL or REST? Why not both?"
                                 },
                                 {
-                                    "id": 19,
+                                    "id": 1119,
                                     "title": "Nested mutations are a must have"
                                 }
                             ],
@@ -494,15 +494,15 @@
                     "postCount": 3,
                     "posts": [
                         {
-                            "id": 28,
+                            "id": 1128,
                             "title": "HTTP caching improves performance"
                         },
                         {
-                            "id": 25,
+                            "id": 1125,
                             "title": "Public or Private API mode, for extra security"
                         },
                         {
-                            "id": 19,
+                            "id": 1119,
                             "title": "Nested mutations are a must have"
                         }
                     ],
@@ -582,7 +582,7 @@
         },
         "postsByCategoryIDs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "categories": [
                     {
@@ -591,7 +591,7 @@
                 ]
             },
             {
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance",
                 "categories": [
                     {
@@ -603,7 +603,7 @@
                 ]
             },
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "categories": [
                     {
@@ -618,7 +618,7 @@
                 ]
             },
             {
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?",
                 "categories": [
                     {
@@ -627,7 +627,7 @@
                 ]
             },
             {
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client",
                 "categories": [
                     {
@@ -636,7 +636,7 @@
                 ]
             },
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "categories": [
                     {
@@ -651,7 +651,7 @@
                 ]
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "categories": [
                     {
@@ -671,7 +671,7 @@
         ],
         "postsExcludeByCategoryIDs": [
             {
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out",
                 "categories": [
                     {
@@ -682,7 +682,7 @@
         ],
         "postsByCategorySlugs": [
             {
-                "id": 28,
+                "id": 1128,
                 "title": "HTTP caching improves performance",
                 "categories": [
                     {
@@ -694,7 +694,7 @@
                 ]
             },
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "categories": [
                     {
@@ -709,7 +709,7 @@
                 ]
             },
             {
-                "id": 23,
+                "id": 1123,
                 "title": "GraphQL or REST? Why not both?",
                 "categories": [
                     {
@@ -718,7 +718,7 @@
                 ]
             },
             {
-                "id": 19,
+                "id": 1119,
                 "title": "Nested mutations are a must have",
                 "categories": [
                     {
@@ -735,7 +735,7 @@
         ],
         "postsExcludeByCategorySlugs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!",
                 "categories": [
                     {
@@ -744,7 +744,7 @@
                 ]
             },
             {
-                "id": 21,
+                "id": 1121,
                 "title": "Customize the schema for each client",
                 "categories": [
                     {
@@ -753,7 +753,7 @@
                 ]
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "categories": [
                     {
@@ -762,7 +762,7 @@
                 ]
             },
             {
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out",
                 "categories": [
                     {
@@ -793,15 +793,15 @@
             "postCount": 4,
             "posts": [
                 {
-                    "id": 40,
+                    "id": 1140,
                     "title": "Welcome to a single post full of blocks!"
                 },
                 {
-                    "id": 21,
+                    "id": 1121,
                     "title": "Customize the schema for each client"
                 },
                 {
-                    "id": 16,
+                    "id": 1116,
                     "title": "Working on flat chain syntax next"
                 },
                 {
@@ -830,19 +830,19 @@
             "postCount": 4,
             "posts": [
                 {
-                    "id": 28,
+                    "id": 1128,
                     "title": "HTTP caching improves performance"
                 },
                 {
-                    "id": 25,
+                    "id": 1125,
                     "title": "Public or Private API mode, for extra security"
                 },
                 {
-                    "id": 23,
+                    "id": 1123,
                     "title": "GraphQL or REST? Why not both?"
                 },
                 {
-                    "id": 19,
+                    "id": 1119,
                     "title": "Nested mutations are a must have"
                 }
             ],

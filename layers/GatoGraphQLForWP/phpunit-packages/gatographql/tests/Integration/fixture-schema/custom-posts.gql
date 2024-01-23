@@ -1,5 +1,5 @@
 query {
-  customPosts(pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
+  customPosts(filter: { ids: [1, 2, 1113] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       areCommentsOpen
@@ -16,12 +16,16 @@ query {
       date
       dateStr
       excerpt
-      featuredImage {
-        id
-        src
+      ...on WithFeaturedImage {
+        featuredImage {
+          id
+          src
+        }
       }
       hasComments
-      hasFeaturedImage
+      ...on WithFeaturedImage {
+        hasFeaturedImage
+      }
       id
       isStatus(status: pending)
       metaValue(key: "_thumbnail_id")
@@ -72,7 +76,7 @@ query {
       title
     }
   }
-  customPostsByExcludeIDs: customPosts(filter: { excludeIDs: [1, 28] }, sort: { by: ID, order: ASC }) {
+  customPostsByExcludeIDs: customPosts(filter: { excludeIDs: [1, 1128] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id
@@ -86,7 +90,7 @@ query {
       title
     }
   }
-  customPostsByIds: customPosts(filter: { ids: [1, 28] }, sort: { by: ID, order: ASC }) {
+  customPostsByIds: customPosts(filter: { ids: [1, 1128] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id

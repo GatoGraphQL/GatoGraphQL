@@ -11,7 +11,7 @@
             "extensions": {
                 "path": [
                     "blocks { ... }",
-                    "posts(filter: {ids: [28]}) { ... }",
+                    "posts(filter: {ids: [1128]}) { ... }",
                     "query { ... }"
                 ],
                 "type": "Post",
@@ -24,7 +24,7 @@
     "data": {
         "posts": [
             {
-                "id": 28,
+                "id": 1128,
                 "blocks": null
             }
         ]

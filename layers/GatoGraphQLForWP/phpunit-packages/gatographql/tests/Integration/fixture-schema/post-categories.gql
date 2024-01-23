@@ -11,7 +11,7 @@
     name
   }
 
-  post(by:{ id: 25 }) {
+  post(by:{ id: 1125 }) {
     categories {
       ...PostCategoryData
       children {

@@ -951,161 +951,6 @@
                 ]
             },
             {
-                "__typename": "Post",
-                "id": 13,
-                "title": "Released v0.6, check it out",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 3,
-                        "name": "Blog",
-                        "slug": "blog",
-                        "slugPath": "blog"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 16,
-                "title": "Working on flat chain syntax next",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 1,
-                        "name": "Uncategorized",
-                        "slug": "uncategorized",
-                        "slugPath": "uncategorized"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 19,
-                "title": "Nested mutations are a must have",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 4,
-                        "name": "Resource",
-                        "slug": "resource",
-                        "slugPath": "blog\/resource"
-                    },
-                    {
-                        "__typename": "PostCategory",
-                        "id": 3,
-                        "name": "Blog",
-                        "slug": "blog",
-                        "slugPath": "blog"
-                    },
-                    {
-                        "__typename": "PostCategory",
-                        "id": 2,
-                        "name": "Advanced",
-                        "slug": "advanced",
-                        "slugPath": "advanced"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 21,
-                "title": "Customize the schema for each client",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 1,
-                        "name": "Uncategorized",
-                        "slug": "uncategorized",
-                        "slugPath": "uncategorized"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 23,
-                "title": "GraphQL or REST? Why not both?",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 6,
-                        "name": "Special topic",
-                        "slug": "special-topic",
-                        "slugPath": "blog\/resource\/special-topic"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 25,
-                "title": "Public or Private API mode, for extra security",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 4,
-                        "name": "Resource",
-                        "slug": "resource",
-                        "slugPath": "blog\/resource"
-                    },
-                    {
-                        "__typename": "PostCategory",
-                        "id": 3,
-                        "name": "Blog",
-                        "slug": "blog",
-                        "slugPath": "blog"
-                    },
-                    {
-                        "__typename": "PostCategory",
-                        "id": 2,
-                        "name": "Advanced",
-                        "slug": "advanced",
-                        "slugPath": "advanced"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 28,
-                "title": "HTTP caching improves performance",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 7,
-                        "name": "Most special topic",
-                        "slug": "most-special-topic",
-                        "slugPath": "blog\/resource\/special-topic\/most-special-topic"
-                    },
-                    {
-                        "__typename": "PostCategory",
-                        "id": 2,
-                        "name": "Advanced",
-                        "slug": "advanced",
-                        "slugPath": "advanced"
-                    }
-                ]
-            },
-            {
-                "__typename": "Post",
-                "id": 40,
-                "title": "Welcome to a single post full of blocks!",
-                "customPostType": "post",
-                "categories": [
-                    {
-                        "__typename": "PostCategory",
-                        "id": 1,
-                        "name": "Uncategorized",
-                        "slug": "uncategorized",
-                        "slugPath": "uncategorized"
-                    }
-                ]
-            },
-            {
                 "__typename": "GenericCustomPost",
                 "id": 613,
                 "title": "Dolor facilis repellat pariatur veniam at",
@@ -1471,6 +1316,161 @@
                 "title": "Dummy CPT with server-side-registered block",
                 "customPostType": "dummy-cpt",
                 "categories": []
+            },
+            {
+                "__typename": "Post",
+                "id": 1113,
+                "title": "Released v0.6, check it out",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 3,
+                        "name": "Blog",
+                        "slug": "blog",
+                        "slugPath": "blog"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1116,
+                "title": "Working on flat chain syntax next",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized",
+                        "slug": "uncategorized",
+                        "slugPath": "uncategorized"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1119,
+                "title": "Nested mutations are a must have",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 4,
+                        "name": "Resource",
+                        "slug": "resource",
+                        "slugPath": "blog\/resource"
+                    },
+                    {
+                        "__typename": "PostCategory",
+                        "id": 3,
+                        "name": "Blog",
+                        "slug": "blog",
+                        "slugPath": "blog"
+                    },
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1121,
+                "title": "Customize the schema for each client",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized",
+                        "slug": "uncategorized",
+                        "slugPath": "uncategorized"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1123,
+                "title": "GraphQL or REST? Why not both?",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 6,
+                        "name": "Special topic",
+                        "slug": "special-topic",
+                        "slugPath": "blog\/resource\/special-topic"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1125,
+                "title": "Public or Private API mode, for extra security",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 4,
+                        "name": "Resource",
+                        "slug": "resource",
+                        "slugPath": "blog\/resource"
+                    },
+                    {
+                        "__typename": "PostCategory",
+                        "id": 3,
+                        "name": "Blog",
+                        "slug": "blog",
+                        "slugPath": "blog"
+                    },
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1128,
+                "title": "HTTP caching improves performance",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 7,
+                        "name": "Most special topic",
+                        "slug": "most-special-topic",
+                        "slugPath": "blog\/resource\/special-topic\/most-special-topic"
+                    },
+                    {
+                        "__typename": "PostCategory",
+                        "id": 2,
+                        "name": "Advanced",
+                        "slug": "advanced",
+                        "slugPath": "advanced"
+                    }
+                ]
+            },
+            {
+                "__typename": "Post",
+                "id": 1140,
+                "title": "Welcome to a single post full of blocks!",
+                "customPostType": "post",
+                "categories": [
+                    {
+                        "__typename": "PostCategory",
+                        "id": 1,
+                        "name": "Uncategorized",
+                        "slug": "uncategorized",
+                        "slugPath": "uncategorized"
+                    }
+                ]
             }
         ],
         "customPostsByCategoryIDs": [
@@ -1600,7 +1600,7 @@
         ],
         "customPostsExcludeByCategoryIDs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
             {
@@ -1765,7 +1765,7 @@
         ],
         "customPostsExcludeByCategorySlugs": [
             {
-                "id": 40,
+                "id": 1140,
                 "title": "Welcome to a single post full of blocks!"
             },
             {

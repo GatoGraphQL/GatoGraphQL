@@ -5,15 +5,15 @@
             "email": "blogger@test.com",
             "posts": [
                 {
-                    "id": 25,
+                    "id": 1125,
                     "title": "Public or Private API mode, for extra security"
                 },
                 {
-                    "id": 23,
+                    "id": 1123,
                     "title": "GraphQL or REST? Why not both?"
                 },
                 {
-                    "id": 21,
+                    "id": 1121,
                     "title": "Customize the schema for each client"
                 },
                 {

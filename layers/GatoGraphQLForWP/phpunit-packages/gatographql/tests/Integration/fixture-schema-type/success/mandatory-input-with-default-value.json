@@ -2,15 +2,15 @@
     "data": {
         "postsByMetaQuery": [
             {
-                "id": 25,
+                "id": 1125,
                 "title": "Public or Private API mode, for extra security"
             },
             {
-                "id": 16,
+                "id": 1116,
                 "title": "Working on flat chain syntax next"
             },
             {
-                "id": 13,
+                "id": 1113,
                 "title": "Released v0.6, check it out"
             }
         ]

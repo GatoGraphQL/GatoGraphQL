@@ -18,11 +18,11 @@
                 }
             },
             {
-                "id": 13,
-                "__typename": "Post",
+                "id": 613,
+                "__typename": "GenericCustomPost",
                 "self": {
-                    "id": 13,
-                    "__typename": "Post"
+                    "id": 613,
+                    "__typename": "GenericCustomPost"
                 }
             }
         ]
