@@ -1,5 +1,5 @@
 query {
-  customPosts(pagination: { ids: [1, 2, 1113] }, sort: { by: ID, order: ASC }) {
+  customPosts(filter: { ids: [1, 2, 1113] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       areCommentsOpen
