@@ -6,7 +6,7 @@ mutation TestCreateMediaItemFromURL(
       url: $url
     }
   }) {
-    mediaItemID
+    # mediaItemID
     status
     errors {
       __typename
@@ -27,20 +27,20 @@ fragment MediaItemData on Media {
     name
   } 
   caption
-  date
-  dateStr(format: "F j")
+  # date
+  # dateStr(format: "F j")
   description
   height
-  id
+  # id
   mimeType
   # modifiedDate
   # modifiedDateStr
   sizes
-  slug
+  # slug
   src
   srcSet
   title
-  url
-  urlPath
+  # url
+  # urlPath
   width
 }
