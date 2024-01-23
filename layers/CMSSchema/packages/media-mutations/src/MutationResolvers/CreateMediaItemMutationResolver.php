@@ -145,8 +145,8 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                         $fieldDataAccessor->getField(),
                     )
                 );
+                return;
             }
-            return;
         }
 
         // If providing the author, check that the user exists
