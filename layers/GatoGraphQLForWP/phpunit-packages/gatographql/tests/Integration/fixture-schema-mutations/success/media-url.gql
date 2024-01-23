@@ -8,6 +8,7 @@ mutation TestCreateMediaItemFromURL(
   $slug: String,
   $title: String,
   $altText: String,
+  $mimeType: AllowedMimeTypeEnumString,
 ) {
   loginUser(by: {
     credentials: {
@@ -32,6 +33,7 @@ mutation TestCreateMediaItemFromURL(
     slug: $slug
     title: $title
     altText: $altText
+    mimeType: $mimeType
   }) {
     # mediaItemID
     status

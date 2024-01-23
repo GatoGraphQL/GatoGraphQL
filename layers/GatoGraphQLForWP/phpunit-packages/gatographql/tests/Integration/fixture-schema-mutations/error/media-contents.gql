@@ -2,7 +2,6 @@ mutation TestCreateMediaItemFromContents(
   $username: String! = "editor",
   $body: String!,
   $filename: String!,
-  $mimeType: AllowedMimeTypeEnumString,
   $authorID: ID,
   $caption: String,
   $customPostID: ID,
@@ -10,6 +9,7 @@ mutation TestCreateMediaItemFromContents(
   $slug: String,
   $title: String,
   $altText: String,
+  $mimeType: AllowedMimeTypeEnumString,
 ) {
   loginUser(by: {
     credentials: {
