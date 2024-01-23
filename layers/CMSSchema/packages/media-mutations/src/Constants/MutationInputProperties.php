@@ -13,6 +13,7 @@ class MutationInputProperties
     public final const SLUG = 'slug';
     public final const CAPTION = 'caption';
     public final const DESCRIPTION = 'description';
+    public final const ALT_TEXT = 'altText';
     
     public final const URL = 'url';
     public final const CONTENTS = 'contents';

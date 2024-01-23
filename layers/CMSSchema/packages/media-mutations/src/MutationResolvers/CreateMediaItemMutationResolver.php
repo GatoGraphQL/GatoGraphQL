@@ -196,6 +196,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             'slug' => $fieldDataAccessor->getValue(MutationInputProperties::SLUG),
             'caption' => $fieldDataAccessor->getValue(MutationInputProperties::CAPTION),
             'description' => $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION),
+            'altText' => $fieldDataAccessor->getValue(MutationInputProperties::ALT_TEXT),
         ];
 
         // Inject custom post ID, etc
