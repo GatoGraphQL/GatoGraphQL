@@ -2,7 +2,7 @@
     "data": {
         "customPosts": [
             {
-                "id": 666,
+                "id": 1666,
                 "title": "Another Page",
                 "customPostType": "page",
                 "__typename": "GenericCustomPost"

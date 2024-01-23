@@ -172,7 +172,7 @@
             },
             {
                 "__typename": "Page",
-                "id": 666,
+                "id": 1666,
                 "title": "Another Page"
             }
         ],
@@ -390,7 +390,7 @@
             },
             {
                 "__typename": "Page",
-                "id": 666,
+                "id": 1666,
                 "title": "Another Page"
             },
             {
