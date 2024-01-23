@@ -90,7 +90,7 @@ fragment MediaItemData on Media {
         "caption": "Gato GraphQL logo",
         "mimeType": "image/png",
         "slug": "gatographql-logo-png",
-        "src": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.png",
+        "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.png",
         "title": "GatoGraphQL-logo.png"
       }
     },
@@ -103,7 +103,7 @@ fragment MediaItemData on Media {
         "caption": "",
         "mimeType": "text/html",
         "slug": "hello-world-html",
-        "src": "https://gatographql.lndo.site/wp-content/uploads/hello-world.html",
+        "src": "https://mysite.com/wp-content/uploads/hello-world.html",
         "title": "Hello world!"
       }
     }
@@ -131,7 +131,7 @@ query GetMediaItems {
     ...MediaItemData
   }
 
-  myMediaItem(by: { id: 1082 }) {
+  myMediaItem(by: { id: 1380 }) {
     ...MediaItemData
   }
 }
@@ -149,6 +149,40 @@ fragment MediaItemData on Media {
 ...will produce:
 
 ```json
+{
+  "data": {
+    "me": {
+      "slug": "admin"
+    },
+    "myMediaItemCount": 2,
+    "myMediaItems": [
+      {
+        "id": 1380,
+        "mimeType": "image/png",
+        "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.png",
+        "author": {
+          "slug": "admin"
+        }
+      },
+      {
+        "id": 1365,
+        "mimeType": "image/png",
+        "src": "https://mysite.com/wp-content/uploads/browser.png",
+        "author": {
+          "slug": "admin"
+        }
+      }
+    ],
+    "myMediaItem": {
+      "id": 1380,
+      "mimeType": "image/png",
+      "src": "https://mysite.com/wp-content/uploads/GatoGraphQL-logo.png",
+      "author": {
+        "slug": "admin"
+      }
+    }
+  }
+}
 ```
 
 ## Improvements
