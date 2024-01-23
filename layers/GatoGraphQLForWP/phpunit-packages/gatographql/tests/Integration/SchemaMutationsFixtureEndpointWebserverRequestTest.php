@@ -25,7 +25,7 @@ class SchemaMutationsFixtureEndpointWebserverRequestTest extends AbstractFixture
     {
         return preg_replace(
             [
-                '/("slug"\: ?)"([a-z-]*)(-[0-9]*)(.*)?"/',
+                '/("slug"\: ?)"([a-z-]*)(-[0-9]*)(-.*)?"/',
                 '/("src"\: ?)"(.*)(-[0-9]*)(\.[a-z]*)?"/',
             ],
             [
