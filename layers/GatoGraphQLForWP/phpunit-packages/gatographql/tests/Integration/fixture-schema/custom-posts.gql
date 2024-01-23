@@ -16,12 +16,16 @@ query {
       date
       dateStr
       excerpt
-      featuredImage {
-        id
-        src
+      ...on WithFeaturedImage {
+        featuredImage {
+          id
+          src
+        }
       }
       hasComments
-      hasFeaturedImage
+      ...on WithFeaturedImage {
+        hasFeaturedImage
+      }
       id
       isStatus(status: pending)
       metaValue(key: "_thumbnail_id")
