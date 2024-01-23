@@ -1,1 +1,24 @@
-{}
+{
+    "data": {
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "altText": "",
+                "author": {
+                    "id": 1,
+                    "name": "admin"
+                },
+                "caption": "",
+                "description": "",
+                "height": null,
+                "mimeType": "text\/html",
+                "sizes": null,
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2024\/01\/readme-2.html",
+                "srcSet": null,
+                "title": "readme.html",
+                "width": null
+            }
+        }
+    }
+}
