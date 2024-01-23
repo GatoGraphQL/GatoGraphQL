@@ -1,0 +1,18 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "UserDoesNotExistErrorPayload",
+                    "message": "There is no user with ID '888888'"
+                }
+            ],
+            "mediaItem": null
+        }
+    }
+}
