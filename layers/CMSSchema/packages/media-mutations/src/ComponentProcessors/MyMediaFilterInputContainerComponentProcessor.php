@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
-use PoPCMSSchema\Media\ComponentProcessors\MediaFilterInputContainerComponentProcessor as UpstreamMediaFilterInputContainerComponentProcessor;
+use PoPCMSSchema\Media\ComponentProcessors\MediaFilterInputContainerComponentProcessor;
 
-class MediaFilterInputContainerComponentProcessor extends UpstreamMediaFilterInputContainerComponentProcessor
+class MyMediaFilterInputContainerComponentProcessor extends MediaFilterInputContainerComponentProcessor
 {
     public const HOOK_FILTER_INPUTS = __CLASS__ . ':filter-inputs';
 
