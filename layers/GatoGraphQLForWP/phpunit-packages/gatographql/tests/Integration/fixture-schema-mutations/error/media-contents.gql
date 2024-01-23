@@ -2,7 +2,7 @@ mutation TestCreateMediaItemFromContents(
   $username: String! = "editor",
   $body: String!,
   $filename: String!,
-  $mimeType: String,
+  $mimeType: AllowedMimeTypeEnumString,
   $authorID: ID,
   $caption: String,
   $customPostID: ID,
