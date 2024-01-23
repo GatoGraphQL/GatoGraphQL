@@ -164,19 +164,19 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             }
         }
 
-        /** @var stdClass */
-        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
-        if (!$from->{MutationInputProperties::URL} && !$from->{MutationInputProperties::CONTENTS}) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E3,
-                    ),
-                    $field,
-                )
-            );
-        }
+        // /** @var stdClass */
+        // $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
+        // if (!$from->{MutationInputProperties::URL} && !$from->{MutationInputProperties::CONTENTS}) {
+        //     $objectTypeFieldResolutionFeedbackStore->addError(
+        //         new ObjectTypeFieldResolutionFeedback(
+        //             new FeedbackItemResolution(
+        //                 MutationErrorFeedbackItemProvider::class,
+        //                 MutationErrorFeedbackItemProvider::E3,
+        //             ),
+        //             $field,
+        //         )
+        //     );
+        // }
 
         // Allow components to inject their own validations
         App::doAction(

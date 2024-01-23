@@ -97,12 +97,12 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             ] => new UserHasNoPermissionToUploadFilesErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new MediaItemSourceIsMissingErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
+            // [
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E3,
+            // ] => new MediaItemSourceIsMissingErrorPayload(
+            //     $feedbackItemResolution->getMessage(),
+            // ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
