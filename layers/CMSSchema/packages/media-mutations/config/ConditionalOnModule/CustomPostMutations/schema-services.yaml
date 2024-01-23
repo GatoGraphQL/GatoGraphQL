@@ -5,3 +5,6 @@ services:
 
     PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\SchemaHooks\:
         resource: '../../../src/ConditionalOnModule/CustomPostMutations/SchemaHooks/*'
+
+    PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\ObjectTypeResolverPickers\:
+        resource: '../../../src/ConditionalOnModule/CustomPostMutations/ObjectTypeResolverPickers/*'
