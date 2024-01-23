@@ -1,1 +1,14 @@
-{}
+{
+    "data": {
+        "createMediaItem": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "GenericErrorPayload",
+                    "message": "The file's mime type is not allowed"
+                }
+            ],
+            "mediaItem": null
+        }
+    }
+}
