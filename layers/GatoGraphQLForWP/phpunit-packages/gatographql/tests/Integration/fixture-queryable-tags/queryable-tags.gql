@@ -20,7 +20,7 @@
   postFormats: tags(taxonomy: post_format) {
     ...TagData
   }
-  postFormat: tag(taxonomy: post_format, by: { id: 1125 }) {
+  postFormat: tag(taxonomy: post_format, by: { id: 25 }) {
     ...TagData
   }
   postFormatCount: tagCount(taxonomy: post_format)
