@@ -34,12 +34,16 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         $downloadedFile = $downloadedFileOrError;
         $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($url);
 
-        return $this->createMediaItemFromLocalFile(
+        $mediaItemID = $this->createMediaItemFromLocalFile(
             $downloadedFile,
             basename($url),
             $mimeType,
             $mediaItemData,
         );
+
+        \unlink($downloadedFile);
+
+        return $mediaItemID;
     }
 
     /**
