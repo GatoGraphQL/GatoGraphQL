@@ -13,9 +13,9 @@
                 }
             ],
             "mediaItem": null
+        },
+        "logoutUser": {
+            "status": "SUCCESS"
         }
-    },
-    "logoutUser": {
-      "status": "SUCCESS"
     }
 }
