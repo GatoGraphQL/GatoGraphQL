@@ -7,7 +7,6 @@ namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemSourceIsMissingErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
 use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
@@ -97,12 +96,6 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             ] => new UserHasNoPermissionToUploadFilesErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            // [
-            //     MutationErrorFeedbackItemProvider::class,
-            //     MutationErrorFeedbackItemProvider::E3,
-            // ] => new MediaItemSourceIsMissingErrorPayload(
-            //     $feedbackItemResolution->getMessage(),
-            // ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
