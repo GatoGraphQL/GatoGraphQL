@@ -1,0 +1,18 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "CustomPostDoesNotExistErrorPayload",
+                    "message": "There is no custom post with ID '888888'"
+                }
+            ],
+            "mediaItem": null
+        }
+    }
+}
