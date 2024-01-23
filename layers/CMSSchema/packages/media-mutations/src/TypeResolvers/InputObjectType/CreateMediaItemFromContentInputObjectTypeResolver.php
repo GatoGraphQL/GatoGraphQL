@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObjectTypeResolver
@@ -42,16 +43,16 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'filename' => $this->getStringScalarTypeResolver(),
-            'body' => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::FILENAME => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::BODY => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'filename' => $this->__('File name', 'media-mutations'),
-            'body' => $this->__('File body', 'media-mutations'),
+            MutationInputProperties::FILENAME => $this->__('File name', 'media-mutations'),
+            MutationInputProperties::BODY => $this->__('File body', 'media-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
