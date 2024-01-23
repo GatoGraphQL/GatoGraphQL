@@ -10,11 +10,11 @@
       ],
       "extensions": {
         "path": [
-          "post(by: {id: 28}) { ... }",
+          "post(by: {id: 1128}) { ... }",
           "mutation { ... }"
         ],
         "type": "MutationRoot",
-        "field": "post(by: {id: 28}) { ... }",
+        "field": "post(by: {id: 1128}) { ... }",
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
