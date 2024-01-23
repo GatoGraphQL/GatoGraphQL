@@ -24,7 +24,7 @@ mutation {
       }
     }
   }
-  allowedPost: post(by: {id: 28}) {
+  allowedPost: post(by: {id: 1128}) {
     firstTitle: title
     update(input: {
       title: "HTTP caching improves performance 33333"

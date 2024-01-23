@@ -8,7 +8,7 @@
     name
   }
 
-  post(by:{ id: 25 }) {
+  post(by:{ id: 1125 }) {
     tags {
       ...PostTagData
     }

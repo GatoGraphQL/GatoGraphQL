@@ -9,7 +9,7 @@
     blockFlattenedDataItems
   }
 
-  includeBlockFilter1: post(by: { id: 19 }) {
+  includeBlockFilter1: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -30,7 +30,7 @@
     )
   }
 
-  includeBlockFilter2: post(by: { id: 19 }) {
+  includeBlockFilter2: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -60,7 +60,7 @@
     )
   }
 
-  includeBlockFilter3: post(by: { id: 19 }) {
+  includeBlockFilter3: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -93,7 +93,7 @@
     )
   }
 
-  includeBlockFilter4: post(by: { id: 19 }) {
+  includeBlockFilter4: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -123,7 +123,7 @@
     )
   }
 
-  excludeBlockFilter1: post(by: { id: 19 }) {
+  excludeBlockFilter1: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -144,7 +144,7 @@
     )
   }
 
-  excludeBlockFilter2: post(by: { id: 19 }) {
+  excludeBlockFilter2: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -174,7 +174,7 @@
     )
   }
 
-  excludeBlockFilter3: post(by: { id: 19 }) {
+  excludeBlockFilter3: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -207,7 +207,7 @@
     )
   }
 
-  excludeBlockFilter4: post(by: { id: 19 }) {
+  excludeBlockFilter4: post(by: { id: 1119 }) {
     id
     blocks(
       filterBy: {
@@ -338,7 +338,7 @@
   }
   
   # This post contains blocks containing blocks containing blocks
-  singleLevelBlockPost: post(by: {id: 28}) {
+  singleLevelBlockPost: post(by: {id: 1128}) {
     id
     title
     blocks {
@@ -351,7 +351,7 @@
   # This post contains blocks containing blocks containing blocks,
   # and a last level with empty attributes (that must be returned)
   # as {}, not as []
-  multiLevelBlockPost: post(by: {id: 40}) {
+  multiLevelBlockPost: post(by: {id: 1140}) {
     id
     title
     blocks {
