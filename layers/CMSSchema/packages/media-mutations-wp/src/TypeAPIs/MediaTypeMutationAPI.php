@@ -19,7 +19,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     public function createMediaItemFromURL(string $url, array $mediaItemData): string|int
     {
-		require_once ABSPATH . 'wp-admin/includes/file.php';
+        require_once ABSPATH . 'wp-admin/includes/file.php';
 
         $downloadedFileOrError = \download_url($url);
 
@@ -33,8 +33,8 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         $downloadedFile = $downloadedFileOrError;
         $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($url);
-        
-        $filename = basename($url);        
+
+        $filename = basename($url);
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
         }
@@ -60,7 +60,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $body,
         array $mediaItemData,
     ): string|int {
-		$uploadedFileOrError = \wp_upload_bits($filename, null, $body);
+        $uploadedFileOrError = \wp_upload_bits($filename, null, $body);
         if ($uploadedFileOrError['error']) {
             /** @var string */
             $errorMessage = $uploadedFileOrError['error'];
@@ -71,11 +71,11 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         $uploadedFile = $uploadedFileOrError;
         $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
-        
+
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
         }
-        
+
         /** @var string */
         $file = $uploadedFile['file'];
         return $this->createMediaItemFromLocalFile(
@@ -95,10 +95,10 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $filename,
         string $mimeType,
         array $mediaItemData
-    ): string|int {        
-		require_once ABSPATH . 'wp-admin/includes/file.php';
+    ): string|int {
+        require_once ABSPATH . 'wp-admin/includes/file.php';
 
-		$fileData = [
+        $fileData = [
             'name' => \sanitize_file_name($filename),
             'type' => $mimeType,
             'tmp_name' => $file,
@@ -129,7 +129,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             $customPostID = $mediaItemData['customPostID'];
             unset($mediaItemData['customPostID']);
         }
-        
+
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = sanitize_file_name(basename($uploadedFilename));
         }
@@ -137,14 +137,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         $mediaItemData['mimeType'] = $mimeType;
 
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
-        
+
         $mediaItemIDOrError = \wp_insert_attachment(
             $mediaItemData,
             $uploadedFilename,
             $customPostID,
             true
         );
-        
+
         if (\is_wp_error($mediaItemIDOrError)) {
             /** @var WP_Error */
             $wpError = $mediaItemIDOrError;
@@ -160,7 +160,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             $uploadedFilename,
             $mediaItemData,
         );
-        
+
         return $mediaItemID;
     }
 
@@ -224,12 +224,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string|int $mediaItemID,
         string $filename,
         array $mediaItemData
-    ): void {        
-		require_once ABSPATH . 'wp-admin/includes/image.php';
-        
+    ): void {
+        require_once ABSPATH . 'wp-admin/includes/image.php';
+
         $mediaItemMetaData = \wp_generate_attachment_metadata((int) $mediaItemID, $filename);
         \wp_update_attachment_metadata((int) $mediaItemID, $mediaItemMetaData);
-        
+
         $altText = $mediaItemData['altText'] ?? null;
         if (!empty($altText)) {
             \update_post_meta((int) $mediaItemID, '_wp_attachment_image_alt', $altText);

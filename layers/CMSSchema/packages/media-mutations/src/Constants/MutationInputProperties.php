@@ -15,10 +15,10 @@ class MutationInputProperties
     public final const DESCRIPTION = 'description';
     public final const ALT_TEXT = 'altText';
     public final const MIME_TYPE = 'mimeType';
-    
+
     public final const URL = 'url';
     public final const CONTENTS = 'contents';
-    
+
     public final const FILENAME = 'filename';
     public final const BODY = 'body';
 }

@@ -105,7 +105,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             );
             return;
         }
-        
+
         // Validate the user has the needed capability to upload files
         $currentUserID = App::getState('current-user-id');
         $uploadFilesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY);
