@@ -21,8 +21,10 @@ class SchemaMutationsFixtureEndpointWebserverRequestTest extends AbstractAdminCl
         return preg_replace(
             [
                 '/("slug"\: ?)"([a-z-]*)(-[0-9]*)(.*)?"/',
+                '/("src"\: ?)"(.*)(-[0-9]*)(\.[a-z]*)?"/',
             ],
             [
+                '$1"$2$4"',
                 '$1"$2$4"',
             ],
             $responseBody
