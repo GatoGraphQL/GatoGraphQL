@@ -72,7 +72,7 @@ query {
       title
     }
   }
-  customPostsByExcludeIDs: customPosts(filter: { excludeIDs: [1, 28] }, sort: { by: ID, order: ASC }) {
+  customPostsByExcludeIDs: customPosts(filter: { excludeIDs: [1, 1128] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id
@@ -86,7 +86,7 @@ query {
       title
     }
   }
-  customPostsByIds: customPosts(filter: { ids: [1, 28] }, sort: { by: ID, order: ASC }) {
+  customPostsByIds: customPosts(filter: { ids: [1, 1128] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
       id

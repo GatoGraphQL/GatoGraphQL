@@ -1,7 +1,7 @@
 query {
   posts(
     filter: {
-      ids: [1, 28]
+      ids: [1, 1128]
     }
   ) {
     id
