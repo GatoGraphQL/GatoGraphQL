@@ -1008,7 +1008,7 @@
 		<link>https://gatographql.lndo.site/sample-page/</link>
 		<pubDate>Sun, 17 Aug 2020 13:06:58 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=666</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?page_id=1666</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>This is an example page. It's different from a blog post because it will stay in one place and will show up in your site navigation (in most themes). Most people start with an About page that introduces them to potential site visitors. It might say something like this:</p>
@@ -1030,7 +1030,7 @@
 <p>As a new WordPress user, you should go to <a href="https://gatographql.lndo.site/wp-admin/">your dashboard</a> to delete this page and create new pages for your content. Have fun!</p>
 <!-- /wp:paragraph -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>666</wp:post_id>
+		<wp:post_id>1666</wp:post_id>
 		<wp:post_date><![CDATA[2020-08-17 13:06:58]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-08-17 13:06:58]]></wp:post_date_gmt>
 		<wp:post_modified><![CDATA[2020-08-17 13:06:58]]></wp:post_modified>
@@ -1816,11 +1816,11 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/trashed-page/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
 		<dc:creator><![CDATA[editor]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?p=34</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1134</guid>
 		<description></description>
 		<content:encoded><![CDATA[Trashed page for testing comments with Integration Tests]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>34</wp:post_id>
+		<wp:post_id>1134</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 04:08:47]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 04:08:47]]></wp:post_date_gmt>
 		<wp:post_modified><![CDATA[2020-12-12 04:08:47]]></wp:post_modified>
