@@ -61,7 +61,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         array $mediaItemData,
     ): string|int {
 		$uploadedFileOrError = \wp_upload_bits($filename, null, $body);
-        if ($uploadedFileOrError['error'] ?? false) {
+        if ($uploadedFileOrError['error']) {
             /** @var string */
             $errorMessage = $uploadedFileOrError['error'];
             throw new MediaItemCRUDMutationException(
@@ -183,6 +183,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
     /**
      * @param array<string,mixed> $mediaItemData
+     * @return array<string,mixed>
      */
     protected function convertMediaItemCreationArgs(array $mediaItemData): array
     {
@@ -226,12 +227,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     ): void {        
 		require_once ABSPATH . 'wp-admin/includes/image.php';
         
-        $mediaItemMetaData = \wp_generate_attachment_metadata($mediaItemID, $filename);
-        \wp_update_attachment_metadata($mediaItemID, $mediaItemMetaData);
+        $mediaItemMetaData = \wp_generate_attachment_metadata((int) $mediaItemID, $filename);
+        \wp_update_attachment_metadata((int) $mediaItemID, $mediaItemMetaData);
         
         $altText = $mediaItemData['altText'] ?? null;
         if (!empty($altText)) {
-            \update_post_meta($mediaItemID, '_wp_attachment_image_alt', $altText);
+            \update_post_meta((int) $mediaItemID, '_wp_attachment_image_alt', $altText);
         }
     }
 }

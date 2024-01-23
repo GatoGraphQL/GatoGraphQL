@@ -23,7 +23,8 @@ class SchemaMutationsFixtureEndpointWebserverRequestTest extends AbstractFixture
      */
     protected function adaptResponseBody(string $responseBody): string
     {
-        return preg_replace(
+        /** @var string */
+        $responseBody = preg_replace(
             [
                 '/("slug"\: ?)"([a-z-]*)(-[0-9]*)(-.*)?"/',
                 '/("src"\: ?)"(.*)(-[0-9]*)(\.[a-z]*)?"/',
@@ -34,5 +35,6 @@ class SchemaMutationsFixtureEndpointWebserverRequestTest extends AbstractFixture
             ],
             $responseBody
         );
+        return $responseBody;
     }
 }
