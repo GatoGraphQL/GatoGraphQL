@@ -1,0 +1,46 @@
+mutation TestCreateMediaItemFromURL(
+  $url: URL!
+) {
+  createMediaItem(input:{
+    from: {
+      url: $url
+    }
+  }) {
+    mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+}
+
+fragment MediaItemData on Media {
+  altText
+  author {
+    id
+    name
+  } 
+  caption
+  date
+  dateStr(format: "F j")
+  description
+  height
+  id
+  mimeType
+  # modifiedDate
+  # modifiedDateStr
+  sizes
+  slug
+  src
+  srcSet
+  title
+  url
+  urlPath
+  width
+}
