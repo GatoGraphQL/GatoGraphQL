@@ -139,6 +139,13 @@ class MutationResolverHookSet extends AbstractHookSet
             return;
         }
 
+        $this->validateCanLoggedInUserEditCustomPosts(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         // Make sure the custom post exists
         $this->validateCustomPostExists(
             $customPostID,
@@ -146,10 +153,9 @@ class MutationResolverHookSet extends AbstractHookSet
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $this->validateCanLoggedInUserEditCustomPosts(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
 
         $this->validateCanLoggedInUserEditCustomPost(
             $customPostID,
