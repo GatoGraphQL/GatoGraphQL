@@ -20,7 +20,6 @@ interface MediaTypeMutationAPIInterface
     public function createMediaItemFromContents(
         string $filename,
         string $body,
-        ?string $mimeType,
         array $mediaItemData,
     ): string|int;
 }

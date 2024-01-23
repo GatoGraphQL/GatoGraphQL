@@ -32,7 +32,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $downloadedFile = $downloadedFileOrError;
-        $mimeType = $this->getFileMimeTypeOrThrowError($url);
+        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($url);
         
         $filename = basename($url);        
         if (empty($mediaItemData['title'])) {
@@ -58,7 +58,6 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     public function createMediaItemFromContents(
         string $filename,
         string $body,
-        ?string $mimeType,
         array $mediaItemData,
     ): string|int {
 		$uploadedFileOrError = \wp_upload_bits($filename, null, $body);
@@ -71,7 +70,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $uploadedFile = $uploadedFileOrError;
-        $mimeType ??= $this->getFileMimeTypeOrThrowError($filename);
+        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
         
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;

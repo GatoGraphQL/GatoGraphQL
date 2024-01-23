@@ -61,7 +61,6 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
         return [
             MutationInputProperties::FILENAME => $this->getStringScalarTypeResolver(),
             MutationInputProperties::BODY => $this->getStringScalarTypeResolver(),
-            MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
         ];
     }
 
@@ -81,7 +80,6 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
         return match ($inputFieldName) {
             MutationInputProperties::FILENAME => $this->__('File name', 'media-mutations'),
             MutationInputProperties::BODY => $this->__('File body', 'media-mutations'),
-            MutationInputProperties::MIME_TYPE => $this->__('File mime type', 'media-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

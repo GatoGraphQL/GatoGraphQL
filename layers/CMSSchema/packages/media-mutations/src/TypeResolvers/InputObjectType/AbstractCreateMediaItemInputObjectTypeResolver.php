@@ -72,6 +72,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::CAPTION => $this->getStringScalarTypeResolver(),
             MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
             MutationInputProperties::ALT_TEXT => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::MIME_TYPE => $this->getStringScalarTypeResolver(),
         ];
 
         // Inject custom post ID, etc
@@ -94,6 +95,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::CAPTION => $this->__('Attachment caption', 'media-mutations'),
             MutationInputProperties::DESCRIPTION => $this->__('Attachment description', 'media-mutations'),
             MutationInputProperties::ALT_TEXT => $this->__('Image alternative information', 'media-mutations'),
+            MutationInputProperties::MIME_TYPE => $this->__('Attachment mime type', 'media-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 

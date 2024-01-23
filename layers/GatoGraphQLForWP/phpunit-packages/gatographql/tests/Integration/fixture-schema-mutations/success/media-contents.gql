@@ -28,7 +28,6 @@ mutation TestCreateMediaItemFromContents(
       contents: {
         body: $body
         filename: $filename
-        mimeType: $mimeType
       }
     }
     authorID: $authorID
@@ -38,6 +37,7 @@ mutation TestCreateMediaItemFromContents(
     slug: $slug
     title: $title
     altText: $altText
+    mimeType: $mimeType
   }) {
     # mediaItemID
     status
