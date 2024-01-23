@@ -22,11 +22,11 @@ query {
     id
     title
   }
-  mediaItemsByExcludeIDs: mediaItems(filter: { excludeIDs: [361], mimeTypes: "*" }) {
+  mediaItemsByExcludeIDs: mediaItems(filter: { excludeIDs: [1361], mimeTypes: "*" }) {
     id
     title
   }
-  mediaItemsByIds: mediaItems(filter: { ids: [361, 363], mimeTypes: "*" }) {
+  mediaItemsByIds: mediaItems(filter: { ids: [1361, 1363], mimeTypes: "*" }) {
     id
     title
   }
@@ -50,7 +50,7 @@ query {
     date
   }
 
-  mediaItemById: mediaItem(by: { id: 361 }) {
+  mediaItemById: mediaItem(by: { id: 1361 }) {
     id
     title
     slug

@@ -74,7 +74,7 @@
                 "wpAdminEditURL": null,
                 "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
                 "featuredImage": {
-                    "id": 361,
+                    "id": 1361,
                     "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png"
                 },
                 "hasComments": true,
@@ -82,7 +82,7 @@
                 "id": 1113,
                 "isStatus": false,
                 "isSticky": false,
-                "metaValue": "361",
+                "metaValue": "1361",
                 "postFormat": "standard",
                 "rawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:heading -->\n<h2>Image Block (Standard)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"id\":1755} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->",
                 "rawTitle": "Released v0.6, check it out",
@@ -133,7 +133,7 @@
                 "wpAdminEditURL": null,
                 "excerpt": "Image Block (Wide) Image Block (Full width) Cover Image Block Gallery Block",
                 "featuredImage": {
-                    "id": 361,
+                    "id": 1361,
                     "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png"
                 },
                 "hasComments": false,
@@ -141,7 +141,7 @@
                 "id": 1116,
                 "isStatus": false,
                 "isSticky": false,
-                "metaValue": "361",
+                "metaValue": "1361",
                 "postFormat": "standard",
                 "rawContent": "<!-- wp:heading -->\n<h2>Image Block (Wide)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"align\":\"wide\",\"id\":1755} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:heading -->\n<h2>Image Block (Full width)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"align\":\"full\",\"id\":1755} -->\n<figure class=\"wp-block-image alignfull\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:heading -->\n<h2>Cover Image Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:cover {\"url\":\"https:\/\/d.pr\/i\/8pTmgY+\",\"id\":1755} -->\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\"><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"align\":\"center\",\"placeholder\":\"Write title\u2026\",\"fontSize\":\"large\"} -->\n<p class=\"has-text-align-center has-large-font-size\">This block can be used for Hero section.<br>Full width\u00c2 has been applied.<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->\n\n<!-- wp:heading -->\n<h2>Gallery Block<\/h2>\n<!-- \/wp:heading -->",
                 "rawTitle": "Working on flat chain syntax next",

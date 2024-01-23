@@ -20,21 +20,21 @@
                 "id": 1113,
                 "title": "Released v0.6, check it out",
                 "featuredImage": {
-                    "id": 361
+                    "id": 1361
                 }
             },
             {
                 "id": 1116,
                 "title": "Working on flat chain syntax next",
                 "featuredImage": {
-                    "id": 361
+                    "id": 1361
                 }
             },
             {
                 "id": 1125,
                 "title": "Public or Private API mode, for extra security",
                 "featuredImage": {
-                    "id": 362
+                    "id": 1362
                 }
             }
         ],

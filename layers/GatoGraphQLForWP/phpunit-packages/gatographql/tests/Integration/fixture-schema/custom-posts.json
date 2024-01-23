@@ -74,14 +74,14 @@
                 "dateStr": "December 12, 2020",
                 "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
                 "featuredImage": {
-                    "id": 361,
+                    "id": 1361,
                     "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png"
                 },
                 "hasComments": true,
                 "hasFeaturedImage": true,
                 "id": 1113,
                 "isStatus": false,
-                "metaValue": "361",
+                "metaValue": "1361",
                 "rawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:heading -->\n<h2>Image Block (Standard)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"id\":1755} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->",
                 "slug": "released-v0-6-check-it-out",
                 "status": "publish",

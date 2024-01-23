@@ -72,21 +72,21 @@
         "__typename": "Post"
       },
       {
-        "id": 361,
+        "id": 1361,
         "title": "graphql-api-header",
         "customPostType": "attachment",
         "status": "publish",
         "__typename": "GenericCustomPost"
       },
       {
-        "id": 362,
+        "id": 1362,
         "title": "graphql-api-search-results",
         "customPostType": "attachment",
         "status": "publish",
         "__typename": "GenericCustomPost"
       },
       {
-        "id": 363,
+        "id": 1363,
         "title": "LICENSE",
         "customPostType": "attachment",
         "status": "publish",

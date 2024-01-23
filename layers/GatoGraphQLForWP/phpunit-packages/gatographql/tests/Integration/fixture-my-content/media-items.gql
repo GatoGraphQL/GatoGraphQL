@@ -15,7 +15,7 @@ query GetMediaItems {
     ...MediaItemData
   }
 
-  notMine: myMediaItem(by: { id: 363 }) {
+  notMine: myMediaItem(by: { id: 1363 }) {
     ...MediaItemData
   }
 
