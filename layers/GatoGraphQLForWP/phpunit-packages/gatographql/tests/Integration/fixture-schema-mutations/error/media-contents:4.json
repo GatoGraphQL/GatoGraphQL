@@ -13,7 +13,7 @@
                     "{from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType}",
                     "(input: {from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType})",
                     "createMediaItem(input: {from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType}) { ... }",
-                    "mutation TestCreateMediaItemFromContents($username: String! = \"editor\", $body: String!, $filename: String!, $mimeType: AllowedMimeTypeEnumString, $authorID: ID, $caption: String, $customPostID: ID, $description: String, $slug: String, $title: String, $altText: String) { ... }"
+                    "mutation TestCreateMediaItemFromContents($username: String! = \"editor\", $body: String!, $filename: String!, $authorID: ID, $caption: String, $customPostID: ID, $description: String, $slug: String, $title: String, $altText: String, $mimeType: AllowedMimeTypeEnumString) { ... }"
                 ],
                 "type": "MutationRoot",
                 "field": "createMediaItem(input: {from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType}) { ... }",
