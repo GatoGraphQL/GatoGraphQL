@@ -1,10 +1,22 @@
-mutation TestCreateMediaItem(
-  $url: URL!
+mutation TestCreateMediaItemFromURL(
+  $url: URL!,
+  $authorID: ID,
+  $caption: String,
+  $customPostID: ID,
+  $description: String,
+  $slug: String,
+  $title: String,
 ) {
   createMediaItem(input:{
     from: {
       url: $url
     }
+    authorID: $authorID
+    caption: $caption
+    customPostID: $customPostID
+    description: $description
+    slug: $slug
+    title: $title
   }) {
     # mediaItemID
     status
