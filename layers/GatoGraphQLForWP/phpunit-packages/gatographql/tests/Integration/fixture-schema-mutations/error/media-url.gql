@@ -6,6 +6,7 @@ mutation TestCreateMediaItemFromURL(
   $description: String,
   $slug: String,
   $title: String,
+  $altText: String,
 ) {
   createMediaItem(input:{
     from: {
@@ -17,6 +18,7 @@ mutation TestCreateMediaItemFromURL(
     description: $description
     slug: $slug
     title: $title
+    altText: $altText
   }) {
     # mediaItemID
     status
