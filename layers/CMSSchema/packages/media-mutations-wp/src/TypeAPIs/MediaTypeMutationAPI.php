@@ -102,7 +102,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         $file = $uploadedFile['file'];
         return $this->createMediaItemFromLocalFile(
             $file,
-            basename($file),
+            $filename,
             $mimeType,
             $mediaItemData,
         );
