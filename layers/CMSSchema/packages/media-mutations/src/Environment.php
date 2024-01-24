@@ -6,5 +6,5 @@ namespace PoPCMSSchema\MediaMutations;
 
 class Environment
 {
-    public final const USE_PAYLOADABLE_COMMENT_MUTATIONS = 'USE_PAYLOADABLE_COMMENT_MUTATIONS';
+    public final const USE_PAYLOADABLE_MEDIA_MUTATIONS = 'USE_PAYLOADABLE_MEDIA_MUTATIONS';
 }
