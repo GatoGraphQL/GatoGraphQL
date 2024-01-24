@@ -15,7 +15,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      */
     public function usePayloadableMediaMutations(): bool
     {
-        $envVariable = Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS;
+        $envVariable = Environment::USE_PAYLOADABLE_MEDIA_MUTATIONS;
         $defaultValue = true;
         $callback = EnvironmentValueHelpers::toBool(...);
 
