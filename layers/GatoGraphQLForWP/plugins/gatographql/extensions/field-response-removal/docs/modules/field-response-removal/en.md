@@ -80,7 +80,7 @@ query {
       {
         "title": "Nested mutations are a must have",
         "featuredImage": {
-          "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo.png"
+          "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.png"
         }
       },
       {
