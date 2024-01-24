@@ -96,61 +96,61 @@
     "dummyCustomPosts": [
       {
         "__typename": "GenericCustomPost",
-        "id": 613,
+        "id": 1613,
         "title": "Dolor facilis repellat pariatur veniam at",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 616,
+        "id": 1616,
         "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 619,
+        "id": 1619,
         "title": "Error debitis nulla vel est",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 620,
+        "id": 1620,
         "title": "Dignissimos sed dolore aut",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 622,
+        "id": 1622,
         "title": "Dolore ex et deleniti mollitia",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 627,
+        "id": 1627,
         "title": "Quis voluptatum tempore veniam est sit",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 629,
+        "id": 1629,
         "title": "Qui ea incidunt qui",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 630,
+        "id": 1630,
         "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 631,
+        "id": 1631,
         "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis",
         "customPostType": "dummy-cpt"
       },
       {
         "__typename": "GenericCustomPost",
-        "id": 634,
+        "id": 1634,
         "title": "Recusandae vel deleniti est expedita dolores quasi",
         "customPostType": "dummy-cpt"
       }

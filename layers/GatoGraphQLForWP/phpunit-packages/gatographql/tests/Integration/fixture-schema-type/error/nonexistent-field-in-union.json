@@ -39,26 +39,6 @@
         "code": "gql@5.3.1",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
       }
-    },
-    {
-      "message": "There is no field 'nonExisting' on type 'GenericCustomPost'",
-      "locations": [
-        {
-          "line": 5,
-          "column": 5
-        }
-      ],
-      "extensions": {
-        "path": [
-          "nonExisting",
-          "customPosts(pagination: {limit: 3}, sort: {order: ASC, by: ID}) { ... }",
-          "query { ... }"
-        ],
-        "type": "CustomPostUnion",
-        "field": "nonExisting",
-        "code": "gql@5.3.1",
-        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
-      }
     }
   ],
   "data": {
@@ -74,8 +54,8 @@
         "nonExisting": null
       },
       {
-        "__typename": "GenericCustomPost",
-        "id": 613,
+        "__typename": "Post",
+        "id": 1113,
         "nonExisting": null
       }
     ]
