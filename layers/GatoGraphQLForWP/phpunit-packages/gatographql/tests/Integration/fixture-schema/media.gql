@@ -30,7 +30,7 @@ query {
     id
     title
   }
-  mediaItemsByMimeTypes: mediaItems(filter: { mimeTypes: ["text/"] }) {
+  mediaItemsByMimeTypes: mediaItems(filter: { mimeTypes: ["text/"] }, pagination: { limit: 3 }, sort: { by: ID, order: ASC }) {
     id
     title
   }
@@ -39,7 +39,7 @@ query {
     title
   }
 
-  mediaItemsSortedASC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: ASC}) {
+  mediaItemsSortedASC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: ASC }) {
     id
     title
     date
