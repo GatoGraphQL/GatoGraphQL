@@ -1257,7 +1257,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":1361,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-1024x622.jpg" alt="" class="wp-image-1361"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-1024x622.jpg" alt="" class="wp-image-1361"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -1267,7 +1267,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":1362,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-suki-1024x598.png" alt="" class="wp-image-1362"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png" alt="" class="wp-image-1362"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns --></div>
@@ -2364,7 +2364,7 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/graphql-api-header/</link>
 		<pubDate>Thu, 26 May 2022 05:13:32 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo.png</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.png</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2448,7 +2448,7 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/graphql-api-search-results/</link>
 		<pubDate>Thu, 26 May 2022 05:13:35 +0000</pubDate>
 		<dc:creator><![CDATA[blogger]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-suki.png</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki.png</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2481,7 +2481,7 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/license/</link>
 		<pubDate>Thu, 26 May 2022 13:01:16 +0000</pubDate>
 		<dc:creator><![CDATA[author]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/05/LICENSE.txt</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/LICENSE.txt</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2514,7 +2514,7 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/funny-dog/</link>
 		<pubDate>Thu, 15 Jun 2023 04:24:00 +0000</pubDate>
 		<dc:creator><![CDATA[contributor]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2547,7 +2547,7 @@ https://wordpress.org/about/
 		<link>https://gatographql.lndo.site/single-post-with-a-lot-of-blocks/funny-dog-again/</link>
 		<pubDate>Thu, 15 Jun 2022 04:24:00 +0000</pubDate>
 		<dc:creator><![CDATA[contributor]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/2022/06/Funny-Dog-again.jpg</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/wp-content/uploads/Funny-Dog-again.jpg</guid>
 		<description></description>
 		<content:encoded><![CDATA[]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -2700,8 +2700,8 @@ https://wordpress.org/about/
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg","id":1380,"dimRatio":50,"isDark":false} -->
-<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/2023/06/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
+<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg","id":1380,"dimRatio":50,"isDark":false} -->
+<div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">See if I care</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
@@ -2741,7 +2741,7 @@ https://wordpress.org/about/
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:media-text {"mediaId":1362,"mediaLink":"https://gatographql.lndo.site/graphql-api-search-results/","mediaType":"image"} -->
-<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/2022/05/GatoGraphQL-logo-suki-1024x598.png" alt="In red are the entities with a transformed name" class="wp-image-1362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki-1024x598.png" alt="In red are the entities with a transformed name" class="wp-image-1362 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
 <p>This is the schema</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:media-text --></div>

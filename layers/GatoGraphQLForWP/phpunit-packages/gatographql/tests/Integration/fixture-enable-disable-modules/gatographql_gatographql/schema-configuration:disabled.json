@@ -3,19 +3,19 @@
         "dummyCustomPosts": [
             {
                 "__typename": "GenericCustomPost",
-                "id": 613,
+                "id": 1613,
                 "title": "Dolor facilis repellat pariatur veniam at",
                 "customPostType": "dummy-cpt"
             },
             {
                 "__typename": "GenericCustomPost",
-                "id": 616,
+                "id": 1616,
                 "title": "Asperiores voluptatem facilis doloremque nemo nesciunt",
                 "customPostType": "dummy-cpt"
             },
             {
                 "__typename": "GenericCustomPost",
-                "id": 619,
+                "id": 1619,
                 "title": "Error debitis nulla vel est",
                 "customPostType": "dummy-cpt"
             }

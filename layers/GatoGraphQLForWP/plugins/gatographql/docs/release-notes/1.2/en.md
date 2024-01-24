@@ -148,10 +148,10 @@ Ergonomic motivating parallelism,Consequuntur velit quasi assumenda,"<!-- wp:par
 <p>Consequuntur velit quasi assumenda. Eum non saepe est. Ut dolorem harum eveniet eaque nemo impedit. Voluptatem commodi modi sed sed animi voluptatem.</p>
 <!-- /wp:paragraph -->
 <!-- wp:image {""id"":5,""sizeSlug"":""large""} -->
-<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/2023/09/wordpress0.jpg"" alt="""" class=""wp-image-5""/></figure>
+<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/wordpress0.jpg"" alt="""" class=""wp-image-5""/></figure>
 <!-- /wp:image -->
 <!-- wp:image {""id"":7,""sizeSlug"":""large""} -->
-<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/2023/09/wordpress2.jpg"" alt="""" class=""wp-image-7""/></figure>
+<figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/wordpress2.jpg"" alt="""" class=""wp-image-7""/></figure>
 <!-- /wp:image -->",admin
 Down-sized solution-oriented securedline,Ipsam minima qui asperiores dolorum unde voluptas quia voluptate,"<!-- wp:paragraph -->
 <p>Ipsam minima qui asperiores dolorum unde voluptas quia voluptate. Incidunt omnis cumque beatae quo deleniti ex. Praesentium nihil et consectetur neque commodi tempora ipsa adipisci. Praesentium perferendis sint est.</p>

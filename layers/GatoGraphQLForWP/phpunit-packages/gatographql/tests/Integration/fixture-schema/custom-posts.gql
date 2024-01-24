@@ -141,7 +141,7 @@ query {
     }
   }
 
-  singleCustomPost: customPost(by: { id: 619 }) {
+  singleCustomPost: customPost(by: { id: 1619 }) {
     __typename
     ...on CustomPost {
       id

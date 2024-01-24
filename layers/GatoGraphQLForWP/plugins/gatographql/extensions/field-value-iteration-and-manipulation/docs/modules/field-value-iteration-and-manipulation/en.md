@@ -147,7 +147,7 @@ query {
   "data": {
     "posts": [
       {
-        "id": 662,
+        "id": 1662,
         "title": "Explaining the privacy policy",
         "categoryNames": [
           "Non classé"

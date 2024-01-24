@@ -18,11 +18,11 @@ query {
     id
     title
   }
-  mediaItemsByExcludeAuthorIDs: mediaItems(filter: { author: { excludeIDs: 2 }, mimeTypes: "*" }) {
+  mediaItemsByExcludeAuthorIDs: mediaItems(filter: { author: { excludeIDs: 2 }, mimeTypes: "*", dateQuery: { before: "2024-01-01" } }) {
     id
     title
   }
-  mediaItemsByExcludeIDs: mediaItems(filter: { excludeIDs: [1361], mimeTypes: "*" }) {
+  mediaItemsByExcludeIDs: mediaItems(filter: { excludeIDs: [1361], mimeTypes: "*", dateQuery: { before: "2024-01-01" } }) {
     id
     title
   }
@@ -44,7 +44,7 @@ query {
     title
     date
   }
-  mediaItemsSortedDESC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: DESC}) {
+  mediaItemsSortedDESC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: DESC }, filter: { dateQuery: { before: "2024-01-01" } }) {
     id
     title
     date
