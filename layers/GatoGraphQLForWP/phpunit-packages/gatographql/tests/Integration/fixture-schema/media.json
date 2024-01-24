@@ -168,86 +168,34 @@
         ],
         "mediaItemsByExcludeAuthorIDs": [
             {
-                "id": 1869,
-                "title": "license.txt"
+                "id": 1380,
+                "title": "Funny-Dog"
             },
             {
-                "id": 1868,
-                "title": "This file has a customized slug"
+                "id": 1382,
+                "title": "Funny-Dog-again"
             },
             {
-                "id": 1867,
-                "title": "loading.gif"
-            },
-            {
-                "id": 1866,
-                "title": "browser.png"
-            },
-            {
-                "id": 1865,
-                "title": "readme.html"
-            },
-            {
-                "id": 1864,
-                "title": "\/hello.world.html"
-            },
-            {
-                "id": 1863,
-                "title": "\/hello\/world.html"
-            },
-            {
-                "id": 1862,
-                "title": "hello\/world.html"
-            },
-            {
-                "id": 1861,
-                "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html"
-            },
-            {
-                "id": 1860,
-                "title": "hello-world.html"
+                "id": 1363,
+                "title": "LICENSE"
             }
         ],
         "mediaItemsByExcludeIDs": [
             {
-                "id": 1869,
-                "title": "license.txt"
+                "id": 1380,
+                "title": "Funny-Dog"
             },
             {
-                "id": 1868,
-                "title": "This file has a customized slug"
+                "id": 1382,
+                "title": "Funny-Dog-again"
             },
             {
-                "id": 1867,
-                "title": "loading.gif"
+                "id": 1363,
+                "title": "LICENSE"
             },
             {
-                "id": 1866,
-                "title": "browser.png"
-            },
-            {
-                "id": 1865,
-                "title": "readme.html"
-            },
-            {
-                "id": 1864,
-                "title": "\/hello.world.html"
-            },
-            {
-                "id": 1863,
-                "title": "\/hello\/world.html"
-            },
-            {
-                "id": 1862,
-                "title": "hello\/world.html"
-            },
-            {
-                "id": 1861,
-                "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html"
-            },
-            {
-                "id": 1860,
-                "title": "hello-world.html"
+                "id": 1362,
+                "title": "graphql-api-search-results"
             }
         ],
         "mediaItemsByIds": [
@@ -331,6 +279,11 @@
         ],
         "mediaItemsSortedDESC": [
             {
+                "id": 1380,
+                "title": "Funny-Dog",
+                "date": "2023-06-15T04:24:00+00:00"
+            },
+            {
                 "id": 1382,
                 "title": "Funny-Dog-again",
                 "date": "2022-06-15T04:24:00+00:00"
@@ -339,11 +292,6 @@
                 "id": 1362,
                 "title": "graphql-api-search-results",
                 "date": "2022-05-25T05:13:35+00:00"
-            },
-            {
-                "id": 1361,
-                "title": "graphql-api-header",
-                "date": "2022-05-25T05:13:32+00:00"
             }
         ],
         "mediaItemById": {
