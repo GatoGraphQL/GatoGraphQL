@@ -44,7 +44,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         $filename = basename(GeneralUtils::getURLWithouQueryParams($url));
 
         $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
-        
+
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
         }
