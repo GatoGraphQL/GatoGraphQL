@@ -42,8 +42,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
          * `wp_check_filetype` won't figure out the mime type
          */
         $filename = basename(GeneralUtils::getURLWithouQueryParams($url));
+        
+        $explicitMimeType = $mediaItemData['mimeType'] ?? null;
+        $filename = $this->maybeAddExtensionToFilename(
+            $filename,
+            $explicitMimeType,
+        );
 
-        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
+        $mimeType = $explicitMimeType ?? $this->getFileMimeTypeOrThrowError($filename);
 
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
@@ -70,6 +76,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $body,
         array $mediaItemData,
     ): string|int {
+        $explicitMimeType = $mediaItemData['mimeType'] ?? null;
+        $filename = $this->maybeAddExtensionToFilename(
+            $filename,
+            $explicitMimeType,
+        );
+
         $uploadedFileOrError = \wp_upload_bits($filename, null, $body);
         if ($uploadedFileOrError['error']) {
             /** @var string */
@@ -80,7 +92,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $uploadedFile = $uploadedFileOrError;
-        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
+        $mimeType = $explicitMimeType ?? $this->getFileMimeTypeOrThrowError($filename);
 
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
@@ -97,6 +109,34 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     }
 
     /**
+     * If the file doesn't contain an extension (even when we are
+     * providing the mime type), we will get an error:
+     *
+     *   > Sorry, you are not allowed to upload this file type.
+     *
+     * Then, append the extension if missing.
+     */
+    protected function maybeAddExtensionToFilename(
+        string $filename,
+        ?string $explicitMimeType,
+    ): string {
+        if ($explicitMimeType === null) {
+            return $filename;
+        }
+        
+        if (strpos($filename, '.') !== false) {
+            return $filename;
+        }
+        
+        $extension = \wp_get_default_extension_for_mime_type($explicitMimeType);
+        if ($extension === false) {
+            return $filename;
+        }
+        
+        return $filename . '.' . $extension;
+    }
+
+    /**
      * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $mediaItemData
      */
@@ -107,25 +147,9 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         array $mediaItemData
     ): string|int {
         require_once ABSPATH . 'wp-admin/includes/file.php';
-
-        /**
-         * If the file doesn't contain an extension (even when we are
-         * providing the mime type), we will get an error:
-         *
-         *   > Sorry, you are not allowed to upload this file type.
-         *
-         * Then, append the extension if missing.
-         */
-        $mediaFileName = \sanitize_file_name($filename);
-        if (strpos($mediaFileName, '.') === false) {
-            $extension = \wp_get_default_extension_for_mime_type($mimeType);
-            if ($extension !== false) {
-                $mediaFileName .= '.' . $extension;
-            }
-        }
         
         $fileData = [
-            'name' => $mediaFileName,
+            'name' => \sanitize_file_name($filename),
             'type' => $mimeType,
             'tmp_name' => $file,
             'error' => 0,
