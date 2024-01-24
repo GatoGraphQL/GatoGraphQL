@@ -247,7 +247,7 @@
     blockFlattenedDataItems
   }
 
-  customPost(by: { id: 654 }) {
+  customPost(by: { id: 1654 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -262,7 +262,7 @@
     }
   }
 
-  contentWithoutBlocks: customPost(by: { id: 619 }) {
+  contentWithoutBlocks: customPost(by: { id: 1619 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -277,7 +277,7 @@
     }
   }
 
-  nonExistingBlocks: customPost(by: { id: 656 }) {
+  nonExistingBlocks: customPost(by: { id: 1656 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -292,7 +292,7 @@
     }
   }
 
-  noContent: customPost(by: { id: 658 }) {
+  noContent: customPost(by: { id: 1658 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -307,7 +307,7 @@
     }
   }
 
-  serverSideRegisteredBlocks: customPost(by: { id: 680 }) {
+  serverSideRegisteredBlocks: customPost(by: { id: 1680 }) {
     __typename
     ...on GenericCustomPost {
       id
@@ -322,7 +322,7 @@
     }
   }
 
-  notServerSideRegisteredBlocks: customPost(by: { id: 660 }) {
+  notServerSideRegisteredBlocks: customPost(by: { id: 1660 }) {
     __typename
     ...on GenericCustomPost {
       id
