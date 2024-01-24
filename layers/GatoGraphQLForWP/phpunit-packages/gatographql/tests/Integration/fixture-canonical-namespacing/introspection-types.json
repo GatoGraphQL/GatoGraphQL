@@ -256,10 +256,6 @@
         },
         {
           "kind": "SCALAR",
-          "name": "AllowedMimeTypeEnumString"
-        },
-        {
-          "kind": "SCALAR",
           "name": "AnyBuiltInScalar"
         },
         {
