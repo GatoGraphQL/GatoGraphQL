@@ -1,5 +1,5 @@
 {
-    "url": "https://gatographql.lndo.site/wp-admin/images/browser.png",
+    "url": "https://gatographql.lndo.site/wp-admin/images/browser.png?someparam=somevalue&anotherparam=anothervalue",
     "authorID": 6,
     "caption": "Browser pic from WordPress"
 }
