@@ -33,19 +33,18 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $downloadedFile = $downloadedFileOrError;
-        $mimeType = $mediaItemData['mimeType'] ?? null;
-        if (empty($mimeType)) {
-            /**
-             * The URL might contain params (eg: with the dynamically
-             * generated image by DALL-E).
-             *
-             * Remove the URL params to expose the extension, or
-             * `wp_check_filetype` won't figure out the mime type
-             */
-            $mimeType = $this->getFileMimeTypeOrThrowError(GeneralUtils::getURLWithouQueryParams($url));
-        }
 
-        $filename = basename($url);
+        /**
+         * The URL might contain params (eg: with the dynamically
+         * generated image by DALL-E).
+         *
+         * Remove the URL params to expose the extension, or
+         * `wp_check_filetype` won't figure out the mime type
+         */
+        $filename = basename(GeneralUtils::getURLWithouQueryParams($url));
+
+        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
+        
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
         }
