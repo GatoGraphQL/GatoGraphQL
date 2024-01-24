@@ -44,7 +44,7 @@ query {
     title
     date
   }
-  mediaItemsSortedDESC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: DESC}) {
+  mediaItemsSortedDESC: mediaItems(pagination: { limit: 3 }, sort: { by: DATE, order: DESC}, filter: { dateQuery: { before: "2023-01-01" } }) {
     id
     title
     date
