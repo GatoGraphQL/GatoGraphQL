@@ -183,4 +183,13 @@ class GeneralUtils
         /** @var array<string,mixed> */
         return $queryParams;
     }
+
+    public static function getURLWithouQueryParams(string $url): string
+    {
+        $paramsPos = strpos($url, '?');
+        if ($paramsPos === false) {
+            return $url;
+        }
+        return substr($url, 0, $paramsPos);
+    }
 }

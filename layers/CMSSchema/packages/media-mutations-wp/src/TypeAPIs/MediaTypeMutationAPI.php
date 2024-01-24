@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutationsWP\TypeAPIs;
 
+use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\BasicServiceTrait;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
@@ -32,7 +33,17 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         $downloadedFile = $downloadedFileOrError;
-        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($url);
+        $mimeType = $mediaItemData['mimeType'] ?? null;
+        if (empty($mimeType)) {
+            /**
+             * The URL might contain params (eg: with the dynamically
+             * generated image by DALL-E).
+             *
+             * Remove the URL params to expose the extension, or
+             * `wp_check_filetype` won't figure out the mime type
+             */
+            $mimeType = $this->getFileMimeTypeOrThrowError(GeneralUtils::getURLWithouQueryParams($url));
+        }
 
         $filename = basename($url);
         if (empty($mediaItemData['title'])) {
