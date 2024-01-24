@@ -13,12 +13,12 @@
                     "path": [
                         "blocks { ... }",
                         "...on GenericCustomPost { ... }",
-                        "nonExistingBlocks: customPost(by: {id: 656}) { ... }",
+                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
                     "field": "blocks { ... }",
-                    "id": 656,
+                    "id": 1656,
                     "code": "PoP\/ComponentModel@w1"
                 }
             },
@@ -34,12 +34,12 @@
                     "path": [
                         "blockDataItems",
                         "...on GenericCustomPost { ... }",
-                        "nonExistingBlocks: customPost(by: {id: 656}) { ... }",
+                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
                     "field": "blockDataItems",
-                    "id": 656,
+                    "id": 1656,
                     "code": "PoP\/ComponentModel@w1"
                 }
             },
@@ -55,12 +55,12 @@
                     "path": [
                         "blockFlattenedDataItems",
                         "...on GenericCustomPost { ... }",
-                        "nonExistingBlocks: customPost(by: {id: 656}) { ... }",
+                        "nonExistingBlocks: customPost(by: {id: 1656}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
                     "field": "blockFlattenedDataItems",
-                    "id": 656,
+                    "id": 1656,
                     "code": "PoP\/ComponentModel@w1"
                 }
             },
@@ -76,12 +76,12 @@
                     "path": [
                         "blocks { ... }",
                         "...on GenericCustomPost { ... }",
-                        "notServerSideRegisteredBlocks: customPost(by: {id: 660}) { ... }",
+                        "notServerSideRegisteredBlocks: customPost(by: {id: 1660}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
                     "field": "blocks { ... }",
-                    "id": 660,
+                    "id": 1660,
                     "code": "PoP\/ComponentModel@w1"
                 }
             },
@@ -97,12 +97,12 @@
                     "path": [
                         "blockDataItems",
                         "...on GenericCustomPost { ... }",
-                        "notServerSideRegisteredBlocks: customPost(by: {id: 660}) { ... }",
+                        "notServerSideRegisteredBlocks: customPost(by: {id: 1660}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
                     "field": "blockDataItems",
-                    "id": 660,
+                    "id": 1660,
                     "code": "PoP\/ComponentModel@w1"
                 }
             },
@@ -118,12 +118,12 @@
                     "path": [
                         "blockFlattenedDataItems",
                         "...on GenericCustomPost { ... }",
-                        "notServerSideRegisteredBlocks: customPost(by: {id: 660}) { ... }",
+                        "notServerSideRegisteredBlocks: customPost(by: {id: 1660}) { ... }",
                         "query { ... }"
                     ],
                     "type": "GenericCustomPost",
                     "field": "blockFlattenedDataItems",
-                    "id": 660,
+                    "id": 1660,
                     "code": "PoP\/ComponentModel@w1"
                 }
             }
@@ -131,7 +131,7 @@
     },
     "errors": [
         {
-            "message": "Error parsing post ID 619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
+            "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
                     "line": 272,
@@ -142,17 +142,17 @@
                 "path": [
                     "blocks { ... }",
                     "...on GenericCustomPost { ... }",
-                    "contentWithoutBlocks: customPost(by: {id: 619}) { ... }",
+                    "contentWithoutBlocks: customPost(by: {id: 1619}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
                 "field": "blocks { ... }",
-                "id": 619,
+                "id": 1619,
                 "code": "PoP\/ComponentModel@e1"
             }
         },
         {
-            "message": "Error parsing post ID 619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
+            "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
                     "line": 275,
@@ -163,17 +163,17 @@
                 "path": [
                     "blockDataItems",
                     "...on GenericCustomPost { ... }",
-                    "contentWithoutBlocks: customPost(by: {id: 619}) { ... }",
+                    "contentWithoutBlocks: customPost(by: {id: 1619}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
                 "field": "blockDataItems",
-                "id": 619,
+                "id": 1619,
                 "code": "PoP\/ComponentModel@e1"
             }
         },
         {
-            "message": "Error parsing post ID 619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
+            "message": "Error parsing post ID 1619: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
                     "line": 276,
@@ -184,17 +184,17 @@
                 "path": [
                     "blockFlattenedDataItems",
                     "...on GenericCustomPost { ... }",
-                    "contentWithoutBlocks: customPost(by: {id: 619}) { ... }",
+                    "contentWithoutBlocks: customPost(by: {id: 1619}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
                 "field": "blockFlattenedDataItems",
-                "id": 619,
+                "id": 1619,
                 "code": "PoP\/ComponentModel@e1"
             }
         },
         {
-            "message": "Error parsing post ID 658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
+            "message": "Error parsing post ID 1658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
                     "line": 302,
@@ -205,17 +205,17 @@
                 "path": [
                     "blocks { ... }",
                     "...on GenericCustomPost { ... }",
-                    "noContent: customPost(by: {id: 658}) { ... }",
+                    "noContent: customPost(by: {id: 1658}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
                 "field": "blocks { ... }",
-                "id": 658,
+                "id": 1658,
                 "code": "PoP\/ComponentModel@e1"
             }
         },
         {
-            "message": "Error parsing post ID 658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
+            "message": "Error parsing post ID 1658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
                     "line": 305,
@@ -226,17 +226,17 @@
                 "path": [
                     "blockDataItems",
                     "...on GenericCustomPost { ... }",
-                    "noContent: customPost(by: {id: 658}) { ... }",
+                    "noContent: customPost(by: {id: 1658}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
                 "field": "blockDataItems",
-                "id": 658,
+                "id": 1658,
                 "code": "PoP\/ComponentModel@e1"
             }
         },
         {
-            "message": "Error parsing post ID 658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
+            "message": "Error parsing post ID 1658: This post does not appear to contain block content. This fields is designed to parse Gutenberg blocks and can not read classic editor content.",
             "locations": [
                 {
                     "line": 306,
@@ -247,12 +247,12 @@
                 "path": [
                     "blockFlattenedDataItems",
                     "...on GenericCustomPost { ... }",
-                    "noContent: customPost(by: {id: 658}) { ... }",
+                    "noContent: customPost(by: {id: 1658}) { ... }",
                     "query { ... }"
                 ],
                 "type": "GenericCustomPost",
                 "field": "blockFlattenedDataItems",
-                "id": 658,
+                "id": 1658,
                 "code": "PoP\/ComponentModel@e1"
             }
         }
@@ -5942,7 +5942,7 @@
         },
         "customPost": {
             "__typename": "GenericCustomPost",
-            "id": 654,
+            "id": 1654,
             "title": "Dummy CPT with blocks",
             "rawContent": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:heading {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\"} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->\n\n<!-- wp:heading -->\n<h2 class=\"wp-block-heading\">Columns inside Columns (nested inner blocks)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\"} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/05\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
             "customPostType": "dummy-cpt",
@@ -6708,7 +6708,7 @@
         },
         "contentWithoutBlocks": {
             "__typename": "GenericCustomPost",
-            "id": 619,
+            "id": 1619,
             "title": "Error debitis nulla vel est",
             "rawContent": "<hr>\n<hr>\n<h1>Laudantium distinctio blanditiis et et voluptas. Nobis maxime et ab ut laboriosam provident<\/h1>\n<ul><li>Nisi dolorem<\/li><li>Dolorum<\/li><\/ul>\n<!--more-->\n<img class=\"alignleft\" alt=\"Illum neque aliquam fuga dolor ea voluptas\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/2022\/12\/c08092fd-0c80-38d0-a678-61e938599f7d.jpg\">",
             "customPostType": "dummy-cpt",
@@ -6718,7 +6718,7 @@
         },
         "nonExistingBlocks": {
             "__typename": "GenericCustomPost",
-            "id": 656,
+            "id": 1656,
             "title": "Dummy CPT with non-existing block",
             "rawContent": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:nonexisting {\"className\":\"has-top-margin\"} -->\n<h2 class=\"has-top-margin\">Columns Block<\/h2>\n<!-- \/wp:nonexisting -->",
             "customPostType": "dummy-cpt",
@@ -6927,7 +6927,7 @@
         },
         "noContent": {
             "__typename": "GenericCustomPost",
-            "id": 658,
+            "id": 1658,
             "title": "Dummy CPT with no content",
             "rawContent": "",
             "customPostType": "dummy-cpt",
@@ -6937,7 +6937,7 @@
         },
         "serverSideRegisteredBlocks": {
             "__typename": "GenericCustomPost",
-            "id": 680,
+            "id": 1680,
             "title": "Dummy CPT with server-side-registered block",
             "rawContent": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:gatographql\/server-side-registered-block-schema-testing {\"someAttribute\":false,\"someOtherAttribute\":\"Hello\"} \/-->\n\n<!-- wp:gatographql\/server-side-registered-block-schema-testing {\"someAttribute\":true,\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[]} \/-->\n\n<!-- wp:gatographql\/server-side-registered-block-schema-testing {\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[\"testing\",\"non\",\"server\",\"side\",\"registered\",\"blocks\"]} \/-->\n\n<!-- wp:paragraph -->\n<p>And back to some text<\/p>\n<!-- \/wp:paragraph -->",
             "customPostType": "dummy-cpt",
@@ -7248,7 +7248,7 @@
         },
         "notServerSideRegisteredBlocks": {
             "__typename": "GenericCustomPost",
-            "id": 660,
+            "id": 1660,
             "title": "Dummy CPT with non server-side-registered block",
             "rawContent": "<!-- wp:gallery {\"linkTo\":\"none\",\"className\":\"alignnone\"} -->\n<figure class=\"wp-block-gallery columns-3 is-cropped alignnone\"><ul class=\"blocks-gallery-grid\"><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/zd7Ehu+\" alt=\"\" data-id=\"1706\" class=\"wp-image-1706\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/jXLtzZ+\" alt=\"\" data-id=\"1705\" class=\"wp-image-1705\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/VhP9ud+\" alt=\"\" data-id=\"1704\" class=\"wp-image-1704\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/HB0qXg+\" alt=\"\" data-id=\"1703\" class=\"wp-image-1703\"\/><\/figure><\/li><li class=\"blocks-gallery-item\"><figure><img src=\"https:\/\/d.pr\/i\/5cHfcd+\" alt=\"\" data-id=\"1699\" class=\"wp-image-1699\"\/><\/figure><\/li><\/ul><\/figure>\n<!-- \/wp:gallery -->\n\n<!-- wp:heading -->\n<h2>List Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:list -->\n<ul><li>List item 1<\/li><li>List item 2<\/li><li>List item 3<\/li><li>List item 4<\/li><\/ul>\n<!-- \/wp:list -->\n\n<!-- wp:gatographql\/not-server-side-registered-block-schema-testing {\"someAttribute\":false,\"someOtherAttribute\":\"Hello\"} \/-->\n\n<!-- wp:gatographql\/not-server-side-registered-block-schema-testing {\"someAttribute\":true,\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[]} \/-->\n\n<!-- wp:gatographql\/not-server-side-registered-block-schema-testing {\"someOtherAttribute\":\" world!\",\"yetAnotherAttribute\":[\"testing\",\"non\",\"server\",\"side\",\"registered\",\"blocks\"]} \/-->\n\n<!-- wp:paragraph -->\n<p>And back to some text<\/p>\n<!-- \/wp:paragraph -->",
             "customPostType": "dummy-cpt",
