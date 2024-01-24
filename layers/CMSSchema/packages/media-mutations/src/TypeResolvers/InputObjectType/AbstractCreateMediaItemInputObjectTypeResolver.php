@@ -87,7 +87,9 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::CAPTION => $this->getStringScalarTypeResolver(),
             MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
             MutationInputProperties::ALT_TEXT => $this->getStringScalarTypeResolver(),
-            MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
+            // Can't use type "AllowedMimeTypeEnum" because it changes with the logged-in user!
+            // MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
+            MutationInputProperties::MIME_TYPE => $this->getStringScalarTypeResolver(),
         ];
 
         // Inject custom post ID, etc
