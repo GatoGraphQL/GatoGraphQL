@@ -108,8 +108,24 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     ): string|int {
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
+        /**
+         * If the file doesn't contain an extension (even when we are
+         * providing the mime type), we will get an error:
+         *
+         *   > Sorry, you are not allowed to upload this file type.
+         *
+         * Then, append the extension if missing.
+         */
+        $mediaFileName = \sanitize_file_name($filename);
+        if (strpos($mediaFileName, '.') === false) {
+            $extension = \wp_get_default_extension_for_mime_type($mimeType);
+            if ($extension !== false) {
+                $mediaFileName .= '.' . $extension;
+            }
+        }
+        
         $fileData = [
-            'name' => \sanitize_file_name($filename),
+            'name' => $mediaFileName,
             'type' => $mimeType,
             'tmp_name' => $file,
             'error' => 0,
