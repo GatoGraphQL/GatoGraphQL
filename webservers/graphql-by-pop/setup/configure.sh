@@ -6,3 +6,5 @@ wp option update uploads_use_yearmonth_folders '0'
 cp /app/assets/.htaccess /app/wordpress
 cp /app/assets/phpinfo.php /app/wordpress
 cp /app/assets/favicon.ico /app/wordpress
+# Test creating media items via URL from files without extension
+cp /app/wordpress/license.txt /app/wordpress/license
