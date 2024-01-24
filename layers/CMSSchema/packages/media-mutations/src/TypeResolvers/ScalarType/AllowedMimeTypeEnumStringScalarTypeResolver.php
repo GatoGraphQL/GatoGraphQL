@@ -6,6 +6,9 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType;
 
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
 
+/**
+ * @deprecated Can't use this type, because it changes with the logged-in user!
+ */
 class AllowedMimeTypeEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
 {
     public function getTypeName(): string
