@@ -9,16 +9,16 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Custom-Scalars
  */
-class URLScalarTypeResolver extends AbstractURIScalarTypeResolver
+class URIScalarTypeResolver extends AbstractURIScalarTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'URL';
+        return 'URI';
     }
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('URL scalar, such as https://mysite.com/my-fabulous-page', 'schema-commons');
+        return $this->__('URI scalar, such as https://mysite.com/my-fabulous-page', 'schema-commons');
     }
 
     public function getSpecifiedByURL(): ?string
