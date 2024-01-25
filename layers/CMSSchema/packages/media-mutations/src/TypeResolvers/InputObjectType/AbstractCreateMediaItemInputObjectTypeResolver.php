@@ -6,7 +6,6 @@ namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MediaMutations\TypeResolvers\ScalarType\AllowedMimeTypeEnumStringScalarTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
@@ -19,7 +18,6 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CreateMediaItemFromOneofInputObjectTypeResolver $createMediaItemFromOneofInputObjectTypeResolver = null;
-    private ?AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver = null;
 
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -60,19 +58,6 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
         }
         return $this->createMediaItemFromOneofInputObjectTypeResolver;
     }
-    final public function setAllowedMimeTypeEnumStringScalarTypeResolver(AllowedMimeTypeEnumStringScalarTypeResolver $allowedMimeTypeEnumStringScalarTypeResolver): void
-    {
-        $this->allowedMimeTypeEnumStringScalarTypeResolver = $allowedMimeTypeEnumStringScalarTypeResolver;
-    }
-    final protected function getAllowedMimeTypeEnumStringScalarTypeResolver(): AllowedMimeTypeEnumStringScalarTypeResolver
-    {
-        if ($this->allowedMimeTypeEnumStringScalarTypeResolver === null) {
-            /** @var AllowedMimeTypeEnumStringScalarTypeResolver */
-            $allowedMimeTypeEnumStringScalarTypeResolver = $this->instanceManager->getInstance(AllowedMimeTypeEnumStringScalarTypeResolver::class);
-            $this->allowedMimeTypeEnumStringScalarTypeResolver = $allowedMimeTypeEnumStringScalarTypeResolver;
-        }
-        return $this->allowedMimeTypeEnumStringScalarTypeResolver;
-    }
 
     /**
      * @return array<string,InputTypeResolverInterface>
@@ -87,8 +72,6 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::CAPTION => $this->getStringScalarTypeResolver(),
             MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
             MutationInputProperties::ALT_TEXT => $this->getStringScalarTypeResolver(),
-            // Can't use type "AllowedMimeTypeEnumString" because it changes with the logged-in user!
-            // MutationInputProperties::MIME_TYPE => $this->getAllowedMimeTypeEnumStringScalarTypeResolver(),
             MutationInputProperties::MIME_TYPE => $this->getStringScalarTypeResolver(),
         ];
 

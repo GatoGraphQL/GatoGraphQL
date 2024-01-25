@@ -9,7 +9,7 @@ mutation TestCreateMediaItemFromContents(
   $slug: String,
   $title: String,
   $altText: String,
-  $mimeType: AllowedMimeTypeEnumString,
+  $mimeType: String,
 ) {
   loginUser(by: {
     credentials: {
