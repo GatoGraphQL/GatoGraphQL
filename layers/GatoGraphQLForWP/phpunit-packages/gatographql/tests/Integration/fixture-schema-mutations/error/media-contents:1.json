@@ -1,34 +1,21 @@
 {
-    "errors": [
-        {
-            "message": "Value 'image\/svg' for type 'AllowedMimeTypeEnumString' is not valid (the only valid values are: 'application\/java', 'application\/msword', 'application\/octet-stream', 'application\/octet-stream', 'application\/onenote', 'application\/oxps', 'application\/pdf', 'application\/rar', 'application\/rtf', 'application\/ttaf+xml', 'application\/vnd.apple.keynote', 'application\/vnd.apple.numbers', 'application\/vnd.apple.pages', 'application\/vnd.ms-access', 'application\/vnd.ms-excel', 'application\/vnd.ms-excel.addin.macroEnabled.12', 'application\/vnd.ms-excel.sheet.binary.macroEnabled.12', 'application\/vnd.ms-excel.sheet.macroEnabled.12', 'application\/vnd.ms-excel.template.macroEnabled.12', 'application\/vnd.ms-powerpoint', 'application\/vnd.ms-powerpoint.addin.macroEnabled.12', 'application\/vnd.ms-powerpoint.presentation.macroEnabled.12', 'application\/vnd.ms-powerpoint.slide.macroEnabled.12', 'application\/vnd.ms-powerpoint.slideshow.macroEnabled.12', 'application\/vnd.ms-powerpoint.template.macroEnabled.12', 'application\/vnd.ms-project', 'application\/vnd.ms-word.document.macroEnabled.12', 'application\/vnd.ms-word.template.macroEnabled.12', 'application\/vnd.ms-write', 'application\/vnd.ms-xpsdocument', 'application\/vnd.oasis.opendocument.chart', 'application\/vnd.oasis.opendocument.database', 'application\/vnd.oasis.opendocument.formula', 'application\/vnd.oasis.opendocument.graphics', 'application\/vnd.oasis.opendocument.presentation', 'application\/vnd.oasis.opendocument.spreadsheet', 'application\/vnd.oasis.opendocument.text', 'application\/vnd.openxmlformats-officedocument.presentationml.presentation', 'application\/vnd.openxmlformats-officedocument.presentationml.slide', 'application\/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application\/vnd.openxmlformats-officedocument.presentationml.template', 'application\/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application\/vnd.openxmlformats-officedocument.spreadsheetml.template', 'application\/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application\/vnd.openxmlformats-officedocument.wordprocessingml.template', 'application\/wordperfect', 'application\/x-7z-compressed', 'application\/x-gzip', 'application\/x-tar', 'application\/zip', 'audio\/aac', 'audio\/flac', 'audio\/midi', 'audio\/mpeg', 'audio\/ogg', 'audio\/wav', 'audio\/x-matroska', 'audio\/x-ms-wax', 'audio\/x-ms-wma', 'audio\/x-realaudio', 'image\/bmp', 'image\/gif', 'image\/heic', 'image\/jpeg', 'image\/png', 'image\/tiff', 'image\/webp', 'image\/x-icon', 'text\/calendar', 'text\/css', 'text\/csv', 'text\/plain', 'text\/richtext', 'text\/tab-separated-values', 'text\/vtt', 'video\/3gpp', 'video\/3gpp2', 'video\/avi', 'video\/divx', 'video\/mp4', 'video\/mpeg', 'video\/ogg', 'video\/quicktime', 'video\/webm', 'video\/x-flv', 'video\/x-matroska', 'video\/x-ms-asf', 'video\/x-ms-wm', 'video\/x-ms-wmv', 'video\/x-ms-wmx')",
-            "locations": [
-                {
-                    "line": 26,
-                    "column": 25
-                }
-            ],
-            "extensions": {
-                "path": [
-                    "{from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType}",
-                    "(input: {from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType})",
-                    "createMediaItem(input: {from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType}) { ... }",
-                    "mutation TestCreateMediaItemFromContents($username: String! = \"editor\", $body: String!, $filename: String!, $authorID: ID, $caption: String, $customPostID: ID, $description: String, $slug: String, $title: String, $altText: String, $mimeType: AllowedMimeTypeEnumString) { ... }"
-                ],
-                "type": "MutationRoot",
-                "field": "createMediaItem(input: {from: {contents: {body: $body, filename: $filename}}, authorID: $authorID, caption: $caption, customPostID: $customPostID, description: $description, slug: $slug, title: $title, altText: $altText, mimeType: $mimeType}) { ... }",
-                "code": "PoPSchema\/SchemaCommons@e2"
-            }
-        }
-    ],
     "data": {
         "loginUser": {
             "status": "SUCCESS",
             "errors": null
         },
-        "createMediaItem": null,
+        "createMediaItem": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "GenericErrorPayload",
+                    "message": "The file's mime type is not allowed"
+                }
+            ],
+            "mediaItem": null
+        },
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

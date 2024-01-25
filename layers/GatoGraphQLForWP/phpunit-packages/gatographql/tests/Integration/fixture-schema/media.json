@@ -210,44 +210,16 @@
         ],
         "mediaItemsByMimeTypes": [
             {
-                "id": 1868,
-                "title": "This file has a customized slug"
-            },
-            {
-                "id": 1865,
-                "title": "readme.html"
-            },
-            {
-                "id": 1864,
-                "title": "\/hello.world.html"
-            },
-            {
-                "id": 1863,
-                "title": "\/hello\/world.html"
-            },
-            {
-                "id": 1862,
-                "title": "hello\/world.html"
-            },
-            {
-                "id": 1861,
-                "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html"
-            },
-            {
-                "id": 1859,
-                "title": "hello-world.html"
-            },
-            {
-                "id": 1858,
-                "title": "hello-world.html"
-            },
-            {
-                "id": 1857,
-                "title": "import-posts.csv"
+                "id": 1363,
+                "title": "LICENSE"
             },
             {
                 "id": 1856,
                 "title": "hello-world.txt"
+            },
+            {
+                "id": 1857,
+                "title": "import-posts.csv"
             }
         ],
         "mediaItemsBySearch": [

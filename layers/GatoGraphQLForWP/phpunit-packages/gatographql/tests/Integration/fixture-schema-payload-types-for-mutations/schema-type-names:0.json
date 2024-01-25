@@ -192,9 +192,6 @@
           "name": "__Type"
         },
         {
-          "name": "AllowedMimeTypeEnumString"
-        },
-        {
           "name": "AnyBuiltInScalar"
         },
         {

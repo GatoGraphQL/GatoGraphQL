@@ -43,7 +43,21 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
          */
         $filename = basename(GeneralUtils::getURLWithouQueryParams($url));
 
-        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
+        /**
+         * The mime type is retrieved from the filename extension
+         * always, because that's what `wp_handle_sideload` does.
+         *
+         * Then, we need to always add the corresponding extension
+         * to the file name.
+         *
+         * If the filename has no extension, get it from the "mimeType"
+         * input param.
+         */
+        $filename = $this->maybeAddExtensionToFilename(
+            $filename,
+            $mediaItemData['mimeType'] ?? null,
+        );
+        $mimeType = $this->getFileMimeTypeOrThrowError($filename);
 
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
@@ -70,6 +84,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $body,
         array $mediaItemData,
     ): string|int {
+        $filename = $this->maybeAddExtensionToFilename(
+            $filename,
+            $mediaItemData['mimeType'] ?? null,
+        );
+        $mimeType = $this->getFileMimeTypeOrThrowError($filename);
+
         $uploadedFileOrError = \wp_upload_bits($filename, null, $body);
         if ($uploadedFileOrError['error']) {
             /** @var string */
@@ -78,9 +98,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
                 $errorMessage
             );
         }
-
         $uploadedFile = $uploadedFileOrError;
-        $mimeType = $mediaItemData['mimeType'] ?? $this->getFileMimeTypeOrThrowError($filename);
 
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
@@ -90,10 +108,38 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         $file = $uploadedFile['file'];
         return $this->createMediaItemFromLocalFile(
             $file,
-            basename($file),
+            $filename,
             $mimeType,
             $mediaItemData,
         );
+    }
+
+    /**
+     * If the file doesn't contain an extension (even when we are
+     * providing the mime type), we will get an error:
+     *
+     *   > Sorry, you are not allowed to upload this file type.
+     *
+     * Then, append the extension if missing.
+     */
+    protected function maybeAddExtensionToFilename(
+        string $filename,
+        ?string $explicitMimeType,
+    ): string {
+        if ($explicitMimeType === null || $explicitMimeType === '') {
+            return $filename;
+        }
+
+        if (strpos($filename, '.') !== false) {
+            return $filename;
+        }
+
+        $extension = \wp_get_default_extension_for_mime_type($explicitMimeType);
+        if ($extension === false) {
+            return $filename;
+        }
+
+        return $filename . '.' . $extension;
     }
 
     /**

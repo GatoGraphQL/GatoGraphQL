@@ -15,13 +15,13 @@
                 },
                 "caption": "",
                 "description": "",
-                "height": null,
-                "mimeType": "text\/html",
-                "sizes": null,
-                "slug": "hello-world-html",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/hello-world.html",
-                "title": "hello-world.html",
-                "width": null
+                "height": 144,
+                "mimeType": "image\/png",
+                "sizes": "(max-width: 364px) 100vw, 364px",
+                "slug": "browser-png",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser.png",
+                "title": "browser.png",
+                "width": 364
             }
         },
         "logoutUser": {

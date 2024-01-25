@@ -6,9 +6,6 @@
           "name": "Comment"
         },
         {
-          "name": "CustomPostDoesNotExistErrorPayload"
-        },
-        {
           "name": "GeneralBlock"
         },
         {
@@ -16,9 +13,6 @@
         },
         {
           "name": "GenericCustomPost"
-        },
-        {
-          "name": "GenericErrorPayload"
         },
         {
           "name": "GenericTag"
@@ -54,25 +48,10 @@
           "name": "Root"
         },
         {
-          "name": "RootCreateMediaItemMutationPayload"
-        },
-        {
           "name": "User"
         },
         {
           "name": "UserAvatar"
-        },
-        {
-          "name": "UserDoesNotExistErrorPayload"
-        },
-        {
-          "name": "UserHasNoPermissionToUploadFilesErrorPayload"
-        },
-        {
-          "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload"
-        },
-        {
-          "name": "UserIsNotLoggedInErrorPayload"
         },
         {
           "name": "UserRole"
@@ -112,9 +91,6 @@
         },
         {
           "name": "__Type"
-        },
-        {
-          "name": "AllowedMimeTypeEnumString"
         },
         {
           "name": "AnyBuiltInScalar"
@@ -178,9 +154,6 @@
         },
         {
           "name": "CustomPost"
-        },
-        {
-          "name": "ErrorPayload"
         },
         {
           "name": "IdentifiableObject"
@@ -510,9 +483,6 @@
           "name": "MetaQueryValueTypesEnum"
         },
         {
-          "name": "OperationStatusEnum"
-        },
-        {
           "name": "OrderEnum"
         },
         {
@@ -535,9 +505,6 @@
         },
         {
           "name": "CustomPostUnion"
-        },
-        {
-          "name": "RootCreateMediaItemMutationErrorPayloadUnion"
         },
         {
           "name": "TagUnion"
