@@ -43,13 +43,21 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
          */
         $filename = basename(GeneralUtils::getURLWithouQueryParams($url));
         
-        $explicitMimeType = $mediaItemData['mimeType'] ?? null;
+        /**
+         * The mime type is retrieved from the filename extension
+         * always, because that's what `wp_handle_sideload` does.
+         *
+         * Then, we need to always add the corresponding extension
+         * to the file name.
+         * 
+         * If the filename has no extension, get it from the "mimeType"
+         * input param.
+         */
         $filename = $this->maybeAddExtensionToFilename(
             $filename,
-            $explicitMimeType,
+            $mediaItemData['mimeType'] ?? null,
         );
-
-        $mimeType = $explicitMimeType ?? $this->getFileMimeTypeOrThrowError($filename);
+        $mimeType = $this->getFileMimeTypeOrThrowError($filename);
 
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
@@ -76,11 +84,11 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $body,
         array $mediaItemData,
     ): string|int {
-        $explicitMimeType = $mediaItemData['mimeType'] ?? null;
         $filename = $this->maybeAddExtensionToFilename(
             $filename,
-            $explicitMimeType,
+            $mediaItemData['mimeType'] ?? null,
         );
+        $mimeType = $this->getFileMimeTypeOrThrowError($filename);
 
         $uploadedFileOrError = \wp_upload_bits($filename, null, $body);
         if ($uploadedFileOrError['error']) {
@@ -90,9 +98,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
                 $errorMessage
             );
         }
-
         $uploadedFile = $uploadedFileOrError;
-        $mimeType = $explicitMimeType ?? $this->getFileMimeTypeOrThrowError($filename);
 
         if (empty($mediaItemData['title'])) {
             $mediaItemData['title'] = $filename;
@@ -120,7 +126,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string $filename,
         ?string $explicitMimeType,
     ): string {
-        if ($explicitMimeType === null) {
+        if ($explicitMimeType === null || $explicitMimeType === '') {
             return $filename;
         }
         

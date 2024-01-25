@@ -112,7 +112,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractIn
             MutationInputProperties::CAPTION => $this->__('Attachment caption', 'media-mutations'),
             MutationInputProperties::DESCRIPTION => $this->__('Attachment description', 'media-mutations'),
             MutationInputProperties::ALT_TEXT => $this->__('Image alternative information', 'media-mutations'),
-            MutationInputProperties::MIME_TYPE => $this->__('Attachment mime type', 'media-mutations'),
+            MutationInputProperties::MIME_TYPE => $this->__('Mime type to use for the attachment, when this information can\'t be deduced from the filename (because it has no extension)', 'media-mutations'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 
