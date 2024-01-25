@@ -61,18 +61,18 @@ if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsV
  *
  * Minimum: 128MB
  */
-$minumumMemoryLimit = '128M';
-$minumumMemoryLimitInBytes = \wp_convert_hr_to_bytes($minumumMemoryLimit);
+$minRequiredPHPMemoryLimit = '128M';
+$minRequiredPHPMemoryLimitInBytes = \wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
 $phpMemoryLimit = \ini_get('memory_limit');
 $phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
-if ($phpMemoryLimitInBytes < $minumumMemoryLimitInBytes) {
-    \add_action('admin_notices', function () use ($minumumMemoryLimit, $phpMemoryLimit) {
+if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
+    \add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit) {
         printf(
             '<div class="notice notice-error"><p>%s</p></div>',
             sprintf(
                 __('Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of memory, however the server\'s PHP memory limit is set to <strong>%3$s</strong>. Please increase the memory limit to load %1$s.', 'gatographql'),
                 __('Gato GraphQL', 'gatographql'),
-                $minumumMemoryLimit,
+                $minRequiredPHPMemoryLimit,
                 $phpMemoryLimit
             )
         );
