@@ -66,13 +66,14 @@ $minumumMemoryLimitInBytes = \wp_convert_hr_to_bytes($minumumMemoryLimit);
 $phpMemoryLimit = \ini_get('memory_limit');
 $phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
 if ($phpMemoryLimitInBytes < $minumumMemoryLimitInBytes) {
-    \add_action('admin_notices', function () use ($minumumMemoryLimit) {
+    \add_action('admin_notices', function () use ($minumumMemoryLimit, $phpMemoryLimit) {
         printf(
             '<div class="notice notice-error"><p>%s</p></div>',
             sprintf(
-                __('Plugin <strong>%s</strong> requires at least <strong>%s</strong> of memory. Please increase the PHP memory limit.', 'gatographql'),
+                __('Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of memory, however the server\'s memory limit is set to <strong>%3$s</strong>. Please increase the PHP memory limit to load %1$s.', 'gatographql'),
                 __('Gato GraphQL', 'gatographql'),
-                $minumumMemoryLimit
+                $minumumMemoryLimit,
+                $phpMemoryLimit
             )
         );
     });
