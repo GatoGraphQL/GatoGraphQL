@@ -15,17 +15,17 @@
                 },
                 "caption": "",
                 "description": "",
-                "height": 0,
-                "mimeType": "image\/png",
+                "height": null,
+                "mimeType": "text\/html",
                 "sizes": null,
                 "slug": "hello-world-html",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/hello-world.html",
                 "title": "hello-world.html",
-                "width": 0
+                "width": null
             }
         },
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

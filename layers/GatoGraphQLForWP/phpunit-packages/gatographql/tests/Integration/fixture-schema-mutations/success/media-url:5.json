@@ -16,7 +16,7 @@
                 "caption": "",
                 "description": "",
                 "height": null,
-                "mimeType": "application\/pdf",
+                "mimeType": "text\/plain",
                 "sizes": null,
                 "slug": "license-txt",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/license.txt",
@@ -25,7 +25,7 @@
             }
         },
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

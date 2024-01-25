@@ -16,7 +16,7 @@
                 "caption": "",
                 "description": "",
                 "height": null,
-                "mimeType": "text\/plain",
+                "mimeType": "text\/html",
                 "sizes": null,
                 "slug": "hello-world-html",
                 "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/hello-world.html",
@@ -25,7 +25,7 @@
             }
         },
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

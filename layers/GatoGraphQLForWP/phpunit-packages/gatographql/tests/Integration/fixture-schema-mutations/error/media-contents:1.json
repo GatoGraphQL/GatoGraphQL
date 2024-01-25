@@ -9,7 +9,7 @@
             "errors": [
                 {
                     "__typename": "GenericErrorPayload",
-                    "message": "Sorry, you are not allowed to upload this file type."
+                    "message": "The file's mime type is not allowed"
                 }
             ],
             "mediaItem": null
