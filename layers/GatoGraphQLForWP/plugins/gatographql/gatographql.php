@@ -57,6 +57,29 @@ if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsV
 }
 
 /**
+ * Validate that there is enough memory to run the plugin.
+ *
+ * Minimum: 128MB
+ */
+$minumumMemoryLimit = '128M';
+$minumumMemoryLimitInBytes = \wp_convert_hr_to_bytes($minumumMemoryLimit);
+$phpMemoryLimit = \ini_get('memory_limit');
+$phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
+if ($phpMemoryLimitInBytes < $minumumMemoryLimitInBytes) {
+    \add_action('admin_notices', function () use ($minumumMemoryLimit) {
+        printf(
+            '<div class="notice notice-error"><p>%s</p></div>',
+            sprintf(
+                __('Plugin <strong>%s</strong> requires at least <strong>%s</strong> of memory. Please increase the PHP memory limit.', 'gatographql'),
+                __('Gato GraphQL', 'gatographql'),
+                $minumumMemoryLimit
+            )
+        );
+    });
+    return;
+}
+
+/**
  * The commit hash is added to the plugin version 
  * through the CI when merging the PR.
  *
