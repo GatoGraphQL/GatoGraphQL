@@ -59,9 +59,9 @@ if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsV
 /**
  * Validate that there is enough memory to run the plugin.
  *
- * Minimum: 128MB
+ * Minimum: 64MB
  */
-$minRequiredPHPMemoryLimit = '128M';
+$minRequiredPHPMemoryLimit = '64M';
 $minRequiredPHPMemoryLimitInBytes = \wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
 $phpMemoryLimit = \ini_get('memory_limit');
 $phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
