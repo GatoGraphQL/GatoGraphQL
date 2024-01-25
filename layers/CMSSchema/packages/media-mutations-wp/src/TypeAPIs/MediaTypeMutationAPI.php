@@ -42,14 +42,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
          * `wp_check_filetype` won't figure out the mime type
          */
         $filename = basename(GeneralUtils::getURLWithouQueryParams($url));
-        
+
         /**
          * The mime type is retrieved from the filename extension
          * always, because that's what `wp_handle_sideload` does.
          *
          * Then, we need to always add the corresponding extension
          * to the file name.
-         * 
+         *
          * If the filename has no extension, get it from the "mimeType"
          * input param.
          */
@@ -129,16 +129,16 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         if ($explicitMimeType === null || $explicitMimeType === '') {
             return $filename;
         }
-        
+
         if (strpos($filename, '.') !== false) {
             return $filename;
         }
-        
+
         $extension = \wp_get_default_extension_for_mime_type($explicitMimeType);
         if ($extension === false) {
             return $filename;
         }
-        
+
         return $filename . '.' . $extension;
     }
 
@@ -153,7 +153,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         array $mediaItemData
     ): string|int {
         require_once ABSPATH . 'wp-admin/includes/file.php';
-        
+
         $fileData = [
             'name' => \sanitize_file_name($filename),
             'type' => $mimeType,
