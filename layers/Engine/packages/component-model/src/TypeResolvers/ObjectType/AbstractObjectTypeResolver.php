@@ -1940,6 +1940,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 $argName,
                 $argValue,
                 $astNode,
+                $fieldArgs,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }

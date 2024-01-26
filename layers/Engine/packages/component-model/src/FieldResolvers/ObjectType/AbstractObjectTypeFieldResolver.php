@@ -644,6 +644,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
 
     /**
      * Validate the constraints for a field argument
+     * @param array<string,mixed> $fieldArgs
      */
     public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -651,11 +652,12 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
         string $fieldArgName,
         mixed $fieldArgValue,
         AstInterface $astNode,
+        array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $schemaDefinitionResolver = $this->getSchemaDefinitionResolver($objectTypeResolver, $fieldName);
         if ($schemaDefinitionResolver !== $this) {
-            $schemaDefinitionResolver->validateFieldArgValue($objectTypeResolver, $fieldName, $fieldArgName, $fieldArgValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+            $schemaDefinitionResolver->validateFieldArgValue($objectTypeResolver, $fieldName, $fieldArgName, $fieldArgValue, $astNode, $fieldArgs, $objectTypeFieldResolutionFeedbackStore);
         }
     }
 

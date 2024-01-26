@@ -52,6 +52,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
     public function getConsolidatedFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int;
     /**
      * Validate the constraints for a field argument
+     * @param array<string,mixed> $fieldArgs
      */
     public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -59,6 +60,7 @@ interface ObjectTypeFieldSchemaDefinitionResolverInterface
         string $fieldArgName,
         mixed $fieldArgValue,
         AstInterface $astNode,
+        array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
 }
