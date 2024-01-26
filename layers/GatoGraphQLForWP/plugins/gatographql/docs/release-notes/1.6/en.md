@@ -19,7 +19,9 @@ Running this query:
 mutation CreateMediaItems {
   fromURL: createMediaItem(input:{
     from: {
-      url: "https://gatographql.com/assets/GatoGraphQL-logo.png"
+      url: {
+        source: "https://gatographql.com/assets/GatoGraphQL-logo.png"
+      }
     }
     caption: "Gato GraphQL logo"
     altText: "This is the Gato GraphQL logo"
