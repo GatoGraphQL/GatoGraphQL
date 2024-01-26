@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -12,8 +13,22 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
 class CreateMediaItemFromURLInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
+    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
+    }
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
         $this->stringScalarTypeResolver = $stringScalarTypeResolver;
@@ -45,7 +60,7 @@ class CreateMediaItemFromURLInputObjectTypeResolver extends AbstractInputObjectT
     {
         return [
             MutationInputProperties::FILENAME => $this->getStringScalarTypeResolver(),
-            MutationInputProperties::SOURCE => $this->getStringScalarTypeResolver(),
+            MutationInputProperties::SOURCE => $this->getURLScalarTypeResolver(),
         ];
     }
 
