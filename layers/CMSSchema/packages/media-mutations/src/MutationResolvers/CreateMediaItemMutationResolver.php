@@ -234,8 +234,8 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         $contents = $from->{MutationInputProperties::CONTENTS};
 
         return $this->getMediaTypeMutationAPI()->createMediaItemFromContents(
-            $contents->{MutationInputProperties::FILENAME},
             $contents->{MutationInputProperties::BODY},
+            $contents->{MutationInputProperties::FILENAME},
             $mediaItemData,
         );
     }

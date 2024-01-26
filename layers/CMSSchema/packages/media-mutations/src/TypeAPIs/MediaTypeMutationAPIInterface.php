@@ -23,8 +23,8 @@ interface MediaTypeMutationAPIInterface
      * @param array<string,mixed> $mediaItemData
      */
     public function createMediaItemFromContents(
-        string $filename,
         string $body,
+        string $filename,
         array $mediaItemData,
     ): string|int;
 }

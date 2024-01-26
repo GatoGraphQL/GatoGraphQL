@@ -87,8 +87,8 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      * @param array<string,mixed> $mediaItemData
      */
     public function createMediaItemFromContents(
-        string $filename,
         string $body,
+        string $filename,
         array $mediaItemData,
     ): string|int {
         $filename = $this->maybeAddExtensionToFilename(
