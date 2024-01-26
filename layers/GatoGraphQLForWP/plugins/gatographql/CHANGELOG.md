@@ -193,6 +193,39 @@ fragment MediaItemData on Media {
 }
 ```
 
+#### Documentation for new field `_dataMatrixOutputAsCSV` from the Helper Function Collection extension
+
+Field `_dataMatrixOutputAsCSV` has been added to the documentation for the Helper Function Collection extension.
+
+This field takes a matrix of data, and produces a CSV string. For instance, this query:
+
+```graphql
+csv: _dataMatrixOutputAsCSV(
+  fields: 
+    ["Name", "Surname", "Year"]
+  data: [
+    ["John", "Smith", 2003],
+    ["Pedro", "Gonzales", 2012],
+    ["Manuel", "Perez", 2008],
+    ["Jose", "Pereyra", 1999],
+    ["Jacinto", "Bloomberg", 1998],
+    ["Jun-E", "Song", 1983],
+    ["Juan David", "Santamaria", 1943],
+    ["Luis Miguel", null, 1966],
+  ]
+)
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "csv": "Name,Surname,Year\nJohn,Smith,2003\nPedro,Gonzales,2012\nManuel,Perez,2008\nJose,Pereyra,1999\nJacinto,Bloomberg,1998\nJun-E,Song,1983\nJuan David,Santamaria,1943\nLuis Miguel,,1966\n"
+  }
+}
+```
+
 ### Improvements
 
 - Validate the license keys when updating the plugin
