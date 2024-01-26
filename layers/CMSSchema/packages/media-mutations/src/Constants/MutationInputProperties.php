@@ -21,4 +21,5 @@ class MutationInputProperties
     public final const CONTENTS = 'contents';
 
     public final const BODY = 'body';
+    public final const SOURCE = 'source';
 }
