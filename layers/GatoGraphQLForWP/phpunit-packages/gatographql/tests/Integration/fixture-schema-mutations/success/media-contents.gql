@@ -23,7 +23,7 @@ mutation TestCreateMediaItemFromContents(
     }
   }
 
-  createMediaItem(input:{
+  createMediaItem(input: {
     from: {
       contents: {
         body: $body

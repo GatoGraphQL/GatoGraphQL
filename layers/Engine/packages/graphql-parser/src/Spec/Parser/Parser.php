@@ -275,8 +275,12 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RPAREN) && !$this->end()) {
             $this->eat(Token::TYPE_COMMA);
 
-            /** @var Token */
+            /** @var Token|null */
             $variableToken = $this->eat(Token::TYPE_VARIABLE);
+            if ($variableToken === null) {
+                // If the variable doesn't start with "$" => syntax error
+                throw $this->createUnexpectedException($this->peek());
+            }
             $nameToken     = $this->eatIdentifierToken();
             $this->eat(Token::TYPE_COLON);
 

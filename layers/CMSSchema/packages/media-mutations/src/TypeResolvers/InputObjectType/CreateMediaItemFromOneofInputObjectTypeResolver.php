@@ -5,28 +5,14 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
-    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
     private ?CreateMediaItemFromContentInputObjectTypeResolver $createMediaItemFromContentInputObjectTypeResolver = null;
+    private ?CreateMediaItemFromURLInputObjectTypeResolver $createMediaItemFromURLInputObjectTypeResolver = null;
 
-    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
-    {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
-    {
-        if ($this->urlScalarTypeResolver === null) {
-            /** @var URLScalarTypeResolver */
-            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
-            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        }
-        return $this->urlScalarTypeResolver;
-    }
     final public function setCreateMediaItemFromContentInputObjectTypeResolver(CreateMediaItemFromContentInputObjectTypeResolver $createMediaItemFromContentInputObjectTypeResolver): void
     {
         $this->createMediaItemFromContentInputObjectTypeResolver = $createMediaItemFromContentInputObjectTypeResolver;
@@ -40,6 +26,19 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
         }
         return $this->createMediaItemFromContentInputObjectTypeResolver;
     }
+    final public function setCreateMediaItemFromURLInputObjectTypeResolver(CreateMediaItemFromURLInputObjectTypeResolver $createMediaItemFromURLInputObjectTypeResolver): void
+    {
+        $this->createMediaItemFromURLInputObjectTypeResolver = $createMediaItemFromURLInputObjectTypeResolver;
+    }
+    final protected function getCreateMediaItemFromURLInputObjectTypeResolver(): CreateMediaItemFromURLInputObjectTypeResolver
+    {
+        if ($this->createMediaItemFromURLInputObjectTypeResolver === null) {
+            /** @var CreateMediaItemFromURLInputObjectTypeResolver */
+            $createMediaItemFromURLInputObjectTypeResolver = $this->instanceManager->getInstance(CreateMediaItemFromURLInputObjectTypeResolver::class);
+            $this->createMediaItemFromURLInputObjectTypeResolver = $createMediaItemFromURLInputObjectTypeResolver;
+        }
+        return $this->createMediaItemFromURLInputObjectTypeResolver;
+    }
 
     public function getTypeName(): string
     {
@@ -52,7 +51,7 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            MutationInputProperties::URL => $this->getURLScalarTypeResolver(),
+            MutationInputProperties::URL => $this->getCreateMediaItemFromURLInputObjectTypeResolver(),
             MutationInputProperties::CONTENTS => $this->getCreateMediaItemFromContentInputObjectTypeResolver(),
         ];
     }
