@@ -198,6 +198,10 @@ fragment MediaItemData on Media {
 - Validate the license keys when updating the plugin
 - Simplified the Tutorial section
 
+### Fixed
+
+- Bug where a syntax error on a variable definition in the GraphQL query was not validated
+
 ## 1.5.4 - 11/01/2024
 
 ### Fixed

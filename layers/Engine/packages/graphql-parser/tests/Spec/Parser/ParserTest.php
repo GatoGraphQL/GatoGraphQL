@@ -2187,4 +2187,28 @@ GRAPHQL;
         $parser = $this->getParser();
         $parser->parse('query ($variable: [[[String]]]){ query ( teas: $variable ) { alias: name } }');
     }
+
+    public function testVariableSyntaxIncorrect(): void
+    {
+        $this->expectException(SyntaxErrorParserException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['IDENTIFIER']))->getMessage());
+        $parser = $this->getParser();
+        $parser->parse('
+          query(variable: Int) {
+            id
+          }
+        ');
+    }
+
+    public function testVariableNameMissing(): void
+    {
+        $this->expectException(SyntaxErrorParserException::class);
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLParserErrorFeedbackItemProvider::class, GraphQLParserErrorFeedbackItemProvider::E_6, ['COLON']))->getMessage());
+        $parser = $this->getParser();
+        $parser->parse('
+          query($: Int) {
+            id
+          }
+        ');
+    }
 }
