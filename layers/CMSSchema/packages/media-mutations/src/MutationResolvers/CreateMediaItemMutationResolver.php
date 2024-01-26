@@ -221,9 +221,13 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
 
         if (isset($from->{MutationInputProperties::URL})) {
-            /** @var string */
+            /** @var stdClass */
             $url = $from->{MutationInputProperties::URL};
-            return $this->getMediaTypeMutationAPI()->createMediaItemFromURL($url, $mediaItemData);
+            return $this->getMediaTypeMutationAPI()->createMediaItemFromURL(
+                $url->{MutationInputProperties::URL},
+                $url->{MutationInputProperties::FILENAME},
+                $mediaItemData,
+            );
         }
 
         /** @var stdClass */

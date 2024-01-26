@@ -16,10 +16,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
     /**
      * @throws MediaItemCRUDMutationException In case of error
+     * @param string|null $filename Override the filename from the URL, or pass `null` to use filename from URL
      * @param array<string,mixed> $mediaItemData
      */
-    public function createMediaItemFromURL(string $url, array $mediaItemData): string|int
-    {
+    public function createMediaItemFromURL(
+        string $url,
+        ?string $filename,
+        array $mediaItemData,
+    ): string|int {
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         $downloadedFileOrError = \download_url($url);
