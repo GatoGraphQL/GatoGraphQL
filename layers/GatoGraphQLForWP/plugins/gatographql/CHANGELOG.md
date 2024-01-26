@@ -23,9 +23,11 @@ Running this query:
 
 ```graphql
 mutation CreateMediaItems {
-  fromURL: createMediaItem(input:{
+  fromURL: createMediaItem(input: {
     from: {
-      url: "https://gatographql.com/assets/GatoGraphQL-logo.png"
+      url: {
+        source: "https://gatographql.com/assets/GatoGraphQL-logo.png"
+      }
     }
     caption: "Gato GraphQL logo"
     altText: "This is the Gato GraphQL logo"
@@ -43,7 +45,7 @@ mutation CreateMediaItems {
     }
   }
 
-  directlyByContents: createMediaItem(input:{
+  directlyByContents: createMediaItem(input: {
     from: {
       contents: {
         body: """

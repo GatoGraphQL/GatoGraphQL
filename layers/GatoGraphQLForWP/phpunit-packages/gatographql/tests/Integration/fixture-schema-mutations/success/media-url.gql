@@ -1,6 +1,7 @@
 mutation TestCreateMediaItemFromURL(
   $username: String! = "editor",
   $url: URL!,
+  $filename: String,
   $authorID: ID,
   $caption: String,
   $customPostID: ID,
@@ -22,9 +23,12 @@ mutation TestCreateMediaItemFromURL(
     }
   }
 
-  createMediaItem(input:{
+  createMediaItem(input: {
     from: {
-      url: $url
+      url: {
+        source: $url
+        filename: $filename
+      }
     }
     authorID: $authorID
     caption: $caption
