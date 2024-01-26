@@ -242,6 +242,41 @@ air, moon roof, loaded",4799.00"""
 }
 ```
 
+### `_dataMatrixOutputAsCSV`
+
+Output data as a CSV.
+
+This field will take a matrix of data, and produce a CSV string. This string can then be uploaded to the Media Library, or uploaded to an S3 bucket or FileStack, or other.
+
+For instance, this query:
+
+```graphql
+csv: _dataMatrixOutputAsCSV(
+  fields: 
+    ["Name", "Surname", "Year"]
+  data: [
+    ["John", "Smith", 2003],
+    ["Pedro", "Gonzales", 2012],
+    ["Manuel", "Perez", 2008],
+    ["Jose", "Pereyra", 1999],
+    ["Jacinto", "Bloomberg", 1998],
+    ["Jun-E", "Song", 1983],
+    ["Juan David", "Santamaria", 1943],
+    ["Luis Miguel", null, 1966],
+  ]
+)
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "csv": "Name,Surname,Year\nJohn,Smith,2003\nPedro,Gonzales,2012\nManuel,Perez,2008\nJose,Pereyra,1999\nJacinto,Bloomberg,1998\nJun-E,Song,1983\nJuan David,Santamaria,1943\nLuis Miguel,,1966\n"
+  }
+}
+```
+
 ### `_urlAddParams`
 
 Adds params to a URL.
