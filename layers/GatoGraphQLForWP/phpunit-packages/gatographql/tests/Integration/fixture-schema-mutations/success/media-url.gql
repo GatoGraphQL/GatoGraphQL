@@ -24,7 +24,9 @@ mutation TestCreateMediaItemFromURL(
 
   createMediaItem(input:{
     from: {
-      url: $url
+      url: {
+        source: $url
+      }
     }
     authorID: $authorID
     caption: $caption
