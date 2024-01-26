@@ -379,6 +379,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
     /**
      * Proxy pattern: execute same function on the aliased ObjectTypeFieldResolver,
      * for the aliased $fieldName
+     * @param array<string,mixed> $fieldArgs
      */
     public function validateFieldArgValue(
         ObjectTypeResolverInterface $objectTypeResolver,
@@ -386,6 +387,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
         string $fieldArgName,
         mixed $fieldArgValue,
         AstInterface $astNode,
+        array $fieldArgs,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $aliasedObjectTypeFieldResolver = $this->getAliasedObjectTypeFieldResolver();
@@ -395,6 +397,7 @@ trait AliasSchemaObjectTypeFieldResolverTrait
             $fieldArgName,
             $fieldArgValue,
             $astNode,
+            $fieldArgs,
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
