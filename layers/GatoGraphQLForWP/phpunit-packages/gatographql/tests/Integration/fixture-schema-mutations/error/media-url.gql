@@ -23,7 +23,7 @@ mutation TestCreateMediaItemFromURL(
     }
   }
 
-  createMediaItem(input:{
+  createMediaItem(input: {
     from: {
       url: {
         source: $url
