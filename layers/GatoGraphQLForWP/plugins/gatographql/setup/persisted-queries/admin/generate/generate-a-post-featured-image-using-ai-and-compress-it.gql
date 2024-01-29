@@ -92,11 +92,11 @@ query ExportPostData(
     title
       @export(as: "postTitle")
     mediaItemFilename: rawTitle
-	    @default(value: "untitled", condition: IS_EMPTY)
-	    @strLowerCase
-	    @strSubstr(offset: 0, length: 20)
+      @default(value: "untitled", condition: IS_EMPTY)
+      @strLowerCase
+      @strSubstr(offset: 0, length: 20)
       @export(as: "filename")
-	    @remove
+      @remove
   }
 }
 
