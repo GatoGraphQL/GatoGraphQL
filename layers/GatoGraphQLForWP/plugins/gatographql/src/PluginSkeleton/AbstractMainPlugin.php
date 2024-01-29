@@ -2140,8 +2140,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                         'attrs' => [
                             AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                'admin/generate/generate-a-post-featured-image-using-ai-and-compress-it',
-                                VirtualTutorialLessons::GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_COMPRESS_IT,
+                                'admin/generate/generate-a-post-featured-image-using-ai-and-optimize-it',
+                                VirtualTutorialLessons::GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_OPTIMIZE_IT,
                             ),
                         ],
                     ],
