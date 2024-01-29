@@ -187,9 +187,9 @@ fragment MediaItemData on Media {
 }
 ```
 
-### Predefined persisted query "Generate a post's featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)"
+### Predefined persisted query "Generate a post's featured image using AI and optimize it"
 
-A new predefined Persisted query, with title "Generate a post's featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)", has been added.
+A new predefined Persisted query, with title "Generate a post's featured image using AI and optimize it", has been added.
 
 It uses generative AI to produce images for posts without a featured image, choosing from these service providers:
 

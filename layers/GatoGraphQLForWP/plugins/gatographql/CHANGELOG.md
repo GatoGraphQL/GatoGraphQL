@@ -11,7 +11,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Module "Media Mutations"
 - Mutation `createMediaItem`
 - Fields `myMediaItemCount`, `myMediaItems` and `myMediaItem`
-- Predefined persisted query "Generate a post's featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)"
+- Predefined persisted query "Generate a post's featured image using AI and optimize it"
 - Documentation for new field `_dataMatrixOutputAsCSV` from the Helper Function Collection extension
 
 ### Improvements

@@ -88,7 +88,7 @@ class VirtualTutorialLessonDataProvider
                 ]
             ],
             VirtualTutorialLessons::GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_COMPRESS_IT => [
-                \__('Generate a post\'s featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)', 'gatographql'),
+                \__('Generate a post\'s featured image using AI and optimize it', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
