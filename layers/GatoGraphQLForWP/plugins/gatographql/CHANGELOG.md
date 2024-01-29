@@ -18,6 +18,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Validate the license keys when updating the plugin
 - Simplified the Tutorial section
+- Prevent max execution time issues when installing plugin on (cheap) shared hosting (#2631)
+  - Validate that the PHP memory limit is at least 64MB to load Gato GraphQL
+  - Store the new plugin versions to DB only after generating the service container cache
+  - Disable the max execution time when compiling the container
 
 ### Fixed
 

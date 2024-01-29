@@ -177,6 +177,7 @@ You can even synchronize content across a network of sites, such as from an upst
 * Added documentation for new field `_dataMatrixOutputAsCSV` from the Helper Function Collection extension
 * Validate the license keys when updating the plugin
 * Simplified the Tutorial section
+* Prevent max execution time issues when installing plugin on (cheap) shared hosting (#2631)
 * Fixed bug where a syntax error on a variable definition in the GraphQL query was not validated
 
 = 1.5.4 =

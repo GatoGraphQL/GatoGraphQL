@@ -159,7 +159,17 @@ trait ContainerBuilderFactoryTrait
         foreach ($compilerPasses as $compilerPass) {
             $containerBuilder->addCompilerPass($compilerPass);
         }
-        // Compile the container
+
+        /**
+         * On a (cheap) shared hosting, this script might take too long
+         * to execute, reaching the max time limit, which is a fatal error.
+         * Avoid it!
+         *
+         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2631
+         */
+        \set_time_limit(0); // 0 = no limits
+
+        // Compile the container.
         $containerBuilder->compile();
 
         // Cache the container
