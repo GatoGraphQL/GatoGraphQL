@@ -1,4 +1,4 @@
-# Release Notes: 1.6
+# Release Notes: 2.0
 
 ## Added
 
