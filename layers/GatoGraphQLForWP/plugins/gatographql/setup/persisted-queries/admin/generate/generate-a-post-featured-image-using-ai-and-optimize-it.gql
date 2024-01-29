@@ -3,19 +3,24 @@
 # This Persisted GraphQL query uses generative AI to produce
 # images for posts without a featured image.
 #
-# It first checks if a post has a featured image. If it does not,
-# it creates one by calling one of the following generative AI
-# services (which one to use, that's your decision):
+# It uses any of these generative AI services (you must choose
+# which one to use):
 #
 #   - OpenAI's DALL-E
 #   - Stable Diffusion
 #
-# We must provide the corresponding API key for the chosen
-# service to use.
+# It first checks if a post has a featured image. If it does not,
+# it creates one by calling chosen generative AI service.
+#
+# To choose which service to use, simply provide its API key
+# as a variable (`$openAIAPIKey` or `$stableDiffusionAPIKey`).
 #
 # As the generative AI images are not optimized for the web,
-# the query can also send the newly-generated image to TinyPNG
-# to compress it. Providing an API key will use this service.
+# the query sends the newly-generated image to TinyPNG
+# to compress it.
+#
+# Provide an API key (as variable `$tinyPngAPIKey`) to
+# use this service.
 #
 # Finally, the query creates a new media item with the image, and
 # sets it as the post's featured image.
