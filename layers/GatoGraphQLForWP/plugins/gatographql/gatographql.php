@@ -58,6 +58,10 @@ if (class_exists(Plugin::class) && !PluginApp::getMainPluginManager()->assertIsV
 
 /**
  * Validate that there is enough memory to run the plugin.
+ *
+ * > Note that to have no memory limit, set this directive to -1.
+ *
+ * @see https://www.php.net/manual/en/ini.core.php#ini.sect.resource-limits
  */
 $phpMemoryLimit = \ini_get('memory_limit');
 $phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
