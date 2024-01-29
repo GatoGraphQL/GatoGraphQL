@@ -187,6 +187,21 @@ fragment MediaItemData on Media {
 }
 ```
 
+### Predefined persisted query "Generate a post's featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)"
+
+A new predefined Persisted query, with title "Generate a post's featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)", has been added.
+
+It uses generative AI to produce images for posts without a featured image, choosing from these service providers:
+
+- [OpenAI's DALL-E](https://openai.com/dall-e-3)
+- [Stable Diffusion](https://stablediffusionapi.com/)
+
+It first checks if a post has a featured image. If it does not, it creates one by calling the generative AI service. We must provide the corresponding API key for the chosen service to use.
+
+As the generative AI images are not optimized for the web, the query can also send the newly-generated image to [TinyPNG](https://tinypng.com/) to compress it. We must provide the API key to use it.
+
+Finally, the query creates a new media item with the image, and sets it as the post's featured image.
+
 ### Documentation for new field `_dataMatrixOutputAsCSV` from the Helper Function Collection extension
 
 Field `_dataMatrixOutputAsCSV` has been added to the documentation for the Helper Function Collection extension.
