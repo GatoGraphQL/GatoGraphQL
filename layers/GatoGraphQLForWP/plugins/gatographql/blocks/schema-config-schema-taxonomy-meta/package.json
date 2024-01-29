@@ -1,6 +1,6 @@
 {
     "name": "schema-config-schema-taxonomy-meta",
-    "version": "2.0.0",
+    "version": "2.1.0-dev",
     "description": "Configure taxonomy meta options in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
