@@ -239,9 +239,10 @@ csv: _dataMatrixOutputAsCSV(
 
 - Validate the license keys when updating the plugin
 - Simplified the Tutorial section
-- Validate that the PHP memory limit is at least 64MB to load Gato GraphQL (#2631)
-- Store the new plugin versions to DB only after generating the service container cache (#2631)
-- Disable the max execution time when compiling the container (#2631)
+- Prevent max execution time issues when installing plugin on (cheap) shared hosting (#2631)
+  - Validate that the PHP memory limit is at least 64MB to load Gato GraphQL
+  - Store the new plugin versions to DB only after generating the service container cache
+  - Disable the max execution time when compiling the container
 
 ## Fixed
 
