@@ -173,6 +173,7 @@ You can even synchronize content across a network of sites, such as from an upst
 * Added new module Media Mutations
 * Added mutation `createMediaItem`
 * Added fields `myMediaItemCount`, `myMediaItems` and `myMediaItem`
+* Added predefined persisted query "Generate a post's featured image using AI and optimize it"
 * Added documentation for new field `_dataMatrixOutputAsCSV` from the Helper Function Collection extension
 * Validate the license keys when updating the plugin
 * Simplified the Tutorial section
