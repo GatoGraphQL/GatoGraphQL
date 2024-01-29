@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Module Media Mutations
+- Module "Media Mutations"
 - Mutation `createMediaItem`
 - Fields `myMediaItemCount`, `myMediaItems` and `myMediaItem`
 - Documentation for new field `_dataMatrixOutputAsCSV` from the Helper Function Collection extension
