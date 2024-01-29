@@ -23,10 +23,13 @@
 # *********************************************************************
 # 
 # Variables:
-#   - postId: ID of the post
+#   - postID: ID of the post
 #   - openAIAPIKey: API key for OpenAI (https://platform.openai.com/api-keys)
 #   - stableDiffusionAPIKey: API key for Stable Diffusion (https://stablediffusionapi.com/dashboard/apikeys)
 #   - tinyPngAPIKey: API key for TinyPNG (https://tinify.com/dashboard/api)
+#   - imageSize: Size for OpenAI's generated image, among "256x256", "512x512", or "1024x1024" pixels
+#   - width: Width for Stable Diffusion's generated image
+#   - height: Height for Stable Diffusion's generated image
 #
 # *********************************************************************
 #
