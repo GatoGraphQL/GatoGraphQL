@@ -2,7 +2,7 @@
 
 ## Added
 
-### Module Media Mutations
+### Module "Media Mutations"
 
 The new module "Media Mutations" adds fields to the schema that upload media attachments, and query for the logged-in user's media attachments.
 
