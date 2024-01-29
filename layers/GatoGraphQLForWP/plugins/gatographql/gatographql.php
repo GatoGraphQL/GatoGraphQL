@@ -65,7 +65,7 @@ $minRequiredPHPMemoryLimit = '64M';
 $minRequiredPHPMemoryLimitInBytes = \wp_convert_hr_to_bytes($minRequiredPHPMemoryLimit);
 $phpMemoryLimit = \ini_get('memory_limit');
 $phpMemoryLimitInBytes = \wp_convert_hr_to_bytes($phpMemoryLimit);
-if ($phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
+if ($phpMemoryLimitInBytes !== -1 && $phpMemoryLimitInBytes < $minRequiredPHPMemoryLimitInBytes) {
     \add_action('admin_notices', function () use ($minRequiredPHPMemoryLimit, $phpMemoryLimit) {
         printf(
             '<div class="notice notice-error"><p>%s</p></div>',
