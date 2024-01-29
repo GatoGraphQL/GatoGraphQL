@@ -28,7 +28,7 @@
 # *********************************************************************
 # 
 # Variables:
-#   - postID: ID of the post
+#   - postId: ID of the post
 #   - openAIAPIKey: API key for OpenAI (https://platform.openai.com/api-keys)
 #   - stableDiffusionAPIKey: API key for Stable Diffusion (https://stablediffusionapi.com/dashboard/apikeys)
 #   - tinyPngAPIKey: API key for TinyPNG (https://tinify.com/dashboard/api)
@@ -85,11 +85,11 @@ query InitializeVariables(
 }
 
 query ExportPostData(
-  $postID: ID!
+  $postId: ID!
 )
   @depends(on: "InitializeVariables")
 {
-  post(by: { id: $postID }) {
+  post(by: { id: $postId }) {
     hasFeaturedImage
     isFeaturedImageMissing: hasFeaturedImage
       @boolOpposite
@@ -279,13 +279,13 @@ mutation CreateMediaItemFromGeneratedImage
 }
 
 mutation SetMediaItemAsPostFeaturedImage(
-  $postID: ID!
+  $postId: ID!
 )
   @depends(on: "CreateMediaItemFromGeneratedImage")
   @include(if: $isMediaItemCreated)
 {
   setFeaturedImageOnCustomPost(input: {
-    customPostID: $postID
+    customPostID: $postId
     mediaItemBy: { id: $mediaItemID }
   }) {
     status
