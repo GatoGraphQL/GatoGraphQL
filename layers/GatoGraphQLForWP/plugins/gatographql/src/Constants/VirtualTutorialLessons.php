@@ -17,4 +17,5 @@ class VirtualTutorialLessons
     public const FETCH_POST_LINKS = 'fetch-post-links';
     public const SEND_EMAIL_TO_ADMIN_ABOUT_POST = 'send-email-to-admin-about-post';
     public const ADD_COMMENTS_BLOCK_TO_POST = 'add-comments-block-to-post';
+    public const GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_COMPRESS_IT = 'generate-a-post-featured-image-using-ai-and-compress-it';
 }

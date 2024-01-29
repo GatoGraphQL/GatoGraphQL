@@ -87,6 +87,18 @@ class VirtualTutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
+            VirtualTutorialLessons::GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_COMPRESS_IT => [
+                \__('Generate a post\'s featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
         ];
     }
 }

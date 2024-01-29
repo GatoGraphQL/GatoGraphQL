@@ -629,6 +629,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
             '1.4' => $this->installPluginSetupDataForVersion1Dot4(...),
             '1.5' => $this->installPluginSetupDataForVersion1Dot5(...),
+            '1.6' => $this->installPluginSetupDataForVersion1Dot6(...),
         ];
         foreach ($versionCallbacks as $version => $callback) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
@@ -2116,6 +2117,35 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         ],
                     ],
                     ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                ])),
+            ]
+        ));
+    }
+
+    protected function installPluginSetupDataForVersion1Dot6(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+        \wp_insert_post(array_merge(
+            $adminPersistedQueryOptions,
+            [
+                'post_title' => \__('Generate a post\'s featured image using AI (OpenAI/Stable Diffusion) and compress it (TinyPNG)', 'gatographql'),
+                'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                    [
+                        'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                        'attrs' => [
+                            AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                'admin/generate/generate-a-post-featured-image-using-ai-and-compress-it',
+                                VirtualTutorialLessons::GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_COMPRESS_IT,
+                            ),
+                        ],
+                    ],
+                    ...$defaultSchemaConfigurationPersistedQueryBlocks,
                 ])),
             ]
         ));
