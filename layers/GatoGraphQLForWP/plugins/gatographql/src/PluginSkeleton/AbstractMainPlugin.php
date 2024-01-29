@@ -441,7 +441,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 foreach (array_merge($justFirstTimeActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
                     $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
                 }
-                update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
 
                 // Regenerate the timestamp, to generate the service container
                 $this->purgeContainer();
@@ -461,6 +460,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         $justFirstTimeActivatedExtensions,
                         $justUpdatedExtensions,
                     ): void {
+                        /**
+                         * Update the versions only now, as to be sure that
+                         * compiling the container has ended successfully.
+                         *
+                         * Otherwise, if it produces a fatal error (because the
+                         * script takes too long to execute), we don't want
+                         * to reference the cached container (which may contain
+                         * garbage)
+                         *
+                         * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2631
+                         */
+                        update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
+
                         if ($isMainPluginJustFirstTimeActivated) {
                             $this->pluginJustFirstTimeActivated();
                         } elseif ($isMainPluginJustUpdated) {
