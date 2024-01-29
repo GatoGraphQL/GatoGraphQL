@@ -247,3 +247,27 @@ csv: _dataMatrixOutputAsCSV(
 ## Fixed
 
 - Bug where a syntax error on a variable definition in the GraphQL query was not validated
+
+## Breaking changes
+
+### Field resolver's `validateFieldArgValue` method receives extra argument `$fieldArgs`
+
+It is now possible for a field to validate an input based on the value of another input.
+
+For this, method [`validateFieldArgValue` from `AbstractObjectTypeFieldResolver`](https://github.com/GatoGraphQL/GatoGraphQL/blob/949c63f9b163b106e517af69d62bdd8eb3dcbd73/layers/Engine/packages/component-model/src/FieldResolvers/ObjectType/AbstractObjectTypeFieldResolver.php#L649) now receives a `$fieldArgs` param, which contains the values for all inputs provided to the field:
+
+```php
+/**
+ * Validate the constraints for a field argument
+ * @param array<string,mixed> $fieldArgs
+ */
+public function validateFieldArgValue(
+    ObjectTypeResolverInterface $objectTypeResolver,
+    string $fieldName,
+    string $fieldArgName,
+    mixed $fieldArgValue,
+    AstInterface $astNode,
+    array $fieldArgs,
+    ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+): void;
+```

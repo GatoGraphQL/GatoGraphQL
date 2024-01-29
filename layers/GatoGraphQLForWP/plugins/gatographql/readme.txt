@@ -169,7 +169,7 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
-= 1.6.0 =
+= 2.0.0 =
 * Added new module Media Mutations
 * Added mutation `createMediaItem`
 * Added fields `myMediaItemCount`, `myMediaItems` and `myMediaItem`
@@ -179,6 +179,7 @@ You can even synchronize content across a network of sites, such as from an upst
 * Simplified the Tutorial section
 * Prevent max execution time issues when installing plugin on (cheap) shared hosting (#2631)
 * Fixed bug where a syntax error on a variable definition in the GraphQL query was not validated
+* Breaking change: Field resolver's `validateFieldArgValue` method receives extra argument `$fieldArgs`
 
 = 1.5.4 =
 * Fixed bug in resolver where innerBlocks is not set

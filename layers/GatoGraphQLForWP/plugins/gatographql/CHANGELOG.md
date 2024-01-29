@@ -29,6 +29,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Bug where a syntax error on a variable definition in the GraphQL query was not validated
 
+### Breaking changes
+
+- Field resolver's `validateFieldArgValue` method receives extra argument `$fieldArgs`
+
 ## 1.5.4 - 11/01/2024
 
 ### Fixed
