@@ -491,7 +491,7 @@ class Plugin extends AbstractMainPlugin
         string $relativeFilePath,
         string $extension,
     ): string {
-        $rootFolder = dirname(__DIR__, 2);
+        $rootFolder = dirname(__DIR__);
         $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
         return $persistedQueriesFolder . '/' . $relativeFilePath . '.' . $extension;
     }
