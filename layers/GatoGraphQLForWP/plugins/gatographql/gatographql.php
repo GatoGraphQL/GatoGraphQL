@@ -2,11 +2,13 @@
 /*
 Plugin Name: Gato GraphQL
 Plugin URI: https://gatographql.com
+GitHub Plugin URI: https://github.com/GatoGraphQL/GatoGraphQL
 Description: Interact with all your data in WordPress.
 Version: 2.1.0-dev
 Requires at least: 5.4
 Requires PHP: 8.1
 Author: Gato GraphQL
+Author URI: https://gatographql.com
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 Text Domain: gatographql
