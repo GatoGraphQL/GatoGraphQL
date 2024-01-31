@@ -31,7 +31,6 @@ use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutations
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
-use GatoGraphQL\GatoGraphQL\Services\DataComposers\GraphQLDocumentDataComposer;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
@@ -42,7 +41,6 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 
-use RuntimeException;
 use WP_Error;
 use WP_Term;
 
@@ -453,86 +451,6 @@ class Plugin extends AbstractMainPlugin
             $slug,
             \__('Webhook', 'gatographql'),
             \__('Process data from external services', 'gatographql'),
-        );
-    }
-
-    /**
-     * @param string|null $tutorialLessonSlug The slug of the tutorial lesson's .md file, same as in TutorialLessonDataProvider
-     * @param string[]|null $skipExtensionModules Extensions that must not be added to the Persisted Query (which are associated to the tutorial lesson)
-     */
-    protected function readSetupGraphQLPersistedQueryAndEncodeForOutput(
-        string $relativeFilePath,
-        ?string $tutorialLessonSlug = null,
-        ?array $skipExtensionModules = null
-    ): string {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLDocumentDataComposer */
-        $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
-
-        $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-        if ($tutorialLessonSlug !== null) {
-            $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
-                $graphQLPersistedQuery,
-                $tutorialLessonSlug,
-                $skipExtensionModules,
-            );
-        }
-        $graphQLPersistedQuery = $graphQLDocumentDataComposer->encodeGraphQLDocumentForOutput($graphQLPersistedQuery);
-        return $graphQLPersistedQuery;
-    }
-
-    protected function readSetupGraphQLPersistedQuery(string $relativeFilePath): string
-    {
-        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'gql');
-        return $this->readFile($persistedQueryFile);
-    }
-
-    protected function getSetupGraphQLPersistedQueryFilePath(
-        string $relativeFilePath,
-        string $extension,
-    ): string {
-        $rootFolder = dirname(__DIR__);
-        $persistedQueriesFolder = $rootFolder . '/setup/persisted-queries';
-        return $persistedQueriesFolder . '/' . $relativeFilePath . '.' . $extension;
-    }
-
-    protected function readSetupGraphQLVariablesJSONAndEncodeForOutput(string $relativeFilePath): string
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLDocumentDataComposer */
-        $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
-
-        $graphQLVariablesJSON = $this->readSetupGraphQLVariablesJSON($relativeFilePath);
-        $graphQLVariablesJSON = $graphQLDocumentDataComposer->encodeGraphQLVariablesJSONForOutput($graphQLVariablesJSON);
-        return $graphQLVariablesJSON;
-    }
-
-    protected function readSetupGraphQLVariablesJSON(string $relativeFilePath): string
-    {
-        $persistedQueryFile = $this->getSetupGraphQLPersistedQueryFilePath($relativeFilePath, 'var.json');
-        return $this->readFile($persistedQueryFile);
-    }
-
-    protected function readFile(string $filePath): string
-    {
-        $file = file_get_contents($filePath);
-        if ($file === false) {
-            throw new RuntimeException(
-                sprintf('Loading file \'%s\' failed', $filePath)
-            );
-        }
-        return $file;
-    }
-
-    /**
-     * @param array<array<string,mixed>> $blockDataItems
-     * @return array<array<string,mixed>>
-     */
-    protected function addInnerContentToBlockAtts(array $blockDataItems): array
-    {
-        return array_map(
-            fn (array $blockDataItem) => [...$blockDataItem, 'innerContent' => []],
-            $blockDataItems
         );
     }
 
