@@ -40,7 +40,6 @@ use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
-
 use WP_Error;
 use WP_Term;
 

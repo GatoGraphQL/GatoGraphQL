@@ -951,7 +951,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * Method to override.
-     * 
+     *
      * Provide the installation in stages, version by version, to
      * be able to execute it both when installing/activating the plugin,
      * or updating it to a new version with setup data.
