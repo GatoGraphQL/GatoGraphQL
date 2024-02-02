@@ -245,16 +245,16 @@ class Plugin extends AbstractMainPlugin
      * Retrieve the callback functions to execute for every version
      * of the main plugin, to install setup data.
      *
-     * @return array<string,callback> 
+     * @return array<string,callback[]> 
      */
     protected function getPluginSetupDataVersionCallbacks(): array
     {
         return [
-            '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
-            '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
-            '1.4' => $this->installPluginSetupDataForVersion1Dot4(...),
-            '1.5' => $this->installPluginSetupDataForVersion1Dot5(...),
-            '1.6' => $this->installPluginSetupDataForVersion1Dot6(...),
+            '1.1' => [$this->installPluginSetupDataForVersion1Dot1(...)],
+            '1.2' => [$this->installPluginSetupDataForVersion1Dot2(...)],
+            '1.4' => [$this->installPluginSetupDataForVersion1Dot4(...)],
+            '1.5' => [$this->installPluginSetupDataForVersion1Dot5(...)],
+            '1.6' => [$this->installPluginSetupDataForVersion1Dot6(...)],
         ];
     }
 

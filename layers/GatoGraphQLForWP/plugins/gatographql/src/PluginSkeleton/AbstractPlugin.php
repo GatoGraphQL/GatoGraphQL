@@ -460,11 +460,13 @@ abstract class AbstractPlugin implements PluginInterface
     protected function installPluginSetupData(?string $previousVersion = null): void
     {
         $versionCallbacks = $this->getPluginSetupDataVersionCallbacks();
-        foreach ($versionCallbacks as $version => $callback) {
+        foreach ($versionCallbacks as $version => $callbacks) {
             if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
                 continue;
             }
-            $callback();
+            foreach ($callbacks as $callback) {
+                $callback();
+            }
         }
     }
 
@@ -474,7 +476,7 @@ abstract class AbstractPlugin implements PluginInterface
      * Retrieve the callback functions to execute for every version
      * of the main plugin, to install setup data.
      *
-     * @return array<string,callback> 
+     * @return array<string,callback[]> 
      */
     protected function getPluginSetupDataVersionCallbacks(): array
     {
