@@ -476,10 +476,22 @@ abstract class AbstractPlugin implements PluginInterface
      * Retrieve the callback functions to execute for every version
      * of the main plugin, to install setup data.
      *
-     * @return array<string,callback[]> 
+     * @return array<string,callable[]>
      */
     protected function getPluginSetupDataVersionCallbacks(): array
     {
         return [];
+    }
+
+    /**
+     * @param array<array<string,mixed>> $blockDataItems
+     * @return array<array<string,mixed>>
+     */
+    protected function addInnerContentToBlockAtts(array $blockDataItems): array
+    {
+        return array_map(
+            fn (array $blockDataItem) => [...$blockDataItem, 'innerContent' => []],
+            $blockDataItems
+        );
     }
 }

@@ -943,16 +943,4 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         }
         return $file;
     }
-
-    /**
-     * @param array<array<string,mixed>> $blockDataItems
-     * @return array<array<string,mixed>>
-     */
-    protected function addInnerContentToBlockAtts(array $blockDataItems): array
-    {
-        return array_map(
-            fn (array $blockDataItem) => [...$blockDataItem, 'innerContent' => []],
-            $blockDataItems
-        );
-    }
 }
