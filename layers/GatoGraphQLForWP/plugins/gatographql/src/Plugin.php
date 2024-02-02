@@ -35,12 +35,12 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginSetupDataHelpers;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use WP_Error;
-use WP_Term;
 
 class Plugin extends AbstractMainPlugin
 {
@@ -262,7 +262,7 @@ class Plugin extends AbstractMainPlugin
     {
         // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
         $slug = 'nested-mutations';
-        $schemaConfigurationID = $this->getSchemaConfigurationID($slug);
+        $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
             return $schemaConfigurationID;
         }
@@ -294,27 +294,6 @@ class Plugin extends AbstractMainPlugin
         ];
     }
 
-    protected function getSchemaConfigurationID(string $slug): ?int
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLSchemaConfigurationCustomPostType */
-        $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
-
-        /** @var array<string|int> */
-        $schemaConfigurations = \get_posts([
-            'name' => $slug,
-            'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-            'post_status' => 'publish',
-            'numberposts' => 1,
-            'fields' => 'ids',
-        ]);
-        if (isset($schemaConfigurations[0])) {
-            return (int) $schemaConfigurations[0];
-        }
-
-        return null;
-    }
-
     /**
      * @param array<array<string,mixed>> $blockDataItems
      */
@@ -341,7 +320,7 @@ class Plugin extends AbstractMainPlugin
     {
         // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
         $slug = 'nested-mutations-entity-as-mutation-payload-type';
-        $schemaConfigurationID = $this->getSchemaConfigurationID($slug);
+        $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
             return $schemaConfigurationID;
         }
@@ -378,7 +357,7 @@ class Plugin extends AbstractMainPlugin
     protected function getAdminEndpointCategoryID(): ?int
     {
         $slug = 'admin';
-        $endpointCategoryID = $this->getEndpointCategoryID($slug);
+        $endpointCategoryID = PluginSetupDataHelpers::getEndpointCategoryID($slug);
         if ($endpointCategoryID !== null) {
             return $endpointCategoryID;
         }
@@ -388,21 +367,6 @@ class Plugin extends AbstractMainPlugin
             \__('Admin', 'gatographql'),
             \__('Internal admin tasks', 'gatographql'),
         );
-    }
-
-    protected function getEndpointCategoryID(string $slug): ?int
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-        /** @var GraphQLEndpointCategoryTaxonomy */
-        $graphQLEndpointCategoryTaxonomy = $instanceManager->getInstance(GraphQLEndpointCategoryTaxonomy::class);
-
-        /** @var WP_Term|false */
-        $endpointCategoryTerm = \get_term_by('slug', $slug, $graphQLEndpointCategoryTaxonomy->getTaxonomy());
-        if ($endpointCategoryTerm instanceof WP_Term) {
-            return $endpointCategoryTerm->term_id;
-        }
-
-        return null;
     }
 
     protected function createEndpointCategoryID(string $slug, string $name, string $description): ?int
@@ -428,7 +392,7 @@ class Plugin extends AbstractMainPlugin
     protected function getWebhookEndpointCategoryID(): ?int
     {
         $slug = 'webhook';
-        $endpointCategoryID = $this->getEndpointCategoryID($slug);
+        $endpointCategoryID = PluginSetupDataHelpers::getEndpointCategoryID($slug);
         if ($endpointCategoryID !== null) {
             return $endpointCategoryID;
         }
