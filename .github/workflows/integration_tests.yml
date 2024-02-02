@@ -13,7 +13,7 @@ jobs:
         name: Retrieve the GitHub Action artifact URLs to install in InstaWP
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -73,7 +73,7 @@ jobs:
             matrix:
                 instaWPConfig: ${{ fromJson(needs.provide_data.outputs.instawp_config_entries) }}
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 

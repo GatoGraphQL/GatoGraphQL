@@ -39,7 +39,7 @@ jobs:
         name: Provide configuration to generate plugins
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -79,7 +79,7 @@ jobs:
                 pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -160,7 +160,7 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Check if readme.txt exists
-                uses: andstor/file-existence-action@v2
+                uses: andstor/file-existence-action@v3
                 id: check_readme_exists
                 with:
                     files: "${{ matrix.pluginConfig.path }}/readme.txt"
@@ -229,7 +229,7 @@ jobs:
                     args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
 
             -   name: Upload plugin zip as artifact
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v4
                 with:
                     name: ${{ matrix.pluginConfig.zip_file }}
                     path: build/dist-plugin/

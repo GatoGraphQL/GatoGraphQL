@@ -19,7 +19,7 @@ jobs:
         name: Provide configuration of scoped releases
         runs-on: ubuntu-latest
         steps:
-            -   uses: actions/checkout@v3
+            -   uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
@@ -51,7 +51,7 @@ jobs:
                 pluginConfig: ${{ fromJson(needs.provide_data.outputs.plugin_config_entries) }}
         steps:
             -   name: Checkout code
-                uses: actions/checkout@v3
+                uses: actions/checkout@v4
                 with:
                     submodules: ${{ env.CHECKOUT_SUBMODULES }}
 
