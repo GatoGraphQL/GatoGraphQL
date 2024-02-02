@@ -229,7 +229,7 @@ jobs:
                     args: unzip -qq build/${{ matrix.pluginConfig.zip_file }}.zip -d build/dist-plugin/${{ matrix.pluginConfig.plugin_slug }}
 
             -   name: Upload plugin zip as artifact
-                uses: actions/upload-artifact@v3
+                uses: actions/upload-artifact@v4
                 with:
                     name: ${{ matrix.pluginConfig.zip_file }}
                     path: build/dist-plugin/
