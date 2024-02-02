@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
+use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
@@ -458,5 +459,25 @@ abstract class AbstractPlugin implements PluginInterface
      */
     protected function installPluginSetupData(?string $previousVersion = null): void
     {
+        $versionCallbacks = $this->getPluginSetupDataVersionCallbacks();
+        foreach ($versionCallbacks as $version => $callback) {
+            if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
+                continue;
+            }
+            $callback();
+        }
+    }
+
+    /**
+     * Method to override.
+     *
+     * Retrieve the callback functions to execute for every version
+     * of the main plugin, to install setup data.
+     *
+     * @return array<string,callback> 
+     */
+    protected function getPluginSetupDataVersionCallbacks(): array
+    {
+        return [];
     }
 }

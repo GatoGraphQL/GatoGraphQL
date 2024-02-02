@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
-use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
@@ -243,32 +242,22 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Provide the installation in stages, version by version, to
-     * be able to execute it both when installing/activating the plugin,
-     * or updating it to a new version with setup data.
+     * Method to override.
      *
-     * The plugin's setup data will be installed if:
+     * Retrieve the callback functions to execute for every version
+     * of the main plugin, to install setup data.
      *
-     * - $previousVersion = null => Activating the plugin for first time
-     * - $previousVersion < someVersion => Updating to a new version that has data to install
+     * @return array<string,callback> 
      */
-    protected function installPluginSetupData(?string $previousVersion = null): void
+    protected function getPluginSetupDataVersionCallbacks(): array
     {
-        parent::installPluginSetupData($previousVersion);
-
-        $versionCallbacks = [
+        return [
             '1.1' => $this->installPluginSetupDataForVersion1Dot1(...),
             '1.2' => $this->installPluginSetupDataForVersion1Dot2(...),
             '1.4' => $this->installPluginSetupDataForVersion1Dot4(...),
             '1.5' => $this->installPluginSetupDataForVersion1Dot5(...),
             '1.6' => $this->installPluginSetupDataForVersion1Dot6(...),
         ];
-        foreach ($versionCallbacks as $version => $callback) {
-            if ($previousVersion !== null && SemverWrapper::satisfies($previousVersion, '>= ' . $version)) {
-                continue;
-            }
-            $callback();
-        }
     }
 
     protected function getNestedMutationsSchemaConfigurationCustomPostID(): ?int
