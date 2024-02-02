@@ -1261,7 +1261,7 @@ class Plugin extends AbstractMainPlugin
             $adminPersistedQueryOptions,
             [
                 'post_title' => \__('Add comments block to post', 'gatographql'),
-                'post_slug' => 'add-comments-block-to-post',
+                'post_slug' => VirtualTutorialLessons::ADD_COMMENTS_BLOCK_TO_POST,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
