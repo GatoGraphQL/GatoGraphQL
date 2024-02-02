@@ -160,7 +160,7 @@ jobs:
                 working-directory: ${{ matrix.pluginConfig.path }}
 
             -   name: Check if readme.txt exists
-                uses: andstor/file-existence-action@v2
+                uses: andstor/file-existence-action@v3
                 id: check_readme_exists
                 with:
                     files: "${{ matrix.pluginConfig.path }}/readme.txt"
