@@ -242,8 +242,6 @@ class Plugin extends AbstractMainPlugin
     }
 
     /**
-     * Method to override.
-     *
      * Retrieve the callback functions to execute for every version
      * of the main plugin, to install setup data.
      *
