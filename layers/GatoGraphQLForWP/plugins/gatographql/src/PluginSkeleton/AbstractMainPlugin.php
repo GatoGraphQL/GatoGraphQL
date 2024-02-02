@@ -15,8 +15,6 @@ use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
@@ -483,53 +481,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Execute logic after the plugin/extension has just been activated
-     * (for first time)
-     */
-    public function pluginJustFirstTimeActivated(): void
-    {
-        parent::pluginJustFirstTimeActivated();
-
-        /**
-         * Taxonomies are registered on "init", hence must insert
-         * data only after that.
-         *
-         * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
-         */
-        \add_action(
-            'init',
-            function (): void {
-                $this->maybeInstallPluginSetupData();
-            },
-            PHP_INT_MAX
-        );
-    }
-
-    /**
      * Execute logic after the plugin/extension has just been updated
      */
     public function pluginJustUpdated(string $newVersion, string $previousVersion): void
     {
         parent::pluginJustUpdated($newVersion, $previousVersion);
-
-        /**
-         * Taxonomies are registered on "init", hence must insert
-         * data only after that.
-         *
-         * @see layers/GatoGraphQLForWP/plugins/gatographql/src/Services/Taxonomies/AbstractTaxonomy.php
-         */
-        \add_action(
-            'init',
-            function () use ($previousVersion): void {
-                // The version could contain the hash commit. Remove it!
-                $commitHashPos = strpos($previousVersion, self::PLUGIN_VERSION_COMMIT_HASH_IDENTIFIER);
-                if ($commitHashPos !== false) {
-                    $previousVersion = substr($previousVersion, 0, $commitHashPos);
-                }
-                $this->maybeInstallPluginSetupData($previousVersion);
-            },
-            PHP_INT_MAX
-        );
 
         $this->revalidateCommercialExtensionActivatedLicenses();
     }
@@ -918,51 +874,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 return $classes;
             }
         );
-    }
-
-    /**
-     * Install the initial plugin data
-     */
-    protected function maybeInstallPluginSetupData(?string $previousVersion = null): void
-    {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->installPluginSetupData()) {
-            return;
-        }
-
-        /**
-         * Use a transient to make sure that only one instance
-         * will install the data. Otherwise, two WP REST API
-         * requests happening simultaneously might both execute
-         * this logic
-         */
-        $transientName = 'gatographql-installing-plugin-setup-data';
-        $transient = \get_transient($transientName);
-        if ($transient !== false) {
-            // Another instance is executing this code right now
-            return;
-        }
-
-        \set_transient($transientName, true, 30);
-        $this->installPluginSetupData($previousVersion);
-        \delete_transient($transientName);
-    }
-
-    /**
-     * Method to override.
-     *
-     * Provide the installation in stages, version by version, to
-     * be able to execute it both when installing/activating the plugin,
-     * or updating it to a new version with setup data.
-     *
-     * The plugin's setup data will be installed if:
-     *
-     * - $previousVersion = null => Activating the plugin for first time
-     * - $previousVersion < someVersion => Updating to a new version that has data to install
-     */
-    protected function installPluginSetupData(?string $previousVersion = null): void
-    {
     }
 
     /**
