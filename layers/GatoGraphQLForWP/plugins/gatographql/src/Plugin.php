@@ -245,7 +245,7 @@ class Plugin extends AbstractMainPlugin
      * Retrieve the callback functions to execute for every version
      * of the main plugin, to install setup data.
      *
-     * @return array<string,callback[]> 
+     * @return array<string,callable[]> 
      */
     protected function getPluginSetupDataVersionCallbacks(): array
     {
