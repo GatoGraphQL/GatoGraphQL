@@ -20,12 +20,9 @@ class InternalGraphQLServerContainerCacheConfigurationManager extends ContainerC
      * The internal server is always private, and has the
      * same configuration as the default admin endpoint.
      */
-    public function getNamespace(): string
+    protected function getNamespaceSuffix(): string
     {
         $graphQLServerContextID = AppThreadHelper::getGraphQLServerContextUniqueID($this->pluginAppGraphQLServerContext);
-        return $this->makeNamespace(
-            $this->getNamespaceTimestampPrefix(),
-            'internal_' . $graphQLServerContextID
-        );
+        return 'internal_' . $graphQLServerContextID;
     }
 }

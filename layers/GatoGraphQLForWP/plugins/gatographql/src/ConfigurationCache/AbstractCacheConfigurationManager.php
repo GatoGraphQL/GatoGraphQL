@@ -59,6 +59,14 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getNamespace(): string
     {
+        return $this->makeNamespace(
+            $this->getNamespaceTimestampPrefix(),
+            $this->getNamespaceSuffix()
+        );
+    }
+
+    protected function getNamespaceSuffix(): string
+    {
         /**
          * admin/non-admin screens have different services enabled.
          *
@@ -108,10 +116,7 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              */
             $suffix = 'public';
         }
-        return $this->makeNamespace(
-            $this->getNamespaceTimestampPrefix(),
-            $suffix
-        );
+        return $suffix;
     }
 
     protected function makeNamespace(string $prefix, string $suffix): string
