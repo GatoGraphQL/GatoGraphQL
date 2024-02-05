@@ -43,6 +43,12 @@ interface AppThreadInterface
     public function getContext(): array;
 
     /**
+     * Combination of the Name and Context
+     * to uniquely identify the AppThread
+     */
+    public function getUniqueID(): string;
+
+    /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
      *

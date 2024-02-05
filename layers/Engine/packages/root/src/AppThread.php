@@ -46,6 +46,7 @@ class AppThread implements AppThreadInterface
     /** @var array<class-string<ModuleInterface>> */
     protected array $moduleClassesToInitialize = [];
     protected bool $isHTTPRequest;
+    protected ?string $uniqueID = null;
 
     /**
      * @param array<string,mixed> $context
@@ -109,6 +110,22 @@ class AppThread implements AppThreadInterface
     public function getContext(): array
     {
         return $this->context;
+    }
+
+    /**
+     * Combination of the Name and Context
+     * to uniquely identify the AppThread
+     */
+    public function getUniqueID(): string
+    {
+        if ($this->uniqueID === null) {
+            $this->uniqueID = \sprintf(
+                '%s:%s',
+                $this->getName() ?? '',
+                json_encode($this->getContext())
+            );
+        }
+        return $this->uniqueID;
     }
 
     protected function createAppLoader(): AppLoaderInterface
