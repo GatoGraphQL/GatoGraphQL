@@ -108,7 +108,10 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
              */
             $suffix = 'public';
         }
-        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), $suffix);
+        return $this->makeNamespace(
+            $this->getNamespaceTimestampPrefix(),
+            $suffix
+        );
     }
 
     protected function makeNamespace(string $prefix, string $suffix): string
