@@ -18,7 +18,7 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
      * Initialize the App with a new AppThread
      */
     public function __construct(
-        protected string|int|null $schemaConfigurationID
+        protected ?int $schemaConfigurationID
     )
     {
         /**
