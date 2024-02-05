@@ -427,7 +427,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  */
                 add_action(
                     PluginAppHooks::INITIALIZE_APP,
-                    function () use (
+                    function (string $pluginAppGraphQLServerName) use (
                         $isMainPluginJustFirstTimeActivated,
                         $isMainPluginJustUpdated,
                         $previousPluginVersions,
@@ -435,6 +435,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         $justFirstTimeActivatedExtensions,
                         $justUpdatedExtensions,
                     ): void {
+                        if (
+                            $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                            || $this->inititalizationException !== null
+                        ) {
+                            return;
+                        }
                         /**
                          * Update the versions only now, as to be sure that
                          * compiling the container has ended successfully.
