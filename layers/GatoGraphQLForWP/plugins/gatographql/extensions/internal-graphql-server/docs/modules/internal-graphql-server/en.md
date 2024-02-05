@@ -26,7 +26,8 @@ class GraphQLServer {
   public static function executeQuery(
       string $query,
       array $variables = [],
-      ?string $operationName = null
+      ?string $operationName = null,
+      ?int $schemaConfigurationID = null,
   ): Response {
     // ...
   }
@@ -38,7 +39,8 @@ class GraphQLServer {
   public static function executeQueryInFile(
       string $file,
       array $variables = [],
-      ?string $operationName = null
+      ?string $operationName = null,
+      ?int $schemaConfigurationID = null,
   ): Response {
     // ...
   }
