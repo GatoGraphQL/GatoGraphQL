@@ -589,10 +589,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         : $hookManager,
                     null,
                     $isInternalGraphQLServer
-                        ? new InternalGraphQLServerContainerBuilderFactory()
+                        ? new InternalGraphQLServerContainerBuilderFactory($pluginAppGraphQLServerContext)
                         : null,
                     $isInternalGraphQLServer
-                        ? new InternalGraphQLServerSystemContainerBuilderFactory()
+                        ? new InternalGraphQLServerSystemContainerBuilderFactory($pluginAppGraphQLServerContext)
                         : null
                 );
             },
