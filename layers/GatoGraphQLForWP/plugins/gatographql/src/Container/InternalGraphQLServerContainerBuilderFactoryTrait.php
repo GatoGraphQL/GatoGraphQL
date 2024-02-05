@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Container;
 
-use GatoGraphQL\GatoGraphQL\Facades\StateManagers\AppThreadServiceFacade;
+use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHelper;
 
 trait InternalGraphQLServerContainerBuilderFactoryTrait
 {
@@ -12,7 +12,6 @@ trait InternalGraphQLServerContainerBuilderFactoryTrait
         array $pluginAppGraphQLServerContext,
         string $containerClassName,
     ): string {
-        $appThreadService = AppThreadServiceFacade::getInstance();
-        return 'InternalGraphQLServer_' . $appThreadService->getGraphQLServerContextUniqueID($pluginAppGraphQLServerContext) . '_' . $containerClassName;
+        return 'InternalGraphQLServer_' . AppThreadHelper::getGraphQLServerContextUniqueID($pluginAppGraphQLServerContext) . '_' . $containerClassName;
     }
 }

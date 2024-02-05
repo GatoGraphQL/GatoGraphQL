@@ -46,9 +46,6 @@ services:
     GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationService
 
-    GatoGraphQL\GatoGraphQL\StateManagers\AppThreadServiceInterface:
-        class: \GatoGraphQL\GatoGraphQL\StateManagers\AppThreadService
-
     GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*
 

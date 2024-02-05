@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Facades;
 
-use GatoGraphQL\GatoGraphQL\Facades\StateManagers\AppThreadServiceFacade;
+use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHelper;
 use PoP\ComponentModel\Cache\CacheConfigurationManagerInterface;
 
 trait ContainerCacheConfigurationManagerFacadeTrait
@@ -19,8 +19,7 @@ trait ContainerCacheConfigurationManagerFacadeTrait
      */
     public static function getInstance(array $pluginAppGraphQLServerContext): CacheConfigurationManagerInterface
     {
-        $appThreadService = AppThreadServiceFacade::getInstance();
-        $graphQLServerContextUniqueID = $appThreadService->getGraphQLServerContextUniqueID($pluginAppGraphQLServerContext);
+        $graphQLServerContextUniqueID = AppThreadHelper::getGraphQLServerContextUniqueID($pluginAppGraphQLServerContext);
         if (!isset(self::$instances[$graphQLServerContextUniqueID])) {
             self::$instances[$graphQLServerContextUniqueID] = self::doGetInstance($pluginAppGraphQLServerContext);
         }
