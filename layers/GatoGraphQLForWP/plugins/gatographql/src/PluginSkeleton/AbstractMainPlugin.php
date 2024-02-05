@@ -641,11 +641,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName): void {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->configure($pluginAppGraphQLServerName);
+                $this->configure();
             },
             PluginLifecyclePriorities::CONFIGURE_PLUGIN
         );

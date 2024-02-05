@@ -221,7 +221,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Plugin configuration
      */
-    public function configure(string $pluginAppGraphQLServerName): void
+    public function configure(): void
     {
         /**
          * Configure the plugin. This defines hooks to set
