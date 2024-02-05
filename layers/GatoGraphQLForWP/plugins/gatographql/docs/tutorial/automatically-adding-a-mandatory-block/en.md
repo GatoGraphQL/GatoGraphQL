@@ -106,7 +106,7 @@ mutation MaybeInsertCommentsBlock($postId: ID!)
 
 ⚙️ **Configuration alert:**
 
-The [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) always [applies the Schema Configuration defined in its own Settings](https://gatographql.com/guides/config/defining-the-schema-configuration-for-the-internal-graphql-server/). This is the case even when executing `GraphQLServer::executePersistedQuery` (i.e. if the Persisted Query defines a Schema Configuration, this one is ignored).
+The [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) by default [applies the Schema Configuration defined in its own Settings](https://gatographql.com/guides/config/defining-the-schema-configuration-for-the-internal-graphql-server/).
 
 Then, for this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the **Internal GraphQL Server** needs to have [Nested Mutations](https://gatographql.com/guides/schema/using-nested-mutations/) enabled.
 

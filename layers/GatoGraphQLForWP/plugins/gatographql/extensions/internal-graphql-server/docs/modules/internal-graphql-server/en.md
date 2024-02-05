@@ -87,11 +87,9 @@ Please notice that class `GraphQLServer` is not ready before the WordPress core 
 
 <!-- ## Schema Configuration
 
-The internal GraphQL Server applies the Schema Configuration selected in the Settings page, under tab "Server Configuration > Internal GraphQL Server".
+By default, the internal GraphQL Server applies the Schema Configuration selected in the Settings page, under tab "Server Configuration > Internal GraphQL Server".
 
 ![Configuring the Internal GraphQL Server in the Settings](../../images/settings-schema-configuration-for-internal-graphql-server.png "Configuring the Internal GraphQL Server in the Settings")
-
-This is the case even when executing `GraphQLServer::executePersistedQuery` (i.e. if the Persisted Query defines a Schema Configuration, this one is ignored).
 
 This configuration also applies whenever the query executed against the internal GraphQL server was triggered by some other GraphQL query while being resolved in an endpoint with a different configuration (such as the public endpoint `graphql/`).
 
