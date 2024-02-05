@@ -21,7 +21,7 @@ trait ContainerCacheConfigurationManagerFacadeTrait
     {
         $appThreadService = AppThreadServiceFacade::getInstance();
         $graphQLServerContextUniqueID = $appThreadService->getGraphQLServerContextUniqueID($pluginAppGraphQLServerContext);
-        if (self::$instances[$graphQLServerContextUniqueID] === null) {
+        if (!isset(self::$instances[$graphQLServerContextUniqueID])) {
             self::$instances[$graphQLServerContextUniqueID] = self::doGetInstance($pluginAppGraphQLServerContext);
         }
         return self::$instances[$graphQLServerContextUniqueID];
