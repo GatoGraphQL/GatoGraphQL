@@ -6,5 +6,5 @@ namespace GatoGraphQL\GatoGraphQL\StateManagers;
 
 class AppThreadContext
 {
-    public final const PERSISTED_QUERY_ID = 'persistedQueryID';
+    public final const SCHEMA_CONFIGURATION_ID = 'schemaConfigurationID';
 }

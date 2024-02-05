@@ -15,7 +15,7 @@ class AppThreadService implements AppThreadServiceInterface
      */
     public function getGraphQLServerContextUniqueID(array $pluginAppGraphQLServerContext): string
     {
-        $persistedQueryID = $pluginAppGraphQLServerContext[AppThreadContext::PERSISTED_QUERY_ID] ?? null;
-        return $persistedQueryID ?? '0';
+        $schemaConfigurationID = $pluginAppGraphQLServerContext[AppThreadContext::SCHEMA_CONFIGURATION_ID] ?? null;
+        return $schemaConfigurationID ?? '0';
     }
 }
