@@ -8,6 +8,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Exception\ComponentNotExistsException;
+use PoP\Root\Helpers\AppThreadHelpers;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
@@ -119,10 +120,9 @@ class AppThread implements AppThreadInterface
     public function getUniqueID(): string
     {
         if ($this->uniqueID === null) {
-            $this->uniqueID = \sprintf(
-                '%s:%s',
-                $this->getName() ?? '',
-                json_encode($this->getContext())
+            $this->uniqueID = AppThreadHelpers::getUniqueID(
+                $this->getName(),
+                $this->getContext()
             );
         }
         return $this->uniqueID;

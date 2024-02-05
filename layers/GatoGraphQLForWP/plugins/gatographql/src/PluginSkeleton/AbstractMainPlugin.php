@@ -631,13 +631,17 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName): void {
+            /**
+             * @var array<string,mixed> $pluginAppGraphQLServerContext
+             */
+            function (string $pluginAppGraphQLServerName, array $pluginAppGraphQLServerContext): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->bootSystem($pluginAppGraphQLServerName);
+                $this->bootSystem($pluginAppGraphQLServerName, $pluginAppGraphQLServerContext);
             },
-            PluginLifecyclePriorities::BOOT_SYSTEM
+            PluginLifecyclePriorities::BOOT_SYSTEM,
+            2
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
@@ -715,15 +719,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * Boot the system
-     */
-    public function bootSystem(string $pluginAppGraphQLServerName): void
-    {
+     * 
+     * @param array<string,mixed> $pluginAppGraphQLServerContext
+    */
+     public function bootSystem(
+        string $pluginAppGraphQLServerName,
+        array $pluginAppGraphQLServerContext
+    ): void {
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
             $appLoader->setContainerCacheConfiguration(
-                $this->pluginInitializationConfiguration->getContainerCacheConfiguration($pluginAppGraphQLServerName)
+                $this->pluginInitializationConfiguration->getContainerCacheConfiguration(
+                    $pluginAppGraphQLServerName,
+                    $pluginAppGraphQLServerContext
+                )
             );
             $appLoader->bootSystem();
 

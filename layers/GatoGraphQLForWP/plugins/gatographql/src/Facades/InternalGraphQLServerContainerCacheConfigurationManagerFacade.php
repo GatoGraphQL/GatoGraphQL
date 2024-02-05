@@ -18,8 +18,11 @@ class InternalGraphQLServerContainerCacheConfigurationManagerFacade extends Abst
 {
     use ContainerCacheConfigurationManagerFacadeTrait;
 
-    protected static function createContainerCacheConfigurationManager(): ContainerCacheConfigurationManager
+    /**
+     * @param array<string,mixed> $pluginAppGraphQLServerContext
+     */
+    protected static function createContainerCacheConfigurationManager(array $pluginAppGraphQLServerContext): ContainerCacheConfigurationManager
     {
-        return new InternalGraphQLServerContainerCacheConfigurationManager();
+        return new InternalGraphQLServerContainerCacheConfigurationManager($pluginAppGraphQLServerContext);
     }
 }

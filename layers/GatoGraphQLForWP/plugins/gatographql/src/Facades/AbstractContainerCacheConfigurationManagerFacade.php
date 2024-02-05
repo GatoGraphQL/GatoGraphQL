@@ -23,18 +23,23 @@ abstract class AbstractContainerCacheConfigurationManagerFacade
      * We can create a new instance of these classes
      * because their instantiation produces no side-effects
      * (maybe that happens under `initialize`)
+     *
+     * @param array<string,mixed> $pluginAppGraphQLServerContext
      */
-    protected static function doGetInstance(): CacheConfigurationManagerInterface
+    protected static function doGetInstance(array $pluginAppGraphQLServerContext): CacheConfigurationManagerInterface
     {
         /**
          * Only this service will be required, and this one
          * will itself not require any other service
          */
         $endpointHelpers = new EndpointHelpers();
-        $containerCacheConfigurationManager = static::createContainerCacheConfigurationManager();
+        $containerCacheConfigurationManager = static::createContainerCacheConfigurationManager($pluginAppGraphQLServerContext);
         $containerCacheConfigurationManager->setEndpointHelpers($endpointHelpers);
         return $containerCacheConfigurationManager;
     }
 
-    abstract protected static function createContainerCacheConfigurationManager(): ContainerCacheConfigurationManager;
+    /**
+     * @param array<string,mixed> $pluginAppGraphQLServerContext
+     */
+    abstract protected static function createContainerCacheConfigurationManager(array $pluginAppGraphQLServerContext): ContainerCacheConfigurationManager;
 }
