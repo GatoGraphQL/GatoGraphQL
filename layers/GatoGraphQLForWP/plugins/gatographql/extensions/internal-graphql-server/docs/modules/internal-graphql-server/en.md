@@ -24,10 +24,10 @@ class GraphQLServer {
    * Execute a GraphQL query
    */
   public static function executeQuery(
-      string $query,
-      array $variables = [],
-      ?string $operationName = null,
-      ?int $schemaConfigurationID = null,
+    string $query,
+    array $variables = [],
+    ?string $operationName = null,
+    ?int $schemaConfigurationID = null,
   ): Response {
     // ...
   }
@@ -37,10 +37,10 @@ class GraphQLServer {
    * Execute a GraphQL query contained in a (`.gql`) file
    */
   public static function executeQueryInFile(
-      string $file,
-      array $variables = [],
-      ?string $operationName = null,
-      ?int $schemaConfigurationID = null,
+    string $file,
+    array $variables = [],
+    ?string $operationName = null,
+    ?int $schemaConfigurationID = null,
   ): Response {
     // ...
   }
@@ -50,9 +50,9 @@ class GraphQLServer {
    * Execute a persisted GraphQL query (providing its ID as an int, or slug as a string)
    */
   public static function executePersistedQuery(
-      string|int $persistedQueryIDOrSlug,
-      array $variables = [],
-      ?string $operationName = null
+    string|int $persistedQueryIDOrSlug,
+    array $variables = [],
+    ?string $operationName = null
   ): Response {
     // ...
   }
