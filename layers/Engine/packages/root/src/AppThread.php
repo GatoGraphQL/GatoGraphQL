@@ -47,8 +47,12 @@ class AppThread implements AppThreadInterface
     protected array $moduleClassesToInitialize = [];
     protected bool $isHTTPRequest;
 
+    /**
+     * @param array<string,mixed> $context
+     */
     public function __construct(
         private ?string $name = null,
+        private array $context = [],
     ) {
     }
 
@@ -93,6 +97,18 @@ class AppThread implements AppThreadInterface
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * Store properties for identifying across different
+     * INTERNAL GraphQL servers, by storing the
+     * persisted query for each in the context.
+     *
+     * @return array<string,mixed>
+     */
+    public function getContext(): array
+    {
+        return $this->context;
     }
 
     protected function createAppLoader(): AppLoaderInterface

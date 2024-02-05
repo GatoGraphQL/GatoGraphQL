@@ -34,6 +34,15 @@ interface AppThreadInterface
     public function getName(): ?string;
 
     /**
+     * Store properties for identifying across different
+     * INTERNAL GraphQL servers, by storing the
+     * persisted query for each in the context.
+     *
+     * @return array<string,mixed>
+     */
+    public function getContext(): array;
+
+    /**
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
      *
