@@ -8,6 +8,13 @@ use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadContext;
 
 trait InternalGraphQLServerContainerBuilderFactoryTrait
 {
+    public function getInternalGraphQLServerContainerClassName(
+        array $pluginAppGraphQLServerContext,
+        string $containerClassName,
+    ): string {
+        return 'InternalGraphQLServer_' . $this->getContextUniqueID($pluginAppGraphQLServerContext) . '_' . $containerClassName;
+    }
+
     /**
      * @param array<string,mixed> $pluginAppGraphQLServerContext
      */

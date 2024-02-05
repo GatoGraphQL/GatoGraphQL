@@ -20,6 +20,9 @@ class InternalGraphQLServerSystemContainerBuilderFactory extends SystemContainer
 
     public function getContainerClassName(): string
     {
-        return 'InternalGraphQLServer_' . $this->getContextUniqueID($this->pluginAppGraphQLServerContext) . '_' . parent::getContainerClassName();
+        return $this->getInternalGraphQLServerContainerClassName(
+            $this->pluginAppGraphQLServerContext,
+            parent::getContainerClassName()
+        );
     }
 }
