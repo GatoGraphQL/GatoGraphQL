@@ -2,19 +2,19 @@
     "data": {
         "postTags": [
             {
+                "id": 18,
+                "slug": "zoroastro",
+                "name": "zoroastro"
+            },
+            {
+                "id": 17,
+                "slug": "xcel",
+                "name": "xcel"
+            },
+            {
                 "id": 15,
                 "slug": "wordpress",
                 "name": "wordpress"
-            },
-            {
-                "id": 14,
-                "slug": "security",
-                "name": "Security"
-            },
-            {
-                "id": 13,
-                "slug": "release",
-                "name": "release"
             }
         ]
     }
