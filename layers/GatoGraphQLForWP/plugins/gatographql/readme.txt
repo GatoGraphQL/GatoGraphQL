@@ -169,6 +169,9 @@ You can even synchronize content across a network of sites, such as from an upst
 
 == Changelog ==
 
+= 2.1.0 =
+* Support passing the Schema Configuration to apply when invoking the Internal GraphQL Server
+
 = 2.0.0 =
 * Added new module Media Mutations
 * Added mutation `createMediaItem`

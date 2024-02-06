@@ -427,7 +427,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                  */
                 add_action(
                     PluginAppHooks::INITIALIZE_APP,
-                    function () use (
+                    function (string $pluginAppGraphQLServerName) use (
                         $isMainPluginJustFirstTimeActivated,
                         $isMainPluginJustUpdated,
                         $previousPluginVersions,
@@ -435,6 +435,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         $justFirstTimeActivatedExtensions,
                         $justUpdatedExtensions,
                     ): void {
+                        if (
+                            $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                            || $this->inititalizationException !== null
+                        ) {
+                            return;
+                        }
                         /**
                          * Update the versions only now, as to be sure that
                          * compiling the container has ended successfully.
@@ -550,7 +556,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          */
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName): void {
+            /**
+             * @var array<string,mixed> $pluginAppGraphQLServerContext
+             */
+            function (string $pluginAppGraphQLServerName, array $pluginAppGraphQLServerContext): void {
                 /**
                  * The "external" (i.e. standard) server has not been initialized yet,
                  * hence there can be no Initialization Exception
@@ -561,7 +570,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
-                App::setAppThread(new AppThread($pluginAppGraphQLServerName));
+                App::setAppThread(new AppThread($pluginAppGraphQLServerName, $pluginAppGraphQLServerContext));
                 $hookManager = new HookManager();
                 /**
                  * Boot the external GraphQL server only after the
@@ -580,14 +589,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                         : $hookManager,
                     null,
                     $isInternalGraphQLServer
-                        ? new InternalGraphQLServerContainerBuilderFactory()
+                        ? new InternalGraphQLServerContainerBuilderFactory($pluginAppGraphQLServerContext)
                         : null,
                     $isInternalGraphQLServer
-                        ? new InternalGraphQLServerSystemContainerBuilderFactory()
+                        ? new InternalGraphQLServerSystemContainerBuilderFactory($pluginAppGraphQLServerContext)
                         : null
                 );
             },
-            PluginLifecyclePriorities::INITIALIZE_APP
+            PluginLifecyclePriorities::INITIALIZE_APP,
+            2
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
@@ -621,21 +631,25 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName): void {
+            /**
+             * @var array<string,mixed> $pluginAppGraphQLServerContext
+             */
+            function (string $pluginAppGraphQLServerName, array $pluginAppGraphQLServerContext): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->bootSystem($pluginAppGraphQLServerName);
+                $this->bootSystem($pluginAppGraphQLServerName, $pluginAppGraphQLServerContext);
             },
-            PluginLifecyclePriorities::BOOT_SYSTEM
+            PluginLifecyclePriorities::BOOT_SYSTEM,
+            2
         );
         add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (string $pluginAppGraphQLServerName): void {
+            function (): void {
                 if ($this->inititalizationException !== null) {
                     return;
                 }
-                $this->configure($pluginAppGraphQLServerName);
+                $this->configure();
             },
             PluginLifecyclePriorities::CONFIGURE_PLUGIN
         );
@@ -705,15 +719,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * Boot the system
-     */
-    public function bootSystem(string $pluginAppGraphQLServerName): void
-    {
+     *
+     * @param array<string,mixed> $pluginAppGraphQLServerContext
+    */
+    public function bootSystem(
+        string $pluginAppGraphQLServerName,
+        array $pluginAppGraphQLServerContext
+    ): void {
         // If the service container has an error, Symfony DI will throw an exception
         try {
             // Boot all PoP components, from this plugin and all extensions
             $appLoader = App::getAppLoader();
             $appLoader->setContainerCacheConfiguration(
-                $this->pluginInitializationConfiguration->getContainerCacheConfiguration($pluginAppGraphQLServerName)
+                $this->pluginInitializationConfiguration->getContainerCacheConfiguration(
+                    $pluginAppGraphQLServerName,
+                    $pluginAppGraphQLServerContext
+                )
             );
             $appLoader->bootSystem();
 

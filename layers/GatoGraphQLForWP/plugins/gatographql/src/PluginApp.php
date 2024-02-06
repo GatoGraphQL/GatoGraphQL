@@ -29,7 +29,8 @@ class PluginApp implements PluginAppInterface
             'plugins_loaded',
             fn () => do_action(
                 PluginAppHooks::INITIALIZE_APP,
-                PluginAppGraphQLServerNames::EXTERNAL
+                PluginAppGraphQLServerNames::EXTERNAL,
+                []
             ),
             /**
              * Priority 1000: Give room for the extensions (as well as for

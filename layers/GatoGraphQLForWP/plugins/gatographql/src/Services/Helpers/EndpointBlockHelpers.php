@@ -102,7 +102,7 @@ class EndpointBlockHelpers
 
         // Return `-1` to allow to signify "Do not apply a Schema Configuration at all"
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE) {
-            return EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_NONE;
+            return $schemaConfiguration;
         }
 
         if ($schemaConfiguration === EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_INHERIT) {

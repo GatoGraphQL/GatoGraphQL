@@ -35,25 +35,24 @@ use PoP\Root\StateManagers\HookManagerInterface;
  */
 class AppThreadHookManagerWrapper implements HookManagerInterface
 {
-    private string $appThreadName;
+    private string $appThreadUniqueID;
 
     public function __construct(
         private HookManagerInterface $hookManager,
     ) {
-        $currentAppThreadName = App::getAppThread()->getName();
-        if ($currentAppThreadName === null) {
+        if (App::getAppThread()->getName() === null) {
             throw new ShouldNotHappenException(
                 \__('AppThread has no name', 'gatographql')
             );
         }
-        $this->appThreadName = $currentAppThreadName;
+        $this->appThreadUniqueID = App::getAppThread()->getUniqueID();
     }
 
     private function getAppThreadTag(string $tag): string
     {
         return sprintf(
             'AppThread:%s-%s',
-            $this->appThreadName,
+            $this->appThreadUniqueID,
             $tag
         );
     }

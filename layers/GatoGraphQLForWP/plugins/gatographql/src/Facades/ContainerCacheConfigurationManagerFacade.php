@@ -17,7 +17,10 @@ class ContainerCacheConfigurationManagerFacade extends AbstractContainerCacheCon
 {
     use ContainerCacheConfigurationManagerFacadeTrait;
 
-    protected static function createContainerCacheConfigurationManager(): ContainerCacheConfigurationManager
+    /**
+     * @param array<string,mixed> $pluginAppGraphQLServerContext
+     */
+    protected static function createContainerCacheConfigurationManager(array $pluginAppGraphQLServerContext): ContainerCacheConfigurationManager
     {
         return new ContainerCacheConfigurationManager();
     }

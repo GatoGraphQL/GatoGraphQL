@@ -59,56 +59,64 @@ abstract class AbstractCacheConfigurationManager implements CacheConfigurationMa
      */
     public function getNamespace(): string
     {
+        return $this->makeNamespace(
+            $this->getNamespaceTimestampPrefix(),
+            $this->getNamespaceSuffix()
+        );
+    }
+
+    protected function getNamespaceSuffix(): string
+    {
         /**
          * admin/non-admin screens have different services enabled.
          *
          * By checking for `is_admin` we are also store the container
          * for internal execution, via the `GraphQLServer` class, and
          * the cache will be shared with the "default" private endpoint.
+         */
+        if (!is_admin()) {
+            /**
+             * Single endpoint / Custom endpoints / Persisted queries
+             */
+            return 'public';
+        }
+
+        /**
+         * Admin endpoints.
          *
          * Notice that Persisted Queries in the admin are also handled
          * here, and not under "public", since they'll also have the services
          * registered on ConditionalOnContext\Admin (even if they won't
          * be used).
          */
-        if (is_admin()) {
-            /**
-             * Admin endpoints
-             */
-            $suffix = 'private';
+        $suffix = 'private';
 
-            /**
-             * Different admin endpoints might also have different services,
-             * hence cache a different container per endpointGroup.
-             *
-             * For instance, the WordPress editor can access the full schema,
-             * including "admin" fields, so it must be cached individually.
-             */
-            $endpointGroup = $this->getEndpointHelpers()->getAdminGraphQLEndpointGroup();
+        /**
+         * Different admin endpoints might also have different services,
+         * hence cache a different container per endpointGroup.
+         *
+         * For instance, the WordPress editor can access the full schema,
+         * including "admin" fields, so it must be cached individually.
+         */
+        $endpointGroup = $this->getEndpointHelpers()->getAdminGraphQLEndpointGroup();
 
-            /**             *
-             * All admin endpoints either have (such as PluginOwnUse,
-             * which adds a FieldResolver for field "schemaConfigurations")
-             * or are allowed to have (eg: Custom Admin Endpoint, via hook)
-             * a distinctive configuration of their own, so cache them
-             * independently.
-             *
-             * This also applies to Persisted Query endpoints. Normally,
-             * they are the same as the Default admin endpoint (they are
-             * applied the same Disabled Modules, so they have the same
-             * Service Container) with the unique exception of
-             * Low-Level Persisted Query Editing, so then can't reuse the cache.
-             */
-            if ($endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT) {
-                $suffix .= '_' . sanitize_file_name($endpointGroup);
-            }
-        } else {
-            /**
-             * Single endpoint / Custom endpoints / Persisted queries
-             */
-            $suffix = 'public';
+        /**             *
+         * All admin endpoints either have (such as PluginOwnUse,
+         * which adds a FieldResolver for field "schemaConfigurations")
+         * or are allowed to have (eg: Custom Admin Endpoint, via hook)
+         * a distinctive configuration of their own, so cache them
+         * independently.
+         *
+         * This also applies to Persisted Query endpoints. Normally,
+         * they are the same as the Default admin endpoint (they are
+         * applied the same Disabled Modules, so they have the same
+         * Service Container) with the unique exception of
+         * Low-Level Persisted Query Editing, so then can't reuse the cache.
+         */
+        if ($endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT) {
+            $suffix .= '_' . sanitize_file_name($endpointGroup);
         }
-        return $this->makeNamespace($this->getNamespaceTimestampPrefix(), $suffix);
+        return $suffix;
     }
 
     protected function makeNamespace(string $prefix, string $suffix): string

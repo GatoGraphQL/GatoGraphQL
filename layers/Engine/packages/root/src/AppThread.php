@@ -8,6 +8,7 @@ use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Exception\ComponentNotExistsException;
+use PoP\Root\Helpers\AppThreadHelpers;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
@@ -46,9 +47,14 @@ class AppThread implements AppThreadInterface
     /** @var array<class-string<ModuleInterface>> */
     protected array $moduleClassesToInitialize = [];
     protected bool $isHTTPRequest;
+    protected ?string $uniqueID = null;
 
+    /**
+     * @param array<string,mixed> $context
+     */
     public function __construct(
         private ?string $name = null,
+        private array $context = [],
     ) {
     }
 
@@ -93,6 +99,33 @@ class AppThread implements AppThreadInterface
     public function getName(): ?string
     {
         return $this->name;
+    }
+
+    /**
+     * Store properties for identifying across different
+     * INTERNAL GraphQL servers, by storing the
+     * persisted query for each in the context.
+     *
+     * @return array<string,mixed>
+     */
+    public function getContext(): array
+    {
+        return $this->context;
+    }
+
+    /**
+     * Combination of the Name and Context
+     * to uniquely identify the AppThread
+     */
+    public function getUniqueID(): string
+    {
+        if ($this->uniqueID === null) {
+            $this->uniqueID = AppThreadHelpers::getUniqueID(
+                $this->getName(),
+                $this->getContext()
+            );
+        }
+        return $this->uniqueID;
     }
 
     protected function createAppLoader(): AppLoaderInterface

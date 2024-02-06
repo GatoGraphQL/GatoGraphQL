@@ -221,7 +221,7 @@ abstract class AbstractPlugin implements PluginInterface
     /**
      * Plugin configuration
      */
-    public function configure(string $pluginAppGraphQLServerName): void
+    public function configure(): void
     {
         /**
          * Configure the plugin. This defines hooks to set
@@ -386,8 +386,16 @@ abstract class AbstractPlugin implements PluginInterface
             function (): void {
                 $this->maybeInstallPluginSetupData();
             },
-            PHP_INT_MAX
+            $this->getInstallPluginSetupDataInitHookPriority()
         );
+    }
+
+    /**
+     * Allow functionality to be executed after
+     */
+    protected function getInstallPluginSetupDataInitHookPriority(): int
+    {
+        return PHP_INT_MAX - 10;
     }
 
     /**
@@ -412,7 +420,7 @@ abstract class AbstractPlugin implements PluginInterface
                 }
                 $this->maybeInstallPluginSetupData($previousVersion);
             },
-            PHP_INT_MAX
+            $this->getInstallPluginSetupDataInitHookPriority()
         );
     }
 

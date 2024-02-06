@@ -6,6 +6,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.1.0 - DATE
 
+- Support passing the Schema Configuration to apply when invoking the Internal GraphQL Server
+
 ## 2.0.0 - 29/01/2014
 
 ### Added

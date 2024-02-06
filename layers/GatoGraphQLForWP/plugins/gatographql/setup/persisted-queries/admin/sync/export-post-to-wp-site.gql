@@ -19,7 +19,7 @@
 #   - update: Indicate if to update the post, or create a new one
 #   - postSlug: The slug of the post to export. In case of update, the post in the downstream site needs to have the same post slug
 #   - downstreamServerGraphQLEndpointURL: The GraphQL endpoint on the downstream WordPress site. It needs to have "Nested mutations" enabled
-#       eg: https://www.some-downstream-wp-site.com/graphql/nested-mutations/
+#       eg: https://www.some-downstream-wp-site.com/graphql/mutations-nested/
 #   - username: Credentials on the downstream WordPress site
 #   - userPassword: Credentials on the downstream WordPress site
 # 
