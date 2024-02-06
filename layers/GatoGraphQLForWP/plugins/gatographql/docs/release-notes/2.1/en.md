@@ -26,7 +26,7 @@ class GraphQLServer {
     array $variables = [],
     ?string $operationName = null,
 +   // Accept parameter 
-+    int|string|null $schemaConfigurationIDOrSlug = null,
++   int|string|null $schemaConfigurationIDOrSlug = null,
   ): Response {
     // ...
   }
