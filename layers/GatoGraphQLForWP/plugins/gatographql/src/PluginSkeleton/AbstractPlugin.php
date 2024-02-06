@@ -386,8 +386,16 @@ abstract class AbstractPlugin implements PluginInterface
             function (): void {
                 $this->maybeInstallPluginSetupData();
             },
-            PHP_INT_MAX
+            $this->getInstallPluginSetupDataInitHookPriority()
         );
+    }
+
+    /**
+     * Allow functionality to be executed after
+     */
+    protected function getInstallPluginSetupDataInitHookPriority(): int
+    {
+        return PHP_INT_MAX - 10;
     }
 
     /**
@@ -412,7 +420,7 @@ abstract class AbstractPlugin implements PluginInterface
                 }
                 $this->maybeInstallPluginSetupData($previousVersion);
             },
-            PHP_INT_MAX
+            $this->getInstallPluginSetupDataInitHookPriority()
         );
     }
 
