@@ -29,7 +29,7 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
          * 3. Restore the current AppThread
          */
         $currentAppThread = App::getAppThread();
-        $this->appThread = $this->initializeApp($schemaConfigurationID);
+        $this->appThread = $this->initializeApp();
         App::setAppThread($currentAppThread);
     }
 

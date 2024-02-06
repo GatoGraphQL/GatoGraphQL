@@ -8,6 +8,9 @@ use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHelper;
 
 trait InternalGraphQLServerContainerBuilderFactoryTrait
 {
+    /**
+     * @param array<string,mixed> $pluginAppGraphQLServerContext
+     */
     public function getInternalGraphQLServerContainerClassName(
         array $pluginAppGraphQLServerContext,
         string $containerClassName,

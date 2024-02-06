@@ -563,8 +563,7 @@ class AppLoader implements AppLoaderInterface
         // Allow to inject functionality
         App::doAction(sprintf(
             HookNamePlaceholders::APPLICATION_READY_FOR_APP_THREAD,
-            App::getAppThread()->getName() ?? '',
-            App::getAppThread()->getContext()
+            App::getAppThread()->getName() ?? ''
         ));
         App::doAction(HookNames::APPLICATION_READY);
     }
