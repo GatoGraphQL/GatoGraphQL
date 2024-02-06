@@ -71,7 +71,7 @@
     filter: {
       categories: {
         excludeBy: {
-          ids: [28, 33]
+          ids: [23, 32]
         }
         taxonomy: "dummy-category"
       }
@@ -177,7 +177,7 @@
   ) {
     ...CategoryData
   }
-  dummyCategoryByID: category(taxonomy: "dummy-category", by: { id: 27 }) {
+  dummyCategoryByID: category(taxonomy: "dummy-category", by: { id: 23 }) {
     ...CategoryData
   }
   dummyCategoryBySlug: category(taxonomy: "dummy-category", by: { slug: "nostradamus" }) {
