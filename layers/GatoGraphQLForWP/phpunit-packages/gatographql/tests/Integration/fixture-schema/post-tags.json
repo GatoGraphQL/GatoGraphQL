@@ -2,6 +2,32 @@
     "data": {
         "postTags": [
             {
+                "count": 0,
+                "description": "",
+                "id": 18,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "zoroastro",
+                "postCount": 0,
+                "posts": [],
+                "slug": "zoroastro",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/zoroastro\/",
+                "urlPath": "\/tag\/zoroastro\/"
+            },
+            {
+                "count": 0,
+                "description": "",
+                "id": 17,
+                "metaValue": null,
+                "metaValues": null,
+                "name": "xcel",
+                "postCount": 0,
+                "posts": [],
+                "slug": "xcel",
+                "url": "https:\/\/gatographql.lndo.site\/tag\/xcel\/",
+                "urlPath": "\/tag\/xcel\/"
+            },
+            {
                 "count": 2,
                 "description": "",
                 "id": 15,
@@ -163,24 +189,6 @@
                 "slug": "also-never-used",
                 "url": "https:\/\/gatographql.lndo.site\/tag\/also-never-used\/",
                 "urlPath": "\/tag\/also-never-used\/"
-            },
-            {
-                "count": 1,
-                "description": "",
-                "id": 8,
-                "metaValue": null,
-                "metaValues": null,
-                "name": "advanced",
-                "postCount": 1,
-                "posts": [
-                    {
-                        "id": 1121,
-                        "title": "Customize the schema for each client"
-                    }
-                ],
-                "slug": "advanced",
-                "url": "https:\/\/gatographql.lndo.site\/tag\/advanced\/",
-                "urlPath": "\/tag\/advanced\/"
             }
         ],
         "nonEmptyPostTags": [
