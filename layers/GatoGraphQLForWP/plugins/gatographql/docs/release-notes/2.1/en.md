@@ -6,7 +6,7 @@
 
 Gato GraphQL now supports indicating what Schema Configuration to apply when executing a query via an internal GraphQL Server (i.e. directly within the PHP application, not via an endpoint).
 
-The [Internal GraphQL Server extension](https://gatographql.com/extensions/internal-graphql-server/) makes use of this feature. It now accepts a `$schemaConfigurationID` parameter on `GraphQLServer::executeQuery` and `GraphQLServer::executeQueryInFile`, and already provides the persisted query's schema configuration on `GraphQLServer::executePersistedQuery`:
+The [Internal GraphQL Server extension](https://gatographql.com/extensions/internal-graphql-server/) makes use of this feature. It now accepts a `$schemaConfigurationIDOrSlug` parameter on `GraphQLServer::executeQuery` and `GraphQLServer::executeQueryInFile`, and already provides the persisted query's schema configuration on `GraphQLServer::executePersistedQuery`:
 
 ```diff
 class GraphQLServer {
