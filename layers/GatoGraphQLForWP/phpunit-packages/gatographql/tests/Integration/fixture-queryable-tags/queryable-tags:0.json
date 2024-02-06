@@ -32,11 +32,11 @@
         "path": [
           "post_format",
           "(taxonomy: post_format)",
-          "postFormat: tag(taxonomy: post_format, by: {id: 25}) { ... }",
+          "postFormat: tag(taxonomy: post_format, by: {id: 43}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postFormat: tag(taxonomy: post_format, by: {id: 25}) { ... }",
+        "field": "postFormat: tag(taxonomy: post_format, by: {id: 43}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },
@@ -85,6 +85,16 @@
     "postTags": [
       {
         "__typename": "PostTag",
+        "id": 18,
+        "name": "zoroastro"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 17,
+        "name": "xcel"
+      },
+      {
+        "__typename": "PostTag",
         "id": 15,
         "name": "wordpress"
       },
@@ -122,11 +132,6 @@
         "__typename": "PostTag",
         "id": 16,
         "name": "Also never used"
-      },
-      {
-        "__typename": "PostTag",
-        "id": 8,
-        "name": "advanced"
       }
     ],
     "postTag": {
@@ -134,8 +139,10 @@
       "id": 15,
       "name": "wordpress"
     },
-    "postTagCount": 9,
+    "postTagCount": 11,
     "postTagNames": [
+      "zoroastro",
+      "xcel",
       "wordpress",
       "Security",
       "release",
@@ -143,45 +150,44 @@
       "ideas",
       "GraphQL",
       "features",
-      "Also never used",
-      "advanced"
+      "Also never used"
     ],
     "dummyTags": [
       {
         "__typename": "GenericTag",
-        "id": 37,
+        "id": 36,
         "name": "Tango"
       },
       {
         "__typename": "GenericTag",
-        "id": 39,
+        "id": 34,
         "name": "Rock"
       },
       {
         "__typename": "GenericTag",
-        "id": 36,
+        "id": 29,
         "name": "Jazz"
       },
       {
         "__typename": "GenericTag",
-        "id": 38,
+        "id": 28,
         "name": "Hip Hop"
       },
       {
         "__typename": "GenericTag",
-        "id": 35,
+        "id": 27,
         "name": "Heavy metal"
       },
       {
         "__typename": "GenericTag",
-        "id": 40,
+        "id": 25,
         "name": "Classical"
       }
     ],
     "dummyTag": {
       "__typename": "GenericTag",
       "id": 36,
-      "name": "Jazz"
+      "name": "Tango"
     },
     "dummyTagCount": 6,
     "dummyTagNames": [

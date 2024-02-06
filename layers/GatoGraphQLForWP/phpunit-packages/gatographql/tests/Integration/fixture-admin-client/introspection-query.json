@@ -17469,9 +17469,44 @@
               "name": "url",
               "description": "Upload the attachment from a URL",
               "type": {
-                "kind": "SCALAR",
-                "name": "URL",
+                "kind": "INPUT_OBJECT",
+                "name": "CreateMediaItemFromURLInput",
                 "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CreateMediaItemFromURLInput",
+          "description": "Create and upload the attachment from a URL",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "filename",
+              "description": "File name (to override the one from the URL source)",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "source",
+              "description": "URL source",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "URL!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "URL",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             }
@@ -19921,7 +19956,7 @@
             },
             {
               "name": "mimeType",
-              "description": "Attachment mime type",
+              "description": "Mime type to use for the attachment, when this information can't be deduced from the filename (because it has no extension)",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",

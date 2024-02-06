@@ -420,6 +420,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CreateMediaItemFromURLInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CustomPostByInput"
         },
         {

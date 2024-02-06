@@ -2635,6 +2635,13 @@
           "description": null
         },
         {
+          "name": "CreateMediaItemFromURLInput",
+          "namespacedName": "CreateMediaItemFromURLInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Create and upload the attachment from a URL"
+        },
+        {
           "name": "CustomPostByInput",
           "namespacedName": "CustomPostByInput",
           "fields": null,

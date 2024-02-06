@@ -85,6 +85,16 @@
     "postTags": [
       {
         "__typename": "PostTag",
+        "id": 18,
+        "name": "zoroastro"
+      },
+      {
+        "__typename": "PostTag",
+        "id": 17,
+        "name": "xcel"
+      },
+      {
+        "__typename": "PostTag",
         "id": 15,
         "name": "wordpress"
       },
@@ -122,11 +132,6 @@
         "__typename": "PostTag",
         "id": 16,
         "name": "Also never used"
-      },
-      {
-        "__typename": "PostTag",
-        "id": 8,
-        "name": "advanced"
       }
     ],
     "postTag": {
@@ -134,8 +139,10 @@
       "id": 15,
       "name": "wordpress"
     },
-    "postTagCount": 9,
+    "postTagCount": 11,
     "postTagNames": [
+      "zoroastro",
+      "xcel",
       "wordpress",
       "Security",
       "release",
@@ -143,8 +150,7 @@
       "ideas",
       "GraphQL",
       "features",
-      "Also never used",
-      "advanced"
+      "Also never used"
     ],
     "dummyTags": null,
     "dummyTag": null,
@@ -153,23 +159,23 @@
     "postFormats": [
       {
         "__typename": "GenericTag",
-        "id": 25,
+        "id": 43,
         "name": "Link"
       },
       {
         "__typename": "GenericTag",
-        "id": 24,
+        "id": 42,
         "name": "Chat"
       },
       {
         "__typename": "GenericTag",
-        "id": 23,
+        "id": 41,
         "name": "Aside"
       }
     ],
     "postFormat": {
       "__typename": "GenericTag",
-      "id": 25,
+      "id": 43,
       "name": "Link"
     },
     "postFormatCount": 3,

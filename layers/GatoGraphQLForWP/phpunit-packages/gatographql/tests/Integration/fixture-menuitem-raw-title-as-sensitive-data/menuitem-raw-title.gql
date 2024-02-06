@@ -1,5 +1,5 @@
 {
-  menu(by: { id: 42 }) {
+  menu(by: { id: 46 }) {
     id
     items {
       id

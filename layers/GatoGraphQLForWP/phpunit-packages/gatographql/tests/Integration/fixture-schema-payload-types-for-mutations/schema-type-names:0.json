@@ -315,6 +315,9 @@
           "name": "CreateMediaItemFromInput"
         },
         {
+          "name": "CreateMediaItemFromURLInput"
+        },
+        {
           "name": "CustomPostByInput"
         },
         {

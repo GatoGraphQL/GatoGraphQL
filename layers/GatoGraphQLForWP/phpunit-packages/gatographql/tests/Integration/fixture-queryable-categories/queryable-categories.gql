@@ -17,7 +17,7 @@
   ) {
     ...CategoryData
   }
-  dummyCategory: category(taxonomy: "dummy-category", by: { id: 27 }) {
+  dummyCategory: category(taxonomy: "dummy-category", by: { id: 19 }) {
     ...CategoryData
   }
   dummyCategoryCount: categoryCount(taxonomy: "dummy-category")

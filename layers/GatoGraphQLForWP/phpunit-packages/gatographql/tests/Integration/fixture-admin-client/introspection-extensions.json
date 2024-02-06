@@ -9104,6 +9104,31 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CreateMediaItemFromURLInput",
+                    "extensions": {
+                        "elementName": "CreateMediaItemFromURLInput",
+                        "namespacedName": "CreateMediaItemFromURLInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "filename",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "source",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "CustomPostByInput",
                     "extensions": {
                         "elementName": "CustomPostByInput",
