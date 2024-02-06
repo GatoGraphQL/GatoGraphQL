@@ -27,7 +27,7 @@ class GraphQLServer {
     string $query,
     array $variables = [],
     ?string $operationName = null,
-    ?int $schemaConfigurationID = null,
+    int|string|null $schemaConfigurationIDOrSlug = null,
   ): Response {
     // ...
   }
@@ -40,7 +40,7 @@ class GraphQLServer {
     string $file,
     array $variables = [],
     ?string $operationName = null,
-    ?int $schemaConfigurationID = null,
+    int|string|null $schemaConfigurationIDOrSlug = null,
   ): Response {
     // ...
   }
