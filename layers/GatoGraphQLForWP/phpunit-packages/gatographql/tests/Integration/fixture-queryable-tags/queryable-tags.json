@@ -89,39 +89,39 @@
     "dummyTags": [
       {
         "__typename": "GenericTag",
-        "id": 37,
+        "id": 36,
         "name": "Tango"
       },
       {
         "__typename": "GenericTag",
-        "id": 39,
+        "id": 34,
         "name": "Rock"
       },
       {
         "__typename": "GenericTag",
-        "id": 36,
+        "id": 29,
         "name": "Jazz"
       },
       {
         "__typename": "GenericTag",
-        "id": 38,
+        "id": 28,
         "name": "Hip Hop"
       },
       {
         "__typename": "GenericTag",
-        "id": 35,
+        "id": 27,
         "name": "Heavy metal"
       },
       {
         "__typename": "GenericTag",
-        "id": 40,
+        "id": 25,
         "name": "Classical"
       }
     ],
     "dummyTag": {
       "__typename": "GenericTag",
       "id": 36,
-      "name": "Jazz"
+      "name": "Tango"
     },
     "dummyTagCount": 6,
     "dummyTagNames": [
@@ -135,23 +135,23 @@
     "postFormats": [
       {
         "__typename": "GenericTag",
-        "id": 25,
+        "id": 43,
         "name": "Link"
       },
       {
         "__typename": "GenericTag",
-        "id": 24,
+        "id": 42,
         "name": "Chat"
       },
       {
         "__typename": "GenericTag",
-        "id": 23,
+        "id": 41,
         "name": "Aside"
       }
     ],
     "postFormat": {
       "__typename": "GenericTag",
-      "id": 25,
+      "id": 43,
       "name": "Link"
     },
     "postFormatCount": 3,
