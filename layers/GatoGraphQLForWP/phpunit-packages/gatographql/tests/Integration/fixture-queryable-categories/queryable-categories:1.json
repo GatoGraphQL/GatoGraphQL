@@ -32,11 +32,11 @@
                 "path": [
                     "\"dummy-category\"",
                     "(taxonomy: \"dummy-category\")",
-                    "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 27}) { ... }",
+                    "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 19}) { ... }",
                     "query { ... }"
                 ],
                 "type": "QueryRoot",
-                "field": "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 27}) { ... }",
+                "field": "dummyCategory: category(taxonomy: \"dummy-category\", by: {id: 19}) { ... }",
                 "code": "PoPSchema\/SchemaCommons@e2"
             }
         },

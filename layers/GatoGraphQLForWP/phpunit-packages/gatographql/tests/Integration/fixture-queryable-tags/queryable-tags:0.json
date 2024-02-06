@@ -32,11 +32,11 @@
         "path": [
           "post_format",
           "(taxonomy: post_format)",
-          "postFormat: tag(taxonomy: post_format, by: {id: 25}) { ... }",
+          "postFormat: tag(taxonomy: post_format, by: {id: 43}) { ... }",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "postFormat: tag(taxonomy: post_format, by: {id: 25}) { ... }",
+        "field": "postFormat: tag(taxonomy: post_format, by: {id: 43}) { ... }",
         "code": "PoPSchema\/SchemaCommons@e2"
       }
     },

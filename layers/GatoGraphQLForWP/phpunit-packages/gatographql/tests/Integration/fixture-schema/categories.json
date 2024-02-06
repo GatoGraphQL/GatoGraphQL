@@ -1473,17 +1473,7 @@
                 "categories": []
             }
         ],
-        "customPostsByCategoryIDs": [],
-        "customPostsExcludeByCategoryIDs": [
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1649,
-                "title": "Nulla numquam totam eaque",
-                "categories": []
-            },
+        "customPostsByCategoryIDs": [
             {
                 "id": 1619,
                 "title": "Error debitis nulla vel est",
@@ -1542,6 +1532,86 @@
                 ]
             },
             {
+                "id": 1639,
+                "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae",
+                "categories": [
+                    {
+                        "id": 24
+                    },
+                    {
+                        "id": 30
+                    }
+                ]
+            },
+            {
+                "id": 1622,
+                "title": "Dolore ex et deleniti mollitia",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 30
+                    },
+                    {
+                        "id": 37
+                    }
+                ]
+            },
+            {
+                "id": 1648,
+                "title": "Nostrum consequatur non fugit vel",
+                "categories": [
+                    {
+                        "id": 24
+                    },
+                    {
+                        "id": 32
+                    },
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 1644,
+                "title": "Impedit eaque numquam quas inventore",
+                "categories": [
+                    {
+                        "id": 23
+                    },
+                    {
+                        "id": 24
+                    },
+                    {
+                        "id": 37
+                    },
+                    {
+                        "id": 40
+                    }
+                ]
+            },
+            {
+                "id": 1630,
+                "title": "Corrupti voluptatem asperiores nam exercitationem corrupti",
+                "categories": [
+                    {
+                        "id": 24
+                    }
+                ]
+            }
+        ],
+        "customPostsExcludeByCategoryIDs": [
+            {
+                "id": 1140,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
+                "id": 1649,
+                "title": "Nulla numquam totam eaque",
+                "categories": []
+            },
+            {
                 "id": 1660,
                 "title": "Dummy CPT with non server-side-registered block",
                 "categories": []
@@ -1555,6 +1625,37 @@
                 "id": 1636,
                 "title": "Ab blanditiis doloremque cupiditate inventore magni ducimus",
                 "categories": []
+            },
+            {
+                "id": 1641,
+                "title": "Impedit necessitatibus dolor est",
+                "categories": []
+            },
+            {
+                "id": 1613,
+                "title": "Dolor facilis repellat pariatur veniam at",
+                "categories": [
+                    {
+                        "id": 19
+                    }
+                ]
+            },
+            {
+                "id": 1620,
+                "title": "Dignissimos sed dolore aut",
+                "categories": [
+                    {
+                        "id": 19
+                    }
+                ]
+            },
+            {
+                "id": 1128,
+                "title": "HTTP caching improves performance"
+            },
+            {
+                "id": 1125,
+                "title": "Public or Private API mode, for extra security"
             }
         ],
         "customPostsByCategorySlugs": [
@@ -2028,7 +2129,18 @@
                 "urlPath": "\/dummy-category\/world-cup\/"
             }
         ],
-        "dummyCategoryByID": null,
+        "dummyCategoryByID": {
+            "count": 4,
+            "description": "",
+            "id": 23,
+            "metaValue": null,
+            "metaValues": null,
+            "name": "Brontosaurus",
+            "slug": "brontosaurus",
+            "slugPath": "absolute-brilliance\/brontosaurus",
+            "url": "https:\/\/gatographql.lndo.site\/dummy-category\/brontosaurus\/",
+            "urlPath": "\/dummy-category\/brontosaurus\/"
+        },
         "dummyCategoryBySlug": {
             "count": 3,
             "description": "",
