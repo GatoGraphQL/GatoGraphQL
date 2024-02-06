@@ -719,10 +719,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * Boot the system
-     * 
+     *
      * @param array<string,mixed> $pluginAppGraphQLServerContext
     */
-     public function bootSystem(
+    public function bootSystem(
         string $pluginAppGraphQLServerName,
         array $pluginAppGraphQLServerContext
     ): void {

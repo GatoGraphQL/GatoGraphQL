@@ -15,7 +15,7 @@ class InternalGraphQLServerSystemContainerBuilderFactory extends SystemContainer
      */
     public function __construct(
         private array $pluginAppGraphQLServerContext,
-    ){        
+    ) {
     }
 
     public function getContainerClassName(): string

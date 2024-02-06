@@ -19,8 +19,7 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
      */
     public function __construct(
         protected ?int $schemaConfigurationID
-    )
-    {
+    ) {
         /**
          * Steps:
          *

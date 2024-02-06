@@ -15,7 +15,7 @@ class InternalGraphQLServerContainerBuilderFactory extends ContainerBuilderFacto
      */
     public function __construct(
         private array $pluginAppGraphQLServerContext,
-    ){        
+    ) {
     }
 
     public function getContainerClassName(): string
