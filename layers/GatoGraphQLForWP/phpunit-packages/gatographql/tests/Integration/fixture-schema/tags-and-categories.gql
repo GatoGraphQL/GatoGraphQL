@@ -3,13 +3,13 @@
     filter: {
       tags: {
         includeBy: {
-          ids: [37, 39]
+          ids: [25, 29]
         }
         taxonomy: "dummy-tag"
       }
       categories: {
         includeBy: {
-          ids: [32, 36]
+          ids: [32, 37]
         }
         taxonomy: "dummy-category"
       }
