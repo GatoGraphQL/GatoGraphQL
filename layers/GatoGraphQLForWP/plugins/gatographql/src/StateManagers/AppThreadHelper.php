@@ -11,7 +11,14 @@ class AppThreadHelper
      */
     public static function getGraphQLServerContextUniqueID(array $pluginAppGraphQLServerContext): string
     {
-        $schemaConfigurationID = $pluginAppGraphQLServerContext[AppThreadContext::SCHEMA_CONFIGURATION_ID] ?? null;
-        return (string) ($schemaConfigurationID ?? 0);
+        $schemaConfigurationID = (int) $pluginAppGraphQLServerContext[AppThreadContext::SCHEMA_CONFIGURATION_ID] ?? 0;
+        /**
+         * Watch out! This method can be used to generate classnames!
+         * Hence, remove the "-" from a negative number.
+         */
+        if ($schemaConfigurationID < 0) {
+            return '_' . ((string) $schemaConfigurationID * -1);
+        }
+        return (string) $schemaConfigurationID;
     }
 }
