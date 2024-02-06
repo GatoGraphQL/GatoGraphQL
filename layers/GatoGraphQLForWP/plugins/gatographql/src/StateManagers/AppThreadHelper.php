@@ -15,6 +15,7 @@ class AppThreadHelper
         /**
          * Watch out! This method can be used to generate classnames!
          * Hence, remove the "-" from a negative number.
+         * In particualr: `-1` means "No schema config"
          */
         if ($schemaConfigurationID < 0) {
             return '_' . ((string) $schemaConfigurationID * -1);
