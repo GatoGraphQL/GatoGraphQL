@@ -126,6 +126,8 @@ trait ContainerBuilderFactoryTrait
                 if (Environment::isApplicationEnvironmentDev()) {
                     throw $e;
                 }
+                // Delete the cache file, and instantiate container as normal
+                \unlink($this->cacheFile);
                 $this->instance = new ContainerBuilder();
             }
         }
