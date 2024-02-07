@@ -14,6 +14,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - If initializing the service container from the cache fails, fallback to initializing PHP object from memory (#2638)
 
+### Fixed
+
+- Bug in multi-control JS component used by extensions (Access Control, Cache Control, and Field Deprecation) showing "undefined" on the block on the Schema Configuration (#2639)
+
 ## 2.0.0 - 29/01/2014
 
 ### Added
