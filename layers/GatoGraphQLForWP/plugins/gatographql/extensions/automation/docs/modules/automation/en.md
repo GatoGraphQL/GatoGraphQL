@@ -49,22 +49,35 @@ The parameters passed are:
 
 The following action hooks are provided, to be invoked from within [WP-Cron](https://developer.wordpress.org/plugins/cron/):
 
-1. `gatographql__execute_query`
-2. `gatographql__execute_persisted_query`
+### `gatographql__execute_query`
 
-These hooks receive the following parameters (in this same order):
+This hook receives the following parameters (in this same order):
 
 | # | Mandatory? | Param | Description |
 | --- | --- | --- | --- |
-| 1 | ✅ | `$query` for `gatographql__execute_query`, or<br/><br/>`$persistedQueryIDOrSlug` for `gatographql__execute_persisted_query` | The GraphQL query to execute with `gatographql__execute_query`, or<br/><br/>The Persisted Query ID (as an int) or slug (as a string) for `gatographql__execute_persisted_query` |
+| 1 | ✅ | `$query` | The GraphQL query to execute |
 | 2 | ❌ | `$variables` | GraphQL variables |
 | 3 | ❌ | `$operationName` | The operation name to execute |
 | 4 | ❌ | `$executeAsUser` | The user to log-in to execute the query |
+| 5 | ❌ | `$schemaConfigurationIDOrSlug` | The schema configuration ID (as an int) or slug (as a string) to apply when executing the query. Passing `null` will use the default value, and passing `-1` means "use no schema configuration" |
 
 The `$executeAsUser` parameter is needed if the query requires the user to be logged-in, such as when executing a mutation:
 
 - If provided, the user with given ID (as an int) or username (as a string) will be logged-in right before executing the GraphQL query, and logged-out immediately afterwards.
 - If not provided, no user will be logged-in when executing the query.
+
+### `gatographql__execute_persisted_query`
+
+This hook receives the following parameters (in this same order):
+
+| # | Mandatory? | Param | Description |
+| --- | --- | --- | --- |
+| 1 | ✅ | `$persistedQueryIDOrSlug` | The Persisted Query ID (as an int) or slug (as a string) |
+| 2 | ❌ | `$variables` | GraphQL variables |
+| 3 | ❌ | `$operationName` | The operation name to execute |
+| 4 | ❌ | `$executeAsUser` | The user to log-in to execute the query |
+
+Notice that the schema configuration to apply is already selected within the persisted query.
 
 ## Examples
 
