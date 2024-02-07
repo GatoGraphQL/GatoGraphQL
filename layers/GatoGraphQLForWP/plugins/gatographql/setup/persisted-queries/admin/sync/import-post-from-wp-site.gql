@@ -1,4 +1,12 @@
 ########################################################################
+# 
+# Variables:
+#   - upstreamServerGraphQLEndpointURL: The GraphQL endpoint on the upstream WordPress site
+#   - postSlug: The slug of the post to import
+# 
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query imports a post from some upstream
 # WordPress site into our local WordPress site.
@@ -20,12 +28,6 @@
 #
 # If any of the resources does not exist in the local site, the GraphQL query prints an error and halts the import.
 #
-# *********************************************************************
-# 
-# Variables:
-#   - upstreamServerGraphQLEndpointURL: The GraphQL endpoint on the upstream WordPress site
-#   - postSlug: The slug of the post to import
-# 
 # *********************************************************************
 #
 # More info:

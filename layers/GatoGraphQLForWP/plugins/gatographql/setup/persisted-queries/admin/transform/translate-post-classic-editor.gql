@@ -1,4 +1,13 @@
 ########################################################################
+# 
+# Variables:
+#   - postId: ID of the post to translate
+#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - update: Indicate if to update the post, or create a new one
+#
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query translates a "Classic editor" post to
 # the desired language.
@@ -8,13 +17,6 @@
 #
 #   - false (default): A new post (using the translated slug) with "draft" status
 #   - true: The same post
-#
-# *********************************************************************
-# 
-# Variables:
-#   - postId: ID of the post to translate
-#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
-#   - update: Indicate if to update the post, or create a new one
 #
 ########################################################################
 

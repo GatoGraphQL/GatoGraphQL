@@ -1,4 +1,12 @@
 ########################################################################
+# 
+# Variables:
+#   - mailchimpDataCenterCode: Code for the data center of your account on Mailchimp (See: https://mailchimp.com/developer/marketing/docs/fundamentals/#api-structure)
+#   - mailchimpAudienceID: Audience ID for the list on Mailchimp to which to subscribe the email
+#
+# *********************************************************************
+#
+# === Description ===
 #
 # This GraphQL query captures the email from the visitors who ticked
 # the "Subscribe to mailing list" checkbox from InstaWP (when creating
@@ -11,12 +19,6 @@
 #     define( 'MAILCHIMP_API_CREDENTIALS_USERNAME', '{ username }' );
 #     define( 'MAILCHIMP_API_CREDENTIALS_PASSWORD', '{ password }' );
 # 
-# *********************************************************************
-# 
-# Variables:
-#   - mailchimpDataCenterCode: Code for the data center of your account on Mailchimp (See: https://mailchimp.com/developer/marketing/docs/fundamentals/#api-structure)
-#   - mailchimpAudienceID: Audience ID for the list on Mailchimp to which to subscribe the email
-#
 # *********************************************************************
 #
 # More info:

@@ -1,4 +1,13 @@
 ########################################################################
+# 
+# Variables:
+#   - url: URL of the WordPress single post's RSS feed. It usually is the blog post URL + "/feed/rss/?withoutcomments=1"
+#       eg: https://newapi.getpop.org/blogroll/a-tale-of-two-cities-teaser/feed/rss/?withoutcomments=1
+#   - defaultAuthorUsername: Author username of the imported post, to be used whenever the username on the RSS feed does not exist on the local site
+#
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query imports a post from a WordPress RSS feed.
 #
@@ -8,13 +17,6 @@
 # It doesn't import the featured image, as it doesn't appear in the RSS.
 # It doesn't import categories or tags, as these are mixed under the
 # same "category" entry in the RSS.
-#
-# *********************************************************************
-# 
-# Variables:
-#   - url: URL of the WordPress single post's RSS feed. It usually is the blog post URL + "/feed/rss/?withoutcomments=1"
-#       eg: https://newapi.getpop.org/blogroll/a-tale-of-two-cities-teaser/feed/rss/?withoutcomments=1
-#   - defaultAuthorUsername: Author username of the imported post, to be used whenever the username on the RSS feed does not exist on the local site
 #
 ########################################################################
 

@@ -1,13 +1,15 @@
 ########################################################################
-#
-# This Persisted GraphQL query replaces all `http` URLs with `https`
-# in the image sources from the post's HTML
-#
-# *********************************************************************
 # 
 # Variables:
 #   - postId: ID of the post to modify
 # 
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query replaces all `http` URLs with `https`
+# in the image sources from the post's HTML
+#
 # *********************************************************************
 #
 # More info:

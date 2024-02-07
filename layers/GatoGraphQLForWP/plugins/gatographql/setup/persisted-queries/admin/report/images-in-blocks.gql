@@ -1,13 +1,15 @@
 ########################################################################
+# 
+# Variables:
+#   - postId: ID of the post to fetch the images from
+#
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query fetches the data for all blocks in the post
 # (including inner blocks) while filtering them by `core/image` type,
 # and extracts the URL property from each.
-#
-# *********************************************************************
-# 
-# Variables:
-#   - postId: ID of the post to fetch the images from
 #
 # *********************************************************************
 #

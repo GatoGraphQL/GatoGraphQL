@@ -1,14 +1,16 @@
 ########################################################################
+# 
+# Variables:
+#   - postId: ID of the post to modify
+# 
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query checks if block `wp:comments` has been
 # added to the post indicated by variable `$postId`.
 # If the block is missing, it then adds it at the bottom of the post.
 #
-# *********************************************************************
-# 
-# Variables:
-#   - postId: ID of the post to modify
-# 
 # *********************************************************************
 #
 # More info:

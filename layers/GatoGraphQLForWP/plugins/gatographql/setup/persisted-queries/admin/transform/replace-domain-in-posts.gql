@@ -1,14 +1,16 @@
 ########################################################################
-#
-# This Persisted GraphQL query  first filters all posts containing
-# "https://my-old-domain.com" in its content, and replaces this string
-# with "https://my-new-domain.com"
-#
-# *********************************************************************
 # 
 # Variables:
 #   - oldDomain: The old domain
 #   - newDomain: The new domain
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query  first filters all posts containing
+# "https://my-old-domain.com" in its content, and replaces this string
+# with "https://my-new-domain.com"
 #
 # *********************************************************************
 # 

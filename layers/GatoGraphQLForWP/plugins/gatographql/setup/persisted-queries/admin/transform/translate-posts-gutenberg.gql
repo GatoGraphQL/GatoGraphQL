@@ -1,4 +1,12 @@
 ########################################################################
+# 
+# Variables:
+#   - postIds: List of IDs of the posts to translate
+#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query translates multiple posts at once
 # (in bulk), while executing a single call to the Google Translate
@@ -8,12 +16,6 @@
 #
 # See Persisted Query "Translate post (Gutenberg)" for additional
 # documentation.
-#
-# *********************************************************************
-# 
-# Variables:
-#   - postIds: List of IDs of the posts to translate
-#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
 #
 # *********************************************************************
 # 

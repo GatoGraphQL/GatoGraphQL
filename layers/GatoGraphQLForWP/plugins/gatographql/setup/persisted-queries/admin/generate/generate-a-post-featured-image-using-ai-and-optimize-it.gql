@@ -1,4 +1,17 @@
 ########################################################################
+# 
+# Variables:
+#   - postId: ID of the post
+#   - openAIAPIKey: API key for OpenAI (https://platform.openai.com/api-keys)
+#   - stableDiffusionAPIKey: API key for Stable Diffusion (https://stablediffusionapi.com/dashboard/apikeys)
+#   - tinyPngAPIKey: API key for TinyPNG (https://tinify.com/dashboard/api)
+#   - imageSize: Size for OpenAI's generated image, among "256x256", "512x512", or "1024x1024" pixels
+#   - width: Width for Stable Diffusion's generated image
+#   - height: Height for Stable Diffusion's generated image
+#
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query uses generative AI to produce
 # images for posts without a featured image.
@@ -24,17 +37,6 @@
 #
 # Finally, the query creates a new media item with the image, and
 # sets it as the post's featured image.
-#
-# *********************************************************************
-# 
-# Variables:
-#   - postId: ID of the post
-#   - openAIAPIKey: API key for OpenAI (https://platform.openai.com/api-keys)
-#   - stableDiffusionAPIKey: API key for Stable Diffusion (https://stablediffusionapi.com/dashboard/apikeys)
-#   - tinyPngAPIKey: API key for TinyPNG (https://tinify.com/dashboard/api)
-#   - imageSize: Size for OpenAI's generated image, among "256x256", "512x512", or "1024x1024" pixels
-#   - width: Width for Stable Diffusion's generated image
-#   - height: Height for Stable Diffusion's generated image
 #
 # *********************************************************************
 #

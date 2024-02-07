@@ -1,16 +1,18 @@
 ########################################################################
-#
-# This Persisted GraphQL query retrieves a post, replaces all
-# matches of a list of regex strings with a list of strings
-# in the post's content and title, and stores the post again.
-#
-# *********************************************************************
 # 
 # Variables:
 #   - postId: The ID of the post to do the search and replace
 #   - searchRegex: The list of regex to search
 #   - replaceWith: The list of strings to replace with
 # 
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query retrieves a post, replaces all
+# matches of a list of regex strings with a list of strings
+# in the post's content and title, and stores the post again.
+#
 # *********************************************************************
 #
 # More info:

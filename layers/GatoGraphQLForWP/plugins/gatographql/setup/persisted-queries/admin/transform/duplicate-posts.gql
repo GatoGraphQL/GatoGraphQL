@@ -1,14 +1,16 @@
 ########################################################################
-#
-# This Persisted GraphQL query duplicates the posts retrieved via the
-# provided `$limit` and `$offset` variables (sorted by ascending ID).
-#
-# *********************************************************************
 # 
 # Variables:
 #   - limit: Number of posts to duplicate
 #   - offset: Position of the first post to duplicate
 # 
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query duplicates the posts retrieved via the
+# provided `$limit` and `$offset` variables (sorted by ascending ID).
+#
 # *********************************************************************
 #
 # More info:

@@ -1,4 +1,11 @@
 ########################################################################
+# 
+# Variables:
+#   - postId: ID of the post to modify
+# 
+# *********************************************************************
+#
+# === Description ===
 #
 # This Persisted GraphQL query does a regex search and replace to add
 # missing links in the post's HTML content.
@@ -13,11 +20,6 @@
 #
 #  <p>Visit my website: <a href="https://mysite.com" target="_blank">mysite.com</a>.</p>
 #
-# *********************************************************************
-# 
-# Variables:
-#   - postId: ID of the post to modify
-# 
 # *********************************************************************
 #
 # More info:

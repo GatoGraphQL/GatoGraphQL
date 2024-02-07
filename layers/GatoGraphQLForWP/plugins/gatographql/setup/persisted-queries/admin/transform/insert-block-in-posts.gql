@@ -1,16 +1,18 @@
 ########################################################################
-#
-# This Persisted GraphQL query identifies the nth block of a given type
-# ("wp:paragraph" by default) in all posts, and places the provided
-# custom block's HTML content right after it.
-#
-# *********************************************************************
 # 
 # Variables:
 #   - searchBlockType: After what block type to insert the new block ("wp:paragraph" by default)
 #   - injectAfterBlockCount: After how many occurrences of the block to search will the new block be placed
 #   - injectBlockMarkup: The HTML for the block to insert
 #       eg: <!-- mycompany:black-friday-campaign-video --><figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure><!-- /mycompany:black-friday-campaign-video -->
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query identifies the nth block of a given type
+# ("wp:paragraph" by default) in all posts, and places the provided
+# custom block's HTML content right after it.
 #
 # *********************************************************************
 # 
