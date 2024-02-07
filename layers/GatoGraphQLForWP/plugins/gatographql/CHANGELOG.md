@@ -6,7 +6,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.1.0 - DATE
 
+### Added
+
 - Support passing the Schema Configuration to apply when invoking the Internal GraphQL Server
+
+### Improvements
+
+- If initializing the service container from the cache fails, fallback to initializing PHP object from memory
 
 ## 2.0.0 - 29/01/2014
 
