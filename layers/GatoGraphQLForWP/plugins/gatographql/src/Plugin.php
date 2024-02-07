@@ -638,7 +638,7 @@ class Plugin extends AbstractMainPlugin
         $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         
         $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_NESTED_MUTATIONS;
-        if (PluginSetupDataHelpers::getCustomEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminCustomEndpointOptions,
                 [
@@ -674,7 +674,7 @@ class Plugin extends AbstractMainPlugin
          * Create the Persisted Queries
          */        
          $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POST;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -697,7 +697,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -723,7 +723,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_STRINGS_IN_POST;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -749,7 +749,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_STRINGS_IN_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -775,7 +775,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POST;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -801,7 +801,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -827,7 +827,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_ADD_MISSING_LINKS_IN_POST;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -850,7 +850,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_HTTP_WITH_HTTPS_IN_IMAGE_SOURCES_IN_POST;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -873,7 +873,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_DOMAIN_IN_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -896,7 +896,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_POST_SLUG_IN_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -922,7 +922,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_INSERT_BLOCK_IN_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -945,7 +945,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REMOVE_BLOCK_FROM_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -968,7 +968,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POST_GUTENBERG;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -991,7 +991,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_GUTENBERG;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1014,7 +1014,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_SITE;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1037,7 +1037,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_EXPORT_POST_TO_WORDPRESS_SITE;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1060,7 +1060,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_POSTS_BY_THUMBNAIL;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1083,7 +1083,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_USERS_BY_LOCALE;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1106,7 +1106,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_COMMENTS_BY_PERIOD;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1129,7 +1129,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_IMAGE_URLS_IN_BLOCKS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1154,7 +1154,7 @@ class Plugin extends AbstractMainPlugin
         $webhookPersistedQueryOptions = $this->getWebhookPersistedQueryOptions();
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGISTER_A_NEWSLETTER_SUBSCRIBER_FROM_INSTAWP_TO_MAILCHIMP;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $webhookPersistedQueryOptions,
                 [
@@ -1189,7 +1189,7 @@ class Plugin extends AbstractMainPlugin
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CONTENT_FROM_URL;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1215,7 +1215,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_RSS_FEED;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1243,7 +1243,7 @@ class Plugin extends AbstractMainPlugin
         $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks();
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1269,7 +1269,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_POST_LINKS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1292,7 +1292,7 @@ class Plugin extends AbstractMainPlugin
         }
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POST_CLASSIC_EDITOR;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1317,7 +1317,7 @@ class Plugin extends AbstractMainPlugin
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_CLASSIC_EDITOR;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1355,7 +1355,7 @@ class Plugin extends AbstractMainPlugin
         $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
         
         $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE;
-        if (PluginSetupDataHelpers::getCustomEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminCustomEndpointOptions,
                 [
@@ -1387,7 +1387,7 @@ class Plugin extends AbstractMainPlugin
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SEND_EMAIL_TO_ADMIN_ABOUT_POST;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1412,7 +1412,7 @@ class Plugin extends AbstractMainPlugin
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_ADD_COMMENTS_BLOCK_TO_POST;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
@@ -1446,7 +1446,7 @@ class Plugin extends AbstractMainPlugin
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_GENERATE_A_POSTS_FEATURED_IMAGE_USING_AI_AND_OPTIMIZE_IT;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug) === null) {
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
