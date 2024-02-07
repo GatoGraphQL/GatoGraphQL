@@ -21,11 +21,11 @@ const PostListPrintoutBody = ( props ) => {
 	const { items, selectedItems } = props;
 
 	/**
-	 * Create a dictionary, with ID as key, and title as the value
+	 * Create a dictionary, with ID as key (stored under `value`), and title as the value
 	 */
 	let itemsDictionary = {};
 	items.forEach(function(item) {
-		itemsDictionary[ item.id ] = item.title;
+		itemsDictionary[ item.value ] = item.title;
 	} );
 	return (
 		<>
