@@ -1289,7 +1289,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
-                'post_name' => VirtualTutorialLessons::ADD_COMMENTS_BLOCK_TO_POST,
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_ADD_COMMENTS_BLOCK_TO_POST,
                 'post_title' => \__('Add comments block to post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
