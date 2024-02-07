@@ -6,6 +6,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query removes a block of a given type
 # from all posts
 #

@@ -11,6 +11,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query uses generative AI to produce
 # images for posts without a featured image.
 #

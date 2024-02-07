@@ -7,6 +7,8 @@
 # 
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query retrieves a post, replaces all
 # occurrences of a list of strings with another list of strings
 # in the post's content and title, and stores the post again.

@@ -9,6 +9,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query imports posts from a CSV.
 #
 # It creates a new post with the title, excerpt, content and author
@@ -20,7 +22,7 @@
 #
 ########################################################################
 #
-# CSV Examples:
+# === CSV Examples ===
 #
 # The following CSV will import 3 posts:
 # 

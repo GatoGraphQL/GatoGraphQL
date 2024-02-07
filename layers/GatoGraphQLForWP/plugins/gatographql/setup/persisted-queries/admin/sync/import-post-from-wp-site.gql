@@ -6,6 +6,8 @@
 # 
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query imports a post from some upstream
 # WordPress site into our local WordPress site.
 #

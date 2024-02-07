@@ -8,6 +8,8 @@
 # 
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query adapts content in bulk, searching for
 # matches using regex in the title, content and excerpt for multiple
 # posts, and replacing them with another string.

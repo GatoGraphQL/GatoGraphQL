@@ -6,6 +6,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query retrieves all users with a certain locale,
 # providing a regex to identify them.
 #

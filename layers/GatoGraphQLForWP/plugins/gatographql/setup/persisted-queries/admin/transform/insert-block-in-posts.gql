@@ -8,6 +8,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query identifies the nth block of a given type
 # ("wp:paragraph" by default) in all posts, and places the provided
 # custom block's HTML content right after it.

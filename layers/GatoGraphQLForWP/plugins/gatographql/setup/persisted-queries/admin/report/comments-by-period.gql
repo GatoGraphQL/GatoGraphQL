@@ -1,5 +1,7 @@
 ########################################################################
 #
+# === Description ===
+#
 # This Persisted GraphQL query retrieves the number of comments
 # added to the site in several periods of time:
 #

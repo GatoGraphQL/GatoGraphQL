@@ -5,6 +5,8 @@
 # 
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query does a regex search and replace to add
 # missing links in the post's HTML content.
 #

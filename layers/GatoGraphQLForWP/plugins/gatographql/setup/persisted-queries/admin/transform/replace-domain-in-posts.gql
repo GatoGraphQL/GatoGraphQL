@@ -6,6 +6,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query  first filters all posts containing
 # "https://my-old-domain.com" in its content, and replaces this string
 # with "https://my-new-domain.com"

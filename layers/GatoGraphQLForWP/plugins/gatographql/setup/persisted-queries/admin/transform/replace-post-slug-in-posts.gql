@@ -6,6 +6,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # After changing the slug of a post or page, execute this Persisted
 # GraphQL query to convert all content to point to the new URL.
 #

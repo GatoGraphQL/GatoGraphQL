@@ -5,6 +5,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query sends an email to the admin user,
 # passing the contents of a new post.
 # 

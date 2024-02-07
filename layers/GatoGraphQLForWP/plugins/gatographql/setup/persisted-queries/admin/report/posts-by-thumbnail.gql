@@ -1,5 +1,7 @@
 ########################################################################
 #
+# === Description ===
+#
 # This Persisted GraphQL query retrieves all posts that have a
 # thumbnail, and those that do not
 #

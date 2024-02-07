@@ -10,6 +10,8 @@
 # 
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query exports a post from this WordPress site
 # into some downstream WordPress site.
 #

@@ -8,6 +8,8 @@
 # 
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query adapts content in bulk, updating the
 # title, content and excerpt for multiple posts with a single request.
 #

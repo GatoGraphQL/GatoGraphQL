@@ -7,6 +7,8 @@
 #
 # *********************************************************************
 #
+# === Description ===
+#
 # This Persisted GraphQL query translates a post to the desired language,
 # with full support for Gutenberg, for the following block types:
 # 
