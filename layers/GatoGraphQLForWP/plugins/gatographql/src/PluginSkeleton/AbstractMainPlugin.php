@@ -385,15 +385,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $registeredExtensionBaseNameInstances = PluginApp::getExtensionManager()->getExtensions();
 
                 // Check if the main plugin has been activated or updated
-                $isMainPluginJustFirstTimeActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
-                $isMainPluginJustUpdated = !$isMainPluginJustFirstTimeActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->getPluginVersionWithCommitHash();
+                $isMainPluginJustActivated = !isset($storedPluginVersions[$this->pluginBaseName]);
+                $isMainPluginJustUpdated = !$isMainPluginJustActivated && $storedPluginVersions[$this->pluginBaseName] !== $this->getPluginVersionWithCommitHash();
 
                 // Check if any extension has been activated or updated
-                $justFirstTimeActivatedExtensions = [];
+                $justActivatedExtensions = [];
                 $justUpdatedExtensions = [];
                 foreach ($registeredExtensionBaseNameInstances as $extensionBaseName => $extensionInstance) {
                     if (!isset($storedPluginVersions[$extensionBaseName])) {
-                        $justFirstTimeActivatedExtensions[$extensionBaseName] = $extensionInstance;
+                        $justActivatedExtensions[$extensionBaseName] = $extensionInstance;
                     } elseif ($storedPluginVersions[$extensionBaseName] !== $extensionInstance->getPluginVersionWithCommitHash()) {
                         $justUpdatedExtensions[$extensionBaseName] = $extensionInstance;
                     }
@@ -401,9 +401,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
                 // If there were no changes, nothing to do
                 if (
-                    !$isMainPluginJustFirstTimeActivated
+                    !$isMainPluginJustActivated
                     && !$isMainPluginJustUpdated
-                    && $justFirstTimeActivatedExtensions === []
+                    && $justActivatedExtensions === []
                     && $justUpdatedExtensions === []
                 ) {
                     return;
@@ -413,7 +413,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
                 // Recalculate the updated entry and update on the DB
                 $storedPluginVersions[$this->pluginBaseName] = $this->getPluginVersionWithCommitHash();
-                foreach (array_merge($justFirstTimeActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
+                foreach (array_merge($justActivatedExtensions, $justUpdatedExtensions) as $extensionBaseName => $extensionInstance) {
                     $storedPluginVersions[$extensionBaseName] = $extensionInstance->getPluginVersionWithCommitHash();
                 }
 
@@ -428,11 +428,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 add_action(
                     PluginAppHooks::INITIALIZE_APP,
                     function (string $pluginAppGraphQLServerName) use (
-                        $isMainPluginJustFirstTimeActivated,
+                        $isMainPluginJustActivated,
                         $isMainPluginJustUpdated,
                         $previousPluginVersions,
                         $storedPluginVersions,
-                        $justFirstTimeActivatedExtensions,
+                        $justActivatedExtensions,
                         $justUpdatedExtensions,
                     ): void {
                         if (
@@ -454,13 +454,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                          */
                         update_option(PluginOptions::PLUGIN_VERSIONS, $storedPluginVersions);
 
-                        if ($isMainPluginJustFirstTimeActivated) {
-                            $this->pluginJustFirstTimeActivated();
+                        if ($isMainPluginJustActivated) {
+                            $this->pluginJustActivated();
                         } elseif ($isMainPluginJustUpdated) {
                             $this->pluginJustUpdated($storedPluginVersions[$this->pluginBaseName], $previousPluginVersions[$this->pluginBaseName]);
                         }
-                        foreach ($justFirstTimeActivatedExtensions as $extensionBaseName => $extensionInstance) {
-                            $extensionInstance->pluginJustFirstTimeActivated();
+                        foreach ($justActivatedExtensions as $extensionBaseName => $extensionInstance) {
+                            $extensionInstance->pluginJustActivated();
                         }
                         foreach ($justUpdatedExtensions as $extensionBaseName => $extensionInstance) {
                             $extensionInstance->pluginJustUpdated($storedPluginVersions[$extensionBaseName], $previousPluginVersions[$extensionBaseName]);
