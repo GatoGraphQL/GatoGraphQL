@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Slugs;
+namespace GatoGraphQL\GatoGraphQL\Constants;
 
 class PluginSetupDataSlugs
 {
