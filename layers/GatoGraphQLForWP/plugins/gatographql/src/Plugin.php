@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
+use GatoGraphQL\GatoGraphQL\Constants\PluginSetupDataEntrySlugs;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Constants\TutorialLessons;
 use GatoGraphQL\GatoGraphQL\Constants\VirtualTutorialLessons;
@@ -260,8 +261,7 @@ class Plugin extends AbstractMainPlugin
 
     protected function getNestedMutationsSchemaConfigurationCustomPostID(): ?int
     {
-        // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
-        $slug = 'nested-mutations';
+        $slug = PluginSetupDataEntrySlugs::SCHEMA_CONFIGURATION_NESTED_MUTATIONS;
         $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
             return $schemaConfigurationID;
@@ -318,8 +318,7 @@ class Plugin extends AbstractMainPlugin
 
     protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID(): ?int
     {
-        // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
-        $slug = 'nested-mutations-entity-as-mutation-payload-type';
+        $slug = PluginSetupDataEntrySlugs::SCHEMA_CONFIGURATION_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE;
         $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
             return $schemaConfigurationID;
@@ -638,6 +637,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminCustomEndpointOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_NESTED_MUTATIONS,
                 'post_title' => \__('Nested mutations', 'gatographql'),
                 'post_excerpt' => \__('Private client to execute queries that need nested mutations', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -670,6 +670,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POST,
                 'post_title' => \__('Duplicate post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -688,6 +689,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POSTS,
                 'post_title' => \__('Duplicate posts', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -709,6 +711,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_STRINGS_IN_POST,
                 'post_title' => \__('Replace strings in post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -730,6 +733,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_STRINGS_IN_POSTS,
                 'post_title' => \__('Replace strings in posts', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -751,6 +755,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POST,
                 'post_title' => \__('Regex replace strings in post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -772,6 +777,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POSTS,
                 'post_title' => \__('Regex replace strings in posts', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -793,6 +799,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_ADD_MISSING_LINKS_IN_POST,
                 'post_title' => \__('Add missing links in post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -811,6 +818,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_HTTP_WITH_HTTPS_IN_IMAGE_SOURCES_IN_POST,
                 'post_title' => \__('Replace "http" with "https" in image sources in post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -829,6 +837,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_DOMAIN_IN_POSTS,
                 'post_title' => \__('Replace domain in posts', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -847,6 +856,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_POST_SLUG_IN_POSTS,
                 'post_title' => \__('Replace post slug in posts', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -868,6 +878,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_INSERT_BLOCK_IN_POSTS,
                 'post_title' => \__('Insert block in posts', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -886,6 +897,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REMOVE_BLOCK_FROM_POSTS,
                 'post_title' => \__('Remove block from posts', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -904,6 +916,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POST_GUTENBERG,
                 'post_title' => \__('Translate post (Gutenberg)', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -922,6 +935,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_GUTENBERG,
                 'post_title' => \__('Translate posts (Gutenberg)', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -940,6 +954,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_SITE,
                 'post_title' => \__('Import post from WordPress site', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -958,6 +973,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_EXPORT_POST_TO_WORDPRESS_SITE,
                 'post_title' => \__('Export post to WordPress site', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -976,6 +992,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_POSTS_BY_THUMBNAIL,
                 'post_title' => \__('Fetch posts by thumbnail', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -994,6 +1011,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_USERS_BY_LOCALE,
                 'post_title' => \__('Fetch users by locale', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1012,6 +1030,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_COMMENTS_BY_PERIOD,
                 'post_title' => \__('Fetch comments by period', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1030,6 +1049,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_IMAGE_URLS_IN_BLOCKS,
                 'post_title' => \__('Fetch image URLs in blocks', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1050,6 +1070,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $webhookPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGISTER_A_NEWSLETTER_SUBSCRIBER_FROM_INSTAWP_TO_MAILCHIMP,
                 'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                 'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. More info: gatographql.com/blog/instawp-gatographql', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -1080,6 +1101,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CONTENT_FROM_URL,
                 'post_title' => \__('Translate content from URL', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1101,6 +1123,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_RSS_FEED,
                 'post_title' => \__('Import post from WordPress RSS feed', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1123,6 +1146,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV,
                 'post_title' => \__('Import posts from CSV', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1144,6 +1168,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_POST_LINKS,
                 'post_title' => \__('Fetch post links', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1162,6 +1187,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POST_CLASSIC_EDITOR,
                 'post_title' => \__('Translate post (Classic editor)', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1181,6 +1207,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_CLASSIC_EDITOR,
                 'post_title' => \__('Translate posts (Classic editor)', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1214,6 +1241,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminCustomEndpointOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE,
                 'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
                 'post_excerpt' => \__('Private client to execute queries that create resources in bulk', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
@@ -1241,6 +1269,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_SEND_EMAIL_TO_ADMIN_ABOUT_POST,
                 'post_title' => \__('Send email to admin about post', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
@@ -1260,8 +1289,8 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_ADD_COMMENTS_BLOCK_TO_POST,
                 'post_title' => \__('Add comments block to post', 'gatographql'),
-                'post_slug' => VirtualTutorialLessons::ADD_COMMENTS_BLOCK_TO_POST,
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
                         'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1290,6 +1319,7 @@ class Plugin extends AbstractMainPlugin
         \wp_insert_post(array_merge(
             $adminPersistedQueryOptions,
             [
+                'post_name' => PluginSetupDataEntrySlugs::PERSISTED_QUERY_GENERATE_A_POSTS_FEATURED_IMAGE_USING_AI_AND_OPTIMIZE_IT,
                 'post_title' => \__('Generate a post\'s featured image using AI and optimize it', 'gatographql'),
                 'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                     [
