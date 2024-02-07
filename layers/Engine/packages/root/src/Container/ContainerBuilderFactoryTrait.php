@@ -111,9 +111,6 @@ trait ContainerBuilderFactoryTrait
         if (!$this->cached) {
             $this->instance = new ContainerBuilder();
         } else {
-            require_once $this->cacheFile;
-            /** @var class-string<ContainerBuilder> */
-            $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClassName}";
             /**
              * If for some reason the cached file was malformed,
              * and the class cannot be instantiated, this will
@@ -121,6 +118,9 @@ trait ContainerBuilderFactoryTrait
              * catch it for PROD and fallback to non-cached method.
              */
             try {
+                require_once $this->cacheFile;
+                /** @var class-string<ContainerBuilder> */
+                $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClassName}";
                 $this->instance = new $containerFullyQuantifiedClass();
             } catch (Exception $e) {
                 if (Environment::isApplicationEnvironmentDev()) {
