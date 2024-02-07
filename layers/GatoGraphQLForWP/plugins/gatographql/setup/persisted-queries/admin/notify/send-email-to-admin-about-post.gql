@@ -1,15 +1,15 @@
 ########################################################################
+# 
+# Variables:
+#   - postId: ID of the post
+#
+# *********************************************************************
 #
 # This Persisted GraphQL query sends an email to the admin user,
 # passing the contents of a new post.
 # 
 # It is useful to trigger with automation, to notify of the creation
 # of a new post on the site.
-#
-# *********************************************************************
-# 
-# Variables:
-#   - postId: ID of the post
 #
 # *********************************************************************
 #

@@ -1,4 +1,13 @@
 ########################################################################
+# 
+# Variables:
+#   - url: URL of the CSV
+#   - titleColumn: Column name (on the CSV header) for the post's title. Default: "Title"
+#   - excerptColumn: Column name (on the CSV header) for the post's excerpt. Default: "Excerpt"
+#   - contentColumn: Column name (on the CSV header) for the post's content. Default: "Content"
+#   - authorUsernameColumn: Column name (on the CSV header) for the post author's username. Default: "Author"
+#
+# *********************************************************************
 #
 # This Persisted GraphQL query imports posts from a CSV.
 #
@@ -43,15 +52,6 @@
 #     <!-- wp:image {""id"":5,""sizeSlug"":""large""} -->
 #     <figure class=""wp-block-image size-large""><img src=""https://mysite.com/wp-content/uploads/wordpress0.jpg"" alt=""wordpress logo"" class=""wp-image-5""/></figure>
 #     <!-- /wp:image -->",admin
-#
-# *********************************************************************
-# 
-# Variables:
-#   - url: URL of the CSV
-#   - titleColumn: Column name (on the CSV header) for the post's title. Default: "Title"
-#   - excerptColumn: Column name (on the CSV header) for the post's excerpt. Default: "Excerpt"
-#   - contentColumn: Column name (on the CSV header) for the post's content. Default: "Content"
-#   - authorUsernameColumn: Column name (on the CSV header) for the post author's username. Default: "Author"
 #
 ########################################################################
 

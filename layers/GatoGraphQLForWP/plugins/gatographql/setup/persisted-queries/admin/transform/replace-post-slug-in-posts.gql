@@ -1,13 +1,13 @@
 ########################################################################
-#
-# After changing the slug of a post or page, execute this Persisted
-# GraphQL query to convert all content to point to the new URL.
-#
-# *********************************************************************
 # 
 # Variables:
 #   - oldPostSlug: The old post or page slug
 #   - newPostSlug: The new post or page slug
+#
+# *********************************************************************
+#
+# After changing the slug of a post or page, execute this Persisted
+# GraphQL query to convert all content to point to the new URL.
 #
 # *********************************************************************
 # 

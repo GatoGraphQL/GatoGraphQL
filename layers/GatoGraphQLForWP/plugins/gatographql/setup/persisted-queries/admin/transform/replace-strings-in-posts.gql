@@ -1,9 +1,4 @@
 ########################################################################
-#
-# This Persisted GraphQL query adapts content in bulk, updating the
-# title, content and excerpt for multiple posts with a single request.
-#
-# *********************************************************************
 # 
 # Variables:
 #   - limit: Number of posts to update
@@ -11,6 +6,11 @@
 #   - replaceFrom: The list of strings to search
 #   - replaceTo: The list of strings to replace with
 # 
+# *********************************************************************
+#
+# This Persisted GraphQL query adapts content in bulk, updating the
+# title, content and excerpt for multiple posts with a single request.
+#
 # *********************************************************************
 #
 # More info:

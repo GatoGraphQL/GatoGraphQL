@@ -1,13 +1,13 @@
 ########################################################################
-#
-# This Persisted GraphQL query translates the content from the provided URL
-#
-# *********************************************************************
 # 
 # Variables:
 #   - url: The URL with the content to translate
 #   - fromLang: The language code to translate from, from Google Translate (https://cloud.google.com/translate/docs/languages)
 #   - toLang: The language code to translate from, from Google Translate
+#
+# *********************************************************************
+#
+# This Persisted GraphQL query translates the content from the provided URL
 #
 # *********************************************************************
 # 

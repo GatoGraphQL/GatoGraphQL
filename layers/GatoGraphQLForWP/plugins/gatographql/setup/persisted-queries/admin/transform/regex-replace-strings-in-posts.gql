@@ -1,10 +1,4 @@
 ########################################################################
-#
-# This Persisted GraphQL query adapts content in bulk, searching for
-# matches using regex in the title, content and excerpt for multiple
-# posts, and replacing them with another string.
-#
-# *********************************************************************
 # 
 # Variables:
 #   - limit: Number of posts to update
@@ -12,6 +6,12 @@
 #   - searchRegex: The list of regex to search
 #   - replaceWith: The list of strings to replace with
 # 
+# *********************************************************************
+#
+# This Persisted GraphQL query adapts content in bulk, searching for
+# matches using regex in the title, content and excerpt for multiple
+# posts, and replacing them with another string.
+#
 # *********************************************************************
 #
 # More info:
