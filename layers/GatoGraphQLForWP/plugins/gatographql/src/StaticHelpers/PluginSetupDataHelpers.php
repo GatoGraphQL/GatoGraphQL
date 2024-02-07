@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
@@ -65,6 +66,28 @@ class PluginSetupDataHelpers
         ]);
         if (isset($persistedQueryEndpoints[0])) {
             return (int) $persistedQueryEndpoints[0];
+        }
+
+        return null;
+    }
+
+    public static function getCustomEndpointID(string $slug): ?int
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $graphQLCustomEndpointCustomPostType = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+
+        /** @var array<string|int> */
+        $customEndpoints = \get_posts([
+            'name' => $slug,
+            'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
+            'post_status' => ['publish', 'private'],
+            'numberposts' => 1,
+            'fields' => 'ids',
+        ]);
+        if (isset($customEndpoints[0])) {
+            return (int) $customEndpoints[0];
         }
 
         return null;
