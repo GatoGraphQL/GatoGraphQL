@@ -318,8 +318,7 @@ class Plugin extends AbstractMainPlugin
 
     protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID(): ?int
     {
-        // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
-        $slug = 'nested-mutations-entity-as-mutation-payload-type';
+        $slug = PluginSetupDataEntrySlugs::SCHEMA_CONFIGURATION_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE;
         $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
             return $schemaConfigurationID;
