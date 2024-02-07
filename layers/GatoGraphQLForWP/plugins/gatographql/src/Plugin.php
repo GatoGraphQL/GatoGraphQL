@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
+use GatoGraphQL\GatoGraphQL\Constants\PluginSetupDataEntrySlugs;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Constants\TutorialLessons;
 use GatoGraphQL\GatoGraphQL\Constants\VirtualTutorialLessons;
@@ -260,8 +261,7 @@ class Plugin extends AbstractMainPlugin
 
     protected function getNestedMutationsSchemaConfigurationCustomPostID(): ?int
     {
-        // @gatographql-note: Do not rename this slug, as it's referenced when installing the testing webservers
-        $slug = 'nested-mutations';
+        $slug = PluginSetupDataEntrySlugs::SCHEMA_CONFIGURATION_NESTED_MUTATIONS;
         $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
             return $schemaConfigurationID;
