@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root\Container;
 
+use Exception;
 use InvalidArgumentException;
 use PoP\Root\AppArchitecture;
 use PoP\Root\Container\Dumper\DowngradingPhpDumper;
@@ -109,11 +110,27 @@ trait ContainerBuilderFactoryTrait
         // If not cached, then create the new instance
         if (!$this->cached) {
             $this->instance = new ContainerBuilder();
-        } else {
+            return;
+        }
+
+        /**
+         * If for some reason the cached file was malformed,
+         * and the class cannot be instantiated, this will
+         * throw an Exception. Let it explode for DEV, but
+         * catch it for PROD and fallback to non-cached method.
+         */
+        try {
             require_once $this->cacheFile;
             /** @var class-string<ContainerBuilder> */
             $containerFullyQuantifiedClass = "\\{$containerNamespace}\\{$containerClassName}";
             $this->instance = new $containerFullyQuantifiedClass();
+        } catch (Exception $e) {
+            if (Environment::isApplicationEnvironmentDev()) {
+                throw $e;
+            }
+            // Delete the cache file, and instantiate container as normal
+            @unlink($this->cacheFile);
+            $this->instance = new ContainerBuilder();
         }
     }
     public function getInstance(): ContainerInterface
