@@ -356,8 +356,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
-     * Check if the plugin has just been activated (for first time) or updated,
-     * or if an extension has just been activated (for first time).
+     * Check if the plugin has just been activated or updated,
+     * or if an extension has just been activated.
      *
      * Regenerate the container here, and not in the `activate` function,
      * because `activate` doesn't get called within the "plugins_loaded" hook.
@@ -369,7 +369,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         /**
          * Logic to check if the main plugin or any extension has
-         * just been activated (for first time) or updated.
+         * just been activated or updated.
          */
         add_action(
             PluginAppHooks::INITIALIZE_APP,

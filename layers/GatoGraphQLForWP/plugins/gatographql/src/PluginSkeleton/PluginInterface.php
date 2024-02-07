@@ -9,7 +9,7 @@ interface PluginInterface
     public function setup(): void;
 
     /**
-     * Execute logic after the plugin/extension has just been activated (for first time)
+     * Execute logic after the plugin/extension has just been activated
      */
     public function pluginJustActivated(): void;
 

@@ -371,7 +371,6 @@ abstract class AbstractPlugin implements PluginInterface
 
     /**
      * Execute logic after the plugin/extension has just been activated
-     * (for first time)
      */
     public function pluginJustActivated(): void
     {
@@ -462,7 +461,7 @@ abstract class AbstractPlugin implements PluginInterface
      *
      * The plugin's setup data will be installed if:
      *
-     * - $previousVersion = null => Activating the plugin for first time
+     * - $previousVersion = null => Activating the plugin
      * - $previousVersion < someVersion => Updating to a new version that has data to install
      */
     protected function installPluginSetupData(?string $previousVersion = null): void
