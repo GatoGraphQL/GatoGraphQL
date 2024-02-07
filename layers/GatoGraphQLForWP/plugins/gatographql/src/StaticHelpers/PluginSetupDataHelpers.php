@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLPersistedQueryEndpointCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLSchemaConfigurationCustomPostType;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
@@ -27,8 +28,13 @@ class PluginSetupDataHelpers
         return null;
     }
 
-    public static function getSchemaConfigurationID(string $slug): ?int
-    {
+    /**
+     * @param string|string[] $status
+     */
+    public static function getSchemaConfigurationID(
+        string $slug,
+        string|array $status = 'publish',
+    ): ?int {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
@@ -37,7 +43,7 @@ class PluginSetupDataHelpers
         $schemaConfigurations = \get_posts([
             'name' => $slug,
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
-            'post_status' => 'publish',
+            'post_status' => $status,
             'numberposts' => 1,
             'fields' => 'ids',
         ]);
@@ -48,8 +54,13 @@ class PluginSetupDataHelpers
         return null;
     }
 
-    public static function getPersistedQueryEndpointID(string $slug): ?int
-    {
+    /**
+     * @param string|string[] $status
+     */
+    public static function getPersistedQueryEndpointID(
+        string $slug,
+        string|array $status = ['publish', 'private'],
+    ): ?int {
         $instanceManager = InstanceManagerFacade::getInstance();
 
         /** @var GraphQLPersistedQueryEndpointCustomPostType */
@@ -59,12 +70,39 @@ class PluginSetupDataHelpers
         $persistedQueryEndpoints = \get_posts([
             'name' => $slug,
             'post_type' => $graphQLPersistedQueryEndpointCustomPostType->getCustomPostType(),
-            'post_status' => ['publish', 'private'],
+            'post_status' => $status,
             'numberposts' => 1,
             'fields' => 'ids',
         ]);
         if (isset($persistedQueryEndpoints[0])) {
             return (int) $persistedQueryEndpoints[0];
+        }
+
+        return null;
+    }
+
+    /**
+     * @param string|string[] $status
+     */
+    public static function getCustomEndpointID(
+        string $slug,
+        string|array $status = ['publish', 'private'],
+    ): ?int {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var GraphQLCustomEndpointCustomPostType */
+        $graphQLCustomEndpointCustomPostType = $instanceManager->getInstance(GraphQLCustomEndpointCustomPostType::class);
+
+        /** @var array<string|int> */
+        $customEndpoints = \get_posts([
+            'name' => $slug,
+            'post_type' => $graphQLCustomEndpointCustomPostType->getCustomPostType(),
+            'post_status' => $status,
+            'numberposts' => 1,
+            'fields' => 'ids',
+        ]);
+        if (isset($customEndpoints[0])) {
+            return (int) $customEndpoints[0];
         }
 
         return null;

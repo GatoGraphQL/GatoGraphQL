@@ -9,9 +9,17 @@ interface PluginInterface
     public function setup(): void;
 
     /**
-     * Execute logic after the plugin/extension has just been activated (for first time)
+     * Execute logic after the plugin/extension has just been activated.
+     *
+     * Notice that this will be executed when first time activated, or
+     * reactivated (i.e. activated => deactivated => activated).
+     *
+     * Then, when installing setup data, we must first check that the entry
+     * does not already exist. This will also avoid duplicating setup data
+     * when downgrading the plugin to a lower version, and then upgrading
+     * again.
      */
-    public function pluginJustFirstTimeActivated(): void;
+    public function pluginJustActivated(): void;
 
     /**
      * Execute logic after the plugin/extension has just been updated

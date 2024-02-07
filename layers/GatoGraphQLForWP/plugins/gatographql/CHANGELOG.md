@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Bug in multi-control JS component used by extensions (Access Control, Cache Control, and Field Deprecation) showing "undefined" on the block on the Schema Configuration (#2639)
+- Avoid reinstalling plugin setup data if deactivating/reactivating the plugin (#2641)
 
 ## 2.0.0 - 29/01/2014
 

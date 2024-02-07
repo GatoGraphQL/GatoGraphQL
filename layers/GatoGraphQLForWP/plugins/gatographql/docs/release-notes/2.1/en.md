@@ -48,3 +48,4 @@ class GraphQLServer {
 ## Fixed
 
 - Bug in multi-control JS component used by extensions (Access Control, Cache Control, and Field Deprecation) showing "undefined" on the block on the Schema Configuration (#2639)
+- Avoid reinstalling plugin setup data if deactivating/reactivating the plugin (#2641)
