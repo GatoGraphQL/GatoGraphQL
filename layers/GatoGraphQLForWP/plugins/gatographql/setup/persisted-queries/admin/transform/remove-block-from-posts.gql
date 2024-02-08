@@ -36,7 +36,7 @@ query CreateVars(
     @remove
 }
 
-mutation RemoveBlock
+mutation RemoveBlockFromPosts
   @depends(on: "CreateVars")
 {
   posts(filter: { search: $search } ) {

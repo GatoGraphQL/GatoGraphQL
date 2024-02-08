@@ -128,7 +128,7 @@ mutation LoginUserAndUpdatePost(
     @remove
 }
 
-query SendGraphQLHTTPRequest(
+query ExportPostToWordPressSite(
   $downstreamServerGraphQLEndpointURL: String!
   $update: Boolean! = false
   $username: String!

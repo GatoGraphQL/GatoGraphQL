@@ -504,7 +504,7 @@ query ExportMutationInputs
     @remove
 }
 
-mutation ImportPost(
+mutation ImportPostFromWordPressSite(
   $postSlug: String!
 )
   @depends(on: "ExportMutationInputs")

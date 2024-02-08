@@ -166,7 +166,7 @@ mutation CreatePostsFromCSVEntries
     @export(as: "createdPostIDs")
 }
 
-query CreatePostsFromCSVEntriesAndRetrieve
+query ImportPostsFromCSVEntries
   @depends(on: "CreatePostsFromCSVEntries")
 {
   createdPosts: posts(

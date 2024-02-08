@@ -34,7 +34,7 @@ query HasSubscribedToNewsletter {
     @export(as: "subscribedToNewsletter")
 }
 
-query MaybeSubscribeEmailOnMailchimpList(
+query RegisterNewsletterSubscriberFromInstaWPToMailchimp(
   $mailchimpDataCenterCode: String!
   $mailchimpAudienceID: String!
 )

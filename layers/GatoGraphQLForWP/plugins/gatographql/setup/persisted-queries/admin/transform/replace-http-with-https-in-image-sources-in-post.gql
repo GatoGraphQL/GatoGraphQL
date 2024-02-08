@@ -30,7 +30,7 @@ query GetPostData($postId: ID!) {
   }
 }
 
-mutation UpdatePost($postId: ID!)
+mutation ReplaceHttpWithHttpsInImageSourcesInPost($postId: ID!)
   @depends(on: "GetPostData")
 {
   updatePost(input: {

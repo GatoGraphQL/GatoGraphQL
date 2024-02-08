@@ -101,7 +101,7 @@ query AdaptDataForMutationInput
     @export(as: "postInputs")
 }
 
-mutation UpdatePost(
+mutation RegexReplaceStringsInPosts(
   $limit: Int! = 5,
   $offset: Int! = 0
 )

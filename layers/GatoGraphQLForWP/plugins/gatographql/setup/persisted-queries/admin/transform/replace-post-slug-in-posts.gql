@@ -35,7 +35,7 @@ query ExportData(
   ) @export(as: "newPostURL")
 }
 
-mutation ReplaceOldWithNewURLInPosts
+mutation ReplaceOldWithNewSlugInPosts
   @depends(on: "ExportData")
 {
   posts(

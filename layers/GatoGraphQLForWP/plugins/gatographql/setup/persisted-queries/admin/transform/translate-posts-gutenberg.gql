@@ -2063,7 +2063,7 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslatePosts($postIds: [ID!]!)
+mutation TranslateGutenbergPosts($postIds: [ID!]!)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"

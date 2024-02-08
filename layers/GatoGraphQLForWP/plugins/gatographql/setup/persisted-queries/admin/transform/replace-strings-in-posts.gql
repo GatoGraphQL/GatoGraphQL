@@ -100,7 +100,7 @@ query AdaptDataForMutationInput
     @export(as: "postInputs")
 }
 
-mutation UpdatePost(
+mutation ReplaceStringsInPosts(
   $limit: Int! = 5,
   $offset: Int! = 0
 )

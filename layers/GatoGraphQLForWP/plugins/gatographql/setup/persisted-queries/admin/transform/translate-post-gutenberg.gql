@@ -1186,7 +1186,7 @@ query PrepareMetaReplacements
       @export(as: "transformedTitle")
 }
 
-mutation TranslatePost(
+mutation TranslateGutenbergPost(
   $postId: ID!
   $update: Boolean! = false
 )

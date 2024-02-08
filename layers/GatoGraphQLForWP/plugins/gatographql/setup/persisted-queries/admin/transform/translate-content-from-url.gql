@@ -18,7 +18,7 @@
 #
 ########################################################################
 
-query TranslateContent(
+query TranslateContentFromURL(
   $url: URL!
   $fromLang: String!
   $toLang: String!

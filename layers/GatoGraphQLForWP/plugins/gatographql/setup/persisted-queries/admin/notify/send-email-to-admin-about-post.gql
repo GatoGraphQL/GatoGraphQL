@@ -59,7 +59,9 @@ There is a [new post on the site]({$postURL}):
     @export(as: "emailSubject")
 }
 
-mutation SendEmail @depends(on: "GetEmailData") {
+mutation SendEmailToAdminAboutPost
+  @depends(on: "GetEmailData")
+{
   _sendEmail(
     input: {
       to: $adminEmail

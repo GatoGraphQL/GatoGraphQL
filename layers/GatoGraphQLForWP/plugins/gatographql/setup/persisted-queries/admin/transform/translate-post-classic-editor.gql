@@ -49,7 +49,7 @@ query TranslateData(
       @export(as: "translatedRawExcerpt")
 }
 
-mutation TranslatePost(
+mutation TranslateClassicEditorPost(
   $postId: ID!
   $update: Boolean! = false
 )

@@ -12,7 +12,7 @@
 #
 ########################################################################
 
-query {
+query GetPostsWithAndWithoutThumbnail {
   postsWithThumbnail: posts(
     filter: {
       metaQuery: {
