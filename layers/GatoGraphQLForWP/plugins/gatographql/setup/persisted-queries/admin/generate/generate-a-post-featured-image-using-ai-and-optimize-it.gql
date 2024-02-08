@@ -280,7 +280,7 @@ mutation CreateMediaItemFromGeneratedImage
   }
 }
 
-mutation SetMediaItemAsPostFeaturedImage(
+mutation GenerateAPostFeaturedImageUsingAIAndOptimizeIt(
   $postId: ID!
 )
   @depends(on: "CreateMediaItemFromGeneratedImage")

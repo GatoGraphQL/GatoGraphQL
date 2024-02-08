@@ -98,7 +98,7 @@ query CheckAuthorExistsOrChange(
     @export(as: "existingAuthorUsername")
 }
 
-mutation ImportPostFromRSSFeed
+mutation ImportPostFromWordPressRSSFeed
   @depends(on: "CheckAuthorExistsOrChange")
 {
   createPost(input: {

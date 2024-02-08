@@ -99,7 +99,7 @@ query GenerateMutationInputs
     @export(as: "postInputs")
 }
 
-mutation TranslateDataInPosts($postIds: [ID!]!)
+mutation TranslateClassicEditorPosts($postIds: [ID!]!)
   @depends(on: "GenerateMutationInputs")
 {
   updatePosts: posts(filter: { ids: $postIds } ) {

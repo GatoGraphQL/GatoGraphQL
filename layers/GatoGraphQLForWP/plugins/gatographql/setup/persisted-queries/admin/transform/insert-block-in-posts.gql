@@ -56,7 +56,7 @@ query CreateRegex(
     @remove
 }
 
-mutation InjectBlock
+mutation InsertBlockInPosts
   @depends(on: "CreateRegex")
 {
   posts: posts(

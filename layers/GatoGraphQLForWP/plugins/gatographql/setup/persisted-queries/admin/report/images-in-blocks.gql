@@ -18,7 +18,7 @@
 #
 ########################################################################
 
-query GetImageBlockImageURLs($postId: ID!) {
+query GetCoreImageBlockImageURLs($postId: ID!) {
   post(by: { id: $postId } ) {
     coreImageURLs: blockFlattenedDataItems(
       filterBy: { include: "core/image" }

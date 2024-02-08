@@ -9,7 +9,7 @@
 #
 ########################################################################
 
-query GetPostLinks {
+query ExtractLinksInContentFromAllPosts {
   posts(pagination: { limit: -1 }) {
     id
     title

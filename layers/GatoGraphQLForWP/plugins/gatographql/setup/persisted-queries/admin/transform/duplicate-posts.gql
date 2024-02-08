@@ -88,7 +88,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
   }
 }
 
-mutation DuplicatePosts
+mutation CreatePosts
   @depends(on: "GetPostsAndExportData")
 {
   createdPostIDs: _echo(value: $postInput)
@@ -105,8 +105,8 @@ mutation DuplicatePosts
     @export(as: "createdPostIDs")
 }
 
-query RetrieveCreatedPosts
-  @depends(on: "DuplicatePosts")
+query DuplicatePosts
+  @depends(on: "CreatePosts")
 {
   createdPosts: posts(
     filter: {

@@ -44,7 +44,7 @@ query GetPostData(
   }
 }
 
-mutation UpdatePost($postId: ID!)
+mutation RegexReplaceStringsInPost($postId: ID!)
   @depends(on: "GetPostData")
 {
   updatePost(input: {

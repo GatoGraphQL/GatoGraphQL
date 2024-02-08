@@ -18,7 +18,7 @@
 #
 ########################################################################
 
-query {
+query GetCommentsByPeriod {
   timeNow: _time  
   time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
   date24HsAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time24HsAgo)  

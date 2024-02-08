@@ -40,7 +40,7 @@ query GetPostData($postId: ID!) {
   }
 }
 
-mutation UpdatePost($postId: ID!)
+mutation AddMissingLinksInPost($postId: ID!)
   @depends(on: "GetPostData")
 {
   updatePost(input: {
