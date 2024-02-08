@@ -11,7 +11,7 @@ This extension is composed of:
 
 When the GraphQL server resolves a query, it triggers the following action hooks with the GraphQL response:
 
-1. `gatographql__executed_query_{$operationName}` (only if the GraphQL operation to execute was provided)
+1. `gatographql__executed_query:{$operationName}` (only if the GraphQL operation to execute was provided)
 2. `gatographql__executed_query`
 
 The action hooks that are triggered are:
@@ -19,7 +19,7 @@ The action hooks that are triggered are:
 ```php
 // Triggered only if the GraphQL operation to execute was provided
 do_action(
-  "gatographql__executed_query_{$operationName}",
+  "gatographql__executed_query:{$operationName}",
   $response,
   $isInternalExecution,
   $query,
@@ -122,7 +122,7 @@ GraphQLServer::executeQuery(
 );
 
 add_action(
-  "gatographql__executed_query_CreatePost",
+  "gatographql__executed_query:CreatePost",
   function (Response $response) {
     /** @var string */
     $responseContent = $response->getContent();
