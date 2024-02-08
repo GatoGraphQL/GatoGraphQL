@@ -45,6 +45,7 @@ class GraphQLServer {
 
 - If initializing the service container from the cache fails, fallback to initializing PHP object from memory (#2638)
 - Give unique operationName to all predefined persisted queries (#2644)
+- Improved error message when fetching blocks from a post, and the block content has errors
 
 ## Fixed
 

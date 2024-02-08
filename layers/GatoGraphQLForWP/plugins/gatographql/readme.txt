@@ -173,6 +173,7 @@ You can even synchronize content across a network of sites, such as from an upst
 * Support passing the Schema Configuration to apply when invoking the Internal GraphQL Server
 * If initializing the service container from the cache fails, fallback to initializing PHP object from memory (#2638)
 * Give unique operationName to all predefined persisted queries (#2644)
+* Improved error message when fetching blocks from a post, and the block content has errors
 * Fixed bug in multi-control JS component used by extensions (Access Control, Cache Control, and Field Deprecation) showing "undefined" on the block on the Schema Configuration (#2639)
 * Avoid reinstalling plugin setup data if deactivating/reactivating the plugin (#2641)
 
