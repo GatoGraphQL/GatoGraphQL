@@ -13,7 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - If initializing the service container from the cache fails, fallback to initializing PHP object from memory (#2638)
-- Give unique operationName to all predefined persisted queries
+- Give unique operationName to all predefined persisted queries (#2644)
 
 ### Fixed
 
