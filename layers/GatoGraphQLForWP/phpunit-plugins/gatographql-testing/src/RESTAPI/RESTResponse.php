@@ -24,8 +24,8 @@ class RESTResponse
         $clientResponseContents = json_decode($clientResponse->getBody()->__toString());
         $restResponse = new self();
         $restResponse->status = $clientResponseContents->status;
-        $restResponse->message = $clientResponseContents->message;
-        $restResponse->data = (object) $clientResponseContents->data;
+        $restResponse->message = $clientResponseContents->message ?? '';
+        $restResponse->data = (object) ($clientResponseContents->data ?? []);
         return $restResponse;
     }
 }
