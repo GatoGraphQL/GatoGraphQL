@@ -7,26 +7,25 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ParamValues;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
-use PHPUnitForGatoGraphQL\GatoGraphQL\Constants\RESTAPIEndpoints;
 
 trait UpdatePostBeforeAfterTestWebserverRequestTestTrait
 {
     use ExecuteRESTWebserverRequestTestCaseTrait;
 
+    /**
+     * @param array<string,mixed> $postData
+     */
     protected function executeRESTEndpointToUpdatePost(
         string $dataName,
-        bool $moduleEnabled
+        array $postData,
     ): void {
         $client = static::getClient();
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE;
-        $endpointURL = sprintf(
-            $endpointURLPlaceholder,
-            $this->getModuleID($dataName),
-        );
+        $endpointURL = static::getWebserverHomeURL() . '/wp-json/wp/v2/posts/' . $this->getPostID($dataName);
         $options = $this->getRESTEndpointRequestOptions();
-        $options[RequestOptions::QUERY][Params::STATE] = $moduleEnabled ? ParamValues::ENABLED : ParamValues::DISABLED;
+        $options[RequestOptions::QUERY] = array_merge(
+            $options[RequestOptions::QUERY] ?? [],
+            $postData
+        );
         $response = $client->post(
             $endpointURL,
             $options,
@@ -39,5 +38,5 @@ trait UpdatePostBeforeAfterTestWebserverRequestTestTrait
 
     abstract protected function getRESTEndpointRequestOptions(): array;
 
-    abstract protected function getModuleID(string $dataName): string;
+    abstract protected function getPostID(string $dataName): int;
 }
