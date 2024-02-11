@@ -11,10 +11,10 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
  * the test. That's why these tests are done with the authenticated user
  * in WordPress, so the user can execute operations via the REST endpoint.
  */
-abstract class AbstractUpdatePostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
+abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
-    use UpdatePostBeforeTestWebserverRequestTestTrait;
+    use UpdateCustomPostBeforeTestWebserverRequestTestTrait;
 
     protected function setUp(): void
     {

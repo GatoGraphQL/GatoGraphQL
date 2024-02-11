@@ -11,7 +11,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCase
 /**
  * @see https://developer.wordpress.org/rest-api/reference/posts/#arguments
  */
-trait UpdatePostBeforeTestWebserverRequestTestTrait
+trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
 {
     use ExecuteRESTWebserverRequestTestCaseTrait;
 
