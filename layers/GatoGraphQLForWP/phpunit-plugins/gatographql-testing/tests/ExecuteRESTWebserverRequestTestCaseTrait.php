@@ -25,6 +25,8 @@ trait ExecuteRESTWebserverRequestTestCaseTrait
 
     /**
      * Assert the REST API call is successful, or already fail the test
+     *
+     * @param array<string,mixed> $options
      */
     protected function assertRESTPostCallIsSuccessful(
         ResponseInterface $response,
@@ -37,6 +39,9 @@ trait ExecuteRESTWebserverRequestTestCaseTrait
         $this->assertEquals($this->getRESTCallSuccessStatus($dataName, $endpointURL, $options), $restResponse->status);
     }
 
+    /**
+     * @param array<string,mixed> $options
+     */
     protected function getRESTCallSuccessStatus(
         string $dataName,
         string $endpointURL,
