@@ -32,6 +32,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_RSS_FEED = 'import-post-from-wordpress-rss-feed';
     public final const PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_SITE = 'import-post-from-wordpress-site';
     public final const PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV = 'import-posts-from-csv';
+    public final const PERSISTED_QUERY_INSERT_BLOCK_IN_POST = 'insert-block-in-post';
     public final const PERSISTED_QUERY_INSERT_BLOCK_IN_POSTS = 'insert-block-in-posts';
     public final const PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POST = 'regex-replace-strings-in-post';
     public final const PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POSTS = 'regex-replace-strings-in-posts';
