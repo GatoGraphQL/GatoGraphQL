@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Support passing the Schema Configuration to apply when invoking the Internal GraphQL Server
+- Predefined persisted query "Insert block in post"
 
 ### Improvements
 
