@@ -59,20 +59,20 @@ abstract class AbstractUpdatePostBeforeTestWordPressAuthenticatedUserWebserverRe
     {
         $endpoint = static::getEndpoint();
         $providerEntries = [];
-        foreach (static::getFixtureNameEntries() as $fixtureName => $moduleEntry) {
+        foreach (static::getFixtureNameEntries() as $fixtureName => $fixtureEntry) {
             $providerEntries[$fixtureName . ':enabled'] = [
                 'application/json',
-                $moduleEntry['response-enabled'],
-                $moduleEntry['endpoint'] ?? $endpoint,
+                $fixtureEntry['response-enabled'],
+                $fixtureEntry['endpoint'] ?? $endpoint,
                 [],
-                $moduleEntry['query'],
+                $fixtureEntry['query'],
             ];
             $providerEntries[$fixtureName . ':disabled'] = [
                 'application/json',
-                $moduleEntry['response-disabled'],
-                $moduleEntry['endpoint'] ?? $endpoint,
+                $fixtureEntry['response-disabled'],
+                $fixtureEntry['endpoint'] ?? $endpoint,
                 [],
-                $moduleEntry['query'],
+                $fixtureEntry['query'],
             ];
         }
         return $providerEntries;
