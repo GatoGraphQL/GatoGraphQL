@@ -8,6 +8,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
 
+/**
+ * @see https://developer.wordpress.org/rest-api/reference/posts/#arguments
+ */
 trait UpdatePostBeforeTestWebserverRequestTestTrait
 {
     use ExecuteRESTWebserverRequestTestCaseTrait;
