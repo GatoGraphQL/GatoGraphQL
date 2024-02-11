@@ -147,7 +147,7 @@ trait ModifyCPTBlockAttributesWebserverRequestTestCaseTrait
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTPostCallIsSuccessful($response);
+        $this->assertRESTPostCallIsSuccessful($response, $dataName);
     }
 
     abstract protected function getCustomPostID(string $dataName): int;

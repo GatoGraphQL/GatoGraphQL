@@ -27,14 +27,17 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
         $options = $this->getRESTEndpointRequestOptions();
         $options[RequestOptions::QUERY] = array_merge(
             $options[RequestOptions::QUERY] ?? [],
-            $postData
+            $postData,
+            [
+                'context' => 'edit',
+            ]
         );
         $response = $client->post(
             $endpointURL,
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTPostCallIsSuccessful($response);
+        $this->assertRESTPostCallIsSuccessful($response, $dataName);
     }
 
     protected function getCustomPostTypeEndpointPath(): string

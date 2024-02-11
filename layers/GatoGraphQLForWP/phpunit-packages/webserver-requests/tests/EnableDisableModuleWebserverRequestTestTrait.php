@@ -32,7 +32,7 @@ trait EnableDisableModuleWebserverRequestTestTrait
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTPostCallIsSuccessful($response);
+        $this->assertRESTPostCallIsSuccessful($response, $dataName);
     }
 
     abstract protected static function getClient(): Client;
