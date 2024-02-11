@@ -217,26 +217,6 @@ class GraphQLDocumentDataComposer
      */
     public function encodeGraphQLVariablesJSONForOutput(string $graphQLVariablesJSON): string
     {
-        return str_replace(
-            [
-                '\\',
-                PHP_EOL,
-                '"',
-                '&',
-                '-',
-                '<',
-                '>',
-            ],
-            [
-                '\\\\',
-                '\\n',
-                '\"',
-                '\&',
-                '\u002d',
-                '\<',
-                '\>',
-            ],
-            $graphQLVariablesJSON
-        );
+        return $this->encodeGraphQLDocumentForOutput($graphQLVariablesJSON);
     }
 }
