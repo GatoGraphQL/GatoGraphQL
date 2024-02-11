@@ -60,7 +60,7 @@ query CreateRegex(
 mutation InsertBlockInPost($postId: ID!)
   @depends(on: "CreateRegex")
 {
-  post(by: { id : $postId }) {
+  post(by: { id: $postId }, status: any) {
     rawContent
     adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
