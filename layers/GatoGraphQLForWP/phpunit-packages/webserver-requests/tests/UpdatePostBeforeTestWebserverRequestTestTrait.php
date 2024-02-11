@@ -8,7 +8,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
 
-trait UpdatePostBeforeAfterTestWebserverRequestTestTrait
+trait UpdatePostBeforeTestWebserverRequestTestTrait
 {
     use ExecuteRESTWebserverRequestTestCaseTrait;
 
