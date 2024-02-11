@@ -23,7 +23,7 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
         array $postData,
     ): void {
         $client = static::getClient();
-        $endpointURL = static::getWebserverHomeURL() . '/wp-json/wp/v2/posts/' . $this->getPostID($dataName);
+        $endpointURL = static::getWebserverHomeURL() . '/wp-json/wp/v2/' . $this->getCustomPostTypeEndpointPath() . '/' . $this->getPostID($dataName);
         $options = $this->getRESTEndpointRequestOptions();
         $options[RequestOptions::QUERY] = array_merge(
             $options[RequestOptions::QUERY] ?? [],
@@ -35,6 +35,11 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
         );
         // Assert the REST API call is successful, or already fail the test
         $this->assertRESTPostCallIsSuccessful($response);
+    }
+
+    protected function getCustomPostTypeEndpointPath(): string
+    {
+        return 'posts';
     }
 
     abstract protected static function getClient(): Client;
