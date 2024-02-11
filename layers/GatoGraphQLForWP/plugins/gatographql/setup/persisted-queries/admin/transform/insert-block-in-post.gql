@@ -1,0 +1,87 @@
+########################################################################
+# 
+# Variables:
+#   - postId: ID of the post to modify
+#   - searchBlockType: After what block type to insert the new block ("wp:paragraph" by default)
+#   - injectAfterBlockCount: After how many occurrences of the block to search will the new block be placed
+#   - injectBlockMarkup: The HTML for the block to insert
+#       eg: <!-- mycompany:black-friday-campaign-video --><figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure><!-- /mycompany:black-friday-campaign-video -->
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query identifies the nth block of a given type
+# ("wp:paragraph" by default) in a post, and places the provided
+# custom block's HTML content right after it.
+#
+# *********************************************************************
+# 
+# More info:
+#   - https://gatographql.com/tutorial/inserting-removing-a-gutenberg-block-in-bulk/#heading-inserting-the-block-with-more-options
+#
+########################################################################
+
+query CreateRegex(
+  $searchBlockType: String! = "wp:paragraph"
+  $injectAfterBlockCount: Int = 1
+  $injectBlockMarkup: String!
+) {
+  endingBlockMarkup: _sprintf(
+    string: "<!-- /%s -->",
+    values: [$searchBlockType]
+  )
+    @remove
+  endingBlockMarkupArray: _arrayPad(
+    array: [],
+    length: $injectAfterBlockCount,
+    value: $__endingBlockMarkup
+  )
+    @remove
+  regexString: _arrayJoin(
+    array: $__endingBlockMarkupArray,
+    separator: "[\\s\\S]+"
+  )
+    @remove
+  regex: _sprintf(
+    string: "#(%s)#U",
+    values: [$__regexString]
+  )
+    @export(as: "regex")
+    @remove
+  replaceWith: _sprintf(
+    string: "$1%s",
+    values: [$injectBlockMarkup]
+  )
+    @export(as: "replaceWith")
+    @remove
+}
+
+mutation InsertBlockInPost($postId: ID!)
+  @depends(on: "CreateRegex")
+{
+  post(by: { id : $postId }) {
+    rawContent
+    adaptedRawContent: _strRegexReplace(
+      in: $__rawContent,
+      searchRegex: $regex,
+      replaceWith: $replaceWith,
+      limit: 1
+    )
+    update(input: {
+      contentAs: { html: $__adaptedRawContent },
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        id
+        rawContent
+      }
+    }
+  }
+}

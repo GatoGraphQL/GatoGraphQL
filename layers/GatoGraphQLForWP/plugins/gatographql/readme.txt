@@ -171,6 +171,7 @@ You can even synchronize content across a network of sites, such as from an upst
 
 = 2.1.0 =
 * Support passing the Schema Configuration to apply when invoking the Internal GraphQL Server
+* Added predefined persisted query "Insert block in post"
 * If initializing the service container from the cache fails, fallback to initializing PHP object from memory (#2638)
 * Give unique operationName to all predefined persisted queries (#2644)
 * Improved error message when fetching blocks from a post, and the block content has errors

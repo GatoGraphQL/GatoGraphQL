@@ -41,6 +41,12 @@ class GraphQLServer {
   }
 ```
 
+### Predefined persisted query "Insert block in post"
+
+The newly-added persisted GraphQL query "Insert block in post" allows to inject a block in a post. It identifies the nth block of a given type (`wp:paragraph` by default) in a post, and places the provided custom block's HTML content right after it.
+
+Used with the [Automation](https://gatographql.com/extensions/automation/) extension, this persisted query can be used to automatically inject mandatory blocks to a newly-published post (eg: a CTA block to promote an ongoing campaign).
+
 ## Improvements
 
 - If initializing the service container from the cache fails, fallback to initializing PHP object from memory (#2638)

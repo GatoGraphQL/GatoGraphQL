@@ -256,6 +256,7 @@ class Plugin extends AbstractMainPlugin
             '1.4' => [$this->installPluginSetupDataForVersion1Dot4(...)],
             '1.5' => [$this->installPluginSetupDataForVersion1Dot5(...)],
             '1.6' => [$this->installPluginSetupDataForVersion1Dot6(...)],
+            '2.1' => [$this->installPluginSetupDataForVersion2Dot1(...)],
         ];
     }
 
@@ -1463,6 +1464,40 @@ class Plugin extends AbstractMainPlugin
                             ],
                         ],
                         ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+    }
+
+    protected function installPluginSetupDataForVersion2Dot1(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_INSERT_BLOCK_IN_POST;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('Insert block in post', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/insert-block-in-post',
+                                    TutorialLessons::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK,
+                                ),
+                            ],
+                        ],
+                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));

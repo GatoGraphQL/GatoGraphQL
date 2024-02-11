@@ -273,7 +273,7 @@ class BlockContentParser implements BlockContentParserInterface
         }
 
         if ($parsing_error) {
-        $error_message = sprintf('Error parsing post ID %d: %s', $post_id, /*$parsing_error->getMessage()*/\__('This post either does not contain block content, or its block content has errors. (Edit the post within the WordPress editor, fix the errors, save, and try again.)', 'gatographql'));
+            $error_message = sprintf('Error parsing post ID %d: %s', $post_id, /*$parsing_error->getMessage()*/\__('This post either does not contain block content, or its block content has errors. (Edit the post within the WordPress editor, fix the errors, save, and try again.)', 'gatographql'));
             return new WP_Error('vip-block-data-api-parser-error', $error_message, [
                 'status'  => 500,
                 'details' => $parsing_error->__toString(),
