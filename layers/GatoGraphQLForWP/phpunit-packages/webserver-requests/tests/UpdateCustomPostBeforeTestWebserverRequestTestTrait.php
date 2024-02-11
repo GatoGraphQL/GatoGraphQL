@@ -7,26 +7,28 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ParamValues;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
-use PHPUnitForGatoGraphQL\GatoGraphQL\Constants\RESTAPIEndpoints;
 
-trait EnableDisableModuleWebserverRequestTestTrait
+/**
+ * @see https://developer.wordpress.org/rest-api/reference/posts/#arguments
+ */
+trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
 {
     use ExecuteRESTWebserverRequestTestCaseTrait;
 
-    protected function executeRESTEndpointToEnableOrDisableModule(
+    /**
+     * @param array<string,mixed> $postData
+     */
+    protected function executeRESTEndpointToUpdateCustomPost(
         string $dataName,
-        bool $moduleEnabled
+        array $postData,
     ): void {
         $client = static::getClient();
-        $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . RESTAPIEndpoints::MODULE;
-        $endpointURL = sprintf(
-            $endpointURLPlaceholder,
-            $this->getModuleID($dataName),
-        );
+        $endpointURL = static::getWebserverHomeURL() . '/wp-json/wp/v2/' . $this->getCustomPostTypeEndpointPath() . '/' . $this->getPostID($dataName);
         $options = $this->getRESTEndpointRequestOptions();
-        $options[RequestOptions::QUERY][Params::STATE] = $moduleEnabled ? ParamValues::ENABLED : ParamValues::DISABLED;
+        $options[RequestOptions::QUERY] = array_merge(
+            $options[RequestOptions::QUERY] ?? [],
+            $postData,
+        );
         $response = $client->post(
             $endpointURL,
             $options,
@@ -35,9 +37,14 @@ trait EnableDisableModuleWebserverRequestTestTrait
         $this->assertRESTPostCallIsSuccessful($response, $dataName, $endpointURL, $options);
     }
 
+    protected function getCustomPostTypeEndpointPath(): string
+    {
+        return 'posts';
+    }
+
     abstract protected static function getClient(): Client;
 
     abstract protected function getRESTEndpointRequestOptions(): array;
 
-    abstract protected function getModuleID(string $dataName): string;
+    abstract protected function getPostID(string $dataName): int;
 }
