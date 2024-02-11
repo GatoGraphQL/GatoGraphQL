@@ -21,26 +21,36 @@ abstract class AbstractUpdatePostBeforeAfterTestWordPressAuthenticatedUserWebser
         parent::setUp();
 
         /**
-         * Disable the module before executing the ":disabled" test
+         * Modify the post data before executing the ":enabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':disabled')) {
-            $this->executeRESTEndpointToUpdatePost($dataName, false);
+        if (str_ends_with($dataName, ':enabled')) {
+            $this->executeRESTEndpointToUpdatePost($dataName, $this->getUpdatedPostData());
         }
     }
 
     protected function tearDown(): void
     {
         /**
-         * Re-enable the module after executing the ":disabled" test
+         * Revert the post data after executing the ":enabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':disabled')) {
-            $this->executeRESTEndpointToUpdatePost($dataName, true);
+        if (str_ends_with($dataName, ':enabled')) {
+            $this->executeRESTEndpointToUpdatePost($dataName, $this->getOriginalPostData());
         }
 
         parent::tearDown();
     }
+
+    /**
+     * @return array<string,mixed>
+     */
+    abstract protected function getUpdatedPostData(): array;
+
+    /**
+     * @return array<string,mixed>
+     */
+    abstract protected function getOriginalPostData(): array;
 
     /**
      * @return array<string,array<mixed>>
