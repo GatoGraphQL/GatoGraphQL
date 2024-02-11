@@ -59,15 +59,15 @@ abstract class AbstractUpdatePostBeforeTestWordPressAuthenticatedUserWebserverRe
     {
         $endpoint = static::getEndpoint();
         $providerEntries = [];
-        foreach (static::getModuleNameEntries() as $moduleName => $moduleEntry) {
-            $providerEntries[$moduleName . ':enabled'] = [
+        foreach (static::getFixtureNameEntries() as $fixtureName => $moduleEntry) {
+            $providerEntries[$fixtureName . ':enabled'] = [
                 'application/json',
                 $moduleEntry['response-enabled'],
                 $moduleEntry['endpoint'] ?? $endpoint,
                 [],
                 $moduleEntry['query'],
             ];
-            $providerEntries[$moduleName . ':disabled'] = [
+            $providerEntries[$fixtureName . ':disabled'] = [
                 'application/json',
                 $moduleEntry['response-disabled'],
                 $moduleEntry['endpoint'] ?? $endpoint,
@@ -97,7 +97,7 @@ abstract class AbstractUpdatePostBeforeTestWordPressAuthenticatedUserWebserverRe
     }
 
     /**
-     * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."], 'endpoint' => "..."]
+     * @return array<string,array<string,mixed>> An array of [$fixtureName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."], 'endpoint' => "..."]
      */
-    abstract protected static function getModuleNameEntries(): array;
+    abstract protected static function getFixtureNameEntries(): array;
 }
