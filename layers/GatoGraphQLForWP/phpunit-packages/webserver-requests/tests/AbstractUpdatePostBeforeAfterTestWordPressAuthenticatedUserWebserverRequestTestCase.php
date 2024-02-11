@@ -1,0 +1,93 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PHPUnitForGatoGraphQL\WebserverRequests;
+
+/**
+ * Update a post before/after executing the test.
+ *
+ * It uses the REST API to update the post before/after executing
+ * the test. That's why these tests are done with the authenticated user
+ * in WordPress, so the user can execute operations via the REST endpoint.
+ */
+abstract class AbstractUpdatePostBeforeAfterTestWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
+{
+    use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
+    use UpdatePostBeforeAfterTestWebserverRequestTestTrait;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        /**
+         * Disable the module before executing the ":disabled" test
+         */
+        $dataName = $this->getDataName();
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToUpdatePost($dataName, false);
+        }
+    }
+
+    protected function tearDown(): void
+    {
+        /**
+         * Re-enable the module after executing the ":disabled" test
+         */
+        $dataName = $this->getDataName();
+        if (str_ends_with($dataName, ':disabled')) {
+            $this->executeRESTEndpointToUpdatePost($dataName, true);
+        }
+
+        parent::tearDown();
+    }
+
+    /**
+     * @return array<string,array<mixed>>
+     */
+    public static function provideEndpointEntries(): array
+    {
+        $endpoint = static::getEndpoint();
+        $providerEntries = [];
+        foreach (static::getModuleNameEntries() as $moduleName => $moduleEntry) {
+            $providerEntries[$moduleName . ':enabled'] = [
+                'application/json',
+                $moduleEntry['response-enabled'],
+                $moduleEntry['endpoint'] ?? $endpoint,
+                [],
+                $moduleEntry['query'],
+            ];
+            $providerEntries[$moduleName . ':disabled'] = [
+                'application/json',
+                $moduleEntry['response-disabled'],
+                $moduleEntry['endpoint'] ?? $endpoint,
+                [],
+                $moduleEntry['query'],
+            ];
+        }
+        return $providerEntries;
+    }
+
+    protected static function getEndpoint(): ?string
+    {
+        if (static::useAdminEndpoint()) {
+            return static::getAdminEndpoint();
+        }
+        return 'graphql/';
+    }
+
+    protected static function useAdminEndpoint(): bool
+    {
+        return false;
+    }
+
+    protected static function getAdminEndpoint(): string
+    {
+        return 'wp-admin/edit.php?page=gatographql&action=execute_query';
+    }
+
+    /**
+     * @return array<string,array<string,mixed>> An array of [$moduleName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."], 'endpoint' => "..."]
+     */
+    abstract protected static function getModuleNameEntries(): array;
+}
