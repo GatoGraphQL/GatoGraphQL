@@ -140,7 +140,7 @@ trait ModifyPluginSettingsWebserverRequestTestCaseTrait
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTPostCallIsSuccessful($response, $dataName);
+        $this->assertRESTPostCallIsSuccessful($response, $dataName, $endpointURL, $options);
     }
 
     abstract protected function getSettingsKey(): string;

@@ -28,15 +28,20 @@ trait ExecuteRESTWebserverRequestTestCaseTrait
      */
     protected function assertRESTPostCallIsSuccessful(
         ResponseInterface $response,
-        string $dataName
+        string $dataName,
+        string $endpointURL,
+        array $options = [],
     ): void {
         $this->assertRESTGetCallIsSuccessful($response);
         $restResponse = RESTResponse::fromClientResponse($response);
-        $this->assertEquals($this->getRESTCallSuccessStatus($dataName), $restResponse->status);
+        $this->assertEquals($this->getRESTCallSuccessStatus($dataName, $endpointURL, $options), $restResponse->status);
     }
 
-    protected function getRESTCallSuccessStatus(string $dataName): string
-    {
+    protected function getRESTCallSuccessStatus(
+        string $dataName,
+        string $endpointURL,
+        array $options = [],
+    ): string {
         return ResponseStatus::SUCCESS;
     }
 }
