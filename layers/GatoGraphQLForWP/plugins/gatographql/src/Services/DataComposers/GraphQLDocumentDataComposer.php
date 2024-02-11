@@ -219,6 +219,7 @@ class GraphQLDocumentDataComposer
     {
         return str_replace(
             [
+                '\\',
                 PHP_EOL,
                 '"',
                 '&',
@@ -227,6 +228,7 @@ class GraphQLDocumentDataComposer
                 '>',
             ],
             [
+                '\\\\',
                 '\\n',
                 '\"',
                 '\&',
