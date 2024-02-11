@@ -28,9 +28,6 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
         $options[RequestOptions::QUERY] = array_merge(
             $options[RequestOptions::QUERY] ?? [],
             $postData,
-            [
-                'context' => 'edit',
-            ]
         );
         $response = $client->post(
             $endpointURL,
