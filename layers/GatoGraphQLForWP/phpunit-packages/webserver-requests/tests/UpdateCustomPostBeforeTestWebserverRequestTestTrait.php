@@ -18,7 +18,7 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
     /**
      * @param array<string,mixed> $postData
      */
-    protected function executeRESTEndpointToUpdatePost(
+    protected function executeRESTEndpointToUpdateCustomPost(
         string $dataName,
         array $postData,
     ): void {

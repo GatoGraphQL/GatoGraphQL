@@ -25,7 +25,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':enabled')) {
-            $this->executeRESTEndpointToUpdatePost($dataName, $this->getUpdatedPostData());
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedPostData());
         }
     }
 
@@ -36,7 +36,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         if (str_ends_with($dataName, ':enabled')) {
-            $this->executeRESTEndpointToUpdatePost($dataName, $this->getOriginalPostData());
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalPostData());
         }
 
         parent::tearDown();
