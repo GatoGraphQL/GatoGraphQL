@@ -57,7 +57,7 @@ query CreateRegex(
     @remove
 }
 
-mutation InsertBlockInPosts($postId: ID!)
+mutation InsertBlockInPost($postId: ID!)
   @depends(on: "CreateRegex")
 {
   post(by: { id : $postId }) {
