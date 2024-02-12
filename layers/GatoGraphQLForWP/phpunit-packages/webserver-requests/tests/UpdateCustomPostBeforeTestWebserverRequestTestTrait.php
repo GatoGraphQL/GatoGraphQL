@@ -16,6 +16,36 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
     use ExecuteRESTWebserverRequestTestCaseTrait;
 
     /**
+     * @return array<string,mixed>
+     */
+    protected function executeRESTEndpointToGetOriginalCustomPostData(
+        string $dataName,
+    ): array {
+        $client = static::getClient();
+        $endpointURL = $this->getCustomPostRESTEndpointURL($dataName);
+        $options = $this->getRESTEndpointRequestOptions();
+        $options[RequestOptions::QUERY] = array_merge(
+            $options[RequestOptions::QUERY] ?? [],
+            [
+                'context' => 'edit',
+            ]
+        );
+        $response = $client->get(
+            $endpointURL,
+            $options,
+        );
+        // Assert the REST API call is successful, or already fail the test
+        $this->assertRESTGetCallIsSuccessful($response);
+        $body = $response->getBody()->__toString();
+        return json_decode($body, true);
+    }
+
+    protected function getCustomPostRESTEndpointURL(string $dataName): string
+    {
+        return static::getWebserverHomeURL() . '/wp-json/wp/v2/' . $this->getCustomPostTypeEndpointPath() . '/' . $this->getPostID($dataName);
+    }
+
+    /**
      * @param array<string,mixed> $postData
      */
     protected function executeRESTEndpointToUpdateCustomPost(
@@ -23,18 +53,21 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
         array $postData,
     ): void {
         $client = static::getClient();
-        $endpointURL = static::getWebserverHomeURL() . '/wp-json/wp/v2/' . $this->getCustomPostTypeEndpointPath() . '/' . $this->getPostID($dataName);
+        $endpointURL = $this->getCustomPostRESTEndpointURL($dataName);
         $options = $this->getRESTEndpointRequestOptions();
         $options[RequestOptions::QUERY] = array_merge(
             $options[RequestOptions::QUERY] ?? [],
             $postData,
+            [
+                'context' => 'edit',
+            ]
         );
         $response = $client->post(
             $endpointURL,
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTPostCallIsSuccessful($response, $dataName, $endpointURL, $options);
+        $this->assertRESTGetCallIsSuccessful($response);
     }
 
     protected function getCustomPostTypeEndpointPath(): string

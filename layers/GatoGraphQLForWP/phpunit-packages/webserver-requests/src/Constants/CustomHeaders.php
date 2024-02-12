@@ -17,4 +17,11 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests\Constants;
 class CustomHeaders
 {
     public const REQUEST_ORIGIN = 'X-Request-Origin';
+
+    /**
+     * Duplicated constant
+     *
+     * @see layers/GatoGraphQLForWP/plugins/testing-schema/src/Constants/CustomHeaders.php
+     */
+    public const GATOGRAPHQL_ERRORS = 'X-GATOGRAPHQL-ERRORS';
 }

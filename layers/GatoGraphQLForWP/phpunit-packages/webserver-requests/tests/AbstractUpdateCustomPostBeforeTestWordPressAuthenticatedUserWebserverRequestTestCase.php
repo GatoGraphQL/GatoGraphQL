@@ -16,6 +16,9 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
     use UpdateCustomPostBeforeTestWebserverRequestTestTrait;
 
+    /** @var array<string,mixed> */
+    protected array $originalCustomPostData;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -24,10 +27,13 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          * Modify the post data before executing the ":enabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':enabled')) {
-            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedPostData());
+        if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
+            $this->originalCustomPostData = $this->executeRESTEndpointToGetOriginalCustomPostData($dataName);
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedCustomPostData($dataName));
         }
     }
+
+    abstract protected function mustExecuteRESTEndpointToUpdateCustomPost(string $dataName): bool;
 
     protected function tearDown(): void
     {
@@ -35,8 +41,8 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          * Revert the post data after executing the ":enabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':enabled')) {
-            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalPostData());
+        if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalCustomPostData($dataName));
         }
 
         parent::tearDown();
@@ -45,40 +51,21 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     /**
      * @return array<string,mixed>
      */
-    abstract protected function getUpdatedPostData(): array;
+    abstract protected function getUpdatedCustomPostData(string $dataName): array;
 
     /**
      * @return array<string,mixed>
      */
-    abstract protected function getOriginalPostData(): array;
-
-    /**
-     * @return array<string,array<mixed>>
-     */
-    public static function provideEndpointEntries(): array
+    protected function getOriginalCustomPostData(string $dataName): array
     {
-        $endpoint = static::getEndpoint();
-        $providerEntries = [];
-        foreach (static::getFixtureNameEntries() as $fixtureName => $fixtureEntry) {
-            $providerEntries[$fixtureName . ':enabled'] = [
-                'application/json',
-                $fixtureEntry['response-enabled'],
-                $fixtureEntry['endpoint'] ?? $endpoint,
-                [],
-                $fixtureEntry['query'],
-            ];
-            $providerEntries[$fixtureName . ':disabled'] = [
-                'application/json',
-                $fixtureEntry['response-disabled'],
-                $fixtureEntry['endpoint'] ?? $endpoint,
-                [],
-                $fixtureEntry['query'],
-            ];
+        $originalCustomPostData = [];
+        foreach (array_keys($this->getUpdatedCustomPostData($dataName)) as $key) {
+            $originalCustomPostData[$key] = $this->originalCustomPostData[$key];
         }
-        return $providerEntries;
+        return $originalCustomPostData;
     }
 
-    protected static function getEndpoint(): ?string
+    protected static function getEndpoint(): string
     {
         if (static::useAdminEndpoint()) {
             return static::getAdminEndpoint();
@@ -95,9 +82,4 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     {
         return 'wp-admin/edit.php?page=gatographql&action=execute_query';
     }
-
-    /**
-     * @return array<string,array<string,mixed>> An array of [$fixtureName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."], 'endpoint' => "..."]
-     */
-    abstract protected static function getFixtureNameEntries(): array;
 }
