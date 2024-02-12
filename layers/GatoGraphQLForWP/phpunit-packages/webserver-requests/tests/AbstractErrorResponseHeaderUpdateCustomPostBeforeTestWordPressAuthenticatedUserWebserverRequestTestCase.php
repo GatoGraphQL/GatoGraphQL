@@ -6,6 +6,8 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\FixtureEndpointWebserverRequestTestCaseTrait;
+use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaders;
+use Psr\Http\Message\ResponseInterface;
 
 abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase
 {
@@ -27,4 +29,15 @@ abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAut
     {
         return true;
     }
+
+    protected function validateResponseHeaders(ResponseInterface $response): void
+    {
+        $dataName = $this->getDataName();
+        $this->assertEquals(
+            $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
+            $this->getExpectedResponseErrorMessage($dataName)
+        );
+    }
+
+    abstract protected function getExpectedResponseErrorMessage(string $dataName): string;
 }
