@@ -54,32 +54,6 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
      */
     abstract protected function getOriginalPostData(): array;
 
-    /**
-     * @return array<string,array<mixed>>
-     */
-    public static function provideEndpointEntries(): array
-    {
-        $endpoint = static::getEndpoint();
-        $providerEntries = [];
-        foreach (static::getFixtureNameEntries() as $fixtureName => $fixtureEntry) {
-            $providerEntries[$fixtureName . ':enabled'] = [
-                'application/json',
-                $fixtureEntry['response-enabled'],
-                $fixtureEntry['endpoint'] ?? $endpoint,
-                [],
-                $fixtureEntry['query'],
-            ];
-            $providerEntries[$fixtureName . ':disabled'] = [
-                'application/json',
-                $fixtureEntry['response-disabled'],
-                $fixtureEntry['endpoint'] ?? $endpoint,
-                [],
-                $fixtureEntry['query'],
-            ];
-        }
-        return $providerEntries;
-    }
-
     protected static function getEndpoint(): ?string
     {
         if (static::useAdminEndpoint()) {
@@ -97,9 +71,4 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     {
         return 'wp-admin/edit.php?page=gatographql&action=execute_query';
     }
-
-    /**
-     * @return array<string,array<string,mixed>> An array of [$fixtureName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."], 'endpoint' => "..."]
-     */
-    abstract protected static function getFixtureNameEntries(): array;
 }

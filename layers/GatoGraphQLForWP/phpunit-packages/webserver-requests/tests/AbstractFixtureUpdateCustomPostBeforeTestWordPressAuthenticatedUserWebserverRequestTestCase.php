@@ -15,6 +15,32 @@ abstract class AbstractFixtureUpdateCustomPostBeforeTestWordPressAuthenticatedUs
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
 
     /**
+     * @return array<string,array<mixed>>
+     */
+    public static function provideEndpointEntries(): array
+    {
+        $endpoint = static::getEndpoint();
+        $providerEntries = [];
+        foreach (static::getFixtureNameEntries() as $fixtureName => $fixtureEntry) {
+            $providerEntries[$fixtureName . ':enabled'] = [
+                'application/json',
+                $fixtureEntry['response-enabled'],
+                $fixtureEntry['endpoint'] ?? $endpoint,
+                [],
+                $fixtureEntry['query'],
+            ];
+            $providerEntries[$fixtureName . ':disabled'] = [
+                'application/json',
+                $fixtureEntry['response-disabled'],
+                $fixtureEntry['endpoint'] ?? $endpoint,
+                [],
+                $fixtureEntry['query'],
+            ];
+        }
+        return $providerEntries;
+    }
+
+    /**
      * @return array<string,array<string,mixed>> An array of [$fixtureName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
     protected static function getFixtureNameEntries(): array
