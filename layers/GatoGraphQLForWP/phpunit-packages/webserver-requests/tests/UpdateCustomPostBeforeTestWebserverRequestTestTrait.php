@@ -24,6 +24,12 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
         $client = static::getClient();
         $endpointURL = $this->getCustomPostRESTEndpointURL($dataName);
         $options = $this->getRESTEndpointRequestOptions();
+        $options[RequestOptions::QUERY] = array_merge(
+            $options[RequestOptions::QUERY] ?? [],
+            [
+                'context' => 'edit',
+            ]
+        );
         $response = $client->get(
             $endpointURL,
             $options,
@@ -52,6 +58,9 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
         $options[RequestOptions::QUERY] = array_merge(
             $options[RequestOptions::QUERY] ?? [],
             $postData,
+            [
+                'context' => 'edit',
+            ]
         );
         $response = $client->post(
             $endpointURL,
