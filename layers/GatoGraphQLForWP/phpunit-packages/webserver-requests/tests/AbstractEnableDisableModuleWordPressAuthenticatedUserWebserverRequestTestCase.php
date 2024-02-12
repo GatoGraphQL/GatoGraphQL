@@ -68,7 +68,7 @@ abstract class AbstractEnableDisableModuleWordPressAuthenticatedUserWebserverReq
         return $providerEntries;
     }
 
-    protected static function getEndpoint(): ?string
+    protected static function getEndpoint(): string
     {
         if (static::useAdminEndpoint()) {
             return static::getAdminEndpoint();

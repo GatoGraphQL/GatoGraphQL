@@ -54,7 +54,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
      */
     abstract protected function getOriginalPostData(): array;
 
-    protected static function getEndpoint(): ?string
+    protected static function getEndpoint(): string
     {
         if (static::useAdminEndpoint()) {
             return static::getAdminEndpoint();
