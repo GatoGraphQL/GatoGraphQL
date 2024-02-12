@@ -6,6 +6,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GuzzleHttp\RequestOptions;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
 
 abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserverRequestTestCase
@@ -114,6 +115,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         if ($expectedContentType !== '') { // Avoid PHPStan error with "non-empty-string"
             $this->assertStringStartsWith($expectedContentType, $response->getHeaderLine('content-type'));
         }
+        $this->validateResponseHeaders($response);
         if ($expectedResponseBody !== null) {
             $responseBody = $response->getBody()->__toString();
             // Allow to modify the URLs for the "PROD Integration Tests"
@@ -127,6 +129,13 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
                 $this->assertMatchesRegularExpression($expectedResponseBody, $responseBody);
             }
         }
+    }
+
+    /**
+     * Method to override if needed
+     */
+    protected function validateResponseHeaders(ResponseInterface $response): void
+    {
     }
 
     protected function adaptResponseBody(string $responseBody): string
