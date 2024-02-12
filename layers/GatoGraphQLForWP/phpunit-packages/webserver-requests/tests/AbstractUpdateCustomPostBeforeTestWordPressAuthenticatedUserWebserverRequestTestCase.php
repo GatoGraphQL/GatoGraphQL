@@ -25,7 +25,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
-            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedPostData());
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedCustomPostData());
         }
     }
 
@@ -38,7 +38,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
-            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalPostData());
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalCustomPostData());
         }
 
         parent::tearDown();
@@ -47,12 +47,12 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     /**
      * @return array<string,mixed>
      */
-    abstract protected function getUpdatedPostData(): array;
+    abstract protected function getUpdatedCustomPostData(): array;
 
     /**
      * @return array<string,mixed>
      */
-    abstract protected function getOriginalPostData(): array;
+    abstract protected function getOriginalCustomPostData(): array;
 
     protected static function getEndpoint(): string
     {
