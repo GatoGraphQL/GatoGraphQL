@@ -33,9 +33,10 @@ abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAut
     protected function validateResponseHeaders(ResponseInterface $response): void
     {
         $dataName = $this->getDataName();
+        $expectedResponseErrorMessage = $this->getExpectedResponseErrorMessage($dataName);
         $this->assertEquals(
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
-            $this->getExpectedResponseErrorMessage($dataName)
+            $expectedResponseErrorMessage
         );
     }
 
