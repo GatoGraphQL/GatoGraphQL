@@ -60,7 +60,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     {
         $originalCustomPostData = [];
         foreach (array_keys($this->getUpdatedCustomPostData($dataName)) as $key) {
-            $originalCustomPostData = $this->originalCustomPostData[$key];
+            $originalCustomPostData[$key] = $this->originalCustomPostData[$key];
         }
         return $originalCustomPostData;
     }
