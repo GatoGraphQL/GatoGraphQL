@@ -24,9 +24,14 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          * Modify the post data before executing the ":enabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':enabled')) {
+        if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
             $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedPostData());
         }
+    }
+
+    protected function mustExecuteRESTEndpointToUpdateCustomPost(string $dataName): bool
+    {
+        return str_ends_with($dataName, ':enabled');
     }
 
     protected function tearDown(): void
@@ -35,7 +40,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          * Revert the post data after executing the ":enabled" test
          */
         $dataName = $this->getDataName();
-        if (str_ends_with($dataName, ':enabled')) {
+        if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
             $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalPostData());
         }
 
