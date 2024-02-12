@@ -7,5 +7,4 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants;
 class CustomHeaders
 {
     public const WP_REST_NONCE = 'X-WP-REST-NONCE';
-    public const GATOGRAPHQL_ERRORS = 'X-GATOGRAPHQL-ERRORS';
 }

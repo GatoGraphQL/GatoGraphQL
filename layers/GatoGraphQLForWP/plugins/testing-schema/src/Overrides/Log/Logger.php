@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
 use GatoGraphQL\GatoGraphQL\Log\Logger as UpstreamLogger;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\CustomHeaders;
+use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
 class Logger extends UpstreamLogger
 {
