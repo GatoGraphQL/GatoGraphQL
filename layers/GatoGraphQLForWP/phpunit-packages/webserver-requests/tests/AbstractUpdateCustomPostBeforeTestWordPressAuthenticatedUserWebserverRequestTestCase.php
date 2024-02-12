@@ -16,6 +16,9 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
     use UpdateCustomPostBeforeTestWebserverRequestTestTrait;
 
+    /** @var array<string,mixed> */
+    protected array $originalCustomPostData;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -25,6 +28,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
+            $this->originalCustomPostData = $this->executeRESTEndpointToGetOriginalCustomPostData($dataName);
             $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedCustomPostData());
         }
     }
