@@ -56,7 +56,14 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     /**
      * @return array<string,mixed>
      */
-    abstract protected function getOriginalCustomPostData(): array;
+    protected function getOriginalCustomPostData(): array
+    {
+        $originalCustomPostData = [];
+        foreach (array_keys($this->getUpdatedCustomPostData()) as $key) {
+            $originalCustomPostData = $this->originalCustomPostData[$key];
+        }
+        return $originalCustomPostData;
+    }
 
     protected static function getEndpoint(): string
     {
