@@ -29,10 +29,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
         }
     }
 
-    protected function mustExecuteRESTEndpointToUpdateCustomPost(string $dataName): bool
-    {
-        return str_ends_with($dataName, ':enabled');
-    }
+    abstract protected function mustExecuteRESTEndpointToUpdateCustomPost(string $dataName): bool;
 
     protected function tearDown(): void
     {

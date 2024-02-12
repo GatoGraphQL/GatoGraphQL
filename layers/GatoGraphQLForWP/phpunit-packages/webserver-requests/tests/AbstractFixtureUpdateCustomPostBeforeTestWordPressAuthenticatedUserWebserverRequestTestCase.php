@@ -56,6 +56,11 @@ abstract class AbstractFixtureUpdateCustomPostBeforeTestWordPressAuthenticatedUs
         return static::customizeFixtureEntries($fixtureEntries);
     }
 
+    protected function mustExecuteRESTEndpointToUpdateCustomPost(string $dataName): bool
+    {
+        return str_ends_with($dataName, ':enabled');
+    }
+
     /**
      * @param array<string,array<string,mixed>> $fixtureEntries
      * @return array<string,array<string,mixed>>
