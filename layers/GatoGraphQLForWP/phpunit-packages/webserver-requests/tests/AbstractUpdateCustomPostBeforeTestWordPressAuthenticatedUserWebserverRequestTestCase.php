@@ -29,7 +29,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
         $dataName = $this->getDataName();
         if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
             $this->originalCustomPostData = $this->executeRESTEndpointToGetOriginalCustomPostData($dataName);
-            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedCustomPostData());
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getUpdatedCustomPostData($dataName));
         }
     }
 
@@ -42,7 +42,7 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
          */
         $dataName = $this->getDataName();
         if ($this->mustExecuteRESTEndpointToUpdateCustomPost($dataName)) {
-            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalCustomPostData());
+            $this->executeRESTEndpointToUpdateCustomPost($dataName, $this->getOriginalCustomPostData($dataName));
         }
 
         parent::tearDown();
@@ -51,15 +51,15 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
     /**
      * @return array<string,mixed>
      */
-    abstract protected function getUpdatedCustomPostData(): array;
+    abstract protected function getUpdatedCustomPostData(string $dataName): array;
 
     /**
      * @return array<string,mixed>
      */
-    protected function getOriginalCustomPostData(): array
+    protected function getOriginalCustomPostData(string $dataName): array
     {
         $originalCustomPostData = [];
-        foreach (array_keys($this->getUpdatedCustomPostData()) as $key) {
+        foreach (array_keys($this->getUpdatedCustomPostData($dataName)) as $key) {
             $originalCustomPostData = $this->originalCustomPostData[$key];
         }
         return $originalCustomPostData;
