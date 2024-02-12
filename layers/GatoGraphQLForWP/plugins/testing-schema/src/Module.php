@@ -41,4 +41,21 @@ class Module extends AbstractExtensionModule
             $moduleClassConfiguration[\PoP\Engine\Module::class][\PoP\Engine\Environment::ENABLE_QUERYING_APP_STATE_FIELDS] = true;
         }
     }
+
+    /**
+     * Initialize services
+     *
+     * @param array<class-string<ModuleInterface>> $skipSchemaModuleClasses
+     */
+    protected function initializeContainerServices(
+        bool $skipSchema,
+        array $skipSchemaModuleClasses,
+    ): void {
+        parent::initializeContainerServices(
+            $skipSchema,
+            $skipSchemaModuleClasses
+        );
+
+        $this->initServices(dirname(__DIR__), '/Overrides');
+    }
 }
