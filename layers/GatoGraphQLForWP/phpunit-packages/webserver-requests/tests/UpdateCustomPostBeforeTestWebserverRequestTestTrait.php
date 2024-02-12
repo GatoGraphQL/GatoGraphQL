@@ -67,7 +67,7 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTPostCallIsSuccessful($response, $dataName, $endpointURL, $options);
+        $this->assertRESTGetCallIsSuccessful($response);
     }
 
     protected function getCustomPostTypeEndpointPath(): string
