@@ -16,7 +16,7 @@ trait UpdateCustomPostBeforeTestWebserverRequestTestTrait
     use ExecuteRESTWebserverRequestTestCaseTrait;
 
     /**
-     * @param array<string,mixed> $postData
+     * @return array<string,mixed>
      */
     protected function executeRESTEndpointToGetOriginalCustomPostData(
         string $dataName,
