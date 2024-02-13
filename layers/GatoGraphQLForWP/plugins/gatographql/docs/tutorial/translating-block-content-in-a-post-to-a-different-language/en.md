@@ -517,7 +517,7 @@ query EscapeRegexStrings
           @applyField(
             name: "_sprintf",
             arguments: {
-              string: "$1%s$2",
+              string: "${1}%s${2}",
               values: [$value]
             },
             setResultInResponse: true

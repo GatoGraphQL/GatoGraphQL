@@ -50,7 +50,7 @@ query CreateRegex(
     @export(as: "regex")
     @remove
   replaceWith: _sprintf(
-    string: "$1%s",
+    string: "${1}%s",
     values: [$injectBlockMarkup]
   )
     @export(as: "replaceWith")
