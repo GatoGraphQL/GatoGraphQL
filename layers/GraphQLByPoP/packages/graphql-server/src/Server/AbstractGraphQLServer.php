@@ -64,6 +64,18 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         // Set a new Response into the AppState
         App::setResponse(new Response());
 
+        /**
+         * The GraphQL query is validated in
+         * `defineGraphQLQueryVarsInApplicationState`,
+         * so before then we need to create new instances
+         * for the Document/Feedback stores as errors
+         * can be added to them
+         *
+         * @see `generateDataAndPrepareResponse` in layers/Engine/packages/component-model/src/Engine/Engine.php
+         */
+        App::generateAndStackFeedbackStore();
+        App::generateAndStackTracingStore();
+
         $this->getApplicationStateFillerService()->defineGraphQLQueryVarsInApplicationState(
             $queryOrExecutableDocument,
             $variables,
@@ -86,5 +98,17 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         return $response;
     }
 
-    abstract protected function areFeedbackAndTracingStoresAlreadyCreated(): bool;
+    /**
+     * Function kept for documentation purposes.
+     *
+     * Since already calling `App::generateAndStackFeedbackStore()`
+     * in method above, there's no need Engine to execute that logic.
+     *
+     * It is needed, as the store regeneration must happen
+     * before the GraphQL query is validated.
+     */
+    final protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
+    {
+        return true;
+    }
 }
