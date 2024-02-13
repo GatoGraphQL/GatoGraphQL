@@ -75,9 +75,4 @@ abstract class AbstractAttachedGraphQLServer extends AbstractGraphQLServer
 
         return $response;
     }
-
-    protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
-    {
-        return false;
-    }
 }
