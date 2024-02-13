@@ -33,7 +33,7 @@ mutation InjectBlock(
     adaptedRawContent: _strRegexReplace(
       in: $__rawContent,
       searchRegex: "#(<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->[\\s\\S]+<!-- /wp:paragraph -->)#U",
-      replaceWith: "$1<!-- mycompany:black-friday-campaign-video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure>\n<!-- /mycompany:black-friday-campaign-video -->",
+      replaceWith: "${1}<!-- mycompany:black-friday-campaign-video -->\n<figure class=\"wp-block-video\"><video controls src=\"https://mysite.com/videos/BlackFriday2023.mp4\"></video></figure>\n<!-- /mycompany:black-friday-campaign-video -->",
       limit: 1
     )
     update(input: {
@@ -88,7 +88,7 @@ query CreateRegex(
     @export(as: "regex")
     @remove
   replaceWith: _sprintf(
-    string: "$1%s",
+    string: "${1}%s",
     values: [$injectBlockMarkup]
   )
     @export(as: "replaceWith")
