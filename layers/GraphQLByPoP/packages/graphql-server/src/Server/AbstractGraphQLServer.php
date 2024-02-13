@@ -87,7 +87,7 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
          * used during this processing
          */
         $this->getEngine()->generateDataAndPrepareResponse(
-            true,//$this->areFeedbackAndTracingStoresAlreadyCreated()
+            $this->areFeedbackAndTracingStoresAlreadyCreated()
         );
 
         $response = App::getResponse();
@@ -98,5 +98,17 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
         return $response;
     }
 
-    abstract protected function areFeedbackAndTracingStoresAlreadyCreated(): bool;
+    /**
+     * Function kept for documentation purposes.
+     *
+     * Since already calling `App::generateAndStackFeedbackStore()`
+     * in method above, there's no need Engine to execute that logic.
+     *
+     * It is needed, as the store regeneration must happen
+     * before the GraphQL query is validated.
+     */
+    final protected function areFeedbackAndTracingStoresAlreadyCreated(): bool
+    {
+        return true;
+    }
 }
