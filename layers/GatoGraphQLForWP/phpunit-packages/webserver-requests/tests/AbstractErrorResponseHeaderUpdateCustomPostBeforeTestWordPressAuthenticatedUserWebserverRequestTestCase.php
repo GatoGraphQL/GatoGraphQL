@@ -35,8 +35,8 @@ abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAut
         $dataName = $this->getDataName();
         $expectedResponseErrorMessage = $this->getExpectedResponseErrorMessage($dataName);
         $this->assertEquals(
+            $expectedResponseErrorMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
-            $expectedResponseErrorMessage
         );
     }
 
