@@ -105,7 +105,7 @@ query ConnectToGraphQLAPI(
     query: """
     
 query GetPost($postSlug: String!) {
-  post(by: { slug: $postSlug }) {
+  post(by: { slug: $postSlug }, status: any) {
     id
     slug
     rawTitle
