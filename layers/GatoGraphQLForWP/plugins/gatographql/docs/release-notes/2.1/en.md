@@ -73,6 +73,7 @@ Used with the [Automation](https://gatographql.com/extensions/automation/) exten
 - Give unique operationName to all predefined persisted queries (#2644)
 - Improved error message when fetching blocks from a post, and the block content has errors
 - Completed documentation for the Automation extension (#2651)
+- On the "Generate a post's featured image using AI and optimize it" predefined persisted query, execute logic only if the post title is not empty (#ec931dd)
 
 ## Fixed
 
