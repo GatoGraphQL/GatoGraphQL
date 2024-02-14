@@ -22,7 +22,7 @@
 
 query FetchData($postId: ID!)
 {
-  post(by: { id: $postId } ) {
+  post(by: { id: $postId }, status: any) {
     title
     rawContent
     rawExcerpt

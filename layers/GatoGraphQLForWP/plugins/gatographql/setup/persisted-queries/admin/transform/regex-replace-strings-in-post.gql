@@ -25,7 +25,7 @@ query GetPostData(
   $searchRegex: [String!]!,
   $replaceWith: [String!]!
 ) {
-  post(by: { id: $postId }) {
+  post(by: { id: $postId }, status: any) {
     title
     adaptedPostTitle: _strRegexReplaceMultiple(
       searchRegex: $searchRegex
