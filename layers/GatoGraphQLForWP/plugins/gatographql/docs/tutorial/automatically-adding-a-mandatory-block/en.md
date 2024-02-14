@@ -120,7 +120,7 @@ use WP_Post;
 
 add_action(
   'draft_post',
-  function (int $postID, WP_Post $post): void {
+  function (int $postID): void {
     GraphQLServer::executePersistedQuery(
       'insert-mandatory-comments-block-if-missing',
       [
@@ -128,8 +128,6 @@ add_action(
       ],
       'MaybeInsertCommentsBlock'
     );
-  },
-  10,
-  2
+  }
 );
 ```
