@@ -12,24 +12,6 @@ This extension is composed of:
 
 Automatically execute a GraphQL Persisted Query when some event happens on the site.
 
-Some examples are:
-
-- Create a featured image for new posts using AI
-- Add a mandatory block to the post when published
-- Replace `http` with `https` in all image sources and links when a post is updated
-- Send an email to the admin when there's a new post
-- Send an email to the user whose comment has a new response
-- Translate a post to a different language when created, and export it to another site (in a multisite setup)
-- Contact an external service when a post is published (eg: automatically post it on your Facebook feed)
-
-For instance, when creating a new post with `draft` status, the predefined automation rule **Add comments block to new post** checks if the `core/comments` block is present and, if not, it adds it at the bottom of the post:
-
-<div class="img-width-640" markdown=1>
-
-![Automatically inserting the comments block to new 'draft' posts](../../images/automation-rule-insert-mandatory-comments-block.gif "Automatically inserting the comments block to new 'draft' posts")
-
-</div>
-
 A Custom Post Type "Automation Rules" is provided to create automations. When creating a new entry, we must provide the configuration for:
 
 - Automation trigger(s)
@@ -174,6 +156,26 @@ This hook receives the following parameters (in this same order):
 Notice that the schema configuration to apply is already selected within the persisted query.
 
 ## Examples
+
+### Automation Configurator
+
+Some examples are:
+
+- Create a featured image for new posts using AI
+- Add a mandatory block to the post when published
+- Replace `http` with `https` in all image sources and links when a post is updated
+- Send an email to the admin when there's a new post
+- Send an email to the user whose comment has a new response
+- Translate a post to a different language when created, and export it to another site (in a multisite setup)
+- Contact an external service when a post is published (eg: automatically post it on your Facebook feed)
+
+For instance, when creating a new post with `draft` status, the predefined automation rule **Add comments block to new post** checks if the `core/comments` block is present and, if not, it adds it at the bottom of the post:
+
+<div class="img-width-640" markdown=1>
+
+![Automatically inserting the comments block to new 'draft' posts](../../images/automation-rule-insert-mandatory-comments-block.gif "Automatically inserting the comments block to new 'draft' posts")
+
+</div>
 
 ### Query Resolution Action
 
