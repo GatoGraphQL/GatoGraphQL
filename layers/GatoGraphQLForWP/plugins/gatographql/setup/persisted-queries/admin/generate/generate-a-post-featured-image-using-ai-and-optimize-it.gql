@@ -57,8 +57,8 @@ query InitializeVariables(
     @export(as: "isFeaturedImageMissing")
     @remove
 
-  isPostTitleEmpty: _echo(value: false)
-    @export(as: "isPostTitleEmpty")
+  isPostTitleNotEmpty: _echo(value: false)
+    @export(as: "isPostTitleNotEmpty")
     @remove
 
   generatedImageURL: _echo(value: null)
@@ -104,8 +104,8 @@ query ExportPostData(
       @export(as: "postTitle")
     rawTitle
       @remove
-    isPostTitleEmpty: _isEmpty(value: $__rawTitle)
-      @export(as: "isPostTitleEmpty")
+    isPostTitleNotEmpty: _notEmpty(value: $__rawTitle)
+      @export(as: "isPostTitleNotEmpty")
     mediaItemFilename: rawTitle
       @default(value: "untitled", condition: IS_EMPTY)
       @strLowerCase
@@ -121,7 +121,7 @@ query MaybeGenerateImageUsingOpenAI(
 )
   @depends(on: "ExportPostData")
   @include(if: $isFeaturedImageMissing)
-  @include(if: $isPostTitleEmpty)
+  @include(if: $isPostTitleNotEmpty)
   @include(if: $useOpenAI)
 {
   openAIResponse: _sendJSONObjectItemHTTPRequest(input: {
@@ -164,7 +164,7 @@ query MaybeGenerateImageUsingStableDiffusion(
 )
   @depends(on: "ExportPostData")
   @include(if: $isFeaturedImageMissing)
-  @include(if: $isPostTitleEmpty)
+  @include(if: $isPostTitleNotEmpty)
   @include(if: $useStableDiffusion)
 {
   stableDiffusionResponse: _sendJSONObjectItemHTTPRequest(input: {
@@ -203,7 +203,7 @@ query CheckIsImageGenerated
     "MaybeGenerateImageUsingStableDiffusion"
   ])
   @include(if: $isFeaturedImageMissing)
-  @include(if: $isPostTitleEmpty)
+  @include(if: $isPostTitleNotEmpty)
 {
   isImageGenerated: _notEmpty(value: $generatedImageURL)
     @export(as: "isImageGenerated")
