@@ -107,11 +107,11 @@ mutation {
 
 As such, only visitors from that IP will be able to execute this mutation.
 
-Then there is a hook on `publish_post` that executes some query against the internal GraphQL server (eg: to send a notification to the site admin):
+Then there is a hook on `new_to_publish` that executes some query against the internal GraphQL server (eg: to send a notification to the site admin):
 
 ```php
 add_action(
-  "publish_post",
+  "new_to_publish",
   fn (int $post_id) => GraphQLServer::executeQuery("...", ["postID" => $post_id])
 );
 ```
@@ -124,12 +124,15 @@ As a result, the validation by user IP will not take place (that is, unless that
 
 In this example workflow (which also uses **Multiple Query Execution**, **Helper Function Collection** and **Field to Input** modules), when a new post is created in the site, we send a notification to the admin user.
 
-We hook into the WordPress core action `publish_post`, retrieve the data from the newly-created post, and call `GraphQLServer::executeQuery`:
+We hook into the WordPress core action `new_to_publish`, retrieve the data from the newly-created post, and call `GraphQLServer::executeQuery`:
 
 ```php
 add_action(
-  'publish_post',
-  function (int $postID, WP_Post $post) {
+  'new_to_publish',
+  function (WP_Post $post) {
+    if ($post->post_type !== 'post') {
+      return;
+    }
     // Check the contents of the query below
     $query = ' ... ';
     $variables = [
@@ -137,9 +140,7 @@ add_action(
       'postContent' => $post->post_content,
     ];
     GraphQLServer::executeQuery($query, $variables, 'SendEmail');
-  },
-  10,
-  2
+  }
 );
 ```
 
