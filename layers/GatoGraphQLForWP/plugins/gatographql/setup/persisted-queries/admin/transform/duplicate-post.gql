@@ -39,7 +39,7 @@ query InitializeDynamicVariables
 query GetPostAndExportData($postId: ID!)
   @depends(on: "InitializeDynamicVariables")
 {
-  post(by: { id : $postId }) {
+  post(by: { id: $postId }, status: any) {
     # Fields not to be duplicated
     id
     slug

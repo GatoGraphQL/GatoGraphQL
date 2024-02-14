@@ -72,7 +72,7 @@ Let's see next how to trigger the execution of the GraphQL query.
 
 ## Option 1: Trigger always by reacting to WordPress hooks
 
-We hook into the WordPress core action `wp_insert_post`, retrieve the data from the newly-created post, and execute the GraphQL query defined above against the internal GraphQL server (provided via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
+We hook into the WordPress core action `new_to_publish`, retrieve the data from the newly-created post, and execute the GraphQL query defined above against the internal GraphQL server (provided via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
 
 ```php
 use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
@@ -81,9 +81,9 @@ use WP_Post;
 // The GraphQL query, under var `$query`, is the one defined above
 // $query = '...';
 add_action(
-  'wp_insert_post',
-  function (int $postID, WP_Post $post) use ($query) {
-    if ($post->post_type !== 'post' || $post->post_status !== 'publish') {
+  'new_to_publish',
+  function (WP_Post $post) use ($query) {
+    if ($post->post_type !== 'post') {
       return;
     }
     $variables = [
@@ -92,9 +92,7 @@ add_action(
       'postURL' => get_permalink($post->ID),
     ];
     GraphQLServer::executeQuery($query, $variables, 'SendEmail');
-  },
-  10,
-  2
+  }
 );
 ```
 
@@ -112,7 +110,7 @@ This class provides 3 static methods to execute queries:
 
 </div>
 
-This GraphQL query will be executed whenever a new post is created or, to be more precise, whenever WordPress function `wp_insert_post` is invoked (as this function triggers hook `wp_insert_post`):
+This GraphQL query will be executed whenever a new post is created or, to be more precise, whenever WordPress function `wp_insert_post` is invoked (as this function triggers hook `new_to_publish`):
 
 ```php
 $postID = wp_insert_post([
@@ -144,8 +142,8 @@ For instance, let' say we are executing a GraphQL query against the single endpo
 | **(External) GraphQL Server** | **Internal GraphQL Server** |
 | --- | --- |
 | Execute GraphQL query against the single endpoint, using its own Schema Configuration | _(not active)_ |
-| Create a post; this triggers `wp_insert_post` | _(not active)_ |
-| _(waiting...)_ | React to `wp_insert_post` hook: Spin the Internal GraphQL server, using its own Schema Configuration |
+| Create a post; this triggers `new_to_publish` | _(not active)_ |
+| _(waiting...)_ | React to `new_to_publish` hook: Spin the Internal GraphQL server, using its own Schema Configuration |
 | _(waiting...)_ | Execute the query to send an email |
 | _(waiting...)_ | Send email, end of that query |
 | _(waiting...)_ | Shutdown server |

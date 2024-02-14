@@ -21,7 +21,7 @@
 ########################################################################
 
 query GetPostAndExportData($postId: ID!) {
-  post(by: { id : $postId }) {
+  post(by: { id: $postId }, status: any) {
     content @export(as: "postContent")
     title @export(as: "postTitle")
     url @export(as: "postURL")

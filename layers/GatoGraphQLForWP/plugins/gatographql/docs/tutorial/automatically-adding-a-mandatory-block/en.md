@@ -112,18 +112,15 @@ Then, for this GraphQL query to work, the [Schema Configuration](https://gatogra
 
 </div>
 
-This PHP code hooks into WordPress action `wp_insert_post` to execute the Persisted Query (via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
+This PHP code hooks into WordPress action `draft_post` to execute the Persisted Query (via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
 
 ```php
 use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
 use WP_Post;
 
 add_action(
-  'wp_insert_post',
-  function (int $postID, WP_Post $post): void {
-    if ($post->post_type !== 'post' || $post->post_status !== 'publish') {
-      return;
-    }
+  'draft_post',
+  function (int $postID): void {
     GraphQLServer::executePersistedQuery(
       'insert-mandatory-comments-block-if-missing',
       [
@@ -131,8 +128,6 @@ add_action(
       ],
       'MaybeInsertCommentsBlock'
     );
-  },
-  10,
-  2
+  }
 );
 ```

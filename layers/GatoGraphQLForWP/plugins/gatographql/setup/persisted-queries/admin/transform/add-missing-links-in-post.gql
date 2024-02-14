@@ -28,7 +28,7 @@
 ########################################################################
 
 query GetPostData($postId: ID!) {
-  post(by: { id: $postId }) {
+  post(by: { id: $postId }, status: any) {
     id
     rawContent
     adaptedRawContent: _strRegexReplace(

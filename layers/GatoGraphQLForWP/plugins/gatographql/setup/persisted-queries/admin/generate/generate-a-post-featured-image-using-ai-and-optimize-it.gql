@@ -91,7 +91,7 @@ query ExportPostData(
 )
   @depends(on: "InitializeVariables")
 {
-  post(by: { id: $postId }) {
+  post(by: { id: $postId }, status: any) {
     hasFeaturedImage
     isFeaturedImageMissing: hasFeaturedImage
       @boolOpposite

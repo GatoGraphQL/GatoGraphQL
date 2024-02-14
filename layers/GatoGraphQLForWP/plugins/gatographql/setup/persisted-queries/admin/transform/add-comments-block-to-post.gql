@@ -36,7 +36,7 @@ mutation InsertCommentsBlockIfMissingInPost($postId: ID!)
   @depends(on: "CheckIfCommentsBlockExists")
   @skip(if: $blockExists)
 {
-  post(by: { id: $postId }) {
+  post(by: { id: $postId }, status: any) {
     id
     rawContent
     adaptedRawContent: _strAppend(
