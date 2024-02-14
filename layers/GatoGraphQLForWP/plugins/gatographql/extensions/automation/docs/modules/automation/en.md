@@ -89,9 +89,9 @@ If the same key is used for the "dynamic" and "static" GraphQL variables (see **
 
 ### Debugging issues
 
-If the automation hasn't been executed, there could be an error with the execution of the persisted query.
+If the automation hasn't been executed, there could be an error with the configuration of the automation, or execution of the persisted query.
 
-All errors (such as thrown exceptions, or `errors` entries in the GraphQL query) are sent to PHP function's `error_log`, so these are printed in the [WordPress error log](https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/).
+All configuration problems (such as a malformed JSON string for the GraphQL variables, or pointing to a persisted query that has been deleted) and execution errors (such as thrown exceptions, or `errors` entries in the GraphQL query) are sent to PHP function's `error_log`, so these are printed in the [WordPress error log](https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/).
 
 These error logs are prepended with string `[Gato GraphQL]`.
 
