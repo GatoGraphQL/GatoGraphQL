@@ -12,6 +12,10 @@ This extension is composed of:
 
 Automatically execute a GraphQL Persisted Query when some event happens on the site.
 
+The **Automation Configurator** module provides an "automator" user interface, to create automations via the WordPress editor.
+
+The automation trigger is any WordPress action hook, and the action is the execution of a GraphQL persisted query.
+
 A Custom Post Type "Automation Rules" is provided to create automations. When creating a new entry, we must provide the configuration for:
 
 - Automation trigger(s)
@@ -159,7 +163,7 @@ Notice that the schema configuration to apply is already selected within the per
 
 ### Automation Configurator
 
-Some examples are:
+These are some examples of how we can use it:
 
 - Create a featured image for new posts using AI
 - Add a mandatory block to the post when published
