@@ -2,7 +2,7 @@
 
 ## Added
 
-### Support passing the Schema Configuration to apply when invoking the Internal GraphQL Server
+### Support providing the Schema Configuration to apply when invoking the Internal GraphQL Server
 
 Gato GraphQL now supports providing the Schema Configuration to apply when executing a query via an internal GraphQL Server (i.e. directly within the PHP application, not via an endpoint).
 
