@@ -1,6 +1,6 @@
 {
     "name": "endpoint-voyager",
-    "version": "2.2.0-dev",
+    "version": "2.1.1",
     "description": "Configure the GraphQL endpoint",
     "author": "Leonardo Losoviz",
     "license": "MIT",
