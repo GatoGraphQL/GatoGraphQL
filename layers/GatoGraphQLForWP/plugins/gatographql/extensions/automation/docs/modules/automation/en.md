@@ -178,8 +178,8 @@ These are some examples of how we can use it:
 - Replace `http` with `https` in all image sources and links when a post is updated
 - Send an email to the admin when there's a new post
 - Send an email to the user whose comment has a new response
-- Translate a post to a different language when created, and export it to another site (in a multisite setup)
-- Contact an external service when a post is published (eg: automatically post it on your Facebook feed)
+- [Multisite] Translate a new post to different languages, and add the translated posts to each site
+- Execute an action on an external service (eg: automatically share new posts on Facebook)
 
 For instance, when creating a new post with `draft` status, the predefined automation rule **Add comments block to new post** checks if the `core/comments` block is present and, if not, it adds it at the bottom of the post:
 
