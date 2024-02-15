@@ -115,6 +115,7 @@ abstract class AbstractViewSourceEndpointExecuter extends AbstractCPTEndpointExe
         wp_enqueue_script('highlight-language-json', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/json.min.js');
         wp_enqueue_script('highlight-language-bash', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/bash.min.js');
         wp_enqueue_script('highlight-language-xml', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/xml.min.js');
+        wp_enqueue_script('highlight-language-diff', $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/diff.min.js');
         wp_enqueue_script('highlight-script-run', $mainPluginURL . 'assets/js/run_highlight.js');
     }
 }

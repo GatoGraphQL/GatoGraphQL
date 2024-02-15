@@ -82,6 +82,13 @@ trait PrettyprintCodePageTrait
             true
         );
         \wp_enqueue_script(
+            'highlight-language-diff',
+            $mainPluginURL . 'assets/js/vendors/highlight-11.6.0/languages/diff.min.js',
+            array('highlight'),
+            $mainPluginVersion,
+            true
+        );
+        \wp_enqueue_script(
             'highlight-run',
             $mainPluginURL . 'assets/js/run_highlight.js',
             array('highlight'),
