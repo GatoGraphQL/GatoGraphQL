@@ -1,6 +1,6 @@
 {
     "name": "@gatographql/api-fetch",
-    "version": "2.1.0",
+    "version": "2.2.0-dev",
     "description": "Fetch data from the server through the GraphQL API",
     "repository": {
         "type": "git",
