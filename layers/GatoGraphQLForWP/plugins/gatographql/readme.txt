@@ -3,7 +3,7 @@ Contributors: gatographql, leoloso
 Tags: graphql, headless, webhook, api, automator, import export, search replace, update urls, wpcli, wget, translation, notifications
 Requires at least: 5.4
 Tested up to: 6.4
-Stable tag: 2.0.1
+Stable tag: 2.1.0
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html

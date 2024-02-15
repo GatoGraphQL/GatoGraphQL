@@ -1,6 +1,6 @@
 {
     "name": "custom-endpoint-options",
-    "version": "2.1.0-dev",
+    "version": "2.1.0",
     "description": "Configure the GraphQL custom endpoint",
     "author": "Leonardo Losoviz",
     "license": "MIT",
