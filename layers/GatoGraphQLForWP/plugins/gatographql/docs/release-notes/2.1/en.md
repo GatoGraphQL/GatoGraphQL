@@ -33,7 +33,7 @@ class GraphQLServer {
     // ...
   }
 
-+ // Schema Configuration is taken from the Persisted Query
++ // Schema Configuration is taken directly from the Persisted Query
   public static function executePersistedQuery(
     string|int $persistedQueryIDOrSlug,
     array $variables = [],
@@ -45,7 +45,7 @@ class GraphQLServer {
 
 The [Automation](https://gatographql.com/extensions/automation/) extension also benefits from this new feature.
 
-It now provides a user interface for its "automator" functionality (directly via the WordPress editor), called [Automation Configurator](https://gatographql.com/extensions/automation/#heading-automation-configurator). The automation trigger is any WordPress action hook, and the action is the execution of a GraphQL persisted query.
+It now provides an "automator" user interface (directly via the WordPress editor) called [Automation Configurator](https://gatographql.com/extensions/automation/#heading-automation-configurator). The automation trigger is any WordPress action hook, and the action is the execution of a GraphQL persisted query.
 
 <div class="img-width-1024" markdown=1>
 
