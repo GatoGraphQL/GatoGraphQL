@@ -56,7 +56,6 @@ class InputValueCoercionQueryExecutionGraphQLServerTest extends AbstractGraphQLS
             ],
         ];
         foreach ($items as $item) {
-            $item[2] ??= [];
             [$query, $expectedResponse, $variables] = $item;
             $this->assertGraphQLQueryExecution($query, $expectedResponse, $variables);
         }
