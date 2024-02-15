@@ -24,7 +24,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Bug in multi-control JS component used by extensions (Access Control, Cache Control, and Field Deprecation) showing "undefined" on the block on the Schema Configuration (#2639)
 - Bug in regex replacements in predefined persisted queries (#2649)
 - Avoid reinstalling plugin setup data if deactivating/reactivating the plugin (#2641)
-- Handle error from passing WP_Post as GraphQL variable
+- Handle error from passing WP_Post as GraphQL variable to the Internal GraphQL Server (#2652)
 
 ## 2.0.0 - 29/01/2014
 
