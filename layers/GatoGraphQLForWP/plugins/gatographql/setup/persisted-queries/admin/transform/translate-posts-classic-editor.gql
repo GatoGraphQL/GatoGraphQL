@@ -21,7 +21,7 @@
 
 query FetchData($postIds: [ID!]!)
 {
-  posts(filter: { ids: $postIds } ) {
+  posts(filter: { ids: $postIds, status: any } ) {
     title
     rawContent
     rawExcerpt
@@ -102,7 +102,7 @@ query GenerateMutationInputs
 mutation TranslateClassicEditorPosts($postIds: [ID!]!)
   @depends(on: "GenerateMutationInputs")
 {
-  updatePosts: posts(filter: { ids: $postIds } ) {
+  updatePosts: posts(filter: { ids: $postIds, status: any } ) {
     id
     postInput: _objectProperty(
       object: $postInputs,

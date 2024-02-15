@@ -25,7 +25,7 @@
 ########################################################################
 
 query InitializeEmptyVariables($postIds: [ID!]!) {
-  emptyVars: posts(filter: { ids: $postIds } ) {
+  emptyVars: posts(filter: { ids: $postIds, status: any } ) {
     emptyArray: _echo(value: [])
       @export(
         as: "coreHeadingContentItems"
@@ -267,7 +267,7 @@ query FetchData($postIds: [ID!]!)
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
   @depends(on: "InitializeEmptyVariables")
 {
-  posts(filter: { ids: $postIds } ) {
+  posts(filter: { ids: $postIds, status: any } ) {
     id
     title
       @export(as: "title", type: DICTIONARY)
@@ -2068,7 +2068,7 @@ mutation TranslateGutenbergPosts($postIds: [ID!]!)
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
 ]) {
-  updatePosts: posts(filter: { ids: $postIds } ) {
+  updatePosts: posts(filter: { ids: $postIds, status: any } ) {
     id
     transformedRawContent: _objectProperty(
       object: $transformedRawContent,
