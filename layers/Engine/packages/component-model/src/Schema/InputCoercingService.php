@@ -303,6 +303,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             );
             return null;
         }
+
         /**
          * If it is a null, nothing to coerce.
          *
@@ -322,7 +323,7 @@ class InputCoercingService implements InputCoercingServiceInterface
             return array_map(
                 // If it contains a null value, return it as is
                 fn (array|ValueResolutionPromiseInterface|null $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayArgValueElem : array_map(
-                    fn (mixed $arrayOfArraysArgValueElem) => ($arrayOfArraysArgValueElem === null || $arrayOfArraysArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayOfArraysArgValueElem : $inputTypeResolver->coerceValue($arrayOfArraysArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
+                    fn (mixed $arrayOfArraysArgValueElem) => ($arrayOfArraysArgValueElem === null || $arrayOfArraysArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayOfArraysArgValueElem : $this->validateAndCoerceInputValue($inputTypeResolver, $arrayOfArraysArgValueElem, $inputName, $astNode, $objectTypeFieldResolutionFeedbackStore),
                     $arrayArgValueElem
                 ),
                 $inputValue
@@ -332,12 +333,48 @@ class InputCoercingService implements InputCoercingServiceInterface
             /** @var mixed[] $inputValue */
             // If the value is an array, then cast each element to the item type
             return array_map(
-                fn (mixed $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayArgValueElem : $inputTypeResolver->coerceValue($arrayArgValueElem, $astNode, $objectTypeFieldResolutionFeedbackStore),
+                fn (mixed $arrayArgValueElem) => ($arrayArgValueElem === null || $arrayArgValueElem instanceof ValueResolutionPromiseInterface) ? $arrayArgValueElem : $this->validateAndCoerceInputValue($inputTypeResolver, $arrayArgValueElem, $inputName, $astNode, $objectTypeFieldResolutionFeedbackStore),
                 $inputValue
             );
         }
         // Otherwise, simply cast the given value directly
-        return $inputTypeResolver->coerceValue($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+        return $this->validateAndCoerceInputValue($inputTypeResolver, $inputValue, $inputName, $astNode, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * Handle error from passing WP_Post (or any object)
+     * as GraphQL variable, which is possible when executing
+     * a query via the Internal GraphQL Server, as variables
+     * are passed as a PHP array.
+     */
+    protected function validateAndCoerceInputValue(
+        InputTypeResolverInterface $inputTypeResolver,
+        string|int|float|bool|object $inputValue,
+        string $inputName,
+        AstInterface $astNode,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): string|int|float|bool|object|null {
+        if (is_object($inputValue) && !($inputValue instanceof stdClass)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                        InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_20,
+                        [
+                            $inputName,
+                            $inputTypeResolver->getMaybeNamespacedTypeName(),
+                        ]
+                    ),
+                    $astNode,
+                ),
+            );
+            return null;
+        }
+        return $inputTypeResolver->coerceValue(
+            $inputValue,
+            $astNode,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**
