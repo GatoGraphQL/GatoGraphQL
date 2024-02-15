@@ -342,10 +342,10 @@ class InputCoercingService implements InputCoercingServiceInterface
     }
 
     /**
-     * Handle error from passing WP_Post as GraphQL variable,
-     * which is possible when executing a query via the
-     * Internal GraphQL Server, as variables are passed
-     * as a JSON.
+     * Handle error from passing WP_Post (or any object)
+     * as GraphQL variable, which is possible when executing
+     * a query via the Internal GraphQL Server, as variables
+     * are passed as a PHP array.
      */
     protected function validateAndCoerceInputValue(
         InputTypeResolverInterface $inputTypeResolver,
