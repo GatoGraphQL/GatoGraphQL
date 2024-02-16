@@ -1,6 +1,6 @@
 {
     "name": "schema-configuration-block",
-    "version": "2.1.3",
+    "version": "2.2.0-dev",
     "description": "Select the Schema Configuration for the GraphQL query",
     "author": "Leonardo Losoviz",
     "license": "MIT",
