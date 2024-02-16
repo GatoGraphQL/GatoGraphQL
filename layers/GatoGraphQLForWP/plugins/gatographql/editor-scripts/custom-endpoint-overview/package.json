@@ -1,6 +1,6 @@
 {
     "name": "custom-endpoint-overview",
-    "version": "2.2.0-dev",
+    "version": "2.1.3",
     "description": "Sidebar component displaying Properties for a Custom Endpoint",
     "author": "Leonardo Losoviz",
     "license": "MIT",
