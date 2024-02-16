@@ -75,6 +75,7 @@ Used with the [Automation](https://gatographql.com/extensions/automation/) exten
 - Completed documentation for the Automation extension (#2651)
 - On the "Generate a post's featured image using AI and optimize it" predefined persisted query, execute logic only if the post title is not empty (#ec931dd)
 - Added documentation for fields `_arrayFlipToObject` and `_objectIntersectKey` from the PHP Functions via Schema extension
+- Added documentation for field `_arrayOfJSONObjectsExtractProperty` from the Helper Function Collection extension
 
 ## Fixed
 

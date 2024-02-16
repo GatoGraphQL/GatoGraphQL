@@ -171,6 +171,7 @@ You can even synchronize content across a network of sites, such as from an upst
 
 = 2.1.3 =
 * Added documentation for fields `_arrayFlipToObject` and `_objectIntersectKey` from the PHP Functions via Schema extension
+* Added documentation for field `_arrayOfJSONObjectsExtractProperty` from the Helper Function Collection extension
 
 = 2.1.0 =
 * Support providing the Schema Configuration to apply when invoking the Internal GraphQL Server
