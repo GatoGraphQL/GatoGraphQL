@@ -479,7 +479,9 @@ This query:
         items: ["Pasta", "Bagel"]
       }
     ],
-    property: "label"
+    propertyBy: {
+      key: "label"
+    }
   )
 }
 ```
