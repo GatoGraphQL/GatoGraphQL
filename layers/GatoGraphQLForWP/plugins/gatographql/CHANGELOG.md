@@ -6,6 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.2.0 - DATE
 
+## 2.1.3 - 16/02/2024
+
+### Improvements
+
+- Added documentation for fields `_arrayFlipToObject` and `_objectIntersectKey` from the PHP Functions via Schema extension
+
 ## 2.1.0 - 15/02/2024
 
 ### Added
