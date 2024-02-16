@@ -456,6 +456,44 @@ This query:
 }
 ```
 
+### `_arrayOfJSONObjectsExtractProperty`
+
+Given an array of JSON objects, with all of them having a common property, extract the value of this property and replace it as elements on the array.
+
+This query:
+
+```graphql
+{
+  arrayOfProperties: _arrayOfJSONObjectsExtractProperty(
+    array: [
+      {
+        label: "person",
+        items: ["Sam", "Eric"]
+      },
+      {
+        label: "location",
+        items: ["Paris", "Rome"]
+      },
+      {
+        label: "meal",
+        items: ["Pasta", "Bagel"]
+      }
+    ],
+    key: "label"
+  )
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "arrayOfProperties": ["person", "location", "meal"]
+  }
+}
+```
+
 ## Examples
 
 In combination with extensions **HTTP Request via Schema** and **Field to Input**, we can retrieve the currently-requested URL when executing a GraphQL custom endpoint or persisted query, add extra parameters, and send another HTTP request to the new URL.

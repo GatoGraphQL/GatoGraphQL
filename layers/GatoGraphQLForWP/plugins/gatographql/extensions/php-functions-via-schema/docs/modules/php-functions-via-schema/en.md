@@ -221,6 +221,10 @@ Return an array containing all the elements from the first array which are not p
 
 Create an array filled with values.
 
+### `_arrayFlipToObject`
+
+Exchanges all numeric keys with their associated values in an array, returning an object.
+
 ### `_arrayInnerJoinJSONObjectProperties`
 
 Fill the JSON objects inside a target array with properties from a JSON object from a source array, where a certain property is the same for both objects.
@@ -386,6 +390,10 @@ Indicate if the value is not `null`.
 ### `_objectAddEntry`
 
 Adds an entry to the object.
+
+### `_objectIntersectKey`
+
+Computes the intersection of objects using keys for comparison.
 
 ### `_objectKeepProperties`
 
