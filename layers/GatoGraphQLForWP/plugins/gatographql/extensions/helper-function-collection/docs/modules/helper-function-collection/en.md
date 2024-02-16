@@ -479,7 +479,7 @@ This query:
         items: ["Pasta", "Bagel"]
       }
     ],
-    property: "label"
+    key: "label"
   )
 }
 ```
