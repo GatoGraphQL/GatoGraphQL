@@ -391,6 +391,10 @@ Indicate if the value is not `null`.
 
 Adds an entry to the object.
 
+### `_objectIntersectKey`
+
+Computes the intersection of objects using keys for comparison.
+
 ### `_objectKeepProperties`
 
 Keeps specific properties only in the JSON object.
