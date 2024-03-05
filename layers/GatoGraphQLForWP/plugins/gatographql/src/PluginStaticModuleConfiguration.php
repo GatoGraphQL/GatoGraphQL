@@ -21,4 +21,15 @@ class PluginStaticModuleConfiguration
     {
         return false;
     }
+
+    /**
+     * Since only releasing the PRO bundle, disable generating
+     * all other bundles.
+     *
+     * @since v2.2
+     */
+    public static function enableMultiplePROBundles(): bool
+    {
+        return false;
+    }
 }

@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolver
 {
@@ -27,20 +28,24 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
      */
     public function getModulesToResolve(): array
     {
-        return [
-            self::PRO,
-            self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
-            self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE,
-            self::BETTER_WORDPRESS_WEBHOOKS,
-            self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
-            self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
-            self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
-            self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
-            self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
-            self::TAILORED_WORDPRESS_AUTOMATOR,
-            self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
-            self::VERSATILE_WORDPRESS_REQUEST_API,
-        ];
+        return array_merge(
+            [
+                self::PRO,
+            ],
+            PluginStaticModuleConfiguration::enableMultiplePROBundles() ? [
+                self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
+                self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE,
+                self::BETTER_WORDPRESS_WEBHOOKS,
+                self::EASY_WORDPRESS_BULK_TRANSFORM_AND_UPDATE,
+                self::PRIVATE_GRAPHQL_SERVER_FOR_WORDPRESS,
+                self::RESPONSIBLE_WORDPRESS_PUBLIC_API,
+                self::SELECTIVE_CONTENT_IMPORT_EXPORT_AND_SYNC_FOR_WORDPRESS,
+                self::SIMPLEST_WORDPRESS_CONTENT_TRANSLATION,
+                self::TAILORED_WORDPRESS_AUTOMATOR,
+                self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
+                self::VERSATILE_WORDPRESS_REQUEST_API,
+            ] : [],
+        );
     }
 
     public function getName(string $module): string
