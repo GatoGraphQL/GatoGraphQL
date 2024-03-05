@@ -1112,7 +1112,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Fetch comments by period', 'gatographql'),
+                    'post_title' => \__('[PRO] Fetch comments by period', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
