@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleR
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\BundleExtensionInterface;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\ExtensionInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\AdminHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
@@ -346,8 +347,13 @@ class ExtensionManager extends AbstractPluginManager
             $adminNotice_safe = sprintf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 sprintf(
-                    __('<strong>Gato GraphQL - %s</strong>: %s.', 'gatographql'),
-                    $extensionProductName,
+                    __('<strong>%s</strong>: %s.', 'gatographql'),
+                    PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()
+                        ? __('Gato GraphQL PRO', 'gatographql')
+                        : sprintf(
+                            __('Gato GraphQL - %s', 'gatographql'),
+                            $extensionProductName,
+                        ),
                     sprintf(
                         $messagePlaceholder,
                         $activateExtensionsSettingsURL,
