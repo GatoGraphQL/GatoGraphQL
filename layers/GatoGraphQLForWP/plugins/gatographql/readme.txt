@@ -12,11 +12,22 @@ The most powerful GraphQL server for WordPress.
 
 == Description ==
 
-Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way.
+Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the GraphQL language.
 
-Among others, you can use it to:
+Use Gato GraphQL to create headless sites, power your Gutenberg blocks, or fetch data for your theme, plugin or application.
 
-- Query data to create headless sites
+Gato GraphQL supports Persisted Queries out of the box. Persisted queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
+
+With persisted queries, you can have the great user experience of GraphQL, while having the security from a REST API, limiting clients and visitors to only query the data that you have defined in advance.
+
+You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
+
+=== Go PRO ===
+
+Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
+
+Among others, you can use Gato GraphQL PRO to:
+
 - Expose public and private APIs
 - Synchronize content across sites
 - Automate tasks
@@ -29,16 +40,6 @@ Among others, you can use it to:
 - Insert or remove (Gutenberg) blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
-
-Gato GraphQL supports Persisted Queries out of the box. Persisted queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
-
-With persisted queries, you can have the great user experience of GraphQL, while having the security from a REST API, limiting clients and visitors to only query the data that you have defined in advance.
-
-You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
-
-=== Go PRO ===
-
-Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
 
 Gato GraphQL PRO can handle the functionality from multiple plugins:
 
