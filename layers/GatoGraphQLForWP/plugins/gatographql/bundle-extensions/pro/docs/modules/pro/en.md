@@ -1,6 +1,6 @@
 # Gato GraphQL PRO
 
-PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress.
+All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress.
 
 As new extensions are created and released, they will also be added to this plugin.
 
