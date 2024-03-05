@@ -14,20 +14,6 @@ The most powerful GraphQL server for WordPress.
 
 Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way.
 
-Gato GraphQL can handle the functionality from multiple plugins:
-
-- ✅ APIs
-- ✅ Automators
-- ✅ Bulk editing
-- ✅ Code snippets
-- ✅ Content distribution
-- ✅ Email notifications
-- ✅ HTTP client
-- ✅ Import/export
-- ✅ Search & replace
-- ✅ Translation
-- ✅ Webhooks
-
 Among others, you can use it to:
 
 - Query data to create headless sites
@@ -52,39 +38,26 @@ You can also create public and private custom endpoints, exposing each of them f
 
 Browse the [Queries Library](https://gatographql.com/library/) for ready-to-use queries for your WordPress site. (The more popular queries are already created as Persisted Queries when installing the plugin.) The library is growing constantly, with new queries added on a regular basis.
 
-=== Augment Gato GraphQL via bundles and extensions ===
+=== Go PRO ===
 
-[Extensions](https://gatographql.com/extensions/) provide additional functionality and expand the GraphQL schema.
+Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
 
-[Bundles](https://gatographql.com/bundles/) are sets of extensions that satisfy predefined use cases.
+Gato GraphQL PRO can handle the functionality from multiple plugins:
 
-The bundle containing all extensions is:
+- ✅ APIs
+- ✅ Automator
+- ✅ Bulk editing/Post duplicator
+- ✅ Content distribution
+- ✅ Email notifications
+- ✅ HTTP client
+- ✅ Import/export
+- ✅ Search & replace
+- ✅ Translation
+- ✅ Webhooks
 
-👉🏽 **[“All in One Toolbox for WordPress” Bundle](https://gatographql.com/bundles/all-in-one-toolbox-for-wordpress/)**: As it contains all of Gato GraphQL extensions, it supports all promoted features and use cases.
+As new extensions are created, they are added to Gato GraphQL PRO.
 
-The bundles for specific use cases are:
-
-👉🏽 [“Automated Content Translation & Sync for WordPress Multisite” Bundle](https://gatographql.com/bundles/automated-content-translation-and-sync-for-wordpress-multisite/): Automatically create a translation of a newly-published post using the Google Translate API, for every language site on a WordPress multisite.
-
-👉🏽 [“Better WordPress Webhooks” Bundle](https://gatographql.com/bundles/better-wordpress-webhooks/): Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin.
-
-👉🏽 [“Easy WordPress Bulk Transform & Update” Bundle](https://gatographql.com/bundles/easy-wordpress-bulk-transform-and-update/): Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB.
-
-👉🏽 [“Private GraphQL Server for WordPress” Bundle](https://gatographql.com/bundles/private-graphql-server-for-wordpress/): Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint.
-
-👉🏽 [“Responsible WordPress Public API” Bundle](https://gatographql.com/bundles/responsible-wordpress-public-api/): Enhance your public APIs with additional layers of security, speed, power, schema evolution and control.
-
-👉🏽 [“Selective Content Import, Export & Sync for WordPress” Bundle](https://gatographql.com/bundles/selective-content-import-export-and-sync-for-wordpress/): Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site.
-
-👉🏽 [“Simplest WordPress Content Translation” Bundle](https://gatographql.com/bundles/simplest-wordpress-content-translation/): Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB.
-
-👉🏽 [“Tailored WordPress Automator” Bundle](https://gatographql.com/bundles/tailored-wordpress-automator/): Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more).
-
-👉🏽 [“Unhindered WordPress Email Notifications” Bundle](https://gatographql.com/bundles/unhindered-wordpress-email-notifications/): Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email.
-
-👉🏽 [“Versatile WordPress Request API” Bundle](https://gatographql.com/bundles/versatile-wordpress-request-api/): Interact with any external API and cloud service, posting and fetching data to/from them.
-
-The Gato GraphQL team is continually working on new extensions and bundles. If you need an integration with some WordPress plugin, or some missing functionality, [let us know](https://gatographql.com/contact/) and we'll work on it.
+Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
 == Source code ==
 
