@@ -1,6 +1,6 @@
 # About Gato GraphQL
 
-Interact with all your data in WordPress.
+The most powerful GraphQL server for WordPress.
 
 ## Home Links
 
