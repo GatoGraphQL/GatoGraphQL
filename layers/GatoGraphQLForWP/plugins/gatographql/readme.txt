@@ -171,7 +171,7 @@ You can even synchronize content across a network of sites, such as from an upst
 
 = 2.2.0 =
 * Do not include bundles in the Extensions page
-* Do not include the required extensions on predefined persisted queries
+* Do not print the required extensions on predefined persisted queries
 
 = 2.1.3 =
 * Added documentation for fields `_arrayFlipToObject` and `_objectIntersectKey` from the PHP Functions via Schema extension
