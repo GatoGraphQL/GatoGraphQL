@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ExtensionsMenuPage;
 
@@ -157,6 +158,7 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         $entryModule = $entry[2];
         /** @var ExtensionModuleResolverInterface */
         $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
+        $offerSinglePROCommercialProduct = PluginStaticModuleConfiguration::offerSinglePROCommercialProduct();
         return sprintf(
             \__('%s <small>(<a href="%s" target="%s" title="%s">%s%s</a>)</small>', 'gatographql'),
             $entryTitle,
@@ -164,8 +166,8 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             '_blank',
             \__('Open in shop', 'gatographql'),
             $entryModuleResolver instanceof BundleExtensionModuleResolverInterface
-                ? \__('get bundle', 'gatographql')
-                : \__('get extension', 'gatographql'),
+                ? ($offerSinglePROCommercialProduct ? \__('go PRO', 'gatographql') : \__('get bundle', 'gatographql'))
+                : ($offerSinglePROCommercialProduct ? \__('visit on website', 'gatographql') : \__('get extension', 'gatographql')),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }

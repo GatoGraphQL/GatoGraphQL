@@ -1,6 +1,6 @@
 # About Gato GraphQL
 
-Interact with all your data in WordPress.
+The most powerful GraphQL server for WordPress.
 
 ## Home Links
 
@@ -142,7 +142,8 @@ Subscribe to our newsletter and receive timely updates concerning:
 
 New features released on each version:
 
-- **[2.1](../../release-notes/2.1/en.md)** (current)
+- **[2.2](../../release-notes/2.2/en.md)** (current)
+- [2.1](../../release-notes/2.1/en.md)
 - [2.0](../../release-notes/2.0/en.md)
 - [1.5](../../release-notes/1.5/en.md)
 - [1.4](../../release-notes/1.4/en.md)

@@ -1,19 +1,8 @@
-# “All in One Toolbox for WordPress” Bundle
+# Gato GraphQL PRO
 
-This bundle contains **all of Gato GraphQL extensions**, in a single plugin, allowing you to achieve all superpowers using GraphQL:
+All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress.
 
-- GraphQL as an API
-- GraphQL as engine for your app
-- GraphQL as dev/admin tool
-- GraphQL as translation tool
-- GraphQL as HTTP client
-- GraphQL as notifications system
-- GraphQL as data synchronization tool
-- GraphQL as automation tool
-
-In addition to added functionality, this bundle also contains integrations with 3rd-party WordPress plugins, adding support to retrieve/mutate their data via GraphQL.
-
-As new extensions are created and released, they will also be added to this bundle.
+As new extensions are created and released, they will also be added to this plugin.
 
 ## List of bundled extensions
 

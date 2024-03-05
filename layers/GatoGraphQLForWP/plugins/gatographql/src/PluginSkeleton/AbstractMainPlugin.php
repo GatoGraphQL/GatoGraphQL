@@ -9,15 +9,19 @@ use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Exception\IOExcepti
 use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppThread;
+use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\DataComposers\GraphQLDocumentDataComposer;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -197,6 +201,28 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * @param string[] $actions
+     * @return string[]
+     */
+    public function getPluginActionLinks(array $actions): array
+    {
+        if (!PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()) {
+            return $actions;
+        }
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return [
+            sprintf(
+                '<a href="%s" target="_blank">%s%s</a>',
+                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+                __('Go PRO', 'gatographql'),
+                HTMLCodes::OPEN_IN_NEW_WINDOW,
+            ),
+            ...$actions,
+        ];
+    }
+
+    /**
      * When deactivating the main plugin or an extension,
      * remove the stored version from the DB
      */
@@ -347,6 +373,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         add_action('deactivate_plugin', $this->maybeRemoveStoredPluginVersionWhenPluginDeactivated(...));
 
         add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
+
+        add_filter('plugin_action_links_gatographql/gatographql.php', $this->getPluginActionLinks(...), 10, 1);
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
@@ -911,7 +939,10 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
 
         $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-        if ($tutorialLessonSlug !== null) {
+        if (
+            $tutorialLessonSlug !== null
+            && !PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()
+        ) {
             $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
                 $graphQLPersistedQuery,
                 $tutorialLessonSlug,

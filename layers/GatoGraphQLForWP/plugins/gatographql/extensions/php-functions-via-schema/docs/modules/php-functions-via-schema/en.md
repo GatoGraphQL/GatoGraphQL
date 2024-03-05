@@ -873,7 +873,7 @@ query {
   }
 }
 ```
-
+<!-- 
 ## Bundles including extension
 
 - [“All in One Toolbox for WordPress” Bundle](../../../../../bundle-extensions/all-in-one-toolbox-for-wordpress/docs/modules/all-in-one-toolbox-for-wordpress/en.md)
@@ -885,35 +885,4 @@ query {
 - [“Simplest WordPress Content Translation” Bundle](../../../../../bundle-extensions/simplest-wordpress-content-translation/docs/modules/simplest-wordpress-content-translation/en.md)
 - [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)
 - [“Unhindered WordPress Email Notifications” Bundle](../../../../../bundle-extensions/unhindered-wordpress-email-notifications/docs/modules/unhindered-wordpress-email-notifications/en.md)
-- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/versatile-wordpress-request-api/docs/modules/versatile-wordpress-request-api/en.md)
-
-<!-- ## Tutorial lessons referencing extension
-
-- [Querying dynamic data](../../../../../docs/tutorial/querying-dynamic-data/en.md)
-- [Duplicating a blog post](../../../../../docs/tutorial/duplicating-a-blog-post/en.md)
-- [Duplicating multiple blog posts at once](../../../../../docs/tutorial/duplicating-multiple-blog-posts-at-once/en.md)
-- [Customizing content for different users](../../../../../docs/tutorial/customizing-content-for-different-users/en.md)
-- [Search, replace, and store again](../../../../../docs/tutorial/search-replace-and-store-again/en.md)
-- [Adapting content in bulk](../../../../../docs/tutorial/adapting-content-in-bulk/en.md)
-- [Site migrations](../../../../../docs/tutorial/site-migrations/en.md)
-- [Inserting/Removing a (Gutenberg) block in bulk](../../../../../docs/tutorial/inserting-removing-a-gutenberg-block-in-bulk/en.md)
-- [Retrieving structured data from blocks](../../../../../docs/tutorial/retrieving-structured-data-from-blocks/en.md)
-- [Modifying (and storing again) the image URLs from all Image blocks in a post](../../../../../docs/tutorial/modifying-and-storing-again-the-image-urls-from-all-image-blocks-in-a-post/en.md)
-- [Translating block content in a post to a different language](../../../../../docs/tutorial/translating-block-content-in-a-post-to-a-different-language/en.md)
-- [Bulk translating block content in multiple posts to a different language](../../../../../docs/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md)
-- [Sending emails with pleasure](../../../../../docs/tutorial/sending-emails-with-pleasure/en.md)
-- [Sending a notification when there is a new post](../../../../../docs/tutorial/sending-a-notification-when-there-is-a-new-post/en.md)
-- [Sending a daily summary of activity](../../../../../docs/tutorial/sending-a-daily-summary-of-activity/en.md)
-- [Automatically adding a mandatory block](../../../../../docs/tutorial/automatically-adding-a-mandatory-block/en.md)
-- [Interacting with external services via webhooks](../../../../../docs/tutorial/interacting-with-external-services-via-webhooks/en.md)
-- [Retrieving data from an external API](../../../../../docs/tutorial/retrieving-data-from-an-external-api/en.md)
-- [Combining user data from different sources](../../../../../docs/tutorial/combining-user-data-from-different-sources/en.md)
-- [Handling errors when connecting to services](../../../../../docs/tutorial/handling-errors-when-connecting-to-services/en.md)
-- [Creating an API gateway](../../../../../docs/tutorial/creating-an-api-gateway/en.md)
-- [Transforming data from an external API](../../../../../docs/tutorial/transforming-data-from-an-external-api/en.md)
-- [Filtering data from an external API](../../../../../docs/tutorial/filtering-data-from-an-external-api/en.md)
-- [Pinging external services](../../../../../docs/tutorial/pinging-external-services/en.md)
-- [Updating large sets of data](../../../../../docs/tutorial/updating-large-sets-of-data/en.md)
-- [Importing a post from another WordPress site](../../../../../docs/tutorial/importing-a-post-from-another-wordpress-site/en.md)
-- [Distributing content from an upstream to multiple downstream sites](../../../../../docs/tutorial/distributing-content-from-an-upstream-to-multiple-downstream-sites/en.md)
-- [Automatically sending newsletter subscribers from InstaWP to Mailchimp](../../../../../docs/tutorial/automatically-sending-newsletter-subscribers-from-instawp-to-mailchimp/en.md) -->
+- [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/versatile-wordpress-request-api/docs/modules/versatile-wordpress-request-api/en.md) -->

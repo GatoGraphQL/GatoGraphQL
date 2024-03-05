@@ -1,6 +1,6 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
-Tags: graphql, headless, webhook, api, automator, import export, search replace, update urls, wpcli, wget, translation, notifications
+Tags: graphql, headless, webhook, api, automator, import export, search replace, bulk update, wpcli, wget, translation, notifications
 Requires at least: 5.4
 Tested up to: 6.4
 Stable tag: 2.1.3
@@ -8,29 +8,26 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Interact with all your data in WordPress.
+The most powerful GraphQL server for WordPress.
 
 == Description ==
 
-Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way.
+Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the GraphQL language.
 
-Gato GraphQL can handle the functionality from multiple plugins:
+Use Gato GraphQL to create headless sites, power your Gutenberg blocks, fetch data for your theme, plugin or website, or expose an API for other applications.
 
-- ✅ APIs
-- ✅ Automators
-- ✅ Bulk editing
-- ✅ Code snippets
-- ✅ Content distribution
-- ✅ Email notifications
-- ✅ HTTP client
-- ✅ Import/export
-- ✅ Search & replace
-- ✅ Translation
-- ✅ Webhooks
+Gato GraphQL supports Persisted Queries out of the box. Persisted queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
 
-Among others, you can use it to:
+With persisted queries, you can have the great user experience of GraphQL, while having the security from a REST API, limiting clients and visitors to only query the data that you have defined in advance.
 
-- Query data to create headless sites
+You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
+
+=== Go PRO ===
+
+Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
+
+Among others, you can use Gato GraphQL PRO to:
+
 - Expose public and private APIs
 - Synchronize content across sites
 - Automate tasks
@@ -44,47 +41,22 @@ Among others, you can use it to:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-Gato GraphQL supports Persisted Queries out of the box. Persisted queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
+Gato GraphQL PRO can handle the functionality from multiple plugins:
 
-With persisted queries, you can have the great user experience of GraphQL, while having the security from a REST API, limiting clients and visitors to only query the data that you have defined in advance.
+- ✅ APIs
+- ✅ Automator
+- ✅ Bulk editing/Post duplicator
+- ✅ Content distribution
+- ✅ Email notifications
+- ✅ HTTP client
+- ✅ Import/export
+- ✅ Search & replace
+- ✅ Translation
+- ✅ Webhooks
 
-You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
+As new extensions are created, they are added to Gato GraphQL PRO.
 
-Browse the [Queries Library](https://gatographql.com/library/) for ready-to-use queries for your WordPress site. (The more popular queries are already created as Persisted Queries when installing the plugin.) The library is growing constantly, with new queries added on a regular basis.
-
-=== Augment Gato GraphQL via bundles and extensions ===
-
-[Extensions](https://gatographql.com/extensions/) provide additional functionality and expand the GraphQL schema.
-
-[Bundles](https://gatographql.com/bundles/) are sets of extensions that satisfy predefined use cases.
-
-The bundle containing all extensions is:
-
-👉🏽 **[“All in One Toolbox for WordPress” Bundle](https://gatographql.com/bundles/all-in-one-toolbox-for-wordpress/)**: As it contains all of Gato GraphQL extensions, it supports all promoted features and use cases.
-
-The bundles for specific use cases are:
-
-👉🏽 [“Automated Content Translation & Sync for WordPress Multisite” Bundle](https://gatographql.com/bundles/automated-content-translation-and-sync-for-wordpress-multisite/): Automatically create a translation of a newly-published post using the Google Translate API, for every language site on a WordPress multisite.
-
-👉🏽 [“Better WordPress Webhooks” Bundle](https://gatographql.com/bundles/better-wordpress-webhooks/): Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin.
-
-👉🏽 [“Easy WordPress Bulk Transform & Update” Bundle](https://gatographql.com/bundles/easy-wordpress-bulk-transform-and-update/): Transform hundreds of posts with a single operation (replacing strings, adding blocks, adding a thumbnail, and more), and store them again on the DB.
-
-👉🏽 [“Private GraphQL Server for WordPress” Bundle](https://gatographql.com/bundles/private-graphql-server-for-wordpress/): Use GraphQL to power your application (blocks, themes and plugins), internally fetching data without exposing a public endpoint.
-
-👉🏽 [“Responsible WordPress Public API” Bundle](https://gatographql.com/bundles/responsible-wordpress-public-api/): Enhance your public APIs with additional layers of security, speed, power, schema evolution and control.
-
-👉🏽 [“Selective Content Import, Export & Sync for WordPress” Bundle](https://gatographql.com/bundles/selective-content-import-export-and-sync-for-wordpress/): Import hundreds of records into your WordPress site from another site or service (such as Google Sheets), and selectively export entries to another site.
-
-👉🏽 [“Simplest WordPress Content Translation” Bundle](https://gatographql.com/bundles/simplest-wordpress-content-translation/): Translate your content into over 130 languages using the Google Translate API, without adding extra tables or inner joins to the DB.
-
-👉🏽 [“Tailored WordPress Automator” Bundle](https://gatographql.com/bundles/tailored-wordpress-automator/): Create workflows to automate tasks (to transform data, automatically caption images, send notifications, and more).
-
-👉🏽 [“Unhindered WordPress Email Notifications” Bundle](https://gatographql.com/bundles/unhindered-wordpress-email-notifications/): Send personalized emails to all your users, and notifications to the admin, without constraints on what data can be added to the email.
-
-👉🏽 [“Versatile WordPress Request API” Bundle](https://gatographql.com/bundles/versatile-wordpress-request-api/): Interact with any external API and cloud service, posting and fetching data to/from them.
-
-The Gato GraphQL team is continually working on new extensions and bundles. If you need an integration with some WordPress plugin, or some missing functionality, [let us know](https://gatographql.com/contact/) and we'll work on it.
+Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
 == Source code ==
 
@@ -102,19 +74,15 @@ Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://gith
 
 With Gato GraphQL you can query data from the WordPress database, and then inject the results into a WP-CLI command (either to select a specific resource, or update an option with some value, or other).
 
-Check out tutorial lesson [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli/) for a thorough description on how to do it.
+Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli/) for a thorough description on how to do it.
 
 = How do I use Gato GraphQL to build headless sites? =
 
-With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org/) or others) you can query the data and render the HTML using CSR (client-side rendering).
+With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org/) or others) you can query the data and render the HTML.
 
-= How do I fetch Gutenberg block data with Gato GraphQL? =
+= Can I fetch Gutenberg block data with Gato GraphQL? =
 
-Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks/) for an example.
-
-= How do I use Gato GraphQL to feed data to my Gutenberg blocks? =
-
-Check tutorial lesson [Feeding data to blocks in the editor](https://gatographql.com/guides/code/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
+Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks/) for an example.
 
 = How is Gato GraphQL different than the WP REST API? =
 
@@ -124,29 +92,11 @@ Gato GraphQL supports "Persisted Queries", which are also endpoints with pre-def
 
 In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need, and fetching only that. As a result, you can retrieve all needed data in a single request.
 
-= Can I use Gato GraphQL to migrate my site? =
+= What's the difference between the Gato GraphQL plugin and its PRO version? =
 
-With Gato GraphQL you can execute queries to update data in your database, converting content into what is required for the new site.
+The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL as an API, such as for building headless sites.
 
-For instance, you can execute a query that replaces "https://my-old-domain.com" with "https://my-new-domain.com" in the content of all posts (even within Gutenberg block properties).
-
-Check tutorial lesson [Site migrations](https://gatographql.com/tutorial/site-migrations/) to learn how to do this.
-
-= Can Persisted Queries be used as webhooks? =
-
-Yes they can, because Persisted Queries are exposed under their own URL, they can extract the payload data, and then do something with that data (update a post, add a comment, send a notification, etc).
-
-Check tutorial lesson [Interacting with external services via webhooks](https://gatographql.com/tutorial/interacting-with-external-services-via-webhooks/) to learn how to do this.
-
-= Can I use Gato GraphQL to interact with external services? =
-
-Yes, you can. Check tutorial lesson [Retrieving data from an external API](https://gatographql.com/tutorial/retrieving-data-from-an-external-api/) to see examples on how to do this.
-
-= How can Gato GraphQL synchronize content across sites? =
-
-We can create GraphQL queries that fetch content from a site, and import that content into another site. Check tutorial lesson [Importing a post from another WordPress site](https://gatographql.com/tutorial/importing-a-post-from-another-wordpress-site/) to learn how to do this.
-
-You can even synchronize content across a network of sites, such as from an upstream to multiple downstreams. Check tutorial lesson [Distributing content from an upstream to multiple downstream sites](https://gatographql.com/tutorial/distributing-content-from-an-upstream-to-multiple-downstream-sites/) which explains how to do this.
+Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
 
 == Screenshots ==
 
@@ -168,6 +118,10 @@ You can even synchronize content across a network of sites, such as from an upst
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 2.2.0 =
+* Do not include bundles in the Extensions page
+* Do not print the required extensions on predefined persisted queries
 
 = 2.1.3 =
 * Added documentation for fields `_arrayFlipToObject` and `_objectIntersectKey` from the PHP Functions via Schema extension

@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 /**
  * Extension Table implementation, which retrieves the Extensions
@@ -118,21 +119,29 @@ class ExtensionListTable extends AbstractExtensionListTable
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
+        $offerSinglePROCommercialProduct = PluginStaticModuleConfiguration::offerSinglePROCommercialProduct();
+
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
         $extensionActionLabel = $plugin['gato_extension_is_bundle']
             ? sprintf(
                 '%s%s',
-                \__('Get Bundle', 'gatographql'),
+                $offerSinglePROCommercialProduct ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             )
-            : parent::getPluginInstallActionLabel($plugin);
+            : (
+                $offerSinglePROCommercialProduct ? sprintf(
+                    '%s%s',
+                    \__('Visit on website', 'gatographql'),
+                    HTMLCodes::OPEN_IN_NEW_WINDOW
+                ) : parent::getPluginInstallActionLabel($plugin)
+            );
         return sprintf(
             '
                 <span class="gatographql-extension-action-label">%s</span>
                 <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
             ',
             $extensionActionLabel,
-            \__('Active (via Bundle)', 'gatographql')
+            $offerSinglePROCommercialProduct ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
         );
     }
 
@@ -143,7 +152,12 @@ class ExtensionListTable extends AbstractExtensionListTable
     {
         if ($plugin['gato_extension_is_bundle']) {
             $additionalPluginCardClassnames = 'plugin-card-extension-bundle';
-            if ($plugin['gato_extension_module'] === BundleExtensionModuleResolver::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS) {
+            if (
+                in_array($plugin['gato_extension_module'], [
+                BundleExtensionModuleResolver::PRO,
+                BundleExtensionModuleResolver::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
+                ])
+            ) {
                 $additionalPluginCardClassnames .= ' plugin-card-highlight';
             } else {
                 $additionalPluginCardClassnames .= ' plugin-card-not-highlight';

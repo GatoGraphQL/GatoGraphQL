@@ -157,10 +157,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             if ($commercialExtensionSlugProductNames !== []) {
                 $ulPlaceholder = '<ul><li>%s</li></ul>';
                 $handlingLicenseMessageItems = [
-                    \__('Adding a license key will <strong>activate the extension</strong>', 'gatographql'),
-                    \__('Removing an existing license key will <strong>deactivate the extension</strong>', 'gatographql'),
-                    \__('Updating a license key will first <strong>deactivate the extension</strong> (using the previous license key) and then <strong>activate the extension</strong> again (using the new license key)', 'gatographql'),
-                    \__('Not updating a license key will <strong>validate the status of the extension</strong>', 'gatographql'),
+                    \__('Adding a license key will <strong>activate the product</strong>', 'gatographql'),
+                    \__('Removing an existing license key will <strong>deactivate the product</strong>', 'gatographql'),
+                    \__('Updating a license key will first <strong>deactivate the product</strong> (using the previous license key) and then <strong>activate the product</strong> again (using the new license key)', 'gatographql'),
+                    \__('Not updating a license key will <strong>validate the status of the product</strong>', 'gatographql'),
                 ];
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
                 $moduleSettings[] = [
@@ -172,7 +172,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::TITLE => \__('Activate Extension Licenses', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
-                        \__('Enter the license keys for the bundles/extensions purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
+                        \__('Enter the license keys for the products purchased on the Gato GraphQL Shop, and click on <strong>Activate Licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
                         $this->getCollapsible(
                             sprintf(
                                 '%s%s',
@@ -185,7 +185,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                     )
                                 ),
                             ),
-                            \__('(Show details: When are extensions activated, deactivated or validated?)')
+                            \__('(Show details: When are products activated, deactivated or validated?)')
                         ),
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
