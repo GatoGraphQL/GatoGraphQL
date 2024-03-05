@@ -119,13 +119,13 @@ class ExtensionListTable extends AbstractExtensionListTable
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
-        $enableMultiplePROBundles = PluginStaticModuleConfiguration::enableMultiplePROBundles();
+        $offerSinglePROCommercialProduct = PluginStaticModuleConfiguration::offerSinglePROCommercialProduct();
 
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
         $extensionActionLabel = $plugin['gato_extension_is_bundle']
             ? sprintf(
                 '%s%s',
-                $enableMultiplePROBundles ? \__('Get Bundle', 'gatographql') : \__('Go PRO', 'gatographql'),
+                $offerSinglePROCommercialProduct ? \__('Go PRO', 'gatographql') : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             )
             : parent::getPluginInstallActionLabel($plugin);
@@ -135,7 +135,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
             ',
             $extensionActionLabel,
-            $enableMultiplePROBundles ? \__('Active (via Bundle)', 'gatographql') : \__('Active (via PRO plugin)', 'gatographql')
+            $offerSinglePROCommercialProduct ? \__('Active (via PRO)', 'gatographql') : \__('Active (via Bundle)', 'gatographql')
         );
     }
 

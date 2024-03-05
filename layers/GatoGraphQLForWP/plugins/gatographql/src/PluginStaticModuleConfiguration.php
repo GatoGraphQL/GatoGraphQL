@@ -28,8 +28,8 @@ class PluginStaticModuleConfiguration
      *
      * @since v2.2
      */
-    public static function enableMultiplePROBundles(): bool
+    public static function offerSinglePROCommercialProduct(): bool
     {
-        return false;
+        return true;
     }
 }

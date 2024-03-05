@@ -32,7 +32,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
             [
                 self::PRO,
             ],
-            PluginStaticModuleConfiguration::enableMultiplePROBundles() ? [
+            PluginStaticModuleConfiguration::offerSinglePROCommercialProduct() ? [] : [
                 self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
                 self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE,
                 self::BETTER_WORDPRESS_WEBHOOKS,
@@ -44,7 +44,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 self::TAILORED_WORDPRESS_AUTOMATOR,
                 self::UNHINDERED_WORDPRESS_EMAIL_NOTIFICATIONS,
                 self::VERSATILE_WORDPRESS_REQUEST_API,
-            ] : [],
+            ],
         );
     }
 
