@@ -18,6 +18,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\DataComposers\GraphQLDocumentDataComposer;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -31,8 +32,8 @@ use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
-use WP_Upgrader;
 
+use WP_Upgrader;
 use function __;
 use function add_action;
 use function do_action;
@@ -911,7 +912,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
 
         $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-        if ($tutorialLessonSlug !== null) {
+        if ($tutorialLessonSlug !== null
+            && !PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()
+        ) {
             $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
                 $graphQLPersistedQuery,
                 $tutorialLessonSlug,
