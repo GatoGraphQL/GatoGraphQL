@@ -52,7 +52,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     {
         $placeholder = \__('“%s” Bundle', 'gatographql');
         return match ($module) {
-            self::PRO => sprintf($placeholder, \__('Gato GraphQL PRO', 'gatographql')),
+            self::PRO => \__('Gato GraphQL PRO', 'gatographql'),
             self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => sprintf($placeholder, \__('All in One Toolbox for WordPress', 'gatographql')),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => sprintf($placeholder, \__('Automated Content Translation & Sync for WordPress Multisite', 'gatographql')),
             self::BETTER_WORDPRESS_WEBHOOKS => sprintf($placeholder, \__('Better WordPress Webhooks', 'gatographql')),
