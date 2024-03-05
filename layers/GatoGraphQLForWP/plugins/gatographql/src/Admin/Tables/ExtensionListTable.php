@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 /**
  * Extension Table implementation, which retrieves the Extensions
@@ -118,11 +119,13 @@ class ExtensionListTable extends AbstractExtensionListTable
      */
     public function getPluginInstallActionLabel(array $plugin): string
     {
+        $enableMultiplePROBundles = PluginStaticModuleConfiguration::enableMultiplePROBundles();
+
         // If it's a Bundle => "Get Bundle", otherwise "Get Extension"
         $extensionActionLabel = $plugin['gato_extension_is_bundle']
             ? sprintf(
                 '%s%s',
-                \__('Get Bundle', 'gatographql'),
+                $enableMultiplePROBundles ? \__('Get Bundle', 'gatographql') : \__('Go PRO', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             )
             : parent::getPluginInstallActionLabel($plugin);
@@ -132,7 +135,7 @@ class ExtensionListTable extends AbstractExtensionListTable
                 <span class="gatographql-extension-bundle-action-label" style="display: none;">%s</span>
             ',
             $extensionActionLabel,
-            \__('Active (via Bundle)', 'gatographql')
+            $enableMultiplePROBundles ? \__('Active (via Bundle)', 'gatographql') : \__('Active (via PRO plugin)', 'gatographql')
         );
     }
 
