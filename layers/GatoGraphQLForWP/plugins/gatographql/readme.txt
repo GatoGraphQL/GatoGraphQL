@@ -80,13 +80,9 @@ Check out tutorial lesson [Complementing WP-CLI](https://gatographql.com/guides/
 
 With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org/) or others) you can query the data and render the HTML using CSR (client-side rendering).
 
-= How do I fetch Gutenberg block data with Gato GraphQL? =
+= Can I fetch Gutenberg block data with Gato GraphQL? =
 
-Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks/) for an example.
-
-= How do I use Gato GraphQL to feed data to my Gutenberg blocks? =
-
-Check tutorial lesson [Feeding data to blocks in the editor](https://gatographql.com/guides/code/feeding-data-to-blocks-in-the-editor/) to learn how to create a private endpoint and have the block connect to it via JavaScript.
+Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks/) for an example.
 
 = How is Gato GraphQL different than the WP REST API? =
 
@@ -96,29 +92,15 @@ Gato GraphQL supports "Persisted Queries", which are also endpoints with pre-def
 
 In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need, and fetching only that. As a result, you can retrieve all needed data in a single request.
 
-= Can I use Gato GraphQL to migrate my site? =
+= What's the difference between Gato GraphQL and Gato GraphQL PRO? =
 
-With Gato GraphQL you can execute queries to update data in your database, converting content into what is required for the new site.
+The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL as an API, such as for building headless sites.
 
-For instance, you can execute a query that replaces "https://my-old-domain.com" with "https://my-new-domain.com" in the content of all posts (even within Gutenberg block properties).
+Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
 
-Check tutorial lesson [Site migrations](https://gatographql.com/tutorial/site-migrations/) to learn how to do this.
+= Can I ask for a refund? =
 
-= Can Persisted Queries be used as webhooks? =
-
-Yes they can, because Persisted Queries are exposed under their own URL, they can extract the payload data, and then do something with that data (update a post, add a comment, send a notification, etc).
-
-Check tutorial lesson [Interacting with external services via webhooks](https://gatographql.com/tutorial/interacting-with-external-services-via-webhooks/) to learn how to do this.
-
-= Can I use Gato GraphQL to interact with external services? =
-
-Yes, you can. Check tutorial lesson [Retrieving data from an external API](https://gatographql.com/tutorial/retrieving-data-from-an-external-api/) to see examples on how to do this.
-
-= How can Gato GraphQL synchronize content across sites? =
-
-We can create GraphQL queries that fetch content from a site, and import that content into another site. Check tutorial lesson [Importing a post from another WordPress site](https://gatographql.com/tutorial/importing-a-post-from-another-wordpress-site/) to learn how to do this.
-
-You can even synchronize content across a network of sites, such as from an upstream to multiple downstreams. Check tutorial lesson [Distributing content from an upstream to multiple downstream sites](https://gatographql.com/tutorial/distributing-content-from-an-upstream-to-multiple-downstream-sites/) which explains how to do this.
+If Gato GraphQL PRO does not solve your problem, you have 30 days to request a refund.
 
 == Screenshots ==
 
