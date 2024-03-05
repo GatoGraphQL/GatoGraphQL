@@ -680,7 +680,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Duplicate post', 'gatographql'),
+                    'post_title' => \__('[PRO] Duplicate post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -703,7 +703,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Duplicate posts', 'gatographql'),
+                    'post_title' => \__('[PRO] Duplicate posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -729,7 +729,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Replace strings in post', 'gatographql'),
+                    'post_title' => \__('[PRO] Replace strings in post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -755,7 +755,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Replace strings in posts', 'gatographql'),
+                    'post_title' => \__('[PRO] Replace strings in posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -781,7 +781,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Regex replace strings in post', 'gatographql'),
+                    'post_title' => \__('[PRO] Regex replace strings in post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -807,7 +807,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Regex replace strings in posts', 'gatographql'),
+                    'post_title' => \__('[PRO] Regex replace strings in posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -833,7 +833,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Add missing links in post', 'gatographql'),
+                    'post_title' => \__('[PRO] Add missing links in post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -856,7 +856,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Replace "http" with "https" in image sources in post', 'gatographql'),
+                    'post_title' => \__('[PRO] Replace "http" with "https" in image sources in post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -879,7 +879,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Replace domain in posts', 'gatographql'),
+                    'post_title' => \__('[PRO] Replace domain in posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -902,7 +902,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Replace post slug in posts', 'gatographql'),
+                    'post_title' => \__('[PRO] Replace post slug in posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -928,7 +928,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Insert block in posts', 'gatographql'),
+                    'post_title' => \__('[PRO] Insert block in posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -951,7 +951,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Remove block from posts', 'gatographql'),
+                    'post_title' => \__('[PRO] Remove block from posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -974,7 +974,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Translate post (Gutenberg)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate post (Gutenberg)', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -997,7 +997,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Translate posts (Gutenberg)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate posts (Gutenberg)', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1020,7 +1020,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Import post from WordPress site', 'gatographql'),
+                    'post_title' => \__('[PRO] Import post from WordPress site', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1043,7 +1043,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Export post to WordPress site', 'gatographql'),
+                    'post_title' => \__('[PRO] Export post to WordPress site', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1135,7 +1135,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Fetch image URLs in blocks', 'gatographql'),
+                    'post_title' => \__('[PRO] Fetch image URLs in blocks', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1160,7 +1160,7 @@ class Plugin extends AbstractMainPlugin
                 $webhookPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
+                    'post_title' => \__('[PRO] Register a newsletter subscriber from InstaWP to Mailchimp', 'gatographql'),
                     'post_excerpt' => \__('Setup this persisted query\'s URL as webhook in an InstaWP template, to automatically capture the email from the visitors who ticked the "Subscribe to mailing list" checkbox (when creating a sandbox site), and send it straight to a Mailchimp list. More info: gatographql.com/blog/instawp-gatographql', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
@@ -1195,7 +1195,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Translate content from URL', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate content from URL', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1221,7 +1221,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Import post from WordPress RSS feed', 'gatographql'),
+                    'post_title' => \__('[PRO] Import post from WordPress RSS feed', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1249,7 +1249,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Import posts from CSV', 'gatographql'),
+                    'post_title' => \__('[PRO] Import posts from CSV', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1275,7 +1275,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Fetch post links', 'gatographql'),
+                    'post_title' => \__('[PRO] Fetch post links', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1298,7 +1298,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Translate post (Classic editor)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate post (Classic editor)', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1323,7 +1323,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Translate posts (Classic editor)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate posts (Classic editor)', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1393,7 +1393,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Send email to admin about post', 'gatographql'),
+                    'post_title' => \__('[PRO] Send email to admin about post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1418,7 +1418,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Add comments block to post', 'gatographql'),
+                    'post_title' => \__('[PRO] Add comments block to post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1452,7 +1452,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Generate a post\'s featured image using AI and optimize it', 'gatographql'),
+                    'post_title' => \__('[PRO] Generate a post\'s featured image using AI and optimize it', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1486,7 +1486,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('Insert block in post', 'gatographql'),
+                    'post_title' => \__('[PRO] Insert block in post', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
