@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
@@ -90,6 +93,16 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getPriority(): int
     {
         return 20;
+    }
+
+    public function getWebsiteURL(string $module): string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return match ($module) {
+            self::PRO => $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+            default => parent::getWebsiteURL($module),
+        };
     }
 
     public function getLogoURL(string $module): string
