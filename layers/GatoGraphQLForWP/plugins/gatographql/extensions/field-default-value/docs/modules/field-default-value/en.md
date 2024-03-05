@@ -68,7 +68,3 @@ By using `@default`, we can then retrieve some default image:
 - [“Selective Content Import, Export & Sync for WordPress” Bundle](../../../../../bundle-extensions/selective-content-import-export-and-sync-for-wordpress/docs/modules/selective-content-import-export-and-sync-for-wordpress/en.md)
 - [“Tailored WordPress Automator” Bundle](../../../../../bundle-extensions/tailored-wordpress-automator/docs/modules/tailored-wordpress-automator/en.md)
 - [“Versatile WordPress Request API” Bundle](../../../../../bundle-extensions/versatile-wordpress-request-api/docs/modules/versatile-wordpress-request-api/en.md)
-
-<!-- ## Tutorial lessons referencing extension
-
-- [Transforming data from an external API](../../../../../docs/tutorial/transforming-data-from-an-external-api/en.md) -->
