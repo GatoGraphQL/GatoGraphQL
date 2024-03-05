@@ -125,7 +125,7 @@ class ExtensionListTable extends AbstractExtensionListTable
         $extensionActionLabel = $plugin['gato_extension_is_bundle']
             ? sprintf(
                 '%s%s',
-                $offerSinglePROCommercialProduct ? \__('Go PRO', 'gatographql') : \__('Get Bundle', 'gatographql'),
+                $offerSinglePROCommercialProduct ? sprintf('<strong>%s</strong>', \__('Go PRO', 'gatographql')) : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             )
             : (
