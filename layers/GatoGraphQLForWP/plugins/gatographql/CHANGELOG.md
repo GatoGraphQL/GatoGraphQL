@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.2.0 - DATE
 
+### Improvements
+
+- Do not include bundles in the Extensions page
+
 ## 2.1.3 - 16/02/2024
 
 ### Improvements
