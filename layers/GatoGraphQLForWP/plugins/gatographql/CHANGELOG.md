@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Do not include bundles in the Extensions page
+- Do not include the required extensions on predefined persisted queries
 
 ## 2.1.3 - 16/02/2024
 
