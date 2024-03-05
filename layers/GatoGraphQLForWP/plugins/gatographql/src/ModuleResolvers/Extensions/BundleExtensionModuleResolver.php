@@ -66,7 +66,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
     public function getDescription(string $module): string
     {
         return match ($module) {
-            self::PRO => \__('Achieve all superpowers: All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
+            self::PRO => \__('PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS => \__('Achieve all superpowers: All of Gato GraphQL extensions, in a single plugin', 'gatographql'),
             self::AUTOMATED_CONTENT_TRANSLATION_AND_SYNC_FOR_WORDPRESS_MULTISITE => \__('Automatically create a translation of a newly-published post using the Google Translate API, for every language site on a WordPress multisite', 'gatographql'),
             self::BETTER_WORDPRESS_WEBHOOKS => \__('Easily create webhooks to process incoming data from any source or service using advanced tools, directly within the wp-admin', 'gatographql'),
