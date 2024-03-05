@@ -98,10 +98,6 @@ The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL 
 
 Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
 
-= Can I ask for a refund? =
-
-If Gato GraphQL PRO does not solve your problem, you have 30 days to request a refund.
-
 == Screenshots ==
 
 1. GraphiQL client to execute queries in the wp-admin
