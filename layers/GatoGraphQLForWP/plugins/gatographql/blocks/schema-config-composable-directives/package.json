@@ -1,6 +1,6 @@
 {
     "name": "schema-config-composable-directives",
-    "version": "2.2.0-dev",
+    "version": "2.2.0",
     "description": "Enable composable directives in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
