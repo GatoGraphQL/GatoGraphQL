@@ -674,7 +674,7 @@ class Plugin extends AbstractMainPlugin
         /**
          * Create the Persisted Queries
          */
-         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POST;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
