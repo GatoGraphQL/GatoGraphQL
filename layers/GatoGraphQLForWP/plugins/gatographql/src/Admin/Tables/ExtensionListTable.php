@@ -152,10 +152,12 @@ class ExtensionListTable extends AbstractExtensionListTable
     {
         if ($plugin['gato_extension_is_bundle']) {
             $additionalPluginCardClassnames = 'plugin-card-extension-bundle';
-            if (in_array($plugin['gato_extension_module'], [
+            if (
+                in_array($plugin['gato_extension_module'], [
                 BundleExtensionModuleResolver::PRO,
                 BundleExtensionModuleResolver::ALL_IN_ONE_TOOLBOX_FOR_WORDPRESS,
-            ])) {
+                ])
+            ) {
                 $additionalPluginCardClassnames .= ' plugin-card-highlight';
             } else {
                 $additionalPluginCardClassnames .= ' plugin-card-not-highlight';

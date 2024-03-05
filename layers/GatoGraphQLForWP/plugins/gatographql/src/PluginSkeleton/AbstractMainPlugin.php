@@ -32,11 +32,11 @@ use PoP\RootWP\StateManagers\HookManager;
 use PoP\Root\AppLoader as ImmediateAppLoader;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
-
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
 use WP_Upgrader;
+
 use function __;
 use function add_action;
 use function do_action;
@@ -374,7 +374,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         add_action('upgrader_process_complete', $this->maybeRegenerateContainerWhenPluginUpdated(...), 10, 2);
 
-        add_filter( 'plugin_action_links_gatographql/gatographql.php', $this->getPluginActionLinks(...), 10, 1 );
+        add_filter('plugin_action_links_gatographql/gatographql.php', $this->getPluginActionLinks(...), 10, 1);
 
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
@@ -939,7 +939,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $graphQLDocumentDataComposer = $instanceManager->getInstance(GraphQLDocumentDataComposer::class);
 
         $graphQLPersistedQuery = $this->readSetupGraphQLPersistedQuery($relativeFilePath);
-        if ($tutorialLessonSlug !== null
+        if (
+            $tutorialLessonSlug !== null
             && !PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()
         ) {
             $graphQLPersistedQuery = $graphQLDocumentDataComposer->addRequiredBundlesAndExtensionsToGraphQLDocumentHeader(
