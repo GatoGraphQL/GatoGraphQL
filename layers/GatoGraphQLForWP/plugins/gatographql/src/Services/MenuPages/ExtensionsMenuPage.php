@@ -11,6 +11,7 @@ use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 
 /**
  * Extension menu page
@@ -135,6 +136,15 @@ class ExtensionsMenuPage extends AbstractTableMenuPage
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()) {
+            return sprintf(
+                __('<strong>%1$s</strong> includes extensions that add functionality and extend the GraphQL schema. Browse them all here, or on the <a href="%2$s" target="%3$s">Gato GraphQL website%4$s</a>.', 'gatographql'),
+                'Gato GraphQL PRO',
+                $moduleConfiguration->getGatoGraphQLWebsiteURL(),
+                '_blank',
+                HTMLCodes::OPEN_IN_NEW_WINDOW,
+            );
+        }
         return sprintf(
             __('Extensions add functionality and expand the GraphQL schema. Browse all <a href="%1$s" target="%3$s">bundles%4$s</a> and <a href="%2$s" target="%3$s">extensions%4$s</a> on the Gato GraphQL website.', 'gatographql'),
             $moduleConfiguration->getGatoGraphQLBundlesPageURL(),
