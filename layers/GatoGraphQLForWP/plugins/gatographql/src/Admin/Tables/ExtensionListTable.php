@@ -128,7 +128,13 @@ class ExtensionListTable extends AbstractExtensionListTable
                 $offerSinglePROCommercialProduct ? \__('Go PRO', 'gatographql') : \__('Get Bundle', 'gatographql'),
                 HTMLCodes::OPEN_IN_NEW_WINDOW
             )
-            : ($offerSinglePROCommercialProduct ? \__('Visit on website', 'gatographql') : parent::getPluginInstallActionLabel($plugin));
+            : (
+                $offerSinglePROCommercialProduct ? sprintf(
+                    '%s%s',
+                    \__('Visit on website', 'gatographql'),
+                    HTMLCodes::OPEN_IN_NEW_WINDOW
+                ) : parent::getPluginInstallActionLabel($plugin)
+            );
         return sprintf(
             '
                 <span class="gatographql-extension-action-label">%s</span>
