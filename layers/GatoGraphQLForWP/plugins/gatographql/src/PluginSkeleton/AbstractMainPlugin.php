@@ -206,6 +206,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      */
     public function getPluginActionLinks(array $actions): array
     {
+        if (!PluginStaticModuleConfiguration::offerSinglePROCommercialProduct()) {
+            return $actions;
+        }
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return [
