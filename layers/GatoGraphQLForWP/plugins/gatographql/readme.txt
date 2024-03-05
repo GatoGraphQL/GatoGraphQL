@@ -74,11 +74,11 @@ Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://gith
 
 With Gato GraphQL you can query data from the WordPress database, and then inject the results into a WP-CLI command (either to select a specific resource, or update an option with some value, or other).
 
-Check out tutorial lesson [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli/) for a thorough description on how to do it.
+Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli/) for a thorough description on how to do it.
 
 = How do I use Gato GraphQL to build headless sites? =
 
-With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org/) or others) you can query the data and render the HTML using CSR (client-side rendering).
+With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org/) or others) you can query the data and render the HTML.
 
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
@@ -92,7 +92,7 @@ Gato GraphQL supports "Persisted Queries", which are also endpoints with pre-def
 
 In addition, with Gato GraphQL you can execute tailored GraphQL queries against an endpoint, indicating what specific data you need, and fetching only that. As a result, you can retrieve all needed data in a single request.
 
-= What's the difference between Gato GraphQL and Gato GraphQL PRO? =
+= What's the difference between the Gato GraphQL plugin and its PRO version? =
 
 The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL as an API, such as for building headless sites.
 
