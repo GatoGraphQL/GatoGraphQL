@@ -186,6 +186,10 @@ You can use GraphQL to automate tasks and content workflows (PRO). For instance,
 
 And all of these additional uses cases can be achieved directly within the wp-admin, providing the GraphQL query via a user interface, without having to deploy any PHP code.
 
+= Does Gato GraphQL PRO have a refund policy? =
+
+Yes it does. If you have purchased Gato GraphQL PRO and found out that it's not the right tool to satisfy your needs, you have [30 days to ask for a refund](https://gatographql.com/refund-policy).
+
 == Screenshots ==
 
 1. GraphiQL client to execute queries in the wp-admin
