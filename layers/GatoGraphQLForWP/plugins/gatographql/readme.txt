@@ -34,7 +34,7 @@ And finally, Gato GraphQL is **forward-looking**, already providing features tha
 
 === Features ===
 
-Gato GraphQL provides all these features:
+Gato GraphQL provides [all these features](https://gatographql.com/features):
 
 - **Security:** Multiple mechanisms are provided to help protect your data.
 - **Custom Endpoints:** Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
