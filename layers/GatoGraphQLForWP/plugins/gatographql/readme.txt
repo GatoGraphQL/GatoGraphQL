@@ -22,6 +22,27 @@ With persisted queries, you can have the great user experience of GraphQL, while
 
 You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
 
+Features:
+
+- Security: Multiple mechanisms are provided to help protect your data.
+- Custom Endpoints: Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
+- Persisted Queries: GraphQL queries which are stored in the server and accessed under their own URL, thus emulating a REST endpoint.
+- Predefined Persisted Queries: Tackle admin tasks that are common to WordPress sites, by executing an already-installed persisted query.
+- Public, Private & Password-Protected Endpoints: In addition to creating and exposing public endpoints, create private endpoints, and protect a public endpoint with a password.
+- Internal Endpoint for Blocks: Fetch data for your Gutenberg blocks, via an internal GraphQL endpoint accessible within the wp-admin only.
+- API Hierarchy: Organize endpoints hierarchically, to group and expose related endpoints under a logical structure.
+- Endpoint Management: Organize custom endpoint and persisted queries by assigning them custom categories, similar to posts in WordPress.
+- Schema namespacing: Avoid conflicts in the schema, by having all type names automatically namespaced.
+- Nested mutations: Execute a mutation within a queried entity (similar to accessing a field), and not only on the root type in the GraphQL query.
+- “Sensitive” data: Decide if to expose or not private data in a public API.
+- Global Fields: Common fields added to all types of the GraphQL schema (while being defined only once).
+- Composable directives: Expose directives that augment other directives, modifying their behavior or filling a gap.
+- Multi-Field Directives: Have directives applied to multiple fields (instead of only one), for performance and extended use cases.
+- 'oneOf' Input Object: Input object where exactly one of the input fields must be provided as input, or the server returns a validation error.
+- Returning different types on mutations: Mutation fields can be configured to return either a payload object type, or directly the mutated entity.
+- Field and directive-based versioning: Version fields and directives independently from the overall schema.
+- Proactive feedback: Use the top-level entry 'extensions' to send data concerning deprecations and warnings in the response to the query.
+
 === Go PRO ===
 
 Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
