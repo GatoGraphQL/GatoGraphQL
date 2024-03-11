@@ -202,6 +202,16 @@ Gato GraphQL has been designed to be as easy to use as possible, accessible dire
 
 The only requirement is to learn the [GraphQL language](https://graphql.org). If you are able to learn this language, then you are able to use Gato GraphQL.
 
+= Why would I want to use Gato GraphQL to manage my WordPress site? =
+
+GraphQL is a super powerful language`, that can achieve a lot more than just building headless sites, and it's easy to learn.
+
+Gato GraphQL is a generic tool that extracts all the power from GraphQL. You provide the GraphQL query directly via the wp-admin, and dozens of use cases (normally provided by dedicated plugins) become available.
+
+Gato GraphQL is not a duplicator plugin, but it can duplicate posts. It is not a translation plugin, but it can translate any content, including the properties inside Gutenberg blocks. It is not an automator plugin, but you can automate your tasks, without any restriction. It is not backup plugin, but you can import and export posts. It is not a search and replace plugin, but you can modify your posts in bulk, with a single query. And it is not webhook plugin or HTTP client, but you can both send a request to any API, and receive incoming requests from any service.
+
+What you can use Gato GraphQL for, literally depends on your imagination.
+
 == Screenshots ==
 
 1. GraphiQL client to execute queries in the wp-admin
