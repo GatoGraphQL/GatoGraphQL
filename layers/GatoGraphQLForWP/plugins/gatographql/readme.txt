@@ -34,6 +34,8 @@ And finally, Gato GraphQL is **forward-looking**, already providing features tha
 
 === Features ===
 
+Gato GraphQL provides all these features:
+
 - **Security:** Multiple mechanisms are provided to help protect your data.
 - **Custom Endpoints:** Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
 - **Persisted Queries:** GraphQL queries which are stored in the server and accessed under their own URL, thus emulating a REST endpoint.
@@ -95,6 +97,8 @@ As new extensions are created, they are added to Gato GraphQL PRO.
 Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
 === Features ===
+
+Gato GraphQL PRO provides all these features:
 
 - **Enhanced security:** Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
 - **Automation:** Automatically execute a GraphQL Persisted Query when some event happens on the site, creating automations via a user interface.
