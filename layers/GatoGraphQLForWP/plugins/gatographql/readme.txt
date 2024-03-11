@@ -166,7 +166,7 @@ You can validate that only logged-in users, or users with a certain role or capa
 
 You can cache the GraphQL response using standard HTTP caching (PRO).
 
-You will have access to novel GraphQL features, proposed for the spec but not yet released, including the 'oneof' Input Object, and also Multiple Query Execution (PRO).
+You will have access to novel GraphQL features, proposed for the spec but not yet released, including schema namespacing and the 'oneof' Input Object. And also dynamic variables and Multiple Query Execution (PRO).
 
 You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
 
