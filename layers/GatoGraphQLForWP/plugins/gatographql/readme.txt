@@ -94,7 +94,7 @@ Gato GraphQL PRO can help you simplify your tech stack, handling the functionali
 
 As new extensions are created, they are added to Gato GraphQL PRO.
 
-Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
+Gato GraphQL PRO clients have access to all **product updates** and **premium support**, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
 === Features ===
 
