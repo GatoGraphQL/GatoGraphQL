@@ -196,6 +196,12 @@ Yes it does. If you have purchased Gato GraphQL PRO and found out that it's not 
 
 Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL PRO, for free, for 7 days.
 
+= Do I need to be a developer to use Gato GraphQL? =
+
+Gato GraphQL has been designed to be as easy to use as possible, accessible directly within the wp-admin via several user interfaces, powered by the WordPress editor.
+
+The only requirement is to learn the [GraphQL language](https://graphql.org). If you are able to learn this language, then you are able to use Gato GraphQL.
+
 == Screenshots ==
 
 1. GraphiQL client to execute queries in the wp-admin
