@@ -166,6 +166,8 @@ You will have access to novel GraphQL features, proposed for the spec but not ye
 
 You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
 
+You can use GraphQL to import posts from another WordPress site, from an RSS feed, from a CSV file, or from any REST or GraphQL API. And you can export content as JSON and CSV. (PRO)
+
 You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event `wp_insert_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that cases, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
 
 = What's the difference between the Gato GraphQL plugin and its PRO version? =
