@@ -162,19 +162,21 @@ You can use persisted queries to expose predefined data, and completely disable 
 
 You can provide multiple custom endpoints, each of them customized for your customers or applications, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as /graphql/customers/some-customer and /graphql/customers/another-customer).
 
+You will have access to novel GraphQL features, proposed for the spec but not yet released, including nested mutations, schema namespacing and the 'oneOf' Input Object. And also dynamic variables and Multiple Query Execution (PRO).
+
 You can validate that only logged-in users, or users with a certain role or capability, or visitors from a certain IP range, can access data, on a field-by-field basis (PRO).
 
 You can cache the GraphQL response using standard HTTP caching (PRO).
 
-You will have access to novel GraphQL features, proposed for the spec but not yet released, including nested mutations, schema namespacing and the 'oneOf' Input Object. And also dynamic variables and Multiple Query Execution (PRO).
-
 You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
 
-You can use GraphQL to import posts from another WordPress site, from an RSS feed, from a CSV file, or from any REST or GraphQL API. And you can export content as JSON and CSV. (PRO)
+You can use GraphQL to import posts from another WordPress site, from an RSS feed, from a CSV, or from any REST or GraphQL API. And you can export content as JSON and CSV. (PRO)
 
-You can interact with any external service via an HTTP client (PRO). For instance, you can subscribe users to your Mailchimp email list.
+You can invoke the API of any external service via an HTTP client (PRO). For instance, you can subscribe your WordPress users to your Mailchimp email list.
 
-You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event `wp_insert_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that cases, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
+You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event `wp_insert_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that case, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
+
+And all of these additional uses cases can be achieved directly within the wp-admin, providing the GraphQL query via a user interface, without having to deploy any PHP code.
 
 = What's the difference between the Gato GraphQL plugin and its PRO version? =
 
