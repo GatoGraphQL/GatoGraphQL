@@ -162,6 +162,8 @@ You can use persisted queries to expose predefined data, and completely disable 
 
 You can provide multiple custom endpoints, each of them customized for your customers or applications, even validating that only visitors from a certain IP range can access it (PRO).
 
+You will have access to novel GraphQL features, proposed for the spec but not yet released, including the 'oneof' Input Object, and also Multiple Query Execution (PRO).
+
 You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
 
 You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event `wp_insert_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that cases, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
