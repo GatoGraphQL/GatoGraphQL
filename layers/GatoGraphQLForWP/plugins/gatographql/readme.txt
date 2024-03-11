@@ -82,8 +82,6 @@ Gato GraphQL PRO can handle the functionality from multiple plugins:
 
 As new extensions are created, they are added to Gato GraphQL PRO.
 
-Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
-
 Features:
 
 - **Enhanced security:** Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
@@ -101,6 +99,8 @@ Features:
 - **Environment Fields:** In your GraphQL document, query a value from an environment variable, or from a PHP constant.
 - **HTTP Client:** Execute HTTP requests against a webserver and fetch their response.
 - **Schema Editing Access:** Grant non-admin users access to the clients in the admin, and access to editing the GraphQL schema and its configuration.
+
+Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
 == Source code ==
 
