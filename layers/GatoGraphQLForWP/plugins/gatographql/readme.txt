@@ -112,6 +112,8 @@ Gato GraphQL PRO clients have access to all product updates and premium support,
 
 == Source code ==
 
+Gato GraphQL is open source, under the GPLv2 license.
+
 The source code for the plugin is in GitHub repo [GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL).
 
 The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plugins/gatographql/blocks](https://github.com/GatoGraphQL/GatoGraphQL/tree/master/layers/GatoGraphQLForWP/plugins/gatographql/blocks).
