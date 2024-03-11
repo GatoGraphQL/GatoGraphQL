@@ -79,7 +79,7 @@ Use Gato GraphQL PRO to:
 - Validate that a new post contains a mandatory block
 - And much more...
 
-Gato GraphQL PRO can handle the functionality from multiple plugins:
+Gato GraphQL PRO can help you simplify your tech stack, handling the functionality from multiple plugins (so you need to install fewer plugins in your site, and remove bloat), including:
 
 - ✅ APIs
 - ✅ Automator
