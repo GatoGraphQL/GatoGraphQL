@@ -54,15 +54,15 @@ Use Gato GraphQL PRO to:
 - Automate tasks and content workflows (like Zapier)
 - Complement WP-CLI to execute admin tasks
 - Search/replace content for site migrations
-- Send notifications when something happens (new post published, new comment added, etc)
-- Interact with cloud services
-- Convert the data from a 3rd-party API into the required format
+- Send an email/notifications when something happens (new post published, new comment added, etc)
 - Translate content in the site using the Google Translate API
 - Generate an image using OpenAI's DALL-E or Stable Diffusion, and set it as featured image
 - Send new posts to Facebook, Instagram, LinkedIn, or other social media platforms
 - Import/export a post from/to another WordPress site
 - Import all posts from a CSV file
 - Create posts from static html files
+- Interact with cloud services
+- Convert the data from a 3rd-party API into the required format
 - Insert or remove (Gutenberg) blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
