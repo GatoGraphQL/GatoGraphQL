@@ -57,7 +57,7 @@ Among others, you can use Gato GraphQL PRO to:
 - Send notifications when something happens (new post published, new comment added, etc)
 - Interact with cloud services
 - Convert the data from a 3rd-party API into the required format
-- Translate content in the site
+- Translate content in the site using the Google Translate API
 - Insert or remove (Gutenberg) blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
