@@ -172,6 +172,8 @@ You can use GraphQL to retrieve, modify and finally store again the content in y
 
 You can use GraphQL to import posts from another WordPress site, from an RSS feed, from a CSV file, or from any REST or GraphQL API. And you can export content as JSON and CSV. (PRO)
 
+You can interact with any external service via an HTTP client (PRO). For instance, you can subscribe users to your Mailchimp email list.
+
 You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event `wp_insert_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that cases, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
 
 = What's the difference between the Gato GraphQL plugin and its PRO version? =
