@@ -47,7 +47,7 @@ Features:
 
 Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
 
-Among others, you can use Gato GraphQL PRO to:
+Use Gato GraphQL PRO to:
 
 - Expose public and private APIs
 - Synchronize content across sites
