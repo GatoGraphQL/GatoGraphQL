@@ -212,6 +212,12 @@ Gato GraphQL is not a duplicator plugin, but you can duplicate posts with it. It
 
 What you can use Gato GraphQL for, literally depends on your imagination.
 
+= Are there predefined GraphQL queries for common use cases? =
+
+Yes. The [queries library](https://gatographql.com/library) contains a collection of common use cases, which you can copy/paste and customize to your needs.
+
+This library is continually growing.
+
 == Screenshots ==
 
 1. GraphiQL client to execute queries in the wp-admin
