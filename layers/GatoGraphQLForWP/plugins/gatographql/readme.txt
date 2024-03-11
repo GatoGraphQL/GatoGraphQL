@@ -22,7 +22,15 @@ With persisted queries, you can have the great user experience of GraphQL, while
 
 You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
 
-Features:
+=== Architectural foundation ===
+
+Gato GraphQL is **optimized for speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
+
+Gato GraphQL is also **fully extensible**, so you can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
+
+Gato GraphQL is finally **super configurable**, to suit your specific needs, even endpoint by endpoint.
+
+=== Features ===
 
 - **Security:** Multiple mechanisms are provided to help protect your data.
 - **Custom Endpoints:** Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
@@ -43,7 +51,7 @@ Features:
 - **Field and directive-based versioning:** Version fields and directives independently from the overall schema.
 - **Proactive feedback:** Use the top-level entry 'extensions' to send data concerning deprecations and warnings in the response to the query.
 
-=== Go PRO ===
+== Go PRO ==
 
 Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
 
@@ -82,7 +90,9 @@ Gato GraphQL PRO can handle the functionality from multiple plugins:
 
 As new extensions are created, they are added to Gato GraphQL PRO.
 
-Features:
+Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
+
+=== Features ===
 
 - **Enhanced security:** Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
 - **Automation:** Automatically execute a GraphQL Persisted Query when some event happens on the site, creating automations via a user interface.
@@ -99,8 +109,6 @@ Features:
 - **Environment Fields:** In your GraphQL document, query a value from an environment variable, or from a PHP constant.
 - **HTTP Client:** Execute HTTP requests against a webserver and fetch their response.
 - **Schema Editing Access:** Grant non-admin users access to the clients in the admin, and access to editing the GraphQL schema and its configuration.
-
-Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
 == Source code ==
 
