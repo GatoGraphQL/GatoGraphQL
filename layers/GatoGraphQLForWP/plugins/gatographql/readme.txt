@@ -79,6 +79,24 @@ As new extensions are created, they are added to Gato GraphQL PRO.
 
 Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
 
+Features:
+
+- Enhanced security: Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
+- Automation: Automatically execute a GraphQL Persisted Query when some event happens on the site, creating automations via a user interface.
+- Access Control: Avoid visitors accessing private data from your site, by granting granular access to the schema, based on the user being logged-in or not, having a certain role or capability, and more.
+- Public/Private Schema: Control the desired behavior when a user without access to some field or directive in the schema attempts to access it.
+- HTTP Caching: Cache the GraphQL response via standard HTTP caching, with the max-age value automatically calculated.
+- Integrations with 3rd-party plugins: Extend the GraphQL schema to access data from popular WordPress plugins.
+- Field Deprecation via UI: Deprecate fields on the GraphQL schema by using a user interface, without the need to deploy any code.
+- Multiple Query Execution: Combine multiple queries into a single one, share state across them, and execute it in only one request.
+- Field to Input: Obtain the value of a field, manipulate it, and input it into another field, all within the same query.
+- Function Fields: Expose functionalities commonly found in programming languages (such as PHP) via GraphQL fields.
+- Function Directives: Expose functionalities commonly found in programming languages (such as PHP) via GraphQL directives.
+- Helper Fields: Set of fields added to the schema, providing commonly-used helper functionality.
+- Environment Fields: In your GraphQL document, query a value from an environment variable, or from a PHP constant.
+- HTTP Client: Execute HTTP requests against a webserver and fetch their response.
+- Schema Editing Access: Grant non-admin users access to the clients in the admin, and access to editing the GraphQL schema and its configuration.
+
 == Source code ==
 
 The source code for the plugin is in GitHub repo [GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL).
