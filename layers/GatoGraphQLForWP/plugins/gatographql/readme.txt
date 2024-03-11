@@ -168,7 +168,7 @@ You can use persisted queries to expose predefined data, and completely disable 
 
 You can provide multiple custom endpoints, each of them customized for your customers or applications, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as /graphql/customers/some-customer and /graphql/customers/another-customer).
 
-You can execute updates in bulk. For instance, you can delete all comments on the site, or assign a tag or category to all your posts. And you search and replace a string, even using a regex, on hundreds of posts (PRO).
+You can execute updates in bulk. For instance, you can delete all comments on the site, or assign a tag or category to all your posts. And you can search and replace a string, even using a regex, on hundreds of posts (PRO).
 
 You will have access to novel GraphQL features, proposed for the spec but not yet released, including nested mutations, schema namespacing and the 'oneOf' Input Object. And also dynamic variables and Multiple Query Execution (PRO).
 
