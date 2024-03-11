@@ -28,7 +28,9 @@ Gato GraphQL is **optimized for speed:** The query is resolved on linear time co
 
 Gato GraphQL is also **fully extensible**, so you can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
 
-Gato GraphQL is finally **super configurable**, to suit your specific needs, even endpoint by endpoint.
+Gato GraphQL is **super configurable**, to suit your specific needs, even endpoint by endpoint.
+
+And finally, Gato GraphQL is **forward-looking**, already providing features that have been proposed for the GraphQL spec but not yet released.
 
 === Features ===
 
