@@ -190,6 +190,10 @@ And all of these additional uses cases can be achieved directly within the wp-ad
 
 Yes it does. If you have purchased Gato GraphQL PRO and found out that it's not the right tool to satisfy your needs, you have [30 days to ask for a refund](https://gatographql.com/refund-policy).
 
+= Can I try out Gato GraphQL PRO? =
+
+Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL PRO, for free, for 7 days.
+
 == Screenshots ==
 
 1. GraphiQL client to execute queries in the wp-admin
