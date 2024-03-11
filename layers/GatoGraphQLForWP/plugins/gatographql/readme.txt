@@ -160,7 +160,9 @@ Otherwise, switching to Gato GraphQL provides many additional benefits:
 
 You can use persisted queries to expose predefined data, and completely disable the GraphQL single endpoint, for better security.
 
-You can provide multiple custom endpoints, each of them customized for your customers or applications, protecting them via a password. Even better, you can validate that only logged-in users, or users with a certain role or capability, or visitors from a certain IP range, can access the schema, on a field-by-field basis (PRO).
+You can provide multiple custom endpoints, each of them customized for your customers or applications, protecting them via a password.
+
+You can validate that only logged-in users, or users with a certain role or capability, or visitors from a certain IP range, can access data, on a field-by-field basis (PRO).
 
 You can cache the GraphQL response using standard HTTP caching (PRO).
 
