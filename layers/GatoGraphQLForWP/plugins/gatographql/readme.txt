@@ -51,7 +51,7 @@ Use Gato GraphQL PRO to:
 
 - Expose public and private APIs
 - Synchronize content across sites
-- Automate tasks and content workflows
+- Automate tasks and content workflows (like Zapier)
 - Complement WP-CLI to execute admin tasks
 - Search/replace content for site migrations
 - Send notifications when something happens (new post published, new comment added, etc)
