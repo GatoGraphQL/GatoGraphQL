@@ -152,6 +152,12 @@ Gato GraphQL supports "Persisted Queries", which are also endpoints with pre-def
 
 With Gato GraphQL you can also execute tailored GraphQL queries against an endpoint, indicating what specific data you need, and fetching only that within a single request.
 
+= What's the difference between the Gato GraphQL plugin and its PRO version? =
+
+The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL as an API, such as for building headless sites.
+
+Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
+
 = How is Gato GraphQL different than WPGraphQL? =
 
 If you just need to build a headless WordPress site and deploy it as static, and you're currently using WPGraphQL, switching to Gato GraphQL will not make any difference.
@@ -177,12 +183,6 @@ You can invoke the API of any external service via an HTTP client (PRO). For ins
 You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event `wp_insert_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that case, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
 
 And all of these additional uses cases can be achieved directly within the wp-admin, providing the GraphQL query via a user interface, without having to deploy any PHP code.
-
-= What's the difference between the Gato GraphQL plugin and its PRO version? =
-
-The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL as an API, such as for building headless sites.
-
-Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
 
 == Screenshots ==
 
