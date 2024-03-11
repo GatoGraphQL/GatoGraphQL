@@ -218,6 +218,10 @@ Gato GraphQL's [queries library](https://gatographql.com/library) contains a col
 
 This library is continually growing.
 
+= Does the plugin provide documentation? =
+
+The Gato GraphQL website contains extensive documentation, including [guides](https://gatographql.com/guides) on configuring and using the plugin, the [extensions reference](https://gatographql.com/extensions-reference) docs, and a [tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema.
+
 == Screenshots ==
 
 1. GraphiQL client to execute queries in the wp-admin
