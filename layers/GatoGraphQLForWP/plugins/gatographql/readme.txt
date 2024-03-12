@@ -162,7 +162,7 @@ Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP ca
 
 If you just need to build a headless WordPress site and deploy it as static, and you're currently using WPGraphQL, switching to Gato GraphQL will not make any difference.
 
-Otherwise, switching to Gato GraphQL provides many additional benefits:
+Otherwise, switching to Gato GraphQL provides many benefits:
 
 The "n+1" query problem just doesn't happen, by design.
 
