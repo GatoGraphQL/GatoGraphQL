@@ -164,6 +164,8 @@ If you just need to build a headless WordPress site and deploy it as static, and
 
 Otherwise, switching to Gato GraphQL provides many additional benefits:
 
+The "n+1" query problem just doesn't happen, by design.
+
 You can use persisted queries to expose predefined data, and completely disable the GraphQL single endpoint, for better security.
 
 You can provide multiple custom endpoints, each of them customized for your customers or applications, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as /graphql/customers/some-customer and /graphql/customers/another-customer).
