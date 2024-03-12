@@ -1,6 +1,6 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
-Tags: graphql, headless, webhook, api, automator, import export, search replace, bulk update, wpcli, wget, translation, notifications
+Tags: graphql, headless, webhook, api, automator, import export, search replace, bulk update, wpcli, wget, wpgraphql, cloud
 Requires at least: 5.4
 Tested up to: 6.4
 Stable tag: 2.2.0
@@ -14,7 +14,7 @@ The most powerful GraphQL server for WordPress.
 
 Gato GraphQL is a productivity tool for interacting with data in your WordPress site. It allows you to retrieve, manipulate and store again any piece of data, in any desired way, using the GraphQL language.
 
-Use Gato GraphQL to create headless sites, power your Gutenberg blocks, fetch data for your theme, plugin or website, or expose an API for other applications.
+Use Gato GraphQL to create headless WordPress sites (using Nextjs or any other JS framework), power your Gutenberg blocks, fetch data for your theme, plugin or website, or expose an API for other applications.
 
 Gato GraphQL supports Persisted Queries out of the box. Persisted queries are similar to WP REST API endpoints, however they are created and published directly within the wp-admin, using the GraphQL language (and no PHP code at all).
 
@@ -22,26 +22,64 @@ With persisted queries, you can have the great user experience of GraphQL, while
 
 You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
 
-=== Go PRO ===
+=== Architectural foundation ===
+
+Gato GraphQL is **optimized for speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
+
+Gato GraphQL is also **fully extensible**, so you can create your own extensions and integrations, to extend the GraphQL schema for your own CPTs and plugins.
+
+Gato GraphQL is **super configurable**, to suit your specific needs, even endpoint by endpoint.
+
+And finally, Gato GraphQL is **forward-looking**, already providing features that have been proposed for the GraphQL spec but not yet released.
+
+=== Features ===
+
+Gato GraphQL provides [all these features](https://gatographql.com/features):
+
+- **Security:** Multiple mechanisms are provided to help protect your data.
+- **Custom Endpoints:** Create and expose multiple custom GraphQL schemas under their own URL, for different users, applications, external services, or other.
+- **Persisted Queries:** GraphQL queries which are stored in the server and accessed under their own URL, thus emulating a REST endpoint.
+- **Predefined Persisted Queries:** Tackle admin tasks that are common to WordPress sites, by executing an already-installed persisted query.
+- **Public, Private & Password-Protected Endpoints:** In addition to creating and exposing public endpoints, create private endpoints, and protect a public endpoint with a password.
+- **Internal Endpoint for Blocks:** Fetch data for your Gutenberg blocks, via an internal GraphQL endpoint accessible within the wp-admin only.
+- **API Hierarchy:** Organize endpoints hierarchically, to group and expose related endpoints under a logical structure.
+- **Endpoint Management:** Organize custom endpoint and persisted queries by assigning them custom categories, similar to posts in WordPress.
+- **Schema namespacing:** Avoid conflicts in the schema, by having all type names automatically namespaced.
+- **Nested mutations:** Execute a mutation within a queried entity (similar to accessing a field), and not only on the root type in the GraphQL query.
+- **“Sensitive” data:** Decide if to expose or not private data in a public API.
+- **Global Fields:** Common fields added to all types of the GraphQL schema (while being defined only once).
+- **Composable directives:** Expose directives that augment other directives, modifying their behavior or filling a gap.
+- **Multi-Field Directives:** Have directives applied to multiple fields (instead of only one), for performance and extended use cases.
+- **'oneOf' Input Object:** Input object where exactly one of the input fields must be provided as input, or the server returns a validation error.
+- **Returning different types on mutations:** Mutation fields can be configured to return either a payload object type, or directly the mutated entity.
+- **Field and directive-based versioning:** Version fields and directives independently from the overall schema.
+- **Proactive feedback:** Use the top-level entry 'extensions' to send data concerning deprecations and warnings in the response to the query.
+
+== Go PRO ==
 
 Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, which contains all our PRO extensions for Gato GraphQL.
 
-Among others, you can use Gato GraphQL PRO to:
+Use Gato GraphQL PRO to:
 
 - Expose public and private APIs
 - Synchronize content across sites
-- Automate tasks
+- Automate tasks and content workflows (like Zapier)
 - Complement WP-CLI to execute admin tasks
 - Search/replace content for site migrations
-- Send notifications when something happens (new post published, new comment added, etc)
+- Send an email/notifications when something happens (new post published, new comment added, etc)
+- Translate content in the site using the Google Translate API
+- Generate an image using OpenAI's DALL-E or Stable Diffusion, and set it as featured image
+- Send new posts to Facebook, Instagram, LinkedIn, or other social media platforms
+- Import/export a post from/to another WordPress site
+- Import all posts from a CSV file
+- Create posts from static html files
 - Interact with cloud services
 - Convert the data from a 3rd-party API into the required format
-- Translate content in the site
 - Insert or remove (Gutenberg) blocks in bulk
 - Validate that a new post contains a mandatory block
 - And much more...
 
-Gato GraphQL PRO can handle the functionality from multiple plugins:
+Gato GraphQL PRO can help you simplify your tech stack, handling the functionality from multiple plugins (so you need to install fewer plugins in your site, and remove bloat), including:
 
 - ✅ APIs
 - ✅ Automator
@@ -56,9 +94,31 @@ Gato GraphQL PRO can handle the functionality from multiple plugins:
 
 As new extensions are created, they are added to Gato GraphQL PRO.
 
-Gato GraphQL PRO clients have access to all product updates and premium support, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
+Gato GraphQL PRO clients have access to all **product updates** and **premium support**, and can ask the Gato GraphQL team to work on integrations with popular WordPress plugins.
+
+=== Features ===
+
+Gato GraphQL PRO provides all these features:
+
+- **Enhanced security:** Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
+- **Automation:** Automatically execute a GraphQL Persisted Query when some event happens on the site, creating automations via a user interface.
+- **Access Control:** Avoid visitors accessing private data from your site, by granting granular access to the schema, based on the user being logged-in or not, having a certain role or capability, and more.
+- **Public/Private Schema:** Control the desired behavior when a user without access to some field or directive in the schema attempts to access it.
+- **HTTP Caching:** Cache the GraphQL response via standard HTTP caching, with the max-age value automatically calculated.
+- **Integrations with 3rd-party plugins:** Extend the GraphQL schema to access data from popular WordPress plugins.
+- **Field Deprecation via UI:** Deprecate fields on the GraphQL schema by using a user interface, without the need to deploy any code.
+- **Multiple Query Execution:** Combine multiple queries into a single one, share state across them, and execute it in only one request.
+- **Field to Input:** Obtain the value of a field, manipulate it, and input it into another field, all within the same query.
+- **Function Fields:** Expose functionalities commonly found in programming languages (such as PHP) via GraphQL fields.
+- **Function Directives:** Expose functionalities commonly found in programming languages (such as PHP) via GraphQL directives.
+- **Helper Fields:** Set of fields added to the schema, providing commonly-used helper functionality.
+- **Environment Fields:** In your GraphQL document, query a value from an environment variable, or from a PHP constant.
+- **HTTP Client:** Execute HTTP requests against a webserver and fetch their response.
+- **Schema Editing Access:** Grant non-admin users access to the clients in the admin, and access to editing the GraphQL schema and its configuration.
 
 == Source code ==
+
+Gato GraphQL is open source, under the GPLv2 license.
 
 The source code for the plugin is in GitHub repo [GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL).
 
@@ -97,6 +157,74 @@ With Gato GraphQL you can also execute tailored GraphQL queries against an endpo
 The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL as an API, such as for building headless sites.
 
 Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
+
+= How is Gato GraphQL different than WPGraphQL? =
+
+If you just need to build a headless WordPress site and deploy it as static, and you're currently using WPGraphQL, switching to Gato GraphQL will not make any difference.
+
+Otherwise, switching to Gato GraphQL provides many benefits:
+
+The "n+1" query problem just doesn't happen, by design.
+
+When using persisted queries to expose predefined data, you can completely disable the GraphQL single endpoint, so that it is not accessible even to authenticated users.
+
+You can provide multiple custom endpoints, each of them customized to a specific customer or application, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as /graphql/customers/some-customer and /graphql/customers/another-customer).
+
+You can execute updates in bulk. For instance, you can delete all comments on the site, or assign a tag or category to all your posts. And you can search and replace a string, even using a regex, on hundreds of posts (PRO).
+
+You will have access to novel GraphQL features, proposed for the spec but not yet released, including nested mutations, schema namespacing and the 'oneOf' Input Object. And also dynamic variables and Multiple Query Execution (PRO).
+
+You can validate that only logged-in users, or users with a certain role or capability, or visitors from a certain IP range, can access data, on a field-by-field basis (PRO).
+
+You can compose fields, so that a foundational set of field resolvers can cover an unlimited number of use cases, and compose directives, so that a directive can be applied on an inner property from the field's value.
+
+You can expose private endpoints, accessible only within the wp-admin, to power your Gutenberg blocks. And you can access a private GraphQL server, to fetch data for your application using PHP code, without exposing any public-facing endpoint (PRO).
+
+You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
+
+You can use GraphQL to import posts from another WordPress site, from an RSS feed, from a CSV, or from any REST or GraphQL API. And you can export content as JSON and CSV. (PRO)
+
+You can invoke the API of any external service via an HTTP client (PRO). For instance, you can subscribe your WordPress users to your Mailchimp email list.
+
+You can receive and process incoming data from any service via a dedicated webhook (PRO). For instance, you can capture the newsletter emails registered in an InstaWP sandbox site and send them automatically to Mailchimp.
+
+You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event via hook `draft_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that case, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
+
+And all of these additional uses cases can be achieved directly within the wp-admin, providing the GraphQL query via a user interface, without having to deploy any PHP code.
+
+= Does Gato GraphQL PRO have a refund policy? =
+
+Yes it does. If you have purchased Gato GraphQL PRO and found out that it's not the right tool to satisfy your needs, you have [30 days to ask for a refund](https://gatographql.com/refund-policy).
+
+= Can I try out Gato GraphQL PRO? =
+
+Yes, you can [launch your own sandbox site](https://app.instawp.io/launch?t=gatographql-demo&d=v2) to play with Gato GraphQL PRO, for free, for 7 days.
+
+= Do I need to be a developer to use Gato GraphQL? =
+
+Gato GraphQL has been designed to be as easy to use as possible, accessible directly within the wp-admin via several user interfaces, powered by the WordPress editor.
+
+The only requirement is to learn the [GraphQL language](https://graphql.org). If you are able to learn this language, then you are able to use Gato GraphQL.
+
+= Why would I want to use Gato GraphQL to manage my WordPress site? =
+
+GraphQL is a super powerful language`, that can achieve a lot more than just building headless sites, and it's easy to learn.
+
+Gato GraphQL is a generic tool that extracts all the power from GraphQL. You provide the GraphQL query directly via the wp-admin, and dozens of use cases (normally provided by dedicated plugins) become available.
+
+Gato GraphQL is not a duplicator plugin, but you can duplicate posts with it. It is not a translation plugin, but you can translate any content, including the properties inside Gutenberg blocks. It is not an automator plugin, but you can automate your tasks, without any restriction. It is not a backup plugin, but you can import and export posts. It is not a search and replace plugin, but you can modify your posts in bulk, with a single query. And it is not webhook plugin or HTTP client, but you can both send a request to any API, and receive and process incoming requests from any service.
+
+What you can use Gato GraphQL for, literally depends on your imagination.
+
+= Are there predefined GraphQL queries for common use cases? =
+
+Gato GraphQL's [queries library](https://gatographql.com/library) contains a collection of GraphQL queries for common use cases, which you can copy/paste and customize to your needs.
+
+This library is continually growing.
+
+= Does the plugin provide documentation? =
+
+The Gato GraphQL website contains extensive documentation, including [guides](https://gatographql.com/guides) on configuring and using the plugin, the [extensions reference](https://gatographql.com/extensions-reference) docs, and a [tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema.
 
 == Screenshots ==
 
