@@ -176,8 +176,6 @@ You can validate that only logged-in users, or users with a certain role or capa
 
 You can expose private endpoints, accessible only within the wp-admin, to power your Gutenberg blocks. And you can access a private GraphQL server, to fetch data for your application using PHP code, without exposing any public-facing endpoint (PRO).
 
-You can cache the GraphQL response using standard HTTP caching (PRO).
-
 You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
 
 You can use GraphQL to import posts from another WordPress site, from an RSS feed, from a CSV, or from any REST or GraphQL API. And you can export content as JSON and CSV. (PRO)
