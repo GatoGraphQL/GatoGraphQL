@@ -184,6 +184,8 @@ You can use GraphQL to import posts from another WordPress site, from an RSS fee
 
 You can invoke the API of any external service via an HTTP client (PRO). For instance, you can subscribe your WordPress users to your Mailchimp email list.
 
+You can receive and process incoming data from any service via a dedicated webhook (PRO). For instance, you can capture the newsletter emails registered in an InstaWP sandbox site and send them automatically to Mailchimp.
+
 You can use GraphQL to automate tasks and content workflows (PRO). For instance, when a new post is created (event via hook `draft_post`) you can execute a persisted query that checks if the post does not have a thumbnail and, in that case, generates one by calling the Stable Diffusion API, compresses the image via TinyPng, and finally inserts the image as the post's featured image.
 
 And all of these additional uses cases can be achieved directly within the wp-admin, providing the GraphQL query via a user interface, without having to deploy any PHP code.
