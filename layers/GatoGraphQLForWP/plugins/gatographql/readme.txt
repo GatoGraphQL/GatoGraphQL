@@ -212,7 +212,7 @@ GraphQL is a super powerful language`, that can achieve a lot more than just bui
 
 Gato GraphQL is a generic tool that extracts all the power from GraphQL. You provide the GraphQL query directly via the wp-admin, and dozens of use cases (normally provided by dedicated plugins) become available.
 
-Gato GraphQL is not a duplicator plugin, but you can duplicate posts with it. It is not a translation plugin, but you can translate any content, including the properties inside Gutenberg blocks. It is not an automator plugin, but you can automate your tasks, without any restriction. It is not a backup plugin, but you can import and export posts. It is not a search and replace plugin, but you can modify your posts in bulk, with a single query. And it is not webhook plugin or HTTP client, but you can both send a request to any API, and receive incoming requests from any service.
+Gato GraphQL is not a duplicator plugin, but you can duplicate posts with it. It is not a translation plugin, but you can translate any content, including the properties inside Gutenberg blocks. It is not an automator plugin, but you can automate your tasks, without any restriction. It is not a backup plugin, but you can import and export posts. It is not a search and replace plugin, but you can modify your posts in bulk, with a single query. And it is not webhook plugin or HTTP client, but you can both send a request to any API, and receive and process incoming requests from any service.
 
 What you can use Gato GraphQL for, literally depends on your imagination.
 
