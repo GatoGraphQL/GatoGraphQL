@@ -176,6 +176,8 @@ You will have access to novel GraphQL features, proposed for the spec but not ye
 
 You can validate that only logged-in users, or users with a certain role or capability, or visitors from a certain IP range, can access data, on a field-by-field basis (PRO).
 
+You can compose fields, so that a foundational set of field resolvers can cover an unlimited number of use cases, and compose directives, so that a directive can be applied on an inner property from the field's value.
+
 You can expose private endpoints, accessible only within the wp-admin, to power your Gutenberg blocks. And you can access a private GraphQL server, to fetch data for your application using PHP code, without exposing any public-facing endpoint (PRO).
 
 You can use GraphQL to retrieve, modify and finally store again the content in your site, all within a single GraphQL document (PRO). For instance, you can fetch all the Gutenberg blocks in a post, extract their properties, translate those strings via Google Translate API, insert those strings back into the block, and store the post again.
