@@ -168,7 +168,7 @@ The "n+1" query problem just doesn't happen, by design.
 
 When using persisted queries to expose predefined data, you can completely disable the GraphQL single endpoint, so that it is not accessible even to authenticated users.
 
-You can provide multiple custom endpoints, each of them customized for your customers or applications, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as /graphql/customers/some-customer and /graphql/customers/another-customer).
+You can provide multiple custom endpoints, each of them customized to a specific customer or application, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as /graphql/customers/some-customer and /graphql/customers/another-customer).
 
 You can execute updates in bulk. For instance, you can delete all comments on the site, or assign a tag or category to all your posts. And you can search and replace a string, even using a regex, on hundreds of posts (PRO).
 
