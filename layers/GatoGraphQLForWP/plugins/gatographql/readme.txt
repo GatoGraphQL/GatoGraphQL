@@ -134,15 +134,15 @@ Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://gith
 
 With Gato GraphQL you can query data from the WordPress database, and then inject the results into a WP-CLI command (either to select a specific resource, or update an option with some value, or other).
 
-Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli/) for a thorough description on how to do it.
+Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli) for a thorough description on how to do it.
 
 = How do I use Gato GraphQL to build headless sites? =
 
-With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org/) or others) you can query the data and render the HTML.
+With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org) or others) you can query the data and render the HTML.
 
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
-Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks/) for an example.
+Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks) for an example.
 
 = How is Gato GraphQL different than the WP REST API? =
 
