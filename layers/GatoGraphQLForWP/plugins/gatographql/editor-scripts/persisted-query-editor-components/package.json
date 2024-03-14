@@ -1,6 +1,6 @@
 {
     "name": "persisted-query-editor-components",
-    "version": "2.2.1",
+    "version": "2.3.0-dev",
     "description": "Components required to edit a GraphQL Persisted Query CPT",
     "author": "Leonardo Losoviz",
     "license": "MIT",
