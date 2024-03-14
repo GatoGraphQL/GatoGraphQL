@@ -1,4 +1,4 @@
-# Sending a notification when there is a new post
+# Lesson 16: Sending a notification when there is a new post
 
 Gato GraphQL can help us automate tasks in the application, such as sending a notification email to the admin when there is a new post.
 

@@ -1,4 +1,4 @@
-# Handling errors when connecting to services
+# Lesson 22: Handling errors when connecting to services
 
 We can encounter different types of errors when fetching data from an external API.
 

@@ -1,4 +1,4 @@
-# Filtering data from an external API
+# Lesson 26: Filtering data from an external API
 
 If the external API does not allow filtering by a certain property that we need, we can use Gato GraphQL to iterate over the entries in the API response, and remove those ones that do not satifsy our condition.
 

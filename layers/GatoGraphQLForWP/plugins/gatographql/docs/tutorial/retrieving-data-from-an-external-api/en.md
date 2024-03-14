@@ -1,4 +1,4 @@
-# Retrieving data from an external API
+# Lesson 19: Retrieving data from an external API
 
 The [**HTTP Client**](https://gatographql.com/extensions/http-client/) extension allows us to execute HTTP requests against a webserver.
 

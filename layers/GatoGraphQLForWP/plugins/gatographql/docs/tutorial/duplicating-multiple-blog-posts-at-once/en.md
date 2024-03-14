@@ -1,4 +1,4 @@
-# Duplicating multiple blog posts at once
+# Lesson 4: Duplicating multiple blog posts at once
 
 We can extend the previous tutorial lesson, to duplicate multiple posts with a single GraphQL request.
 

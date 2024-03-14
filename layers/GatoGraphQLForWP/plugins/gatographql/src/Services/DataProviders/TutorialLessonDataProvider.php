@@ -19,10 +19,10 @@ class TutorialLessonDataProvider
                 \__('Intro', 'gatographql'),
             ],
             TutorialLessons::SEARCHING_WORDPRESS_DATA => [
-                \__('Searching WordPress data', 'gatographql'),
+                \__('Lesson 1: Searching WordPress data', 'gatographql'),
             ],
             TutorialLessons::QUERYING_DYNAMIC_DATA => [
-                \__('Querying dynamic data', 'gatographql'),
+                \__('Lesson 2: Querying dynamic data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
@@ -60,7 +60,7 @@ class TutorialLessonDataProvider
             //     \__('Mapping JS components to (Gutenberg) blocks', 'gatographql'),
             // ],
             TutorialLessons::DUPLICATING_A_BLOG_POST => [
-                \__('Duplicating a blog post', 'gatographql'),
+                \__('Lesson 3: Duplicating a blog post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -68,7 +68,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE => [
-                \__('Duplicating multiple blog posts at once', 'gatographql'),
+                \__('Lesson 4: Duplicating multiple blog posts at once', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -79,7 +79,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::CUSTOMIZING_CONTENT_FOR_DIFFERENT_USERS => [
-                \__('Customizing content for different users', 'gatographql'),
+                \__('Lesson 5: Customizing content for different users', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -88,7 +88,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::SEARCH_REPLACE_AND_STORE_AGAIN => [
-                \__('Search, replace, and store again', 'gatographql'),
+                \__('Lesson 6: Search, replace, and store again', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -96,7 +96,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::ADAPTING_CONTENT_IN_BULK => [
-                \__('Adapting content in bulk', 'gatographql'),
+                \__('Lesson 7: Adapting content in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -105,7 +105,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::SITE_MIGRATIONS => [
-                \__('Site migrations', 'gatographql'),
+                \__('Lesson 8: Site migrations', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
@@ -113,7 +113,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::INSERTING_REMOVING_A_GUTENBERG_BLOCK_IN_BULK => [
-                \__('Inserting/Removing a (Gutenberg) block in bulk', 'gatographql'),
+                \__('Lesson 9: Inserting/Removing a (Gutenberg) block in bulk', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -122,7 +122,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::RETRIEVING_STRUCTURED_DATA_FROM_BLOCKS => [
-                \__('Retrieving structured data from blocks', 'gatographql'),
+                \__('Lesson 10: Retrieving structured data from blocks', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
@@ -130,7 +130,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::MODIFYING_AND_STORING_AGAIN_THE_IMAGE_URLS_FROM_ALL_IMAGE_BLOCKS_IN_A_POST => [
-                \__('Modifying (and storing again) the image URLs from all Image blocks in a post', 'gatographql'),
+                \__('Lesson 11: Modifying (and storing again) the image URLs from all Image blocks in a post', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -141,7 +141,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::TRANSLATING_BLOCK_CONTENT_IN_A_POST_TO_A_DIFFERENT_LANGUAGE => [
-                \__('Translating block content in a post to a different language', 'gatographql'),
+                \__('Lesson 12: Translating block content in a post to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -153,7 +153,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::BULK_TRANSLATING_BLOCK_CONTENT_IN_MULTIPLE_POSTS_TO_A_DIFFERENT_LANGUAGE => [
-                \__('Bulk translating block content in multiple posts to a different language', 'gatographql'),
+                \__('Lesson 13: Bulk translating block content in multiple posts to a different language', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -165,7 +165,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::SENDING_EMAILS_WITH_PLEASURE => [
-                \__('Sending emails with pleasure', 'gatographql'),
+                \__('Lesson 14: Sending emails with pleasure', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -175,7 +175,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::SENDING_A_NOTIFICATION_WHEN_THERE_IS_A_NEW_POST => [
-                \__('Sending a notification when there is a new post', 'gatographql'),
+                \__('Lesson 15: Sending a notification when there is a new post', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -187,7 +187,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::SENDING_A_DAILY_SUMMARY_OF_ACTIVITY => [
-                \__('Sending a daily summary of activity', 'gatographql'),
+                \__('Lesson 16: Sending a daily summary of activity', 'gatographql'),
                 [
                     ExtensionModuleResolver::AUTOMATION,
                     ExtensionModuleResolver::EMAIL_SENDER,
@@ -200,7 +200,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::AUTOMATICALLY_ADDING_A_MANDATORY_BLOCK => [
-                \__('Automatically adding a mandatory block', 'gatographql'),
+                \__('Lesson 17: Automatically adding a mandatory block', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_TO_INPUT,
                     ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
@@ -209,7 +209,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::INTERACTING_WITH_EXTERNAL_SERVICES_VIA_WEBHOOKS => [
-                \__('Interacting with external services via webhooks', 'gatographql'),
+                \__('Lesson 18: Interacting with external services via webhooks', 'gatographql'),
                 [
                     ExtensionModuleResolver::EMAIL_SENDER,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -219,7 +219,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::RETRIEVING_DATA_FROM_AN_EXTERNAL_API => [
-                \__('Retrieving data from an external API', 'gatographql'),
+                \__('Lesson 19: Retrieving data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESOLUTION_CACHING,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -231,14 +231,14 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::COMBINING_USER_DATA_FROM_DIFFERENT_SOURCES => [
-                \__('Combining user data from different sources', 'gatographql'),
+                \__('Lesson 20: Combining user data from different sources', 'gatographql'),
                 [
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
             TutorialLessons::NOT_LEAKING_CREDENTIALS_WHEN_CONNECTING_TO_SERVICES => [
-                \__('Not leaking credentials when connecting to services', 'gatographql'),
+                \__('Lesson 21: Not leaking credentials when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -247,7 +247,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::HANDLING_ERRORS_WHEN_CONNECTING_TO_SERVICES => [
-                \__('Handling errors when connecting to services', 'gatographql'),
+                \__('Lesson 22: Handling errors when connecting to services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -258,7 +258,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::CREATING_AN_API_GATEWAY => [
-                \__('Creating an API gateway', 'gatographql'),
+                \__('Lesson 23: Creating an API gateway', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -273,14 +273,14 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::TRANSLATING_CONTENT_FROM_URL => [
-                \__('Translating content from URL', 'gatographql'),
+                \__('Lesson 24: Translating content from URL', 'gatographql'),
                 [
                     ExtensionModuleResolver::GOOGLE_TRANSLATE,
                     ExtensionModuleResolver::HTTP_CLIENT,
                 ]
             ],
             TutorialLessons::TRANSFORMING_DATA_FROM_AN_EXTERNAL_API => [
-                \__('Transforming data from an external API', 'gatographql'),
+                \__('Lesson 25: Transforming data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_DEFAULT_VALUE,
@@ -293,7 +293,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::FILTERING_DATA_FROM_AN_EXTERNAL_API => [
-                \__('Filtering data from an external API', 'gatographql'),
+                \__('Lesson 26: Filtering data from an external API', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -303,7 +303,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::PINGING_EXTERNAL_SERVICES => [
-                \__('Pinging external services', 'gatographql'),
+                \__('Lesson 27: Pinging external services', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
@@ -313,7 +313,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::UPDATING_LARGE_SETS_OF_DATA => [
-                \__('Updating large sets of data', 'gatographql'),
+                \__('Lesson 28: Updating large sets of data', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -326,7 +326,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::IMPORTING_A_POST_FROM_ANOTHER_WORDPRESS_SITE => [
-                \__('Importing a post from another WordPress site', 'gatographql'),
+                \__('Lesson 29: Importing a post from another WordPress site', 'gatographql'),
                 [
                     ExtensionModuleResolver::CONDITIONAL_FIELD_MANIPULATION,
                     ExtensionModuleResolver::FIELD_ON_FIELD,
@@ -340,7 +340,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::DISTRIBUTING_CONTENT_FROM_AN_UPSTREAM_TO_MULTIPLE_DOWNSTREAM_SITES => [
-                \__('Distributing content from an upstream to multiple downstream sites', 'gatographql'),
+                \__('Lesson 30: Distributing content from an upstream to multiple downstream sites', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
@@ -353,7 +353,7 @@ class TutorialLessonDataProvider
                 ]
             ],
             TutorialLessons::AUTOMATICALLY_SENDING_NEWSLETTER_SUBSCRIBERS_FROM_INSTAWP_TO_MAILCHIMP => [
-                \__('Automatically sending newsletter subscribers from InstaWP to Mailchimp', 'gatographql'),
+                \__('Lesson 31: Automatically sending newsletter subscribers from InstaWP to Mailchimp', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,

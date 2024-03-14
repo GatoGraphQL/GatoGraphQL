@@ -249,6 +249,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 2.2.1 =
+* Added "Lesson (number): " in the tutorials
+
 = 2.2.0 =
 * Do not include bundles in the Extensions page
 * Do not print the required extensions on predefined persisted queries

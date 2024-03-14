@@ -1,4 +1,4 @@
-# Importing a post from another WordPress site
+# Lesson 29: Importing a post from another WordPress site
 
 This tutorial lesson demonstrates how we can keep WordPress sites in sync, by importing a post from some WordPress site into our local WordPress site.
 

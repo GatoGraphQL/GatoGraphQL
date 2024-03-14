@@ -1,4 +1,4 @@
-# Duplicating a blog post
+# Lesson 3: Duplicating a blog post
 
 Duplicating a post is an example of Gato GraphQL's ability to retrieve, manipulate and store again data in the site.
 

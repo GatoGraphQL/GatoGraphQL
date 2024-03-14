@@ -1,4 +1,4 @@
-# Translating block content in a post to a different language
+# Lesson 11: Translating block content in a post to a different language
 
 This tutorial lesson demonstrates translating a post to the desired language, with full support for (Gutenberg) blocks.
 
