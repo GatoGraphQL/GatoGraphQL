@@ -1,4 +1,4 @@
-# Transforming data from an external API
+# Lesson 25: Transforming data from an external API
 
 This tutorial lesson demonstrates examples on adapting the response from an external API to anything we need it to be.
 

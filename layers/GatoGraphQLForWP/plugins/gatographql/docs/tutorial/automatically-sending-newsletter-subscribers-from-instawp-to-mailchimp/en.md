@@ -1,4 +1,4 @@
-# Automatically sending newsletter subscribers from InstaWP to Mailchimp
+# Lesson 31: Automatically sending newsletter subscribers from InstaWP to Mailchimp
 
 This GraphQL query captures the email from the visitors who ticked the "Subscribe to mailing list" checkbox from InstaWP (when creating a new sandbox site), and subscribes this email to a Mailchimp list:
 

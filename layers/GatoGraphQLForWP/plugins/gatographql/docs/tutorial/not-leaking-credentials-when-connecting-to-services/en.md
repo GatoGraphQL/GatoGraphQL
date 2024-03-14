@@ -1,4 +1,4 @@
-# Not leaking credentials when connecting to services
+# Lesson 21: Not leaking credentials when connecting to services
 
 This GraphQL query retrieves credentials from an environment value, and avoids them getting printed in the response or logs, thus avoiding security risks:
 

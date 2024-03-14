@@ -1,4 +1,4 @@
-# Updating large sets of data
+# Lesson 28: Updating large sets of data
 
 Sometimes we need to update thousands of resources in a single action, as expressed in the following comment (posted on a community group about WordPress):
 

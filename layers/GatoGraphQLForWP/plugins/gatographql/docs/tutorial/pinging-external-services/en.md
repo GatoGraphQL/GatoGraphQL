@@ -1,4 +1,4 @@
-# Pinging external services
+# Lesson 27: Pinging external services
 
 We can ping external services about new resources added to our website, passing along data both stored in the website and/or provided via parameters or headers.
 

@@ -1,4 +1,4 @@
-# Creating an API gateway
+# Lesson 23: Creating an API gateway
 
 An API gateway is a component on our application that provides a centralized handling of API communication between the client and the multiple required services.
 
