@@ -98,7 +98,7 @@ Gato GraphQL PRO clients have access to all **product updates** and **premium su
 
 === Features ===
 
-Gato GraphQL PRO provides all these features:
+Gato GraphQL PRO provides [all these features](https://gatographql.com/features#pro):
 
 - **Enhanced security:** Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
 - **Automation:** Automatically execute a GraphQL Persisted Query when some event happens on the site, creating automations via a user interface.
