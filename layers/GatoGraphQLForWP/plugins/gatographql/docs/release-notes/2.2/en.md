@@ -2,6 +2,8 @@
 
 ## Improvements
 
+- Added "Lesson (number): " in the tutorials (`v2.2.1`)
+
 ### Do not include bundles in the Extensions page
 
 In order to simplify the product offering, Gato GraphQL PRO will now be released as a single plugin, containing all the extensions. As such, installing bundles and single extensions are now both deprecated, and not offered anymore.

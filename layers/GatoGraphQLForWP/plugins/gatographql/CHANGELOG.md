@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Added "Lesson (number):..." in the tutorials
+- Added "Lesson (number): " in the tutorials
 
 ## 2.2.0 - 06/03/2024
 
