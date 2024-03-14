@@ -1,4 +1,4 @@
-# Bulk translating block content in multiple posts to a different language
+# Lesson 12: Bulk translating block content in multiple posts to a different language
 
 The previous tutorial lesson demonstrated how to translate a post. This lesson is the equivalent but translating multiple posts at once (in bulk), while executing a single call to the Google Translate API containing all text to translate from all the posts.
 

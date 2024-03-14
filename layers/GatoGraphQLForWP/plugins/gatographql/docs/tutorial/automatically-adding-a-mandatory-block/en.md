@@ -1,4 +1,4 @@
-# Automatically adding a mandatory block
+# Lesson 17: Automatically adding a mandatory block
 
 Whenever a new post is created, we can use the automation features to validate and modify the content of the post.
 

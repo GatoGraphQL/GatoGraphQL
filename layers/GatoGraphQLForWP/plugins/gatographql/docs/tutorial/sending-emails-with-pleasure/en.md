@@ -1,4 +1,4 @@
-# Sending emails (with pleasure)
+# Lesson 14: Sending emails (with pleasure)
 
 This tutorial lesson demonstrates several capabilities by Gato GraphQL to send emails.
 

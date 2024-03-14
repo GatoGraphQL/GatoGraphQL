@@ -1,4 +1,4 @@
-# Sending a daily summary of activity
+# Lesson 15: Sending a daily summary of activity
 
 We can integrate Gato GraphQL with [WP-Cron](https://developer.wordpress.org/plugins/cron/), as to automate the execution GraphQL queries that perform admin tasks, with some time interval. (The [**Automation**](https://gatographql.com/extensions/automation/) extension is required.)
 
