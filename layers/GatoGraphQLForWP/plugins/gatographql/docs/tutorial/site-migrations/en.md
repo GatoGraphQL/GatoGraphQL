@@ -1,4 +1,4 @@
-# Site migrations
+# Lesson 8: Site migrations
 
 We can execute a batch of GraphQL queries to adapt the content in the site when migrating it to a new domain, moving pages to a different URL, or others.
 

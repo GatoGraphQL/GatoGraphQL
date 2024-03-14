@@ -1,4 +1,4 @@
-# Querying dynamic data
+# Lesson 2: Querying dynamic data
 
 Gato GraphQL can further augment WordPress' capabilities to search data via the use of "function" fields (a distinct type of field which provides functionality instead of data), allowing us to dynamically compute data, input it back into the query, and affect the response with granular control.
 

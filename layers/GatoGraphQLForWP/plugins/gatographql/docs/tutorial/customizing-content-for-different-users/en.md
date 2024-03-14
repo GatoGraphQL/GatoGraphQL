@@ -1,4 +1,4 @@
-# Customizing content for different users
+# Lesson 5: Customizing content for different users
 
 We can retrieve a different response in a field depending on some piece of queried data, such as the roles of the logged-in user.
 

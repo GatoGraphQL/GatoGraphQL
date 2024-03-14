@@ -1,4 +1,4 @@
-# Searching WordPress data
+# Lesson 1: Searching WordPress data
 
 Searching for data within WordPress is limited in several cases, and Gato GraphQL can help augment these capabilities.
 

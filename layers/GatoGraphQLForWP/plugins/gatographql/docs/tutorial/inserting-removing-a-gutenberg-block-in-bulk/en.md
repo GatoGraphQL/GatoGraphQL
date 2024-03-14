@@ -1,4 +1,4 @@
-# Inserting/Removing a (Gutenberg) block in bulk
+# Lesson 9: Inserting/Removing a (Gutenberg) block in bulk
 
 We can update posts by modifying their (Gutenberg) block's HTML content.
 

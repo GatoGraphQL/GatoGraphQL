@@ -1,4 +1,4 @@
-# Retrieving structured data from blocks
+# Lesson 10: Retrieving structured data from blocks
 
 We can iterate the (Gutenberg) blocks in the post and extract the attributes from deep within the block structure, unlocking these attributes to be fed into any functionality in our site.
 

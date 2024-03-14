@@ -1,4 +1,4 @@
-# Adapting content in bulk
+# Lesson 7: Adapting content in bulk
 
 This tutorial lesson adapts content in bulk, updating the title and excerpt for multiple posts with a single GraphQL request.
 
