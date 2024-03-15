@@ -8,7 +8,7 @@ Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The most powerful GraphQL server for WordPress.
+The most powerful GraphQL server for WordPress. Do headless, APIs, webhooks, import/export, search & replace, Google translate, and more.
 
 == Description ==
 
