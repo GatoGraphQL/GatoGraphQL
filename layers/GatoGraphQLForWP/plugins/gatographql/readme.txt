@@ -84,6 +84,7 @@ Gato GraphQL PRO can help you simplify your tech stack, handling the functionali
 - ✅ APIs
 - ✅ Automator
 - ✅ Bulk editing/Post duplicator
+- ✅ Code snippets
 - ✅ Content distribution
 - ✅ Email notifications
 - ✅ HTTP client
