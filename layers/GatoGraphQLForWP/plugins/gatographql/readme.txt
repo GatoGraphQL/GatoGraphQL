@@ -62,21 +62,27 @@ Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, 
 Use Gato GraphQL PRO to:
 
 - Expose public and private APIs
-- Synchronize content across sites
-- Automate tasks and content workflows (like Zapier)
 - Complement WP-CLI to execute admin tasks
+- Update posts in bulk
 - Search/replace content for site migrations
 - Send an email/notifications when something happens (new post published, new comment added, etc)
+- Synchronize content across sites, or a multisite network
+- Insert or remove Gutenberg blocks in bulk
+- Automatically insert a mandatory block when creating a new post
 - Translate content in the site using the Google Translate API
+- Automatically translate new posts to all different languages in a multisite
 - Generate an image using OpenAI's DALL-E or Stable Diffusion, and set it as featured image
 - Send new posts to Facebook, Instagram, LinkedIn, or other social media platforms
-- Import/export a post from/to another WordPress site
-- Import all posts from a CSV file
+- Import a post from another WordPress site
+- Import all posts from a JSON or CSV file (including from Google Sheets)
+- Export all posts to a JSON or CSV file
+- Import a post from an RSS feed
 - Create posts from static html files
-- Interact with cloud services
+- Interact with cloud services via an HTTP client
 - Convert the data from a 3rd-party API into the required format
-- Insert or remove (Gutenberg) blocks in bulk
-- Validate that a new post contains a mandatory block
+- Call external APIs to validate your data
+- Automate tasks and content workflows when some event happens (eg: `wp_insert_post`), like Zapier for WordPress
+- Use WP-Cron to regularly execute GraphQL queries
 - And much more...
 
 Gato GraphQL PRO can help you simplify your tech stack, handling the functionality from multiple plugins (so you need to install fewer plugins in your site, and remove bloat), including:
