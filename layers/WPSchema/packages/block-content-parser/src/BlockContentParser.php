@@ -410,7 +410,10 @@ class BlockContentParser implements BlockContentParserInterface
             // https://github.com/WordPress/gutenberg/pull/8276
 
             $attribute_value = $this->source_block_attribute($crawler, $block_attribute_definition);
-        } elseif ('html' === $attribute_source) {
+        } elseif ('html' === $attribute_source || 'rich-text' === $attribute_source) {
+            // 'html' source was converted to 'rich-text' in WordPress 6.5.
+            // https://github.com/WordPress/gutenberg/commit/6a42225124e69276a2deec4597a855bb504b37cc
+
             $attribute_value = $this->source_block_html($crawler, $block_attribute_definition);
         } elseif ('text' === $attribute_source) {
             $attribute_value = $this->source_block_text($crawler, $block_attribute_definition);

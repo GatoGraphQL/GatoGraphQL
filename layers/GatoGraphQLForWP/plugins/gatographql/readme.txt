@@ -1,14 +1,14 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
-Tags: graphql, headless, webhook, api, automator, import export, search replace, bulk update, wpcli, wget, wpgraphql, cloud
+Tags: graphql, headless, webhook, api, automator, import export, search replace, google translate, wp-cli, external api, wpgraphql, code snippets
 Requires at least: 5.4
 Tested up to: 6.5
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-The most powerful GraphQL server for WordPress.
+The most powerful GraphQL server for WordPress. Do headless, APIs, webhooks, import/export, search & replace, Google translate, and more.
 
 == Description ==
 
@@ -62,21 +62,27 @@ Unleash your capabilities with **[Gato GraphQL PRO](https://gatographql.com)**, 
 Use Gato GraphQL PRO to:
 
 - Expose public and private APIs
-- Synchronize content across sites
-- Automate tasks and content workflows (like Zapier)
 - Complement WP-CLI to execute admin tasks
+- Update posts in bulk
 - Search/replace content for site migrations
 - Send an email/notifications when something happens (new post published, new comment added, etc)
+- Synchronize content across sites, or a multisite network
+- Insert or remove Gutenberg blocks in bulk
+- Automatically insert a mandatory block when creating a new post
 - Translate content in the site using the Google Translate API
+- Automatically translate new posts to all different languages in a multisite
 - Generate an image using OpenAI's DALL-E or Stable Diffusion, and set it as featured image
 - Send new posts to Facebook, Instagram, LinkedIn, or other social media platforms
-- Import/export a post from/to another WordPress site
-- Import all posts from a CSV file
+- Import a post from another WordPress site
+- Import all posts from a JSON or CSV file (including from Google Sheets)
+- Export all posts to a JSON or CSV file
+- Import a post from an RSS feed
 - Create posts from static html files
-- Interact with cloud services
+- Interact with cloud services via an HTTP client
 - Convert the data from a 3rd-party API into the required format
-- Insert or remove (Gutenberg) blocks in bulk
-- Validate that a new post contains a mandatory block
+- Call external APIs to validate your data
+- Automate tasks and content workflows when some event happens (eg: `wp_insert_post`), like Zapier for WordPress
+- Use WP-Cron to regularly execute GraphQL queries
 - And much more...
 
 Gato GraphQL PRO can help you simplify your tech stack, handling the functionality from multiple plugins (so you need to install fewer plugins in your site, and remove bloat), including:
@@ -84,6 +90,7 @@ Gato GraphQL PRO can help you simplify your tech stack, handling the functionali
 - ✅ APIs
 - ✅ Automator
 - ✅ Bulk editing/Post duplicator
+- ✅ Code snippets
 - ✅ Content distribution
 - ✅ Email notifications
 - ✅ HTTP client
@@ -98,7 +105,7 @@ Gato GraphQL PRO clients have access to all **product updates** and **premium su
 
 === Features ===
 
-Gato GraphQL PRO provides all these features:
+Gato GraphQL PRO provides [all these features](https://gatographql.com/features#pro):
 
 - **Enhanced security:** Additional mechanisms to help protect that your data is safe, accessible only to the intended targets.
 - **Automation:** Automatically execute a GraphQL Persisted Query when some event happens on the site, creating automations via a user interface.
@@ -134,15 +141,15 @@ Yes you can. Use the GitHub template [GatoGraphQL/ExtensionStarter](https://gith
 
 With Gato GraphQL you can query data from the WordPress database, and then inject the results into a WP-CLI command (either to select a specific resource, or update an option with some value, or other).
 
-Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli/) for a thorough description on how to do it.
+Check out guide [Complementing WP-CLI](https://gatographql.com/guides/code/complementing-wp-cli) for a thorough description on how to do it.
 
 = How do I use Gato GraphQL to build headless sites? =
 
-With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org/) or others) you can query the data and render the HTML.
+With Gato GraphQL you can create an endpoint that exposes the data from your WordPress site. Then, within some framework (such as [Next.js](https://nextjs.org) or others) you can query the data and render the HTML.
 
 = Can I fetch Gutenberg block data with Gato GraphQL? =
 
-Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks/) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks/) for an example.
+Yes you can. Check guide [Working with (Gutenberg) blocks](https://gatographql.com/guides/interact/working-with-gutenberg-blocks) for the different ways in which we can query block data, and guide [Mapping JS components to (Gutenberg) blocks](https://gatographql.com/guides/code/mapping-js-components-to-gutenberg-blocks) for an example.
 
 = How is Gato GraphQL different than the WP REST API? =
 
@@ -170,7 +177,7 @@ When using persisted queries to expose predefined data, you can completely disab
 
 When caching the GraphQL response using standard HTTP caching, the `max-age` header is calculated automatically, from all the fields present in the GraphQL query (PRO).
 
-You can provide multiple custom endpoints, each of them customized to a specific customer or application, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as /graphql/customers/some-customer and /graphql/customers/another-customer).
+You can provide multiple custom endpoints, each of them customized to a specific customer or application, protecting them via a password. And you can add custom categories to them, and give them a hierarchy (such as `/graphql/customers/some-customer` and `/graphql/customers/another-customer`).
 
 You can execute updates in bulk. For instance, you can delete all comments on the site, or assign a tag or category to all your posts. And you can search and replace a string, even using a regex, on hundreds of posts (PRO).
 
