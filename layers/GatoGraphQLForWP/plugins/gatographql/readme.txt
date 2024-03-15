@@ -258,6 +258,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 2.2.2 =
 * Tested up WordPress 6.5
+* Renamed "Tutorial" to "Schema tutorial"
 
 = 2.2.1 =
 * Added "Lesson (number): " in the tutorials

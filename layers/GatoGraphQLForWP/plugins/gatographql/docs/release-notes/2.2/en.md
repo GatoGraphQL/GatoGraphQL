@@ -4,6 +4,7 @@
 
 - Added "Lesson (number): " in the tutorials (`v2.2.1`)
 - Tested up WordPress 6.5 (`v2.2.2`)
+- Renamed "Tutorial" to "Schema tutorial" (`v2.2.2`)
 
 ### Do not include bundles in the Extensions page
 
