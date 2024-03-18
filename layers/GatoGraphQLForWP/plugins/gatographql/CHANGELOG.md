@@ -6,6 +6,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.3.0 - DATE
 
+## 2.2.2 - DATE
+
+### Improvements
+
+- Adapted `blocks` field to work with WordPress 6.5 (#2657)
+- Tested up WordPress 6.5
+- Renamed "Tutorial" to "Schema tutorial"
+
 ## 2.2.1 - 14/03/2024
 
 ### Improvements

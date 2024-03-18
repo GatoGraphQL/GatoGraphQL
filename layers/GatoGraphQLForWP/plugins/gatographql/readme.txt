@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: graphql, headless, webhook, api, automator, import export, search replace, google translate, wp-cli, external api, wpgraphql, code snippets
 Requires at least: 5.4
-Tested up to: 6.4
+Tested up to: 6.5
 Stable tag: 2.2.1
 Requires PHP: 8.1
 License: GPLv2 or later
@@ -255,6 +255,11 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 2.2.2 =
+* Adapted `blocks` field to work with WordPress 6.5 (#2657)
+* Tested up WordPress 6.5
+* Renamed "Tutorial" to "Schema tutorial"
 
 = 2.2.1 =
 * Added "Lesson (number): " in the tutorials
