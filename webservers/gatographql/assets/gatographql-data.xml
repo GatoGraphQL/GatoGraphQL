@@ -2822,7 +2822,7 @@ https://wordpress.org/about/
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg","id":1380,"dimRatio":50,"isDark":false} -->
+<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg","id":1380,"alt":"Dog not caring about anything","dimRatio":50,"isDark":false} -->
 <div class="wp-block-cover is-light"><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"align":"center","placeholder":"Write title…","fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">See if I care</p>
 <!-- /wp:paragraph --></div></div>
