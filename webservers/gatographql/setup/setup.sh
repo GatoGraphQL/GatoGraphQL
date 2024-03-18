@@ -18,4 +18,5 @@ echo "Installing WordPress..."
 /bin/bash /app/setup/configure-plugin-settings.sh
 /bin/bash /app/setup/import-data.sh
 /bin/bash /app/setup/create-menus.sh
+/bin/bash /app/setup/trigger-setup-data-install.sh
 # /bin/bash /app/setup/create-taxonomy-terms.sh
