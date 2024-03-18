@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Adapted `blocks` field to work with WordPress 6.5 (#2657)
 - Tested up WordPress 6.5
 - Renamed "Tutorial" to "Schema tutorial"
 

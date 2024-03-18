@@ -3,6 +3,7 @@
 ## Improvements
 
 - Added "Lesson (number): " in the tutorials (`v2.2.1`)
+- Adapted `blocks` field to work with WordPress 6.5 ([#2657](https://github.com/GatoGraphQL/GatoGraphQL/pull/2657)) (`v2.2.2`)
 - Tested up WordPress 6.5 (`v2.2.2`)
 - Renamed "Tutorial" to "Schema tutorial" (`v2.2.2`)
 
