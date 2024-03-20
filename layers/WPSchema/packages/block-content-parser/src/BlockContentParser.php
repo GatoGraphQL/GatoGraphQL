@@ -290,6 +290,8 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * @return array<string,mixed>|null
      *
+     * @access private
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_block(array $block, array $registered_blocks, array $filter_options): ?array
@@ -395,6 +397,8 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * @return mixed[]|string|null
      *
+     * @access private
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_attribute(Crawler $crawler, array $block_attribute_definition): array|string|null
@@ -410,10 +414,12 @@ class BlockContentParser implements BlockContentParserInterface
             // https://github.com/WordPress/gutenberg/pull/8276
 
             $attribute_value = $this->source_block_attribute($crawler, $block_attribute_definition);
-        } elseif ('html' === $attribute_source || 'rich-text' === $attribute_source) {
-            // 'html' source was converted to 'rich-text' in WordPress 6.5.
-            // https://github.com/WordPress/gutenberg/commit/6a42225124e69276a2deec4597a855bb504b37cc
+        } elseif ('rich-text' === $attribute_source) {
+            // Most 'html' sources were converted to 'rich-text' in WordPress 6.5.
+            // https://github.com/WordPress/gutenberg/pull/43204
 
+            $attribute_value = $this->source_block_rich_text($crawler, $block_attribute_definition);
+        } elseif ('html' === $attribute_source) {
             $attribute_value = $this->source_block_html($crawler, $block_attribute_definition);
         } elseif ('text' === $attribute_source) {
             $attribute_value = $this->source_block_text($crawler, $block_attribute_definition);
@@ -443,6 +449,8 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * @return string|null
      *
+     * @access private
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_block_attribute(Crawler $crawler, array $block_attribute_definition): ?string
@@ -469,6 +477,8 @@ class BlockContentParser implements BlockContentParserInterface
      * @param array<string,mixed> $block_attribute_definition
      *
      * @return string|null
+     *
+     * @access private
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
@@ -502,9 +512,43 @@ class BlockContentParser implements BlockContentParserInterface
     }
 
     /**
+     * Helper function to process the `rich-text` source attribute.
+     * At present, the main difference from `html` is that `rich-text` does not support multiline selectors.
+     *
+     * @param Crawler $crawler Crawler instance.
+     * @param array<string,mixed> $block_attribute_definition Definition of the block attribute.
+     *
+     * @return string|null
+     *
+     * @access private
+     *
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function source_block_rich_text(Crawler $crawler, array $block_attribute_definition): ?string
+    {
+        // 'rich-text' sources:
+        // https://github.com/WordPress/gutenberg/blob/6a42225124e69276a2deec4597a855bb504b37cc/packages/blocks/src/api/parser/get-block-attributes.js#L228-L232
+
+        $attribute_value = null;
+        $selector        = $block_attribute_definition['selector'] ?? null;
+
+        if (null !== $selector) {
+            $crawler = $crawler->filter($selector);
+        }
+
+        if ($crawler->count() > 0) {
+            $attribute_value = $crawler->html();
+        }
+
+        return $attribute_value;
+    }
+
+    /**
      * @param array<string,mixed> $block_attribute_definition
      *
      * @return string|null
+     *
+     * @access private
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
@@ -531,6 +575,8 @@ class BlockContentParser implements BlockContentParserInterface
      * @param array<string,mixed> $block_attribute_definition
      *
      * @return mixed[]|null
+     *
+     * @access private
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
@@ -568,6 +614,8 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * @return string|null
      *
+     * @access private
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_block_tag(Crawler $crawler, array $block_attribute_definition): ?string
@@ -596,6 +644,8 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * @return string|null
      *
+     * @access private
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_block_raw(Crawler $crawler, array $block_attribute_definition): ?string
@@ -618,6 +668,8 @@ class BlockContentParser implements BlockContentParserInterface
      * @param array<string,mixed> $block_attribute_definition
      *
      * @return string|null
+     *
+     * @access private
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
@@ -645,6 +697,8 @@ class BlockContentParser implements BlockContentParserInterface
      * @param array<string,mixed> $block_attribute_definition
      *
      * @return mixed[]|null
+     *
+     * @access private
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
@@ -696,6 +750,8 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * @return mixed[]|string|null
      *
+     * @access private
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function source_block_node(Crawler $crawler, array $block_attribute_definition): array|string|null
@@ -732,11 +788,13 @@ class BlockContentParser implements BlockContentParserInterface
      *
      * @return mixed[]|string|null
      *
+     * @access private
+     *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
     protected function from_dom_node(DOMNode $node): array|string|null
     {
-		// phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- external API calls
+        // phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase -- external API calls
 
         if (XML_TEXT_NODE === $node->nodeType) {
             // For plain text nodes, return the text directly
@@ -760,7 +818,7 @@ class BlockContentParser implements BlockContentParserInterface
 
         return null;
 
-		// phpcs:enable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+        // phpcs:enable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
     }
 
     /**
