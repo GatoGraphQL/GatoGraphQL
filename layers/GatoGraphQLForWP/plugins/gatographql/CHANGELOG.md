@@ -6,7 +6,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.3.0 - DATE
 
-## 2.2.2 - DATE
+## 2.2.2 - 27/03/2024
 
 ### Improvements
 
