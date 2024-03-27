@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-api/api": "^2.2.2"
+        "pop-api/api": "^2.3"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -180,7 +180,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.2-dev"
+            "dev-master": "2.3-dev"
         }
     },
     "config": {

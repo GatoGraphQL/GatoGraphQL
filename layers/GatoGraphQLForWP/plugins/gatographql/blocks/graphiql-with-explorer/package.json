@@ -1,6 +1,6 @@
 {
     "name": "graphiql-with-explorer-block",
-    "version": "2.2.2",
+    "version": "2.3.0-dev",
     "description": "Block for adding a GraphiQL client with Explorer",
     "author": "Leonardo Losoviz",
     "license": "MIT",
