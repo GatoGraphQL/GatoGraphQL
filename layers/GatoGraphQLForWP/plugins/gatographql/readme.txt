@@ -256,6 +256,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 2.2.3 =
+* Bug parsing `@export(as: $someVar)` (#2661)
+
 = 2.2.2 =
 * Adapted `blocks` field to work with WordPress 6.5 (#2657)
 * Tested up WordPress 6.5
