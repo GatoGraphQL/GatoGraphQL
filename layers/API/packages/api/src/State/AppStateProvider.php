@@ -165,7 +165,8 @@ class AppStateProvider extends AbstractAppStateProvider
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $state['document-object-resolved-field-value-referenced-fields'] = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
-        } catch (AbstractASTNodeException | AbstractASTNodeParserException $exception) {
+        } catch (AbstractASTNodeException | AbstractASTNodeParserException | AbstractQueryException $exception) {
+            // AbstractQueryException is needed to avoid `@export(as: $someVar)`
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
                     FeedbackItemResolution::fromUpstreamFeedbackItemResolution($exception->getFeedbackItemResolution()),
