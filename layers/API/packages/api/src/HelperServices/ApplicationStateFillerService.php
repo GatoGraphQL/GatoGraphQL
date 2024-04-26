@@ -77,18 +77,12 @@ class ApplicationStateFillerService implements ApplicationStateFillerServiceInte
             );
             $executableDocument = $graphQLQueryParsingPayload->executableDocument;
             $documentObjectResolvedFieldValueReferencedFields = $graphQLQueryParsingPayload->objectResolvedFieldValueReferencedFields;
-        } catch (AbstractASTNodeException $astNodeException) {
+        } catch (AbstractASTNodeException | AbstractASTNodeParserException | AbstractQueryException $exception) {
+            // AbstractQueryException is needed to avoid `@export(as: $someVar)`
             App::getFeedbackStore()->documentFeedbackStore->addError(
                 new QueryFeedback(
-                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeException->getFeedbackItemResolution()),
-                    $astNodeException->getAstNode(),
-                )
-            );
-        } catch (AbstractASTNodeParserException $astNodeParserException) {
-            App::getFeedbackStore()->documentFeedbackStore->addError(
-                new QueryFeedback(
-                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($astNodeParserException->getFeedbackItemResolution()),
-                    $astNodeParserException->getAstNode(),
+                    FeedbackItemResolution::fromUpstreamFeedbackItemResolution($exception->getFeedbackItemResolution()),
+                    $exception->getAstNode(),
                 )
             );
         } catch (AbstractParserException $parserException) {

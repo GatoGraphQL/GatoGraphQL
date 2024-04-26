@@ -6,6 +6,7 @@
 - Adapted `blocks` field to work with WordPress 6.5 ([#2657](https://github.com/GatoGraphQL/GatoGraphQL/pull/2657)) (`v2.2.2`)
 - Tested up WordPress 6.5 (`v2.2.2`)
 - Renamed "Tutorial" to "Schema tutorial" (`v2.2.2`)
+- Bug parsing `@export(as: $someVar)` ([#2661](https://github.com/GatoGraphQL/GatoGraphQL/pull/2661)) (`v2.2.3`)
 
 ### Do not include bundles in the Extensions page
 
