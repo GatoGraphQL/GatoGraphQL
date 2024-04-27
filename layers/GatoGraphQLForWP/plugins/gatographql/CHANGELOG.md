@@ -10,7 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Updated the Support form's action URL
+- Updated the Support form's action URL (#2662)
 
 ## 2.2.3 - 26/04/2024
 
