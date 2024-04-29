@@ -662,6 +662,9 @@
               "name": "addCommentToCustomPost"
             },
             {
+              "name": "createCustomPost"
+            },
+            {
               "name": "createMediaItem"
             },
             {
@@ -687,6 +690,9 @@
             },
             {
               "name": "setTagsOnPost"
+            },
+            {
+              "name": "updateCustomPost"
             },
             {
               "name": "updatePost"
@@ -1285,6 +1291,9 @@
               "name": "comments"
             },
             {
+              "name": "createCustomPost"
+            },
+            {
               "name": "createMediaItem"
             },
             {
@@ -1465,6 +1474,9 @@
               "name": "tags"
             },
             {
+              "name": "updateCustomPost"
+            },
+            {
               "name": "updatePost"
             },
             {
@@ -1499,6 +1511,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of adding a comment to a custom post"
+        },
+        {
+          "name": "RootCreateCustomPostMutationPayload",
+          "namespacedName": "RootCreateCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a custom post"
         },
         {
           "name": "RootCreateMediaItemMutationPayload",
@@ -1679,6 +1711,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of setting tags on a post"
+        },
+        {
+          "name": "RootUpdateCustomPostMutationPayload",
+          "namespacedName": "RootUpdateCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a custom post"
         },
         {
           "name": "RootUpdatePostMutationPayload",
@@ -2670,6 +2722,13 @@
           "description": "Input to filter comments from custom posts"
         },
         {
+          "name": "CustomPostContentInput",
+          "namespacedName": "CustomPostContentInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
+        },
+        {
           "name": "CustomPostMetaQueryInput",
           "namespacedName": "CustomPostMetaQueryInput",
           "fields": null,
@@ -2929,6 +2988,13 @@
           "description": "Input to filter comments"
         },
         {
+          "name": "RootCreateCustomPostInput",
+          "namespacedName": "RootCreateCustomPostInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a custom post"
+        },
+        {
           "name": "RootCreateMediaItemInput",
           "namespacedName": "RootCreateMediaItemInput",
           "fields": null,
@@ -3060,6 +3126,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter tags"
+        },
+        {
+          "name": "RootUpdateCustomPostInput",
+          "namespacedName": "RootUpdateCustomPostInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a custom post"
         },
         {
           "name": "RootUpdatePostInput",
@@ -3342,6 +3415,13 @@
           "description": "Union of 'Error Payload' types when adding a comment to a custom post"
         },
         {
+          "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootCreateCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a custom post"
+        },
+        {
           "name": "RootCreateMediaItemMutationErrorPayloadUnion",
           "namespacedName": "RootCreateMediaItemMutationErrorPayloadUnion",
           "fields": null,
@@ -3403,6 +3483,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when setting tags on a custom post"
+        },
+        {
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a custom post"
         },
         {
           "name": "RootUpdatePostMutationErrorPayloadUnion",
