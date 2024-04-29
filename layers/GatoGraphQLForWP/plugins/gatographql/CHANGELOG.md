@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.3.0 - DATE
 
+### Improvements
+
+- Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost`
+
 ### Fixed
 
 - Updated the Support form's action URL (#2662)

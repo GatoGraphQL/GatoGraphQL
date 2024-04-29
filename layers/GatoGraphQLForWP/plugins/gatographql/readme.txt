@@ -257,6 +257,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 2.3.0 =
+* Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost`
 * Updated the Support form's action URL (#2662)
 
 = 2.2.3 =
