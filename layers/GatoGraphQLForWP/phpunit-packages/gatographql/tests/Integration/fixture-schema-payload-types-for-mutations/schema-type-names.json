@@ -228,6 +228,9 @@
           "name": "CustomPostCommentsFilterInput"
         },
         {
+          "name": "CustomPostContentInput"
+        },
+        {
           "name": "CustomPostMetaQueryInput"
         },
         {
@@ -339,6 +342,9 @@
           "name": "RootCommentsFilterInput"
         },
         {
+          "name": "RootCreateCustomPostInput"
+        },
+        {
           "name": "RootCreateMediaItemInput"
         },
         {
@@ -394,6 +400,9 @@
         },
         {
           "name": "RootTagsFilterInput"
+        },
+        {
+          "name": "RootUpdateCustomPostInput"
         },
         {
           "name": "RootUpdatePostInput"
