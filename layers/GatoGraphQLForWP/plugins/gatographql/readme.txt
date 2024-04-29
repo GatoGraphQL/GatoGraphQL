@@ -256,7 +256,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
-= 2.2.4 =
+= 2.3.0 =
 * Updated the Support form's action URL (#2662)
 
 = 2.2.3 =

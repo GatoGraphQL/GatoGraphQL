@@ -6,8 +6,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.3.0 - DATE
 
-## 2.2.4 - DATE
-
 ### Fixed
 
 - Updated the Support form's action URL (#2662)
