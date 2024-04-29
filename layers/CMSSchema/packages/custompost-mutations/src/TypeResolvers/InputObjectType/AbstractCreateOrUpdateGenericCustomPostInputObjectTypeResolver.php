@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateGenericCustomPostInputObjectTypeResolver extends AbstractCreateOrUpdateCustomPostInputObjectTypeResolver implements UpdateCustomPostInputObjectTypeResolverInterface
 {
