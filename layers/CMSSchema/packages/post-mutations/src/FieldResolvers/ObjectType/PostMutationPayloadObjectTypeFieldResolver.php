@@ -47,8 +47,7 @@ class PostMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationP
     {
         return match ($fieldName) {
             $this->getObjectFieldName() => $this->getPostObjectTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 }
