@@ -10,7 +10,7 @@ class RootCreateGenericCustomPostInputObjectTypeResolver extends AbstractCreateO
     {
         return 'RootCreateCustomPostInput';
     }
-    
+
     protected function addCustomPostInputField(): bool
     {
         return false;
