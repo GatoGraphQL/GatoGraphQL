@@ -2040,6 +2040,21 @@
                             ]
                         },
                         {
+                            "name": "createCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createMediaItem",
                             "extensions": {
                                 "isMutation": true,
@@ -2154,6 +2169,21 @@
                         },
                         {
                             "name": "setTagsOnPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateCustomPost",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -4979,6 +5009,21 @@
                             ]
                         },
                         {
+                            "name": "createCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createMediaItem",
                             "extensions": {
                                 "isMutation": true,
@@ -6061,6 +6106,21 @@
                             ]
                         },
                         {
+                            "name": "updateCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePost",
                             "extensions": {
                                 "isMutation": true,
@@ -6155,6 +6215,51 @@
                         },
                         {
                             "name": "commentID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateCustomPostMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreateCustomPostMutationPayload",
+                        "namespacedName": "RootCreateCustomPostMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "customPost",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "customPostID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6568,6 +6673,51 @@
                         },
                         {
                             "name": "postID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateCustomPostMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdateCustomPostMutationPayload",
+                        "namespacedName": "RootUpdateCustomPostMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "customPost",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "customPostID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -9307,6 +9457,25 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CustomPostContentInput",
+                    "extensions": {
+                        "elementName": "CustomPostContentInput",
+                        "namespacedName": "CustomPostContentInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "html",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "CustomPostMetaQueryInput",
                     "extensions": {
                         "elementName": "CustomPostMetaQueryInput",
@@ -10544,6 +10713,67 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateCustomPostInput",
+                    "extensions": {
+                        "elementName": "RootCreateCustomPostInput",
+                        "namespacedName": "RootCreateCustomPostInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "authorBy",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
+                            "name": "contentAs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "customPostType",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excerpt",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreateMediaItemInput",
                     "extensions": {
                         "elementName": "RootCreateMediaItemInput",
@@ -11557,6 +11787,73 @@
                         },
                         {
                             "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateCustomPostInput",
+                    "extensions": {
+                        "elementName": "RootUpdateCustomPostInput",
+                        "namespacedName": "RootUpdateCustomPostInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "authorBy",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
+                            "name": "contentAs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "customPostType",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excerpt",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "title",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -13359,6 +13656,18 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreateCustomPostMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreateCustomPostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreateMediaItemMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootCreateMediaItemMutationErrorPayloadUnion",
@@ -13459,6 +13768,18 @@
                     "extensions": {
                         "elementName": "RootSetTagsOnPostMutationErrorPayloadUnion",
                         "namespacedName": "RootSetTagsOnPostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdateCustomPostMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateCustomPostMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },

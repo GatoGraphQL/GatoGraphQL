@@ -225,6 +225,9 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $customPostData['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::CUSTOMPOST_TYPE)) {
+            $customPostData['custompost-type'] = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_TYPE);
+        }
 
         // Inject author, categories, tags, featured image, etc
         $customPostData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_DATA, $customPostData, $fieldDataAccessor);

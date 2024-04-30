@@ -99,6 +99,9 @@
           "name": "RootAddCommentToCustomPostMutationPayload"
         },
         {
+          "name": "RootCreateCustomPostMutationPayload"
+        },
+        {
           "name": "RootCreateMediaItemMutationPayload"
         },
         {
@@ -124,6 +127,9 @@
         },
         {
           "name": "RootSetTagsOnPostMutationPayload"
+        },
+        {
+          "name": "RootUpdateCustomPostMutationPayload"
         },
         {
           "name": "RootUpdatePostMutationPayload"
@@ -330,6 +336,9 @@
           "name": "CustomPostCommentsFilterInput"
         },
         {
+          "name": "CustomPostContentInput"
+        },
+        {
           "name": "CustomPostMetaQueryInput"
         },
         {
@@ -441,6 +450,9 @@
           "name": "RootCommentsFilterInput"
         },
         {
+          "name": "RootCreateCustomPostInput"
+        },
+        {
           "name": "RootCreateMediaItemInput"
         },
         {
@@ -496,6 +508,9 @@
         },
         {
           "name": "RootTagsFilterInput"
+        },
+        {
+          "name": "RootUpdateCustomPostInput"
         },
         {
           "name": "RootUpdatePostInput"
@@ -618,6 +633,9 @@
           "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion"
         },
         {
+          "name": "RootCreateCustomPostMutationErrorPayloadUnion"
+        },
+        {
           "name": "RootCreateMediaItemMutationErrorPayloadUnion"
         },
         {
@@ -643,6 +661,9 @@
         },
         {
           "name": "RootSetTagsOnPostMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion"
         },
         {
           "name": "RootUpdatePostMutationErrorPayloadUnion"

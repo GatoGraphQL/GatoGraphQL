@@ -6,7 +6,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.3.0 - DATE
 
-## 2.2.4 - DATE
+### Improvements
+
+- Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)
 
 ### Fixed
 

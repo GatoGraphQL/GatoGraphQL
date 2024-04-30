@@ -3809,6 +3809,37 @@
               "deprecationReason": null
             },
             {
+              "name": "createCustomPost",
+              "description": "Create a custom post. This mutation accepts the data that is common to all custom posts (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those custom post types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createMediaItem",
               "description": "Upload an attachment",
               "args": [
@@ -4066,6 +4097,37 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "RootSetTagsOnPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateCustomPost",
+              "description": "Update a custom post",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateCustomPostMutationPayload",
                   "ofType": null
                 }
               },
@@ -9756,6 +9818,37 @@
               "deprecationReason": null
             },
             {
+              "name": "createCustomPost",
+              "description": "Create a custom post. This mutation accepts the data that is common to all custom posts (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those custom post types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createMediaItem",
               "description": "Upload an attachment",
               "args": [
@@ -11970,6 +12063,37 @@
               "deprecationReason": null
             },
             {
+              "name": "updateCustomPost",
+              "description": "Update a custom post",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateCustomPostInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateCustomPostInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateCustomPostMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePost",
               "description": "Update a post",
               "args": [
@@ -12163,6 +12287,77 @@
                   "ofType": {
                     "kind": "UNION",
                     "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreateCustomPostMutationPayload",
+          "description": "Payload of creating a custom post",
+          "fields": [
+            {
+              "name": "customPost",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericCustomPost",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customPostID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootCreateCustomPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootCreateCustomPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootCreateCustomPostMutationErrorPayloadUnion",
                     "ofType": null
                   }
                 }
@@ -12805,6 +13000,77 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateCustomPostMutationPayload",
+          "description": "Payload of executing an update mutation on a custom post",
+          "fields": [
+            {
+              "name": "customPost",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericCustomPost",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "customPostID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootUpdateCustomPostMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootUpdateCustomPostMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -17871,6 +18137,27 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CustomPostContentInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "html",
+              "description": "Use HTML as content for the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "HTML",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CustomPostMetaQueryInput",
           "description": "Filter by meta key and value. The key must be allowed access in the Settings. See: https:\/\/developer.wordpress.org\/reference\/classes\/wp_meta_query\/",
           "fields": null,
@@ -19886,6 +20173,101 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateCustomPostInput",
+          "description": "Input to update a custom post",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "authorBy",
+              "description": "The author of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "AuthorByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "contentAs",
+              "description": "The content of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CustomPostContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "customPostType",
+              "description": "The custom post type",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "CustomPostEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "CustomPostEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "featuredImageBy",
+              "description": "The image to set as featured",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FeaturedImageByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "status",
+              "description": "The status of the custom post",
+              "type": {
+                "kind": "ENUM",
+                "name": "CustomPostStatusEnum",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "title",
+              "description": "The title of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreateMediaItemInput",
           "description": "Input to upload an attachment",
           "fields": null,
@@ -21891,6 +22273,115 @@
                     "ofType": null
                   }
                 }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateCustomPostInput",
+          "description": "Input to update a custom post",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "authorBy",
+              "description": "The author of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "AuthorByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "contentAs",
+              "description": "The content of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CustomPostContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "customPostType",
+              "description": "The custom post type",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "CustomPostEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "CustomPostEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "featuredImageBy",
+              "description": "The image to set as featured",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FeaturedImageByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the custom post to update",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "status",
+              "description": "The status of the custom post",
+              "type": {
+                "kind": "ENUM",
+                "name": "CustomPostStatusEnum",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "title",
+              "description": "The title of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "defaultValue": null
             }
@@ -24188,6 +24679,47 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when creating a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreateMediaItemMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when uploading an attachment",
           "fields": null,
@@ -24541,6 +25073,57 @@
             {
               "kind": "OBJECT",
               "name": "TagDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a custom post",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
               "ofType": null
             },
             {

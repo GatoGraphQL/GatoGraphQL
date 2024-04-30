@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
+
+use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCreateCustomPostMutationResolverTrait;
+
+class PayloadableCreateGenericCustomPostMutationResolver extends AbstractCreateUpdateGenericCustomPostMutationResolver
+{
+    use PayloadableCreateCustomPostMutationResolverTrait;
+}

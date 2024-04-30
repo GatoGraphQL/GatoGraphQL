@@ -132,6 +132,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreateCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootCreateMediaItemMutationPayload"
         },
         {
@@ -165,6 +169,10 @@
         {
           "kind": "OBJECT",
           "name": "RootSetTagsOnPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateCustomPostMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -440,6 +448,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CustomPostContentInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CustomPostMetaQueryInput"
         },
         {
@@ -588,6 +600,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreateMediaItemInput"
         },
         {
@@ -661,6 +677,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootTagsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateCustomPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -824,6 +844,10 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreateCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreateMediaItemMutationErrorPayloadUnion"
         },
         {
@@ -857,6 +881,10 @@
         {
           "kind": "UNION",
           "name": "RootSetTagsOnPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",

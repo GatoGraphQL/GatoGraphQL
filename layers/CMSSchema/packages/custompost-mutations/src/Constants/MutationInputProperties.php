@@ -13,6 +13,7 @@ class MutationInputProperties
     public final const EXCERPT = 'excerpt';
     public final const SLUG = 'slug';
     public final const STATUS = 'status';
+    public final const CUSTOMPOST_TYPE = 'customPostType';
 
     public final const HTML = 'html';
 }
