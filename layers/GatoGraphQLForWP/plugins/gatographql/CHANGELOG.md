@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost`
+- Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)
 
 ### Fixed
 
