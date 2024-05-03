@@ -260,6 +260,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)
 * Added documentation for integration with Polylang (#2664)
 * Added module type "Integrations" (#2665)
+* Return an EnumString type on `GenericCategory.taxonomy` and `GenericTag.taxonomy` (#2666)
 * Fix bug: Updated the Support form's action URL (#2662)
 * [PRO] Added integration with Polylang
 
