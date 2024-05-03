@@ -11,9 +11,9 @@
 
 Gato GraphQL PRO now has an integration with the [Polylang](https://wordpress.org/plugins/polylang/) plugin.
 
-The GraphQL schema is provided the following fields.
+The GraphQL schema is provided the fields to retrieve multilingual data.
 
-#### On the `Root`/`QueryRoot` types
+#### Types `Root`/`QueryRoot`
 
 Query the site metadata configured in Polylang.
 
@@ -46,7 +46,7 @@ Running this query:
 }
 ```
 
-#### On types `Post`, `Page`, `PostTag`, `PostCategory` and `Media`
+#### Types `Post`, `Page`, `PostTag`, `PostCategory` and `Media`
 
 Query the language for the entity, and the IDs for the translations for that entity.
 
@@ -204,7 +204,7 @@ Running this query:
 }
 ```
 
-#### On types `GenericCustomPost`, `GenericTag` and `GenericCategory`
+#### Types `GenericCustomPost`, `GenericTag` and `GenericCategory`
 
 `GenericCustomPost` is a type used to represent any custom post installed on the site, such as `Portfolio`, `Event`, `Product`, or other. Similarly, `GenericTag` and `GenericCategory` are used to represent their taxonomies.
 
