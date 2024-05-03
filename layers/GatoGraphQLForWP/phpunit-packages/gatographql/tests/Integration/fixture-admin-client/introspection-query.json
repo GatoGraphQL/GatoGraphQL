@@ -1123,7 +1123,7 @@
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "CategoryTaxonomyEnumString",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -2604,7 +2604,7 @@
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "AnyBuiltInScalar",
+                "name": "TagTaxonomyEnumString",
                 "ofType": null
               },
               "isDeprecated": false,
