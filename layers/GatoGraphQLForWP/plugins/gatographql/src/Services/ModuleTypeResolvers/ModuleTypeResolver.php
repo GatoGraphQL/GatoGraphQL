@@ -15,6 +15,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
     public final const ENDPOINT = Plugin::NAMESPACE . '\endpoint';
     public final const ENDPOINT_CONFIGURATION = Plugin::NAMESPACE . '\endpoint-configuration';
     public final const FUNCTIONALITY = Plugin::NAMESPACE . '\functionality';
+    public final const INTEGRATIONS = Plugin::NAMESPACE . '\integrations';
     public final const OPERATIONAL = Plugin::NAMESPACE . '\operational';
     public final const PERFORMANCE = Plugin::NAMESPACE . '\performance';
     public final const PLUGIN_GENERAL_SETTINGS = Plugin::NAMESPACE . '\plugin-general-settings';
@@ -42,6 +43,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::ENDPOINT,
             self::ENDPOINT_CONFIGURATION,
             self::FUNCTIONALITY,
+            self::INTEGRATIONS,
             self::OPERATIONAL,
             self::PERFORMANCE,
             self::PLUGIN_GENERAL_SETTINGS,
@@ -64,6 +66,7 @@ class ModuleTypeResolver extends AbstractModuleTypeResolver
             self::ENDPOINT => $this->__('Endpoint', 'gatographql'),
             self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'gatographql'),
             self::FUNCTIONALITY => $this->__('Functionality', 'gatographql'),
+            self::INTEGRATIONS => $this->__('Integrations', 'gatographql'),
             self::OPERATIONAL => $this->__('Operational', 'gatographql'),
             self::PERFORMANCE => $this->__('Performance', 'gatographql'),
             self::PLUGIN_GENERAL_SETTINGS => $this->__('General Settings', 'gatographql'),

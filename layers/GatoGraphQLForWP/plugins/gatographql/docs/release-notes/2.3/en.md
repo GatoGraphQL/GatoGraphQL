@@ -4,6 +4,7 @@
 
 - Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` ([#2663](https://github.com/GatoGraphQL/GatoGraphQL/pull/2663))
 - Added documentation for integration with Polylang ([#2664](https://github.com/GatoGraphQL/GatoGraphQL/pull/2664))
+- Added module type "Integrations" ([#2665](https://github.com/GatoGraphQL/GatoGraphQL/pull/2665))
 
 ## [PRO] Improvements
 

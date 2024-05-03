@@ -17,6 +17,19 @@
     border: 1px solid;
 }
 
+.plugins .active.module-integrations td,
+.plugins .active.module-integrations th,
+.subsubsub a.module-type-integrations {
+    background-color: #fef7f8;
+}
+.plugin-update-tr.active.module-integrations td,
+.plugins .active.module-integrations th.check-column {
+    border-left-color: #d20000;
+}
+.subsubsub a.module-type-integrations {
+    border-color: #d20000;
+}
+
 .plugins .active.module-schema-type td,
 .plugins .active.module-schema-type th,
 .subsubsub a.module-type-schema-type {
