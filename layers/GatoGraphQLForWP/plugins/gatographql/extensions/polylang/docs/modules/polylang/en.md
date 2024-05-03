@@ -41,7 +41,7 @@ Running this query:
 
 Query the language for the entity, and the IDs for the translations for that entity.
 
-These types implement interface `PolylangTranslatable` (type `Media` does only when media support is enabled, via the Polylang settings).
+These types implement interface `PolylangTranslatable`. (Type `Media` does only when media support is enabled, via the Polylang settings.)
 
 | Field | Description |
 | --- | --- |
