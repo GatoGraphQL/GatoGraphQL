@@ -14,7 +14,7 @@ trait IntegrationsModuleResolverTrait
      */
     public function getPriority(): int
     {
-        return 88;
+        return 70;
     }
 
     /**
