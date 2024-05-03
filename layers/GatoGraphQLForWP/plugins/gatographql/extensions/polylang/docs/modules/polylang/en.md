@@ -1,19 +1,10 @@
-# Release Notes: 2.3
+# Polylang
 
-## Improvements
-
-- Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` ([#2663](https://github.com/GatoGraphQL/GatoGraphQL/pull/2663))
-- Added documentation for integration with Polylang ([#2664](https://github.com/GatoGraphQL/GatoGraphQL/pull/2664))
-
-## [PRO] Improvements
-
-### Added integration with Polylang
-
-Gato GraphQL PRO now has an integration with the [Polylang](https://wordpress.org/plugins/polylang/) plugin.
+Integration with the [Polylang](https://wordpress.org/plugins/polylang/) plugin.
 
 The GraphQL schema is provided the following fields.
 
-#### On the `Root`/`QueryRoot` types
+## On the `Root`/`QueryRoot` types
 
 Query the site metadata configured in Polylang.
 
@@ -46,7 +37,7 @@ Running this query:
 }
 ```
 
-#### On types `Post`, `Page`, `PostTag`, `PostCategory` and `Media`
+## On types `Post`, `Page`, `PostTag`, `PostCategory` and `Media`
 
 Query the language for the entity, and the IDs for the translations for that entity.
 
@@ -204,7 +195,7 @@ Running this query:
 }
 ```
 
-#### On types `GenericCustomPost`, `GenericTag` and `GenericCategory`
+## On types `GenericCustomPost`, `GenericTag` and `GenericCategory`
 
 `GenericCustomPost` is a type used to represent any custom post installed on the site, such as `Portfolio`, `Event`, `Product`, or other. Similarly, `GenericTag` and `GenericCategory` are used to represent their taxonomies.
 

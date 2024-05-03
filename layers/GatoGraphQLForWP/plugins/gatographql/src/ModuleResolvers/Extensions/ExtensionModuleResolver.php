@@ -32,6 +32,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
     public const MULTIPLE_QUERY_EXECUTION = Plugin::NAMESPACE . '\\extensions\\multiple-query-execution';
     public const PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\php-constants-and-environment-variables-via-schema';
     public const PHP_FUNCTIONS_VIA_SCHEMA = Plugin::NAMESPACE . '\\extensions\\php-functions-via-schema';
+    public const POLYLANG = Plugin::NAMESPACE . '\\extensions\\polylang';
     public const RESPONSE_ERROR_TRIGGER = Plugin::NAMESPACE . '\\extensions\\response-error-trigger';
     public const SCHEMA_EDITING_ACCESS = Plugin::NAMESPACE . '\\extensions\\schema-editing-access';
 
@@ -65,6 +66,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::MULTIPLE_QUERY_EXECUTION,
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
             self::PHP_FUNCTIONS_VIA_SCHEMA,
+            self::POLYLANG,
             self::RESPONSE_ERROR_TRIGGER,
             self::SCHEMA_EDITING_ACCESS,
         ];
@@ -97,6 +99,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::MULTIPLE_QUERY_EXECUTION => \__('Multiple Query Execution', 'gatographql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('PHP Constants and Environment Variables via Schema', 'gatographql'),
             self::PHP_FUNCTIONS_VIA_SCHEMA => \__('PHP Functions via Schema', 'gatographql'),
+            self::POLYLANG => \__('Polylang', 'gatographql'),
             self::RESPONSE_ERROR_TRIGGER => \__('Response Error Trigger', 'gatographql'),
             self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gatographql'),
             default => $module,
@@ -130,6 +133,7 @@ class ExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::MULTIPLE_QUERY_EXECUTION => \__('Combine multiple queries into a single query, sharing state across them and executing them in the requested order.', 'gatographql'),
             self::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA => \__('Query the value from an environment variable or PHP constant.', 'gatographql'),
             self::PHP_FUNCTIONS_VIA_SCHEMA => \__('Manipulate the field output using standard programming language functions available in PHP.', 'gatographql'),
+            self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::RESPONSE_ERROR_TRIGGER => \__('Explicitly add an error entry to the response to trigger the failure of the GraphQL request (whenever a field does not meet the expected conditions).', 'gatographql'),
             self::SCHEMA_EDITING_ACCESS => \__('Grant access to users other than admins to edit the GraphQL schema.', 'gatographql'),
             default => parent::getDescription($module),
