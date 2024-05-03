@@ -258,7 +258,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 2.3.0 =
 * Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)
-* Added documentation for integration with Polylang (#...)
+* Added documentation for integration with Polylang (#2664)
 * Fix bug: Updated the Support form's action URL (#2662)
 * [PRO] Added integration with Polylang
 
