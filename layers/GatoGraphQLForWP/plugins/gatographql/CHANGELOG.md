@@ -9,10 +9,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)
+- Added documentation for integration with Polylang (#...)
 
 ### Fixed
 
 - Updated the Support form's action URL (#2662)
+
+### [PRO] Improvements
+
+- Added integration with Polylang
 
 ## 2.2.3 - 26/04/2024
 
