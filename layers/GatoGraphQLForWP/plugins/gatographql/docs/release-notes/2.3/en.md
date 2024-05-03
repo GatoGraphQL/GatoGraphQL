@@ -19,8 +19,8 @@ Query the site metadata configured in Polylang.
 
 | Field | Description |
 | --- | --- |
-| `polylangDefaultLanguage` | Default language on Polylang, or `null` if there are no languages enabled |
-| `polylangEnabledLanguages` | Enabled languages on Polylang |
+| `polylangDefaultLanguage` | Default language on Polylang, or `null` if there are no languages enabled. |
+| `polylangEnabledLanguages` | Enabled languages on Polylang. |
 
 Running this query:
 
@@ -54,8 +54,8 @@ The fields on type `Media` are enabled only when media support is enabled in the
 
 | Field | Description |
 | --- | --- |
-| `polylangLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on) |
-| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on) |
+| `polylangLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on). |
+| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on). |
 
 Field `polylangTranslationLanguageIDs` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
 
@@ -214,9 +214,9 @@ In addition, field `polylangIsTranslatable` indicates if the CPT or taxonomy is 
 
 | Field | Description |
 | --- | --- |
-| `polylangLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings) |
-| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings) |
-| `polylangIsTranslatable` | Indicate if the entity can be translated |
+| `polylangLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
+| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
+| `polylangIsTranslatable` | Indicate if the entity can be translated. |
 
 Running this query:
 
