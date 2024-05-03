@@ -50,7 +50,7 @@ Running this query:
 
 Query the language for the entity, and the IDs for the translations for that entity.
 
-The fields on type `Media` are enabled only when media support is enabled in the Polylang settings.
+These types implement interface `PolylangTranslatable` (type `Media` does only when media support is enabled, via the Polylang settings).
 
 | Field | Description |
 | --- | --- |
@@ -205,6 +205,8 @@ Running this query:
 ```
 
 #### Types `GenericCustomPost`, `GenericTag` and `GenericCategory`
+
+These types implement interface `PolylangMaybeTranslatable`.
 
 `GenericCustomPost` is a type used to represent any custom post installed on the site, such as `Portfolio`, `Event`, `Product`, or other. Similarly, `GenericTag` and `GenericCategory` are used to represent their taxonomies.
 
