@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)
 - Added documentation for integration with Polylang (#2664)
+- Added module type "Integrations" (#2665)
 
 ### Fixed
 
