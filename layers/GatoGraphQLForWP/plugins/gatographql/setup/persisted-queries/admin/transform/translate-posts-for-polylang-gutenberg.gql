@@ -28,9 +28,104 @@
 #   - https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/
 #
 ########################################################################
+query InitializeEmptyVariables {
+  null: _echo(value: null)
+    @export(as: "fromLanguage")
+    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "translationPostIds")
 
-query InitializeEmptyVariables($postIds: [ID!]!) {
-  emptyVars: posts(filter: { ids: $postIds, status: any } ) {
+    @export(as: "coreHeadingContentItems")
+    @export(as: "coreHeadingContentReplacementsFrom")
+    @export(as: "coreHeadingContentReplacementsTo")
+
+    @export(as: "coreParagraphContentItems")
+    @export(as: "coreParagraphContentReplacementsFrom")
+    @export(as: "coreParagraphContentReplacementsTo")
+
+    @export(as: "coreImageAltItems")
+    @export(as: "coreImageAltReplacementsFrom")
+    @export(as: "coreImageAltReplacementsTo")
+
+    @export(as: "coreImageCaptionItems")
+    @export(as: "coreImageCaptionReplacementsFrom")
+    @export(as: "coreImageCaptionReplacementsTo")
+
+    @export(as: "coreButtonTextItems")
+    @export(as: "coreButtonTextReplacementsFrom")
+    @export(as: "coreButtonTextReplacementsTo")
+
+    @export(as: "coreTableCaptionItems")
+    @export(as: "coreTableCaptionReplacementsFrom")
+    @export(as: "coreTableCaptionReplacementsTo")
+
+    @export(as: "coreTableBodyCellsContentItems")
+    @export(as: "coreTableBodyCellsContentReplacementsFrom")
+    @export(as: "coreTableBodyCellsContentReplacementsTo")
+
+    @export(as: "coreListItemContentItems")
+    @export(as: "coreListItemContentReplacementsFrom")
+    @export(as: "coreListItemContentReplacementsTo")
+
+    @export(as: "coreCoverAltItems")
+    @export(as: "coreCoverAltReplacementsFrom")
+    @export(as: "coreCoverAltReplacementsTo")
+
+    @export(as: "coreMediaTextAltItems")
+    @export(as: "coreMediaTextAltReplacementsFrom")
+    @export(as: "coreMediaTextAltReplacementsTo")
+
+    @export(as: "coreVerseContentItems")
+    @export(as: "coreVerseContentReplacementsFrom")
+    @export(as: "coreVerseContentReplacementsTo")
+
+    @export(as: "coreQuoteCitationItems")
+    @export(as: "coreQuoteCitationReplacementsFrom")
+    @export(as: "coreQuoteCitationReplacementsTo")
+
+    @export(as: "corePullquoteCitationItems")
+    @export(as: "corePullquoteCitationReplacementsFrom")
+    @export(as: "corePullquoteCitationReplacementsTo")
+
+    @export(as: "corePullquoteValueItems")
+    @export(as: "corePullquoteValueReplacementsFrom")
+    @export(as: "corePullquoteValueReplacementsTo")
+
+    @export(as: "coreAudioCaptionItems")
+    @export(as: "coreAudioCaptionReplacementsFrom")
+    @export(as: "coreAudioCaptionReplacementsTo")
+
+    @export(as: "coreVideoCaptionItems")
+    @export(as: "coreVideoCaptionReplacementsFrom")
+    @export(as: "coreVideoCaptionReplacementsTo")
+
+    @export(as: "corePreformattedContentItems")
+    @export(as: "corePreformattedContentReplacementsFrom")
+    @export(as: "corePreformattedContentReplacementsTo")
+
+    @export(as: "coreEmbedCaptionItems")
+    @export(as: "coreEmbedCaptionReplacementsFrom")
+    @export(as: "coreEmbedCaptionReplacementsTo")
+
+    @remove
+}
+
+query GetTranslationPosts($postId: ID!)
+  @depends(on: "InitializeEmptyVariables")
+{
+  originalPost: post(by: { id: $postId }, status: any) {
+    polylangLanguage
+      @export(as: "fromLanguage")
+    polylangTranslationLanguageIDs
+      @export(as: "translationPostIds")
+  }
+}
+
+query InitializeEmptyTranslationVariables($translationPostIds: [ID!]!)
+  @depends(on: "GetTranslationPosts")
+{
+  emptyVars: posts(filter: { ids: $translationPostIds, status: any } ) {
     emptyArray: _echo(value: [])
       @export(
         as: "coreHeadingContentItems"
@@ -268,11 +363,11 @@ query InitializeEmptyVariables($postIds: [ID!]!) {
   }
 }
 
-query FetchData($postIds: [ID!]!)
+query FetchData($translationPostIds: [ID!]!)
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
-  @depends(on: "InitializeEmptyVariables")
+  @depends(on: "InitializeEmptyTranslationVariables")
 {
-  posts(filter: { ids: $postIds, status: any } ) {
+  posts(filter: { ids: $translationPostIds, status: any } ) {
     id
     title
       @export(as: "title", type: DICTIONARY)
@@ -2068,12 +2163,12 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslateGutenbergPosts($postIds: [ID!]!)
+mutation TranslateGutenbergPosts($translationPostIds: [ID!]!)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
 ]) {
-  updatePosts: posts(filter: { ids: $postIds, status: any } ) {
+  updatePosts: posts(filter: { ids: $translationPostIds, status: any } ) {
     id
     transformedRawContent: _objectProperty(
       object: $transformedRawContent,
