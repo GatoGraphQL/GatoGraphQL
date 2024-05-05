@@ -382,6 +382,11 @@ query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum!
   emptyVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     emptyArray: _echo(value: [])
       @export(
+        as: "translationPostLanguages"
+        type: DICTIONARY
+      )
+      
+      @export(
         as: "coreHeadingContentItems"
         type: DICTIONARY
       )
@@ -629,6 +634,13 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
       @export(as: "title", type: DICTIONARY)
     rawContent
       @export(as: "rawContent", type: DICTIONARY)
+
+
+    polylangLanguage
+      @export(
+        as: "translationPostLanguages"
+        type: DICTIONARY
+      )
 
 
     coreHeadingContentItems: _echo(value: $originCoreHeadingContentItems)
@@ -1056,9 +1068,7 @@ query AdaptData
     @export(as: "adaptedFromTitle")
 }
 
-query TransformData(
-  $toLang: String!
-)
+query TransformData
   @depends(on: "AdaptData")
 {
   transformations: _echo(value: {
@@ -1141,7 +1151,18 @@ query TransformData(
   })
     @underEachJSONObjectProperty
       @underJSONObjectProperty(by: { key: "to" })
-        @underEachJSONObjectProperty
+        @underEachJSONObjectProperty(
+          passKeyOnwardsAs: "postId"
+          affectDirectivesUnderPos: [1, 2]
+        )
+          @applyField(
+            name: "_objectProperty",
+            arguments: {
+              object: $translationPostLanguages,
+              by: { key: "postId" }
+            },
+            passOnwardsAs: "toLang"
+          )
           @underEachArrayItem
             @strTranslate(to: $toLang)
     @export(as: "transformations")
