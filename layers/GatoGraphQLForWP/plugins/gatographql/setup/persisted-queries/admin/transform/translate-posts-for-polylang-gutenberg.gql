@@ -1160,7 +1160,7 @@ query TransformData
             name: "_objectProperty",
             arguments: {
               object: $translationPostLanguages,
-              by: { key: "postId" }
+              by: { key: $postId }
             },
             passOnwardsAs: "toLang"
           )
