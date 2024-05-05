@@ -28,7 +28,9 @@
 #   - https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/
 #
 ########################################################################
-query InitializeEmptyVariables {
+query InitializeEmptyVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
     @remove
@@ -623,7 +625,6 @@ query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum!
 }
 
 query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
   @depends(on: "InitializeEmptyTranslationVariables")
 {
   posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
