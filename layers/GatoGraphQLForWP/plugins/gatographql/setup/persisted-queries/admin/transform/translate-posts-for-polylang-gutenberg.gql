@@ -119,7 +119,7 @@ query ExportOriginPost($postId: ID!)
 {
   originPost: post(by: { id: $postId }, status: any) {
     id
-    
+
 
     polylangLanguage
       @export(as: "fromLanguage")
@@ -133,9 +133,9 @@ query ExportOriginPost($postId: ID!)
 
 
     title
-      @export(as: "title")
+      @export(as: "originTitle")
     rawContent
-      @export(as: "rawContent")
+      @export(as: "originRawContent")
     
 
     originCoreHeading: blockFlattenedDataItems(
@@ -631,10 +631,18 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
     id
 
 
-    title
-      @export(as: "title", type: DICTIONARY)
-    rawContent
-      @export(as: "rawContent", type: DICTIONARY)
+    title: _echo(value: $originTitle)
+      @export(
+        as: "title",
+        type: DICTIONARY
+      )
+      @remove
+    rawContent: _echo(value: $originRawContent)
+      @export(
+        as: "rawContent",
+        type: DICTIONARY
+      )
+      @remove
 
 
     polylangLanguage
@@ -642,6 +650,7 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
         as: "translationPostLanguages"
         type: DICTIONARY
       )
+      @remove
 
 
     coreHeadingContentItems: _echo(value: $originCoreHeadingContentItems)
