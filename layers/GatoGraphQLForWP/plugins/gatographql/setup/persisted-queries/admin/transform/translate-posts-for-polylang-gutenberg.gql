@@ -376,10 +376,14 @@ query ExportOriginPost($postId: ID!)
             as: "originCoreEmbedCaptionItems"
           )
   }
+
+  hasOriginPost: _notNull(value: $__originPost)
+    @export(as: "hasOriginPost")
 }
 
 query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum! = draft)
   @depends(on: "ExportOriginPost")
+  @include(if: $hasOriginPost)
 {
   emptyVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     emptyArray: _echo(value: [])
@@ -631,10 +635,14 @@ query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum!
         type: DICTIONARY
       )
   }
+
+  hasTranslationPosts: _notEmpty(value: $__emptyVars)
+    @export(as: "hasTranslationPosts")
 }
 
 query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
   @depends(on: "InitializeEmptyTranslationVariables")
+  @include(if: $hasTranslationPosts)
 {
   posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
@@ -1062,6 +1070,7 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
 
 query AdaptData
   @depends(on: "FetchData")
+  @include(if: $hasTranslationPosts)
 {
   adaptedToTitle: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -1089,6 +1098,7 @@ query AdaptData
 
 query TransformData
   @depends(on: "AdaptData")
+  @include(if: $hasTranslationPosts)
 {
   transformations: _echo(value: {
     meta: {
@@ -1189,6 +1199,7 @@ query TransformData
 
 query EscapeRegexStrings
   @depends(on: "TransformData")
+  @include(if: $hasTranslationPosts)
 {  
   escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty(
@@ -1271,6 +1282,7 @@ query EscapeRegexStrings
 
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
+  @include(if: $hasTranslationPosts)
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
@@ -1833,6 +1845,7 @@ query CreateRegexReplacements
 
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
+  @include(if: $hasTranslationPosts)
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
@@ -2564,6 +2577,7 @@ query ExecuteRegexReplacements
 
 query PrepareMetaReplacements
   @depends(on: "TransformData")
+  @include(if: $hasTranslationPosts)
 {  
   transformedMeta: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -2603,7 +2617,9 @@ mutation TranslateGutenbergPosts($statusToUpdate: CustomPostStatusEnum! = draft)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
-]) {
+  ])
+  @include(if: $hasTranslationPosts)
+{
   updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
     transformedRawContent: _objectProperty(
