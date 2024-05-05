@@ -1193,7 +1193,10 @@ query TransformData
             passOnwardsAs: "toLanguage"
           )
           @underEachArrayItem
-            @strTranslate(to: $toLanguage)
+            @strTranslate(
+              from: $fromLanguage,
+              to: $toLanguage
+            )
     @export(as: "transformations")
 }
 
