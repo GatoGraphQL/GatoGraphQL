@@ -384,6 +384,15 @@ query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum!
   emptyVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     emptyArray: _echo(value: [])
       @export(
+        as: "title"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawContent"
+        type: DICTIONARY
+      )
+
+      @export(
         as: "translationPostLanguages"
         type: DICTIONARY
       )
