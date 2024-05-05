@@ -28,7 +28,94 @@
 #   - https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/
 #
 ########################################################################
+query InitializeEmptyVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "translationLanguages")
+    @export(as: "translationPostIds")
+
+    @export(as: "originCoreHeadingContentItems")
+    @export(as: "originCoreHeadingContentReplacementsFrom")
+    @export(as: "originCoreHeadingContentReplacementsTo")
+
+    @export(as: "originCoreParagraphContentItems")
+    @export(as: "originCoreParagraphContentReplacementsFrom")
+    @export(as: "originCoreParagraphContentReplacementsTo")
+
+    @export(as: "originCoreImageAltItems")
+    @export(as: "originCoreImageAltReplacementsFrom")
+    @export(as: "originCoreImageAltReplacementsTo")
+
+    @export(as: "originCoreImageCaptionItems")
+    @export(as: "originCoreImageCaptionReplacementsFrom")
+    @export(as: "originCoreImageCaptionReplacementsTo")
+
+    @export(as: "originCoreButtonTextItems")
+    @export(as: "originCoreButtonTextReplacementsFrom")
+    @export(as: "originCoreButtonTextReplacementsTo")
+
+    @export(as: "originCoreTableCaptionItems")
+    @export(as: "originCoreTableCaptionReplacementsFrom")
+    @export(as: "originCoreTableCaptionReplacementsTo")
+
+    @export(as: "originCoreTableBodyCellsContentItems")
+    @export(as: "originCoreTableBodyCellsContentReplacementsFrom")
+    @export(as: "originCoreTableBodyCellsContentReplacementsTo")
+
+    @export(as: "originCoreListItemContentItems")
+    @export(as: "originCoreListItemContentReplacementsFrom")
+    @export(as: "originCoreListItemContentReplacementsTo")
+
+    @export(as: "originCoreCoverAltItems")
+    @export(as: "originCoreCoverAltReplacementsFrom")
+    @export(as: "originCoreCoverAltReplacementsTo")
+
+    @export(as: "originCoreMediaTextAltItems")
+    @export(as: "originCoreMediaTextAltReplacementsFrom")
+    @export(as: "originCoreMediaTextAltReplacementsTo")
+
+    @export(as: "originCoreVerseContentItems")
+    @export(as: "originCoreVerseContentReplacementsFrom")
+    @export(as: "originCoreVerseContentReplacementsTo")
+
+    @export(as: "originCoreQuoteCitationItems")
+    @export(as: "originCoreQuoteCitationReplacementsFrom")
+    @export(as: "originCoreQuoteCitationReplacementsTo")
+
+    @export(as: "originCorePullquoteCitationItems")
+    @export(as: "originCorePullquoteCitationReplacementsFrom")
+    @export(as: "originCorePullquoteCitationReplacementsTo")
+
+    @export(as: "originCorePullquoteValueItems")
+    @export(as: "originCorePullquoteValueReplacementsFrom")
+    @export(as: "originCorePullquoteValueReplacementsTo")
+
+    @export(as: "originCoreAudioCaptionItems")
+    @export(as: "originCoreAudioCaptionReplacementsFrom")
+    @export(as: "originCoreAudioCaptionReplacementsTo")
+
+    @export(as: "originCoreVideoCaptionItems")
+    @export(as: "originCoreVideoCaptionReplacementsFrom")
+    @export(as: "originCoreVideoCaptionReplacementsTo")
+
+    @export(as: "originCorePreformattedContentItems")
+    @export(as: "originCorePreformattedContentReplacementsFrom")
+    @export(as: "originCorePreformattedContentReplacementsTo")
+
+    @export(as: "originCoreEmbedCaptionItems")
+    @export(as: "originCoreEmbedCaptionReplacementsFrom")
+    @export(as: "originCoreEmbedCaptionReplacementsTo")
+
+    @remove
+}
+
 query ExportOriginPost($postId: ID!)
+  @depends(on: "InitializeEmptyVariables")
 {
   originPost: post(by: { id: $postId }, status: any) {
     id
@@ -289,16 +376,258 @@ query ExportOriginPost($postId: ID!)
             as: "originCoreEmbedCaptionItems"
           )
   }
-
-  hasOriginPost: _notNull(value: $__originPost)
-    @export(as: "hasOriginPost")
 }
 
-query ReplicateOriginDataAsTranslationData($statusToUpdate: CustomPostStatusEnum! = draft)
+query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum! = draft)
   @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
 {
-  translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  emptyVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    emptyArray: _echo(value: [])
+      @export(
+        as: "translationPostLanguages"
+        type: DICTIONARY
+      )
+      
+      @export(
+        as: "coreHeadingContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreHeadingContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreHeadingContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreParagraphContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreParagraphContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreParagraphContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreImageAltItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageAltReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreImageCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreButtonTextItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreButtonTextReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreButtonTextReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreTableCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreTableBodyCellsContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableBodyCellsContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableBodyCellsContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreListItemContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreListItemContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreListItemContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreCoverAltItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreCoverAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreCoverAltReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreMediaTextAltItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreMediaTextAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreMediaTextAltReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreVerseContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVerseContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVerseContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreQuoteCitationItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreQuoteCitationReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreQuoteCitationReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "corePullquoteCitationItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteCitationReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteCitationReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "corePullquoteValueItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteValueReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteValueReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreAudioCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreAudioCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreAudioCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreVideoCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVideoCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVideoCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "corePreformattedContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePreformattedContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePreformattedContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreEmbedCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreEmbedCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreEmbedCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+  }
+}
+
+query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
+  @depends(on: "InitializeEmptyTranslationVariables")
+{
+  posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
 
 
@@ -720,14 +1049,10 @@ query ReplicateOriginDataAsTranslationData($statusToUpdate: CustomPostStatusEnum
       @remove
       
   }
-
-  hasTranslationPosts: _notEmpty(value: $__translationPosts)
-    @export(as: "hasTranslationPosts")
 }
 
 query AdaptData
-  @depends(on: "ReplicateOriginDataAsTranslationData")
-  @include(if: $hasTranslationPosts)
+  @depends(on: "FetchData")
 {
   adaptedToTitle: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -755,7 +1080,6 @@ query AdaptData
 
 query TransformData
   @depends(on: "AdaptData")
-  @include(if: $hasTranslationPosts)
 {
   transformations: _echo(value: {
     meta: {
@@ -856,7 +1180,6 @@ query TransformData
 
 query EscapeRegexStrings
   @depends(on: "TransformData")
-  @include(if: $hasTranslationPosts)
 {  
   escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty(
@@ -939,7 +1262,6 @@ query EscapeRegexStrings
 
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
-  @include(if: $hasTranslationPosts)
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
@@ -1502,7 +1824,6 @@ query CreateRegexReplacements
 
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
-  @include(if: $hasTranslationPosts)
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
@@ -2234,7 +2555,6 @@ query ExecuteRegexReplacements
 
 query PrepareMetaReplacements
   @depends(on: "TransformData")
-  @include(if: $hasTranslationPosts)
 {  
   transformedMeta: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -2274,10 +2594,8 @@ mutation TranslateGutenbergPosts($statusToUpdate: CustomPostStatusEnum! = draft)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
-  ])
-  @include(if: $hasTranslationPosts)
-{
-  updateTranslationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+]) {
+  updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
     transformedRawContent: _objectProperty(
       object: $transformedRawContent,
