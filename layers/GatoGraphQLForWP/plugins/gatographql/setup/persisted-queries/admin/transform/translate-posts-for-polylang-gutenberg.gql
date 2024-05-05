@@ -1190,10 +1190,10 @@ query TransformData
               object: $translationPostLanguages,
               by: { key: $postId }
             },
-            passOnwardsAs: "toLang"
+            passOnwardsAs: "toLanguage"
           )
           @underEachArrayItem
-            @strTranslate(to: $toLang)
+            @strTranslate(to: $toLanguage)
     @export(as: "transformations")
 }
 
