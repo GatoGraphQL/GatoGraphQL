@@ -29,7 +29,7 @@
 #
 ########################################################################
 query InitializeEmptyVariables {
-  null: _echo(value: null)
+  emptyString: _echo(value: null)
     @export(as: "fromLanguage")
     @remove
   
