@@ -3,6 +3,7 @@
 # Variables:
 #   - postId: The post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
+#   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #
 # *********************************************************************
 #
@@ -28,7 +29,7 @@
 #   - https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/
 #
 ########################################################################
-query InitializeEmptyVariables
+query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   emptyString: _echo(value: null)
@@ -115,8 +116,11 @@ query InitializeEmptyVariables
 }
 
 query ExportOriginPost($postId: ID!)
-  @depends(on: "InitializeEmptyVariables")
+  @depends(on: "InitializeVariables")
 {
+  defaultLanguage: polylangDefaultLanguage
+      @export(as: "defaultLanguage")
+
   originPost: post(by: { id: $postId }, status: any) {
     id
 
@@ -381,11 +385,11 @@ query ExportOriginPost($postId: ID!)
     @export(as: "hasOriginPost")
 }
 
-query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum! = draft)
+query InitializeTranslationVariables($statusToUpdate: CustomPostStatusEnum! = draft)
   @depends(on: "ExportOriginPost")
   @include(if: $hasOriginPost)
 {
-  emptyVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  emptyTranslationPostVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     emptyArray: _echo(value: [])
       @export(
         as: "title"
@@ -636,13 +640,23 @@ query InitializeEmptyTranslationVariables($statusToUpdate: CustomPostStatusEnum!
       )
   }
 
-  hasTranslationPosts: _notEmpty(value: $__emptyVars)
-    @export(as: "hasTranslationPosts")
+  hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
+
+  originPostHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationPosts,
+    $__originPostHasDefaultLanguage
+  ])
+    @export(as: "executeTranslation")
 }
 
 query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
-  @depends(on: "InitializeEmptyTranslationVariables")
-  @include(if: $hasTranslationPosts)
+  @depends(on: "InitializeTranslationVariables")
+  @include(if: $executeTranslation)
 {
   posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
@@ -1070,7 +1084,7 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
 
 query AdaptData
   @depends(on: "FetchData")
-  @include(if: $hasTranslationPosts)
+  @include(if: $executeTranslation)
 {
   adaptedToTitle: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -1098,7 +1112,7 @@ query AdaptData
 
 query TransformData
   @depends(on: "AdaptData")
-  @include(if: $hasTranslationPosts)
+  @include(if: $executeTranslation)
 {
   transformations: _echo(value: {
     meta: {
@@ -1202,7 +1216,7 @@ query TransformData
 
 query EscapeRegexStrings
   @depends(on: "TransformData")
-  @include(if: $hasTranslationPosts)
+  @include(if: $executeTranslation)
 {  
   escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty(
@@ -1285,7 +1299,7 @@ query EscapeRegexStrings
 
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
-  @include(if: $hasTranslationPosts)
+  @include(if: $executeTranslation)
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
@@ -1848,7 +1862,7 @@ query CreateRegexReplacements
 
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
-  @include(if: $hasTranslationPosts)
+  @include(if: $executeTranslation)
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
@@ -2580,7 +2594,7 @@ query ExecuteRegexReplacements
 
 query PrepareMetaReplacements
   @depends(on: "TransformData")
-  @include(if: $hasTranslationPosts)
+  @include(if: $executeTranslation)
 {  
   transformedMeta: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -2616,12 +2630,15 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslateGutenbergPosts($statusToUpdate: CustomPostStatusEnum! = draft)
+mutation TranslateGutenbergPosts(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+  $updateSlug: Boolean! = true
+)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
   ])
-  @include(if: $hasTranslationPosts)
+  @include(if: $executeTranslation)
 {
   updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
@@ -2637,8 +2654,14 @@ mutation TranslateGutenbergPosts($statusToUpdate: CustomPostStatusEnum! = draft)
         key: $__id
       }
     )
+    transformedSlug: _if(
+      condition: $updateSlug,
+      then: $__transformedTitle,
+      else: null
+    )
     update(input: {
       title: $__transformedTitle,
+      slug: $__transformedSlug,
       contentAs: {
         html: $__transformedRawContent
       }
