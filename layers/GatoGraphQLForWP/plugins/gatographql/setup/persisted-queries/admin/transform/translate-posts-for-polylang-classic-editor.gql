@@ -46,7 +46,10 @@ query InitializeVariables
 {
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
-    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "translationLanguages")
+    @export(as: "translationPostIds")
 }
 
 query ExportOriginPost($postId: ID!)
@@ -91,6 +94,13 @@ query FetchData(
 {
   translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
+
+    polylangLanguage
+      @export(
+        as: "translationPostLanguages"
+        type: DICTIONARY
+      )
+
     title: _echo(value: $originTitle)
     rawContent: _echo(value: $originRawContent)
     rawExcerpt: _echo(value: $originRawExcerpt)
