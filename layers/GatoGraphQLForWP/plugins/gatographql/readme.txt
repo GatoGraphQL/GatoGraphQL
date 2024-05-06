@@ -262,6 +262,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added module type "Integrations" (#2665)
 * Return an EnumString type on `GenericCategory.taxonomy` and `GenericTag.taxonomy` (#2666)
 * Fix bug: Updated the Support form's action URL (#2662)
+* Added predefined persisted queries: "[PRO] Translate posts for Polylang (Gutenberg)" and "[PRO] Translate posts for Polylang (Classic editor)"
 * [PRO] Added integration with Polylang
 
 = 2.2.3 =
