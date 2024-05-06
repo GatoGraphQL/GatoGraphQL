@@ -12,6 +12,10 @@
 
 ## [PRO] Improvements
 
+- Added automation rules:
+  - Polylang: When publishing a post, translate it to all languages (Gutenberg)
+  - Polylang: When publishing a post, translate it to all languages (Classic editor)
+
 ### Added integration with Polylang
 
 Gato GraphQL PRO now has an integration with the [Polylang](https://wordpress.org/plugins/polylang/) plugin.
