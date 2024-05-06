@@ -11,6 +11,8 @@
 # === Description ===
 #
 # This Persisted GraphQL query is an integration for Polylang.
+# to translate posts based on the Classic editor.
+#
 # It takes an origin post, it translates it using the Google
 # Translate API to all the other languages defined in Polylang,
 # and stores those translations in the corresponding posts,
