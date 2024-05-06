@@ -137,14 +137,14 @@ query TranslateData
 {  
   translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postId"
+      passKeyOnwardsAs: "postID"
       affectDirectivesUnderPos: [1, 2]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $translationPostLanguages,
-          by: { key: $postId }
+          by: { key: $postID }
         },
         passOnwardsAs: "toLanguage"
       )
