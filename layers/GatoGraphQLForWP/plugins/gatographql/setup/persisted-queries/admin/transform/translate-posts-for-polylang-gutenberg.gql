@@ -150,6 +150,8 @@ query ExportOriginPost($postId: ID!)
       @export(as: "originTitle")
     rawContent
       @export(as: "originRawContent")
+    rawExcerpt
+      @export(as: "originRawExcerpt")
     
 
     originCoreHeading: blockFlattenedDataItems(
@@ -410,6 +412,10 @@ query InitializeTranslationVariables(
       )
       @export(
         as: "rawContent"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawExcerpt"
         type: DICTIONARY
       )
 
@@ -690,6 +696,12 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
     rawContent: _echo(value: $originRawContent)
       @export(
         as: "rawContent",
+        type: DICTIONARY
+      )
+      @remove
+    rawExcerpt: _echo(value: $originRawExcerpt)
+      @export(
+        as: "rawExcerpt",
         type: DICTIONARY
       )
       @remove
@@ -1127,6 +1139,29 @@ query AdaptData
         setResultInResponse: true
       )
     @export(as: "adaptedFromTitle")
+
+  adaptedToRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToRawExcerpt")
+  adaptedFromRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromRawExcerpt")
 }
 
 query TransformData
@@ -1134,10 +1169,14 @@ query TransformData
   @include(if: $executeTranslation)
 {
   transformations: _echo(value: {
-    meta: {
+    metaTitle: {
       from: $adaptedFromTitle,
       to: $adaptedToTitle,
-    }
+    },
+    metaRawExcerpt: {
+      from: $adaptedFromRawExcerpt,
+      to: $adaptedToRawExcerpt,
+    },
     coreHeadingContent: {
       from: $coreHeadingContentItems,
       to: $coreHeadingContentItems,
@@ -1241,7 +1280,10 @@ query EscapeRegexStrings
     @underEachJSONObjectProperty(
       filter: {
         by: {
-          excludeKeys: "meta"
+          excludeKeys: [
+            "metaTitle",
+            "metaRawExcerpt"
+          ]
         }
       }
     )
@@ -1287,7 +1329,10 @@ query EscapeRegexStrings
     @underEachJSONObjectProperty(
       filter: {
         by: {
-          excludeKeys: "meta"
+          excludeKeys: [
+            "metaTitle",
+            "metaRawExcerpt"
+          ]
         }
       }
     )
@@ -2614,8 +2659,8 @@ query ExecuteRegexReplacements
 query PrepareMetaReplacements
   @depends(on: "TransformData")
   @include(if: $executeTranslation)
-{  
-  transformedMeta: _echo(value: $title)
+{
+  transformedMetaTitle: _echo(value: $title)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "postID"
       affectDirectivesUnderPos: [1, 2, 3]
@@ -2623,7 +2668,7 @@ query PrepareMetaReplacements
       @applyField(
         name: "_sprintf",
         arguments: {
-          string: "meta.to.%s",
+          string: "metaTitle.to.%s",
           values: [$postID]
         }
         passOnwardsAs: "titlePath"
@@ -2646,6 +2691,39 @@ query PrepareMetaReplacements
       )
     @export(
       as: "transformedTitle"
+    )
+
+  transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "postID"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "metaRawExcerpt.to.%s",
+          values: [$postID]
+        }
+        passOnwardsAs: "rawExcerptPath"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: $rawExcerptPath }
+        }
+        passOnwardsAs: "transformedPostRawExcerptAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostRawExcerptAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawExcerpt"
     )
 }
 
@@ -2678,9 +2756,16 @@ mutation TranslateGutenbergPosts(
       then: $__transformedTitle,
       else: null
     )
+    transformedRawExcerpt: _objectProperty(
+      object: $transformedRawExcerpt,
+      by: {
+        key: $__id
+      }
+    )
     update(input: {
       title: $__transformedTitle,
       slug: $__transformedSlug,
+      excerpt: $__transformedRawExcerpt,
       contentAs: {
         html: $__transformedRawContent
       }
@@ -2696,6 +2781,7 @@ mutation TranslateGutenbergPosts(
         id
         title
         rawContent
+        rawExcerpt
       }
     }
   }
