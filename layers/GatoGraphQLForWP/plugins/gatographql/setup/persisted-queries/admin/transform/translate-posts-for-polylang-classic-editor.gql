@@ -55,7 +55,7 @@ query ExportOriginPost($postId: ID!)
   defaultLanguage: polylangDefaultLanguage
       @export(as: "defaultLanguage")
 
-  originPost: post(by: { id: $postId }, status: $statusToUpdate) {
+  originPost: post(by: { id: $postId }, status: any) {
     id
 
 
@@ -219,7 +219,7 @@ mutation TranslateClassicEditorPosts(
   @depends(on: "GenerateMutationInputs")
   @include(if: $executeTranslation)
 {
-  updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  updateTranslationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
     postInput: _objectProperty(
       object: $postInputs,
