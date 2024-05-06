@@ -146,14 +146,16 @@ query TranslateData
     @export(as: "translatedData")
 }
 
-query GenerateMutationInputs
+query GenerateMutationInputs(
+  $updateSlug: Boolean! = true
+)
   @depends(on: "TranslateData")
   @include(if: $executeTranslation)
 {  
   postInputs: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
       passValueOnwardsAs: "postTranslatedData"
-      affectDirectivesUnderPos: [1, 2, 3, 4]
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5]
     )
       @applyField(
         name: "_objectProperty",
@@ -164,6 +166,15 @@ query GenerateMutationInputs
           }
         },
         passOnwardsAs: "postTranslatedTitle"
+      )
+      @applyField(
+        name: "_if",
+        arguments: {
+          condition: $updateSlug,
+          then: $postTranslatedTitle,
+          else: null
+        },
+        passOnwardsAs: "postMaybeTranslatedSlug"
       )
       @applyField(
         name: "_objectProperty",
@@ -190,6 +201,7 @@ query GenerateMutationInputs
         arguments: {
           value: {
             title: $postTranslatedTitle,
+            slug: $postMaybeTranslatedSlug,
             excerpt: $postTranslatedRawExcerpt,
             contentAs: {
               html: $postTranslatedRawContent
