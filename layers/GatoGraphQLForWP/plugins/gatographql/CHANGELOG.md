@@ -12,6 +12,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added documentation for integration with Polylang (#2664)
 - Added module type "Integrations" (#2665)
 - Return an EnumString type on `GenericCategory.taxonomy` and `GenericTag.taxonomy` (#2666)
+- Added predefined persisted queries: (#2667)
+  - [PRO] Translate posts for Polylang (Gutenberg)
+  - [PRO] Translate posts for Polylang (Classic editor)
 
 ### Fixed
 
@@ -20,6 +23,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### [PRO] Improvements
 
 - Added integration with Polylang
+- Added automation rules:
+  - Polylang: When publishing a post, translate it to all languages (Gutenberg)
+  - Polylang: When publishing a post, translate it to all languages (Classic editor)
 
 ## 2.2.3 - 26/04/2024
 

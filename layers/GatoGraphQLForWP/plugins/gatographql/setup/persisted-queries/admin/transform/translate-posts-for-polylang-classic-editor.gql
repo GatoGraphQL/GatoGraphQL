@@ -1,0 +1,257 @@
+########################################################################
+# 
+# Variables:
+#   - postId: The post with the origin language, from where all translations will be made
+#   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
+#   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
+#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang.
+# to translate posts based on the Classic editor.
+#
+# It takes an origin post, it translates it using the Google
+# Translate API to all the other languages defined in Polylang,
+# and stores those translations in the corresponding posts,
+# as set-up via Polylang.
+#
+# All translation posts must already exist, created using the
+# Polylang UI. These posts must also have the  `draft` status
+# to be updated. To update posts with any other status, use
+# variable `$statusToUpdate` (for instance, passing value
+# `publish`, `pending` or `any`)
+#
+# By default, the origin post must have the default language
+# of the site, or the translation will not be executed.
+# To translate from any language, pass variable
+# `$translateDefaultLanguageOnly` with `false`.
+#
+# By default it also translates the post slug. To disable, pass
+# variable `updateSlug` with `false`.
+#
+# See Persisted Query "Translate post (Classic editor)" for additional
+# documentation.
+#
+# *********************************************************************
+# 
+# More info:
+#   - https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+  
+  emptyArray: _echo(value: [])
+    @export(as: "translationLanguages")
+    @export(as: "translationPostIds")
+}
+
+query ExportOriginPost($postId: ID!)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage
+      @export(as: "defaultLanguage")
+
+  originPost: post(by: { id: $postId }, status: any) {
+    id
+
+
+    polylangLanguage
+      @export(as: "fromLanguage")
+    
+
+    polylangTranslationLanguageIDs
+    translationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
+      @export(as: "translationLanguages")
+    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "translationPostIds")
+
+
+    title
+      @export(as: "originTitle")
+    rawContent
+      @export(as: "originRawContent")
+    rawExcerpt
+      @export(as: "originRawExcerpt")
+  }
+
+  hasOriginPost: _notNull(value: $__originPost)
+    @export(as: "hasOriginPost")
+}
+
+query FetchData(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+  $translateDefaultLanguageOnly: Boolean! = true
+)
+  @depends(on: "ExportOriginPost")
+  @include(if: $hasOriginPost)
+{
+  translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    id
+
+    polylangLanguage
+      @export(
+        as: "translationPostLanguages"
+        type: DICTIONARY
+      )
+
+    title: _echo(value: $originTitle)
+    rawContent: _echo(value: $originRawContent)
+    rawExcerpt: _echo(value: $originRawExcerpt)
+      @export(
+        as: "dataToTranslate",
+        affectAdditionalFieldsUnderPos: [1, 2]
+        type: DICTIONARY
+      )
+  }
+
+  hasTranslationPosts: _notEmpty(value: $__translationPosts)
+
+  originPostHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginPost: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: $__originPostHasDefaultLanguage,
+    else: true
+  )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationPosts,
+    $__canTranslateOriginPost
+  ])
+    @export(as: "executeTranslation")
+}
+
+query TranslateData
+  @depends(on: "FetchData")
+  @include(if: $executeTranslation)
+{  
+  translatedData: _echo(value: $dataToTranslate)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "postID"
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $translationPostLanguages,
+          by: { key: $postID }
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @underEachJSONObjectProperty
+        @strTranslate(
+          from: $fromLanguage,
+          to: $toLanguage
+        )
+    @export(as: "translatedData")
+}
+
+query GenerateMutationInputs(
+  $updateSlug: Boolean! = true
+)
+  @depends(on: "TranslateData")
+  @include(if: $executeTranslation)
+{  
+  postInputs: _echo(value: $translatedData)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "postTranslatedData"
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postTranslatedData,
+          by: {
+            key: "title",
+          }
+        },
+        passOnwardsAs: "postTranslatedTitle"
+      )
+      @applyField(
+        name: "_if",
+        arguments: {
+          condition: $updateSlug,
+          then: $postTranslatedTitle,
+          else: null
+        },
+        passOnwardsAs: "postMaybeTranslatedSlug"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postTranslatedData,
+          by: {
+            key: "rawExcerpt",
+          }
+        },
+        passOnwardsAs: "postTranslatedRawExcerpt"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $postTranslatedData,
+          by: {
+            key: "rawContent",
+          }
+        },
+        passOnwardsAs: "postTranslatedRawContent"
+      )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            title: $postTranslatedTitle,
+            slug: $postMaybeTranslatedSlug,
+            excerpt: $postTranslatedRawExcerpt,
+            contentAs: {
+              html: $postTranslatedRawContent
+            }
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "postInputs")
+}
+
+mutation TranslateClassicEditorPosts(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+)
+  @depends(on: "GenerateMutationInputs")
+  @include(if: $executeTranslation)
+{
+  updateTranslationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    id
+    postInput: _objectProperty(
+      object: $postInputs,
+      by: {
+        key: $__id
+      }
+    )
+      @remove
+    update(input: $__postInput) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        id
+        title
+        rawExcerpt
+        rawContent
+      }
+    }
+  }
+}
