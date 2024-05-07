@@ -234,7 +234,18 @@ class ModuleRegistry implements ModuleRegistryInterface
          */
         foreach ($moduleResolver->getDependentOnActiveWordPressPlugins($module) as $dependedActivePlugin) {
             // Check that all required plugins are active
-            if (!PluginStaticHelpers::isWordPressPluginActive($dependedActivePlugin->file)) {
+            $activeFile = null;
+            if (PluginStaticHelpers::isWordPressPluginActive($dependedActivePlugin->file)) {
+                $activeFile = $dependedActivePlugin->file;
+            } else {
+                foreach ($dependedActivePlugin->alternativeFiles as $alternativeFile) {
+                    if (PluginStaticHelpers::isWordPressPluginActive($alternativeFile)) {
+                        $activeFile = $alternativeFile;
+                        break;
+                    }
+                }
+            }
+            if ($activeFile === null) {
                 return false;
             }
 
@@ -245,7 +256,7 @@ class ModuleRegistry implements ModuleRegistryInterface
 
             if (
                 !PluginStaticHelpers::doesActivePluginSatisfyVersionConstraint(
-                    $dependedActivePlugin->file,
+                    $activeFile,
                     $dependedActivePlugin->versionConstraint
                 )
             ) {
