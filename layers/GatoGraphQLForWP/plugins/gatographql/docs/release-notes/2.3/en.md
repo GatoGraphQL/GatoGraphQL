@@ -17,6 +17,7 @@
   - Polylang: When publishing a post, translate it to all languages (Gutenberg)
   - Polylang: When publishing a post, translate it to all languages (Classic editor)
   - Polylang: When publishing a post, set the featured image for each language on all translation posts
+  - Polylang: When publishing a post, set the tags and categories for each language on all translation posts
 
 ### Added integration with Polylang
 
