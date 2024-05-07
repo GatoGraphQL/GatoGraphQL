@@ -272,6 +272,11 @@ class ModuleRegistry implements ModuleRegistryInterface
             if (PluginStaticHelpers::isWordPressPluginActive($dependedInactivePlugin->file)) {
                 return false;
             }
+            foreach ($dependedInactivePlugin->alternativeFiles as $alternativeFile) {
+                if (PluginStaticHelpers::isWordPressPluginActive($alternativeFile)) {
+                    return false;
+                }
+            }
         }
 
         return true;
