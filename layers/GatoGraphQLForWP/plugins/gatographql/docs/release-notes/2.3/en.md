@@ -6,15 +6,17 @@
 - Added documentation for integration with Polylang ([#2664](https://github.com/GatoGraphQL/GatoGraphQL/pull/2664))
 - Added module type "Integrations" ([#2665](https://github.com/GatoGraphQL/GatoGraphQL/pull/2665))
 - Return an EnumString type on `GenericCategory.taxonomy` and `GenericTag.taxonomy` ([#2666](https://github.com/GatoGraphQL/GatoGraphQL/pull/2666))
-- Added predefined persisted queries: ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
-  - [PRO] Translate posts for Polylang (Gutenberg)
-  - [PRO] Translate posts for Polylang (Classic editor)
+- Added predefined persisted queries:
+  - [PRO] Translate posts for Polylang (Gutenberg) ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
+  - [PRO] Translate posts for Polylang (Classic editor) ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
+  - [PRO] Sync featured image for Polylang ([#2669](https://github.com/GatoGraphQL/GatoGraphQL/pull/2669))
 
 ## [PRO] Improvements
 
 - Added automation rules:
   - Polylang: When publishing a post, translate it to all languages (Gutenberg)
   - Polylang: When publishing a post, translate it to all languages (Classic editor)
+  - Polylang: When publishing a post, set the featured image for each language on all translation posts
 
 ### Added integration with Polylang
 

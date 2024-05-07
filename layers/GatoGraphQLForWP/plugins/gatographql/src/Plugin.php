@@ -1522,6 +1522,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for Polylang (Gutenberg)', 'gatographql'),
+                    'post_excerpt' => \__('Translate a block-based post to all languages defined in the Polylang settings, and store those translations in the corresponding posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1545,6 +1546,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for Polylang (Classic editor)', 'gatographql'),
+                    'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the Polylang settings, and store those translations in the corresponding posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1552,6 +1554,30 @@ class Plugin extends AbstractMainPlugin
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                     'admin/transform/translate-posts-for-polylang-classic-editor',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_POLYLANG_AND_CLASSIC_EDITOR,
+                                ),
+                            ],
+                        ],
+                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Sync featured image for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding featured image for each language', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/sync-featuredimage-for-polylang',
+                                    VirtualTutorialLessons::SYNCHRONIZING_FEATUREDIMAGE_FOR_POLYLANG,
                                 ),
                             ],
                         ],

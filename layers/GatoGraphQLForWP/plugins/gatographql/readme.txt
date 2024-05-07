@@ -262,9 +262,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added module type "Integrations" (#2665)
 * Return an EnumString type on `GenericCategory.taxonomy` and `GenericTag.taxonomy` (#2666)
 * Fix bug: Updated the Support form's action URL (#2662)
-* Added predefined persisted queries: "[PRO] Translate posts for Polylang (Gutenberg)" and "[PRO] Translate posts for Polylang (Classic editor)" (#2667)
+* Added predefined persisted queries: "[PRO] Translate posts for Polylang (Gutenberg)" (#2667), "[PRO] Translate posts for Polylang (Classic editor)" (#2667), and "[PRO] Sync featured image for Polylang" (#2669)
 * [PRO] Added integration with Polylang
-* [PRO] Added automation rules: "Polylang: When publishing a post, translate it to all languages (Gutenberg)" and "Polylang: When publishing a post, translate it to all languages (Classic editor)"
+* [PRO] Added automation rules: "Polylang: When publishing a post, translate it to all languages (Gutenberg)", "Polylang: When publishing a post, translate it to all languages (Classic editor)" and "Polylang: When publishing a post, set the featured image for each language on all translation posts"
 
 = 2.2.3 =
 * Bug parsing `@export(as: $someVar)` (#2661)
