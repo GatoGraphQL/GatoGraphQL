@@ -130,8 +130,8 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
       object: $featuredImageTranslationLanguageIDs,
       by: {
         key: $__polylangLanguage
-        failIfNonExistingKeyOrPath: false
       }
+      failIfNonExistingKeyOrPath: false
     ) @default(value: $originPostFeaturedImageID)
       
     setFeaturedImage(input: {
