@@ -71,7 +71,7 @@ query ExportDataFromOriginPost($postId: ID!)
       id
       name
       polylangLanguage
-      polylangTranslationLanguageIDs(filter: { includeSelf: true })
+      polylangTranslationLanguageIDs
         @export(
           as: "tagIDTranslationLanguageIDs",
           type: DICTIONARY
@@ -82,7 +82,7 @@ query ExportDataFromOriginPost($postId: ID!)
       id
       name
       polylangLanguage
-      polylangTranslationLanguageIDs(filter: { includeSelf: true })
+      polylangTranslationLanguageIDs
         @export(
           as: "categoryIDTranslationLanguageIDs",
           type: DICTIONARY
