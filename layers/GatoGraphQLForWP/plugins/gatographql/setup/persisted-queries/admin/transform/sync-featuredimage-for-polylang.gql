@@ -64,20 +64,15 @@ query ExportDataFromOriginPost($postId: ID!)
       @export(as: "originPostTranslationPostIds")
 
 
-    featuredImage {
+    featuredImage @export(as: "featuredImageID") {
       id
 
       polylangTranslationLanguageIDs
-      translationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-        @export(as: "featuredImageTranslationLanguages")
-      translationMediaItemIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-        @export(as: "featuredImageTranslationMediaItemIds")
+        @export(as: "featuredImageTranslationLanguageIDs")
 
       hasTranslationPosts: _notEmpty(value: $__polylangTranslationLanguageIDs)
         @export(as: "hasFeaturedImageTranslations")
-
     }
-      @export(as: "featuredImageID")
   }
 }
 
@@ -90,12 +85,6 @@ query FilterTranslationPostsToUpdate(
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
-
-    polylangLanguage
-      @export(
-        as: "translationPostLanguages"
-        type: DICTIONARY
-      )
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
@@ -118,114 +107,30 @@ query FilterTranslationPostsToUpdate(
     @export(as: "executeTranslation")
 }
 
-query TranslateData
-  @depends(on: "FilterTranslationPostsToUpdate")
-  @include(if: $executeTranslation)
-{  
-  translatedData: _echo(value: $dataToTranslate)
-    @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
-      affectDirectivesUnderPos: [1, 2]
-    )
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $translationPostLanguages,
-          by: { key: $postID }
-        },
-        passOnwardsAs: "toLanguage"
-      )
-      @underEachJSONObjectProperty
-        @strTranslate(
-          from: $fromLanguage,
-          to: $toLanguage
-        )
-    @export(as: "translatedData")
-}
-
-query GenerateMutationInputs(
-  $updateSlug: Boolean! = true
-)
-  @depends(on: "TranslateData")
-  @include(if: $executeTranslation)
-{  
-  postInputs: _echo(value: $translatedData)
-    @underEachJSONObjectProperty(
-      passValueOnwardsAs: "postTranslatedData"
-      affectDirectivesUnderPos: [1, 2, 3, 4, 5]
-    )
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $postTranslatedData,
-          by: {
-            key: "title",
-          }
-        },
-        passOnwardsAs: "postTranslatedTitle"
-      )
-      @applyField(
-        name: "_if",
-        arguments: {
-          condition: $updateSlug,
-          then: $postTranslatedTitle,
-          else: null
-        },
-        passOnwardsAs: "postMaybeTranslatedSlug"
-      )
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $postTranslatedData,
-          by: {
-            key: "rawExcerpt",
-          }
-        },
-        passOnwardsAs: "postTranslatedRawExcerpt"
-      )
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $postTranslatedData,
-          by: {
-            key: "rawContent",
-          }
-        },
-        passOnwardsAs: "postTranslatedRawContent"
-      )
-      @applyField(
-        name: "_echo",
-        arguments: {
-          value: {
-            title: $postTranslatedTitle,
-            slug: $postMaybeTranslatedSlug,
-            excerpt: $postTranslatedRawExcerpt,
-            contentAs: {
-              html: $postTranslatedRawContent
-            }
-          }
-        },
-        setResultInResponse: true
-      )
-    @export(as: "postInputs")
-}
-
-mutation TranslateClassicEditorPosts(
+mutation UpdateFeaturedImageForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
 )
-  @depends(on: "GenerateMutationInputs")
+  @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeTranslation)
 {
   updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
-    postInput: _objectProperty(
-      object: $postInputs,
+
+    polylangLanguage
+
+    translationFeaturedImageID: _objectProperty(
+      object: $featuredImageTranslationLanguageIDs,
       by: {
-        key: $__id
+        key: $__polylangLanguage
       }
     )
       @remove
-    update(input: $__postInput) {
+      
+    setFeaturedImage(input: {
+      mediaItemBy: {
+        id: $__translationFeaturedImageID
+      }
+    }) {
       status
       errors {
         __typename
@@ -233,11 +138,14 @@ mutation TranslateClassicEditorPosts(
           message
         }
       }
-      post {
-        id
-        title
-        rawExcerpt
-        rawContent
+      customPost {
+        __typename
+        ...on CustomPost {
+          featuredImage {
+            id
+            polylangLanguage
+          }
+        }
       }
     }
   }
