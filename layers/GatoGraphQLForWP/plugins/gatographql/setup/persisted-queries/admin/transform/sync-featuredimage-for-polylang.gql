@@ -39,8 +39,9 @@ query InitializeVariables
   
   emptyArray: _echo(value: [])
     @export(as: "originPostTranslationPostIds")
-    @export(as: "featuredImageTranslationLanguages")
-    @export(as: "featuredImageTranslationMediaItemIds")
+  
+  emptyJSON: _echo(value: {})
+    @export(as: "featuredImageTranslationLanguageIDs")
 }
 
 query ExportDataFromOriginPost($postId: ID!)
