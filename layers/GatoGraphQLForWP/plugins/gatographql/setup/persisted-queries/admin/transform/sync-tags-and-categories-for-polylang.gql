@@ -45,7 +45,7 @@ query InitializeVariables
   
   emptyJSON: _echo(value: {})
     @export(as: "tagIDTranslationLanguageIDs")
-    @export(as: "categoryTranslationLanguageIDs")
+    @export(as: "categoryIDTranslationLanguageIDs")
 }
 
 query ExportDataFromOriginPost($postId: ID!)
@@ -82,7 +82,7 @@ query ExportDataFromOriginPost($postId: ID!)
       name
       polylangTranslationLanguageIDs(filter: { includeSelf: true })
         @export(
-          as: "categoryTranslationLanguageIDs",
+          as: "categoryIDTranslationLanguageIDs",
           type: DICTIONARY
         )
     }
@@ -133,6 +133,40 @@ query FilterTranslationPostsToUpdate(
         as: "translationPostTagIDs",
         type: DICTIONARY
       )
+
+    translationPostCategoryIDs: _echo(value: $__polylangLanguage)
+      @passOnwards(as: "lang")
+      @applyField(
+        name: "_echo"
+        arguments: { value: $originPostCategoryIDs }
+        setResultInResponse: true
+      )
+      @underEachArrayItem(
+        passValueOnwardsAs: "categoryID"
+        affectDirectivesUnderPos: [1, 2]
+      )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $categoryIDTranslationLanguageIDs,
+            by: { key: $categoryID }
+          }
+          passOnwardsAs: "categoryTranslationLanguageIDs"
+        )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $categoryTranslationLanguageIDs,
+            by: { key: $lang },
+            failIfNonExistingKeyOrPath: false
+          }
+          setResultInResponse: true
+        )
+      @arrayFilter
+      @export(
+        as: "translationPostCategoryIDs",
+        type: DICTIONARY
+      )
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
@@ -165,9 +199,13 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
   {
     id
     polylangLanguage
-    
+
     tagIDs: _objectProperty(
       object: $translationPostTagIDs,
+      by: { key: $__id }
+    )
+    categoryIDs: _objectProperty(
+      object: $translationPostCategoryIDs,
       by: { key: $__id }
     )
 
@@ -188,8 +226,30 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
         __typename
         tags {
           id
+          name
         }
-        tagNames
+      }
+    }
+
+    setCategories(input: {
+      categoriesBy: {
+        ids: $__categoryIDs
+      },
+      append: false
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        __typename
+        categories {
+          id
+          name
+        }
       }
     }
   }
