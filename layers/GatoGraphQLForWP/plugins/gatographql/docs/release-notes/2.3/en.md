@@ -2,7 +2,6 @@
 
 ## Improvements
 
-- Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` ([#2663](https://github.com/GatoGraphQL/GatoGraphQL/pull/2663))
 - Added documentation for integration with Polylang ([#2664](https://github.com/GatoGraphQL/GatoGraphQL/pull/2664))
 - Added module type "Integrations" ([#2665](https://github.com/GatoGraphQL/GatoGraphQL/pull/2665))
 - Return an EnumString type on `GenericCategory.taxonomy` and `GenericTag.taxonomy` ([#2666](https://github.com/GatoGraphQL/GatoGraphQL/pull/2666))
@@ -11,6 +10,49 @@
   - [PRO] Translate posts for Polylang (Classic editor) ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
   - [PRO] Sync featured image for Polylang ([#2669](https://github.com/GatoGraphQL/GatoGraphQL/pull/2669))
   - [PRO] Sync tags and categories for Polylang ([#2670](https://github.com/GatoGraphQL/GatoGraphQL/pull/2670))
+
+### Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` ([#2663](https://github.com/GatoGraphQL/GatoGraphQL/pull/2663))
+
+We have added mutations to create an update custom posts!
+
+For instance, this query updates the title and content for a Custom Post Type `"my-portfolio"`:
+
+```graphql
+mutation UpdateCustomPost {
+  updateCustomPost(input: {
+    id: 1616
+    customPostType: "my-portfolio"
+    title: "Updated title"
+    contentAs: { html: "Updated content" }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    customPost {
+      __typename
+      ...on CustomPost {
+        id
+        title
+        content
+      }
+    }
+  }
+}
+```
+
+Concerning Custom Post Types (CPT) of your own creation, and which do not require any additional fields over those from a Post, then you can use both `createCustomPost` and `updateCustomPost` without any fear or restraint. For instance, a `MyPortfolio` CPT that simply uses the standard fields `title` and `content`, and has no extra fields, can be fully managed via these new fields.
+
+Custom post types that are provided by 3rd-party plugins, though, may need to be created (and possibly updated too) by the corresponding plugin only. This is because they may have their custom data (either in `wp_postmeta` or in a proprietary table) that needs to be added too, and that Gato GraphQL is unaware of.
+
+To manage these CPTs appropriately, a corresponding integration between that plugin and Gato GraphQL should be created, which would provide the mapping for all the fields for the CPT.
+
+For instance, to work with WooCommerce, we can currently use field `Root.updateCustomPost` to translate and update the title and content of an WooCommerce product (i.e. from the Product CPT).
+
+However, we cannot create an WooCommerce product. For that, we must wait until the "WooCommerce for Gato GraphQL" extension is available.
 
 ## [PRO] Improvements
 
