@@ -31,13 +31,19 @@ query InitializeVariables
 {
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
+
+  emptyBool: _echo(value: false)
+    @export(as: "executeTranslation")
+    @export(as: "hasFeaturedImageTranslations")
   
   emptyArray: _echo(value: [])
-    @export(as: "translationLanguages")
-    @export(as: "translationPostIds")
+    @export(as: "originPostTranslationLanguages")
+    @export(as: "originPostTranslationPostIds")
+    @export(as: "featuredImageTranslationLanguages")
+    @export(as: "featuredImageTranslationMediaItemIds")
 }
 
-query ExportOriginPost($postId: ID!)
+query ExportDataFromOriginPost($postId: ID!)
   @depends(on: "InitializeVariables")
 {
   defaultLanguage: polylangDefaultLanguage
@@ -53,45 +59,41 @@ query ExportOriginPost($postId: ID!)
 
     polylangTranslationLanguageIDs
     translationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationLanguages")
+      @export(as: "originPostTranslationLanguages")
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationPostIds")
+      @export(as: "originPostTranslationPostIds")
 
 
-    title
-      @export(as: "originTitle")
-    rawContent
-      @export(as: "originRawContent")
-    rawExcerpt
-      @export(as: "originRawExcerpt")
+    featuredImage {
+      id
+
+      polylangTranslationLanguageIDs
+      translationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
+        @export(as: "featuredImageTranslationLanguages")
+      translationMediaItemIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+        @export(as: "featuredImageTranslationMediaItemIds")
+
+      hasTranslationPosts: _notEmpty(value: $__polylangTranslationLanguageIDs)
+        @export(as: "hasFeaturedImageTranslations")
+
+    }
+      @export(as: "featuredImageID")
   }
-
-  hasOriginPost: _notNull(value: $__originPost)
-    @export(as: "hasOriginPost")
 }
 
-query FetchData(
+query FilterTranslationPostsToUpdate(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $translateDefaultLanguageOnly: Boolean! = true
 )
-  @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
+  @depends(on: "ExportDataFromOriginPost")
+  @include(if: $hasFeaturedImageTranslations)
 {
-  translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
 
     polylangLanguage
       @export(
         as: "translationPostLanguages"
-        type: DICTIONARY
-      )
-
-    title: _echo(value: $originTitle)
-    rawContent: _echo(value: $originRawContent)
-    rawExcerpt: _echo(value: $originRawExcerpt)
-      @export(
-        as: "dataToTranslate",
-        affectAdditionalFieldsUnderPos: [1, 2]
         type: DICTIONARY
       )
   }
@@ -117,7 +119,7 @@ query FetchData(
 }
 
 query TranslateData
-  @depends(on: "FetchData")
+  @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeTranslation)
 {  
   translatedData: _echo(value: $dataToTranslate)
@@ -214,7 +216,7 @@ mutation TranslateClassicEditorPosts(
   @depends(on: "GenerateMutationInputs")
   @include(if: $executeTranslation)
 {
-  updateTranslationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
     postInput: _objectProperty(
       object: $postInputs,
