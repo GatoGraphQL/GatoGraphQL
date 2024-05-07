@@ -133,6 +133,7 @@ query FilterTranslationPostsToUpdate(
         as: "translationPostTagIDs",
         type: DICTIONARY
       )
+      @remove
 
     translationPostCategoryIDs: _echo(value: $__polylangLanguage)
       @passOnwards(as: "lang")
@@ -167,6 +168,7 @@ query FilterTranslationPostsToUpdate(
         as: "translationPostCategoryIDs",
         type: DICTIONARY
       )
+      @remove
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
