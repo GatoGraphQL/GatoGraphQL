@@ -99,8 +99,9 @@ query FilterTranslationPostsToUpdate(
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
+    polylangLanguage
 
-    translationPostTagIDs: polylangLanguage
+    translationPostTagIDs: _echo(value: $__polylangLanguage)
       @passOnwards(as: "lang")
       @applyField(
         name: "_echo"
