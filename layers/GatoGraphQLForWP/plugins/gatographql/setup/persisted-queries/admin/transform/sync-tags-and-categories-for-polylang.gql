@@ -133,7 +133,6 @@ query FilterTranslationPostsToUpdate(
         as: "translationPostTagIDs",
         type: DICTIONARY
       )
-    )
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
@@ -165,7 +164,7 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
   updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
   {
     id
-    
+
     tagIDs: _objectProperty(
       object: $translationPostTagIDs,
       by: { key: $__id }
