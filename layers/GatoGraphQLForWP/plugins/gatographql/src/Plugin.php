@@ -1522,6 +1522,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for Polylang (Gutenberg)', 'gatographql'),
+                    'post_excerpt' => \__('Translate a block-based post to all languages defined in the Polylang settings, and store those translations in the corresponding posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1545,6 +1546,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for Polylang (Classic editor)', 'gatographql'),
+                    'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the Polylang settings, and store those translations in the corresponding posts', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1568,6 +1570,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Sync featured image for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding featured image for each language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
