@@ -70,6 +70,7 @@ query ExportDataFromOriginPost($postId: ID!)
     tags @export(as: "originPostTagIDs") {
       id
       name
+      polylangLanguage
       polylangTranslationLanguageIDs(filter: { includeSelf: true })
         @export(
           as: "tagIDTranslationLanguageIDs",
@@ -80,6 +81,7 @@ query ExportDataFromOriginPost($postId: ID!)
     categories @export(as: "originPostCategoryIDs") {
       id
       name
+      polylangLanguage
       polylangTranslationLanguageIDs(filter: { includeSelf: true })
         @export(
           as: "categoryIDTranslationLanguageIDs",
@@ -229,6 +231,7 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
         tags {
           id
           name
+          polylangLanguage
         }
       }
     }
@@ -251,6 +254,7 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
         categories {
           id
           name
+          polylangLanguage
         }
       }
     }
