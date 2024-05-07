@@ -132,11 +132,17 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
         key: $__polylangLanguage
       }
       failIfNonExistingKeyOrPath: false
-    ) @default(value: $originPostFeaturedImageID)
+    )
+
+    translationOrDefaultFeaturedImageID: _if(
+      condition: _notNull(value: $translationFeaturedImageID),
+      then: _echo(value: $translationFeaturedImageID),
+      else: _echo(value: $originPostFeaturedImageID)
+    )
       
     setFeaturedImage(input: {
       mediaItemBy: {
-        id: $__translationFeaturedImageID
+        id: $__translationOrDefaultFeaturedImageID
       }
     }) {
       status
