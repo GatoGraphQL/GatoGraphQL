@@ -37,7 +37,6 @@ query InitializeVariables
     @export(as: "hasFeaturedImageTranslations")
   
   emptyArray: _echo(value: [])
-    @export(as: "originPostTranslationLanguages")
     @export(as: "originPostTranslationPostIds")
     @export(as: "featuredImageTranslationLanguages")
     @export(as: "featuredImageTranslationMediaItemIds")
@@ -58,13 +57,11 @@ query ExportDataFromOriginPost($postId: ID!)
     
 
     polylangTranslationLanguageIDs
-    translationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-      @export(as: "originPostTranslationLanguages")
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "originPostTranslationPostIds")
 
 
-    featuredImage @export(as: "featuredImageID") {
+    featuredImage {
       id
 
       polylangTranslationLanguageIDs
@@ -124,7 +121,6 @@ mutation UpdateFeaturedImageForTranslationPosts(
         key: $__polylangLanguage
       }
     )
-      @remove
       
     setFeaturedImage(input: {
       mediaItemBy: {
