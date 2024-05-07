@@ -52,15 +52,12 @@ query ExportDataFromOriginPost($postId: ID!)
   originPost: post(by: { id: $postId }, status: any) {
     id
 
-
     polylangLanguage
       @export(as: "fromLanguage")
     
-
     polylangTranslationLanguageIDs
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "originPostTranslationPostIds")
-
 
     featuredImage {
       id
