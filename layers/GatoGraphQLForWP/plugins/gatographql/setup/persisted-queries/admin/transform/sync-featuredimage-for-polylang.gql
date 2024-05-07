@@ -14,9 +14,11 @@
 # It takes an origin post, queries its featured image,
 # and updates its translation posts with the corresponding
 # featured image for the corresponding language,
-# as set-up via Polylang. If the origin post does not have
-# a featured image, it also removes it from all translation
-# posts.
+# as set-up via Polylang. If there is no translation for that
+# image, the same image from the origin post is set.
+#
+# If the origin post does not have a featured image,
+# it removes it from all translation posts.
 #
 # All translation posts must have the  `draft` status
 # to be updated. To update posts with any other status, use
@@ -34,6 +36,9 @@ query InitializeVariables
 {
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
+
+  emptyID: _echo(value: null)
+    @export(as: "originPostFeaturedImageID")
 
   emptyBool: _echo(value: false)
     @export(as: "hasFeaturedImage")
@@ -66,7 +71,7 @@ query ExportDataFromOriginPost($postId: ID!)
     hasTranslationPosts: _notEmpty(value: $__translationPostIds)
       @export(as: "hasOriginPostTranslationPosts")
 
-    featuredImage {
+    featuredImage @export(as: "originPostFeaturedImageID") {
       id
 
       polylangTranslationLanguageIDs
@@ -125,8 +130,9 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
       object: $featuredImageTranslationLanguageIDs,
       by: {
         key: $__polylangLanguage
+        failIfNonExistingKeyOrPath: false
       }
-    )
+    ) @default(value: $originPostFeaturedImageID)
       
     setFeaturedImage(input: {
       mediaItemBy: {
