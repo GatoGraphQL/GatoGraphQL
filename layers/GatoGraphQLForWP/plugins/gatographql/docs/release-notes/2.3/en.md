@@ -9,7 +9,7 @@
 - Added predefined persisted queries:
   - [PRO] Translate posts for Polylang (Gutenberg) ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
   - [PRO] Translate posts for Polylang (Classic editor) ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
-  - [PRO] Sync featured image for Polylang ([#2668](https://github.com/GatoGraphQL/GatoGraphQL/pull/2668))
+  - [PRO] Sync featured image for Polylang ([#2669](https://github.com/GatoGraphQL/GatoGraphQL/pull/2669))
 
 ## [PRO] Improvements
 
