@@ -15,8 +15,7 @@
 # and updates its translation posts with the corresponding
 # tags and categories for the corresponding language,
 # as set-up via Polylang. If some tag or category does not
-# have a translation, that same tag or category from the 
-# origin post is set.
+# have a translation, that tag or category is removed.
 #
 # All translation posts must have the  `draft` status
 # to be updated. To update posts with any other status, use
@@ -110,7 +109,7 @@ query FilterTranslationPostsToUpdate(
       )
       @underEachArrayItem(
         passValueOnwardsAs: "tagID"
-        affectDirectivesUnderPos: [1, 2, 3]
+        affectDirectivesUnderPos: [1, 2]
       )
         @applyField(
           name: "_objectProperty"
@@ -129,7 +128,7 @@ query FilterTranslationPostsToUpdate(
           }
           setResultInResponse: true
         )
-        @default(value: $tagID)
+      @arrayFilter
       @export(
         as: "translationPostTagIDs",
         type: DICTIONARY
