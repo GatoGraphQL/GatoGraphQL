@@ -35,9 +35,6 @@ query InitializeVariables
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
 
-  emptyID: _echo(value: null)
-    @export(as: "originPostFeaturedImageID")
-
   emptyBool: _echo(value: false)
     @export(as: "executeUpdate")
     @export(as: "hasOriginPostTranslationPosts")
@@ -168,6 +165,7 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
   updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
   {
     id
+    
     tagIDs: _objectProperty(
       object: $translationPostTagIDs,
       by: { key: $__id }
