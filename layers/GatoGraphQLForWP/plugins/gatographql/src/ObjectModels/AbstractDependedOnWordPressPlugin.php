@@ -15,8 +15,8 @@ abstract class AbstractDependedOnWordPressPlugin
     public function __construct(
         public readonly string $name,
         public readonly string $file,
-        ?string $url = null,
         public readonly array $alternativeFiles = [],
+        ?string $url = null,
     ) {
         $this->slug = $this->extractSlugFromPluginFile($file);
         $this->url = $this->calculateURL($url, $this->slug);

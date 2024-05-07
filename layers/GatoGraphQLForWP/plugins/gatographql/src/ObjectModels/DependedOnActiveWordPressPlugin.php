@@ -13,14 +13,14 @@ final class DependedOnActiveWordPressPlugin extends AbstractDependedOnWordPressP
         string $name,
         string $file,
         public readonly ?string $versionConstraint = null,
-        ?string $url = null,
         array $alternativeFiles = [],
+        ?string $url = null,
     ) {
         parent::__construct(
             $name,
             $file,
-            $url,
             $alternativeFiles,
+            $url,
         );
     }
 }
