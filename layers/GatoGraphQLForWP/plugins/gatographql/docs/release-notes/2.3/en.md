@@ -10,6 +10,7 @@
   - [PRO] Translate posts for Polylang (Gutenberg) ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
   - [PRO] Translate posts for Polylang (Classic editor) ([#2667](https://github.com/GatoGraphQL/GatoGraphQL/pull/2667))
   - [PRO] Sync featured image for Polylang ([#2669](https://github.com/GatoGraphQL/GatoGraphQL/pull/2669))
+  - [PRO] Sync tags and categories for Polylang ([#2670](https://github.com/GatoGraphQL/GatoGraphQL/pull/2670))
 
 ## [PRO] Improvements
 
@@ -17,6 +18,7 @@
   - Polylang: When publishing a post, translate it to all languages (Gutenberg)
   - Polylang: When publishing a post, translate it to all languages (Classic editor)
   - Polylang: When publishing a post, set the featured image for each language on all translation posts
+  - Polylang: When publishing a post, set the tags and categories for each language on all translation posts
 
 ### Added integration with Polylang
 
