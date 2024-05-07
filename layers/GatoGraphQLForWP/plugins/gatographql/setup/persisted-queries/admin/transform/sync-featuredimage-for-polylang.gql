@@ -34,6 +34,7 @@ query InitializeVariables
     @export(as: "fromLanguage")
 
   emptyBool: _echo(value: false)
+    @export(as: "hasFeaturedImage")
     @export(as: "executeUpdate")
     @export(as: "hasFeaturedImageTranslations")
   
@@ -69,6 +70,9 @@ query ExportDataFromOriginPost($postId: ID!)
       hasTranslationPosts: _notEmpty(value: $__polylangTranslationLanguageIDs)
         @export(as: "hasFeaturedImageTranslations")
     }
+
+    hasFeaturedImage: _notNull(value: $__featuredImage)
+      @export(as: "hasFeaturedImage")
   }
 }
 
@@ -103,17 +107,18 @@ query FilterTranslationPostsToUpdate(
     @export(as: "executeUpdate")
 }
 
-mutation UpdateFeaturedImageForTranslationPosts(
+mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
 )
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
+  updateFeaturedImageInTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
+    @include(if: $hasFeaturedImage)
+  {
     id
-
+    
     polylangLanguage
-
     translationFeaturedImageID: _objectProperty(
       object: $featuredImageTranslationLanguageIDs,
       by: {
@@ -139,6 +144,29 @@ mutation UpdateFeaturedImageForTranslationPosts(
           featuredImage {
             id
             polylangLanguage
+          }
+        }
+      }
+    }
+  }
+
+  removeFeaturedImageFromTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
+    @skip(if: $hasFeaturedImage)
+  {
+    id      
+    removeFeaturedImage {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      customPost {
+        __typename
+        ...on CustomPost {
+          featuredImage {
+            id
           }
         }
       }
