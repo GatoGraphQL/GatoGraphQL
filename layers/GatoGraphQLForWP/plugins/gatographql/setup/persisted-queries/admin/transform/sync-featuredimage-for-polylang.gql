@@ -134,10 +134,12 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
       failIfNonExistingKeyOrPath: false
     )
 
+    hasTranslationFeaturedImageID: _notNull(value: $__translationFeaturedImageID)
+
     translationOrDefaultFeaturedImageID: _if(
-      condition: _notNull(value: $translationFeaturedImageID),
-      then: _echo(value: $translationFeaturedImageID),
-      else: _echo(value: $originPostFeaturedImageID)
+      condition: $__hasTranslationFeaturedImageID,
+      then: $__translationFeaturedImageID,
+      else: $originPostFeaturedImageID
     )
       
     setFeaturedImage(input: {
