@@ -120,6 +120,14 @@ class VirtualTutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
+            VirtualTutorialLessons::SYNCHRONIZING_FEATUREDIMAGE_FOR_POLYLANG => [
+                \__('Synchronizing the featured image to the different language one defined via Polylang', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
         ];
     }
 }

@@ -1560,5 +1560,28 @@ class Plugin extends AbstractMainPlugin
                 ]
             ));
         }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Sync featured image for Polylang', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/sync-featuredimage-for-polylang',
+                                    VirtualTutorialLessons::SYNCHRONIZING_FEATUREDIMAGE_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
     }
 }
