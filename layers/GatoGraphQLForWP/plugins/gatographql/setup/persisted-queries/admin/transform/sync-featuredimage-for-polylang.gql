@@ -33,7 +33,7 @@ query InitializeVariables
     @export(as: "fromLanguage")
 
   emptyBool: _echo(value: false)
-    @export(as: "executeTranslation")
+    @export(as: "executeUpdate")
     @export(as: "hasFeaturedImageTranslations")
   
   emptyArray: _echo(value: [])
@@ -97,18 +97,18 @@ query FilterTranslationPostsToUpdate(
     else: true
   )
 
-  executeTranslation: _and(values: [
+  executeUpdate: _and(values: [
     $__hasTranslationPosts,
     $__canTranslateOriginPost
   ])
-    @export(as: "executeTranslation")
+    @export(as: "executeUpdate")
 }
 
 mutation UpdateFeaturedImageForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
 )
   @depends(on: "FilterTranslationPostsToUpdate")
-  @include(if: $executeTranslation)
+  @include(if: $executeUpdate)
 {
   updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
