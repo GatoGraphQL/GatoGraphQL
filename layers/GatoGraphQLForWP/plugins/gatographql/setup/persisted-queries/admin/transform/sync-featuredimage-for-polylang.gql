@@ -38,7 +38,7 @@ query InitializeVariables
   emptyBool: _echo(value: false)
     @export(as: "hasFeaturedImage")
     @export(as: "executeUpdate")
-    @export(as: "hasFeaturedImageTranslations")
+    @export(as: "hasOriginPostTranslationPosts")
   
   emptyArray: _echo(value: [])
     @export(as: "originPostTranslationPostIds")
@@ -63,14 +63,14 @@ query ExportDataFromOriginPost($postId: ID!)
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "originPostTranslationPostIds")
 
+    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+      @export(as: "hasOriginPostTranslationPosts")
+
     featuredImage {
       id
 
       polylangTranslationLanguageIDs
         @export(as: "featuredImageTranslationLanguageIDs")
-
-      hasTranslationPosts: _notEmpty(value: $__polylangTranslationLanguageIDs)
-        @export(as: "hasFeaturedImageTranslations")
     }
 
     hasFeaturedImage: _notNull(value: $__featuredImage)
@@ -83,7 +83,7 @@ query FilterTranslationPostsToUpdate(
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportDataFromOriginPost")
-  @include(if: $hasFeaturedImageTranslations)
+  @include(if: $hasOriginPostTranslationPosts)
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
