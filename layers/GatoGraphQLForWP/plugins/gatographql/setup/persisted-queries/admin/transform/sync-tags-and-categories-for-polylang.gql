@@ -39,15 +39,17 @@ query InitializeVariables
     @export(as: "originPostFeaturedImageID")
 
   emptyBool: _echo(value: false)
-    @export(as: "hasFeaturedImage")
     @export(as: "executeUpdate")
     @export(as: "hasOriginPostTranslationPosts")
   
   emptyArray: _echo(value: [])
     @export(as: "originPostTranslationPostIds")
+    @export(as: "originPostTagIDs")
+    @export(as: "originPostCategoryIDs")
   
   emptyJSON: _echo(value: {})
-    @export(as: "featuredImageTranslationLanguageIDs")
+    @export(as: "tagIDTranslationLanguageIDs")
+    @export(as: "categoryTranslationLanguageIDs")
 }
 
 query ExportDataFromOriginPost($postId: ID!)
@@ -69,15 +71,25 @@ query ExportDataFromOriginPost($postId: ID!)
     hasTranslationPosts: _notEmpty(value: $__translationPostIds)
       @export(as: "hasOriginPostTranslationPosts")
 
-    featuredImage @export(as: "originPostFeaturedImageID") {
+    tags @export(as: "originPostTagIDs") {
       id
-
-      polylangTranslationLanguageIDs
-        @export(as: "featuredImageTranslationLanguageIDs")
+      name
+      polylangTranslationLanguageIDs(filter: { includeSelf: true })
+        @export(
+          as: "tagIDTranslationLanguageIDs",
+          type: DICTIONARY
+        )
     }
 
-    hasFeaturedImage: _notNull(value: $__featuredImage)
-      @export(as: "hasFeaturedImage")
+    categories @export(as: "originPostCategoryIDs") {
+      id
+      name
+      polylangTranslationLanguageIDs(filter: { includeSelf: true })
+        @export(
+          as: "categoryTranslationLanguageIDs",
+          type: DICTIONARY
+        )
+    }
   }
 }
 
@@ -90,6 +102,41 @@ query FilterTranslationPostsToUpdate(
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
+
+    translationPostTagIDs: polylangLanguage
+      @passOnwards(as: "lang")
+      @applyField(
+        name: "_echo"
+        arguments: { value: $originPostTagIDs }
+        setResultInResponse: true
+      )
+      @underEachArrayItem(
+        passValueOnwardsAs: "tagID"
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $tagIDTranslationLanguageIDs,
+            by: { key: $tagID }
+          }
+          passOnwardsAs: "tagTranslationLanguageIDs"
+        )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $tagTranslationLanguageIDs,
+            by: { key: $lang },
+            failIfNonExistingKeyOrPath: false
+          }
+          setResultInResponse: true
+        )
+        @default(value: $tagID)
+      @export(
+        as: "translationPostTagIDs",
+        type: DICTIONARY
+      )
+    )
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
@@ -112,38 +159,25 @@ query FilterTranslationPostsToUpdate(
     @export(as: "executeUpdate")
 }
 
-mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
+mutation UpdateTagsAndCategoriesForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
 )
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateFeaturedImageInTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
-    @include(if: $hasFeaturedImage)
+  updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
   {
     id
-
-    polylangLanguage
-    translationFeaturedImageID: _objectProperty(
-      object: $featuredImageTranslationLanguageIDs,
-      by: {
-        key: $__polylangLanguage
-      }
-      failIfNonExistingKeyOrPath: false
+    tagIDs: _objectProperty(
+      object: $translationPostTagIDs,
+      by: { key: $__id }
     )
 
-    hasTranslationFeaturedImageID: _notNull(value: $__translationFeaturedImageID)
-
-    translationOrDefaultFeaturedImageID: _if(
-      condition: $__hasTranslationFeaturedImageID,
-      then: $__translationFeaturedImageID,
-      else: $originPostFeaturedImageID
-    )
-      
-    setFeaturedImage(input: {
-      mediaItemBy: {
-        id: $__translationOrDefaultFeaturedImageID
-      }
+    setTags(input: {
+      tagsBy: {
+        ids: $__tagIDs
+      },
+      append: false
     }) {
       status
       errors {
@@ -152,37 +186,12 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
           message
         }
       }
-      customPost {
+      post {
         __typename
-        ...on CustomPost {
-          featuredImage {
-            id
-            polylangLanguage
-          }
+        tags {
+          id
         }
-      }
-    }
-  }
-
-  removeFeaturedImageFromTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
-    @skip(if: $hasFeaturedImage)
-  {
-    id      
-    removeFeaturedImage {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      customPost {
-        __typename
-        ...on CustomPost {
-          featuredImage {
-            id
-          }
-        }
+        tagNames
       }
     }
   }
