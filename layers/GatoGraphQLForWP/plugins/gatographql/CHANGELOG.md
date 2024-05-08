@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - [PRO] Translate posts for Polylang (Classic editor) (#2667)
   - [PRO] Sync featured image for Polylang (#2669)
   - [PRO] Sync tags and categories for Polylang (#2670)
+- Support alternative filenames from 3rd-party plugins for extensions
 
 ### Fixed
 

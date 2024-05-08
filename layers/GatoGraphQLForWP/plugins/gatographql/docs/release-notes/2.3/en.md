@@ -54,6 +54,12 @@ For instance, to work with WooCommerce, we can currently use field `Root.updateC
 
 However, we cannot create an WooCommerce product. For that, we must wait until the "WooCommerce for Gato GraphQL" extension is available.
 
+## Support alternative filenames from 3rd-party plugins for extensions
+
+Gato GraphQL extensions with 3rd-party plugins now support alternative filenames from the plugin, where any of them being active will make the extension be enabled.
+
+For instance, the Polylang extension in Gato GraphQL PRO will be enabled if either `polylang/polylang.php` or `polylang-pro/polylang.php` is active.
+
 ## [PRO] Improvements
 
 - Added automation rules:
