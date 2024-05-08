@@ -1,6 +1,6 @@
 {
     "name": "persisted-query-endpoint-api-hierarchy",
-    "version": "2.3.0-dev",
+    "version": "2.3.0",
     "description": "Configure the API Hierarchy in the GraphQL persisted query",
     "author": "Leonardo Losoviz",
     "license": "MIT",
