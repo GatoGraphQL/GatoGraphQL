@@ -9,9 +9,13 @@ abstract class AbstractDependedOnWordPressPlugin
     public readonly string $slug;
     public readonly string $url;
 
+    /**
+     * @param string[] $alternativeFiles
+     */
     public function __construct(
         public readonly string $name,
         public readonly string $file,
+        public readonly array $alternativeFiles = [],
         ?string $url = null,
     ) {
         $this->slug = $this->extractSlugFromPluginFile($file);
