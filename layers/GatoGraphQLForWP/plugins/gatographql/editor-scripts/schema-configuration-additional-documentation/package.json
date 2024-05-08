@@ -1,6 +1,6 @@
 {
     "name": "schema-configuration-additional-documentation",
-    "version": "2.3.0",
+    "version": "2.4.0-dev",
     "description": "Sidebar component displaying Additional Documentation when editing a GraphQL Schema Configuration CPT",
     "author": "Leonardo Losoviz",
     "license": "MIT",

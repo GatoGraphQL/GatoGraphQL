@@ -1,6 +1,6 @@
 {
     "name": "schema-config-schema-custompost-meta",
-    "version": "2.3.0",
+    "version": "2.4.0-dev",
     "description": "Configure custom post meta options in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",

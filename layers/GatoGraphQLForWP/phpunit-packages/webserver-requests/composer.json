@@ -149,7 +149,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "graphql-by-pop/graphql-server": "^2.3"
+        "graphql-by-pop/graphql-server": "^2.4"
     },
     "require-dev": {
         "guzzlehttp/guzzle": "^7.4",
@@ -176,7 +176,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.3-dev"
+            "dev-master": "2.4-dev"
         }
     },
     "config": {
