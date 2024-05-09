@@ -22,6 +22,8 @@ With persisted queries, you can have the great user experience of GraphQL, while
 
 You can also create public and private custom endpoints, exposing each of them for some specific target (whether different applications, clients, teams, or other), and have a private endpoint feed data to your custom Gutenberg blocks.
 
+[youtube https://www.youtube.com/watch?v=uabFL_CoEWo]
+
 === Architectural foundation ===
 
 Gato GraphQL is **optimized for speed:** The query is resolved on linear time complexity, and does not suffer the "n+1" problem. The GraphQL schema is generated only the first time, and cached. The response can be cached, using standard HTTP Caching. And installing additional CPTs does not affect the speed of creating the schema.
