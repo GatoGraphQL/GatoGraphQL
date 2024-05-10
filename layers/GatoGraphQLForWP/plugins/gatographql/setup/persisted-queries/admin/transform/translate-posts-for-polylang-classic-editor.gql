@@ -48,7 +48,6 @@ query InitializeVariables
     @export(as: "fromLanguage")
   
   emptyArray: _echo(value: [])
-    @export(as: "translationLanguages")
     @export(as: "translationPostIds")
 }
 
@@ -67,8 +66,6 @@ query ExportOriginPost($postId: ID!)
     
 
     polylangTranslationLanguageIDs
-    translationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationLanguages")
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "translationPostIds")
 
