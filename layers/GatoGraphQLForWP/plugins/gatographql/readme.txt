@@ -177,7 +177,7 @@ And you can set it all up via automation, so that whenever a post in the default
 
 Both Polylang and Polylang PRO are supported.
 
-Check out the [Gato GraphQL with Polylang demos](https://gatographql.com/demos?tag=polylang) to learn more.
+Check out the [Gato GraphQL with Polylang demos](https://gatographql.com/demos?tag=Polylang) to learn more.
 
 = How is Gato GraphQL different than WPGraphQL? =
 
