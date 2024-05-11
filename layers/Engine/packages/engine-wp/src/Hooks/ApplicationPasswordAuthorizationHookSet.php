@@ -8,6 +8,16 @@ use PoP\ComponentModel\Constants\Params;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
+/**
+ * Use:
+ *
+ *   curl -i \
+ *     --user "{ USER }:{ APPLICATION PASSWORD}" \
+ *     -X POST \
+ *     -H "Content-Type: application/json" \
+ *     -d '{"query": "{ id me { name } }"}' \
+ *     https://mysite.com/graphql/?actions[]=gql-auth-app-pwd
+ */
 class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
     protected function init(): void
