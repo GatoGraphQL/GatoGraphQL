@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\EngineWP\Hooks;
 
 use PoP\ComponentModel\Constants\Params;
+use PoP\EngineWP\Constants\ParamValues;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
@@ -36,6 +37,9 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         }
 
         $actions = App::request(Params::ACTIONS) ?? App::query(Params::ACTIONS) ?? [];
-        return in_array('gql-auth-app-pwd', $actions);
+        return in_array(
+            ParamValues::GRAPHQL_AUTHORIZE_APPLICATION_PASSWORD,
+            $actions
+        );
     }
 }
