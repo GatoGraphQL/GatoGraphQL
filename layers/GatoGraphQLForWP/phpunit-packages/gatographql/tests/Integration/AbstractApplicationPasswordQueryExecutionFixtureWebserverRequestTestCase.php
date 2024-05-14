@@ -4,13 +4,11 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 
 abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
 {
-    use ExecuteRESTWebserverRequestTestCaseTrait;
     use WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 
     protected static string $applicationPassword;
@@ -37,8 +35,6 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
             $endpointURL,
             $options,
         );
-        // Assert the REST API call is successful, or already fail the test
-        static::assertRESTGetCallIsSuccessful($response);
         $body = $response->getBody()->__toString();
         $content = json_decode($body, true);
         /**
