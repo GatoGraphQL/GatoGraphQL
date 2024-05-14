@@ -29,12 +29,9 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         $this->applicationPassword = $this->executeRESTEndpointToGetApplicationPassword($dataName);
     }
 
-    /**
-     * @return array<string,mixed>
-     */
     protected function executeRESTEndpointToGetApplicationPassword(
         string $dataName,
-    ): array {
+    ): string {
         $client = static::getClient();
         $endpointURL = $this->getUserRESTEndpointURL($dataName);
         $options = [];
@@ -45,7 +42,13 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         // Assert the REST API call is successful, or already fail the test
         $this->assertRESTGetCallIsSuccessful($response);
         $body = $response->getBody()->__toString();
-        return json_decode($body, true);
+        $content = json_decode($body, true);
+        /**
+         * Same as UserMetaKeys::APP_PASSWORD
+         *
+         * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
+         */
+        return $content['app_password'] ?? '';
     }
 
     protected function getUserRESTEndpointURL(string $dataName): string
