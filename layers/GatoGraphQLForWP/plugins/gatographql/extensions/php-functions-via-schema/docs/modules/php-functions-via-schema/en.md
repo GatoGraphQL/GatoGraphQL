@@ -443,9 +443,9 @@ Append a string to another string.
 
 Encodes data with MIME base64.
 
-### `_strBase64Decode`
+<!-- ### `_strBase64Decode`
 
-Decodes data encoded with MIME base64, or `null` if the input contains character from outside the base64 alphabet.
+Decodes data encoded with MIME base64, or `null` if the input contains character from outside the base64 alphabet. -->
 
 ### `_strContains`
 
