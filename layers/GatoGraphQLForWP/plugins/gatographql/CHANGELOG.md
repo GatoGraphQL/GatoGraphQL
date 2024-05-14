@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Support Application Passwords (#2672)
+- Added documentation for new PRO field `_strBase64Encode` (#2673)
 
 ## 2.3.0 - 08/05/2024
 

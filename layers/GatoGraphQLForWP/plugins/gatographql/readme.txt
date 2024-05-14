@@ -272,6 +272,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 2.4.0 =
 * Support Application Passwords (#2672)
+* Added documentation for new PRO field `_strBase64Encode`
 
 = 2.3.0 =
 * Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)

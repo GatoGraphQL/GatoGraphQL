@@ -439,6 +439,14 @@ Replace placeholders inside a string with provided values.
 
 Append a string to another string.
 
+### `_strBase64Encode`
+
+Encodes data with MIME base64.
+
+<!-- ### `_strBase64Decode`
+
+Decodes data encoded with MIME base64, or `null` if the input contains character from outside the base64 alphabet. -->
+
 ### `_strContains`
 
 Indicates if a string contains another string.
