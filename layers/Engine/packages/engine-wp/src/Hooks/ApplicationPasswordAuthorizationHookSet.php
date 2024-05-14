@@ -26,7 +26,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
-    
+
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
         $this->moduleRegistry = $moduleRegistry;
@@ -48,7 +48,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
-    
+
     protected function init(): void
     {
         \add_filter(
@@ -95,7 +95,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
      * - Single endpoint
      * - Custom endpoints
      * - Persisted query endpoints
-     * 
+     *
      * @return string[]
      */
     protected function getGraphQLEndpointPaths(): array
