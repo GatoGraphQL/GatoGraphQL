@@ -7,3 +7,5 @@ echo "Adding Application Passwords for users"
 DEV_TESTS_APP_PASSWORD=$(wp user application-password create 1 dev_tests --porcelain)
 echo "Added application password $DEV_TESTS_APP_PASSWORD"
 wp user meta add 1 app_password $DEV_TESTS_APP_PASSWORD
+# Also save it under a non-admin user, so it can be accessed without being logged-in
+wp user meta add 2 app_password $DEV_TESTS_APP_PASSWORD
