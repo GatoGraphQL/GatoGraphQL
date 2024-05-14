@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\UserMetaKeys;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\BulkPluginActivationDeactivationExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GatoGraphQLAdminEndpointsTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHook;
@@ -55,6 +56,7 @@ class Plugin
         $this->maybeAdaptRESTAPIResponse();
 
         add_action('init', $this->registerTestingTaxonomies(...));
+        add_action('init', $this->registerRESTFields(...));
     }
 
     /**
@@ -182,6 +184,28 @@ class Plugin
                 __('dummy CPTs'),
             )
         );
+    }
+
+    /**
+     * Taxonomies used for testing the plugin
+     */
+    protected function registerRESTFields(): void
+    {
+        \register_rest_field(
+            'user',
+            UserMetaKeys::APP_PASSWORD,
+            [
+                'get_callback' => $this->userMetaCallback(...),
+            ]
+        );
+    }
+
+    /**
+     * @param array<string,mixed> $userData
+     */
+    function userMetaCallback(array $userData, string $field_name): mixed
+    {
+        return \get_user_meta($userData['id'], $field_name, true);
     }
 
     /**
