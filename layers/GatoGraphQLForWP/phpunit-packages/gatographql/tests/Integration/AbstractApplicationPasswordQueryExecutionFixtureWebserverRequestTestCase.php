@@ -13,34 +13,32 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
     use ExecuteRESTWebserverRequestTestCaseTrait;
     use WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 
-    protected string $applicationPassword;
+    protected static string $applicationPassword;
 
     /**
      * Retrieve the admin's application password
      */
-    protected function setUp(): void
+    public static function setUpBeforeClass(): void
     {
-        parent::setUp();
+        parent::setUpBeforeClass();
 
         /**
          * Modify the post data before executing the ":enabled" test
          */
-        $dataName = $this->getDataName();
-        $this->applicationPassword = $this->executeRESTEndpointToGetApplicationPassword($dataName);
+        self::$applicationPassword = static::executeRESTEndpointToGetApplicationPassword();
     }
 
-    protected function executeRESTEndpointToGetApplicationPassword(
-        string $dataName,
-    ): string {
+    protected static function executeRESTEndpointToGetApplicationPassword(): string
+    {
         $client = static::getClient();
-        $endpointURL = $this->getUserRESTEndpointURL($dataName);
+        $endpointURL = static::getUserRESTEndpointURL();
         $options = [];
         $response = $client->get(
             $endpointURL,
             $options,
         );
         // Assert the REST API call is successful, or already fail the test
-        $this->assertRESTGetCallIsSuccessful($response);
+        static::assertRESTGetCallIsSuccessful($response);
         $body = $response->getBody()->__toString();
         $content = json_decode($body, true);
         /**
@@ -51,7 +49,7 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         return $content['app_password'] ?? '';
     }
 
-    protected function getUserRESTEndpointURL(string $dataName): string
+    protected static function getUserRESTEndpointURL(): string
     {
         /**
          * The app_password is also stored under this (non-admin) user.
@@ -67,7 +65,7 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         return sprintf(
             '%s:%s',
             Environment::getIntegrationTestsAuthenticatedAdminUserUsername(),
-            ''
+            self::$applicationPassword
         );
     }
 }
