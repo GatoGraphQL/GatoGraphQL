@@ -53,7 +53,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
     {
         \add_filter(
             'application_password_is_api_request',
-            $this->isAPIRequest(...),
+            $this->isGraphQLAPIRequest(...),
             PHP_INT_MAX // Execute last
         );
     }
@@ -69,7 +69,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
      * if any of them is enabled, check if the URL starts with their
      * path (even if that specific endpoint is disabled).
      */
-    public function isAPIRequest(bool $isAPIRequest): bool
+    public function isGraphQLAPIRequest(bool $isAPIRequest): bool
     {
         if ($isAPIRequest) {
             return $isAPIRequest;
