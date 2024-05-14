@@ -74,16 +74,21 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             );
         }
 
-        // Check if the requested URL starts with any of the GraphQL endpoints
-        $graphQLEndpointPathPrefixes = array_map(
-            fn (string $path) => trailingslashit($path),
+        /**
+         * Check if the requested URL starts with any of the GraphQL endpoints.
+         *
+         * First slash them both
+         */
+        $requestedURLPath = '/' . trim(App::getRequest()->getPathInfo(), '/\\') . '/';
+        $graphQLEndpointPathPrefixes = array_values(array_unique(array_map(
+            fn (string $path) => '/' . trim($path, '/\\') . '/',
             $graphQLEndpointPathPrefixes
-        );
+        )));
 
         $someVar = true;
 
-        foreach ($graphQLEndpointPathPrefixes as $graphQLPath) {
-            if (strpos($_SERVER['REQUEST_URI'], $graphQLPath) === 0) {
+        foreach ($graphQLEndpointPathPrefixes as $graphQLEndpointPathPrefix) {
+            if (str_starts_with($requestedURLPath, $graphQLEndpointPathPrefix)) {
                 return true;
             }
         }
