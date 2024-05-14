@@ -270,6 +270,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 2.4.0 =
+* Support Application Passwords (#2672)
+
 = 2.3.0 =
 * Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)
 * Added documentation for integration with Polylang (#2664)
