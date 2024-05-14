@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.4.0 - DATE
 
+### Improvements
+
+- Support Application Passwords (#2672)
+
 ## 2.3.0 - 08/05/2024
 
 ### Improvements
