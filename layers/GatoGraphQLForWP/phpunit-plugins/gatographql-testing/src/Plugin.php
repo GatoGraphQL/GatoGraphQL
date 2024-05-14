@@ -203,7 +203,8 @@ class Plugin
     /**
      * @param array<string,mixed> $userData
      */
-    function userMetaCallback(array $userData, string $field_name) {
+    function userMetaCallback(array $userData, string $field_name): mixed
+    {
         return \get_user_meta($userData['id'], $field_name, true);
     }
 
