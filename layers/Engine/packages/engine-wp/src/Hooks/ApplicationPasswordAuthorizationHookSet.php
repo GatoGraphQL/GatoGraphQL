@@ -54,29 +54,35 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
 
-        $graphQLPaths = [];
+        $graphQLEndpointPathPrefixes = [];
         if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
-            $graphQLPaths[] = $userSettingsManager->getSetting(
+            $graphQLEndpointPathPrefixes[] = $userSettingsManager->getSetting(
                 EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 ModuleSettingOptions::PATH
             );
         }
         if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS)) {
-            $graphQLPaths[] = $userSettingsManager->getSetting(
+            $graphQLEndpointPathPrefixes[] = $userSettingsManager->getSetting(
                 EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 ModuleSettingOptions::PATH
             );
         }
         if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
-            $graphQLPaths[] = $userSettingsManager->getSetting(
+            $graphQLEndpointPathPrefixes[] = $userSettingsManager->getSetting(
                 EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 ModuleSettingOptions::PATH
             );
         }
 
+        // Check if the requested URL starts with any of the GraphQL endpoints
+        $graphQLEndpointPathPrefixes = array_map(
+            fn (string $path) => trailingslashit($path),
+            $graphQLEndpointPathPrefixes
+        );
+
         $someVar = true;
 
-        foreach ($graphQLPaths as $graphQLPath) {
+        foreach ($graphQLEndpointPathPrefixes as $graphQLPath) {
             if (strpos($_SERVER['REQUEST_URI'], $graphQLPath) === 0) {
                 return true;
             }
