@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace PoP\EngineWP\Hooks;
 
+use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use PoP\ComponentModel\Constants\Params;
 use PoP\EngineWP\Constants\ParamValues;
 use PoP\Root\App;
@@ -30,11 +34,54 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         );
     }
 
+    /**
+     * Check if requesting a GraphQL endpoint.
+     *
+     * Because the AppStateProviders have not been initialized yet,
+     * we can't check ->doingJSON().
+     *
+     * As a workaround, retrieve the configuration for all GraphQL endpoints
+     * (Single endpoint, custom endpoint, and persisted queries) and,
+     * if any of them is enabled, check if the URL starts with their
+     * path (even if that specific endpoint is disabled).
+     */
     public function isAPIRequest(bool $isAPIRequest): bool
     {
         if ($isAPIRequest) {
             return $isAPIRequest;
         }
+
+        $moduleRegistry = ModuleRegistryFacade::getInstance();
+        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+
+        $graphQLPaths = [];
+        if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
+            $graphQLPaths[] = $userSettingsManager->getSetting(
+                EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
+                ModuleSettingOptions::PATH
+            );
+        }
+        if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS)) {
+            $graphQLPaths[] = $userSettingsManager->getSetting(
+                EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
+                ModuleSettingOptions::PATH
+            );
+        }
+        if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
+            $graphQLPaths[] = $userSettingsManager->getSetting(
+                EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
+                ModuleSettingOptions::PATH
+            );
+        }
+
+        $someVar = true;
+
+        foreach ($graphQLPaths as $graphQLPath) {
+            if (strpos($_SERVER['REQUEST_URI'], $graphQLPath) === 0) {
+                return true;
+            }
+        }
+        return false;
 
         $actions = App::request(Params::ACTIONS) ?? App::query(Params::ACTIONS) ?? [];
         return in_array(
