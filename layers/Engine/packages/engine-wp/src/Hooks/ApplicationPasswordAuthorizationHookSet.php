@@ -49,6 +49,25 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             return $isAPIRequest;
         }
 
+        /**
+         * Check if the (slashed) requested URL starts with any
+         * of the (slashed) GraphQL endpoints.
+         */
+        $requestedURLPath = '/' . trim(App::getRequest()->getPathInfo(), '/\\') . '/';
+        foreach ($this->getGraphQLEndpointPathPrefixes() as $graphQLEndpointPathPrefix) {
+            $graphQLEndpointPathPrefix = '/' . trim($graphQLEndpointPathPrefix, '/\\') . '/';
+            if (str_starts_with($requestedURLPath, $graphQLEndpointPathPrefix)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getGraphQLEndpointPathPrefixes(): array
+    {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
 
@@ -72,17 +91,6 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             );
         }
 
-        /**
-         * Check if the (slashed) requested URL starts with any
-         * of the (slashed) GraphQL endpoints.
-         */
-        $requestedURLPath = '/' . trim(App::getRequest()->getPathInfo(), '/\\') . '/';
-        foreach ($graphQLEndpointPathPrefixes as $graphQLEndpointPathPrefix) {
-            $graphQLEndpointPathPrefix = '/' . trim($graphQLEndpointPathPrefix, '/\\') . '/';
-            if (str_starts_with($requestedURLPath, $graphQLEndpointPathPrefix)) {
-                return true;
-            }
-        }
-        return false;
+        return $graphQLEndpointPathPrefixes;
     }
 }
