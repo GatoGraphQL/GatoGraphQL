@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQLTesting;
 
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\UserMetaKeys;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\BulkPluginActivationDeactivationExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GatoGraphQLAdminEndpointsTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHook;
@@ -192,7 +193,7 @@ class Plugin
     {
         \register_rest_field(
             'user',
-            'app_password',
+            UserMetaKeys::APP_PASSWORD,
             [
                 'get_callback' => $this->userMetaCallback(...),
             ]
