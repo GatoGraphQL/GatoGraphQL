@@ -54,9 +54,9 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
          * of the (slashed) GraphQL endpoints.
          */
         $requestedURLPath = '/' . trim(App::getRequest()->getPathInfo(), '/\\') . '/';
-        foreach ($this->getGraphQLEndpointPathPrefixes() as $graphQLEndpointPathPrefix) {
-            $graphQLEndpointPathPrefix = '/' . trim($graphQLEndpointPathPrefix, '/\\') . '/';
-            if (str_starts_with($requestedURLPath, $graphQLEndpointPathPrefix)) {
+        foreach ($this->getGraphQLEndpointPaths() as $graphQLEndpointPath) {
+            $graphQLEndpointPath = '/' . trim($graphQLEndpointPath, '/\\') . '/';
+            if (str_starts_with($requestedURLPath, $graphQLEndpointPath)) {
                 return true;
             }
         }
@@ -66,31 +66,31 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
     /**
      * @return string[]
      */
-    protected function getGraphQLEndpointPathPrefixes(): array
+    protected function getGraphQLEndpointPaths(): array
     {
         $moduleRegistry = ModuleRegistryFacade::getInstance();
         $userSettingsManager = UserSettingsManagerFacade::getInstance();
 
-        $graphQLEndpointPathPrefixes = [];
+        $graphQLEndpointPaths = [];
         if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
-            $graphQLEndpointPathPrefixes[] = $userSettingsManager->getSetting(
+            $graphQLEndpointPaths[] = $userSettingsManager->getSetting(
                 EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 ModuleSettingOptions::PATH
             );
         }
         if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS)) {
-            $graphQLEndpointPathPrefixes[] = $userSettingsManager->getSetting(
+            $graphQLEndpointPaths[] = $userSettingsManager->getSetting(
                 EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
                 ModuleSettingOptions::PATH
             );
         }
         if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
-            $graphQLEndpointPathPrefixes[] = $userSettingsManager->getSetting(
+            $graphQLEndpointPaths[] = $userSettingsManager->getSetting(
                 EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
                 ModuleSettingOptions::PATH
             );
         }
 
-        return $graphQLEndpointPathPrefixes;
+        return $graphQLEndpointPaths;
     }
 }
