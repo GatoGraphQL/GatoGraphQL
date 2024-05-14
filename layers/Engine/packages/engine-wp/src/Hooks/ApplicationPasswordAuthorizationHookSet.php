@@ -90,6 +90,12 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
     }
 
     /**
+     * GraphQL endpoint paths (if enabled):
+     *
+     * - Single endpoint
+     * - Custom endpoints
+     * - Persisted query endpoints
+     * 
      * @return string[]
      */
     protected function getGraphQLEndpointPaths(): array
