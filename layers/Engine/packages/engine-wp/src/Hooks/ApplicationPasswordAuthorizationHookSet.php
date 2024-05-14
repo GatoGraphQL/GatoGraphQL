@@ -8,8 +8,6 @@ use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use PoP\ComponentModel\Constants\Params;
-use PoP\EngineWP\Constants\ParamValues;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
@@ -21,7 +19,7 @@ use PoP\Root\Hooks\AbstractHookSet;
  *     -X POST \
  *     -H "Content-Type: application/json" \
  *     -d '{"query": "{ id me { name } }"}' \
- *     https://mysite.com/graphql/?actions[]=gql-auth-app-pwd
+ *     https://mysite.com/graphql/
  */
 class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
@@ -86,11 +84,5 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             }
         }
         return false;
-
-        $actions = App::request(Params::ACTIONS) ?? App::query(Params::ACTIONS) ?? [];
-        return in_array(
-            ParamValues::GRAPHQL_AUTHORIZE_APPLICATION_PASSWORD,
-            $actions
-        );
     }
 }
