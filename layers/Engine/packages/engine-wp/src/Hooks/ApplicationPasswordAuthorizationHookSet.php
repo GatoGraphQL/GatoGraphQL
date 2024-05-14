@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PoP\EngineWP\Hooks;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
-use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
+use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 
@@ -23,6 +24,31 @@ use PoP\Root\Hooks\AbstractHookSet;
  */
 class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
+    private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
+    
+    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    {
+        $this->moduleRegistry = $moduleRegistry;
+    }
+    final protected function getModuleRegistry(): ModuleRegistryInterface
+    {
+        if ($this->moduleRegistry === null) {
+            /** @var ModuleRegistryInterface */
+            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
+            $this->moduleRegistry = $moduleRegistry;
+        }
+        return $this->moduleRegistry;
+    }
+    final public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
+    {
+        $this->userSettingsManager = $userSettingsManager;
+    }
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
+    
     protected function init(): void
     {
         \add_filter(
@@ -68,8 +94,8 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
      */
     protected function getGraphQLEndpointPaths(): array
     {
-        $moduleRegistry = ModuleRegistryFacade::getInstance();
-        $userSettingsManager = UserSettingsManagerFacade::getInstance();
+        $moduleRegistry = $this->getModuleRegistry();
+        $userSettingsManager = $this->getUserSettingsManager();
 
         $graphQLEndpointPaths = [];
         if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
