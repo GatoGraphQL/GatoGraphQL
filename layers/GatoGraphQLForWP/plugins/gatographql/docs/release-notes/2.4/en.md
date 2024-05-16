@@ -4,6 +4,8 @@
 
 - Support Application Passwords ([#2672](https://github.com/GatoGraphQL/GatoGraphQL/pull/2672))
 - Added documentation for new PRO field `_strBase64Encode` ([#2673](https://github.com/GatoGraphQL/GatoGraphQL/pull/2673))
+- Link extensions to the Extensions Reference in gatographql.com ([#2675](https://github.com/GatoGraphQL/GatoGraphQL/pull/2675))
+
 
 ## Fixed
 
