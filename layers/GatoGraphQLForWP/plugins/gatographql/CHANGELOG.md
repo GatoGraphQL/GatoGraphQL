@@ -11,6 +11,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Support Application Passwords (#2672)
 - Added documentation for new PRO field `_strBase64Encode` (#2673)
 
+### Fixed
+
+- Highlight extensions and enable link to visit in website (#2674)
+
 ## 2.3.0 - 08/05/2024
 
 ### Improvements
