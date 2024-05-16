@@ -40,7 +40,7 @@ The most powerful GraphQL server for WordPress.
 
 <div class="hide-for-customers" markdown=1>
 
-_Support is provided to customers of any Gato GraphQL product (bundles or extensions) with an active license._
+_Support is provided to customers of any Gato GraphQL product with an active license._
 
 </div>
 
