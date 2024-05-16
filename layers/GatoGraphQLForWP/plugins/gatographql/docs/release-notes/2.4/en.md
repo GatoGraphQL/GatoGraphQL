@@ -7,4 +7,4 @@
 
 ## Fixed
 
-- Highlight extensions and enable link to visit in website
+- Highlight extensions and enable link to visit in website ([#2674](https://github.com/GatoGraphQL/GatoGraphQL/pull/2674))

@@ -13,7 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Highlight extensions and enable link to visit in website
+- Highlight extensions and enable link to visit in website (#2674)
 
 ## 2.3.0 - 08/05/2024
 
