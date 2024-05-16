@@ -188,7 +188,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         if (
             str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')
             // Starting from WordPress 6.5
-            || '<button type="button" class="install-now button button-disabled" disabled="disabled"'
+            || str_starts_with($actionLinks[0] ?? '', '<button type="button" class="install-now button button-disabled" disabled="disabled"')
         ) {
             $actionLinks[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s</a>',
@@ -304,7 +304,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
             if (
                 str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')
-                || str_starts_with($actionLinks[0] ?? '', '<button type="button" class="install-now button button-disabled" disabled="disabled"')
+                // // Starting from WordPress 6.5
+                // || str_starts_with($actionLinks[0] ?? '', '<button type="button" class="install-now button button-disabled" disabled="disabled"')
             ) {
                 $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed', $pos, strlen($pluginCardClassname));
             }
