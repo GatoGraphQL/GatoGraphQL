@@ -8,14 +8,11 @@ use PoP\Root\App;
 use GraphQLByPoP\GraphQLEndpointForWP\Module;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration;
 use PoPAPI\APIEndpointsForWP\EndpointHandlers\AbstractEndpointHandler;
-use PoP\Root\Services\BasicServiceTrait;
 use PoPAPI\GraphQLAPI\Module as GatoGraphQLModule;
 use PoPAPI\GraphQLAPI\DataStructureFormatters\GraphQLDataStructureFormatter;
 
 class GraphQLEndpointHandler extends AbstractEndpointHandler
 {
-    use BasicServiceTrait;
-
     private ?GraphQLDataStructureFormatter $graphQLDataStructureFormatter = null;
 
     final public function setGraphQLDataStructureFormatter(GraphQLDataStructureFormatter $graphQLDataStructureFormatter): void
