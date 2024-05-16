@@ -79,7 +79,7 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return sprintf(
-            '%s/extensions/%s/',
+            '%s/extensions-reference/%s/',
             $moduleConfiguration->getGatoGraphQLWebsiteURL(),
             $this->getSlug($module)
         );
