@@ -4,12 +4,31 @@ declare(strict_types=1);
 
 namespace PoPAPI\APIEndpoints;
 
-use PoP\Root\App;
+use PoP\Root\Routing\RoutingHelperServiceInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
+use PoP\Root\Services\BasicServiceTrait;
 
 abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiatedService implements EndpointHandlerInterface
 {
+    use BasicServiceTrait;
+
     protected ?string $endpoint = null;
+
+    private ?RoutingHelperServiceInterface $routingHelperService = null;
+
+    final public function setRoutingHelperService(RoutingHelperServiceInterface $routingHelperService): void
+    {
+        $this->routingHelperService = $routingHelperService;
+    }
+    final protected function getRoutingHelperService(): RoutingHelperServiceInterface
+    {
+        if ($this->routingHelperService === null) {
+            /** @var RoutingHelperServiceInterface */
+            $routingHelperService = $this->instanceManager->getInstance(RoutingHelperServiceInterface::class);
+            $this->routingHelperService = $routingHelperService;
+        }
+        return $this->routingHelperService;
+    }
 
     /**
      * Initialize the client
@@ -40,7 +59,7 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
     protected function getRequestedURI(): string
     {
         // Check if the URL ends with either /api/graphql/ or /api/rest/ or /api/
-        $uri = EndpointUtils::removeMarkersFromURI(App::server('REQUEST_URI'));
+        $uri = EndpointUtils::removeMarkersFromURI($this->getRoutingHelperService()->getRequestURI());
         // Same as the endpoint, make sure the URI has "/" in both ends
         return EndpointUtils::slashURI($uri);
     }
