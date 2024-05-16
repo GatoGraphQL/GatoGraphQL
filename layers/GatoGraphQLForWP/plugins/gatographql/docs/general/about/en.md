@@ -14,11 +14,19 @@ The most powerful GraphQL server for WordPress.
 
 <br/>
 
+**Plugin in WordPress.org:** [wordpress.org/plugins/gatographql/](https://wordpress.org/plugins/gatographql/)
+
+<br/>
+
 **GitHub:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
 
 <br/>
 
 **Extension Starter:** [github.com/GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter)
+
+<br/>
+
+**YouTube channel:** [youtube.com/@GatoGraphQL](https://www.youtube.com/@GatoGraphQL)
 
 </p>
 
