@@ -59,7 +59,8 @@ abstract class AbstractEndpointHandler extends AbstractAutomaticallyInstantiated
     protected function getRequestedURI(): string
     {
         // Check if the URL ends with either /api/graphql/ or /api/rest/ or /api/
-        $uri = EndpointUtils::removeMarkersFromURI($this->getRoutingHelperService()->getRequestURI());
+        $requestURI = $this->getRoutingHelperService()->getRequestURI() ?? '';
+        $uri = EndpointUtils::removeMarkersFromURI($requestURI);
         // Same as the endpoint, make sure the URI has "/" in both ends
         return EndpointUtils::slashURI($uri);
     }
