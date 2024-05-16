@@ -185,7 +185,10 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         /**
          * Replace the "Install Now" action message
          */
-        if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')) {
+        if (str_starts_with($action_links[0] ?? '', '<a class="install-now button"')
+            // Starting from WordPress 6.5
+            || '<button type="button" class="install-now button button-disabled" disabled="disabled"'
+        ) {
             $action_links[0] = sprintf(
                 '<a class="install-now button" data-slug="%s" href="%s" aria-label="%s" data-name="%s" target="%s">%s</a>',
                 esc_attr($plugin['slug']),
@@ -194,12 +197,6 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'])),
                 esc_attr($plugin['name']),
                 '_blank',
-                $this->getPluginInstallActionLabel($plugin)
-            );
-        } elseif (str_starts_with($action_links[0] ?? '', '<button type="button" class="install-now button button-disabled" disabled="disabled"')) {
-            // WordPress 6.5
-            $action_links[0] = sprintf(
-                '<button type="button" class="install-now button button-disabled" disabled="disabled">%s</button>',
                 $this->getPluginInstallActionLabel($plugin)
             );
         }
