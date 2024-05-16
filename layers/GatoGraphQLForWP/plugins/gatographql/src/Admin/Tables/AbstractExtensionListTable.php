@@ -185,7 +185,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         /**
          * Replace the "Install Now" action message
          */
-        if (str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')
+        if (
+            str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')
             // Starting from WordPress 6.5
             || '<button type="button" class="install-now button button-disabled" disabled="disabled"'
         ) {
@@ -301,7 +302,8 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
              * being replaced in "access-control-visitor-ip"
              */
             $actionLinks = $this->pluginActionLinks[$pluginName] ?? [];
-            if (str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')
+            if (
+                str_starts_with($actionLinks[0] ?? '', '<a class="install-now button"')
                 || str_starts_with($actionLinks[0] ?? '', '<button type="button" class="install-now button button-disabled" disabled="disabled"')
             ) {
                 $html = substr_replace($html, $pluginCardClassname . ' plugin-card-non-installed', $pos, strlen($pluginCardClassname));
