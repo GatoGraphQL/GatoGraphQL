@@ -17,7 +17,10 @@ class RoutingHelperService implements RoutingHelperServiceInterface
             return null;
         }
 
-        // Allow to remove the language information from qTranslate (https://domain.com/en/...)
+        /**
+         * Allow to remove the language information from Multisite network
+         * based on subfolders (https://domain.com/en/...)
+         */
         return App::applyFilters(
             HookNames::REQUEST_URI,
             App::server('REQUEST_URI')
