@@ -4,9 +4,9 @@ The most powerful GraphQL server for WordPress.
 
 ## Home Links
 
-<div style="display: flex; gap: 10px; margin-top: 10px;">
+<div style="display: flex; gap: 20px; margin-top: 10px;">
 
-<img src="../../../assets/img/logos/GatoGraphQL-logo-suki.png" style="height: 80px;">
+<img src="../../../assets/img/logos/GatoGraphQL-logo-suki.png" style="height: 175px;">
 
 <div>
 
@@ -31,7 +31,7 @@ The most powerful GraphQL server for WordPress.
   **YouTube channel:** [youtube.com/@GatoGraphQL](https://www.youtube.com/@GatoGraphQL)
 
   </p>
-  
+
 </div>
 
 </div>
