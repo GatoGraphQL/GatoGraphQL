@@ -647,11 +647,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::REQUIRE_COMMENTER_NAME_AND_EMAIL,
                 'callback' => fn () => \get_option('require_name_email') === '1',
             ],
-            // For a Multisite network, remove the site subfolder path from the REQUEST_URI
+            /**
+             * For a Multisite network based on subfolders,
+             * remove the subfolder path from the REQUEST_URI
+             */
             [
                 'class' => \PoPCMSSchema\SchemaCommons\Module::class,
                 'envVariable' => \PoPCMSSchema\SchemaCommons\Environment::OVERRIDE_REQUEST_URI,
-                'callback' => fn () => \is_multisite(),
+                'callback' => fn () => \is_multisite() && !\is_subdomain_install(),
             ],
         ];
     }
