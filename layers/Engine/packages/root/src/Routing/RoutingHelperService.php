@@ -11,20 +11,31 @@ class RoutingHelperService implements RoutingHelperServiceInterface
 {
     use BasicServiceTrait;
 
+    private bool $requestURIInitialized = false;
+    private ?string $requestURI = null;
+
     public function getRequestURI(): ?string
     {
+        if ($this->requestURIInitialized) {
+            return $this->requestURI;
+        }
+
+        $this->requestURIInitialized = true;
+
         if (!App::isHTTPRequest()) {
-            return null;
+            $this->requestURI = null;
+            return $this->requestURI;
         }
 
         /**
          * Allow to remove the language information from Multisite network
          * based on subfolders (https://domain.com/en/...)
          */
-        return App::applyFilters(
+        $this->requestURI = App::applyFilters(
             HookNames::REQUEST_URI,
             App::server('REQUEST_URI')
         );
+        return $this->requestURI;
     }
 
     public function getRequestURIPath(): ?string
