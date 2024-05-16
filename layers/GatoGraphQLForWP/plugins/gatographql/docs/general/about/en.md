@@ -8,27 +8,31 @@ The most powerful GraphQL server for WordPress.
 
 <img src="../../../assets/img/logos/GatoGraphQL-logo-suki.png" style="height: 80px;">
 
-<p markdown=1>
+<div>
 
-**Website:** [gatographql.com](https://gatographql.com)
+  <p markdown=1>
 
-<br/>
+  **Website:** [gatographql.com](https://gatographql.com)
 
-**Plugin in WordPress.org:** [wordpress.org/plugins/gatographql/](https://wordpress.org/plugins/gatographql/)
+  </p><p markdown=1>
 
-<br/>
+  **Plugin in WordPress.org:** [wordpress.org/plugins/gatographql/](https://wordpress.org/plugins/gatographql/)
 
-**GitHub:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
+  </p><p markdown=1>
 
-<br/>
+  **GitHub:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
 
-**Extension Starter:** [github.com/GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter)
+  </p><p markdown=1>
 
-<br/>
+  **Extension Starter:** [github.com/GatoGraphQL/ExtensionStarter](https://github.com/GatoGraphQL/ExtensionStarter)
 
-**YouTube channel:** [youtube.com/@GatoGraphQL](https://www.youtube.com/@GatoGraphQL)
+  </p><p markdown=1>
 
-</p>
+  **YouTube channel:** [youtube.com/@GatoGraphQL](https://www.youtube.com/@GatoGraphQL)
+
+  </p>
+  
+</div>
 
 </div>
 
