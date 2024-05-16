@@ -40,10 +40,6 @@ class RoutingHelperService implements RoutingHelperServiceInterface
 
     public function getRequestURIPath(): ?string
     {
-        if (!App::isHTTPRequest()) {
-            return null;
-        }
-
         $route = $this->getRequestURI();
         if ($route === null) {
             return null;
