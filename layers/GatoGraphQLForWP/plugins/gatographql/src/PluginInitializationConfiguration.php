@@ -642,9 +642,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         if (!is_multisite() || is_subdomain_install()) {
             return $path;
         }
-        $current_network = get_network();
-        $subfolder = $current_network->path;
-        return '/' . $subfolder . $path;
+        $currentNetwork = get_network();
+        return $currentNetwork->path . $path;
     }
 
     /**
