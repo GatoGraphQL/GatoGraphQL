@@ -36,6 +36,13 @@ trait WPClientTrait
     {
         /** @var GraphQLEndpointForWPModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
-        return $moduleConfiguration->getGraphQLAPIEndpoint();
+        $endpoint = $moduleConfiguration->getGraphQLAPIEndpoint();
+
+        /**
+         * Because of the Multisite network based on subfolders,
+         * which has the path embedded within the domain,
+         * we must pass the full path
+         */
+        return untrailingslashit(get_site_url()) . $endpoint;
     }
 }
