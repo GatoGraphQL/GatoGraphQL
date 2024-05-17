@@ -13,6 +13,8 @@ use PoP\Root\App;
 use PoP\Root\Services\BasicServiceTrait;
 
 use function is_user_logged_in;
+use function is_multisite;
+use function is_super_admin;
 
 /**
  * UserAuthorization
@@ -68,6 +70,16 @@ class UserAuthorization implements UserAuthorizationInterface
         if (!is_user_logged_in()) {
             return false;
         }
+
+        /**
+         * The multisite super admin has ID=1 and no roles!!!
+         * Hence, to allow super admins to access the services,
+         * grant explicit access.
+         */
+        if (is_multisite() && is_super_admin()) {
+            return true;
+        }
+
         $userAuthorizationScheme = $this->getUserAuthorizationScheme();
         $user = wp_get_current_user();
         return $userAuthorizationScheme->canAccessSchemaEditor($user);
