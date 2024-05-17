@@ -74,6 +74,8 @@ use PoP\Root\Module\ModuleInterface;
 
 use function get_post_types;
 use function get_taxonomies;
+use function is_multisite;
+use function is_subdomain_install;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -628,6 +630,19 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'option' => MutationSchemaTypeModuleResolver::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA,
             ],
         ];
+    }
+
+    /**
+     * For a Multisite network based on subfolders:
+     * Append the subfolder before the endpoint path.
+     */
+    protected function maybeAddMultisiteSubfolderToPath(string $path): string
+    {
+        if (!is_multisite() || is_subdomain_install()) {
+            return $path;
+        }
+        $subfolder = '';
+        return '/' . $subfolder . $path;
     }
 
     /**
