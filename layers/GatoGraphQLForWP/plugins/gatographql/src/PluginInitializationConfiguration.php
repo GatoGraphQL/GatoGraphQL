@@ -691,18 +691,22 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => Module::class,
                 'envVariable' => Environment::ADD_EXCERPT_AS_DESCRIPTION,
             ],
-            [
-                'class' => GraphQLEndpointForWPModule::class,
-                'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
-            ],
-            [
-                'class' => GraphQLClientsForWPModule::class,
-                'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
-            ],
-            [
-                'class' => GraphQLClientsForWPModule::class,
-                'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
-            ],
+            /**
+             * Because of Multisite network based on subfolders,
+             * these paths can't be hardcoded
+             */
+            // [
+            //     'class' => GraphQLEndpointForWPModule::class,
+            //     'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
+            // ],
+            // [
+            //     'class' => GraphQLClientsForWPModule::class,
+            //     'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
+            // ],
+            // [
+            //     'class' => GraphQLClientsForWPModule::class,
+            //     'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
+            // ],
             [
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::NAMESPACE_TYPES_AND_INTERFACES,
