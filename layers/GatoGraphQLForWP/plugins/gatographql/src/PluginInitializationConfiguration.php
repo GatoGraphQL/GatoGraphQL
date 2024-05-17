@@ -72,6 +72,7 @@ use PoP\GraphQLParser\Module as GraphQLParserModule;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Module\ModuleInterface;
 
+use function get_network;
 use function get_post_types;
 use function get_taxonomies;
 use function is_multisite;
@@ -641,7 +642,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         if (!is_multisite() || is_subdomain_install()) {
             return $path;
         }
-        $subfolder = '';
+        $current_network = get_network();
+        $subfolder = $current_network->path;
         return '/' . $subfolder . $path;
     }
 
