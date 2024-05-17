@@ -57,7 +57,7 @@ class RoutingHookSet extends AbstractHookSet
      *
      * Watch out: If the homeURL is not contained in the current URL,
      * then there's a misconfiguration in the server.
-     * 
+     *
      * This logic will remove the language information from a Multisite
      * network based on subfolders (https://domain.com/en/...)
      */
