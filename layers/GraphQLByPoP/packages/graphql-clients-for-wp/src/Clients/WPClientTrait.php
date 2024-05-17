@@ -10,6 +10,8 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
 
+use function get_site_url;
+
 trait WPClientTrait
 {
     /**
@@ -36,6 +38,13 @@ trait WPClientTrait
     {
         /** @var GraphQLEndpointForWPModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
-        return $moduleConfiguration->getGraphQLAPIEndpoint();
+        $endpoint = $moduleConfiguration->getGraphQLAPIEndpoint();
+
+        /**
+         * Because of the Multisite network based on subfolders,
+         * which has the path embedded within the domain,
+         * we must pass the full path
+         */
+        return untrailingslashit(get_site_url()) . $endpoint;
     }
 }
