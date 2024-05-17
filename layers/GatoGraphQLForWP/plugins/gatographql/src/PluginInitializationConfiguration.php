@@ -125,10 +125,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLEndpointForWPEnvironment::GRAPHQL_API_ENDPOINT,
                 'module' => EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getURLPathSettingValue(
-                    $value,
-                    EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                    ModuleSettingOptions::PATH
+                'callback' => fn ($value) => $this->maybeAddMultisiteSubfolderToPath(
+                    $pluginOptionsFormHandler->getURLPathSettingValue(
+                        $value,
+                        EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
+                        ModuleSettingOptions::PATH
+                    )
                 ),
                 'condition' => 'any',
             ],
@@ -164,10 +166,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::GRAPHIQL_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getURLPathSettingValue(
-                    $value,
-                    ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
-                    ModuleSettingOptions::PATH
+                'callback' => fn ($value) => $this->maybeAddMultisiteSubfolderToPath(
+                    $pluginOptionsFormHandler->getURLPathSettingValue(
+                        $value,
+                        ClientFunctionalityModuleResolver::GRAPHIQL_FOR_SINGLE_ENDPOINT,
+                        ModuleSettingOptions::PATH
+                    )
                 ),
                 'condition' => 'any',
             ],
@@ -177,10 +181,12 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => GraphQLClientsForWPEnvironment::VOYAGER_CLIENT_ENDPOINT,
                 'module' => ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
                 'option' => ModuleSettingOptions::PATH,
-                'callback' => fn ($value) => $pluginOptionsFormHandler->getURLPathSettingValue(
-                    $value,
-                    ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
-                    ModuleSettingOptions::PATH
+                'callback' => fn ($value) => $this->maybeAddMultisiteSubfolderToPath(
+                    $pluginOptionsFormHandler->getURLPathSettingValue(
+                        $value,
+                        ClientFunctionalityModuleResolver::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT,
+                        ModuleSettingOptions::PATH
+                    )
                 ),
                 'condition' => 'any',
             ],
