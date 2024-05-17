@@ -23,7 +23,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getGatoGraphQLEndpoint(): string
+    public function getGraphQLAPIEndpoint(): string
     {
         $envVariable = Environment::GRAPHQL_API_ENDPOINT;
         $defaultValue = '/api/graphql/';

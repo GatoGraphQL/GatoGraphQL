@@ -36,6 +36,6 @@ trait WPClientTrait
     {
         /** @var GraphQLEndpointForWPModuleConfiguration */
         $moduleConfiguration = App::getModule(GraphQLEndpointForWPModule::class)->getConfiguration();
-        return $moduleConfiguration->getGatoGraphQLEndpoint();
+        return $moduleConfiguration->getGraphQLAPIEndpoint();
     }
 }

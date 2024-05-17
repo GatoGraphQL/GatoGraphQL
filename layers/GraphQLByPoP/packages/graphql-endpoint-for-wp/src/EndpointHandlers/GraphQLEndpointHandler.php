@@ -45,7 +45,7 @@ class GraphQLEndpointHandler extends AbstractEndpointHandler
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return $moduleConfiguration->getGatoGraphQLEndpoint();
+        return $moduleConfiguration->getGraphQLAPIEndpoint();
     }
 
     /**
