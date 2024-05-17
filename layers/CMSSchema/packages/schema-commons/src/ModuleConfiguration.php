@@ -13,7 +13,8 @@ class ModuleConfiguration extends AbstractModuleConfiguration
      * Remove unwanted data added to the REQUEST_URI, replacing
      * it with the website home URL.
      *
-     * Eg: the language information from qTranslate (https://domain.com/en/...)
+     * Eg: the language information from a Multisite network
+     * based on subfolders (https://domain.com/en/...)
      */
     public function overrideRequestURI(): bool
     {

@@ -56,7 +56,10 @@ class RoutingHookSet extends AbstractHookSet
      * Replace REQUEST_URI with the website's home URL.
      *
      * Watch out: If the homeURL is not contained in the current URL,
-     * then there's a misconfiguration in the server
+     * then there's a misconfiguration in the server.
+     * 
+     * This logic will remove the language information from a Multisite
+     * network based on subfolders (https://domain.com/en/...)
      */
     public function maybeOverrideURIRoute(string $route): string
     {
