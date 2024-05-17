@@ -10,6 +10,8 @@ use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\ModuleConfiguration as GraphQLEndpointForWPModuleConfiguration;
 use PoP\Root\App;
 
+use function get_site_url;
+
 trait WPClientTrait
 {
     /**
