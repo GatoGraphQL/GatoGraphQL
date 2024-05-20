@@ -11,7 +11,7 @@
 
 It is now possible to use WordPress [Application Passwords](https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/) to send an authenticated request to the GraphQL endpoint.
 
-For instance, we can pass the application password when executing the `curl` command against the GraphQL server:
+For instance, we can pass the application password when executing the `curl` command against the GraphQL server, replacing the `USERNAME` and `PASSWORD` values:
 
 ```bash
 curl -i \
