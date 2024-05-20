@@ -18,7 +18,6 @@ class UserIsNotLoggedInMutationErrorPayloadObjectTypeResolverPicker extends Abst
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            // AbstractPageMutationErrorPayloadUnionTypeResolver::class,
             AbstractPageUpdateMutationErrorPayloadUnionTypeResolver::class,
             AbstractRootCreatePageMutationErrorPayloadUnionTypeResolver::class,
             AbstractRootUpdatePageMutationErrorPayloadUnionTypeResolver::class,
