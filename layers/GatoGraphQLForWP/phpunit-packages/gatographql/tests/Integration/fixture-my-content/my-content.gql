@@ -10,6 +10,10 @@
       title
     }
   }
+  myPages {
+    id
+    title
+  }
   me {
     id
   }
