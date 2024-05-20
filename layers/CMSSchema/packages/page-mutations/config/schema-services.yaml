@@ -12,5 +12,8 @@ services:
     PoPCMSSchema\PageMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
+    PoPCMSSchema\PageMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'
+
     PoPCMSSchema\PageMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PageMutations\TypeResolvers\UnionType;
 
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractCustomPostUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\PageMutations\RelationalTypeDataLoaders\UnionType\PageUpdateMutationErrorPayloadUnionTypeDataLoader;
 use PoP\ComponentModel\RelationalTypeDataLoaders\RelationalTypeDataLoaderInterface;
 
-class PageUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostUpdateMutationErrorPayloadUnionTypeResolver
+class PageUpdateMutationErrorPayloadUnionTypeResolver extends AbstractPageUpdateMutationErrorPayloadUnionTypeResolver
 {
     private ?PageUpdateMutationErrorPayloadUnionTypeDataLoader $pageUpdateMutationErrorPayloadUnionTypeDataLoader = null;
 
