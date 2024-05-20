@@ -122,6 +122,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/page-mutations:/app/vendor/pop-cms-schema/page-mutations
         - >-
+          ../../layers/CMSSchema/packages/page-mutations-wp:/app/vendor/pop-cms-schema/page-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/pagemedia-mutations:/app/vendor/pop-cms-schema/pagemedia-mutations
         - >-
           ../../layers/CMSSchema/packages/pages-wp:/app/vendor/pop-cms-schema/pages-wp
