@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PageMutations\TypeResolvers\UnionType;
 
-use PoPSchema\SchemaCommons\TypeResolvers\UnionType\AbstractErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractCustomPostMutationErrorPayloadUnionTypeResolver;
 
-abstract class AbstractPageMutationErrorPayloadUnionTypeResolver extends AbstractErrorPayloadUnionTypeResolver
+abstract class AbstractPageMutationErrorPayloadUnionTypeResolver extends AbstractCustomPostMutationErrorPayloadUnionTypeResolver
 {
 }

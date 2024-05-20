@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PageMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PageMutations\TypeResolvers\UnionType\AbstractPageMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\UserStateMutations\ObjectTypeResolverPickers\AbstractUserIsNotLoggedInErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPCMSSchema\PageMutations\TypeResolvers\UnionType\AbstractPageUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\UnionType\AbstractRootCreatePageMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\UnionType\AbstractRootUpdatePageMutationErrorPayloadUnionTypeResolver;
 
 class UserIsNotLoggedInMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserIsNotLoggedInErrorPayloadObjectTypeResolverPicker
 {
@@ -16,7 +18,10 @@ class UserIsNotLoggedInMutationErrorPayloadObjectTypeResolverPicker extends Abst
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractPageMutationErrorPayloadUnionTypeResolver::class,
+            // AbstractPageMutationErrorPayloadUnionTypeResolver::class,
+            AbstractPageUpdateMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootCreatePageMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootUpdatePageMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
