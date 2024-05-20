@@ -24,7 +24,7 @@ curl -i \
 
 When using Gato GraphQL PRO, thanks to the newly added `_strBase64Encode` field, we can use GraphQL to execute aunthenticated HTTP requests against another WordPress site.
 
-The query below receives the username, application password, and endpoint, creates the required authentication header (of type "Basic base64encoded(username:password)"), and sends a GraphQL request against the server:
+The query below receives the username and application password (and the endpoint to connect to), creates the required authentication header (of type "Basic base64encoded(username:password)"), and sends an HTTP request against the GraphQL server, passing the GraphQL query to execute:
 
 ```graphql
 query GetDataFromExternalWPSite(
