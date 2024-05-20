@@ -7,6 +7,47 @@
 - Link extensions to the Extensions Reference in gatographql.com ([#2675](https://github.com/GatoGraphQL/GatoGraphQL/pull/2675))
 - Added YouTube channel link to About page ([#2676](https://github.com/GatoGraphQL/GatoGraphQL/pull/2676))
 
+### Added page mutations to the GraphQL schema
+
+Added the following mutations to the GraphQL schema:
+
+- `Root.createPage`
+- `Root.updatePage`
+- `Page.update`
+
+For instance, you can now execute this GraphQL query to modify a page:
+
+```graphql
+mutation UpdatePage {
+  updatePage(input: {
+    id: 2
+    title: "Updated title"
+    contentAs: { html: "Updated content" },
+    status: pending
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    page {
+      id
+      rawTitle
+      rawContent
+      status
+    }
+  }
+}
+```
+
+Also added fields to retrieve the logged-in user's pages:
+
+- `Root.myPages`
+- `Root.myPageCount`
+- `Root.myPage`
+
 ### Support Application Passwords ([#2672](https://github.com/GatoGraphQL/GatoGraphQL/pull/2672))
 
 It is now possible to use WordPress [Application Passwords](https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/) to send an authenticated request to the GraphQL endpoint.
