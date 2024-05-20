@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\PageMutations\TypeResolvers\InputObjectType;
+
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\CreateCustomPostInputObjectTypeResolverInterface;
+
+interface CreatePageInputObjectTypeResolverInterface extends CreateCustomPostInputObjectTypeResolverInterface
+{
+}

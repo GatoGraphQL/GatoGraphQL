@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPCMSSchema\PageMutations\ConditionalOnModule\Users\SchemaHooks\:
+        resource: '../../../src/ConditionalOnModule/Users/SchemaHooks/*'
