@@ -44,7 +44,6 @@
         "pop-cms-schema/customposts": "<2.3.0",
         "pop-cms-schema/categories-wp": "<2.3.0",
         "pop-cms-schema/meta": "<2.3.0",
-        "pop-cms-schema/page-mutations": "<2.3.0",
         "pop-cms-schema/schema-commons": "<2.3.0",
         "pop-cms-schema/tags": "<2.3.0",
         "pop-cms-schema/usermeta-wp": "<2.3.0",
