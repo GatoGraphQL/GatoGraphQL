@@ -4,6 +4,9 @@ services:
         autowire: true
         autoconfigure: true
 
+    PoPCMSSchema\PageMutations\LooseContracts\:
+        resource: '../src/LooseContracts/*'
+
     PoPCMSSchema\PageMutations\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
 
