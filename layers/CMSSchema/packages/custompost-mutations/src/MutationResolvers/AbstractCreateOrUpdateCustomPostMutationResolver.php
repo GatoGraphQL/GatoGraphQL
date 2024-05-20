@@ -132,6 +132,10 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         // Check if the user can publish custom posts
         if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
             $this->validateCanLoggedInUserPublishCustomPosts(
