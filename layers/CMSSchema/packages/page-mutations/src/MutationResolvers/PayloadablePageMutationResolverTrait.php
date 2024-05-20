@@ -9,7 +9,6 @@ use PoPCMSSchema\PageMutations\Constants\HookNames;
 use PoPCMSSchema\PageMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\PageMutations\ObjectModels\LoggedInUserHasNoEditingPageCapabilityErrorPayload;
 use PoPCMSSchema\PageMutations\ObjectModels\LoggedInUserHasNoPublishingPageCapabilityErrorPayload;
-use PoPCMSSchema\PageMutations\ObjectModels\PageDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -40,12 +39,6 @@ trait PayloadablePageMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E3,
             ] => new LoggedInUserHasNoPublishingPageCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E7,
-            ] => new PageDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => App::applyFilters(
