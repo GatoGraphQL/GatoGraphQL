@@ -8,7 +8,6 @@ use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableUpdateCustomPo
 use PoPCMSSchema\PageMutations\Constants\HookNames;
 use PoPCMSSchema\PageMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\PageMutations\ObjectModels\LoggedInUserHasNoEditingPageCapabilityErrorPayload;
-use PoPCMSSchema\PageMutations\ObjectModels\LoggedInUserHasNoPermissionToEditPageErrorPayload;
 use PoPCMSSchema\PageMutations\ObjectModels\LoggedInUserHasNoPublishingPageCapabilityErrorPayload;
 use PoPCMSSchema\PageMutations\ObjectModels\PageDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -41,12 +40,6 @@ trait PayloadablePageMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E3,
             ] => new LoggedInUserHasNoPublishingPageCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E8,
-            ] => new LoggedInUserHasNoPermissionToEditPageErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
