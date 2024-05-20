@@ -1,20 +1,54 @@
 {
+  # User state
+  me {
+    id
+  }
+
+  # Posts
+  existingPost: myPost(by: { id: 1 }) {
+    id
+    title
+  }
+  nonExistingPost: myPost(by: { id: 8888 }) {
+    id
+    title
+  }
   myPosts {
+    id
+    title
+  }
+  myPostCount
+
+  # Custom Posts
+  existingCustomPost: myCustomPost(by: { id: 1 }) {
+    id
+    title
+  }
+  nonExistingCustomPost: myCustomPost(by: { id: 8888 }) {
     id
     title
   }
   myCustomPosts {
     __typename
-    ...on Post {
+    ...on CustomPost {
       id
       title
     }
+  }
+  myCustomPostCount
+
+  # Pages
+  existingPage: myPage(by: { id: 2 }) {
+    id
+    title
+  }
+  nonExistingPage: myPage(by: { id: 8888 }) {
+    id
+    title
   }
   myPages {
     id
     title
   }
-  me {
-    id
-  }
+  myPageCount  
 }
