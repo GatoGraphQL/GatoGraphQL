@@ -42,11 +42,27 @@ mutation UpdatePage {
 }
 ```
 
-Also added fields to retrieve the logged-in user's pages:
+## Added fields to fetch the logged-in user's pages
 
+`v2.4` also adds fields to retrieve the logged-in user's pages.
+
+The previously-existing fields `Root.page`, `Root.pages` and `Root.pageCount` retrieve pages for any user, but only public ones (i.e. those with status `"publish"`).
+
+From this version on, we can fetch public or private pages from the logged-in user (i.e. with status `"publish"`, `"pending"`, `"draft"` or `"trash"`), using these new fields:
+
+- `Root.myPage`
 - `Root.myPages`
 - `Root.myPageCount`
-- `Root.myPage`
+
+```graphql
+query {
+  myPages(filter: { status: [draft, pending] }) {
+    id
+    title
+    status
+  }
+}
+```
 
 ### Support Application Passwords ([#2672](https://github.com/GatoGraphQL/GatoGraphQL/pull/2672))
 
