@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\PageMutations\ComponentProcessors\:
         resource: '../src/ComponentProcessors/*'
+
+    PoPCMSSchema\PageMutations\FeedbackItemProviders\:
+        resource: '../src/FeedbackItemProviders/*'
