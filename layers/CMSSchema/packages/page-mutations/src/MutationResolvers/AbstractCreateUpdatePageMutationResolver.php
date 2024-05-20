@@ -95,33 +95,4 @@ abstract class AbstractCreateUpdatePageMutationResolver extends AbstractCreateOr
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
-
-    protected function validateCanLoggedInUserEditCustomPost(
-        string|int $customPostID,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        // Check that the user has access to the edited custom post
-        $userID = App::getState('current-user-id');
-        if (!$this->getCustomPostTypeMutationAPI()->canUserEditCustomPost($userID, $customPostID)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E8,
-                        [
-                            $customPostID,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
-
-        parent::validateCanLoggedInUserEditCustomPost(
-            $customPostID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
 }
