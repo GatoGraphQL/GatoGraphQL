@@ -41,6 +41,8 @@ abstract class AbstractCreateUpdatePageMutationResolver extends AbstractCreateOr
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         // Validate user permission
         $userID = App::getState('current-user-id');
         $editPagesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_PAGES_CAPABILITY);
@@ -61,6 +63,10 @@ abstract class AbstractCreateUpdatePageMutationResolver extends AbstractCreateOr
             );
         }
 
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         parent::validateCanLoggedInUserEditCustomPosts(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
@@ -71,6 +77,8 @@ abstract class AbstractCreateUpdatePageMutationResolver extends AbstractCreateOr
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $userID = App::getState('current-user-id');
         $publishPagesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_PUBLISH_PAGES_CAPABILITY);
         if (
@@ -88,6 +96,10 @@ abstract class AbstractCreateUpdatePageMutationResolver extends AbstractCreateOr
                     $fieldDataAccessor->getField(),
                 )
             );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
         }
 
         parent::validateCanLoggedInUserPublishCustomPosts(
