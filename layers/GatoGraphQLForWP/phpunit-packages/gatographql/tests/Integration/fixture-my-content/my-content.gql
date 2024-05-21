@@ -2,53 +2,54 @@
   # User state
   me {
     id
+    roleNames
   }
 
   # Posts
-  existingPost: myPost(by: { id: 1 }) {
+  existingPost: myPost(by: { id: 1116 }, status: [pending, trash]) {
     id
     title
   }
-  nonExistingPost: myPost(by: { id: 8888 }) {
+  nonExistingPost: myPost(by: { id: 8888 }, status: [pending, trash]) {
     id
     title
   }
-  myPosts {
+  myPosts(status: [pending, trash]) {
     id
     title
   }
-  myPostCount
+  myPostCount(status: [pending, trash])
 
   # Custom Posts
-  existingCustomPost: myCustomPost(by: { id: 1 }) {
+  existingCustomPost: myCustomPost(by: { id: 1116 }, status: [pending, trash]) {
     id
     title
   }
-  nonExistingCustomPost: myCustomPost(by: { id: 8888 }) {
+  nonExistingCustomPost: myCustomPost(by: { id: 8888 }, status: [pending, trash]) {
     id
     title
   }
-  myCustomPosts {
+  myCustomPosts(status: [pending, trash]) {
     __typename
     ...on CustomPost {
       id
       title
     }
   }
-  myCustomPostCount
+  myCustomPostCount(status: [pending, trash])
 
   # Pages
-  existingPage: myPage(by: { id: 2 }) {
+  existingPage: myPage(by: { id: 2 }, status: [pending, trash]) {
     id
     title
   }
-  nonExistingPage: myPage(by: { id: 8888 }) {
+  nonExistingPage: myPage(by: { id: 8888 }, status: [pending, trash]) {
     id
     title
   }
-  myPages {
+  myPages(status: [pending, trash]) {
     id
     title
   }
-  myPageCount  
+  myPageCount(status: [pending, trash])
 }
