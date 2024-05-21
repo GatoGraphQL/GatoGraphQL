@@ -14,11 +14,11 @@
     id
     title
   }
-  myPosts(status: [pending, trash]) {
+  myPosts(filter: { status: [pending, trash] }) {
     id
     title
   }
-  myPostCount(status: [pending, trash])
+  myPostCount(filter: { status: [pending, trash] })
 
   # Custom Posts
   existingCustomPost: myCustomPost(by: { id: 1116 }, status: [pending, trash]) {
@@ -29,14 +29,14 @@
     id
     title
   }
-  myCustomPosts(status: [pending, trash]) {
+  myCustomPosts(filter: { status: [pending, trash] }) {
     __typename
     ...on CustomPost {
       id
       title
     }
   }
-  myCustomPostCount(status: [pending, trash])
+  myCustomPostCount(filter: { status: [pending, trash] })
 
   # Pages
   existingPage: myPage(by: { id: 2 }, status: [pending, trash]) {
@@ -47,9 +47,9 @@
     id
     title
   }
-  myPages(status: [pending, trash]) {
+  myPages(filter: { status: [pending, trash] }) {
     id
     title
   }
-  myPageCount(status: [pending, trash])
+  myPageCount(filter: { status: [pending, trash] })
 }
