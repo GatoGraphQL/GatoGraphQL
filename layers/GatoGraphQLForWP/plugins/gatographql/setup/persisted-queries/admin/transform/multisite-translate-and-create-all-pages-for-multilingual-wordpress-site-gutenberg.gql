@@ -2773,6 +2773,7 @@ query ExportMutationInputs
       }
     )
     input: _echo(value: {
+      status: draft,
       title: $__transformedTitle,
       slug: $__transformedSlug,
       excerpt: $__transformedRawExcerpt,
