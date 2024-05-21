@@ -27,12 +27,22 @@
 #
 ########################################################################
 
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyBool: _echo(value: false)
+    @export(as: "retrievedExternalSiteLanguage")
+    @remove
+}
+
 query ExportData(
   $username: String!
   $appPassword: String!
   $externalSiteURL: URL!
   $externalSiteGraphQLEndpointPath: String! = "/graphql/nested-mutations/"
-) {
+)
+  @depends(on: "InitializeVariables")
+{
   loginCredentials: _sprintf(
     string: "%s:%s",
     values: [$username, $appPassword]
@@ -92,5 +102,10 @@ query GetExternalSiteLanguage
     }
   )
     @export(as: "externalSiteLanguage")
+  
+  retrievedExternalSiteLanguage: _notEmpty(
+    value: $__externalSiteLanguage
+  )
+    @export(as: "retrievedExternalSiteLanguage")
 }
 
