@@ -2744,17 +2744,14 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslateGutenbergPosts(
-  $statusToUpdate: CustomPostStatusEnum! = draft
-  $updateSlug: Boolean! = true
-)
+mutation TranslateGutenbergPages
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
   ])
   @include(if: $executeTranslation)
 {
-  updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  updatePages: pages {
     id
     transformedRawContent: _objectProperty(
       object: $transformedRawContent,
