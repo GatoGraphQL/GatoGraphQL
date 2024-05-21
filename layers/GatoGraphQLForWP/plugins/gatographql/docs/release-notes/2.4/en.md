@@ -7,7 +7,7 @@
 - Link extensions to the Extensions Reference in gatographql.com ([#2675](https://github.com/GatoGraphQL/GatoGraphQL/pull/2675))
 - Added YouTube channel link to About page ([#2676](https://github.com/GatoGraphQL/GatoGraphQL/pull/2676))
 
-### Added page mutations to the GraphQL schema
+### Added page mutations to the GraphQL schema ([#2682](https://github.com/GatoGraphQL/GatoGraphQL/pull/2682))
 
 Added the following mutations to the GraphQL schema:
 
@@ -42,7 +42,7 @@ mutation UpdatePage {
 }
 ```
 
-### Added fields to fetch the logged-in user's pages
+### Added fields to fetch the logged-in user's pages ([#2682](https://github.com/GatoGraphQL/GatoGraphQL/pull/2682))
 
 `v2.4` also adds fields to retrieve the logged-in user's pages.
 
