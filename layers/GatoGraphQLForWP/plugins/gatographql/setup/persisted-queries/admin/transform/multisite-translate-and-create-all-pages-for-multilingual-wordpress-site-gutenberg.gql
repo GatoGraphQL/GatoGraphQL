@@ -2744,7 +2744,7 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslateGutenbergPages
+mutation CreatePagesWithTranslationOnExternalSite
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
