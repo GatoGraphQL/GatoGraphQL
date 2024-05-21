@@ -114,6 +114,13 @@ query RetrieveAndExportExternalSiteLanguage
     value: $__externalSiteLanguage
   )
     @export(as: "hasRetrievedExternalSiteLanguage")
+
+  # Only translate the content if the master/destination sites languages are different
+  doTranslateToExternalSiteLanguage: _notEquals(
+    value1: $fromLanguage
+    value2: $__externalSiteLanguage
+  )
+    @export(as: "doTranslateToExternalSiteLanguage")
 }
 
 query InitializeTranslationVariables
@@ -396,6 +403,11 @@ query FetchData
     rawContent
       @export(
         as: "rawContent"
+        type: DICTIONARY
+      )
+      # Also export it as "transformed" for if the from/to languages are the same (and no translation is done)
+      @export(
+        as: "transformedRawContent"
         type: DICTIONARY
       )
     rawExcerpt
@@ -800,20 +812,24 @@ query TransformData
       to: $coreEmbedCaptionItems,
     },
   })
-    @underEachJSONObjectProperty
-      @underJSONObjectProperty(by: { key: "to" })
-        @underEachJSONObjectProperty
-          @underEachArrayItem
-            @strTranslate(
-              from: $fromLanguage,
-              to: $toLanguage
-            )
+    @if(
+      condition: $doTranslateToExternalSiteLanguage
+    )
+      @underEachJSONObjectProperty
+        @underJSONObjectProperty(by: { key: "to" })
+          @underEachJSONObjectProperty
+            @underEachArrayItem
+              @strTranslate(
+                from: $fromLanguage,
+                to: $toLanguage
+              )
     @export(as: "transformations")
 }
 
 query EscapeRegexStrings
   @depends(on: "TransformData")
   @include(if: $executeTranslation)
+  @include(if: $doTranslateToExternalSiteLanguage)
 {  
   escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty(
@@ -907,6 +923,7 @@ query EscapeRegexStrings
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
   @include(if: $executeTranslation)
+  @include(if: $doTranslateToExternalSiteLanguage)
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
@@ -1470,6 +1487,7 @@ query CreateRegexReplacements
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
   @include(if: $executeTranslation)
+  @include(if: $doTranslateToExternalSiteLanguage)
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
