@@ -19,6 +19,7 @@ class VirtualTutorialLessons
     public final const SEND_EMAIL_TO_ADMIN_ABOUT_POST = 'send-email-to-admin-about-post';
     public final const SYNCHRONIZING_FEATUREDIMAGE_FOR_POLYLANG = 'synchronizing-featured-image-for-polylang';
     public final const SYNCHRONIZING_TAGS_AND_CATEGORIES_FOR_POLYLANG = 'synchronizing-tags-and-categories-for-polylang';
+    public final const TRANSLATING_AND_CREATING_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG = 'translating_and-creating-all-pages-for-multilingual-wordpress-site-gutenberg';
     public final const TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE = 'translating-classic-editor-post-to-a-different-language';
     public final const TRANSLATING_POSTS_FOR_POLYLANG_AND_GUTENBERG = 'translating-posts-for-polylang-and-gutenberg';
     public final const TRANSLATING_POSTS_FOR_POLYLANG_AND_CLASSIC_EDITOR = 'translating-posts-for-polylang-and-classic-editor';
