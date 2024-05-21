@@ -4772,6 +4772,22 @@
                             "args": []
                         },
                         {
+                            "name": "siteLanguage",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "siteLocale",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "tag",
                             "extensions": {
                                 "isMutation": false,
@@ -6209,6 +6225,22 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "siteLanguage",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "siteLocale",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
                         },
                         {
                             "name": "tag",

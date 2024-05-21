@@ -178,6 +178,12 @@
                         "name": "self"
                     },
                     {
+                        "name": "siteLanguage"
+                    },
+                    {
+                        "name": "siteLocale"
+                    },
+                    {
                         "name": "tag"
                     },
                     {

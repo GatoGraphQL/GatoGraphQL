@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added page mutations to the GraphQL schema (#2682)
 - Added fields to fetch the logged-in user's pages (#2682)
+- Added fields to fetch the site's locale and language (#2685)
 - Install "internal" private custom endpoint (#2684)
 - Support Application Passwords (#2672)
 - Support for subfolder-based Multisite network (#2677)

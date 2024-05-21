@@ -1025,6 +1025,9 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 MediaModule::class,
                 \PoPWPSchema\Media\Module::class,
             ],
+            SchemaTypeModuleResolver::SCHEMA_SITE => [
+                \PoPWPSchema\Site\Module::class,
+            ],
             SchemaTypeModuleResolver::SCHEMA_TAGS => [
                 TagsModule::class,
                 \PoPCMSSchema\TagsWP\Module::class,

@@ -1272,6 +1272,12 @@
               "name": "self"
             },
             {
+              "name": "siteLanguage"
+            },
+            {
+              "name": "siteLocale"
+            },
+            {
               "name": "tag"
             },
             {
@@ -1509,6 +1515,12 @@
             },
             {
               "name": "setTagsOnPost"
+            },
+            {
+              "name": "siteLanguage"
+            },
+            {
+              "name": "siteLocale"
             },
             {
               "name": "tag"

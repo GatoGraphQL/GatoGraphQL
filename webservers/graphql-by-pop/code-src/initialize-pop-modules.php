@@ -36,6 +36,7 @@ App::stockAndInitializeModuleClasses([
     \PoPWPSchema\Pages\Module::class,
     \PoPWPSchema\Blocks\Module::class,
     \PoPWPSchema\Posts\Module::class,
+    \PoPWPSchema\Site\Module::class,
     \PoPWPSchema\TaxonomyMeta\Module::class,
     \PoPWPSchema\UserMeta\Module::class,
 ]);

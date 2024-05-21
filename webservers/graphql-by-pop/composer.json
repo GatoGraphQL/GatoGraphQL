@@ -44,6 +44,7 @@
         "pop-wp-schema/menus": "dev-master",
         "pop-wp-schema/pages": "dev-master",
         "pop-wp-schema/posts": "dev-master",
+        "pop-wp-schema/site": "dev-master",
         "pop-wp-schema/taxonomymeta": "dev-master",
         "pop-wp-schema/usermeta": "dev-master"
     },

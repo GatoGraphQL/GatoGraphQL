@@ -65,6 +65,35 @@ query {
 }
 ```
 
+### Added fields to fetch the site's locale and language ([#2685](https://github.com/GatoGraphQL/GatoGraphQL/pull/2685))
+
+Added the following fields to the GraphQL schema:
+
+- `Root.siteLocale`
+- `Root.siteLanguage`
+
+For instance, executing the following query:
+
+```graphql
+{
+  siteLocale
+  siteLanguage
+}
+```
+
+...might produce:
+
+```json
+{
+  "data": {
+    "siteLocale": "en_US",
+    "siteLanguage": "en"
+  }
+}
+```
+
+These fields are provided via the new "Site" module. Disabling this module will remove the fields from the GraphQL schema.
+
 ### Support Application Passwords ([#2672](https://github.com/GatoGraphQL/GatoGraphQL/pull/2672))
 
 It is now possible to use WordPress [Application Passwords](https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/) to send an authenticated request to the GraphQL endpoint.
