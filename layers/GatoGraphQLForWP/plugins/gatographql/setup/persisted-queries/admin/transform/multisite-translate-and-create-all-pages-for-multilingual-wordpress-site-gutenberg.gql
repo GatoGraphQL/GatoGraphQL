@@ -2765,11 +2765,7 @@ mutation CreatePagesWithTranslationOnExternalSite
         key: $__id
       }
     )
-    transformedSlug: _if(
-      condition: $updateSlug,
-      then: $__transformedTitle,
-      else: null
-    )
+    transformedSlug: $__transformedTitle
     transformedRawExcerpt: _objectProperty(
       object: $transformedRawExcerpt,
       by: {
