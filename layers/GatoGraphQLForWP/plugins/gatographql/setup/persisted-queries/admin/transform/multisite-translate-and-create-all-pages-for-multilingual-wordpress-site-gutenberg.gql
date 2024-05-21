@@ -32,7 +32,7 @@ query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   emptyBool: _echo(value: false)
-    @export(as: "retrievedExternalSiteLanguage")
+    @export(as: "hasRetrievedExternalSiteLanguage")
     @remove
 }
 
@@ -44,17 +44,20 @@ query ExportData(
 )
   @depends(on: "InitializeVariables")
 {
+  # Retrieve the language of the content
+  siteLanguage
+    @export(as: "fromLanguage")
+
+  # Generate the authorization header to connect to the external site
   loginCredentials: _sprintf(
     string: "%s:%s",
     values: [$username, $appPassword]
   )
     @remove
-
   base64EncodedLoginCredentials: _strBase64Encode(
     string: $__loginCredentials
   )
     @remove
-
   authorizationHeaderValue: _sprintf(
     string: "Basic %s",
     values: [$__base64EncodedLoginCredentials]
@@ -62,6 +65,7 @@ query ExportData(
     @remove
     @export(as: "authorizationHeaderValue")
   
+  # Generate the external site's GraphQL endpoint to connect to
   endpoint: _sprintf(
     string: "%s%s",
     values: [
@@ -75,6 +79,7 @@ query ExportData(
 query GetExternalSiteLanguage
   @depends(on: "ExportData")
 {
+  # Retrieve the language of the external site
   externalHTTPRequest: _sendGraphQLHTTPRequest(input:{
     endpoint: $endpoint,
     query: """
@@ -102,11 +107,12 @@ query GetExternalSiteLanguage
       path: "data.siteLanguage"
     }
   )
-    @export(as: "externalSiteLanguage")
+    @export(as: "toLanguage")
   
-  retrievedExternalSiteLanguage: _notEmpty(
+  # Flag to indicate if connecting to the external site was successful
+  hasRetrievedExternalSiteLanguage: _notEmpty(
     value: $__externalSiteLanguage
   )
-    @export(as: "retrievedExternalSiteLanguage")
+    @export(as: "hasRetrievedExternalSiteLanguage")
 }
 
