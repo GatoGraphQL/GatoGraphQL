@@ -258,6 +258,7 @@ class Plugin extends AbstractMainPlugin
             '1.6' => [$this->installPluginSetupDataForVersion1Dot6(...)],
             '2.1' => [$this->installPluginSetupDataForVersion2Dot1(...)],
             '2.3' => [$this->installPluginSetupDataForVersion2Dot3(...)],
+            '2.4' => [$this->installPluginSetupDataForVersion2Dot4(...)],
         ];
     }
 
@@ -1606,6 +1607,41 @@ class Plugin extends AbstractMainPlugin
                             ],
                         ],
                         ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+    }
+
+    protected function installPluginSetupDataForVersion2Dot4(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /**
+         * Create custom endpoint
+         */
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+
+        $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
+        $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
+
+        $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_INTERNAL;
+        if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminCustomEndpointOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('Internal', 'gatographql'),
+                    'post_excerpt' => \__('Private client with default configuration', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                            'attrs' => [
+                                EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
+                            ],
+                        ],
+                        ...$defaultCustomEndpointBlocks
                     ])),
                 ]
             ));
