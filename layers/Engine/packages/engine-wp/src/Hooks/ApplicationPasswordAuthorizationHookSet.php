@@ -103,7 +103,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         $requestURI = EndpointUtils::removeMarkersFromURI($requestURI);
         $requestURI = EndpointUtils::slashURI($requestURI);
         foreach ($this->getGraphQLEndpointPaths() as $graphQLEndpointPath) {
-            $graphQLEndpointPath = '/' . trim($graphQLEndpointPath, '/\\') . '/';
+            $graphQLEndpointPath = EndpointUtils::slashURI($graphQLEndpointPath);
             if (str_starts_with($requestURI, $graphQLEndpointPath)) {
                 return true;
             }
