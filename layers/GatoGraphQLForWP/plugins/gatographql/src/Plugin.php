@@ -1652,7 +1652,7 @@ class Plugin extends AbstractMainPlugin
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
         
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_MULTISITE_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -1665,7 +1665,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/multisite-translate-and-create-all-pages-for-multilingual-wordpress-site-gutenberg',
+                                    'admin/transform/translate-and-create-all-pages-for-multilingual-wordpress-site-gutenberg',
                                     VirtualTutorialLessons::TRANSLATING_AND_CREATING_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG,
                                 ),
                             ],

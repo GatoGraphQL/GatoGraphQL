@@ -35,7 +35,6 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV = 'import-posts-from-csv';
     public final const PERSISTED_QUERY_INSERT_BLOCK_IN_POST = 'insert-block-in-post';
     public final const PERSISTED_QUERY_INSERT_BLOCK_IN_POSTS = 'insert-block-in-posts';
-    public final const PERSISTED_QUERY_MULTISITE_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE = 'multisite-translate-and-create-all-pages-for-multilingual-wordpress-site-gutenberg';
     public final const PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POST = 'regex-replace-strings-in-post';
     public final const PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POSTS = 'regex-replace-strings-in-posts';
     public final const PERSISTED_QUERY_REGISTER_A_NEWSLETTER_SUBSCRIBER_FROM_INSTAWP_TO_MAILCHIMP = 'register-a-newsletter-subscriber-from-instawp-to-mailchimp';
@@ -48,6 +47,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_SEND_EMAIL_TO_ADMIN_ABOUT_POST = 'send-email-to-admin-about-post';
     public final const PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG = 'sync-featuredimage-for-polylang';
     public final const PERSISTED_QUERY_SYNC_TAGS_AND_CATEGORIES_FOR_POLYLANG = 'sync-tags-and-categories-for-polylang';
+    public final const PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE = 'translate-and-create-all-pages-for-multilingual-wordpress-site-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_CONTENT_FROM_URL = 'translate-content-from-url';
     public final const PERSISTED_QUERY_TRANSLATE_POST_CLASSIC_EDITOR = 'translate-post-classic-editor';
     public final const PERSISTED_QUERY_TRANSLATE_POST_GUTENBERG = 'translate-post-gutenberg';
