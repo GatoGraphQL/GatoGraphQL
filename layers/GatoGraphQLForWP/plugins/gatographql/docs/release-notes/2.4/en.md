@@ -42,7 +42,7 @@ mutation UpdatePage {
 }
 ```
 
-## Added fields to fetch the logged-in user's pages
+### Added fields to fetch the logged-in user's pages
 
 `v2.4` also adds fields to retrieve the logged-in user's pages.
 
