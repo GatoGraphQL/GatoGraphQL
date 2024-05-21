@@ -2765,7 +2765,7 @@ query ExportMutationInputs
         key: $__id
       }
     )
-    transformedSlug: $__transformedTitle
+    transformedSlug: _echo(value: $__transformedTitle)
     transformedRawExcerpt: _objectProperty(
       object: $transformedRawExcerpt,
       by: {
