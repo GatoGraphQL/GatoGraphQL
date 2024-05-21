@@ -11,9 +11,9 @@
 # === Description ===
 #
 # This Persisted GraphQL query helps create a Multilingual site
-# (eg: based on a WordPress multisite network), where every site
-# is the translation for some language. The content is based on the
-# Gutenberg editor.
+# where every site is the translation for some language. The content
+# is based on the Gutenberg editor, and it is most suitable with a
+# WordPress multisite network.
 # 
 # It must be executed on the master site, which must have the PRO plugin.
 # All other sites in the network can have the free Gato GraphQL plugin.
