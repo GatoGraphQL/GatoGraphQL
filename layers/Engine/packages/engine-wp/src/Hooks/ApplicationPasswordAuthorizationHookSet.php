@@ -10,7 +10,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
-use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Routing\RoutingHelperServiceInterface;
 
