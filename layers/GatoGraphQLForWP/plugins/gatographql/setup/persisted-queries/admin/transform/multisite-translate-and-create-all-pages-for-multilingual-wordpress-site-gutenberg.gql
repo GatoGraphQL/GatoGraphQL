@@ -10,8 +10,8 @@
 #
 # === Description ===
 #
-# This Persisted GraphQL query works on a WordPress Multisite network,
-# to create a Multilingual site, where every site in the network
+# This Persisted GraphQL query helps create a Multilingual site
+# (eg: based on a WordPress Multisite network), where every site
 # is the translation for some language. The content is based on the
 # Gutenberg editor.
 # 
