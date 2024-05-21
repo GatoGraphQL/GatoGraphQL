@@ -558,6 +558,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_POST_CATEGORIES:
             case self::SCHEMA_MENUS:
             case self::SCHEMA_MEDIA:
+            case self::SCHEMA_SITE:
                 return false;
         }
         return $this->upstreamHasDocumentation($module);
