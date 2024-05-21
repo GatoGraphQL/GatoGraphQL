@@ -15,6 +15,7 @@ class PluginSetupDataEntrySlugs
      */
     public final const SCHEMA_CONFIGURATION_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE = 'nested-mutations-entity-as-mutation-payload-type';
 
+    public final const CUSTOM_ENDPOINT_INTERNAL = 'internal';
     public final const CUSTOM_ENDPOINT_NESTED_MUTATIONS = 'nested-mutations';
     public final const CUSTOM_ENDPOINT_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE = 'nested-mutations-entity-as-mutation-payload-type';
 
