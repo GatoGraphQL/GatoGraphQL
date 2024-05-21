@@ -4,7 +4,7 @@
 #   - $username: The username to log into the external site
 #   - $appPassword: The application password to log into the external site
 #   - $externalSiteURL: The URL of the external site, where all pages will be (translated and) created
-#   - (Optional) $externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site, configured with "nested mutations" and "Entity as mutation payload type"
+#   - (Optional) $externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site
 #
 # *********************************************************************
 #
@@ -40,7 +40,7 @@ query ExportExternalSiteData(
   $username: String!
   $appPassword: String!
   $externalSiteURL: URL!
-  $externalSiteGraphQLEndpointPath: String! = "/graphql/nested-mutations-entity-as-mutation-payload-type/"
+  $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
 )
   @depends(on: "InitializeExternalSiteVariables")
 {
