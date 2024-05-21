@@ -2744,7 +2744,7 @@ query PrepareMetaReplacements
     )
 }
 
-mutation CreatePagesWithTranslationOnExternalSite
+query ExportMutationInputs
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
@@ -2772,27 +2772,35 @@ mutation CreatePagesWithTranslationOnExternalSite
         key: $__id
       }
     )
-    update(input: {
+    input: _echo(value: {
       title: $__transformedTitle,
       slug: $__transformedSlug,
       excerpt: $__transformedRawExcerpt,
       contentAs: {
         html: $__transformedRawContent
       }
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        title
-        rawContent
-        rawExcerpt
-      }
-    }
+    })
+      @export(
+        as: "createPostMutationInputs"
+        type: LIST
+      )
   }
+}
+
+mutation CreatePagesWithTranslationOnExternalSite
+  @depends(on: "ExportMutationInputs")
+  @include(if: $executeTranslation)
+{
+  createdPageIDs: _echo(value: $postInput)
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      @applyField(
+        name: "createPage"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPageIDs")
 }
