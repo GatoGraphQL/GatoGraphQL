@@ -2318,7 +2318,7 @@ mutation CreatePagesWithTranslationOnExternalSite
   @depends(on: "ExportMutationInputs")
   @include(if: $executeTranslation)
 {
-  createdExternalSitePageIDs: _echo(value: $createPostMutationInputs)
+  createExternalSitePageHTTPRequests: _echo(value: $createPostMutationInputs)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
