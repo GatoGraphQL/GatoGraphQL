@@ -10,27 +10,28 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use WP_Post;
+
+use function get_locale;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
+    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
     }
-    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
-        if ($this->intScalarTypeResolver === null) {
-            /** @var IntScalarTypeResolver */
-            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
-            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        if ($this->stringScalarTypeResolver === null) {
+            /** @var StringScalarTypeResolver */
+            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
+            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
-        return $this->intScalarTypeResolver;
+        return $this->stringScalarTypeResolver;
     }
 
     /**
@@ -49,14 +50,16 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
-            'menuOrder',
+            'siteLocale',
+            'siteLanguage',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'menuOrder' => $this->__('Menu order', 'site'),
+            'siteLocale' => $this->__('Site\'s locale', 'site'),
+            'siteLanguage' => $this->__('Site\'s language', 'site'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -64,16 +67,22 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'menuOrder' => $this->getIntScalarTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'siteLocale',
+            'siteLanguage' =>
+                $this->getStringScalarTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'menuOrder' => SchemaTypeModifiers::NON_NULLABLE,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'siteLocale',
+            'siteLanguage'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -83,11 +92,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        /** @var WP_Post */
-        $page = $object;
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'menuOrder':
-                return $page->menu_order;
+            case 'siteLocale':
+                return get_locale();
+
+            case 'siteLanguage':
+                $locale = get_locale();
+                $localeParts = explode('_', $locale);
+                return $localeParts[0];
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
