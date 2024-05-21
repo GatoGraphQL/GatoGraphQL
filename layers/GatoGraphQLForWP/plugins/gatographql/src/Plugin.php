@@ -1658,7 +1658,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] (Multisite) Translate and Create all pages for a Multilingual WordPress Site (Gutenberg)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate and create all pages for a multilingual site (Multisite / Gutenberg)', 'gatographql'),
                     'post_excerpt' => \__('In a Multisite, grab all block-based pages from the main site in the network, and translate them and create them on a given translation site, for the corresponding language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
