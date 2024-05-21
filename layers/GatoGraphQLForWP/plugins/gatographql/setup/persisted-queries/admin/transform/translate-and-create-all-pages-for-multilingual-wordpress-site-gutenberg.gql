@@ -18,13 +18,20 @@
 # It must be executed on the master site, which must have the PRO plugin.
 # All other sites in the network can have the free Gato GraphQL plugin.
 #
-# The query first connects to the external site, and retrieves its language.
-# Then it grabs all the pages from the master site, and it translates them
-# all at once (in bulk) to that language, by executing a single call to the
-# Google Translate API.
+# The query retrieves the language from the main site and from the external
+# site, and compares them:
 #
-# Finally it logs into the external site again, and creates all those pages
-# with all the translations.
+#   - If they are the same, simply replicate all pages
+#   - If they are different, replicate all pages with translated content
+#
+#   (This way, if the main site has "en" language, and another site in
+#   the network also has "en", all pages are still replicated.)
+#
+# Then it grabs all the pages from the master site, and (if required) it
+# translates them all at once (in bulk) to the destination site's language,
+# by executing a single call to the Google Translate API.
+#
+# Finally it creates all those pages in the external site.
 #
 ########################################################################
 
