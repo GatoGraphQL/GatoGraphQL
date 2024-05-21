@@ -126,7 +126,6 @@
         "pop-wp-schema/users": "<2.3.0",
         "pop-wp-schema/menus": "<2.3.0",
         "pop-wp-schema/block-content-parser": "<2.3.0",
-        "pop-wp-schema/pages": "<2.3.0",
         "pop-wp-schema/custompostmeta": "<2.3.0",
         "pop-wp-schema/media": "<2.3.0",
         "pop-cms-schema/media-mutations-wp": "<2.3.0",
