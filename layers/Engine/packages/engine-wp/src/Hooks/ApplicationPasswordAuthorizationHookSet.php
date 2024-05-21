@@ -9,8 +9,10 @@ use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
+use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
 use PoP\Root\Hooks\AbstractHookSet;
+use PoP\Root\Routing\RoutingHelperServiceInterface;
 
 /**
  * Use:
@@ -26,6 +28,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
+    private ?RoutingHelperServiceInterface $routingHelperService = null;
 
     final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
     {
@@ -47,6 +50,20 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
     final protected function getUserSettingsManager(): UserSettingsManagerInterface
     {
         return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
+    }
+
+    final public function setRoutingHelperService(RoutingHelperServiceInterface $routingHelperService): void
+    {
+        $this->routingHelperService = $routingHelperService;
+    }
+    final protected function getRoutingHelperService(): RoutingHelperServiceInterface
+    {
+        if ($this->routingHelperService === null) {
+            /** @var RoutingHelperServiceInterface */
+            $routingHelperService = $this->instanceManager->getInstance(RoutingHelperServiceInterface::class);
+            $this->routingHelperService = $routingHelperService;
+        }
+        return $this->routingHelperService;
     }
 
     protected function init(): void
@@ -78,11 +95,16 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         /**
          * Check if the (slashed) requested URL starts with any
          * of the (slashed) GraphQL endpoints.
+         *
+         * Use `getRequestURI` as to remove the language info from
+         * the URI when in subfolder-based Multisite.
          */
-        $requestedURLPath = '/' . trim(App::getRequest()->getPathInfo(), '/\\') . '/';
+        $requestURI = $this->getRoutingHelperService()->getRequestURI() ?? '';
+        $requestURI = EndpointUtils::removeMarkersFromURI($requestURI);
+        $requestURI = EndpointUtils::slashURI($requestURI);
         foreach ($this->getGraphQLEndpointPaths() as $graphQLEndpointPath) {
             $graphQLEndpointPath = '/' . trim($graphQLEndpointPath, '/\\') . '/';
-            if (str_starts_with($requestedURLPath, $graphQLEndpointPath)) {
+            if (str_starts_with($requestURI, $graphQLEndpointPath)) {
                 return true;
             }
         }
