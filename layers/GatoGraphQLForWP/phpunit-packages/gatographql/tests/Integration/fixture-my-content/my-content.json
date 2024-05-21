@@ -1,20 +1,61 @@
 {
     "data": {
+        "me": {
+            "id": 4,
+            "roleNames": [
+                "contributor"
+            ]
+        },
+        "existingPost": {
+            "id": 1116,
+            "title": "Working on flat chain syntax next"
+        },
+        "nonExistingPost": null,
         "myPosts": [
+            {
+                "id": 1130,
+                "title": "Trashed Post"
+            },
             {
                 "id": 1116,
                 "title": "Working on flat chain syntax next"
             }
         ],
+        "myPostCount": 2,
+        "existingCustomPost": {
+            "id": 1116,
+            "title": "Working on flat chain syntax next"
+        },
+        "nonExistingCustomPost": null,
         "myCustomPosts": [
+            {
+                "__typename": "Post",
+                "id": 1130,
+                "title": "Trashed Post"
+            },
+            {
+                "__typename": "Page",
+                "id": 1134,
+                "title": "Trashed Page"
+            },
             {
                 "__typename": "Post",
                 "id": 1116,
                 "title": "Working on flat chain syntax next"
             }
         ],
-        "me": {
-            "id": 4
-        }
+        "myCustomPostCount": 3,
+        "existingPage": {
+            "id": 1134,
+            "title": "Trashed Page"
+        },
+        "nonExistingPage": null,
+        "myPages": [
+            {
+                "id": 1134,
+                "title": "Trashed Page"
+            }
+        ],
+        "myPageCount": 1
     }
 }
