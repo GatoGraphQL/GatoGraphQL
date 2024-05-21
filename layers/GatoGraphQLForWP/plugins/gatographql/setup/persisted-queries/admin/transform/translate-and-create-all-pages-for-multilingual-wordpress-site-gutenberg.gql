@@ -43,7 +43,7 @@ query InitializeExternalSiteVariables
     @remove
 }
 
-query ExportSiteData(
+query ExportData(
   $username: String!
   $appPassword: String!
   $externalSiteURL: URL!
@@ -105,7 +105,7 @@ query ExportSiteData(
 }
 
 query RetrieveAndExportExternalSiteLanguage
-  @depends(on: "ExportSiteData")
+  @depends(on: "ExportData")
   @include(if: $hasMasterPages)
 {
   # Retrieve the language of the external site
