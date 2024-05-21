@@ -32,11 +32,11 @@ query InitializeExternalSiteVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
   emptyBool: _echo(value: false)
-    @export(as: "hasRetrievedExternalSiteLanguage")
+    @export(as: "executeTranslation")
     @remove
 }
 
-query ExportExternalSiteData(
+query ExportSiteData(
   $username: String!
   $appPassword: String!
   $externalSiteURL: URL!
@@ -74,10 +74,32 @@ query ExportExternalSiteData(
     ]
   )
     @export(as: "endpoint")
+    
+  masterPages: pages {
+    id
+    emptyArray: _echo(value: [])
+      @export(
+        as: "title"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawContent"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawExcerpt"
+        type: DICTIONARY
+      )
+      @remove
+  }
+
+  hasMasterPages: _notEmpty(value: $__masterPages)
+    @export(as: "hasMasterPages")
 }
 
 query RetrieveAndExportExternalSiteLanguage
-  @depends(on: "ExportExternalSiteData")
+  @depends(on: "ExportSiteData")
+  @include(if: $hasMasterPages)
 {
   # Retrieve the language of the external site
   externalHTTPRequest: _sendGraphQLHTTPRequest(input:{
@@ -109,39 +131,34 @@ query RetrieveAndExportExternalSiteLanguage
   )
     @export(as: "toLanguage")
   
-  # Flag to indicate if connecting to the external site was successful
+  # Indicate if connecting to the external site was successful
   hasRetrievedExternalSiteLanguage: _notEmpty(
     value: $__externalSiteLanguage
   )
-    @export(as: "hasRetrievedExternalSiteLanguage")
 
   # Only translate the content if the master/destination sites languages are different
-  doTranslateToExternalSiteLanguage: _notEquals(
+  areFromToLanguagesDifferent: _notEquals(
     value1: $fromLanguage
     value2: $__externalSiteLanguage
   )
-    @export(as: "doTranslateToExternalSiteLanguage")
+
+  # Flag to indicate if to translate the content
+  executeTranslation: _and(
+    values: [
+      $__hasRetrievedExternalSiteLanguage,
+      $__areFromToLanguagesDifferent,
+    ]
+  )
+    @export(as: "executeTranslation")
 }
 
-query InitializeTranslationVariables
+query InitializeBlockVariables
   @depends(on: "RetrieveAndExportExternalSiteLanguage")
-  @include(if: $hasRetrievedExternalSiteLanguage)
+  @include(if: $hasMasterPages)
 {
   emptyTranslationPageVars: pages {
+    id
     emptyArray: _echo(value: [])
-      @export(
-        as: "title"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawContent"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawExcerpt"
-        type: DICTIONARY
-      )
-
       @export(
         as: "coreHeadingContentItems"
         type: DICTIONARY
@@ -375,23 +392,15 @@ query InitializeTranslationVariables
         as: "coreEmbedCaptionReplacementsTo"
         type: DICTIONARY
       )
+      @remove
   }
-
-  hasMasterPages: _notEmpty(value: $__emptyTranslationPageVars)
-    @export(as: "hasMasterPages")
-
-  executeTranslation: _and(values: [
-    $hasRetrievedExternalSiteLanguage
-    $__hasMasterPages,
-  ])
-    @export(as: "executeTranslation")
 }
 
 query FetchData
-  @depends(on: "InitializeTranslationVariables")
-  @include(if: $executeTranslation)
+  @depends(on: "InitializeBlockVariables")
+  @include(if: $hasMasterPages)
 {
-  masterPages: pages {
+  fetchDataPages: pages {
     id
 
 
@@ -415,6 +424,15 @@ query FetchData
         as: "rawExcerpt"
         type: DICTIONARY
       )
+  }
+}
+
+query FetchBlockData
+  @depends(on: "FetchData")
+  @include(if: $executeTranslation)
+{
+  fetchBlockDataPages: pages {
+    id
     
 
     coreHeading: blockFlattenedDataItems(
@@ -676,8 +694,8 @@ query FetchData
 }
 
 query AdaptData
-  @depends(on: "FetchData")
-  @include(if: $executeTranslation)
+  @depends(on: "FetchBlockData")
+  @include(if: $hasMasterPages)
 {
   adaptedToTitle: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -728,7 +746,7 @@ query AdaptData
 
 query TransformData
   @depends(on: "AdaptData")
-  @include(if: $executeTranslation)
+  @include(if: $hasMasterPages)
 {
   transformations: _echo(value: {
     metaTitle: {
@@ -812,9 +830,7 @@ query TransformData
       to: $coreEmbedCaptionItems,
     },
   })
-    @if(
-      condition: $doTranslateToExternalSiteLanguage
-    )
+    @if(condition: $executeTranslation)
       @underEachJSONObjectProperty
         @underJSONObjectProperty(by: { key: "to" })
           @underEachJSONObjectProperty
@@ -829,7 +845,6 @@ query TransformData
 query EscapeRegexStrings
   @depends(on: "TransformData")
   @include(if: $executeTranslation)
-  @include(if: $doTranslateToExternalSiteLanguage)
 {  
   escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty(
@@ -923,7 +938,6 @@ query EscapeRegexStrings
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
   @include(if: $executeTranslation)
-  @include(if: $doTranslateToExternalSiteLanguage)
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
@@ -1487,7 +1501,6 @@ query CreateRegexReplacements
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
   @include(if: $executeTranslation)
-  @include(if: $doTranslateToExternalSiteLanguage)
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
@@ -2219,7 +2232,7 @@ query ExecuteRegexReplacements
 
 query PrepareMetaReplacements
   @depends(on: "TransformData")
-  @include(if: $executeTranslation)
+  @include(if: $hasMasterPages)
 {
   transformedMetaTitle: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -2293,7 +2306,7 @@ query ExportMutationInputs
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
   ])
-  @include(if: $executeTranslation)
+  @include(if: $hasMasterPages)
 {
   updatePages: pages {
     id
@@ -2334,7 +2347,7 @@ query ExportMutationInputs
 
 mutation CreatePagesWithTranslationOnExternalSite
   @depends(on: "ExportMutationInputs")
-  @include(if: $executeTranslation)
+  @include(if: $hasMasterPages)
 {
   createExternalSitePageHTTPRequests: _echo(value: $createPostMutationInputs)
     @underEachArrayItem(
