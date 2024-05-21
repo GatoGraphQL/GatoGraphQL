@@ -54,10 +54,16 @@
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
         },
         {
+          "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload"
+        },
+        {
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
         },
         {
           "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+        },
+        {
+          "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload"
         },
         {
           "name": "Media"
@@ -105,6 +111,9 @@
           "name": "RootCreateMediaItemMutationPayload"
         },
         {
+          "name": "RootCreatePageMutationPayload"
+        },
+        {
           "name": "RootCreatePostMutationPayload"
         },
         {
@@ -130,6 +139,9 @@
         },
         {
           "name": "RootUpdateCustomPostMutationPayload"
+        },
+        {
+          "name": "RootUpdatePageMutationPayload"
         },
         {
           "name": "RootUpdatePostMutationPayload"
@@ -420,6 +432,9 @@
           "name": "PageChildrenFilterInput"
         },
         {
+          "name": "PageContentInput"
+        },
+        {
           "name": "PagePaginationInput"
         },
         {
@@ -456,6 +471,9 @@
           "name": "RootCreateMediaItemInput"
         },
         {
+          "name": "RootCreatePageInput"
+        },
+        {
           "name": "RootCreatePostInput"
         },
         {
@@ -481,6 +499,9 @@
         },
         {
           "name": "RootMyMediaItemsFilterInput"
+        },
+        {
+          "name": "RootMyPagesFilterInput"
         },
         {
           "name": "RootMyPostsFilterInput"
@@ -511,6 +532,9 @@
         },
         {
           "name": "RootUpdateCustomPostInput"
+        },
+        {
+          "name": "RootUpdatePageInput"
         },
         {
           "name": "RootUpdatePostInput"
@@ -639,6 +663,9 @@
           "name": "RootCreateMediaItemMutationErrorPayloadUnion"
         },
         {
+          "name": "RootCreatePageMutationErrorPayloadUnion"
+        },
+        {
           "name": "RootCreatePostMutationErrorPayloadUnion"
         },
         {
@@ -664,6 +691,9 @@
         },
         {
           "name": "RootUpdateCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootUpdatePageMutationErrorPayloadUnion"
         },
         {
           "name": "RootUpdatePostMutationErrorPayloadUnion"

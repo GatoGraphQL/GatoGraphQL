@@ -312,6 +312,9 @@
           "name": "PageChildrenFilterInput"
         },
         {
+          "name": "PageContentInput"
+        },
+        {
           "name": "PagePaginationInput"
         },
         {
@@ -348,6 +351,9 @@
           "name": "RootCreateMediaItemInput"
         },
         {
+          "name": "RootCreatePageInput"
+        },
+        {
           "name": "RootCreatePostInput"
         },
         {
@@ -373,6 +379,9 @@
         },
         {
           "name": "RootMyMediaItemsFilterInput"
+        },
+        {
+          "name": "RootMyPagesFilterInput"
         },
         {
           "name": "RootMyPostsFilterInput"
@@ -403,6 +412,9 @@
         },
         {
           "name": "RootUpdateCustomPostInput"
+        },
+        {
+          "name": "RootUpdatePageInput"
         },
         {
           "name": "RootUpdatePostInput"
