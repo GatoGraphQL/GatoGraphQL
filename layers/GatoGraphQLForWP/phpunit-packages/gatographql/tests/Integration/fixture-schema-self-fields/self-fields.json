@@ -175,6 +175,12 @@
                         "name": "roles"
                     },
                     {
+                        "name": "siteLanguage"
+                    },
+                    {
+                        "name": "siteLocale"
+                    },
+                    {
                         "name": "tag"
                     },
                     {
