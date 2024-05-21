@@ -27,3 +27,70 @@
 #
 ########################################################################
 
+query ExportData(
+  $username: String!
+  $appPassword: String!
+  $externalSiteURL: URL!
+  $externalSiteGraphQLEndpointPath: String! = "/graphql/nested-mutations/"
+) {
+  loginCredentials: _sprintf(
+    string: "%s:%s",
+    values: [$username, $appPassword]
+  )
+    @remove
+
+  base64EncodedLoginCredentials: _strBase64Encode(
+    string: $__loginCredentials
+  )
+    @remove
+
+  authorizationHeaderValue: _sprintf(
+    string: "Basic %s",
+    values: [$__base64EncodedLoginCredentials]
+  )
+    @remove
+    @export(as: "authorizationHeaderValue")
+  
+  endpoint: _sprintf(
+    string: "%s%s",
+    values: [
+      $externalSiteURL,
+      $externalSiteGraphQLEndpointPath
+    ]
+  )
+    @export(as: "endpoint")
+}
+
+query GetExternalSiteLanguage
+  @depends(on: "ExportData")
+{
+  externalHTTPRequest: _sendGraphQLHTTPRequest(input:{
+    endpoint: $endpoint,
+    query: """
+  
+{
+  me {
+    name
+  }
+  siteLanguage
+}
+
+    """,
+    options: {
+      headers: [
+        {
+          name: "Authorization",
+          value: $authorizationHeaderValue
+        }
+      ]
+    }
+  })
+  externalSiteLanguage: _objectProperty(
+    object: $__externalHTTPRequest,
+    by: {
+      path: "data.siteLanguage"
+    }
+  )
+    @export(as: "externalSiteLanguage")
+}
+
