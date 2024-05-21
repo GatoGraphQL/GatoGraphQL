@@ -6,50 +6,50 @@
   }
 
   # Posts
-  existingPost: myPost(by: { id: 1116 }, status: [pending, trash]) {
+  existingPost: myPost(by: { id: 1116 }, status: [publish, trash]) {
     id
     title
   }
-  nonExistingPost: myPost(by: { id: 8888 }, status: [pending, trash]) {
+  nonExistingPost: myPost(by: { id: 8888 }, status: [publish, trash]) {
     id
     title
   }
-  myPosts(filter: { status: [pending, trash] }) {
+  myPosts(filter: { status: [publish, trash] }) {
     id
     title
   }
-  myPostCount(filter: { status: [pending, trash] })
+  myPostCount(filter: { status: [publish, trash] })
 
   # Custom Posts
-  existingCustomPost: myCustomPost(by: { id: 1116 }, status: [pending, trash]) {
+  existingCustomPost: myCustomPost(by: { id: 1116 }, status: [publish, trash]) {
     id
     title
   }
-  nonExistingCustomPost: myCustomPost(by: { id: 8888 }, status: [pending, trash]) {
+  nonExistingCustomPost: myCustomPost(by: { id: 8888 }, status: [publish, trash]) {
     id
     title
   }
-  myCustomPosts(filter: { status: [pending, trash] }) {
+  myCustomPosts(filter: { status: [publish, trash] }) {
     __typename
     ...on CustomPost {
       id
       title
     }
   }
-  myCustomPostCount(filter: { status: [pending, trash] })
+  myCustomPostCount(filter: { status: [publish, trash] })
 
   # Pages
-  existingPage: myPage(by: { id: 2 }, status: [pending, trash]) {
+  existingPage: myPage(by: { id: 2 }, status: [publish, trash]) {
     id
     title
   }
-  nonExistingPage: myPage(by: { id: 8888 }, status: [pending, trash]) {
+  nonExistingPage: myPage(by: { id: 8888 }, status: [publish, trash]) {
     id
     title
   }
-  myPages(filter: { status: [pending, trash] }) {
+  myPages(filter: { status: [publish, trash] }) {
     id
     title
   }
-  myPageCount(filter: { status: [pending, trash] })
+  myPageCount(filter: { status: [publish, trash] })
 }
