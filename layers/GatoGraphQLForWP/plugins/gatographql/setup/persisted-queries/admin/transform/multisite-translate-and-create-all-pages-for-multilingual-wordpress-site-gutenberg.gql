@@ -2318,16 +2318,55 @@ mutation CreatePagesWithTranslationOnExternalSite
   @depends(on: "ExportMutationInputs")
   @include(if: $executeTranslation)
 {
-  createdPageIDs: _echo(value: $createPostMutationInputs)
+  createdExternalSitePageIDs: _echo(value: $createPostMutationInputs)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
       @applyField(
-        name: "createPage"
+        name: "_sendGraphQLHTTPRequest"
         arguments: {
-          input: $input
+          input: {
+            endpoint: $endpoint,
+            query: """
+          
+mutation CreatePageFromMasterSite($input: JSONObject!) {
+  createPage(input: $input) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    page {
+      id
+      slug
+      title
+      content
+      status
+      url
+      excerpt
+    }
+  }
+}
+
+            """,
+            variables: [
+              {
+                name: "input",
+                value: $input
+              }
+            ],
+            options: {
+              headers: [
+                {
+                  name: "Authorization",
+                  value: $authorizationHeaderValue
+                }
+              ]
+            }
+          }
         },
         setResultInResponse: true
       )
-    @export(as: "createdPageIDs")
 }
