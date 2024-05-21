@@ -39,7 +39,7 @@
   myCustomPostCount(filter: { status: [publish, trash] })
 
   # Pages
-  existingPage: myPage(by: { id: 2 }, status: [publish, trash]) {
+  existingPage: myPage(by: { id: 1134 }, status: [publish, trash]) {
     id
     title
   }
