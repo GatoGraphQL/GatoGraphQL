@@ -1,16 +1,55 @@
 {
-  myPosts {
+  # User state
+  me {
+    id
+    roleNames
+  }
+
+  # Posts
+  existingPost: myPost(by: { id: 1116 }, status: [publish, trash]) {
     id
     title
   }
-  myCustomPosts {
+  nonExistingPost: myPost(by: { id: 8888 }, status: [publish, trash]) {
+    id
+    title
+  }
+  myPosts(filter: { status: [publish, trash] }) {
+    id
+    title
+  }
+  myPostCount(filter: { status: [publish, trash] })
+
+  # Custom Posts
+  existingCustomPost: myCustomPost(by: { id: 1116 }, status: [publish, trash]) {
+    id
+    title
+  }
+  nonExistingCustomPost: myCustomPost(by: { id: 8888 }, status: [publish, trash]) {
+    id
+    title
+  }
+  myCustomPosts(filter: { status: [publish, trash] }) {
     __typename
-    ...on Post {
+    ...on CustomPost {
       id
       title
     }
   }
-  me {
+  myCustomPostCount(filter: { status: [publish, trash] })
+
+  # Pages
+  existingPage: myPage(by: { id: 1134 }, status: [publish, trash]) {
     id
+    title
   }
+  nonExistingPage: myPage(by: { id: 8888 }, status: [publish, trash]) {
+    id
+    title
+  }
+  myPages(filter: { status: [publish, trash] }) {
+    id
+    title
+  }
+  myPageCount(filter: { status: [publish, trash] })
 }

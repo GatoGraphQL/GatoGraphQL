@@ -1253,7 +1253,7 @@
 		<link>https://gatographql.lndo.site/working-on-flat-chain-syntax-next/</link>
 		<pubDate>Sat, 12 Dec 2020 03:59:07 +0000</pubDate>
 		<dc:creator><![CDATA[contributor]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?p=16</guid>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1116</guid>
 		<description></description>
 		<content:encoded><![CDATA[<!-- wp:heading -->
 <h2>Image Block (Wide)</h2>
@@ -1891,8 +1891,8 @@ https://wordpress.org/about/
 		<title><![CDATA[Trashed Post]]></title>
 		<link>https://gatographql.lndo.site/trashed-post/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
-		<dc:creator><![CDATA[author]]></dc:creator>
-		<guid isPermaLink="false">https://gatographql.lndo.site/?p=30</guid>
+		<dc:creator><![CDATA[contributor]]></dc:creator>
+		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1130</guid>
 		<description></description>
 		<content:encoded><![CDATA[Trashed post for testing comments with Integration Tests]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
@@ -1937,7 +1937,7 @@ https://wordpress.org/about/
 		<title><![CDATA[Trashed Page]]></title>
 		<link>https://gatographql.lndo.site/trashed-page/</link>
 		<pubDate>Sat, 12 Dec 2020 04:08:47 +0000</pubDate>
-		<dc:creator><![CDATA[editor]]></dc:creator>
+		<dc:creator><![CDATA[contributor]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?p=1134</guid>
 		<description></description>
 		<content:encoded><![CDATA[Trashed page for testing comments with Integration Tests]]></content:encoded>

@@ -127,6 +127,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/page-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/page-mutations
         - >-
+          ../../layers/CMSSchema/packages/page-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/page-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/pagemedia-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/pagemedia-mutations
         - >-
           ../../layers/CMSSchema/packages/pages-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/pages-wp

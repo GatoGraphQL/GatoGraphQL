@@ -29,7 +29,7 @@
         "pop-cms-schema/custompostmedia-mutations-wp": "^2.4",
         "pop-cms-schema/custompostmedia-wp": "^2.4",
         "pop-cms-schema/media-mutations-wp": "^2.4",
-        "pop-cms-schema/page-mutations": "^2.4",
+        "pop-cms-schema/page-mutations-wp": "^2.4",
         "pop-cms-schema/pagemedia-mutations": "^2.4",
         "pop-cms-schema/post-categories-wp": "^2.4",
         "pop-cms-schema/post-category-mutations-wp": "^2.4",

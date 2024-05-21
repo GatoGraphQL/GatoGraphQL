@@ -72,11 +72,19 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
         },
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -140,6 +148,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreatePageMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootCreatePostMutationPayload"
         },
         {
@@ -173,6 +185,10 @@
         {
           "kind": "OBJECT",
           "name": "RootUpdateCustomPostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdatePageMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -560,6 +576,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "PageContentInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "PagePaginationInput"
         },
         {
@@ -608,6 +628,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreatePageInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreatePostInput"
         },
         {
@@ -641,6 +665,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootMyMediaItemsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootMyPagesFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -681,6 +709,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootUpdateCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdatePageInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -852,6 +884,10 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreatePageMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreatePostMutationErrorPayloadUnion"
         },
         {
@@ -885,6 +921,10 @@
         {
           "kind": "UNION",
           "name": "RootUpdateCustomPostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdatePageMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",

@@ -460,6 +460,17 @@
           "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\""
         },
         {
+          "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to edit pages\""
+        },
+        {
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "namespacedName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "fields": [
@@ -480,6 +491,17 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The logged-in user has no permission to publish custom posts\""
+        },
+        {
+          "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to publish pages\""
         },
         {
           "name": "Media",
@@ -668,6 +690,9 @@
               "name": "createMediaItem"
             },
             {
+              "name": "createPage"
+            },
+            {
               "name": "createPost"
             },
             {
@@ -693,6 +718,9 @@
             },
             {
               "name": "updateCustomPost"
+            },
+            {
+              "name": "updatePage"
             },
             {
               "name": "updatePost"
@@ -1166,6 +1194,15 @@
               "name": "myMediaItems"
             },
             {
+              "name": "myPage"
+            },
+            {
+              "name": "myPageCount"
+            },
+            {
+              "name": "myPages"
+            },
+            {
               "name": "myPost"
             },
             {
@@ -1297,6 +1334,9 @@
               "name": "createMediaItem"
             },
             {
+              "name": "createPage"
+            },
+            {
               "name": "createPost"
             },
             {
@@ -1376,6 +1416,15 @@
             },
             {
               "name": "myMediaItems"
+            },
+            {
+              "name": "myPage"
+            },
+            {
+              "name": "myPageCount"
+            },
+            {
+              "name": "myPages"
             },
             {
               "name": "myPost"
@@ -1477,6 +1526,9 @@
               "name": "updateCustomPost"
             },
             {
+              "name": "updatePage"
+            },
+            {
               "name": "updatePost"
             },
             {
@@ -1551,6 +1603,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of uploading an attachment"
+        },
+        {
+          "name": "RootCreatePageMutationPayload",
+          "namespacedName": "RootCreatePageMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a page"
         },
         {
           "name": "RootCreatePostMutationPayload",
@@ -1731,6 +1803,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing an update mutation on a custom post"
+        },
+        {
+          "name": "RootUpdatePageMutationPayload",
+          "namespacedName": "RootUpdatePageMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a page"
         },
         {
           "name": "RootUpdatePostMutationPayload",
@@ -2918,6 +3010,13 @@
           "description": "Input to filter the page children"
         },
         {
+          "name": "PageContentInput",
+          "namespacedName": "PageContentInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": null
+        },
+        {
           "name": "PagePaginationInput",
           "namespacedName": "PagePaginationInput",
           "fields": null,
@@ -3002,6 +3101,13 @@
           "description": "Input to upload an attachment"
         },
         {
+          "name": "RootCreatePageInput",
+          "namespacedName": "RootCreatePageInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a custom post"
+        },
+        {
           "name": "RootCreatePostInput",
           "namespacedName": "RootCreatePostInput",
           "fields": null,
@@ -3063,6 +3169,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter the logged-in user's media items"
+        },
+        {
+          "name": "RootMyPagesFilterInput",
+          "namespacedName": "RootMyPagesFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter the logged-in user's pages"
         },
         {
           "name": "RootMyPostsFilterInput",
@@ -3130,6 +3243,13 @@
         {
           "name": "RootUpdateCustomPostInput",
           "namespacedName": "RootUpdateCustomPostInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a custom post"
+        },
+        {
+          "name": "RootUpdatePageInput",
+          "namespacedName": "RootUpdatePageInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"
@@ -3429,6 +3549,13 @@
           "description": "Union of 'Error Payload' types when uploading an attachment"
         },
         {
+          "name": "RootCreatePageMutationErrorPayloadUnion",
+          "namespacedName": "RootCreatePageMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a page"
+        },
+        {
           "name": "RootCreatePostMutationErrorPayloadUnion",
           "namespacedName": "RootCreatePostMutationErrorPayloadUnion",
           "fields": null,
@@ -3490,6 +3617,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a custom post"
+        },
+        {
+          "name": "RootUpdatePageMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdatePageMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a page"
         },
         {
           "name": "RootUpdatePostMutationErrorPayloadUnion",

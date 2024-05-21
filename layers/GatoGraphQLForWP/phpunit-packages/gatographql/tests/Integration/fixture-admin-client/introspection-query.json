@@ -2770,6 +2770,39 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to edit pages\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "description": "Error payload for: \"The logged-in user has no permission to edit the requested custom post\"",
           "fields": [
@@ -2805,6 +2838,39 @@
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
           "description": "Error payload for: \"The logged-in user has no permission to publish custom posts\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to publish pages\"",
           "fields": [
             {
               "name": "message",
@@ -3871,6 +3937,37 @@
               "deprecationReason": null
             },
             {
+              "name": "createPage",
+              "description": "Create a page",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePageInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreatePageInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreatePageMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreatePageMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPost",
               "description": "Create a post",
               "args": [
@@ -4128,6 +4225,37 @@
                 "ofType": {
                   "kind": "OBJECT",
                   "name": "RootUpdateCustomPostMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePage",
+              "description": "Update a page",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePageInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdatePageInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdatePageMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdatePageMutationPayload",
                   "ofType": null
                 }
               },
@@ -8196,6 +8324,137 @@
               "deprecationReason": null
             },
             {
+              "name": "myPage",
+              "description": "Retrieve a single page by the logged-in user",
+              "args": [
+                {
+                  "name": "status",
+                  "description": "Custom Post Status",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": "[\"publish\"]"
+                },
+                {
+                  "name": "by",
+                  "description": "Oneof input to specify the property and data to fetch a page",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PageByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PageByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Page",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myPageCount",
+              "description": "Number of pages by the logged-in user",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's pages",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyPagesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myPages",
+              "description": "Pages by the logged-in user",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's pages",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyPagesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate pages",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "PagePaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CustomPostSortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[Page!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[Page!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "Page!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Page",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "myPost",
               "description": "Retrieve a single post by the logged-in user",
               "args": [
@@ -9880,6 +10139,37 @@
               "deprecationReason": null
             },
             {
+              "name": "createPage",
+              "description": "Create a page",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePageInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreatePageInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreatePageMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreatePageMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPost",
               "description": "Create a post",
               "args": [
@@ -10809,6 +11099,137 @@
                     "ofType": {
                       "kind": "OBJECT",
                       "name": "Media",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myPage",
+              "description": "Retrieve a single page by the logged-in user",
+              "args": [
+                {
+                  "name": "status",
+                  "description": "Custom Post Status",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[FilterCustomPostStatusEnum!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[FilterCustomPostStatusEnum!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "FilterCustomPostStatusEnum!",
+                        "ofType": {
+                          "kind": "ENUM",
+                          "name": "FilterCustomPostStatusEnum",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": "[\"publish\"]"
+                },
+                {
+                  "name": "by",
+                  "description": "Oneof input to specify the property and data to fetch a page",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "PageByInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "PageByInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Page",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myPageCount",
+              "description": "Number of pages by the logged-in user",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's pages",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyPagesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Int!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "myPages",
+              "description": "Pages by the logged-in user",
+              "args": [
+                {
+                  "name": "filter",
+                  "description": "Input to filter the logged-in user's pages",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootMyPagesFilterInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "pagination",
+                  "description": "Input to paginate pages",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "PagePaginationInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "sort",
+                  "description": "Input to sort custom posts",
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CustomPostSortInput",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[Page!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[Page!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "Page!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "Page",
                       "ofType": null
                     }
                   }
@@ -12094,6 +12515,37 @@
               "deprecationReason": null
             },
             {
+              "name": "updatePage",
+              "description": "Update a page",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePageInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdatePageInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdatePageMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdatePageMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePost",
               "description": "Update a post",
               "args": [
@@ -12426,6 +12878,77 @@
             },
             {
               "name": "mediaItemID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreatePageMutationPayload",
+          "description": "Payload of creating a page",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootCreatePageMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootCreatePageMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootCreatePageMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "page",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Page",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "pageID",
               "description": "ID of the entity, if the operation was successful",
               "args": [],
               "type": {
@@ -13071,6 +13594,77 @@
                     "ofType": null
                   }
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdatePageMutationPayload",
+          "description": "Payload of executing an update mutation on a page",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootUpdatePageMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootUpdatePageMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootUpdatePageMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "page",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Page",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "pageID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -16596,12 +17190,22 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
             {
               "kind": "OBJECT",
               "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -19493,6 +20097,27 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "PageContentInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "html",
+              "description": "Use HTML as content for the page",
+              "type": {
+                "kind": "SCALAR",
+                "name": "HTML",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "PagePaginationInput",
           "description": "Input to paginate pages",
           "fields": null,
@@ -20359,6 +20984,87 @@
             {
               "name": "title",
               "description": "Attachment title",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCreatePageInput",
+          "description": "Input to update a custom post",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "authorBy",
+              "description": "The author of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "AuthorByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "contentAs",
+              "description": "The content of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "PageContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "featuredImageBy",
+              "description": "The image to set as featured",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FeaturedImageByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "status",
+              "description": "The status of the custom post",
+              "type": {
+                "kind": "ENUM",
+                "name": "CustomPostStatusEnum",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "title",
+              "description": "The title of the custom post",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -21410,6 +22116,155 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootMyPagesFilterInput",
+          "description": "Input to filter the logged-in user's pages",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "customPostTypes",
+              "description": "Filter custom posts of given types",
+              "type": {
+                "kind": "LIST",
+                "name": "[CustomPostEnumString!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "CustomPostEnumString!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "CustomPostEnumString",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+            },
+            {
+              "name": "dateQuery",
+              "description": "Filter custom posts based on date",
+              "type": {
+                "kind": "LIST",
+                "name": "[DateQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "DateQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DateQueryInput",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excludeIDs",
+              "description": "Exclude elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "hasPassword",
+              "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": "false"
+            },
+            {
+              "name": "ids",
+              "description": "Limit results to elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "metaQuery",
+              "description": "Filter elements by meta key and value",
+              "type": {
+                "kind": "LIST",
+                "name": "[CustomPostMetaQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "CustomPostMetaQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CustomPostMetaQueryInput",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "password",
+              "description": "Include custom posts protected by a specific password",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "search",
+              "description": "Search for custom posts containing the given string",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "status",
+              "description": "Custom post status",
+              "type": {
+                "kind": "LIST",
+                "name": "[FilterCustomPostStatusEnum!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "FilterCustomPostStatusEnum!",
+                  "ofType": {
+                    "kind": "ENUM",
+                    "name": "FilterCustomPostStatusEnum",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": "[\"publish\"]"
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootMyPostsFilterInput",
           "description": "Input to filter the logged-in user's posts",
           "fields": null,
@@ -22318,6 +23173,101 @@
                   "name": "CustomPostEnumString",
                   "ofType": null
                 }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "excerpt",
+              "description": "The excerpt of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "featuredImageBy",
+              "description": "The image to set as featured",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "FeaturedImageByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the custom post to update",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "status",
+              "description": "The status of the custom post",
+              "type": {
+                "kind": "ENUM",
+                "name": "CustomPostStatusEnum",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "title",
+              "description": "The title of the custom post",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdatePageInput",
+          "description": "Input to update a custom post",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "authorBy",
+              "description": "The author of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "AuthorByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "contentAs",
+              "description": "The content of the custom post",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "PageContentInput",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -24761,6 +25711,57 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreatePageMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when creating a page",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreatePostMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when creating a post",
           "fields": null,
@@ -25114,6 +26115,67 @@
             {
               "kind": "OBJECT",
               "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdatePageMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a page",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
               "ofType": null
             },
             {

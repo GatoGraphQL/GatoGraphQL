@@ -7,6 +7,63 @@
 - Link extensions to the Extensions Reference in gatographql.com ([#2675](https://github.com/GatoGraphQL/GatoGraphQL/pull/2675))
 - Added YouTube channel link to About page ([#2676](https://github.com/GatoGraphQL/GatoGraphQL/pull/2676))
 
+### Added page mutations to the GraphQL schema ([#2682](https://github.com/GatoGraphQL/GatoGraphQL/pull/2682))
+
+Added the following mutations to the GraphQL schema:
+
+- `Root.createPage`
+- `Root.updatePage`
+- `Page.update`
+
+For instance, you can now execute this GraphQL query to modify a page:
+
+```graphql
+mutation UpdatePage {
+  updatePage(input: {
+    id: 2
+    title: "Updated title"
+    contentAs: { html: "Updated content" },
+    status: pending
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    page {
+      id
+      rawTitle
+      rawContent
+      status
+    }
+  }
+}
+```
+
+### Added fields to fetch the logged-in user's pages ([#2682](https://github.com/GatoGraphQL/GatoGraphQL/pull/2682))
+
+`v2.4` also adds fields to retrieve the logged-in user's pages.
+
+The previously-existing fields `Root.page`, `Root.pages` and `Root.pageCount` retrieve pages for any user, but only public ones (i.e. those with status `"publish"`).
+
+From this version on, we can fetch public or private pages from the logged-in user (i.e. with status `"publish"`, `"pending"`, `"draft"` or `"trash"`), using these new fields:
+
+- `Root.myPage`
+- `Root.myPages`
+- `Root.myPageCount`
+
+```graphql
+query {
+  myPages(filter: { status: [draft, pending] }) {
+    id
+    title
+    status
+  }
+}
+```
+
 ### Support Application Passwords ([#2672](https://github.com/GatoGraphQL/GatoGraphQL/pull/2672))
 
 It is now possible to use WordPress [Application Passwords](https://make.wordpress.org/core/2020/11/05/application-passwords-integration-guide/) to send an authenticated request to the GraphQL endpoint.

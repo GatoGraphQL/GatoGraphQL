@@ -271,6 +271,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 2.4.0 =
+* Added page mutations to the GraphQL schema (#2682)
+* Added fields to fetch the logged-in user's pages (#2682)
 * Support Application Passwords (#2672)
 * Support for subfolder-based Multisite network (#2677)
 * Added documentation for new PRO field `_strBase64Encode` (#2673)

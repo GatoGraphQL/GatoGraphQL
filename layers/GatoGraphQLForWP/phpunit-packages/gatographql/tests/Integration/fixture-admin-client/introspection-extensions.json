@@ -1457,6 +1457,27 @@
                     "enumValues": null
                 },
                 {
+                    "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
@@ -1482,6 +1503,27 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
                         "namespacedName": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -2070,6 +2112,21 @@
                             ]
                         },
                         {
+                            "name": "createPage",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2184,6 +2241,21 @@
                         },
                         {
                             "name": "updateCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePage",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -4211,6 +4283,69 @@
                             ]
                         },
                         {
+                            "name": "myPage",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "status",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "by",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myPageCount",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myPages",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "pagination",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "myPost",
                             "extensions": {
                                 "isMutation": false,
@@ -5039,6 +5174,21 @@
                             ]
                         },
                         {
+                            "name": "createPage",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPost",
                             "extensions": {
                                 "isMutation": true,
@@ -5471,6 +5621,69 @@
                         },
                         {
                             "name": "myMediaItems",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "pagination",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myPage",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "status",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "by",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myPageCount",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filter",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "myPages",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6121,6 +6334,21 @@
                             ]
                         },
                         {
+                            "name": "updatePage",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePost",
                             "extensions": {
                                 "isMutation": true,
@@ -6313,6 +6541,51 @@
                         },
                         {
                             "name": "mediaItemID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreatePageMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreatePageMutationPayload",
+                        "namespacedName": "RootCreatePageMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "page",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "pageID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -6718,6 +6991,51 @@
                         },
                         {
                             "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdatePageMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdatePageMutationPayload",
+                        "namespacedName": "RootUpdatePageMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "page",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "pageID",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -10325,6 +10643,25 @@
                     "enumValues": null
                 },
                 {
+                    "name": "PageContentInput",
+                    "extensions": {
+                        "elementName": "PageContentInput",
+                        "namespacedName": "PageContentInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "html",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "PagePaginationInput",
                     "extensions": {
                         "elementName": "PagePaginationInput",
@@ -10827,6 +11164,61 @@
                         },
                         {
                             "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreatePageInput",
+                    "extensions": {
+                        "elementName": "RootCreatePageInput",
+                        "namespacedName": "RootCreatePageInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "authorBy",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
+                            "name": "contentAs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excerpt",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "status",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -11348,6 +11740,73 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootMyPagesFilterInput",
+                    "extensions": {
+                        "elementName": "RootMyPagesFilterInput",
+                        "namespacedName": "RootMyPagesFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "customPostTypes",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "dateQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excludeIDs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "hasPassword",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
+                            "name": "ids",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "metaQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "password",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
+                            "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootMyPostsFilterInput",
                     "extensions": {
                         "elementName": "RootMyPostsFilterInput",
@@ -11818,6 +12277,67 @@
                         },
                         {
                             "name": "customPostType",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "excerpt",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "featuredImageBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdatePageInput",
+                    "extensions": {
+                        "elementName": "RootUpdatePageInput",
+                        "namespacedName": "RootUpdatePageInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "authorBy",
+                            "extensions": {
+                                "isSensitiveDataElement": true
+                            }
+                        },
+                        {
+                            "name": "contentAs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -13680,6 +14200,18 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreatePageMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreatePageMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreatePageMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreatePostMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootCreatePostMutationErrorPayloadUnion",
@@ -13780,6 +14312,18 @@
                     "extensions": {
                         "elementName": "RootUpdateCustomPostMutationErrorPayloadUnion",
                         "namespacedName": "RootUpdateCustomPostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdatePageMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdatePageMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdatePageMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
