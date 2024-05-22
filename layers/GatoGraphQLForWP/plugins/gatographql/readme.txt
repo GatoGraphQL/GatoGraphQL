@@ -276,13 +276,13 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added fields to fetch the site's locale and language (#2685)
 * Install "internal" private custom endpoint (#2684)
 * Support Application Passwords (#2672)
-* Support for subfolder-based Multisite network (#2677)
 * Added documentation for new PRO field `_strBase64Encode` (#2673)
 * Link extensions to the Extensions Reference in gatographql.com (#2675)
 * Added YouTube channel link to About page (#2676)
 * Added predefined persisted queries:
   * [PRO] Translate and create all pages for a multilingual site (Multisite / Gutenberg) (#2688)
   * [PRO] Translate and create all pages for a multilingual site (Multisite / Classic editor) (#2688)
+* Fixed: Open GraphiQL/Voyager clients in subfolder-based Multisite network (#2677)
 * Fixed: Highlight extensions and enable link to visit in website (#2674)
 * Fixed: GraphiQL client (for LocalWP) now uses site URL as endpoint (#2686)
 
