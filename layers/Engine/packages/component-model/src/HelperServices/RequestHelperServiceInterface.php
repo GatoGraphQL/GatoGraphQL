@@ -8,10 +8,8 @@ interface RequestHelperServiceInterface
 {
     /**
      * Return the requested full URL
-     *
-     * @param boolean $useHostRequestedByClient If true, get the host from user-provided HTTP_HOST, otherwise from the server-defined SERVER_NAME
      */
-    public function getRequestedFullURL(bool $useHostRequestedByClient = false): ?string;
+    public function getRequestedFullURL(): ?string;
 
     /**
      * Return the URL that is useful to the component model:

@@ -8,7 +8,6 @@ use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
-use PoP\ComponentModel\Misc\GeneralUtils;
 
 trait CustomEndpointClientTrait
 {
@@ -35,23 +34,13 @@ trait CustomEndpointClientTrait
          * If accessing from Nginx, the server_name might point to localhost
          * instead of the actual server domain. So use the user-requested host
          */
-        $fullURL = $this->getRequestHelperService()->getRequestedFullURL(true);
+        $fullURL = $this->getRequestHelperService()->getRequestedFullURL();
         if ($fullURL === null) {
             return null;
         }
 
         // Remove the ?view=...
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
-
-        /**
-         * When using LocalWP, the port "10003" is somehow added to the URL,
-         * and it doesn't work anymore.
-         *
-         * Then, simply use the path from the current URL, and retrieve the
-         * domain from the WP site
-         */
-        $endpointPath = GeneralUtils::removeDomain($endpointURL);
-        $endpointURL = untrailingslashit(get_site_url()) . $endpointPath;
 
         // // Maybe add ?use_namespace=true
         // /** @var ComponentModelModuleConfiguration */
