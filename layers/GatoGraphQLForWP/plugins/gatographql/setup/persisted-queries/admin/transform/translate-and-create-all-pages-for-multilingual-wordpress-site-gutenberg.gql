@@ -50,7 +50,7 @@ query ExportData(
   $appPassword: String!
   $externalSiteURL: URL!
   $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
-  $pageIDs: [!ID]! = []
+  $pageIDs: [ID!]! = []
   $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: "InitializeExternalSiteVariables")
@@ -164,7 +164,7 @@ query RetrieveAndExportExternalSiteLanguage
 }
 
 query InitializeBlockVariables(
-  $pageIDs: [!ID]! = []
+  $pageIDs: [ID!]! = []
   $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: "RetrieveAndExportExternalSiteLanguage")
@@ -411,7 +411,7 @@ query InitializeBlockVariables(
 }
 
 query FetchData(
-  $pageIDs: [!ID]! = []
+  $pageIDs: [ID!]! = []
   $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: "InitializeBlockVariables")
@@ -445,7 +445,7 @@ query FetchData(
 }
 
 query FetchBlockData(
-  $pageIDs: [!ID]! = []
+  $pageIDs: [ID!]! = []
   $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: "FetchData")
@@ -2322,7 +2322,7 @@ query PrepareMetaReplacements
 }
 
 query ExportMutationInputs(
-  $pageIDs: [!ID]! = []
+  $pageIDs: [ID!]! = []
   $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: [
