@@ -122,7 +122,7 @@ class GeneralUtils
         return rtrim($text, '/\\') . '/';
     }
 
-    public static function getDomain(string $url): string
+    public static function getDomain(string $url, bool $withPort = false): string
     {
         $url_parts = parse_url($url);
         if (!is_array($url_parts)) {
@@ -130,7 +130,14 @@ class GeneralUtils
         }
         $scheme = isset($url_parts['scheme']) ? $url_parts['scheme'] . '://' : '';
         $host = $url_parts['host'] ?? '';
-        return $scheme . $host;
+        $port = '';
+        if ($withPort) {
+            $port = $url_parts['port'] ?? '';
+            if ($port) {
+                $port = ':' . $port;
+            }
+        }
+        return $scheme . $host . $port;
     }
 
     public static function getHost(string $url): string
@@ -144,7 +151,7 @@ class GeneralUtils
 
     public static function removeDomain(string $url): string
     {
-        return substr($url, strlen(self::getDomain($url)));
+        return substr($url, strlen(self::getDomain($url, true)));
     }
 
     public static function getPath(string $url): string

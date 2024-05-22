@@ -281,6 +281,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Link extensions to the Extensions Reference in gatographql.com (#2675)
 * Added YouTube channel link to About page (#2676)
 * Fixed: Highlight extensions and enable link to visit in website (#2674)
+* Fixed: GraphiQL client (for LocalWP) now uses site URL as endpoint (#2686)
 
 = 2.3.0 =
 * Added fields `GenericCustomPost.update`, `Root.updateCustomPost` and `Root.createCustomPost` (#2663)

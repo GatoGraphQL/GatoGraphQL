@@ -21,6 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Highlight extensions and enable link to visit in website (#2674)
+- GraphiQL client (for LocalWP) now uses site URL as endpoint (#2686)
 
 ## 2.3.0 - 08/05/2024
 

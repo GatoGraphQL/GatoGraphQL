@@ -162,3 +162,4 @@ query GetDataFromExternalWPSite(
 ## Fixed
 
 - Highlight extensions and enable link to visit in website ([#2674](https://github.com/GatoGraphQL/GatoGraphQL/pull/2674))
+- GraphiQL client (for LocalWP) now uses site URL as endpoint ([#2686](https://github.com/GatoGraphQL/GatoGraphQL/pull/2686))
