@@ -4,6 +4,8 @@
 #   - $username: The username to log into the external site
 #   - $appPassword: The application password to log into the external site
 #   - $externalSiteURL: The URL of the external site, where all pages will be (translated and) created
+#   - (Optional) $pageIDs: Restrict translating/creating the pages with given IDs
+#   - (Optional) $pageStatus: Fetch pages with given status
 #   - (Optional) $externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site
 #
 # *********************************************************************
@@ -48,6 +50,8 @@ query ExportData(
   $appPassword: String!
   $externalSiteURL: URL!
   $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
+  $pageIDs: [!ID]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: "InitializeExternalSiteVariables")
 {
@@ -82,7 +86,7 @@ query ExportData(
   )
     @export(as: "endpoint")
     
-  masterPages: pages {
+  masterPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
     id
     emptyArray: _echo(value: [])
       @export(
@@ -159,11 +163,14 @@ query RetrieveAndExportExternalSiteLanguage
     @export(as: "executeTranslation")
 }
 
-query InitializeBlockVariables
+query InitializeBlockVariables(
+  $pageIDs: [!ID]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
+)
   @depends(on: "RetrieveAndExportExternalSiteLanguage")
   @include(if: $hasMasterPages)
 {
-  emptyTranslationPageVars: pages {
+  emptyTranslationPageVars: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
     id
     emptyArray: _echo(value: [])
       @export(
@@ -403,11 +410,14 @@ query InitializeBlockVariables
   }
 }
 
-query FetchData
+query FetchData(
+  $pageIDs: [!ID]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
+)
   @depends(on: "InitializeBlockVariables")
   @include(if: $hasMasterPages)
 {
-  fetchDataPages: pages {
+  fetchDataPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
     id
 
 
@@ -434,11 +444,14 @@ query FetchData
   }
 }
 
-query FetchBlockData
+query FetchBlockData(
+  $pageIDs: [!ID]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
+)
   @depends(on: "FetchData")
   @include(if: $executeTranslation)
 {
-  fetchBlockDataPages: pages {
+  fetchBlockDataPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
     id
     
 
@@ -2308,14 +2321,17 @@ query PrepareMetaReplacements
     )
 }
 
-query ExportMutationInputs
+query ExportMutationInputs(
+  $pageIDs: [!ID]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
+)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
   ])
   @include(if: $hasMasterPages)
 {
-  updatePages: pages {
+  exportPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
     id
     transformedRawContent: _objectProperty(
       object: $transformedRawContent,
