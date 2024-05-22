@@ -29,27 +29,7 @@ class RequestHelperService implements RequestHelperServiceInterface
             return null;
         }
 
-        $s = App::server("HTTPS") === "on" ? "s" : "";
-        $sp = strtolower(App::server("SERVER_PROTOCOL"));
-        $pos = strpos($sp, "/");
-        if ($pos === false) {
-            $pos = null;
-        }
-        $protocol = substr($sp, 0, $pos) . $s;
-        /**
-         * The default ports (80 for HTTP and 443 for HTTPS) must be ignored
-         */
-        $isDefaultPort = $s ? in_array(App::server("SERVER_PORT"), ["443", "80"]) : App::server("SERVER_PORT") == "80";
-        $port = $isDefaultPort ? "" : (":" . App::server("SERVER_PORT"));
-        /**
-         * If accessing from Nginx, the server_name might point to localhost
-         * instead of the actual server domain. So provide the change to use
-         * the user-requested host
-         *
-         * @see https://stackoverflow.com/questions/2297403/what-is-the-difference-between-http-host-and-server-name-in-php
-         */
-        $host = $useHostRequestedByClient ? App::server('HTTP_HOST') : App::server('SERVER_NAME');
-        return $protocol . "://" . $host . $port . App::server('REQUEST_URI');
+        return App::getRequest()->getRequestUri();
     }
 
     public function getComponentModelCurrentURL(): ?string
