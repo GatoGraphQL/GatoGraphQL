@@ -34,7 +34,7 @@ trait CustomEndpointClientTrait
          * If accessing from Nginx, the server_name might point to localhost
          * instead of the actual server domain. So use the user-requested host
          */
-        $fullURL = $this->getRequestHelperService()->getRequestedFullURL(true);
+        $fullURL = $this->getRequestHelperService()->getRequestedFullURL();
         if ($fullURL === null) {
             return null;
         }

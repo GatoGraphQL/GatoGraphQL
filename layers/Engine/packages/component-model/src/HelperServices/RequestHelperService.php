@@ -23,7 +23,7 @@ class RequestHelperService implements RequestHelperServiceInterface
      *
      * @param bool $useHostRequestedByClient If true, get the host from user-provided HTTP_HOST, otherwise from the server-defined SERVER_NAME
      */
-    public function getRequestedFullURL(bool $useHostRequestedByClient = false): ?string
+    public function getRequestedFullURL(): ?string
     {
         if (!App::isHTTPRequest()) {
             return null;
