@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\GraphQLCustomEndpointCustomPostType;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
+use PoP\ComponentModel\Misc\GeneralUtils;
 
 trait CustomEndpointClientTrait
 {
@@ -41,6 +42,17 @@ trait CustomEndpointClientTrait
 
         // Remove the ?view=...
         $endpointURL = \remove_query_arg(RequestParams::VIEW, $fullURL);
+
+        /**
+         * When using LocalWP, the port "10003" is somehow added to the URL,
+         * and it doesn't work anymore.
+         *
+         * Then, simply use the path from the current URL, and retrieve the
+         * domain from the WP site
+         */
+        $endpointPath = GeneralUtils::removeDomain($endpointURL);
+        $endpointURL = untrailingslashit(get_site_url()) . $endpointPath;
+        
         // // Maybe add ?use_namespace=true
         // /** @var ComponentModelModuleConfiguration */
         // $moduleConfiguration = \PoP\Root\App::getModule(ComponentModelModule::class)->getConfiguration();
