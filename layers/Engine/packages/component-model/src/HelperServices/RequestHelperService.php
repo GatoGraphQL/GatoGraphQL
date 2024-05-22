@@ -20,8 +20,6 @@ class RequestHelperService implements RequestHelperServiceInterface
 
     /**
      * Return the requested full URL
-     *
-     * @param bool $useHostRequestedByClient If true, get the host from user-provided HTTP_HOST, otherwise from the server-defined SERVER_NAME
      */
     public function getRequestedFullURL(): ?string
     {
@@ -29,7 +27,7 @@ class RequestHelperService implements RequestHelperServiceInterface
             return null;
         }
 
-        return App::getRequest()->getRequestUri();
+        return App::getRequest()->getSchemeAndHttpHost() . App::getRequest()->getRequestUri();
     }
 
     public function getComponentModelCurrentURL(): ?string
