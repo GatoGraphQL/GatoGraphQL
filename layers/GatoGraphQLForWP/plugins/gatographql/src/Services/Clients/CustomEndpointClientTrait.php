@@ -52,7 +52,7 @@ trait CustomEndpointClientTrait
          */
         $endpointPath = GeneralUtils::removeDomain($endpointURL);
         $endpointURL = untrailingslashit(get_site_url()) . $endpointPath;
-        
+
         // // Maybe add ?use_namespace=true
         // /** @var ComponentModelModuleConfiguration */
         // $moduleConfiguration = \PoP\Root\App::getModule(ComponentModelModule::class)->getConfiguration();
