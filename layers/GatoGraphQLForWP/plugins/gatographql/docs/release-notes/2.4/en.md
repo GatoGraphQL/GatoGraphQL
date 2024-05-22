@@ -7,6 +7,9 @@
 - Added documentation for new PRO field `_strBase64Encode` ([#2673](https://github.com/GatoGraphQL/GatoGraphQL/pull/2673))
 - Link extensions to the Extensions Reference in gatographql.com ([#2675](https://github.com/GatoGraphQL/GatoGraphQL/pull/2675))
 - Added YouTube channel link to About page ([#2676](https://github.com/GatoGraphQL/GatoGraphQL/pull/2676))
+- Added predefined persisted queries:
+  - [PRO] Translate and create all pages for a multilingual site (Multisite / Gutenberg) ([#2688](https://github.com/GatoGraphQL/GatoGraphQL/pull/2688))
+  - [PRO] Translate and create all pages for a multilingual site (Multisite / Classic editor) ([#2688](https://github.com/GatoGraphQL/GatoGraphQL/pull/2688))
 
 ### Added page mutations to the GraphQL schema ([#2682](https://github.com/GatoGraphQL/GatoGraphQL/pull/2682))
 
