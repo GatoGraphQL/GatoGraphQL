@@ -851,13 +851,13 @@ query TransformData
       from: $coreQuoteCitationItems,
       to: $coreQuoteCitationItems,
     },
-    corePullquoteCitation: {
-      from: $corePullquoteCitationItems,
-      to: $corePullquoteCitationItems,
-    },
     coreQuoteValue: {
       from: $coreQuoteValueItems,
       to: $coreQuoteValueItems,
+    },
+    corePullquoteCitation: {
+      from: $corePullquoteCitationItems,
+      to: $corePullquoteCitationItems,
     },
     corePullquoteValue: {
       from: $corePullquoteValueItems,
