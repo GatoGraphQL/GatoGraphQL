@@ -1,6 +1,6 @@
 {
     "name": "schema-config-schema-settings",
-    "version": "2.4.0",
+    "version": "2.5.0-dev",
     "description": "Configure settings options in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",

@@ -151,7 +151,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/component-model": "^2.4",
+        "getpop/component-model": "^2.5",
         "masterminds/html5": "^2.7",
         "symfony/css-selector": "^6.0",
         "symfony/dom-crawler": "^6.0"
@@ -180,7 +180,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.4-dev"
+            "dev-master": "2.5-dev"
         }
     },
     "config": {
