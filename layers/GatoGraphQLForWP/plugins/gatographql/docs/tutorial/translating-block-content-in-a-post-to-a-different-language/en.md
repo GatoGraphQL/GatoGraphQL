@@ -897,7 +897,7 @@ query CreateRegexReplacements
           @applyField(
             name: "_sprintf",
             arguments: {
-              string: "#(<!-- wp:quote .*?-->\\n?<blockquote ?.*?><p ?.*?>.*</p><cite ?.*?>)%s(</cite></blockquote>\\n?<!-- /wp:quote -->)#",
+              string: "#(<!-- wp:quote .*?-->\\n?<blockquote ?.*?>.*<cite ?.*?>)%s(</cite></blockquote>\\n?<!-- /wp:quote -->)#",
               values: [$value]
             },
             setResultInResponse: true
@@ -927,7 +927,7 @@ query CreateRegexReplacements
           @applyField(
             name: "_sprintf",
             arguments: {
-              string: "#(<!-- wp:quote .*?-->\\n?<blockquote ?.*?><p ?.*?>)%s(</p>(<cite ?.*?>.*</cite>)?</blockquote>\\n?<!-- /wp:quote -->)#",
+              string: "#(<!-- wp:quote .*?-->\\n?<blockquote ?.*?>)%s((<cite ?.*?>.*</cite>)?</blockquote>\\n?<!-- /wp:quote -->)#",
               values: [$value]
             },
             setResultInResponse: true
