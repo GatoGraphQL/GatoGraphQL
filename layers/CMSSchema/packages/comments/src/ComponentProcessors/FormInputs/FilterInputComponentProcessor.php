@@ -15,7 +15,7 @@ use PoPCMSSchema\Comments\FilterInputs\ExcludeCustomPostIDsFilterInput;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentStatusEnumTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\EnumType\CommentTypeEnumTypeResolver;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
-use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
 use PoP\ComponentModel\ComponentProcessors\DataloadQueryArgsFilterInputComponentProcessorInterface;
 use PoP\ComponentModel\Component\Component;
@@ -36,7 +36,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?CommentTypeEnumTypeResolver $commentTypeEnumTypeResolver = null;
     private ?CommentStatusEnumTypeResolver $commentStatusEnumTypeResolver = null;
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
+    private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?CommentStatusFilterInput $commentStatusFilterInput = null;
     private ?CommentTypesFilterInput $commentTypesFilterInput = null;
@@ -71,18 +71,18 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         }
         return $this->commentStatusEnumTypeResolver;
     }
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
+    final public function setFilterCustomPostStatusEnumTypeResolver(FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver): void
     {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
     }
-    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
+    final protected function getFilterCustomPostStatusEnumTypeResolver(): FilterCustomPostStatusEnumTypeResolver
     {
-        if ($this->customPostStatusEnumTypeResolver === null) {
-            /** @var CustomPostStatusEnumTypeResolver */
-            $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-            $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
+        if ($this->filterCustomPostStatusEnumTypeResolver === null) {
+            /** @var FilterCustomPostStatusEnumTypeResolver */
+            $filterCustomPostStatusEnumTypeResolver = $this->instanceManager->getInstance(FilterCustomPostStatusEnumTypeResolver::class);
+            $this->filterCustomPostStatusEnumTypeResolver = $filterCustomPostStatusEnumTypeResolver;
         }
-        return $this->customPostStatusEnumTypeResolver;
+        return $this->filterCustomPostStatusEnumTypeResolver;
     }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
@@ -237,7 +237,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
-            self::COMPONENT_FILTERINPUT_CUSTOMPOST_STATUS => $this->getCustomPostStatusEnumTypeResolver(),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOST_STATUS => $this->getFilterCustomPostStatusEnumTypeResolver(),
             self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->getIDScalarTypeResolver(),
             self::COMPONENT_FILTERINPUT_COMMENT_TYPES => $this->getCommentTypeEnumTypeResolver(),
             self::COMPONENT_FILTERINPUT_COMMENT_STATUS => $this->getCommentStatusEnumTypeResolver(),
