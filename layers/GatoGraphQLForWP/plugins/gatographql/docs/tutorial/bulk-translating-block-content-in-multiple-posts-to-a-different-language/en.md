@@ -671,6 +671,7 @@ query EscapeRegexStrings
             @strReplaceMultiple(
               search: [
                 "’",
+                "ñ",
 
                 "\\",
                 "^",
@@ -690,6 +691,7 @@ query EscapeRegexStrings
               ],
               replaceWith: [
                 "&#8217;",
+                "&#241;",
 
                 "\\\\",
                 "\\^",
