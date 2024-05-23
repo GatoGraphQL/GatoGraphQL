@@ -1161,7 +1161,7 @@ query CreateRegexReplacements
             @applyField(
               name: "_sprintf",
               arguments: {
-                string: "#(<!-- wp:quote .*?-->\\n?<blockquote ?.*?><p ?.*?>)%s(</p><cite ?.*?>.*</cite></blockquote>\\n?<!-- /wp:quote -->)#",
+                string: "#(<!-- wp:quote .*?-->\\n?<blockquote ?.*?><p ?.*?>)%s(</p>(<cite ?.*?>.*</cite>)?</blockquote>\\n?<!-- /wp:quote -->)#",
                 values: [$value]
               },
               setResultInResponse: true
@@ -1223,7 +1223,7 @@ query CreateRegexReplacements
             @applyField(
               name: "_sprintf",
               arguments: {
-                string: "#(<!-- wp:pullquote .*?-->\\n?<figure ?.*?><blockquote ?.*?><p ?.*?>)%s(</p><cite ?.*?>.*</cite></blockquote></figure>\\n?<!-- /wp:pullquote -->)#",
+                string: "#(<!-- wp:pullquote .*?-->\\n?<figure ?.*?><blockquote ?.*?><p ?.*?>)%s(</p>(<cite ?.*?>.*</cite>)?</blockquote></figure>\\n?<!-- /wp:pullquote -->)#",
                 values: [$value]
               },
               setResultInResponse: true
@@ -3712,7 +3712,7 @@ Passing these `variables`:
       "corePullquoteValue": {
         "from": {
           "40": [
-            "#(<!-- wp:pullquote .*?-->\\n?<figure ?.*?><blockquote ?.*?><p ?.*?>)You only know me as you see me, not as I actually am\\.(</p><cite ?.*?>.*</cite></blockquote></figure>\\n?<!-- /wp:pullquote -->)#"
+            "#(<!-- wp:pullquote .*?-->\\n?<figure ?.*?><blockquote ?.*?><p ?.*?>)You only know me as you see me, not as I actually am\\.(</p>(<cite ?.*?>.*</cite>)?</blockquote></figure>\\n?<!-- /wp:pullquote -->)#"
           ]
         },
         "to": {
