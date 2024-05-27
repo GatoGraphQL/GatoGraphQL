@@ -75,6 +75,15 @@ abstract class AbstractSchemaEntityBlockSchemaConfigurationExecuter extends Abst
         $customPostIDs = $this->getUserSettingsHelpers()->getUserDefaultSettingCustomPostValueIDs(
             $enablingModule,
         );
+
+        /**
+         * Cast to int[]
+         */
+        $customPostIDs = array_map(
+            fn (int|string $item) => (int) $item,
+            $customPostIDs
+        );
+
         $this->executeCustomPostListsBlockSchemaConfiguration($customPostIDs);
     }
 }

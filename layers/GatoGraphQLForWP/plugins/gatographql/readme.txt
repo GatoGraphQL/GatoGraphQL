@@ -270,6 +270,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 2.4.1 =
+* Fixed bug: Internal server error from passing string when expected int 
+
 = 2.4.0 =
 * Added page mutations to the GraphQL schema (#2682)
 * Added fields to fetch the logged-in user's pages (#2682)
