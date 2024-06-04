@@ -271,7 +271,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 2.5.0 =
-* Added documentation for "WordPress hook mapping" for the [PRO] Automation extension
+* Added documentation for "WordPress hook mapping" for the [PRO] Automation extension (#2691)
 
 = 2.4.1 =
 * Fixed bug: Internal server error from passing string when expected int 

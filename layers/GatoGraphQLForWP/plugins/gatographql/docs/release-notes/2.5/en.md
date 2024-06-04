@@ -2,7 +2,7 @@
 
 ## Improvements
 
-### Added documentation for "WordPress hook mapping" for the [PRO] Automation extension
+### Added documentation for "WordPress hook mapping" for the [PRO] Automation extension ([#2691](https://github.com/GatoGraphQL/GatoGraphQL/pull/2691))
 
 There are WordPress hooks which cannot be directly used in the Automation Configurator, because they provide a PHP object via the hook, which can't be input as a GraphQL variable.
 
