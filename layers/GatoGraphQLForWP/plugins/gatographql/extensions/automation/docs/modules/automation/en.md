@@ -87,6 +87,20 @@ If the same key is used for the "dynamic" and "static" GraphQL variables (see **
 
 </div>
 
+### WordPress hook mapping
+
+There are WordPress hooks which cannot be directly used in the Automation Configurator, because they provide a PHP object via the hook, which can't be input as a GraphQL variable.
+
+Several of these hooks have been mapped by Gato GraphQL, by triggering a new hook prepended with `gatographql:` and the same hook name, and passing the corresponding object ID as a variable, which can be input as a GraphQL variable.
+
+For instance, WordPress hook `draft_to_publish` passes the `$post` as variable (of type `WP_Post`). Gato GraphQL maps this hook as `gatographql:draft_to_publish`, and passes the `$postId` (of type `int`) as variable.
+
+The following table lists down the mapped WordPress hooks:
+
+| WordPress hook | Mapped hook by Gato GraphQL |
+| --- | --- |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_{$new_status}` (passing `int $postId`) |
+
 ### Debugging issues
 
 If the automation hasn't been executed, there could be an error with the configuration of the automation, or execution of the persisted query.

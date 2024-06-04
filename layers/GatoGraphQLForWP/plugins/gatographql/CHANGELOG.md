@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.5.0 - DATE
 
+### Improvements
+
+- Added documentation for "WordPress hook mapping" for the [PRO] Automation extension (#2691)
+
 ## 2.4.0 - 23/05/2024
 
 ### Improvements
