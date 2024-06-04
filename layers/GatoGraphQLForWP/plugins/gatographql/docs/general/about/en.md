@@ -154,7 +154,8 @@ Subscribe to our newsletter and receive timely updates concerning:
 
 New features released on each version:
 
-- **[2.4](../../release-notes/2.4/en.md)** (current)
+- **[2.5](../../release-notes/2.5/en.md)** (current)
+- [2.4](../../release-notes/2.4/en.md)
 - [2.3](../../release-notes/2.3/en.md)
 - [2.2](../../release-notes/2.2/en.md)
 - [2.1](../../release-notes/2.1/en.md)
