@@ -45,6 +45,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_REPLACE_STRINGS_IN_POST = 'replace-strings-in-post';
     public final const PERSISTED_QUERY_REPLACE_STRINGS_IN_POSTS = 'replace-strings-in-posts';
     public final const PERSISTED_QUERY_SEND_EMAIL_TO_ADMIN_ABOUT_POST = 'send-email-to-admin-about-post';
+    public final const PERSISTED_QUERY_SEND_EMAIL_TO_USERS_ABOUT_POST = 'send-email-to-users-about-post';
     public final const PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG = 'sync-featuredimage-for-polylang';
     public final const PERSISTED_QUERY_SYNC_TAGS_AND_CATEGORIES_FOR_POLYLANG = 'sync-tags-and-categories-for-polylang';
     public final const PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_CLASSIC_EDITOR = 'translate-and-create-all-pages-for-multilingual-wordpress-site-classic-editor';

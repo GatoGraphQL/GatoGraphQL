@@ -1,0 +1,113 @@
+########################################################################
+# 
+# Variables:
+#   - postId: ID of the post
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query sends an email to the users of the site,
+# passing the contents of a new post.
+#
+# It includes the ability to select users who subscribed to an email list,
+# however this portion of the query is commented out. (Please uncomment
+# if needed.) The subscribed users are those with meta `email_list` with
+# value `new_posts`.
+# 
+# This query is useful to trigger with automation (eg: on hook
+# `draft_to_publish`), to notify of the creation of a new post on the site.
+#
+# *********************************************************************
+#
+# More info:
+#   - https://gatographql.com/library/send-email-to-subscribers-notifying-of-a-new-post/
+#
+########################################################################
+
+query GetPostAndExportData($postId: ID!) {
+  post(by: { id: $postId }) {
+    content @export(as: "postContent")
+    title @export(as: "postTitle")
+    url @export(as: "postURL")
+  }
+
+  hasPost: _notNull(value: $__post)
+    @export(as: "doSendEmail")
+}
+ 
+query GetEmailData
+  @depends(on: "GetPostAndExportData")
+  @include(if: $doSendEmail)
+{ 
+  siteName: optionValue(name: "blogname")
+    @export(as: "siteName")
+
+  emailSubject: _sprintf(
+    string: "There is a new post: \"%s\"",
+    values: [$postTitle]
+  )
+    @export(as: "emailSubject")
+}
+ 
+mutation SendEmailToUsersAboutNewPost
+  @depends(on: "GetEmailData")
+  @include(if: $doSendEmail)
+{
+  users(
+    # # Retrieve only users subscribed to an email list (uncomment if needed)
+    # filter: {
+    #   metaQuery: {
+    #     key: "email_list",
+    #     compareBy: {
+    #       arrayValue: {
+    #         value: "new_posts",
+    #         operator: IN
+    #       }
+    #     }
+    #   }
+    # }
+  ) {
+    displayName
+    email
+
+    emailMessageTemplate: _strConvertMarkdownToHTML(
+      text: """
+
+  Hi {$userDisplayName},
+  
+  There is a new post on the **{$siteName}** website:
+  
+  [**{$postTitle}**]({$postURL})
+  
+  {$postContent}
+  
+      """
+    )
+      @remove
+    emailMessage: _strReplaceMultiple(
+      search: ["{$userDisplayName}", "{$siteName}", "{$postTitle}", "{$postContent}", "{$postURL}"],
+      replaceWith: [$__displayName, $siteName, $postTitle, $postContent, $postURL],
+      in: $__emailMessageTemplate
+    )
+      @remove
+
+    _sendEmail(
+      input: {
+        to: $__email
+        subject: $emailSubject
+        messageAs: {
+          html: $__emailMessage
+        }
+      }
+    ) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+    }
+  }
+}

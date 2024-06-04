@@ -79,6 +79,16 @@ class VirtualTutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
+            VirtualTutorialLessons::SEND_EMAIL_TO_USERS_ABOUT_POST => [
+                \__('Send email to users about post', 'gatographql'),
+                [
+                    ExtensionModuleResolver::EMAIL_SENDER,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
             VirtualTutorialLessons::ADD_COMMENTS_BLOCK_TO_POST => [
                 \__('Add comments block to post', 'gatographql'),
                 [
