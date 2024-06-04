@@ -99,7 +99,7 @@ The following table lists down the mapped WordPress hooks:
 
 | WordPress hook | Mapped hook by Gato GraphQL |
 | --- | --- |
-| `do_action( “{$old_status}_to_{$new_status}”, WP_Post $post )` | `do_action( “gatographql:{$old_status}_to_{$new_status}”, int $postId )` (eg: `gatographql:draft_to_publish`) |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_{$new_status}` (passing `int $postId`) |
 
 ### Debugging issues
 
