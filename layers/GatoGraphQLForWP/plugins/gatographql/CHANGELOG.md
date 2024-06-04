@@ -9,7 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Added predefined persisted queries
-  - [PRO] Send email to users about post
+  - [PRO] Send email to users about post (#2692)
 - Added documentation for "WordPress hook mapping" for the [PRO] Automation extension (#2691)
 
 ## 2.4.0 - 23/05/2024
