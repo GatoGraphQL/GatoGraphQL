@@ -54,20 +54,22 @@ mutation SendEmailToUsersAboutNewPost
   @depends(on: "GetEmailData")
   @include(if: $doSendEmail)
 {
-  users(
-    # # Retrieve only users subscribed to an email list (uncomment if needed)
-    # filter: {
-    #   metaQuery: {
-    #     key: "email_list",
-    #     compareBy: {
-    #       arrayValue: {
-    #         value: "new_posts",
-    #         operator: IN
-    #       }
-    #     }
-    #   }
-    # }
-  ) {
+  users
+  # # Retrieve only users subscribed to an email list (uncomment if needed)
+  # (
+  #   filter: {
+  #     metaQuery: {
+  #       key: "email_list",
+  #       compareBy: {
+  #         arrayValue: {
+  #           value: "new_posts",
+  #           operator: IN
+  #         }
+  #       }
+  #     }
+  #   }
+  # )
+  {
     displayName
     email
 
