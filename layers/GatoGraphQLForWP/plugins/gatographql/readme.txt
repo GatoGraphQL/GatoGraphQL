@@ -271,6 +271,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 2.5.0 =
+* Added predefined persisted queries
+  * [PRO] Send email to users about post (#2692)
 * Added documentation for "WordPress hook mapping" for the [PRO] Automation extension (#2691)
 
 = 2.4.1 =
