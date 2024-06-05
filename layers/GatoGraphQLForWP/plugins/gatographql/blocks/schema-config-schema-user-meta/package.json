@@ -1,6 +1,6 @@
 {
     "name": "schema-config-schema-user-meta",
-    "version": "2.5.0",
+    "version": "2.6.0-dev",
     "description": "Configure user meta options in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
