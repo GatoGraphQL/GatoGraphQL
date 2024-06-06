@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 2.5.2 - 06/06/2024
+
+### Fixed
+
+- Initialize blocks only after their corresponding CPTs
+
 ## 2.5.1 - 05/06/2024
 
 ### Fixed

@@ -13,3 +13,7 @@ There are WordPress hooks which cannot be directly used in the Automation Config
 Starting from `v2.5` of Gato GraphQL PRO, several of these hooks have been mapped, by triggering a new hook prepended with `gatographql:` and the same hook name, and passing the corresponding object ID as a variable, which can be input as a GraphQL variable.
 
 For instance, WordPress hook `draft_to_publish` passes the `$post` as variable (of type `WP_Post`). Gato GraphQL PRO maps this hook as `gatographql:draft_to_publish`, and passes the `$postId` (of type `int`) as variable.
+
+### Fixed
+
+- Initialize blocks only after their corresponding CPTs (v2.5.2)

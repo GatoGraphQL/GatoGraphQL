@@ -270,6 +270,12 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 2.5.2 =
+* Fixed bug: Initialize blocks only after their corresponding CPTs
+
+= 2.5.1 =
+* Fixed tabs in Markdown in new persisted query **[PRO] Send email to users about post**
+
 = 2.5.0 =
 * Added predefined persisted queries
   * [PRO] Send email to users about post (#2692)
