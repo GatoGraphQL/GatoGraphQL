@@ -149,9 +149,9 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/custompost-category-mutations": "^2.5.2",
-        "pop-cms-schema/post-categories": "^2.5.2",
-        "pop-cms-schema/post-mutations": "^2.5.2"
+        "pop-cms-schema/custompost-category-mutations": "^2.6",
+        "pop-cms-schema/post-categories": "^2.6",
+        "pop-cms-schema/post-mutations": "^2.6"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -177,7 +177,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.5-dev"
+            "dev-master": "2.6-dev"
         }
     },
     "config": {
