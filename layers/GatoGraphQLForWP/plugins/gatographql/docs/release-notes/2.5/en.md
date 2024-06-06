@@ -16,4 +16,4 @@ For instance, WordPress hook `draft_to_publish` passes the `$post` as variable (
 
 ### Fixed
 
-- Initialize blocks only after their corresponding CPTs (v2.5.2)
+- Initialize blocks only after their corresponding CPTs (v2.5.2) ([#2693](https://github.com/GatoGraphQL/GatoGraphQL/pull/2693))

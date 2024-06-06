@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Initialize blocks only after their corresponding CPTs
+- Initialize blocks only after their corresponding CPTs (#2693)
 
 ## 2.5.1 - 05/06/2024
 
