@@ -4,7 +4,13 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 2.5.0 - DATE
+## 2.5.1 - 05/06/2024
+
+### Fixed
+
+- Fixed tabs in Markdown in new persisted query **[PRO] Send email to users about post**
+
+## 2.5.0 - 05/06/2024
 
 ### Improvements
 
