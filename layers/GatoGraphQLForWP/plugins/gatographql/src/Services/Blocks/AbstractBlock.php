@@ -126,7 +126,21 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
      */
     final public function initialize(): void
     {
-        \add_action('init', $this->initBlock(...));
+        \add_action(
+            'init',
+            $this->initBlock(...),
+            $this->getPriority()
+        );
+    }
+
+    /**
+     * They must be initialized after the corresponding CPTs!!!!
+     * Otherwise they don't get initialized when editing that
+     * CPT in the WordPress editor.
+     */
+    protected function getPriority(): int
+    {
+        return 10000;
     }
 
     public function getEnablingModule(): ?string
