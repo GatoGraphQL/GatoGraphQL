@@ -91,6 +91,7 @@ query ExportOriginPost($postId: ID!)
 query FetchData(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $translateDefaultLanguageOnly: Boolean! = true
+  $translateFromLanguage: String
 )
   @depends(on: "ExportOriginPost")
   @include(if: $hasOriginPost)
@@ -121,11 +122,27 @@ query FetchData(
     value2: $fromLanguage
   )
 
-  canTranslateOriginPost: _if(
+  canTranslateOriginPostByDefaultLanguage: _if(
     condition: $translateDefaultLanguageOnly,
     then: $__originPostHasDefaultLanguage,
     else: true
   )
+
+  originPostHasSpecificLanguage: _equals(
+    value1: $translateFromLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginPostBySpecificLanguage: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: false,
+    else: $__originPostHasSpecificLanguage
+  )
+
+  canTranslateOriginPost: _or(values: [
+    $__canTranslateOriginPostByDefaultLanguage,
+    $__canTranslateOriginPostBySpecificLanguage
+  ])
 
   executeTranslation: _and(values: [
     $__hasTranslationPosts,
