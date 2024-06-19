@@ -130,7 +130,7 @@ query FetchData(
   )
 
   canTranslateOriginPostFromSpecificLanguage: _if(
-    condition: $isTranslateFromLanguageProvided,
+    condition: $__isTranslateFromLanguageProvided,
     then: $__originPostHasSpecificLanguage,
     else: false
   )
