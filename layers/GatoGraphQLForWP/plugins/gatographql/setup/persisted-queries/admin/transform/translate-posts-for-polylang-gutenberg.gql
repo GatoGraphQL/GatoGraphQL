@@ -675,7 +675,7 @@ query InitializeTranslationVariables(
   canTranslateOriginPostByDefaultLanguage: _if(
     condition: $translateDefaultLanguageOnly,
     then: $__originPostHasDefaultLanguage,
-    else: true
+    else: false
   )
 
   originPostHasSpecificLanguage: _equals(
