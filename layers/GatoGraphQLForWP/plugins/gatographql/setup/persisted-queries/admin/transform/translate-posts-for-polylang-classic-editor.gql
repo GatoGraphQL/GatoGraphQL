@@ -122,27 +122,16 @@ query FetchData(
     value2: $fromLanguage
   )
 
-  canTranslateOriginPostByDefaultLanguage: _if(
-    condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
-    else: false
-  )
-
   originPostHasSpecificLanguage: _equals(
     value1: $translateFromLanguage,
     value2: $fromLanguage
   )
 
-  canTranslateOriginPostBySpecificLanguage: _if(
+  canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
-    then: false,
+    then: $__originPostHasDefaultLanguage,
     else: $__originPostHasSpecificLanguage
   )
-
-  canTranslateOriginPost: _or(values: [
-    $__canTranslateOriginPostByDefaultLanguage,
-    $__canTranslateOriginPostBySpecificLanguage
-  ])
 
   executeTranslation: _and(values: [
     $__hasTranslationPosts,
