@@ -17,3 +17,4 @@ For instance, WordPress hook `draft_to_publish` passes the `$post` as variable (
 ### Fixed
 
 - Initialize blocks only after their corresponding CPTs (v2.5.2) ([#2693](https://github.com/GatoGraphQL/GatoGraphQL/pull/2693))
+- Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)" (v2.5.3) ([#2694](https://github.com/GatoGraphQL/GatoGraphQL/pull/2694))
