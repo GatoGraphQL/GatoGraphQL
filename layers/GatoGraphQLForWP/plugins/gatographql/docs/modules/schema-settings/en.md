@@ -16,7 +16,7 @@ For instance, this query retrieves the site's URL:
 
 ```graphql
 {
-  siteURL: optionValue(name: "siteurl")
+  homeURL: optionValue(name: "home")
 }
 ```
 
