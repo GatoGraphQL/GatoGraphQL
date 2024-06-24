@@ -165,7 +165,7 @@ class NetworkSiteObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     protected function getSiteLocale(int $siteID): string
     {
         switch_to_blog($siteID);
-        
+
         /**
          * Calling `get_locale` doesn't work when switching blog,
          * hence reproduce its logic, reading option WPLANG which
