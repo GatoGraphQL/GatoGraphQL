@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Multisite\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\Comments\TypeResolvers\ObjectType\NetworkSiteObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPWPSchema\Multisite\TypeAPIs\MultisiteTypeAPIInterface;
+use PoPWPSchema\Multisite\TypeResolvers\ObjectType\NetworkSiteObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\Comments\TypeResolvers\ObjectType;
+namespace PoPWPSchema\Multisite\TypeResolvers\ObjectType;
 
 use PoPWPSchema\Multisite\RelationalTypeDataLoaders\ObjectType\NetworkSiteObjectTypeDataLoader;
 use PoPWPSchema\Multisite\TypeAPIs\MultisiteTypeAPIInterface;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Multisite\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\Comments\TypeResolvers\ObjectType\NetworkSiteObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
+use PoPWPSchema\Multisite\TypeResolvers\ObjectType\NetworkSiteObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
