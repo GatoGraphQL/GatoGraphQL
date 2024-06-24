@@ -41,6 +41,8 @@ class MultisiteTypeAPI implements MultisiteTypeAPIInterface
      * @return array<string,mixed>
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
+     *
+     * @see https://developer.wordpress.org/reference/classes/WP_Site_Query/__construct/
      */
     protected function convertNetworkSitesQuery(array $query, array $options): array
     {

@@ -14,15 +14,29 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use function get_sites;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver = null;
     private ?MultisiteTypeAPIInterface $multisiteTypeAPI = null;
 
+    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    {
+        $this->intScalarTypeResolver = $intScalarTypeResolver;
+    }
+    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    {
+        if ($this->intScalarTypeResolver === null) {
+            /** @var IntScalarTypeResolver */
+            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
+            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        }
+        return $this->intScalarTypeResolver;
+    }
     final public function setNetworkSiteObjectTypeResolver(NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver): void
     {
         $this->networkSiteObjectTypeResolver = $networkSiteObjectTypeResolver;
@@ -67,6 +81,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return [
             'networkSites',
+            'networkSiteCount',
         ];
     }
 
@@ -74,6 +89,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'networkSites' => $this->__('Sites in the WordPress multisite network', 'multisite'),
+            'networkSiteCount' => $this->__('Number of sites in the WordPress multisite network', 'multisite'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -82,6 +98,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'networkSites' => $this->getNetworkSiteObjectTypeResolver(),
+            'networkSiteCount' => $this->getIntScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -90,6 +107,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     {
         return match ($fieldName) {
             'networkSites' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'networkSiteCount' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -104,6 +122,10 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'networkSites':
                 /** @var int[] */
                 $siteIDs = $this->getMultisiteTypeAPI()->getNetworkSites([], [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $siteIDs;
+            case 'networkSiteCount':
+                /** @var int[] */
+                $siteIDs = $this->getMultisiteTypeAPI()->getNetworkSiteCount([], [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
                 return $siteIDs;
         }
 
