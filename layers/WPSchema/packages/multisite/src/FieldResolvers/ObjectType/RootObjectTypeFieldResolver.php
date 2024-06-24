@@ -4,67 +4,31 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Multisite\FieldResolvers\ObjectType;
 
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-use WP_Site;
-use function get_locale;
-// use function get_site_url;
-
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
-    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
+    private ?NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver = null;
 
-    final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
+    final public function setNetworkSiteObjectTypeResolver(NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver): void
     {
-        $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        $this->networkSiteObjectTypeResolver = $networkSiteObjectTypeResolver;
     }
-    final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
+    final protected function getNetworkSiteObjectTypeResolver(): NetworkSiteObjectTypeResolver
     {
-        if ($this->stringScalarTypeResolver === null) {
-            /** @var StringScalarTypeResolver */
-            $stringScalarTypeResolver = $this->instanceManager->getInstance(StringScalarTypeResolver::class);
-            $this->stringScalarTypeResolver = $stringScalarTypeResolver;
+        if ($this->networkSiteObjectTypeResolver === null) {
+            /** @var NetworkSiteObjectTypeResolver */
+            $networkSiteObjectTypeResolver = $this->instanceManager->getInstance(NetworkSiteObjectTypeResolver::class);
+            $this->networkSiteObjectTypeResolver = $networkSiteObjectTypeResolver;
         }
-        return $this->stringScalarTypeResolver;
-    }
-    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
-    {
-        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-    }
-    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
-    {
-        if ($this->urlScalarTypeResolver === null) {
-            /** @var URLScalarTypeResolver */
-            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
-            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
-        }
-        return $this->urlScalarTypeResolver;
-    }
-
-    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
-    {
-        $this->idScalarTypeResolver = $idScalarTypeResolver;
-    }
-    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
-    {
-        if ($this->idScalarTypeResolver === null) {
-            /** @var IDScalarTypeResolver */
-            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
-            $this->idScalarTypeResolver = $idScalarTypeResolver;
-        }
-        return $this->idScalarTypeResolver;
+        return $this->networkSiteObjectTypeResolver;
     }
 
     /**
@@ -83,22 +47,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
-            'id',
-            'name',
-            'url',
-            'locale',
-            'language',
+            'networkSites',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'id' => $this->__('Site\'s ID (within the multisite)', 'multisite'),
-            'name' => $this->__('Site\'s name', 'multisite'),
-            'url' => $this->__('Site\'s URL', 'multisite'),
-            'locale' => $this->__('Site\'s locale', 'multisite'),
-            'language' => $this->__('Site\'s language', 'multisite'),
+            'networkSites' => $this->__('Sites in the WordPress multisite network', 'multisite'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -106,30 +62,16 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'id' =>
-                $this->getIDScalarTypeResolver(),
-            'name',
-            'locale',
-            'language' =>
-                $this->getStringScalarTypeResolver(),
-            'url' =>
-                $this->getURLScalarTypeResolver(),
-            default
-                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            'networkSites' => $this->getNetworkSiteObjectTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'id',
-            'name',
-            'url',
-            'locale',
-            'language'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'networkSites' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -139,38 +81,22 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        /** @var WP_Site */
-        $site = $object;
-        $siteID = (int) $site->blog_id;
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'id':
-                return $siteID;
-
-            case 'name':
-                return $site->blogname;
-
-            case 'url':
-                return $site->siteurl;
-                // return get_site_url($siteID);
-
-            case 'locale':
-                return $this->getSiteLocale($siteID);
-
-            case 'language':
-                $locale = $this->getSiteLocale($siteID);
-                $localeParts = explode('_', $locale);
-                return $localeParts[0];
+            case 'networkSites':
+                $args = [
+                    'fields' => 'ids',
+                    'number' => '',
+                    'archived' => 0,
+                    'spam' => 0,
+                    'deleted' => 0,
+                ];
+        
+                /** @var int[] */
+                $siteIDs = get_sites($args);
+                return $siteIDs;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-    }
-
-    protected function getSiteLocale(int $siteID): string
-    {
-        switch_to_blog($siteID);
-        $locale = get_locale();
-        restore_current_blog();
-        return $locale;
     }
 
     /**
