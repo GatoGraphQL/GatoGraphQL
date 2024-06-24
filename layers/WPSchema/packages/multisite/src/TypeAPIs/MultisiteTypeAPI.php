@@ -69,7 +69,7 @@ class MultisiteTypeAPI implements MultisiteTypeAPIInterface
     public function getNetworkSiteCount(array $query, array $options = []): int
     {
         $query = $this->convertNetworkSitesQuery($query, $options);
-        $query['number'] = '';
+        $query['number'] = 0;
         unset($query['offset']);
         $query['count'] = true;
         /** @var int */
