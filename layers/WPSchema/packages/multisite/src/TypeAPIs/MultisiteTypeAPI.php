@@ -83,4 +83,3 @@ class MultisiteTypeAPI implements MultisiteTypeAPIInterface
         return (int) $networkSite->blog_id;
     }
 }
-

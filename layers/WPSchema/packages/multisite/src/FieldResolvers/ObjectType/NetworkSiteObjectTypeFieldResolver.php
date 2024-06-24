@@ -18,6 +18,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Site;
 
 use function get_locale;
+
 // use function get_site_url;
 
 class NetworkSiteObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
