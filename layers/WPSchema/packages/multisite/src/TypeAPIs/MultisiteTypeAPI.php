@@ -76,4 +76,11 @@ class MultisiteTypeAPI implements MultisiteTypeAPIInterface
         $count = get_sites($query);
         return $count;
     }
+
+    public function getNetworkSiteID(object $networkSite): string|int
+    {
+        /** @var WP_Site $networkSite */
+        return (int) $networkSite->blog_id;
+    }
 }
+
