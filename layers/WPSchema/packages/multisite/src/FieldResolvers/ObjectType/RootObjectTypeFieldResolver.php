@@ -14,9 +14,10 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use WP_Site;
 
 use function get_locale;
-use function get_site_url;
+// use function get_site_url;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -113,20 +114,33 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
+        /** @var WP_Site */
+        $site = $object;
+        $siteID = (int) $site->blog_id;
         switch ($fieldDataAccessor->getFieldName()) {
             case 'url':
-                return get_site_url();
+                /** @var string */
+                return $site->siteurl;
+                // return get_site_url($siteID);
 
             case 'locale':
-                return get_locale();
+                return $this->getSiteLocale($siteID);
 
             case 'language':
-                $locale = get_locale();
+                $locale = $this->getSiteLocale($siteID);
                 $localeParts = explode('_', $locale);
                 return $localeParts[0];
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    protected function getSiteLocale(int $siteID): string
+    {
+        switch_to_blog($siteID);
+        $locale = get_locale();
+        restore_current_blog();
+        return $locale;
     }
 
     /**
