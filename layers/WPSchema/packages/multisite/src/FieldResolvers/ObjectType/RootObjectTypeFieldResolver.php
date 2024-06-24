@@ -11,11 +11,12 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-use WP_Site;
 
+use WP_Site;
 use function get_locale;
 // use function get_site_url;
 
@@ -23,6 +24,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
+    private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -51,6 +53,20 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         return $this->urlScalarTypeResolver;
     }
 
+    final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
+    {
+        $this->idScalarTypeResolver = $idScalarTypeResolver;
+    }
+    final protected function getIDScalarTypeResolver(): IDScalarTypeResolver
+    {
+        if ($this->idScalarTypeResolver === null) {
+            /** @var IDScalarTypeResolver */
+            $idScalarTypeResolver = $this->instanceManager->getInstance(IDScalarTypeResolver::class);
+            $this->idScalarTypeResolver = $idScalarTypeResolver;
+        }
+        return $this->idScalarTypeResolver;
+    }
+
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
      */
@@ -67,6 +83,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
+            'id',
+            'name',
             'url',
             'locale',
             'language',
@@ -76,9 +94,11 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->__('Site\'s URL (in a multisite)', 'multisite'),
-            'locale' => $this->__('Site\'s locale (in a multisite)', 'multisite'),
-            'language' => $this->__('Site\'s language (in a multisite)', 'multisite'),
+            'id' => $this->__('Site\'s ID (within the multisite)', 'multisite'),
+            'name' => $this->__('Site\'s name', 'multisite'),
+            'url' => $this->__('Site\'s URL', 'multisite'),
+            'locale' => $this->__('Site\'s locale', 'multisite'),
+            'language' => $this->__('Site\'s language', 'multisite'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -86,11 +106,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'url' =>
-                $this->getURLScalarTypeResolver(),
+            'id' =>
+                $this->getIDScalarTypeResolver(),
+            'name',
             'locale',
             'language' =>
                 $this->getStringScalarTypeResolver(),
+            'url' =>
+                $this->getURLScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
@@ -99,6 +122,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
+            'id',
+            'name',
             'url',
             'locale',
             'language'
@@ -118,8 +143,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $site = $object;
         $siteID = (int) $site->blog_id;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'id':
+                return $siteID;
+
+            case 'name':
+                return $site->blogname;
+
             case 'url':
-                /** @var string */
                 return $site->siteurl;
                 // return get_site_url($siteID);
 
