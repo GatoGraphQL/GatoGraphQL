@@ -59,6 +59,7 @@ class Module extends AbstractPluginModule
             \PoPWPSchema\Posts\Module::class,
             \PoPWPSchema\Blocks\Module::class,
             \PoPWPSchema\Site\Module::class,
+            \PoPWPSchema\Multisite\Module::class,
             \PoPWPSchema\TaxonomyMeta\Module::class,
             \PoPWPSchema\UserMeta\Module::class,
 
