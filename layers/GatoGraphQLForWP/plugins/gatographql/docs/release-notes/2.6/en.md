@@ -47,7 +47,7 @@ Field `networkSites` returns an array with all the sites in the network, each of
 
 These fields are only enabled when multisite is enabled (i.e. when method `is_multisite()` returns `true`).
 
-For instance, we can now execute the following query:
+For instance, executing the following query:
 
 ```graphql
 {
@@ -58,6 +58,39 @@ For instance, we can now execute the following query:
     url
     locale
     language
+  }
+}
+```
+
+might return:
+
+```json
+{
+  "data": {
+    "networkSiteCount": 3,
+    "networkSites": [
+      {
+        "id": 1,
+        "name": "Site in English",
+        "url": "https://mymultisite.com",
+        "locale": "en_US",
+        "language": "en"
+      },
+      {
+        "id": 2,
+        "name": "Site in Spanish",
+        "url": "https://es.mymultisite.com",
+        "locale": "es_AR",
+        "language": "es"
+      },
+      {
+        "id": 3,
+        "name": "Site in French",
+        "url": "https://fr.mymultisite.com",
+        "locale": "fr_FR",
+        "language": "fr"
+      }
+    ]
   }
 }
 ```
