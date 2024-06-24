@@ -1,1 +1,46 @@
-{}
+{
+    "errors": [
+        {
+            "message": "There is no field 'networkSiteCount' on type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 4,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "networkSiteCount",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "networkSiteCount",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        },
+        {
+            "message": "There is no field 'networkSites' on type 'QueryRoot'",
+            "locations": [
+                {
+                    "line": 5,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "networkSites { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "networkSites { ... }",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "networkSiteCount": null,
+        "networkSites": null
+    }
+}
