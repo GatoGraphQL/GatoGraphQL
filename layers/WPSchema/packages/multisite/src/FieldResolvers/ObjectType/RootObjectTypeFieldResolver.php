@@ -4,18 +4,24 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Multisite\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPWPSchema\Multisite\TypeAPIs\MultisiteTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use function get_sites;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver = null;
+    private ?MultisiteTypeAPIInterface $multisiteTypeAPI = null;
 
     final public function setNetworkSiteObjectTypeResolver(NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver): void
     {
@@ -29,6 +35,19 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->networkSiteObjectTypeResolver = $networkSiteObjectTypeResolver;
         }
         return $this->networkSiteObjectTypeResolver;
+    }
+    final public function setMultisiteTypeAPI(MultisiteTypeAPIInterface $multisiteTypeAPI): void
+    {
+        $this->multisiteTypeAPI = $multisiteTypeAPI;
+    }
+    final protected function getMultisiteTypeAPI(): MultisiteTypeAPIInterface
+    {
+        if ($this->multisiteTypeAPI === null) {
+            /** @var MultisiteTypeAPIInterface */
+            $multisiteTypeAPI = $this->instanceManager->getInstance(MultisiteTypeAPIInterface::class);
+            $this->multisiteTypeAPI = $multisiteTypeAPI;
+        }
+        return $this->multisiteTypeAPI;
     }
 
     /**
@@ -83,16 +102,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case 'networkSites':
-                $args = [
-                    'fields' => 'ids',
-                    'number' => '',
-                    'archived' => 0,
-                    'spam' => 0,
-                    'deleted' => 0,
-                ];
-        
                 /** @var int[] */
-                $siteIDs = get_sites($args);
+                $siteIDs = $this->getMultisiteTypeAPI()->getNetworkSites([], [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
                 return $siteIDs;
         }
 
