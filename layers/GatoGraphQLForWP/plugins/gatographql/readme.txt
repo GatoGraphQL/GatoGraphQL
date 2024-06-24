@@ -272,6 +272,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 2.6.0 =
 * Added `siteURL` field (#2697)
+* Added fields to fetch multisite data (#2698)
 * Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)" (#2694)
 
 = 2.5.2 =
