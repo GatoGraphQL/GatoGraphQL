@@ -270,7 +270,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
-= 2.5.3 =
+= 2.6.0 =
 * Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)" (#2694)
 
 = 2.5.2 =
