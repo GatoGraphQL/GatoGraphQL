@@ -52,6 +52,7 @@
         "pop-wp-schema/customposts": "^2.6",
         "pop-wp-schema/media": "^2.6",
         "pop-wp-schema/menus": "^2.6",
+        "pop-wp-schema/multisite": "^2.6",
         "pop-wp-schema/pages": "^2.6",
         "pop-wp-schema/posts": "^2.6",
         "pop-wp-schema/site": "^2.6",
