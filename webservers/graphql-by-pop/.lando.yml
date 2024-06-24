@@ -220,6 +220,7 @@ services:
         - '../../layers/WPSchema/packages/media:/app/vendor/pop-wp-schema/media'
         - '../../layers/WPSchema/packages/menus:/app/vendor/pop-wp-schema/menus'
         - '../../layers/WPSchema/packages/meta:/app/vendor/pop-wp-schema/meta'
+        - '../../layers/WPSchema/packages/multisite:/app/vendor/pop-wp-schema/multisite'
         - '../../layers/WPSchema/packages/pages:/app/vendor/pop-wp-schema/pages'
         - '../../layers/WPSchema/packages/posts:/app/vendor/pop-wp-schema/posts'
         - >-
