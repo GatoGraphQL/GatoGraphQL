@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Site\FieldResolvers\ObjectType;
 
+use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -15,10 +16,12 @@ use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 use function get_locale;
+use function get_site_url;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?URLScalarTypeResolver $urlScalarTypeResolver = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -32,6 +35,19 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
+    }
+    final public function setURLScalarTypeResolver(URLScalarTypeResolver $urlScalarTypeResolver): void
+    {
+        $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+    }
+    final protected function getURLScalarTypeResolver(): URLScalarTypeResolver
+    {
+        if ($this->urlScalarTypeResolver === null) {
+            /** @var URLScalarTypeResolver */
+            $urlScalarTypeResolver = $this->instanceManager->getInstance(URLScalarTypeResolver::class);
+            $this->urlScalarTypeResolver = $urlScalarTypeResolver;
+        }
+        return $this->urlScalarTypeResolver;
     }
 
     /**
@@ -50,6 +66,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
+            'siteURL',
             'siteLocale',
             'siteLanguage',
         ];
@@ -58,6 +75,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
+            'siteURL' => $this->__('Site\'s URL', 'site'),
             'siteLocale' => $this->__('Site\'s locale', 'site'),
             'siteLanguage' => $this->__('Site\'s language', 'site'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -67,6 +85,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
+            'siteURL' =>
+                $this->getURLScalarTypeResolver(),
             'siteLocale',
             'siteLanguage' =>
                 $this->getStringScalarTypeResolver(),
@@ -78,6 +98,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
+            'siteURL',
             'siteLocale',
             'siteLanguage'
                 => SchemaTypeModifiers::NON_NULLABLE,
@@ -93,6 +114,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'siteURL':
+                return get_site_url();
+
             case 'siteLocale':
                 return get_locale();
 
