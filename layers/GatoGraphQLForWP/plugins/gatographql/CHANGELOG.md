@@ -4,9 +4,9 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 2.5.3 - DATE
+## 2.6.0 - DATE
 
-### Improvement
+### Improvements
 
 - Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)"
 
