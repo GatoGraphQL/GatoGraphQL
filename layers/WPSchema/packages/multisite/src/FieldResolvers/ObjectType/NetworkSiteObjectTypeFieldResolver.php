@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Multisite\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\Comments\TypeResolvers\ObjectType\NetworkSiteObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\URLScalarTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -14,8 +15,8 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
-
 use WP_Site;
+
 use function get_locale;
 // use function get_site_url;
 

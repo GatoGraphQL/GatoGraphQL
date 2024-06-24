@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Multisite\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\Comments\TypeResolvers\ObjectType\NetworkSiteObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPWPSchema\Multisite\TypeAPIs\MultisiteTypeAPIInterface;
@@ -12,7 +13,6 @@ use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFiel
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
-
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
