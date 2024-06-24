@@ -2,4 +2,28 @@
 
 ## Improvements
 
+### Added `siteURL` field ([#2697](https://github.com/GatoGraphQL/GatoGraphQL/pull/2697))
+
+Added the following field to the GraphQL schema, via the "Site" module:
+
+- `Root.siteURL`
+
+For instance, executing the following query:
+
+```graphql
+{
+  siteURL
+}
+```
+
+...might produce:
+
+```json
+{
+  "data": {
+    "siteURL": "https://mysite.com"
+  }
+}
+```
+
 - Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)" ([#2694](https://github.com/GatoGraphQL/GatoGraphQL/pull/2694))
