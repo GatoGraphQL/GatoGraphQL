@@ -133,7 +133,6 @@
         "pop-cms-schema/comment-mutations-wp": "<2.5.2",
         "pop-cms-schema/page-mutations": "<2.5.2",
         "pop-cms-schema/page-mutations-wp": "<2.5.2",
-        "pop-wp-schema/site": "<2.5.2",
         "pop-wp-schema/pages": "<2.5.2"
     },
     "type": "library",

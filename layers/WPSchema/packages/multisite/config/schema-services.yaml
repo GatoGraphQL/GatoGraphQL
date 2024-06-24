@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+
+    PoPWPSchema\Multisite\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPWPSchema\Multisite\TypeResolvers\:
+        resource: '../src/TypeResolvers/*'
+
+    PoPWPSchema\Multisite\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+

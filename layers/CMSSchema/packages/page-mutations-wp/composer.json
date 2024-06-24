@@ -127,7 +127,6 @@
         "pop-wp-schema/schema-commons": "<2.5.2",
         "pop-wp-schema/commentmeta": "<2.5.2",
         "pop-wp-schema/users": "<2.5.2",
-        "pop-wp-schema/site": "<2.5.2",
         "pop-wp-schema/menus": "<2.5.2",
         "pop-wp-schema/block-content-parser": "<2.5.2",
         "pop-wp-schema/pages": "<2.5.2",

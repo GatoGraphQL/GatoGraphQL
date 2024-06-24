@@ -42,6 +42,7 @@
         "pop-wp-schema/custompostmeta": "dev-master",
         "pop-wp-schema/media": "dev-master",
         "pop-wp-schema/menus": "dev-master",
+        "pop-wp-schema/multisite": "dev-master",
         "pop-wp-schema/pages": "dev-master",
         "pop-wp-schema/posts": "dev-master",
         "pop-wp-schema/site": "dev-master",

@@ -1,0 +1,12 @@
+# Because this testing site is not a WordPress multisite network,
+# all these fields will not exist in the GraphQL schema
+{
+  networkSiteCount
+  networkSites {
+    id
+    name
+    url
+    locale
+    language
+  }
+}

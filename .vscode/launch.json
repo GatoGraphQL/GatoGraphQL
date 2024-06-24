@@ -127,6 +127,7 @@
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/media": "${workspaceFolder}/layers/WPSchema/packages/media",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/menus": "${workspaceFolder}/layers/WPSchema/packages/menus",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/meta": "${workspaceFolder}/layers/WPSchema/packages/meta",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/multisite": "${workspaceFolder}/layers/WPSchema/packages/multisite",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/pages": "${workspaceFolder}/layers/WPSchema/packages/pages",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/posts": "${workspaceFolder}/layers/WPSchema/packages/posts",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/schema-commons": "${workspaceFolder}/layers/WPSchema/packages/schema-commons",

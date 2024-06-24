@@ -49,6 +49,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_PAGES = Plugin::NAMESPACE . '\schema-pages';
     public final const SCHEMA_MEDIA = Plugin::NAMESPACE . '\schema-media';
     public final const SCHEMA_SITE = Plugin::NAMESPACE . '\schema-site';
+    public final const SCHEMA_MULTISITE = Plugin::NAMESPACE . '\schema-multisite';
     public final const SCHEMA_TAGS = Plugin::NAMESPACE . '\schema-tags';
     public final const SCHEMA_POST_TAGS = Plugin::NAMESPACE . '\schema-post-tags';
     public final const SCHEMA_CATEGORIES = Plugin::NAMESPACE . '\schema-categories';
@@ -382,6 +383,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_USER_AVATARS,
             self::SCHEMA_COMMENTS,
             self::SCHEMA_SITE,
+            self::SCHEMA_MULTISITE,
             self::SCHEMA_TAGS,
             self::SCHEMA_POST_TAGS,
             self::SCHEMA_CATEGORIES,
@@ -450,6 +452,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_PAGES => \__('Pages', 'gatographql'),
             self::SCHEMA_MEDIA => \__('Media', 'gatographql'),
             self::SCHEMA_SITE => \__('Site', 'gatographql'),
+            self::SCHEMA_MULTISITE => \__('Multisite', 'gatographql'),
             self::SCHEMA_TAGS => \__('Tags', 'gatographql'),
             self::SCHEMA_POST_TAGS => \__('Post Tags', 'gatographql'),
             self::SCHEMA_CATEGORIES => \__('Categories', 'gatographql'),
@@ -518,6 +521,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_SETTINGS => \__('Fetch settings from the site', 'gatographql'),
             self::SCHEMA_CUSTOMPOSTS => \__('Base functionality for all custom posts', 'gatographql'),
             self::SCHEMA_SITE => \__('Fetch site information', 'gatographql'),
+            self::SCHEMA_MULTISITE => \__('Fetch site information in a WordPress multisite network', 'gatographql'),
             self::SCHEMA_TAGS => \__('Base functionality for all tags', 'gatographql'),
             self::SCHEMA_CATEGORIES => \__('Base functionality for all categories', 'gatographql'),
             default => parent::getDescription($module),
@@ -542,6 +546,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         };
     }
 
+    public function areRequirementsSatisfied(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_MULTISITE:
+                return is_multisite();
+        }
+        return parent::areRequirementsSatisfied($module);
+    }
+
     /**
      * Does the module have HTML Documentation?
      */
@@ -559,6 +572,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_MENUS:
             case self::SCHEMA_MEDIA:
             case self::SCHEMA_SITE:
+            case self::SCHEMA_MULTISITE:
                 return false;
         }
         return $this->upstreamHasDocumentation($module);
