@@ -546,6 +546,15 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         };
     }
 
+    public function areRequirementsSatisfied(string $module): bool
+    {
+        switch ($module) {
+            case self::SCHEMA_MULTISITE:
+                return is_multisite();
+        }
+        return parent::areRequirementsSatisfied($module);
+    }
+
     /**
      * Does the module have HTML Documentation?
      */
