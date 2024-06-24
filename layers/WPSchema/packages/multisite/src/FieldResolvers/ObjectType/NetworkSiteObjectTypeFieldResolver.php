@@ -17,9 +17,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Site;
 
-use function get_locale;
-
-// use function get_site_url;
+use function get_option;
 
 class NetworkSiteObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
@@ -151,7 +149,6 @@ class NetworkSiteObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
 
             case 'url':
                 return $site->siteurl;
-                // return get_site_url($siteID);
 
             case 'locale':
                 return $this->getSiteLocale($siteID);
@@ -168,7 +165,20 @@ class NetworkSiteObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     protected function getSiteLocale(int $siteID): string
     {
         switch_to_blog($siteID);
-        $locale = get_locale();
+        
+        /**
+         * Calling `get_locale` doesn't work when switching blog,
+         * hence reproduce its logic, reading option WPLANG which
+         * does work.
+         *
+         * @see wp-includes/l10n.php
+         */
+        // $locale = get_locale();
+        $locale = get_option('WPLANG');
+        if (empty($locale)) {
+            $locale = 'en_US';
+        }
+
         restore_current_blog();
         return $locale;
     }
