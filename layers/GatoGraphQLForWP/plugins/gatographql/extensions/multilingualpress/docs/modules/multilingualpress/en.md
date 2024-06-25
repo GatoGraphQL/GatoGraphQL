@@ -1,6 +1,6 @@
 # MultilingualPress
 
-Integration with the [MultilingualPress](https://wordpress.org/plugins/multilingualpress/) plugin.
+Integration with the [MultilingualPress](https://multilingualpress.org/) plugin.
 
 The GraphQL schema is provided the fields to retrieve multilingual data.
 
