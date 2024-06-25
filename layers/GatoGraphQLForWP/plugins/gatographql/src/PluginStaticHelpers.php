@@ -8,6 +8,7 @@ use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 
 use function get_file_data;
+use function is_multisite;
 
 class PluginStaticHelpers
 {
@@ -63,6 +64,14 @@ class PluginStaticHelpers
     {
         if (self::$activeWordPressPluginFiles === null) {
             self::$activeWordPressPluginFiles = get_option('active_plugins', []);
+            if (is_multisite()) {
+                /** @var string[] */
+                $activeNetworkWordPressPluginFiles = array_keys(get_network_option(0, 'active_sitewide_plugins', []));
+                self::$activeWordPressPluginFiles = array_values(array_unique(array_merge(
+                    self::$activeWordPressPluginFiles,
+                    $activeNetworkWordPressPluginFiles
+                )));
+            }
         }
         return self::$activeWordPressPluginFiles;
     }

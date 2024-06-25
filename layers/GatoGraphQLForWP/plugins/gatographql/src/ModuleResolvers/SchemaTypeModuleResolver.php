@@ -32,6 +32,8 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPWPSchema\Blocks\TypeResolvers\ObjectType\GeneralBlockObjectTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 
+use function is_multisite;
+
 class SchemaTypeModuleResolver extends AbstractModuleResolver
 {
     use ModuleResolverTrait {
