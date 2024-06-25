@@ -12,7 +12,7 @@ These types implement interface `MultilingualPressTranslatable`.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation languages for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no language was assigned (eg: Multilingual Press was installed later on). |
+| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation languages for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no language was assigned. |
 
 Field `multilingualpressTranslationSiteRelationshipIDs` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
 
@@ -139,7 +139,7 @@ In addition, field `multilingualpressIsTranslatable` indicates if the CPT or tax
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation languages for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no language was assigned (eg: Multilingual Press was installed later on), or if the entity is not configured to be translated (via Multilingual Press Settings). |
+| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation languages for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no language was assigned, or if the entity is not configured to be translated (via Multilingual Press Settings). |
 | `multilingualpressIsTranslatable` | Indicate if the entity can be translated. |
 
 Running this query:
