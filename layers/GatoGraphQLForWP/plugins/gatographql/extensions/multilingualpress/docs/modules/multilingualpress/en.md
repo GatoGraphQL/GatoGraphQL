@@ -12,7 +12,6 @@ These types implement interface `MultilingualPressTranslatable`.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Multilingual Press was installed later on). |
 | `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Multilingual Press was installed later on). |
 
 Field `multilingualpressTranslationSiteRelationshipIDs` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
@@ -25,7 +24,6 @@ Running this query:
     __typename
     id
     title
-    multilingualpressLanguage
     multilingualpressTranslationSiteRelationshipIDs
     multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
 
@@ -33,7 +31,6 @@ Running this query:
       __typename
       id
       name
-      multilingualpressLanguage
       multilingualpressTranslationSiteRelationshipIDs
       multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
     }
@@ -42,7 +39,6 @@ Running this query:
       __typename
       id
       name
-      multilingualpressLanguage
       multilingualpressTranslationSiteRelationshipIDs
       multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
     }
@@ -52,7 +48,6 @@ Running this query:
     __typename
     id
     title
-    multilingualpressLanguage
     multilingualpressTranslationSiteRelationshipIDs
     multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
   }
@@ -69,7 +64,6 @@ Running this query:
         "__typename": "Post",
         "id": 1668,
         "title": "Some post translated using Multilingual Press",
-        "multilingualpressLanguage": "en",
         "multilingualpressTranslationSiteRelationshipIDs": {
           "fr": 1670,
           "es": 1672
@@ -84,7 +78,6 @@ Running this query:
             "__typename": "PostCategory",
             "id": 61,
             "name": "Category for Multilingual Press",
-            "multilingualpressLanguage": "en",
             "multilingualpressTranslationSiteRelationshipIDs": {
               "fr": 63,
               "es": 65
@@ -101,7 +94,6 @@ Running this query:
             "__typename": "PostTag",
             "id": 67,
             "name": "Tag for Multilingual Press",
-            "multilingualpressLanguage": "en",
             "multilingualpressTranslationSiteRelationshipIDs": {
               "fr": 69,
               "es": 71
@@ -120,7 +112,6 @@ Running this query:
         "__typename": "Page",
         "id": 1674,
         "title": "Some page translated using Multilingual Press",
-        "multilingualpressLanguage": "en",
         "multilingualpressTranslationSiteRelationshipIDs": {
           "fr": 1676,
           "es": 1678
@@ -142,13 +133,12 @@ These types implement interface `MultilingualPressMaybeTranslatable`.
 
 `GenericCustomPost` is a type used to represent any custom post installed on the site, such as `Portfolio`, `Event`, `Product`, or other. Similarly, `GenericTag` and `GenericCategory` are used to represent their taxonomies.
 
-Each of these CPTs and taxonomies can be defined to be translatable on the Multilingual Press settings. Fields `multilingualpressLanguage` and `multilingualpressTranslationSiteRelationshipIDs` will then have the same behavior as for `Post` and the others (described above), and also return `null` if the entity's CPT or taxonomy is not configured to be translated.
+Each of these CPTs and taxonomies can be defined to be translatable on the Multilingual Press settings. Field `multilingualpressTranslationSiteRelationshipIDs` will then have the same behavior as for `Post` and the others (described above), and also return `null` if the entity's CPT or taxonomy is not configured to be translated.
 
 In addition, field `multilingualpressIsTranslatable` indicates if the CPT or taxonomy is configured to be translatable.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Multilingual Press was installed later on), or if the entity is not configured to be translated (via Multilingual Press Settings). |
 | `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Multilingual Press was installed later on), or if the entity is not configured to be translated (via Multilingual Press Settings). |
 | `multilingualpressIsTranslatable` | Indicate if the entity can be translated. |
 
@@ -163,7 +153,6 @@ Running this query:
       title
       customPostType
       multilingualpressIsTranslatable
-      multilingualpressLanguage
       multilingualpressTranslationSiteRelationshipIDs
       multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
       
@@ -173,7 +162,6 @@ Running this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressLanguage
           multilingualpressTranslationSiteRelationshipIDs
           multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
         }
@@ -185,7 +173,6 @@ Running this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressLanguage
           multilingualpressTranslationSiteRelationshipIDs
           multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
         }
@@ -207,7 +194,6 @@ Running this query:
         "title": "Some CPT that has Multilingual Press translation enabled",
         "customPostType": "some-cpt",
         "multilingualpressIsTranslatable": true,
-        "multilingualpressLanguage": "en",
         "multilingualpressTranslationSiteRelationshipIDs": {
           "fr": 12,
           "es": 14
@@ -223,7 +209,6 @@ Running this query:
             "id": 30,
             "name": "Some Category for Multilingual Press",
             "multilingualpressIsTranslatable": true,
-            "multilingualpressLanguage": "en",
             "multilingualpressTranslationSiteRelationshipIDs": {
               "fr": 32,
               "es": 34
@@ -241,7 +226,6 @@ Running this query:
             "id": 50,
             "name": "Some Tag for Multilingual Press",
             "multilingualpressIsTranslatable": true,
-            "multilingualpressLanguage": "en",
             "multilingualpressTranslationSiteRelationshipIDs": {
               "fr": 52,
               "es": 54
@@ -260,7 +244,6 @@ Running this query:
         "title": "Another CPT that does not have Multilingual Press translation enabled",
         "customPostType": "another-cpt",
         "multilingualpressIsTranslatable": false,
-        "multilingualpressLanguage": null,
         "multilingualpressTranslationSiteRelationshipIDs": null,
         "multilingualpressTranslationSiteRelationshipIDsWithSelf": null,
         "categories": [
@@ -269,7 +252,6 @@ Running this query:
             "id": 70,
             "name": "Category without support for Multilingual Press",
             "multilingualpressIsTranslatable": false,
-            "multilingualpressLanguage": null,
             "multilingualpressTranslationSiteRelationshipIDs": null,
             "multilingualpressTranslationSiteRelationshipIDsWithSelf": null
           }
@@ -280,7 +262,6 @@ Running this query:
             "id": 72,
             "name": "Tag without support for Multilingual Press",
             "multilingualpressIsTranslatable": false,
-            "multilingualpressLanguage": null,
             "multilingualpressTranslationSiteRelationshipIDs": null,
             "multilingualpressTranslationSiteRelationshipIDsWithSelf": null
           }
