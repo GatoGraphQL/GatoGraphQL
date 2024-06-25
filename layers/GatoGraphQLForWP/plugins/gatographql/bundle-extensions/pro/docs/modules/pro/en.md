@@ -27,6 +27,7 @@ As new extensions are created and released, they will also be added to this plug
 - [HTTP Request via Schema](../../../../../extensions/http-request-via-schema/docs/modules/http-request-via-schema/en.md)
 - [Internal GraphQL Server](../../../../../extensions/internal-graphql-server/docs/modules/internal-graphql-server/en.md)
 - [Low-Level Persisted Query Editing](../../../../../extensions/low-level-persisted-query-editing/docs/modules/low-level-persisted-query-editing/en.md)
+- [Multilingual Press](../../../../../extensions/multilingualpress/docs/modules/multilingualpress/en.md)
 - [Multiple Query Execution](../../../../../extensions/multiple-query-execution/docs/modules/multiple-query-execution/en.md)
 - [PHP Constants and Environment via Schema](../../../../../extensions/php-constants-and-environment-variables-via-schema/docs/modules/php-constants-and-environment-variables-via-schema/en.md)
 - [PHP Functions via Schema](../../../../../extensions/php-functions-via-schema/docs/modules/php-functions-via-schema/en.md)

@@ -143,6 +143,7 @@ class BundleExtensionModuleResolver extends AbstractBundleExtensionModuleResolve
                 ExtensionModuleResolver::HTTP_REQUEST_VIA_SCHEMA,
                 ExtensionModuleResolver::INTERNAL_GRAPHQL_SERVER,
                 ExtensionModuleResolver::LOW_LEVEL_PERSISTED_QUERY_EDITING,
+                ExtensionModuleResolver::MULTILINGUALPRESS,
                 ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                 ExtensionModuleResolver::PHP_CONSTANTS_AND_ENVIRONMENT_VARIABLES_VIA_SCHEMA,
                 ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
