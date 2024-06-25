@@ -273,7 +273,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 = 2.6.0 =
 * Added `siteURL` field (#2697)
 * Added fields to fetch multisite data (#2698)
+* Added documentation for integration with MultilingualPress (#2699)
 * Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)" (#2694)
+* [PRO] Added integration with MultilingualPress
 
 = 2.5.2 =
 * Fixed bug: Initialize blocks only after their corresponding CPTs (#2693)
