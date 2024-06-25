@@ -4,11 +4,11 @@ Integration with the [Multilingual Press](https://wordpress.org/plugins/multilin
 
 The GraphQL schema is provided the fields to retrieve multilingual data.
 
-## Types `Post`, `Page`, `PostTag`, `PostCategory` and `Media`
+## Types `Post`, `Page`, `PostTag` and `PostCategory`
 
 Query the language for the entity, and the IDs for the translations for that entity.
 
-These types implement interface `MultilingualPressTranslatable`. (Type `Media` does only when media support is enabled, via the Multilingual Press settings.)
+These types implement interface `MultilingualPressTranslatable`.
 
 | Field | Description |
 | --- | --- |
@@ -49,15 +49,6 @@ Running this query:
   }
 
   pages {
-    __typename
-    id
-    title
-    multilingualpressLanguage
-    multilingualpressTranslationSiteRelationshipIDs
-    multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
-  }
-
-  mediaItems {
     __typename
     id
     title
@@ -138,23 +129,6 @@ Running this query:
           "en": 1674,
           "fr": 1676,
           "es": 1678
-        }
-      }
-    ],
-    "mediaItems": [
-      {
-        "__typename": "Media",
-        "id": 40,
-        "title": "Media-for-MultilingualPress",
-        "multilingualpressLanguage": "en",
-        "multilingualpressTranslationSiteRelationshipIDs": {
-          "fr": 42,
-          "es": 44
-        },
-        "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
-          "en": 40,
-          "fr": 42,
-          "es": 44
         }
       }
     ]
