@@ -4,39 +4,6 @@ Integration with the [Multilingual Press](https://wordpress.org/plugins/multilin
 
 The GraphQL schema is provided the fields to retrieve multilingual data.
 
-## Types `Root`/`QueryRoot`
-
-Query the site metadata configured in Multilingual Press.
-
-| Field | Description |
-| --- | --- |
-| `multilingualpressDefaultLanguage` | Default language on Multilingual Press, or `null` if there are no languages enabled. |
-| `multilingualpressEnabledLanguages` | Enabled languages on Multilingual Press. |
-
-Running this query:
-
-```graphql
-{
-  multilingualpressDefaultLanguage
-  multilingualpressEnabledLanguages
-}
-```
-
-...might produce:
-
-```json
-{
-  "data": {
-    "multilingualpressDefaultLanguage": "en",
-    "multilingualpressEnabledLanguages": [
-      "en",
-      "es",
-      "fr"
-    ]
-  }
-}
-```
-
 ## Types `Post`, `Page`, `PostTag`, `PostCategory` and `Media`
 
 Query the language for the entity, and the IDs for the translations for that entity.
