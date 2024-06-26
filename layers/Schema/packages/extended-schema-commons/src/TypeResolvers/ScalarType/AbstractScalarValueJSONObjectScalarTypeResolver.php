@@ -52,13 +52,21 @@ abstract class AbstractScalarValueJSONObjectScalarTypeResolver extends JSONObjec
                 return null;
             }
             /**
-             * Coerce to the specific scalar type
+             * Coerce to the specific scalar type, if possible
              */
+            if (!$this->canCastJSONObjectPropertyValue($value)) {
+                $this->addDefaultError($inputValue, $astNode, $objectTypeFieldResolutionFeedbackStore);
+                return null;
+            }
             $inputValue->$key = $this->castJSONObjectPropertyValue($value);
         }
         return $inputValue;
     }
 
+    abstract protected function canCastJSONObjectPropertyValue(
+        string|int|float|bool $value,
+    ): bool;
+    
     abstract protected function castJSONObjectPropertyValue(
         string|int|float|bool $value,
     ): string|int|float|bool;

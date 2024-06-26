@@ -16,6 +16,12 @@ class StringValueJSONObjectScalarTypeResolver extends AbstractScalarValueJSONObj
         return $this->__('Custom scalar representing a JSON Object where values are strings', 'extended-schema-commons');
     }
 
+    protected function canCastJSONObjectPropertyValue(
+        string|int|float|bool $value,
+    ): bool {
+        return true;
+    }
+
     protected function castJSONObjectPropertyValue(
         string|int|float|bool $value,
     ): string|int|float|bool {
