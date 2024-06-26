@@ -150,6 +150,8 @@ query FetchData(
       )
   }
 
+  hasTranslationPosts: _notEmpty(value: $__translationPosts)
+
   originPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
@@ -168,11 +170,16 @@ query FetchData(
     else: true
   )
 
-  executeTranslation: _if(
+  canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
     then: $__originPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationPosts,
+    $__canTranslateOriginPost
+  ])
     @export(as: "executeTranslation")
 }
 

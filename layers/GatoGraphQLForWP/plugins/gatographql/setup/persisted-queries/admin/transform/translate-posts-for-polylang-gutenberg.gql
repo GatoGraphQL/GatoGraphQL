@@ -700,6 +700,8 @@ query InitializeTranslationVariables(
       )
   }
 
+  hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
+
   originPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
@@ -718,11 +720,16 @@ query InitializeTranslationVariables(
     else: true
   )
 
-  executeTranslation: _if(
+  canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
     then: $__originPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationPosts,
+    $__canTranslateOriginPost
+  ])
     @export(as: "executeTranslation")
 }
 
