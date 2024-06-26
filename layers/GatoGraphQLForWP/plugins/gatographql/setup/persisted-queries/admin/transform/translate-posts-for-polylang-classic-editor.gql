@@ -163,20 +163,32 @@ query FetchData(
     @export(as: "executeTranslation")
 }
 
-query TranslateData
+query TranslateData(
+  $languageMapping: JSONObject! = {}
+)
   @depends(on: "FetchData")
   @include(if: $executeTranslation)
 {  
   translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "postID"
-      affectDirectivesUnderPos: [1, 2]
+      affectDirectivesUnderPos: [1, 2, 3]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $translationPostLanguages,
           by: { key: $postID }
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageMapping,
+          by: { key: $toLanguage }
+          failIfNonExistingKeyOrPath: false
+          valueWhenNonExistingKeyOrPath: $toLanguage
         },
         passOnwardsAs: "toLanguage"
       )
