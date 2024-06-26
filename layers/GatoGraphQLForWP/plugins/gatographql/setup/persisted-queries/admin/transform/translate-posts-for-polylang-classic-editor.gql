@@ -63,7 +63,11 @@ query InitializeVariables
     @export(as: "translationPostIds")
 }
 
-query ExportOriginPost($postId: ID!)
+query ExportOriginPost(
+  $postId: ID!
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
   @depends(on: "InitializeVariables")
 {
   defaultLanguage: polylangDefaultLanguage
@@ -77,7 +81,10 @@ query ExportOriginPost($postId: ID!)
       @export(as: "fromLanguage")
     
 
-    polylangTranslationLanguageIDs
+    polylangTranslationLanguageIDs(filter: {
+      includeLanguagues: $includeLanguagesToTranslate
+      excludeLanguagues: $excludeLanguagesToTranslate
+    })
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "translationPostIds")
 
