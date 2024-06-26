@@ -59,6 +59,11 @@ query InitializeVariables
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
     @remove
+
+  emptyBool: _echo(value: false)
+    @export(as: "hasTranslationPosts")
+    @export(as: "executeTranslation")
+    @remove
   
   emptyArray: _echo(value: [])
     @export(as: "translationPostIds")
@@ -162,6 +167,9 @@ query ExportOriginPost(
     })
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "translationPostIds")
+
+    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+      @export(as: "hasTranslationPosts")
 
 
     title
@@ -422,6 +430,7 @@ query InitializeTranslationVariables(
 )
   @depends(on: "ExportOriginPost")
   @include(if: $hasOriginPost)
+  @include(if: $hasTranslationPosts)
 {
   emptyTranslationPostVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     emptyArray: _echo(value: [])
@@ -678,8 +687,6 @@ query InitializeTranslationVariables(
       )
   }
 
-  hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
-
   originPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
@@ -698,16 +705,11 @@ query InitializeTranslationVariables(
     else: true
   )
 
-  canTranslateOriginPost: _if(
+  executeTranslation: _if(
     condition: $translateDefaultLanguageOnly,
     then: $__originPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
-
-  executeTranslation: _and(values: [
-    $__hasTranslationPosts,
-    $__canTranslateOriginPost
-  ])
     @export(as: "executeTranslation")
 }
 
