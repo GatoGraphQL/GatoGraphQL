@@ -11,7 +11,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added `siteURL` field (#2697)
 - Added fields to fetch multisite data (#2698)
 - Added documentation for integration with MultilingualPress (#2699)
-- Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)"
+- Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries (#2694 / #2700):
+  - [PRO] Translate posts for Polylang (Gutenberg)
+  - [PRO] Translate posts for Polylang (Classic editor)
 - [PRO] Added integration with MultilingualPress
 
 ## 2.5.2 - 06/06/2024

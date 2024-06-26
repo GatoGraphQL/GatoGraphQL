@@ -3,7 +3,9 @@
 ## Improvements
 
 - Added documentation for integration with MultilingualPress ([#2699](https://github.com/GatoGraphQL/GatoGraphQL/pull/2699))
-- Added GraphQL variable `$translateFromLanguage` to persisted query "[PRO] Translate posts for Polylang (Gutenberg)" ([#2694](https://github.com/GatoGraphQL/GatoGraphQL/pull/2694))
+- Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries ([#2694](https://github.com/GatoGraphQL/GatoGraphQL/pull/2694) / [#2700](https://github.com/GatoGraphQL/GatoGraphQL/pull/2700)):
+  - [PRO] Translate posts for Polylang (Gutenberg)
+  - [PRO] Translate posts for Polylang (Classic editor)
 
 ### Added `siteURL` field ([#2697](https://github.com/GatoGraphQL/GatoGraphQL/pull/2697))
 

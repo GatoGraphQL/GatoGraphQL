@@ -6,6 +6,8 @@
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
 #   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
+#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
+#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
 #
 # *********************************************************************
 #
@@ -35,6 +37,10 @@
 # (for instance, `"en"`). It applies only when
 # `$translateDefaultLanguageOnly` is `false`.
 #
+# To limit for what languages to execute the translation, pass
+# variables `$includeLanguagesToTranslate` (if empty, all languages
+# will be included) and `$excludeLanguagesToTranslate`.
+#
 # By default it also translates the post slug. To disable, pass
 # variable `updateSlug` with `false`.
 #
@@ -52,12 +58,21 @@ query InitializeVariables
 {
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
+
+  emptyBool: _echo(value: false)
+    @export(as: "hasTranslationPosts")
+    @export(as: "executeTranslation")
+    @remove
   
   emptyArray: _echo(value: [])
     @export(as: "translationPostIds")
 }
 
-query ExportOriginPost($postId: ID!)
+query ExportOriginPost(
+  $postId: ID!
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
   @depends(on: "InitializeVariables")
 {
   defaultLanguage: polylangDefaultLanguage
@@ -71,9 +86,15 @@ query ExportOriginPost($postId: ID!)
       @export(as: "fromLanguage")
     
 
-    polylangTranslationLanguageIDs
+    polylangTranslationLanguageIDs(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "translationPostIds")
+
+    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+      @export(as: "hasTranslationPosts")
 
 
     title
@@ -95,6 +116,7 @@ query FetchData(
 )
   @depends(on: "ExportOriginPost")
   @include(if: $hasOriginPost)
+  @include(if: $hasTranslationPosts)
 {
   translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
@@ -115,8 +137,6 @@ query FetchData(
       )
   }
 
-  hasTranslationPosts: _notEmpty(value: $__translationPosts)
-
   originPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
@@ -135,16 +155,11 @@ query FetchData(
     else: true
   )
 
-  canTranslateOriginPost: _if(
+  executeTranslation: _if(
     condition: $translateDefaultLanguageOnly,
     then: $__originPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
-
-  executeTranslation: _and(values: [
-    $__hasTranslationPosts,
-    $__canTranslateOriginPost
-  ])
     @export(as: "executeTranslation")
 }
 
