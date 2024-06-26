@@ -152,7 +152,7 @@ query ExportOriginPost($postId: ID!)
       @export(as: "fromLanguage")
     
 
-    polylangTranslationLanguageIDs(filter: { includeLanguagues: ["en"] })
+    polylangTranslationLanguageIDs
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "translationPostIds")
 
