@@ -8,6 +8,7 @@
 #   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
 #   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
 #   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
 #
 # *********************************************************************
 #
@@ -43,6 +44,18 @@
 #
 # By default it also translates the post slug. To disable, pass
 # variable `updateSlug` with `false`.
+#
+# For some languages, the code used by WordPress and Google Translate
+# are different. For instance, Norwegian is represented as "nb" by
+# WordPress, and as "no" by Google Translate. To support translating
+# to these languages, provide the language code mapping via the
+# `$languageMapping` GraphQL variable, such as:
+#
+#   {
+#     "languageMapping": {
+#       "nb": "no"
+#     }
+#   }
 #
 # See Persisted Query "Translate post (Gutenberg)" for additional
 # documentation.
@@ -1198,7 +1211,9 @@ query AdaptData
     @export(as: "adaptedFromRawExcerpt")
 }
 
-query TransformData
+query TransformData(
+  $languageMapping: JSONObject! = {}
+)
   @depends(on: "AdaptData")
   @include(if: $executeTranslation)
 {
@@ -1288,13 +1303,23 @@ query TransformData
       @underJSONObjectProperty(by: { key: "to" })
         @underEachJSONObjectProperty(
           passKeyOnwardsAs: "postId"
-          affectDirectivesUnderPos: [1, 2]
+          affectDirectivesUnderPos: [1, 2, 3]
         )
           @applyField(
             name: "_objectProperty",
             arguments: {
               object: $translationPostLanguages,
               by: { key: $postId }
+            },
+            passOnwardsAs: "toLanguage"
+          )
+          @applyField(
+            name: "_objectProperty",
+            arguments: {
+              object: $languageMapping,
+              by: { key: $toLanguage }
+              failIfNonExistingKeyOrPath: false
+              valueWhenNonExistingKeyOrPath: $toLanguage
             },
             passOnwardsAs: "toLanguage"
           )
