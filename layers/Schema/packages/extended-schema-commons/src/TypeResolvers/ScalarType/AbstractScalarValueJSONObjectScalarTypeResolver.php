@@ -66,7 +66,7 @@ abstract class AbstractScalarValueJSONObjectScalarTypeResolver extends JSONObjec
     abstract protected function canCastJSONObjectPropertyValue(
         string|int|float|bool $value,
     ): bool;
-    
+
     abstract protected function castJSONObjectPropertyValue(
         string|int|float|bool $value,
     ): string|int|float|bool;
