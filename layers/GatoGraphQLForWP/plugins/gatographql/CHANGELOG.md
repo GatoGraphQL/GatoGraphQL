@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - [PRO] Translate posts for Polylang (Gutenberg)
   - [PRO] Translate posts for Polylang (Classic editor)
 - [PRO] Added integration with MultilingualPress
+- [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
 
 ## 2.5.2 - 06/06/2024
 

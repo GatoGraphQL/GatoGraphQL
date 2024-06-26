@@ -278,6 +278,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * [PRO] Translate posts for Polylang (Gutenberg)
   * [PRO] Translate posts for Polylang (Classic editor)
 * [PRO] Added integration with MultilingualPress
+* [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
 
 = 2.5.2 =
 * Fixed bug: Initialize blocks only after their corresponding CPTs (#2693)
