@@ -6,7 +6,7 @@
 - Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries ([#2694](https://github.com/GatoGraphQL/GatoGraphQL/pull/2694) / [#2700](https://github.com/GatoGraphQL/GatoGraphQL/pull/2700)):
   - [PRO] Translate posts for Polylang (Gutenberg)
   - [PRO] Translate posts for Polylang (Classic editor)
-- Added scalar type `IntValueJSONObject` to the GraphQL schema
+- Added scalar type `IntValueJSONObject` to the GraphQL schema ([#2703](https://github.com/GatoGraphQL/GatoGraphQL/pull/2703))
 
 ### Added `siteURL` field ([#2697](https://github.com/GatoGraphQL/GatoGraphQL/pull/2697))
 
