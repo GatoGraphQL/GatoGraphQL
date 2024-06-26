@@ -277,6 +277,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries (#2694 / #2700):
   * [PRO] Translate posts for Polylang (Gutenberg)
   * [PRO] Translate posts for Polylang (Classic editor)
+* Added scalar type `IntValueJSONObject` to the GraphQL schema
 * [PRO] Added integration with MultilingualPress
 * [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
 
