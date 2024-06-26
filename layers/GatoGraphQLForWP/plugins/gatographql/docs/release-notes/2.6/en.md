@@ -100,6 +100,8 @@ might return:
 
 ## [PRO] Improvements
 
+- [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
+
 ### Added integration with MultilingualPress
 
 Gato GraphQL PRO now has an integration with the [MultilingualPress](https://multilingualpress.org/) plugin.
