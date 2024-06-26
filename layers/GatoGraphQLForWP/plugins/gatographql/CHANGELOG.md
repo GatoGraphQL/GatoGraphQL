@@ -14,7 +14,9 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries (#2694 / #2700):
   - [PRO] Translate posts for Polylang (Gutenberg)
   - [PRO] Translate posts for Polylang (Classic editor)
-- Added scalar type `IntValueJSONObject` to the GraphQL schema (#2703)
+- Added scalar types to the GraphQL schema:
+  - `IntValueJSONObject` (#2703)
+  - `IDValueJSONObject` (#2704)
 - [PRO] Added integration with MultilingualPress
 - [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
 
