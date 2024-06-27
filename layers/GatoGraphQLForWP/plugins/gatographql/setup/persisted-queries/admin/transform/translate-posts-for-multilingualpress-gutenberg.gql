@@ -820,7 +820,7 @@ query EscapeRegexStrings
       }
     )
       @underJSONObjectProperty(by: { key: "from" })
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem
             @strReplaceMultiple(
               search: [
@@ -877,7 +877,7 @@ query EscapeRegexStrings
       @underJSONObjectProperty(
         by: { key: "to" }
       )
-        @underEachJSONObjectProperty(
+        @underEachArrayItem(
           affectDirectivesUnderPos: [1, 3]
         )
           @underEachArrayItem
@@ -912,7 +912,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -943,7 +943,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -974,7 +974,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1005,7 +1005,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1036,7 +1036,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1067,7 +1067,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1098,7 +1098,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1129,7 +1129,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1160,7 +1160,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1191,7 +1191,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1222,7 +1222,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1253,7 +1253,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1284,7 +1284,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1315,7 +1315,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1346,7 +1346,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1377,7 +1377,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1408,7 +1408,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
@@ -1439,7 +1439,7 @@ query CreateRegexReplacements
         by: { key: "from" }
         affectDirectivesUnderPos: [1, 4],
       )
-        @underEachJSONObjectProperty
+        @underEachArrayItem
           @underEachArrayItem(
             passValueOnwardsAs: "value"
           )
