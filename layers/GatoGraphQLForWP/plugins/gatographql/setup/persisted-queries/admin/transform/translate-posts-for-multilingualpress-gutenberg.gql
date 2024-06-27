@@ -805,6 +805,7 @@ query InitializeTranslationVariables(
       @export(
         as: "coreEmbedCaptionReplacementsTo"
         type: LIST
+      )
 
   hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
 
