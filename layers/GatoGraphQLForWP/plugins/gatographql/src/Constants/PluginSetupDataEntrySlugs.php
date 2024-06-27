@@ -57,4 +57,6 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_GUTENBERG = 'translate-posts-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_CLASSIC_EDITOR = 'translate-posts-for-polylang-classic-editor';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_GUTENBERG = 'translate-posts-for-polylang-gutenberg';
+    public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_CLASSIC_EDITOR = 'translate-posts-for-multilingualpress-classic-editor';
+    public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_GUTENBERG = 'translate-posts-for-multilingualpress-gutenberg';
 }

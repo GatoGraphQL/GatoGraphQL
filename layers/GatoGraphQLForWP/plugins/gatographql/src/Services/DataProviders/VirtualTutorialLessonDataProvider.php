@@ -169,6 +169,29 @@ class VirtualTutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
+            VirtualTutorialLessons::TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_GUTENBERG => [
+                \__('Translating block content in a post to a different language, with integration for MultilingualPress', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
+            VirtualTutorialLessons::TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_CLASSIC_EDITOR => [
+                \__('Translating "Classic editor" post to a different language, with integration for MultilingualPress', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
         ];
     }
 }

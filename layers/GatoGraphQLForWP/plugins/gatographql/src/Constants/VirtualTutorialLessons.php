@@ -25,4 +25,6 @@ class VirtualTutorialLessons
     public final const TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE = 'translating-classic-editor-post-to-a-different-language';
     public final const TRANSLATING_POSTS_FOR_POLYLANG_AND_GUTENBERG = 'translating-posts-for-polylang-and-gutenberg';
     public final const TRANSLATING_POSTS_FOR_POLYLANG_AND_CLASSIC_EDITOR = 'translating-posts-for-polylang-and-classic-editor';
+    public final const TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_GUTENBERG = 'translating-posts-for-multilingualpress-and-gutenberg';
+    public final const TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_CLASSIC_EDITOR = 'translating-posts-for-multilingualpress-and-classic-editor';
 }
