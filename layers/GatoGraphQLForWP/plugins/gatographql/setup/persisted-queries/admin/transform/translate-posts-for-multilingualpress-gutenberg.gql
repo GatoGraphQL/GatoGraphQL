@@ -2952,7 +2952,7 @@ mutation CreatePagesWithTranslationOnExternalSite
             endpoint: $endpoint,
             query: """
           
-mutation UpdatePageFromMasterSite($input: JSONObject!) {
+mutation UpdatePostFromMasterSite($input: JSONObject!) {
   updatePost(input: $input) {
     status
     errors {
