@@ -90,7 +90,7 @@ query ExportData(
     id
     emptyArray: _echo(value: [])
       @export(
-        as: "title"
+        as: "rawTitle"
         type: DICTIONARY
       )
       @export(
@@ -421,9 +421,9 @@ query FetchData(
     id
 
 
-    title
+    rawTitle
       @export(
-        as: "title"
+        as: "rawTitle"
         type: DICTIONARY
       )
     rawContent
@@ -717,7 +717,7 @@ query AdaptData
   @depends(on: "FetchBlockData")
   @include(if: $hasMasterPages)
 {
-  adaptedToTitle: _echo(value: $title)
+  adaptedToTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
       passValueOnwardsAs: "value"
     )
@@ -729,7 +729,7 @@ query AdaptData
         setResultInResponse: true
       )
     @export(as: "adaptedToTitle")
-  adaptedFromTitle: _echo(value: $title)
+  adaptedFromTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty
       @applyField(
         name: "_echo"
@@ -2256,7 +2256,7 @@ query PrepareMetaReplacements
   @depends(on: "TransformData")
   @include(if: $hasMasterPages)
 {
-  transformedMetaTitle: _echo(value: $title)
+  transformedMetaTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "pageID"
       affectDirectivesUnderPos: [1, 2, 3]
@@ -2286,7 +2286,7 @@ query PrepareMetaReplacements
         setResultInResponse: true
       )
     @export(
-      as: "transformedTitle"
+      as: "transformedRawTitle"
     )
 
   transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
@@ -2341,13 +2341,13 @@ query ExportMutationInputs(
         key: $__id
       }
     )
-    transformedTitle: _objectProperty(
-      object: $transformedTitle,
+    transformedRawTitle: _objectProperty(
+      object: $transformedRawTitle,
       by: {
         key: $__id
       }
     )
-    transformedSlug: _echo(value: $__transformedTitle)
+    transformedSlug: _echo(value: $__transformedRawTitle)
     transformedRawExcerpt: _objectProperty(
       object: $transformedRawExcerpt,
       by: {
@@ -2356,7 +2356,7 @@ query ExportMutationInputs(
     )
     input: _echo(value: {
       status: draft,
-      title: $__transformedTitle,
+      title: $__transformedRawTitle,
       slug: $__transformedSlug,
       excerpt: $__transformedRawExcerpt,
       contentAs: {

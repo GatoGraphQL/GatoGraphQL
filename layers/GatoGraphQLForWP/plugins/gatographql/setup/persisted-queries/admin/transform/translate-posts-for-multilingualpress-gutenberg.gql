@@ -222,8 +222,8 @@ query ExportOriginPost(
       @export(as: "hasTranslationConnections")
 
 
-    title
-      @export(as: "originTitle")
+    rawTitle
+      @export(as: "originRawTitle")
     rawContent
       @export(as: "originRawContent")
     rawExcerpt
@@ -494,12 +494,12 @@ query InitializeTranslationVariables
       @applyField(
         name: "_echo"
         arguments: {
-          value: $originTitle
+          value: $originRawTitle
         }
         setResultInResponse: true
       )
       @deferredExport(
-        as: "title"
+        as: "rawTitle"
         type: LIST
       )
     @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
@@ -1200,7 +1200,7 @@ query AdaptData
   @depends(on: "InitializeTranslationVariables")
   @include(if: $executeTranslation)
 {
-  adaptedToTitle: _echo(value: $title)
+  adaptedToTitle: _echo(value: $rawTitle)
     @underEachArrayItem(
       passValueOnwardsAs: "value"
     )
@@ -1212,7 +1212,7 @@ query AdaptData
         setResultInResponse: true
       )
     @export(as: "adaptedToTitle")
-  adaptedFromTitle: _echo(value: $title)
+  adaptedFromTitle: _echo(value: $rawTitle)
     @underEachArrayItem
       @applyField(
         name: "_echo"
@@ -2769,7 +2769,7 @@ query PrepareMetaReplacements
   @depends(on: "TransformData")
   @include(if: $executeTranslation)
 {
-  transformedMetaTitle: _echo(value: $title)
+  transformedMetaTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "postID"
       affectDirectivesUnderPos: [1, 2, 3]
@@ -2799,7 +2799,7 @@ query PrepareMetaReplacements
         setResultInResponse: true
       )
     @export(
-      as: "transformedTitle"
+      as: "transformedRawTitle"
     )
 
   transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
@@ -2904,7 +2904,7 @@ query ExportMutationInputs
             endpoint: $itemEndpoint,
             input: {
               id: $itemPostID,
-              title: $itemTransformedTitle,
+              title: $itemTransformedRawTitle,
               slug: $itemTransformedSlug,
               excerpt: $itemTransformedRawExcerpt,
               contentAs: {

@@ -185,8 +185,8 @@ query ExportOriginPost(
       @export(as: "hasTranslationPosts")
 
 
-    title
-      @export(as: "originTitle")
+    rawTitle
+      @export(as: "originRawTitle")
     rawContent
       @export(as: "originRawContent")
     rawExcerpt
@@ -448,7 +448,7 @@ query InitializeTranslationVariables(
   emptyTranslationPostVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     emptyArray: _echo(value: [])
       @export(
-        as: "title"
+        as: "rawTitle"
         type: DICTIONARY
       )
       @export(
@@ -741,9 +741,9 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
     id
 
 
-    title: _echo(value: $originTitle)
+    rawTitle: _echo(value: $originRawTitle)
       @export(
-        as: "title",
+        as: "rawTitle",
         type: DICTIONARY
       )
       @remove
@@ -1171,7 +1171,7 @@ query AdaptData
   @depends(on: "FetchData")
   @include(if: $executeTranslation)
 {
-  adaptedToTitle: _echo(value: $title)
+  adaptedToTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
       passValueOnwardsAs: "value"
     )
@@ -1183,7 +1183,7 @@ query AdaptData
         setResultInResponse: true
       )
     @export(as: "adaptedToTitle")
-  adaptedFromTitle: _echo(value: $title)
+  adaptedFromTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty
       @applyField(
         name: "_echo"
@@ -2732,7 +2732,7 @@ query PrepareMetaReplacements
   @depends(on: "TransformData")
   @include(if: $executeTranslation)
 {
-  transformedMetaTitle: _echo(value: $title)
+  transformedMetaTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "postID"
       affectDirectivesUnderPos: [1, 2, 3]
@@ -2762,7 +2762,7 @@ query PrepareMetaReplacements
         setResultInResponse: true
       )
     @export(
-      as: "transformedTitle"
+      as: "transformedRawTitle"
     )
 
   transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
@@ -2817,15 +2817,15 @@ mutation TranslateGutenbergPosts(
         key: $__id
       }
     )
-    transformedTitle: _objectProperty(
-      object: $transformedTitle,
+    transformedRawTitle: _objectProperty(
+      object: $transformedRawTitle,
       by: {
         key: $__id
       }
     )
     transformedSlug: _if(
       condition: $updateSlug,
-      then: $__transformedTitle,
+      then: $__transformedRawTitle,
       else: null
     )
     transformedRawExcerpt: _objectProperty(
@@ -2835,7 +2835,7 @@ mutation TranslateGutenbergPosts(
       }
     )
     update(input: {
-      title: $__transformedTitle,
+      title: $__transformedRawTitle,
       slug: $__transformedSlug,
       excerpt: $__transformedRawExcerpt,
       contentAs: {

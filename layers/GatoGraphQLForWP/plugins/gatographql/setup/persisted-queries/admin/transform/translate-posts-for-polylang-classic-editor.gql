@@ -110,8 +110,8 @@ query ExportOriginPost(
       @export(as: "hasTranslationPosts")
 
 
-    title
-      @export(as: "originTitle")
+    rawTitle
+      @export(as: "originRawTitle")
     rawContent
       @export(as: "originRawContent")
     rawExcerpt
@@ -140,7 +140,7 @@ query FetchData(
         type: DICTIONARY
       )
 
-    title: _echo(value: $originTitle)
+    rawTitle: _echo(value: $originRawTitle)
     rawContent: _echo(value: $originRawContent)
     rawExcerpt: _echo(value: $originRawExcerpt)
       @export(
@@ -236,16 +236,16 @@ query GenerateMutationInputs(
         arguments: {
           object: $postTranslatedData,
           by: {
-            key: "title",
+            key: "rawTitle",
           }
         },
-        passOnwardsAs: "postTranslatedTitle"
+        passOnwardsAs: "postTranslatedRawTitle"
       )
       @applyField(
         name: "_if",
         arguments: {
           condition: $updateSlug,
-          then: $postTranslatedTitle,
+          then: $postTranslatedRawTitle,
           else: null
         },
         passOnwardsAs: "postMaybeTranslatedSlug"
@@ -274,7 +274,7 @@ query GenerateMutationInputs(
         name: "_echo",
         arguments: {
           value: {
-            title: $postTranslatedTitle,
+            title: $postTranslatedRawTitle,
             slug: $postMaybeTranslatedSlug,
             excerpt: $postTranslatedRawExcerpt,
             contentAs: {
