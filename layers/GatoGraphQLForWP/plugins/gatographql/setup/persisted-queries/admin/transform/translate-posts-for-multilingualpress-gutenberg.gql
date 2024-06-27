@@ -2918,9 +2918,7 @@ query ExportMutationInputs
     )
 }
 
-mutation UpdatePagesWithTranslationOnExternalSite(
-  $statusToUpdate: CustomPostStatusEnum! = draft
-)
+mutation UpdatePagesWithTranslationOnExternalSite
   @depends(on: "ExportMutationInputs")
   @include(if: $executeTranslation)
 {
