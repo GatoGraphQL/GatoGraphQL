@@ -1207,7 +1207,7 @@ query AdaptData
   @include(if: $executeTranslation)
 {
   adaptedToTitle: _echo(value: $title)
-    @underEachJSONObjectProperty(
+    @underEachArrayItem(
       passValueOnwardsAs: "value"
     )
       @applyField(
@@ -1219,7 +1219,7 @@ query AdaptData
       )
     @export(as: "adaptedToTitle")
   adaptedFromTitle: _echo(value: $title)
-    @underEachJSONObjectProperty
+    @underEachArrayItem
       @applyField(
         name: "_echo"
         arguments: {
@@ -1230,7 +1230,7 @@ query AdaptData
     @export(as: "adaptedFromTitle")
 
   adaptedToRawExcerpt: _echo(value: $rawExcerpt)
-    @underEachJSONObjectProperty(
+    @underEachArrayItem(
       passValueOnwardsAs: "value"
     )
       @applyField(
@@ -1242,7 +1242,7 @@ query AdaptData
       )
     @export(as: "adaptedToRawExcerpt")
   adaptedFromRawExcerpt: _echo(value: $rawExcerpt)
-    @underEachJSONObjectProperty
+    @underEachArrayItem
       @applyField(
         name: "_echo"
         arguments: {
