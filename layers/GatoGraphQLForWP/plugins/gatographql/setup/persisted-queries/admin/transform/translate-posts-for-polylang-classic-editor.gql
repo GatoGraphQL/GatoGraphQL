@@ -71,6 +71,7 @@ query InitializeVariables
 {
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
+    @remove
 
   emptyBool: _echo(value: false)
     @export(as: "hasTranslationPosts")
