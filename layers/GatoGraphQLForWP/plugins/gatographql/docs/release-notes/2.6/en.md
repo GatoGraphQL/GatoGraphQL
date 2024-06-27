@@ -8,6 +8,9 @@
 - Added scalar types to the GraphQL schema:
   - `IntValueJSONObject` ([#2703](https://github.com/GatoGraphQL/GatoGraphQL/pull/2703))
   - `IDValueJSONObject` ([#2704](https://github.com/GatoGraphQL/GatoGraphQL/pull/2704))
+- Added predefined persisted queries:
+  - [PRO] Translate posts for MultilingualPress (Gutenberg)
+  - [PRO] Translate posts for MultilingualPress (Classic editor)
 
 ### Added `siteURL` field ([#2697](https://github.com/GatoGraphQL/GatoGraphQL/pull/2697))
 
@@ -103,6 +106,9 @@ might return:
 ## [PRO] Improvements
 
 - [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
+- Added automation rules:
+  - MultilingualPress: When publishing a post, translate it to all languages (Gutenberg)
+  - MultilingualPress: When publishing a post, translate it to all languages (Classic editor)
 
 ### Added integration with MultilingualPress
 

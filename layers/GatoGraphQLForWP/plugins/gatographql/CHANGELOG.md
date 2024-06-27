@@ -17,8 +17,17 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added scalar types to the GraphQL schema:
   - `IntValueJSONObject` (#2703)
   - `IDValueJSONObject` (#2704)
-- [PRO] Added integration with MultilingualPress
-- [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
+- Added predefined persisted queries:
+  - [PRO] Translate posts for MultilingualPress (Gutenberg)
+  - [PRO] Translate posts for MultilingualPress (Classic editor)
+
+### [PRO] Improvements
+
+- Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
+- Added integration with MultilingualPress
+- Added automation rules:
+  - MultilingualPress: When publishing a post, translate it to all languages (Gutenberg)
+  - MultilingualPress: When publishing a post, translate it to all languages (Classic editor)
 
 ## 2.5.2 - 06/06/2024
 
