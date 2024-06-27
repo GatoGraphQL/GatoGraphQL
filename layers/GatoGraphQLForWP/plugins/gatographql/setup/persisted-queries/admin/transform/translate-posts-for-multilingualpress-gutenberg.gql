@@ -57,10 +57,6 @@
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  emptyString: _echo(value: null)
-    @export(as: "fromLanguage")
-    @remove
-
   emptyBool: _echo(value: false)
     @export(as: "hasTranslationPosts")
     @export(as: "executeTranslation")
@@ -151,12 +147,11 @@ query ExportOriginPost(
 )
   @depends(on: "InitializeVariables")
 {
+  siteLanguage
+    @export(as: "fromLanguage")
+
   originPost: post(by: { id: $postId }, status: any) {
     id
-
-
-    polylangLanguage
-      @export(as: "fromLanguage")
     
 
     polylangTranslationLanguageIDs(filter: {
