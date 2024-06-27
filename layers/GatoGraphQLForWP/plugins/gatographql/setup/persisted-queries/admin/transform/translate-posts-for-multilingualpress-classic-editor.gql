@@ -1,24 +1,32 @@
 ########################################################################
 # 
 # Variables:
+#   - $username: The username to log into the external site
+#   - $appPassword: The application password to log into the external site
+#   - $externalSiteURL: The URL of the external site, where all pages will be (translated and) created
 #   - postId: The post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
 #   - excludeLanguagesToTranslate: Exclude languages from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
+#   - (Optional) $externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site
 #
 # *********************************************************************
 #
 # === Description ===
 #
 # This Persisted GraphQL query is an integration for MultilingualPress,
-# to translate posts based on the Classic editor.
+# to translate posts based on the Classic editor, where very site in a
+# WordPress multisite network is a translationsite.
+# 
+# It must be executed on the master site, which must have the PRO plugin.
+# All other sites in the network can have the free Gato GraphQL plugin.
 #
-# It takes an origin post, it translates it using the Google
-# Translate API to all the other languages defined in MultilingualPress,
-# and stores those translations in the corresponding sites in the network,
-# as set-up via MultilingualPress.
+# It takes an origin post on the master site, it translates it using the
+# Google Translate API to all the other languages defined as connections
+# in MultilingualPress, and stores those translations in the corresponding
+# sites in the network.
 #
 # All translation posts in all the network sites must already exist.
 # These posts must also have the  `draft` status
@@ -48,12 +56,475 @@
 # See Persisted Query "Translate post (Classic editor)" for additional
 # documentation.
 #
-# *********************************************************************
-# 
-# More info:
-#   - https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/
-#
 ########################################################################
+query InitializeExternalSiteVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyBool: _echo(value: false)
+    @export(as: "executeTranslation")
+    @remove
+}
+
+query ExportData(
+  $username: String!
+  $appPassword: String!
+  $externalSiteURL: URL!
+  $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
+  $pageIDs: [ID!]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
+)
+  @depends(on: "InitializeExternalSiteVariables")
+{
+  # Retrieve the language of the content
+  siteLanguage
+    @export(as: "fromLanguage")
+
+  # Generate the authorization header to connect to the external site
+  loginCredentials: _sprintf(
+    string: "%s:%s",
+    values: [$username, $appPassword]
+  )
+    @remove
+  base64EncodedLoginCredentials: _strBase64Encode(
+    string: $__loginCredentials
+  )
+    @remove
+  authorizationHeaderValue: _sprintf(
+    string: "Basic %s",
+    values: [$__base64EncodedLoginCredentials]
+  )
+    @remove
+    @export(as: "authorizationHeaderValue")
+  
+  # Generate the external site's GraphQL endpoint to connect to
+  endpoint: _sprintf(
+    string: "%s%s",
+    values: [
+      $externalSiteURL,
+      $externalSiteGraphQLEndpointPath
+    ]
+  )
+    @export(as: "endpoint")
+    
+  masterPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
+    id
+    emptyArray: _echo(value: [])
+      @export(
+        as: "title"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawContent"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawExcerpt"
+        type: DICTIONARY
+      )
+      @remove
+  }
+
+  hasMasterPages: _notEmpty(value: $__masterPages)
+    @export(as: "hasMasterPages")
+}
+
+query RetrieveAndExportExternalSiteLanguage
+  @depends(on: "ExportData")
+  @include(if: $hasMasterPages)
+{
+  # Retrieve the language of the external site
+  externalHTTPRequest: _sendGraphQLHTTPRequest(input:{
+    endpoint: $endpoint,
+    query: """
+  
+{
+  me {
+    name
+  }
+  siteLanguage
+}
+
+    """,
+    options: {
+      headers: [
+        {
+          name: "Authorization",
+          value: $authorizationHeaderValue
+        }
+      ]
+    }
+  })
+  externalSiteLanguage: _objectProperty(
+    object: $__externalHTTPRequest,
+    by: {
+      path: "data.siteLanguage"
+    }
+  )
+    @export(as: "toLanguage")
+  
+  # Indicate if connecting to the external site was successful
+  hasRetrievedExternalSiteLanguage: _notEmpty(
+    value: $__externalSiteLanguage
+  )
+
+  # Only translate the content if the master/destination sites languages are different
+  areFromToLanguagesDifferent: _notEquals(
+    value1: $fromLanguage
+    value2: $__externalSiteLanguage
+  )
+
+  # Flag to indicate if to translate the content
+  executeTranslation: _and(
+    values: [
+      $__hasRetrievedExternalSiteLanguage,
+      $__areFromToLanguagesDifferent,
+    ]
+  )
+    @export(as: "executeTranslation")
+}
+
+query FetchData(
+  $pageIDs: [ID!]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
+)
+  @depends(on: "RetrieveAndExportExternalSiteLanguage")
+  @include(if: $hasMasterPages)
+{
+  fetchDataPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
+    id
+
+
+    title
+      @export(
+        as: "title"
+        type: DICTIONARY
+      )
+    rawContent
+      @export(
+        as: "rawContent"
+        type: DICTIONARY
+      )
+    rawExcerpt
+      @export(
+        as: "rawExcerpt"
+        type: DICTIONARY
+      )
+  }
+}
+
+query AdaptData
+  @depends(on: "FetchData")
+  @include(if: $hasMasterPages)
+{
+  adaptedToTitle: _echo(value: $title)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToTitle")
+  adaptedFromTitle: _echo(value: $title)
+    @underEachJSONObjectProperty
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromTitle")
+
+  adaptedToRawContent: _echo(value: $rawContent)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToRawContent")
+  adaptedFromRawContent: _echo(value: $rawContent)
+    @underEachJSONObjectProperty
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromRawContent")
+
+  adaptedToRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToRawExcerpt")
+  adaptedFromRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromRawExcerpt")
+}
+
+query TransformData
+  @depends(on: "AdaptData")
+  @include(if: $hasMasterPages)
+{
+  transformations: _echo(value: {
+    metaTitle: {
+      from: $adaptedFromTitle,
+      to: $adaptedToTitle,
+    },
+    metaRawContent: {
+      from: $adaptedFromRawContent,
+      to: $adaptedToRawContent,
+    },
+    metaRawExcerpt: {
+      from: $adaptedFromRawExcerpt,
+      to: $adaptedToRawExcerpt,
+    }
+  })
+    @if(condition: $executeTranslation)
+      @underEachJSONObjectProperty
+        @underJSONObjectProperty(by: { key: "to" })
+          @underEachJSONObjectProperty
+            @underEachArrayItem
+              @strTranslate(
+                from: $fromLanguage,
+                to: $toLanguage
+              )
+    @export(as: "transformations")
+}
+
+query PrepareMetaReplacements
+  @depends(on: "TransformData")
+  @include(if: $hasMasterPages)
+{
+  transformedMetaTitle: _echo(value: $title)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "pageID"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "metaTitle.to.%s",
+          values: [$pageID]
+        }
+        passOnwardsAs: "titlePath"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: $titlePath }
+        }
+        passOnwardsAs: "transformedPostTitleAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostTitleAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedTitle"
+    )
+
+  transformedMetaRawContent: _echo(value: $rawContent)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "pageID"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "metaRawContent.to.%s",
+          values: [$pageID]
+        }
+        passOnwardsAs: "rawContentPath"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: $rawContentPath }
+        }
+        passOnwardsAs: "transformedPostRawContentAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostRawContentAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawContent"
+    )
+
+  transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "pageID"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "metaRawExcerpt.to.%s",
+          values: [$pageID]
+        }
+        passOnwardsAs: "rawExcerptPath"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: $rawExcerptPath }
+        }
+        passOnwardsAs: "transformedPostRawExcerptAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostRawExcerptAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawExcerpt"
+    )
+}
+
+query ExportMutationInputs(
+  $pageIDs: [ID!]! = []
+  $pageStatus: [CustomPostStatusEnum!]! = [publish]
+)
+  @depends(on: "PrepareMetaReplacements")
+  @include(if: $hasMasterPages)
+{
+  exportPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
+    id
+    transformedRawContent: _objectProperty(
+      object: $transformedRawContent,
+      by: {
+        key: $__id
+      }
+    )
+    transformedTitle: _objectProperty(
+      object: $transformedTitle,
+      by: {
+        key: $__id
+      }
+    )
+    transformedSlug: _echo(value: $__transformedTitle)
+    transformedRawExcerpt: _objectProperty(
+      object: $transformedRawExcerpt,
+      by: {
+        key: $__id
+      }
+    )
+    input: _echo(value: {
+      status: draft,
+      title: $__transformedTitle,
+      slug: $__transformedSlug,
+      excerpt: $__transformedRawExcerpt,
+      contentAs: {
+        html: $__transformedRawContent
+      }
+    })
+      @export(
+        as: "createPostMutationInputs"
+        type: LIST
+      )
+  }
+}
+
+mutation CreatePagesWithTranslationOnExternalSite
+  @depends(on: "ExportMutationInputs")
+  @include(if: $hasMasterPages)
+{
+  createExternalSitePageHTTPRequests: _echo(value: $createPostMutationInputs)
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      @applyField(
+        name: "_sendGraphQLHTTPRequest"
+        arguments: {
+          input: {
+            endpoint: $endpoint,
+            query: """
+          
+mutation CreatePageFromMasterSite($input: JSONObject!) {
+  createPage(input: $input) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    page {
+      id
+      slug
+      title
+      content
+      status
+      url
+      excerpt
+    }
+  }
+}
+
+            """,
+            variables: [
+              {
+                name: "input",
+                value: $input
+              }
+            ],
+            options: {
+              headers: [
+                {
+                  name: "Authorization",
+                  value: $authorizationHeaderValue
+                }
+              ]
+            }
+          }
+        },
+        setResultInResponse: true
+      )
+}
+
+
+
+
+
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
