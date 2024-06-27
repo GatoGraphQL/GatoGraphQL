@@ -1467,729 +1467,422 @@ query ExecuteRegexReplacements
   @include(if: $executeTranslation)
 {
   transformedRawContent: _echo(value: $rawContent)
-    @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
-      affectDirectivesUnderPos: [
-        1, 2,
-        6, 7,
-        11, 12,
-        16, 17,
-        21, 22,
-        26, 27,
-        31, 32,
-        36, 37,
-        41, 42,
-        46, 47,
-        51, 52,
-        56, 57,
-        61, 62,
-        66, 67,
-        71, 72,
-        76, 77,
-        81, 82,
-        86, 87,
-      ]
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]
     )
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreHeadingContentReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreHeadingContentReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreHeadingContentReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreHeadingContentReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreHeadingContentReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreHeadingContentReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreHeadingContentReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreHeadingContentReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreHeadingContentReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreHeadingContentReplacementsFrom,
-          replaceWith: $postCoreHeadingContentReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreHeadingContentReplacementsFrom,
+        replaceWith: $postCoreHeadingContentReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreParagraphContentReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreParagraphContentReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreParagraphContentReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreParagraphContentReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreParagraphContentReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreParagraphContentReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreParagraphContentReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreParagraphContentReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreParagraphContentReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreParagraphContentReplacementsFrom,
-          replaceWith: $postCoreParagraphContentReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreParagraphContentReplacementsFrom,
+        replaceWith: $postCoreParagraphContentReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreImageAltReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreImageAltReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreImageAltReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreImageAltReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreImageAltReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreImageAltReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreImageAltReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreImageAltReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreImageAltReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreImageAltReplacementsFrom,
-          replaceWith: $postCoreImageAltReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreImageAltReplacementsFrom,
+        replaceWith: $postCoreImageAltReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreImageCaptionReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreImageCaptionReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreImageCaptionReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreImageCaptionReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreImageCaptionReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreImageCaptionReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreImageCaptionReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreImageCaptionReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreImageCaptionReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreImageCaptionReplacementsFrom,
-          replaceWith: $postCoreImageCaptionReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreImageCaptionReplacementsFrom,
+        replaceWith: $postCoreImageCaptionReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreButtonTextReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreButtonTextReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreButtonTextReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreButtonTextReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreButtonTextReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreButtonTextReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreButtonTextReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreButtonTextReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreButtonTextReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreButtonTextReplacementsFrom,
-          replaceWith: $postCoreButtonTextReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreButtonTextReplacementsFrom,
+        replaceWith: $postCoreButtonTextReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreTableCaptionReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreTableCaptionReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreTableCaptionReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreTableCaptionReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreTableCaptionReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreTableCaptionReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreTableCaptionReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreTableCaptionReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreTableCaptionReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreTableCaptionReplacementsFrom,
-          replaceWith: $postCoreTableCaptionReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreTableCaptionReplacementsFrom,
+        replaceWith: $postCoreTableCaptionReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreTableBodyCellsContentReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreTableBodyCellsContentReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreTableBodyCellsContentReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreTableBodyCellsContentReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreTableBodyCellsContentReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreTableBodyCellsContentReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreTableBodyCellsContentReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreTableBodyCellsContentReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreTableBodyCellsContentReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreTableBodyCellsContentReplacementsFrom,
-          replaceWith: $postCoreTableBodyCellsContentReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreTableBodyCellsContentReplacementsFrom,
+        replaceWith: $postCoreTableBodyCellsContentReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreListItemContentReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreListItemContentReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreListItemContentReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreListItemContentReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreListItemContentReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreListItemContentReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreListItemContentReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreListItemContentReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreListItemContentReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreListItemContentReplacementsFrom,
-          replaceWith: $postCoreListItemContentReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreListItemContentReplacementsFrom,
+        replaceWith: $postCoreListItemContentReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreCoverAltReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreCoverAltReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreCoverAltReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreCoverAltReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreCoverAltReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreCoverAltReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreCoverAltReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreCoverAltReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreCoverAltReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreCoverAltReplacementsFrom,
-          replaceWith: $postCoreCoverAltReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreCoverAltReplacementsFrom,
+        replaceWith: $postCoreCoverAltReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreMediaTextAltReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreMediaTextAltReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreMediaTextAltReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreMediaTextAltReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreMediaTextAltReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreMediaTextAltReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreMediaTextAltReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreMediaTextAltReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreMediaTextAltReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreMediaTextAltReplacementsFrom,
-          replaceWith: $postCoreMediaTextAltReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreMediaTextAltReplacementsFrom,
+        replaceWith: $postCoreMediaTextAltReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreVerseContentReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreVerseContentReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreVerseContentReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreVerseContentReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreVerseContentReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreVerseContentReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreVerseContentReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreVerseContentReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreVerseContentReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreVerseContentReplacementsFrom,
-          replaceWith: $postCoreVerseContentReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreVerseContentReplacementsFrom,
+        replaceWith: $postCoreVerseContentReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreQuoteCitationReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreQuoteCitationReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreQuoteCitationReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreQuoteCitationReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreQuoteCitationReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreQuoteCitationReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreQuoteCitationReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreQuoteCitationReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreQuoteCitationReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreQuoteCitationReplacementsFrom,
-          replaceWith: $postCoreQuoteCitationReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreQuoteCitationReplacementsFrom,
+        replaceWith: $postCoreQuoteCitationReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $corePullquoteCitationReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $corePullquoteCitationReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCorePullquoteCitationReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $corePullquoteCitationReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCorePullquoteCitationReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $corePullquoteCitationReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCorePullquoteCitationReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $corePullquoteCitationReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCorePullquoteCitationReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCorePullquoteCitationReplacementsFrom,
-          replaceWith: $postCorePullquoteCitationReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCorePullquoteCitationReplacementsFrom,
+        replaceWith: $postCorePullquoteCitationReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $corePullquoteValueReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $corePullquoteValueReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCorePullquoteValueReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $corePullquoteValueReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCorePullquoteValueReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $corePullquoteValueReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCorePullquoteValueReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $corePullquoteValueReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCorePullquoteValueReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCorePullquoteValueReplacementsFrom,
-          replaceWith: $postCorePullquoteValueReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCorePullquoteValueReplacementsFrom,
+        replaceWith: $postCorePullquoteValueReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreAudioCaptionReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreAudioCaptionReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreAudioCaptionReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreAudioCaptionReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreAudioCaptionReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreAudioCaptionReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreAudioCaptionReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreAudioCaptionReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreAudioCaptionReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreAudioCaptionReplacementsFrom,
-          replaceWith: $postCoreAudioCaptionReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreAudioCaptionReplacementsFrom,
+        replaceWith: $postCoreAudioCaptionReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreVideoCaptionReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreVideoCaptionReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreVideoCaptionReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreVideoCaptionReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreVideoCaptionReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreVideoCaptionReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreVideoCaptionReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreVideoCaptionReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreVideoCaptionReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreVideoCaptionReplacementsFrom,
-          replaceWith: $postCoreVideoCaptionReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreVideoCaptionReplacementsFrom,
+        replaceWith: $postCoreVideoCaptionReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $corePreformattedContentReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $corePreformattedContentReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCorePreformattedContentReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $corePreformattedContentReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCorePreformattedContentReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $corePreformattedContentReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCorePreformattedContentReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $corePreformattedContentReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCorePreformattedContentReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCorePreformattedContentReplacementsFrom,
-          replaceWith: $postCorePreformattedContentReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCorePreformattedContentReplacementsFrom,
+        replaceWith: $postCorePreformattedContentReplacementsTo
+      )
     
     
       @applyField(
-        name: "_propertyExistsInJSONObject"
+        name: "_arrayItem",
         arguments: {
-          object: $coreEmbedCaptionReplacementsFrom
-          by: { key: $postID }
-        }
-        passOnwardsAs: "hasPostID"
+          array: $coreEmbedCaptionReplacementsFrom,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreEmbedCaptionReplacementsFrom"
       )
-      @if(
-        condition: $hasPostID
-        affectDirectivesUnderPos: [1, 2, 3]
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $coreEmbedCaptionReplacementsTo,
+          position: $itemNumber
+        },
+        passOnwardsAs: "postCoreEmbedCaptionReplacementsTo"
       )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreEmbedCaptionReplacementsFrom,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreEmbedCaptionReplacementsFrom"
-        )
-        @applyField(
-          name: "_objectProperty",
-          arguments: {
-            object: $coreEmbedCaptionReplacementsTo,
-            by: {
-              key: $postID
-            }
-          },
-          passOnwardsAs: "postCoreEmbedCaptionReplacementsTo"
-        )
-        @strRegexReplaceMultiple(
-          limit: 1,
-          searchRegex: $postCoreEmbedCaptionReplacementsFrom,
-          replaceWith: $postCoreEmbedCaptionReplacementsTo
-        )
+      @strRegexReplaceMultiple(
+        limit: 1,
+        searchRegex: $postCoreEmbedCaptionReplacementsFrom,
+        replaceWith: $postCoreEmbedCaptionReplacementsTo
+      )
     
     @export(as: "transformedRawContent")
 }
