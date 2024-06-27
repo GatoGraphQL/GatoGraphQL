@@ -806,38 +806,6 @@ query InitializeTranslationVariables(
         as: "coreEmbedCaptionReplacementsTo"
         type: LIST
       )
-
-  hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
-
-  originPostHasDefaultLanguage: _equals(
-    value1: $defaultLanguage,
-    value2: $fromLanguage
-  )
-
-  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
-
-  originPostHasSpecificLanguage: _equals(
-    value1: $translateFromLanguage,
-    value2: $fromLanguage
-  )
-
-  canTranslateOriginPostFromSpecificLanguage: _if(
-    condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
-    else: true
-  )
-
-  canTranslateOriginPost: _if(
-    condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
-    else: $__canTranslateOriginPostFromSpecificLanguage
-  )
-
-  executeTranslation: _and(values: [
-    $__hasTranslationPosts,
-    $__canTranslateOriginPost
-  ])
-    @export(as: "executeTranslation")
 }
 
 
