@@ -2834,7 +2834,9 @@ query PrepareMetaReplacements
     )
 }
 
-query ExportMutationInputs
+query ExportMutationInputs(
+  $updateSlug: Boolean! = true
+)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
@@ -2880,10 +2882,11 @@ query ExportMutationInputs
         passOnwardsAs: "itemTransformedRawTitle"
       )
       @applyField(
-        name: "_arrayItem",
+        name: "_if",
         arguments: {
-          object: $transformedRawTitle,
-          position: $itemNumber
+          condition: $updateSlug,
+          then: $itemTransformedRawTitle,
+          else: null
         },
         passOnwardsAs: "itemTransformedSlug"
       )
