@@ -473,8 +473,8 @@ query CombineConnectionData
   @include(if: $hasTranslationConnections)
 {
   networkSiteTranslationConnectionDataItems: _arrayInnerJoinJSONObjectProperties(
-    source: $translationConnectionDataItems,
-    target: $networkSiteDataItems,
+    source: $networkSiteDataItems,
+    target: $translationConnectionDataItems,
     index: "siteID"
   )
     @export(as: "networkSiteTranslationConnectionDataItems")
