@@ -12,9 +12,9 @@ These types implement interface `MultilingualPressTranslatable`.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned. |
+| `multilingualpressTranslationConnections` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned. |
 
-Field `multilingualpressTranslationSiteRelationshipIDs` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
+Field `multilingualpressTranslationConnections` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
 
 Running this query:
 
@@ -24,23 +24,23 @@ Running this query:
     __typename
     id
     title
-    multilingualpressTranslationSiteRelationshipIDs
-    multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+    multilingualpressTranslationConnections
+    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
 
     categories {
       __typename
       id
       name
-      multilingualpressTranslationSiteRelationshipIDs
-      multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+      multilingualpressTranslationConnections
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
     }
     
     tags {
       __typename
       id
       name
-      multilingualpressTranslationSiteRelationshipIDs
-      multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+      multilingualpressTranslationConnections
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
     }
   }
 
@@ -48,8 +48,8 @@ Running this query:
     __typename
     id
     title
-    multilingualpressTranslationSiteRelationshipIDs
-    multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+    multilingualpressTranslationConnections
+    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
   }
 }
 ```
@@ -64,11 +64,11 @@ Running this query:
         "__typename": "Post",
         "id": 1668,
         "title": "Some post translated using MultilingualPress",
-        "multilingualpressTranslationSiteRelationshipIDs": {
+        "multilingualpressTranslationConnections": {
           "fr": 1670,
           "es": 1672
         },
-        "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
+        "multilingualpressTranslationConnectionsWithSelf": {
           "en": 1668,
           "fr": 1670,
           "es": 1672
@@ -78,11 +78,11 @@ Running this query:
             "__typename": "PostCategory",
             "id": 61,
             "name": "Category for MultilingualPress",
-            "multilingualpressTranslationSiteRelationshipIDs": {
+            "multilingualpressTranslationConnections": {
               "fr": 63,
               "es": 65
             },
-            "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
+            "multilingualpressTranslationConnectionsWithSelf": {
               "en": 61,
               "fr": 63,
               "es": 65
@@ -94,11 +94,11 @@ Running this query:
             "__typename": "PostTag",
             "id": 67,
             "name": "Tag for MultilingualPress",
-            "multilingualpressTranslationSiteRelationshipIDs": {
+            "multilingualpressTranslationConnections": {
               "fr": 69,
               "es": 71
             },
-            "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
+            "multilingualpressTranslationConnectionsWithSelf": {
               "en": 67,
               "fr": 69,
               "es": 71
@@ -112,11 +112,11 @@ Running this query:
         "__typename": "Page",
         "id": 1674,
         "title": "Some page translated using MultilingualPress",
-        "multilingualpressTranslationSiteRelationshipIDs": {
+        "multilingualpressTranslationConnections": {
           "fr": 1676,
           "es": 1678
         },
-        "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
+        "multilingualpressTranslationConnectionsWithSelf": {
           "en": 1674,
           "fr": 1676,
           "es": 1678
@@ -133,13 +133,13 @@ These types implement interface `MultilingualPressMaybeTranslatable`.
 
 `GenericCustomPost` is a type used to represent any custom post installed on the site, such as `Portfolio`, `Event`, `Product`, or other. Similarly, `GenericTag` and `GenericCategory` are used to represent their taxonomies.
 
-Each of these CPTs and taxonomies can be defined to be translatable on the MultilingualPress settings. Field `multilingualpressTranslationSiteRelationshipIDs` will then have the same behavior as for `Post` and the others (described above), and also return `null` if the entity's CPT or taxonomy is not configured to be translated.
+Each of these CPTs and taxonomies can be defined to be translatable on the MultilingualPress settings. Field `multilingualpressTranslationConnections` will then have the same behavior as for `Post` and the others (described above), and also return `null` if the entity's CPT or taxonomy is not configured to be translated.
 
 In addition, field `multilingualpressIsTranslatable` indicates if the CPT or taxonomy is configured to be translatable.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned, or if the entity is not configured to be translated (via MultilingualPress Settings). |
+| `multilingualpressTranslationConnections` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned, or if the entity is not configured to be translated (via MultilingualPress Settings). |
 | `multilingualpressIsTranslatable` | Indicate if the entity can be translated. |
 
 Running this query:
@@ -153,8 +153,8 @@ Running this query:
       title
       customPostType
       multilingualpressIsTranslatable
-      multilingualpressTranslationSiteRelationshipIDs
-      multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+      multilingualpressTranslationConnections
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
       
       categories(taxonomy: "some-category") {
         __typename
@@ -162,8 +162,8 @@ Running this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressTranslationSiteRelationshipIDs
-          multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+          multilingualpressTranslationConnections
+          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
         }
       }
       
@@ -173,8 +173,8 @@ Running this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressTranslationSiteRelationshipIDs
-          multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+          multilingualpressTranslationConnections
+          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
         }
       }
     }
@@ -194,11 +194,11 @@ Running this query:
         "title": "Some CPT that has MultilingualPress translation enabled",
         "customPostType": "some-cpt",
         "multilingualpressIsTranslatable": true,
-        "multilingualpressTranslationSiteRelationshipIDs": {
+        "multilingualpressTranslationConnections": {
           "fr": 12,
           "es": 14
         },
-        "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
+        "multilingualpressTranslationConnectionsWithSelf": {
           "en": 10,
           "fr": 12,
           "es": 14
@@ -209,11 +209,11 @@ Running this query:
             "id": 30,
             "name": "Some Category for MultilingualPress",
             "multilingualpressIsTranslatable": true,
-            "multilingualpressTranslationSiteRelationshipIDs": {
+            "multilingualpressTranslationConnections": {
               "fr": 32,
               "es": 34
             },
-            "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
+            "multilingualpressTranslationConnectionsWithSelf": {
               "en": 30,
               "fr": 32,
               "es": 34
@@ -226,11 +226,11 @@ Running this query:
             "id": 50,
             "name": "Some Tag for MultilingualPress",
             "multilingualpressIsTranslatable": true,
-            "multilingualpressTranslationSiteRelationshipIDs": {
+            "multilingualpressTranslationConnections": {
               "fr": 52,
               "es": 54
             },
-            "multilingualpressTranslationSiteRelationshipIDsWithSelf": {
+            "multilingualpressTranslationConnectionsWithSelf": {
               "en": 50,
               "fr": 52,
               "es": 54
@@ -244,16 +244,16 @@ Running this query:
         "title": "Another CPT that does not have MultilingualPress translation enabled",
         "customPostType": "another-cpt",
         "multilingualpressIsTranslatable": false,
-        "multilingualpressTranslationSiteRelationshipIDs": null,
-        "multilingualpressTranslationSiteRelationshipIDsWithSelf": null,
+        "multilingualpressTranslationConnections": null,
+        "multilingualpressTranslationConnectionsWithSelf": null,
         "categories": [
           {
             "__typename": "GenericCategory",
             "id": 70,
             "name": "Category without support for MultilingualPress",
             "multilingualpressIsTranslatable": false,
-            "multilingualpressTranslationSiteRelationshipIDs": null,
-            "multilingualpressTranslationSiteRelationshipIDsWithSelf": null
+            "multilingualpressTranslationConnections": null,
+            "multilingualpressTranslationConnectionsWithSelf": null
           }
         ],
         "tags": [
@@ -262,8 +262,8 @@ Running this query:
             "id": 72,
             "name": "Tag without support for MultilingualPress",
             "multilingualpressIsTranslatable": false,
-            "multilingualpressTranslationSiteRelationshipIDs": null,
-            "multilingualpressTranslationSiteRelationshipIDsWithSelf": null
+            "multilingualpressTranslationConnections": null,
+            "multilingualpressTranslationConnectionsWithSelf": null
           }
         ]
       }

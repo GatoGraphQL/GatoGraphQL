@@ -118,9 +118,9 @@ These types implement interface `MultilingualPressTranslatable`.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned. |
+| `multilingualpressTranslationConnections` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned. |
 
-Field `multilingualpressTranslationSiteRelationshipIDs` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
+Field `multilingualpressTranslationConnections` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
 
 For instance, you can now run this query:
 
@@ -130,23 +130,23 @@ For instance, you can now run this query:
     __typename
     id
     title
-    multilingualpressTranslationSiteRelationshipIDs
-    multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+    multilingualpressTranslationConnections
+    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
 
     categories {
       __typename
       id
       name
-      multilingualpressTranslationSiteRelationshipIDs
-      multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+      multilingualpressTranslationConnections
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
     }
     
     tags {
       __typename
       id
       name
-      multilingualpressTranslationSiteRelationshipIDs
-      multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+      multilingualpressTranslationConnections
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
     }
   }
 
@@ -154,8 +154,8 @@ For instance, you can now run this query:
     __typename
     id
     title
-    multilingualpressTranslationSiteRelationshipIDs
-    multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+    multilingualpressTranslationConnections
+    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
   }
 }
 ```
@@ -166,13 +166,13 @@ These types implement interface `MultilingualPressMaybeTranslatable`.
 
 `GenericCustomPost` is a type used to represent any custom post installed on the site, such as `Portfolio`, `Event`, `Product`, or other. Similarly, `GenericTag` and `GenericCategory` are used to represent their taxonomies.
 
-Each of these CPTs and taxonomies can be defined to be translatable on the MultilingualPress settings. Field `multilingualpressTranslationSiteRelationshipIDs` will then have the same behavior as for `Post` and the others (described above), and also return `null` if the entity's CPT or taxonomy is not configured to be translated.
+Each of these CPTs and taxonomies can be defined to be translatable on the MultilingualPress settings. Field `multilingualpressTranslationConnections` will then have the same behavior as for `Post` and the others (described above), and also return `null` if the entity's CPT or taxonomy is not configured to be translated.
 
 In addition, field `multilingualpressIsTranslatable` indicates if the CPT or taxonomy is configured to be translatable.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationSiteRelationshipIDs` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned, or if the entity is not configured to be translated (via MultilingualPress Settings). |
+| `multilingualpressTranslationConnections` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned, or if the entity is not configured to be translated (via MultilingualPress Settings). |
 | `multilingualpressIsTranslatable` | Indicate if the entity can be translated. |
 
 For instance, you can now run this query:
@@ -186,8 +186,8 @@ For instance, you can now run this query:
       title
       customPostType
       multilingualpressIsTranslatable
-      multilingualpressTranslationSiteRelationshipIDs
-      multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+      multilingualpressTranslationConnections
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
       
       categories(taxonomy: "some-category") {
         __typename
@@ -195,8 +195,8 @@ For instance, you can now run this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressTranslationSiteRelationshipIDs
-          multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+          multilingualpressTranslationConnections
+          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
         }
       }
       
@@ -206,8 +206,8 @@ For instance, you can now run this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressTranslationSiteRelationshipIDs
-          multilingualpressTranslationSiteRelationshipIDsWithSelf: multilingualpressTranslationSiteRelationshipIDs(filter: { includeSelf: true })
+          multilingualpressTranslationConnections
+          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
         }
       }
     }
