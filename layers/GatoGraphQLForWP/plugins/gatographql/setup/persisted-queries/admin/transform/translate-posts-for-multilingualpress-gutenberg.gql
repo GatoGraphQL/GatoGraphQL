@@ -2918,11 +2918,13 @@ query ExportMutationInputs
     )
 }
 
-mutation CreatePagesWithTranslationOnExternalSite
+mutation UpdatePagesWithTranslationOnExternalSite(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+)
   @depends(on: "ExportMutationInputs")
   @include(if: $executeTranslation)
 {
-  createExternalSitePageHTTPRequests: _echo(value: $updatePostMutationInputDataItems)
+  updateExternalSitePageHTTPRequests: _echo(value: $updatePostMutationInputDataItems)
     @underEachArrayItem(
       passValueOnwardsAs: "mutationInputDataItem"
       affectDirectivesUnderPos: [1, 2, 3]
