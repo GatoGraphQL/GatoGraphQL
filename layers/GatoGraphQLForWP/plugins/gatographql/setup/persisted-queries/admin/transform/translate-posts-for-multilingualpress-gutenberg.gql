@@ -487,709 +487,140 @@ query InitializeTranslationVariables
   @depends(on: "CombineConnectionData")
   @include(if: $executeTranslation)
 {
-  emptyTranslationPostVars: _echo(value: $networkSiteTranslationConnectionDataItems)
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originRawTitle
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "rawTitle"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originRawContent
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "rawContent"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originRawExcerpt
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "rawExcerpt"
-        type: LIST
-      )
+  arrayItems: _arrayLength(array: $networkSiteTranslationConnectionDataItems)
+
+  rawTitle: _arrayPad(array: [], length: $__arrayItems, value: $originRawTitle)
+    @export(as: "rawTitle")
+  rawContent: _arrayPad(array: [], length: $__arrayItems, value: $originRawContent)
+    @export(as: "rawContent")
+  rawExcerpt: _arrayPad(array: [], length: $__arrayItems, value: $originRawExcerpt)
+    @export(as: "rawExcerpt")
     
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreHeadingContentItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreHeadingContentItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreHeadingContentReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreHeadingContentReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreHeadingContentReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreHeadingContentReplacementsTo"
-        type: LIST
-      )
+  coreHeadingContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreHeadingContentItems)
+    @export(as: "coreHeadingContentItems")
+  coreHeadingContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreHeadingContentReplacementsFrom)
+    @export(as: "coreHeadingContentReplacementsFrom")
+  coreHeadingContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreHeadingContentReplacementsTo)
+    @export(as: "coreHeadingContentReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreParagraphContentItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreParagraphContentItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreParagraphContentReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreParagraphContentReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreParagraphContentReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreParagraphContentReplacementsTo"
-        type: LIST
-      )
+  coreParagraphContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreParagraphContentItems)
+    @export(as: "coreParagraphContentItems")
+  coreParagraphContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreParagraphContentReplacementsFrom)
+    @export(as: "coreParagraphContentReplacementsFrom")
+  coreParagraphContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreParagraphContentReplacementsTo)
+    @export(as: "coreParagraphContentReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreImageAltItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreImageAltItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreImageAltReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreImageAltReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreImageAltReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreImageAltReplacementsTo"
-        type: LIST
-      )
+  coreImageAltItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageAltItems)
+    @export(as: "coreImageAltItems")
+  coreImageAltReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageAltReplacementsFrom)
+    @export(as: "coreImageAltReplacementsFrom")
+  coreImageAltReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageAltReplacementsTo)
+    @export(as: "coreImageAltReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreImageCaptionItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreImageCaptionItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreImageCaptionReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreImageCaptionReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreImageCaptionReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreImageCaptionReplacementsTo"
-        type: LIST
-      )
+  coreImageCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageCaptionItems)
+    @export(as: "coreImageCaptionItems")
+  coreImageCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageCaptionReplacementsFrom)
+    @export(as: "coreImageCaptionReplacementsFrom")
+  coreImageCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageCaptionReplacementsTo)
+    @export(as: "coreImageCaptionReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreButtonTextItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreButtonTextItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreButtonTextReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreButtonTextReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreButtonTextReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreButtonTextReplacementsTo"
-        type: LIST
-      )
+  coreButtonTextItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreButtonTextItems)
+    @export(as: "coreButtonTextItems")
+  coreButtonTextReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreButtonTextReplacementsFrom)
+    @export(as: "coreButtonTextReplacementsFrom")
+  coreButtonTextReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreButtonTextReplacementsTo)
+    @export(as: "coreButtonTextReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreTableCaptionItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreTableCaptionItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreTableCaptionReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreTableCaptionReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreTableCaptionReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreTableCaptionReplacementsTo"
-        type: LIST
-      )
+  coreTableCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableCaptionItems)
+    @export(as: "coreTableCaptionItems")
+  coreTableCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableCaptionReplacementsFrom)
+    @export(as: "coreTableCaptionReplacementsFrom")
+  coreTableCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableCaptionReplacementsTo)
+    @export(as: "coreTableCaptionReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreTableBodyCellsContentItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreTableBodyCellsContentItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreTableBodyCellsContentReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreTableBodyCellsContentReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreTableBodyCellsContentReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreTableBodyCellsContentReplacementsTo"
-        type: LIST
-      )
+  coreTableBodyCellsContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableBodyCellsContentItems)
+    @export(as: "coreTableBodyCellsContentItems")
+  coreTableBodyCellsContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableBodyCellsContentReplacementsFrom)
+    @export(as: "coreTableBodyCellsContentReplacementsFrom")
+  coreTableBodyCellsContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableBodyCellsContentReplacementsTo)
+    @export(as: "coreTableBodyCellsContentReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreListItemContentItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreListItemContentItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreListItemContentReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreListItemContentReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreListItemContentReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreListItemContentReplacementsTo"
-        type: LIST
-      )
+  coreListItemContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreListItemContentItems)
+    @export(as: "coreListItemContentItems")
+  coreListItemContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreListItemContentReplacementsFrom)
+    @export(as: "coreListItemContentReplacementsFrom")
+  coreListItemContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreListItemContentReplacementsTo)
+    @export(as: "coreListItemContentReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreCoverAltItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreCoverAltItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreCoverAltReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreCoverAltReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreCoverAltReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreCoverAltReplacementsTo"
-        type: LIST
-      )
+  coreCoverAltItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreCoverAltItems)
+    @export(as: "coreCoverAltItems")
+  coreCoverAltReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreCoverAltReplacementsFrom)
+    @export(as: "coreCoverAltReplacementsFrom")
+  coreCoverAltReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreCoverAltReplacementsTo)
+    @export(as: "coreCoverAltReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreMediaTextAltItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreMediaTextAltItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreMediaTextAltReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreMediaTextAltReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreMediaTextAltReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreMediaTextAltReplacementsTo"
-        type: LIST
-      )
+  coreMediaTextAltItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreMediaTextAltItems)
+    @export(as: "coreMediaTextAltItems")
+  coreMediaTextAltReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreMediaTextAltReplacementsFrom)
+    @export(as: "coreMediaTextAltReplacementsFrom")
+  coreMediaTextAltReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreMediaTextAltReplacementsTo)
+    @export(as: "coreMediaTextAltReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreVerseContentItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreVerseContentItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreVerseContentReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreVerseContentReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreVerseContentReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreVerseContentReplacementsTo"
-        type: LIST
-      )
+  coreVerseContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVerseContentItems)
+    @export(as: "coreVerseContentItems")
+  coreVerseContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVerseContentReplacementsFrom)
+    @export(as: "coreVerseContentReplacementsFrom")
+  coreVerseContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVerseContentReplacementsTo)
+    @export(as: "coreVerseContentReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreQuoteCitationItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreQuoteCitationItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreQuoteCitationReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreQuoteCitationReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreQuoteCitationReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreQuoteCitationReplacementsTo"
-        type: LIST
-      )
+  coreQuoteCitationItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreQuoteCitationItems)
+    @export(as: "coreQuoteCitationItems")
+  coreQuoteCitationReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreQuoteCitationReplacementsFrom)
+    @export(as: "coreQuoteCitationReplacementsFrom")
+  coreQuoteCitationReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreQuoteCitationReplacementsTo)
+    @export(as: "coreQuoteCitationReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePullquoteCitationItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePullquoteCitationItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePullquoteCitationReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePullquoteCitationReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePullquoteCitationReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePullquoteCitationReplacementsTo"
-        type: LIST
-      )
+  corePullquoteCitationItems: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteCitationItems)
+    @export(as: "corePullquoteCitationItems")
+  corePullquoteCitationReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteCitationReplacementsFrom)
+    @export(as: "corePullquoteCitationReplacementsFrom")
+  corePullquoteCitationReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteCitationReplacementsTo)
+    @export(as: "corePullquoteCitationReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePullquoteValueItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePullquoteValueItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePullquoteValueReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePullquoteValueReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePullquoteValueReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePullquoteValueReplacementsTo"
-        type: LIST
-      )
+  corePullquoteValueItems: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteValueItems)
+    @export(as: "corePullquoteValueItems")
+  corePullquoteValueReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteValueReplacementsFrom)
+    @export(as: "corePullquoteValueReplacementsFrom")
+  corePullquoteValueReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteValueReplacementsTo)
+    @export(as: "corePullquoteValueReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreAudioCaptionItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreAudioCaptionItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreAudioCaptionReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreAudioCaptionReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreAudioCaptionReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreAudioCaptionReplacementsTo"
-        type: LIST
-      )
+  coreAudioCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreAudioCaptionItems)
+    @export(as: "coreAudioCaptionItems")
+  coreAudioCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreAudioCaptionReplacementsFrom)
+    @export(as: "coreAudioCaptionReplacementsFrom")
+  coreAudioCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreAudioCaptionReplacementsTo)
+    @export(as: "coreAudioCaptionReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreVideoCaptionItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreVideoCaptionItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreVideoCaptionReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreVideoCaptionReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreVideoCaptionReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreVideoCaptionReplacementsTo"
-        type: LIST
-      )
+  coreVideoCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVideoCaptionItems)
+    @export(as: "coreVideoCaptionItems")
+  coreVideoCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVideoCaptionReplacementsFrom)
+    @export(as: "coreVideoCaptionReplacementsFrom")
+  coreVideoCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVideoCaptionReplacementsTo)
+    @export(as: "coreVideoCaptionReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePreformattedContentItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePreformattedContentItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePreformattedContentReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePreformattedContentReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCorePreformattedContentReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "corePreformattedContentReplacementsTo"
-        type: LIST
-      )
+  corePreformattedContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCorePreformattedContentItems)
+    @export(as: "corePreformattedContentItems")
+  corePreformattedContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCorePreformattedContentReplacementsFrom)
+    @export(as: "corePreformattedContentReplacementsFrom")
+  corePreformattedContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCorePreformattedContentReplacementsTo)
+    @export(as: "corePreformattedContentReplacementsTo")
 
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreEmbedCaptionItems
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreEmbedCaptionItems"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreEmbedCaptionReplacementsFrom
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreEmbedCaptionReplacementsFrom"
-        type: LIST
-      )
-    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: $originCoreEmbedCaptionReplacementsTo
-        }
-        setResultInResponse: true
-      )
-      @deferredExport(
-        as: "coreEmbedCaptionReplacementsTo"
-        type: LIST
-      )
+  coreEmbedCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreEmbedCaptionItems)
+    @export(as: "coreEmbedCaptionItems")
+  coreEmbedCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreEmbedCaptionReplacementsFrom)
+    @export(as: "coreEmbedCaptionReplacementsFrom")
+  coreEmbedCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreEmbedCaptionReplacementsTo)
+    @export(as: "coreEmbedCaptionReplacementsTo")
 
     @remove
 }
