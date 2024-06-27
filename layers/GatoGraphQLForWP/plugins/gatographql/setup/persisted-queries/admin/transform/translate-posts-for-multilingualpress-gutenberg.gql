@@ -2838,6 +2838,150 @@ query PrepareMetaReplacements
     )
 }
 
+query ExportMutationInputs
+  @depends(on: [
+    "ExecuteRegexReplacements",
+    "PrepareMetaReplacements"
+  ])
+  @include(if: $executeTranslation)
+{
+  updatePostMutationInputDataItems: _echo(value: $networkSiteTranslationConnectionDataItems)
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
+      passValueOnwardsAs: "networkSiteTranslationConnectionDataItem"
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6, 7]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $networkSiteTranslationConnectionDataItem,
+          by: { key: "url" }
+        },
+        passOnwardsAs: "itemURL"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $networkSiteTranslationConnectionDataItem,
+          by: { key: "postID" }
+        },
+        passOnwardsAs: "itemPostID"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          object: $transformedRawContent,
+          position: $itemNumber
+        },
+        passOnwardsAs: "itemTransformedRawContent"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          object: $transformedRawTitle,
+          position: $itemNumber
+        },
+        passOnwardsAs: "itemTransformedRawTitle"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          object: $transformedRawTitle,
+          position: $itemNumber
+        },
+        passOnwardsAs: "itemTransformedRawSlug"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          object: $transformedRawExcerpt,
+          position: $itemNumber
+        },
+        passOnwardsAs: "itemTransformedRawExcerpt"
+      )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: {
+            url: $itemURL,
+            postID: $itemPostID,
+            input: {
+              status: draft,
+              title: $itemTransformedTitle,
+              slug: $itemTransformedSlug,
+              excerpt: $itemTransformedRawExcerpt,
+              contentAs: {
+                html: $itemTransformedRawContent
+              }
+            }
+          }
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "updatePostMutationInputDataItems"
+    )
+}
+
+mutation CreatePagesWithTranslationOnExternalSite
+  @depends(on: "ExportMutationInputs")
+  @include(if: $hasMasterPages)
+{
+  createExternalSitePageHTTPRequests: _echo(value: $createPostMutationInputs)
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      @applyField(
+        name: "_sendGraphQLHTTPRequest"
+        arguments: {
+          input: {
+            endpoint: $endpoint,
+            query: """
+          
+mutation CreatePageFromMasterSite($input: JSONObject!) {
+  createPage(input: $input) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    page {
+      id
+      slug
+      title
+      content
+      status
+      url
+      excerpt
+    }
+  }
+}
+
+            """,
+            variables: [
+              {
+                name: "input",
+                value: $input
+              }
+            ],
+            options: {
+              headers: [
+                {
+                  name: "Authorization",
+                  value: $authorizationHeaderValue
+                }
+              ]
+            }
+          }
+        },
+        setResultInResponse: true
+      )
+}
+
+
+
 mutation TranslateGutenbergPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $updateSlug: Boolean! = true
