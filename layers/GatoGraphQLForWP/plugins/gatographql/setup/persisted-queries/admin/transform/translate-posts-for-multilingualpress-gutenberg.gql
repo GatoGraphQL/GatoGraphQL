@@ -4,8 +4,6 @@
 #   - postId: The post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
-#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
-#   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
 #   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
 #   - excludeLanguagesToTranslate: Exclude languages from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
@@ -27,16 +25,6 @@
 # to be updated. To update posts with any other status, use
 # variable `$statusToUpdate` (for instance, passing value
 # `publish`, `pending` or `any`)
-#
-# By default, the origin post must have the default language
-# of the site, or the translation will not be executed.
-# To translate from any language, pass variable
-# `$translateDefaultLanguageOnly` with `false`.
-#
-# Additionally, translate only from a specific language by
-# providing `$translateFromLanguage` with the language code
-# (for instance, `"en"`). It applies only when
-# `$translateDefaultLanguageOnly` is `false`.
 #
 # To limit for what languages to execute the translation, pass
 # variables `$includeLanguagesToTranslate` (if empty, all languages
@@ -437,9 +425,7 @@ query ExportOriginPost(
 }
 
 query InitializeTranslationVariables(
-  $statusToUpdate: CustomPostStatusEnum! = draft,
-  $translateDefaultLanguageOnly: Boolean! = true
-  $translateFromLanguage: String
+  $statusToUpdate: CustomPostStatusEnum! = draft
 )
   @depends(on: "ExportOriginPost")
   @include(if: $hasOriginPost)
@@ -700,36 +686,7 @@ query InitializeTranslationVariables(
       )
   }
 
-  hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
-
-  originPostHasDefaultLanguage: _equals(
-    value1: $defaultLanguage,
-    value2: $fromLanguage
-  )
-
-  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
-
-  originPostHasSpecificLanguage: _equals(
-    value1: $translateFromLanguage,
-    value2: $fromLanguage
-  )
-
-  canTranslateOriginPostFromSpecificLanguage: _if(
-    condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
-    else: true
-  )
-
-  canTranslateOriginPost: _if(
-    condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
-    else: $__canTranslateOriginPostFromSpecificLanguage
-  )
-
-  executeTranslation: _and(values: [
-    $__hasTranslationPosts,
-    $__canTranslateOriginPost
-  ])
+  executeTranslation: _notEmpty(value: $__emptyTranslationPostVars)
     @export(as: "executeTranslation")
 }
 
