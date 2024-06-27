@@ -4,7 +4,6 @@
 #   - $username: The username to log into the external site
 #   - $appPassword: The application password to log into the external site
 #   - postId: The post with the origin language, from where all translations will be made
-#   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - includeSiteIDsToTranslate: Limit sites to execute the translation for. If empty, all sites are included
 #   - excludeSiteIDsToTranslate: Exclude sites from executing the translation
@@ -25,16 +24,11 @@
 # It takes an origin post on the master site, it translates it using the
 # Google Translate API to all the other languages defined as connections
 # in MultilingualPress, and stores those translations in the corresponding
-# sites in the network.
+# sites in the network. All translation posts in the network sites must
+# already exist.
 #
-# All translation posts in all the network sites must already exist.
-# These posts must also have the  `draft` status
-# to be updated. To update posts with any other status, use
-# variable `$statusToUpdate` (for instance, passing value
-# `publish`, `pending` or `any`)
-#
-# To limit for what languages to execute the translation, pass
-# variables `$includeSiteIDsToTranslate` (if empty, all languages
+# To limit for what sites to execute the translation, pass
+# variables `$includeSiteIDsToTranslate` (if empty, all sites
 # will be included) and `$excludeSiteIDsToTranslate`.
 #
 # By default it also translates the post slug. To disable, pass
