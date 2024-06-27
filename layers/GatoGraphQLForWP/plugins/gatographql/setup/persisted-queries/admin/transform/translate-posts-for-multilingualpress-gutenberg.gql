@@ -17,11 +17,11 @@
 #
 # It takes an origin post, it translates it using the Google
 # Translate API to all the other languages defined in MultilingualPress,
-# and stores those translations in the corresponding posts,
+# and stores those translations in the corresponding sites in the network,
 # as set-up via MultilingualPress.
 #
-# All translation posts must already exist, created using the
-# MultilingualPress UI. These posts must also have the  `draft` status
+# All translation posts in all the network sites must already exist.
+# These posts must also have the  `draft` status
 # to be updated. To update posts with any other status, use
 # variable `$statusToUpdate` (for instance, passing value
 # `publish`, `pending` or `any`)
