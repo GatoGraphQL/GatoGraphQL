@@ -683,7 +683,7 @@ query TransformData(
   @include(if: $executeTranslation)
 {
   transformations: _echo(value: {
-    metaTitle: {
+    metaRawTitle: {
       from: $adaptedFromTitle,
       to: $adaptedToTitle,
     },
@@ -813,7 +813,7 @@ query EscapeRegexStrings
       filter: {
         by: {
           excludeKeys: [
-            "metaTitle",
+            "metaRawTitle",
             "metaRawExcerpt"
           ]
         }
@@ -868,7 +868,7 @@ query EscapeRegexStrings
       filter: {
         by: {
           excludeKeys: [
-            "metaTitle",
+            "metaRawTitle",
             "metaRawExcerpt"
           ]
         }
@@ -2206,7 +2206,7 @@ query PrepareMetaReplacements
       @applyField(
         name: "_sprintf",
         arguments: {
-          string: "metaTitle.to.%s",
+          string: "metaRawTitle.to.%s",
           values: [$postID]
         }
         passOnwardsAs: "titlePath"

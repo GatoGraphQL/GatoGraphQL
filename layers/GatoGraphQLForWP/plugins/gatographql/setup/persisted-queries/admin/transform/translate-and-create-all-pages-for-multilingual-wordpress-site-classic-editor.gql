@@ -271,7 +271,7 @@ query TransformData
   @include(if: $hasMasterPages)
 {
   transformations: _echo(value: {
-    metaTitle: {
+    metaRawTitle: {
       from: $adaptedFromTitle,
       to: $adaptedToTitle,
     },
@@ -308,7 +308,7 @@ query PrepareMetaReplacements
       @applyField(
         name: "_sprintf",
         arguments: {
-          string: "metaTitle.to.%s",
+          string: "metaRawTitle.to.%s",
           values: [$pageID]
         }
         passOnwardsAs: "titlePath"

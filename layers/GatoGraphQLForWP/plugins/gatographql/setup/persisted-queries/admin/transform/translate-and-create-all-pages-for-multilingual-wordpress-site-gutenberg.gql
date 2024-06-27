@@ -769,7 +769,7 @@ query TransformData
   @include(if: $hasMasterPages)
 {
   transformations: _echo(value: {
-    metaTitle: {
+    metaRawTitle: {
       from: $adaptedFromTitle,
       to: $adaptedToTitle,
     },
@@ -871,7 +871,7 @@ query EscapeRegexStrings
       filter: {
         by: {
           excludeKeys: [
-            "metaTitle",
+            "metaRawTitle",
             "metaRawExcerpt"
           ]
         }
@@ -926,7 +926,7 @@ query EscapeRegexStrings
       filter: {
         by: {
           excludeKeys: [
-            "metaTitle",
+            "metaRawTitle",
             "metaRawExcerpt"
           ]
         }
@@ -2264,7 +2264,7 @@ query PrepareMetaReplacements
       @applyField(
         name: "_sprintf",
         arguments: {
-          string: "metaTitle.to.%s",
+          string: "metaRawTitle.to.%s",
           values: [$pageID]
         }
         passOnwardsAs: "titlePath"
