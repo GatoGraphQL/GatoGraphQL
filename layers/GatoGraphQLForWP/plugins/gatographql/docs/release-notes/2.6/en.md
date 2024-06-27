@@ -118,7 +118,7 @@ These types implement interface `MultilingualPressTranslatable`.
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationConnections` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned. |
+| `multilingualpressTranslationConnections` | Translation connections for the entity for all sites in the network, or `null` if no connection was assigned. |
 
 Field `multilingualpressTranslationConnections` provides the post/page IDs for all the translations. It accepts field `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default).
 
@@ -172,7 +172,7 @@ In addition, field `multilingualpressIsTranslatable` indicates if the CPT or tax
 
 | Field | Description |
 | --- | --- |
-| `multilingualpressTranslationConnections` | Nodes for all the translation relationships for the entity, as a JSON object with the network site ID and entity ID as value, or `null` if no relationship was assigned, or if the entity is not configured to be translated (via MultilingualPress Settings). |
+| `multilingualpressTranslationConnections` | Translation connections for the entity for all sites in the network, or `null` if no connection was assigned, or if the entity is not configured to be translated (via MultilingualPress Settings). |
 | `multilingualpressIsTranslatable` | Indicate if the entity can be translated. |
 
 For instance, you can now run this query:
