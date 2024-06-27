@@ -70,8 +70,6 @@ query ExportData(
   $appPassword: String!
   $externalSiteURL: URL!
   $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
-  $pageIDs: [ID!]! = []
-  $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: "InitializeExternalSiteVariables")
 {
@@ -105,32 +103,50 @@ query ExportData(
     ]
   )
     @export(as: "endpoint")
-    
-  masterPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
+}
+
+query ExportOriginPost(
+  $postId: ID!
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @depends(on: "ExportData")
+{
+  originPost: post(by: { id: $postId }, status: any) {
     id
-    emptyArray: _echo(value: [])
-      @export(
-        as: "title"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawContent"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawExcerpt"
-        type: DICTIONARY
-      )
-      @remove
+    
+
+    multilingualpressTranslationConnections(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    }) {
+      siteID
+      postID: entityID
+        @export(
+          as: "translationPostIds",
+          type: LIST
+        )
+    }
+
+    hasTranslationPosts: _notEmpty(value: $__multilingualpressTranslationConnections)
+      @export(as: "hasTranslationPosts")
+
+
+    title
+      @export(as: "originTitle")
+    rawContent
+      @export(as: "originRawContent")
+    rawExcerpt
+      @export(as: "originRawExcerpt")
   }
 
-  hasMasterPages: _notEmpty(value: $__masterPages)
-    @export(as: "hasMasterPages")
+  hasOriginPost: _notNull(value: $__originPost)
+    @export(as: "hasOriginPost")
 }
 
 query RetrieveAndExportExternalSiteLanguage
-  @depends(on: "ExportData")
-  @include(if: $hasMasterPages)
+  @depends(on: "ExportOriginPost")
+  @include(if: $hasOriginPost)
 {
   # Retrieve the language of the external site
   externalHTTPRequest: _sendGraphQLHTTPRequest(input:{
@@ -520,6 +536,11 @@ mutation CreatePageFromMasterSite($input: JSONObject!) {
         setResultInResponse: true
       )
 }
+
+
+
+
+
 
 
 

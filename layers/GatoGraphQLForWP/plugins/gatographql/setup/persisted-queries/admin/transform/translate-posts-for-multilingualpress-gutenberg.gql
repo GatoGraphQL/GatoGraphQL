@@ -70,8 +70,6 @@ query ExportData(
   $appPassword: String!
   $externalSiteURL: URL!
   $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
-  $pageIDs: [ID!]! = []
-  $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
   @depends(on: "InitializeExternalSiteVariables")
 {
@@ -105,32 +103,292 @@ query ExportData(
     ]
   )
     @export(as: "endpoint")
-    
-  masterPages: pages(filter: { ids: $pageIDs, status: $pageStatus }) {
+}
+
+query ExportOriginPost(
+  $postId: ID!
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @depends(on: "ExportData")
+{
+  siteLanguage
+    @export(as: "fromLanguage")
+
+  originPost: post(by: { id: $postId }, status: any) {
     id
-    emptyArray: _echo(value: [])
-      @export(
-        as: "title"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawContent"
-        type: DICTIONARY
-      )
-      @export(
-        as: "rawExcerpt"
-        type: DICTIONARY
-      )
-      @remove
+    
+
+    multilingualpressTranslationConnections(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    }) {
+      siteID
+      postID: entityID
+        @export(
+          as: "translationPostIds",
+          type: LIST
+        )
+    }
+
+    hasTranslationPosts: _notEmpty(value: $__multilingualpressTranslationConnections)
+      @export(as: "hasTranslationPosts")
+
+
+    title
+      @export(as: "originTitle")
+    rawContent
+      @export(as: "originRawContent")
+    rawExcerpt
+      @export(as: "originRawExcerpt")
+    
+
+    originCoreHeading: blockFlattenedDataItems(
+      filterBy: { include: "core/heading" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreHeadingContentItems"
+          )
+    
+
+    originCoreParagraph: blockFlattenedDataItems(
+      filterBy: { include: "core/paragraph" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreParagraphContentItems"
+          )
+    
+
+    originCoreImage: blockFlattenedDataItems(
+      filterBy: { include: "core/image" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { key: "attributes" }
+          affectDirectivesUnderPos: [1, 3]
+        )
+          @underJSONObjectProperty(
+            by: { key: "alt" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreImageAltItems"
+            )
+    
+          @underJSONObjectProperty(
+            by: { key: "caption" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreImageCaptionItems"
+            )
+
+    
+    originCoreButton: blockFlattenedDataItems(
+      filterBy: { include: "core/button" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.text" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreButtonTextItems"
+          )
+    
+
+    originCoreTable: blockFlattenedDataItems(
+      filterBy: { include: "core/table" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { key: "attributes" }
+          affectDirectivesUnderPos: [1, 3]
+        )
+          @underJSONObjectProperty(
+            by: { key: "caption" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreTableCaptionItems"
+            )
+    
+          @underJSONObjectProperty(
+            by: { key: "body" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @underEachArrayItem
+              @underJSONObjectProperty(
+                by: { key: "cells" }
+              )
+                @underEachArrayItem
+                  @underJSONObjectProperty(
+                    by: { key: "content" }
+                  )
+                    @export(
+                      as: "originCoreTableBodyCellsContentItems"
+                    )
+
+    
+    originCoreListItem: blockFlattenedDataItems(
+      filterBy: { include: "core/list-item" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreListItemContentItems"
+          )
+    
+
+    originCoreCover: blockFlattenedDataItems(
+      filterBy: { include: "core/cover" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.alt" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreCoverAltItems"
+          )
+    
+
+    originCoreMediaText: blockFlattenedDataItems(
+      filterBy: { include: "core/media-text" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.mediaAlt" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreMediaTextAltItems"
+          )
+    
+
+    originCoreVerse: blockFlattenedDataItems(
+      filterBy: { include: "core/verse" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreVerseContentItems"
+          )
+    
+
+    originCoreQuote: blockFlattenedDataItems(
+      filterBy: { include: "core/quote" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.citation" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreQuoteCitationItems"
+          )
+    
+
+    originCorePullquote: blockFlattenedDataItems(
+      filterBy: { include: "core/pullquote" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { key: "attributes" }
+          affectDirectivesUnderPos: [1, 3]
+        )
+          @underJSONObjectProperty(
+            by: { key: "citation" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCorePullquoteCitationItems"
+            )
+    
+          @underJSONObjectProperty(
+            by: { key: "value" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCorePullquoteValueItems"
+            )
+    
+
+    originCoreAudio: blockFlattenedDataItems(
+      filterBy: { include: "core/audio" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreAudioCaptionItems"
+          )
+    
+
+    originCoreVideo: blockFlattenedDataItems(
+      filterBy: { include: "core/video" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreVideoCaptionItems"
+          )
+    
+
+    originCorePreformatted: blockFlattenedDataItems(
+      filterBy: { include: "core/preformatted" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCorePreformattedContentItems"
+          )
+    
+
+    originCoreEmbed: blockFlattenedDataItems(
+      filterBy: { include: "core/embed" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreEmbedCaptionItems"
+          )
   }
 
-  hasMasterPages: _notEmpty(value: $__masterPages)
-    @export(as: "hasMasterPages")
+  hasOriginPost: _notNull(value: $__originPost)
+    @export(as: "hasOriginPost")
 }
 
 query RetrieveAndExportExternalSiteLanguage
-  @depends(on: "ExportData")
-  @include(if: $hasMasterPages)
+  @depends(on: "ExportOriginPost")
+  @include(if: $hasOriginPost)
 {
   # Retrieve the language of the external site
   externalHTTPRequest: _sendGraphQLHTTPRequest(input:{
@@ -2446,6 +2704,12 @@ mutation CreatePageFromMasterSite($input: JSONObject!) {
         setResultInResponse: true
       )
 }
+
+
+
+
+
+
 
 
 
