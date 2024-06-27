@@ -1892,23 +1892,23 @@ query PrepareMetaReplacements
   @include(if: $executeTranslation)
 {
   transformedMetaTitle: _echo(value: $rawTitle)
-    @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
       affectDirectivesUnderPos: [1, 2, 3]
     )
-      @applyField(
-        name: "_sprintf",
-        arguments: {
-          string: "metaRawTitle.to.%s",
-          values: [$postID]
-        }
-        passOnwardsAs: "titlePath"
-      )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $transformations
-          by: { path: $titlePath }
+          by: { path: "metaRawTitle.to" }
+        }
+        passOnwardsAs: "transformedPostTitleItem"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostTitleItem
+          position: $itemNumber
         }
         passOnwardsAs: "transformedPostTitleAsArray"
       )
@@ -1925,30 +1925,30 @@ query PrepareMetaReplacements
     )
 
   transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
-    @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
       affectDirectivesUnderPos: [1, 2, 3]
     )
-      @applyField(
-        name: "_sprintf",
-        arguments: {
-          string: "metaRawExcerpt.to.%s",
-          values: [$postID]
-        }
-        passOnwardsAs: "rawExcerptPath"
-      )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $transformations
-          by: { path: $rawExcerptPath }
+          by: { path: "metaRawExcerpt.to" }
         }
-        passOnwardsAs: "transformedPostRawExcerptAsArray"
+        passOnwardsAs: "transformedPostExcerptItem"
       )
       @applyField(
         name: "_arrayItem",
         arguments: {
-          array: $transformedPostRawExcerptAsArray
+          array: $transformedPostExcerptItem
+          position: $itemNumber
+        }
+        passOnwardsAs: "transformedPostExcerptAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostExcerptAsArray
           position: 0
         }
         setResultInResponse: true
