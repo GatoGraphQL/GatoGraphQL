@@ -77,6 +77,18 @@ query ExportData(
   siteLanguage
     @export(as: "fromLanguage")
 
+  networkSites {
+    name
+    siteID: id
+    url
+    language
+      @export(
+        as: "networkSiteDataItems"
+        type: LIST
+        affectAdditionalFieldsUnderPos: [1, 2]
+      )
+  }
+
   # Generate the authorization header to connect to the external site
   loginCredentials: _sprintf(
     string: "%s:%s",
@@ -112,9 +124,6 @@ query ExportOriginPost(
 )
   @depends(on: "ExportData")
 {
-  siteLanguage
-    @export(as: "fromLanguage")
-
   originPost: post(by: { id: $postId }, status: any) {
     id
     
