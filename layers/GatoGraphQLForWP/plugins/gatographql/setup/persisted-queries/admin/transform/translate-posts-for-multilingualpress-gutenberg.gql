@@ -158,8 +158,16 @@ query ExportData(
   # Sites in the network
   networkSites {
     name
-    siteID: id
     url
+    siteID: id
+    # Generate the external site's GraphQL endpoint to connect to
+    endpoint: _sprintf(
+      string: "%s%s",
+      values: [
+        $__url,
+        $externalSiteGraphQLEndpointPath
+      ]
+    )
     language
       @export(
         as: "networkSiteDataItems"
@@ -184,16 +192,6 @@ query ExportData(
   )
     @remove
     @export(as: "authorizationHeaderValue")
-  
-  # Generate the external site's GraphQL endpoint to connect to
-  endpoint: _sprintf(
-    string: "%s%s",
-    values: [
-      $externalSiteURL,
-      $externalSiteGraphQLEndpointPath
-    ]
-  )
-    @export(as: "endpoint")
 }
 
 query ExportOriginPost(
@@ -2855,9 +2853,9 @@ query ExportMutationInputs
         name: "_objectProperty",
         arguments: {
           object: $networkSiteTranslationConnectionDataItem,
-          by: { key: "url" }
+          by: { key: "endpoint" }
         },
-        passOnwardsAs: "itemURL"
+        passOnwardsAs: "itemEndpoint"
       )
       @applyField(
         name: "_objectProperty",
@@ -2903,7 +2901,7 @@ query ExportMutationInputs
         name: "_echo"
         arguments: {
           value: {
-            url: $itemURL,
+            endpoint: $itemEndpoint,
             input: {
               id: $itemPostID,
               title: $itemTransformedTitle,
@@ -2935,9 +2933,9 @@ mutation CreatePagesWithTranslationOnExternalSite
         name: "_objectProperty",
         arguments: {
           object: $mutationInputDataItem,
-          by: { key: "url" }
+          by: { key: "endpoint" }
         },
-        passOnwardsAs: "url"
+        passOnwardsAs: "endpoint"
       )
       @applyField(
         name: "_objectProperty",
