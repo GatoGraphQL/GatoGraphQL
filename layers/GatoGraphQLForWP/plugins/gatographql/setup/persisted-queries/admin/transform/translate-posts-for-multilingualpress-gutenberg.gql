@@ -1339,15 +1339,23 @@ query TransformData(
   })
     @underEachJSONObjectProperty
       @underJSONObjectProperty(by: { key: "to" })
-        @underEachJSONObjectProperty(
-          passKeyOnwardsAs: "postId"
-          affectDirectivesUnderPos: [1, 2, 3]
+        @underEachArrayItem(
+          passIndexOnwardsAs: "itemNumber"
+          affectDirectivesUnderPos: [1, 2, 3, 4]
         )
+          @applyField(
+            name: "_arrayItem",
+            arguments: {
+              array: $networkSiteTranslationConnectionDataItems,
+              position: $itemNumber
+            },
+            passOnwardsAs: "networkSiteTranslationConnectionDataItem"
+          )
           @applyField(
             name: "_objectProperty",
             arguments: {
-              object: $translationPostLanguages,
-              by: { key: $postId }
+              object: $networkSiteTranslationConnectionDataItem,
+              by: { key: "language" }
             },
             passOnwardsAs: "toLanguage"
           )
