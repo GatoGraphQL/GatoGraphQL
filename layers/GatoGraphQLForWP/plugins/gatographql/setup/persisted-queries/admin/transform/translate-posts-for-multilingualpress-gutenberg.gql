@@ -6,8 +6,8 @@
 #   - postId: The post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
-#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
-#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#   - includeSiteIDsToTranslate: Limit sites to execute the translation for. If empty, all sites are included
+#   - excludeSiteIDsToTranslate: Exclude sites from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
 #   - (Optional) $externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site
 #
@@ -34,8 +34,8 @@
 # `publish`, `pending` or `any`)
 #
 # To limit for what languages to execute the translation, pass
-# variables `$includeLanguagesToTranslate` (if empty, all languages
-# will be included) and `$excludeLanguagesToTranslate`.
+# variables `$includeSiteIDsToTranslate` (if empty, all languages
+# will be included) and `$excludeSiteIDsToTranslate`.
 #
 # By default it also translates the post slug. To disable, pass
 # variable `updateSlug` with `false`.
@@ -194,8 +194,8 @@ query ExportData(
 
 query ExportOriginPost(
   $postId: ID!
-  $includeLanguagesToTranslate: [String!]
-  $excludeLanguagesToTranslate: [String!]
+  $includeSiteIDsToTranslate: [ID!]
+  $excludeSiteIDsToTranslate: [ID!]
 )
   @depends(on: "ExportData")
 {
@@ -204,8 +204,8 @@ query ExportOriginPost(
     
 
     multilingualpressTranslationConnections(filter: {
-      includeLanguages: $includeLanguagesToTranslate
-      excludeLanguages: $excludeLanguagesToTranslate
+      includeSiteIDs: $includeSiteIDsToTranslate
+      excludeSiteIDs: $excludeSiteIDsToTranslate
     }) {
       siteID
       postID: entityID
