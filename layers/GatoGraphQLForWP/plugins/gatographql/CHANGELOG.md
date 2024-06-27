@@ -18,8 +18,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - `IntValueJSONObject` (#2703)
   - `IDValueJSONObject` (#2704)
 - Added predefined persisted queries:
-  - [PRO] Translate posts for MultilingualPress (Gutenberg)
-  - [PRO] Translate posts for MultilingualPress (Classic editor)
+  - [PRO] Translate posts for MultilingualPress (Gutenberg) (#2706)
+  - [PRO] Translate posts for MultilingualPress (Classic editor) (#2706)
 
 ### [PRO] Improvements
 

@@ -281,8 +281,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * `IntValueJSONObject` (#2703)
   * `IDValueJSONObject` (#2704)
 * Added predefined persisted queries:
-  * [PRO] Translate posts for MultilingualPress (Gutenberg)
-  * [PRO] Translate posts for MultilingualPress (Classic editor)
+  * [PRO] Translate posts for MultilingualPress (Gutenberg) (#2706)
+  * [PRO] Translate posts for MultilingualPress (Classic editor) (#2706)
 * [PRO] Added integration with MultilingualPress
 * [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`
 * [PRO] Added automation rules:
