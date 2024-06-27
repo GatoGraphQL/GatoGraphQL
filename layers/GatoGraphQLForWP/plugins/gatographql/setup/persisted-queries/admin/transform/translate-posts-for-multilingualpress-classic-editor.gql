@@ -80,14 +80,19 @@ query ExportOriginPost(
     id
     
 
-    polylangTranslationLanguageIDs(filter: {
+    multilingualpressTranslationConnections(filter: {
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
-    })
-    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationPostIds")
+    }) {
+      siteID
+      postID: entityID
+        @export(
+          as: "translationPostIds",
+          type: LIST
+        )
+    }
 
-    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+    hasTranslationPosts: _notEmpty(value: $__multilingualpressTranslationConnections)
       @export(as: "hasTranslationPosts")
 
 
