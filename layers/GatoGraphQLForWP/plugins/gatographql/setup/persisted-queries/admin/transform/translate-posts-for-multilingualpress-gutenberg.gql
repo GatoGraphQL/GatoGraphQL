@@ -3,7 +3,6 @@
 # Variables:
 #   - $username: The username to log into the external site
 #   - $appPassword: The application password to log into the external site
-#   - $externalSiteURL: The URL of the external site, where all pages will be (translated and) created
 #   - postId: The post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
@@ -146,7 +145,6 @@ query InitializeVariables
 query ExportData(
   $username: String!
   $appPassword: String!
-  $externalSiteURL: URL!
   $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
 )
   @depends(on: "InitializeVariables")
