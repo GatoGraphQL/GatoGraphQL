@@ -76,9 +76,6 @@ query ExportOriginPost(
 )
   @depends(on: "InitializeVariables")
 {
-  defaultLanguage: polylangDefaultLanguage
-    @export(as: "defaultLanguage")
-
   originPost: post(by: { id: $postId }, status: any) {
     id
 
