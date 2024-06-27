@@ -66,7 +66,7 @@ query InitializeVariables
     @remove
   
   emptyArray: _echo(value: [])
-    @export(as: "translationConnectionSiteIDs")
+    @export(as: "networkSiteTranslationConnectionDataItems")
 
     @export(as: "originCoreHeadingContentItems")
     @export(as: "originCoreHeadingContentReplacementsFrom")
@@ -212,10 +212,6 @@ query ExportOriginPost(
       excludeLanguages: $excludeLanguagesToTranslate
     }) {
       siteID
-        @export(
-          as: "translationConnectionSiteIDs",
-          type: LIST
-        )
       postID: entityID
         @export(
           as: "translationConnectionDataItems",
@@ -495,7 +491,7 @@ query InitializeTranslationVariables
   @depends(on: "CombineConnectionData")
   @include(if: $executeTranslation)
 {
-  emptyTranslationPostVars: _echo(value: $translationConnectionSiteIDs)
+  emptyTranslationPostVars: _echo(value: $networkSiteTranslationConnectionDataItems)
     @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
       @applyField(
         name: "_echo"
