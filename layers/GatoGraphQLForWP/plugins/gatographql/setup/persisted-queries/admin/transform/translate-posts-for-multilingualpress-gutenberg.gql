@@ -1992,7 +1992,7 @@ query ExportMutationInputs(
       @applyField(
         name: "_arrayItem",
         arguments: {
-          object: $transformedRawContent,
+          array: $transformedRawContent,
           position: $itemNumber
         },
         passOnwardsAs: "itemTransformedRawContent"
@@ -2000,7 +2000,7 @@ query ExportMutationInputs(
       @applyField(
         name: "_arrayItem",
         arguments: {
-          object: $transformedRawTitle,
+          array: $transformedRawTitle,
           position: $itemNumber
         },
         passOnwardsAs: "itemTransformedRawTitle"
@@ -2017,7 +2017,7 @@ query ExportMutationInputs(
       @applyField(
         name: "_arrayItem",
         arguments: {
-          object: $transformedRawExcerpt,
+          array: $transformedRawExcerpt,
           position: $itemNumber
         },
         passOnwardsAs: "itemTransformedRawExcerpt"
