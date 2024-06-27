@@ -120,7 +120,7 @@ These types implement interface `MultilingualPressTranslatable`.
 | --- | --- |
 | `multilingualpressTranslationConnections` | Translation connections for the entity for all sites in the network, or `null` if no connection was assigned. |
 
-Field `multilingualpressTranslationConnections` provides results of type `MultilingualPressTranslationConnection`, from which we can query the site ID and entity ID for the connection. It accepts field `includeSelf`, to indicate if to include the queried entity's connection in the results (it's `false` by default).
+Field `multilingualpressTranslationConnections` provides results of type `MultilingualPressTranslationConnection`, from which we can query the site ID and entity ID for the connection. It accepts input `includeSelf`, to indicate if to include the queried entity's connection in the results (it's `false` by default), and inputs `includeSiteIDs` and `excludeSiteIDs`, to filter the included sites in the results.
 
 For instance, you can now run this query:
 
