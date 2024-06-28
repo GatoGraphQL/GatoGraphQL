@@ -11,6 +11,7 @@
 - Added predefined persisted queries:
   - [PRO] Translate posts for MultilingualPress (Gutenberg) ([#2706](https://github.com/GatoGraphQL/GatoGraphQL/pull/2706))
   - [PRO] Translate posts for MultilingualPress (Classic editor) ([#2706](https://github.com/GatoGraphQL/GatoGraphQL/pull/2706))
+- Added Gato GraphQL intro video to documentation (Classic editor) ([#2707](https://github.com/GatoGraphQL/GatoGraphQL/pull/2707))
 - Tested up to WordPress v6.6
 
 ### Added `siteURL` field ([#2697](https://github.com/GatoGraphQL/GatoGraphQL/pull/2697))

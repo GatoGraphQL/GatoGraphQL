@@ -288,6 +288,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * [PRO] Added automation rules:
   * MultilingualPress: When publishing a post, translate it to all languages (Gutenberg)
   * MultilingualPress: When publishing a post, translate it to all languages (Classic editor)
+* Added Gato GraphQL intro video to documentation (#2707)
 * Tested up to WordPress v6.6
 
 = 2.5.2 =
