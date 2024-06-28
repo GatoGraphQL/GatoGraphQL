@@ -22,4 +22,6 @@ This tutorial explains how to achieve all of these objectives, one by one, by ex
 
 Lessons are incremental, focusing on some new element from the GraphQL schema, and building upon all items introduced in the previous lessons. Hence, the lessons are better read in the given order.
 
-By the last lesson, you will have a thorough understanding of all the distinctive features of Gato GraphQL, and how to benefit from them.
+By the last lesson, you will have a thorough understanding of crafting GraphQL queries to achieve all the features by Gato GraphQL, as demonstrated in the video below.
+
+[Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo)

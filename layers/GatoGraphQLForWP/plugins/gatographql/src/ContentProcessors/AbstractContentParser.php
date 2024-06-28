@@ -562,10 +562,9 @@ abstract class AbstractContentParser implements ContentParserInterface
     protected function embedVideos(string $htmlContent): string
     {
         // Identify videos from Vimeo
-        return (string)preg_replace_callback(
+        $htmlContent = (string)preg_replace_callback(
             '/<p>(.*?)<a href="https:\/\/(vimeo.com)\/(.*?)">(.*?)<\/a>\.?<\/p>/',
             function (array $matches): string {
-                // $videoURL = sprintf('https://%s/%s', $matches[2], $matches[3]);
                 $playerURL = sprintf('https://player.vimeo.com/video/%s', $matches[3]);
                 $videoHTML = sprintf(
                     '<iframe src="%s" width="640" height="480" frameborder="0" allow="fullscreen; picture-in-picture" allowfullscreen></iframe>',
@@ -578,6 +577,25 @@ abstract class AbstractContentParser implements ContentParserInterface
             },
             $htmlContent
         );
+
+        // Identify videos from YouTube
+        $htmlContent = (string)preg_replace_callback(
+            '/<p>(.*?)<a href="https:\/\/(www.youtube.com)\/watch\?v=(.*?)">(.*?)<\/a>\.?<\/p>/',
+            function (array $matches): string {
+                $playerURL = sprintf('https://www.youtube.com/embed/%s', $matches[3]);
+                $videoHTML = sprintf(
+                    '<iframe src="%s" width="768" height="432" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>',
+                    $playerURL
+                );
+                // Keep the link, and append the embed immediately after
+                return
+                    $matches[0]
+                    . '<div class="video-responsive-container">' . $videoHTML . '</div>';
+            },
+            $htmlContent
+        );
+
+        return $htmlContent;
     }
 
     /**

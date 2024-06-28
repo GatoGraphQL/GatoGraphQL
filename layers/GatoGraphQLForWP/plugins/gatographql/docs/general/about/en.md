@@ -2,7 +2,7 @@
 
 The most powerful GraphQL server for WordPress.
 
-<div class="notice notice-success" markdown=1>
+<div class="notice notice-info" markdown=1>
 
 ### Rate Gato GraphQL
 
@@ -11,6 +11,12 @@ We work really hard to deliver a plugin that enables you to retrieve, manipulate
 <a class="rating-link" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a> <a class="button" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank">Rate Plugin</a>
 
 </div>
+
+## Intro video
+
+Gato GraphQL is a productivity tool for interacting with data in your WordPress site. Check the video to discover all the things you can do with it.
+
+[Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo)
 
 ## Home Links
 
