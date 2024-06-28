@@ -16,7 +16,7 @@
 #
 # This Persisted GraphQL query is an integration for MultilingualPress,
 # to translate posts based on the Gutenberg editor, where very site in a
-# WordPress multisite network is a translationsite.
+# WordPress multisite network is a translation site.
 # 
 # It must be executed on the master site, which must have the PRO plugin.
 # All other sites in the network can have the free Gato GraphQL plugin.
