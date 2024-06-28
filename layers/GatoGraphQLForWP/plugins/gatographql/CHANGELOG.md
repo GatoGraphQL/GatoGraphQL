@@ -20,6 +20,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added predefined persisted queries:
   - [PRO] Translate posts for MultilingualPress (Gutenberg) (#2706)
   - [PRO] Translate posts for MultilingualPress (Classic editor) (#2706)
+- Tested up to WordPress v6.6
 
 ### [PRO] Improvements
 
