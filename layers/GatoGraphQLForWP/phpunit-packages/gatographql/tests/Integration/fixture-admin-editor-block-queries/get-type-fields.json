@@ -1278,6 +1278,9 @@
               "name": "siteLocale"
             },
             {
+              "name": "siteURL"
+            },
+            {
               "name": "tag"
             },
             {
@@ -1521,6 +1524,9 @@
             },
             {
               "name": "siteLocale"
+            },
+            {
+              "name": "siteURL"
             },
             {
               "name": "tag"

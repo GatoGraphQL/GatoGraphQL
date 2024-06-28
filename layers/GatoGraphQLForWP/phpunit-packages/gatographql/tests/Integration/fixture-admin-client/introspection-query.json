@@ -9357,6 +9357,22 @@
               "deprecationReason": null
             },
             {
+              "name": "siteURL",
+              "description": "Site's URL",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "URL!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "URL",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "tag",
               "description": "Retrieve a single post tag",
               "args": [
@@ -12321,6 +12337,22 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "siteURL",
+              "description": "Site's URL",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "URL!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "URL",
                   "ofType": null
                 }
               },

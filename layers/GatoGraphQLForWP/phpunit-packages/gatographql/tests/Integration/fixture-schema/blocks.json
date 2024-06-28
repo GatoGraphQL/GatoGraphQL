@@ -462,7 +462,7 @@
                             "align": "wide",
                             "isStackedOnMobile": true
                         },
-                        "contentSource": "<!-- wp:columns {\"align\":\"wide\",\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns alignwide\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"content\":\"If you want to know who controls you, look at who you are not allowed to criticize. (\\u003ca rel=\\u0022noreferrer noopener\\u0022 href=\\u0022https:\/\/www.azquotes.com\/author\/15138-Voltaire\\u0022 target=\\u0022_blank\\u0022\\u003eQuote by Voltaire\\u003c\/a\\u003e)\",\"dropCap\":false} -->\n<p>If you want to know who controls you, look at who you are not allowed to criticize. (<a rel=\"noreferrer noopener\" href=\"https:\/\/www.azquotes.com\/author\/15138-Voltaire\" target=\"_blank\">Quote by Voltaire<\/a>)<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:verse {\"content\":\"Reality is created by the mind, \\u003cstrong\\u003ewe can change our reality by changing our mind\\u003c\/strong\\u003e.\"} -->\n<pre class=\"wp-block-verse\">Reality is created by the mind, <strong>we can change our reality by changing our mind<\/strong>.<\/pre>\n<!-- \/wp:verse --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                        "contentSource": "<!-- wp:columns {\"align\":\"wide\",\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns alignwide\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"content\":\"If you want to know who controls you, look at who you are not allowed to criticize. (\\u003ca rel=\\u0022noreferrer noopener\\u0022 href=\\u0022https:\/\/www.azquotes.com\/author\/15138-Voltaire\\u0022 target=\\u0022_blank\\u0022\\u003eQuote by Voltaire\\u003c\/a\\u003e)\",\"dropCap\":false} -->\n<p>If you want to know who controls you, look at who you are not allowed to criticize. (<a rel=\"noreferrer noopener\" href=\"https:\/\/www.azquotes.com\/author\/15138-Voltaire\" target=\"_blank\">Quote by Voltaire<\/a>)<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true,\"useFeaturedImage\":false} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:verse {\"content\":\"Reality is created by the mind, \\u003cstrong\\u003ewe can change our reality by changing our mind\\u003c\/strong\\u003e.\"} -->\n<pre class=\"wp-block-verse\">Reality is created by the mind, <strong>we can change our reality by changing our mind<\/strong>.<\/pre>\n<!-- \/wp:verse --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/column",
@@ -483,7 +483,7 @@
                             {
                                 "name": "core\/column",
                                 "attributes": {},
-                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->",
+                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true,\"useFeaturedImage\":false} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->",
                                 "innerBlocks": [
                                     {
                                         "name": "core\/media-text",
@@ -496,9 +496,10 @@
                                             "mediaPosition": "left",
                                             "mediaUrl": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png",
                                             "mediaWidth": 50,
-                                            "isStackedOnMobile": true
+                                            "isStackedOnMobile": true,
+                                            "useFeaturedImage": false
                                         },
-                                        "contentSource": "<!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text -->",
+                                        "contentSource": "<!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true,\"useFeaturedImage\":false} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text -->",
                                         "innerBlocks": [
                                             {
                                                 "name": "core\/paragraph",
@@ -1022,7 +1023,8 @@
                                             "mediaPosition": "left",
                                             "mediaUrl": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png",
                                             "mediaWidth": 50,
-                                            "isStackedOnMobile": true
+                                            "isStackedOnMobile": true,
+                                            "useFeaturedImage": false
                                         },
                                         "innerBlocks": [
                                             {
@@ -1566,7 +1568,8 @@
                             "mediaPosition": "left",
                             "mediaUrl": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png",
                             "mediaWidth": 50,
-                            "isStackedOnMobile": true
+                            "isStackedOnMobile": true,
+                            "useFeaturedImage": false
                         },
                         "parentBlockPosition": 23,
                         "innerBlockPositions": [
@@ -2252,7 +2255,7 @@
                         "name": "core\/table",
                         "attributes": {
                             "className": "is-style-stripes",
-                            "hasFixedLayout": false,
+                            "hasFixedLayout": true,
                             "head": [],
                             "body": [
                                 {
@@ -2294,7 +2297,7 @@
                             ],
                             "foot": []
                         },
-                        "contentSource": "<!-- wp:table {\"className\":\"is-style-stripes\",\"hasFixedLayout\":false,\"head\":[],\"body\":[{\"cells\":[{\"content\":\"Row 1 Column 1\",\"tag\":\"td\"},{\"content\":\"Row 1 Column 2\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"Row 2 Column 1\",\"tag\":\"td\"},{\"content\":\"Row 2 Column 2\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"Row 3 Column 1\",\"tag\":\"td\"},{\"content\":\"Row 3 Column 2\",\"tag\":\"td\"}]}],\"foot\":[]} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1<\/td><td>Row 1 Column 2<\/td><\/tr><tr><td>Row 2 Column 1<\/td><td>Row 2 Column 2<\/td><\/tr><tr><td>Row 3 Column 1<\/td><td>Row 3 Column 2<\/td><\/tr><\/tbody><\/table><\/figure>\n<!-- \/wp:table -->",
+                        "contentSource": "<!-- wp:table {\"className\":\"is-style-stripes\",\"hasFixedLayout\":true,\"head\":[],\"body\":[{\"cells\":[{\"content\":\"Row 1 Column 1\",\"tag\":\"td\"},{\"content\":\"Row 1 Column 2\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"Row 2 Column 1\",\"tag\":\"td\"},{\"content\":\"Row 2 Column 2\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"Row 3 Column 1\",\"tag\":\"td\"},{\"content\":\"Row 3 Column 2\",\"tag\":\"td\"}]}],\"foot\":[]} -->\n<figure class=\"wp-block-table is-style-stripes\"><table><tbody><tr><td>Row 1 Column 1<\/td><td>Row 1 Column 2<\/td><\/tr><tr><td>Row 2 Column 1<\/td><td>Row 2 Column 2<\/td><\/tr><tr><td>Row 3 Column 1<\/td><td>Row 3 Column 2<\/td><\/tr><\/tbody><\/table><\/figure>\n<!-- \/wp:table -->",
                         "innerBlocks": null
                     },
                     {
@@ -2358,7 +2361,7 @@
                         "name": "core\/table",
                         "attributes": {
                             "className": "is-style-stripes",
-                            "hasFixedLayout": false,
+                            "hasFixedLayout": true,
                             "head": [],
                             "body": [
                                 {
@@ -2460,7 +2463,7 @@
                         "name": "core\/table",
                         "attributes": {
                             "className": "is-style-stripes",
-                            "hasFixedLayout": false,
+                            "hasFixedLayout": true,
                             "head": [],
                             "body": [
                                 {
@@ -8091,7 +8094,7 @@
                         "align": "wide",
                         "isStackedOnMobile": true
                     },
-                    "contentSource": "<!-- wp:columns {\"align\":\"wide\",\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns alignwide\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"content\":\"If you want to know who controls you, look at who you are not allowed to criticize. (\\u003ca rel=\\u0022noreferrer noopener\\u0022 href=\\u0022https:\/\/www.azquotes.com\/author\/15138-Voltaire\\u0022 target=\\u0022_blank\\u0022\\u003eQuote by Voltaire\\u003c\/a\\u003e)\",\"dropCap\":false} -->\n<p>If you want to know who controls you, look at who you are not allowed to criticize. (<a rel=\"noreferrer noopener\" href=\"https:\/\/www.azquotes.com\/author\/15138-Voltaire\" target=\"_blank\">Quote by Voltaire<\/a>)<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:verse {\"content\":\"Reality is created by the mind, \\u003cstrong\\u003ewe can change our reality by changing our mind\\u003c\/strong\\u003e.\"} -->\n<pre class=\"wp-block-verse\">Reality is created by the mind, <strong>we can change our reality by changing our mind<\/strong>.<\/pre>\n<!-- \/wp:verse --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                    "contentSource": "<!-- wp:columns {\"align\":\"wide\",\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns alignwide\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"content\":\"If you want to know who controls you, look at who you are not allowed to criticize. (\\u003ca rel=\\u0022noreferrer noopener\\u0022 href=\\u0022https:\/\/www.azquotes.com\/author\/15138-Voltaire\\u0022 target=\\u0022_blank\\u0022\\u003eQuote by Voltaire\\u003c\/a\\u003e)\",\"dropCap\":false} -->\n<p>If you want to know who controls you, look at who you are not allowed to criticize. (<a rel=\"noreferrer noopener\" href=\"https:\/\/www.azquotes.com\/author\/15138-Voltaire\" target=\"_blank\">Quote by Voltaire<\/a>)<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true,\"useFeaturedImage\":false} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:verse {\"content\":\"Reality is created by the mind, \\u003cstrong\\u003ewe can change our reality by changing our mind\\u003c\/strong\\u003e.\"} -->\n<pre class=\"wp-block-verse\">Reality is created by the mind, <strong>we can change our reality by changing our mind<\/strong>.<\/pre>\n<!-- \/wp:verse --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                     "innerBlocks": [
                         {
                             "name": "core\/column",
@@ -8112,7 +8115,7 @@
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->",
+                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true,\"useFeaturedImage\":false} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text --><\/div>\n<!-- \/wp:column -->",
                             "innerBlocks": [
                                 {
                                     "name": "core\/media-text",
@@ -8125,9 +8128,10 @@
                                         "mediaPosition": "left",
                                         "mediaUrl": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png",
                                         "mediaWidth": 50,
-                                        "isStackedOnMobile": true
+                                        "isStackedOnMobile": true,
+                                        "useFeaturedImage": false
                                     },
-                                    "contentSource": "<!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text -->",
+                                    "contentSource": "<!-- wp:media-text {\"mediaId\":1362,\"mediaLink\":\"https:\/\/gatographql.lndo.site\/graphql-api-search-results\/\",\"mediaType\":\"image\",\"align\":\"none\",\"mediaAlt\":\"In red are the entities with a transformed name\",\"mediaPosition\":\"left\",\"mediaUrl\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\",\"mediaWidth\":50,\"isStackedOnMobile\":true,\"useFeaturedImage\":false} -->\n<div class=\"wp-block-media-text alignwide is-stacked-on-mobile\"><figure class=\"wp-block-media-text__media\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png\" alt=\"In red are the entities with a transformed name\" class=\"wp-image-1362 size-full\"\/><\/figure><div class=\"wp-block-media-text__content\"><!-- wp:paragraph {\"placeholder\":\"Content\u2026\",\"content\":\"This is the schema\",\"dropCap\":false} -->\n<p>This is the schema<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:media-text -->",
                                     "innerBlocks": [
                                         {
                                             "name": "core\/paragraph",
@@ -8651,7 +8655,8 @@
                                         "mediaPosition": "left",
                                         "mediaUrl": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png",
                                         "mediaWidth": 50,
-                                        "isStackedOnMobile": true
+                                        "isStackedOnMobile": true,
+                                        "useFeaturedImage": false
                                     },
                                     "innerBlocks": [
                                         {
@@ -9195,7 +9200,8 @@
                         "mediaPosition": "left",
                         "mediaUrl": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.png",
                         "mediaWidth": 50,
-                        "isStackedOnMobile": true
+                        "isStackedOnMobile": true,
+                        "useFeaturedImage": false
                     },
                     "parentBlockPosition": 23,
                     "innerBlockPositions": [
