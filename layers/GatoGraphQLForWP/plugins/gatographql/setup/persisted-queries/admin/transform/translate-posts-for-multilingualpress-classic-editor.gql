@@ -3,12 +3,10 @@
 # Variables:
 #   - $username: The username to log into the external site
 #   - $appPassword: The application password to log into the external site
-#   - $externalSiteURL: The URL of the external site, where all pages will be (translated and) created
 #   - postId: The post with the origin language, from where all translations will be made
-#   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
-#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
-#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#   - includeSiteIDsToTranslate: Limit sites to execute the translation for. If empty, all sites are included
+#   - excludeSiteIDsToTranslate: Exclude sites from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
 #   - (Optional) $externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site
 #
@@ -26,17 +24,12 @@
 # It takes an origin post on the master site, it translates it using the
 # Google Translate API to all the other languages defined as connections
 # in MultilingualPress, and stores those translations in the corresponding
-# sites in the network.
+# sites in the network. All translation posts in the network sites must
+# already exist.
 #
-# All translation posts in all the network sites must already exist.
-# These posts must also have the  `draft` status
-# to be updated. To update posts with any other status, use
-# variable `$statusToUpdate` (for instance, passing value
-# `publish`, `pending` or `any`)
-#
-# To limit for what languages to execute the translation, pass
-# variables `$includeLanguagesToTranslate` (if empty, all languages
-# will be included) and `$excludeLanguagesToTranslate`.
+# To limit for what sites to execute the translation, pass
+# variables `$includeSiteIDsToTranslate` (if empty, all sites
+# will be included) and `$excludeSiteIDsToTranslate`.
 #
 # By default it also translates the post slug. To disable, pass
 # variable `updateSlug` with `false`.
@@ -57,5 +50,528 @@
 # documentation.
 #
 ########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyBool: _echo(value: false)
+    @export(as: "hasTranslationConnections")
+    @export(as: "executeTranslation")
+    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "networkSiteTranslationConnectionDataItems")
+    @remove
+}
 
-# @todo Complete translate-posts-for-multilingualpress-classic-editor
+query ExportData(
+  $username: String!
+  $appPassword: String!
+  $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
+)
+  @depends(on: "InitializeVariables")
+{
+  # Retrieve the language of the content
+  siteLanguage
+    @export(as: "fromLanguage")
+
+  # Sites in the network
+  networkSites {
+    name
+    url
+    siteID: id
+    # Generate the external site's GraphQL endpoint to connect to
+    endpoint: _sprintf(
+      string: "%s%s",
+      values: [
+        $__url,
+        $externalSiteGraphQLEndpointPath
+      ]
+    )
+    language
+      @export(
+        as: "networkSiteDataItems"
+        type: LIST
+        affectAdditionalFieldsUnderPos: [1, 2]
+      )
+  }
+
+  # Generate the authorization header to connect to the external site
+  loginCredentials: _sprintf(
+    string: "%s:%s",
+    values: [$username, $appPassword]
+  )
+    @remove
+  base64EncodedLoginCredentials: _strBase64Encode(
+    string: $__loginCredentials
+  )
+    @remove
+  authorizationHeaderValue: _sprintf(
+    string: "Basic %s",
+    values: [$__base64EncodedLoginCredentials]
+  )
+    @remove
+    @export(as: "authorizationHeaderValue")
+}
+
+query ExportOriginPost(
+  $postId: ID!
+  $includeSiteIDsToTranslate: [ID!]
+  $excludeSiteIDsToTranslate: [ID!]
+)
+  @depends(on: "ExportData")
+{
+  originPost: post(by: { id: $postId }, status: any) {
+    id
+    
+
+    multilingualpressTranslationConnections(filter: {
+      includeSiteIDs: $includeSiteIDsToTranslate
+      excludeSiteIDs: $excludeSiteIDsToTranslate
+    }) {
+      siteID
+      postID: entityID
+        @export(
+          as: "translationConnectionDataItems",
+          type: LIST,
+          affectAdditionalFieldsUnderPos: 1
+        )
+    }
+
+    hasTranslationConnections: _notEmpty(value: $__multilingualpressTranslationConnections)
+      @export(as: "hasTranslationConnections")
+
+
+    rawTitle
+      @export(as: "originRawTitle")
+    rawContent
+      @export(as: "originRawContent")
+    rawExcerpt
+      @export(as: "originRawExcerpt")
+  }
+}
+
+query CombineConnectionData
+  @depends(on: "ExportOriginPost")
+  @include(if: $hasTranslationConnections)
+{
+  networkSiteTranslationConnectionDataItems: _arrayInnerJoinJSONObjectProperties(
+    source: $networkSiteDataItems,
+    target: $translationConnectionDataItems,
+    index: "siteID"
+  )
+    @export(as: "networkSiteTranslationConnectionDataItems")
+
+  executeTranslation: _notEmpty(value: $__networkSiteTranslationConnectionDataItems)
+    @export(as: "executeTranslation")
+}
+
+query InitializeTranslationVariables
+  @depends(on: "CombineConnectionData")
+  @include(if: $executeTranslation)
+{
+  arrayItems: _arrayLength(array: $networkSiteTranslationConnectionDataItems)
+
+  rawTitle: _arrayPad(array: [], length: $__arrayItems, value: $originRawTitle)
+    @export(as: "rawTitle")
+  rawContent: _arrayPad(array: [], length: $__arrayItems, value: $originRawContent)
+    @export(as: "rawContent")
+  rawExcerpt: _arrayPad(array: [], length: $__arrayItems, value: $originRawExcerpt)
+    @export(as: "rawExcerpt")
+
+    @remove
+}
+
+query AdaptData
+  @depends(on: "InitializeTranslationVariables")
+  @include(if: $executeTranslation)
+{
+  adaptedToContent: _echo(value: $rawContent)
+    @underEachArrayItem(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToContent")
+  adaptedFromContent: _echo(value: $rawContent)
+    @underEachArrayItem
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromContent")
+
+  adaptedToTitle: _echo(value: $rawTitle)
+    @underEachArrayItem(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToTitle")
+  adaptedFromTitle: _echo(value: $rawTitle)
+    @underEachArrayItem
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromTitle")
+
+  adaptedToRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachArrayItem(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToRawExcerpt")
+  adaptedFromRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachArrayItem
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromRawExcerpt")
+}
+
+query TransformData(
+  $languageMapping: JSONObject! = {}
+)
+  @depends(on: "AdaptData")
+  @include(if: $executeTranslation)
+{
+  transformations: _echo(value: {
+    metaRawContent: {
+      from: $adaptedFromContent,
+      to: $adaptedToContent,
+    },
+    metaRawTitle: {
+      from: $adaptedFromTitle,
+      to: $adaptedToTitle,
+    },
+    metaRawExcerpt: {
+      from: $adaptedFromRawExcerpt,
+      to: $adaptedToRawExcerpt,
+    }
+  })
+    @underEachJSONObjectProperty
+      @underJSONObjectProperty(by: { key: "to" })
+        @underEachArrayItem(
+          passIndexOnwardsAs: "itemNumber"
+          affectDirectivesUnderPos: [1, 2, 3, 4]
+        )
+          @applyField(
+            name: "_arrayItem",
+            arguments: {
+              array: $networkSiteTranslationConnectionDataItems,
+              position: $itemNumber
+            },
+            passOnwardsAs: "networkSiteTranslationConnectionDataItem"
+          )
+          @applyField(
+            name: "_objectProperty",
+            arguments: {
+              object: $networkSiteTranslationConnectionDataItem,
+              by: { key: "language" }
+            },
+            passOnwardsAs: "toLanguage"
+          )
+          @applyField(
+            name: "_objectProperty",
+            arguments: {
+              object: $languageMapping,
+              by: { key: $toLanguage }
+              failIfNonExistingKeyOrPath: false
+              valueWhenNonExistingKeyOrPath: $toLanguage
+            },
+            passOnwardsAs: "toLanguage"
+          )
+          @underEachArrayItem
+            @strTranslate(
+              from: $fromLanguage,
+              to: $toLanguage
+            )
+    @export(as: "transformations")
+}
+
+query PrepareMetaReplacements
+  @depends(on: "TransformData")
+  @include(if: $executeTranslation)
+{
+  transformedMetaContent: _echo(value: $rawContent)
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: "metaRawContent.to" }
+        }
+        passOnwardsAs: "transformedPostContentItem"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostContentItem
+          position: $itemNumber
+        }
+        passOnwardsAs: "transformedPostContentAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostContentAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawContent"
+    )
+
+  transformedMetaTitle: _echo(value: $rawTitle)
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: "metaRawTitle.to" }
+        }
+        passOnwardsAs: "transformedPostTitleItem"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostTitleItem
+          position: $itemNumber
+        }
+        passOnwardsAs: "transformedPostTitleAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostTitleAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawTitle"
+    )
+
+  transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: "metaRawExcerpt.to" }
+        }
+        passOnwardsAs: "transformedPostExcerptItem"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostExcerptItem
+          position: $itemNumber
+        }
+        passOnwardsAs: "transformedPostExcerptAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostExcerptAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawExcerpt"
+    )
+}
+
+query ExportMutationInputs(
+  $updateSlug: Boolean! = true
+)
+  @depends(on: "PrepareMetaReplacements")
+  @include(if: $executeTranslation)
+{
+  updatePostMutationInputDataItems: _echo(value: $networkSiteTranslationConnectionDataItems)
+    @underEachArrayItem(
+      passIndexOnwardsAs: "itemNumber"
+      passValueOnwardsAs: "networkSiteTranslationConnectionDataItem"
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6, 7]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $networkSiteTranslationConnectionDataItem,
+          by: { key: "endpoint" }
+        },
+        passOnwardsAs: "itemEndpoint"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $networkSiteTranslationConnectionDataItem,
+          by: { key: "postID" }
+        },
+        passOnwardsAs: "itemPostID"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedRawContent,
+          position: $itemNumber
+        },
+        passOnwardsAs: "itemTransformedRawContent"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedRawTitle,
+          position: $itemNumber
+        },
+        passOnwardsAs: "itemTransformedRawTitle"
+      )
+      @applyField(
+        name: "_if",
+        arguments: {
+          condition: $updateSlug,
+          then: $itemTransformedRawTitle,
+          else: null
+        },
+        passOnwardsAs: "itemTransformedSlug"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedRawExcerpt,
+          position: $itemNumber
+        },
+        passOnwardsAs: "itemTransformedRawExcerpt"
+      )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: {
+            endpoint: $itemEndpoint,
+            input: {
+              id: $itemPostID,
+              title: $itemTransformedRawTitle,
+              slug: $itemTransformedSlug,
+              excerpt: $itemTransformedRawExcerpt,
+              contentAs: {
+                html: $itemTransformedRawContent
+              }
+            }
+          }
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "updatePostMutationInputDataItems"
+    )
+}
+
+mutation UpdatePagesWithTranslationOnExternalSite
+  @depends(on: "ExportMutationInputs")
+  @include(if: $executeTranslation)
+{
+  updateExternalSitePageHTTPRequests: _echo(value: $updatePostMutationInputDataItems)
+    @underEachArrayItem(
+      passValueOnwardsAs: "mutationInputDataItem"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mutationInputDataItem,
+          by: { key: "endpoint" }
+        },
+        passOnwardsAs: "endpoint"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mutationInputDataItem,
+          by: { key: "input" }
+        },
+        passOnwardsAs: "input"
+      )
+      @applyField(
+        name: "_sendGraphQLHTTPRequest"
+        arguments: {
+          input: {
+            endpoint: $endpoint,
+            query: """
+          
+mutation UpdatePostFromMasterSite($input: JSONObject!) {
+  updatePost(input: $input) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      slug
+      title
+      content
+      status
+      excerpt
+    }
+  }
+}
+
+            """,
+            variables: [
+              {
+                name: "input",
+                value: $input
+              }
+            ],
+            options: {
+              headers: [
+                {
+                  name: "Authorization",
+                  value: $authorizationHeaderValue
+                }
+              ]
+            }
+          }
+        },
+        setResultInResponse: true
+      )
+}
