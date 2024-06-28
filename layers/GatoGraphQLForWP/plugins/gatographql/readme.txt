@@ -167,6 +167,12 @@ The Gato GraphQL plugin maps the WordPress schema, and is enough to use GraphQL 
 
 Gato GraphQL PRO is needed for enhanced security for public APIs, adding HTTP caching, sending emails, executing updates in bulk, connecting to external services, and automating tasks (among others).
 
+= Does Gato GraphQL support WordPress Multisite? =
+
+Yes, it does. Gato GraphQL can be installed on a multisite network.
+
+In addition, Gato GraphQL provides fields on the GraphQL schema to retrieve multisite network data, allowing to use GraphQL to sync content across the multisite (for instance, to translate posts when using MultilingualPress, as described below).
+
 = How to use Gato GraphQL with Polylang? =
 
 Gato GraphQL PRO provides an integration with Polylang, allowing you to automatically translate a post's content using the Google Translate API, and store it on all translation posts, as defined and managed via Polylang.
@@ -178,6 +184,14 @@ And you can set it all up via automation, so that whenever a post in the default
 Both Polylang and Polylang PRO are supported.
 
 Check out the [Gato GraphQL with Polylang demos](https://gatographql.com/demos?tag=Polylang) to learn more.
+
+= How to use Gato GraphQL with MultilingualPress? =
+
+Gato GraphQL PRO provides an integration with MultilingualPress, allowing you to translate a post's content to all languages defined in a multisite network, and store the translated content (from Google Translate) on the corresponding translation sites.
+
+And you can set it all up via automation, so that whenever a post is published, it is automatically translated to all languages, and stored in the corresponding sites in the network.
+
+Check out the [Gato GraphQL with MultilingualPress demos](https://gatographql.com/demos?tag=MultilingualPress) to learn more.
 
 = How is Gato GraphQL different than WPGraphQL? =
 
