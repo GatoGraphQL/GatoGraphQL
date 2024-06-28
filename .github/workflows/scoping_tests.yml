@@ -74,6 +74,24 @@ jobs:
                     vendor/bin/monorepo-builder custom-bump-interdependency --config=config/monorepo-builder/custom-bump-interdependency.php "dev-${{ needs.provide_data.outputs.git_base_branch }}"
                     vendor/bin/monorepo-builder localize-composer-paths --config=config/monorepo-builder/localize-composer-paths.php ${{ matrix.pluginConfig.path }}/composer.json --ansi
 
+            ###########################################################################
+            # When building bundles (i.e. containing 2 or more extension plugins), if 2 extensions
+            # contain the same entry under "replace" in composer.json, then "require"ing both of
+            # them in the bundle fails.
+            #
+            # For instance, several plugins replace "pop-schema/schema-commons", producing
+            # the following error message:
+            #
+            #   > Only one of these can be installed: pop-schema/schema-commons[dev-master], gatographql-pro/php-constants-and-environment-variables-via-schema[dev-master], gatographql-pro/helper-function-collection[dev-master]. [gatographql-pro/php-constants-and-environment-variables-via-schema, gatographql-pro/helper-function-collection] replace pop-schema/schema-commons and thus cannot coexist with it.
+            #
+            # As a solution, when generating the bundle plugin, remove all the "replace" entries
+            # in the composer.json for the included plugins, and move them to the bundle composer.json
+            ###########################################################################
+            -   name: "Bundles: Transfer the 'replace' entries in composer.json, from the contained plugins to the bundle"
+                run: |
+                    vendor/bin/monorepo-builder transfer-composer-replace-entries-from-plugins-to-bundle --config=config/monorepo-builder/transfer-composer-replace-entries-from-plugins-to-bundle.php "${{ matrix.pluginConfig.path }}/composer.json" --exclude-replace="${{ matrix.pluginConfig.exclude_replace }}"
+                if: ${{ matrix.pluginConfig.is_bundle }}
+
             -   name: Install release dependencies for PROD
                 run: composer install --no-dev --no-progress --no-interaction --ansi
                 working-directory: ${{ matrix.pluginConfig.path }}
