@@ -4,6 +4,8 @@ All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for Wo
 
 As new extensions are created and released, they will also be added to this plugin.
 
+With Gato GraphQL PRO, you can achieve all the things from the video:
+
 [Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo)
 
 ## List of bundled extensions
