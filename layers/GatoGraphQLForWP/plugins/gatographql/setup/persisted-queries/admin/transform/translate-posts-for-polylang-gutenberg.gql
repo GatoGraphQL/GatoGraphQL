@@ -60,11 +60,6 @@
 # See Persisted Query "Translate post (Gutenberg)" for additional
 # documentation.
 #
-# *********************************************************************
-# 
-# More info:
-#   - https://gatographql.com/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/
-#
 ########################################################################
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
