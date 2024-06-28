@@ -2,7 +2,7 @@
 
 The most powerful GraphQL server for WordPress.
 
-<div class="notice notice-success" markdown=1>
+<div class="notice notice-info" markdown=1>
 
 ### Rate Gato GraphQL
 
