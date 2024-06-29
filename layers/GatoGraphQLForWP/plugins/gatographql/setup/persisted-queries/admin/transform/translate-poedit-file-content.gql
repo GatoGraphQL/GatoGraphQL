@@ -69,10 +69,16 @@ query GenerateTranslatedPoeditFile
     value: $regex
   )
     @remove
+  replaceWith: _echo(value: $translatedStrings)
+    @underEachArrayItem(
+      affectaffectDirectivesUnderPos: [1, 2]
+    )
+      @strPrepend(string: "#msgid \"$1\"\nmsgstr \"")
+      @strAppend(string: "\"#")
   translatedContent: _strRegexReplaceMultiple(
     in: $content,
     searchRegex: $__replaceFrom,
-    replaceWith: $translatedStrings,
+    replaceWith: $replaceWith,
     limit: 1
   )
 }
