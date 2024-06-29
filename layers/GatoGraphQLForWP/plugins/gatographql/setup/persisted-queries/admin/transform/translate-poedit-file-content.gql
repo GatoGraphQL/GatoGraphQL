@@ -62,13 +62,11 @@ query GenerateTranslatedPoeditFile
   @depends(on: "TranslateStrings")
 {
   entriesCount: _arrayLength(array: $translatedStrings)
-    @remove
   replaceFrom: _arrayPad(
     array: [],
     length: $__entriesCount,
     value: $regex
   )
-    @remove
   replaceWith: _echo(value: $translatedStrings)
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2]
