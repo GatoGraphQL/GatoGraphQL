@@ -72,8 +72,8 @@ query ExportReplacements
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2]
     )
-      @strPrepend(string: "#msgid \"$1\"\nmsgstr \"")
-      @strAppend(string: "\"#")
+      @strPrepend(string: "msgid \"$1\"\nmsgstr \"")
+      @strAppend(string: "\"")
     @export(as: "replaceWith")
 }
 
