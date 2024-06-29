@@ -1,0 +1,79 @@
+########################################################################
+# 
+# Variables:
+#   - content: The .po/.pot Poedit (https://poedit.net/) file content
+#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query translates the empty strings from a
+# Poedit file (by executing a single call to the Google Translate API),
+# and adds those translations in the corresponding entry.
+#
+########################################################################
+
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyArray: _echo(value: [])
+    @export(as: "stringsToTranslate")
+}
+
+query ExportData($fileURL: URL!)
+  @depends(on: "InitializeVariables")
+{
+  _sendHTTPRequest(input: { url: $fileURL, method: GET }) {
+    content: body
+      @export(as: "content")
+  }
+  regex: _echo(value: "#msgid \"(.*)\"\nmsgstr \"\"#")
+    @export(as: "regex")
+}
+
+query ExtractStringsToTranslate
+  @depends(on: "ExportData")
+{
+  stringsToTranslateMatches: _strRegexFindMatches(
+    string: $content,
+    regex: $regex
+  )
+    @underEachArrayItem
+      @underArrayItem(index: 0)
+        @export(
+          as: "stringsToTranslate"
+          type: LIST
+        )
+}
+
+query TranslateStrings(
+  $fromLang: String
+  $toLang: String!
+)
+  @depends(on: "ExtractStringsToTranslate")
+{  
+  translatedStrings: _echo(value: $stringsToTranslate)
+    @underEachArrayItem
+      @strTranslate(from: $fromLang, to: $toLang)
+    @export(as: "translatedStrings")
+}
+
+query GenerateTranslatedPoeditFile
+  @depends(on: "TranslateStrings")
+{
+  entriesCount: _arrayLength(array: $translatedStrings)
+    @remove
+  replaceFrom: _arrayPad(
+    array: [],
+    length: $__entriesCount,
+    value: $regex
+  )
+    @remove
+  translatedContent: _strRegexReplaceMultiple(
+    in: $content,
+    searchRegex: $__replaceFrom,
+    replaceWith: $translatedStrings,
+    limit: 1
+  )
+}
