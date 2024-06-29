@@ -58,7 +58,7 @@ query TranslateStrings(
     @export(as: "translatedStrings")
 }
 
-query GenerateTranslatedPoeditFile
+query ExportReplacements
   @depends(on: "TranslateStrings")
 {
   entriesCount: _arrayLength(array: $translatedStrings)
@@ -67,16 +67,23 @@ query GenerateTranslatedPoeditFile
     length: $__entriesCount,
     value: $regex
   )
+    @export(as: "replaceFrom")
   replaceWith: _echo(value: $translatedStrings)
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2]
     )
       @strPrepend(string: "#msgid \"$1\"\nmsgstr \"")
       @strAppend(string: "\"#")
+    @export(as: "replaceWith")
+}
+
+query GenerateTranslatedPoeditFile
+  @depends(on: "ExportReplacements")
+{
   translatedContent: _strRegexReplaceMultiple(
     in: $content,
-    searchRegex: $__replaceFrom,
-    replaceWith: $__replaceWith,
+    searchRegex: $replaceFrom,
+    replaceWith: $replaceWith,
     limit: 1
   )
 }
