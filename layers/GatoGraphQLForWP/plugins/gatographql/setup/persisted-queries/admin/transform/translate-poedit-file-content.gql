@@ -28,7 +28,7 @@ query ExportData($fileURL: URL!)
     content: body
       @export(as: "content")
   }
-  regex: _echo(value: "#msgid \"(.*)\"\nmsgstr \"\"#")
+  regex: _echo(value: "#msgid \"(.+)\"\nmsgstr \"\"#")
     @export(as: "regex")
 }
 
@@ -39,12 +39,11 @@ query ExtractStringsToTranslate
     string: $content,
     regex: $regex
   )
-    @underEachArrayItem
-      @underArrayItem(index: 0)
-        @export(
-          as: "stringsToTranslate"
-          type: LIST
-        )
+  stringsToTranslate: _arrayItem(
+    array: $__stringsToTranslateMatches,
+    position: 1
+  )
+     @export(as: "stringsToTranslate")
 }
 
 query TranslateStrings(
