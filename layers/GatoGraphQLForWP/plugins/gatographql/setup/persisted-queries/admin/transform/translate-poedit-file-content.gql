@@ -203,5 +203,17 @@ query UploadTranslatedPoeditFile(
   }) {
     body
     jsonBody: _strDecodeJSONObject(string: $__body)
+    uploadedFileURL: _objectProperty(
+      object: $__jsonBody,
+      by: { key: "url" }
+    )
+      @export(as: "uploadedFileURL")
+      @remove
   }
+}
+
+query UploadTranslatedPoeditFileAndPrintURL
+  @depends(on: "UploadTranslatedPoeditFile")
+{
+  uploadedFileURL: _echo(value: $uploadedFileURL)
 }
