@@ -24,7 +24,7 @@ query InitializeVariables
 query ExportData($fileURL: URL!)
   @depends(on: "InitializeVariables")
 {
-  _sendHTTPRequest(input: { url: $fileURL, method: GET }) {
+  getContentsFromURL: _sendHTTPRequest(input: { url: $fileURL, method: GET }) {
     content: body
       @export(as: "content")
   }
@@ -173,9 +173,10 @@ query GenerateTranslatedPoeditFile
   )
     @export(as: "translatedContent")
 }
-
-mutation CreateAndUploadTranslatedPoeditFile(
+  
+query UploadTranslatedPoeditFile(
   $toLang: String!
+  $filestackApiKey: String!
 )
   @depends(on: "GenerateTranslatedPoeditFile")
 {
@@ -183,33 +184,27 @@ mutation CreateAndUploadTranslatedPoeditFile(
     string: "%s.po",
     values: [$toLang]
   )
-  title: _sprintf(
-    string: "Poedit translation file for %s",
-    values: [$toLang]
-  )
-  createMediaItem(input: {
-    from: {
-      contents: {
-        body: $translatedContent
-        filename: $__filename
-      }
+  url: _sprintf(
+    string: "https://www.filestackapi.com/api/store/S3?key=%s&filename=%s",
+    values: [
+      $filestackApiKey,
+      $__filename
+    ]
+  ) @remove
+  uploadFileToFilestack: _sendHTTPRequest(input: {
+    url: $__url,
+    method: POST,
+    options: {
+      headers: [
+        {
+          name: "Content-Type",
+          value: "plain/text"
+        }
+      ]
+      body: $translatedContent
     }
-    title: $__title
-    mimeType: "text/plain"
   }) {
-    # mediaItemID
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-    mediaItem {
-      mimeType
-      mediaItemSlug: slug
-      mediaItemSrc: src
-      title
-    }
+    body
+    jsonBody: _strDecodeJSONObject(string: $__body)
   }
 }
