@@ -181,11 +181,11 @@ mutation CreateAndUploadTranslatedPoeditFile(
 {
   filename: _sprintf(
     string: "%s.po",
-    values: $toLang
+    values: [$toLang]
   )
   title: _sprintf(
     string: "Poedit translation file for %s",
-    values: $toLang
+    values: [$toLang]
   )
   createMediaItem(input: {
     from: {
