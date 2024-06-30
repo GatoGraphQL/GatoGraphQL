@@ -23,6 +23,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added Gato GraphQL intro video to documentation (#2707)
 - Tested up to WordPress v6.6
 
+### Fixed
+
+- Identifying extension in `createMediaItem` when filename has more then one dot
+
 ### [PRO] Improvements
 
 - Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`

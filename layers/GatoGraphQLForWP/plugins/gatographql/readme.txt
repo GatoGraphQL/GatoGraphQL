@@ -306,6 +306,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * MultilingualPress: When publishing a post, translate it to all languages (Classic editor)
 * Added Gato GraphQL intro video to documentation (#2707)
 * Tested up to WordPress v6.6
+* Fixed identifying extension in `createMediaItem` when filename has more then one dot
 
 = 2.5.2 =
 * Fixed bug: Initialize blocks only after their corresponding CPTs (#2693)
