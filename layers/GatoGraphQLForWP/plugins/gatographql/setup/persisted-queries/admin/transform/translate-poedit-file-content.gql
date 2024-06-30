@@ -1,8 +1,10 @@
 ########################################################################
 # 
 # Variables:
-#   - content: The .po/.pot Poedit (https://poedit.net/) file content
+#   - fileURL: The URL for the .po/.pot Poedit (https://poedit.net/) file
 #   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - filestackApiKey: The API key to upload files to Filestack
+#   - (Optional) fromLang: The language code to translate from, from Google Translate
 #
 # *********************************************************************
 #
@@ -10,7 +12,10 @@
 #
 # This Persisted GraphQL query translates the empty strings from a
 # Poedit file (by executing a single call to the Google Translate API),
-# and adds those translations in the corresponding entry.
+# and adds those translations in the corresponding entry of a new
+# translation Poedit file.
+#
+# It then uploads the translation file to Filestack (https://www.filestack.com)
 #
 ########################################################################
 
