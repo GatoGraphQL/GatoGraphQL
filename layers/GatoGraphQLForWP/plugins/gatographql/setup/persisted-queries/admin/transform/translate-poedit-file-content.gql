@@ -32,7 +32,7 @@ query ExportData($fileURL: URL!)
   regexIndividual: _echo(value: "#msgid \"(.+)\"\nmsgstr \"\"#")
     @export(as: "regexIndividual")
 
-  regexMultipleSingular: _echo(value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \"\"#")
+  regexMultipleSingular: _echo(value: "#msgid \"(.+)\"\nmsgid_plural \".*\"\nmsgstr\\[0\\] \"\"#")
     @export(as: "regexMultipleSingular")
 
   regexMultiplePlural: _echo(value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \".*\"\nmsgstr\\[1\\] \"\"#")
@@ -122,13 +122,12 @@ query ExportReplacements
   replaceFromMultipleSingular: _arrayPad(
     array: [],
     length: $__entriesCountMultipleSingular,
-    value: $regexMultipleSingular
+    value: "#msgid \"(.+)\"\nmsgid_plural \"(.*)\"\nmsgstr\\[0\\] \"\"#"
   )
     @export(as: "replaceFromMultipleSingular")
   replaceFromMultiplePlural: _arrayPad(
     array: [],
     length: $__entriesCountMultiplePlural,
-    # value: $regexMultiplePlural
     value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \"(.*)\"\nmsgstr\\[1\\] \"\"#"
   )
     @export(as: "replaceFromMultiplePlural")
@@ -144,7 +143,7 @@ query ExportReplacements
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2]
     )
-      @strPrepend(string: "msgid_plural \"$1\"\nmsgstr[0] \"")
+      @strPrepend(string: "msgid \"$1\"\nmsgid_plural \"$2\"\nmsgstr[0] \"")
       @strAppend(string: "\"")
     @export(as: "replaceWithMultipleSingular")
   replaceWithMultiplePlural: _echo(value: $__translatedStringsMultiplePlural)
