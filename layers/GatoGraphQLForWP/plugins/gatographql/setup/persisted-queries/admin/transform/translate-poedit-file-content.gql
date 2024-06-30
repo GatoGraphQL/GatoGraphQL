@@ -14,15 +14,7 @@
 #
 ########################################################################
 
-query InitializeVariables
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
-{
-  emptyArray: _echo(value: [])
-    @export(as: "stringsToTranslate")
-}
-
 query ExportData($fileURL: URL!)
-  @depends(on: "InitializeVariables")
 {
   getContentsFromURL: _sendHTTPRequest(input: { url: $fileURL, method: GET }) {
     content: body
