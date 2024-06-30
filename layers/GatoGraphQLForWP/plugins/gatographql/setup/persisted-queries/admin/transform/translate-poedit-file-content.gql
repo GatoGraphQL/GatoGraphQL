@@ -28,22 +28,49 @@ query ExportData($fileURL: URL!)
     content: body
       @export(as: "content")
   }
-  regex: _echo(value: "#msgid \"(.+)\"\nmsgstr \"\"#")
-    @export(as: "regex")
+
+  regexIndividual: _echo(value: "#msgid \"(.+)\"\nmsgstr \"\"#")
+    @export(as: "regexIndividual")
+
+  regexMultipleSingular: _echo(value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \"\"#")
+    @export(as: "regexMultipleSingular")
+
+  regexMultiplePlural: _echo(value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \".*\"\nmsgstr\\[1\\] \"\"#")
+    @export(as: "regexMultiplePlural")
 }
 
 query ExtractStringsToTranslate
   @depends(on: "ExportData")
 {
-  stringsToTranslateMatches: _strRegexFindMatches(
+  stringsToTranslateIndividualMatches: _strRegexFindMatches(
     string: $content,
-    regex: $regex
+    regex: $regexIndividual
   )
-  stringsToTranslate: _arrayItem(
-    array: $__stringsToTranslateMatches,
+  stringsToTranslateIndividual: _arrayItem(
+    array: $__stringsToTranslateIndividualMatches,
     position: 1
   )
-     @export(as: "stringsToTranslate")
+     @export(as: "stringsToTranslateIndividual")
+
+  stringsToTranslateMultipleSingularMatches: _strRegexFindMatches(
+    string: $content,
+    regex: $regexMultipleSingular
+  )
+  stringsToTranslateMultipleSingular: _arrayItem(
+    array: $__stringsToTranslateMultipleSingularMatches,
+    position: 1
+  )
+     @export(as: "stringsToTranslateMultipleSingular")
+
+  stringsToTranslateMultiplePluralMatches: _strRegexFindMatches(
+    string: $content,
+    regex: $regexMultiplePlural
+  )
+  stringsToTranslateMultiplePlural: _arrayItem(
+    array: $__stringsToTranslateMultiplePluralMatches,
+    position: 1
+  )
+     @export(as: "stringsToTranslateMultiplePlural")
 }
 
 query TranslateStrings(
@@ -51,8 +78,11 @@ query TranslateStrings(
   $toLang: String!
 )
   @depends(on: "ExtractStringsToTranslate")
-{  
-  translatedStrings: _echo(value: $stringsToTranslate)
+{ 
+  stringsToTranslate: _arrayMerge(
+    arrays: [$stringsToTranslateIndividual, $stringsToTranslateMultipleSingular, $stringsToTranslateMultiplePlural]
+  )
+  translatedStrings: _echo(value: $__stringsToTranslate)
     @underEachArrayItem
       @strTranslate(from: $fromLang, to: $toLang)
     @export(as: "translatedStrings")
@@ -61,29 +91,85 @@ query TranslateStrings(
 query ExportReplacements
   @depends(on: "TranslateStrings")
 {
-  entriesCount: _arrayLength(array: $translatedStrings)
-  replaceFrom: _arrayPad(
-    array: [],
-    length: $__entriesCount,
-    value: $regex
+  entriesCountIndividual: _arrayLength(array: $stringsToTranslateIndividual)
+  entriesCountMultipleSingular: _arrayLength(array: $stringsToTranslateMultipleSingular)
+  entriesCountMultiplePlural: _arrayLength(array: $stringsToTranslateMultiplePlural)
+  
+  offsetMultiplePlural: _intAdd(add: $__entriesCountIndividual, to: $__entriesCountMultipleSingular)
+  
+  translatedStringsIndividual: _arraySlice(
+    array: $translatedStrings,
+    length: $__entriesCountIndividual,
+    offset: 0
   )
-    @export(as: "replaceFrom")
-  replaceWith: _echo(value: $translatedStrings)
+  translatedStringsMultipleSingular: _arraySlice(
+    array: $translatedStrings,
+    length: $__entriesCountMultipleSingular,
+    offset: $__entriesCountIndividual
+  )
+  translatedStringsMultiplePlural: _arraySlice(
+    array: $translatedStrings,
+    length: $__entriesCountMultiplePlural,
+    offset: $__offsetMultiplePlural
+  )
+  
+  replaceFromIndividual: _arrayPad(
+    array: [],
+    length: $__entriesCountIndividual,
+    value: $regexIndividual
+  )
+    @export(as: "replaceFromIndividual")
+  replaceFromMultipleSingular: _arrayPad(
+    array: [],
+    length: $__entriesCountMultipleSingular,
+    value: $regexMultipleSingular
+  )
+    @export(as: "replaceFromMultipleSingular")
+  replaceFromMultiplePlural: _arrayPad(
+    array: [],
+    length: $__entriesCountMultiplePlural,
+    # value: $regexMultiplePlural
+    value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \"(.*)\"\nmsgstr\\[1\\] \"\"#"
+  )
+    @export(as: "replaceFromMultiplePlural")
+  
+  replaceWithIndividual: _echo(value: $__translatedStringsIndividual)
     @underEachArrayItem(
       affectDirectivesUnderPos: [1, 2]
     )
       @strPrepend(string: "msgid \"$1\"\nmsgstr \"")
       @strAppend(string: "\"")
-    @export(as: "replaceWith")
+    @export(as: "replaceWithIndividual")  
+  replaceWithMultipleSingular: _echo(value: $__translatedStringsMultipleSingular)
+    @underEachArrayItem(
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @strPrepend(string: "msgid_plural \"$1\"\nmsgstr[0] \"")
+      @strAppend(string: "\"")
+    @export(as: "replaceWithMultipleSingular")
+  replaceWithMultiplePlural: _echo(value: $__translatedStringsMultiplePlural)
+    @underEachArrayItem(
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @strPrepend(string: "msgid_plural \"$1\"\nmsgstr[0] \"$2\"\nmsgstr[1] \"")
+      @strAppend(string: "\"")
+    @export(as: "replaceWithMultiplePlural")
 }
 
 query GenerateTranslatedPoeditFile
   @depends(on: "ExportReplacements")
 {
+  replaceFrom: _arrayMerge(
+    arrays: [$replaceFromIndividual, $replaceFromMultipleSingular, $replaceFromMultiplePlural]
+  )
+  replaceWith: _arrayMerge(
+    arrays: [$replaceWithIndividual, $replaceWithMultipleSingular, $replaceWithMultiplePlural]
+  )
+
   translatedContent: _strRegexReplaceMultiple(
     in: $content,
-    searchRegex: $replaceFrom,
-    replaceWith: $replaceWith,
+    searchRegex: $__replaceFrom,
+    replaceWith: $__replaceWith,
     limit: 1
   )
 }
