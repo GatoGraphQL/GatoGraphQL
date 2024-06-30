@@ -171,4 +171,45 @@ query GenerateTranslatedPoeditFile
     replaceWith: $__replaceWith,
     limit: 1
   )
+    @export(as: "translatedContent")
+}
+
+mutation CreateAndUploadTranslatedPoeditFile(
+  $toLang: String!
+)
+  @depends(on: "GenerateTranslatedPoeditFile")
+{
+  filename: _sprintf(
+    string: "%s.po",
+    values: $toLang
+  )
+  title: _sprintf(
+    string: "Poedit translation file for %s",
+    values: $toLang
+  )
+  createMediaItem(input: {
+    from: {
+      contents: {
+        body: $translatedContent
+        filename: $__filename
+      }
+    }
+    title: $__title
+    mimeType: "text/plain"
+  }) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      mimeType
+      mediaItemSlug: slug
+      mediaItemSrc: src
+      title
+    }
+  }
 }
