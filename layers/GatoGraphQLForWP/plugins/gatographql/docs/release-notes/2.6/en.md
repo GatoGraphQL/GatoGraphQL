@@ -105,6 +105,10 @@ might return:
 }
 ```
 
+## Fixed
+
+- Identifying extension in `createMediaItem` when filename has more then one dot
+
 ## [PRO] Improvements
 
 - [PRO] Added input `valueWhenNonExistingKeyOrPath` to field `_objectProperty`

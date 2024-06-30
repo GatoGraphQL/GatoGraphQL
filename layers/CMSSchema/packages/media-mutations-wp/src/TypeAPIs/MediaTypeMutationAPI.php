@@ -137,7 +137,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             return $filename;
         }
 
-        if (strpos($filename, '.') !== false) {
+        if (strrpos($filename, '.') !== false) {
             return $filename;
         }
 
