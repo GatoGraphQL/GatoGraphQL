@@ -115,6 +115,14 @@ This query, containing a variety of function fields and directives:
       2
     ],
     "_arrayLength": 3,
+    "_strRegexFindMatches": [
+      [
+        "https:\/\/gatographql.com"
+      ],
+      [
+        "gatographql.com"
+      ]
+    ],
     "_strReplace": "http://gatographql.com",
     "_strReplaceMultiple": "http://doggraphql.com",
     "_strRegexReplace": "gatographql.com",
