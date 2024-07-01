@@ -289,7 +289,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 = 2.6.0 =
 * Added `siteURL` field (#2697)
 * Added fields to fetch multisite data (#2698)
-* Added documentation for integration with MultilingualPress (#2699)
+* Added documentation for PRO integration with MultilingualPress (#2699)
+* Added documentation for new PRO field `_strRegexFindMatches`
 * Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries (#2694 / #2700):
   * [PRO] Translate posts for Polylang (Gutenberg)
   * [PRO] Translate posts for Polylang (Classic editor)
