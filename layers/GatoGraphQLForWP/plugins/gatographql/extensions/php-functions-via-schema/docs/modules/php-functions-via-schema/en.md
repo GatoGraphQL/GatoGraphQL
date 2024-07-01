@@ -24,9 +24,11 @@ This query, containing a variety of function fields and directives:
   _arrayKeys(array: ["uno", "dos", "tres"])
   _arrayLength(array: ["uno", "dos", "tres"])
 
+  _strRegexFindMatches(regex: "/https?:\\/\\/([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,})/", string: "In website https://gatographql.com there is more information")
+  
   _strReplace(search: "https://", replaceWith: "http://", in: "https://gatographql.com")
   _strReplaceMultiple(search: ["https://", "gato"], replaceWith: ["http://", "dog"], in: "https://gatographql.com")
-  _strRegexFindMatches(regex: "/https?:\\/\\/([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,})/", string: "In website https://gatographql.com there is more information")
+  _strRegexReplace(searchRegex: "/^https?:\\/\\//", replaceWith: "", in: "https://gatographql.com")
   _strRegexReplaceMultiple(searchRegex: ["/^https?:\\/\\//", "/([a-z]*)/"], replaceWith: ["", "$1$1"], in: "https://gatographql.com")
   
   _strStartsWith(search: "orld", in: "Hello world")
