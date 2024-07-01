@@ -141,18 +141,18 @@
     ],
     "require": {
         "php": "^8.1",
-        "phpunit-for-gatographql/dummy-schema": "^2.6.1",
-        "phpunit-for-gatographql/dummy-wp-schema": "^2.6.1",
-        "phpunit-for-gatographql/webserver-requests": "^2.6.1",
-        "phpunit-for-gatographql/wpfaker-schema": "^2.6.1",
-        "pop-cms-schema/comment-mutations-wp": "^2.6.1",
-        "pop-cms-schema/post-categories-wp": "^2.6.1",
-        "pop-cms-schema/post-tags-wp": "^2.6.1",
-        "pop-cms-schema/user-state-mutations-wp": "^2.6.1",
-        "pop-wp-schema/comments": "^2.6.1",
-        "pop-wp-schema/pages": "^2.6.1",
-        "pop-wp-schema/posts": "^2.6.1",
-        "pop-wp-schema/users": "^2.6.1"
+        "phpunit-for-gatographql/dummy-schema": "^2.7",
+        "phpunit-for-gatographql/dummy-wp-schema": "^2.7",
+        "phpunit-for-gatographql/webserver-requests": "^2.7",
+        "phpunit-for-gatographql/wpfaker-schema": "^2.7",
+        "pop-cms-schema/comment-mutations-wp": "^2.7",
+        "pop-cms-schema/post-categories-wp": "^2.7",
+        "pop-cms-schema/post-tags-wp": "^2.7",
+        "pop-cms-schema/user-state-mutations-wp": "^2.7",
+        "pop-wp-schema/comments": "^2.7",
+        "pop-wp-schema/pages": "^2.7",
+        "pop-wp-schema/posts": "^2.7",
+        "pop-wp-schema/users": "^2.7"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -178,7 +178,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "2.6-dev"
+            "dev-master": "2.7-dev"
         }
     },
     "config": {
