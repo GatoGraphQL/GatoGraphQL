@@ -151,8 +151,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/schema-commons-wp": "^2.6",
-        "pop-cms-schema/taxonomyquery": "^2.6"
+        "pop-cms-schema/schema-commons-wp": "^2.7",
+        "pop-cms-schema/taxonomyquery": "^2.7"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.4",
@@ -182,7 +182,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "2.6-dev"
+            "dev-master": "2.7-dev"
         }
     },
     "config": {
