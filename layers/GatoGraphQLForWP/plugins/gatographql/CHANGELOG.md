@@ -21,6 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added predefined persisted queries:
   - [PRO] Translate posts for MultilingualPress (Gutenberg) (#2706)
   - [PRO] Translate posts for MultilingualPress (Classic editor) (#2706)
+  - [PRO] Translate Poedit file content (#2709)
 - Added Gato GraphQL intro video to documentation (#2707)
 - Tested up to WordPress v6.6
 

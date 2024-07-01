@@ -1,0 +1,219 @@
+########################################################################
+# 
+# Variables:
+#   - fileURL: The URL for the .po/.pot Poedit (https://poedit.net/) file
+#   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
+#   - filestackApiKey: The API key to upload files to Filestack
+#   - (Optional) fromLang: The language code to translate from, from Google Translate
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query translates the empty strings from a
+# Poedit file (by executing a single call to the Google Translate API),
+# and adds those translations in the corresponding entry of a new
+# translation Poedit file.
+#
+# It then uploads the translation file to Filestack (https://www.filestack.com)
+#
+########################################################################
+
+query ExportData($fileURL: URL!)
+{
+  getContentsFromURL: _sendHTTPRequest(input: { url: $fileURL, method: GET }) {
+    content: body
+      @export(as: "content")
+  }
+
+  regexIndividual: _echo(value: "#msgid \"(.+)\"\nmsgstr \"\"#")
+    @export(as: "regexIndividual")
+
+  regexMultipleSingular: _echo(value: "#msgid \"(.+)\"\nmsgid_plural \".*\"\nmsgstr\\[0\\] \"\"#")
+    @export(as: "regexMultipleSingular")
+
+  regexMultiplePlural: _echo(value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \".*\"\nmsgstr\\[1\\] \"\"#")
+    @export(as: "regexMultiplePlural")
+}
+
+query ExtractStringsToTranslate
+  @depends(on: "ExportData")
+{
+  stringsToTranslateIndividualMatches: _strRegexFindMatches(
+    string: $content,
+    regex: $regexIndividual
+  )
+  stringsToTranslateIndividual: _arrayItem(
+    array: $__stringsToTranslateIndividualMatches,
+    position: 1
+  )
+     @export(as: "stringsToTranslateIndividual")
+
+  stringsToTranslateMultipleSingularMatches: _strRegexFindMatches(
+    string: $content,
+    regex: $regexMultipleSingular
+  )
+  stringsToTranslateMultipleSingular: _arrayItem(
+    array: $__stringsToTranslateMultipleSingularMatches,
+    position: 1
+  )
+     @export(as: "stringsToTranslateMultipleSingular")
+
+  stringsToTranslateMultiplePluralMatches: _strRegexFindMatches(
+    string: $content,
+    regex: $regexMultiplePlural
+  )
+  stringsToTranslateMultiplePlural: _arrayItem(
+    array: $__stringsToTranslateMultiplePluralMatches,
+    position: 1
+  )
+     @export(as: "stringsToTranslateMultiplePlural")
+}
+
+query TranslateStrings(
+  $fromLang: String
+  $toLang: String!
+)
+  @depends(on: "ExtractStringsToTranslate")
+{ 
+  stringsToTranslate: _arrayMerge(
+    arrays: [$stringsToTranslateIndividual, $stringsToTranslateMultipleSingular, $stringsToTranslateMultiplePlural]
+  )
+  translatedStrings: _echo(value: $__stringsToTranslate)
+    @underEachArrayItem
+      @strTranslate(from: $fromLang, to: $toLang)
+    @export(as: "translatedStrings")
+}
+
+query ExportReplacements
+  @depends(on: "TranslateStrings")
+{
+  entriesCountIndividual: _arrayLength(array: $stringsToTranslateIndividual)
+  entriesCountMultipleSingular: _arrayLength(array: $stringsToTranslateMultipleSingular)
+  entriesCountMultiplePlural: _arrayLength(array: $stringsToTranslateMultiplePlural)
+  
+  offsetMultiplePlural: _intAdd(add: $__entriesCountIndividual, to: $__entriesCountMultipleSingular)
+  
+  translatedStringsIndividual: _arraySlice(
+    array: $translatedStrings,
+    length: $__entriesCountIndividual,
+    offset: 0
+  )
+  translatedStringsMultipleSingular: _arraySlice(
+    array: $translatedStrings,
+    length: $__entriesCountMultipleSingular,
+    offset: $__entriesCountIndividual
+  )
+  translatedStringsMultiplePlural: _arraySlice(
+    array: $translatedStrings,
+    length: $__entriesCountMultiplePlural,
+    offset: $__offsetMultiplePlural
+  )
+  
+  replaceFromIndividual: _arrayPad(
+    array: [],
+    length: $__entriesCountIndividual,
+    value: $regexIndividual
+  )
+    @export(as: "replaceFromIndividual")
+  replaceFromMultipleSingular: _arrayPad(
+    array: [],
+    length: $__entriesCountMultipleSingular,
+    value: "#msgid \"(.+)\"\nmsgid_plural \"(.*)\"\nmsgstr\\[0\\] \"\"#"
+  )
+    @export(as: "replaceFromMultipleSingular")
+  replaceFromMultiplePlural: _arrayPad(
+    array: [],
+    length: $__entriesCountMultiplePlural,
+    value: "#msgid_plural \"(.+)\"\nmsgstr\\[0\\] \"(.*)\"\nmsgstr\\[1\\] \"\"#"
+  )
+    @export(as: "replaceFromMultiplePlural")
+  
+  replaceWithIndividual: _echo(value: $__translatedStringsIndividual)
+    @underEachArrayItem(
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @strPrepend(string: "msgid \"$1\"\nmsgstr \"")
+      @strAppend(string: "\"")
+    @export(as: "replaceWithIndividual")  
+  replaceWithMultipleSingular: _echo(value: $__translatedStringsMultipleSingular)
+    @underEachArrayItem(
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @strPrepend(string: "msgid \"$1\"\nmsgid_plural \"$2\"\nmsgstr[0] \"")
+      @strAppend(string: "\"")
+    @export(as: "replaceWithMultipleSingular")
+  replaceWithMultiplePlural: _echo(value: $__translatedStringsMultiplePlural)
+    @underEachArrayItem(
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @strPrepend(string: "msgid_plural \"$1\"\nmsgstr[0] \"$2\"\nmsgstr[1] \"")
+      @strAppend(string: "\"")
+    @export(as: "replaceWithMultiplePlural")
+}
+
+query GenerateTranslatedPoeditFile
+  @depends(on: "ExportReplacements")
+{
+  replaceFrom: _arrayMerge(
+    arrays: [$replaceFromIndividual, $replaceFromMultipleSingular, $replaceFromMultiplePlural]
+  )
+  replaceWith: _arrayMerge(
+    arrays: [$replaceWithIndividual, $replaceWithMultipleSingular, $replaceWithMultiplePlural]
+  )
+
+  translatedContent: _strRegexReplaceMultiple(
+    in: $content,
+    searchRegex: $__replaceFrom,
+    replaceWith: $__replaceWith,
+    limit: 1
+  )
+    @export(as: "translatedContent")
+}
+  
+query UploadTranslatedPoeditFile(
+  $toLang: String!
+  $filestackApiKey: String!
+)
+  @depends(on: "GenerateTranslatedPoeditFile")
+{
+  filename: _sprintf(
+    string: "%s.po",
+    values: [$toLang]
+  )
+  url: _sprintf(
+    string: "https://www.filestackapi.com/api/store/S3?key=%s&filename=%s",
+    values: [
+      $filestackApiKey,
+      $__filename
+    ]
+  ) @remove
+  uploadFileToFilestack: _sendHTTPRequest(input: {
+    url: $__url,
+    method: POST,
+    options: {
+      headers: [
+        {
+          name: "Content-Type",
+          value: "plain/text"
+        }
+      ]
+      body: $translatedContent
+    }
+  }) {
+    body
+    jsonBody: _strDecodeJSONObject(string: $__body)
+    uploadedFileURL: _objectProperty(
+      object: $__jsonBody,
+      by: { key: "url" }
+    )
+      @export(as: "uploadedFileURL")
+      @remove
+  }
+}
+
+query UploadTranslatedPoeditFileAndPrintURL
+  @depends(on: "UploadTranslatedPoeditFile")
+{
+  uploadedFileURL: _echo(value: $uploadedFileURL)
+}
