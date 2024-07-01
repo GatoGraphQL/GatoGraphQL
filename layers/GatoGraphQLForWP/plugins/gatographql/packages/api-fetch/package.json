@@ -21,7 +21,7 @@
         "packages-update": "wp-scripts packages-update"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^12.1.0",
+        "@wordpress/scripts": "^27.9.0",
         "graphql-request": "^1.8.2"
     }
 }

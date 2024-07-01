@@ -22,12 +22,12 @@
     },
     "devDependencies": {
         "@gatographql/api-fetch": "file:../api-fetch",
-        "@wordpress/base-styles": "^2.0.0",
-        "@wordpress/components": "^10.0.0",
-        "@wordpress/compose": "^3.19.0",
-        "@wordpress/data": "^4.22.0",
-        "@wordpress/edit-post": "^3.21.0",
-        "@wordpress/scripts": "^12.1.0",
+        "@wordpress/base-styles": "^4.49.0",
+        "@wordpress/components": "^27.6.0",
+        "@wordpress/compose": "^6.35.0",
+        "@wordpress/data": "^9.28.0",
+        "@wordpress/edit-post": "^7.35.0",
+        "@wordpress/scripts": "^27.9.0",
         "prettier": "npm:wp-prettier@2.0.5",
         "raw-loader": "^4.0.2",
         "react-select": "^3.0.8"
