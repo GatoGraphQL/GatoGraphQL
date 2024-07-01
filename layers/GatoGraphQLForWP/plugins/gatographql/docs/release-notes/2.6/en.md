@@ -3,7 +3,7 @@
 ## Improvements
 
 - Added documentation for PRO integration with MultilingualPress ([#2699](https://github.com/GatoGraphQL/GatoGraphQL/pull/2699))
-- Added documentation for new PRO field `_strRegexFindMatches`
+- Added documentation for new PRO field `_strRegexFindMatches` ([#2708](https://github.com/GatoGraphQL/GatoGraphQL/pull/2708))
 - Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries ([#2694](https://github.com/GatoGraphQL/GatoGraphQL/pull/2694) / [#2700](https://github.com/GatoGraphQL/GatoGraphQL/pull/2700)):
   - [PRO] Translate posts for Polylang (Gutenberg)
 - Added scalar types to the GraphQL schema:
