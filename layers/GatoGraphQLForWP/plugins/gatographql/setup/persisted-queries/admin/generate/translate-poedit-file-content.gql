@@ -71,7 +71,7 @@ query ExtractStringsToTranslate
 }
 
 query TranslateStrings(
-  $fromLang: String
+  $fromLang: String!
   $toLang: String!
 )
   @depends(on: "ExtractStringsToTranslate")
