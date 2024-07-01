@@ -24,6 +24,8 @@ This query, containing a variety of function fields and directives:
   _arrayKeys(array: ["uno", "dos", "tres"])
   _arrayLength(array: ["uno", "dos", "tres"])
 
+  _strRegexFindMatches(regex: "/https?:\\/\\/([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,})/", string: "In website https://gatographql.com there is more information")
+  
   _strReplace(search: "https://", replaceWith: "http://", in: "https://gatographql.com")
   _strReplaceMultiple(search: ["https://", "gato"], replaceWith: ["http://", "dog"], in: "https://gatographql.com")
   _strRegexReplace(searchRegex: "/^https?:\\/\\//", replaceWith: "", in: "https://gatographql.com")
@@ -113,6 +115,14 @@ This query, containing a variety of function fields and directives:
       2
     ],
     "_arrayLength": 3,
+    "_strRegexFindMatches": [
+      [
+        "https:\/\/gatographql.com"
+      ],
+      [
+        "gatographql.com"
+      ]
+    ],
     "_strReplace": "http://gatographql.com",
     "_strReplaceMultiple": "http://doggraphql.com",
     "_strRegexReplace": "gatographql.com",
@@ -465,7 +475,7 @@ Indicates if a string ends with another string.
 
 ### `_strLength`
 
-Length of the string
+Length of the string.
 
 ### `_strLowerCase`
 
@@ -473,11 +483,15 @@ Transform a string to lower case.
 
 ### `_strPad`
 
-Pad a string to a certain length with another string
+Pad a string to a certain length with another string.
 
 ### `_strPos`
 
-Position of a substring within the string, or `null` if not found
+Position of a substring within the string, or `null` if not found.
+
+### `_strRegexFindMatches`
+
+Execute a regular expression to extract all matches from a string.
 
 ### `_strRegexReplace`
 
