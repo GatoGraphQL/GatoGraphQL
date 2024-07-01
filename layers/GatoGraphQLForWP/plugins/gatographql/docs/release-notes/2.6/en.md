@@ -2,7 +2,8 @@
 
 ## Improvements
 
-- Added documentation for integration with MultilingualPress ([#2699](https://github.com/GatoGraphQL/GatoGraphQL/pull/2699))
+- Added documentation for PRO integration with MultilingualPress ([#2699](https://github.com/GatoGraphQL/GatoGraphQL/pull/2699))
+- Added documentation for new PRO field `_strRegexFindMatches` ([#2708](https://github.com/GatoGraphQL/GatoGraphQL/pull/2708))
 - Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries ([#2694](https://github.com/GatoGraphQL/GatoGraphQL/pull/2694) / [#2700](https://github.com/GatoGraphQL/GatoGraphQL/pull/2700)):
   - [PRO] Translate posts for Polylang (Gutenberg)
 - Added scalar types to the GraphQL schema:
@@ -223,6 +224,35 @@ For instance, you can now run this query:
         }
       }
     }
+  }
+}
+```
+
+### Added field `_strRegexFindMatches`
+
+Field `_strRegexFindMatches` has been added to the **Helper Function Collection** module. This field executes a regular expression to extract all matches from a string.
+
+For instance, running this query:
+
+```graphql
+{
+  _strRegexFindMatches(regex: "/https?:\\/\\/([a-zA-Z0-9][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\\.[a-zA-Z]{2,})/", string: "In website https://gatographql.com there is more information")
+}
+```
+
+...will produce:
+
+```json
+{
+  "data": {
+    "_strRegexFindMatches": [
+      [
+        "https:\/\/gatographql.com"
+      ],
+      [
+        "gatographql.com"
+      ]
+    ]
   }
 }
 ```

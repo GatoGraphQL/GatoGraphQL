@@ -10,7 +10,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added `siteURL` field (#2697)
 - Added fields to fetch multisite data (#2698)
-- Added documentation for integration with MultilingualPress (#2699)
+- Added documentation for PRO integration with MultilingualPress (#2699)
+- Added documentation for new PRO field `_strRegexFindMatches` (#2708)
 - Added GraphQL variables `$translateFromLanguage`, `$includeLanguagesToTranslate` and `$excludeLanguagesToTranslate` to persisted queries (#2694 / #2700):
   - [PRO] Translate posts for Polylang (Gutenberg)
   - [PRO] Translate posts for Polylang (Classic editor)
@@ -34,6 +35,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added automation rules:
   - MultilingualPress: When publishing a post, translate it to all languages (Gutenberg)
   - MultilingualPress: When publishing a post, translate it to all languages (Classic editor)
+- Added field `_strRegexFindMatches`
 
 ## 2.5.2 - 06/06/2024
 
