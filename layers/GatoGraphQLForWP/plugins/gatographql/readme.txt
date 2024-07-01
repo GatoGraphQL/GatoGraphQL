@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: graphql, headless, webhook, api, automator, import export, search replace, google translate, wp-cli, external api, wpgraphql, code snippets
 Requires at least: 5.4
-Tested up to: 6.6
+Tested up to: 6.5
 Stable tag: 2.5.2
 Requires PHP: 8.1
 License: GPLv2 or later
@@ -307,7 +307,6 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * MultilingualPress: When publishing a post, translate it to all languages (Gutenberg)
   * MultilingualPress: When publishing a post, translate it to all languages (Classic editor)
 * Added Gato GraphQL intro video to documentation (#2707)
-* Tested up to WordPress v6.6
 * Fixed identifying extension in `createMediaItem` when filename has more then one dot
 
 = 2.5.2 =
