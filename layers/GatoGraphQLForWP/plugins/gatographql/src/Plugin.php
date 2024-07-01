@@ -1802,6 +1802,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate Poedit file content', 'gatographql'),
+                    'post_excerpt' => \__('Translate the empty strings from a Poedit file, then create a new translation Poedit file for that language, and upload it to Filestack', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
