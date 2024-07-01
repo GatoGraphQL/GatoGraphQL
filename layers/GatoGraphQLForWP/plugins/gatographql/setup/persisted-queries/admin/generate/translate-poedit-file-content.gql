@@ -192,12 +192,6 @@ query UploadTranslatedPoeditFile(
     url: $__url,
     method: POST,
     options: {
-      headers: [
-        {
-          name: "Content-Type",
-          value: "plain/text"
-        }
-      ]
       body: $translatedContent
     }
   }) {
