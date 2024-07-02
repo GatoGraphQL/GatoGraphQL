@@ -253,7 +253,7 @@ fragment MultilingualPressConnectionData {
 
 ### Added field `_strRegexFindMatches`
 
-Field `_strRegexFindMatches` has been added to the **Helper Function Collection** module. This field executes a regular expression to extract all matches from a string.
+Field `_strRegexFindMatches` has been added to the **PHP Functions via Schema** module. This field executes a regular expression to extract all matches from a string.
 
 For instance, running this query:
 
