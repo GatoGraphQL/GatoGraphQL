@@ -141,8 +141,6 @@ For instance, you can now run this query:
 {
   posts {
     __typename
-    id
-    title
     multilingualpressTranslationConnections {
       ...MultilingualPressConnectionData
     }
@@ -152,8 +150,6 @@ For instance, you can now run this query:
 
     categories {
       __typename
-      id
-      name
       multilingualpressTranslationConnections {
         ...MultilingualPressConnectionData
       }
@@ -164,8 +160,6 @@ For instance, you can now run this query:
     
     tags {
       __typename
-      id
-      name
       multilingualpressTranslationConnections {
         ...MultilingualPressConnectionData
       }
@@ -177,8 +171,6 @@ For instance, you can now run this query:
 
   pages {
     __typename
-    id
-    title
     multilingualpressTranslationConnections {
       ...MultilingualPressConnectionData
     }
@@ -216,9 +208,6 @@ For instance, you can now run this query:
   customPosts(filter: { customPostTypes: ["some-cpt", "another-cpt"] }) {
     __typename
     ...on GenericCustomPost {
-      id
-      title
-      customPostType
       multilingualpressIsTranslatable
       multilingualpressTranslationConnections {
         ...MultilingualPressConnectionData
@@ -230,8 +219,6 @@ For instance, you can now run this query:
       categories(taxonomy: "some-category") {
         __typename
         ...on GenericCategory {
-          id
-          name
           multilingualpressIsTranslatable
           multilingualpressTranslationConnections {
             ...MultilingualPressConnectionData
@@ -245,8 +232,6 @@ For instance, you can now run this query:
       tags(taxonomy: "some-tag") {
         __typename
         ...on GenericTag {
-          id
-          name
           multilingualpressIsTranslatable
           multilingualpressTranslationConnections {
             ...MultilingualPressConnectionData
