@@ -143,23 +143,35 @@ For instance, you can now run this query:
     __typename
     id
     title
-    multilingualpressTranslationConnections
-    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
+    multilingualpressTranslationConnections {
+      ...MultilingualPressConnectionData
+    }
+    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true }) {
+      ...MultilingualPressConnectionData
+    }
 
     categories {
       __typename
       id
       name
-      multilingualpressTranslationConnections
-      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
+      multilingualpressTranslationConnections {
+        ...MultilingualPressConnectionData
+      }
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true }) {
+        ...MultilingualPressConnectionData
+      }
     }
     
     tags {
       __typename
       id
       name
-      multilingualpressTranslationConnections
-      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
+      multilingualpressTranslationConnections {
+        ...MultilingualPressConnectionData
+      }
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true }) {
+        ...MultilingualPressConnectionData
+      }
     }
   }
 
@@ -167,9 +179,18 @@ For instance, you can now run this query:
     __typename
     id
     title
-    multilingualpressTranslationConnections
-    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
+    multilingualpressTranslationConnections {
+      ...MultilingualPressConnectionData
+    }
+    multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true }) {
+      ...MultilingualPressConnectionData
+    }
   }
+}
+
+fragment MultilingualPressConnectionData {
+  siteID
+  entityID
 }
 ```
 
@@ -199,8 +220,12 @@ For instance, you can now run this query:
       title
       customPostType
       multilingualpressIsTranslatable
-      multilingualpressTranslationConnections
-      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
+      multilingualpressTranslationConnections {
+        ...MultilingualPressConnectionData
+      }
+      multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true }) {
+        ...MultilingualPressConnectionData
+      }
       
       categories(taxonomy: "some-category") {
         __typename
@@ -208,8 +233,12 @@ For instance, you can now run this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressTranslationConnections
-          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
+          multilingualpressTranslationConnections {
+            ...MultilingualPressConnectionData
+          }
+          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true }) {
+            ...MultilingualPressConnectionData
+          }
         }
       }
       
@@ -219,12 +248,21 @@ For instance, you can now run this query:
           id
           name
           multilingualpressIsTranslatable
-          multilingualpressTranslationConnections
-          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true })
+          multilingualpressTranslationConnections {
+            ...MultilingualPressConnectionData
+          }
+          multilingualpressTranslationConnectionsWithSelf: multilingualpressTranslationConnections(filter: { includeSelf: true }) {
+            ...MultilingualPressConnectionData
+          }
         }
       }
     }
   }
+}
+
+fragment MultilingualPressConnectionData {
+  siteID
+  entityID
 }
 ```
 
