@@ -25,6 +25,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\DictionaryObjectTypeDataLoaderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -378,10 +379,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'updatePostMutationPayloadObjects':
                 /** @var AbstractObjectMutationPayloadObjectTypeResolver */
                 $objectMutationPayloadObjectTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-                /** @var ObjectMutationPayloadObjectTypeDataLoader */
-                $objectMutationPayloadObjectTypeDataLoader = $objectMutationPayloadObjectTypeResolver->getRelationalTypeDataLoader();
+                /** @var DictionaryObjectTypeDataLoaderInterface */
+                $dictionaryObjectTypeDataLoader = $objectMutationPayloadObjectTypeResolver->getRelationalTypeDataLoader();
                 return $this->resolveMutationPayloadObjectsValue(
-                    $objectMutationPayloadObjectTypeDataLoader->getObjectClass(),
+                    $dictionaryObjectTypeDataLoader->getObjectClass(),
                     $fieldDataAccessor,
                 );
         }
