@@ -32,6 +32,6 @@ class SchemaPayloadTypesForMutationsWithObjectFieldsModifyPluginSettingsFixtureE
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS;
+        return MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS;
     }
 }

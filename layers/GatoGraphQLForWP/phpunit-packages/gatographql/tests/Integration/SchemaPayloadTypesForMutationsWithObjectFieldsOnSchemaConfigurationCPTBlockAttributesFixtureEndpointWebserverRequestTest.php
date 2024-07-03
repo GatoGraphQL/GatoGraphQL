@@ -6,6 +6,8 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
 
 class SchemaPayloadTypesForMutationsWithObjectFieldsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
@@ -34,7 +36,7 @@ class SchemaPayloadTypesForMutationsWithObjectFieldsOnSchemaConfigurationCPTBloc
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [
-            BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
+            SchemaConfigPayloadTypesForMutationsBlock::ATTRIBUTE_NAME_USE_PAYLOAD_TYPE => MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
         ];
     }
 
