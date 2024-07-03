@@ -18,6 +18,8 @@ use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoPSchema\SchemaCommons\RelationalTypeDataLoaders\ObjectType\ObjectMutationPayloadObjectTypeDataLoader;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -370,10 +372,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        switch ($fieldDataAccessor->getFieldName()) {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
             case 'createPostMutationPayloadObjects':
             case 'updatePostMutationPayloadObjects':
-                return $this->resolveMutationPayloadObjectsValue($fieldDataAccessor);
+                /** @var AbstractObjectMutationPayloadObjectTypeResolver */
+                $objectMutationPayloadObjectTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
+                /** @var ObjectMutationPayloadObjectTypeDataLoader */
+                $objectMutationPayloadObjectTypeDataLoader = $objectMutationPayloadObjectTypeResolver->getRelationalTypeDataLoader();
+                return $this->resolveMutationPayloadObjectsValue(
+                    $objectMutationPayloadObjectTypeDataLoader->getObjectClass(),
+                    $fieldDataAccessor,
+                );
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
