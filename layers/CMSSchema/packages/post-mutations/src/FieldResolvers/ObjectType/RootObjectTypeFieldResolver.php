@@ -18,6 +18,7 @@ use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -29,6 +30,7 @@ use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Root\App;
+use stdClass;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -357,5 +359,25 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 break;
         }
         return $validationCheckpoints;
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        switch ($fieldDataAccessor->getFieldName()) {
+            /**
+             * Simply return the same IDs from the filter
+             */
+            case 'createdPostPayloadObjects':
+            case 'updatedPostPayloadObjects':
+                /** @var stdClass */
+                $mutationPayloadObjectsInput = $fieldDataAccessor->getValue('input');
+                return $mutationPayloadObjectsInput->ids;
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
