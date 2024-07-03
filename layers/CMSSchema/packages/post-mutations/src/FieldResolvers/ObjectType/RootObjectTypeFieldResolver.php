@@ -189,14 +189,20 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        /** @var CustomPostMutationsModuleConfiguration */
+        $customPostMutationsModuleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $usePayloadableCustomPostMutations = $customPostMutationsModuleConfiguration->usePayloadableCustomPostMutations();
         return array_merge(
             [
                 'createPost',
             ],
-            !$moduleConfiguration->disableRedundantRootTypeMutationFields() ? [
+            !$engineModuleConfiguration->disableRedundantRootTypeMutationFields() ? [
                 'updatePost',
-            ] : []
+            ] : [],
+            $usePayloadableCustomPostMutations ? [
+                'postMutationPayloadObjects',
+            ] : [],
         );
     }
 
@@ -205,6 +211,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'createPost' => $this->__('Create a post', 'post-mutations'),
             'updatePost' => $this->__('Update a post', 'post-mutations'),
+            'postMutationPayloadObjects' => $this->__('Retrieve the payload objects from executing a post mutation', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -221,6 +228,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createPost',
             'updatePost' =>
                 SchemaTypeModifiers::NON_NULLABLE,
+            'postMutationPayloadObjects' =>
+                SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
