@@ -213,7 +213,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
         /** @var CustomPostMutationsModuleConfiguration */
         $customPostMutationsModuleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
-        $usePayloadableCustomPostMutations = $customPostMutationsModuleConfiguration->usePayloadableCustomPostMutations();
+        $addFieldsToQueryPayloadableCustomPostMutations = $customPostMutationsModuleConfiguration->addFieldsToQueryPayloadableCustomPostMutations();
         return array_merge(
             [
                 'createPost',
@@ -221,7 +221,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             !$engineModuleConfiguration->disableRedundantRootTypeMutationFields() ? [
                 'updatePost',
             ] : [],
-            $usePayloadableCustomPostMutations ? [
+            $addFieldsToQueryPayloadableCustomPostMutations ? [
                 'createPostMutationPayloadObjects',
                 'updatePostMutationPayloadObjects',
             ] : [],
