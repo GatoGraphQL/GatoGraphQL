@@ -54,7 +54,7 @@ class MutationPayloadObjectsInputObjectTypeResolver extends AbstractQueryableInp
     {
         return match ($inputFieldName) {
             'ids'
-                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getInputFieldTypeModifiers($inputFieldName),
         };
