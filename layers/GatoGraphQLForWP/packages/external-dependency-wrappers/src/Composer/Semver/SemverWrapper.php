@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\ExternalDependencyWrappers\Composer\Semver;
 
 use Composer\Semver\Semver;
+use Exception;
 
 /**
  * Wrapper for Composer\Semver\Semver.
@@ -25,6 +26,15 @@ class SemverWrapper
         if ($constraints === '*') {
             return true;
         }
-        return Semver::satisfies($version, $constraints);
+        /**
+         * If passing a wrong value to validate against
+         * (eg: "saraza" instead of "1.0.0"),
+         * it will throw an Exception
+         */
+        try {
+            return Semver::satisfies($version, $constraints);
+        } catch (Exception) {
+            return false;
+        }
     }
 }

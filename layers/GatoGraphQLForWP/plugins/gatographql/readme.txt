@@ -286,6 +286,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 2.6.2 =
+* Fixed bug: Catch exception if dependency version is not semver (#2712)
+
 = 2.6.0 =
 * Added `siteURL` field (#2697)
 * Added fields to fetch multisite data (#2698)
