@@ -11,8 +11,13 @@ class SchemaCustomPostTagMutationsBlockSchemaConfigurationExecuter extends Abstr
         return \PoPCMSSchema\CustomPostTagMutations\Module::class;
     }
 
-    public function getHookEnvironmentClass(): string
+    public function getHookUsePayloadableEnvironmentClass(): string
     {
         return \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS;
+    }
+
+    public function getHookAddFieldsToQueryPayloadableEnvironmentClass(): string
+    {
+        return \PoPCMSSchema\CustomPostTagMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS;
     }
 }

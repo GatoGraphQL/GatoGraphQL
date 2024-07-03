@@ -11,8 +11,13 @@ class SchemaCommentMutationsBlockSchemaConfigurationExecuter extends AbstractSch
         return \PoPCMSSchema\CommentMutations\Module::class;
     }
 
-    public function getHookEnvironmentClass(): string
+    public function getHookUsePayloadableEnvironmentClass(): string
     {
         return \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS;
+    }
+
+    public function getHookAddFieldsToQueryPayloadableEnvironmentClass(): string
+    {
+        return \PoPCMSSchema\CommentMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_COMMENT_MUTATIONS;
     }
 }
