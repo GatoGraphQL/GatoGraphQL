@@ -1,4 +1,4 @@
-query SchemaTypeNames {
+query SchemaTypeAndFieldNames {
     __schema {
         types {
             name
