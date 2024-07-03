@@ -216,7 +216,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'updatePost',
             ] : [],
             $usePayloadableCustomPostMutations ? [
-                'postMutationPayloadObjects',
+                'createPostMutationPayloadObjects',
+                'updatePostMutationPayloadObjects',
             ] : [],
         );
     }
@@ -226,7 +227,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'createPost' => $this->__('Create a post', 'post-mutations'),
             'updatePost' => $this->__('Update a post', 'post-mutations'),
-            'postMutationPayloadObjects' => $this->__('Retrieve the payload objects from executing a post mutation', 'post-mutations'),
+            'createPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from executing the `createPost` mutation', 'post-mutations'),
+            'updatePostMutationPayloadObjects' => $this->__('Retrieve the payload objects from executing the `updatePost` mutation', 'post-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -241,10 +243,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return match ($fieldName) {
             'createPost',
-            'updatePost' =>
-                SchemaTypeModifiers::NON_NULLABLE,
-            'postMutationPayloadObjects' =>
-                SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'updatePost'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'createPostMutationPayloadObjects',
+            'updatePostMutationPayloadObjects'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -262,7 +265,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'updatePost' => [
                 'input' => $this->getRootUpdatePostInputObjectTypeResolver(),
             ],
-            'postMutationPayloadObjects' => [
+            'createPostMutationPayloadObjects',
+            'updatePostMutationPayloadObjects' => [
                 'input' => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
@@ -300,9 +304,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if ($usePayloadableCustomPostMutations) {
             return match ($fieldName) {
-                'createPost' => $this->getRootCreatePostMutationPayloadObjectTypeResolver(),
-                'updatePost' => $this->getRootUpdatePostMutationPayloadObjectTypeResolver(),
-                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+                'createPost',
+                'createPostMutationPayloadObjects'
+                    => $this->getRootCreatePostMutationPayloadObjectTypeResolver(),
+                'updatePost',
+                'updatePostMutationPayloadObjects'
+                    => $this->getRootUpdatePostMutationPayloadObjectTypeResolver(),
+                default
+                    => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
