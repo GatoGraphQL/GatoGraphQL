@@ -109,6 +109,7 @@ might return:
 ## Fixed
 
 - Identifying extension in `createMediaItem` when filename has more then one dot
+- Catch exception if dependency version is not semver (`v2.6.2`)
 
 ## [PRO] Improvements
 
