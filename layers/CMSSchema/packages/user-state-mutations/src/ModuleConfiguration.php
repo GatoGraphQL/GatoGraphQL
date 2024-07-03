@@ -28,6 +28,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function addFieldsToQueryPayloadableUserStateMutations(): bool
     {
+        if (!$this->usePayloadableUserStateMutations()) {
+            return false;
+        }
+        
         $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_USERSTATE_MUTATIONS;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);

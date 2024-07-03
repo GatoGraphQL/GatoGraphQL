@@ -28,6 +28,10 @@ class ModuleConfiguration extends AbstractModuleConfiguration
 
     public function addFieldsToQueryPayloadableMediaMutations(): bool
     {
+        if (!$this->usePayloadableMediaMutations()) {
+            return false;
+        }
+        
         $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_MEDIA_MUTATIONS;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);
