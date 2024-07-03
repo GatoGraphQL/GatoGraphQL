@@ -9,7 +9,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryOb
 
 class CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
 {
-    protected function getObjectClass(): string
+    public function getObjectClass(): string
     {
         return CommentsAreNotOpenForCustomPostErrorPayload::class;
     }

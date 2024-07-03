@@ -38,5 +38,5 @@ abstract class AbstractDictionaryObjectTypeDataLoader extends AbstractObjectType
         );
     }
 
-    abstract protected function getObjectClass(): string;
+    abstract public function getObjectClass(): string;
 }
