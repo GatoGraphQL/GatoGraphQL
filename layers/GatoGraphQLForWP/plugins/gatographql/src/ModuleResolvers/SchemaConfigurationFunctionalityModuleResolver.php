@@ -10,6 +10,7 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 
 class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -163,7 +164,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ModuleSettingOptions::DEFAULT_VALUE => true,
             ],
             self::MUTATIONS => [
-                self::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => true,
+                self::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE => MutationPayloadTypeOptions::USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             self::NESTED_MUTATIONS => [
                 ModuleSettingOptions::DEFAULT_VALUE => MutationSchemes::STANDARD,
@@ -272,6 +273,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::MUTATIONS) {
+            $possibleValues = [
+                MutationPayloadTypeOptions::USE_PAYLOAD_TYPES_FOR_MUTATIONS => \__('Use payload types for mutations', 'gatographql'),
+                MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS => \__('Use payload types for mutations, and add fields to query those payload objects', 'gatographql'),
+                MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS => \__('Do not use payload types for mutations (i.e. return the mutated entity)', 'gatographql'),
+            ];
             $option = self::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -284,7 +290,8 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     \__('Use payload types for mutations in the schema?<br/>%s', 'gatographql'),
                     $defaultValueDesc
                 ),
-                Properties::TYPE => Properties::TYPE_BOOL,
+                Properties::TYPE => Properties::TYPE_STRING,
+                Properties::POSSIBLE_VALUES => $possibleValues,
             ];
 
             $moduleSettings[] = [
@@ -292,7 +299,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $module,
                     'payload-types-intro'
                 ),
-                Properties::DESCRIPTION => \__('✅ <strong>Checked</strong>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/>🟥 <strong>Unchecked</strong>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'gatographql'),
+                Properties::DESCRIPTION => \__('<strong>Use payload types for mutations</strong>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/><strong>Use payload types for mutations, and add fields to query those payload objects</strong>:<br/><br/>In addition, query fields will be added to retrieve once again those payload objects.<br/><br/><strong>Do not use payload types for mutations (i.e. return the mutated entity)</strong>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::NESTED_MUTATIONS) {

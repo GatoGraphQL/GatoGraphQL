@@ -23,6 +23,7 @@ use GraphQLByPoP\GraphQLClientsForWP\Environment as GraphQLClientsForWPEnvironme
 use GraphQLByPoP\GraphQLClientsForWP\Module as GraphQLClientsForWPModule;
 use GraphQLByPoP\GraphQLEndpointForWP\Environment as GraphQLEndpointForWPEnvironment;
 use GraphQLByPoP\GraphQLEndpointForWP\Module as GraphQLEndpointForWPModule;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use GraphQLByPoP\GraphQLServer\Environment as GraphQLServerEnvironment;
 use GraphQLByPoP\GraphQLServer\Module as GraphQLServerModule;
@@ -583,42 +584,49 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'envVariable' => \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostTagMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMediaMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\UserStateMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\MediaMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\MediaMutations\Environment::USE_PAYLOADABLE_MEDIA_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             // Sensitive data
             [
