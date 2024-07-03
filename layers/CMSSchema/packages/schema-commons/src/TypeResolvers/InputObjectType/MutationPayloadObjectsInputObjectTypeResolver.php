@@ -9,7 +9,7 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjec
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
-class FilterByIDsInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
+class MutationPayloadObjectsInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
 
@@ -29,7 +29,7 @@ class FilterByIDsInputObjectTypeResolver extends AbstractQueryableInputObjectTyp
 
     public function getTypeName(): string
     {
-        return 'FilterByIDsInput';
+        return 'MutationPayloadObjectsInput';
     }
 
     /**
@@ -45,7 +45,7 @@ class FilterByIDsInputObjectTypeResolver extends AbstractQueryableInputObjectTyp
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'ids' => $this->__('Filter by IDs', 'schema-commons'),
+            'ids' => $this->__('IDs of the payload objects for the recently-executed mutations', 'schema-commons'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
