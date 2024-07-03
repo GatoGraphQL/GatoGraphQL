@@ -17,8 +17,8 @@ import { __ } from '@wordpress/i18n';
  */
 import EditBlock from './edit';
 import {
-	ATTRIBUTE_VALUE_DEFAULT,
-} from '@gatographql/components';
+	ATTRIBUTE_VALUE_PAYLOAD_TYPE_DEFAULT,
+} from './mutation-payload-type-options';
 
 /**
  * Every block starts by registering a new block type definition.
@@ -59,11 +59,11 @@ registerBlockType( 'gatographql/schema-config-payload-types-for-mutations', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames::ENABLED_CONST
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock::ATTRIBUTE_NAME_USE_PAYLOAD_TYPE
 		 */
-		enabledConst: {
+		usePayloadType: {
 			type: 'string',
-			default: ATTRIBUTE_VALUE_DEFAULT,
+			default: ATTRIBUTE_VALUE_PAYLOAD_TYPE_DEFAULT,
 		},
 	},
 
