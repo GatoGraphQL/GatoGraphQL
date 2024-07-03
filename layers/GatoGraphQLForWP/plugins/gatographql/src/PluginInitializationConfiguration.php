@@ -587,11 +587,25 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
+                'class' => \PoPCMSSchema\CommentMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\CommentMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_COMMENT_MUTATIONS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value === MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
+            ],
+            [
                 'class' => \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
                 'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
+            ],
+            [
+                'class' => \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\CustomPostCategoryMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value === MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMutations\Module::class,
@@ -601,11 +615,25 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
+                'class' => \PoPCMSSchema\CustomPostMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\CustomPostMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOST_MUTATIONS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value === MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
+            ],
+            [
                 'class' => \PoPCMSSchema\CustomPostTagMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
                 'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
+            ],
+            [
+                'class' => \PoPCMSSchema\CustomPostTagMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\CustomPostTagMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value === MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
                 'class' => \PoPCMSSchema\CustomPostMediaMutations\Module::class,
@@ -615,6 +643,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
+                'class' => \PoPCMSSchema\CustomPostMediaMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\CustomPostMediaMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value === MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
+            ],
+            [
                 'class' => \PoPCMSSchema\UserStateMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
@@ -622,11 +657,25 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             [
+                'class' => \PoPCMSSchema\UserStateMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\UserStateMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_USERSTATE_MUTATIONS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value === MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
+            ],
+            [
                 'class' => \PoPCMSSchema\MediaMutations\Module::class,
                 'envVariable' => \PoPCMSSchema\MediaMutations\Environment::USE_PAYLOADABLE_MEDIA_MUTATIONS,
                 'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
                 'callback' => fn ($value) => $value !== MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
+            ],
+            [
+                'class' => \PoPCMSSchema\MediaMutations\Module::class,
+                'envVariable' => \PoPCMSSchema\MediaMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_MEDIA_MUTATIONS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::MUTATIONS,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE,
+                'callback' => fn ($value) => $value === MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
             ],
             // Sensitive data
             [
@@ -913,21 +962,27 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     // Do use the Payloadable types for mutations
                     \PoPCMSSchema\CommentMutations\Module::class => [
                         \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => true,
+                        \PoPCMSSchema\CommentMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_COMMENT_MUTATIONS => false,
                     ],
                     \PoPCMSSchema\CustomPostCategoryMutations\Module::class => [
                         \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => true,
+                        \PoPCMSSchema\CustomPostCategoryMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS => false,
                     ],
                     \PoPCMSSchema\CustomPostMutations\Module::class => [
                         \PoPCMSSchema\CustomPostMutations\Environment::USE_PAYLOADABLE_CUSTOMPOST_MUTATIONS => true,
+                        \PoPCMSSchema\CustomPostMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOST_MUTATIONS => false,
                     ],
                     \PoPCMSSchema\CustomPostTagMutations\Module::class => [
                         \PoPCMSSchema\CustomPostTagMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => true,
+                        \PoPCMSSchema\CustomPostTagMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS => false,
                     ],
                     \PoPCMSSchema\CustomPostMediaMutations\Module::class => [
                         \PoPCMSSchema\CustomPostMediaMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => true,
+                        \PoPCMSSchema\CustomPostMediaMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTMEDIA_MUTATIONS => false,
                     ],
                     \PoPCMSSchema\UserStateMutations\Module::class => [
                         \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS => true,
+                        \PoPCMSSchema\UserStateMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_USERSTATE_MUTATIONS => false,
                     ],
                 ]
             );
