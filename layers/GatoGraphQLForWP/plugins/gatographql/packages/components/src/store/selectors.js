@@ -85,7 +85,7 @@ function getGlobalFieldsKey( graphQLVariables ) {
  */
 export function isRequestingGlobalFields( state, graphQLVariables ) {
 	const key = getGlobalFieldsKey(graphQLVariables)
-	return state.globalField[ key ]?.isRequesting ?? false;
+	return state.globalFields[ key ]?.isRequesting ?? false;
 }
 
 /**
@@ -98,7 +98,7 @@ export function isRequestingGlobalFields( state, graphQLVariables ) {
  */
 export function getGlobalFields( state, graphQLVariables ) {
 	const key = getGlobalFieldsKey(graphQLVariables)
-	return state.globalField[ key ]?.results ?? [];
+	return state.globalFields[ key ]?.results ?? [];
 }
 
 /**
@@ -111,7 +111,7 @@ export function getGlobalFields( state, graphQLVariables ) {
  */
 export function getRetrievingGlobalFieldsErrorMessage( state, graphQLVariables ) {
 	const key = getGlobalFieldsKey(graphQLVariables)
-	return state.globalField[ key ]?.errorMessage ?? null;
+	return state.globalFields[ key ]?.errorMessage ?? null;
 }
 
 
