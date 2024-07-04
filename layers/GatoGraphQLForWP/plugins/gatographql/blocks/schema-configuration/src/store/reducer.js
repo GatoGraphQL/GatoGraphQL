@@ -16,14 +16,14 @@ export const schemaConfigurations = ( state = {}, action ) => {
 		case 'FETCH_SCHEMA_CONFIGURATIONS':
 			return {
 				...state,
-				[ action.query ]: {
+				[ (action.variables || []).toString() ]: {
 					isRequesting: true,
 				},
 			};
 		case 'RECEIVE_SCHEMA_CONFIGURATIONS':
 			return {
 				...state,
-				[ action.query ]: {
+				[ (action.variables || []).toString() ]: {
 					results: action.schemaConfigurations,
 					errorMessage: action.errorMessage,
 					isRequesting: false,

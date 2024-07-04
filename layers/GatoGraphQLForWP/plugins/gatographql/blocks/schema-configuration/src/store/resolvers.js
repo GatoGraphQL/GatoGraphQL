@@ -11,16 +11,16 @@ import schemaConfigurationsGraphQLQuery from '../../graphql-documents/schema-con
 
 
 export const getSchemaConfigurations =
-	( query = schemaConfigurationsGraphQLQuery ) =>
+	() =>
 	async ( { dispatch } ) => {
-		if ( ! query ) {
-			return;
-		}
+		const query = schemaConfigurationsGraphQLQuery
+		const variables = []
 		try {
-			dispatch( fetchSchemaConfigurations( query ) );
+			dispatch( fetchSchemaConfigurations( variables ) );
 			const response = await fetchGraphQLQuery(
 				GATOGRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT,
-				query
+				query,
+				variables
 			);
 			
 			/**
@@ -28,11 +28,11 @@ export const getSchemaConfigurations =
 			 */
 			const maybeErrorMessage = maybeGetErrorMessage(response);
 			if (maybeErrorMessage) {
-				dispatch( receiveSchemaConfigurations( query, [], maybeErrorMessage ) );
+				dispatch( receiveSchemaConfigurations( variables, [], maybeErrorMessage ) );
 				return
 			}
 
-			const schemaConfigurations = response.data?.schemaConfigurations || [];
-			dispatch( receiveSchemaConfigurations( query, schemaConfigurations ) );
+			const results = response.data?.schemaConfigurations || [];
+			dispatch( receiveSchemaConfigurations( variables, results ) );
 		} catch {}
 	};
