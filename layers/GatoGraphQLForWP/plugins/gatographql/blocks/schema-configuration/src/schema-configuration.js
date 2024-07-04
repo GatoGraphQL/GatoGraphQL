@@ -159,12 +159,12 @@ export default compose( [
 	withSelect( ( select ) => {
 		const {
 			getSchemaConfigurations,
-			hasRetrievedSchemaConfigurations,
+			isRequestingSchemaConfigurations,
 			getRetrievingSchemaConfigurationsErrorMessage,
 		} = select ( 'gatographql/schema-configuration' );
 		return {
 			schemaConfigurations: getSchemaConfigurations(),
-			hasRetrievedItems: hasRetrievedSchemaConfigurations(),
+			isRequestingItems: isRequestingSchemaConfigurations(),
 			errorMessage: getRetrievingSchemaConfigurationsErrorMessage(),
 		};
 	} ),

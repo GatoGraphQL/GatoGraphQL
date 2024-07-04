@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { select, registerStore } from '@wordpress/data';
+import { select, createReduxStore, register } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -9,18 +9,17 @@ import { select, registerStore } from '@wordpress/data';
 import reducer from './reducer';
 import * as selectors from './selectors';
 import * as actions from './actions';
-import resolvers from './resolvers';
-import controls from './controls';
+import * as resolvers from './resolvers';
 
 /**
  * Module Constants
  */
-const MODULE_KEY = 'gatographql/components';
+const STORE_NAME = 'gatographql/components';
 
 /**
  * Block editor data store configuration.
  *
- * @see https://github.com/WordPress/gutenberg/blob/master/packages/data/README.md#registerStore
+ * @see https://github.com/WordPress/gutenberg/blob/HEAD/packages/data/README.md#registerStore
  *
  * @type {Object}
  */
@@ -28,7 +27,6 @@ export const storeConfig = {
 	reducer,
 	selectors,
 	actions,
-	controls,
 	resolvers,
 };
 
@@ -42,6 +40,17 @@ export const storeConfig = {
  * To avoid this, first check if the store already exists. If not, only then
  * register it.
  */
-const store = select( MODULE_KEY ) || registerStore( MODULE_KEY, storeConfig );
+const existingStore = select( STORE_NAME );
 
-export default store;
+/**
+ * Store definition for the block directory namespace.
+ *
+ * @see https://github.com/WordPress/gutenberg/blob/HEAD/packages/data/README.md#createReduxStore
+ *
+ * @type {Object}
+ */
+export const store = existingStore || createReduxStore( STORE_NAME, storeConfig );
+
+if ( ! existingStore ) { 
+	register( store );
+}

@@ -9,8 +9,8 @@ import { Spinner } from '@wordpress/components';
  */
 const withSpinner = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
-		const { hasRetrievedItems } = props;
-		if (!hasRetrievedItems) {
+		const { isRequestingItems } = props;
+		if ( isRequestingItems ) {
 			return <Spinner />
 		}
 
