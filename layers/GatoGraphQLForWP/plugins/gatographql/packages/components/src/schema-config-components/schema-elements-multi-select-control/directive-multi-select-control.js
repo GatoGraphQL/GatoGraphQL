@@ -16,7 +16,7 @@ const DirectiveMultiSelectControl = compose( [
 	withSelect( ( select ) => {
 		const {
 			getDirectives,
-			hasRetrievedDirectives,
+			isRequestingDirectives,
 			getRetrievingDirectivesErrorMessage,
 		} = select ( 'gatographql/components' );
 		/**
@@ -32,7 +32,7 @@ const DirectiveMultiSelectControl = compose( [
 		) );
 		return {
 			items,
-			isRequestingItems: ! hasRetrievedDirectives(),
+			isRequestingItems: isRequestingDirectives(),
 			errorMessage: getRetrievingDirectivesErrorMessage(),
 		};
 	} ),
