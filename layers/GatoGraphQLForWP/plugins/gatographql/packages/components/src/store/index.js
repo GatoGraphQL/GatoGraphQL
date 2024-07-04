@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { createReduxStore, register } from '@wordpress/data';
+import { select, createReduxStore, register } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -40,9 +40,7 @@ export const storeConfig = {
  * To avoid this, first check if the store already exists. If not, only then
  * register it.
  */
-if ( select( STORE_NAME ) ) {
-	return;
-}
+const existingStore = select( STORE_NAME );
 
 /**
  * Store definition for the block directory namespace.
@@ -51,6 +49,8 @@ if ( select( STORE_NAME ) ) {
  *
  * @type {Object}
  */
-export const store = createReduxStore( STORE_NAME, storeConfig );
+export const store = existingStore || createReduxStore( STORE_NAME, storeConfig );
 
-register( store );
+if ( ! existingStore ) { 
+	register( store );
+}
