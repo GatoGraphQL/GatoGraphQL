@@ -15,16 +15,16 @@ export function fetchTypeFields( graphQLVariables ) {
  * have been updated.
  *
  * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
- * @param {Array} schemaConfigurations Type fields.
+ * @param {Array} typeFields Type fields.
  * @param {string|null} errorMessage Error message if fetching the objects failed
  *
  * @return {Object} Action object.
  */
-export function receiveTypeFields( graphQLVariables, schemaConfigurations, errorMessage ) {
+export function receiveTypeFields( graphQLVariables, typeFields, errorMessage ) {
 	return {
 		type: 'RECEIVE_TYPE_FIELDS',
 		graphQLVariables,
-		schemaConfigurations,
+		typeFields,
 		errorMessage,
 	};
 }
@@ -46,16 +46,16 @@ export function fetchGlobalFields( graphQLVariables ) {
  * have been updated.
  *
  * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
- * @param {Array} schemaConfigurations Global fields.
+ * @param {Array} globalFields Global fields.
  * @param {string|null} errorMessage Error message if fetching the objects failed
  *
  * @return {Object} Action object.
  */
-export function receiveGlobalFields( graphQLVariables, schemaConfigurations, errorMessage ) {
+export function receiveGlobalFields( graphQLVariables, globalFields, errorMessage ) {
 	return {
 		type: 'RECEIVE_GLOBAL_FIELDS',
 		graphQLVariables,
-		schemaConfigurations,
+		globalFields,
 		errorMessage,
 	};
 }
@@ -77,16 +77,16 @@ export function fetchDirectives( graphQLVariables ) {
  * have been updated.
  *
  * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
- * @param {Array} schemaConfigurations Directives.
+ * @param {Array} directives Directives.
  * @param {string|null} errorMessage Error message if fetching the objects failed
  *
  * @return {Object} Action object.
  */
-export function receiveDirectives( graphQLVariables, schemaConfigurations, errorMessage ) {
+export function receiveDirectives( graphQLVariables, directives, errorMessage ) {
 	return {
 		type: 'RECEIVE_DIRECTIVES',
 		graphQLVariables,
-		schemaConfigurations,
+		directives,
 		errorMessage,
 	};
 }
