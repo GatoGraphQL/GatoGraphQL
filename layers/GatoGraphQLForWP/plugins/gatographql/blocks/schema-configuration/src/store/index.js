@@ -8,7 +8,7 @@ import { registerStore } from '@wordpress/data';
  */
 import reducer from './reducer';
 import * as selectors from './selectors';
-import * as actions from './action-creators';
+import * as actions from './actions';
 import resolvers from './resolvers';
 import controls from './controls';
 
