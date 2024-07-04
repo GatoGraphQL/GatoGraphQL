@@ -22,12 +22,39 @@ export function isRequestingTypeFields( state, graphQLVariables ) {
  *
  * @param {Object} state Global application state.
  * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
+ * @param {bool} keepScalarTypes Keep the scalar types in the typeFields object
+ * @param {bool} keepIntrospectionTypes Keep the introspection types (__Type, __Directive, __Field, etc) in the typeFields object
  *
  * @return {Array} Schema configurations.
  */
-export function getTypeFields( state, graphQLVariables ) {
+export function getTypeFields( state, graphQLVariables, keepScalarTypes = false, keepIntrospectionTypes = false ) {
 	const key = getTypeFieldsKey(graphQLVariables)
-	return state.typeFields[ key ]?.results ?? [];
+	let typeFields = state.typeFields[ key ]?.results ?? [];
+
+	/**
+	 * Each element in typeFields has this shape:
+	 * {
+	 *   "typeName": string
+	 *   "typeNamespacedName": string
+	 *   "fields": array|null
+	 * }
+	 */
+
+	/**
+	 * Scalar types are those with no fields
+	 */
+	if ( !keepScalarTypes ) {
+		typeFields = typeFields.filter(element => element.fields != null);
+	}
+
+	/**
+	 * Introspection types (eg: __Schema, __Directive, __Type, etc) start with "__"
+	 */
+	if ( !keepIntrospectionTypes ) {
+		typeFields = typeFields.filter(element => !element.typeName.startsWith('__'));
+	}
+
+	return typeFields;
 }
 
 /**
