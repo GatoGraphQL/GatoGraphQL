@@ -1,43 +1,38 @@
 /**
- * WordPress dependencies
- */
-import { __ } from '@wordpress/i18n';
-/**
  * Internal dependencies
  */
+import { fetchSchemaConfigurations, receiveSchemaConfigurations } from './actions';
 import { maybeGetErrorMessage } from '@gatographql/components';
-
-/**
- * External dependencies
- */
-import {
-	receiveSchemaConfigurations,
-	setSchemaConfigurations,
-} from './actions';
-
+import { fetchGraphQLQuery } from '@gatographql/api-fetch';
 /**
  * GraphQL query to fetch the list of schemaConfigurations from the GraphQL schema
  */
 import schemaConfigurationsGraphQLQuery from '../../graphql-documents/schema-configurations.gql';
 
-export default {
-	/**
-	 * Fetch the schemaConfigurations from the GraphQL server
-	 */
-	* getSchemaConfigurations() {
 
-		const response = yield receiveSchemaConfigurations( schemaConfigurationsGraphQLQuery );
-		/**
-		 * If there were erros when executing the query, return an empty list, and keep the error in the state
-		 */
-		const maybeErrorMessage = maybeGetErrorMessage(response);
-		if (maybeErrorMessage) {
-			return setSchemaConfigurations( [], maybeErrorMessage );
+export const getSchemaConfigurations =
+	( query = schemaConfigurationsGraphQLQuery ) =>
+	async ( { dispatch } ) => {
+		if ( ! query ) {
+			return;
 		}
-		/**
-		 * Flatten the response to an array containing the schemaConfiguration name directly (extracting them from under the "name" key)
-		 */
-		const schemaConfigurations = response.data?.schemaConfigurations || [];
-		return setSchemaConfigurations( schemaConfigurations );
-	},
-};
+		try {
+			dispatch( fetchSchemaConfigurations( query ) );
+			const response = await fetchGraphQLQuery(
+				GATOGRAPHQL_PLUGIN_OWN_USE_ADMIN_ENDPOINT,
+				query
+			);
+			
+			/**
+			 * If there were erros when executing the query, return an empty list, and keep the error in the state
+			 */
+			const maybeErrorMessage = maybeGetErrorMessage(response);
+			if (maybeErrorMessage) {
+				dispatch( receiveSchemaConfigurations( query, [], maybeErrorMessage ) );
+				return
+			}
+
+			const schemaConfigurations = response.data?.schemaConfigurations || [];
+			dispatch( receiveSchemaConfigurations( query, schemaConfigurations ) );
+		} catch {}
+	};

@@ -1,32 +1,40 @@
 /**
- * Get the schemaConfigurations from the GraphQL schema
- *
- * @param {Object} state Store state
- *
- * @return {array} The list of schemaConfigurations from the GraphQL schema
+ * GraphQL query to fetch the list of schemaConfigurations from the GraphQL schema
  */
-export function getSchemaConfigurations( state ) {
-	return state.schemaConfigurations;
-};
+import schemaConfigurationsGraphQLQuery from '../../graphql-documents/schema-configurations.gql';
 
 /**
- * Have the schemaConfigurations been retrieved from the GraphQL server?
+ * Returns true if application is requesting for schema configurations.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {string} query GraphQL query to execute
  *
- * @return {bool} The list of schemaConfigurations from the GraphQL schema
+ * @return {boolean} Whether a request is in progress for the schema configurations.
  */
-export function hasRetrievedSchemaConfigurations( state ) {
-	return state.hasRetrievedSchemaConfigurations;
-};
+export function isRequestingSchemaConfigurations( state, query = schemaConfigurationsGraphQLQuery ) {
+	return state.schemaConfigurations[ query ]?.isRequesting ?? false;
+}
 
 /**
- * Get the error message from retrieving the schemaConfigurations from the GraphQL server, if any
+ * Returns the schema configurations.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {string} query GraphQL query to execute
  *
- * @return {string|null} The error message
+ * @return {Array} Schema configurations.
  */
-export function getRetrievingSchemaConfigurationsErrorMessage( state ) {
-	return state.retrievingSchemaConfigurationsErrorMessage;
-};
+export function getSchemaConfigurations( state, query = schemaConfigurationsGraphQLQuery ) {
+	return state.schemaConfigurations[ query ]?.results ?? [];
+}
+
+/**
+ * Returns the error message from fetching schema configurations.
+ *
+ * @param {Object} state Global application state.
+ * @param {string} query GraphQL query to execute
+ *
+ * @return {string|null} Error message, if any.
+ */
+export function getFetchingSchemaConfigurationsErrorMessage( state, query = schemaConfigurationsGraphQLQuery ) {
+	return state.schemaConfigurations[ query ]?.errorMessage ?? null;
+}
