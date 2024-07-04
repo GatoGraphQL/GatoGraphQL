@@ -38,7 +38,7 @@ export function getSchemaConfigurations( state, graphQLVariables ) {
  *
  * @return {string|null} Error message, if any.
  */
-export function getFetchingSchemaConfigurationsErrorMessage( state, graphQLVariables ) {
+export function getRetrievingSchemaConfigurationsErrorMessage( state, graphQLVariables ) {
 	const key = getSchemaConfigurationsKey(graphQLVariables)
 	return state.schemaConfigurations[ key ]?.errorMessage ?? null;
 }
