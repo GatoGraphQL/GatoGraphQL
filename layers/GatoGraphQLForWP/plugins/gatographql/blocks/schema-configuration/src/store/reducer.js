@@ -1,3 +1,5 @@
+import parameters from './parameters'
+
 /**
  * WordPress dependencies
  */
@@ -16,14 +18,14 @@ export const schemaConfigurations = ( state = {}, action ) => {
 		case 'FETCH_SCHEMA_CONFIGURATIONS':
 			return {
 				...state,
-				[ (action.variables || []).toString() ]: {
+				[ ( action.variables || parameters.defaultVariables ).toString() ]: {
 					isRequesting: true,
 				},
 			};
 		case 'RECEIVE_SCHEMA_CONFIGURATIONS':
 			return {
 				...state,
-				[ (action.variables || []).toString() ]: {
+				[ ( action.variables || parameters.defaultVariables ).toString() ]: {
 					results: action.schemaConfigurations,
 					errorMessage: action.errorMessage,
 					isRequesting: false,

@@ -1,3 +1,9 @@
+import parameters from './parameters'
+
+function getSchemaConfigurationsKey( graphQLVariables ) {
+	return (graphQLVariables || parameters.defaultVariables).toString()
+}
+
 /**
  * Returns true if application is requesting for schema configurations.
  *
@@ -7,7 +13,7 @@
  * @return {boolean} Whether a request is in progress for the schema configurations.
  */
 export function isRequestingSchemaConfigurations( state, graphQLVariables ) {
-	const key = (graphQLVariables ?? []).toString()
+	const key = getSchemaConfigurationsKey(graphQLVariables)
 	return state.schemaConfigurations[ key ]?.isRequesting ?? false;
 }
 
@@ -20,7 +26,7 @@ export function isRequestingSchemaConfigurations( state, graphQLVariables ) {
  * @return {Array} Schema configurations.
  */
 export function getSchemaConfigurations( state, graphQLVariables ) {
-	const key = (graphQLVariables ?? []).toString()
+	const key = getSchemaConfigurationsKey(graphQLVariables)
 	return state.schemaConfigurations[ key ]?.results ?? [];
 }
 
@@ -33,6 +39,6 @@ export function getSchemaConfigurations( state, graphQLVariables ) {
  * @return {string|null} Error message, if any.
  */
 export function getFetchingSchemaConfigurationsErrorMessage( state, graphQLVariables ) {
-	const key = (graphQLVariables ?? []).toString()
+	const key = getSchemaConfigurationsKey(graphQLVariables)
 	return state.schemaConfigurations[ key ]?.errorMessage ?? null;
 }
