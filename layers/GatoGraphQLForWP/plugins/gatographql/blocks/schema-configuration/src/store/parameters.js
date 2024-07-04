@@ -5,5 +5,5 @@ import schemaConfigurationsGraphQLQuery from '../../graphql-documents/schema-con
 
 export default {
 	query: schemaConfigurationsGraphQLQuery,
-	defaultVariables: []
+	defaultVariables: {}
 }
