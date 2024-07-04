@@ -29,8 +29,7 @@ export function isRequestingTypeFields( state, graphQLVariables ) {
  */
 export function getTypeFields( state, graphQLVariables, keepScalarTypes = false, keepIntrospectionTypes = false ) {
 	const key = getTypeFieldsKey(graphQLVariables)
-	let typeFields = state.typeFields[ key ]?.results ?? [];
-
+	
 	/**
 	 * Each element in typeFields has this shape:
 	 * {
@@ -39,6 +38,8 @@ export function getTypeFields( state, graphQLVariables, keepScalarTypes = false,
 	 *   "fields": array|null
 	 * }
 	 */
+
+	let typeFields = state.typeFields[ key ]?.results ?? [];
 
 	/**
 	 * Scalar types are those with no fields
