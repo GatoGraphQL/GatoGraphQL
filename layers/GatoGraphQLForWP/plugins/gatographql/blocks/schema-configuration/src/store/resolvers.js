@@ -13,7 +13,7 @@ import { maybeGetErrorMessage } from '@gatographql/components';
 import {
 	receiveSchemaConfigurations,
 	setSchemaConfigurations,
-} from './action-creators';
+} from './actions';
 
 /**
  * GraphQL query to fetch the list of schemaConfigurations from the GraphQL schema

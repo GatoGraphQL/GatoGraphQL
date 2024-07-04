@@ -13,7 +13,7 @@ import {
 	setGlobalFields,
 	receiveDirectives,
 	setDirectives,
-} from './action-creators';
+} from './actions';
 
 import { DIRECTIVE_KINDS } from '../constants/directive-kinds'
 
