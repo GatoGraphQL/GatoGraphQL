@@ -269,7 +269,7 @@ export default compose( [
 		}).reduce(reducer, {});
 		return {
 			typeFieldNames,
-			hasRetrievedItems: hasRetrievedTypeFields(),
+			isRequestingItems: ! hasRetrievedTypeFields(),
 			errorMessage: getRetrievingTypeFieldsErrorMessage(),
 		};
 	} ),

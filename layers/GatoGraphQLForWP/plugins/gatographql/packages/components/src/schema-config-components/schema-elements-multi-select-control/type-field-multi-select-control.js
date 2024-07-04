@@ -38,7 +38,7 @@ const TypeFieldMultiSelectControl = compose( [
 		});
 		return {
 			items,
-			hasRetrievedItems: hasRetrievedTypeFields(),
+			isRequestingItems: ! hasRetrievedTypeFields(),
 			errorMessage: getRetrievingTypeFieldsErrorMessage(),
 		};
 	} ),

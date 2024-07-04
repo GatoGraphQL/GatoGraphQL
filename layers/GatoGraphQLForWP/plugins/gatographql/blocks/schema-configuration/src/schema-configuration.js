@@ -164,7 +164,7 @@ export default compose( [
 		} = select ( 'gatographql/schema-configuration' );
 		return {
 			schemaConfigurations: getSchemaConfigurations(),
-			hasRetrievedItems: ! isRequestingSchemaConfigurations(),
+			isRequestingItems: isRequestingSchemaConfigurations(),
 			errorMessage: getRetrievingSchemaConfigurationsErrorMessage(),
 		};
 	} ),

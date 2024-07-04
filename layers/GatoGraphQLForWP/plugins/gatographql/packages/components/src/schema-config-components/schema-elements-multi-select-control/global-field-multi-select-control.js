@@ -32,7 +32,7 @@ const GlobalFieldMultiSelectControl = compose( [
 		) );
 		return {
 			items,
-			hasRetrievedItems: hasRetrievedGlobalFields(),
+			isRequestingItems: ! hasRetrievedGlobalFields(),
 			errorMessage: getRetrievingGlobalFieldsErrorMessage(),
 		};
 	} ),

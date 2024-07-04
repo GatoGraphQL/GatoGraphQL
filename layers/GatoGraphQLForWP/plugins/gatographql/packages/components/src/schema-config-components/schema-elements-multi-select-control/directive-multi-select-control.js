@@ -32,7 +32,7 @@ const DirectiveMultiSelectControl = compose( [
 		) );
 		return {
 			items,
-			hasRetrievedItems: hasRetrievedDirectives(),
+			isRequestingItems: ! hasRetrievedDirectives(),
 			errorMessage: getRetrievingDirectivesErrorMessage(),
 		};
 	} ),
