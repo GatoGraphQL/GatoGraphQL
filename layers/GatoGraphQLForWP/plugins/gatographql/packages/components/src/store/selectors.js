@@ -38,7 +38,6 @@ export function getTypeFields( state, graphQLVariables, keepScalarTypes = false,
 	 *   "fields": array|null
 	 * }
 	 */
-
 	let typeFields = state.typeFields[ key ]?.results ?? [];
 
 	/**
