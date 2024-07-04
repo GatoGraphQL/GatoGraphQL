@@ -25,7 +25,7 @@ export function isRequestingTypeFields( state, graphQLVariables ) {
  * @param {bool} keepScalarTypes Keep the scalar types in the typeFields object
  * @param {bool} keepIntrospectionTypes Keep the introspection types (__Type, __Directive, __Field, etc) in the typeFields object
  *
- * @return {Array} Schema configurations.
+ * @return {Array} Type fields.
  */
 export function getTypeFields( state, graphQLVariables, keepScalarTypes = false, keepIntrospectionTypes = false ) {
 	const key = getTypeFieldsKey(graphQLVariables)
@@ -94,7 +94,7 @@ export function isRequestingGlobalFields( state, graphQLVariables ) {
  * @param {Object} state Global application state.
  * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {Array} Schema configurations.
+ * @return {Array} Global fields.
  */
 export function getGlobalFields( state, graphQLVariables ) {
 	const key = getGlobalFieldsKey(graphQLVariables)
@@ -138,7 +138,7 @@ export function isRequestingDirectives( state, graphQLVariables ) {
  * @param {Object} state Global application state.
  * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {Array} Schema configurations.
+ * @return {Array} Directives.
  */
 export function getDirectives( state, graphQLVariables ) {
 	const key = getDirectivesKey(graphQLVariables)
