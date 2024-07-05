@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLRequest\StaticHelpers;
 
+use PoP\ComponentModel\Facades\Variables\VariableManagerFacade;
 use PoP\Root\App;
 use stdClass;
 
@@ -41,6 +42,7 @@ class GraphQLQueryPayloadRetriever
             if (isset($json->operationName)) {
                 $payload['operationName'] = $json->operationName;
             }
+            $payload = static::formatPayloadVariables($payload);
             return static::maybeAddOperationNameAndVariablesFromGET($payload);
         }
 
@@ -54,7 +56,37 @@ class GraphQLQueryPayloadRetriever
             }
             $payload[$entry] = App::request($entry);
         }
+        $payload = static::formatPayloadVariables($payload);
         return static::maybeAddOperationNameAndVariablesFromGET($payload);
+    }
+
+    /**
+     * Convert arrays to objects in the variables JSON entries.
+     * 
+     * For instance, storing this JSON:
+     * 
+     *   {
+     *     "languageMapping": {
+     *       "nb": "no"
+     *     }
+     *   }
+     * 
+     * ...must be interpreted as object, not array
+     * 
+     * @param array<string,mixed> $payload
+     * @return array<string,mixed>
+     */
+    protected static function formatPayloadVariables(array $payload): array
+    {
+        /** @var array<string,mixed>|null */
+        $variables = $payload['variables'] ?? null;
+        if ($variables === null) {
+            return $payload;
+        }
+        $variableManager = VariableManagerFacade::getInstance();
+        $variables = $variableManager->recursivelyConvertVariableEntriesFromArrayToObject($variables);
+        $payload['variables'] = $variables;
+        return $payload;
     }
 
     /**
