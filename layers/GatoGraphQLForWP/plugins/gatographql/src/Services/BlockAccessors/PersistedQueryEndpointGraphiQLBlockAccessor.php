@@ -77,6 +77,19 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
         } else {
             $variables = [];
         }
+        /**
+         * Convert arrays to objects.
+         * 
+         * For instance, storing this JSON:
+         * 
+         *   {
+         *     "languageMapping": {
+         *       "nb": "no"
+         *     }
+         *   }
+         * 
+         * ...must be interpreted as object, not array
+         */
         return new PersistedQueryEndpointGraphiQLBlockAttributes(
             // Remove whitespaces so it counts as an empty query,
             // so it keeps iterating upwards to get the ancestor query
