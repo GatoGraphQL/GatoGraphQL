@@ -9,7 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Catch exception if dependency version is not semver (#2712)
-- Convert entries in JSON dictionary of variables in persisted query from array to object
+- Convert entries in JSON dictionary of variables in persisted query from array to object (#2715)
 
 ## 2.6.0 - 01/07/2024
 
