@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\BlockAccessors;
 use GatoGraphQL\GatoGraphQL\AppObjects\BlockAttributes\PersistedQueryEndpointGraphiQLBlockAttributes;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\PersistedQueryEndpointGraphiQLBlock;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\BlockHelpers;
+use PoP\ComponentModel\Variables\VariableManagerInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Post;
 
@@ -16,6 +17,7 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
 
     private ?BlockHelpers $blockHelpers = null;
     private ?PersistedQueryEndpointGraphiQLBlock $persistedQueryEndpointGraphiQLBlock = null;
+    private ?VariableManagerInterface $variableManager = null;
 
     final public function setBlockHelpers(BlockHelpers $blockHelpers): void
     {
@@ -42,6 +44,19 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
             $this->persistedQueryEndpointGraphiQLBlock = $persistedQueryEndpointGraphiQLBlock;
         }
         return $this->persistedQueryEndpointGraphiQLBlock;
+    }
+    final public function setVariableManager(VariableManagerInterface $variableManager): void
+    {
+        $this->variableManager = $variableManager;
+    }
+    final protected function getVariableManager(): VariableManagerInterface
+    {
+        if ($this->variableManager === null) {
+            /** @var VariableManagerInterface */
+            $variableManager = $this->instanceManager->getInstance(VariableManagerInterface::class);
+            $this->variableManager = $variableManager;
+        }
+        return $this->variableManager;
     }
 
     /**
@@ -77,6 +92,9 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
         } else {
             $variables = [];
         }
+
+        $variables = $this->getVariableManager()->recursivelyConvertVariableEntriesFromArrayToObject($variables);
+
         return new PersistedQueryEndpointGraphiQLBlockAttributes(
             // Remove whitespaces so it counts as an empty query,
             // so it keeps iterating upwards to get the ancestor query
