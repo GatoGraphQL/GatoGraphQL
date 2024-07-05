@@ -93,19 +93,6 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
             $variables = [];
         }
 
-        /**
-         * Convert arrays to objects in the variables JSON entries.
-         * 
-         * For instance, storing this JSON:
-         * 
-         *   {
-         *     "languageMapping": {
-         *       "nb": "no"
-         *     }
-         *   }
-         * 
-         * ...must be interpreted as object, not array
-         */
         $variables = $this->getVariableManager()->recursivelyConvertVariableEntriesFromArrayToObject($variables);
 
         return new PersistedQueryEndpointGraphiQLBlockAttributes(
