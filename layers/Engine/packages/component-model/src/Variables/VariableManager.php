@@ -49,13 +49,24 @@ class VariableManager implements VariableManagerInterface
         );
 
         /**
-         * Convert associative arrays (and their elements) to stdClass,
-         * which is the data structure used for inputs in GraphQL.
-         *
          * Using associative array would not work, as ScalarTypeResolvers
          * can't receive an `array` as input to function `coerceValue`,
          * then `JSONObjectScalar` can only receive `stdClass`, not an array.
          */
+        $variables = $this->recursivelyConvertVariableEntriesFromArrayToObject($variables);
+
+        return $variables;
+    }
+
+    /**
+     * Convert associative arrays (and their elements) to stdClass,
+     * which is the data structure used for inputs in GraphQL.
+     *
+     * @param array<string,mixed> $variables
+     * @return array<string,mixed>
+     */
+    public function recursivelyConvertVariableEntriesFromArrayToObject(array $variables): array
+    {
         foreach ($variables as $variableName => $variableValue) {
             if (!is_array($variableValue)) {
                 continue;
