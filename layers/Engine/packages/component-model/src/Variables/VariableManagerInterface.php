@@ -15,15 +15,15 @@ interface VariableManagerInterface
      * variables JSON entries, recursively.
      *
      * stdClass is the data structure used for inputs in GraphQL
-     * 
+     *
      * For instance, storing this JSON:
-     * 
+     *
      *   {
      *     "languageMapping": {
      *       "nb": "no"
      *     }
      *   }
-     * 
+     *
      * ...must be interpreted as object, not array.
      *
      * @param array<string,mixed> $variables

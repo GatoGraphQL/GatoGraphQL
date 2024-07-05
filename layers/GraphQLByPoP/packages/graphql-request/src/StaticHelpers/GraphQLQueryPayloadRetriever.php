@@ -62,17 +62,17 @@ class GraphQLQueryPayloadRetriever
 
     /**
      * Convert arrays to objects in the variables JSON entries.
-     * 
+     *
      * For instance, storing this JSON:
-     * 
+     *
      *   {
      *     "languageMapping": {
      *       "nb": "no"
      *     }
      *   }
-     * 
+     *
      * ...must be interpreted as object, not array
-     * 
+     *
      * @param array<string,mixed> $payload
      * @return array<string,mixed>
      */
