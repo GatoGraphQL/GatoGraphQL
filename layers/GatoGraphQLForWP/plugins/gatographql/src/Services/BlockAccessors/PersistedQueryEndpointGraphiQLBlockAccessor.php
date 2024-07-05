@@ -92,9 +92,9 @@ class PersistedQueryEndpointGraphiQLBlockAccessor
         } else {
             $variables = [];
         }
-        
+
         /**
-         * Convert arrays to objects.
+         * Convert arrays to objects in the variables JSON entries.
          * 
          * For instance, storing this JSON:
          * 
