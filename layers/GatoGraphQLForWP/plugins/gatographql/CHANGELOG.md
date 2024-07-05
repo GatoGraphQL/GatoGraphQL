@@ -4,6 +4,13 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 2.7.0 - DATE
+
+### Fixed
+
+- Catch exception if dependency version is not semver (#2712)
+- Convert entries in JSON dictionary of variables in persisted query from array to object
+
 ## 2.6.0 - 01/07/2024
 
 ### Improvements
