@@ -23,7 +23,7 @@ class VariableManager implements VariableManagerInterface
      */
     public function getVariablesFromRequest(): array
     {
-        if (is_null($this->variablesFromRequestCache)) {
+        if ($this->variablesFromRequestCache === null) {
             $this->variablesFromRequestCache = $this->doGetVariablesFromRequest();
         }
         return $this->variablesFromRequestCache;
