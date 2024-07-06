@@ -4,7 +4,7 @@
 
 ### Require at least WordPress v6.0 ([#2719](https://github.com/GatoGraphQL/GatoGraphQL/pull/2719))
 
-When using Gato GraphQL with WordPress v6.6 (just ahead of its release), [blocks in the plugin stopped working](https://github.com/WordPress/gutenberg/issues/63009).
+When using Gato GraphQL with WordPress `v6.6` (just ahead of its release), [blocks in the plugin stopped working](https://github.com/WordPress/gutenberg/issues/63009).
 
 As a solution, blocks were adapted and re-compiled, and the new [compiled files only work only with WordPress `v6.0`+](https://github.com/WordPress/gutenberg/issues/63135#issuecomment-2211631051).
 
