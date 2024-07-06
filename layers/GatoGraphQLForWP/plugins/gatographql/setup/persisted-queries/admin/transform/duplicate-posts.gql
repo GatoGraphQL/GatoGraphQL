@@ -91,7 +91,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 mutation CreatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostIDs: _echo(value: $postInput)
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
@@ -102,39 +102,47 @@ mutation CreatePosts
         },
         setResultInResponse: true
       )
-    @export(as: "createdPostIDs")
+    @export(as: "createdPostMutationPayloadObjectIDs")
 }
 
 query DuplicatePosts
   @depends(on: "CreatePosts")
 {
-  createdPosts: posts(
-    filter: {
-      ids: $createdPostIDs,
-      status: [draft]
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(
+    input: {
+      ids: $createdPostMutationPayloadObjectIDs
     }
   ) {
-    # Fields not to be duplicated
-    id
-    slug
-    date
     status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
 
-    # Fields to be duplicated
-    author {
-      id
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      rawContent
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
     }
-    categories {
-      id
-    }
-    rawContent
-    excerpt
-    featuredImage {
-      id
-    }
-    tags {
-      id
-    }
-    title
   }
 }

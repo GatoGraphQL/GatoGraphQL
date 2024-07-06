@@ -152,7 +152,7 @@ query GetPostsFromCSVAndExportData(
 mutation CreatePostsFromCSVEntries
   @depends(on: "GetPostsFromCSVAndExportData")
 {
-  createdPostIDs: _echo(value: $postInputs)
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInputs)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
@@ -163,28 +163,36 @@ mutation CreatePostsFromCSVEntries
         },
         setResultInResponse: true
       )
-    @export(as: "createdPostIDs")
+    @export(as: "createdPostMutationPayloadObjectIDs")
 }
 
 query ImportPostsFromCSVEntries
   @depends(on: "CreatePostsFromCSVEntries")
 {
-  createdPosts: posts(
-    filter: {
-      ids: $createdPostIDs,
-      status: [draft]
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(
+    input: {
+      ids: $createdPostMutationPayloadObjectIDs
     }
   ) {
-    id
-    slug
-    date
     status
-    title
-    excerpt
-    content
-    author {
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
       id
-      username
+      slug
+      date
+      status
+      title
+      excerpt
+      content
+      author {
+        id
+        username
+      }
     }
   }
 }
