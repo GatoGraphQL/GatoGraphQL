@@ -342,23 +342,6 @@ class Plugin extends AbstractMainPlugin
         );
     }
 
-    // /**
-    //  * @return array<string,mixed>
-    //  */
-    // protected function getEntityAsPayloadTypeBlockDataItem(): array
-    // {
-    //     $instanceManager = InstanceManagerFacade::getInstance();
-    //     /** @var SchemaConfigPayloadTypesForMutationsBlock */
-    //     $schemaConfigPayloadTypesForMutationsBlock = $instanceManager->getInstance(SchemaConfigPayloadTypesForMutationsBlock::class);
-
-    //     return [
-    //         'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
-    //         'attrs' => [
-    //             BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
-    //         ]
-    //     ];
-    // }
-
     /**
      * @return array<string,mixed>
      */
