@@ -155,6 +155,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
          * Starting from WP 5.8 the hook is a different one
          *
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/711
+         * 
+         * Notice that Gato GraphQL requires a higher version than 5.8,
+         * however a potential "Gato GraphQL lite" version, without blocks,
+         * would still work with WP 5.4. Hence, to make life easier
+         * if that event happens, this code is kept.
          */
         if (\is_wp_version_compatible('5.8')) {
             \add_filter(
