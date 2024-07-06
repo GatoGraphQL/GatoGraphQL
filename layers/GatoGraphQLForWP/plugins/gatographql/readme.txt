@@ -287,6 +287,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 2.7.0 =
+* Added compatibility with WordPress 6.6
 * Fixed bug: Catch exception if dependency version is not semver (#2712)
 * Fixed bug: Convert entries in JSON dictionary of variables in persisted query from array to object (#2715)
 

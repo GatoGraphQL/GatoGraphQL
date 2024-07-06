@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 2.7.0 - DATE
 
+### Improvements
+
+- Added compatibility with WordPress 6.6
+
 ### Fixed
 
 - Catch exception if dependency version is not semver (#2712)
