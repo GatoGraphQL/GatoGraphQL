@@ -10,7 +10,7 @@ We can extend the previous tutorial lesson, to duplicate multiple posts with a s
 
 For this GraphQL query to work, the [Schema Configuration](https://gatographql.com/guides/use/creating-a-schema-configuration/) applied to the endpoint needs to have the following configuration:
 
-- In block [Payload Types for Mutations](https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations/), select "Do not use Payload Types for Mutations (i.e. return the mutated entity)" (so that dynamic variable `$createdPostIDs` will contain the IDs of the created posts)
+- In block [Payload Types for Mutations](https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations/), select "Use payload types for mutations, and add fields to query those payload objects"
 - In block [Mutation Scheme](https://gatographql.com/guides/schema/using-nested-mutations/), select any of the two "Enable Nested Mutations" options (as to use field `_echo` inside a `mutation`)
 
 </div>
@@ -91,7 +91,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostIDs: _echo(value: $postInput)
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
@@ -102,40 +102,46 @@ mutation DuplicatePosts
         },
         setResultInResponse: true
       )
-    @export(as: "createdPostIDs")
+    @export(as: "createdPostMutationPayloadObjectIDs")
 }
 
 query RetrieveCreatedPosts
   @depends(on: "DuplicatePosts")
 {
-  createdPosts: posts(
-    filter: {
-      ids: $createdPostIDs,
-      status: [draft]
-    }
-  ) {
-    # Fields not to be duplicated
-    id
-    slug
-    date
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
+    ids: $createdPostMutationPayloadObjectIDs
+  }) {
     status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
 
-    # Fields to be duplicated
-    author {
-      id
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      rawContent
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
     }
-    categories {
-      id
-    }
-    rawContent
-    excerpt
-    featuredImage {
-      id
-    }
-    tags {
-      id
-    }
-    title
   }
 }
 ```
@@ -401,13 +407,13 @@ Thanks to `@underEachArrayItem`, we can convert all capability items to upper ca
 
 </div>
 
-This GraphQL query passes iterates all items in `$postInput`, assigns each of them to dynamic variable `$input`, injects into the `createPost` mutation, and finally exports the IDs of the created posts under dynamic variable `$createdPostIDs`:
+This GraphQL query passes iterates all items in `$postInput`, assigns each of them to dynamic variable `$input`, injects into the `createPost` mutation, and finally exports the IDs of the created payload objects under dynamic variable `$createdPostMutationPayloadObjectIDs`:
 
 ```graphql
 mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostIDs: _echo(value: $postInput)
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
@@ -418,44 +424,50 @@ mutation DuplicatePosts
         },
         setResultInResponse: true
       )
-    @export(as: "createdPostIDs")
+    @export(as: "createdPostMutationPayloadObjectIDs")
 }
 ```
 
-Finally, we can use dynamic variable `$createdPostIDs` to retrieve the data for the newly-created posts:
+Finally, we can use dynamic variable `$createdPostMutationPayloadObjectIDs` to retrieve the data for the created payload objects, and queried the created posts:
 
 ```graphql
 query RetrieveCreatedPosts
   @depends(on: "DuplicatePosts")
 {
-  createdPosts: posts(
-    filter: {
-      ids: $createdPostIDs,
-      status: [draft]
-    }
-  ) {
-    # Fields not to be duplicated
-    id
-    slug
-    date
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
+    ids: $createdPostMutationPayloadObjectIDs
+  }) {
     status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
 
-    # Fields to be duplicated
-    author {
-      id
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      rawContent
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
     }
-    categories {
-      id
-    }
-    rawContent
-    excerpt
-    featuredImage {
-      id
-    }
-    tags {
-      id
-    }
-    title
   }
 }
 ```
@@ -540,7 +552,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostIDs: _echo(value: $postInput)
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
@@ -551,40 +563,46 @@ mutation DuplicatePosts
         },
         setResultInResponse: true
       )
-    @export(as: "createdPostIDs")
+    @export(as: "createdPostMutationPayloadObjectIDs")
 }
 
 query RetrieveCreatedPosts
   @depends(on: "DuplicatePosts")
 {
-  createdPosts: posts(
-    filter: {
-      ids: $createdPostIDs,
-      status: [draft]
-    }
-  ) {
-    # Fields not to be duplicated
-    id
-    slug
-    date
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
+    ids: $createdPostMutationPayloadObjectIDs
+  }) {
     status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      # Fields not to be duplicated
+      id
+      slug
+      date
+      status
 
-    # Fields to be duplicated
-    author {
-      id
+      # Fields to be duplicated
+      author {
+        id
+      }
+      categories {
+        id
+      }
+      rawContent
+      excerpt
+      featuredImage {
+        id
+      }
+      tags {
+        id
+      }
+      title
     }
-    categories {
-      id
-    }
-    rawContent
-    excerpt
-    featuredImage {
-      id
-    }
-    tags {
-      id
-    }
-    title
   }
 }
 ```
