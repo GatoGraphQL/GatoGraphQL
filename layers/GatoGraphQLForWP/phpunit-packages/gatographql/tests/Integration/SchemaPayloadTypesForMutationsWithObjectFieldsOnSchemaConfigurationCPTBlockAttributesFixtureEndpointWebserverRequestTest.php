@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
