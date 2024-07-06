@@ -426,9 +426,6 @@
           "name": "MetaQueryCompareByStringValueInput"
         },
         {
-          "name": "MutationPayloadObjectsInput"
-        },
-        {
           "name": "PageByInput"
         },
         {
