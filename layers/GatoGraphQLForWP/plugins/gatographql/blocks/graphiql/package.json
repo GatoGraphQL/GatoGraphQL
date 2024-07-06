@@ -14,7 +14,8 @@
         "packages-update": "wp-scripts packages-update"
     },
     "devDependencies": {
-        "@wordpress/scripts": "^12.1.0",
+        "@wordpress/scripts": "^27.9.0",
+        "ajv": "^8.16.0",
         "graphiql": "^1.5.7",
         "graphql": "^16.0.0",
         "isomorphic-fetch": "^2.2.1"

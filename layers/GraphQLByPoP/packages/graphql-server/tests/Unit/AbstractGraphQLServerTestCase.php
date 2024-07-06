@@ -7,6 +7,7 @@ namespace GraphQLByPoP\GraphQLServer\Unit;
 use GraphQLByPoP\GraphQLServer\Server\StandaloneGraphQLServer;
 use PHPUnit\Framework\TestCase;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\Facades\Variables\VariableManagerFacade;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use RuntimeException;
@@ -134,6 +135,8 @@ abstract class AbstractGraphQLServerTestCase extends TestCase
                 );
             }
             $graphQLVariables = (array) $graphQLVariables;
+            $variableManager = VariableManagerFacade::getInstance();
+            $graphQLVariables = $variableManager->recursivelyConvertVariableEntriesFromArrayToObject($graphQLVariables);
         }
 
         $response = self::getGraphQLServer()->execute($graphQLQuery, $graphQLVariables, $operationName);
