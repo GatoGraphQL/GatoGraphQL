@@ -17,7 +17,7 @@ class SchemaPayloadTypesForMutationsWithObjectFieldsOnSchemaConfigurationCPTBloc
         /**
          * This endpoint:
          *
-         * - Has "Use Payload Types for Mutations" as Default (i.e. true)
+         * - Has "Use Payload Types for Mutations" as Default (i.e. "use-payload-types")
          * - Has the Schema Configuration "Mobile App" (with ID 193)
          */
         return 'graphql/mobile-app/';
