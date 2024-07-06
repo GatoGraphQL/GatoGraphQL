@@ -2,7 +2,7 @@
 
 ## Improvements
 
-- Added compatibility with WordPress 6.6
+- Added compatibility with WordPress 6.6 ([#2717](https://github.com/GatoGraphQL/GatoGraphQL/pull/2717))
 
 ## Fixed
 

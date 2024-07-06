@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
-- Added compatibility with WordPress 6.6
+- Added compatibility with WordPress 6.6 (#2717)
 
 ### Fixed
 
