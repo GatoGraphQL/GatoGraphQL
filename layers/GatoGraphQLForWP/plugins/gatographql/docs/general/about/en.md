@@ -170,7 +170,7 @@ Subscribe to our newsletter and receive timely updates concerning:
 
 New features released on each version:
 
-- **[2.7](../../release-notes/2.7/en.md)** (current)
+- **[3.0](../../release-notes/3.0/en.md)** (current)
 - [2.6](../../release-notes/2.6/en.md)
 - [2.5](../../release-notes/2.5/en.md)
 - [2.4](../../release-notes/2.4/en.md)
