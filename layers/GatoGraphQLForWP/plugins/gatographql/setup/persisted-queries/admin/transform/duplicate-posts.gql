@@ -108,11 +108,9 @@ mutation CreatePosts
 query DuplicatePosts
   @depends(on: "CreatePosts")
 {
-  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(
-    input: {
-      ids: $createdPostMutationPayloadObjectIDs
-    }
-  ) {
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
+    ids: $createdPostMutationPayloadObjectIDs
+  }) {
     status
     errors {
       __typename

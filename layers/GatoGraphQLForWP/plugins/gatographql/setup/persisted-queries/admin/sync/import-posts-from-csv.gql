@@ -169,11 +169,9 @@ mutation CreatePostsFromCSVEntries
 query ImportPostsFromCSVEntries
   @depends(on: "CreatePostsFromCSVEntries")
 {
-  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(
-    input: {
-      ids: $createdPostMutationPayloadObjectIDs
-    }
-  ) {
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
+    ids: $createdPostMutationPayloadObjectIDs
+  }) {
     status
     errors {
       __typename
