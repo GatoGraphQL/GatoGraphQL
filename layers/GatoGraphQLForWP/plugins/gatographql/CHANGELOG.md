@@ -4,7 +4,7 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 2.7.0 - DATE
+## 3.0.0 - DATE
 
 ### Improvements
 
@@ -38,7 +38,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Identifying extension in `createMediaItem` when filename has more then one dot
-- Catch exception if dependency version is not semver (`v2.6.2`) (#2712)
 
 ### [PRO] Improvements
 
