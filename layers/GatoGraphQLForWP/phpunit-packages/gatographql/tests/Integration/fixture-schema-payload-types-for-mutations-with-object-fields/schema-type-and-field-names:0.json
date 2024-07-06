@@ -1028,9 +1028,6 @@
               "name": "comments"
             },
             {
-              "name": "createPostMutationPayloadObjects"
-            },
-            {
               "name": "customPost"
             },
             {
@@ -1202,9 +1199,6 @@
               "name": "tags"
             },
             {
-              "name": "updatePostMutationPayloadObjects"
-            },
-            {
               "name": "user"
             },
             {
@@ -1256,9 +1250,6 @@
             },
             {
               "name": "createPost"
-            },
-            {
-              "name": "createPostMutationPayloadObjects"
             },
             {
               "name": "customPost"
@@ -1460,9 +1451,6 @@
             },
             {
               "name": "updatePost"
-            },
-            {
-              "name": "updatePostMutationPayloadObjects"
             },
             {
               "name": "user"
@@ -2600,10 +2588,6 @@
         },
         {
           "name": "MetaQueryCompareByStringValueInput",
-          "fields": null
-        },
-        {
-          "name": "MutationPayloadObjectsInput",
           "fields": null
         },
         {

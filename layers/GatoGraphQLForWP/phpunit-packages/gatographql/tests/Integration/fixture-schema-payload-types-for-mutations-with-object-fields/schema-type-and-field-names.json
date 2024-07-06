@@ -3,6 +3,14 @@
     "__schema": {
       "types": [
         {
+          "name": "CategoryDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
           "name": "Comment",
           "fields": [
             {
@@ -73,6 +81,62 @@
             },
             {
               "name": "type"
+            }
+          ]
+        },
+        {
+          "name": "CommentAuthorEmailIsMissingErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentAuthorNameIsMissingErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentParentCommentDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CustomPostDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+          "fields": [
+            {
+              "name": "message"
             }
           ]
         },
@@ -260,6 +324,20 @@
           ]
         },
         {
+          "name": "GenericErrorPayload",
+          "fields": [
+            {
+              "name": "code"
+            },
+            {
+              "name": "data"
+            },
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
           "name": "GenericTag",
           "fields": [
             {
@@ -303,6 +381,62 @@
             },
             {
               "name": "urlPath"
+            }
+          ]
+        },
+        {
+          "name": "InvalidUserEmailErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "InvalidUsernameErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
             }
           ]
         },
@@ -374,6 +508,14 @@
             },
             {
               "name": "width"
+            }
+          ]
+        },
+        {
+          "name": "MediaItemDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
             }
           ]
         },
@@ -619,6 +761,14 @@
             },
             {
               "name": "wpAdminEditURL"
+            }
+          ]
+        },
+        {
+          "name": "PasswordIsIncorrectErrorPayload",
+          "fields": [
+            {
+              "name": "message"
             }
           ]
         },
@@ -878,6 +1028,9 @@
               "name": "comments"
             },
             {
+              "name": "createPostMutationPayloadObjects"
+            },
+            {
               "name": "customPost"
             },
             {
@@ -1049,6 +1202,9 @@
               "name": "tags"
             },
             {
+              "name": "updatePostMutationPayloadObjects"
+            },
+            {
               "name": "user"
             },
             {
@@ -1100,6 +1256,9 @@
             },
             {
               "name": "createPost"
+            },
+            {
+              "name": "createPostMutationPayloadObjects"
             },
             {
               "name": "customPost"
@@ -1303,6 +1462,9 @@
               "name": "updatePost"
             },
             {
+              "name": "updatePostMutationPayloadObjects"
+            },
+            {
               "name": "user"
             },
             {
@@ -1310,6 +1472,269 @@
             },
             {
               "name": "users"
+            }
+          ]
+        },
+        {
+          "name": "RootAddCommentToCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreateCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreateMediaItemMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "mediaItem"
+            },
+            {
+              "name": "mediaItemID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreatePageMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreatePostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootLoginUserMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ]
+        },
+        {
+          "name": "RootLogoutUserMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ]
+        },
+        {
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootReplyCommentMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootSetCategoriesOnPostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootSetTagsOnPostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdateCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdatePageMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdatePostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "TagDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
             }
           ]
         },
@@ -1434,6 +1859,46 @@
             },
             {
               "name": "src"
+            }
+          ]
+        },
+        {
+          "name": "UserDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserIsLoggedInErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserIsNotLoggedInErrorPayload",
+          "fields": [
+            {
+              "name": "message"
             }
           ]
         },
@@ -1885,6 +2350,14 @@
           ]
         },
         {
+          "name": "ErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
           "name": "IdentifiableObject",
           "fields": [
             {
@@ -2127,6 +2600,10 @@
         },
         {
           "name": "MetaQueryCompareByStringValueInput",
+          "fields": null
+        },
+        {
+          "name": "MutationPayloadObjectsInput",
           "fields": null
         },
         {
@@ -2398,6 +2875,10 @@
           "fields": null
         },
         {
+          "name": "OperationStatusEnum",
+          "fields": null
+        },
+        {
           "name": "OrderEnum",
           "fields": null
         },
@@ -2427,6 +2908,66 @@
         },
         {
           "name": "CustomPostUnion",
+          "fields": null
+        },
+        {
+          "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreateMediaItemMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreatePageMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreatePostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootLoginUserMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootLogoutUserMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootReplyCommentMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdatePageMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdatePostMutationErrorPayloadUnion",
           "fields": null
         },
         {
