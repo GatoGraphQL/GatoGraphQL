@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 3.0.0 - DATE
 
+### Breaking changes
+
+- Require at least WordPress v6.0 (#2719)
+
 ### Improvements
 
 - Added compatibility with WordPress 6.6 (#2717)
