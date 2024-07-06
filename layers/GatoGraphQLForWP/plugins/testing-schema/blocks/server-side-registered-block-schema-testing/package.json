@@ -14,9 +14,9 @@
         "packages-update": "wp-scripts packages-update"
     },
     "devDependencies": {
-        "@wordpress/components": "^10.0.0",
-        "@wordpress/i18n": "^3.14.0",
-        "@wordpress/scripts": "^12.1.0",
+        "@wordpress/components": "^27.6.0",
+        "@wordpress/i18n": "^4.58.0",
+        "@wordpress/scripts": "^27.9.0",
         "file-loader": "^6.2.0",
         "highlight.js": "^11.6.0",
         "html-loader": "^1.1.0",

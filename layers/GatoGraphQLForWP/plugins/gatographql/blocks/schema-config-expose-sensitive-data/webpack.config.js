@@ -67,7 +67,8 @@ config.module.rules.push(
  * @see https://webpack.js.org/configuration/output/#outputjsonpfunction
  */
 // ------------------------------------------------------
-config.output.jsonpFunction = 'webpackJsonpGatoGraphQLExposeSensitiveData';
+// Needed for webpack v4, so commented out for webpack v5
+// config.output.jsonpFunction = 'webpackJsonpGatoGraphQLExposeSensitiveData';
 // ------------------------------------------------------
 
 module.exports = config;
