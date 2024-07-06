@@ -6,8 +6,6 @@ namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
 use GatoGraphQL\GatoGraphQL\Constants\PluginSetupDataEntrySlugs;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Constants\TutorialLessons;
@@ -1820,7 +1818,7 @@ class Plugin extends AbstractMainPlugin
                 ]
             ));
         }
-        
+
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
