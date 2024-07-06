@@ -16,7 +16,7 @@ const TypeFieldMultiSelectControl = compose( [
 	withSelect( ( select ) => {
 		const {
 			getTypeFields,
-			hasRetrievedTypeFields,
+			isRequestingTypeFields,
 			getRetrievingTypeFieldsErrorMessage,
 		} = select ( 'gatographql/components' );
 		/**
@@ -38,7 +38,7 @@ const TypeFieldMultiSelectControl = compose( [
 		});
 		return {
 			items,
-			hasRetrievedItems: hasRetrievedTypeFields(),
+			isRequestingItems: isRequestingTypeFields(),
 			errorMessage: getRetrievingTypeFieldsErrorMessage(),
 		};
 	} ),

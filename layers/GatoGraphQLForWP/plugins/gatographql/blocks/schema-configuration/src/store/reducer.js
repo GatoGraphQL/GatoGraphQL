@@ -1,34 +1,40 @@
-/**
- * The initial state of the store
- */
-const DEFAULT_STATE = {
-	schemaConfigurations: [],
-	hasRetrievedSchemaConfigurations: false,
-	retrievingSchemaConfigurationsErrorMessage: null,
-};
+import parameters from './parameters'
 
 /**
- * Reducer returning an array of types and their fields, and schemaConfigurations.
+ * WordPress dependencies
+ */
+import { combineReducers } from '@wordpress/data';
+
+/**
+ * Reducer returning an array of schema configurations.
  *
  * @param {Object} state  Current state.
  * @param {Object} action Dispatched action.
  *
  * @return {Object} Updated state.
  */
-const schemaConfigurations = (
-	state = DEFAULT_STATE,
-	action
-) => {
+export const schemaConfigurations = ( state = {}, action ) => {
 	switch ( action.type ) {
-		case 'SET_SCHEMA_CONFIGURATIONS':
+		case 'FETCH_SCHEMA_CONFIGURATIONS':
 			return {
 				...state,
-				schemaConfigurations: action.schemaConfigurations,
-				hasRetrievedSchemaConfigurations: true,
-				retrievingSchemaConfigurationsErrorMessage: action.errorMessage,
+				[ ( action.variables || parameters.defaultVariables ).toString() ]: {
+					isRequesting: true,
+				},
+			};
+		case 'RECEIVE_SCHEMA_CONFIGURATIONS':
+			return {
+				...state,
+				[ ( action.variables || parameters.defaultVariables ).toString() ]: {
+					results: action.schemaConfigurations,
+					errorMessage: action.errorMessage,
+					isRequesting: false,
+				},
 			};
 	}
 	return state;
 };
 
-export default schemaConfigurations;
+export default combineReducers( {
+	schemaConfigurations,
+} );

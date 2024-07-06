@@ -13,8 +13,8 @@ import { createHigherOrderComponent } from '@wordpress/compose';
  */
 const withErrorMessage = () => createHigherOrderComponent(
 	( WrappedComponent ) => ( props ) => {
-		const { hasRetrievedItems, errorMessage } = props;
-		if (hasRetrievedItems && errorMessage) {
+		const { isRequestingItems, errorMessage } = props;
+		if ( ! isRequestingItems && errorMessage ) {
 			return <div className="multi-select-control__error_message">
 				<Notice status="error" isDismissible={ false }>
 					{ errorMessage }

@@ -247,7 +247,7 @@ export default compose( [
 
 		const {
 			getTypeFields,
-			hasRetrievedTypeFields,
+			isRequestingTypeFields,
 			getRetrievingTypeFieldsErrorMessage,
 		} = select ( 'gatographql/components' );
 		/**
@@ -269,7 +269,7 @@ export default compose( [
 		}).reduce(reducer, {});
 		return {
 			typeFieldNames,
-			hasRetrievedItems: hasRetrievedTypeFields(),
+			isRequestingItems: isRequestingTypeFields(),
 			errorMessage: getRetrievingTypeFieldsErrorMessage(),
 		};
 	} ),

@@ -1,14 +1,14 @@
 ########################################################################
 # 
 # Variables:
-#   - $username: The username to log into the external site
-#   - $appPassword: The application password to log into the external site
+#   - username: The username to log into the external site
+#   - appPassword: The application password to log into the external site
 #   - postId: The post with the origin language, from where all translations will be made
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - includeSiteIDsToTranslate: Limit sites to execute the translation for. If empty, all sites are included
 #   - excludeSiteIDsToTranslate: Exclude sites from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
-#   - (Optional) $externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site
+#   - (Optional) externalSiteGraphQLEndpointPath: Path to the GraphQL endpoint on the external site
 #
 # *********************************************************************
 #

@@ -2,9 +2,9 @@
 # 
 # Variables:
 #   - fileURL: The URL for the .po/.pot Poedit (https://poedit.net/) file
+#   - fromLang: The language code to translate from, from Google Translate
 #   - toLang: The language code to translate to, from Google Translate (https://cloud.google.com/translate/docs/languages)
 #   - filestackApiKey: The API key to upload files to Filestack
-#   - (Optional) fromLang: The language code to translate from, from Google Translate
 #
 # *********************************************************************
 #
@@ -71,7 +71,7 @@ query ExtractStringsToTranslate
 }
 
 query TranslateStrings(
-  $fromLang: String
+  $fromLang: String!
   $toLang: String!
 )
   @depends(on: "ExtractStringsToTranslate")

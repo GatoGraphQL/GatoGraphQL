@@ -27,7 +27,7 @@ const OperationMultiSelectControl = compose( [
 	withState( {
 		attributeName: 'operations',
 		items,
-		hasRetrievedItems: true,
+		isRequestingItems: false,
 	} ),
 	AddUndefinedSelectedItemIDs,
 ] )( MultiSelectControl );

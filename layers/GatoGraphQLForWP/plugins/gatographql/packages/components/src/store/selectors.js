@@ -1,13 +1,35 @@
+import parameters from './parameters'
+
+function getTypeFieldsKey( graphQLVariables ) {
+	return (graphQLVariables || parameters.typeFields.defaultVariables).toString()
+}
+
 /**
- * Get the types and their fields from the GraphQL schema
+ * Returns true if application is requesting for type fields.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
+ *
+ * @return {boolean} Whether a request is in progress for the type fields.
+ */
+export function isRequestingTypeFields( state, graphQLVariables ) {
+	const key = getTypeFieldsKey(graphQLVariables)
+	return state.typeFields[ key ]?.isRequesting ?? false;
+}
+
+/**
+ * Returns the type fields.
+ *
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  * @param {bool} keepScalarTypes Keep the scalar types in the typeFields object
  * @param {bool} keepIntrospectionTypes Keep the introspection types (__Type, __Directive, __Field, etc) in the typeFields object
  *
- * @return {array} The list of types and their fields from the GraphQL schema
+ * @return {Array} Type fields.
  */
-export function getTypeFields( state, keepScalarTypes = false, keepIntrospectionTypes = false ) {
+export function getTypeFields( state, graphQLVariables, keepScalarTypes = false, keepIntrospectionTypes = false ) {
+	const key = getTypeFieldsKey(graphQLVariables)
+	
 	/**
 	 * Each element in typeFields has this shape:
 	 * {
@@ -16,7 +38,7 @@ export function getTypeFields( state, keepScalarTypes = false, keepIntrospection
 	 *   "fields": array|null
 	 * }
 	 */
-	let { typeFields } = state;
+	let typeFields = state.typeFields[ key ]?.results ?? [];
 
 	/**
 	 * Scalar types are those with no fields
@@ -31,93 +53,107 @@ export function getTypeFields( state, keepScalarTypes = false, keepIntrospection
 	if ( !keepIntrospectionTypes ) {
 		typeFields = typeFields.filter(element => !element.typeName.startsWith('__'));
 	}
+
 	return typeFields;
-};
+}
 
 /**
- * Have the typeFields been retrieved from the GraphQL server?
+ * Returns the error message from fetching type fields.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {bool} The list of types and their fields from the GraphQL schema
+ * @return {string|null} Error message, if any.
  */
-export function hasRetrievedTypeFields( state ) {
-	return state.hasRetrievedTypeFields;
-};
+export function getRetrievingTypeFieldsErrorMessage( state, graphQLVariables ) {
+	const key = getTypeFieldsKey(graphQLVariables)
+	return state.typeFields[ key ]?.errorMessage ?? null;
+}
+
+
+function getGlobalFieldsKey( graphQLVariables ) {
+	return (graphQLVariables || parameters.globalFields.defaultVariables).toString()
+}
 
 /**
- * Get the error message from retrieving the typeFields from the GraphQL server, if any
+ * Returns true if application is requesting for global fields.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {string|null} The error message
+ * @return {boolean} Whether a request is in progress for the global fields.
  */
-export function getRetrievingTypeFieldsErrorMessage( state ) {
-	return state.retrievingTypeFieldsErrorMessage;
-};
+export function isRequestingGlobalFields( state, graphQLVariables ) {
+	const key = getGlobalFieldsKey(graphQLVariables)
+	return state.globalFields[ key ]?.isRequesting ?? false;
+}
 
 /**
- * Get the global fields from the GraphQL schema
+ * Returns the global fields.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {array} The list of global fields from the GraphQL schema
+ * @return {Array} Global fields.
  */
-export function getGlobalFields( state ) {
-	return state.globalFields;
-};
+export function getGlobalFields( state, graphQLVariables ) {
+	const key = getGlobalFieldsKey(graphQLVariables)
+	return state.globalFields[ key ]?.results ?? [];
+}
 
 /**
- * Have the global fields been retrieved from the GraphQL server?
+ * Returns the error message from fetching global fields.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {bool} The list of global fields from the GraphQL schema
+ * @return {string|null} Error message, if any.
  */
-export function hasRetrievedGlobalFields( state ) {
-	return state.hasRetrievedGlobalFields;
-};
+export function getRetrievingGlobalFieldsErrorMessage( state, graphQLVariables ) {
+	const key = getGlobalFieldsKey(graphQLVariables)
+	return state.globalFields[ key ]?.errorMessage ?? null;
+}
+
+
+function getDirectivesKey( graphQLVariables ) {
+	return (graphQLVariables || parameters.directives.defaultVariables).toString()
+}
 
 /**
- * Get the error message from retrieving the global fields from the GraphQL server, if any
+ * Returns true if application is requesting for directives.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {string|null} The error message
+ * @return {boolean} Whether a request is in progress for the directives.
  */
-export function getRetrievingGlobalFieldsErrorMessage( state ) {
-	return state.retrievingGlobalFieldsErrorMessage;
-};
+export function isRequestingDirectives( state, graphQLVariables ) {
+	const key = getDirectivesKey(graphQLVariables)
+	return state.directives[ key ]?.isRequesting ?? false;
+}
 
 /**
- * Get the directives from the GraphQL schema
+ * Returns the directives.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {array} The list of directives from the GraphQL schema
+ * @return {Array} Directives.
  */
-export function getDirectives( state ) {
-	return state.directives;
-};
+export function getDirectives( state, graphQLVariables ) {
+	const key = getDirectivesKey(graphQLVariables)
+	return state.directives[ key ]?.results ?? [];
+}
 
 /**
- * Have the directives been retrieved from the GraphQL server?
+ * Returns the error message from fetching directives.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {bool} The list of directives from the GraphQL schema
+ * @return {string|null} Error message, if any.
  */
-export function hasRetrievedDirectives( state ) {
-	return state.hasRetrievedDirectives;
-};
-
-/**
- * Get the error message from retrieving the directives from the GraphQL server, if any
- *
- * @param {Object} state Store state
- *
- * @return {string|null} The error message
- */
-export function getRetrievingDirectivesErrorMessage( state ) {
-	return state.retrievingDirectivesErrorMessage;
-};
+export function getRetrievingDirectivesErrorMessage( state, graphQLVariables ) {
+	const key = getDirectivesKey(graphQLVariables)
+	return state.directives[ key ]?.errorMessage ?? null;
+}

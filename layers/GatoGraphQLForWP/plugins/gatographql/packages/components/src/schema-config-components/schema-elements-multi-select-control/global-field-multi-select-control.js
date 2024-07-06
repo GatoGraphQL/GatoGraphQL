@@ -16,7 +16,7 @@ const GlobalFieldMultiSelectControl = compose( [
 	withSelect( ( select ) => {
 		const {
 			getGlobalFields,
-			hasRetrievedGlobalFields,
+			isRequestingGlobalFields,
 			getRetrievingGlobalFieldsErrorMessage,
 		} = select ( 'gatographql/components' );
 		/**
@@ -32,7 +32,7 @@ const GlobalFieldMultiSelectControl = compose( [
 		) );
 		return {
 			items,
-			hasRetrievedItems: hasRetrievedGlobalFields(),
+			isRequestingItems: isRequestingGlobalFields(),
 			errorMessage: getRetrievingGlobalFieldsErrorMessage(),
 		};
 	} ),

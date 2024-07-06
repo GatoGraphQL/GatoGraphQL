@@ -1,32 +1,44 @@
-/**
- * Get the schemaConfigurations from the GraphQL schema
- *
- * @param {Object} state Store state
- *
- * @return {array} The list of schemaConfigurations from the GraphQL schema
- */
-export function getSchemaConfigurations( state ) {
-	return state.schemaConfigurations;
-};
+import parameters from './parameters'
+
+function getSchemaConfigurationsKey( graphQLVariables ) {
+	return (graphQLVariables || parameters.defaultVariables).toString()
+}
 
 /**
- * Have the schemaConfigurations been retrieved from the GraphQL server?
+ * Returns true if application is requesting for schema configurations.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {bool} The list of schemaConfigurations from the GraphQL schema
+ * @return {boolean} Whether a request is in progress for the schema configurations.
  */
-export function hasRetrievedSchemaConfigurations( state ) {
-	return state.hasRetrievedSchemaConfigurations;
-};
+export function isRequestingSchemaConfigurations( state, graphQLVariables ) {
+	const key = getSchemaConfigurationsKey(graphQLVariables)
+	return state.schemaConfigurations[ key ]?.isRequesting ?? false;
+}
 
 /**
- * Get the error message from retrieving the schemaConfigurations from the GraphQL server, if any
+ * Returns the schema configurations.
  *
- * @param {Object} state Store state
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
  *
- * @return {string|null} The error message
+ * @return {Array} Schema configurations.
  */
-export function getRetrievingSchemaConfigurationsErrorMessage( state ) {
-	return state.retrievingSchemaConfigurationsErrorMessage;
-};
+export function getSchemaConfigurations( state, graphQLVariables ) {
+	const key = getSchemaConfigurationsKey(graphQLVariables)
+	return state.schemaConfigurations[ key ]?.results ?? [];
+}
+
+/**
+ * Returns the error message from fetching schema configurations.
+ *
+ * @param {Object} state Global application state.
+ * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
+ *
+ * @return {string|null} Error message, if any.
+ */
+export function getRetrievingSchemaConfigurationsErrorMessage( state, graphQLVariables ) {
+	const key = getSchemaConfigurationsKey(graphQLVariables)
+	return state.schemaConfigurations[ key ]?.errorMessage ?? null;
+}

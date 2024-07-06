@@ -4,7 +4,14 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 2.6.0 - DATE
+## 2.7.0 - DATE
+
+### Fixed
+
+- Catch exception if dependency version is not semver (#2712)
+- Convert entries in JSON dictionary of variables in persisted query from array to object (#2715)
+
+## 2.6.0 - 01/07/2024
 
 ### Improvements
 
@@ -23,11 +30,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - [PRO] Translate posts for MultilingualPress (Classic editor) (#2706)
   - [PRO] Translate Poedit file content (#2709)
 - Added Gato GraphQL intro video to documentation (#2707)
-- Tested up to WordPress v6.6
 
 ### Fixed
 
 - Identifying extension in `createMediaItem` when filename has more then one dot
+- Catch exception if dependency version is not semver (`v2.6.2`) (#2712)
 
 ### [PRO] Improvements
 
