@@ -225,7 +225,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'createCustomPostMutationPayloadObjects',
             ] : [],
             $addFieldsToQueryPayloadableCustomPostMutations && !$disableRedundantRootTypeMutationFields ? [
-                'updateCustomPostPostMutationPayloadObjects',
+                'updateCustomPostMutationPayloadObjects',
             ] : [],
         );
     }
