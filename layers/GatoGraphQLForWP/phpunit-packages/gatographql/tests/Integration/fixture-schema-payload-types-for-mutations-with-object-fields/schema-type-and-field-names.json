@@ -1004,6 +1004,9 @@
           "name": "QueryRoot",
           "fields": [
             {
+              "name": "addCommentToCustomPostMutationPayloadObjects"
+            },
+            {
               "name": "capabilities"
             },
             {
@@ -1026,6 +1029,15 @@
             },
             {
               "name": "comments"
+            },
+            {
+              "name": "createCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "createMediaItemMutationPayloadObjects"
+            },
+            {
+              "name": "createPageMutationPayloadObjects"
             },
             {
               "name": "createPostMutationPayloadObjects"
@@ -1172,6 +1184,12 @@
               "name": "posts"
             },
             {
+              "name": "removeFeaturedImageFromCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "replyCommentMutationPayloadObjects"
+            },
+            {
               "name": "roleNames"
             },
             {
@@ -1179,6 +1197,15 @@
             },
             {
               "name": "self"
+            },
+            {
+              "name": "setCategoriesOnPostMutationPayloadObjects"
+            },
+            {
+              "name": "setFeaturedImageOnCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "setTagsOnPostMutationPayloadObjects"
             },
             {
               "name": "siteLanguage"
@@ -1202,6 +1229,12 @@
               "name": "tags"
             },
             {
+              "name": "updateCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "updatePageMutationPayloadObjects"
+            },
+            {
               "name": "updatePostMutationPayloadObjects"
             },
             {
@@ -1220,6 +1253,9 @@
           "fields": [
             {
               "name": "addCommentToCustomPost"
+            },
+            {
+              "name": "addCommentToCustomPostMutationPayloadObjects"
             },
             {
               "name": "capabilities"
@@ -1249,10 +1285,19 @@
               "name": "createCustomPost"
             },
             {
+              "name": "createCustomPostMutationPayloadObjects"
+            },
+            {
               "name": "createMediaItem"
             },
             {
+              "name": "createMediaItemMutationPayloadObjects"
+            },
+            {
               "name": "createPage"
+            },
+            {
+              "name": "createPageMutationPayloadObjects"
             },
             {
               "name": "createPost"
@@ -1411,7 +1456,13 @@
               "name": "removeFeaturedImageFromCustomPost"
             },
             {
+              "name": "removeFeaturedImageFromCustomPostMutationPayloadObjects"
+            },
+            {
               "name": "replyComment"
+            },
+            {
+              "name": "replyCommentMutationPayloadObjects"
             },
             {
               "name": "roleNames"
@@ -1426,10 +1477,19 @@
               "name": "setCategoriesOnPost"
             },
             {
+              "name": "setCategoriesOnPostMutationPayloadObjects"
+            },
+            {
               "name": "setFeaturedImageOnCustomPost"
             },
             {
+              "name": "setFeaturedImageOnCustomPostMutationPayloadObjects"
+            },
+            {
               "name": "setTagsOnPost"
+            },
+            {
+              "name": "setTagsOnPostMutationPayloadObjects"
             },
             {
               "name": "siteLanguage"
@@ -1456,7 +1516,13 @@
               "name": "updateCustomPost"
             },
             {
+              "name": "updateCustomPostMutationPayloadObjects"
+            },
+            {
               "name": "updatePage"
+            },
+            {
+              "name": "updatePageMutationPayloadObjects"
             },
             {
               "name": "updatePost"
