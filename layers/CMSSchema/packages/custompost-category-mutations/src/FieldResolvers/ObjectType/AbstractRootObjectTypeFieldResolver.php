@@ -37,10 +37,13 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
-        if ($moduleConfiguration->disableRedundantRootTypeMutationFields()) {
+        $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        if ($engineModuleConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $addFieldsToQueryPayloadableCustomPostCategoryMutations = $moduleConfiguration->addFieldsToQueryPayloadableCustomPostCategoryMutations();
         return [
             $this->getSetCategoriesFieldName(),
         ];

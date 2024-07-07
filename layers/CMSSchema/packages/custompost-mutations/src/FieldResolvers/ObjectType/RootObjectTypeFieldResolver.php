@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPostMutations\Module as CustomPostMutationsModule;
-use PoPCMSSchema\CustomPostMutations\ModuleConfiguration as CustomPostMutationsModuleConfiguration;
+use PoPCMSSchema\CustomPostMutations\Module;
+use PoPCMSSchema\CustomPostMutations\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateGenericCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCreateGenericCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableUpdateGenericCustomPostMutationResolver;
@@ -189,12 +189,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $addFieldsToQueryPayloadableCustomPostMutations = $moduleConfiguration->addFieldsToQueryPayloadableCustomPostMutations();
         return array_merge(
             [
                 'createCustomPost',
             ],
-            !$moduleConfiguration->disableRedundantRootTypeMutationFields() ? [
+            !$engineModuleConfiguration->disableRedundantRootTypeMutationFields() ? [
                 'updateCustomPost',
             ] : []
         );
@@ -211,8 +214,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
-        /** @var CustomPostMutationsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if (!$usePayloadableCustomPostMutations) {
             return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
@@ -252,8 +255,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
-        /** @var CustomPostMutationsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
             'createCustomPost' => $usePayloadableCustomPostMutations
@@ -268,8 +271,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        /** @var CustomPostMutationsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if ($usePayloadableCustomPostMutations) {
             return match ($fieldName) {
@@ -306,9 +309,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
          * instead this validation is executed inside the mutation, so the error
          * shows up in the Payload
          *
-         * @var CustomPostMutationsModuleConfiguration
+         * @var ModuleConfiguration
          */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if ($usePayloadableCustomPostMutations) {
             return $validationCheckpoints;
