@@ -128,6 +128,93 @@ As a consequence of all the additional `MutationPayload`, `MutationErrorPayloadU
 
 ![GraphQL schema with payload object types for mutations](../../images/mutations-using-payload-object-types.png "GraphQL schema with payload object types for mutations")
 
+#### Query the mutation payload objects
+
+Every mutation in the schema has a corresponding field to query its recently-created payload objects, with name `{mutationName}MutationPayloadObjects`.
+
+These fields include:
+
+- `addCommentToCustomPostMutationPayloadObjects` (for `addCommentToCustomPost`)
+- `createCustomPostMutationPayloadObjects` (for `createCustomPost`)
+- `createMediaItemMutationPayloadObjects` (for `createMediaItem`)
+- `createPageMutationPayloadObjects` (for `createPage`)
+- `createPostMutationPayloadObjects` (for `createPost`)
+- `removeFeaturedImageFromCustomPostMutationPayloadObjects` (for `removeFeaturedImageFromCustomPost`)
+- `replyCommentMutationPayloadObjects` (for `replyComment`)
+- `setCategoriesOnPostMutationPayloadObjects` (for `setCategoriesOnPost`)
+- `setFeaturedImageOnCustomPostMutationPayloadObjects` (for `setFeaturedImageOnCustomPost`)
+- `setTagsOnPostMutationPayloadObjects` (for `setTagsOnPost`)
+- `updateCustomPostMutationPayloadObjects` (for `updateCustomPost`)
+- `updatePageMutationPayloadObjects` (for `updatePage`)
+- `updatePostMutationPayloadObjects` (for `updatePost`)
+
+These fields enable us to retrieve the results of mutations executed using `@applyField` while iterating the items in an array.
+
+For instance, the following query duplicates posts in bulk:
+
+```graphql
+query GetPostsAndExportData
+{
+  postsToDuplicate: posts {
+    title
+    rawContent
+    excerpt
+
+    # Already create (and export) the inputs for the mutation
+    postInput: _echo(value: {
+      title: $__title
+      contentAs: {
+        html: $__rawContent
+      },
+      excerpt: $__excerpt
+    })
+      @export(as: "postInput", type: LIST)
+      @remove
+  }
+}
+
+mutation CreatePosts
+  @depends(on: "GetPostsAndExportData")
+{
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
+    @underEachArrayItem(
+      passValueOnwardsAs: "input"
+    )
+      @applyField(
+        name: "createPost"
+        arguments: {
+          input: $input
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createdPostMutationPayloadObjectIDs")
+}
+
+query DuplicatePosts
+  @depends(on: "CreatePosts")
+{
+  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
+    ids: $createdPostMutationPayloadObjectIDs
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      rawContent
+      excerpt
+    }
+  }
+}
+```
+
+By default, these fields are not added to the GraphQL schema. For that, we must select option "Use payload types for mutations, and add fields to query those payload objects" (see below).
+
 ### Mutated entity
 
 The mutation will directly return the mutated entity in case of success, or <code>null</code> in case of failure, and any error message will be displayed in the JSON response's top-level <code>errors</code> entry.
@@ -191,11 +278,17 @@ Because there are no additional types added, the GraphQL schema will look leaner
 
 ### Configuration
 
+We can configure the GraphQL schema with one among three options:
+
+- Use payload types for mutations
+- Use payload types for mutations, and add fields to query those payload objects
+- Do not use payload types for mutations (i.e. return the mutated entity)
+
 Using payload object types for mutations in the schema can be configured as follows, in order of priority:
 
 ✅ Specific mode for the custom endpoint or persisted query, defined in the schema configuration
 
-![Defining if to use payload object types for mutations, set in the Schema configuration](../../images/schema-configuration-payload-object-types-for-mutations.png "Defining if to use payload object types for mutations, set in the Schema configuration")
+![Defining if and how to use payload object types for mutations, set in the Schema configuration](../../images/schema-configuration-payload-object-types-for-mutations.png "Defining if and how to use payload object types for mutations, set in the Schema configuration")
 
 ✅ Default mode, defined in the Settings
 
@@ -203,6 +296,6 @@ If the schema configuration has value `"Default"`, it will use the mode defined 
 
 <div class="img-width-1024" markdown=1>
 
-![Defining if to use payload object types for mutations, in the Settings](../../images/settings-payload-object-types-for-mutations-default.png "Defining if to use payload object types for mutations, in the Settings")
+![Defining if and how to use payload object types for mutations, in the Settings](../../images/settings-payload-object-types-for-mutations-default.png "Defining if and how to use payload object types for mutations, in the Settings")
 
 </div>
