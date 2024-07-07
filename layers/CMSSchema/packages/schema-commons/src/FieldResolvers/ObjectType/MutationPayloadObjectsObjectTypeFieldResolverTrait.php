@@ -6,6 +6,7 @@ namespace PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType;
 
 use PoP\ComponentModel\Facades\Dictionaries\ObjectDictionaryFacade;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties;
 use stdClass;
 
 trait MutationPayloadObjectsObjectTypeFieldResolverTrait
@@ -20,7 +21,7 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         /** @var stdClass */
-        $mutationPayloadObjectsInput = $fieldDataAccessor->getValue('input');
+        $mutationPayloadObjectsInput = $fieldDataAccessor->getValue(MutationInputProperties::INPUT);
         $ids = $mutationPayloadObjectsInput->ids;
         
         /**
