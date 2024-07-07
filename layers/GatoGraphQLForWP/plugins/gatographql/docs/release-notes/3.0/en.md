@@ -98,7 +98,16 @@ query DuplicatePosts
 
 The list of added fields is the following:
 
+- `addCommentToCustomPostMutationPayloadObjects` (for `addCommentToCustomPost`)
+- `createCustomPostMutationPayloadObjects` (for `createCustomPost`)
+- `createMediaItemMutationPayloadObjects` (for `createMediaItem`)
+- `createPageMutationPayloadObjects` (for `createPage`)
 - `createPostMutationPayloadObjects` (for `createPost`)
+- `removeFeaturedImageFromCustomPostMutationPayloadObjects` (for `removeFeaturedImageFromCustomPost`)
+- `replyCommentMutationPayloadObjects` (for `replyComment`)
+- `setFeaturedImageOnCustomPostMutationPayloadObjects` (for `setFeaturedImageOnCustomPost`)
+- `updateCustomPostMutationPayloadObjects` (for `updateCustomPost`)
+- `updatePageMutationPayloadObjects` (for `updatePage`)
 - `updatePostMutationPayloadObjects` (for `updatePost`)
 
 By default, these fields are not added to the GraphQL schema. For that, the new option "Use payload types for mutations, and add fields to query those payload objects" must be selected (see below).
