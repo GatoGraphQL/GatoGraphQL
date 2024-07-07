@@ -215,6 +215,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'createPage' => $this->__('Create a page', 'page-mutations'),
             'updatePage' => $this->__('Update a page', 'page-mutations'),
+            'createPageMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createPage` mutation', 'page-mutations'),
+            'updatePageMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updatePage` mutation', 'page-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

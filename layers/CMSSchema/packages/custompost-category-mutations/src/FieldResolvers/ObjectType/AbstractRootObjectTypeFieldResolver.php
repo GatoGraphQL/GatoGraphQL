@@ -63,6 +63,10 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
                 $this->__('Set categories on a %s', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
+            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => sprintf(
+                $this->__('Retrieve the payload objects from a recently-executed `%s` mutation', 'post-mutations'),
+                $this->getSetCategoriesFieldName()
+            ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

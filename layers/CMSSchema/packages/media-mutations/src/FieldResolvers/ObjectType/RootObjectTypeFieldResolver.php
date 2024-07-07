@@ -134,6 +134,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'createMediaItem' => $this->__('Upload an attachment', 'media-mutations'),
+            'createMediaItemMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createMediaItem` mutation', 'media-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
