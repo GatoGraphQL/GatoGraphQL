@@ -123,7 +123,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            [$this->getSetTagsFieldName() => 'input'] => SchemaTypeModifiers::MANDATORY,
+            [$this->getSetTagsFieldName() => 'input'],
+            [$this->getSetTagsFieldName() . 'MutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
+                => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
