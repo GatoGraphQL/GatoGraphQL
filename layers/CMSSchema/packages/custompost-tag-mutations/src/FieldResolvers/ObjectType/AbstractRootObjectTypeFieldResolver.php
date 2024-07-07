@@ -44,9 +44,14 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $addFieldsToQueryPayloadableCustomPostTagMutations = $moduleConfiguration->addFieldsToQueryPayloadableCustomPostTagMutations();
-        return [
-            $this->getSetTagsFieldName(),
-        ];
+        return array_merge(
+            [
+                $this->getSetTagsFieldName(),
+            ],
+            $addFieldsToQueryPayloadableCustomPostTagMutations ? [
+                $this->getSetTagsFieldName() . 'MutationPayloadObjects',
+            ] : [],
+        );
     }
 
     abstract protected function getSetTagsFieldName(): string;

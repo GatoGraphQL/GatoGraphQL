@@ -179,10 +179,16 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $addFieldsToQueryPayloadableCustomPostMediaMutations = $moduleConfiguration->addFieldsToQueryPayloadableCustomPostMediaMutations();
-        return [
-            'setFeaturedImageOnCustomPost',
-            'removeFeaturedImageFromCustomPost',
-        ];
+        return array_merge(
+            [
+                'setFeaturedImageOnCustomPost',
+                'removeFeaturedImageFromCustomPost',
+            ],
+            $addFieldsToQueryPayloadableCustomPostMediaMutations ? [
+                'setFeaturedImageOnCustomPostMutationPayloadObjects',
+                'removeFeaturedImageFromCustomPostMutationPayloadObjects',
+            ] : [],
+        );
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

@@ -120,9 +120,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $addFieldsToQueryPayloadableMediaMutations = $moduleConfiguration->addFieldsToQueryPayloadableMediaMutations();
-        return [
-            'createMediaItem',
-        ];
+        return array_merge(
+            [
+                'createMediaItem',
+            ],
+            $addFieldsToQueryPayloadableMediaMutations ? [
+                'createMediaItemMutationPayloadObjects',
+            ] : [],
+        );
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string

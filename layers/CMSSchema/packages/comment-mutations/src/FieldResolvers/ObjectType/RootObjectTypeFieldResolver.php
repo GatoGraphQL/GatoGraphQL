@@ -150,10 +150,16 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $addFieldsToQueryPayloadableCommentMutations = $moduleConfiguration->addFieldsToQueryPayloadableCommentMutations();
-        return [
-            'addCommentToCustomPost',
-            'replyComment',
-        ];
+        return array_merge(
+            [
+                'addCommentToCustomPost',
+                'replyComment',
+            ],
+            $addFieldsToQueryPayloadableCommentMutations ? [
+                'addCommentToCustomPostMutationPayloadObjects',
+                'replyCommentMutationPayloadObjects',
+            ] : [],
+        );
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
