@@ -11,8 +11,13 @@ class SchemaMediaMutationsBlockSchemaConfigurationExecuter extends AbstractSchem
         return \PoPCMSSchema\MediaMutations\Module::class;
     }
 
-    public function getHookEnvironmentClass(): string
+    public function getHookUsePayloadableEnvironmentClass(): string
     {
         return \PoPCMSSchema\MediaMutations\Environment::USE_PAYLOADABLE_MEDIA_MUTATIONS;
+    }
+
+    public function getHookAddFieldsToQueryPayloadableEnvironmentClass(): string
+    {
+        return \PoPCMSSchema\MediaMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_MEDIA_MUTATIONS;
     }
 }

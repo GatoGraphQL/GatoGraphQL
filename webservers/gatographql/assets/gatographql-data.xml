@@ -975,7 +975,7 @@
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=600</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->]]></content:encoded>
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"usePayloadType":"do-not-use-payload-types"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>600</wp:post_id>
 		<wp:post_date><![CDATA[2022-10-05 06:47:18]]></wp:post_date>
@@ -3061,7 +3061,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 		<dc:creator><![CDATA[admin]]></dc:creator>
 		<guid isPermaLink="false">https://gatographql.lndo.site/?post_type=graphql-schemaconfig&#038;p=1222</guid>
 		<description></description>
-		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"enabledConst":"disabled"} /-->
+		<content:encoded><![CDATA[<!-- wp:gatographql/schema-config-payload-types-for-mutations {"usePayloadType":"do-not-use-payload-types"} /-->
 
 <!-- wp:gatographql/schema-config-mutation-scheme {"mutationScheme":"nested"} /-->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CustomPostMutations\Module as CustomPostMutationsModule;
-use PoPCMSSchema\CustomPostMutations\ModuleConfiguration as CustomPostMutationsModuleConfiguration;
+use PoPCMSSchema\CustomPostMutations\Module;
+use PoPCMSSchema\CustomPostMutations\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateGenericCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCreateGenericCustomPostMutationResolver;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableUpdateGenericCustomPostMutationResolver;
@@ -15,8 +15,12 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\RootUpdateGen
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\RootCreateGenericCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -31,6 +35,8 @@ use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver $rootUpdateGenericCustomPostMutationPayloadObjectTypeResolver = null;
     private ?RootCreateGenericCustomPostMutationPayloadObjectTypeResolver $rootCreateGenericCustomPostMutationPayloadObjectTypeResolver = null;
@@ -41,6 +47,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootUpdateGenericCustomPostInputObjectTypeResolver $rootUpdateGenericCustomPostInputObjectTypeResolver = null;
     private ?RootCreateGenericCustomPostInputObjectTypeResolver $rootCreateGenericCustomPostInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+    private ?MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver = null;
 
     final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
     {
@@ -172,6 +179,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->userLoggedInCheckpoint;
     }
+    final public function setMutationPayloadObjectsInputObjectTypeResolver(MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver): void
+    {
+        $this->mutationPayloadObjectsInputObjectTypeResolver = $mutationPayloadObjectsInputObjectTypeResolver;
+    }
+    final protected function getMutationPayloadObjectsInputObjectTypeResolver(): MutationPayloadObjectsInputObjectTypeResolver
+    {
+        if ($this->mutationPayloadObjectsInputObjectTypeResolver === null) {
+            /** @var MutationPayloadObjectsInputObjectTypeResolver */
+            $mutationPayloadObjectsInputObjectTypeResolver = $this->instanceManager->getInstance(MutationPayloadObjectsInputObjectTypeResolver::class);
+            $this->mutationPayloadObjectsInputObjectTypeResolver = $mutationPayloadObjectsInputObjectTypeResolver;
+        }
+        return $this->mutationPayloadObjectsInputObjectTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -189,14 +209,24 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        $disableRedundantRootTypeMutationFields = $engineModuleConfiguration->disableRedundantRootTypeMutationFields();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $addFieldsToQueryPayloadableCustomPostMutations = $moduleConfiguration->addFieldsToQueryPayloadableCustomPostMutations();
         return array_merge(
             [
                 'createCustomPost',
             ],
-            !$moduleConfiguration->disableRedundantRootTypeMutationFields() ? [
+            !$disableRedundantRootTypeMutationFields ? [
                 'updateCustomPost',
-            ] : []
+            ] : [],
+            $addFieldsToQueryPayloadableCustomPostMutations ? [
+                'createCustomPostMutationPayloadObjects',
+            ] : [],
+            $addFieldsToQueryPayloadableCustomPostMutations && !$disableRedundantRootTypeMutationFields ? [
+                'updateCustomPostMutationPayloadObjects',
+            ] : [],
         );
     }
 
@@ -205,22 +235,27 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'createCustomPost' => $this->__('Create a custom post. This mutation accepts the data that is common to all custom posts (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those custom post types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'custompost-mutations'),
             'updateCustomPost' => $this->__('Update a custom post', 'custompost-mutations'),
+            'createCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createCustomPost` mutation', 'custompost-mutations'),
+            'updateCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCustomPost` mutation', 'custompost-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
-        /** @var CustomPostMutationsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if (!$usePayloadableCustomPostMutations) {
             return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
         }
         return match ($fieldName) {
             'createCustomPost',
-            'updateCustomPost' =>
-                SchemaTypeModifiers::NON_NULLABLE,
+            'updateCustomPost'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'createCustomPostMutationPayloadObjects',
+            'updateCustomPostMutationPayloadObjects'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -238,22 +273,30 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'updateCustomPost' => [
                 'input' => $this->getRootUpdateGenericCustomPostInputObjectTypeResolver(),
             ],
+            'createCustomPostMutationPayloadObjects',
+            'updateCustomPostMutationPayloadObjects' => [
+                SchemaCommonsMutationInputProperties::INPUT => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldArgName) {
-            'input' => SchemaTypeModifiers::MANDATORY,
+        return match ([$fieldName => $fieldArgName]) {
+            ['createCustomPost' => 'input'],
+            ['updateCustomPost' => 'input'],
+            ['createCustomPostMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT],
+            ['updateCustomPostMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
+                => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
     {
-        /** @var CustomPostMutationsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         return match ($fieldName) {
             'createCustomPost' => $usePayloadableCustomPostMutations
@@ -268,13 +311,17 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
-        /** @var CustomPostMutationsModuleConfiguration */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if ($usePayloadableCustomPostMutations) {
             return match ($fieldName) {
-                'createCustomPost' => $this->getRootCreateGenericCustomPostMutationPayloadObjectTypeResolver(),
-                'updateCustomPost' => $this->getRootUpdateGenericCustomPostMutationPayloadObjectTypeResolver(),
+                'createCustomPost',
+                'createCustomPostMutationPayloadObjects'
+                    => $this->getRootCreateGenericCustomPostMutationPayloadObjectTypeResolver(),
+                'updateCustomPost',
+                'updateCustomPostMutationPayloadObjects'
+                    => $this->getRootUpdateGenericCustomPostMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
@@ -306,9 +353,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
          * instead this validation is executed inside the mutation, so the error
          * shows up in the Payload
          *
-         * @var CustomPostMutationsModuleConfiguration
+         * @var ModuleConfiguration
          */
-        $moduleConfiguration = App::getModule(CustomPostMutationsModule::class)->getConfiguration();
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if ($usePayloadableCustomPostMutations) {
             return $validationCheckpoints;
@@ -321,5 +368,24 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 break;
         }
         return $validationCheckpoints;
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'createCustomPostMutationPayloadObjects':
+            case 'updateCustomPostMutationPayloadObjects':
+                return $this->resolveMutationPayloadObjectsValue(
+                    $objectTypeResolver,
+                    $fieldDataAccessor,
+                );
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -121,14 +121,6 @@ abstract class AbstractGraphQLPersistedQueryEndpointCustomPostType extends Abstr
         return true;
     }
 
-    /**
-     * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
-     */
-    public function usePostExcerptAsDescription(): bool
-    {
-        return true;
-    }
-
     public function getEndpointOptionsBlock(): BlockInterface
     {
         return $this->getPersistedQueryEndpointOptionsBlock();

@@ -11,8 +11,13 @@ class SchemaUserStateMutationsBlockSchemaConfigurationExecuter extends AbstractS
         return \PoPCMSSchema\UserStateMutations\Module::class;
     }
 
-    public function getHookEnvironmentClass(): string
+    public function getHookUsePayloadableEnvironmentClass(): string
     {
         return \PoPCMSSchema\UserStateMutations\Environment::USE_PAYLOADABLE_USERSTATE_MUTATIONS;
+    }
+
+    public function getHookAddFieldsToQueryPayloadableEnvironmentClass(): string
+    {
+        return \PoPCMSSchema\UserStateMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_USERSTATE_MUTATIONS;
     }
 }

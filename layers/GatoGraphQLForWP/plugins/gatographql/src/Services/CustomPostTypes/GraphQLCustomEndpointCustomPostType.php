@@ -186,14 +186,6 @@ class GraphQLCustomEndpointCustomPostType extends AbstractGraphQLEndpointCustomP
     }
 
     /**
-     * Indicate if the excerpt must be used as the CPT's description and rendered when rendering the post
-     */
-    public function usePostExcerptAsDescription(): bool
-    {
-        return true;
-    }
-
-    /**
      * Label to show on the "execute" action in the CPT table
      */
     protected function getExecuteActionLabel(): string

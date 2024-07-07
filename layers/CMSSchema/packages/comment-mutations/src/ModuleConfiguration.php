@@ -56,4 +56,21 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function addFieldsToQueryPayloadableCommentMutations(): bool
+    {
+        if (!$this->usePayloadableCommentMutations()) {
+            return false;
+        }
+
+        $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_COMMENT_MUTATIONS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

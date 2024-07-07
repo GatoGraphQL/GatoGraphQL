@@ -10,11 +10,14 @@ import { compose, withState } from '@wordpress/compose';
  */
 import { getModuleDocMarkdownContentOrUseDefault } from './module-doc-markdown-loader';
 import {
+	ATTRIBUTE_VALUE_PAYLOAD_TYPE_DEFAULT,
+	ATTRIBUTE_VALUE_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
+	ATTRIBUTE_VALUE_USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
+	ATTRIBUTE_VALUE_DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
+} from './mutation-payload-type-options';
+import {
 	InfoTooltip,
 	SETTINGS_VALUE_LABEL,
-	ATTRIBUTE_VALUE_DEFAULT,
-	ATTRIBUTE_VALUE_ENABLED,
-	ATTRIBUTE_VALUE_DISABLED,
 	withCard,
 	withEditableOnFocus,
 } from '@gatographql/components';
@@ -24,21 +27,25 @@ const SchemaConfigPayloadTypesForMutationsCard = ( props ) => {
 		isSelected,
 		setAttributes,
 		attributes: {
-			enabledConst,
+			usePayloadType,
 		},
 	} = props;
 	const options = [
 		{
 			label: SETTINGS_VALUE_LABEL,
-			value: ATTRIBUTE_VALUE_DEFAULT,
+			value: ATTRIBUTE_VALUE_PAYLOAD_TYPE_DEFAULT,
 		},
 		{
 			label: __('Use payload types for mutations', 'gatographql'),
-			value: ATTRIBUTE_VALUE_ENABLED,
+			value: ATTRIBUTE_VALUE_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
+		},
+		{
+			label: __('Use payload types for mutations, and add fields to query those payload objects', 'gatographql'),
+			value: ATTRIBUTE_VALUE_USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
 		},
 		{
 			label: __('Do not use payload types for mutations (i.e. return the mutated entity)', 'gatographql'),
-			value: ATTRIBUTE_VALUE_DISABLED,
+			value: ATTRIBUTE_VALUE_DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
 		},
 	];
 	const optionValues = options.map( option => option.value );
@@ -52,13 +59,16 @@ const SchemaConfigPayloadTypesForMutationsCard = ( props ) => {
 			{ !isSelected && (
 				<>
 					<br />
-					{ ( enabledConst == ATTRIBUTE_VALUE_DEFAULT || !optionValues.includes(enabledConst) ) &&
+					{ ( usePayloadType == ATTRIBUTE_VALUE_PAYLOAD_TYPE_DEFAULT || !optionValues.includes(usePayloadType) ) &&
 						<span>🟡 { __('Default', 'gatographql') }</span>
 					}
-					{ enabledConst == ATTRIBUTE_VALUE_ENABLED &&
+					{ usePayloadType == ATTRIBUTE_VALUE_USE_PAYLOAD_TYPES_FOR_MUTATIONS &&
 						<span>✅ { __('Use payload types for mutations', 'gatographql') }</span>
 					}
-					{ enabledConst == ATTRIBUTE_VALUE_DISABLED &&
+					{ usePayloadType == ATTRIBUTE_VALUE_USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS &&
+						<span>✳️ { __('Use payload types for mutations, and add fields to query those payload objects', 'gatographql') }</span>
+					}
+					{ usePayloadType == ATTRIBUTE_VALUE_DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS &&
 						<span>❌ { __('Do not use payload types for mutations (i.e. return the mutated entity)', 'gatographql') }</span>
 					}
 				</>
@@ -67,10 +77,10 @@ const SchemaConfigPayloadTypesForMutationsCard = ( props ) => {
 				<RadioControl
 					{ ...props }
 					options={ options }
-					selected={ enabledConst }
+					selected={ usePayloadType }
 					onChange={ newValue => (
 						setAttributes( {
-							enabledConst: newValue
+							usePayloadType: newValue
 						} )
 					)}
 				/>

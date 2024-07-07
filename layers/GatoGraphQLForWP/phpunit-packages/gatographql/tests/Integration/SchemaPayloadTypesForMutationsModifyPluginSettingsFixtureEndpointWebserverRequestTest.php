@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaConfigurationFunctionalityModuleResolver;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase;
 
 class SchemaPayloadTypesForMutationsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
@@ -31,6 +32,6 @@ class SchemaPayloadTypesForMutationsModifyPluginSettingsFixtureEndpointWebserver
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return false;
+        return MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS;
     }
 }

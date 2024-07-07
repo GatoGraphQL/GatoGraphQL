@@ -313,4 +313,19 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
             </style>
         <?php
     }
+
+    /**
+     * Indicate if the excerpt must be used as the CPT's description
+     * and rendered when rendering the post.
+     *
+     * For the Endpoint CPTs, do it only when passing ?view=source, otherwise
+     * that hooks is executed when retrieving `Post.content` against
+     * a custom endpoint!
+     */
+    public function usePostExcerptAsDescription(): bool
+    {
+        // Use `''` instead of `null` so that the query resolution
+        // works either without param or empty (?view=)
+        return App::query(RequestParams::VIEW, '') === RequestParams::VIEW_SOURCE;
+    }
 }

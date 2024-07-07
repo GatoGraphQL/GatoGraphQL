@@ -6,7 +6,7 @@ namespace PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType;
 
 use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 
-abstract class AbstractDictionaryObjectTypeDataLoader extends AbstractObjectTypeDataLoader
+abstract class AbstractDictionaryObjectTypeDataLoader extends AbstractObjectTypeDataLoader implements DictionaryObjectTypeDataLoaderInterface
 {
     private ?ObjectDictionaryInterface $objectDictionary = null;
 
@@ -37,6 +37,4 @@ abstract class AbstractDictionaryObjectTypeDataLoader extends AbstractObjectType
             $ids
         );
     }
-
-    abstract protected function getObjectClass(): string;
 }

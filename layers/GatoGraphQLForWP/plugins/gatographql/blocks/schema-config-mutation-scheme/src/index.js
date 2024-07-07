@@ -59,7 +59,7 @@ registerBlockType( 'gatographql/schema-config-mutation-scheme', {
 	attributes: {
 		/**
 		 * Same attribute name as defined in
-		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME_DEFAULT
+		 * GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigMutationSchemeBlock::ATTRIBUTE_NAME_MUTATION_SCHEME
 		 */
 		mutationScheme: {
 			type: 'string',

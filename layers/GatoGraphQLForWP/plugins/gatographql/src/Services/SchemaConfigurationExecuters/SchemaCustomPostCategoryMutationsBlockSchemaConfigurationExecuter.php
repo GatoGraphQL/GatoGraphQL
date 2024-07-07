@@ -11,8 +11,13 @@ class SchemaCustomPostCategoryMutationsBlockSchemaConfigurationExecuter extends 
         return \PoPCMSSchema\CustomPostCategoryMutations\Module::class;
     }
 
-    public function getHookEnvironmentClass(): string
+    public function getHookUsePayloadableEnvironmentClass(): string
     {
         return \PoPCMSSchema\CustomPostCategoryMutations\Environment::USE_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS;
+    }
+
+    public function getHookAddFieldsToQueryPayloadableEnvironmentClass(): string
+    {
+        return \PoPCMSSchema\CustomPostCategoryMutations\Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS;
     }
 }

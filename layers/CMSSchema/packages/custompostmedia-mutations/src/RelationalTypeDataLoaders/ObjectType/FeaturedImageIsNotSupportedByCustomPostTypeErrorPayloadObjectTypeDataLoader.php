@@ -9,7 +9,7 @@ use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractDictionaryOb
 
 class FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeDataLoader extends AbstractDictionaryObjectTypeDataLoader
 {
-    protected function getObjectClass(): string
+    public function getObjectClass(): string
     {
         return FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload::class;
     }

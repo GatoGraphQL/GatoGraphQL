@@ -14,8 +14,13 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootReplyComment
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootAddCommentToCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootReplyCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
+use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -27,6 +32,8 @@ use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
     private ?RootAddCommentToCustomPostInputObjectTypeResolver $rootAddCommentToCustomPostInputObjectTypeResolver = null;
@@ -34,6 +41,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootAddCommentToCustomPostMutationPayloadObjectTypeResolver $rootAddCommentToCustomPostMutationPayloadObjectTypeResolver = null;
     private ?RootReplyCommentMutationPayloadObjectTypeResolver $rootReplyCommentMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
+    private ?MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
@@ -126,6 +134,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->payloadableAddCommentToCustomPostMutationResolver;
     }
+    final public function setMutationPayloadObjectsInputObjectTypeResolver(MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver): void
+    {
+        $this->mutationPayloadObjectsInputObjectTypeResolver = $mutationPayloadObjectsInputObjectTypeResolver;
+    }
+    final protected function getMutationPayloadObjectsInputObjectTypeResolver(): MutationPayloadObjectsInputObjectTypeResolver
+    {
+        if ($this->mutationPayloadObjectsInputObjectTypeResolver === null) {
+            /** @var MutationPayloadObjectsInputObjectTypeResolver */
+            $mutationPayloadObjectsInputObjectTypeResolver = $this->instanceManager->getInstance(MutationPayloadObjectsInputObjectTypeResolver::class);
+            $this->mutationPayloadObjectsInputObjectTypeResolver = $mutationPayloadObjectsInputObjectTypeResolver;
+        }
+        return $this->mutationPayloadObjectsInputObjectTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -143,14 +164,23 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         /** @var EngineModuleConfiguration */
-        $moduleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
-        if ($moduleConfiguration->disableRedundantRootTypeMutationFields()) {
+        $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
+        if ($engineModuleConfiguration->disableRedundantRootTypeMutationFields()) {
             return [];
         }
-        return [
-            'addCommentToCustomPost',
-            'replyComment',
-        ];
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $addFieldsToQueryPayloadableCommentMutations = $moduleConfiguration->addFieldsToQueryPayloadableCommentMutations();
+        return array_merge(
+            [
+                'addCommentToCustomPost',
+                'replyComment',
+            ],
+            $addFieldsToQueryPayloadableCommentMutations ? [
+                'addCommentToCustomPostMutationPayloadObjects',
+                'replyCommentMutationPayloadObjects',
+            ] : [],
+        );
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
@@ -158,6 +188,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return match ($fieldName) {
             'addCommentToCustomPost' => $this->__('Add a comment to a custom post', 'comment-mutations'),
             'replyComment' => $this->__('Reply a comment with another comment', 'comment-mutations'),
+            'addCommentToCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCommentToCustomPost` mutation', 'comment-mutations'),
+            'replyCommentMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `replyComment` mutation', 'comment-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -174,6 +206,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'addCommentToCustomPost',
             'replyComment'
                 => SchemaTypeModifiers::NON_NULLABLE,
+            'addCommentToCustomPostMutationPayloadObjects',
+            'replyCommentMutationPayloadObjects'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -191,14 +226,22 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'replyComment' => [
                 MutationInputProperties::INPUT => $this->getRootReplyCommentInputObjectTypeResolver(),
             ],
+            'addCommentToCustomPostMutationPayloadObjects',
+            'replyCommentMutationPayloadObjects' => [
+                SchemaCommonsMutationInputProperties::INPUT => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        return match ($fieldArgName) {
-            MutationInputProperties::INPUT => SchemaTypeModifiers::MANDATORY,
+        return match ([$fieldName => $fieldArgName]) {
+            ['addCommentToCustomPost' => MutationInputProperties::INPUT],
+            ['replyComment' => MutationInputProperties::INPUT],
+            ['addCommentToCustomPostMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT],
+            ['replyCommentMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
+                => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -226,8 +269,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $usePayloadableCommentMutations = $moduleConfiguration->usePayloadableCommentMutations();
         if ($usePayloadableCommentMutations) {
             return match ($fieldName) {
-                'addCommentToCustomPost' => $this->getRootAddCommentToCustomPostMutationPayloadObjectTypeResolver(),
-                'replyComment' => $this->getRootReplyCommentMutationPayloadObjectTypeResolver(),
+                'addCommentToCustomPost',
+                'addCommentToCustomPostMutationPayloadObjects'
+                    => $this->getRootAddCommentToCustomPostMutationPayloadObjectTypeResolver(),
+                'replyComment',
+                'replyCommentMutationPayloadObjects'
+                    => $this->getRootReplyCommentMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
@@ -238,5 +285,24 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'addCommentToCustomPostMutationPayloadObjects':
+            case 'replyCommentMutationPayloadObjects':
+                return $this->resolveMutationPayloadObjectsValue(
+                    $objectTypeResolver,
+                    $fieldDataAccessor,
+                );
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -25,4 +25,21 @@ class ModuleConfiguration extends AbstractModuleConfiguration
             $callback,
         );
     }
+
+    public function addFieldsToQueryPayloadableCustomPostCategoryMutations(): bool
+    {
+        if (!$this->usePayloadableCustomPostCategoryMutations()) {
+            return false;
+        }
+
+        $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTCATEGORY_MUTATIONS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
 }

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
+use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigPayloadTypesForMutationsBlock;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase;
 
 class SchemaPayloadTypesForMutationsOnSchemaConfigurationCPTBlockAttributesFixtureEndpointWebserverRequestTest extends AbstractModifyCPTBlockAttributesFixtureEndpointWebserverRequestTestCase
@@ -17,7 +17,7 @@ class SchemaPayloadTypesForMutationsOnSchemaConfigurationCPTBlockAttributesFixtu
         /**
          * This endpoint:
          *
-         * - Has "Use Payload Types for Mutations" as Default (i.e. true)
+         * - Has "Use Payload Types for Mutations" as Default (i.e. "use-payload-types")
          * - Has the Schema Configuration "Mobile App" (with ID 193)
          */
         return 'graphql/mobile-app/';
@@ -34,7 +34,7 @@ class SchemaPayloadTypesForMutationsOnSchemaConfigurationCPTBlockAttributesFixtu
     protected function getCPTBlockAttributesNewValue(): array
     {
         return [
-            BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
+            SchemaConfigPayloadTypesForMutationsBlock::ATTRIBUTE_NAME_USE_PAYLOAD_TYPE => MutationPayloadTypeOptions::DO_NOT_USE_PAYLOAD_TYPES_FOR_MUTATIONS,
         ];
     }
 

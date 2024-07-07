@@ -6,8 +6,6 @@ namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\GatoGraphQL\Assets\UseImageWidthsAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ConditionalOnContext\Admin\SystemServices\TableActions\ModuleListTableAction;
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
-use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeValues;
 use GatoGraphQL\GatoGraphQL\Constants\PluginSetupDataEntrySlugs;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Constants\TutorialLessons;
@@ -37,6 +35,7 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\GraphQLEndpointCategoryTaxonomy;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginSetupDataHelpers;
+use GraphQLByPoP\GraphQLServer\Configuration\MutationPayloadTypeOptions;
 use GraphQLByPoP\GraphQLServer\Configuration\MutationSchemes;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
@@ -253,7 +252,6 @@ class Plugin extends AbstractMainPlugin
         return [
             '1.1' => [$this->installPluginSetupDataForVersion1Dot1(...)],
             '1.2' => [$this->installPluginSetupDataForVersion1Dot2(...)],
-            '1.4' => [$this->installPluginSetupDataForVersion1Dot4(...)],
             '1.5' => [$this->installPluginSetupDataForVersion1Dot5(...)],
             '1.6' => [$this->installPluginSetupDataForVersion1Dot6(...)],
             '2.1' => [$this->installPluginSetupDataForVersion2Dot1(...)],
@@ -261,6 +259,7 @@ class Plugin extends AbstractMainPlugin
             '2.4' => [$this->installPluginSetupDataForVersion2Dot4(...)],
             '2.5' => [$this->installPluginSetupDataForVersion2Dot5(...)],
             '2.6' => [$this->installPluginSetupDataForVersion2Dot6(...)],
+            '3.0' => [$this->installPluginSetupDataForVersion3Dot0(...)],
         ];
     }
 
@@ -322,23 +321,23 @@ class Plugin extends AbstractMainPlugin
         return $schemaConfigurationCustomPostID;
     }
 
-    protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID(): ?int
+    protected function getBulkMutationsSchemaConfigurationCustomPostID(): ?int
     {
 
-        $slug = PluginSetupDataEntrySlugs::SCHEMA_CONFIGURATION_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE;
+        $slug = PluginSetupDataEntrySlugs::SCHEMA_CONFIGURATION_BULK_MUTATIONS;
         $schemaConfigurationID = PluginSetupDataHelpers::getSchemaConfigurationID($slug);
         if ($schemaConfigurationID !== null) {
             return $schemaConfigurationID;
         }
 
         $nestedMutationsBlockDataItem = $this->getNestedMutationsBlockDataItem();
-        $entityAsPayloadTypeBlockDataItem = $this->getEntityAsPayloadTypeBlockDataItem();
+        $useAndQueryPayloadTypeForMutationsBlockDataItem = $this->getUseAndQueryPayloadTypeForMutationseBlockDataItem();
         return $this->createSchemaConfigurationID(
             $slug,
-            \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
+            \__('Bulk mutations', 'gatographql'),
             [
                 $nestedMutationsBlockDataItem,
-                $entityAsPayloadTypeBlockDataItem,
+                $useAndQueryPayloadTypeForMutationsBlockDataItem,
             ]
         );
     }
@@ -346,7 +345,7 @@ class Plugin extends AbstractMainPlugin
     /**
      * @return array<string,mixed>
      */
-    protected function getEntityAsPayloadTypeBlockDataItem(): array
+    protected function getUseAndQueryPayloadTypeForMutationseBlockDataItem(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
         /** @var SchemaConfigPayloadTypesForMutationsBlock */
@@ -355,7 +354,7 @@ class Plugin extends AbstractMainPlugin
         return [
             'blockName' => $schemaConfigPayloadTypesForMutationsBlock->getBlockFullName(),
             'attrs' => [
-                BlockAttributeNames::ENABLED_CONST => BlockAttributeValues::DISABLED,
+                SchemaConfigPayloadTypesForMutationsBlock::ATTRIBUTE_NAME_USE_PAYLOAD_TYPE => MutationPayloadTypeOptions::USE_AND_QUERY_PAYLOAD_TYPES_FOR_MUTATIONS,
             ]
         ];
     }
@@ -599,7 +598,7 @@ class Plugin extends AbstractMainPlugin
     /**
      * @return array<array<string,mixed>>
      */
-    protected function getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks(): array
+    protected function getBulkMutationsSchemaConfigurationPersistedQueryBlocks(): array
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
@@ -610,13 +609,13 @@ class Plugin extends AbstractMainPlugin
         /** @var PersistedQueryEndpointAPIHierarchyBlock */
         $persistedQueryEndpointAPIHierarchyBlock = $instanceManager->getInstance(PersistedQueryEndpointAPIHierarchyBlock::class);
 
-        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID();
+        $bulkMutationsSchemaConfigurationCustomPostID = $this->getBulkMutationsSchemaConfigurationCustomPostID();
 
         return [
             [
                 'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
                 'attrs' => [
-                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
+                    EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $bulkMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
                 ],
             ],
             [
@@ -673,7 +672,7 @@ class Plugin extends AbstractMainPlugin
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
-        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks();
+        $bulkMutationsSchemaConfigurationPersistedQueryBlocks = $this->getBulkMutationsSchemaConfigurationPersistedQueryBlocks();
 
         /**
          * Create the Persisted Queries
@@ -696,32 +695,6 @@ class Plugin extends AbstractMainPlugin
                             ],
                         ],
                         ...$defaultSchemaConfigurationPersistedQueryBlocks,
-                    ])),
-                ]
-            ));
-        }
-
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POSTS;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
-                $adminPersistedQueryOptions,
-                [
-                    'post_name' => $slug,
-                    'post_title' => \__('[PRO] Duplicate posts', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                        [
-                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                            'attrs' => [
-                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/duplicate-posts',
-                                    TutorialLessons::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE,
-                                ),
-                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
-                                    'admin/transform/duplicate-posts',
-                                ),
-                            ],
-                        ],
-                        ...$nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));
@@ -1245,34 +1218,6 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks();
-
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
-                $adminPersistedQueryOptions,
-                [
-                    'post_name' => $slug,
-                    'post_title' => \__('[PRO] Import posts from CSV', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                        [
-                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                            'attrs' => [
-                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/sync/import-posts-from-csv',
-                                    VirtualTutorialLessons::IMPORTING_POSTS_FROM_A_CSV,
-                                ),
-                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
-                                    'admin/sync/import-posts-from-csv',
-                                ),
-                            ],
-                        ],
-                        ...$nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationPersistedQueryBlocks,
-                    ])),
-                ]
-            ));
-        }
-
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_POST_LINKS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
@@ -1339,42 +1284,6 @@ class Plugin extends AbstractMainPlugin
                             ],
                         ],
                         ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
-                    ])),
-                ]
-            ));
-        }
-    }
-
-    protected function installPluginSetupDataForVersion1Dot4(): void
-    {
-        $instanceManager = InstanceManagerFacade::getInstance();
-
-        /**
-         * Create custom endpoint
-         */
-        /** @var EndpointSchemaConfigurationBlock */
-        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
-
-        $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID = $this->getNestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID();
-        $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
-        $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
-
-        $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_NESTED_MUTATIONS_ENTITY_AS_MUTATION_PAYLOAD_TYPE;
-        if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
-                $adminCustomEndpointOptions,
-                [
-                    'post_name' => $slug,
-                    'post_title' => \__('Nested mutations + Entity as mutation payload type', 'gatographql'),
-                    'post_excerpt' => \__('Private client to execute queries that create resources in bulk', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                        [
-                            'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
-                            'attrs' => [
-                                EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $nestedMutationsPlusEntityAsPayloadTypeSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
-                            ],
-                        ],
-                        ...$defaultCustomEndpointBlocks
                     ])),
                 ]
             ));
@@ -1814,6 +1723,106 @@ class Plugin extends AbstractMainPlugin
                             ],
                         ],
                         ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+    }
+
+    protected function installPluginSetupDataForVersion3Dot0(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /**
+         * Create custom endpoint
+         */
+        /** @var EndpointSchemaConfigurationBlock */
+        $endpointSchemaConfigurationBlock = $instanceManager->getInstance(EndpointSchemaConfigurationBlock::class);
+
+        $bulkMutationsSchemaConfigurationCustomPostID = $this->getBulkMutationsSchemaConfigurationCustomPostID();
+        $defaultCustomEndpointBlocks = $this->getDefaultCustomEndpointBlocks();
+        $adminCustomEndpointOptions = $this->getAdminCustomEndpointOptions();
+
+        $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_BULK_MUTATIONS;
+        if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminCustomEndpointOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('Bulk mutations', 'gatographql'),
+                    'post_excerpt' => \__('Private client to execute queries that execute CRUD operations in bulk', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $endpointSchemaConfigurationBlock->getBlockFullName(),
+                            'attrs' => [
+                                EndpointSchemaConfigurationBlock::ATTRIBUTE_NAME_SCHEMA_CONFIGURATION => $bulkMutationsSchemaConfigurationCustomPostID ?? EndpointSchemaConfigurationBlock::ATTRIBUTE_VALUE_SCHEMA_CONFIGURATION_DEFAULT,
+                            ],
+                        ],
+                        ...$defaultCustomEndpointBlocks
+                    ])),
+                ]
+            ));
+        }
+
+        /**
+         * Create the ancestor Persisted Queries for organization
+         */
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $bulkMutationsSchemaConfigurationPersistedQueryBlocks = $this->getBulkMutationsSchemaConfigurationPersistedQueryBlocks();
+
+        /**
+         * Create the Persisted Queries
+         */
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POSTS;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Duplicate posts', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/duplicate-posts',
+                                    TutorialLessons::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE,
+                                ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/duplicate-posts',
+                                ),
+                            ],
+                        ],
+                        ...$bulkMutationsSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Import posts from CSV', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/sync/import-posts-from-csv',
+                                    VirtualTutorialLessons::IMPORTING_POSTS_FROM_A_CSV,
+                                ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/sync/import-posts-from-csv',
+                                ),
+                            ],
+                        ],
+                        ...$bulkMutationsSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));

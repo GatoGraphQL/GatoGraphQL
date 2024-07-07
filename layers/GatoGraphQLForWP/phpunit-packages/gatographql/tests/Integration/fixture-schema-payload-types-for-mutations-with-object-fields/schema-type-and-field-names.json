@@ -1,0 +1,3046 @@
+{
+  "data": {
+    "__schema": {
+      "types": [
+        {
+          "name": "CategoryDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "Comment",
+          "fields": [
+            {
+              "name": "approved"
+            },
+            {
+              "name": "author"
+            },
+            {
+              "name": "authorEmail"
+            },
+            {
+              "name": "authorIP"
+            },
+            {
+              "name": "authorName"
+            },
+            {
+              "name": "authorURL"
+            },
+            {
+              "name": "content"
+            },
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "date"
+            },
+            {
+              "name": "dateStr"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "karma"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "parent"
+            },
+            {
+              "name": "rawContent"
+            },
+            {
+              "name": "responseCount"
+            },
+            {
+              "name": "responses"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "type"
+            }
+          ]
+        },
+        {
+          "name": "CommentAuthorEmailIsMissingErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentAuthorNameIsMissingErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentParentCommentDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentsAreNotOpenForCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "CustomPostDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "GeneralBlock",
+          "fields": [
+            {
+              "name": "attributes"
+            },
+            {
+              "name": "contentSource"
+            },
+            {
+              "name": "innerBlocks"
+            },
+            {
+              "name": "name"
+            }
+          ]
+        },
+        {
+          "name": "GenericCategory",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "customPostCount"
+            },
+            {
+              "name": "customPosts"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "parent"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "slugPath"
+            },
+            {
+              "name": "taxonomy"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            }
+          ]
+        },
+        {
+          "name": "GenericCustomPost",
+          "fields": [
+            {
+              "name": "areCommentsOpen"
+            },
+            {
+              "name": "author"
+            },
+            {
+              "name": "blockDataItems"
+            },
+            {
+              "name": "blockFlattenedDataItems"
+            },
+            {
+              "name": "blocks"
+            },
+            {
+              "name": "categories"
+            },
+            {
+              "name": "categoryCount"
+            },
+            {
+              "name": "categoryNames"
+            },
+            {
+              "name": "commentCount"
+            },
+            {
+              "name": "comments"
+            },
+            {
+              "name": "content"
+            },
+            {
+              "name": "customPostType"
+            },
+            {
+              "name": "date"
+            },
+            {
+              "name": "dateStr"
+            },
+            {
+              "name": "excerpt"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "hasComments"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "isStatus"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "modifiedDate"
+            },
+            {
+              "name": "modifiedDateStr"
+            },
+            {
+              "name": "rawContent"
+            },
+            {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tagCount"
+            },
+            {
+              "name": "tagNames"
+            },
+            {
+              "name": "tags"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            },
+            {
+              "name": "wpAdminEditURL"
+            }
+          ]
+        },
+        {
+          "name": "GenericErrorPayload",
+          "fields": [
+            {
+              "name": "code"
+            },
+            {
+              "name": "data"
+            },
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "GenericTag",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "customPostCount"
+            },
+            {
+              "name": "customPosts"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "taxonomy"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            }
+          ]
+        },
+        {
+          "name": "InvalidUserEmailErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "InvalidUsernameErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoPublishingPageCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "Media",
+          "fields": [
+            {
+              "name": "altText"
+            },
+            {
+              "name": "author"
+            },
+            {
+              "name": "caption"
+            },
+            {
+              "name": "date"
+            },
+            {
+              "name": "dateStr"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "height"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "mimeType"
+            },
+            {
+              "name": "modifiedDate"
+            },
+            {
+              "name": "modifiedDateStr"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "sizes"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "src"
+            },
+            {
+              "name": "srcPath"
+            },
+            {
+              "name": "srcSet"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            },
+            {
+              "name": "width"
+            }
+          ]
+        },
+        {
+          "name": "MediaItemDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "Menu",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "itemDataEntries"
+            },
+            {
+              "name": "items"
+            },
+            {
+              "name": "locations"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            }
+          ]
+        },
+        {
+          "name": "MenuItem",
+          "fields": [
+            {
+              "name": "children"
+            },
+            {
+              "name": "classes"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "label"
+            },
+            {
+              "name": "linkRelationship"
+            },
+            {
+              "name": "localURLPath"
+            },
+            {
+              "name": "objectID"
+            },
+            {
+              "name": "parentID"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "target"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "url"
+            }
+          ]
+        },
+        {
+          "name": "MutationRoot",
+          "fields": [
+            {
+              "name": "addCommentToCustomPost"
+            },
+            {
+              "name": "createCustomPost"
+            },
+            {
+              "name": "createMediaItem"
+            },
+            {
+              "name": "createPage"
+            },
+            {
+              "name": "createPost"
+            },
+            {
+              "name": "loginUser"
+            },
+            {
+              "name": "logoutUser"
+            },
+            {
+              "name": "removeFeaturedImageFromCustomPost"
+            },
+            {
+              "name": "replyComment"
+            },
+            {
+              "name": "setCategoriesOnPost"
+            },
+            {
+              "name": "setFeaturedImageOnCustomPost"
+            },
+            {
+              "name": "setTagsOnPost"
+            },
+            {
+              "name": "updateCustomPost"
+            },
+            {
+              "name": "updatePage"
+            },
+            {
+              "name": "updatePost"
+            }
+          ]
+        },
+        {
+          "name": "Page",
+          "fields": [
+            {
+              "name": "areCommentsOpen"
+            },
+            {
+              "name": "author"
+            },
+            {
+              "name": "blockDataItems"
+            },
+            {
+              "name": "blockFlattenedDataItems"
+            },
+            {
+              "name": "blocks"
+            },
+            {
+              "name": "childCount"
+            },
+            {
+              "name": "children"
+            },
+            {
+              "name": "commentCount"
+            },
+            {
+              "name": "comments"
+            },
+            {
+              "name": "content"
+            },
+            {
+              "name": "customPostType"
+            },
+            {
+              "name": "date"
+            },
+            {
+              "name": "dateStr"
+            },
+            {
+              "name": "excerpt"
+            },
+            {
+              "name": "featuredImage"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "hasComments"
+            },
+            {
+              "name": "hasFeaturedImage"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "isStatus"
+            },
+            {
+              "name": "menuOrder"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "modifiedDate"
+            },
+            {
+              "name": "modifiedDateStr"
+            },
+            {
+              "name": "parent"
+            },
+            {
+              "name": "rawContent"
+            },
+            {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            },
+            {
+              "name": "wpAdminEditURL"
+            }
+          ]
+        },
+        {
+          "name": "PasswordIsIncorrectErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "Post",
+          "fields": [
+            {
+              "name": "areCommentsOpen"
+            },
+            {
+              "name": "author"
+            },
+            {
+              "name": "blockDataItems"
+            },
+            {
+              "name": "blockFlattenedDataItems"
+            },
+            {
+              "name": "blocks"
+            },
+            {
+              "name": "categories"
+            },
+            {
+              "name": "categoryCount"
+            },
+            {
+              "name": "categoryNames"
+            },
+            {
+              "name": "commentCount"
+            },
+            {
+              "name": "comments"
+            },
+            {
+              "name": "content"
+            },
+            {
+              "name": "customPostType"
+            },
+            {
+              "name": "date"
+            },
+            {
+              "name": "dateStr"
+            },
+            {
+              "name": "excerpt"
+            },
+            {
+              "name": "featuredImage"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "hasComments"
+            },
+            {
+              "name": "hasFeaturedImage"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "isStatus"
+            },
+            {
+              "name": "isSticky"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "modifiedDate"
+            },
+            {
+              "name": "modifiedDateStr"
+            },
+            {
+              "name": "postFormat"
+            },
+            {
+              "name": "rawContent"
+            },
+            {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tagCount"
+            },
+            {
+              "name": "tagNames"
+            },
+            {
+              "name": "tags"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            },
+            {
+              "name": "wpAdminEditURL"
+            }
+          ]
+        },
+        {
+          "name": "PostCategory",
+          "fields": [
+            {
+              "name": "childCount"
+            },
+            {
+              "name": "childNames"
+            },
+            {
+              "name": "children"
+            },
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "parent"
+            },
+            {
+              "name": "postCount"
+            },
+            {
+              "name": "posts"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "slugPath"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            }
+          ]
+        },
+        {
+          "name": "PostTag",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "postCount"
+            },
+            {
+              "name": "posts"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            }
+          ]
+        },
+        {
+          "name": "QueryRoot",
+          "fields": [
+            {
+              "name": "addCommentToCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "capabilities"
+            },
+            {
+              "name": "categories"
+            },
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryCount"
+            },
+            {
+              "name": "categoryNames"
+            },
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentCount"
+            },
+            {
+              "name": "comments"
+            },
+            {
+              "name": "createCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "createMediaItemMutationPayloadObjects"
+            },
+            {
+              "name": "createPageMutationPayloadObjects"
+            },
+            {
+              "name": "createPostMutationPayloadObjects"
+            },
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostCount"
+            },
+            {
+              "name": "customPosts"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "imageSizeNames"
+            },
+            {
+              "name": "isUserLoggedIn"
+            },
+            {
+              "name": "loggedInUserID"
+            },
+            {
+              "name": "me"
+            },
+            {
+              "name": "mediaItem"
+            },
+            {
+              "name": "mediaItemCount"
+            },
+            {
+              "name": "mediaItems"
+            },
+            {
+              "name": "menu"
+            },
+            {
+              "name": "menuCount"
+            },
+            {
+              "name": "menus"
+            },
+            {
+              "name": "myComment"
+            },
+            {
+              "name": "myCommentCount"
+            },
+            {
+              "name": "myComments"
+            },
+            {
+              "name": "myCustomPost"
+            },
+            {
+              "name": "myCustomPostCount"
+            },
+            {
+              "name": "myCustomPosts"
+            },
+            {
+              "name": "myMediaItem"
+            },
+            {
+              "name": "myMediaItemCount"
+            },
+            {
+              "name": "myMediaItems"
+            },
+            {
+              "name": "myPage"
+            },
+            {
+              "name": "myPageCount"
+            },
+            {
+              "name": "myPages"
+            },
+            {
+              "name": "myPost"
+            },
+            {
+              "name": "myPostCount"
+            },
+            {
+              "name": "myPosts"
+            },
+            {
+              "name": "optionObjectValue"
+            },
+            {
+              "name": "optionValue"
+            },
+            {
+              "name": "optionValues"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageCount"
+            },
+            {
+              "name": "pages"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postCategories"
+            },
+            {
+              "name": "postCategory"
+            },
+            {
+              "name": "postCategoryCount"
+            },
+            {
+              "name": "postCategoryNames"
+            },
+            {
+              "name": "postCount"
+            },
+            {
+              "name": "postTag"
+            },
+            {
+              "name": "postTagCount"
+            },
+            {
+              "name": "postTagNames"
+            },
+            {
+              "name": "postTags"
+            },
+            {
+              "name": "posts"
+            },
+            {
+              "name": "removeFeaturedImageFromCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "replyCommentMutationPayloadObjects"
+            },
+            {
+              "name": "roleNames"
+            },
+            {
+              "name": "roles"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "setCategoriesOnPostMutationPayloadObjects"
+            },
+            {
+              "name": "setFeaturedImageOnCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "setTagsOnPostMutationPayloadObjects"
+            },
+            {
+              "name": "siteLanguage"
+            },
+            {
+              "name": "siteLocale"
+            },
+            {
+              "name": "siteURL"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagCount"
+            },
+            {
+              "name": "tagNames"
+            },
+            {
+              "name": "tags"
+            },
+            {
+              "name": "updateCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "updatePageMutationPayloadObjects"
+            },
+            {
+              "name": "updatePostMutationPayloadObjects"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userCount"
+            },
+            {
+              "name": "users"
+            }
+          ]
+        },
+        {
+          "name": "Root",
+          "fields": [
+            {
+              "name": "addCommentToCustomPost"
+            },
+            {
+              "name": "addCommentToCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "capabilities"
+            },
+            {
+              "name": "categories"
+            },
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryCount"
+            },
+            {
+              "name": "categoryNames"
+            },
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentCount"
+            },
+            {
+              "name": "comments"
+            },
+            {
+              "name": "createCustomPost"
+            },
+            {
+              "name": "createCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "createMediaItem"
+            },
+            {
+              "name": "createMediaItemMutationPayloadObjects"
+            },
+            {
+              "name": "createPage"
+            },
+            {
+              "name": "createPageMutationPayloadObjects"
+            },
+            {
+              "name": "createPost"
+            },
+            {
+              "name": "createPostMutationPayloadObjects"
+            },
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostCount"
+            },
+            {
+              "name": "customPosts"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "imageSizeNames"
+            },
+            {
+              "name": "isUserLoggedIn"
+            },
+            {
+              "name": "loggedInUserID"
+            },
+            {
+              "name": "loginUser"
+            },
+            {
+              "name": "logoutUser"
+            },
+            {
+              "name": "me"
+            },
+            {
+              "name": "mediaItem"
+            },
+            {
+              "name": "mediaItemCount"
+            },
+            {
+              "name": "mediaItems"
+            },
+            {
+              "name": "menu"
+            },
+            {
+              "name": "menuCount"
+            },
+            {
+              "name": "menus"
+            },
+            {
+              "name": "myComment"
+            },
+            {
+              "name": "myCommentCount"
+            },
+            {
+              "name": "myComments"
+            },
+            {
+              "name": "myCustomPost"
+            },
+            {
+              "name": "myCustomPostCount"
+            },
+            {
+              "name": "myCustomPosts"
+            },
+            {
+              "name": "myMediaItem"
+            },
+            {
+              "name": "myMediaItemCount"
+            },
+            {
+              "name": "myMediaItems"
+            },
+            {
+              "name": "myPage"
+            },
+            {
+              "name": "myPageCount"
+            },
+            {
+              "name": "myPages"
+            },
+            {
+              "name": "myPost"
+            },
+            {
+              "name": "myPostCount"
+            },
+            {
+              "name": "myPosts"
+            },
+            {
+              "name": "optionObjectValue"
+            },
+            {
+              "name": "optionValue"
+            },
+            {
+              "name": "optionValues"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageCount"
+            },
+            {
+              "name": "pages"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postCategories"
+            },
+            {
+              "name": "postCategory"
+            },
+            {
+              "name": "postCategoryCount"
+            },
+            {
+              "name": "postCategoryNames"
+            },
+            {
+              "name": "postCount"
+            },
+            {
+              "name": "postTag"
+            },
+            {
+              "name": "postTagCount"
+            },
+            {
+              "name": "postTagNames"
+            },
+            {
+              "name": "postTags"
+            },
+            {
+              "name": "posts"
+            },
+            {
+              "name": "removeFeaturedImageFromCustomPost"
+            },
+            {
+              "name": "removeFeaturedImageFromCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "replyComment"
+            },
+            {
+              "name": "replyCommentMutationPayloadObjects"
+            },
+            {
+              "name": "roleNames"
+            },
+            {
+              "name": "roles"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "setCategoriesOnPost"
+            },
+            {
+              "name": "setCategoriesOnPostMutationPayloadObjects"
+            },
+            {
+              "name": "setFeaturedImageOnCustomPost"
+            },
+            {
+              "name": "setFeaturedImageOnCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "setTagsOnPost"
+            },
+            {
+              "name": "setTagsOnPostMutationPayloadObjects"
+            },
+            {
+              "name": "siteLanguage"
+            },
+            {
+              "name": "siteLocale"
+            },
+            {
+              "name": "siteURL"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagCount"
+            },
+            {
+              "name": "tagNames"
+            },
+            {
+              "name": "tags"
+            },
+            {
+              "name": "updateCustomPost"
+            },
+            {
+              "name": "updateCustomPostMutationPayloadObjects"
+            },
+            {
+              "name": "updatePage"
+            },
+            {
+              "name": "updatePageMutationPayloadObjects"
+            },
+            {
+              "name": "updatePost"
+            },
+            {
+              "name": "updatePostMutationPayloadObjects"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userCount"
+            },
+            {
+              "name": "users"
+            }
+          ]
+        },
+        {
+          "name": "RootAddCommentToCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreateCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreateMediaItemMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "mediaItem"
+            },
+            {
+              "name": "mediaItemID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreatePageMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreatePostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootLoginUserMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ]
+        },
+        {
+          "name": "RootLogoutUserMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "user"
+            },
+            {
+              "name": "userID"
+            }
+          ]
+        },
+        {
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootReplyCommentMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootSetCategoriesOnPostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootSetTagsOnPostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdateCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdatePageMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "page"
+            },
+            {
+              "name": "pageID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdatePostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "post"
+            },
+            {
+              "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "TagDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "User",
+          "fields": [
+            {
+              "name": "avatar"
+            },
+            {
+              "name": "capabilities"
+            },
+            {
+              "name": "customPostCount"
+            },
+            {
+              "name": "customPosts"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "displayName"
+            },
+            {
+              "name": "email"
+            },
+            {
+              "name": "firstName"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "hasAnyCapability"
+            },
+            {
+              "name": "hasAnyRole"
+            },
+            {
+              "name": "hasCapability"
+            },
+            {
+              "name": "hasRole"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "lastName"
+            },
+            {
+              "name": "locale"
+            },
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "nicename"
+            },
+            {
+              "name": "nickname"
+            },
+            {
+              "name": "postCount"
+            },
+            {
+              "name": "posts"
+            },
+            {
+              "name": "registeredDate"
+            },
+            {
+              "name": "registeredDateStr"
+            },
+            {
+              "name": "roleNames"
+            },
+            {
+              "name": "roles"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            },
+            {
+              "name": "username"
+            },
+            {
+              "name": "websiteURL"
+            }
+          ]
+        },
+        {
+          "name": "UserAvatar",
+          "fields": [
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "self"
+            },
+            {
+              "name": "size"
+            },
+            {
+              "name": "src"
+            }
+          ]
+        },
+        {
+          "name": "UserDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserIsLoggedInErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserIsNotLoggedInErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "UserRole",
+          "fields": [
+            {
+              "name": "capabilities"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "self"
+            }
+          ]
+        },
+        {
+          "name": "_DirectiveExtensions",
+          "fields": [
+            {
+              "name": "fieldDirectiveSupportedTypeNamesOrDescriptions"
+            },
+            {
+              "name": "needsDataToExecute"
+            }
+          ]
+        },
+        {
+          "name": "_EnumValueExtensions",
+          "fields": [
+            {
+              "name": "isSensitiveDataElement"
+            }
+          ]
+        },
+        {
+          "name": "_FieldExtensions",
+          "fields": [
+            {
+              "name": "isGlobal"
+            },
+            {
+              "name": "isMutation"
+            },
+            {
+              "name": "isSensitiveDataElement"
+            }
+          ]
+        },
+        {
+          "name": "_InputValueExtensions",
+          "fields": [
+            {
+              "name": "isSensitiveDataElement"
+            }
+          ]
+        },
+        {
+          "name": "_NamedTypeExtensions",
+          "fields": [
+            {
+              "name": "elementName"
+            },
+            {
+              "name": "isOneOf"
+            },
+            {
+              "name": "namespacedName"
+            },
+            {
+              "name": "possibleValues"
+            }
+          ]
+        },
+        {
+          "name": "_SchemaExtensions",
+          "fields": [
+            {
+              "name": "isNamespaced"
+            }
+          ]
+        },
+        {
+          "name": "__Directive",
+          "fields": [
+            {
+              "name": "args"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "extensions"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "isRepeatable"
+            },
+            {
+              "name": "locations"
+            },
+            {
+              "name": "name"
+            }
+          ]
+        },
+        {
+          "name": "__EnumValue",
+          "fields": [
+            {
+              "name": "deprecationReason"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "extensions"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "isDeprecated"
+            },
+            {
+              "name": "name"
+            }
+          ]
+        },
+        {
+          "name": "__Field",
+          "fields": [
+            {
+              "name": "args"
+            },
+            {
+              "name": "deprecationReason"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "extensions"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "isDeprecated"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "type"
+            }
+          ]
+        },
+        {
+          "name": "__InputValue",
+          "fields": [
+            {
+              "name": "defaultValue"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "extensions"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "type"
+            }
+          ]
+        },
+        {
+          "name": "__Schema",
+          "fields": [
+            {
+              "name": "directives"
+            },
+            {
+              "name": "extensions"
+            },
+            {
+              "name": "globalFields"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "mutationType"
+            },
+            {
+              "name": "queryType"
+            },
+            {
+              "name": "subscriptionType"
+            },
+            {
+              "name": "type"
+            },
+            {
+              "name": "types"
+            }
+          ]
+        },
+        {
+          "name": "__Type",
+          "fields": [
+            {
+              "name": "description"
+            },
+            {
+              "name": "enumValues"
+            },
+            {
+              "name": "extensions"
+            },
+            {
+              "name": "fields"
+            },
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            },
+            {
+              "name": "inputFields"
+            },
+            {
+              "name": "interfaces"
+            },
+            {
+              "name": "kind"
+            },
+            {
+              "name": "name"
+            },
+            {
+              "name": "ofType"
+            },
+            {
+              "name": "possibleTypes"
+            },
+            {
+              "name": "specifiedByURL"
+            }
+          ]
+        },
+        {
+          "name": "AnyBuiltInScalar",
+          "fields": null
+        },
+        {
+          "name": "Boolean",
+          "fields": null
+        },
+        {
+          "name": "CategoryTaxonomyEnumString",
+          "fields": null
+        },
+        {
+          "name": "CustomPostEnumString",
+          "fields": null
+        },
+        {
+          "name": "Date",
+          "fields": null
+        },
+        {
+          "name": "DateTime",
+          "fields": null
+        },
+        {
+          "name": "Email",
+          "fields": null
+        },
+        {
+          "name": "HTML",
+          "fields": null
+        },
+        {
+          "name": "ID",
+          "fields": null
+        },
+        {
+          "name": "Int",
+          "fields": null
+        },
+        {
+          "name": "JSONObject",
+          "fields": null
+        },
+        {
+          "name": "MenuLocationEnumString",
+          "fields": null
+        },
+        {
+          "name": "Numeric",
+          "fields": null
+        },
+        {
+          "name": "String",
+          "fields": null
+        },
+        {
+          "name": "TagTaxonomyEnumString",
+          "fields": null
+        },
+        {
+          "name": "URL",
+          "fields": null
+        },
+        {
+          "name": "URLAbsolutePath",
+          "fields": null
+        },
+        {
+          "name": "Block",
+          "fields": [
+            {
+              "name": "attributes"
+            },
+            {
+              "name": "contentSource"
+            },
+            {
+              "name": "innerBlocks"
+            },
+            {
+              "name": "name"
+            }
+          ]
+        },
+        {
+          "name": "Category",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "name"
+            }
+          ]
+        },
+        {
+          "name": "Commentable",
+          "fields": [
+            {
+              "name": "areCommentsOpen"
+            },
+            {
+              "name": "commentCount"
+            },
+            {
+              "name": "comments"
+            },
+            {
+              "name": "hasComments"
+            }
+          ]
+        },
+        {
+          "name": "CustomPost",
+          "fields": [
+            {
+              "name": "content"
+            },
+            {
+              "name": "customPostType"
+            },
+            {
+              "name": "date"
+            },
+            {
+              "name": "dateStr"
+            },
+            {
+              "name": "excerpt"
+            },
+            {
+              "name": "isStatus"
+            },
+            {
+              "name": "modifiedDate"
+            },
+            {
+              "name": "modifiedDateStr"
+            },
+            {
+              "name": "rawContent"
+            },
+            {
+              "name": "rawExcerpt"
+            },
+            {
+              "name": "rawTitle"
+            },
+            {
+              "name": "slug"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "title"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            }
+          ]
+        },
+        {
+          "name": "ErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "IdentifiableObject",
+          "fields": [
+            {
+              "name": "globalID"
+            },
+            {
+              "name": "id"
+            }
+          ]
+        },
+        {
+          "name": "Queryable",
+          "fields": [
+            {
+              "name": "slug"
+            },
+            {
+              "name": "url"
+            },
+            {
+              "name": "urlPath"
+            }
+          ]
+        },
+        {
+          "name": "Tag",
+          "fields": [
+            {
+              "name": "count"
+            },
+            {
+              "name": "description"
+            },
+            {
+              "name": "name"
+            }
+          ]
+        },
+        {
+          "name": "WithAuthor",
+          "fields": [
+            {
+              "name": "author"
+            }
+          ]
+        },
+        {
+          "name": "WithFeaturedImage",
+          "fields": [
+            {
+              "name": "featuredImage"
+            },
+            {
+              "name": "hasFeaturedImage"
+            }
+          ]
+        },
+        {
+          "name": "WithMeta",
+          "fields": [
+            {
+              "name": "metaValue"
+            },
+            {
+              "name": "metaValues"
+            }
+          ]
+        },
+        {
+          "name": "AuthorByInput",
+          "fields": null
+        },
+        {
+          "name": "BlockFilterByInput",
+          "fields": null
+        },
+        {
+          "name": "CategoriesByInput",
+          "fields": null
+        },
+        {
+          "name": "CategoryByInput",
+          "fields": null
+        },
+        {
+          "name": "CategoryPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "CommentByInput",
+          "fields": null
+        },
+        {
+          "name": "CommentContentInput",
+          "fields": null
+        },
+        {
+          "name": "CommentMetaQueryInput",
+          "fields": null
+        },
+        {
+          "name": "CommentResponsePaginationInput",
+          "fields": null
+        },
+        {
+          "name": "CommentResponsesFilterInput",
+          "fields": null
+        },
+        {
+          "name": "CommentSortInput",
+          "fields": null
+        },
+        {
+          "name": "CreateMediaItemFromContentInput",
+          "fields": null
+        },
+        {
+          "name": "CreateMediaItemFromInput",
+          "fields": null
+        },
+        {
+          "name": "CreateMediaItemFromURLInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostByInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostCategoriesFilterInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostCommentPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostCommentsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostContentInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostMetaQueryInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostSortInput",
+          "fields": null
+        },
+        {
+          "name": "CustomPostTagsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "DateQueryInput",
+          "fields": null
+        },
+        {
+          "name": "FeaturedImageByInput",
+          "fields": null
+        },
+        {
+          "name": "FilterByAuthorInput",
+          "fields": null
+        },
+        {
+          "name": "FilterByTaxonomyTermsInput",
+          "fields": null
+        },
+        {
+          "name": "FilterCommentsByCommentAuthorInput",
+          "fields": null
+        },
+        {
+          "name": "FilterCommentsByCustomPostAuthorInput",
+          "fields": null
+        },
+        {
+          "name": "FilterCustomPostsByCategoriesInput",
+          "fields": null
+        },
+        {
+          "name": "FilterCustomPostsByTagsInput",
+          "fields": null
+        },
+        {
+          "name": "FilterPostsByCategoriesInput",
+          "fields": null
+        },
+        {
+          "name": "FilterPostsByTagsInput",
+          "fields": null
+        },
+        {
+          "name": "LoginCredentialsInput",
+          "fields": null
+        },
+        {
+          "name": "LoginUserByInput",
+          "fields": null
+        },
+        {
+          "name": "MediaItemByInput",
+          "fields": null
+        },
+        {
+          "name": "MediaItemSortInput",
+          "fields": null
+        },
+        {
+          "name": "MenuByInput",
+          "fields": null
+        },
+        {
+          "name": "MenuSortInput",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByArrayValueInput",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByInput",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByKeyInput",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByNumericValueInput",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByStringValueInput",
+          "fields": null
+        },
+        {
+          "name": "MutationPayloadObjectsInput",
+          "fields": null
+        },
+        {
+          "name": "PageByInput",
+          "fields": null
+        },
+        {
+          "name": "PageChildrenFilterInput",
+          "fields": null
+        },
+        {
+          "name": "PageContentInput",
+          "fields": null
+        },
+        {
+          "name": "PagePaginationInput",
+          "fields": null
+        },
+        {
+          "name": "PostByInput",
+          "fields": null
+        },
+        {
+          "name": "PostCategoryByInput",
+          "fields": null
+        },
+        {
+          "name": "PostContentInput",
+          "fields": null
+        },
+        {
+          "name": "PostPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "PostTagByInput",
+          "fields": null
+        },
+        {
+          "name": "RootAddCommentToCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootCategoriesFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootCommentPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "RootCommentsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootCreateCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootCreateMediaItemInput",
+          "fields": null
+        },
+        {
+          "name": "RootCreatePageInput",
+          "fields": null
+        },
+        {
+          "name": "RootCreatePostInput",
+          "fields": null
+        },
+        {
+          "name": "RootCustomPostsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootMediaItemPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "RootMediaItemsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootMenuPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "RootMenusFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootMyCommentsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootMyCustomPostsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootMyMediaItemsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootMyPagesFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootMyPostsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootPagesFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootPostsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootRemoveFeaturedImageFromCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootReplyCommentInput",
+          "fields": null
+        },
+        {
+          "name": "RootSetCategoriesOnCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootSetFeaturedImageOnCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootSetTagsOnCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootTagsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootUpdatePageInput",
+          "fields": null
+        },
+        {
+          "name": "RootUpdatePostInput",
+          "fields": null
+        },
+        {
+          "name": "TagByInput",
+          "fields": null
+        },
+        {
+          "name": "TagPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "TagsByInput",
+          "fields": null
+        },
+        {
+          "name": "TaxonomyCustomPostsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "TaxonomyMetaQueryInput",
+          "fields": null
+        },
+        {
+          "name": "TaxonomySortInput",
+          "fields": null
+        },
+        {
+          "name": "TaxonomyTaxonomiesFilterInput",
+          "fields": null
+        },
+        {
+          "name": "UserByInput",
+          "fields": null
+        },
+        {
+          "name": "UserCustomPostsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "UserMetaQueryInput",
+          "fields": null
+        },
+        {
+          "name": "UserPaginationInput",
+          "fields": null
+        },
+        {
+          "name": "UserSearchByInput",
+          "fields": null
+        },
+        {
+          "name": "UserSortInput",
+          "fields": null
+        },
+        {
+          "name": "UsersFilterInput",
+          "fields": null
+        },
+        {
+          "name": "CommentOrderByEnum",
+          "fields": null
+        },
+        {
+          "name": "CommentStatusEnum",
+          "fields": null
+        },
+        {
+          "name": "CommentTypeEnum",
+          "fields": null
+        },
+        {
+          "name": "CustomPostOrderByEnum",
+          "fields": null
+        },
+        {
+          "name": "CustomPostStatusEnum",
+          "fields": null
+        },
+        {
+          "name": "DirectiveKindEnum",
+          "fields": null
+        },
+        {
+          "name": "DirectiveLocation",
+          "fields": null
+        },
+        {
+          "name": "FilterCustomPostStatusEnum",
+          "fields": null
+        },
+        {
+          "name": "MediaItemOrderByEnum",
+          "fields": null
+        },
+        {
+          "name": "MenuOrderByEnum",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByArrayValueOperatorEnum",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByKeyOperatorEnum",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByNumericValueOperatorEnum",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryCompareByStringValueOperatorEnum",
+          "fields": null
+        },
+        {
+          "name": "MetaQueryValueTypesEnum",
+          "fields": null
+        },
+        {
+          "name": "OperationStatusEnum",
+          "fields": null
+        },
+        {
+          "name": "OrderEnum",
+          "fields": null
+        },
+        {
+          "name": "RelationEnum",
+          "fields": null
+        },
+        {
+          "name": "TaxonomyOrderByEnum",
+          "fields": null
+        },
+        {
+          "name": "TypeKind",
+          "fields": null
+        },
+        {
+          "name": "UserOrderByEnum",
+          "fields": null
+        },
+        {
+          "name": "BlockUnion",
+          "fields": null
+        },
+        {
+          "name": "CategoryUnion",
+          "fields": null
+        },
+        {
+          "name": "CustomPostUnion",
+          "fields": null
+        },
+        {
+          "name": "RootAddCommentToCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreateCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreateMediaItemMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreatePageMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreatePostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootLoginUserMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootLogoutUserMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootReplyCommentMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootSetTagsOnPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdatePageMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdatePostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "TagUnion",
+          "fields": null
+        }
+      ]
+    }
+  }
+}
