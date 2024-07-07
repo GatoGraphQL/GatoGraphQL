@@ -312,8 +312,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $usePayloadableCustomPostMutations = $moduleConfiguration->usePayloadableCustomPostMutations();
         if ($usePayloadableCustomPostMutations) {
             return match ($fieldName) {
-                'createCustomPost' => $this->getRootCreateGenericCustomPostMutationPayloadObjectTypeResolver(),
-                'updateCustomPost' => $this->getRootUpdateGenericCustomPostMutationPayloadObjectTypeResolver(),
+                'createCustomPost',
+                'createCustomPostMutationPayloadObjects'
+                    => $this->getRootCreateGenericCustomPostMutationPayloadObjectTypeResolver(),
+                'updateCustomPost',
+                'updateCustomPostMutationPayloadObjects'
+                    => $this->getRootUpdateGenericCustomPostMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }

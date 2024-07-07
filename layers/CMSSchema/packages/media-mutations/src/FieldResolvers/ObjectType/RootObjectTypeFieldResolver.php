@@ -216,7 +216,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $usePayloadableMediaMutations = $moduleConfiguration->usePayloadableMediaMutations();
         if ($usePayloadableMediaMutations) {
             return match ($fieldName) {
-                'createMediaItem' => $this->getRootCreateMediaItemMutationPayloadObjectTypeResolver(),
+                'createMediaItem',
+                'createMediaItemMutationPayloadObjects'
+                    => $this->getRootCreateMediaItemMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }

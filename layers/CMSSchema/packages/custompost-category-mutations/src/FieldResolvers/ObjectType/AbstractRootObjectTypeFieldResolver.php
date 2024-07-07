@@ -150,7 +150,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $usePayloadableCustomPostCategoryMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMutations();
         if ($usePayloadableCustomPostCategoryMutations) {
             return match ($fieldName) {
-                $this->getSetCategoriesFieldName() => $this->getRootSetCategoriesMutationPayloadObjectTypeResolver(),
+                $this->getSetCategoriesFieldName(),
+                $this->getSetCategoriesFieldName() . 'MutationPayloadObjects'
+                    => $this->getRootSetCategoriesMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }

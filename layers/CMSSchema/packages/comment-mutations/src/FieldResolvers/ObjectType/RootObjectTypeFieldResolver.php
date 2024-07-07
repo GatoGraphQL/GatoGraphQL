@@ -264,8 +264,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $usePayloadableCommentMutations = $moduleConfiguration->usePayloadableCommentMutations();
         if ($usePayloadableCommentMutations) {
             return match ($fieldName) {
-                'addCommentToCustomPost' => $this->getRootAddCommentToCustomPostMutationPayloadObjectTypeResolver(),
-                'replyComment' => $this->getRootReplyCommentMutationPayloadObjectTypeResolver(),
+                'addCommentToCustomPost',
+                'addCommentToCustomPostMutationPayloadObjects'
+                    => $this->getRootAddCommentToCustomPostMutationPayloadObjectTypeResolver(),
+                'replyComment',
+                'replyCommentMutationPayloadObjects'
+                    => $this->getRootReplyCommentMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }

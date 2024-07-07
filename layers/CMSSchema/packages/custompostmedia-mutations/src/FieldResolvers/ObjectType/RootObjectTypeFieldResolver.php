@@ -293,8 +293,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $usePayloadableCustomPostMediaMutations = $moduleConfiguration->usePayloadableCustomPostMediaMutations();
         if ($usePayloadableCustomPostMediaMutations) {
             return match ($fieldName) {
-                'setFeaturedImageOnCustomPost' => $this->getRootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver(),
-                'removeFeaturedImageFromCustomPost' => $this->getRootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver(),
+                'setFeaturedImageOnCustomPost',
+                'setFeaturedImageOnCustomPostMutationPayloadObjects'
+                    => $this->getRootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver(),
+                'removeFeaturedImageFromCustomPost',
+                'removeFeaturedImageFromCustomPostMutationPayloadObjects'
+                    => $this->getRootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
