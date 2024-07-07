@@ -16,9 +16,12 @@ use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\RootRemoveFea
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -30,6 +33,8 @@ use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
+    use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
     private ?RemoveFeaturedImageFromCustomPostMutationResolver $removeFeaturedImageFromCustomPostMutationResolver = null;
@@ -309,5 +314,24 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'setFeaturedImageOnCustomPostMutationPayloadObjects':
+            case 'removeFeaturedImageFromCustomPostMutationPayloadObjects':
+                return $this->resolveMutationPayloadObjectsValue(
+                    $objectTypeResolver,
+                    $fieldDataAccessor,
+                );
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

@@ -13,9 +13,12 @@ use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootCreateMediaIte
 use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\RootCreateMediaItemMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -27,6 +30,8 @@ use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CreateMediaItemMutationResolver $createMediaItemMutationResolver = null;
     private ?RootCreateMediaItemInputObjectTypeResolver $rootCreateMediaItemInputObjectTypeResolver = null;
@@ -226,5 +231,23 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createMediaItem' => $this->getMediaObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'createMediaItemMutationPayloadObjects':
+                return $this->resolveMutationPayloadObjectsValue(
+                    $objectTypeResolver,
+                    $fieldDataAccessor,
+                );
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

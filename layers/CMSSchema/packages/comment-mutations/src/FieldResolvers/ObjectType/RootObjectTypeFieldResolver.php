@@ -15,9 +15,12 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootAddCommentToCusto
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootReplyCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -29,6 +32,8 @@ use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
     private ?RootAddCommentToCustomPostInputObjectTypeResolver $rootAddCommentToCustomPostInputObjectTypeResolver = null;
@@ -280,5 +285,24 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'addCommentToCustomPostMutationPayloadObjects':
+            case 'replyCommentMutationPayloadObjects':
+                return $this->resolveMutationPayloadObjectsValue(
+                    $objectTypeResolver,
+                    $fieldDataAccessor,
+                );
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

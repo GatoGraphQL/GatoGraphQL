@@ -16,9 +16,11 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\RootCreateGenericC
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -33,6 +35,8 @@ use PoP\Root\App;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver $rootUpdateGenericCustomPostMutationPayloadObjectTypeResolver = null;
     private ?RootCreateGenericCustomPostMutationPayloadObjectTypeResolver $rootCreateGenericCustomPostMutationPayloadObjectTypeResolver = null;
@@ -364,5 +368,24 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 break;
         }
         return $validationCheckpoints;
+    }
+
+    public function resolveValue(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $fieldName = $fieldDataAccessor->getFieldName();
+        switch ($fieldName) {
+            case 'createCustomPostMutationPayloadObjects':
+            case 'updateCustomPostMutationPayloadObjects':
+                return $this->resolveMutationPayloadObjectsValue(
+                    $objectTypeResolver,
+                    $fieldDataAccessor,
+                );
+        }
+
+        return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }
