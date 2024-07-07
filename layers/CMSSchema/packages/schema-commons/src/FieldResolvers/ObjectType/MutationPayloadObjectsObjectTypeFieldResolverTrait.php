@@ -23,7 +23,7 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
         $objectMutationPayloadObjectTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
         /** @var DictionaryObjectTypeDataLoaderInterface */
         $dictionaryObjectTypeDataLoader = $objectMutationPayloadObjectTypeResolver->getRelationalTypeDataLoader();
-        
+
         return $this->retrieveInputIDsFromObjectDictionary(
             $dictionaryObjectTypeDataLoader->getObjectClass(),
             $fieldDataAccessor,
@@ -48,7 +48,7 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
         /** @var stdClass */
         $mutationPayloadObjectsInput = $fieldDataAccessor->getValue(MutationInputProperties::INPUT);
         $ids = $mutationPayloadObjectsInput->ids;
-        
+
         /**
          * Make sure the IDs really exist (i.e. they are IDs from transient
          * payload objects, just created)
@@ -58,7 +58,7 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
             $ids,
             fn (string|int $id) => $objectDictionary->has($objectClass, $id)
         );
-        
+
         return $ids;
     }
 }

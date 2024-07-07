@@ -34,7 +34,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
-    
+
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
     private ?RemoveFeaturedImageFromCustomPostMutationResolver $removeFeaturedImageFromCustomPostMutationResolver = null;

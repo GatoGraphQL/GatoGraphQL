@@ -19,13 +19,11 @@ use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommon
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
-use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\DictionaryObjectTypeDataLoaderInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -38,7 +36,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
-    
+
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?RootUpdatePostMutationPayloadObjectTypeResolver $rootUpdatePostMutationPayloadObjectTypeResolver = null;
     private ?RootCreatePostMutationPayloadObjectTypeResolver $rootCreatePostMutationPayloadObjectTypeResolver = null;

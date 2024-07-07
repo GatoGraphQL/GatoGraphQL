@@ -31,7 +31,7 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         if (!$this->usePayloadableCustomPostTagMutations()) {
             return false;
         }
-        
+
         $envVariable = Environment::ADD_FIELDS_TO_QUERY_PAYLOADABLE_CUSTOMPOSTTAG_MUTATIONS;
         $defaultValue = false;
         $callback = EnvironmentValueHelpers::toBool(...);

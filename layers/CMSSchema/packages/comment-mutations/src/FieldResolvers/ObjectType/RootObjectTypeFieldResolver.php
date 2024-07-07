@@ -33,7 +33,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
-    
+
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
     private ?RootAddCommentToCustomPostInputObjectTypeResolver $rootAddCommentToCustomPostInputObjectTypeResolver = null;

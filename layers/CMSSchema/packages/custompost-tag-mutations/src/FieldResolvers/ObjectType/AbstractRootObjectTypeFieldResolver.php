@@ -167,7 +167,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     }
 
     abstract protected function getRootSetTagsMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface;
-    
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
@@ -182,7 +182,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
                     $fieldDataAccessor,
                 );
         }
-    
+
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 }

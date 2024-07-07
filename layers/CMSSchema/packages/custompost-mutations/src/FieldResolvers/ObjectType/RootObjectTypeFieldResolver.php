@@ -36,7 +36,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
-    
+
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver $rootUpdateGenericCustomPostMutationPayloadObjectTypeResolver = null;
     private ?RootCreateGenericCustomPostMutationPayloadObjectTypeResolver $rootCreateGenericCustomPostMutationPayloadObjectTypeResolver = null;

@@ -45,7 +45,7 @@ abstract class AbstractSchemaMutationsBlockSchemaConfigurationExecuter extends A
          * Default value (if not defined in DB): `default`. Then do nothing
          */
         $usePayloadType = $schemaConfigBlockDataItem['attrs'][SchemaConfigPayloadTypesForMutationsBlock::ATTRIBUTE_NAME_USE_PAYLOAD_TYPE] ?? null;
-        
+
         /**
          * Only execute if it has any selectable value (no null, no invented).
          * If "default", then the general settings will already take effect,

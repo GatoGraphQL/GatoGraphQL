@@ -36,7 +36,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
-    
+
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?RootUpdatePageMutationPayloadObjectTypeResolver $rootUpdatePageMutationPayloadObjectTypeResolver = null;
     private ?RootCreatePageMutationPayloadObjectTypeResolver $rootCreatePageMutationPayloadObjectTypeResolver = null;

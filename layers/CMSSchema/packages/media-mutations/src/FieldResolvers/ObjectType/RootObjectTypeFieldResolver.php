@@ -31,7 +31,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
-    
+
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CreateMediaItemMutationResolver $createMediaItemMutationResolver = null;
     private ?RootCreateMediaItemInputObjectTypeResolver $rootCreateMediaItemInputObjectTypeResolver = null;
