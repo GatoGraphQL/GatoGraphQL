@@ -231,8 +231,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return match ($fieldName) {
             'createCustomPost',
-            'updateCustomPost' =>
-                SchemaTypeModifiers::NON_NULLABLE,
+            'updateCustomPost'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'createCustomPostMutationPayloadObjects',
+            'updateCustomPostMutationPayloadObjects'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };

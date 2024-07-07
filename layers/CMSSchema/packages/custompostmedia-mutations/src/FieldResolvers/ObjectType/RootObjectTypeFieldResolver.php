@@ -214,6 +214,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'setFeaturedImageOnCustomPost',
             'removeFeaturedImageFromCustomPost'
                 => SchemaTypeModifiers::NON_NULLABLE,
+            'setFeaturedImageOnCustomPostMutationPayloadObjects',
+            'removeFeaturedImageFromCustomPostMutationPayloadObjects'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };

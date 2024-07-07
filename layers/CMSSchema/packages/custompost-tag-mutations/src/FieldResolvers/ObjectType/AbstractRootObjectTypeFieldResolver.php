@@ -81,6 +81,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         }
         return match ($fieldName) {
             $this->getSetTagsFieldName() => SchemaTypeModifiers::NON_NULLABLE,
+            $this->getSetTagsFieldName() . 'MutationPayloadObjects' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
