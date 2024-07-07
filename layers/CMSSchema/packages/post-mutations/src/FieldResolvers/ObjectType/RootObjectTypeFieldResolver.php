@@ -383,12 +383,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         switch ($fieldName) {
             case 'createPostMutationPayloadObjects':
             case 'updatePostMutationPayloadObjects':
-                /** @var AbstractObjectMutationPayloadObjectTypeResolver */
-                $objectMutationPayloadObjectTypeResolver = $this->getFieldTypeResolver($objectTypeResolver, $fieldName);
-                /** @var DictionaryObjectTypeDataLoaderInterface */
-                $dictionaryObjectTypeDataLoader = $objectMutationPayloadObjectTypeResolver->getRelationalTypeDataLoader();
                 return $this->resolveMutationPayloadObjectsValue(
-                    $dictionaryObjectTypeDataLoader->getObjectClass(),
+                    $objectTypeResolver,
                     $fieldDataAccessor,
                 );
         }
