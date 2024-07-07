@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties;
+use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Facades\Dictionaries\ObjectDictionaryFacade;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\DictionaryObjectTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use stdClass;
