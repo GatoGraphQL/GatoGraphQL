@@ -51,6 +51,17 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
+        if (in_array($field->getName(), [
+            'addCommentToCustomPostMutationPayloadObjects',
+            'replyCommentMutationPayloadObjects',
+        ])) {
+            return parent::prepareFieldArgs(
+                $fieldArgs,
+                $objectTypeResolver,
+                $field,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
         return $this->prepareAddCommentFieldArgs($fieldArgs);
     }
 }
