@@ -250,7 +250,7 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
         switch ($field->getName()) {
             case 'addComment':
                 /** @var stdClass */
-                $input = $fieldArgsForMutationForObject[MutationInputProperties::INPUT];
+                $input = &$fieldArgsForMutationForObject[MutationInputProperties::INPUT];
                 $input->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
                 break;
             case 'addComments':
