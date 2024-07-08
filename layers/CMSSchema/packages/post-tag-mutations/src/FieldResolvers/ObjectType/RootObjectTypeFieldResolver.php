@@ -130,9 +130,19 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getSetTagsOnPostMutationResolver();
     }
 
+    public function getSetTagsBulkOperationMutationResolver(): MutationResolverInterface
+    {
+        return $this->getSetTagsOnPostBulkOperationMutationResolver();
+    }
+
     public function getPayloadableSetTagsMutationResolver(): MutationResolverInterface
     {
         return $this->getPayloadableSetTagsOnPostMutationResolver();
+    }
+
+    public function getPayloadableSetTagsBulkOperationMutationResolver(): MutationResolverInterface
+    {
+        return $this->getPayloadableSetTagsOnPostBulkOperationMutationResolver();
     }
 
     protected function getRootSetTagsMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
@@ -153,5 +163,10 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     protected function getSetTagsFieldName(): string
     {
         return 'setTagsOnPost';
+    }
+
+    protected function getBulkOperationSetTagsFieldName(): string
+    {
+        return 'setTagsOnPosts';
     }
 }
