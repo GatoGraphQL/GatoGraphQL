@@ -28,13 +28,13 @@
     addComments(inputs: [
       {
         commentAs: { html: "Great first insight!" },
-        authorName: "Leo"
-        authorEmail: "leo@saronga.com",
+        authorName: "Leo First"
+        authorEmail: "leo-first@saronga.com",
       },
       {
         commentAs: { html: "Great second insight!" },
-        authorName: "Leo"
-        authorEmail: "leo@saronga.com",
+        authorName: "Leo Second"
+        authorEmail: "leo-second@saronga.com",
       }
     ]) {
       status

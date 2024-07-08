@@ -29,12 +29,12 @@
       ],
       "extensions": {
         "path": [
-          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
         "type": "Post",
-        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
         "code": "PoP\/ComponentModel@2"
       }
     },
@@ -67,12 +67,12 @@
       ],
       "extensions": {
         "path": [
-          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
           "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
           "query { ... }"
         ],
         "type": "Page",
-        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
         "code": "PoP\/ComponentModel@2"
       }
     }

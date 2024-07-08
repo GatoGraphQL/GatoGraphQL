@@ -21,8 +21,8 @@
           "errors": null,
           "comment": {
             "content": "Great first insight!",
-            "authorName": "Leo",
-            "authorEmail": "leo@saronga.com",
+            "authorName": "Leo First",
+            "authorEmail": "leo-first@saronga.com",
             "customPost": {
               "__typename": "Post",
               "id": 1724,
@@ -35,8 +35,8 @@
           "errors": null,
           "comment": {
             "content": "Great second insight!",
-            "authorName": "Leo",
-            "authorEmail": "leo@saronga.com",
+            "authorName": "Leo Second",
+            "authorEmail": "leo-second@saronga.com",
             "customPost": {
               "__typename": "Post",
               "id": 1724,
