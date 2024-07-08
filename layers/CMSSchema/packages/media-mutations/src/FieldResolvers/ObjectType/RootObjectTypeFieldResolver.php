@@ -7,7 +7,9 @@ namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Module;
 use PoPCMSSchema\MediaMutations\ModuleConfiguration;
+use PoPCMSSchema\MediaMutations\MutationResolvers\CreateMediaItemBulkOperationMutationResolver;
 use PoPCMSSchema\MediaMutations\MutationResolvers\CreateMediaItemMutationResolver;
+use PoPCMSSchema\MediaMutations\MutationResolvers\PayloadableCreateMediaItemBulkOperationMutationResolver;
 use PoPCMSSchema\MediaMutations\MutationResolvers\PayloadableCreateMediaItemMutationResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType\RootCreateMediaItemInputObjectTypeResolver;
 use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\RootCreateMediaItemMutationPayloadObjectTypeResolver;
@@ -34,9 +36,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CreateMediaItemMutationResolver $createMediaItemMutationResolver = null;
+    private ?CreateMediaItemBulkOperationMutationResolver $createMediaItemBulkOperationMutationResolver = null;
     private ?RootCreateMediaItemInputObjectTypeResolver $rootCreateMediaItemInputObjectTypeResolver = null;
     private ?RootCreateMediaItemMutationPayloadObjectTypeResolver $rootCreateMediaItemMutationPayloadObjectTypeResolver = null;
     private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
+    private ?PayloadableCreateMediaItemBulkOperationMutationResolver $payloadableCreateMediaItemBulkOperationMutationResolver = null;
     private ?MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver = null;
 
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
@@ -64,6 +68,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->createMediaItemMutationResolver = $createMediaItemMutationResolver;
         }
         return $this->createMediaItemMutationResolver;
+    }
+    final public function setCreateMediaItemBulkOperationMutationResolver(CreateMediaItemBulkOperationMutationResolver $createMediaItemBulkOperationMutationResolver): void
+    {
+        $this->createMediaItemBulkOperationMutationResolver = $createMediaItemBulkOperationMutationResolver;
+    }
+    final protected function getCreateMediaItemBulkOperationMutationResolver(): CreateMediaItemBulkOperationMutationResolver
+    {
+        if ($this->createMediaItemBulkOperationMutationResolver === null) {
+            /** @var CreateMediaItemBulkOperationMutationResolver */
+            $createMediaItemBulkOperationMutationResolver = $this->instanceManager->getInstance(CreateMediaItemBulkOperationMutationResolver::class);
+            $this->createMediaItemBulkOperationMutationResolver = $createMediaItemBulkOperationMutationResolver;
+        }
+        return $this->createMediaItemBulkOperationMutationResolver;
     }
     final public function setRootCreateMediaItemInputObjectTypeResolver(RootCreateMediaItemInputObjectTypeResolver $rootCreateMediaItemInputObjectTypeResolver): void
     {
@@ -103,6 +120,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableCreateMediaItemMutationResolver = $payloadableCreateMediaItemMutationResolver;
         }
         return $this->payloadableCreateMediaItemMutationResolver;
+    }
+    final public function setPayloadableCreateMediaItemBulkOperationMutationResolver(PayloadableCreateMediaItemBulkOperationMutationResolver $payloadableCreateMediaItemBulkOperationMutationResolver): void
+    {
+        $this->payloadableCreateMediaItemBulkOperationMutationResolver = $payloadableCreateMediaItemBulkOperationMutationResolver;
+    }
+    final protected function getPayloadableCreateMediaItemBulkOperationMutationResolver(): PayloadableCreateMediaItemBulkOperationMutationResolver
+    {
+        if ($this->payloadableCreateMediaItemBulkOperationMutationResolver === null) {
+            /** @var PayloadableCreateMediaItemBulkOperationMutationResolver */
+            $payloadableCreateMediaItemBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableCreateMediaItemBulkOperationMutationResolver::class);
+            $this->payloadableCreateMediaItemBulkOperationMutationResolver = $payloadableCreateMediaItemBulkOperationMutationResolver;
+        }
+        return $this->payloadableCreateMediaItemBulkOperationMutationResolver;
     }
     final public function setMutationPayloadObjectsInputObjectTypeResolver(MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver): void
     {

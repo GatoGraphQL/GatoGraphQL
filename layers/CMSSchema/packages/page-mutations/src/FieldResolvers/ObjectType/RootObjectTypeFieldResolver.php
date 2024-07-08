@@ -6,9 +6,13 @@ namespace PoPCMSSchema\PageMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostMutations\Module as CustomPostMutationsModule;
 use PoPCMSSchema\CustomPostMutations\ModuleConfiguration as CustomPostMutationsModuleConfiguration;
+use PoPCMSSchema\PageMutations\MutationResolvers\CreatePageBulkOperationMutationResolver;
 use PoPCMSSchema\PageMutations\MutationResolvers\CreatePageMutationResolver;
+use PoPCMSSchema\PageMutations\MutationResolvers\PayloadableCreatePageBulkOperationMutationResolver;
 use PoPCMSSchema\PageMutations\MutationResolvers\PayloadableCreatePageMutationResolver;
+use PoPCMSSchema\PageMutations\MutationResolvers\PayloadableUpdatePageBulkOperationMutationResolver;
 use PoPCMSSchema\PageMutations\MutationResolvers\PayloadableUpdatePageMutationResolver;
+use PoPCMSSchema\PageMutations\MutationResolvers\UpdatePageBulkOperationMutationResolver;
 use PoPCMSSchema\PageMutations\MutationResolvers\UpdatePageMutationResolver;
 use PoPCMSSchema\PageMutations\TypeResolvers\InputObjectType\RootCreatePageInputObjectTypeResolver;
 use PoPCMSSchema\PageMutations\TypeResolvers\InputObjectType\RootUpdatePageInputObjectTypeResolver;
@@ -41,9 +45,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootUpdatePageMutationPayloadObjectTypeResolver $rootUpdatePageMutationPayloadObjectTypeResolver = null;
     private ?RootCreatePageMutationPayloadObjectTypeResolver $rootCreatePageMutationPayloadObjectTypeResolver = null;
     private ?CreatePageMutationResolver $createPageMutationResolver = null;
+    private ?CreatePageBulkOperationMutationResolver $createPageBulkOperationMutationResolver = null;
     private ?UpdatePageMutationResolver $updatePageMutationResolver = null;
+    private ?UpdatePageBulkOperationMutationResolver $updatePageBulkOperationMutationResolver = null;
     private ?PayloadableUpdatePageMutationResolver $payloadableUpdatePageMutationResolver = null;
+    private ?PayloadableUpdatePageBulkOperationMutationResolver $payloadableUpdatePageBulkOperationMutationResolver = null;
     private ?PayloadableCreatePageMutationResolver $payloadableCreatePageMutationResolver = null;
+    private ?PayloadableCreatePageBulkOperationMutationResolver $payloadableCreatePageBulkOperationMutationResolver = null;
     private ?RootUpdatePageInputObjectTypeResolver $rootUpdatePageInputObjectTypeResolver = null;
     private ?RootCreatePageInputObjectTypeResolver $rootCreatePageInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
@@ -101,6 +109,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->createPageMutationResolver;
     }
+    final public function setCreatePageBulkOperationMutationResolver(CreatePageBulkOperationMutationResolver $createPageBulkOperationMutationResolver): void
+    {
+        $this->createPageBulkOperationMutationResolver = $createPageBulkOperationMutationResolver;
+    }
+    final protected function getCreatePageBulkOperationMutationResolver(): CreatePageBulkOperationMutationResolver
+    {
+        if ($this->createPageBulkOperationMutationResolver === null) {
+            /** @var CreatePageBulkOperationMutationResolver */
+            $createPageBulkOperationMutationResolver = $this->instanceManager->getInstance(CreatePageBulkOperationMutationResolver::class);
+            $this->createPageBulkOperationMutationResolver = $createPageBulkOperationMutationResolver;
+        }
+        return $this->createPageBulkOperationMutationResolver;
+    }
     final public function setUpdatePageMutationResolver(UpdatePageMutationResolver $updatePageMutationResolver): void
     {
         $this->updatePageMutationResolver = $updatePageMutationResolver;
@@ -113,6 +134,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->updatePageMutationResolver = $updatePageMutationResolver;
         }
         return $this->updatePageMutationResolver;
+    }
+    final public function setUpdatePageBulkOperationMutationResolver(UpdatePageBulkOperationMutationResolver $updatePageBulkOperationMutationResolver): void
+    {
+        $this->updatePageBulkOperationMutationResolver = $updatePageBulkOperationMutationResolver;
+    }
+    final protected function getUpdatePageBulkOperationMutationResolver(): UpdatePageBulkOperationMutationResolver
+    {
+        if ($this->updatePageBulkOperationMutationResolver === null) {
+            /** @var UpdatePageBulkOperationMutationResolver */
+            $updatePageBulkOperationMutationResolver = $this->instanceManager->getInstance(UpdatePageBulkOperationMutationResolver::class);
+            $this->updatePageBulkOperationMutationResolver = $updatePageBulkOperationMutationResolver;
+        }
+        return $this->updatePageBulkOperationMutationResolver;
     }
     final public function setPayloadableUpdatePageMutationResolver(PayloadableUpdatePageMutationResolver $payloadableUpdatePageMutationResolver): void
     {
@@ -127,6 +161,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->payloadableUpdatePageMutationResolver;
     }
+    final public function setPayloadableUpdatePageBulkOperationMutationResolver(PayloadableUpdatePageBulkOperationMutationResolver $payloadableUpdatePageBulkOperationMutationResolver): void
+    {
+        $this->payloadableUpdatePageBulkOperationMutationResolver = $payloadableUpdatePageBulkOperationMutationResolver;
+    }
+    final protected function getPayloadableUpdatePageBulkOperationMutationResolver(): PayloadableUpdatePageBulkOperationMutationResolver
+    {
+        if ($this->payloadableUpdatePageBulkOperationMutationResolver === null) {
+            /** @var PayloadableUpdatePageBulkOperationMutationResolver */
+            $payloadableUpdatePageBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableUpdatePageBulkOperationMutationResolver::class);
+            $this->payloadableUpdatePageBulkOperationMutationResolver = $payloadableUpdatePageBulkOperationMutationResolver;
+        }
+        return $this->payloadableUpdatePageBulkOperationMutationResolver;
+    }
     final public function setPayloadableCreatePageMutationResolver(PayloadableCreatePageMutationResolver $payloadableCreatePageMutationResolver): void
     {
         $this->payloadableCreatePageMutationResolver = $payloadableCreatePageMutationResolver;
@@ -139,6 +186,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableCreatePageMutationResolver = $payloadableCreatePageMutationResolver;
         }
         return $this->payloadableCreatePageMutationResolver;
+    }
+    final public function setPayloadableCreatePageBulkOperationMutationResolver(PayloadableCreatePageBulkOperationMutationResolver $payloadableCreatePageBulkOperationMutationResolver): void
+    {
+        $this->payloadableCreatePageBulkOperationMutationResolver = $payloadableCreatePageBulkOperationMutationResolver;
+    }
+    final protected function getPayloadableCreatePageBulkOperationMutationResolver(): PayloadableCreatePageBulkOperationMutationResolver
+    {
+        if ($this->payloadableCreatePageBulkOperationMutationResolver === null) {
+            /** @var PayloadableCreatePageBulkOperationMutationResolver */
+            $payloadableCreatePageBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableCreatePageBulkOperationMutationResolver::class);
+            $this->payloadableCreatePageBulkOperationMutationResolver = $payloadableCreatePageBulkOperationMutationResolver;
+        }
+        return $this->payloadableCreatePageBulkOperationMutationResolver;
     }
     final public function setRootUpdatePageInputObjectTypeResolver(RootUpdatePageInputObjectTypeResolver $rootUpdatePageInputObjectTypeResolver): void
     {
