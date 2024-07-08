@@ -176,7 +176,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableUserStateMutations = $moduleConfiguration->usePayloadableUserStateMutations();
         if (!$usePayloadableUserStateMutations) {
-            return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+            return match ($fieldName) {
+                'loginUser',
+                'logoutUser' =>
+                    SchemaTypeModifiers::NONE,
+                default
+                    => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            };
         }
         return match ($fieldName) {
             'loginUser',
