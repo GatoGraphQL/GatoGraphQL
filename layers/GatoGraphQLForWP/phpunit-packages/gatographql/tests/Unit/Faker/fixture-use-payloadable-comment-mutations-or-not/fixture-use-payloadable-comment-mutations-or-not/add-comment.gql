@@ -23,4 +23,35 @@ mutation {
       }
     }
   }
+
+  addCommentToCustomPosts(inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1724,
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1724,
+    }
+  ]) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    comment {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on Post {
+          id
+          title
+        }
+      }
+    }
+  }
 }
