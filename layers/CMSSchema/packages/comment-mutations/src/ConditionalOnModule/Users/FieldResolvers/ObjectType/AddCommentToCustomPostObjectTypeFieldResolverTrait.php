@@ -25,7 +25,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     protected function prepareAddCommentFieldArgs(
         array $fieldArgs,
     ): array {
-        if (!$this->isUserMustNotBeLoggedInToAddCommendAndUserIsLoggedIn()) {
+        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
             return $fieldArgs;
         }
         
@@ -48,7 +48,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
      * @param array<string,mixed> $fieldArgs
      * @return array<string,mixed>
      */
-    protected function isUserMustNotBeLoggedInToAddCommendAndUserIsLoggedIn(): bool
+    protected function isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -81,7 +81,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     protected function prepareBulkOperationAddCommentFieldArgs(
         array $fieldArgs,
     ): array {
-        if (!$this->isUserMustNotBeLoggedInToAddCommendAndUserIsLoggedIn()) {
+        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
             return $fieldArgs;
         }
         
