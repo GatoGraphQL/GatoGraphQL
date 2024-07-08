@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostTagMutations\MutationResolvers;
 use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class PayloadableSetTagsOnPostBulkOperationDecoratorMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
+class PayloadableSetTagsOnPostBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
 {
     private ?PayloadableSetTagsOnPostMutationResolver $payloadableSetTagsOnPostMutationResolver = null;
 

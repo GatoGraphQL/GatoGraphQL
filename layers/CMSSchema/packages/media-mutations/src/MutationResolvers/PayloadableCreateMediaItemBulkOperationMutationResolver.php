@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class PayloadableCreateMediaItemBulkOperationDecoratorMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
+class PayloadableCreateMediaItemBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
 {
     private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
 

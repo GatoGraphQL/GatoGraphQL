@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostMutations\MutationResolvers;
 use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class PayloadableCreatePostBulkOperationDecoratorMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
+class PayloadableCreatePostBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
 {
     private ?PayloadableCreatePostMutationResolver $payloadableCreatePostMutationResolver = null;
 

@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PageMutations\MutationResolvers;
 use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
-class CreatePageBulkOperationDecoratorMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
+class CreatePageBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver
 {
     private ?CreatePageMutationResolver $createPageMutationResolver = null;
 
