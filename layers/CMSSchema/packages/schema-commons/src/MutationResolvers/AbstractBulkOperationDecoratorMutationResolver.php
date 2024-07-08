@@ -8,7 +8,6 @@ use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\InputObjectListItemSubpropertyFieldDataAccessor;
 use PoP\Root\Exception\AbstractException;
