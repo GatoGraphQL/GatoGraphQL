@@ -250,8 +250,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'replyComment'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'addCommentToCustomPosts',
-            'replyComments'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            'replyComments',
             'addCommentToCustomPostMutationPayloadObjects',
             'replyCommentMutationPayloadObjects'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
