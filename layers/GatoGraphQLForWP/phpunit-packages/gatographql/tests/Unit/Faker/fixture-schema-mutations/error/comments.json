@@ -10,6 +10,28 @@
       ],
       "comment": null
     },
+    "commentsNotSupportedByCPTBulk": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      }
+    ],
     "commentsNotOpenForCustomPost": {
       "status": "FAILURE",
       "errors": [
@@ -19,6 +41,28 @@
         }
       ],
       "comment": null
-    }
+    },
+    "commentsNotOpenForCustomPostBulk": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      }
+    ]
   }
 }

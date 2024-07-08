@@ -9,6 +9,28 @@
         }
       ],
       "comment": null
-    }
+    },
+    "addCommentToCustomPosts": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "UserIsNotLoggedInErrorPayload",
+            "message": "You are not logged in"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "UserIsNotLoggedInErrorPayload",
+            "message": "You are not logged in"
+          }
+        ],
+        "comment": null
+      }
+    ]
   }
 }
