@@ -182,7 +182,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'createMediaItem' => [
-                MutationInputProperties::INPUT => $this->getRootCreateMediaItemInputObjectTypeResolver(),
+                'input' => $this->getRootCreateMediaItemInputObjectTypeResolver(),
             ],
             'createMediaItemMutationPayloadObjects' => [
                 SchemaCommonsMutationInputProperties::INPUT => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
@@ -194,7 +194,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['createMediaItem' => MutationInputProperties::INPUT],
+            ['createMediaItem' => 'input'],
             ['createMediaItemMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
                 => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
