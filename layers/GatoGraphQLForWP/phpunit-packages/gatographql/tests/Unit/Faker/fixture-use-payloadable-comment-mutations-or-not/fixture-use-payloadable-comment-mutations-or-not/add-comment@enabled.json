@@ -4,8 +4,8 @@
       "status": "FAILURE",
       "errors": [
         {
-          "__typename": "UserIsNotLoggedInErrorPayload",
-          "message": "You are not logged in"
+          "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+          "message": "Comments are not supported for custom post type 'page'"
         }
       ],
       "comment": null
@@ -15,8 +15,8 @@
         "status": "FAILURE",
         "errors": [
           {
-            "__typename": "UserIsNotLoggedInErrorPayload",
-            "message": "You are not logged in"
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
           }
         ],
         "comment": null
@@ -25,8 +25,8 @@
         "status": "FAILURE",
         "errors": [
           {
-            "__typename": "UserIsNotLoggedInErrorPayload",
-            "message": "You are not logged in"
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
           }
         ],
         "comment": null
