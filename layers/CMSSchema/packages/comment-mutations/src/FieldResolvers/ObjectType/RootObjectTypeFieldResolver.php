@@ -293,8 +293,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             ['addCommentToCustomPostMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT],
             ['replyCommentMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
                 => SchemaTypeModifiers::MANDATORY,
-            ['addCommentToCustomPost' => SchemaCommonsMutationInputProperties::INPUTS],
-            ['replyComment' => SchemaCommonsMutationInputProperties::INPUTS]
+            ['addCommentToCustomPosts' => SchemaCommonsMutationInputProperties::INPUTS],
+            ['replyComments' => SchemaCommonsMutationInputProperties::INPUTS]
                 => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
