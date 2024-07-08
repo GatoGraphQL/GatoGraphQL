@@ -146,6 +146,11 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getSetCategoriesOnPostMutationResolver();
     }
 
+    public function getSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    {
+        return $this->getSetCategoriesOnPostBulkOperationMutationResolver();
+    }
+
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
         return $this->getPostCategoryObjectTypeResolver();
@@ -161,6 +166,11 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getPayloadableSetCategoriesOnPostMutationResolver();
     }
 
+    public function getPayloadableSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    {
+        return $this->getPayloadableSetCategoriesOnPostBulkOperationMutationResolver();
+    }
+
     protected function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
     {
         return $this->getRootSetCategoriesOnPostMutationPayloadObjectTypeResolver();
@@ -174,5 +184,10 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     protected function getSetCategoriesFieldName(): string
     {
         return 'setCategoriesOnPost';
+    }
+
+    protected function getBulkOperationSetCategoriesFieldName(): string
+    {
+        return 'setCategoriesOnPosts';
     }
 }

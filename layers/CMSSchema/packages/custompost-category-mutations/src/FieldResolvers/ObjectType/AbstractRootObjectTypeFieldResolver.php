@@ -69,6 +69,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         return array_merge(
             [
                 $this->getSetCategoriesFieldName(),
+                $this->getBulkOperationSetCategoriesFieldName(),
             ],
             $addFieldsToQueryPayloadableCustomPostCategoryMutations ? [
                 $this->getSetCategoriesFieldName() . 'MutationPayloadObjects',
@@ -77,12 +78,17 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     }
 
     abstract protected function getSetCategoriesFieldName(): string;
+    abstract protected function getBulkOperationSetCategoriesFieldName(): string;
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => sprintf(
                 $this->__('Set categories on a %s', 'custompost-category-mutations'),
+                $this->getEntityName()
+            ),
+            $this->getBulkOperationSetCategoriesFieldName() => sprintf(
+                $this->__('Set categories on a %s in bulk', 'custompost-category-mutations'),
                 $this->getEntityName()
             ),
             $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => sprintf(
@@ -99,12 +105,20 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostCategoryMutations = $moduleConfiguration->usePayloadableCustomPostCategoryMutations();
         if (!$usePayloadableCustomPostCategoryMutations) {
-            return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+            return match ($fieldName) {
+                $this->getSetCategoriesFieldName() => SchemaTypeModifiers::NONE,
+                $this->getBulkOperationSetCategoriesFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            };
         }
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName() => SchemaTypeModifiers::NON_NULLABLE,
-            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            $this->getSetCategoriesFieldName()
+                => SchemaTypeModifiers::NON_NULLABLE,
+            $this->getBulkOperationSetCategoriesFieldName(),
+            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -116,6 +130,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         return match ($fieldName) {
             $this->getSetCategoriesFieldName() => [
                 'input' => $this->getCustomPostSetCategoriesInputObjectTypeResolver(),
+            ],
+            $this->getBulkOperationSetCategoriesFieldName() => [
+                SchemaCommonsMutationInputProperties::INPUTS => $this->getCustomPostSetCategoriesInputObjectTypeResolver(),
             ],
             $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => [
                 SchemaCommonsMutationInputProperties::INPUT => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
@@ -130,6 +147,8 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             [$this->getSetCategoriesFieldName() => 'input'],
             [$this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
                 => SchemaTypeModifiers::MANDATORY,
+            [$this->getBulkOperationSetCategoriesFieldName() => SchemaCommonsMutationInputProperties::INPUTS]
+                => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -143,6 +162,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             $this->getSetCategoriesFieldName() => $usePayloadableCustomPostCategoryMutations
                 ? $this->getPayloadableSetCategoriesMutationResolver()
                 : $this->getSetCategoriesMutationResolver(),
+            $this->getBulkOperationSetCategoriesFieldName() => $usePayloadableCustomPostCategoryMutations
+                ? $this->getPayloadableSetCategoriesBulkOperationMutationResolver()
+                : $this->getSetCategoriesBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -155,14 +177,19 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         if ($usePayloadableCustomPostCategoryMutations) {
             return match ($fieldName) {
                 $this->getSetCategoriesFieldName(),
+                $this->getBulkOperationSetCategoriesFieldName(),
                 $this->getSetCategoriesFieldName() . 'MutationPayloadObjects'
                     => $this->getRootSetCategoriesMutationPayloadObjectTypeResolver(),
-                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+                default
+                    => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName() => $this->getCustomPostObjectTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            $this->getSetCategoriesFieldName(),
+            $this->getBulkOperationSetCategoriesFieldName()
+                => $this->getCustomPostObjectTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 
