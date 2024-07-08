@@ -82,7 +82,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         array $fieldArgs,
     ): array {
         // Just in case, make sure the InputObject has been set
-        $inputListValue = &$fieldArgs[SchemaCommonsMutationInputProperties::INPUTS] ?? null;
+        $inputListValue = $fieldArgs[SchemaCommonsMutationInputProperties::INPUTS] ?? null;
         if ($inputListValue === null) {
             return $fieldArgs;
         }
@@ -94,7 +94,9 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         
         foreach ($inputListValue as &$inputValue) {
             $inputValue = $this->prepareAddCommentFieldArgsInputValue($inputValue);
-        }        
+        }
+        
+        $fieldArgs[SchemaCommonsMutationInputProperties::INPUTS] = $inputListValue;
         
         return $fieldArgs;
     }
