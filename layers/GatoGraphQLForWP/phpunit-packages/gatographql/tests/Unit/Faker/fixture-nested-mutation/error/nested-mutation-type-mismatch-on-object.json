@@ -26,6 +26,50 @@
       "message": "Argument 'authorEmail' does not expect an array, but array '[\"leo@saronga.com\"]' was provided",
       "locations": [
         {
+          "line": 28,
+          "column": 25
+        }
+      ],
+      "extensions": {
+        "path": [
+          "[{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]",
+          "(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}])",
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "Post",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+        "code": "gql@5.6.1[8]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Argument 'authorEmail' does not expect an array, but array '[\"leo@saronga.com\"]' was provided",
+      "locations": [
+        {
+          "line": 28,
+          "column": 25
+        }
+      ],
+      "extensions": {
+        "path": [
+          "[{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]",
+          "(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}])",
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "Post",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+        "code": "gql@5.6.1[8]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Argument 'authorEmail' does not expect an array, but array '[\"leo@saronga.com\"]' was provided",
+      "locations": [
+        {
           "line": 3,
           "column": 23
         }
@@ -43,18 +87,65 @@
         "code": "gql@5.6.1[8]",
         "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
       }
+    },
+    {
+      "message": "Argument 'authorEmail' does not expect an array, but array '[\"leo@saronga.com\"]' was provided",
+      "locations": [
+        {
+          "line": 28,
+          "column": 25
+        }
+      ],
+      "extensions": {
+        "path": [
+          "[{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]",
+          "(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}])",
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "Page",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+        "code": "gql@5.6.1[8]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
+    },
+    {
+      "message": "Argument 'authorEmail' does not expect an array, but array '[\"leo@saronga.com\"]' was provided",
+      "locations": [
+        {
+          "line": 28,
+          "column": 25
+        }
+      ],
+      "extensions": {
+        "path": [
+          "[{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]",
+          "(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}])",
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "Page",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: [\"leo@saronga.com\"]}]) { ... }",
+        "code": "gql@5.6.1[8]",
+        "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+      }
     }
   ],
   "data": {
     "customPosts": [
       {
-        "addComment": null
+        "addComment": null,
+        "addComments": null
       },
       {
-        "addComment": null
+        "addComment": null,
+        "addComments": null
       },
       {
-        "addComment": null
+        "addComment": null,
+        "addComments": null
       }
     ]
   }
