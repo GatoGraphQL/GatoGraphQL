@@ -7,7 +7,9 @@ namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ModuleConfiguration;
+use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostBulkOperationDecoratorMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\AddCommentToCustomPostMutationResolver;
+use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver;
 use PoPCMSSchema\CommentMutations\MutationResolvers\PayloadableAddCommentToCustomPostMutationResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootAddCommentToCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootReplyCommentInputObjectTypeResolver;
@@ -36,11 +38,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
+    private ?AddCommentToCustomPostBulkOperationDecoratorMutationResolver $addCommentToCustomPostBulkOperationDecoratorMutationResolver = null;
     private ?RootAddCommentToCustomPostInputObjectTypeResolver $rootAddCommentToCustomPostInputObjectTypeResolver = null;
     private ?RootReplyCommentInputObjectTypeResolver $rootReplyCommentInputObjectTypeResolver = null;
     private ?RootAddCommentToCustomPostMutationPayloadObjectTypeResolver $rootAddCommentToCustomPostMutationPayloadObjectTypeResolver = null;
     private ?RootReplyCommentMutationPayloadObjectTypeResolver $rootReplyCommentMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
+    private ?PayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver $payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver = null;
     private ?MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver = null;
 
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
@@ -68,6 +72,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->addCommentToCustomPostMutationResolver = $addCommentToCustomPostMutationResolver;
         }
         return $this->addCommentToCustomPostMutationResolver;
+    }
+    final public function setAddCommentToCustomPostBulkOperationDecoratorMutationResolver(AddCommentToCustomPostBulkOperationDecoratorMutationResolver $addCommentToCustomPostBulkOperationDecoratorMutationResolver): void
+    {
+        $this->addCommentToCustomPostBulkOperationDecoratorMutationResolver = $addCommentToCustomPostBulkOperationDecoratorMutationResolver;
+    }
+    final protected function getAddCommentToCustomPostBulkOperationDecoratorMutationResolver(): AddCommentToCustomPostBulkOperationDecoratorMutationResolver
+    {
+        if ($this->addCommentToCustomPostBulkOperationDecoratorMutationResolver === null) {
+            /** @var AddCommentToCustomPostBulkOperationDecoratorMutationResolver */
+            $addCommentToCustomPostBulkOperationDecoratorMutationResolver = $this->instanceManager->getInstance(AddCommentToCustomPostBulkOperationDecoratorMutationResolver::class);
+            $this->addCommentToCustomPostBulkOperationDecoratorMutationResolver = $addCommentToCustomPostBulkOperationDecoratorMutationResolver;
+        }
+        return $this->addCommentToCustomPostBulkOperationDecoratorMutationResolver;
     }
     final public function setRootAddCommentToCustomPostInputObjectTypeResolver(RootAddCommentToCustomPostInputObjectTypeResolver $rootAddCommentToCustomPostInputObjectTypeResolver): void
     {
@@ -133,6 +150,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableAddCommentToCustomPostMutationResolver = $payloadableAddCommentToCustomPostMutationResolver;
         }
         return $this->payloadableAddCommentToCustomPostMutationResolver;
+    }
+    final public function setPayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver(PayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver $payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver): void
+    {
+        $this->payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver = $payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver;
+    }
+    final protected function getPayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver(): PayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver
+    {
+        if ($this->payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver === null) {
+            /** @var PayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver */
+            $payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver = $this->instanceManager->getInstance(PayloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver::class);
+            $this->payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver = $payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver;
+        }
+        return $this->payloadableAddCommentToCustomPostBulkOperationDecoratorMutationResolver;
     }
     final public function setMutationPayloadObjectsInputObjectTypeResolver(MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver): void
     {
