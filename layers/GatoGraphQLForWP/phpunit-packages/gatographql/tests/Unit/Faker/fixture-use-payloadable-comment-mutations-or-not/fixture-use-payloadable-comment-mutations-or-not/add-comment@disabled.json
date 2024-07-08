@@ -17,9 +17,46 @@
         "field": "addCommentToCustomPost(input: {commentAs: {html: \"Great insight!\"}, customPostID: 1724}) { ... }",
         "code": "PoPCMSSchema\/CommentMutations@e1"
       }
+    },
+    {
+      "message": "You are not logged in",
+      "locations": [
+        {
+          "line": 27,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addCommentToCustomPosts(inputs: [{commentAs: {html: \"Great insight first!\"}, customPostID: 1724}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1724}]) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPosts(inputs: [{commentAs: {html: \"Great insight first!\"}, customPostID: 1724}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1724}]) { ... }",
+        "code": "PoPCMSSchema\/CommentMutations@e1"
+      }
+    },
+    {
+      "message": "You are not logged in",
+      "locations": [
+        {
+          "line": 27,
+          "column": 3
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addCommentToCustomPosts(inputs: [{commentAs: {html: \"Great insight first!\"}, customPostID: 1724}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1724}]) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPosts(inputs: [{commentAs: {html: \"Great insight first!\"}, customPostID: 1724}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1724}]) { ... }",
+        "code": "PoPCMSSchema\/CommentMutations@e1"
+      }
     }
   ],
   "data": {
-    "addCommentToCustomPost": null
+    "addCommentToCustomPost": null,
+    "addCommentToCustomPosts": null
   }
 }
