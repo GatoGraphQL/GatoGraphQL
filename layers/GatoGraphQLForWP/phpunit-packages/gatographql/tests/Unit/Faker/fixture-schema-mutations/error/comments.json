@@ -47,8 +47,8 @@
         "status": "FAILURE",
         "errors": [
           {
-            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
-            "message": "Comments are not supported for custom post type 'page'"
+            "__typename": "CommentsAreNotOpenForCustomPostErrorPayload",
+            "message": "Comments are not open for custom post with ID '1730'"
           }
         ],
         "comment": null
@@ -57,8 +57,8 @@
         "status": "FAILURE",
         "errors": [
           {
-            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
-            "message": "Comments are not supported for custom post type 'page'"
+            "__typename": "CommentsAreNotOpenForCustomPostErrorPayload",
+            "message": "Comments are not open for custom post with ID '1730'"
           }
         ],
         "comment": null
