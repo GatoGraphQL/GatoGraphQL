@@ -10,6 +10,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessor;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\QueryResolution\InputObjectListItemSubpropertyFieldDataAccessor;
 use PoP\Root\Exception\AbstractException;
 
 abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMutationResolver
@@ -26,9 +27,14 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
         $results = [];
         /** @var mixed[] */
         $inputs = $fieldDataAccessor->getValue(MutationInputProperties::INPUTS);
-        foreach ($inputs as $input) {
+        foreach ($inputs as $position => $input) {
             $results[] = $decoratedOperationMutationResolver->executeMutation(
-                new FieldDataAccessor($fieldDataAccessor->getField(), $input),
+                new InputObjectListItemSubpropertyFieldDataAccessor(
+                    $fieldDataAccessor->getField(),
+                    MutationInputProperties::INPUTS,
+                    $position,
+                    $fieldDataAccessor->getFieldArgs(),
+                ),
                 $objectTypeFieldResolutionFeedbackStore
             );
         }
