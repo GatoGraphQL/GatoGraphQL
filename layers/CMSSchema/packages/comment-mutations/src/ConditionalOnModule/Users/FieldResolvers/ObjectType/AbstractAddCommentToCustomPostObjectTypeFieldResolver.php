@@ -55,6 +55,11 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Ups
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
+        if (in_array($field->getName(), [
+            'addComments',
+        ])) {
+            return $this->prepareBulkOperationAddCommentFieldArgs($fieldArgs);
+        }
         return $this->prepareAddCommentFieldArgs($fieldArgs);
     }
 }
