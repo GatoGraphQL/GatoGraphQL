@@ -18,11 +18,31 @@
         "field": "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "code": "PoP\/ComponentModel@2"
       }
+    },
+    {
+      "message": "Use the operation 'mutation' to mutate data",
+      "locations": [
+        {
+          "line": 28,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+          "customPost(by: {id: 1724}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+        "code": "PoP\/ComponentModel@2"
+      }
     }
   ],
   "data": {
     "customPost": {
-      "addComment": null
+      "addComment": null,
+      "addComments": null
     }
   }
 }
