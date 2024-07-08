@@ -25,10 +25,6 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     protected function prepareAddCommentFieldArgs(
         array $fieldArgs,
     ): array {
-        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
-            return $fieldArgs;
-        }
-        
         // Just in case, make sure the InputObject has been set
         /** @var stdClass|null */
         $inputValue = $fieldArgs[MutationInputProperties::INPUT] ?? null;
@@ -37,6 +33,10 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         }
         /** @var stdClass $inputValue */
 
+        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
+            return $fieldArgs;
+        }
+        
         $fieldArgs[MutationInputProperties::INPUT] = $this->prepareAddCommentFieldArgsInputValue($inputValue);
 
         return $fieldArgs;
@@ -81,10 +81,6 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
     protected function prepareBulkOperationAddCommentFieldArgs(
         array $fieldArgs,
     ): array {
-        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
-            return $fieldArgs;
-        }
-        
         // Just in case, make sure the InputObject has been set
         $inputListValue = &$fieldArgs[SchemaCommonsMutationInputProperties::INPUTS] ?? null;
         if ($inputListValue === null) {
@@ -92,6 +88,10 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         }
         /** @var stdClass[] $inputListValue */
 
+        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
+            return $fieldArgs;
+        }
+        
         foreach ($inputListValue as &$inputValue) {
             $inputValue = $this->prepareAddCommentFieldArgsInputValue($inputValue);
         }        
