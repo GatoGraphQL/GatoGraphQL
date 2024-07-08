@@ -14,29 +14,24 @@ use PoP\Root\Exception\AbstractException;
 
 abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMutationResolver
 {
-    /** @param InputObjectListItemSubpropertyFieldDataAccessor[] */
-    protected ?array $inputObjectListItemSubpropertyFieldDataAccessor = null;
-
     /**
      * @return InputObjectListItemSubpropertyFieldDataAccessor[]
      */
     protected function getInputObjectListItemSubpropertyFieldDataAccessors(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
-        if ($this->inputObjectListItemSubpropertyFieldDataAccessor === null) {
-            $this->inputObjectListItemSubpropertyFieldDataAccessor = [];
-            /** @var mixed[] */
-            $inputs = $fieldDataAccessor->getValue(MutationInputProperties::INPUTS);
-            foreach ($inputs as $position => $input) {
-                $this->inputObjectListItemSubpropertyFieldDataAccessor[] = new InputObjectListItemSubpropertyFieldDataAccessor(
-                    $fieldDataAccessor->getField(),
-                    MutationInputProperties::INPUTS,
-                    $position,
-                    $fieldDataAccessor->getFieldArgs(),
-                );
-            }
+        $inputObjectListItemSubpropertyFieldDataAccessors = [];
+        /** @var mixed[] */
+        $inputs = $fieldDataAccessor->getValue(MutationInputProperties::INPUTS);
+        foreach ($inputs as $position => $input) {
+            $inputObjectListItemSubpropertyFieldDataAccessors[] = new InputObjectListItemSubpropertyFieldDataAccessor(
+                $fieldDataAccessor->getField(),
+                MutationInputProperties::INPUTS,
+                $position,
+                $fieldDataAccessor->getFieldArgs(),
+            );
         }
-        return $this->inputObjectListItemSubpropertyFieldDataAccessor;
+        return $inputObjectListItemSubpropertyFieldDataAccessors;
     }
     
     /**
