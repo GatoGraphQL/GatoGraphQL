@@ -9,7 +9,8 @@
         "authorEmail": "leo@saronga.com",
         "customPost": {
           "__typename": "Post",
-          "id": 1724
+          "id": 1724,
+          "title": "Keyboard navigation"
         }
       }
     },
@@ -23,7 +24,8 @@
           "authorEmail": "leo-first@saronga.com",
           "customPost": {
             "__typename": "Post",
-            "id": 1724
+            "id": 1724,
+            "title": "Keyboard navigation"
           }
         }
       },
@@ -36,7 +38,8 @@
           "authorEmail": "leo-second@saronga.com",
           "customPost": {
             "__typename": "Post",
-            "id": 1724
+            "id": 1724,
+            "title": "Keyboard navigation"
           }
         }
       }

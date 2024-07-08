@@ -21,7 +21,7 @@ mutation {
         ...on IdentifiableObject {
           id
         }
-        ...on Page {
+        ...on Post {
           title
         }
       }
@@ -58,7 +58,7 @@ mutation {
         ...on IdentifiableObject {
           id
         }
-        ...on Page {
+        ...on Post {
           title
         }
       }
