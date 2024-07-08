@@ -33,7 +33,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         }
         /** @var stdClass $inputValue */
 
-        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
+        if ($this->skipInjectingLoggedInUserDataIntoInput()) {
             return $fieldArgs;
         }
         
@@ -42,18 +42,12 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         return $fieldArgs;
     }
 
-    /**
-     * If not provided, set the properties from the logged-in user
-     *
-     * @param array<string,mixed> $fieldArgs
-     * @return array<string,mixed>
-     */
-    protected function isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn(): bool
+    protected function skipInjectingLoggedInUserDataIntoInput(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return !$moduleConfiguration->mustUserBeLoggedInToAddComment()
-            && App::getState('is-user-logged-in');
+        return $moduleConfiguration->mustUserBeLoggedInToAddComment()
+            || !App::getState('is-user-logged-in');
     }
 
     protected function prepareAddCommentFieldArgsInputValue(
@@ -88,7 +82,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         }
         /** @var stdClass[] $inputListValue */
 
-        if (!$this->isNotMustUserBeLoggedInToAddCommentAndIsUserLoggedIn()) {
+        if ($this->skipInjectingLoggedInUserDataIntoInput()) {
             return $fieldArgs;
         }
         
