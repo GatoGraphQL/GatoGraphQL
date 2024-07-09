@@ -218,19 +218,19 @@ query DuplicatePosts
 
 The list of added fields is the following:
 
-- `addCommentToCustomPostMutationPayloadObjects` (for `addCommentToCustomPost`)
-- `createCustomPostMutationPayloadObjects` (for `createCustomPost`)
-- `createMediaItemMutationPayloadObjects` (for `createMediaItem`)
-- `createPageMutationPayloadObjects` (for `createPage`)
-- `createPostMutationPayloadObjects` (for `createPost`)
-- `removeFeaturedImageFromCustomPostMutationPayloadObjects` (for `removeFeaturedImageFromCustomPost`)
-- `replyCommentMutationPayloadObjects` (for `replyComment`)
-- `setCategoriesOnPostMutationPayloadObjects` (for `setCategoriesOnPost`)
-- `setFeaturedImageOnCustomPostMutationPayloadObjects` (for `setFeaturedImageOnCustomPost`)
-- `setTagsOnPostMutationPayloadObjects` (for `setTagsOnPost`)
-- `updateCustomPostMutationPayloadObjects` (for `updateCustomPost`)
-- `updatePageMutationPayloadObjects` (for `updatePage`)
-- `updatePostMutationPayloadObjects` (for `updatePost`)
+- `Root.addCommentToCustomPostMutationPayloadObjects` (for `Root.addCommentToCustomPost`)
+- `Root.createCustomPostMutationPayloadObjects` (for `Root.createCustomPost`)
+- `Root.createMediaItemMutationPayloadObjects` (for `Root.createMediaItem`)
+- `Root.createPageMutationPayloadObjects` (for `Root.createPage`)
+- `Root.createPostMutationPayloadObjects` (for `Root.createPost`)
+- `Root.removeFeaturedImageFromCustomPostMutationPayloadObjects` (for `Root.removeFeaturedImageFromCustomPost`)
+- `Root.replyCommentMutationPayloadObjects` (for `Root.replyComment`)
+- `Root.setCategoriesOnPostMutationPayloadObjects` (for `Root.setCategoriesOnPost`)
+- `Root.setFeaturedImageOnCustomPostMutationPayloadObjects` (for `Root.setFeaturedImageOnCustomPost`)
+- `Root.setTagsOnPostMutationPayloadObjects` (for `Root.setTagsOnPost`)
+- `Root.updateCustomPostMutationPayloadObjects` (for `Root.updateCustomPost`)
+- `Root.updatePageMutationPayloadObjects` (for `Root.updatePage`)
+- `Root.updatePostMutationPayloadObjects` (for `Root.updatePost`)
 
 By default, these fields are not added to the GraphQL schema. For that, the new option "Use payload types for mutations, and add fields to query those payload objects" must be selected (see below).
 
