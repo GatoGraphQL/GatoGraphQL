@@ -72,6 +72,48 @@ All bulk mutations accept two arguments:
 
 All mutations are executed in the same order provided in the `inputs` argument.
 
+Bulk mutations unlock plenty of possibilities for managing our WordPress site. For instance, the following GraphQL query uses `createPosts` to duplicate posts:
+
+```graphql
+query GetPostsAndExportData
+{
+  postsToDuplicate: posts {
+    rawTitle
+    rawContent
+    rawExcerpt
+    postInput: _echo(value: {
+      title: $__rawTitle
+      contentAs: {
+        html: $__rawContent
+      },
+      excerpt: $__rawExcerpt
+    })
+      @export(as: "postInputs", type: LIST)
+      @remove
+  }
+}
+
+mutation CreatePosts
+  @depends(on: "GetPostsAndExportData")
+{
+  createPosts(inputs: $postInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      content
+      excerpt
+    }
+  }
+}
+```
+
 The list of added bulk mutation fields is the following:
 
 - `Root.addCommentToCustomPosts`
