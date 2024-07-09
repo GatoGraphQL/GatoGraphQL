@@ -57,5 +57,37 @@ mutation {
         }
       }
     }
+    addCommentsStopExecuting: addComments(stopExecutingMutationItemsOnFirstError: true, inputs: [
+      {
+        commentAs: { html: "Great first insight!" },
+        authorName: "Leo"
+        authorEmail: ["leo@saronga.com"],
+      },
+      {
+        commentAs: { html: "Great second insight!" },
+        authorName: "Leo"
+        authorEmail: ["leo@saronga.com"],
+      }
+    ]) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      comment {
+        content
+        authorName
+        authorEmail
+        customPost {
+          __typename
+          ...on Post {
+            id
+            title
+          }
+        }
+      }
+    }
   }
 }

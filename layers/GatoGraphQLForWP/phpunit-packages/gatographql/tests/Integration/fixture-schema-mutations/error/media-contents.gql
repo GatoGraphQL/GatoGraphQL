@@ -99,6 +99,53 @@ mutation TestCreateMediaItemFromContents(
     }
   }
 
+  createMediaItemsStopExecuting: createMediaItems(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      from: {
+        contents: {
+          body: $body
+          filename: $filename
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    },
+    {
+      from: {
+        contents: {
+          body: $body
+          filename: $filename
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    }
+  ]) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+
   logoutUser {
     status
   }
