@@ -42,4 +42,45 @@ mutation {
       }
     }
   }
+
+  addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1809,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1724,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight third!" },
+      customPostID: 1730,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    }
+  ]) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    comment {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on Post {
+          id
+          title
+        }
+      }
+    }
+  }
 }
