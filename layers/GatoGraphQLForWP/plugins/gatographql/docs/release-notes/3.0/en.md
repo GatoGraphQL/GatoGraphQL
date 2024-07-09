@@ -151,11 +151,11 @@ The list of added bulk mutation fields is the following:
 
 ### Added fields to query the mutation payload objects ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
 
-Every mutation in the schema has been added a corresponding field to query its recently-created payload objects, with name `{mutationName}MutationPayloadObjects` (such as field `createPostMutationPayloadObjects` to query the payload objects from mutation `createPost`).
+In addition to a bulk mutation, every mutation in the GraphQL schema has also been added a corresponding field to query its recently-created payload objects, with name `{mutationName}MutationPayloadObjects` (such as field `createPostMutationPayloadObjects` to query the payload objects from mutation `createPost`).
 
-These fields enable us to retrieve the results of bulk mutations.
+These fields provide an alternative method to retrieve the results of bulk mutations.
 
-For instance, we can duplicate posts in bulk with the following query (using Gato GraphQL PRO):
+For instance, duplicating posts in bulk can also be achieved with the following query (it also requires Gato GraphQL PRO):
 
 ```graphql
 query ExportPostData
