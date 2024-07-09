@@ -24,6 +24,23 @@ mutation {
   ]) {
     ...RootAddCommentToCustomPostMutationPayloadData
   }
+
+  addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1809,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1809,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    }
+  ]) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
 }
 
 fragment RootAddCommentToCustomPostMutationPayloadData on RootAddCommentToCustomPostMutationPayload {
