@@ -15,6 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Added compatibility with WordPress 6.6 (#2717)
+- Added bulk mutation fields (for all mutations in the schema) (#2721)
 - Added fields to query the mutation payload objects (#2720)
 - Added option to schema configuration block "Payload Types for Mutations" (#2720)
 - Added predefined custom endpoint "Bulk mutations" (#2720)

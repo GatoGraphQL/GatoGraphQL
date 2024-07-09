@@ -291,6 +291,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Breaking changes: Removed predefined custom endpoint "Nested mutations + Entity as mutation payload type" (#2720)
 * Breaking changes: Option "Do not use payload types for mutations (i.e. return the mutated entity)" in schema configuration block "Payload Types for Mutations" must be re-selected (#2720)
 * Added compatibility with WordPress 6.6 (#2717)
+* Added bulk mutation fields (for all mutations in the schema) (#2721)
 * Added fields to query the mutation payload objects (#2720)
 * Added option to schema configuration block "Payload Types for Mutations" (#2720)
 * Added predefined custom endpoint "Bulk mutations" (#2720)
