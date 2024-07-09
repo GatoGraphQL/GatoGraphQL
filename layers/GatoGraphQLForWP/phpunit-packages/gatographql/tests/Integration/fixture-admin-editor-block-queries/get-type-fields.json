@@ -684,16 +684,31 @@
               "name": "addCommentToCustomPost"
             },
             {
+              "name": "addCommentToCustomPosts"
+            },
+            {
               "name": "createCustomPost"
+            },
+            {
+              "name": "createCustomPosts"
             },
             {
               "name": "createMediaItem"
             },
             {
+              "name": "createMediaItems"
+            },
+            {
               "name": "createPage"
             },
             {
+              "name": "createPages"
+            },
+            {
               "name": "createPost"
+            },
+            {
+              "name": "createPosts"
             },
             {
               "name": "loginUser"
@@ -705,25 +720,49 @@
               "name": "removeFeaturedImageFromCustomPost"
             },
             {
+              "name": "removeFeaturedImageFromCustomPosts"
+            },
+            {
               "name": "replyComment"
+            },
+            {
+              "name": "replyComments"
             },
             {
               "name": "setCategoriesOnPost"
             },
             {
+              "name": "setCategoriesOnPosts"
+            },
+            {
               "name": "setFeaturedImageOnCustomPost"
+            },
+            {
+              "name": "setFeaturedImageOnCustomPosts"
             },
             {
               "name": "setTagsOnPost"
             },
             {
+              "name": "setTagsOnPosts"
+            },
+            {
               "name": "updateCustomPost"
+            },
+            {
+              "name": "updateCustomPosts"
             },
             {
               "name": "updatePage"
             },
             {
+              "name": "updatePages"
+            },
+            {
               "name": "updatePost"
+            },
+            {
+              "name": "updatePosts"
             }
           ],
           "kind": "OBJECT",
@@ -1313,6 +1352,9 @@
               "name": "addCommentToCustomPost"
             },
             {
+              "name": "addCommentToCustomPosts"
+            },
+            {
               "name": "capabilities"
             },
             {
@@ -1340,13 +1382,25 @@
               "name": "createCustomPost"
             },
             {
+              "name": "createCustomPosts"
+            },
+            {
               "name": "createMediaItem"
+            },
+            {
+              "name": "createMediaItems"
             },
             {
               "name": "createPage"
             },
             {
+              "name": "createPages"
+            },
+            {
               "name": "createPost"
+            },
+            {
+              "name": "createPosts"
             },
             {
               "name": "customPost"
@@ -1499,7 +1553,13 @@
               "name": "removeFeaturedImageFromCustomPost"
             },
             {
+              "name": "removeFeaturedImageFromCustomPosts"
+            },
+            {
               "name": "replyComment"
+            },
+            {
+              "name": "replyComments"
             },
             {
               "name": "roleNames"
@@ -1514,10 +1574,19 @@
               "name": "setCategoriesOnPost"
             },
             {
+              "name": "setCategoriesOnPosts"
+            },
+            {
               "name": "setFeaturedImageOnCustomPost"
             },
             {
+              "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
               "name": "setTagsOnPost"
+            },
+            {
+              "name": "setTagsOnPosts"
             },
             {
               "name": "siteLanguage"
@@ -1544,10 +1613,19 @@
               "name": "updateCustomPost"
             },
             {
+              "name": "updateCustomPosts"
+            },
+            {
               "name": "updatePage"
             },
             {
+              "name": "updatePages"
+            },
+            {
               "name": "updatePost"
+            },
+            {
+              "name": "updatePosts"
             },
             {
               "name": "user"

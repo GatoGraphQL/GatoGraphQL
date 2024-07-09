@@ -3875,6 +3875,67 @@
               "deprecationReason": null
             },
             {
+              "name": "addCommentToCustomPosts",
+              "description": "Add comments to a custom post",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to add a comment to a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootAddCommentToCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootAddCommentToCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootAddCommentToCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootAddCommentToCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootAddCommentToCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootAddCommentToCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootAddCommentToCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootAddCommentToCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createCustomPost",
               "description": "Create a custom post. This mutation accepts the data that is common to all custom posts (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those custom post types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)",
               "args": [
@@ -3900,6 +3961,67 @@
                   "kind": "OBJECT",
                   "name": "RootCreateCustomPostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createCustomPosts",
+              "description": "Create custom posts. This mutation accepts the data that is common to all custom posts (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those custom post types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -3937,6 +4059,67 @@
               "deprecationReason": null
             },
             {
+              "name": "createMediaItems",
+              "description": "Upload attachments",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to upload an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateMediaItemInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateMediaItemInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateMediaItemInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateMediaItemInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateMediaItemMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateMediaItemMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateMediaItemMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateMediaItemMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPage",
               "description": "Create a page",
               "args": [
@@ -3968,6 +4151,67 @@
               "deprecationReason": null
             },
             {
+              "name": "createPages",
+              "description": "Create pages",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreatePageInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreatePageInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreatePageInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreatePageInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePageMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePageMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePageMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePageMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPost",
               "description": "Create a post",
               "args": [
@@ -3993,6 +4237,67 @@
                   "kind": "OBJECT",
                   "name": "RootCreatePostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPosts",
+              "description": "Create posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreatePostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreatePostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreatePostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreatePostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -4077,6 +4382,67 @@
               "deprecationReason": null
             },
             {
+              "name": "removeFeaturedImageFromCustomPosts",
+              "description": "Remove the featured image from custom posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to remove the featured image from a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootRemoveFeaturedImageFromCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootRemoveFeaturedImageFromCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootRemoveFeaturedImageFromCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootRemoveFeaturedImageFromCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootRemoveFeaturedImageFromCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootRemoveFeaturedImageFromCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "replyComment",
               "description": "Reply a comment with another comment",
               "args": [
@@ -4102,6 +4468,67 @@
                   "kind": "OBJECT",
                   "name": "RootReplyCommentMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "replyComments",
+              "description": "Reply comment with other comments",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to add a comment to a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootReplyCommentInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootReplyCommentInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootReplyCommentInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootReplyCommentInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootReplyCommentMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootReplyCommentMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootReplyCommentMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootReplyCommentMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -4139,6 +4566,67 @@
               "deprecationReason": null
             },
             {
+              "name": "setCategoriesOnPosts",
+              "description": "Set categories on a post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set categories on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetCategoriesOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetCategoriesOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetCategoriesOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetCategoriesOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetCategoriesOnPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetCategoriesOnPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetCategoriesOnPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setFeaturedImageOnCustomPost",
               "description": "Set the featured image on a custom post",
               "args": [
@@ -4164,6 +4652,67 @@
                   "kind": "OBJECT",
                   "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "setFeaturedImageOnCustomPosts",
+              "description": "Set the featured image on custom posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set the featured image on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetFeaturedImageOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetFeaturedImageOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetFeaturedImageOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetFeaturedImageOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetFeaturedImageOnCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetFeaturedImageOnCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetFeaturedImageOnCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -4201,6 +4750,67 @@
               "deprecationReason": null
             },
             {
+              "name": "setTagsOnPosts",
+              "description": "Set tags on a post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set tags on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetTagsOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetTagsOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetTagsOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetTagsOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetTagsOnPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetTagsOnPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetTagsOnPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updateCustomPost",
               "description": "Update a custom post",
               "args": [
@@ -4226,6 +4836,67 @@
                   "kind": "OBJECT",
                   "name": "RootUpdateCustomPostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateCustomPosts",
+              "description": "Update custom posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -4263,6 +4934,67 @@
               "deprecationReason": null
             },
             {
+              "name": "updatePages",
+              "description": "Update pages",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdatePageInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdatePageInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdatePageInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdatePageInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePageMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePageMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePageMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePageMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePost",
               "description": "Update a post",
               "args": [
@@ -4288,6 +5020,67 @@
                   "kind": "OBJECT",
                   "name": "RootUpdatePostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePosts",
+              "description": "Update posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdatePostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdatePostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdatePostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdatePostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -9750,6 +10543,67 @@
               "deprecationReason": null
             },
             {
+              "name": "addCommentToCustomPosts",
+              "description": "Add comments to a custom post",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to add a comment to a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootAddCommentToCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootAddCommentToCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootAddCommentToCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootAddCommentToCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootAddCommentToCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootAddCommentToCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootAddCommentToCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootAddCommentToCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "capabilities",
               "description": "All user capabilities",
               "args": [],
@@ -10156,6 +11010,67 @@
               "deprecationReason": null
             },
             {
+              "name": "createCustomPosts",
+              "description": "Create custom posts. This mutation accepts the data that is common to all custom posts (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those custom post types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createMediaItem",
               "description": "Upload an attachment",
               "args": [
@@ -10181,6 +11096,67 @@
                   "kind": "OBJECT",
                   "name": "RootCreateMediaItemMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createMediaItems",
+              "description": "Upload attachments",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to upload an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateMediaItemInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateMediaItemInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateMediaItemInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateMediaItemInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateMediaItemMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateMediaItemMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateMediaItemMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateMediaItemMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -10218,6 +11194,67 @@
               "deprecationReason": null
             },
             {
+              "name": "createPages",
+              "description": "Create pages",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreatePageInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreatePageInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreatePageInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreatePageInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePageMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePageMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePageMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePageMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPost",
               "description": "Create a post",
               "args": [
@@ -10243,6 +11280,67 @@
                   "kind": "OBJECT",
                   "name": "RootCreatePostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPosts",
+              "description": "Create posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreatePostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreatePostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreatePostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreatePostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -12124,6 +13222,67 @@
               "deprecationReason": null
             },
             {
+              "name": "removeFeaturedImageFromCustomPosts",
+              "description": "Remove the featured image from custom posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to remove the featured image from a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootRemoveFeaturedImageFromCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootRemoveFeaturedImageFromCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootRemoveFeaturedImageFromCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootRemoveFeaturedImageFromCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootRemoveFeaturedImageFromCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootRemoveFeaturedImageFromCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootRemoveFeaturedImageFromCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "replyComment",
               "description": "Reply a comment with another comment",
               "args": [
@@ -12149,6 +13308,67 @@
                   "kind": "OBJECT",
                   "name": "RootReplyCommentMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "replyComments",
+              "description": "Reply comment with other comments",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to add a comment to a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootReplyCommentInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootReplyCommentInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootReplyCommentInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootReplyCommentInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootReplyCommentMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootReplyCommentMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootReplyCommentMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootReplyCommentMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -12250,6 +13470,67 @@
               "deprecationReason": null
             },
             {
+              "name": "setCategoriesOnPosts",
+              "description": "Set categories on a post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set categories on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetCategoriesOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetCategoriesOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetCategoriesOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetCategoriesOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetCategoriesOnPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetCategoriesOnPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetCategoriesOnPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetCategoriesOnPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setFeaturedImageOnCustomPost",
               "description": "Set the featured image on a custom post",
               "args": [
@@ -12281,6 +13562,67 @@
               "deprecationReason": null
             },
             {
+              "name": "setFeaturedImageOnCustomPosts",
+              "description": "Set the featured image on custom posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set the featured image on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetFeaturedImageOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetFeaturedImageOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetFeaturedImageOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetFeaturedImageOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetFeaturedImageOnCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetFeaturedImageOnCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetFeaturedImageOnCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "setTagsOnPost",
               "description": "Set tags on a post",
               "args": [
@@ -12306,6 +13648,67 @@
                   "kind": "OBJECT",
                   "name": "RootSetTagsOnPostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "setTagsOnPosts",
+              "description": "Set tags on a post in bulk",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to set tags on a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootSetTagsOnCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootSetTagsOnCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootSetTagsOnCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootSetTagsOnCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootSetTagsOnPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootSetTagsOnPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootSetTagsOnPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootSetTagsOnPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,
@@ -12611,6 +14014,67 @@
               "deprecationReason": null
             },
             {
+              "name": "updateCustomPosts",
+              "description": "Update custom posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateCustomPostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateCustomPostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateCustomPostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateCustomPostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateCustomPostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateCustomPostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateCustomPostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePage",
               "description": "Update a page",
               "args": [
@@ -12642,6 +14106,67 @@
               "deprecationReason": null
             },
             {
+              "name": "updatePages",
+              "description": "Update pages",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdatePageInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdatePageInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdatePageInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdatePageInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePageMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePageMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePageMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePageMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePost",
               "description": "Update a post",
               "args": [
@@ -12667,6 +14192,67 @@
                   "kind": "OBJECT",
                   "name": "RootUpdatePostMutationPayload",
                   "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePosts",
+              "description": "Update posts",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a custom post",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdatePostInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdatePostInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdatePostInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdatePostInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePostMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePostMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
                 }
               },
               "isDeprecated": false,

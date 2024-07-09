@@ -2082,6 +2082,27 @@
                             ]
                         },
                         {
+                            "name": "addCommentToCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2090,6 +2111,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -2112,6 +2154,27 @@
                             ]
                         },
                         {
+                            "name": "createMediaItems",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPage",
                             "extensions": {
                                 "isMutation": true,
@@ -2127,6 +2190,27 @@
                             ]
                         },
                         {
+                            "name": "createPages",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2135,6 +2219,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -2180,6 +2285,27 @@
                             ]
                         },
                         {
+                            "name": "removeFeaturedImageFromCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "replyComment",
                             "extensions": {
                                 "isMutation": true,
@@ -2188,6 +2314,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "replyComments",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -2210,6 +2357,27 @@
                             ]
                         },
                         {
+                            "name": "setCategoriesOnPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "setFeaturedImageOnCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2218,6 +2386,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setFeaturedImageOnCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -2240,6 +2429,27 @@
                             ]
                         },
                         {
+                            "name": "setTagsOnPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updateCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2248,6 +2458,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -2270,6 +2501,27 @@
                             ]
                         },
                         {
+                            "name": "updatePages",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePost",
                             "extensions": {
                                 "isMutation": true,
@@ -2278,6 +2530,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -4989,6 +5262,27 @@
                             ]
                         },
                         {
+                            "name": "addCommentToCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "capabilities",
                             "extensions": {
                                 "isMutation": false,
@@ -5183,6 +5477,27 @@
                             ]
                         },
                         {
+                            "name": "createCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createMediaItem",
                             "extensions": {
                                 "isMutation": true,
@@ -5191,6 +5506,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createMediaItems",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -5213,6 +5549,27 @@
                             ]
                         },
                         {
+                            "name": "createPages",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPost",
                             "extensions": {
                                 "isMutation": true,
@@ -5221,6 +5578,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -6151,6 +6529,27 @@
                             ]
                         },
                         {
+                            "name": "removeFeaturedImageFromCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "replyComment",
                             "extensions": {
                                 "isMutation": true,
@@ -6159,6 +6558,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "replyComments",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -6205,6 +6625,27 @@
                             ]
                         },
                         {
+                            "name": "setCategoriesOnPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "setFeaturedImageOnCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -6220,6 +6661,27 @@
                             ]
                         },
                         {
+                            "name": "setFeaturedImageOnCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "setTagsOnPost",
                             "extensions": {
                                 "isMutation": true,
@@ -6228,6 +6690,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "setTagsOnPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -6382,6 +6865,27 @@
                             ]
                         },
                         {
+                            "name": "updateCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePage",
                             "extensions": {
                                 "isMutation": true,
@@ -6397,6 +6901,27 @@
                             ]
                         },
                         {
+                            "name": "updatePages",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePost",
                             "extensions": {
                                 "isMutation": true,
@@ -6405,6 +6930,27 @@
                             "args": [
                                 {
                                     "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
