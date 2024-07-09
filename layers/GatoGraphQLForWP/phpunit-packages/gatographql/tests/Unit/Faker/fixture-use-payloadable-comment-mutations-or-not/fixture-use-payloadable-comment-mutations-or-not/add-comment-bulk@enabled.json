@@ -2,6 +2,20 @@
   "data": {
     "addCommentToCustomPosts": [
       {
+        "status": "SUCCESS",
+        "errors": null,
+        "comment": {
+          "content": "Great insight zero!",
+          "authorName": "Leo Zero",
+          "authorEmail": "leo-zero@saronga.com",
+          "customPost": {
+            "__typename": "Post",
+            "id": 1724,
+            "title": "Keyboard navigation"
+          }
+        }
+      },
+      {
         "status": "FAILURE",
         "errors": [
           {
@@ -37,6 +51,20 @@
       }
     ],
     "addCommentToCustomPostsStopExecuting": [
+      {
+        "status": "SUCCESS",
+        "errors": null,
+        "comment": {
+          "content": "Great insight zero!",
+          "authorName": "Leo Zero",
+          "authorEmail": "leo-zero@saronga.com",
+          "customPost": {
+            "__typename": "Post",
+            "id": 1724,
+            "title": "Keyboard navigation"
+          }
+        }
+      },
       {
         "status": "FAILURE",
         "errors": [
