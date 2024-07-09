@@ -53,6 +53,24 @@
         "field": "addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great insight zero!\"}, customPostID: 1724, authorName: \"Leo Zero\", authorEmail: \"leo-zero@saronga.com\"}, {commentAs: {html: \"Great insight first!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight third!\"}, customPostID: 1730, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
         "code": "PoPCMSSchema\/CommentMutations@e8"
       }
+    },
+    {
+      "message": "Comments are not open for custom post with ID '1730'",
+      "locations": [
+        {
+          "line": 52,
+          "column": 41
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great insight zero!\"}, customPostID: 1724, authorName: \"Leo Zero\", authorEmail: \"leo-zero@saronga.com\"}, {commentAs: {html: \"Great insight first!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight third!\"}, customPostID: 1730, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great insight zero!\"}, customPostID: 1724, authorName: \"Leo Zero\", authorEmail: \"leo-zero@saronga.com\"}, {commentAs: {html: \"Great insight first!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1724, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight third!\"}, customPostID: 1730, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+        "code": "PoPCMSSchema\/CommentMutations@e9"
+      }
     }
   ],
   "data": {

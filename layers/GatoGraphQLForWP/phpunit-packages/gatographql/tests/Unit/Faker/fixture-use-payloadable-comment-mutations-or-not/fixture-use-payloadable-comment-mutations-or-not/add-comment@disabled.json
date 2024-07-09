@@ -71,6 +71,24 @@
         "field": "addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great insight first!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
         "code": "PoPCMSSchema\/CommentMutations@e8"
       }
+    },
+    {
+      "message": "Comments are not supported for custom post type 'page'",
+      "locations": [
+        {
+          "line": 28,
+          "column": 41
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great insight first!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+          "mutation { ... }"
+        ],
+        "type": "MutationRoot",
+        "field": "addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great insight first!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}, {commentAs: {html: \"Great insight second!\"}, customPostID: 1809, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}]) { ... }",
+        "code": "PoPCMSSchema\/CommentMutations@e8"
+      }
     }
   ],
   "data": {
