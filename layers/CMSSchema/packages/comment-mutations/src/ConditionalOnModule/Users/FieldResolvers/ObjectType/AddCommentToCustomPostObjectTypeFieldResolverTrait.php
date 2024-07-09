@@ -36,7 +36,7 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         if ($this->skipInjectingLoggedInUserDataIntoInput()) {
             return $fieldArgs;
         }
-        
+
         $fieldArgs[MutationInputProperties::INPUT] = $this->prepareAddCommentFieldArgsInputValue($inputValue);
 
         return $fieldArgs;
@@ -85,13 +85,13 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         if ($this->skipInjectingLoggedInUserDataIntoInput()) {
             return $fieldArgs;
         }
-        
+
         foreach ($inputListValue as &$inputValue) {
             $inputValue = $this->prepareAddCommentFieldArgsInputValue($inputValue);
         }
-        
+
         $fieldArgs[SchemaCommonsMutationInputProperties::INPUTS] = $inputListValue;
-        
+
         return $fieldArgs;
     }
 }

@@ -45,7 +45,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootReplyCommentMutationPayloadObjectTypeResolver $rootReplyCommentMutationPayloadObjectTypeResolver = null;
     private ?PayloadableAddCommentToCustomPostMutationResolver $payloadableAddCommentToCustomPostMutationResolver = null;
     private ?PayloadableAddCommentToCustomPostBulkOperationMutationResolver $payloadableAddCommentToCustomPostBulkOperationMutationResolver = null;
-    
+
     final public function setCommentObjectTypeResolver(CommentObjectTypeResolver $commentObjectTypeResolver): void
     {
         $this->commentObjectTypeResolver = $commentObjectTypeResolver;
@@ -231,11 +231,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
-        
-        if (in_array($fieldName, [
+
+        if (
+            in_array($fieldName, [
             'addCommentToCustomPostMutationPayloadObjects',
             'replyCommentMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
@@ -275,18 +277,22 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'addCommentToCustomPostMutationPayloadObjects',
             'replyCommentMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'addCommentToCustomPosts',
             'replyComments',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
@@ -302,10 +308,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'addCommentToCustomPosts',
             'replyComments',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
                 ?? parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
         }

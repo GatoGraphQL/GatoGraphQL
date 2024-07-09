@@ -309,10 +309,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             };
         }
 
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createPostMutationPayloadObjects',
             'updatePostMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
@@ -354,18 +356,22 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createPostMutationPayloadObjects',
             'updatePostMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createPosts',
             'updatePosts',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
@@ -380,10 +386,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createPosts',
             'updatePosts',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
                 ?? parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
         }

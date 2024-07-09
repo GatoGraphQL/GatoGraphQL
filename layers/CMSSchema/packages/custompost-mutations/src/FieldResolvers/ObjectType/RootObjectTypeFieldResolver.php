@@ -55,7 +55,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootUpdateGenericCustomPostInputObjectTypeResolver $rootUpdateGenericCustomPostInputObjectTypeResolver = null;
     private ?RootCreateGenericCustomPostInputObjectTypeResolver $rootCreateGenericCustomPostInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
-    
+
     final public function setGenericCustomPostObjectTypeResolver(GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver): void
     {
         $this->genericCustomPostObjectTypeResolver = $genericCustomPostObjectTypeResolver;
@@ -308,11 +308,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
-        
-        if (in_array($fieldName, [
+
+        if (
+            in_array($fieldName, [
             'createCustomPostMutationPayloadObjects',
             'updateCustomPostMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
@@ -354,18 +356,22 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createCustomPostMutationPayloadObjects',
             'updateCustomPostMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createCustomPosts',
             'updateCustomPosts',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
@@ -380,10 +386,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createCustomPosts',
             'updateCustomPosts',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
                 ?? parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
         }

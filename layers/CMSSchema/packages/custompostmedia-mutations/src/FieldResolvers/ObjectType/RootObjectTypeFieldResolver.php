@@ -52,7 +52,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     private ?PayloadableRemoveFeaturedImageFromCustomPostBulkOperationMutationResolver $payloadableRemoveFeaturedImageFromCustomPostBulkOperationMutationResolver = null;
     private ?RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver $rootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver = null;
     private ?RootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver $rootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver = null;
-    
+
     final public function setCustomPostUnionTypeResolver(CustomPostUnionTypeResolver $customPostUnionTypeResolver): void
     {
         $this->customPostUnionTypeResolver = $customPostUnionTypeResolver;
@@ -290,11 +290,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
-        
-        if (in_array($fieldName, [
+
+        if (
+            in_array($fieldName, [
             'setFeaturedImageOnCustomPostMutationPayloadObjects',
             'removeFeaturedImageFromCustomPostMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
@@ -336,18 +338,22 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'setFeaturedImageOnCustomPostMutationPayloadObjects',
             'removeFeaturedImageFromCustomPostMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'setFeaturedImageOnCustomPosts',
             'removeFeaturedImageFromCustomPosts',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
@@ -362,10 +368,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'setFeaturedImageOnCustomPosts',
             'removeFeaturedImageFromCustomPosts',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
                 ?? parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
         }

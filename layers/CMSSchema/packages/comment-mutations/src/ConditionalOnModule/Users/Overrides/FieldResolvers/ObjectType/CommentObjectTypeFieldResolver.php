@@ -51,9 +51,11 @@ class CommentObjectTypeFieldResolver extends UpstreamCommentObjectTypeFieldResol
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        if (in_array($field->getName(), [
+        if (
+            in_array($field->getName(), [
             'replyWithComments',
-        ])) {
+            ])
+        ) {
             return $this->prepareBulkOperationAddCommentFieldArgs($fieldArgs);
         }
         return $this->prepareAddCommentFieldArgs($fieldArgs);

@@ -30,7 +30,7 @@ use stdClass;
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use BulkOperationDecoratorObjectTypeFieldResolverTrait;
-    
+
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;

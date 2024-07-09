@@ -62,7 +62,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     }
 
     abstract protected function getSetTagsFieldName(): string;
-    
+
     abstract protected function getBulkOperationSetTagsFieldName(): string;
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
@@ -96,10 +96,12 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
                 default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
-        
-        if (in_array($fieldName, [
+
+        if (
+            in_array($fieldName, [
             $this->getSetTagsFieldName() . 'MutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
@@ -127,16 +129,20 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             $this->getSetTagsFieldName() . 'MutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             $this->getBulkOperationSetTagsFieldName(),
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
@@ -150,9 +156,11 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             $this->getBulkOperationSetTagsFieldName(),
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
                 ?? parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
         }

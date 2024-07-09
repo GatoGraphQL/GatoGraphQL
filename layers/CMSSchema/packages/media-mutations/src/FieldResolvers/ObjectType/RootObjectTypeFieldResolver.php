@@ -40,7 +40,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootCreateMediaItemMutationPayloadObjectTypeResolver $rootCreateMediaItemMutationPayloadObjectTypeResolver = null;
     private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
     private ?PayloadableCreateMediaItemBulkOperationMutationResolver $payloadableCreateMediaItemBulkOperationMutationResolver = null;
-    
+
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
         $this->mediaObjectTypeResolver = $mediaObjectTypeResolver;
@@ -189,10 +189,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
-        
-        if (in_array($fieldName, [
+
+        if (
+            in_array($fieldName, [
             'createMediaItemMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
@@ -220,16 +222,20 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createMediaItemMutationPayloadObjects',
-        ])) {
+            ])
+        ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createMediaItems',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
@@ -243,9 +249,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
     {
-        if (in_array($fieldName, [
+        if (
+            in_array($fieldName, [
             'createMediaItems',
-        ])) {
+            ])
+        ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
                 ?? parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
         }

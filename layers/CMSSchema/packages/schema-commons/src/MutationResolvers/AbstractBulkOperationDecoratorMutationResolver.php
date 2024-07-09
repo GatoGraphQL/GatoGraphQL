@@ -52,7 +52,7 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
         }
         return $inputObjectListItemSubpropertyFieldDataAccessors;
     }
-    
+
     /**
      * @throws AbstractException In case of error
      */
@@ -93,7 +93,7 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
                  * - Check if that object has failure status
                  *
                  * ObjectMutationPayload is a TransientObject, its ID is an integer.
-                 * 
+                 *
                  * @see layers/Engine/packages/component-model/src/ObjectModels/AbstractTransientObject.php
                  */
                 if (!is_integer($result)) {

@@ -74,7 +74,7 @@ class InputObjectListItemSubpropertyFieldDataAccessor extends FieldDataAccessor 
                 )
             );
         }
-        $inputObjectListItemValue = $inputObjectListValue[$inputObjectListItemPosition];        
+        $inputObjectListItemValue = $inputObjectListValue[$inputObjectListItemPosition];
         if (!($inputObjectListItemValue instanceof stdClass)) {
             throw new ShouldNotHappenException(
                 sprintf(

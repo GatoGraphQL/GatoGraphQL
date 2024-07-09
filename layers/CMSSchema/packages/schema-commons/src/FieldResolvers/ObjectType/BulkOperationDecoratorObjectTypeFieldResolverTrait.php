@@ -30,8 +30,7 @@ trait BulkOperationDecoratorObjectTypeFieldResolverTrait
      */
     protected function getBulkOperationFieldArgNameTypeResolvers(
         InputObjectTypeResolverInterface $inputObjectTypeResolver
-    ): array
-    {
+    ): array {
         return [
             MutationInputProperties::INPUTS => $inputObjectTypeResolver,
             MutationInputProperties::STOP_EXECUTING_MUTATION_ITEMS_ON_FIRST_ERROR => $this->getBooleanScalarTypeResolver(),

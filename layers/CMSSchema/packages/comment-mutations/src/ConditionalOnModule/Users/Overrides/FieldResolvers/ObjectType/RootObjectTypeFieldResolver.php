@@ -6,7 +6,6 @@ namespace PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\Overrides\Fiel
 
 use PoPCMSSchema\CommentMutations\ConditionalOnModule\Users\FieldResolvers\ObjectType\AddCommentToCustomPostObjectTypeFieldResolverTrait;
 use PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType\RootObjectTypeFieldResolver as UpstreamRootObjectTypeFieldResolver;
-use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
