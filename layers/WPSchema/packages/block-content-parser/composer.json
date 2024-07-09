@@ -151,8 +151,8 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/dom-crawler": "^3.0",
-        "getpop/engine-wp": "^3.0"
+        "getpop/dom-crawler": "^3.1",
+        "getpop/engine-wp": "^3.1"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.4",
@@ -182,7 +182,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "3.1-dev"
         }
     },
     "config": {

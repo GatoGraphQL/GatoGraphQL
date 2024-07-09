@@ -150,10 +150,10 @@
     "require": {
         "php": "^8.1",
         "composer/semver": "^3.2",
-        "getpop/componentrouting": "^3.0",
-        "getpop/definitions": "^3.0",
-        "getpop/graphql-parser": "^3.0",
-        "getpop/loosecontracts": "^3.0",
+        "getpop/componentrouting": "^3.1",
+        "getpop/definitions": "^3.1",
+        "getpop/graphql-parser": "^3.1",
+        "getpop/loosecontracts": "^3.1",
         "jrfnl/php-cast-to-type": "^2.0",
         "league/pipeline": "^1.0",
         "psr/simple-cache": "^3.0",
@@ -184,7 +184,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "3.0-dev"
+            "dev-master": "3.1-dev"
         }
     },
     "config": {
