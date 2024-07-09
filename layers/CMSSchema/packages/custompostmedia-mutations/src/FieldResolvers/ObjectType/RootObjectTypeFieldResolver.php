@@ -19,7 +19,6 @@ use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\InputObjectType\RootSetF
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\RootRemoveFeaturedImageFromCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
-use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -345,13 +344,18 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
+        if (in_array($fieldName, [
+            'setFeaturedImageOnCustomPosts',
+            'removeFeaturedImageFromCustomPosts',
+        ])) {
+            return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
         return match ([$fieldName => $fieldArgName]) {
             ['setFeaturedImageOnCustomPost' => 'input'],
             ['removeFeaturedImageFromCustomPost' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
-            ['setFeaturedImageOnCustomPosts' => SchemaCommonsMutationInputProperties::INPUTS],
-            ['removeFeaturedImageFromCustomPosts' => SchemaCommonsMutationInputProperties::INPUTS]
-                => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

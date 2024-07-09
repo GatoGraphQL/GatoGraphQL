@@ -16,7 +16,6 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\InputObjectType\RootReplyComment
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootAddCommentToCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootReplyCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
-use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -284,13 +283,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
+        if (in_array($fieldName, [
+            'addCommentToCustomPosts',
+            'replyComments',
+        ])) {
+            return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
         return match ([$fieldName => $fieldArgName]) {
             ['addCommentToCustomPost' => MutationInputProperties::INPUT],
             ['replyComment' => MutationInputProperties::INPUT]
                 => SchemaTypeModifiers::MANDATORY,
-            ['addCommentToCustomPosts' => SchemaCommonsMutationInputProperties::INPUTS],
-            ['replyComments' => SchemaCommonsMutationInputProperties::INPUTS]
-                => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };

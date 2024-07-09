@@ -6,7 +6,6 @@ namespace PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostCategoryMutations\Module;
 use PoPCMSSchema\CustomPostCategoryMutations\ModuleConfiguration;
-use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -134,11 +133,16 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
                 ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
         }
 
+        if (in_array($fieldName, [
+            $this->getBulkOperationSetCategoriesFieldName(),
+        ])) {
+            return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
         return match ([$fieldName => $fieldArgName]) {
             [$this->getSetCategoriesFieldName() => 'input']
                 => SchemaTypeModifiers::MANDATORY,
-            [$this->getBulkOperationSetCategoriesFieldName() => SchemaCommonsMutationInputProperties::INPUTS]
-                => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
