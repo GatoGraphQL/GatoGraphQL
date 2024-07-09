@@ -18,8 +18,42 @@
             ],
             "mediaItem": null
         },
+        "createMediaItems": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "UserIsNotLoggedInErrorPayload",
+                        "message": "You must be logged in to upload files"
+                    }
+                ],
+                "mediaItem": null
+            },
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "UserIsNotLoggedInErrorPayload",
+                        "message": "You must be logged in to upload files"
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "UserIsNotLoggedInErrorPayload",
+                        "message": "You must be logged in to upload files"
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
         "logoutUser": {
-          "status": "FAILURE"
+            "status": "FAILURE"
         }
     }
 }

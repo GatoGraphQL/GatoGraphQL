@@ -19,11 +19,53 @@
                 "mimeType": "image\/png",
                 "sizes": "(max-width: 364px) 100vw, 364px",
                 "slug": "another-browser-png",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/another-browser.png",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/another-browser-3.png",
                 "title": "another-browser.png",
                 "width": 364
             }
         },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": 144,
+                    "mimeType": "image\/png",
+                    "sizes": "(max-width: 364px) 100vw, 364px",
+                    "slug": "another-browser-png",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/another-browser-4.png",
+                    "title": "another-browser.png",
+                    "width": 364
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": 144,
+                    "mimeType": "image\/png",
+                    "sizes": "(max-width: 364px) 100vw, 364px",
+                    "slug": "another-browser-png",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/another-browser.png",
+                    "title": "another-browser.png",
+                    "width": 364
+                }
+            }
+        ],
         "logoutUser": {
             "status": "SUCCESS"
         }

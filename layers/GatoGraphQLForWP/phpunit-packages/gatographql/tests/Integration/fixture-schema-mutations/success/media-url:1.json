@@ -24,8 +24,50 @@
                 "width": 364
             }
         },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "Browser pic from WordPress",
+                    "description": "",
+                    "height": 144,
+                    "mimeType": "image\/png",
+                    "sizes": "(max-width: 364px) 100vw, 364px",
+                    "slug": "browser-png",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser-1.png",
+                    "title": "browser.png",
+                    "width": 364
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "Browser pic from WordPress",
+                    "description": "",
+                    "height": 144,
+                    "mimeType": "image\/png",
+                    "sizes": "(max-width: 364px) 100vw, 364px",
+                    "slug": "browser-png",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/browser.png",
+                    "title": "browser.png",
+                    "width": 364
+                }
+            }
+        ],
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

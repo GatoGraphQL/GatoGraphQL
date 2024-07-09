@@ -14,8 +14,42 @@
             ],
             "mediaItem": null
         },
+        "createMediaItems": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "Not Found"
+                    }
+                ],
+                "mediaItem": null
+            },
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "Not Found"
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "Not Found"
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

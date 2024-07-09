@@ -24,8 +24,50 @@
                 "width": null
             }
         },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "readme-html",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/readme-1.html",
+                    "title": "readme.html",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "readme-html",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/readme.html",
+                    "title": "readme.html",
+                    "width": null
+                }
+            }
+        ],
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }
