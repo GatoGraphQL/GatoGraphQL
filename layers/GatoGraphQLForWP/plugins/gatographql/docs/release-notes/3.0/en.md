@@ -74,7 +74,21 @@ All mutations are executed in the same order provided in the `inputs` argument.
 
 The list of added bulk mutation fields is the following:
 
-
+- `Root.addCommentToCustomPosts`
+- `Root.createCustomPosts`
+- `Root.createMediaItems`
+- `Root.createPages`
+- `Root.createPosts`
+- `Root.removeFeaturedImageFromCustomPosts`
+- `Root.replyComments`
+- `Root.setCategoriesOnPosts`
+- `Root.setFeaturedImageOnCustomPosts`
+- `Root.setTagsOnPosts`
+- `Root.updateCustomPosts`
+- `Root.updatePages`
+- `Root.updatePosts`
+- `Comment.replyWithComments`
+- `CustomPost.addComments`
 
 ### Added fields to query the mutation payload objects ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
 
