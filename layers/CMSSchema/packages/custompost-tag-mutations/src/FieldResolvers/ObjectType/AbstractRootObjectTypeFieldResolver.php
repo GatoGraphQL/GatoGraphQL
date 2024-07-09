@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\CustomPostTagMutations\Module;
 use PoPCMSSchema\CustomPostTagMutations\ModuleConfiguration;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -24,6 +25,7 @@ use PoP\Root\App;
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
 
     /**
@@ -118,9 +120,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             $this->getSetTagsFieldName() => [
                 'input' => $this->getCustomPostSetTagsInputObjectTypeResolver(),
             ],
-            $this->getBulkOperationSetTagsFieldName() => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getCustomPostSetTagsInputObjectTypeResolver(),
-            ],
+            $this->getBulkOperationSetTagsFieldName() => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCustomPostSetTagsInputObjectTypeResolver()),
             $this->getSetTagsFieldName() . 'MutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

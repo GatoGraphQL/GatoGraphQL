@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType;
 use PoPCMSSchema\CustomPostCategoryMutations\Module;
 use PoPCMSSchema\CustomPostCategoryMutations\ModuleConfiguration;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -24,6 +25,7 @@ use PoP\Root\App;
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetCategoriesOnCustomPostObjectTypeFieldResolverInterface
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
     use SetCategoriesOnCustomPostObjectTypeFieldResolverTrait;
 
     /**
@@ -117,9 +119,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             $this->getSetCategoriesFieldName() => [
                 'input' => $this->getCustomPostSetCategoriesInputObjectTypeResolver(),
             ],
-            $this->getBulkOperationSetCategoriesFieldName() => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getCustomPostSetCategoriesInputObjectTypeResolver(),
-            ],
+            $this->getBulkOperationSetCategoriesFieldName() => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCustomPostSetCategoriesInputObjectTypeResolver()),
             $this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

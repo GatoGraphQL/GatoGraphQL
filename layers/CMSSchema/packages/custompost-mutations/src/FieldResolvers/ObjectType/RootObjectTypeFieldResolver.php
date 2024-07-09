@@ -20,6 +20,7 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\RootCreateGenericC
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
@@ -39,6 +40,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
 
     private ?GenericCustomPostObjectTypeResolver $genericCustomPostObjectTypeResolver = null;
     private ?RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver $rootUpdateGenericCustomPostMutationPayloadObjectTypeResolver = null;
@@ -336,15 +338,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createCustomPost' => [
                 'input' => $this->getRootCreateGenericCustomPostInputObjectTypeResolver(),
             ],
-            'createCustomPosts' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootCreateGenericCustomPostInputObjectTypeResolver(),
-            ],
+            'createCustomPosts'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateGenericCustomPostInputObjectTypeResolver()),
             'updateCustomPost' => [
                 'input' => $this->getRootUpdateGenericCustomPostInputObjectTypeResolver(),
             ],
-            'updateCustomPosts' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootUpdateGenericCustomPostInputObjectTypeResolver(),
-            ],
+            'updateCustomPosts'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateGenericCustomPostInputObjectTypeResolver()),
             'createCustomPostMutationPayloadObjects',
             'updateCustomPostMutationPayloadObjects'
                 => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),

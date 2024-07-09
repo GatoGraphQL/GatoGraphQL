@@ -16,6 +16,7 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentReplyMutationP
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -27,6 +28,8 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
+    
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
@@ -199,9 +202,7 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'reply' => [
                 MutationInputProperties::INPUT => $this->getCommentReplyInputObjectTypeResolver(),
             ],
-            'replyWithComments' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getCommentReplyInputObjectTypeResolver(),
-            ],
+            'replyWithComments' => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCommentReplyInputObjectTypeResolver()),
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }

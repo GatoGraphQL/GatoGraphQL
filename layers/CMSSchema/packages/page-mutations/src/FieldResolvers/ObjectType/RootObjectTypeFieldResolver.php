@@ -20,6 +20,7 @@ use PoPCMSSchema\PageMutations\TypeResolvers\ObjectType\RootCreatePageMutationPa
 use PoPCMSSchema\PageMutations\TypeResolvers\ObjectType\RootUpdatePageMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
@@ -39,6 +40,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
 
     private ?PageObjectTypeResolver $pageObjectTypeResolver = null;
     private ?RootUpdatePageMutationPayloadObjectTypeResolver $rootUpdatePageMutationPayloadObjectTypeResolver = null;
@@ -336,18 +338,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createPage' => [
                 'input' => $this->getRootCreatePageInputObjectTypeResolver(),
             ],
-            'createPages' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootCreatePageInputObjectTypeResolver(),
-            ],
+            'createPages'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreatePageInputObjectTypeResolver()),
             'updatePage' => [
                 'input' => $this->getRootUpdatePageInputObjectTypeResolver(),
             ],
-            'updatePages' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootUpdatePageInputObjectTypeResolver(),
-            ],
+            'updatePages'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdatePageInputObjectTypeResolver()),
             'createPageMutationPayloadObjects',
-            'updatePageMutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
-            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+            'updatePageMutationPayloadObjects'
+                => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
+            default
+                => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 

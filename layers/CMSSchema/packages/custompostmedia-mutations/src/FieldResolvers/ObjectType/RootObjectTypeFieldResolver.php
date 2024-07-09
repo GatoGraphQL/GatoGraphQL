@@ -20,6 +20,7 @@ use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\RootRemoveFea
 use PoPCMSSchema\CustomPostMediaMutations\TypeResolvers\ObjectType\RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\UnionType\CustomPostUnionTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
@@ -37,6 +38,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
 
     private ?CustomPostUnionTypeResolver $customPostUnionTypeResolver = null;
     private ?SetFeaturedImageOnCustomPostMutationResolver $setFeaturedImageOnCustomPostMutationResolver = null;
@@ -318,15 +320,13 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'setFeaturedImageOnCustomPost' => [
                 'input' => $this->getRootSetFeaturedImageOnCustomPostInputObjectTypeResolver(),
             ],
-            'setFeaturedImageOnCustomPosts' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootSetFeaturedImageOnCustomPostInputObjectTypeResolver(),
-            ],
+            'setFeaturedImageOnCustomPosts'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootSetFeaturedImageOnCustomPostInputObjectTypeResolver()),
             'removeFeaturedImageFromCustomPost' => [
                 'input' => $this->getRootRemoveFeaturedImageFromCustomPostInputObjectTypeResolver(),
             ],
-            'removeFeaturedImageFromCustomPosts' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootRemoveFeaturedImageFromCustomPostInputObjectTypeResolver(),
-            ],
+            'removeFeaturedImageFromCustomPosts'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootRemoveFeaturedImageFromCustomPostInputObjectTypeResolver()),
             'setFeaturedImageOnCustomPostMutationPayloadObjects',
             'removeFeaturedImageFromCustomPostMutationPayloadObjects'
                 => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),

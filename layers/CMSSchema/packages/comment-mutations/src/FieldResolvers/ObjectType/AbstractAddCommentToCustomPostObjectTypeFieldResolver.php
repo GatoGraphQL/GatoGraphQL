@@ -17,6 +17,7 @@ use PoPCMSSchema\Comments\FieldResolvers\ObjectType\MaybeCommentableCustomPostOb
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -30,6 +31,7 @@ use stdClass;
 abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MaybeCommentableCustomPostObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
@@ -198,9 +200,7 @@ abstract class AbstractAddCommentToCustomPostObjectTypeFieldResolver extends Abs
             'addComment' => [
                 MutationInputProperties::INPUT => $this->getCustomPostAddCommentInputObjectTypeResolver(),
             ],
-            'addComments' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getCustomPostAddCommentInputObjectTypeResolver(),
-            ],
+            'addComments' => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCustomPostAddCommentInputObjectTypeResolver()),
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }

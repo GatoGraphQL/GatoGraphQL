@@ -20,6 +20,7 @@ use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\RootCreatePostMutationPa
 use PoPCMSSchema\PostMutations\TypeResolvers\ObjectType\RootUpdatePostMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
@@ -39,6 +40,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
 
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?RootUpdatePostMutationPayloadObjectTypeResolver $rootUpdatePostMutationPayloadObjectTypeResolver = null;
@@ -336,15 +338,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createPost' => [
                 'input' => $this->getRootCreatePostInputObjectTypeResolver(),
             ],
-            'createPosts' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootCreatePostInputObjectTypeResolver(),
-            ],
+            'createPosts'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreatePostInputObjectTypeResolver()),
             'updatePost' => [
                 'input' => $this->getRootUpdatePostInputObjectTypeResolver(),
             ],
-            'updatePosts' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootUpdatePostInputObjectTypeResolver(),
-            ],
+            'updatePosts'
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdatePostInputObjectTypeResolver()),
             'createPostMutationPayloadObjects',
             'updatePostMutationPayloadObjects'
                 => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),

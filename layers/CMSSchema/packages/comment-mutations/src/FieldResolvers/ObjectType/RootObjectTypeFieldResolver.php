@@ -17,6 +17,7 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootAddCommentToCusto
 use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootReplyCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
@@ -34,6 +35,7 @@ use PoP\Root\App;
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
 
     private ?CommentObjectTypeResolver $commentObjectTypeResolver = null;
     private ?AddCommentToCustomPostMutationResolver $addCommentToCustomPostMutationResolver = null;
@@ -259,15 +261,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'addCommentToCustomPost' => [
                 MutationInputProperties::INPUT => $this->getRootAddCommentToCustomPostInputObjectTypeResolver(),
             ],
-            'addCommentToCustomPosts' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootAddCommentToCustomPostInputObjectTypeResolver(),
-            ],
+            'addCommentToCustomPosts' => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootAddCommentToCustomPostInputObjectTypeResolver()),
             'replyComment' => [
                 MutationInputProperties::INPUT => $this->getRootReplyCommentInputObjectTypeResolver(),
             ],
-            'replyComments' => [
-                SchemaCommonsMutationInputProperties::INPUTS => $this->getRootReplyCommentInputObjectTypeResolver(),
-            ],
+            'replyComments' => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootReplyCommentInputObjectTypeResolver()),
             'addCommentToCustomPostMutationPayloadObjects',
             'replyCommentMutationPayloadObjects'
                 => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
