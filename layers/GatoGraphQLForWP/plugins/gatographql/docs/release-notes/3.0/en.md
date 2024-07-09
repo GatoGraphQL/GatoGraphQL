@@ -89,7 +89,7 @@ All bulk mutations accept two arguments:
 
 All mutations are executed in the same order provided in the `inputs` argument.
 
-Bulk mutations unlock plenty of possibilities for managing our WordPress site. For instance, the following GraphQL query uses `createPosts` (and Multiple Query Execution, provided by Gato GraphQL PRO) to duplicate posts:
+Bulk mutations unlock possibilities for managing our WordPress site. For instance, the following GraphQL query uses `createPosts` (and Multiple Query Execution, provided by Gato GraphQL PRO) to duplicate posts:
 
 ```graphql
 query ExportPostData
