@@ -25,6 +25,7 @@
 	list-style: none;
 	margin-left: 0;
 	margin-top: 0;
+	padding-left: 0.5rem;
 }
 .multi-select-control__checklist-item {
 	list-style: none;
@@ -140,6 +141,10 @@
 		margin: 0;
 	}
 
+	.components-base-control.components-checkbox-control {
+		padding: 0.7rem 0;
+	}
+
 	.components-modal__content &.components-checkbox-control__input-container {
 		margin: 0 $grid-unit-10;
 	}
@@ -149,7 +154,7 @@
 		align-items: center;
 		justify-content: space-between;
 		flex-grow: 1;
-		padding: 0.6rem 0 0.6rem 10px;
+		// padding: 0.6rem 0 0.6rem 10px;
 	}
 
 	.block-editor-block-icon {
