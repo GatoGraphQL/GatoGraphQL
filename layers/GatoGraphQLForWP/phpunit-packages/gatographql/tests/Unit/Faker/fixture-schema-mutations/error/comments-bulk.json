@@ -35,6 +35,18 @@
         ],
         "comment": null
       }
+    ],
+    "addCommentToCustomPostsStopExecuting": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      }
     ]
   }
 }
