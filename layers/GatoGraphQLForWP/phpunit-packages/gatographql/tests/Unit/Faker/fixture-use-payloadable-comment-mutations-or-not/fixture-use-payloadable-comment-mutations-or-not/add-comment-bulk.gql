@@ -1,8 +1,14 @@
 ########################################################################
-# Test one failing one working one failing
+# Test one working one failing one working one failing
 ########################################################################
 mutation {
   addCommentToCustomPosts(inputs: [
+    {
+      commentAs: { html: "Great insight zero!" },
+      customPostID: 1724,
+      authorName: "Leo Zero"
+      authorEmail: "leo-zero@saronga.com",
+    },
     {
       commentAs: { html: "Great insight first!" },
       customPostID: 1809,
@@ -44,6 +50,12 @@ mutation {
   }
 
   addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      commentAs: { html: "Great insight zero!" },
+      customPostID: 1724,
+      authorName: "Leo Zero"
+      authorEmail: "leo-zero@saronga.com",
+    },
     {
       commentAs: { html: "Great insight first!" },
       customPostID: 1809,
