@@ -1,6 +1,6 @@
 {
     "name": "schema-config-schema-comment-meta",
-    "version": "2.7.0-dev",
+    "version": "3.0.0",
     "description": "Configure comment meta options in the the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",

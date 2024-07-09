@@ -1,20 +1,13 @@
 {
     "name": "@gatographql/api-fetch",
-    "version": "2.7.0-dev",
+    "version": "3.0.0",
     "description": "Fetch data from the server through the GraphQL API",
     "repository": {
         "type": "git",
         "url": "https://github.com/GatoGraphQL/gatographql.git",
         "directory": "packages/api-fetch"
     },
-    "keywords": [
-        "PHP",
-        "GraphQL",
-        "API",
-        "WordPress",
-        "Fetch",
-        "Query"
-    ],
+    "keywords": ["PHP", "GraphQL", "API", "WordPress", "Fetch", "Query"],
     "author": "Leonardo Losoviz",
     "license": "MIT",
     "main": "build/index.js",
