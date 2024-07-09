@@ -19,11 +19,53 @@
                 "mimeType": "text\/html",
                 "sizes": null,
                 "slug": "name-with-no-extension-htm",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/name-with-no-extension.htm",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/name-with-no-extension-1.htm",
                 "title": "name-with-no-extension.htm",
                 "width": null
             }
         },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "name-with-no-extension-htm",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/name-with-no-extension-2.htm",
+                    "title": "name-with-no-extension.htm",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "name-with-no-extension-htm",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/name-with-no-extension.htm",
+                    "title": "name-with-no-extension.htm",
+                    "width": null
+                }
+            }
+        ],
         "logoutUser": {
             "status": "SUCCESS"
         }

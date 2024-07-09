@@ -52,6 +52,100 @@ mutation TestCreateMediaItemFromURL(
     }
   }
 
+  createMediaItems(inputs: [
+    {
+      from: {
+        url: {
+          source: $url
+          filename: $filename
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    },
+    {
+      from: {
+        url: {
+          source: $url
+          filename: $filename
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    }
+  ]) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+
+  createMediaItemsStopExecuting: createMediaItems(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      from: {
+        url: {
+          source: $url
+          filename: $filename
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    },
+    {
+      from: {
+        url: {
+          source: $url
+          filename: $filename
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    }
+  ]) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+
   logoutUser {
     status
   }

@@ -64,6 +64,16 @@ class RootObjectTypeFieldResolver extends UpstreamRootObjectTypeFieldResolver
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
+
+        if (
+            in_array($field->getName(), [
+            'addCommentToCustomPosts',
+            'replyComments',
+            ])
+        ) {
+            return $this->prepareBulkOperationAddCommentFieldArgs($fieldArgs);
+        }
+
         return $this->prepareAddCommentFieldArgs($fieldArgs);
     }
 }

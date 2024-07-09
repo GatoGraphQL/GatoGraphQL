@@ -14,8 +14,42 @@
             ],
             "mediaItem": null
         },
+        "createMediaItems": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "Sorry, you are not allowed to upload this file type."
+                    }
+                ],
+                "mediaItem": null
+            },
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "Sorry, you are not allowed to upload this file type."
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "Sorry, you are not allowed to upload this file type."
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

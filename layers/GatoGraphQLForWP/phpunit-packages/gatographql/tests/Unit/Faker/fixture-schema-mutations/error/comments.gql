@@ -8,12 +8,80 @@ mutation {
     ...RootAddCommentToCustomPostMutationPayloadData
   }
 
+  commentsNotSupportedByCPTBulk: addCommentToCustomPosts(inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1809,
+      authorName: "Leo First"
+      authorEmail: "leo-first@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1809,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    }
+  ]) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+
+  commentsNotSupportedByCPTBulkStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1809,
+      authorName: "Leo First"
+      authorEmail: "leo-first@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1809,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    }
+  ]) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+
   commentsNotOpenForCustomPost: addCommentToCustomPost(input: {
     commentAs: { html: "Great insight!" },
     customPostID: 1730,
     authorName: "Leo"
     authorEmail: "leo@saronga.com",
   }) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+
+  commentsNotOpenForCustomPostBulk: addCommentToCustomPosts(inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1730,
+      authorName: "Leo First"
+      authorEmail: "leo-first@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1730,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    }
+  ]) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+
+  commentsNotOpenForCustomPostBulkStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1730,
+      authorName: "Leo First"
+      authorEmail: "leo-first@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1730,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    }
+  ]) {
     ...RootAddCommentToCustomPostMutationPayloadData
   }
 }

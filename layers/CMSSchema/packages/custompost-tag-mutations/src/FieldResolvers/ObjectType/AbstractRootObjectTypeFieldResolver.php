@@ -6,9 +6,8 @@ namespace PoPCMSSchema\CustomPostTagMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CustomPostTagMutations\Module;
 use PoPCMSSchema\CustomPostTagMutations\ModuleConfiguration;
-use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
+use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
-use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -25,23 +24,8 @@ use PoP\Root\App;
 abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver implements SetTagsOnCustomPostObjectTypeFieldResolverInterface
 {
     use MutationPayloadObjectsObjectTypeFieldResolverTrait;
+    use BulkOperationDecoratorObjectTypeFieldResolverTrait;
     use SetTagsOnCustomPostObjectTypeFieldResolverTrait;
-
-    private ?MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver = null;
-
-    final public function setMutationPayloadObjectsInputObjectTypeResolver(MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver): void
-    {
-        $this->mutationPayloadObjectsInputObjectTypeResolver = $mutationPayloadObjectsInputObjectTypeResolver;
-    }
-    final protected function getMutationPayloadObjectsInputObjectTypeResolver(): MutationPayloadObjectsInputObjectTypeResolver
-    {
-        if ($this->mutationPayloadObjectsInputObjectTypeResolver === null) {
-            /** @var MutationPayloadObjectsInputObjectTypeResolver */
-            $mutationPayloadObjectsInputObjectTypeResolver = $this->instanceManager->getInstance(MutationPayloadObjectsInputObjectTypeResolver::class);
-            $this->mutationPayloadObjectsInputObjectTypeResolver = $mutationPayloadObjectsInputObjectTypeResolver;
-        }
-        return $this->mutationPayloadObjectsInputObjectTypeResolver;
-    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -69,6 +53,7 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         return array_merge(
             [
                 $this->getSetTagsFieldName(),
+                $this->getBulkOperationSetTagsFieldName(),
             ],
             $addFieldsToQueryPayloadableCustomPostTagMutations ? [
                 $this->getSetTagsFieldName() . 'MutationPayloadObjects',
@@ -78,11 +63,17 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     abstract protected function getSetTagsFieldName(): string;
 
+    abstract protected function getBulkOperationSetTagsFieldName(): string;
+
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
             $this->getSetTagsFieldName() => sprintf(
                 $this->__('Set tags on a %s', 'custompost-tag-mutations'),
+                $this->getEntityName()
+            ),
+            $this->getBulkOperationSetTagsFieldName() => sprintf(
+                $this->__('Set tags on a %s in bulk', 'custompost-tag-mutations'),
                 $this->getEntityName()
             ),
             $this->getSetTagsFieldName() . 'MutationPayloadObjects' => sprintf(
@@ -99,11 +90,24 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $usePayloadableCustomPostTagMutations = $moduleConfiguration->usePayloadableCustomPostTagMutations();
         if (!$usePayloadableCustomPostTagMutations) {
-            return parent::getFieldTypeModifiers($objectTypeResolver, $fieldName);
+            return match ($fieldName) {
+                $this->getSetTagsFieldName() => SchemaTypeModifiers::NONE,
+                $this->getBulkOperationSetTagsFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            };
         }
+
+        if (
+            in_array($fieldName, [
+            $this->getSetTagsFieldName() . 'MutationPayloadObjects',
+            ])
+        ) {
+            return $this->getMutationPayloadObjectsFieldTypeModifiers();
+        }
+
         return match ($fieldName) {
             $this->getSetTagsFieldName() => SchemaTypeModifiers::NON_NULLABLE,
-            $this->getSetTagsFieldName() . 'MutationPayloadObjects' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            $this->getBulkOperationSetTagsFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -117,21 +121,51 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             $this->getSetTagsFieldName() => [
                 'input' => $this->getCustomPostSetTagsInputObjectTypeResolver(),
             ],
-            $this->getSetTagsFieldName() . 'MutationPayloadObjects' => [
-                SchemaCommonsMutationInputProperties::INPUT => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
-            ],
+            $this->getBulkOperationSetTagsFieldName() => $this->getBulkOperationFieldArgNameTypeResolvers($this->getCustomPostSetTagsInputObjectTypeResolver()),
+            $this->getSetTagsFieldName() . 'MutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
+        if (
+            in_array($fieldName, [
+            $this->getSetTagsFieldName() . 'MutationPayloadObjects',
+            ])
+        ) {
+            return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
+        if (
+            in_array($fieldName, [
+            $this->getBulkOperationSetTagsFieldName(),
+            ])
+        ) {
+            return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
         return match ([$fieldName => $fieldArgName]) {
-            [$this->getSetTagsFieldName() => 'input'],
-            [$this->getSetTagsFieldName() . 'MutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
+            [$this->getSetTagsFieldName() => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
+    }
+
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): mixed
+    {
+        if (
+            in_array($fieldName, [
+            $this->getBulkOperationSetTagsFieldName(),
+            ])
+        ) {
+            return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
+                ?? parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
+        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
 
     public function getFieldMutationResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?MutationResolverInterface
@@ -143,6 +177,9 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
             $this->getSetTagsFieldName() => $usePayloadableCustomPostTagMutations
                 ? $this->getPayloadableSetTagsMutationResolver()
                 : $this->getSetTagsMutationResolver(),
+            $this->getBulkOperationSetTagsFieldName() => $usePayloadableCustomPostTagMutations
+                ? $this->getPayloadableSetTagsBulkOperationMutationResolver()
+                : $this->getSetTagsBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -155,14 +192,18 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
         if ($usePayloadableCustomPostTagMutations) {
             return match ($fieldName) {
                 $this->getSetTagsFieldName(),
+                $this->getBulkOperationSetTagsFieldName(),
                 $this->getSetTagsFieldName() . 'MutationPayloadObjects'
                     => $this->getRootSetTagsMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            $this->getSetTagsFieldName() => $this->getCustomPostObjectTypeResolver(),
-            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            $this->getSetTagsFieldName(),
+            $this->getBulkOperationSetTagsFieldName()
+                => $this->getCustomPostObjectTypeResolver(),
+            default
+                => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
 

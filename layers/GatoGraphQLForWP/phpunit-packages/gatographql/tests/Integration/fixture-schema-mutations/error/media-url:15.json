@@ -14,6 +14,40 @@
             ],
             "mediaItem": null
         },
+        "createMediaItems": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "A valid URL was not provided."
+                    }
+                ],
+                "mediaItem": null
+            },
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "A valid URL was not provided."
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "GenericErrorPayload",
+                        "message": "A valid URL was not provided."
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
         "logoutUser": {
             "status": "SUCCESS"
         }

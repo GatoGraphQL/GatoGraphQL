@@ -9,7 +9,9 @@ use PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\ObjectType\AbstractR
 use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType\AbstractSetCategoriesOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\CustomPostObjectTypeResolverInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableSetCategoriesOnPostBulkOperationMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableSetCategoriesOnPostMutationResolver;
+use PoPCMSSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostBulkOperationMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\SetCategoriesOnPostMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\RootSetCategoriesOnCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\ObjectType\RootSetCategoriesOnPostMutationPayloadObjectTypeResolver;
@@ -21,9 +23,11 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 {
     private ?PostObjectTypeResolver $postObjectTypeResolver = null;
     private ?SetCategoriesOnPostMutationResolver $setCategoriesOnPostMutationResolver = null;
+    private ?SetCategoriesOnPostBulkOperationMutationResolver $setCategoriesOnPostBulkOperationMutationResolver = null;
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?RootSetCategoriesOnCustomPostInputObjectTypeResolver $rootSetCategoriesOnCustomPostInputObjectTypeResolver = null;
     private ?PayloadableSetCategoriesOnPostMutationResolver $payloadableSetCategoriesOnPostMutationResolver = null;
+    private ?PayloadableSetCategoriesOnPostBulkOperationMutationResolver $payloadableSetCategoriesOnPostBulkOperationMutationResolver = null;
     private ?RootSetCategoriesOnPostMutationPayloadObjectTypeResolver $rootSetCategoriesOnPostMutationPayloadObjectTypeResolver = null;
 
     final public function setPostObjectTypeResolver(PostObjectTypeResolver $postObjectTypeResolver): void
@@ -51,6 +55,19 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
             $this->setCategoriesOnPostMutationResolver = $setCategoriesOnPostMutationResolver;
         }
         return $this->setCategoriesOnPostMutationResolver;
+    }
+    final public function setSetCategoriesOnPostBulkOperationMutationResolver(SetCategoriesOnPostBulkOperationMutationResolver $setCategoriesOnPostBulkOperationMutationResolver): void
+    {
+        $this->setCategoriesOnPostBulkOperationMutationResolver = $setCategoriesOnPostBulkOperationMutationResolver;
+    }
+    final protected function getSetCategoriesOnPostBulkOperationMutationResolver(): SetCategoriesOnPostBulkOperationMutationResolver
+    {
+        if ($this->setCategoriesOnPostBulkOperationMutationResolver === null) {
+            /** @var SetCategoriesOnPostBulkOperationMutationResolver */
+            $setCategoriesOnPostBulkOperationMutationResolver = $this->instanceManager->getInstance(SetCategoriesOnPostBulkOperationMutationResolver::class);
+            $this->setCategoriesOnPostBulkOperationMutationResolver = $setCategoriesOnPostBulkOperationMutationResolver;
+        }
+        return $this->setCategoriesOnPostBulkOperationMutationResolver;
     }
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -91,6 +108,19 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         }
         return $this->payloadableSetCategoriesOnPostMutationResolver;
     }
+    final public function setPayloadableSetCategoriesOnPostBulkOperationMutationResolver(PayloadableSetCategoriesOnPostBulkOperationMutationResolver $payloadableSetCategoriesOnPostBulkOperationMutationResolver): void
+    {
+        $this->payloadableSetCategoriesOnPostBulkOperationMutationResolver = $payloadableSetCategoriesOnPostBulkOperationMutationResolver;
+    }
+    final protected function getPayloadableSetCategoriesOnPostBulkOperationMutationResolver(): PayloadableSetCategoriesOnPostBulkOperationMutationResolver
+    {
+        if ($this->payloadableSetCategoriesOnPostBulkOperationMutationResolver === null) {
+            /** @var PayloadableSetCategoriesOnPostBulkOperationMutationResolver */
+            $payloadableSetCategoriesOnPostBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableSetCategoriesOnPostBulkOperationMutationResolver::class);
+            $this->payloadableSetCategoriesOnPostBulkOperationMutationResolver = $payloadableSetCategoriesOnPostBulkOperationMutationResolver;
+        }
+        return $this->payloadableSetCategoriesOnPostBulkOperationMutationResolver;
+    }
     final public function setRootSetCategoriesOnPostMutationPayloadObjectTypeResolver(RootSetCategoriesOnPostMutationPayloadObjectTypeResolver $rootSetCategoriesOnPostMutationPayloadObjectTypeResolver): void
     {
         $this->rootSetCategoriesOnPostMutationPayloadObjectTypeResolver = $rootSetCategoriesOnPostMutationPayloadObjectTypeResolver;
@@ -115,6 +145,11 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getSetCategoriesOnPostMutationResolver();
     }
 
+    public function getSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    {
+        return $this->getSetCategoriesOnPostBulkOperationMutationResolver();
+    }
+
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
         return $this->getPostCategoryObjectTypeResolver();
@@ -130,6 +165,11 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
         return $this->getPayloadableSetCategoriesOnPostMutationResolver();
     }
 
+    public function getPayloadableSetCategoriesBulkOperationMutationResolver(): MutationResolverInterface
+    {
+        return $this->getPayloadableSetCategoriesOnPostBulkOperationMutationResolver();
+    }
+
     protected function getRootSetCategoriesMutationPayloadObjectTypeResolver(): ConcreteTypeResolverInterface
     {
         return $this->getRootSetCategoriesOnPostMutationPayloadObjectTypeResolver();
@@ -143,5 +183,10 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
     protected function getSetCategoriesFieldName(): string
     {
         return 'setCategoriesOnPost';
+    }
+
+    protected function getBulkOperationSetCategoriesFieldName(): string
+    {
+        return 'setCategoriesOnPosts';
     }
 }

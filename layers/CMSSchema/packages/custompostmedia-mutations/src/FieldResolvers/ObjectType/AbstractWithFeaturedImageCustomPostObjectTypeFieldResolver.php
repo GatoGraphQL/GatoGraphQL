@@ -212,7 +212,7 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     {
         return match ($fieldName) {
             'setFeaturedImage' => [
-                MutationInputProperties::INPUT => $this->getCustomPostSetFeaturedImageInputObjectTypeResolver(),
+                'input' => $this->getCustomPostSetFeaturedImageInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -221,7 +221,7 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['setFeaturedImage' => MutationInputProperties::INPUT] => SchemaTypeModifiers::MANDATORY,
+            ['setFeaturedImage' => 'input'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -261,13 +261,13 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
         $customPost = $object;
         switch ($field->getName()) {
             case 'removeFeaturedImage':
-                $fieldArgsForMutationForObject[MutationInputProperties::INPUT] ??= new stdClass();
+                $fieldArgsForMutationForObject['input'] ??= new stdClass();
                 break;
         }
         switch ($field->getName()) {
             case 'setFeaturedImage':
             case 'removeFeaturedImage':
-                $fieldArgsForMutationForObject[MutationInputProperties::INPUT]->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::CUSTOMPOST_ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
         return $fieldArgsForMutationForObject;
@@ -283,7 +283,7 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
         FieldInterface $field,
     ): ?string {
         return match ($field->getName()) {
-            'removeFeaturedImage' => MutationInputProperties::INPUT,
+            'removeFeaturedImage' => 'input',
             default => parent::getFieldArgsInputObjectSubpropertyName(
                 $objectTypeResolver,
                 $field,

@@ -14,7 +14,37 @@
             "title": "Keyboard navigation"
           }
         }
-      }
+      },
+      "addComments": [
+        {
+          "status": "SUCCESS",
+          "errors": null,
+          "comment": {
+            "content": "Great first insight!",
+            "authorName": "Leo First",
+            "authorEmail": "leo-first@saronga.com",
+            "customPost": {
+              "__typename": "Post",
+              "id": 1724,
+              "title": "Keyboard navigation"
+            }
+          }
+        },
+        {
+          "status": "SUCCESS",
+          "errors": null,
+          "comment": {
+            "content": "Great second insight!",
+            "authorName": "Leo Second",
+            "authorEmail": "leo-second@saronga.com",
+            "customPost": {
+              "__typename": "Post",
+              "id": 1724,
+              "title": "Keyboard navigation"
+            }
+          }
+        }
+      ]
     }
   }
 }

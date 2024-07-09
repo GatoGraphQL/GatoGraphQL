@@ -19,11 +19,53 @@
                 "mimeType": "text\/plain",
                 "sizes": null,
                 "slug": "license-txt",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/license.txt",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/license-4.txt",
                 "title": "license.txt",
                 "width": null
             }
         },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "license-txt",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/license-5.txt",
+                    "title": "license.txt",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "license-txt",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/license.txt",
+                    "title": "license.txt",
+                    "width": null
+                }
+            }
+        ],
         "logoutUser": {
             "status": "SUCCESS"
         }

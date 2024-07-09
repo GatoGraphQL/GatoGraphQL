@@ -10,6 +10,40 @@
       ],
       "comment": null
     },
+    "commentsNotSupportedByCPTBulk": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      }
+    ],
+    "commentsNotSupportedByCPTBulkStopExecuting": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      }
+    ],
     "commentsNotOpenForCustomPost": {
       "status": "FAILURE",
       "errors": [
@@ -19,6 +53,40 @@
         }
       ],
       "comment": null
-    }
+    },
+    "commentsNotOpenForCustomPostBulk": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotOpenForCustomPostErrorPayload",
+            "message": "Comments are not open for custom post with ID '1730'"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotOpenForCustomPostErrorPayload",
+            "message": "Comments are not open for custom post with ID '1730'"
+          }
+        ],
+        "comment": null
+      }
+    ],
+    "commentsNotOpenForCustomPostBulkStopExecuting": [
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotOpenForCustomPostErrorPayload",
+            "message": "Comments are not open for custom post with ID '1730'"
+          }
+        ],
+        "comment": null
+      }
+    ]
   }
 }

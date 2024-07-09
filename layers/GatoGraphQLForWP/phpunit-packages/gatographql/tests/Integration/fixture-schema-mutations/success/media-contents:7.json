@@ -19,13 +19,55 @@
                 "mimeType": "text\/html",
                 "sizes": null,
                 "slug": "hello-world-html",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/helloworld.html",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/helloworld-4.html",
                 "title": "\/hello\/world.html",
                 "width": null
             }
         },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "hello-world-html",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/helloworld-5.html",
+                    "title": "\/hello\/world.html",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "hello-world-html",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/helloworld.html",
+                    "title": "\/hello\/world.html",
+                    "width": null
+                }
+            }
+        ],
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

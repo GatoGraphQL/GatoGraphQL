@@ -21,7 +21,44 @@ mutation {
         ...on IdentifiableObject {
           id
         }
-        ...on Page {
+        ...on Post {
+          title
+        }
+      }
+    }
+  }
+
+  addCommentToCustomPosts(inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1724,
+      authorName: "Leo First"
+      authorEmail: "leo-first@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1724,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    }
+  ]) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    comment {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on IdentifiableObject {
+          id
+        }
+        ...on Post {
           title
         }
       }

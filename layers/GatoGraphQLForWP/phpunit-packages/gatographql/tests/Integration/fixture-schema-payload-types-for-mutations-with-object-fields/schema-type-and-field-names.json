@@ -608,16 +608,31 @@
               "name": "addCommentToCustomPost"
             },
             {
+              "name": "addCommentToCustomPosts"
+            },
+            {
               "name": "createCustomPost"
+            },
+            {
+              "name": "createCustomPosts"
             },
             {
               "name": "createMediaItem"
             },
             {
+              "name": "createMediaItems"
+            },
+            {
               "name": "createPage"
             },
             {
+              "name": "createPages"
+            },
+            {
               "name": "createPost"
+            },
+            {
+              "name": "createPosts"
             },
             {
               "name": "loginUser"
@@ -629,25 +644,49 @@
               "name": "removeFeaturedImageFromCustomPost"
             },
             {
+              "name": "removeFeaturedImageFromCustomPosts"
+            },
+            {
               "name": "replyComment"
+            },
+            {
+              "name": "replyComments"
             },
             {
               "name": "setCategoriesOnPost"
             },
             {
+              "name": "setCategoriesOnPosts"
+            },
+            {
               "name": "setFeaturedImageOnCustomPost"
+            },
+            {
+              "name": "setFeaturedImageOnCustomPosts"
             },
             {
               "name": "setTagsOnPost"
             },
             {
+              "name": "setTagsOnPosts"
+            },
+            {
               "name": "updateCustomPost"
+            },
+            {
+              "name": "updateCustomPosts"
             },
             {
               "name": "updatePage"
             },
             {
+              "name": "updatePages"
+            },
+            {
               "name": "updatePost"
+            },
+            {
+              "name": "updatePosts"
             }
           ]
         },
@@ -1258,6 +1297,9 @@
               "name": "addCommentToCustomPostMutationPayloadObjects"
             },
             {
+              "name": "addCommentToCustomPosts"
+            },
+            {
               "name": "capabilities"
             },
             {
@@ -1288,10 +1330,16 @@
               "name": "createCustomPostMutationPayloadObjects"
             },
             {
+              "name": "createCustomPosts"
+            },
+            {
               "name": "createMediaItem"
             },
             {
               "name": "createMediaItemMutationPayloadObjects"
+            },
+            {
+              "name": "createMediaItems"
             },
             {
               "name": "createPage"
@@ -1300,10 +1348,16 @@
               "name": "createPageMutationPayloadObjects"
             },
             {
+              "name": "createPages"
+            },
+            {
               "name": "createPost"
             },
             {
               "name": "createPostMutationPayloadObjects"
+            },
+            {
+              "name": "createPosts"
             },
             {
               "name": "customPost"
@@ -1459,10 +1513,16 @@
               "name": "removeFeaturedImageFromCustomPostMutationPayloadObjects"
             },
             {
+              "name": "removeFeaturedImageFromCustomPosts"
+            },
+            {
               "name": "replyComment"
             },
             {
               "name": "replyCommentMutationPayloadObjects"
+            },
+            {
+              "name": "replyComments"
             },
             {
               "name": "roleNames"
@@ -1480,16 +1540,25 @@
               "name": "setCategoriesOnPostMutationPayloadObjects"
             },
             {
+              "name": "setCategoriesOnPosts"
+            },
+            {
               "name": "setFeaturedImageOnCustomPost"
             },
             {
               "name": "setFeaturedImageOnCustomPostMutationPayloadObjects"
             },
             {
+              "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
               "name": "setTagsOnPost"
             },
             {
               "name": "setTagsOnPostMutationPayloadObjects"
+            },
+            {
+              "name": "setTagsOnPosts"
             },
             {
               "name": "siteLanguage"
@@ -1519,16 +1588,25 @@
               "name": "updateCustomPostMutationPayloadObjects"
             },
             {
+              "name": "updateCustomPosts"
+            },
+            {
               "name": "updatePage"
             },
             {
               "name": "updatePageMutationPayloadObjects"
             },
             {
+              "name": "updatePages"
+            },
+            {
               "name": "updatePost"
             },
             {
               "name": "updatePostMutationPayloadObjects"
+            },
+            {
+              "name": "updatePosts"
             },
             {
               "name": "user"

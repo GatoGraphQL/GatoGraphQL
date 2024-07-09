@@ -1,0 +1,102 @@
+########################################################################
+# Test one working one failing one working one failing
+########################################################################
+mutation {
+  addCommentToCustomPosts(inputs: [
+    {
+      commentAs: { html: "Great insight zero!" },
+      customPostID: 1724,
+      authorName: "Leo Zero"
+      authorEmail: "leo-zero@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1809,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1724,
+      authorName: "Leo First"
+      authorEmail: "leo-first@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1730,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    }
+  ]) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    comment {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on IdentifiableObject {
+          id
+        }
+        ...on Post {
+          title
+        }
+      }
+    }
+  }
+  
+  addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      commentAs: { html: "Great insight zero!" },
+      customPostID: 1724,
+      authorName: "Leo Zero"
+      authorEmail: "leo-zero@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1809,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1724,
+      authorName: "Leo First"
+      authorEmail: "leo-first@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1730,
+      authorName: "Leo Second"
+      authorEmail: "leo-second@saronga.com",
+    }
+  ]) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    comment {
+      content
+      authorName
+      authorEmail
+      customPost {
+        __typename
+        ...on IdentifiableObject {
+          id
+        }
+        ...on Post {
+          title
+        }
+      }
+    }
+  }
+}

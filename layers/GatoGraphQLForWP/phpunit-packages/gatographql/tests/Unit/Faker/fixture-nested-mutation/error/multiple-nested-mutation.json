@@ -23,6 +23,44 @@
       "message": "Use the operation 'mutation' to mutate data",
       "locations": [
         {
+          "line": 34,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+        "code": "PoP\/ComponentModel@2"
+      }
+    },
+    {
+      "message": "Use the operation 'mutation' to mutate data",
+      "locations": [
+        {
+          "line": 67,
+          "column": 31
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addCommentsStopExecuting: addComments(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "addCommentsStopExecuting: addComments(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+        "code": "PoP\/ComponentModel@2"
+      }
+    },
+    {
+      "message": "Use the operation 'mutation' to mutate data",
+      "locations": [
+        {
           "line": 8,
           "column": 5
         }
@@ -37,6 +75,44 @@
         "field": "addComment(input: {commentAs: {html: \"Great insight!\"}, authorName: \"Leo\", authorEmail: \"leo@saronga.com\"}) { ... }",
         "code": "PoP\/ComponentModel@2"
       }
+    },
+    {
+      "message": "Use the operation 'mutation' to mutate data",
+      "locations": [
+        {
+          "line": 34,
+          "column": 5
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Page",
+        "field": "addComments(inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+        "code": "PoP\/ComponentModel@2"
+      }
+    },
+    {
+      "message": "Use the operation 'mutation' to mutate data",
+      "locations": [
+        {
+          "line": 67,
+          "column": 31
+        }
+      ],
+      "extensions": {
+        "path": [
+          "addCommentsStopExecuting: addComments(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+          "customPosts(filter: {ids: [1724, 358, 733]}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Page",
+        "field": "addCommentsStopExecuting: addComments(stopExecutingMutationItemsOnFirstError: true, inputs: [{commentAs: {html: \"Great first insight!\"}, authorName: \"Leo First\", authorEmail: \"leo-first@saronga.com\"}, {commentAs: {html: \"Great second insight!\"}, authorName: \"Leo Second\", authorEmail: \"leo-second@saronga.com\"}]) { ... }",
+        "code": "PoP\/ComponentModel@2"
+      }
     }
   ],
   "data": {
@@ -45,19 +121,25 @@
         "__typename": "Post",
         "id": 1724,
         "customPostType": "post",
-        "addComment": null
+        "addComment": null,
+        "addComments": null,
+        "addCommentsStopExecuting": null
       },
       {
         "__typename": "Post",
         "id": 358,
         "customPostType": "post",
-        "addComment": null
+        "addComment": null,
+        "addComments": null,
+        "addCommentsStopExecuting": null
       },
       {
         "__typename": "Page",
         "id": 733,
         "customPostType": "page",
-        "addComment": null
+        "addComment": null,
+        "addComments": null,
+        "addCommentsStopExecuting": null
       }
     ]
   }

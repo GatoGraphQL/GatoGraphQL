@@ -19,13 +19,55 @@
                 "mimeType": "text\/html",
                 "sizes": null,
                 "slug": "pujhgjkaaaaaaaeaaaaa-html",
-                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/@PUJHGJKaaaaaaaeaaaaa.html",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/@PUJHGJKaaaaaaaeaaaaa-1.html",
                 "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html",
                 "width": null
             }
         },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "pujhgjkaaaaaaaeaaaaa-html",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/@PUJHGJKaaaaaaaeaaaaa-2.html",
+                    "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/html",
+                    "sizes": null,
+                    "slug": "pujhgjkaaaaaaaeaaaaa-html",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/@PUJHGJKaaaaaaaeaaaaa.html",
+                    "title": "~!!@$%#%$$}{P}{UJHGJK\u00e0\u00e1\u00e2\u00e4\u01cea\u00e6\u00e3\u00e5\u0101aa.html",
+                    "width": null
+                }
+            }
+        ],
         "logoutUser": {
-          "status": "SUCCESS"
+            "status": "SUCCESS"
         }
     }
 }

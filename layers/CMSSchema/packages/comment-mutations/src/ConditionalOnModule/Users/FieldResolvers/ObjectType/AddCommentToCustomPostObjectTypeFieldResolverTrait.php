@@ -8,7 +8,9 @@ use PoP\Root\App;
 use PoPCMSSchema\CommentMutations\Module;
 use PoPCMSSchema\CommentMutations\ModuleConfiguration;
 use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties as SchemaCommonsMutationInputProperties;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use stdClass;
 
 trait AddCommentToCustomPostObjectTypeFieldResolverTrait
 {
@@ -24,18 +26,33 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         array $fieldArgs,
     ): array {
         // Just in case, make sure the InputObject has been set
+        /** @var stdClass|null */
         $inputValue = $fieldArgs[MutationInputProperties::INPUT] ?? null;
         if ($inputValue === null) {
             return $fieldArgs;
         }
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (
-            $moduleConfiguration->mustUserBeLoggedInToAddComment()
-            || !App::getState('is-user-logged-in')
-        ) {
+        /** @var stdClass $inputValue */
+
+        if ($this->skipInjectingLoggedInUserDataIntoInput()) {
             return $fieldArgs;
         }
+
+        $fieldArgs[MutationInputProperties::INPUT] = $this->prepareAddCommentFieldArgsInputValue($inputValue);
+
+        return $fieldArgs;
+    }
+
+    protected function skipInjectingLoggedInUserDataIntoInput(): bool
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->mustUserBeLoggedInToAddComment()
+            || !App::getState('is-user-logged-in');
+    }
+
+    protected function prepareAddCommentFieldArgsInputValue(
+        stdClass $inputValue,
+    ): stdClass {
         $userID = App::getState('current-user-id');
         if (!property_exists($inputValue, MutationInputProperties::AUTHOR_NAME)) {
             $inputValue->{MutationInputProperties::AUTHOR_NAME} = $this->getUserTypeAPI()->getUserDisplayName($userID);
@@ -46,7 +63,35 @@ trait AddCommentToCustomPostObjectTypeFieldResolverTrait
         if (!property_exists($inputValue, MutationInputProperties::AUTHOR_URL)) {
             $inputValue->{MutationInputProperties::AUTHOR_URL} = $this->getUserTypeAPI()->getUserWebsiteURL($userID);
         }
-        $fieldArgs[MutationInputProperties::INPUT] = $inputValue;
+        return $inputValue;
+    }
+
+    /**
+     * If not provided, set the properties from the logged-in user
+     *
+     * @param array<string,mixed> $fieldArgs
+     * @return array<string,mixed>
+     */
+    protected function prepareBulkOperationAddCommentFieldArgs(
+        array $fieldArgs,
+    ): array {
+        // Just in case, make sure the InputObject has been set
+        $inputListValue = $fieldArgs[SchemaCommonsMutationInputProperties::INPUTS] ?? null;
+        if ($inputListValue === null) {
+            return $fieldArgs;
+        }
+        /** @var stdClass[] $inputListValue */
+
+        if ($this->skipInjectingLoggedInUserDataIntoInput()) {
+            return $fieldArgs;
+        }
+
+        foreach ($inputListValue as &$inputValue) {
+            $inputValue = $this->prepareAddCommentFieldArgsInputValue($inputValue);
+        }
+
+        $fieldArgs[SchemaCommonsMutationInputProperties::INPUTS] = $inputListValue;
+
         return $fieldArgs;
     }
 }

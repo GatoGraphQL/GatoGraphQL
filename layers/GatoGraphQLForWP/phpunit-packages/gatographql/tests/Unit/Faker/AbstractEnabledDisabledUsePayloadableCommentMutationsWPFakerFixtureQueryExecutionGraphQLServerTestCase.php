@@ -44,7 +44,7 @@ abstract class AbstractEnabledDisabledUsePayloadableCommentMutationsWPFakerFixtu
             ...parent::getGraphQLServerModuleClassConfiguration(),
             ...[
                 \PoPCMSSchema\CommentMutations\Module::class => [
-                    \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => true,
+                    \PoPCMSSchema\CommentMutations\Environment::MUST_USER_BE_LOGGED_IN_TO_ADD_COMMENT => false,
                     \PoPCMSSchema\CommentMutations\Environment::USE_PAYLOADABLE_COMMENT_MUTATIONS => static::isEnabled(),
                 ],
             ]

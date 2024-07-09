@@ -1,25 +1,65 @@
 mutation {
   addCommentToCustomPost(input: {
     commentAs: { html: "Great insight!" },
-    customPostID: 1724,
+    customPostID: 1809,
+    authorName: "Leo"
+    authorEmail: "leo@saronga.com",
   }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+
+  addCommentToCustomPosts(inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1809,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1809,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
     }
-    comment {
-      content
-      authorName
-      authorEmail
-      customPost {
-        __typename
-        ...on Post {
-          id
-          title
-        }
+  ]) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+
+  addCommentToCustomPostsStopExecuting: addCommentToCustomPosts(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      commentAs: { html: "Great insight first!" },
+      customPostID: 1809,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    },
+    {
+      commentAs: { html: "Great insight second!" },
+      customPostID: 1809,
+      authorName: "Leo"
+      authorEmail: "leo@saronga.com",
+    }
+  ]) {
+    ...RootAddCommentToCustomPostMutationPayloadData
+  }
+}
+
+fragment RootAddCommentToCustomPostMutationPayloadData on RootAddCommentToCustomPostMutationPayload {
+  status
+  errors {
+    __typename
+    ...on ErrorPayload {
+      message
+    }
+  }
+  comment {
+    content
+    authorName
+    authorEmail
+    customPost {
+      __typename
+      ...on Post {
+        id
+        title
       }
     }
   }

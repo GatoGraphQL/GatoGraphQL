@@ -24,42 +24,162 @@ If you have created a schema configuration with option "Do not use payload types
 
 ## Improvements
 
-- Added compatibility with WordPress 6.6 ([#2717](https://github.com/GatoGraphQL/GatoGraphQL/pull/2717))
+### Added compatibility with WordPress 6.6 ([#2717](https://github.com/GatoGraphQL/GatoGraphQL/pull/2717))
 
-### Added fields to query the mutation payload objects ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
+Gato GraphQL `3.0` has recompiled all its blocks, to make them compatible with WordPress 6.6. (For all previous versions, blocks will throw a JS error.)
 
-Every mutation in the schema has been added a corresponding field to query its recently-created payload objects, with name `{mutationName}MutationPayloadObjects` (such as field `createPostMutationPayloadObjects` to query the payload objects from mutation `createPost`).
+### Added bulk mutation fields (for all mutations in the schema) ([#2721](https://github.com/GatoGraphQL/GatoGraphQL/pull/2721))
 
-These fields enable us to retrieve the results of bulk mutations.
+Gato GraphQL `3.0` adds "bulk" mutation fields for all mutations in the schema, allowing us to mutate multiple resources.
 
-For instance, we can duplicate posts in bulk with the following query (using Gato GraphQL PRO):
+For instance, mutation `createPosts` (single-resource mutation is `createPost`) will create multiple posts:
 
 ```graphql
-query GetPostsAndExportData
+mutation CreatePosts {
+  createPosts(inputs: [
+    {
+      title: "First post"
+      contentAs: {
+        html: "This is the content for the first post"
+      }
+    },
+    {
+      title: "Second post"
+      contentAs: {
+        html: "Here is another content, for another post"
+      }
+      excerpt: "The cup is within reach"
+    },
+    {
+      title: "Third post"
+      contentAs: {
+        html: "This is yet another piece of content"
+      },
+      authorBy: {
+        id: 1
+      },
+      status: draft
+    }
+  ]) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      content
+      excerpt
+      author {
+        name
+      }
+      status
+    }
+  }
+}
+```
+
+All bulk mutations accept two arguments:
+
+- `inputs` (mandatory): The array of input items, where each item contains the data to mutate one resource
+- `stopExecutingMutationItemsOnFirstError` (default `false`): Indicate if, in case any of the inputs produces an error, should stop executing the mutation on the following inputs.
+
+All mutations are executed in the same order provided in the `inputs` argument.
+
+Bulk mutations unlock possibilities for managing our WordPress site. For instance, the following GraphQL query uses `createPosts` (and Multiple Query Execution, provided by Gato GraphQL PRO) to duplicate posts:
+
+```graphql
+query ExportPostData
 {
   postsToDuplicate: posts {
-    title
+    rawTitle
     rawContent
-    excerpt
-
-    # Already create (and export) the inputs for the mutation
+    rawExcerpt
     postInput: _echo(value: {
-      status: draft,
-      title: $__title
+      title: $__rawTitle
       contentAs: {
         html: $__rawContent
       },
-      excerpt: $__excerpt
+      excerpt: $__rawExcerpt
     })
-      @export(as: "postInput", type: LIST)
+      @export(as: "postInputs", type: LIST)
       @remove
   }
 }
 
 mutation CreatePosts
-  @depends(on: "GetPostsAndExportData")
+  @depends(on: "ExportPostData")
 {
-  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
+  createPosts(inputs: $postInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      title
+      content
+      excerpt
+    }
+  }
+}
+```
+
+The list of added bulk mutation fields is the following:
+
+- `Root.addCommentToCustomPosts`
+- `Root.createCustomPosts`
+- `Root.createMediaItems`
+- `Root.createPages`
+- `Root.createPosts`
+- `Root.removeFeaturedImageFromCustomPosts`
+- `Root.replyComments`
+- `Root.setCategoriesOnPosts`
+- `Root.setFeaturedImageOnCustomPosts`
+- `Root.setTagsOnPosts`
+- `Root.updateCustomPosts`
+- `Root.updatePages`
+- `Root.updatePosts`
+- `Comment.replyWithComments`
+- `CustomPost.addComments`
+
+### Added fields to query the mutation payload objects ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
+
+In addition to a bulk mutation, every mutation in the GraphQL schema has also been added a corresponding field to query its recently-created payload objects, with name `{mutationName}MutationPayloadObjects` (such as field `createPostMutationPayloadObjects` to query the payload objects from mutation `createPost`).
+
+These fields provide a method to execute a mutation via the `@applyField` directive (for instance, while iterating all items in an array via `@underEachArrayItem`), and then be able to retrieve the results of the mutation.
+
+For instance, this is an alternative way for duplicating posts in bulk:
+
+```graphql
+query ExportPostData
+{
+  postsToDuplicate: posts {
+    rawTitle
+    rawContent
+    rawExcerpt
+    postInput: _echo(value: {
+      title: $__rawTitle
+      contentAs: {
+        html: $__rawContent
+      },
+      excerpt: $__rawExcerpt
+    })
+      @export(as: "postInputs", type: LIST)
+      @remove
+  }
+}
+
+mutation CreatePosts
+  @depends(on: "ExportPostData")
+{
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInputs)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
@@ -89,7 +209,7 @@ query DuplicatePosts
     post {
       id
       title
-      rawContent
+      content
       excerpt
     }
   }
@@ -98,19 +218,19 @@ query DuplicatePosts
 
 The list of added fields is the following:
 
-- `addCommentToCustomPostMutationPayloadObjects` (for `addCommentToCustomPost`)
-- `createCustomPostMutationPayloadObjects` (for `createCustomPost`)
-- `createMediaItemMutationPayloadObjects` (for `createMediaItem`)
-- `createPageMutationPayloadObjects` (for `createPage`)
-- `createPostMutationPayloadObjects` (for `createPost`)
-- `removeFeaturedImageFromCustomPostMutationPayloadObjects` (for `removeFeaturedImageFromCustomPost`)
-- `replyCommentMutationPayloadObjects` (for `replyComment`)
-- `setCategoriesOnPostMutationPayloadObjects` (for `setCategoriesOnPost`)
-- `setFeaturedImageOnCustomPostMutationPayloadObjects` (for `setFeaturedImageOnCustomPost`)
-- `setTagsOnPostMutationPayloadObjects` (for `setTagsOnPost`)
-- `updateCustomPostMutationPayloadObjects` (for `updateCustomPost`)
-- `updatePageMutationPayloadObjects` (for `updatePage`)
-- `updatePostMutationPayloadObjects` (for `updatePost`)
+- `Root.addCommentToCustomPostMutationPayloadObjects` (for `Root.addCommentToCustomPost`)
+- `Root.createCustomPostMutationPayloadObjects` (for `Root.createCustomPost`)
+- `Root.createMediaItemMutationPayloadObjects` (for `Root.createMediaItem`)
+- `Root.createPageMutationPayloadObjects` (for `Root.createPage`)
+- `Root.createPostMutationPayloadObjects` (for `Root.createPost`)
+- `Root.removeFeaturedImageFromCustomPostMutationPayloadObjects` (for `Root.removeFeaturedImageFromCustomPost`)
+- `Root.replyCommentMutationPayloadObjects` (for `Root.replyComment`)
+- `Root.setCategoriesOnPostMutationPayloadObjects` (for `Root.setCategoriesOnPost`)
+- `Root.setFeaturedImageOnCustomPostMutationPayloadObjects` (for `Root.setFeaturedImageOnCustomPost`)
+- `Root.setTagsOnPostMutationPayloadObjects` (for `Root.setTagsOnPost`)
+- `Root.updateCustomPostMutationPayloadObjects` (for `Root.updateCustomPost`)
+- `Root.updatePageMutationPayloadObjects` (for `Root.updatePage`)
+- `Root.updatePostMutationPayloadObjects` (for `Root.updatePost`)
 
 By default, these fields are not added to the GraphQL schema. For that, the new option "Use payload types for mutations, and add fields to query those payload objects" must be selected (see below).
 

@@ -1,0 +1,80 @@
+{
+  "data": {
+    "addCommentToCustomPosts": [
+      {
+        "status": "SUCCESS",
+        "errors": null,
+        "comment": {
+          "content": "Great insight zero!",
+          "authorName": "Leo Zero",
+          "authorEmail": "leo-zero@saronga.com",
+          "customPost": {
+            "__typename": "Post",
+            "id": 1724,
+            "title": "Keyboard navigation"
+          }
+        }
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      },
+      {
+        "status": "SUCCESS",
+        "errors": null,
+        "comment": {
+          "content": "Great insight first!",
+          "authorName": "Leo First",
+          "authorEmail": "leo-first@saronga.com",
+          "customPost": {
+            "__typename": "Post",
+            "id": 1724,
+            "title": "Keyboard navigation"
+          }
+        }
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotOpenForCustomPostErrorPayload",
+            "message": "Comments are not open for custom post with ID '1730'"
+          }
+        ],
+        "comment": null
+      }
+    ],
+    "addCommentToCustomPostsStopExecuting": [
+      {
+        "status": "SUCCESS",
+        "errors": null,
+        "comment": {
+          "content": "Great insight zero!",
+          "authorName": "Leo Zero",
+          "authorEmail": "leo-zero@saronga.com",
+          "customPost": {
+            "__typename": "Post",
+            "id": 1724,
+            "title": "Keyboard navigation"
+          }
+        }
+      },
+      {
+        "status": "FAILURE",
+        "errors": [
+          {
+            "__typename": "CommentsAreNotSupportedByCustomPostTypeErrorPayload",
+            "message": "Comments are not supported for custom post type 'page'"
+          }
+        ],
+        "comment": null
+      }
+    ]
+  }
+}
