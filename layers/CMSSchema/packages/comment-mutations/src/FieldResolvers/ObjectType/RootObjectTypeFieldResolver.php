@@ -272,11 +272,17 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
+        if (in_array($fieldName, [
+            'addCommentToCustomPostMutationPayloadObjects',
+            'replyCommentMutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
         return match ([$fieldName => $fieldArgName]) {
             ['addCommentToCustomPost' => MutationInputProperties::INPUT],
-            ['replyComment' => MutationInputProperties::INPUT],
-            ['addCommentToCustomPostMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT],
-            ['replyCommentMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
+            ['replyComment' => MutationInputProperties::INPUT]
                 => SchemaTypeModifiers::MANDATORY,
             ['addCommentToCustomPosts' => SchemaCommonsMutationInputProperties::INPUTS],
             ['replyComments' => SchemaCommonsMutationInputProperties::INPUTS]

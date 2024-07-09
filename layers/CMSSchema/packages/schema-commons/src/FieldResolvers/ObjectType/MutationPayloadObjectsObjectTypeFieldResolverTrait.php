@@ -10,6 +10,7 @@ use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPaylo
 use PoP\ComponentModel\Facades\Dictionaries\ObjectDictionaryFacade;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\DictionaryObjectTypeDataLoaderInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
@@ -37,6 +38,14 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
         return [
             MutationInputProperties::INPUT => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
         ];
+    }
+
+    protected function getMutationPayloadObjectsFieldArgTypeModifiers(string $fieldArgName): ?int
+    {
+        return match ($fieldArgName) {
+            MutationInputProperties::INPUT => SchemaTypeModifiers::MANDATORY,
+            default => null,
+        };
     }
 
     protected function resolveMutationPayloadObjectsValue(

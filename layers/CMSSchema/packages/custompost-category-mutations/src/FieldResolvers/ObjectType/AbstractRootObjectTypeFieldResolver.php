@@ -124,9 +124,15 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
+        if (in_array($fieldName, [
+            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
         return match ([$fieldName => $fieldArgName]) {
-            [$this->getSetCategoriesFieldName() => 'input'],
-            [$this->getSetCategoriesFieldName() . 'MutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
+            [$this->getSetCategoriesFieldName() => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             [$this->getBulkOperationSetCategoriesFieldName() => SchemaCommonsMutationInputProperties::INPUTS]
                 => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,

@@ -331,11 +331,17 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
+        if (in_array($fieldName, [
+            'setFeaturedImageOnCustomPostMutationPayloadObjects',
+            'removeFeaturedImageFromCustomPostMutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
+                ?? parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName);
+        }
+
         return match ([$fieldName => $fieldArgName]) {
             ['setFeaturedImageOnCustomPost' => 'input'],
-            ['removeFeaturedImageFromCustomPost' => 'input'],
-            ['setFeaturedImageOnCustomPostMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT],
-            ['removeFeaturedImageFromCustomPostMutationPayloadObjects' => SchemaCommonsMutationInputProperties::INPUT]
+            ['removeFeaturedImageFromCustomPost' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             ['setFeaturedImageOnCustomPosts' => SchemaCommonsMutationInputProperties::INPUTS],
             ['removeFeaturedImageFromCustomPosts' => SchemaCommonsMutationInputProperties::INPUTS]
