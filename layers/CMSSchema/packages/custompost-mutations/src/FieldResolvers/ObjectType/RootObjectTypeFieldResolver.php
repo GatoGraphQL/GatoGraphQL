@@ -406,7 +406,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'updateCustomPost' => $usePayloadableCustomPostMutations
                 ? $this->getPayloadableUpdateGenericCustomPostMutationResolver()
                 : $this->getUpdateGenericCustomPostMutationResolver(),
-            'updateCustomPost' => $usePayloadableCustomPostMutations
+            'updateCustomPosts' => $usePayloadableCustomPostMutations
                 ? $this->getPayloadableUpdateGenericCustomPostBulkOperationMutationResolver()
                 : $this->getUpdateGenericCustomPostBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
