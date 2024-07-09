@@ -28,6 +28,54 @@ If you have created a schema configuration with option "Do not use payload types
 
 Gato GraphQL `3.0` has recompiled all its blocks, to make them compatible with WordPress 6.6. (For all previous versions, blocks will throw a JS error.)
 
+### Added bulk mutation fields (for all mutations in the schema) ([#2721](https://github.com/GatoGraphQL/GatoGraphQL/pull/2721))
+
+Gato GraphQL `3.0` adds "bulk" mutation fields for all mutations in the schema, allowing us to mutate multiple resources.
+
+For instance, mutation `createPosts` (single-resource mutation is `createPost`) will create multiple posts:
+
+```graphql
+mutation CreatePosts {
+  createPosts(inputs: [
+    {
+      title: "First post"
+      contentAs: {
+        html: "This is the content for the first post"
+      }
+    },
+    {
+      title: "Second post"
+      contentAs: {
+        html: "Here is another content, for another post"
+      }
+    }
+  ]) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      title
+      content
+    }
+  }
+}
+```
+
+All bulk mutations accept two arguments:
+
+- `inputs` (mandatory): The array of input items, where each item contains the data to mutate one resource
+- `stopExecutingMutationItemsOnFirstError` (default `false`): Indicate if, in case any of the inputs produces an error, should stop executing the mutation on the following inputs.
+
+All mutations are executed in the same order provided in the `inputs` argument.
+
+The list of added bulk mutation fields is the following:
+
+
+
 ### Added fields to query the mutation payload objects ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
 
 Every mutation in the schema has been added a corresponding field to query its recently-created payload objects, with name `{mutationName}MutationPayloadObjects` (such as field `createPostMutationPayloadObjects` to query the payload objects from mutation `createPost`).
