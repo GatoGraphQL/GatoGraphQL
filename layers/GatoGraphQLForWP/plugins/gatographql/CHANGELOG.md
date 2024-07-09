@@ -9,7 +9,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Breaking changes
 
 - Require at least WordPress v6.0 (#2719)
-- Removed predefined custom endpoint "Nested mutations + Entity as mutation payload type" (#2720)
 - Option "Do not use payload types for mutations (i.e. return the mutated entity)" in schema configuration block "Payload Types for Mutations" must be re-selected (#2720)
 
 ### Improvements
@@ -19,6 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added fields to query the mutation payload objects (#2720)
 - Added option to schema configuration block "Payload Types for Mutations" (#2720)
 - Added predefined custom endpoint "Bulk mutations" (#2720)
+- Removed predefined custom endpoint "Nested mutations + Entity as mutation payload type" (#2720)
 
 ### Fixed
 

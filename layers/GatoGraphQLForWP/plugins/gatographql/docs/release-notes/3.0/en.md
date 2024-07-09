@@ -10,12 +10,6 @@ As a solution, blocks were adapted and re-compiled, and the new [compiled files 
 
 That's why, from now on, Gato GraphQL requires at least WordPress `v6.0`.
 
-### Removed predefined custom endpoint "Nested mutations + Entity as mutation payload type" ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
-
-Since adding predefined custom endpoint "Bulk mutations" (see below), the predefined custom endpoint "Nested mutations + Entity as mutation payload type" became unnecessary, so it's been removed.
-
-Similarly, its schema configuration "Nested mutations + Entity as mutation payload type" has also been removed.
-
 ### Option "Do not use payload types for mutations (i.e. return the mutated entity)" in schema configuration block "Payload Types for Mutations" must be re-selected ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
 
 Schema configuration block "Payload Types for Mutations" has been added a new option value (see below). For this reason, its inner attribute to store the selected option has changed (it went from storing a `true/false` value, to storing an option string value).
@@ -247,6 +241,14 @@ This option will add those fields to query the mutation payload objects (see abo
 Custom endpoint "Bulk mutations" (alongside its schema configuration with the same name) is created by default when installing the plugin.
 
 This custom endpoint is useful for executing CRUD operations in bulk, such as for persisted queries "Duplicate posts" and "Import posts from CSV".
+
+### Removed predefined custom endpoint "Nested mutations + Entity as mutation payload type" ([#2720](https://github.com/GatoGraphQL/GatoGraphQL/pull/2720))
+
+Since adding predefined custom endpoint "Bulk mutations", the predefined custom endpoint "Nested mutations + Entity as mutation payload type" became unnecessary, so it's been removed.
+
+Similarly, its schema configuration "Nested mutations + Entity as mutation payload type" has also been removed.
+
+(This is not a breaking change, because these items will simply not be installed anymore; If you have them already installed, they will not get deleted.)
 
 ## Fixed
 
