@@ -153,9 +153,9 @@ The list of added bulk mutation fields is the following:
 
 In addition to a bulk mutation, every mutation in the GraphQL schema has also been added a corresponding field to query its recently-created payload objects, with name `{mutationName}MutationPayloadObjects` (such as field `createPostMutationPayloadObjects` to query the payload objects from mutation `createPost`).
 
-These fields provide an alternative method to retrieve the results of bulk mutations.
+These fields provide a method to execute a mutation via the `@applyField` directive (for instance, while iterating all items in an array via `@underEachArrayItem`), and then be able to retrieve the results of the mutation.
 
-For instance, duplicating posts in bulk can also be achieved with the following query (it also requires Gato GraphQL PRO):
+For instance, this is an alternative way for duplicating posts in bulk:
 
 ```graphql
 query ExportPostData
