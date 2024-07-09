@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\SchemaCommons\MutationResolvers;
 
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties;
+use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
+use PoPSchema\SchemaCommons\ObjectModels\ObjectMutationPayload;
+use PoP\ComponentModel\Dictionaries\ObjectDictionaryInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -14,6 +17,22 @@ use PoP\Root\Exception\AbstractException;
 
 abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMutationResolver
 {
+    private ?ObjectDictionaryInterface $objectDictionary = null;
+
+    final public function setObjectDictionary(ObjectDictionaryInterface $objectDictionary): void
+    {
+        $this->objectDictionary = $objectDictionary;
+    }
+    final protected function getObjectDictionary(): ObjectDictionaryInterface
+    {
+        if ($this->objectDictionary === null) {
+            /** @var ObjectDictionaryInterface */
+            $objectDictionary = $this->instanceManager->getInstance(ObjectDictionaryInterface::class);
+            $this->objectDictionary = $objectDictionary;
+        }
+        return $this->objectDictionary;
+    }
+
     /**
      * @return InputObjectListItemSubpropertyFieldDataAccessor[]
      */
@@ -45,6 +64,7 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
         $decoratedOperationMutationResolver = $this->getDecoratedOperationMutationResolver();
         $inputObjectListItemSubpropertyFieldDataAccessors = $this->getInputObjectListItemSubpropertyFieldDataAccessors($fieldDataAccessor);
         $results = [];
+        $objectDictionary = $this->getObjectDictionary();
         /** @var mixed[] */
         $inputs = $fieldDataAccessor->getValue(MutationInputProperties::INPUTS);
         /** @var bool */
@@ -53,14 +73,43 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
             /** @var InputObjectListItemSubpropertyFieldDataAccessor */
             $inputObjectListItemSubpropertyFieldDataAccessor = $inputObjectListItemSubpropertyFieldDataAccessors[$position];
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-            $results[] = $decoratedOperationMutationResolver->executeMutation(
+            $result = $decoratedOperationMutationResolver->executeMutation(
                 $inputObjectListItemSubpropertyFieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore
             );
-            if ($stopExecutingMutationItemsOnFirstError
-                && $objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount
-            ) {
-                break;
+            $results[] = $result;
+            if ($stopExecutingMutationItemsOnFirstError) {
+                // Non-payloadable produced error => exit
+                if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                    break;
+                }
+
+                /**
+                 * Check if a Payloadable Mutation Resolver produced error...
+                 *
+                 * Steps:
+                 *
+                 * - Get the ID of the result
+                 * - If that ID belongs to ObjectMutationPayload, then it's payloadable
+                 * - Check if that object has failure status
+                 *
+                 * ObjectMutationPayload is a TransientObject, its ID is an integer.
+                 * 
+                 * @see layers/Engine/packages/component-model/src/ObjectModels/AbstractTransientObject.php
+                 */
+                if (!is_integer($result)) {
+                    continue;
+                }
+                /** @var int */
+                $resultID = $result;
+                if (!$objectDictionary->has(ObjectMutationPayload::class, $resultID)) {
+                    continue;
+                }
+                /** @var ObjectMutationPayload */
+                $objectMutationPayload = $objectDictionary->get(ObjectMutationPayload::class, $resultID);
+                if ($objectMutationPayload->status === OperationStatusEnum::FAILURE) {
+                    break;
+                }
             }
         }
         return $results;
