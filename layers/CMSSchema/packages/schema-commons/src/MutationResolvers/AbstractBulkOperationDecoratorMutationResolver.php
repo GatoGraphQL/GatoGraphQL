@@ -125,21 +125,13 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
         $inputObjectListItemSubpropertyFieldDataAccessors = $this->getInputObjectListItemSubpropertyFieldDataAccessors($fieldDataAccessor);
         /** @var mixed[] */
         $inputs = $fieldDataAccessor->getValue(MutationInputProperties::INPUTS);
-        /** @var bool */
-        $stopExecutingMutationItemsOnFirstError = $fieldDataAccessor->getValue(MutationInputProperties::STOP_EXECUTING_MUTATION_ITEMS_ON_FIRST_ERROR);
         foreach ($inputs as $position => $input) {
             /** @var InputObjectListItemSubpropertyFieldDataAccessor */
             $inputObjectListItemSubpropertyFieldDataAccessor = $inputObjectListItemSubpropertyFieldDataAccessors[$position];
-            $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
             $decoratedOperationMutationResolver->validate(
                 $inputObjectListItemSubpropertyFieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore
             );
-            if ($stopExecutingMutationItemsOnFirstError
-                && $objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount
-            ) {
-                break;
-            }
         }
     }
 }
