@@ -102,20 +102,17 @@ For instance, we can duplicate posts in bulk with the following query (using Gat
 query GetPostsAndExportData
 {
   postsToDuplicate: posts {
-    title
+    rawTitle
     rawContent
-    excerpt
-
-    # Already create (and export) the inputs for the mutation
+    rawExcerpt
     postInput: _echo(value: {
-      status: draft,
-      title: $__title
+      title: $__rawTitle
       contentAs: {
         html: $__rawContent
       },
-      excerpt: $__excerpt
+      excerpt: $__rawExcerpt
     })
-      @export(as: "postInput", type: LIST)
+      @export(as: "postInputs", type: LIST)
       @remove
   }
 }
@@ -123,7 +120,7 @@ query GetPostsAndExportData
 mutation CreatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
+  createdPostMutationPayloadObjectIDs: _echo(value: $postInputs)
     @underEachArrayItem(
       passValueOnwardsAs: "input"
     )
@@ -153,7 +150,7 @@ query DuplicatePosts
     post {
       id
       title
-      rawContent
+      content
       excerpt
     }
   }
