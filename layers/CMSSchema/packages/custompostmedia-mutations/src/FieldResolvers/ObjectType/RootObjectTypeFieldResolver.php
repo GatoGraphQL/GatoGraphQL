@@ -289,14 +289,20 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
+        
+        if (in_array($fieldName, [
+            'setFeaturedImageOnCustomPostMutationPayloadObjects',
+            'removeFeaturedImageFromCustomPostMutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldTypeModifiers();
+        }
+
         return match ($fieldName) {
             'setFeaturedImageOnCustomPost',
             'removeFeaturedImageFromCustomPost'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'setFeaturedImageOnCustomPosts',
-            'removeFeaturedImageFromCustomPosts',
-            'setFeaturedImageOnCustomPostMutationPayloadObjects',
-            'removeFeaturedImageFromCustomPostMutationPayloadObjects'
+            'removeFeaturedImageFromCustomPosts'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),

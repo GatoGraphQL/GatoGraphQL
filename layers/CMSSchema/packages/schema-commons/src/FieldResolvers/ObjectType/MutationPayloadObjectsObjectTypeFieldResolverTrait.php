@@ -30,6 +30,11 @@ trait MutationPayloadObjectsObjectTypeFieldResolverTrait
         return $this->mutationPayloadObjectsInputObjectTypeResolver;
     }
 
+    protected function getMutationPayloadObjectsFieldTypeModifiers(): int
+    {
+        return SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY;
+    }
+
     /**
      * @return array<string,mixed>
      */

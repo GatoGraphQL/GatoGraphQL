@@ -188,14 +188,17 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
+        
+        if (in_array($fieldName, [
+            'createMediaItemMutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldTypeModifiers();
+        }
+
         return match ($fieldName) {
-            'createMediaItem'
-                => SchemaTypeModifiers::NON_NULLABLE,
-            'createMediaItems',
-            'createMediaItemMutationPayloadObjects'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'createMediaItem' => SchemaTypeModifiers::NON_NULLABLE,
+            'createMediaItems' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 

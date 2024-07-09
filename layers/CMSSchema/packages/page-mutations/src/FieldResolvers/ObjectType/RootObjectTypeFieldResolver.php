@@ -307,14 +307,20 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
+        
+        if (in_array($fieldName, [
+            'createPageMutationPayloadObjects',
+            'updatePageMutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldTypeModifiers();
+        }
+
         return match ($fieldName) {
             'createPage',
             'updatePage'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'createPages',
-            'updatePages',
-            'createPageMutationPayloadObjects',
-            'updatePageMutationPayloadObjects'
+            'updatePages'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),

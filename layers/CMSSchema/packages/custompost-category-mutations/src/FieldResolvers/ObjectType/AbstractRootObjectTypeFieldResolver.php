@@ -94,14 +94,17 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
                 default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
+        
+        if (in_array($fieldName, [
+            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldTypeModifiers();
+        }
+
         return match ($fieldName) {
-            $this->getSetCategoriesFieldName()
-                => SchemaTypeModifiers::NON_NULLABLE,
-            $this->getBulkOperationSetCategoriesFieldName(),
-            $this->getSetCategoriesFieldName() . 'MutationPayloadObjects'
-                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default
-                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            $this->getSetCategoriesFieldName() => SchemaTypeModifiers::NON_NULLABLE,
+            $this->getBulkOperationSetCategoriesFieldName() => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 

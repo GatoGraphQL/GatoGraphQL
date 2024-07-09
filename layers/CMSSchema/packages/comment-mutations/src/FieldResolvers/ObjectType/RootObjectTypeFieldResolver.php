@@ -230,14 +230,20 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
+        
+        if (in_array($fieldName, [
+            'addCommentToCustomPostMutationPayloadObjects',
+            'replyCommentMutationPayloadObjects',
+        ])) {
+            return $this->getMutationPayloadObjectsFieldTypeModifiers();
+        }
+
         return match ($fieldName) {
             'addCommentToCustomPost',
             'replyComment'
                 => SchemaTypeModifiers::NON_NULLABLE,
             'addCommentToCustomPosts',
-            'replyComments',
-            'addCommentToCustomPostMutationPayloadObjects',
-            'replyCommentMutationPayloadObjects'
+            'replyComments'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
