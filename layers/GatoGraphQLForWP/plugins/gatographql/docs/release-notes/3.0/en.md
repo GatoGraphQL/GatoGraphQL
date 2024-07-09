@@ -48,6 +48,17 @@ mutation CreatePosts {
       contentAs: {
         html: "Here is another content, for another post"
       }
+      excerpt: "The cup is within reach"
+    },
+    {
+      title: "Third post"
+      contentAs: {
+        html: "This is yet another piece of content"
+      },
+      authorBy: {
+        id: 1
+      },
+      status: draft
     }
   ]) {
     status
@@ -58,8 +69,14 @@ mutation CreatePosts {
       }
     }
     post {
+      id
       title
       content
+      excerpt
+      author {
+        name
+      }
+      status
     }
   }
 }
@@ -75,7 +92,7 @@ All mutations are executed in the same order provided in the `inputs` argument.
 Bulk mutations unlock plenty of possibilities for managing our WordPress site. For instance, the following GraphQL query uses `createPosts` to duplicate posts:
 
 ```graphql
-query GetPostsAndExportData
+query ExportPostData
 {
   postsToDuplicate: posts {
     rawTitle
@@ -94,7 +111,7 @@ query GetPostsAndExportData
 }
 
 mutation CreatePosts
-  @depends(on: "GetPostsAndExportData")
+  @depends(on: "ExportPostData")
 {
   createPosts(inputs: $postInputs) {
     status
@@ -141,7 +158,7 @@ These fields enable us to retrieve the results of bulk mutations.
 For instance, we can duplicate posts in bulk with the following query (using Gato GraphQL PRO):
 
 ```graphql
-query GetPostsAndExportData
+query ExportPostData
 {
   postsToDuplicate: posts {
     rawTitle
@@ -160,7 +177,7 @@ query GetPostsAndExportData
 }
 
 mutation CreatePosts
-  @depends(on: "GetPostsAndExportData")
+  @depends(on: "ExportPostData")
 {
   createdPostMutationPayloadObjectIDs: _echo(value: $postInputs)
     @underEachArrayItem(
