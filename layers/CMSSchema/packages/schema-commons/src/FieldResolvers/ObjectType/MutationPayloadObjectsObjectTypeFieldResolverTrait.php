@@ -5,16 +5,40 @@ declare(strict_types=1);
 namespace PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties;
+use PoPCMSSchema\SchemaCommons\TypeResolvers\InputObjectType\MutationPayloadObjectsInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\TypeResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\Facades\Dictionaries\ObjectDictionaryFacade;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\DictionaryObjectTypeDataLoaderInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use stdClass;
 
 trait MutationPayloadObjectsObjectTypeFieldResolverTrait
 {
+    private ?MutationPayloadObjectsInputObjectTypeResolver $mutationPayloadObjectsInputObjectTypeResolver = null;
+
+    protected function getMutationPayloadObjectsInputObjectTypeResolver(): MutationPayloadObjectsInputObjectTypeResolver
+    {
+        if ($this->mutationPayloadObjectsInputObjectTypeResolver === null) {
+            /** @var MutationPayloadObjectsInputObjectTypeResolver */
+            $mutationPayloadObjectsInputObjectTypeResolver = InstanceManagerFacade::getInstance()->getInstance(MutationPayloadObjectsInputObjectTypeResolver::class);
+            $this->mutationPayloadObjectsInputObjectTypeResolver = $mutationPayloadObjectsInputObjectTypeResolver;
+        }
+        return $this->mutationPayloadObjectsInputObjectTypeResolver;
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getMutationPayloadObjectsFieldArgNameTypeResolvers(): array
+    {
+        return [
+            MutationInputProperties::INPUT => $this->getMutationPayloadObjectsInputObjectTypeResolver(),
+        ];
+    }
+
     protected function resolveMutationPayloadObjectsValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         FieldDataAccessorInterface $fieldDataAccessor,
