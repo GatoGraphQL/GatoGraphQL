@@ -61,7 +61,7 @@ class InputObjectListItemSubpropertyFieldDataAccessor extends FieldDataAccessor 
                 )
             );
         }
-        /** @var $inputObjectListValue mixed[] */
+        /** @var mixed[] $inputObjectListValue */
         $inputObjectListItemPosition = $this->getInputObjectListItemPosition();
         if (!array_key_exists($inputObjectListItemPosition, $inputObjectListValue)) {
             throw new ShouldNotHappenException(

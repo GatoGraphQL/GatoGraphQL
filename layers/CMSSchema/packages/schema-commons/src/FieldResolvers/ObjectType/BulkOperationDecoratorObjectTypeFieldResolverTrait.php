@@ -7,6 +7,7 @@ namespace PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType;
 use PoPCMSSchema\SchemaCommons\Constants\MutationInputProperties;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 

@@ -54,7 +54,6 @@ abstract class AbstractBulkOperationDecoratorMutationResolver extends AbstractMu
     }
     
     /**
-     * @return string
      * @throws AbstractException In case of error
      */
     public function executeMutation(
