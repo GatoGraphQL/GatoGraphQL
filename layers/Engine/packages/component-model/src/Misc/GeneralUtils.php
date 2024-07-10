@@ -39,7 +39,7 @@ class GeneralUtils
     }
 
     /**
-     * Add paramters "key" => "value" to the URL
+     * Add parameters "key" => "value" to the URL
      *
      * @param array<string,mixed> $keyValues
      * @see https://stackoverflow.com/a/5809881
