@@ -66,7 +66,7 @@ class WPDataParser
             $authorDataEntry = $authorDataEntries[$postDataEntry['post_author']] ?? null;
             if ($authorDataEntry === null) {
                 throw new ParserException(sprintf(
-                    'The ID for author "%s" has not beed added to dataset file "%s"',
+                    'The ID for author "%s" has not been added to dataset file "%s"',
                     $postDataEntry['post_author'],
                     $wpDataXMLExportFile
                 ));
