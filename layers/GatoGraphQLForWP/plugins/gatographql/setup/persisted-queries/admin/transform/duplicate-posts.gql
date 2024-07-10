@@ -21,8 +21,8 @@
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  postInput: _echo(value: [])
-    @export(as: "postInput")
+  postInputs: _echo(value: [])
+    @export(as: "postInputs")
     @remove
 }
 
@@ -63,7 +63,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     title
 
     # Already create (and export) the inputs for the mutation
-    postInput: _echo(value: {
+    postInputs: _echo(value: {
       status: draft,
       authorBy: {
         id: $__author
@@ -83,7 +83,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
       },
       title: $__title
     })
-      @export(as: "postInput", type: LIST)
+      @export(as: "postInputs", type: LIST)
       @remove
   }
 }
@@ -91,7 +91,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 mutation CreatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createPosts(inputs: $postInput) {
+  createPosts(inputs: $postInputs) {
     status
     errors {
       __typename
