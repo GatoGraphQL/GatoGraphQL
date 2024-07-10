@@ -9,8 +9,9 @@ on:
         branches:
             - master
     pull_request: null
-env:
-    CHECKOUT_SUBMODULES: ""
+# Only check typos in the current repo, no upstream ones
+# env:
+#     CHECKOUT_SUBMODULES: ""
 
 jobs:
     main:
