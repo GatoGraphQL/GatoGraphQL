@@ -1,6 +1,6 @@
 # Persisted Queries
 
-Use GraphQL queries to create pre-defined enpoints as in REST, obtaining the benefits from both APIs.
+Use GraphQL queries to create pre-defined endpoints as in REST, obtaining the benefits from both APIs.
 
 ## Description
 

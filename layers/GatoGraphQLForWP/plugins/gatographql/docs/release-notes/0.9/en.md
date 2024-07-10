@@ -1080,7 +1080,7 @@ Several enum types have been implemented, and used whenever appropriate in the G
 
 ## "Enum String" types
 
-As explained above for enum types, there are certain pieces of information that can only have a value from a predefined set. However, enum types have the limitation that its values can't include the `"-"` char, and there are ocassions when this can't be avoided.
+As explained above for enum types, there are certain pieces of information that can only have a value from a predefined set. However, enum types have the limitation that its values can't include the `"-"` char, and there are occassions when this can't be avoided.
 
 For instance, it would make sense to have a `CustomPostEnum` enum type, listing all the custom post types that can be queried (i.e. those registered in the site, and which have been allowed to be queried). However, custom post types can include the `"-"` char in their names, as in the `"some-custom-cpt"` example below:
 
@@ -1952,7 +1952,7 @@ The plugin upgraded [GraphiQL](https://github.com/graphql/graphiql/tree/main/pac
 
 The underlying GraphQL server powering the plugin can now be installed and executed as a standalone PHP component, i.e. independently of WordPress 🙏🎉👏💪🚀.
 
-This opens the doors to using the GraphQL API with other frameworks (eg: Laravel), and on any PHP environment, whether WordPress is available or not (such as when executing a Continous Integration task).
+This opens the doors to using the GraphQL API with other frameworks (eg: Laravel), and on any PHP environment, whether WordPress is available or not (such as when executing a Continuous Integration task).
 
 This plugin itself benefits from this feature: the unit tests in the repo are being [executed in GitHub Actions](https://github.com/GatoGraphQL/GatoGraphQL/actions/workflows/unit_tests.yml) (yet there's no instance of WordPress running). As an example, [this PHPUnit test](https://github.com/GatoGraphQL/GatoGraphQL/blob/b6cc58227a06bc2e58b5d31da0d3fdaeec7eacad/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/WPFakerFixtureQueryExecutionGraphQLServerTest.php) asserts that [this GraphQL query](https://github.com/GatoGraphQL/GatoGraphQL/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/fixture/success/query.gql) produces [this response](https://github.com/GatoGraphQL/GatoGraphQL/blob/2558abee7bc08469cda1792543c228a137ec2e69/layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Unit/Faker/fixture/success/query.json).
 
