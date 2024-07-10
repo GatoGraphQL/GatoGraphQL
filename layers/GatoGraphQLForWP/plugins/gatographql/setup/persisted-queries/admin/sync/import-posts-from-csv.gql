@@ -27,7 +27,7 @@
 # The following CSV will import 3 posts:
 # 
 #     Title,Excerpt,Content,Author
-#     Multi-channelled optimal interface,Inventore iste velit et expedita ipsa dolor,<p>Inventore iste velit et expedita ipsa dolor. Option suscipit qui id harum corporis dignissimos.</p>,admin
+#     Multi-channelled optimal interface,Inventore iste velit et expedita ipsa dolor,<p>Inventore iste velit et expedita ipsa dolor. Optio suscipit qui id harum corporis dignissimos.</p>,admin
 #     Ergonomic motivating parallelism,Consequuntur velit quasi assumenda,<p>Consequuntur velit quasi assumenda. Eum non saepe est. Ut dolorem harum eveniet eaque nemo impedit. Voluptatem commodi modi sed sed animi voluptatem.</p>,admin
 #     Down-sized solution-oriented securedline,Ipsam minima qui asperiores dolorum unde voluptas quia voluptate,<p>Ipsam minima qui asperiores dolorum unde voluptas quia voluptate. Incidunt omnis cumque beatae quo deleniti ex. Praesentium nihil et consectetur neque commodi tempora ipsa adipisci. Praesentium perferendis sint est.</p>,admin
 #
@@ -35,7 +35,7 @@
 # and block markup (to insert posts for the WordPress editor):
 # 
 #     Title,Excerpt,Content,Author
-#     Multi-channelled optimal interface,Inventore iste velit et expedita ipsa dolor,"<p>Inventore iste velit et expedita ipsa dolor. Option suscipit qui id harum corporis dignissimos.</p>
+#     Multi-channelled optimal interface,Inventore iste velit et expedita ipsa dolor,"<p>Inventore iste velit et expedita ipsa dolor. Optio suscipit qui id harum corporis dignissimos.</p>
 #     <p>Iste provident aut incidunt dolorum esse nobis. Porro est deserunt quos quia cupiditate earum magnam. Distinctio qui et aut iste et.</p>
 #     <p>Aut earum quos accusamus voluptas sit tempore est. Dolore tempora doloremque magni excepturi. Ullam illum et ullam cum sed.</p>",admin
 #     Ergonomic motivating parallelism,Consequuntur velit quasi assumenda,"<p>Consequuntur velit quasi assumenda. Eum non saepe est. Ut dolorem harum eveniet eaque nemo impedit. Voluptatem commodi modi sed sed animi voluptatem.</p>
