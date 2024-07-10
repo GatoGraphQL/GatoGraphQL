@@ -92,7 +92,7 @@ final class PluginConfigEntriesJsonProvider
                 $entryConfig['version']
             );
 
-            // If it doens't specify a branch, use "main" by default
+            // If it doesn't specify a branch, use "main" by default
             $entryConfig['dist_repo_branch'] ??= 'main';
 
             // If not provided, the "Publish to DIST repo" will not be executed
