@@ -841,7 +841,7 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 }
 ```
 
-Once the ComponentProcessor class is instantiated, all of its defined components become available to be added to the component hirarchy.
+Once the ComponentProcessor class is instantiated, all of its defined components become available to be added to the component hierarchy.
 
 To access the properties of a component, we must reference its corresponding ComponentProcessor through function `getComponentProcessor` from class `ComponentProcessor_Manager`:
 
