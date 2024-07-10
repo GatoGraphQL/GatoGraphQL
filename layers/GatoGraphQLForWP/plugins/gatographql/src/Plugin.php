@@ -1771,7 +1771,7 @@ class Plugin extends AbstractMainPlugin
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
 
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
-        $bulkMutationsSchemaConfigurationPersistedQueryBlocks = $this->getBulkMutationsSchemaConfigurationPersistedQueryBlocks();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
 
         /**
          * Create the Persisted Queries
@@ -1796,7 +1796,7 @@ class Plugin extends AbstractMainPlugin
                                 ),
                             ],
                         ],
-                        ...$bulkMutationsSchemaConfigurationPersistedQueryBlocks,
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));
@@ -1822,7 +1822,7 @@ class Plugin extends AbstractMainPlugin
                                 ),
                             ],
                         ],
-                        ...$bulkMutationsSchemaConfigurationPersistedQueryBlocks,
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));

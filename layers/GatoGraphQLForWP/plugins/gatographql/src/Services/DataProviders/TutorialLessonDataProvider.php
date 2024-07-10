@@ -70,10 +70,8 @@ class TutorialLessonDataProvider
             TutorialLessons::DUPLICATING_MULTIPLE_BLOG_POSTS_AT_ONCE => [
                 \__('Lesson 4: Duplicating multiple blog posts at once', 'gatographql'),
                 [
-                    ExtensionModuleResolver::FIELD_ON_FIELD,
                     ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
                     ExtensionModuleResolver::FIELD_TO_INPUT,
-                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]

@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 3.1.0 - DATE
 
+### Improvements
+
+- Use bulk mutations in predefined persisted queries (#2728)
+
 ## 3.0.0 - 10/07/2024
 
 ### Breaking changes

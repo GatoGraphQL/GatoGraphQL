@@ -21,8 +21,8 @@ This GraphQL query duplicates the posts retrieved via the provided `$limit` and 
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  postInput: _echo(value: [])
-    @export(as: "postInput")
+  postInputs: _echo(value: [])
+    @export(as: "postInputs")
     @remove
 }
 
@@ -63,7 +63,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     title
 
     # Already create (and export) the inputs for the mutation
-    postInput: _echo(value: {
+    postInputs: _echo(value: {
       status: draft,
       authorBy: {
         id: $__author
@@ -83,7 +83,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
       },
       title: $__title
     })
-      @export(as: "postInput", type: LIST)
+      @export(as: "postInputs", type: LIST)
       @remove
   }
 }
@@ -91,26 +91,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
-    @underEachArrayItem(
-      passValueOnwardsAs: "input"
-    )
-      @applyField(
-        name: "createPost"
-        arguments: {
-          input: $input
-        },
-        setResultInResponse: true
-      )
-    @export(as: "createdPostMutationPayloadObjectIDs")
-}
-
-query RetrieveCreatedPosts
-  @depends(on: "DuplicatePosts")
-{
-  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
-    ids: $createdPostMutationPayloadObjectIDs
-  }) {
+  createPosts(inputs: $postInputs) {
     status
     errors {
       __typename
@@ -230,7 +211,7 @@ query GetPostAndExportData {
     }
     title
 
-    postInput: _echo(value: {
+    postInputs: _echo(value: {
       status: draft,
       authorBy: {
         id: $__author
@@ -250,18 +231,18 @@ query GetPostAndExportData {
       },
       title: $__title
     })
-      @export(as: "postInput")
+      @export(as: "postInputs")
   }
 }
 ```
 
-Then, in the following mutation, `createPost(input:)` directly receives dynamic variable `$postInput`:
+Then, in the following mutation, `createPost(input:)` directly receives dynamic variable `$postInputs`:
 
 ```graphql
 mutation DuplicatePost
   @depends(on: "GetPostAndExportData")
 {
-  createPost(input: $postInput) {
+  createPost(input: $postInputs) {
     # ...
   }
 }
@@ -272,7 +253,7 @@ mutation DuplicatePost
 We must convert the query to retrieve the multiple posts to be duplicated:
 
 - Query the posts via `posts(pagination: { limit : $limit, offset: $offset}) { ... }`
-- Export `postInput` as a list (i.e. an array containing all the inputs for the queried posts)
+- Export `postInputs` as a list (i.e. an array containing all the inputs for the queried posts)
 
 ```graphql
 query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
@@ -290,11 +271,11 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
   ) {
     # ...
 
-    postInput: _echo(value: {
+    postInputs: _echo(value: {
       # ...
     })
       @export(
-        as: "postInput",
+        as: "postInputs",
         type: LIST
       )
   }
@@ -303,7 +284,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 
 ### Creating multiple posts in a single GraphQL query
 
-Dynamic variable `$postInput` by now contains an array with all the input data for each of the posts to duplicate:
+Dynamic variable `$postInputs` by now contains an array with all the input data for each of the posts to duplicate:
 
 ```json
 [
@@ -353,90 +334,13 @@ Dynamic variable `$postInput` by now contains an array with all the input data f
 ]
 ```
 
-In the Gato GraphQL schema, there is no mutation to create multiple posts:
-
-- Mutation `createPost` receives a single `input` object, not an array of them
-- There is no mutation `createPosts`
-
-The solution is to use extensions:
-
-- [**Field Value Iteration and Manipulation**](https://gatographql.com/extensions/field-value-iteration-and-manipulation/) provides directive `@underEachArrayItem` to iterate over all the items in `$postInput`
-- [**Field on Field**](https://gatographql.com/extensions/field-on-field/) provides directive `@applyField`, to apply the `createPost` mutation on each iterated-upon item from the array
-
-<div class="doc-highlight" markdown=1>
-
-🔥 **Tips:**
-
-`@underEachArrayItem` is a [composable directive](https://gatographql.com/guides/schema/using-composable-directives/) (or "meta directive", it is a directive which can contain nested directives) that iterates over an array of elements, and applies its nested directive on each of them.
-
-`@underEachArrayItem` helps bridge GraphQL types, as it can make a field that returns a `[String]` value, be applied a directive that receives a `String` value as input (or other combinations).
-
-For instance, in the query below:
-
-- Field `User.capabilities` returns `[String]`
-- Directive `@strUpperCase` receives `String`
-
-Thanks to `@underEachArrayItem`, we can convert all capability items to upper case:
-
-```graphql
-{
-  user(by: { id: 3 }) {
-    capabilities
-      @underEachArrayItem
-        @strUpperCase
-  }
-}
-```
-
-...producing:
-
-```json
-{
-  "data": {
-    "user": {
-      "capabilities": [
-        "LEVEL_0",
-        "READ",
-        "READ_PRIVATE_EVENTS",
-        "READ_PRIVATE_LOCATIONS"
-      ]
-    }
-  }
-}
-```
-
-</div>
-
-This GraphQL query passes iterates all items in `$postInput`, assigns each of them to dynamic variable `$input`, injects into the `createPost` mutation, and finally exports the IDs of the created payload objects under dynamic variable `$createdPostMutationPayloadObjectIDs`:
+Finally, we call bulk mutation `createPosts` to create all the posts passing the data for the exported inputs:
 
 ```graphql
 mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
-    @underEachArrayItem(
-      passValueOnwardsAs: "input"
-    )
-      @applyField(
-        name: "createPost"
-        arguments: {
-          input: $input
-        },
-        setResultInResponse: true
-      )
-    @export(as: "createdPostMutationPayloadObjectIDs")
-}
-```
-
-Finally, we can use dynamic variable `$createdPostMutationPayloadObjectIDs` to retrieve the data for the created payload objects, and queried the created posts:
-
-```graphql
-query RetrieveCreatedPosts
-  @depends(on: "DuplicatePosts")
-{
-  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
-    ids: $createdPostMutationPayloadObjectIDs
-  }) {
+  createPosts(inputs: $postInputs) {
     status
     errors {
       __typename
@@ -482,8 +386,8 @@ The consolidated GraphQL query is:
 query InitializeDynamicVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  postInput: _echo(value: [])
-    @export(as: "postInput")
+  postInputs: _echo(value: [])
+    @export(as: "postInputs")
     @remove
 }
 
@@ -524,7 +428,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
     title
 
     # Already create (and export) the inputs for the mutation
-    postInput: _echo(value: {
+    postInputs: _echo(value: {
       status: draft,
       authorBy: {
         id: $__author
@@ -544,7 +448,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
       },
       title: $__title
     })
-      @export(as: "postInput", type: LIST)
+      @export(as: "postInputs", type: LIST)
       @remove
   }
 }
@@ -552,26 +456,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 mutation DuplicatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
-    @underEachArrayItem(
-      passValueOnwardsAs: "input"
-    )
-      @applyField(
-        name: "createPost"
-        arguments: {
-          input: $input
-        },
-        setResultInResponse: true
-      )
-    @export(as: "createdPostMutationPayloadObjectIDs")
-}
-
-query RetrieveCreatedPosts
-  @depends(on: "DuplicatePosts")
-{
-  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
-    ids: $createdPostMutationPayloadObjectIDs
-  }) {
+  createPosts(inputs: $postInputs) {
     status
     errors {
       __typename
