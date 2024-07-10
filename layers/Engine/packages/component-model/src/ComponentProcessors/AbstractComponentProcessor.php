@@ -211,7 +211,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
             $componentFullName => &$props[$componentFullName],
         );
 
-        // If ancestor components set general props, or props targetted at this current component, then add them to the current component props
+        // If ancestor components set general props, or props targeted at this current component, then add them to the current component props
         foreach ($wildcard_props_to_propagate as $key => $value) {
             $this->setProp($component, $component_props, $key, $value);
         }
@@ -432,7 +432,7 @@ abstract class AbstractComponentProcessor implements ComponentProcessorInterface
 
     /**
      * $component_or_componentPath can be either a single component
-     * (the current one, or its descendant), or a targetted path
+     * (the current one, or its descendant), or a targeted path
      * of components
      *
      * @param Component[]|Component $component_or_componentPath

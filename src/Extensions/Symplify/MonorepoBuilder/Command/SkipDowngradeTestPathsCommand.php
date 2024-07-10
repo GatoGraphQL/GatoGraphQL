@@ -28,7 +28,7 @@ final class SkipDowngradeTestPathsCommand extends AbstractSymplifyCommand
     protected function configure(): void
     {
         $this->setName(CommandNaming::classToName(self::class));
-        $this->setDescription('Files that must be skiped from testing the downgrade');
+        $this->setDescription('Files that must be skipped from testing the downgrade');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
