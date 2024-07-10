@@ -72,14 +72,14 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     {
         $implementedInterfaceTypeFieldResolvers = [];
         foreach ($this->getInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            // Add under class as to mimick `array_unique` for object
+            // Add under class as to mimic `array_unique` for object
             foreach ($interfaceTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
                 $implementedInterfaceTypeFieldResolvers[get_class($implementedInterfaceTypeFieldResolver)] = $implementedInterfaceTypeFieldResolver;
             }
         }
         $implementedInterfaceTypeResolvers = [];
         foreach ($implementedInterfaceTypeFieldResolvers as $implementedInterfaceTypeFieldResolver) {
-            // Add under class as to mimick `array_unique` for object
+            // Add under class as to mimic `array_unique` for object
             foreach ($implementedInterfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers() as $partiallyImplementedInterfaceTypeResolver) {
                 $implementedInterfaceTypeResolvers[get_class($partiallyImplementedInterfaceTypeResolver)] = $partiallyImplementedInterfaceTypeResolver;
             }
@@ -97,7 +97,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
         if ($this->interfaceTypeFieldResolvers === null) {
             $interfaceTypeFieldResolvers = [];
             foreach ($this->getInterfaceTypeFieldResolversByField() as $fieldName => $interfaceTypeFieldResolversByField) {
-                // Add under class as to mimick `array_unique` for object
+                // Add under class as to mimic `array_unique` for object
                 foreach ($interfaceTypeFieldResolversByField as $interfaceTypeFieldResolver) {
                     $interfaceTypeFieldResolvers[get_class($interfaceTypeFieldResolver)] = $interfaceTypeFieldResolver;
                 }

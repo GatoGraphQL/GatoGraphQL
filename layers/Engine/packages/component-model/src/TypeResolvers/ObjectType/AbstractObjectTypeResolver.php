@@ -1065,7 +1065,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 if (!in_array($objectTypeFieldResolverClass, $processedObjectTypeFieldResolverClasses)) {
                     $processedObjectTypeFieldResolverClasses[] = $objectTypeFieldResolverClass;
                     foreach ($objectTypeFieldResolver->getImplementedInterfaceTypeFieldResolvers() as $implementedInterfaceTypeFieldResolver) {
-                        // Add under class as to mimick `array_unique` for object
+                        // Add under class as to mimic `array_unique` for object
                         $interfaceTypeFieldResolvers[get_class($implementedInterfaceTypeFieldResolver)] = $implementedInterfaceTypeFieldResolver;
                     }
                 }
@@ -1093,7 +1093,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $interfaceTypeResolvers = [];
         foreach ($this->getAllImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
             foreach ($interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers() as $partiallyImplementedInterfaceTypeResolver) {
-                // Add under class as to mimick `array_unique` for object
+                // Add under class as to mimic `array_unique` for object
                 $interfaceTypeResolvers[get_class($partiallyImplementedInterfaceTypeResolver)] = $partiallyImplementedInterfaceTypeResolver;
             }
         }
@@ -1225,7 +1225,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             // Sort the found units by their priority, and then add to the stack of all units, for all classes
             // Higher priority means they execute first!
             array_multisort($classTypeResolverPriorities, SORT_DESC, SORT_NUMERIC, $classObjectTypeFieldResolvers);
-            // Add under class as to mimick `array_unique` for object
+            // Add under class as to mimic `array_unique` for object
             foreach ($classObjectTypeFieldResolvers as $classObjectTypeFieldResolver) {
                 $objectTypeFieldResolvers[get_class($classObjectTypeFieldResolver)] = $classObjectTypeFieldResolver;
             }
