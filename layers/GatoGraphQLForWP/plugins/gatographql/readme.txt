@@ -286,6 +286,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 3.1.0 =
+* Use bulk mutations in predefined persisted queries (#2728)
+
 = 3.0.0 =
 * Breaking change: Require at least WordPress v6.0 (#2719)
 * Breaking change: Option "Do not use payload types for mutations (i.e. return the mutated entity)" in schema configuration block "Payload Types for Mutations" must be re-selected (#2720)
