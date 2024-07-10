@@ -707,7 +707,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
      * Among Promises, we have:
      *
      * 1. Resolved Field Value Reference:
-     *    It must be resolved at the Object level, so its resoluton here
+     *    It must be resolved at the Object level, so its resolution here
      *    is suitable.
      *
      * 2. Dynamic Variable Reference:
