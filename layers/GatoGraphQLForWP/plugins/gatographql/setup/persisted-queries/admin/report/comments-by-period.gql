@@ -20,11 +20,11 @@
 
 query GetCommentsByPeriod {
   timeNow: _time  
-  time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
+  time24HsAgo: _intSubtract(subtract: 86400, from: $__timeNow)
   date24HsAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time24HsAgo)  
-  time1MonthAgo: _intSubstract(substract: 2592000, from: $__timeNow)
+  time1MonthAgo: _intSubtract(subtract: 2592000, from: $__timeNow)
   date1MonthAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time1MonthAgo)
-  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeNow)
+  time1YearAgo: _intSubtract(subtract: 31536000, from: $__timeNow)
   date1YearAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time1YearAgo)
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
   dateBegOfThisMonth: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__timeBegOfThisMonth)

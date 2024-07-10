@@ -40,8 +40,8 @@ This query retrieves the number of comments added to the site in the last 24 hs,
 ```graphql
 query {
   timeNow: _time  
-  time24HsAgo: _intSubstract(
-    substract: 86400,
+  time24HsAgo: _intSubtract(
+    subtract: 86400,
     from: $__timeNow
   )
   date24HsAgo: _date(
@@ -87,9 +87,9 @@ This query retrieves the number of comments added to the site starting from "24 
 ```graphql
 query {
   timeNow: _time  
-  time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
+  time24HsAgo: _intSubtract(subtract: 86400, from: $__timeNow)
   date24HsAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time24HsAgo)  
-  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeNow)
+  time1YearAgo: _intSubtract(subtract: 31536000, from: $__timeNow)
   date1YearAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time1YearAgo)
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
   dateBegOfThisMonth: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__timeBegOfThisMonth)
@@ -110,8 +110,8 @@ query {
   # This PHP constant will provide standard time format "Y-m-d\\TH:i:sO"
   DATE_ISO8601: _env(name: DATE_ISO8601)
   timeNow: _time  
-  time24HsAgo: _intSubstract(
-    substract: 86400,
+  time24HsAgo: _intSubtract(
+    subtract: 86400,
     from: $__timeNow
   )
   date24HsAgo: _date(

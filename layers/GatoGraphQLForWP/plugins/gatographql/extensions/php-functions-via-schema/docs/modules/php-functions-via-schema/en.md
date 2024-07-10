@@ -351,7 +351,7 @@ Sum of the integer elements in the array.
 
 Multiple an integer with another integer number.
 
-### `_intSubstract`
+### `_intSubtract`
 
 Substract an integer from another integer number.
 

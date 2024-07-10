@@ -7,7 +7,7 @@ In this query, we retrieve the IDs of the comments added in the last 24 hs and, 
 ```graphql
 {
   timeNow: _time  
-  time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
+  time24HsAgo: _intSubtract(subtract: 86400, from: $__timeNow)
   date24HsAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time24HsAgo)
 
   comments(filter: { dateQuery: { after: $__date24HsAgo } } ) {
@@ -48,7 +48,7 @@ If the external service can receive the data for multiple resources, we can coll
 ```graphql
 query ExportData {
   timeNow: _time  
-  time24HsAgo: _intSubstract(substract: 86400, from: $__timeNow)
+  time24HsAgo: _intSubtract(subtract: 86400, from: $__timeNow)
   date24HsAgo: _date(format: "Y-m-d\\TH:i:sO", timestamp: $__time24HsAgo)
 
   comments(filter: { dateQuery: { after: $__date24HsAgo } } )
