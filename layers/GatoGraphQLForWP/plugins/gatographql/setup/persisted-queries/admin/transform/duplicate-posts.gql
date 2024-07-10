@@ -91,26 +91,7 @@ query GetPostsAndExportData($limit: Int! = 5, $offset: Int! = 0)
 mutation CreatePosts
   @depends(on: "GetPostsAndExportData")
 {
-  createdPostMutationPayloadObjectIDs: _echo(value: $postInput)
-    @underEachArrayItem(
-      passValueOnwardsAs: "input"
-    )
-      @applyField(
-        name: "createPost"
-        arguments: {
-          input: $input
-        },
-        setResultInResponse: true
-      )
-    @export(as: "createdPostMutationPayloadObjectIDs")
-}
-
-query DuplicatePosts
-  @depends(on: "CreatePosts")
-{
-  createdPostMutationObjectPayloads: createPostMutationPayloadObjects(input: {
-    ids: $createdPostMutationPayloadObjectIDs
-  }) {
+  createPosts(inputs: $postInput) {
     status
     errors {
       __typename
