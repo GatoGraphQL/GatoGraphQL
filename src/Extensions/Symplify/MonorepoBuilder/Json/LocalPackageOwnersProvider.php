@@ -36,7 +36,7 @@ final class LocalPackageOwnersProvider
         $rootPackageName = $this->composerJsonProvider->getRootComposerJson()->getName();
         $packageNames[] = $rootPackageName;
 
-        // Extrac the owner, and return unique
+        // Extract the owner, and return unique
         return array_values(array_unique(array_map(
             function (string $packageName): string {
                 return (string) Strings::before($packageName, '/');
