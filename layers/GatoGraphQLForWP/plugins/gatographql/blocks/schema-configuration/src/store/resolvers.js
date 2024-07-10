@@ -18,7 +18,7 @@ export const getSchemaConfigurations =
 			);
 			
 			/**
-			 * If there were erros when executing the query, return an empty list, and keep the error in the state
+			 * If there were errors when executing the query, return an empty list, and keep the error in the state
 			 */
 			const maybeErrorMessage = maybeGetErrorMessage(response);
 			if (maybeErrorMessage) {
