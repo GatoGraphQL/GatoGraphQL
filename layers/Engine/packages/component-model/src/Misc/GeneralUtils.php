@@ -68,7 +68,7 @@ class GeneralUtils
         // Note that this will url_encode all values
         $query = http_build_query($params);
 
-        // Check if schema/host are present, becase the URL can also be a relative path: /some-path/
+        // Check if schema/host are present, because the URL can also be a relative path: /some-path/
         $scheme = isset($url_parts['scheme']) ? $url_parts['scheme'] . '://' : '';
         $host = $url_parts['host'] ?? '';
         $port = isset($url_parts['port']) && $url_parts['port'] ? (($url_parts['port'] == "80") ? "" : (":" . $url_parts['port'])) : '';
@@ -109,7 +109,7 @@ class GeneralUtils
         // Note that this will url_encode all values
         $query = http_build_query($params);
 
-        // Check if schema/host are present, becase the URL can also be a relative path: /some-path/
+        // Check if schema/host are present, because the URL can also be a relative path: /some-path/
         $scheme = isset($url_parts['scheme']) ? $url_parts['scheme'] . '://' : '';
         $host = $url_parts['host'] ?? '';
         $port = isset($url_parts['port']) && $url_parts['port'] ? (($url_parts['port'] == "80") ? "" : (":" . $url_parts['port'])) : '';

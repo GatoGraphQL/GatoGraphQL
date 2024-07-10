@@ -81,7 +81,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
      * to automatically inject all services. Since migrating to lazy getters,
      * this same behavior is implicitly covered.
      *
-     * Make all properties nullable, becase the ModuleRegistry is registered
+     * Make all properties nullable, because the ModuleRegistry is registered
      * in the SystemContainer, where there are no typeResolvers so it will be null,
      * and in the ApplicationContainer, from where the "Modules" page is resolved
      * and which does have all the typeResolvers.
