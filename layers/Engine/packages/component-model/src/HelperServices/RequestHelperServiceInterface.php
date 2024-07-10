@@ -24,7 +24,7 @@ interface RequestHelperServiceInterface
      * it shall return `null`.
      *
      * By default it gets the IP from $_SERVER['REMOTE_ADDR'],
-     * and the property name can be configured via the environmen
+     * and the property name can be configured via the environment
      * variable `CLIENT_IP_ADDRESS_SERVER_PROPERTY_NAME`.
      *
      * Depending on the environment, some candidates are:
