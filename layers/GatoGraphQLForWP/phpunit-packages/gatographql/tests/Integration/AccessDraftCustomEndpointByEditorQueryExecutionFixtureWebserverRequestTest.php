@@ -39,7 +39,7 @@ class AccessDraftCustomEndpointByEditorQueryExecutionFixtureWebserverRequestTest
     {
         // expectedContentType
         $providerItems['draft-custom-endpoint-query'][0] = 'text/html';
-        // expectedResponseBody. null => no exection of test
+        // expectedResponseBody. null => no execution of test
         $providerItems['draft-custom-endpoint-query'][1] = null;
         return $providerItems;
     }
