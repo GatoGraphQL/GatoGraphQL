@@ -101,7 +101,7 @@ The [**HTTP Request via Schema**](https://gatographql.com/extensions/http-reques
 - `_httpRequestScheme`: Scheme of the requested URL
 - `_httpRequestServerIP`: Server IP address
 - `_httpRequestURL`: Requested URL (without query params)
-- `_httpRequestURLPath`: Asolute path (starting with "/") of the requested URL
+- `_httpRequestURLPath`: Absolute path (starting with "/") of the requested URL
 - `_httpRequestUserAgent`: User agent
 
 </div>

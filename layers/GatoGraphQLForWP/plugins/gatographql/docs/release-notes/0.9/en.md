@@ -2127,7 +2127,7 @@ These fields have been renamed as `...Str`:
 - `Media.modifiedDateStr(format: String): String!`
 - `User.registeredDateStr(format: String): String!`
 
-And in their place, they have been converted to type `DateTime`, and have had the argument `format` removed (since specifing how to print the date value does not apply anymore):
+And in their place, they have been converted to type `DateTime`, and have had the argument `format` removed (since specifying how to print the date value does not apply anymore):
 
 - `Post.date: DateTime!`
 - `Media.date: DateTime!`

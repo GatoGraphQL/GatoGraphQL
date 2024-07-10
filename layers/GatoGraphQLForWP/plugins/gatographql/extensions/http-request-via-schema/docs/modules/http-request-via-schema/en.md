@@ -136,7 +136,7 @@ Requested URL (without query params).
 
 ### `_httpRequestURLPath`
 
-Asolute path (starting with "/") of the requested URL.
+Absolute path (starting with "/") of the requested URL.
 
 ### `_httpRequestUserAgent`
 
