@@ -49,7 +49,7 @@ In PoP, everything is a component:
 
 ![In PoP, everything is a component](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
 
-The relationship of all components wrapping each other, from the top-most component all the way down to the last level, is called the component hierarchy. The PoP API has the component hierarchy at its core, implemented as an associative array on the server-side, in which each component states its name as the key attribute and whatever properties it needs as values, and then nests its descendant components under property "components", iteratively adding their own data and that of their own descendant components. Finally, this associative array is returned as a JSON object for comsumption through the API:
+The relationship of all components wrapping each other, from the top-most component all the way down to the last level, is called the component hierarchy. The PoP API has the component hierarchy at its core, implemented as an associative array on the server-side, in which each component states its name as the key attribute and whatever properties it needs as values, and then nests its descendant components under property "components", iteratively adding their own data and that of their own descendant components. Finally, this associative array is returned as a JSON object for consumption through the API:
 
 ```javascript
 {
