@@ -30,6 +30,7 @@ extend-ignore-re = [
     "Allow URE",
     "URE source",
     "X-Github-Access-Token",
+    "[a|A]dditionals"
 ]
 
 [default.extend-identifiers]
@@ -38,8 +39,6 @@ marketing_optin = "marketing_optin"
 QueryRoot2ndLevel = "QueryRoot2ndLevel"
 inputOn2ndLevel = "inputOn2ndLevel"
 no2ndLevelInput = "no2ndLevelInput"
-additionals = "additionals"
-Additionals = "Additionals"
 
 # Typos
 "Github" = "GitHub"
