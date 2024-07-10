@@ -381,7 +381,7 @@ Component("post-layout")->setProp({
   }
 });
 
-// Layout on the center display a big thumnail to the left of the text
+// Layout on the center display a big thumbnail to the left of the text
 Component("central-section")->setProp({
   componentpath: ["post-layout"],
   prop: "classes",
@@ -392,7 +392,7 @@ Component("central-section")->setProp({
   }
 });
 
-// Layout on the floating window display a small thumnail to the left of the text
+// Layout on the floating window display a small thumbnail to the left of the text
 Component("floating-window")->setProp({
   componentpath: ["post-layout"],
   prop: "classes",
