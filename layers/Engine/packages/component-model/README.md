@@ -1504,7 +1504,7 @@ function getFieldprocessor()
 }
 ```
 
-In addition, most likely dataloader will also be in charge of obtaining the `$ids` to fetch from the databse. In this case, it must inherit from class `QueryDataDataloader`, and implement function `getDbobjectIds`:
+In addition, most likely dataloader will also be in charge of obtaining the `$ids` to fetch from the database. In this case, it must inherit from class `QueryDataDataloader`, and implement function `getDbobjectIds`:
 
 ```php
 function getDbobjectIds($data_properties) {
