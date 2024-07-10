@@ -290,7 +290,7 @@ _**Schema errors:** (Severity: high)_
 
 Whenever the query refers to non-existing fields, or using non-valid values
 
-- [/?query=posts.id|title|non-existant-field|is-status(status:non-existant-value)](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|non-existant-field|is-status(status:non-existant-value))
+- [/?query=posts.id|title|non-existent-field|is-status(status:non-existent-value)](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|non-existent-field|is-status(status:non-existent-value))
 
 _**Database errors:** (Severity: high)_
 
@@ -1395,7 +1395,7 @@ Issues are handled differently depending on their severity:
   posts.
     nonExistantField|
     isStatus(
-      status:non-existant-value
+      status:non-existent-value
     )
 ```
 
@@ -1407,7 +1407,7 @@ Issues are handled differently depending on their severity:
 
 <a href="https://newapi.getpop.org/api/graphql/?query=posts.id%5Bbook%5D(key:value)">View query results #4</a>
 
-<a href="https://newapi.getpop.org/api/graphql/?query=posts.nonExistantField%7CisStatus(status:non-existant-value)">View query results #5</a>
+<a href="https://newapi.getpop.org/api/graphql/?query=posts.nonExistantField%7CisStatus(status:non-existent-value)">View query results #5</a>
 
 ### Type casting/validation
 
