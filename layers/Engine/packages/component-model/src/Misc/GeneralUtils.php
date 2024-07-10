@@ -191,7 +191,7 @@ class GeneralUtils
         return $queryParams;
     }
 
-    public static function getURLWithouQueryParams(string $url): string
+    public static function getURLWithoutQueryParams(string $url): string
     {
         $paramsPos = strpos($url, '?');
         if ($paramsPos === false) {
