@@ -1,0 +1,26 @@
+####################################################################################
+# GitHub Action:
+# Check if there are typos in the source code
+# @see https://github.com/crate-ci/typos
+####################################################################################
+name: Spelling
+on:
+    push:
+        branches:
+            - master
+    pull_request: null
+env:
+    CHECKOUT_SUBMODULES: ""
+
+jobs:
+    main:
+        name: Typos
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
+
+            -   name: Search for misspellings
+                uses: crate-ci/typos@master
