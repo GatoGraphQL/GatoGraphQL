@@ -49,7 +49,7 @@ We need to be careful and avoid exposing our credentials:
 
 ## GraphQL query that avoids leaking credentials
 
-This GraphQL query passes the credentials to GitHub's API while avoding leaking the credentials:
+This GraphQL query passes the credentials to GitHub's API while avoiding leaking the credentials:
 
 ```graphql
 query {

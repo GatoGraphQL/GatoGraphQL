@@ -54,8 +54,8 @@ This is the number of comments added to the site:
 | --- | --- |
 | **In the last 24 hs**: | {$commentsAddedInLast24Hs} |
 | **In the last 365 days**: | {$commentsAddedInLast1Year} |
-| **Since begginning of this month**: | {$commentsAddedSinceBegOfThisMonth} |
-| **Since begginning of this year**: | {$commentsAddedSinceBegOfThisYear} |
+| **Since beginning of this month**: | {$commentsAddedSinceBegOfThisMonth} |
+| **Since beginning of this year**: | {$commentsAddedSinceBegOfThisYear} |
 
     """
   )
