@@ -846,7 +846,7 @@ Once the ComponentProcessor class is instantiated, all of its defined components
 To access the properties of a component, we must reference its corresponding ComponentProcessor through function `getComponentProcessor` from class `ComponentProcessor_Manager`:
 
 ```php
-// Retrive the PoP_ComponentProcessor_Manager object from the factory
+// Retrieve the PoP_ComponentProcessor_Manager object from the factory
 $componentprocessor_manager = \PoP\Engine\ComponentProcessor_Manager_Factory::getInstance();
 
 // Obtain the ComponentProcessor for component COMPONENT_SOMENAME

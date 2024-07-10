@@ -353,7 +353,7 @@ Multiple an integer with another integer number.
 
 ### `_intSubtract`
 
-Substract an integer from another integer number.
+Subtract an integer from another integer number.
 
 ### `_isEmpty`
 
@@ -625,9 +625,9 @@ Add an integer number to the field value.
 
 Multiply an integer number with the field value.
 
-### `@intSubstract`
+### `@intSubtract`
 
-Substract an integer number from the field value.
+Subtract an integer number from the field value.
 
 ### `@objectAddEntry`
 

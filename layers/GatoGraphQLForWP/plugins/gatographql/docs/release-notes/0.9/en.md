@@ -1080,7 +1080,7 @@ Several enum types have been implemented, and used whenever appropriate in the G
 
 ## "Enum String" types
 
-As explained above for enum types, there are certain pieces of information that can only have a value from a predefined set. However, enum types have the limitation that its values can't include the `"-"` char, and there are occassions when this can't be avoided.
+As explained above for enum types, there are certain pieces of information that can only have a value from a predefined set. However, enum types have the limitation that its values can't include the `"-"` char, and there are occasions when this can't be avoided.
 
 For instance, it would make sense to have a `CustomPostEnum` enum type, listing all the custom post types that can be queried (i.e. those registered in the site, and which have been allowed to be queried). However, custom post types can include the `"-"` char in their names, as in the `"some-custom-cpt"` example below:
 
