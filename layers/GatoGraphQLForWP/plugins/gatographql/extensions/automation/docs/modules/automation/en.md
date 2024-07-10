@@ -45,7 +45,7 @@ For instance:
 }
 ```
 
-These values are overriden by the "dynamic" GraphQL variables (see **Automation trigger(s)** below).
+These values are overridden by the "dynamic" GraphQL variables (see **Automation trigger(s)** below).
 
 **Operation name** (optional): If the persisted query contains more than one operation, you can indicate which one to execute (by default, it is the last one).
 

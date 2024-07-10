@@ -1,6 +1,6 @@
 #######################################################
 # Argument `size` is mandatory and it has a default
-# value, but since it's overriden with `null` then
+# value, but since it's overridden with `null` then
 # it will produce an error
 #######################################################
 query {

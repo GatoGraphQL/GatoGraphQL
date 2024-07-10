@@ -2250,7 +2250,7 @@ PostTag:
 
 From now on, field `User.email` is treated as “sensitive” data. As such, it is exposed only if property `Expose Sensitive Data in the Schema` is enabled.
 
-This behavior can be overriden in the Settings page:
+This behavior can be overridden in the Settings page:
 
 <div class="img-width-1024" markdown=1>
 

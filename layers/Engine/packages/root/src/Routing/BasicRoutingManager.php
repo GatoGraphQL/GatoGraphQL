@@ -6,7 +6,7 @@ namespace PoP\Root\Routing;
 
 /**
  * Basic Routing Manager, needed for PHPUnit.
- * Must be overriden by the CMS implementation.
+ * Must be overridden by the CMS implementation.
  */
 class BasicRoutingManager extends AbstractRoutingManager
 {

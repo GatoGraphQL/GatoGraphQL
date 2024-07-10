@@ -8,7 +8,7 @@ class AccessPrivatePersistedQuerySourceByAdminQueryExecutionFixtureWebserverRequ
 {
     /**
      * This folder doesn't actually matter, as the content will
-     * be overriden anyway
+     * be overridden anyway
      */
     protected static function getResponseFixtureFolder(): string
     {

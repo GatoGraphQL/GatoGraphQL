@@ -626,7 +626,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
 
     /**
      * By default, the directiveResolver instance can process the directive
-     * This function can be overriden to force certain value on the directive args before it can be executed
+     * This function can be overridden to force certain value on the directive args before it can be executed
      */
     public function resolveCanProcessDirective(
         RelationalTypeResolverInterface $relationalTypeResolver,

@@ -202,7 +202,7 @@ abstract class AbstractRelationalTypeResolver extends AbstractTypeResolver imple
 
     /**
      * By default, handle mandatory directives for Fields.
-     * This method will be overriden by SuperRoot, to handle
+     * This method will be overridden by SuperRoot, to handle
      * mandatory directives for Operations.
      *
      * @return FieldDirectiveResolverInterface[]
