@@ -30,8 +30,10 @@ extend-ignore-re = [
     "Allow URE",
     "URE source",
     "X-Github-Access-Token",
-    "[a|A]dditionals"
 ]
+
+[default.extend-words]
+additionals = "additionals"
 
 [default.extend-identifiers]
 safly = "safly"
