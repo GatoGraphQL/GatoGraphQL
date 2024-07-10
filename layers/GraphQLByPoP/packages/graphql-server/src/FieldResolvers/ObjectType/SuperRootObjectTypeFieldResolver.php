@@ -100,7 +100,7 @@ class SuperRootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             '_rootForQueryRoot' => $this->__('Get the Root type (as requested by a query operation)', 'engine'),
-            '_rootFoMutationRoot' => $this->__('Get the Root type (as requested by a mutation operation)', 'engine'),
+            '_rootForMutationRoot' => $this->__('Get the Root type (as requested by a mutation operation)', 'engine'),
             '_queryRoot' => $this->__('Get the Query Root type', 'engine'),
             '_mutationRoot' => $this->__('Get the Mutation Root type', 'engine'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
