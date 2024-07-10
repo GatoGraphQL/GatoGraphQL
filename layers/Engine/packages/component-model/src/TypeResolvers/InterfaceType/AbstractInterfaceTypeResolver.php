@@ -20,7 +20,7 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
     /**
      * @var array<string,InterfaceTypeFieldResolverInterface>|null
      */
-    protected ?array $excutableInterfaceTypeFieldResolversByField = null;
+    protected ?array $executableInterfaceTypeFieldResolversByField = null;
     /**
      * @var string[]|null
      */
@@ -116,10 +116,10 @@ abstract class AbstractInterfaceTypeResolver extends AbstractTypeResolver implem
      */
     final public function getExecutableInterfaceTypeFieldResolversByField(): array
     {
-        if ($this->excutableInterfaceTypeFieldResolversByField === null) {
-            $this->excutableInterfaceTypeFieldResolversByField = $this->doGetExecutableInterfaceTypeFieldResolversByField();
+        if ($this->executableInterfaceTypeFieldResolversByField === null) {
+            $this->executableInterfaceTypeFieldResolversByField = $this->doGetExecutableInterfaceTypeFieldResolversByField();
         }
-        return $this->excutableInterfaceTypeFieldResolversByField;
+        return $this->executableInterfaceTypeFieldResolversByField;
     }
 
     /**
