@@ -72,7 +72,7 @@ registerBlockType( 'gatographql/endpoint-graphiql', {
 		customClassName: false,
 		// Remove support for an HTML mode.
 		html: false,
-		// Insert programatically only
+		// Insert programmatically only
 		inserter: false,
 	},
 

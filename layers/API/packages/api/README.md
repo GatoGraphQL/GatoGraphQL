@@ -290,7 +290,7 @@ _**Schema errors:** (Severity: high)_
 
 Whenever the query refers to non-existing fields, or using non-valid values
 
-- [/?query=posts.id|title|non-existant-field|is-status(status:non-existant-value)](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|non-existant-field|is-status(status:non-existant-value))
+- [/?query=posts.id|title|non-existent-field|is-status(status:non-existent-value)](https://nextapi.getpop.org/api/graphql/?query=posts.id|title|non-existent-field|is-status(status:non-existent-value))
 
 _**Database errors:** (Severity: high)_
 
@@ -1393,9 +1393,9 @@ Issues are handled differently depending on their severity:
 //5. Schema error
 /?query=
   posts.
-    nonExistantField|
+    nonExistentField|
     isStatus(
-      status:non-existant-value
+      status:non-existent-value
     )
 ```
 

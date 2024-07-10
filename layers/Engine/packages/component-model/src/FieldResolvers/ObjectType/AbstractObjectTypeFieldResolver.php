@@ -227,7 +227,7 @@ abstract class AbstractObjectTypeFieldResolver extends AbstractFieldResolver imp
     {
         $interfaceTypeResolvers = [];
         foreach ($this->getImplementedInterfaceTypeFieldResolvers() as $interfaceTypeFieldResolver) {
-            // Add under class as to mimick `array_unique` for object
+            // Add under class as to mimic `array_unique` for object
             foreach ($interfaceTypeFieldResolver->getPartiallyImplementedInterfaceTypeResolvers() as $partiallyImplementedInterfaceTypeResolver) {
                 $interfaceTypeResolvers[get_class($partiallyImplementedInterfaceTypeResolver)] = $partiallyImplementedInterfaceTypeResolver;
             }

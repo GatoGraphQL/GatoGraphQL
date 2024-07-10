@@ -255,7 +255,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         );
     }
 
-    protected function additionals(string|int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additional(string|int $comment_id, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction(HookNames::ADD_COMMENT, $comment_id, $fieldDataAccessor);
     }
@@ -328,7 +328,7 @@ class AddCommentToCustomPostMutationResolver extends AbstractMutationResolver
         $comment_id = $this->insertComment($comment_data);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionals($comment_id, $fieldDataAccessor);
+        $this->additional($comment_id, $fieldDataAccessor);
 
         return $comment_id;
     }

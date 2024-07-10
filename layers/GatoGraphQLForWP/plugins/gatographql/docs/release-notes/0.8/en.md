@@ -170,7 +170,7 @@ Menus have been mapped, via the new `Menu` type, and the new field `Root.menu`.
 
 The settings from the site (stored in table `wp_options`) can be queried via the new field `Root.option: AnyScalar`.
 
-For instance, this query retrives the site's name:
+For instance, this query retrieves the site's name:
 
 ```graphql
 {
@@ -266,7 +266,7 @@ To enable this behavior, uncheck item `"Have all options in this Settings page b
 
 ![Checkbox to enable/disable tabs in Settings](../../images/releases/v08/settings-without-tabs-checkbox.png)
 
-Then, all settins will be shown together in long form:
+Then, all settings will be shown together in long form:
 
 ![Settings in long format](../../images/releases/v08/settings-without-tabs.png)
 

@@ -28,7 +28,7 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CustomPostStatusFilterInput $customPostStatusFilterInput = null;
     private ?UnionCustomPostTypesFilterInput $unionCustomPostTypesFilterInput = null;
-    private ?SearchFilterInput $seachFilterInput = null;
+    private ?SearchFilterInput $searchFilterInput = null;
 
     final public function setDateQueryInputObjectTypeResolver(DateQueryInputObjectTypeResolver $dateQueryInputObjectTypeResolver): void
     {
@@ -108,18 +108,18 @@ abstract class AbstractCustomPostsFilterInputObjectTypeResolver extends Abstract
         }
         return $this->unionCustomPostTypesFilterInput;
     }
-    final public function setSearchFilterInput(SearchFilterInput $seachFilterInput): void
+    final public function setSearchFilterInput(SearchFilterInput $searchFilterInput): void
     {
-        $this->seachFilterInput = $seachFilterInput;
+        $this->searchFilterInput = $searchFilterInput;
     }
     final protected function getSearchFilterInput(): SearchFilterInput
     {
-        if ($this->seachFilterInput === null) {
+        if ($this->searchFilterInput === null) {
             /** @var SearchFilterInput */
-            $seachFilterInput = $this->instanceManager->getInstance(SearchFilterInput::class);
-            $this->seachFilterInput = $seachFilterInput;
+            $searchFilterInput = $this->instanceManager->getInstance(SearchFilterInput::class);
+            $this->searchFilterInput = $searchFilterInput;
         }
-        return $this->seachFilterInput;
+        return $this->searchFilterInput;
     }
 
     /**

@@ -7,7 +7,7 @@ Persisted queries and custom endpoints can declare a parent, from which it can i
 For persisted queries, it will also inherit:
 
 - Its GraphQL query
-- The query variables, but these can also be independently overriden
+- The query variables, but these can also be independently overridden
 
 The child custom endpoint and persisted query will include, within their endpoint, the full path of its ancestor endpoint(s), such as `/graphql-query/posts/mobile-app/`.
 
@@ -25,7 +25,7 @@ The number of levels is unlimited, so we can also create:
 - `/graphql-query/posts/website/english/`
 - `/graphql-query/posts/website/french/`
 
-Children persisted queries can override variables defined in the parent query. For instance, variable `$limit` is defined in the parent, and overriden in the child:
+Children persisted queries can override variables defined in the parent query. For instance, variable `$limit` is defined in the parent, and overridden in the child:
 
 ![Parent persisted query](../../images/parent-persisted-query.png "Parent persisted query")
 

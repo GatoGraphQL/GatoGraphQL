@@ -4,7 +4,7 @@ import 'graphiql/graphiql.css';
 
 /**
  * Adding the GraphiQL client inside Gutenberg has styles
- * overriden. Undo the undesired changes
+ * overridden. Undo the undesired changes
  */
 import './graphiql-restore.scss';
 

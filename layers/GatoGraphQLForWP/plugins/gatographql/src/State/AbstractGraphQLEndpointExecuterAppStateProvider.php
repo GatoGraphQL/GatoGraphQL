@@ -72,7 +72,7 @@ abstract class AbstractGraphQLEndpointExecuterAppStateProvider extends AbstractA
          * Merge the variables into $state?
          *
          * Normally, GraphQL variables must not override the variables from the request
-         * But this behavior can be overriden for the persisted query,
+         * But this behavior can be overridden for the persisted query,
          * by setting "Accept Variables as URL Params" => false
          * When editing in the editor, 'queried-object' will be null, and that's OK
          */

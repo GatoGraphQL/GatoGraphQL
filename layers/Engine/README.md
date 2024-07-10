@@ -595,7 +595,7 @@ Contributors are welcome! Please check [PoP in PHP](https://github.com/leoloso/P
 
 **Codebase Migration**
 
-[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become aquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
+[PoP in PHP](https://github.com/leoloso/PoP-PHP) is currently being migrated to Composer packages. We are welcoming first-time contributors to help with the migration: This is a good way to become acquainted with PoP, and we will teach you all there is to know about its architecture. [Find out more](https://github.com/leoloso/PoP-PHP#codebase-migration).
 -->
 
 <!--
@@ -639,9 +639,9 @@ Below is a technical summary. For a more in-depth description, please visit [PoP
 
 ## What is PoP?
 
-PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_application) websites, by combining [Wordpress](https://wordpress.org) and [Handlebars](http://handlebarsjs.com/) into an [MVC architecture](https://en.wikipedia.org/wiki/Model-view-controller) framework:
+PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_application) websites, by combining [WordPress](https://wordpress.org) and [Handlebars](http://handlebarsjs.com/) into an [MVC architecture](https://en.wikipedia.org/wiki/Model-view-controller) framework:
 
-- Wordpress is the model/back-end
+- WordPress is the model/back-end
 - Handlebars templates are the view/front-end
 - the PoP engine is the controller
 
@@ -666,7 +666,7 @@ PoP creates [Single-Page Application](https://en.wikipedia.org/wiki/Single-page_
 - Content aggregators
 - Server back-end for mobile apps
 - Microservices
-- APIs for Wordpress websites
+- APIs for WordPress websites
 
 ## Installation
 

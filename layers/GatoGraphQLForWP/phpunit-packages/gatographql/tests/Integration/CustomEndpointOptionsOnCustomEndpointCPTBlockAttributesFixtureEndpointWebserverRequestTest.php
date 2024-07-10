@@ -51,7 +51,7 @@ class CustomEndpointOptionsOnCustomEndpointCPTBlockAttributesFixtureEndpointWebs
     {
         // expectedContentType
         $providerItems['query'][0] = 'text/html';
-        // expectedResponseBody. null => no exection of test
+        // expectedResponseBody. null => no execution of test
         $providerItems['query'][1] = null;
         return $providerItems;
     }

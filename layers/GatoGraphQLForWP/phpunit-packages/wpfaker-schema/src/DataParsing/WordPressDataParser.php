@@ -78,7 +78,7 @@ class WordPressDataParser
             }
             /**
              * Properties "base_url", "base_blog_url" and "version"
-             * need not be overriden.
+             * need not be overridden.
              */
             if (isset($data[$entityType])) {
                 continue;

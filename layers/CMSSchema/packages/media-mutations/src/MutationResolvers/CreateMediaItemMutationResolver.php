@@ -183,7 +183,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         );
     }
 
-    protected function additionals(string|int $mediaItemID, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additional(string|int $mediaItemID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         App::doAction(HookNames::CREATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
     }
@@ -255,7 +255,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
         );
 
         // Allow for additional operations
-        $this->additionals($mediaItemID, $fieldDataAccessor);
+        $this->additional($mediaItemID, $fieldDataAccessor);
 
         return $mediaItemID;
     }

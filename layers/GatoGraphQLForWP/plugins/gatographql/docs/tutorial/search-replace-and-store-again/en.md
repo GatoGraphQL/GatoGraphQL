@@ -188,7 +188,7 @@ All URLs which are not surrounded by an anchor tag, such as:
 <p>Visit my website: https://mysite.com.</p>
 ```
 
-...are added the correspondig `<a>` tag around them (while also removing the domain from the text, and adding a `target` to open in a new window), becoming:
+...are added the corresponding `<a>` tag around them (while also removing the domain from the text, and adding a `target` to open in a new window), becoming:
 
 ```html
 <p>Visit my website: <a href="https://mysite.com" target="_blank">mysite.com</a>.</p>

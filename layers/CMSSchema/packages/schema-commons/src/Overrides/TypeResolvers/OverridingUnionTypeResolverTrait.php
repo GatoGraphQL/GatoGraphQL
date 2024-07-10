@@ -25,7 +25,7 @@ trait OverridingUnionTypeResolverTrait
         $objectIDTargetTypeResolvers = [];
         /**
          * We retrieve the original service, which must also be
-         * overriden with a new service for WP
+         * overridden with a new service for WP
          */
         $unionTypeDataLoader = $this->getRelationalTypeDataLoader();
         $resolvedObjectIDs = [];

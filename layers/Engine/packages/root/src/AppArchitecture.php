@@ -36,7 +36,7 @@ class AppArchitecture implements AppArchitectureInterface
     {
         /**
          * If constant ReflectionClass::IS_READONLY does not exist,
-         * then the environment is not runnin PHP 8.1, and then
+         * then the environment is not running PHP 8.1, and then
          * the code has necessarily been downgraded.
          *
          * @see https://www.php.net/manual/en/class.reflectionproperty.php#reflectionproperty.constants.modifiers

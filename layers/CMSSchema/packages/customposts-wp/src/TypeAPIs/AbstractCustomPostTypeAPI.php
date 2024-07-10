@@ -131,7 +131,7 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             $query['fields'] = 'ids';
         }
 
-        // The query overrides the defaults, and is overriden by the required args
+        // The query overrides the defaults, and is overridden by the required args
         $query = [
             ...$this->getCustomPostQueryDefaults(),
             ...$query,

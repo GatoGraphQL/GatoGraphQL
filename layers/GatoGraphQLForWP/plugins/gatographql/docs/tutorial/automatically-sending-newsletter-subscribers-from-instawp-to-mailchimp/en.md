@@ -6,8 +6,8 @@ This GraphQL query captures the email from the visitors who ticked the "Subscrib
 query HasSubscribedToNewsletter {
   hasSubscriberOptin: _httpRequestHasParam(name: "marketing_optin")
   subscriberOptin: _httpRequestStringParam(name: "marketing_optin")
-  isNotSubscriberOptinNAValue: _notEquals(value1: $__subscriberOptin, value2: "NA")
-  subscribedToNewsletter: _and(values: [$__hasSubscriberOptin, $__isNotSubscriberOptinNAValue])
+  isNotSubscriberOptinNAValue: _notEquals(value1: $__subscriberOption, value2: "NA")
+  subscribedToNewsletter: _and(values: [$__hasSubscriberOption, $__isNotSubscriberOptionNAValue])
     @export(as: "subscribedToNewsletter")
 }
 

@@ -97,7 +97,7 @@ if [ -n "$PACKAGES" ]; then
             path=$(composer info $package --path --working-dir=$composer_working_dir | cut -d' ' -f2-)
         fi
 
-        # Optmization: For local dependencies, only analyze src/
+        # Optimization: For local dependencies, only analyze src/
         package_owner=$(echo "$package" | grep -o "\S*\/" | rev | cut -c2- | rev )
         if [[ " ${local_package_owners[@]} " =~ " ${package_owner} " ]]; then
             path="$path/src"

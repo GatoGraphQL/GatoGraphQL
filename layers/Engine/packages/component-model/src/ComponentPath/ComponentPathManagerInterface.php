@@ -17,7 +17,7 @@ interface ComponentPathManagerInterface
      */
     public function setPropagationCurrentPath(?array $propagation_current_path = null): void;
     /**
-     * The `prepare` function advances the componentPath one level down, when interating into the subcomponents, and then calling `restore` the value goes one level up again
+     * The `prepare` function advances the componentPath one level down, when integrating into the subcomponents, and then calling `restore` the value goes one level up again
      * @param array<string,mixed> $props
      */
     public function prepareForPropagation(Component $component, array &$props): void;

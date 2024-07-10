@@ -184,16 +184,16 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         );
     }
 
-    protected function additionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function additional(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
     /**
      * @param array<string,mixed> $log
      */
-    protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
+    protected function updateAdditional(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
     {
     }
-    protected function createAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
+    protected function createAdditional(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
 
@@ -312,8 +312,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionals($customPostID, $fieldDataAccessor);
-        $this->updateAdditionals($customPostID, $fieldDataAccessor, $log);
+        $this->additional($customPostID, $fieldDataAccessor);
+        $this->updateAdditional($customPostID, $fieldDataAccessor, $log);
 
         // Inject Share profiles here
         App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
@@ -345,8 +345,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
         // Allow for additional operations (eg: set Action categories)
-        $this->additionals($customPostID, $fieldDataAccessor);
-        $this->createAdditionals($customPostID, $fieldDataAccessor);
+        $this->additional($customPostID, $fieldDataAccessor);
+        $this->createAdditional($customPostID, $fieldDataAccessor);
 
         // Inject Share profiles here
         App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);

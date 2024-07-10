@@ -25,7 +25,7 @@ export const getTypeFields =
 			);
 			
 			/**
-			 * If there were erros when executing the query, return an empty list, and keep the error in the state
+			 * If there were errors when executing the query, return an empty list, and keep the error in the state
 			 */
 			const maybeErrorMessage = maybeGetErrorMessage(response);
 			if (maybeErrorMessage) {
@@ -64,7 +64,7 @@ export const getGlobalFields =
 			);
 			
 			/**
-			 * If there were erros when executing the query, return an empty list, and keep the error in the state
+			 * If there were errors when executing the query, return an empty list, and keep the error in the state
 			 */
 			const maybeErrorMessage = maybeGetErrorMessage(response);
 			if (maybeErrorMessage) {
@@ -92,7 +92,7 @@ export const getDirectives =
 			);
 			
 			/**
-			 * If there were erros when executing the query, return an empty list, and keep the error in the state
+			 * If there were errors when executing the query, return an empty list, and keep the error in the state
 			 */
 			const maybeErrorMessage = maybeGetErrorMessage(response);
 			if (maybeErrorMessage) {

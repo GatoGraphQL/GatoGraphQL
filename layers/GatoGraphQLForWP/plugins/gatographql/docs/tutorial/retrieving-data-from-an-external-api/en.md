@@ -67,7 +67,7 @@ Field `_sendHTTPRequest` returns an object of type `HTTPResponse`. After executi
 }
 ```
 
-As the content-type of the response is `application/json`, we can trasform the raw body content from `String` to `JSONObject` via field `_strDecodeJSONObject` (from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension):
+As the content-type of the response is `application/json`, we can transform the raw body content from `String` to `JSONObject` via field `_strDecodeJSONObject` (from the [**PHP Functions Via Schema**](https://gatographql.com/extensions/php-functions-via-schema/) extension):
 
 ```graphql
 query {

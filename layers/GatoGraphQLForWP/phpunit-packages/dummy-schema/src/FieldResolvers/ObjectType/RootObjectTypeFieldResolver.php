@@ -87,7 +87,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'dummyMutation' => $this->__('Dummy mutation (nothing really happens, but it returs a String)', 'dummy-schema'),
+            'dummyMutation' => $this->__('Dummy mutation (nothing really happens, but it returns a String)', 'dummy-schema'),
             'dummyReceivingInputObjectWithNestedValidationField' => $this->__('Dummy field, receiving an Input Object containing other Input Objects, to test their validation is performed', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };

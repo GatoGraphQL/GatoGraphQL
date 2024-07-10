@@ -351,9 +351,9 @@ Sum of the integer elements in the array.
 
 Multiple an integer with another integer number.
 
-### `_intSubstract`
+### `_intSubtract`
 
-Substract an integer from another integer number.
+Subtract an integer from another integer number.
 
 ### `_isEmpty`
 
@@ -625,9 +625,9 @@ Add an integer number to the field value.
 
 Multiply an integer number with the field value.
 
-### `@intSubstract`
+### `@intSubtract`
 
-Substract an integer number from the field value.
+Subtract an integer number from the field value.
 
 ### `@objectAddEntry`
 

@@ -50,7 +50,7 @@ function echo_this_in_header(){
 }
 ```
 
-then all that is left for you is to call the hooked function when you want anywhere in your aplication, EX:
+then all that is left for you is to call the hooked function when you want anywhere in your application, EX:
 
 ```PHP
 echo '<div id="extra_header">';

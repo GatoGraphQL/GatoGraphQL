@@ -150,10 +150,10 @@ export default function PersistedQueryEndpointOverview() {
 									<span className="editor-post-url__link-suffix">
 										{ permalinkSuffix }
 									</span>
-									<span className="editor-endoint-custom-post-url__link-view">
+									<span className="editor-endpoint-custom-post-url__link-view">
 										{ '?view=' }
 									</span>
-									<span className="editor-endoint-custom-post-url__link-view-item">
+									<span className="editor-endpoint-custom-post-url__link-view-item">
 										{ 'source' }
 									</span>
 								</>

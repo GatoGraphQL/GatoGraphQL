@@ -32,7 +32,7 @@ class App implements AppInterface
      * This function must be invoked at the very beginning,
      * to initialize the instance to run the application.
      *
-     * Alos it allows to set a new AppThread instance at
+     * Also it allows to set a new AppThread instance at
      * any time, to initiate a new context.
      */
     public static function setAppThread(AppThreadInterface $appThread): void

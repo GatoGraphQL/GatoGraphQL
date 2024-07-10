@@ -102,7 +102,7 @@ return [
         'GatoGraphQL',
         // Own container cache namespace
         // Watch out! This value is being hardcoded!
-        // In the application, it can be overriden via code:
+        // In the application, it can be overridden via code:
         // - ContainerBuilderFactory::getContainerNamespace()
         // - SystemContainerBuilderFactory::getContainerNamespace()
         // But can't reference these classes here, since they are not found

@@ -85,7 +85,7 @@ Custom endpoints are recommended when we need to manage and customize accesses t
 
 Gato GraphQL implements custom endpoints via Custom Post Types (CPTs). This allows us to [publish the custom endpoint as `private`](https://gatographql.com/guides/special-features/public-private-and-password-protected-endpoints/#heading-private-endpoints) (and also as `password-protected`), thus making the custom endpoint accessible only to logged-in users who have the right to access that custom post, and nobody else.
 
-This method is recommended when the GraphQL endpoint is inteded to be used by the admin of the site only (such as when using GraphQL to execute admin tasks). By completely blocking outside visitors from accessing the endpoint, we will be tightening up the security of the site.
+This method is recommended when the GraphQL endpoint is intended to be used by the admin of the site only (such as when using GraphQL to execute admin tasks). By completely blocking outside visitors from accessing the endpoint, we will be tightening up the security of the site.
 
 ## When to use public Persisted Queries
 

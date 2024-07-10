@@ -41,7 +41,7 @@ class GraphQLParserErrorFeedbackItemProvider extends AbstractFeedbackItemProvide
         return match ($code) {
             self::E_1 => $this->__('Incorrect request syntax: %s', 'graphql-server'),
             self::E_2 => $this->__('Can\'t parse argument', 'graphql-parser'),
-            self::E_3 => $this->__('Invalid string unicode escape sequece \'%s\'', 'graphql-server'),
+            self::E_3 => $this->__('Invalid string unicode escape sequence \'%s\'', 'graphql-server'),
             self::E_4 => $this->__('Unexpected string escaped character \'%s\'', 'graphql-server'),
             self::E_5 => $this->__('Can\t recognize token type', 'graphql-server'),
             self::E_6 => $this->__('Unexpected token \'%s\'', 'graphql-server'),
