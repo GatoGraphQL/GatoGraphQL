@@ -164,7 +164,7 @@ query {
         "id": 25,
         "title": "Public or Private API mode, for extra security",
         "categoryNames": [
-          "Resource",
+          "Ressource",
           "Blog",
           "Avancé"
         ]
