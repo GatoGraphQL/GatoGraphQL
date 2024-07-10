@@ -1,0 +1,47 @@
+[files]
+extend-exclude = [
+    ".git/",
+    "**/vendors/**",
+    "**/build/**",
+    "**.wordpress.xml",
+    "**/gatographql-testing-data.xml",
+    "**/fixture-schema/*.json",
+    "layers/GatoGraphQLForWP/plugins/gatographql/extensions/http-request-via-schema/docs/modules/http-request-via-schema/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/docs/tutorial/bulk-translating-block-content-in-multiple-posts-to-a-different-language/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/docs/tutorial/translating-block-content-in-a-post-to-a-different-language/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/docs/tutorial/translating-content-from-url/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/1.2/en.md",
+    "layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Integration/fixture-admin-client/introspection-query.json",
+    "layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Integration/fixture-schema-mutations/success/media-contents:1.var.json",
+    "layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Integration/fixture-queryable-customposts/queryable-customposts:2.json",
+    "layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Integration/fixture-queryable-customposts/queryable-customposts:0.json",
+    "layers/GatoGraphQLForWP/phpunit-packages/wpfaker-schema/resources/_fixed-dataset.wordpress.php",
+    "layers/GatoGraphQLForWP/plugins/gatographql/docs/release-notes/1.2/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/docs/tutorial/translating-content-from-url/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/extensions/google-translate/docs/modules/google-translate/en.md",
+    "layers/GatoGraphQLForWP/plugins/gatographql/setup/persisted-queries/admin/sync/import-posts-from-csv.gql",
+    "**/input-object-inner-validations.json",
+]
+ignore-hidden = false
+
+[default]
+extend-ignore-re = [
+    "And gettin' caught",
+    "Allow URE",
+    "URE source",
+    "X-Github-Access-Token",
+]
+
+[default.extend-identifiers]
+safly = "safly"
+marketing_optin = "marketing_optin"
+hasSubscriberOptin = "hasSubscriberOptin"
+subscriberOptin = "subscriberOptin"
+isNotSubscriberOptinNAValue = "isNotSubscriberOptinNAValue"
+QueryRoot2ndLevel = "QueryRoot2ndLevel"
+inputOn2ndLevel = "inputOn2ndLevel"
+no2ndLevelInput = "no2ndLevelInput"
+
+# Typos
+"Github" = "GitHub"
+"Wordpress" = "WordPress"
