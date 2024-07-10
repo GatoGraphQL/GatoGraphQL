@@ -31,7 +31,7 @@ class AppStateManager implements AppStateManagerInterface
     }
 
     /**
-     * Called by the AppLoader to initalize the state.
+     * Called by the AppLoader to initialize the state.
      *
      * Initialize application state
      *

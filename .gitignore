@@ -6,7 +6,7 @@ phpunit-test-results.xml
 /.phpunit.cache
 .php-cs-fixer.cache
 composer.lock
-# The root composer.lock is commited to the repo,
+# The root composer.lock is committed to the repo,
 # to make sure the CI doesn't fail
 !/composer.lock
 .lando.local.yml

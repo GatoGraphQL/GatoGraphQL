@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\GuzzleHTTP\Upstream;
 
 /**
- * Class copy/pasted from Guzzle, as to support scoping (it can't be overriden,
+ * Class copy/pasted from Guzzle, as to support scoping (it can't be overridden,
  * as it is final).
  *
  * @see https://github.com/guzzle/guzzle/blob/master/src/RequestOptions.php

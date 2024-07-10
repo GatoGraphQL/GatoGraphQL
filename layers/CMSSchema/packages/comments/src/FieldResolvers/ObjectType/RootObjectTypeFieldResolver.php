@@ -284,7 +284,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             case 'comment':
                 /**
                  * Only from the mapped CPTs, otherwise we may get an error when
-                 * the custom post to which the comment was added, is not accesible
+                 * the custom post to which the comment was added, is not accessible
                  * via field `Comment.customPost`:
                  *
                  *   ```

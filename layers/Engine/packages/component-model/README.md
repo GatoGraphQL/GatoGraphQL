@@ -49,7 +49,7 @@ In PoP, everything is a component:
 
 ![In PoP, everything is a component](https://uploads.getpop.org/wp-content/uploads/2018/12/everything-is-a-module.jpg)
 
-The relationship of all components wrapping each other, from the top-most component all the way down to the last level, is called the component hierarchy. The PoP API has the component hierarchy at its core, implemented as an associative array on the server-side, in which each component states its name as the key attribute and whatever properties it needs as values, and then nests its descendant components under property "components", iteratively adding their own data and that of their own descendant components. Finally, this associative array is returned as a JSON object for comsumption through the API:
+The relationship of all components wrapping each other, from the top-most component all the way down to the last level, is called the component hierarchy. The PoP API has the component hierarchy at its core, implemented as an associative array on the server-side, in which each component states its name as the key attribute and whatever properties it needs as values, and then nests its descendant components under property "components", iteratively adding their own data and that of their own descendant components. Finally, this associative array is returned as a JSON object for consumption through the API:
 
 ```javascript
 {
@@ -381,7 +381,7 @@ Component("post-layout")->setProp({
   }
 });
 
-// Layout on the center display a big thumnail to the left of the text
+// Layout on the center display a big thumbnail to the left of the text
 Component("central-section")->setProp({
   componentpath: ["post-layout"],
   prop: "classes",
@@ -392,7 +392,7 @@ Component("central-section")->setProp({
   }
 });
 
-// Layout on the floating window display a small thumnail to the left of the text
+// Layout on the floating window display a small thumbnail to the left of the text
 Component("floating-window")->setProp({
   componentpath: ["post-layout"],
   prop: "classes",
@@ -841,7 +841,7 @@ class SomeComponentProcessor extends \PoP\Engine\AbstractComponentProcessor {
 }
 ```
 
-Once the ComponentProcessor class is instantiated, all of its defined components become available to be added to the component hirarchy.
+Once the ComponentProcessor class is instantiated, all of its defined components become available to be added to the component hierarchy.
 
 To access the properties of a component, we must reference its corresponding ComponentProcessor through function `getComponentProcessor` from class `ComponentProcessor_Manager`:
 
@@ -1504,7 +1504,7 @@ function getFieldprocessor()
 }
 ```
 
-In addition, most likely dataloader will also be in charge of obtaining the `$ids` to fetch from the databse. In this case, it must inherit from class `QueryDataDataloader`, and implement function `getDbobjectIds`:
+In addition, most likely dataloader will also be in charge of obtaining the `$ids` to fetch from the database. In this case, it must inherit from class `QueryDataDataloader`, and implement function `getDbobjectIds`:
 
 ```php
 function getDbobjectIds($data_properties) {
@@ -1721,7 +1721,7 @@ The QueryInputOutputHandler is an object that synchronizes the state of the quer
 
 Before fetching data from the database, function `prepareQueryArgs` populates the `$query_args` object used passed to the dataloader to fetch data. It can get values from the request (eg: set through the application in the client) or define default values.
 
-After fecthing data from the database, functions `getQueryState`, `getQueryParams` and `getQueryResult`, all of them receiving parameters `$data_properties, $checkpoint_validation, $executed, $objectIDs`, send information about the executed query back to the client: state values (eg: are there more results?), parameter values (eg: how many results to bring each time) and result values (eg: was execution successful?) correspondingly.
+After fetching data from the database, functions `getQueryState`, `getQueryParams` and `getQueryResult`, all of them receiving parameters `$data_properties, $checkpoint_validation, $executed, $objectIDs`, send information about the executed query back to the client: state values (eg: are there more results?), parameter values (eg: how many results to bring each time) and result values (eg: was execution successful?) correspondingly.
 
 ### ActionExecuter
 

@@ -440,7 +440,7 @@ Please notice that not all blocks of type `core/heading` have been included: Tho
 
 ### Inconveniences of field `blocks`
 
-Field `blocks` produces the nuissance that, in order to retrieve the whole block data contained in the custom post, including the data for the inner blocks, and their own inner blocks, and so on, we must know how many nested block levels there are in the content, and reflect this information in the GrapQL query.
+Field `blocks` produces the nuisance that, in order to retrieve the whole block data contained in the custom post, including the data for the inner blocks, and their own inner blocks, and so on, we must know how many nested block levels there are in the content, and reflect this information in the GrapQL query.
 
 Or, if we don't know, we must compose the query with enough levels as to be sure that all data will be fetched.
 

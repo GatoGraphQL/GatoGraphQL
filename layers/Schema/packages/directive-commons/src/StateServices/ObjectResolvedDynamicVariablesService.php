@@ -106,7 +106,7 @@ class ObjectResolvedDynamicVariablesService implements ObjectResolvedDynamicVari
             /**
              * If the variable already exists, then show a warning.
              *
-             * When setting the dynamic variable on both a targetted Field
+             * When setting the dynamic variable on both a targeted Field
              * and the "wildcard field", the latter one may continuously
              * receive many values, so disable setting the warning in that
              * situation or the response will be inundated with

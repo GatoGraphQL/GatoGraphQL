@@ -85,7 +85,7 @@ It has these options:
 - Enable nested mutations, keeping all mutation fields in the root
 - Enable nested mutations, removing the redundant mutation fields from the root
 
-These options are set for the GraphQL server in general, but can be overriden for specific Custom Endpoints and Persisted Queries through the Schema Configuration (see the next section).
+These options are set for the GraphQL server in general, but can be overridden for specific Custom Endpoints and Persisted Queries through the Schema Configuration (see the next section).
 
 ### Do no enable nested mutations
 

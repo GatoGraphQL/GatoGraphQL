@@ -122,8 +122,8 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
             'nicename' => $this->__('User\'s nicename', 'pop-users'),
             'nickname' => $this->__('User\'s nickname', 'pop-users'),
             'locale' => $this->__('Retrieves the locale of a user', 'pop-users'),
-            'registeredDate' => $this->__('The date the user registerd on the site', 'pop-users'),
-            'registeredDateStr' => $this->__('The date the user registerd on the site, in String format', 'pop-users'),
+            'registeredDate' => $this->__('The date the user registered on the site', 'pop-users'),
+            'registeredDateStr' => $this->__('The date the user registered on the site, in String format', 'pop-users'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

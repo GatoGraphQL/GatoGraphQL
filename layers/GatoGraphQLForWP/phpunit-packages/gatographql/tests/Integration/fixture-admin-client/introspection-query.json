@@ -16053,7 +16053,7 @@
             },
             {
               "name": "registeredDate",
-              "description": "The date the user registerd on the site",
+              "description": "The date the user registered on the site",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
@@ -16069,7 +16069,7 @@
             },
             {
               "name": "registeredDateStr",
-              "description": "The date the user registerd on the site, in String format",
+              "description": "The date the user registered on the site, in String format",
               "args": [
                 {
                   "name": "format",

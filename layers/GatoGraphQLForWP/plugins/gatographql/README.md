@@ -24,7 +24,7 @@ Check the list of [Supported PHP features](https://github.com/GatoGraphQL/GatoGr
 
 Compiled JavaScript code (such as all files under a block's `build/` folder) is added to the repo, but only as compiled for production, i.e. after running `npm run build`.
 
-Code compiled for development, i.e. after running `npm start`, cannot be commited/pushed to the repo.
+Code compiled for development, i.e. after running `npm start`, cannot be committed/pushed to the repo.
 
 ## Modules
 

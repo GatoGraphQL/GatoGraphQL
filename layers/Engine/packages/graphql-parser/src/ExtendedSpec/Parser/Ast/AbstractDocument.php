@@ -596,8 +596,8 @@ abstract class AbstractDocument extends UpstreamDocument
 
         $operationDependencyDefinitionArguments = $this->getOperationDependencyDefinitionArguments();
         foreach ($operationDependencyDefinitionArguments as $operationDependencyDefinitionArgument) {
-            $dependendUponOperationNames = $this->getDependedUponOperationNamesInArgument($operationDependencyDefinitionArgument);
-            foreach ($dependendUponOperationNames as $dependendUponOperationName) {
+            $dependedUponOperationNames = $this->getDependedUponOperationNamesInArgument($operationDependencyDefinitionArgument);
+            foreach ($dependedUponOperationNames as $dependendUponOperationName) {
                 if (!in_array($dependendUponOperationName, $operationNames)) {
                     throw new InvalidRequestException(
                         new FeedbackItemResolution(
@@ -645,15 +645,15 @@ abstract class AbstractDocument extends UpstreamDocument
          */
         $dependendUponOperationNameOrNames = $argument->getValue();
         if (!is_array($dependendUponOperationNameOrNames)) {
-            $dependendUponOperationNames = [$dependendUponOperationNameOrNames];
+            $dependedUponOperationNames = [$dependendUponOperationNameOrNames];
         } else {
-            $dependendUponOperationNames = $dependendUponOperationNameOrNames;
+            $dependedUponOperationNames = $dependendUponOperationNameOrNames;
         }
 
         /**
          * Make sure each of the elements is a String.
          */
-        foreach ($dependendUponOperationNames as $dependendUponOperationName) {
+        foreach ($dependedUponOperationNames as $dependendUponOperationName) {
             if (!is_string($dependendUponOperationName)) {
                 throw new InvalidRequestException(
                     new FeedbackItemResolution(
@@ -669,7 +669,7 @@ abstract class AbstractDocument extends UpstreamDocument
                 );
             }
         }
-        return $dependendUponOperationNames;
+        return $dependedUponOperationNames;
     }
 
     /**

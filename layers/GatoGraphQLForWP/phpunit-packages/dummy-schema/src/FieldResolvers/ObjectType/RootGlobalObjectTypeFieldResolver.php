@@ -76,7 +76,7 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_dummyGlobalMutation' => $this->__('Dummy global mutation (nothing really happens, but it returs a String)', 'dummy-schema'),
+            '_dummyGlobalMutation' => $this->__('Dummy global mutation (nothing really happens, but it returns a String)', 'dummy-schema'),
             '_dummyGlobalField' => $this->__('Dummy global field', 'dummy-schema'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };

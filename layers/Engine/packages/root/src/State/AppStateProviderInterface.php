@@ -41,7 +41,7 @@ interface AppStateProviderInterface extends ServiceInterface
      * After services have been initialized, we can then "boot" the AppState.
      *
      * Eg: parsing the GraphQL query must be done on this stage,
-     * as to allow the SchemaConfigutationExecuter to inject its hooks
+     * as to allow the SchemaConfigurationExecuter to inject its hooks
      * (eg: Composable Directives enabled?)  in the `boot` stage.
      * Otherwise, the env var would be read before it was properly initialized.
      *

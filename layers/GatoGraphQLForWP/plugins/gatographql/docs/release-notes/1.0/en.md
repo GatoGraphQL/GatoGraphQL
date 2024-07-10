@@ -1607,7 +1607,7 @@ Upgraded the Voyager client to [v1.3.0](https://github.com/graphql-kit/graphql-v
 
 ### Must update mutations `createPost`, `updatePost`, `addCommentToCustomPost` (and others)
 
-The followng mutations must be updated, passing a "oneof" input object for the content argument (either `content` or `comment`):
+The following mutations must be updated, passing a "oneof" input object for the content argument (either `content` or `comment`):
 
 - `Comment.reply`
 - `CustomPost.addComment`

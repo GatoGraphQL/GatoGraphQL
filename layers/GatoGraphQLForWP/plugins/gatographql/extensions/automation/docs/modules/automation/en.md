@@ -45,7 +45,7 @@ For instance:
 }
 ```
 
-These values are overriden by the "dynamic" GraphQL variables (see **Automation trigger(s)** below).
+These values are overridden by the "dynamic" GraphQL variables (see **Automation trigger(s)** below).
 
 **Operation name** (optional): If the persisted query contains more than one operation, you can indicate which one to execute (by default, it is the last one).
 
@@ -305,10 +305,10 @@ query CountComments {
   timeToday: _time
   dateToday: _date(format: $__DATE_ISO8601, timestamp: $__timeToday)
   
-  timeYesterday: _intSubstract(substract: 86400, from: $__timeToday)
+  timeYesterday: _intSubtract(subtract: 86400, from: $__timeToday)
   dateYesterday: _date(format: $__DATE_ISO8601, timestamp: $__timeYesterday)
   
-  time1YearAgo: _intSubstract(substract: 31536000, from: $__timeToday)
+  time1YearAgo: _intSubtract(subtract: 31536000, from: $__timeToday)
   date1YearAgo: _date(format: $__DATE_ISO8601, timestamp: $__time1YearAgo)
 
   timeBegOfThisMonth: _makeTime(hour: 0, minute: 0, second: 0, day: 1)
@@ -337,8 +337,8 @@ This is the number of comments added to the site:
 | --- | --- |
 | **In the last 24 hs**: | {$commentsAddedInLast24Hs} |
 | **In the last 365 days**: | {$commentsAddedInLast1Year} |
-| **Since beggining of this month**: | {$commentsAddedSinceBegOfThisMonth} |
-| **Since beggining of this year**: | {$commentsAddedSinceBegOfThisYear} |
+| **Since begginning of this month**: | {$commentsAddedSinceBegOfThisMonth} |
+| **Since begginning of this year**: | {$commentsAddedSinceBegOfThisYear} |
 
     """
   )

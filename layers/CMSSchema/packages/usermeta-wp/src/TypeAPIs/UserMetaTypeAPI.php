@@ -30,7 +30,7 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
          * This function does not differentiate between a stored empty value,
          * and a non-existing key!
          *
-         * So if empty, treat it as non-existant and return null.
+         * So if empty, treat it as non-existent and return null.
          */
         $value = \get_user_meta((int)$userID, $key, $single);
         if (($single && $value === '') || (!$single && $value === [])) {

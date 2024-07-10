@@ -14,7 +14,7 @@
 #
 #   <p>Visit my website: https://mysite.com.</p>
 #
-# ...are added the correspondig `<a>` tag around them (while also
+# ...are added the corresponding `<a>` tag around them (while also
 # removing the domain from the text, and adding a target to open in
 # a new window), becoming:
 #

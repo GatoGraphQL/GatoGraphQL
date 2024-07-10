@@ -46,10 +46,10 @@ query GetCustomizedPosts {
 }
 ```
 
-Having support for dynamc variables gives us several benefits, including:
+Having support for dynamic variables gives us several benefits, including:
 
 - Increased performance via the **Multiple Query Execution** extension: Execute a first query, export its field value(s) via some dynamic variables, and input these into a second query which will be executed immediately, already on the same request
-- Field value manipulation: By exporting the value from a field as a dynamic variable, it can be input into a "function field" (`_sprintf`, `_strSubstr`, `_not`, and many others; check the **PHP Functions via Schema** extension), thus manipulating the field in the server before sending it back in the reponse
+- Field value manipulation: By exporting the value from a field as a dynamic variable, it can be input into a "function field" (`_sprintf`, `_strSubstr`, `_not`, and many others; check the **PHP Functions via Schema** extension), thus manipulating the field in the server before sending it back in the response
 
 ## Further examples
 

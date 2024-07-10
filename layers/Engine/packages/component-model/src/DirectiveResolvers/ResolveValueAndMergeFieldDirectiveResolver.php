@@ -213,7 +213,7 @@ final class ResolveValueAndMergeFieldDirectiveResolver extends AbstractGlobalFie
         /**
          * Object-resolved dynamic variables are those generated on runtime
          * when resolving the GraphQL query (eg: via @export),
-         * with a value targetted for a specific object
+         * with a value targeted for a specific object
          *
          * @var SplObjectStorage<FieldInterface,array<string|int,array<string,mixed>>> SplObjectStorage<Field, [objectID => [dynamicVariableName => value]]>
          */

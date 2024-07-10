@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Security\UserAuthorizationSchemes;
 
-class AdmininstratorRoleUserAuthorizationScheme extends AbstractByRoleUserAuthorizationScheme
+class AdministratorRoleUserAuthorizationScheme extends AbstractByRoleUserAuthorizationScheme
 {
     /**
      * @return string[]
