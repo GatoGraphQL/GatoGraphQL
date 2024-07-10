@@ -35,9 +35,6 @@ extend-ignore-re = [
 [default.extend-identifiers]
 safly = "safly"
 marketing_optin = "marketing_optin"
-hasSubscriberOptin = "hasSubscriberOptin"
-subscriberOptin = "subscriberOptin"
-isNotSubscriberOptinNAValue = "isNotSubscriberOptinNAValue"
 QueryRoot2ndLevel = "QueryRoot2ndLevel"
 inputOn2ndLevel = "inputOn2ndLevel"
 no2ndLevelInput = "no2ndLevelInput"
