@@ -288,6 +288,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 3.1.0 =
 * Use bulk mutations in predefined persisted queries (#2728)
+* Fixed: Don't replace chars in translation persisted queries (#2731)
 
 = 3.0.0 =
 * Breaking change: Require at least WordPress v6.0 (#2719)
