@@ -670,9 +670,6 @@ query EscapeRegexStrings
           @underEachArrayItem
             @strReplaceMultiple(
               search: [
-                "’",
-                "ñ",
-
                 "\\",
                 "^",
                 "$",
@@ -690,9 +687,6 @@ query EscapeRegexStrings
                 "+"
               ],
               replaceWith: [
-                "&#8217;",
-                "&#241;",
-
                 "\\\\",
                 "\\^",
                 "\\$",
