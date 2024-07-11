@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Use bulk mutations in predefined persisted queries (#2728)
 
+### Fixed
+
+- Don't replace chars in translation persisted queries (#2731)
+
 ## 3.0.0 - 10/07/2024
 
 ### Breaking changes
