@@ -6,6 +6,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
 
+use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\FixtureWebserverRequestTestCaseTrait;
 use function file_get_contents;
 
 /**
@@ -14,6 +15,7 @@ use function file_get_contents;
 abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase
 {
     use FixtureTestCaseTrait;
+    use FixtureWebserverRequestTestCaseTrait;
 
     /**
      * Since PHPUnit v10, this is not possible anymore!
@@ -58,7 +60,8 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             if (\file_exists($pluginOnlyOneEnabledGraphQLResponseFile)) {
                 $pluginOnlyOneEnabledGraphQLResponse = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
             }
-
+            $pluginGraphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
+            
             // The plugin name is created by the folder (plugin vendor) + fileName (plugin name)
             $pluginVendor = substr($filePath, strlen($fixtureFolder . '/'));
             $pluginName = $pluginVendor . '/' . $fileName;
@@ -69,6 +72,9 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             ];
             if ($pluginOnlyOneEnabledGraphQLResponse !== null) {
                 $pluginEntries[$pluginName]['response-only-one-enabled'] = $pluginOnlyOneEnabledGraphQLResponse;
+            }
+            if (\file_exists($pluginGraphQLVariablesFile)) {
+                $pluginEntries[$pluginName]['variables'] = static::getGraphQLVariables($pluginGraphQLVariablesFile);
             }
         }
         return static::customizePluginNameEntries($pluginEntries);

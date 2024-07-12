@@ -90,6 +90,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $endpoint,
                 [],
                 $pluginEntry['query'],
+                $pluginEntry['variables'] ?? [],
             ];
             $providerEntries[$pluginName . ':disabled'] = [
                 'application/json',
@@ -97,6 +98,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $endpoint,
                 [],
                 $pluginEntry['query'],
+                $pluginEntry['variables'] ?? [],
             ];
             if (isset($pluginEntry['response-only-one-enabled'])) {
                 $providerEntries[$pluginName . ':only-one-enabled'] = [
@@ -105,6 +107,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                     $endpoint,
                     [],
                     $pluginEntry['query'],
+                    $pluginEntry['variables'] ?? [],
                 ];
             }
         }
