@@ -75,6 +75,47 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             }
             if (\file_exists($pluginGraphQLVariablesFile)) {
                 $pluginEntries[$pluginName]['variables'] = static::getGraphQLVariables($pluginGraphQLVariablesFile);
+
+                /**
+                 * Check if there are additional response entries (with different vars)
+                 * for the same query. For that, search for all items of type :{number}.var.json,
+                 * and add those entries with the same query.
+                 */
+                $additionalPluginGraphQLVariablesFiles = static::findFilesInDirectory(
+                    $filePath,
+                    [$fileName . ':*.var.json'],
+                );
+                foreach ($additionalPluginGraphQLVariablesFiles as $additionalPluginGraphQLVariablesFile) {
+                    $additionalFileName = $additionalPluginGraphQLVariablesFile->getFilenameWithoutExtension();
+                    $additionalFileNumberWithSuffix = substr($additionalFileName, strpos($additionalFileName, ':') + 1);
+                    $additionalFileNumber = substr($additionalFileNumberWithSuffix, 0, strpos($additionalFileNumberWithSuffix, '.var'));
+                    if (!is_numeric($additionalFileNumber)) {
+                        continue;
+                    }
+                    $additionalPluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':enabled.json';
+                    if (!\file_exists($additionalPluginEnabledGraphQLResponseFile)) {
+                        static::throwFileNotExistsException($additionalPluginEnabledGraphQLResponseFile);
+                    }
+                    $additionalPluginDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':disabled.json';
+                    if (!\file_exists($additionalPluginDisabledGraphQLResponseFile)) {
+                        static::throwFileNotExistsException($additionalPluginDisabledGraphQLResponseFile);
+                    }
+                    $additionalPluginOnlyOneEnabledGraphQLResponse = null;
+                    $additionalPluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
+                    if (\file_exists($additionalPluginOnlyOneEnabledGraphQLResponseFile)) {
+                        $additionalPluginOnlyOneEnabledGraphQLResponse = file_get_contents($additionalPluginOnlyOneEnabledGraphQLResponseFile);
+                    }
+                    $additionalPluginName = $pluginName . ':' . $additionalFileNumber;
+                    $pluginEntries[$additionalPluginName] = [
+                        'query' => $query,
+                        'response-enabled' => file_get_contents($additionalPluginEnabledGraphQLResponseFile),
+                        'response-disabled' => file_get_contents($additionalPluginDisabledGraphQLResponseFile),
+                    ];
+                    if ($additionalPluginOnlyOneEnabledGraphQLResponse !== null) {
+                        $pluginEntries[$additionalPluginName]['response-only-one-enabled'] = $additionalPluginOnlyOneEnabledGraphQLResponse;
+                    }
+                    $pluginEntries[$additionalPluginName]['variables'] = static::getGraphQLVariables($additionalPluginGraphQLVariablesFile->getRealPath());
+                }
             }
         }
         return static::customizePluginNameEntries($pluginEntries);
