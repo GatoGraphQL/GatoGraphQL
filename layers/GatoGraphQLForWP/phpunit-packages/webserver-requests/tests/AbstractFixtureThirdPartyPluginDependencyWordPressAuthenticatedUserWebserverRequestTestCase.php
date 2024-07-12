@@ -88,27 +88,21 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                     if (!is_numeric($additionalFileNumber)) {
                         continue;
                     }
-                    $additionalPluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':enabled.json';
-                    if (!\file_exists($additionalPluginEnabledGraphQLResponseFile)) {
-                        static::throwFileNotExistsException($additionalPluginEnabledGraphQLResponseFile);
-                    }
-                    $additionalPluginDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':disabled.json';
-                    if (!\file_exists($additionalPluginDisabledGraphQLResponseFile)) {
-                        static::throwFileNotExistsException($additionalPluginDisabledGraphQLResponseFile);
-                    }
-                    $additionalPluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
                     $additionalPluginName = $pluginName . ':' . $additionalFileNumber;
                     $pluginEntries[$additionalPluginName] = [
                         'query' => $query,
                         'variables' => static::getGraphQLVariables($additionalPluginGraphQLVariablesFile->getRealPath()),
                     ];
                     // For the variations, make the "enable" and "disable" responses optional
+                    $additionalPluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':enabled.json';
                     if (\file_exists($additionalPluginEnabledGraphQLResponseFile)) {
                         $pluginEntries[$additionalPluginName]['response-enabled'] = file_get_contents($additionalPluginEnabledGraphQLResponseFile);
                     }
+                    $additionalPluginDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':disabled.json';
                     if (\file_exists($additionalPluginDisabledGraphQLResponseFile)) {
                         $pluginEntries[$additionalPluginName]['response-disabled'] = file_get_contents($additionalPluginDisabledGraphQLResponseFile);
                     }                    
+                    $additionalPluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
                     if (\file_exists($additionalPluginOnlyOneEnabledGraphQLResponseFile)) {
                         $pluginEntries[$additionalPluginName]['response-only-one-enabled'] = file_get_contents($additionalPluginOnlyOneEnabledGraphQLResponseFile);
                     }
