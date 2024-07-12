@@ -7,6 +7,7 @@ namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Term;
+use WP_Error;
 
 class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
 {
@@ -19,5 +20,10 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     {
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->taxonomy;
+    }
+    public function taxonomyTermExists(int|string $id): bool
+    {
+        $taxonomyTermExists = term_exists($id);
+        return $taxonomyTermExists !==  null;
     }
 }
