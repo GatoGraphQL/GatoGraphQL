@@ -55,11 +55,7 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             if (!\file_exists($pluginDisabledGraphQLResponseFile)) {
                 static::throwFileNotExistsException($pluginDisabledGraphQLResponseFile);
             }
-            $pluginOnlyOneEnabledGraphQLResponse = null;
             $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
-            if (\file_exists($pluginOnlyOneEnabledGraphQLResponseFile)) {
-                $pluginOnlyOneEnabledGraphQLResponse = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
-            }
             $pluginGraphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
             
             // The plugin name is created by the folder (plugin vendor) + fileName (plugin name)
@@ -70,8 +66,8 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                 'response-enabled' => file_get_contents($pluginEnabledGraphQLResponseFile),
                 'response-disabled' => file_get_contents($pluginDisabledGraphQLResponseFile),
             ];
-            if ($pluginOnlyOneEnabledGraphQLResponse !== null) {
-                $pluginEntries[$pluginName]['response-only-one-enabled'] = $pluginOnlyOneEnabledGraphQLResponse;
+            if (\file_exists($pluginOnlyOneEnabledGraphQLResponseFile)) {
+                $pluginEntries[$pluginName]['response-only-one-enabled'] = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
             }
             if (\file_exists($pluginGraphQLVariablesFile)) {
                 $pluginEntries[$pluginName]['variables'] = static::getGraphQLVariables($pluginGraphQLVariablesFile);
@@ -100,21 +96,22 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                     if (!\file_exists($additionalPluginDisabledGraphQLResponseFile)) {
                         static::throwFileNotExistsException($additionalPluginDisabledGraphQLResponseFile);
                     }
-                    $additionalPluginOnlyOneEnabledGraphQLResponse = null;
                     $additionalPluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
-                    if (\file_exists($additionalPluginOnlyOneEnabledGraphQLResponseFile)) {
-                        $additionalPluginOnlyOneEnabledGraphQLResponse = file_get_contents($additionalPluginOnlyOneEnabledGraphQLResponseFile);
-                    }
                     $additionalPluginName = $pluginName . ':' . $additionalFileNumber;
                     $pluginEntries[$additionalPluginName] = [
                         'query' => $query,
-                        'response-enabled' => file_get_contents($additionalPluginEnabledGraphQLResponseFile),
-                        'response-disabled' => file_get_contents($additionalPluginDisabledGraphQLResponseFile),
+                        'variables' => static::getGraphQLVariables($additionalPluginGraphQLVariablesFile->getRealPath()),
                     ];
-                    if ($additionalPluginOnlyOneEnabledGraphQLResponse !== null) {
-                        $pluginEntries[$additionalPluginName]['response-only-one-enabled'] = $additionalPluginOnlyOneEnabledGraphQLResponse;
+                    // For the variations, make the "enable" and "disable" responses optional
+                    if (\file_exists($additionalPluginEnabledGraphQLResponseFile)) {
+                        $pluginEntries[$additionalPluginName]['response-enabled'] = file_get_contents($additionalPluginEnabledGraphQLResponseFile);
                     }
-                    $pluginEntries[$additionalPluginName]['variables'] = static::getGraphQLVariables($additionalPluginGraphQLVariablesFile->getRealPath());
+                    if (\file_exists($additionalPluginDisabledGraphQLResponseFile)) {
+                        $pluginEntries[$additionalPluginName]['response-disabled'] = file_get_contents($additionalPluginDisabledGraphQLResponseFile);
+                    }                    
+                    if (\file_exists($additionalPluginOnlyOneEnabledGraphQLResponseFile)) {
+                        $pluginEntries[$additionalPluginName]['response-only-one-enabled'] = file_get_contents($additionalPluginOnlyOneEnabledGraphQLResponseFile);
+                    }
                 }
             }
         }

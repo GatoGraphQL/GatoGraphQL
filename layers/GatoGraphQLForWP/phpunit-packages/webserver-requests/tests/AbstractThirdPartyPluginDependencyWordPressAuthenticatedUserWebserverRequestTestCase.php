@@ -84,22 +84,26 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $endpoint = static::getEndpoint();
         $providerEntries = [];
         foreach (static::getPluginNameEntries() as $pluginName => $pluginEntry) {
-            $providerEntries[$pluginName . ':enabled'] = [
-                'application/json',
-                $pluginEntry['response-enabled'],
-                $endpoint,
-                [],
-                $pluginEntry['query'],
-                $pluginEntry['variables'] ?? [],
-            ];
-            $providerEntries[$pluginName . ':disabled'] = [
-                'application/json',
-                $pluginEntry['response-disabled'],
-                $endpoint,
-                [],
-                $pluginEntry['query'],
-                $pluginEntry['variables'] ?? [],
-            ];
+            if (isset($pluginEntry['response-enabled'])) {
+                $providerEntries[$pluginName . ':enabled'] = [
+                    'application/json',
+                    $pluginEntry['response-enabled'],
+                    $endpoint,
+                    [],
+                    $pluginEntry['query'],
+                    $pluginEntry['variables'] ?? [],
+                ];
+            }
+            if (isset($pluginEntry['response-disabled'])) {
+                $providerEntries[$pluginName . ':disabled'] = [
+                    'application/json',
+                    $pluginEntry['response-disabled'],
+                    $endpoint,
+                    [],
+                    $pluginEntry['query'],
+                    $pluginEntry['variables'] ?? [],
+                ];
+            }
             if (isset($pluginEntry['response-only-one-enabled'])) {
                 $providerEntries[$pluginName . ':only-one-enabled'] = [
                     'application/json',
