@@ -7,7 +7,6 @@ namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Term;
-use WP_Error;
 
 class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
 {
