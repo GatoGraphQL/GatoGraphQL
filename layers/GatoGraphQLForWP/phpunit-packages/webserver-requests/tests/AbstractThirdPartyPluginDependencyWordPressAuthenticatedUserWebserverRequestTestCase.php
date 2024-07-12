@@ -84,6 +84,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $endpoint = static::getEndpoint();
         $providerEntries = [];
         foreach (static::getPluginNameEntries() as $pluginName => $pluginEntry) {
+            // Only for the variations, the "enable" and "disable" responses are optional
             if (isset($pluginEntry['response-enabled'])) {
                 $providerEntries[$pluginName . ':enabled'] = [
                     'application/json',
