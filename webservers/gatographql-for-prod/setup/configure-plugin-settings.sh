@@ -3,6 +3,7 @@ echo Configuring the Gato GraphQL plugin settings
 echo Enabling modules for DEV
 
 ADMIN_USER_APP_PASSWORD=$(wp user meta get 1 app_password)
+# Using "localhost:89347" is not visible from within the container, so point straight to localhost, it always works
 # SITE_DOMAIN=$(wp option get siteurl)
 SITE_DOMAIN=https://localhost
 
