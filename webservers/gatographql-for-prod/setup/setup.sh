@@ -12,7 +12,7 @@ LOCALHOST_WEBSERVER_DOMAIN="$1"
 ########################################################################
 # Required vars
 # ----------------------------------------------------------------------
-WEBSERVER_DOMAIN=$(/bin/bash /app/setup/calculate-webserver-domain.sh "$LOCALHOST_WEBSERVER_DOMAIN")
+WEBSERVER_DOMAIN=$(/bin/bash /app/utils/calculate-webserver-domain.sh "$LOCALHOST_WEBSERVER_DOMAIN")
 
 echo "# ----------------------------------------------------------------------"
 echo "# LOCALHOST_WEBSERVER_DOMAIN: '${LOCALHOST_WEBSERVER_DOMAIN}'"
