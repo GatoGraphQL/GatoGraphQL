@@ -84,20 +84,27 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $endpoint = static::getEndpoint();
         $providerEntries = [];
         foreach (static::getPluginNameEntries() as $pluginName => $pluginEntry) {
-            $providerEntries[$pluginName . ':enabled'] = [
-                'application/json',
-                $pluginEntry['response-enabled'],
-                $endpoint,
-                [],
-                $pluginEntry['query'],
-            ];
-            $providerEntries[$pluginName . ':disabled'] = [
-                'application/json',
-                $pluginEntry['response-disabled'],
-                $endpoint,
-                [],
-                $pluginEntry['query'],
-            ];
+            // Only for the variations, the "enable" and "disable" responses are optional
+            if (isset($pluginEntry['response-enabled'])) {
+                $providerEntries[$pluginName . ':enabled'] = [
+                    'application/json',
+                    $pluginEntry['response-enabled'],
+                    $endpoint,
+                    [],
+                    $pluginEntry['query'],
+                    $pluginEntry['variables'] ?? [],
+                ];
+            }
+            if (isset($pluginEntry['response-disabled'])) {
+                $providerEntries[$pluginName . ':disabled'] = [
+                    'application/json',
+                    $pluginEntry['response-disabled'],
+                    $endpoint,
+                    [],
+                    $pluginEntry['query'],
+                    $pluginEntry['variables'] ?? [],
+                ];
+            }
             if (isset($pluginEntry['response-only-one-enabled'])) {
                 $providerEntries[$pluginName . ':only-one-enabled'] = [
                     'application/json',
@@ -105,6 +112,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                     $endpoint,
                     [],
                     $pluginEntry['query'],
+                    $pluginEntry['variables'] ?? [],
                 ];
             }
         }
@@ -142,9 +150,14 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
 
     /**
      * Support executing many enable/disable plugin tests:
-     * If the $dataName ends with ":1" or ":2" or etc, strip
-     * them off, as they are "this is another test of the
-     * same plugin"
+     * If the $dataName ends with "__{number}" (such as "__1",
+     * or "__2" or etc), strip them off, as they are
+     * "this is another test of the same plugin".
+     *
+     * Also, each of those tests can have variations via
+     * additional .var.json files. In that case, the name
+     * will end with ":{number}", like "test:1.var.json"
+     * or "test__1:1.var.json"
      */
     protected function getPluginNameFromDataName(string $dataName): string
     {
@@ -158,7 +171,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             break;
         }
         $matches = [];
-        if (preg_match('/(.*)\:\d+/', $pluginName, $matches)) {
+        if (preg_match('/(.*)__\d+(\:\d+)?/', $pluginName, $matches)) {
             return $matches[1];
         }
         return $pluginName;

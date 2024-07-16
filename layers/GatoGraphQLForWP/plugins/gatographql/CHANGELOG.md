@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Use bulk mutations in predefined persisted queries (#2728)
+- Added documentation for new PRO module **Polylang Mutations** (#2733)
 
 ### Fixed
 

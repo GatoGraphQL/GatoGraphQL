@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GraphQLByPoP\GraphQLServer\Unit\FixtureQueryExecutionGraphQLServerTestCaseTrait;
-use RuntimeException;
-use stdClass;
 
 use function file_exists;
 use function file_get_contents;
-use function json_decode;
 
 trait FixtureEndpointWebserverRequestTestCaseTrait
 {
     use FixtureQueryExecutionGraphQLServerTestCaseTrait;
+    use FixtureWebserverRequestTestCaseTrait;
 
     /**
      * Retrieve all GraphQL query files and their expected
@@ -118,36 +116,6 @@ trait FixtureEndpointWebserverRequestTestCaseTrait
             }
         }
         return static::customizeProviderEndpointEntries($providerItems);
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
-    protected static function getGraphQLVariables(string $graphQLVariablesFile): array
-    {
-        if (!file_exists($graphQLVariablesFile)) {
-            return [];
-        }
-
-        $fileContents = file_get_contents($graphQLVariablesFile);
-        if ($fileContents === false) {
-            throw new RuntimeException(
-                sprintf(
-                    'File "%s" cannot be read',
-                    $graphQLVariablesFile
-                )
-            );
-        }
-        $variables = json_decode($fileContents);
-        if (!is_array($variables) && !($variables instanceof stdClass)) {
-            throw new RuntimeException(
-                sprintf(
-                    'Decoding the JSON inside file "%s" failed',
-                    $graphQLVariablesFile
-                )
-            );
-        }
-        return (array) $variables;
     }
 
     protected static function getMainFixtureOperationName(string $dataName): ?string
