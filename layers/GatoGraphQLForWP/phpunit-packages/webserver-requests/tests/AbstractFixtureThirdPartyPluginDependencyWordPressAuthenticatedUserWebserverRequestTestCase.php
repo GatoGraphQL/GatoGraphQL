@@ -85,7 +85,9 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                 foreach ($additionalPluginGraphQLVariablesFiles as $additionalPluginGraphQLVariablesFile) {
                     $additionalFileName = $additionalPluginGraphQLVariablesFile->getFilenameWithoutExtension();
                     $additionalFileNumberWithSuffix = substr($additionalFileName, strpos($additionalFileName, ':') + 1);
-                    $additionalFileNumber = substr($additionalFileNumberWithSuffix, 0, strpos($additionalFileNumberWithSuffix, '.var'));
+                    /** @var int */
+                    $dotVarPos = strpos($additionalFileNumberWithSuffix, '.var');
+                    $additionalFileNumber = substr($additionalFileNumberWithSuffix, 0, $dotVarPos);
                     if (!is_numeric($additionalFileNumber)) {
                         continue;
                     }
