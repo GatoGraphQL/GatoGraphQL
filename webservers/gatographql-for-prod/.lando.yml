@@ -15,4 +15,5 @@ services:
   database:
     portforward: true
 env_file:
+  - defaults.env
   - defaults.local.env

@@ -57,7 +57,7 @@
             "lando wp db reset --yes",
             "@install-site"
         ],
-        "install-site": "lando composer install-site-within-container",
+        "install-site": "lando composer install-site-within-container -- \"$(lando info | grep -E -o 'https:\/\/localhost:[0-9]+' | grep -E -o 'localhost:[0-9]+')\"",
         "install-site-within-container": "/bin/bash /app/setup/setup.sh",
         "import-data": "lando composer import-data-within-container",
         "import-data-within-container": "/bin/bash /app/setup/import-data.sh",

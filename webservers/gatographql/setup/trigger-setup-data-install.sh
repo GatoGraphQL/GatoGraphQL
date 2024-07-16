@@ -1,4 +1,6 @@
 #!/bin/bash
 # Call any WordPress page on the site, to trigger the "Install Setup Data" process
 # and generate the entities
-curl -I https://gatographql.lndo.site/wp-admin/
+# WEBSERVER_DOMAIN="$1"
+# curl -I "https://$(echo $WEBSERVER_DOMAIN)/wp-admin/"
+curl -I "https://localhost/wp-admin/"
