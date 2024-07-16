@@ -22,5 +22,6 @@ services:
       environment:
         XDEBUG_MODE: ''
 env_file:
+  - defaults.app.env
   - defaults.env
   - defaults.local.env
