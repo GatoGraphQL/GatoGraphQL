@@ -3,7 +3,8 @@ echo Configuring the Gato GraphQL plugin settings
 echo Enabling modules for DEV
 
 ADMIN_USER_APP_PASSWORD=$(wp user meta get 1 app_password)
-SITE_DOMAIN=$(wp option get siteurl)
+# SITE_DOMAIN=$(wp option get siteurl)
+SITE_DOMAIN=https://localhost
 
 curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
