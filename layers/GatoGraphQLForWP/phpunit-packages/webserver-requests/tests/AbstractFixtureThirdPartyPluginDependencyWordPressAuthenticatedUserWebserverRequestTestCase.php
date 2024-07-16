@@ -80,6 +80,7 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                 $additionalPluginGraphQLVariablesFiles = static::findFilesInDirectory(
                     $filePath,
                     [$fileName . ':*.var.json'],
+                    ['*.disabled.var.json']
                 );
                 foreach ($additionalPluginGraphQLVariablesFiles as $additionalPluginGraphQLVariablesFile) {
                     $additionalFileName = $additionalPluginGraphQLVariablesFile->getFilenameWithoutExtension();
