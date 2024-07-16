@@ -150,8 +150,8 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
 
     /**
      * Support executing many enable/disable plugin tests:
-     * If the $dataName ends with "+{number}" (such as "+1",
-     * or "+2" or etc), strip them off, as they are
+     * If the $dataName ends with "@{number}" (such as "@1",
+     * or "@2" or etc), strip them off, as they are
      * "this is another test of the same plugin".
      *
      * Also, each of those tests can have variations via
@@ -171,7 +171,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             break;
         }
         $matches = [];
-        if (preg_match('/(.*)\+\d+(\:\d+)?/', $pluginName, $matches)) {
+        if (preg_match('/(.*)@\d+(\:\d+)?/', $pluginName, $matches)) {
             return $matches[1];
         }
         return $pluginName;
