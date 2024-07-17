@@ -168,7 +168,6 @@ query ExportMissingTranslationLanguages(
 
 query CreateTranslationPostInputsForMissingLanguages
   @depends(on: "ExportMissingTranslationLanguages")
-  @include(if: $canTranslateOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
   createTranslationPostInputs: _echo(value: $missingTranslationLanguages)
@@ -216,7 +215,6 @@ query CreateTranslationPostInputsForMissingLanguages
 
 mutation CreateTranslationPostForMissingLanguages
   @depends(on: "CreateTranslationPostInputsForMissingLanguages")
-  @include(if: $canTranslateOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
   translationPosts: createPosts(inputs: $createTranslationPostInputs) {
@@ -237,7 +235,6 @@ mutation CreateTranslationPostsAssociation(
   $postId: ID!
 )
   @depends(on: "CreateTranslationPostForMissingLanguages")
-  @include(if: $canTranslateOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
   allTranslationPostIDs: _arrayMerge(
