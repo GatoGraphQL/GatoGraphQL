@@ -2,7 +2,6 @@
 # 
 # Variables:
 #   - postId: The post with the origin language, from where all translations will be made
-#   - createTranslationPosts: Indicate if to create the translation posts if missing. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
 #   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
 #   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
@@ -36,95 +35,14 @@
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
-  emptyString: _echo(value: null)
-    @export(as: "fromLanguage")
-    @remove
-
   emptyBool: _echo(value: false)
     @export(as: "canTranslateOriginPost")
     @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasTranslationPosts")
-    @export(as: "executeTranslation")
     @remove
-  
+
   emptyArray: _echo(value: [])
-    @export(as: "currentlyExistingTranslationLanguages")
-    @export(as: "currentlyExistingTranslationPostIDs")
     @export(as: "createdTranslationPostIDs")
-    @export(as: "translationPostIds")
-
-    @export(as: "originCoreHeadingContentItems")
-    @export(as: "originCoreHeadingContentReplacementsFrom")
-    @export(as: "originCoreHeadingContentReplacementsTo")
-
-    @export(as: "originCoreParagraphContentItems")
-    @export(as: "originCoreParagraphContentReplacementsFrom")
-    @export(as: "originCoreParagraphContentReplacementsTo")
-
-    @export(as: "originCoreImageAltItems")
-    @export(as: "originCoreImageAltReplacementsFrom")
-    @export(as: "originCoreImageAltReplacementsTo")
-
-    @export(as: "originCoreImageCaptionItems")
-    @export(as: "originCoreImageCaptionReplacementsFrom")
-    @export(as: "originCoreImageCaptionReplacementsTo")
-
-    @export(as: "originCoreButtonTextItems")
-    @export(as: "originCoreButtonTextReplacementsFrom")
-    @export(as: "originCoreButtonTextReplacementsTo")
-
-    @export(as: "originCoreTableCaptionItems")
-    @export(as: "originCoreTableCaptionReplacementsFrom")
-    @export(as: "originCoreTableCaptionReplacementsTo")
-
-    @export(as: "originCoreTableBodyCellsContentItems")
-    @export(as: "originCoreTableBodyCellsContentReplacementsFrom")
-    @export(as: "originCoreTableBodyCellsContentReplacementsTo")
-
-    @export(as: "originCoreListItemContentItems")
-    @export(as: "originCoreListItemContentReplacementsFrom")
-    @export(as: "originCoreListItemContentReplacementsTo")
-
-    @export(as: "originCoreCoverAltItems")
-    @export(as: "originCoreCoverAltReplacementsFrom")
-    @export(as: "originCoreCoverAltReplacementsTo")
-
-    @export(as: "originCoreMediaTextAltItems")
-    @export(as: "originCoreMediaTextAltReplacementsFrom")
-    @export(as: "originCoreMediaTextAltReplacementsTo")
-
-    @export(as: "originCoreVerseContentItems")
-    @export(as: "originCoreVerseContentReplacementsFrom")
-    @export(as: "originCoreVerseContentReplacementsTo")
-
-    @export(as: "originCoreQuoteCitationItems")
-    @export(as: "originCoreQuoteCitationReplacementsFrom")
-    @export(as: "originCoreQuoteCitationReplacementsTo")
-
-    @export(as: "originCorePullquoteCitationItems")
-    @export(as: "originCorePullquoteCitationReplacementsFrom")
-    @export(as: "originCorePullquoteCitationReplacementsTo")
-
-    @export(as: "originCorePullquoteValueItems")
-    @export(as: "originCorePullquoteValueReplacementsFrom")
-    @export(as: "originCorePullquoteValueReplacementsTo")
-
-    @export(as: "originCoreAudioCaptionItems")
-    @export(as: "originCoreAudioCaptionReplacementsFrom")
-    @export(as: "originCoreAudioCaptionReplacementsTo")
-
-    @export(as: "originCoreVideoCaptionItems")
-    @export(as: "originCoreVideoCaptionReplacementsFrom")
-    @export(as: "originCoreVideoCaptionReplacementsTo")
-
-    @export(as: "originCorePreformattedContentItems")
-    @export(as: "originCorePreformattedContentReplacementsFrom")
-    @export(as: "originCorePreformattedContentReplacementsTo")
-
-    @export(as: "originCoreEmbedCaptionItems")
-    @export(as: "originCoreEmbedCaptionReplacementsFrom")
-    @export(as: "originCoreEmbedCaptionReplacementsTo")
-
     @remove
 }
 
@@ -178,253 +96,6 @@ query ExportOriginPost(
       @export(as: "currentlyExistingTranslationLanguages")
     currentlyExistingTranslationPostIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "currentlyExistingTranslationPostIDs")
-
-
-    rawTitle
-      @export(as: "originRawTitle")
-    rawContent
-      @export(as: "originRawContent")
-    rawExcerpt
-      @export(as: "originRawExcerpt")
-    
-
-    originCoreHeading: blockFlattenedDataItems(
-      filterBy: { include: "core/heading" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreHeadingContentItems"
-          )
-    
-
-    originCoreParagraph: blockFlattenedDataItems(
-      filterBy: { include: "core/paragraph" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreParagraphContentItems"
-          )
-    
-
-    originCoreImage: blockFlattenedDataItems(
-      filterBy: { include: "core/image" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { key: "attributes" }
-          affectDirectivesUnderPos: [1, 3]
-        )
-          @underJSONObjectProperty(
-            by: { key: "alt" }
-            failIfNonExistingKeyOrPath: false
-          )
-            @export(
-              as: "originCoreImageAltItems"
-            )
-    
-          @underJSONObjectProperty(
-            by: { key: "caption" }
-            failIfNonExistingKeyOrPath: false
-          )
-            @export(
-              as: "originCoreImageCaptionItems"
-            )
-
-    
-    originCoreButton: blockFlattenedDataItems(
-      filterBy: { include: "core/button" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.text" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreButtonTextItems"
-          )
-    
-
-    originCoreTable: blockFlattenedDataItems(
-      filterBy: { include: "core/table" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { key: "attributes" }
-          affectDirectivesUnderPos: [1, 3]
-        )
-          @underJSONObjectProperty(
-            by: { key: "caption" }
-            failIfNonExistingKeyOrPath: false
-          )
-            @export(
-              as: "originCoreTableCaptionItems"
-            )
-    
-          @underJSONObjectProperty(
-            by: { key: "body" }
-            failIfNonExistingKeyOrPath: false
-          )
-            @underEachArrayItem
-              @underJSONObjectProperty(
-                by: { key: "cells" }
-              )
-                @underEachArrayItem
-                  @underJSONObjectProperty(
-                    by: { key: "content" }
-                  )
-                    @export(
-                      as: "originCoreTableBodyCellsContentItems"
-                    )
-
-    
-    originCoreListItem: blockFlattenedDataItems(
-      filterBy: { include: "core/list-item" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreListItemContentItems"
-          )
-    
-
-    originCoreCover: blockFlattenedDataItems(
-      filterBy: { include: "core/cover" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.alt" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreCoverAltItems"
-          )
-    
-
-    originCoreMediaText: blockFlattenedDataItems(
-      filterBy: { include: "core/media-text" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.mediaAlt" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreMediaTextAltItems"
-          )
-    
-
-    originCoreVerse: blockFlattenedDataItems(
-      filterBy: { include: "core/verse" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreVerseContentItems"
-          )
-    
-
-    originCoreQuote: blockFlattenedDataItems(
-      filterBy: { include: "core/quote" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.citation" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreQuoteCitationItems"
-          )
-    
-
-    originCorePullquote: blockFlattenedDataItems(
-      filterBy: { include: "core/pullquote" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { key: "attributes" }
-          affectDirectivesUnderPos: [1, 3]
-        )
-          @underJSONObjectProperty(
-            by: { key: "citation" }
-            failIfNonExistingKeyOrPath: false
-          )
-            @export(
-              as: "originCorePullquoteCitationItems"
-            )
-    
-          @underJSONObjectProperty(
-            by: { key: "value" }
-            failIfNonExistingKeyOrPath: false
-          )
-            @export(
-              as: "originCorePullquoteValueItems"
-            )
-    
-
-    originCoreAudio: blockFlattenedDataItems(
-      filterBy: { include: "core/audio" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.caption" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreAudioCaptionItems"
-          )
-    
-
-    originCoreVideo: blockFlattenedDataItems(
-      filterBy: { include: "core/video" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.caption" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreVideoCaptionItems"
-          )
-    
-
-    originCorePreformatted: blockFlattenedDataItems(
-      filterBy: { include: "core/preformatted" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.content" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCorePreformattedContentItems"
-          )
-    
-
-    originCoreEmbed: blockFlattenedDataItems(
-      filterBy: { include: "core/embed" }
-    )
-      @underEachArrayItem
-        @underJSONObjectProperty(
-          by: { path: "attributes.caption" }
-          failIfNonExistingKeyOrPath: false
-        )
-          @export(
-            as: "originCoreEmbedCaptionItems"
-          )
   }
 
   hasOriginPost: _notNull(value: $__originPost)
@@ -467,10 +138,8 @@ query ExportOriginPostCanBeTranslated(
 query ExportMissingTranslationLanguages(
   $includeLanguagesToTranslate: [String!]! = []
   $excludeLanguagesToTranslate: [String!]! = []
-  $createTranslationPosts: Boolean! = true
 )
   @depends(on: "ExportOriginPostCanBeTranslated")
-  @include(if: $createTranslationPosts)
   @include(if: $canTranslateOriginPost)
 {
   missingTranslationLanguagesWithoutFilteringByInclude: arrayDiff(
@@ -497,11 +166,8 @@ query ExportMissingTranslationLanguages(
     @export(as: "hasMissingTranslationLanguages")
 }
 
-query CreateTranslationPostInputsForMissingLanguages(
-  $createTranslationPosts: Boolean! = true
-)
+query CreateTranslationPostInputsForMissingLanguages
   @depends(on: "ExportMissingTranslationLanguages")
-  @include(if: $createTranslationPosts)
   @include(if: $canTranslateOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
@@ -548,11 +214,8 @@ query CreateTranslationPostInputsForMissingLanguages(
     @export(as: "createTranslationPostInputs")
 }
 
-mutation CreateTranslationPostForMissingLanguages(
-  $createTranslationPosts: Boolean! = true
-)
+mutation CreateTranslationPostForMissingLanguages
   @depends(on: "CreateTranslationPostInputsForMissingLanguages")
-  @include(if: $createTranslationPosts)
   @include(if: $canTranslateOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
@@ -572,10 +235,8 @@ mutation CreateTranslationPostForMissingLanguages(
 
 mutation CreateTranslationPostsAssociation(
   $postId: ID!
-  $createTranslationPosts: Boolean! = true
 )
   @depends(on: "CreateTranslationPostForMissingLanguages")
-  @include(if: $createTranslationPosts)
   @include(if: $canTranslateOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
