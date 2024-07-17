@@ -39,6 +39,7 @@ query InitializeVariables
     @export(as: "canTranslateOriginPost")
     @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasTranslationPosts")
+    @export(as: "hasCreatedTranslationPosts")
     @remove
 
   emptyArray: _echo(value: [])
@@ -226,7 +227,11 @@ mutation CreateTranslationPostForMissingLanguages
       }
     }
     post {
-      id @export(as: "createdTranslationPostIDs", type: LIST)
+      id
+        @export(as: "createdTranslationPostIDs", type: LIST)
+      hasCreatedTranslationPosts: _echo(value: true)
+        @export(as: "hasCreatedTranslationPosts")
+        @remove
     }    
   }
 }
@@ -235,7 +240,7 @@ mutation CreateTranslationPostsAssociation(
   $postId: ID!
 )
   @depends(on: "CreateTranslationPostForMissingLanguages")
-  @include(if: $hasMissingTranslationLanguages)
+  @include(if: $hasCreatedTranslationPosts)
 {
   allTranslationPostIDs: _arrayMerge(
     arrays: [
