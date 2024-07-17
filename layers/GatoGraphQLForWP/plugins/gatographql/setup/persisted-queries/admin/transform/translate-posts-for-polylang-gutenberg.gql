@@ -75,7 +75,6 @@ query InitializeVariables
     @remove
   
   emptyArray: _echo(value: [])
-    @export(as: "createdTranslationPostIDs")
     @export(as: "translationPostIds")
 
     @export(as: "originCoreHeadingContentItems")
