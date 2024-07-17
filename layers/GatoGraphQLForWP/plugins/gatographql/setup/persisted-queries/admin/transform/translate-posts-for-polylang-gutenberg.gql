@@ -82,6 +82,7 @@ query InitializeVariables
   
   emptyArray: _echo(value: [])
     @export(as: "currentlyExistingTranslationLanguages")
+    @export(as: "duplicatedPostIDs")
     @export(as: "translationPostIds")
 
     @export(as: "originCoreHeadingContentItems")
@@ -542,11 +543,12 @@ mutation DuplicatePostForMissingTranslationLanguages
       }
     }
     post {
-      id
-      slug
-    }
+      id @export(as: "duplicatedPostIDs", type: LIST)
+    }    
   }
 }
+
+
 
 
 
