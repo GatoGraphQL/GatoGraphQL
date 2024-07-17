@@ -521,14 +521,14 @@ query ExportExecuteTranslation(
   @depends(on: "ExportHasTranslationPosts")
   @include(if: $hasTranslationPosts)
 {
-  hasPostsToTranslate: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  postsToTranslate: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
   }
 
-  hasTranslationPosts: _notEmpty(value: $__hasPostsToTranslate)
+  hasPostsToTranslate: _notEmpty(value: $__postsToTranslate)
 
   executeTranslation: _and(values: [
-    $__hasTranslationPosts,
+    $__hasPostsToTranslate,
     $canTranslateOriginPost
   ])
     @export(as: "executeTranslation")
