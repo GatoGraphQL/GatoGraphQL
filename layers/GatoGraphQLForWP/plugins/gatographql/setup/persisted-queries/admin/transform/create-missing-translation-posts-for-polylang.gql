@@ -38,7 +38,6 @@ query InitializeVariables
   emptyBool: _echo(value: false)
     @export(as: "canTranslateOriginPost")
     @export(as: "hasMissingTranslationLanguages")
-    @export(as: "hasTranslationPosts")
     @export(as: "hasCreatedTranslationPosts")
     @remove
 
