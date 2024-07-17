@@ -175,6 +175,28 @@ query ExportOriginPost(
   originPost: post(by: { id: $postId }, status: any) {
     id
 
+    
+    ################################################################
+    # Data needed to duplicate post for missing languages
+    ################################################################
+    originPostSlug: slug @export(as: "originPostSlug")
+    originPostAuthor: author @export(as: "originPostAuthorID") {
+      id
+    }
+    originPostCategories: categories @export(as: "originPostCategoryIDs") {
+      id
+    }
+    originPostRawContent: rawContent @export(as: "originPostRawContent")
+    originPostRawExcerpt: rawExcerpt @export(as: "originPostRawExcerpt")
+    originPostFeaturedImage: featuredImage @export(as: "originPostFeaturedImageID") {
+      id
+    }
+    originPostTags: tags @export(as: "originPostTagIDs") {
+      id
+    }
+    originPostRawTitle: rawTitle @export(as: "originPostRawTitle")
+    ################################################################
+
 
     polylangLanguage
       @export(as: "fromLanguage")
@@ -471,6 +493,62 @@ query ExportMissingTranslationLanguages(
   hasMissingTranslationLanguages: _notEmpty(value: $__missingTranslationLanguages)
     @export(as: "hasMissingTranslationLanguages")
 }
+
+query ExportPostDataForMissingTranslationLanguages($postId: ID!)
+  @depends(on: "ExportMissingTranslationLanguages")
+  @include(if: $hasOriginPost)
+  @include(if: $hasMissingTranslationLanguages)
+{
+  numberMissingLanguages: _arrayLength(array: $missingTranslationLanguages)
+  duplicatePostInputs: _arrayPad(
+    array: [],
+    length: $__numberMissingLanguages,
+    value: {
+      status: draft,
+      slug: $originPostSlug,
+      authorBy: {
+        id: $originPostAuthorID
+      },
+      categoriesBy: {
+        ids: $originPostCategoryIDs
+      },
+      contentAs: {
+        html: $originPostRawContent
+      },
+      excerpt: $originPostRawExcerpt
+      featuredImageBy: {
+        id: $originPostFeaturedImageID
+      },
+      tagsBy: {
+        ids: $originPostTagIDs
+      },
+      title: $originPostRawTitle
+    }
+  )
+    @export(as: "duplicatePostInputs")
+}
+
+mutation DuplicatePostForMissingTranslationLanguages
+  @depends(on: "ExportPostDataForMissingTranslationLanguages")
+  @include(if: $hasOriginPost)
+  @include(if: $hasMissingTranslationLanguages)
+{
+  createPosts(inputs: $duplicatePostInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      slug
+    }
+  }
+}
+
+
 
 query ExportHasTranslationPosts(
   $postId: ID!
