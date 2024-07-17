@@ -19,6 +19,7 @@ This query, containing a variety of function fields and directives:
   _arrayUnique(array: ["uno", "dos", "uno", "tres", "cuatro", "dos", "cinco", "dos"])
   _arrayMerge(arrays: [["uno", "dos", "uno"], ["tres", "cuatro", "dos", "cinco", "dos"]])
   _arrayDiff(arrays: [["uno", "dos"], ["tres", "cuatro", "dos"]])
+  _arrayIntersect(arrays: [["uno", "dos"], ["tres", "cuatro", "dos"]])
   _arrayAddItem(array: ["uno", "dos"], value: "tres")
   _arraySetItem(array: ["uno", "dos"], index: 0, value: "tres")
   _arrayKeys(array: ["uno", "dos", "tres"])
@@ -99,6 +100,9 @@ This query, containing a variety of function fields and directives:
     ],
     "_arrayDiff": [
       "uno"
+    ],
+    "_arrayIntersect": [
+      "dos"
     ],
     "_arrayAddItem": [
       "uno",
@@ -238,6 +242,10 @@ Exchanges all numeric keys with their associated values in an array, returning a
 ### `_arrayInnerJoinJSONObjectProperties`
 
 Fill the JSON objects inside a target array with properties from a JSON object from a source array, where a certain property is the same for both objects.
+
+### `_arrayIntersect`
+
+Return an array containing all the elements from the first array which are present on all of the other arrays.
 
 ### `_arrayItem`
 
