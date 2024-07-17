@@ -75,6 +75,7 @@ query InitializeVariables
     @remove
 
   emptyBool: _echo(value: false)
+    @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasTranslationPosts")
     @export(as: "executeTranslation")
     @remove
@@ -467,6 +468,8 @@ query ExportMissingTranslationLanguages(
     else: $__missingTranslationLanguagesWithoutFilteringByInclude
   )
     @export(as: "missingTranslationLanguages")
+  hasMissingTranslationLanguages: _notEmpty(value: $__missingTranslationLanguages)
+    @export(as: "hasMissingTranslationLanguages")
 }
 
 query ExportHasTranslationPosts(
