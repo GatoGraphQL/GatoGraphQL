@@ -290,7 +290,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Use bulk mutations in predefined persisted queries (#2728)
 * Added documentation for new PRO module **Polylang Mutations** (#2733)
 * Added documentation for new PRO field `_arrayIntersect` (#2735)
-* Fixed: Don't replace chars in translation persisted queries (#2731)
+* Added predefined persisted query:
+  * [PRO] Create missing translation posts for Polylang* Fixed: Don't replace chars in translation persisted queries (#2731)
 * [PRO] Added **Polylang Mutations**
 * [PRO] Added field `_arrayIntersect`
 
