@@ -181,7 +181,6 @@ query ExportOriginPost(
     ################################################################
     # Data needed to duplicate post for missing languages
     ################################################################
-    originPostSlug: slug @export(as: "originPostSlug")
     originPostAuthor: author @export(as: "originPostAuthorID") {
       id
     }
@@ -524,7 +523,6 @@ query CreateTranslationPostInputsForMissingLanguages(
         arguments: {
           value: {
             status: draft,
-            slug: $originPostSlug,
             authorBy: {
               id: $originPostAuthorID
             },
