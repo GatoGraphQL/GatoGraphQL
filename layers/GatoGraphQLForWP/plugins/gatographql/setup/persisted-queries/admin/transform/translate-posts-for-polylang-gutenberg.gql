@@ -2,7 +2,6 @@
 # 
 # Variables:
 #   - postId: The post with the origin language, from where all translations will be made
-#   - createTranslationPosts: Indicate if to create the translation posts if missing. It is `true` by default.
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
@@ -22,11 +21,6 @@
 # Translate API to all the other languages defined in Polylang,
 # and stores those translations in the corresponding posts,
 # as set-up via Polylang.
-#
-# If the translation posts are missing, and variable
-# `$createTranslationPosts` is `true`, it will create the
-# translation posts in advance, and then set the translation
-# on them.
 #
 # All translation posts must already exist, created using the
 # Polylang UI. These posts must also have the  `draft` status
@@ -76,7 +70,6 @@ query InitializeVariables
 
   emptyBool: _echo(value: false)
     @export(as: "canTranslateOriginPost")
-    @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasTranslationPosts")
     @export(as: "executeTranslation")
     @remove
@@ -498,142 +491,6 @@ query ExportOriginPostCanBeTranslated(
     @export(as: "canTranslateOriginPost")
 }
 
-query ExportMissingTranslationLanguages(
-  $includeLanguagesToTranslate: [String!]! = []
-  $excludeLanguagesToTranslate: [String!]! = []
-  $createTranslationPosts: Boolean! = true
-)
-  @depends(on: "ExportOriginPostCanBeTranslated")
-  @include(if: $createTranslationPosts)
-  @include(if: $canTranslateOriginPost)
-{
-  missingTranslationLanguagesWithoutFilteringByInclude: arrayDiff(
-    arrays: [
-      $enabledLanguages,
-      $currentlyExistingTranslationLanguages,
-      $excludeLanguagesToTranslate
-    ]
-  )
-  hasIncludeLanguagesToTranslate: _notEmpty(value: $includeLanguagesToTranslate)
-  missingTranslationLanguagesWithFilteringByInclude: arrayIntersect(
-    arrays: [
-      $missingTranslationLanguagesWithoutFilteringByInclude,
-      $includeLanguagesToTranslate
-    ]
-  )
-  missingTranslationLanguages: _if(
-    condition: $__hasIncludeLanguagesToTranslate,
-    then: $__missingTranslationLanguagesWithFilteringByInclude,
-    else: $__missingTranslationLanguagesWithoutFilteringByInclude
-  )
-    @export(as: "missingTranslationLanguages")
-  hasMissingTranslationLanguages: _notEmpty(value: $__missingTranslationLanguages)
-    @export(as: "hasMissingTranslationLanguages")
-}
-
-query CreateTranslationPostInputsForMissingLanguages(
-  $createTranslationPosts: Boolean! = true
-)
-  @depends(on: "ExportMissingTranslationLanguages")
-  @include(if: $createTranslationPosts)
-  @include(if: $canTranslateOriginPost)
-  @include(if: $hasMissingTranslationLanguages)
-{
-  createTranslationPostInputs: _echo(value: $missingTranslationLanguages)
-    @underEachArrayItem(
-      passValueOnwardsAs: "language"
-      affectDirectivesUnderPos: [1, 2]
-    )
-      @applyField(
-        name: "_sprintf"
-        arguments: {
-          string: "%s (%s)"
-          values: [$originPostRawTitle, $language]
-        }
-        passOnwardsAs: "originPostRawTitleForLanguage"
-      )
-      @applyField(
-        name: "_echo",
-        arguments: {
-          value: {
-            status: draft,
-            authorBy: {
-              id: $originPostAuthorID
-            },
-            categoriesBy: {
-              ids: $originPostCategoryIDs
-            },
-            contentAs: {
-              html: $originPostRawContent
-            },
-            excerpt: $originPostRawExcerpt
-            featuredImageBy: {
-              id: $originPostFeaturedImageID
-            },
-            tagsBy: {
-              ids: $originPostTagIDs
-            },
-            title: $originPostRawTitleForLanguage,
-            polylangLanguage: $language
-          }
-        },
-        setResultInResponse: true
-      )
-    @export(as: "createTranslationPostInputs")
-}
-
-mutation CreateTranslationPostForMissingLanguages(
-  $createTranslationPosts: Boolean! = true
-)
-  @depends(on: "CreateTranslationPostInputsForMissingLanguages")
-  @include(if: $createTranslationPosts)
-  @include(if: $canTranslateOriginPost)
-  @include(if: $hasMissingTranslationLanguages)
-{
-  translationPosts: createPosts(inputs: $createTranslationPostInputs) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-    post {
-      id @export(as: "createdTranslationPostIDs", type: LIST)
-    }    
-  }
-}
-
-mutation CreateTranslationPostsAssociation(
-  $postId: ID!
-  $createTranslationPosts: Boolean! = true
-)
-  @depends(on: "CreateTranslationPostForMissingLanguages")
-  @include(if: $createTranslationPosts)
-  @include(if: $canTranslateOriginPost)
-  @include(if: $hasMissingTranslationLanguages)
-{
-  allTranslationPostIDs: _arrayMerge(
-    arrays: [
-      [$postId],
-      $currentlyExistingTranslationPostIDs,
-      $createdTranslationPostIDs,
-    ]
-  )
-
-  polylangSaveCustomPostTranslationAssociation(input: {
-    ids: $__allTranslationPostIDs
-  }) {
-    status
-    errors {
-      __typename
-      ...on ErrorPayload {
-        message
-      }
-    }
-  }
-}
-
 query ExportHasTranslationPosts(
   $postId: ID!
   $includeLanguagesToTranslate: [String!]
@@ -660,8 +517,6 @@ query ExportHasTranslationPosts(
 
 query ExportExecuteTranslation(
   $statusToUpdate: CustomPostStatusEnum! = draft,
-  $translateDefaultLanguageOnly: Boolean! = true
-  $translateFromLanguage: String
 )
   @depends(on: "ExportHasTranslationPosts")
   @include(if: $hasTranslationPosts)
@@ -672,33 +527,9 @@ query ExportExecuteTranslation(
 
   hasTranslationPosts: _notEmpty(value: $__hasPostsToTranslate)
 
-  originPostHasDefaultLanguage: _equals(
-    value1: $defaultLanguage,
-    value2: $fromLanguage
-  )
-
-  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
-
-  originPostHasSpecificLanguage: _equals(
-    value1: $translateFromLanguage,
-    value2: $fromLanguage
-  )
-
-  canTranslateOriginPostFromSpecificLanguage: _if(
-    condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
-    else: true
-  )
-
-  canTranslateOriginPost: _if(
-    condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
-    else: $__canTranslateOriginPostFromSpecificLanguage
-  )
-
   executeTranslation: _and(values: [
     $__hasTranslationPosts,
-    $__canTranslateOriginPost
+    $canTranslateOriginPost
   ])
     @export(as: "executeTranslation")
 }
