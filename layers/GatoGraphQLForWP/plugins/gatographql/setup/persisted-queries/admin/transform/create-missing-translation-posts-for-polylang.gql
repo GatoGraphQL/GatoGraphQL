@@ -1,0 +1,3055 @@
+########################################################################
+# 
+# Variables:
+#   - postId: The post with the origin language, from where all translations will be made
+#   - createTranslationPosts: Indicate if to create the translation posts if missing. It is `true` by default.
+#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
+#   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
+#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
+#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang,
+# to create the missing translation posts.
+#
+# It takes an origin post, and duplicates it into all the other
+# languages defined in Polylang for which there is no post yet.
+#
+# By default, the origin post must have the default language
+# of the site, or the logic will not be executed.
+# To translate from any language, pass variable
+# `$translateDefaultLanguageOnly` with `false`.
+#
+# Additionally, execute the logic only when the origin post
+# has a specific language by providing `$translateFromLanguage`
+# with the language code (for instance, `"en"`). It applies only
+# when `$translateDefaultLanguageOnly` is `false`.
+#
+# To limit for what languages to execute the logic, pass
+# variables `$includeLanguagesToTranslate` (if empty, all languages
+# will be included) and `$excludeLanguagesToTranslate`.
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+    @remove
+
+  emptyBool: _echo(value: false)
+    @export(as: "canTranslateOriginPost")
+    @export(as: "hasMissingTranslationLanguages")
+    @export(as: "hasTranslationPosts")
+    @export(as: "executeTranslation")
+    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "currentlyExistingTranslationLanguages")
+    @export(as: "currentlyExistingTranslationPostIDs")
+    @export(as: "createdTranslationPostIDs")
+    @export(as: "translationPostIds")
+
+    @export(as: "originCoreHeadingContentItems")
+    @export(as: "originCoreHeadingContentReplacementsFrom")
+    @export(as: "originCoreHeadingContentReplacementsTo")
+
+    @export(as: "originCoreParagraphContentItems")
+    @export(as: "originCoreParagraphContentReplacementsFrom")
+    @export(as: "originCoreParagraphContentReplacementsTo")
+
+    @export(as: "originCoreImageAltItems")
+    @export(as: "originCoreImageAltReplacementsFrom")
+    @export(as: "originCoreImageAltReplacementsTo")
+
+    @export(as: "originCoreImageCaptionItems")
+    @export(as: "originCoreImageCaptionReplacementsFrom")
+    @export(as: "originCoreImageCaptionReplacementsTo")
+
+    @export(as: "originCoreButtonTextItems")
+    @export(as: "originCoreButtonTextReplacementsFrom")
+    @export(as: "originCoreButtonTextReplacementsTo")
+
+    @export(as: "originCoreTableCaptionItems")
+    @export(as: "originCoreTableCaptionReplacementsFrom")
+    @export(as: "originCoreTableCaptionReplacementsTo")
+
+    @export(as: "originCoreTableBodyCellsContentItems")
+    @export(as: "originCoreTableBodyCellsContentReplacementsFrom")
+    @export(as: "originCoreTableBodyCellsContentReplacementsTo")
+
+    @export(as: "originCoreListItemContentItems")
+    @export(as: "originCoreListItemContentReplacementsFrom")
+    @export(as: "originCoreListItemContentReplacementsTo")
+
+    @export(as: "originCoreCoverAltItems")
+    @export(as: "originCoreCoverAltReplacementsFrom")
+    @export(as: "originCoreCoverAltReplacementsTo")
+
+    @export(as: "originCoreMediaTextAltItems")
+    @export(as: "originCoreMediaTextAltReplacementsFrom")
+    @export(as: "originCoreMediaTextAltReplacementsTo")
+
+    @export(as: "originCoreVerseContentItems")
+    @export(as: "originCoreVerseContentReplacementsFrom")
+    @export(as: "originCoreVerseContentReplacementsTo")
+
+    @export(as: "originCoreQuoteCitationItems")
+    @export(as: "originCoreQuoteCitationReplacementsFrom")
+    @export(as: "originCoreQuoteCitationReplacementsTo")
+
+    @export(as: "originCorePullquoteCitationItems")
+    @export(as: "originCorePullquoteCitationReplacementsFrom")
+    @export(as: "originCorePullquoteCitationReplacementsTo")
+
+    @export(as: "originCorePullquoteValueItems")
+    @export(as: "originCorePullquoteValueReplacementsFrom")
+    @export(as: "originCorePullquoteValueReplacementsTo")
+
+    @export(as: "originCoreAudioCaptionItems")
+    @export(as: "originCoreAudioCaptionReplacementsFrom")
+    @export(as: "originCoreAudioCaptionReplacementsTo")
+
+    @export(as: "originCoreVideoCaptionItems")
+    @export(as: "originCoreVideoCaptionReplacementsFrom")
+    @export(as: "originCoreVideoCaptionReplacementsTo")
+
+    @export(as: "originCorePreformattedContentItems")
+    @export(as: "originCorePreformattedContentReplacementsFrom")
+    @export(as: "originCorePreformattedContentReplacementsTo")
+
+    @export(as: "originCoreEmbedCaptionItems")
+    @export(as: "originCoreEmbedCaptionReplacementsFrom")
+    @export(as: "originCoreEmbedCaptionReplacementsTo")
+
+    @remove
+}
+
+query ExportOriginPost(
+  $postId: ID!
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage
+    @export(as: "defaultLanguage")
+
+  enabledLanguages: polylangEnabledLanguages
+    @export(as: "enabledLanguages")
+
+  originPost: post(by: { id: $postId }, status: any) {
+    id
+
+    
+    ################################################################
+    # Data needed to duplicate post for missing languages
+    ################################################################
+    originPostAuthor: author @export(as: "originPostAuthorID") {
+      id
+    }
+    originPostCategories: categories @export(as: "originPostCategoryIDs") {
+      id
+    }
+    originPostRawContent: rawContent @export(as: "originPostRawContent")
+    originPostRawExcerpt: rawExcerpt @export(as: "originPostRawExcerpt")
+    originPostFeaturedImage: featuredImage @export(as: "originPostFeaturedImageID") {
+      id
+    }
+    originPostTags: tags @export(as: "originPostTagIDs") {
+      id
+    }
+    originPostRawTitle: rawTitle @export(as: "originPostRawTitle")
+    ################################################################
+
+
+    polylangLanguage
+      @export(as: "fromLanguage")
+    
+
+    polylangTranslationLanguageIDs(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
+    currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
+      @export(as: "currentlyExistingTranslationLanguages")
+    currentlyExistingTranslationPostIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "currentlyExistingTranslationPostIDs")
+
+
+    rawTitle
+      @export(as: "originRawTitle")
+    rawContent
+      @export(as: "originRawContent")
+    rawExcerpt
+      @export(as: "originRawExcerpt")
+    
+
+    originCoreHeading: blockFlattenedDataItems(
+      filterBy: { include: "core/heading" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreHeadingContentItems"
+          )
+    
+
+    originCoreParagraph: blockFlattenedDataItems(
+      filterBy: { include: "core/paragraph" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreParagraphContentItems"
+          )
+    
+
+    originCoreImage: blockFlattenedDataItems(
+      filterBy: { include: "core/image" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { key: "attributes" }
+          affectDirectivesUnderPos: [1, 3]
+        )
+          @underJSONObjectProperty(
+            by: { key: "alt" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreImageAltItems"
+            )
+    
+          @underJSONObjectProperty(
+            by: { key: "caption" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreImageCaptionItems"
+            )
+
+    
+    originCoreButton: blockFlattenedDataItems(
+      filterBy: { include: "core/button" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.text" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreButtonTextItems"
+          )
+    
+
+    originCoreTable: blockFlattenedDataItems(
+      filterBy: { include: "core/table" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { key: "attributes" }
+          affectDirectivesUnderPos: [1, 3]
+        )
+          @underJSONObjectProperty(
+            by: { key: "caption" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCoreTableCaptionItems"
+            )
+    
+          @underJSONObjectProperty(
+            by: { key: "body" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @underEachArrayItem
+              @underJSONObjectProperty(
+                by: { key: "cells" }
+              )
+                @underEachArrayItem
+                  @underJSONObjectProperty(
+                    by: { key: "content" }
+                  )
+                    @export(
+                      as: "originCoreTableBodyCellsContentItems"
+                    )
+
+    
+    originCoreListItem: blockFlattenedDataItems(
+      filterBy: { include: "core/list-item" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreListItemContentItems"
+          )
+    
+
+    originCoreCover: blockFlattenedDataItems(
+      filterBy: { include: "core/cover" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.alt" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreCoverAltItems"
+          )
+    
+
+    originCoreMediaText: blockFlattenedDataItems(
+      filterBy: { include: "core/media-text" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.mediaAlt" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreMediaTextAltItems"
+          )
+    
+
+    originCoreVerse: blockFlattenedDataItems(
+      filterBy: { include: "core/verse" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreVerseContentItems"
+          )
+    
+
+    originCoreQuote: blockFlattenedDataItems(
+      filterBy: { include: "core/quote" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.citation" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreQuoteCitationItems"
+          )
+    
+
+    originCorePullquote: blockFlattenedDataItems(
+      filterBy: { include: "core/pullquote" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { key: "attributes" }
+          affectDirectivesUnderPos: [1, 3]
+        )
+          @underJSONObjectProperty(
+            by: { key: "citation" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCorePullquoteCitationItems"
+            )
+    
+          @underJSONObjectProperty(
+            by: { key: "value" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @export(
+              as: "originCorePullquoteValueItems"
+            )
+    
+
+    originCoreAudio: blockFlattenedDataItems(
+      filterBy: { include: "core/audio" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreAudioCaptionItems"
+          )
+    
+
+    originCoreVideo: blockFlattenedDataItems(
+      filterBy: { include: "core/video" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreVideoCaptionItems"
+          )
+    
+
+    originCorePreformatted: blockFlattenedDataItems(
+      filterBy: { include: "core/preformatted" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.content" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCorePreformattedContentItems"
+          )
+    
+
+    originCoreEmbed: blockFlattenedDataItems(
+      filterBy: { include: "core/embed" }
+    )
+      @underEachArrayItem
+        @underJSONObjectProperty(
+          by: { path: "attributes.caption" }
+          failIfNonExistingKeyOrPath: false
+        )
+          @export(
+            as: "originCoreEmbedCaptionItems"
+          )
+  }
+
+  hasOriginPost: _notNull(value: $__originPost)
+    @export(as: "hasOriginPost")
+}
+
+query ExportOriginPostCanBeTranslated(
+  $translateDefaultLanguageOnly: Boolean! = true
+  $translateFromLanguage: String
+)
+  @depends(on: "ExportOriginPost")
+  @include(if: $hasOriginPost)
+{
+  originPostHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
+
+  originPostHasSpecificLanguage: _equals(
+    value1: $translateFromLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginPostFromSpecificLanguage: _if(
+    condition: $__isTranslateFromLanguageProvided,
+    then: $__originPostHasSpecificLanguage,
+    else: true
+  )
+
+  canTranslateOriginPost: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: $__originPostHasDefaultLanguage,
+    else: $__canTranslateOriginPostFromSpecificLanguage
+  )
+    @export(as: "canTranslateOriginPost")
+}
+
+query ExportMissingTranslationLanguages(
+  $includeLanguagesToTranslate: [String!]! = []
+  $excludeLanguagesToTranslate: [String!]! = []
+  $createTranslationPosts: Boolean! = true
+)
+  @depends(on: "ExportOriginPostCanBeTranslated")
+  @include(if: $createTranslationPosts)
+  @include(if: $canTranslateOriginPost)
+{
+  missingTranslationLanguagesWithoutFilteringByInclude: arrayDiff(
+    arrays: [
+      $enabledLanguages,
+      $currentlyExistingTranslationLanguages,
+      $excludeLanguagesToTranslate
+    ]
+  )
+  hasIncludeLanguagesToTranslate: _notEmpty(value: $includeLanguagesToTranslate)
+  missingTranslationLanguagesWithFilteringByInclude: arrayIntersect(
+    arrays: [
+      $missingTranslationLanguagesWithoutFilteringByInclude,
+      $includeLanguagesToTranslate
+    ]
+  )
+  missingTranslationLanguages: _if(
+    condition: $__hasIncludeLanguagesToTranslate,
+    then: $__missingTranslationLanguagesWithFilteringByInclude,
+    else: $__missingTranslationLanguagesWithoutFilteringByInclude
+  )
+    @export(as: "missingTranslationLanguages")
+  hasMissingTranslationLanguages: _notEmpty(value: $__missingTranslationLanguages)
+    @export(as: "hasMissingTranslationLanguages")
+}
+
+query CreateTranslationPostInputsForMissingLanguages(
+  $createTranslationPosts: Boolean! = true
+)
+  @depends(on: "ExportMissingTranslationLanguages")
+  @include(if: $createTranslationPosts)
+  @include(if: $canTranslateOriginPost)
+  @include(if: $hasMissingTranslationLanguages)
+{
+  createTranslationPostInputs: _echo(value: $missingTranslationLanguages)
+    @underEachArrayItem(
+      passValueOnwardsAs: "language"
+      affectDirectivesUnderPos: [1, 2]
+    )
+      @applyField(
+        name: "_sprintf"
+        arguments: {
+          string: "%s (%s)"
+          values: [$originPostRawTitle, $language]
+        }
+        passOnwardsAs: "originPostRawTitleForLanguage"
+      )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            status: draft,
+            authorBy: {
+              id: $originPostAuthorID
+            },
+            categoriesBy: {
+              ids: $originPostCategoryIDs
+            },
+            contentAs: {
+              html: $originPostRawContent
+            },
+            excerpt: $originPostRawExcerpt
+            featuredImageBy: {
+              id: $originPostFeaturedImageID
+            },
+            tagsBy: {
+              ids: $originPostTagIDs
+            },
+            title: $originPostRawTitleForLanguage,
+            polylangLanguage: $language
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createTranslationPostInputs")
+}
+
+mutation CreateTranslationPostForMissingLanguages(
+  $createTranslationPosts: Boolean! = true
+)
+  @depends(on: "CreateTranslationPostInputsForMissingLanguages")
+  @include(if: $createTranslationPosts)
+  @include(if: $canTranslateOriginPost)
+  @include(if: $hasMissingTranslationLanguages)
+{
+  translationPosts: createPosts(inputs: $createTranslationPostInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id @export(as: "createdTranslationPostIDs", type: LIST)
+    }    
+  }
+}
+
+mutation CreateTranslationPostsAssociation(
+  $postId: ID!
+  $createTranslationPosts: Boolean! = true
+)
+  @depends(on: "CreateTranslationPostForMissingLanguages")
+  @include(if: $createTranslationPosts)
+  @include(if: $canTranslateOriginPost)
+  @include(if: $hasMissingTranslationLanguages)
+{
+  allTranslationPostIDs: _arrayMerge(
+    arrays: [
+      [$postId],
+      $currentlyExistingTranslationPostIDs,
+      $createdTranslationPostIDs,
+    ]
+  )
+
+  polylangSaveCustomPostTranslationAssociation(input: {
+    ids: $__allTranslationPostIDs
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}
+
+query ExportHasTranslationPosts(
+  $postId: ID!
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @include(if: $canTranslateOriginPost)
+  @depends(on: "CreateTranslationPostsAssociation")
+{
+  originPostForTranslations: post(by: { id: $postId }, status: any) {
+    id
+
+
+    polylangTranslationLanguageIDs(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
+    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "translationPostIds")
+
+    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+      @export(as: "hasTranslationPosts")
+  }
+}
+
+query ExportExecuteTranslation(
+  $statusToUpdate: CustomPostStatusEnum! = draft,
+  $translateDefaultLanguageOnly: Boolean! = true
+  $translateFromLanguage: String
+)
+  @depends(on: "ExportHasTranslationPosts")
+  @include(if: $hasTranslationPosts)
+{
+  hasPostsToTranslate: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    id
+  }
+
+  hasTranslationPosts: _notEmpty(value: $__hasPostsToTranslate)
+
+  originPostHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
+
+  originPostHasSpecificLanguage: _equals(
+    value1: $translateFromLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginPostFromSpecificLanguage: _if(
+    condition: $__isTranslateFromLanguageProvided,
+    then: $__originPostHasSpecificLanguage,
+    else: true
+  )
+
+  canTranslateOriginPost: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: $__originPostHasDefaultLanguage,
+    else: $__canTranslateOriginPostFromSpecificLanguage
+  )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationPosts,
+    $__canTranslateOriginPost
+  ])
+    @export(as: "executeTranslation")
+}
+
+query InitializeTranslationVariables(
+  $statusToUpdate: CustomPostStatusEnum! = draft,
+)
+  @depends(on: "ExportExecuteTranslation")
+  @include(if: $executeTranslation)
+{
+  emptyTranslationPostVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    id
+    emptyArray: _echo(value: [])
+      @export(
+        as: "rawTitle"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawContent"
+        type: DICTIONARY
+      )
+      @export(
+        as: "rawExcerpt"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "translationPostLanguages"
+        type: DICTIONARY
+      )
+      
+      @export(
+        as: "coreHeadingContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreHeadingContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreHeadingContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreParagraphContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreParagraphContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreParagraphContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreImageAltItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageAltReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreImageCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreImageCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreButtonTextItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreButtonTextReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreButtonTextReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreTableCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreTableBodyCellsContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableBodyCellsContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreTableBodyCellsContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreListItemContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreListItemContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreListItemContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreCoverAltItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreCoverAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreCoverAltReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreMediaTextAltItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreMediaTextAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreMediaTextAltReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreVerseContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVerseContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVerseContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreQuoteCitationItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreQuoteCitationReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreQuoteCitationReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "corePullquoteCitationItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteCitationReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteCitationReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "corePullquoteValueItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteValueReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePullquoteValueReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreAudioCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreAudioCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreAudioCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreVideoCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVideoCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreVideoCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "corePreformattedContentItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePreformattedContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "corePreformattedContentReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @export(
+        as: "coreEmbedCaptionItems"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreEmbedCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @export(
+        as: "coreEmbedCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+
+      @remove
+  }
+}
+
+query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
+  @depends(on: "InitializeTranslationVariables")
+  @include(if: $executeTranslation)
+{
+  posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    id
+
+
+    rawTitle: _echo(value: $originRawTitle)
+      @export(
+        as: "rawTitle",
+        type: DICTIONARY
+      )
+      @remove
+    rawContent: _echo(value: $originRawContent)
+      @export(
+        as: "rawContent",
+        type: DICTIONARY
+      )
+      @remove
+    rawExcerpt: _echo(value: $originRawExcerpt)
+      @export(
+        as: "rawExcerpt",
+        type: DICTIONARY
+      )
+      @remove
+
+
+    polylangLanguage
+      @export(
+        as: "translationPostLanguages"
+        type: DICTIONARY
+      )
+      @remove
+
+
+    coreHeadingContentItems: _echo(value: $originCoreHeadingContentItems)
+      @export(
+        as: "coreHeadingContentItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreHeadingContentReplacementsFrom: _echo(value: $originCoreHeadingContentReplacementsFrom)
+      @export(
+        as: "coreHeadingContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreHeadingContentReplacementsTo: _echo(value: $originCoreHeadingContentReplacementsTo)
+      @export(
+        as: "coreHeadingContentReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreParagraphContentItems: _echo(value: $originCoreParagraphContentItems)
+      @export(
+        as: "coreParagraphContentItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreParagraphContentReplacementsFrom: _echo(value: $originCoreParagraphContentReplacementsFrom)
+      @export(
+        as: "coreParagraphContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreParagraphContentReplacementsTo: _echo(value: $originCoreParagraphContentReplacementsTo)
+      @export(
+        as: "coreParagraphContentReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreImageAltItems: _echo(value: $originCoreImageAltItems)
+      @export(
+        as: "coreImageAltItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreImageAltReplacementsFrom: _echo(value: $originCoreImageAltReplacementsFrom)
+      @export(
+        as: "coreImageAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreImageAltReplacementsTo: _echo(value: $originCoreImageAltReplacementsTo)
+      @export(
+        as: "coreImageAltReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreImageCaptionItems: _echo(value: $originCoreImageCaptionItems)
+      @export(
+        as: "coreImageCaptionItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreImageCaptionReplacementsFrom: _echo(value: $originCoreImageCaptionReplacementsFrom)
+      @export(
+        as: "coreImageCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreImageCaptionReplacementsTo: _echo(value: $originCoreImageCaptionReplacementsTo)
+      @export(
+        as: "coreImageCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreButtonTextItems: _echo(value: $originCoreButtonTextItems)
+      @export(
+        as: "coreButtonTextItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreButtonTextReplacementsFrom: _echo(value: $originCoreButtonTextReplacementsFrom)
+      @export(
+        as: "coreButtonTextReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreButtonTextReplacementsTo: _echo(value: $originCoreButtonTextReplacementsTo)
+      @export(
+        as: "coreButtonTextReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreTableCaptionItems: _echo(value: $originCoreTableCaptionItems)
+      @export(
+        as: "coreTableCaptionItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreTableCaptionReplacementsFrom: _echo(value: $originCoreTableCaptionReplacementsFrom)
+      @export(
+        as: "coreTableCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreTableCaptionReplacementsTo: _echo(value: $originCoreTableCaptionReplacementsTo)
+      @export(
+        as: "coreTableCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreTableBodyCellsContentItems: _echo(value: $originCoreTableBodyCellsContentItems)
+      @export(
+        as: "coreTableBodyCellsContentItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreTableBodyCellsContentReplacementsFrom: _echo(value: $originCoreTableBodyCellsContentReplacementsFrom)
+      @export(
+        as: "coreTableBodyCellsContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreTableBodyCellsContentReplacementsTo: _echo(value: $originCoreTableBodyCellsContentReplacementsTo)
+      @export(
+        as: "coreTableBodyCellsContentReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreListItemContentItems: _echo(value: $originCoreListItemContentItems)
+      @export(
+        as: "coreListItemContentItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreListItemContentReplacementsFrom: _echo(value: $originCoreListItemContentReplacementsFrom)
+      @export(
+        as: "coreListItemContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreListItemContentReplacementsTo: _echo(value: $originCoreListItemContentReplacementsTo)
+      @export(
+        as: "coreListItemContentReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreCoverAltItems: _echo(value: $originCoreCoverAltItems)
+      @export(
+        as: "coreCoverAltItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreCoverAltReplacementsFrom: _echo(value: $originCoreCoverAltReplacementsFrom)
+      @export(
+        as: "coreCoverAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreCoverAltReplacementsTo: _echo(value: $originCoreCoverAltReplacementsTo)
+      @export(
+        as: "coreCoverAltReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreMediaTextAltItems: _echo(value: $originCoreMediaTextAltItems)
+      @export(
+        as: "coreMediaTextAltItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreMediaTextAltReplacementsFrom: _echo(value: $originCoreMediaTextAltReplacementsFrom)
+      @export(
+        as: "coreMediaTextAltReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreMediaTextAltReplacementsTo: _echo(value: $originCoreMediaTextAltReplacementsTo)
+      @export(
+        as: "coreMediaTextAltReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreVerseContentItems: _echo(value: $originCoreVerseContentItems)
+      @export(
+        as: "coreVerseContentItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreVerseContentReplacementsFrom: _echo(value: $originCoreVerseContentReplacementsFrom)
+      @export(
+        as: "coreVerseContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreVerseContentReplacementsTo: _echo(value: $originCoreVerseContentReplacementsTo)
+      @export(
+        as: "coreVerseContentReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreQuoteCitationItems: _echo(value: $originCoreQuoteCitationItems)
+      @export(
+        as: "coreQuoteCitationItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreQuoteCitationReplacementsFrom: _echo(value: $originCoreQuoteCitationReplacementsFrom)
+      @export(
+        as: "coreQuoteCitationReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreQuoteCitationReplacementsTo: _echo(value: $originCoreQuoteCitationReplacementsTo)
+      @export(
+        as: "coreQuoteCitationReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    corePullquoteCitationItems: _echo(value: $originCorePullquoteCitationItems)
+      @export(
+        as: "corePullquoteCitationItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    corePullquoteCitationReplacementsFrom: _echo(value: $originCorePullquoteCitationReplacementsFrom)
+      @export(
+        as: "corePullquoteCitationReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    corePullquoteCitationReplacementsTo: _echo(value: $originCorePullquoteCitationReplacementsTo)
+      @export(
+        as: "corePullquoteCitationReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    corePullquoteValueItems: _echo(value: $originCorePullquoteValueItems)
+      @export(
+        as: "corePullquoteValueItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    corePullquoteValueReplacementsFrom: _echo(value: $originCorePullquoteValueReplacementsFrom)
+      @export(
+        as: "corePullquoteValueReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    corePullquoteValueReplacementsTo: _echo(value: $originCorePullquoteValueReplacementsTo)
+      @export(
+        as: "corePullquoteValueReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreAudioCaptionItems: _echo(value: $originCoreAudioCaptionItems)
+      @export(
+        as: "coreAudioCaptionItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreAudioCaptionReplacementsFrom: _echo(value: $originCoreAudioCaptionReplacementsFrom)
+      @export(
+        as: "coreAudioCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreAudioCaptionReplacementsTo: _echo(value: $originCoreAudioCaptionReplacementsTo)
+      @export(
+        as: "coreAudioCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreVideoCaptionItems: _echo(value: $originCoreVideoCaptionItems)
+      @export(
+        as: "coreVideoCaptionItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreVideoCaptionReplacementsFrom: _echo(value: $originCoreVideoCaptionReplacementsFrom)
+      @export(
+        as: "coreVideoCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreVideoCaptionReplacementsTo: _echo(value: $originCoreVideoCaptionReplacementsTo)
+      @export(
+        as: "coreVideoCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    corePreformattedContentItems: _echo(value: $originCorePreformattedContentItems)
+      @export(
+        as: "corePreformattedContentItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    corePreformattedContentReplacementsFrom: _echo(value: $originCorePreformattedContentReplacementsFrom)
+      @export(
+        as: "corePreformattedContentReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    corePreformattedContentReplacementsTo: _echo(value: $originCorePreformattedContentReplacementsTo)
+      @export(
+        as: "corePreformattedContentReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+
+    coreEmbedCaptionItems: _echo(value: $originCoreEmbedCaptionItems)
+      @export(
+        as: "coreEmbedCaptionItems"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreEmbedCaptionReplacementsFrom: _echo(value: $originCoreEmbedCaptionReplacementsFrom)
+      @export(
+        as: "coreEmbedCaptionReplacementsFrom"
+        type: DICTIONARY
+      )
+      @remove
+      
+    coreEmbedCaptionReplacementsTo: _echo(value: $originCoreEmbedCaptionReplacementsTo)
+      @export(
+        as: "coreEmbedCaptionReplacementsTo"
+        type: DICTIONARY
+      )
+      @remove
+      
+  }
+}
+
+query AdaptData
+  @depends(on: "FetchData")
+  @include(if: $executeTranslation)
+{
+  adaptedToTitle: _echo(value: $rawTitle)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToTitle")
+  adaptedFromTitle: _echo(value: $rawTitle)
+    @underEachJSONObjectProperty
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromTitle")
+
+  adaptedToRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "value"
+    )
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [$value]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedToRawExcerpt")
+  adaptedFromRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty
+      @applyField(
+        name: "_echo"
+        arguments: {
+          value: [""]
+        }
+        setResultInResponse: true
+      )
+    @export(as: "adaptedFromRawExcerpt")
+}
+
+query TransformData(
+  $languageMapping: JSONObject! = {}
+)
+  @depends(on: "AdaptData")
+  @include(if: $executeTranslation)
+{
+  transformations: _echo(value: {
+    metaRawTitle: {
+      from: $adaptedFromTitle,
+      to: $adaptedToTitle,
+    },
+    metaRawExcerpt: {
+      from: $adaptedFromRawExcerpt,
+      to: $adaptedToRawExcerpt,
+    },
+    coreHeadingContent: {
+      from: $coreHeadingContentItems,
+      to: $coreHeadingContentItems,
+    },
+    coreParagraphContent: {
+      from: $coreParagraphContentItems,
+      to: $coreParagraphContentItems,
+    },
+    coreImageAlt: {
+      from: $coreImageAltItems,
+      to: $coreImageAltItems,
+    },
+    coreImageCaption: {
+      from: $coreImageCaptionItems,
+      to: $coreImageCaptionItems,
+    },
+    coreButtonText: {
+      from: $coreButtonTextItems
+      to: $coreButtonTextItems
+    },
+    coreTableCaption: {
+      from: $coreTableCaptionItems,
+      to: $coreTableCaptionItems,
+    },
+    coreTableBodyCellsContent: {
+      from: $coreTableBodyCellsContentItems,
+      to: $coreTableBodyCellsContentItems,
+    },
+    coreListItemContent: {
+      from: $coreListItemContentItems,
+      to: $coreListItemContentItems,
+    },
+    coreCoverAlt: {
+      from: $coreCoverAltItems,
+      to: $coreCoverAltItems,
+    },
+    coreMediaTextAlt: {
+      from: $coreMediaTextAltItems,
+      to: $coreMediaTextAltItems,
+    },
+    coreVerseContent: {
+      from: $coreVerseContentItems,
+      to: $coreVerseContentItems,
+    },
+    coreQuoteCitation: {
+      from: $coreQuoteCitationItems,
+      to: $coreQuoteCitationItems,
+    },
+    corePullquoteCitation: {
+      from: $corePullquoteCitationItems,
+      to: $corePullquoteCitationItems,
+    },
+    corePullquoteValue: {
+      from: $corePullquoteValueItems,
+      to: $corePullquoteValueItems,
+    },
+    coreAudioCaption: {
+      from: $coreAudioCaptionItems,
+      to: $coreAudioCaptionItems,
+    },
+    coreVideoCaption: {
+      from: $coreVideoCaptionItems,
+      to: $coreVideoCaptionItems,
+    },
+    corePreformattedContent: {
+      from: $corePreformattedContentItems,
+      to: $corePreformattedContentItems,
+    },
+    coreEmbedCaption: {
+      from: $coreEmbedCaptionItems,
+      to: $coreEmbedCaptionItems,
+    },
+  })
+    @underEachJSONObjectProperty
+      @underJSONObjectProperty(by: { key: "to" })
+        @underEachJSONObjectProperty(
+          passKeyOnwardsAs: "postId"
+          affectDirectivesUnderPos: [1, 2, 3]
+        )
+          @applyField(
+            name: "_objectProperty",
+            arguments: {
+              object: $translationPostLanguages,
+              by: { key: $postId }
+            },
+            passOnwardsAs: "toLanguage"
+          )
+          @applyField(
+            name: "_objectProperty",
+            arguments: {
+              object: $languageMapping,
+              by: { key: $toLanguage }
+              failIfNonExistingKeyOrPath: false
+              valueWhenNonExistingKeyOrPath: $toLanguage
+            },
+            passOnwardsAs: "toLanguage"
+          )
+          @underEachArrayItem
+            @strTranslate(
+              from: $fromLanguage,
+              to: $toLanguage
+            )
+    @export(as: "transformations")
+}
+
+query EscapeRegexStrings
+  @depends(on: "TransformData")
+  @include(if: $executeTranslation)
+{  
+  escapedRegexStrings: _echo(value: $transformations)
+    @underEachJSONObjectProperty(
+      filter: {
+        by: {
+          excludeKeys: [
+            "metaRawTitle",
+            "metaRawExcerpt"
+          ]
+        }
+      }
+    )
+      @underJSONObjectProperty(by: { key: "from" })
+        @underEachJSONObjectProperty
+          @underEachArrayItem
+            @strReplaceMultiple(
+              search: [
+                "\\",
+                "^",
+                "$",
+                "|",
+                "[",
+                "]",
+                "(",
+                ")",
+                "{",
+                "{",
+                "#",
+                "?",
+                ".",
+                "*",
+                "+"
+              ],
+              replaceWith: [
+                "\\\\",
+                "\\^",
+                "\\$",
+                "\\|",
+                "\\[",
+                "\\]",
+                "\\(",
+                "\\)",
+                "\\{",
+                "\\}",
+                "\\#",
+                "\\?",
+                "\\.",
+                "\\*",
+                "\\+"
+              ]
+            )
+    @underEachJSONObjectProperty(
+      filter: {
+        by: {
+          excludeKeys: [
+            "metaRawTitle",
+            "metaRawExcerpt"
+          ]
+        }
+      }
+    )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @underEachJSONObjectProperty(
+          affectDirectivesUnderPos: [1, 3]
+        )
+          @underEachArrayItem
+            @strRegexReplace(
+              searchRegex: "#\\$(\\d+)#",
+              replaceWith: "\\\\\\$1"
+            )
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "${1}%s${2}",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+    @export(as: "escapedRegexTransformations")
+}
+
+query CreateRegexReplacements
+  @depends(on: "EscapeRegexStrings")
+  @include(if: $executeTranslation)
+{  
+  regexReplacements: _echo(value: $escapedRegexTransformations)
+    @underJSONObjectProperty(
+      by: { key: "coreHeadingContent" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:heading .*?-->\\n?<h[1-6] ?.*?>)%s(</h[1-6]>\\n?<!-- /wp:heading -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreHeadingContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreHeadingContentReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreParagraphContent" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:paragraph .*?-->\\n?<p ?.*?>)%s(</p>\\n?<!-- /wp:paragraph -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreParagraphContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreParagraphContentReplacementsTo",
+        )
+  
+  
+    @underJSONObjectProperty(
+      by: { key: "coreImageAlt" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:image .*?-->\\n?.*<img .*?alt=\\\")%s(\\\".*>.*\\n?<!-- /wp:image -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreImageAltReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreImageAltReplacementsTo",
+        )
+  
+  
+    @underJSONObjectProperty(
+      by: { key: "coreImageCaption" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:image .*?-->\\n?.*<figcaption ?.*?>)%s(</figcaption>.*\\n?<!-- /wp:image -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreImageCaptionReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreImageCaptionReplacementsTo",
+        )
+  
+  
+    @underJSONObjectProperty(
+      by: { key: "coreButtonText" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:button .*?-->\\n?.*<a ?.*?>)%s(</a>.*\\n?<!-- /wp:button -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreButtonTextReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreButtonTextReplacementsTo",
+        )
+  
+  
+    @underJSONObjectProperty(
+      by: { key: "coreTableCaption" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:table .*?-->\\n?.*<figcaption ?.*?>.*)%s(.*</figcaption>.*\\n?<!-- /wp:table -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreTableCaptionReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreTableCaptionReplacementsTo",
+        )
+  
+  
+    @underJSONObjectProperty(
+      by: { key: "coreTableBodyCellsContent" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:table .*?-->\\n?.*<table ?.*?>.*)%s(.*</table>.*\\n?<!-- /wp:table -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreTableBodyCellsContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreTableBodyCellsContentReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreListItemContent" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:list-item .*?-->\\n?<li ?.*?>)%s(</li>\\n?<!-- /wp:list-item -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreListItemContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreListItemContentReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreCoverAlt" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:cover .*?-->\\n?.*<img .*?alt=\\\")%s(\\\".*>.*\\n?<!-- /wp:cover -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreCoverAltReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreCoverAltReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreMediaTextAlt" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:media-text .*?-->\\n?<div .*><figure .*><img .*?alt=\\\")%s(\\\")#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreMediaTextAltReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreMediaTextAltReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreVerseContent" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:verse .*?-->\\n?<pre ?.*?>)%s(</pre>\\n?<!-- /wp:verse -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreVerseContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreVerseContentReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreQuoteCitation" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:quote .*?-->\\n?<blockquote ?.*?>.*<cite ?.*?>)%s(</cite></blockquote>\\n?<!-- /wp:quote -->)#s",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreQuoteCitationReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreQuoteCitationReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "corePullquoteCitation" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:pullquote .*?-->\\n?<figure ?.*?><blockquote ?.*?><p ?.*?>.*</p><cite ?.*?>)%s(</cite></blockquote></figure>\\n?<!-- /wp:pullquote -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "corePullquoteCitationReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "corePullquoteCitationReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "corePullquoteValue" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:pullquote .*?-->\\n?<figure ?.*?><blockquote ?.*?><p ?.*?>)%s(</p>(?:<cite ?.*?>.*</cite>)?</blockquote></figure>\\n?<!-- /wp:pullquote -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "corePullquoteValueReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "corePullquoteValueReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreAudioCaption" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:audio .*?-->\\n?<figure ?.*?><audio ?.*?>.*</audio><figcaption ?.*?>)%s(</figcaption></figure>\\n?<!-- /wp:audio -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreAudioCaptionReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreAudioCaptionReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreVideoCaption" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:video .*?-->\\n?<figure ?.*?><video ?.*?>.*</video><figcaption ?.*?>)%s(</figcaption></figure>\\n?<!-- /wp:video -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreVideoCaptionReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreVideoCaptionReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "corePreformattedContent" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:preformatted .*?-->\\n?<pre ?.*?>)%s(</pre>\\n?<!-- /wp:preformatted -->)#",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "corePreformattedContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "corePreformattedContentReplacementsTo",
+        )
+
+
+    @underJSONObjectProperty(
+      by: { key: "coreEmbedCaption" }
+      affectDirectivesUnderPos: [1, 6]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 4],
+      )
+        @underEachJSONObjectProperty
+          @underEachArrayItem(
+            passValueOnwardsAs: "value"
+          )
+            @applyField(
+              name: "_sprintf",
+              arguments: {
+                string: "#(<!-- wp:embed .*?-->\\n?<figure ?.*?><div ?.*?>.*</div><figcaption ?.*?>)%s(</figcaption></figure>\\n?<!-- /wp:embed -->)#s",
+                values: [$value]
+              },
+              setResultInResponse: true
+            )
+        @export(
+          as: "coreEmbedCaptionReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreEmbedCaptionReplacementsTo",
+        )
+}
+
+query ExecuteRegexReplacements
+  @depends(on: "CreateRegexReplacements")
+  @include(if: $executeTranslation)
+{
+  transformedRawContent: _echo(value: $rawContent)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "postID"
+      affectDirectivesUnderPos: [
+        1, 2,
+        6, 7,
+        11, 12,
+        16, 17,
+        21, 22,
+        26, 27,
+        31, 32,
+        36, 37,
+        41, 42,
+        46, 47,
+        51, 52,
+        56, 57,
+        61, 62,
+        66, 67,
+        71, 72,
+        76, 77,
+        81, 82,
+        86, 87,
+      ]
+    )
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreHeadingContentReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreHeadingContentReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreHeadingContentReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreHeadingContentReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreHeadingContentReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreHeadingContentReplacementsFrom,
+          replaceWith: $postCoreHeadingContentReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreParagraphContentReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreParagraphContentReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreParagraphContentReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreParagraphContentReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreParagraphContentReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreParagraphContentReplacementsFrom,
+          replaceWith: $postCoreParagraphContentReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreImageAltReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreImageAltReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreImageAltReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreImageAltReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreImageAltReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreImageAltReplacementsFrom,
+          replaceWith: $postCoreImageAltReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreImageCaptionReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreImageCaptionReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreImageCaptionReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreImageCaptionReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreImageCaptionReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreImageCaptionReplacementsFrom,
+          replaceWith: $postCoreImageCaptionReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreButtonTextReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreButtonTextReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreButtonTextReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreButtonTextReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreButtonTextReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreButtonTextReplacementsFrom,
+          replaceWith: $postCoreButtonTextReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreTableCaptionReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreTableCaptionReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreTableCaptionReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreTableCaptionReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreTableCaptionReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreTableCaptionReplacementsFrom,
+          replaceWith: $postCoreTableCaptionReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreTableBodyCellsContentReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreTableBodyCellsContentReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreTableBodyCellsContentReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreTableBodyCellsContentReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreTableBodyCellsContentReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreTableBodyCellsContentReplacementsFrom,
+          replaceWith: $postCoreTableBodyCellsContentReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreListItemContentReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreListItemContentReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreListItemContentReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreListItemContentReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreListItemContentReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreListItemContentReplacementsFrom,
+          replaceWith: $postCoreListItemContentReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreCoverAltReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreCoverAltReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreCoverAltReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreCoverAltReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreCoverAltReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreCoverAltReplacementsFrom,
+          replaceWith: $postCoreCoverAltReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreMediaTextAltReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreMediaTextAltReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreMediaTextAltReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreMediaTextAltReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreMediaTextAltReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreMediaTextAltReplacementsFrom,
+          replaceWith: $postCoreMediaTextAltReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreVerseContentReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreVerseContentReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreVerseContentReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreVerseContentReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreVerseContentReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreVerseContentReplacementsFrom,
+          replaceWith: $postCoreVerseContentReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreQuoteCitationReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreQuoteCitationReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreQuoteCitationReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreQuoteCitationReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreQuoteCitationReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreQuoteCitationReplacementsFrom,
+          replaceWith: $postCoreQuoteCitationReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $corePullquoteCitationReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $corePullquoteCitationReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCorePullquoteCitationReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $corePullquoteCitationReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCorePullquoteCitationReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCorePullquoteCitationReplacementsFrom,
+          replaceWith: $postCorePullquoteCitationReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $corePullquoteValueReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $corePullquoteValueReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCorePullquoteValueReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $corePullquoteValueReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCorePullquoteValueReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCorePullquoteValueReplacementsFrom,
+          replaceWith: $postCorePullquoteValueReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreAudioCaptionReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreAudioCaptionReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreAudioCaptionReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreAudioCaptionReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreAudioCaptionReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreAudioCaptionReplacementsFrom,
+          replaceWith: $postCoreAudioCaptionReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreVideoCaptionReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreVideoCaptionReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreVideoCaptionReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreVideoCaptionReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreVideoCaptionReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreVideoCaptionReplacementsFrom,
+          replaceWith: $postCoreVideoCaptionReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $corePreformattedContentReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $corePreformattedContentReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCorePreformattedContentReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $corePreformattedContentReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCorePreformattedContentReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCorePreformattedContentReplacementsFrom,
+          replaceWith: $postCorePreformattedContentReplacementsTo
+        )
+    
+    
+      @applyField(
+        name: "_propertyExistsInJSONObject"
+        arguments: {
+          object: $coreEmbedCaptionReplacementsFrom
+          by: { key: $postID }
+        }
+        passOnwardsAs: "hasPostID"
+      )
+      @if(
+        condition: $hasPostID
+        affectDirectivesUnderPos: [1, 2, 3]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreEmbedCaptionReplacementsFrom,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreEmbedCaptionReplacementsFrom"
+        )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $coreEmbedCaptionReplacementsTo,
+            by: {
+              key: $postID
+            }
+          },
+          passOnwardsAs: "postCoreEmbedCaptionReplacementsTo"
+        )
+        @strRegexReplaceMultiple(
+          limit: 1,
+          searchRegex: $postCoreEmbedCaptionReplacementsFrom,
+          replaceWith: $postCoreEmbedCaptionReplacementsTo
+        )
+    
+    @export(as: "transformedRawContent")
+}
+
+query PrepareMetaReplacements
+  @depends(on: "TransformData")
+  @include(if: $executeTranslation)
+{
+  transformedMetaTitle: _echo(value: $rawTitle)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "postID"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "metaRawTitle.to.%s",
+          values: [$postID]
+        }
+        passOnwardsAs: "titlePath"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: $titlePath }
+        }
+        passOnwardsAs: "transformedPostTitleAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostTitleAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawTitle"
+    )
+
+  transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "postID"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_sprintf",
+        arguments: {
+          string: "metaRawExcerpt.to.%s",
+          values: [$postID]
+        }
+        passOnwardsAs: "rawExcerptPath"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $transformations
+          by: { path: $rawExcerptPath }
+        }
+        passOnwardsAs: "transformedPostRawExcerptAsArray"
+      )
+      @applyField(
+        name: "_arrayItem",
+        arguments: {
+          array: $transformedPostRawExcerptAsArray
+          position: 0
+        }
+        setResultInResponse: true
+      )
+    @export(
+      as: "transformedRawExcerpt"
+    )
+}
+
+mutation TranslateGutenbergPosts(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+  $updateSlug: Boolean! = true
+)
+  @depends(on: [
+    "ExecuteRegexReplacements",
+    "PrepareMetaReplacements"
+  ])
+  @include(if: $executeTranslation)
+{
+  updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    id
+    transformedRawContent: _objectProperty(
+      object: $transformedRawContent,
+      by: {
+        key: $__id
+      }
+    )
+    transformedRawTitle: _objectProperty(
+      object: $transformedRawTitle,
+      by: {
+        key: $__id
+      }
+    )
+    transformedSlug: _if(
+      condition: $updateSlug,
+      then: $__transformedRawTitle,
+      else: null
+    )
+    transformedRawExcerpt: _objectProperty(
+      object: $transformedRawExcerpt,
+      by: {
+        key: $__id
+      }
+    )
+    update(input: {
+      title: $__transformedRawTitle,
+      slug: $__transformedSlug,
+      excerpt: $__transformedRawExcerpt,
+      contentAs: {
+        html: $__transformedRawContent
+      }
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        id
+        title
+        rawContent
+        rawExcerpt
+      }
+    }
+  }
+}
