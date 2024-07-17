@@ -172,27 +172,6 @@ query ExportOriginPost(
     id
 
     
-    ################################################################
-    # Data needed to duplicate post for missing languages
-    ################################################################
-    originPostAuthor: author @export(as: "originPostAuthorID") {
-      id
-    }
-    originPostCategories: categories @export(as: "originPostCategoryIDs") {
-      id
-    }
-    originPostRawContent: rawContent @export(as: "originPostRawContent")
-    originPostRawExcerpt: rawExcerpt @export(as: "originPostRawExcerpt")
-    originPostFeaturedImage: featuredImage @export(as: "originPostFeaturedImageID") {
-      id
-    }
-    originPostTags: tags @export(as: "originPostTagIDs") {
-      id
-    }
-    originPostRawTitle: rawTitle @export(as: "originPostRawTitle")
-    ################################################################
-
-
     polylangLanguage
       @export(as: "fromLanguage")
     
