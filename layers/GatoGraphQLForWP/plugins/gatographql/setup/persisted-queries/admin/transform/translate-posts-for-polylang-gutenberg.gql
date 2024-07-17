@@ -165,7 +165,7 @@ query ExportOriginPost(
   originPost: post(by: { id: $postId }, status: any) {
     id
 
-    
+
     polylangLanguage
       @export(as: "fromLanguage")
     
