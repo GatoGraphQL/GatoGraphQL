@@ -42,6 +42,7 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
         $doingPOST = $method === 'POST';
 
         $client = static::getClient();
+        $endpoint = $this->customizeEndpoint($endpoint);
         $endpointURL = static::getWebserverHomeURL() . '/' . $endpoint;
         $options = static::getRequestBasicOptions();
 
@@ -192,6 +193,11 @@ abstract class AbstractEndpointWebserverRequestTestCase extends AbstractWebserve
     protected function getExpectedResponseStatusCode(): int
     {
         return 200;
+    }
+
+    protected function customizeEndpoint(string $endpoint): string
+    {
+        return $endpoint;
     }
 
     /**
