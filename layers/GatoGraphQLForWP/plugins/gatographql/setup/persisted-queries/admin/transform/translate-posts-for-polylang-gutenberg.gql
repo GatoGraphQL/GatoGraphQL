@@ -2,6 +2,7 @@
 # 
 # Variables:
 #   - postId: The post with the origin language, from where all translations will be made
+#   - createTranslationPosts: Indicate if to create the translation posts if missing. It is `true` by default.
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
@@ -21,6 +22,11 @@
 # Translate API to all the other languages defined in Polylang,
 # and stores those translations in the corresponding posts,
 # as set-up via Polylang.
+#
+# If the translation posts are missing, and variable
+# `$createTranslationPosts` is `true`, it will create the
+# translation posts in advance, and then set the translation
+# on them.
 #
 # All translation posts must already exist, created using the
 # Polylang UI. These posts must also have the  `draft` status
