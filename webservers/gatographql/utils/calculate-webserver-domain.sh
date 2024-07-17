@@ -18,7 +18,7 @@ LOCALHOST_WEBSERVER_DOMAIN="$1"
 #
 # @see https://docs.lando.dev/core/v3/proxy.html
 # ----------------------------------------------------------------------
-MAYBE_ENABLED_PROXIED_WEBSERVER_DOMAIN=$(echo $LANDO_INFO | grep -E -o "https:\/\/$PROXIED_WEBSERVER_DOMAIN" | grep -E -o "$PROXIED_WEBSERVER_DOMAIN")
+MAYBE_ENABLED_PROXIED_WEBSERVER_DOMAIN=$(echo $LANDO_INFO | grep -E -o "https:\/\/$PROXIED_WEBSERVER_DOMAIN(:[0-9]+)?" | grep -E -o "$PROXIED_WEBSERVER_DOMAIN(:[0-9]+)?")
 WEBSERVER_DOMAIN=(${MAYBE_ENABLED_PROXIED_WEBSERVER_DOMAIN:=$LOCALHOST_WEBSERVER_DOMAIN})
 
 echo $WEBSERVER_DOMAIN
