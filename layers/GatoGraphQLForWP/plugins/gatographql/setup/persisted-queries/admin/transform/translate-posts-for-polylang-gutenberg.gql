@@ -441,6 +441,7 @@ query InitializeTranslationVariables(
   @include(if: $hasTranslationPosts)
 {
   emptyTranslationPostVars: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+    id
     emptyArray: _echo(value: [])
       @export(
         as: "rawTitle"
@@ -693,6 +694,8 @@ query InitializeTranslationVariables(
         as: "coreEmbedCaptionReplacementsTo"
         type: DICTIONARY
       )
+
+      @remove
   }
 
   hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
