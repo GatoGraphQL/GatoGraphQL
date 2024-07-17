@@ -82,7 +82,8 @@ query InitializeVariables
   
   emptyArray: _echo(value: [])
     @export(as: "currentlyExistingTranslationLanguages")
-    @export(as: "duplicatedPostIDs")
+    @export(as: "currentlyExistingTranslationPostIDs")
+    @export(as: "createdTranslationPostIDs")
     @export(as: "translationPostIds")
 
     @export(as: "originCoreHeadingContentItems")
@@ -209,6 +210,8 @@ query ExportOriginPost(
     })
     currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
       @export(as: "currentlyExistingTranslationLanguages")
+    currentlyExistingTranslationPostIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "currentlyExistingTranslationPostIDs")
 
 
     rawTitle
@@ -463,13 +466,13 @@ query ExportOriginPost(
 }
 
 query ExportMissingTranslationLanguages(
-  $postId: ID!
   $includeLanguagesToTranslate: [String!]! = []
   $excludeLanguagesToTranslate: [String!]! = []
   $createTranslationPosts: Boolean! = true
 )
   @depends(on: "ExportOriginPost")
   @include(if: $createTranslationPosts)
+  @include(if: $hasOriginPost)
 {
   missingTranslationLanguagesWithoutFilteringByInclude: arrayDiff(
     arrays: [
@@ -478,7 +481,7 @@ query ExportMissingTranslationLanguages(
       $excludeLanguagesToTranslate
     ]
   )
-  hasIncludeLanguagesToTranslate: _notEmpty(value: $excludeLanguagesToTranslate)
+  hasIncludeLanguagesToTranslate: _notEmpty(value: $includeLanguagesToTranslate)
   missingTranslationLanguagesWithFilteringByInclude: arrayIntersect(
     arrays: [
       $missingTranslationLanguagesWithoutFilteringByInclude,
@@ -495,46 +498,58 @@ query ExportMissingTranslationLanguages(
     @export(as: "hasMissingTranslationLanguages")
 }
 
-query ExportPostDataForMissingTranslationLanguages($postId: ID!)
+query CreateTranslationPostInputsForMissingLanguages(
+  $createTranslationPosts: Boolean! = true
+)
   @depends(on: "ExportMissingTranslationLanguages")
+  @include(if: $createTranslationPosts)
   @include(if: $hasOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
-  numberMissingLanguages: _arrayLength(array: $missingTranslationLanguages)
-  duplicatePostInputs: _arrayPad(
-    array: [],
-    length: $__numberMissingLanguages,
-    value: {
-      status: draft,
-      slug: $originPostSlug,
-      authorBy: {
-        id: $originPostAuthorID
-      },
-      categoriesBy: {
-        ids: $originPostCategoryIDs
-      },
-      contentAs: {
-        html: $originPostRawContent
-      },
-      excerpt: $originPostRawExcerpt
-      featuredImageBy: {
-        id: $originPostFeaturedImageID
-      },
-      tagsBy: {
-        ids: $originPostTagIDs
-      },
-      title: $originPostRawTitle
-    }
-  )
-    @export(as: "duplicatePostInputs")
+  createTranslationPostInputs: _echo(value: $missingTranslationLanguages)
+    @underEachArrayItem(
+      passValueOnwardsAs: "language"
+    )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            status: draft,
+            slug: $originPostSlug,
+            authorBy: {
+              id: $originPostAuthorID
+            },
+            categoriesBy: {
+              ids: $originPostCategoryIDs
+            },
+            contentAs: {
+              html: $originPostRawContent
+            },
+            excerpt: $originPostRawExcerpt
+            featuredImageBy: {
+              id: $originPostFeaturedImageID
+            },
+            tagsBy: {
+              ids: $originPostTagIDs
+            },
+            title: $originPostRawTitle,
+            polylangLanguage: $language
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createTranslationPostInputs")
 }
 
-mutation DuplicatePostForMissingTranslationLanguages
-  @depends(on: "ExportPostDataForMissingTranslationLanguages")
+mutation CreateTranslationPostForMissingLanguages(
+  $createTranslationPosts: Boolean! = true
+)
+  @depends(on: "CreateTranslationPostInputsForMissingLanguages")
+  @include(if: $createTranslationPosts)
   @include(if: $hasOriginPost)
   @include(if: $hasMissingTranslationLanguages)
 {
-  createPosts(inputs: $duplicatePostInputs) {
+  translationPosts: createPosts(inputs: $createTranslationPostInputs) {
     status
     errors {
       __typename
@@ -543,14 +558,40 @@ mutation DuplicatePostForMissingTranslationLanguages
       }
     }
     post {
-      id @export(as: "duplicatedPostIDs", type: LIST)
+      id @export(as: "createdTranslationPostIDs", type: LIST)
     }    
   }
 }
 
+mutation CreateTranslationPostsAssociation(
+  $postId: ID!
+  $createTranslationPosts: Boolean! = true
+)
+  @depends(on: "CreateTranslationPostForMissingLanguages")
+  @include(if: $createTranslationPosts)
+  @include(if: $hasOriginPost)
+  @include(if: $hasMissingTranslationLanguages)
+{
+  allTranslationPostIDs: _arrayMerge(
+    arrays: [
+      [$postId],
+      $currentlyExistingTranslationPostIDs,
+      $createdTranslationPostIDs,
+    ]
+  )
 
-
-
+  polylangSaveCustomPostTranslationAssociation(input: {
+    ids: $__allTranslationPostIDs
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}
 
 query ExportHasTranslationPosts(
   $postId: ID!
@@ -558,7 +599,7 @@ query ExportHasTranslationPosts(
   $excludeLanguagesToTranslate: [String!]
 )
   @include(if: $hasOriginPost)
-  @depends(on: "ExportMissingTranslationLanguages")
+  @depends(on: "CreateTranslationPostsAssociation")
 {
   originPostForTranslations: post(by: { id: $postId }, status: any) {
     id
