@@ -75,8 +75,6 @@ query InitializeVariables
     @remove
   
   emptyArray: _echo(value: [])
-    @export(as: "currentlyExistingTranslationLanguages")
-    @export(as: "currentlyExistingTranslationPostIDs")
     @export(as: "createdTranslationPostIDs")
     @export(as: "translationPostIds")
 
@@ -165,9 +163,6 @@ query ExportOriginPost(
   defaultLanguage: polylangDefaultLanguage
     @export(as: "defaultLanguage")
 
-  enabledLanguages: polylangEnabledLanguages
-    @export(as: "enabledLanguages")
-
   originPost: post(by: { id: $postId }, status: any) {
     id
 
@@ -180,10 +175,11 @@ query ExportOriginPost(
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
-    currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-      @export(as: "currentlyExistingTranslationLanguages")
-    currentlyExistingTranslationPostIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "currentlyExistingTranslationPostIDs")
+    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "translationPostIds")
+
+    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+      @export(as: "hasTranslationPosts")
 
 
     rawTitle
@@ -432,9 +428,6 @@ query ExportOriginPost(
             as: "originCoreEmbedCaptionItems"
           )
   }
-
-  hasOriginPost: _notNull(value: $__originPost)
-    @export(as: "hasOriginPost")
 }
 
 query ExportOriginPostCanBeTranslated(
@@ -442,7 +435,7 @@ query ExportOriginPostCanBeTranslated(
   $translateFromLanguage: String
 )
   @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
+  @include(if: $hasTranslationPosts)
 {
   originPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
@@ -470,35 +463,11 @@ query ExportOriginPostCanBeTranslated(
     @export(as: "canTranslateOriginPost")
 }
 
-query ExportHasTranslationPosts(
-  $postId: ID!
-  $includeLanguagesToTranslate: [String!]
-  $excludeLanguagesToTranslate: [String!]
-)
-  @include(if: $canTranslateOriginPost)
-  @depends(on: "CreateTranslationPostsAssociation")
-{
-  originPostForTranslations: post(by: { id: $postId }, status: any) {
-    id
-
-
-    polylangTranslationLanguageIDs(filter: {
-      includeLanguages: $includeLanguagesToTranslate
-      excludeLanguages: $excludeLanguagesToTranslate
-    })
-    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationPostIds")
-
-    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
-      @export(as: "hasTranslationPosts")
-  }
-}
-
 query ExportExecuteTranslation(
   $statusToUpdate: CustomPostStatusEnum! = draft,
 )
-  @depends(on: "ExportHasTranslationPosts")
-  @include(if: $hasTranslationPosts)
+  @depends(on: "ExportOriginPostCanBeTranslated")
+  @include(if: $canTranslateOriginPost)
 {
   postsToTranslate: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
