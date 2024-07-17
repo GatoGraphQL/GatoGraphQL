@@ -245,7 +245,7 @@ Fill the JSON objects inside a target array with properties from a JSON object f
 
 ### `_arrayIntersect`
 
-Computes the intersection of arrays.
+Return an array containing all the elements from the first array which are present on all of the other arrays.
 
 ### `_arrayItem`
 
