@@ -12,6 +12,7 @@ class VirtualTutorialLessons
 {
     public final const ADD_COMMENTS_BLOCK_TO_POST = 'add-comments-block-to-post';
     public final const BULK_TRANSLATING_CLASSIC_EDITOR_POSTS_TO_A_DIFFERENT_LANGUAGE = 'bulk-translating-classic-editor-posts-to-a-different-language';
+    public final const CREATING_MISSING_TRANSLATION_POSTS_FOR_POLYLANG = 'creating-missing-translation-posts-for-polylang';
     public final const FETCH_POST_LINKS = 'fetch-post-links';
     public final const GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_OPTIMIZE_IT = 'generate-a-post-featured-image-using-ai-and-optimize-it';
     public final const IMPORTING_A_POST_FROM_WORDPRESS_RSS_FEED = 'importing-a-post-from-wordpress-rss-feed';
