@@ -14,6 +14,7 @@ use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
@@ -204,8 +205,9 @@ class MutationResolverHookSet extends AbstractHookSet
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ErrorPayloadInterface $errorPayload,
-        FeedbackItemResolution $feedbackItemResolution
+        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
+        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return match (
             [
             $feedbackItemResolution->getFeedbackProviderServiceClass(),
