@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\EngineWP\Hooks;
+namespace GatoGraphQL\GatoGraphQL\Hooks;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;

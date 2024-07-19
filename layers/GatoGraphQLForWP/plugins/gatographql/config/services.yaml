@@ -51,3 +51,6 @@ services:
 
     GatoGraphQL\GatoGraphQL\State\:
         resource: '../src/State/*'
+
+    GatoGraphQL\GatoGraphQL\Hooks\:
+        resource: '../src/Hooks/*'
