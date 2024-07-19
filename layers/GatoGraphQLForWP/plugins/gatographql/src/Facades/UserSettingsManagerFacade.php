@@ -19,7 +19,7 @@ class UserSettingsManagerFacade
 
     public static function getInstance(): UserSettingsManagerInterface
     {
-        if (is_null(self::$instance)) {
+        if (self::$instance === null) {
             self::$instance = new UserSettingsManager();
         }
         return self::$instance;

@@ -13,7 +13,7 @@ use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties as CustomPostMutationsMutationInputProperties;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
@@ -131,8 +131,9 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ErrorPayloadInterface $errorPayload,
-        FeedbackItemResolution $feedbackItemResolution
+        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
+        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
         return match (
             [
             $feedbackItemResolution->getFeedbackProviderServiceClass(),

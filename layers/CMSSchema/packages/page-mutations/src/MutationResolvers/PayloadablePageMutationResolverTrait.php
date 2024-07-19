@@ -44,7 +44,7 @@ trait PayloadablePageMutationResolverTrait
             default => App::applyFilters(
                 HookNames::ERROR_PAYLOAD,
                 $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback),
-                $feedbackItemResolution,
+                $objectTypeFieldResolutionFeedback,
             )
         };
     }

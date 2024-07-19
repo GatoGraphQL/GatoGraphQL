@@ -115,7 +115,7 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
                     $feedbackItemResolution->getMessage(),
                     $feedbackItemResolution->getNamespacedCode(),
                 ),
-                $feedbackItemResolution,
+                $objectTypeFieldResolutionFeedback,
             )
         };
     }
