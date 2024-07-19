@@ -18,7 +18,7 @@
         "pop-cms-schema/users-wp": "^3.1"
     },
     "require-dev": {
-        "johnpbloch/wordpress": "^6.4",
+        "johnpbloch/wordpress": "^6.6",
         "phpunit/phpunit": "^10.2",
         "pop-cms-schema/user-state-wp": "^3.1",
         "rector/rector": "^0.18",
