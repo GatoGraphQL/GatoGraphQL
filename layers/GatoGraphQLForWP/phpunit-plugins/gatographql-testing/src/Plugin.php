@@ -184,6 +184,18 @@ class Plugin
             )
         );
 
+        \register_taxonomy(
+            'dummy-category-two',
+            [],
+            $this->getTaxonomyArgs(
+                true,
+                __('Dummy Category (Two)'),
+                __('Dummy Categories (Two)'),
+                __('dummy category (two)'),
+                __('dummy categories (two)'),
+            )
+        );
+
         \register_post_type(
             'dummy-cpt',
             $this->getCustomPostTypeArgs(

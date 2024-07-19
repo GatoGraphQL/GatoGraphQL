@@ -22,6 +22,7 @@ trait QueryableCategoryTaxonomiesFixtureEndpointWebserverRequestTestTrait
 
         return [
             'dummy-category',
+            'dummy-category-two',
         ];
     }
 
