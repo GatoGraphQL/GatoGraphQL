@@ -26,6 +26,10 @@ interface PrematureRequestServiceInterface
      * (Single endpoint, custom endpoint, and persisted queries) and,
      * if any of them is enabled, check if the URL starts with their
      * path (even if that specific endpoint is disabled).
+     *
+     * Notice this checks only for the publicly-exposed GraphQL
+     * endpoints (i.e. not for `wp-admin/edit.php?page=gatographql&action=execute_query`
+     * or any of those).
      */
-    public function isGraphQLAPIRequest(): bool;
+    public function isPubliclyExposedGraphQLAPIRequest(): bool;
 }
