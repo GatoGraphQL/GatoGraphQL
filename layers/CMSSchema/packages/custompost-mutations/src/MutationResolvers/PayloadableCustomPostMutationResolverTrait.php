@@ -65,7 +65,7 @@ trait PayloadableCustomPostMutationResolverTrait
                     $feedbackItemResolution->getMessage(),
                     $feedbackItemResolution->getNamespacedCode(),
                 ),
-                $feedbackItemResolution,
+                $objectTypeFieldResolutionFeedback,
             )
         };
     }

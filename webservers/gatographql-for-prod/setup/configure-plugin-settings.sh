@@ -21,20 +21,20 @@ curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonEncodedOptionValues": "{\"custompost-types\":[\"dummy-cpt\",\"page\",\"post\"]}"}' \
+  -d '{"jsonEncodedOptionValues": "{\"custompost-types\":[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]}"}' \
   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/module-settings/gatographql_gatographql_schema-customposts
 
 curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonEncodedOptionValues": "{\"tag-taxonomies\":[\"dummy-tag\",\"post_tag\"]}"}' \
+  -d '{"jsonEncodedOptionValues": "{\"tag-taxonomies\":[\"dummy-tag\",\"dummy-tag-two\",\"post_tag\"]}"}' \
   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/module-settings/gatographql_gatographql_schema-tags
 
 curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonEncodedOptionValues": "{\"category-taxonomies\":[\"category\",\"dummy-category\"]}"}' \
+  -d '{"jsonEncodedOptionValues": "{\"category-taxonomies\":[\"category\",\"dummy-category\",\"dummy-category-two\"]}"}' \
   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/module-settings/gatographql_gatographql_schema-categories
  

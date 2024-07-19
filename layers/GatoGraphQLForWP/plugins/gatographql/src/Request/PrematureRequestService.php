@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoP\EngineWP\Hooks;
+namespace GatoGraphQL\GatoGraphQL\Request;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
@@ -10,8 +10,8 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
-use PoP\Root\Hooks\AbstractHookSet;
 use PoP\Root\Routing\RoutingHelperServiceInterface;
+use PoP\Root\Services\BasicServiceTrait;
 
 /**
  * Use:
@@ -23,8 +23,10 @@ use PoP\Root\Routing\RoutingHelperServiceInterface;
  *     -d '{"query": "{ id me { name } }"}' \
  *     https://mysite.com/graphql/
  */
-class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
+class PrematureRequestService implements PrematureRequestServiceInterface
 {
+    use BasicServiceTrait;
+
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?UserSettingsManagerInterface $userSettingsManager = null;
     private ?RoutingHelperServiceInterface $routingHelperService = null;
@@ -65,15 +67,6 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         return $this->routingHelperService;
     }
 
-    protected function init(): void
-    {
-        \add_filter(
-            'application_password_is_api_request',
-            $this->isGraphQLAPIRequest(...),
-            PHP_INT_MAX // Execute last
-        );
-    }
-
     /**
      * Check if requesting a GraphQL endpoint.
      *
@@ -84,13 +77,13 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
      * (Single endpoint, custom endpoint, and persisted queries) and,
      * if any of them is enabled, check if the URL starts with their
      * path (even if that specific endpoint is disabled).
+     *
+     * Notice this checks only for the publicly-exposed GraphQL
+     * endpoints (i.e. not for `wp-admin/edit.php?page=gatographql&action=execute_query`
+     * or any of those).
      */
-    public function isGraphQLAPIRequest(bool $isAPIRequest): bool
+    public function isPubliclyExposedGraphQLAPIRequest(): bool
     {
-        if ($isAPIRequest) {
-            return $isAPIRequest;
-        }
-
         /**
          * Check if the (slashed) requested URL starts with any
          * of the (slashed) GraphQL endpoints.
