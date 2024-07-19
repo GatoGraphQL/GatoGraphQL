@@ -161,6 +161,18 @@ class Plugin
         );
 
         \register_taxonomy(
+            'dummy-tag-two',
+            [],
+            $this->getTaxonomyArgs(
+                false,
+                __('Dummy Tag (Two)'),
+                __('Dummy Tags (Two)'),
+                __('dummy tag (two)'),
+                __('dummy tags (two)'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-category',
             [],
             $this->getTaxonomyArgs(

@@ -28,7 +28,7 @@ curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonEncodedOptionValues": "{\"tag-taxonomies\":[\"dummy-tag\",\"post_tag\"]}"}' \
+  -d '{"jsonEncodedOptionValues": "{\"tag-taxonomies\":[\"dummy-tag\",\"dummy-tag-two\",\"post_tag\"]}"}' \
   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/module-settings/gatographql_gatographql_schema-tags
 
 curl -i --insecure \
