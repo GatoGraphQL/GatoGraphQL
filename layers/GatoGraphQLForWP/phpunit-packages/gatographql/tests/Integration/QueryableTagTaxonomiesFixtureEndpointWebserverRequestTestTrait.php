@@ -22,6 +22,7 @@ trait QueryableTagTaxonomiesFixtureEndpointWebserverRequestTestTrait
             $value[] = 'post_tag';
         } else {
             $value[] = 'dummy-tag';
+            $value[] = 'dummy-tag-two';
         }
 
         /**
