@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Hooks;
 
-use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
-use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
-use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
-use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
-use PoPAPI\APIEndpoints\EndpointUtils;
+use GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface;
 use PoP\Root\Hooks\AbstractHookSet;
-use PoP\Root\Routing\RoutingHelperServiceInterface;
 
 /**
  * Use:
@@ -25,44 +19,20 @@ use PoP\Root\Routing\RoutingHelperServiceInterface;
  */
 class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
-    private ?ModuleRegistryInterface $moduleRegistry = null;
-    private ?UserSettingsManagerInterface $userSettingsManager = null;
-    private ?RoutingHelperServiceInterface $routingHelperService = null;
+    private ?PrematureRequestServiceInterface $prematureRequestService = null;
 
-    final public function setModuleRegistry(ModuleRegistryInterface $moduleRegistry): void
+    final public function setPrematureRequestService(PrematureRequestServiceInterface $prematureRequestService): void
     {
-        $this->moduleRegistry = $moduleRegistry;
+        $this->prematureRequestService = $prematureRequestService;
     }
-    final protected function getModuleRegistry(): ModuleRegistryInterface
+    final protected function getPrematureRequestService(): PrematureRequestServiceInterface
     {
-        if ($this->moduleRegistry === null) {
-            /** @var ModuleRegistryInterface */
-            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-            $this->moduleRegistry = $moduleRegistry;
+        if ($this->prematureRequestService === null) {
+            /** @var PrematureRequestServiceInterface */
+            $prematureRequestService = $this->instanceManager->getInstance(PrematureRequestServiceInterface::class);
+            $this->prematureRequestService = $prematureRequestService;
         }
-        return $this->moduleRegistry;
-    }
-    final public function setUserSettingsManager(UserSettingsManagerInterface $userSettingsManager): void
-    {
-        $this->userSettingsManager = $userSettingsManager;
-    }
-    final protected function getUserSettingsManager(): UserSettingsManagerInterface
-    {
-        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
-    }
-
-    final public function setRoutingHelperService(RoutingHelperServiceInterface $routingHelperService): void
-    {
-        $this->routingHelperService = $routingHelperService;
-    }
-    final protected function getRoutingHelperService(): RoutingHelperServiceInterface
-    {
-        if ($this->routingHelperService === null) {
-            /** @var RoutingHelperServiceInterface */
-            $routingHelperService = $this->instanceManager->getInstance(RoutingHelperServiceInterface::class);
-            $this->routingHelperService = $routingHelperService;
-        }
-        return $this->routingHelperService;
+        return $this->prematureRequestService;
     }
 
     protected function init(): void
@@ -91,59 +61,6 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             return $isAPIRequest;
         }
 
-        /**
-         * Check if the (slashed) requested URL starts with any
-         * of the (slashed) GraphQL endpoints.
-         *
-         * Use `getRequestURI` as to remove the language info from
-         * the URI when in subfolder-based Multisite.
-         */
-        $requestURI = $this->getRoutingHelperService()->getRequestURI() ?? '';
-        $requestURI = EndpointUtils::removeMarkersFromURI($requestURI);
-        $requestURI = EndpointUtils::slashURI($requestURI);
-        foreach ($this->getGraphQLEndpointPaths() as $graphQLEndpointPath) {
-            $graphQLEndpointPath = EndpointUtils::slashURI($graphQLEndpointPath);
-            if (str_starts_with($requestURI, $graphQLEndpointPath)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * GraphQL endpoint paths (if enabled):
-     *
-     * - Single endpoint
-     * - Custom endpoints
-     * - Persisted query endpoints
-     *
-     * @return string[]
-     */
-    protected function getGraphQLEndpointPaths(): array
-    {
-        $moduleRegistry = $this->getModuleRegistry();
-        $userSettingsManager = $this->getUserSettingsManager();
-
-        $graphQLEndpointPaths = [];
-        if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT)) {
-            $graphQLEndpointPaths[] = $userSettingsManager->getSetting(
-                EndpointFunctionalityModuleResolver::SINGLE_ENDPOINT,
-                ModuleSettingOptions::PATH
-            );
-        }
-        if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS)) {
-            $graphQLEndpointPaths[] = $userSettingsManager->getSetting(
-                EndpointFunctionalityModuleResolver::CUSTOM_ENDPOINTS,
-                ModuleSettingOptions::PATH
-            );
-        }
-        if ($moduleRegistry->isModuleEnabled(EndpointFunctionalityModuleResolver::PERSISTED_QUERIES)) {
-            $graphQLEndpointPaths[] = $userSettingsManager->getSetting(
-                EndpointFunctionalityModuleResolver::PERSISTED_QUERIES,
-                ModuleSettingOptions::PATH
-            );
-        }
-
-        return $graphQLEndpointPaths;
+        return $this->getPrematureRequestService()->isGraphQLAPIRequest();
     }
 }
