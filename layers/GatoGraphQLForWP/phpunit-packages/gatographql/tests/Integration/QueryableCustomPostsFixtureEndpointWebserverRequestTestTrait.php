@@ -30,6 +30,7 @@ trait QueryableCustomPostsFixtureEndpointWebserverRequestTestTrait
         } elseif (str_ends_with($dataName, ':2')) {
             $value[] = 'page';
             $value[] = 'dummy-cpt';
+            $value[] = 'dummy-cpt-two';
         }
 
         /**
