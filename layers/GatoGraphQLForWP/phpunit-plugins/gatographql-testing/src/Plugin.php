@@ -184,6 +184,19 @@ class Plugin
                 __('dummy CPTs'),
             )
         );
+
+        \register_post_type(
+            'dummy-cpt-two',
+            $this->getCustomPostTypeArgs(
+                [
+                    'dummy-tag-two',
+                    'dummy-category-two',
+                ],
+                __('Dummy CPT (Two)'),
+                __('Dummy CPTs (Two)'),
+                __('dummy CPTs (two)'),
+            )
+        );
     }
 
     /**

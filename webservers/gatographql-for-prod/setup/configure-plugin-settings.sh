@@ -21,7 +21,7 @@ curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonEncodedOptionValues": "{\"custompost-types\":[\"dummy-cpt\",\"page\",\"post\"]}"}' \
+  -d '{"jsonEncodedOptionValues": "{\"custompost-types\":[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]}"}' \
   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/module-settings/gatographql_gatographql_schema-customposts
 
 curl -i --insecure \
