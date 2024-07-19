@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType;
 
-interface UpdateCustomPostInputObjectTypeResolverInterface
+use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
+
+interface UpdateCustomPostInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
 {
 }
