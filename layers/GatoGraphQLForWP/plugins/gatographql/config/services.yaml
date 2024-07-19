@@ -46,6 +46,9 @@ services:
     GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface:
         class: \GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationService
 
+    GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface:
+        class: \GatoGraphQL\GatoGraphQL\Request\PrematureRequestService
+
     GatoGraphQL\GatoGraphQL\Services\:
         resource: ../src/Services/*
 
