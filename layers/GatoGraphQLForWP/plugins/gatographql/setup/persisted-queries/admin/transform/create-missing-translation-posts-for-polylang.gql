@@ -235,7 +235,7 @@ mutation CreateTranslationPostForMissingLanguages
   }
 }
 
-mutation CreateTranslationPostsAssociation(
+mutation CreateMissingTranslationPostsForPolylang(
   $postId: ID!
 )
   @depends(on: "CreateTranslationPostForMissingLanguages")
