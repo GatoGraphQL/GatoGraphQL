@@ -6,7 +6,7 @@
 - Added documentation for new PRO module **Polylang Mutations** ([#2733](https://github.com/GatoGraphQL/GatoGraphQL/pull/2733))
 - Added documentation for new PRO field `_arrayIntersect` ([#2735](https://github.com/GatoGraphQL/GatoGraphQL/pull/2735))
 - Added predefined persisted query:
-  - [PRO] Create missing translation posts for Polylang
+  - [PRO] Create missing translation posts for Polylang ([#2740](https://github.com/GatoGraphQL/GatoGraphQL/pull/2740))
   
 ## [PRO] Improvements
 
