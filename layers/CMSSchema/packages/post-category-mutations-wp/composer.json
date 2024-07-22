@@ -150,10 +150,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/custompost-mutations-wp": "^3.1",
-        "pop-cms-schema/post-categories-wp": "^3.1",
-        "pop-cms-schema/post-category-mutations": "^3.1",
-        "pop-cms-schema/user-state-mutations-wp": "^3.1"
+        "pop-cms-schema/custompost-mutations-wp": "^4.0",
+        "pop-cms-schema/post-categories-wp": "^4.0",
+        "pop-cms-schema/post-category-mutations": "^4.0",
+        "pop-cms-schema/user-state-mutations-wp": "^4.0"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
@@ -183,7 +183,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "3.1-dev"
+            "dev-master": "4.0-dev"
         }
     },
     "config": {

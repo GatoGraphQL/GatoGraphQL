@@ -4,7 +4,11 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
-## 3.1.0 - DATE
+## 4.0.0 - DATE
+
+### Breaking changes
+
+- Updated internal PHP hook structure for error payloads (#2739)
 
 ### Improvements
 

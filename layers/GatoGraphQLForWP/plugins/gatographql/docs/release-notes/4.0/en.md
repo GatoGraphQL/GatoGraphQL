@@ -1,4 +1,8 @@
-# Release Notes: 3.1
+# Release Notes: 4.0
+
+## Breaking changes
+
+- Updated internal PHP hook structure for error payloads ([#2739](https://github.com/GatoGraphQL/GatoGraphQL/pull/2739))
 
 ## Improvements
 
@@ -7,7 +11,16 @@
 - Added documentation for new PRO field `_arrayIntersect` ([#2735](https://github.com/GatoGraphQL/GatoGraphQL/pull/2735))
 - Added predefined persisted query:
   - [PRO] Create missing translation posts for Polylang ([#2740](https://github.com/GatoGraphQL/GatoGraphQL/pull/2740))
+
+## Fixed
+
+- Don't replace chars in translation persisted queries ([#2731](https://github.com/GatoGraphQL/GatoGraphQL/pull/2731))
   
+## [PRO] Breaking changes
+
+- Rename field `_intSubstract` to `_intSubtract`
+- Rename directive `@intSubstract` to `@intSubtract`
+
 ## [PRO] Improvements
 
 - Added field `_arrayIntersect`
@@ -72,7 +85,3 @@ mutation {
   }
 }
 ```
-
-## Fixed
-
-- Don't replace chars in translation persisted queries ([#2731](https://github.com/GatoGraphQL/GatoGraphQL/pull/2731))

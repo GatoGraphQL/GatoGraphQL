@@ -286,13 +286,16 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
-= 3.1.0 =
+= 4.0.0 =
+* Breaking change: Updated internal PHP hook structure for error payloads (#2739)
 * Use bulk mutations in predefined persisted queries (#2728)
 * Added documentation for new PRO module **Polylang Mutations** (#2733)
 * Added documentation for new PRO field `_arrayIntersect` (#2735)
 * Added predefined persisted query:
   * [PRO] Create missing translation posts for Polylang (#2740)
 * Fixed: Don't replace chars in translation persisted queries (#2731)
+* [PRO] Breaking change: Rename field `_intSubstract` to `_intSubtract`
+* [PRO] Breaking change: Rename directive `@intSubstract` to `@intSubtract`
 * [PRO] Added **Polylang Mutations**
 * [PRO] Added field `_arrayIntersect`
 
