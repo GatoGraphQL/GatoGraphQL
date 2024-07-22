@@ -152,7 +152,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "getpop/engine": "^3.1"
+        "getpop/engine": "^4.0"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
