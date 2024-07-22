@@ -294,6 +294,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added predefined persisted query:
   * [PRO] Create missing translation posts for Polylang (#2740)
 * Fixed: Don't replace chars in translation persisted queries (#2731)
+* [PRO] Breaking change: Rename field `_intSubstract` to `_intSubtract`
+* [PRO] Breaking change: Rename directive `@intSubstract` to `@intSubtract`
 * [PRO] Added **Polylang Mutations**
 * [PRO] Added field `_arrayIntersect`
 
