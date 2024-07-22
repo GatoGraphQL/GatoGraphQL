@@ -152,7 +152,7 @@ query ExportMissingTranslationLanguages(
   hasIncludeLanguagesToTranslate: _notEmpty(value: $includeLanguagesToTranslate)
   missingTranslationLanguagesWithFilteringByInclude: arrayIntersect(
     arrays: [
-      $missingTranslationLanguagesWithoutFilteringByInclude,
+      $__missingTranslationLanguagesWithoutFilteringByInclude,
       $includeLanguagesToTranslate
     ]
   )
