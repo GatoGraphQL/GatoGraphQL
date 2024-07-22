@@ -1,6 +1,6 @@
 {
     "name": "custom-endpoint-editor-components",
-    "version": "3.1.0-dev",
+    "version": "4.0.0-dev",
     "description": "Components required to edit a GraphQL custom endpoint CPT",
     "author": "Leonardo Losoviz",
     "license": "MIT",
