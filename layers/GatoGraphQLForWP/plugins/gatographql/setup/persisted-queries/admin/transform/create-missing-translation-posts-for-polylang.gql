@@ -238,9 +238,7 @@ mutation CreateTranslationPostForMissingLanguages
   }
 }
 
-query ExportAllTranslationPosts(
-  $postId: ID!
-)
+query ExportAllTranslationPosts
   @depends(on: "CreateTranslationPostForMissingLanguages")
   @include(if: $hasCreatedTranslationPosts)
 {
