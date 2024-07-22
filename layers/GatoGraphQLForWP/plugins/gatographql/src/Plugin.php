@@ -260,7 +260,7 @@ class Plugin extends AbstractMainPlugin
             '2.5' => [$this->installPluginSetupDataForVersion2Dot5(...)],
             '2.6' => [$this->installPluginSetupDataForVersion2Dot6(...)],
             '3.0' => [$this->installPluginSetupDataForVersion3Dot0(...)],
-            '3.1' => [$this->installPluginSetupDataForVersion3Dot1(...)],
+            '4.0' => [$this->installPluginSetupDataForVersion4Dot0(...)],
         ];
     }
 
@@ -1830,7 +1830,7 @@ class Plugin extends AbstractMainPlugin
         }
     }
 
-    protected function installPluginSetupDataForVersion3Dot1(): void
+    protected function installPluginSetupDataForVersion4Dot0(): void
     {
         $instanceManager = InstanceManagerFacade::getInstance();
 
