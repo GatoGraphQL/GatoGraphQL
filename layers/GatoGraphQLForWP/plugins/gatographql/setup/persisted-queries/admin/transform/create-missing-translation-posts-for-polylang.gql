@@ -19,7 +19,7 @@
 #
 # By default, the origin post must have the default language
 # of the site, or the logic will not be executed.
-# To translate from any language, pass variable
+# To execute for any language, pass variable
 # `$translateDefaultLanguageOnly` with `false`.
 #
 # Additionally, execute the logic only when the origin post
