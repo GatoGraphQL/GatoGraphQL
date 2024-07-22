@@ -47,7 +47,7 @@ trait ClientTrait
     /**
      * Endpoint URL
      */
-    abstract protected function getEndpointURLOrURLPath(): ?string;
+    abstract public function getEndpointURLOrURLPath(): ?string;
 
     abstract protected function __(string $text, string $domain = 'default'): string;
 
