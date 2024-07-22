@@ -142,7 +142,7 @@ query ExportMissingTranslationLanguages(
   @depends(on: "ExportOriginPostCanBeTranslated")
   @include(if: $canTranslateOriginPost)
 {
-  missingTranslationLanguagesWithoutFilteringByInclude: arrayDiff(
+  missingTranslationLanguagesWithoutFilteringByInclude: _arrayDiff(
     arrays: [
       $enabledLanguages,
       $currentlyExistingTranslationLanguages,
@@ -150,7 +150,7 @@ query ExportMissingTranslationLanguages(
     ]
   )
   hasIncludeLanguagesToTranslate: _notEmpty(value: $includeLanguagesToTranslate)
-  missingTranslationLanguagesWithFilteringByInclude: arrayIntersect(
+  missingTranslationLanguagesWithFilteringByInclude: _arrayIntersect(
     arrays: [
       $__missingTranslationLanguagesWithoutFilteringByInclude,
       $includeLanguagesToTranslate
