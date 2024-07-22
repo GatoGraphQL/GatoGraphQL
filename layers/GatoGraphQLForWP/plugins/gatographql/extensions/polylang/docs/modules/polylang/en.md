@@ -349,3 +349,62 @@ Running this query:
   }
 }
 ```
+
+## Mutations
+
+The GraphQL schema is provided with mutations to:
+
+- Establish the language for custom posts, tags and categories, and
+- Define associations among them (i.e. indicate that a set of custom posts, tags or categories is a translation for each other).
+
+| Mutation | Description |
+| --- | --- |
+| `polylangSetCustomPostLanguage` | Set the language of the custom post. |
+| `polylangSetTaxonomyTermLanguage` | Set the language of the taxonomy term. |
+| `polylangSaveCustomPostTranslationAssociation` | Set the translation association for the custom post. |
+| `polylangSaveTaxonomyTermTranslationAssociation` | Set the translation association for the taxonomy term. |
+
+For instance, the following query defines the language for 3 posts (to English, Spanish and French), and then defines that these 3 posts are a translation of each other:
+
+```graphql
+mutation {
+  post1: polylangSetCustomPostLanguage(input: {id: 1, language: "en"}) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+  post2: polylangSetCustomPostLanguage(input: {id: 2, language: "es"}) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+  post3: polylangSetCustomPostLanguage(input: {id: 3, language: "fr"}) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+  polylangSaveCustomPostTranslationAssociation(input: {
+    ids: [1, 2, 3]
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}
+```
