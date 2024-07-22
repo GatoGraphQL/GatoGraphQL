@@ -63,7 +63,7 @@ add_action(
          *
          * @gatographql-readonly-code
          */
-        $mainPluginVersionConstraint = '^3.1';
+        $mainPluginVersionConstraint = '^4.0';
         
         /**
          * Validate Gato GraphQL is active
