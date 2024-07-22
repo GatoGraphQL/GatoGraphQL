@@ -286,6 +286,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 3.0.1 =
+* Fixed: "Call to protected method" exception in PHP 8.2 (#2741)
+
 = 3.0.0 =
 * Breaking change: Require at least WordPress v6.0 (#2719)
 * Breaking change: Option "Do not use payload types for mutations (i.e. return the mutated entity)" in schema configuration block "Payload Types for Mutations" must be re-selected (#2720)
