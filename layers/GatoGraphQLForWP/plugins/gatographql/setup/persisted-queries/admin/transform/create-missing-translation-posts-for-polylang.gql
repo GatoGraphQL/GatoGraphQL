@@ -235,9 +235,7 @@ mutation CreateTranslationPostForMissingLanguages
   }
 }
 
-mutation CreateMissingTranslationPostsForPolylang(
-  $postId: ID!
-)
+query ExportAllTranslationPosts
   @depends(on: "CreateTranslationPostForMissingLanguages")
   @include(if: $hasCreatedTranslationPosts)
 {
@@ -248,9 +246,17 @@ mutation CreateMissingTranslationPostsForPolylang(
       $createdTranslationPostIDs,
     ]
   )
+    @export(as: "allTranslationPostIDs")
+}
 
+mutation CreateMissingTranslationPostsForPolylang(
+  $postId: ID!
+)
+  @depends(on: "ExportAllTranslationPosts")
+  @include(if: $hasCreatedTranslationPosts)
+{
   polylangSaveCustomPostTranslationAssociation(input: {
-    ids: $__allTranslationPostIDs
+    ids: $allTranslationPostIDs
   }) {
     status
     errors {
