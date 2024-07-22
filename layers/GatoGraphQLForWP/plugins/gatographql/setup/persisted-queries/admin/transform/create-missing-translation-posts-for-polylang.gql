@@ -88,13 +88,11 @@ query ExportOriginPost(
       @export(as: "fromLanguage")
     
 
-    polylangTranslationLanguageIDs(
-      includeSelf: true,
-      filter: {
-        includeLanguages: $includeLanguagesToTranslate
-        excludeLanguages: $excludeLanguagesToTranslate
-      }
-    )
+    polylangTranslationLanguageIDs(filter: {
+      includeSelf: true
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
     currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
       @export(as: "currentlyExistingTranslationLanguages")
     currentlyExistingTranslationPostIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
