@@ -11,6 +11,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Use bulk mutations in predefined persisted queries (#2728)
 - Added documentation for new PRO module **Polylang Mutations** (#2733)
 - Added documentation for new PRO field `_arrayIntersect` (#2735)
+- Added predefined persisted query:
+  - [PRO] Create missing translation posts for Polylang (#2740)
 
 ### Fixed
 

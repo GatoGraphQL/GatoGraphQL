@@ -21,6 +21,7 @@ class PluginSetupDataEntrySlugs
 
     public final const PERSISTED_QUERY_ADD_COMMENTS_BLOCK_TO_POST = 'add-comments-block-to-post';
     public final const PERSISTED_QUERY_ADD_MISSING_LINKS_IN_POST = 'add-missing-links-in-post';
+    public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG = 'create-missing-translation-posts-for-polylang';
     public final const PERSISTED_QUERY_DUPLICATE_POST = 'duplicate-post';
     public final const PERSISTED_QUERY_DUPLICATE_POSTS = 'duplicate-posts';
     public final const PERSISTED_QUERY_EXPORT_POST_TO_WORDPRESS_SITE = 'export-post-to-wordpress-site';

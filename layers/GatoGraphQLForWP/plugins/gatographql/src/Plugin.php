@@ -260,6 +260,7 @@ class Plugin extends AbstractMainPlugin
             '2.5' => [$this->installPluginSetupDataForVersion2Dot5(...)],
             '2.6' => [$this->installPluginSetupDataForVersion2Dot6(...)],
             '3.0' => [$this->installPluginSetupDataForVersion3Dot0(...)],
+            '3.1' => [$this->installPluginSetupDataForVersion3Dot1(...)],
         ];
     }
 
@@ -1819,6 +1820,43 @@ class Plugin extends AbstractMainPlugin
                                 ),
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
                                     'admin/sync/import-posts-from-csv',
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+    }
+
+    protected function installPluginSetupDataForVersion3Dot1(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+
+        /**
+         * Create the Persisted Queries
+         */
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Create missing translation posts for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Given a post, duplicate it into all the other languages defined in Polylang for which there is no translation post yet', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/create-missing-translation-posts-for-polylang',
+                                    VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_POSTS_FOR_POLYLANG,
                                 ),
                             ],
                         ],
