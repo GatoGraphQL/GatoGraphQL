@@ -12,6 +12,11 @@
 - Added predefined persisted query:
   - [PRO] Create missing translation posts for Polylang ([#2740](https://github.com/GatoGraphQL/GatoGraphQL/pull/2740))
   
+## [PRO] Breaking changes
+
+- Rename field `_intSubstract` to `_intSubtract`
+- Rename directive `@intSubstract` to `@intSubtract`
+
 ## [PRO] Improvements
 
 - Added field `_arrayIntersect`
