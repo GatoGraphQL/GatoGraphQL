@@ -21,6 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Don't replace chars in translation persisted queries (#2731)
+- "Call to protected method" exception in PHP 8.2 (#2741)
 
 ## 3.0.0 - 10/07/2024
 
