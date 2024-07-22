@@ -15,7 +15,8 @@
 ## Fixed
 
 - Don't replace chars in translation persisted queries ([#2731](https://github.com/GatoGraphQL/GatoGraphQL/pull/2731))
-  
+- "Call to protected method" exception in PHP 8.2 ([#2741](https://github.com/GatoGraphQL/GatoGraphQL/pull/2741))
+
 ## [PRO] Breaking changes
 
 - Rename field `_intSubstract` to `_intSubtract`
