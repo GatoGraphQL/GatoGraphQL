@@ -1,5 +1,9 @@
 # Release Notes: 3.1
 
+## Breaking changes
+
+- Updated internal PHP hook structure for error payloads ([#2739](https://github.com/GatoGraphQL/GatoGraphQL/pull/2739))
+
 ## Improvements
 
 - Use bulk mutations in predefined persisted queries ([#2728](https://github.com/GatoGraphQL/GatoGraphQL/pull/2728))

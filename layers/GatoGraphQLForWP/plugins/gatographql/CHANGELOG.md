@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 4.0.0 - DATE
 
+### Breaking changes
+
+- Updated internal PHP hook structure for error payloads (#2739)
+
 ### Improvements
 
 - Use bulk mutations in predefined persisted queries (#2728)
