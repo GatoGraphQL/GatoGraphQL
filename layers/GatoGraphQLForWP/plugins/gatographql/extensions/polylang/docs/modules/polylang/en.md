@@ -58,7 +58,7 @@ These types implement interface `PolylangTranslatable`. (Type `Media` does only 
 | Field | Description |
 | --- | --- |
 | `polylangLanguage` | Language of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on). |
-| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on). |
+| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language locale as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on). |
 
 Field `polylangTranslationLanguageIDs` provides the entity IDs for all the translations (i.e. post/page/category/tag/media). It accepts input `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default), and inputs `includeLanguages` and `excludeLanguages`, to filter the included languages in the results.
 
@@ -240,7 +240,7 @@ In addition, field `polylangIsTranslatable` indicates if the CPT or taxonomy is 
 | Field | Description |
 | --- | --- |
 | `polylangLanguage` | Language of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
-| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
+| `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language locale as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
 | `polylangIsTranslatable` | Indicate if the entity can be translated. |
 
 Running this query:
