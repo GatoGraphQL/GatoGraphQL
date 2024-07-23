@@ -101,10 +101,6 @@ query FilterTranslationPostsToUpdate(
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
-
-    polylangLanguage {
-      code @export(as: "polylangLanguageIDCodes", type: DICTIONARY)
-    }
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
