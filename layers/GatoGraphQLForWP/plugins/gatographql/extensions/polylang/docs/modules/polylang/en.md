@@ -11,7 +11,7 @@ Query the site metadata configured in Polylang.
 | Field | Description |
 | --- | --- |
 | `polylangDefaultLanguage` | Default language on Polylang, or `null` if there are no languages enabled. |
-| `polylangEnabledLanguages` | Enabled languages on Polylang. |
+| `polylangLanguages` | Enabled languages on Polylang. |
 
 Running this query:
 
@@ -20,7 +20,7 @@ Running this query:
   polylangDefaultLanguage {
     code
   }
-  polylangEnabledLanguages {
+  polylangLanguages {
     code
   }
 }
@@ -34,7 +34,7 @@ Running this query:
     "polylangDefaultLanguage": {
       "code": "en"
     },
-    "polylangEnabledLanguages": [
+    "polylangLanguages": [
       {
         "code": "en"
       },
