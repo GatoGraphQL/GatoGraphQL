@@ -57,7 +57,7 @@ query ExportOriginPost(
     code @export(as: "defaultLanguage")
   }
 
-  enabledLanguages: polylangLanguages {
+  enabledLanguages: polylangLanguages(filter: { enabled: true }) {
     code @export(as: "enabledLanguages", type: LIST)
   }
 
