@@ -17,8 +17,12 @@ Running this query:
 
 ```graphql
 {
-  polylangDefaultLanguage
-  polylangEnabledLanguages
+  polylangDefaultLanguage {
+    code
+  }
+  polylangEnabledLanguages {
+    code
+  }
 }
 ```
 
@@ -27,11 +31,19 @@ Running this query:
 ```json
 {
   "data": {
-    "polylangDefaultLanguage": "en",
+    "polylangDefaultLanguage": {
+      "code": "en"
+    },
     "polylangEnabledLanguages": [
-      "en",
-      "es",
-      "fr"
+      {
+        "code": "en"
+      },
+      {
+        "code": "es"
+      },
+      {
+        "code": "fr"
+      }
     ]
   }
 }
