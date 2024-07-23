@@ -57,8 +57,18 @@ query ExportOriginPost(
     code @export(as: "defaultLanguage")
   }
 
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
   enabledLanguages: polylangLanguages(filter: { enabled: true }) {
-    code @export(as: "enabledLanguages", type: LIST)
+    code @export(
+      as: "enabledLanguages",
+      type: LIST
+    )
   }
 
   originPost: post(by: { id: $postId }, status: any) {
@@ -96,8 +106,8 @@ query ExportOriginPost(
       includeLanguageLocales: $includeLanguageLocalesToTranslate
       excludeLanguageLocales: $excludeLanguageLocalesToTranslate
     })
-    currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-      @export(as: "currentlyExistingTranslationLanguages")
+    currentlyExistingTranslationLanguageLocales: _objectProperties(object: $__polylangTranslationLanguageIDs)
+      @export(as: "currentlyExistingTranslationLanguageLocales")
     currentlyExistingTranslationPostIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
       @export(as: "currentlyExistingTranslationPostIDs")
   }
@@ -113,6 +123,20 @@ query ExportOriginPostCanBeTranslated(
   @depends(on: "ExportOriginPost")
   @include(if: $hasOriginPost)
 {
+  currentlyExistingTranslationLanguages: _echo(value: $currentlyExistingTranslationLanguageLocales)
+    @underEachArrayItem(
+      passValueOnwardsAs: "languageLocale"
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageLocaleCodes,
+          by: { key: $languageLocale }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "currentlyExistingTranslationLanguages")
+    
   originPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage

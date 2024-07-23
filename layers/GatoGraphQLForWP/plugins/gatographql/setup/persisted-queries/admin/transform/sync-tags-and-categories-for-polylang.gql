@@ -131,17 +131,13 @@ query FilterTranslationPostsToUpdate(
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
-    polylangLanguageCode: _objectProperty(
+    polylangLanguageLocale: _objectProperty(
       object: $translationPostLanguages,
       by: { key: $__id }
     )
-    polylangLanguage: _objectProperty(
-      object: $languageLocaleCodes,
-      by: { key: $__polylangLanguageCode }
-    )
 
-    translationPostTagIDs: _echo(value: $__polylangLanguage)
-      @passOnwards(as: "lang")
+    translationPostTagIDs: _echo(value: $__polylangLanguageLocale)
+      @passOnwards(as: "languageLocale")
       @applyField(
         name: "_echo"
         arguments: { value: $originPostTagIDs }
@@ -163,7 +159,7 @@ query FilterTranslationPostsToUpdate(
           name: "_objectProperty"
           arguments: {
             object: $tagTranslationLanguageIDs,
-            by: { key: $lang },
+            by: { key: $languageLocale },
             failIfNonExistingKeyOrPath: false
           }
           setResultInResponse: true
@@ -175,8 +171,8 @@ query FilterTranslationPostsToUpdate(
       )
       @remove
 
-    translationPostCategoryIDs: _echo(value: $__polylangLanguage)
-      @passOnwards(as: "lang")
+    translationPostCategoryIDs: _echo(value: $__polylangLanguageLocale)
+      @passOnwards(as: "languageLocale")
       @applyField(
         name: "_echo"
         arguments: { value: $originPostCategoryIDs }
@@ -198,7 +194,7 @@ query FilterTranslationPostsToUpdate(
           name: "_objectProperty"
           arguments: {
             object: $categoryTranslationLanguageIDs,
-            by: { key: $lang },
+            by: { key: $languageLocale },
             failIfNonExistingKeyOrPath: false
           }
           setResultInResponse: true

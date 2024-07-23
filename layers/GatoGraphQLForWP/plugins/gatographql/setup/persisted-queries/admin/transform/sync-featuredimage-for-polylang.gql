@@ -137,15 +137,11 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
     polylangLanguageLocale: polylangLanguage {
       code
     }
-    polylangLanguage: _objectProperty(
-      object: $languageLocaleCodes,
-      by: { key: $__polylangLanguageLocale }
-    )
 
     translationFeaturedImageID: _objectProperty(
       object: $featuredImageTranslationLanguageIDs,
       by: {
-        key: $__polylangLanguage
+        key: $__polylangLanguageLocale
       }
       failIfNonExistingKeyOrPath: false
     )
