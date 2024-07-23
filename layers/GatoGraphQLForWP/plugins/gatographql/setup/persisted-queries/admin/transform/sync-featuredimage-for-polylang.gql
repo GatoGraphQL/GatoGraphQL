@@ -134,13 +134,12 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
   {
     id
 
-    polylangLanguageCode: _objectProperty(
-      object: $translationPostLanguages,
-      by: { key: $__id }
-    )
+    polylangLanguage {
+      code
+    }
     polylangLanguage: _objectProperty(
       object: $languageLocaleCodes,
-      by: { key: $__polylangLanguageCode }
+      by: { key: $__polylangLanguage }
     )
 
     translationFeaturedImageID: _objectProperty(
