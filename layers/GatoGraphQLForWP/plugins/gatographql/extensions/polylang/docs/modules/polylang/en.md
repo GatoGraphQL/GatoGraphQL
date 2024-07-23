@@ -11,7 +11,7 @@ Query the site metadata configured in Polylang.
 | Field | Description |
 | --- | --- |
 | `polylangDefaultLanguage` | Default language on Polylang, or `null` if there are no languages enabled. |
-| `polylangLanguages` | Enabled languages on Polylang. |
+| `polylangLanguages` | List of languages on Polylang. |
 
 Running this query:
 
