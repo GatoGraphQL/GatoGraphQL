@@ -118,7 +118,7 @@ These types implement interface `PolylangTranslatable`. (Type `Media` does only 
 | `polylangLanguage` | Language of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on). |
 | `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language locale as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on). |
 
-Field `polylangTranslationLanguageIDs` provides the entity IDs for all the translations (i.e. post/page/category/tag/media). It accepts input `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default), and inputs `includeLanguages` and `excludeLanguages`, to filter the included languages in the results.
+Field `polylangTranslationLanguageIDs` provides the entity IDs for all the translations (i.e. post/page/category/tag/media). It accepts input `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default), and inputs `includeLanguageLocales` and `excludeLanguageLocales`, to filter the included languages in the results.
 
 Running this query:
 
