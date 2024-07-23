@@ -151,26 +151,13 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * The tests have this shape:
      * 
-     *   pluginVendor/pluginSlug/testName.gql
+     *   pluginVendor/pluginSlug/fixtureName.gql
      * 
      * pluginName = pluginVendor/pluginSlug
      */
     protected function getPluginNameFromDataName(string $dataName): string
     {
-        $pluginName = $dataName;
-        $possibleSuffixes = [':enabled', ':disabled', ':only-one-enabled'];
-        foreach ($possibleSuffixes as $suffix) {
-            if (!str_ends_with($dataName, $suffix)) {
-                continue;
-            }
-            $pluginName = substr($dataName, 0, strlen($dataName) - strlen($suffix));
-            break;
-        }
-        $matches = [];
-        if (preg_match('/(.*)(\:\d+)?/', $pluginName, $matches)) {
-            return $matches[1];
-        }
-        return $pluginName;
+        return substr($dataName, 0, strrpos($dataName, '/'));
     }
 
     /**

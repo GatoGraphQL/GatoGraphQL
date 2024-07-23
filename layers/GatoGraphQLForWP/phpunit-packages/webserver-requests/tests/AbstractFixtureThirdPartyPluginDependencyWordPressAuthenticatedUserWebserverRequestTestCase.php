@@ -61,21 +61,22 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             /**
              * The tests have this shape:
              * 
-             *   pluginVendor/pluginSlug/testName.gql
+             *   pluginVendor/pluginSlug/fixtureName.gql
              * 
              * pluginName = pluginVendor/pluginSlug
              */
             $pluginName = substr($filePath, strlen($fixtureFolder . '/'));
-            $pluginEntries[$pluginName] = [
+            $fixtureName = $pluginName . '/' . $fileName;
+            $pluginEntries[$fixtureName] = [
                 'query' => $query,
                 'response-enabled' => file_get_contents($pluginEnabledGraphQLResponseFile),
                 'response-disabled' => file_get_contents($pluginDisabledGraphQLResponseFile),
             ];
             if (\file_exists($pluginOnlyOneEnabledGraphQLResponseFile)) {
-                $pluginEntries[$pluginName]['response-only-one-enabled'] = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
+                $pluginEntries[$fixtureName]['response-only-one-enabled'] = file_get_contents($pluginOnlyOneEnabledGraphQLResponseFile);
             }
             if (\file_exists($pluginGraphQLVariablesFile)) {
-                $pluginEntries[$pluginName]['variables'] = static::getGraphQLVariables($pluginGraphQLVariablesFile);
+                $pluginEntries[$fixtureName]['variables'] = static::getGraphQLVariables($pluginGraphQLVariablesFile);
 
                 /**
                  * Check if there are additional response entries (with different vars)
@@ -96,23 +97,23 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
                     if (!is_numeric($additionalFileNumber)) {
                         continue;
                     }
-                    $additionalPluginName = $pluginName . ':' . $additionalFileNumber;
-                    $pluginEntries[$additionalPluginName] = [
+                    $additionalFixtureName = $fixtureName . ':' . $additionalFileNumber;
+                    $pluginEntries[$additionalFixtureName] = [
                         'query' => $query,
                         'variables' => static::getGraphQLVariables($additionalPluginGraphQLVariablesFile->getRealPath()),
                     ];
                     // For the variations, make the "enable" and "disable" responses optional
                     $additionalPluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':enabled.json';
                     if (\file_exists($additionalPluginEnabledGraphQLResponseFile)) {
-                        $pluginEntries[$additionalPluginName]['response-enabled'] = file_get_contents($additionalPluginEnabledGraphQLResponseFile);
+                        $pluginEntries[$additionalFixtureName]['response-enabled'] = file_get_contents($additionalPluginEnabledGraphQLResponseFile);
                     }
                     $additionalPluginDisabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':' . $additionalFileNumber . ':disabled.json';
                     if (\file_exists($additionalPluginDisabledGraphQLResponseFile)) {
-                        $pluginEntries[$additionalPluginName]['response-disabled'] = file_get_contents($additionalPluginDisabledGraphQLResponseFile);
+                        $pluginEntries[$additionalFixtureName]['response-disabled'] = file_get_contents($additionalPluginDisabledGraphQLResponseFile);
                     }
                     $additionalPluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
                     if (\file_exists($additionalPluginOnlyOneEnabledGraphQLResponseFile)) {
-                        $pluginEntries[$additionalPluginName]['response-only-one-enabled'] = file_get_contents($additionalPluginOnlyOneEnabledGraphQLResponseFile);
+                        $pluginEntries[$additionalFixtureName]['response-only-one-enabled'] = file_get_contents($additionalPluginOnlyOneEnabledGraphQLResponseFile);
                     }
                 }
             }
