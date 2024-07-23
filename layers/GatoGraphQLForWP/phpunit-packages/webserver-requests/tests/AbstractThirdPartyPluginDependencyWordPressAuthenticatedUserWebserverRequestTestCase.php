@@ -8,6 +8,7 @@ use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use RuntimeException;
 
 /**
  * Test that enabling/disabling a required 3rd-party plugin works well.
@@ -149,32 +150,21 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     }
 
     /**
-     * Support executing many enable/disable plugin tests:
-     * If the $dataName ends with "__{number}" (such as "__1",
-     * or "__2" or etc), strip them off, as they are
-     * "this is another test of the same plugin".
-     *
-     * Also, each of those tests can have variations via
-     * additional .var.json files. In that case, the name
-     * will end with ":{number}", like "test:1.var.json"
-     * or "test__1:1.var.json"
+     * The tests have this shape:
+     * 
+     *   pluginVendor/pluginSlug/fixtureName.gql
+     * 
+     * pluginName = pluginVendor/pluginSlug
      */
     protected function getPluginNameFromDataName(string $dataName): string
     {
-        $pluginName = $dataName;
-        $possibleSuffixes = [':enabled', ':disabled', ':only-one-enabled'];
-        foreach ($possibleSuffixes as $suffix) {
-            if (!str_ends_with($dataName, $suffix)) {
-                continue;
-            }
-            $pluginName = substr($dataName, 0, strlen($dataName) - strlen($suffix));
-            break;
+        $parts = explode('/', $dataName);
+        if (count($parts) < 3) {
+            throw new RuntimeException(
+                sprintf('DataName \'%s\' must have shape pluginVendor/pluginSlug/fixtureName', $dataName)
+            );
         }
-        $matches = [];
-        if (preg_match('/(.*)__\d+(\:\d+)?/', $pluginName, $matches)) {
-            return $matches[1];
-        }
-        return $pluginName;
+        return $parts[0] . '/' . $parts[1];
     }
 
     /**
