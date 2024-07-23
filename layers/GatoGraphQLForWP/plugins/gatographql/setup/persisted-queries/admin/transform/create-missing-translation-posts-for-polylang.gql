@@ -53,11 +53,13 @@ query ExportOriginPost(
 )
   @depends(on: "InitializeVariables")
 {
-  defaultLanguage: polylangDefaultLanguage
-    @export(as: "defaultLanguage")
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
 
-  enabledLanguages: polylangEnabledLanguages
-    @export(as: "enabledLanguages")
+  enabledLanguages: polylangLanguages(filter: { enabled: true }) {
+    code @export(as: "enabledLanguages", type: LIST)
+  }
 
   originPost: post(by: { id: $postId }, status: any) {
     id
@@ -84,8 +86,9 @@ query ExportOriginPost(
     ################################################################
 
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
 
     polylangTranslationLanguageIDs(filter: {

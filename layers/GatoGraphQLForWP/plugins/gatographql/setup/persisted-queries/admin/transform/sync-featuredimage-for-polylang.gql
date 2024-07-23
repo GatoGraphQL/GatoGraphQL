@@ -55,14 +55,23 @@ query InitializeVariables
 query ExportDataFromOriginPost($postId: ID!)
   @depends(on: "InitializeVariables")
 {
-  defaultLanguage: polylangDefaultLanguage
-    @export(as: "defaultLanguage")
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
 
   originPost: post(by: { id: $postId }, status: any) {
     id
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
     polylangTranslationLanguageIDs
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
@@ -125,7 +134,14 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
   {
     id
 
-    polylangLanguage
+    polylangLanguageLocale: polylangLanguage {
+      code
+    }
+    polylangLanguage: _objectProperty(
+      object: $languageLocaleCodes,
+      by: { key: $__polylangLanguageLocale }
+    )
+
     translationFeaturedImageID: _objectProperty(
       object: $featuredImageTranslationLanguageIDs,
       by: {
@@ -159,7 +175,9 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
         ...on CustomPost {
           featuredImage {
             id
-            polylangLanguage
+            polylangLanguage {
+              code
+            }
           }
         }
       }

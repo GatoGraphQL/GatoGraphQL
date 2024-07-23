@@ -297,6 +297,8 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Fixed: "Call to protected method" exception in PHP 8.2 (#2741)
 * [PRO] Breaking change: Rename field `_intSubstract` to `_intSubtract`
 * [PRO] Breaking change: Rename directive `@intSubstract` to `@intSubtract`
+* [PRO] Breaking change: Renamed field `polylangEnabledLanguages` to `polylangLanguages`
+* [PRO] Breaking change: Fields `polylangLanguage`, `polylangDefaultLanguage` and `polylangLanguages` return type `PolylangLanguage` instead of `String`
 * [PRO] Added **Polylang Mutations**
 * [PRO] Added field `_arrayIntersect`
 

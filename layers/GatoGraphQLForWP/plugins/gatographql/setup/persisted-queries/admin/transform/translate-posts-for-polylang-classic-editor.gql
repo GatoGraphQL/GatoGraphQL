@@ -85,15 +85,24 @@ query ExportOriginPost(
 )
   @depends(on: "InitializeVariables")
 {
-  defaultLanguage: polylangDefaultLanguage
-    @export(as: "defaultLanguage")
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
 
   originPost: post(by: { id: $postId }, status: any) {
     id
 
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
 
     polylangTranslationLanguageIDs(filter: {
@@ -131,11 +140,12 @@ query FetchData(
   translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
 
-    polylangLanguage
-      @export(
-        as: "translationPostLanguages"
-        type: DICTIONARY
-      )
+    polylangLanguage @export(
+      as: "translationPostLanguages"
+      type: DICTIONARY
+    ) {
+      code
+    }
 
     rawTitle: _echo(value: $originRawTitle)
     rawContent: _echo(value: $originRawContent)
@@ -189,13 +199,21 @@ query TranslateData(
   translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "postID"
-      affectDirectivesUnderPos: [1, 2, 3]
+      affectDirectivesUnderPos: [1, 2, 3, 4]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $translationPostLanguages,
           by: { key: $postID }
+        },
+        passOnwardsAs: "toLanguageLocale"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageLocaleCodes,
+          by: { key: $toLanguageLocale }
         },
         passOnwardsAs: "toLanguage"
       )

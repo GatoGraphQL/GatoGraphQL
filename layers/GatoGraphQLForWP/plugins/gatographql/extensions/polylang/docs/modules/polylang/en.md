@@ -11,14 +11,18 @@ Query the site metadata configured in Polylang.
 | Field | Description |
 | --- | --- |
 | `polylangDefaultLanguage` | Default language on Polylang, or `null` if there are no languages enabled. |
-| `polylangEnabledLanguages` | Enabled languages on Polylang. |
+| `polylangLanguages` | List of languages on Polylang. |
 
 Running this query:
 
 ```graphql
 {
-  polylangDefaultLanguage
-  polylangEnabledLanguages
+  polylangDefaultLanguage {
+    code
+  }
+  polylangLanguages {
+    code
+  }
 }
 ```
 
@@ -27,11 +31,19 @@ Running this query:
 ```json
 {
   "data": {
-    "polylangDefaultLanguage": "en",
-    "polylangEnabledLanguages": [
-      "en",
-      "es",
-      "fr"
+    "polylangDefaultLanguage": {
+      "code": "en"
+    },
+    "polylangLanguages": [
+      {
+        "code": "en"
+      },
+      {
+        "code": "es"
+      },
+      {
+        "code": "fr"
+      }
     ]
   }
 }
@@ -45,7 +57,7 @@ These types implement interface `PolylangTranslatable`. (Type `Media` does only 
 
 | Field | Description |
 | --- | --- |
-| `polylangLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on). |
+| `polylangLanguage` | Language of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on). |
 | `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on). |
 
 Field `polylangTranslationLanguageIDs` provides the entity IDs for all the translations (i.e. post/page/category/tag/media). It accepts input `includeSelf`, to indicate if to include the queried entity's ID in the results (it's `false` by default), and inputs `includeLanguages` and `excludeLanguages`, to filter the included languages in the results.
@@ -58,7 +70,9 @@ Running this query:
     __typename
     id
     title
-    polylangLanguage
+    polylangLanguage {
+      code
+    }
     polylangTranslationLanguageIDs
     polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
 
@@ -66,7 +80,9 @@ Running this query:
       __typename
       id
       name
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
       polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
     }
@@ -75,7 +91,9 @@ Running this query:
       __typename
       id
       name
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
       polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
     }
@@ -85,7 +103,9 @@ Running this query:
     __typename
     id
     title
-    polylangLanguage
+    polylangLanguage {
+      code
+    }
     polylangTranslationLanguageIDs
     polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
   }
@@ -94,7 +114,9 @@ Running this query:
     __typename
     id
     title
-    polylangLanguage
+    polylangLanguage {
+      code
+    }
     polylangTranslationLanguageIDs
     polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
   }
@@ -111,7 +133,9 @@ Running this query:
         "__typename": "Post",
         "id": 1668,
         "title": "Some post translated using Polylang",
-        "polylangLanguage": "en",
+        "polylangLanguage": {
+          "code": "en"
+        },
         "polylangTranslationLanguageIDs": {
           "fr": 1670,
           "es": 1672
@@ -126,7 +150,9 @@ Running this query:
             "__typename": "PostCategory",
             "id": 61,
             "name": "Category for Polylang",
-            "polylangLanguage": "en",
+            "polylangLanguage": {
+              "code": "en"
+            },
             "polylangTranslationLanguageIDs": {
               "fr": 63,
               "es": 65
@@ -143,7 +169,9 @@ Running this query:
             "__typename": "PostTag",
             "id": 67,
             "name": "Tag for Polylang",
-            "polylangLanguage": "en",
+            "polylangLanguage": {
+              "code": "en"
+            },
             "polylangTranslationLanguageIDs": {
               "fr": 69,
               "es": 71
@@ -162,7 +190,9 @@ Running this query:
         "__typename": "Page",
         "id": 1674,
         "title": "Some page translated using Polylang",
-        "polylangLanguage": "en",
+        "polylangLanguage": {
+          "code": "en"
+        },
         "polylangTranslationLanguageIDs": {
           "fr": 1676,
           "es": 1678
@@ -179,7 +209,9 @@ Running this query:
         "__typename": "Media",
         "id": 40,
         "title": "Media-for-Polylang",
-        "polylangLanguage": "en",
+        "polylangLanguage": {
+          "code": "en"
+        },
         "polylangTranslationLanguageIDs": {
           "fr": 42,
           "es": 44
@@ -207,7 +239,7 @@ In addition, field `polylangIsTranslatable` indicates if the CPT or taxonomy is 
 
 | Field | Description |
 | --- | --- |
-| `polylangLanguage` | Language code of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
+| `polylangLanguage` | Language of the post or page, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
 | `polylangTranslationLanguageIDs` | Nodes for all the translation languages for the entity, as a JSON object with the language code as key and entity ID as value, or `null` if no language was assigned (eg: Polylang was installed later on), or if the entity is not configured to be translated (via Polylang Settings). |
 | `polylangIsTranslatable` | Indicate if the entity can be translated. |
 
@@ -222,7 +254,9 @@ Running this query:
       title
       customPostType
       polylangIsTranslatable
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
       polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
       
@@ -232,7 +266,9 @@ Running this query:
           id
           name
           polylangIsTranslatable
-          polylangLanguage
+          polylangLanguage {
+            code
+          }
           polylangTranslationLanguageIDs
           polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
         }
@@ -244,7 +280,9 @@ Running this query:
           id
           name
           polylangIsTranslatable
-          polylangLanguage
+          polylangLanguage {
+            code
+          }
           polylangTranslationLanguageIDs
           polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
         }
@@ -266,7 +304,9 @@ Running this query:
         "title": "Some CPT that has Polylang translation enabled",
         "customPostType": "some-cpt",
         "polylangIsTranslatable": true,
-        "polylangLanguage": "en",
+        "polylangLanguage": {
+          "code": "en"
+        },
         "polylangTranslationLanguageIDs": {
           "fr": 12,
           "es": 14
@@ -282,7 +322,9 @@ Running this query:
             "id": 30,
             "name": "Some Category for Polylang",
             "polylangIsTranslatable": true,
-            "polylangLanguage": "en",
+            "polylangLanguage": {
+              "code": "en"
+            },
             "polylangTranslationLanguageIDs": {
               "fr": 32,
               "es": 34
@@ -300,7 +342,9 @@ Running this query:
             "id": 50,
             "name": "Some Tag for Polylang",
             "polylangIsTranslatable": true,
-            "polylangLanguage": "en",
+            "polylangLanguage": {
+              "code": "en"
+            },
             "polylangTranslationLanguageIDs": {
               "fr": 52,
               "es": 54
