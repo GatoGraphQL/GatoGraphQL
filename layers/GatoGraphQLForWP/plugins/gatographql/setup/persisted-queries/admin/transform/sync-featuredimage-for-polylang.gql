@@ -176,7 +176,7 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
           featuredImage {
             id
             polylangLanguage {
-              en
+              code
             }
           }
         }
