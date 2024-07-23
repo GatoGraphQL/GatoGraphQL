@@ -151,9 +151,9 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
 
     /**
      * The tests have this shape:
-     * 
+     *
      *   pluginVendor/pluginSlug/fixtureName.gql
-     * 
+     *
      * pluginName = pluginVendor/pluginSlug
      */
     protected function getPluginNameFromDataName(string $dataName): string

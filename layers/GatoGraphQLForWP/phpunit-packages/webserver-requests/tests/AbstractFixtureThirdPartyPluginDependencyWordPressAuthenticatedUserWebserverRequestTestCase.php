@@ -60,9 +60,9 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
 
             /**
              * The tests have this shape:
-             * 
+             *
              *   pluginVendor/pluginSlug/fixtureName.gql
-             * 
+             *
              * pluginName = pluginVendor/pluginSlug
              */
             $pluginName = substr($filePath, strlen($fixtureFolder . '/'));
