@@ -149,15 +149,11 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     }
 
     /**
-     * Support executing many enable/disable plugin tests:
-     * If the $dataName ends with "__{number}" (such as "__1",
-     * or "__2" or etc), strip them off, as they are
-     * "this is another test of the same plugin".
-     *
-     * Also, each of those tests can have variations via
-     * additional .var.json files. In that case, the name
-     * will end with ":{number}", like "test:1.var.json"
-     * or "test__1:1.var.json"
+     * The tests have this shape:
+     * 
+     *   pluginVendor/pluginSlug/testName.gql
+     * 
+     * pluginName = pluginVendor/pluginSlug
      */
     protected function getPluginNameFromDataName(string $dataName): string
     {
@@ -171,7 +167,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             break;
         }
         $matches = [];
-        if (preg_match('/(.*)__\d+(\:\d+)?/', $pluginName, $matches)) {
+        if (preg_match('/(.*)(\:\d+)?/', $pluginName, $matches)) {
             return $matches[1];
         }
         return $pluginName;

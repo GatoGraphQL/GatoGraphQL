@@ -58,9 +58,14 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
             $pluginGraphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
 
-            // The plugin name is created by the folder (plugin vendor) + fileName (plugin name)
-            $pluginVendor = substr($filePath, strlen($fixtureFolder . '/'));
-            $pluginName = $pluginVendor . '/' . $fileName;
+            /**
+             * The tests have this shape:
+             * 
+             *   pluginVendor/pluginSlug/testName.gql
+             * 
+             * pluginName = pluginVendor/pluginSlug
+             */
+            $pluginName = substr($filePath, strlen($fixtureFolder . '/'));
             $pluginEntries[$pluginName] = [
                 'query' => $query,
                 'response-enabled' => file_get_contents($pluginEnabledGraphQLResponseFile),
