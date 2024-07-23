@@ -21,6 +21,8 @@
 
 - Rename field `_intSubstract` to `_intSubtract`
 - Rename directive `@intSubstract` to `@intSubtract`
+- Renamed field `polylangEnabledLanguages` to `polylangLanguages`
+- Fields `polylangLanguage`, `polylangDefaultLanguage` and `polylangLanguages` return type `PolylangLanguage` instead of `String`
 
 ## [PRO] Improvements
 
