@@ -57,8 +57,9 @@ query ExportDataFromOriginPost($postId: ID!)
   originPost: post(by: { id: $postId }, status: any) {
     id
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
     polylangTranslationLanguageIDs
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
@@ -70,7 +71,9 @@ query ExportDataFromOriginPost($postId: ID!)
     tags @export(as: "originPostTagIDs") {
       id
       name
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
         @export(
           as: "tagIDTranslationLanguageIDs",
@@ -81,7 +84,9 @@ query ExportDataFromOriginPost($postId: ID!)
     categories @export(as: "originPostCategoryIDs") {
       id
       name
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
         @export(
           as: "categoryIDTranslationLanguageIDs",
@@ -91,16 +96,34 @@ query ExportDataFromOriginPost($postId: ID!)
   }
 }
 
-query FilterTranslationPostsToUpdate(
+query ExportTranslationPostLanguages(
   $statusToUpdate: CustomPostStatusEnum! = draft
-  $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportDataFromOriginPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
+  translationPostLanguages: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
+    id
+
+    polylangLanguage {
+      code @export(as: "polylangLanguageIDCodes", type: DICTIONARY)
+    }
+  }
+}
+
+query FilterTranslationPostsToUpdate(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+  $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
+)
+  @depends(on: "ExportTranslationPostLanguages")
+  @include(if: $hasOriginPostTranslationPosts)
+{
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
-    polylangLanguage
+    polylangLanguage: _objectProperty(
+      object: $polylangLanguageIDCodes,
+      by: { key: $__id }
+    )
 
     translationPostTagIDs: _echo(value: $__polylangLanguage)
       @passOnwards(as: "lang")
@@ -202,7 +225,9 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
   updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
   {
     id
-    polylangLanguage
+    polylangLanguage {
+      code
+    }
 
     tagIDs: _objectProperty(
       object: $translationPostTagIDs,
@@ -231,7 +256,9 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
         tags {
           id
           name
-          polylangLanguage
+          polylangLanguage {
+            code
+          }
         }
       }
     }
@@ -254,7 +281,9 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
         categories {
           id
           name
-          polylangLanguage
+          polylangLanguage {
+            code
+          }
         }
       }
     }

@@ -92,8 +92,9 @@ query ExportOriginPost(
     id
 
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
 
     polylangTranslationLanguageIDs(filter: {
@@ -131,11 +132,13 @@ query FetchData(
   translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
 
-    polylangLanguage
-      @export(
-        as: "translationPostLanguages"
-        type: DICTIONARY
-      )
+    polylangLanguage {
+      code
+        @export(
+          as: "translationPostLanguages"
+          type: DICTIONARY
+        )
+    }
 
     rawTitle: _echo(value: $originRawTitle)
     rawContent: _echo(value: $originRawContent)

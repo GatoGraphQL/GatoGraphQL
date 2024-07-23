@@ -61,8 +61,9 @@ query ExportDataFromOriginPost($postId: ID!)
   originPost: post(by: { id: $postId }, status: any) {
     id
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
     polylangTranslationLanguageIDs
     translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
@@ -92,6 +93,10 @@ query FilterTranslationPostsToUpdate(
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
+
+    polylangLanguage {
+      code @export(as: "polylangLanguageIDCodes", type: DICTIONARY)
+    }
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
@@ -125,7 +130,10 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
   {
     id
 
-    polylangLanguage
+    polylangLanguage: _objectProperty(
+      object: $polylangLanguageIDCodes,
+      by: { key: $__id }
+    )
     translationFeaturedImageID: _objectProperty(
       object: $featuredImageTranslationLanguageIDs,
       by: {
@@ -159,7 +167,9 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
         ...on CustomPost {
           featuredImage {
             id
-            polylangLanguage
+            polylangLanguage {
+              en
+            }
           }
         }
       }

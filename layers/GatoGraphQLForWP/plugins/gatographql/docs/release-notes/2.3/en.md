@@ -128,7 +128,9 @@ Running this query:
     __typename
     id
     title
-    polylangLanguage
+    polylangLanguage {
+      code
+    }
     polylangTranslationLanguageIDs
     polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
 
@@ -136,7 +138,9 @@ Running this query:
       __typename
       id
       name
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
       polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
     }
@@ -145,7 +149,9 @@ Running this query:
       __typename
       id
       name
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
       polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
     }
@@ -155,7 +161,9 @@ Running this query:
     __typename
     id
     title
-    polylangLanguage
+    polylangLanguage {
+      code
+    }
     polylangTranslationLanguageIDs
     polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
   }
@@ -164,7 +172,9 @@ Running this query:
     __typename
     id
     title
-    polylangLanguage
+    polylangLanguage {
+      code
+    }
     polylangTranslationLanguageIDs
     polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
   }
@@ -181,7 +191,9 @@ Running this query:
         "__typename": "Post",
         "id": 1668,
         "title": "Some post translated using Polylang",
-        "polylangLanguage": "en",
+        "polylangLanguage": {
+          "code": "en"
+        },
         "polylangTranslationLanguageIDs": {
           "fr": 1670,
           "es": 1672
@@ -196,7 +208,9 @@ Running this query:
             "__typename": "PostCategory",
             "id": 61,
             "name": "Category for Polylang",
-            "polylangLanguage": "en",
+            "polylangLanguage": {
+              "code": "en"
+            },
             "polylangTranslationLanguageIDs": {
               "fr": 63,
               "es": 65
@@ -213,7 +227,9 @@ Running this query:
             "__typename": "PostTag",
             "id": 67,
             "name": "Tag for Polylang",
-            "polylangLanguage": "en",
+            "polylangLanguage": {
+              "code": "en"
+            },
             "polylangTranslationLanguageIDs": {
               "fr": 69,
               "es": 71
@@ -232,7 +248,9 @@ Running this query:
         "__typename": "Page",
         "id": 1674,
         "title": "Some page translated using Polylang",
-        "polylangLanguage": "en",
+        "polylangLanguage": {
+          "code": "en"
+        },
         "polylangTranslationLanguageIDs": {
           "fr": 1676,
           "es": 1678
@@ -249,7 +267,9 @@ Running this query:
         "__typename": "Media",
         "id": 40,
         "title": "Media-for-Polylang",
-        "polylangLanguage": "en",
+        "polylangLanguage": {
+          "code": "en"
+        },
         "polylangTranslationLanguageIDs": {
           "fr": 42,
           "es": 44
@@ -292,7 +312,9 @@ Running this query:
       title
       customPostType
       polylangIsTranslatable
-      polylangLanguage
+      polylangLanguage {
+        code
+      }
       polylangTranslationLanguageIDs
       polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
       
@@ -302,7 +324,9 @@ Running this query:
           id
           name
           polylangIsTranslatable
-          polylangLanguage
+          polylangLanguage {
+            code
+          }
           polylangTranslationLanguageIDs
           polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
         }
@@ -314,7 +338,9 @@ Running this query:
           id
           name
           polylangIsTranslatable
-          polylangLanguage
+          polylangLanguage {
+            code
+          }
           polylangTranslationLanguageIDs
           polylangTranslationLanguageIDsWithSelf: polylangTranslationLanguageIDs(filter: { includeSelf: true })
         }

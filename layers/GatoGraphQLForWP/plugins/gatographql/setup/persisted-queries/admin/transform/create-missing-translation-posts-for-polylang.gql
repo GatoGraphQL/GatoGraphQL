@@ -84,8 +84,9 @@ query ExportOriginPost(
     ################################################################
 
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
 
     polylangTranslationLanguageIDs(filter: {

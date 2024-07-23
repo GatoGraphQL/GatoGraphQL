@@ -165,8 +165,9 @@ query ExportOriginPost(
     id
 
 
-    polylangLanguage
-      @export(as: "fromLanguage")
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
     
 
     polylangTranslationLanguageIDs(filter: {
@@ -759,12 +760,13 @@ query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
       @remove
 
 
-    polylangLanguage
-      @export(
-        as: "translationPostLanguages"
-        type: DICTIONARY
-      )
-      @remove
+    polylangLanguage {
+      code
+        @export(
+          as: "translationPostLanguages"
+          type: DICTIONARY
+        )
+    }
 
 
     coreHeadingContentItems: _echo(value: $originCoreHeadingContentItems)
