@@ -59,6 +59,13 @@ query ExportDataFromOriginPost($postId: ID!)
     code @export(as: "defaultLanguage")
   }
 
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
   originPost: post(by: { id: $postId }, status: any) {
     id
 
@@ -131,10 +138,15 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
   {
     id
 
-    polylangLanguage: _objectProperty(
-      object: $polylangLanguageIDCodes,
+    polylangLanguageCode: _objectProperty(
+      object: $translationPostLanguages,
       by: { key: $__id }
     )
+    polylangLanguage: _objectProperty(
+      object: $languageLocaleCodes,
+      by: { key: $__polylangLanguageCode }
+    )
+
     translationFeaturedImageID: _objectProperty(
       object: $featuredImageTranslationLanguageIDs,
       by: {

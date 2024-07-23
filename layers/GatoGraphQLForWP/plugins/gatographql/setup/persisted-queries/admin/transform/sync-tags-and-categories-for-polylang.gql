@@ -55,6 +55,13 @@ query ExportDataFromOriginPost($postId: ID!)
     code @export(as: "defaultLanguage")
   }
 
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
   originPost: post(by: { id: $postId }, status: any) {
     id
 
@@ -106,8 +113,11 @@ query ExportTranslationPostLanguages(
   translationPostLanguages: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
 
-    polylangLanguage {
-      code @export(as: "polylangLanguageIDCodes", type: DICTIONARY)
+    polylangLanguage @export(
+      as: "translationPostLanguages"
+      type: DICTIONARY
+    ) {
+      code
     }
   }
 }
@@ -121,9 +131,13 @@ query FilterTranslationPostsToUpdate(
 {
   translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
-    polylangLanguage: _objectProperty(
-      object: $polylangLanguageIDCodes,
+    polylangLanguageCode: _objectProperty(
+      object: $translationPostLanguages,
       by: { key: $__id }
+    )
+    polylangLanguage: _objectProperty(
+      object: $languageLocaleCodes,
+      by: { key: $__polylangLanguageCode }
     )
 
     translationPostTagIDs: _echo(value: $__polylangLanguage)
