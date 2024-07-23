@@ -89,6 +89,13 @@ query ExportOriginPost(
     code @export(as: "defaultLanguage")
   }
 
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
   originPost: post(by: { id: $postId }, status: any) {
     id
 
@@ -133,12 +140,11 @@ query FetchData(
   translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
     id
 
-    polylangLanguage {
+    polylangLanguage @export(
+      as: "translationPostLanguages"
+      type: DICTIONARY
+    ) {
       code
-        @export(
-          as: "translationPostLanguages"
-          type: DICTIONARY
-        )
     }
 
     rawTitle: _echo(value: $originRawTitle)
@@ -193,13 +199,21 @@ query TranslateData(
   translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "postID"
-      affectDirectivesUnderPos: [1, 2, 3]
+      affectDirectivesUnderPos: [1, 2, 3, 4]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $translationPostLanguages,
           by: { key: $postID }
+        },
+        passOnwardsAs: "toLanguageLocale"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageLocaleCodes,
+          by: { key: $toLanguageLocale }
         },
         passOnwardsAs: "toLanguage"
       )
