@@ -374,13 +374,11 @@ query {
 
 ```json
 {
-  "1":
-  {
+  "1": {
     "title": "Hello world!",
     "content": "Lorem ipsum."
   },
-  "5":
-  {
+  "5": {
     "title": "Everything good?",
     "content": "Quisque convallis libero in sapien pharetra tincidunt."
   }
