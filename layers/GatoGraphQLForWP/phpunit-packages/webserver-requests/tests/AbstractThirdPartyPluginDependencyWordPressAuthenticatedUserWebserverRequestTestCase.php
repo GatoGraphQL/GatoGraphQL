@@ -8,6 +8,7 @@ use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
 use PoP\ComponentModel\Misc\GeneralUtils;
+use RuntimeException;
 
 /**
  * Test that enabling/disabling a required 3rd-party plugin works well.
@@ -157,7 +158,13 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
      */
     protected function getPluginNameFromDataName(string $dataName): string
     {
-        return substr($dataName, 0, strrpos($dataName, '/'));
+        $parts = explode('/', $dataName);
+        if (count($parts) < 3) {
+            throw new RuntimeException(
+                sprintf('DataName \'%s\' must have shape pluginVendor/pluginSlug/fixtureName', $dataName)
+            );
+        }
+        return $parts[0] . '/' . $parts[1];
     }
 
     /**
