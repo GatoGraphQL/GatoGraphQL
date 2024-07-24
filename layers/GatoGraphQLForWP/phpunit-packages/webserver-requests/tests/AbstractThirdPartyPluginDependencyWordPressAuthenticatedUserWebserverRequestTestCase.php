@@ -31,16 +31,17 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $dataName = $this->getDataName();
         $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
         $isPluginActiveByDefault = $this->isPluginActiveByDefault($dataName);
+        $pluginName = $this->getPluginNameFromDataName($dataName);
         if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled') && $isPluginActiveByDefault) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+            $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'inactive');
         } elseif ((!$isModuleEnabledByDefault || !$isPluginActiveByDefault) && str_ends_with($dataName, ':enabled')) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+            $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'active');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkDeactivatePlugins(
                 $this->getBulkPluginDeactivationPluginFilesToSkip($dataName)
             );
             if (!$isModuleEnabledByDefault) {
-                $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+                $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'active');
             }
         }
     }
@@ -53,14 +54,15 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $dataName = $this->getDataName();
         $isModuleEnabledByDefault = $this->isModuleEnabledByDefault($dataName);
         $isPluginActiveByDefault = $this->isPluginActiveByDefault($dataName);
+        $pluginName = $this->getPluginNameFromDataName($dataName);
         if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled') && $isPluginActiveByDefault) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'active');
+            $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'active');
         } elseif ((!$isModuleEnabledByDefault || !$isPluginActiveByDefault) && str_ends_with($dataName, ':enabled')) {
-            $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+            $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'inactive');
         } elseif (str_ends_with($dataName, ':only-one-enabled')) {
             $this->executeEndpointToBulkActivatePlugins();
             if (!$isModuleEnabledByDefault) {
-                $this->executeRESTEndpointToEnableOrDisablePlugin($dataName, 'inactive');
+                $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'inactive');
             }
         }
 
@@ -133,12 +135,11 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
      */
-    protected function executeRESTEndpointToEnableOrDisablePlugin(string $dataName, string $status): void
+    protected function executeRESTEndpointToEnableOrDisablePlugin(string $pluginName, string $status): void
     {
         $client = static::getClient();
         $restEndpointPlaceholder = 'wp-json/wp/v2/plugins/%s/?status=%s';
         $endpointURLPlaceholder = static::getWebserverHomeURL() . '/' . $restEndpointPlaceholder;
-        $pluginName = $this->getPluginNameFromDataName($dataName);
         $client->post(
             sprintf(
                 $endpointURLPlaceholder,
