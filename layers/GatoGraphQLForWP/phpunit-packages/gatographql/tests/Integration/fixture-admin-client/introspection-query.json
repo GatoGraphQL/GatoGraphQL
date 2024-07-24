@@ -8302,7 +8302,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -8900,7 +8900,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -11392,7 +11392,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -12037,7 +12037,7 @@
                       }
                     }
                   },
-                  "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+                  "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
                 },
                 {
                   "name": "by",
@@ -17957,7 +17957,7 @@
         {
           "kind": "SCALAR",
           "name": "CategoryTaxonomyEnumString",
-          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`.",
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -17967,7 +17967,7 @@
         {
           "kind": "SCALAR",
           "name": "CustomPostEnumString",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`.",
+          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -18077,7 +18077,7 @@
         {
           "kind": "SCALAR",
           "name": "TagTaxonomyEnumString",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"post_tag\"`.",
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -22289,7 +22289,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -22902,7 +22902,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -23365,7 +23365,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -23576,7 +23576,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -23818,7 +23818,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -23977,7 +23977,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -25278,7 +25278,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
@@ -25683,7 +25683,7 @@
                   }
                 }
               },
-              "defaultValue": "[\"dummy-cpt\",\"page\",\"post\"]"
+              "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-two\",\"page\",\"post\"]"
             },
             {
               "name": "dateQuery",
