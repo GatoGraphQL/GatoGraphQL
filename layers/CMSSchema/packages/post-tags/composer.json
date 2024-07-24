@@ -14,14 +14,14 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/posts": "^4.0.1",
-        "pop-cms-schema/tags": "^4.0.1"
+        "pop-cms-schema/posts": "^4.1",
+        "pop-cms-schema/tags": "^4.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
         "phpunit/phpunit": "^10.2",
-        "pop-api/api": "^4.0.1",
-        "pop-api/api-rest": "^4.0.1",
+        "pop-api/api": "^4.1",
+        "pop-api/api-rest": "^4.1",
         "rector/rector": "^0.18",
         "squizlabs/php_codesniffer": "^3.6"
     },
@@ -184,7 +184,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0-dev"
+            "dev-master": "4.1-dev"
         }
     },
     "config": {

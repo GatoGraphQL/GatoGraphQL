@@ -1,6 +1,6 @@
 {
     "name": "schema-config-expose-sensitive-data",
-    "version": "4.0.1",
+    "version": "4.1.0-dev",
     "description": "Configure the 'Expose Sensitive Data in the Schema' module in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",

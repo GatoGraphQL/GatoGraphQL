@@ -20,7 +20,7 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-api/api-endpoints": "^4.0.1"
+        "pop-api/api-endpoints": "^4.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -183,7 +183,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0-dev"
+            "dev-master": "4.1-dev"
         }
     },
     "config": {
