@@ -176,14 +176,14 @@ query CreateTranslationPostInputsForMissingLanguages
 {
   createTranslationPostInputs: _echo(value: $missingTranslationLanguages)
     @underEachArrayItem(
-      passValueOnwardsAs: "language"
+      passValueOnwardsAs: "languageCode"
       affectDirectivesUnderPos: [1, 2]
     )
       @applyField(
         name: "_sprintf"
         arguments: {
           string: "%s (%s)"
-          values: [$originPostRawTitle, $language]
+          values: [$originPostRawTitle, $languageCode]
         }
         passOnwardsAs: "originPostRawTitleForLanguage"
       )
@@ -209,7 +209,7 @@ query CreateTranslationPostInputsForMissingLanguages
               ids: $originPostTagIDs
             },
             title: $originPostRawTitleForLanguage,
-            polylangLanguage: $language
+            polylangLanguageBy: { code: $languageCode }
           }
         },
         setResultInResponse: true

@@ -299,6 +299,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * [PRO] Breaking change: Rename directive `@intSubstract` to `@intSubtract`
 * [PRO] Breaking change: Renamed field `polylangEnabledLanguages` to `polylangLanguages`
 * [PRO] Breaking change: Fields `polylangLanguage`, `polylangDefaultLanguage` and `polylangLanguages` return type `PolylangLanguage` instead of `String`
+* [PRO] Breaking change: Renamed inputs `language` to `languageBy` and `polylangLanguage` to `polylangLanguageBy`
 * [PRO] Added **Polylang Mutations**
 * [PRO] Added field `_arrayIntersect`
 
