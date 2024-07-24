@@ -6,6 +6,7 @@
         "extensions": {
           "possibleValues": [
             "dummy-cpt",
+            "dummy-cpt-two",
             "page",
             "post"
           ]
@@ -16,6 +17,7 @@
         "extensions": {
           "possibleValues": [
             "dummy-tag",
+            "dummy-tag-two",
             "post_tag"
           ]
         }

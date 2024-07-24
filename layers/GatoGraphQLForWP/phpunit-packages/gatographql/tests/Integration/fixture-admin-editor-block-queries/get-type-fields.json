@@ -2472,14 +2472,14 @@
           "namespacedName": "CategoryTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`."
+          "description": "Category taxonomies (available for querying via the API), with possible values: `\"category\"`, `\"dummy-category\"`, `\"dummy-category-two\"`."
         },
         {
           "name": "CustomPostEnumString",
           "namespacedName": "CustomPostEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"page\"`, `\"post\"`."
+          "description": "Custom post types (available for querying via the API), with possible values: `\"dummy-cpt\"`, `\"dummy-cpt-two\"`, `\"page\"`, `\"post\"`."
         },
         {
           "name": "Date",
@@ -2556,7 +2556,7 @@
           "namespacedName": "TagTaxonomyEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"post_tag\"`."
+          "description": "Tag taxonomies (available for querying via the API), with possible values: `\"dummy-tag\"`, `\"dummy-tag-two\"`, `\"post_tag\"`."
         },
         {
           "name": "URL",

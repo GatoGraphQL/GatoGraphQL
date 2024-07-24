@@ -13,7 +13,8 @@
                 "name": "CategoryTaxonomyEnumString",
                 "extensions": {
                     "possibleValues": [
-                        "dummy-category"
+                        "dummy-category",
+                        "dummy-category-two"
                     ]
                 }
             }

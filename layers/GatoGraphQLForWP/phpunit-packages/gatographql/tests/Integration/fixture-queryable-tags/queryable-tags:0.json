@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 20,
@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 23,
@@ -41,7 +41,7 @@
       }
     },
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 26,
@@ -61,7 +61,7 @@
       }
     },
     {
-      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'post_tag')",
+      "message": "Value 'post_format' for type 'TagTaxonomyEnumString' is not valid (the only valid values are: 'dummy-tag', 'dummy-tag-two', 'post_tag')",
       "locations": [
         {
           "line": 30,

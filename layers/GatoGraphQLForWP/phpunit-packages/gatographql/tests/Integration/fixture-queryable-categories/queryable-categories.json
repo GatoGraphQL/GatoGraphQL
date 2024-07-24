@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category', 'dummy-category-two')",
             "locations": [
                 {
                     "line": 3,
@@ -21,7 +21,7 @@
             }
         },
         {
-            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category', 'dummy-category-two')",
             "locations": [
                 {
                     "line": 8,
@@ -41,7 +41,7 @@
             }
         },
         {
-            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category', 'dummy-category-two')",
             "locations": [
                 {
                     "line": 11,
@@ -61,7 +61,7 @@
             }
         },
         {
-            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category')",
+            "message": "Value 'category' for type 'CategoryTaxonomyEnumString' is not valid (the only valid values are: 'dummy-category', 'dummy-category-two')",
             "locations": [
                 {
                     "line": 12,

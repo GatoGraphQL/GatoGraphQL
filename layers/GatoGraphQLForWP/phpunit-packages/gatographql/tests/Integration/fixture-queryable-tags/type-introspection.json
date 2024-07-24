@@ -14,6 +14,7 @@
                 "extensions": {
                     "possibleValues": [
                         "dummy-tag",
+                        "dummy-tag-two",
                         "post_format"
                     ]
                 }

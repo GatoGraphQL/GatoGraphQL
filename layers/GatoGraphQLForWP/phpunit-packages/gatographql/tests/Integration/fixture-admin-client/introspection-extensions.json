@@ -9060,7 +9060,8 @@
                         "namespacedName": "CategoryTaxonomyEnumString",
                         "possibleValues": [
                             "category",
-                            "dummy-category"
+                            "dummy-category",
+                            "dummy-category-two"
                         ],
                         "isOneOf": false
                     },
@@ -9075,6 +9076,7 @@
                         "namespacedName": "CustomPostEnumString",
                         "possibleValues": [
                             "dummy-cpt",
+                            "dummy-cpt-two",
                             "page",
                             "post"
                         ],
@@ -9214,6 +9216,7 @@
                         "namespacedName": "TagTaxonomyEnumString",
                         "possibleValues": [
                             "dummy-tag",
+                            "dummy-tag-two",
                             "post_tag"
                         ],
                         "isOneOf": false

@@ -17,7 +17,8 @@
                 "extensions": {
                     "possibleValues": [
                         "category",
-                        "dummy-category"
+                        "dummy-category",
+                        "dummy-category-two"
                     ]
                 }
             }
