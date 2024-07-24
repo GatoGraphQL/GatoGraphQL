@@ -412,7 +412,7 @@ For instance, the following query defines the language for 3 posts (to English, 
 
 ```graphql
 mutation {
-  post1: polylangSetCustomPostLanguage(input: {id: 1, language: "en"}) {
+  post1: polylangSetCustomPostLanguage(input: {id: 1, languageBy: { code: "en" }}) {
     status
     errors {
       __typename
@@ -421,7 +421,7 @@ mutation {
       }
     }
   }
-  post2: polylangSetCustomPostLanguage(input: {id: 2, language: "es"}) {
+  post2: polylangSetCustomPostLanguage(input: {id: 2, languageBy: { code: "es" }}) {
     status
     errors {
       __typename
@@ -430,7 +430,7 @@ mutation {
       }
     }
   }
-  post3: polylangSetCustomPostLanguage(input: {id: 3, language: "fr"}) {
+  post3: polylangSetCustomPostLanguage(input: {id: 3, languageBy: { code: "fr" }}) {
     status
     errors {
       __typename
