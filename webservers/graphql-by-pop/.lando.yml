@@ -2,7 +2,7 @@ name: graphql-by-pop
 recipe: wordpress
 config:
   webroot: wordpress
-  php: '8.1'
+  php: '8.2'
   ssl: true
   database: mariadb
   xdebug: true
