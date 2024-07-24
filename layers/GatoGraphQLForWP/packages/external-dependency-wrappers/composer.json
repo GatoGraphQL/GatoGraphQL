@@ -153,7 +153,7 @@
     "require": {
         "php": "^8.1",
         "composer/semver": "^3.2",
-        "getpop/engine": "^4.0"
+        "getpop/engine": "^4.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^1.8",
@@ -179,7 +179,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "4.0-dev"
+            "dev-master": "4.1-dev"
         }
     },
     "config": {
