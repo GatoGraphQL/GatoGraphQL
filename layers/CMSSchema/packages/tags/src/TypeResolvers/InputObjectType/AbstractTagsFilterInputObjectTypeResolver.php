@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\AbstractTaxonomiesFilterInputObjectTypeResolver;
 
-abstract class AbstractTagsFilterInputObjectTypeResolver extends AbstractTaxonomiesFilterInputObjectTypeResolver
+abstract class AbstractTagsFilterInputObjectTypeResolver extends AbstractTaxonomiesFilterInputObjectTypeResolver implements TagsFilterInputObjectTypeResolverInterface
 {
     public function getTypeDescription(): ?string
     {
