@@ -286,6 +286,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 4.1.0 =
+* [PRO] Polylang: Filter data by language
+
 = 4.0.0 =
 * Breaking change: Updated internal PHP hook structure for error payloads (#2739)
 * Use bulk mutations in predefined persisted queries (#2728)

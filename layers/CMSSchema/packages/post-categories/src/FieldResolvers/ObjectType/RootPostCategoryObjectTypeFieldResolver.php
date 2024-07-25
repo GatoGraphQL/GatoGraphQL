@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategories\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputObjectTypeResolver;
-use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\RootCategoriesFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\InputObjectType\PostCategoryByOneofInputObjectTypeResolver;
+use PoPCMSSchema\PostCategories\TypeResolvers\InputObjectType\RootPostCategoriesFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
@@ -34,7 +34,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     private ?PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
     private ?PostCategoryByOneofInputObjectTypeResolver $postCategoryByOneofInputObjectTypeResolver = null;
-    private ?RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver = null;
+    private ?RootPostCategoriesFilterInputObjectTypeResolver $rootPostCategoriesFilterInputObjectTypeResolver = null;
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
 
@@ -103,18 +103,18 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         }
         return $this->postCategoryByOneofInputObjectTypeResolver;
     }
-    final public function setRootCategoriesFilterInputObjectTypeResolver(RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver): void
+    final public function setRootPostCategoriesFilterInputObjectTypeResolver(RootPostCategoriesFilterInputObjectTypeResolver $rootPostCategoriesFilterInputObjectTypeResolver): void
     {
-        $this->rootCategoriesFilterInputObjectTypeResolver = $rootCategoriesFilterInputObjectTypeResolver;
+        $this->rootPostCategoriesFilterInputObjectTypeResolver = $rootPostCategoriesFilterInputObjectTypeResolver;
     }
-    final protected function getRootCategoriesFilterInputObjectTypeResolver(): RootCategoriesFilterInputObjectTypeResolver
+    final protected function getRootPostCategoriesFilterInputObjectTypeResolver(): RootPostCategoriesFilterInputObjectTypeResolver
     {
-        if ($this->rootCategoriesFilterInputObjectTypeResolver === null) {
-            /** @var RootCategoriesFilterInputObjectTypeResolver */
-            $rootCategoriesFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootCategoriesFilterInputObjectTypeResolver::class);
-            $this->rootCategoriesFilterInputObjectTypeResolver = $rootCategoriesFilterInputObjectTypeResolver;
+        if ($this->rootPostCategoriesFilterInputObjectTypeResolver === null) {
+            /** @var RootPostCategoriesFilterInputObjectTypeResolver */
+            $rootPostCategoriesFilterInputObjectTypeResolver = $this->instanceManager->getInstance(RootPostCategoriesFilterInputObjectTypeResolver::class);
+            $this->rootPostCategoriesFilterInputObjectTypeResolver = $rootPostCategoriesFilterInputObjectTypeResolver;
         }
-        return $this->rootCategoriesFilterInputObjectTypeResolver;
+        return $this->rootPostCategoriesFilterInputObjectTypeResolver;
     }
     final public function setCategoryPaginationInputObjectTypeResolver(CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver): void
     {
@@ -222,7 +222,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             'postCategoryNames' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootCategoriesFilterInputObjectTypeResolver(),
+                    'filter' => $this->getRootPostCategoriesFilterInputObjectTypeResolver(),
                     'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
                     'sort' => $this->getTaxonomySortInputObjectTypeResolver(),
                 ]
@@ -230,7 +230,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             'postCategoryCount' => array_merge(
                 $fieldArgNameTypeResolvers,
                 [
-                    'filter' => $this->getRootCategoriesFilterInputObjectTypeResolver(),
+                    'filter' => $this->getRootPostCategoriesFilterInputObjectTypeResolver(),
                 ]
             ),
             default => $fieldArgNameTypeResolvers,
