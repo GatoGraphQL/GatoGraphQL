@@ -70,11 +70,14 @@ use PoP\Engine\Environment as EngineEnvironment;
 use PoP\Engine\Module as EngineModule;
 use PoP\GraphQLParser\Environment as GraphQLParserEnvironment;
 use PoP\GraphQLParser\Module as GraphQLParserModule;
+use PoP\GuzzleHTTP\Module as GuzzleHTTPModule;
+use PoP\GuzzleHTTP\Environment as GuzzleHTTPEnvironment;
 use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Module\ModuleInterface;
 
 use function get_post_types;
 use function get_taxonomies;
+use function home_url;
 
 /**
  * Sets the configuration in all the PoP components from the main plugin.
@@ -797,6 +800,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
         $moduleClassConfiguration[CustomPostsModule::class] = [
             // The default queryable custom post types are defined by this plugin
             CustomPostsEnvironment::DISABLE_PACKAGES_ADDING_DEFAULT_QUERYABLE_CUSTOMPOST_TYPES => true,
+        ];
+        $moduleClassConfiguration[GuzzleHTTPModule::class] = [
+            // Set the referer
+            GuzzleHTTPEnvironment::GUZZLE_REQUEST_REFERER => home_url(),
         ];
 
         return $moduleClassConfiguration;
