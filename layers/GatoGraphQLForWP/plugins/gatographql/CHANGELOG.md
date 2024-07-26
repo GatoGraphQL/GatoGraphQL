@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 4.1.0 - DATE
 
+### Improvements
+
+- Send the referer on Guzzle requests (#2754)
+
 ## 4.0.0 - 24/07/2024
 
 ### Breaking changes

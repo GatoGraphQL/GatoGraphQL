@@ -287,6 +287,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 4.1.0 =
+* Send the referer on Guzzle requests (#2754)
 * [PRO] Polylang: Filter data by language
 * [PRO] Use enums types to return Polylang language codes, locales and names
 
