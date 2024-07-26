@@ -8,6 +8,7 @@
 
 - Use enums types to return Polylang language codes, locales and names
 - Automation: Handle `new` and `auto-draft` old status in `{$old_status}_to_{$new_status}` hook
+- Predefined automation rules: In addition to `draft_to_publish`, also trigger from `new`, `pending` and `auto-draft` states
 
 ### Polylang: Filter data by language
 
