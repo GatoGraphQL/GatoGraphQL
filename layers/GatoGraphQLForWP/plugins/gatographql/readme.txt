@@ -288,6 +288,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 4.1.0 =
 * [PRO] Polylang: Filter data by language
+* [PRO] Use enums types to return Polylang language codes, locales and names
 
 = 4.0.0 =
 * Breaking change: Updated internal PHP hook structure for error payloads (#2739)
