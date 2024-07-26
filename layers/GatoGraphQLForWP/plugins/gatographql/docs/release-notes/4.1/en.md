@@ -92,3 +92,7 @@ query FilterByLanguage($languageCodes: [String!])
   }
 }
 ```
+
+## [PRO] Fixed
+
+- Plugin throwing exception on PHP 7.2
