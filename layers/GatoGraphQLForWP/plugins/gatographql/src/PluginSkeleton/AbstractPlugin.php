@@ -507,7 +507,7 @@ abstract class AbstractPlugin implements PluginInterface
         return array_map(
             function (array $blockDataItem): array {
                 // Must add an empty array for each of the innerBlocks
-                $innerContentItems = array_pad([], count($blockDataItem['innerBlocks'] ?? []), []);        
+                $innerContentItems = array_pad([], count($blockDataItem['innerBlocks'] ?? []), []);
                 return [
                     ...$blockDataItem,
                     'innerContent' => $innerContentItems,
