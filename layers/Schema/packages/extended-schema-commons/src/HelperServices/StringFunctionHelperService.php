@@ -24,7 +24,7 @@ class StringFunctionHelperService implements StringFunctionHelperServiceInterfac
     ): string {
         $value = preg_quote($string, $delimiter);
         if (\PHP_VERSION_ID < 70300 && $delimiter !== '#') {
-            $value = str_replace($value, '#', '\\#');
+            $value = str_replace('#', '\\#', $value);
         }
         return $value;
     }
