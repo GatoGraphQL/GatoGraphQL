@@ -2,6 +2,8 @@
 
 ## Improvements
 
+- Send the referer on Guzzle requests ([#2754](https://github.com/GatoGraphQL/GatoGraphQL/pull/2754))
+
 ## [PRO] Improvements
 
 - Use enums types to return Polylang language codes, locales and names
