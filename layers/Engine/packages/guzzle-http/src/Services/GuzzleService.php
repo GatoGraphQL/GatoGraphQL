@@ -7,7 +7,10 @@ namespace PoP\GuzzleHTTP\Services;
 use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\Utils;
+use PoP\ComponentModel\App;
 use PoP\GuzzleHTTP\Exception\GuzzleHTTPRequestException;
+use PoP\GuzzleHTTP\Module;
+use PoP\GuzzleHTTP\ModuleConfiguration;
 use PoP\GuzzleHTTP\ObjectModels\RequestInput;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseInterface;
 use PoP\GuzzleHTTP\UpstreamWrappers\Http\Message\ResponseWrapper;
@@ -47,7 +50,37 @@ class GuzzleService implements GuzzleServiceInterface
 
     protected function createClient(): Client
     {
-        return new Client();
+        return new Client($this->getClientConfig());
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getClientConfig(): array
+    {
+        return [
+            'headers' => $this->getClientConfigHeaders(),
+        ];
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getClientConfigHeaders(): array
+    {
+        $headers = [];
+        $referer = $this->getClientConfigReferer();
+        if ($referer !== null) {
+            $headers['Referer'] = $referer;
+        }
+        return $headers;
+    }
+
+    protected function getClientConfigReferer(): ?string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getGuzzleRequestReferer();
     }
 
     /**
