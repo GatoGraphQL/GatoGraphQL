@@ -7,6 +7,7 @@
 ## [PRO] Improvements
 
 - Use enums types to return Polylang language codes, locales and names
+- Automation: Handle `new` and `auto-draft` old status in `{$old_status}_to_{$new_status}` hook
 
 ### Polylang: Filter data by language
 
