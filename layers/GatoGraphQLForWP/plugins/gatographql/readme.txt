@@ -292,6 +292,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * [PRO] Use enums types to return Polylang language codes, locales and names
 * [PRO] Automation: Handle `new` and `auto-draft` old status in `{$old_status}_to_{$new_status}` hook (#1376)
 * [PRO] Predefined automation rules: In addition to `draft_to_publish`, also trigger from `new`, `auto-draft`, `pending`, `future`, and `private` states
+* [PRO] Added field `_strQuoteRegex` and directive `@strQuoteRegex`
 
 = 4.0.0 =
 * Breaking change: Updated internal PHP hook structure for error payloads (#2739)
