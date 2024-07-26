@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Send the referer on Guzzle requests (#2754)
+- Use `@strQuoteRegex` in predefined persisted queries (#2758)
 
 ## 4.0.0 - 24/07/2024
 
