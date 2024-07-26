@@ -3,6 +3,7 @@
 ## Improvements
 
 - Send the referer on Guzzle requests ([#2754](https://github.com/GatoGraphQL/GatoGraphQL/pull/2754))
+- Use `@strQuoteRegex` in predefined persisted queries ([#2758](https://github.com/GatoGraphQL/GatoGraphQL/pull/2758))
 
 ## [PRO] Improvements
 
