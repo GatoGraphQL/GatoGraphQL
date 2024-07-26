@@ -4,6 +4,8 @@
 
 ## [PRO] Improvements
 
+- Use enums types to return Polylang language codes, locales and names
+
 ### Polylang: Filter data by language
 
 With the **Polylang** extension, we can now filter data by language.
