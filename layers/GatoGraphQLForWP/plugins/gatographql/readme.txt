@@ -288,7 +288,6 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 = 4.1.0 =
 * Send the referer on Guzzle requests (#2754)
-* Use `@strQuoteRegex` in predefined persisted queries (#2758)
 * [PRO] Polylang: Filter data by language
 * [PRO] Use enums types to return Polylang language codes, locales and names
 * [PRO] Automation: Handle `new` and `auto-draft` old status in `{$old_status}_to_{$new_status}` hook (#1376)
