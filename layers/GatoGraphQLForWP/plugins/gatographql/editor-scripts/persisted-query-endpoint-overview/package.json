@@ -1,6 +1,6 @@
 {
     "name": "persisted-query-endpoint-overview",
-    "version": "4.2.0-dev",
+    "version": "4.1.1",
     "description": "Sidebar component displaying Properties for a Persisted Query Endpoint",
     "author": "Leonardo Losoviz",
     "license": "MIT",
