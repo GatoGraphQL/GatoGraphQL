@@ -668,7 +668,42 @@ query EscapeRegexStrings
       @underJSONObjectProperty(by: { key: "from" })
         @underEachJSONObjectProperty
           @underEachArrayItem
-            @strQuoteRegex
+            @strReplaceMultiple(
+              search: [
+                "\\",
+                "^",
+                "$",
+                "|",
+                "[",
+                "]",
+                "(",
+                ")",
+                "{",
+                "{",
+                "#",
+                "?",
+                ".",
+                "*",
+                "+"
+              ],
+              replaceWith: [
+                "\\\\",
+                "\\^",
+                "\\$",
+                "\\|",
+                "\\[",
+                "\\]",
+                "\\(",
+                "\\)",
+                "\\{",
+                "\\}",
+                "\\#",
+                "\\?",
+                "\\.",
+                "\\*",
+                "\\+"
+              ]
+            )
     @underEachJSONObjectProperty(
       filter: {
         by: {
