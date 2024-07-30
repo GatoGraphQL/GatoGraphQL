@@ -117,9 +117,4 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
         return $taxonomyTermID;
     }
-
-    public function canUserEditTaxonomy(string|int $userID, string|int $taxonomyID): bool
-    {
-        return user_can((int)$userID, 'edit_post', $taxonomyID);
-    }
 }
