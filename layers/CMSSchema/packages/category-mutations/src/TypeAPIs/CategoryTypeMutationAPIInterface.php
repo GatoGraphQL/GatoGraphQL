@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMutations\TypeAPIs;
 
 use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
+use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-interface CategoryTypeMutationAPIInterface
+interface CategoryTypeMutationAPIInterface extends TaxonomyTypeMutationAPIInterface
 {
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the created category
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createCategory(array $data): string|int;
+    public function createCategoryTerm(array $data): string|int;
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated category
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateCategory(array $data): string|int;
-    public function canUserEditCategory(string|int $userID, string|int $categoryID): bool;
+    public function updateCategoryTerm(array $data): string|int;
 }

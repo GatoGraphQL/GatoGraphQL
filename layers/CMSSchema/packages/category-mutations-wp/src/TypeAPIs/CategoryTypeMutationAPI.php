@@ -6,84 +6,26 @@ namespace PoPCMSSchema\CategoryMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
-use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
-use PoP\ComponentModel\App;
-use PoP\Root\Services\BasicServiceTrait;
-use WP_Error;
+use PoPCMSSchema\TaxonomyMutationsWP\TypeAPIs\TaxonomyTypeMutationAPI;
 
-use function user_can;
+use WP_Error;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class CategoryTypeMutationAPI implements CategoryTypeMutationAPIInterface
+class CategoryTypeMutationAPI extends TaxonomyTypeMutationAPI implements CategoryTypeMutationAPIInterface
 {
-    use BasicServiceTrait;
-    use TypeMutationAPITrait;
-
-    public const HOOK_QUERY = __CLASS__ . ':query';
-
-    /**
-     * @param array<string,mixed> $query
-     * @return array<string,mixed> $query
-     */
-    protected function convertCategoriesMutationQuery(array $query): array
-    {
-        // Convert the parameters
-        if (isset($query['parent-id'])) {
-            $query['parent'] = $query['parent-id'];
-            unset($query['parent-id']);
-        }
-        if (isset($query['id'])) {
-            $query['ID'] = $query['id'];
-            unset($query['id']);
-        }
-        if (isset($query['description'])) {
-            // Nothing to do
-            // $query['description'] = $query['description'];
-            // unset($query['description']);
-        }
-        if (isset($query['slug'])) {
-            // Nothing to do
-            // $query['slug'] = $query['slug'];
-            // unset($query['slug']);
-        }
-        if (isset($query['name'])) {
-            // Nothing to do
-            // $query['name'] = $query['name'];
-            // unset($query['name']);
-        }
-        if (isset($query['taxonomy-name'])) {
-            $query['taxonomy'] = $query['taxonomy-name'];
-            unset($query['taxonomy-name']);
-        }
-
-        return App::applyFilters(
-            self::HOOK_QUERY,
-            $query
-        );
-    }
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the created category
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createCategory(array $data): string|int
+    public function createCategoryTerm(array $data): string|int
     {
-        // Convert the parameters
-        $data = $this->convertCategoriesMutationQuery($data);
-        $postIDOrError = \wp_insert_post($data, true);
-        if ($postIDOrError instanceof WP_Error) {
-            /** @var WP_Error */
-            $wpError = $postIDOrError;
-            throw $this->createCategoryTermCRUDMutationException($wpError);
-        }
-        /** @var int */
-        $postID = $postIDOrError;
-        return $postID;
+        return $this->createTaxonomyTerm($data);
     }
 
-    protected function createCategoryTermCRUDMutationException(WP_Error $wpError): CategoryTermCRUDMutationException
+    protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): CategoryTermCRUDMutationException
     {
         return new CategoryTermCRUDMutationException(
             $wpError->get_error_message(),
@@ -95,25 +37,10 @@ class CategoryTypeMutationAPI implements CategoryTypeMutationAPIInterface
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated category
-     * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateCategory(array $data): string|int
+    public function updateCategoryTerm(array $data): string|int
     {
-        // Convert the parameters
-        $data = $this->convertCategoriesMutationQuery($data);
-        $postIDOrError = \wp_update_post($data, true);
-        if ($postIDOrError instanceof WP_Error) {
-            /** @var WP_Error */
-            $wpError = $postIDOrError;
-            throw $this->createCategoryTermCRUDMutationException($wpError);
-        }
-        /** @var int */
-        $postID = $postIDOrError;
-        return $postID;
-    }
-
-    public function canUserEditCategory(string|int $userID, string|int $categoryID): bool
-    {
-        return user_can((int)$userID, 'edit_post', $categoryID);
+        return $this->updateTaxonomyTerm($data);
     }
 }
