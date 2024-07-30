@@ -73,10 +73,10 @@ abstract class AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver extends Abs
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::EXCERPT => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
+                MutationInputProperties::PARENT_ID => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
     }
@@ -87,10 +87,10 @@ abstract class AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver extends Abs
     {
         return match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('The ID of the taxonomy to update', 'taxonomy-mutations'),
-            MutationInputProperties::TITLE => $this->__('The title of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::EXCERPT => $this->__('The excerpt of the taxonomy', 'taxonomy-mutations'),
+            MutationInputProperties::NAME => $this->__('The title of the taxonomy', 'taxonomy-mutations'),
+            MutationInputProperties::DESCRIPTION => $this->__('The excerpt of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::SLUG => $this->__('The slug of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::STATUS => $this->__('The status of the taxonomy', 'taxonomy-mutations'),
+            MutationInputProperties::PARENT_ID => $this->__('The status of the taxonomy', 'taxonomy-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

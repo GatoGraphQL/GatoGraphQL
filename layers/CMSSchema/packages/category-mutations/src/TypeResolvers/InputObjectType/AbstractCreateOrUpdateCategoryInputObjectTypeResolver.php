@@ -73,10 +73,10 @@ abstract class AbstractCreateOrUpdateCategoryInputObjectTypeResolver extends Abs
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
-                MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::EXCERPT => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
+                MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
+                MutationInputProperties::PARENT_ID => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
     }
@@ -87,10 +87,10 @@ abstract class AbstractCreateOrUpdateCategoryInputObjectTypeResolver extends Abs
     {
         return match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('The ID of the category to update', 'category-mutations'),
-            MutationInputProperties::TITLE => $this->__('The title of the category', 'category-mutations'),
-            MutationInputProperties::EXCERPT => $this->__('The excerpt of the category', 'category-mutations'),
+            MutationInputProperties::NAME => $this->__('The title of the category', 'category-mutations'),
+            MutationInputProperties::DESCRIPTION => $this->__('The excerpt of the category', 'category-mutations'),
             MutationInputProperties::SLUG => $this->__('The slug of the category', 'category-mutations'),
-            MutationInputProperties::STATUS => $this->__('The status of the category', 'category-mutations'),
+            MutationInputProperties::PARENT_ID => $this->__('The status of the category', 'category-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

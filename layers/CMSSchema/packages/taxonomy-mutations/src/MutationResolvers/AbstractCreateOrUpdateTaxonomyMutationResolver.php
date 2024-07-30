@@ -2,29 +2,28 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
+namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMutations\Constants\HookNames;
-use PoPCMSSchema\CategoryMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CategoryMutations\Exception\CategoryCRUDMutationException;
-use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyCRUDMutationException;
+use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use stdClass;
 
-abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMutationResolver implements CategoryMutationResolverInterface
+abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMutationResolver implements TaxonomyMutationResolverInterface
 {
-    use CreateOrUpdateCategoryMutationResolverTrait;
+    use CreateOrUpdateTaxonomyMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
-    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
-    private ?CategoryTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+    private ?TaxonomyTypeAPIInterface $taxonomyTypeAPI = null;
+    private ?TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -52,31 +51,31 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         }
         return $this->userRoleTypeAPI;
     }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
+    final public function TaxonomyTypeAPI(TaxonomyTypeAPIInterface $taxonomyTypeAPI): void
     {
-        $this->customPostTypeAPI = $customPostTypeAPI;
+        $this->taxonomyTypeAPI = $taxonomyTypeAPI;
     }
-    final protected function getTaxonomyNameAPI(): CustomPostTypeAPIInterface
+    final protected function getTaxonomyNameAPI(): TaxonomyTypeAPIInterface
     {
-        if ($this->customPostTypeAPI === null) {
-            /** @var CustomPostTypeAPIInterface */
-            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
-            $this->customPostTypeAPI = $customPostTypeAPI;
+        if ($this->taxonomyTypeAPI === null) {
+            /** @var TaxonomyTypeAPIInterface */
+            $taxonomyTypeAPI = $this->instanceManager->getInstance(TaxonomyTypeAPIInterface::class);
+            $this->taxonomyTypeAPI = $taxonomyTypeAPI;
         }
-        return $this->customPostTypeAPI;
+        return $this->taxonomyTypeAPI;
     }
-    final public function setCategoryTypeMutationAPI(CategoryTypeMutationAPIInterface $customPostTypeMutationAPI): void
+    final public function setTaxonomyTypeMutationAPI(TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI): void
     {
-        $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+        $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
     }
-    final protected function getCategoryTypeMutationAPI(): CategoryTypeMutationAPIInterface
+    final protected function getTaxonomyTypeMutationAPI(): TaxonomyTypeMutationAPIInterface
     {
-        if ($this->customPostTypeMutationAPI === null) {
-            /** @var CategoryTypeMutationAPIInterface */
-            $customPostTypeMutationAPI = $this->instanceManager->getInstance(CategoryTypeMutationAPIInterface::class);
-            $this->customPostTypeMutationAPI = $customPostTypeMutationAPI;
+        if ($this->taxonomyTypeMutationAPI === null) {
+            /** @var TaxonomyTypeMutationAPIInterface */
+            $taxonomyTypeMutationAPI = $this->instanceManager->getInstance(TaxonomyTypeMutationAPIInterface::class);
+            $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;
         }
-        return $this->customPostTypeMutationAPI;
+        return $this->taxonomyTypeMutationAPI;
     }
 
     protected function validateCreateErrors(
@@ -108,7 +107,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        // Allow components (eg: CustomPostTaxonomyMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
@@ -136,7 +135,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        // Allow components (eg: CustomPostTaxonomyMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
@@ -148,7 +147,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        // Allow components (eg: CustomPostTaxonomyMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
@@ -182,7 +181,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
      * @param array<string,mixed> $taxonomyData
      * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateCategoryData(array $taxonomyData, FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function addCreateOrUpdateTaxonomyData(array $taxonomyData, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TAXONOMY)) {
             $taxonomyData['taxonomy-name'] = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
@@ -209,12 +208,12 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getUpdateCategoryData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getUpdateTaxonomyData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $taxonomyData = array(
             'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
-        $taxonomyData = $this->addCreateOrUpdateCategoryData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->addCreateOrUpdateTaxonomyData($taxonomyData, $fieldDataAccessor);
 
         // Inject author, categories, tags, featured image, etc
         $taxonomyData = App::applyFilters(HookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
@@ -225,12 +224,12 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
     /**
      * @return array<string,mixed>
      */
-    protected function getCreateCategoryData(FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getCreateTaxonomyData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $taxonomyData = [
             'custompost-type' => $this->getTaxonomyName(),
         ];
-        $taxonomyData = $this->addCreateOrUpdateCategoryData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->addCreateOrUpdateTaxonomyData($taxonomyData, $fieldDataAccessor);
 
         // Inject author, categories, tags, featured image, etc
         $taxonomyData = App::applyFilters(HookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
@@ -241,21 +240,21 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the updated category
-     * @throws CategoryCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    protected function executeUpdateCategory(array $taxonomyData): string|int
+    protected function executeUpdateTaxonomy(array $taxonomyData): string|int
     {
-        return $this->getCategoryTypeMutationAPI()->updateCategory($taxonomyData);
+        return $this->getTaxonomyTypeMutationAPI()->updateTaxonomy($taxonomyData);
     }
 
-    protected function createUpdateCategory(FieldDataAccessorInterface $fieldDataAccessor, int|string $categoryID): void
+    protected function createUpdateTaxonomy(FieldDataAccessorInterface $fieldDataAccessor, int|string $categoryID): void
     {
     }
 
     /**
      * @return array<string,string>|null[]
      */
-    protected function getUpdateCategoryDataLog(int|string $categoryID, FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getUpdateTaxonomyDataLog(int|string $categoryID, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return [
             'previous-status' => $this->getTaxonomyNameAPI()->getStatus($categoryID),
@@ -264,23 +263,23 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws CategoryCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyData = $this->getUpdateCategoryData($fieldDataAccessor);
+        $taxonomyData = $this->getUpdateTaxonomyData($fieldDataAccessor);
         $categoryID = $taxonomyData['id'];
 
         // Create the operation log, to see what changed. Needed for
         // - Send email only when post published
         // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
-        $log = $this->getUpdateCategoryDataLog($categoryID, $fieldDataAccessor);
+        $log = $this->getUpdateTaxonomyDataLog($categoryID, $fieldDataAccessor);
 
-        $categoryID = $this->executeUpdateCategory($taxonomyData);
+        $categoryID = $this->executeUpdateTaxonomy($taxonomyData);
 
-        $this->createUpdateCategory($fieldDataAccessor, $categoryID);
+        $this->createUpdateTaxonomy($fieldDataAccessor, $categoryID);
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($categoryID, $fieldDataAccessor);
@@ -296,24 +295,24 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the created category
-     * @throws CategoryCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function executeCreateCategory(array $taxonomyData): string|int
+    protected function executeCreateTaxonomy(array $taxonomyData): string|int
     {
-        return $this->getCategoryTypeMutationAPI()->createCategory($taxonomyData);
+        return $this->getTaxonomyTypeMutationAPI()->createTaxonomy($taxonomyData);
     }
 
     /**
      * @return string|int The ID of the created entity
-     * @throws CategoryCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int {
-        $taxonomyData = $this->getCreateCategoryData($fieldDataAccessor);
-        $categoryID = $this->executeCreateCategory($taxonomyData);
+        $taxonomyData = $this->getCreateTaxonomyData($fieldDataAccessor);
+        $categoryID = $this->executeCreateTaxonomy($taxonomyData);
 
-        $this->createUpdateCategory($fieldDataAccessor, $categoryID);
+        $this->createUpdateTaxonomy($fieldDataAccessor, $categoryID);
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($categoryID, $fieldDataAccessor);

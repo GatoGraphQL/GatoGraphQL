@@ -30,9 +30,9 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     protected function convertTaxonomiesMutationQuery(array $query): array
     {
         // Convert the parameters
-        if (isset($query['status'])) {
-            $query['post_status'] = $query['status'];
-            unset($query['status']);
+        if (isset($query['parent-id'])) {
+            $query['post_status'] = $query['parent-id'];
+            unset($query['parent-id']);
         }
         if (isset($query['id'])) {
             $query['ID'] = $query['id'];
@@ -42,17 +42,17 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
             $query['post_content'] = $query['content'];
             unset($query['content']);
         }
-        if (isset($query['excerpt'])) {
-            $query['post_excerpt'] = $query['excerpt'];
-            unset($query['excerpt']);
+        if (isset($query['description'])) {
+            $query['post_excerpt'] = $query['description'];
+            unset($query['description']);
         }
         if (isset($query['slug'])) {
             $query['post_name'] = $query['slug'];
             unset($query['slug']);
         }
-        if (isset($query['title'])) {
-            $query['post_title'] = $query['title'];
-            unset($query['title']);
+        if (isset($query['name'])) {
+            $query['post_title'] = $query['name'];
+            unset($query['name']);
         }
         if (isset($query['custompost-type'])) {
             $query['post_type'] = $query['custompost-type'];
