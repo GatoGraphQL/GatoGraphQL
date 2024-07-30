@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType;
 
-class RootCreateGenericTaxonomyInputObjectTypeResolver extends AbstractCreateOrUpdateGenericTaxonomyInputObjectTypeResolver implements CreateTaxonomyInputObjectTypeResolverInterface
+class RootCreateGenericTaxonomyTermInputObjectTypeResolver extends AbstractCreateOrUpdateGenericTaxonomyTermInputObjectTypeResolver implements CreateTaxonomyInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
-        return 'RootCreateTaxonomyInput';
+        return 'RootCreateTaxonomyTermInput';
     }
 
     protected function addCustomPostInputField(): bool

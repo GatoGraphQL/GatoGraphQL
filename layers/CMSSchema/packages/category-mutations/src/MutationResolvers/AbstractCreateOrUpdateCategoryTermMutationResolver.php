@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryTermMutations\MutationResolvers;
+namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryTermMutations\Constants\HookNames;
-use PoPCMSSchema\CategoryTermMutations\Exception\CategoryTermCRUDMutationException;
-use PoPCMSSchema\CategoryTermMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
+use PoPCMSSchema\CategoryMutations\Constants\HookNames;
+use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
+use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;

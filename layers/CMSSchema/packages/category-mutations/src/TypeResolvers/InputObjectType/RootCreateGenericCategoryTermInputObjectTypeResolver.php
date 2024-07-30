@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
-class RootCreateGenericCategoryInputObjectTypeResolver extends AbstractCreateOrUpdateGenericCategoryInputObjectTypeResolver implements CreateCategoryInputObjectTypeResolverInterface
+class RootCreateGenericCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver implements CreateCategoryInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {

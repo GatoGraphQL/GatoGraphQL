@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
-class RootUpdateGenericCategoryInputObjectTypeResolver extends AbstractCreateOrUpdateGenericCategoryInputObjectTypeResolver implements UpdateCategoryInputObjectTypeResolverInterface
+class RootUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver implements UpdateCategoryInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
-        return 'RootUpdateCategoryInput';
+        return 'RootUpdateCategoryTermInput';
     }
 
     protected function addCustomPostInputField(): bool

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-abstract class AbstractCreateOrUpdateGenericTaxonomyInputObjectTypeResolver extends AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver implements UpdateGenericTaxonomyInputObjectTypeResolverInterface, CreateGenericTaxonomyInputObjectTypeResolverInterface
+abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver implements UpdateGenericCategoryTermInputObjectTypeResolverInterface, CreateGenericCategoryTermInputObjectTypeResolverInterface
 {
     private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
 
@@ -43,7 +43,7 @@ abstract class AbstractCreateOrUpdateGenericTaxonomyInputObjectTypeResolver exte
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::TAXONOMY => $this->__('The taxonomy', 'taxonomy-mutations'),
+            MutationInputProperties::TAXONOMY => $this->__('The taxonomy', 'category-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

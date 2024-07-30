@@ -6,18 +6,18 @@ namespace PoPCMSSchema\CategoryMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CategoryMutations\Module;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\CreateGenericCategoryBulkOperationMutationResolver;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\CreateGenericCategoryMutationResolver;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableCreateGenericCategoryBulkOperationMutationResolver;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableCreateGenericCategoryMutationResolver;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateGenericCategoryBulkOperationMutationResolver;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateGenericCategoryMutationResolver;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\UpdateGenericCategoryBulkOperationMutationResolver;
-use PoPCMSSchema\CategoryMutations\MutationResolvers\UpdateGenericCategoryMutationResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\RootCreateGenericCategoryInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\RootUpdateGenericCategoryInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryMutationPayloadObjectTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\CreateGenericCategoryTermBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\CreateGenericCategoryTermMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableCreateGenericCategoryTermBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableCreateGenericCategoryTermMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\UpdateGenericCategoryTermBulkOperationMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\UpdateGenericCategoryTermMutationResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\RootCreateGenericCategoryTermInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\RootUpdateGenericCategoryTermInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
@@ -42,18 +42,18 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     use BulkOperationDecoratorObjectTypeFieldResolverTrait;
 
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
-    private ?RootUpdateGenericCategoryMutationPayloadObjectTypeResolver $rootUpdateGenericCategoryMutationPayloadObjectTypeResolver = null;
-    private ?RootCreateGenericCategoryMutationPayloadObjectTypeResolver $rootCreateGenericCategoryMutationPayloadObjectTypeResolver = null;
-    private ?CreateGenericCategoryMutationResolver $createGenericCategoryMutationResolver = null;
-    private ?CreateGenericCategoryBulkOperationMutationResolver $createGenericCategoryBulkOperationMutationResolver = null;
-    private ?UpdateGenericCategoryMutationResolver $updateGenericCategoryMutationResolver = null;
-    private ?UpdateGenericCategoryBulkOperationMutationResolver $updateGenericCategoryBulkOperationMutationResolver = null;
-    private ?PayloadableUpdateGenericCategoryMutationResolver $payloadableUpdateGenericCategoryMutationResolver = null;
-    private ?PayloadableUpdateGenericCategoryBulkOperationMutationResolver $payloadableUpdateGenericCategoryBulkOperationMutationResolver = null;
-    private ?PayloadableCreateGenericCategoryMutationResolver $payloadableCreateGenericCategoryMutationResolver = null;
-    private ?PayloadableCreateGenericCategoryBulkOperationMutationResolver $payloadableCreateGenericCategoryBulkOperationMutationResolver = null;
-    private ?RootUpdateGenericCategoryInputObjectTypeResolver $rootUpdateGenericCategoryInputObjectTypeResolver = null;
-    private ?RootCreateGenericCategoryInputObjectTypeResolver $rootCreateGenericCategoryInputObjectTypeResolver = null;
+    private ?RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver $rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver = null;
+    private ?RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver $rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver = null;
+    private ?CreateGenericCategoryTermMutationResolver $createGenericCategoryTermMutationResolver = null;
+    private ?CreateGenericCategoryTermBulkOperationMutationResolver $createGenericCategoryTermBulkOperationMutationResolver = null;
+    private ?UpdateGenericCategoryTermMutationResolver $updateGenericCategoryTermMutationResolver = null;
+    private ?UpdateGenericCategoryTermBulkOperationMutationResolver $updateGenericCategoryTermBulkOperationMutationResolver = null;
+    private ?PayloadableUpdateGenericCategoryTermMutationResolver $payloadableUpdateGenericCategoryTermMutationResolver = null;
+    private ?PayloadableUpdateGenericCategoryTermBulkOperationMutationResolver $payloadableUpdateGenericCategoryTermBulkOperationMutationResolver = null;
+    private ?PayloadableCreateGenericCategoryTermMutationResolver $payloadableCreateGenericCategoryTermMutationResolver = null;
+    private ?PayloadableCreateGenericCategoryTermBulkOperationMutationResolver $payloadableCreateGenericCategoryTermBulkOperationMutationResolver = null;
+    private ?RootUpdateGenericCategoryTermInputObjectTypeResolver $rootUpdateGenericCategoryTermInputObjectTypeResolver = null;
+    private ?RootCreateGenericCategoryTermInputObjectTypeResolver $rootCreateGenericCategoryTermInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
@@ -69,161 +69,161 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->genericCategoryObjectTypeResolver;
     }
-    final public function setRootUpdateGenericCategoryMutationPayloadObjectTypeResolver(RootUpdateGenericCategoryMutationPayloadObjectTypeResolver $rootUpdateGenericCategoryMutationPayloadObjectTypeResolver): void
+    final public function setRootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver(RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver $rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver): void
     {
-        $this->rootUpdateGenericCategoryMutationPayloadObjectTypeResolver = $rootUpdateGenericCategoryMutationPayloadObjectTypeResolver;
+        $this->rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver = $rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootUpdateGenericCategoryMutationPayloadObjectTypeResolver(): RootUpdateGenericCategoryMutationPayloadObjectTypeResolver
+    final protected function getRootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver(): RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver
     {
-        if ($this->rootUpdateGenericCategoryMutationPayloadObjectTypeResolver === null) {
-            /** @var RootUpdateGenericCategoryMutationPayloadObjectTypeResolver */
-            $rootUpdateGenericCategoryMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateGenericCategoryMutationPayloadObjectTypeResolver::class);
-            $this->rootUpdateGenericCategoryMutationPayloadObjectTypeResolver = $rootUpdateGenericCategoryMutationPayloadObjectTypeResolver;
+        if ($this->rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver === null) {
+            /** @var RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver */
+            $rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver::class);
+            $this->rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver = $rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver;
         }
-        return $this->rootUpdateGenericCategoryMutationPayloadObjectTypeResolver;
+        return $this->rootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver;
     }
-    final public function setRootCreateGenericCategoryMutationPayloadObjectTypeResolver(RootCreateGenericCategoryMutationPayloadObjectTypeResolver $rootCreateGenericCategoryMutationPayloadObjectTypeResolver): void
+    final public function setRootCreateGenericCategoryTermMutationPayloadObjectTypeResolver(RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver $rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver): void
     {
-        $this->rootCreateGenericCategoryMutationPayloadObjectTypeResolver = $rootCreateGenericCategoryMutationPayloadObjectTypeResolver;
+        $this->rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver = $rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver;
     }
-    final protected function getRootCreateGenericCategoryMutationPayloadObjectTypeResolver(): RootCreateGenericCategoryMutationPayloadObjectTypeResolver
+    final protected function getRootCreateGenericCategoryTermMutationPayloadObjectTypeResolver(): RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver
     {
-        if ($this->rootCreateGenericCategoryMutationPayloadObjectTypeResolver === null) {
-            /** @var RootCreateGenericCategoryMutationPayloadObjectTypeResolver */
-            $rootCreateGenericCategoryMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootCreateGenericCategoryMutationPayloadObjectTypeResolver::class);
-            $this->rootCreateGenericCategoryMutationPayloadObjectTypeResolver = $rootCreateGenericCategoryMutationPayloadObjectTypeResolver;
+        if ($this->rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver === null) {
+            /** @var RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver */
+            $rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver::class);
+            $this->rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver = $rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver;
         }
-        return $this->rootCreateGenericCategoryMutationPayloadObjectTypeResolver;
+        return $this->rootCreateGenericCategoryTermMutationPayloadObjectTypeResolver;
     }
-    final public function setCreateGenericCategoryMutationResolver(CreateGenericCategoryMutationResolver $createGenericCategoryMutationResolver): void
+    final public function setCreateGenericCategoryTermMutationResolver(CreateGenericCategoryTermMutationResolver $createGenericCategoryTermMutationResolver): void
     {
-        $this->createGenericCategoryMutationResolver = $createGenericCategoryMutationResolver;
+        $this->createGenericCategoryTermMutationResolver = $createGenericCategoryTermMutationResolver;
     }
-    final protected function getCreateGenericCategoryMutationResolver(): CreateGenericCategoryMutationResolver
+    final protected function getCreateGenericCategoryTermMutationResolver(): CreateGenericCategoryTermMutationResolver
     {
-        if ($this->createGenericCategoryMutationResolver === null) {
-            /** @var CreateGenericCategoryMutationResolver */
-            $createGenericCategoryMutationResolver = $this->instanceManager->getInstance(CreateGenericCategoryMutationResolver::class);
-            $this->createGenericCategoryMutationResolver = $createGenericCategoryMutationResolver;
+        if ($this->createGenericCategoryTermMutationResolver === null) {
+            /** @var CreateGenericCategoryTermMutationResolver */
+            $createGenericCategoryTermMutationResolver = $this->instanceManager->getInstance(CreateGenericCategoryTermMutationResolver::class);
+            $this->createGenericCategoryTermMutationResolver = $createGenericCategoryTermMutationResolver;
         }
-        return $this->createGenericCategoryMutationResolver;
+        return $this->createGenericCategoryTermMutationResolver;
     }
-    final public function setCreateGenericCategoryBulkOperationMutationResolver(CreateGenericCategoryBulkOperationMutationResolver $createGenericCategoryBulkOperationMutationResolver): void
+    final public function setCreateGenericCategoryTermBulkOperationMutationResolver(CreateGenericCategoryTermBulkOperationMutationResolver $createGenericCategoryTermBulkOperationMutationResolver): void
     {
-        $this->createGenericCategoryBulkOperationMutationResolver = $createGenericCategoryBulkOperationMutationResolver;
+        $this->createGenericCategoryTermBulkOperationMutationResolver = $createGenericCategoryTermBulkOperationMutationResolver;
     }
-    final protected function getCreateGenericCategoryBulkOperationMutationResolver(): CreateGenericCategoryBulkOperationMutationResolver
+    final protected function getCreateGenericCategoryTermBulkOperationMutationResolver(): CreateGenericCategoryTermBulkOperationMutationResolver
     {
-        if ($this->createGenericCategoryBulkOperationMutationResolver === null) {
-            /** @var CreateGenericCategoryBulkOperationMutationResolver */
-            $createGenericCategoryBulkOperationMutationResolver = $this->instanceManager->getInstance(CreateGenericCategoryBulkOperationMutationResolver::class);
-            $this->createGenericCategoryBulkOperationMutationResolver = $createGenericCategoryBulkOperationMutationResolver;
+        if ($this->createGenericCategoryTermBulkOperationMutationResolver === null) {
+            /** @var CreateGenericCategoryTermBulkOperationMutationResolver */
+            $createGenericCategoryTermBulkOperationMutationResolver = $this->instanceManager->getInstance(CreateGenericCategoryTermBulkOperationMutationResolver::class);
+            $this->createGenericCategoryTermBulkOperationMutationResolver = $createGenericCategoryTermBulkOperationMutationResolver;
         }
-        return $this->createGenericCategoryBulkOperationMutationResolver;
+        return $this->createGenericCategoryTermBulkOperationMutationResolver;
     }
-    final public function setUpdateGenericCategoryMutationResolver(UpdateGenericCategoryMutationResolver $updateGenericCategoryMutationResolver): void
+    final public function setUpdateGenericCategoryTermMutationResolver(UpdateGenericCategoryTermMutationResolver $updateGenericCategoryTermMutationResolver): void
     {
-        $this->updateGenericCategoryMutationResolver = $updateGenericCategoryMutationResolver;
+        $this->updateGenericCategoryTermMutationResolver = $updateGenericCategoryTermMutationResolver;
     }
-    final protected function getUpdateGenericCategoryMutationResolver(): UpdateGenericCategoryMutationResolver
+    final protected function getUpdateGenericCategoryTermMutationResolver(): UpdateGenericCategoryTermMutationResolver
     {
-        if ($this->updateGenericCategoryMutationResolver === null) {
-            /** @var UpdateGenericCategoryMutationResolver */
-            $updateGenericCategoryMutationResolver = $this->instanceManager->getInstance(UpdateGenericCategoryMutationResolver::class);
-            $this->updateGenericCategoryMutationResolver = $updateGenericCategoryMutationResolver;
+        if ($this->updateGenericCategoryTermMutationResolver === null) {
+            /** @var UpdateGenericCategoryTermMutationResolver */
+            $updateGenericCategoryTermMutationResolver = $this->instanceManager->getInstance(UpdateGenericCategoryTermMutationResolver::class);
+            $this->updateGenericCategoryTermMutationResolver = $updateGenericCategoryTermMutationResolver;
         }
-        return $this->updateGenericCategoryMutationResolver;
+        return $this->updateGenericCategoryTermMutationResolver;
     }
-    final public function setUpdateGenericCategoryBulkOperationMutationResolver(UpdateGenericCategoryBulkOperationMutationResolver $updateGenericCategoryBulkOperationMutationResolver): void
+    final public function setUpdateGenericCategoryTermBulkOperationMutationResolver(UpdateGenericCategoryTermBulkOperationMutationResolver $updateGenericCategoryTermBulkOperationMutationResolver): void
     {
-        $this->updateGenericCategoryBulkOperationMutationResolver = $updateGenericCategoryBulkOperationMutationResolver;
+        $this->updateGenericCategoryTermBulkOperationMutationResolver = $updateGenericCategoryTermBulkOperationMutationResolver;
     }
-    final protected function getUpdateGenericCategoryBulkOperationMutationResolver(): UpdateGenericCategoryBulkOperationMutationResolver
+    final protected function getUpdateGenericCategoryTermBulkOperationMutationResolver(): UpdateGenericCategoryTermBulkOperationMutationResolver
     {
-        if ($this->updateGenericCategoryBulkOperationMutationResolver === null) {
-            /** @var UpdateGenericCategoryBulkOperationMutationResolver */
-            $updateGenericCategoryBulkOperationMutationResolver = $this->instanceManager->getInstance(UpdateGenericCategoryBulkOperationMutationResolver::class);
-            $this->updateGenericCategoryBulkOperationMutationResolver = $updateGenericCategoryBulkOperationMutationResolver;
+        if ($this->updateGenericCategoryTermBulkOperationMutationResolver === null) {
+            /** @var UpdateGenericCategoryTermBulkOperationMutationResolver */
+            $updateGenericCategoryTermBulkOperationMutationResolver = $this->instanceManager->getInstance(UpdateGenericCategoryTermBulkOperationMutationResolver::class);
+            $this->updateGenericCategoryTermBulkOperationMutationResolver = $updateGenericCategoryTermBulkOperationMutationResolver;
         }
-        return $this->updateGenericCategoryBulkOperationMutationResolver;
+        return $this->updateGenericCategoryTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableUpdateGenericCategoryMutationResolver(PayloadableUpdateGenericCategoryMutationResolver $payloadableUpdateGenericCategoryMutationResolver): void
+    final public function setPayloadableUpdateGenericCategoryTermMutationResolver(PayloadableUpdateGenericCategoryTermMutationResolver $payloadableUpdateGenericCategoryTermMutationResolver): void
     {
-        $this->payloadableUpdateGenericCategoryMutationResolver = $payloadableUpdateGenericCategoryMutationResolver;
+        $this->payloadableUpdateGenericCategoryTermMutationResolver = $payloadableUpdateGenericCategoryTermMutationResolver;
     }
-    final protected function getPayloadableUpdateGenericCategoryMutationResolver(): PayloadableUpdateGenericCategoryMutationResolver
+    final protected function getPayloadableUpdateGenericCategoryTermMutationResolver(): PayloadableUpdateGenericCategoryTermMutationResolver
     {
-        if ($this->payloadableUpdateGenericCategoryMutationResolver === null) {
-            /** @var PayloadableUpdateGenericCategoryMutationResolver */
-            $payloadableUpdateGenericCategoryMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateGenericCategoryMutationResolver::class);
-            $this->payloadableUpdateGenericCategoryMutationResolver = $payloadableUpdateGenericCategoryMutationResolver;
+        if ($this->payloadableUpdateGenericCategoryTermMutationResolver === null) {
+            /** @var PayloadableUpdateGenericCategoryTermMutationResolver */
+            $payloadableUpdateGenericCategoryTermMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateGenericCategoryTermMutationResolver::class);
+            $this->payloadableUpdateGenericCategoryTermMutationResolver = $payloadableUpdateGenericCategoryTermMutationResolver;
         }
-        return $this->payloadableUpdateGenericCategoryMutationResolver;
+        return $this->payloadableUpdateGenericCategoryTermMutationResolver;
     }
-    final public function setPayloadableUpdateGenericCategoryBulkOperationMutationResolver(PayloadableUpdateGenericCategoryBulkOperationMutationResolver $payloadableUpdateGenericCategoryBulkOperationMutationResolver): void
+    final public function setPayloadableUpdateGenericCategoryTermBulkOperationMutationResolver(PayloadableUpdateGenericCategoryTermBulkOperationMutationResolver $payloadableUpdateGenericCategoryTermBulkOperationMutationResolver): void
     {
-        $this->payloadableUpdateGenericCategoryBulkOperationMutationResolver = $payloadableUpdateGenericCategoryBulkOperationMutationResolver;
+        $this->payloadableUpdateGenericCategoryTermBulkOperationMutationResolver = $payloadableUpdateGenericCategoryTermBulkOperationMutationResolver;
     }
-    final protected function getPayloadableUpdateGenericCategoryBulkOperationMutationResolver(): PayloadableUpdateGenericCategoryBulkOperationMutationResolver
+    final protected function getPayloadableUpdateGenericCategoryTermBulkOperationMutationResolver(): PayloadableUpdateGenericCategoryTermBulkOperationMutationResolver
     {
-        if ($this->payloadableUpdateGenericCategoryBulkOperationMutationResolver === null) {
-            /** @var PayloadableUpdateGenericCategoryBulkOperationMutationResolver */
-            $payloadableUpdateGenericCategoryBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateGenericCategoryBulkOperationMutationResolver::class);
-            $this->payloadableUpdateGenericCategoryBulkOperationMutationResolver = $payloadableUpdateGenericCategoryBulkOperationMutationResolver;
+        if ($this->payloadableUpdateGenericCategoryTermBulkOperationMutationResolver === null) {
+            /** @var PayloadableUpdateGenericCategoryTermBulkOperationMutationResolver */
+            $payloadableUpdateGenericCategoryTermBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateGenericCategoryTermBulkOperationMutationResolver::class);
+            $this->payloadableUpdateGenericCategoryTermBulkOperationMutationResolver = $payloadableUpdateGenericCategoryTermBulkOperationMutationResolver;
         }
-        return $this->payloadableUpdateGenericCategoryBulkOperationMutationResolver;
+        return $this->payloadableUpdateGenericCategoryTermBulkOperationMutationResolver;
     }
-    final public function setPayloadableCreateGenericCategoryMutationResolver(PayloadableCreateGenericCategoryMutationResolver $payloadableCreateGenericCategoryMutationResolver): void
+    final public function setPayloadableCreateGenericCategoryTermMutationResolver(PayloadableCreateGenericCategoryTermMutationResolver $payloadableCreateGenericCategoryTermMutationResolver): void
     {
-        $this->payloadableCreateGenericCategoryMutationResolver = $payloadableCreateGenericCategoryMutationResolver;
+        $this->payloadableCreateGenericCategoryTermMutationResolver = $payloadableCreateGenericCategoryTermMutationResolver;
     }
-    final protected function getPayloadableCreateGenericCategoryMutationResolver(): PayloadableCreateGenericCategoryMutationResolver
+    final protected function getPayloadableCreateGenericCategoryTermMutationResolver(): PayloadableCreateGenericCategoryTermMutationResolver
     {
-        if ($this->payloadableCreateGenericCategoryMutationResolver === null) {
-            /** @var PayloadableCreateGenericCategoryMutationResolver */
-            $payloadableCreateGenericCategoryMutationResolver = $this->instanceManager->getInstance(PayloadableCreateGenericCategoryMutationResolver::class);
-            $this->payloadableCreateGenericCategoryMutationResolver = $payloadableCreateGenericCategoryMutationResolver;
+        if ($this->payloadableCreateGenericCategoryTermMutationResolver === null) {
+            /** @var PayloadableCreateGenericCategoryTermMutationResolver */
+            $payloadableCreateGenericCategoryTermMutationResolver = $this->instanceManager->getInstance(PayloadableCreateGenericCategoryTermMutationResolver::class);
+            $this->payloadableCreateGenericCategoryTermMutationResolver = $payloadableCreateGenericCategoryTermMutationResolver;
         }
-        return $this->payloadableCreateGenericCategoryMutationResolver;
+        return $this->payloadableCreateGenericCategoryTermMutationResolver;
     }
-    final public function setPayloadableCreateGenericCategoryBulkOperationMutationResolver(PayloadableCreateGenericCategoryBulkOperationMutationResolver $payloadableCreateGenericCategoryBulkOperationMutationResolver): void
+    final public function setPayloadableCreateGenericCategoryTermBulkOperationMutationResolver(PayloadableCreateGenericCategoryTermBulkOperationMutationResolver $payloadableCreateGenericCategoryTermBulkOperationMutationResolver): void
     {
-        $this->payloadableCreateGenericCategoryBulkOperationMutationResolver = $payloadableCreateGenericCategoryBulkOperationMutationResolver;
+        $this->payloadableCreateGenericCategoryTermBulkOperationMutationResolver = $payloadableCreateGenericCategoryTermBulkOperationMutationResolver;
     }
-    final protected function getPayloadableCreateGenericCategoryBulkOperationMutationResolver(): PayloadableCreateGenericCategoryBulkOperationMutationResolver
+    final protected function getPayloadableCreateGenericCategoryTermBulkOperationMutationResolver(): PayloadableCreateGenericCategoryTermBulkOperationMutationResolver
     {
-        if ($this->payloadableCreateGenericCategoryBulkOperationMutationResolver === null) {
-            /** @var PayloadableCreateGenericCategoryBulkOperationMutationResolver */
-            $payloadableCreateGenericCategoryBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableCreateGenericCategoryBulkOperationMutationResolver::class);
-            $this->payloadableCreateGenericCategoryBulkOperationMutationResolver = $payloadableCreateGenericCategoryBulkOperationMutationResolver;
+        if ($this->payloadableCreateGenericCategoryTermBulkOperationMutationResolver === null) {
+            /** @var PayloadableCreateGenericCategoryTermBulkOperationMutationResolver */
+            $payloadableCreateGenericCategoryTermBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableCreateGenericCategoryTermBulkOperationMutationResolver::class);
+            $this->payloadableCreateGenericCategoryTermBulkOperationMutationResolver = $payloadableCreateGenericCategoryTermBulkOperationMutationResolver;
         }
-        return $this->payloadableCreateGenericCategoryBulkOperationMutationResolver;
+        return $this->payloadableCreateGenericCategoryTermBulkOperationMutationResolver;
     }
-    final public function setRootUpdateGenericCategoryInputObjectTypeResolver(RootUpdateGenericCategoryInputObjectTypeResolver $rootUpdateGenericCategoryInputObjectTypeResolver): void
+    final public function setRootUpdateGenericCategoryTermInputObjectTypeResolver(RootUpdateGenericCategoryTermInputObjectTypeResolver $rootUpdateGenericCategoryTermInputObjectTypeResolver): void
     {
-        $this->rootUpdateGenericCategoryInputObjectTypeResolver = $rootUpdateGenericCategoryInputObjectTypeResolver;
+        $this->rootUpdateGenericCategoryTermInputObjectTypeResolver = $rootUpdateGenericCategoryTermInputObjectTypeResolver;
     }
-    final protected function getRootUpdateGenericCategoryInputObjectTypeResolver(): RootUpdateGenericCategoryInputObjectTypeResolver
+    final protected function getRootUpdateGenericCategoryTermInputObjectTypeResolver(): RootUpdateGenericCategoryTermInputObjectTypeResolver
     {
-        if ($this->rootUpdateGenericCategoryInputObjectTypeResolver === null) {
-            /** @var RootUpdateGenericCategoryInputObjectTypeResolver */
-            $rootUpdateGenericCategoryInputObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateGenericCategoryInputObjectTypeResolver::class);
-            $this->rootUpdateGenericCategoryInputObjectTypeResolver = $rootUpdateGenericCategoryInputObjectTypeResolver;
+        if ($this->rootUpdateGenericCategoryTermInputObjectTypeResolver === null) {
+            /** @var RootUpdateGenericCategoryTermInputObjectTypeResolver */
+            $rootUpdateGenericCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateGenericCategoryTermInputObjectTypeResolver::class);
+            $this->rootUpdateGenericCategoryTermInputObjectTypeResolver = $rootUpdateGenericCategoryTermInputObjectTypeResolver;
         }
-        return $this->rootUpdateGenericCategoryInputObjectTypeResolver;
+        return $this->rootUpdateGenericCategoryTermInputObjectTypeResolver;
     }
-    final public function setRootCreateGenericCategoryInputObjectTypeResolver(RootCreateGenericCategoryInputObjectTypeResolver $rootCreateGenericCategoryInputObjectTypeResolver): void
+    final public function setRootCreateGenericCategoryTermInputObjectTypeResolver(RootCreateGenericCategoryTermInputObjectTypeResolver $rootCreateGenericCategoryTermInputObjectTypeResolver): void
     {
-        $this->rootCreateGenericCategoryInputObjectTypeResolver = $rootCreateGenericCategoryInputObjectTypeResolver;
+        $this->rootCreateGenericCategoryTermInputObjectTypeResolver = $rootCreateGenericCategoryTermInputObjectTypeResolver;
     }
-    final protected function getRootCreateGenericCategoryInputObjectTypeResolver(): RootCreateGenericCategoryInputObjectTypeResolver
+    final protected function getRootCreateGenericCategoryTermInputObjectTypeResolver(): RootCreateGenericCategoryTermInputObjectTypeResolver
     {
-        if ($this->rootCreateGenericCategoryInputObjectTypeResolver === null) {
-            /** @var RootCreateGenericCategoryInputObjectTypeResolver */
-            $rootCreateGenericCategoryInputObjectTypeResolver = $this->instanceManager->getInstance(RootCreateGenericCategoryInputObjectTypeResolver::class);
-            $this->rootCreateGenericCategoryInputObjectTypeResolver = $rootCreateGenericCategoryInputObjectTypeResolver;
+        if ($this->rootCreateGenericCategoryTermInputObjectTypeResolver === null) {
+            /** @var RootCreateGenericCategoryTermInputObjectTypeResolver */
+            $rootCreateGenericCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootCreateGenericCategoryTermInputObjectTypeResolver::class);
+            $this->rootCreateGenericCategoryTermInputObjectTypeResolver = $rootCreateGenericCategoryTermInputObjectTypeResolver;
         }
-        return $this->rootCreateGenericCategoryInputObjectTypeResolver;
+        return $this->rootCreateGenericCategoryTermInputObjectTypeResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -337,15 +337,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'createCategory' => [
-                'input' => $this->getRootCreateGenericCategoryInputObjectTypeResolver(),
+                'input' => $this->getRootCreateGenericCategoryTermInputObjectTypeResolver(),
             ],
             'createCategorys'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateGenericCategoryInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateGenericCategoryTermInputObjectTypeResolver()),
             'updateCategory' => [
-                'input' => $this->getRootUpdateGenericCategoryInputObjectTypeResolver(),
+                'input' => $this->getRootUpdateGenericCategoryTermInputObjectTypeResolver(),
             ],
             'updateCategorys'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateGenericCategoryInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateGenericCategoryTermInputObjectTypeResolver()),
             'createCategoryMutationPayloadObjects',
             'updateCategoryMutationPayloadObjects'
                 => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
@@ -406,17 +406,17 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         return match ($fieldName) {
             'createCategory' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableCreateGenericCategoryMutationResolver()
-                : $this->getCreateGenericCategoryMutationResolver(),
+                ? $this->getPayloadableCreateGenericCategoryTermMutationResolver()
+                : $this->getCreateGenericCategoryTermMutationResolver(),
             'createCategorys' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableCreateGenericCategoryBulkOperationMutationResolver()
-                : $this->getCreateGenericCategoryBulkOperationMutationResolver(),
+                ? $this->getPayloadableCreateGenericCategoryTermBulkOperationMutationResolver()
+                : $this->getCreateGenericCategoryTermBulkOperationMutationResolver(),
             'updateCategory' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableUpdateGenericCategoryMutationResolver()
-                : $this->getUpdateGenericCategoryMutationResolver(),
+                ? $this->getPayloadableUpdateGenericCategoryTermMutationResolver()
+                : $this->getUpdateGenericCategoryTermMutationResolver(),
             'updateCategorys' => $usePayloadableCategoryMutations
-                ? $this->getPayloadableUpdateGenericCategoryBulkOperationMutationResolver()
-                : $this->getUpdateGenericCategoryBulkOperationMutationResolver(),
+                ? $this->getPayloadableUpdateGenericCategoryTermBulkOperationMutationResolver()
+                : $this->getUpdateGenericCategoryTermBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -431,11 +431,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'createCategory',
                 'createCategorys',
                 'createCategoryMutationPayloadObjects'
-                    => $this->getRootCreateGenericCategoryMutationPayloadObjectTypeResolver(),
+                    => $this->getRootCreateGenericCategoryTermMutationPayloadObjectTypeResolver(),
                 'updateCategory',
                 'updateCategorys',
                 'updateCategoryMutationPayloadObjects'
-                    => $this->getRootUpdateGenericCategoryMutationPayloadObjectTypeResolver(),
+                    => $this->getRootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }

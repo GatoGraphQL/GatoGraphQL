@@ -2,13 +2,15 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMutations\RelationalTypeDataLoaders\UnionType;
+namespace PoPCMSSchema\CategoryMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
-use PoP\ComponentModel\RelationalTypeDataLoaders\UnionType\AbstractUnionTypeDataLoader;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver;
+use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader extends AbstractUnionTypeDataLoader
+class RootCreateGenericCategoryTermMutationPayloadErrorsFieldTransientOperationPayloadObjectTypeFieldResolver extends AbstractErrorsFieldTransientOperationPayloadObjectTypeFieldResolver
 {
     private ?RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver $rootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver = null;
 
@@ -26,7 +28,17 @@ class RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeDataLoader exten
         return $this->rootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
     }
 
-    protected function getUnionTypeResolver(): UnionTypeResolverInterface
+    /**
+     * @return array<class-string<ObjectTypeResolverInterface>>
+     */
+    public function getObjectTypeResolverClassesToAttachTo(): array
+    {
+        return [
+            RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver::class,
+        ];
+    }
+
+    protected function getErrorsFieldFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return $this->getRootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver();
     }
