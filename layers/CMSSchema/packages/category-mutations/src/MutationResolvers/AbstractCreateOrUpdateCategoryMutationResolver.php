@@ -200,7 +200,6 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
             $taxonomyData['description'] = $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION);
         }
 
-        // Inject author, categories, tags, featured image, etc
         $taxonomyData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
@@ -216,7 +215,6 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         );
         $taxonomyData = $this->addCreateOrUpdateCategoryData($taxonomyData, $fieldDataAccessor);
 
-        // Inject author, categories, tags, featured image, etc
         $taxonomyData = App::applyFilters(HookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
@@ -232,7 +230,6 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         ];
         $taxonomyData = $this->addCreateOrUpdateCategoryData($taxonomyData, $fieldDataAccessor);
 
-        // Inject author, categories, tags, featured image, etc
         $taxonomyData = App::applyFilters(HookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
