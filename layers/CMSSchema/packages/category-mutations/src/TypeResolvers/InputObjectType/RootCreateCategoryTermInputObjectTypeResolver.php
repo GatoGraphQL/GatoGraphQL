@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
-class RootCreateCategoryInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryInputObjectTypeResolver implements CreateCategoryInputObjectTypeResolverInterface
+class RootCreateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver implements CreateCategoryTermInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
         return 'RootCreateCategoryInput';
     }
 
-    protected function addCustomPostInputField(): bool
+    protected function addTaxonomyInputField(): bool
     {
         return false;
     }

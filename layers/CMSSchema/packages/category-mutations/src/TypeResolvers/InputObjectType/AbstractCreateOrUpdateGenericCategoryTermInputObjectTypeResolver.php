@@ -49,7 +49,7 @@ abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver 
         return $this->getGenericTaxonomyTermInputFieldTypeModifiers($inputFieldName) ?? parent::getInputFieldTypeModifiers($inputFieldName);
     }
     
-    protected function getTaxonomyTypeResolver(): TypeResolverInterface
+    protected function getGenericTaxonomyTermTaxonomyTypeResolver(): TypeResolverInterface
     {
         return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
     }

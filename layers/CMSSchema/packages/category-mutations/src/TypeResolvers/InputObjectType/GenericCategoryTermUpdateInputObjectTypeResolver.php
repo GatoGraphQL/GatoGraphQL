@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-interface CreateCategoryInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
+interface CreateCategoryTermInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
 {
 }

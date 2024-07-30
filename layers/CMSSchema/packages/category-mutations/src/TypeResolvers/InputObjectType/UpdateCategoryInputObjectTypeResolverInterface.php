@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
+use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\UpdateTaxonomyInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
-interface UpdateCategoryInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
+interface UpdateCategoryInputObjectTypeResolverInterface extends UpdateTaxonomyInputObjectTypeResolverInterface
 {
 }

@@ -8,10 +8,10 @@ class RootUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreat
 {
     public function getTypeName(): string
     {
-        return 'RootUpdateCategoryTermInput';
+        return 'RootUpdateCategoryInput';
     }
 
-    protected function addCustomPostInputField(): bool
+    protected function addTaxonomyInputField(): bool
     {
         return true;
     }
