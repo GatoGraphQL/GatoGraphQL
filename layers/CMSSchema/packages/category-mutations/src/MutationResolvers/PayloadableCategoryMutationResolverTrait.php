@@ -8,8 +8,6 @@ use PoPCMSSchema\CategoryMutations\Constants\HookNames;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CategoryMutations\ObjectModels\LoggedInUserHasNoEditingCategoryCapabilityErrorPayload;
-use PoPCMSSchema\CategoryMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
-use PoPCMSSchema\CategoryMutations\ObjectModels\LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
@@ -38,18 +36,6 @@ trait PayloadableCategoryMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new LoggedInUserHasNoEditingCategoryCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E8,
-            ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
