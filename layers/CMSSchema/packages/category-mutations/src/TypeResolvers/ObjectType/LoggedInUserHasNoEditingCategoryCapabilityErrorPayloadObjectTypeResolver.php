@@ -33,7 +33,7 @@ class LoggedInUserHasNoEditingCategoryCapabilityErrorPayloadObjectTypeResolver e
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit categorys"', 'customposts');
+        return $this->__('Error payload for: "The logged-in user has no permission to edit categories"', 'customposts');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

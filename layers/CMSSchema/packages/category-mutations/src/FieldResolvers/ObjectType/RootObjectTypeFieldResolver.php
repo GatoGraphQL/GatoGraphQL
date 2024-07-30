@@ -281,10 +281,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createCategory' => $this->__('Create a category. This mutation accepts the data that is common to all categorys (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those category types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'category-mutations'),
-            'createCategorys' => $this->__('Create categorys. This mutation accepts the data that is common to all categorys (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those category types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'category-mutations'),
+            'createCategory' => $this->__('Create a category. This mutation accepts the data that is common to all categories (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those category types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'category-mutations'),
+            'createCategorys' => $this->__('Create categories. This mutation accepts the data that is common to all categories (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those category types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'category-mutations'),
             'updateCategory' => $this->__('Update a category', 'category-mutations'),
-            'updateCategorys' => $this->__('Update categorys', 'category-mutations'),
+            'updateCategorys' => $this->__('Update categories', 'category-mutations'),
             'createCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createCategory` mutation', 'category-mutations'),
             'updateCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategory` mutation', 'category-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
