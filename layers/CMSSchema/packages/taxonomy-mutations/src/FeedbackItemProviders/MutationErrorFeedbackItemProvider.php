@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders;
 
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
-use PoP\ComponentModel\Feedback\FeedbackTaxonomies;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
@@ -44,8 +44,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
         };
     }
 
-    public function getTaxonomy(string $code): string
+    public function getCategory(string $code): string
     {
-        return FeedbackTaxonomies::ERROR;
+        return FeedbackCategories::ERROR;
     }
 }
