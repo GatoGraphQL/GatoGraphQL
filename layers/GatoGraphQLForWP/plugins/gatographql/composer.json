@@ -165,7 +165,6 @@
         "pop-wp-schema/meta": "<4.1.1",
         "pop-wp-schema/schema-commons": "<4.1.1",
         "pop-wp-schema/block-content-parser": "<4.1.1",
-        "pop-cms-schema/comment-mutations": "<4.1.1",
         "pop-cms-schema/media-mutations": "<4.1.1",
         "pop-cms-schema/user-state-wp": "<4.1.1",
         "pop-cms-schema/page-mutations": "<4.1.1"
