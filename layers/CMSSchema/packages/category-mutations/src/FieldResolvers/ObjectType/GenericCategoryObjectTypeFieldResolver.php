@@ -10,7 +10,7 @@ use PoPCMSSchema\CategoryMutations\Module as CategoryMutationsModule;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration as CategoryMutationsModuleConfiguration;
 use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMutationResolver;
 use PoPCMSSchema\CategoryMutations\MutationResolvers\UpdateGenericCategoryTermMutationResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\GenericCategoryUpdateInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\GenericCategoryTermUpdateInputObjectTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -24,7 +24,7 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     private ?GenericCategoryUpdateMutationPayloadObjectTypeResolver $genericCategoryUpdateMutationPayloadObjectTypeResolver = null;
     private ?UpdateGenericCategoryTermMutationResolver $updateGenericCategoryTermMutationResolver = null;
     private ?PayloadableUpdateGenericCategoryTermMutationResolver $payloadableUpdateGenericCategoryTermMutationResolver = null;
-    private ?GenericCategoryUpdateInputObjectTypeResolver $genericCategoryUpdateInputObjectTypeResolver = null;
+    private ?GenericCategoryTermUpdateInputObjectTypeResolver $genericCategoryTermUpdateInputObjectTypeResolver = null;
 
     final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
     {
@@ -78,18 +78,18 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return $this->payloadableUpdateGenericCategoryTermMutationResolver;
     }
-    final public function setGenericCategoryUpdateInputObjectTypeResolver(GenericCategoryUpdateInputObjectTypeResolver $genericCategoryUpdateInputObjectTypeResolver): void
+    final public function setGenericCategoryTermUpdateInputObjectTypeResolver(GenericCategoryTermUpdateInputObjectTypeResolver $genericCategoryTermUpdateInputObjectTypeResolver): void
     {
-        $this->genericCategoryUpdateInputObjectTypeResolver = $genericCategoryUpdateInputObjectTypeResolver;
+        $this->genericCategoryTermUpdateInputObjectTypeResolver = $genericCategoryTermUpdateInputObjectTypeResolver;
     }
-    final protected function getGenericCategoryUpdateInputObjectTypeResolver(): GenericCategoryUpdateInputObjectTypeResolver
+    final protected function getGenericCategoryTermUpdateInputObjectTypeResolver(): GenericCategoryTermUpdateInputObjectTypeResolver
     {
-        if ($this->genericCategoryUpdateInputObjectTypeResolver === null) {
-            /** @var GenericCategoryUpdateInputObjectTypeResolver */
-            $genericCategoryUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryUpdateInputObjectTypeResolver::class);
-            $this->genericCategoryUpdateInputObjectTypeResolver = $genericCategoryUpdateInputObjectTypeResolver;
+        if ($this->genericCategoryTermUpdateInputObjectTypeResolver === null) {
+            /** @var GenericCategoryTermUpdateInputObjectTypeResolver */
+            $genericCategoryTermUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryTermUpdateInputObjectTypeResolver::class);
+            $this->genericCategoryTermUpdateInputObjectTypeResolver = $genericCategoryTermUpdateInputObjectTypeResolver;
         }
-        return $this->genericCategoryUpdateInputObjectTypeResolver;
+        return $this->genericCategoryTermUpdateInputObjectTypeResolver;
     }
 
     /**
@@ -117,7 +117,7 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     {
         return match ($fieldName) {
             'update' => [
-                'input' => $this->getGenericCategoryUpdateInputObjectTypeResolver(),
+                'input' => $this->getGenericCategoryTermUpdateInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };

@@ -14,27 +14,27 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CategoryMutations\Module;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryUpdateInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryTermUpdateInputObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
-    private ?CategoryUpdateInputObjectTypeResolver $customPostUpdateInputObjectTypeResolver = null;
+    private ?CategoryTermUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
-    final public function setCategoryUpdateInputObjectTypeResolver(CategoryUpdateInputObjectTypeResolver $customPostUpdateInputObjectTypeResolver): void
+    final public function setCategoryTermUpdateInputObjectTypeResolver(CategoryTermUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver): void
     {
-        $this->customPostUpdateInputObjectTypeResolver = $customPostUpdateInputObjectTypeResolver;
+        $this->categoryTermUpdateInputObjectTypeResolver = $categoryTermUpdateInputObjectTypeResolver;
     }
-    final protected function getCategoryUpdateInputObjectTypeResolver(): CategoryUpdateInputObjectTypeResolver
+    final protected function getCategoryTermUpdateInputObjectTypeResolver(): CategoryTermUpdateInputObjectTypeResolver
     {
-        if ($this->customPostUpdateInputObjectTypeResolver === null) {
-            /** @var CategoryUpdateInputObjectTypeResolver */
-            $customPostUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryUpdateInputObjectTypeResolver::class);
-            $this->customPostUpdateInputObjectTypeResolver = $customPostUpdateInputObjectTypeResolver;
+        if ($this->categoryTermUpdateInputObjectTypeResolver === null) {
+            /** @var CategoryTermUpdateInputObjectTypeResolver */
+            $categoryTermUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermUpdateInputObjectTypeResolver::class);
+            $this->categoryTermUpdateInputObjectTypeResolver = $categoryTermUpdateInputObjectTypeResolver;
         }
-        return $this->customPostUpdateInputObjectTypeResolver;
+        return $this->categoryTermUpdateInputObjectTypeResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -92,7 +92,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     {
         return match ($fieldName) {
             'update' => [
-                'input' => $this->getCategoryUpdateInputObjectTypeResolver(),
+                'input' => $this->getCategoryTermUpdateInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
