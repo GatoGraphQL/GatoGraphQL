@@ -100,6 +100,8 @@
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/tags": "${workspaceFolder}/layers/CMSSchema/packages/tags",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomies-wp": "${workspaceFolder}/layers/CMSSchema/packages/taxonomies-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomies": "${workspaceFolder}/layers/CMSSchema/packages/taxonomies",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomy-mutations-wp": "${workspaceFolder}/layers/CMSSchema/packages/taxonomy-mutations-wp",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomy-mutations": "${workspaceFolder}/layers/CMSSchema/packages/taxonomy-mutations",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomymeta-wp": "${workspaceFolder}/layers/CMSSchema/packages/taxonomymeta-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomymeta": "${workspaceFolder}/layers/CMSSchema/packages/taxonomymeta",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomyquery-wp": "${workspaceFolder}/layers/CMSSchema/packages/taxonomyquery-wp",
