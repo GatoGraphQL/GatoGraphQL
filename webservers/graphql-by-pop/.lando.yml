@@ -63,6 +63,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/categories:/app/vendor/pop-cms-schema/categories
         - >-
+          ../../layers/CMSSchema/packages/category-mutations-wp:/app/vendor/pop-cms-schema/category-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/category-mutations:/app/vendor/pop-cms-schema/category-mutations
+        - >-
           ../../layers/CMSSchema/packages/comment-mutations-wp:/app/vendor/pop-cms-schema/comment-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/comment-mutations:/app/vendor/pop-cms-schema/comment-mutations

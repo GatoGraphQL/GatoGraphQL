@@ -65,6 +65,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/categories:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/categories
         - >-
+          ../../layers/CMSSchema/packages/category-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/category-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/category-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/category-mutations
+        - >-
           ../../layers/CMSSchema/packages/comment-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comment-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/comment-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comment-mutations

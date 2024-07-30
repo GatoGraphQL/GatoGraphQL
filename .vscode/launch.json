@@ -41,6 +41,8 @@
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-backbone/php-hooks": "${workspaceFolder}/layers/Backbone/packages/php-hooks",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/categories-wp": "${workspaceFolder}/layers/CMSSchema/packages/categories-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/categories": "${workspaceFolder}/layers/CMSSchema/packages/categories",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/category-mutations-wp": "${workspaceFolder}/layers/CMSSchema/packages/category-mutations-wp",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/category-mutations": "${workspaceFolder}/layers/CMSSchema/packages/category-mutations",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comment-mutations-wp": "${workspaceFolder}/layers/CMSSchema/packages/comment-mutations-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comment-mutations": "${workspaceFolder}/layers/CMSSchema/packages/comment-mutations",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/commentmeta-wp": "${workspaceFolder}/layers/CMSSchema/packages/commentmeta-wp",
