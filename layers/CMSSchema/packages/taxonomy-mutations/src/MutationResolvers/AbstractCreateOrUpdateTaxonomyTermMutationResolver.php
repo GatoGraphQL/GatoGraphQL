@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
-use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
-use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -16,13 +16,13 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 
-abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMutationResolver implements TaxonomyMutationResolverInterface
+abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends AbstractMutationResolver implements TaxonomyTermMutationResolverInterface
 {
-    use CreateOrUpdateTaxonomyMutationResolverTrait;
+    use CreateOrUpdateTaxonomyTermMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
-    private ?TaxonomyTypeAPIInterface $taxonomyTypeAPI = null;
+    private ?CustomPostTypeAPIInterface $taxonomyTypeAPI = null;
     private ?TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
@@ -51,15 +51,15 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
         }
         return $this->userRoleTypeAPI;
     }
-    final public function TaxonomyTypeAPI(TaxonomyTypeAPIInterface $taxonomyTypeAPI): void
+    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $taxonomyTypeAPI): void
     {
         $this->taxonomyTypeAPI = $taxonomyTypeAPI;
     }
-    final protected function getTaxonomyNameAPI(): TaxonomyTypeAPIInterface
+    final protected function getTaxonomyNameAPI(): CustomPostTypeAPIInterface
     {
         if ($this->taxonomyTypeAPI === null) {
-            /** @var TaxonomyTypeAPIInterface */
-            $taxonomyTypeAPI = $this->instanceManager->getInstance(TaxonomyTypeAPIInterface::class);
+            /** @var CustomPostTypeAPIInterface */
+            $taxonomyTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
             $this->taxonomyTypeAPI = $taxonomyTypeAPI;
         }
         return $this->taxonomyTypeAPI;
@@ -107,7 +107,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostTaxonomyMutations) to inject their own validations
+        // Allow components (eg: CustomPostTaxonomyTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
@@ -135,7 +135,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostTaxonomyMutations) to inject their own validations
+        // Allow components (eg: CustomPostTaxonomyTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
@@ -147,7 +147,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostTaxonomyMutations) to inject their own validations
+        // Allow components (eg: CustomPostTaxonomyTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
@@ -181,7 +181,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
      * @param array<string,mixed> $taxonomyData
      * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateTaxonomyData(array $taxonomyData, FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function addCreateOrUpdateTaxonomyTermData(array $taxonomyData, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TAXONOMY)) {
             $taxonomyData['taxonomy-name'] = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
@@ -212,7 +212,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
         $taxonomyData = array(
             'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
-        $taxonomyData = $this->addCreateOrUpdateTaxonomyData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->addCreateOrUpdateTaxonomyTermData($taxonomyData, $fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(HookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
@@ -227,7 +227,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
         $taxonomyData = [
             'taxonomy' => $this->getTaxonomyName(),
         ];
-        $taxonomyData = $this->addCreateOrUpdateTaxonomyData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->addCreateOrUpdateTaxonomyTermData($taxonomyData, $fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(HookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
 

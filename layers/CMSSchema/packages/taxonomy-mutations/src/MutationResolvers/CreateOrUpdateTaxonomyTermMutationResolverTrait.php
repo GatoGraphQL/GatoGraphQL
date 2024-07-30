@@ -4,27 +4,25 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\LooseContracts\LooseContractSet;
-use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
-use PoP\Root\App;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
-trait CreateOrUpdateTaxonomyMutationResolverTrait
+trait CreateOrUpdateTaxonomyTermMutationResolverTrait
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
     abstract protected function getNameResolver(): NameResolverInterface;
     abstract protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface;
-    abstract protected function getTaxonomyNameAPI(): CustomPostTypeAPIInterface;
-    abstract protected function getTaxonomyTypeMutationAPI(): TaxonomyTypeMutationAPIInterface;
+    abstract protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface;
 
     /**
      * Check that the user is logged-in
@@ -44,31 +42,6 @@ trait CreateOrUpdateTaxonomyMutationResolverTrait
         }
     }
 
-    protected function validateCanLoggedInUserEditTaxonomies(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        // Validate user permission
-        $userID = App::getState('current-user-id');
-        $editCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_TAXONOMIES_CAPABILITY);
-        if (
-            !$this->getUserRoleTypeAPI()->userCan(
-                $userID,
-                $editCustomPostsCapability
-            )
-        ) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-        }
-    }
-
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
@@ -78,11 +51,11 @@ trait CreateOrUpdateTaxonomyMutationResolverTrait
     }
 
     protected function validateTaxonomyExists(
-        string|int|null $categoryID,
+        string|int|null $taxonomyTermID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$categoryID) {
+        if (!$taxonomyTermID) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -95,15 +68,40 @@ trait CreateOrUpdateTaxonomyMutationResolverTrait
             return;
         }
 
-        if (!$this->getTaxonomyNameAPI()->customPostExists($categoryID)) {
+        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E7,
                         [
-                            $categoryID,
+                            $taxonomyTermID,
                         ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateCanLoggedInUserEditTaxonomies(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        // Validate user permission
+        $userID = App::getState('current-user-id');
+        $editTaxonomiesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_TAXONOMIES_CAPABILITY);
+        if (
+            !$this->getUserRoleTypeAPI()->userCan(
+                $userID,
+                $editTaxonomiesCapability
+            )
+        ) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
                     ),
                     $fieldDataAccessor->getField(),
                 )
