@@ -50,7 +50,7 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
         );
     }
 
-    protected function validateTaxonomyExists(
+    protected function validateTaxonomyTermExists(
         string|int|null $taxonomyTermID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -71,17 +71,23 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
         if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E7,
-                        [
-                            $taxonomyTermID,
-                        ]
-                    ),
+                    $this->getTaxonomyTermDoesNotExistError($taxonomyTermID),
                     $fieldDataAccessor->getField(),
                 )
             );
         }
+    }
+
+    protected function getTaxonomyTermDoesNotExistError(
+        string|int $taxonomyTermID,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E7,
+            [
+                $taxonomyTermID,
+            ]
+        );
     }
 
     protected function validateCanLoggedInUserEditTaxonomies(
@@ -99,13 +105,18 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
-                    ),
+                    $this->getLoggedInUserHasNoPermissionToEditTaxonomiesError(),
                     $fieldDataAccessor->getField(),
                 )
             );
         }
+    }
+
+    protected function getLoggedInUserHasNoPermissionToEditTaxonomiesError(): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E2,
+        );
     }
 }

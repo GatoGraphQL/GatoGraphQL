@@ -52,7 +52,7 @@ trait CreateOrUpdateCategoryTermMutationResolverTrait
         );
     }
 
-    protected function validateTaxonomyExists(
+    protected function validateTaxonomyTermExists(
         string|int|null $categoryID,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
