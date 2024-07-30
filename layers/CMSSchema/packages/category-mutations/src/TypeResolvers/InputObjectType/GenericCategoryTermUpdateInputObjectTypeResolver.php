@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
-
-interface CreateCategoryTermInputObjectTypeResolverInterface extends InputObjectTypeResolverInterface
+class GenericCategoryTermUpdateInputObjectTypeResolver extends CategoryTermUpdateInputObjectTypeResolver implements UpdateGenericCategoryTermInputObjectTypeResolverInterface
 {
+    public function getTypeName(): string
+    {
+        return 'GenericCategoryUpdateInput';
+    }
 }
