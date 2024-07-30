@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CategoryMutations\Exception;
+
+use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
+
+final class CategoryCRUDMutationException extends AbstractPayloadClientException
+{
+}
