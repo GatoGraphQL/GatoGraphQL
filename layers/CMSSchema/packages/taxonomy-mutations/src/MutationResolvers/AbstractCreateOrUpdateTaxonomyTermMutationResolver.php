@@ -139,8 +139,6 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
         $taxonomyID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $this->validateTaxonomyTermExists(
             $taxonomyID,
