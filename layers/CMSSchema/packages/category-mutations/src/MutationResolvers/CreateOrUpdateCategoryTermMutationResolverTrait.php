@@ -9,6 +9,14 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 trait CreateOrUpdateCategoryTermMutationResolverTrait
 {
+    protected function getUserNotLoggedInError(): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E1,
+        );
+    }
+
     protected function getTaxonomyTermDoesNotExistError(
         string|int $taxonomyTermID,
     ): FeedbackItemResolution {

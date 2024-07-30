@@ -8,6 +8,7 @@ use PoPCMSSchema\CategoryMutations\Constants\HookNames;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait;
+use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\App;
@@ -30,6 +31,12 @@ trait PayloadableCategoryMutationResolverTrait
             ]
         ) {
             [
+                $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
+                $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),
+            ] => new UserIsNotLoggedInErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new CategoryTermDoesNotExistErrorPayload(
@@ -37,12 +44,21 @@ trait PayloadableCategoryMutationResolverTrait
             ),
             default => App::applyFilters(
                 HookNames::ERROR_PAYLOAD,
-                new GenericErrorPayload(
-                    $feedbackItemResolution->getMessage(),
-                    $feedbackItemResolution->getNamespacedCode(),
+                $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
+                    $objectTypeFieldResolutionFeedback
                 ),
                 $objectTypeFieldResolutionFeedback,
             )
         };
+    }
+
+    protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
+    {
+        return MutationErrorFeedbackItemProvider::class;
+    }
+
+    protected function getUserNotLoggedInErrorFeedbackItemProviderCode(): string
+    {
+        return MutationErrorFeedbackItemProvider::E1;
     }
 }
