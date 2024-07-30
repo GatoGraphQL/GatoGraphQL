@@ -204,7 +204,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the updated taxonomy
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function executeUpdateTaxonomyTerm(array $taxonomyData): string|int
     {
@@ -217,7 +217,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -239,7 +239,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the created taxonomy
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function executeCreateTaxonomyTerm(array $taxonomyData): string|int
     {
@@ -248,7 +248,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
     /**
      * @return string|int The ID of the created entity
-     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
