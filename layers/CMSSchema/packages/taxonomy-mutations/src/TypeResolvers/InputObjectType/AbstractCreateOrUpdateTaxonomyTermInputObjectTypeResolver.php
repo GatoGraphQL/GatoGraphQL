@@ -86,8 +86,11 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => SchemaTypeModifiers::MANDATORY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName),
+            MutationInputProperties::ID,
+            MutationInputProperties::NAME
+                => SchemaTypeModifiers::MANDATORY,
+            default
+                => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 }
