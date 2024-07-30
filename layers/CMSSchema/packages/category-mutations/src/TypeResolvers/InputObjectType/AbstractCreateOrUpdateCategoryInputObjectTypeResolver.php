@@ -9,8 +9,8 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\CategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 
 abstract class AbstractCreateOrUpdateCategoryInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements UpdateCategoryInputObjectTypeResolverInterface, CreateCategoryInputObjectTypeResolverInterface
 {

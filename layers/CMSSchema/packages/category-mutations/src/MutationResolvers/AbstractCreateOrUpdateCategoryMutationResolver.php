@@ -5,17 +5,16 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMutations\Constants\HookNames;
-use PoPCMSSchema\CategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CategoryMutations\Exception\CategoryCRUDMutationException;
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use stdClass;
 
 abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMutationResolver implements CategoryMutationResolverInterface
 {
