@@ -4,8 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\CategoryMutations\ComponentProcessors\:
-        resource: '../src/ComponentProcessors/*'
-
     PoPCMSSchema\CategoryMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
