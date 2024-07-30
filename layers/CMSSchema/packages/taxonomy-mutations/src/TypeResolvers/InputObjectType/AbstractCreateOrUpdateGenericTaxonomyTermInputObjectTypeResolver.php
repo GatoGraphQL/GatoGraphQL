@@ -4,13 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-abstract class AbstractCreateOrUpdateGenericTaxonomyTermInputObjectTypeResolver extends AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver implements UpdateGenericTaxonomyTermInputObjectTypeResolverInterface, CreateGenericTaxonomyTermInputObjectTypeResolverInterface
+abstract class AbstractCreateOrUpdateGenericTaxonomyTermInputObjectTypeResolver extends AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver implements UpdateGenericTaxonomyTermInputObjectTypeResolverInterface, CreateGenericTaxonomyTermInputObjectTypeResolverInterface
 {
+    use CreateOrUpdateGenericTaxonomyTermInputObjectTypeResolverTrait;
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */
@@ -18,27 +17,17 @@ abstract class AbstractCreateOrUpdateGenericTaxonomyTermInputObjectTypeResolver 
     {
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
-            [
-                MutationInputProperties::TAXONOMY => $this->getTaxonomyTypeResolver(),
-            ]
+            $this->getGenericTaxonomyTermInputFieldNameTypeResolvers()
         );
     }
 
-    abstract protected function getTaxonomyTypeResolver(): TypeResolverInterface;
-
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
-        return match ($inputFieldName) {
-            MutationInputProperties::TAXONOMY => $this->__('The taxonomy', 'taxonomy-mutations'),
-            default => parent::getInputFieldDescription($inputFieldName),
-        };
+        return $this->getGenericTaxonomyTermInputFieldDescription($inputFieldName) ?? parent::getInputFieldDescription($inputFieldName);
     }
 
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
-        return match ($inputFieldName) {
-            MutationInputProperties::TAXONOMY => SchemaTypeModifiers::MANDATORY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName),
-        };
+        return $this->getGenericTaxonomyTermInputFieldTypeModifiers($inputFieldName) ?? parent::getInputFieldTypeModifiers($inputFieldName);
     }
 }

@@ -4,27 +4,28 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostEnumStringScalarTypeResolver;
-use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
+use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\CreateOrUpdateGenericTaxonomyTermInputObjectTypeResolverTrait;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver implements UpdateGenericCategoryTermInputObjectTypeResolverInterface, CreateGenericCategoryTermInputObjectTypeResolverInterface
 {
-    private ?CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver = null;
-
-    final public function setCustomPostEnumStringScalarTypeResolver(CustomPostEnumStringScalarTypeResolver $customPostEnumStringScalarTypeResolver): void
+    use CreateOrUpdateGenericTaxonomyTermInputObjectTypeResolverTrait;
+    
+    private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
+    
+    final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
     {
-        $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
+        $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
     }
-    final protected function getCustomPostEnumStringScalarTypeResolver(): CustomPostEnumStringScalarTypeResolver
+    final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
     {
-        if ($this->customPostEnumStringScalarTypeResolver === null) {
-            /** @var CustomPostEnumStringScalarTypeResolver */
-            $customPostEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CustomPostEnumStringScalarTypeResolver::class);
-            $this->customPostEnumStringScalarTypeResolver = $customPostEnumStringScalarTypeResolver;
+        if ($this->categoryTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
+            $categoryTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
+            $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
         }
-        return $this->customPostEnumStringScalarTypeResolver;
+        return $this->categoryTaxonomyEnumStringScalarTypeResolver;
     }
 
     /**
@@ -34,25 +35,22 @@ abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver 
     {
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
-            [
-                MutationInputProperties::TAXONOMY => $this->getCustomPostEnumStringScalarTypeResolver(),
-            ]
+            $this->getGenericTaxonomyTermInputFieldNameTypeResolvers()
         );
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
-        return match ($inputFieldName) {
-            MutationInputProperties::TAXONOMY => $this->__('The taxonomy', 'category-mutations'),
-            default => parent::getInputFieldDescription($inputFieldName),
-        };
+        return $this->getGenericTaxonomyTermInputFieldDescription($inputFieldName) ?? parent::getInputFieldDescription($inputFieldName);
     }
 
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
-        return match ($inputFieldName) {
-            MutationInputProperties::TAXONOMY => SchemaTypeModifiers::MANDATORY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName),
-        };
+        return $this->getGenericTaxonomyTermInputFieldTypeModifiers($inputFieldName) ?? parent::getInputFieldTypeModifiers($inputFieldName);
+    }
+    
+    protected function getTaxonomyTypeResolver(): TypeResolverInterface
+    {
+        return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
     }
 }

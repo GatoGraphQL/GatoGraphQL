@@ -2,35 +2,20 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
+namespace PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType;
 
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\CustomPostStatusEnumTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 
-abstract class AbstractCreateOrUpdateCategoryInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements UpdateCategoryInputObjectTypeResolverInterface, CreateCategoryInputObjectTypeResolverInterface
+abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements UpdateTaxonomyInputObjectTypeResolverInterface, CreateTaxonomyInputObjectTypeResolverInterface
 {
-    private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
 
-    final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
-    {
-        $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-    }
-    final protected function getCustomPostStatusEnumTypeResolver(): CustomPostStatusEnumTypeResolver
-    {
-        if ($this->customPostStatusEnumTypeResolver === null) {
-            /** @var CustomPostStatusEnumTypeResolver */
-            $customPostStatusEnumTypeResolver = $this->instanceManager->getInstance(CustomPostStatusEnumTypeResolver::class);
-            $this->customPostStatusEnumTypeResolver = $customPostStatusEnumTypeResolver;
-        }
-        return $this->customPostStatusEnumTypeResolver;
-    }
     final public function setIDScalarTypeResolver(IDScalarTypeResolver $idScalarTypeResolver): void
     {
         $this->idScalarTypeResolver = $idScalarTypeResolver;
@@ -60,7 +45,7 @@ abstract class AbstractCreateOrUpdateCategoryInputObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a category', 'category-mutations');
+        return $this->__('Input to update a taxonomy', 'taxonomy-mutations');
     }
 
     /**
@@ -69,28 +54,31 @@ abstract class AbstractCreateOrUpdateCategoryInputObjectTypeResolver extends Abs
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
-            $this->addCustomPostInputField() ? [
+            $this->addTaxonomyInputField() ? [
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
+            ] : [],
+            $this->addParentIDInputField() ? [
+                MutationInputProperties::PARENT_ID => $this->getIDScalarTypeResolver(),
             ] : [],
             [
                 MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::DESCRIPTION => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::PARENT_ID => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
     }
 
-    abstract protected function addCustomPostInputField(): bool;
+    abstract protected function addTaxonomyInputField(): bool;
+    abstract protected function addParentIDInputField(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the category to update', 'category-mutations'),
-            MutationInputProperties::NAME => $this->__('The title of the category', 'category-mutations'),
-            MutationInputProperties::DESCRIPTION => $this->__('The excerpt of the category', 'category-mutations'),
-            MutationInputProperties::SLUG => $this->__('The slug of the category', 'category-mutations'),
-            MutationInputProperties::PARENT_ID => $this->__('The status of the category', 'category-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy to update', 'taxonomy-mutations'),
+            MutationInputProperties::NAME => $this->__('The name of the taxonomy', 'taxonomy-mutations'),
+            MutationInputProperties::DESCRIPTION => $this->__('The description of the taxonomy', 'taxonomy-mutations'),
+            MutationInputProperties::SLUG => $this->__('The slug of the taxonomy', 'taxonomy-mutations'),
+            MutationInputProperties::PARENT_ID => $this->__('The taxonomy\'s parent', 'taxonomy-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
