@@ -7,7 +7,6 @@ namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -22,7 +21,6 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
-    private ?CustomPostTypeAPIInterface $taxonomyTypeAPI = null;
     private ?TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
@@ -50,19 +48,6 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
             $this->userRoleTypeAPI = $userRoleTypeAPI;
         }
         return $this->userRoleTypeAPI;
-    }
-    final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $taxonomyTypeAPI): void
-    {
-        $this->taxonomyTypeAPI = $taxonomyTypeAPI;
-    }
-    final protected function getTaxonomyNameAPI(): CustomPostTypeAPIInterface
-    {
-        if ($this->taxonomyTypeAPI === null) {
-            /** @var CustomPostTypeAPIInterface */
-            $taxonomyTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
-            $this->taxonomyTypeAPI = $taxonomyTypeAPI;
-        }
-        return $this->taxonomyTypeAPI;
     }
     final public function setTaxonomyTypeMutationAPI(TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI): void
     {
@@ -156,25 +141,12 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $categoryID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $this->validateTaxonomyTermExists(
-            $categoryID,
+            $taxonomyID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-    }
-
-    protected function additionals(int|string $categoryID, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
-    }
-    /**
-     * @param array<string,mixed> $log
-     */
-    protected function updateAdditionals(int|string $categoryID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
-    {
-    }
-    protected function createAdditionals(int|string $categoryID, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
     }
 
     /**
@@ -236,7 +208,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
     /**
      * @param array<string,mixed> $taxonomyData
-     * @return string|int the ID of the updated category
+     * @return string|int the ID of the updated taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     protected function executeUpdateTaxonomy(array $taxonomyData): string|int
@@ -244,18 +216,8 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         return $this->getTaxonomyTypeMutationAPI()->updateTaxonomy($taxonomyData);
     }
 
-    protected function createUpdateTaxonomy(FieldDataAccessorInterface $fieldDataAccessor, int|string $categoryID): void
+    protected function createUpdateTaxonomy(FieldDataAccessorInterface $fieldDataAccessor, int|string $taxonomyID): void
     {
-    }
-
-    /**
-     * @return array<string,string>|null[]
-     */
-    protected function getUpdateTaxonomyDataLog(int|string $categoryID, FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        return [
-            'previous-status' => $this->getTaxonomyNameAPI()->getStatus($categoryID),
-        ];
     }
 
     /**
@@ -267,31 +229,21 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         $taxonomyData = $this->getUpdateTaxonomyData($fieldDataAccessor);
-        $categoryID = $taxonomyData['id'];
+        $taxonomyID = $taxonomyData['id'];
 
-        // Create the operation log, to see what changed. Needed for
-        // - Send email only when post published
-        // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
-        $log = $this->getUpdateTaxonomyDataLog($categoryID, $fieldDataAccessor);
+        $taxonomyID = $this->executeUpdateTaxonomy($taxonomyData);
 
-        $categoryID = $this->executeUpdateTaxonomy($taxonomyData);
+        $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyID);
 
-        $this->createUpdateTaxonomy($fieldDataAccessor, $categoryID);
+        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyID, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_UPDATE, $taxonomyID, $fieldDataAccessor);
 
-        // Allow for additional operations (eg: set Action categories)
-        $this->additionals($categoryID, $fieldDataAccessor);
-        $this->updateAdditionals($categoryID, $fieldDataAccessor, $log);
-
-        // Inject Share profiles here
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $categoryID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_UPDATE, $categoryID, $log, $fieldDataAccessor);
-
-        return $categoryID;
+        return $taxonomyID;
     }
 
     /**
      * @param array<string,mixed> $taxonomyData
-     * @return string|int the ID of the created category
+     * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     protected function executeCreateTaxonomy(array $taxonomyData): string|int
@@ -307,18 +259,13 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int {
         $taxonomyData = $this->getCreateTaxonomyData($fieldDataAccessor);
-        $categoryID = $this->executeCreateTaxonomy($taxonomyData);
+        $taxonomyID = $this->executeCreateTaxonomy($taxonomyData);
 
-        $this->createUpdateTaxonomy($fieldDataAccessor, $categoryID);
+        $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyID);
 
-        // Allow for additional operations (eg: set Action categories)
-        $this->additionals($categoryID, $fieldDataAccessor);
-        $this->createAdditionals($categoryID, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyID, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_CREATE, $taxonomyID, $fieldDataAccessor);
 
-        // Inject Share profiles here
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $categoryID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_CREATE, $categoryID, $fieldDataAccessor);
-
-        return $categoryID;
+        return $taxonomyID;
     }
 }
