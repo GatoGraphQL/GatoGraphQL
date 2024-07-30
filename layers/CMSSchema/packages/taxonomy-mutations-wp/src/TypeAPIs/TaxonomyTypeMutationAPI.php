@@ -12,6 +12,8 @@ use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
 use function user_can;
+use function wp_insert_term;
+use function wp_update_term;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -31,7 +33,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         if (isset($query['id'])) {
-            $query['ID'] = $query['id'];
+            $query['term_id'] = $query['id'];
             unset($query['id']);
         }
         if (isset($query['taxonomy-name'])) {
@@ -72,14 +74,14 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
-        $postIDOrError = \wp_insert_post($data, true);
-        if ($postIDOrError instanceof WP_Error) {
+        $taxonomyIDOrError = \wp_insert_post($data, true);
+        if ($taxonomyIDOrError instanceof WP_Error) {
             /** @var WP_Error */
-            $wpError = $postIDOrError;
+            $wpError = $taxonomyIDOrError;
             throw $this->createTaxonomyTermTermCRUDMutationException($wpError);
         }
         /** @var int */
-        $postID = $postIDOrError;
+        $postID = $taxonomyIDOrError;
         return $postID;
     }
 
@@ -101,15 +103,17 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
-        $postIDOrError = \wp_update_post($data, true);
-        if ($postIDOrError instanceof WP_Error) {
+        $taxonomyTermID = $data['term_id'] ?? null;
+        $taxonomy = $data['taxonomy'] ?? '';
+        $taxonomyDataOrError = wp_update_term($taxonomyTermID, $taxonomy, $data);
+        if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
-            $wpError = $postIDOrError;
+            $wpError = $taxonomyDataOrError;
             throw $this->createTaxonomyTermTermCRUDMutationException($wpError);
         }
         /** @var int */
-        $postID = $postIDOrError;
-        return $postID;
+        $taxonomyTermID = $taxonomyDataOrError['term_id'];
+        return $taxonomyTermID;
     }
 
     public function canUserEditTaxonomy(string|int $userID, string|int $taxonomyID): bool
