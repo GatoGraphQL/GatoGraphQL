@@ -35,7 +35,7 @@ abstract class AbstractCreateOrUpdateGenericCategoryInputObjectTypeResolver exte
         return array_merge(
             parent::getInputFieldNameTypeResolvers(),
             [
-                MutationInputProperties::CATEGORY_TYPE => $this->getCustomPostEnumStringScalarTypeResolver(),
+                MutationInputProperties::TAXONOMY => $this->getCustomPostEnumStringScalarTypeResolver(),
             ]
         );
     }
@@ -43,7 +43,7 @@ abstract class AbstractCreateOrUpdateGenericCategoryInputObjectTypeResolver exte
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CATEGORY_TYPE => $this->__('The category type', 'category-mutations'),
+            MutationInputProperties::TAXONOMY => $this->__('The taxonomy', 'category-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -51,7 +51,7 @@ abstract class AbstractCreateOrUpdateGenericCategoryInputObjectTypeResolver exte
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CATEGORY_TYPE => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::TAXONOMY => SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }

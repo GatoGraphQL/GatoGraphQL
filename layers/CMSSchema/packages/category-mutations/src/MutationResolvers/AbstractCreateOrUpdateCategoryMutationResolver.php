@@ -196,8 +196,8 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         if ($fieldDataAccessor->hasValue(MutationInputProperties::STATUS)) {
             $customPostData['status'] = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
         }
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::CATEGORY_TYPE)) {
-            $customPostData['custompost-type'] = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORY_TYPE);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::TAXONOMY)) {
+            $customPostData['taxonomy'] = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
         }
 
         // Inject author, categories, tags, featured image, etc
