@@ -226,7 +226,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
     protected function getCreateCategoryData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $taxonomyData = [
-            'custompost-type' => $this->getTaxonomyName(),
+            'taxonomy' => $this->getTaxonomyName(),
         ];
         $taxonomyData = $this->addCreateOrUpdateCategoryData($taxonomyData, $fieldDataAccessor);
 

@@ -225,7 +225,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
     protected function getCreateTaxonomyData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         $taxonomyData = [
-            'custompost-type' => $this->getTaxonomyName(),
+            'taxonomy' => $this->getTaxonomyName(),
         ];
         $taxonomyData = $this->addCreateOrUpdateTaxonomyData($taxonomyData, $fieldDataAccessor);
 
