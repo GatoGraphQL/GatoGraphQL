@@ -21,7 +21,6 @@
         "pop-cms-schema/tags-wp": "<4.1.1",
         "pop-cms-schema/posts": "<4.1.1",
         "pop-cms-schema/custompost-tags-wp": "<4.1.1",
-        "pop-cms-schema/taxonomymeta-wp": "<4.1.1",
         "pop-cms-schema/custompost-category-mutations": "<4.1.1",
         "pop-cms-schema/taxonomymeta": "<4.1.1",
         "pop-cms-schema/media-wp": "<4.1.1",
