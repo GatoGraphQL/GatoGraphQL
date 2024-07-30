@@ -44,7 +44,6 @@ trait PayloadableTaxonomyMutationResolverTrait
             ] => new TaxonomyTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            // Allow components (eg: CustomPostTaxonomyMutations) to inject their own validations
             default => App::applyFilters(
                 HookNames::ERROR_PAYLOAD,
                 new GenericErrorPayload(

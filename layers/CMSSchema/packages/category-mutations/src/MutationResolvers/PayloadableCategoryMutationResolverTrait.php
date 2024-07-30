@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMutations\Constants\HookNames;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
-use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
 use PoP\ComponentModel\App;
@@ -15,6 +15,10 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
 trait PayloadableCategoryMutationResolverTrait
 {
+    use PayloadableTaxonomyMutationResolverTrait {
+        PayloadableTaxonomyMutationResolverTrait::createErrorPayloadFromObjectTypeFieldResolutionFeedback as upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback;
+    }
+
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
@@ -26,18 +30,11 @@ trait PayloadableCategoryMutationResolverTrait
             ]
         ) {
             [
-                $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
-                $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),
-            ] => new UserIsNotLoggedInErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new CategoryTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
             default => App::applyFilters(
                 HookNames::ERROR_PAYLOAD,
                 new GenericErrorPayload(
@@ -47,15 +44,5 @@ trait PayloadableCategoryMutationResolverTrait
                 $objectTypeFieldResolutionFeedback,
             )
         };
-    }
-
-    protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
-    {
-        return MutationErrorFeedbackItemProvider::class;
-    }
-
-    protected function getUserNotLoggedInErrorFeedbackItemProviderCode(): string
-    {
-        return MutationErrorFeedbackItemProvider::E1;
     }
 }
