@@ -211,9 +211,9 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
      * @return string|int the ID of the updated taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    protected function executeUpdateTaxonomy(array $taxonomyData): string|int
+    protected function executeUpdateTaxonomyTerm(array $taxonomyData): string|int
     {
-        return $this->getTaxonomyTypeMutationAPI()->updateTaxonomy($taxonomyData);
+        return $this->getTaxonomyTypeMutationAPI()->updateTaxonomyTerm($taxonomyData);
     }
 
     protected function createUpdateTaxonomy(FieldDataAccessorInterface $fieldDataAccessor, int|string $taxonomyID): void
@@ -231,7 +231,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         $taxonomyData = $this->getUpdateTaxonomyData($fieldDataAccessor);
         $taxonomyID = $taxonomyData['id'];
 
-        $taxonomyID = $this->executeUpdateTaxonomy($taxonomyData);
+        $taxonomyID = $this->executeUpdateTaxonomyTerm($taxonomyData);
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyID);
 
@@ -246,9 +246,9 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
      * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    protected function executeCreateTaxonomy(array $taxonomyData): string|int
+    protected function executeCreateTaxonomyTerm(array $taxonomyData): string|int
     {
-        return $this->getTaxonomyTypeMutationAPI()->createTaxonomy($taxonomyData);
+        return $this->getTaxonomyTypeMutationAPI()->createTaxonomyTerm($taxonomyData);
     }
 
     /**
@@ -259,7 +259,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int {
         $taxonomyData = $this->getCreateTaxonomyData($fieldDataAccessor);
-        $taxonomyID = $this->executeCreateTaxonomy($taxonomyData);
+        $taxonomyID = $this->executeCreateTaxonomyTerm($taxonomyData);
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyID);
 
