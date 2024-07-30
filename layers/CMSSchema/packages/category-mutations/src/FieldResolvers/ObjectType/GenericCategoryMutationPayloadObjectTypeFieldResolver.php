@@ -40,7 +40,7 @@ class GenericCategoryMutationPayloadObjectTypeFieldResolver extends AbstractObje
 
     protected function getObjectFieldName(): string
     {
-        return 'customPost';
+        return 'category';
     }
 
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
