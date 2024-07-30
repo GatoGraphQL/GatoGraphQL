@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyCRUDMutationException;
+use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\App;
@@ -66,7 +66,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the created taxonomy
-     * @throws TaxonomyCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     public function createTaxonomy(array $data): string|int
     {
@@ -76,16 +76,16 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $postIDOrError;
-            throw $this->createTaxonomyCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermCRUDMutationException($wpError);
         }
         /** @var int */
         $postID = $postIDOrError;
         return $postID;
     }
 
-    protected function createTaxonomyCRUDMutationException(WP_Error $wpError): TaxonomyCRUDMutationException
+    protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException
     {
-        return new TaxonomyCRUDMutationException(
+        return new TaxonomyTermCRUDMutationException(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
             $this->getWPErrorData($wpError),
@@ -95,7 +95,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated taxonomy
-     * @throws TaxonomyCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     public function updateTaxonomy(array $data): string|int
     {
@@ -105,7 +105,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $postIDOrError;
-            throw $this->createTaxonomyCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermCRUDMutationException($wpError);
         }
         /** @var int */
         $postID = $postIDOrError;

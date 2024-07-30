@@ -7,7 +7,7 @@ namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyCRUDMutationException;
+use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -237,7 +237,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the updated category
-     * @throws TaxonomyCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     protected function executeUpdateTaxonomy(array $taxonomyData): string|int
     {
@@ -260,7 +260,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws TaxonomyCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -292,7 +292,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
     /**
      * @param array<string,mixed> $taxonomyData
      * @return string|int the ID of the created category
-     * @throws TaxonomyCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     protected function executeCreateTaxonomy(array $taxonomyData): string|int
     {
@@ -301,7 +301,7 @@ abstract class AbstractCreateOrUpdateTaxonomyMutationResolver extends AbstractMu
 
     /**
      * @return string|int The ID of the created entity
-     * @throws TaxonomyCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,

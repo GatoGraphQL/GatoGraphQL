@@ -6,6 +6,6 @@ namespace PoPCMSSchema\TaxonomyMutations\Exception;
 
 use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 
-final class TaxonomyCRUDMutationException extends AbstractPayloadClientException
+final class TaxonomyTermCRUDMutationException extends AbstractPayloadClientException
 {
 }
