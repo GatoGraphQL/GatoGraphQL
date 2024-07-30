@@ -263,11 +263,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return array_merge(
             [
                 'createCategory',
-                'createCategorys',
+                'createCategories',
             ],
             !$disableRedundantRootTypeMutationFields ? [
                 'updateCategory',
-                'updateCategorys',
+                'updateCategories',
             ] : [],
             $addFieldsToQueryPayloadableCategoryMutations ? [
                 'createCategoryMutationPayloadObjects',
@@ -282,9 +282,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'createCategory' => $this->__('Create a category. This mutation accepts the data that is common to all categories (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those category types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'category-mutations'),
-            'createCategorys' => $this->__('Create categories. This mutation accepts the data that is common to all categories (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those category types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'category-mutations'),
+            'createCategories' => $this->__('Create categories. This mutation accepts the data that is common to all categories (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those category types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)', 'category-mutations'),
             'updateCategory' => $this->__('Update a category', 'category-mutations'),
-            'updateCategorys' => $this->__('Update categories', 'category-mutations'),
+            'updateCategories' => $this->__('Update categories', 'category-mutations'),
             'createCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createCategory` mutation', 'category-mutations'),
             'updateCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategory` mutation', 'category-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
@@ -301,8 +301,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'createCategory',
                 'updateCategory'
                     => SchemaTypeModifiers::NONE,
-                'createCategorys',
-                'updateCategorys'
+                'createCategories',
+                'updateCategories'
                     => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
                 default
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -322,8 +322,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createCategory',
             'updateCategory'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'createCategorys',
-            'updateCategorys'
+            'createCategories',
+            'updateCategories'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -339,12 +339,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createCategory' => [
                 'input' => $this->getRootCreateGenericCategoryTermInputObjectTypeResolver(),
             ],
-            'createCategorys'
+            'createCategories'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateGenericCategoryTermInputObjectTypeResolver()),
             'updateCategory' => [
                 'input' => $this->getRootUpdateGenericCategoryTermInputObjectTypeResolver(),
             ],
-            'updateCategorys'
+            'updateCategories'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateGenericCategoryTermInputObjectTypeResolver()),
             'createCategoryMutationPayloadObjects',
             'updateCategoryMutationPayloadObjects'
@@ -368,8 +368,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
         if (
             in_array($fieldName, [
-            'createCategorys',
-            'updateCategorys',
+            'createCategories',
+            'updateCategories',
             ])
         ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
@@ -388,8 +388,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         if (
             in_array($fieldName, [
-            'createCategorys',
-            'updateCategorys',
+            'createCategories',
+            'updateCategories',
             ])
         ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
@@ -408,13 +408,13 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createCategory' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableCreateGenericCategoryTermMutationResolver()
                 : $this->getCreateGenericCategoryTermMutationResolver(),
-            'createCategorys' => $usePayloadableCategoryMutations
+            'createCategories' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableCreateGenericCategoryTermBulkOperationMutationResolver()
                 : $this->getCreateGenericCategoryTermBulkOperationMutationResolver(),
             'updateCategory' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableUpdateGenericCategoryTermMutationResolver()
                 : $this->getUpdateGenericCategoryTermMutationResolver(),
-            'updateCategorys' => $usePayloadableCategoryMutations
+            'updateCategories' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableUpdateGenericCategoryTermBulkOperationMutationResolver()
                 : $this->getUpdateGenericCategoryTermBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -429,11 +429,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         if ($usePayloadableCategoryMutations) {
             return match ($fieldName) {
                 'createCategory',
-                'createCategorys',
+                'createCategories',
                 'createCategoryMutationPayloadObjects'
                     => $this->getRootCreateGenericCategoryTermMutationPayloadObjectTypeResolver(),
                 'updateCategory',
-                'updateCategorys',
+                'updateCategories',
                 'updateCategoryMutationPayloadObjects'
                     => $this->getRootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -441,9 +441,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return match ($fieldName) {
             'createCategory',
-            'createCategorys',
+            'createCategories',
             'updateCategory',
-            'updateCategorys'
+            'updateCategories'
                 => $this->getGenericCategoryObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -479,9 +479,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 
         switch ($fieldDataAccessor->getFieldName()) {
             case 'createCategory':
-            case 'createCategorys':
+            case 'createCategories':
             case 'updateCategory':
-            case 'updateCategorys':
+            case 'updateCategories':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }
