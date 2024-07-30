@@ -187,16 +187,6 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TITLE)) {
             $customPostData['title'] = $fieldDataAccessor->getValue(MutationInputProperties::TITLE);
         }
-        /**
-         * @todo In addition to "html", support additional oneof properties for the mutation (eg: provide "blocks" for Gutenberg)
-         */
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::CONTENT_AS)) {
-            /** @var stdClass */
-            $contentAs = $fieldDataAccessor->getValue(MutationInputProperties::CONTENT_AS);
-            if (isset($contentAs->{MutationInputProperties::HTML})) {
-                $customPostData['content'] = $contentAs->{MutationInputProperties::HTML};
-            }
-        }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::EXCERPT)) {
             $customPostData['excerpt'] = $fieldDataAccessor->getValue(MutationInputProperties::EXCERPT);
         }

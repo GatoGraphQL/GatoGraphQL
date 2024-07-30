@@ -17,7 +17,6 @@ abstract class AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver extends Abs
     private ?CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
-    private ?CustomPostContentAsOneofInputObjectTypeResolver $customPostContentAsOneofInputObjectTypeResolver = null;
 
     final public function setCustomPostStatusEnumTypeResolver(CustomPostStatusEnumTypeResolver $customPostStatusEnumTypeResolver): void
     {
@@ -58,19 +57,6 @@ abstract class AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver extends Abs
         }
         return $this->stringScalarTypeResolver;
     }
-    final public function setCustomPostContentAsOneofInputObjectTypeResolver(CustomPostContentAsOneofInputObjectTypeResolver $customPostContentAsOneofInputObjectTypeResolver): void
-    {
-        $this->customPostContentAsOneofInputObjectTypeResolver = $customPostContentAsOneofInputObjectTypeResolver;
-    }
-    final protected function getCustomPostContentAsOneofInputObjectTypeResolver(): CustomPostContentAsOneofInputObjectTypeResolver
-    {
-        if ($this->customPostContentAsOneofInputObjectTypeResolver === null) {
-            /** @var CustomPostContentAsOneofInputObjectTypeResolver */
-            $customPostContentAsOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CustomPostContentAsOneofInputObjectTypeResolver::class);
-            $this->customPostContentAsOneofInputObjectTypeResolver = $customPostContentAsOneofInputObjectTypeResolver;
-        }
-        return $this->customPostContentAsOneofInputObjectTypeResolver;
-    }
 
     public function getTypeDescription(): ?string
     {
@@ -88,17 +74,11 @@ abstract class AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver extends Abs
             ] : [],
             [
                 MutationInputProperties::TITLE => $this->getStringScalarTypeResolver(),
-                MutationInputProperties::CONTENT_AS => $this->getContentAsOneofInputObjectTypeResolver(),
                 MutationInputProperties::EXCERPT => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::SLUG => $this->getStringScalarTypeResolver(),
                 MutationInputProperties::STATUS => $this->getCustomPostStatusEnumTypeResolver(),
             ]
         );
-    }
-
-    protected function getContentAsOneofInputObjectTypeResolver(): AbstractCustomPostContentAsOneofInputObjectTypeResolver
-    {
-        return $this->getCustomPostContentAsOneofInputObjectTypeResolver();
     }
 
     abstract protected function addCustomPostInputField(): bool;
@@ -108,7 +88,6 @@ abstract class AbstractCreateOrUpdateTaxonomyInputObjectTypeResolver extends Abs
         return match ($inputFieldName) {
             MutationInputProperties::ID => $this->__('The ID of the taxonomy to update', 'taxonomy-mutations'),
             MutationInputProperties::TITLE => $this->__('The title of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::CONTENT_AS => $this->__('The content of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::EXCERPT => $this->__('The excerpt of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::SLUG => $this->__('The slug of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::STATUS => $this->__('The status of the taxonomy', 'taxonomy-mutations'),
