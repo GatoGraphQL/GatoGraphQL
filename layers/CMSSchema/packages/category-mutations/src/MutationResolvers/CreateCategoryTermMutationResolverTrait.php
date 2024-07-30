@@ -9,7 +9,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 
-trait CreateCategoryMutationResolverTrait
+trait CreateCategoryTermMutationResolverTrait
 {
     /**
      * @throws AbstractException In case of error

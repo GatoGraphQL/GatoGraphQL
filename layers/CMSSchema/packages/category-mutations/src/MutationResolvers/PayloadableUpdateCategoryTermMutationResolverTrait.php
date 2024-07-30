@@ -10,11 +10,11 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
-trait PayloadableUpdateCategoryMutationResolverTrait
+trait PayloadableUpdateCategoryTermMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait, UpdateCategoryMutationResolverTrait {
-        UpdateCategoryMutationResolverTrait::executeMutation as upstreamExecuteMutation;
-        PayloadableMutationResolverTrait::validate insteadof UpdateCategoryMutationResolverTrait;
+    use PayloadableMutationResolverTrait, UpdateCategoryTermMutationResolverTrait {
+        UpdateCategoryTermMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validate insteadof UpdateCategoryTermMutationResolverTrait;
     }
     use PayloadableCategoryMutationResolverTrait;
 

@@ -6,5 +6,5 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
 class UpdateGenericCategoryTermMutationResolver extends AbstractCreateUpdateGenericCategoryTermMutationResolver
 {
-    use UpdateCategoryMutationResolverTrait;
+    use UpdateCategoryTermMutationResolverTrait;
 }
