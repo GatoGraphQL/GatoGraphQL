@@ -55,6 +55,11 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        /**
+         * Perform this validation, even though this situation
+         * should never happen. That's why there's no
+         * CategoryIDIsEmptyError
+         */
         if (!$taxonomyTermID) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
