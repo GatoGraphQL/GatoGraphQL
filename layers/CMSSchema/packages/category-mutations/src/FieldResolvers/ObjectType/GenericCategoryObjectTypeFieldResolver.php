@@ -105,7 +105,7 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->__('Update the post', 'post-mutations'),
+            'update' => $this->__('Update the category', 'category-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
