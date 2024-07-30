@@ -32,12 +32,14 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         if (isset($query['id'])) {
-            $query['term_id'] = $query['id'];
-            unset($query['id']);
+            // Nothing to do
+            // $query['id'] = $query['id'];
+            // unset($query['id']);
         }
         if (isset($query['taxonomy-name'])) {
-            $query['taxonomy'] = $query['taxonomy-name'];
-            unset($query['taxonomy-name']);
+            // Nothing to do
+            // $query['taxonomy-name'] = $query['taxonomy-name'];
+            // unset($query['taxonomy-name']);
         }
         if (isset($query['name'])) {
             // Nothing to do
@@ -73,9 +75,9 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
-        $name = $data['name'] ?? '';
-        $taxonomy = $data['taxonomy'] ?? '';
-        $taxonomyDataOrError = wp_insert_term($name, $taxonomy, $data);
+        $taxonomyTermName = $data['name'] ?? '';
+        $taxonomyName = $data['taxonomy-name'] ?? '';
+        $taxonomyDataOrError = wp_insert_term($taxonomyTermName, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
@@ -104,9 +106,9 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
-        $taxonomyTermID = $data['term_id'] ?? null;
-        $taxonomy = $data['taxonomy'] ?? '';
-        $taxonomyDataOrError = wp_update_term($taxonomyTermID, $taxonomy, $data);
+        $taxonomyTermID = $data['id'] ?? null;
+        $taxonomyName = $data['taxonomy-name'] ?? '';
+        $taxonomyDataOrError = wp_update_term($taxonomyTermID, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
