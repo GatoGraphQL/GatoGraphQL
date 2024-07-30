@@ -33,7 +33,7 @@ class TaxonomyTermDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErr
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested taxonomy does not exist"', 'customposts');
+        return $this->__('Error payload for: "The requested taxonomy does not exist"', 'taxonomy-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
