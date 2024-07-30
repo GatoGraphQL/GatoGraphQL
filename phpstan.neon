@@ -117,6 +117,8 @@ includes:
     - layers/CMSSchema/packages/tags-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomies/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomies-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/taxonomy-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/taxonomy-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomymeta/phpstan.neon.dist
     - layers/WPSchema/packages/taxonomymeta/phpstan.neon.dist
     - layers/CMSSchema/packages/taxonomymeta-wp/phpstan.neon.dist
