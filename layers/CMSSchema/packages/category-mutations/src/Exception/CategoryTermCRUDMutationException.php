@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\Exception;
 
-use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
+use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 
-final class CategoryTermCRUDMutationException extends AbstractPayloadClientException
+
+final class CategoryTermCRUDMutationException extends TaxonomyTermCRUDMutationException
 {
 }
