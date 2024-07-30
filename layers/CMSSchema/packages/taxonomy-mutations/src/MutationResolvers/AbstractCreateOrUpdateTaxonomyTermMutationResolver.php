@@ -131,8 +131,11 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
         $taxonomyParentID = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_ID);
         if ($taxonomyParentID !== null) {
+            /** @var string|null */
+            $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
             $this->validateTaxonomyTermExists(
                 $taxonomyParentID,
+                $taxonomyName,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -163,6 +166,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         $taxonomyID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         $this->validateTaxonomyTermExists(
             $taxonomyID,
+            null,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

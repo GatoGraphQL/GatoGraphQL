@@ -52,6 +52,7 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
 
     protected function validateTaxonomyTermExists(
         string|int|null $taxonomyTermID,
+        string|null $taxonomyName,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -73,7 +74,7 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
             return;
         }
 
-        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID)) {
+        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID, $taxonomyName)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $this->getTaxonomyTermDoesNotExistError($taxonomyTermID),

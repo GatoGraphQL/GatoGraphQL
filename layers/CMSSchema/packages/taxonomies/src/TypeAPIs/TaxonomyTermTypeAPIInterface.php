@@ -13,5 +13,5 @@ interface TaxonomyTermTypeAPIInterface
      * Retrieves the taxonomy name of the object ("post_tag", "category", etc)
      */
     public function getTermTaxonomyName(object $taxonomyTerm): string;
-    public function taxonomyTermExists(int|string $id): bool;
+    public function taxonomyTermExists(int|string $id, string $taxonomy = ''): bool;
 }
