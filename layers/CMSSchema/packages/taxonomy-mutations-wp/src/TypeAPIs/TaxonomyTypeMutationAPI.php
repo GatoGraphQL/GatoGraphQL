@@ -74,15 +74,17 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
-        $taxonomyIDOrError = \wp_insert_post($data, true);
-        if ($taxonomyIDOrError instanceof WP_Error) {
+        $name = $data['name'] ?? '';
+        $taxonomy = $data['taxonomy'] ?? '';
+        $taxonomyDataOrError = wp_insert_term($name, $taxonomy, $data);
+        if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
-            $wpError = $taxonomyIDOrError;
+            $wpError = $taxonomyDataOrError;
             throw $this->createTaxonomyTermTermCRUDMutationException($wpError);
         }
         /** @var int */
-        $postID = $taxonomyIDOrError;
-        return $postID;
+        $taxonomyTermID = $taxonomyDataOrError['term_id'];
+        return $taxonomyTermID;
     }
 
     protected function createTaxonomyTermTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException
