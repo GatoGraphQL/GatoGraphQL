@@ -8,7 +8,6 @@ use PoPCMSSchema\CategoryMutations\Constants\HookNames;
 use PoPCMSSchema\CategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CategoryMutations\Exception\CategoryCRUDMutationException;
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -127,18 +126,10 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
             return;
         }
 
-        $this->validateCanLoggedInUserEditCustomPosts(
+        $this->validateCanLoggedInUserEditTaxonomies(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        // Check if the user can publish categorys
-        if ($fieldDataAccessor->getValue(MutationInputProperties::STATUS) === CustomPostStatus::PUBLISH) {
-            $this->validateCanLoggedInUserPublishCustomPosts(
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
     }
 
     protected function validateCreate(
@@ -167,17 +158,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $categoryID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        $this->validateCustomPostExists(
-            $categoryID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $this->validateCanLoggedInUserEditCustomPost(
+        $this->validateTaxonomyExists(
             $categoryID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

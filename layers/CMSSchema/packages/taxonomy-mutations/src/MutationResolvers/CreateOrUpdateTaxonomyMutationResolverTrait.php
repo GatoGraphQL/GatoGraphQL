@@ -2,29 +2,29 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
+namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\TaxonomyMutations\LooseContracts\LooseContractSet;
+use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\CreateOrUpdateTaxonomyMutationResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
+use PoP\Root\App;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
-trait CreateOrUpdateCategoryMutationResolverTrait
+trait CreateOrUpdateTaxonomyMutationResolverTrait
 {
     use ValidateUserLoggedInMutationResolverTrait;
-    use CreateOrUpdateTaxonomyMutationResolverTrait;
 
     abstract protected function getNameResolver(): NameResolverInterface;
     abstract protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface;
     abstract protected function getTaxonomyNameAPI(): CustomPostTypeAPIInterface;
-    abstract protected function getCategoryTypeMutationAPI(): CategoryTypeMutationAPIInterface;
+    abstract protected function getTaxonomyTypeMutationAPI(): TaxonomyTypeMutationAPIInterface;
 
     /**
      * Check that the user is logged-in
@@ -38,6 +38,31 @@ trait CreateOrUpdateCategoryMutationResolverTrait
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $errorFeedbackItemResolution,
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function validateCanLoggedInUserEditTaxonomies(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        // Validate user permission
+        $userID = App::getState('current-user-id');
+        $editCustomPostsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_TAXONOMIES_CAPABILITY);
+        if (
+            !$this->getUserRoleTypeAPI()->userCan(
+                $userID,
+                $editCustomPostsCapability
+            )
+        ) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E2,
+                    ),
                     $fieldDataAccessor->getField(),
                 )
             );

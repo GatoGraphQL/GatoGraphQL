@@ -13,7 +13,6 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     {
         $this->getNameResolver()->implementNames([
             LooseContractSet::NAME_EDIT_TAXONOMIES_CAPABILITY => 'edit_terms',
-            LooseContractSet::NAME_PUBLISH_TAXONOMIES_CAPABILITY => 'publish_posts',
         ]);
     }
 }
