@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\FieldResolvers\ObjectType;
 
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CategoryMutations\FieldResolvers\ObjectType\AbstractCategoryObjectTypeFieldResolver;
 use PoPCMSSchema\CategoryMutations\Module as CategoryMutationsModule;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration as CategoryMutationsModuleConfiguration;
-use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
 use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMutationResolver;
 use PoPCMSSchema\CategoryMutations\MutationResolvers\UpdateGenericCategoryTermMutationResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\GenericCategoryUpdateInputObjectTypeResolver;

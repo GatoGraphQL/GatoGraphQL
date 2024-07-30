@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\CreateOrUpdateTaxonomyTermMutationResolverTrait;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\CreateOrUpdateTaxonomyMutationResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -19,7 +19,7 @@ use PoP\LooseContracts\NameResolverInterface;
 trait CreateOrUpdateCategoryTermMutationResolverTrait
 {
     use ValidateUserLoggedInMutationResolverTrait;
-    use CreateOrUpdateTaxonomyTermMutationResolverTrait;
+    use CreateOrUpdateTaxonomyMutationResolverTrait;
 
     abstract protected function getNameResolver(): NameResolverInterface;
     abstract protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface;
