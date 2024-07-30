@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
-use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\TaxonomyTermMutationResolverInterface;
 
-interface CategoryTermMutationResolverInterface extends MutationResolverInterface
+interface CategoryTermMutationResolverInterface extends TaxonomyTermMutationResolverInterface
 {
-    public function getTaxonomyName(): string;
 }
