@@ -27,8 +27,7 @@ class Module extends AbstractModule
         return [
             \PoPCMSSchema\CategoriesWP\Module::class,
             \PoPCMSSchema\CategoryMutations\Module::class,
-            \PoPCMSSchema\UserStateMutationsWP\Module::class,
-            \PoPCMSSchema\UserRolesWP\Module::class,
+            \PoPCMSSchema\TaxonomyMutationsWP\Module::class,
         ];
     }
 
