@@ -46,10 +46,10 @@ trait PayloadableCreateCategoryTermMutationResolverTrait
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
-        } catch (CategoryTermCRUDMutationException $customPostCRUDMutationException) {
+        } catch (CategoryTermCRUDMutationException $categoryTermCRUDMutationException) {
             return $this->createFailureObjectMutationPayload(
                 [
-                    $this->createGenericErrorPayloadFromPayloadClientException($customPostCRUDMutationException),
+                    $this->createGenericErrorPayloadFromPayloadClientException($categoryTermCRUDMutationException),
                 ]
             )->getID();
         }

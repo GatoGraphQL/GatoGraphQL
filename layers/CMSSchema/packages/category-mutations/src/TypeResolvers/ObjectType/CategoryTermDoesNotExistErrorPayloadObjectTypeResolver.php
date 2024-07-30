@@ -33,7 +33,7 @@ class CategoryTermDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErr
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested category does not exist"', 'customposts');
+        return $this->__('Error payload for: "The requested category does not exist"', 'category-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
