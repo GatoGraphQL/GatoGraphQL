@@ -23,6 +23,7 @@
         "graphql-by-pop/graphql-clients-for-wp": "^4.2",
         "graphql-by-pop/graphql-endpoint-for-wp": "^4.2",
         "graphql-by-pop/graphql-server": "^4.2",
+        "pop-cms-schema/category-mutations-wp": "^4.2",
         "pop-cms-schema/comment-mutations-wp": "^4.2",
         "pop-cms-schema/custompost-mutations-wp": "^4.2",
         "pop-cms-schema/custompost-user-mutations-wp": "^4.2",

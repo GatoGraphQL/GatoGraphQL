@@ -7,6 +7,7 @@ use PoP\Root\App;
 App::stockAndInitializeModuleClasses([
     \GraphQLByPoP\GraphQLServer\Module::class,
     \PoPAPI\RESTAPI\Module::class,
+    \PoPCMSSchema\CategoryMutationsWP\Module::class,
     \PoPCMSSchema\CommentMutationsWP\Module::class,
     \PoPCMSSchema\MediaMutationsWP\Module::class,
     \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
