@@ -128,6 +128,15 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+
+        $taxonomyParentID = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_ID);
+        if ($taxonomyParentID !== null) {
+            $this->validateTaxonomyTermExists(
+                $taxonomyParentID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
     }
 
     protected function validateCreate(
