@@ -8,3 +8,6 @@ services:
 
     PoPCMSSchema\TaxonomyMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\TaxonomyMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'

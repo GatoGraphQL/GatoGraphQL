@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMutations\Constants\HookNames;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
-use PoPCMSSchema\CategoryMutations\ObjectModels\LoggedInUserHasNoEditingCategoryCapabilityErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
@@ -30,12 +29,6 @@ trait PayloadableCategoryMutationResolverTrait
                 $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
                 $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),
             ] => new UserIsNotLoggedInErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new LoggedInUserHasNoEditingCategoryCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [

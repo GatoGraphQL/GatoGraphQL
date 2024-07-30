@@ -10,7 +10,6 @@ use PoP\ComponentModel\Feedback\FeedbackCategories;
 class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     public final const E1 = 'e1';
-    public final const E2 = 'e2';
     public final const E6 = 'e6';
     public final const E7 = 'e7';
 
@@ -21,7 +20,6 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             self::E1,
-            self::E2,
             self::E6,
             self::E7,
         ];
@@ -31,7 +29,6 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('You must be logged in to create or update categories', 'category-mutations'),
-            self::E2 => $this->__('Your user doesn\'t have permission for editing categories.', 'category-mutations'),
             self::E6 => $this->__('The category ID is missing', 'category-mutations'),
             self::E7 => $this->__('There is no category with ID \'%s\'', 'category-mutations'),
             default => parent::getMessagePlaceholder($code),
