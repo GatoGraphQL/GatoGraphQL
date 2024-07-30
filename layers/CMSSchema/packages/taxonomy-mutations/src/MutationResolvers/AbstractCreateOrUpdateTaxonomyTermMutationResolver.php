@@ -92,7 +92,6 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostTaxonomyTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
@@ -120,7 +119,6 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostTaxonomyTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
@@ -132,7 +130,6 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostTaxonomyTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
