@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMutations\Exception\CategoryCRUDMutationException;
+use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
@@ -26,7 +26,7 @@ trait UpdateCategoryMutationResolverTrait
 
     /**
      * @return string|int The ID of the updated entity
-     * @throws CategoryCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     abstract protected function update(
         FieldDataAccessorInterface $fieldDataAccessor,

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
+namespace PoPCMSSchema\CategoryTermMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMutations\Constants\HookNames;
-use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
-use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
+use PoPCMSSchema\CategoryTermMutations\Constants\HookNames;
+use PoPCMSSchema\CategoryTermMutations\Exception\CategoryTermCRUDMutationException;
+use PoPCMSSchema\CategoryTermMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
@@ -16,9 +16,9 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 
-abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMutationResolver implements CategoryMutationResolverInterface
+abstract class AbstractCreateOrUpdateCategoryTermMutationResolver extends AbstractMutationResolver implements CategoryTermMutationResolverInterface
 {
-    use CreateOrUpdateCategoryMutationResolverTrait;
+    use CreateOrUpdateCategoryTermMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
@@ -107,7 +107,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        // Allow components (eg: CustomPostCategoryTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
@@ -135,7 +135,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        // Allow components (eg: CustomPostCategoryTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
@@ -147,7 +147,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
+        // Allow components (eg: CustomPostCategoryTermMutations) to inject their own validations
         App::doAction(
             HookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
@@ -181,7 +181,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
      * @param array<string,mixed> $taxonomyData
      * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateCategoryData(array $taxonomyData, FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function addCreateOrUpdateCategoryTermData(array $taxonomyData, FieldDataAccessorInterface $fieldDataAccessor): array
     {
         if ($fieldDataAccessor->hasValue(MutationInputProperties::TAXONOMY)) {
             $taxonomyData['taxonomy-name'] = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
@@ -212,7 +212,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         $taxonomyData = array(
             'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
         );
-        $taxonomyData = $this->addCreateOrUpdateCategoryData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->addCreateOrUpdateCategoryTermData($taxonomyData, $fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(HookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
@@ -227,7 +227,7 @@ abstract class AbstractCreateOrUpdateCategoryMutationResolver extends AbstractMu
         $taxonomyData = [
             'taxonomy' => $this->getTaxonomyName(),
         ];
-        $taxonomyData = $this->addCreateOrUpdateCategoryData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->addCreateOrUpdateCategoryTermData($taxonomyData, $fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(HookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
 

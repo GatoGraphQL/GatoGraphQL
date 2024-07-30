@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
-use PoPCMSSchema\CategoryMutations\Exception\CategoryCRUDMutationException;
+use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 
 trait CreateCategoryMutationResolverTrait
 {
@@ -23,7 +23,7 @@ trait CreateCategoryMutationResolverTrait
 
     /**
      * @return string|int The ID of the created entity
-     * @throws CategoryCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     abstract protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,

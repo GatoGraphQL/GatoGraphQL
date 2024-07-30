@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CategoryMutations\Exception;
 
 use PoPSchema\SchemaCommons\Exception\AbstractPayloadClientException;
 
-final class CategoryCRUDMutationException extends AbstractPayloadClientException
+final class CategoryTermCRUDMutationException extends AbstractPayloadClientException
 {
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\CategoryMutations\Exception\CategoryCRUDMutationException;
+use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
 use PoPCMSSchema\SchemaCommonsWP\TypeAPIs\TypeMutationAPITrait;
 use PoP\ComponentModel\App;
@@ -66,7 +66,7 @@ class CategoryTypeMutationAPI implements CategoryTypeMutationAPIInterface
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the created category
-     * @throws CategoryCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
     public function createCategory(array $data): string|int
     {
@@ -76,16 +76,16 @@ class CategoryTypeMutationAPI implements CategoryTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $postIDOrError;
-            throw $this->createCategoryCRUDMutationException($wpError);
+            throw $this->createCategoryTermCRUDMutationException($wpError);
         }
         /** @var int */
         $postID = $postIDOrError;
         return $postID;
     }
 
-    protected function createCategoryCRUDMutationException(WP_Error $wpError): CategoryCRUDMutationException
+    protected function createCategoryTermCRUDMutationException(WP_Error $wpError): CategoryTermCRUDMutationException
     {
-        return new CategoryCRUDMutationException(
+        return new CategoryTermCRUDMutationException(
             $wpError->get_error_message(),
             $wpError->get_error_code() ? $wpError->get_error_code() : null,
             $this->getWPErrorData($wpError),
@@ -95,7 +95,7 @@ class CategoryTypeMutationAPI implements CategoryTypeMutationAPIInterface
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated category
-     * @throws CategoryCRUDMutationException If there was an error (eg: Custom Post does not exist)
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     public function updateCategory(array $data): string|int
     {
@@ -105,7 +105,7 @@ class CategoryTypeMutationAPI implements CategoryTypeMutationAPIInterface
         if ($postIDOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $postIDOrError;
-            throw $this->createCategoryCRUDMutationException($wpError);
+            throw $this->createCategoryTermCRUDMutationException($wpError);
         }
         /** @var int */
         $postID = $postIDOrError;

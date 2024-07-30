@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMutations\Exception\CategoryCRUDMutationException;
+use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -46,7 +46,7 @@ trait PayloadableCreateCategoryMutationResolverTrait
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
-        } catch (CategoryCRUDMutationException $customPostCRUDMutationException) {
+        } catch (CategoryTermCRUDMutationException $customPostCRUDMutationException) {
             return $this->createFailureObjectMutationPayload(
                 [
                     $this->createGenericErrorPayloadFromPayloadClientException($customPostCRUDMutationException),
