@@ -6,6 +6,6 @@ namespace PoPCMSSchema\TaxonomyMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class TaxonomyDoesNotExistErrorPayload extends AbstractErrorPayload
+final class TaxonomyTermDoesNotExistErrorPayload extends AbstractErrorPayload
 {
 }

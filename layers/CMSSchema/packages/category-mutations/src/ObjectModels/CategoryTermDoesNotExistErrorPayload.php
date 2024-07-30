@@ -6,6 +6,6 @@ namespace PoPCMSSchema\CategoryMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class CategoryDoesNotExistErrorPayload extends AbstractErrorPayload
+final class CategoryTermDoesNotExistErrorPayload extends AbstractErrorPayload
 {
 }

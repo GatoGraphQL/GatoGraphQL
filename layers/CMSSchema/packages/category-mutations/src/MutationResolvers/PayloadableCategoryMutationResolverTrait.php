@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMutations\Constants\HookNames;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
+use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
 use PoPCMSSchema\CategoryMutations\ObjectModels\LoggedInUserHasNoEditingCategoryCapabilityErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -41,7 +41,7 @@ trait PayloadableCategoryMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
-            ] => new CategoryDoesNotExistErrorPayload(
+            ] => new CategoryTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
