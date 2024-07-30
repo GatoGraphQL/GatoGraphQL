@@ -138,10 +138,10 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             $field,
             $object,
         );
-        $post = $object;
+        $category = $object;
         switch ($field->getName()) {
             case 'update':
-                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($post);
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
                 break;
         }
         return $fieldArgsForMutationForObject;
