@@ -11,7 +11,6 @@ use PoP\ComponentModel\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
-use function user_can;
 use function wp_insert_term;
 use function wp_update_term;
 
