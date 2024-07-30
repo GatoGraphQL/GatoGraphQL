@@ -17,6 +17,8 @@ includes:
     - layers/Engine/packages/cache-control/phpstan.neon.dist
     - layers/CMSSchema/packages/categories/phpstan.neon.dist
     - layers/CMSSchema/packages/categories-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/category-mutations/phpstan.neon.dist
+    - layers/CMSSchema/packages/category-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/comment-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/comment-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/commentmeta/phpstan.neon.dist
