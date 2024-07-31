@@ -32,7 +32,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to create or update taxonomies', 'taxonomy-mutations'),
+            self::E1 => $this->__('You must be logged in to mutate taxonomy terms', 'taxonomy-mutations'),
             self::E2 => $this->__('Your user doesn\'t have permission for editing taxonomies.', 'taxonomy-mutations'),
             self::E6 => $this->__('The taxonomy ID is missing', 'taxonomy-mutations'),
             self::E7 => $this->__('There is no taxonomy with ID \'%s\'', 'taxonomy-mutations'),

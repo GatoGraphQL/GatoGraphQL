@@ -28,7 +28,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You must be logged in to create or update categories', 'category-mutations'),
+            self::E1 => $this->__('You must be logged in to mutate category terms', 'category-mutations'),
             self::E7 => $this->__('There is no category with ID \'%s\'', 'category-mutations'),
             self::E8 => $this->__('There is no category with slug \'%s\'', 'category-mutations'),
             default => parent::getMessagePlaceholder($code),
