@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableUpdateTaxonomyTermMutationResolverTrait;
 
-class PayloadableUpdateGenericTaxonomyTermMutationResolver extends AbstractCreateUpdateGenericTaxonomyTermMutationResolver
+class PayloadableUpdateGenericTaxonomyTermMutationResolver extends AbstractMutateGenericTaxonomyTermMutationResolver
 {
     use PayloadableUpdateTaxonomyTermMutationResolverTrait;
 }

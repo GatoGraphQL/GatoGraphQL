@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateCategoryTermMutationResolverTrait;
 
-class PayloadableUpdateGenericCategoryTermMutationResolver extends AbstractCreateUpdateGenericCategoryTermMutationResolver
+class PayloadableUpdateGenericCategoryTermMutationResolver extends AbstractMutateGenericCategoryTermMutationResolver
 {
     use PayloadableUpdateCategoryTermMutationResolverTrait;
 }

@@ -18,7 +18,7 @@ use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use stdClass;
 
-abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends AbstractMutationResolver implements TaxonomyTermMutationResolverInterface
+abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutationResolver implements TaxonomyTermMutationResolverInterface
 {
     use MutateTaxonomyTermMutationResolverTrait;
 

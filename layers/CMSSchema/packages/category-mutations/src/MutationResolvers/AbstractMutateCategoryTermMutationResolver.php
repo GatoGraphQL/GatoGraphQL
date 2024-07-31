@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\AbstractCreateOrUpdateTaxonomyTermMutationResolver;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\AbstractMutateTaxonomyTermMutationResolver;
 
-abstract class AbstractCreateOrUpdateCategoryTermMutationResolver extends AbstractCreateOrUpdateTaxonomyTermMutationResolver implements CategoryTermMutationResolverInterface
+abstract class AbstractMutateCategoryTermMutationResolver extends AbstractMutateTaxonomyTermMutationResolver implements CategoryTermMutationResolverInterface
 {
-    use CreateOrUpdateCategoryTermMutationResolverTrait;
+    use MutateCategoryTermMutationResolverTrait;
 
     private ?CategoryTypeMutationAPIInterface $categoryTypeMutationAPI = null;
 

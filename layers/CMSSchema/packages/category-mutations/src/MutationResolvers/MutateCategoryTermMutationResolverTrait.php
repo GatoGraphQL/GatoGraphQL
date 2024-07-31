@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
-trait CreateOrUpdateCategoryTermMutationResolverTrait
+trait MutateCategoryTermMutationResolverTrait
 {
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
