@@ -4,32 +4,31 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryByOneofInputObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver implements UpdateCategoryTermInputObjectTypeResolverInterface, CreateCategoryTermInputObjectTypeResolverInterface
 {
-    private ?CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver = null;
+    private ?ParentCategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver = null;
 
-    final public function setCategoryByOneofInputObjectTypeResolver(CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver): void
+    final public function setParentCategoryByOneofInputObjectTypeResolver(ParentCategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver): void
     {
-        $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
+        $this->parentCategoryByOneofInputObjectTypeResolver = $parentCategoryByOneofInputObjectTypeResolver;
     }
-    final protected function getCategoryByOneofInputObjectTypeResolver(): CategoryByOneofInputObjectTypeResolver
+    final protected function getParentCategoryByOneofInputObjectTypeResolver(): ParentCategoryByOneofInputObjectTypeResolver
     {
-        if ($this->categoryByOneofInputObjectTypeResolver === null) {
-            /** @var CategoryByOneofInputObjectTypeResolver */
-            $categoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryByOneofInputObjectTypeResolver::class);
-            $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
+        if ($this->parentCategoryByOneofInputObjectTypeResolver === null) {
+            /** @var ParentCategoryByOneofInputObjectTypeResolver */
+            $parentCategoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(ParentCategoryByOneofInputObjectTypeResolver::class);
+            $this->parentCategoryByOneofInputObjectTypeResolver = $parentCategoryByOneofInputObjectTypeResolver;
         }
-        return $this->categoryByOneofInputObjectTypeResolver;
+        return $this->parentCategoryByOneofInputObjectTypeResolver;
     }
 
     protected function getTaxonomyTermParentInputObjectTypeResolver(): InputTypeResolverInterface
     {
-        return $this->getCategoryByOneofInputObjectTypeResolver();
+        return $this->getParentCategoryByOneofInputObjectTypeResolver();
     }
     
     protected function addParentIDInputField(): bool
