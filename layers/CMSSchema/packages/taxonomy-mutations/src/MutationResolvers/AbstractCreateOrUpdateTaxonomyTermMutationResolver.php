@@ -148,7 +148,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
             } elseif ($taxonomyParentBy->{InputProperties::SLUG} !== null) {
                 /** @var string */
                 $taxonomyParentSlug = $taxonomyParentBy->{InputProperties::SLUG};
-                $this->validateTaxonomyTermByIDExists(
+                $this->validateTaxonomyTermBySlugExists(
                     $taxonomyParentSlug,
                     $taxonomyName,
                     $fieldDataAccessor,
