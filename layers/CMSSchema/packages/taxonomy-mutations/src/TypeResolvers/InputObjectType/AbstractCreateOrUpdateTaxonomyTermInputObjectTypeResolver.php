@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements UpdateTaxonomyTermInputObjectTypeResolverInterface, CreateTaxonomyInputObjectTypeResolverInterface
 {
@@ -58,7 +59,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             $this->addParentIDInputField() ? [
-                MutationInputProperties::PARENT_ID => $this->getIDScalarTypeResolver(),
+                MutationInputProperties::PARENT_BY => $this->getTaxonomyTermParentTypeResolver(),
             ] : [],
             [
                 MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
@@ -67,6 +68,8 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
             ]
         );
     }
+
+    abstract protected function getTaxonomyTermParentTypeResolver(): TypeResolverInterface;
 
     abstract protected function addTaxonomyInputField(): bool;
     abstract protected function addParentIDInputField(): bool;
@@ -78,7 +81,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
             MutationInputProperties::NAME => $this->__('The name of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::DESCRIPTION => $this->__('The description of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::SLUG => $this->__('The slug of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::PARENT_ID => $this->__('The taxonomy\'s parent', 'taxonomy-mutations'),
+            MutationInputProperties::PARENT_BY => $this->__('The taxonomy\'s parent', 'taxonomy-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

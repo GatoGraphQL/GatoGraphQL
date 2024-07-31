@@ -15,6 +15,7 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
+use stdClass;
 
 abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends AbstractMutationResolver implements TaxonomyTermMutationResolverInterface
 {
@@ -129,8 +130,11 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyParentID = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_ID);
-        if ($taxonomyParentID !== null) {
+        /** @var stdClass|null */
+        $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
+        if ($taxonomyParentBy !== null && $taxonomyParentBy->{MutationInputProperties::ID} !== null) {
+            /** @var string|int */
+            $taxonomyParentID = $taxonomyParentBy->{MutationInputProperties::ID};
             /** @var string|null */
             $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
             $this->validateTaxonomyTermExists(
@@ -187,8 +191,14 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         if ($fieldDataAccessor->hasValue(MutationInputProperties::SLUG)) {
             $taxonomyData['slug'] = $fieldDataAccessor->getValue(MutationInputProperties::SLUG);
         }
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_ID)) {
-            $taxonomyData['parent-id'] = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_ID);
+        if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
+            /** @var stdClass|null */
+            $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
+            if ($taxonomyParentBy !== null && $taxonomyParentBy->{MutationInputProperties::ID} !== null) {
+                /** @var string|int */
+                $taxonomyParentID = $taxonomyParentBy->{MutationInputProperties::ID};
+                $taxonomyData['parent-id'] = $taxonomyParentID;
+            }
         }
         if ($fieldDataAccessor->hasValue(MutationInputProperties::DESCRIPTION)) {
             $taxonomyData['description'] = $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION);
