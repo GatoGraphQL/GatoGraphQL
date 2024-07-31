@@ -126,7 +126,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
      */
     public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool
     {
-        $taxonomyDataOrError = wp_delete_term($taxonomyTermID, $taxonomyName);
+        $taxonomyDataOrError = wp_delete_term((int) $taxonomyTermID, $taxonomyName);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
@@ -135,6 +135,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         if ($taxonomyDataOrError === 0) {
             return false;
         }
+        /** @var bool $taxonomyDataOrError */
         return $taxonomyDataOrError;
     }
 }

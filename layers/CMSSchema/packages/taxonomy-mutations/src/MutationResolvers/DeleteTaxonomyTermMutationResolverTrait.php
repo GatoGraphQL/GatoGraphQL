@@ -18,7 +18,7 @@ trait DeleteTaxonomyTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->delete($fieldDataAccessor);
+        return $this->delete($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
     /**
@@ -27,6 +27,7 @@ trait DeleteTaxonomyTermMutationResolverTrait
      */
     abstract protected function delete(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int;
 
     public function validate(

@@ -54,7 +54,7 @@ trait PayloadableDeleteCategoryTermMutationResolverTrait
             )->getID();
         }
 
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+        if ($separateObjectTypeFieldResolutionFeedbackStore->hasErrors()) {
             return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),

@@ -74,7 +74,7 @@ trait MutateTaxonomyTermMutationResolverTrait
             return;
         }
 
-        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID, $taxonomyName)) {
+        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID, $taxonomyName ?? '')) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $this->getTaxonomyTermDoesNotExistError($taxonomyTermID),
@@ -97,12 +97,12 @@ trait MutateTaxonomyTermMutationResolverTrait
     }
 
     protected function validateTaxonomyTermBySlugExists(
-        string|null $taxonomyTermSlug,
+        string $taxonomyTermSlug,
         string|null $taxonomyName,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermSlug, $taxonomyName)) {
+        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermSlug, $taxonomyName ?? '')) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $this->getTaxonomyTermBySlugDoesNotExistError($taxonomyTermSlug),
