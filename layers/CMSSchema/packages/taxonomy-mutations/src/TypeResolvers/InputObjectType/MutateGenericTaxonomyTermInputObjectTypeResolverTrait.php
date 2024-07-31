@@ -7,7 +7,6 @@ namespace PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 trait MutateGenericTaxonomyTermInputObjectTypeResolverTrait
 {
@@ -21,7 +20,7 @@ trait MutateGenericTaxonomyTermInputObjectTypeResolverTrait
         ];
     }
 
-    abstract protected function getGenericTaxonomyTermTaxonomyTypeResolver(): TypeResolverInterface;
+    abstract protected function getGenericTaxonomyTermTaxonomyTypeResolver(): InputTypeResolverInterface;
 
     public function getGenericTaxonomyTermInputFieldDescription(string $inputFieldName): ?string
     {

@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\MutateGenericTaxonomyTermInputObjectTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver implements UpdateGenericCategoryTermInputObjectTypeResolverInterface, CreateGenericCategoryTermInputObjectTypeResolverInterface
 {
@@ -50,7 +49,7 @@ abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver 
         return $this->getGenericTaxonomyTermInputFieldTypeModifiers($inputFieldName) ?? parent::getInputFieldTypeModifiers($inputFieldName);
     }
     
-    protected function getGenericTaxonomyTermTaxonomyTypeResolver(): TypeResolverInterface
+    protected function getGenericTaxonomyTermTaxonomyTypeResolver(): InputTypeResolverInterface
     {
         return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
     }
