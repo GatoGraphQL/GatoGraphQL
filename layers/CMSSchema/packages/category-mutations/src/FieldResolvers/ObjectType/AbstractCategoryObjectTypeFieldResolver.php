@@ -14,7 +14,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoPCMSSchema\CategoryMutations\Module;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryTermDeleteInputObjectTypeResolver;
+// use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryTermDeleteInputObjectTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryTermUpdateInputObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
@@ -22,7 +22,7 @@ use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?CategoryTermUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver = null;
-    private ?CategoryTermDeleteInputObjectTypeResolver $categoryTermDeleteInputObjectTypeResolver = null;
+    // private ?CategoryTermDeleteInputObjectTypeResolver $categoryTermDeleteInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setCategoryTermUpdateInputObjectTypeResolver(CategoryTermUpdateInputObjectTypeResolver $categoryTermUpdateInputObjectTypeResolver): void
@@ -38,19 +38,19 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         }
         return $this->categoryTermUpdateInputObjectTypeResolver;
     }
-    final public function setCategoryTermDeleteInputObjectTypeResolver(CategoryTermDeleteInputObjectTypeResolver $categoryTermDeleteInputObjectTypeResolver): void
-    {
-        $this->categoryTermDeleteInputObjectTypeResolver = $categoryTermDeleteInputObjectTypeResolver;
-    }
-    final protected function getCategoryTermDeleteInputObjectTypeResolver(): CategoryTermDeleteInputObjectTypeResolver
-    {
-        if ($this->categoryTermDeleteInputObjectTypeResolver === null) {
-            /** @var CategoryTermDeleteInputObjectTypeResolver */
-            $categoryTermDeleteInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermDeleteInputObjectTypeResolver::class);
-            $this->categoryTermDeleteInputObjectTypeResolver = $categoryTermDeleteInputObjectTypeResolver;
-        }
-        return $this->categoryTermDeleteInputObjectTypeResolver;
-    }
+    // final public function setCategoryTermDeleteInputObjectTypeResolver(CategoryTermDeleteInputObjectTypeResolver $categoryTermDeleteInputObjectTypeResolver): void
+    // {
+    //     $this->categoryTermDeleteInputObjectTypeResolver = $categoryTermDeleteInputObjectTypeResolver;
+    // }
+    // final protected function getCategoryTermDeleteInputObjectTypeResolver(): CategoryTermDeleteInputObjectTypeResolver
+    // {
+    //     if ($this->categoryTermDeleteInputObjectTypeResolver === null) {
+    //         /** @var CategoryTermDeleteInputObjectTypeResolver */
+    //         $categoryTermDeleteInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryTermDeleteInputObjectTypeResolver::class);
+    //         $this->categoryTermDeleteInputObjectTypeResolver = $categoryTermDeleteInputObjectTypeResolver;
+    //     }
+    //     return $this->categoryTermDeleteInputObjectTypeResolver;
+    // }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
         $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
@@ -118,7 +118,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
                 'input' => $this->getCategoryTermUpdateInputObjectTypeResolver(),
             ],
             'delete' => [
-                'input' => $this->getCategoryTermDeleteInputObjectTypeResolver(),
+                // 'input' => $this->getCategoryTermDeleteInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -127,8 +127,8 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['update' => 'input'],
-            ['delete' => 'input']
+            ['update' => 'input']
+            // ['delete' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default
                 => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
@@ -171,8 +171,14 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         $category = $object;
         switch ($field->getName()) {
             case 'update':
-            case 'delete':
                 $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($category);
+                break;
+
+            case 'delete':
+                // This mutation receives no input! Hence create it
+                $fieldArgsForMutationForObject['input'] = (object) [
+                    MutationInputProperties::ID => $objectTypeResolver->getID($category),
+                ];
                 break;
         }
         return $fieldArgsForMutationForObject;
