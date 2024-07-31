@@ -9,8 +9,10 @@ use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
+use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -221,6 +223,26 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         );
 
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        
+        /**
+         * Perform this validation, even though this situation
+         * should never happen. That's why there's no
+         * CategoryIDMissingError added to the Union type
+         */
+        if ($taxonomyTermID === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E6,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return;
+        }
+
+        
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
             null,

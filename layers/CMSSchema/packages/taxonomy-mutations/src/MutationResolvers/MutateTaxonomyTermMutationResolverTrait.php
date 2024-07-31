@@ -51,29 +51,11 @@ trait MutateTaxonomyTermMutationResolverTrait
     }
 
     protected function validateTaxonomyTermByIDExists(
-        string|int|null $taxonomyTermID,
+        string|int $taxonomyTermID,
         string|null $taxonomyName,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        /**
-         * Perform this validation, even though this situation
-         * should never happen. That's why there's no
-         * CategoryIDIsEmptyError
-         */
-        if (!$taxonomyTermID) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E6,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return;
-        }
-
         if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID, $taxonomyName ?? '')) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
