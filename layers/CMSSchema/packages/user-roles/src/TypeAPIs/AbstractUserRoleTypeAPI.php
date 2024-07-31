@@ -24,7 +24,7 @@ abstract class AbstractUserRoleTypeAPI implements UserRoleTypeAPIInterface
         return $role;
     }
 
-    public function userCan(string|int|object $userObjectOrID, string $capability): bool
+    public function userCan(string|int|object $userObjectOrID, string $capability, mixed ...$args): bool
     {
         $capabilities = $this->getUserCapabilities($userObjectOrID);
         return in_array($capability, $capabilities);
