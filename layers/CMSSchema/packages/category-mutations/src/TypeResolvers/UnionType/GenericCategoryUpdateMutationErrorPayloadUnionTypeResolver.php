@@ -33,7 +33,7 @@ class GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver extends Abstrac
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating a category (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating a category term (using nested mutations)', 'post-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

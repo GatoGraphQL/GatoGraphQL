@@ -43,4 +43,9 @@ class CategoryTypeMutationAPI extends TaxonomyTypeMutationAPI implements Categor
     {
         return $this->updateTaxonomyTerm($data);
     }
+
+    public function deleteCategoryTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool
+    {
+        return $this->deleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
+    }
 }

@@ -402,7 +402,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     }
 
     /**
-     * @param array<string,mixed> $taxonomyData
      * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */

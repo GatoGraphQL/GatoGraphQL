@@ -8,9 +8,13 @@ use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeRe
 use PoPCMSSchema\CategoryMutations\FieldResolvers\ObjectType\AbstractCategoryObjectTypeFieldResolver;
 use PoPCMSSchema\CategoryMutations\Module as CategoryMutationsModule;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration as CategoryMutationsModuleConfiguration;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\DeleteGenericCategoryTermMutationResolver;
+use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableDeleteGenericCategoryTermMutationResolver;
 use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableUpdateGenericCategoryTermMutationResolver;
 use PoPCMSSchema\CategoryMutations\MutationResolvers\UpdateGenericCategoryTermMutationResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\GenericCategoryTermDeleteInputObjectTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\GenericCategoryTermUpdateInputObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\GenericCategoryDeleteMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -22,9 +26,13 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
 {
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
     private ?GenericCategoryUpdateMutationPayloadObjectTypeResolver $genericCategoryUpdateMutationPayloadObjectTypeResolver = null;
+    private ?GenericCategoryDeleteMutationPayloadObjectTypeResolver $genericCategoryDeleteMutationPayloadObjectTypeResolver = null;
     private ?UpdateGenericCategoryTermMutationResolver $updateGenericCategoryTermMutationResolver = null;
+    private ?DeleteGenericCategoryTermMutationResolver $deleteGenericCategoryTermMutationResolver = null;
     private ?PayloadableUpdateGenericCategoryTermMutationResolver $payloadableUpdateGenericCategoryTermMutationResolver = null;
+    private ?PayloadableDeleteGenericCategoryTermMutationResolver $payloadableDeleteGenericCategoryTermMutationResolver = null;
     private ?GenericCategoryTermUpdateInputObjectTypeResolver $genericCategoryTermUpdateInputObjectTypeResolver = null;
+    private ?GenericCategoryTermDeleteInputObjectTypeResolver $genericCategoryTermDeleteInputObjectTypeResolver = null;
 
     final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
     {
@@ -52,6 +60,19 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return $this->genericCategoryUpdateMutationPayloadObjectTypeResolver;
     }
+    final public function setGenericCategoryDeleteMutationPayloadObjectTypeResolver(GenericCategoryDeleteMutationPayloadObjectTypeResolver $genericCategoryDeleteMutationPayloadObjectTypeResolver): void
+    {
+        $this->genericCategoryDeleteMutationPayloadObjectTypeResolver = $genericCategoryDeleteMutationPayloadObjectTypeResolver;
+    }
+    final protected function getGenericCategoryDeleteMutationPayloadObjectTypeResolver(): GenericCategoryDeleteMutationPayloadObjectTypeResolver
+    {
+        if ($this->genericCategoryDeleteMutationPayloadObjectTypeResolver === null) {
+            /** @var GenericCategoryDeleteMutationPayloadObjectTypeResolver */
+            $genericCategoryDeleteMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryDeleteMutationPayloadObjectTypeResolver::class);
+            $this->genericCategoryDeleteMutationPayloadObjectTypeResolver = $genericCategoryDeleteMutationPayloadObjectTypeResolver;
+        }
+        return $this->genericCategoryDeleteMutationPayloadObjectTypeResolver;
+    }
     final public function setUpdateGenericCategoryTermMutationResolver(UpdateGenericCategoryTermMutationResolver $updateGenericCategoryTermMutationResolver): void
     {
         $this->updateGenericCategoryTermMutationResolver = $updateGenericCategoryTermMutationResolver;
@@ -64,6 +85,19 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
             $this->updateGenericCategoryTermMutationResolver = $updateGenericCategoryTermMutationResolver;
         }
         return $this->updateGenericCategoryTermMutationResolver;
+    }
+    final public function setDeleteGenericCategoryTermMutationResolver(DeleteGenericCategoryTermMutationResolver $deleteGenericCategoryTermMutationResolver): void
+    {
+        $this->deleteGenericCategoryTermMutationResolver = $deleteGenericCategoryTermMutationResolver;
+    }
+    final protected function getDeleteGenericCategoryTermMutationResolver(): DeleteGenericCategoryTermMutationResolver
+    {
+        if ($this->deleteGenericCategoryTermMutationResolver === null) {
+            /** @var DeleteGenericCategoryTermMutationResolver */
+            $deleteGenericCategoryTermMutationResolver = $this->instanceManager->getInstance(DeleteGenericCategoryTermMutationResolver::class);
+            $this->deleteGenericCategoryTermMutationResolver = $deleteGenericCategoryTermMutationResolver;
+        }
+        return $this->deleteGenericCategoryTermMutationResolver;
     }
     final public function setPayloadableUpdateGenericCategoryTermMutationResolver(PayloadableUpdateGenericCategoryTermMutationResolver $payloadableUpdateGenericCategoryTermMutationResolver): void
     {
@@ -78,6 +112,19 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return $this->payloadableUpdateGenericCategoryTermMutationResolver;
     }
+    final public function setPayloadableDeleteGenericCategoryTermMutationResolver(PayloadableDeleteGenericCategoryTermMutationResolver $payloadableDeleteGenericCategoryTermMutationResolver): void
+    {
+        $this->payloadableDeleteGenericCategoryTermMutationResolver = $payloadableDeleteGenericCategoryTermMutationResolver;
+    }
+    final protected function getPayloadableDeleteGenericCategoryTermMutationResolver(): PayloadableDeleteGenericCategoryTermMutationResolver
+    {
+        if ($this->payloadableDeleteGenericCategoryTermMutationResolver === null) {
+            /** @var PayloadableDeleteGenericCategoryTermMutationResolver */
+            $payloadableDeleteGenericCategoryTermMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteGenericCategoryTermMutationResolver::class);
+            $this->payloadableDeleteGenericCategoryTermMutationResolver = $payloadableDeleteGenericCategoryTermMutationResolver;
+        }
+        return $this->payloadableDeleteGenericCategoryTermMutationResolver;
+    }
     final public function setGenericCategoryTermUpdateInputObjectTypeResolver(GenericCategoryTermUpdateInputObjectTypeResolver $genericCategoryTermUpdateInputObjectTypeResolver): void
     {
         $this->genericCategoryTermUpdateInputObjectTypeResolver = $genericCategoryTermUpdateInputObjectTypeResolver;
@@ -90,6 +137,19 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
             $this->genericCategoryTermUpdateInputObjectTypeResolver = $genericCategoryTermUpdateInputObjectTypeResolver;
         }
         return $this->genericCategoryTermUpdateInputObjectTypeResolver;
+    }
+    final public function setGenericCategoryTermDeleteInputObjectTypeResolver(GenericCategoryTermDeleteInputObjectTypeResolver $genericCategoryTermDeleteInputObjectTypeResolver): void
+    {
+        $this->genericCategoryTermDeleteInputObjectTypeResolver = $genericCategoryTermDeleteInputObjectTypeResolver;
+    }
+    final protected function getGenericCategoryTermDeleteInputObjectTypeResolver(): GenericCategoryTermDeleteInputObjectTypeResolver
+    {
+        if ($this->genericCategoryTermDeleteInputObjectTypeResolver === null) {
+            /** @var GenericCategoryTermDeleteInputObjectTypeResolver */
+            $genericCategoryTermDeleteInputObjectTypeResolver = $this->instanceManager->getInstance(GenericCategoryTermDeleteInputObjectTypeResolver::class);
+            $this->genericCategoryTermDeleteInputObjectTypeResolver = $genericCategoryTermDeleteInputObjectTypeResolver;
+        }
+        return $this->genericCategoryTermDeleteInputObjectTypeResolver;
     }
 
     /**
@@ -106,6 +166,7 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     {
         return match ($fieldName) {
             'update' => $this->__('Update the category', 'category-mutations'),
+            'delete' => $this->__('Delete the category', 'category-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -118,6 +179,9 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         return match ($fieldName) {
             'update' => [
                 'input' => $this->getGenericCategoryTermUpdateInputObjectTypeResolver(),
+            ],
+            'delete' => [
+                'input' => $this->getGenericCategoryTermDeleteInputObjectTypeResolver(),
             ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -132,6 +196,9 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
             'update' => $usePayloadableCategoryMutations
                 ? $this->getPayloadableUpdateGenericCategoryTermMutationResolver()
                 : $this->getUpdateGenericCategoryTermMutationResolver(),
+            'delete' => $usePayloadableCategoryMutations
+                ? $this->getPayloadableDeleteGenericCategoryTermMutationResolver()
+                : $this->getDeleteGenericCategoryTermMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -141,10 +208,18 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         /** @var CategoryMutationsModuleConfiguration */
         $moduleConfiguration = App::getModule(CategoryMutationsModule::class)->getConfiguration();
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
+        if (!$usePayloadableCategoryMutations) {
+            return match ($fieldName) {
+                'update',
+                'delete'
+                    => $this->getGenericCategoryObjectTypeResolver(),
+                default
+                    => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+            };
+        }
         return match ($fieldName) {
-            'update' => $usePayloadableCategoryMutations
-                ? $this->getGenericCategoryUpdateMutationPayloadObjectTypeResolver()
-                : $this->getGenericCategoryObjectTypeResolver(),
+            'update' => $this->getGenericCategoryUpdateMutationPayloadObjectTypeResolver(),
+            'delete' => $this->getGenericCategoryDeleteMutationPayloadObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }

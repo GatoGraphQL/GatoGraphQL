@@ -46,4 +46,13 @@ abstract class AbstractMutateCategoryTermMutationResolver extends AbstractMutate
     {
         return $this->getCategoryTypeMutationAPI()->createCategoryTerm($taxonomyData);
     }
+
+    /**
+     * @return bool `true` if the operation successful, `false` if the term does not exist
+     * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
+     */
+    protected function executeDeleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool
+    {
+        return $this->getCategoryTypeMutationAPI()->deleteCategoryTerm($taxonomyTermID, $taxonomyName);
+    }
 }
