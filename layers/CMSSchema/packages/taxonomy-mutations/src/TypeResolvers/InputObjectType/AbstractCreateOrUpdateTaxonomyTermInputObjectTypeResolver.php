@@ -89,10 +89,13 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
     {
         return match ($inputFieldName) {
             MutationInputProperties::ID,
-            MutationInputProperties::NAME
                 => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::NAME
+                => $this->isNameInputFieldMandatory() ? SchemaTypeModifiers::MANDATORY : SchemaTypeModifiers::NONE,
             default
                 => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
+
+    abstract protected function isNameInputFieldMandatory(): bool;
 }

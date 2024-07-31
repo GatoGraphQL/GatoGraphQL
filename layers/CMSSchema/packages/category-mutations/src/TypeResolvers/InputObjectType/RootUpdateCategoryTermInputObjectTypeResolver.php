@@ -20,4 +20,9 @@ class RootUpdateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpda
     {
         return true;
     }
+
+    protected function isNameInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }

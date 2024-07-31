@@ -15,4 +15,9 @@ class RootCreateGenericCategoryTermInputObjectTypeResolver extends AbstractCreat
     {
         return false;
     }
+
+    protected function isNameInputFieldMandatory(): bool
+    {
+        return true;
+    }
 }
