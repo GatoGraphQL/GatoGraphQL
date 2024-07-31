@@ -33,7 +33,7 @@ class LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResol
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit taxonomies"', 'taxonomy-mutations');
+        return $this->__('Error payload for: "The logged-in user has no permission to edit taxonomy terms"', 'taxonomy-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
