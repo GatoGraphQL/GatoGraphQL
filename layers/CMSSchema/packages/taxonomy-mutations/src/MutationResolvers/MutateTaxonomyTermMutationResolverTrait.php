@@ -139,14 +139,14 @@ trait MutateTaxonomyTermMutationResolverTrait
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getLoggedInUserHasNoPermissionToEditTaxonomiesError(),
+                    $this->getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(),
                     $fieldDataAccessor->getField(),
                 )
             );
         }
     }
 
-    protected function getLoggedInUserHasNoPermissionToEditTaxonomiesError(): FeedbackItemResolution
+    protected function getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(): FeedbackItemResolution
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
