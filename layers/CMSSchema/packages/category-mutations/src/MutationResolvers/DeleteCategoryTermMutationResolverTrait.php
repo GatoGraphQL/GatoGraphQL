@@ -9,7 +9,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
-trait UpdateCategoryTermMutationResolverTrait
+trait DeleteCategoryTermMutationResolverTrait
 {
     /**
      * @throws AbstractException In case of error
@@ -18,17 +18,17 @@ trait UpdateCategoryTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->update(
+        return $this->delete(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
 
     /**
-     * @return string|int The ID of the updated entity
+     * @return string|int The ID of the deleted entity
      * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    abstract protected function update(
+    abstract protected function delete(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int;
@@ -40,10 +40,10 @@ trait UpdateCategoryTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $this->validateDeleteErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
-    abstract protected function validateUpdateErrors(
+    abstract protected function validateDeleteErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void;
