@@ -39,10 +39,10 @@ trait PayloadableCreateTaxonomyTermMutationResolverTrait
             )->getID();
         }
 
-        $categoryID = null;
+        $taxonomyTermID = null;
         try {
             /** @var string|int */
-            $categoryID = $this->upstreamExecuteMutation(
+            $taxonomyTermID = $this->upstreamExecuteMutation(
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
@@ -60,11 +60,11 @@ trait PayloadableCreateTaxonomyTermMutationResolverTrait
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
                     $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
                 ),
-                $categoryID
+                $taxonomyTermID
             )->getID();
         }
 
-        /** @var string|int $categoryID */
-        return $this->createSuccessObjectMutationPayload($categoryID)->getID();
+        /** @var string|int $taxonomyTermID */
+        return $this->createSuccessObjectMutationPayload($taxonomyTermID)->getID();
     }
 }

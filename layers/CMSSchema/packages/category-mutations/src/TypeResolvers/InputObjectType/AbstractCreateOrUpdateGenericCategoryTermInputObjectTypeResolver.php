@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
-use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\CreateOrUpdateGenericTaxonomyTermInputObjectTypeResolverTrait;
+use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\MutateGenericTaxonomyTermInputObjectTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver implements UpdateGenericCategoryTermInputObjectTypeResolverInterface, CreateGenericCategoryTermInputObjectTypeResolverInterface
 {
-    use CreateOrUpdateGenericTaxonomyTermInputObjectTypeResolverTrait;
+    use MutateGenericTaxonomyTermInputObjectTypeResolverTrait;
     
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
     

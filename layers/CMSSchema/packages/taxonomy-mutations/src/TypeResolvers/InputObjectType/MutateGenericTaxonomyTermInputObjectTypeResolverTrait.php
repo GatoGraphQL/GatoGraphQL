@@ -9,7 +9,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
-trait CreateOrUpdateGenericTaxonomyTermInputObjectTypeResolverTrait
+trait MutateGenericTaxonomyTermInputObjectTypeResolverTrait
 {
     /**
      * @return array<string,InputTypeResolverInterface>

@@ -10,11 +10,11 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
 
-trait PayloadableUpdateTaxonomyTermMutationResolverTrait
+trait PayloadableDeleteTaxonomyTermMutationResolverTrait
 {
-    use PayloadableMutationResolverTrait, UpdateTaxonomyTermMutationResolverTrait {
-        UpdateTaxonomyTermMutationResolverTrait::executeMutation as upstreamExecuteMutation;
-        PayloadableMutationResolverTrait::validate insteadof UpdateTaxonomyTermMutationResolverTrait;
+    use PayloadableMutationResolverTrait, DeleteTaxonomyTermMutationResolverTrait {
+        DeleteTaxonomyTermMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validate insteadof DeleteTaxonomyTermMutationResolverTrait;
     }
     use PayloadableTaxonomyMutationResolverTrait;
 
@@ -29,7 +29,7 @@ trait PayloadableUpdateTaxonomyTermMutationResolverTrait
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
-        $this->validateUpdateErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
+        $this->validateDeleteErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
         if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createFailureObjectMutationPayload(
                 array_map(
