@@ -28,4 +28,16 @@ trait CreateOrUpdateCategoryTermMutationResolverTrait
             ]
         );
     }
+
+    protected function getTaxonomyTermBySlugDoesNotExistError(
+        string|int $taxonomyTermSlug,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E8,
+            [
+                $taxonomyTermSlug,
+            ]
+        );
+    }
 }

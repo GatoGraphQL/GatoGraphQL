@@ -44,6 +44,12 @@ trait PayloadableTaxonomyMutationResolverTrait
             ] => new TaxonomyTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E8,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
             default => App::applyFilters(
                 HookNames::ERROR_PAYLOAD,
                 new GenericErrorPayload(

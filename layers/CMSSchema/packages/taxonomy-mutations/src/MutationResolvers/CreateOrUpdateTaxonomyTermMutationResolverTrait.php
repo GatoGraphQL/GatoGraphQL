@@ -50,7 +50,7 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
         );
     }
 
-    protected function validateTaxonomyTermExists(
+    protected function validateTaxonomyTermByIDExists(
         string|int|null $taxonomyTermID,
         string|null $taxonomyName,
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -92,6 +92,34 @@ trait CreateOrUpdateTaxonomyTermMutationResolverTrait
             MutationErrorFeedbackItemProvider::E7,
             [
                 $taxonomyTermID,
+            ]
+        );
+    }
+
+    protected function validateTaxonomyTermBySlugExists(
+        string|null $taxonomyTermSlug,
+        string|null $taxonomyName,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermSlug, $taxonomyName)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getTaxonomyTermBySlugDoesNotExistError($taxonomyTermSlug),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function getTaxonomyTermBySlugDoesNotExistError(
+        string|int $taxonomyTermSlug,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E8,
+            [
+                $taxonomyTermSlug,
             ]
         );
     }

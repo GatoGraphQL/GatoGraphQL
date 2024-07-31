@@ -133,17 +133,28 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
-        if ($taxonomyParentBy !== null && $taxonomyParentBy->{InputProperties::ID} !== null) {
-            /** @var string|int */
-            $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
+        if ($taxonomyParentBy !== null) {
             /** @var string|null */
             $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-            $this->validateTaxonomyTermExists(
-                $taxonomyParentID,
-                $taxonomyName,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
+            if ($taxonomyParentBy->{InputProperties::ID} !== null) {
+                /** @var string|int */
+                $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
+                $this->validateTaxonomyTermByIDExists(
+                    $taxonomyParentID,
+                    $taxonomyName,
+                    $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            } elseif ($taxonomyParentBy->{InputProperties::SLUG} !== null) {
+                /** @var string */
+                $taxonomyParentSlug = $taxonomyParentBy->{InputProperties::SLUG};
+                $this->validateTaxonomyTermByIDExists(
+                    $taxonomyParentSlug,
+                    $taxonomyName,
+                    $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            }
         }
     }
 
@@ -169,7 +180,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         );
 
         $taxonomyID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        $this->validateTaxonomyTermExists(
+        $this->validateTaxonomyTermByIDExists(
             $taxonomyID,
             null,
             $fieldDataAccessor,
