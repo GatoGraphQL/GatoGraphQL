@@ -41,6 +41,12 @@ trait PayloadableCategoryMutationResolverTrait
             ] => new CategoryTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E8,
+            ] => new CategoryTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
             default => App::applyFilters(
                 HookNames::ERROR_PAYLOAD,
                 $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
