@@ -6,6 +6,6 @@ namespace PoPCMSSchema\TaxonomyMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class LoggedInUserHasNoEditingTaxonomyCapabilityErrorPayload extends AbstractErrorPayload
+final class LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload extends AbstractErrorPayload
 {
 }
