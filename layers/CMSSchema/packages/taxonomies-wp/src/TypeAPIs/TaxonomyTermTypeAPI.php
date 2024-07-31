@@ -25,4 +25,18 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         $taxonomyTermExists = term_exists($idOrSlug, $taxonomy);
         return $taxonomyTermExists !==  null;
     }
+    public function getTaxonomyTermID(int|string $idOrSlug, string $taxonomy = ''): string|int|null
+    {
+        /** @var array<string,string|int>|string|int|null */
+        $taxonomyTerm = term_exists($idOrSlug, $taxonomy);
+        if ($taxonomyTerm === null) {
+            return null;
+        }
+        if (is_array($taxonomyTerm)) {
+            /** @var string|int */
+            return $taxonomyTerm['term_id'];
+        }
+        /** @var string|int */
+        return $taxonomyTerm;
+    }
 }
