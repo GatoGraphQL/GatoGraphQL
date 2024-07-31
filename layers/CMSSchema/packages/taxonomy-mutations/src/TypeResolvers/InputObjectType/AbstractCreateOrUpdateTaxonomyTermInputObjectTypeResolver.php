@@ -46,7 +46,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a taxonomy', 'taxonomy-mutations');
+        return $this->__('Input to create or update a taxonomy term', 'taxonomy-mutations');
     }
 
     /**

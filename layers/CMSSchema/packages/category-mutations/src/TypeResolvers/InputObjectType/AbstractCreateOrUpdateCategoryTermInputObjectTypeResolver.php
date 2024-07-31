@@ -39,7 +39,7 @@ abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a category term', 'category-mutations');
+        return $this->__('Input to create or update a category term', 'category-mutations');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string

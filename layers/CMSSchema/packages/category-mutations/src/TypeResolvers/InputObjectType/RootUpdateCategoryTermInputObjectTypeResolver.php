@@ -11,6 +11,11 @@ class RootUpdateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpda
         return 'RootUpdateCategoryInput';
     }
 
+    public function getTypeDescription(): ?string
+    {
+        return $this->__('Input to update a taxonomy term', 'taxonomy-mutations');
+    }
+
     protected function addTaxonomyInputField(): bool
     {
         return true;
