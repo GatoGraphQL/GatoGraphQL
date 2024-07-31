@@ -171,18 +171,22 @@ trait MutateTaxonomyTermMutationResolverTrait
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getLoggedInUserHasNoPermissionToDeleteTaxonomyTermError(),
+                    $this->getLoggedInUserHasNoPermissionToDeleteTaxonomyTermError($taxonomyTermID),
                     $fieldDataAccessor->getField(),
                 )
             );
         }
     }
 
-    protected function getLoggedInUserHasNoPermissionToDeleteTaxonomyTermError(): FeedbackItemResolution
-    {
+    protected function getLoggedInUserHasNoPermissionToDeleteTaxonomyTermError(
+        string|int $taxonomyTermID,
+    ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E3,
+            [
+                $taxonomyTermID,
+            ]
         );
     }
 }
