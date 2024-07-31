@@ -10,7 +10,7 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 
-class ParentCategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
+class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
@@ -44,7 +44,7 @@ class ParentCategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObj
 
     public function getTypeName(): string
     {
-        return 'ParentCategoryByInput';
+        return 'CategoryByInput';
     }
 
     protected function isOneInputValueMandatory(): bool

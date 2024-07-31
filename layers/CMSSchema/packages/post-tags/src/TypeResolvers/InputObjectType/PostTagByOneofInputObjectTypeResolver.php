@@ -10,6 +10,6 @@ class PostTagByOneofInputObjectTypeResolver extends AbstractTagByOneofInputObjec
 {
     public function getTypeName(): string
     {
-        return 'PostTagByInput';
+        return 'PostTagByFilterInput';
     }
 }

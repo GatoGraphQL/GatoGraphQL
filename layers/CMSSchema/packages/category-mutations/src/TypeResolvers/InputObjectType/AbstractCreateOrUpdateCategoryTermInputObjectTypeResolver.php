@@ -10,17 +10,17 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver implements UpdateCategoryTermInputObjectTypeResolverInterface, CreateCategoryTermInputObjectTypeResolverInterface
 {
-    private ?ParentCategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver = null;
+    private ?CategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver = null;
 
-    final public function setParentCategoryByOneofInputObjectTypeResolver(ParentCategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver): void
+    final public function setCategoryByOneofInputObjectTypeResolver(CategoryByOneofInputObjectTypeResolver $parentCategoryByOneofInputObjectTypeResolver): void
     {
         $this->parentCategoryByOneofInputObjectTypeResolver = $parentCategoryByOneofInputObjectTypeResolver;
     }
-    final protected function getParentCategoryByOneofInputObjectTypeResolver(): ParentCategoryByOneofInputObjectTypeResolver
+    final protected function getCategoryByOneofInputObjectTypeResolver(): CategoryByOneofInputObjectTypeResolver
     {
         if ($this->parentCategoryByOneofInputObjectTypeResolver === null) {
-            /** @var ParentCategoryByOneofInputObjectTypeResolver */
-            $parentCategoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(ParentCategoryByOneofInputObjectTypeResolver::class);
+            /** @var CategoryByOneofInputObjectTypeResolver */
+            $parentCategoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryByOneofInputObjectTypeResolver::class);
             $this->parentCategoryByOneofInputObjectTypeResolver = $parentCategoryByOneofInputObjectTypeResolver;
         }
         return $this->parentCategoryByOneofInputObjectTypeResolver;
@@ -28,7 +28,7 @@ abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends
 
     protected function getTaxonomyTermParentInputObjectTypeResolver(): InputTypeResolverInterface
     {
-        return $this->getParentCategoryByOneofInputObjectTypeResolver();
+        return $this->getCategoryByOneofInputObjectTypeResolver();
     }
     
     protected function addParentIDInputField(): bool
