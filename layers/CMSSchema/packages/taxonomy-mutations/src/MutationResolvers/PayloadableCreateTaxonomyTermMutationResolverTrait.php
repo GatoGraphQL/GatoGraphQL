@@ -30,7 +30,7 @@ trait PayloadableCreateTaxonomyTermMutationResolverTrait
     ): mixed {
         $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
         $this->validateCreateErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
-        if ($separateObjectTypeFieldResolutionFeedbackStore->hasErrors()) {
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
@@ -54,7 +54,7 @@ trait PayloadableCreateTaxonomyTermMutationResolverTrait
             )->getID();
         }
 
-        if ($separateObjectTypeFieldResolutionFeedbackStore->hasErrors()) {
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
             return $this->createFailureObjectMutationPayload(
                 array_map(
                     $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
