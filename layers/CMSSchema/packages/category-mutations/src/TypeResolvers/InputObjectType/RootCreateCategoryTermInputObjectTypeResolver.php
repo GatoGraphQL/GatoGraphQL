@@ -13,7 +13,7 @@ class RootCreateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpda
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to create a taxonomy term', 'taxonomy-mutations');
+        return $this->__('Input to create a category term', 'category-mutations');
     }
 
     protected function addTaxonomyInputField(): bool

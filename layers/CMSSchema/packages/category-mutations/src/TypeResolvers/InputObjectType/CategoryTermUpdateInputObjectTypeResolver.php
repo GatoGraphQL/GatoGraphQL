@@ -13,7 +13,7 @@ class CategoryTermUpdateInputObjectTypeResolver extends AbstractCreateOrUpdateCa
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a taxonomy term', 'taxonomy-mutations');
+        return $this->__('Input to update a category term', 'category-mutations');
     }
 
     protected function addTaxonomyInputField(): bool
