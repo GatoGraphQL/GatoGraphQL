@@ -206,17 +206,16 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
         if ($taxonomyParentBy !== null) {
+            $taxonomyParentID = null;
             if ($taxonomyParentBy->{InputProperties::ID} !== null) {
                 /** @var string|int */
                 $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
-                $taxonomyData['parent-id'] = $taxonomyParentID;
             } elseif ($taxonomyParentBy->{InputProperties::SLUG} !== null) {
-                /** @var string|null */
-                $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-            
                 /** @var string */
                 $taxonomyParentSlug = $taxonomyParentBy->{InputProperties::SLUG};
-                $taxonomyParentID = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyParentSlug, $taxonomyName);                
+                $taxonomyParentID = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyParentSlug, $taxonomyData['taxonomy-name'] ?? '');                
+            }
+            if ($taxonomyParentID !== null) {
                 $taxonomyData['parent-id'] = $taxonomyParentID;
             }
         }
