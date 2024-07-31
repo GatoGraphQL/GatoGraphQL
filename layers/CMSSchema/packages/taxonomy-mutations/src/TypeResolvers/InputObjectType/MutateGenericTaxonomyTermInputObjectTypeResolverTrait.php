@@ -16,11 +16,11 @@ trait MutateGenericTaxonomyTermInputObjectTypeResolverTrait
     public function getGenericTaxonomyTermInputFieldNameTypeResolvers(): array
     {
         return [
-            MutationInputProperties::TAXONOMY => $this->getGenericTaxonomyTermTaxonomyTypeResolver(),
+            MutationInputProperties::TAXONOMY => $this->getGenericTaxonomyTermTaxonomyInputTypeResolver(),
         ];
     }
 
-    abstract protected function getGenericTaxonomyTermTaxonomyTypeResolver(): InputTypeResolverInterface;
+    abstract protected function getGenericTaxonomyTermTaxonomyInputTypeResolver(): InputTypeResolverInterface;
 
     public function getGenericTaxonomyTermInputFieldDescription(string $inputFieldName): ?string
     {
