@@ -59,7 +59,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             $this->addParentIDInputField() ? [
-                MutationInputProperties::PARENT_BY => $this->getTaxonomyTermParentTypeResolver(),
+                MutationInputProperties::PARENT_BY => $this->getTaxonomyTermParentInputObjectTypeResolver(),
             ] : [],
             [
                 MutationInputProperties::NAME => $this->getStringScalarTypeResolver(),
@@ -69,7 +69,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
         );
     }
 
-    abstract protected function getTaxonomyTermParentTypeResolver(): TypeResolverInterface;
+    abstract protected function getTaxonomyTermParentInputObjectTypeResolver(): TypeResolverInterface;
 
     abstract protected function addTaxonomyInputField(): bool;
     abstract protected function addParentIDInputField(): bool;

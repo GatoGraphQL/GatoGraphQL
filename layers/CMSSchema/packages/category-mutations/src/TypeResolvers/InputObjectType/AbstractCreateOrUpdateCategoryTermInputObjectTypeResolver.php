@@ -4,11 +4,34 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
+use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryByOneofInputObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver implements UpdateCategoryTermInputObjectTypeResolverInterface, CreateCategoryTermInputObjectTypeResolverInterface
 {
+    private ?CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver = null;
+
+    final public function setCategoryByOneofInputObjectTypeResolver(CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver): void
+    {
+        $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
+    }
+    final protected function getCategoryByOneofInputObjectTypeResolver(): CategoryByOneofInputObjectTypeResolver
+    {
+        if ($this->categoryByOneofInputObjectTypeResolver === null) {
+            /** @var CategoryByOneofInputObjectTypeResolver */
+            $categoryByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(CategoryByOneofInputObjectTypeResolver::class);
+            $this->categoryByOneofInputObjectTypeResolver = $categoryByOneofInputObjectTypeResolver;
+        }
+        return $this->categoryByOneofInputObjectTypeResolver;
+    }
+
+    protected function getTaxonomyTermParentInputObjectTypeResolver(): TypeResolverInterface
+    {
+        return $this->getCategoryByOneofInputObjectTypeResolver();
+    }
+    
     protected function addParentIDInputField(): bool
     {
         return true;
