@@ -11,6 +11,7 @@ use PoP\ComponentModel\App;
 use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
+use function wp_delete_term;
 use function wp_insert_term;
 use function wp_update_term;
 
@@ -117,5 +118,23 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
         return $taxonomyTermID;
+    }
+
+    /**
+     * @return bool `true` if the operation successful, `false` if the term does not exist
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     */
+    public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool
+    {
+        $taxonomyDataOrError = wp_delete_term($taxonomyTermID, $taxonomyName);
+        if ($taxonomyDataOrError instanceof WP_Error) {
+            /** @var WP_Error */
+            $wpError = $taxonomyDataOrError;
+            throw $this->createTaxonomyTermTermCRUDMutationException($wpError);
+        }
+        if ($taxonomyDataOrError === 0) {
+            return false;
+        }
+        return $taxonomyDataOrError;
     }
 }

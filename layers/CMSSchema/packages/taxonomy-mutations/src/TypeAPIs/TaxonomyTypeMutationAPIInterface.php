@@ -20,4 +20,9 @@ interface TaxonomyTypeMutationAPIInterface
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateTaxonomyTerm(array $data): string|int;
+    /**
+     * @return bool `true` if the operation successful, `false` if the term does not exist
+     * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy does not exist)
+     */
+    public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool;
 }
