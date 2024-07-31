@@ -16,7 +16,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 
-trait CreateOrUpdateTaxonomyTermMutationResolverTrait
+trait MutateTaxonomyTermMutationResolverTrait
 {
     use ValidateUserLoggedInMutationResolverTrait;
 

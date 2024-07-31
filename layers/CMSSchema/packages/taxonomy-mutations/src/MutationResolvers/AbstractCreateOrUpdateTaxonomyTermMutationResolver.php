@@ -20,7 +20,7 @@ use stdClass;
 
 abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends AbstractMutationResolver implements TaxonomyTermMutationResolverInterface
 {
-    use CreateOrUpdateTaxonomyTermMutationResolverTrait;
+    use MutateTaxonomyTermMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
