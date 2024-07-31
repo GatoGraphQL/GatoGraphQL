@@ -10,7 +10,6 @@ use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeReso
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends AbstractInputObjectTypeResolver implements UpdateTaxonomyTermInputObjectTypeResolverInterface, CreateTaxonomyTermInputObjectTypeResolverInterface
 {
@@ -69,7 +68,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
         );
     }
 
-    abstract protected function getTaxonomyTermParentInputObjectTypeResolver(): TypeResolverInterface;
+    abstract protected function getTaxonomyTermParentInputObjectTypeResolver(): InputTypeResolverInterface;
 
     abstract protected function addTaxonomyInputField(): bool;
     abstract protected function addParentIDInputField(): bool;

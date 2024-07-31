@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryByOneofInputObjectTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\TypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver implements UpdateCategoryTermInputObjectTypeResolverInterface, CreateCategoryTermInputObjectTypeResolverInterface
 {
@@ -27,7 +27,7 @@ abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends
         return $this->categoryByOneofInputObjectTypeResolver;
     }
 
-    protected function getTaxonomyTermParentInputObjectTypeResolver(): TypeResolverInterface
+    protected function getTaxonomyTermParentInputObjectTypeResolver(): InputTypeResolverInterface
     {
         return $this->getCategoryByOneofInputObjectTypeResolver();
     }
