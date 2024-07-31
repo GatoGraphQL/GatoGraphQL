@@ -11,6 +11,7 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoPCMSSchema\SchemaCommons\FilterInputs\IncludeFilterInput;
 use PoPCMSSchema\SchemaCommons\FilterInputs\SlugFilterInput;
+use PoPCMSSchema\Taxonomies\Constants\InputProperties;
 
 abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQueryableInputObjectTypeResolver
 {
@@ -91,16 +92,16 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
-            'id' => $this->getIDScalarTypeResolver(),
-            'slug' => $this->getStringScalarTypeResolver(),
+            InputProperties::ID => $this->getIDScalarTypeResolver(),
+            InputProperties::SLUG => $this->getStringScalarTypeResolver(),
         ];
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by taxonomy ID', 'taxonomies'),
-            'slug' => $this->__('Query by taxonomy slug', 'taxonomies'),
+            InputProperties::ID => $this->__('Query by taxonomy ID', 'taxonomies'),
+            InputProperties::SLUG => $this->__('Query by taxonomy slug', 'taxonomies'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
@@ -108,8 +109,8 @@ abstract class AbstractTaxonomyByInputObjectTypeResolver extends AbstractOneofQu
     public function getInputFieldFilterInput(string $inputFieldName): ?FilterInputInterface
     {
         return match ($inputFieldName) {
-            'id' => $this->getIncludeFilterInput(),
-            'slug' => $this->getSlugFilterInput(),
+            InputProperties::ID => $this->getIncludeFilterInput(),
+            InputProperties::SLUG => $this->getSlugFilterInput(),
             default => parent::getInputFieldFilterInput($inputFieldName),
         };
     }

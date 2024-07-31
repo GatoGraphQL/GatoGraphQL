@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
+use PoPCMSSchema\Taxonomies\Constants\InputProperties;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
@@ -132,9 +133,9 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
 
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
-        if ($taxonomyParentBy !== null && $taxonomyParentBy->{MutationInputProperties::ID} !== null) {
+        if ($taxonomyParentBy !== null && $taxonomyParentBy->{InputProperties::ID} !== null) {
             /** @var string|int */
-            $taxonomyParentID = $taxonomyParentBy->{MutationInputProperties::ID};
+            $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
             /** @var string|null */
             $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
             $this->validateTaxonomyTermExists(
@@ -194,9 +195,9 @@ abstract class AbstractCreateOrUpdateTaxonomyTermMutationResolver extends Abstra
         if ($fieldDataAccessor->hasValue(MutationInputProperties::PARENT_BY)) {
             /** @var stdClass|null */
             $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
-            if ($taxonomyParentBy !== null && $taxonomyParentBy->{MutationInputProperties::ID} !== null) {
+            if ($taxonomyParentBy !== null && $taxonomyParentBy->{InputProperties::ID} !== null) {
                 /** @var string|int */
-                $taxonomyParentID = $taxonomyParentBy->{MutationInputProperties::ID};
+                $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
                 $taxonomyData['parent-id'] = $taxonomyParentID;
             }
         }
