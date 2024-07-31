@@ -129,7 +129,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $this->validateCanLoggedInUserEditTaxonomies(
+        $this->validateCanLoggedInUserEditTaxonomyTerms(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -166,7 +166,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
-        $this->validateCanLoggedInUserEditTaxonomies(
+        $this->validateCanLoggedInUserEditTaxonomyTerms(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

@@ -124,7 +124,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         );
     }
 
-    protected function validateCanLoggedInUserEditTaxonomies(
+    protected function validateCanLoggedInUserEditTaxonomyTerms(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
