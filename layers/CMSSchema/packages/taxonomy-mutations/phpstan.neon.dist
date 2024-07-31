@@ -11,3 +11,15 @@ parameters:
 		- 
 			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
 			path: src/MutationResolvers/PayloadableCreateTaxonomyMutationResolverTrait.php
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolvers/PayloadableDeleteTaxonomyMutationResolverTrait.php
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolvers/PayloadableCreateGenericTaxonomyTermMutationResolver.php
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolvers/PayloadableDeleteGenericTaxonomyTermMutationResolver.php
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolvers/PayloadableUpdateGenericTaxonomyTermMutationResolver.php

@@ -11,3 +11,6 @@ parameters:
 		- 
 			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
 			path: src/MutationResolvers/PayloadableCreateCategoryTermMutationResolverTrait.php
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolvers/PayloadableDeleteCategoryTermMutationResolverTrait.php
