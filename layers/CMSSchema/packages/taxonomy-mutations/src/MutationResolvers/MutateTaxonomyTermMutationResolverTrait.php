@@ -130,11 +130,11 @@ trait MutateTaxonomyTermMutationResolverTrait
     ): void {
         // Validate user permission
         $userID = App::getState('current-user-id');
-        $editTaxonomiesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_TAXONOMIES_CAPABILITY);
+        $editTaxonomyTermsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_TAXONOMY_TERMS_CAPABILITY);
         if (
             !$this->getUserRoleTypeAPI()->userCan(
                 $userID,
-                $editTaxonomiesCapability
+                $editTaxonomyTermsCapability
             )
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
@@ -152,5 +152,29 @@ trait MutateTaxonomyTermMutationResolverTrait
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E2,
         );
+    }
+
+    protected function validateCanLoggedInUserDeleteTaxonomyTerm(
+        string|int $taxonomyTermID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        // Validate user permission
+        $userID = App::getState('current-user-id');
+        $deleteTaxonomyTermCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_DELETE_TAXONOMY_TERM_CAPABILITY);
+        if (
+            !$this->getUserRoleTypeAPI()->userCan(
+                $userID,
+                $deleteTaxonomyTermCapability,
+                $taxonomyTermID
+            )
+        ) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getLoggedInUserHasNoPermissionToEditTaxonomiesError(),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
     }
 }

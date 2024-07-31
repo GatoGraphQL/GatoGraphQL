@@ -12,7 +12,8 @@ class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
     protected function resolveContracts(): void
     {
         $this->getNameResolver()->implementNames([
-            LooseContractSet::NAME_EDIT_TAXONOMIES_CAPABILITY => 'edit_terms',
+            LooseContractSet::NAME_EDIT_TAXONOMY_TERMS_CAPABILITY => 'edit_terms',
+            LooseContractSet::NAME_DELETE_TAXONOMY_TERM_CAPABILITY => 'delete_term',
         ]);
     }
 }
