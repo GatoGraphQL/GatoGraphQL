@@ -41,61 +41,90 @@
 	<wp:author><wp:author_id>2</wp:author_id><wp:author_login><![CDATA[blogger]]></wp:author_login><wp:author_email><![CDATA[blogger@test.com]]></wp:author_email><wp:author_display_name><![CDATA[Blogger Davenport]]></wp:author_display_name><wp:author_first_name><![CDATA[Blogger]]></wp:author_first_name><wp:author_last_name><![CDATA[Davenport]]></wp:author_last_name></wp:author>
 
 
+	
 	<wp:term>
-		<wp:term_id>27</wp:term_id>
+		<wp:term_id>19</wp:term_id>
 		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[absolute-brilliance]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Absolute Brilliance]]></wp:term_name>
 	</wp:term>
-	<wp:term>
-		<wp:term_id>28</wp:term_id>
+		<wp:term>
+		<wp:term_id>23</wp:term_id>
 		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[brontosaurus]]></wp:term_slug>
 		<wp:term_parent><![CDATA[absolute-brilliance]]></wp:term_parent>
 		<wp:term_name><![CDATA[Brontosaurus]]></wp:term_name>
 	</wp:term>
-	<wp:term>
-		<wp:term_id>29</wp:term_id>
+		<wp:term>
+		<wp:term_id>24</wp:term_id>
 		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[capullo]]></wp:term_slug>
 		<wp:term_parent><![CDATA[brontosaurus]]></wp:term_parent>
 		<wp:term_name><![CDATA[Capullo]]></wp:term_name>
 	</wp:term>
-	<wp:term>
+		<wp:term>
 		<wp:term_id>30</wp:term_id>
 		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[nostradamus]]></wp:term_slug>
 		<wp:term_parent><![CDATA[capullo]]></wp:term_parent>
 		<wp:term_name><![CDATA[Nostradamus]]></wp:term_name>
 	</wp:term>
-	<wp:term>
+		<wp:term>
 		<wp:term_id>31</wp:term_id>
+		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[nostradamus-2]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Nostradamus]]></wp:term_name>
+	</wp:term>
+		<wp:term>
+		<wp:term_id>32</wp:term_id>
 		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[perestroika]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Perestroika]]></wp:term_name>
 	</wp:term>
-	<wp:term>
-		<wp:term_id>32</wp:term_id>
+		<wp:term>
+		<wp:term_id>37</wp:term_id>
 		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[unexpected-randomness]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Unexpected Randomness]]></wp:term_name>
 	</wp:term>
-	<wp:term>
-		<wp:term_id>33</wp:term_id>
+		<wp:term>
+		<wp:term_id>40</wp:term_id>
 		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
 		<wp:term_slug><![CDATA[world-cup]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[World Cup]]></wp:term_name>
 	</wp:term>
-	<wp:term>
-		<wp:term_id>34</wp:term_id>
-		<wp:term_taxonomy><![CDATA[dummy-category]]></wp:term_taxonomy>
-		<wp:term_slug><![CDATA[nostradamus-2]]></wp:term_slug>
+		<wp:term>
+		<wp:term_id>25</wp:term_id>
+		<wp:term_taxonomy><![CDATA[dummy-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[classical]]></wp:term_slug>
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
-		<wp:term_name><![CDATA[Nostradamus]]></wp:term_name>
+		<wp:term_name><![CDATA[Classical]]></wp:term_name>
+	</wp:term>
+		<wp:term>
+		<wp:term_id>29</wp:term_id>
+		<wp:term_taxonomy><![CDATA[dummy-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[jazz]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Jazz]]></wp:term_name>
+	</wp:term>
+		<wp:term>
+		<wp:term_id>34</wp:term_id>
+		<wp:term_taxonomy><![CDATA[dummy-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[rock]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Rock]]></wp:term_name>
+	</wp:term>
+		<wp:term>
+		<wp:term_id>36</wp:term_id>
+		<wp:term_taxonomy><![CDATA[dummy-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[tango]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Tango]]></wp:term_name>
 	</wp:term>
 
 				
