@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\CategoryMutations\Constants\HookNames;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
@@ -33,6 +34,12 @@ trait PayloadableCategoryMutationResolverTrait
                 $this->getUserNotLoggedInErrorFeedbackItemProviderClass(),
                 $this->getUserNotLoggedInErrorFeedbackItemProviderCode(),
             ] => new UserIsNotLoggedInErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new CategoryDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [

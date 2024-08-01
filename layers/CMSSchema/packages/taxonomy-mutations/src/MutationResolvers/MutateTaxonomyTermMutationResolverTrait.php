@@ -50,6 +50,33 @@ trait MutateTaxonomyTermMutationResolverTrait
         );
     }
 
+    protected function validateTaxonomyExists(
+        string $taxonomyName,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if (!$this->getTaxonomyTypeAPI()->taxonomyExists($taxonomyName)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getTaxonomyDoesNotExistError($taxonomyName),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function getTaxonomyDoesNotExistError(
+        string $taxonomyName,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E5,
+            [
+                $taxonomyName,
+            ]
+        );
+    }
+
     protected function validateTaxonomyTermByIDExists(
         string|int $taxonomyTermID,
         string|null $taxonomyName,

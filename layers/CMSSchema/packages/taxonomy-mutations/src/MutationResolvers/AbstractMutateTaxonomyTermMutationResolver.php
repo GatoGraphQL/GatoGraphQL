@@ -164,6 +164,23 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
+        /** @var string */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+
+        /**
+         * Validate the taxonomy exists, even though in practice
+         * it will always exist (since the input is an Enum)
+         */
+        $this->validateTaxonomyExists(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         $this->validateCanLoggedInUserEditTaxonomyTerms(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

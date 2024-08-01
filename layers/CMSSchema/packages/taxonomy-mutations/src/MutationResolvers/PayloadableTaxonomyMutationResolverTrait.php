@@ -6,6 +6,7 @@ namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
 use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
@@ -36,6 +37,12 @@ trait PayloadableTaxonomyMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
             ] => new LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new TaxonomyDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
