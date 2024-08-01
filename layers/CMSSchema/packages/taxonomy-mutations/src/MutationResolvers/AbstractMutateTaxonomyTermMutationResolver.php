@@ -406,8 +406,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         $taxonomyData = $this->getDeleteTaxonomyTermData($fieldDataAccessor);
+        /** @var string|int */
         $taxonomyTermID = $taxonomyData['id'];
-        $taxonomyName = $taxonomyData['taxonomy-name'] ?? '';
+        $taxonomyName = $taxonomyData['taxonomy-name'] ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
 
         $result = $this->executeDeleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
         if ($result === false) {
