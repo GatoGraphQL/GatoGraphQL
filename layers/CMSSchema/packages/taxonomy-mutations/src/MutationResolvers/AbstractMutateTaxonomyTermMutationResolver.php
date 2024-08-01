@@ -11,13 +11,11 @@ use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
-use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
 use stdClass;
 
@@ -25,37 +23,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
 {
     use MutateTaxonomyTermMutationResolverTrait;
 
-    private ?NameResolverInterface $nameResolver = null;
-    private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI = null;
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
-    final public function setNameResolver(NameResolverInterface $nameResolver): void
-    {
-        $this->nameResolver = $nameResolver;
-    }
-    final protected function getNameResolver(): NameResolverInterface
-    {
-        if ($this->nameResolver === null) {
-            /** @var NameResolverInterface */
-            $nameResolver = $this->instanceManager->getInstance(NameResolverInterface::class);
-            $this->nameResolver = $nameResolver;
-        }
-        return $this->nameResolver;
-    }
-    final public function setUserRoleTypeAPI(UserRoleTypeAPIInterface $userRoleTypeAPI): void
-    {
-        $this->userRoleTypeAPI = $userRoleTypeAPI;
-    }
-    final protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface
-    {
-        if ($this->userRoleTypeAPI === null) {
-            /** @var UserRoleTypeAPIInterface */
-            $userRoleTypeAPI = $this->instanceManager->getInstance(UserRoleTypeAPIInterface::class);
-            $this->userRoleTypeAPI = $userRoleTypeAPI;
-        }
-        return $this->userRoleTypeAPI;
-    }
     final public function setTaxonomyTypeMutationAPI(TaxonomyTypeMutationAPIInterface $taxonomyTypeMutationAPI): void
     {
         $this->taxonomyTypeMutationAPI = $taxonomyTypeMutationAPI;

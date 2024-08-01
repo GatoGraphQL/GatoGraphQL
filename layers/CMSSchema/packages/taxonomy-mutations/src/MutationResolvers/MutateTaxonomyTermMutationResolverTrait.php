@@ -6,22 +6,17 @@ namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMutations\LooseContracts\LooseContractSet;
-use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\LooseContracts\NameResolverInterface;
 
 trait MutateTaxonomyTermMutationResolverTrait
 {
     use ValidateUserLoggedInMutationResolverTrait;
 
-    abstract protected function getNameResolver(): NameResolverInterface;
-    abstract protected function getUserRoleTypeAPI(): UserRoleTypeAPIInterface;
     abstract protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface;
 
     /**
