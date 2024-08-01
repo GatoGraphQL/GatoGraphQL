@@ -82,14 +82,14 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermTermCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermCRUDMutationException($wpError);
         }
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
         return $taxonomyTermID;
     }
 
-    protected function createTaxonomyTermTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException
+    protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException
     {
         return new TaxonomyTermCRUDMutationException(
             $wpError->get_error_message(),
@@ -113,7 +113,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermTermCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermCRUDMutationException($wpError);
         }
         /** @var int */
         $taxonomyTermID = $taxonomyDataOrError['term_id'];
@@ -130,7 +130,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;
-            throw $this->createTaxonomyTermTermCRUDMutationException($wpError);
+            throw $this->createTaxonomyTermCRUDMutationException($wpError);
         }
         if ($taxonomyDataOrError === 0) {
             return false;
