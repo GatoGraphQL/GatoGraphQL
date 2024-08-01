@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\AbstractGenericCategoryMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\GenericCategoryUpdateMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\ObjectType\RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver;
 
 class GenericCategoryMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationPayloadObjectTypeFieldResolver
 {
@@ -34,7 +36,9 @@ class GenericCategoryMutationPayloadObjectTypeFieldResolver extends AbstractObje
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractGenericCategoryMutationPayloadObjectTypeResolver::class,
+            GenericCategoryUpdateMutationPayloadObjectTypeResolver::class,
+            RootCreateGenericCategoryTermMutationPayloadObjectTypeResolver::class,
+            RootUpdateGenericCategoryTermMutationPayloadObjectTypeResolver::class,
         ];
     }
 
