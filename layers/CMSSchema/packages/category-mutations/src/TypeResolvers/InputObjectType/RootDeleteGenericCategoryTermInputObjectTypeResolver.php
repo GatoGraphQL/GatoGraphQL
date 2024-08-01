@@ -8,7 +8,7 @@ class RootDeleteGenericCategoryTermInputObjectTypeResolver extends AbstractDelet
 {
     public function getTypeName(): string
     {
-        return 'RootDeleteCategoryInput';
+        return 'RootDeleteGenericCategoryInput';
     }
 
     protected function addTaxonomyInputField(): bool

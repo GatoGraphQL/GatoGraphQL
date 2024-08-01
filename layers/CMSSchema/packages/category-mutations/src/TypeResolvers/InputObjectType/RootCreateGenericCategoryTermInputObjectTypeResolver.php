@@ -8,7 +8,7 @@ class RootCreateGenericCategoryTermInputObjectTypeResolver extends AbstractCreat
 {
     public function getTypeName(): string
     {
-        return 'RootCreateCategoryInput';
+        return 'RootCreateGenericCategoryInput';
     }
 
     protected function addTaxonomyInputField(): bool

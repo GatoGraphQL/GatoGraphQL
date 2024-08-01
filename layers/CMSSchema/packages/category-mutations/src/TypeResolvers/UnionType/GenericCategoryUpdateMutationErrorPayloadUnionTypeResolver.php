@@ -28,7 +28,7 @@ class GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver extends Abstrac
 
     public function getTypeName(): string
     {
-        return 'CategoryUpdateMutationErrorPayloadUnion';
+        return 'GenericCategoryUpdateMutationErrorPayloadUnion';
     }
 
     public function getTypeDescription(): ?string

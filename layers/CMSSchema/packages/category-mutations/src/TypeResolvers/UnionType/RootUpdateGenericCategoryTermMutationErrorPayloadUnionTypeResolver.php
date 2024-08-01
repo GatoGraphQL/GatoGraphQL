@@ -28,7 +28,7 @@ class RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver extends
 
     public function getTypeName(): string
     {
-        return 'RootUpdateCategoryTermMutationErrorPayloadUnion';
+        return 'RootUpdateGenericCategoryTermMutationErrorPayloadUnion';
     }
 
     public function getTypeDescription(): ?string

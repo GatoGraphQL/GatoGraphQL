@@ -8,7 +8,7 @@ class RootDeleteGenericCategoryTermMutationPayloadObjectTypeResolver extends Abs
 {
     public function getTypeName(): string
     {
-        return 'RootDeleteCategoryTermMutationPayload';
+        return 'RootDeleteGenericCategoryTermMutationPayload';
     }
 
     public function getTypeDescription(): ?string
