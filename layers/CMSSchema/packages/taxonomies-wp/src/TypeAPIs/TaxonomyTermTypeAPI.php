@@ -20,15 +20,15 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         /** @var WP_Term $taxonomyTerm */
         return $taxonomyTerm->taxonomy;
     }
-    public function taxonomyTermExists(int|string $idOrSlug, string $taxonomy = ''): bool
+    public function taxonomyTermExists(int|string $taxonomyTermIDOrSlug, string $taxonomy = ''): bool
     {
-        $taxonomyTermExists = term_exists($idOrSlug, $taxonomy);
+        $taxonomyTermExists = term_exists($taxonomyTermIDOrSlug, $taxonomy);
         return $taxonomyTermExists !==  null;
     }
-    public function getTaxonomyTermID(int|string $idOrSlug, string $taxonomy = ''): string|int|null
+    public function getTaxonomyTermID(int|string $taxonomyTermIDOrSlug, string $taxonomy = ''): string|int|null
     {
         /** @var array<string,string|int>|string|int|null */
-        $taxonomyTerm = term_exists($idOrSlug, $taxonomy);
+        $taxonomyTerm = term_exists($taxonomyTermIDOrSlug, $taxonomy);
         if ($taxonomyTerm === null) {
             return null;
         }

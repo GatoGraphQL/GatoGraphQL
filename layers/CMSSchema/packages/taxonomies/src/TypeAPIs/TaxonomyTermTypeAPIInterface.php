@@ -14,5 +14,5 @@ interface TaxonomyTermTypeAPIInterface
      */
     public function getTermTaxonomyName(object $taxonomyTerm): string;
     public function taxonomyTermExists(int|string $id, string $taxonomy = ''): bool;
-    public function getTaxonomyTermID(int|string $idOrSlug, string $taxonomy = ''): string|int|null;
+    public function getTaxonomyTermID(int|string $taxonomyTermIDOrSlug, string $taxonomy = ''): string|int|null;
 }
