@@ -71,6 +71,11 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         return isset($taxonomy->cap->edit_terms) && user_can($userID, $taxonomy->cap->edit_terms);
     }
 
+    public function canUserDeleteTaxonomyTerm(string|int $userID, string|int $taxonomyTermID): bool
+    {
+        return user_can($userID, 'delete_term', $taxonomyTermID);
+    }
+
     public function getTaxonomy(string $taxonomyName): object|null
     {
         $taxonomy = get_taxonomy($taxonomyName);

@@ -170,11 +170,9 @@ trait MutateTaxonomyTermMutationResolverTrait
     ): void {
         // Validate user permission
         $userID = App::getState('current-user-id');
-        $deleteTaxonomyTermCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_DELETE_TAXONOMY_TERM_CAPABILITY);
         if (
-            !$this->getUserRoleTypeAPI()->userCan(
+            !$this->getTaxonomyTermTypeAPI()->canUserDeleteTaxonomyTerm(
                 $userID,
-                $deleteTaxonomyTermCapability,
                 $taxonomyTermID
             )
         ) {
