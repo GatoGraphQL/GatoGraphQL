@@ -25,13 +25,13 @@ trait DeleteCategoryTermMutationResolverTrait
     }
 
     /**
-     * @return string|int The ID of the deleted entity
+     * @return bool Was the deletion successful?
      * @throws CategoryTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     abstract protected function delete(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int;
+    ): bool;
 
     /**
      * Validate the app-level errors in top-level "errors" entry.

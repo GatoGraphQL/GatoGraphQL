@@ -400,13 +400,13 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     }
 
     /**
-     * @return string|int The ID of the updated entity
+     * @return bool Was the deletion successful?
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     protected function delete(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int {
+    ): bool {
         $taxonomyData = $this->getDeleteTaxonomyTermData($fieldDataAccessor);
         /** @var string|int */
         $taxonomyTermID = $taxonomyData['id'];
@@ -422,7 +422,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             );
         }
 
-        return $taxonomyTermID;
+        return $result;
     }
 
     /**

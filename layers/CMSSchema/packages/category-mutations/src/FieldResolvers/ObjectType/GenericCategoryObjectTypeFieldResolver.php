@@ -21,6 +21,7 @@ use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 
 class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFieldResolver
 {
@@ -33,6 +34,7 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     private ?PayloadableDeleteGenericCategoryTermMutationResolver $payloadableDeleteGenericCategoryTermMutationResolver = null;
     private ?GenericCategoryTermUpdateInputObjectTypeResolver $genericCategoryTermUpdateInputObjectTypeResolver = null;
     private ?GenericCategoryTermDeleteInputObjectTypeResolver $genericCategoryTermDeleteInputObjectTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
     {
@@ -151,6 +153,19 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return $this->genericCategoryTermDeleteInputObjectTypeResolver;
     }
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -210,11 +225,9 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         $usePayloadableCategoryMutations = $moduleConfiguration->usePayloadableCategoryMutations();
         if (!$usePayloadableCategoryMutations) {
             return match ($fieldName) {
-                'update',
-                'delete'
-                    => $this->getGenericCategoryObjectTypeResolver(),
-                default
-                    => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+                'update' => $this->getGenericCategoryObjectTypeResolver(),
+                'delete' => $this->getBooleanScalarTypeResolver(),
+                default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {

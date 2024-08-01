@@ -28,7 +28,7 @@ trait DeleteTaxonomyTermMutationResolverTrait
     abstract protected function delete(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int;
+    ): bool;
 
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,

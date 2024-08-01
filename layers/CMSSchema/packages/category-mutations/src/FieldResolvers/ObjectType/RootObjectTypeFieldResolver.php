@@ -37,6 +37,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\Module as EngineModule;
 use PoP\Engine\ModuleConfiguration as EngineModuleConfiguration;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
@@ -67,6 +68,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootUpdateGenericCategoryTermInputObjectTypeResolver $rootUpdateGenericCategoryTermInputObjectTypeResolver = null;
     private ?RootCreateGenericCategoryTermInputObjectTypeResolver $rootCreateGenericCategoryTermInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
     final public function setGenericCategoryObjectTypeResolver(GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver): void
     {
@@ -328,6 +330,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return $this->userLoggedInCheckpoint;
     }
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
+    {
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -564,10 +579,11 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'createCategory',
             'createCategories',
             'updateCategory',
-            'updateCategories',
+            'updateCategories'
+                => $this->getGenericCategoryObjectTypeResolver(),
             'deleteCategory',
             'deleteCategories'
-                => $this->getGenericCategoryObjectTypeResolver(),
+                => $this->getBooleanScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
