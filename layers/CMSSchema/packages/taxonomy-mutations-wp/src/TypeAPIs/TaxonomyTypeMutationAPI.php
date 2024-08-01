@@ -124,7 +124,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
      * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy does not exist)
      */
-    public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool
+    public function deleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool
     {
         $taxonomyDataOrError = wp_delete_term((int) $taxonomyTermID, $taxonomyName);
         if ($taxonomyDataOrError instanceof WP_Error) {

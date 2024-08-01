@@ -24,5 +24,5 @@ interface CategoryTypeMutationAPIInterface extends TaxonomyTypeMutationAPIInterf
      * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
     public function updateCategoryTerm(array $data): string|int;
-    public function deleteCategoryTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool;
+    public function deleteCategoryTerm(string|int $taxonomyTermID, string $taxonomyName): bool;
 }

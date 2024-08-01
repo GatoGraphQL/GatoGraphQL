@@ -426,7 +426,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
      * @return bool `true` if the operation successful, `false` if the term does not exist
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeDeleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName = ''): bool
+    protected function executeDeleteTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName): bool
     {
         return $this->getTaxonomyTypeMutationAPI()->deleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
     }
