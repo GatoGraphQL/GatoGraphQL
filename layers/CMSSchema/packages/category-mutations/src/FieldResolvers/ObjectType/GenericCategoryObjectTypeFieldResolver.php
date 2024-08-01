@@ -177,15 +177,6 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         ];
     }
 
-    public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
-    {
-        return match ($fieldName) {
-            'update' => $this->__('Update the category', 'category-mutations'),
-            'delete' => $this->__('Delete the category', 'category-mutations'),
-            default => parent::getFieldDescription($objectTypeResolver, $fieldName),
-        };
-    }
-
     /**
      * @return array<string,InputTypeResolverInterface>
      */
