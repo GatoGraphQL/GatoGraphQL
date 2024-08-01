@@ -33,7 +33,9 @@ trait MutateGenericTaxonomyTermInputObjectTypeResolverTrait
     public function getGenericTaxonomyTermInputFieldTypeModifiers(string $inputFieldName): ?int
     {
         return match ($inputFieldName) {
-            MutationInputProperties::TAXONOMY => SchemaTypeModifiers::MANDATORY,
+            MutationInputProperties::TAXONOMY => $this->isTaxonomyInputFieldMandatory()
+                ? SchemaTypeModifiers::MANDATORY
+                : SchemaTypeModifiers::NONE,
             default => null,
         };
     }
