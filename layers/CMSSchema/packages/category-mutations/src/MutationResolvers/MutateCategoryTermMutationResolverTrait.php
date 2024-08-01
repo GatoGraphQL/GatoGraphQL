@@ -17,6 +17,18 @@ trait MutateCategoryTermMutationResolverTrait
         );
     }
 
+    protected function getTaxonomyDoesNotExistError(
+        string $taxonomyName,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E5,
+            [
+                $taxonomyName,
+            ]
+        );
+    }
+
     protected function getTaxonomyTermDoesNotExistError(
         string|int $taxonomyTermID,
     ): FeedbackItemResolution {
