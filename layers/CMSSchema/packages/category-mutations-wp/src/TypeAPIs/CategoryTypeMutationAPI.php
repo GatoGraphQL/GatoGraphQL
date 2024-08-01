@@ -8,6 +8,7 @@ use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
 use PoPCMSSchema\TaxonomyMutationsWP\TypeAPIs\TaxonomyTypeMutationAPI;
 
+use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use WP_Error;
 
 /**
@@ -25,7 +26,7 @@ class CategoryTypeMutationAPI extends TaxonomyTypeMutationAPI implements Categor
         return $this->createTaxonomyTerm($data);
     }
 
-    protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): CategoryTermCRUDMutationException
+    protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException
     {
         return new CategoryTermCRUDMutationException(
             $wpError->get_error_message(),
