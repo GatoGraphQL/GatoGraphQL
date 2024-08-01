@@ -50,7 +50,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        if (!$this->getTaxonomyTypeAPI()->taxonomyExists($taxonomyName)) {
+        if (!$this->getTaxonomyTermTypeAPI()->taxonomyExists($taxonomyName)) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $this->getTaxonomyDoesNotExistError($taxonomyName),

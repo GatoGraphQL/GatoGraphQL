@@ -57,7 +57,7 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     public function getTaxonomyTerm(int|string $taxonomyTermID, string $taxonomy = ''): object|null
     {
         /** @var WP_Term|WP_Error|null */
-        $taxonomyTerm = get_term($taxonomyTermID, $taxonomy);
+        $taxonomyTerm = get_term((int) $taxonomyTermID, $taxonomy);
         if ($taxonomyTerm instanceof WP_Error) {
             return null;
         }
@@ -68,12 +68,12 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     {
         /** @var WP_Taxonomy */
         $taxonomy = $this->getTaxonomy($taxonomyName);
-        return isset($taxonomy->cap->edit_terms) && user_can($userID, $taxonomy->cap->edit_terms);
+        return isset($taxonomy->cap->edit_terms) && user_can((int) $userID, $taxonomy->cap->edit_terms);
     }
 
     public function canUserDeleteTaxonomyTerm(string|int $userID, string|int $taxonomyTermID): bool
     {
-        return user_can($userID, 'delete_term', $taxonomyTermID);
+        return user_can((int) $userID, 'delete_term', $taxonomyTermID);
     }
 
     public function getTaxonomy(string $taxonomyName): object|null
@@ -83,5 +83,10 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
             return null;
         }
         return $taxonomy;
+    }
+
+    public function taxonomyExists(string $taxonomyName): bool
+    {
+        return $this->getTaxonomy($taxonomyName) !== null;
     }
 }
