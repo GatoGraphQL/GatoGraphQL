@@ -15,7 +15,11 @@ class CategoryDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends A
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractRootCreateCategoryMutationErrorPayloadUnionTypeResolver::class,
+            /**
+             * Commented because the input is an Enum type, hence
+             * the taxonomy will always exist
+             */
+            // AbstractRootCreateCategoryMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
