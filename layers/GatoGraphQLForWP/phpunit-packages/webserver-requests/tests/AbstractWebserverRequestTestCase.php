@@ -7,7 +7,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
 use GuzzleHttp\Exception\GuzzleException;
-use GuzzleHttp\Exception\ServerException;
+// use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
@@ -81,10 +81,10 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             static::postWebserverPingResponse($response, $options);
             return;
         } catch (GuzzleException | RuntimeException $e) {
-            // The code produced a 500 error => bubble it up
-            if ($e instanceof ServerException && $e->getCode() === 500) {
-                throw $e;
-            }
+            // // The code produced a 500 error => bubble it up
+            // if ($e instanceof ServerException && $e->getCode() === 500) {
+            throw $e;
+            // }
         }
 
         // The webserver is down
