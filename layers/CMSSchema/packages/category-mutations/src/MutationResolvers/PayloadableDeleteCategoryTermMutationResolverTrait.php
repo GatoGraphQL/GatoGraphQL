@@ -9,6 +9,7 @@ use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\Exception\AbstractException;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 
 trait PayloadableDeleteCategoryTermMutationResolverTrait
 {
@@ -39,10 +40,11 @@ trait PayloadableDeleteCategoryTermMutationResolverTrait
             )->getID();
         }
 
-        $categoryTermID = null;
+        /** @var string|int */
+        $categoryTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         try {
-            /** @var string|int */
-            $categoryTermID = $this->upstreamExecuteMutation(
+            /** @var bool */
+            $operationSuccessful = $this->upstreamExecuteMutation(
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );
@@ -64,7 +66,6 @@ trait PayloadableDeleteCategoryTermMutationResolverTrait
             )->getID();
         }
 
-        /** @var string|int $categoryTermID */
         return $this->createSuccessObjectMutationPayload($categoryTermID)->getID();
     }
 }
