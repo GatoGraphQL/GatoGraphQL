@@ -20,4 +20,9 @@ class RootUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreat
     {
         return false;
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }

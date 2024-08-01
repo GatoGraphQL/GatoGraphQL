@@ -53,4 +53,9 @@ abstract class AbstractDeleteGenericCategoryTermInputObjectTypeResolver extends 
     {
         return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }

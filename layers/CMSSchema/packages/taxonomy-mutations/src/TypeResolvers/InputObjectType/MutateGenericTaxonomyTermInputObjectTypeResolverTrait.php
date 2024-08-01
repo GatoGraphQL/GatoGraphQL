@@ -37,4 +37,6 @@ trait MutateGenericTaxonomyTermInputObjectTypeResolverTrait
             default => null,
         };
     }
+
+    abstract protected function isTaxonomyInputFieldMandatory(): bool;
 }

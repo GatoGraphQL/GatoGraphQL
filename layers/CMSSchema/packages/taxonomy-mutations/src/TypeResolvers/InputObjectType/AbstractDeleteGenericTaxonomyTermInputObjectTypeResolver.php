@@ -30,4 +30,9 @@ abstract class AbstractDeleteGenericTaxonomyTermInputObjectTypeResolver extends 
     {
         return $this->getGenericTaxonomyTermInputFieldTypeModifiers($inputFieldName) ?? parent::getInputFieldTypeModifiers($inputFieldName);
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }
