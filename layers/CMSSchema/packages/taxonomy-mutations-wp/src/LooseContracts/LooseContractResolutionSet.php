@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TaxonomyMutationsWP\LooseContracts;
 
 use PoP\LooseContracts\AbstractLooseContractResolutionSet;
-use PoPCMSSchema\TaxonomyMutations\LooseContracts\LooseContractSet;
 
 class LooseContractResolutionSet extends AbstractLooseContractResolutionSet
 {
