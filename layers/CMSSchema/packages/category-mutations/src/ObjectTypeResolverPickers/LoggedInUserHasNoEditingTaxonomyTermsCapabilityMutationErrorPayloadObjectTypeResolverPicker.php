@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractCategoryMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractCategoryUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractRootCreateCategoryMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractRootUpdateCategoryMutationErrorPayloadUnionTypeResolver;
 
 class LoggedInUserHasNoEditingTaxonomyTermsCapabilityMutationErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolverPicker
 {
@@ -16,7 +18,9 @@ class LoggedInUserHasNoEditingTaxonomyTermsCapabilityMutationErrorPayloadObjectT
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCategoryMutationErrorPayloadUnionTypeResolver::class,
+            AbstractCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootCreateCategoryMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootUpdateCategoryMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
