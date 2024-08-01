@@ -103,12 +103,10 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
      * @return string|int the ID of the updated taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
-    public function updateTaxonomyTerm(array $data): string|int
+    public function updateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
-        $taxonomyTermID = $data['id'] ?? null;
-        $taxonomyName = $data['taxonomy-name'] ?? '';
         $taxonomyDataOrError = wp_update_term($taxonomyTermID, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */

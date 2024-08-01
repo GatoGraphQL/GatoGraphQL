@@ -33,9 +33,9 @@ abstract class AbstractMutateCategoryTermMutationResolver extends AbstractMutate
      * @return string|int the ID of the updated taxonomy
      * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeUpdateTaxonomyTerm(array $taxonomyData): string|int
+    protected function executeUpdateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getCategoryTypeMutationAPI()->updateCategoryTerm($taxonomyData);
+        return $this->getCategoryTypeMutationAPI()->updateCategoryTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
     }
 
     /**

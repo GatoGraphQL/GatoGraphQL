@@ -339,9 +339,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
      * @return string|int the ID of the updated taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    protected function executeUpdateTaxonomyTerm(array $taxonomyData): string|int
+    protected function executeUpdateTaxonomyTerm(string|int $taxonomyTermID, string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getTaxonomyTypeMutationAPI()->updateTaxonomyTerm($taxonomyData);
+        return $this->getTaxonomyTypeMutationAPI()->updateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
     }
 
     protected function createUpdateTaxonomy(FieldDataAccessorInterface $fieldDataAccessor, int|string $taxonomyTermID): void
@@ -357,9 +357,11 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         $taxonomyData = $this->getUpdateTaxonomyTermData($fieldDataAccessor);
+        /** @var string|int */
         $taxonomyTermID = $taxonomyData['id'];
+        $taxonomyName = $taxonomyData['taxonomy-name'] ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
 
-        $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyData);
+        $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 

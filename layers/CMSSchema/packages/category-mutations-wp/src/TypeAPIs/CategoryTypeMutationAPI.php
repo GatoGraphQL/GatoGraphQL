@@ -40,9 +40,9 @@ class CategoryTypeMutationAPI extends TaxonomyTypeMutationAPI implements Categor
      * @return string|int the ID of the updated category
      * @throws CategoryTermCRUDMutationException If there was an error (eg: taxonomy term does not exist)
      */
-    public function updateCategoryTerm(array $data): string|int
+    public function updateCategoryTerm(string|int $taxonomyTermID, string $taxonomyName, array $data): string|int
     {
-        return $this->updateTaxonomyTerm($data);
+        return $this->updateTaxonomyTerm($taxonomyTermID, $taxonomyName, $data);
     }
 
     public function deleteCategoryTerm(string|int $taxonomyTermID, string $taxonomyName): bool
