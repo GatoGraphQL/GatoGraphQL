@@ -133,17 +133,17 @@ trait MutateTaxonomyTermMutationResolverTrait
         );
     }
 
-    protected function validateCanLoggedInUserEditTaxonomyTerms(
+    protected function validateCanLoggedInUserEditTaxonomy(
+        string $taxonomyName,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         // Validate user permission
         $userID = App::getState('current-user-id');
-        $editTaxonomyTermsCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_EDIT_TAXONOMY_TERMS_CAPABILITY);
         if (
-            !$this->getUserRoleTypeAPI()->userCan(
+            !$this->getTaxonomyTermTypeAPI()->canUserEditTaxonomy(
                 $userID,
-                $editTaxonomyTermsCapability
+                $taxonomyName
             )
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(

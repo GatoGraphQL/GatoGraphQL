@@ -164,28 +164,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
-        /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-
-        /**
-         * Validate the taxonomy exists, even though in practice
-         * it will always exist (since the input is an Enum)
-         */
-        $this->validateTaxonomyExists(
-            $taxonomyName,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $this->validateCanLoggedInUserEditTaxonomyTerms(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
         if ($taxonomyParentBy !== null) {
@@ -222,6 +200,31 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        /** @var string */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+
+        /**
+         * Validate the taxonomy exists, even though in practice
+         * it will always exist (since the input is an Enum)
+         */
+        $this->validateTaxonomyExists(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateCanLoggedInUserEditTaxonomy(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function validateUpdate(
@@ -254,10 +257,24 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
-        
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
             null,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+        
+        /** @var string */
+        $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+
+        $this->validateCanLoggedInUserEditTaxonomy(
+            $taxonomyName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

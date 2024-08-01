@@ -6,7 +6,11 @@ namespace PoPCMSSchema\TaxonomiesWP\TypeAPIs;
 
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoP\Root\Services\BasicServiceTrait;
+use WP_Error;
+use WP_Taxonomy;
 use WP_Term;
+
+use function get_term;
 
 class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
 {
@@ -38,5 +42,41 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         }
         /** @var string|int */
         return $taxonomyTerm;
+    }
+
+    public function getTaxonomyTermTaxonomy(int|string $taxonomyTermID): string|null
+    {
+        /** @var WP_Term|null */
+        $taxonomyTerm = $this->getTaxonomyTerm($taxonomyTermID);
+        if ($taxonomyTerm === null) {
+            return null;
+        }
+        return $taxonomyTerm->taxonomy;
+    }
+
+    public function getTaxonomyTerm(int|string $taxonomyTermID, string $taxonomy = ''): object|null
+    {
+        /** @var WP_Term|WP_Error|null */
+        $taxonomyTerm = get_term($taxonomyTermID, $taxonomy);
+        if ($taxonomyTerm instanceof WP_Error) {
+            return null;
+        }
+        return $taxonomyTerm;
+    }
+
+    public function canUserEditTaxonomy(string|int $userID, string $taxonomyName): bool
+    {
+        /** @var WP_Taxonomy */
+        $taxonomy = $this->getTaxonomy($taxonomyName);
+        return isset($taxonomy->cap->edit_terms) && user_can($userID, $taxonomy->cap->edit_terms);
+    }
+
+    public function getTaxonomy(string $taxonomyName): object|null
+    {
+        $taxonomy = get_taxonomy($taxonomyName);
+        if ($taxonomy === false) {
+            return null;
+        }
+        return $taxonomy;
     }
 }
