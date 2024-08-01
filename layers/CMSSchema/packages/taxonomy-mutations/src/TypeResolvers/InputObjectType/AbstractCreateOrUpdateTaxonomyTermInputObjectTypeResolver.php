@@ -80,7 +80,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
             MutationInputProperties::NAME => $this->__('The name of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::DESCRIPTION => $this->__('The description of the taxonomy', 'taxonomy-mutations'),
             MutationInputProperties::SLUG => $this->__('The slug of the taxonomy', 'taxonomy-mutations'),
-            MutationInputProperties::PARENT_BY => $this->__('The taxonomy\'s parent', 'taxonomy-mutations'),
+            MutationInputProperties::PARENT_BY => $this->__('The taxonomy\'s parent, or `null` to remove it', 'taxonomy-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

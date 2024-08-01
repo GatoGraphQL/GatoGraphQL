@@ -52,10 +52,15 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
             // $query['slug'] = $query['slug'];
             // unset($query['slug']);
         }
-        if (isset($query['parent-id'])) {
+        
+        /**
+         * If parent-id is `null` then remove the parent!
+         */
+        if (array_key_exists('parent-id', $query)) {
             $query['parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }
+        
         if (isset($query['description'])) {
             // Nothing to do
             // $query['description'] = $query['description'];
