@@ -55,16 +55,102 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        $this->validateCreate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        App::doAction(
+            HookNames::VALIDATE_CREATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        /** @var string */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+
+        /**
+         * Validate the taxonomy exists, even though in practice
+         * it will always exist (since the input is an Enum)
+         */
+        $this->validateTaxonomyExists(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $this->validateTaxonomyParent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateCanLoggedInUserEditTaxonomy(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function validateUpdateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        $this->validateUpdate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        App::doAction(
+            HookNames::VALIDATE_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        
+        /**
+         * Perform this validation, even though this situation
+         * should never happen. That's why there's no
+         * CategoryIDMissingError added to the Union type
+         */
+        $this->validateTaxonomyTermIDNotEmpty(
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $this->validateTaxonomyParent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        /** @var string|int $taxonomyTermID */
+
+        $this->validateTaxonomyTermByIDExists(
+            $taxonomyTermID,
+            null,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+        
+        /** @var string */
+        $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+
+        $this->validateCanLoggedInUserEditTaxonomy(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     protected function validateDeleteErrors(
@@ -119,15 +205,10 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         );
     }
 
-    protected function validateCreateUpdateErrors(
+    protected function validateTaxonomyParent(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        $this->validateIsUserLoggedIn(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
         if ($taxonomyParentBy !== null) {
@@ -153,94 +234,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
                 );
             }
         }
-    }
-
-    protected function validateCreate(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        App::doAction(
-            HookNames::VALIDATE_CREATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-
-        /**
-         * Validate the taxonomy exists, even though in practice
-         * it will always exist (since the input is an Enum)
-         */
-        $this->validateTaxonomyExists(
-            $taxonomyName,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $this->validateCanLoggedInUserEditTaxonomy(
-            $taxonomyName,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
-
-    protected function validateUpdate(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): void {
-        App::doAction(
-            HookNames::VALIDATE_UPDATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        
-        /**
-         * Perform this validation, even though this situation
-         * should never happen. That's why there's no
-         * CategoryIDMissingError added to the Union type
-         */
-        $this->validateTaxonomyTermIDNotEmpty(
-            $taxonomyTermID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        /** @var string|int $taxonomyTermID */
-
-        $this->validateTaxonomyTermByIDExists(
-            $taxonomyTermID,
-            null,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-        
-        /** @var string */
-        $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
-
-        $this->validateCanLoggedInUserEditTaxonomy(
-            $taxonomyName,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
     }
 
     /**
