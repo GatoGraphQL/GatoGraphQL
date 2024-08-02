@@ -7,13 +7,16 @@ echo "Adding Application Passwords for users"
 DEV_TESTS_APP_PASSWORD=$(wp user application-password create 1 dev_tests --porcelain)
 echo "Added application password $DEV_TESTS_APP_PASSWORD"
 wp user meta add 1 app_password $DEV_TESTS_APP_PASSWORD
-# Also save it under a non-admin user, so it can be accessed without being logged-in
-wp user meta add 2 app_password $DEV_TESTS_APP_PASSWORD
 #------------------------------------------------------------
+# Also save it under a non-admin user, so it can be accessed without
+# being logged-in, and to run tests using AppPassword.
+# @see layers/GatoGraphQLForWP/phpunit-packages/gatographql/tests/Integration/AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase.php
+#
 # Generate App Passwords for all user roles
 # Same as UserMetaKeys::APP_PASSWORD and the UserRole specific meta keys
 # @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
 #------------------------------------------------------------
+wp user meta add 2 app_password $DEV_TESTS_APP_PASSWORD
 wp user meta add 2 app_password:admin $DEV_TESTS_APP_PASSWORD
 wp user meta add 2 app_password:editor $(wp user application-password create $(wp user get editor --field=ID) dev_tests --porcelain)
 wp user meta add 2 app_password:author $(wp user application-password create $(wp user get author --field=ID) dev_tests --porcelain)
