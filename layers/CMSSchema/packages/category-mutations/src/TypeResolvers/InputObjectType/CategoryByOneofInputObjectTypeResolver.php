@@ -52,6 +52,12 @@ class CategoryByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTyp
         return false;
     }
 
+    protected function isOneOfInputPropertyNullable(
+        string $propertyName
+    ): bool {
+        return true;
+    }
+
     /**
      * @return array<string,InputTypeResolverInterface>
      */

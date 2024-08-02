@@ -275,6 +275,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             /** @var stdClass|null */
             $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
             if ($taxonomyParentBy !== null) {
+                /**
+                 * If either `id` or `slug` is `null` then remove the parent!
+                 */
                 if ($taxonomyParentBy->{InputProperties::ID} !== null) {
                     /** @var string|int */
                     $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
