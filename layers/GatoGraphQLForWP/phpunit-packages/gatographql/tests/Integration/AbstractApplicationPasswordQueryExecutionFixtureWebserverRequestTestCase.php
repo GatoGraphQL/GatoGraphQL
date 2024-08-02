@@ -54,11 +54,6 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         );
         $body = $response->getBody()->__toString();
         $content = json_decode($body, true);
-        /**
-         * Same as UserMetaKeys::APP_PASSWORD
-         *
-         * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
-         */
         return static::getUserApplicationPasswordFromResponse($content);
     }
 
