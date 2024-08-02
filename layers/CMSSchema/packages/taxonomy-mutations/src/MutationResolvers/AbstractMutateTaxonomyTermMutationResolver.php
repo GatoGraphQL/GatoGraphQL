@@ -56,10 +56,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return;
-        }
-
         $this->validateCreate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
@@ -67,12 +63,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        // If there are errors here, don't keep validating others
         $this->validateCreateUpdateErrors($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return;
-        }
-
         $this->validateUpdate($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
     }
 
@@ -86,10 +77,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
 
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
