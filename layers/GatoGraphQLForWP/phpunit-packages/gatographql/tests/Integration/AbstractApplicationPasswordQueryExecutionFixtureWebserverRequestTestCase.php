@@ -18,7 +18,7 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
      *
      * @see webservers/gatographql/setup/add-user-application-passwords.sh
      */
-    public const USER_STORING_APP_PASSWORDS_IN_META_USER_ID = 2;    
+    public const USER_STORING_APP_PASSWORDS_IN_META_USER_ID = 2;
 
     public const USER_ADMIN = 'admin';
     public const USER_EDITOR = 'editor';
@@ -70,7 +70,7 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         $appPasswordByUserRoleMetaKey = sprintf(
             'app_password:%s',
             $userToLogin
-        );        
+        );
         return $content[$appPasswordByUserRoleMetaKey] ?? $content['app_password'] ?? '';
     }
 
