@@ -139,16 +139,10 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
         $this->validateIsUserLoggedIn(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
 
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
