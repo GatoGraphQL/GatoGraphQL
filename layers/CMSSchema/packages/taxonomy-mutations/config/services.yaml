@@ -4,8 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\TaxonomyMutations\LooseContracts\:
-        resource: '../src/LooseContracts/*'
-
     PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'

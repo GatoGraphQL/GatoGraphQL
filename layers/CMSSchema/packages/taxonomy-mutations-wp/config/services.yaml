@@ -6,6 +6,3 @@ services:
 
     PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface:
         class: \PoPCMSSchema\TaxonomyMutationsWP\TypeAPIs\TaxonomyTypeMutationAPI
-
-    PoPCMSSchema\TaxonomyMutationsWP\LooseContracts\:
-        resource: '../src/LooseContracts/*'
