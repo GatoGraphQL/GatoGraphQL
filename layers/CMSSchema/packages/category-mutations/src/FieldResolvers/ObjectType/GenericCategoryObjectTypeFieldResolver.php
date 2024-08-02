@@ -195,9 +195,9 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
             'update' => [
                 'input' => $this->getGenericCategoryTermUpdateInputObjectTypeResolver(),
             ],
-            // 'delete' => [
-            //     'input' => $this->getGenericCategoryTermDeleteInputObjectTypeResolver(),
-            // ],
+            'delete' => [
+                // 'input' => $this->getGenericCategoryTermDeleteInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }

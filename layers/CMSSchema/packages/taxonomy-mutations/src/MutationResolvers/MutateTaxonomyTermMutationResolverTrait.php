@@ -72,6 +72,24 @@ trait MutateTaxonomyTermMutationResolverTrait
         );
     }
 
+    protected function validateTaxonomyTermIDNotEmpty(
+        string|int|null $taxonomyTermID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($taxonomyTermID === null || $taxonomyTermID === '') {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E6,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
     protected function validateTaxonomyTermByIDExists(
         string|int $taxonomyTermID,
         string|null $taxonomyName,

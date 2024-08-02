@@ -9,9 +9,7 @@ use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
-use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
@@ -95,6 +93,24 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
 
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        
+        /**
+         * Perform this validation, even though this situation
+         * should never happen. That's why there's no
+         * CategoryIDMissingError added to the Union type
+         */
+        $this->validateTaxonomyTermIDNotEmpty(
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+        
+        /** @var string|int $taxonomyTermID */
+
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
             null,
@@ -207,6 +223,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         
         /**
@@ -214,20 +232,17 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
          * should never happen. That's why there's no
          * CategoryIDMissingError added to the Union type
          */
-        if ($taxonomyTermID === null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E6,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
+        $this->validateTaxonomyTermIDNotEmpty(
+            $taxonomyTermID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        /** @var string|int $taxonomyTermID */
 
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
