@@ -97,10 +97,13 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         }
         
         /** @var string|int $taxonomyTermID */
+        
+        /** @var string */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
 
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
-            null,
+            $taxonomyName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -395,6 +398,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     ): bool {
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        /** @var string */
         $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
         
         $result = $this->executeDeleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
