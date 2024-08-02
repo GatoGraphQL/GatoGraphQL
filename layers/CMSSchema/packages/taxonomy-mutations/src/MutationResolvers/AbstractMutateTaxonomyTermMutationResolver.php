@@ -123,12 +123,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
-        App::doAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
         $this->validateIsUserLoggedIn(
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

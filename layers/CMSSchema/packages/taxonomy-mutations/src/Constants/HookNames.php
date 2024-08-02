@@ -6,7 +6,6 @@ namespace PoPCMSSchema\TaxonomyMutations\Constants;
 
 class HookNames
 {
-    public final const VALIDATE_CREATE_OR_UPDATE = __CLASS__ . ':validate-create-or-update';
     public final const VALIDATE_CREATE = __CLASS__ . ':validate-create';
     public final const VALIDATE_UPDATE = __CLASS__ . ':validate-update';
     public final const EXECUTE_CREATE_OR_UPDATE = __CLASS__ . ':execute-create-or-update';
