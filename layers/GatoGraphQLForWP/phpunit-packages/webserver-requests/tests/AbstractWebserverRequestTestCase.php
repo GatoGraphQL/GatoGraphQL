@@ -17,8 +17,8 @@ use PHPUnitForGatoGraphQL\WebserverRequests\Exception\IntegrationTestApplication
 use PHPUnitForGatoGraphQL\WebserverRequests\Exception\UnauthenticatedUserException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-
 use RuntimeException;
+
 use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
@@ -83,7 +83,8 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             return;
         } catch (GuzzleException | RuntimeException $e) {
             // // The code produced a 500 error => bubble it up
-            if (($e instanceof ServerException && $e->getCode() === 500)
+            if (
+                ($e instanceof ServerException && $e->getCode() === 500)
                 || $e instanceof ConnectException
             ) {
                 throw $e;
