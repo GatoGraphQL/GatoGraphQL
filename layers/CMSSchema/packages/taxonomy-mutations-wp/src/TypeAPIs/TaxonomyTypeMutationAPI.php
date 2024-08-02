@@ -111,7 +111,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
-        $taxonomyDataOrError = wp_update_term($taxonomyTermID, $taxonomyName, $data);
+        $taxonomyDataOrError = wp_update_term((int) $taxonomyTermID, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */
             $wpError = $taxonomyDataOrError;

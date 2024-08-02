@@ -184,8 +184,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         
         /** @var string|int $taxonomyTermID */
         
-        /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID) ?? '';
+        /** @var string $taxonomyName */
 
         $this->validateTaxonomyTermByIDExists(
             $taxonomyTermID,
@@ -269,7 +269,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
                 } elseif ($taxonomyParentBy->{InputProperties::SLUG} !== null) {
                     /** @var string */
                     $taxonomyParentSlug = $taxonomyParentBy->{InputProperties::SLUG};
-                    $taxonomyParentID = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyParentSlug, $taxonomyData['taxonomy-name'] ?? '');                
+                    $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? '';
+                    $taxonomyParentID = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyParentSlug, $taxonomyName);                
                 }
             }
 
