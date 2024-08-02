@@ -52,6 +52,18 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
          *
          * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
          */
+        return static::getUserApplicationPasswordFromResponse($content);
+    }
+
+    /**
+     * Same as UserMetaKeys::APP_PASSWORD
+     *
+     * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
+     *
+     * @param array<string,mixed> $content
+     */
+    protected static function getUserApplicationPasswordFromResponse(array $content): string
+    {
         $userToLogin = static::getUserToLogin();
         return $content['app_password_' . $userToLogin] ?? $content['app_password'] ?? '';
     }
