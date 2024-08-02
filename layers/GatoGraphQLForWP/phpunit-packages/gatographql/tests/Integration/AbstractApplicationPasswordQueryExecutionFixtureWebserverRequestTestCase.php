@@ -63,7 +63,7 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
     }
 
     /**
-     * Same as UserMetaKeys::APP_PASSWORD
+     * Same as UserMetaKeys::APP_PASSWORD and the UserRole specific meta keys
      *
      * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
      *
@@ -72,7 +72,11 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
     protected static function getUserApplicationPasswordFromResponse(array $content): string
     {
         $userToLogin = static::getUserToLogin();
-        return $content['app_password_' . $userToLogin] ?? $content['app_password'] ?? '';
+        $appPasswordByUserRoleMetaKey = sprintf(
+            'app_password:%s',
+            $userToLogin
+        );        
+        return $content[$appPasswordByUserRoleMetaKey] ?? $content['app_password'] ?? '';
     }
 
     /**
