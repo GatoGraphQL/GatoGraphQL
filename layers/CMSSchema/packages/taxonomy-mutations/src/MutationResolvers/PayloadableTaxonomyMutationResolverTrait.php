@@ -47,6 +47,12 @@ trait PayloadableTaxonomyMutationResolverTrait
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new TaxonomyTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
@@ -54,6 +60,12 @@ trait PayloadableTaxonomyMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E8,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
             ] => new TaxonomyTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),

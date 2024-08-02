@@ -30,11 +30,22 @@ trait MutateCategoryTermMutationResolverTrait
     }
 
     protected function getTaxonomyTermDoesNotExistError(
+        ?string $taxonomyName,
         string|int $taxonomyTermID,
     ): FeedbackItemResolution {
+        if ($taxonomyName !== null) {
+            return new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
+                [
+                    $taxonomyName,
+                    $taxonomyTermID,
+                ]
+            );
+        }
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E7,
+            MutationErrorFeedbackItemProvider::E6,
             [
                 $taxonomyTermID,
             ]
@@ -42,8 +53,19 @@ trait MutateCategoryTermMutationResolverTrait
     }
 
     protected function getTaxonomyTermBySlugDoesNotExistError(
+        ?string $taxonomyName,
         string|int $taxonomyTermSlug,
     ): FeedbackItemResolution {
+        if ($taxonomyName !== null) {
+            return new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
+                [
+                    $taxonomyName,
+                    $taxonomyTermSlug,
+                ]
+            );
+        }
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E8,

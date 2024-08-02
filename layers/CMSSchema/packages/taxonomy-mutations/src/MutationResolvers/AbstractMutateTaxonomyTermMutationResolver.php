@@ -405,7 +405,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         if ($result === false) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getTaxonomyTermDoesNotExistError($taxonomyTermID),
+                    $this->getTaxonomyTermDoesNotExistError($taxonomyName, $taxonomyTermID),
                     $fieldDataAccessor->getField(),
                 )
             );

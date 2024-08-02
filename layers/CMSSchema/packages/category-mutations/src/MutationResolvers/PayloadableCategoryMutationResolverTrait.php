@@ -44,6 +44,12 @@ trait PayloadableCategoryMutationResolverTrait
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            ] => new CategoryTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new CategoryTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
@@ -51,6 +57,12 @@ trait PayloadableCategoryMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E8,
+            ] => new CategoryTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
             ] => new CategoryTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),

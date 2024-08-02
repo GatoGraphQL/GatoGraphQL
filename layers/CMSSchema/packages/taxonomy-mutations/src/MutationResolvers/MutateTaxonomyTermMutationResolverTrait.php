@@ -82,7 +82,7 @@ trait MutateTaxonomyTermMutationResolverTrait
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E6,
+                        MutationErrorFeedbackItemProvider::E4,
                     ),
                     $fieldDataAccessor->getField(),
                 )
@@ -99,7 +99,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermID, $taxonomyName ?? '')) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getTaxonomyTermDoesNotExistError($taxonomyTermID),
+                    $this->getTaxonomyTermDoesNotExistError($taxonomyName, $taxonomyTermID),
                     $fieldDataAccessor->getField(),
                 )
             );
@@ -107,11 +107,22 @@ trait MutateTaxonomyTermMutationResolverTrait
     }
 
     protected function getTaxonomyTermDoesNotExistError(
+        ?string $taxonomyName,
         string|int $taxonomyTermID,
     ): FeedbackItemResolution {
+        if ($taxonomyName !== null) {
+            return new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
+                [
+                    $taxonomyName,
+                    $taxonomyTermID,
+                ]
+            );
+        }
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E7,
+            MutationErrorFeedbackItemProvider::E6,
             [
                 $taxonomyTermID,
             ]
@@ -127,7 +138,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         if (!$this->getTaxonomyTermTypeAPI()->taxonomyTermExists($taxonomyTermSlug, $taxonomyName ?? '')) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getTaxonomyTermBySlugDoesNotExistError($taxonomyTermSlug),
+                    $this->getTaxonomyTermBySlugDoesNotExistError($taxonomyName, $taxonomyTermSlug),
                     $fieldDataAccessor->getField(),
                 )
             );
@@ -135,8 +146,19 @@ trait MutateTaxonomyTermMutationResolverTrait
     }
 
     protected function getTaxonomyTermBySlugDoesNotExistError(
+        ?string $taxonomyName,
         string|int $taxonomyTermSlug,
     ): FeedbackItemResolution {
+        if ($taxonomyName !== null) {
+            return new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
+                [
+                    $taxonomyName,
+                    $taxonomyTermSlug,
+                ]
+            );
+        }
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E8,
