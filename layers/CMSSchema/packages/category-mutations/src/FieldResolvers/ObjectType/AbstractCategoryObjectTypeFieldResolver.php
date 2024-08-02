@@ -153,6 +153,24 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     }
 
     /**
+     * Because "delete" receives no arguments, it doesn't
+     * know it needs to pass the "input" entry to the MutationResolver,
+     * so explicitly set it up then.
+     */
+    public function getFieldArgsInputObjectSubpropertyName(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldInterface $field,
+    ): ?string {
+        return match ($field->getName()) {
+            'delete' => 'input',
+            default => parent::getFieldArgsInputObjectSubpropertyName(
+                $objectTypeResolver,
+                $field,
+            ),
+        };
+    }
+
+    /**
      * @param array<string,mixed> $fieldArgsForMutationForObject
      * @return array<string,mixed>
      */
