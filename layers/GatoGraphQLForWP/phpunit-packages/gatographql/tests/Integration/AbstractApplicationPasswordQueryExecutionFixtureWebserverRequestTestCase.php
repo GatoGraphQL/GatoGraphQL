@@ -13,6 +13,13 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
 {
     use WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 
+    /**
+     * The app_password is also stored under this (non-admin) user.
+     *
+     * @see webservers/gatographql/setup/add-user-application-passwords.sh
+     */
+    public const USER_STORING_APP_PASSWORDS_IN_META_USER_ID = 2;    
+
     public const USER_ADMIN = 'admin';
     public const USER_EDITOR = 'editor';
     public const USER_AUTHOR = 'author';
@@ -68,15 +75,18 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         return $content['app_password_' . $userToLogin] ?? $content['app_password'] ?? '';
     }
 
+    /**
+     * The app_password is also stored under this (non-admin) user.
+     *
+     * @see webservers/gatographql/setup/add-user-application-passwords.sh
+     */
     protected static function getUserRESTEndpointURL(): string
     {
-        /**
-         * The app_password is also stored under this (non-admin) user.
-         *
-         * @see webservers/gatographql/setup/add-user-application-passwords.sh
-         */
-        $userID = 2;
-        return static::getWebserverHomeURL() . '/wp-json/wp/v2/users/' . $userID;
+        return sprintf(
+            '%s/wp-json/wp/v2/users/%s',
+            static::getWebserverHomeURL(),
+            self::USER_STORING_APP_PASSWORDS_IN_META_USER_ID
+        );
     }
 
     protected static function getApplicationPassword(): string
