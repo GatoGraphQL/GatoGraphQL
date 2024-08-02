@@ -7,10 +7,17 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
+use RuntimeException;
 
 abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
 {
     use WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
+
+    public const USER_ADMIN = 'admin';
+    public const USER_EDITOR = 'editor';
+    public const USER_AUTHOR = 'author';
+    public const USER_CONTRIBUTOR = 'contributor';
+    public const USER_SUBSCRIBER = 'subscriber';
 
     protected static string $applicationPassword;
 
@@ -45,7 +52,8 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
          *
          * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
          */
-        return $content['app_password'] ?? '';
+        $userToLogin = static::getUserToLogin();
+        return $content['app_password_' . $userToLogin] ?? $content['app_password'] ?? '';
     }
 
     protected static function getUserRESTEndpointURL(): string
@@ -63,8 +71,26 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
     {
         return sprintf(
             '%s:%s',
-            Environment::getIntegrationTestsAuthenticatedAdminUserUsername(),
+            static::getUsernameToLogin(),
             self::$applicationPassword
         );
+    }
+
+    protected static function getUsernameToLogin(): string
+    {
+        $userToLogin = static::getUserToLogin();
+        return match ($userToLogin) {
+            self::USER_ADMIN => Environment::getIntegrationTestsAuthenticatedAdminUserUsername(),
+            self::USER_EDITOR => Environment::getIntegrationTestsAuthenticatedEditorUserUsername(),
+            self::USER_AUTHOR => Environment::getIntegrationTestsAuthenticatedAuthorUserUsername(),
+            self::USER_CONTRIBUTOR => Environment::getIntegrationTestsAuthenticatedContributorUserUsername(),
+            self::USER_SUBSCRIBER => Environment::getIntegrationTestsAuthenticatedSubscriberUserUsername(),
+            default => throw new RuntimeException(sprintf('Unexpected user \'%s\'', $userToLogin)),
+        };
+    }
+
+    protected static function getUserToLogin(): string
+    {
+        return self::USER_ADMIN;
     }
 }
