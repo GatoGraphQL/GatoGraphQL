@@ -266,17 +266,16 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     }
 
     /**
-     * @param array<string,mixed> $taxonomyData
      * @return array<string,mixed>
      */
-    protected function addCreateOrUpdateTaxonomyTermData(array $taxonomyData, FieldDataAccessorInterface $fieldDataAccessor): array
+    protected function getCreateOrUpdateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::TAXONOMY)) {
-            $taxonomyData['taxonomy-name'] = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? '';
-        }
+        $taxonomyData = [];
+
         if ($fieldDataAccessor->hasValue(MutationInputProperties::NAME)) {
             $taxonomyData['name'] = $fieldDataAccessor->getValue(MutationInputProperties::NAME);
         }
+        
         if ($fieldDataAccessor->hasValue(MutationInputProperties::SLUG)) {
             $taxonomyData['slug'] = $fieldDataAccessor->getValue(MutationInputProperties::SLUG);
         }
@@ -320,10 +319,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
      */
     protected function getUpdateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = array(
-            'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
-        );
-        $taxonomyData = $this->addCreateOrUpdateTaxonomyTermData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(HookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
@@ -333,26 +329,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     /**
      * @return array<string,mixed>
      */
-    protected function getDeleteTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        $taxonomyData = array(
-            'id' => $fieldDataAccessor->getValue(MutationInputProperties::ID),
-        );
-        if ($fieldDataAccessor->hasValue(MutationInputProperties::TAXONOMY)) {
-            $taxonomyData['taxonomy-name'] = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? '';
-        }
-        return $taxonomyData;
-    }
-
-    /**
-     * @return array<string,mixed>
-     */
     protected function getCreateTaxonomyTermData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
-        $taxonomyData = [
-            'taxonomy' => $this->getTaxonomyName(),
-        ];
-        $taxonomyData = $this->addCreateOrUpdateTaxonomyTermData($taxonomyData, $fieldDataAccessor);
+        $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
 
         $taxonomyData = App::applyFilters(HookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
 
@@ -381,10 +360,10 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
-        $taxonomyData = $this->getUpdateTaxonomyTermData($fieldDataAccessor);
         /** @var string|int */
-        $taxonomyTermID = $taxonomyData['id'];
-        $taxonomyName = $taxonomyData['taxonomy-name'] ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+        $taxonomyData = $this->getUpdateTaxonomyTermData($fieldDataAccessor);
 
         $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
 
@@ -401,9 +380,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
      * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function executeCreateTaxonomyTerm(array $taxonomyData): string|int
+    protected function executeCreateTaxonomyTerm(string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getTaxonomyTypeMutationAPI()->createTaxonomyTerm($taxonomyData);
+        return $this->getTaxonomyTypeMutationAPI()->createTaxonomyTerm($taxonomyName, $taxonomyData);
     }
 
     /**
@@ -413,8 +392,9 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int {
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
         $taxonomyData = $this->getCreateTaxonomyTermData($fieldDataAccessor);
-        $taxonomyTermID = $this->executeCreateTaxonomyTerm($taxonomyData);
+        $taxonomyTermID = $this->executeCreateTaxonomyTerm($taxonomyName, $taxonomyData);
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
@@ -432,11 +412,10 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): bool {
-        $taxonomyData = $this->getDeleteTaxonomyTermData($fieldDataAccessor);
         /** @var string|int */
-        $taxonomyTermID = $taxonomyData['id'];
-        $taxonomyName = $taxonomyData['taxonomy-name'] ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
-
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+        
         $result = $this->executeDeleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
         if ($result === false) {
             $objectTypeFieldResolutionFeedbackStore->addError(

@@ -43,9 +43,9 @@ abstract class AbstractMutateCategoryTermMutationResolver extends AbstractMutate
      * @return string|int the ID of the created taxonomy
      * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    protected function executeCreateTaxonomyTerm(array $taxonomyData): string|int
+    protected function executeCreateTaxonomyTerm(string $taxonomyName, array $taxonomyData): string|int
     {
-        return $this->getCategoryTypeMutationAPI()->createCategoryTerm($taxonomyData);
+        return $this->getCategoryTypeMutationAPI()->createCategoryTerm($taxonomyName, $taxonomyData);
     }
 
     /**

@@ -17,7 +17,7 @@ interface CategoryTypeMutationAPIInterface extends TaxonomyTypeMutationAPIInterf
      * @return string|int the ID of the created category
      * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createCategoryTerm(array $data): string|int;
+    public function createCategoryTerm(string $taxonomyName, array $data): string|int;
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated category

@@ -21,9 +21,9 @@ class CategoryTypeMutationAPI extends TaxonomyTypeMutationAPI implements Categor
      * @return string|int the ID of the created category
      * @throws CategoryTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createCategoryTerm(array $data): string|int
+    public function createCategoryTerm(string $taxonomyName, array $data): string|int
     {
-        return $this->createTaxonomyTerm($data);
+        return $this->createTaxonomyTerm($taxonomyName, $data);
     }
 
     protected function createTaxonomyTermCRUDMutationException(WP_Error $wpError): TaxonomyTermCRUDMutationException

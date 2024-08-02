@@ -77,12 +77,11 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
      * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some Custom Post creation validation failed)
      */
-    public function createTaxonomyTerm(array $data): string|int
+    public function createTaxonomyTerm(string $taxonomyName, array $data): string|int
     {
         // Convert the parameters
         $data = $this->convertTaxonomiesMutationQuery($data);
         $taxonomyTermName = $data['name'] ?? '';
-        $taxonomyName = $data['taxonomy-name'] ?? '';
         $taxonomyDataOrError = wp_insert_term($taxonomyTermName, $taxonomyName, $data);
         if ($taxonomyDataOrError instanceof WP_Error) {
             /** @var WP_Error */

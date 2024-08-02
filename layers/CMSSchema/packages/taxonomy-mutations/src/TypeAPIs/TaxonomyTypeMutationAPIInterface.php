@@ -13,7 +13,7 @@ interface TaxonomyTypeMutationAPIInterface
      * @return string|int the ID of the created taxonomy
      * @throws TaxonomyTermCRUDMutationException If there was an error (eg: some taxonomy term creation validation failed)
      */
-    public function createTaxonomyTerm(array $data): string|int;
+    public function createTaxonomyTerm(string $taxonomyName, array $data): string|int;
     /**
      * @param array<string,mixed> $data
      * @return string|int the ID of the updated taxonomy
