@@ -6,18 +6,19 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Cookie\CookieJar;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\GuzzleException;
-// use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\RequestOptions;
+use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaderValues;
+use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaders;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
 use PHPUnitForGatoGraphQL\WebserverRequests\Exception\UnauthenticatedUserException;
 use PHPUnit\Framework\TestCase;
-use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaders;
-use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaderValues;
 use Psr\Http\Message\ResponseInterface;
-use RuntimeException;
 
+use RuntimeException;
 use function getenv;
 
 abstract class AbstractWebserverRequestTestCase extends TestCase
@@ -82,9 +83,11 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
             return;
         } catch (GuzzleException | RuntimeException $e) {
             // // The code produced a 500 error => bubble it up
-            // if ($e instanceof ServerException && $e->getCode() === 500) {
-            throw $e;
-            // }
+            if (($e instanceof ServerException && $e->getCode() === 500)
+                || $e instanceof ConnectException
+            ) {
+                throw $e;
+            }
         }
 
         // The webserver is down
