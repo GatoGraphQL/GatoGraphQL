@@ -73,11 +73,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     ): void {
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $this->validateIsUserLoggedIn(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         
@@ -95,6 +90,11 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
+
+        $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
         
         /** @var string|int $taxonomyTermID */
         
