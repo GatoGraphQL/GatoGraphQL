@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
+use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 
@@ -30,7 +31,9 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
     {
         $client = static::getClient();
         $endpointURL = static::getUserRESTEndpointURL();
-        $options = [];
+        $options = [
+            RequestOptions::VERIFY => false,
+        ];
         $response = $client->get(
             $endpointURL,
             $options,
