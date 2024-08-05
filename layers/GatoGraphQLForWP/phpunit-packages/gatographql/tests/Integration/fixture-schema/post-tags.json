@@ -515,6 +515,67 @@
                 "title": "Hello world!",
                 "tags": []
             }
-        ]
+        ],
+        "postsByTagByID": {
+            "count": 2,
+            "description": "",
+            "id": 15,
+            "metaValue": null,
+            "metaValues": null,
+            "name": "wordpress",
+            "postCount": 2,
+            "posts": [
+                {
+                    "id": 1119,
+                    "title": "Nested mutations are a must have"
+                },
+                {
+                    "id": 1116,
+                    "title": "Working on flat chain syntax next"
+                }
+            ],
+            "slug": "wordpress",
+            "url": "https:\/\/gatographql.lndo.site\/tag\/wordpress\/",
+            "urlPath": "\/tag\/wordpress\/"
+        },
+        "postsByTagBySlug": {
+            "count": 2,
+            "description": "",
+            "id": 15,
+            "metaValue": null,
+            "metaValues": null,
+            "name": "wordpress",
+            "postCount": 2,
+            "posts": [
+                {
+                    "id": 1119,
+                    "title": "Nested mutations are a must have"
+                },
+                {
+                    "id": 1116,
+                    "title": "Working on flat chain syntax next"
+                }
+            ],
+            "slug": "wordpress",
+            "url": "https:\/\/gatographql.lndo.site\/tag\/wordpress\/",
+            "urlPath": "\/tag\/wordpress\/"
+        },
+        "postTagCount": 11,
+        "postTagNames": [
+            "zoroastro",
+            "xcel",
+            "wordpress",
+            "Security",
+            "release",
+            "plugin",
+            "ideas",
+            "GraphQL",
+            "features",
+            "Also never used"
+        ],
+        "postsByTagByNonExistingID": null,
+        "postsByTagByNonExistingSlug": null,
+        "postsByTagByDifferentTaxonomyID": null,
+        "postsByTagByDifferentTaxonomySlug": null
     }
 }
