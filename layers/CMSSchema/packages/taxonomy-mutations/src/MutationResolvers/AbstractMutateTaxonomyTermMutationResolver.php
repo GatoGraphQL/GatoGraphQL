@@ -146,7 +146,12 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
         
-        /** @var string */
+        /**
+         * Notice that the GenericCategory and GenericTag will not
+         * provide a taxonomy name in the Resolver.
+         *
+         * @var string
+         */
         $taxonomyName = $this->getTaxonomyName();
         if ($taxonomyName === '') {
             $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
