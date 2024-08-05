@@ -68,18 +68,19 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        /** @var string */
+        /** @var string|null */
         $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-
-        /**
-         * Validate the taxonomy exists, even though in practice
-         * it will always exist (since the input is an Enum)
-         */
-        $this->validateTaxonomyExists(
-            $taxonomyName,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        if ($taxonomyName !== null) {
+            /**
+             * Validate the taxonomy exists, even though in practice
+             * it will always exist (since the input is an Enum)
+             */
+            $this->validateTaxonomyExists(
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
 
         $this->validateTaxonomyParent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
