@@ -88,6 +88,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
+        $taxonomyName ??= $this->getTaxonomyName();
+
         $this->validateCanLoggedInUserEditTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,
