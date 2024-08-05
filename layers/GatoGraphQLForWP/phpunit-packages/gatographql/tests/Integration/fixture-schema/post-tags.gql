@@ -101,6 +101,13 @@
   postsByTagByNonExistingSlug: postTag(by: { slug: "non-existing" }) {
     ...PostTagData
   }
+
+  postsByTagByDifferentTaxonomyID: postTag(by: { id: 25 }) {
+    ...PostTagData
+  }
+  postsByTagByDifferentTaxonomySlug: postTag(by: { slug: "classical" }) {
+    ...PostTagData
+  }
 }
 
 fragment PostTagData on PostTag {

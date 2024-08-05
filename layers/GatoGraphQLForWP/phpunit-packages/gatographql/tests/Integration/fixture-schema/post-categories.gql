@@ -110,6 +110,13 @@
   postsByCategoryByNonExistingSlug: postCategory(by: { slug: "non-existing" }) {
     ...PostCategoryData
   }
+
+  postsByCategoryByDifferentTaxonomyID: postCategory(by: { id: 19 }) {
+    ...PostCategoryData
+  }
+  postsByCategoryByDifferentTaxonomySlug: postCategory(by: { slug: "absolute-brilliance" }) {
+    ...PostCategoryData
+  }
 }
 
 fragment PostCategoryData on PostCategory {
