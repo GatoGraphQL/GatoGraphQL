@@ -155,6 +155,16 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         $taxonomyName = $this->getTaxonomyName();
         if ($taxonomyName === '') {
             $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+        } else {
+            /**
+             * Make sure the provided ID corresponds to the expected taxonomy
+             */
+            $this->validateTaxonomyTermByIDExists(
+                $taxonomyTermID,
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
         }
 
         $this->validateCanLoggedInUserEditTaxonomy(
