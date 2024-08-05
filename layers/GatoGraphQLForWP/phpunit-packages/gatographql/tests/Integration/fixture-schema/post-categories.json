@@ -859,6 +859,10 @@
             "Most special topic",
             "Blog",
             "Advanced"
-        ]
+        ],
+        "postsByCategoryByNonExistingID": null,
+        "postsByCategoryByNonExistingSlug": null,
+        "postsByCategoryByDifferentTaxonomyID": null,
+        "postsByCategoryByDifferentTaxonomySlug": null
     }
 }
