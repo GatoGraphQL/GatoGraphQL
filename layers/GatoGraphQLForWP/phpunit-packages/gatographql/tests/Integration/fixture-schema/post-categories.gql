@@ -103,6 +103,13 @@
   
   postCategoryCount
   postCategoryNames
+
+  postsByCategoryByNonExistingID: postCategory(by: { id: 8888 }) {
+    ...PostCategoryData
+  }
+  postsByCategoryByNonExistingSlug: postCategory(by: { slug: "non-existing" }) {
+    ...PostCategoryData
+  }
 }
 
 fragment PostCategoryData on PostCategory {

@@ -84,6 +84,23 @@
       slug
     }
   }
+
+  postsByTagByID: postTag(by: { id: 15 }) {
+    ...PostTagData
+  }
+  postsByTagBySlug: postTag(by: { slug: "wordpress" }) {
+    ...PostTagData
+  }
+  
+  postTagCount
+  postTagNames
+
+  postsByTagByNonExistingID: postTag(by: { id: 8888 }) {
+    ...PostTagData
+  }
+  postsByTagByNonExistingSlug: postTag(by: { slug: "non-existing" }) {
+    ...PostTagData
+  }
 }
 
 fragment PostTagData on PostTag {
