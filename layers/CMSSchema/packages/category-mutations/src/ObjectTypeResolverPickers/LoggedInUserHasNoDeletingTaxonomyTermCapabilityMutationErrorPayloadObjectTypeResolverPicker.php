@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoryMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractCategoryDeleteMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractRootDeleteCategoryMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractRootDeleteCategoryTermMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -17,7 +17,7 @@ class LoggedInUserHasNoDeletingTaxonomyTermCapabilityMutationErrorPayloadObjectT
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractRootDeleteCategoryMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootDeleteCategoryTermMutationErrorPayloadUnionTypeResolver::class,
             AbstractCategoryDeleteMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
