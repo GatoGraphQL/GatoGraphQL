@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType;
+
+use PoPCMSSchema\CategoryMutations\TypeResolvers\UnionType\AbstractCategoryMutationErrorPayloadUnionTypeResolver;
+
+abstract class AbstractPostCategoryUpdateMutationErrorPayloadUnionTypeResolver extends AbstractCategoryMutationErrorPayloadUnionTypeResolver
+{
+}

@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategoryMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CategoryMutations\ObjectTypeResolverPickers\AbstractCategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractPostCategoryMutationErrorPayloadUnionTypeResolver;
-use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractGenericErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class GenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPayloadObjectTypeResolverPicker
+class CategoryTermDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractCategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
@@ -17,7 +16,6 @@ class GenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPa
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver::class,
             AbstractPostCategoryMutationErrorPayloadUnionTypeResolver::class,
         ];
     }

@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\PostCategoryMutations\MutationResolvers;
+
+use PoPCMSSchema\CategoryMutations\MutationResolvers\PayloadableDeleteCategoryTermMutationResolverTrait;
+
+class PayloadableDeletePostCategoryTermMutationResolver extends AbstractMutatePostCategoryTermMutationResolver
+{
+    use PayloadableDeleteCategoryTermMutationResolverTrait;
+}
