@@ -110,7 +110,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         ?string $taxonomyName,
         string|int $taxonomyTermID,
     ): FeedbackItemResolution {
-        if ($taxonomyName !== null) {
+        if ($taxonomyName !== null && $taxonomyName !== '') {
             return new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
@@ -149,7 +149,7 @@ trait MutateTaxonomyTermMutationResolverTrait
         ?string $taxonomyName,
         string|int $taxonomyTermSlug,
     ): FeedbackItemResolution {
-        if ($taxonomyName !== null) {
+        if ($taxonomyName !== null && $taxonomyName !== '') {
             return new FeedbackItemResolution(
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E9,
