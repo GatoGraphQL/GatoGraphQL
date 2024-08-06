@@ -26,6 +26,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_PAGEMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-pagemedia-mutations';
     public final const SCHEMA_POSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-postmedia-mutations';
     public final const SCHEMA_CUSTOMPOST_USER_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-user-mutations';
+    public final const SCHEMA_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-tag-mutations';
     public final const SCHEMA_POST_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-post-tag-mutations';
     public final const SCHEMA_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-category-mutations';
     public final const SCHEMA_POST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-post-category-mutations';
@@ -67,6 +68,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_PAGEMEDIA_MUTATIONS,
             self::SCHEMA_POSTMEDIA_MUTATIONS,
             self::SCHEMA_CUSTOMPOST_USER_MUTATIONS,
+            self::SCHEMA_TAG_MUTATIONS,
             self::SCHEMA_POST_TAG_MUTATIONS,
             self::SCHEMA_CATEGORY_MUTATIONS,
             self::SCHEMA_POST_CATEGORY_MUTATIONS,
@@ -168,6 +170,9 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     [
                         self::SCHEMA_POST_MUTATIONS,
                     ],
+                    [
+                        self::SCHEMA_TAG_MUTATIONS,
+                    ],
                 ];
             case self::SCHEMA_POST_CATEGORY_MUTATIONS:
                 return [
@@ -206,6 +211,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Page Media Mutations', 'gatographql'),
             self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Post Media Mutations', 'gatographql'),
             self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Custom Post User Mutations', 'gatographql'),
+            self::SCHEMA_TAG_MUTATIONS => \__('Tag Mutations', 'gatographql'),
             self::SCHEMA_POST_TAG_MUTATIONS => \__('Post Tag Mutations', 'gatographql'),
             self::SCHEMA_CATEGORY_MUTATIONS => \__('Category Mutations', 'gatographql'),
             self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Post Category Mutations', 'gatographql'),
@@ -226,6 +232,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             self::SCHEMA_PAGEMEDIA_MUTATIONS => \__('Execute mutations concerning media items on pages', 'gatographql'),
             self::SCHEMA_POSTMEDIA_MUTATIONS => \__('Execute mutations concerning media items on posts', 'gatographql'),
             self::SCHEMA_CUSTOMPOST_USER_MUTATIONS => \__('Input user data when creating/updating custom posts', 'gatographql'),
+            self::SCHEMA_TAG_MUTATIONS => \__('Add tags', 'gatographql'),
             self::SCHEMA_POST_TAG_MUTATIONS => \__('Add tags to posts', 'gatographql'),
             self::SCHEMA_CATEGORY_MUTATIONS => \__('Add categories', 'gatographql'),
             self::SCHEMA_POST_CATEGORY_MUTATIONS => \__('Add categories to posts', 'gatographql'),
@@ -248,6 +255,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
             case self::SCHEMA_PAGEMEDIA_MUTATIONS:
             case self::SCHEMA_POSTMEDIA_MUTATIONS:
             case self::SCHEMA_CUSTOMPOST_USER_MUTATIONS:
+            case self::SCHEMA_TAG_MUTATIONS:
             case self::SCHEMA_POST_TAG_MUTATIONS:
             case self::SCHEMA_CATEGORY_MUTATIONS:
             case self::SCHEMA_POST_CATEGORY_MUTATIONS:
