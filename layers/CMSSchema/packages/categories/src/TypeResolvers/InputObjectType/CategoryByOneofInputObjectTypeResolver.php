@@ -10,6 +10,6 @@ class CategoryByOneofInputObjectTypeResolver extends AbstractCategoryByOneofInpu
 {
     public function getTypeName(): string
     {
-        return 'CategoryByInput';
+        return 'CategoryByFilterInput';
     }
 }

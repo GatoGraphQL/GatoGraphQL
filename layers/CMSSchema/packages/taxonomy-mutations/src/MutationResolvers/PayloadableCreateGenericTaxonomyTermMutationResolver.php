@@ -1,0 +1,12 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
+
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableCreateTaxonomyTermMutationResolverTrait;
+
+class PayloadableCreateGenericTaxonomyTermMutationResolver extends AbstractMutateGenericTaxonomyTermMutationResolver
+{
+    use PayloadableCreateTaxonomyTermMutationResolverTrait;
+}

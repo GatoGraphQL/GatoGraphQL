@@ -18,6 +18,7 @@
         "graphql-by-pop/graphql-server": "dev-master",
         "graphql-by-pop/graphql-voyager": "dev-master",
         "pop-api/api-rest": "dev-master",
+        "pop-cms-schema/category-mutations-wp": "dev-master",
         "pop-cms-schema/comment-mutations-wp": "dev-master",
         "pop-cms-schema/custompostmedia-mutations-wp": "dev-master",
         "pop-cms-schema/custompostmedia-wp": "dev-master",

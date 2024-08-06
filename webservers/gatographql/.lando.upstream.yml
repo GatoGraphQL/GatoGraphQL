@@ -65,6 +65,10 @@ services:
         - >-
           ../../layers/CMSSchema/packages/categories:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/categories
         - >-
+          ../../layers/CMSSchema/packages/category-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/category-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/category-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/category-mutations
+        - >-
           ../../layers/CMSSchema/packages/comment-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comment-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/comment-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/comment-mutations
@@ -182,6 +186,10 @@ services:
           ../../layers/CMSSchema/packages/taxonomyquery-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomyquery-wp
         - >-
           ../../layers/CMSSchema/packages/taxonomyquery:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomyquery
+        - >-
+          ../../layers/CMSSchema/packages/taxonomy-mutations-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomy-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/taxonomy-mutations:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomy-mutations
         - >-
           ../../layers/CMSSchema/packages/taxonomymeta-wp:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/taxonomymeta-wp
         - >-

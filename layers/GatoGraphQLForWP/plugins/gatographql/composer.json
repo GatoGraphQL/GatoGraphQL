@@ -23,6 +23,7 @@
         "graphql-by-pop/graphql-clients-for-wp": "^4.2",
         "graphql-by-pop/graphql-endpoint-for-wp": "^4.2",
         "graphql-by-pop/graphql-server": "^4.2",
+        "pop-cms-schema/category-mutations-wp": "^4.2",
         "pop-cms-schema/comment-mutations-wp": "^4.2",
         "pop-cms-schema/custompost-mutations-wp": "^4.2",
         "pop-cms-schema/custompost-user-mutations-wp": "^4.2",
@@ -96,7 +97,6 @@
         "pop-cms-schema/tags-wp": "<4.1.1",
         "pop-cms-schema/posts": "<4.1.1",
         "pop-cms-schema/custompost-tags-wp": "<4.1.1",
-        "pop-cms-schema/taxonomymeta-wp": "<4.1.1",
         "pop-cms-schema/custompost-category-mutations": "<4.1.1",
         "pop-cms-schema/taxonomymeta": "<4.1.1",
         "pop-cms-schema/media-wp": "<4.1.1",
@@ -165,7 +165,6 @@
         "pop-wp-schema/meta": "<4.1.1",
         "pop-wp-schema/schema-commons": "<4.1.1",
         "pop-wp-schema/block-content-parser": "<4.1.1",
-        "pop-cms-schema/comment-mutations": "<4.1.1",
         "pop-cms-schema/media-mutations": "<4.1.1",
         "pop-cms-schema/user-state-wp": "<4.1.1",
         "pop-cms-schema/page-mutations": "<4.1.1"

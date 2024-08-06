@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CategoryMutationsWP\TypeAPIs\CategoryTypeMutationAPI
+

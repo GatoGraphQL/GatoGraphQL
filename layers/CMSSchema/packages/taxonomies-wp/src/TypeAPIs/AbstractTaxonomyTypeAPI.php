@@ -224,7 +224,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         if (isset($query['slug'])) {
             // Same param name, so do nothing
         }
-        if ($this->isHierarchical() && isset($query['parent-id'])) {
+
+        /**
+         * If parent-id is `null` then remove the parent!
+         */
+        if ($this->isHierarchical() && array_key_exists('parent-id', $query)) {
             $query['parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }

@@ -31,6 +31,7 @@ class Module extends AbstractPluginModule
             \GraphQLByPoP\GraphQLServer\Module::class,
             \PoP\MandatoryDirectivesByConfiguration\Module::class,
             \PoP\GuzzleHTTP\Module::class,
+            \PoPCMSSchema\CategoryMutationsWP\Module::class,
             \PoPCMSSchema\CommentMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMediaMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMediaWP\Module::class,

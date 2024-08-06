@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 4.2.0 - DATE
 
+### Improvements
+
+- Added mutations for categories (#2764)
+
 ## 4.1.0 - 26/07/2024
 
 ### Improvements
