@@ -8,6 +8,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CategoryTermDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "Comment"
         },
         {
@@ -73,6 +77,10 @@
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -144,6 +152,14 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreateGenericCategoryTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreateGenericTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootCreateMediaItemMutationPayload"
         },
         {
@@ -152,7 +168,31 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreatePostCategoryTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootCreatePostMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreatePostTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteGenericCategoryTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteGenericTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeletePostCategoryTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeletePostTagTermMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -188,7 +228,19 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdateGenericCategoryTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateGenericTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootUpdatePageMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdatePostCategoryTermMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -196,7 +248,15 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdatePostTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "TagDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "TagTermDoesNotExistErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -404,6 +464,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CategoryByFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CategoryByInput"
         },
         {
@@ -588,7 +652,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "PostCategoryByInput"
+          "name": "PostCategoryByFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -600,7 +664,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "PostTagByInput"
+          "name": "PostTagByFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -620,7 +684,19 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreateCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCreateGenericCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCreateGenericTagInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -636,7 +712,27 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateTagInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCustomPostsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteGenericCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteGenericTagInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteTagInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -680,6 +776,14 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootPostCategoriesFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootPostTagsFilterInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootPostsFilterInput"
         },
         {
@@ -708,7 +812,19 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdateCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdateCustomPostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateGenericCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateGenericTagInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -717,6 +833,14 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootUpdatePostInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateTagInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TagByFilterInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -880,6 +1004,14 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreateGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreateMediaItemMutationErrorPayloadUnion"
         },
         {
@@ -888,7 +1020,31 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreatePostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreatePostTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeletePostTagTermMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -924,11 +1080,27 @@
         },
         {
           "kind": "UNION",
+          "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdatePageMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
+          "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdatePostMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdatePostTagTermMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",

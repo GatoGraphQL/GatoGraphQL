@@ -27,6 +27,27 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CategoryTermDoesNotExistErrorPayload",
+                    "extensions": {
+                        "elementName": "CategoryTermDoesNotExistErrorPayload",
+                        "namespacedName": "CategoryTermDoesNotExistErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "Comment",
                     "extensions": {
                         "elementName": "Comment",
@@ -1478,6 +1499,27 @@
                     "enumValues": null
                 },
                 {
+                    "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+                        "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
@@ -2103,6 +2145,42 @@
                             ]
                         },
                         {
+                            "name": "createCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2226,7 +2304,259 @@
                             ]
                         },
                         {
+                            "name": "createPostCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPostCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPostTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteTags",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -2450,6 +2780,42 @@
                             ]
                         },
                         {
+                            "name": "updateCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updateCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -2537,7 +2903,115 @@
                             ]
                         },
                         {
+                            "name": "updatePostCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePostCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePostTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateTags",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -5462,6 +5936,42 @@
                             ]
                         },
                         {
+                            "name": "createCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -5585,7 +6095,115 @@
                             ]
                         },
                         {
+                            "name": "createPostCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPostCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPostTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createPostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "createPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createTags",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -5668,6 +6286,150 @@
                                 },
                                 {
                                     "name": "sort",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -6850,6 +7612,42 @@
                             ]
                         },
                         {
+                            "name": "updateCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updateCustomPost",
                             "extensions": {
                                 "isMutation": true,
@@ -6937,7 +7735,115 @@
                             ]
                         },
                         {
+                            "name": "updatePostCategories",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePostCategory",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePostTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updatePostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateTag",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateTags",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -7109,6 +8015,96 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateGenericCategoryTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreateGenericCategoryTermMutationPayload",
+                        "namespacedName": "RootCreateGenericCategoryTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "category",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "categoryID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateGenericTagTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreateGenericTagTermMutationPayload",
+                        "namespacedName": "RootCreateGenericTagTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tag",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tagID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreateMediaItemMutationPayload",
                     "extensions": {
                         "elementName": "RootCreateMediaItemMutationPayload",
@@ -7199,6 +8195,51 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreatePostCategoryTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreatePostCategoryTermMutationPayload",
+                        "namespacedName": "RootCreatePostCategoryTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "category",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "categoryID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreatePostMutationPayload",
                     "extensions": {
                         "elementName": "RootCreatePostMutationPayload",
@@ -7225,6 +8266,167 @@
                         },
                         {
                             "name": "postID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreatePostTagTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreatePostTagTermMutationPayload",
+                        "namespacedName": "RootCreatePostTagTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tag",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tagID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteGenericCategoryTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeleteGenericCategoryTermMutationPayload",
+                        "namespacedName": "RootDeleteGenericCategoryTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteGenericTagTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeleteGenericTagTermMutationPayload",
+                        "namespacedName": "RootDeleteGenericTagTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostCategoryTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeletePostCategoryTermMutationPayload",
+                        "namespacedName": "RootDeletePostCategoryTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostTagTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeletePostTagTermMutationPayload",
+                        "namespacedName": "RootDeletePostTagTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -7604,6 +8806,96 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateGenericCategoryTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdateGenericCategoryTermMutationPayload",
+                        "namespacedName": "RootUpdateGenericCategoryTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "category",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "categoryID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateGenericTagTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdateGenericTagTermMutationPayload",
+                        "namespacedName": "RootUpdateGenericTagTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tag",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tagID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdatePageMutationPayload",
                     "extensions": {
                         "elementName": "RootUpdatePageMutationPayload",
@@ -7630,6 +8922,51 @@
                         },
                         {
                             "name": "pageID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdatePostCategoryTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdatePostCategoryTermMutationPayload",
+                        "namespacedName": "RootUpdatePostCategoryTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "category",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "categoryID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -7694,10 +9031,76 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdatePostTagTermMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdatePostTagTermMutationPayload",
+                        "namespacedName": "RootUpdatePostTagTermMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tag",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "tagID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "TagDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "TagDoesNotExistErrorPayload",
                         "namespacedName": "TagDoesNotExistErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "TagTermDoesNotExistErrorPayload",
+                    "extensions": {
+                        "elementName": "TagTermDoesNotExistErrorPayload",
+                        "namespacedName": "TagTermDoesNotExistErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -9889,6 +11292,31 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CategoryByFilterInput",
+                    "extensions": {
+                        "elementName": "CategoryByFilterInput",
+                        "namespacedName": "CategoryByFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "CategoryByInput",
                     "extensions": {
                         "elementName": "CategoryByInput",
@@ -11309,10 +12737,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "PostCategoryByInput",
+                    "name": "PostCategoryByFilterInput",
                     "extensions": {
-                        "elementName": "PostCategoryByInput",
-                        "namespacedName": "PostCategoryByInput",
+                        "elementName": "PostCategoryByFilterInput",
+                        "namespacedName": "PostCategoryByFilterInput",
                         "possibleValues": null,
                         "isOneOf": true
                     },
@@ -11378,10 +12806,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "PostTagByInput",
+                    "name": "PostTagByFilterInput",
                     "extensions": {
-                        "elementName": "PostTagByInput",
-                        "namespacedName": "PostTagByInput",
+                        "elementName": "PostTagByFilterInput",
+                        "namespacedName": "PostTagByFilterInput",
                         "possibleValues": null,
                         "isOneOf": true
                     },
@@ -11647,6 +13075,43 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateCategoryInput",
+                    "extensions": {
+                        "elementName": "RootCreateCategoryInput",
+                        "namespacedName": "RootCreateCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreateCustomPostInput",
                     "extensions": {
                         "elementName": "RootCreateCustomPostInput",
@@ -11700,6 +13165,92 @@
                         },
                         {
                             "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateGenericCategoryInput",
+                    "extensions": {
+                        "elementName": "RootCreateGenericCategoryInput",
+                        "namespacedName": "RootCreateGenericCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateGenericTagInput",
+                    "extensions": {
+                        "elementName": "RootCreateGenericTagInput",
+                        "namespacedName": "RootCreateGenericTagInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -11897,6 +13448,43 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateTagInput",
+                    "extensions": {
+                        "elementName": "RootCreateTagInput",
+                        "namespacedName": "RootCreateTagInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootCustomPostsFilterInput",
                     "extensions": {
                         "elementName": "RootCustomPostsFilterInput",
@@ -11974,6 +13562,94 @@
                         },
                         {
                             "name": "tags",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteCategoryInput",
+                    "extensions": {
+                        "elementName": "RootDeleteCategoryInput",
+                        "namespacedName": "RootDeleteCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteGenericCategoryInput",
+                    "extensions": {
+                        "elementName": "RootDeleteGenericCategoryInput",
+                        "namespacedName": "RootDeleteGenericCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteGenericTagInput",
+                    "extensions": {
+                        "elementName": "RootDeleteGenericTagInput",
+                        "namespacedName": "RootDeleteGenericTagInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteTagInput",
+                    "extensions": {
+                        "elementName": "RootDeleteTagInput",
+                        "namespacedName": "RootDeleteTagInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -12568,6 +14244,110 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootPostCategoriesFilterInput",
+                    "extensions": {
+                        "elementName": "RootPostCategoriesFilterInput",
+                        "namespacedName": "RootPostCategoriesFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "excludeIDs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "hideEmpty",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "ids",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "metaQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootPostTagsFilterInput",
+                    "extensions": {
+                        "elementName": "RootPostTagsFilterInput",
+                        "namespacedName": "RootPostTagsFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "excludeIDs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "hideEmpty",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "ids",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "metaQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "search",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slugs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootPostsFilterInput",
                     "extensions": {
                         "elementName": "RootPostsFilterInput",
@@ -12851,6 +14631,49 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateCategoryInput",
+                    "extensions": {
+                        "elementName": "RootUpdateCategoryInput",
+                        "namespacedName": "RootUpdateCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdateCustomPostInput",
                     "extensions": {
                         "elementName": "RootUpdateCustomPostInput",
@@ -12910,6 +14733,104 @@
                         },
                         {
                             "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateGenericCategoryInput",
+                    "extensions": {
+                        "elementName": "RootUpdateGenericCategoryInput",
+                        "namespacedName": "RootUpdateGenericCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateGenericTagInput",
+                    "extensions": {
+                        "elementName": "RootUpdateGenericTagInput",
+                        "namespacedName": "RootUpdateGenericTagInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "taxonomy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -13044,6 +14965,74 @@
                         },
                         {
                             "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateTagInput",
+                    "extensions": {
+                        "elementName": "RootUpdateTagInput",
+                        "namespacedName": "RootUpdateTagInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "TagByFilterInput",
+                    "extensions": {
+                        "elementName": "TagByFilterInput",
+                        "namespacedName": "TagByFilterInput",
+                        "possibleValues": null,
+                        "isOneOf": true
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -14785,6 +16774,30 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreateMediaItemMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootCreateMediaItemMutationErrorPayloadUnion",
@@ -14809,10 +16822,82 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreatePostMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootCreatePostMutationErrorPayloadUnion",
                         "namespacedName": "RootCreatePostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootCreatePostTagTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreatePostTagTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreatePostTagTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostTagTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeletePostTagTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeletePostTagTermMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -14917,6 +17002,30 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdatePageMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdatePageMutationErrorPayloadUnion",
@@ -14929,10 +17038,34 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdatePostMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootUpdatePostMutationErrorPayloadUnion",
                         "namespacedName": "RootUpdatePostMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdatePostTagTermMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdatePostTagTermMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdatePostTagTermMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },

@@ -44,6 +44,39 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CategoryTermDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested category does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "Comment",
           "description": "Comments added to custom posts",
           "fields": [
@@ -2803,6 +2836,39 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to edit taxonomy terms\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "description": "Error payload for: \"The logged-in user has no permission to edit the requested custom post\"",
           "fields": [
@@ -3936,6 +4002,98 @@
               "deprecationReason": null
             },
             {
+              "name": "createCategories",
+              "description": "Create categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateGenericCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateGenericCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateGenericCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateGenericCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateGenericCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateGenericCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateGenericCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createCategory",
+              "description": "Create a category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateGenericCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateGenericCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateGenericCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createCustomPost",
               "description": "Create a custom post. This mutation accepts the data that is common to all custom posts (title, content, excerpt, slug, etc), but no custom data (such as the price of a Product CPT). So use it with care, only for those custom post types that do not require to be provided data for their own custom fields (for those, you will need to use a more specific mutation, for that CPT)",
               "args": [
@@ -4243,6 +4401,190 @@
               "deprecationReason": null
             },
             {
+              "name": "createPostCategories",
+              "description": "Create post categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePostCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePostCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePostCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPostCategory",
+              "description": "Create a post category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreatePostCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreatePostCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPostTag",
+              "description": "Create a post tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreatePostTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreatePostTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPostTags",
+              "description": "Create post tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePostTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePostTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePostTagTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPosts",
               "description": "Create posts",
               "args": [
@@ -4295,6 +4637,466 @@
                     "ofType": {
                       "kind": "OBJECT",
                       "name": "RootCreatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createTag",
+              "description": "Create a tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateGenericTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateGenericTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateGenericTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createTags",
+              "description": "Create tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateGenericTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateGenericTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateGenericTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateGenericTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateGenericTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateGenericTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateGenericTagTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteCategories",
+              "description": "Delete categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteGenericCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteGenericCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteGenericCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteGenericCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeleteGenericCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeleteGenericCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeleteGenericCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteCategory",
+              "description": "Delete a category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteGenericCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeleteGenericCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeleteGenericCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostCategories",
+              "description": "Delete post categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeletePostCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeletePostCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeletePostCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeletePostCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostCategory",
+              "description": "Delete a post category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeletePostCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeletePostCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostTag",
+              "description": "Delete a post tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeletePostTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeletePostTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostTags",
+              "description": "Delete post tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeletePostTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeletePostTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeletePostTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeletePostTagTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteTag",
+              "description": "Delete a tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteGenericTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeleteGenericTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeleteGenericTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteTags",
+              "description": "Delete tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteGenericTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteGenericTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteGenericTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteGenericTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeleteGenericTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeleteGenericTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeleteGenericTagTermMutationPayload",
                       "ofType": null
                     }
                   }
@@ -4811,6 +5613,98 @@
               "deprecationReason": null
             },
             {
+              "name": "updateCategories",
+              "description": "Update categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateGenericCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateGenericCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateGenericCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateGenericCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateGenericCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateGenericCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateGenericCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateCategory",
+              "description": "Update a category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateGenericCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateGenericCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateGenericCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updateCustomPost",
               "description": "Update a custom post",
               "args": [
@@ -5026,6 +5920,190 @@
               "deprecationReason": null
             },
             {
+              "name": "updatePostCategories",
+              "description": "Update post categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePostCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePostCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePostCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePostCategory",
+              "description": "Update a post category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdatePostCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdatePostCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePostTag",
+              "description": "Update a post tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdatePostTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdatePostTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePostTags",
+              "description": "Update post tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePostTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePostTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePostTagTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePosts",
               "description": "Update posts",
               "args": [
@@ -5078,6 +6156,98 @@
                     "ofType": {
                       "kind": "OBJECT",
                       "name": "RootUpdatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateTag",
+              "description": "Update a tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateGenericTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateGenericTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateGenericTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateTags",
+              "description": "Update tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateGenericTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateGenericTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateGenericTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateGenericTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateGenericTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateGenericTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateGenericTagTermMutationPayload",
                       "ofType": null
                     }
                   }
@@ -7997,10 +9167,10 @@
                   "description": "Parameter by which to select the category",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "CategoryByInput!",
+                    "name": "CategoryByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "CategoryByInput",
+                      "name": "CategoryByFilterInput",
                       "ofType": null
                     }
                   },
@@ -9652,7 +10822,7 @@
                   "description": "Input to filter categories",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootCategoriesFilterInput",
+                    "name": "RootPostCategoriesFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -9707,10 +10877,10 @@
                   "description": "Oneof input to specify the property and data to fetch a category",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "PostCategoryByInput!",
+                    "name": "PostCategoryByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "PostCategoryByInput",
+                      "name": "PostCategoryByFilterInput",
                       "ofType": null
                     }
                   },
@@ -9734,7 +10904,7 @@
                   "description": "Input to filter categories",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootCategoriesFilterInput",
+                    "name": "RootPostCategoriesFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -9761,7 +10931,7 @@
                   "description": "Input to filter categories",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootCategoriesFilterInput",
+                    "name": "RootPostCategoriesFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -9843,10 +11013,10 @@
                   "description": "Oneof input to specify the property and data to fetch a tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "PostTagByInput!",
+                    "name": "PostTagByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "PostTagByInput",
+                      "name": "PostTagByFilterInput",
                       "ofType": null
                     }
                   },
@@ -9870,7 +11040,7 @@
                   "description": "Input to filter tags",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootTagsFilterInput",
+                    "name": "RootPostTagsFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -9897,7 +11067,7 @@
                   "description": "Input to filter tags",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootTagsFilterInput",
+                    "name": "RootPostTagsFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -9952,7 +11122,7 @@
                   "description": "Input to filter tags",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootTagsFilterInput",
+                    "name": "RootPostTagsFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -10188,10 +11358,10 @@
                   "description": "Parameter by which to select the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagByInput!",
+                    "name": "TagByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "TagByInput",
+                      "name": "TagByFilterInput",
                       "ofType": null
                     }
                   },
@@ -10719,10 +11889,10 @@
                   "description": "Parameter by which to select the category",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "CategoryByInput!",
+                    "name": "CategoryByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "CategoryByInput",
+                      "name": "CategoryByFilterInput",
                       "ofType": null
                     }
                   },
@@ -10973,6 +12143,98 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createCategories",
+              "description": "Create categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateGenericCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateGenericCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateGenericCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateGenericCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateGenericCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateGenericCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateGenericCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createCategory",
+              "description": "Create a category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateGenericCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateGenericCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateGenericCategoryTermMutationPayload",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,
@@ -11286,6 +12548,190 @@
               "deprecationReason": null
             },
             {
+              "name": "createPostCategories",
+              "description": "Create post categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePostCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePostCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePostCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPostCategory",
+              "description": "Create a post category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreatePostCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreatePostCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPostTag",
+              "description": "Create a post tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreatePostTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreatePostTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createPostTags",
+              "description": "Create post tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreatePostTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreatePostTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreatePostTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreatePostTagTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createPosts",
               "description": "Create posts",
               "args": [
@@ -11338,6 +12784,98 @@
                     "ofType": {
                       "kind": "OBJECT",
                       "name": "RootCreatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createTag",
+              "description": "Create a tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootCreateGenericTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootCreateGenericTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootCreateGenericTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createTags",
+              "description": "Create tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootCreateGenericTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootCreateGenericTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootCreateGenericTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootCreateGenericTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootCreateGenericTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootCreateGenericTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootCreateGenericTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootCreateGenericTagTermMutationPayload",
                       "ofType": null
                     }
                   }
@@ -11491,6 +13029,374 @@
                     "ofType": {
                       "kind": "UNION",
                       "name": "CustomPostUnion",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteCategories",
+              "description": "Delete categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteGenericCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteGenericCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteGenericCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteGenericCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeleteGenericCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeleteGenericCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeleteGenericCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteCategory",
+              "description": "Delete a category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteGenericCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeleteGenericCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeleteGenericCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostCategories",
+              "description": "Delete post categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeletePostCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeletePostCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeletePostCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeletePostCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostCategory",
+              "description": "Delete a post category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeletePostCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeletePostCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostTag",
+              "description": "Delete a post tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeletePostTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeletePostTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletePostTags",
+              "description": "Delete post tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeletePostTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeletePostTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeletePostTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeletePostTagTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteTag",
+              "description": "Delete a tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootDeleteGenericTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootDeleteGenericTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootDeleteGenericTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteTags",
+              "description": "Delete tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to delete a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootDeleteGenericTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootDeleteGenericTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootDeleteGenericTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootDeleteGenericTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootDeleteGenericTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootDeleteGenericTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootDeleteGenericTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootDeleteGenericTagTermMutationPayload",
                       "ofType": null
                     }
                   }
@@ -12789,7 +14695,7 @@
                   "description": "Input to filter categories",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootCategoriesFilterInput",
+                    "name": "RootPostCategoriesFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -12844,10 +14750,10 @@
                   "description": "Oneof input to specify the property and data to fetch a category",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "PostCategoryByInput!",
+                    "name": "PostCategoryByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "PostCategoryByInput",
+                      "name": "PostCategoryByFilterInput",
                       "ofType": null
                     }
                   },
@@ -12871,7 +14777,7 @@
                   "description": "Input to filter categories",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootCategoriesFilterInput",
+                    "name": "RootPostCategoriesFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -12898,7 +14804,7 @@
                   "description": "Input to filter categories",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootCategoriesFilterInput",
+                    "name": "RootPostCategoriesFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -12980,10 +14886,10 @@
                   "description": "Oneof input to specify the property and data to fetch a tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "PostTagByInput!",
+                    "name": "PostTagByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "PostTagByInput",
+                      "name": "PostTagByFilterInput",
                       "ofType": null
                     }
                   },
@@ -13007,7 +14913,7 @@
                   "description": "Input to filter tags",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootTagsFilterInput",
+                    "name": "RootPostTagsFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -13034,7 +14940,7 @@
                   "description": "Input to filter tags",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootTagsFilterInput",
+                    "name": "RootPostTagsFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -13089,7 +14995,7 @@
                   "description": "Input to filter tags",
                   "type": {
                     "kind": "INPUT_OBJECT",
-                    "name": "RootTagsFilterInput",
+                    "name": "RootPostTagsFilterInput",
                     "ofType": null
                   },
                   "defaultValue": null
@@ -13785,10 +15691,10 @@
                   "description": "Parameter by which to select the tag",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "TagByInput!",
+                    "name": "TagByFilterInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "TagByInput",
+                      "name": "TagByFilterInput",
                       "ofType": null
                     }
                   },
@@ -13977,6 +15883,98 @@
                       "ofType": null
                     }
                   }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateCategories",
+              "description": "Update categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateGenericCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateGenericCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateGenericCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateGenericCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateGenericCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateGenericCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateGenericCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateCategory",
+              "description": "Update a category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateGenericCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateGenericCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateGenericCategoryTermMutationPayload",
+                  "ofType": null
                 }
               },
               "isDeprecated": false,
@@ -14198,6 +16196,190 @@
               "deprecationReason": null
             },
             {
+              "name": "updatePostCategories",
+              "description": "Update post categories",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateCategoryInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateCategoryInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateCategoryInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateCategoryInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePostCategoryTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePostCategoryTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostCategoryTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePostCategoryTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePostCategory",
+              "description": "Update a post category",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a category term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateCategoryInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateCategoryInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdatePostCategoryTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdatePostCategoryTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePostTag",
+              "description": "Update a post tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdatePostTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdatePostTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatePostTags",
+              "description": "Update post tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdatePostTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdatePostTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdatePostTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdatePostTagTermMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePosts",
               "description": "Update posts",
               "args": [
@@ -14250,6 +16432,98 @@
                     "ofType": {
                       "kind": "OBJECT",
                       "name": "RootUpdatePostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateTag",
+              "description": "Update a tag",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericTagInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateGenericTagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateGenericTagTermMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateGenericTagTermMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateTags",
+              "description": "Update tags",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to create or update a tag term",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateGenericTagInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateGenericTagInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateGenericTagInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateGenericTagInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateGenericTagTermMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateGenericTagTermMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateGenericTagTermMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateGenericTagTermMutationPayload",
                       "ofType": null
                     }
                   }
@@ -14523,6 +16797,148 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreateGenericCategoryTermMutationPayload",
+          "description": "Payload of creating a category term",
+          "fields": [
+            {
+              "name": "category",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericCategory",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootCreateGenericCategoryTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreateGenericTagTermMutationPayload",
+          "description": "Payload of creating a tag term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootCreateGenericTagTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootCreateGenericTagTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tag",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericTag",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootCreateMediaItemMutationPayload",
           "description": "Payload of uploading an attachment",
           "fields": [
@@ -14665,6 +17081,77 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreatePostCategoryTermMutationPayload",
+          "description": "Payload of creating a post category term",
+          "fields": [
+            {
+              "name": "category",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PostCategory",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootCreatePostCategoryTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootCreatePostMutationPayload",
           "description": "Payload of creating a post",
           "fields": [
@@ -14708,6 +17195,265 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootCreatePostTagTermMutationPayload",
+          "description": "Payload of creating a post tag term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootCreatePostTagTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootCreatePostTagTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootCreatePostTagTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tag",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PostTag",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteGenericCategoryTermMutationPayload",
+          "description": "Payload of executing a delete mutation on a category term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootDeleteGenericCategoryTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteGenericTagTermMutationPayload",
+          "description": "Payload of executing a delete mutation on a tag term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootDeleteGenericTagTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeletePostCategoryTermMutationPayload",
+          "description": "Payload of executing a delete mutation on a post category term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootDeletePostCategoryTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeletePostTagTermMutationPayload",
+          "description": "Payload of executing a delete mutation on a post tag term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootDeletePostTagTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootDeletePostTagTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootDeletePostTagTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -15304,6 +18050,148 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdateGenericCategoryTermMutationPayload",
+          "description": "Payload of executing an update mutation on a category term",
+          "fields": [
+            {
+              "name": "category",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericCategory",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootUpdateGenericCategoryTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateGenericTagTermMutationPayload",
+          "description": "Payload of executing an update mutation on a tag term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootUpdateGenericTagTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tag",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericTag",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootUpdatePageMutationPayload",
           "description": "Payload of executing an update mutation on a page",
           "fields": [
@@ -15347,6 +18235,77 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdatePostCategoryTermMutationPayload",
+          "description": "Payload of executing an update mutation on a post category term",
+          "fields": [
+            {
+              "name": "category",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PostCategory",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "categoryID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootUpdatePostCategoryTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -15446,7 +18405,111 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdatePostTagTermMutationPayload",
+          "description": "Payload of executing an update mutation on a post tag term",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootUpdatePostTagTermMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootUpdatePostTagTermMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootUpdatePostTagTermMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tag",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "PostTag",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "tagID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "TagDoesNotExistErrorPayload",
+          "description": "Error payload for: \"The requested tag does not exist\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "TagTermDoesNotExistErrorPayload",
           "description": "Error payload for: \"The requested tag does not exist\"",
           "fields": [
             {
@@ -18817,6 +21880,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "CommentAuthorEmailIsMissingErrorPayload",
               "ofType": null
             },
@@ -18877,6 +21945,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
@@ -18903,6 +21976,11 @@
             {
               "kind": "OBJECT",
               "name": "TagDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -19602,7 +22680,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "CategoryByInput",
+          "name": "CategoryByFilterInput",
           "description": "Oneof input to specify the property and data to fetch a category",
           "fields": null,
           "inputFields": [
@@ -19619,6 +22697,37 @@
             {
               "name": "slug",
               "description": "Query by category slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "CategoryByInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "Input the parent category ID",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Input the parent category slug",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -21862,7 +24971,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "PostCategoryByInput",
+          "name": "PostCategoryByFilterInput",
           "description": "Oneof input to specify the property and data to fetch a category",
           "fields": null,
           "inputFields": [
@@ -21945,7 +25054,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "PostTagByInput",
+          "name": "PostTagByFilterInput",
           "description": "Oneof input to specify the property and data to fetch a tag",
           "fields": null,
           "inputFields": [
@@ -22480,6 +25589,61 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateCategoryInput",
+          "description": "Input to create a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the category",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The category's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoryByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreateCustomPostInput",
           "description": "Input to update a custom post",
           "fields": null,
@@ -22565,6 +25729,144 @@
                 "kind": "SCALAR",
                 "name": "String",
                 "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCreateGenericCategoryInput",
+          "description": "Input to create or update a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the category",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The category's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoryByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "CategoryTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "CategoryTaxonomyEnumString",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootCreateGenericTagInput",
+          "description": "Input to create or update a tag term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the tag",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The taxonomy's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "TagByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "TagTaxonomyEnumString!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "TagTaxonomyEnumString",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             }
@@ -22862,6 +26164,61 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateTagInput",
+          "description": "Input to create a tag term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the tag",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The taxonomy's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "TagByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCustomPostsFilterInput",
           "description": "Input to filter custom posts",
           "fields": null,
@@ -23031,6 +26388,126 @@
                 "kind": "INPUT_OBJECT",
                 "name": "FilterCustomPostsByTagsInput",
                 "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteCategoryInput",
+          "description": "Input to delete a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "The ID of the category to delete",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteGenericCategoryInput",
+          "description": "Input to delete a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "The ID of the category to delete",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "CategoryTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteGenericTagInput",
+          "description": "Input to delete a tag term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "The ID of the tag to delete",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "TagTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteTagInput",
+          "description": "Input to delete a tag term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "The ID of the tag to delete",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             }
@@ -24303,6 +27780,230 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootPostCategoriesFilterInput",
+          "description": "Input to filter categories",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeIDs",
+              "description": "Exclude elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "hideEmpty",
+              "description": "Hide empty taxonomies terms?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
+            },
+            {
+              "name": "ids",
+              "description": "Limit results to elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "metaQuery",
+              "description": "Filter elements by meta key and value",
+              "type": {
+                "kind": "LIST",
+                "name": "[TaxonomyMetaQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "TaxonomyMetaQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomyMetaQueryInput",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentID",
+              "description": "Limit results to taxonomies with the given parent ID. '0' means 'no parent'",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "search",
+              "description": "Search for taxonomies containing the given string",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slugs",
+              "description": "Search for taxonomies with the given slugs",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootPostTagsFilterInput",
+          "description": "Input to filter tags",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "excludeIDs",
+              "description": "Exclude elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "hideEmpty",
+              "description": "Hide empty taxonomies terms?",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "Boolean!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              },
+              "defaultValue": "false"
+            },
+            {
+              "name": "ids",
+              "description": "Limit results to elements with the given IDs",
+              "type": {
+                "kind": "LIST",
+                "name": "[ID!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "ID!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "metaQuery",
+              "description": "Filter elements by meta key and value",
+              "type": {
+                "kind": "LIST",
+                "name": "[TaxonomyMetaQueryInput!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "TaxonomyMetaQueryInput!",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "TaxonomyMetaQueryInput",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "search",
+              "description": "Search for taxonomies containing the given string",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slugs",
+              "description": "Search for taxonomies with the given slugs",
+              "type": {
+                "kind": "LIST",
+                "name": "[String!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "String!",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootPostsFilterInput",
           "description": "Input to filter posts",
           "fields": null,
@@ -24820,6 +28521,71 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdateCategoryInput",
+          "description": "Input to update a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the category to update",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The category's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoryByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdateCustomPostInput",
           "description": "Input to update a custom post",
           "fields": null,
@@ -24918,6 +28684,156 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateGenericCategoryInput",
+          "description": "Input to create or update a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the category to update",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The category's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoryByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "CategoryTaxonomyEnumString",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateGenericTagInput",
+          "description": "Input to create or update a tag term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the tag to update",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The taxonomy's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "TagByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "taxonomy",
+              "description": "The taxonomy",
+              "type": {
+                "kind": "SCALAR",
+                "name": "TagTaxonomyEnumString",
                 "ofType": null
               },
               "defaultValue": null
@@ -25139,7 +29055,72 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "TagByInput",
+          "name": "RootUpdateTagInput",
+          "description": "Input to update a tag term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the tag to update",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The taxonomy's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "TagByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the tag",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TagByFilterInput",
           "description": "Oneof input to specify the property and data to fetch a tag",
           "fields": null,
           "inputFields": [
@@ -25156,6 +29137,37 @@
             {
               "name": "slug",
               "description": "Query by tag slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "TagByInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "Input the parent tag ID",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Input the parent tag slug",
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
@@ -27352,6 +31364,68 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when creating a category term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when creating a tag term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreateMediaItemMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when uploading an attachment",
           "fields": null,
@@ -27444,6 +31518,37 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when creating a post category term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootCreatePostMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when creating a post",
           "fields": null,
@@ -27484,6 +31589,161 @@
             {
               "kind": "OBJECT",
               "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootCreatePostTagTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when creating a post tag term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when deleting a category term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when deleting a tag term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when deleting a post category term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeletePostTagTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when deleting a post tag term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
@@ -27818,6 +32078,68 @@
         },
         {
           "kind": "UNION",
+          "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a category term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a tag term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdatePageMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when updating a page",
           "fields": null,
@@ -27879,6 +32201,37 @@
         },
         {
           "kind": "UNION",
+          "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a post category term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CategoryTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
           "name": "RootUpdatePostMutationErrorPayloadUnion",
           "description": "Union of 'Error Payload' types when updating a post",
           "fields": null,
@@ -27929,6 +32282,37 @@
             {
               "kind": "OBJECT",
               "name": "UserDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdatePostTagTermMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating a post tag term",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "TagTermDoesNotExistErrorPayload",
               "ofType": null
             },
             {
