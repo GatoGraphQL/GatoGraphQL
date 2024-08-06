@@ -29,6 +29,7 @@ class Module extends AbstractModule
             \PoPCMSSchema\CustomPostMutationsWP\Module::class,
             \PoPCMSSchema\PostTagsWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
+            \PoPCMSSchema\TagMutationsWP\Module::class,
         ];
     }
 

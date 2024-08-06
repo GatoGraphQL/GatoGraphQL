@@ -46,6 +46,7 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\PostTagMutationsWP\Module::class,
             \PoPCMSSchema\PostTagsWP\Module::class,
             \PoPCMSSchema\SettingsWP\Module::class,
+            \PoPCMSSchema\TagMutationsWP\Module::class,
             \PoPCMSSchema\TaxonomyQueryWP\Module::class,
             \PoPCMSSchema\UserAvatarsWP\Module::class,
             \PoPCMSSchema\UserRolesWP\Module::class,

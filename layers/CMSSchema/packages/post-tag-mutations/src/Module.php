@@ -23,6 +23,7 @@ class Module extends AbstractModule
             \PoPCMSSchema\CustomPostTagMutations\Module::class,
             \PoPCMSSchema\PostMutations\Module::class,
             \PoPCMSSchema\PostTags\Module::class,
+            \PoPCMSSchema\TagMutations\Module::class,
         ];
     }
 

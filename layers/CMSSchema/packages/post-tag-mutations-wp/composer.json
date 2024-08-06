@@ -150,6 +150,7 @@
         "pop-cms-schema/custompost-mutations-wp": "^4.2",
         "pop-cms-schema/post-tag-mutations": "^4.2",
         "pop-cms-schema/post-tags-wp": "^4.2",
+        "pop-cms-schema/tag-mutations-wp": "^4.2",
         "pop-cms-schema/user-state-mutations-wp": "^4.2"
     },
     "require-dev": {

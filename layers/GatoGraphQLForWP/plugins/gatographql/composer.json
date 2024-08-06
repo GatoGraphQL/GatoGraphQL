@@ -39,6 +39,7 @@
         "pop-cms-schema/post-tags-wp": "^4.2",
         "pop-cms-schema/postmedia-mutations": "^4.2",
         "pop-cms-schema/settings-wp": "^4.2",
+        "pop-cms-schema/tag-mutations-wp": "^4.2",
         "pop-cms-schema/taxonomyquery-wp": "^4.2",
         "pop-cms-schema/user-avatars-wp": "^4.2",
         "pop-cms-schema/user-roles-wp": "^4.2",
