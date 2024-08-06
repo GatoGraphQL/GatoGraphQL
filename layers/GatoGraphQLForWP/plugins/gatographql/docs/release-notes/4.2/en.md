@@ -251,7 +251,7 @@ mutation CreateUpdateDeleteTags {
 
   updateTag(input: {
     id: 1
-    taxonomy: "some-cat-taxonomy"
+    taxonomy: "some-tag-taxonomy"
     name: "Some updated name"
     slug: "Some updated slug"
     description: "Some updated description"
@@ -270,7 +270,7 @@ mutation CreateUpdateDeleteTags {
 
   deleteTag(input: {
     id: 1
-    taxonomy: "some-cat-taxonomy"
+    taxonomy: "some-tag-taxonomy"
   }) {
     status
     errors {
