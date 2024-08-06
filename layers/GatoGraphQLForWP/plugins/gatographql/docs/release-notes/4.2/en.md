@@ -224,9 +224,6 @@ fragment PostTagData on PostTag {
   name
   slug
   description
-  parent {
-    id
-  }
 }
 ```
 
@@ -290,8 +287,5 @@ fragment TagData on Tag {
   name
   slug
   description
-  parent {
-    id
-  }
 }
 ```
