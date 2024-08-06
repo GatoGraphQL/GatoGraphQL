@@ -292,7 +292,6 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             if ($taxonomyParentBy === null) {
                 $taxonomyData['parent-id'] = null;
             } elseif (property_exists($taxonomyParentBy, InputProperties::ID)) {
-                /** @var string|int|null */
                 $taxonomyData['parent-id'] = $taxonomyParentBy->{InputProperties::ID};
             } elseif (property_exists($taxonomyParentBy, InputProperties::SLUG)) {
                 /** @var string|null */
