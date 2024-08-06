@@ -171,6 +171,10 @@ services:
           ../../layers/CMSSchema/packages/tags-wp:/app/vendor/pop-cms-schema/tags-wp
         - '../../layers/CMSSchema/packages/tags:/app/vendor/pop-cms-schema/tags'
         - >-
+          ../../layers/CMSSchema/packages/tag-mutations-wp:/app/vendor/pop-cms-schema/tag-mutations-wp
+        - >-
+          ../../layers/CMSSchema/packages/tag-mutations:/app/vendor/pop-cms-schema/tag-mutations
+        - >-
           ../../layers/CMSSchema/packages/taxonomies-wp:/app/vendor/pop-cms-schema/taxonomies-wp
         - >-
           ../../layers/CMSSchema/packages/taxonomies:/app/vendor/pop-cms-schema/taxonomies

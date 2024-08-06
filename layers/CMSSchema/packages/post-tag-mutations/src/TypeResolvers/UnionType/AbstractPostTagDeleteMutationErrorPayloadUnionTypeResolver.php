@@ -1,0 +1,11 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\PostTagMutations\TypeResolvers\UnionType;
+
+use PoPCMSSchema\TagMutations\TypeResolvers\UnionType\AbstractTagMutationErrorPayloadUnionTypeResolver;
+
+abstract class AbstractPostTagDeleteMutationErrorPayloadUnionTypeResolver extends AbstractTagMutationErrorPayloadUnionTypeResolver
+{
+}

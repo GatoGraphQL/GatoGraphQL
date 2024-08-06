@@ -33,6 +33,7 @@
         "pop-cms-schema/post-tags-wp": "dev-master",
         "pop-cms-schema/postmedia-mutations": "dev-master",
         "pop-cms-schema/settings-wp": "dev-master",
+        "pop-cms-schema/tag-mutations-wp": "dev-master",
         "pop-cms-schema/taxonomyquery-wp": "dev-master",
         "pop-cms-schema/user-avatars-wp": "dev-master",
         "pop-cms-schema/user-roles-wp": "dev-master",

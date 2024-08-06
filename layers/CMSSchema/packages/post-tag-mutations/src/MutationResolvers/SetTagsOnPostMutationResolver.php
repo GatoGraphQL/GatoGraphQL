@@ -12,21 +12,21 @@ use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 
 class SetTagsOnPostMutationResolver extends AbstractSetTagsOnCustomPostMutationResolver
 {
-    private ?PostTagTypeMutationAPIInterface $postCategoryTypeMutationAPIInterface = null;
+    private ?PostTagTypeMutationAPIInterface $postTagTypeMutationAPIInterface = null;
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
-    final public function setPostTagTypeMutationAPI(PostTagTypeMutationAPIInterface $postCategoryTypeMutationAPIInterface): void
+    final public function setPostTagTypeMutationAPI(PostTagTypeMutationAPIInterface $postTagTypeMutationAPIInterface): void
     {
-        $this->postCategoryTypeMutationAPIInterface = $postCategoryTypeMutationAPIInterface;
+        $this->postTagTypeMutationAPIInterface = $postTagTypeMutationAPIInterface;
     }
     final protected function getPostTagTypeMutationAPI(): PostTagTypeMutationAPIInterface
     {
-        if ($this->postCategoryTypeMutationAPIInterface === null) {
+        if ($this->postTagTypeMutationAPIInterface === null) {
             /** @var PostTagTypeMutationAPIInterface */
-            $postCategoryTypeMutationAPIInterface = $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
-            $this->postCategoryTypeMutationAPIInterface = $postCategoryTypeMutationAPIInterface;
+            $postTagTypeMutationAPIInterface = $this->instanceManager->getInstance(PostTagTypeMutationAPIInterface::class);
+            $this->postTagTypeMutationAPIInterface = $postTagTypeMutationAPIInterface;
         }
-        return $this->postCategoryTypeMutationAPIInterface;
+        return $this->postTagTypeMutationAPIInterface;
     }
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {

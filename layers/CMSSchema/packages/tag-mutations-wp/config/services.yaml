@@ -1,0 +1,9 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPCMSSchema\TagMutations\TypeAPIs\TagTypeMutationAPIInterface:
+        class: \PoPCMSSchema\TagMutationsWP\TypeAPIs\TagTypeMutationAPI
+
