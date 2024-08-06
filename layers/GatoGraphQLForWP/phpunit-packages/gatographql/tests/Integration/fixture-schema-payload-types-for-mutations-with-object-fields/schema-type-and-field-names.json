@@ -11,6 +11,14 @@
           ]
         },
         {
+          "name": "CategoryTermDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
           "name": "Comment",
           "fields": [
             {
@@ -417,6 +425,14 @@
           ]
         },
         {
+          "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "fields": [
             {
@@ -611,6 +627,12 @@
               "name": "addCommentToCustomPosts"
             },
             {
+              "name": "createCategories"
+            },
+            {
+              "name": "createCategory"
+            },
+            {
               "name": "createCustomPost"
             },
             {
@@ -632,7 +654,49 @@
               "name": "createPost"
             },
             {
+              "name": "createPostCategories"
+            },
+            {
+              "name": "createPostCategory"
+            },
+            {
+              "name": "createPostTag"
+            },
+            {
+              "name": "createPostTags"
+            },
+            {
               "name": "createPosts"
+            },
+            {
+              "name": "createTag"
+            },
+            {
+              "name": "createTags"
+            },
+            {
+              "name": "deleteCategories"
+            },
+            {
+              "name": "deleteCategory"
+            },
+            {
+              "name": "deletePostCategories"
+            },
+            {
+              "name": "deletePostCategory"
+            },
+            {
+              "name": "deletePostTag"
+            },
+            {
+              "name": "deletePostTags"
+            },
+            {
+              "name": "deleteTag"
+            },
+            {
+              "name": "deleteTags"
             },
             {
               "name": "loginUser"
@@ -671,6 +735,12 @@
               "name": "setTagsOnPosts"
             },
             {
+              "name": "updateCategories"
+            },
+            {
+              "name": "updateCategory"
+            },
+            {
               "name": "updateCustomPost"
             },
             {
@@ -686,7 +756,25 @@
               "name": "updatePost"
             },
             {
+              "name": "updatePostCategories"
+            },
+            {
+              "name": "updatePostCategory"
+            },
+            {
+              "name": "updatePostTag"
+            },
+            {
+              "name": "updatePostTags"
+            },
+            {
               "name": "updatePosts"
+            },
+            {
+              "name": "updateTag"
+            },
+            {
+              "name": "updateTags"
             }
           ]
         },
@@ -1324,6 +1412,12 @@
               "name": "comments"
             },
             {
+              "name": "createCategories"
+            },
+            {
+              "name": "createCategory"
+            },
+            {
               "name": "createCustomPost"
             },
             {
@@ -1354,10 +1448,28 @@
               "name": "createPost"
             },
             {
+              "name": "createPostCategories"
+            },
+            {
+              "name": "createPostCategory"
+            },
+            {
               "name": "createPostMutationPayloadObjects"
             },
             {
+              "name": "createPostTag"
+            },
+            {
+              "name": "createPostTags"
+            },
+            {
               "name": "createPosts"
+            },
+            {
+              "name": "createTag"
+            },
+            {
+              "name": "createTags"
             },
             {
               "name": "customPost"
@@ -1367,6 +1479,30 @@
             },
             {
               "name": "customPosts"
+            },
+            {
+              "name": "deleteCategories"
+            },
+            {
+              "name": "deleteCategory"
+            },
+            {
+              "name": "deletePostCategories"
+            },
+            {
+              "name": "deletePostCategory"
+            },
+            {
+              "name": "deletePostTag"
+            },
+            {
+              "name": "deletePostTags"
+            },
+            {
+              "name": "deleteTag"
+            },
+            {
+              "name": "deleteTags"
             },
             {
               "name": "globalID"
@@ -1582,6 +1718,12 @@
               "name": "tags"
             },
             {
+              "name": "updateCategories"
+            },
+            {
+              "name": "updateCategory"
+            },
+            {
               "name": "updateCustomPost"
             },
             {
@@ -1603,10 +1745,28 @@
               "name": "updatePost"
             },
             {
+              "name": "updatePostCategories"
+            },
+            {
+              "name": "updatePostCategory"
+            },
+            {
               "name": "updatePostMutationPayloadObjects"
             },
             {
+              "name": "updatePostTag"
+            },
+            {
+              "name": "updatePostTags"
+            },
+            {
               "name": "updatePosts"
+            },
+            {
+              "name": "updateTag"
+            },
+            {
+              "name": "updateTags"
             },
             {
               "name": "user"
@@ -1654,6 +1814,40 @@
           ]
         },
         {
+          "name": "RootCreateGenericCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreateGenericTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ]
+        },
+        {
           "name": "RootCreateMediaItemMutationPayload",
           "fields": [
             {
@@ -1688,6 +1882,23 @@
           ]
         },
         {
+          "name": "RootCreatePostCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
           "name": "RootCreatePostMutationPayload",
           "fields": [
             {
@@ -1698,6 +1909,67 @@
             },
             {
               "name": "postID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootCreatePostTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ]
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootDeleteGenericTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootDeletePostCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootDeletePostTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
             },
             {
               "name": "status"
@@ -1841,6 +2113,40 @@
           ]
         },
         {
+          "name": "RootUpdateGenericCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdateGenericTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ]
+        },
+        {
           "name": "RootUpdatePageMutationPayload",
           "fields": [
             {
@@ -1851,6 +2157,23 @@
             },
             {
               "name": "pageID"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdatePostCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
             },
             {
               "name": "status"
@@ -1875,7 +2198,32 @@
           ]
         },
         {
+          "name": "RootUpdatePostTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ]
+        },
+        {
           "name": "TagDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "TagTermDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -2583,6 +2931,10 @@
           "fields": null
         },
         {
+          "name": "CategoryByFilterInput",
+          "fields": null
+        },
+        {
           "name": "CategoryByInput",
           "fields": null
         },
@@ -2771,7 +3123,7 @@
           "fields": null
         },
         {
-          "name": "PostCategoryByInput",
+          "name": "PostCategoryByFilterInput",
           "fields": null
         },
         {
@@ -2783,7 +3135,7 @@
           "fields": null
         },
         {
-          "name": "PostTagByInput",
+          "name": "PostTagByFilterInput",
           "fields": null
         },
         {
@@ -2803,7 +3155,19 @@
           "fields": null
         },
         {
+          "name": "RootCreateCategoryInput",
+          "fields": null
+        },
+        {
           "name": "RootCreateCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootCreateGenericCategoryInput",
+          "fields": null
+        },
+        {
+          "name": "RootCreateGenericTagInput",
           "fields": null
         },
         {
@@ -2819,7 +3183,27 @@
           "fields": null
         },
         {
+          "name": "RootCreateTagInput",
+          "fields": null
+        },
+        {
           "name": "RootCustomPostsFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootDeleteCategoryInput",
+          "fields": null
+        },
+        {
+          "name": "RootDeleteGenericCategoryInput",
+          "fields": null
+        },
+        {
+          "name": "RootDeleteGenericTagInput",
+          "fields": null
+        },
+        {
+          "name": "RootDeleteTagInput",
           "fields": null
         },
         {
@@ -2863,6 +3247,14 @@
           "fields": null
         },
         {
+          "name": "RootPostCategoriesFilterInput",
+          "fields": null
+        },
+        {
+          "name": "RootPostTagsFilterInput",
+          "fields": null
+        },
+        {
           "name": "RootPostsFilterInput",
           "fields": null
         },
@@ -2891,7 +3283,19 @@
           "fields": null
         },
         {
+          "name": "RootUpdateCategoryInput",
+          "fields": null
+        },
+        {
           "name": "RootUpdateCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateGenericCategoryInput",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateGenericTagInput",
           "fields": null
         },
         {
@@ -2900,6 +3304,14 @@
         },
         {
           "name": "RootUpdatePostInput",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateTagInput",
+          "fields": null
+        },
+        {
+          "name": "TagByFilterInput",
           "fields": null
         },
         {
@@ -3063,6 +3475,14 @@
           "fields": null
         },
         {
+          "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
           "name": "RootCreateMediaItemMutationErrorPayloadUnion",
           "fields": null
         },
@@ -3071,7 +3491,31 @@
           "fields": null
         },
         {
+          "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
           "name": "RootCreatePostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootCreatePostTagTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootDeletePostTagTermMutationErrorPayloadUnion",
           "fields": null
         },
         {
@@ -3107,11 +3551,27 @@
           "fields": null
         },
         {
+          "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
           "name": "RootUpdatePageMutationErrorPayloadUnion",
           "fields": null
         },
         {
+          "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
           "name": "RootUpdatePostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdatePostTagTermMutationErrorPayloadUnion",
           "fields": null
         },
         {

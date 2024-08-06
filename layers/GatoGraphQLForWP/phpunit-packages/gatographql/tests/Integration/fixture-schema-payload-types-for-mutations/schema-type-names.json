@@ -3,6 +3,9 @@
     "__schema": {
       "types": [
         {
+          "name": "CategoryTermDoesNotExistErrorPayload"
+        },
+        {
           "name": "Comment"
         },
         {
@@ -15,7 +18,13 @@
           "name": "GenericCustomPost"
         },
         {
+          "name": "GenericErrorPayload"
+        },
+        {
           "name": "GenericTag"
+        },
+        {
+          "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload"
         },
         {
           "name": "Media"
@@ -48,10 +57,52 @@
           "name": "Root"
         },
         {
+          "name": "RootCreateGenericCategoryTermMutationPayload"
+        },
+        {
+          "name": "RootCreateGenericTagTermMutationPayload"
+        },
+        {
+          "name": "RootCreatePostCategoryTermMutationPayload"
+        },
+        {
+          "name": "RootCreatePostTagTermMutationPayload"
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMutationPayload"
+        },
+        {
+          "name": "RootDeleteGenericTagTermMutationPayload"
+        },
+        {
+          "name": "RootDeletePostCategoryTermMutationPayload"
+        },
+        {
+          "name": "RootDeletePostTagTermMutationPayload"
+        },
+        {
+          "name": "RootUpdateGenericCategoryTermMutationPayload"
+        },
+        {
+          "name": "RootUpdateGenericTagTermMutationPayload"
+        },
+        {
+          "name": "RootUpdatePostCategoryTermMutationPayload"
+        },
+        {
+          "name": "RootUpdatePostTagTermMutationPayload"
+        },
+        {
+          "name": "TagTermDoesNotExistErrorPayload"
+        },
+        {
           "name": "User"
         },
         {
           "name": "UserAvatar"
+        },
+        {
+          "name": "UserIsNotLoggedInErrorPayload"
         },
         {
           "name": "UserRole"
@@ -156,6 +207,9 @@
           "name": "CustomPost"
         },
         {
+          "name": "ErrorPayload"
+        },
+        {
           "name": "IdentifiableObject"
         },
         {
@@ -181,6 +235,9 @@
         },
         {
           "name": "CategoriesByInput"
+        },
+        {
+          "name": "CategoryByFilterInput"
         },
         {
           "name": "CategoryByInput"
@@ -321,7 +378,7 @@
           "name": "PostByInput"
         },
         {
-          "name": "PostCategoryByInput"
+          "name": "PostCategoryByFilterInput"
         },
         {
           "name": "PostContentInput"
@@ -330,7 +387,7 @@
           "name": "PostPaginationInput"
         },
         {
-          "name": "PostTagByInput"
+          "name": "PostTagByFilterInput"
         },
         {
           "name": "RootAddCommentToCustomPostInput"
@@ -345,7 +402,16 @@
           "name": "RootCommentsFilterInput"
         },
         {
+          "name": "RootCreateCategoryInput"
+        },
+        {
           "name": "RootCreateCustomPostInput"
+        },
+        {
+          "name": "RootCreateGenericCategoryInput"
+        },
+        {
+          "name": "RootCreateGenericTagInput"
         },
         {
           "name": "RootCreateMediaItemInput"
@@ -357,7 +423,22 @@
           "name": "RootCreatePostInput"
         },
         {
+          "name": "RootCreateTagInput"
+        },
+        {
           "name": "RootCustomPostsFilterInput"
+        },
+        {
+          "name": "RootDeleteCategoryInput"
+        },
+        {
+          "name": "RootDeleteGenericCategoryInput"
+        },
+        {
+          "name": "RootDeleteGenericTagInput"
+        },
+        {
+          "name": "RootDeleteTagInput"
         },
         {
           "name": "RootMediaItemPaginationInput"
@@ -390,6 +471,12 @@
           "name": "RootPagesFilterInput"
         },
         {
+          "name": "RootPostCategoriesFilterInput"
+        },
+        {
+          "name": "RootPostTagsFilterInput"
+        },
+        {
           "name": "RootPostsFilterInput"
         },
         {
@@ -411,13 +498,28 @@
           "name": "RootTagsFilterInput"
         },
         {
+          "name": "RootUpdateCategoryInput"
+        },
+        {
           "name": "RootUpdateCustomPostInput"
+        },
+        {
+          "name": "RootUpdateGenericCategoryInput"
+        },
+        {
+          "name": "RootUpdateGenericTagInput"
         },
         {
           "name": "RootUpdatePageInput"
         },
         {
           "name": "RootUpdatePostInput"
+        },
+        {
+          "name": "RootUpdateTagInput"
+        },
+        {
+          "name": "TagByFilterInput"
         },
         {
           "name": "TagByInput"
@@ -507,6 +609,9 @@
           "name": "MetaQueryValueTypesEnum"
         },
         {
+          "name": "OperationStatusEnum"
+        },
+        {
           "name": "OrderEnum"
         },
         {
@@ -529,6 +634,42 @@
         },
         {
           "name": "CustomPostUnion"
+        },
+        {
+          "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootCreateGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootCreatePostTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootDeletePostTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootUpdatePostTagTermMutationErrorPayloadUnion"
         },
         {
           "name": "TagUnion"

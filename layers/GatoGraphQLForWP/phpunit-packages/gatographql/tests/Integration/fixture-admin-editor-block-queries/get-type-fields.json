@@ -14,6 +14,17 @@
           "description": "Error payload for: \"The requested category does not exist\""
         },
         {
+          "name": "CategoryTermDoesNotExistErrorPayload",
+          "namespacedName": "CategoryTermDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested category does not exist\""
+        },
+        {
           "name": "Comment",
           "namespacedName": "Comment",
           "fields": [
@@ -471,6 +482,17 @@
           "description": "Error payload for: \"The logged-in user has no permission to edit pages\""
         },
         {
+          "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+          "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to edit taxonomy terms\""
+        },
+        {
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "namespacedName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "fields": [
@@ -687,6 +709,12 @@
               "name": "addCommentToCustomPosts"
             },
             {
+              "name": "createCategories"
+            },
+            {
+              "name": "createCategory"
+            },
+            {
               "name": "createCustomPost"
             },
             {
@@ -708,7 +736,49 @@
               "name": "createPost"
             },
             {
+              "name": "createPostCategories"
+            },
+            {
+              "name": "createPostCategory"
+            },
+            {
+              "name": "createPostTag"
+            },
+            {
+              "name": "createPostTags"
+            },
+            {
               "name": "createPosts"
+            },
+            {
+              "name": "createTag"
+            },
+            {
+              "name": "createTags"
+            },
+            {
+              "name": "deleteCategories"
+            },
+            {
+              "name": "deleteCategory"
+            },
+            {
+              "name": "deletePostCategories"
+            },
+            {
+              "name": "deletePostCategory"
+            },
+            {
+              "name": "deletePostTag"
+            },
+            {
+              "name": "deletePostTags"
+            },
+            {
+              "name": "deleteTag"
+            },
+            {
+              "name": "deleteTags"
             },
             {
               "name": "loginUser"
@@ -747,6 +817,12 @@
               "name": "setTagsOnPosts"
             },
             {
+              "name": "updateCategories"
+            },
+            {
+              "name": "updateCategory"
+            },
+            {
               "name": "updateCustomPost"
             },
             {
@@ -762,7 +838,25 @@
               "name": "updatePost"
             },
             {
+              "name": "updatePostCategories"
+            },
+            {
+              "name": "updatePostCategory"
+            },
+            {
+              "name": "updatePostTag"
+            },
+            {
+              "name": "updatePostTags"
+            },
+            {
               "name": "updatePosts"
+            },
+            {
+              "name": "updateTag"
+            },
+            {
+              "name": "updateTags"
             }
           ],
           "kind": "OBJECT",
@@ -1379,6 +1473,12 @@
               "name": "comments"
             },
             {
+              "name": "createCategories"
+            },
+            {
+              "name": "createCategory"
+            },
+            {
               "name": "createCustomPost"
             },
             {
@@ -1400,7 +1500,25 @@
               "name": "createPost"
             },
             {
+              "name": "createPostCategories"
+            },
+            {
+              "name": "createPostCategory"
+            },
+            {
+              "name": "createPostTag"
+            },
+            {
+              "name": "createPostTags"
+            },
+            {
               "name": "createPosts"
+            },
+            {
+              "name": "createTag"
+            },
+            {
+              "name": "createTags"
             },
             {
               "name": "customPost"
@@ -1410,6 +1528,30 @@
             },
             {
               "name": "customPosts"
+            },
+            {
+              "name": "deleteCategories"
+            },
+            {
+              "name": "deleteCategory"
+            },
+            {
+              "name": "deletePostCategories"
+            },
+            {
+              "name": "deletePostCategory"
+            },
+            {
+              "name": "deletePostTag"
+            },
+            {
+              "name": "deletePostTags"
+            },
+            {
+              "name": "deleteTag"
+            },
+            {
+              "name": "deleteTags"
             },
             {
               "name": "globalID"
@@ -1610,6 +1752,12 @@
               "name": "tags"
             },
             {
+              "name": "updateCategories"
+            },
+            {
+              "name": "updateCategory"
+            },
+            {
               "name": "updateCustomPost"
             },
             {
@@ -1625,7 +1773,25 @@
               "name": "updatePost"
             },
             {
+              "name": "updatePostCategories"
+            },
+            {
+              "name": "updatePostCategory"
+            },
+            {
+              "name": "updatePostTag"
+            },
+            {
+              "name": "updatePostTags"
+            },
+            {
               "name": "updatePosts"
+            },
+            {
+              "name": "updateTag"
+            },
+            {
+              "name": "updateTags"
             },
             {
               "name": "user"
@@ -1681,6 +1847,46 @@
           "description": "Payload of creating a custom post"
         },
         {
+          "name": "RootCreateGenericCategoryTermMutationPayload",
+          "namespacedName": "RootCreateGenericCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a category term"
+        },
+        {
+          "name": "RootCreateGenericTagTermMutationPayload",
+          "namespacedName": "RootCreateGenericTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a tag term"
+        },
+        {
           "name": "RootCreateMediaItemMutationPayload",
           "namespacedName": "RootCreateMediaItemMutationPayload",
           "fields": [
@@ -1721,6 +1927,26 @@
           "description": "Payload of creating a page"
         },
         {
+          "name": "RootCreatePostCategoryTermMutationPayload",
+          "namespacedName": "RootCreatePostCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a post category term"
+        },
+        {
           "name": "RootCreatePostMutationPayload",
           "namespacedName": "RootCreatePostMutationPayload",
           "fields": [
@@ -1739,6 +1965,82 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of creating a post"
+        },
+        {
+          "name": "RootCreatePostTagTermMutationPayload",
+          "namespacedName": "RootCreatePostTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of creating a post tag term"
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMutationPayload",
+          "namespacedName": "RootDeleteGenericCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete mutation on a category term"
+        },
+        {
+          "name": "RootDeleteGenericTagTermMutationPayload",
+          "namespacedName": "RootDeleteGenericTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete mutation on a tag term"
+        },
+        {
+          "name": "RootDeletePostCategoryTermMutationPayload",
+          "namespacedName": "RootDeletePostCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete mutation on a post category term"
+        },
+        {
+          "name": "RootDeletePostTagTermMutationPayload",
+          "namespacedName": "RootDeletePostTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete mutation on a post tag term"
         },
         {
           "name": "RootLoginUserMutationPayload",
@@ -1901,6 +2203,46 @@
           "description": "Payload of executing an update mutation on a custom post"
         },
         {
+          "name": "RootUpdateGenericCategoryTermMutationPayload",
+          "namespacedName": "RootUpdateGenericCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a category term"
+        },
+        {
+          "name": "RootUpdateGenericTagTermMutationPayload",
+          "namespacedName": "RootUpdateGenericTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a tag term"
+        },
+        {
           "name": "RootUpdatePageMutationPayload",
           "namespacedName": "RootUpdatePageMutationPayload",
           "fields": [
@@ -1919,6 +2261,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing an update mutation on a page"
+        },
+        {
+          "name": "RootUpdatePostCategoryTermMutationPayload",
+          "namespacedName": "RootUpdatePostCategoryTermMutationPayload",
+          "fields": [
+            {
+              "name": "category"
+            },
+            {
+              "name": "categoryID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a post category term"
         },
         {
           "name": "RootUpdatePostMutationPayload",
@@ -1941,8 +2303,39 @@
           "description": "Payload of executing an update mutation on a post"
         },
         {
+          "name": "RootUpdatePostTagTermMutationPayload",
+          "namespacedName": "RootUpdatePostTagTermMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            },
+            {
+              "name": "tag"
+            },
+            {
+              "name": "tagID"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing an update mutation on a post tag term"
+        },
+        {
           "name": "TagDoesNotExistErrorPayload",
           "namespacedName": "TagDoesNotExistErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The requested tag does not exist\""
+        },
+        {
+          "name": "TagTermDoesNotExistErrorPayload",
+          "namespacedName": "TagTermDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -2805,11 +3198,18 @@
           "description": null
         },
         {
+          "name": "CategoryByFilterInput",
+          "namespacedName": "CategoryByFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the property and data to fetch a category"
+        },
+        {
           "name": "CategoryByInput",
           "namespacedName": "CategoryByInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a category"
+          "description": null
         },
         {
           "name": "CategoryPaginationInput",
@@ -3127,8 +3527,8 @@
           "description": "Oneof input to specify the property and data to fetch a post"
         },
         {
-          "name": "PostCategoryByInput",
-          "namespacedName": "PostCategoryByInput",
+          "name": "PostCategoryByFilterInput",
+          "namespacedName": "PostCategoryByFilterInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Oneof input to specify the property and data to fetch a category"
@@ -3148,8 +3548,8 @@
           "description": "Input to paginate posts"
         },
         {
-          "name": "PostTagByInput",
-          "namespacedName": "PostTagByInput",
+          "name": "PostTagByFilterInput",
+          "namespacedName": "PostTagByFilterInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Oneof input to specify the property and data to fetch a tag"
@@ -3183,11 +3583,32 @@
           "description": "Input to filter comments"
         },
         {
+          "name": "RootCreateCategoryInput",
+          "namespacedName": "RootCreateCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create a category term"
+        },
+        {
           "name": "RootCreateCustomPostInput",
           "namespacedName": "RootCreateCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"
+        },
+        {
+          "name": "RootCreateGenericCategoryInput",
+          "namespacedName": "RootCreateGenericCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create or update a category term"
+        },
+        {
+          "name": "RootCreateGenericTagInput",
+          "namespacedName": "RootCreateGenericTagInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create or update a tag term"
         },
         {
           "name": "RootCreateMediaItemInput",
@@ -3211,11 +3632,46 @@
           "description": "Input to update a custom post"
         },
         {
+          "name": "RootCreateTagInput",
+          "namespacedName": "RootCreateTagInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create a tag term"
+        },
+        {
           "name": "RootCustomPostsFilterInput",
           "namespacedName": "RootCustomPostsFilterInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter custom posts"
+        },
+        {
+          "name": "RootDeleteCategoryInput",
+          "namespacedName": "RootDeleteCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a category term"
+        },
+        {
+          "name": "RootDeleteGenericCategoryInput",
+          "namespacedName": "RootDeleteGenericCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a category term"
+        },
+        {
+          "name": "RootDeleteGenericTagInput",
+          "namespacedName": "RootDeleteGenericTagInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a tag term"
+        },
+        {
+          "name": "RootDeleteTagInput",
+          "namespacedName": "RootDeleteTagInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a tag term"
         },
         {
           "name": "RootMediaItemPaginationInput",
@@ -3288,6 +3744,20 @@
           "description": "Input to filter pages"
         },
         {
+          "name": "RootPostCategoriesFilterInput",
+          "namespacedName": "RootPostCategoriesFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter categories"
+        },
+        {
+          "name": "RootPostTagsFilterInput",
+          "namespacedName": "RootPostTagsFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to filter tags"
+        },
+        {
           "name": "RootPostsFilterInput",
           "namespacedName": "RootPostsFilterInput",
           "fields": null,
@@ -3337,11 +3807,32 @@
           "description": "Input to filter tags"
         },
         {
+          "name": "RootUpdateCategoryInput",
+          "namespacedName": "RootUpdateCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a category term"
+        },
+        {
           "name": "RootUpdateCustomPostInput",
           "namespacedName": "RootUpdateCustomPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a custom post"
+        },
+        {
+          "name": "RootUpdateGenericCategoryInput",
+          "namespacedName": "RootUpdateGenericCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create or update a category term"
+        },
+        {
+          "name": "RootUpdateGenericTagInput",
+          "namespacedName": "RootUpdateGenericTagInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create or update a tag term"
         },
         {
           "name": "RootUpdatePageInput",
@@ -3358,11 +3849,25 @@
           "description": "Input to update a custom post"
         },
         {
+          "name": "RootUpdateTagInput",
+          "namespacedName": "RootUpdateTagInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a tag term"
+        },
+        {
+          "name": "TagByFilterInput",
+          "namespacedName": "TagByFilterInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Oneof input to specify the property and data to fetch a tag"
+        },
+        {
           "name": "TagByInput",
           "namespacedName": "TagByInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
-          "description": "Oneof input to specify the property and data to fetch a tag"
+          "description": null
         },
         {
           "name": "TagPaginationInput",
@@ -3638,6 +4143,20 @@
           "description": "Union of 'Error Payload' types when creating a custom post"
         },
         {
+          "name": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+          "namespacedName": "RootCreateGenericCategoryTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a category term"
+        },
+        {
+          "name": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+          "namespacedName": "RootCreateGenericTagTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a tag term"
+        },
+        {
           "name": "RootCreateMediaItemMutationErrorPayloadUnion",
           "namespacedName": "RootCreateMediaItemMutationErrorPayloadUnion",
           "fields": null,
@@ -3652,11 +4171,53 @@
           "description": "Union of 'Error Payload' types when creating a page"
         },
         {
+          "name": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+          "namespacedName": "RootCreatePostCategoryTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a post category term"
+        },
+        {
           "name": "RootCreatePostMutationErrorPayloadUnion",
           "namespacedName": "RootCreatePostMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when creating a post"
+        },
+        {
+          "name": "RootCreatePostTagTermMutationErrorPayloadUnion",
+          "namespacedName": "RootCreatePostTagTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when creating a post tag term"
+        },
+        {
+          "name": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericCategoryTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a category term"
+        },
+        {
+          "name": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteGenericTagTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a tag term"
+        },
+        {
+          "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a post category term"
+        },
+        {
+          "name": "RootDeletePostTagTermMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePostTagTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a post tag term"
         },
         {
           "name": "RootLoginUserMutationErrorPayloadUnion",
@@ -3715,6 +4276,20 @@
           "description": "Union of 'Error Payload' types when updating a custom post"
         },
         {
+          "name": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericCategoryTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a category term"
+        },
+        {
+          "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a tag term"
+        },
+        {
           "name": "RootUpdatePageMutationErrorPayloadUnion",
           "namespacedName": "RootUpdatePageMutationErrorPayloadUnion",
           "fields": null,
@@ -3722,11 +4297,25 @@
           "description": "Union of 'Error Payload' types when updating a page"
         },
         {
+          "name": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdatePostCategoryTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a post category term"
+        },
+        {
           "name": "RootUpdatePostMutationErrorPayloadUnion",
           "namespacedName": "RootUpdatePostMutationErrorPayloadUnion",
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a post"
+        },
+        {
+          "name": "RootUpdatePostTagTermMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdatePostTagTermMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a post tag term"
         },
         {
           "name": "TagUnion",
