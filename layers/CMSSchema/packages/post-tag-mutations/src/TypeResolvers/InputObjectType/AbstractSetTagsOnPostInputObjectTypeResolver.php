@@ -33,6 +33,6 @@ abstract class AbstractSetTagsOnPostInputObjectTypeResolver extends AbstractSetT
 
     protected function getEntityName(): string
     {
-        return $this->__('post', 'postcategory-mutations');
+        return $this->__('post', 'posttag-mutations');
     }
 }
