@@ -52,7 +52,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
             // $query['slug'] = $query['slug'];
             // unset($query['slug']);
         }
-        
+
         /**
          * If parent-id is `null` then remove the parent!
          */
@@ -60,7 +60,7 @@ class TaxonomyTypeMutationAPI implements TaxonomyTypeMutationAPIInterface
             $query['parent'] = $query['parent-id'];
             unset($query['parent-id']);
         }
-        
+
         if (isset($query['description'])) {
             // Nothing to do
             // $query['description'] = $query['description'];

@@ -30,7 +30,7 @@ abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends
     {
         return $this->getCategoryByOneofInputObjectTypeResolver();
     }
-    
+
     protected function addParentIDInputField(): bool
     {
         return true;

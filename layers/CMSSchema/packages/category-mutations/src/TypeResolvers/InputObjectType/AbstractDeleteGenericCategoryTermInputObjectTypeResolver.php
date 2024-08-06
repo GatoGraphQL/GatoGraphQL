@@ -11,9 +11,9 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 abstract class AbstractDeleteGenericCategoryTermInputObjectTypeResolver extends AbstractDeleteCategoryTermInputObjectTypeResolver implements UpdateGenericCategoryTermInputObjectTypeResolverInterface, CreateGenericCategoryTermInputObjectTypeResolverInterface
 {
     use MutateGenericTaxonomyTermInputObjectTypeResolverTrait;
-    
+
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
-    
+
     final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
     {
         $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
@@ -48,7 +48,7 @@ abstract class AbstractDeleteGenericCategoryTermInputObjectTypeResolver extends 
     {
         return $this->getGenericTaxonomyTermInputFieldTypeModifiers($inputFieldName) ?? parent::getInputFieldTypeModifiers($inputFieldName);
     }
-    
+
     protected function getGenericTaxonomyTermTaxonomyInputTypeResolver(): InputTypeResolverInterface
     {
         return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();

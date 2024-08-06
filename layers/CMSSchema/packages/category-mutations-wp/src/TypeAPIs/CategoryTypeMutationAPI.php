@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CategoryMutationsWP\TypeAPIs;
 use PoPCMSSchema\CategoryMutations\Exception\CategoryTermCRUDMutationException;
 use PoPCMSSchema\CategoryMutations\TypeAPIs\CategoryTypeMutationAPIInterface;
 use PoPCMSSchema\TaxonomyMutationsWP\TypeAPIs\TaxonomyTypeMutationAPI;
-
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use WP_Error;
 
