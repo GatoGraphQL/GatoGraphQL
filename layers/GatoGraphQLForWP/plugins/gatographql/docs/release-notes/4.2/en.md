@@ -37,7 +37,6 @@ mutation CreateUpdateDeletePostCategories {
       }
     }
     category {
-      id
       ...PostCategoryData
     }
   }
