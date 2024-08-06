@@ -1,0 +1,52 @@
+{
+    "name": "pop-cms-schema/tag-mutations",
+    "type": "library",
+    "description": "Adds support for tag mutations",
+    "keywords": ["Gato", "GatoGraphQL", "GraphQL", "PHP", "tag-mutations"],
+    "homepage": "https://github.com/PoPCMSSchema/tag-mutations",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Leonardo Losoviz",
+            "email": "leo@getpop.org",
+            "homepage": "https://gatographql.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "pop-cms-schema/tags": "^4.2",
+        "pop-cms-schema/taxonomy-mutations": "^4.2"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.8",
+        "phpunit/phpunit": "^10.2",
+        "rector/rector": "^0.18",
+        "squizlabs/php_codesniffer": "^3.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "PoPCMSSchema\\TagMutations\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PoPCMSSchema\\TagMutations\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "check-style": "phpcs src tests",
+        "fix-style": "phpcbf src tests",
+        "analyse": "phpstan analyse"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "4.2-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
