@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TagMutations\FeedbackItemProviders;
 
 use PoP\Root\FeedbackItemProviders\AbstractFeedbackItemProvider;
-use PoP\ComponentModel\Feedback\FeedbackTags;
+use PoP\ComponentModel\Feedback\FeedbackCategories;
 
 class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
@@ -46,6 +46,6 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 
     public function getTag(string $code): string
     {
-        return FeedbackTags::ERROR;
+        return FeedbackCategories::ERROR;
     }
 }
