@@ -56,4 +56,9 @@ abstract class AbstractMutateCategoryTermMutationResolver extends AbstractMutate
     {
         return $this->getCategoryTypeMutationAPI()->deleteCategoryTerm($taxonomyTermID, $taxonomyName);
     }
+
+    protected function isHierarchical(): bool
+    {
+        return true;
+    }
 }

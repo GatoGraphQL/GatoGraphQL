@@ -56,4 +56,9 @@ abstract class AbstractMutateTagTermMutationResolver extends AbstractMutateTaxon
     {
         return $this->getTagTypeMutationAPI()->deleteTagTerm($taxonomyTermID, $taxonomyName);
     }
+
+    protected function isHierarchical(): bool
+    {
+        return false;
+    }
 }
