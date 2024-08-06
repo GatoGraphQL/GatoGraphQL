@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTagMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\PostTagMutations\TypeResolvers\UnionType\AbstractPostTagsMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\TagMutations\ObjectTypeResolverPickers\AbstractTagTermDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\UnionType\AbstractPostTagMutationErrorPayloadUnionTypeResolver;
-use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractGenericErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class GenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPayloadObjectTypeResolverPicker
+class TagTermDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractTagTermDoesNotExistErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
@@ -17,7 +16,6 @@ class GenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPa
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractPostTagsMutationErrorPayloadUnionTypeResolver::class,
             AbstractPostTagMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
