@@ -6,13 +6,10 @@ namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
 class RootDeleteCategoryTermInputObjectTypeResolver extends AbstractDeleteCategoryTermInputObjectTypeResolver implements DeleteCategoryTermInputObjectTypeResolverInterface
 {
+    use RootDeleteCategoryTermInputObjectTypeResolverTrait;
+
     public function getTypeName(): string
     {
         return 'RootDeleteCategoryInput';
-    }
-
-    protected function addTaxonomyInputField(): bool
-    {
-        return true;
     }
 }

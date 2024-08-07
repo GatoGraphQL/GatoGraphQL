@@ -6,9 +6,6 @@ namespace PoPCMSSchema\PostCategoryMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\CategoryMutations\Module;
 use PoPCMSSchema\CategoryMutations\ModuleConfiguration;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\RootCreateCategoryTermInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\RootDeleteCategoryTermInputObjectTypeResolver;
-use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\RootUpdateCategoryTermInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\CreatePostCategoryTermBulkOperationMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\CreatePostCategoryTermMutationResolver;
@@ -22,6 +19,9 @@ use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableUpdatePostCa
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableUpdatePostCategoryTermMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\UpdatePostCategoryTermBulkOperationMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\UpdatePostCategoryTermMutationResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\RootCreatePostCategoryTermInputObjectTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\RootDeletePostCategoryTermInputObjectTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\RootUpdatePostCategoryTermInputObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\ObjectType\RootCreatePostCategoryTermMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\ObjectType\RootDeletePostCategoryTermMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\ObjectType\RootUpdatePostCategoryTermMutationPayloadObjectTypeResolver;
@@ -64,9 +64,9 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
     private ?PayloadableUpdatePostCategoryTermBulkOperationMutationResolver $payloadableUpdatePostCategoryTermBulkOperationMutationResolver = null;
     private ?PayloadableCreatePostCategoryTermMutationResolver $payloadableCreatePostCategoryTermMutationResolver = null;
     private ?PayloadableCreatePostCategoryTermBulkOperationMutationResolver $payloadableCreatePostCategoryTermBulkOperationMutationResolver = null;
-    private ?RootDeleteCategoryTermInputObjectTypeResolver $rootDeleteCategoryTermInputObjectTypeResolver = null;
-    private ?RootUpdateCategoryTermInputObjectTypeResolver $rootUpdateCategoryTermInputObjectTypeResolver = null;
-    private ?RootCreateCategoryTermInputObjectTypeResolver $rootCreateCategoryTermInputObjectTypeResolver = null;
+    private ?RootDeletePostCategoryTermInputObjectTypeResolver $rootDeletePostCategoryTermInputObjectTypeResolver = null;
+    private ?RootUpdatePostCategoryTermInputObjectTypeResolver $rootUpdatePostCategoryTermInputObjectTypeResolver = null;
+    private ?RootCreatePostCategoryTermInputObjectTypeResolver $rootCreatePostCategoryTermInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
@@ -278,44 +278,44 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->payloadableCreatePostCategoryTermBulkOperationMutationResolver;
     }
-    final public function setRootDeleteCategoryTermInputObjectTypeResolver(RootDeleteCategoryTermInputObjectTypeResolver $rootDeleteCategoryTermInputObjectTypeResolver): void
+    final public function setRootDeletePostCategoryTermInputObjectTypeResolver(RootDeletePostCategoryTermInputObjectTypeResolver $rootDeletePostCategoryTermInputObjectTypeResolver): void
     {
-        $this->rootDeleteCategoryTermInputObjectTypeResolver = $rootDeleteCategoryTermInputObjectTypeResolver;
+        $this->rootDeletePostCategoryTermInputObjectTypeResolver = $rootDeletePostCategoryTermInputObjectTypeResolver;
     }
-    final protected function getRootDeleteCategoryTermInputObjectTypeResolver(): RootDeleteCategoryTermInputObjectTypeResolver
+    final protected function getRootDeletePostCategoryTermInputObjectTypeResolver(): RootDeletePostCategoryTermInputObjectTypeResolver
     {
-        if ($this->rootDeleteCategoryTermInputObjectTypeResolver === null) {
-            /** @var RootDeleteCategoryTermInputObjectTypeResolver */
-            $rootDeleteCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootDeleteCategoryTermInputObjectTypeResolver::class);
-            $this->rootDeleteCategoryTermInputObjectTypeResolver = $rootDeleteCategoryTermInputObjectTypeResolver;
+        if ($this->rootDeletePostCategoryTermInputObjectTypeResolver === null) {
+            /** @var RootDeletePostCategoryTermInputObjectTypeResolver */
+            $rootDeletePostCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootDeletePostCategoryTermInputObjectTypeResolver::class);
+            $this->rootDeletePostCategoryTermInputObjectTypeResolver = $rootDeletePostCategoryTermInputObjectTypeResolver;
         }
-        return $this->rootDeleteCategoryTermInputObjectTypeResolver;
+        return $this->rootDeletePostCategoryTermInputObjectTypeResolver;
     }
-    final public function setRootUpdateCategoryTermInputObjectTypeResolver(RootUpdateCategoryTermInputObjectTypeResolver $rootUpdateCategoryTermInputObjectTypeResolver): void
+    final public function setRootUpdatePostCategoryTermInputObjectTypeResolver(RootUpdatePostCategoryTermInputObjectTypeResolver $rootUpdatePostCategoryTermInputObjectTypeResolver): void
     {
-        $this->rootUpdateCategoryTermInputObjectTypeResolver = $rootUpdateCategoryTermInputObjectTypeResolver;
+        $this->rootUpdatePostCategoryTermInputObjectTypeResolver = $rootUpdatePostCategoryTermInputObjectTypeResolver;
     }
-    final protected function getRootUpdateCategoryTermInputObjectTypeResolver(): RootUpdateCategoryTermInputObjectTypeResolver
+    final protected function getRootUpdatePostCategoryTermInputObjectTypeResolver(): RootUpdatePostCategoryTermInputObjectTypeResolver
     {
-        if ($this->rootUpdateCategoryTermInputObjectTypeResolver === null) {
-            /** @var RootUpdateCategoryTermInputObjectTypeResolver */
-            $rootUpdateCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateCategoryTermInputObjectTypeResolver::class);
-            $this->rootUpdateCategoryTermInputObjectTypeResolver = $rootUpdateCategoryTermInputObjectTypeResolver;
+        if ($this->rootUpdatePostCategoryTermInputObjectTypeResolver === null) {
+            /** @var RootUpdatePostCategoryTermInputObjectTypeResolver */
+            $rootUpdatePostCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootUpdatePostCategoryTermInputObjectTypeResolver::class);
+            $this->rootUpdatePostCategoryTermInputObjectTypeResolver = $rootUpdatePostCategoryTermInputObjectTypeResolver;
         }
-        return $this->rootUpdateCategoryTermInputObjectTypeResolver;
+        return $this->rootUpdatePostCategoryTermInputObjectTypeResolver;
     }
-    final public function setRootCreateCategoryTermInputObjectTypeResolver(RootCreateCategoryTermInputObjectTypeResolver $rootCreateCategoryTermInputObjectTypeResolver): void
+    final public function setRootCreatePostCategoryTermInputObjectTypeResolver(RootCreatePostCategoryTermInputObjectTypeResolver $rootCreatePostCategoryTermInputObjectTypeResolver): void
     {
-        $this->rootCreateCategoryTermInputObjectTypeResolver = $rootCreateCategoryTermInputObjectTypeResolver;
+        $this->rootCreatePostCategoryTermInputObjectTypeResolver = $rootCreatePostCategoryTermInputObjectTypeResolver;
     }
-    final protected function getRootCreateCategoryTermInputObjectTypeResolver(): RootCreateCategoryTermInputObjectTypeResolver
+    final protected function getRootCreatePostCategoryTermInputObjectTypeResolver(): RootCreatePostCategoryTermInputObjectTypeResolver
     {
-        if ($this->rootCreateCategoryTermInputObjectTypeResolver === null) {
-            /** @var RootCreateCategoryTermInputObjectTypeResolver */
-            $rootCreateCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootCreateCategoryTermInputObjectTypeResolver::class);
-            $this->rootCreateCategoryTermInputObjectTypeResolver = $rootCreateCategoryTermInputObjectTypeResolver;
+        if ($this->rootCreatePostCategoryTermInputObjectTypeResolver === null) {
+            /** @var RootCreatePostCategoryTermInputObjectTypeResolver */
+            $rootCreatePostCategoryTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootCreatePostCategoryTermInputObjectTypeResolver::class);
+            $this->rootCreatePostCategoryTermInputObjectTypeResolver = $rootCreatePostCategoryTermInputObjectTypeResolver;
         }
-        return $this->rootCreateCategoryTermInputObjectTypeResolver;
+        return $this->rootCreatePostCategoryTermInputObjectTypeResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -453,20 +453,20 @@ class RootPostCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeFiel
     {
         return match ($fieldName) {
             'createPostCategory' => [
-                'input' => $this->getRootCreateCategoryTermInputObjectTypeResolver(),
+                'input' => $this->getRootCreatePostCategoryTermInputObjectTypeResolver(),
             ],
             'createPostCategories'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateCategoryTermInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreatePostCategoryTermInputObjectTypeResolver()),
             'updatePostCategory' => [
-                'input' => $this->getRootUpdateCategoryTermInputObjectTypeResolver(),
+                'input' => $this->getRootUpdatePostCategoryTermInputObjectTypeResolver(),
             ],
             'updatePostCategories'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateCategoryTermInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdatePostCategoryTermInputObjectTypeResolver()),
             'deletePostCategory' => [
-                'input' => $this->getRootDeleteCategoryTermInputObjectTypeResolver(),
+                'input' => $this->getRootDeletePostCategoryTermInputObjectTypeResolver(),
             ],
             'deletePostCategories'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootDeleteCategoryTermInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootDeletePostCategoryTermInputObjectTypeResolver()),
             'createPostCategoryMutationPayloadObjects',
             'updatePostCategoryMutationPayloadObjects',
             'deletePostCategoryMutationPayloadObjects'
