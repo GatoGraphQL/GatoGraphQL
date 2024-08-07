@@ -48,6 +48,13 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
              */
             $fileName = $graphQLQueryFileInfo->getFilenameWithoutExtension();
             $filePath = $graphQLQueryFileInfo->getPath();
+            if ($responseFixtureFolder !== null) {
+                $filePath = str_replace(
+                    $fixtureFolder,
+                    $responseFixtureFolder,
+                    $filePath
+                );
+            }
             $pluginEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':enabled.json';
             if (!\file_exists($pluginEnabledGraphQLResponseFile)) {
                 static::throwFileNotExistsException($pluginEnabledGraphQLResponseFile);
@@ -59,15 +66,8 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
             $pluginOnlyOneEnabledGraphQLResponseFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . ':only-one-enabled.json';
             $pluginGraphQLVariablesFile = $filePath . \DIRECTORY_SEPARATOR . $fileName . '.var.json';
 
-            /**
-             * The tests have this shape:
-             *
-             *   pluginVendor/pluginSlug/fixtureName.gql
-             *
-             * pluginName = pluginVendor/pluginSlug
-             */
-            $pluginName = substr($filePath, strlen($fixtureFolder . '/'));
-            $fixtureName = $pluginName . '/' . $fileName;
+            $relativePath = substr($filePath, strlen(($responseFixtureFolder !== null ? $responseFixtureFolder : $fixtureFolder) . '/'));
+            $fixtureName = $relativePath . '/' . $fileName;
             $pluginEntries[$fixtureName] = [
                 'query' => $query,
                 'response-enabled' => file_get_contents($pluginEnabledGraphQLResponseFile),
