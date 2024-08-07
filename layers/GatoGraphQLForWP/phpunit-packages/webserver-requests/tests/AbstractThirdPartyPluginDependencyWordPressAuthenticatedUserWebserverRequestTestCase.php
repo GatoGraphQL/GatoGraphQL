@@ -7,6 +7,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use RuntimeException;
 
@@ -17,9 +18,9 @@ use RuntimeException;
  * the test. That's why these tests are done with the authenticated user
  * in WordPress, so the user can execute operations via the REST endpoint.
  */
-abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
+abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase
 {
-    use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
+    use RequestRESTAPIWebserverRequestTestTrait;
 
     protected function setUp(): void
     {
@@ -124,7 +125,7 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
 
     protected static function getEndpoint(): string
     {
-        return 'wp-admin/edit.php?page=gatographql&action=execute_query';
+        return 'graphql/';
     }
 
     /**

@@ -5,12 +5,14 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GuzzleHttp\RequestOptions;
+use PHPUnitForGatoGraphQL\WebserverRequests\AbstractEndpointWebserverRequestTestCase;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 use RuntimeException;
 
-abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase extends AbstractFixtureEndpointWebserverRequestTestCase
+abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
 {
+    use FixtureEndpointWebserverRequestTestCaseTrait;
     use WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrait;
 
     /**

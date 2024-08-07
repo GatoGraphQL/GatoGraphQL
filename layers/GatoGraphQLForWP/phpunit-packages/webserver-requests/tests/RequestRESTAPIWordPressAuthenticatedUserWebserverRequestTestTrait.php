@@ -5,9 +5,6 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
 use GuzzleHttp\RequestOptions;
-use PoP\ComponentModel\Constants\FrameworkParams;
-
-use function getenv;
 
 /**
  * Tests that require to call the REST API to perform some action
@@ -18,17 +15,15 @@ use function getenv;
  */
 trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
 {
+    use RequestRESTAPIWebserverRequestTestTrait {
+        RequestRESTAPIWebserverRequestTestTrait::getRESTEndpointRequestOptions as upstreamGetRESTEndpointRequestOptions;
+    }
     use WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
     protected static function useSSL(): bool
     {
         return true;
     }
-
-    /**
-     * @return array<string,mixed>
-     */
-    abstract protected static function getRequestBasicOptions(): array;
 
     /**
      * Basic options for the Request:
@@ -41,18 +36,8 @@ trait RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait
      */
     protected function getRESTEndpointRequestOptions(): array
     {
-        $options = static::getRequestBasicOptions();
+        $options = $this->upstreamGetRESTEndpointRequestOptions();
         $options[RequestOptions::HEADERS]['X-WP-Nonce'] = static::$wpRESTNonce;
-        $xdebugTrigger = getenv(FrameworkParams::XDEBUG_TRIGGER);
-        if ($xdebugTrigger !== false) {
-            $options[RequestOptions::QUERY][FrameworkParams::XDEBUG_TRIGGER] = $xdebugTrigger;
-            /**
-             * Must also pass ?XDEBUG_SESSION_STOP=1 in the URL to avoid
-             * setting cookie XDEBUG_SESSION="1", which launches the
-             * debugger every single time
-             */
-            $options[RequestOptions::QUERY][FrameworkParams::XDEBUG_SESSION_STOP] = '1';
-        }
         return $options;
     }
 }
