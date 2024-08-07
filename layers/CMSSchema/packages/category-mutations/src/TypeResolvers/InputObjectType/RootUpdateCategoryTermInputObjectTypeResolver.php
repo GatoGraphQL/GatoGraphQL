@@ -6,23 +6,10 @@ namespace PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType;
 
 class RootUpdateCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver implements UpdateCategoryTermInputObjectTypeResolverInterface
 {
+    use RootUpdateCategoryTermInputObjectTypeResolverTrait;
+
     public function getTypeName(): string
     {
         return 'RootUpdateCategoryInput';
-    }
-
-    public function getTypeDescription(): ?string
-    {
-        return $this->__('Input to update a category term', 'category-mutations');
-    }
-
-    protected function addTaxonomyInputField(): bool
-    {
-        return true;
-    }
-
-    protected function isNameInputFieldMandatory(): bool
-    {
-        return false;
     }
 }

@@ -6,9 +6,6 @@ namespace PoPCMSSchema\PostTagMutations\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\TagMutations\Module;
 use PoPCMSSchema\TagMutations\ModuleConfiguration;
-use PoPCMSSchema\TagMutations\TypeResolvers\InputObjectType\RootCreateTagTermInputObjectTypeResolver;
-use PoPCMSSchema\TagMutations\TypeResolvers\InputObjectType\RootDeleteTagTermInputObjectTypeResolver;
-use PoPCMSSchema\TagMutations\TypeResolvers\InputObjectType\RootUpdateTagTermInputObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\CreatePostTagTermBulkOperationMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\CreatePostTagTermMutationResolver;
@@ -22,6 +19,9 @@ use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableUpdatePostTagTerm
 use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableUpdatePostTagTermMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\UpdatePostTagTermBulkOperationMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\UpdatePostTagTermMutationResolver;
+use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\RootCreatePostTagTermInputObjectTypeResolver;
+use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\RootDeletePostTagTermInputObjectTypeResolver;
+use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\RootUpdatePostTagTermInputObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootCreatePostTagTermMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootDeletePostTagTermMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\RootUpdatePostTagTermMutationPayloadObjectTypeResolver;
@@ -64,9 +64,9 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     private ?PayloadableUpdatePostTagTermBulkOperationMutationResolver $payloadableUpdatePostTagTermBulkOperationMutationResolver = null;
     private ?PayloadableCreatePostTagTermMutationResolver $payloadableCreatePostTagTermMutationResolver = null;
     private ?PayloadableCreatePostTagTermBulkOperationMutationResolver $payloadableCreatePostTagTermBulkOperationMutationResolver = null;
-    private ?RootDeleteTagTermInputObjectTypeResolver $rootDeleteTagTermInputObjectTypeResolver = null;
-    private ?RootUpdateTagTermInputObjectTypeResolver $rootUpdateTagTermInputObjectTypeResolver = null;
-    private ?RootCreateTagTermInputObjectTypeResolver $rootCreateTagTermInputObjectTypeResolver = null;
+    private ?RootDeletePostTagTermInputObjectTypeResolver $rootDeletePostTagTermInputObjectTypeResolver = null;
+    private ?RootUpdatePostTagTermInputObjectTypeResolver $rootUpdatePostTagTermInputObjectTypeResolver = null;
+    private ?RootCreatePostTagTermInputObjectTypeResolver $rootCreatePostTagTermInputObjectTypeResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
 
@@ -278,44 +278,44 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
         }
         return $this->payloadableCreatePostTagTermBulkOperationMutationResolver;
     }
-    final public function setRootDeleteTagTermInputObjectTypeResolver(RootDeleteTagTermInputObjectTypeResolver $rootDeleteTagTermInputObjectTypeResolver): void
+    final public function setRootDeletePostTagTermInputObjectTypeResolver(RootDeletePostTagTermInputObjectTypeResolver $rootDeletePostTagTermInputObjectTypeResolver): void
     {
-        $this->rootDeleteTagTermInputObjectTypeResolver = $rootDeleteTagTermInputObjectTypeResolver;
+        $this->rootDeletePostTagTermInputObjectTypeResolver = $rootDeletePostTagTermInputObjectTypeResolver;
     }
-    final protected function getRootDeleteTagTermInputObjectTypeResolver(): RootDeleteTagTermInputObjectTypeResolver
+    final protected function getRootDeletePostTagTermInputObjectTypeResolver(): RootDeletePostTagTermInputObjectTypeResolver
     {
-        if ($this->rootDeleteTagTermInputObjectTypeResolver === null) {
-            /** @var RootDeleteTagTermInputObjectTypeResolver */
-            $rootDeleteTagTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootDeleteTagTermInputObjectTypeResolver::class);
-            $this->rootDeleteTagTermInputObjectTypeResolver = $rootDeleteTagTermInputObjectTypeResolver;
+        if ($this->rootDeletePostTagTermInputObjectTypeResolver === null) {
+            /** @var RootDeletePostTagTermInputObjectTypeResolver */
+            $rootDeletePostTagTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootDeletePostTagTermInputObjectTypeResolver::class);
+            $this->rootDeletePostTagTermInputObjectTypeResolver = $rootDeletePostTagTermInputObjectTypeResolver;
         }
-        return $this->rootDeleteTagTermInputObjectTypeResolver;
+        return $this->rootDeletePostTagTermInputObjectTypeResolver;
     }
-    final public function setRootUpdateTagTermInputObjectTypeResolver(RootUpdateTagTermInputObjectTypeResolver $rootUpdateTagTermInputObjectTypeResolver): void
+    final public function setRootUpdatePostTagTermInputObjectTypeResolver(RootUpdatePostTagTermInputObjectTypeResolver $rootUpdatePostTagTermInputObjectTypeResolver): void
     {
-        $this->rootUpdateTagTermInputObjectTypeResolver = $rootUpdateTagTermInputObjectTypeResolver;
+        $this->rootUpdatePostTagTermInputObjectTypeResolver = $rootUpdatePostTagTermInputObjectTypeResolver;
     }
-    final protected function getRootUpdateTagTermInputObjectTypeResolver(): RootUpdateTagTermInputObjectTypeResolver
+    final protected function getRootUpdatePostTagTermInputObjectTypeResolver(): RootUpdatePostTagTermInputObjectTypeResolver
     {
-        if ($this->rootUpdateTagTermInputObjectTypeResolver === null) {
-            /** @var RootUpdateTagTermInputObjectTypeResolver */
-            $rootUpdateTagTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateTagTermInputObjectTypeResolver::class);
-            $this->rootUpdateTagTermInputObjectTypeResolver = $rootUpdateTagTermInputObjectTypeResolver;
+        if ($this->rootUpdatePostTagTermInputObjectTypeResolver === null) {
+            /** @var RootUpdatePostTagTermInputObjectTypeResolver */
+            $rootUpdatePostTagTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootUpdatePostTagTermInputObjectTypeResolver::class);
+            $this->rootUpdatePostTagTermInputObjectTypeResolver = $rootUpdatePostTagTermInputObjectTypeResolver;
         }
-        return $this->rootUpdateTagTermInputObjectTypeResolver;
+        return $this->rootUpdatePostTagTermInputObjectTypeResolver;
     }
-    final public function setRootCreateTagTermInputObjectTypeResolver(RootCreateTagTermInputObjectTypeResolver $rootCreateTagTermInputObjectTypeResolver): void
+    final public function setRootCreatePostTagTermInputObjectTypeResolver(RootCreatePostTagTermInputObjectTypeResolver $rootCreatePostTagTermInputObjectTypeResolver): void
     {
-        $this->rootCreateTagTermInputObjectTypeResolver = $rootCreateTagTermInputObjectTypeResolver;
+        $this->rootCreatePostTagTermInputObjectTypeResolver = $rootCreatePostTagTermInputObjectTypeResolver;
     }
-    final protected function getRootCreateTagTermInputObjectTypeResolver(): RootCreateTagTermInputObjectTypeResolver
+    final protected function getRootCreatePostTagTermInputObjectTypeResolver(): RootCreatePostTagTermInputObjectTypeResolver
     {
-        if ($this->rootCreateTagTermInputObjectTypeResolver === null) {
-            /** @var RootCreateTagTermInputObjectTypeResolver */
-            $rootCreateTagTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootCreateTagTermInputObjectTypeResolver::class);
-            $this->rootCreateTagTermInputObjectTypeResolver = $rootCreateTagTermInputObjectTypeResolver;
+        if ($this->rootCreatePostTagTermInputObjectTypeResolver === null) {
+            /** @var RootCreatePostTagTermInputObjectTypeResolver */
+            $rootCreatePostTagTermInputObjectTypeResolver = $this->instanceManager->getInstance(RootCreatePostTagTermInputObjectTypeResolver::class);
+            $this->rootCreatePostTagTermInputObjectTypeResolver = $rootCreatePostTagTermInputObjectTypeResolver;
         }
-        return $this->rootCreateTagTermInputObjectTypeResolver;
+        return $this->rootCreatePostTagTermInputObjectTypeResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
@@ -453,20 +453,20 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     {
         return match ($fieldName) {
             'createPostTag' => [
-                'input' => $this->getRootCreateTagTermInputObjectTypeResolver(),
+                'input' => $this->getRootCreatePostTagTermInputObjectTypeResolver(),
             ],
             'createPostTags'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateTagTermInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreatePostTagTermInputObjectTypeResolver()),
             'updatePostTag' => [
-                'input' => $this->getRootUpdateTagTermInputObjectTypeResolver(),
+                'input' => $this->getRootUpdatePostTagTermInputObjectTypeResolver(),
             ],
             'updatePostTags'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateTagTermInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdatePostTagTermInputObjectTypeResolver()),
             'deletePostTag' => [
-                'input' => $this->getRootDeleteTagTermInputObjectTypeResolver(),
+                'input' => $this->getRootDeletePostTagTermInputObjectTypeResolver(),
             ],
             'deletePostTags'
-                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootDeleteTagTermInputObjectTypeResolver()),
+                => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootDeletePostTagTermInputObjectTypeResolver()),
             'createPostTagMutationPayloadObjects',
             'updatePostTagMutationPayloadObjects',
             'deletePostTagMutationPayloadObjects'

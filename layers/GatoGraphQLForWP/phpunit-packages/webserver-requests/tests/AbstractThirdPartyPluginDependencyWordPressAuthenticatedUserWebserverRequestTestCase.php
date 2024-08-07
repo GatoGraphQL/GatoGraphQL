@@ -7,6 +7,7 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Actions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use RuntimeException;
 
@@ -17,9 +18,9 @@ use RuntimeException;
  * the test. That's why these tests are done with the authenticated user
  * in WordPress, so the user can execute operations via the REST endpoint.
  */
-abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractEndpointWebserverRequestTestCase
+abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestTestCase
 {
-    use RequestRESTAPIWordPressAuthenticatedUserWebserverRequestTestTrait;
+    use RequestRESTAPIWebserverRequestTestTrait;
 
     protected function setUp(): void
     {
@@ -82,11 +83,13 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @return array<string,array<mixed>>
      */
-    public static function provideEndpointEntries(): array
-    {
+    public static function provideFixtureEndpointEntries(
+        string $fixtureFolder,
+        ?string $responseFixtureFolder = null,
+    ): array {
         $endpoint = static::getEndpoint();
         $providerEntries = [];
-        foreach (static::getPluginNameEntries() as $pluginName => $pluginEntry) {
+        foreach (static::getPluginNameEntries($fixtureFolder, $responseFixtureFolder) as $pluginName => $pluginEntry) {
             // Only for the variations, the "enable" and "disable" responses are optional
             if (isset($pluginEntry['response-enabled'])) {
                 $providerEntries[$pluginName . ':enabled'] = [
@@ -124,13 +127,16 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
 
     protected static function getEndpoint(): string
     {
-        return 'wp-admin/edit.php?page=gatographql&action=execute_query';
+        return 'graphql/';
     }
 
     /**
      * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    abstract protected static function getPluginNameEntries(): array;
+    abstract protected static function getPluginNameEntries(
+        string $fixtureFolder,
+        ?string $responseFixtureFolder = null,
+    ): array;
 
     /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
@@ -146,8 +152,21 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $pluginName,
                 $status
             ),
-            static::getRESTEndpointRequestOptions()
+            static::getEnableDisablePluginsRESTEndpointRequestOptions()
         );
+    }
+
+    /**
+     * Enable/disable plugins as the admin user,
+     * to allow testing with subscribers
+     *
+     * @return array<string,mixed>
+     */
+    protected function getEnableDisablePluginsRESTEndpointRequestOptions(): array
+    {
+        $options = static::getRESTEndpointRequestOptions();
+        $options[RequestOptions::HEADERS]['Authorization'] = static::getApplicationPasswordAuthorizationHeader(static::USER_ADMIN);
+        return $options;
     }
 
     /**

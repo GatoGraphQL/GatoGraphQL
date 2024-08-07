@@ -12,6 +12,7 @@ use PoPCMSSchema\PostCategoryMutations\MutationResolvers\DeletePostCategoryTermM
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableDeletePostCategoryTermMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\PayloadableUpdatePostCategoryTermMutationResolver;
 use PoPCMSSchema\PostCategoryMutations\MutationResolvers\UpdatePostCategoryTermMutationResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType\PostCategoryTermUpdateInputObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\ObjectType\PostCategoryDeleteMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\ObjectType\PostCategoryUpdateMutationPayloadObjectTypeResolver;
 use PoP\ComponentModel\App;
@@ -31,6 +32,7 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
     private ?PayloadableUpdatePostCategoryTermMutationResolver $payloadableUpdatePostCategoryTermMutationResolver = null;
     private ?PayloadableDeletePostCategoryTermMutationResolver $payloadableDeletePostCategoryTermMutationResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?PostCategoryTermUpdateInputObjectTypeResolver $postCategoryTermUpdateInputObjectTypeResolver = null;
 
     final public function setPostCategoryObjectTypeResolver(PostCategoryObjectTypeResolver $postCategoryObjectTypeResolver): void
     {
@@ -136,6 +138,19 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
         }
         return $this->booleanScalarTypeResolver;
     }
+    final public function setPostCategoryTermUpdateInputObjectTypeResolver(PostCategoryTermUpdateInputObjectTypeResolver $postCategoryTermUpdateInputObjectTypeResolver): void
+    {
+        $this->postCategoryTermUpdateInputObjectTypeResolver = $postCategoryTermUpdateInputObjectTypeResolver;
+    }
+    final protected function getPostCategoryTermUpdateInputObjectTypeResolver(): PostCategoryTermUpdateInputObjectTypeResolver
+    {
+        if ($this->postCategoryTermUpdateInputObjectTypeResolver === null) {
+            /** @var PostCategoryTermUpdateInputObjectTypeResolver */
+            $postCategoryTermUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(PostCategoryTermUpdateInputObjectTypeResolver::class);
+            $this->postCategoryTermUpdateInputObjectTypeResolver = $postCategoryTermUpdateInputObjectTypeResolver;
+        }
+        return $this->postCategoryTermUpdateInputObjectTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -163,7 +178,7 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
     {
         return match ($fieldName) {
             'update' => [
-                'input' => $this->getCategoryTermUpdateInputObjectTypeResolver(),
+                'input' => $this->getPostCategoryTermUpdateInputObjectTypeResolver(),
             ],
             'delete' => [],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),

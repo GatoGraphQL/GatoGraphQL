@@ -6,13 +6,10 @@ namespace PoPCMSSchema\TagMutations\TypeResolvers\InputObjectType;
 
 class RootDeleteTagTermInputObjectTypeResolver extends AbstractDeleteTagTermInputObjectTypeResolver implements DeleteTagTermInputObjectTypeResolverInterface
 {
+    use RootDeleteTagTermInputObjectTypeResolverTrait;
+
     public function getTypeName(): string
     {
         return 'RootDeleteTagInput';
-    }
-
-    protected function addTaxonomyInputField(): bool
-    {
-        return true;
     }
 }
