@@ -31,8 +31,7 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
     protected static function getPluginNameEntries(
         string $fixtureFolder,
         ?string $responseFixtureFolder = null,
-    ): array
-    {
+    ): array {
         $pluginEntries = [];
         $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,

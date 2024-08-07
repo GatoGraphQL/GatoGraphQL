@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTagMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\TagMutations\FieldResolvers\ObjectType\AbstractTagObjectTypeFieldResolver;
-use PoPCMSSchema\TagMutations\Module as TagMutationsModule;
-use PoPCMSSchema\TagMutations\ModuleConfiguration as TagMutationsModuleConfiguration;
-use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\DeletePostTagTermMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableDeletePostTagTermMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\PayloadableUpdatePostTagTermMutationResolver;
 use PoPCMSSchema\PostTagMutations\MutationResolvers\UpdatePostTagTermMutationResolver;
+use PoPCMSSchema\PostTagMutations\TypeResolvers\InputObjectType\PostTagTermUpdateInputObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\PostTagDeleteMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\PostTagMutations\TypeResolvers\ObjectType\PostTagUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
+use PoPCMSSchema\TagMutations\FieldResolvers\ObjectType\AbstractTagObjectTypeFieldResolver;
+use PoPCMSSchema\TagMutations\Module as TagMutationsModule;
+use PoPCMSSchema\TagMutations\ModuleConfiguration as TagMutationsModuleConfiguration;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -31,6 +32,7 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
     private ?PayloadableUpdatePostTagTermMutationResolver $payloadableUpdatePostTagTermMutationResolver = null;
     private ?PayloadableDeletePostTagTermMutationResolver $payloadableDeletePostTagTermMutationResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
+    private ?PostTagTermUpdateInputObjectTypeResolver $postTagTermUpdateInputObjectTypeResolver = null;
 
     final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
@@ -136,6 +138,19 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
         }
         return $this->booleanScalarTypeResolver;
     }
+    final public function setPostTagTermUpdateInputObjectTypeResolver(PostTagTermUpdateInputObjectTypeResolver $postTagTermUpdateInputObjectTypeResolver): void
+    {
+        $this->postTagTermUpdateInputObjectTypeResolver = $postTagTermUpdateInputObjectTypeResolver;
+    }
+    final protected function getPostTagTermUpdateInputObjectTypeResolver(): PostTagTermUpdateInputObjectTypeResolver
+    {
+        if ($this->postTagTermUpdateInputObjectTypeResolver === null) {
+            /** @var PostTagTermUpdateInputObjectTypeResolver */
+            $postTagTermUpdateInputObjectTypeResolver = $this->instanceManager->getInstance(PostTagTermUpdateInputObjectTypeResolver::class);
+            $this->postTagTermUpdateInputObjectTypeResolver = $postTagTermUpdateInputObjectTypeResolver;
+        }
+        return $this->postTagTermUpdateInputObjectTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -163,7 +178,7 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
     {
         return match ($fieldName) {
             'update' => [
-                'input' => $this->getTagTermUpdateInputObjectTypeResolver(),
+                'input' => $this->getPostTagTermUpdateInputObjectTypeResolver(),
             ],
             'delete' => [],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),

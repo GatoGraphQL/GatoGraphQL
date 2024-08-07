@@ -60,6 +60,11 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
+        App::doAction(
+            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
@@ -105,6 +110,11 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     ): void {
         App::doAction(
             HookNames::VALIDATE_UPDATE,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(
+            HookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
