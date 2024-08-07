@@ -112,10 +112,11 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         );
     }
 
-    protected static function getUsernameToLogin(): string
+    protected static function getUsernameToLogin(): ?string
     {
         $userToLogin = static::getUserToLogin();
         return match ($userToLogin) {
+            null => null,
             self::USER_ADMIN => Environment::getIntegrationTestsAuthenticatedAdminUserUsername(),
             self::USER_EDITOR => Environment::getIntegrationTestsAuthenticatedEditorUserUsername(),
             self::USER_AUTHOR => Environment::getIntegrationTestsAuthenticatedAuthorUserUsername(),
@@ -125,7 +126,7 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         };
     }
 
-    protected static function getUserToLogin(): string
+    protected static function getUserToLogin(): ?string
     {
         return self::USER_ADMIN;
     }
