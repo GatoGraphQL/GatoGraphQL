@@ -28,10 +28,12 @@ abstract class AbstractFixtureThirdPartyPluginDependencyWordPressAuthenticatedUs
     /**
      * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    protected static function getPluginNameEntries(): array
+    protected static function getPluginNameEntries(
+        string $fixtureFolder,
+        ?string $responseFixtureFolder = null,
+    ): array
     {
         $pluginEntries = [];
-        $fixtureFolder = static::getFixtureFolder();
         $graphQLQueryFileNameFileInfos = static::findFilesInDirectory(
             $fixtureFolder,
             ['*.gql'],

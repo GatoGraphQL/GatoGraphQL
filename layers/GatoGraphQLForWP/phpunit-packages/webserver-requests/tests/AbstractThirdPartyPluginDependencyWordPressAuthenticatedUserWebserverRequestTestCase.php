@@ -83,11 +83,13 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @return array<string,array<mixed>>
      */
-    public static function provideEndpointEntries(): array
-    {
+    public static function provideFixtureEndpointEntries(
+        string $fixtureFolder,
+        ?string $responseFixtureFolder = null,
+    ): array {
         $endpoint = static::getEndpoint();
         $providerEntries = [];
-        foreach (static::getPluginNameEntries() as $pluginName => $pluginEntry) {
+        foreach (static::getPluginNameEntries($fixtureFolder, $responseFixtureFolder) as $pluginName => $pluginEntry) {
             // Only for the variations, the "enable" and "disable" responses are optional
             if (isset($pluginEntry['response-enabled'])) {
                 $providerEntries[$pluginName . ':enabled'] = [
@@ -131,7 +133,10 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
     /**
      * @return array<string,array<string,mixed>> An array of [$pluginName => ['query' => "...", 'response-enabled' => "...", 'response-disabled' => "..."]]
      */
-    abstract protected static function getPluginNameEntries(): array;
+    abstract protected static function getPluginNameEntries(
+        string $fixtureFolder,
+        ?string $responseFixtureFolder = null,
+    ): array;
 
     /**
      * @see https://developer.wordpress.org/rest-api/using-the-rest-api/authentication/
