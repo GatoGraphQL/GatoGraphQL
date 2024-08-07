@@ -152,8 +152,21 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
                 $pluginName,
                 $status
             ),
-            static::getRESTEndpointRequestOptions()
+            static::getEnableDisablePluginsRESTEndpointRequestOptions()
         );
+    }
+
+    /**
+     * Enable/disable plugins as the admin user,
+     * to allow testing with subscribers
+     *
+     * @return array<string,mixed>
+     */
+    protected function getEnableDisablePluginsRESTEndpointRequestOptions(): array
+    {
+        $options = static::getRESTEndpointRequestOptions();
+        $options[RequestOptions::HEADERS]['Authorization'] = static::getApplicationPasswordAuthorizationHeader(static::USER_ADMIN);
+        return $options;
     }
 
     /**
