@@ -26,7 +26,8 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
     public const USER_CONTRIBUTOR = 'contributor';
     public const USER_SUBSCRIBER = 'subscriber';
 
-    protected static string $applicationPassword;
+    /** @var array<string,string> Key: role, Value: application password */
+    protected static array $applicationPasswords;
 
     /**
      * Retrieve the admin's application password
@@ -38,10 +39,13 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         /**
          * Modify the post data before executing the ":enabled" test
          */
-        self::$applicationPassword = static::executeRESTEndpointToGetApplicationPassword();
+        self::$applicationPasswords = static::executeRESTEndpointToGetApplicationPasswords();
     }
 
-    protected static function executeRESTEndpointToGetApplicationPassword(): string
+    /**
+     * @return array<string,string>
+     */
+    protected static function executeRESTEndpointToGetApplicationPasswords(): array
     {
         $client = static::getClient();
         $endpointURL = static::getUserRESTEndpointURL();
@@ -54,7 +58,7 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         );
         $body = $response->getBody()->__toString();
         $content = json_decode($body, true);
-        return static::getUserApplicationPasswordFromResponse($content);
+        return static::getUserApplicationPasswordsFromResponse($content);
     }
 
     /**
@@ -63,15 +67,26 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
      * @see layers/GatoGraphQLForWP/phpunit-plugins/gatographql-testing/src/Constants/UserMetaKeys.php
      *
      * @param array<string,mixed> $content
+     * @return array<string,string>
      */
-    protected static function getUserApplicationPasswordFromResponse(array $content): string
+    protected static function getUserApplicationPasswordsFromResponse(array $content): array
     {
-        $userToLogin = static::getUserToLogin();
-        $appPasswordByUserRoleMetaKey = sprintf(
-            'app_password:%s',
-            $userToLogin
-        );
-        return $content[$appPasswordByUserRoleMetaKey] ?? $content['app_password'] ?? '';
+        $appPasswords = [];
+        $users = [
+            self::USER_ADMIN,
+            self::USER_EDITOR,
+            self::USER_AUTHOR,
+            self::USER_CONTRIBUTOR,
+            self::USER_SUBSCRIBER,
+        ];
+        foreach ($users as $user) {
+            $appPasswordByUserRoleMetaKey = sprintf(
+                'app_password:%s',
+                $user
+            );
+            $appPasswords[$user] = $content[$appPasswordByUserRoleMetaKey] ?? '';
+        }
+        return $appPasswords;
     }
 
     /**
@@ -88,12 +103,12 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         );
     }
 
-    protected static function getApplicationPassword(): string
+    protected static function getApplicationPassword(string $usernameToLogin): string
     {
         return sprintf(
             '%s:%s',
-            static::getUsernameToLogin(),
-            self::$applicationPassword
+            $usernameToLogin,
+            self::$applicationPasswords[$usernameToLogin] ?? ''
         );
     }
 

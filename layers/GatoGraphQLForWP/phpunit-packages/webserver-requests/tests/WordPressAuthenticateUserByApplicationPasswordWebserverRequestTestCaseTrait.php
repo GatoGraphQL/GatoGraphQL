@@ -14,12 +14,17 @@ trait WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrai
     protected static function getRequestBasicOptions(): array
     {
         $options = parent::getRequestBasicOptions();
-        $options[RequestOptions::HEADERS]['Authorization'] = sprintf(
-            'Basic %s',
-            base64_encode(static::getApplicationPassword())
-        );
+        $options[RequestOptions::HEADERS]['Authorization'] = static::getApplicationPasswordAuthorizationHeader(static::getUsernameToLogin());
         return $options;
     }
 
-    abstract protected static function getApplicationPassword(): string;
+    protected static function getApplicationPasswordAuthorizationHeader(string $usernameToLogin): string
+    {
+        return sprintf(
+            'Basic %s',
+            base64_encode(static::getApplicationPassword($usernameToLogin))
+        );
+    }
+
+    abstract protected static function getApplicationPassword(string $usernameToLogin): string;
 }
