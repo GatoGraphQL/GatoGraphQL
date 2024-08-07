@@ -289,6 +289,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 = 4.2.0 =
 * Added mutations for categories (#2764)
 * Added mutations for tags (#2765)
+* [PRO] Define the Polylang language on tag and category mutations
 
 = 4.1.0 =
 * Send the referer on Guzzle requests (#2754)

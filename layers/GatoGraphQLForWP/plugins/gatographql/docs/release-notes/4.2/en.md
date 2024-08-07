@@ -289,3 +289,34 @@ fragment TagData on Tag {
   description
 }
 ```
+
+## [PRO] Improvements
+
+### Define the Polylang language on tag and category mutations
+
+With the **Polylang integration**, when creating a tag or category (see above), we can pass `polylangLanguageBy` input to already define its language.
+
+For instance, this query creates a post category, and defines its language as Spanish:
+
+```graphql
+mutation {
+  createPostCategory(input: {
+    name: "Noticias"
+    polylangLanguageBy: { code: "es" }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    category {
+      polylangLanguage {
+        locale
+      }
+      name
+    }
+  }
+}
+```
