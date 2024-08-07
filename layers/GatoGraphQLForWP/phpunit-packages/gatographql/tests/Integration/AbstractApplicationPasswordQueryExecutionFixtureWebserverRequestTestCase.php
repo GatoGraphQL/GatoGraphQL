@@ -88,11 +88,11 @@ abstract class AbstractApplicationPasswordQueryExecutionFixtureWebserverRequestT
         );
     }
 
-    protected static function getApplicationPassword(): string
+    protected static function getApplicationPassword(?string $usernameToLogin = null): string
     {
         return sprintf(
             '%s:%s',
-            static::getUsernameToLogin(),
+            $usernameToLogin ?? static::getUsernameToLogin(),
             self::$applicationPassword
         );
     }

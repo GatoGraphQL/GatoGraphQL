@@ -26,5 +26,5 @@ trait WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrai
         );
     }
 
-    abstract protected static function getApplicationPassword(): string;
+    abstract protected static function getApplicationPassword(?string $usernameToLogin = null): string;
 }
