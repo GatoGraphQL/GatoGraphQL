@@ -18,11 +18,11 @@ trait WordPressAuthenticateUserByApplicationPasswordWebserverRequestTestCaseTrai
         return $options;
     }
 
-    protected static function getApplicationPasswordAuthorizationHeader(): string
+    protected static function getApplicationPasswordAuthorizationHeader(?string $usernameToLogin = null): string
     {
         return sprintf(
             'Basic %s',
-            base64_encode(static::getApplicationPassword())
+            base64_encode(static::getApplicationPassword($usernameToLogin))
         );
     }
 
