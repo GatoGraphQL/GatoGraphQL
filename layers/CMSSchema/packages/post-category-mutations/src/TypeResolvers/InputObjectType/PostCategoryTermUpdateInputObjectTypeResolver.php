@@ -9,7 +9,7 @@ use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\CategoryTermUpd
 class PostCategoryTermUpdateInputObjectTypeResolver extends AbstractCreateOrUpdatePostCategoryTermInputObjectTypeResolver implements UpdatePostCategoryTermInputObjectTypeResolverInterface
 {
     use CategoryTermUpdateInputObjectTypeResolverTrait;
-    
+
     public function getTypeName(): string
     {
         return 'PostCategoryUpdateInput';

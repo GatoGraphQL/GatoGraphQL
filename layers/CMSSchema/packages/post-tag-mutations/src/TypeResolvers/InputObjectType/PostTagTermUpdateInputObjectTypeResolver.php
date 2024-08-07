@@ -9,7 +9,7 @@ use PoPCMSSchema\TagMutations\TypeResolvers\InputObjectType\TagTermUpdateInputOb
 class PostTagTermUpdateInputObjectTypeResolver extends AbstractCreateOrUpdatePostTagTermInputObjectTypeResolver implements UpdatePostTagTermInputObjectTypeResolverInterface
 {
     use TagTermUpdateInputObjectTypeResolverTrait;
-    
+
     public function getTypeName(): string
     {
         return 'PostTagUpdateInput';
