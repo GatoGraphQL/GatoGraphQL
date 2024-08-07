@@ -7,7 +7,7 @@ namespace PoPCMSSchema\TagMutations\TypeResolvers\InputObjectType;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\AbstractDeleteTaxonomyTermInputObjectTypeResolver;
 
-abstract class AbstractDeleteTagTermInputObjectTypeResolver extends AbstractDeleteTaxonomyTermInputObjectTypeResolver implements UpdateTagTermInputObjectTypeResolverInterface, CreateTagTermInputObjectTypeResolverInterface
+abstract class AbstractDeleteTagTermInputObjectTypeResolver extends AbstractDeleteTaxonomyTermInputObjectTypeResolver implements DeleteTagTermInputObjectTypeResolverInterface
 {
     public function getTypeDescription(): ?string
     {
