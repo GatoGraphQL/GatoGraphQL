@@ -460,6 +460,17 @@
           "description": "Error payload for: \"No user is registered with the provided username\""
         },
         {
+          "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+          "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to assign terms to a taxonomy\""
+        },
+        {
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
           "namespacedName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
           "fields": [
@@ -3583,13 +3594,6 @@
           "description": "Input to filter comments"
         },
         {
-          "name": "RootCreateCategoryInput",
-          "namespacedName": "RootCreateCategoryInput",
-          "fields": null,
-          "kind": "INPUT_OBJECT",
-          "description": "Input to create a category term"
-        },
-        {
           "name": "RootCreateCustomPostInput",
           "namespacedName": "RootCreateCustomPostInput",
           "fields": null,
@@ -3625,6 +3629,13 @@
           "description": "Input to update a custom post"
         },
         {
+          "name": "RootCreatePostCategoryInput",
+          "namespacedName": "RootCreatePostCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to create a category term"
+        },
+        {
           "name": "RootCreatePostInput",
           "namespacedName": "RootCreatePostInput",
           "fields": null,
@@ -3632,8 +3643,8 @@
           "description": "Input to update a custom post"
         },
         {
-          "name": "RootCreateTagInput",
-          "namespacedName": "RootCreateTagInput",
+          "name": "RootCreatePostTagInput",
+          "namespacedName": "RootCreatePostTagInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to create a tag term"
@@ -3644,13 +3655,6 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter custom posts"
-        },
-        {
-          "name": "RootDeleteCategoryInput",
-          "namespacedName": "RootDeleteCategoryInput",
-          "fields": null,
-          "kind": "INPUT_OBJECT",
-          "description": "Input to delete a category term"
         },
         {
           "name": "RootDeleteGenericCategoryInput",
@@ -3667,8 +3671,15 @@
           "description": "Input to delete a tag term"
         },
         {
-          "name": "RootDeleteTagInput",
-          "namespacedName": "RootDeleteTagInput",
+          "name": "RootDeletePostCategoryInput",
+          "namespacedName": "RootDeletePostCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a category term"
+        },
+        {
+          "name": "RootDeletePostTagInput",
+          "namespacedName": "RootDeletePostTagInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a tag term"
@@ -3779,8 +3790,8 @@
           "description": "Input to add a comment to a custom post"
         },
         {
-          "name": "RootSetCategoriesOnCustomPostInput",
-          "namespacedName": "RootSetCategoriesOnCustomPostInput",
+          "name": "RootSetCategoriesOnPostInput",
+          "namespacedName": "RootSetCategoriesOnPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set categories on a custom post"
@@ -3793,8 +3804,8 @@
           "description": "Input to set the featured image on a custom post"
         },
         {
-          "name": "RootSetTagsOnCustomPostInput",
-          "namespacedName": "RootSetTagsOnCustomPostInput",
+          "name": "RootSetTagsOnPostInput",
+          "namespacedName": "RootSetTagsOnPostInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to set tags on a custom post"
@@ -3805,13 +3816,6 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to filter tags"
-        },
-        {
-          "name": "RootUpdateCategoryInput",
-          "namespacedName": "RootUpdateCategoryInput",
-          "fields": null,
-          "kind": "INPUT_OBJECT",
-          "description": "Input to update a category term"
         },
         {
           "name": "RootUpdateCustomPostInput",
@@ -3842,6 +3846,13 @@
           "description": "Input to update a custom post"
         },
         {
+          "name": "RootUpdatePostCategoryInput",
+          "namespacedName": "RootUpdatePostCategoryInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a category term"
+        },
+        {
           "name": "RootUpdatePostInput",
           "namespacedName": "RootUpdatePostInput",
           "fields": null,
@@ -3849,8 +3860,8 @@
           "description": "Input to update a custom post"
         },
         {
-          "name": "RootUpdateTagInput",
-          "namespacedName": "RootUpdateTagInput",
+          "name": "RootUpdatePostTagInput",
+          "namespacedName": "RootUpdatePostTagInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a tag term"

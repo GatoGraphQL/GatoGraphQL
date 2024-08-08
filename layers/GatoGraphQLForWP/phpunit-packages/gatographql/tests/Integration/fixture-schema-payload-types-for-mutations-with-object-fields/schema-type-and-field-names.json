@@ -409,6 +409,14 @@
           ]
         },
         {
+          "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
           "fields": [
             {
@@ -3155,10 +3163,6 @@
           "fields": null
         },
         {
-          "name": "RootCreateCategoryInput",
-          "fields": null
-        },
-        {
           "name": "RootCreateCustomPostInput",
           "fields": null
         },
@@ -3179,19 +3183,19 @@
           "fields": null
         },
         {
+          "name": "RootCreatePostCategoryInput",
+          "fields": null
+        },
+        {
           "name": "RootCreatePostInput",
           "fields": null
         },
         {
-          "name": "RootCreateTagInput",
+          "name": "RootCreatePostTagInput",
           "fields": null
         },
         {
           "name": "RootCustomPostsFilterInput",
-          "fields": null
-        },
-        {
-          "name": "RootDeleteCategoryInput",
           "fields": null
         },
         {
@@ -3203,7 +3207,11 @@
           "fields": null
         },
         {
-          "name": "RootDeleteTagInput",
+          "name": "RootDeletePostCategoryInput",
+          "fields": null
+        },
+        {
+          "name": "RootDeletePostTagInput",
           "fields": null
         },
         {
@@ -3267,7 +3275,7 @@
           "fields": null
         },
         {
-          "name": "RootSetCategoriesOnCustomPostInput",
+          "name": "RootSetCategoriesOnPostInput",
           "fields": null
         },
         {
@@ -3275,15 +3283,11 @@
           "fields": null
         },
         {
-          "name": "RootSetTagsOnCustomPostInput",
+          "name": "RootSetTagsOnPostInput",
           "fields": null
         },
         {
           "name": "RootTagsFilterInput",
-          "fields": null
-        },
-        {
-          "name": "RootUpdateCategoryInput",
           "fields": null
         },
         {
@@ -3303,11 +3307,15 @@
           "fields": null
         },
         {
+          "name": "RootUpdatePostCategoryInput",
+          "fields": null
+        },
+        {
           "name": "RootUpdatePostInput",
           "fields": null
         },
         {
-          "name": "RootUpdateTagInput",
+          "name": "RootUpdatePostTagInput",
           "fields": null
         },
         {

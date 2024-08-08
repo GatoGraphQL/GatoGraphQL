@@ -402,9 +402,6 @@
           "name": "RootCommentsFilterInput"
         },
         {
-          "name": "RootCreateCategoryInput"
-        },
-        {
           "name": "RootCreateCustomPostInput"
         },
         {
@@ -420,16 +417,16 @@
           "name": "RootCreatePageInput"
         },
         {
+          "name": "RootCreatePostCategoryInput"
+        },
+        {
           "name": "RootCreatePostInput"
         },
         {
-          "name": "RootCreateTagInput"
+          "name": "RootCreatePostTagInput"
         },
         {
           "name": "RootCustomPostsFilterInput"
-        },
-        {
-          "name": "RootDeleteCategoryInput"
         },
         {
           "name": "RootDeleteGenericCategoryInput"
@@ -438,7 +435,10 @@
           "name": "RootDeleteGenericTagInput"
         },
         {
-          "name": "RootDeleteTagInput"
+          "name": "RootDeletePostCategoryInput"
+        },
+        {
+          "name": "RootDeletePostTagInput"
         },
         {
           "name": "RootMediaItemPaginationInput"
@@ -486,19 +486,16 @@
           "name": "RootReplyCommentInput"
         },
         {
-          "name": "RootSetCategoriesOnCustomPostInput"
+          "name": "RootSetCategoriesOnPostInput"
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostInput"
         },
         {
-          "name": "RootSetTagsOnCustomPostInput"
+          "name": "RootSetTagsOnPostInput"
         },
         {
           "name": "RootTagsFilterInput"
-        },
-        {
-          "name": "RootUpdateCategoryInput"
         },
         {
           "name": "RootUpdateCustomPostInput"
@@ -513,10 +510,13 @@
           "name": "RootUpdatePageInput"
         },
         {
+          "name": "RootUpdatePostCategoryInput"
+        },
+        {
           "name": "RootUpdatePostInput"
         },
         {
-          "name": "RootUpdateTagInput"
+          "name": "RootUpdatePostTagInput"
         },
         {
           "name": "TagByFilterInput"
