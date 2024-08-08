@@ -139,10 +139,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-
-            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-                return;
-            }
         } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
             $this->validateCategoriesBySlugExist(
@@ -150,10 +146,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-
-            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-                return;
-            }
         }
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {

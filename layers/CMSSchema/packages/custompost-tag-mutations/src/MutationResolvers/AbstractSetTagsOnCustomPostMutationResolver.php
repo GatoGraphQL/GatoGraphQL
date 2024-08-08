@@ -124,10 +124,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
@@ -137,10 +133,10 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
+        }
 
-            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-                return;
-            }
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
         }
 
         $this->validateCanLoggedInUserEditCustomPosts(
