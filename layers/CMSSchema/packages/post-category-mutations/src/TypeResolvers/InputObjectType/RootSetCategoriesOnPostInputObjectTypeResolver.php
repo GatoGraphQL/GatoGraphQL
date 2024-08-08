@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategoryMutations\TypeResolvers\InputObjectType;
 
-class RootSetCategoriesOnCustomPostInputObjectTypeResolver extends AbstractSetCategoriesOnPostInputObjectTypeResolver
+class RootSetCategoriesOnPostInputObjectTypeResolver extends AbstractSetCategoriesOnPostInputObjectTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'RootSetCategoriesOnCustomPostInput';
+        return 'RootSetCategoriesOnPostInput';
     }
 
     protected function addCustomPostInputField(): bool
