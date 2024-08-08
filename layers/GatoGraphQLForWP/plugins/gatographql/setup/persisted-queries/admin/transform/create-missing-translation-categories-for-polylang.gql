@@ -40,10 +40,15 @@ query InitializeVariables
     @export(as: "canTranslateOriginCategory")
     @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasCreatedTranslationCategories")
+    @export(as: "hasOriginCategoryParent")
     @remove
 
   emptyArray: _echo(value: [])
     @export(as: "createdTranslationCategoryIDs")
+    @remove
+
+  emptyObject: _echo(value: {})
+    @export(as: "categoryParentTranslationLanguages")
     @remove
 }
 
@@ -76,6 +81,7 @@ query ExportOriginCategory(
       id
     }
     ################################################################
+    hasOriginCategoryParent: _notNull(value: $__originCategoryParent)
 
 
     polylangLanguage {
@@ -131,11 +137,27 @@ query ExportOriginCategoryCanBeTranslated(
     @export(as: "canTranslateOriginCategory")
 }
 
+query ExportOriginCategoryParent(
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
+)
+  @depends(on: "ExportOriginCategoryCanBeTranslated")
+  @include(if: $canTranslateOriginCategory)
+  @include(if: $hasOriginCategoryParent)
+{
+  originCategoryParent: category(by: { id: $originCategoryParentID }, taxonomy: $categoryTaxonomy) {
+    id
+
+    
+    polylangTranslationLanguageIDs
+      @export(as: "categoryParentTranslationLanguages")
+  }
+}
+
 query ExportMissingTranslationLanguages(
   $includeLanguagesToTranslate: [String!]! = []
   $excludeLanguagesToTranslate: [String!]! = []
 )
-  @depends(on: "ExportOriginCategoryCanBeTranslated")
+  @depends(on: "ExportOriginCategoryParent")
   @include(if: $canTranslateOriginCategory)
 {
   missingTranslationLanguagesWithoutFilteringByInclude: _arrayDiff(
@@ -169,7 +191,7 @@ query CreateTranslationCategoryInputsForMissingLanguages
   createTranslationCategoryInputs: _echo(value: $missingTranslationLanguages)
     @underEachArrayItem(
       passValueOnwardsAs: "languageCode"
-      affectDirectivesUnderPos: [1, 2]
+      affectDirectivesUnderPos: [1, 2, 3]
     )
       @applyField(
         name: "_sprintf"
@@ -180,13 +202,23 @@ query CreateTranslationCategoryInputsForMissingLanguages
         passOnwardsAs: "originCategoryNameForLanguage"
       )
       @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $categoryParentTranslationLanguages,
+          by: { key: $languageCode }
+          failIfNonExistingKeyOrPath: false
+          valueWhenNonExistingKeyOrPath: $originCategoryParentID
+        },
+        passOnwardsAs: "originSameOrTranslatedCategoryParentID"
+      )
+      @applyField(
         name: "_echo",
         arguments: {
           value: {
             name: $originCategoryNameForLanguage,
             description: $originCategoryDescription
             parentBy: {
-              id: $originCategoryParentID
+              id: $originSameOrTranslatedCategoryParentID
             },
             polylangLanguageBy: { code: $languageCode }
           }
