@@ -54,6 +54,12 @@ trait PayloadableCustomPostMutationResolverTrait
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
+            ] => new LoggedInUserHasNoPermissionToEditCustomPostErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new CustomPostDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),

@@ -12,6 +12,7 @@ use PoP\Root\Services\BasicServiceTrait;
 use WP_Error;
 
 use function user_can;
+use function get_post_type_object;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -116,5 +117,15 @@ class CustomPostTypeMutationAPI implements CustomPostTypeMutationAPIInterface
     public function canUserEditCustomPost(string|int $userID, string|int $customPostID): bool
     {
         return user_can((int)$userID, 'edit_post', $customPostID);
+    }
+
+    public function canUserEditCustomPostType(string|int $userID, string $customPostType): bool
+    {
+        $customPostTypeObject = get_post_type_object($customPostType);
+        if ($customPostTypeObject === null) {
+            return false;
+        }
+
+        return isset($customPostTypeObject->cap->edit_posts) && user_can((int)$userID, $customPostTypeObject->cap->edit_posts);
     }
 }

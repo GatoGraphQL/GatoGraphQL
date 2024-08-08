@@ -71,6 +71,13 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         return isset($taxonomy->cap->edit_terms) && user_can((int) $userID, $taxonomy->cap->edit_terms);
     }
 
+    public function canUserAssignTermsToTaxonomy(string|int $userID, string $taxonomyName): bool
+    {
+        /** @var WP_Taxonomy */
+        $taxonomy = $this->getTaxonomy($taxonomyName);
+        return isset($taxonomy->cap->assign_terms) && user_can((int) $userID, $taxonomy->cap->assign_terms);
+    }
+
     public function canUserDeleteTaxonomyTerm(string|int $userID, string|int $taxonomyTermID): bool
     {
         return user_can((int) $userID, 'delete_term', $taxonomyTermID);

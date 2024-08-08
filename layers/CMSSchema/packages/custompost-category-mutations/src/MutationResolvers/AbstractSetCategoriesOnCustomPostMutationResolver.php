@@ -10,6 +10,7 @@ use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMuta
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateOrUpdateCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -21,7 +22,10 @@ use stdClass;
 
 abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends AbstractMutationResolver
 {
-    use CreateOrUpdateCustomPostMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMutationResolverTrait {
+        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait;
+        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMutationResolverTrait;
+    }
     use SetCategoriesOnCustomPostMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
@@ -139,10 +143,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-
-            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-                return;
-            }
         } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
             $this->validateCategoriesBySlugExist(
@@ -150,10 +150,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
-
-            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-                return;
-            }
         }
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
@@ -161,6 +157,13 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
 
         $this->validateCanLoggedInUserEditCustomPosts(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        $taxonomyName = $this->getCategoryTaxonomyName();
+        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
+            $taxonomyName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -175,6 +178,8 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
+
+    abstract protected function getCategoryTaxonomyName(): string;
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

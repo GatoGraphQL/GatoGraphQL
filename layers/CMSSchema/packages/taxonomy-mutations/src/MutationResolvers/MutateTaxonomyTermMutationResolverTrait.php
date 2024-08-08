@@ -183,18 +183,22 @@ trait MutateTaxonomyTermMutationResolverTrait
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(),
+                    $this->getLoggedInUserHasNoPermissionToEditTaxonomyTermsError($taxonomyName),
                     $fieldDataAccessor->getField(),
                 )
             );
         }
     }
 
-    protected function getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(): FeedbackItemResolution
-    {
+    protected function getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(
+        string $taxonomyName,
+    ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E2,
+            [
+                $taxonomyName,
+            ]
         );
     }
 
@@ -228,6 +232,40 @@ trait MutateTaxonomyTermMutationResolverTrait
             MutationErrorFeedbackItemProvider::E3,
             [
                 $taxonomyTermID,
+            ]
+        );
+    }
+
+    protected function validateCanLoggedInUserAssignTermsToTaxonomy(
+        string $taxonomyName,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        // Validate user permission
+        $userID = App::getState('current-user-id');
+        if (
+            !$this->getTaxonomyTermTypeAPI()->canUserAssignTermsToTaxonomy(
+                $userID,
+                $taxonomyName
+            )
+        ) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getLoggedInUserHasNoPermissionToAssignTermsToTaxonomyError($taxonomyName),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    protected function getLoggedInUserHasNoPermissionToAssignTermsToTaxonomyError(
+        string $taxonomyName,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E10,
+            [
+                $taxonomyName,
             ]
         );
     }
