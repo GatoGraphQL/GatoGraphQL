@@ -192,8 +192,7 @@ trait MutateTaxonomyTermMutationResolverTrait
 
     protected function getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(
         string $taxonomyName,
-    ): FeedbackItemResolution
-    {
+    ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E2,
