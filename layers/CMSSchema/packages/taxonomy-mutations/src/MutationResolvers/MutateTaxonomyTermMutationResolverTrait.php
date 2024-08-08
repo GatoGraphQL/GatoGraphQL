@@ -183,18 +183,22 @@ trait MutateTaxonomyTermMutationResolverTrait
         ) {
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
-                    $this->getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(),
+                    $this->getLoggedInUserHasNoPermissionToEditTaxonomyTermsError($taxonomyName),
                     $fieldDataAccessor->getField(),
                 )
             );
         }
     }
 
-    protected function getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(): FeedbackItemResolution
-    {
+    protected function getLoggedInUserHasNoPermissionToEditTaxonomyTermsError(
+        string $taxonomyName,
+    ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E2,
+            [
+                $taxonomyName,
+            ]
         );
     }
 

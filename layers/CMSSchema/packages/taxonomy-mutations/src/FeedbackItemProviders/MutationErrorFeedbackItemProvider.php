@@ -41,7 +41,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('You must be logged in to mutate taxonomy terms', 'taxonomy-mutations'),
-            self::E2 => $this->__('Your user doesn\'t have permission for editing taxonomy terms.', 'taxonomy-mutations'),
+            self::E2 => $this->__('Your user doesn\'t have permission for editing taxonomy \'%s\'.', 'taxonomy-mutations'),
             self::E3 => $this->__('Your user doesn\'t have permission for deleting taxonomy term with ID \'%s\'.', 'taxonomy-mutations'),
             self::E4 => $this->__('The taxonomy ID is missing', 'taxonomy-mutations'),
             self::E5 => $this->__('There is no taxonomy with name \'%s\'', 'taxonomy-mutations'),
