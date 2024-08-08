@@ -72,6 +72,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
         },
         {
@@ -684,10 +688,6 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreateCategoryInput"
-        },
-        {
-          "kind": "INPUT_OBJECT",
           "name": "RootCreateCustomPostInput"
         },
         {
@@ -708,19 +708,19 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreatePostCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreatePostInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreateTagInput"
+          "name": "RootCreatePostTagInput"
         },
         {
           "kind": "INPUT_OBJECT",
           "name": "RootCustomPostsFilterInput"
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "RootDeleteCategoryInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -732,7 +732,11 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootDeleteTagInput"
+          "name": "RootDeletePostCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeletePostTagInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -796,7 +800,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetCategoriesOnCustomPostInput"
+          "name": "RootSetCategoriesOnPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -804,15 +808,11 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetTagsOnCustomPostInput"
+          "name": "RootSetTagsOnPostInput"
         },
         {
           "kind": "INPUT_OBJECT",
           "name": "RootTagsFilterInput"
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "RootUpdateCategoryInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -832,11 +832,15 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdatePostCategoryInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdatePostInput"
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootUpdateTagInput"
+          "name": "RootUpdatePostTagInput"
         },
         {
           "kind": "INPUT_OBJECT",
