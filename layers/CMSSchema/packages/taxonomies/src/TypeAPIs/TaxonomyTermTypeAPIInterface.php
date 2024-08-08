@@ -18,6 +18,7 @@ interface TaxonomyTermTypeAPIInterface
     public function getTaxonomyTermTaxonomy(int|string $taxonomyTermID): string|null;
     public function getTaxonomyTerm(int|string $taxonomyTermID, string $taxonomy = ''): object|null;
     public function canUserEditTaxonomy(string|int $userID, string $taxonomyName): bool;
+    public function canUserAssignTermsToTaxonomy(string|int $userID, string $taxonomyName): bool;
     public function canUserDeleteTaxonomyTerm(string|int $userID, string|int $taxonomyTermID): bool;
     public function getTaxonomy(string $taxonomyName): object|null;
     public function taxonomyExists(string $taxonomyName): bool;
