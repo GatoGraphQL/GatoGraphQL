@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Added mutations for categories (#2764)
 - Added mutations for tags (#2765)
+- Validate `assign_terms` capability on `setCategory` and `setTag` mutations (#2772)
 
 ## 4.1.0 - 26/07/2024
 

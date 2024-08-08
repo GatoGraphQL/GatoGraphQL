@@ -18,6 +18,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E7 = 'e7';
     public final const E8 = 'e8';
     public final const E9 = 'e9';
+    public final const E10 = 'e10';
 
     /**
      * @return string[]
@@ -34,6 +35,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7,
             self::E8,
             self::E9,
+            self::E10,
         ];
     }
 
@@ -49,6 +51,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7 => $this->__('On taxonomy \'%s\', there is no term with ID \'%s\'', 'taxonomy-mutations'),
             self::E8 => $this->__('There is no taxonomy term with slug \'%s\'', 'taxonomy-mutations'),
             self::E9 => $this->__('On taxonomy \'%s\', there is no term with slug \'%s\'', 'taxonomy-mutations'),
+            self::E10 => $this->__('Your user doesn\'t have permission to assign terms to taxonomy \'%s\'.', 'taxonomy-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

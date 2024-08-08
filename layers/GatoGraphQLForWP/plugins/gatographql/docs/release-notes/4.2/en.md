@@ -2,6 +2,8 @@
 
 ## Improvements
 
+- Validate `assign_terms` capability on `setCategory` and `setTag` mutations ([#2772](https://github.com/GatoGraphQL/GatoGraphQL/pull/2772))
+
 ### Added mutations for categories ([#2764](https://github.com/GatoGraphQL/GatoGraphQL/pull/2764))
 
 It is now possible to create, update and delete post categories, with the newly-added mutations:

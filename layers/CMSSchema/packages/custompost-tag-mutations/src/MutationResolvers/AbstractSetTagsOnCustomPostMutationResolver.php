@@ -10,18 +10,22 @@ use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use stdClass;
 
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
-    use CreateOrUpdateCustomPostMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMutationResolverTrait {
+        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait;
+        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMutationResolverTrait;
+    }
     use SetTagsOnCustomPostMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
@@ -144,6 +148,13 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $taxonomyName = $this->getTagTaxonomyName();
+        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
@@ -154,6 +165,8 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
+
+    abstract protected function getTagTaxonomyName(): string;
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {
