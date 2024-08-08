@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategoryMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\PostUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootCreatePostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootUpdatePostMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -17,6 +20,9 @@ class LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityMutationErrorPayloadObj
     {
         return [
             AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver::class,
+            PostUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreatePostMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdatePostMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
