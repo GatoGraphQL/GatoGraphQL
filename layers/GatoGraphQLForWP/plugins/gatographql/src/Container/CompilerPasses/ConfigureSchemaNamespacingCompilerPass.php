@@ -44,6 +44,8 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPCMSSchema\CommentMutations\Module::class,
             \PoPCMSSchema\Comments\Module::class,
             \PoPCMSSchema\Taxonomies\Module::class,
+            \PoPCMSSchema\TaxonomyMutations\Module::class,
+            \PoPCMSSchema\TaxonomyMutationsWP\Module::class,
             \PoPCMSSchema\CategoryMutations\Module::class,
             \PoPCMSSchema\CategoryMutationsWP\Module::class,
             \PoPCMSSchema\CustomPostMutations\Module::class,
