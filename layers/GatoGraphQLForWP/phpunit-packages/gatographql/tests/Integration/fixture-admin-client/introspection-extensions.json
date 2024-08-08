@@ -1457,6 +1457,27 @@
                     "enumValues": null
                 },
                 {
+                    "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+                        "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
@@ -13075,43 +13096,6 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootCreateCategoryInput",
-                    "extensions": {
-                        "elementName": "RootCreateCategoryInput",
-                        "namespacedName": "RootCreateCategoryInput",
-                        "possibleValues": null,
-                        "isOneOf": false
-                    },
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "description",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "name",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "parentBy",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "slug",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ],
-                    "enumValues": null
-                },
-                {
                     "name": "RootCreateCustomPostInput",
                     "extensions": {
                         "elementName": "RootCreateCustomPostInput",
@@ -13381,6 +13365,43 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreatePostCategoryInput",
+                    "extensions": {
+                        "elementName": "RootCreatePostCategoryInput",
+                        "namespacedName": "RootCreatePostCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootCreatePostInput",
                     "extensions": {
                         "elementName": "RootCreatePostInput",
@@ -13448,10 +13469,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootCreateTagInput",
+                    "name": "RootCreatePostTagInput",
                     "extensions": {
-                        "elementName": "RootCreateTagInput",
-                        "namespacedName": "RootCreateTagInput",
+                        "elementName": "RootCreatePostTagInput",
+                        "namespacedName": "RootCreatePostTagInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -13570,25 +13591,6 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootDeleteCategoryInput",
-                    "extensions": {
-                        "elementName": "RootDeleteCategoryInput",
-                        "namespacedName": "RootDeleteCategoryInput",
-                        "possibleValues": null,
-                        "isOneOf": false
-                    },
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "id",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ],
-                    "enumValues": null
-                },
-                {
                     "name": "RootDeleteGenericCategoryInput",
                     "extensions": {
                         "elementName": "RootDeleteGenericCategoryInput",
@@ -13639,10 +13641,29 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootDeleteTagInput",
+                    "name": "RootDeletePostCategoryInput",
                     "extensions": {
-                        "elementName": "RootDeleteTagInput",
-                        "namespacedName": "RootDeleteTagInput",
+                        "elementName": "RootDeletePostCategoryInput",
+                        "namespacedName": "RootDeletePostCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostTagInput",
+                    "extensions": {
+                        "elementName": "RootDeletePostTagInput",
+                        "namespacedName": "RootDeletePostTagInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -14495,10 +14516,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetCategoriesOnCustomPostInput",
+                    "name": "RootSetCategoriesOnPostInput",
                     "extensions": {
-                        "elementName": "RootSetCategoriesOnCustomPostInput",
-                        "namespacedName": "RootSetCategoriesOnCustomPostInput",
+                        "elementName": "RootSetCategoriesOnPostInput",
+                        "namespacedName": "RootSetCategoriesOnPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -14551,10 +14572,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootSetTagsOnCustomPostInput",
+                    "name": "RootSetTagsOnPostInput",
                     "extensions": {
-                        "elementName": "RootSetTagsOnCustomPostInput",
-                        "namespacedName": "RootSetTagsOnCustomPostInput",
+                        "elementName": "RootSetTagsOnPostInput",
+                        "namespacedName": "RootSetTagsOnPostInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -14623,49 +14644,6 @@
                         },
                         {
                             "name": "slugs",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ],
-                    "enumValues": null
-                },
-                {
-                    "name": "RootUpdateCategoryInput",
-                    "extensions": {
-                        "elementName": "RootUpdateCategoryInput",
-                        "namespacedName": "RootUpdateCategoryInput",
-                        "possibleValues": null,
-                        "isOneOf": false
-                    },
-                    "fields": null,
-                    "inputFields": [
-                        {
-                            "name": "description",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "id",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "name",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "parentBy",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "slug",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -14900,6 +14878,49 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdatePostCategoryInput",
+                    "extensions": {
+                        "elementName": "RootUpdatePostCategoryInput",
+                        "namespacedName": "RootUpdatePostCategoryInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "name",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentBy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdatePostInput",
                     "extensions": {
                         "elementName": "RootUpdatePostInput",
@@ -14973,10 +14994,10 @@
                     "enumValues": null
                 },
                 {
-                    "name": "RootUpdateTagInput",
+                    "name": "RootUpdatePostTagInput",
                     "extensions": {
-                        "elementName": "RootUpdateTagInput",
-                        "namespacedName": "RootUpdateTagInput",
+                        "elementName": "RootUpdatePostTagInput",
+                        "namespacedName": "RootUpdatePostTagInput",
                         "possibleValues": null,
                         "isOneOf": false
                     },

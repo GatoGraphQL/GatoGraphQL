@@ -2770,6 +2770,39 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+          "description": "Error payload for: \"The logged-in user has no permission to assign terms to a taxonomy\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
           "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\"",
           "fields": [
@@ -4409,16 +4442,16 @@
                   "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootCreateCategoryInput!]!",
+                    "name": "[RootCreatePostCategoryInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootCreateCategoryInput!]",
+                      "name": "[RootCreatePostCategoryInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootCreateCategoryInput!",
+                        "name": "RootCreatePostCategoryInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootCreateCategoryInput",
+                          "name": "RootCreatePostCategoryInput",
                           "ofType": null
                         }
                       }
@@ -4470,10 +4503,10 @@
                   "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreateCategoryInput!",
+                    "name": "RootCreatePostCategoryInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreateCategoryInput",
+                      "name": "RootCreatePostCategoryInput",
                       "ofType": null
                     }
                   },
@@ -4501,10 +4534,10 @@
                   "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreateTagInput!",
+                    "name": "RootCreatePostTagInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreateTagInput",
+                      "name": "RootCreatePostTagInput",
                       "ofType": null
                     }
                   },
@@ -4532,16 +4565,16 @@
                   "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootCreateTagInput!]!",
+                    "name": "[RootCreatePostTagInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootCreateTagInput!]",
+                      "name": "[RootCreatePostTagInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootCreateTagInput!",
+                        "name": "RootCreatePostTagInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootCreateTagInput",
+                          "name": "RootCreatePostTagInput",
                           "ofType": null
                         }
                       }
@@ -4838,16 +4871,16 @@
                   "description": "Input to delete a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootDeleteCategoryInput!]!",
+                    "name": "[RootDeletePostCategoryInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootDeleteCategoryInput!]",
+                      "name": "[RootDeletePostCategoryInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootDeleteCategoryInput!",
+                        "name": "RootDeletePostCategoryInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootDeleteCategoryInput",
+                          "name": "RootDeletePostCategoryInput",
                           "ofType": null
                         }
                       }
@@ -4899,10 +4932,10 @@
                   "description": "Input to delete a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootDeleteCategoryInput!",
+                    "name": "RootDeletePostCategoryInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootDeleteCategoryInput",
+                      "name": "RootDeletePostCategoryInput",
                       "ofType": null
                     }
                   },
@@ -4930,10 +4963,10 @@
                   "description": "Input to delete a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootDeleteTagInput!",
+                    "name": "RootDeletePostTagInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootDeleteTagInput",
+                      "name": "RootDeletePostTagInput",
                       "ofType": null
                     }
                   },
@@ -4961,16 +4994,16 @@
                   "description": "Input to delete a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootDeleteTagInput!]!",
+                    "name": "[RootDeletePostTagInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootDeleteTagInput!]",
+                      "name": "[RootDeletePostTagInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootDeleteTagInput!",
+                        "name": "RootDeletePostTagInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootDeleteTagInput",
+                          "name": "RootDeletePostTagInput",
                           "ofType": null
                         }
                       }
@@ -5345,10 +5378,10 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetCategoriesOnCustomPostInput!",
+                    "name": "RootSetCategoriesOnPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetCategoriesOnCustomPostInput",
+                      "name": "RootSetCategoriesOnPostInput",
                       "ofType": null
                     }
                   },
@@ -5376,16 +5409,16 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootSetCategoriesOnCustomPostInput!]!",
+                    "name": "[RootSetCategoriesOnPostInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootSetCategoriesOnCustomPostInput!]",
+                      "name": "[RootSetCategoriesOnPostInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootSetCategoriesOnCustomPostInput!",
+                        "name": "RootSetCategoriesOnPostInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootSetCategoriesOnCustomPostInput",
+                          "name": "RootSetCategoriesOnPostInput",
                           "ofType": null
                         }
                       }
@@ -5529,10 +5562,10 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetTagsOnCustomPostInput!",
+                    "name": "RootSetTagsOnPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetTagsOnCustomPostInput",
+                      "name": "RootSetTagsOnPostInput",
                       "ofType": null
                     }
                   },
@@ -5560,16 +5593,16 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootSetTagsOnCustomPostInput!]!",
+                    "name": "[RootSetTagsOnPostInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootSetTagsOnCustomPostInput!]",
+                      "name": "[RootSetTagsOnPostInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootSetTagsOnCustomPostInput!",
+                        "name": "RootSetTagsOnPostInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootSetTagsOnCustomPostInput",
+                          "name": "RootSetTagsOnPostInput",
                           "ofType": null
                         }
                       }
@@ -5928,16 +5961,16 @@
                   "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootUpdateCategoryInput!]!",
+                    "name": "[RootUpdatePostCategoryInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootUpdateCategoryInput!]",
+                      "name": "[RootUpdatePostCategoryInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootUpdateCategoryInput!",
+                        "name": "RootUpdatePostCategoryInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootUpdateCategoryInput",
+                          "name": "RootUpdatePostCategoryInput",
                           "ofType": null
                         }
                       }
@@ -5989,10 +6022,10 @@
                   "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootUpdateCategoryInput!",
+                    "name": "RootUpdatePostCategoryInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootUpdateCategoryInput",
+                      "name": "RootUpdatePostCategoryInput",
                       "ofType": null
                     }
                   },
@@ -6020,10 +6053,10 @@
                   "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootUpdateTagInput!",
+                    "name": "RootUpdatePostTagInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootUpdateTagInput",
+                      "name": "RootUpdatePostTagInput",
                       "ofType": null
                     }
                   },
@@ -6051,16 +6084,16 @@
                   "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootUpdateTagInput!]!",
+                    "name": "[RootUpdatePostTagInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootUpdateTagInput!]",
+                      "name": "[RootUpdatePostTagInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootUpdateTagInput!",
+                        "name": "RootUpdatePostTagInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootUpdateTagInput",
+                          "name": "RootUpdatePostTagInput",
                           "ofType": null
                         }
                       }
@@ -12556,16 +12589,16 @@
                   "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootCreateCategoryInput!]!",
+                    "name": "[RootCreatePostCategoryInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootCreateCategoryInput!]",
+                      "name": "[RootCreatePostCategoryInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootCreateCategoryInput!",
+                        "name": "RootCreatePostCategoryInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootCreateCategoryInput",
+                          "name": "RootCreatePostCategoryInput",
                           "ofType": null
                         }
                       }
@@ -12617,10 +12650,10 @@
                   "description": "Input to create a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreateCategoryInput!",
+                    "name": "RootCreatePostCategoryInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreateCategoryInput",
+                      "name": "RootCreatePostCategoryInput",
                       "ofType": null
                     }
                   },
@@ -12648,10 +12681,10 @@
                   "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootCreateTagInput!",
+                    "name": "RootCreatePostTagInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootCreateTagInput",
+                      "name": "RootCreatePostTagInput",
                       "ofType": null
                     }
                   },
@@ -12679,16 +12712,16 @@
                   "description": "Input to create a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootCreateTagInput!]!",
+                    "name": "[RootCreatePostTagInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootCreateTagInput!]",
+                      "name": "[RootCreatePostTagInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootCreateTagInput!",
+                        "name": "RootCreatePostTagInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootCreateTagInput",
+                          "name": "RootCreatePostTagInput",
                           "ofType": null
                         }
                       }
@@ -13138,16 +13171,16 @@
                   "description": "Input to delete a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootDeleteCategoryInput!]!",
+                    "name": "[RootDeletePostCategoryInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootDeleteCategoryInput!]",
+                      "name": "[RootDeletePostCategoryInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootDeleteCategoryInput!",
+                        "name": "RootDeletePostCategoryInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootDeleteCategoryInput",
+                          "name": "RootDeletePostCategoryInput",
                           "ofType": null
                         }
                       }
@@ -13199,10 +13232,10 @@
                   "description": "Input to delete a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootDeleteCategoryInput!",
+                    "name": "RootDeletePostCategoryInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootDeleteCategoryInput",
+                      "name": "RootDeletePostCategoryInput",
                       "ofType": null
                     }
                   },
@@ -13230,10 +13263,10 @@
                   "description": "Input to delete a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootDeleteTagInput!",
+                    "name": "RootDeletePostTagInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootDeleteTagInput",
+                      "name": "RootDeletePostTagInput",
                       "ofType": null
                     }
                   },
@@ -13261,16 +13294,16 @@
                   "description": "Input to delete a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootDeleteTagInput!]!",
+                    "name": "[RootDeletePostTagInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootDeleteTagInput!]",
+                      "name": "[RootDeletePostTagInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootDeleteTagInput!",
+                        "name": "RootDeletePostTagInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootDeleteTagInput",
+                          "name": "RootDeletePostTagInput",
                           "ofType": null
                         }
                       }
@@ -15353,10 +15386,10 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetCategoriesOnCustomPostInput!",
+                    "name": "RootSetCategoriesOnPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetCategoriesOnCustomPostInput",
+                      "name": "RootSetCategoriesOnPostInput",
                       "ofType": null
                     }
                   },
@@ -15384,16 +15417,16 @@
                   "description": "Input to set categories on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootSetCategoriesOnCustomPostInput!]!",
+                    "name": "[RootSetCategoriesOnPostInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootSetCategoriesOnCustomPostInput!]",
+                      "name": "[RootSetCategoriesOnPostInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootSetCategoriesOnCustomPostInput!",
+                        "name": "RootSetCategoriesOnPostInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootSetCategoriesOnCustomPostInput",
+                          "name": "RootSetCategoriesOnPostInput",
                           "ofType": null
                         }
                       }
@@ -15537,10 +15570,10 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootSetTagsOnCustomPostInput!",
+                    "name": "RootSetTagsOnPostInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootSetTagsOnCustomPostInput",
+                      "name": "RootSetTagsOnPostInput",
                       "ofType": null
                     }
                   },
@@ -15568,16 +15601,16 @@
                   "description": "Input to set tags on a custom post",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootSetTagsOnCustomPostInput!]!",
+                    "name": "[RootSetTagsOnPostInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootSetTagsOnCustomPostInput!]",
+                      "name": "[RootSetTagsOnPostInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootSetTagsOnCustomPostInput!",
+                        "name": "RootSetTagsOnPostInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootSetTagsOnCustomPostInput",
+                          "name": "RootSetTagsOnPostInput",
                           "ofType": null
                         }
                       }
@@ -16204,16 +16237,16 @@
                   "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootUpdateCategoryInput!]!",
+                    "name": "[RootUpdatePostCategoryInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootUpdateCategoryInput!]",
+                      "name": "[RootUpdatePostCategoryInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootUpdateCategoryInput!",
+                        "name": "RootUpdatePostCategoryInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootUpdateCategoryInput",
+                          "name": "RootUpdatePostCategoryInput",
                           "ofType": null
                         }
                       }
@@ -16265,10 +16298,10 @@
                   "description": "Input to update a category term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootUpdateCategoryInput!",
+                    "name": "RootUpdatePostCategoryInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootUpdateCategoryInput",
+                      "name": "RootUpdatePostCategoryInput",
                       "ofType": null
                     }
                   },
@@ -16296,10 +16329,10 @@
                   "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "RootUpdateTagInput!",
+                    "name": "RootUpdatePostTagInput!",
                     "ofType": {
                       "kind": "INPUT_OBJECT",
-                      "name": "RootUpdateTagInput",
+                      "name": "RootUpdatePostTagInput",
                       "ofType": null
                     }
                   },
@@ -16327,16 +16360,16 @@
                   "description": "Input to update a tag term",
                   "type": {
                     "kind": "NON_NULL",
-                    "name": "[RootUpdateTagInput!]!",
+                    "name": "[RootUpdatePostTagInput!]!",
                     "ofType": {
                       "kind": "LIST",
-                      "name": "[RootUpdateTagInput!]",
+                      "name": "[RootUpdatePostTagInput!]",
                       "ofType": {
                         "kind": "NON_NULL",
-                        "name": "RootUpdateTagInput!",
+                        "name": "RootUpdatePostTagInput!",
                         "ofType": {
                           "kind": "INPUT_OBJECT",
-                          "name": "RootUpdateTagInput",
+                          "name": "RootUpdatePostTagInput",
                           "ofType": null
                         }
                       }
@@ -21935,6 +21968,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
@@ -25589,61 +25627,6 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreateCategoryInput",
-          "description": "Input to create a category term",
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "description",
-              "description": "The description of the category",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "name",
-              "description": "The name of the category",
-              "type": {
-                "kind": "NON_NULL",
-                "name": "String!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "parentBy",
-              "description": "The category's parent, or `null` to remove it",
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "CategoryByInput",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "slug",
-              "description": "The slug of the category",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
           "name": "RootCreateCustomPostInput",
           "description": "Input to update a custom post",
           "fields": null,
@@ -26063,6 +26046,61 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreatePostCategoryInput",
+          "description": "Input to create a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the category",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The category's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoryByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCreatePostInput",
           "description": "Input to update a custom post",
           "fields": null,
@@ -26164,7 +26202,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootCreateTagInput",
+          "name": "RootCreatePostTagInput",
           "description": "Input to create a tag term",
           "fields": null,
           "inputFields": [
@@ -26398,31 +26436,6 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootDeleteCategoryInput",
-          "description": "Input to delete a category term",
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "id",
-              "description": "The ID of the category to delete",
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
           "name": "RootDeleteGenericCategoryInput",
           "description": "Input to delete a category term",
           "fields": null,
@@ -26493,7 +26506,32 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootDeleteTagInput",
+          "name": "RootDeletePostCategoryInput",
+          "description": "Input to delete a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": "The ID of the category to delete",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeletePostTagInput",
           "description": "Input to delete a tag term",
           "fields": null,
           "inputFields": [
@@ -28269,7 +28307,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetCategoriesOnCustomPostInput",
+          "name": "RootSetCategoriesOnPostInput",
           "description": "Input to set categories on a custom post",
           "fields": null,
           "inputFields": [
@@ -28361,7 +28399,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootSetTagsOnCustomPostInput",
+          "name": "RootSetTagsOnPostInput",
           "description": "Input to set tags on a custom post",
           "fields": null,
           "inputFields": [
@@ -28511,71 +28549,6 @@
                     "ofType": null
                   }
                 }
-              },
-              "defaultValue": null
-            }
-          ],
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "RootUpdateCategoryInput",
-          "description": "Input to update a category term",
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "description",
-              "description": "The description of the category",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "id",
-              "description": "The ID of the category to update",
-              "type": {
-                "kind": "NON_NULL",
-                "name": "ID!",
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "ID",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "name",
-              "description": "The name of the category",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "parentBy",
-              "description": "The category's parent, or `null` to remove it",
-              "type": {
-                "kind": "INPUT_OBJECT",
-                "name": "CategoryByInput",
-                "ofType": null
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "slug",
-              "description": "The slug of the category",
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
               },
               "defaultValue": null
             }
@@ -28940,6 +28913,71 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdatePostCategoryInput",
+          "description": "Input to update a category term",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "description",
+              "description": "The description of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "The ID of the category to update",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "name",
+              "description": "The name of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "parentBy",
+              "description": "The category's parent, or `null` to remove it",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "CategoryByInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "The slug of the category",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdatePostInput",
           "description": "Input to update a custom post",
           "fields": null,
@@ -29055,7 +29093,7 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "RootUpdateTagInput",
+          "name": "RootUpdatePostTagInput",
           "description": "Input to update a tag term",
           "fields": null,
           "inputFields": [
@@ -31342,6 +31380,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
@@ -31491,6 +31534,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
@@ -31568,7 +31616,17 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
               "ofType": null
             },
             {
@@ -31918,6 +31976,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
               "ofType": null
             },
@@ -32001,6 +32064,11 @@
             {
               "kind": "OBJECT",
               "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
               "ofType": null
             },
             {
@@ -32252,6 +32320,11 @@
             {
               "kind": "OBJECT",
               "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
               "ofType": null
             },
             {
