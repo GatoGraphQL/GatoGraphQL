@@ -184,7 +184,9 @@ query ExportMissingTranslationLanguages(
     @export(as: "hasMissingTranslationLanguages")
 }
 
-query CreateTranslationCategoryInputsForMissingLanguages
+query CreateTranslationCategoryInputsForMissingLanguages(
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
+)
   @depends(on: "ExportMissingTranslationLanguages")
   @include(if: $hasMissingTranslationLanguages)
 {
@@ -215,7 +217,8 @@ query CreateTranslationCategoryInputsForMissingLanguages
         name: "_echo",
         arguments: {
           value: {
-            name: $originCategoryNameForLanguage,
+            taxonomy: $categoryTaxonomy
+            name: $originCategoryNameForLanguage
             description: $originCategoryDescription
             parentBy: {
               id: $originSameOrTranslatedCategoryParentID
