@@ -1,11 +1,11 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The post with the origin language, from where all translations will be made
-#   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
-#   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
-#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
-#   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
+#   - categoryId: The category with the origin language, from where all translations will be made
+#   - categoryTaxonomy: The taxonomy of the category. It is `category` by default (for categorys)
+#   - updateSlug: Indicate if to update the category slug, using the translated name. It is `false` by default.
+#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin category has the default language of the site. It is `true` by default.
+#   - translateFromLanguage: Only execute the translation when the origin category has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
 #   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
 #   - excludeLanguagesToTranslate: Exclude languages from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
@@ -15,20 +15,14 @@
 # === Description ===
 #
 # This Persisted GraphQL query is an integration for Polylang,
-# to translate posts based on the Classic editor.
+# to translate categories.
 #
-# It takes an origin post, it translates it using the Google
+# It takes an origin category, it translates it using the Google
 # Translate API to all the other languages defined in Polylang,
-# and stores those translations in the corresponding posts,
-# as set-up via Polylang.
+# and stores those translations in the corresponding categories,
+# as set-up via Polylang. All translation categories must already exist.
 #
-# All translation posts must already exist. These posts
-# must also have the  `draft` status to be updated.
-# To update posts with any other status, use
-# variable `$statusToUpdate` (for instance, passing value
-# `publish`, `pending` or `any`)
-#
-# By default, the origin post must have the default language
+# By default, the origin category must have the default language
 # of the site, or the translation will not be executed.
 # To translate from any language, pass variable
 # `$translateDefaultLanguageOnly` with `false`.
@@ -42,8 +36,8 @@
 # variables `$includeLanguagesToTranslate` (if empty, all languages
 # will be included) and `$excludeLanguagesToTranslate`.
 #
-# By default it also translates the post slug. To disable, pass
-# variable `updateSlug` with `false`.
+# By default it doesn't translate the category slug. To enable, pass
+# variable `updateSlug` with `true`.
 #
 # For some languages, the code used by WordPress and Google Translate
 # are different. For instance, Norwegian is represented as "nb" by
@@ -57,9 +51,6 @@
 #     }
 #   }
 #
-# See Persisted Query "Translate post (Classic editor)" for additional
-# documentation.
-#
 ########################################################################
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
@@ -69,17 +60,18 @@ query InitializeVariables
     @remove
 
   emptyBool: _echo(value: false)
-    @export(as: "hasTranslationPosts")
+    @export(as: "hasTranslationCategories")
     @export(as: "executeTranslation")
     @remove
   
   emptyArray: _echo(value: [])
-    @export(as: "translationPostIds")
+    @export(as: "translationCategoryIds")
     @remove
 }
 
-query ExportOriginPost(
-  $postId: ID!
+query ExportOriginCategory(
+  $categoryId: ID!
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
 )
@@ -96,7 +88,7 @@ query ExportOriginPost(
     )
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
+  originCategory: category(by: { id: $categoryId }, taxonomy: $categoryTaxonomy) {
     id
 
 
@@ -109,83 +101,83 @@ query ExportOriginPost(
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
-    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationPostIds")
+    translationCategoryIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "translationCategoryIds")
 
-    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
-      @export(as: "hasTranslationPosts")
+    hasTranslationCategories: _notEmpty(value: $__translationCategoryIds)
+      @export(as: "hasTranslationCategories")
 
 
-    rawTitle
-      @export(as: "originRawTitle")
-    rawContent
-      @export(as: "originRawContent")
-    rawExcerpt
-      @export(as: "originRawExcerpt")
+    name
+      @export(as: "originName")
+    description
+      @export(as: "originDescription")
   }
 
-  hasOriginPost: _notNull(value: $__originPost)
-    @export(as: "hasOriginPost")
+  hasOriginCategory: _notNull(value: $__originCategory)
+    @export(as: "hasOriginCategory")
 }
 
 query FetchData(
-  $statusToUpdate: CustomPostStatusEnum! = draft
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
-  @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
-  @include(if: $hasTranslationPosts)
+  @depends(on: "ExportOriginCategory")
+  @include(if: $hasOriginCategory)
+  @include(if: $hasTranslationCategories)
 {
-  translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  translationCategories: categories(
+    taxonomy: $categoryTaxonomy
+    filter: { ids: $translationCategoryIds }
+  ) {
     id
 
     polylangLanguage @export(
-      as: "translationPostLanguages"
+      as: "translationCategoryLanguages"
       type: DICTIONARY
     ) {
       code
     }
 
-    rawTitle: _echo(value: $originRawTitle)
-    rawContent: _echo(value: $originRawContent)
-    rawExcerpt: _echo(value: $originRawExcerpt)
+    name: _echo(value: $originName)
+    description: _echo(value: $originDescription)
       @export(
         as: "dataToTranslate",
-        affectAdditionalFieldsUnderPos: [1, 2]
+        affectAdditionalFieldsUnderPos: [1]
         type: DICTIONARY
       )
   }
 
-  hasTranslationPosts: _notEmpty(value: $__translationPosts)
+  hasTranslationCategories: _notEmpty(value: $__translationCategories)
 
-  originPostHasDefaultLanguage: _equals(
+  originCategoryHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
 
-  originPostHasSpecificLanguage: _equals(
+  originCategoryHasSpecificLanguage: _equals(
     value1: $translateFromLanguage,
     value2: $fromLanguage
   )
 
-  canTranslateOriginPostFromSpecificLanguage: _if(
+  canTranslateOriginCategoryFromSpecificLanguage: _if(
     condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
+    then: $__originCategoryHasSpecificLanguage,
     else: true
   )
 
-  canTranslateOriginPost: _if(
+  canTranslateOriginCategory: _if(
     condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
-    else: $__canTranslateOriginPostFromSpecificLanguage
+    then: $__originCategoryHasDefaultLanguage,
+    else: $__canTranslateOriginCategoryFromSpecificLanguage
   )
 
   executeTranslation: _and(values: [
-    $__hasTranslationPosts,
-    $__canTranslateOriginPost
+    $__hasTranslationCategories,
+    $__canTranslateOriginCategory
   ])
     @export(as: "executeTranslation")
 }
@@ -198,14 +190,14 @@ query TranslateData(
 {  
   translatedData: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "categoryID"
       affectDirectivesUnderPos: [1, 2, 3, 4]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
-          object: $translationPostLanguages,
-          by: { key: $postID }
+          object: $translationCategoryLanguages,
+          by: { key: $categoryID }
         },
         passOnwardsAs: "toLanguageLocale"
       )
@@ -236,101 +228,89 @@ query TranslateData(
 }
 
 query GenerateMutationInputs(
-  $updateSlug: Boolean! = true
+  $updateSlug: Boolean! = false
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
   @depends(on: "TranslateData")
   @include(if: $executeTranslation)
 {  
-  postInputs: _echo(value: $translatedData)
+  categoryInputObject: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
-      passValueOnwardsAs: "postTranslatedData"
-      affectDirectivesUnderPos: [1, 2, 3, 4, 5]
+      passKeyOnwardsAs: "categoryID"
+      passValueOnwardsAs: "categoryTranslatedData"
+      affectDirectivesUnderPos: [1, 2, 3, 4]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
-          object: $postTranslatedData,
+          object: $categoryTranslatedData,
           by: {
-            key: "rawTitle",
+            key: "name",
           }
         },
-        passOnwardsAs: "postTranslatedRawTitle"
-      )
-      @applyField(
-        name: "_if",
-        arguments: {
-          condition: $updateSlug,
-          then: $postTranslatedRawTitle,
-          else: null
-        },
-        passOnwardsAs: "postMaybeTranslatedSlug"
+        passOnwardsAs: "categoryTranslatedName"
       )
       @applyField(
         name: "_objectProperty",
         arguments: {
-          object: $postTranslatedData,
+          object: $categoryTranslatedData,
           by: {
-            key: "rawExcerpt",
+            key: "description",
           }
         },
-        passOnwardsAs: "postTranslatedRawExcerpt"
-      )
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $postTranslatedData,
-          by: {
-            key: "rawContent",
-          }
-        },
-        passOnwardsAs: "postTranslatedRawContent"
+        passOnwardsAs: "categoryTranslatedDescription"
       )
       @applyField(
         name: "_echo",
         arguments: {
           value: {
-            title: $postTranslatedRawTitle,
-            slug: $postMaybeTranslatedSlug,
-            excerpt: $postTranslatedRawExcerpt,
-            contentAs: {
-              html: $postTranslatedRawContent
-            }
+            id: $categoryID
+            taxonomy: $categoryTaxonomy
+            name: $categoryTranslatedName
+            description: $categoryTranslatedDescription
           }
         },
+        passOnwardsAs: "categoryInput"
         setResultInResponse: true
       )
-    @export(as: "postInputs")
+      @if(condition: $updateSlug)
+        @applyField(
+          name: "_objectAddEntry",
+          arguments: {
+            object: $categoryInput
+            key: "slug"
+            value: $categoryTranslatedName
+          },
+          setResultInResponse: true
+        )
+    @export(as: "categoryInputObject")
 }
 
-mutation TranslateClassicEditorPosts(
-  $statusToUpdate: CustomPostStatusEnum! = draft
-)
+query FormatMutationInputs
   @depends(on: "GenerateMutationInputs")
   @include(if: $executeTranslation)
+{  
+  categoryInputs: _objectValues(object: $categoryInputObject)
+    @export(as: "categoryInputs")
+}
+
+mutation TranslateCategories
+  @depends(on: "FormatMutationInputs")
+  @include(if: $executeTranslation)
 {
-  updateTranslationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
-    id
-    postInput: _objectProperty(
-      object: $postInputs,
-      by: {
-        key: $__id
+  updateCategories(inputs: $categoryInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
       }
-    )
-      @remove
-    update(input: $__postInput) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        id
-        title
-        rawExcerpt
-        rawContent
-      }
+    }
+    category {
+      id
+      name
+      description
+      slug
     }
   }
 }

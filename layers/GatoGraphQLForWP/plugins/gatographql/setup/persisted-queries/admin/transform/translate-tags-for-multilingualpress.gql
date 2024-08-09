@@ -3,8 +3,9 @@
 # Variables:
 #   - username: The username to log into the external site
 #   - appPassword: The application password to log into the external site
-#   - postId: The post with the origin language, from where all translations will be made
-#   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
+#   - tagId: The tag with the origin language, from where all translations will be made
+#   - tagTaxonomy: The taxonomy of the tag. It is `post_tag` by default
+#   - updateSlug: Indicate if to update the tag slug, using the translated name. It is `false` by default.
 #   - includeSiteIDsToTranslate: Limit sites to execute the translation for. If empty, all sites are included
 #   - excludeSiteIDsToTranslate: Exclude sites from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
@@ -15,24 +16,24 @@
 # === Description ===
 #
 # This Persisted GraphQL query is an integration for MultilingualPress,
-# to translate posts based on the Classic editor, where every site in a
+# to translate tags, where every site in a
 # WordPress multisite network is a translation site.
 # 
 # It must be executed on the master site, which must have the PRO plugin.
 # All other sites in the network can have the free Gato GraphQL plugin.
 #
-# It takes an origin post on the master site, it translates it using the
+# It takes an origin tag on the master site, it translates it using the
 # Google Translate API to all the other languages defined as connections
 # in MultilingualPress, and stores those translations in the corresponding
-# sites in the network. All translation posts in the network sites must
+# sites in the network. All translation tags in the network sites must
 # already exist.
 #
 # To limit for what sites to execute the translation, pass
 # variables `$includeSiteIDsToTranslate` (if empty, all sites
 # will be included) and `$excludeSiteIDsToTranslate`.
 #
-# By default it also translates the post slug. To disable, pass
-# variable `updateSlug` with `false`.
+# By default it doesn't translate the tag slug. To enable, pass
+# variable `updateSlug` with `true`.
 #
 # For some languages, the code used by WordPress and Google Translate
 # are different. For instance, Norwegian is represented as "nb" by
@@ -45,9 +46,6 @@
 #       "nb": "no"
 #     }
 #   }
-#
-# See Persisted Query "Translate post (Classic editor)" for additional
-# documentation.
 #
 ########################################################################
 query InitializeVariables
@@ -113,14 +111,15 @@ query ExportData(
     @export(as: "authorizationHeaderValue")
 }
 
-query ExportOriginPost(
-  $postId: ID!
+query ExportOriginTag(
+  $tagId: ID!
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
   $includeSiteIDsToTranslate: [ID!]
   $excludeSiteIDsToTranslate: [ID!]
 )
   @depends(on: "ExportData")
 {
-  originPost: post(by: { id: $postId }, status: any) {
+  originTag: tag(by: { id: $tagId }, taxonomy: $tagTaxonomy) {
     id
     
 
@@ -129,7 +128,7 @@ query ExportOriginPost(
       excludeSiteIDs: $excludeSiteIDsToTranslate
     }) {
       siteID
-      postID: entityID
+      tagID: entityID
         @export(
           as: "translationConnectionDataItems",
           type: LIST,
@@ -141,17 +140,15 @@ query ExportOriginPost(
       @export(as: "hasTranslationConnections")
 
 
-    rawTitle
-      @export(as: "originRawTitle")
-    rawContent
-      @export(as: "originRawContent")
-    rawExcerpt
-      @export(as: "originRawExcerpt")
+    name
+      @export(as: "originName")
+    description
+      @export(as: "originDescription")
   }
 }
 
 query CombineConnectionData
-  @depends(on: "ExportOriginPost")
+  @depends(on: "ExportOriginTag")
   @include(if: $hasTranslationConnections)
 {
   networkSiteTranslationConnectionDataItems: _arrayInnerJoinJSONObjectProperties(
@@ -172,14 +169,11 @@ query InitializeTranslationVariables
   arrayItems: _arrayLength(array: $networkSiteTranslationConnectionDataItems)
     @remove
 
-  rawTitle: _arrayPad(array: [], length: $__arrayItems, value: $originRawTitle)
-    @export(as: "rawTitle")
+  name: _arrayPad(array: [], length: $__arrayItems, value: $originName)
+    @export(as: "name")
     @remove
-  rawContent: _arrayPad(array: [], length: $__arrayItems, value: $originRawContent)
-    @export(as: "rawContent")
-    @remove
-  rawExcerpt: _arrayPad(array: [], length: $__arrayItems, value: $originRawExcerpt)
-    @export(as: "rawExcerpt")
+  description: _arrayPad(array: [], length: $__arrayItems, value: $originDescription)
+    @export(as: "description")
     @remove
 }
 
@@ -187,7 +181,7 @@ query AdaptData
   @depends(on: "InitializeTranslationVariables")
   @include(if: $executeTranslation)
 {
-  adaptedToContent: _echo(value: $rawContent)
+  adaptedToName: _echo(value: $name)
     @underEachArrayItem(
       passValueOnwardsAs: "value"
     )
@@ -198,8 +192,8 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedToContent")
-  adaptedFromContent: _echo(value: $rawContent)
+    @export(as: "adaptedToName")
+  adaptedFromName: _echo(value: $name)
     @underEachArrayItem
       @applyField(
         name: "_echo"
@@ -208,9 +202,9 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedFromContent")
+    @export(as: "adaptedFromName")
 
-  adaptedToTitle: _echo(value: $rawTitle)
+  adaptedToDescription: _echo(value: $description)
     @underEachArrayItem(
       passValueOnwardsAs: "value"
     )
@@ -221,8 +215,8 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedToTitle")
-  adaptedFromTitle: _echo(value: $rawTitle)
+    @export(as: "adaptedToDescription")
+  adaptedFromDescription: _echo(value: $description)
     @underEachArrayItem
       @applyField(
         name: "_echo"
@@ -231,30 +225,7 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedFromTitle")
-
-  adaptedToRawExcerpt: _echo(value: $rawExcerpt)
-    @underEachArrayItem(
-      passValueOnwardsAs: "value"
-    )
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: [$value]
-        }
-        setResultInResponse: true
-      )
-    @export(as: "adaptedToRawExcerpt")
-  adaptedFromRawExcerpt: _echo(value: $rawExcerpt)
-    @underEachArrayItem
-      @applyField(
-        name: "_echo"
-        arguments: {
-          value: [""]
-        }
-        setResultInResponse: true
-      )
-    @export(as: "adaptedFromRawExcerpt")
+    @export(as: "adaptedFromDescription")
 }
 
 query TransformData(
@@ -264,17 +235,13 @@ query TransformData(
   @include(if: $executeTranslation)
 {
   transformations: _echo(value: {
-    metaRawContent: {
-      from: $adaptedFromContent,
-      to: $adaptedToContent,
+    metaName: {
+      from: $adaptedFromName,
+      to: $adaptedToName,
     },
-    metaRawTitle: {
-      from: $adaptedFromTitle,
-      to: $adaptedToTitle,
-    },
-    metaRawExcerpt: {
-      from: $adaptedFromRawExcerpt,
-      to: $adaptedToRawExcerpt,
+    metaDescription: {
+      from: $adaptedFromDescription,
+      to: $adaptedToDescription,
     }
   })
     @underEachJSONObjectProperty
@@ -321,7 +288,7 @@ query PrepareMetaReplacements
   @depends(on: "TransformData")
   @include(if: $executeTranslation)
 {
-  transformedMetaContent: _echo(value: $rawContent)
+  transformedMetaName: _echo(value: $name)
     @underEachArrayItem(
       passIndexOnwardsAs: "itemNumber"
       affectDirectivesUnderPos: [1, 2, 3]
@@ -330,31 +297,31 @@ query PrepareMetaReplacements
         name: "_objectProperty",
         arguments: {
           object: $transformations
-          by: { path: "metaRawContent.to" }
+          by: { path: "metaName.to" }
         }
-        passOnwardsAs: "transformedPostContentItem"
+        passOnwardsAs: "transformedTagNameItem"
       )
       @applyField(
         name: "_arrayItem",
         arguments: {
-          array: $transformedPostContentItem
+          array: $transformedTagNameItem
           position: $itemNumber
         }
-        passOnwardsAs: "transformedPostContentAsArray"
+        passOnwardsAs: "transformedTagNameAsArray"
       )
       @applyField(
         name: "_arrayItem",
         arguments: {
-          array: $transformedPostContentAsArray
+          array: $transformedTagNameAsArray
           position: 0
         }
         setResultInResponse: true
       )
     @export(
-      as: "transformedRawContent"
+      as: "transformedName"
     )
 
-  transformedMetaTitle: _echo(value: $rawTitle)
+  transformedMetaDescription: _echo(value: $description)
     @underEachArrayItem(
       passIndexOnwardsAs: "itemNumber"
       affectDirectivesUnderPos: [1, 2, 3]
@@ -363,75 +330,43 @@ query PrepareMetaReplacements
         name: "_objectProperty",
         arguments: {
           object: $transformations
-          by: { path: "metaRawTitle.to" }
+          by: { path: "metaDescription.to" }
         }
-        passOnwardsAs: "transformedPostTitleItem"
+        passOnwardsAs: "transformedTagExcerptItem"
       )
       @applyField(
         name: "_arrayItem",
         arguments: {
-          array: $transformedPostTitleItem
+          array: $transformedTagExcerptItem
           position: $itemNumber
         }
-        passOnwardsAs: "transformedPostTitleAsArray"
+        passOnwardsAs: "transformedTagExcerptAsArray"
       )
       @applyField(
         name: "_arrayItem",
         arguments: {
-          array: $transformedPostTitleAsArray
+          array: $transformedTagExcerptAsArray
           position: 0
         }
         setResultInResponse: true
       )
     @export(
-      as: "transformedRawTitle"
-    )
-
-  transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
-    @underEachArrayItem(
-      passIndexOnwardsAs: "itemNumber"
-      affectDirectivesUnderPos: [1, 2, 3]
-    )
-      @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $transformations
-          by: { path: "metaRawExcerpt.to" }
-        }
-        passOnwardsAs: "transformedPostExcerptItem"
-      )
-      @applyField(
-        name: "_arrayItem",
-        arguments: {
-          array: $transformedPostExcerptItem
-          position: $itemNumber
-        }
-        passOnwardsAs: "transformedPostExcerptAsArray"
-      )
-      @applyField(
-        name: "_arrayItem",
-        arguments: {
-          array: $transformedPostExcerptAsArray
-          position: 0
-        }
-        setResultInResponse: true
-      )
-    @export(
-      as: "transformedRawExcerpt"
+      as: "transformedDescription"
     )
 }
 
 query ExportMutationInputs(
-  $updateSlug: Boolean! = true
+  $updateSlug: Boolean! = false
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
 )
   @depends(on: "PrepareMetaReplacements")
   @include(if: $executeTranslation)
 {
-  updatePostMutationInputDataItems: _echo(value: $networkSiteTranslationConnectionDataItems)
+  updateTagMutationInputDataItems: _echo(value: $networkSiteTranslationConnectionDataItems)
     @underEachArrayItem(
       passIndexOnwardsAs: "itemNumber"
       passValueOnwardsAs: "networkSiteTranslationConnectionDataItem"
-      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6, 7]
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6]
     )
       @applyField(
         name: "_objectProperty",
@@ -445,42 +380,25 @@ query ExportMutationInputs(
         name: "_objectProperty",
         arguments: {
           object: $networkSiteTranslationConnectionDataItem,
-          by: { key: "postID" }
+          by: { key: "tagID" }
         },
-        passOnwardsAs: "itemPostID"
+        passOnwardsAs: "itemTagID"
       )
       @applyField(
         name: "_arrayItem",
         arguments: {
-          array: $transformedRawContent,
+          array: $transformedName,
           position: $itemNumber
         },
-        passOnwardsAs: "itemTransformedRawContent"
+        passOnwardsAs: "itemTransformedName"
       )
       @applyField(
         name: "_arrayItem",
         arguments: {
-          array: $transformedRawTitle,
+          array: $transformedDescription,
           position: $itemNumber
         },
-        passOnwardsAs: "itemTransformedRawTitle"
-      )
-      @applyField(
-        name: "_if",
-        arguments: {
-          condition: $updateSlug,
-          then: $itemTransformedRawTitle,
-          else: null
-        },
-        passOnwardsAs: "itemTransformedSlug"
-      )
-      @applyField(
-        name: "_arrayItem",
-        arguments: {
-          array: $transformedRawExcerpt,
-          position: $itemNumber
-        },
-        passOnwardsAs: "itemTransformedRawExcerpt"
+        passOnwardsAs: "itemTransformedDescription"
       )
       @applyField(
         name: "_echo"
@@ -488,20 +406,28 @@ query ExportMutationInputs(
           value: {
             endpoint: $itemEndpoint,
             input: {
-              id: $itemPostID,
-              title: $itemTransformedRawTitle,
-              slug: $itemTransformedSlug,
-              excerpt: $itemTransformedRawExcerpt,
-              contentAs: {
-                html: $itemTransformedRawContent
-              }
+              id: $itemTagID,
+              taxonomy: $tagTaxonomy,
+              name: $itemTransformedName,
+              description: $itemTransformedDescription
             }
           }
         }
+        passOnwardsAs: "itemInput"
         setResultInResponse: true
       )
+      @if(condition: $updateSlug)
+        @applyField(
+          name: "_objectAddEntry",
+          arguments: {
+            object: $itemInput
+            key: "slug"
+            value: $itemTransformedName
+          },
+          setResultInResponse: true
+        )
     @export(
-      as: "updatePostMutationInputDataItems"
+      as: "updateTagMutationInputDataItems"
     )
 }
 
@@ -509,7 +435,7 @@ mutation UpdatePagesWithTranslationOnExternalSite
   @depends(on: "ExportMutationInputs")
   @include(if: $executeTranslation)
 {
-  updateExternalSitePageHTTPRequests: _echo(value: $updatePostMutationInputDataItems)
+  updateExternalSitePageHTTPRequests: _echo(value: $updateTagMutationInputDataItems)
     @underEachArrayItem(
       passValueOnwardsAs: "mutationInputDataItem"
       affectDirectivesUnderPos: [1, 2, 3]
@@ -537,8 +463,8 @@ mutation UpdatePagesWithTranslationOnExternalSite
             endpoint: $endpoint,
             query: """
           
-mutation UpdatePostFromMasterSite($input: JSONObject!) {
-  updatePost(input: $input) {
+mutation UpdateTagFromMasterSite($input: JSONObject!) {
+  updateTag(input: $input) {
     status
     errors {
       __typename
@@ -546,13 +472,11 @@ mutation UpdatePostFromMasterSite($input: JSONObject!) {
         message
       }
     }
-    post {
+    tag {
       id
       slug
-      title
-      content
-      status
-      excerpt
+      name
+      description
     }
   }
 }

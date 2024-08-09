@@ -261,6 +261,7 @@ class Plugin extends AbstractMainPlugin
             '2.6' => [$this->installPluginSetupDataForVersion2Dot6(...)],
             '3.0' => [$this->installPluginSetupDataForVersion3Dot0(...)],
             '4.0' => [$this->installPluginSetupDataForVersion4Dot0(...)],
+            '4.2' => [$this->installPluginSetupDataForVersion4Dot2(...)],
         ];
     }
 
@@ -1857,6 +1858,163 @@ class Plugin extends AbstractMainPlugin
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                     'admin/transform/create-missing-translation-posts-for-polylang',
                                     VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_POSTS_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+    }
+
+    protected function installPluginSetupDataForVersion4Dot2(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+
+        /**
+         * Create the Persisted Queries
+         */
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Translate categories for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Translate a category to all languages defined in the Polylang settings, and store those translations in the corresponding categories', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/translate-categories-for-polylang',
+                                    VirtualTutorialLessons::TRANSLATING_CATEGORIES_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Create missing translation categories for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Given a category, duplicate it into all the other languages defined in Polylang for which there is no translation category yet', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/create-missing-translation-categories-for-polylang',
+                                    VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_TAGS_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Translate tags for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Translate a tag to all languages defined in the Polylang settings, and store those translations in the corresponding tags', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/translate-tags-for-polylang',
+                                    VirtualTutorialLessons::TRANSLATING_TAGS_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_TAGS_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Create missing translation tags for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Given a tag, duplicate it into all the other languages defined in Polylang for which there is no translation tag yet', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/create-missing-translation-tags-for-polylang',
+                                    VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_TAGS_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_MULTILINGUALPRESS;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Translate categories for MultilingualPress', 'gatographql'),
+                    'post_excerpt' => \__('Translate a category to all languages defined in the MultilingualPress settings, and store those translations in the corresponding sites in the network', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/translate-categories-for-multilingualpress',
+                                    VirtualTutorialLessons::TRANSLATING_CATEGORIES_FOR_MULTILINGUALPRESS,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_TAGS_FOR_MULTILINGUALPRESS;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Translate tags for MultilingualPress', 'gatographql'),
+                    'post_excerpt' => \__('Translate a tag to all languages defined in the MultilingualPress settings, and store those translations in the corresponding sites in the network', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/translate-tags-for-multilingualpress',
+                                    VirtualTutorialLessons::TRANSLATING_TAGS_FOR_MULTILINGUALPRESS,
                                 ),
                             ],
                         ],

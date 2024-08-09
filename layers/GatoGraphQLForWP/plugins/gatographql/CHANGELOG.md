@@ -11,6 +11,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added mutations for categories (#2764)
 - Added mutations for tags (#2765)
 - Validate `assign_terms` capability on `setCategory` and `setTag` mutations (#2772)
+- Added predefined persisted queries: (#2774)
+  - [PRO] Create missing translation categories for Polylang
+  - [PRO] Translate categories for Polylang
+  - [PRO] Translate tags for Polylang
+  - [PRO] Create missing translation tags for Polylang
+  - [PRO] Translate categories for MultilingualPress
+  - [PRO] Translate tags for MultilingualPress
 
 ## 4.1.0 - 26/07/2024
 
