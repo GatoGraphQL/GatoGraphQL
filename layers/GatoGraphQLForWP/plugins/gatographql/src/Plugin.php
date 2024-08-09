@@ -1445,6 +1445,9 @@ class Plugin extends AbstractMainPlugin
                                     'admin/transform/translate-posts-for-polylang-gutenberg',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_POLYLANG_AND_GUTENBERG,
                                 ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
+                                ),
                             ],
                         ],
                         ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
@@ -1468,6 +1471,9 @@ class Plugin extends AbstractMainPlugin
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                     'admin/transform/translate-posts-for-polylang-classic-editor',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_POLYLANG_AND_CLASSIC_EDITOR,
+                                ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
                                 ),
                             ],
                         ],
@@ -1674,6 +1680,9 @@ class Plugin extends AbstractMainPlugin
                                     'admin/transform/translate-posts-for-multilingualpress-gutenberg',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_GUTENBERG,
                                 ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
+                                ),
                             ],
                         ],
                         ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
@@ -1697,6 +1706,9 @@ class Plugin extends AbstractMainPlugin
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                     'admin/transform/translate-posts-for-multilingualpress-classic-editor',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_CLASSIC_EDITOR,
+                                ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
                                 ),
                             ],
                         ],
@@ -1896,6 +1908,9 @@ class Plugin extends AbstractMainPlugin
                                     'admin/transform/translate-categories-for-polylang',
                                     VirtualTutorialLessons::TRANSLATING_CATEGORIES_FOR_POLYLANG,
                                 ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
+                                ),
                             ],
                         ],
                         ...$defaultSchemaConfigurationPersistedQueryBlocks,
@@ -1943,6 +1958,9 @@ class Plugin extends AbstractMainPlugin
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                     'admin/transform/translate-tags-for-polylang',
                                     VirtualTutorialLessons::TRANSLATING_TAGS_FOR_POLYLANG,
+                                ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
                                 ),
                             ],
                         ],
@@ -1992,6 +2010,9 @@ class Plugin extends AbstractMainPlugin
                                     'admin/transform/translate-categories-for-multilingualpress',
                                     VirtualTutorialLessons::TRANSLATING_CATEGORIES_FOR_MULTILINGUALPRESS,
                                 ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
+                                ),
                             ],
                         ],
                         ...$defaultSchemaConfigurationPersistedQueryBlocks,
@@ -2015,6 +2036,9 @@ class Plugin extends AbstractMainPlugin
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
                                     'admin/transform/translate-tags-for-multilingualpress',
                                     VirtualTutorialLessons::TRANSLATING_TAGS_FOR_MULTILINGUALPRESS,
+                                ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/translation-language-mapping',
                                 ),
                             ],
                         ],
