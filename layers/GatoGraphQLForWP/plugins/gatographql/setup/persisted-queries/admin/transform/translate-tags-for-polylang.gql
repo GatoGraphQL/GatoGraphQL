@@ -2,7 +2,7 @@
 # 
 # Variables:
 #   - tagId: The tag with the origin language, from where all translations will be made
-#   - tagTaxonomy: The taxonomy of the tag. It is `tag` by default (for tags)
+#   - tagTaxonomy: The taxonomy of the tag. It is `post_tag` by default
 #   - updateSlug: Indicate if to update the tag slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin tag has the default language of the site. It is `true` by default.
 #   - translateFromLanguage: Only execute the translation when the origin tag has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
@@ -71,7 +71,7 @@ query InitializeVariables
 
 query ExportOriginTag(
   $tagId: ID!
-  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
 )
@@ -119,7 +119,7 @@ query ExportOriginTag(
 }
 
 query FetchData(
-  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
@@ -229,7 +229,7 @@ query TranslateData(
 
 query GenerateMutationInputs(
   $updateSlug: Boolean! = true
-  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
 )
   @depends(on: "TranslateData")
   @include(if: $executeTranslation)

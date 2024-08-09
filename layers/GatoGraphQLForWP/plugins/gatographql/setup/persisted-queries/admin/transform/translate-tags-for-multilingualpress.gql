@@ -4,7 +4,7 @@
 #   - username: The username to log into the external site
 #   - appPassword: The application password to log into the external site
 #   - tagId: The tag with the origin language, from where all translations will be made
-#   - tagTaxonomy: The taxonomy of the tag. It is `tag` by default (for tags)
+#   - tagTaxonomy: The taxonomy of the tag. It is `post_tag` by default
 #   - updateSlug: Indicate if to update the tag slug, using the translated title. It is `true` by default.
 #   - includeSiteIDsToTranslate: Limit sites to execute the translation for. If empty, all sites are included
 #   - excludeSiteIDsToTranslate: Exclude sites from executing the translation
@@ -113,7 +113,7 @@ query ExportData(
 
 query ExportOriginTag(
   $tagId: ID!
-  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
   $includeSiteIDsToTranslate: [ID!]
   $excludeSiteIDsToTranslate: [ID!]
 )
@@ -357,7 +357,7 @@ query PrepareMetaReplacements
 
 query ExportMutationInputs(
   $updateSlug: Boolean! = true
-  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
 )
   @depends(on: "PrepareMetaReplacements")
   @include(if: $executeTranslation)
