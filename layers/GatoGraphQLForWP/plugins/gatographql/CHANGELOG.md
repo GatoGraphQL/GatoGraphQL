@@ -18,6 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - [PRO] Create missing translation tags for Polylang
   - [PRO] Translate categories for MultilingualPress
   - [PRO] Translate tags for MultilingualPress
+- Added translation language mapping to persisted queries (#2775)
 
 ## 4.1.0 - 26/07/2024
 
