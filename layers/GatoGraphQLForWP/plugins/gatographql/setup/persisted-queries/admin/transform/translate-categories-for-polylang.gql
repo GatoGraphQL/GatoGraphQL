@@ -289,7 +289,7 @@ mutation TranslateCategories
   @depends(on: "GenerateMutationInputs")
   @include(if: $executeTranslation)
 {
-  updateCategories(input: $categoryInputs) {
+  updateCategories(inputs: $categoryInputs) {
     status
     errors {
       __typename
