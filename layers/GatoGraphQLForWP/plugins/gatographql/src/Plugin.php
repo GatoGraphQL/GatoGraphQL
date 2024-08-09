@@ -1951,7 +1951,7 @@ class Plugin extends AbstractMainPlugin
                 ]
             ));
         }
-        
+
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_TAGS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
