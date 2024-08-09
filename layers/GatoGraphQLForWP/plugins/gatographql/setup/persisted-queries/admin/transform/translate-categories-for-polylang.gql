@@ -251,15 +251,6 @@ query GenerateMutationInputs(
         passOnwardsAs: "categoryTranslatedName"
       )
       @applyField(
-        name: "_if",
-        arguments: {
-          condition: $updateSlug,
-          then: $categoryTranslatedName,
-          else: null
-        },
-        passOnwardsAs: "categoryMaybeTranslatedSlug"
-      )
-      @applyField(
         name: "_objectProperty",
         arguments: {
           object: $categoryTranslatedData,
@@ -277,11 +268,21 @@ query GenerateMutationInputs(
             taxonomy: $categoryTaxonomy
             name: $categoryTranslatedName
             description: $categoryTranslatedDescription
-            slug: $categoryMaybeTranslatedSlug
           }
         },
+        passOnwardsAs: "categoryInput"
         setResultInResponse: true
       )
+      @if(condition: $updateSlug)
+        @applyField(
+          name: "_objectAddEntry",
+          arguments: {
+            object: $categoryInput
+            key: "slug"
+            value: $categoryTranslatedName
+          },
+          setResultInResponse: true
+        )
     @export(as: "categoryInputObject")
 }
 

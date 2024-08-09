@@ -393,15 +393,6 @@ query ExportMutationInputs(
         passOnwardsAs: "itemTransformedName"
       )
       @applyField(
-        name: "_if",
-        arguments: {
-          condition: $updateSlug,
-          then: $itemTransformedName,
-          else: null
-        },
-        passOnwardsAs: "itemTransformedSlug"
-      )
-      @applyField(
         name: "_arrayItem",
         arguments: {
           array: $transformedDescription,
@@ -418,13 +409,23 @@ query ExportMutationInputs(
               id: $itemCategoryID,
               taxonomy: $categoryTaxonomy,
               name: $itemTransformedName,
-              slug: $itemTransformedSlug,
               description: $itemTransformedDescription
             }
           }
         }
+        passOnwardsAs: "itemInput"
         setResultInResponse: true
       )
+      @if(condition: $updateSlug)
+        @applyField(
+          name: "_objectAddEntry",
+          arguments: {
+            object: $itemInput
+            key: "slug"
+            value: $itemTransformedName
+          },
+          setResultInResponse: true
+        )
     @export(
       as: "updateCategoryMutationInputDataItems"
     )

@@ -251,15 +251,6 @@ query GenerateMutationInputs(
         passOnwardsAs: "tagTranslatedName"
       )
       @applyField(
-        name: "_if",
-        arguments: {
-          condition: $updateSlug,
-          then: $tagTranslatedName,
-          else: null
-        },
-        passOnwardsAs: "tagMaybeTranslatedSlug"
-      )
-      @applyField(
         name: "_objectProperty",
         arguments: {
           object: $tagTranslatedData,
@@ -277,11 +268,21 @@ query GenerateMutationInputs(
             taxonomy: $tagTaxonomy
             name: $tagTranslatedName
             description: $tagTranslatedDescription
-            slug: $tagMaybeTranslatedSlug
           }
         },
+        passOnwardsAs: "tagInput"
         setResultInResponse: true
       )
+      @if(condition: $updateSlug)
+        @applyField(
+          name: "_objectAddEntry",
+          arguments: {
+            object: $tagInput
+            key: "slug"
+            value: $tagTranslatedName
+          },
+          setResultInResponse: true
+        )
     @export(as: "tagInputObject")
 }
 
