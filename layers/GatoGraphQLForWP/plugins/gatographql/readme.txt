@@ -290,6 +290,11 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added mutations for categories (#2764)
 * Added mutations for tags (#2765)
 * Validate `assign_terms` capability on `setCategory` and `setTag` mutations (#2772)
+* Added predefined persisted queries: (#2774)
+  * Create missing translation categories for Polylang
+  * Translate categories for Polylang
+  * Create missing translation tags for Polylang
+  * Translate tags for Polylang
 * [PRO] Define the Polylang language on tag and category mutations
 
 = 4.1.0 =
