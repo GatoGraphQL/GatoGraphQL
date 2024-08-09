@@ -298,6 +298,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * Translate categories for MultilingualPress
   * Translate tags for MultilingualPress
 * [PRO] Define the Polylang language on tag and category mutations
+* Added translation language mapping to persisted queries (#2775)
 
 = 4.1.0 =
 * Send the referer on Guzzle requests (#2754)
