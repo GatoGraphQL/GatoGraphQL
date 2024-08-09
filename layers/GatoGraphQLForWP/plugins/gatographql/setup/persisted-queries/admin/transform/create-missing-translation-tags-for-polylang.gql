@@ -1,0 +1,284 @@
+########################################################################
+# 
+# Variables:
+#   - tagId: The tag with the origin language, from where all translations will be made
+#   - tagTaxonomy: The taxonomy of the tag. It is `tag` by default (for tags)
+#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin tag has the default language of the site. It is `true` by default.
+#   - translateFromLanguage: Only execute the translation when the origin tag has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
+#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
+#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang,
+# to create the missing translation tags.
+#
+# It takes an origin tag, and duplicates it into all the other
+# languages defined in Polylang for which there is no tag yet.
+#
+# By default, the origin tag must have the default language
+# of the site, or the logic will not be executed.
+# To execute for any language, pass variable
+# `$translateDefaultLanguageOnly` with `false`.
+#
+# Additionally, execute the logic only when the origin tag
+# has a specific language by providing `$translateFromLanguage`
+# with the language code (for instance, `"en"`). It applies only
+# when `$translateDefaultLanguageOnly` is `false`.
+#
+# To limit for what languages to execute the logic, pass
+# variables `$includeLanguagesToTranslate` (if empty, all languages
+# will be included) and `$excludeLanguagesToTranslate`.
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyBool: _echo(value: false)
+    @export(as: "canTranslateOriginTag")
+    @export(as: "hasMissingTranslationLanguages")
+    @export(as: "hasCreatedTranslationTags")
+    @export(as: "hasOriginTagParent")
+    @remove
+
+  emptyArray: _echo(value: [])
+    @export(as: "createdTranslationTagIDs")
+    @remove
+
+  emptyObject: _echo(value: {})
+    @export(as: "tagParentTranslationLanguages")
+    @remove
+}
+
+query ExportOriginTag(
+  $tagId: ID!
+  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  enabledLanguages: polylangLanguages(filter: { enabled: true }) {
+    code @export(as: "enabledLanguages", type: LIST)
+  }
+
+  originTag: tag(by: { id: $tagId }, taxonomy: $tagTaxonomy) {
+    id
+
+    
+    ################################################################
+    # Data needed to duplicate tag for missing languages
+    ################################################################
+    originTagName: name @export(as: "originTagName")
+    originTagDescription: description @export(as: "originTagDescription")
+    originTagParent: parent @export(as: "originTagParentID") {
+      id
+    }
+    ################################################################
+    hasOriginTagParent: _notNull(value: $__originTagParent)
+
+
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
+    
+
+    polylangTranslationLanguageIDs(filter: {
+      includeSelf: true
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
+    currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
+      @export(as: "currentlyExistingTranslationLanguages")
+    currentlyExistingTranslationTagIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "currentlyExistingTranslationTagIDs")
+  }
+
+  hasOriginTag: _notNull(value: $__originTag)
+    @export(as: "hasOriginTag")
+}
+
+query ExportOriginTagCanBeTranslated(
+  $translateDefaultLanguageOnly: Boolean! = true
+  $translateFromLanguage: String
+)
+  @depends(on: "ExportOriginTag")
+  @include(if: $hasOriginTag)
+{
+  originTagHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
+
+  originTagHasSpecificLanguage: _equals(
+    value1: $translateFromLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginTagFromSpecificLanguage: _if(
+    condition: $__isTranslateFromLanguageProvided,
+    then: $__originTagHasSpecificLanguage,
+    else: true
+  )
+
+  canTranslateOriginTag: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: $__originTagHasDefaultLanguage,
+    else: $__canTranslateOriginTagFromSpecificLanguage
+  )
+    @export(as: "canTranslateOriginTag")
+}
+
+query ExportOriginTagParent(
+  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+)
+  @depends(on: "ExportOriginTagCanBeTranslated")
+  @include(if: $canTranslateOriginTag)
+  @include(if: $hasOriginTagParent)
+{
+  originTagParent: tag(by: { id: $originTagParentID }, taxonomy: $tagTaxonomy) {
+    id
+
+    
+    polylangTranslationLanguageIDs
+      @export(as: "tagParentTranslationLanguages")
+  }
+}
+
+query ExportMissingTranslationLanguages(
+  $includeLanguagesToTranslate: [String!]! = []
+  $excludeLanguagesToTranslate: [String!]! = []
+)
+  @depends(on: "ExportOriginTagParent")
+  @include(if: $canTranslateOriginTag)
+{
+  missingTranslationLanguagesWithoutFilteringByInclude: _arrayDiff(
+    arrays: [
+      $enabledLanguages,
+      $currentlyExistingTranslationLanguages,
+      $excludeLanguagesToTranslate
+    ]
+  )
+  hasIncludeLanguagesToTranslate: _notEmpty(value: $includeLanguagesToTranslate)
+  missingTranslationLanguagesWithFilteringByInclude: _arrayIntersect(
+    arrays: [
+      $__missingTranslationLanguagesWithoutFilteringByInclude,
+      $includeLanguagesToTranslate
+    ]
+  )
+  missingTranslationLanguages: _if(
+    condition: $__hasIncludeLanguagesToTranslate,
+    then: $__missingTranslationLanguagesWithFilteringByInclude,
+    else: $__missingTranslationLanguagesWithoutFilteringByInclude
+  )
+    @export(as: "missingTranslationLanguages")
+  hasMissingTranslationLanguages: _notEmpty(value: $__missingTranslationLanguages)
+    @export(as: "hasMissingTranslationLanguages")
+}
+
+query CreateTranslationTagInputsForMissingLanguages(
+  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+)
+  @depends(on: "ExportMissingTranslationLanguages")
+  @include(if: $hasMissingTranslationLanguages)
+{
+  createTranslationTagInputs: _echo(value: $missingTranslationLanguages)
+    @underEachArrayItem(
+      passValueOnwardsAs: "languageCode"
+      affectDirectivesUnderPos: [1, 2, 3]
+    )
+      @applyField(
+        name: "_sprintf"
+        arguments: {
+          string: "%s (%s)"
+          values: [$originTagName, $languageCode]
+        }
+        passOnwardsAs: "originTagNameForLanguage"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $tagParentTranslationLanguages,
+          by: { key: $languageCode }
+          failIfNonExistingKeyOrPath: false
+          valueWhenNonExistingKeyOrPath: $originTagParentID
+        },
+        passOnwardsAs: "originSameOrTranslatedTagParentID"
+      )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            taxonomy: $tagTaxonomy
+            name: $originTagNameForLanguage
+            description: $originTagDescription
+            parentBy: {
+              id: $originSameOrTranslatedTagParentID
+            },
+            polylangLanguageBy: { code: $languageCode }
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "createTranslationTagInputs")
+}
+
+mutation CreateTranslationTagForMissingLanguages
+  @depends(on: "CreateTranslationTagInputsForMissingLanguages")
+  @include(if: $hasMissingTranslationLanguages)
+{
+  translationTags: createTags(inputs: $createTranslationTagInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    tag {
+      id
+        @export(as: "createdTranslationTagIDs", type: LIST)
+      hasCreatedTranslationTags: _echo(value: true)
+        @export(as: "hasCreatedTranslationTags")
+        @remove
+    }    
+  }
+}
+
+query ExportAllTranslationTags
+  @depends(on: "CreateTranslationTagForMissingLanguages")
+  @include(if: $hasCreatedTranslationTags)
+{
+  allTranslationTagIDs: _arrayMerge(
+    arrays: [
+      $currentlyExistingTranslationTagIDs,
+      $createdTranslationTagIDs,
+    ]
+  )
+    @export(as: "allTranslationTagIDs")
+}
+
+mutation CreateMissingTranslationTagsForPolylang
+  @depends(on: "ExportAllTranslationTags")
+  @include(if: $hasCreatedTranslationTags)
+{
+  polylangSaveTaxonomyTermTranslationAssociation(input: {
+    ids: $allTranslationTagIDs
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}

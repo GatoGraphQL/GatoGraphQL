@@ -1,0 +1,315 @@
+########################################################################
+# 
+# Variables:
+#   - tagId: The tag with the origin language, from where all translations will be made
+#   - tagTaxonomy: The taxonomy of the tag. It is `tag` by default (for tags)
+#   - updateSlug: Indicate if to update the tag slug, using the translated title. It is `true` by default.
+#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin tag has the default language of the site. It is `true` by default.
+#   - translateFromLanguage: Only execute the translation when the origin tag has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
+#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
+#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang,
+# to translate tags.
+#
+# It takes an origin tag, it translates it using the Google
+# Translate API to all the other languages defined in Polylang,
+# and stores those translations in the corresponding tags,
+# as set-up via Polylang. All translation tags must already exist.
+#
+# By default, the origin tag must have the default language
+# of the site, or the translation will not be executed.
+# To translate from any language, pass variable
+# `$translateDefaultLanguageOnly` with `false`.
+#
+# Additionally, translate only from a specific language by
+# providing `$translateFromLanguage` with the language code
+# (for instance, `"en"`). It applies only when
+# `$translateDefaultLanguageOnly` is `false`.
+#
+# To limit for what languages to execute the translation, pass
+# variables `$includeLanguagesToTranslate` (if empty, all languages
+# will be included) and `$excludeLanguagesToTranslate`.
+#
+# By default it also translates the tag slug. To disable, pass
+# variable `updateSlug` with `false`.
+#
+# For some languages, the code used by WordPress and Google Translate
+# are different. For instance, Norwegian is represented as "nb" by
+# WordPress, and as "no" by Google Translate. To support translating
+# to these languages, provide the language code mapping via the
+# `$languageMapping` GraphQL variable, such as:
+#
+#   {
+#     "languageMapping": {
+#       "nb": "no"
+#     }
+#   }
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+    @remove
+
+  emptyBool: _echo(value: false)
+    @export(as: "hasTranslationTags")
+    @export(as: "executeTranslation")
+    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "translationTagIds")
+    @remove
+}
+
+query ExportOriginTag(
+  $tagId: ID!
+  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
+  originTag: tag(by: { id: $tagId }, taxonomy: $tagTaxonomy) {
+    id
+
+
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
+    
+
+    polylangTranslationLanguageIDs(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
+    translationTagIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "translationTagIds")
+
+    hasTranslationTags: _notEmpty(value: $__translationTagIds)
+      @export(as: "hasTranslationTags")
+
+
+    name
+      @export(as: "originName")
+    description
+      @export(as: "originDescription")
+  }
+
+  hasOriginTag: _notNull(value: $__originTag)
+    @export(as: "hasOriginTag")
+}
+
+query FetchData(
+  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+  $translateDefaultLanguageOnly: Boolean! = true
+  $translateFromLanguage: String
+)
+  @depends(on: "ExportOriginTag")
+  @include(if: $hasOriginTag)
+  @include(if: $hasTranslationTags)
+{
+  translationTags: tags(
+    taxonomy: $tagTaxonomy
+    filter: { ids: $translationTagIds }
+  ) {
+    id
+
+    polylangLanguage @export(
+      as: "translationTagLanguages"
+      type: DICTIONARY
+    ) {
+      code
+    }
+
+    name: _echo(value: $originName)
+    description: _echo(value: $originDescription)
+      @export(
+        as: "dataToTranslate",
+        affectAdditionalFieldsUnderPos: [1]
+        type: DICTIONARY
+      )
+  }
+
+  hasTranslationTags: _notEmpty(value: $__translationTags)
+
+  originTagHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
+
+  originTagHasSpecificLanguage: _equals(
+    value1: $translateFromLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginTagFromSpecificLanguage: _if(
+    condition: $__isTranslateFromLanguageProvided,
+    then: $__originTagHasSpecificLanguage,
+    else: true
+  )
+
+  canTranslateOriginTag: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: $__originTagHasDefaultLanguage,
+    else: $__canTranslateOriginTagFromSpecificLanguage
+  )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationTags,
+    $__canTranslateOriginTag
+  ])
+    @export(as: "executeTranslation")
+}
+
+query TranslateData(
+  $languageMapping: JSONObject! = {}
+)
+  @depends(on: "FetchData")
+  @include(if: $executeTranslation)
+{  
+  translatedData: _echo(value: $dataToTranslate)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "tagID"
+      affectDirectivesUnderPos: [1, 2, 3, 4]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $translationTagLanguages,
+          by: { key: $tagID }
+        },
+        passOnwardsAs: "toLanguageLocale"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageLocaleCodes,
+          by: { key: $toLanguageLocale }
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageMapping,
+          by: { key: $toLanguage }
+          failIfNonExistingKeyOrPath: false
+          valueWhenNonExistingKeyOrPath: $toLanguage
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @underEachJSONObjectProperty
+        @strTranslate(
+          from: $fromLanguage,
+          to: $toLanguage
+        )
+    @export(as: "translatedData")
+}
+
+query GenerateMutationInputs(
+  $updateSlug: Boolean! = true
+  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
+)
+  @depends(on: "TranslateData")
+  @include(if: $executeTranslation)
+{  
+  tagInputObject: _echo(value: $translatedData)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "tagID"
+      passValueOnwardsAs: "tagTranslatedData"
+      affectDirectivesUnderPos: [1, 2, 3, 4]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $tagTranslatedData,
+          by: {
+            key: "name",
+          }
+        },
+        passOnwardsAs: "tagTranslatedName"
+      )
+      @applyField(
+        name: "_if",
+        arguments: {
+          condition: $updateSlug,
+          then: $tagTranslatedName,
+          else: null
+        },
+        passOnwardsAs: "tagMaybeTranslatedSlug"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $tagTranslatedData,
+          by: {
+            key: "description",
+          }
+        },
+        passOnwardsAs: "tagTranslatedDescription"
+      )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            id: $tagID
+            taxonomy: $tagTaxonomy
+            name: $tagTranslatedName
+            description: $tagTranslatedDescription
+            slug: $tagMaybeTranslatedSlug
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "tagInputObject")
+}
+
+query FormatMutationInputs
+  @depends(on: "GenerateMutationInputs")
+  @include(if: $executeTranslation)
+{  
+  tagInputs: _objectValues(object: $tagInputObject)
+    @export(as: "tagInputs")
+}
+
+mutation TranslateTags
+  @depends(on: "FormatMutationInputs")
+  @include(if: $executeTranslation)
+{
+  updateTags(inputs: $tagInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    tag {
+      id
+      name
+      description
+      slug
+    }
+  }
+}
