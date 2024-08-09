@@ -173,11 +173,12 @@ query InitializeTranslationVariables
 
   rawTitle: _arrayPad(array: [], length: $__arrayItems, value: $originRawTitle)
     @export(as: "rawTitle")
+    @remove
   rawContent: _arrayPad(array: [], length: $__arrayItems, value: $originRawContent)
     @export(as: "rawContent")
+    @remove
   rawExcerpt: _arrayPad(array: [], length: $__arrayItems, value: $originRawExcerpt)
     @export(as: "rawExcerpt")
-
     @remove
 }
 

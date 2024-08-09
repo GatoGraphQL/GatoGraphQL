@@ -485,137 +485,192 @@ query InitializeTranslationVariables
 
   rawTitle: _arrayPad(array: [], length: $__arrayItems, value: $originRawTitle)
     @export(as: "rawTitle")
+    @remove
   rawContent: _arrayPad(array: [], length: $__arrayItems, value: $originRawContent)
     @export(as: "rawContent")
+    @remove
   rawExcerpt: _arrayPad(array: [], length: $__arrayItems, value: $originRawExcerpt)
     @export(as: "rawExcerpt")
+    @remove
     
   coreHeadingContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreHeadingContentItems)
     @export(as: "coreHeadingContentItems")
+    @remove
   coreHeadingContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreHeadingContentReplacementsFrom)
     @export(as: "coreHeadingContentReplacementsFrom")
+    @remove
   coreHeadingContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreHeadingContentReplacementsTo)
     @export(as: "coreHeadingContentReplacementsTo")
+    @remove
 
   coreParagraphContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreParagraphContentItems)
     @export(as: "coreParagraphContentItems")
+    @remove
   coreParagraphContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreParagraphContentReplacementsFrom)
     @export(as: "coreParagraphContentReplacementsFrom")
+    @remove
   coreParagraphContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreParagraphContentReplacementsTo)
     @export(as: "coreParagraphContentReplacementsTo")
+    @remove
 
   coreImageAltItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageAltItems)
     @export(as: "coreImageAltItems")
+    @remove
   coreImageAltReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageAltReplacementsFrom)
     @export(as: "coreImageAltReplacementsFrom")
+    @remove
   coreImageAltReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageAltReplacementsTo)
     @export(as: "coreImageAltReplacementsTo")
+    @remove
 
   coreImageCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageCaptionItems)
     @export(as: "coreImageCaptionItems")
+    @remove
   coreImageCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageCaptionReplacementsFrom)
     @export(as: "coreImageCaptionReplacementsFrom")
+    @remove
   coreImageCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreImageCaptionReplacementsTo)
     @export(as: "coreImageCaptionReplacementsTo")
+    @remove
 
   coreButtonTextItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreButtonTextItems)
     @export(as: "coreButtonTextItems")
+    @remove
   coreButtonTextReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreButtonTextReplacementsFrom)
     @export(as: "coreButtonTextReplacementsFrom")
+    @remove
   coreButtonTextReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreButtonTextReplacementsTo)
     @export(as: "coreButtonTextReplacementsTo")
+    @remove
 
   coreTableCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableCaptionItems)
     @export(as: "coreTableCaptionItems")
+    @remove
   coreTableCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableCaptionReplacementsFrom)
     @export(as: "coreTableCaptionReplacementsFrom")
+    @remove
   coreTableCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableCaptionReplacementsTo)
     @export(as: "coreTableCaptionReplacementsTo")
+    @remove
 
   coreTableBodyCellsContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableBodyCellsContentItems)
     @export(as: "coreTableBodyCellsContentItems")
+    @remove
   coreTableBodyCellsContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableBodyCellsContentReplacementsFrom)
     @export(as: "coreTableBodyCellsContentReplacementsFrom")
+    @remove
   coreTableBodyCellsContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreTableBodyCellsContentReplacementsTo)
     @export(as: "coreTableBodyCellsContentReplacementsTo")
+    @remove
 
   coreListItemContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreListItemContentItems)
     @export(as: "coreListItemContentItems")
+    @remove
   coreListItemContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreListItemContentReplacementsFrom)
     @export(as: "coreListItemContentReplacementsFrom")
+    @remove
   coreListItemContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreListItemContentReplacementsTo)
     @export(as: "coreListItemContentReplacementsTo")
+    @remove
 
   coreCoverAltItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreCoverAltItems)
     @export(as: "coreCoverAltItems")
+    @remove
   coreCoverAltReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreCoverAltReplacementsFrom)
     @export(as: "coreCoverAltReplacementsFrom")
+    @remove
   coreCoverAltReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreCoverAltReplacementsTo)
     @export(as: "coreCoverAltReplacementsTo")
+    @remove
 
   coreMediaTextAltItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreMediaTextAltItems)
     @export(as: "coreMediaTextAltItems")
+    @remove
   coreMediaTextAltReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreMediaTextAltReplacementsFrom)
     @export(as: "coreMediaTextAltReplacementsFrom")
+    @remove
   coreMediaTextAltReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreMediaTextAltReplacementsTo)
     @export(as: "coreMediaTextAltReplacementsTo")
+    @remove
 
   coreVerseContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVerseContentItems)
     @export(as: "coreVerseContentItems")
+    @remove
   coreVerseContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVerseContentReplacementsFrom)
     @export(as: "coreVerseContentReplacementsFrom")
+    @remove
   coreVerseContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVerseContentReplacementsTo)
     @export(as: "coreVerseContentReplacementsTo")
+    @remove
 
   coreQuoteCitationItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreQuoteCitationItems)
     @export(as: "coreQuoteCitationItems")
+    @remove
   coreQuoteCitationReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreQuoteCitationReplacementsFrom)
     @export(as: "coreQuoteCitationReplacementsFrom")
+    @remove
   coreQuoteCitationReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreQuoteCitationReplacementsTo)
     @export(as: "coreQuoteCitationReplacementsTo")
+    @remove
 
   corePullquoteCitationItems: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteCitationItems)
     @export(as: "corePullquoteCitationItems")
+    @remove
   corePullquoteCitationReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteCitationReplacementsFrom)
     @export(as: "corePullquoteCitationReplacementsFrom")
+    @remove
   corePullquoteCitationReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteCitationReplacementsTo)
     @export(as: "corePullquoteCitationReplacementsTo")
+    @remove
 
   corePullquoteValueItems: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteValueItems)
     @export(as: "corePullquoteValueItems")
+    @remove
   corePullquoteValueReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteValueReplacementsFrom)
     @export(as: "corePullquoteValueReplacementsFrom")
+    @remove
   corePullquoteValueReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCorePullquoteValueReplacementsTo)
     @export(as: "corePullquoteValueReplacementsTo")
+    @remove
 
   coreAudioCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreAudioCaptionItems)
     @export(as: "coreAudioCaptionItems")
+    @remove
   coreAudioCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreAudioCaptionReplacementsFrom)
     @export(as: "coreAudioCaptionReplacementsFrom")
+    @remove
   coreAudioCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreAudioCaptionReplacementsTo)
     @export(as: "coreAudioCaptionReplacementsTo")
+    @remove
 
   coreVideoCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVideoCaptionItems)
     @export(as: "coreVideoCaptionItems")
+    @remove
   coreVideoCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVideoCaptionReplacementsFrom)
     @export(as: "coreVideoCaptionReplacementsFrom")
+    @remove
   coreVideoCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreVideoCaptionReplacementsTo)
     @export(as: "coreVideoCaptionReplacementsTo")
+    @remove
 
   corePreformattedContentItems: _arrayPad(array: [], length: $__arrayItems, value: $originCorePreformattedContentItems)
     @export(as: "corePreformattedContentItems")
+    @remove
   corePreformattedContentReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCorePreformattedContentReplacementsFrom)
     @export(as: "corePreformattedContentReplacementsFrom")
+    @remove
   corePreformattedContentReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCorePreformattedContentReplacementsTo)
     @export(as: "corePreformattedContentReplacementsTo")
+    @remove
 
   coreEmbedCaptionItems: _arrayPad(array: [], length: $__arrayItems, value: $originCoreEmbedCaptionItems)
     @export(as: "coreEmbedCaptionItems")
+    @remove
   coreEmbedCaptionReplacementsFrom: _arrayPad(array: [], length: $__arrayItems, value: $originCoreEmbedCaptionReplacementsFrom)
     @export(as: "coreEmbedCaptionReplacementsFrom")
+    @remove
   coreEmbedCaptionReplacementsTo: _arrayPad(array: [], length: $__arrayItems, value: $originCoreEmbedCaptionReplacementsTo)
     @export(as: "coreEmbedCaptionReplacementsTo")
-
     @remove
 }
 
