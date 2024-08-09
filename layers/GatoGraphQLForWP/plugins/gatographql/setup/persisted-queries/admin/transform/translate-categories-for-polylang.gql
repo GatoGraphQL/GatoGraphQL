@@ -1,0 +1,318 @@
+########################################################################
+# 
+# Variables:
+#   - categoryId: The category with the origin language, from where all translations will be made
+#   - categoryTaxonomy: The taxonomy of the category. It is `category` by default (for categorys)
+#   - updateSlug: Indicate if to update the category slug, using the translated title. It is `true` by default.
+#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin category has the default language of the site. It is `true` by default.
+#   - translateFromLanguage: Only execute the translation when the origin category has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
+#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
+#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang,
+# to translate categories.
+#
+# It takes an origin category, it translates it using the Google
+# Translate API to all the other languages defined in Polylang,
+# and stores those translations in the corresponding categories,
+# as set-up via Polylang. All translation categories must already exist.
+#
+# By default, the origin category must have the default language
+# of the site, or the translation will not be executed.
+# To translate from any language, pass variable
+# `$translateDefaultLanguageOnly` with `false`.
+#
+# Additionally, translate only from a specific language by
+# providing `$translateFromLanguage` with the language code
+# (for instance, `"en"`). It applies only when
+# `$translateDefaultLanguageOnly` is `false`.
+#
+# To limit for what languages to execute the translation, pass
+# variables `$includeLanguagesToTranslate` (if empty, all languages
+# will be included) and `$excludeLanguagesToTranslate`.
+#
+# By default it also translates the category slug. To disable, pass
+# variable `updateSlug` with `false`.
+#
+# For some languages, the code used by WordPress and Google Translate
+# are different. For instance, Norwegian is represented as "nb" by
+# WordPress, and as "no" by Google Translate. To support translating
+# to these languages, provide the language code mapping via the
+# `$languageMapping` GraphQL variable, such as:
+#
+#   {
+#     "languageMapping": {
+#       "nb": "no"
+#     }
+#   }
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+    @remove
+
+  emptyBool: _echo(value: false)
+    @export(as: "hasTranslationCategories")
+    @export(as: "executeTranslation")
+    @remove
+  
+  emptyArray: _echo(value: [])
+    @export(as: "translationCategoryIds")
+    @remove
+}
+
+query ExportOriginCategory(
+  $categoryId: ID!
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
+  originCategory: category(by: { id: $categoryId }, taxonomy: $categoryTaxonomy) {
+    id
+
+
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
+    
+
+    polylangTranslationLanguageIDs(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
+    translationCategoryIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "translationCategoryIds")
+
+    hasTranslationCategories: _notEmpty(value: $__translationCategoryIds)
+      @export(as: "hasTranslationCategories")
+
+
+    name
+      @export(as: "originName")
+    description
+      @export(as: "originDescription")
+  }
+
+  hasOriginCategory: _notNull(value: $__originCategory)
+    @export(as: "hasOriginCategory")
+}
+
+query FetchData(
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
+  $translateDefaultLanguageOnly: Boolean! = true
+  $translateFromLanguage: String
+)
+  @depends(on: "ExportOriginCategory")
+  @include(if: $hasOriginCategory)
+  @include(if: $hasTranslationCategories)
+{
+  translationCategories: categories(
+    taxonomy: $categoryTaxonomy
+    filter: { ids: $translationCategoryIds }
+  ) {
+    id
+
+    polylangLanguage @export(
+      as: "translationCategoryLanguages"
+      type: DICTIONARY
+    ) {
+      code
+    }
+
+    name: _echo(value: $originName)
+    description: _echo(value: $originDescription)
+      @export(
+        as: "dataToTranslate",
+        affectAdditionalFieldsUnderPos: [1]
+        type: DICTIONARY
+      )
+  }
+
+  hasTranslationCategories: _notEmpty(value: $__translationCategories)
+
+  originCategoryHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
+
+  originCategoryHasSpecificLanguage: _equals(
+    value1: $translateFromLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginCategoryFromSpecificLanguage: _if(
+    condition: $__isTranslateFromLanguageProvided,
+    then: $__originCategoryHasSpecificLanguage,
+    else: true
+  )
+
+  canTranslateOriginCategory: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: $__originCategoryHasDefaultLanguage,
+    else: $__canTranslateOriginCategoryFromSpecificLanguage
+  )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationCategories,
+    $__canTranslateOriginCategory
+  ])
+    @export(as: "executeTranslation")
+}
+
+query TranslateData(
+  $languageMapping: JSONObject! = {}
+)
+  @depends(on: "FetchData")
+  @include(if: $executeTranslation)
+{  
+  translatedData: _echo(value: $dataToTranslate)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "categoryID"
+      affectDirectivesUnderPos: [1, 2, 3, 4]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $translationCategoryLanguages,
+          by: { key: $categoryID }
+        },
+        passOnwardsAs: "toLanguageLocale"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageLocaleCodes,
+          by: { key: $toLanguageLocale }
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageMapping,
+          by: { key: $toLanguage }
+          failIfNonExistingKeyOrPath: false
+          valueWhenNonExistingKeyOrPath: $toLanguage
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @underEachJSONObjectProperty
+        @strTranslate(
+          from: $fromLanguage,
+          to: $toLanguage
+        )
+    @export(as: "translatedData")
+}
+
+query GenerateMutationInputs(
+  $updateSlug: Boolean! = true
+)
+  @depends(on: "TranslateData")
+  @include(if: $executeTranslation)
+{  
+  categoryInputs: _echo(value: $translatedData)
+    @underEachJSONObjectProperty(
+      passValueOnwardsAs: "categoryTranslatedData"
+      affectDirectivesUnderPos: [1, 2, 3, 4]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $categoryTranslatedData,
+          by: {
+            key: "name",
+          }
+        },
+        passOnwardsAs: "categoryTranslatedName"
+      )
+      @applyField(
+        name: "_if",
+        arguments: {
+          condition: $updateSlug,
+          then: $categoryTranslatedName,
+          else: null
+        },
+        passOnwardsAs: "categoryMaybeTranslatedSlug"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $categoryTranslatedData,
+          by: {
+            key: "description",
+          }
+        },
+        passOnwardsAs: "categoryTranslatedDescription"
+      )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            name: $categoryTranslatedName,
+            slug: $categoryMaybeTranslatedSlug,
+            description: $categoryTranslatedDescription
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "categoryInputs")
+}
+
+mutation TranslateCategories(
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
+)
+  @depends(on: "GenerateMutationInputs")
+  @include(if: $executeTranslation)
+{
+  updateTranslationCategories: categories(
+    taxonomy: $categoryTaxonomy
+    filter: { ids: $translationCategoryIds }
+  ) {
+    id
+    categoryInput: _objectProperty(
+      object: $categoryInputs,
+      by: {
+        key: $__id
+      }
+    )
+      @remove
+    update(input: $__categoryInput) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      category {
+        id
+        name
+        description
+        slug
+      }
+    }
+  }
+}
