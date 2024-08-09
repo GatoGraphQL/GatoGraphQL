@@ -234,7 +234,7 @@ query GenerateMutationInputs(
   @depends(on: "TranslateData")
   @include(if: $executeTranslation)
 {  
-  categoryInputs: _echo(value: $translatedData)
+  categoryInputObject: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "categoryID"
       passValueOnwardsAs: "categoryTranslatedData"
@@ -282,11 +282,19 @@ query GenerateMutationInputs(
         },
         setResultInResponse: true
       )
+    @export(as: "categoryInputObject")
+}
+
+query FormatMutationInputs
+  @depends(on: "GenerateMutationInputs")
+  @include(if: $executeTranslation)
+{  
+  categoryInputs: _objectValues(object: $categoryInputObject)
     @export(as: "categoryInputs")
 }
 
 mutation TranslateCategories
-  @depends(on: "GenerateMutationInputs")
+  @depends(on: "FormatMutationInputs")
   @include(if: $executeTranslation)
 {
   updateCategories(inputs: $categoryInputs) {
