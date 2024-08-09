@@ -3,7 +3,7 @@
 # Variables:
 #   - categoryId: The category with the origin language, from where all translations will be made
 #   - categoryTaxonomy: The taxonomy of the category. It is `category` by default (for categorys)
-#   - updateSlug: Indicate if to update the category slug, using the translated title. It is `true` by default.
+#   - updateSlug: Indicate if to update the category slug, using the translated name. It is `false` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin category has the default language of the site. It is `true` by default.
 #   - translateFromLanguage: Only execute the translation when the origin category has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
 #   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
@@ -36,8 +36,8 @@
 # variables `$includeLanguagesToTranslate` (if empty, all languages
 # will be included) and `$excludeLanguagesToTranslate`.
 #
-# By default it also translates the category slug. To disable, pass
-# variable `updateSlug` with `false`.
+# By default it doesn't translate the category slug. To enable, pass
+# variable `updateSlug` with `true`.
 #
 # For some languages, the code used by WordPress and Google Translate
 # are different. For instance, Norwegian is represented as "nb" by
@@ -228,7 +228,7 @@ query TranslateData(
 }
 
 query GenerateMutationInputs(
-  $updateSlug: Boolean! = true
+  $updateSlug: Boolean! = false
   $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
   @depends(on: "TranslateData")

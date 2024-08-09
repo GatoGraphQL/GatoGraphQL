@@ -5,7 +5,7 @@
 #   - appPassword: The application password to log into the external site
 #   - categoryId: The category with the origin language, from where all translations will be made
 #   - categoryTaxonomy: The taxonomy of the category. It is `category` by default (for categorys)
-#   - updateSlug: Indicate if to update the category slug, using the translated title. It is `true` by default.
+#   - updateSlug: Indicate if to update the category slug, using the translated name. It is `false` by default.
 #   - includeSiteIDsToTranslate: Limit sites to execute the translation for. If empty, all sites are included
 #   - excludeSiteIDsToTranslate: Exclude sites from executing the translation
 #   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
@@ -32,8 +32,8 @@
 # variables `$includeSiteIDsToTranslate` (if empty, all sites
 # will be included) and `$excludeSiteIDsToTranslate`.
 #
-# By default it also translates the category slug. To disable, pass
-# variable `updateSlug` with `false`.
+# By default it doesn't translate the category slug. To enable, pass
+# variable `updateSlug` with `true`.
 #
 # For some languages, the code used by WordPress and Google Translate
 # are different. For instance, Norwegian is represented as "nb" by
@@ -356,7 +356,7 @@ query PrepareMetaReplacements
 }
 
 query ExportMutationInputs(
-  $updateSlug: Boolean! = true
+  $updateSlug: Boolean! = false
   $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
   @depends(on: "PrepareMetaReplacements")
