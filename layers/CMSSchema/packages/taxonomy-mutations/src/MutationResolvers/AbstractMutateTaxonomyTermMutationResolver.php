@@ -258,7 +258,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         if ($taxonomyParentBy !== null) {
             /** @var string */
             $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
-            if ($taxonomyParentBy->{InputProperties::ID} !== null) {
+            if (isset($taxonomyParentBy->{InputProperties::ID})) {
                 /** @var string|int */
                 $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
                 $this->validateTaxonomyTermByIDExists(
@@ -267,7 +267,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
                     $fieldDataAccessor,
                     $objectTypeFieldResolutionFeedbackStore,
                 );
-            } elseif ($taxonomyParentBy->{InputProperties::SLUG} !== null) {
+            } elseif (isset($taxonomyParentBy->{InputProperties::SLUG})) {
                 /** @var string */
                 $taxonomyParentSlug = $taxonomyParentBy->{InputProperties::SLUG};
                 $this->validateTaxonomyTermBySlugExists(
