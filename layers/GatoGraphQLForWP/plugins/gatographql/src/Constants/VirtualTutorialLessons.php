@@ -25,6 +25,7 @@ class VirtualTutorialLessons
     public final const SYNCHRONIZING_TAGS_AND_CATEGORIES_FOR_POLYLANG = 'synchronizing-tags-and-categories-for-polylang';
     public final const TRANSLATING_AND_CREATING_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_CLASSIC_EDITOR = 'translating_and-creating-all-pages-for-multilingual-wordpress-site-classic-editor';
     public final const TRANSLATING_AND_CREATING_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG = 'translating_and-creating-all-pages-for-multilingual-wordpress-site-gutenberg';
+    public final const TRANSLATING_CATEGORIES_FOR_MULTILINGUALPRESS = 'translating-categories-for-multilingualpress';
     public final const TRANSLATING_CATEGORIES_FOR_POLYLANG = 'translating-categories-for-polylang';
     public final const TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE = 'translating-classic-editor-post-to-a-different-language';
     public final const TRANSLATING_POEDIT_FILE_CONTENT = 'translating-poedit-file-content';
@@ -32,5 +33,6 @@ class VirtualTutorialLessons
     public final const TRANSLATING_POSTS_FOR_POLYLANG_AND_CLASSIC_EDITOR = 'translating-posts-for-polylang-and-classic-editor';
     public final const TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_GUTENBERG = 'translating-posts-for-multilingualpress-and-gutenberg';
     public final const TRANSLATING_POSTS_FOR_MULTILINGUALPRESS_AND_CLASSIC_EDITOR = 'translating-posts-for-multilingualpress-and-classic-editor';
+    public final const TRANSLATING_TAGS_FOR_MULTILINGUALPRESS = 'translating-tags-for-multilingualpress';
     public final const TRANSLATING_TAGS_FOR_POLYLANG = 'translating-tags-for-polylang';
 }

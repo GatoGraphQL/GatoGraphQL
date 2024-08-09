@@ -53,6 +53,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_SYNC_TAGS_AND_CATEGORIES_FOR_POLYLANG = 'sync-tags-and-categories-for-polylang';
     public final const PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_CLASSIC_EDITOR = 'translate-and-create-all-pages-for-multilingual-wordpress-site-classic-editor';
     public final const PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG = 'translate-and-create-all-pages-for-multilingual-wordpress-site-gutenberg';
+    public final const PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_MULTILINGUALPRESS = 'translate-categories-for-multilingualpress';
     public final const PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_POLYLANG = 'translate-categories-for-polylang';
     public final const PERSISTED_QUERY_TRANSLATE_CONTENT_FROM_URL = 'translate-content-from-url';
     public final const PERSISTED_QUERY_TRANSLATE_POEDIT_FILE_CONTENT = 'translate-poedit-file-content';
@@ -64,5 +65,6 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_GUTENBERG = 'translate-posts-for-polylang-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_CLASSIC_EDITOR = 'translate-posts-for-multilingualpress-classic-editor';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_GUTENBERG = 'translate-posts-for-multilingualpress-gutenberg';
+    public final const PERSISTED_QUERY_TRANSLATE_TAGS_FOR_MULTILINGUALPRESS = 'translate-tags-for-multilingualpress';
     public final const PERSISTED_QUERY_TRANSLATE_TAGS_FOR_POLYLANG = 'translate-tags-for-polylang';
 }
