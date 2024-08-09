@@ -40,15 +40,10 @@ query InitializeVariables
     @export(as: "canTranslateOriginTag")
     @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasCreatedTranslationTags")
-    @export(as: "hasOriginTagParent")
     @remove
 
   emptyArray: _echo(value: [])
     @export(as: "createdTranslationTagIDs")
-    @remove
-
-  emptyObject: _echo(value: {})
-    @export(as: "tagParentTranslationLanguages")
     @remove
 }
 
@@ -77,11 +72,7 @@ query ExportOriginTag(
     ################################################################
     originTagName: name @export(as: "originTagName")
     originTagDescription: description @export(as: "originTagDescription")
-    originTagParent: parent @export(as: "originTagParentID") {
-      id
-    }
     ################################################################
-    hasOriginTagParent: _notNull(value: $__originTagParent)
 
 
     polylangLanguage {
@@ -137,27 +128,11 @@ query ExportOriginTagCanBeTranslated(
     @export(as: "canTranslateOriginTag")
 }
 
-query ExportOriginTagParent(
-  $tagTaxonomy: TagTaxonomyEnumString! = "tag"
-)
-  @depends(on: "ExportOriginTagCanBeTranslated")
-  @include(if: $canTranslateOriginTag)
-  @include(if: $hasOriginTagParent)
-{
-  originTagParent: tag(by: { id: $originTagParentID }, taxonomy: $tagTaxonomy) {
-    id
-
-    
-    polylangTranslationLanguageIDs
-      @export(as: "tagParentTranslationLanguages")
-  }
-}
-
 query ExportMissingTranslationLanguages(
   $includeLanguagesToTranslate: [String!]! = []
   $excludeLanguagesToTranslate: [String!]! = []
 )
-  @depends(on: "ExportOriginTagParent")
+  @depends(on: "ExportOriginTagCanBeTranslated")
   @include(if: $canTranslateOriginTag)
 {
   missingTranslationLanguagesWithoutFilteringByInclude: _arrayDiff(
@@ -193,7 +168,7 @@ query CreateTranslationTagInputsForMissingLanguages(
   createTranslationTagInputs: _echo(value: $missingTranslationLanguages)
     @underEachArrayItem(
       passValueOnwardsAs: "languageCode"
-      affectDirectivesUnderPos: [1, 2, 3]
+      affectDirectivesUnderPos: [1, 2]
     )
       @applyField(
         name: "_sprintf"
@@ -204,25 +179,12 @@ query CreateTranslationTagInputsForMissingLanguages(
         passOnwardsAs: "originTagNameForLanguage"
       )
       @applyField(
-        name: "_objectProperty",
-        arguments: {
-          object: $tagParentTranslationLanguages,
-          by: { key: $languageCode }
-          failIfNonExistingKeyOrPath: false
-          valueWhenNonExistingKeyOrPath: $originTagParentID
-        },
-        passOnwardsAs: "originSameOrTranslatedTagParentID"
-      )
-      @applyField(
         name: "_echo",
         arguments: {
           value: {
             taxonomy: $tagTaxonomy
             name: $originTagNameForLanguage
             description: $originTagDescription
-            parentBy: {
-              id: $originSameOrTranslatedTagParentID
-            },
             polylangLanguageBy: { code: $languageCode }
           }
         },
