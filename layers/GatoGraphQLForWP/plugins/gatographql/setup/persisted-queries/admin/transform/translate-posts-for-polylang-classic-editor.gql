@@ -22,9 +22,9 @@
 # and stores those translations in the corresponding posts,
 # as set-up via Polylang.
 #
-# All translation posts must already exist, created using the
-# Polylang UI. These posts must also have the  `draft` status
-# to be updated. To update posts with any other status, use
+# All translation posts must already exist. These posts
+# must also have the  `draft` status to be updated.
+# To update posts with any other status, use
 # variable `$statusToUpdate` (for instance, passing value
 # `publish`, `pending` or `any`)
 #
