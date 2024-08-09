@@ -170,6 +170,7 @@ query InitializeTranslationVariables
   @include(if: $executeTranslation)
 {
   arrayItems: _arrayLength(array: $networkSiteTranslationConnectionDataItems)
+    @remove
 
   rawTitle: _arrayPad(array: [], length: $__arrayItems, value: $originRawTitle)
     @export(as: "rawTitle")
