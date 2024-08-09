@@ -82,6 +82,7 @@ query ExportOriginCategory(
     }
     ################################################################
     hasOriginCategoryParent: _notNull(value: $__originCategoryParent)
+      @export(as: "hasOriginCategoryParent")
 
 
     polylangLanguage {
