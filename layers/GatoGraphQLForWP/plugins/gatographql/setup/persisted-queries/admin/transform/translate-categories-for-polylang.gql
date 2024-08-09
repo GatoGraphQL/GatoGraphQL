@@ -229,12 +229,14 @@ query TranslateData(
 
 query GenerateMutationInputs(
   $updateSlug: Boolean! = true
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
   @depends(on: "TranslateData")
   @include(if: $executeTranslation)
 {  
   categoryInputs: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "categoryID"
       passValueOnwardsAs: "categoryTranslatedData"
       affectDirectivesUnderPos: [1, 2, 3, 4]
     )
@@ -271,9 +273,11 @@ query GenerateMutationInputs(
         name: "_echo",
         arguments: {
           value: {
-            name: $categoryTranslatedName,
-            slug: $categoryMaybeTranslatedSlug,
+            id: $categoryID
+            taxonomy: $categoryTaxonomy
+            name: $categoryTranslatedName
             description: $categoryTranslatedDescription
+            slug: $categoryMaybeTranslatedSlug
           }
         },
         setResultInResponse: true
@@ -281,38 +285,23 @@ query GenerateMutationInputs(
     @export(as: "categoryInputs")
 }
 
-mutation TranslateCategories(
-  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
-)
+mutation TranslateCategories
   @depends(on: "GenerateMutationInputs")
   @include(if: $executeTranslation)
 {
-  updateTranslationCategories: categories(
-    taxonomy: $categoryTaxonomy
-    filter: { ids: $translationCategoryIds }
-  ) {
-    id
-    categoryInput: _objectProperty(
-      object: $categoryInputs,
-      by: {
-        key: $__id
+  updateCategories(input: $categoryInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
       }
-    )
-      @remove
-    update(input: $__categoryInput) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      category {
-        id
-        name
-        description
-        slug
-      }
+    }
+    category {
+      id
+      name
+      description
+      slug
     }
   }
 }
