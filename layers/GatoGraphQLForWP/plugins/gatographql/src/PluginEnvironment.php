@@ -30,12 +30,7 @@ class PluginEnvironment
         return true;
     }
 
-    /**
-     * If the cache dir is provided by either environment variable
-     * or constant in wp-config.php, use it.
-     * Otherwise, set the default to wp-content/gatographql/cache
-     */
-    public static function getCacheDir(): string
+    public static function getGatoGraphQLDynamicFileStorageDir(): string
     {
         $baseCacheDir = null;
         if (getenv(self::CACHE_DIR) !== false) {
@@ -46,7 +41,17 @@ class PluginEnvironment
             $baseCacheDir = constant('WP_CONTENT_DIR');
         }
 
-        return $baseCacheDir . \DIRECTORY_SEPARATOR . 'gatographql' . \DIRECTORY_SEPARATOR . 'cache';
+        return $baseCacheDir . \DIRECTORY_SEPARATOR . 'gatographql';
+    }
+
+    /**
+     * If the cache dir is provided by either environment variable
+     * or constant in wp-config.php, use it.
+     * Otherwise, set the default to wp-content/gatographql/cache
+     */
+    public static function getCacheDir(): string
+    {
+        return static::getGatoGraphQLDynamicFileStorageDir() . \DIRECTORY_SEPARATOR . 'cache';
 
         // This is under wp-content/plugins/gatographql/cache
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
