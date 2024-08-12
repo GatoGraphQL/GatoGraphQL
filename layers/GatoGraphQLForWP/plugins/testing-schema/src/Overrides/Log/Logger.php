@@ -23,4 +23,18 @@ class Logger extends UpstreamLogger
             str_replace(PHP_EOL, '\n', $message)
         ));
     }
+    /**
+     * Send the error to the response headers,
+     * so we can test it
+     */
+    public function logInfo(string $message): void
+    {
+        parent::logInfo($message);
+
+        header(sprintf(
+            '%s: %s',
+            CustomHeaders::GATOGRAPHQL_INFO,
+            str_replace(PHP_EOL, '\n', $message)
+        ));
+    }
 }

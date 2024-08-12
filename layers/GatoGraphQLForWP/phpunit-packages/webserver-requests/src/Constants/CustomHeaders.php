@@ -24,4 +24,11 @@ class CustomHeaders
      * @see layers/GatoGraphQLForWP/plugins/testing-schema/src/Constants/CustomHeaders.php
      */
     public const GATOGRAPHQL_ERRORS = 'X-GATOGRAPHQL-ERRORS';
+
+    /**
+     * Duplicated constant
+     *
+     * @see layers/GatoGraphQLForWP/plugins/testing-schema/src/Constants/CustomHeaders.php
+     */
+    public const GATOGRAPHQL_INFO = 'X-GATOGRAPHQL-INFO';
 }

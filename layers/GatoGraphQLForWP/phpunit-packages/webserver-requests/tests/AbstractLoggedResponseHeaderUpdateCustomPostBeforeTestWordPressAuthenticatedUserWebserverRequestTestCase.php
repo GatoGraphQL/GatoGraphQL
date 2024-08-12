@@ -9,7 +9,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\FixtureEndpointWebserverReques
 use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaders;
 use Psr\Http\Message\ResponseInterface;
 
-abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase
+abstract class AbstractLoggedResponseHeaderUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase
 {
     use FixtureTestCaseTrait;
     use FixtureEndpointWebserverRequestTestCaseTrait;
@@ -33,12 +33,18 @@ abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAut
     protected function validateResponseHeaders(ResponseInterface $response): void
     {
         $dataName = $this->getDataName();
-        $expectedResponseErrorMessage = $this->getExpectedResponseErrorMessage($dataName);
+        $expectedResponseLogErrorMessage = $this->getExpectedResponseLogErrorMessage($dataName);
         $this->assertEquals(
-            $expectedResponseErrorMessage,
+            $expectedResponseLogErrorMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
+        );
+        $expectedResponseLogInfoMessage = $this->getExpectedResponseLogInfoMessage($dataName);
+        $this->assertEquals(
+            $expectedResponseLogInfoMessage,
+            $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_INFO),
         );
     }
 
-    abstract protected function getExpectedResponseErrorMessage(string $dataName): string;
+    abstract protected function getExpectedResponseLogErrorMessage(string $dataName): string;
+    abstract protected function getExpectedResponseLogInfoMessage(string $dataName): string;
 }
