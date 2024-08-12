@@ -33,18 +33,25 @@ class Logger implements LoggerInterface
         ), 3, $logFile);
     }
 
-    protected function maybeCreateLogFile(string $logFile): bool
+    protected function maybeCreateLogFile(string $filename): bool
     {
-        if (file_exists($logFile)) {
+        if (file_exists($filename)) {
             return true;
         }
 
-        $handle = fopen($logFile, "w");
+        $dir = \dirname($filename);
+        if (!is_dir($dir) && @mkdir($dir, 0777, true) === false) {
+            $this->logError('Can\'t create directory to store log files, under path ' . $dir);
+            return false;
+        }
+
+        $handle = fopen($filename, "w");
         if ($handle === false) {
-            $this->logError('Can\'t create log file under path ' . $logFile);
+            $this->logError('Can\'t create log file under path ' . $filename);
             return false;
         }
         fclose($handle);
+
         return true;
     }
 }
