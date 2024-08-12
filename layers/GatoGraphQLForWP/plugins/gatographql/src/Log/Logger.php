@@ -24,6 +24,6 @@ class Logger implements LoggerInterface
         \error_log(sprintf(
             '[Gato GraphQL] %s',
             $message
-        ), 3, PluginEnvironment::getLogsFilePath('logs.txt'));
+        ), 3, PluginEnvironment::getLogsFilePath('info.log'));
     }
 }
