@@ -22,7 +22,7 @@ class Logger implements LoggerInterface
     public function logInfo(string $message): void
     {
         $logFile = PluginEnvironment::getLogsFilePath('info.log');
-        $hasLogFile = $this->maybeCreateLogInfoFile($logFile);
+        $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
         }
@@ -33,7 +33,7 @@ class Logger implements LoggerInterface
         ), 3, $logFile);
     }
 
-    protected function maybeCreateLogInfoFile(string $logFile): bool
+    protected function maybeCreateLogFile(string $logFile): bool
     {
         if (file_exists($logFile)) {
             return true;
