@@ -28,7 +28,7 @@ class Logger implements LoggerInterface
         }
 
         \error_log(sprintf(
-            '[Gato GraphQL] %s',
+            '[INFO] %s',
             $message
         ), 3, $logFile);
     }
