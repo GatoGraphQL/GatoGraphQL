@@ -14,17 +14,6 @@ abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAut
     use FixtureTestCaseTrait;
     use FixtureEndpointWebserverRequestTestCaseTrait;
 
-    /**
-     * @return array<string,array<mixed>>
-     */
-    public static function provideEndpointEntries(): array
-    {
-        return static::provideFixtureEndpointEntries(
-            static::getFixtureFolder(),
-            static::getResponseFixtureFolder()
-        );
-    }
-
     protected function mustExecuteRESTEndpointToUpdateCustomPost(string $dataName): bool
     {
         return true;
