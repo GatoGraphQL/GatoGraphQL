@@ -299,7 +299,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * Translate tags for MultilingualPress
 * Added translation language mapping to persisted queries (#2775)
 * [PRO] Define the Polylang language on tag and category mutations
-* [PRO] Automation: Log info when the execution of a persisted query was successful
+* [PRO] Automation: Store the GraphQL response in the info logs
 
 = 4.1.0 =
 * Send the referer on Guzzle requests (#2754)

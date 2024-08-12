@@ -331,6 +331,6 @@ mutation {
 }
 ```
 
-### Automation: Log info when the execution of a persisted query was successful
+### Automation: Store the GraphQL response in the info logs
 
-The complete GraphQL response for the automation (whether successful or not) is logged under file `wp-content/gatographql/logs/info.log`.
+The complete GraphQL response for an automation execution (for both WP-Cron and Automation Rules, whether the execution was successful or not) is logged under file `wp-content/gatographql/logs/info.log`.
