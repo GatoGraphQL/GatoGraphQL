@@ -33,18 +33,18 @@ abstract class AbstractLoggedResponseHeaderUpdateCustomPostBeforeTestWordPressAu
     protected function validateResponseHeaders(ResponseInterface $response): void
     {
         $dataName = $this->getDataName();
-        $expectedResponseErrorMessage = $this->getExpectedResponseErrorMessage($dataName);
+        $expectedResponseLogErrorMessage = $this->getExpectedResponseLogErrorMessage($dataName);
         $this->assertEquals(
-            $expectedResponseErrorMessage,
+            $expectedResponseLogErrorMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
         );
-        $expectedResponseInfoMessage = $this->getExpectedResponseInfoMessage($dataName);
+        $expectedResponseLogInfoMessage = $this->getExpectedResponseLogInfoMessage($dataName);
         $this->assertEquals(
-            $expectedResponseInfoMessage,
+            $expectedResponseLogInfoMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_INFO),
         );
     }
 
-    abstract protected function getExpectedResponseErrorMessage(string $dataName): string;
-    abstract protected function getExpectedResponseInfoMessage(string $dataName): string;
+    abstract protected function getExpectedResponseLogErrorMessage(string $dataName): string;
+    abstract protected function getExpectedResponseLogInfoMessage(string $dataName): string;
 }
