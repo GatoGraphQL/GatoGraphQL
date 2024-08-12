@@ -28,7 +28,7 @@ class Logger implements LoggerInterface
         }
 
         \error_log(sprintf(
-            '[INFO] %s',
+            '[INFO] %s\n',
             $message
         ), 3, $logFile);
     }
