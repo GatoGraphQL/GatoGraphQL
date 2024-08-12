@@ -4,16 +4,10 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
-use GraphQLByPoP\GraphQLServer\Unit\FixtureQueryExecutionGraphQLServerTestCaseTrait;
-use GraphQLByPoP\GraphQLServer\Unit\FixtureTestCaseTrait;
-
 use function file_get_contents;
 
 abstract class AbstractFixtureUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase extends AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebserverRequestTestCase
 {
-    use FixtureTestCaseTrait;
-    use FixtureQueryExecutionGraphQLServerTestCaseTrait;
-
     /**
      * @return array<string,array<mixed>>
      */
