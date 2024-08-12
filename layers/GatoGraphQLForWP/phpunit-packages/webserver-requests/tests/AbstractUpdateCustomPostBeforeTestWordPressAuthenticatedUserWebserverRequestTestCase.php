@@ -73,19 +73,6 @@ abstract class AbstractUpdateCustomPostBeforeTestWordPressAuthenticatedUserWebse
 
     protected static function getEndpoint(): string
     {
-        if (static::useAdminEndpoint()) {
-            return static::getAdminEndpoint();
-        }
         return 'graphql/';
-    }
-
-    protected static function useAdminEndpoint(): bool
-    {
-        return false;
-    }
-
-    protected static function getAdminEndpoint(): string
-    {
-        return 'wp-admin/edit.php?page=gatographql&action=execute_query';
     }
 }
