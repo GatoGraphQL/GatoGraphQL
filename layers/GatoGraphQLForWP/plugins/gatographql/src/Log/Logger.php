@@ -21,9 +21,13 @@ class Logger implements LoggerInterface
      */
     public function logInfo(string $message): void
     {
+        $logFile = PluginEnvironment::getLogsFilePath('info.log');
+        if (!file_exists($logFile)) {
+            file_put_contents($logFile, '');
+        }
         \error_log(sprintf(
             '[Gato GraphQL] %s',
             $message
-        ), 3, PluginEnvironment::getLogsFilePath('info.log'));
+        ), 3, $logFile);
     }
 }
