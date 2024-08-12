@@ -21,7 +21,7 @@ class Logger implements LoggerInterface
      */
     public function logInfo(string $message): void
     {
-        $logFile = PluginEnvironment::getLogsFilePath('info.log');
+        $logFile = PluginEnvironment::getLogsFilePath('logs.log');
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;

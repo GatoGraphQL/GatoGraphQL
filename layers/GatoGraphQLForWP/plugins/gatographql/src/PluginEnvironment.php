@@ -59,7 +59,7 @@ class PluginEnvironment
 
     public static function getLogsDir(): string
     {
-        return static::getGatoGraphQLDynamicFileStorageDir() . \DIRECTORY_SEPARATOR . 'logs';
+        return static::getGatoGraphQLDynamicFileStorageDir();
     }
 
     public static function getLogsFilePath(string $filename): string
