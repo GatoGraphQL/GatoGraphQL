@@ -27,8 +27,10 @@ class Logger implements LoggerInterface
             return;
         }
 
+        $date = date('Y-m-d H:i:s');
         \error_log(sprintf(
-            '[INFO] %s\n',
+            '[%s] %s\n',
+            $date,
             $message
         ), 3, $logFile);
     }
