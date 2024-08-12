@@ -17,8 +17,10 @@ abstract class AbstractFixtureUpdateCustomPostBeforeTestWordPressAuthenticatedUs
     /**
      * @return array<string,array<mixed>>
      */
-    public static function provideEndpointEntries(): array
-    {
+    public static function provideFixtureEndpointEntries(
+        string $fixtureFolder,
+        ?string $responseFixtureFolder = null,
+    ): array {
         $endpoint = static::getEndpoint();
         $providerEntries = [];
         foreach (static::getFixtureNameEntries() as $fixtureName => $fixtureEntry) {
