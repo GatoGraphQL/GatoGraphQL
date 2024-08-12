@@ -56,4 +56,9 @@ class PluginEnvironment
         // This is under wp-content/plugins/gatographql/cache
         // return dirname(__FILE__, 2) . \DIRECTORY_SEPARATOR . 'cache';
     }
+
+    public static function getLogsDir(): string
+    {
+        return static::getGatoGraphQLDynamicFileStorageDir() . \DIRECTORY_SEPARATOR . 'logs';
+    }
 }
