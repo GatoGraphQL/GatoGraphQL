@@ -13,4 +13,12 @@ class Logger implements LoggerInterface
             $message
         ));
     }
+
+    public function logInfo(string $message): void
+    {
+        \syslog(LOG_INFO, sprintf(
+            '[Gato GraphQL] %s',
+            $message
+        ));
+    }
 }
