@@ -23,7 +23,12 @@ class Logger implements LoggerInterface
     {
         $logFile = PluginEnvironment::getLogsFilePath('info.log');
         if (!file_exists($logFile)) {
-            file_put_contents($logFile, '');
+            $handle = fopen($logFile, "w");
+            if ($handle === false) {
+                $this->logError('Can\'t create log file under path ' . $logFile);
+                return;
+            }
+            fclose($handle);
         }
         \error_log(sprintf(
             '[Gato GraphQL] %s',
