@@ -302,8 +302,6 @@ fragment TagData on Tag {
 
 ## [PRO] Improvements
 
-- Automation: Log info when the execution of a persisted query was successful
-
 ### Define the Polylang language on tag and category mutations
 
 With the **Polylang integration**, when creating a tag or category (see above), we can pass `polylangLanguageBy` input to already define its language.
@@ -332,3 +330,7 @@ mutation {
   }
 }
 ```
+
+### Automation: Store the GraphQL response in the info logs
+
+The complete GraphQL response for an automation execution (for both WP-Cron and Automation Rules, whether the execution was successful or not) is logged under file `wp-content/gatographql/logs/info.log`.
