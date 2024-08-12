@@ -109,6 +109,8 @@ All configuration problems (such as a malformed JSON string for the GraphQL vari
 
 These error logs are prepended with string `[Gato GraphQL]`.
 
+In addition, the complete GraphQL response for the automation (whether successful or not) is logged under file `wp-content/gatographql/logs/info.log`.
+
 ## Query Resolution Action
 
 When the GraphQL server resolves a query, it triggers the following action hooks with the GraphQL response:
