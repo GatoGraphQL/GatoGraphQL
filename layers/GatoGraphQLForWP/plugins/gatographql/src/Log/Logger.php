@@ -29,7 +29,7 @@ class Logger implements LoggerInterface
 
         $date = date('Y-m-d H:i:s');
         \error_log(sprintf(
-            '[%s] %s\n',
+            '[%s] %s' . PHP_EOL,
             $date,
             $message
         ), 3, $logFile);
