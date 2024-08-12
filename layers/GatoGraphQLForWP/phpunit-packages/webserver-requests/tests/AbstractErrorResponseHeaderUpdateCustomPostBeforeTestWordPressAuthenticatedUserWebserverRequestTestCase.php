@@ -38,7 +38,13 @@ abstract class AbstractErrorResponseHeaderUpdateCustomPostBeforeTestWordPressAut
             $expectedResponseErrorMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
         );
+        $expectedResponseInfoMessage = $this->getExpectedResponseInfoMessage($dataName);
+        $this->assertEquals(
+            $expectedResponseInfoMessage,
+            $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_INFO),
+        );
     }
 
     abstract protected function getExpectedResponseErrorMessage(string $dataName): string;
+    abstract protected function getExpectedResponseInfoMessage(string $dataName): string;
 }
