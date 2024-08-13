@@ -302,6 +302,8 @@ fragment TagData on Tag {
 
 ## [PRO] Improvements
 
+- Renamed input `polylangLanguage` to `polylangLanguageBy` to filter entities by language (custom posts, taxonomies and media items)
+
 ### Define the Polylang language on tag and category mutations
 
 With the **Polylang integration**, when creating a tag or category (see above), we can pass `polylangLanguageBy` input to already define its language.

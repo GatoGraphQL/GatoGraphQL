@@ -25,7 +25,7 @@ We can provide the language to filter by when fetching data for:
 - Tags
 - Media items
 
-The corresponding fields receive input `polylangLanguageBy`, and we can filter by code or locale, and by 1 or more than 1 language.
+The corresponding fields receive input `polylangLanguage`, and we can filter by code or locale, and by 1 or more than 1 language.
 
 For instance, passing `$languageCodes: ["es"]` will fetch data in Spanish:
 
@@ -33,14 +33,14 @@ For instance, passing `$languageCodes: ["es"]` will fetch data in Spanish:
 query FilterByLanguage($languageCodes: [String!])
 {
   posts(filter: {
-    polylangLanguagesBy: { codes: $languageCodes }
+    polylangLanguages: { codes: $languageCodes }
   }) {
     id
     title
   }
 
   pages(filter: {
-    polylangLanguagesBy: { codes: $languageCodes }
+    polylangLanguages: { codes: $languageCodes }
   }) {
     id
     title
@@ -48,21 +48,21 @@ query FilterByLanguage($languageCodes: [String!])
 
   customPosts(filter: {
     customPostTypes: ["some-cpt"]
-    polylangLanguagesBy: { codes: $languageCodes }
+    polylangLanguages: { codes: $languageCodes }
   }) {
     id
     title
   }
 
   postCategories(filter: {
-    polylangLanguagesBy: { codes: $languageCodes }
+    polylangLanguages: { codes: $languageCodes }
   }) {
     id
     name
   }
 
   postTags(filter: {
-    polylangLanguagesBy: { codes: $languageCodes }
+    polylangLanguages: { codes: $languageCodes }
   }) {
     id
     name
@@ -70,7 +70,7 @@ query FilterByLanguage($languageCodes: [String!])
 
   categories(
     taxonomy: "some-category"
-    filter: { polylangLanguagesBy: { codes: $languageCodes } }
+    filter: { polylangLanguages: { codes: $languageCodes } }
   ) {
     id
     name
@@ -78,14 +78,14 @@ query FilterByLanguage($languageCodes: [String!])
 
   tags(
     taxonomy: "some-tag"
-    filter: { polylangLanguagesBy: { codes: $languageCodes } }
+    filter: { polylangLanguages: { codes: $languageCodes } }
   ) {
     id
     name
   }
 
   mediaItems(filter: {
-    polylangLanguagesBy: { codes: $languageCodes }
+    polylangLanguages: { codes: $languageCodes }
   }) {
     id
     title
