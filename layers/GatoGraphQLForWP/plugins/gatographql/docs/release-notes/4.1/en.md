@@ -33,14 +33,14 @@ For instance, passing `$languageCodes: ["es"]` will fetch data in Spanish:
 query FilterByLanguage($languageCodes: [String!])
 {
   posts(filter: {
-    polylangLanguages: { codes: $languageCodes }
+    polylangLanguagesBy: { codes: $languageCodes }
   }) {
     id
     title
   }
 
   pages(filter: {
-    polylangLanguages: { codes: $languageCodes }
+    polylangLanguagesBy: { codes: $languageCodes }
   }) {
     id
     title
@@ -48,21 +48,21 @@ query FilterByLanguage($languageCodes: [String!])
 
   customPosts(filter: {
     customPostTypes: ["some-cpt"]
-    polylangLanguages: { codes: $languageCodes }
+    polylangLanguagesBy: { codes: $languageCodes }
   }) {
     id
     title
   }
 
   postCategories(filter: {
-    polylangLanguages: { codes: $languageCodes }
+    polylangLanguagesBy: { codes: $languageCodes }
   }) {
     id
     name
   }
 
   postTags(filter: {
-    polylangLanguages: { codes: $languageCodes }
+    polylangLanguagesBy: { codes: $languageCodes }
   }) {
     id
     name
@@ -70,7 +70,7 @@ query FilterByLanguage($languageCodes: [String!])
 
   categories(
     taxonomy: "some-category"
-    filter: { polylangLanguages: { codes: $languageCodes } }
+    filter: { polylangLanguagesBy: { codes: $languageCodes } }
   ) {
     id
     name
@@ -78,14 +78,14 @@ query FilterByLanguage($languageCodes: [String!])
 
   tags(
     taxonomy: "some-tag"
-    filter: { polylangLanguages: { codes: $languageCodes } }
+    filter: { polylangLanguagesBy: { codes: $languageCodes } }
   ) {
     id
     name
   }
 
   mediaItems(filter: {
-    polylangLanguages: { codes: $languageCodes }
+    polylangLanguagesBy: { codes: $languageCodes }
   }) {
     id
     title
