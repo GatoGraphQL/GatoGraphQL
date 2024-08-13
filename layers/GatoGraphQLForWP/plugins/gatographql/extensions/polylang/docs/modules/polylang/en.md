@@ -398,8 +398,8 @@ Running this query:
 
 The GraphQL schema is provided with mutations to:
 
-- Establish the language for custom posts, tags and categories, and
-- Define associations among them (i.e. indicate that a set of custom posts, tags or categories is a translation for each other).
+- Establish the language for custom posts, tags, categories, and media items, and
+- Define associations among them (i.e. indicate that a set of custom posts, tags, categories, or media items is a translation for each other).
 
 | Mutation | Description |
 | --- | --- |
