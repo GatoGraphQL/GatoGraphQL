@@ -464,7 +464,7 @@ We can provide the language to filter by when fetching data for:
 - Tags
 - Media items
 
-The corresponding fields receive input `polylangLanguage`, and we can filter by code or locale, and by 1 or more than 1 language.
+The corresponding fields receive input `polylangLanguageBy`, and we can filter by code or locale, and by 1 or more than 1 language.
 
 For instance, passing `$languageCodes: ["es"]` will fetch data in Spanish:
 
