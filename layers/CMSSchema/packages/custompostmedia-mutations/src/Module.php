@@ -22,6 +22,7 @@ class Module extends AbstractModule
         return [
             \PoPCMSSchema\CustomPostMutations\Module::class,
             \PoPCMSSchema\CustomPostMedia\Module::class,
+            \PoPCMSSchema\MediaMutations\Module::class,
         ];
     }
 
