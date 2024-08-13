@@ -398,15 +398,17 @@ Running this query:
 
 The GraphQL schema is provided with mutations to:
 
-- Establish the language for custom posts, tags and categories, and
-- Define associations among them (i.e. indicate that a set of custom posts, tags or categories is a translation for each other).
+- Establish the language for custom posts, tags, categories, and media items, and
+- Define associations among them (i.e. indicate that a set of custom posts, tags, categories, or media items is a translation for each other).
 
 | Mutation | Description |
 | --- | --- |
 | `polylangSetCustomPostLanguage` | Set the language of the custom post. |
 | `polylangSetTaxonomyTermLanguage` | Set the language of the taxonomy term. |
+| `polylangSetMediaItemLanguage` | Set the language of the media item. |
 | `polylangSaveCustomPostTranslationAssociation` | Set the translation association for the custom post. |
 | `polylangSaveTaxonomyTermTranslationAssociation` | Set the translation association for the taxonomy term. |
+| `polylangSaveMediaItemTranslationAssociation` | Set the translation association for the media item. |
 
 For instance, the following query defines the language for 3 posts (to English, Spanish and French), and then defines that these 3 posts are a translation of each other:
 

@@ -300,6 +300,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added translation language mapping to persisted queries (#2775)
 * [PRO] Define the Polylang language on tag and category mutations
 * [PRO] Automation: Store the GraphQL response in the info logs
+* [PRO] Added Polylang Mutations for Media Items
 
 = 4.1.0 =
 * Send the referer on Guzzle requests (#2754)

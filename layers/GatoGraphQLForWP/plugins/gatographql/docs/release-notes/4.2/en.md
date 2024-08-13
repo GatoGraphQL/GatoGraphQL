@@ -334,3 +334,62 @@ mutation {
 ### Automation: Store the GraphQL response in the info logs
 
 The complete GraphQL response for an automation execution (for both WP-Cron and Automation Rules, whether the execution was successful or not) is logged under file `wp-content/gatographql/logs/info.log`.
+
+### Added Polylang Mutations for Media Items
+
+PRO module **Polylang Mutations** provides mutations for the integration with the [Polylang](https://wordpress.org/plugins/polylang/) plugin.
+
+The GraphQL schema has been augmented with mutations to:
+
+- Establish the language for media items, and
+- Define associations among them (i.e. indicate that a set of media items is a translation for each other).
+
+| Mutation | Description |
+| --- | --- |
+| `polylangSetMediaItemLanguage` | Set the language of the media item. |
+| `polylangSaveMediaItemTranslationAssociation` | Set the translation association for the media item. |
+
+For instance, the following query defines the language for 3 media items (to English, Spanish and French), and then defines that these 3 media items are a translation of each other:
+
+```graphql
+mutation {
+  mediaItem1: polylangSetMediaItemLanguage(input: {id: 1007, languageBy: { code: "en" }}) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+  mediaItem2: polylangSetMediaItemLanguage(input: {id: 204, languageBy: { code: "es" }}) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+  mediaItem3: polylangSetMediaItemLanguage(input: {id: 377, languageBy: { code: "fr" }}) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+  polylangSaveMediaItemTranslationAssociation(input: {
+    ids: [1007, 204, 377]
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}
+```
