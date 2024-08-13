@@ -16,6 +16,8 @@ use PoP\ComponentModel\App;
  */
 class TagUnionTypeDataLoader extends UpstreamTagUnionTypeDataLoader
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?QueryableTagListObjectTypeDataLoader $queryableTagListObjectTypeDataLoader = null;
 
     final public function setQueryableTagListObjectTypeDataLoader(QueryableTagListObjectTypeDataLoader $queryableTagListObjectTypeDataLoader): void
@@ -45,7 +47,11 @@ class TagUnionTypeDataLoader extends UpstreamTagUnionTypeDataLoader
         $moduleConfiguration = App::getModule(TagsModule::class)->getConfiguration();
         $query['taxonomy'] = $moduleConfiguration->getQueryableTagTaxonomies();
 
-        return $query;
+        return App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            $query,
+            $ids
+        );
     }
 
     /**

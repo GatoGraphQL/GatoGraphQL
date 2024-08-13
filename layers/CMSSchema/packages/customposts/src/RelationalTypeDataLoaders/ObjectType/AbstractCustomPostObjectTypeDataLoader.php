@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeResolvers\EnumType\FilterCustomPostStatusEnumTypeResolver;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 abstract class AbstractCustomPostObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?FilterCustomPostStatusEnumTypeResolver $filterCustomPostStatusEnumTypeResolver = null;
 
@@ -48,10 +51,14 @@ abstract class AbstractCustomPostObjectTypeDataLoader extends AbstractObjectType
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        return [
-            'include' => $ids,
-            'status' => $this->getFilterCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues(),
-        ];
+        return App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            [
+                'include' => $ids,
+                'status' => $this->getFilterCustomPostStatusEnumTypeResolver()->getConsolidatedEnumValues(),
+            ],
+            $ids
+        );
     }
 
     /**

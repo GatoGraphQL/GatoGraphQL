@@ -13,6 +13,8 @@ use PoP\Root\App;
 
 abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeDataLoader implements ObjectTypeQueryableDataLoaderInterface
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final public function setComponentProcessorManager(ComponentProcessorManagerInterface $componentProcessorManager): void
@@ -119,7 +121,11 @@ abstract class AbstractObjectTypeQueryableDataLoader extends AbstractObjectTypeD
      */
     public function getObjects(array $ids): array
     {
-        $query = $this->getQueryToRetrieveObjectsForIDs($ids);
+        $query = App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            $this->getQueryToRetrieveObjectsForIDs($ids),
+            $ids
+        );
         return $this->executeQuery($query);
     }
 

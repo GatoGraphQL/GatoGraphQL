@@ -7,10 +7,13 @@ namespace PoPWPSchema\Multisite\RelationalTypeDataLoaders\ObjectType;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPWPSchema\Multisite\TypeAPIs\MultisiteTypeAPIInterface;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 class NetworkSiteObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?MultisiteTypeAPIInterface $multisiteTypeAPI = null;
 
     final public function setMultisiteTypeAPI(MultisiteTypeAPIInterface $multisiteTypeAPI): void
@@ -33,13 +36,17 @@ class NetworkSiteObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoa
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        return [
-            'site__in' => $ids,
-            'number' => '',
-            // 'archived' => 0,
-            // 'spam' => 0,
-            // 'deleted' => 0,
-        ];
+        return App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            [
+                'site__in' => $ids,
+                'number' => '',
+                // 'archived' => 0,
+                // 'spam' => 0,
+                // 'deleted' => 0,
+            ],
+            $ids
+        );
     }
 
     /**

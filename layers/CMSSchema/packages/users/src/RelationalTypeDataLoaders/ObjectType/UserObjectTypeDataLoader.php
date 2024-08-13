@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Users\RelationalTypeDataLoaders\ObjectType;
 
-use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
+use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoP\ComponentModel\App;
+use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 class UserObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?UserTypeAPIInterface $userTypeAPI = null;
 
     final public function setUserTypeAPI(UserTypeAPIInterface $userTypeAPI): void
@@ -33,9 +36,13 @@ class UserObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        return [
-            'include' => $ids,
-        ];
+        return App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            [
+                'include' => $ids,
+            ],
+            $ids
+        );
     }
 
     protected function getOrderbyDefault(): string

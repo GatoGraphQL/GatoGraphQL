@@ -19,6 +19,8 @@ use SplObjectStorage;
  */
 class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoader
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?CustomPostObjectTypeDataLoader $customPostObjectTypeDataLoader = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
@@ -62,7 +64,11 @@ class CustomPostUnionTypeDataLoader extends UpstreamCustomPostUnionTypeDataLoade
         $moduleConfiguration = App::getModule(CustomPostsModule::class)->getConfiguration();
         $query['custompost-types'] = $moduleConfiguration->getQueryableCustomPostTypes();
 
-        return $query;
+        return App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            $query,
+            $ids
+        );
     }
 
 
