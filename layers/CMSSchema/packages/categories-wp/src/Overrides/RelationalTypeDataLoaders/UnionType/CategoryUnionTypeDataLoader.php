@@ -16,6 +16,8 @@ use PoP\ComponentModel\App;
  */
 class CategoryUnionTypeDataLoader extends UpstreamCategoryUnionTypeDataLoader
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader = null;
 
     final public function setQueryableCategoryListObjectTypeDataLoader(QueryableCategoryListObjectTypeDataLoader $queryableCategoryListObjectTypeDataLoader): void
@@ -45,7 +47,11 @@ class CategoryUnionTypeDataLoader extends UpstreamCategoryUnionTypeDataLoader
         $moduleConfiguration = App::getModule(CategoriesModule::class)->getConfiguration();
         $query['taxonomy'] = $moduleConfiguration->getQueryableCategoryTaxonomies();
 
-        return $query;
+        return App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            $query,
+            $ids
+        );
     }
 
     /**

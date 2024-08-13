@@ -10,10 +10,13 @@ use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\AbstractObjectTypeQueryableDataLoader;
 
 class CommentObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
 {
+    public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
+
     private ?CommentTypeAPIInterface $commentTypeAPI = null;
 
     final public function setCommentTypeAPI(CommentTypeAPIInterface $commentTypeAPI): void
@@ -36,21 +39,25 @@ class CommentObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
      */
     public function getQueryToRetrieveObjectsForIDs(array $ids): array
     {
-        return [
-            'include' => $ids,
-            'type' => [
-                CommentTypes::COMMENT,
-                CommentTypes::TRACKBACK,
-                CommentTypes::PINGBACK,
+        return App::applyFilters(
+            self::HOOK_ALL_OBJECTS_BY_IDS_QUERY,
+            [
+                'include' => $ids,
+                'type' => [
+                    CommentTypes::COMMENT,
+                    CommentTypes::TRACKBACK,
+                    CommentTypes::PINGBACK,
+                ],
+                'status' => [
+                    CommentStatus::APPROVE,
+                    CommentStatus::HOLD,
+                    CommentStatus::SPAM,
+                    CommentStatus::TRASH,
+                ],
+                'custompost-status' => $this->getAllCustomPostStatuses(),
             ],
-            'status' => [
-                CommentStatus::APPROVE,
-                CommentStatus::HOLD,
-                CommentStatus::SPAM,
-                CommentStatus::TRASH,
-            ],
-            'custompost-status' => $this->getAllCustomPostStatuses(),
-        ];
+            $ids
+        );
     }
 
     /**
