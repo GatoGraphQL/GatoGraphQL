@@ -250,6 +250,11 @@ mutation CreateTranslationCategoryForMissingLanguages
       hasCreatedTranslationCategories: _echo(value: true)
         @export(as: "hasCreatedTranslationCategories")
         @remove
+      name
+      slug
+      polylangLanguage {
+        code
+      }
     }    
   }
 }
