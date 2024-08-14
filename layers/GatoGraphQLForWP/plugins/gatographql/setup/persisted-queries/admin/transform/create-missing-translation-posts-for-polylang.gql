@@ -244,6 +244,11 @@ mutation CreateTranslationPostForMissingLanguages
       hasCreatedTranslationPosts: _echo(value: true)
         @export(as: "hasCreatedTranslationPosts")
         @remove
+      title
+      slug
+      polylangLanguage {
+        code
+      }
     }    
   }
 }

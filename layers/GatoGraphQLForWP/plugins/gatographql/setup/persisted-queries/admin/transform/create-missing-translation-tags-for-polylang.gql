@@ -220,6 +220,11 @@ mutation CreateTranslationTagForMissingLanguages
       hasCreatedTranslationTags: _echo(value: true)
         @export(as: "hasCreatedTranslationTags")
         @remove
+      name
+      slug
+      polylangLanguage {
+        code
+      }
     }    
   }
 }
