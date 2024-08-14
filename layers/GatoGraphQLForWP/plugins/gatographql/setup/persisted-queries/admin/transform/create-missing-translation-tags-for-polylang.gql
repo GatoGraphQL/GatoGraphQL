@@ -168,7 +168,7 @@ query CreateTranslationTagInputsForMissingLanguages(
   createTranslationTagInputs: _echo(value: $missingTranslationLanguages)
     @underEachArrayItem(
       passValueOnwardsAs: "languageCode"
-      affectDirectivesUnderPos: [1, 2]
+      affectDirectivesUnderPos: [1, 2, 3]
     )
       @applyField(
         name: "_sprintf"
@@ -179,11 +179,20 @@ query CreateTranslationTagInputsForMissingLanguages(
         passOnwardsAs: "originTagNameForLanguage"
       )
       @applyField(
+        name: "_sprintf"
+        arguments: {
+          string: "%s___%s"
+          values: [$originTagName, $languageCode]
+        }
+        passOnwardsAs: "originTagSlugForLanguage"
+      )
+      @applyField(
         name: "_echo",
         arguments: {
           value: {
             taxonomy: $tagTaxonomy
             name: $originTagNameForLanguage
+            slug: $originTagSlugForLanguage
             description: $originTagDescription
             polylangLanguageBy: { code: $languageCode }
           }

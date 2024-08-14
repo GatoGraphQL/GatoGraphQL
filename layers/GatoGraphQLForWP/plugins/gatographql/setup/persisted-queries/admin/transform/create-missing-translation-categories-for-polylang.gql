@@ -194,7 +194,7 @@ query CreateTranslationCategoryInputsForMissingLanguages(
   createTranslationCategoryInputs: _echo(value: $missingTranslationLanguages)
     @underEachArrayItem(
       passValueOnwardsAs: "languageCode"
-      affectDirectivesUnderPos: [1, 2, 3]
+      affectDirectivesUnderPos: [1, 2, 3, 4]
     )
       @applyField(
         name: "_sprintf"
@@ -203,6 +203,14 @@ query CreateTranslationCategoryInputsForMissingLanguages(
           values: [$originCategoryName, $languageCode]
         }
         passOnwardsAs: "originCategoryNameForLanguage"
+      )
+      @applyField(
+        name: "_sprintf"
+        arguments: {
+          string: "%s___%s"
+          values: [$originCategoryName, $languageCode]
+        }
+        passOnwardsAs: "originCategorySlugForLanguage"
       )
       @applyField(
         name: "_objectProperty",
@@ -220,6 +228,7 @@ query CreateTranslationCategoryInputsForMissingLanguages(
           value: {
             taxonomy: $categoryTaxonomy
             name: $originCategoryNameForLanguage
+            slug: $originCategorySlugForLanguage
             description: $originCategoryDescription
             parentBy: {
               id: $originSameOrTranslatedCategoryParentID
