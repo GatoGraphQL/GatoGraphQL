@@ -243,7 +243,7 @@ query GenerateMutationInputs(
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "tagID"
       passValueOnwardsAs: "tagTranslatedData"
-      affectDirectivesUnderPos: [1, 2, 3, 4, 6]
+      affectDirectivesUnderPos: [1, 2, 3, 5, 7]
     )
       @applyField(
         name: "_objectProperty",
@@ -265,33 +265,15 @@ query GenerateMutationInputs(
         },
         passOnwardsAs: "tagTranslatedDescription"
       )
-      @applyField(
-        name: "_echo",
-        arguments: {
-          value: {
-            id: $tagID
-            taxonomy: $tagTaxonomy
-            name: $tagTranslatedName
-            description: $tagTranslatedDescription
-          }
-        },
-        passOnwardsAs: "tagInput"
-        setResultInResponse: true
-      )
       @if(condition: $updateSlug)
         @applyField(
-          name: "_objectAddEntry",
+          name: "_echo",
           arguments: {
-            object: $tagInput
-            key: "slug"
             value: $tagTranslatedName
           },
-          setResultInResponse: true
+          passOnwardsAs: "tagOriginalOrTranslatedSlug"
         )
-      @unless(
-        condition: $updateSlug
-        affectDirectivesUnderPos: [1, 2]
-      )
+      @unless(condition: $updateSlug)
         @applyField(
           name: "_objectProperty",
           arguments: {
@@ -300,17 +282,21 @@ query GenerateMutationInputs(
               key: $tagID,
             }
           },
-          passOnwardsAs: "tagTranslationOriginalSlug"
+          passOnwardsAs: "tagOriginalOrTranslatedSlug"
         )
-        @applyField(
-          name: "_objectAddEntry",
-          arguments: {
-            object: $tagInput
-            key: "slug"
-            value: $tagTranslationOriginalSlug
-          },
-          setResultInResponse: true
-        )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            id: $tagID
+            taxonomy: $tagTaxonomy
+            name: $tagTranslatedName
+            slug: $categoryOriginalOrTranslatedSlug
+            description: $tagTranslatedDescription
+          }
+        },
+        setResultInResponse: true
+      )
     @export(as: "tagInputObject")
 }
 

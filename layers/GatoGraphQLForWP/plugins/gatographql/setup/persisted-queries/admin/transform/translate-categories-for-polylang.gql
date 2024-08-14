@@ -243,7 +243,7 @@ query GenerateMutationInputs(
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "categoryID"
       passValueOnwardsAs: "categoryTranslatedData"
-      affectDirectivesUnderPos: [1, 2, 3, 4, 6]
+      affectDirectivesUnderPos: [1, 2, 3, 5, 7]
     )
       @applyField(
         name: "_objectProperty",
@@ -265,33 +265,15 @@ query GenerateMutationInputs(
         },
         passOnwardsAs: "categoryTranslatedDescription"
       )
-      @applyField(
-        name: "_echo",
-        arguments: {
-          value: {
-            id: $categoryID
-            taxonomy: $categoryTaxonomy
-            name: $categoryTranslatedName
-            description: $categoryTranslatedDescription
-          }
-        },
-        passOnwardsAs: "categoryInput"
-        setResultInResponse: true
-      )
       @if(condition: $updateSlug)
         @applyField(
-          name: "_objectAddEntry",
+          name: "_echo",
           arguments: {
-            object: $categoryInput
-            key: "slug"
             value: $categoryTranslatedName
           },
-          setResultInResponse: true
+          passOnwardsAs: "categoryOriginalOrTranslatedSlug"
         )
-      @unless(
-        condition: $updateSlug
-        affectDirectivesUnderPos: [1, 2]
-      )
+      @unless(condition: $updateSlug)
         @applyField(
           name: "_objectProperty",
           arguments: {
@@ -300,17 +282,21 @@ query GenerateMutationInputs(
               key: $categoryID,
             }
           },
-          passOnwardsAs: "categoryTranslationOriginalSlug"
+          passOnwardsAs: "categoryOriginalOrTranslatedSlug"
         )
-        @applyField(
-          name: "_objectAddEntry",
-          arguments: {
-            object: $categoryInput
-            key: "slug"
-            value: $categoryTranslationOriginalSlug
-          },
-          setResultInResponse: true
-        )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            id: $categoryID
+            taxonomy: $categoryTaxonomy
+            name: $categoryTranslatedName
+            slug: $categoryOriginalOrTranslatedSlug
+            description: $categoryTranslatedDescription
+          }
+        },
+        setResultInResponse: true
+      )
     @export(as: "categoryInputObject")
 }
 
