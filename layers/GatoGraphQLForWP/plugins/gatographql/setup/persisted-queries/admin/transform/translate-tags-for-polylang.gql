@@ -291,7 +291,7 @@ query GenerateMutationInputs(
             id: $tagID
             taxonomy: $tagTaxonomy
             name: $tagTranslatedName
-            slug: $categoryOriginalOrTranslatedSlug
+            slug: $tagOriginalOrTranslatedSlug
             description: $tagTranslatedDescription
           }
         },
