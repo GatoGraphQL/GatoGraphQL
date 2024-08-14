@@ -147,6 +147,11 @@ query FetchData(
         affectAdditionalFieldsUnderPos: [1]
         type: DICTIONARY
       )
+    slug
+      @export(
+        as: "translationOriginalSlug",
+        type: DICTIONARY
+      )
   }
 
   hasTranslationCategories: _notEmpty(value: $__translationCategories)
@@ -238,7 +243,7 @@ query GenerateMutationInputs(
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "categoryID"
       passValueOnwardsAs: "categoryTranslatedData"
-      affectDirectivesUnderPos: [1, 2, 3, 4]
+      affectDirectivesUnderPos: [1, 2, 3, 4, 6]
     )
       @applyField(
         name: "_objectProperty",
@@ -280,6 +285,29 @@ query GenerateMutationInputs(
             object: $categoryInput
             key: "slug"
             value: $categoryTranslatedName
+          },
+          setResultInResponse: true
+        )
+      @unless(
+        condition: $updateSlug
+        affectDirectivesUnderPos: [1, 2]
+      )
+        @applyField(
+          name: "_objectProperty",
+          arguments: {
+            object: $translationOriginalSlug,
+            by: {
+              key: $categoryID,
+            }
+          },
+          passOnwardsAs: "categoryTranslationOriginalSlug"
+        )
+        @applyField(
+          name: "_objectAddEntry",
+          arguments: {
+            object: $categoryInput
+            key: "slug"
+            value: $categoryTranslationOriginalSlug
           },
           setResultInResponse: true
         )
