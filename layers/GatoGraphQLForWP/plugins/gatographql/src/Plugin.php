@@ -2047,5 +2047,29 @@ class Plugin extends AbstractMainPlugin
                 ]
             ));
         }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CATEGORIES_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Sync categories for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding categories for each language', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/sync-categories-for-polylang',
+                                    VirtualTutorialLessons::SYNCHRONIZING_CATEGORIES_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
     }
 }
