@@ -72,10 +72,6 @@ query InitializeVariables
     @export(as: "hasTranslationPosts")
     @export(as: "executeTranslation")
     @remove
-  
-  emptyArray: _echo(value: [])
-    @export(as: "translationPostIds")
-    @remove
 }
 
 query ExportOriginPost(
@@ -105,14 +101,14 @@ query ExportOriginPost(
     }
     
 
-    polylangTranslationLanguageIDs(filter: {
+    postIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
-    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationPostIds")
+      @default(value: {})
+      @export(as: "postIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+    hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
       @export(as: "hasTranslationPosts")
 
 
@@ -137,7 +133,9 @@ query FetchData(
   @include(if: $hasOriginPost)
   @include(if: $hasTranslationPosts)
 {
-  translationPosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  translationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
+    @export(as: "translationPostIds")
+  translationPosts: posts(filter: { ids: $__translationPostIds, status: $statusToUpdate } ) {
     id
 
     polylangLanguage @export(
