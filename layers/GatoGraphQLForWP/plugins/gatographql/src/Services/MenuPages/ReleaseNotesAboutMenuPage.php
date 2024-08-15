@@ -39,7 +39,10 @@ class ReleaseNotesAboutMenuPage extends AbstractDocAboutMenuPage
      */
     protected function isCurrentScreen(): bool
     {
-        return $this->getMenuPageHelper()->isDocumentationScreen() && parent::isCurrentScreen();
+        if (!parent::isCurrentScreen()) {
+            return false;
+        }
+        return $this->getMenuPageHelper()->isDocumentationScreen();
     }
 
     /**
