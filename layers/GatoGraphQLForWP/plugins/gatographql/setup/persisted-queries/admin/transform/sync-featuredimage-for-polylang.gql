@@ -20,7 +20,7 @@
 # If the origin post does not have a featured image,
 # it removes it from all translation posts.
 #
-# All translation posts must have the  `draft` status
+# All translation posts must have the `draft` status
 # to be updated. To update posts with any other status, use
 # variable `$statusToUpdate` (for instance, passing value
 # `publish`, `pending` or `any`)

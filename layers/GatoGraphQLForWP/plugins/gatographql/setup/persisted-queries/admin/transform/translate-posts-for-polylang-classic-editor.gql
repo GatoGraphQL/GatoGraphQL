@@ -23,7 +23,7 @@
 # as set-up via Polylang.
 #
 # All translation posts must already exist. These posts
-# must also have the  `draft` status to be updated.
+# must also have the `draft` status to be updated.
 # To update posts with any other status, use
 # variable `$statusToUpdate` (for instance, passing value
 # `publish`, `pending` or `any`)

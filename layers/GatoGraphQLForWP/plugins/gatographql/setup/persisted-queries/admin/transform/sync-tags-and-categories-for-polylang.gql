@@ -17,7 +17,7 @@
 # as set-up via Polylang. If some tag or category does not
 # have a translation, that tag or category is removed.
 #
-# All translation posts must have the  `draft` status
+# All translation posts must have the `draft` status
 # to be updated. To update posts with any other status, use
 # variable `$statusToUpdate` (for instance, passing value
 # `publish`, `pending` or `any`)
