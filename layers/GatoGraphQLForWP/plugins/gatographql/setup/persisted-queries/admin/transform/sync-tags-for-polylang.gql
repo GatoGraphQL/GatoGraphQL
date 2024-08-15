@@ -14,8 +14,8 @@
 # It takes an origin post, queries its tags,
 # and updates its translation posts with the corresponding
 # tags for the corresponding language,
-# as set-up via Polylang. If some tag or category does not
-# have a translation, that tag or category is removed.
+# as set-up via Polylang. If some tag does not
+# have a translation, that tag is removed.
 #
 # All translation posts must have the `draft` status
 # to be updated. To update posts with any other status, use
@@ -41,11 +41,9 @@ query InitializeVariables
   emptyArray: _echo(value: [])
     @export(as: "originPostTranslationPostIds")
     @export(as: "originPostTagIDs")
-    @export(as: "originPostCategoryIDs")
   
   emptyJSON: _echo(value: {})
     @export(as: "tagIDTranslationLanguageIDs")
-    @export(as: "categoryIDTranslationLanguageIDs")
 }
 
 query ExportDataFromOriginPost($postId: ID!)
@@ -85,19 +83,6 @@ query ExportDataFromOriginPost($postId: ID!)
       polylangTranslationLanguageIDs
         @export(
           as: "tagIDTranslationLanguageIDs",
-          type: DICTIONARY
-        )
-    }
-
-    categories @export(as: "originPostCategoryIDs") {
-      id
-      name
-      polylangLanguage {
-        code
-      }
-      polylangTranslationLanguageIDs
-        @export(
-          as: "categoryIDTranslationLanguageIDs",
           type: DICTIONARY
         )
     }
@@ -174,41 +159,6 @@ query FilterTranslationPostsToUpdate(
         type: DICTIONARY
       )
       @remove
-
-    translationPostCategoryIDs: _echo(value: $__polylangLanguage)
-      @passOnwards(as: "lang")
-      @applyField(
-        name: "_echo"
-        arguments: { value: $originPostCategoryIDs }
-        setResultInResponse: true
-      )
-      @underEachArrayItem(
-        passValueOnwardsAs: "categoryID"
-        affectDirectivesUnderPos: [1, 2]
-      )
-        @applyField(
-          name: "_objectProperty"
-          arguments: {
-            object: $categoryIDTranslationLanguageIDs,
-            by: { key: $categoryID }
-          }
-          passOnwardsAs: "categoryTranslationLanguageIDs"
-        )
-        @applyField(
-          name: "_objectProperty"
-          arguments: {
-            object: $categoryTranslationLanguageIDs,
-            by: { key: $lang },
-            failIfNonExistingKeyOrPath: false
-          }
-          setResultInResponse: true
-        )
-      @arrayFilter
-      @export(
-        as: "translationPostCategoryIDs",
-        type: DICTIONARY
-      )
-      @remove
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
@@ -248,10 +198,6 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
       object: $translationPostTagIDs,
       by: { key: $__id }
     )
-    categoryIDs: _objectProperty(
-      object: $translationPostCategoryIDs,
-      by: { key: $__id }
-    )
 
     setTags(input: {
       tagsBy: {
@@ -269,31 +215,6 @@ mutation UpdateTagsAndCategoriesForTranslationPosts(
       post {
         __typename
         tags {
-          id
-          name
-          polylangLanguage {
-            code
-          }
-        }
-      }
-    }
-
-    setCategories(input: {
-      categoriesBy: {
-        ids: $__categoryIDs
-      },
-      append: false
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
-      }
-      post {
-        __typename
-        categories {
           id
           name
           polylangLanguage {
