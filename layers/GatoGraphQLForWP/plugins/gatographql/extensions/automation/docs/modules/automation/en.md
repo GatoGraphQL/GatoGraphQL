@@ -95,6 +95,8 @@ Several of these hooks have been mapped by Gato GraphQL, by triggering a new hoo
 
 For instance, WordPress hook `draft_to_publish` passes the `$post` as variable (of type `WP_Post`). Gato GraphQL maps this hook as `gatographql:draft_to_publish`, and passes the `$postId` (of type `int`) as variable.
 
+For another example, WordPress hooks that create, update and delete meta values are mapped containing the meta key as part of the hook name. Then, an automation can be triggered when a featured image is assigned to a post, on hook `gatographql:updated_post_meta:_thumbnail_id`.
+
 The following table lists down the mapped WordPress hooks:
 
 | WordPress hook | Mapped hook by Gato GraphQL |
