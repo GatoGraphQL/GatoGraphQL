@@ -394,7 +394,7 @@ mutation {
 }
 ```
 
-### Trigger WordPress hooks with meta key in hook name for Automation
+### Map additional WordPress hooks for Automation
 
 WordPress hooks that create, update and delete meta values have been mapped to Gato GraphQL automation hooks, containing the meta key as part of the hook name, so they can be referenced directly within an automation rule.
 
@@ -407,3 +407,4 @@ These are the added hook mappings:
 | [`added_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/added_meta_type_meta/) | `gatographql:added_{$meta_type}_meta:{$meta_key}` |
 | [`updated_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/updated_meta_type_meta/) | `gatographql:updated_{$meta_type}_meta:{$meta_key}` |
 | [`deleted_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/deleted_meta_type_meta/) | `gatographql:deleted_{$meta_type}_meta:{$meta_key}` |
+| [`set_object_terms`](https://developer.wordpress.org/reference/hooks/set_object_terms/) | `gatographql:set_object_terms:{$taxonomy}` |
