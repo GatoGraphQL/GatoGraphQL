@@ -50,7 +50,8 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_SEND_EMAIL_TO_ADMIN_ABOUT_POST = 'send-email-to-admin-about-post';
     public final const PERSISTED_QUERY_SEND_EMAIL_TO_USERS_ABOUT_POST = 'send-email-to-users-about-post';
     public final const PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG = 'sync-featuredimage-for-polylang';
-    public final const PERSISTED_QUERY_SYNC_TAGS_AND_CATEGORIES_FOR_POLYLANG = 'sync-tags-and-categories-for-polylang';
+    public final const PERSISTED_QUERY_SYNC_CATEGORIES_FOR_POLYLANG = 'sync-categories-for-polylang';
+    public final const PERSISTED_QUERY_SYNC_TAGS_FOR_POLYLANG = 'sync-tags-for-polylang';
     public final const PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_CLASSIC_EDITOR = 'translate-and-create-all-pages-for-multilingual-wordpress-site-classic-editor';
     public final const PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG = 'translate-and-create-all-pages-for-multilingual-wordpress-site-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_MULTILINGUALPRESS = 'translate-categories-for-multilingualpress';

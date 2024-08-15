@@ -1,0 +1,227 @@
+########################################################################
+# 
+# Variables:
+#   - postId: The post with the origin language, from where to trigger the updates
+#   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
+#   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the update when the origin post has the default language of the site. It is `true` by default.
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang.
+#
+# It takes an origin post, queries its tags,
+# and updates its translation posts with the corresponding
+# tags for the corresponding language,
+# as set-up via Polylang. If some tag does not
+# have a translation, that tag is removed.
+#
+# All translation posts must have the `draft` status
+# to be updated. To update posts with any other status, use
+# variable `$statusToUpdate` (for instance, passing value
+# `publish`, `pending` or `any`)
+#
+# By default, the origin post must have the default language
+# of the site, or the update will not be executed.
+# To trigger the update from any language, pass variable
+# `$triggerUpdateFromDefaultLanguageOnly` with `false`.
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+
+  emptyBool: _echo(value: false)
+    @export(as: "executeUpdate")
+    @export(as: "hasOriginPostTranslationPosts")
+  
+  emptyArray: _echo(value: [])
+    @export(as: "originPostTranslationPostIds")
+    @export(as: "originPostTagIDs")
+  
+  emptyJSON: _echo(value: {})
+    @export(as: "tagIDTranslationLanguageIDs")
+}
+
+query ExportDataFromOriginPost($postId: ID!)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
+  originPost: post(by: { id: $postId }, status: any) {
+    id
+
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
+    
+    polylangTranslationLanguageIDs
+    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
+      @export(as: "originPostTranslationPostIds")
+
+    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+      @export(as: "hasOriginPostTranslationPosts")
+
+    tags @export(as: "originPostTagIDs") {
+      id
+      name
+      polylangLanguage {
+        code
+      }
+      polylangTranslationLanguageIDs
+        @export(
+          as: "tagIDTranslationLanguageIDs",
+          type: DICTIONARY
+        )
+    }
+  }
+}
+
+query ExportTranslationPostLanguages(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+)
+  @depends(on: "ExportDataFromOriginPost")
+  @include(if: $hasOriginPostTranslationPosts)
+{
+  translationPostLanguages: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
+    id
+
+    polylangLanguage @export(
+      as: "translationPostLanguages"
+      type: DICTIONARY
+    ) {
+      code
+    }
+  }
+}
+
+query FilterTranslationPostsToUpdate(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+  $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
+)
+  @depends(on: "ExportTranslationPostLanguages")
+  @include(if: $hasOriginPostTranslationPosts)
+{
+  translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
+    id
+    polylangLanguageCode: _objectProperty(
+      object: $translationPostLanguages,
+      by: { key: $__id }
+    )
+    polylangLanguage: _objectProperty(
+      object: $languageLocaleCodes,
+      by: { key: $__polylangLanguageCode }
+    )
+
+    translationPostTagIDs: _echo(value: $__polylangLanguage)
+      @passOnwards(as: "lang")
+      @applyField(
+        name: "_echo"
+        arguments: { value: $originPostTagIDs }
+        setResultInResponse: true
+      )
+      @underEachArrayItem(
+        passValueOnwardsAs: "tagID"
+        affectDirectivesUnderPos: [1, 2]
+      )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $tagIDTranslationLanguageIDs,
+            by: { key: $tagID }
+          }
+          passOnwardsAs: "tagTranslationLanguageIDs"
+        )
+        @applyField(
+          name: "_objectProperty"
+          arguments: {
+            object: $tagTranslationLanguageIDs,
+            by: { key: $lang },
+            failIfNonExistingKeyOrPath: false
+          }
+          setResultInResponse: true
+        )
+      @arrayFilter
+      @export(
+        as: "translationPostTagIDs",
+        type: DICTIONARY
+      )
+      @remove
+  }
+
+  hasTranslationPosts: _notEmpty(value: $__translationPosts)
+
+  originPostHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  canTriggerUpdateFromOriginPost: _if(
+    condition: $triggerUpdateFromDefaultLanguageOnly,
+    then: $__originPostHasDefaultLanguage,
+    else: true
+  )
+
+  executeUpdate: _and(values: [
+    $__hasTranslationPosts,
+    $__canTriggerUpdateFromOriginPost
+  ])
+    @export(as: "executeUpdate")
+}
+
+mutation UpdateTagsForTranslationPosts(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+)
+  @depends(on: "FilterTranslationPostsToUpdate")
+  @include(if: $executeUpdate)
+{
+  updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
+  {
+    id
+    polylangLanguage {
+      code
+    }
+
+    tagIDs: _objectProperty(
+      object: $translationPostTagIDs,
+      by: { key: $__id }
+    )
+
+    setTags(input: {
+      tagsBy: {
+        ids: $__tagIDs
+      },
+      append: false
+    }) {
+      status
+      errors {
+        __typename
+        ...on ErrorPayload {
+          message
+        }
+      }
+      post {
+        __typename
+        tags {
+          id
+          name
+          polylangLanguage {
+            code
+          }
+        }
+      }
+    }
+  }
+}
