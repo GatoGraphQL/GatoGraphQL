@@ -98,7 +98,7 @@ query ExportOriginCategory(
       excludeLanguages: $excludeLanguagesToTranslate
     })
       @default(value: {})
-      @export(as: "postIDTranslationLanguageIDs")
+      @export(as: "categoryIDTranslationLanguageIDs")
 
     hasTranslationCategories: _notEmpty(value: $__categoryIDTranslationLanguageIDs)
       @export(as: "hasTranslationCategories")
