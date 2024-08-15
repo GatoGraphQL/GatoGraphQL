@@ -301,7 +301,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * [PRO] Define the Polylang language on tag and category mutations
 * [PRO] Automation: Store the GraphQL response in the info logs
 * [PRO] Added Polylang Mutations for Media Items
-* [PRO] Trigger WordPress hooks with meta key in hook name for Automation
+* [PRO] Map additional WordPress hooks for Automation
 
 = 4.1.0 =
 * Send the referer on Guzzle requests (#2754)
