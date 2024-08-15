@@ -393,3 +393,17 @@ mutation {
   }
 }
 ```
+
+### Trigger WordPress hooks with meta key in hook name for Automation
+
+WordPress hooks that create, update and delete meta values have been mapped to Gato GraphQL automation hooks, containing the meta key as part of the hook name, so they can be referenced directly within an automation rule.
+
+This makes it easier to capture and automate specific events, such as the assigning of a featured image to a post, which is based on meta key `_thumbnail_id`. Then, the automation can be triggered on event `gatographql:updated_post_meta:_thumbnail_id`.
+
+These are the added hook mappings:
+
+| WordPress hook | Mapped hook by Gato GraphQL |
+| --- | --- |
+| [`added_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/added_meta_type_meta/) | `gatographql:added_{$meta_type}_meta:{$meta_key}` |
+| [`updated_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/updated_meta_type_meta/) | `gatographql:updated_{$meta_type}_meta:{$meta_key}` |
+| [`deleted_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/deleted_meta_type_meta/) | `gatographql:deleted_{$meta_type}_meta:{$meta_key}` |
