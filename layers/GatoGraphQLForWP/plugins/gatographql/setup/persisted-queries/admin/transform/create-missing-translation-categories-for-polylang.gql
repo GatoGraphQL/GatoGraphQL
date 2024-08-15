@@ -95,6 +95,7 @@ query ExportOriginCategory(
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
+      @default(value: {})
       @export(as: "polylangTranslationLanguageIDs")
   }
 

@@ -96,6 +96,7 @@ query ExportOriginPost(
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
+      @default(value: {})
       @export(as: "polylangTranslationLanguageIDs")
   }
 

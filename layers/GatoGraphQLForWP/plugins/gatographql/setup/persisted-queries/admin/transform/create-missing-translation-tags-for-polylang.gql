@@ -85,6 +85,7 @@ query ExportOriginTag(
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
+      @default(value: {})
       @export(as: "polylangTranslationLanguageIDs")
   }
 
