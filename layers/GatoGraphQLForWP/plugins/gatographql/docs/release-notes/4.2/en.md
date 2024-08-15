@@ -400,6 +400,8 @@ WordPress hooks that create, update and delete meta values have been mapped to G
 
 This makes it easier to capture and automate specific events, such as the assigning of a featured image to a post, which is based on meta key `_thumbnail_id`. Then, the automation can be triggered on event `gatographql:updated_post_meta:_thumbnail_id`.
 
+In addition, `set_object_terms` was mapped, including the `taxonomy` as part of the hook name.
+
 These are the added hook mappings:
 
 | WordPress hook | Mapped hook by Gato GraphQL |
