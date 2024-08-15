@@ -11,9 +11,9 @@
 #
 # This Persisted GraphQL query is an integration for Polylang.
 #
-# It takes an origin post, queries its tags and categories,
+# It takes an origin post, queries its tags,
 # and updates its translation posts with the corresponding
-# tags and categories for the corresponding language,
+# tags for the corresponding language,
 # as set-up via Polylang. If some tag or category does not
 # have a translation, that tag or category is removed.
 #

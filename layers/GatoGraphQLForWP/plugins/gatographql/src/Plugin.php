@@ -674,7 +674,6 @@ class Plugin extends AbstractMainPlugin
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
-        $bulkMutationsSchemaConfigurationPersistedQueryBlocks = $this->getBulkMutationsSchemaConfigurationPersistedQueryBlocks();
 
         /**
          * Create the Persisted Queries
@@ -1506,30 +1505,6 @@ class Plugin extends AbstractMainPlugin
                 ]
             ));
         }
-
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_TAGS_AND_CATEGORIES_FOR_POLYLANG;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
-                $adminPersistedQueryOptions,
-                [
-                    'post_name' => $slug,
-                    'post_title' => \__('[PRO] Sync tags and categories for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding tags and categories for each language', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                        [
-                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                            'attrs' => [
-                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/sync-tags-and-categories-for-polylang',
-                                    VirtualTutorialLessons::SYNCHRONIZING_TAGS_AND_CATEGORIES_FOR_POLYLANG,
-                                ),
-                            ],
-                        ],
-                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
-                    ])),
-                ]
-            ));
-        }
     }
 
     protected function installPluginSetupDataForVersion2Dot4(): void
@@ -1888,6 +1863,7 @@ class Plugin extends AbstractMainPlugin
         $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+        $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
 
         /**
          * Create the Persisted Queries
@@ -2043,6 +2019,30 @@ class Plugin extends AbstractMainPlugin
                             ],
                         ],
                         ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_TAGS_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Sync tags for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Integration with Polylang: For a given post, update its translation posts with the corresponding tags for each language', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/sync-tags-for-polylang',
+                                    VirtualTutorialLessons::SYNCHRONIZING_TAGS_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));

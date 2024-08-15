@@ -150,8 +150,8 @@ class VirtualTutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
-            VirtualTutorialLessons::SYNCHRONIZING_TAGS_AND_CATEGORIES_FOR_POLYLANG => [
-                \__('Synchronizing the tags and categories to the different language one defined via Polylang', 'gatographql'),
+            VirtualTutorialLessons::SYNCHRONIZING_TAGS_FOR_POLYLANG => [
+                \__('Synchronizing the tags to the different language one defined via Polylang', 'gatographql'),
                 [
                     ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
                     ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
