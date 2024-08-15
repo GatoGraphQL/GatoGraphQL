@@ -181,7 +181,7 @@ query FilterTranslationPostsToUpdate(
     @export(as: "executeUpdate")
 }
 
-mutation UpdateTagsAndCategoriesForTranslationPosts(
+mutation UpdateTagsForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
 )
   @depends(on: "FilterTranslationPostsToUpdate")
