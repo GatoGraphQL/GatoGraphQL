@@ -63,10 +63,6 @@ query InitializeVariables
     @export(as: "hasTranslationTags")
     @export(as: "executeTranslation")
     @remove
-  
-  emptyArray: _echo(value: [])
-    @export(as: "translationTagIds")
-    @remove
 }
 
 query ExportOriginTag(
@@ -97,14 +93,14 @@ query ExportOriginTag(
     }
     
 
-    polylangTranslationLanguageIDs(filter: {
+    tagIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
-    translationTagIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "translationTagIds")
+      @default(value: {})
+      @export(as: "tagIDTranslationLanguageIDs")
 
-    hasTranslationTags: _notEmpty(value: $__translationTagIds)
+    hasTranslationTags: _notEmpty(value: $__tagIDTranslationLanguageIDs)
       @export(as: "hasTranslationTags")
 
 
@@ -127,9 +123,10 @@ query FetchData(
   @include(if: $hasOriginTag)
   @include(if: $hasTranslationTags)
 {
+  translationTagIds: _objectValues(object: $tagIDTranslationLanguageIDs)
   translationTags: tags(
     taxonomy: $tagTaxonomy
-    filter: { ids: $translationTagIds }
+    filter: { ids: $__translationTagIds }
   ) {
     id
 

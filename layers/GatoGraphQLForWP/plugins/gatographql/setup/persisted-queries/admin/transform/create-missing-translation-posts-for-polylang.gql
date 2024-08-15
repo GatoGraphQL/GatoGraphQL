@@ -91,15 +91,13 @@ query ExportOriginPost(
     }
     
 
-    polylangTranslationLanguageIDs(filter: {
+    postIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
       includeSelf: true
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
-    currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-      @export(as: "currentlyExistingTranslationLanguages")
-    currentlyExistingTranslationPostIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "currentlyExistingTranslationPostIDs")
+      @default(value: {})
+      @export(as: "postIDTranslationLanguageIDs")
   }
 
   hasOriginPost: _notNull(value: $__originPost)
@@ -146,10 +144,11 @@ query ExportMissingTranslationLanguages(
   @depends(on: "ExportOriginPostCanBeTranslated")
   @include(if: $canTranslateOriginPost)
 {
+  currentlyExistingTranslationLanguages: _objectProperties(object: $postIDTranslationLanguageIDs)
   missingTranslationLanguagesWithoutFilteringByInclude: _arrayDiff(
     arrays: [
       $enabledLanguages,
-      $currentlyExistingTranslationLanguages,
+      $__currentlyExistingTranslationLanguages,
       $excludeLanguagesToTranslate
     ]
   )
@@ -248,9 +247,10 @@ query ExportAllTranslationPosts
   @depends(on: "CreateTranslationPostForMissingLanguages")
   @include(if: $hasCreatedTranslationPosts)
 {
+  currentlyExistingTranslationPostIDs: _objectValues(object: $postIDTranslationLanguageIDs)
   allTranslationPostIDs: _arrayMerge(
     arrays: [
-      $currentlyExistingTranslationPostIDs,
+      $__currentlyExistingTranslationPostIDs,
       $createdTranslationPostIDs,
     ]
   )

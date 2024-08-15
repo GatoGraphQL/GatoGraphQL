@@ -67,11 +67,11 @@ query ExportDataFromOriginPost($postId: ID!)
       code @export(as: "fromLanguage")
     }
     
-    polylangTranslationLanguageIDs
-    translationPostIds: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "originPostTranslationPostIds")
+    postIDTranslationLanguageIDs: polylangTranslationLanguageIDs
+      @default(value: {})
+      @export(as: "postIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__translationPostIds)
+    hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
       @export(as: "hasOriginPostTranslationPosts")
 
     tags @export(as: "originPostTagIDs") {
@@ -95,7 +95,9 @@ query ExportTranslationPostLanguages(
   @depends(on: "ExportDataFromOriginPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
-  translationPostLanguages: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
+  originPostTranslationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
+    @export(as: "originPostTranslationPostIds")
+  translationPostLanguages: posts(filter: { ids: $__originPostTranslationPostIds, status: $statusToUpdate } ) {
     id
 
     polylangLanguage @export(

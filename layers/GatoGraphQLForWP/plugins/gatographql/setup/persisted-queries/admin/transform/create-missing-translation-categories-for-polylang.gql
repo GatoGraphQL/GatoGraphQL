@@ -90,15 +90,13 @@ query ExportOriginCategory(
     }
     
 
-    polylangTranslationLanguageIDs(filter: {
+    categoryIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
       includeSelf: true
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
-    currentlyExistingTranslationLanguages: _objectProperties(object: $__polylangTranslationLanguageIDs)
-      @export(as: "currentlyExistingTranslationLanguages")
-    currentlyExistingTranslationCategoryIDs: _objectValues(object: $__polylangTranslationLanguageIDs)
-      @export(as: "currentlyExistingTranslationCategoryIDs")
+      @default(value: {})
+      @export(as: "categoryIDTranslationLanguageIDs")
   }
 
   hasOriginCategory: _notNull(value: $__originCategory)
@@ -161,10 +159,11 @@ query ExportMissingTranslationLanguages(
   @depends(on: "ExportOriginCategoryParent")
   @include(if: $canTranslateOriginCategory)
 {
+  currentlyExistingTranslationLanguages: _objectProperties(object: $categoryIDTranslationLanguageIDs)
   missingTranslationLanguagesWithoutFilteringByInclude: _arrayDiff(
     arrays: [
       $enabledLanguages,
-      $currentlyExistingTranslationLanguages,
+      $__currentlyExistingTranslationLanguages,
       $excludeLanguagesToTranslate
     ]
   )
@@ -263,9 +262,10 @@ query ExportAllTranslationCategories
   @depends(on: "CreateTranslationCategoryForMissingLanguages")
   @include(if: $hasCreatedTranslationCategories)
 {
+  currentlyExistingTranslationCategoryIDs: _objectValues(object: $categoryIDTranslationLanguageIDs)
   allTranslationCategoryIDs: _arrayMerge(
     arrays: [
-      $currentlyExistingTranslationCategoryIDs,
+      $__currentlyExistingTranslationCategoryIDs,
       $createdTranslationCategoryIDs,
     ]
   )
