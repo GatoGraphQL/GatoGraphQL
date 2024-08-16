@@ -1,0 +1,115 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "altText": "",
+                "author": {
+                    "id": 4,
+                    "name": "Contributor Johnson"
+                },
+                "caption": "",
+                "description": "",
+                "height": null,
+                "mimeType": "text\/plain",
+                "sizes": null,
+                "slug": "funny-dog",
+                "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                "title": "Funny-Dog",
+                "width": null
+            }
+        },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": null
+                }
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": null
+                }
+            }
+        ],
+        "logoutUser": {
+            "status": "SUCCESS"
+        }
+    }
+}
