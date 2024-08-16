@@ -8,6 +8,10 @@
             "status": "SUCCESS",
             "errors": null,
             "mediaItem": {
+                "parentCustomPost": {
+                    "id": 1113,
+                    "title": "Released v0.6, check it out"
+                },
                 "altText": "",
                 "author": {
                     "id": 2,
@@ -29,6 +33,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
                     "altText": "",
                     "author": {
                         "id": 2,
@@ -49,6 +57,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
                     "altText": "",
                     "author": {
                         "id": 2,
@@ -71,6 +83,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
                     "altText": "",
                     "author": {
                         "id": 2,
@@ -91,6 +107,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
                     "altText": "",
                     "author": {
                         "id": 2,

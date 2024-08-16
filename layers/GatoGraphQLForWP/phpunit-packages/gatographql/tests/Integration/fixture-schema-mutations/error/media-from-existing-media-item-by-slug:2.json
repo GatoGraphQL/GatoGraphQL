@@ -8,6 +8,10 @@
             "status": "SUCCESS",
             "errors": null,
             "mediaItem": {
+                "parentCustomPost": {
+                    "id": 1140,
+                    "title": "Welcome to a single post full of blocks!"
+                },
                 "altText": "",
                 "author": {
                     "id": 4,
@@ -29,6 +33,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
                         "id": 4,
@@ -49,6 +57,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
                         "id": 4,
@@ -71,6 +83,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
                         "id": 4,
@@ -91,6 +107,10 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
                         "id": 4,
