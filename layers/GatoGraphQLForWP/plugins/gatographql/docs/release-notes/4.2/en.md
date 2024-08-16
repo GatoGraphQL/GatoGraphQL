@@ -404,11 +404,7 @@ These are the added hook mappings:
 
 | WordPress hook | Mapped hook by Gato GraphQL |
 | --- | --- |
-| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:any_to_{$new_status}` (passing `int $postId`) |
-| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_any` (passing `int $postId`) |
-| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_{$new_status}:{$post_type}` (passing `int $postId`) |
-| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:any_to_{$new_status}:{$post_type}` (passing `int $postId`) |
-| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_any:{$post_type}` (passing `int $postId`) |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/)<br/><em>(Passing `WP_Post $post`)</em> | `gatographql:any_to_{$new_status}`<br/>`gatographql:{$old_status}_to_any`<br/>`gatographql:{$old_status}_to_{$new_status}:{$post_type}`<br/>`gatographql:any_to_{$new_status}:{$post_type}`<br/>`gatographql:{$old_status}_to_any:{$post_type}`<br/><em>(All passing `int $postId`)</em> |
 | [`added_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/added_meta_type_meta/) | `gatographql:added_{$meta_type}_meta:{$meta_key}` |
 | [`updated_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/updated_meta_type_meta/) | `gatographql:updated_{$meta_type}_meta:{$meta_key}` |
 | [`deleted_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/deleted_meta_type_meta/) | `gatographql:deleted_{$meta_type}_meta:{$meta_key}` |
