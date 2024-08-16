@@ -1,0 +1,135 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "parentCustomPost": {
+                    "id": 1140,
+                    "title": "Welcome to a single post full of blocks!"
+                },
+                "altText": "",
+                "author": {
+                    "id": 4,
+                    "name": "Contributor Johnson"
+                },
+                "caption": "",
+                "description": "",
+                "height": 1200,
+                "mimeType": "image\/jpeg",
+                "sizes": "(max-width: 1600px) 100vw, 1600px",
+                "slug": "funny-dog",
+                "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                "title": "Funny-Dog",
+                "width": 1600
+            }
+        },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": 1600
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": 1600
+                }
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": 1600
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 4,
+                        "name": "Contributor Johnson"
+                    },
+                    "caption": "",
+                    "description": "",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "funny-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Funny-Dog",
+                    "width": 1600
+                }
+            }
+        ],
+        "logoutUser": {
+            "status": "SUCCESS"
+        }
+    }
+}
