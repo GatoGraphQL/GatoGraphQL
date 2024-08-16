@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\Media\TypeResolvers\InputObjectType\MediaItemByOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractOneofInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
@@ -12,6 +13,7 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
 {
     private ?CreateMediaItemFromContentInputObjectTypeResolver $createMediaItemFromContentInputObjectTypeResolver = null;
     private ?CreateMediaItemFromURLInputObjectTypeResolver $createMediaItemFromURLInputObjectTypeResolver = null;
+    private ?MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver = null;
 
     final public function setCreateMediaItemFromContentInputObjectTypeResolver(CreateMediaItemFromContentInputObjectTypeResolver $createMediaItemFromContentInputObjectTypeResolver): void
     {
@@ -39,6 +41,19 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
         }
         return $this->createMediaItemFromURLInputObjectTypeResolver;
     }
+    final public function setMediaItemByOneofInputObjectTypeResolver(MediaItemByOneofInputObjectTypeResolver $mediaItemByOneofInputObjectTypeResolver): void
+    {
+        $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
+    }
+    final protected function getMediaItemByOneofInputObjectTypeResolver(): MediaItemByOneofInputObjectTypeResolver
+    {
+        if ($this->mediaItemByOneofInputObjectTypeResolver === null) {
+            /** @var MediaItemByOneofInputObjectTypeResolver */
+            $mediaItemByOneofInputObjectTypeResolver = $this->instanceManager->getInstance(MediaItemByOneofInputObjectTypeResolver::class);
+            $this->mediaItemByOneofInputObjectTypeResolver = $mediaItemByOneofInputObjectTypeResolver;
+        }
+        return $this->mediaItemByOneofInputObjectTypeResolver;
+    }
 
     public function getTypeName(): string
     {
@@ -51,6 +66,7 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
+            MutationInputProperties::MEDIAITEM_BY => $this->getMediaItemByOneofInputObjectTypeResolver(),
             MutationInputProperties::URL => $this->getCreateMediaItemFromURLInputObjectTypeResolver(),
             MutationInputProperties::CONTENTS => $this->getCreateMediaItemFromContentInputObjectTypeResolver(),
         ];
@@ -59,6 +75,7 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
+            MutationInputProperties::MEDIAITEM_BY => $this->__('Use the attachment from an existing media item', 'media-mutations'),
             MutationInputProperties::URL => $this->__('Upload the attachment from a URL', 'media-mutations'),
             MutationInputProperties::CONTENTS => $this->__('Create the attachment by passing the file name and body', 'media-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),

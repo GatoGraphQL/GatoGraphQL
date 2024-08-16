@@ -13,6 +13,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E2 = 'e2';
     public final const E4 = 'e4';
     public final const E5 = 'e5';
+    public final const E6 = 'e6';
+    public final const E7 = 'e7';
 
     /**
      * @return string[]
@@ -24,6 +26,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E2,
             self::E4,
             self::E5,
+            self::E6,
+            self::E7,
         ];
     }
 
@@ -34,6 +38,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E2 => $this->__('You don\'t have permission to upload files', 'media-mutations'),
             self::E4 => $this->__('You don\'t have permission to upload files for other users', 'media-mutations'),
             self::E5 => $this->__('There is no user with ID \'%s\'', 'media-mutations'),
+            self::E6 => $this->__('There is no media item with ID \'%s\'', 'media-mutations'),
+            self::E7 => $this->__('There is no media item with slug \'%s\'', 'media-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

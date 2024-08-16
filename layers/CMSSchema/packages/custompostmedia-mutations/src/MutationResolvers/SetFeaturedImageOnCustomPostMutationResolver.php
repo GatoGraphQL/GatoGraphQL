@@ -7,6 +7,7 @@ namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
+use PoPCMSSchema\MediaMutations\MutationResolvers\MediaItemCRUDMutationResolverTrait;
 use PoPCMSSchema\Media\Constants\InputProperties;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -17,7 +18,7 @@ use PoP\Root\Exception\AbstractException;
 
 class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFeaturedImageOnCustomPostMutationResolver
 {
-    use SetFeaturedImageOnCustomPostMutationResolverTrait;
+    use MediaItemCRUDMutationResolverTrait;
 
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;

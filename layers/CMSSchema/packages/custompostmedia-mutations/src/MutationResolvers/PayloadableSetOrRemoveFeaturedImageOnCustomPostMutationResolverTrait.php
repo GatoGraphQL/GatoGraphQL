@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\ObjectModels\FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableCustomPostMutationResolverTrait;
-use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
+use PoPCMSSchema\MediaMutations\MutationResolvers\MediaItemCRUDMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 
@@ -16,6 +16,7 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
     use PayloadableCustomPostMutationResolverTrait {
         PayloadableCustomPostMutationResolverTrait::createErrorPayloadFromObjectTypeFieldResolutionFeedback as upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback;
     }
+    use MediaItemCRUDMutationResolverTrait;
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
@@ -29,23 +30,13 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
         ) {
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new MediaItemDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new MediaItemDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            default => $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
+            default => $this->createMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
+                $objectTypeFieldResolutionFeedback,
+            ) ?? $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback
             ),
         };

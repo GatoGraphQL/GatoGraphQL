@@ -111,7 +111,9 @@ class PayloadableCreateMediaItemMutationResolver extends CreateMediaItemMutation
             // Allow components to inject their own validations
             default => App::applyFilters(
                 HookNames::ERROR_PAYLOAD,
-                new GenericErrorPayload(
+                $this->createMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
+                    $objectTypeFieldResolutionFeedback,
+                ) ?? new GenericErrorPayload(
                     $feedbackItemResolution->getMessage(),
                     $feedbackItemResolution->getNamespacedCode(),
                 ),

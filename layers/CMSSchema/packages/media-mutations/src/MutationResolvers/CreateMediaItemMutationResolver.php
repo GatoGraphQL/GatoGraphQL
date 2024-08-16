@@ -9,7 +9,10 @@ use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\LooseContracts\LooseContractSet;
+use PoPCMSSchema\MediaMutations\MutationResolvers\MediaItemCRUDMutationResolverTrait;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
+use PoPCMSSchema\Media\Constants\InputProperties;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPCMSSchema\UserStateMutations\MutationResolvers\ValidateUserLoggedInMutationResolverTrait;
 use PoPCMSSchema\Users\TypeAPIs\UserTypeAPIInterface;
@@ -26,11 +29,13 @@ use stdClass;
 class CreateMediaItemMutationResolver extends AbstractMutationResolver
 {
     use ValidateUserLoggedInMutationResolverTrait;
+    use MediaItemCRUDMutationResolverTrait;
 
     private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
     private ?UserTypeAPIInterface $userTypeAPI = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?NameResolverInterface $nameResolver = null;
+    private ?MediaTypeAPIInterface $mediaTypeAPI = null;
 
     final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
     {
@@ -83,6 +88,19 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             $this->nameResolver = $nameResolver;
         }
         return $this->nameResolver;
+    }
+    final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
+    {
+        $this->mediaTypeAPI = $mediaTypeAPI;
+    }
+    final protected function getMediaTypeAPI(): MediaTypeAPIInterface
+    {
+        if ($this->mediaTypeAPI === null) {
+            /** @var MediaTypeAPIInterface */
+            $mediaTypeAPI = $this->instanceManager->getInstance(MediaTypeAPIInterface::class);
+            $this->mediaTypeAPI = $mediaTypeAPI;
+        }
+        return $this->mediaTypeAPI;
     }
 
     public function validate(
@@ -167,6 +185,32 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             }
         }
 
+        // If providing an existing media item, check that it exists
+        /** @var stdClass */
+        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
+
+        if (isset($from->{MutationInputProperties::MEDIAITEM_BY})) {
+            /** @var stdClass */
+            $mediaItemBy = $from->{MutationInputProperties::MEDIAITEM_BY};
+            if (isset($mediaItemBy->{InputProperties::ID})) {
+                /** @var string|int */
+                $mediaItemID = $mediaItemBy->{InputProperties::ID};
+                $this->validateMediaItemByIDExists(
+                    $mediaItemID,
+                    $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
+                /** @var string */
+                $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
+                $this->validateMediaItemBySlugExists(
+                    $mediaItemSlug,
+                    $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            }
+        }
+
         // Allow components to inject their own validations
         App::doAction(
             HookNames::VALIDATE_CREATE_MEDIA_ITEM,
@@ -216,7 +260,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
     protected function createMediaItem(
         array $mediaItemData,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string|int {
+    ): string|int|null {
         /** @var stdClass */
         $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
 
@@ -226,6 +270,30 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             return $this->getMediaTypeMutationAPI()->createMediaItemFromURL(
                 $url->{MutationInputProperties::SOURCE},
                 $url->{MutationInputProperties::FILENAME},
+                $mediaItemData,
+            );
+        }
+
+        if (isset($from->{MutationInputProperties::MEDIAITEM_BY})) {
+            /** @var string|int|null */
+            $mediaItemID = null;
+            /** @var stdClass */
+            $mediaItemBy = $from->{MutationInputProperties::MEDIAITEM_BY};
+            if (isset($mediaItemBy->{InputProperties::ID})) {
+                $mediaItemID = $mediaItemBy->{InputProperties::ID};
+            } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
+                $mediaTypeAPI = $this->getMediaTypeAPI();
+                /** @var string */
+                $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
+                /** @var object */
+                $mediaItem = $mediaTypeAPI->getMediaItemBySlug($mediaItemSlug);
+                $mediaItemID = $mediaTypeAPI->getMediaItemID($mediaItem);
+            }
+            if ($mediaItemID === null) {
+                return null;
+            }
+            return $this->getMediaTypeMutationAPI()->createMediaItemFromExistingMediaItem(
+                $mediaItemID,
                 $mediaItemData,
             );
         }
@@ -253,6 +321,10 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             $mediaItemData,
             $fieldDataAccessor,
         );
+
+        if ($mediaItemID === null) {
+            return null;
+        }
 
         // Allow for additional operations
         $this->additionals($mediaItemID, $fieldDataAccessor);

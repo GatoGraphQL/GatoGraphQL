@@ -300,6 +300,34 @@ fragment TagData on Tag {
 }
 ```
 
+### Create a media item using the attachment from an existing media item ([#2787](https://github.com/GatoGraphQL/GatoGraphQL/pull/2787))
+
+Mutation `createMediaItem` can now create a media item using the same attachment from an existing media item (i.e. without duplicating the file on disk):
+
+```graphql
+mutation {
+  createMediaItem(input: {
+    from: {
+      mediaItemBy: {
+        id: 337
+      }
+    }
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      id  # New media item created
+      src # Same attachment as the provided media item
+    }
+  }
+}
+```
+
 ## [PRO] Improvements
 
 ### Define the Polylang language on tag and category mutations

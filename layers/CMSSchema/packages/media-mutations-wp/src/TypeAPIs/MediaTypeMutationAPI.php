@@ -10,9 +10,92 @@ use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use WP_Error;
 
+use function add_post_meta;
+use function get_attached_file;
+use function get_post_meta;
+use function get_post;
+use function is_wp_error;
+use function update_attached_file;
+use function wp_get_attachment_metadata;
+use function wp_insert_attachment;
+use function wp_slash;
+use function wp_update_attachment_metadata;
+
 class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 {
     use BasicServiceTrait;
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     * @param array<string,mixed> $mediaItemData
+     */
+    public function createMediaItemFromExistingMediaItem(
+        string|int $existingMediaItemID,
+        array $mediaItemData,
+    ): string|int|null {
+        $toCreateMediaItemData = get_post((int) $existingMediaItemID, ARRAY_A);
+
+        if ($toCreateMediaItemData === null || $toCreateMediaItemData === []) {
+            return null;
+        }
+
+        unset($toCreateMediaItemData['ID']);
+
+        $customPostID = 0;
+        if (isset($mediaItemData['customPostID'])) {
+            $customPostID = $mediaItemData['customPostID'];
+            unset($mediaItemData['customPostID']);
+        }
+
+        /**
+         * Override properties with the provided ones
+         */
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
+        $toCreateMediaItemData = array_merge(
+            $toCreateMediaItemData,
+            array_filter($mediaItemData)
+        );
+
+        $mediaItemIDOrError = wp_insert_attachment(
+            wp_slash($toCreateMediaItemData),
+            false,
+            $customPostID,
+            true
+        );
+
+        if (is_wp_error($mediaItemIDOrError)) {
+            /** @var WP_Error */
+            $wpError = $mediaItemIDOrError;
+            throw new MediaItemCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+
+        /** @var int */
+        $mediaItemID = $mediaItemIDOrError;
+
+        /**
+         * Copy over:
+         *
+         * - Metadata
+         * - Attached file
+         * - Alternative text
+         */
+        $attachmentMetadata = wp_get_attachment_metadata((int) $existingMediaItemID, true);
+        if ($attachmentMetadata !== false) {
+            wp_update_attachment_metadata($mediaItemID, wp_slash($attachmentMetadata));
+        }
+        $attachedFile = get_attached_file((int) $existingMediaItemID, true);
+        if ($attachedFile !== false) {
+            update_attached_file($mediaItemID, wp_slash($attachedFile));
+        }
+        $alternativeText = get_post_meta((int) $existingMediaItemID, '_wp_attachment_image_alt', true);
+        if ($alternativeText) {
+            add_post_meta($mediaItemID, '_wp_attachment_image_alt', wp_slash($alternativeText));
+        }
+
+        return $mediaItemID;
+    }
 
     /**
      * @throws MediaItemCRUDMutationException In case of error
@@ -28,7 +111,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         $downloadedFileOrError = \download_url($url);
 
-        if (\is_wp_error($downloadedFileOrError)) {
+        if (is_wp_error($downloadedFileOrError)) {
             /** @var WP_Error */
             $wpError = $downloadedFileOrError;
             throw new MediaItemCRUDMutationException(
@@ -201,14 +284,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
 
-        $mediaItemIDOrError = \wp_insert_attachment(
+        $mediaItemIDOrError = wp_insert_attachment(
             $mediaItemData,
             $uploadedFilename,
             $customPostID,
             true
         );
 
-        if (\is_wp_error($mediaItemIDOrError)) {
+        if (is_wp_error($mediaItemIDOrError)) {
             /** @var WP_Error */
             $wpError = $mediaItemIDOrError;
             throw new MediaItemCRUDMutationException(
