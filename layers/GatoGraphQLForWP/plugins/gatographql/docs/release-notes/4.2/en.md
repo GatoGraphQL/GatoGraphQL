@@ -396,16 +396,19 @@ mutation {
 
 ### Map additional WordPress hooks for Automation
 
-WordPress hooks that create, update and delete meta values have been mapped to Gato GraphQL automation hooks, containing the meta key as part of the hook name, so they can be referenced directly within an automation rule.
+From this version, Gato GraphQL re-triggers several WordPress hooks with some extra information on the hook name, to make it easier to capture and automate specific events.
 
-This makes it easier to capture and automate specific events, such as the assigning of a featured image to a post, which is based on meta key `_thumbnail_id`. Then, the automation can be triggered on event `gatographql:updated_post_meta:_thumbnail_id`.
-
-In addition, `set_object_terms` was mapped, including the `taxonomy` as part of the hook name.
+For instance, hooks that create, update and delete meta values are triggered containing the meta key as part of the hook name. Then, an automation can be triggered when a featured image is assigned to a post, on hook `gatographql:added_post_meta:_thumbnail_id`.
 
 These are the added hook mappings:
 
 | WordPress hook | Mapped hook by Gato GraphQL |
 | --- | --- |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:any_to_{$new_status}` (passing `int $postId`) |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_any` (passing `int $postId`) |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_{$new_status}:{$post_type}` (passing `int $postId`) |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:any_to_{$new_status}:{$post_type}` (passing `int $postId`) |
+| [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_any:{$post_type}` (passing `int $postId`) |
 | [`added_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/added_meta_type_meta/) | `gatographql:added_{$meta_type}_meta:{$meta_key}` |
 | [`updated_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/updated_meta_type_meta/) | `gatographql:updated_{$meta_type}_meta:{$meta_key}` |
 | [`deleted_{$meta_type}_meta`](https://developer.wordpress.org/reference/hooks/deleted_meta_type_meta/) | `gatographql:deleted_{$meta_type}_meta:{$meta_key}` |
