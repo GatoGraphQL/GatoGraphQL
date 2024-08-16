@@ -41,8 +41,6 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
 		unset($toCreateMediaItemData['ID']);
         
-        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
-
         $customPostID = 0;
         if (isset($mediaItemData['customPostID'])) {
             $customPostID = $mediaItemData['customPostID'];
@@ -52,6 +50,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         /**
          * Override properties with the provided ones
          */
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
         $toCreateMediaItemData = array_merge(
             $toCreateMediaItemData,
             array_filter($mediaItemData)
