@@ -1868,6 +1868,30 @@ class Plugin extends AbstractMainPlugin
         /**
          * Create the Persisted Queries
          */
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            \wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Create missing translation categories for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Given a category, duplicate it into all the other languages defined in Polylang for which there is no translation category yet', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/create-missing-translation-categories-for-polylang',
+                                    VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
@@ -1895,21 +1919,21 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_TAGS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             \wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] Create missing translation categories for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Given a category, duplicate it into all the other languages defined in Polylang for which there is no translation category yet', 'gatographql'),
+                    'post_title' => \__('[PRO] Create missing translation tags for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Given a tag, duplicate it into all the other languages defined in Polylang for which there is no translation tag yet', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/create-missing-translation-categories-for-polylang',
-                                    VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG,
+                                    'admin/transform/create-missing-translation-tags-for-polylang',
+                                    VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_TAGS_FOR_POLYLANG,
                                 ),
                             ],
                         ],
@@ -1937,30 +1961,6 @@ class Plugin extends AbstractMainPlugin
                                 ),
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
                                     'admin/transform/translation-language-mapping',
-                                ),
-                            ],
-                        ],
-                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
-                    ])),
-                ]
-            ));
-        }
-
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_TAGS_FOR_POLYLANG;
-        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
-                $adminPersistedQueryOptions,
-                [
-                    'post_name' => $slug,
-                    'post_title' => \__('[PRO] Create missing translation tags for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Given a tag, duplicate it into all the other languages defined in Polylang for which there is no translation tag yet', 'gatographql'),
-                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
-                        [
-                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
-                            'attrs' => [
-                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/create-missing-translation-tags-for-polylang',
-                                    VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_TAGS_FOR_POLYLANG,
                                 ),
                             ],
                         ],
