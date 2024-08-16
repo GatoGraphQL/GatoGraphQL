@@ -1435,7 +1435,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for Polylang (Gutenberg)', 'gatographql'),
-                    'post_excerpt' => \__('Translate a block-based post to all languages defined in the Polylang settings, and store those translations in the corresponding posts', 'gatographql'),
+                    'post_excerpt' => \__('Translate a block-based post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1462,7 +1462,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for Polylang (Classic editor)', 'gatographql'),
-                    'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the Polylang settings, and store those translations in the corresponding posts', 'gatographql'),
+                    'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1646,7 +1646,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for MultilingualPress (Gutenberg)', 'gatographql'),
-                    'post_excerpt' => \__('Translate a block-based post to all languages defined in the MultilingualPress settings, and store those translations in the corresponding sites in the network', 'gatographql'),
+                    'post_excerpt' => \__('Translate a block-based post to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1673,7 +1673,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate posts for MultilingualPress (Classic editor)', 'gatographql'),
-                    'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the MultilingualPress settings, and store those translations in the corresponding sites in the network', 'gatographql'),
+                    'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1899,7 +1899,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate categories for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Translate a category to all languages defined in the Polylang settings, and store those translations in the corresponding categories', 'gatographql'),
+                    'post_excerpt' => \__('Translate a category to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -1950,7 +1950,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate tags for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Translate a tag to all languages defined in the Polylang settings, and store those translations in the corresponding tags', 'gatographql'),
+                    'post_excerpt' => \__('Translate a tag to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -2001,7 +2001,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate media for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Translate a media item to all languages defined in the Polylang settings, and store those translations in the corresponding media item', 'gatographql'),
+                    'post_excerpt' => \__('Translate a media item to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -2028,7 +2028,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate categories for MultilingualPress', 'gatographql'),
-                    'post_excerpt' => \__('Translate a category to all languages defined in the MultilingualPress settings, and store those translations in the corresponding sites in the network', 'gatographql'),
+                    'post_excerpt' => \__('Translate a category to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
@@ -2055,7 +2055,7 @@ class Plugin extends AbstractMainPlugin
                 [
                     'post_name' => $slug,
                     'post_title' => \__('[PRO] Translate tags for MultilingualPress', 'gatographql'),
-                    'post_excerpt' => \__('Translate a tag to all languages defined in the MultilingualPress settings, and store those translations in the corresponding sites in the network', 'gatographql'),
+                    'post_excerpt' => \__('Translate a tag to all languages defined in the MultilingualPress settings, storing each translation in the corresponding site in the network for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
