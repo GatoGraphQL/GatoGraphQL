@@ -274,6 +274,30 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             );
         }
 
+        if (isset($from->{MutationInputProperties::MEDIAITEM_BY})) {
+            /** @var string|int|null */
+            $mediaItemID = null;
+            /** @var stdClass */
+            $mediaItemBy = $from->{MutationInputProperties::MEDIAITEM_BY};
+            if (isset($mediaItemBy->{InputProperties::ID})) {
+                $mediaItemID = $mediaItemBy->{InputProperties::ID};
+            } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
+                $mediaTypeAPI = $this->getMediaTypeAPI();
+                /** @var string */
+                $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
+                /** @var object */
+                $mediaItem = $mediaTypeAPI->getMediaItemBySlug($mediaItemSlug);
+                $mediaItemID = $mediaTypeAPI->getMediaItemID($mediaItem);
+            }
+            if ($mediaItem === null) {
+                return null;
+            }
+            return $this->getMediaTypeMutationAPI()->createMediaItemFromExistingMediaItem(
+                $mediaItemID,
+                $mediaItemData,
+            );
+        }
+
         /** @var stdClass */
         $contents = $from->{MutationInputProperties::CONTENTS};
 
