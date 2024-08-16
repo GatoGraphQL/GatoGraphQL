@@ -289,7 +289,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
                 $mediaItem = $mediaTypeAPI->getMediaItemBySlug($mediaItemSlug);
                 $mediaItemID = $mediaTypeAPI->getMediaItemID($mediaItem);
             }
-            if ($mediaItem === null) {
+            if ($mediaItemID === null) {
                 return null;
             }
             return $this->getMediaTypeMutationAPI()->createMediaItemFromExistingMediaItem(
