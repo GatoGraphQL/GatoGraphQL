@@ -39,7 +39,7 @@ query InitializeVariables
     @export(as: "canTranslateOriginMediaItem")
     @export(as: "hasMissingTranslationLanguages")
     @export(as: "hasCreatedTranslationMediaItems")
-    @export(as: "hasOriginMediaItemParent")
+    @export(as: "hasOriginMediaItemParentCustomPost")
     @remove
 
   emptyArray: _echo(value: [])
@@ -47,7 +47,7 @@ query InitializeVariables
     @remove
 
   emptyObject: _echo(value: {})
-    @export(as: "mediaItemParentTranslationLanguages")
+    @export(as: "mediaItemParentCustomPostTranslationLanguages")
     @remove
 }
 
@@ -73,14 +73,17 @@ query ExportOriginMediaItem(
     ################################################################
     # Data needed to duplicate media item for missing languages
     ################################################################
-    originMediaItemName: name @export(as: "originMediaItemName")
+    originMediaItemTitle: title @export(as: "originMediaItemTitle")
     originMediaItemDescription: description @export(as: "originMediaItemDescription")
-    originMediaItemParent: parent @export(as: "originMediaItemParentID") {
+    originMediaItemCaption: altText @export(as: "originMediaItemCaption")
+    originMediaItemAltText: altText @export(as: "originMediaItemAltText")
+    originMediaItemAuthorID: altText @export(as: "originMediaItemAuthorID")
+    originMediaItemParentCustomPost: parentCustomPost @export(as: "originMediaItemParentCustomPostID") {
       id
     }
     ################################################################
-    hasOriginMediaItemParent: _notNull(value: $__originMediaItemParent)
-      @export(as: "hasOriginMediaItemParent")
+    hasOriginMediaItemParentCustomPost: _notNull(value: $__originMediaItemParentCustomPost)
+      @export(as: "hasOriginMediaItemParentCustomPost")
 
 
     polylangLanguage {
@@ -134,17 +137,19 @@ query ExportOriginMediaItemCanBeTranslated(
     @export(as: "canTranslateOriginMediaItem")
 }
 
-query ExportOriginMediaItemParent
+query ExportOriginMediaItemParent(
+  $customPostType: CustomPostEnumString!
+)
   @depends(on: "ExportOriginMediaItemCanBeTranslated")
   @include(if: $canTranslateOriginMediaItem)
-  @include(if: $hasOriginMediaItemParent)
+  @include(if: $hasOriginMediaItemParentCustomPost)
 {
-  originMediaItemParent: mediaItem(by: { id: $originMediaItemParentID }) {
+  originMediaItemParentCustomPost: customPost(by: { id: $originMediaItemParentCustomPostID }, customPostTypes: [$customPostType]) {
     id
 
     
     polylangTranslationLanguageIDs
-      @export(as: "mediaItemParentTranslationLanguages")
+      @export(as: "mediaItemParentCustomPostTranslationLanguages")
   }
 }
 
@@ -193,29 +198,30 @@ query CreateTranslationMediaItemInputsForMissingLanguages
         name: "_sprintf"
         arguments: {
           string: "%s (%s)"
-          values: [$originMediaItemName, $languageCode]
+          values: [$originMediaItemTitle, $languageCode]
         }
-        passOnwardsAs: "originMediaItemNameForLanguage"
+        passOnwardsAs: "originMediaItemTitleForLanguage"
       )
       @applyField(
         name: "_objectProperty",
         arguments: {
-          object: $mediaItemParentTranslationLanguages,
+          object: $mediaItemParentCustomPostTranslationLanguages,
           by: { key: $languageCode }
           failIfNonExistingKeyOrPath: false
-          valueWhenNonExistingKeyOrPath: $originMediaItemParentID
+          valueWhenNonExistingKeyOrPath: $originMediaItemParentCustomPostID
         },
-        passOnwardsAs: "originSameOrTranslatedMediaItemParentID"
+        passOnwardsAs: "originSameOrTranslatedMediaItemParentCustomPostID"
       )
       @applyField(
         name: "_echo",
         arguments: {
           value: {
-            name: $originMediaItemNameForLanguage
+            title: $originMediaItemTitleForLanguage
             description: $originMediaItemDescription
-            parentBy: {
-              id: $originSameOrTranslatedMediaItemParentID
-            },
+            caption: $originMediaItemCaption
+            altText: $originMediaItemAltText
+            authorID: $originMediaItemAuthorID
+            customPostID: $originSameOrTranslatedMediaItemParentCustomPostID
             polylangLanguageBy: { code: $languageCode }
           }
         },
@@ -242,8 +248,13 @@ mutation CreateTranslationMediaItemForMissingLanguages
       hasCreatedTranslationMediaItems: _echo(value: true)
         @export(as: "hasCreatedTranslationMediaItems")
         @remove
-      name
+      title
       slug
+      src
+      parentCustomPost {
+        id
+        title
+      }
       polylangLanguage {
         code
       }
@@ -269,7 +280,7 @@ mutation CreateMissingTranslationMediaItemsForPolylang
   @depends(on: "ExportAllTranslationMediaItems")
   @include(if: $hasCreatedTranslationMediaItems)
 {
-  polylangSaveTaxonomyTermTranslationAssociation(input: {
+  polylangSaveMediaItemTranslationAssociation(input: {
     ids: $allTranslationMediaItemIDs
   }) {
     status
