@@ -1,0 +1,171 @@
+mutation TestCreateMediaItemFromContents(
+  $username: String! = "editor",
+  $mediaItemID: ID!,
+  $authorID: ID,
+  $caption: String,
+  $customPostID: ID,
+  $description: String,
+  $slug: String,
+  $title: String,
+  $altText: String,
+  $mimeType: String,
+) {
+  loginUser(by: {
+    credentials: {
+      usernameOrEmail: $username,
+      password: "11111111"
+    }
+  }) {
+    status
+    errors {
+      __typename
+    }
+  }
+
+  createMediaItem(input: {
+    from: {
+      mediaItemBy: {
+        id: $mediaItemID
+      }
+    }
+    authorID: $authorID
+    caption: $caption
+    customPostID: $customPostID
+    description: $description
+    slug: $slug
+    title: $title
+    altText: $altText
+    mimeType: $mimeType
+  }) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+
+  createMediaItems(inputs: [
+    {
+      from: {
+        mediaItemBy: {
+          id: $mediaItemID
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    },
+    {
+      from: {
+        mediaItemBy: {
+          id: $mediaItemID
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    }
+  ]) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+
+  createMediaItemsStopExecuting: createMediaItems(stopExecutingMutationItemsOnFirstError: true, inputs: [
+    {
+      from: {
+        mediaItemBy: {
+          id: $mediaItemID
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    },
+    {
+      from: {
+        mediaItemBy: {
+          id: $mediaItemID
+        }
+      }
+      authorID: $authorID
+      caption: $caption
+      customPostID: $customPostID
+      description: $description
+      slug: $slug
+      title: $title
+      altText: $altText
+      mimeType: $mimeType
+    }
+  ]) {
+    # mediaItemID
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      ...MediaItemData
+    }
+  }
+
+  logoutUser {
+    status
+  }
+}
+
+fragment MediaItemData on Media {
+  altText
+  author {
+    id
+    name
+  } 
+  caption
+  # date
+  # dateStr(format: "F j")
+  description
+  height
+  # id
+  mimeType
+  # modifiedDate
+  # modifiedDateStr
+  sizes
+  slug
+  src
+  # srcSet
+  title
+  # url
+  # urlPath
+  width
+}
