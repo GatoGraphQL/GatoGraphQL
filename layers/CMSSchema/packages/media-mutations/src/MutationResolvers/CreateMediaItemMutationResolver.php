@@ -260,7 +260,7 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
     protected function createMediaItem(
         array $mediaItemData,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string|int {
+    ): string|int|null {
         /** @var stdClass */
         $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
 
@@ -321,6 +321,10 @@ class CreateMediaItemMutationResolver extends AbstractMutationResolver
             $mediaItemData,
             $fieldDataAccessor,
         );
+
+        if ($mediaItemID === null) {
+            return null;
+        }
 
         // Allow for additional operations
         $this->additionals($mediaItemID, $fieldDataAccessor);
