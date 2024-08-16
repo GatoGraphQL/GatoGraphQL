@@ -66,6 +66,7 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
     public function getInputFieldNameTypeResolvers(): array
     {
         return [
+            MutationInputProperties::MEDIAITEM_BY => $this->getMediaItemByOneofInputObjectTypeResolver(),
             MutationInputProperties::URL => $this->getCreateMediaItemFromURLInputObjectTypeResolver(),
             MutationInputProperties::CONTENTS => $this->getCreateMediaItemFromContentInputObjectTypeResolver(),
         ];
@@ -74,6 +75,7 @@ class CreateMediaItemFromOneofInputObjectTypeResolver extends AbstractOneofInput
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
+            MutationInputProperties::MEDIAITEM_BY => $this->__('Use the attachment from an existing media item', 'media-mutations'),
             MutationInputProperties::URL => $this->__('Upload the attachment from a URL', 'media-mutations'),
             MutationInputProperties::CONTENTS => $this->__('Create the attachment by passing the file name and body', 'media-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),

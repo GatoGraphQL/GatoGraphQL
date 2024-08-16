@@ -16,6 +16,7 @@ class MutationInputProperties
     public final const MIME_TYPE = 'mimeType';
     public final const FILENAME = 'filename';
 
+    public final const MEDIAITEM_BY = 'mediaItemBy';
     public final const URL = 'url';
     public final const CONTENTS = 'contents';
 
