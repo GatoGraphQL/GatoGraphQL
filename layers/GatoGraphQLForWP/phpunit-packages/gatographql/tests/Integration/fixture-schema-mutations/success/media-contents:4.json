@@ -8,6 +8,7 @@
             "status": "SUCCESS",
             "errors": null,
             "mediaItem": {
+                "parentCustomPost": null,
                 "altText": "",
                 "author": {
                     "id": 6,
@@ -29,6 +30,7 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": null,
                     "altText": "",
                     "author": {
                         "id": 6,
@@ -49,6 +51,7 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": null,
                     "altText": "",
                     "author": {
                         "id": 6,
