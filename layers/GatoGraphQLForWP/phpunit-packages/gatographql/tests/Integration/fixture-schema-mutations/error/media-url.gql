@@ -152,6 +152,10 @@ mutation TestCreateMediaItemFromURL(
 }
 
 fragment MediaItemData on Media {
+  parentCustomPost {
+    id
+    title
+  }
   altText
   author {
     id
