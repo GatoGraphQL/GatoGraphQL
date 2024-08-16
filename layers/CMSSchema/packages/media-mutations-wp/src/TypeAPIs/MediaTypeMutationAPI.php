@@ -10,9 +10,60 @@ use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use WP_Error;
 
+use function add_post_meta;
+use function get_attached_file;
+use function get_post_meta;
+use function get_post;
+use function update_attached_file;
+use function wp_get_attachment_metadata;
+use function wp_insert_attachment;
+use function wp_slash;
+use function wp_update_attachment_metadata;
+
 class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 {
     use BasicServiceTrait;
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     * @param WP_Post $mediaItemData
+     * @param array<string,mixed> $mediaItemData
+     */
+    public function createMediaItemFromExistingMediaItem(
+        string|int $existingMediaItemID,
+        array $mediaItemData,
+    ): string|int|null {
+        $existingMediaItem = get_post($existingMediaItemID, ARRAY_A);
+
+		if ($existingMediaItem === null || $existingMediaItem === []) {
+			return null;
+		}
+
+		unset($existingMediaItem['ID']);
+		$mediaItemID = wp_insert_attachment(wp_slash($existingMediaItem));
+
+		/**
+         * Copy over:
+         *
+         * - Metadata
+         * - Attached file
+         * - Alternative text
+         */
+		$data = wp_get_attachment_metadata($existingMediaItemID, true);
+		if ($data !== false) {
+			wp_update_attachment_metadata($mediaItemID, wp_slash($data));
+		}
+        $file = get_attached_file($existingMediaItemID, true);
+		if ($file !== false) {
+			update_attached_file($mediaItemID, wp_slash($file));
+		}
+		$alternativeText = get_post_meta($existingMediaItemID, '_wp_attachment_image_alt', true);
+		if ($alternativeText) {
+			add_post_meta($mediaItemID, '_wp_attachment_image_alt', wp_slash($alternativeText));
+		}
+
+        return $mediaItemID;
+    }
 
     /**
      * @throws MediaItemCRUDMutationException In case of error

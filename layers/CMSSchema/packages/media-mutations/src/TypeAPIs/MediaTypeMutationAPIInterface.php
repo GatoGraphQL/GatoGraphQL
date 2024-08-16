@@ -10,6 +10,14 @@ interface MediaTypeMutationAPIInterface
 {
     /**
      * @throws MediaItemCRUDMutationException In case of error
+     * @param array<string,mixed> $mediaItemData
+     */
+    public function createMediaItemFromExistingMediaItem(
+        string|int $existingMediaItemID,
+        array $mediaItemData,
+    ): string|int|null;
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
      * @param string|null $filename Override the filename from the URL, or pass `null` to use filename from URL
      * @param array<string,mixed> $mediaItemData
      */
