@@ -16,7 +16,7 @@ use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use WP_Post;
 
-class MediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+class QueryableMediaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?CMSHelperServiceInterface $cmsHelperService = null;
     private ?DateFormatterInterface $dateFormatter = null;
