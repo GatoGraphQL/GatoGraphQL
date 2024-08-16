@@ -1,0 +1,85 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "parentCustomPost": {
+                    "id": 1,
+                    "title": "Hello world!"
+                },
+                "altText": "Some alternative info about the tongue",
+                "author": {
+                    "id": 6,
+                    "name": "Editor Smith"
+                },
+                "caption": "Some coooool caption",
+                "description": "Description for the tongue image",
+                "height": null,
+                "mimeType": "text\/plain",
+                "sizes": null,
+                "slug": "hello-world-txt",
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/hello-world-7.txt",
+                "title": "hello-world.txt",
+                "width": null
+            }
+        },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1,
+                        "title": "Hello world!"
+                    },
+                    "altText": "Some alternative info about the tongue",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "Some coooool caption",
+                    "description": "Description for the tongue image",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "hello-world-txt",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/hello-world-8.txt",
+                    "title": "hello-world.txt",
+                    "width": null
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1,
+                        "title": "Hello world!"
+                    },
+                    "altText": "Some alternative info about the tongue",
+                    "author": {
+                        "id": 6,
+                        "name": "Editor Smith"
+                    },
+                    "caption": "Some coooool caption",
+                    "description": "Description for the tongue image",
+                    "height": null,
+                    "mimeType": "text\/plain",
+                    "sizes": null,
+                    "slug": "hello-world-txt",
+                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/hello-world.txt",
+                    "title": "hello-world.txt",
+                    "width": null
+                }
+            }
+        ],
+        "logoutUser": {
+            "status": "SUCCESS"
+        }
+    }
+}
