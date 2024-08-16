@@ -14,6 +14,7 @@ use function add_post_meta;
 use function get_attached_file;
 use function get_post_meta;
 use function get_post;
+use function is_wp_error;
 use function update_attached_file;
 use function wp_get_attachment_metadata;
 use function wp_insert_attachment;
@@ -32,14 +33,48 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string|int $existingMediaItemID,
         array $mediaItemData,
     ): string|int|null {
-        $existingMediaItem = get_post($existingMediaItemID, ARRAY_A);
+        $toCreateMediaItemData = get_post($existingMediaItemID, ARRAY_A);
 
-		if ($existingMediaItem === null || $existingMediaItem === []) {
+		if ($toCreateMediaItemData === null || $toCreateMediaItemData === []) {
 			return null;
 		}
 
-		unset($existingMediaItem['ID']);
-		$mediaItemID = wp_insert_attachment(wp_slash($existingMediaItem));
+		unset($toCreateMediaItemData['ID']);
+        
+        /**
+         * Override properties with the provided ones
+         */
+        $properties = [
+            'title',
+        ];
+        foreach ($properties as $property) {
+            if (empty($mediaItemData[$property])) {
+                continue;
+            }
+            $toCreateMediaItemData = $mediaItemData[$property];
+        }
+
+        $customPostID = 0;
+        if (isset($mediaItemData['customPostID'])) {
+            $customPostID = $mediaItemData['customPostID'];
+        }
+
+		$mediaItemIDOrError = wp_insert_attachment(
+            wp_slash($toCreateMediaItemData),
+            false,
+            $customPostID,
+            true
+        );
+
+        if (is_wp_error($mediaItemIDOrError)) {
+            /** @var WP_Error */
+            $wpError = $mediaItemIDOrError;
+            throw new MediaItemCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+
+        $mediaItemID = $mediaItemIDOrError;
 
 		/**
          * Copy over:
@@ -78,7 +113,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         $downloadedFileOrError = \download_url($url);
 
-        if (\is_wp_error($downloadedFileOrError)) {
+        if (is_wp_error($downloadedFileOrError)) {
             /** @var WP_Error */
             $wpError = $downloadedFileOrError;
             throw new MediaItemCRUDMutationException(
@@ -251,14 +286,14 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
 
-        $mediaItemIDOrError = \wp_insert_attachment(
+        $mediaItemIDOrError = wp_insert_attachment(
             $mediaItemData,
             $uploadedFilename,
             $customPostID,
             true
         );
 
-        if (\is_wp_error($mediaItemIDOrError)) {
+        if (is_wp_error($mediaItemIDOrError)) {
             /** @var WP_Error */
             $wpError = $mediaItemIDOrError;
             throw new MediaItemCRUDMutationException(
