@@ -22,6 +22,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_ADD_COMMENTS_BLOCK_TO_POST = 'add-comments-block-to-post';
     public final const PERSISTED_QUERY_ADD_MISSING_LINKS_IN_POST = 'add-missing-links-in-post';
     public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG = 'create-missing-translation-categories-for-polylang';
+    public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_MEDIA_FOR_POLYLANG = 'create-missing-translation-media-for-polylang';
     public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG = 'create-missing-translation-posts-for-polylang';
     public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_TAGS_FOR_POLYLANG = 'create-missing-translation-tags-for-polylang';
     public final const PERSISTED_QUERY_DUPLICATE_POST = 'duplicate-post';
@@ -56,6 +57,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG = 'translate-and-create-all-pages-for-multilingual-wordpress-site-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_MULTILINGUALPRESS = 'translate-categories-for-multilingualpress';
     public final const PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_POLYLANG = 'translate-categories-for-polylang';
+    public final const PERSISTED_QUERY_TRANSLATE_MEDIA_FOR_POLYLANG = 'translate-media-for-polylang';
     public final const PERSISTED_QUERY_TRANSLATE_CONTENT_FROM_URL = 'translate-content-from-url';
     public final const PERSISTED_QUERY_TRANSLATE_POEDIT_FILE_CONTENT = 'translate-poedit-file-content';
     public final const PERSISTED_QUERY_TRANSLATE_POST_CLASSIC_EDITOR = 'translate-post-classic-editor';
