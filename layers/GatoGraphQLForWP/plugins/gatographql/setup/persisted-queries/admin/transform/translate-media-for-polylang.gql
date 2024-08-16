@@ -102,10 +102,14 @@ query ExportOriginMediaItem(
       @export(as: "hasTranslationMediaItems")
 
 
-    name
-      @export(as: "originName")
+    title
+      @export(as: "originTitle")
     description
       @export(as: "originDescription")
+    caption
+      @export(as: "originCaption")
+    altText
+      @export(as: "originAltText")
   }
 
   hasOriginMediaItem: _notNull(value: $__originMediaItem)
@@ -133,11 +137,13 @@ query FetchData(
       code
     }
 
-    name: _echo(value: $originName)
+    title: _echo(value: $originTitle)
     description: _echo(value: $originDescription)
+    caption: _echo(value: $originCaption)
+    altText: _echo(value: $originAltText)
       @export(
         as: "dataToTranslate",
-        affectAdditionalFieldsUnderPos: [1]
+        affectAdditionalFieldsUnderPos: [1, 2, 3]
         type: DICTIONARY
       )
   }
@@ -230,17 +236,17 @@ query GenerateMutationInputs(
     @underEachJSONObjectProperty(
       passKeyOnwardsAs: "mediaItemID"
       passValueOnwardsAs: "mediaItemTranslatedData"
-      affectDirectivesUnderPos: [1, 2, 3, 4]
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6]
     )
       @applyField(
         name: "_objectProperty",
         arguments: {
           object: $mediaItemTranslatedData,
           by: {
-            key: "name",
+            key: "title",
           }
         },
-        passOnwardsAs: "mediaItemTranslatedName"
+        passOnwardsAs: "mediaItemTranslatedTitle"
       )
       @applyField(
         name: "_objectProperty",
@@ -253,12 +259,34 @@ query GenerateMutationInputs(
         passOnwardsAs: "mediaItemTranslatedDescription"
       )
       @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mediaItemTranslatedData,
+          by: {
+            key: "caption",
+          }
+        },
+        passOnwardsAs: "mediaItemTranslatedCaption"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mediaItemTranslatedData,
+          by: {
+            key: "altText",
+          }
+        },
+        passOnwardsAs: "mediaItemTranslatedAltText"
+      )
+      @applyField(
         name: "_echo",
         arguments: {
           value: {
             id: $mediaItemID
-            name: $mediaItemTranslatedName
+            title: $mediaItemTranslatedTitle
             description: $mediaItemTranslatedDescription
+            caption: $mediaItemTranslatedCaption
+            altText: $mediaItemTranslatedAltText
           }
         },
         passOnwardsAs: "mediaItemInput"
@@ -270,7 +298,7 @@ query GenerateMutationInputs(
           arguments: {
             object: $mediaItemInput
             key: "slug"
-            value: $mediaItemTranslatedName
+            value: $mediaItemTranslatedTitle
           },
           setResultInResponse: true
         )
@@ -299,8 +327,10 @@ mutation TranslateMediaItems
     }
     mediaItem {
       id
-      name
+      title
       description
+      caption
+      altText
       slug
     }
   }
