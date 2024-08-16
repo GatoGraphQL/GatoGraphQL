@@ -1,0 +1,135 @@
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "SUCCESS",
+            "errors": null,
+            "mediaItem": {
+                "parentCustomPost": {
+                    "id": 1113,
+                    "title": "Released v0.6, check it out"
+                },
+                "altText": "",
+                "author": {
+                    "id": 2,
+                    "name": "Blogger Davenport"
+                },
+                "caption": "Look at that tongue!",
+                "description": "Isn't this something?",
+                "height": 1200,
+                "mimeType": "image\/jpeg",
+                "sizes": "(max-width: 1600px) 100vw, 1600px",
+                "slug": "super-funny-duplicated-dog",
+                "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                "title": "Super funny duplicated dog",
+                "width": 1600
+            }
+        },
+        "createMediaItems": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 2,
+                        "name": "Blogger Davenport"
+                    },
+                    "caption": "Look at that tongue!",
+                    "description": "Isn't this something?",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "super-funny-duplicated-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Super funny duplicated dog",
+                    "width": 1600
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 2,
+                        "name": "Blogger Davenport"
+                    },
+                    "caption": "Look at that tongue!",
+                    "description": "Isn't this something?",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "super-funny-duplicated-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Super funny duplicated dog",
+                    "width": 1600
+                }
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 2,
+                        "name": "Blogger Davenport"
+                    },
+                    "caption": "Look at that tongue!",
+                    "description": "Isn't this something?",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "super-funny-duplicated-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Super funny duplicated dog",
+                    "width": 1600
+                }
+            },
+            {
+                "status": "SUCCESS",
+                "errors": null,
+                "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1113,
+                        "title": "Released v0.6, check it out"
+                    },
+                    "altText": "",
+                    "author": {
+                        "id": 2,
+                        "name": "Blogger Davenport"
+                    },
+                    "caption": "Look at that tongue!",
+                    "description": "Isn't this something?",
+                    "height": 1200,
+                    "mimeType": "image\/jpeg",
+                    "sizes": "(max-width: 1600px) 100vw, 1600px",
+                    "slug": "super-funny-duplicated-dog",
+                    "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
+                    "title": "Super funny duplicated dog",
+                    "width": 1600
+                }
+            }
+        ],
+        "logoutUser": {
+            "status": "SUCCESS"
+        }
+    }
+}

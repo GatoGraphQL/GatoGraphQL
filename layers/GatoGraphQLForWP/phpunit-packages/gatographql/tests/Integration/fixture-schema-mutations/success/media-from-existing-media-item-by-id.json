@@ -8,19 +8,23 @@
             "status": "SUCCESS",
             "errors": null,
             "mediaItem": {
+                "parentCustomPost": {
+                    "id": 1140,
+                    "title": "Welcome to a single post full of blocks!"
+                },
                 "altText": "",
                 "author": {
-                    "id": 2,
-                    "name": "Blogger Davenport"
+                    "id": 4,
+                    "name": "Contributor Johnson"
                 },
-                "caption": "Look at that tongue!",
-                "description": "Isn't this something?",
+                "caption": "",
+                "description": "",
                 "height": 1200,
                 "mimeType": "image\/jpeg",
                 "sizes": "(max-width: 1600px) 100vw, 1600px",
-                "slug": "super-funny-duplicated-dog",
+                "slug": "funny-dog",
                 "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
-                "title": "Super funny duplicated dog",
+                "title": "Funny-Dog",
                 "width": 1600
             }
         },
@@ -29,19 +33,23 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
-                        "id": 2,
-                        "name": "Blogger Davenport"
+                        "id": 4,
+                        "name": "Contributor Johnson"
                     },
-                    "caption": "Look at that tongue!",
-                    "description": "Isn't this something?",
+                    "caption": "",
+                    "description": "",
                     "height": 1200,
                     "mimeType": "image\/jpeg",
                     "sizes": "(max-width: 1600px) 100vw, 1600px",
-                    "slug": "super-funny-duplicated-dog",
+                    "slug": "funny-dog",
                     "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
-                    "title": "Super funny duplicated dog",
+                    "title": "Funny-Dog",
                     "width": 1600
                 }
             },
@@ -49,19 +57,23 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
-                        "id": 2,
-                        "name": "Blogger Davenport"
+                        "id": 4,
+                        "name": "Contributor Johnson"
                     },
-                    "caption": "Look at that tongue!",
-                    "description": "Isn't this something?",
+                    "caption": "",
+                    "description": "",
                     "height": 1200,
                     "mimeType": "image\/jpeg",
                     "sizes": "(max-width: 1600px) 100vw, 1600px",
-                    "slug": "super-funny-duplicated-dog",
+                    "slug": "funny-dog",
                     "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
-                    "title": "Super funny duplicated dog",
+                    "title": "Funny-Dog",
                     "width": 1600
                 }
             }
@@ -71,19 +83,23 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
-                        "id": 2,
-                        "name": "Blogger Davenport"
+                        "id": 4,
+                        "name": "Contributor Johnson"
                     },
-                    "caption": "Look at that tongue!",
-                    "description": "Isn't this something?",
+                    "caption": "",
+                    "description": "",
                     "height": 1200,
                     "mimeType": "image\/jpeg",
                     "sizes": "(max-width: 1600px) 100vw, 1600px",
-                    "slug": "super-funny-duplicated-dog",
+                    "slug": "funny-dog",
                     "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
-                    "title": "Super funny duplicated dog",
+                    "title": "Funny-Dog",
                     "width": 1600
                 }
             },
@@ -91,19 +107,23 @@
                 "status": "SUCCESS",
                 "errors": null,
                 "mediaItem": {
+                    "parentCustomPost": {
+                        "id": 1140,
+                        "title": "Welcome to a single post full of blocks!"
+                    },
                     "altText": "",
                     "author": {
-                        "id": 2,
-                        "name": "Blogger Davenport"
+                        "id": 4,
+                        "name": "Contributor Johnson"
                     },
-                    "caption": "Look at that tongue!",
-                    "description": "Isn't this something?",
+                    "caption": "",
+                    "description": "",
                     "height": 1200,
                     "mimeType": "image\/jpeg",
                     "sizes": "(max-width: 1600px) 100vw, 1600px",
-                    "slug": "super-funny-duplicated-dog",
+                    "slug": "funny-dog",
                     "src": "https:\/\/localhost:49811\/wp-content\/uploads\/Funny-Dog.jpg",
-                    "title": "Super funny duplicated dog",
+                    "title": "Funny-Dog",
                     "width": 1600
                 }
             }

@@ -25,6 +25,10 @@ query GetMediaItems {
 }
 
 fragment MediaItemData on Media {
+  parentCustomPost {
+    id
+    title
+  }
   altText
   author {
     slug
