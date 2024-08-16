@@ -33,7 +33,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string|int $existingMediaItemID,
         array $mediaItemData,
     ): string|int|null {
-        $toCreateMediaItemData = get_post($existingMediaItemID, ARRAY_A);
+        $toCreateMediaItemData = get_post((int) $existingMediaItemID, ARRAY_A);
 
 		if ($toCreateMediaItemData === null || $toCreateMediaItemData === []) {
 			return null;
@@ -71,6 +71,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             );
         }
 
+        /** @var int */
         $mediaItemID = $mediaItemIDOrError;
 
 		/**
@@ -80,15 +81,15 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
          * - Attached file
          * - Alternative text
          */
-		$attachmentMetadata = wp_get_attachment_metadata($existingMediaItemID, true);
+		$attachmentMetadata = wp_get_attachment_metadata((int) $existingMediaItemID, true);
 		if ($attachmentMetadata !== false) {
 			wp_update_attachment_metadata($mediaItemID, wp_slash($attachmentMetadata));
 		}
-        $attachedFile = get_attached_file($existingMediaItemID, true);
+        $attachedFile = get_attached_file((int) $existingMediaItemID, true);
 		if ($attachedFile !== false) {
 			update_attached_file($mediaItemID, wp_slash($attachedFile));
 		}
-		$alternativeText = get_post_meta($existingMediaItemID, '_wp_attachment_image_alt', true);
+		$alternativeText = get_post_meta((int) $existingMediaItemID, '_wp_attachment_image_alt', true);
 		if ($alternativeText) {
 			add_post_meta($mediaItemID, '_wp_attachment_image_alt', wp_slash($alternativeText));
 		}
