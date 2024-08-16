@@ -80,13 +80,13 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
          * - Attached file
          * - Alternative text
          */
-		$data = wp_get_attachment_metadata($existingMediaItemID, true);
-		if ($data !== false) {
-			wp_update_attachment_metadata($mediaItemID, wp_slash($data));
+		$attachmentMetadata = wp_get_attachment_metadata($existingMediaItemID, true);
+		if ($attachmentMetadata !== false) {
+			wp_update_attachment_metadata($mediaItemID, wp_slash($attachmentMetadata));
 		}
-        $file = get_attached_file($existingMediaItemID, true);
-		if ($file !== false) {
-			update_attached_file($mediaItemID, wp_slash($file));
+        $attachedFile = get_attached_file($existingMediaItemID, true);
+		if ($attachedFile !== false) {
+			update_attached_file($mediaItemID, wp_slash($attachedFile));
 		}
 		$alternativeText = get_post_meta($existingMediaItemID, '_wp_attachment_image_alt', true);
 		if ($alternativeText) {
