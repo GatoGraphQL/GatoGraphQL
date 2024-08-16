@@ -26,7 +26,6 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
     /**
      * @throws MediaItemCRUDMutationException In case of error
-     * @param WP_Post $mediaItemData
      * @param array<string,mixed> $mediaItemData
      */
     public function createMediaItemFromExistingMediaItem(
