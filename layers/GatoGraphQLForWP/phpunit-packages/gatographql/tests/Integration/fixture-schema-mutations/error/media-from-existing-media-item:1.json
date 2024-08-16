@@ -8,7 +8,7 @@
             "status": "FAILURE",
             "errors": [
                 {
-                    "__typename": "GenericErrorPayload",
+                    "__typename": "MediaItemDoesNotExistErrorPayload",
                     "message": "There is no media item with ID '8888'"
                 }
             ],
@@ -19,7 +19,7 @@
                 "status": "FAILURE",
                 "errors": [
                     {
-                        "__typename": "GenericErrorPayload",
+                        "__typename": "MediaItemDoesNotExistErrorPayload",
                         "message": "There is no media item with ID '8888'"
                     }
                 ],
@@ -29,7 +29,7 @@
                 "status": "FAILURE",
                 "errors": [
                     {
-                        "__typename": "GenericErrorPayload",
+                        "__typename": "MediaItemDoesNotExistErrorPayload",
                         "message": "There is no media item with ID '8888'"
                     }
                 ],
@@ -41,7 +41,7 @@
                 "status": "FAILURE",
                 "errors": [
                     {
-                        "__typename": "GenericErrorPayload",
+                        "__typename": "MediaItemDoesNotExistErrorPayload",
                         "message": "There is no media item with ID '8888'"
                     }
                 ],
