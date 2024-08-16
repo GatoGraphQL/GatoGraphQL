@@ -101,7 +101,7 @@ The following table lists down the mapped WordPress hooks:
 | --- | --- |
 | [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/) (passing `WP_Post $post`) | `gatographql:{$old_status}_to_{$new_status}` (passing `int $postId`) |
 
-In addition, Gato GraphQL triggers additional hooks with some extra information on the hook name, to make it easier to capture and automate specific events.
+In addition, Gato GraphQL re-triggers several WordPress hooks with some extra information on the hook name, to make it easier to capture and automate specific events.
 
 For instance, hooks that create, update and delete meta values are triggered containing the meta key as part of the hook name. Then, an automation can be triggered when a featured image is assigned to a post, on hook `gatographql:added_post_meta:_thumbnail_id`.
 
