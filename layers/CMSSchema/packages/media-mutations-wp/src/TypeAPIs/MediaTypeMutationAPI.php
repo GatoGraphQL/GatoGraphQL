@@ -35,12 +35,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     ): string|int|null {
         $toCreateMediaItemData = get_post((int) $existingMediaItemID, ARRAY_A);
 
-		if ($toCreateMediaItemData === null || $toCreateMediaItemData === []) {
-			return null;
-		}
+        if ($toCreateMediaItemData === null || $toCreateMediaItemData === []) {
+            return null;
+        }
 
-		unset($toCreateMediaItemData['ID']);
-        
+        unset($toCreateMediaItemData['ID']);
+
         $customPostID = 0;
         if (isset($mediaItemData['customPostID'])) {
             $customPostID = $mediaItemData['customPostID'];
@@ -74,25 +74,25 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         /** @var int */
         $mediaItemID = $mediaItemIDOrError;
 
-		/**
+        /**
          * Copy over:
          *
          * - Metadata
          * - Attached file
          * - Alternative text
          */
-		$attachmentMetadata = wp_get_attachment_metadata((int) $existingMediaItemID, true);
-		if ($attachmentMetadata !== false) {
-			wp_update_attachment_metadata($mediaItemID, wp_slash($attachmentMetadata));
-		}
+        $attachmentMetadata = wp_get_attachment_metadata((int) $existingMediaItemID, true);
+        if ($attachmentMetadata !== false) {
+            wp_update_attachment_metadata($mediaItemID, wp_slash($attachmentMetadata));
+        }
         $attachedFile = get_attached_file((int) $existingMediaItemID, true);
-		if ($attachedFile !== false) {
-			update_attached_file($mediaItemID, wp_slash($attachedFile));
-		}
-		$alternativeText = get_post_meta((int) $existingMediaItemID, '_wp_attachment_image_alt', true);
-		if ($alternativeText) {
-			add_post_meta($mediaItemID, '_wp_attachment_image_alt', wp_slash($alternativeText));
-		}
+        if ($attachedFile !== false) {
+            update_attached_file($mediaItemID, wp_slash($attachedFile));
+        }
+        $alternativeText = get_post_meta((int) $existingMediaItemID, '_wp_attachment_image_alt', true);
+        if ($alternativeText) {
+            add_post_meta($mediaItemID, '_wp_attachment_image_alt', wp_slash($alternativeText));
+        }
 
         return $mediaItemID;
     }
