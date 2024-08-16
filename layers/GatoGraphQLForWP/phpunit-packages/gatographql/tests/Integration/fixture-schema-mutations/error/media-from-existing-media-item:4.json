@@ -1,1 +1,55 @@
-{}
+{
+    "data": {
+        "loginUser": {
+            "status": "SUCCESS",
+            "errors": null
+        },
+        "createMediaItem": {
+            "status": "FAILURE",
+            "errors": [
+                {
+                    "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
+                    "message": "You don't have permission to upload files"
+                }
+            ],
+            "mediaItem": null
+        },
+        "createMediaItems": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
+                        "message": "You don't have permission to upload files"
+                    }
+                ],
+                "mediaItem": null
+            },
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
+                        "message": "You don't have permission to upload files"
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
+        "createMediaItemsStopExecuting": [
+            {
+                "status": "FAILURE",
+                "errors": [
+                    {
+                        "__typename": "UserHasNoPermissionToUploadFilesErrorPayload",
+                        "message": "You don't have permission to upload files"
+                    }
+                ],
+                "mediaItem": null
+            }
+        ],
+        "logoutUser": {
+            "status": "SUCCESS"
+        }
+    }
+}
