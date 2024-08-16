@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
+namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
-trait SetFeaturedImageOnCustomPostMutationResolverTrait
+trait MediaItemCRUDMutationResolverTrait
 {
     protected function validateMediaItemByIDExists(
         string|int $mediaItemID,
@@ -23,7 +23,7 @@ trait SetFeaturedImageOnCustomPostMutationResolverTrait
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
+                        MutationErrorFeedbackItemProvider::E6,
                         [
                             $mediaItemID,
                         ]
@@ -44,7 +44,7 @@ trait SetFeaturedImageOnCustomPostMutationResolverTrait
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E5,
+                        MutationErrorFeedbackItemProvider::E7,
                         [
                             $mediaItemSlug,
                         ]
