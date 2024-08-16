@@ -13,13 +13,15 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Validate `assign_terms` capability on `setCategory` and `setTag` mutations (#2772)
 - Create a media item using the attachment from an existing media item (#2787)
 - Added field `Media.parentCustomPost` (#2788)
-- Added predefined persisted queries: (#2774)
-  - [PRO] Create missing translation categories for Polylang
-  - [PRO] Translate categories for Polylang
-  - [PRO] Translate tags for Polylang
-  - [PRO] Create missing translation tags for Polylang
-  - [PRO] Translate categories for MultilingualPress
-  - [PRO] Translate tags for MultilingualPress
+- Added predefined persisted queries:
+  - [PRO] Create missing translation categories for Polylang (#2774)
+  - [PRO] Translate categories for Polylang (#2774)
+  - [PRO] Translate tags for Polylang (#2774)
+  - [PRO] Create missing translation tags for Polylang (#2774)
+  - [PRO] Translate categories for MultilingualPress (#2774)
+  - [PRO] Translate tags for MultilingualPress (#2774)
+  - [PRO] Create missing translation media for Polylang (#2789)
+  - [PRO] Translate media for Polylang (#2789)
 - Added translation language mapping to persisted queries (#2775)
 
 ## 4.1.0 - 26/07/2024

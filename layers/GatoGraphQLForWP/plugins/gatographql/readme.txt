@@ -292,13 +292,15 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Validate `assign_terms` capability on `setCategory` and `setTag` mutations (#2772)
 * Create a media item using the attachment from an existing media item (#2787)
 * Added field `Media.parentCustomPost` (#2788)
-* Added predefined persisted queries: (#2774)
-  * Create missing translation categories for Polylang
-  * Create missing translation tags for Polylang
-  * Translate categories for Polylang
-  * Translate tags for Polylang
-  * Translate categories for MultilingualPress
-  * Translate tags for MultilingualPress
+* Added predefined persisted queries:
+  * Create missing translation categories for Polylang (#2774)
+  * Create missing translation tags for Polylang (#2774)
+  * Translate categories for Polylang (#2774)
+  * Translate tags for Polylang (#2774)
+  * Translate categories for MultilingualPress (#2774)
+  * Translate tags for MultilingualPress (#2774)
+  * Create missing translation media for Polylang (#2789)
+  * Translate media for Polylang (#2789)
 * Added translation language mapping to persisted queries (#2775)
 * [PRO] Define the Polylang language on tag and category mutations
 * [PRO] Automation: Store the GraphQL response in the info logs
