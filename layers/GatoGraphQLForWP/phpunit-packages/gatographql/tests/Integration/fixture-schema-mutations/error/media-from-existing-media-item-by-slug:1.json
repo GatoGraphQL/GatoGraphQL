@@ -9,7 +9,7 @@
             "errors": [
                 {
                     "__typename": "MediaItemDoesNotExistErrorPayload",
-                    "message": "There is no media item with ID '8888'"
+                    "message": "There is no media item with slug 'non-existing'"
                 }
             ],
             "mediaItem": null
@@ -20,7 +20,7 @@
                 "errors": [
                     {
                         "__typename": "MediaItemDoesNotExistErrorPayload",
-                        "message": "There is no media item with ID '8888'"
+                        "message": "There is no media item with slug 'non-existing'"
                     }
                 ],
                 "mediaItem": null
@@ -30,7 +30,7 @@
                 "errors": [
                     {
                         "__typename": "MediaItemDoesNotExistErrorPayload",
-                        "message": "There is no media item with ID '8888'"
+                        "message": "There is no media item with slug 'non-existing'"
                     }
                 ],
                 "mediaItem": null
@@ -42,7 +42,7 @@
                 "errors": [
                     {
                         "__typename": "MediaItemDoesNotExistErrorPayload",
-                        "message": "There is no media item with ID '8888'"
+                        "message": "There is no media item with slug 'non-existing'"
                     }
                 ],
                 "mediaItem": null
