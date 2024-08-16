@@ -41,25 +41,23 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
 		unset($toCreateMediaItemData['ID']);
         
-        /**
-         * Override properties with the provided ones
-         */
-        $properties = [
-            'title',
-        ];
-        foreach ($properties as $property) {
-            if (empty($mediaItemData[$property])) {
-                continue;
-            }
-            $toCreateMediaItemData = $mediaItemData[$property];
-        }
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
 
         $customPostID = 0;
         if (isset($mediaItemData['customPostID'])) {
             $customPostID = $mediaItemData['customPostID'];
+            unset($mediaItemData['customPostID']);
         }
 
-		$mediaItemIDOrError = wp_insert_attachment(
+        /**
+         * Override properties with the provided ones
+         */
+        $toCreateMediaItemData = array_merge(
+            $toCreateMediaItemData,
+            array_filter($mediaItemData)
+        );
+
+        $mediaItemIDOrError = wp_insert_attachment(
             wp_slash($toCreateMediaItemData),
             false,
             $customPostID,
