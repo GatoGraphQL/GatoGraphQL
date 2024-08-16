@@ -13,6 +13,7 @@ class VirtualTutorialLessons
     public final const ADD_COMMENTS_BLOCK_TO_POST = 'add-comments-block-to-post';
     public final const BULK_TRANSLATING_CLASSIC_EDITOR_POSTS_TO_A_DIFFERENT_LANGUAGE = 'bulk-translating-classic-editor-posts-to-a-different-language';
     public final const CREATING_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG = 'creating-missing-translation-categories-for-polylang';
+    public final const CREATING_MISSING_TRANSLATION_MEDIA_FOR_POLYLANG = 'creating-missing-translation-media-for-polylang';
     public final const CREATING_MISSING_TRANSLATION_POSTS_FOR_POLYLANG = 'creating-missing-translation-posts-for-polylang';
     public final const CREATING_MISSING_TRANSLATION_TAGS_FOR_POLYLANG = 'creating-missing-translation-tags-for-polylang';
     public final const FETCH_POST_LINKS = 'fetch-post-links';
@@ -28,6 +29,7 @@ class VirtualTutorialLessons
     public final const TRANSLATING_AND_CREATING_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG = 'translating_and-creating-all-pages-for-multilingual-wordpress-site-gutenberg';
     public final const TRANSLATING_CATEGORIES_FOR_MULTILINGUALPRESS = 'translating-categories-for-multilingualpress';
     public final const TRANSLATING_CATEGORIES_FOR_POLYLANG = 'translating-categories-for-polylang';
+    public final const TRANSLATING_MEDIA_FOR_POLYLANG = 'translating-media-for-polylang';
     public final const TRANSLATING_CLASSIC_EDITOR_POST_TO_A_DIFFERENT_LANGUAGE = 'translating-classic-editor-post-to-a-different-language';
     public final const TRANSLATING_POEDIT_FILE_CONTENT = 'translating-poedit-file-content';
     public final const TRANSLATING_POSTS_FOR_POLYLANG_AND_GUTENBERG = 'translating-posts-for-polylang-and-gutenberg';

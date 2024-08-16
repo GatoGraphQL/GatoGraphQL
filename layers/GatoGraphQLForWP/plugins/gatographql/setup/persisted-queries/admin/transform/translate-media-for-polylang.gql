@@ -1,0 +1,337 @@
+########################################################################
+# 
+# Variables:
+#   - mediaItemId: The media item with the origin language, from where all translations will be made
+#   - updateSlug: Indicate if to update the media item slug, using the translated name. It is `false` by default.
+#   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin media item has the default language of the site. It is `true` by default.
+#   - translateFromLanguage: Only execute the translation when the origin media item has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
+#   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
+#   - excludeLanguagesToTranslate: Exclude languages from executing the translation
+#   - languageMapping: JSON object to convert languages codes to work with Google Translate. For instance, WordPress uses "nb" as the code for Norwegian, but Google Translate uses "no" instead; to translate to Norwegian, then pass value `{"nb": "no"}`
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This Persisted GraphQL query is an integration for Polylang,
+# to translate media items.
+#
+# It takes an origin media item, it translates it using the Google
+# Translate API to all the other languages defined in Polylang,
+# and stores those translations in the corresponding media items,
+# as set-up via Polylang. All translation media items must already exist.
+#
+# By default, the origin media item must have the default language
+# of the site, or the translation will not be executed.
+# To translate from any language, pass variable
+# `$translateDefaultLanguageOnly` with `false`.
+#
+# Additionally, translate only from a specific language by
+# providing `$translateFromLanguage` with the language code
+# (for instance, `"en"`). It applies only when
+# `$translateDefaultLanguageOnly` is `false`.
+#
+# To limit for what languages to execute the translation, pass
+# variables `$includeLanguagesToTranslate` (if empty, all languages
+# will be included) and `$excludeLanguagesToTranslate`.
+#
+# By default it doesn't translate the media item slug. To enable, pass
+# variable `updateSlug` with `true`.
+#
+# For some languages, the code used by WordPress and Google Translate
+# are different. For instance, Norwegian is represented as "nb" by
+# WordPress, and as "no" by Google Translate. To support translating
+# to these languages, provide the language code mapping via the
+# `$languageMapping` GraphQL variable, such as:
+#
+#   {
+#     "languageMapping": {
+#       "nb": "no"
+#     }
+#   }
+#
+########################################################################
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  emptyString: _echo(value: null)
+    @export(as: "fromLanguage")
+    @remove
+
+  emptyBool: _echo(value: false)
+    @export(as: "hasTranslationMediaItems")
+    @export(as: "executeTranslation")
+    @remove
+}
+
+query ExportOriginMediaItem(
+  $mediaItemId: ID!
+  $includeLanguagesToTranslate: [String!]
+  $excludeLanguagesToTranslate: [String!]
+)
+  @depends(on: "InitializeVariables")
+{
+  defaultLanguage: polylangDefaultLanguage {
+    code @export(as: "defaultLanguage")
+  }
+
+  languages: polylangLanguages {
+    code @export(
+      as: "languageLocaleCodes"
+      type: DICTIONARY
+    )
+  }
+
+  originMediaItem: mediaItem(by: { id: $mediaItemId }) {
+    id
+
+
+    polylangLanguage {
+      code @export(as: "fromLanguage")
+    }
+    
+
+    mediaItemIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
+      includeLanguages: $includeLanguagesToTranslate
+      excludeLanguages: $excludeLanguagesToTranslate
+    })
+      @default(value: {})
+      @export(as: "mediaItemIDTranslationLanguageIDs")
+
+    hasTranslationMediaItems: _notEmpty(value: $__mediaItemIDTranslationLanguageIDs)
+      @export(as: "hasTranslationMediaItems")
+
+
+    title
+      @export(as: "originTitle")
+    description
+      @export(as: "originDescription")
+    caption
+      @export(as: "originCaption")
+    altText
+      @export(as: "originAltText")
+  }
+
+  hasOriginMediaItem: _notNull(value: $__originMediaItem)
+    @export(as: "hasOriginMediaItem")
+}
+
+query FetchData(
+  $translateDefaultLanguageOnly: Boolean! = true
+  $translateFromLanguage: String
+)
+  @depends(on: "ExportOriginMediaItem")
+  @include(if: $hasOriginMediaItem)
+  @include(if: $hasTranslationMediaItems)
+{
+  translationMediaItemIds: _objectValues(object: $mediaItemIDTranslationLanguageIDs)
+  translationMediaItems: mediaItems(
+    filter: { ids: $__translationMediaItemIds }
+  ) {
+    id
+
+    polylangLanguage @export(
+      as: "translationMediaItemLanguages"
+      type: DICTIONARY
+    ) {
+      code
+    }
+
+    title: _echo(value: $originTitle)
+    description: _echo(value: $originDescription)
+    caption: _echo(value: $originCaption)
+    altText: _echo(value: $originAltText)
+      @export(
+        as: "dataToTranslate",
+        affectAdditionalFieldsUnderPos: [1, 2, 3]
+        type: DICTIONARY
+      )
+  }
+
+  hasTranslationMediaItems: _notEmpty(value: $__translationMediaItems)
+
+  originMediaItemHasDefaultLanguage: _equals(
+    value1: $defaultLanguage,
+    value2: $fromLanguage
+  )
+
+  isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
+
+  originMediaItemHasSpecificLanguage: _equals(
+    value1: $translateFromLanguage,
+    value2: $fromLanguage
+  )
+
+  canTranslateOriginMediaItemFromSpecificLanguage: _if(
+    condition: $__isTranslateFromLanguageProvided,
+    then: $__originMediaItemHasSpecificLanguage,
+    else: true
+  )
+
+  canTranslateOriginMediaItem: _if(
+    condition: $translateDefaultLanguageOnly,
+    then: $__originMediaItemHasDefaultLanguage,
+    else: $__canTranslateOriginMediaItemFromSpecificLanguage
+  )
+
+  executeTranslation: _and(values: [
+    $__hasTranslationMediaItems,
+    $__canTranslateOriginMediaItem
+  ])
+    @export(as: "executeTranslation")
+}
+
+query TranslateData(
+  $languageMapping: JSONObject! = {}
+)
+  @depends(on: "FetchData")
+  @include(if: $executeTranslation)
+{  
+  translatedData: _echo(value: $dataToTranslate)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "mediaItemID"
+      affectDirectivesUnderPos: [1, 2, 3, 4]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $translationMediaItemLanguages,
+          by: { key: $mediaItemID }
+        },
+        passOnwardsAs: "toLanguageLocale"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageLocaleCodes,
+          by: { key: $toLanguageLocale }
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $languageMapping,
+          by: { key: $toLanguage }
+          failIfNonExistingKeyOrPath: false
+          valueWhenNonExistingKeyOrPath: $toLanguage
+        },
+        passOnwardsAs: "toLanguage"
+      )
+      @underEachJSONObjectProperty
+        @strTranslate(
+          from: $fromLanguage,
+          to: $toLanguage
+        )
+    @export(as: "translatedData")
+}
+
+query GenerateMutationInputs(
+  $updateSlug: Boolean! = false
+)
+  @depends(on: "TranslateData")
+  @include(if: $executeTranslation)
+{  
+  mediaItemInputObject: _echo(value: $translatedData)
+    @underEachJSONObjectProperty(
+      passKeyOnwardsAs: "mediaItemID"
+      passValueOnwardsAs: "mediaItemTranslatedData"
+      affectDirectivesUnderPos: [1, 2, 3, 4, 5, 6]
+    )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mediaItemTranslatedData,
+          by: {
+            key: "title",
+          }
+        },
+        passOnwardsAs: "mediaItemTranslatedTitle"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mediaItemTranslatedData,
+          by: {
+            key: "description",
+          }
+        },
+        passOnwardsAs: "mediaItemTranslatedDescription"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mediaItemTranslatedData,
+          by: {
+            key: "caption",
+          }
+        },
+        passOnwardsAs: "mediaItemTranslatedCaption"
+      )
+      @applyField(
+        name: "_objectProperty",
+        arguments: {
+          object: $mediaItemTranslatedData,
+          by: {
+            key: "altText",
+          }
+        },
+        passOnwardsAs: "mediaItemTranslatedAltText"
+      )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            id: $mediaItemID
+            title: $mediaItemTranslatedTitle
+            description: $mediaItemTranslatedDescription
+            caption: $mediaItemTranslatedCaption
+            altText: $mediaItemTranslatedAltText
+          }
+        },
+        passOnwardsAs: "mediaItemInput"
+        setResultInResponse: true
+      )
+      @if(condition: $updateSlug)
+        @applyField(
+          name: "_objectAddEntry",
+          arguments: {
+            object: $mediaItemInput
+            key: "slug"
+            value: $mediaItemTranslatedTitle
+          },
+          setResultInResponse: true
+        )
+    @export(as: "mediaItemInputObject")
+}
+
+query FormatMutationInputs
+  @depends(on: "GenerateMutationInputs")
+  @include(if: $executeTranslation)
+{  
+  mediaItemInputs: _objectValues(object: $mediaItemInputObject)
+    @export(as: "mediaItemInputs")
+}
+
+mutation TranslateMediaItems
+  @depends(on: "FormatMutationInputs")
+  @include(if: $executeTranslation)
+{
+  updateMediaItems(inputs: $mediaItemInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    mediaItem {
+      id
+      title
+      description
+      caption
+      altText
+      slug
+    }
+  }
+}

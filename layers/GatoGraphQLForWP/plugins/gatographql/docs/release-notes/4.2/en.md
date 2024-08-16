@@ -4,13 +4,15 @@
 
 - Validate `assign_terms` capability on `setCategory` and `setTag` mutations ([#2772](https://github.com/GatoGraphQL/GatoGraphQL/pull/2772))
 - Added field `Media.parentCustomPost` ([#2788](https://github.com/GatoGraphQL/GatoGraphQL/pull/2788))
-- Added predefined persisted queries: ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
-  - Create missing translation categories for Polylang
-  - Create missing translation tags for Polylang
-  - Translate categories for Polylang
-  - Translate tags for Polylang
-  - Translate categories for MultilingualPress
-  - Translate tags for MultilingualPress
+- Added predefined persisted queries:
+  - Create missing translation categories for Polylang ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
+  - Create missing translation tags for Polylang ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
+  - Translate categories for Polylang ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
+  - Translate tags for Polylang ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
+  - Translate categories for MultilingualPress ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
+  - Translate tags for MultilingualPress ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
+  - Create missing translation media for Polylang ([#2789](https://github.com/GatoGraphQL/GatoGraphQL/pull/2789))
+  - Translate media for Polylang ([#2789](https://github.com/GatoGraphQL/GatoGraphQL/pull/2789))
 - Added translation language mapping to persisted queries ([#2775](https://github.com/GatoGraphQL/GatoGraphQL/pull/2775))
 
 ### Added mutations for categories ([#2764](https://github.com/GatoGraphQL/GatoGraphQL/pull/2764))
@@ -330,6 +332,8 @@ mutation {
 ```
 
 ## [PRO] Improvements
+
+- [Automation] Added automation rule: "Polylang: When creating a media item, translate it to all languages"
 
 ### Define the Polylang language on tag and category mutations
 

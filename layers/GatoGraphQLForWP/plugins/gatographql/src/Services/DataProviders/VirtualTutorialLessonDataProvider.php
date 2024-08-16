@@ -263,6 +263,26 @@ class VirtualTutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
+            VirtualTutorialLessons::TRANSLATING_MEDIA_FOR_POLYLANG => [
+                \__('Translating a media item to a different language, with integration for Polylang', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::GOOGLE_TRANSLATE,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
+            VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_MEDIA_FOR_POLYLANG => [
+                \__('Creating missing translation media items for Polylang', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_ON_FIELD,
+                    ExtensionModuleResolver::FIELD_RESPONSE_REMOVAL,
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::FIELD_VALUE_ITERATION_AND_MANIPULATION,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
             VirtualTutorialLessons::TRANSLATING_CATEGORIES_FOR_MULTILINGUALPRESS => [
                 \__('Translating a category to a different language, with integration for MultilingualPress', 'gatographql'),
                 [
