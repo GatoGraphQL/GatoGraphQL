@@ -38,10 +38,16 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?MediaObjectTypeResolver $mediaObjectTypeResolver = null;
     private ?CreateMediaItemMutationResolver $createMediaItemMutationResolver = null;
     private ?CreateMediaItemBulkOperationMutationResolver $createMediaItemBulkOperationMutationResolver = null;
+    private ?UpdateMediaItemMutationResolver $updateMediaItemMutationResolver = null;
+    private ?UpdateMediaItemBulkOperationMutationResolver $updateMediaItemBulkOperationMutationResolver = null;
     private ?RootCreateMediaItemInputObjectTypeResolver $rootCreateMediaItemInputObjectTypeResolver = null;
     private ?RootCreateMediaItemMutationPayloadObjectTypeResolver $rootCreateMediaItemMutationPayloadObjectTypeResolver = null;
     private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
     private ?PayloadableCreateMediaItemBulkOperationMutationResolver $payloadableCreateMediaItemBulkOperationMutationResolver = null;
+    private ?RootUpdateMediaItemInputObjectTypeResolver $rootUpdateMediaItemInputObjectTypeResolver = null;
+    private ?RootUpdateMediaItemMutationPayloadObjectTypeResolver $rootUpdateMediaItemMutationPayloadObjectTypeResolver = null;
+    private ?PayloadableUpdateMediaItemMutationResolver $payloadableUpdateMediaItemMutationResolver = null;
+    private ?PayloadableUpdateMediaItemBulkOperationMutationResolver $payloadableUpdateMediaItemBulkOperationMutationResolver = null;
     private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
@@ -82,6 +88,32 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->createMediaItemBulkOperationMutationResolver = $createMediaItemBulkOperationMutationResolver;
         }
         return $this->createMediaItemBulkOperationMutationResolver;
+    }
+    final public function setUpdateMediaItemMutationResolver(UpdateMediaItemMutationResolver $updateMediaItemMutationResolver): void
+    {
+        $this->updateMediaItemMutationResolver = $updateMediaItemMutationResolver;
+    }
+    final protected function getUpdateMediaItemMutationResolver(): UpdateMediaItemMutationResolver
+    {
+        if ($this->updateMediaItemMutationResolver === null) {
+            /** @var UpdateMediaItemMutationResolver */
+            $updateMediaItemMutationResolver = $this->instanceManager->getInstance(UpdateMediaItemMutationResolver::class);
+            $this->updateMediaItemMutationResolver = $updateMediaItemMutationResolver;
+        }
+        return $this->updateMediaItemMutationResolver;
+    }
+    final public function setUpdateMediaItemBulkOperationMutationResolver(UpdateMediaItemBulkOperationMutationResolver $updateMediaItemBulkOperationMutationResolver): void
+    {
+        $this->updateMediaItemBulkOperationMutationResolver = $updateMediaItemBulkOperationMutationResolver;
+    }
+    final protected function getUpdateMediaItemBulkOperationMutationResolver(): UpdateMediaItemBulkOperationMutationResolver
+    {
+        if ($this->updateMediaItemBulkOperationMutationResolver === null) {
+            /** @var UpdateMediaItemBulkOperationMutationResolver */
+            $updateMediaItemBulkOperationMutationResolver = $this->instanceManager->getInstance(UpdateMediaItemBulkOperationMutationResolver::class);
+            $this->updateMediaItemBulkOperationMutationResolver = $updateMediaItemBulkOperationMutationResolver;
+        }
+        return $this->updateMediaItemBulkOperationMutationResolver;
     }
     final public function setRootCreateMediaItemInputObjectTypeResolver(RootCreateMediaItemInputObjectTypeResolver $rootCreateMediaItemInputObjectTypeResolver): void
     {
@@ -134,6 +166,58 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableCreateMediaItemBulkOperationMutationResolver = $payloadableCreateMediaItemBulkOperationMutationResolver;
         }
         return $this->payloadableCreateMediaItemBulkOperationMutationResolver;
+    }
+    final public function setRootUpdateMediaItemInputObjectTypeResolver(RootUpdateMediaItemInputObjectTypeResolver $rootUpdateMediaItemInputObjectTypeResolver): void
+    {
+        $this->rootUpdateMediaItemInputObjectTypeResolver = $rootUpdateMediaItemInputObjectTypeResolver;
+    }
+    final protected function getRootUpdateMediaItemInputObjectTypeResolver(): RootUpdateMediaItemInputObjectTypeResolver
+    {
+        if ($this->rootUpdateMediaItemInputObjectTypeResolver === null) {
+            /** @var RootUpdateMediaItemInputObjectTypeResolver */
+            $rootUpdateMediaItemInputObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateMediaItemInputObjectTypeResolver::class);
+            $this->rootUpdateMediaItemInputObjectTypeResolver = $rootUpdateMediaItemInputObjectTypeResolver;
+        }
+        return $this->rootUpdateMediaItemInputObjectTypeResolver;
+    }
+    final public function setRootUpdateMediaItemMutationPayloadObjectTypeResolver(RootUpdateMediaItemMutationPayloadObjectTypeResolver $rootUpdateMediaItemMutationPayloadObjectTypeResolver): void
+    {
+        $this->rootUpdateMediaItemMutationPayloadObjectTypeResolver = $rootUpdateMediaItemMutationPayloadObjectTypeResolver;
+    }
+    final protected function getRootUpdateMediaItemMutationPayloadObjectTypeResolver(): RootUpdateMediaItemMutationPayloadObjectTypeResolver
+    {
+        if ($this->rootUpdateMediaItemMutationPayloadObjectTypeResolver === null) {
+            /** @var RootUpdateMediaItemMutationPayloadObjectTypeResolver */
+            $rootUpdateMediaItemMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(RootUpdateMediaItemMutationPayloadObjectTypeResolver::class);
+            $this->rootUpdateMediaItemMutationPayloadObjectTypeResolver = $rootUpdateMediaItemMutationPayloadObjectTypeResolver;
+        }
+        return $this->rootUpdateMediaItemMutationPayloadObjectTypeResolver;
+    }
+    final public function setPayloadableUpdateMediaItemMutationResolver(PayloadableUpdateMediaItemMutationResolver $payloadableUpdateMediaItemMutationResolver): void
+    {
+        $this->payloadableUpdateMediaItemMutationResolver = $payloadableUpdateMediaItemMutationResolver;
+    }
+    final protected function getPayloadableUpdateMediaItemMutationResolver(): PayloadableUpdateMediaItemMutationResolver
+    {
+        if ($this->payloadableUpdateMediaItemMutationResolver === null) {
+            /** @var PayloadableUpdateMediaItemMutationResolver */
+            $payloadableUpdateMediaItemMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateMediaItemMutationResolver::class);
+            $this->payloadableUpdateMediaItemMutationResolver = $payloadableUpdateMediaItemMutationResolver;
+        }
+        return $this->payloadableUpdateMediaItemMutationResolver;
+    }
+    final public function setPayloadableUpdateMediaItemBulkOperationMutationResolver(PayloadableUpdateMediaItemBulkOperationMutationResolver $payloadableUpdateMediaItemBulkOperationMutationResolver): void
+    {
+        $this->payloadableUpdateMediaItemBulkOperationMutationResolver = $payloadableUpdateMediaItemBulkOperationMutationResolver;
+    }
+    final protected function getPayloadableUpdateMediaItemBulkOperationMutationResolver(): PayloadableUpdateMediaItemBulkOperationMutationResolver
+    {
+        if ($this->payloadableUpdateMediaItemBulkOperationMutationResolver === null) {
+            /** @var PayloadableUpdateMediaItemBulkOperationMutationResolver */
+            $payloadableUpdateMediaItemBulkOperationMutationResolver = $this->instanceManager->getInstance(PayloadableUpdateMediaItemBulkOperationMutationResolver::class);
+            $this->payloadableUpdateMediaItemBulkOperationMutationResolver = $payloadableUpdateMediaItemBulkOperationMutationResolver;
+        }
+        return $this->payloadableUpdateMediaItemBulkOperationMutationResolver;
     }
     final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
     {
