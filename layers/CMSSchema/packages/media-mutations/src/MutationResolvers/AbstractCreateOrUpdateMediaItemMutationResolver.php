@@ -215,7 +215,7 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
 
         // Allow components to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_CREATE_MEDIA_ITEM,
+            HookNames::VALIDATE_CREATE_OR_UPDATE_MEDIA_ITEM,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -233,7 +233,7 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
 
     protected function additionals(string|int $mediaItemID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction(HookNames::CREATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
+        App::doAction(HookNames::CREATE_OR_UPDATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
     }
 
     /**
@@ -252,7 +252,7 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
         ];
 
         // Inject custom post ID, etc
-        $mediaItemData = App::applyFilters(HookNames::GET_CREATE_MEDIA_ITEM_DATA, $mediaItemData, $fieldDataAccessor);
+        $mediaItemData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_MEDIA_ITEM_DATA, $mediaItemData, $fieldDataAccessor);
 
         return $mediaItemData;
     }
