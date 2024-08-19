@@ -41,10 +41,12 @@ trait MediaItemCRUDMutationResolverTrait
 
     protected function validateMediaItemBySlugExists(
         string $mediaItemSlug,
+        string $fieldInputName,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (!$this->getMediaTypeAPI()->mediaItemBySlugExists($mediaItemSlug)) {
+            $field = $fieldDataAccessor->getField();
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -54,7 +56,7 @@ trait MediaItemCRUDMutationResolverTrait
                             $mediaItemSlug,
                         ]
                     ),
-                    $fieldDataAccessor->getField(),
+                    $field->getArgument($fieldInputName) ?? $field,
                 )
             );
         }

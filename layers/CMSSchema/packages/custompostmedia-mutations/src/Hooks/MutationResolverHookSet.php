@@ -91,7 +91,7 @@ class MutationResolverHookSet extends AbstractHookSet
             $featuredImageID = $featuredImageBy->{InputProperties::ID};
             $this->validateMediaItemByIDExists(
                 $featuredImageID,
-                InputProperties::ID,
+                MutationInputProperties::FEATUREDIMAGE_BY,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -100,6 +100,7 @@ class MutationResolverHookSet extends AbstractHookSet
             $featuredImageSlug = $featuredImageBy->{InputProperties::SLUG};
             $this->validateMediaItemBySlugExists(
                 $featuredImageSlug,
+                MutationInputProperties::FEATUREDIMAGE_BY,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
