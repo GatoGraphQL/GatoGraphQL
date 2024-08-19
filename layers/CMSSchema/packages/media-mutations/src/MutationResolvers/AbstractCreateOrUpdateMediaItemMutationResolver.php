@@ -171,11 +171,9 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                         $fieldDataAccessor->getField(),
                     )
                 );
-                return;
             }
-            
-            // Validate the logged-in user has the capability to upload files for other people
-            if ($authorID !== null && $authorID !== $currentUserID) {
+            elseif ($authorID !== null && $authorID !== $currentUserID) {
+                // Validate the logged-in user has the capability to upload files for other people
                 $uploadFilesForOtherUsersCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY);
                 if (
                     !$this->getUserRoleTypeAPI()->userCan(
@@ -192,7 +190,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                             $fieldDataAccessor->getField(),
                         )
                     );
-                    return;
                 }
             }
 
