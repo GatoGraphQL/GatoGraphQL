@@ -34,7 +34,7 @@ trait PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait
             ] => new FeaturedImageIsNotSupportedByCustomPostTypeErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            default => $this->createMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
+            default => $this->createOrUpdateMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback,
             ) ?? $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback
