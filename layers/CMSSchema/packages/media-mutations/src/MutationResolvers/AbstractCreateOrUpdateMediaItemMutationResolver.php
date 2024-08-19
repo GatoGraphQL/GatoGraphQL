@@ -267,6 +267,10 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             'mimeType' => $fieldDataAccessor->getValue(MutationInputProperties::MIME_TYPE),
         ];
 
+        if ($this->addMediaItemInputField()) {
+            $mediaItemData['id'] = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        }
+
         // Inject custom post ID, etc
         $mediaItemData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_MEDIA_ITEM_DATA, $mediaItemData, $fieldDataAccessor);
 

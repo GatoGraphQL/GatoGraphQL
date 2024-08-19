@@ -357,6 +357,11 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     protected function convertMediaItemCreationArgs(array $mediaItemData): array
     {
+        if (isset($mediaItemData['id'])) {
+            $mediaItemID = $mediaItemData['id'];
+            unset($mediaItemData['id']);
+            $mediaItemData['ID'] = $mediaItemID;
+        }
         if (isset($mediaItemData['authorID'])) {
             $mediaItemData['post_author'] = $mediaItemData['authorID'];
             unset($mediaItemData['authorID']);
