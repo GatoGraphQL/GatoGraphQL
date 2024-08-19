@@ -281,6 +281,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         if (
             in_array($fieldName, [
             'createMediaItems',
+            'updateMediaItems',
             ])
         ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
