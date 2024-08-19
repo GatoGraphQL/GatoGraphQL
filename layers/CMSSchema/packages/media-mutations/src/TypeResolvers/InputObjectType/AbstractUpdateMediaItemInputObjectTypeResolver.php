@@ -8,11 +8,11 @@ use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractCreateOrUpdateMediaItemInputObjectTypeResolver implements CreateMediaItemInputObjectTypeResolverInterface
+abstract class AbstractUpdateMediaItemInputObjectTypeResolver extends AbstractCreateOrUpdateMediaItemInputObjectTypeResolver implements CreateMediaItemInputObjectTypeResolverInterface
 {
     protected function canUploadAttachment(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -21,7 +21,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractCr
     public function getInputFieldNameTypeResolvers(): array
     {
         return App::applyFilters(
-            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            HookNames::UPDATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
             parent::getInputFieldNameTypeResolvers(),
             $this,
         );
@@ -30,7 +30,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractCr
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return App::applyFilters(
-            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
+            HookNames::UPDATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
             parent::getInputFieldDescription($inputFieldName),
             $inputFieldName,
             $this,
@@ -40,7 +40,7 @@ abstract class AbstractCreateMediaItemInputObjectTypeResolver extends AbstractCr
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         return App::applyFilters(
-            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_TYPE_MODIFIERS,
+            HookNames::UPDATE_MEDIA_ITEM_INPUT_FIELD_TYPE_MODIFIERS,
             parent::getInputFieldTypeModifiers($inputFieldName),
             $inputFieldName,
             $this,
