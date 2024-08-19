@@ -405,6 +405,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $fieldName = $fieldDataAccessor->getFieldName();
         switch ($fieldName) {
             case 'createMediaItemMutationPayloadObjects':
+            case 'updateMediaItemMutationPayloadObjects':
                 return $this->resolveMutationPayloadObjectsValue(
                     $objectTypeResolver,
                     $fieldDataAccessor,
