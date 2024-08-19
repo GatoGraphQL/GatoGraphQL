@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Validate `assign_terms` capability on `setCategory` and `setTag` mutations (#2772)
 - Create a media item using the attachment from an existing media item (#2787)
 - Added field `Media.parentCustomPost` (#2788)
+- Added mutation `Root.updateMediaItem` (#2790)
 - Added predefined persisted queries:
   - [PRO] Create missing translation categories for Polylang (#2774)
   - [PRO] Translate categories for Polylang (#2774)
