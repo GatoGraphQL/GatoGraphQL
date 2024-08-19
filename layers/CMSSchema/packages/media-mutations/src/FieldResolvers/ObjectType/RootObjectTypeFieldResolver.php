@@ -15,6 +15,8 @@ use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\RootCreateMediaItemMuta
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\BulkOperationDecoratorObjectTypeFieldResolverTrait;
 use PoPCMSSchema\SchemaCommons\FieldResolvers\ObjectType\MutationPayloadObjectsObjectTypeFieldResolverTrait;
+use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
+use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
@@ -40,6 +42,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     private ?RootCreateMediaItemMutationPayloadObjectTypeResolver $rootCreateMediaItemMutationPayloadObjectTypeResolver = null;
     private ?PayloadableCreateMediaItemMutationResolver $payloadableCreateMediaItemMutationResolver = null;
     private ?PayloadableCreateMediaItemBulkOperationMutationResolver $payloadableCreateMediaItemBulkOperationMutationResolver = null;
+    private ?UserLoggedInCheckpoint $userLoggedInCheckpoint = null;
 
     final public function setMediaObjectTypeResolver(MediaObjectTypeResolver $mediaObjectTypeResolver): void
     {
@@ -131,6 +134,19 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->payloadableCreateMediaItemBulkOperationMutationResolver = $payloadableCreateMediaItemBulkOperationMutationResolver;
         }
         return $this->payloadableCreateMediaItemBulkOperationMutationResolver;
+    }
+    final public function setUserLoggedInCheckpoint(UserLoggedInCheckpoint $userLoggedInCheckpoint): void
+    {
+        $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+    }
+    final protected function getUserLoggedInCheckpoint(): UserLoggedInCheckpoint
+    {
+        if ($this->userLoggedInCheckpoint === null) {
+            /** @var UserLoggedInCheckpoint */
+            $userLoggedInCheckpoint = $this->instanceManager->getInstance(UserLoggedInCheckpoint::class);
+            $this->userLoggedInCheckpoint = $userLoggedInCheckpoint;
+        }
+        return $this->userLoggedInCheckpoint;
     }
 
     /**
@@ -340,6 +356,44 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
+    }
+
+    /**
+     * @return CheckpointInterface[]
+     */
+    public function getValidationCheckpoints(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        object $object,
+    ): array {
+        $validationCheckpoints = parent::getValidationCheckpoints(
+            $objectTypeResolver,
+            $fieldDataAccessor,
+            $object,
+        );
+
+        /**
+         * For Payloadable: The "User Logged-in" checkpoint validation is not added,
+         * instead this validation is executed inside the mutation, so the error
+         * shows up in the Payload
+         *
+         * @var ModuleConfiguration
+         */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $usePayloadableMediaMutations = $moduleConfiguration->usePayloadableMediaMutations();
+        if ($usePayloadableMediaMutations) {
+            return $validationCheckpoints;
+        }
+
+        switch ($fieldDataAccessor->getFieldName()) {
+            case 'createMediaItem':
+            case 'createMediaItems':
+            case 'updateMediaItem':
+            case 'updateMediaItems':
+                $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
+                break;
+        }
+        return $validationCheckpoints;
     }
 
     public function resolveValue(
