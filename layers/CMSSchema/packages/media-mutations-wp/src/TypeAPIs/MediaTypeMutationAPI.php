@@ -411,7 +411,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
     }
 
-    public function canUserEditAttachments(
+    public function canUserEditMediaItems(
         string|int $userID
     ): bool {
         $attachmentObject = get_post_type_object('attachment');
@@ -420,5 +420,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         return isset($attachmentObject->cap->edit_posts) && user_can((int)$userID, $attachmentObject->cap->edit_posts);
+    }
+
+    public function canUserEditMediaItem(
+        string|int $userID,
+        string|int $mediaItemID,
+    ): bool {
+        return user_can((int)$userID, 'edit_post', $mediaItemID);
     }
 }

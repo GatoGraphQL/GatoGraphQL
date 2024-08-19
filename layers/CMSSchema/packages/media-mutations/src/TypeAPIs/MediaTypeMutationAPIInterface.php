@@ -43,7 +43,11 @@ interface MediaTypeMutationAPIInterface
         string|int $mediaItemID,
         array $mediaItemData,
     ): void;
-    public function canUserEditAttachments(
-        string|int $userID
+    public function canUserEditMediaItems(
+        string|int $userID,
+    ): bool;
+    public function canUserEditMediaItem(
+        string|int $userID,
+        string|int $mediaItemID,
     ): bool;
 }
