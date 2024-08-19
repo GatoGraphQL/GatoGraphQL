@@ -18,10 +18,12 @@ trait MediaItemCRUDMutationResolverTrait
 {
     protected function validateMediaItemByIDExists(
         string|int $mediaItemID,
+        string $fieldInputName,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (!$this->getMediaTypeAPI()->mediaItemByIDExists($mediaItemID)) {
+            $field = $fieldDataAccessor->getField();
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
@@ -31,7 +33,7 @@ trait MediaItemCRUDMutationResolverTrait
                             $mediaItemID,
                         ]
                     ),
-                    $fieldDataAccessor->getField(),
+                    $field->getArgument($fieldInputName) ?? $field,
                 )
             );
         }

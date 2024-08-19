@@ -104,6 +104,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             $mediaItemID = $mediaItemBy->{InputProperties::ID};
             $this->validateMediaItemByIDExists(
                 $mediaItemID,
+                InputProperties::ID,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );

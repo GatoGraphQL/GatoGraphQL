@@ -191,6 +191,7 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
             $this->validateMediaItemByIDExists(
                 $mediaItemID,
+                InputProperties::ID,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -209,6 +210,7 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                     $mediaItemID = $mediaItemBy->{InputProperties::ID};
                     $this->validateMediaItemByIDExists(
                         $mediaItemID,
+                        InputProperties::ID,
                         $fieldDataAccessor,
                         $objectTypeFieldResolutionFeedbackStore,
                     );
