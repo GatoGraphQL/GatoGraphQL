@@ -101,23 +101,23 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            HookNames::VALIDATE_CREATE_MEDIA_ITEM,
+            HookNames::VALIDATE_CREATE_OR_UPDATE_MEDIA_ITEM,
             $this->maybeValidateCustomPost(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::GET_CREATE_MEDIA_ITEM_DATA,
+            HookNames::GET_CREATE_OR_UPDATE_MEDIA_ITEM_DATA,
             $this->addCreateMediaItemData(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            HookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $this->getInputFieldNameTypeResolvers(...)
         );
         App::addFilter(
-            HookNames::CREATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
+            HookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
             $this->getInputFieldDescription(...),
             10,
             2
