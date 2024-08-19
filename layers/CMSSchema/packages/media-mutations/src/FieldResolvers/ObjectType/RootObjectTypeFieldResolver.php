@@ -150,9 +150,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         /** @var EngineModuleConfiguration */
         $engineModuleConfiguration = App::getModule(EngineModule::class)->getConfiguration();
-        if ($engineModuleConfiguration->disableRedundantRootTypeMutationFields()) {
-            return [];
-        }
+        $disableRedundantRootTypeMutationFields = $engineModuleConfiguration->disableRedundantRootTypeMutationFields();
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         $addFieldsToQueryPayloadableMediaMutations = $moduleConfiguration->addFieldsToQueryPayloadableMediaMutations();
@@ -161,8 +159,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'createMediaItem',
                 'createMediaItems',
             ],
+            !$disableRedundantRootTypeMutationFields ? [
+                'updateMediaItem',
+                'updateMediaItems',
+            ] : [],
             $addFieldsToQueryPayloadableMediaMutations ? [
                 'createMediaItemMutationPayloadObjects',
+            ] : [],
+            $addFieldsToQueryPayloadableMediaMutations && !$disableRedundantRootTypeMutationFields ? [
+                'updateMediaItemMutationPayloadObjects',
             ] : [],
         );
     }
