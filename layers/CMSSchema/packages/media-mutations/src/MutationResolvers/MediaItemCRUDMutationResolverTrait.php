@@ -6,8 +6,10 @@ namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
+use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -89,4 +91,28 @@ trait MediaItemCRUDMutationResolverTrait
     }
 
     abstract protected function getMediaTypeAPI(): MediaTypeAPIInterface;
+
+    protected function validateCanLoggedInUserEditMediaItem(
+        string|int $mediaItemID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $userID = App::getState('current-user-id');
+        if (!$this->getMediaTypeMutationAPI()->canUserEditMediaItem($userID, $mediaItemID)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E8,
+                        [
+                            $mediaItemID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
+
+    abstract protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface;
 }
