@@ -150,4 +150,22 @@ trait MediaItemCRUDMutationResolverTrait
     }
 
     abstract protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface;
+
+    protected function validateCanLoggedInUserEditMediaItems(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $userID = App::getState('current-user-id');
+        if (!$this->getMediaTypeMutationAPI()->canUserEditMediaItems($userID)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E9,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
 }
