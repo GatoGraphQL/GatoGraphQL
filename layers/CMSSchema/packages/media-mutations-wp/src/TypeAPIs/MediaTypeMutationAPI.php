@@ -410,4 +410,15 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             \update_post_meta((int) $mediaItemID, '_wp_attachment_image_alt', $altText);
         }
     }
+
+    public function canUserEditAttachments(
+        string|int $userID
+    ): bool {
+        $attachmentObject = get_post_type_object('attachment');
+        if ($attachmentObject === null) {
+            return false;
+        }
+
+        return isset($attachmentObject->cap->edit_posts) && user_can((int)$userID, $attachmentObject->cap->edit_posts);
+    }
 }
