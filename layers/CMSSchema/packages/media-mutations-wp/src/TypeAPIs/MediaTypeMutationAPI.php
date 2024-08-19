@@ -99,6 +99,30 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
 
     /**
      * @throws MediaItemCRUDMutationException In case of error
+     * @param array<string,mixed> $mediaItemData
+     */
+    public function updateMediaItem(
+        string|int $mediaItemID,
+        array $mediaItemData,
+    ): void {
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
+        
+        $mediaItemIDOrError = wp_update_post(
+            $mediaItemData,
+            true
+        );
+
+        if (is_wp_error($mediaItemIDOrError)) {
+            /** @var WP_Error */
+            $wpError = $mediaItemIDOrError;
+            throw new MediaItemCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+    }
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
      * @param string|null $filename Override the filename from the URL, or pass `null` to use filename from URL
      * @param array<string,mixed> $mediaItemData
      */
@@ -356,6 +380,10 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         if (isset($mediaItemData['mimeType'])) {
             $mediaItemData['post_mime_type'] = $mediaItemData['mimeType'];
             unset($mediaItemData['mimeType']);
+        }
+        if (isset($mediaItemData['customPostID'])) {
+            $mediaItemData['post_parent'] = $mediaItemData['customPostID'];
+            unset($mediaItemData['customPostID']);
         }
         return $mediaItemData;
     }
