@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\UnionType;
 
-use PoPSchema\SchemaCommons\TypeResolvers\UnionType\AbstractErrorPayloadUnionTypeResolver;
-
-abstract class AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractErrorPayloadUnionTypeResolver
+abstract class AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractCreateOrUpdateMediaItemMutationErrorPayloadUnionTypeResolver
 {
 }
