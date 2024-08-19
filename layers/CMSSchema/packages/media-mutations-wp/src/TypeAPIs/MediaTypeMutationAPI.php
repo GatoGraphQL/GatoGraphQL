@@ -107,9 +107,9 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     ): void {
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
         $mediaItemData['ID'] = $mediaItemID;
-        
+
         $mediaItemIDOrError = wp_update_post(
-            $mediaItemData,
+            wp_slash($mediaItemData),
             true
         );
 
