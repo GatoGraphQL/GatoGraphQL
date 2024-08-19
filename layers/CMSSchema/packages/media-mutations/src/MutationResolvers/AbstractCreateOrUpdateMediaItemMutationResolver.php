@@ -107,6 +107,18 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
     ): void {
         $field = $fieldDataAccessor->getField();
 
+        if ($this->addMediaItemInputField()) {
+            // If updating a media item, check that it exists
+            /** @var string|int */
+            $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+            $this->validateMediaItemByIDExists(
+                $mediaItemID,
+                InputProperties::ID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
         /** @var int|string|null */
         $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
 
@@ -181,18 +193,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                     return;
                 }
             }
-        }
-
-        if ($this->addMediaItemInputField()) {
-            // If updating a media item, check that it exists
-            /** @var string|int */
-            $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-            $this->validateMediaItemByIDExists(
-                $mediaItemID,
-                InputProperties::ID,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
         }
 
         if ($this->canUploadAttachment()) {
