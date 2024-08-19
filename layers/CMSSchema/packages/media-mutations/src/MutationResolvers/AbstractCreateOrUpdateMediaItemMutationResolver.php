@@ -6,7 +6,6 @@ namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\MediaMutations\LooseContracts\LooseContractSet;
 use PoPCMSSchema\MediaMutations\MutationResolvers\MediaItemCRUDMutationResolverTrait;
@@ -23,7 +22,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\App;
-use PoP\Root\Exception\AbstractException;
 use stdClass;
 
 abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractMutationResolver
@@ -275,84 +273,5 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
         $mediaItemData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_MEDIA_ITEM_DATA, $mediaItemData, $fieldDataAccessor);
 
         return $mediaItemData;
-    }
-
-    /**
-     * @throws MediaItemCRUDMutationException In case of error
-     * @param array<string,mixed> $mediaItemData
-     */
-    protected function createMediaItem(
-        array $mediaItemData,
-        FieldDataAccessorInterface $fieldDataAccessor,
-    ): string|int|null {
-        /** @var stdClass */
-        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
-
-        if (isset($from->{MutationInputProperties::URL})) {
-            /** @var stdClass */
-            $url = $from->{MutationInputProperties::URL};
-            return $this->getMediaTypeMutationAPI()->createMediaItemFromURL(
-                $url->{MutationInputProperties::SOURCE},
-                $url->{MutationInputProperties::FILENAME},
-                $mediaItemData,
-            );
-        }
-
-        if (isset($from->{MutationInputProperties::MEDIAITEM_BY})) {
-            /** @var string|int|null */
-            $mediaItemID = null;
-            /** @var stdClass */
-            $mediaItemBy = $from->{MutationInputProperties::MEDIAITEM_BY};
-            if (isset($mediaItemBy->{InputProperties::ID})) {
-                $mediaItemID = $mediaItemBy->{InputProperties::ID};
-            } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
-                $mediaTypeAPI = $this->getMediaTypeAPI();
-                /** @var string */
-                $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
-                /** @var object */
-                $mediaItem = $mediaTypeAPI->getMediaItemBySlug($mediaItemSlug);
-                $mediaItemID = $mediaTypeAPI->getMediaItemID($mediaItem);
-            }
-            if ($mediaItemID === null) {
-                return null;
-            }
-            return $this->getMediaTypeMutationAPI()->createMediaItemFromExistingMediaItem(
-                $mediaItemID,
-                $mediaItemData,
-            );
-        }
-
-        /** @var stdClass */
-        $contents = $from->{MutationInputProperties::CONTENTS};
-
-        return $this->getMediaTypeMutationAPI()->createMediaItemFromContents(
-            $contents->{MutationInputProperties::BODY},
-            $contents->{MutationInputProperties::FILENAME},
-            $mediaItemData,
-        );
-    }
-
-    /**
-     * @throws AbstractException In case of error
-     */
-    public function executeMutation(
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): mixed {
-        $mediaItemData = $this->getMediaItemData($fieldDataAccessor);
-
-        $mediaItemID = $this->createMediaItem(
-            $mediaItemData,
-            $fieldDataAccessor,
-        );
-
-        if ($mediaItemID === null) {
-            return null;
-        }
-
-        // Allow for additional operations
-        $this->additionals($mediaItemID, $fieldDataAccessor);
-
-        return $mediaItemID;
     }
 }
