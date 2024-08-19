@@ -6,6 +6,7 @@ namespace PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers\AbstractMediaItemDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractUpdateMediaItemMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class MediaItemDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractMediaItemDoesNotExistErrorPayloadObjectTypeResolverPicker
@@ -17,6 +18,7 @@ class MediaItemDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends 
     {
         return [
             AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver::class,
+            AbstractUpdateMediaItemMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
