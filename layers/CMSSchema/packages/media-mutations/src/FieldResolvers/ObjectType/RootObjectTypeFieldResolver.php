@@ -333,7 +333,9 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
         return match ($fieldName) {
             'createMediaItem',
-            'createMediaItems'
+            'createMediaItems',
+            'updateMediaItem',
+            'updateMediaItems'
                 => $this->getMediaObjectTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
