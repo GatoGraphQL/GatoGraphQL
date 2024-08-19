@@ -134,27 +134,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             return;
         }
 
-        // Validate the user has the needed capability to upload files
-        $currentUserID = App::getState('current-user-id');
-        $uploadFilesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY);
-        if (
-            !$this->getUserRoleTypeAPI()->userCan(
-                $currentUserID,
-                $uploadFilesCapability
-            )
-        ) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E2,
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return;
-        }
-
         if ($authorID !== null) {
             // If providing the author, check that the user exists
             if ($this->getUserTypeAPI()->getUserByID($authorID) === null) {
@@ -171,9 +150,32 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                     )
                 );
             }
+        }
+
+        if ($this->canUploadAttachment()) {
+            // Validate the user has the needed capability to upload files
+            $currentUserID = App::getState('current-user-id');
+            $uploadFilesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY);
+            if (
+                !$this->getUserRoleTypeAPI()->userCan(
+                    $currentUserID,
+                    $uploadFilesCapability
+                )
+            ) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E2,
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
+                );
+                return;
+            }
             
             // Validate the logged-in user has the capability to upload files for other people
-            if ($authorID !== $currentUserID) {
+            if ($authorID !== null && $authorID !== $currentUserID) {
                 $uploadFilesForOtherUsersCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY);
                 if (
                     !$this->getUserRoleTypeAPI()->userCan(
@@ -193,9 +195,7 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                     return;
                 }
             }
-        }
 
-        if ($this->canUploadAttachment()) {
             // If providing an existing media item, check that it exists
             /** @var stdClass */
             $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
