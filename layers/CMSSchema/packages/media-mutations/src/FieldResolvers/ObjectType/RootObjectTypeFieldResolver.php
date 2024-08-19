@@ -251,6 +251,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         if (
             in_array($fieldName, [
             'createMediaItemMutationPayloadObjects',
+            'updateMediaItemMutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldArgTypeModifiers($fieldArgName)
@@ -260,6 +261,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         if (
             in_array($fieldName, [
             'createMediaItems',
+            'updateMediaItems',
             ])
         ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
@@ -267,7 +269,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         }
 
         return match ([$fieldName => $fieldArgName]) {
-            ['createMediaItem' => 'input']
+            ['createMediaItem' => 'input'],
+            ['updateMediaItem' => 'input']
                 => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
