@@ -68,7 +68,8 @@ class UpdateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int|null {
         /** @var string|int */
-        $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        $mediaItemID = $mediaItemData['id'];
+        unset($mediaItemData['id']);
 
         $this->getMediaTypeMutationAPI()->updateMediaItem(
             $mediaItemID,
