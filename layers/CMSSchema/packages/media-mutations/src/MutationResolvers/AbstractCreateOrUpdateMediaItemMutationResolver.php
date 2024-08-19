@@ -185,6 +185,17 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             }
         }
 
+        if ($this->addMediaItemInputField()) {
+            // If updating a media item, check that it exists
+            /** @var string|int */
+            $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+            $this->validateMediaItemByIDExists(
+                $mediaItemID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
         if ($this->canUploadAttachment()) {
             // If providing an existing media item, check that it exists
             /** @var stdClass */
@@ -220,6 +231,8 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             $objectTypeFieldResolutionFeedbackStore,
         );
     }
+
+    abstract protected function addMediaItemInputField(): bool;
 
     abstract protected function canUploadAttachment(): bool;
 

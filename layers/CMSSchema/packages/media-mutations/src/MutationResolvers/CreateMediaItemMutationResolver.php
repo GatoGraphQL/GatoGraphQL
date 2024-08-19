@@ -16,6 +16,11 @@ use stdClass;
 
 class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMutationResolver
 {
+    protected function addMediaItemInputField(): bool
+    {
+        return false;
+    }
+
     protected function canUploadAttachment(): bool
     {
         return true;

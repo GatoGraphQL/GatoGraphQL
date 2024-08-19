@@ -14,6 +14,11 @@ use PoP\Root\Exception\AbstractException;
 
 class UpdateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMutationResolver
 {
+    protected function addMediaItemInputField(): bool
+    {
+        return true;
+    }
+
     protected function canUploadAttachment(): bool
     {
         return false;
