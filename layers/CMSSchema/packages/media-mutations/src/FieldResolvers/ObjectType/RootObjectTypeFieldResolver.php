@@ -192,24 +192,35 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         $usePayloadableMediaMutations = $moduleConfiguration->usePayloadableMediaMutations();
         if (!$usePayloadableMediaMutations) {
             return match ($fieldName) {
-                'createMediaItem' => SchemaTypeModifiers::NONE,
-                'createMediaItems' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
-                default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+                'createMediaItem',
+                'updateMediaItem'
+                    => SchemaTypeModifiers::NONE,
+                'createMediaItems',
+                'updateMediaItems'
+                    => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
+                default
+                    => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
 
         if (
             in_array($fieldName, [
             'createMediaItemMutationPayloadObjects',
+            'updateMediaItemMutationPayloadObjects',
             ])
         ) {
             return $this->getMutationPayloadObjectsFieldTypeModifiers();
         }
 
         return match ($fieldName) {
-            'createMediaItem' => SchemaTypeModifiers::NON_NULLABLE,
-            'createMediaItems' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
+            'createMediaItem',
+            'updateMediaItem'
+                => SchemaTypeModifiers::NON_NULLABLE,
+            'createMediaItems',
+            'updateMediaItems'
+                => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
+            default
+                => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
