@@ -106,6 +106,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         array $mediaItemData,
     ): void {
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
+        $mediaItemData['ID'] = $mediaItemID;
         
         $mediaItemIDOrError = wp_update_post(
             $mediaItemData,
@@ -357,11 +358,6 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
      */
     protected function convertMediaItemCreationArgs(array $mediaItemData): array
     {
-        if (isset($mediaItemData['id'])) {
-            $mediaItemID = $mediaItemData['id'];
-            unset($mediaItemData['id']);
-            $mediaItemData['ID'] = $mediaItemID;
-        }
         if (isset($mediaItemData['authorID'])) {
             $mediaItemData['post_author'] = $mediaItemData['authorID'];
             unset($mediaItemData['authorID']);
