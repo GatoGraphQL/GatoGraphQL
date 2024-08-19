@@ -6,6 +6,6 @@ namespace PoPCMSSchema\MediaMutations\ObjectModels;
 
 use PoPSchema\SchemaCommons\ObjectModels\AbstractErrorPayload;
 
-final class UserHasNoPermissionToEditMediaItemErrorPayload extends AbstractErrorPayload
+final class LoggedInUserHasNoPermissionToEditMediaItemErrorPayload extends AbstractErrorPayload
 {
 }
