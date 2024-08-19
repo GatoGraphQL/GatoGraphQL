@@ -145,30 +145,8 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             return;
         }
 
-        // Validate the user has the needed capability to upload files for other people
-        if ($authorID !== null && $authorID !== $currentUserID) {
-            $uploadFilesForOtherUsersCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY);
-            if (
-                !$this->getUserRoleTypeAPI()->userCan(
-                    $currentUserID,
-                    $uploadFilesForOtherUsersCapability
-                )
-            ) {
-                $objectTypeFieldResolutionFeedbackStore->addError(
-                    new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E4,
-                        ),
-                        $fieldDataAccessor->getField(),
-                    )
-                );
-                return;
-            }
-        }
-
-        // If providing the author, check that the user exists
         if ($authorID !== null) {
+            // If providing the author, check that the user exists
             if ($this->getUserTypeAPI()->getUserByID($authorID) === null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
@@ -182,6 +160,28 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                         $field,
                     )
                 );
+            }
+            
+            // Validate the logged-in user has the capability to upload files for other people
+            if ($authorID !== $currentUserID) {
+                $uploadFilesForOtherUsersCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_FOR_OTHER_USERS_CAPABILITY);
+                if (
+                    !$this->getUserRoleTypeAPI()->userCan(
+                        $currentUserID,
+                        $uploadFilesForOtherUsersCapability
+                    )
+                ) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                MutationErrorFeedbackItemProvider::class,
+                                MutationErrorFeedbackItemProvider::E4,
+                            ),
+                            $fieldDataAccessor->getField(),
+                        )
+                    );
+                    return;
+                }
             }
         }
 
