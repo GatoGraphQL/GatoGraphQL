@@ -324,6 +324,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'createMediaItems',
                 'createMediaItemMutationPayloadObjects'
                     => $this->getRootCreateMediaItemMutationPayloadObjectTypeResolver(),
+                'updateMediaItem',
+                'updateMediaItems',
+                'updateMediaItemMutationPayloadObjects'
+                    => $this->getRootUpdateMediaItemMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
             };
         }
