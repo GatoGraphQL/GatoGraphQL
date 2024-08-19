@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\MutationResolvers\MediaItemCRUDMutationResolverTrait;
+use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\Constants\InputProperties;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -24,6 +25,7 @@ class MutationResolverHookSet extends AbstractHookSet
 
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
 
     final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
@@ -50,6 +52,19 @@ class MutationResolverHookSet extends AbstractHookSet
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
+    }
+    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
+    {
+        $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
+    }
+    final protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface
+    {
+        if ($this->mediaTypeMutationAPI === null) {
+            /** @var MediaTypeMutationAPIInterface */
+            $mediaTypeMutationAPI = $this->instanceManager->getInstance(MediaTypeMutationAPIInterface::class);
+            $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
+        }
+        return $this->mediaTypeMutationAPI;
     }
 
     protected function init(): void
@@ -176,7 +191,7 @@ class MutationResolverHookSet extends AbstractHookSet
         ErrorPayloadInterface $errorPayload,
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
-        return $this->createMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
+        return $this->createOrUpdateMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
             $objectTypeFieldResolutionFeedback,
         ) ?? $errorPayload;
     }

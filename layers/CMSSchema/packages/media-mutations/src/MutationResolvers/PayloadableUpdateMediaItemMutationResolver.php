@@ -6,12 +6,6 @@ namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
-use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToEditMediaItemErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
-use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoPSchema\SchemaCommons\ObjectModels\GenericErrorPayload;
@@ -79,53 +73,16 @@ class PayloadableUpdateMediaItemMutationResolver extends UpdateMediaItemMutation
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
         $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match (
-            [
-            $feedbackItemResolution->getFeedbackProviderServiceClass(),
-            $feedbackItemResolution->getCode()
-            ]
-        ) {
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E1,
-            ] => new UserIsNotLoggedInErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new UserHasNoPermissionToUploadFilesErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E4,
-            ] => new UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E8,
-            ] => new UserHasNoPermissionToEditMediaItemErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new UserDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            // Allow components to inject their own validations
-            default => App::applyFilters(
-                HookNames::ERROR_PAYLOAD,
-                $this->createMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
-                    $objectTypeFieldResolutionFeedback,
-                ) ?? new GenericErrorPayload(
-                    $feedbackItemResolution->getMessage(),
-                    $feedbackItemResolution->getNamespacedCode(),
-                ),
+        // Allow components to inject their own validations
+        return App::applyFilters(
+            HookNames::ERROR_PAYLOAD,
+            $this->createOrUpdateMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
                 $objectTypeFieldResolutionFeedback,
-            )
-        };
+            ) ?? new GenericErrorPayload(
+                $feedbackItemResolution->getMessage(),
+                $feedbackItemResolution->getNamespacedCode(),
+            ),
+            $objectTypeFieldResolutionFeedback,
+        );
     }
 }

@@ -4,17 +4,22 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
-use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
-use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
-use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToEditMediaItemErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
+use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
+use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 
 trait MediaItemCRUDMutationResolverTrait
 {
@@ -64,7 +69,7 @@ trait MediaItemCRUDMutationResolverTrait
         }
     }
 
-    public function createMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
+    public function createOrUpdateMediaItemErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ?ErrorPayloadInterface {
         $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
@@ -76,6 +81,30 @@ trait MediaItemCRUDMutationResolverTrait
         ) {
             [
                 MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E1,
+            ] => new UserIsNotLoggedInErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            ] => new UserHasNoPermissionToUploadFilesErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            ] => new UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new UserDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
             ] => new MediaItemDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
@@ -84,6 +113,12 @@ trait MediaItemCRUDMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E7,
             ] => new MediaItemDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E8,
+            ] => new UserHasNoPermissionToEditMediaItemErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => null,
