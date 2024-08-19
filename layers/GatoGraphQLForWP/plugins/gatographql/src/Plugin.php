@@ -42,6 +42,8 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use WP_Error;
 
+use function add_action;
+use function is_admin;
 use function wp_insert_post;
 
 class Plugin extends AbstractMainPlugin
@@ -93,7 +95,7 @@ class Plugin extends AbstractMainPlugin
     protected function showReleaseNotesInAdminNotice(): void
     {
         // Load the assets to open in a modal
-        \add_action('admin_enqueue_scripts', function (): void {
+        add_action('admin_enqueue_scripts', function (): void {
             /**
              * Hack to open the modal thickbox iframe with the documentation
              */
@@ -105,7 +107,7 @@ class Plugin extends AbstractMainPlugin
             );
         });
         // Add the admin notice
-        \add_action('admin_notices', function (): void {
+        add_action('admin_notices', function (): void {
             $instanceManager = InstanceManagerFacade::getInstance();
             $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
             /**
@@ -198,7 +200,7 @@ class Plugin extends AbstractMainPlugin
          *
          * For that, all the classes below have also been registered in system-services.yaml
          */
-        if (\is_admin()) {
+        if (is_admin()) {
             // Obtain these services from the SystemContainer
             $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
             /** @var MenuPageHelper */
@@ -237,7 +239,7 @@ class Plugin extends AbstractMainPlugin
          * Load the image width classes also within the Gutenberg editor,
          * to be used within the documentation modal windows.
          */
-        \add_action(
+        add_action(
             'enqueue_block_editor_assets',
             $this->enqueueImageWidthsAssets(...)
         );
