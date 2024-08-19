@@ -108,7 +108,7 @@ class MutationResolverHookSet extends AbstractHookSet
         );
         App::addFilter(
             HookNames::GET_CREATE_OR_UPDATE_MEDIA_ITEM_DATA,
-            $this->addCreateMediaItemData(...),
+            $this->addCreateOrUpdateMediaItemData(...),
             10,
             2
         );
@@ -168,7 +168,7 @@ class MutationResolverHookSet extends AbstractHookSet
      * @param array<string,mixed> $mediaItemData
      * @return array<string,mixed>
      */
-    public function addCreateMediaItemData(
+    public function addCreateOrUpdateMediaItemData(
         array $mediaItemData,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
