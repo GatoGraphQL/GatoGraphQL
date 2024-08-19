@@ -65,6 +65,9 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
     public function getInputFieldNameTypeResolvers(): array
     {
         $inputFieldNameTypeResolvers = array_merge(
+            $this->addMediaItemInputField() ? [
+                MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
+            ] : [],
             $this->canUploadAttachment() ? [
                 MutationInputProperties::FROM => $this->getCreateMediaItemFromOneofInputObjectTypeResolver(),
             ] : [],
@@ -89,11 +92,14 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
         return $inputFieldNameTypeResolvers;
     }
 
+    abstract protected function addMediaItemInputField(): bool;
+
     abstract protected function canUploadAttachment(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         $inputFieldDescription = match ($inputFieldName) {
+            MutationInputProperties::ID => $this->__('Media item ID', 'media-mutations'),
             MutationInputProperties::FROM => $this->__('Source for the file', 'media-mutations'),
             MutationInputProperties::AUTHOR_ID => $this->__('The ID of the author', 'media-mutations'),
             MutationInputProperties::TITLE => $this->__('Attachment title', 'media-mutations'),
@@ -119,6 +125,7 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
     public function getInputFieldTypeModifiers(string $inputFieldName): int
     {
         $inputFieldTypeModifiers = match ($inputFieldName) {
+            MutationInputProperties::ID => SchemaTypeModifiers::MANDATORY,
             MutationInputProperties::FROM => SchemaTypeModifiers::MANDATORY,
             default => parent::getInputFieldTypeModifiers($inputFieldName),
         };

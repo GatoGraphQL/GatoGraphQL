@@ -10,6 +10,11 @@ use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 abstract class AbstractUpdateMediaItemInputObjectTypeResolver extends AbstractCreateOrUpdateMediaItemInputObjectTypeResolver implements UpdateMediaItemInputObjectTypeResolverInterface
 {
+    protected function addMediaItemInputField(): bool
+    {
+        return true;
+    }
+
     protected function canUploadAttachment(): bool
     {
         return false;
