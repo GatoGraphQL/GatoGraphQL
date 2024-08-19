@@ -234,8 +234,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 'input' => $this->getRootCreateMediaItemInputObjectTypeResolver(),
             ],
             'createMediaItems' => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateMediaItemInputObjectTypeResolver()),
-            'createMediaItemMutationPayloadObjects' => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
-            default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
+            'updateMediaItem' => [
+                'input' => $this->getRootUpdateMediaItemInputObjectTypeResolver(),
+            ],
+            'updateMediaItems' => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateMediaItemInputObjectTypeResolver()),
+            'createMediaItemMutationPayloadObjects',
+            'updateMediaItemMutationPayloadObjects'
+                => $this->getMutationPayloadObjectsFieldArgNameTypeResolvers(),
+            default
+                => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 
