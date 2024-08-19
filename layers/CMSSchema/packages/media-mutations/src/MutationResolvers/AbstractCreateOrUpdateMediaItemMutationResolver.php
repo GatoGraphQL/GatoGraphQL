@@ -107,6 +107,8 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
     ): void {
         $field = $fieldDataAccessor->getField();
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         if ($this->addMediaItemInputField()) {
             // If updating a media item, check that it exists
             /** @var string|int */
@@ -119,9 +121,6 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             );
         }
 
-        /** @var int|string|null */
-        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
-
         // Check that the user is logged-in
         $errorFeedbackItemResolution = $this->validateUserIsLoggedIn();
         if ($errorFeedbackItemResolution !== null) {
@@ -131,8 +130,14 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
                     $field,
                 )
             );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
+
+        /** @var int|string|null */
+        $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
 
         if ($authorID !== null) {
             // If providing the author, check that the user exists
@@ -152,9 +157,21 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             }
         }
 
+        // Validate the user can edit the attachment
+        if ($this->addMediaItemInputField()) {
+            /** @var string|int */
+            $mediaItemID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+            $this->validateCanLoggedInUserEditMediaItem(
+                $mediaItemID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
         if ($this->canUploadAttachment()) {
-            // Validate the user has the needed capability to upload files
             $currentUserID = App::getState('current-user-id');
+
+            // Validate the user has the needed capability to upload files
             $uploadFilesCapability = $this->getNameResolver()->getName(LooseContractSet::NAME_UPLOAD_FILES_CAPABILITY);
             if (
                 !$this->getUserRoleTypeAPI()->userCan(
