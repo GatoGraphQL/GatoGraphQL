@@ -8,7 +8,7 @@ use PoPCMSSchema\MediaMutations\Constants\HookNames;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
-abstract class AbstractUpdateMediaItemInputObjectTypeResolver extends AbstractCreateOrUpdateMediaItemInputObjectTypeResolver implements CreateMediaItemInputObjectTypeResolverInterface
+abstract class AbstractUpdateMediaItemInputObjectTypeResolver extends AbstractCreateOrUpdateMediaItemInputObjectTypeResolver implements UpdateMediaItemInputObjectTypeResolverInterface
 {
     protected function canUploadAttachment(): bool
     {
