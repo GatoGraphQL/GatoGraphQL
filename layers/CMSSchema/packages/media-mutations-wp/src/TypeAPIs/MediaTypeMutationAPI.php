@@ -434,9 +434,6 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
     }
 
-    /**
-     * @param array<string,mixed> $mediaItemData
-     */
     protected function updateImageAltText(
         string|int $mediaItemID,
         string $altText,
