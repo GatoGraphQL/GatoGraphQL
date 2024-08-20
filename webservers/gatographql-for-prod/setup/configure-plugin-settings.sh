@@ -5,7 +5,7 @@ echo Enabling modules for DEV
 ADMIN_USER_APP_PASSWORD=$(wp user meta get 1 app_password)
 # Using "localhost:89347" is not visible from within the container, so point straight to localhost, it always works
 # Remove the port from the webserver URL
-SITE_DOMAIN=$(wp option get siteurl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%-]*")
+SITE_DOMAIN=$(wp option get siteurl | grep -Eo "(http|https)://[a-zA-Z0-9./?=_%-\.]*")
 # SITE_DOMAIN=$(wp option get siteurl)
 # SITE_DOMAIN=https://localhost
 
