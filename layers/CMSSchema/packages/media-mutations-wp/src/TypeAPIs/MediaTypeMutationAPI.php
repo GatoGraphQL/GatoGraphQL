@@ -16,6 +16,7 @@ use function get_post_meta;
 use function get_post;
 use function is_wp_error;
 use function update_attached_file;
+use function update_post_meta;
 use function wp_get_attachment_metadata;
 use function wp_insert_attachment;
 use function wp_slash;
@@ -119,6 +120,12 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             throw new MediaItemCRUDMutationException(
                 $wpError->get_error_message()
             );
+        }
+
+        /** @var string|null */
+        $altText = $mediaItemData['altText'] ?? null;
+        if ($altText !== null) {
+            $this->updateImageAltText($mediaItemID, $altText);
         }
     }
 
@@ -403,12 +410,23 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         require_once ABSPATH . 'wp-admin/includes/image.php';
 
         $mediaItemMetaData = \wp_generate_attachment_metadata((int) $mediaItemID, $filename);
-        \wp_update_attachment_metadata((int) $mediaItemID, $mediaItemMetaData);
+        wp_update_attachment_metadata((int) $mediaItemID, $mediaItemMetaData);
 
+        /** @var string|null */
         $altText = $mediaItemData['altText'] ?? null;
         if (!empty($altText)) {
-            \update_post_meta((int) $mediaItemID, '_wp_attachment_image_alt', $altText);
+            $this->updateImageAltText($mediaItemID, $altText);
         }
+    }
+
+    /**
+     * @param array<string,mixed> $mediaItemData
+     */
+    protected function updateImageAltText(
+        string|int $mediaItemID,
+        string $altText,
+    ): void {
+        update_post_meta((int) $mediaItemID, '_wp_attachment_image_alt', $altText);
     }
 
     public function canUserEditMediaItems(
