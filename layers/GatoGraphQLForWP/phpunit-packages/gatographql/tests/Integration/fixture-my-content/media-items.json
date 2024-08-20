@@ -6,6 +6,10 @@
         "myMediaItemCount": 2,
         "myMediaItems": [
             {
+                "parentCustomPost": {
+                    "id": 1140,
+                    "title": "Welcome to a single post full of blocks!"
+                },
                 "altText": "",
                 "author": {
                     "slug": "contributor"
@@ -29,6 +33,10 @@
                 "width": 1600
             },
             {
+                "parentCustomPost": {
+                    "id": 1140,
+                    "title": "Welcome to a single post full of blocks!"
+                },
                 "altText": "",
                 "author": {
                     "slug": "contributor"
@@ -53,6 +61,10 @@
             }
         ],
         "myMediaItem": {
+            "parentCustomPost": {
+                "id": 1140,
+                "title": "Welcome to a single post full of blocks!"
+            },
             "altText": "",
             "author": {
                 "slug": "contributor"
