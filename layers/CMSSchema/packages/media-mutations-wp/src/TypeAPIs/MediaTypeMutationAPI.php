@@ -109,7 +109,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         $mediaItemData['ID'] = $mediaItemID;
 
         $mediaItemIDOrError = wp_update_post(
-            wp_slash($mediaItemData),
+            wp_slash($mediaItemData), // @phpstan-ignore-line
             true
         );
 
