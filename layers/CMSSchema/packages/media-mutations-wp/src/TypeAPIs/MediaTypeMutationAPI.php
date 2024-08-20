@@ -11,6 +11,7 @@ use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use WP_Error;
 
 use function add_post_meta;
+use function get_allowed_mime_types;
 use function get_attached_file;
 use function get_post_meta;
 use function get_post;
@@ -107,6 +108,19 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         string|int $mediaItemID,
         array $mediaItemData,
     ): void {
+        $mimeType = $mediaItemData['mimeType'] ?? null;
+        if ($mimeType !== null) {
+            $mimes = get_allowed_mime_types();
+            if (!in_array($mimeType, $mimes)) {
+                throw new MediaItemCRUDMutationException(
+                    sprintf(
+                        $this->__('Mime type  \'%s\' is not allowed', 'media-mutations'),
+                        $mimeType
+                    )
+                );
+            }
+        }
+
         $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
         $mediaItemData['ID'] = $mediaItemID;
 
