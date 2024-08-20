@@ -80,6 +80,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload"
         },
         {
@@ -89,6 +93,10 @@
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -237,6 +245,10 @@
         {
           "kind": "OBJECT",
           "name": "RootUpdateGenericTagTermMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateMediaItemMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -828,6 +840,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdateMediaItemInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdatePageInput"
         },
         {
@@ -1089,6 +1105,10 @@
         {
           "kind": "UNION",
           "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateMediaItemMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",

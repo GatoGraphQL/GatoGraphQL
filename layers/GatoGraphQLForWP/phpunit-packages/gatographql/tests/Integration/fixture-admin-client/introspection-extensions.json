@@ -1460,7 +1460,7 @@
                     "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
-                        "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -1482,6 +1482,27 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
                         "namespacedName": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -1523,7 +1544,7 @@
                     "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
-                        "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -1545,6 +1566,27 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
                         "namespacedName": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
                         "possibleValues": null,
                         "isOneOf": false
                     },
@@ -1754,6 +1796,14 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "parentCustomPost",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
                         },
                         {
                             "name": "self",
@@ -2853,6 +2903,42 @@
                         },
                         {
                             "name": "updateCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateMediaItem",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateMediaItems",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -7705,6 +7791,42 @@
                             ]
                         },
                         {
+                            "name": "updateMediaItem",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateMediaItems",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updatePage",
                             "extensions": {
                                 "isMutation": true,
@@ -8906,6 +9028,51 @@
                         },
                         {
                             "name": "tagID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateMediaItemMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdateMediaItemMutationPayload",
+                        "namespacedName": "RootUpdateMediaItemMutationPayload",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "mediaItem",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "mediaItemID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -11604,6 +11771,12 @@
                     "inputFields": [
                         {
                             "name": "contents",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "mediaItemBy",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -14817,6 +14990,73 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateMediaItemInput",
+                    "extensions": {
+                        "elementName": "RootUpdateMediaItemInput",
+                        "namespacedName": "RootUpdateMediaItemInput",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "altText",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "authorID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "caption",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "customPostID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "mimeType",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "title",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdatePageInput",
                     "extensions": {
                         "elementName": "RootUpdatePageInput",
@@ -17039,6 +17279,18 @@
                     "extensions": {
                         "elementName": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
                         "namespacedName": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+                        "possibleValues": null,
+                        "isOneOf": false
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateMediaItemMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdateMediaItemMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateMediaItemMutationErrorPayloadUnion",
                         "possibleValues": null,
                         "isOneOf": false
                     },

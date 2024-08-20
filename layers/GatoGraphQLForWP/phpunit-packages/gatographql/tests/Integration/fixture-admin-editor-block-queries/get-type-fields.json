@@ -461,7 +461,7 @@
         },
         {
           "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
-          "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -482,6 +482,17 @@
           "description": "Error payload for: \"The logged-in user has no permission to edit custom posts\""
         },
         {
+          "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user cannot edit media items\""
+        },
+        {
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
           "namespacedName": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
           "fields": [
@@ -494,7 +505,7 @@
         },
         {
           "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
-          "namespacedName": "PoPCMSSchema_TaxonomyMutations_LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+          "namespacedName": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -513,6 +524,17 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The logged-in user has no permission to edit the requested custom post\""
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to edit the media item\""
         },
         {
           "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload",
@@ -575,6 +597,9 @@
             },
             {
               "name": "modifiedDateStr"
+            },
+            {
+              "name": "parentCustomPost"
             },
             {
               "name": "self"
@@ -838,6 +863,12 @@
             },
             {
               "name": "updateCustomPosts"
+            },
+            {
+              "name": "updateMediaItem"
+            },
+            {
+              "name": "updateMediaItems"
             },
             {
               "name": "updatePage"
@@ -1775,6 +1806,12 @@
               "name": "updateCustomPosts"
             },
             {
+              "name": "updateMediaItem"
+            },
+            {
+              "name": "updateMediaItems"
+            },
+            {
               "name": "updatePage"
             },
             {
@@ -2252,6 +2289,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing an update mutation on a tag term"
+        },
+        {
+          "name": "RootUpdateMediaItemMutationPayload",
+          "namespacedName": "RootUpdateMediaItemMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "mediaItem"
+            },
+            {
+              "name": "mediaItemID"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of updating the metadata for an attachment"
         },
         {
           "name": "RootUpdatePageMutationPayload",
@@ -3839,6 +3896,13 @@
           "description": "Input to create or update a tag term"
         },
         {
+          "name": "RootUpdateMediaItemInput",
+          "namespacedName": "RootUpdateMediaItemInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update the metadata for an attachment"
+        },
+        {
           "name": "RootUpdatePageInput",
           "namespacedName": "RootUpdatePageInput",
           "fields": null,
@@ -4299,6 +4363,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating a tag term"
+        },
+        {
+          "name": "RootUpdateMediaItemMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateMediaItemMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating the metadata for an attachment"
         },
         {
           "name": "RootUpdatePageMutationErrorPayloadUnion",
