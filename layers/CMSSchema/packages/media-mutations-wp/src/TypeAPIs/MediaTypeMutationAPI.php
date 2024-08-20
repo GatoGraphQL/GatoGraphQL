@@ -407,6 +407,10 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         if (isset($mediaItemData['customPostID'])) {
             $mediaItemData['post_parent'] = $mediaItemData['customPostID'];
             unset($mediaItemData['customPostID']);
+        } elseif (array_key_exists('customPostID', $mediaItemData)) {
+            // `customPostID` = `null` => Set as `0`
+            $mediaItemData['post_parent'] = 0;
+            unset($mediaItemData['customPostID']);
         }
         return $mediaItemData;
     }
