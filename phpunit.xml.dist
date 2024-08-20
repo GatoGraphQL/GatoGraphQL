@@ -16,7 +16,7 @@
     <directory>layers/**/plugins/**/tests</directory>
   </testsuite>
   <php>
-    <ini name="memory_limit" value="256M"/>
+    <ini name="memory_limit" value="512M"/>
     <env name="APPLICATION_ENVIRONMENT" value="development-phpunit"/>
     <env name="INTEGRATION_TESTS_WEBSERVER_DOMAIN" value="gatographql.lndo.site"/>
     <env name="INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME" value="admin"/>
