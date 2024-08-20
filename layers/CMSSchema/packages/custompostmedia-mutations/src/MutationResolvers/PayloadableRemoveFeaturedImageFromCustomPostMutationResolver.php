@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\MutationResolvers;
 
+use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -16,6 +17,7 @@ class PayloadableRemoveFeaturedImageFromCustomPostMutationResolver extends Remov
     use PayloadableSetOrRemoveFeaturedImageOnCustomPostMutationResolverTrait;
 
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
 
     final public function setMediaTypeAPI(MediaTypeAPIInterface $mediaTypeAPI): void
     {
@@ -29,6 +31,19 @@ class PayloadableRemoveFeaturedImageFromCustomPostMutationResolver extends Remov
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
+    }
+    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
+    {
+        $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
+    }
+    final protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface
+    {
+        if ($this->mediaTypeMutationAPI === null) {
+            /** @var MediaTypeMutationAPIInterface */
+            $mediaTypeMutationAPI = $this->instanceManager->getInstance(MediaTypeMutationAPIInterface::class);
+            $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
+        }
+        return $this->mediaTypeMutationAPI;
     }
 
     /**

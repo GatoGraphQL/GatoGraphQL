@@ -138,10 +138,10 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             $field,
             $object,
         );
-        $post = $object;
+        $customPost = $object;
         switch ($field->getName()) {
             case 'update':
-                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($post);
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
         return $fieldArgsForMutationForObject;

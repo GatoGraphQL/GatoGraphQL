@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostMediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostMediaMutations\TypeAPIs\CustomPostMediaTypeMutationAPIInterface;
 use PoPCMSSchema\MediaMutations\MutationResolvers\MediaItemCRUDMutationResolverTrait;
+use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use PoPCMSSchema\Media\Constants\InputProperties;
 use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -22,6 +23,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
 
     private ?CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI = null;
     private ?MediaTypeAPIInterface $mediaTypeAPI = null;
+    private ?MediaTypeMutationAPIInterface $mediaTypeMutationAPI = null;
 
     final public function setCustomPostMediaTypeMutationAPI(CustomPostMediaTypeMutationAPIInterface $customPostMediaTypeMutationAPI): void
     {
@@ -48,6 +50,19 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             $this->mediaTypeAPI = $mediaTypeAPI;
         }
         return $this->mediaTypeAPI;
+    }
+    final public function setMediaTypeMutationAPI(MediaTypeMutationAPIInterface $mediaTypeMutationAPI): void
+    {
+        $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
+    }
+    final protected function getMediaTypeMutationAPI(): MediaTypeMutationAPIInterface
+    {
+        if ($this->mediaTypeMutationAPI === null) {
+            /** @var MediaTypeMutationAPIInterface */
+            $mediaTypeMutationAPI = $this->instanceManager->getInstance(MediaTypeMutationAPIInterface::class);
+            $this->mediaTypeMutationAPI = $mediaTypeMutationAPI;
+        }
+        return $this->mediaTypeMutationAPI;
     }
 
     /**
@@ -104,6 +119,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             $mediaItemID = $mediaItemBy->{InputProperties::ID};
             $this->validateMediaItemByIDExists(
                 $mediaItemID,
+                MutationInputProperties::MEDIAITEM_BY,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -112,6 +128,7 @@ class SetFeaturedImageOnCustomPostMutationResolver extends AbstractSetOrRemoveFe
             $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
             $this->validateMediaItemBySlugExists(
                 $mediaItemSlug,
+                MutationInputProperties::MEDIAITEM_BY,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );

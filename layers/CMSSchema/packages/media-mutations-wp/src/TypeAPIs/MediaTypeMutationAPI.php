@@ -11,11 +11,14 @@ use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
 use WP_Error;
 
 use function add_post_meta;
+use function get_allowed_mime_types;
 use function get_attached_file;
 use function get_post_meta;
 use function get_post;
 use function is_wp_error;
 use function update_attached_file;
+use function update_post_meta;
+use function wp_check_filetype;
 use function wp_get_attachment_metadata;
 use function wp_insert_attachment;
 use function wp_slash;
@@ -95,6 +98,50 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         }
 
         return $mediaItemID;
+    }
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     * @param array<string,mixed> $mediaItemData
+     */
+    public function updateMediaItem(
+        string|int $mediaItemID,
+        array $mediaItemData,
+    ): void {
+        $mimeType = $mediaItemData['mimeType'] ?? null;
+        if ($mimeType !== null) {
+            $mimes = get_allowed_mime_types();
+            if (!in_array($mimeType, $mimes)) {
+                throw new MediaItemCRUDMutationException(
+                    sprintf(
+                        $this->__('Mime type \'%s\' is not allowed', 'media-mutations'),
+                        $mimeType
+                    )
+                );
+            }
+        }
+
+        $mediaItemData = $this->convertMediaItemCreationArgs($mediaItemData);
+        $mediaItemData['ID'] = $mediaItemID;
+
+        $mediaItemIDOrError = wp_update_post(
+            wp_slash($mediaItemData), // @phpstan-ignore-line
+            true
+        );
+
+        if (is_wp_error($mediaItemIDOrError)) {
+            /** @var WP_Error */
+            $wpError = $mediaItemIDOrError;
+            throw new MediaItemCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+
+        /** @var string|null */
+        $altText = $mediaItemData['altText'] ?? null;
+        if ($altText !== null) {
+            $this->updateImageAltText($mediaItemID, $altText);
+        }
     }
 
     /**
@@ -316,7 +363,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     protected function getFileMimeTypeOrThrowError(string $filename): string
     {
         // Get the mime type from the file, and check it's allowed
-        $mimeTypeCheck = \wp_check_filetype(sanitize_file_name(basename($filename)));
+        $mimeTypeCheck = wp_check_filetype(sanitize_file_name(basename($filename)));
         if (!$mimeTypeCheck['type']) {
             throw new MediaItemCRUDMutationException(
                 $this->__('The file\'s mime type is not allowed', 'media-mutations')
@@ -357,6 +404,10 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             $mediaItemData['post_mime_type'] = $mediaItemData['mimeType'];
             unset($mediaItemData['mimeType']);
         }
+        if (isset($mediaItemData['customPostID'])) {
+            $mediaItemData['post_parent'] = $mediaItemData['customPostID'];
+            unset($mediaItemData['customPostID']);
+        }
         return $mediaItemData;
     }
 
@@ -374,11 +425,40 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
         require_once ABSPATH . 'wp-admin/includes/image.php';
 
         $mediaItemMetaData = \wp_generate_attachment_metadata((int) $mediaItemID, $filename);
-        \wp_update_attachment_metadata((int) $mediaItemID, $mediaItemMetaData);
+        wp_update_attachment_metadata((int) $mediaItemID, $mediaItemMetaData);
 
+        /** @var string|null */
         $altText = $mediaItemData['altText'] ?? null;
         if (!empty($altText)) {
-            \update_post_meta((int) $mediaItemID, '_wp_attachment_image_alt', $altText);
+            $this->updateImageAltText($mediaItemID, $altText);
         }
+    }
+
+    /**
+     * @param array<string,mixed> $mediaItemData
+     */
+    protected function updateImageAltText(
+        string|int $mediaItemID,
+        string $altText,
+    ): void {
+        update_post_meta((int) $mediaItemID, '_wp_attachment_image_alt', $altText);
+    }
+
+    public function canUserEditMediaItems(
+        string|int $userID
+    ): bool {
+        $attachmentObject = get_post_type_object('attachment');
+        if ($attachmentObject === null) {
+            return false;
+        }
+
+        return isset($attachmentObject->cap->edit_posts) && user_can((int)$userID, $attachmentObject->cap->edit_posts);
+    }
+
+    public function canUserEditMediaItem(
+        string|int $userID,
+        string|int $mediaItemID,
+    ): bool {
+        return user_can((int)$userID, 'edit_post', $mediaItemID);
     }
 }

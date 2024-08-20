@@ -35,4 +35,19 @@ interface MediaTypeMutationAPIInterface
         string $filename,
         array $mediaItemData,
     ): string|int;
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     * @param array<string,mixed> $mediaItemData
+     */
+    public function updateMediaItem(
+        string|int $mediaItemID,
+        array $mediaItemData,
+    ): void;
+    public function canUserEditMediaItems(
+        string|int $userID,
+    ): bool;
+    public function canUserEditMediaItem(
+        string|int $userID,
+        string|int $mediaItemID,
+    ): bool;
 }

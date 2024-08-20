@@ -4,6 +4,7 @@
 
 - Validate `assign_terms` capability on `setCategory` and `setTag` mutations ([#2772](https://github.com/GatoGraphQL/GatoGraphQL/pull/2772))
 - Added field `Media.parentCustomPost` ([#2788](https://github.com/GatoGraphQL/GatoGraphQL/pull/2788))
+- Added mutation `Root.updateMediaItem` ([#2790](https://github.com/GatoGraphQL/GatoGraphQL/pull/2790))
 - Added predefined persisted queries:
   - Create missing translation categories for Polylang ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))
   - Create missing translation tags for Polylang ([#2774](https://github.com/GatoGraphQL/GatoGraphQL/pull/2774))

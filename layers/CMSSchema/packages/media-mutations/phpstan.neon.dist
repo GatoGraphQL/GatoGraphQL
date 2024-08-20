@@ -8,3 +8,6 @@ parameters:
 		- 
 			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
 			path: src/MutationResolvers/PayloadableCreateMediaItemMutationResolver.php
+		- 
+			message: '#Strict comparison using !== between array{} and array{} will always evaluate to false\.#'
+			path: src/MutationResolvers/PayloadableUpdateMediaItemMutationResolver.php

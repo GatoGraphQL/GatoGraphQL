@@ -5,25 +5,22 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
-use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
-use PoPCMSSchema\Media\Constants\InputProperties;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 use PoP\Root\Exception\AbstractException;
-use stdClass;
 
-class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMutationResolver
+class UpdateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMutationResolver
 {
     protected function addMediaItemInputField(): bool
     {
-        return false;
+        return true;
     }
 
     protected function canUploadAttachment(): bool
     {
-        return true;
+        return false;
     }
 
     public function validate(
@@ -37,7 +34,7 @@ class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
 
         // Allow components to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_CREATE_MEDIA_ITEM,
+            HookNames::VALIDATE_UPDATE_MEDIA_ITEM,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -46,7 +43,7 @@ class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
     protected function additionals(string|int $mediaItemID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::additionals($mediaItemID, $fieldDataAccessor);
-        App::doAction(HookNames::CREATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
+        App::doAction(HookNames::UPDATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
     }
 
     /**
@@ -55,7 +52,7 @@ class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
     protected function getMediaItemData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return App::applyFilters(
-            HookNames::GET_CREATE_MEDIA_ITEM_DATA,
+            HookNames::GET_UPDATE_MEDIA_ITEM_DATA,
             parent::getMediaItemData($fieldDataAccessor),
             $fieldDataAccessor
         );
@@ -65,55 +62,20 @@ class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
      * @throws MediaItemCRUDMutationException In case of error
      * @param array<string,mixed> $mediaItemData
      */
-    protected function createMediaItem(
+    protected function updateMediaItem(
         array $mediaItemData,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string|int|null {
-        /** @var stdClass */
-        $from = $fieldDataAccessor->getValue(MutationInputProperties::FROM);
+        /** @var string|int */
+        $mediaItemID = $mediaItemData['id'];
+        unset($mediaItemData['id']);
 
-        if (isset($from->{MutationInputProperties::URL})) {
-            /** @var stdClass */
-            $url = $from->{MutationInputProperties::URL};
-            return $this->getMediaTypeMutationAPI()->createMediaItemFromURL(
-                $url->{MutationInputProperties::SOURCE},
-                $url->{MutationInputProperties::FILENAME},
-                $mediaItemData,
-            );
-        }
-
-        if (isset($from->{MutationInputProperties::MEDIAITEM_BY})) {
-            /** @var string|int|null */
-            $mediaItemID = null;
-            /** @var stdClass */
-            $mediaItemBy = $from->{MutationInputProperties::MEDIAITEM_BY};
-            if (isset($mediaItemBy->{InputProperties::ID})) {
-                $mediaItemID = $mediaItemBy->{InputProperties::ID};
-            } elseif (isset($mediaItemBy->{InputProperties::SLUG})) {
-                $mediaTypeAPI = $this->getMediaTypeAPI();
-                /** @var string */
-                $mediaItemSlug = $mediaItemBy->{InputProperties::SLUG};
-                /** @var object */
-                $mediaItem = $mediaTypeAPI->getMediaItemBySlug($mediaItemSlug);
-                $mediaItemID = $mediaTypeAPI->getMediaItemID($mediaItem);
-            }
-            if ($mediaItemID === null) {
-                return null;
-            }
-            return $this->getMediaTypeMutationAPI()->createMediaItemFromExistingMediaItem(
-                $mediaItemID,
-                $mediaItemData,
-            );
-        }
-
-        /** @var stdClass */
-        $contents = $from->{MutationInputProperties::CONTENTS};
-
-        return $this->getMediaTypeMutationAPI()->createMediaItemFromContents(
-            $contents->{MutationInputProperties::BODY},
-            $contents->{MutationInputProperties::FILENAME},
+        $this->getMediaTypeMutationAPI()->updateMediaItem(
+            $mediaItemID,
             $mediaItemData,
         );
+
+        return $mediaItemID;
     }
 
     /**
@@ -125,7 +87,7 @@ class CreateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
     ): mixed {
         $mediaItemData = $this->getMediaItemData($fieldDataAccessor);
 
-        $mediaItemID = $this->createMediaItem(
+        $mediaItemID = $this->updateMediaItem(
             $mediaItemData,
             $fieldDataAccessor,
         );

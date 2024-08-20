@@ -42,6 +42,10 @@ use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
 use WP_Error;
 
+use function add_action;
+use function is_admin;
+use function wp_insert_post;
+
 class Plugin extends AbstractMainPlugin
 {
     use UseImageWidthsAssetsTrait;
@@ -91,7 +95,7 @@ class Plugin extends AbstractMainPlugin
     protected function showReleaseNotesInAdminNotice(): void
     {
         // Load the assets to open in a modal
-        \add_action('admin_enqueue_scripts', function (): void {
+        add_action('admin_enqueue_scripts', function (): void {
             /**
              * Hack to open the modal thickbox iframe with the documentation
              */
@@ -103,7 +107,7 @@ class Plugin extends AbstractMainPlugin
             );
         });
         // Add the admin notice
-        \add_action('admin_notices', function (): void {
+        add_action('admin_notices', function (): void {
             $instanceManager = InstanceManagerFacade::getInstance();
             $settingsCategoryRegistry = SystemSettingsCategoryRegistryFacade::getInstance();
             /**
@@ -196,7 +200,7 @@ class Plugin extends AbstractMainPlugin
          *
          * For that, all the classes below have also been registered in system-services.yaml
          */
-        if (\is_admin()) {
+        if (is_admin()) {
             // Obtain these services from the SystemContainer
             $systemInstanceManager = SystemInstanceManagerFacade::getInstance();
             /** @var MenuPageHelper */
@@ -235,7 +239,7 @@ class Plugin extends AbstractMainPlugin
          * Load the image width classes also within the Gutenberg editor,
          * to be used within the documentation modal windows.
          */
-        \add_action(
+        add_action(
             'enqueue_block_editor_assets',
             $this->enqueueImageWidthsAssets(...)
         );
@@ -310,7 +314,7 @@ class Plugin extends AbstractMainPlugin
         /** @var GraphQLSchemaConfigurationCustomPostType */
         $graphQLSchemaConfigurationCustomPostType = $instanceManager->getInstance(GraphQLSchemaConfigurationCustomPostType::class);
 
-        $schemaConfigurationCustomPostID = \wp_insert_post([
+        $schemaConfigurationCustomPostID = wp_insert_post([
             'post_status' => 'publish',
             'post_name' => $slug,
             'post_type' => $graphQLSchemaConfigurationCustomPostType->getCustomPostType(),
@@ -645,7 +649,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_NESTED_MUTATIONS;
         if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminCustomEndpointOptions,
                 [
                     'post_name' => $slug,
@@ -680,7 +684,7 @@ class Plugin extends AbstractMainPlugin
          */
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -703,7 +707,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_STRINGS_IN_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -729,7 +733,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_STRINGS_IN_POSTS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -755,7 +759,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -781,7 +785,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGEX_REPLACE_STRINGS_IN_POSTS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -807,7 +811,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_ADD_MISSING_LINKS_IN_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -830,7 +834,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_HTTP_WITH_HTTPS_IN_IMAGE_SOURCES_IN_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -853,7 +857,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_DOMAIN_IN_POSTS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -876,7 +880,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REPLACE_POST_SLUG_IN_POSTS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -902,7 +906,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_INSERT_BLOCK_IN_POSTS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -925,7 +929,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REMOVE_BLOCK_FROM_POSTS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -948,7 +952,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POST_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -971,7 +975,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -994,7 +998,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_SITE;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1017,7 +1021,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_EXPORT_POST_TO_WORDPRESS_SITE;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1040,7 +1044,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_POSTS_BY_THUMBNAIL;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1063,7 +1067,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_USERS_BY_LOCALE;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1086,7 +1090,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_COMMENTS_BY_PERIOD;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1109,7 +1113,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_IMAGE_URLS_IN_BLOCKS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1134,7 +1138,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_REGISTER_A_NEWSLETTER_SUBSCRIBER_FROM_INSTAWP_TO_MAILCHIMP;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $webhookPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1169,7 +1173,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CONTENT_FROM_URL;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1195,7 +1199,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_RSS_FEED;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1221,7 +1225,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_FETCH_POST_LINKS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1244,7 +1248,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POST_CLASSIC_EDITOR;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1269,7 +1273,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_CLASSIC_EDITOR;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1303,7 +1307,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SEND_EMAIL_TO_ADMIN_ABOUT_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1328,7 +1332,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_ADD_COMMENTS_BLOCK_TO_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1362,7 +1366,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_GENERATE_A_POSTS_FEATURED_IMAGE_USING_AI_AND_OPTIMIZE_IT;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1396,7 +1400,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_INSERT_BLOCK_IN_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1430,7 +1434,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1457,7 +1461,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_CLASSIC_EDITOR;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1484,7 +1488,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1522,7 +1526,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_INTERNAL;
         if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminCustomEndpointOptions,
                 [
                     'post_name' => $slug,
@@ -1548,7 +1552,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1572,7 +1576,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_AND_CREATE_ALL_PAGES_FOR_MULTILINGUAL_WORDPRESS_SITE_CLASSIC_EDITOR;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1606,7 +1610,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SEND_EMAIL_TO_USERS_ABOUT_POST;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1641,7 +1645,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1668,7 +1672,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_CLASSIC_EDITOR;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1695,7 +1699,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POEDIT_FILE_CONTENT;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1734,7 +1738,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::CUSTOM_ENDPOINT_BULK_MUTATIONS;
         if (PluginSetupDataHelpers::getCustomEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminCustomEndpointOptions,
                 [
                     'post_name' => $slug,
@@ -1767,7 +1771,7 @@ class Plugin extends AbstractMainPlugin
          */
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_DUPLICATE_POSTS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1793,7 +1797,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1832,7 +1836,7 @@ class Plugin extends AbstractMainPlugin
          */
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1870,7 +1874,7 @@ class Plugin extends AbstractMainPlugin
          */
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1894,7 +1898,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1921,7 +1925,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_TAGS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1945,7 +1949,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_TAGS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1972,7 +1976,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_MEDIA_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -1996,7 +2000,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_MEDIA_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -2023,7 +2027,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CATEGORIES_FOR_MULTILINGUALPRESS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -2050,7 +2054,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_TAGS_FOR_MULTILINGUALPRESS;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -2077,7 +2081,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_TAGS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
@@ -2101,7 +2105,7 @@ class Plugin extends AbstractMainPlugin
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CATEGORIES_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
-            \wp_insert_post(array_merge(
+            wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
