@@ -114,7 +114,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
             if (!in_array($mimeType, $mimes)) {
                 throw new MediaItemCRUDMutationException(
                     sprintf(
-                        $this->__('Mime type  \'%s\' is not allowed', 'media-mutations'),
+                        $this->__('Mime type \'%s\' is not allowed', 'media-mutations'),
                         $mimeType
                     )
                 );
