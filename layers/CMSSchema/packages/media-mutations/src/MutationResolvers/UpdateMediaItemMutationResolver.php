@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
 use PoPCMSSchema\MediaMutations\Constants\HookNames;
-use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
