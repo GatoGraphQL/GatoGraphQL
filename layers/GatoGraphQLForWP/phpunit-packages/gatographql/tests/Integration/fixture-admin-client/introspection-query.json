@@ -2836,6 +2836,39 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+          "description": "Error payload for: \"The user cannot edit media items\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
           "description": "Error payload for: \"The logged-in user has no permission to edit pages\"",
           "fields": [
@@ -2904,6 +2937,39 @@
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
           "description": "Error payload for: \"The logged-in user has no permission to edit the requested custom post\"",
+          "fields": [
+            {
+              "name": "message",
+              "description": "Error message",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "String!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "ErrorPayload",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
+          "description": "Error payload for: \"The user has no permission to edit the media item\"",
           "fields": [
             {
               "name": "message",
@@ -3267,6 +3333,18 @@
                   "name": "String",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "parentCustomPost",
+              "description": "Custom post the media item is attached to.",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "GenericCustomPost",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -5821,6 +5899,98 @@
                     "ofType": {
                       "kind": "OBJECT",
                       "name": "RootUpdateCustomPostMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateMediaItem",
+              "description": "Update the metadata for an attachment",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update the metadata for an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateMediaItemInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateMediaItemInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateMediaItemMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateMediaItemMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateMediaItems",
+              "description": "Update the metadata for attachments",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update the metadata for an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateMediaItemInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateMediaItemInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateMediaItemInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateMediaItemInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateMediaItemMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateMediaItemMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateMediaItemMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateMediaItemMutationPayload",
                       "ofType": null
                     }
                   }
@@ -16106,6 +16276,98 @@
               "deprecationReason": null
             },
             {
+              "name": "updateMediaItem",
+              "description": "Update the metadata for an attachment",
+              "args": [
+                {
+                  "name": "input",
+                  "description": "Input to update the metadata for an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateMediaItemInput!",
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "RootUpdateMediaItemInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "RootUpdateMediaItemMutationPayload!",
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "RootUpdateMediaItemMutationPayload",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateMediaItems",
+              "description": "Update the metadata for attachments",
+              "args": [
+                {
+                  "name": "inputs",
+                  "description": "Input to update the metadata for an attachment",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "[RootUpdateMediaItemInput!]!",
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": "[RootUpdateMediaItemInput!]",
+                      "ofType": {
+                        "kind": "NON_NULL",
+                        "name": "RootUpdateMediaItemInput!",
+                        "ofType": {
+                          "kind": "INPUT_OBJECT",
+                          "name": "RootUpdateMediaItemInput",
+                          "ofType": null
+                        }
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "stopExecutingMutationItemsOnFirstError",
+                  "description": "The Boolean scalar type represents `true` or `false`.",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": "Boolean!",
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "Boolean",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": "false"
+                }
+              ],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "[RootUpdateMediaItemMutationPayload!]!",
+                "ofType": {
+                  "kind": "LIST",
+                  "name": "[RootUpdateMediaItemMutationPayload!]",
+                  "ofType": {
+                    "kind": "NON_NULL",
+                    "name": "RootUpdateMediaItemMutationPayload!",
+                    "ofType": {
+                      "kind": "OBJECT",
+                      "name": "RootUpdateMediaItemMutationPayload",
+                      "ofType": null
+                    }
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "updatePage",
               "description": "Update a page",
               "args": [
@@ -18213,6 +18475,77 @@
                 "kind": "SCALAR",
                 "name": "ID",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootUpdateMediaItemMutationPayload",
+          "description": "Payload of updating the metadata for an attachment",
+          "fields": [
+            {
+              "name": "errors",
+              "description": "List of error data, if the operation failed",
+              "args": [],
+              "type": {
+                "kind": "LIST",
+                "name": "[RootUpdateMediaItemMutationErrorPayloadUnion!]",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": "RootUpdateMediaItemMutationErrorPayloadUnion!",
+                  "ofType": {
+                    "kind": "UNION",
+                    "name": "RootUpdateMediaItemMutationErrorPayloadUnion",
+                    "ofType": null
+                  }
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "mediaItem",
+              "description": "Object affected by the mutation, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Media",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "mediaItemID",
+              "description": "ID of the entity, if the operation was successful",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "status",
+              "description": "Status of the operation",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": "OperationStatusEnum!",
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "OperationStatusEnum",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -21978,6 +22311,11 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
               "ofType": null
             },
@@ -21989,6 +22327,11 @@
             {
               "kind": "OBJECT",
               "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
               "ofType": null
             },
             {
@@ -23160,6 +23503,16 @@
               "type": {
                 "kind": "INPUT_OBJECT",
                 "name": "CreateMediaItemFromContentInput",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "mediaItemBy",
+              "description": "Use the attachment from an existing media item",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "MediaItemByInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -28818,6 +29171,111 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootUpdateMediaItemInput",
+          "description": "Input to update the metadata for an attachment",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "altText",
+              "description": "Image alternative information",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "authorID",
+              "description": "The ID of the author",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "caption",
+              "description": "Attachment caption",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "customPostID",
+              "description": "ID of the custom post under which to upload the attachment",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "description",
+              "description": "Attachment description",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "Media item ID",
+              "type": {
+                "kind": "NON_NULL",
+                "name": "ID!",
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "mimeType",
+              "description": "Mime type to use for the attachment, when this information can't be deduced from the filename (because it has no extension)",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "slug",
+              "description": "Attachment slug",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "title",
+              "description": "Attachment title",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootUpdatePageInput",
           "description": "Input to update a custom post",
           "fields": null,
@@ -31488,6 +31946,16 @@
             },
             {
               "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "UserDoesNotExistErrorPayload",
               "ofType": null
             },
@@ -32197,6 +32665,52 @@
             {
               "kind": "OBJECT",
               "name": "TagTermDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserIsNotLoggedInErrorPayload",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateMediaItemMutationErrorPayloadUnion",
+          "description": "Union of 'Error Payload' types when updating the metadata for an attachment",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "CustomPostDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "GenericErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "MediaItemDoesNotExistErrorPayload",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserDoesNotExistErrorPayload",
               "ofType": null
             },
             {

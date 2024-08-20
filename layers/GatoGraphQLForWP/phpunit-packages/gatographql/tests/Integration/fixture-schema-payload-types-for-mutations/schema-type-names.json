@@ -507,6 +507,9 @@
           "name": "RootUpdateGenericTagInput"
         },
         {
+          "name": "RootUpdateMediaItemInput"
+        },
+        {
           "name": "RootUpdatePageInput"
         },
         {

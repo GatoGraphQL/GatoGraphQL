@@ -60,6 +60,9 @@
           "name": "LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload"
         },
         {
+          "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload"
+        },
+        {
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload"
         },
         {
@@ -67,6 +70,9 @@
         },
         {
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload"
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload"
         },
         {
           "name": "LoggedInUserHasNoPublishingCustomPostCapabilityErrorPayload"
@@ -178,6 +184,9 @@
         },
         {
           "name": "RootUpdateGenericTagTermMutationPayload"
+        },
+        {
+          "name": "RootUpdateMediaItemMutationPayload"
         },
         {
           "name": "RootUpdatePageMutationPayload"
@@ -621,6 +630,9 @@
           "name": "RootUpdateGenericTagInput"
         },
         {
+          "name": "RootUpdateMediaItemInput"
+        },
+        {
           "name": "RootUpdatePageInput"
         },
         {
@@ -817,6 +829,9 @@
         },
         {
           "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion"
+        },
+        {
+          "name": "RootUpdateMediaItemMutationErrorPayloadUnion"
         },
         {
           "name": "RootUpdatePageMutationErrorPayloadUnion"
