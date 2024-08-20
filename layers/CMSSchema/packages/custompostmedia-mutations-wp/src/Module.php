@@ -28,7 +28,7 @@ class Module extends AbstractModule
             \PoPCMSSchema\CustomPostMediaWP\Module::class,
             \PoPCMSSchema\CustomPostMediaMutations\Module::class,
             \PoPCMSSchema\CustomPostMutationsWP\Module::class,
-            \PoPCMSSchema\MediaWP\Module::class,
+            \PoPCMSSchema\MediaMutationsWP\Module::class,
             \PoPCMSSchema\UserStateMutationsWP\Module::class,
         ];
     }
