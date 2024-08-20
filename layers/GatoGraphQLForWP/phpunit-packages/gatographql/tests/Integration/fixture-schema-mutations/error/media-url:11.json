@@ -13,7 +13,7 @@
             "errors": [
                 {
                     "__typename": "UserIsNotLoggedInErrorPayload",
-                    "message": "You must be logged in to upload files"
+                    "message": "You must be logged in to upload files or edit media items"
                 }
             ],
             "mediaItem": null
@@ -24,7 +24,7 @@
                 "errors": [
                     {
                         "__typename": "UserIsNotLoggedInErrorPayload",
-                        "message": "You must be logged in to upload files"
+                        "message": "You must be logged in to upload files or edit media items"
                     }
                 ],
                 "mediaItem": null
@@ -34,7 +34,7 @@
                 "errors": [
                     {
                         "__typename": "UserIsNotLoggedInErrorPayload",
-                        "message": "You must be logged in to upload files"
+                        "message": "You must be logged in to upload files or edit media items"
                     }
                 ],
                 "mediaItem": null
@@ -46,7 +46,7 @@
                 "errors": [
                     {
                         "__typename": "UserIsNotLoggedInErrorPayload",
-                        "message": "You must be logged in to upload files"
+                        "message": "You must be logged in to upload files or edit media items"
                     }
                 ],
                 "mediaItem": null
