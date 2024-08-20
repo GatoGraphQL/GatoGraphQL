@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
+use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\MediaMutations\ObjectModels\LoggedInUserHasNoEditingMediaCapabilityErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\LoggedInUserHasNoPermissionToEditMediaItemErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
+use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
+use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
+use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
+use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoPCMSSchema\Media\TypeAPIs\MediaTypeAPIInterface;
-use PoPCMSSchema\MediaMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\MediaMutations\ObjectModels\MediaItemDoesNotExistErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserDoesNotExistErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\LoggedInUserHasNoPermissionToEditMediaItemErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesErrorPayload;
-use PoPCMSSchema\MediaMutations\ObjectModels\UserHasNoPermissionToUploadFilesForOtherUsersErrorPayload;
-use PoPCMSSchema\MediaMutations\TypeAPIs\MediaTypeMutationAPIInterface;
-use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
-use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 
 trait MediaItemCRUDMutationResolverTrait
 {
@@ -119,6 +120,12 @@ trait MediaItemCRUDMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E8,
             ] => new LoggedInUserHasNoPermissionToEditMediaItemErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
+            ] => new LoggedInUserHasNoEditingMediaCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             default => null,
