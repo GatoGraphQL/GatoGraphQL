@@ -136,6 +136,15 @@ abstract class AbstractCreateOrUpdateMediaItemMutationResolver extends AbstractM
             return;
         }
 
+        $this->validateCanLoggedInUserEditMediaItems(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         /** @var int|string|null */
         $authorID = $fieldDataAccessor->getValue(MutationInputProperties::AUTHOR_ID);
 
