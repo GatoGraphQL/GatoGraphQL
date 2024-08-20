@@ -173,10 +173,6 @@ class MutationResolverHookSet extends AbstractHookSet
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        if ($customPostID === null) {
-            return $mediaItemData;
-        }
-
         $mediaItemData['customPostID'] = $customPostID;
         return $mediaItemData;
     }
