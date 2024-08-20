@@ -17,6 +17,7 @@ use function get_post;
 use function is_wp_error;
 use function update_attached_file;
 use function update_post_meta;
+use function wp_check_filetype;
 use function wp_get_attachment_metadata;
 use function wp_insert_attachment;
 use function wp_slash;
@@ -348,7 +349,7 @@ class MediaTypeMutationAPI implements MediaTypeMutationAPIInterface
     protected function getFileMimeTypeOrThrowError(string $filename): string
     {
         // Get the mime type from the file, and check it's allowed
-        $mimeTypeCheck = \wp_check_filetype(sanitize_file_name(basename($filename)));
+        $mimeTypeCheck = wp_check_filetype(sanitize_file_name(basename($filename)));
         if (!$mimeTypeCheck['type']) {
             throw new MediaItemCRUDMutationException(
                 $this->__('The file\'s mime type is not allowed', 'media-mutations')
