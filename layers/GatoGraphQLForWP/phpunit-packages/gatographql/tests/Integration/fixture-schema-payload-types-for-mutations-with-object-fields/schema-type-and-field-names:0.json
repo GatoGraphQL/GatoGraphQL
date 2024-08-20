@@ -425,6 +425,14 @@
           ]
         },
         {
+          "name": "LoggedInUserHasNoEditingMediaCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
           "name": "LoggedInUserHasNoEditingPageCapabilityErrorPayload",
           "fields": [
             {
@@ -442,6 +450,14 @@
         },
         {
           "name": "LoggedInUserHasNoPermissionToEditCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToEditMediaItemErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -502,6 +518,9 @@
             },
             {
               "name": "modifiedDateStr"
+            },
+            {
+              "name": "parentCustomPost"
             },
             {
               "name": "self"
@@ -753,6 +772,12 @@
             },
             {
               "name": "updateCustomPosts"
+            },
+            {
+              "name": "updateMediaItem"
+            },
+            {
+              "name": "updateMediaItems"
             },
             {
               "name": "updatePage"
@@ -1669,6 +1694,12 @@
               "name": "updateCustomPosts"
             },
             {
+              "name": "updateMediaItem"
+            },
+            {
+              "name": "updateMediaItems"
+            },
+            {
               "name": "updatePage"
             },
             {
@@ -2073,6 +2104,23 @@
             },
             {
               "name": "tagID"
+            }
+          ]
+        },
+        {
+          "name": "RootUpdateMediaItemMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "mediaItem"
+            },
+            {
+              "name": "mediaItemID"
+            },
+            {
+              "name": "status"
             }
           ]
         },
@@ -3221,6 +3269,10 @@
           "fields": null
         },
         {
+          "name": "RootUpdateMediaItemInput",
+          "fields": null
+        },
+        {
           "name": "RootUpdatePageInput",
           "fields": null
         },
@@ -3482,6 +3534,10 @@
         },
         {
           "name": "RootUpdateGenericTagTermMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootUpdateMediaItemMutationErrorPayloadUnion",
           "fields": null
         },
         {
