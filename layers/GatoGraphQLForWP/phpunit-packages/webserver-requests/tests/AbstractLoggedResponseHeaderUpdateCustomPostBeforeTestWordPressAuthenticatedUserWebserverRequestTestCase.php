@@ -38,13 +38,22 @@ abstract class AbstractLoggedResponseHeaderUpdateCustomPostBeforeTestWordPressAu
             $expectedResponseLogErrorMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
         );
-        $expectedResponseLogInfoMessageRegex = $this->getExpectedResponseLogInfoMessageRegex($dataName);
-        $this->assertMatchesRegularExpression(
-            $expectedResponseLogInfoMessageRegex,
-            $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_INFO),
-        );
+        $expectedResponseLogInfoMessageOrRegex = $this->getExpectedResponseLogInfoMessageOrRegex($dataName);
+        if (str_starts_with($expectedResponseLogInfoMessageOrRegex, '/') && str_ends_with($expectedResponseLogInfoMessageOrRegex, '/')) {
+            $expectedResponseLogInfoMessageRegex = $expectedResponseLogInfoMessageOrRegex;
+            $this->assertMatchesRegularExpression(
+                $expectedResponseLogInfoMessageRegex,
+                $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_INFO),
+            );
+        } else {
+            $expectedResponseLogInfoMessage = $expectedResponseLogInfoMessageOrRegex;
+            $this->assertEquals(
+                $expectedResponseLogInfoMessage,
+                $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_INFO),
+            );
+        }
     }
 
     abstract protected function getExpectedResponseLogErrorMessage(string $dataName): string;
-    abstract protected function getExpectedResponseLogInfoMessageRegex(string $dataName): string;
+    abstract protected function getExpectedResponseLogInfoMessageOrRegex(string $dataName): string;
 }
