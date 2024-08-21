@@ -303,6 +303,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * Create missing translation media for Polylang (#2789)
   * Translate media for Polylang (#2789)
 * Added translation language mapping to persisted queries (#2775)
+* Fixed exception when initializing the GraphQL Internal Server query on `add_attachment` (#2796)
 * [PRO] Define the Polylang language on tag and category mutations
 * [PRO] Automation: Store the GraphQL response in the info logs
 * [PRO] Added Polylang Mutations for Media Items
