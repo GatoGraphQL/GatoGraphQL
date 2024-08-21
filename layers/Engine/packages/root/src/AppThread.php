@@ -163,6 +163,8 @@ class AppThread implements AppThreadInterface
      * Copied logic from Symfony.
      *
      * @see vendor/symfony/http-foundation/Request.php
+     *
+     * phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
      */
     protected function createRequestAvoidingException(Exception $exception): Request
     {
