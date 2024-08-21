@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Log;
 
+use Exception;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 
 class Logger implements LoggerInterface
@@ -55,5 +56,14 @@ class Logger implements LoggerInterface
         fclose($handle);
 
         return true;
+    }
+
+    public function getExceptionMessage(Exception $exception): string
+    {
+        return sprintf(
+            '%s - Stack trace: %s',
+            $exception->getMessage(),
+            str_replace('\n', ' ', $exception->getTraceAsString())
+        );
     }
 }
