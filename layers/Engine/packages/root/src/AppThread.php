@@ -20,6 +20,7 @@ use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\Root\StateManagers\ModuleManager;
 use PoP\Root\StateManagers\ModuleManagerInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\InputBag;
 
 /**
@@ -150,10 +151,9 @@ class AppThread implements AppThreadInterface
     {
         try {
             return Request::createFromGlobals();
-        } catch (Exception) {
+        } catch (Exception $exception) {
+            return $this->createRequestAvoidingException($exception);
         }
-
-        return $this->createRequestWithoutFiles();
     }
 
     /**
@@ -161,14 +161,15 @@ class AppThread implements AppThreadInterface
      *
      * @see vendor/symfony/http-foundation/Request.php
      */
-    protected function createRequestWithoutFiles(): Request
+    protected function createRequestAvoidingException(Exception $exception): Request
     {
         $request = new Request(
             $_GET,
             $_POST,
             [],
             $_COOKIE,
-            [], // $_FILES is producing the exception, so comment out
+            $exception instanceof FileNotFoundException
+                ? [] : $_FILES, // @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
             $_SERVER,
         );
 
