@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use Exception;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -138,9 +139,21 @@ class AppThread implements AppThreadInterface
         return new HookManager();
     }
 
+    /**
+     * If an exception is thrown, re-create the logic from
+     * Symfony but without passing the $_FILES
+     *
+     * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
+     */
     protected function createRequest(): Request
     {
-        return Request::createFromGlobals();
+        try {
+            $request = Request::createFromGlobals();
+        } catch (Exception $exception) {
+
+        }
+
+        return $request;
     }
 
     /**
