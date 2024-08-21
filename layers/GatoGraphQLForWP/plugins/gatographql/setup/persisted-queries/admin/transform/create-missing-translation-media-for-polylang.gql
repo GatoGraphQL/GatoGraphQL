@@ -187,7 +187,9 @@ query ExportMissingTranslationLanguages(
     @export(as: "hasMissingTranslationLanguages")
 }
 
-query CreateTranslationMediaItemInputsForMissingLanguages
+query CreateTranslationMediaItemInputsForMissingLanguages(
+  $mediaItemId: ID!
+)
   @depends(on: "ExportMissingTranslationLanguages")
   @include(if: $hasMissingTranslationLanguages)
 {
@@ -218,6 +220,11 @@ query CreateTranslationMediaItemInputsForMissingLanguages
         name: "_echo",
         arguments: {
           value: {
+            from: {
+              mediaItemBy: {
+                id: $mediaItemId
+              }
+            }
             title: $originMediaItemTitleForLanguage
             description: $originMediaItemDescription
             caption: $originMediaItemCaption
