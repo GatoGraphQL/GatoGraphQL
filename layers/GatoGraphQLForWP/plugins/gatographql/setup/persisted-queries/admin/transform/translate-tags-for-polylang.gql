@@ -93,10 +93,12 @@ query ExportOriginTag(
     }
     
 
-    tagIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
+    polylangTranslationLanguageIDs(filter: {
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
+      @remove
+    tagIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
       @default(value: {})
       @export(as: "tagIDTranslationLanguageIDs")
 

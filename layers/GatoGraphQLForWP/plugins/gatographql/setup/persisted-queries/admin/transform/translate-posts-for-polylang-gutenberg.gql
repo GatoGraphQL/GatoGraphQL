@@ -176,10 +176,12 @@ query ExportOriginPost(
     }
     
 
-    postIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
+    polylangTranslationLanguageIDs(filter: {
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
+      @remove
+    postIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
       @default(value: {})
       @export(as: "postIDTranslationLanguageIDs")
 
