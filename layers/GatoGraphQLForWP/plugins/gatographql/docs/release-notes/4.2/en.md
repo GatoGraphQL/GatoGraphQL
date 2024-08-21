@@ -338,7 +338,7 @@ mutation {
 
 ## [PRO] Improvements
 
-- [Automation] Added automation rule: "Polylang: When creating a media item, translate it to all languages"
+- [Automation] Added automation rule: "Polylang: When uploading an attachment, translate it to all languages"
 
 ### Define the Polylang language on tag and category mutations
 
