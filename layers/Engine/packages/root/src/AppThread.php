@@ -142,10 +142,8 @@ class AppThread implements AppThreadInterface
     }
 
     /**
-     * If an exception is thrown, create the Request
-     * without the $_FILES
-     *
-     * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
+     * If an exception is thrown, re-create the Request
+     * avoiding the exception
      */
     protected function createRequest(): Request
     {
@@ -157,7 +155,12 @@ class AppThread implements AppThreadInterface
     }
 
     /**
-     * Copied logic from Symfony
+     * If a file in $_FILES does not exist, re-create the Request
+     * without passing $_FILES.
+     *
+     * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
+     * 
+     * Copied logic from Symfony.
      *
      * @see vendor/symfony/http-foundation/Request.php
      */
@@ -168,7 +171,7 @@ class AppThread implements AppThreadInterface
             $_POST,
             [],
             $_COOKIE,
-            $exception instanceof FileNotFoundException ? [] : $_FILES, // @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
+            $exception instanceof FileNotFoundException ? [] : $_FILES, // @see vendor/symfony/http-foundation/File/File.php `__construct`
             $_SERVER,
         );
 
