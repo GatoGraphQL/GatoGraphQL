@@ -140,17 +140,42 @@ class AppThread implements AppThreadInterface
     }
 
     /**
-     * If an exception is thrown, re-create the logic from
-     * Symfony but without passing the $_FILES
+     * If an exception is thrown, create the Request
+     * without the $_FILES
      *
      * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
      */
     protected function createRequest(): Request
     {
         try {
-            $request = Request::createFromGlobals();
-        } catch (Exception $exception) {
+            return Request::createFromGlobals();
+        } catch (Exception) {
+        }
 
+        return $this->createRequestWithoutFiles();
+    }
+
+    /**
+     * Copied logic from Symfony
+     *
+     * @see vendor/symfony/http-foundation/Request.php
+     */
+    protected function createRequestWithoutFiles(): Request
+    {
+        $request = new Request(
+            $_GET,
+            $_POST,
+            [],
+            $_COOKIE,
+            [], // $_FILES is producing the exception, so comment out
+            $_SERVER,
+        );
+
+        if (str_starts_with($request->headers->get('CONTENT_TYPE', ''), 'application/x-www-form-urlencoded')
+            && \in_array(strtoupper($request->server->get('REQUEST_METHOD', 'GET')), ['PUT', 'DELETE', 'PATCH'])
+        ) {
+            parse_str($request->getContent(), $data);
+            $request->request = new InputBag($data);
         }
 
         return $request;
