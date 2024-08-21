@@ -73,7 +73,9 @@ query ExportDataFromOriginPost($postId: ID!)
       code @export(as: "fromLanguage")
     }
     
-    postIDTranslationLanguageIDs: polylangTranslationLanguageIDs
+    polylangTranslationLanguageIDs
+      @remove
+    postIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
       @default(value: {})
       @export(as: "postIDTranslationLanguageIDs")
 
