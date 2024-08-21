@@ -168,8 +168,7 @@ class AppThread implements AppThreadInterface
             $_POST,
             [],
             $_COOKIE,
-            $exception instanceof FileNotFoundException
-                ? [] : $_FILES, // @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
+            $exception instanceof FileNotFoundException ? [] : $_FILES, // @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
             $_SERVER,
         );
 
