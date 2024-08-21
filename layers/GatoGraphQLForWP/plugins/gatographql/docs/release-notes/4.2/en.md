@@ -332,6 +332,10 @@ mutation {
 }
 ```
 
+## Fixed
+
+- Exception when initializing the GraphQL Internal Server query on `add_attachment` ([#2796](https://github.com/GatoGraphQL/GatoGraphQL/pull/2796))
+
 ## [PRO] Improvements
 
 - [Automation] Added automation rule: "Polylang: When creating a media item, translate it to all languages"

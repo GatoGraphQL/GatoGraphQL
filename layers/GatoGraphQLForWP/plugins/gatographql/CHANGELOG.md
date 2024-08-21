@@ -25,6 +25,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - [PRO] Translate media for Polylang (#2789)
 - Added translation language mapping to persisted queries (#2775)
 
+### Fixed
+
+- Exception when initializing the GraphQL Internal Server query on `add_attachment` (#2796)
+
 ## 4.1.0 - 26/07/2024
 
 ### Improvements

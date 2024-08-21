@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\Root;
 
+use Exception;
 use PoP\Root\Container\ContainerBuilderFactory;
 use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
@@ -19,6 +20,8 @@ use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\Root\StateManagers\ModuleManager;
 use PoP\Root\StateManagers\ModuleManagerInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\HttpFoundation\InputBag;
 
 /**
  * Single class hosting all the top-level instances
@@ -138,9 +141,48 @@ class AppThread implements AppThreadInterface
         return new HookManager();
     }
 
+    /**
+     * If an exception is thrown, re-create the Request
+     * avoiding the exception
+     */
     protected function createRequest(): Request
     {
-        return Request::createFromGlobals();
+        try {
+            return Request::createFromGlobals();
+        } catch (Exception $exception) {
+            return $this->createRequestAvoidingException($exception);
+        }
+    }
+
+    /**
+     * If a file in $_FILES does not exist, re-create the Request
+     * without passing $_FILES.
+     *
+     * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2794
+     * 
+     * Copied logic from Symfony.
+     *
+     * @see vendor/symfony/http-foundation/Request.php
+     */
+    protected function createRequestAvoidingException(Exception $exception): Request
+    {
+        $request = new Request(
+            $_GET,
+            $_POST,
+            [],
+            $_COOKIE,
+            $exception instanceof FileNotFoundException ? [] : $_FILES, // @see vendor/symfony/http-foundation/File/File.php `__construct`
+            $_SERVER,
+        );
+
+        if (str_starts_with($request->headers->get('CONTENT_TYPE', '') ?? '', 'application/x-www-form-urlencoded')
+            && \in_array(strtoupper($request->server->get('REQUEST_METHOD', 'GET')), ['PUT', 'DELETE', 'PATCH'])
+        ) {
+            parse_str($request->getContent(), $data);
+            $request->request = new InputBag($data);
+        }
+
+        return $request;
     }
 
     /**
