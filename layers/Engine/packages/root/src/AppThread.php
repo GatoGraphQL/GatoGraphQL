@@ -10,7 +10,6 @@ use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Helpers\AppThreadHelpers;
-use PoP\Root\HttpFoundation\InputBag;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
@@ -21,6 +20,7 @@ use PoP\Root\StateManagers\HookManagerInterface;
 use PoP\Root\StateManagers\ModuleManager;
 use PoP\Root\StateManagers\ModuleManagerInterface;
 use Symfony\Component\HttpFoundation\Exception\BadRequestException;
+use Symfony\Component\HttpFoundation\InputBag;
 
 /**
  * Single class hosting all the top-level instances
