@@ -172,12 +172,17 @@ class AppThread implements AppThreadInterface
             $_SERVER,
         );
 
-        if (str_starts_with($request->headers->get('CONTENT_TYPE', '') ?? '', 'application/x-www-form-urlencoded')
-            && \in_array(strtoupper($request->server->get('REQUEST_METHOD', 'GET')), ['PUT', 'DELETE', 'PATCH'])
-        ) {
-            parse_str($request->getContent(), $data);
-            $request->request = new InputBag($data);
-        }
+        /**
+         * Commented this logic, because can't extend final class
+         * \Symfony\Component\HttpFoundation\InputBag,
+         * yet \PoP\Root\HttpFoundation\InputBag is needed for scoping
+         */
+        // if (str_starts_with($request->headers->get('CONTENT_TYPE', '') ?? '', 'application/x-www-form-urlencoded')
+        //     && \in_array(strtoupper($request->server->get('REQUEST_METHOD', 'GET')), ['PUT', 'DELETE', 'PATCH'])
+        // ) {
+        //     parse_str($request->getContent(), $data);
+        //     $request->request = new InputBag($data);
+        // }
 
         return $request;
     }
