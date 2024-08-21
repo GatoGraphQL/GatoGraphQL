@@ -38,13 +38,13 @@ abstract class AbstractLoggedResponseHeaderUpdateCustomPostBeforeTestWordPressAu
             $expectedResponseLogErrorMessage,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_ERRORS),
         );
-        $expectedResponseLogInfoMessage = $this->getExpectedResponseLogInfoMessage($dataName);
-        $this->assertEquals(
-            $expectedResponseLogInfoMessage,
+        $expectedResponseLogInfoMessageRegex = $this->getExpectedResponseLogInfoMessageRegex($dataName);
+        $this->assertMatchesRegularExpression(
+            $expectedResponseLogInfoMessageRegex,
             $response->getHeaderLine(CustomHeaders::GATOGRAPHQL_INFO),
         );
     }
 
     abstract protected function getExpectedResponseLogErrorMessage(string $dataName): string;
-    abstract protected function getExpectedResponseLogInfoMessage(string $dataName): string;
+    abstract protected function getExpectedResponseLogInfoMessageRegex(string $dataName): string;
 }
