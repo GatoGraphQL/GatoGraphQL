@@ -75,9 +75,11 @@ query ExportOriginMediaItem(
     ################################################################
     originMediaItemTitle: title @export(as: "originMediaItemTitle")
     originMediaItemDescription: description @export(as: "originMediaItemDescription")
-    originMediaItemCaption: altText @export(as: "originMediaItemCaption")
+    originMediaItemCaption: caption @export(as: "originMediaItemCaption")
     originMediaItemAltText: altText @export(as: "originMediaItemAltText")
-    originMediaItemAuthorID: altText @export(as: "originMediaItemAuthorID")
+    originMediaItemAuthorID: author @export(as: "originMediaItemAuthorID") {
+      id
+    }
     originMediaItemParentCustomPost: parentCustomPost @export(as: "originMediaItemParentCustomPostID") {
       id
     }
