@@ -91,11 +91,13 @@ query ExportOriginMediaItem(
     }
     
 
-    mediaItemIDTranslationLanguageIDs: polylangTranslationLanguageIDs(filter: {
+    polylangTranslationLanguageIDs(filter: {
       includeSelf: true
       includeLanguages: $includeLanguagesToTranslate
       excludeLanguages: $excludeLanguagesToTranslate
     })
+      @remove
+    mediaItemIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
       @default(value: {})
       @export(as: "mediaItemIDTranslationLanguageIDs")
   }
