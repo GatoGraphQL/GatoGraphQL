@@ -1990,6 +1990,9 @@ class Plugin extends AbstractMainPlugin
                                     'admin/transform/create-missing-translation-media-for-polylang',
                                     VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_MEDIA_FOR_POLYLANG,
                                 ),
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
+                                    'admin/transform/create-missing-translation-media-for-polylang',
+                                ),
                             ],
                         ],
                         ...$defaultSchemaConfigurationPersistedQueryBlocks,
