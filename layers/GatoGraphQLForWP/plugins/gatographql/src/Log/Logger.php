@@ -63,7 +63,7 @@ class Logger implements LoggerInterface
         return sprintf(
             '%s - Stack trace: %s',
             $exception->getMessage(),
-            str_replace('\n', ' ', $exception->getTraceAsString())
+            str_replace(PHP_EOL, '\n', $exception->getTraceAsString())
         );
     }
 }
