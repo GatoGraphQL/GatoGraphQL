@@ -10,6 +10,7 @@ use PoP\Root\Container\ContainerInterface;
 use PoP\Root\Container\SystemContainerBuilderFactory;
 use PoP\Root\Exception\ComponentNotExistsException;
 use PoP\Root\Helpers\AppThreadHelpers;
+use PoP\Root\HttpFoundation\InputBag;
 use PoP\Root\HttpFoundation\Request;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Module\ModuleInterface;
