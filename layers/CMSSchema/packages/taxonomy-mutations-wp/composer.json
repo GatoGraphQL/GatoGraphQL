@@ -163,10 +163,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/taxonomies-wp": "^4.2",
-        "pop-cms-schema/taxonomy-mutations": "^4.2",
-        "pop-cms-schema/user-roles-wp": "^4.2",
-        "pop-cms-schema/user-state-mutations-wp": "^4.2"
+        "pop-cms-schema/taxonomies-wp": "^4.3",
+        "pop-cms-schema/taxonomy-mutations": "^4.3",
+        "pop-cms-schema/user-roles-wp": "^4.3",
+        "pop-cms-schema/user-state-mutations-wp": "^4.3"
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
@@ -196,7 +196,7 @@
     "extra": {
         "wordpress-install-dir": "vendor/wordpress/wordpress",
         "branch-alias": {
-            "dev-master": "4.2-dev"
+            "dev-master": "4.3-dev"
         }
     },
     "config": {
