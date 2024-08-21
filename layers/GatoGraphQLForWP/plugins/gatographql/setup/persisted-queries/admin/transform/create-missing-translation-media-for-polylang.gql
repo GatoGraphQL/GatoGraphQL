@@ -139,14 +139,12 @@ query ExportOriginMediaItemCanBeTranslated(
     @export(as: "canTranslateOriginMediaItem")
 }
 
-query ExportOriginMediaItemParent(
-  $customPostType: CustomPostEnumString!
-)
+query ExportOriginMediaItemParent
   @depends(on: "ExportOriginMediaItemCanBeTranslated")
   @include(if: $canTranslateOriginMediaItem)
   @include(if: $hasOriginMediaItemParentCustomPost)
 {
-  originMediaItemParentCustomPost: customPost(by: { id: $originMediaItemParentCustomPostID }, customPostTypes: [$customPostType]) {
+  originMediaItemParentCustomPost: customPost(by: { id: $originMediaItemParentCustomPostID }) {
     id
 
     
