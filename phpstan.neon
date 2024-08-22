@@ -111,6 +111,7 @@ includes:
     - layers/WPSchema/packages/schema-commons/phpstan.neon.dist
     - layers/CMSSchema/packages/schema-commons-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/settings/phpstan.neon.dist
+    - layers/WPSchema/packages/settings/phpstan.neon.dist
     - layers/CMSSchema/packages/settings-wp/phpstan.neon.dist
     - layers/WPSchema/packages/site/phpstan.neon.dist
     - layers/CMSSchema/packages/tag-mutations/phpstan.neon.dist
