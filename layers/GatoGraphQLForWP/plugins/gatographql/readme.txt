@@ -308,7 +308,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * [PRO] Automation: Store the GraphQL response in the info logs
 * [PRO] Added Polylang Mutations for Media Items
 * [PRO] Map additional WordPress hooks for Automation
-* [PRO] Filter entities by Polylang's DEFAULT language
+* [PRO] Filter entities by Polylang's default language
 
 = 4.1.0 =
 * Send the referer on Guzzle requests (#2754)
