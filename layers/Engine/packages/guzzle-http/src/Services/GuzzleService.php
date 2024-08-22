@@ -123,10 +123,21 @@ class GuzzleService implements GuzzleServiceInterface
     }
 
     /**
+     * Try to increase the limit of the truncated response
+     *
+     * @see https://github.com/laravel/framework/discussions/47773
+     */
+    protected function maybeReplaceException(Exception $exception): Exception
+    {
+        return $exception;
+    }
+
+    /**
      * @throws GuzzleHTTPRequestException
      */
     protected function throwException(Exception $exception): void
     {
+        $exception = $this->maybeReplaceException($exception);
         throw new GuzzleHTTPRequestException(
             $exception->getMessage(),
             0,
