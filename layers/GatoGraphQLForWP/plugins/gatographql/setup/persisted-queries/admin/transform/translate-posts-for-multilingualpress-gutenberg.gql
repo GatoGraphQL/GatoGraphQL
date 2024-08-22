@@ -53,6 +53,9 @@
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+
   emptyBool: _echo(value: false)
     @export(as: "hasTranslationConnections")
     @export(as: "executeTranslation")
@@ -142,6 +145,7 @@ query ExportData(
   $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
 )
   @depends(on: "InitializeVariables")
+  @include(if: $isGutenbergEditorEnabled)
 {
   # Retrieve the language of the content
   siteLanguage
@@ -192,6 +196,7 @@ query ExportOriginPost(
   $excludeSiteIDsToTranslate: [ID!]
 )
   @depends(on: "ExportData")
+  @include(if: $isGutenbergEditorEnabled)
 {
   originPost: post(by: { id: $postId }, status: any) {
     id

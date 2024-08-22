@@ -61,14 +61,19 @@
 # documentation.
 #
 ########################################################################
+
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
     @remove
 
   emptyBool: _echo(value: false)
+    @export(as: "hasOriginPost")
     @export(as: "hasTranslationPosts")
     @export(as: "executeTranslation")
     @remove
@@ -155,6 +160,7 @@ query ExportOriginPost(
   $excludeLanguagesToTranslate: [String!]
 )
   @depends(on: "InitializeVariables")
+  @include(if: $isGutenbergEditorEnabled)
 {
   defaultLanguage: polylangDefaultLanguage {
     code @export(as: "defaultLanguage")

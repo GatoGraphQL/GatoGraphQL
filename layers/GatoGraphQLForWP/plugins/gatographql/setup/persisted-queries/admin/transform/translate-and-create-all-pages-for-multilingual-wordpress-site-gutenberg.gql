@@ -37,10 +37,14 @@
 #
 ########################################################################
 
-query InitializeExternalSiteVariables
+query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+
   emptyBool: _echo(value: false)
+    @export(as: "hasMasterPages")
     @export(as: "executeTranslation")
     @remove
 }
@@ -53,7 +57,8 @@ query ExportData(
   $pageIDs: [ID!]! = []
   $pageStatus: [CustomPostStatusEnum!]! = [publish]
 )
-  @depends(on: "InitializeExternalSiteVariables")
+  @depends(on: "InitializeVariables")
+  @include(if: $isGutenbergEditorEnabled)
 {
   # Retrieve the language of the content
   siteLanguage

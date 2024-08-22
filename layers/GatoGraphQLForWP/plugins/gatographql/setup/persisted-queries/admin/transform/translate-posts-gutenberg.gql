@@ -24,7 +24,11 @@
 #
 ########################################################################
 
-query InitializeEmptyVariables($postIds: [ID!]!) {
+query InitializeVariables($postIds: [ID!]!)
+{
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+
   emptyVars: posts(filter: { ids: $postIds, status: any } ) {
     emptyArray: _echo(value: [])
       @export(
@@ -265,7 +269,8 @@ query InitializeEmptyVariables($postIds: [ID!]!) {
 
 query FetchData($postIds: [ID!]!)
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
-  @depends(on: "InitializeEmptyVariables")
+  @depends(on: "InitializeVariables")
+  @include(if: $isGutenbergEditorEnabled)
 {
   posts(filter: { ids: $postIds, status: any } ) {
     id
@@ -535,6 +540,7 @@ query FetchData($postIds: [ID!]!)
 
 query AdaptData
   @depends(on: "FetchData")
+  @include(if: $isGutenbergEditorEnabled)
 {
   adaptedToTitle: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -564,6 +570,7 @@ query TransformData(
   $toLang: String!
 )
   @depends(on: "AdaptData")
+  @include(if: $isGutenbergEditorEnabled)
 {
   transformations: _echo(value: {
     meta: {
@@ -653,6 +660,7 @@ query TransformData(
 
 query EscapeRegexStrings
   @depends(on: "TransformData")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty(
@@ -700,6 +708,7 @@ query EscapeRegexStrings
 
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
@@ -1262,6 +1271,7 @@ query CreateRegexReplacements
 
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
+  @include(if: $isGutenbergEditorEnabled)
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
@@ -1993,6 +2003,7 @@ query ExecuteRegexReplacements
 
 query PrepareMetaReplacements
   @depends(on: "TransformData")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   transformedMeta: _echo(value: $title)
     @underEachJSONObjectProperty(
@@ -2032,7 +2043,9 @@ mutation TranslateGutenbergPosts($postIds: [ID!]!)
   @depends(on: [
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
-]) {
+  ]
+  @include(if: $isGutenbergEditorEnabled)
+) {
   updatePosts: posts(filter: { ids: $postIds, status: any } ) {
     id
     transformedRawContent: _objectProperty(
