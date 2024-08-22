@@ -100,33 +100,36 @@ query ExportOriginCustomPost(
   }
 
   originCustomPost: customPost(by: { id: $customPostId }, status: any) {
-    id
+    __typename
+    ...on CustomPost {
+      id
 
 
-    polylangLanguage {
-      code @export(as: "fromLanguage")
+      polylangLanguage {
+        code @export(as: "fromLanguage")
+      }
+      
+
+      polylangTranslationLanguageIDs(filter: {
+        includeLanguages: $includeLanguagesToTranslate
+        excludeLanguages: $excludeLanguagesToTranslate
+      })
+        @remove
+      customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+        @default(value: {})
+        @export(as: "customPostIDTranslationLanguageIDs")
+
+      hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+        @export(as: "hasTranslationCustomPosts")
+
+
+      rawTitle
+        @export(as: "originRawTitle")
+      rawContent
+        @export(as: "originRawContent")
+      rawExcerpt
+        @export(as: "originRawExcerpt")
     }
-    
-
-    polylangTranslationLanguageIDs(filter: {
-      includeLanguages: $includeLanguagesToTranslate
-      excludeLanguages: $excludeLanguagesToTranslate
-    })
-      @remove
-    customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
-      @export(as: "customPostIDTranslationLanguageIDs")
-
-    hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
-      @export(as: "hasTranslationCustomPosts")
-
-
-    rawTitle
-      @export(as: "originRawTitle")
-    rawContent
-      @export(as: "originRawContent")
-    rawExcerpt
-      @export(as: "originRawExcerpt")
   }
 
   hasOriginCustomPost: _notNull(value: $__originCustomPost)
@@ -146,23 +149,26 @@ query FetchData(
   translationCustomPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "translationCustomPostIds")
   translationCustomPosts: customPosts(filter: { ids: $__translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
-    id
+    __typename
+    ...on CustomPost {
+      id
 
-    polylangLanguage @export(
-      as: "translationPostLanguages"
-      type: DICTIONARY
-    ) {
-      code
-    }
-
-    rawTitle: _echo(value: $originRawTitle)
-    rawContent: _echo(value: $originRawContent)
-    rawExcerpt: _echo(value: $originRawExcerpt)
-      @export(
-        as: "dataToTranslate",
-        affectAdditionalFieldsUnderPos: [1, 2]
+      polylangLanguage @export(
+        as: "translationPostLanguages"
         type: DICTIONARY
-      )
+      ) {
+        code
+      }
+
+      rawTitle: _echo(value: $originRawTitle)
+      rawContent: _echo(value: $originRawContent)
+      rawExcerpt: _echo(value: $originRawExcerpt)
+        @export(
+          as: "dataToTranslate",
+          affectAdditionalFieldsUnderPos: [1, 2]
+          type: DICTIONARY
+        )
+    }
   }
 
   hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
@@ -318,27 +324,30 @@ mutation TranslateClassicEditorCustomPosts(
   @include(if: $executeTranslation)
 {
   updateTranslationPosts: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
-    id
-    postInput: _objectProperty(
-      object: $postInputs,
-      by: {
-        key: $__id
-      }
-    )
-      @remove
-    update(input: $__postInput) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
+    __typename
+    ...on CustomPost {
+      id
+      postInput: _objectProperty(
+        object: $postInputs,
+        by: {
+          key: $__id
         }
-      }
-      post {
-        id
-        title
-        rawExcerpt
-        rawContent
+      )
+        @remove
+      update(input: $__postInput) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        post {
+          id
+          title
+          rawExcerpt
+          rawContent
+        }
       }
     }
   }

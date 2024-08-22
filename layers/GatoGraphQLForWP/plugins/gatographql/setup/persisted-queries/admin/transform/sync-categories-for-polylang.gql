@@ -66,32 +66,35 @@ query ExportDataFromOriginCustomPost(
   }
 
   originCustomPost: customPost(by: { id: $customPostId }, status: any) {
-    id
-
-    polylangLanguage {
-      code @export(as: "fromLanguage")
-    }
-    
-    polylangTranslationLanguageIDs
-      @remove
-    customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
-      @export(as: "customPostIDTranslationLanguageIDs")
-
-    hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
-      @export(as: "hasOriginCustomPostTranslationPosts")
-
-    categories(taxonomy: $categoryTaxonomy) @export(as: "originCustomPostCategoryIDs") {
+    __typename
+    ...on CustomPost {
       id
-      name
+
       polylangLanguage {
-        code
+        code @export(as: "fromLanguage")
       }
+      
       polylangTranslationLanguageIDs
-        @export(
-          as: "categoryIDTranslationLanguageIDs",
-          type: DICTIONARY
-        )
+        @remove
+      customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+        @default(value: {})
+        @export(as: "customPostIDTranslationLanguageIDs")
+
+      hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+        @export(as: "hasOriginCustomPostTranslationPosts")
+
+      categories(taxonomy: $categoryTaxonomy) @export(as: "originCustomPostCategoryIDs") {
+        id
+        name
+        polylangLanguage {
+          code
+        }
+        polylangTranslationLanguageIDs
+          @export(
+            as: "categoryIDTranslationLanguageIDs",
+            type: DICTIONARY
+          )
+      }
     }
   }
 }
@@ -106,13 +109,16 @@ query ExportTranslationCustomPostLanguages(
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "originCustomPostTranslationPostIds")
   translationCustomPostLanguages: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
-    id
+    __typename
+    ...on CustomPost {
+      id
 
-    polylangLanguage @export(
-      as: "translationCustomPostLanguages"
-      type: DICTIONARY
-    ) {
-      code
+      polylangLanguage @export(
+        as: "translationCustomPostLanguages"
+        type: DICTIONARY
+      ) {
+        code
+      }
     }
   }
 }
@@ -126,50 +132,53 @@ query FilterTranslationCustomPostsToUpdate(
   @include(if: $hasOriginCustomPostTranslationPosts)
 {
   translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
-    id
-    polylangLanguageCode: _objectProperty(
-      object: $translationCustomPostLanguages,
-      by: { key: $__id }
-    )
-    polylangLanguage: _objectProperty(
-      object: $languageLocaleCodes,
-      by: { key: $__polylangLanguageCode }
-    )
+    __typename
+    ...on CustomPost {
+      id
+      polylangLanguageCode: _objectProperty(
+        object: $translationCustomPostLanguages,
+        by: { key: $__id }
+      )
+      polylangLanguage: _objectProperty(
+        object: $languageLocaleCodes,
+        by: { key: $__polylangLanguageCode }
+      )
 
-    translationPostCategoryIDs: _echo(value: $__polylangLanguage)
-      @passOnwards(as: "lang")
-      @applyField(
-        name: "_echo"
-        arguments: { value: $originCustomPostCategoryIDs }
-        setResultInResponse: true
-      )
-      @underEachArrayItem(
-        passValueOnwardsAs: "categoryID"
-        affectDirectivesUnderPos: [1, 2]
-      )
+      translationPostCategoryIDs: _echo(value: $__polylangLanguage)
+        @passOnwards(as: "lang")
         @applyField(
-          name: "_objectProperty"
-          arguments: {
-            object: $categoryIDTranslationLanguageIDs,
-            by: { key: $categoryID }
-          }
-          passOnwardsAs: "categoryTranslationLanguageIDs"
-        )
-        @applyField(
-          name: "_objectProperty"
-          arguments: {
-            object: $categoryTranslationLanguageIDs,
-            by: { key: $lang },
-            failIfNonExistingKeyOrPath: false
-          }
+          name: "_echo"
+          arguments: { value: $originCustomPostCategoryIDs }
           setResultInResponse: true
         )
-      @arrayFilter
-      @export(
-        as: "translationPostCategoryIDs",
-        type: DICTIONARY
-      )
-      @remove
+        @underEachArrayItem(
+          passValueOnwardsAs: "categoryID"
+          affectDirectivesUnderPos: [1, 2]
+        )
+          @applyField(
+            name: "_objectProperty"
+            arguments: {
+              object: $categoryIDTranslationLanguageIDs,
+              by: { key: $categoryID }
+            }
+            passOnwardsAs: "categoryTranslationLanguageIDs"
+          )
+          @applyField(
+            name: "_objectProperty"
+            arguments: {
+              object: $categoryTranslationLanguageIDs,
+              by: { key: $lang },
+              failIfNonExistingKeyOrPath: false
+            }
+            setResultInResponse: true
+          )
+        @arrayFilter
+        @export(
+          as: "translationPostCategoryIDs",
+          type: DICTIONARY
+        )
+        @remove
+    }
   }
 
   hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
@@ -200,39 +209,41 @@ mutation UpdateCategoriesForTranslationPosts(
   @depends(on: "FilterTranslationCustomPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )
-  {
-    id
-    polylangLanguage {
-      code
-    }
-
-    categoryIDs: _objectProperty(
-      object: $translationPostCategoryIDs,
-      by: { key: $__id }
-    )
-
-    setCategories(input: {
-      taxonomy: $categoryTaxonomy
-      categoriesBy: {
-        ids: $__categoryIDs
-      },
-      append: false
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
-        }
+  updateTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
+    __typename
+    ...on CustomPost {
+      id
+      polylangLanguage {
+        code
       }
-      post {
-        __typename
-        categories {
-          id
-          name
-          polylangLanguage {
-            code
+
+      categoryIDs: _objectProperty(
+        object: $translationPostCategoryIDs,
+        by: { key: $__id }
+      )
+
+      setCategories(input: {
+        taxonomy: $categoryTaxonomy
+        categoriesBy: {
+          ids: $__categoryIDs
+        },
+        append: false
+      }) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        post {
+          __typename
+          categories {
+            id
+            name
+            polylangLanguage {
+              code
+            }
           }
         }
       }

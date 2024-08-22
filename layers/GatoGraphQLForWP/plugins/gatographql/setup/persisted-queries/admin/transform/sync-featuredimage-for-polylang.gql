@@ -68,30 +68,33 @@ query ExportDataFromOriginCustomPost($customPostId: ID!)
   }
 
   originCustomPost: customPost(by: { id: $customPostId }, status: any) {
-    id
-
-    polylangLanguage {
-      code @export(as: "fromLanguage")
-    }
-    
-    polylangTranslationLanguageIDs
-      @remove
-    customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
-      @export(as: "customPostIDTranslationLanguageIDs")
-
-    hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
-      @export(as: "hasOriginCustomPostTranslationPosts")
-
-    featuredImage @export(as: "originCustomPostFeaturedImageID") {
+    __typename
+    ...on CustomPost {
       id
 
+      polylangLanguage {
+        code @export(as: "fromLanguage")
+      }
+      
       polylangTranslationLanguageIDs
-        @export(as: "featuredImageTranslationLanguageIDs")
-    }
+        @remove
+      customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+        @default(value: {})
+        @export(as: "customPostIDTranslationLanguageIDs")
 
-    hasFeaturedImage: _notNull(value: $__featuredImage)
-      @export(as: "hasFeaturedImage")
+      hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+        @export(as: "hasOriginCustomPostTranslationPosts")
+
+      featuredImage @export(as: "originCustomPostFeaturedImageID") {
+        id
+
+        polylangTranslationLanguageIDs
+          @export(as: "featuredImageTranslationLanguageIDs")
+      }
+
+      hasFeaturedImage: _notNull(value: $__featuredImage)
+        @export(as: "hasFeaturedImage")
+    }
   }
 }
 
@@ -106,7 +109,10 @@ query FilterTranslationCustomPostsToUpdate(
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "originCustomPostTranslationPostIds")
   translationCustomPosts: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
-    id
+    __typename
+    ...on CustomPost {
+      id
+    }
   }
 
   hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
@@ -139,51 +145,54 @@ mutation UpdateOrRemoveFeaturedImageForTranslationCustomPosts(
   updateFeaturedImageInTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )
     @include(if: $hasFeaturedImage)
   {
-    id
+    __typename
+    ...on CustomPost {
+      id
 
-    polylangLanguageLocale: polylangLanguage {
-      code
-    }
-    polylangLanguage: _objectProperty(
-      object: $languageLocaleCodes,
-      by: { key: $__polylangLanguageLocale }
-    )
-
-    translationFeaturedImageID: _objectProperty(
-      object: $featuredImageTranslationLanguageIDs,
-      by: {
-        key: $__polylangLanguage
+      polylangLanguageLocale: polylangLanguage {
+        code
       }
-      failIfNonExistingKeyOrPath: false
-    )
+      polylangLanguage: _objectProperty(
+        object: $languageLocaleCodes,
+        by: { key: $__polylangLanguageLocale }
+      )
 
-    hasTranslationFeaturedImageID: _notNull(value: $__translationFeaturedImageID)
-
-    translationOrDefaultFeaturedImageID: _if(
-      condition: $__hasTranslationFeaturedImageID,
-      then: $__translationFeaturedImageID,
-      else: $originCustomPostFeaturedImageID
-    )
-      
-    setFeaturedImage(input: {
-      mediaItemBy: {
-        id: $__translationOrDefaultFeaturedImageID
-      }
-    }) {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
+      translationFeaturedImageID: _objectProperty(
+        object: $featuredImageTranslationLanguageIDs,
+        by: {
+          key: $__polylangLanguage
         }
-      }
-      customPost {
-        __typename
-        ...on CustomPost {
-          featuredImage {
-            id
-            polylangLanguage {
-              code
+        failIfNonExistingKeyOrPath: false
+      )
+
+      hasTranslationFeaturedImageID: _notNull(value: $__translationFeaturedImageID)
+
+      translationOrDefaultFeaturedImageID: _if(
+        condition: $__hasTranslationFeaturedImageID,
+        then: $__translationFeaturedImageID,
+        else: $originCustomPostFeaturedImageID
+      )
+        
+      setFeaturedImage(input: {
+        mediaItemBy: {
+          id: $__translationOrDefaultFeaturedImageID
+        }
+      }) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        customPost {
+          __typename
+          ...on CustomPost {
+            featuredImage {
+              id
+              polylangLanguage {
+                code
+              }
             }
           }
         }
@@ -194,20 +203,23 @@ mutation UpdateOrRemoveFeaturedImageForTranslationCustomPosts(
   removeFeaturedImageFromTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )
     @skip(if: $hasFeaturedImage)
   {
-    id      
-    removeFeaturedImage {
-      status
-      errors {
-        __typename
-        ...on ErrorPayload {
-          message
+    __typename
+    ...on CustomPost {
+      id      
+      removeFeaturedImage {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
         }
-      }
-      customPost {
-        __typename
-        ...on CustomPost {
-          featuredImage {
-            id
+        customPost {
+          __typename
+          ...on CustomPost {
+            featuredImage {
+              id
+            }
           }
         }
       }
