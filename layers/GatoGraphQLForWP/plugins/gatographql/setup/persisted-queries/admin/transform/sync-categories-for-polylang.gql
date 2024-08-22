@@ -105,7 +105,7 @@ query ExportTranslationPostLanguages(
 {
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "originCustomPostTranslationPostIds")
-  translationCustomPostLanguages: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPost] } ) {
+  translationCustomPostLanguages: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
     id
 
     polylangLanguage @export(
@@ -125,7 +125,7 @@ query FilterTranslationPostsToUpdate(
   @depends(on: "ExportTranslationPostLanguages")
   @include(if: $hasOriginPostTranslationPosts)
 {
-  translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPost] } ) {
+  translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
     id
     polylangLanguageCode: _objectProperty(
       object: $translationCustomPostLanguages,
@@ -200,7 +200,7 @@ mutation UpdateCategoriesForTranslationPosts(
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPost] } )
+  updateTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )
   {
     id
     polylangLanguage {
