@@ -187,11 +187,11 @@ query ExportOriginPost(
       excludeLanguages: $excludeLanguagesToTranslate
     })
       @remove
-    postIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+    customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
       @default(value: {})
-      @export(as: "postIDTranslationLanguageIDs")
+      @export(as: "customPostIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
+    hasTranslationPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
       @export(as: "hasTranslationPosts")
 
 
@@ -455,7 +455,7 @@ query InitializeTranslationVariables(
   @include(if: $hasOriginPost)
   @include(if: $hasTranslationPosts)
 {
-  translationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
+  translationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "translationPostIds")
   emptyTranslationPostVars: posts(filter: { ids: $__translationPostIds, status: $statusToUpdate } ) {
     id
@@ -1984,7 +1984,7 @@ query ExecuteRegexReplacements
 {
   transformedRawContent: _echo(value: $rawContent)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "customPostID"
       affectDirectivesUnderPos: [
         1, 2,
         6, 7,
@@ -2010,7 +2010,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreHeadingContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2023,7 +2023,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreHeadingContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreHeadingContentReplacementsFrom"
@@ -2033,7 +2033,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreHeadingContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreHeadingContentReplacementsTo"
@@ -2049,7 +2049,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreParagraphContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2062,7 +2062,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreParagraphContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreParagraphContentReplacementsFrom"
@@ -2072,7 +2072,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreParagraphContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreParagraphContentReplacementsTo"
@@ -2088,7 +2088,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreImageAltReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2101,7 +2101,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageAltReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageAltReplacementsFrom"
@@ -2111,7 +2111,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageAltReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageAltReplacementsTo"
@@ -2127,7 +2127,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreImageCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2140,7 +2140,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageCaptionReplacementsFrom"
@@ -2150,7 +2150,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreImageCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreImageCaptionReplacementsTo"
@@ -2166,7 +2166,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreButtonTextReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2179,7 +2179,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreButtonTextReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreButtonTextReplacementsFrom"
@@ -2189,7 +2189,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreButtonTextReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreButtonTextReplacementsTo"
@@ -2205,7 +2205,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreTableCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2218,7 +2218,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableCaptionReplacementsFrom"
@@ -2228,7 +2228,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableCaptionReplacementsTo"
@@ -2244,7 +2244,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreTableBodyCellsContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2257,7 +2257,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableBodyCellsContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableBodyCellsContentReplacementsFrom"
@@ -2267,7 +2267,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreTableBodyCellsContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreTableBodyCellsContentReplacementsTo"
@@ -2283,7 +2283,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreListItemContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2296,7 +2296,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreListItemContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreListItemContentReplacementsFrom"
@@ -2306,7 +2306,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreListItemContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreListItemContentReplacementsTo"
@@ -2322,7 +2322,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreCoverAltReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2335,7 +2335,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreCoverAltReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreCoverAltReplacementsFrom"
@@ -2345,7 +2345,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreCoverAltReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreCoverAltReplacementsTo"
@@ -2361,7 +2361,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreMediaTextAltReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2374,7 +2374,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreMediaTextAltReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreMediaTextAltReplacementsFrom"
@@ -2384,7 +2384,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreMediaTextAltReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreMediaTextAltReplacementsTo"
@@ -2400,7 +2400,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreVerseContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2413,7 +2413,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVerseContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVerseContentReplacementsFrom"
@@ -2423,7 +2423,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVerseContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVerseContentReplacementsTo"
@@ -2439,7 +2439,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreQuoteCitationReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2452,7 +2452,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreQuoteCitationReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreQuoteCitationReplacementsFrom"
@@ -2462,7 +2462,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreQuoteCitationReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreQuoteCitationReplacementsTo"
@@ -2478,7 +2478,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $corePullquoteCitationReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2491,7 +2491,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteCitationReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteCitationReplacementsFrom"
@@ -2501,7 +2501,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteCitationReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteCitationReplacementsTo"
@@ -2517,7 +2517,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $corePullquoteValueReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2530,7 +2530,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteValueReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteValueReplacementsFrom"
@@ -2540,7 +2540,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePullquoteValueReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePullquoteValueReplacementsTo"
@@ -2556,7 +2556,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreAudioCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2569,7 +2569,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreAudioCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreAudioCaptionReplacementsFrom"
@@ -2579,7 +2579,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreAudioCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreAudioCaptionReplacementsTo"
@@ -2595,7 +2595,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreVideoCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2608,7 +2608,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVideoCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVideoCaptionReplacementsFrom"
@@ -2618,7 +2618,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreVideoCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreVideoCaptionReplacementsTo"
@@ -2634,7 +2634,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $corePreformattedContentReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2647,7 +2647,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePreformattedContentReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePreformattedContentReplacementsFrom"
@@ -2657,7 +2657,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $corePreformattedContentReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCorePreformattedContentReplacementsTo"
@@ -2673,7 +2673,7 @@ query ExecuteRegexReplacements
         name: "_propertyExistsInJSONObject"
         arguments: {
           object: $coreEmbedCaptionReplacementsFrom
-          by: { key: $postID }
+          by: { key: $customPostID }
         }
         passOnwardsAs: "hasPostID"
       )
@@ -2686,7 +2686,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreEmbedCaptionReplacementsFrom,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreEmbedCaptionReplacementsFrom"
@@ -2696,7 +2696,7 @@ query ExecuteRegexReplacements
           arguments: {
             object: $coreEmbedCaptionReplacementsTo,
             by: {
-              key: $postID
+              key: $customPostID
             }
           },
           passOnwardsAs: "postCoreEmbedCaptionReplacementsTo"
@@ -2716,14 +2716,14 @@ query PrepareMetaReplacements
 {
   transformedMetaTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "customPostID"
       affectDirectivesUnderPos: [1, 2, 3]
     )
       @applyField(
         name: "_sprintf",
         arguments: {
           string: "metaRawTitle.to.%s",
-          values: [$postID]
+          values: [$customPostID]
         }
         passOnwardsAs: "titlePath"
       )
@@ -2749,14 +2749,14 @@ query PrepareMetaReplacements
 
   transformedMetaRawExcerpt: _echo(value: $rawExcerpt)
     @underEachJSONObjectProperty(
-      passKeyOnwardsAs: "postID"
+      passKeyOnwardsAs: "customPostID"
       affectDirectivesUnderPos: [1, 2, 3]
     )
       @applyField(
         name: "_sprintf",
         arguments: {
           string: "metaRawExcerpt.to.%s",
-          values: [$postID]
+          values: [$customPostID]
         }
         passOnwardsAs: "rawExcerptPath"
       )

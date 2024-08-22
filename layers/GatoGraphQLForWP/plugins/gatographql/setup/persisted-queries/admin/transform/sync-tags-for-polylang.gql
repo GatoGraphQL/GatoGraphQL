@@ -69,11 +69,11 @@ query ExportDataFromOriginPost($customPostId: ID!)
     
     polylangTranslationLanguageIDs
       @remove
-    postIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+    customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
       @default(value: {})
-      @export(as: "postIDTranslationLanguageIDs")
+      @export(as: "customPostIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
+    hasTranslationPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
       @export(as: "hasOriginPostTranslationPosts")
 
     tags @export(as: "originCustomPostTagIDs") {
@@ -97,7 +97,7 @@ query ExportTranslationPostLanguages(
   @depends(on: "ExportDataFromOriginPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
-  originCustomPostTranslationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
+  originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "originCustomPostTranslationPostIds")
   translationPostLanguages: posts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
     id
