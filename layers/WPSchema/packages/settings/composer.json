@@ -66,7 +66,6 @@
         "pop-cms-schema/user-avatars": "<4.2.0",
         "pop-cms-schema/comments-wp": "<4.2.0",
         "pop-cms-schema/metaquery-wp": "<4.2.0",
-        "pop-cms-schema/settings": "<2.3.0",
         "pop-cms-schema/menus-wp": "<4.2.0",
         "pop-cms-schema/custompostmeta": "<4.2.0",
         "pop-cms-schema/categories": "<4.2.0",
