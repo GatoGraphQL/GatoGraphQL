@@ -1445,7 +1445,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/translate-posts-for-polylang-gutenberg',
+                                    'admin/transform/translate-customposts-for-polylang-gutenberg',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_POLYLANG_AND_GUTENBERG,
                                 ),
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
@@ -1472,7 +1472,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/translate-posts-for-polylang-classic-editor',
+                                    'admin/transform/translate-customposts-for-polylang-classic-editor',
                                     VirtualTutorialLessons::TRANSLATING_POSTS_FOR_POLYLANG_AND_CLASSIC_EDITOR,
                                 ),
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_VARIABLES => $this->readSetupGraphQLVariablesJSONAndEncodeForOutput(
@@ -1847,7 +1847,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/create-missing-translation-posts-for-polylang',
+                                    'admin/transform/create-missing-translation-customposts-for-polylang',
                                     VirtualTutorialLessons::CREATING_MISSING_TRANSLATION_POSTS_FOR_POLYLANG,
                                 ),
                             ],

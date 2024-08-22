@@ -23,7 +23,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_ADD_MISSING_LINKS_IN_POST = 'add-missing-links-in-post';
     public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG = 'create-missing-translation-categories-for-polylang';
     public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_MEDIA_FOR_POLYLANG = 'create-missing-translation-media-for-polylang';
-    public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG = 'create-missing-translation-posts-for-polylang';
+    public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG = 'create-missing-translation-customposts-for-polylang';
     public final const PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_TAGS_FOR_POLYLANG = 'create-missing-translation-tags-for-polylang';
     public final const PERSISTED_QUERY_DUPLICATE_POST = 'duplicate-post';
     public final const PERSISTED_QUERY_DUPLICATE_POSTS = 'duplicate-posts';
@@ -64,8 +64,8 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_TRANSLATE_POST_GUTENBERG = 'translate-post-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_CLASSIC_EDITOR = 'translate-posts-classic-editor';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_GUTENBERG = 'translate-posts-gutenberg';
-    public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_CLASSIC_EDITOR = 'translate-posts-for-polylang-classic-editor';
-    public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_GUTENBERG = 'translate-posts-for-polylang-gutenberg';
+    public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_CLASSIC_EDITOR = 'translate-customposts-for-polylang-classic-editor';
+    public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_GUTENBERG = 'translate-customposts-for-polylang-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_CLASSIC_EDITOR = 'translate-posts-for-multilingualpress-classic-editor';
     public final const PERSISTED_QUERY_TRANSLATE_POSTS_FOR_MULTILINGUALPRESS_GUTENBERG = 'translate-posts-for-multilingualpress-gutenberg';
     public final const PERSISTED_QUERY_TRANSLATE_TAGS_FOR_MULTILINGUALPRESS = 'translate-tags-for-multilingualpress';
