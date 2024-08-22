@@ -181,7 +181,7 @@ And also custom tags, with the newly-added mutations:
 - `GenericTag.update`
 - `GenericTag.delete`
 
-This query creates, updates and deletes post category terms:
+This query creates, updates and deletes post tag terms:
 
 ```graphql
 mutation CreateUpdateDeletePostTags {
@@ -241,7 +241,7 @@ fragment PostTagData on PostTag {
 }
 ```
 
-This query creates, updates and deletes category terms for a custom `some-tag-taxonomy` category:
+This query creates, updates and deletes tag terms for a custom `some-tag-taxonomy` tag:
 
 ```graphql
 mutation CreateUpdateDeleteTags {
