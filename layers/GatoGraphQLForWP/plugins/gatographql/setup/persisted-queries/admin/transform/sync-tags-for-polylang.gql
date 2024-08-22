@@ -46,7 +46,10 @@ query InitializeVariables
     @export(as: "tagIDTranslationLanguageIDs")
 }
 
-query ExportDataFromOriginPost($customPostId: ID!)
+query ExportDataFromOriginPost(
+  $customPostId: ID!
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
+)
   @depends(on: "InitializeVariables")
 {
   defaultLanguage: polylangDefaultLanguage {
@@ -76,7 +79,7 @@ query ExportDataFromOriginPost($customPostId: ID!)
     hasTranslationPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
       @export(as: "hasOriginPostTranslationPosts")
 
-    tags @export(as: "originCustomPostTagIDs") {
+    tags(taxonomy: $tagTaxonomy) @export(as: "originCustomPostTagIDs") {
       id
       name
       polylangLanguage {
