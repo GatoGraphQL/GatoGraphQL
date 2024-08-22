@@ -1,7 +1,7 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The custom post with the origin language, from where all translations will be made
+#   - customPostId: The custom post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
@@ -80,7 +80,7 @@ query InitializeVariables
 }
 
 query ExportOriginPost(
-  $postId: ID!
+  $customPostId: ID!
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
 )
@@ -98,7 +98,7 @@ query ExportOriginPost(
     )
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
     id
 
 
@@ -128,7 +128,7 @@ query ExportOriginPost(
       @export(as: "originRawExcerpt")
   }
 
-  hasOriginPost: _notNull(value: $__originPost)
+  hasOriginPost: _notNull(value: $__originCustomPost)
     @export(as: "hasOriginPost")
 }
 
@@ -165,27 +165,27 @@ query FetchData(
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
 
-  originPostHasDefaultLanguage: _equals(
+  originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
 
-  originPostHasSpecificLanguage: _equals(
+  originCustomPostHasSpecificLanguage: _equals(
     value1: $translateFromLanguage,
     value2: $fromLanguage
   )
 
   canTranslateOriginPostFromSpecificLanguage: _if(
     condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
+    then: $__originCustomPostHasSpecificLanguage,
     else: true
   )
 
   canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
+    then: $__originCustomPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
 
