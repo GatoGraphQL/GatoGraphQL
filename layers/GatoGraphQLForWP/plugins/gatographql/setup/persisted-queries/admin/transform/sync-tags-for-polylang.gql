@@ -191,6 +191,7 @@ query FilterTranslationPostsToUpdate(
 
 mutation UpdateTagsForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
+  $tagTaxonomy: TagTaxonomyEnumString! = "post_tag"
 )
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
@@ -208,6 +209,7 @@ mutation UpdateTagsForTranslationPosts(
     )
 
     setTags(input: {
+      taxonomy: $tagTaxonomy
       tagsBy: {
         ids: $__tagIDs
       },

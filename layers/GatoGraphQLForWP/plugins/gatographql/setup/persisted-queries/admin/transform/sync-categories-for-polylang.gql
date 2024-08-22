@@ -191,6 +191,7 @@ query FilterTranslationPostsToUpdate(
 
 mutation UpdateCategoriesForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
+  $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
@@ -208,6 +209,7 @@ mutation UpdateCategoriesForTranslationPosts(
     )
 
     setCategories(input: {
+      taxonomy: $categoryTaxonomy
       categoriesBy: {
         ids: $__categoryIDs
       },
