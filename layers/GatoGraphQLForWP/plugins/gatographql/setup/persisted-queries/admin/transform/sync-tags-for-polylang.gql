@@ -38,7 +38,7 @@ query InitializeVariables
 
   emptyBool: _echo(value: false)
     @export(as: "executeUpdate")
-    @export(as: "hasOriginPostTranslationPosts")
+    @export(as: "hasOriginCustomPostTranslationPosts")
   
   emptyArray: _echo(value: [])
     @export(as: "originCustomPostTranslationPostIds")
@@ -79,7 +79,7 @@ query ExportDataFromOriginCustomPost(
       @export(as: "customPostIDTranslationLanguageIDs")
 
     hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
-      @export(as: "hasOriginPostTranslationPosts")
+      @export(as: "hasOriginCustomPostTranslationPosts")
 
     tags(taxonomy: $tagTaxonomy) @export(as: "originCustomPostTagIDs") {
       id
@@ -101,7 +101,7 @@ query ExportTranslationCustomPostLanguages(
   $customPostType: CustomPostEnumString! = "post"
 )
   @depends(on: "ExportDataFromOriginCustomPost")
-  @include(if: $hasOriginPostTranslationPosts)
+  @include(if: $hasOriginCustomPostTranslationPosts)
 {
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "originCustomPostTranslationPostIds")
@@ -123,7 +123,7 @@ query FilterTranslationCustomPostsToUpdate(
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportTranslationCustomPostLanguages")
-  @include(if: $hasOriginPostTranslationPosts)
+  @include(if: $hasOriginCustomPostTranslationPosts)
 {
   translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
     id
@@ -186,7 +186,7 @@ query FilterTranslationCustomPostsToUpdate(
   )
 
   executeUpdate: _and(values: [
-    $__hasTranslationPosts,
+    $__hasTranslationCustomPosts,
     $__canTriggerUpdateFromOriginPost
   ])
     @export(as: "executeUpdate")

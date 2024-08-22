@@ -192,7 +192,7 @@ query FetchData(
   )
 
   executeTranslation: _and(values: [
-    $__hasTranslationPosts,
+    $__hasTranslationCustomPosts,
     $__canTranslateOriginPost
   ])
     @export(as: "executeTranslation")

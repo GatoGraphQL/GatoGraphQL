@@ -106,7 +106,7 @@ query ExportOriginCustomPost(
     @export(as: "hasOriginCustomPost")
 }
 
-query ExportOriginPostCanBeTranslated(
+query ExportOriginCustomPostCanBeTranslated(
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
@@ -143,7 +143,7 @@ query ExportMissingTranslationLanguages(
   $includeLanguagesToTranslate: [String!]! = []
   $excludeLanguagesToTranslate: [String!]! = []
 )
-  @depends(on: "ExportOriginPostCanBeTranslated")
+  @depends(on: "ExportOriginCustomPostCanBeTranslated")
   @include(if: $canTranslateOriginPost)
 {
   currentlyExistingTranslationLanguages: _objectProperties(object: $customPostIDTranslationLanguageIDs)
