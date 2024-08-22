@@ -286,6 +286,9 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 
 == Changelog ==
 
+= 4.3.0 =
+* Increase limit of chars in truncated response by Guzzle (#2800)
+
 = 4.2.0 =
 * Added mutations for categories (#2764)
 * Added mutations for tags (#2765)

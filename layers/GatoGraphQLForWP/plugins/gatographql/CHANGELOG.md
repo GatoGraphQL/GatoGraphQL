@@ -8,6 +8,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- Increase limit of chars in truncated response by Guzzle (#2800)
+
 ## 4.2.0 - 21/08/2024
 
 ### Improvements
