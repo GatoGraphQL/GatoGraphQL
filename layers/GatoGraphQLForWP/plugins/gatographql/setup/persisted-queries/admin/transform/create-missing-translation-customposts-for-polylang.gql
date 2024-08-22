@@ -62,44 +62,47 @@ query ExportOriginCustomPost(
   }
 
   originCustomPost: customPost(by: { id: $customPostId }, status: any) {
-    id
-
-    
-    ################################################################
-    # Data needed to duplicate post for missing languages
-    ################################################################
-    originCustomPostAuthor: author @export(as: "originCustomPostAuthorID") {
+    __typename
+    ...on CustomPost {
       id
-    }
-    originCustomPostCategories: categories @export(as: "originCustomPostCategoryIDs") {
-      id
-    }
-    originCustomPostRawContent: rawContent @export(as: "originCustomPostRawContent")
-    originCustomPostRawExcerpt: rawExcerpt @export(as: "originCustomPostRawExcerpt")
-    originCustomPostFeaturedImage: featuredImage @export(as: "originCustomPostFeaturedImageID") {
-      id
-    }
-    originCustomPostTags: tags @export(as: "originCustomPostTagIDs") {
-      id
-    }
-    originCustomPostRawTitle: rawTitle @export(as: "originCustomPostRawTitle")
-    ################################################################
+
+      
+      ################################################################
+      # Data needed to duplicate post for missing languages
+      ################################################################
+      originCustomPostAuthor: author @export(as: "originCustomPostAuthorID") {
+        id
+      }
+      originCustomPostCategories: categories @export(as: "originCustomPostCategoryIDs") {
+        id
+      }
+      originCustomPostRawContent: rawContent @export(as: "originCustomPostRawContent")
+      originCustomPostRawExcerpt: rawExcerpt @export(as: "originCustomPostRawExcerpt")
+      originCustomPostFeaturedImage: featuredImage @export(as: "originCustomPostFeaturedImageID") {
+        id
+      }
+      originCustomPostTags: tags @export(as: "originCustomPostTagIDs") {
+        id
+      }
+      originCustomPostRawTitle: rawTitle @export(as: "originCustomPostRawTitle")
+      ################################################################
 
 
-    polylangLanguage {
-      code @export(as: "fromLanguage")
-    }
-    
+      polylangLanguage {
+        code @export(as: "fromLanguage")
+      }
+      
 
-    polylangTranslationLanguageIDs(filter: {
-      includeSelf: true
-      includeLanguages: $includeLanguagesToTranslate
-      excludeLanguages: $excludeLanguagesToTranslate
-    })
-      @remove
-    customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
-      @export(as: "customPostIDTranslationLanguageIDs")
+      polylangTranslationLanguageIDs(filter: {
+        includeSelf: true
+        includeLanguages: $includeLanguagesToTranslate
+        excludeLanguages: $excludeLanguagesToTranslate
+      })
+        @remove
+      customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
+        @default(value: {})
+        @export(as: "customPostIDTranslationLanguageIDs")
+    }
   }
 
   hasOriginCustomPost: _notNull(value: $__originCustomPost)
