@@ -1,7 +1,7 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The custom post with the origin language, from where to trigger the updates
+#   - customPostId: The custom post with the origin language, from where to trigger the updates
 #   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the update when the origin post has the default language of the site. It is `true` by default.
 #
@@ -39,14 +39,14 @@ query InitializeVariables
     @export(as: "hasOriginPostTranslationPosts")
   
   emptyArray: _echo(value: [])
-    @export(as: "originPostTranslationPostIds")
-    @export(as: "originPostCategoryIDs")
+    @export(as: "originCustomPostTranslationPostIds")
+    @export(as: "originCustomPostCategoryIDs")
   
   emptyJSON: _echo(value: {})
     @export(as: "categoryIDTranslationLanguageIDs")
 }
 
-query ExportDataFromOriginPost($postId: ID!)
+query ExportDataFromOriginPost($customPostId: ID!)
   @depends(on: "InitializeVariables")
 {
   defaultLanguage: polylangDefaultLanguage {
@@ -60,7 +60,7 @@ query ExportDataFromOriginPost($postId: ID!)
     )
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
     id
 
     polylangLanguage {
@@ -76,7 +76,7 @@ query ExportDataFromOriginPost($postId: ID!)
     hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
       @export(as: "hasOriginPostTranslationPosts")
 
-    categories @export(as: "originPostCategoryIDs") {
+    categories @export(as: "originCustomPostCategoryIDs") {
       id
       name
       polylangLanguage {
@@ -97,9 +97,9 @@ query ExportTranslationPostLanguages(
   @depends(on: "ExportDataFromOriginPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
-  originPostTranslationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
-    @export(as: "originPostTranslationPostIds")
-  translationPostLanguages: posts(filter: { ids: $__originPostTranslationPostIds, status: $statusToUpdate } ) {
+  originCustomPostTranslationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
+    @export(as: "originCustomPostTranslationPostIds")
+  translationPostLanguages: posts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
     id
 
     polylangLanguage @export(
@@ -118,7 +118,7 @@ query FilterTranslationPostsToUpdate(
   @depends(on: "ExportTranslationPostLanguages")
   @include(if: $hasOriginPostTranslationPosts)
 {
-  translationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } ) {
+  translationPosts: posts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
     id
     polylangLanguageCode: _objectProperty(
       object: $translationPostLanguages,
@@ -133,7 +133,7 @@ query FilterTranslationPostsToUpdate(
       @passOnwards(as: "lang")
       @applyField(
         name: "_echo"
-        arguments: { value: $originPostCategoryIDs }
+        arguments: { value: $originCustomPostCategoryIDs }
         setResultInResponse: true
       )
       @underEachArrayItem(
@@ -167,14 +167,14 @@ query FilterTranslationPostsToUpdate(
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
 
-  originPostHasDefaultLanguage: _equals(
+  originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   canTriggerUpdateFromOriginPost: _if(
     condition: $triggerUpdateFromDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
+    then: $__originCustomPostHasDefaultLanguage,
     else: true
   )
 
@@ -191,7 +191,7 @@ mutation UpdateCategoriesForTranslationPosts(
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
+  updateTranslationPosts: posts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } )
   {
     id
     polylangLanguage {
