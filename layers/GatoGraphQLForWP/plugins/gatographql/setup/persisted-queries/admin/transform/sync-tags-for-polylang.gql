@@ -2,6 +2,7 @@
 # 
 # Variables:
 #   - customPostId: The custom post with the origin language, from where to trigger the updates
+#   - tagTaxonomy: The taxonomy of the tags
 #   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the update when the origin post has the default language of the site. It is `true` by default.
 #
