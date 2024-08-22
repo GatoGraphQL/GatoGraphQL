@@ -6,8 +6,8 @@ namespace GatoGraphQL\GatoGraphQL;
 
 use GatoGraphQL\ExternalDependencyWrappers\Composer\Semver\SemverWrapper;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
-
 use PoPWPSchema\SchemaCommons\StaticHelpers\WordPressStaticHelpers;
+
 use function get_file_data;
 
 class PluginStaticHelpers
