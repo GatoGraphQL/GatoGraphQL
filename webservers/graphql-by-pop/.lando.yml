@@ -237,6 +237,7 @@ services:
         - '../../layers/WPSchema/packages/posts:/app/vendor/pop-wp-schema/posts'
         - >-
           ../../layers/WPSchema/packages/schema-commons:/app/vendor/pop-wp-schema/schema-commons
+        - '../../layers/WPSchema/packages/settings:/app/vendor/pop-wp-schema/settings'
         - '../../layers/WPSchema/packages/site:/app/vendor/pop-wp-schema/site'
         - >-
           ../../layers/WPSchema/packages/taxonomymeta:/app/vendor/pop-wp-schema/taxonomymeta
