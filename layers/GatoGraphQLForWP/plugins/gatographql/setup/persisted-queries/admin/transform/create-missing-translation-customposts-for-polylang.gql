@@ -46,7 +46,7 @@ query InitializeVariables
     @remove
 }
 
-query ExportOriginPost(
+query ExportOriginCustomPost(
   $customPostId: ID!
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
@@ -102,16 +102,16 @@ query ExportOriginPost(
       @export(as: "customPostIDTranslationLanguageIDs")
   }
 
-  hasOriginPost: _notNull(value: $__originCustomPost)
-    @export(as: "hasOriginPost")
+  hasOriginCustomPost: _notNull(value: $__originCustomPost)
+    @export(as: "hasOriginCustomPost")
 }
 
 query ExportOriginPostCanBeTranslated(
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
-  @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
+  @depends(on: "ExportOriginCustomPost")
+  @include(if: $hasOriginCustomPost)
 {
   originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,

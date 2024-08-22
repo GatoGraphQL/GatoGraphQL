@@ -74,13 +74,13 @@ query InitializeVariables
     @remove
 
   emptyBool: _echo(value: false)
-    @export(as: "hasOriginPost")
-    @export(as: "hasTranslationPosts")
+    @export(as: "hasOriginCustomPost")
+    @export(as: "hasTranslationCustomPosts")
     @export(as: "executeTranslation")
     @remove
 }
 
-query ExportOriginPost(
+query ExportOriginCustomPost(
   $customPostId: ID!
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
@@ -117,8 +117,8 @@ query ExportOriginPost(
       @default(value: {})
       @export(as: "customPostIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
-      @export(as: "hasTranslationPosts")
+    hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+      @export(as: "hasTranslationCustomPosts")
 
 
     rawTitle
@@ -129,8 +129,8 @@ query ExportOriginPost(
       @export(as: "originRawExcerpt")
   }
 
-  hasOriginPost: _notNull(value: $__originCustomPost)
-    @export(as: "hasOriginPost")
+  hasOriginCustomPost: _notNull(value: $__originCustomPost)
+    @export(as: "hasOriginCustomPost")
 }
 
 query FetchData(
@@ -139,9 +139,9 @@ query FetchData(
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
-  @depends(on: "ExportOriginPost")
-  @include(if: $hasOriginPost)
-  @include(if: $hasTranslationPosts)
+  @depends(on: "ExportOriginCustomPost")
+  @include(if: $hasOriginCustomPost)
+  @include(if: $hasTranslationCustomPosts)
 {
   translationCustomPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "translationCustomPostIds")
@@ -165,7 +165,7 @@ query FetchData(
       )
   }
 
-  hasTranslationPosts: _notEmpty(value: $__translationCustomPosts)
+  hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
 
   originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
@@ -310,7 +310,7 @@ query GenerateMutationInputs(
     @export(as: "postInputs")
 }
 
-mutation TranslateClassicEditorPosts(
+mutation TranslateClassicEditorCustomPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $customPostType: CustomPostEnumString! = "post"
 )

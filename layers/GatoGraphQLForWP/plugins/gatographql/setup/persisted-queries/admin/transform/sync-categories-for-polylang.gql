@@ -48,7 +48,7 @@ query InitializeVariables
     @export(as: "categoryIDTranslationLanguageIDs")
 }
 
-query ExportDataFromOriginPost(
+query ExportDataFromOriginCustomPost(
   $customPostId: ID!
   $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
@@ -78,7 +78,7 @@ query ExportDataFromOriginPost(
       @default(value: {})
       @export(as: "customPostIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+    hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
       @export(as: "hasOriginPostTranslationPosts")
 
     categories(taxonomy: $categoryTaxonomy) @export(as: "originCustomPostCategoryIDs") {
@@ -96,11 +96,11 @@ query ExportDataFromOriginPost(
   }
 }
 
-query ExportTranslationPostLanguages(
+query ExportTranslationCustomPostLanguages(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $customPostType: CustomPostEnumString! = "post"
 )
-  @depends(on: "ExportDataFromOriginPost")
+  @depends(on: "ExportDataFromOriginCustomPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
@@ -117,12 +117,12 @@ query ExportTranslationPostLanguages(
   }
 }
 
-query FilterTranslationPostsToUpdate(
+query FilterTranslationCustomPostsToUpdate(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $customPostType: CustomPostEnumString! = "post"
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
-  @depends(on: "ExportTranslationPostLanguages")
+  @depends(on: "ExportTranslationCustomPostLanguages")
   @include(if: $hasOriginPostTranslationPosts)
 {
   translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
@@ -172,7 +172,7 @@ query FilterTranslationPostsToUpdate(
       @remove
   }
 
-  hasTranslationPosts: _notEmpty(value: $__translationCustomPosts)
+  hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
 
   originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
@@ -197,7 +197,7 @@ mutation UpdateCategoriesForTranslationPosts(
   $customPostType: CustomPostEnumString! = "post"
   $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
-  @depends(on: "FilterTranslationPostsToUpdate")
+  @depends(on: "FilterTranslationCustomPostsToUpdate")
   @include(if: $executeUpdate)
 {
   updateTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )

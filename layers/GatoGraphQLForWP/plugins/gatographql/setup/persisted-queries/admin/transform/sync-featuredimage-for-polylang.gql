@@ -53,7 +53,7 @@ query InitializeVariables
     @export(as: "featuredImageTranslationLanguageIDs")
 }
 
-query ExportDataFromOriginPost($customPostId: ID!)
+query ExportDataFromOriginCustomPost($customPostId: ID!)
   @depends(on: "InitializeVariables")
 {
   defaultLanguage: polylangDefaultLanguage {
@@ -80,7 +80,7 @@ query ExportDataFromOriginPost($customPostId: ID!)
       @default(value: {})
       @export(as: "customPostIDTranslationLanguageIDs")
 
-    hasTranslationPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
+    hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
       @export(as: "hasOriginPostTranslationPosts")
 
     featuredImage @export(as: "originCustomPostFeaturedImageID") {
@@ -95,12 +95,12 @@ query ExportDataFromOriginPost($customPostId: ID!)
   }
 }
 
-query FilterTranslationPostsToUpdate(
+query FilterTranslationCustomPostsToUpdate(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $customPostType: CustomPostEnumString! = "post"
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
-  @depends(on: "ExportDataFromOriginPost")
+  @depends(on: "ExportDataFromOriginCustomPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
@@ -109,7 +109,7 @@ query FilterTranslationPostsToUpdate(
     id
   }
 
-  hasTranslationPosts: _notEmpty(value: $__translationCustomPosts)
+  hasTranslationCustomPosts: _notEmpty(value: $__translationCustomPosts)
 
   originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
@@ -129,11 +129,11 @@ query FilterTranslationPostsToUpdate(
     @export(as: "executeUpdate")
 }
 
-mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
+mutation UpdateOrRemoveFeaturedImageForTranslationCustomPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $customPostType: CustomPostEnumString! = "post"
 )
-  @depends(on: "FilterTranslationPostsToUpdate")
+  @depends(on: "FilterTranslationCustomPostsToUpdate")
   @include(if: $executeUpdate)
 {
   updateFeaturedImageInTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )
