@@ -10,9 +10,14 @@ class SettingsTypeAPI implements SettingsTypeAPIInterface
 {
     use BasicServiceTrait;
 
-    // @todo Implement!
+    /**
+     * The Gutenberg editor is enabled when the Classic editor
+     * plugin is not enabled
+     *
+     * @see https://wordpress.org/plugins/classic-editor/
+     */
     public function isGutenbergEditorEnabled(): bool
     {
-        return false;
+        return !PluginStaticHelpers::isWordPressPluginActive('classic-editor/classic-editor.php');
     }
 }
