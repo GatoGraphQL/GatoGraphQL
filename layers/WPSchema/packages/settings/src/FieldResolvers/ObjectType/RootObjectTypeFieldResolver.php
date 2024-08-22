@@ -4,51 +4,34 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Settings\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
-use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoPWPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface;
-use PoPWPSchema\Settings\TypeResolvers\ObjectType\NetworkSiteObjectTypeResolver;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractQueryableObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
 class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolver
 {
-    private ?IntScalarTypeResolver $intScalarTypeResolver = null;
-    private ?NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
-    final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
+    final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
-        $this->intScalarTypeResolver = $intScalarTypeResolver;
+        $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
     }
-    final protected function getIntScalarTypeResolver(): IntScalarTypeResolver
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
     {
-        if ($this->intScalarTypeResolver === null) {
-            /** @var IntScalarTypeResolver */
-            $intScalarTypeResolver = $this->instanceManager->getInstance(IntScalarTypeResolver::class);
-            $this->intScalarTypeResolver = $intScalarTypeResolver;
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
         }
-        return $this->intScalarTypeResolver;
-    }
-    final public function setNetworkSiteObjectTypeResolver(NetworkSiteObjectTypeResolver $networkSiteObjectTypeResolver): void
-    {
-        $this->networkSiteObjectTypeResolver = $networkSiteObjectTypeResolver;
-    }
-    final protected function getNetworkSiteObjectTypeResolver(): NetworkSiteObjectTypeResolver
-    {
-        if ($this->networkSiteObjectTypeResolver === null) {
-            /** @var NetworkSiteObjectTypeResolver */
-            $networkSiteObjectTypeResolver = $this->instanceManager->getInstance(NetworkSiteObjectTypeResolver::class);
-            $this->networkSiteObjectTypeResolver = $networkSiteObjectTypeResolver;
-        }
-        return $this->networkSiteObjectTypeResolver;
+        return $this->booleanScalarTypeResolver;
     }
     final public function setSettingsTypeAPI(SettingsTypeAPIInterface $settingsTypeAPI): void
     {
@@ -80,16 +63,14 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldNamesToResolve(): array
     {
         return [
-            'networkSites',
-            'networkSiteCount',
+            'isGutenbergEditorEnabled',
         ];
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'networkSites' => $this->__('Sites in the WordPress settings network', 'settings'),
-            'networkSiteCount' => $this->__('Number of sites in the WordPress settings network', 'settings'),
+            'isGutenbergEditorEnabled' => $this->__('Is the Gutenberg editor enabled? (i.e. the "Classic Editor" plugins is not enabled)', 'settings'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -97,8 +78,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            'networkSites' => $this->getNetworkSiteObjectTypeResolver(),
-            'networkSiteCount' => $this->getIntScalarTypeResolver(),
+            'isGutenbergEditorEnabled' => $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -106,8 +86,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            'networkSites' => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            'networkSiteCount' => SchemaTypeModifiers::NON_NULLABLE,
+            'isGutenbergEditorEnabled' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -119,14 +98,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
-            case 'networkSites':
-                /** @var int[] */
-                $siteIDs = $this->getSettingsTypeAPI()->getNetworkSites([], [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
-                return $siteIDs;
-            case 'networkSiteCount':
-                /** @var int[] */
-                $siteIDs = $this->getSettingsTypeAPI()->getNetworkSiteCount([], [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
-                return $siteIDs;
+            case 'isGutenbergEditorEnabled':
+                return $this->getSettingsTypeAPI()->isGutenbergEditorEnabled();
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
