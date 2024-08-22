@@ -1432,7 +1432,7 @@ class Plugin extends AbstractMainPlugin
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_GUTENBERG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CUSTOMPOSTS_FOR_POLYLANG_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -1459,7 +1459,7 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_POSTS_FOR_POLYLANG_CLASSIC_EDITOR;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CUSTOMPOSTS_FOR_POLYLANG_CLASSIC_EDITOR;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -1834,7 +1834,7 @@ class Plugin extends AbstractMainPlugin
         /**
          * Create the Persisted Queries
          */
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_POSTS_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CUSTOMPOSTS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
