@@ -20,7 +20,16 @@
 #
 ########################################################################
 
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+}
+
 query FetchData($postId: ID!)
+  @depends(on: "InitializeVariables")
+  @skip(if: $isGutenbergEditorEnabled)
 {
   post(by: { id: $postId }, status: any) {
     title
@@ -37,6 +46,7 @@ query TranslateData(
   $toLang: String!
 )
   @depends(on: "FetchData")
+  @skip(if: $isGutenbergEditorEnabled)
 {  
   translations: _echo(value: $dataToTranslate)
     @underEachJSONObjectProperty
@@ -54,6 +64,7 @@ mutation TranslateClassicEditorPost(
   $update: Boolean! = false
 )
   @depends(on: "TranslateData")
+  @skip(if: $isGutenbergEditorEnabled)
 {
   createPost(input: {
     title: $translatedTitle,
