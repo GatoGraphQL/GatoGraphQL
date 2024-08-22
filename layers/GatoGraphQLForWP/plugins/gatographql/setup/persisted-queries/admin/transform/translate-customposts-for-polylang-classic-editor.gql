@@ -255,7 +255,7 @@ query GenerateMutationInputs(
   @depends(on: "TranslateData")
   @include(if: $executeTranslation)
 {  
-  postInputs: _echo(value: $translatedData)
+  customPostInputs: _echo(value: $translatedData)
     @underEachJSONObjectProperty(
       passValueOnwardsAs: "postTranslatedData"
       affectDirectivesUnderPos: [1, 2, 3, 4, 5]
@@ -313,7 +313,7 @@ query GenerateMutationInputs(
         },
         setResultInResponse: true
       )
-    @export(as: "postInputs")
+    @export(as: "customPostInputs")
 }
 
 mutation TranslateClassicEditorCustomPosts(
@@ -327,14 +327,14 @@ mutation TranslateClassicEditorCustomPosts(
     __typename
     ...on CustomPost {
       id
-      postInput: _objectProperty(
-        object: $postInputs,
+      customPostInput: _objectProperty(
+        object: $customPostInputs,
         by: {
           key: $__id
         }
       )
         @remove
-      update(input: $__postInput) {
+      update(input: $__customPostInput) {
         status
         errors {
           __typename
