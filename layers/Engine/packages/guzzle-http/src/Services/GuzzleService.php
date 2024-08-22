@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace PoP\GuzzleHTTP\Services;
 
 use Exception;
+use GuzzleHttp\BodySummarizer;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use PoP\ComponentModel\App;
 use PoP\GuzzleHTTP\Exception\GuzzleHTTPRequestException;
@@ -129,6 +131,15 @@ class GuzzleService implements GuzzleServiceInterface
      */
     protected function maybeReplaceException(Exception $exception): Exception
     {
+        if ($exception instanceof RequestException) {
+            return RequestException::create(
+                $exception->getRequest(),
+                $exception->getResponse(),
+                $exception->getPrevious(),
+                $exception->getHandlerContext(),
+                new BodySummarizer(1000)
+            );
+        }
         return $exception;
     }
 
