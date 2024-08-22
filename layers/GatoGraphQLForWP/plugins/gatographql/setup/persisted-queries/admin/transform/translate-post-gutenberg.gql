@@ -41,7 +41,9 @@
 #
 ########################################################################
 
-query InitializeVariables {
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
   isGutenbergEditorEnabled
     @export(as: "isGutenbergEditorEnabled")
 
@@ -122,7 +124,6 @@ query InitializeVariables {
 }
 
 query FetchData($postId: ID!)
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
   @depends(on: "InitializeVariables")
   @include(if: $isGutenbergEditorEnabled)
 {
