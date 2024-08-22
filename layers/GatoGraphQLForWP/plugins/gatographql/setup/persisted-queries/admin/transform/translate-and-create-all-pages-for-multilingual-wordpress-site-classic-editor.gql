@@ -201,7 +201,7 @@ query AdaptData
   @depends(on: "FetchData")
   @include(if: $hasMasterPages)
 {
-  adaptedToTitle: _echo(value: $rawTitle)
+  adaptedToRawTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
       passValueOnwardsAs: "value"
     )
@@ -212,7 +212,7 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedToTitle")
+    @export(as: "adaptedToRawTitle")
   adaptedFromTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty
       @applyField(
@@ -278,7 +278,7 @@ query TransformData
   transformations: _echo(value: {
     metaRawTitle: {
       from: $adaptedFromTitle,
-      to: $adaptedToTitle,
+      to: $adaptedToRawTitle,
     },
     metaRawContent: {
       from: $adaptedFromRawContent,

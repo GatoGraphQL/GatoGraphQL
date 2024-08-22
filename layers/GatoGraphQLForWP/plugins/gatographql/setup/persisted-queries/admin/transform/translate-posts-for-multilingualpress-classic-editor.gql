@@ -215,7 +215,7 @@ query AdaptData
       )
     @export(as: "adaptedFromContent")
 
-  adaptedToTitle: _echo(value: $rawTitle)
+  adaptedToRawTitle: _echo(value: $rawTitle)
     @underEachArrayItem(
       passValueOnwardsAs: "value"
     )
@@ -226,7 +226,7 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedToTitle")
+    @export(as: "adaptedToRawTitle")
   adaptedFromTitle: _echo(value: $rawTitle)
     @underEachArrayItem
       @applyField(
@@ -275,7 +275,7 @@ query TransformData(
     },
     metaRawTitle: {
       from: $adaptedFromTitle,
-      to: $adaptedToTitle,
+      to: $adaptedToRawTitle,
     },
     metaRawExcerpt: {
       from: $adaptedFromRawExcerpt,
