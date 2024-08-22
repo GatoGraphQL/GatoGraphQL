@@ -1,7 +1,7 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The custom post with the origin language, from where to trigger the featured image updates
+#   - customPostId: The custom post with the origin language, from where to trigger the featured image updates
 #   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the featured image update when the origin post has the default language of the site. It is `true` by default.
 #
@@ -38,7 +38,7 @@ query InitializeVariables
     @export(as: "fromLanguage")
 
   emptyID: _echo(value: null)
-    @export(as: "originPostFeaturedImageID")
+    @export(as: "originCustomPostFeaturedImageID")
 
   emptyBool: _echo(value: false)
     @export(as: "hasFeaturedImage")
@@ -46,13 +46,13 @@ query InitializeVariables
     @export(as: "hasOriginPostTranslationPosts")
   
   emptyArray: _echo(value: [])
-    @export(as: "originPostTranslationPostIds")
+    @export(as: "originCustomPostTranslationPostIds")
   
   emptyJSON: _echo(value: {})
     @export(as: "featuredImageTranslationLanguageIDs")
 }
 
-query ExportDataFromOriginPost($postId: ID!)
+query ExportDataFromOriginPost($customPostId: ID!)
   @depends(on: "InitializeVariables")
 {
   defaultLanguage: polylangDefaultLanguage {
@@ -66,7 +66,7 @@ query ExportDataFromOriginPost($postId: ID!)
     )
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
     id
 
     polylangLanguage {
@@ -82,7 +82,7 @@ query ExportDataFromOriginPost($postId: ID!)
     hasTranslationPosts: _notEmpty(value: $__postIDTranslationLanguageIDs)
       @export(as: "hasOriginPostTranslationPosts")
 
-    featuredImage @export(as: "originPostFeaturedImageID") {
+    featuredImage @export(as: "originCustomPostFeaturedImageID") {
       id
 
       polylangTranslationLanguageIDs
@@ -101,22 +101,22 @@ query FilterTranslationPostsToUpdate(
   @depends(on: "ExportDataFromOriginPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
-  originPostTranslationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
-    @export(as: "originPostTranslationPostIds")
-  translationPosts: posts(filter: { ids: $__originPostTranslationPostIds, status: $statusToUpdate } ) {
+  originCustomPostTranslationPostIds: _objectValues(object: $postIDTranslationLanguageIDs)
+    @export(as: "originCustomPostTranslationPostIds")
+  translationPosts: posts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
     id
   }
 
   hasTranslationPosts: _notEmpty(value: $__translationPosts)
 
-  originPostHasDefaultLanguage: _equals(
+  originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   canTriggerUpdateFromOriginPost: _if(
     condition: $triggerUpdateFromDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
+    then: $__originCustomPostHasDefaultLanguage,
     else: true
   )
 
@@ -133,7 +133,7 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateFeaturedImageInTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
+  updateFeaturedImageInTranslationPosts: posts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } )
     @include(if: $hasFeaturedImage)
   {
     id
@@ -159,7 +159,7 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
     translationOrDefaultFeaturedImageID: _if(
       condition: $__hasTranslationFeaturedImageID,
       then: $__translationFeaturedImageID,
-      else: $originPostFeaturedImageID
+      else: $originCustomPostFeaturedImageID
     )
       
     setFeaturedImage(input: {
@@ -188,7 +188,7 @@ mutation UpdateOrRemoveFeaturedImageForTranslationPosts(
     }
   }
 
-  removeFeaturedImageFromTranslationPosts: posts(filter: { ids: $originPostTranslationPostIds, status: $statusToUpdate } )
+  removeFeaturedImageFromTranslationPosts: posts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } )
     @skip(if: $hasFeaturedImage)
   {
     id      
