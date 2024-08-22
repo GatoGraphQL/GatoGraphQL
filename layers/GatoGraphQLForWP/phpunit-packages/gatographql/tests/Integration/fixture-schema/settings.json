@@ -145,6 +145,7 @@
                 "capabilities": { "read": true, "level_0": true }
             }
         },
-        "nonExistingObject": null
+        "nonExistingObject": null,
+        "isGutenbergEditorEnabled": true
     }
 }
