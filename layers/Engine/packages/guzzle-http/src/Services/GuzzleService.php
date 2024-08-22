@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace PoP\GuzzleHTTP\Services;
 
 use Exception;
+use GuzzleHttp\BodySummarizer;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Promise\Utils;
 use PoP\ComponentModel\App;
 use PoP\GuzzleHTTP\Exception\GuzzleHTTPRequestException;
@@ -123,10 +125,32 @@ class GuzzleService implements GuzzleServiceInterface
     }
 
     /**
+     * Try to increase the limit of the truncated response,
+     * which is 120 chars by default.
+     *
+     * @see https://github.com/laravel/framework/discussions/47773
+     */
+    protected function maybeReplaceException(Exception $exception): Exception
+    {
+        if (!($exception instanceof RequestException)) {
+            return $exception;
+        }
+
+        return RequestException::create(
+            $exception->getRequest(),
+            $exception->getResponse(),
+            $exception->getPrevious(),
+            $exception->getHandlerContext(),
+            new BodySummarizer(1200)
+        );
+    }
+
+    /**
      * @throws GuzzleHTTPRequestException
      */
     protected function throwException(Exception $exception): void
     {
+        $exception = $this->maybeReplaceException($exception);
         throw new GuzzleHTTPRequestException(
             $exception->getMessage(),
             0,
