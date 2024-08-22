@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPWPSchema\SchemaCommons\StaticHelpers;
 
 use function is_multisite;
+use function get_option;
 
 class WordPressStaticHelpers
 {
