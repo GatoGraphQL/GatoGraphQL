@@ -2,6 +2,7 @@
 # 
 # Variables:
 #   - customPostId: The custom post with the origin language, from where all translations will be made
+#   - customPostType: The custom post's type. Default is `post`
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
@@ -448,6 +449,7 @@ query ExportOriginPost(
 
 query InitializeTranslationVariables(
   $statusToUpdate: CustomPostStatusEnum! = draft,
+  $customPostType: CustomPostEnumString! = "post"
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
@@ -455,9 +457,9 @@ query InitializeTranslationVariables(
   @include(if: $hasOriginPost)
   @include(if: $hasTranslationPosts)
 {
-  translationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
-    @export(as: "translationPostIds")
-  emptyTranslationPostVars: posts(filter: { ids: $__translationPostIds, status: $statusToUpdate } ) {
+  translationCustomPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
+    @export(as: "translationCustomPostIds")
+  emptyTranslationCustomPostVars: customPosts(filter: { ids: $__translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
     id
     emptyArray: _echo(value: [])
       @export(
@@ -715,7 +717,7 @@ query InitializeTranslationVariables(
       @remove
   }
 
-  hasTranslationPosts: _notEmpty(value: $__emptyTranslationPostVars)
+  hasTranslationPosts: _notEmpty(value: $__emptyTranslationCustomPostVars)
 
   originPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
@@ -748,11 +750,14 @@ query InitializeTranslationVariables(
     @export(as: "executeTranslation")
 }
 
-query FetchData($statusToUpdate: CustomPostStatusEnum! = draft)
+query FetchData(
+  $statusToUpdate: CustomPostStatusEnum! = draft
+  $customPostType: CustomPostEnumString! = "post"
+)
   @depends(on: "InitializeTranslationVariables")
   @include(if: $executeTranslation)
 {
-  posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
     id
 
 
@@ -2783,6 +2788,7 @@ query PrepareMetaReplacements
 
 mutation TranslateGutenbergPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
+  $customPostType: CustomPostEnumString! = "post"
   $updateSlug: Boolean! = true
 )
   @depends(on: [
@@ -2791,7 +2797,7 @@ mutation TranslateGutenbergPosts(
   ])
   @include(if: $executeTranslation)
 {
-  updatePosts: posts(filter: { ids: $translationPostIds, status: $statusToUpdate } ) {
+  updateCustomPosts: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
     id
     transformedRawContent: _objectProperty(
       object: $transformedRawContent,
