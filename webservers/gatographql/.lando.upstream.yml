@@ -257,6 +257,8 @@ services:
         - >-
           ../../layers/WPSchema/packages/schema-commons:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/schema-commons
         - >-
+          ../../layers/WPSchema/packages/settings:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/settings
+        - >-
           ../../layers/WPSchema/packages/site:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/site
         - >-
           ../../layers/WPSchema/packages/taxonomymeta:/app/wordpress/wp-content/plugins/gatographql/vendor/pop-wp-schema/taxonomymeta

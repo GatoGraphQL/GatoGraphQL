@@ -1,0 +1,8 @@
+services:
+    _defaults:
+        public: true
+        autowire: true
+        autoconfigure: true
+
+    PoPWPSchema\Settings\TypeAPIs\SettingsTypeAPIInterface:
+        class: \PoPWPSchema\Settings\TypeAPIs\SettingsTypeAPI

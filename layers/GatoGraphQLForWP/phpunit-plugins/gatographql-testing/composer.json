@@ -176,7 +176,6 @@
         "pop-cms-schema/page-mutations-wp": "<4.2.0",
         "pop-wp-schema/pages": "<4.2.0",
         "pop-wp-schema/site": "<4.2.0",
-        "pop-wp-schema/multisite": "<4.2.0",
         "pop-cms-schema/tag-mutations": "<4.2.0",
         "pop-cms-schema/taxonomymeta-wp": "<4.2.0",
         "pop-cms-schema/taxonomy-mutations-wp": "<4.2.0",

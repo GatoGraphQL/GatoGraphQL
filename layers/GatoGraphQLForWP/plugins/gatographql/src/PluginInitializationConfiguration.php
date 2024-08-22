@@ -1125,6 +1125,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             SchemaTypeModuleResolver::SCHEMA_SETTINGS => [
                 SettingsModule::class,
                 \PoPCMSSchema\SettingsWP\Module::class,
+                \PoPWPSchema\Settings\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_USER_STATE_MUTATIONS => [
                 \PoPCMSSchema\UserStateMutations\Module::class,

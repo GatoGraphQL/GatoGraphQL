@@ -138,7 +138,6 @@
         "pop-wp-schema/site": "<4.2.0",
         "pop-wp-schema/menus": "<4.2.0",
         "pop-wp-schema/block-content-parser": "<4.2.0",
-        "pop-wp-schema/multisite": "<4.2.0",
         "pop-wp-schema/pages": "<4.2.0",
         "pop-wp-schema/custompostmeta": "<4.2.0",
         "pop-wp-schema/media": "<4.2.0"

@@ -32,7 +32,6 @@
         "pop-cms-schema/post-tag-mutations-wp": "dev-master",
         "pop-cms-schema/post-tags-wp": "dev-master",
         "pop-cms-schema/postmedia-mutations": "dev-master",
-        "pop-cms-schema/settings-wp": "dev-master",
         "pop-cms-schema/tag-mutations-wp": "dev-master",
         "pop-cms-schema/taxonomyquery-wp": "dev-master",
         "pop-cms-schema/user-avatars-wp": "dev-master",
@@ -47,6 +46,7 @@
         "pop-wp-schema/multisite": "dev-master",
         "pop-wp-schema/pages": "dev-master",
         "pop-wp-schema/posts": "dev-master",
+        "pop-wp-schema/settings": "dev-master",
         "pop-wp-schema/site": "dev-master",
         "pop-wp-schema/taxonomymeta": "dev-master",
         "pop-wp-schema/usermeta": "dev-master"

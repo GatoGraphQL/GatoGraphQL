@@ -5,4 +5,5 @@
   nonExistingArray: optionValues(name: "nonExisting")
   existingObject: optionObjectValue(name: "wp_user_roles")
   nonExistingObject: optionObjectValue(name: "nonExisting")
+  isGutenbergEditorEnabled
 }
