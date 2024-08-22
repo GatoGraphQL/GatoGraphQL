@@ -236,13 +236,15 @@ mutation UpdateCategoriesForTranslationPosts(
             message
           }
         }
-        post {
+        customPost {
           __typename
-          categories {
-            id
-            name
-            polylangLanguage {
-              code
+          ...on CustomPost {
+            categories {
+              id
+              name
+              polylangLanguage {
+                code
+              }
             }
           }
         }

@@ -2848,11 +2848,14 @@ mutation TranslateGutenbergCustomPosts(
             message
           }
         }
-        post {
-          id
-          title
-          rawContent
-          rawExcerpt
+        customPost {
+          __typename
+          ...on CustomPost {
+            id
+            title
+            rawContent
+            rawExcerpt
+          }
         }
       }
     }

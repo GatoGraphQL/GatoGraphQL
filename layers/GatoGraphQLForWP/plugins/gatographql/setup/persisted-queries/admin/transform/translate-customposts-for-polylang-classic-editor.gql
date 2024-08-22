@@ -342,11 +342,14 @@ mutation TranslateClassicEditorCustomPosts(
             message
           }
         }
-        post {
-          id
-          title
-          rawExcerpt
-          rawContent
+        customPost {
+          __typename
+          ...on CustomPost {
+            id
+            title
+            rawExcerpt
+            rawContent
+          }
         }
       }
     }

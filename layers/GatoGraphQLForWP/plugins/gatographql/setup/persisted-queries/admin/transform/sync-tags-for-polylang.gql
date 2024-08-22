@@ -236,13 +236,15 @@ mutation UpdateTagsForTranslationCustomPosts(
             message
           }
         }
-        post {
+        customPost {
           __typename
-          tags {
-            id
-            name
-            polylangLanguage {
-              code
+          ...on CustomPost {
+            tags {
+              id
+              name
+              polylangLanguage {
+                code
+              }
             }
           }
         }

@@ -230,16 +230,19 @@ mutation CreateTranslationPostForMissingLanguages
         message
       }
     }
-    post {
-      id
-        @export(as: "createdTranslationPostIDs", type: LIST)
-      hasCreatedTranslationPosts: _echo(value: true)
-        @export(as: "hasCreatedTranslationPosts")
-        @remove
-      title
-      slug
-      polylangLanguage {
-        code
+    customPost {
+      __typename
+      ...on CustomPost {
+        id
+          @export(as: "createdTranslationPostIDs", type: LIST)
+        hasCreatedTranslationPosts: _echo(value: true)
+          @export(as: "hasCreatedTranslationPosts")
+          @remove
+        title
+        slug
+        polylangLanguage {
+          code
+        }
       }
     }    
   }
