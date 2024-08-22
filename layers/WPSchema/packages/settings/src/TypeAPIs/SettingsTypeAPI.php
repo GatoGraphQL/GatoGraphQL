@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Settings\TypeAPIs;
 
+use PoPWPSchema\SchemaCommons\StaticHelpers\WordPressStaticHelpers;
 use PoP\Root\Services\BasicServiceTrait;
 
 class SettingsTypeAPI implements SettingsTypeAPIInterface
@@ -18,6 +19,6 @@ class SettingsTypeAPI implements SettingsTypeAPIInterface
      */
     public function isGutenbergEditorEnabled(): bool
     {
-        return !PluginStaticHelpers::isWordPressPluginActive('classic-editor/classic-editor.php');
+        return !WordPressStaticHelpers::isWordPressPluginActive('classic-editor/classic-editor.php');
     }
 }
