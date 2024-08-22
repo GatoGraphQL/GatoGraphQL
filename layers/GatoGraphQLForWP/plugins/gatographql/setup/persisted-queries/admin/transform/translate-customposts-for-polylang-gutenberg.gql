@@ -174,7 +174,7 @@ query ExportOriginCustomPost(
     )
   }
 
-  originPost: customPost(by: { id: $customPostId }, status: any) {
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
     __typename
     ...on CustomPost {
       id
@@ -446,7 +446,7 @@ query ExportOriginCustomPost(
     }
   }
 
-  hasOriginCustomPost: _notNull(value: $__originPost)
+  hasOriginCustomPost: _notNull(value: $__originCustomPost)
     @export(as: "hasOriginCustomPost")
 }
 
@@ -725,27 +725,27 @@ query InitializeTranslationVariables(
 
   hasTranslationCustomPosts: _notEmpty(value: $__emptyTranslationCustomPostVars)
 
-  originPostHasDefaultLanguage: _equals(
+  originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
 
-  originPostHasSpecificLanguage: _equals(
+  originCustomPostHasSpecificLanguage: _equals(
     value1: $translateFromLanguage,
     value2: $fromLanguage
   )
 
   canTranslateOriginPostFromSpecificLanguage: _if(
     condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
+    then: $__originCustomPostHasSpecificLanguage,
     else: true
   )
 
   canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
+    then: $__originCustomPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
 
