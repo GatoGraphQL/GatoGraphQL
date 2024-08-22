@@ -1,7 +1,7 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The custom post with the origin language, from where all translations will be made
+#   - customPostId: The custom post with the origin language, from where all translations will be made
 #   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
@@ -155,7 +155,7 @@ query InitializeVariables
 }
 
 query ExportOriginPost(
-  $postId: ID!
+  $customPostId: ID!
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
 )
@@ -173,7 +173,7 @@ query ExportOriginPost(
     )
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
+  originPost: customPost(by: { id: $customPostId }, status: any) {
     id
 
 
@@ -1324,14 +1324,14 @@ query TransformData(
     @underEachJSONObjectProperty
       @underJSONObjectProperty(by: { key: "to" })
         @underEachJSONObjectProperty(
-          passKeyOnwardsAs: "postId"
+          passKeyOnwardsAs: "itemCustomPostId"
           affectDirectivesUnderPos: [1, 2, 3, 4]
         )
           @applyField(
             name: "_objectProperty",
             arguments: {
               object: $translationPostLanguages,
-              by: { key: $postId }
+              by: { key: $itemCustomPostId }
             },
             passOnwardsAs: "toLanguageLocale"
           )
