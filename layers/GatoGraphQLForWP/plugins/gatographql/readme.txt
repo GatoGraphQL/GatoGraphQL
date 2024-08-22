@@ -289,6 +289,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 = 4.3.0 =
 * Increase limit of chars in truncated response by Guzzle (#2800)
 * Added field `isGutenbergEditorEnabled` (#2801)
+* Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 
 = 4.2.0 =
 * Added mutations for categories (#2764)
