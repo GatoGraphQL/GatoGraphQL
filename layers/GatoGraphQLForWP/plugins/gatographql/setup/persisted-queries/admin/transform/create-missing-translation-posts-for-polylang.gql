@@ -1,7 +1,7 @@
 ########################################################################
 # 
 # Variables:
-#   - postId: The post with the origin language, from where all translations will be made
+#   - customPostId: The custom post with the origin language, from where all translations will be made
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
 #   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
 #   - includeLanguagesToTranslate: Limit languages to execute the translation for. If empty, all languages are included
@@ -47,7 +47,7 @@ query InitializeVariables
 }
 
 query ExportOriginPost(
-  $postId: ID!
+  $customPostId: ID!
   $includeLanguagesToTranslate: [String!]
   $excludeLanguagesToTranslate: [String!]
 )
@@ -61,28 +61,28 @@ query ExportOriginPost(
     code @export(as: "enabledLanguages", type: LIST)
   }
 
-  originPost: post(by: { id: $postId }, status: any) {
+  originCustomPost: customPost(by: { id: $customPostId }, status: any) {
     id
 
     
     ################################################################
     # Data needed to duplicate post for missing languages
     ################################################################
-    originPostAuthor: author @export(as: "originPostAuthorID") {
+    originCustomPostAuthor: author @export(as: "originCustomPostAuthorID") {
       id
     }
-    originPostCategories: categories @export(as: "originPostCategoryIDs") {
+    originCustomPostCategories: categories @export(as: "originCustomPostCategoryIDs") {
       id
     }
-    originPostRawContent: rawContent @export(as: "originPostRawContent")
-    originPostRawExcerpt: rawExcerpt @export(as: "originPostRawExcerpt")
-    originPostFeaturedImage: featuredImage @export(as: "originPostFeaturedImageID") {
+    originCustomPostRawContent: rawContent @export(as: "originCustomPostRawContent")
+    originCustomPostRawExcerpt: rawExcerpt @export(as: "originCustomPostRawExcerpt")
+    originCustomPostFeaturedImage: featuredImage @export(as: "originCustomPostFeaturedImageID") {
       id
     }
-    originPostTags: tags @export(as: "originPostTagIDs") {
+    originCustomPostTags: tags @export(as: "originCustomPostTagIDs") {
       id
     }
-    originPostRawTitle: rawTitle @export(as: "originPostRawTitle")
+    originCustomPostRawTitle: rawTitle @export(as: "originCustomPostRawTitle")
     ################################################################
 
 
@@ -102,7 +102,7 @@ query ExportOriginPost(
       @export(as: "postIDTranslationLanguageIDs")
   }
 
-  hasOriginPost: _notNull(value: $__originPost)
+  hasOriginPost: _notNull(value: $__originCustomPost)
     @export(as: "hasOriginPost")
 }
 
@@ -113,27 +113,27 @@ query ExportOriginPostCanBeTranslated(
   @depends(on: "ExportOriginPost")
   @include(if: $hasOriginPost)
 {
-  originPostHasDefaultLanguage: _equals(
+  originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
     value2: $fromLanguage
   )
 
   isTranslateFromLanguageProvided: _notEmpty(value: $translateFromLanguage)
 
-  originPostHasSpecificLanguage: _equals(
+  originCustomPostHasSpecificLanguage: _equals(
     value1: $translateFromLanguage,
     value2: $fromLanguage
   )
 
   canTranslateOriginPostFromSpecificLanguage: _if(
     condition: $__isTranslateFromLanguageProvided,
-    then: $__originPostHasSpecificLanguage,
+    then: $__originCustomPostHasSpecificLanguage,
     else: true
   )
 
   canTranslateOriginPost: _if(
     condition: $translateDefaultLanguageOnly,
-    then: $__originPostHasDefaultLanguage,
+    then: $__originCustomPostHasDefaultLanguage,
     else: $__canTranslateOriginPostFromSpecificLanguage
   )
     @export(as: "canTranslateOriginPost")
@@ -184,9 +184,9 @@ query CreateTranslationPostInputsForMissingLanguages
         name: "_sprintf"
         arguments: {
           string: "%s (%s)"
-          values: [$originPostRawTitle, $languageCode]
+          values: [$originCustomPostRawTitle, $languageCode]
         }
-        passOnwardsAs: "originPostRawTitleForLanguage"
+        passOnwardsAs: "originCustomPostRawTitleForLanguage"
       )
       @applyField(
         name: "_echo",
@@ -194,22 +194,22 @@ query CreateTranslationPostInputsForMissingLanguages
           value: {
             status: draft,
             authorBy: {
-              id: $originPostAuthorID
+              id: $originCustomPostAuthorID
             },
             categoriesBy: {
-              ids: $originPostCategoryIDs
+              ids: $originCustomPostCategoryIDs
             },
             contentAs: {
-              html: $originPostRawContent
+              html: $originCustomPostRawContent
             },
-            excerpt: $originPostRawExcerpt
+            excerpt: $originCustomPostRawExcerpt
             featuredImageBy: {
-              id: $originPostFeaturedImageID
+              id: $originCustomPostFeaturedImageID
             },
             tagsBy: {
-              ids: $originPostTagIDs
+              ids: $originCustomPostTagIDs
             },
-            title: $originPostRawTitleForLanguage,
+            title: $originCustomPostRawTitleForLanguage,
             polylangLanguageBy: { code: $languageCode }
           }
         },
