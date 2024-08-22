@@ -61,14 +61,19 @@
 # documentation.
 #
 ########################################################################
+
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
     @remove
 
   emptyBool: _echo(value: false)
+    @export(as: "hasOriginPost")
     @export(as: "hasTranslationPosts")
     @export(as: "executeTranslation")
     @remove
@@ -155,6 +160,7 @@ query ExportOriginPost(
   $excludeLanguagesToTranslate: [String!]
 )
   @depends(on: "InitializeVariables")
+  @include(if: $isGutenbergEditorEnabled)
 {
   defaultLanguage: polylangDefaultLanguage {
     code @export(as: "defaultLanguage")
@@ -1180,7 +1186,7 @@ query AdaptData
   @depends(on: "FetchData")
   @include(if: $executeTranslation)
 {
-  adaptedToTitle: _echo(value: $rawTitle)
+  adaptedToRawTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty(
       passValueOnwardsAs: "value"
     )
@@ -1191,7 +1197,7 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedToTitle")
+    @export(as: "adaptedToRawTitle")
   adaptedFromTitle: _echo(value: $rawTitle)
     @underEachJSONObjectProperty
       @applyField(
@@ -1236,7 +1242,7 @@ query TransformData(
   transformations: _echo(value: {
     metaRawTitle: {
       from: $adaptedFromTitle,
-      to: $adaptedToTitle,
+      to: $adaptedToRawTitle,
     },
     metaRawExcerpt: {
       from: $adaptedFromRawExcerpt,

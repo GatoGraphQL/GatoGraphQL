@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Increase limit of chars in truncated response by Guzzle (#2800)
 - Added field `isGutenbergEditorEnabled` (#2801)
+- Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 
 ## 4.2.0 - 21/08/2024
 

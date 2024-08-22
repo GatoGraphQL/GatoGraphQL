@@ -41,7 +41,12 @@
 #
 ########################################################################
 
-query InitializeEmptyVariables {
+query InitializeVariables
+  @configureWarningsOnExportingDuplicateVariable(enabled: false)
+{
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+
   emptyArray: _echo(value: [])
     @export(as: "coreHeadingContentItems")
     @export(as: "coreHeadingContentReplacementsFrom")
@@ -119,8 +124,8 @@ query InitializeEmptyVariables {
 }
 
 query FetchData($postId: ID!)
-  @configureWarningsOnExportingDuplicateVariable(enabled: false)
-  @depends(on: "InitializeEmptyVariables")
+  @depends(on: "InitializeVariables")
+  @include(if: $isGutenbergEditorEnabled)
 {
   post(by: { id: $postId }, status: any) {
     id
@@ -374,6 +379,7 @@ query TransformData(
   $toLang: String!
 )
   @depends(on: "FetchData")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   transformations: _echo(value: {
     meta: {
@@ -462,6 +468,7 @@ query TransformData(
 
 query EscapeRegexStrings
   @depends(on: "TransformData")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   escapedRegexStrings: _echo(value: $transformations)
     @underEachJSONObjectProperty
@@ -500,6 +507,7 @@ query EscapeRegexStrings
 
 query CreateRegexReplacements
   @depends(on: "EscapeRegexStrings")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   regexReplacements: _echo(value: $escapedRegexTransformations)
     @underJSONObjectProperty(
@@ -1044,6 +1052,7 @@ query CreateRegexReplacements
 
 query ExecuteRegexReplacements
   @depends(on: "CreateRegexReplacements")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   transformedRawContent: _echo(value: $rawContent)
     @strRegexReplaceMultiple(
@@ -1142,6 +1151,7 @@ query ExecuteRegexReplacements
 
 query PrepareMetaReplacements
   @depends(on: "TransformData")
+  @include(if: $isGutenbergEditorEnabled)
 {  
   transformedMeta: _objectProperty(
     object: $transformations,
@@ -1159,6 +1169,7 @@ mutation TranslateGutenbergPost(
     "ExecuteRegexReplacements",
     "PrepareMetaReplacements"
   ]
+  @include(if: $isGutenbergEditorEnabled)
 ) {
   createPost(input: {
     title: $transformedTitle,

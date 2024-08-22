@@ -53,6 +53,9 @@
 query InitializeVariables
   @configureWarningsOnExportingDuplicateVariable(enabled: false)
 {
+  isGutenbergEditorEnabled
+    @export(as: "isGutenbergEditorEnabled")
+
   emptyBool: _echo(value: false)
     @export(as: "hasTranslationConnections")
     @export(as: "executeTranslation")
@@ -142,6 +145,7 @@ query ExportData(
   $externalSiteGraphQLEndpointPath: String! = "/graphql/internal/"
 )
   @depends(on: "InitializeVariables")
+  @include(if: $isGutenbergEditorEnabled)
 {
   # Retrieve the language of the content
   siteLanguage
@@ -192,6 +196,7 @@ query ExportOriginPost(
   $excludeSiteIDsToTranslate: [ID!]
 )
   @depends(on: "ExportData")
+  @include(if: $isGutenbergEditorEnabled)
 {
   originPost: post(by: { id: $postId }, status: any) {
     id
@@ -678,7 +683,7 @@ query AdaptData
   @depends(on: "InitializeTranslationVariables")
   @include(if: $executeTranslation)
 {
-  adaptedToTitle: _echo(value: $rawTitle)
+  adaptedToRawTitle: _echo(value: $rawTitle)
     @underEachArrayItem(
       passValueOnwardsAs: "value"
     )
@@ -689,7 +694,7 @@ query AdaptData
         }
         setResultInResponse: true
       )
-    @export(as: "adaptedToTitle")
+    @export(as: "adaptedToRawTitle")
   adaptedFromTitle: _echo(value: $rawTitle)
     @underEachArrayItem
       @applyField(
@@ -734,7 +739,7 @@ query TransformData(
   transformations: _echo(value: {
     metaRawTitle: {
       from: $adaptedFromTitle,
-      to: $adaptedToTitle,
+      to: $adaptedToRawTitle,
     },
     metaRawExcerpt: {
       from: $adaptedFromRawExcerpt,
