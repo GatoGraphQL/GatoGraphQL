@@ -2,7 +2,8 @@
 # 
 # Variables:
 #   - customPostId: The custom post with the origin language, from where to trigger the updates
-#   - categoryTaxonomy: The taxonomy of the categories
+#   - customPostType: The custom post's type. Default is `post`
+#   - categoryTaxonomy: The taxonomy of the categories. Default is `category`
 #   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the update when the origin post has the default language of the site. It is `true` by default.
 #
@@ -97,17 +98,18 @@ query ExportDataFromOriginPost(
 
 query ExportTranslationPostLanguages(
   $statusToUpdate: CustomPostStatusEnum! = draft
+  $customPostType: CustomPostEnumString! = "post"
 )
   @depends(on: "ExportDataFromOriginPost")
   @include(if: $hasOriginPostTranslationPosts)
 {
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "originCustomPostTranslationPostIds")
-  translationPostLanguages: posts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
+  translationCustomPostLanguages: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPost] } ) {
     id
 
     polylangLanguage @export(
-      as: "translationPostLanguages"
+      as: "translationCustomPostLanguages"
       type: DICTIONARY
     ) {
       code
@@ -117,15 +119,16 @@ query ExportTranslationPostLanguages(
 
 query FilterTranslationPostsToUpdate(
   $statusToUpdate: CustomPostStatusEnum! = draft
+  $customPostType: CustomPostEnumString! = "post"
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportTranslationPostLanguages")
   @include(if: $hasOriginPostTranslationPosts)
 {
-  translationPosts: posts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
+  translationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPost] } ) {
     id
     polylangLanguageCode: _objectProperty(
-      object: $translationPostLanguages,
+      object: $translationCustomPostLanguages,
       by: { key: $__id }
     )
     polylangLanguage: _objectProperty(
@@ -169,7 +172,7 @@ query FilterTranslationPostsToUpdate(
       @remove
   }
 
-  hasTranslationPosts: _notEmpty(value: $__translationPosts)
+  hasTranslationPosts: _notEmpty(value: $__translationCustomPosts)
 
   originCustomPostHasDefaultLanguage: _equals(
     value1: $defaultLanguage,
@@ -191,12 +194,13 @@ query FilterTranslationPostsToUpdate(
 
 mutation UpdateCategoriesForTranslationPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
+  $customPostType: CustomPostEnumString! = "post"
   $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
   @depends(on: "FilterTranslationPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateTranslationPosts: posts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } )
+  updateTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPost] } )
   {
     id
     polylangLanguage {
