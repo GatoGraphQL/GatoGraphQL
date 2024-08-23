@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
+
+    PoPCMSSchema\CustomPostCategoryMutations\Hooks\:
+        resource: '../src/Hooks/*'
