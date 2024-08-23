@@ -17,7 +17,6 @@
         "pop-cms-schema/users-wp": "<4.2.0",
         "pop-cms-schema/custompostmeta-wp": "<4.2.0",
         "pop-cms-schema/custompost-mutations": "<4.2.0",
-        "pop-cms-schema/post-tag-mutations-wp": "<4.2.0",
         "pop-cms-schema/post-tag-mutations": "<4.2.0",
         "pop-cms-schema/posts": "<4.2.0",
         "pop-cms-schema/custompost-category-mutations": "<4.2.0",

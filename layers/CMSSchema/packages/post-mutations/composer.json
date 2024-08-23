@@ -47,7 +47,6 @@
         "pop-cms-schema/pagemedia-mutations": "<4.2.0",
         "pop-cms-schema/users-wp": "<4.2.0",
         "pop-cms-schema/custompostmeta-wp": "<4.2.0",
-        "pop-cms-schema/post-tag-mutations-wp": "<4.2.0",
         "pop-cms-schema/post-tag-mutations": "<4.2.0",
         "pop-cms-schema/tags-wp": "<4.2.0",
         "pop-cms-schema/custompost-tags-wp": "<4.2.0",
