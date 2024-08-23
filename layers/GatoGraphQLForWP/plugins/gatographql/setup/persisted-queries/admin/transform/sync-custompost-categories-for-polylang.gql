@@ -218,7 +218,33 @@ mutation UpdateCategoriesForTranslationPosts(
         object: $translationPostCategoryIDs,
         by: { key: $__id }
       )
-
+    }
+    ...on Post {
+      setCategories(input: {
+        categoriesBy: {
+          ids: $__categoryIDs
+        },
+        append: false
+      }) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        post {
+          categories {
+            id
+            name
+            polylangLanguage {
+              code
+            }
+          }
+        }
+      }
+    }
+    ...on GenericCustomPost {
       setCategories(input: {
         taxonomy: $categoryTaxonomy
         categoriesBy: {
@@ -236,7 +262,7 @@ mutation UpdateCategoriesForTranslationPosts(
         customPost {
           __typename
           ...on CustomPost {
-            categories {
+            categories(taxonomy: $categoryTaxonomy) {
               id
               name
               polylangLanguage {

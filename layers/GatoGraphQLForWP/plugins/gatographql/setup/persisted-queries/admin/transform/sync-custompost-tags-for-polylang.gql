@@ -218,7 +218,33 @@ mutation UpdateTagsForTranslationCustomPosts(
         object: $translationPostTagIDs,
         by: { key: $__id }
       )
-
+    }
+    ...on Post {
+      setTags(input: {
+        tagsBy: {
+          ids: $__tagIDs
+        },
+        append: false
+      }) {
+        status
+        errors {
+          __typename
+          ...on ErrorPayload {
+            message
+          }
+        }
+        post {
+          tags {
+            id
+            name
+            polylangLanguage {
+              code
+            }
+          }
+        }
+      }
+    }
+    ...on GenericCustomPost {
       setTags(input: {
         taxonomy: $tagTaxonomy
         tagsBy: {
@@ -236,7 +262,7 @@ mutation UpdateTagsForTranslationCustomPosts(
         customPost {
           __typename
           ...on CustomPost {
-            tags {
+            tags(taxonomy: $tagTaxonomy) {
               id
               name
               polylangLanguage {
