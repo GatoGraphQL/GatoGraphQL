@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
-class PostCategoryTypeMutationAPI implements PostCategoryTypeMutationAPIInterface
+class CustomPostCategoryTypeMutationAPI implements CustomPostCategoryTypeMutationAPIInterface
 {
     /**
      * @param array<string|int> $categoryIDs
