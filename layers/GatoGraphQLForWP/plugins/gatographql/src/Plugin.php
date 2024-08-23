@@ -1486,7 +1486,7 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_FEATUREDIMAGE_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CUSTOMPOST_FEATUREDIMAGE_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -1499,7 +1499,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/sync-featuredimage-for-polylang',
+                                    'admin/transform/sync-custompost-featuredimage-for-polylang',
                                     VirtualTutorialLessons::SYNCHRONIZING_FEATUREDIMAGE_FOR_POLYLANG,
                                 ),
                             ],
@@ -2079,7 +2079,7 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_TAGS_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CUSTOMPOST_TAGS_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -2092,7 +2092,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/sync-tags-for-polylang',
+                                    'admin/transform/sync-custompost-tags-for-polylang',
                                     VirtualTutorialLessons::SYNCHRONIZING_TAGS_FOR_POLYLANG,
                                 ),
                             ],
@@ -2103,7 +2103,7 @@ class Plugin extends AbstractMainPlugin
             ));
         }
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CATEGORIES_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_SYNC_CUSTOMPOST_CATEGORIES_FOR_POLYLANG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
@@ -2116,7 +2116,7 @@ class Plugin extends AbstractMainPlugin
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
                             'attrs' => [
                                 AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
-                                    'admin/transform/sync-categories-for-polylang',
+                                    'admin/transform/sync-custompost-categories-for-polylang',
                                     VirtualTutorialLessons::SYNCHRONIZING_CATEGORIES_FOR_POLYLANG,
                                 ),
                             ],
