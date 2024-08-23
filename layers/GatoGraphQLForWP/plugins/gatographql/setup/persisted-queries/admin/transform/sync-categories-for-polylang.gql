@@ -69,7 +69,8 @@ query ExportDataFromOriginCustomPost(
     __typename
     ...on CustomPost {
       id
-
+    }
+    ...on PolylangTranslatable {
       polylangLanguage {
         code @export(as: "fromLanguage")
       }
@@ -82,18 +83,15 @@ query ExportDataFromOriginCustomPost(
 
       hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)
         @export(as: "hasOriginCustomPostTranslationPosts")
-
+    }
+    ...on Post {
+      categories @export(as: "originCustomPostCategoryIDs") {
+        ...CategoryData
+      }
+    }
+    ...on GenericCustomPost {
       categories(taxonomy: $categoryTaxonomy) @export(as: "originCustomPostCategoryIDs") {
-        id
-        name
-        polylangLanguage {
-          code
-        }
-        polylangTranslationLanguageIDs
-          @export(
-            as: "categoryIDTranslationLanguageIDs",
-            type: DICTIONARY
-          )
+        ...CategoryData
       }
     }
   }
@@ -251,4 +249,17 @@ mutation UpdateCategoriesForTranslationPosts(
       }
     }
   }
+}
+
+fragment CategoryData on Category {
+  id
+  name
+  polylangLanguage {
+    code
+  }
+  polylangTranslationLanguageIDs
+    @export(
+      as: "categoryIDTranslationLanguageIDs",
+      type: DICTIONARY
+    )
 }
