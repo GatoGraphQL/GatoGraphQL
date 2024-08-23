@@ -28,6 +28,7 @@
         "pop-cms-schema/pagemedia-mutations": "dev-master",
         "pop-cms-schema/post-categories-wp": "dev-master",
         "pop-cms-schema/custompost-category-mutations-wp": "dev-master",
+        "pop-cms-schema/post-category-mutations": "dev-master",
         "pop-cms-schema/post-mutations": "dev-master",
         "pop-cms-schema/post-tag-mutations-wp": "dev-master",
         "pop-cms-schema/post-tags-wp": "dev-master",
