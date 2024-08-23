@@ -32,7 +32,7 @@ class PostSetTagsMutationErrorPayloadUnionTypeResolver extends AbstractPostTagsM
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when setting tags on a custom post (using nested mutations)', 'posttag-mutations');
+        return $this->__('Union of \'Error Payload\' types when setting tags on a post (using nested mutations)', 'posttag-mutations');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface
