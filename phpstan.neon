@@ -95,7 +95,7 @@ includes:
     - layers/CMSSchema/packages/post-category-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/post-mutations/phpstan.neon.dist
     - layers/CMSSchema/packages/post-tag-mutations/phpstan.neon.dist
-    - layers/CMSSchema/packages/post-tag-mutations-wp/phpstan.neon.dist
+    - layers/CMSSchema/packages/custompost-tag-mutations-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/post-tags/phpstan.neon.dist
     - layers/CMSSchema/packages/post-tags-wp/phpstan.neon.dist
     - layers/CMSSchema/packages/postmedia-mutations/phpstan.neon.dist

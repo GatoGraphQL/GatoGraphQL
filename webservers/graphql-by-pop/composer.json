@@ -30,7 +30,7 @@
         "pop-cms-schema/custompost-category-mutations-wp": "dev-master",
         "pop-cms-schema/post-category-mutations": "dev-master",
         "pop-cms-schema/post-mutations": "dev-master",
-        "pop-cms-schema/post-tag-mutations-wp": "dev-master",
+        "pop-cms-schema/custompost-tag-mutations-wp": "dev-master",
         "pop-cms-schema/post-tags-wp": "dev-master",
         "pop-cms-schema/postmedia-mutations": "dev-master",
         "pop-cms-schema/tag-mutations-wp": "dev-master",
