@@ -69,8 +69,7 @@ query ExportDataFromOriginCustomPost(
     __typename
     ...on CustomPost {
       id
-    }
-    ...on PolylangTranslatable {
+      
       polylangLanguage {
         code @export(as: "fromLanguage")
       }
