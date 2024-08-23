@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostTagMutationsWP;
+namespace PoPCMSSchema\CustomPostTagMutationsWP;
 
 use PoP\ComponentModel\AbstractModuleTestCase;
 

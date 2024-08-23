@@ -2,14 +2,11 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\PostTagMutationsWP\TypeAPIs;
+namespace PoPCMSSchema\CustomPostTagMutationsWP\TypeAPIs;
 
-use PoPCMSSchema\PostTagMutations\TypeAPIs\PostTagTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
-/**
- * Methods to interact with the Type, to be implemented by the underlying CMS
- */
-class PostTagTypeMutationAPI implements PostTagTypeMutationAPIInterface
+class CustomPostTagTypeMutationAPI implements CustomPostTagTypeMutationAPIInterface
 {
     /**
      * Watch out! $tags must be the array of tags as string, not their IDs
