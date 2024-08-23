@@ -91,6 +91,8 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompost-tag-mutations:/app/vendor/pop-cms-schema/custompost-tag-mutations
         - >-
+          ../../layers/CMSSchema/packages/custompost-tag-mutations-wp:/app/vendor/pop-cms-schema/custompost-tag-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/custompost-tags-wp:/app/vendor/pop-cms-schema/custompost-tags-wp
         - >-
           ../../layers/CMSSchema/packages/custompost-user-mutations:/app/vendor/pop-cms-schema/custompost-user-mutations
@@ -142,8 +144,6 @@ services:
           ../../layers/CMSSchema/packages/post-category-mutations:/app/vendor/pop-cms-schema/post-category-mutations
         - >-
           ../../layers/CMSSchema/packages/post-mutations:/app/vendor/pop-cms-schema/post-mutations
-        - >-
-          ../../layers/CMSSchema/packages/custompost-tag-mutations-wp:/app/vendor/pop-cms-schema/custompost-tag-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/post-tag-mutations:/app/vendor/pop-cms-schema/post-tag-mutations
         - >-

@@ -36,6 +36,7 @@
         "pop-cms-schema/custompost-category-mutations-wp": "^4.3",
         "pop-cms-schema/post-mutations": "^4.3",
         "pop-cms-schema/custompost-tag-mutations-wp": "^4.3",
+        "pop-cms-schema/post-tag-mutations": "^4.3",
         "pop-cms-schema/post-tags-wp": "^4.3",
         "pop-cms-schema/postmedia-mutations": "^4.3",
         "pop-cms-schema/tag-mutations-wp": "^4.3",
