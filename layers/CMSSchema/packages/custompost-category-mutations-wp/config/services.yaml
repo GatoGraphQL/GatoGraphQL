@@ -4,5 +4,5 @@ services:
         autowire: true
         autoconfigure: true
 
-    PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface:
-        class: \PoPCMSSchema\CustomPostCategoryMutationsWP\TypeAPIs\PostCategoryTypeMutationAPI
+    PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface:
+        class: \PoPCMSSchema\CustomPostCategoryMutationsWP\TypeAPIs\CustomPostCategoryTypeMutationAPI
