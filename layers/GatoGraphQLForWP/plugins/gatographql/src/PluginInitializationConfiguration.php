@@ -1158,7 +1158,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
                 \PoPCMSSchema\PostTagMutations\Module::class,
-                \PoPCMSSchema\PostTagMutationsWP\Module::class,
+                \PoPCMSSchema\CustomPostTagMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_TAG_MUTATIONS => [
                 \PoPCMSSchema\TagMutations\Module::class,
