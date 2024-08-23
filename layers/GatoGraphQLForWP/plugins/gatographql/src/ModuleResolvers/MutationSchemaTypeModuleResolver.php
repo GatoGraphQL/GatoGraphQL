@@ -27,8 +27,10 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     public final const SCHEMA_POSTMEDIA_MUTATIONS = Plugin::NAMESPACE . '\schema-postmedia-mutations';
     public final const SCHEMA_CUSTOMPOST_USER_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-user-mutations';
     public final const SCHEMA_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-tag-mutations';
+    public final const SCHEMA_CUSTOMPOST_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-tag-mutations';
     public final const SCHEMA_POST_TAG_MUTATIONS = Plugin::NAMESPACE . '\schema-post-tag-mutations';
     public final const SCHEMA_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-category-mutations';
+    public final const SCHEMA_CUSTOMPOST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-category-mutations';
     public final const SCHEMA_POST_CATEGORY_MUTATIONS = Plugin::NAMESPACE . '\schema-post-category-mutations';
     public final const SCHEMA_COMMENT_MUTATIONS = Plugin::NAMESPACE . '\schema-comment-mutations';
 
