@@ -33,6 +33,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+    private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -86,6 +87,19 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
         return $this->customPostTypeMutationAPI;
     }
+    final public function setCustomPostTagTypeMutationAPI(CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI): void
+    {
+        $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+    }
+    final protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
+    {
+        if ($this->customPostTagTypeMutationAPI === null) {
+            /** @var CustomPostTagTypeMutationAPIInterface */
+            $customPostTagTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTagTypeMutationAPIInterface::class);
+            $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+        }
+        return $this->customPostTagTypeMutationAPI;
+    }
 
     /**
      * @throws AbstractException In case of error
@@ -108,8 +122,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         $customPostTagTypeAPI->setTags($customPostID, $postTags, $append);
         return $customPostID;
     }
-
-    abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
 
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,

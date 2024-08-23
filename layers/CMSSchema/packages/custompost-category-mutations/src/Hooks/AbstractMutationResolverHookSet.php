@@ -27,6 +27,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     use SetCategoriesOnCustomPostMutationResolverTrait;
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -40,6 +41,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $this->customPostTypeAPI = $customPostTypeAPI;
         }
         return $this->customPostTypeAPI;
+    }
+    final public function setCustomPostCategoryTypeMutationAPI(CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI): void
+    {
+        $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+    }
+    final protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
+    {
+        if ($this->customPostCategoryTypeMutationAPI === null) {
+            /** @var CustomPostCategoryTypeMutationAPIInterface */
+            $customPostCategoryTypeMutationAPI = $this->instanceManager->getInstance(CustomPostCategoryTypeMutationAPIInterface::class);
+            $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+        }
+        return $this->customPostCategoryTypeMutationAPI;
     }
 
     protected function init(): void
@@ -100,11 +114,18 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (((array) $categoriesBy) === []) {
             return false;
         }
+
+        // @todo Fix: Only for selected inputs!
+
         // Only for that specific CPT
         $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
+        $customPostType = $this->getCustomPostType();
         if (
             $customPostID !== null
-            && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()
+            && (
+                $customPostType !== ''
+                && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $customPostType
+            )
         ) {
             return false;
         }
@@ -159,5 +180,4 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     }
 
     abstract protected function getCustomPostType(): string;
-    abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 }

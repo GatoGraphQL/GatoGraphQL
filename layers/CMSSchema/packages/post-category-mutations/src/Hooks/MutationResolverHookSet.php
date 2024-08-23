@@ -6,15 +6,12 @@ namespace PoPCMSSchema\PostCategoryMutations\Hooks;
 
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\Hooks\AbstractMutationResolverHookSet;
-use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
-    private ?PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPI = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
     final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
@@ -29,19 +26,6 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
             $this->postTypeAPI = $postTypeAPI;
         }
         return $this->postTypeAPI;
-    }
-    final public function setPostCategoryTypeMutationAPI(PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPI): void
-    {
-        $this->postCategoryTypeMutationAPI = $postCategoryTypeMutationAPI;
-    }
-    final protected function getPostCategoryTypeMutationAPI(): PostCategoryTypeMutationAPIInterface
-    {
-        if ($this->postCategoryTypeMutationAPI === null) {
-            /** @var PostCategoryTypeMutationAPIInterface */
-            $postCategoryTypeMutationAPI = $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
-            $this->postCategoryTypeMutationAPI = $postCategoryTypeMutationAPI;
-        }
-        return $this->postCategoryTypeMutationAPI;
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
@@ -60,11 +44,6 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     protected function getCustomPostType(): string
     {
         return $this->getPostTypeAPI()->getPostCustomPostType();
-    }
-
-    protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
-    {
-        return $this->getPostCategoryTypeMutationAPI();
     }
 
     protected function getCategoryTypeAPI(): CategoryTypeAPIInterface

@@ -33,6 +33,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+    private ?CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -86,6 +87,19 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
         return $this->customPostTypeMutationAPI;
     }
+    final public function setCustomPostCategoryTypeMutationAPI(CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI): void
+    {
+        $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+    }
+    final protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
+    {
+        if ($this->customPostCategoryTypeMutationAPI === null) {
+            /** @var CustomPostCategoryTypeMutationAPIInterface */
+            $customPostCategoryTypeMutationAPI = $this->instanceManager->getInstance(CustomPostCategoryTypeMutationAPIInterface::class);
+            $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+        }
+        return $this->customPostCategoryTypeMutationAPI;
+    }
 
     /**
      * @throws AbstractException In case of error
@@ -114,8 +128,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
         return $customPostID;
     }
-
-    abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,

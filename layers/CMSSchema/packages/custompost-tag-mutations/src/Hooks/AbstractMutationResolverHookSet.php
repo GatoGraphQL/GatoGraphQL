@@ -27,6 +27,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     use SetTagsOnCustomPostMutationResolverTrait;
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -40,6 +41,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $this->customPostTypeAPI = $customPostTypeAPI;
         }
         return $this->customPostTypeAPI;
+    }
+    final public function setCustomPostTagTypeMutationAPI(CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI): void
+    {
+        $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+    }
+    final protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
+    {
+        if ($this->customPostTagTypeMutationAPI === null) {
+            /** @var CustomPostTagTypeMutationAPIInterface */
+            $customPostTagTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTagTypeMutationAPIInterface::class);
+            $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+        }
+        return $this->customPostTagTypeMutationAPI;
     }
 
     protected function init(): void
@@ -94,11 +108,18 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (((array) $tagsBy) === []) {
             return false;
         }
+        
+        // @todo Fix: Only for selected inputs!
+        
         // Only for that specific CPT
         $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
+        $customPostType = $this->getCustomPostType();
         if (
             $customPostID !== null
-            && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()
+            && (
+                $customPostType !== ''
+                && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $customPostType
+            )
         ) {
             return false;
         }
@@ -146,5 +167,4 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     }
 
     abstract protected function getCustomPostType(): string;
-    abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
 }
