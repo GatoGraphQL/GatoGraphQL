@@ -45,7 +45,7 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\PageMediaMutations\Module::class,
             \PoPCMSSchema\PostMediaMutations\Module::class,
             \PoPCMSSchema\CustomPostTagMutationsWP\Module::class,
-            \PoPCMSSchema\CustomPostTagMutations\Module::class,
+            \PoPCMSSchema\PostTagMutations\Module::class,
             \PoPCMSSchema\PostTagsWP\Module::class,
             \PoPCMSSchema\TagMutationsWP\Module::class,
             \PoPCMSSchema\TaxonomyQueryWP\Module::class,
