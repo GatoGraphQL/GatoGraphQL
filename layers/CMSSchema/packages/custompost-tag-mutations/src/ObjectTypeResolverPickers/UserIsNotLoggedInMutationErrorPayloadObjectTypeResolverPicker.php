@@ -1,0 +1,24 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostTagMutations\ObjectTypeResolverPickers;
+
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\UnionType\AbstractGenericTagsMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\UnionType\AbstractGenericTagMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\UserStateMutations\ObjectTypeResolverPickers\AbstractUserIsNotLoggedInErrorPayloadObjectTypeResolverPicker;
+use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+
+class UserIsNotLoggedInMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserIsNotLoggedInErrorPayloadObjectTypeResolverPicker
+{
+    /**
+     * @return array<class-string<UnionTypeResolverInterface>>
+     */
+    public function getUnionTypeResolverClassesToAttachTo(): array
+    {
+        return [
+            AbstractGenericTagsMutationErrorPayloadUnionTypeResolver::class,
+            AbstractGenericTagMutationErrorPayloadUnionTypeResolver::class,
+        ];
+    }
+}
