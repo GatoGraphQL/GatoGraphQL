@@ -16,11 +16,11 @@ class PostTagMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutati
 {
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
 
-    final public function setPostObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
+    final public function setPostTagObjectTypeResolver(PostTagObjectTypeResolver $postTagObjectTypeResolver): void
     {
         $this->postTagObjectTypeResolver = $postTagObjectTypeResolver;
     }
-    final protected function getPostObjectTypeResolver(): PostTagObjectTypeResolver
+    final protected function getPostTagObjectTypeResolver(): PostTagObjectTypeResolver
     {
         if ($this->postTagObjectTypeResolver === null) {
             /** @var PostTagObjectTypeResolver */
@@ -50,7 +50,7 @@ class PostTagMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutati
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
-            $this->getObjectFieldName() => $this->getPostObjectTypeResolver(),
+            $this->getObjectFieldName() => $this->getPostTagObjectTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
