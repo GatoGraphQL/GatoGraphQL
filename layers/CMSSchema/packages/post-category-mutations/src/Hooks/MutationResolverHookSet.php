@@ -14,7 +14,7 @@ use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
-    private ?PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPIInterface = null;
+    private ?PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPI = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
     final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
@@ -30,18 +30,18 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
         }
         return $this->postTypeAPI;
     }
-    final public function setPostCategoryTypeMutationAPI(PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPIInterface): void
+    final public function setPostCategoryTypeMutationAPI(PostCategoryTypeMutationAPIInterface $postCategoryTypeMutationAPI): void
     {
-        $this->postCategoryTypeMutationAPIInterface = $postCategoryTypeMutationAPIInterface;
+        $this->postCategoryTypeMutationAPI = $postCategoryTypeMutationAPI;
     }
     final protected function getPostCategoryTypeMutationAPI(): PostCategoryTypeMutationAPIInterface
     {
-        if ($this->postCategoryTypeMutationAPIInterface === null) {
+        if ($this->postCategoryTypeMutationAPI === null) {
             /** @var PostCategoryTypeMutationAPIInterface */
-            $postCategoryTypeMutationAPIInterface = $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
-            $this->postCategoryTypeMutationAPIInterface = $postCategoryTypeMutationAPIInterface;
+            $postCategoryTypeMutationAPI = $this->instanceManager->getInstance(PostCategoryTypeMutationAPIInterface::class);
+            $this->postCategoryTypeMutationAPI = $postCategoryTypeMutationAPI;
         }
-        return $this->postCategoryTypeMutationAPIInterface;
+        return $this->postCategoryTypeMutationAPI;
     }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
