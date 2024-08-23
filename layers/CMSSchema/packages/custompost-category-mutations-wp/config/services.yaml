@@ -5,4 +5,4 @@ services:
         autoconfigure: true
 
     PoPCMSSchema\PostCategoryMutations\TypeAPIs\PostCategoryTypeMutationAPIInterface:
-        class: \PoPCMSSchema\PostCategoryMutationsWP\TypeAPIs\PostCategoryTypeMutationAPI
+        class: \PoPCMSSchema\CustomPostCategoryMutationsWP\TypeAPIs\PostCategoryTypeMutationAPI

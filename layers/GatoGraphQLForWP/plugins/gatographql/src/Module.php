@@ -40,7 +40,7 @@ class Module extends AbstractPluginModule
             \PoPCMSSchema\MediaMutationsWP\Module::class,
             \PoPCMSSchema\PageMutationsWP\Module::class,
             \PoPCMSSchema\PostCategoriesWP\Module::class,
-            \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
+            \PoPCMSSchema\CustomPostCategoryMutationsWP\Module::class,
             \PoPCMSSchema\PageMediaMutations\Module::class,
             \PoPCMSSchema\PostMediaMutations\Module::class,
             \PoPCMSSchema\PostTagMutationsWP\Module::class,

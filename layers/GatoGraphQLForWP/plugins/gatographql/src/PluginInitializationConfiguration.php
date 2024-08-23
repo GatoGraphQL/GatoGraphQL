@@ -1170,7 +1170,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
                 \PoPCMSSchema\PostCategoryMutations\Module::class,
-                \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
+                \PoPCMSSchema\CustomPostCategoryMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPCMSSchema\CommentMutations\Module::class,

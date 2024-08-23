@@ -18,7 +18,7 @@ App::stockAndInitializeModuleClasses([
     \PoPCMSSchema\PageMutationsWP\Module::class,
     \PoPCMSSchema\PagesWP\Module::class,
     \PoPCMSSchema\PostCategoriesWP\Module::class,
-    \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
+    \PoPCMSSchema\CustomPostCategoryMutationsWP\Module::class,
     \PoPCMSSchema\PostMutations\Module::class,
     \PoPCMSSchema\PostsWP\Module::class,
     \PoPCMSSchema\PostTagMutationsWP\Module::class,

@@ -137,7 +137,7 @@ services:
         - >-
           ../../layers/CMSSchema/packages/post-categories:/app/vendor/pop-cms-schema/post-categories
         - >-
-          ../../layers/CMSSchema/packages/post-category-mutations-wp:/app/vendor/pop-cms-schema/post-category-mutations-wp
+          ../../layers/CMSSchema/packages/custompost-category-mutations-wp:/app/vendor/pop-cms-schema/custompost-category-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/post-category-mutations:/app/vendor/pop-cms-schema/post-category-mutations
         - >-

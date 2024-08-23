@@ -70,7 +70,7 @@ class ConfigureSchemaNamespacingCompilerPass extends AbstractConfigureSchemaName
             \PoPCMSSchema\Pages\Module::class,
             \PoPCMSSchema\PostCategories\Module::class,
             \PoPCMSSchema\PostCategoryMutations\Module::class,
-            \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
+            \PoPCMSSchema\CustomPostCategoryMutationsWP\Module::class,
             \PoPCMSSchema\PostMutations\Module::class,
             \PoPCMSSchema\Posts\Module::class,
             \PoPCMSSchema\PostTagMutations\Module::class,

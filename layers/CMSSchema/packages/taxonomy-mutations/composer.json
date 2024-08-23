@@ -146,7 +146,7 @@
         "pop-cms-schema/tag-mutations-wp": "<4.2.0",
         "pop-cms-schema/category-mutations-wp": "<4.2.0",
         "pop-cms-schema/categories": "<4.2.0",
-        "pop-cms-schema/post-category-mutations-wp": "<4.2.0"
+        "pop-cms-schema/custompost-category-mutations-wp": "<4.2.0"
     },
     "type": "library",
     "description": "Adds support for taxonomy mutations",

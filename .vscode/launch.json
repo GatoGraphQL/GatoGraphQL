@@ -80,7 +80,7 @@
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/pages": "${workspaceFolder}/layers/CMSSchema/packages/pages",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-categories-wp": "${workspaceFolder}/layers/CMSSchema/packages/post-categories-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-categories": "${workspaceFolder}/layers/CMSSchema/packages/post-categories",
-                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-category-mutations-wp": "${workspaceFolder}/layers/CMSSchema/packages/post-category-mutations-wp",
+                "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/custompost-category-mutations-wp": "${workspaceFolder}/layers/CMSSchema/packages/custompost-category-mutations-wp",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-category-mutations": "${workspaceFolder}/layers/CMSSchema/packages/post-category-mutations",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-mutations": "${workspaceFolder}/layers/CMSSchema/packages/post-mutations",
                 "/app/wordpress/wp-content/plugins/gatographql/vendor/pop-cms-schema/post-tag-mutations-wp": "${workspaceFolder}/layers/CMSSchema/packages/post-tag-mutations-wp",
