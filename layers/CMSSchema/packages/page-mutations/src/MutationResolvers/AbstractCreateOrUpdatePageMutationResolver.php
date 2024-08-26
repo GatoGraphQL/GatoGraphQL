@@ -14,7 +14,7 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
-abstract class AbstractCreateUpdatePageMutationResolver extends AbstractCreateOrUpdateCustomPostMutationResolver
+abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreateOrUpdateCustomPostMutationResolver
 {
     private ?PageTypeAPIInterface $pageTypeAPI = null;
 

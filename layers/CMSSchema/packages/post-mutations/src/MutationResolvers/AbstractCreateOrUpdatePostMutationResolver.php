@@ -7,7 +7,7 @@ namespace PoPCMSSchema\PostMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 
-abstract class AbstractCreateUpdatePostMutationResolver extends AbstractCreateOrUpdateCustomPostMutationResolver
+abstract class AbstractCreateOrUpdatePostMutationResolver extends AbstractCreateOrUpdateCustomPostMutationResolver
 {
     private ?PostTypeAPIInterface $postTypeAPI = null;
 
