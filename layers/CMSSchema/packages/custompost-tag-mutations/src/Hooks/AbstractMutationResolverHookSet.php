@@ -14,6 +14,8 @@ use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -142,9 +144,9 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         /**
          * Validate the taxonomy is valid
          */
-        $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor);
+        $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
-
+            return;
         }
         
         /** @var stdClass */
@@ -194,9 +196,22 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function getTagTaxonomyName(
         int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?string {
         $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
         if ($customPostType === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        TaxonomyMutationErrorFeedbackItemProvider::class,
+                        TaxonomyMutationErrorFeedbackItemProvider::E11,
+                        [
+                            $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
             return null;
         }
 
@@ -206,10 +221,40 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $taxonomyNames,
             fn (string $taxonomyName) => !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName),
         );
-        if (count($tagTaxonomyNames) === 1) {
-            return $tagTaxonomyNames[0];
+
+        if (count($tagTaxonomyNames) === 0) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            $customPostType,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return null;
         }
 
-        return null;
+        if (count($tagTaxonomyNames) > 1) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E4,
+                        [
+                            $customPostType,
+                            implode($this->__('\', \''), $tagTaxonomyNames)
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return null;
+        }
+
+        return $tagTaxonomyNames[0];
     }
 }

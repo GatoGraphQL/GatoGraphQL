@@ -9,6 +9,7 @@ use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
@@ -37,6 +38,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     protected function getTagTaxonomyName(
         int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?string {
         /** @var string|null */
         $taxonomName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
@@ -44,6 +46,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
             return parent::getTagTaxonomyName(
                 $customPostID,
                 $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
             );
         }
         return $taxonomName;
