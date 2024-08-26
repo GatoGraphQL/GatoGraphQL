@@ -6,9 +6,12 @@ namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
 use PoPCMSSchema\CustomPostMutations\Constants\GenericCustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
@@ -49,6 +52,39 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
+
+        /**
+         * Validate the taxonomy is valid for this CPT
+         */
+        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        if ($customPostType === null) {
+            // Error handled in the parent
+            return parent::getTagTaxonomyName(
+                $customPostID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
+        $taxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
+        if (!in_array($taxonomName, $taxonomyNames)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E5,
+                        [
+                            $taxonomName,
+                            $customPostType,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return null;
+        }
+
         return $taxonomName;
     }
 
