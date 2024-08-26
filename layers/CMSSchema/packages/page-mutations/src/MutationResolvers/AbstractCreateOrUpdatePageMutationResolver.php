@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PageMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 use PoPCMSSchema\PageMutations\Constants\PageCRUDHookNames;
 use PoPCMSSchema\PageMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
