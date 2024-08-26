@@ -3,6 +3,9 @@ services:
         public: true
         autowire: true
 
+    PoPCMSSchema\CustomPostCategoryMutations\RelationalTypeDataLoaders\:
+        resource: '../src/RelationalTypeDataLoaders/*'
+
     PoPCMSSchema\CustomPostCategoryMutations\FieldResolvers\:
         resource: '../src/FieldResolvers/*'
 
@@ -17,6 +20,3 @@ services:
 
     PoPCMSSchema\CustomPostCategoryMutations\ObjectTypeResolverPickers\:
         resource: '../src/ObjectTypeResolverPickers/*'
-
-    PoPCMSSchema\CustomPostCategoryMutations\RelationalTypeDataLoaders\:
-        resource: '../src/RelationalTypeDataLoaders/*'
