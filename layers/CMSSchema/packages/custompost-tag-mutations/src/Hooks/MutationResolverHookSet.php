@@ -29,6 +29,11 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
         return $this->queryableTagTypeAPI;
     }
 
+    /**
+     * Retrieve the taxonomy passed via the `taxonomy` input.
+     * If that's not possible (eg: on `createCustomPost.setTags`),
+     * then retrieve it from queried object's CPT.
+     */
     protected function getTagTaxonomyName(
         int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -38,6 +43,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
         if ($taxonomName !== null) {
             return $taxonomName;
         }
+
         return '';
     }
 
