@@ -235,9 +235,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         }
 
         // Inject author, categories, tags, featured image, etc
-        $customPostData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_DATA, $customPostData, $fieldDataAccessor);
-
-        return $customPostData;
+        return App::applyFilters(
+            HookNames::GET_CREATE_OR_UPDATE_DATA,
+            $customPostData,
+            $fieldDataAccessor,
+        );
     }
 
     /**
@@ -251,9 +253,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         // Inject author, categories, tags, featured image, etc
-        $customPostData = App::applyFilters(HookNames::GET_UPDATE_DATA, $customPostData, $fieldDataAccessor);
-
-        return $customPostData;
+        return App::applyFilters(
+            HookNames::GET_UPDATE_DATA,
+            $customPostData,
+            $fieldDataAccessor,
+        );
     }
 
     /**
@@ -267,9 +271,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         // Inject author, categories, tags, featured image, etc
-        $customPostData = App::applyFilters(HookNames::GET_CREATE_DATA, $customPostData, $fieldDataAccessor);
-
-        return $customPostData;
+        return App::applyFilters(
+            HookNames::GET_CREATE_DATA,
+            $customPostData,
+            $fieldDataAccessor,
+        );
     }
 
     /**
@@ -305,9 +311,16 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->updateAdditionals($customPostID, $fieldDataAccessor);
 
-        // Inject Share profiles here
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_UPDATE, $customPostID, $fieldDataAccessor);
+        App::doAction(
+            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+        );
+        App::doAction(
+            HookNames::EXECUTE_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+        );
 
         return $customPostID;
     }
@@ -338,9 +351,16 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->createAdditionals($customPostID, $fieldDataAccessor);
 
-        // Inject Share profiles here
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_CREATE, $customPostID, $fieldDataAccessor);
+        App::doAction(
+            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+        );
+        App::doAction(
+            HookNames::EXECUTE_CREATE,
+            $customPostID,
+            $fieldDataAccessor,
+        );
 
         return $customPostID;
     }
