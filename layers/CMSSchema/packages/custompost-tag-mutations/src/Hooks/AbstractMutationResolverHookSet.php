@@ -136,6 +136,9 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
+        /**
+         * Validate the taxonomy is valid
+         */
         $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor);
         if ($taxonomyName === null) {
 
