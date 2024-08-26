@@ -102,7 +102,7 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     /**
      * @return string[]
      */
-    public function getCustomPostTypeTaxonomies(string $customPostType): array
+    public function getCustomPostTypeTaxonomyNames(string $customPostType): array
     {
         return get_object_taxonomies($customPostType);
     }

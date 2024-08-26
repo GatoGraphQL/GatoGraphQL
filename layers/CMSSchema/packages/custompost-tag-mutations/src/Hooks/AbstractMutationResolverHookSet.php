@@ -10,6 +10,7 @@ use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\SetTagsOnCustomPostMut
 use PoPCMSSchema\CustomPostTagMutations\ObjectModels\TagDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -26,6 +27,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
+    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -53,6 +55,20 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
         return $this->customPostTagTypeMutationAPI;
     }
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    {
+        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+    }
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        if ($this->taxonomyTermTypeAPI === null) {
+            /** @var TaxonomyTermTypeAPIInterface */
+            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+        }
+        return $this->taxonomyTermTypeAPI;
+    }
+
 
     protected function init(): void
     {
@@ -161,8 +177,20 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         };
     }
 
-    abstract protected function getTagTaxonomyName(
+    /**
+     * Retrieve the taxonomy from the queried object's CPT,
+     * which works as long as it has only 1 tag taxonomy registered.
+     */
+    protected function getTagTaxonomyName(
         int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string;
+    ): ?string {
+        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        if ($customPostType === null) {
+            return null;
+        }
+        $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
+
+        return null;
+    }
 }

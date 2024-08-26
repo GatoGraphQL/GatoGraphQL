@@ -37,14 +37,16 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     protected function getTagTaxonomyName(
         int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string {
+    ): ?string {
         /** @var string|null */
         $taxonomName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomName !== null) {
-            return $taxonomName;
+        if ($taxonomName === null) {
+            return parent::getTagTaxonomyName(
+                $customPostID,
+                $fieldDataAccessor,
+            );
         }
-
-        return '';
+        return $taxonomName;
     }
 
     protected function getTagTypeAPI(): TagTypeAPIInterface
