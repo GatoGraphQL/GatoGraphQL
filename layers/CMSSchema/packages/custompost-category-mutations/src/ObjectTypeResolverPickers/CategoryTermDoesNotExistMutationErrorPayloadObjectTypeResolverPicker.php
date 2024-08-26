@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CategoryMutations\ObjectTypeResolverPickers\AbstractCategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker;
-use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\UnionType\AbstractGenericCategoryMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\UnionType\GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\UnionType\GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\UnionType\RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\UnionType\RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\UnionType\RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
 class CategoryTermDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends AbstractCategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker
@@ -16,7 +20,11 @@ class CategoryTermDoesNotExistMutationErrorPayloadObjectTypeResolverPicker exten
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractGenericCategoryMutationErrorPayloadUnionTypeResolver::class,
+            RootCreateGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
+            RootDeleteGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdateGenericCategoryTermMutationErrorPayloadUnionTypeResolver::class,
+            GenericCategoryDeleteMutationErrorPayloadUnionTypeResolver::class,
+            GenericCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
