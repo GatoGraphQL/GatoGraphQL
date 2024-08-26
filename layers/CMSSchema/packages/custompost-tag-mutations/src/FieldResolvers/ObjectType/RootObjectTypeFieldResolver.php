@@ -177,7 +177,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 
     protected function getEntityName(): string
     {
-        return $this->__('post', 'post-tag-mutations');
+        return $this->__('custom post', 'post-tag-mutations');
     }
 
     protected function getSetTagsFieldName(): string
