@@ -42,11 +42,6 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
         return $this->postTagTypeAPI;
     }
 
-    protected function getCustomPostType(): string
-    {
-        return $this->getPostTypeAPI()->getPostCustomPostType();
-    }
-
     protected function getTagTaxonomyName(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string {

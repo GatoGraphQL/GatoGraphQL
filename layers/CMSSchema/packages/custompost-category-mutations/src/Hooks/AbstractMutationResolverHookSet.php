@@ -10,7 +10,6 @@ use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\SetCategoriesOnCu
 use PoPCMSSchema\CustomPostCategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
-use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties as CustomPostMutationsMutationInputProperties;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
@@ -128,20 +127,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return false;
         }
 
-        // @todo Fix: Only for selected inputs!
-
-        // Only for that specific CPT
-        $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
-        $customPostType = $this->getCustomPostType();
-        if (
-            $customPostID !== null
-            && (
-                $customPostType !== ''
-                && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $customPostType
-            )
-        ) {
-            return false;
-        }
         return true;
     }
 
@@ -204,7 +189,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         };
     }
 
-    abstract protected function getCustomPostType(): string;
     abstract protected function getCategoryTaxonomyName(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string;

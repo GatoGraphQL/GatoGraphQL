@@ -29,11 +29,6 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
         return $this->queryableCategoryTypeAPI;
     }
 
-    protected function getCustomPostType(): string
-    {
-        return '';
-    }
-
     protected function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
         return $this->getQueryableCategoryTypeAPI();

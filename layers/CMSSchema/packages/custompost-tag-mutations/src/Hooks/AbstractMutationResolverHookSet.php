@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
 use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
-use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties as CustomPostMutationsMutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\SetTagsOnCustomPostMutationResolverTrait;
@@ -108,21 +107,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (((array) $tagsBy) === []) {
             return false;
         }
-        
-        // @todo Fix: Only for selected inputs!
-        
-        // Only for that specific CPT
-        $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
-        $customPostType = $this->getCustomPostType();
-        if (
-            $customPostID !== null
-            && (
-                $customPostType !== ''
-                && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $customPostType
-            )
-        ) {
-            return false;
-        }
+
         return true;
     }
 
@@ -173,7 +158,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         };
     }
 
-    abstract protected function getCustomPostType(): string;
     abstract protected function getTagTaxonomyName(
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string;
