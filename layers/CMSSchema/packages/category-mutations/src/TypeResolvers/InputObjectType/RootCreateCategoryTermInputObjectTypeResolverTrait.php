@@ -11,7 +11,7 @@ trait RootCreateCategoryTermInputObjectTypeResolverTrait
         return $this->__('Input to create a category term', 'category-mutations');
     }
 
-    protected function addTaxonomyInputField(): bool
+    protected function addIDInputField(): bool
     {
         return false;
     }
