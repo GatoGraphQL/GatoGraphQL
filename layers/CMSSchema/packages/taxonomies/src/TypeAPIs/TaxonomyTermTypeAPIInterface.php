@@ -22,4 +22,9 @@ interface TaxonomyTermTypeAPIInterface
     public function canUserDeleteTaxonomyTerm(string|int $userID, string|int $taxonomyTermID): bool;
     public function getTaxonomy(string $taxonomyName): object|null;
     public function taxonomyExists(string $taxonomyName): bool;
+    /**
+     * @return string[]
+     */
+    public function getCustomPostTypeTaxonomies(string $customPostType): array;
+    public function isTaxonomyHierarchical(string $taxonomyName): bool;
 }
