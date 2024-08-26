@@ -122,6 +122,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             /** @var array<string|int> */
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
             $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
+                $taxonomyName,
                 $customPostID,
                 $customPostCategoryIDs,
                 $append
@@ -130,6 +131,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             /** @var string[] */
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
             $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug(
+                $taxonomyName,
                 $customPostID,
                 $customPostCategorySlugs,
                 $append

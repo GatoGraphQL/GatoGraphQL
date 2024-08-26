@@ -139,6 +139,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
+
         $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
         /** @var stdClass */
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
@@ -146,6 +147,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             /** @var array<string|int> */
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
             $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
+                $taxonomyName,
                 $customPostID,
                 $customPostCategoryIDs,
                 false
@@ -154,6 +156,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             /** @var string[] */
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
             $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug(
+                $taxonomyName,
                 $customPostID,
                 $customPostCategorySlugs,
                 false
