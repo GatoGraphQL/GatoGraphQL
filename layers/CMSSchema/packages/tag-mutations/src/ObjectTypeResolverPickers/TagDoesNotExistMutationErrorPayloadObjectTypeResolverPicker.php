@@ -18,7 +18,7 @@ class TagDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends Abstra
              * Commented because the input is an Enum type, hence
              * the taxonomy will always exist
              */
-            // AbstractRootCreateTagMutationErrorPayloadUnionTypeResolver::class,
+            // AbstractRootCreateTagTermMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

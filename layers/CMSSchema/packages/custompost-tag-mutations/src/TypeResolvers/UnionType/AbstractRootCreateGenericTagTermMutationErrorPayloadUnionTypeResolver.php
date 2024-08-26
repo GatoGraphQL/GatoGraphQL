@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\TypeResolvers\UnionType;
 
-abstract class AbstractRootCreateGenericTagTermMutationErrorPayloadUnionTypeResolver extends AbstractGenericTagMutationErrorPayloadUnionTypeResolver
+use PoPCMSSchema\TagMutations\TypeResolvers\UnionType\AbstractRootCreateTagTermMutationErrorPayloadUnionTypeResolver;
+
+abstract class AbstractRootCreateGenericTagTermMutationErrorPayloadUnionTypeResolver extends AbstractRootCreateTagTermMutationErrorPayloadUnionTypeResolver
 {
 }

@@ -7,8 +7,8 @@ namespace PoPCMSSchema\TagMutations\ObjectTypeResolverPickers;
 use PoPCMSSchema\TagMutations\TypeResolvers\UnionType\AbstractTagUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\TaxonomyMutations\ObjectTypeResolverPickers\AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
-use PoPCMSSchema\TagMutations\TypeResolvers\UnionType\AbstractRootCreateTagMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\TagMutations\TypeResolvers\UnionType\AbstractRootUpdateTagMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\TagMutations\TypeResolvers\UnionType\AbstractRootCreateTagTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\TagMutations\TypeResolvers\UnionType\AbstractRootUpdateTagTermMutationErrorPayloadUnionTypeResolver;
 
 class LoggedInUserHasNoEditingTaxonomyTermsCapabilityMutationErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayloadObjectTypeResolverPicker
 {
@@ -19,8 +19,8 @@ class LoggedInUserHasNoEditingTaxonomyTermsCapabilityMutationErrorPayloadObjectT
     {
         return [
             AbstractTagUpdateMutationErrorPayloadUnionTypeResolver::class,
-            AbstractRootCreateTagMutationErrorPayloadUnionTypeResolver::class,
-            AbstractRootUpdateTagMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootCreateTagTermMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootUpdateTagTermMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
