@@ -82,7 +82,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $this->getExecuteCreateOrUpdateHookName(),
             $this->maybeSetTags(...),
             10,
-            2
+            3
         );
         App::addFilter(
             $this->getErrorPayloadHookName(),
@@ -130,8 +130,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         return true;
     }
 
-    public function maybeSetTags(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    public function maybeSetTags(
+        int|string $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
