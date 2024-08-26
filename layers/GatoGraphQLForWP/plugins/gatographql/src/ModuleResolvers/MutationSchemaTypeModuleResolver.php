@@ -187,7 +187,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                         self::SCHEMA_POST_MUTATIONS,
                     ],
                     [
-                        self::SCHEMA_CUSTOMPOST_TAG_MUTATIONS,
+                        self::SCHEMA_TAG_MUTATIONS,
                     ],
                 ];
             case self::SCHEMA_CUSTOMPOST_CATEGORY_MUTATIONS:
@@ -211,7 +211,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                         self::SCHEMA_POST_MUTATIONS,
                     ],
                     [
-                        self::SCHEMA_CUSTOMPOST_CATEGORY_MUTATIONS,
+                        self::SCHEMA_CATEGORY_MUTATIONS,
                     ],
                 ];
             case self::SCHEMA_COMMENT_MUTATIONS:
