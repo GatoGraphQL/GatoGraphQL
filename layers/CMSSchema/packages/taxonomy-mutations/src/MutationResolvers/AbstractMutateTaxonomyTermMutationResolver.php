@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
 use PoPCMSSchema\Taxonomies\Constants\InputProperties;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
+use PoPCMSSchema\TaxonomyMutations\Constants\TaxonomyCRUDHookNames;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\Exception\TaxonomyTermCRUDMutationException;
 use PoPCMSSchema\TaxonomyMutations\TypeAPIs\TaxonomyTypeMutationAPIInterface;
@@ -56,12 +56,12 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            HookNames::VALIDATE_CREATE,
+            TaxonomyCRUDHookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            TaxonomyCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -109,12 +109,12 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         App::doAction(
-            HookNames::VALIDATE_UPDATE,
+            TaxonomyCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            TaxonomyCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -328,7 +328,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $taxonomyData['description'] = $fieldDataAccessor->getValue(MutationInputProperties::DESCRIPTION);
         }
 
-        $taxonomyData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(TaxonomyCRUDHookNames::GET_CREATE_OR_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -340,7 +340,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     {
         $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(HookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(TaxonomyCRUDHookNames::GET_UPDATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -352,7 +352,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     {
         $taxonomyData = $this->getCreateOrUpdateTaxonomyTermData($fieldDataAccessor);
 
-        $taxonomyData = App::applyFilters(HookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
+        $taxonomyData = App::applyFilters(TaxonomyCRUDHookNames::GET_CREATE_DATA, $taxonomyData, $fieldDataAccessor);
 
         return $taxonomyData;
     }
@@ -392,8 +392,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_UPDATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(TaxonomyCRUDHookNames::EXECUTE_UPDATE, $taxonomyTermID, $fieldDataAccessor);
 
         return $taxonomyTermID;
     }
@@ -422,8 +422,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
 
         $this->createUpdateTaxonomy($fieldDataAccessor, $taxonomyTermID);
 
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE_OR_UPDATE, $taxonomyTermID, $fieldDataAccessor);
+        App::doAction(TaxonomyCRUDHookNames::EXECUTE_CREATE, $taxonomyTermID, $fieldDataAccessor);
 
         return $taxonomyTermID;
     }

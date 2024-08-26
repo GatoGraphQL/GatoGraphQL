@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
-use PoPCMSSchema\TaxonomyMutations\Constants\HookNames;
+use PoPCMSSchema\TaxonomyMutations\Constants\TaxonomyCRUDHookNames;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
@@ -70,7 +70,7 @@ trait PayloadableTaxonomyMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             default => App::applyFilters(
-                HookNames::ERROR_PAYLOAD,
+                TaxonomyCRUDHookNames::ERROR_PAYLOAD,
                 new GenericErrorPayload(
                     $feedbackItemResolution->getMessage(),
                     $feedbackItemResolution->getNamespacedCode(),

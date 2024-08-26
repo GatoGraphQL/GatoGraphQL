@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\Constants;
 
-class HookNames
+class MediaCRUDHookNames
 {
     public final const CREATE_OR_UPDATE_MEDIA_ITEM = __CLASS__ . ':createOrUpdateMediaItem';
     public final const CREATE_MEDIA_ITEM = __CLASS__ . ':createMediaItem';

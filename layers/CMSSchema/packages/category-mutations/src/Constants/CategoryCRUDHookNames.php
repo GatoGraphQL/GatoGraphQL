@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace PoPCMSSchema\TagMutations\Constants;
+namespace PoPCMSSchema\CategoryMutations\Constants;
 
-class HookNames
+class CategoryCRUDHookNames
 {
     public final const VALIDATE_CREATE_OR_UPDATE = __CLASS__ . ':validate-create-or-update';
     public final const VALIDATE_CREATE = __CLASS__ . ':validate-create';

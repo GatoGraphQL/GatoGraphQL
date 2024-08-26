@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TagMutations\MutationResolvers;
 
-use PoPCMSSchema\TagMutations\Constants\HookNames;
+use PoPCMSSchema\TagMutations\Constants\TagCRUDHookNames;
 use PoPCMSSchema\TagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TagMutations\ObjectModels\TagDoesNotExistErrorPayload;
 use PoPCMSSchema\TagMutations\ObjectModels\TagTermDoesNotExistErrorPayload;
@@ -67,7 +67,7 @@ trait PayloadableTagMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             default => App::applyFilters(
-                HookNames::ERROR_PAYLOAD,
+                TagCRUDHookNames::ERROR_PAYLOAD,
                 $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
                     $objectTypeFieldResolutionFeedback
                 ),
