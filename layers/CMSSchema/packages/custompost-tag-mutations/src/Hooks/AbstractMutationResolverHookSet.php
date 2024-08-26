@@ -189,7 +189,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if ($customPostType === null) {
             return null;
         }
-        $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
+
+        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
+        $taxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
+        $tagTaxonomyNames = array_filter(
+            $taxonomyNames,
+            fn (string $taxonomyName) => !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName),
+        );
+        if (count($tagTaxonomyNames) === 1) {
+            return $tagTaxonomyNames[0];
+        }
 
         return null;
     }
