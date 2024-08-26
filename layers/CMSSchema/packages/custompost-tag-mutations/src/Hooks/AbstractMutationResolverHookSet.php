@@ -167,4 +167,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     }
 
     abstract protected function getCustomPostType(): string;
+    abstract protected function getTagTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string;
 }

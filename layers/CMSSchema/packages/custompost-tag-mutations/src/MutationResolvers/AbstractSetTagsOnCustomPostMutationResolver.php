@@ -161,7 +161,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getTagTaxonomyName();
+        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
         $this->validateCanLoggedInUserAssignTermsToTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,
@@ -179,7 +179,9 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         );
     }
 
-    abstract protected function getTagTaxonomyName(): string;
+    abstract protected function getTagTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string;
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

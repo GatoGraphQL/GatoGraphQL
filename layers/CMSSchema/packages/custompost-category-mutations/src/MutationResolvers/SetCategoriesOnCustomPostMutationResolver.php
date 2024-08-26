@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\AbstractSetCategoriesOnCustomPostMutationResolver;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
+use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
+use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\AbstractSetCategoriesOnCustomPostMutationResolver;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class SetCategoriesOnCustomPostMutationResolver extends AbstractSetCategoriesOnCustomPostMutationResolver
 {
@@ -46,8 +48,10 @@ class SetCategoriesOnCustomPostMutationResolver extends AbstractSetCategoriesOnC
         return $this->getQueryableCategoryTypeAPI();
     }
 
-    protected function getCategoryTaxonomyName(): string
-    {
-        return '';
+    protected function getCategoryTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string {
+        /** @var string */
+        return $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
     }
 }

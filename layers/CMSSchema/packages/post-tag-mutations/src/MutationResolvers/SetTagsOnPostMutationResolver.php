@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\AbstractSetTagsOnCusto
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class SetTagsOnPostMutationResolver extends AbstractSetTagsOnCustomPostMutationResolver
 {
@@ -51,8 +52,9 @@ class SetTagsOnPostMutationResolver extends AbstractSetTagsOnCustomPostMutationR
         return $this->__('post', 'post-tag-mutations');
     }
 
-    protected function getTagTaxonomyName(): string
-    {
+    protected function getTagTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string {
         return $this->getPostTagTypeAPI()->getPostTagTaxonomyName();
     }
 }

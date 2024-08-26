@@ -14,6 +14,7 @@ class MutationInputProperties
     public final const CUSTOMPOST_ID = 'id';
     public final const CATEGORIES_BY = 'categoriesBy';
     public final const APPEND = 'append';
+    public final const TAXONOMY = 'taxonomy';
 
     public final const IDS = 'ids';
     public final const SLUGS = 'slugs';

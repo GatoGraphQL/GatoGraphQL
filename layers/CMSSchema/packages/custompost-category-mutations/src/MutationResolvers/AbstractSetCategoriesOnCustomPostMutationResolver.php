@@ -174,7 +174,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getCategoryTaxonomyName();
+        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
         $this->validateCanLoggedInUserAssignTermsToTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,
@@ -192,7 +192,9 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         );
     }
 
-    abstract protected function getCategoryTaxonomyName(): string;
+    abstract protected function getCategoryTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string;
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

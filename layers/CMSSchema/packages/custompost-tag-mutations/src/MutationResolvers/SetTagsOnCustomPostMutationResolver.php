@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 
-use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\AbstractSetTagsOnCustomPostMutationResolver;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class SetTagsOnCustomPostMutationResolver extends AbstractSetTagsOnCustomPostMutationResolver
 {
@@ -46,8 +48,10 @@ class SetTagsOnCustomPostMutationResolver extends AbstractSetTagsOnCustomPostMut
         return $this->getQueryableTagTypeAPI();
     }
 
-    protected function getTagTaxonomyName(): string
-    {
-        return '';
+    protected function getTagTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string {
+        /** @var string */
+        return $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
     }
 }

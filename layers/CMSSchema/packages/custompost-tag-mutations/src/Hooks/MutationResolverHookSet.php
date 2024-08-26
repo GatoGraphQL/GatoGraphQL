@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
-use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
-use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
+use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
+use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
@@ -29,6 +31,13 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     protected function getCustomPostType(): string
     {
         return '';
+    }
+
+    protected function getTagTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string {
+        /** @var string */
+        return $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
     }
 
     protected function getTagTypeAPI(): TagTypeAPIInterface

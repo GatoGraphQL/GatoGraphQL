@@ -8,6 +8,7 @@ use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\AbstractSetCategoriesOnCustomPostMutationResolver;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class SetCategoriesOnPostMutationResolver extends AbstractSetCategoriesOnCustomPostMutationResolver
 {
@@ -51,8 +52,9 @@ class SetCategoriesOnPostMutationResolver extends AbstractSetCategoriesOnCustomP
         return $this->__('post', 'post-category-mutations');
     }
 
-    protected function getCategoryTaxonomyName(): string
-    {
+    protected function getCategoryTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string {
         return $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
     }
 }

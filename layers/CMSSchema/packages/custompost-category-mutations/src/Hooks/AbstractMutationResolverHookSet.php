@@ -180,4 +180,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     }
 
     abstract protected function getCustomPostType(): string;
+    abstract protected function getCategoryTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string;
 }
