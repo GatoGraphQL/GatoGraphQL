@@ -368,13 +368,13 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         return array_merge(
             [
                 'createGenericTag',
-                'createPostTags',
+                'createGenericTags',
             ],
             !$disableRedundantRootTypeMutationFields ? [
                 'updateGenericTag',
-                'updatePostTags',
+                'updateGenericTags',
                 'deleteGenericTag',
-                'deletePostTags',
+                'deleteGenericTags',
             ] : [],
             $addFieldsToQueryPayloadableTagMutations ? [
                 'createGenericTagMutationPayloadObjects',
@@ -389,12 +389,12 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createGenericTag' => $this->__('Create a post tag', 'tag-mutations'),
-            'createPostTags' => $this->__('Create post tags', 'tag-mutations'),
-            'updateGenericTag' => $this->__('Update a post tag', 'tag-mutations'),
-            'updatePostTags' => $this->__('Update post tags', 'tag-mutations'),
-            'deleteGenericTag' => $this->__('Delete a post tag', 'tag-mutations'),
-            'deletePostTags' => $this->__('Delete post tags', 'tag-mutations'),
+            'createGenericTag' => $this->__('Create a tag', 'tag-mutations'),
+            'createGenericTags' => $this->__('Create tags', 'tag-mutations'),
+            'updateGenericTag' => $this->__('Update a tag', 'tag-mutations'),
+            'updateGenericTags' => $this->__('Update tags', 'tag-mutations'),
+            'deleteGenericTag' => $this->__('Delete a tag', 'tag-mutations'),
+            'deleteGenericTags' => $this->__('Delete tags', 'tag-mutations'),
             'createGenericTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createGenericTag` mutation', 'tag-mutations'),
             'updateGenericTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateGenericTag` mutation', 'tag-mutations'),
             'deleteGenericTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteGenericTag` mutation', 'tag-mutations'),
@@ -413,9 +413,9 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
                 'updateGenericTag',
                 'deleteGenericTag'
                     => SchemaTypeModifiers::NONE,
-                'createPostTags',
-                'updatePostTags',
-                'deletePostTags'
+                'createGenericTags',
+                'updateGenericTags',
+                'deleteGenericTags'
                     => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY,
                 default
                     => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -437,9 +437,9 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
             'updateGenericTag',
             'deleteGenericTag'
                 => SchemaTypeModifiers::NON_NULLABLE,
-            'createPostTags',
-            'updatePostTags',
-            'deletePostTags'
+            'createGenericTags',
+            'updateGenericTags',
+            'deleteGenericTags'
                 => SchemaTypeModifiers::NON_NULLABLE | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
@@ -455,17 +455,17 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
             'createGenericTag' => [
                 'input' => $this->getRootCreateGenericTagTermInputObjectTypeResolver(),
             ],
-            'createPostTags'
+            'createGenericTags'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootCreateGenericTagTermInputObjectTypeResolver()),
             'updateGenericTag' => [
                 'input' => $this->getRootUpdateGenericTagTermInputObjectTypeResolver(),
             ],
-            'updatePostTags'
+            'updateGenericTags'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootUpdateGenericTagTermInputObjectTypeResolver()),
             'deleteGenericTag' => [
                 'input' => $this->getRootDeleteGenericTagTermInputObjectTypeResolver(),
             ],
-            'deletePostTags'
+            'deleteGenericTags'
                 => $this->getBulkOperationFieldArgNameTypeResolvers($this->getRootDeleteGenericTagTermInputObjectTypeResolver()),
             'createGenericTagMutationPayloadObjects',
             'updateGenericTagMutationPayloadObjects',
@@ -491,9 +491,9 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
 
         if (
             in_array($fieldName, [
-            'createPostTags',
-            'updatePostTags',
-            'deletePostTags',
+            'createGenericTags',
+            'updateGenericTags',
+            'deleteGenericTags',
             ])
         ) {
             return $this->getBulkOperationFieldArgTypeModifiers($fieldArgName)
@@ -513,9 +513,9 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     {
         if (
             in_array($fieldName, [
-            'createPostTags',
-            'updatePostTags',
-            'deletePostTags',
+            'createGenericTags',
+            'updateGenericTags',
+            'deleteGenericTags',
             ])
         ) {
             return $this->getBulkOperationFieldArgDefaultValue($fieldArgName)
@@ -534,19 +534,19 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
             'createGenericTag' => $usePayloadableTagMutations
                 ? $this->getPayloadableCreateGenericTagTermMutationResolver()
                 : $this->getCreateGenericTagTermMutationResolver(),
-            'createPostTags' => $usePayloadableTagMutations
+            'createGenericTags' => $usePayloadableTagMutations
                 ? $this->getPayloadableCreateGenericTagTermBulkOperationMutationResolver()
                 : $this->getCreateGenericTagTermBulkOperationMutationResolver(),
             'updateGenericTag' => $usePayloadableTagMutations
                 ? $this->getPayloadableUpdateGenericTagTermMutationResolver()
                 : $this->getUpdateGenericTagTermMutationResolver(),
-            'updatePostTags' => $usePayloadableTagMutations
+            'updateGenericTags' => $usePayloadableTagMutations
                 ? $this->getPayloadableUpdateGenericTagTermBulkOperationMutationResolver()
                 : $this->getUpdateGenericTagTermBulkOperationMutationResolver(),
             'deleteGenericTag' => $usePayloadableTagMutations
                 ? $this->getPayloadableDeleteGenericTagTermMutationResolver()
                 : $this->getDeleteGenericTagTermMutationResolver(),
-            'deletePostTags' => $usePayloadableTagMutations
+            'deleteGenericTags' => $usePayloadableTagMutations
                 ? $this->getPayloadableDeleteGenericTagTermBulkOperationMutationResolver()
                 : $this->getDeleteGenericTagTermBulkOperationMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
@@ -561,15 +561,15 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         if ($usePayloadableTagMutations) {
             return match ($fieldName) {
                 'createGenericTag',
-                'createPostTags',
+                'createGenericTags',
                 'createGenericTagMutationPayloadObjects'
                     => $this->getRootCreateGenericTagTermMutationPayloadObjectTypeResolver(),
                 'updateGenericTag',
-                'updatePostTags',
+                'updateGenericTags',
                 'updateGenericTagMutationPayloadObjects'
                     => $this->getRootUpdateGenericTagTermMutationPayloadObjectTypeResolver(),
                 'deleteGenericTag',
-                'deletePostTags',
+                'deleteGenericTags',
                 'deleteGenericTagMutationPayloadObjects'
                     => $this->getRootDeleteGenericTagTermMutationPayloadObjectTypeResolver(),
                 default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -577,12 +577,12 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
         }
         return match ($fieldName) {
             'createGenericTag',
-            'createPostTags',
+            'createGenericTags',
             'updateGenericTag',
-            'updatePostTags'
+            'updateGenericTags'
                 => $this->getGenericTagObjectTypeResolver(),
             'deleteGenericTag',
-            'deletePostTags'
+            'deleteGenericTags'
                 => $this->getBooleanScalarTypeResolver(),
             default
                 => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
@@ -618,11 +618,11 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
 
         switch ($fieldDataAccessor->getFieldName()) {
             case 'createGenericTag':
-            case 'createPostTags':
+            case 'createGenericTags':
             case 'updateGenericTag':
-            case 'updatePostTags':
+            case 'updateGenericTags':
             case 'deleteGenericTag':
-            case 'deletePostTags':
+            case 'deleteGenericTags':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }
