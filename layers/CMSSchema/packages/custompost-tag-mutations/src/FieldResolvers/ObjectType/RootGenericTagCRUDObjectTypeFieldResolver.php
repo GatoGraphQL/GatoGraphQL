@@ -395,9 +395,9 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
             'updateTags' => $this->__('Update tags', 'tag-mutations'),
             'deleteTag' => $this->__('Delete a tag', 'tag-mutations'),
             'deleteTags' => $this->__('Delete tags', 'tag-mutations'),
-            'createTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createGenericTag` mutation', 'tag-mutations'),
-            'updateTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateGenericTag` mutation', 'tag-mutations'),
-            'deleteTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteGenericTag` mutation', 'tag-mutations'),
+            'createTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createTag` mutation', 'tag-mutations'),
+            'updateTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateTag` mutation', 'tag-mutations'),
+            'deleteTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteTag` mutation', 'tag-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

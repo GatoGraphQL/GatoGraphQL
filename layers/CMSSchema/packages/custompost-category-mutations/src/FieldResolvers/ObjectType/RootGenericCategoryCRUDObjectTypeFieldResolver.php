@@ -395,9 +395,9 @@ class RootGenericCategoryCRUDObjectTypeFieldResolver extends AbstractObjectTypeF
             'updateCategories' => $this->__('Update categories', 'category-mutations'),
             'deleteCategory' => $this->__('Delete a category', 'category-mutations'),
             'deleteCategories' => $this->__('Delete categories', 'category-mutations'),
-            'createCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createGenericCategory` mutation', 'category-mutations'),
-            'updateCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateGenericCategory` mutation', 'category-mutations'),
-            'deleteCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteGenericCategory` mutation', 'category-mutations'),
+            'createCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createCategory` mutation', 'category-mutations'),
+            'updateCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategory` mutation', 'category-mutations'),
+            'deleteCategoryMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCategory` mutation', 'category-mutations'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
