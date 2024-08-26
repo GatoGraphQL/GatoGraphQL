@@ -414,6 +414,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string */
         $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();

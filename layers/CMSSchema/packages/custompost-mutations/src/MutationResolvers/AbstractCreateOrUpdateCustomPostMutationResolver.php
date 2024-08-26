@@ -341,6 +341,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         $customPostData = $this->getCreateCustomPostData($fieldDataAccessor);
         $customPostID = $this->executeCreateCustomPost($customPostData);

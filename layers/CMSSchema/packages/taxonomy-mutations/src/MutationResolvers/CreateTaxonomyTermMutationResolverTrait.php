@@ -18,7 +18,10 @@ trait CreateTaxonomyTermMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        return $this->create($fieldDataAccessor);
+        return $this->create(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**
@@ -27,6 +30,7 @@ trait CreateTaxonomyTermMutationResolverTrait
      */
     abstract protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int;
 
     public function validate(

@@ -153,9 +153,11 @@ abstract class AbstractCreateOrUpdatePostMutationResolver extends AbstractCreate
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         $customPostID = parent::create(
             $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
 
         App::doAction(
