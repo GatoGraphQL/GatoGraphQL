@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTagMutations\Hooks;
 
 use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
+use PoPCMSSchema\PostMutations\Constants\PostCRUDHookNames;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -36,5 +37,18 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     protected function getTagTypeAPI(): TagTypeAPIInterface
     {
         return $this->getPostTagTypeAPI();
+    }
+
+    protected function getValidateCreateOrUpdateHookName(): string
+    {
+        return PostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE;
+    }
+    protected function getExecuteCreateOrUpdateHookName(): string
+    {
+        return PostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
+    }
+    protected function getErrorPayloadHookName(): string
+    {
+        return PostCRUDHookNames::ERROR_PAYLOAD;
     }
 }
