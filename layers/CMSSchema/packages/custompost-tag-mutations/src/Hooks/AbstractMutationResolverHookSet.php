@@ -131,12 +131,18 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
+        
+        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         $customPostTagSlugOrIDs = isset($tagsBy->{MutationInputProperties::IDS})
             ? $tagsBy->{MutationInputProperties::IDS}
             : $tagsBy->{MutationInputProperties::SLUGS};
-        $this->getCustomPostTagTypeMutationAPI()->setTags($customPostID, $customPostTagSlugOrIDs, false);
+        $this->getCustomPostTagTypeMutationAPI()->setTags(
+            $customPostID,
+            $customPostTagSlugOrIDs,
+            false
+        );
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
