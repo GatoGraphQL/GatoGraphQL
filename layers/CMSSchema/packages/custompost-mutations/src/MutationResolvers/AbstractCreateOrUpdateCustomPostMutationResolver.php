@@ -194,10 +194,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     protected function additionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
-    /**
-     * @param array<string,mixed> $log
-     */
-    protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
+    
+    protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
     protected function createAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
@@ -289,16 +287,6 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     }
 
     /**
-     * @return array<string,string>|null[]
-     */
-    protected function getUpdateCustomPostDataLog(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        return [
-            'previous-status' => $this->getCustomPostTypeAPI()->getStatus($customPostID),
-        ];
-    }
-
-    /**
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
@@ -309,22 +297,17 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = $this->getUpdateCustomPostData($fieldDataAccessor);
         $customPostID = $customPostData['id'];
 
-        // Create the operation log, to see what changed. Needed for
-        // - Send email only when post published
-        // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
-        $log = $this->getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);
-
         $customPostID = $this->executeUpdateCustomPost($customPostData);
 
         $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($customPostID, $fieldDataAccessor);
-        $this->updateAdditionals($customPostID, $fieldDataAccessor, $log);
+        $this->updateAdditionals($customPostID, $fieldDataAccessor);
 
         // Inject Share profiles here
         App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_UPDATE, $customPostID, $log, $fieldDataAccessor);
+        App::doAction(HookNames::EXECUTE_UPDATE, $customPostID, $fieldDataAccessor);
 
         return $customPostID;
     }
