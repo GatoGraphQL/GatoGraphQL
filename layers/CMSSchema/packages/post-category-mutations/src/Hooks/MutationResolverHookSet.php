@@ -7,6 +7,7 @@ namespace PoPCMSSchema\PostCategoryMutations\Hooks;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\Hooks\AbstractMutationResolverHookSet;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPCMSSchema\PostMutations\Constants\PostCRUDHookNames;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
@@ -56,5 +57,18 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string {
         return $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
+    }
+
+    protected function getValidateCreateOrUpdateHookName(): string
+    {
+        return PostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE;
+    }
+    protected function getExecuteCreateOrUpdateHookName(): string
+    {
+        return PostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
+    }
+    protected function getErrorPayloadHookName(): string
+    {
+        return PostCRUDHookNames::ERROR_PAYLOAD;
     }
 }

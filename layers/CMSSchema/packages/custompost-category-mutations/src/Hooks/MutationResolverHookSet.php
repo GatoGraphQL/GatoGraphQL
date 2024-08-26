@@ -8,6 +8,7 @@ use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMutations\Hooks\AbstractMutationResolverHookSet;
+use PoPCMSSchema\CustomPostMutations\Constants\GenericCustomPostCRUDHookNames;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
@@ -43,5 +44,18 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     ): string {
         /** @var string */
         return $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+    }
+
+    protected function getValidateCreateOrUpdateHookName(): string
+    {
+        return GenericCustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE;
+    }
+    protected function getExecuteCreateOrUpdateHookName(): string
+    {
+        return GenericCustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
+    }
+    protected function getErrorPayloadHookName(): string
+    {
+        return GenericCustomPostCRUDHookNames::ERROR_PAYLOAD;
     }
 }

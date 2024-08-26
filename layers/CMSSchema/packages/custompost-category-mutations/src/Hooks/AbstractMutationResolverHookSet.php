@@ -59,23 +59,36 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            $this->getValidateCreateOrUpdateHookName(),
             $this->maybeValidateCategories(...),
             10,
             2
         );
         App::addAction(
-            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            $this->getExecuteCreateOrUpdateHookName(),
             $this->maybeSetCategories(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::ERROR_PAYLOAD,
+            $this->getErrorPayloadHookName(),
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2
         );
+    }
+
+    protected function getValidateCreateOrUpdateHookName(): string
+    {
+        return HookNames::VALIDATE_CREATE_OR_UPDATE;
+    }
+    protected function getExecuteCreateOrUpdateHookName(): string
+    {
+        return HookNames::EXECUTE_CREATE_OR_UPDATE;
+    }
+    protected function getErrorPayloadHookName(): string
+    {
+        return HookNames::ERROR_PAYLOAD;
     }
 
     public function maybeValidateCategories(
