@@ -137,6 +137,10 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
 
         $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor);
+        if ($taxonomyName === null) {
+
+        }
+        
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         $customPostTagSlugOrIDs = isset($tagsBy->{MutationInputProperties::IDS})
