@@ -120,11 +120,13 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             GenericCustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,
             $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
             GenericCustomPostCRUDHookNames::EXECUTE_UPDATE,
             $customPostID,
-            $fieldDataAccessor
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
 
         return $customPostID;
@@ -147,11 +149,13 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             GenericCustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,
             $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
             GenericCustomPostCRUDHookNames::EXECUTE_CREATE,
             $customPostID,
             $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
 
         return $customPostID;

@@ -212,11 +212,13 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
             PageCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,
             $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
             PageCRUDHookNames::EXECUTE_UPDATE,
             $customPostID,
-            $fieldDataAccessor
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
 
         return $customPostID;
@@ -239,11 +241,13 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
             PageCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,
             $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
         App::doAction(
             PageCRUDHookNames::EXECUTE_CREATE,
             $customPostID,
             $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
         );
 
         return $customPostID;
