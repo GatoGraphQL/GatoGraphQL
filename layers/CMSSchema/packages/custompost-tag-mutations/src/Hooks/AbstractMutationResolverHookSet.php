@@ -120,7 +120,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
+        $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor);
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         $customPostTagSlugOrIDs = isset($tagsBy->{MutationInputProperties::IDS})
@@ -162,6 +162,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     }
 
     abstract protected function getTagTaxonomyName(
+        int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string;
 }

@@ -29,6 +29,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     }
 
     protected function getTagTaxonomyName(
+        int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
     ): string {
         return $this->getPostTagTypeAPI()->getPostTagTaxonomyName();
