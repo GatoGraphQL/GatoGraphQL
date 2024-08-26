@@ -6,6 +6,8 @@ namespace PoPCMSSchema\CustomPostTagMutationsWP\TypeAPIs;
 
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 
+use function wp_set_post_terms;
+
 class CustomPostTagTypeMutationAPI implements CustomPostTagTypeMutationAPIInterface
 {
     /**
@@ -20,6 +22,6 @@ class CustomPostTagTypeMutationAPI implements CustomPostTagTypeMutationAPIInterf
         array $tags,
         bool $append = false,
     ): void {
-        \wp_set_post_terms((int)$postID, $tags, $taxonomyName, $append);
+        wp_set_post_terms((int)$postID, $tags, $taxonomyName, $append);
     }
 }
