@@ -7,7 +7,6 @@ namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
-use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\GenericCustomPostTagTypeMutationAPIInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
@@ -45,11 +44,6 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     protected function getCustomPostType(): string
     {
         return '';
-    }
-
-    protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
-    {
-        return $this->getGenericCustomPostTagTypeMutationAPI();
     }
 
     protected function getTagTypeAPI(): TagTypeAPIInterface
