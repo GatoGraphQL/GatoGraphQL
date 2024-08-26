@@ -9,7 +9,7 @@ use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationError
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\SetCategoriesOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostCategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
@@ -79,15 +79,15 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     protected function getValidateCreateOrUpdateHookName(): string
     {
-        return HookNames::VALIDATE_CREATE_OR_UPDATE;
+        return CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE;
     }
     protected function getExecuteCreateOrUpdateHookName(): string
     {
-        return HookNames::EXECUTE_CREATE_OR_UPDATE;
+        return CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
     }
     protected function getErrorPayloadHookName(): string
     {
-        return HookNames::ERROR_PAYLOAD;
+        return CustomPostCRUDHookNames::ERROR_PAYLOAD;
     }
 
     public function maybeValidateCategories(

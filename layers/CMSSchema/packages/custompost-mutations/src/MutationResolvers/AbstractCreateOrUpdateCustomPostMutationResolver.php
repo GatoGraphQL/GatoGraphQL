@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
@@ -111,7 +111,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     ): void {
         // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -147,7 +147,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     ): void {
         // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_CREATE,
+            CustomPostCRUDHookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -166,7 +166,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     ): void {
         // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_UPDATE,
+            CustomPostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -236,7 +236,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         // Inject author, categories, tags, featured image, etc
         return App::applyFilters(
-            HookNames::GET_CREATE_OR_UPDATE_DATA,
+            CustomPostCRUDHookNames::GET_CREATE_OR_UPDATE_DATA,
             $customPostData,
             $fieldDataAccessor,
         );
@@ -254,7 +254,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         // Inject author, categories, tags, featured image, etc
         return App::applyFilters(
-            HookNames::GET_UPDATE_DATA,
+            CustomPostCRUDHookNames::GET_UPDATE_DATA,
             $customPostData,
             $fieldDataAccessor,
         );
@@ -272,7 +272,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
 
         // Inject author, categories, tags, featured image, etc
         return App::applyFilters(
-            HookNames::GET_CREATE_DATA,
+            CustomPostCRUDHookNames::GET_CREATE_DATA,
             $customPostData,
             $fieldDataAccessor,
         );
@@ -312,12 +312,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->updateAdditionals($customPostID, $fieldDataAccessor);
 
         App::doAction(
-            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,
             $fieldDataAccessor,
         );
         App::doAction(
-            HookNames::EXECUTE_UPDATE,
+            CustomPostCRUDHookNames::EXECUTE_UPDATE,
             $customPostID,
             $fieldDataAccessor,
         );
@@ -352,12 +352,12 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->createAdditionals($customPostID, $fieldDataAccessor);
 
         App::doAction(
-            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,
             $fieldDataAccessor,
         );
         App::doAction(
-            HookNames::EXECUTE_CREATE,
+            CustomPostCRUDHookNames::EXECUTE_CREATE,
             $customPostID,
             $fieldDataAccessor,
         );

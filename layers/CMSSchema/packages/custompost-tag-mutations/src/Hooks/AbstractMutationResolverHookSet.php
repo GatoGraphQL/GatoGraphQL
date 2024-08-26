@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
-use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\SetTagsOnCustomPostMutationResolverTrait;
@@ -58,19 +58,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $this->maybeValidateTags(...),
             10,
             2
         );
         App::addAction(
-            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $this->maybeSetTags(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::ERROR_PAYLOAD,
+            CustomPostCRUDHookNames::ERROR_PAYLOAD,
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2
