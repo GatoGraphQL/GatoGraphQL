@@ -14,4 +14,9 @@ class GenericTagTermUpdateInputObjectTypeResolver extends AbstractCreateOrUpdate
     {
         return 'GenericTagUpdateInput';
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }

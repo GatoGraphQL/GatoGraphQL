@@ -14,4 +14,9 @@ class GenericCategoryTermUpdateInputObjectTypeResolver extends AbstractCreateOrU
     {
         return 'GenericCategoryUpdateInput';
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }

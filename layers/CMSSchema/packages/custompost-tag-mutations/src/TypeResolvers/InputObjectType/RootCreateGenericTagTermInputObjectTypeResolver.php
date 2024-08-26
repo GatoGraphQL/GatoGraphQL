@@ -14,4 +14,9 @@ class RootCreateGenericTagTermInputObjectTypeResolver extends AbstractCreateOrUp
     {
         return 'RootCreateGenericTagInput';
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return true;
+    }
 }
