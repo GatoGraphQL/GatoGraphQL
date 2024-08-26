@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType;
 
-use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
-use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
+use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\IDScalarTypeResolver;
 
 abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 {
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?CategoriesByOneofInputObjectTypeResolver $categoriesByOneofInputObjectTypeResolver = null;
+    private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -57,6 +59,19 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
         }
         return $this->categoriesByOneofInputObjectTypeResolver;
     }
+    final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->categoryTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
+            $categoryTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
+            $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->categoryTaxonomyEnumStringScalarTypeResolver;
+    }
 
     public function getTypeDescription(): ?string
     {
@@ -69,6 +84,9 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
+            $this->addTaxonomyInputField() ? [
+                MutationInputProperties::TAXONOMY => $this->getCategoryTaxonomyEnumStringScalarTypeResolver(),
+            ] : [],
             $this->addCustomPostInputField() ? [
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ] : [],
@@ -79,6 +97,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
         );
     }
 
+    abstract protected function addTaxonomyInputField(): bool;
     abstract protected function addCustomPostInputField(): bool;
     abstract protected function getEntityName(): string;
     abstract protected function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface;
@@ -86,6 +105,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
+            MutationInputProperties::TAXONOMY => $this->__('The category taxonomy', 'custompost-tag-mutations'),
             MutationInputProperties::CUSTOMPOST_ID => sprintf(
                 $this->__('The ID of the %s', 'custompost-category-mutations'),
                 $this->getEntityName()
@@ -112,6 +132,7 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
         return match ($inputFieldName) {
             MutationInputProperties::APPEND
                 => SchemaTypeModifiers::NON_NULLABLE,
+            MutationInputProperties::TAXONOMY,
             MutationInputProperties::CUSTOMPOST_ID,
             MutationInputProperties::CATEGORIES_BY
                 => SchemaTypeModifiers::MANDATORY,

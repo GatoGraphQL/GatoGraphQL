@@ -11,6 +11,11 @@ class RootSetTagsOnCustomPostInputObjectTypeResolver extends AbstractSetTagsOnGe
         return 'RootSetTagsOnCustomPostInput';
     }
 
+    protected function addTaxonomyInputField(): bool
+    {
+        return true;
+    }
+
     protected function addCustomPostInputField(): bool
     {
         return true;

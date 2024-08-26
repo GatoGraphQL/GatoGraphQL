@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\InputObjectType\TagsByOneofInputObjectTypeResolver;
+use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractInputObjectTypeResolver;
@@ -18,6 +19,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
     private ?TagsByOneofInputObjectTypeResolver $tagsByOneofInputObjectTypeResolver = null;
+    private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setBooleanScalarTypeResolver(BooleanScalarTypeResolver $booleanScalarTypeResolver): void
     {
@@ -58,6 +60,19 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
         }
         return $this->tagsByOneofInputObjectTypeResolver;
     }
+    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->tagTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var TagTaxonomyEnumStringScalarTypeResolver */
+            $tagTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
+            $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->tagTaxonomyEnumStringScalarTypeResolver;
+    }
 
     public function getTypeDescription(): ?string
     {
@@ -70,6 +85,9 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
+            $this->addTaxonomyInputField() ? [
+                MutationInputProperties::TAXONOMY => $this->getTagTaxonomyEnumStringScalarTypeResolver(),
+            ] : [],
             $this->addCustomPostInputField() ? [
                 MutationInputProperties::CUSTOMPOST_ID => $this->getIDScalarTypeResolver(),
             ] : [],
@@ -80,6 +98,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
         );
     }
 
+    abstract protected function addTaxonomyInputField(): bool;
     abstract protected function addCustomPostInputField(): bool;
     abstract protected function getEntityName(): string;
     abstract protected function getTagTypeResolver(): TagObjectTypeResolverInterface;
@@ -87,6 +106,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
+            MutationInputProperties::TAXONOMY => $this->__('The tag taxonomy', 'custompost-tag-mutations'),
             MutationInputProperties::CUSTOMPOST_ID => sprintf(
                 $this->__('The ID of the %s', 'custompost-tag-mutations'),
                 $this->getEntityName()
@@ -113,6 +133,7 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
         return match ($inputFieldName) {
             MutationInputProperties::APPEND
                 => SchemaTypeModifiers::NON_NULLABLE,
+            MutationInputProperties::TAXONOMY,
             MutationInputProperties::CUSTOMPOST_ID,
             MutationInputProperties::TAGS_BY
                 => SchemaTypeModifiers::MANDATORY,

@@ -11,6 +11,11 @@ class GenericCustomPostSetCategoriesInputObjectTypeResolver extends AbstractSetC
         return 'GenericCustomPostSetCategoriesInput';
     }
 
+    protected function addTaxonomyInputField(): bool
+    {
+        return true;
+    }
+
     protected function addCustomPostInputField(): bool
     {
         return false;

@@ -11,6 +11,11 @@ class GenericCustomPostSetTagsInputObjectTypeResolver extends AbstractSetTagsOnG
         return 'GenericCustomPostSetTagsInput';
     }
 
+    protected function addTaxonomyInputField(): bool
+    {
+        return true;
+    }
+
     protected function addCustomPostInputField(): bool
     {
         return false;
