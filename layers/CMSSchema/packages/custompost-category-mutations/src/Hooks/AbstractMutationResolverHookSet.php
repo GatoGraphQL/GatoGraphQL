@@ -77,18 +77,9 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    protected function getValidateCreateOrUpdateHookName(): string
-    {
-        return CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE;
-    }
-    protected function getExecuteCreateOrUpdateHookName(): string
-    {
-        return CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
-    }
-    protected function getErrorPayloadHookName(): string
-    {
-        return CustomPostCRUDHookNames::ERROR_PAYLOAD;
-    }
+    abstract protected function getValidateCreateOrUpdateHookName(): string;
+    abstract protected function getExecuteCreateOrUpdateHookName(): string;
+    abstract protected function getErrorPayloadHookName(): string;
 
     public function maybeValidateCategories(
         FieldDataAccessorInterface $fieldDataAccessor,
