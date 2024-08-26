@@ -35,4 +35,9 @@ abstract class AbstractSetCategoriesOnGenericCustomPostInputObjectTypeResolver e
     {
         return $this->__('custom post', 'postcategory-mutations');
     }
+
+    protected function addTaxonomyInputField(): bool
+    {
+        return true;
+    }
 }

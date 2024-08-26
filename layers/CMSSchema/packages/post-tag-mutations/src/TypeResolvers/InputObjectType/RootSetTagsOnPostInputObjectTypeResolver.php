@@ -11,11 +11,6 @@ class RootSetTagsOnPostInputObjectTypeResolver extends AbstractSetTagsOnPostInpu
         return 'RootSetTagsOnPostInput';
     }
 
-    protected function addTaxonomyInputField(): bool
-    {
-        return false;
-    }
-
     protected function addCustomPostInputField(): bool
     {
         return true;

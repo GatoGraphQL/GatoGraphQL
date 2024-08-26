@@ -35,4 +35,9 @@ abstract class AbstractSetTagsOnGenericCustomPostInputObjectTypeResolver extends
     {
         return $this->__('custom post', 'posttag-mutations');
     }
+
+    protected function addTaxonomyInputField(): bool
+    {
+        return true;
+    }
 }

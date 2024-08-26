@@ -11,11 +11,6 @@ class RootSetCategoriesOnCustomPostInputObjectTypeResolver extends AbstractSetCa
         return 'RootSetCategoriesOnCustomPostInput';
     }
 
-    protected function addTaxonomyInputField(): bool
-    {
-        return true;
-    }
-
     protected function addCustomPostInputField(): bool
     {
         return true;

@@ -11,11 +11,6 @@ class PostSetCategoriesInputObjectTypeResolver extends AbstractSetCategoriesOnPo
         return 'PostSetCategoriesInput';
     }
 
-    protected function addTaxonomyInputField(): bool
-    {
-        return false;
-    }
-
     protected function addCustomPostInputField(): bool
     {
         return false;
