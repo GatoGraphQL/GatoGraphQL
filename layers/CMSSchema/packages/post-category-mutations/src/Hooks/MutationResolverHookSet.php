@@ -8,27 +8,12 @@ use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\Hooks\AbstractMutationResolverHookSet;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\PostMutations\Constants\PostCRUDHookNames;
-use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
-    private ?PostTypeAPIInterface $postTypeAPI = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
-    final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
-    {
-        $this->postTypeAPI = $postTypeAPI;
-    }
-    final protected function getPostTypeAPI(): PostTypeAPIInterface
-    {
-        if ($this->postTypeAPI === null) {
-            /** @var PostTypeAPIInterface */
-            $postTypeAPI = $this->instanceManager->getInstance(PostTypeAPIInterface::class);
-            $this->postTypeAPI = $postTypeAPI;
-        }
-        return $this->postTypeAPI;
-    }
     final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
     {
         $this->postCategoryTypeAPI = $postCategoryTypeAPI;
