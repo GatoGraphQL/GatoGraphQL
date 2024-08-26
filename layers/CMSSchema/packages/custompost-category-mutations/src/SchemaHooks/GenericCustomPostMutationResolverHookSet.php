@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMutations\SchemaHooks;
 
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
-use PoPCMSSchema\CustomPostCategoryMutations\SchemaHooks\AbstractCustomPostMutationResolverHookSet;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
-use PoPCMSSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
+use PoPCMSSchema\CustomPostCategoryMutations\SchemaHooks\AbstractCustomPostMutationResolverHookSet;
+use PoPCMSSchema\CustomPostMutations\SchemaHooks\GenericCustomPostMutationResolverHookSetTrait;
 
 class GenericCustomPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    use PostMutationResolverHookSetTrait;
+    use GenericCustomPostMutationResolverHookSetTrait;
 
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
 

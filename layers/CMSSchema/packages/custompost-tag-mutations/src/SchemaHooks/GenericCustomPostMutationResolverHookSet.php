@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\SchemaHooks;
 
-use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
+use PoPCMSSchema\CustomPostMutations\SchemaHooks\GenericCustomPostMutationResolverHookSetTrait;
 use PoPCMSSchema\CustomPostTagMutations\SchemaHooks\AbstractCustomPostMutationResolverHookSet;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver;
-use PoPCMSSchema\PostMutations\SchemaHooks\PostMutationResolverHookSetTrait;
+use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 
 class GenericCustomPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
-    use PostMutationResolverHookSetTrait;
-
+    use GenericCustomPostMutationResolverHookSetTrait;
+    
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
 
     final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void
