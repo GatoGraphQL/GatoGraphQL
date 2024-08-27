@@ -141,7 +141,7 @@ query FilterTranslationCustomPostsToUpdate(
         by: { key: $__polylangLanguageCode }
       )
 
-      translationPostCategoryIDs: _echo(value: $__polylangLanguage)
+      translationCustomPostCategoryIDs: _echo(value: $__polylangLanguage)
         @passOnwards(as: "lang")
         @applyField(
           name: "_echo"
@@ -171,7 +171,7 @@ query FilterTranslationCustomPostsToUpdate(
           )
         @arrayFilter
         @export(
-          as: "translationPostCategoryIDs",
+          as: "translationCustomPostCategoryIDs",
           type: DICTIONARY
         )
         @remove
@@ -215,7 +215,7 @@ mutation UpdateCategoriesForTranslationPosts(
       }
 
       categoryIDs: _objectProperty(
-        object: $translationPostCategoryIDs,
+        object: $translationCustomPostCategoryIDs,
         by: { key: $__id }
       )
     }
