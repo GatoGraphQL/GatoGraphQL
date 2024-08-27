@@ -3,7 +3,7 @@
 # Variables:
 #   - customPostId: The custom post with the origin language, from where all translations will be made
 #   - customPostType: The custom post's type. Default is `post`
-#   - statusToUpdate: The status the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
+#   - statusToUpdate: The status the translation custom posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
 #   - translateFromLanguage: Only execute the translation when the origin post has some provided language. It applies only when `translateDefaultLanguageOnly` is `false`
