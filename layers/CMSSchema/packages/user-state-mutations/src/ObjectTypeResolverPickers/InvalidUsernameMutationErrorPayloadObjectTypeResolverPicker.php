@@ -8,7 +8,7 @@ use PoPCMSSchema\UserStateMutations\TypeResolvers\UnionType\RootLoginUserMutatio
 use PoPCMSSchema\UserStateMutations\ObjectTypeResolverPickers\AbstractInvalidUsernameErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class InvalidUsernameMutationErrorPayloadObjectTypeResolverPicker extends AbstractInvalidUsernameErrorPayloadObjectTypeResolverPicker
+class InvalidUsernameErrorPayloadObjectTypeResolverPicker extends AbstractInvalidUsernameErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

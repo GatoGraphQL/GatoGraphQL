@@ -9,7 +9,7 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootAddCommentToCustom
 use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\RootReplyCommentMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class CommentsAreNotOpenForCustomPostMutationErrorPayloadObjectTypeResolverPicker extends AbstractCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolverPicker
+class CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolverPicker extends AbstractCommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

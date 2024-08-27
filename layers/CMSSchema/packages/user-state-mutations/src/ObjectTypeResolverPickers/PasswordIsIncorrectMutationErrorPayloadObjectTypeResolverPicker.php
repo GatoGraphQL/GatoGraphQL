@@ -8,7 +8,7 @@ use PoPCMSSchema\UserStateMutations\TypeResolvers\UnionType\RootLoginUserMutatio
 use PoPCMSSchema\UserStateMutations\ObjectTypeResolverPickers\AbstractPasswordIsIncorrectErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class PasswordIsIncorrectMutationErrorPayloadObjectTypeResolverPicker extends AbstractPasswordIsIncorrectErrorPayloadObjectTypeResolverPicker
+class PasswordIsIncorrectErrorPayloadObjectTypeResolverPicker extends AbstractPasswordIsIncorrectErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

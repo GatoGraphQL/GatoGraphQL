@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers;
 use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractCreateMediaItemMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class UserHasNoPermissionToUploadFilesMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolverPicker
+class UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolverPicker extends AbstractUserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

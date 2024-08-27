@@ -7,7 +7,7 @@ namespace PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers;
 use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractUpdateMediaItemMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class LoggedInUserHasNoPermissionToEditMediaItemMutationErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolverPicker
+class LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

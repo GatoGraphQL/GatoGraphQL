@@ -10,7 +10,7 @@ use PoPCMSSchema\CommentMutations\TypeResolvers\UnionType\AbstractCommentMutatio
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class CommentAuthorNameIsMissingMutationErrorPayloadObjectTypeResolverPicker extends AbstractCommentAuthorNameIsMissingErrorPayloadObjectTypeResolverPicker
+class CommentAuthorNameIsMissingErrorPayloadObjectTypeResolverPicker extends AbstractCommentAuthorNameIsMissingErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

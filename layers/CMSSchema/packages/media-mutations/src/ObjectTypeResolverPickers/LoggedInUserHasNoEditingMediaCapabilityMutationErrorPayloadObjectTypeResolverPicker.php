@@ -9,7 +9,7 @@ use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractCreateMediaItemM
 use PoPCMSSchema\MediaMutations\TypeResolvers\UnionType\AbstractUpdateMediaItemMutationErrorPayloadUnionTypeResolver;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class LoggedInUserHasNoEditingMediaCapabilityMutationErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolverPicker
+class LoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolverPicker extends AbstractLoggedInUserHasNoEditingMediaCapabilityErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>

@@ -8,7 +8,7 @@ use PoPCMSSchema\UserStateMutations\TypeResolvers\UnionType\RootLoginUserMutatio
 use PoPCMSSchema\UserStateMutations\ObjectTypeResolverPickers\AbstractUserIsLoggedInErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
-class UserIsLoggedInMutationErrorPayloadObjectTypeResolverPicker extends AbstractUserIsLoggedInErrorPayloadObjectTypeResolverPicker
+class UserIsLoggedInErrorPayloadObjectTypeResolverPicker extends AbstractUserIsLoggedInErrorPayloadObjectTypeResolverPicker
 {
     /**
      * @return array<class-string<UnionTypeResolverInterface>>
