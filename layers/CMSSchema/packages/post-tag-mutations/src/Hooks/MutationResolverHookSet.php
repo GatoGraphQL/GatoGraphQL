@@ -50,8 +50,4 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
     {
         return PostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE;
     }
-    protected function getErrorPayloadHookName(): string
-    {
-        return PostCRUDHookNames::ERROR_PAYLOAD;
-    }
 }

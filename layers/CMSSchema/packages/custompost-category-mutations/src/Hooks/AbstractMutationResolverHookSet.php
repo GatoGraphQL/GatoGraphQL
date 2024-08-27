@@ -9,6 +9,7 @@ use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\SetCategoriesOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
@@ -82,7 +83,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     abstract protected function getValidateCreateOrUpdateHookName(): string;
     abstract protected function getExecuteCreateOrUpdateHookName(): string;
-    abstract protected function getErrorPayloadHookName(): string;
+    
+    protected function getErrorPayloadHookName(): string
+    {
+        return CustomPostCRUDHookNames::ERROR_PAYLOAD;
+    }
 
     public function maybeValidateCategories(
         FieldDataAccessorInterface $fieldDataAccessor,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\SetTagsOnCustomPostMutationResolverTrait;
@@ -82,7 +83,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     abstract protected function getValidateCreateOrUpdateHookName(): string;
     abstract protected function getExecuteCreateOrUpdateHookName(): string;
-    abstract protected function getErrorPayloadHookName(): string;
+    
+    protected function getErrorPayloadHookName(): string
+    {
+        return CustomPostCRUDHookNames::ERROR_PAYLOAD;
+    }
 
     public function maybeValidateTags(
         FieldDataAccessorInterface $fieldDataAccessor,

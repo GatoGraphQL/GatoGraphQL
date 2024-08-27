@@ -15,5 +15,4 @@ class GenericCustomPostCRUDHookNames
     public final const GET_CREATE_OR_UPDATE_DATA = __CLASS__ . ':get-create-or-update-data';
     public final const GET_CREATE_DATA = __CLASS__ . ':get-create-data';
     public final const GET_UPDATE_DATA = __CLASS__ . ':get-update-data';
-    public final const ERROR_PAYLOAD = __CLASS__ . ':error-payload';
 }
