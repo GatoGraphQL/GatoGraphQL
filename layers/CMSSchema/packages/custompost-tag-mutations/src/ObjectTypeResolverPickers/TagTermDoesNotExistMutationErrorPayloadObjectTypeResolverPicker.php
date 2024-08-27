@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\ObjectTypeResolverPickers;
 
+use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\UnionType\AbstractGenericTagsMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\UnionType\GenericTagDeleteMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\UnionType\GenericTagUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\CustomPostTagMutations\TypeResolvers\UnionType\RootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver;
@@ -19,6 +20,7 @@ class TagTermDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends Ab
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
+            AbstractGenericTagsMutationErrorPayloadUnionTypeResolver::class,
             RootDeleteGenericTagTermMutationErrorPayloadUnionTypeResolver::class,
             RootUpdateGenericTagTermMutationErrorPayloadUnionTypeResolver::class,
             GenericTagDeleteMutationErrorPayloadUnionTypeResolver::class,
