@@ -1438,7 +1438,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] Translate posts for Polylang (Gutenberg)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate custom posts for Polylang (Gutenberg)', 'gatographql'),
                     'post_excerpt' => \__('Translate a block-based post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
@@ -1465,7 +1465,7 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] Translate posts for Polylang (Classic editor)', 'gatographql'),
+                    'post_title' => \__('[PRO] Translate custom posts for Polylang (Classic editor)', 'gatographql'),
                     'post_excerpt' => \__('Translate a Classic editor post to all languages defined in the Polylang settings, storing each translation in the corresponding entry for the language', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
@@ -1840,8 +1840,8 @@ class Plugin extends AbstractMainPlugin
                 $adminPersistedQueryOptions,
                 [
                     'post_name' => $slug,
-                    'post_title' => \__('[PRO] Create missing translation posts for Polylang', 'gatographql'),
-                    'post_excerpt' => \__('Given a post, duplicate it into all the other languages defined in Polylang for which there is no translation post yet', 'gatographql'),
+                    'post_title' => \__('[PRO] Create missing translation custom posts for Polylang', 'gatographql'),
+                    'post_excerpt' => \__('Given a custom post, duplicate it into all the other languages defined in Polylang for which there is no translation post yet', 'gatographql'),
                     'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
                         [
                             'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
