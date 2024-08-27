@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTermTypeAPIFacade;
 
 trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
 {
@@ -69,6 +71,11 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         }
 
         return $taxonomyNames[0];
+    }
+
+    protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        return TaxonomyTermTypeAPIFacade::getInstance();
     }
 
     abstract protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution;
