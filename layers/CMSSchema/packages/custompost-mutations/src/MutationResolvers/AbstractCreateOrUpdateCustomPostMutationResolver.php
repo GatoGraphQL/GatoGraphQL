@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
@@ -111,7 +111,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     ): void {
         // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -147,7 +147,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     ): void {
         // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_CREATE,
+            CustomPostCRUDHookNames::VALIDATE_CREATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -166,7 +166,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     ): void {
         // Allow components (eg: CustomPostCategoryMutations) to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_UPDATE,
+            CustomPostCRUDHookNames::VALIDATE_UPDATE,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -194,10 +194,8 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     protected function additionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
-    /**
-     * @param array<string,mixed> $log
-     */
-    protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor, array $log): void
+
+    protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
     protected function createAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
@@ -237,9 +235,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         }
 
         // Inject author, categories, tags, featured image, etc
-        $customPostData = App::applyFilters(HookNames::GET_CREATE_OR_UPDATE_DATA, $customPostData, $fieldDataAccessor);
-
-        return $customPostData;
+        return App::applyFilters(
+            CustomPostCRUDHookNames::GET_CREATE_OR_UPDATE_DATA,
+            $customPostData,
+            $fieldDataAccessor,
+        );
     }
 
     /**
@@ -253,9 +253,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         // Inject author, categories, tags, featured image, etc
-        $customPostData = App::applyFilters(HookNames::GET_UPDATE_DATA, $customPostData, $fieldDataAccessor);
-
-        return $customPostData;
+        return App::applyFilters(
+            CustomPostCRUDHookNames::GET_UPDATE_DATA,
+            $customPostData,
+            $fieldDataAccessor,
+        );
     }
 
     /**
@@ -269,9 +271,11 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = $this->addCreateOrUpdateCustomPostData($customPostData, $fieldDataAccessor);
 
         // Inject author, categories, tags, featured image, etc
-        $customPostData = App::applyFilters(HookNames::GET_CREATE_DATA, $customPostData, $fieldDataAccessor);
-
-        return $customPostData;
+        return App::applyFilters(
+            CustomPostCRUDHookNames::GET_CREATE_DATA,
+            $customPostData,
+            $fieldDataAccessor,
+        );
     }
 
     /**
@@ -289,16 +293,6 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     }
 
     /**
-     * @return array<string,string>|null[]
-     */
-    protected function getUpdateCustomPostDataLog(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): array
-    {
-        return [
-            'previous-status' => $this->getCustomPostTypeAPI()->getStatus($customPostID),
-        ];
-    }
-
-    /**
      * @return string|int The ID of the updated entity
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
@@ -309,22 +303,26 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $customPostData = $this->getUpdateCustomPostData($fieldDataAccessor);
         $customPostID = $customPostData['id'];
 
-        // Create the operation log, to see what changed. Needed for
-        // - Send email only when post published
-        // - Add user notification of post being referenced, only when the reference is new (otherwise it will add the notification each time the user updates the post)
-        $log = $this->getUpdateCustomPostDataLog($customPostID, $fieldDataAccessor);
-
         $customPostID = $this->executeUpdateCustomPost($customPostData);
 
         $this->createUpdateCustomPost($fieldDataAccessor, $customPostID);
 
         // Allow for additional operations (eg: set Action categories)
         $this->additionals($customPostID, $fieldDataAccessor);
-        $this->updateAdditionals($customPostID, $fieldDataAccessor, $log);
+        $this->updateAdditionals($customPostID, $fieldDataAccessor);
 
-        // Inject Share profiles here
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_UPDATE, $customPostID, $log, $fieldDataAccessor);
+        App::doAction(
+            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(
+            CustomPostCRUDHookNames::EXECUTE_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
         return $customPostID;
     }
@@ -345,6 +343,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
      */
     protected function create(
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         $customPostData = $this->getCreateCustomPostData($fieldDataAccessor);
         $customPostID = $this->executeCreateCustomPost($customPostData);
@@ -355,9 +354,18 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
         $this->additionals($customPostID, $fieldDataAccessor);
         $this->createAdditionals($customPostID, $fieldDataAccessor);
 
-        // Inject Share profiles here
-        App::doAction(HookNames::EXECUTE_CREATE_OR_UPDATE, $customPostID, $fieldDataAccessor);
-        App::doAction(HookNames::EXECUTE_CREATE, $customPostID, $fieldDataAccessor);
+        App::doAction(
+            CustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        App::doAction(
+            CustomPostCRUDHookNames::EXECUTE_CREATE,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
 
         return $customPostID;
     }

@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CategoryMutations\MutationResolvers;
 
-use PoPCMSSchema\CategoryMutations\Constants\HookNames;
+use PoPCMSSchema\CategoryMutations\Constants\CategoryCRUDHookNames;
 use PoPCMSSchema\CategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
@@ -39,7 +38,7 @@ trait PayloadableCategoryMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
-            ] => new CategoryDoesNotExistErrorPayload(
+            ] => new CategoryTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
@@ -67,7 +66,7 @@ trait PayloadableCategoryMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             default => App::applyFilters(
-                HookNames::ERROR_PAYLOAD,
+                CategoryCRUDHookNames::ERROR_PAYLOAD,
                 $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
                     $objectTypeFieldResolutionFeedback
                 ),

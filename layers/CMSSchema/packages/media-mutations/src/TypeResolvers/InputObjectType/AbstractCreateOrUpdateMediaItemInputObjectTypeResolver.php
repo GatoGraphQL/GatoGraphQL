@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\TypeResolvers\InputObjectType;
 
-use PoPCMSSchema\MediaMutations\Constants\HookNames;
+use PoPCMSSchema\MediaMutations\Constants\MediaCRUDHookNames;
 use PoPCMSSchema\MediaMutations\Constants\MutationInputProperties;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -84,7 +84,7 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
 
         // Inject custom post ID, etc
         $inputFieldNameTypeResolvers = App::applyFilters(
-            HookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            MediaCRUDHookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $inputFieldNameTypeResolvers,
             $this,
         );
@@ -113,7 +113,7 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
 
         // Inject custom post ID, etc
         $inputFieldDescription = App::applyFilters(
-            HookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
+            MediaCRUDHookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
             $inputFieldDescription,
             $inputFieldName,
             $this,
@@ -132,7 +132,7 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
 
         // Inject custom post ID, etc
         $inputFieldTypeModifiers = App::applyFilters(
-            HookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_TYPE_MODIFIERS,
+            MediaCRUDHookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_TYPE_MODIFIERS,
             $inputFieldTypeModifiers,
             $inputFieldName,
             $this,

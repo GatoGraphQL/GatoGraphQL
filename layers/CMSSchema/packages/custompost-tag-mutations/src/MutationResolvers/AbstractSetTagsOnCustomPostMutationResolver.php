@@ -33,6 +33,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+    private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -86,6 +87,19 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
         return $this->customPostTypeMutationAPI;
     }
+    final public function setCustomPostTagTypeMutationAPI(CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI): void
+    {
+        $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+    }
+    final protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
+    {
+        if ($this->customPostTagTypeMutationAPI === null) {
+            /** @var CustomPostTagTypeMutationAPIInterface */
+            $customPostTagTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTagTypeMutationAPIInterface::class);
+            $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+        }
+        return $this->customPostTagTypeMutationAPI;
+    }
 
     /**
      * @throws AbstractException In case of error
@@ -100,16 +114,21 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         if ($tagsBy === null || ((array) $tagsBy) === []) {
             return $customPostID;
         }
+
+        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
         $postTags = isset($tagsBy->{MutationInputProperties::IDS})
             ? $tagsBy->{MutationInputProperties::IDS}
             : $tagsBy->{MutationInputProperties::SLUGS};
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         $customPostTagTypeAPI = $this->getCustomPostTagTypeMutationAPI();
-        $customPostTagTypeAPI->setTags($customPostID, $postTags, $append);
+        $customPostTagTypeAPI->setTags(
+            $taxonomyName,
+            $customPostID,
+            $postTags,
+            $append
+        );
         return $customPostID;
     }
-
-    abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
 
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -129,12 +148,23 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
+
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
             $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsExist(
+            $this->validateTagsByIDExist(
+                $taxonomyName,
                 $customPostTagIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
+            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $this->validateTagsBySlugExist(
+                $taxonomyName,
+                $customPostTagSlugs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -149,7 +179,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getTagTaxonomyName();
         $this->validateCanLoggedInUserAssignTermsToTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,
@@ -167,7 +196,9 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         );
     }
 
-    abstract protected function getTagTaxonomyName(): string;
+    abstract protected function getTagTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string;
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

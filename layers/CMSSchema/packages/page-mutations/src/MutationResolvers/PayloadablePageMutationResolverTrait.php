@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PageMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\PayloadableUpdateCustomPostMutationResolverTrait;
-use PoPCMSSchema\PageMutations\Constants\HookNames;
+use PoPCMSSchema\PageMutations\Constants\PageCRUDHookNames;
 use PoPCMSSchema\PageMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\PageMutations\ObjectModels\LoggedInUserHasNoEditingPageCapabilityErrorPayload;
 use PoPCMSSchema\PageMutations\ObjectModels\LoggedInUserHasNoPublishingPageCapabilityErrorPayload;
@@ -42,7 +42,7 @@ trait PayloadablePageMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             default => App::applyFilters(
-                HookNames::ERROR_PAYLOAD,
+                PageCRUDHookNames::ERROR_PAYLOAD,
                 $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback),
                 $objectTypeFieldResolutionFeedback,
             )

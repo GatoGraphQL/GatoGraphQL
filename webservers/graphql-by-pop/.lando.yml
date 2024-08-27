@@ -83,11 +83,15 @@ services:
         - >-
           ../../layers/CMSSchema/packages/custompost-category-mutations:/app/vendor/pop-cms-schema/custompost-category-mutations
         - >-
+          ../../layers/CMSSchema/packages/custompost-category-mutations-wp:/app/vendor/pop-cms-schema/custompost-category-mutations-wp
+        - >-
           ../../layers/CMSSchema/packages/custompost-mutations-wp:/app/vendor/pop-cms-schema/custompost-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/custompost-mutations:/app/vendor/pop-cms-schema/custompost-mutations
         - >-
           ../../layers/CMSSchema/packages/custompost-tag-mutations:/app/vendor/pop-cms-schema/custompost-tag-mutations
+        - >-
+          ../../layers/CMSSchema/packages/custompost-tag-mutations-wp:/app/vendor/pop-cms-schema/custompost-tag-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/custompost-tags-wp:/app/vendor/pop-cms-schema/custompost-tags-wp
         - >-
@@ -137,13 +141,9 @@ services:
         - >-
           ../../layers/CMSSchema/packages/post-categories:/app/vendor/pop-cms-schema/post-categories
         - >-
-          ../../layers/CMSSchema/packages/post-category-mutations-wp:/app/vendor/pop-cms-schema/post-category-mutations-wp
-        - >-
           ../../layers/CMSSchema/packages/post-category-mutations:/app/vendor/pop-cms-schema/post-category-mutations
         - >-
           ../../layers/CMSSchema/packages/post-mutations:/app/vendor/pop-cms-schema/post-mutations
-        - >-
-          ../../layers/CMSSchema/packages/post-tag-mutations-wp:/app/vendor/pop-cms-schema/post-tag-mutations-wp
         - >-
           ../../layers/CMSSchema/packages/post-tag-mutations:/app/vendor/pop-cms-schema/post-tag-mutations
         - >-

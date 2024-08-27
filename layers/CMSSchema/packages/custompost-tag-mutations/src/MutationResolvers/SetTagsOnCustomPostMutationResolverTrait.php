@@ -18,12 +18,14 @@ trait SetTagsOnCustomPostMutationResolverTrait
     /**
      * @param array<string|int> $customPostTagIDs
      */
-    protected function validateTagsExist(
+    protected function validateTagsByIDExist(
+        string $taxonomyName,
         array $customPostTagIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $query = [
+            'taxonomy' => $taxonomyName,
             'include' => $customPostTagIDs,
         ];
         $existingTagIDs = $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
@@ -42,6 +44,7 @@ trait SetTagsOnCustomPostMutationResolverTrait
                                 $this->__('\', \'', 'custompost-tag-mutations'),
                                 $nonExistingTagIDs
                             ),
+                            $taxonomyName,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
@@ -51,4 +54,42 @@ trait SetTagsOnCustomPostMutationResolverTrait
     }
 
     abstract protected function getTagTypeAPI(): TagTypeAPIInterface;
+
+    /**
+     * @param array<string> $customPostTagSlugs
+     */
+    protected function validateTagsBySlugExist(
+        string $taxonomyName,
+        array $customPostTagSlugs,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $query = [
+            'taxonomy' => $taxonomyName,
+            'slugs' => $customPostTagSlugs,
+        ];
+        $existingTagSlugs = $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS]);
+        $nonExistingTagSlugs = array_values(array_diff(
+            $customPostTagSlugs,
+            $existingTagSlugs
+        ));
+        if ($nonExistingTagSlugs !== []) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E3,
+                        [
+                            implode(
+                                $this->__('\', \'', 'custompost-tag-mutations'),
+                                $nonExistingTagSlugs
+                            ),
+                            $taxonomyName,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+        }
+    }
 }

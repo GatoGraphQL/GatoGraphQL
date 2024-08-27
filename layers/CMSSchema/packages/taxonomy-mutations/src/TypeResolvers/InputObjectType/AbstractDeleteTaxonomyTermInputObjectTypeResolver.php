@@ -39,13 +39,13 @@ abstract class AbstractDeleteTaxonomyTermInputObjectTypeResolver extends Abstrac
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
-            $this->addTaxonomyInputField() ? [
+            $this->addIDInputField() ? [
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
         );
     }
 
-    abstract protected function addTaxonomyInputField(): bool;
+    abstract protected function addIDInputField(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {

@@ -10,7 +10,7 @@ use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPay
 use PoPCMSSchema\CustomPostMutations\TypeAPIs\CustomPostTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\MediaMutations\ConditionalOnModule\CustomPostMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\MediaMutations\Constants\HookNames;
+use PoPCMSSchema\MediaMutations\Constants\MediaCRUDHookNames;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -101,29 +101,29 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE_MEDIA_ITEM,
+            MediaCRUDHookNames::VALIDATE_CREATE_OR_UPDATE_MEDIA_ITEM,
             $this->maybeValidateCustomPost(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::GET_CREATE_OR_UPDATE_MEDIA_ITEM_DATA,
+            MediaCRUDHookNames::GET_CREATE_OR_UPDATE_MEDIA_ITEM_DATA,
             $this->addCreateOrUpdateMediaItemData(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
+            MediaCRUDHookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_NAME_TYPE_RESOLVERS,
             $this->getInputFieldNameTypeResolvers(...)
         );
         App::addFilter(
-            HookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
+            MediaCRUDHookNames::CREATE_OR_UPDATE_MEDIA_ITEM_INPUT_FIELD_DESCRIPTION,
             $this->getInputFieldDescription(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::ERROR_PAYLOAD,
+            MediaCRUDHookNames::ERROR_PAYLOAD,
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2

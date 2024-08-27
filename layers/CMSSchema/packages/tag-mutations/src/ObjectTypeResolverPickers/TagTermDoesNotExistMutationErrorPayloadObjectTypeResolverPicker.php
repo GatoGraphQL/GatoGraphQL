@@ -16,6 +16,11 @@ class TagTermDoesNotExistMutationErrorPayloadObjectTypeResolverPicker extends Ab
     {
         return [
             AbstractTagMutationErrorPayloadUnionTypeResolver::class,
+            /**
+             * Commented because the input is an Enum type, hence
+             * the taxonomy will always exist
+             */
+            // AbstractRootCreateTagTermMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

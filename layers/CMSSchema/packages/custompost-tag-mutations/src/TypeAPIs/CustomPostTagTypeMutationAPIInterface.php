@@ -9,5 +9,10 @@ interface CustomPostTagTypeMutationAPIInterface
     /**
      * @param array<string|int> $tags List of tags by ID, slug, or a combination of them
      */
-    public function setTags(int|string $postID, array $tags, bool $append = false): void;
+    public function setTags(
+        string $taxonomyName,
+        int|string $postID,
+        array $tags,
+        bool $append = false,
+    ): void;
 }
