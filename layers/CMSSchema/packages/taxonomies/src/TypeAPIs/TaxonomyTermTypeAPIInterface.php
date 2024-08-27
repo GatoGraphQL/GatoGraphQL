@@ -26,5 +26,5 @@ interface TaxonomyTermTypeAPIInterface
      * @return string[]
      */
     public function getCustomPostTypeTaxonomyNames(string $customPostType): array;
-    public function isTaxonomyHierarchical(string $taxonomyName): bool;
+    public function isTaxonomyHierarchical(string $taxonomyName): ?bool;
 }

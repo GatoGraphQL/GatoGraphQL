@@ -106,9 +106,12 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     {
         return get_object_taxonomies($customPostType);
     }
-    public function isTaxonomyHierarchical(string $taxonomyName): bool
+    public function isTaxonomyHierarchical(string $taxonomyName): ?bool
     {
         $taxonomy = get_taxonomy($taxonomyName);
+        if ($taxonomy === false) {
+            return null;
+        }
         return $taxonomy->hierarchical;
     }
 }
