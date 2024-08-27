@@ -88,7 +88,7 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
                 new ObjectTypeFieldResolutionFeedback(
                     new FeedbackItemResolution(
                         MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E5,
+                        MutationErrorFeedbackItemProvider::E6,
                         [
                             $taxonomName,
                             $customPostType,

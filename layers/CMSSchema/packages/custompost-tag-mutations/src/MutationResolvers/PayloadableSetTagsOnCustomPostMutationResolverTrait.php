@@ -35,6 +35,12 @@ trait PayloadableSetTagsOnCustomPostMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new TagTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E10,
             ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(

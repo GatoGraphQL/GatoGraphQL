@@ -12,8 +12,9 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E1 = 'e1';
     public final const E2 = 'e2';
     public final const E3 = 'e3';
-    public final const E4 = 'e4';
-    public final const E5 = 'e5';
+    public final const E4 = 'e3';
+    public final const E5 = 'e4';
+    public final const E6 = 'e5';
 
     /**
      * @return string[]
@@ -26,6 +27,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E3,
             self::E4,
             self::E5,
+            self::E6,
         ];
     }
 
@@ -34,9 +36,10 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
         return match ($code) {
             self::E1 => $this->__('You must be logged in to set tags on custom posts', 'custompost-tag-mutations'),
             self::E2 => $this->__('There are no tags with ID(s) \'%s\' for taxonomy \'%s\'', 'custompost-tag-mutations'),
-            self::E3 => $this->__('There are no tag taxonomies registered for custom post type \'%s\'', 'custompost-tag-mutations'),
-            self::E4 => $this->__('There is more than 1 tag taxonomy registered for custom post type \'%s\': \'%s\'', 'custompost-tag-mutations'),
-            self::E5 => $this->__('Tag taxonomy \'%s\' is not valid for custom post type \'%s\'', 'custompost-tag-mutations'),
+            self::E3 => $this->__('There are no tags with slug(s) \'%s\' for taxonomy \'%s\'', 'custompost-tag-mutations'),
+            self::E4 => $this->__('There are no tag taxonomies registered for custom post type \'%s\'', 'custompost-tag-mutations'),
+            self::E5 => $this->__('There is more than 1 tag taxonomy registered for custom post type \'%s\': \'%s\'', 'custompost-tag-mutations'),
+            self::E6 => $this->__('Tag taxonomy \'%s\' is not valid for custom post type \'%s\'', 'custompost-tag-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

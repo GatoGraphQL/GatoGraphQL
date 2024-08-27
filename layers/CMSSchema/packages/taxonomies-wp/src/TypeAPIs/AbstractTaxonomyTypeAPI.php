@@ -218,7 +218,7 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
             // Same param name, so do nothing
         }
         if (isset($query['slugs'])) {
-            $query['slug'] = $query['slugs'];
+            $query['slug'] = implode(',', $query['slugs']);
             unset($query['slugs']);
         }
         if (isset($query['slug'])) {

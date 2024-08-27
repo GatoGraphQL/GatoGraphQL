@@ -130,6 +130,8 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
         
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         /**
          * Validate the tags are valid for that taxonomy
          *
@@ -138,12 +140,24 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
             $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsExist(
+            $this->validateTagsByIDExist(
                 $taxonomyName,
                 $customPostTagIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
+        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
+            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $this->validateTagsBySlugExist(
+                $taxonomyName,
+                $customPostTagSlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
         }
 
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
@@ -176,6 +190,12 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 $feedbackItemResolution->getMessage(),
             ),
             [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new TagTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E10,
             ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
@@ -189,12 +209,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             ),
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
@@ -202,6 +216,12 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
             ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
@@ -230,7 +250,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E3,
+            MutationErrorFeedbackItemProvider::E4,
             [
                 $customPostType,
             ]
@@ -246,7 +266,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E4,
+            MutationErrorFeedbackItemProvider::E5,
             [
                 $customPostType,
                 implode($this->__('\', \''), $taxonomyNames)
