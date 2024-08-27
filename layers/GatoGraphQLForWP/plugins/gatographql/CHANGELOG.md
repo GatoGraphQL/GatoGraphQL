@@ -13,6 +13,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 - Added mutations to assign custom tags/categories to custom posts (#2803)
 
+### Fixed
+
+- Add `featuredImage` field on `GenericCustomPost` (#2806)
+
 ## 4.2.0 - 21/08/2024
 
 ### Improvements
