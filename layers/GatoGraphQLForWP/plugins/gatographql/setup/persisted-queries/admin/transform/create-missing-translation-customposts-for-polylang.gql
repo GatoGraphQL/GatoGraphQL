@@ -70,6 +70,7 @@ query ExportOriginCustomPost(
       ################################################################
       # Data needed to duplicate post for missing languages
       ################################################################
+      originCustomPostType: customPostType @export(as: "originCustomPostType")
       originCustomPostAuthor: author @export(as: "originCustomPostAuthorID") {
         id
       }
@@ -195,6 +196,7 @@ query CreateTranslationPostInputsForMissingLanguages
         name: "_echo",
         arguments: {
           value: {
+            customPostType: $originCustomPostType,
             status: draft,
             authorBy: {
               id: $originCustomPostAuthorID
