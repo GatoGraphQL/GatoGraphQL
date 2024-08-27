@@ -98,7 +98,7 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     {
         return $this->getTaxonomy($taxonomyName) !== null;
     }
-    
+
     /**
      * @return string[]
      */

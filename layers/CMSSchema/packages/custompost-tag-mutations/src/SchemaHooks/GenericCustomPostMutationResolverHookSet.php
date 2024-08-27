@@ -12,7 +12,7 @@ use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
 class GenericCustomPostMutationResolverHookSet extends AbstractCustomPostMutationResolverHookSet
 {
     use GenericCustomPostMutationResolverHookSetTrait;
-    
+
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
 
     final public function setGenericTagObjectTypeResolver(GenericTagObjectTypeResolver $genericTagObjectTypeResolver): void

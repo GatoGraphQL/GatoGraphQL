@@ -194,7 +194,7 @@ abstract class AbstractCreateOrUpdateCustomPostMutationResolver extends Abstract
     protected function additionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }
-    
+
     protected function updateAdditionals(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
     }

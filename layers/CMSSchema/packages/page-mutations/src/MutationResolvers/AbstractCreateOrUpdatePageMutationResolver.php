@@ -207,7 +207,7 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-        
+
         App::doAction(
             PageCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,

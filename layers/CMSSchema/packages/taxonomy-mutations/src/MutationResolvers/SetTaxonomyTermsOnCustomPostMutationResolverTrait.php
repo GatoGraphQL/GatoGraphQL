@@ -83,7 +83,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * @param string[] $taxonomyNames
      */
     abstract protected function getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(
-       string $customPostType,
-       array $taxonomyNames
-   ): FeedbackItemResolution;
+        string $customPostType,
+        array $taxonomyNames
+    ): FeedbackItemResolution;
 }

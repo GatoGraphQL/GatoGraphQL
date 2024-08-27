@@ -115,7 +115,7 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-        
+
         App::doAction(
             GenericCustomPostCRUDHookNames::EXECUTE_CREATE_OR_UPDATE,
             $customPostID,

@@ -13,7 +13,7 @@ class Module extends AbstractModule
     {
         return true;
     }
-    
+
     /**
      * @return array<class-string<ModuleInterface>>
      */

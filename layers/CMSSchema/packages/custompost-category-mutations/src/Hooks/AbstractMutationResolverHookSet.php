@@ -83,7 +83,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     abstract protected function getValidateCreateOrUpdateHookName(): string;
     abstract protected function getExecuteCreateOrUpdateHookName(): string;
-    
+
     protected function getErrorPayloadHookName(): string
     {
         return CustomPostCRUDHookNames::ERROR_PAYLOAD;
