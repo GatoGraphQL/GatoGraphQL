@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\Hooks;
 
+use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\SetCategoriesOnCustomPostMutationResolverTrait;
-use PoPCMSSchema\CustomPostCategoryMutations\ObjectModels\CategoryDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
-use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
-use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties as CustomPostMutationsMutationInputProperties;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
+use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -25,8 +27,10 @@ use stdClass;
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
     use SetCategoriesOnCustomPostMutationResolverTrait;
+    use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -41,27 +45,48 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
         return $this->customPostTypeAPI;
     }
+    final public function setCustomPostCategoryTypeMutationAPI(CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI): void
+    {
+        $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+    }
+    final protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
+    {
+        if ($this->customPostCategoryTypeMutationAPI === null) {
+            /** @var CustomPostCategoryTypeMutationAPIInterface */
+            $customPostCategoryTypeMutationAPI = $this->instanceManager->getInstance(CustomPostCategoryTypeMutationAPIInterface::class);
+            $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+        }
+        return $this->customPostCategoryTypeMutationAPI;
+    }
 
     protected function init(): void
     {
         App::addAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            $this->getValidateCreateOrUpdateHookName(),
             $this->maybeValidateCategories(...),
             10,
             2
         );
         App::addAction(
-            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            $this->getExecuteCreateOrUpdateHookName(),
             $this->maybeSetCategories(...),
             10,
-            2
+            3
         );
         App::addFilter(
-            HookNames::ERROR_PAYLOAD,
+            $this->getErrorPayloadHookName(),
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2
         );
+    }
+
+    abstract protected function getValidateCreateOrUpdateHookName(): string;
+    abstract protected function getExecuteCreateOrUpdateHookName(): string;
+
+    protected function getErrorPayloadHookName(): string
+    {
+        return CustomPostCRUDHookNames::ERROR_PAYLOAD;
     }
 
     public function maybeValidateCategories(
@@ -70,22 +95,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
-        }
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->validateCategoriesByIDExist(
-                $customPostCategoryIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->validateCategoriesBySlugExist(
-                $customPostCategorySlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
         }
     }
 
@@ -100,34 +109,75 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (((array) $categoriesBy) === []) {
             return false;
         }
-        // Only for that specific CPT
-        $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
-        if (
-            $customPostID !== null
-            && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()
-        ) {
-            return false;
-        }
+
         return true;
     }
 
     public function maybeSetCategories(
         int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        /** @var stdClass */
+
+        /**
+         * Validate the taxonomy is valid
+         */
+        $taxonomyName = $this->getCategoryTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($taxonomyName === null) {
+            return;
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        /**
+         * Validate the categories are valid for that taxonomy
+         *
+         * @var stdClass
+         */
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->validateCategoriesByIDExist(
+                $taxonomyName,
+                $customPostCategoryIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->validateCategoriesBySlugExist(
+                $taxonomyName,
+                $customPostCategorySlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             /** @var array<string|int> */
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID($customPostID, $customPostCategoryIDs, false);
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
+                $taxonomyName,
+                $customPostID,
+                $customPostCategoryIDs,
+                false
+            );
         } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
             /** @var string[] */
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug($customPostID, $customPostCategorySlugs, false);
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug(
+                $taxonomyName,
+                $customPostID,
+                $customPostCategorySlugs,
+                false
+            );
         }
     }
 
@@ -145,7 +195,13 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
-            ] => new CategoryDoesNotExistErrorPayload(
+            ] => new CategoryTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new CategoryTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
@@ -154,10 +210,76 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E11,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
             default => $errorPayload,
         };
     }
 
-    abstract protected function getCustomPostType(): string;
-    abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
+    /**
+     * Retrieve the taxonomy from the queried object's CPT,
+     * which works as long as it has only 1 category taxonomy registered.
+     */
+    protected function getCategoryTaxonomyName(
+        int|string $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?string {
+        return $this->getTaxonomyName(
+            true,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E4,
+            [
+                $customPostType,
+            ]
+        );
+    }
+
+    /**
+     * @param string[] $taxonomyNames
+     */
+    protected function getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(
+        string $customPostType,
+        array $taxonomyNames
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E5,
+            [
+                $customPostType,
+                implode($this->__('\', \''), $taxonomyNames)
+            ]
+        );
+    }
 }

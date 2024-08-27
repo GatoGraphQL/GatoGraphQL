@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\CreateCustomPostMutationResolverTrait;
 
-class CreateGenericCustomPostMutationResolver extends AbstractCreateUpdateGenericCustomPostMutationResolver
+class CreateGenericCustomPostMutationResolver extends AbstractCreateOrUpdateGenericCustomPostMutationResolver
 {
     use CreateCustomPostMutationResolverTrait;
 }

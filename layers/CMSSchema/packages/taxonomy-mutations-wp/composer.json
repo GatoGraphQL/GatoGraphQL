@@ -16,7 +16,6 @@
         "pop-cms-schema/pagemedia-mutations": "<4.2.0",
         "pop-cms-schema/users-wp": "<4.2.0",
         "pop-cms-schema/custompostmeta-wp": "<4.2.0",
-        "pop-cms-schema/post-tag-mutations-wp": "<4.2.0",
         "pop-cms-schema/post-tag-mutations": "<4.2.0",
         "pop-cms-schema/tags-wp": "<4.2.0",
         "pop-cms-schema/posts": "<4.2.0",
@@ -146,7 +145,7 @@
         "pop-cms-schema/tag-mutations-wp": "<4.2.0",
         "pop-cms-schema/category-mutations-wp": "<4.2.0",
         "pop-cms-schema/categories": "<4.2.0",
-        "pop-cms-schema/post-category-mutations-wp": "<4.2.0"
+        "pop-cms-schema/custompost-category-mutations-wp": "<4.2.0"
     },
     "type": "library",
     "description": "Implementation for WordPress of contracts from package \"Taxonomy Mutations\"",

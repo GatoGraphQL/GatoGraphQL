@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\MutationResolvers;
 
-use PoPCMSSchema\MediaMutations\Constants\HookNames;
+use PoPCMSSchema\MediaMutations\Constants\MediaCRUDHookNames;
 use PoPCMSSchema\MediaMutations\Exception\MediaItemCRUDMutationException;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -34,7 +34,7 @@ class UpdateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
 
         // Allow components to inject their own validations
         App::doAction(
-            HookNames::VALIDATE_UPDATE_MEDIA_ITEM,
+            MediaCRUDHookNames::VALIDATE_UPDATE_MEDIA_ITEM,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -43,7 +43,7 @@ class UpdateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
     protected function additionals(string|int $mediaItemID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
         parent::additionals($mediaItemID, $fieldDataAccessor);
-        App::doAction(HookNames::UPDATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
+        App::doAction(MediaCRUDHookNames::UPDATE_MEDIA_ITEM, $mediaItemID, $fieldDataAccessor);
     }
 
     /**
@@ -52,7 +52,7 @@ class UpdateMediaItemMutationResolver extends AbstractCreateOrUpdateMediaItemMut
     protected function getMediaItemData(FieldDataAccessorInterface $fieldDataAccessor): array
     {
         return App::applyFilters(
-            HookNames::GET_UPDATE_MEDIA_ITEM_DATA,
+            MediaCRUDHookNames::GET_UPDATE_MEDIA_ITEM_DATA,
             parent::getMediaItemData($fieldDataAccessor),
             $fieldDataAccessor
         );

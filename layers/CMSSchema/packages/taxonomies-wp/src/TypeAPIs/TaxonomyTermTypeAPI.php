@@ -11,6 +11,8 @@ use WP_Taxonomy;
 use WP_Term;
 
 use function get_term;
+use function get_object_taxonomies;
+use function get_taxonomy;
 
 class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
 {
@@ -95,5 +97,21 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
     public function taxonomyExists(string $taxonomyName): bool
     {
         return $this->getTaxonomy($taxonomyName) !== null;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getCustomPostTypeTaxonomyNames(string $customPostType): array
+    {
+        return get_object_taxonomies($customPostType);
+    }
+    public function isTaxonomyHierarchical(string $taxonomyName): ?bool
+    {
+        $taxonomy = get_taxonomy($taxonomyName);
+        if ($taxonomy === false) {
+            return null;
+        }
+        return $taxonomy->hierarchical;
     }
 }

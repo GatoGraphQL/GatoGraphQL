@@ -6,5 +6,17 @@ services:
     PoPCMSSchema\CustomPostTagMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
 
+    PoPCMSSchema\CustomPostTagMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\CustomPostTagMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
     PoPCMSSchema\CustomPostTagMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
+
+    PoPCMSSchema\CustomPostTagMutations\SchemaHooks\:
+        resource: '../src/SchemaHooks/*'
+
+    PoPCMSSchema\CustomPostTagMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'

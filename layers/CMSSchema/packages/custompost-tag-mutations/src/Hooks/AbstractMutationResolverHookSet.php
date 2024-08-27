@@ -4,17 +4,19 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
-use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
-use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties as CustomPostMutationsMutationInputProperties;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\SetTagsOnCustomPostMutationResolverTrait;
-use PoPCMSSchema\CustomPostTagMutations\ObjectModels\TagDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\TagMutations\ObjectModels\TagTermDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
+use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -25,8 +27,10 @@ use stdClass;
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
     use SetTagsOnCustomPostMutationResolverTrait;
+    use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+    private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -41,27 +45,48 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
         return $this->customPostTypeAPI;
     }
+    final public function setCustomPostTagTypeMutationAPI(CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI): void
+    {
+        $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+    }
+    final protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface
+    {
+        if ($this->customPostTagTypeMutationAPI === null) {
+            /** @var CustomPostTagTypeMutationAPIInterface */
+            $customPostTagTypeMutationAPI = $this->instanceManager->getInstance(CustomPostTagTypeMutationAPIInterface::class);
+            $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
+        }
+        return $this->customPostTagTypeMutationAPI;
+    }
 
     protected function init(): void
     {
         App::addAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            $this->getValidateCreateOrUpdateHookName(),
             $this->maybeValidateTags(...),
             10,
             2
         );
         App::addAction(
-            HookNames::EXECUTE_CREATE_OR_UPDATE,
+            $this->getExecuteCreateOrUpdateHookName(),
             $this->maybeSetTags(...),
             10,
-            2
+            3
         );
         App::addFilter(
-            HookNames::ERROR_PAYLOAD,
+            $this->getErrorPayloadHookName(),
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2
         );
+    }
+
+    abstract protected function getValidateCreateOrUpdateHookName(): string;
+    abstract protected function getExecuteCreateOrUpdateHookName(): string;
+
+    protected function getErrorPayloadHookName(): string
+    {
+        return CustomPostCRUDHookNames::ERROR_PAYLOAD;
     }
 
     public function maybeValidateTags(
@@ -70,16 +95,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
-        }
-        /** @var stdClass */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsExist(
-                $customPostTagIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
         }
     }
 
@@ -94,28 +109,67 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (((array) $tagsBy) === []) {
             return false;
         }
-        // Only for that specific CPT
-        $customPostID = $fieldDataAccessor->getValue(CustomPostMutationsMutationInputProperties::ID);
-        if (
-            $customPostID !== null
-            && $this->getCustomPostTypeAPI()->getCustomPostType($customPostID) !== $this->getCustomPostType()
-        ) {
-            return false;
-        }
+
         return true;
     }
 
-    public function maybeSetTags(int|string $customPostID, FieldDataAccessorInterface $fieldDataAccessor): void
-    {
+    public function maybeSetTags(
+        int|string $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        /** @var stdClass */
+
+        /**
+         * Validate the taxonomy is valid
+         */
+        $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($taxonomyName === null) {
+            return;
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        /**
+         * Validate the tags are valid for that taxonomy
+         *
+         * @var stdClass
+         */
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if (isset($tagsBy->{MutationInputProperties::IDS})) {
+            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $this->validateTagsByIDExist(
+                $taxonomyName,
+                $customPostTagIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
+            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $this->validateTagsBySlugExist(
+                $taxonomyName,
+                $customPostTagSlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         $customPostTagSlugOrIDs = isset($tagsBy->{MutationInputProperties::IDS})
             ? $tagsBy->{MutationInputProperties::IDS}
             : $tagsBy->{MutationInputProperties::SLUGS};
-        $this->getCustomPostTagTypeMutationAPI()->setTags($customPostID, $customPostTagSlugOrIDs, false);
+        $this->getCustomPostTagTypeMutationAPI()->setTags(
+            $taxonomyName,
+            $customPostID,
+            $customPostTagSlugOrIDs,
+            false
+        );
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
@@ -132,7 +186,13 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E2,
-            ] => new TagDoesNotExistErrorPayload(
+            ] => new TagTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
@@ -141,10 +201,76 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E11,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E5,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
             default => $errorPayload,
         };
     }
 
-    abstract protected function getCustomPostType(): string;
-    abstract protected function getCustomPostTagTypeMutationAPI(): CustomPostTagTypeMutationAPIInterface;
+    /**
+     * Retrieve the taxonomy from the queried object's CPT,
+     * which works as long as it has only 1 tag taxonomy registered.
+     */
+    protected function getTagTaxonomyName(
+        int|string $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?string {
+        return $this->getTaxonomyName(
+            false,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
+
+    protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E4,
+            [
+                $customPostType,
+            ]
+        );
+    }
+
+    /**
+     * @param string[] $taxonomyNames
+     */
+    protected function getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(
+        string $customPostType,
+        array $taxonomyNames
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E5,
+            [
+                $customPostType,
+                implode($this->__('\', \''), $taxonomyNames)
+            ]
+        );
+    }
 }

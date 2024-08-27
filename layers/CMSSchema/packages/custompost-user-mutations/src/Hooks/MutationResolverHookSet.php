@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostUserMutations\Hooks;
 
-use PoPCMSSchema\CustomPostMutations\Constants\HookNames;
+use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostUserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostUserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostUserMutations\ObjectModels\UserDoesNotExistErrorPayload;
@@ -41,19 +41,19 @@ class MutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            HookNames::VALIDATE_CREATE_OR_UPDATE,
+            CustomPostCRUDHookNames::VALIDATE_CREATE_OR_UPDATE,
             $this->maybeValidateAuthor(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::GET_CREATE_OR_UPDATE_DATA,
+            CustomPostCRUDHookNames::GET_CREATE_OR_UPDATE_DATA,
             $this->addCreateOrUpdateCustomPostData(...),
             10,
             2
         );
         App::addFilter(
-            HookNames::ERROR_PAYLOAD,
+            CustomPostCRUDHookNames::ERROR_PAYLOAD,
             $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
             10,
             2

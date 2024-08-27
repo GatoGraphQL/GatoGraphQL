@@ -33,6 +33,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
+    private ?CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -86,6 +87,19 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
         return $this->customPostTypeMutationAPI;
     }
+    final public function setCustomPostCategoryTypeMutationAPI(CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI): void
+    {
+        $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+    }
+    final protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface
+    {
+        if ($this->customPostCategoryTypeMutationAPI === null) {
+            /** @var CustomPostCategoryTypeMutationAPIInterface */
+            $customPostCategoryTypeMutationAPI = $this->instanceManager->getInstance(CustomPostCategoryTypeMutationAPIInterface::class);
+            $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
+        }
+        return $this->customPostCategoryTypeMutationAPI;
+    }
 
     /**
      * @throws AbstractException In case of error
@@ -102,20 +116,29 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             return $customPostID;
         }
 
+        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             /** @var array<string|int> */
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID($customPostID, $customPostCategoryIDs, $append);
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
+                $taxonomyName,
+                $customPostID,
+                $customPostCategoryIDs,
+                $append
+            );
         } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
             /** @var string[] */
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug($customPostID, $customPostCategorySlugs, $append);
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug(
+                $taxonomyName,
+                $customPostID,
+                $customPostCategorySlugs,
+                $append
+            );
         }
         return $customPostID;
     }
-
-    abstract protected function getCustomPostCategoryTypeMutationAPI(): CustomPostCategoryTypeMutationAPIInterface;
 
     public function validate(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -135,11 +158,14 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
+
         /** @var stdClass */
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
             $this->validateCategoriesByIDExist(
+                $taxonomyName,
                 $customPostCategoryIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
@@ -147,6 +173,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
             $this->validateCategoriesBySlugExist(
+                $taxonomyName,
                 $customPostCategorySlugs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
@@ -162,7 +189,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getCategoryTaxonomyName();
         $this->validateCanLoggedInUserAssignTermsToTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,
@@ -180,7 +206,9 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         );
     }
 
-    abstract protected function getCategoryTaxonomyName(): string;
+    abstract protected function getCategoryTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string;
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

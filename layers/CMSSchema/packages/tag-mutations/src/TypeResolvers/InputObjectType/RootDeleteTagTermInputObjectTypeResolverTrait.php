@@ -6,7 +6,7 @@ namespace PoPCMSSchema\TagMutations\TypeResolvers\InputObjectType;
 
 trait RootDeleteTagTermInputObjectTypeResolverTrait
 {
-    protected function addTaxonomyInputField(): bool
+    protected function addIDInputField(): bool
     {
         return true;
     }

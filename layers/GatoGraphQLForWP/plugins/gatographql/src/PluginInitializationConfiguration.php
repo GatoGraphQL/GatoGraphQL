@@ -1156,21 +1156,27 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             MutationSchemaTypeModuleResolver::SCHEMA_POSTMEDIA_MUTATIONS => [
                 \PoPCMSSchema\PostMediaMutations\Module::class,
             ],
-            MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
-                \PoPCMSSchema\PostTagMutations\Module::class,
-                \PoPCMSSchema\PostTagMutationsWP\Module::class,
-            ],
             MutationSchemaTypeModuleResolver::SCHEMA_TAG_MUTATIONS => [
                 \PoPCMSSchema\TagMutations\Module::class,
                 \PoPCMSSchema\TagMutationsWP\Module::class,
+            ],
+            MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_TAG_MUTATIONS => [
+                \PoPCMSSchema\CustomPostTagMutations\Module::class,
+                \PoPCMSSchema\CustomPostTagMutationsWP\Module::class,
+            ],
+            MutationSchemaTypeModuleResolver::SCHEMA_POST_TAG_MUTATIONS => [
+                \PoPCMSSchema\PostTagMutations\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_CATEGORY_MUTATIONS => [
                 \PoPCMSSchema\CategoryMutations\Module::class,
                 \PoPCMSSchema\CategoryMutationsWP\Module::class,
             ],
+            MutationSchemaTypeModuleResolver::SCHEMA_CUSTOMPOST_CATEGORY_MUTATIONS => [
+                \PoPCMSSchema\CustomPostCategoryMutations\Module::class,
+                \PoPCMSSchema\CustomPostCategoryMutationsWP\Module::class,
+            ],
             MutationSchemaTypeModuleResolver::SCHEMA_POST_CATEGORY_MUTATIONS => [
                 \PoPCMSSchema\PostCategoryMutations\Module::class,
-                \PoPCMSSchema\PostCategoryMutationsWP\Module::class,
             ],
             MutationSchemaTypeModuleResolver::SCHEMA_COMMENT_MUTATIONS => [
                 \PoPCMSSchema\CommentMutations\Module::class,

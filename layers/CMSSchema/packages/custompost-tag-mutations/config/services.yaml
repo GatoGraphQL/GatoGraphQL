@@ -6,3 +6,6 @@ services:
 
     PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\:
         resource: '../src/FeedbackItemProviders/*'
+
+    PoPCMSSchema\CustomPostTagMutations\Hooks\:
+        resource: '../src/Hooks/*'

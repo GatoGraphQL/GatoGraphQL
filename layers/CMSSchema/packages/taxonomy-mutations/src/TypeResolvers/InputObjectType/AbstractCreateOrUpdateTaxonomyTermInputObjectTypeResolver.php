@@ -54,7 +54,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
     public function getInputFieldNameTypeResolvers(): array
     {
         return array_merge(
-            $this->addTaxonomyInputField() ? [
+            $this->addIDInputField() ? [
                 MutationInputProperties::ID => $this->getIDScalarTypeResolver(),
             ] : [],
             $this->addParentIDInputField() ? [
@@ -70,7 +70,7 @@ abstract class AbstractCreateOrUpdateTaxonomyTermInputObjectTypeResolver extends
 
     abstract protected function getTaxonomyTermParentInputObjectTypeResolver(): InputTypeResolverInterface;
 
-    abstract protected function addTaxonomyInputField(): bool;
+    abstract protected function addIDInputField(): bool;
     abstract protected function addParentIDInputField(): bool;
 
     public function getInputFieldDescription(string $inputFieldName): ?string
