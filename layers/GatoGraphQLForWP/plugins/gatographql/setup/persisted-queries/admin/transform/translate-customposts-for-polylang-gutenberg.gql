@@ -2810,6 +2810,7 @@ query GenerateTranslationInputs(
     __typename
     ...on CustomPost {
       id
+      customPostType
       transformedRawContent: _objectProperty(
         object: $transformedRawContent,
         by: {
@@ -2834,7 +2835,8 @@ query GenerateTranslationInputs(
         }
       )
       updateCustomPostInputs: _echo(value: {
-        id: $__id
+        id: $__id,
+        customPostType: $__customPostType,
         title: $__transformedRawTitle,
         slug: $__transformedSlug,
         excerpt: $__transformedRawExcerpt,
