@@ -6,7 +6,6 @@ namespace PoPCMSSchema\TagMutations\MutationResolvers;
 
 use PoPCMSSchema\TagMutations\Constants\TagCRUDHookNames;
 use PoPCMSSchema\TagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TagMutations\ObjectModels\TagDoesNotExistErrorPayload;
 use PoPCMSSchema\TagMutations\ObjectModels\TagTermDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\PayloadableTaxonomyMutationResolverTrait;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
@@ -39,7 +38,7 @@ trait PayloadableTagMutationResolverTrait
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E5,
-            ] => new TagDoesNotExistErrorPayload(
+            ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
