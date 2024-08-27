@@ -217,7 +217,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     /**
      * Retrieve the taxonomy from the queried object's CPT,
-     * which works as long as it has only 1 tag taxonomy registered.
+     * which works as long as it has only 1 category taxonomy registered.
      */
     protected function getCategoryTaxonomyName(
         int|string $customPostID,
