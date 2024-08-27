@@ -225,7 +225,7 @@ mutation CreateTranslationPostForMissingLanguages
   @depends(on: "CreateTranslationPostInputsForMissingLanguages")
   @include(if: $hasMissingTranslationLanguages)
 {
-  translationPosts: createPosts(inputs: $createTranslationPostInputs) {
+  translationPosts: createCustomPosts(inputs: $createTranslationPostInputs) {
     status
     errors {
       __typename
