@@ -1431,6 +1431,7 @@ class Plugin extends AbstractMainPlugin
 
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $nestedMutationsSchemaConfigurationPersistedQueryBlocks = $this->getNestedMutationsSchemaConfigurationPersistedQueryBlocks();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
 
         $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_TRANSLATE_CUSTOMPOSTS_FOR_POLYLANG_GUTENBERG;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
@@ -1453,7 +1454,7 @@ class Plugin extends AbstractMainPlugin
                                 ),
                             ],
                         ],
-                        ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));
