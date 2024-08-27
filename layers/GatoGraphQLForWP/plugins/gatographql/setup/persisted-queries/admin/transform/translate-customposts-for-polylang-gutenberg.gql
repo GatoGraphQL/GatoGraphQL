@@ -2795,7 +2795,7 @@ query PrepareMetaReplacements
     )
 }
 
-mutation TranslateGutenbergCustomPosts(
+query GenerateTranslationInputs(
   $statusToUpdate: CustomPostStatusEnum! = draft
   $customPostType: CustomPostEnumString! = "post"
   $updateSlug: Boolean! = true
@@ -2806,7 +2806,7 @@ mutation TranslateGutenbergCustomPosts(
   ])
   @include(if: $executeTranslation)
 {
-  updateCustomPosts: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
+  updateCustomPostInputs: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
     __typename
     ...on CustomPost {
       id
@@ -2833,30 +2833,42 @@ mutation TranslateGutenbergCustomPosts(
           key: $__id
         }
       )
-      update(input: {
+      updateCustomPostInputs: _echo(value: {
+        id: $__id
         title: $__transformedRawTitle,
         slug: $__transformedSlug,
         excerpt: $__transformedRawExcerpt,
         contentAs: {
           html: $__transformedRawContent
         }
-      }) {
-        status
-        errors {
-          __typename
-          ...on ErrorPayload {
-            message
-          }
-        }
-        customPost {
-          __typename
-          ...on CustomPost {
-            id
-            title
-            rawContent
-            rawExcerpt
-          }
-        }
+      })
+        @export(
+          as: "updateCustomPostInputs",
+          type: LIST
+        )
+    }
+  }
+}
+
+mutation TranslateGutenbergCustomPosts
+  @depends(on: "GenerateTranslationInputs")
+  @include(if: $executeTranslation)
+{
+  updateCustomPosts(inputs: $updateCustomPostInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    customPost {
+      __typename
+      ...on CustomPost {
+        id
+        title
+        rawContent
+        rawExcerpt
       }
     }
   }
