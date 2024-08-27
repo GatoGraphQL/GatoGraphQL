@@ -43,12 +43,12 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
 
         $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
         $customPostTypeTaxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
-        $taxonomyNames = array_filter(
+        $taxonomyNames = array_values(array_filter(
             $customPostTypeTaxonomyNames,
             fn (string $taxonomyName) => $hierarchical
                 ? $taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName)
                 : !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName),
-        );
+        ));
 
         if (count($taxonomyNames) === 0) {
             $objectTypeFieldResolutionFeedbackStore->addError(
