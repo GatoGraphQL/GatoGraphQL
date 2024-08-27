@@ -9,4 +9,4 @@
 
 ## Fixed
 
-- Add `featuredImage` field on `GenericCustomPost` ([#2804](https://github.com/GatoGraphQL/GatoGraphQL/pull/2804))
+- Add `featuredImage` field on `GenericCustomPost` ([#2806](https://github.com/GatoGraphQL/GatoGraphQL/pull/2806))

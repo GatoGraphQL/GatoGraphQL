@@ -291,7 +291,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added field `isGutenbergEditorEnabled` (#2801)
 * Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 * Added mutations to assign custom tags/categories to custom posts (#2803)
-* Fixed: Add `featuredImage` field on `GenericCustomPost` (#2804)
+* Fixed: Add `featuredImage` field on `GenericCustomPost` (#2806)
 
 = 4.2.0 =
 * Added mutations for categories (#2764)

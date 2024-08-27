@@ -15,7 +15,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
-- Add `featuredImage` field on `GenericCustomPost` (#2804)
+- Add `featuredImage` field on `GenericCustomPost` (#2806)
 
 ## 4.2.0 - 21/08/2024
 
