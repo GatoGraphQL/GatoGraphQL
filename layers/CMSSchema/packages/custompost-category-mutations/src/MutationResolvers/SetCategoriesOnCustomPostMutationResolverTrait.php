@@ -44,6 +44,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
                                 $this->__('\', \'', 'custompost-category-mutations'),
                                 $nonExistingCategoryIDs
                             ),
+                            $taxonomyName,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
@@ -81,6 +82,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
                                 $this->__('\', \'', 'custompost-category-mutations'),
                                 $nonExistingCategorySlugs
                             ),
+                            $taxonomyName,
                         ]
                     ),
                     $fieldDataAccessor->getField(),

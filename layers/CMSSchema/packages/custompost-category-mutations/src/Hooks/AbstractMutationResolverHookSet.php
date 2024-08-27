@@ -194,6 +194,12 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 $feedbackItemResolution->getMessage(),
             ),
             [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new CategoryTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E10,
             ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
