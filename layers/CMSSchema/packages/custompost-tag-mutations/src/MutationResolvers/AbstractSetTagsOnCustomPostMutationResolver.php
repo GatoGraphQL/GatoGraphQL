@@ -148,11 +148,14 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
+
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
             $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
             $this->validateTagsExist(
+                $taxonomyName,
                 $customPostTagIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
@@ -168,7 +171,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
         $this->validateCanLoggedInUserAssignTermsToTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,

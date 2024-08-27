@@ -19,11 +19,13 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
      * @param array<string|int> $customPostCategoryIDs
      */
     protected function validateCategoriesByIDExist(
+        string $taxonomyName,
         array $customPostCategoryIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $query = [
+            'taxonomy' => $taxonomyName,
             'include' => $customPostCategoryIDs,
         ];
         $existingCategoryIDs = $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
@@ -54,11 +56,13 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
      * @param array<string|int> $customPostCategorySlugs
      */
     protected function validateCategoriesBySlugExist(
+        string $taxonomyName,
         array $customPostCategorySlugs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $query = [
+            'taxonomy' => $taxonomyName,
             'slugs' => $customPostCategorySlugs,
         ];
         $existingCategorySlugs = $this->getCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS]);

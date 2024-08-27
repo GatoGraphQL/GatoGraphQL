@@ -158,11 +158,14 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
+        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
+
         /** @var stdClass */
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
             $this->validateCategoriesByIDExist(
+                $taxonomyName,
                 $customPostCategoryIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
@@ -170,6 +173,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
             $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
             $this->validateCategoriesBySlugExist(
+                $taxonomyName,
                 $customPostCategorySlugs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
@@ -185,7 +189,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
         $this->validateCanLoggedInUserAssignTermsToTaxonomy(
             $taxonomyName,
             $fieldDataAccessor,

@@ -91,22 +91,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->validateCategoriesByIDExist(
-                $customPostCategoryIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->validateCategoriesBySlugExist(
-                $customPostCategorySlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
     }
 
     protected function canExecuteMutation(
@@ -141,8 +125,36 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        /** @var stdClass */
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        /**
+         * Validate the categories are valid for that taxonomy
+         *
+         * @var stdClass
+         */
         $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->validateCategoriesByIDExist(
+                $taxonomyName,
+                $customPostCategoryIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->validateCategoriesBySlugExist(
+                $taxonomyName,
+                $customPostCategorySlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             /** @var array<string|int> */
             $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};

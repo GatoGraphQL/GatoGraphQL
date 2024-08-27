@@ -91,16 +91,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
-        /** @var stdClass */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsExist(
-                $customPostTagIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
     }
 
     protected function canExecuteMutation(
@@ -135,7 +125,22 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
         
-        /** @var stdClass */
+        /**
+         * Validate the tags are valid for that taxonomy
+         *
+         * @var stdClass
+         */
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if (isset($tagsBy->{MutationInputProperties::IDS})) {
+            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $this->validateTagsExist(
+                $taxonomyName,
+                $customPostTagIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         $customPostTagSlugOrIDs = isset($tagsBy->{MutationInputProperties::IDS})
             ? $tagsBy->{MutationInputProperties::IDS}

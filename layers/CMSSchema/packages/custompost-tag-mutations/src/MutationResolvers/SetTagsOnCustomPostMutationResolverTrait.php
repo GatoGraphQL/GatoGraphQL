@@ -19,11 +19,13 @@ trait SetTagsOnCustomPostMutationResolverTrait
      * @param array<string|int> $customPostTagIDs
      */
     protected function validateTagsExist(
+        string $taxonomyName,
         array $customPostTagIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $query = [
+            'taxonomy' => $taxonomyName,
             'include' => $customPostTagIDs,
         ];
         $existingTagIDs = $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
@@ -42,6 +44,7 @@ trait SetTagsOnCustomPostMutationResolverTrait
                                 $this->__('\', \'', 'custompost-tag-mutations'),
                                 $nonExistingTagIDs
                             ),
+                            $taxonomyName,
                         ]
                     ),
                     $fieldDataAccessor->getField(),
