@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use PoP\ComponentModel\App;
 
@@ -150,6 +152,12 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
+            $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+            $relativeLogFile = str_replace(
+                constant('ABSPATH'),
+                '',
+                $logFile
+            );
             $option = self::OPTION_ENABLE_LOGS;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -160,7 +168,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TITLE => \__('Enable Logs?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     \__('Enable storing GraphQL execution logs, under file <code>%s<code>', 'gatographql'),
-                    'wp-content/gatographql/logs/info.log'
+                    $relativeLogFile
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
