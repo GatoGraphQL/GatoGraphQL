@@ -114,7 +114,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     {
         return isset($query['include']) && ($query['include'] === '' || $query['include'] === []);
     }
-    
+
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options

@@ -147,7 +147,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         if ($this->isFilteringByEmptyArray($query)) {
             return [];
         }
-        
+
         $tags = get_tags($query);
         if ($tags instanceof WP_Error) {
             return [];

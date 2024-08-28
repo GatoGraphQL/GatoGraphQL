@@ -124,7 +124,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         if ($this->isFilteringByEmptyArray($query)) {
             return [];
         }
-        
+
         return get_categories($query);
     }
 
