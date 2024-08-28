@@ -99,7 +99,23 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
     public function getCustomPosts(array $query, array $options = []): array
     {
         $query = $this->convertCustomPostsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
+
         return get_posts($query);
+    }
+
+    /**
+     * Indicate if an empty array was passed to `filter.ids`
+     *
+     * @param array<string,mixed> $query
+     */
+    protected function isFilteringByEmptyArray(array $query): bool
+    {
+        return isset($query['include']) && ($query['include'] === '' || $query['include'] === []);
     }
 
     /**
@@ -111,6 +127,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
         // Convert parameters
         $options[SchemaCommonsQueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertCustomPostsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return 0;
+        }
 
         // All results, no offset
         $query['posts_per_page'] = -1;

@@ -119,6 +119,12 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     public function getCategories(array $query, array $options = []): array
     {
         $query = $this->convertCategoriesQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
+        
         return get_categories($query);
     }
 

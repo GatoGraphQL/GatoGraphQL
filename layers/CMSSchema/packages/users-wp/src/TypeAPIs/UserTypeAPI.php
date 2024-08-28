@@ -67,6 +67,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertUsersQuery($query, $options);
 
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return 0;
+        }
+
         // All results, no offset
         $query['number'] = -1;
         unset($query['offset']);
@@ -97,6 +102,17 @@ class UserTypeAPI extends AbstractUserTypeAPI
         }
         return $ret;
     }
+
+    /**
+     * Indicate if an empty array was passed to `filter.ids`
+     *
+     * @param array<string,mixed> $query
+     */
+    protected function isFilteringByEmptyArray(array $query): bool
+    {
+        return isset($query['include']) && ($query['include'] === '' || $query['include'] === []);
+    }
+    
     /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query
@@ -106,6 +122,11 @@ class UserTypeAPI extends AbstractUserTypeAPI
     {
         // Convert the parameters
         $query = $this->convertUsersQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
 
         // Limit users which have an email appearing on the input
         // WordPress does not allow to search by many email addresses, only 1!

@@ -48,7 +48,23 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getComments(array $query, array $options = []): array
     {
         $query = $this->convertCommentsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
+
         return (array) get_comments($query);
+    }
+
+    /**
+     * Indicate if an empty array was passed to `filter.ids`
+     *
+     * @param array<string,mixed> $query
+     */
+    protected function isFilteringByEmptyArray(array $query): bool
+    {
+        return isset($query['comment__in']) && ($query['comment__in'] === '' || $query['comment__in'] === []);
     }
 
     /**
@@ -177,6 +193,12 @@ class CommentTypeAPI implements CommentTypeAPIInterface
     public function getCommentCount(array $query, array $options = []): int
     {
         $query = $this->convertCommentsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return 0;
+        }
+
         $query['number'] = 0;
         unset($query['offset']);
         $query['count'] = true;
