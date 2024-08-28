@@ -15,6 +15,9 @@
     tagsByExcludeIDs: tags(filter: { excludeIDs: [5] }) {
       id
     }
+    emptyTagsByIds: tags(filter: { ids: [] }) {
+      id
+    }
     tagsByIds: tags(filter: { ids: [5] }) {
       id
     }

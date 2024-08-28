@@ -15,6 +15,9 @@
     commentsByExcludeParentIDs: comments(filter: { excludeParentIDs: [7] }) {
       id
     }
+    emptyCommentsByIds: comments(filter: { ids: [] }) {
+      id
+    }
     commentsByIds: comments(filter: { ids: [7] }) {
       id
     }

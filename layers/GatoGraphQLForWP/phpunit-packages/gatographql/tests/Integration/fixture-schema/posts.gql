@@ -79,6 +79,10 @@ query {
     id
     title
   }
+  emptyPostsByIds: posts(filter: { ids: [] }) {
+    id
+    title
+  }
   postsByIds: posts(filter: { ids: [1, 1128] }) {
     id
     title

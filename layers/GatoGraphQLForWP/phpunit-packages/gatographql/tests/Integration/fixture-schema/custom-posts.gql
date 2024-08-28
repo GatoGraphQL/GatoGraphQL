@@ -90,6 +90,13 @@ query {
       title
     }
   }
+  emptyCustomPostsByIds: customPosts(filter: { ids: [] }, sort: { by: ID, order: ASC }) {
+    __typename
+    ...on CustomPost {
+      id
+      title
+    }
+  }
   customPostsByIds: customPosts(filter: { ids: [1, 1128] }, sort: { by: ID, order: ASC }) {
     __typename
     ...on CustomPost {
