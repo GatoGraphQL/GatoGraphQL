@@ -2,7 +2,6 @@
 # 
 # Variables:
 #   - customPostId: The custom post with the origin language, from where all translations will be made
-#   - customPostType: The custom post's type. Default is `post`
 #   - statusToUpdate: The status the translation custom posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - updateSlug: Indicate if to update the post slug, using the translated title. It is `true` by default.
 #   - translateDefaultLanguageOnly: Indicate if only execute the translation when the origin post has the default language of the site. It is `true` by default.
@@ -452,7 +451,6 @@ query ExportOriginCustomPost(
 
 query InitializeTranslationVariables(
   $statusToUpdate: CustomPostStatusEnum! = draft,
-  $customPostType: CustomPostEnumString! = "post"
   $translateDefaultLanguageOnly: Boolean! = true
   $translateFromLanguage: String
 )
@@ -462,7 +460,7 @@ query InitializeTranslationVariables(
 {
   translationCustomPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "translationCustomPostIds")
-  emptyTranslationCustomPostVars: customPosts(filter: { ids: $__translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
+  emptyTranslationCustomPostVars: customPosts(filter: { ids: $__translationCustomPostIds, status: $statusToUpdate } ) {
     __typename
     ...on CustomPost {
       id
@@ -758,12 +756,11 @@ query InitializeTranslationVariables(
 
 query FetchData(
   $statusToUpdate: CustomPostStatusEnum! = draft
-  $customPostType: CustomPostEnumString! = "post"
 )
   @depends(on: "InitializeTranslationVariables")
   @include(if: $executeTranslation)
 {
-  customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
+  customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate } ) {
     __typename
     ...on CustomPost {
       id
@@ -2797,7 +2794,6 @@ query PrepareMetaReplacements
 
 query GenerateTranslationInputs(
   $statusToUpdate: CustomPostStatusEnum! = draft
-  $customPostType: CustomPostEnumString! = "post"
   $updateSlug: Boolean! = true
 )
   @depends(on: [
@@ -2806,7 +2802,7 @@ query GenerateTranslationInputs(
   ])
   @include(if: $executeTranslation)
 {
-  updateCustomPostInputs: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
+  updateCustomPostInputs: customPosts(filter: { ids: $translationCustomPostIds, status: $statusToUpdate } ) {
     __typename
     ...on CustomPost {
       id
