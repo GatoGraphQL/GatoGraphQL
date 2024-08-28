@@ -22,11 +22,13 @@ Now, passing an empty array means "retrieve no results".
 
 To ignore the filter input, pass `null` instead.
 
-The same behavior applies for all fields that receive the `filter.ids` input:
+The same behavior applies for all fields that accept the `filter.ids` input:
 
-- `users`
+- `categories`
 - `comments`
 - `customPosts`
+- `tags`
+- `users`
 - etc
 
 ## Improvements
