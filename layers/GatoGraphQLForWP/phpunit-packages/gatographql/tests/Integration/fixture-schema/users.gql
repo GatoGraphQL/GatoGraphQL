@@ -57,6 +57,10 @@ query {
     id
     name
   }
+  emptyUsersByIds: users(filter: { ids: [] }) {
+    id
+    name
+  }
   usersByIds: users(filter: { ids: [2, 4] }) {
     id
     name

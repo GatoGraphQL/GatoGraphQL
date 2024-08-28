@@ -70,6 +70,10 @@ query {
     id
     title
   }
+  emptyPagesByIds: pages(filter: { ids: [], status: [publish, draft] }) {
+    id
+    title
+  }
   pagesByIds: pages(filter: { ids: [2, 3], status: [publish, draft] }) {
     id
     title

@@ -21,6 +21,9 @@
     categoriesByExcludeIDs: categories(filter: { excludeIDs: [2] }) {
       id
     }
+    emptyCategoriesByIds: categories(filter: { ids: [] }) {
+      id
+    }
     categoriesByIds: categories(filter: { ids: [2] }) {
       id
     }
