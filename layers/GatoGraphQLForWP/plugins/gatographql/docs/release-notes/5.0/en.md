@@ -56,7 +56,7 @@ A new option **Enable Logs?** in **Settings > Plugin Configuration > General** h
 
 <div class="img-width-1024" markdown=1>
 
-![Enable Logs? option in Settings](../../../extensions/automation/docs/images/settings-enable-logs.png "Enable Logs? option in Settings")
+![Enable Logs? option in Settings](https://github.com/user-attachments/assets/fc523bc0-ccec-4ff0-8d22-b4ccc81563bb "Enable Logs? option in Settings")
 
 </div>
 
