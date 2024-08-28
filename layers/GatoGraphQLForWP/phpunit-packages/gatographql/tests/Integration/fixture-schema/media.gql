@@ -26,6 +26,10 @@ query {
     id
     title
   }
+  emptyMediaItemsByIds: mediaItems(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { ids: [], mimeTypes: "*" }) {
+    id
+    title
+  }
   mediaItemsByIds: mediaItems(pagination: { limit: 3 }, sort: { by: ID, order: ASC }, filter: { ids: [1361, 1363], mimeTypes: "*" }) {
     id
     title
