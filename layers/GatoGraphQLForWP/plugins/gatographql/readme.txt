@@ -1,7 +1,7 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
 Tags: graphql, headless, webhook, api, automator, import export, search replace, google translate, wp-cli, external api, wpgraphql, code snippets
-Requires at least: 6.0
+Requires at least: 6.1
 Tested up to: 6.6
 Stable tag: 4.2.0
 Requires PHP: 8.1
@@ -287,6 +287,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 5.0.0 =
+* Breaking change: Bumped minimum WordPress version to 6.1 (#2811)
 * Breaking change: Return no results when filtering data by an empty array (#2809)
 * Increase limit of chars in truncated response by Guzzle (#2800)
 * Added field `isGutenbergEditorEnabled` (#2801)
