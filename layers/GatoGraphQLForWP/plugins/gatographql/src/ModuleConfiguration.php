@@ -201,6 +201,19 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function enableLogs(): bool
+    {
+        $envVariable = Environment::ENABLE_LOGS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function installPluginSetupData(): bool
     {
         $envVariable = Environment::INSTALL_PLUGIN_SETUP_DATA;
