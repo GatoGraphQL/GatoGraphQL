@@ -12,8 +12,6 @@ use PoP\ComponentModel\App;
 
 class Logger implements LoggerInterface
 {
-    public static final const INFO_LOG_FILE = 'info.log';
-
     public function logError(string $message): void
     {
         \error_log(sprintf(
@@ -34,7 +32,7 @@ class Logger implements LoggerInterface
             return;
         }
         
-        $logFile = PluginEnvironment::getLogsFilePath(self::INFO_LOG_FILE);
+        $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
