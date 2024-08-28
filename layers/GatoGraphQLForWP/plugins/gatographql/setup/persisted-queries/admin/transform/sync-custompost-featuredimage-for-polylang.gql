@@ -31,20 +31,25 @@ query InitializeVariables
 {
   emptyString: _echo(value: null)
     @export(as: "fromLanguage")
+    @remove
 
   emptyID: _echo(value: null)
     @export(as: "originCustomPostFeaturedImageID")
+    @remove
 
   emptyBool: _echo(value: false)
     @export(as: "hasFeaturedImage")
     @export(as: "executeUpdate")
     @export(as: "hasOriginCustomPostTranslationPosts")
+    @remove
   
   emptyArray: _echo(value: [])
     @export(as: "originCustomPostTranslationPostIds")
+    @remove
   
   emptyJSON: _echo(value: {})
     @export(as: "featuredImageTranslationLanguageIDs")
+    @remove
 }
 
 query ExportDataFromOriginCustomPost($customPostId: ID!)
