@@ -112,7 +112,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
     {
         return isset($query['include']) && ($query['include'] === '' || $query['include'] === []);
     }
-    
+
     /**
      * @return array<string|int>|object[]
      * @param array<string,mixed> $query

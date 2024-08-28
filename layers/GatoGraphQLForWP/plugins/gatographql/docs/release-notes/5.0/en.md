@@ -59,6 +59,7 @@ The WordPress hooks mapped for catching them with Automation rules have been upd
 | Source WordPress hook | Triggered Gato GraphQL hook |
 | --- | --- |
 | [`{$old_status}_to_{$new_status}`](https://developer.wordpress.org/reference/hooks/old_status_to_new_status/)<br/><em>(Passing `WP_Post $post`)</em> | `gatographql:any_to_{$new_status}`<br/>`gatographql:{$old_status}_to_any`<br/>`gatographql:{$old_status}_to_{$new_status}:{$post_type}`<br/>`gatographql:any_to_{$new_status}:{$post_type}`<br/>`gatographql:{$old_status}_to_any:{$post_type}`<br/><em>(All passing `int $postId, string $postType`)</em> |
+| [`created_term`](https://developer.wordpress.org/reference/hooks/created_term/) | `gatographql:created_term:{$taxonomy}` |
 | [`set_object_terms`](https://developer.wordpress.org/reference/hooks/set_object_terms/) | `gatographql:set_object_terms:{$taxonomy}`<br/>`gatographql:updated_object_terms:{$taxonomy}` <em>(When there is a delta between old and new terms)</em> |
 | [`added_post_meta`](https://developer.wordpress.org/reference/hooks/added_meta_type_meta/) | `gatographql:added_post_meta:{$meta_key}`<br/>`gatographql:added_post_meta:{$post_type}:{$meta_key}` <em>(Also passing `string $post_type` as 5th param)</em> |
 | [`updated_post_meta`](https://developer.wordpress.org/reference/hooks/updated_meta_type_meta/) | `gatographql:updated_post_meta:{$meta_key}`<br/>`gatographql:updated_post_meta:{$post_type}:{$meta_key}` <em>(Also passing `string $post_type` as 5th param)</em> |
