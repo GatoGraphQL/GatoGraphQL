@@ -31,7 +31,7 @@ class Logger implements LoggerInterface
         if (!$moduleConfiguration->enableLogs()) {
             return;
         }
-        
+
         $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
