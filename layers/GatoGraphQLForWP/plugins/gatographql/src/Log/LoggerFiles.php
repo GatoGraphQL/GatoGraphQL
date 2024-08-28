@@ -6,5 +6,5 @@ namespace GatoGraphQL\GatoGraphQL\Log;
 
 class LoggerFiles
 {
-    public static final const INFO = 'info.log';
+    public const INFO = 'info.log';
 }
