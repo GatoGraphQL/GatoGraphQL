@@ -1,5 +1,34 @@
 # Release Notes: 5.0
 
+## Breaking changes
+
+### Return no results when filtering data by an empty array ([#2809](https://github.com/GatoGraphQL/GatoGraphQL/pull/2809))
+
+This GraphQL query filter posts by ID:
+
+```graphql
+query FilterPostsByIDs(
+  $ids: [ID!]
+) {
+  posts(filter: { ids: $ids }) {
+    title
+  }
+}
+```
+
+Previously, when passing an empty array in variable `$ids`, input `filter.ids` would be ignored, and the field would then return all results.
+
+Now, passing an empty array means "retrieve no results".
+
+To ignore the filter input, pass `null` instead.
+
+The same behavior applies for all fields that receive the `filter.ids` input:
+
+- `users`
+- `comments`
+- `customPosts`
+- etc
+
 ## Improvements
 
 - Increase limit of chars in truncated response by Guzzle ([#2800](https://github.com/GatoGraphQL/GatoGraphQL/pull/2800))

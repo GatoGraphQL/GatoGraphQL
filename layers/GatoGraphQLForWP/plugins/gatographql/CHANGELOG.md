@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 5.0.0 - DATE
 
+### Breaking changes
+
+- Return no results when filtering data by an empty array (#2809)
+
 ### Improvements
 
 - Increase limit of chars in truncated response by Guzzle (#2800)
