@@ -113,6 +113,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
                 'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_HIDE_TUTORIAL_PAGE,
             ],
+            // Enable Logs?
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::ENABLE_LOGS,
+                'module' => PluginGeneralSettingsFunctionalityModuleResolver::GENERAL,
+                'option' => PluginGeneralSettingsFunctionalityModuleResolver::OPTION_ENABLE_LOGS,
+            ],
             // Install Plugin Setup Data
             [
                 'class' => Module::class,
@@ -729,6 +736,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             [
                 'class' => Module::class,
                 'envVariable' => Environment::HIDE_TUTORIAL_PAGE,
+            ],
+            [
+                'class' => Module::class,
+                'envVariable' => Environment::ENABLE_LOGS,
             ],
             [
                 'class' => Module::class,

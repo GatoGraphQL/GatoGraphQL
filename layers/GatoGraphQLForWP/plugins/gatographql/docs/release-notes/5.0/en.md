@@ -48,9 +48,22 @@ The same behavior applies for all fields that accept the `filter.ids` input:
 - Use `isGutenbergEditorEnabled` in predefined persisted queries ([#2802](https://github.com/GatoGraphQL/GatoGraphQL/pull/2802))
 - Added mutations to assign custom tags/categories to custom posts ([#2803](https://github.com/GatoGraphQL/GatoGraphQL/pull/2803))
 
+### Added Settings option to enable/disable logs ([#2813](https://github.com/GatoGraphQL/GatoGraphQL/pull/2813))
+
+The complete GraphQL response for specific items (eg: when doing automation in PRO) can be logged under file `wp-content/gatographql/logs/info.log`.
+
+A new option **Enable Logs?** in **Settings > Plugin Configuration > General** has been added, to enable printing these logs (it is `false` by default):
+
+<div class="img-width-1024" markdown=1>
+
+![Enable Logs? option in Settings](https://github.com/user-attachments/assets/fc523bc0-ccec-4ff0-8d22-b4ccc81563bb "Enable Logs? option in Settings")
+
+</div>
+
 ## Fixed
 
 - Add `featuredImage` field on `GenericCustomPost` ([#2806](https://github.com/GatoGraphQL/GatoGraphQL/pull/2806))
+- On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content ([#2814](https://github.com/GatoGraphQL/GatoGraphQL/pull/2814))
 
 ## [PRO] Improvements
 

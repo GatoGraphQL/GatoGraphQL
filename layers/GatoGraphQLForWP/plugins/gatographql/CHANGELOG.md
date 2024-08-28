@@ -17,10 +17,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added field `isGutenbergEditorEnabled` (#2801)
 - Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 - Added mutations to assign custom tags/categories to custom posts (#2803)
+- Added Settings option to enable/disable logs (#2813)
 
 ### Fixed
 
 - Add `featuredImage` field on `GenericCustomPost` (#2806)
+- On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content (#2814)
 
 ## 4.2.0 - 21/08/2024
 

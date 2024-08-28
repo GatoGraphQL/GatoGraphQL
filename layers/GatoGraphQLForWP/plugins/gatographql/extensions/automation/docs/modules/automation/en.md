@@ -123,11 +123,23 @@ These are the additional Gato GraphQL hooks:
 
 If the automation hasn't been executed, there could be an error with the configuration of the automation, or execution of the persisted query.
 
+#### Error logs
+
 All configuration problems (such as a malformed JSON string for the GraphQL variables, or pointing to a persisted query that has been deleted) and execution errors (such as thrown exceptions, or `errors` entries in the GraphQL query) are sent to PHP function's `error_log`, so these are printed in the [WordPress error log](https://developer.wordpress.org/advanced-administration/debug/debug-wordpress/).
 
 These error logs are prepended with string `[Gato GraphQL]`.
 
-In addition, the complete GraphQL response for the automation (whether successful or not) is logged under file `wp-content/gatographql/logs/info.log`.
+#### Info logs
+
+The complete GraphQL response for the automation (whether successful or not) is logged under file `wp-content/gatographql/logs/info.log`.
+
+To print these logs, option **Enable Logs?** in **Settings > Plugin Configuration > General** must be selected:
+
+<div class="img-width-1024" markdown=1>
+
+![Enable Logs? option in Settings](../../images/settings-enable-logs.png "Enable Logs? option in Settings")
+
+</div>
 
 ## Query Resolution Action
 

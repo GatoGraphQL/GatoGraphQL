@@ -61,6 +61,13 @@ class BlockContentParser implements BlockContentParserInterface
             }
         }
         $customPostContent = $customPost->post_content;
+        // If the post has no content, don't parse it or it'll produce an error
+        if ($customPostContent === '') {
+            return new BlockContentParserPayload(
+                [],
+                null
+            );
+        }
         $this->includeInnerContent = $options['include-inner-content'] ?? false;
         $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $options['filter'] ?? []);
         return $this->processParsedBlockData($parsedBlockData);

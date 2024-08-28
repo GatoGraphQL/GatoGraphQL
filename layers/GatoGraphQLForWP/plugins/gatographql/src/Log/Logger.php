@@ -5,7 +5,10 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Log;
 
 use Exception;
+use GatoGraphQL\GatoGraphQL\Module;
+use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginEnvironment;
+use PoP\ComponentModel\App;
 
 class Logger implements LoggerInterface
 {
@@ -22,7 +25,14 @@ class Logger implements LoggerInterface
      */
     public function logInfo(string $message): void
     {
-        $logFile = PluginEnvironment::getLogsFilePath('info.log');
+        // Check if the Log is enabled, via the Settings
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if (!$moduleConfiguration->enableLogs()) {
+            return;
+        }
+
+        $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
         $hasLogFile = $this->maybeCreateLogFile($logFile);
         if (!$hasLogFile) {
             return;
