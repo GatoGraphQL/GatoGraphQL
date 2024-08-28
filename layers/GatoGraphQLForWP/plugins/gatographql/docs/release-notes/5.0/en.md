@@ -10,3 +10,7 @@
 ## Fixed
 
 - Add `featuredImage` field on `GenericCustomPost` ([#2806](https://github.com/GatoGraphQL/GatoGraphQL/pull/2806))
+
+## [PRO] Improvements
+
+- Updated mapped automation hooks
