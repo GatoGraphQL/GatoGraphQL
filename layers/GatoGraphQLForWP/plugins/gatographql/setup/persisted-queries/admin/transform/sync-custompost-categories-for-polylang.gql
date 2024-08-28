@@ -75,7 +75,6 @@ query ExportDataFromOriginCustomPost(
       polylangTranslationLanguageIDs
         @remove
       customPostIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-        @default(value: {})
         @export(as: "customPostIDTranslationLanguageIDs")
 
       hasTranslationCustomPosts: _notEmpty(value: $__customPostIDTranslationLanguageIDs)

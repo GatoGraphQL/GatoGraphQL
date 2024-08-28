@@ -99,7 +99,6 @@ query ExportOriginCategory(
     })
       @remove
     categoryIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
       @export(as: "categoryIDTranslationLanguageIDs")
 
     hasTranslationCategories: _notEmpty(value: $__categoryIDTranslationLanguageIDs)

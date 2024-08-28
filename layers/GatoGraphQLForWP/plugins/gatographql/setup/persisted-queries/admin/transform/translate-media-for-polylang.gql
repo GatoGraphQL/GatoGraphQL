@@ -97,7 +97,6 @@ query ExportOriginMediaItem(
     })
       @remove
     mediaItemIDTranslationLanguageIDs: _echo(value: $__polylangTranslationLanguageIDs)
-      @default(value: {})
       @export(as: "mediaItemIDTranslationLanguageIDs")
 
     hasTranslationMediaItems: _notEmpty(value: $__mediaItemIDTranslationLanguageIDs)
