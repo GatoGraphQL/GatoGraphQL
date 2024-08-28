@@ -2,7 +2,6 @@
 # 
 # Variables:
 #   - customPostId: The custom post with the origin language, from where to trigger the featured image updates
-#   - customPostType: The custom post's type. Default is `post`
 #   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
 #   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the featured image update when the origin post has the default language of the site. It is `true` by default.
 #
@@ -100,7 +99,6 @@ query ExportDataFromOriginCustomPost($customPostId: ID!)
 
 query FilterTranslationCustomPostsToUpdate(
   $statusToUpdate: CustomPostStatusEnum! = draft
-  $customPostType: CustomPostEnumString! = "post"
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportDataFromOriginCustomPost")
@@ -108,7 +106,7 @@ query FilterTranslationCustomPostsToUpdate(
 {
   originCustomPostTranslationPostIds: _objectValues(object: $customPostIDTranslationLanguageIDs)
     @export(as: "originCustomPostTranslationPostIds")
-  translationCustomPosts: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } ) {
+  translationCustomPosts: customPosts(filter: { ids: $__originCustomPostTranslationPostIds, status: $statusToUpdate } ) {
     __typename
     ...on CustomPost {
       id
@@ -137,12 +135,11 @@ query FilterTranslationCustomPostsToUpdate(
 
 mutation UpdateOrRemoveFeaturedImageForTranslationCustomPosts(
   $statusToUpdate: CustomPostStatusEnum! = draft
-  $customPostType: CustomPostEnumString! = "post"
 )
   @depends(on: "FilterTranslationCustomPostsToUpdate")
   @include(if: $executeUpdate)
 {
-  updateFeaturedImageInTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )
+  updateFeaturedImageInTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } )
     @include(if: $hasFeaturedImage)
   {
     __typename
@@ -200,7 +197,7 @@ mutation UpdateOrRemoveFeaturedImageForTranslationCustomPosts(
     }
   }
 
-  removeFeaturedImageFromTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate, customPostTypes: [$customPostType] } )
+  removeFeaturedImageFromTranslationCustomPosts: customPosts(filter: { ids: $originCustomPostTranslationPostIds, status: $statusToUpdate } )
     @skip(if: $hasFeaturedImage)
   {
     __typename
