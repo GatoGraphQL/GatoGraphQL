@@ -2,7 +2,7 @@
 # 
 # Variables:
 #   - customPostId: The custom post with the origin language, from where to trigger the featured image updates
-#   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
+#   - statusToUpdate: The status that the translation posts must have to be updated. It is `any` by default
 #   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the featured image update when the origin post has the default language of the site. It is `true` by default.
 #
 # *********************************************************************
@@ -19,11 +19,6 @@
 #
 # If the origin post does not have a featured image,
 # it removes it from all translation posts.
-#
-# All translation posts must have the `draft` status
-# to be updated. To update posts with any other status, use
-# variable `$statusToUpdate` (for instance, passing value
-# `publish`, `pending` or `any`)
 #
 # By default, the origin post must have the default language
 # of the site, or the update will not be executed.
@@ -98,7 +93,7 @@ query ExportDataFromOriginCustomPost($customPostId: ID!)
 }
 
 query FilterTranslationCustomPostsToUpdate(
-  $statusToUpdate: CustomPostStatusEnum! = draft
+  $statusToUpdate: CustomPostStatusEnum! = any
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportDataFromOriginCustomPost")
@@ -134,7 +129,7 @@ query FilterTranslationCustomPostsToUpdate(
 }
 
 mutation UpdateOrRemoveFeaturedImageForTranslationCustomPosts(
-  $statusToUpdate: CustomPostStatusEnum! = draft
+  $statusToUpdate: CustomPostStatusEnum! = any
 )
   @depends(on: "FilterTranslationCustomPostsToUpdate")
   @include(if: $executeUpdate)

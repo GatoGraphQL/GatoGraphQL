@@ -3,7 +3,7 @@
 # Variables:
 #   - customPostId: The custom post with the origin language, from where to trigger the updates
 #   - categoryTaxonomy: The taxonomy of the categories. Default is `category`
-#   - statusToUpdate: The status that the translation posts must have to be updated. It is `draft` by default. Pass `any` for any status.
+#   - statusToUpdate: The status that the translation posts must have to be updated. It is `any` by default
 #   - triggerUpdateFromDefaultLanguageOnly: Indicate if to only execute the update when the origin post has the default language of the site. It is `true` by default.
 #
 # *********************************************************************
@@ -17,11 +17,6 @@
 # categories for the corresponding language,
 # as set-up via Polylang. If some category does not
 # have a translation, that category is removed.
-#
-# All translation posts must have the `draft` status
-# to be updated. To update posts with any other status, use
-# variable `$statusToUpdate` (for instance, passing value
-# `publish`, `pending` or `any`)
 #
 # By default, the origin post must have the default language
 # of the site, or the update will not be executed.
@@ -96,7 +91,7 @@ query ExportDataFromOriginCustomPost(
 }
 
 query ExportTranslationCustomPostLanguages(
-  $statusToUpdate: CustomPostStatusEnum! = draft
+  $statusToUpdate: CustomPostStatusEnum! = any
 )
   @depends(on: "ExportDataFromOriginCustomPost")
   @include(if: $hasOriginCustomPostTranslationPosts)
@@ -119,7 +114,7 @@ query ExportTranslationCustomPostLanguages(
 }
 
 query FilterTranslationCustomPostsToUpdate(
-  $statusToUpdate: CustomPostStatusEnum! = draft
+  $statusToUpdate: CustomPostStatusEnum! = any
   $triggerUpdateFromDefaultLanguageOnly: Boolean! = true
 )
   @depends(on: "ExportTranslationCustomPostLanguages")
@@ -196,7 +191,7 @@ query FilterTranslationCustomPostsToUpdate(
 }
 
 mutation UpdateCategoriesForTranslationPosts(
-  $statusToUpdate: CustomPostStatusEnum! = draft
+  $statusToUpdate: CustomPostStatusEnum! = any
   $categoryTaxonomy: CategoryTaxonomyEnumString! = "category"
 )
   @depends(on: "FilterTranslationCustomPostsToUpdate")
