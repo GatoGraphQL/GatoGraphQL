@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Breaking changes
 
+- Breaking change: Bumped minimum WordPress version to 6.1 (#2811)
 - Return no results when filtering data by an empty array (#2809)
 
 ### Improvements
