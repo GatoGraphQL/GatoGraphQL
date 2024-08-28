@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added field `isGutenbergEditorEnabled` (#2801)
 - Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 - Added mutations to assign custom tags/categories to custom posts (#2803)
+- Added Settings option to enable/disable logs (#2813)
 
 ### Fixed
 

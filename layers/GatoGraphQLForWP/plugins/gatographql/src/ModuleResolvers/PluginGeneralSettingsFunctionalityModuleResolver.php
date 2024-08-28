@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Log\LoggerFiles;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
+use GatoGraphQL\GatoGraphQL\PluginEnvironment;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use PoP\ComponentModel\App;
 
@@ -24,6 +26,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
      * Setting options
      */
     public final const OPTION_HIDE_TUTORIAL_PAGE = 'hide-tutorial-page';
+    public final const OPTION_ENABLE_LOGS = 'enable-logs';
     public final const OPTION_INSTALL_PLUGIN_SETUP_DATA = 'install-plugin-setup-data';
     public final const OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE = 'add-release-notes-admin-notice';
     public final const OPTION_PRINT_SETTINGS_WITH_TABS = 'print-settings-with-tabs';
@@ -116,6 +119,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         $defaultValues = [
             self::GENERAL => [
                 self::OPTION_HIDE_TUTORIAL_PAGE => false,
+                self::OPTION_ENABLE_LOGS => false,
                 self::OPTION_INSTALL_PLUGIN_SETUP_DATA => true,
                 self::OPTION_ADD_RELEASE_NOTES_ADMIN_NOTICE => true,
                 self::OPTION_PRINT_SETTINGS_WITH_TABS => true,
@@ -145,6 +149,27 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 ),
                 Properties::TITLE => \__('Hide Schema tutorial page?', 'gatographql'),
                 Properties::DESCRIPTION => \__('Hide the Schema tutorial page from the menu navigation on the left?', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $logFile = PluginEnvironment::getLogsFilePath(LoggerFiles::INFO);
+            $relativeLogFile = str_replace(
+                constant('ABSPATH'),
+                '',
+                $logFile
+            );
+            $option = self::OPTION_ENABLE_LOGS;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Enable Logs?', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('Enable storing GraphQL execution logs, under file <code>%s</code>', 'gatographql'),
+                    $relativeLogFile
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
