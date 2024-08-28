@@ -63,6 +63,7 @@ A new option **Enable Logs?** in **Settings > Plugin Configuration > General** h
 ## Fixed
 
 - Add `featuredImage` field on `GenericCustomPost` ([#2806](https://github.com/GatoGraphQL/GatoGraphQL/pull/2806))
+- Avoid parsing error when Gutenberg post has no content ([#2814](https://github.com/GatoGraphQL/GatoGraphQL/pull/2814))
 
 ## [PRO] Improvements
 

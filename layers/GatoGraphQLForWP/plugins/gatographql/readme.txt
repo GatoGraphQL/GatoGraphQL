@@ -295,6 +295,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Added mutations to assign custom tags/categories to custom posts (#2803)
 * Added Settings option to enable/disable logs (#2813)
 * Fixed: Add `featuredImage` field on `GenericCustomPost` (#2806)
+* Fixed: parsing error when Gutenberg post has no content (#2814)
 * [PRO] Updated mapped WordPress hooks for automation
 
 = 4.2.0 =
