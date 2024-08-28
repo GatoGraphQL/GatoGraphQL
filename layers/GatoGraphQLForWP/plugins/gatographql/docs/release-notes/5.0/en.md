@@ -16,7 +16,15 @@ query FilterPostsByIDs(
 }
 ```
 
-Previously, when passing an empty array in variable `$ids`, input `filter.ids` would be ignored, and the field would then return all results.
+Previously, when passing an empty array in variable `$ids`:
+
+```json
+{
+  "ids": []
+}
+```
+
+...input `filter.ids` would be ignored, and the field would then return all results.
 
 Now, passing an empty array means "retrieve no results".
 
