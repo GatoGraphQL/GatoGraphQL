@@ -142,6 +142,12 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     public function getTags(array $query, array $options = []): array
     {
         $query = $this->convertTagsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
+        
         $tags = get_tags($query);
         if ($tags instanceof WP_Error) {
             return [];

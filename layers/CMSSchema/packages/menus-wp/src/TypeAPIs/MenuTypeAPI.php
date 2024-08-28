@@ -13,6 +13,7 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_Term;
 
 use function esc_sql;
+use function wp_get_nav_menus;
 
 class MenuTypeAPI implements MenuTypeAPIInterface
 {
@@ -95,8 +96,25 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     public function getMenus(array $query, array $options = []): array
     {
         $query = $this->convertMenusQuery($query, $options);
-        return \wp_get_nav_menus($query);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
+
+        return wp_get_nav_menus($query);
     }
+
+    /**
+     * Indicate if an empty array was passed to `filter.ids`
+     *
+     * @param array<string,mixed> $query
+     */
+    protected function isFilteringByEmptyArray(array $query): bool
+    {
+        return isset($query['include']) && ($query['include'] === '' || $query['include'] === []);
+    }
+    
     /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
@@ -104,6 +122,11 @@ class MenuTypeAPI implements MenuTypeAPIInterface
     public function getMenuCount(array $query, array $options = []): int
     {
         $query = $this->convertMenusQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return 0;
+        }
 
         // Indicate to return the count
         $query['count'] = true;
@@ -115,7 +138,7 @@ class MenuTypeAPI implements MenuTypeAPIInterface
 
         // Execute query and return count
         /** @var string */
-        $count = \wp_get_nav_menus($query);
+        $count = wp_get_nav_menus($query);
         return (int)$count;
     }
 

@@ -94,6 +94,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         $customPostID = $this->getCustomPostID($customPostObjectOrID);
         $query = $this->convertTaxonomyTermsQuery($query, $options);
 
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return [];
+        }
+
         /** @var string|string[] */
         $taxonomyOrTaxonomies = $query['taxonomy'] ?? '';
         if (empty($taxonomyOrTaxonomies)) {
@@ -113,6 +118,16 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     }
 
     /**
+     * Indicate if an empty array was passed to `filter.ids`
+     *
+     * @param array<string,mixed> $query
+     */
+    protected function isFilteringByEmptyArray(array $query): bool
+    {
+        return isset($query['include']) && ($query['include'] === '' || $query['include'] === []);
+    }
+
+    /**
      * @param array<string,mixed> $query
      * @param array<string,mixed> $options
      */
@@ -129,6 +144,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         // So execute a normal `wp_get_post_categories` retrieving all the IDs, and count them
         $options[QueryOptions::RETURN_TYPE] = ReturnTypes::IDS;
         $query = $this->convertTaxonomyTermsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return 0;
+        }
 
         /** @var string|string[] */
         $taxonomyOrTaxonomies = $query['taxonomy'] ?? '';
@@ -310,6 +330,11 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
     protected function getTaxonomyCount(array $query = [], array $options = []): ?int
     {
         $query = $this->convertTaxonomyTermsQuery($query, $options);
+
+        // If passing an empty array to `filter.ids`, return no results
+        if ($this->isFilteringByEmptyArray($query)) {
+            return 0;
+        }
 
         // Indicate to return the count
         $query['count'] = true;

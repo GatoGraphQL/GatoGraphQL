@@ -287,6 +287,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 == Changelog ==
 
 = 5.0.0 =
+* Breaking change: Return no results when filtering data by an empty array (#2809)
 * Increase limit of chars in truncated response by Guzzle (#2800)
 * Added field `isGutenbergEditorEnabled` (#2801)
 * Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
