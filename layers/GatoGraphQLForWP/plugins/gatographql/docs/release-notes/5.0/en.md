@@ -13,7 +13,7 @@
 
 ## [PRO] Improvements
 
-### Updated mapped automation hooks
+### Updated mapped WordPress hooks for automation
 
 The WordPress hooks mapped for catching them with Automation rules have been updated, as follows:
 
