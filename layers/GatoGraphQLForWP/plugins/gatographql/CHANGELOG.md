@@ -22,6 +22,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Add `featuredImage` field on `GenericCustomPost` (#2806)
+- On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content (#2814)
 
 ## 4.2.0 - 21/08/2024
 
