@@ -2,6 +2,8 @@
 
 ## Breaking changes
 
+- Bumped minimum WordPress version to 6.1 ([#2811](https://github.com/GatoGraphQL/GatoGraphQL/pull/2811))
+
 ### Return no results when filtering data by an empty array ([#2809](https://github.com/GatoGraphQL/GatoGraphQL/pull/2809))
 
 This GraphQL query filter posts by ID:
