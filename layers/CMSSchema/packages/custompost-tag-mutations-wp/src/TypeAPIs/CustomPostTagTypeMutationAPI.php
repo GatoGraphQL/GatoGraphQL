@@ -14,14 +14,30 @@ class CustomPostTagTypeMutationAPI implements CustomPostTagTypeMutationAPIInterf
      * Watch out! $tags must be the array of tags as string, not their IDs
      * Passing the IDs will create a tag with that ID as the name!
      *
-     * @param array<string|int> $tags List of tags by ID, slug, or a combination of them
+     * @param array<string|int> $tagIDs
      */
-    public function setTags(
+    public function setTagsByID(
         string $taxonomyName,
         int|string $customPostID,
-        array $tags,
+        array $tagIDs,
         bool $append = false,
     ): void {
-        wp_set_post_terms((int)$customPostID, $tags, $taxonomyName, $append);
+        wp_set_post_terms((int)$customPostID, $tagIDs, $taxonomyName, $append);
+    }
+
+    /**
+     * @param array<string|int> $tagSlugs
+     */
+    public function setTagsBySlug(
+        string $taxonomyName,
+        int|string $customPostID,
+        array $tagSlugs,
+        bool $append = false,
+    ): void {
+        /**
+         * To use this method, make sure that tags with the provided slugs exist!
+         * Otherwise, it will create them as terms.
+         */
+        \wp_set_object_terms((int)$customPostID, $tagSlugs, $taxonomyName, $append);
     }
 }
