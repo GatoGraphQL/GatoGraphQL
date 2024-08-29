@@ -27,7 +27,10 @@ class ApplicationPasswordQueryExecutionFixtureWebserverRequestTest extends Abstr
 
         $dataName = $this->getDataName();
         if (str_starts_with($dataName, 'error/')) {
-            $options[RequestOptions::HEADERS]['Authorization'] = 'Basic ___fail___';
+            $options[RequestOptions::HEADERS]['Authorization'] = sprintf(
+                'Basic %s',
+                base64_encode('admin:___fail___')
+            );
         }
 
         return $options;
