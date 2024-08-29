@@ -66,14 +66,14 @@ If using Application passwords to authenticate the user against the GraphQL endp
 
 ```json
 {
-    "errors": [
-        {
-            "message": "Application Password authentication error: The provided password is an invalid application password."
-        }
-    ],
-    "data": {
-        "me": null
+  "errors": [
+    {
+      "message": "Application Password authentication error: The provided password is an invalid application password."
     }
+  ],
+  "data": {
+    "me": null
+  }
 }
 ```
 
