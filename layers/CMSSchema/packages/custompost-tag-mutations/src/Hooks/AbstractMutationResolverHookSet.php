@@ -158,15 +158,25 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         }
 
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        $customPostTagSlugOrIDs = isset($tagsBy->{MutationInputProperties::IDS})
-            ? $tagsBy->{MutationInputProperties::IDS}
-            : $tagsBy->{MutationInputProperties::SLUGS};
-        $this->getCustomPostTagTypeMutationAPI()->setTags(
-            $taxonomyName,
-            $customPostID,
-            $customPostTagSlugOrIDs,
-            false
-        );
+        if (isset($tagsBy->{MutationInputProperties::IDS})) {
+            /** @var array<string|int> */
+            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
+                $taxonomyName,
+                $customPostID,
+                $customPostTagIDs,
+                false
+            );
+        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
+            /** @var string[] */
+            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $this->getCustomPostTagTypeMutationAPI()->setTagsBySlug(
+                $taxonomyName,
+                $customPostID,
+                $customPostTagSlugs,
+                false
+            );
+        }
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

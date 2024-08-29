@@ -155,17 +155,26 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             return null;
         }
 
-        $customPostTagIDsOrSlugs = isset($tagsBy->{MutationInputProperties::IDS})
-            ? $tagsBy->{MutationInputProperties::IDS}
-            : $tagsBy->{MutationInputProperties::SLUGS};
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
-        $customPostTagTypeAPI = $this->getCustomPostTagTypeMutationAPI();
-        $customPostTagTypeAPI->setTags(
-            $taxonomyName,
-            $customPostID,
-            $customPostTagIDsOrSlugs,
-            $append
-        );
+        if (isset($tagsBy->{MutationInputProperties::IDS})) {
+            /** @var array<string|int> */
+            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
+                $taxonomyName,
+                $customPostID,
+                $customPostTagIDs,
+                $append
+            );
+        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
+            /** @var string[] */
+            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $this->getCustomPostTagTypeMutationAPI()->setTagsBySlug(
+                $taxonomyName,
+                $customPostID,
+                $customPostTagSlugs,
+                $append
+            );
+        }
         return $customPostID;
     }
 
