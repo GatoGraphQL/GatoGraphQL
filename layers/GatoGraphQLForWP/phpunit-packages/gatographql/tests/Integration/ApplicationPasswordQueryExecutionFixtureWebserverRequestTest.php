@@ -14,7 +14,7 @@ class ApplicationPasswordQueryExecutionFixtureWebserverRequestTest extends Abstr
     {
         return 'graphql/';
     }
-    
+
     /**
      * Make the authentication fail
      *

@@ -9,11 +9,11 @@ use GatoGraphQL\GatoGraphQL\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface;
 use PoP\ComponentModel\Engine\EngineHookNames;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-
 use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\RootWP\Exception\WPErrorDataProcessorTrait;
 use PoP\Root\Hooks\AbstractHookSet;
 use WP_Error;
+
 use function add_action;
 use function add_filter;
 
@@ -30,7 +30,7 @@ use function add_filter;
 class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
     use WPErrorDataProcessorTrait;
-    
+
     private ?PrematureRequestServiceInterface $prematureRequestService = null;
 
     final public function setPrematureRequestService(PrematureRequestServiceInterface $prematureRequestService): void
@@ -97,7 +97,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 
         App::addAction(
             EngineHookNames::PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS,
-            function() use ($error): void {
+            function () use ($error): void {
                 $this->addErrorToFeedbackStore($error);
             }
         );
