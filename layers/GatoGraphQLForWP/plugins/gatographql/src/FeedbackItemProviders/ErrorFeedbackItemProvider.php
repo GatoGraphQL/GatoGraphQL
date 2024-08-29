@@ -24,7 +24,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('Couldn\'t log the user in using application passwords: %s', 'gatographql'),
+            self::E1 => $this->__('Application Password authentication error: %s', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

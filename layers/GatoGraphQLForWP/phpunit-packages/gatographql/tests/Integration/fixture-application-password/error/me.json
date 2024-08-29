@@ -1,7 +1,7 @@
 {
     "errors": [
         {
-            "message": "Couldn't log the user in using application passwords: The provided password is an invalid application password.",
+            "message": "Application Password authentication error: The provided password is an invalid application password.",
             "extensions": {
                 "code": "GatoGraphQL\/GatoGraphQL@e1"
             }
