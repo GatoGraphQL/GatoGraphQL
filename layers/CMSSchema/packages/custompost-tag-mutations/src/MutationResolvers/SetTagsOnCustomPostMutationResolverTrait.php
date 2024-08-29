@@ -19,21 +19,21 @@ trait SetTagsOnCustomPostMutationResolverTrait
     use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
     
     /**
-     * @param array<string|int> $customPostTagIDs
+     * @param array<string|int> $tostTagIDs
      */
     protected function validateTagsByIDExist(
         string $taxonomyName,
-        array $customPostTagIDs,
+        array $tostTagIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $query = [
             'taxonomy' => $taxonomyName,
-            'include' => $customPostTagIDs,
+            'include' => $tostTagIDs,
         ];
         $existingTagIDs = $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         $nonExistingTagIDs = array_values(array_diff(
-            $customPostTagIDs,
+            $tostTagIDs,
             $existingTagIDs
         ));
         if ($nonExistingTagIDs !== []) {
@@ -59,21 +59,21 @@ trait SetTagsOnCustomPostMutationResolverTrait
     abstract protected function getTagTypeAPI(): TagTypeAPIInterface;
 
     /**
-     * @param array<string> $customPostTagSlugs
+     * @param array<string> $tagSlugs
      */
     protected function validateTagsBySlugExist(
         string $taxonomyName,
-        array $customPostTagSlugs,
+        array $tagSlugs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $query = [
             'taxonomy' => $taxonomyName,
-            'slugs' => $customPostTagSlugs,
+            'slugs' => $tagSlugs,
         ];
         $existingTagSlugs = $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::SLUGS]);
         $nonExistingTagSlugs = array_values(array_diff(
-            $customPostTagSlugs,
+            $tagSlugs,
             $existingTagSlugs
         ));
         if ($nonExistingTagSlugs !== []) {

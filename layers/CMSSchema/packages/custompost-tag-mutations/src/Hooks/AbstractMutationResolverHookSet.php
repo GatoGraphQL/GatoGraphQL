@@ -136,18 +136,18 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
          */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
             $this->validateTagsByIDExist(
                 $taxonomyName,
-                $customPostTagIDs,
+                $tagIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
             $this->validateTagsBySlugExist(
                 $taxonomyName,
-                $customPostTagSlugs,
+                $tagSlugs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
@@ -160,20 +160,20 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
             /** @var array<string|int> */
-            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
             $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
                 $taxonomyName,
                 $customPostID,
-                $customPostTagIDs,
+                $tagIDs,
                 false
             );
         } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
             /** @var string[] */
-            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
             $this->getCustomPostTagTypeMutationAPI()->setTagsBySlug(
                 $taxonomyName,
                 $customPostID,
-                $customPostTagSlugs,
+                $tagSlugs,
                 false
             );
         }
