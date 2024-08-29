@@ -19,21 +19,21 @@ trait SetTagsOnCustomPostMutationResolverTrait
     use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
     
     /**
-     * @param array<string|int> $tostTagIDs
+     * @param array<string|int> $tagIDs
      */
     protected function validateTagsByIDExist(
         string $taxonomyName,
-        array $tostTagIDs,
+        array $tagIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
         $query = [
             'taxonomy' => $taxonomyName,
-            'include' => $tostTagIDs,
+            'include' => $tagIDs,
         ];
         $existingTagIDs = $this->getTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
         $nonExistingTagIDs = array_values(array_diff(
-            $tostTagIDs,
+            $tagIDs,
             $existingTagIDs
         ));
         if ($nonExistingTagIDs !== []) {
