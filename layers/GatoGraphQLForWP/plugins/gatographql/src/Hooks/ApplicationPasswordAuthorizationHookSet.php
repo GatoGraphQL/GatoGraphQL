@@ -4,8 +4,18 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Hooks;
 
+use GatoGraphQL\GatoGraphQL\App;
+use GatoGraphQL\GatoGraphQL\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface;
+use PoP\ComponentModel\Engine\EngineHookNames;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\Feedback\GeneralFeedback;
+use PoP\RootWP\Exception\WPErrorDataProcessorTrait;
 use PoP\Root\Hooks\AbstractHookSet;
+use WP_Error;
+
+use function add_action;
+use function add_filter;
 
 /**
  * Use:
@@ -19,6 +29,8 @@ use PoP\Root\Hooks\AbstractHookSet;
  */
 class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 {
+    use WPErrorDataProcessorTrait;
+
     private ?PrematureRequestServiceInterface $prematureRequestService = null;
 
     final public function setPrematureRequestService(PrematureRequestServiceInterface $prematureRequestService): void
@@ -37,10 +49,15 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
 
     protected function init(): void
     {
-        \add_filter(
+        add_filter(
             'application_password_is_api_request',
             $this->isGraphQLAPIRequest(...),
             PHP_INT_MAX // Execute last
+        );
+
+        add_action(
+            'application_password_failed_authentication',
+            $this->handleError(...)
         );
     }
 
@@ -66,5 +83,45 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         }
 
         return $this->getPrematureRequestService()->isPubliclyExposedGraphQLAPIRequest();
+    }
+
+    /**
+     * If the user authentication fails, show the error message
+     * in the GraphQL response
+     */
+    public function handleError(WP_Error $error): void
+    {
+        if (!$this->getPrematureRequestService()->isPubliclyExposedGraphQLAPIRequest()) {
+            return;
+        }
+
+        App::addAction(
+            EngineHookNames::PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS,
+            function () use ($error): void {
+                $this->addErrorToFeedbackStore($error);
+            }
+        );
+    }
+
+    public function addErrorToFeedbackStore(WP_Error $error): void
+    {
+        $extensions = [];
+        $errorData = $this->getWPErrorData($error);
+        if ($errorData !== null) {
+            $extensions['data'] = $errorData;
+        }
+
+        App::getFeedbackStore()->generalFeedbackStore->addError(
+            new GeneralFeedback(
+                new FeedbackItemResolution(
+                    ErrorFeedbackItemProvider::class,
+                    ErrorFeedbackItemProvider::E1,
+                    [
+                        $error->get_error_message(),
+                    ]
+                ),
+                $extensions,
+            )
+        );
     }
 }

@@ -60,6 +60,23 @@ A new option **Enable Logs?** in **Settings > Plugin Configuration > General** h
 
 </div>
 
+### Application password failed authentication: Show error in GraphQL response ([#2817](https://github.com/GatoGraphQL/GatoGraphQL/pull/2817))
+
+If using Application passwords to authenticate the user against the GraphQL endpoint, and the authentication fails, the error message is now shown in the GraphQL response:
+
+```json
+{
+  "errors": [
+    {
+      "message": "Application Password authentication error: The provided password is an invalid application password."
+    }
+  ],
+  "data": {
+    "me": null
+  }
+}
+```
+
 ## Fixed
 
 - Add `featuredImage` field on `GenericCustomPost` ([#2806](https://github.com/GatoGraphQL/GatoGraphQL/pull/2806))

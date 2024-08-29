@@ -294,6 +294,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
 * Use `isGutenbergEditorEnabled` in predefined persisted queries (#2802)
 * Added mutations to assign custom tags/categories to custom posts (#2803)
 * Added Settings option to enable/disable logs (#2813)
+* Application password failed authentication: Show error in GraphQL response (#2817)
 * Fixed: Add `featuredImage` field on `GenericCustomPost` (#2806)
 * Fixed: On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content (#2814)
 * [PRO] Updated mapped WordPress hooks for automation
