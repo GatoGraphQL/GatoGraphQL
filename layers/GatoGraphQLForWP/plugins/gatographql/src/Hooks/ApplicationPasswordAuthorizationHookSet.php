@@ -96,7 +96,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         }
 
         App::addAction(
-            EngineHookNames::PREPARE_RESPONSE,
+            EngineHookNames::PROCESS_AND_GENERATE_DATA_HELPER_CALCULATIONS,
             function() use ($error): void {
                 $this->addErrorToFeedbackStore($error);
             }
