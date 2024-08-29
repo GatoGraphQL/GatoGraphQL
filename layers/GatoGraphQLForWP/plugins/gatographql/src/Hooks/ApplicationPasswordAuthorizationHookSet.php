@@ -7,9 +7,10 @@ namespace GatoGraphQL\GatoGraphQL\Hooks;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use GatoGraphQL\GatoGraphQL\Request\PrematureRequestServiceInterface;
+use PoP\ComponentModel\Engine\EngineHookNames;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\GeneralFeedback;
 
+use PoP\ComponentModel\Feedback\GeneralFeedback;
 use PoP\RootWP\Exception\WPErrorDataProcessorTrait;
 use PoP\Root\Hooks\AbstractHookSet;
 use WP_Error;
@@ -94,6 +95,16 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
             return;
         }
 
+        App::addAction(
+            EngineHookNames::PREPARE_RESPONSE,
+            function() use ($error): void {
+                $this->addErrorToFeedbackStore($error);
+            }
+        );
+    }
+
+    public function addErrorToFeedbackStore(WP_Error $error): void
+    {
         $extensions = [];
         $errorData = $this->getWPErrorData($error);
         if ($errorData !== null) {
