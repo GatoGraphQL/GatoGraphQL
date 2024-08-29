@@ -132,7 +132,6 @@ abstract class AbstractSetCategoriesOnCustomPostInputObjectTypeResolver extends 
         return match ($inputFieldName) {
             MutationInputProperties::APPEND
                 => SchemaTypeModifiers::NON_NULLABLE,
-            MutationInputProperties::TAXONOMY,
             MutationInputProperties::CUSTOMPOST_ID,
             MutationInputProperties::CATEGORIES_BY
                 => SchemaTypeModifiers::MANDATORY,

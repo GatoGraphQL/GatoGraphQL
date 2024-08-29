@@ -7,12 +7,9 @@ namespace PoPCMSSchema\CustomPostCategoryMutations\Hooks;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\Hooks\AbstractMutationResolverHookSet;
 use PoPCMSSchema\CustomPostMutations\Constants\GenericCustomPostCRUDHookNames;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
@@ -86,22 +83,16 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
             );
         }
 
-        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
-        $taxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
-        if (!in_array($taxonomName, $taxonomyNames)) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E6,
-                        [
-                            $taxonomName,
-                            $customPostType,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $this->validateTaxonomyIsRegisteredForCustomPostType(
+            $taxonomName,
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 

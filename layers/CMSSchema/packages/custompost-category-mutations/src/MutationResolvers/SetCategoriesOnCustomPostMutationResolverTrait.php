@@ -7,14 +7,17 @@ namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
 trait SetCategoriesOnCustomPostMutationResolverTrait
 {
+    use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
+    
     /**
      * @param array<string|int> $customPostCategoryIDs
      */
@@ -92,4 +95,32 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
     }
 
     abstract protected function getCategoryTypeAPI(): CategoryTypeAPIInterface;
+
+    protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution
+    {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E4,
+            [
+                $customPostType,
+            ]
+        );
+    }
+
+    /**
+     * @param string[] $taxonomyNames
+     */
+    protected function getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(
+        string $customPostType,
+        array $taxonomyNames
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E5,
+            [
+                $customPostType,
+                implode($this->__('\', \''), $taxonomyNames)
+            ]
+        );
+    }
 }

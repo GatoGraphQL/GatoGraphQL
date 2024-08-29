@@ -12,11 +12,9 @@ use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInt
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TagMutations\ObjectModels\TagTermDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
-use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -27,7 +25,6 @@ use stdClass;
 abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 {
     use SetTagsOnCustomPostMutationResolverTrait;
-    use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
@@ -220,8 +217,8 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E6,
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E12,
             ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
@@ -243,34 +240,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
-
-    protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution
-    {
-        return new FeedbackItemResolution(
-            MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E4,
-            [
-                $customPostType,
-            ]
-        );
-    }
-
-    /**
-     * @param string[] $taxonomyNames
-     */
-    protected function getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(
-        string $customPostType,
-        array $taxonomyNames
-    ): FeedbackItemResolution {
-        return new FeedbackItemResolution(
-            MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E5,
-            [
-                $customPostType,
-                implode($this->__('\', \''), $taxonomyNames)
-            ]
         );
     }
 }

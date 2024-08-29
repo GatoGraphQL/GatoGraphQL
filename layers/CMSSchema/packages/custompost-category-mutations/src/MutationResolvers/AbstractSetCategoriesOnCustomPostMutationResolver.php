@@ -116,7 +116,46 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             return $customPostID;
         }
 
-        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
+        /**
+         * Validate the taxonomy is valid
+         */
+        $taxonomyName = $this->getCategoryTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($taxonomyName === null) {
+            return null;
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        /** @var stdClass */
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            $this->validateCategoriesByIDExist(
+                $taxonomyName,
+                $customPostCategoryIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            $this->validateCategoriesBySlugExist(
+                $taxonomyName,
+                $customPostCategorySlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         if (isset($categoriesBy->{MutationInputProperties::IDS})) {
             /** @var array<string|int> */
@@ -158,39 +197,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor);
-
-        /** @var stdClass */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->validateCategoriesByIDExist(
-                $taxonomyName,
-                $customPostCategoryIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->validateCategoriesBySlugExist(
-                $taxonomyName,
-                $customPostCategorySlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
         $this->validateCanLoggedInUserEditCustomPosts(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
-            $taxonomyName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -206,9 +213,22 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         );
     }
 
-    abstract protected function getCategoryTaxonomyName(
+    /**
+     * Retrieve the taxonomy from the queried object's CPT,
+     * which works as long as it has only 1 category taxonomy registered.
+     */
+    protected function getCategoryTaxonomyName(
+        int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string;
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?string {
+        return $this->getTaxonomyName(
+            true,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

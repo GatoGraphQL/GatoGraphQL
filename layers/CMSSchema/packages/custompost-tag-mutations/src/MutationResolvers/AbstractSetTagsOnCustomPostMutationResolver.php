@@ -115,8 +115,47 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             return $customPostID;
         }
 
-        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
-        $postTags = isset($tagsBy->{MutationInputProperties::IDS})
+        /**
+         * Validate the taxonomy is valid
+         */
+        $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($taxonomyName === null) {
+            return null;
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        /** @var stdClass */
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if (isset($tagsBy->{MutationInputProperties::IDS})) {
+            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
+            $this->validateTagsByIDExist(
+                $taxonomyName,
+                $customPostTagIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
+            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            $this->validateTagsBySlugExist(
+                $taxonomyName,
+                $customPostTagSlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        $customPostTagIDsOrSlugs = isset($tagsBy->{MutationInputProperties::IDS})
             ? $tagsBy->{MutationInputProperties::IDS}
             : $tagsBy->{MutationInputProperties::SLUGS};
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
@@ -124,7 +163,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         $customPostTagTypeAPI->setTags(
             $taxonomyName,
             $customPostID,
-            $postTags,
+            $customPostTagIDsOrSlugs,
             $append
         );
         return $customPostID;
@@ -148,39 +187,11 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor);
-
-        /** @var stdClass */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $customPostTagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsByIDExist(
-                $taxonomyName,
-                $customPostTagIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            $customPostTagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
-            $this->validateTagsBySlugExist(
-                $taxonomyName,
-                $customPostTagSlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
         $this->validateCanLoggedInUserEditCustomPosts(
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
-            $taxonomyName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -196,9 +207,22 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         );
     }
 
-    abstract protected function getTagTaxonomyName(
+    /**
+     * Retrieve the taxonomy from the queried object's CPT,
+     * which works as long as it has only 1 tag taxonomy registered.
+     */
+    protected function getTagTaxonomyName(
+        int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string;
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?string {
+        return $this->getTaxonomyName(
+            false,
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+    }
 
     protected function getUserNotLoggedInError(): FeedbackItemResolution
     {

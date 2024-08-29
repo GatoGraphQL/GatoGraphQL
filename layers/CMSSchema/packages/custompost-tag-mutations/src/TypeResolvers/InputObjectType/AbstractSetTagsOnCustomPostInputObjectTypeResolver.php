@@ -133,7 +133,6 @@ abstract class AbstractSetTagsOnCustomPostInputObjectTypeResolver extends Abstra
         return match ($inputFieldName) {
             MutationInputProperties::APPEND
                 => SchemaTypeModifiers::NON_NULLABLE,
-            MutationInputProperties::TAXONOMY,
             MutationInputProperties::CUSTOMPOST_ID,
             MutationInputProperties::TAGS_BY
                 => SchemaTypeModifiers::MANDATORY,

@@ -9,6 +9,7 @@ use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\AbstractSetTagsOnCusto
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class SetTagsOnCustomPostMutationResolver extends AbstractSetTagsOnCustomPostMutationResolver
@@ -48,10 +49,52 @@ class SetTagsOnCustomPostMutationResolver extends AbstractSetTagsOnCustomPostMut
         return $this->getQueryableTagTypeAPI();
     }
 
+    /**
+     * Retrieve the taxonomy passed via the `taxonomy` input.
+     * If that's not possible (eg: on `createCustomPost:input.tagsBy`),
+     * then retrieve it from queried object's CPT.
+     */
     protected function getTagTaxonomyName(
+        int|string $customPostID,
         FieldDataAccessorInterface $fieldDataAccessor,
-    ): string {
-        /** @var string */
-        return $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?string {
+        /** @var string|null */
+        $taxonomName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        if ($taxonomName === null) {
+            return parent::getTagTaxonomyName(
+                $customPostID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        /**
+         * Validate the taxonomy is valid for this CPT
+         */
+        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        if ($customPostType === null) {
+            // Error handled in the parent
+            return parent::getTagTaxonomyName(
+                $customPostID,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $this->validateTaxonomyIsRegisteredForCustomPostType(
+            $taxonomName,
+            $customPostType,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        return $taxonomName;
     }
 }
