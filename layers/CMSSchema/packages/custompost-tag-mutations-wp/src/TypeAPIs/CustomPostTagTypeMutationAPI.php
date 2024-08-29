@@ -18,10 +18,10 @@ class CustomPostTagTypeMutationAPI implements CustomPostTagTypeMutationAPIInterf
      */
     public function setTags(
         string $taxonomyName,
-        int|string $postID,
+        int|string $customPostID,
         array $tags,
         bool $append = false,
     ): void {
-        wp_set_post_terms((int)$postID, $tags, $taxonomyName, $append);
+        wp_set_post_terms((int)$customPostID, $tags, $taxonomyName, $append);
     }
 }

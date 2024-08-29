@@ -11,7 +11,7 @@ interface CustomPostTagTypeMutationAPIInterface
      */
     public function setTags(
         string $taxonomyName,
-        int|string $postID,
+        int|string $customPostID,
         array $tags,
         bool $append = false,
     ): void;
