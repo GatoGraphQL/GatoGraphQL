@@ -120,7 +120,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
          */
         $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
-            return;
+            return null;
         }
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();

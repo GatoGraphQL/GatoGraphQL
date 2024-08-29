@@ -121,7 +121,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
          */
         $taxonomyName = $this->getCategoryTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
-            return;
+            return null;
         }
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
