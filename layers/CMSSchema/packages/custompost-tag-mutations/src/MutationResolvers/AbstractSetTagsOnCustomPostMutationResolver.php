@@ -152,7 +152,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         );
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
+            return null;
         }
 
         $customPostTagIDsOrSlugs = isset($tagsBy->{MutationInputProperties::IDS})

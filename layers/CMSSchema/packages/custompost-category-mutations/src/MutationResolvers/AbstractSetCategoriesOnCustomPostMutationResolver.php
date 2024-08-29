@@ -153,7 +153,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
+            return null;
         }
 
         $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
