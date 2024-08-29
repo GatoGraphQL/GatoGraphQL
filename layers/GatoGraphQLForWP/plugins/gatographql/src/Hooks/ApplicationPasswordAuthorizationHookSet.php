@@ -55,11 +55,6 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
         );
 
         add_action(
-            'wp_authenticate_application_password_errors',
-            $this->handleError(...)
-        );
-        
-        add_action(
             'application_password_failed_authentication',
             $this->handleError(...)
         );
