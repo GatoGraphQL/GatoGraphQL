@@ -17,7 +17,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 trait SetCategoriesOnCustomPostMutationResolverTrait
 {
     use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
-    
+
     /**
      * @param array<string|int> $customPostCategoryIDs
      */

@@ -15,7 +15,7 @@ interface CustomPostTagTypeMutationAPIInterface
         array $tagIDs,
         bool $append = false,
     ): void;
-    
+
     /**
      * @param array<string|int> $tagSlugs
      */

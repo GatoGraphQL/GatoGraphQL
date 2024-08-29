@@ -17,7 +17,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 trait SetTagsOnCustomPostMutationResolverTrait
 {
     use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
-    
+
     /**
      * @param array<string|int> $tagIDs
      */
