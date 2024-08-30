@@ -35,6 +35,7 @@ class PluginSetupDataEntrySlugs
     public final const PERSISTED_QUERY_FETCH_USERS_BY_LOCALE = 'fetch-users-by-locale';
     public final const PERSISTED_QUERY_GENERATE_A_POSTS_FEATURED_IMAGE_USING_AI_AND_OPTIMIZE_IT = 'generate-a-posts-featured-image-using-ai-and-optimize-it';
     public final const PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_RSS_FEED = 'import-post-from-wordpress-rss-feed';
+    public final const PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_RSS_FEED_AND_REWRITE_ITS_CONTENT_WITH_CHATGPT = 'import-post-from-wp-rss-feed-and-rewrite-content-with-chatgpt';
     public final const PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_SITE = 'import-post-from-wordpress-site';
     public final const PERSISTED_QUERY_IMPORT_POSTS_FROM_CSV = 'import-posts-from-csv';
     public final const PERSISTED_QUERY_INSERT_BLOCK_IN_POST = 'insert-block-in-post';

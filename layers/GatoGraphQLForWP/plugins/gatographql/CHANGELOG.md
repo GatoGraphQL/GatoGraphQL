@@ -19,6 +19,8 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Added mutations to assign custom tags/categories to custom posts (#2803)
 - Added Settings option to enable/disable logs (#2813)
 - Application password failed authentication: Show error in GraphQL response (#2817)
+- Added predefined persisted queries:
+  - [PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT (#2818)
 
 ### Fixed
 
