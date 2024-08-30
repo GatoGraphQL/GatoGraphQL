@@ -6,7 +6,11 @@ namespace PoPCMSSchema\PostCategoryMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\CategoryMutations\ObjectTypeResolverPickers\AbstractCategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver;
-use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\AbstractPostCategoryMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\PostCategoryDeleteMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\PostCategoryUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\RootCreatePostCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\RootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\PostCategoryMutations\TypeResolvers\UnionType\RootUpdatePostCategoryTermMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\PostUpdateMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootCreatePostMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\PostMutations\TypeResolvers\UnionType\RootUpdatePostMutationErrorPayloadUnionTypeResolver;
@@ -21,7 +25,11 @@ class CategoryTermDoesNotExistErrorPayloadObjectTypeResolverPicker extends Abstr
     {
         return [
             AbstractPostCategoriesMutationErrorPayloadUnionTypeResolver::class,
-            AbstractPostCategoryMutationErrorPayloadUnionTypeResolver::class,
+            PostCategoryDeleteMutationErrorPayloadUnionTypeResolver::class,
+            PostCategoryUpdateMutationErrorPayloadUnionTypeResolver::class,
+            RootCreatePostCategoryTermMutationErrorPayloadUnionTypeResolver::class,
+            RootDeletePostCategoryTermMutationErrorPayloadUnionTypeResolver::class,
+            RootUpdatePostCategoryTermMutationErrorPayloadUnionTypeResolver::class,
             PostUpdateMutationErrorPayloadUnionTypeResolver::class,
             RootCreatePostMutationErrorPayloadUnionTypeResolver::class,
             RootUpdatePostMutationErrorPayloadUnionTypeResolver::class,
