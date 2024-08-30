@@ -5,7 +5,7 @@
 #   - openAIAPIKey: API key to connect to Open AI
 #   - systemMessage: ChatGPT's system role message
 #   - prompt: ChatGPT's user role message
-#   - model: Open AI's model to use. Defalt: "gpt-3.5-turbo-instruct"`
+#   - model: Open AI's model to use. Default: "gpt-3.5-turbo-instruct"`
 #   - temperature: Level of fuzziness. Default: `0.7`
 #   - maxTokens: Maximum number of tokens for ChatGPT content generation. Default: `50`
 #

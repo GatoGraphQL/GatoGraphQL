@@ -20,6 +20,7 @@ class VirtualTutorialLessons
     public final const GENERATE_A_POST_FEATURED_IMAGE_USING_AI_AND_OPTIMIZE_IT = 'generate-a-post-featured-image-using-ai-and-optimize-it';
     public final const IMPORTING_A_POST_FROM_WORDPRESS_RSS_FEED = 'importing-a-post-from-wordpress-rss-feed';
     public final const IMPORTING_A_POST_FROM_WORDPRESS_RSS_FEED_AND_REWRITING_ITS_CONTENT_WITH_CHATGPT = 'importing-a-post-from-wordpress-rss-feed-and-rewriting-its-content-with-chatgpt';
+    public final const IMPORTING_NEW_POSTS_FROM_WORDPRESS_RSS_FEED = 'importing-new-posts-from-wordpress-rss-feed';
     public final const IMPORTING_POSTS_FROM_A_CSV = 'importing-posts-from-a-csv';
     public final const SEND_EMAIL_TO_ADMIN_ABOUT_POST = 'send-email-to-admin-about-post';
     public final const SEND_EMAIL_TO_USERS_ABOUT_POST = 'send-email-to-users-about-post';

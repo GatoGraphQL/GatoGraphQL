@@ -49,6 +49,7 @@ The same behavior applies for all fields that accept the `filter.ids` input:
 - Added mutations to assign custom tags/categories to custom posts ([#2803](https://github.com/GatoGraphQL/GatoGraphQL/pull/2803))
 - Added predefined persisted queries:
   - [PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT ([#2818](https://github.com/GatoGraphQL/GatoGraphQL/pull/2818))
+  - [PRO] Import new posts from WordPress RSS feed ([#2819](https://github.com/GatoGraphQL/GatoGraphQL/pull/2819))
 
 ### Added Settings option to enable/disable logs ([#2813](https://github.com/GatoGraphQL/GatoGraphQL/pull/2813))
 
