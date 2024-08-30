@@ -303,6 +303,16 @@ class VirtualTutorialLessonDataProvider
                     ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
                 ]
             ],
+            VirtualTutorialLessons::IMPORTING_A_POST_FROM_WORDPRESS_RSS_FEED_AND_REWRITING_ITS_CONTENT_WITH_CHATGPT => [
+                \__('Import a post from some WordPress RSS feed, and rewriting its content with ChatGPT', 'gatographql'),
+                [
+                    ExtensionModuleResolver::FIELD_TO_INPUT,
+                    ExtensionModuleResolver::HELPER_FUNCTION_COLLECTION,
+                    ExtensionModuleResolver::HTTP_CLIENT,
+                    ExtensionModuleResolver::MULTIPLE_QUERY_EXECUTION,
+                    ExtensionModuleResolver::PHP_FUNCTIONS_VIA_SCHEMA,
+                ]
+            ],
         ];
     }
 }

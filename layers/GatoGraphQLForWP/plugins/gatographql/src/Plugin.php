@@ -266,6 +266,7 @@ class Plugin extends AbstractMainPlugin
             '3.0' => [$this->installPluginSetupDataForVersion3Dot0(...)],
             '4.0' => [$this->installPluginSetupDataForVersion4Dot0(...)],
             '4.2' => [$this->installPluginSetupDataForVersion4Dot2(...)],
+            '5.0' => [$this->installPluginSetupDataForVersion5Dot0(...)],
         ];
     }
 
@@ -2122,6 +2123,39 @@ class Plugin extends AbstractMainPlugin
                             ],
                         ],
                         ...$nestedMutationsSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
+    }
+
+    protected function installPluginSetupDataForVersion5Dot0(): void
+    {
+        $instanceManager = InstanceManagerFacade::getInstance();
+
+        /** @var PersistedQueryEndpointGraphiQLBlock */
+        $persistedQueryEndpointGraphiQLBlock = $instanceManager->getInstance(PersistedQueryEndpointGraphiQLBlock::class);
+        $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
+        $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/import-post-from-wp-rss-feed-and-rewrite-its-content-with-chatgpt',
+                                    VirtualTutorialLessons::IMPORTING_A_POST_FROM_WORDPRESS_RSS_FEED_AND_REWRITING_ITS_CONTENT_WITH_CHATGPT,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
                     ])),
                 ]
             ));
