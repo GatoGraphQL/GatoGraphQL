@@ -21,6 +21,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Application password failed authentication: Show error in GraphQL response (#2817)
 - Added predefined persisted queries:
   - [PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT (#2818)
+  - [PRO] Import new posts from WordPress RSS feed (#2819)
 
 ### Fixed
 
