@@ -2160,5 +2160,28 @@ class Plugin extends AbstractMainPlugin
                 ]
             ));
         }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_NEW_POSTS_FROM_WORDPRESS_RSS_FEED;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Import new posts from WordPress RSS feed', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/import-new-posts-from-wp-rss-feed',
+                                    VirtualTutorialLessons::IMPORTING_NEW_POSTS_FROM_WORDPRESS_RSS_FEED,
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
     }
 }
