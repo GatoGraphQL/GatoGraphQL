@@ -24,7 +24,7 @@
 # It usually is the blog post URL + `"/feed/rss/?withoutcomments=1"`.
 # Eg:
 #
-#   https://wordpress.org/news/2024/07/dorsey/feed/rss/?withoutcomments=1
+#   https://wordpress.com/blog/2024/07/16/wordpress-6-6/feed/rss/?withoutcomments=1
 #
 # To connect to the OpenAI API, you must provide variables `$openAIAPIKey` with the API key.
 #
