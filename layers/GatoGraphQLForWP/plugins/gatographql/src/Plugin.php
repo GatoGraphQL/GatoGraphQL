@@ -2138,7 +2138,7 @@ class Plugin extends AbstractMainPlugin
         $adminPersistedQueryOptions = $this->getAdminPersistedQueryOptions();
         $defaultSchemaConfigurationPersistedQueryBlocks = $this->getDefaultSchemaConfigurationPersistedQueryBlocks();
 
-        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_CREATE_MISSING_TRANSLATION_CATEGORIES_FOR_POLYLANG;
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_POST_FROM_WORDPRESS_RSS_FEED_AND_REWRITE_ITS_CONTENT_WITH_CHATGPT;
         if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
             wp_insert_post(array_merge(
                 $adminPersistedQueryOptions,
