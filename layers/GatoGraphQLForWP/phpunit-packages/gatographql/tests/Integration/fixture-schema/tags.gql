@@ -191,6 +191,7 @@
 }
 
 fragment TagData on Tag {
+  taxonomy
   count
   description
   id

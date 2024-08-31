@@ -26,6 +26,7 @@
 
 fragment CategoryData on Category {
   __typename
+  taxonomy
   id
   name
 }
