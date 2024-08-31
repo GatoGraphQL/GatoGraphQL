@@ -32,6 +32,7 @@
 
 fragment TagData on Tag {
   __typename
+  taxonomy
   id
   name
 }

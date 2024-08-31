@@ -188,6 +188,7 @@
 }
 
 fragment CategoryData on Category {
+  taxonomy
   count
   description
   id
