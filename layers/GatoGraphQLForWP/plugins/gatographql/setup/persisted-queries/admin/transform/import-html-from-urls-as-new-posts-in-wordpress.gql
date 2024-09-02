@@ -13,7 +13,7 @@
 #
 # From each URL, it retrieves the title from <title>...</title>,
 # and the content from <body>...</body>, or customized to some specific
-# inner <div> using the `$contentMatchInnerRegex` variable.
+# inner HTML element using the `$contentMatchInnerRegex` variable.
 #
 # With variable `$contentMatchInnerRegex`, we can target what specific
 # HTML tag to capture its content from.
