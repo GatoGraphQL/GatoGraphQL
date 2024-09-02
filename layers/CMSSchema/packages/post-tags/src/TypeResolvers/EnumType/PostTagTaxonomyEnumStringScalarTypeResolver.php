@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\TypeResolvers\EnumType;
 
-use PoPCMSSchema\Tags\Module;
-use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
-use PoP\ComponentModel\App;
+use PoPCMSSchema\Tags\TypeResolvers\EnumType\AbstractTagTaxonomyEnumStringScalarTypeResolver;
 
-class PostTagTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
+class PostTagTaxonomyEnumStringScalarTypeResolver extends AbstractTagTaxonomyEnumStringScalarTypeResolver
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
@@ -41,22 +38,8 @@ class PostTagTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringScal
         );
     }
 
-    /**
-     * Return all the tag taxonomies registered for the "post"
-     * custom post type, that have also been selected as "queryable"
-     * in the plugin settings.
-     *
-     * @return string[]
-     */
-    public function getPossibleValues(): array
+    protected function getRegisteredCustomPostTagTaxonomyNames(): ?array
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $queryableTagTaxonomies = $moduleConfiguration->getQueryableTagTaxonomies();
-
-        return array_values(array_intersect(
-            $this->getPostTagTypeAPI()->getRegisteredPostTagTaxonomyNames(),
-            $queryableTagTaxonomies
-        ));
+        return $this->getPostTagTypeAPI()->getRegisteredPostTagTaxonomyNames();
     }
 }

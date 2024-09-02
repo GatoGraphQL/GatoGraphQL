@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\TypeResolvers\EnumType;
 
-use PoPCMSSchema\Categories\Module;
-use PoPCMSSchema\Categories\ModuleConfiguration;
+use PoPCMSSchema\Categories\TypeResolvers\EnumType\AbstractCategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
-use PoPSchema\SchemaCommons\TypeResolvers\ScalarType\AbstractEnumStringScalarTypeResolver;
-use PoP\ComponentModel\App;
 
-class PostCategoryTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStringScalarTypeResolver
+class PostCategoryTaxonomyEnumStringScalarTypeResolver extends AbstractCategoryTaxonomyEnumStringScalarTypeResolver
 {
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
@@ -41,22 +38,8 @@ class PostCategoryTaxonomyEnumStringScalarTypeResolver extends AbstractEnumStrin
         );
     }
 
-    /**
-     * Return all the category taxonomies registered for the "post"
-     * custom post type, that have also been selected as "queryable"
-     * in the plugin settings.
-     *
-     * @return string[]
-     */
-    public function getPossibleValues(): array
+    protected function getRegisteredCustomPostCategoryTaxonomyNames(): ?array
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $queryableCategoryTaxonomies = $moduleConfiguration->getQueryableCategoryTaxonomies();
-
-        return array_values(array_intersect(
-            $this->getPostCategoryTypeAPI()->getRegisteredPostCategoryTaxonomyNames(),
-            $queryableCategoryTaxonomies
-        ));
+        return $this->getPostCategoryTypeAPI()->getRegisteredPostCategoryTaxonomyNames();
     }
 }
