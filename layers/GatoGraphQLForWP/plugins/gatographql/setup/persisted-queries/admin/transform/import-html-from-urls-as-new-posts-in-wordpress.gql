@@ -2,7 +2,7 @@
 # 
 # Variables:
 #   - urls: The URLs of the external pages to import into WordPress
-#   - contentMatchRegex: The regular subexpression to extract the content from the HTML, to target a specific tag inside of <body> (eg: `<div id="container">...</div>`). It must have 1 parenthesis `()`, from which it'll capture the content. It is `(.*?)` by default (i.e. it captures all content in <body>)
+#   - contentMatchInnerRegex: The regular subexpression to extract the content from the HTML, to target a specific tag inside of <body> (eg: `<div id="container">...</div>`). It must have 1 parenthesis `()`, from which it'll capture the content. It is `(.*?)` by default (i.e. it captures all content in <body>)
 #
 # *********************************************************************
 #
@@ -13,11 +13,12 @@
 #
 # From each URL, it retrieves the title from <title>...</title>,
 # and the content from <body>...</body>, or customized to some specific
-# inner <div> using the `$contentMatchRegex` variable.
+# inner <div> using the `$contentMatchInnerRegex` variable.
 #
 ########################################################################
 query GenerateURLInputs(
   $urls: [URL!]!
+  $contentMatchInnerRegex: String! = "(.*?)"
 ) {
   urlInputs: _echo(value: $urls)
     @underEachArrayItem(
@@ -35,6 +36,11 @@ query GenerateURLInputs(
       )
     @export(as: "urlInputs")
     @remove
+  contentMatchRegex: _sprintf(
+    string: "/(?=<!DOCTYPE html>)?<\\s*?html\\b[^>]*>.*?<\\s*?body\\b[^>]*>%s<\\/body\\b[^>]*>.*?<\\/html\\b[^>]*>/sim",
+    values: [$contentMatchInnerRegex]
+  )
+    @export(as: "contentMatchRegex")
 }
 
 query RequestPages
@@ -50,7 +56,7 @@ query RequestPages
       in: $__body
     )
     content: _strRegexReplace(
-      searchRegex: "/(?=<!DOCTYPE html>)?<\\s*?html\\b[^>]*>.*?<\\s*?body\\b[^>]*>(.*?)<\\/body\\b[^>]*>.*?<\\/html\\b[^>]*>/sim"
+      searchRegex: $contentMatchRegex
       replaceWith: "$1"
       in: $__body
     )
