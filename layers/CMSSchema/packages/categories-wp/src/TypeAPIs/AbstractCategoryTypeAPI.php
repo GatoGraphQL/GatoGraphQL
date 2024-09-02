@@ -97,7 +97,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             $customPostObjectOrID,
             $query,
             $options,
-        );
+        ) ?? [];
     }
     /**
      * @param array<string,mixed> $query

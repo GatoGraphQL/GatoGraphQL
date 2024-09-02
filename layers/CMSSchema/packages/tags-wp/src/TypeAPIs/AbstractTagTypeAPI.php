@@ -125,7 +125,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
             $customPostObjectOrID,
             $query,
             $options,
-        );
+        ) ?? [];
     }
 
     /**
