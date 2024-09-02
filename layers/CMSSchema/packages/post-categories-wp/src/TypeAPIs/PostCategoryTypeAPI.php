@@ -44,7 +44,7 @@ class PostCategoryTypeAPI extends AbstractCategoryTypeAPI implements PostCategor
         }
         return $this->postTypeAPI;
     }
-    
+
     /**
      * The taxonomy name representing a post category ("category")
      */

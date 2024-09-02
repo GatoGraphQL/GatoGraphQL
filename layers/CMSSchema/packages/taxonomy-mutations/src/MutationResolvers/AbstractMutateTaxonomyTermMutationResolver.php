@@ -104,7 +104,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     }
 
     abstract protected function isHierarchical(): bool;
-    
+
     /**
      * For the `create` mutation, the taxonomy input is mandatory.
      * For the `updated` and `delete` mutations, the taxonomy input is optional.

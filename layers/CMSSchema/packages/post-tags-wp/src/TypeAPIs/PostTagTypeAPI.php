@@ -44,7 +44,7 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
         }
         return $this->postTypeAPI;
     }
-    
+
     /**
      * The taxonomy name representing a post tag ("post_tag")
      */
