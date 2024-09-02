@@ -11,12 +11,12 @@
 # This query imports the HTML pages from the given URLs as new posts
 # in WordPress.
 #
-# From each URL, it retrieves the title from <title>...</title>,
+# From each URL, it retrieves the title from <title>...</title> in the meta,
 # and the content from <body>...</body>, or customized to some specific
 # inner HTML element using the `$contentMatchInnerRegex` variable.
 #
-# With variable `$contentMatchInnerRegex`, we can target what specific
-# HTML tag to capture its content from.
+# With `$contentMatchInnerRegex`, we can target what specific subportion of
+# the `<body>`'s HTML to capture.
 #
 # For instance, if the content is within `<article class="main">...</article>`,
 # we can capture it with:
