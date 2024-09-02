@@ -83,7 +83,7 @@ Several persisted queries have been added:
 
 - [PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT ([#2818](https://github.com/GatoGraphQL/GatoGraphQL/pull/2818))
 - [PRO] Import new posts from WordPress RSS feed ([#2819](https://github.com/GatoGraphQL/GatoGraphQL/pull/2819))
-- [PRO] Import HTML from URLs as new posts in WordPress ([#2821](https://github.com/GatoGraphQL/GatoGraphQL/pull/2821))
+- [PRO] Import HTML from URLs as new posts in WordPress ([#2822](https://github.com/GatoGraphQL/GatoGraphQL/pull/2822))
 
 ## Fixed
 
