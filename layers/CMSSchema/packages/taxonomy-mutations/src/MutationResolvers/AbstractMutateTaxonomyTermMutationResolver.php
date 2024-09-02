@@ -180,24 +180,12 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
+        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         /**
-         * Notice that the GenericCategory and GenericTag will not
-         * provide a taxonomy name in the Resolver.
-         *
-         * @var string|null
+         * If explicitly providing the taxonomy, make sure it
+         * exists for that ID.
          */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomyName === null) {
-            $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID) ?? '';
-            if ($taxonomyName === null) {
-                // @todo Throw error here!
-
-                return;
-            }
-        } else {
-            /**
-             * Make sure the provided ID corresponds to the expected taxonomy
-             */
+        if ($fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) !== null) {
             $this->validateTaxonomyTermByIDExists(
                 $taxonomyTermID,
                 $taxonomyName,
@@ -246,16 +234,12 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        /** @var string|null */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomyName === null) {
-            $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID) ?? '';
-            if ($taxonomyName === null) {
-                // @todo Throw error here!
-
-                return;
-            }
-        } else {
+        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
+        /**
+         * If explicitly providing the taxonomy, make sure it
+         * exists for that ID.
+         */
+        if ($fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) !== null) {
             $this->validateTaxonomyTermByIDExists(
                 $taxonomyTermID,
                 $taxonomyName,
