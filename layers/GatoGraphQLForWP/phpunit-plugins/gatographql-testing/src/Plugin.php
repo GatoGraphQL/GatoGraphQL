@@ -149,6 +149,34 @@ class Plugin
     protected function registerTestingTaxonomies(): void
     {
         \register_taxonomy(
+            'additional-post-tag',
+            [
+                'post',
+            ],
+            $this->getTaxonomyArgs(
+                false,
+                __('Additional Post Tag'),
+                __('Additional Post Tags'),
+                __('additional post tag'),
+                __('additional post tags'),
+            )
+        );
+
+        \register_taxonomy(
+            'additional-post-category',
+            [
+                'post',
+            ],
+            $this->getTaxonomyArgs(
+                true,
+                __('Additional Post Category'),
+                __('Additional Post Categories'),
+                __('additional post category'),
+                __('additional post categories'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-tag',
             [],
             $this->getTaxonomyArgs(

@@ -8,7 +8,6 @@ use PoPCMSSchema\TaxonomyMutations\Constants\TaxonomyCRUDHookNames;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload;
-use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyDoesNotExistErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
 use PoPCMSSchema\UserStateMutations\ObjectModels\UserIsNotLoggedInErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
@@ -46,12 +45,12 @@ trait PayloadableTaxonomyMutationResolverTrait
             ] => new LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new TaxonomyDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
+            // [
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E5,
+            // ] => new TaxonomyDoesNotExistErrorPayload(
+            //     $feedbackItemResolution->getMessage(),
+            // ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,

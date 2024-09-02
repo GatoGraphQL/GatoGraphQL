@@ -45,6 +45,9 @@ trait MutateTaxonomyTermMutationResolverTrait
         );
     }
 
+    /**
+     * @deprecated Because the taxonomy is provided via an Enum, this method will not be needed
+     */
     protected function validateTaxonomyExists(
         string $taxonomyName,
         FieldDataAccessorInterface $fieldDataAccessor,

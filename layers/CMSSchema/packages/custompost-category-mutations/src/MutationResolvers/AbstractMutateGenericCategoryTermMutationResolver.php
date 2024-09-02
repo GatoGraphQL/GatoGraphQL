@@ -8,8 +8,4 @@ use PoPCMSSchema\CategoryMutations\MutationResolvers\AbstractMutateCategoryTermM
 
 abstract class AbstractMutateGenericCategoryTermMutationResolver extends AbstractMutateCategoryTermMutationResolver
 {
-    public function getTaxonomyName(): string
-    {
-        return '';
-    }
 }

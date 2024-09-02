@@ -24,6 +24,16 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     abstract protected function getTagTaxonomyName(): string;
 
     /**
+     * @return string[]
+     */
+    abstract protected function getTagTaxonomyNames(): array;
+
+    protected function isTagTaxonomy(WP_Term $taxonomyTerm): bool
+    {
+        return in_array($taxonomyTerm->taxonomy, $this->getTagTaxonomyNames());
+    }
+
+    /**
      * Indicates if the passed object is of type Tag
      */
     public function isInstanceOfTagType(object $object): bool
@@ -32,7 +42,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
             return false;
         }
         /** @var WP_Term $object */
-        return $object->taxonomy === $this->getTagTaxonomyName();
+        return $this->isTagTaxonomy($object);
     }
 
     protected function isHierarchical(): bool
@@ -49,6 +59,21 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         );
     }
 
+    protected function getTaxonomyTermFromObjectOrID(
+        string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy = '',
+    ): ?WP_Term {
+        $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
+        if ($taxonomyTerm === null) {
+            return $taxonomyTerm;
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $this->isTagTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
+    }
+
     public function getTagName(string|int|object $tagObjectOrID): ?string
     {
         /** @var string|int|WP_Term $tagObjectOrID */
@@ -60,23 +85,23 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 
     public function getTag(string|int $tagID): ?object
     {
-        return $this->getTaxonomyTerm(
+        $tag = $this->getTaxonomyTerm(
             $tagID,
             $this->getTagTaxonomyName(),
         );
+        if ($tag === null) {
+            return null;
+        }
+        /** @var WP_Term $tag */
+        if (!$this->isTagTaxonomy($tag)) {
+            return null;
+        }
+        return $tag;
     }
 
     public function tagExists(int|string $id): bool
     {
         return $this->getTag($id) !== null;
-    }
-
-    public function getTagByName(string $tagName): ?object
-    {
-        return $this->getTaxonomyTermByName(
-            $tagName,
-            $this->getTagTaxonomyName(),
-        );
     }
 
     /**
@@ -92,7 +117,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getTagTaxonomyName();
+            $query['taxonomy'] = $this->getTagTaxonomyNames();
         }
 
         /** @var array<string|int>|object[] */
@@ -100,7 +125,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
             $customPostObjectOrID,
             $query,
             $options,
-        );
+        ) ?? [];
     }
 
     /**
@@ -114,7 +139,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getTagTaxonomyName();
+            $query['taxonomy'] = $this->getTagTaxonomyNames();
         }
 
         /** @var string|int|WP_Post $customPostObjectOrID */
@@ -168,7 +193,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
          * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getTagTaxonomyName();
+            $query['taxonomy'] = $this->getTagTaxonomyNames();
         }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(

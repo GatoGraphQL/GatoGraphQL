@@ -29,7 +29,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             return false;
         }
         /** @var WP_Term $object */
-        return $object->taxonomy === $this->getCategoryTaxonomyName();
+        return $this->isCategoryTaxonomy($object);
     }
 
     protected function isHierarchical(): bool
@@ -45,10 +45,18 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
 
     public function getCategory(string|int $categoryID): ?object
     {
-        return $this->getTaxonomyTerm(
+        $category = $this->getTaxonomyTerm(
             $categoryID,
             $this->getCategoryTaxonomyName(),
         );
+        if ($category === null) {
+            return null;
+        }
+        /** @var WP_Term $category */
+        if (!$this->isCategoryTaxonomy($category)) {
+            return null;
+        }
+        return $category;
     }
 
     public function categoryExists(int|string $id): bool
@@ -57,6 +65,16 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     }
 
     abstract protected function getCategoryTaxonomyName(): string;
+
+    /**
+     * @return string[]
+     */
+    abstract protected function getCategoryTaxonomyNames(): array;
+
+    protected function isCategoryTaxonomy(WP_Term $taxonomyTerm): bool
+    {
+        return in_array($taxonomyTerm->taxonomy, $this->getCategoryTaxonomyNames());
+    }
 
     /**
      * @param string|int|WP_Post $customPostObjectOrID
@@ -71,7 +89,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
 
         /** @var array<string|int>|object[] */
@@ -79,7 +97,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             $customPostObjectOrID,
             $query,
             $options,
-        );
+        ) ?? [];
     }
     /**
      * @param array<string,mixed> $query
@@ -92,7 +110,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
 
         /** @var string|int|WP_Post $customPostObjectOrID */
@@ -140,7 +158,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
         $query = parent::convertTaxonomyTermsQuery($query, $options);
         return App::applyFilters(
@@ -185,6 +203,21 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             $catObjectOrID,
             $this->getCategoryTaxonomyName(),
         );
+    }
+
+    protected function getTaxonomyTermFromObjectOrID(
+        string|int|WP_Term $taxonomyTermObjectOrID,
+        string $taxonomy = '',
+    ): ?WP_Term {
+        $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
+            $taxonomyTermObjectOrID,
+            $taxonomy,
+        );
+        if ($taxonomyTerm === null) {
+            return $taxonomyTerm;
+        }
+        /** @var WP_Term $taxonomyTerm */
+        return $this->isCategoryTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
     }
 
     public function getCategorySlug(string|int|object $catObjectOrID): ?string

@@ -6,13 +6,10 @@ namespace PoPCMSSchema\CustomPostCategoryMutations\TypeResolvers\InputObjectType
 
 use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\CategoryMutations\TypeResolvers\InputObjectType\AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver;
-use PoPCMSSchema\TaxonomyMutations\TypeResolvers\InputObjectType\MutateGenericTaxonomyTermInputObjectTypeResolverTrait;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 
 abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver extends AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver implements UpdateGenericCategoryTermInputObjectTypeResolverInterface, CreateGenericCategoryTermInputObjectTypeResolverInterface
 {
-    use MutateGenericTaxonomyTermInputObjectTypeResolverTrait;
-
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
@@ -29,29 +26,13 @@ abstract class AbstractCreateOrUpdateGenericCategoryTermInputObjectTypeResolver 
         return $this->categoryTaxonomyEnumStringScalarTypeResolver;
     }
 
-    /**
-     * @return array<string,InputTypeResolverInterface>
-     */
-    public function getInputFieldNameTypeResolvers(): array
-    {
-        return array_merge(
-            parent::getInputFieldNameTypeResolvers(),
-            $this->getGenericTaxonomyTermInputFieldNameTypeResolvers()
-        );
-    }
-
-    public function getInputFieldDescription(string $inputFieldName): ?string
-    {
-        return $this->getGenericTaxonomyTermInputFieldDescription($inputFieldName) ?? parent::getInputFieldDescription($inputFieldName);
-    }
-
-    public function getInputFieldTypeModifiers(string $inputFieldName): int
-    {
-        return $this->getGenericTaxonomyTermInputFieldTypeModifiers($inputFieldName) ?? parent::getInputFieldTypeModifiers($inputFieldName);
-    }
-
-    protected function getGenericTaxonomyTermTaxonomyInputTypeResolver(): InputTypeResolverInterface
+    protected function getTaxonomyInputObjectTypeResolver(): InputTypeResolverInterface
     {
         return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
+    }
+
+    protected function getTaxonomyInputFieldDefaultValue(): mixed
+    {
+        return null;
     }
 }
