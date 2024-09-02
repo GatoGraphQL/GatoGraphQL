@@ -89,7 +89,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
 
         /** @var array<string|int>|object[] */
@@ -110,7 +110,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getCategoryTaxonomyName();
+            $query['taxonomy'] = $this->getCategoryTaxonomyNames();
         }
 
         /** @var string|int|WP_Post $customPostObjectOrID */

@@ -130,7 +130,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getTagTaxonomyName();
+            $query['taxonomy'] = $this->getTagTaxonomyNames();
         }
 
         /** @var array<string|int>|object[] */
@@ -152,7 +152,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
          * Eg: { customPosts { categories(taxonomy: some_category) { id } }
          */
         if (!isset($query['taxonomy'])) {
-            $query['taxonomy'] = $this->getTagTaxonomyName();
+            $query['taxonomy'] = $this->getTagTaxonomyNames();
         }
 
         /** @var string|int|WP_Post $customPostObjectOrID */
