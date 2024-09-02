@@ -10,7 +10,7 @@ use PoPCMSSchema\Taxonomies\FieldResolvers\ObjectType\AbstractTaxonomyObjectType
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class GenericTaxonomyTagObjectTypeFieldResolver extends AbstractTaxonomyObjectTypeFieldResolver
+class GenericTagTaxonomyTagObjectTypeFieldResolver extends AbstractTaxonomyObjectTypeFieldResolver
 {
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 

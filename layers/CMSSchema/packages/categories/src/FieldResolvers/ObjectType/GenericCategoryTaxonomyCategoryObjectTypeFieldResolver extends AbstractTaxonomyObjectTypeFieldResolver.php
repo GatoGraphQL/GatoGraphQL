@@ -10,7 +10,7 @@ use PoPCMSSchema\Taxonomies\FieldResolvers\ObjectType\AbstractTaxonomyObjectType
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
-class GenericTaxonomyCategoryObjectTypeFieldResolver extends AbstractTaxonomyObjectTypeFieldResolver
+class GenericCategoryTaxonomyCategoryObjectTypeFieldResolver extends AbstractTaxonomyObjectTypeFieldResolver
 {
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
