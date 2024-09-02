@@ -1,0 +1,86 @@
+########################################################################
+# 
+# Variables:
+#   - urls: The URLs of the external pages to import into WordPress
+#   - contentRegex: The regular expression to extract the content from the HTML. It extracts all content in <body>...</body> by default
+#
+# *********************************************************************
+#
+# === Description ===
+#
+# This query imports the HTML pages from the given URLs as new posts
+# in WordPress.
+#
+# From each URL, it retrieves the title from <title>...</title>,
+# and the content from <body>...</body>, or customized to some specific
+# inner <div> using the `$contentRegex` variable.
+#
+########################################################################
+query GenerateURLInputs(
+  $urls: [URL!]!
+) {
+  urlInputs: _echo(value: $urls)
+    @underEachArrayItem(
+      passValueOnwardsAs: "url"
+    )
+      @applyField(
+        name: "_echo",
+        arguments: {
+          value: {
+            url: $url,
+            method: GET
+          }
+        },
+        setResultInResponse: true
+      )
+    @export(as: "urlInputs")
+    @remove
+}
+
+query RequestPages
+  @depends(on: "GenerateURLInputs")
+{
+  urlContents: _sendHTTPRequests(inputs: $urlInputs, async: false) {
+    statusCode
+    body
+      @remove
+    title: _strRegexReplace(
+      searchRegex: "/(<!DOCTYPE html>)?<\\s*?html\\b[^>]*>(.*?)<head\\b[^>]*>(.*?)<\\s*?title\\b[^>]*>(.*?)<\\/title\\b[^>]*>(.*?)<\\/head\\b[^>]*>(.*?)<\\/html\\b[^>]*>/sim"
+      replaceWith: "$4"
+      in: $__body
+    )
+    content: _strRegexReplace(
+      searchRegex: "/(<!DOCTYPE html>)?<\\s*?html\\b[^>]*>(.*?)<\\s*?body\\b[^>]*>(.*?)<\\/body\\b[^>]*>(.*?)<\\/html\\b[^>]*>/sim"
+      replaceWith: "$3"
+      in: $__body
+    )
+    createPostInput: _echo(value: {
+      status: publish,
+      title: $__title
+      contentAs: {
+        html: $__content
+      }
+    })
+      @export(as: "createPostInputs", type: LIST)
+  }
+}
+
+mutation CreatePostsFromURLs
+  @depends(on: "RequestPages")
+{
+  createPosts(inputs: $createPostInputs) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    post {
+      id
+      status
+      title
+      content
+    }
+  }
+}
