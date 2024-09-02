@@ -14,4 +14,9 @@ class RootUpdatePostTagTermInputObjectTypeResolver extends AbstractCreateOrUpdat
     {
         return 'RootUpdatePostTagInput';
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return false;
+    }
 }

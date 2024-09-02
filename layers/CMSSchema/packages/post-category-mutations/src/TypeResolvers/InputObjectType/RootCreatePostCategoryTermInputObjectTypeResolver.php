@@ -14,4 +14,9 @@ class RootCreatePostCategoryTermInputObjectTypeResolver extends AbstractCreateOr
     {
         return 'RootCreatePostCategoryInput';
     }
+
+    protected function isTaxonomyInputFieldMandatory(): bool
+    {
+        return true;
+    }
 }

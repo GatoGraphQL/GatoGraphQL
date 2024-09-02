@@ -16,4 +16,12 @@ interface PostTagTypeAPIInterface extends TagTypeAPIInterface, TagListTypeAPIInt
      * The taxonomy name representing a post tag ("post_tag")
      */
     public function getPostTagTaxonomyName(): string;
+    /**
+     * Return all the tag taxonomies registered for the "post"
+     * custom post type, that have also been selected as "queryable"
+     * in the plugin settings.
+     *
+     * @return string[]
+     */
+    public function getRegisteredPostTagTaxonomyNames(): array;
 }

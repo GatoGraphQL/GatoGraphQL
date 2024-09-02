@@ -48,6 +48,7 @@ abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends
             MutationInputProperties::NAME => $this->__('The name of the category', 'category-mutations'),
             MutationInputProperties::DESCRIPTION => $this->__('The description of the category', 'category-mutations'),
             MutationInputProperties::SLUG => $this->__('The slug of the category', 'category-mutations'),
+            MutationInputProperties::TAXONOMY => $this->__('The taxonomy of the category', 'category-mutations'),
             MutationInputProperties::PARENT_BY => $this->__('The category\'s parent, or `null` to remove it', 'category-mutations'),
             default => parent::getInputFieldDescription($inputFieldName),
         };

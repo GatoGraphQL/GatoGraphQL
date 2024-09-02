@@ -73,19 +73,19 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        /** @var string|null */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomyName !== null) {
-            /**
-             * Validate the taxonomy exists, even though in practice
-             * it will always exist (since the input is an Enum)
-             */
-            $this->validateTaxonomyExists(
-                $taxonomyName,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
+        // /** @var string|null */
+        // $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        // if ($taxonomyName !== null) {
+        //     /**
+        //      * Validate the taxonomy exists, even though in practice
+        //      * it will always exist (since the input is an Enum)
+        //      */
+        //     $this->validateTaxonomyExists(
+        //         $taxonomyName,
+        //         $fieldDataAccessor,
+        //         $objectTypeFieldResolutionFeedbackStore,
+        //     );
+        // }
 
         $this->maybeValidateTaxonomyParent($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
@@ -93,7 +93,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
-        $taxonomyName ??= $this->getTaxonomyName();
+        /** @var string */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
 
         $this->validateCanLoggedInUserEditTaxonomy(
             $taxonomyName,
@@ -103,6 +104,27 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     }
 
     abstract protected function isHierarchical(): bool;
+    
+    /**
+     * For the `create` mutation, the taxonomy input is mandatory.
+     * For the `updated` and `delete` mutations, the taxonomy input is optional.
+     * If not provided, take it from the mutated entity.
+     */
+    protected function getTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): string {
+        /** @var string|null */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        if ($taxonomyName !== null) {
+            return $taxonomyName;
+        }
+
+        // If the taxonomy is null, then the ID must've been provided
+        /** @var string|int */
+        $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+        /** @var string */
+        return $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID);
+    }
 
     protected function validateUpdateErrors(
         FieldDataAccessorInterface $fieldDataAccessor,
@@ -162,11 +184,16 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
          * Notice that the GenericCategory and GenericTag will not
          * provide a taxonomy name in the Resolver.
          *
-         * @var string
+         * @var string|null
          */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
-        if ($taxonomyName === '') {
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        if ($taxonomyName === null) {
             $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID) ?? '';
+            if ($taxonomyName === null) {
+                // @todo Throw error here!
+
+                return;
+            }
         } else {
             /**
              * Make sure the provided ID corresponds to the expected taxonomy
@@ -219,20 +246,23 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             $objectTypeFieldResolutionFeedbackStore,
         );
 
-        /** @var string|int $taxonomyTermID */
-
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
-        if ($taxonomyName === '') {
+        /** @var string|null */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        if ($taxonomyName === null) {
             $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID) ?? '';
-        }
-        /** @var string $taxonomyName */
+            if ($taxonomyName === null) {
+                // @todo Throw error here!
 
-        $this->validateTaxonomyTermByIDExists(
-            $taxonomyTermID,
-            $taxonomyName,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+                return;
+            }
+        } else {
+            $this->validateTaxonomyTermByIDExists(
+                $taxonomyTermID,
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
@@ -253,11 +283,20 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
+        /** @var string|null */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        if ($taxonomyName === null) {
+            /**
+             * If we don't know the taxonomy yet, we can't do the validation.
+             * Then, perform this validation on ->executeMutation, retrieving
+             * the taxonomy from the customPostID
+             */
+            return;
+        }
+
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
         if ($taxonomyParentBy !== null) {
-            /** @var string */
-            $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
             if (isset($taxonomyParentBy->{InputProperties::ID})) {
                 /** @var string|int */
                 $taxonomyParentID = $taxonomyParentBy->{InputProperties::ID};
@@ -316,8 +355,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
                     if ($taxonomyParentSlug === null) {
                         $taxonomyData['parent-id'] = null;
                     } else {
-                        /** @var string */
-                        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
+                        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
                         $taxonomyData['parent-id'] = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyParentSlug, $taxonomyName);
                     }
                 }
@@ -381,11 +419,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     ): string|int {
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
-        if ($taxonomyName === '') {
-            $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID) ?? '';
-        }
+        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getUpdateTaxonomyTermData($fieldDataAccessor);
 
         $taxonomyTermID = $this->executeUpdateTaxonomyTerm($taxonomyTermID, $taxonomyName, $taxonomyData);
@@ -427,7 +461,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): string|int {
         /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
+        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
         $taxonomyData = $this->getCreateTaxonomyTermData($fieldDataAccessor);
         $taxonomyTermID = $this->executeCreateTaxonomyTerm($taxonomyName, $taxonomyData);
 
@@ -449,11 +483,7 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
     ): bool {
         /** @var string|int */
         $taxonomyTermID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
-        /** @var string */
-        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY) ?? $this->getTaxonomyName();
-        if ($taxonomyName === '') {
-            $taxonomyName = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermTaxonomy($taxonomyTermID) ?? '';
-        }
+        $taxonomyName = $this->getTaxonomyName($fieldDataAccessor);
 
         $result = $this->executeDeleteTaxonomyTerm($taxonomyTermID, $taxonomyName);
         if ($result === false) {
