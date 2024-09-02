@@ -37,7 +37,7 @@ query GenerateURLInputs(
     @export(as: "urlInputs")
     @remove
   contentMatchRegex: _sprintf(
-    string: "/(?=<!DOCTYPE html>)?<\\s*?html\\b[^>]*>.*?<\\s*?body\\b[^>]*>%s<\\/body\\b[^>]*>.*?<\\/html\\b[^>]*>/sim",
+    string: "/(?:<!DOCTYPE html>)?<\\s*?html\\b[^>]*>.*?<\\s*?body\\b[^>]*>%s<\\/body\\b[^>]*>.*?<\\/html\\b[^>]*>/sim",
     values: [$contentMatchInnerRegex]
   )
     @export(as: "contentMatchRegex")
@@ -51,7 +51,7 @@ query RequestPages
     body
       @remove
     title: _strRegexReplace(
-      searchRegex: "/(?=<!DOCTYPE html>)?<\\s*?html\\b[^>]*>.*?<head\\b[^>]*>.*?<\\s*?title\\b[^>]*>(.*?)<\\/title\\b[^>]*>.*?<\\/head\\b[^>]*>(.*?)<\\/html\\b[^>]*>/sim"
+      searchRegex: "/(?:<!DOCTYPE html>)?<\\s*?html\\b[^>]*>.*?<head\\b[^>]*>.*?<\\s*?title\\b[^>]*>(.*?)<\\/title\\b[^>]*>.*?<\\/head\\b[^>]*>(.*?)<\\/html\\b[^>]*>/sim"
       replaceWith: "$1"
       in: $__body
     )
