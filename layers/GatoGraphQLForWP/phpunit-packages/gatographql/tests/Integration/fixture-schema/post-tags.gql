@@ -114,6 +114,7 @@
 }
 
 fragment PostTagData on PostTag {
+  taxonomy
   count
   description
   id

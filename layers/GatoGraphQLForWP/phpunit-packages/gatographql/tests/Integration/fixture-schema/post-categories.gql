@@ -123,6 +123,7 @@
 }
 
 fragment PostCategoryData on PostCategory {
+  taxonomy
   childCount
   childNames
   count
