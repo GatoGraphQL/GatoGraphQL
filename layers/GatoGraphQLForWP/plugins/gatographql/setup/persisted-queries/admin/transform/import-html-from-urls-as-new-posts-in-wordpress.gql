@@ -21,7 +21,7 @@
 # For instance, if the content is within `<article class="main">...</article>`,
 # we can capture it with:
 #
-#   `{ "contentMatchInnerRegex": "<\\s*?article\\b[^>]*>(.*?)<\\/article\\b[^>]*>" }`
+#   `{ "contentMatchInnerRegex": ".*?<\\s*?article\\b[^>]*>(.*?)<\\/article\\b[^>]*>.*?" }`
 #
 ########################################################################
 query GenerateURLInputs(
