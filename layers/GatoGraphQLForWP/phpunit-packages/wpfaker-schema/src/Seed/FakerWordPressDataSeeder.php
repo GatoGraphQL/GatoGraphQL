@@ -83,6 +83,9 @@ class FakerWordPressDataSeeder
             ]);
         }
 
+        // Initialize mock functions
+        $wpFaker->taxonomy();
+
         $categoryDataEntries = ($data['categories'] ?? []);
         if ($limitCategories = $options['limit-categories'] ?? 0) {
             $categoryDataEntries = array_slice($categoryDataEntries, 0, $limitCategories, true);
