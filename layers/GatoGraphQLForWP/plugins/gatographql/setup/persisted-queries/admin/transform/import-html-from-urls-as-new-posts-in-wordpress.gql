@@ -2,7 +2,7 @@
 # 
 # Variables:
 #   - urls: The URLs of the external pages to import into WordPress
-#   - contentMatchInnerRegex: The regular subexpression to extract the content from the HTML, to target a specific tag inside of <body> (eg: `<div id="container">...</div>`). It must have 1 parenthesis `()`, from which it'll capture the content. It is `(.*?)` by default (i.e. it captures all content in <body>)
+#   - contentMatchInnerRegex: The regular subexpression to extract the content from the HTML, to target a specific tag inside of <body>. It must have 1 parenthesis `()`, from which it'll capture the content. It is `(.*?)` by default (i.e. it captures all content in <body>)
 #
 # *********************************************************************
 #
@@ -14,6 +14,14 @@
 # From each URL, it retrieves the title from <title>...</title>,
 # and the content from <body>...</body>, or customized to some specific
 # inner <div> using the `$contentMatchInnerRegex` variable.
+#
+# With variable `$contentMatchInnerRegex`, we can target what specific
+# HTML tag to capture its content from.
+#
+# For instance, if the content is within `<article class="main">...</article>`,
+# we can capture it with:
+#
+#   `{ "contentMatchInnerRegex": "<\\s*?article\\b[^>]*>(.*?)<\\/article\\b[^>]*>" }`
 #
 ########################################################################
 query GenerateURLInputs(
