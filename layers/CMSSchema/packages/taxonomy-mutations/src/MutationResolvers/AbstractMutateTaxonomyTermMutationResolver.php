@@ -267,16 +267,8 @@ abstract class AbstractMutateTaxonomyTermMutationResolver extends AbstractMutati
             return;
         }
 
-        /** @var string|null */
+        /** @var string */
         $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomyName === null) {
-            /**
-             * If we don't know the taxonomy yet, we can't do the validation.
-             * Then, perform this validation on ->executeMutation, retrieving
-             * the taxonomy from the customPostID
-             */
-            return;
-        }
 
         /** @var stdClass|null */
         $taxonomyParentBy = $fieldDataAccessor->getValue(MutationInputProperties::PARENT_BY);
