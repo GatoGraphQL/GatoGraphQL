@@ -2183,5 +2183,27 @@ class Plugin extends AbstractMainPlugin
                 ]
             ));
         }
+
+        $slug = PluginSetupDataEntrySlugs::PERSISTED_QUERY_IMPORT_HTML_FROM_URLS_AS_NEW_POSTS_IN_WORDPRESS;
+        if (PluginSetupDataHelpers::getPersistedQueryEndpointID($slug, 'any') === null) {
+            wp_insert_post(array_merge(
+                $adminPersistedQueryOptions,
+                [
+                    'post_name' => $slug,
+                    'post_title' => \__('[PRO] Import HTML from URLs as new posts in WordPress', 'gatographql'),
+                    'post_content' => serialize_blocks($this->addInnerContentToBlockAtts([
+                        [
+                            'blockName' => $persistedQueryEndpointGraphiQLBlock->getBlockFullName(),
+                            'attrs' => [
+                                AbstractGraphiQLBlock::ATTRIBUTE_NAME_QUERY => $this->readSetupGraphQLPersistedQueryAndEncodeForOutput(
+                                    'admin/transform/import-html-from-urls-as-new-posts-in-wordpress',
+                                ),
+                            ],
+                        ],
+                        ...$defaultSchemaConfigurationPersistedQueryBlocks,
+                    ])),
+                ]
+            ));
+        }
     }
 }
