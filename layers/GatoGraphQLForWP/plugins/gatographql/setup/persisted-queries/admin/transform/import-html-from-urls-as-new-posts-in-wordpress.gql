@@ -18,8 +18,11 @@
 # With `$contentMatchInnerRegex`, we can target what specific subportion of
 # the `<body>`'s HTML to capture.
 #
-# For instance, if the content is within `<article class="main">...</article>`,
-# we can capture it with:
+# For instance, if the content must be extracted from:
+#
+#   `<article class="main">...</article>`
+#
+# ...we can capture it with:
 #
 #   `{ "contentMatchInnerRegex": ".*?<\\s*?article\\b[^>]*>(.*?)<\\/article\\b[^>]*>.*?" }`
 #
