@@ -299,6 +299,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * [PRO] Import post from WordPress RSS feed and rewrite its content with ChatGPT (#2818)
   * [PRO] Import new posts from WordPress RSS feed (#2819)
   * [PRO] Import HTML from URLs as new posts in WordPress (#2822)
+* Mutations for post tag and post categories: Support any taxonomy (in addition to `post_tag` and `category`) (#2823)
 * Fixed: Add `featuredImage` field on `GenericCustomPost` (#2806)
 * Fixed: On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content (#2814)
 * [PRO] Updated mapped WordPress hooks for automation
