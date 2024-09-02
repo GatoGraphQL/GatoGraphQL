@@ -61,6 +61,12 @@ class WPFakerFixtureQueryExecutionGraphQLServerTest extends AbstractWPFakerFixtu
                 \PoPCMSSchema\CustomPosts\Module::class => [
                     \PoPCMSSchema\CustomPosts\Environment::TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA => false,
                 ],
+                \PoPCMSSchema\Categories\Module::class => [
+                    \PoPCMSSchema\Categories\Environment::QUERYABLE_CATEGORY_TAXONOMIES => ['category'],
+                ],
+                \PoPCMSSchema\Tags\Module::class => [
+                    \PoPCMSSchema\Tags\Environment::QUERYABLE_TAG_TAXONOMIES => ['post_tag'],
+                ],
             ]
         ];
     }
