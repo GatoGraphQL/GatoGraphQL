@@ -22,7 +22,7 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     abstract protected function getTagTaxonomyName(): string;
-    
+
     /**
      * @return string[]
      */

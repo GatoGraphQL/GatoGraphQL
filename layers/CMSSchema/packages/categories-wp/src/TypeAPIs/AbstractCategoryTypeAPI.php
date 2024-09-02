@@ -65,7 +65,7 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
     }
 
     abstract protected function getCategoryTaxonomyName(): string;
-    
+
     /**
      * @return string[]
      */
