@@ -46,12 +46,12 @@ trait PayloadableTaxonomyMutationResolverTrait
             ] => new LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new TaxonomyDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
+            // [
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E5,
+            // ] => new TaxonomyDoesNotExistErrorPayload(
+            //     $feedbackItemResolution->getMessage(),
+            // ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
