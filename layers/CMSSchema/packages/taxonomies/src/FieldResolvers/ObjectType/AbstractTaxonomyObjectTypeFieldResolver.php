@@ -11,7 +11,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 
-abstract class AbstractGenericTaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
+abstract class AbstractTaxonomyObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
