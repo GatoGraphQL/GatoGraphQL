@@ -59,6 +59,14 @@ class PostCategoryTypeAPI extends AbstractCategoryTypeAPI implements PostCategor
     }
 
     /**
+     * @return string[]
+     */
+    protected function getCategoryTaxonomyNames(): array
+    {
+        return $this->getRegisteredPostCategoryTaxonomyNames();
+    }
+
+    /**
      * Return all the category taxonomies registered for the "post"
      * custom post type, that have also been selected as "queryable"
      * in the plugin settings.

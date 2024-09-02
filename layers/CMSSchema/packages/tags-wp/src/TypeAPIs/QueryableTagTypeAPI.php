@@ -9,7 +9,6 @@ use PoPCMSSchema\Tags\Module;
 use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoP\ComponentModel\App;
-use WP_Term;
 
 class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagTypeAPIInterface
 {
@@ -24,86 +23,13 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
         return '';
     }
 
-    public function getTag(string|int $tagID): ?object
-    {
-        $tag = parent::getTag($tagID);
-        if ($tag === null) {
-            return null;
-        }
-        /** @var WP_Term $tag */
-        if (!$this->isQueryableTagTaxonomy($tag)) {
-            return null;
-        }
-        return $tag;
-    }
-
-    protected function isQueryableTagTaxonomy(WP_Term $taxonomyTerm): bool
+    /**
+     * @return string[]
+     */
+    protected function getTagTaxonomyNames(): array
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return in_array($taxonomyTerm->taxonomy, $moduleConfiguration->getQueryableTagTaxonomies());
-    }
-
-    /**
-     * Indicates if the passed object is of type Tag
-     */
-    public function isInstanceOfTagType(object $object): bool
-    {
-        if (!$this->isInstanceOfTaxonomyTermType($object)) {
-            return false;
-        }
-        /** @var WP_Term $object */
-        return $this->isQueryableTagTaxonomy($object);
-    }
-
-    protected function getTaxonomyTermFromObjectOrID(
-        string|int|WP_Term $taxonomyTermObjectOrID,
-        string $taxonomy = '',
-    ): ?WP_Term {
-        $taxonomyTerm = parent::getTaxonomyTermFromObjectOrID(
-            $taxonomyTermObjectOrID,
-            $taxonomy,
-        );
-        if ($taxonomyTerm === null) {
-            return $taxonomyTerm;
-        }
-        /** @var WP_Term $taxonomyTerm */
-        return $this->isQueryableTagTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
-    }
-
-    public function getTagByName(string $tagName): ?object
-    {
-        $tag = parent::getTagByName($tagName);
-        if ($tag === null) {
-            return null;
-        }
-        /** @var WP_Term $tag */
-        return $this->isQueryableTagTaxonomy($tag) ? $tag : null;
-    }
-
-    /**
-     * Replace the single taxonomy with the list of them.
-     *
-     * @return array<string,mixed>
-     * @param array<string,mixed> $query
-     * @param array<string,mixed> $options
-     */
-    protected function convertTaxonomyTermsQuery(array $query, array $options = []): array
-    {
-        /**
-         * Allow to set the taxonomy in advance via a fieldArg.
-         * Eg: { customPosts { tags(taxonomy: nav_menu) { id } }
-         */
-        if (!isset($query['taxonomy'])) {
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            $query['taxonomy'] = $moduleConfiguration->getQueryableTagTaxonomies();
-        }
-        $query = parent::convertTaxonomyTermsQuery($query, $options);
-        return App::applyFilters(
-            self::HOOK_QUERY,
-            $query,
-            $options
-        );
+        return $moduleConfiguration->getQueryableTagTaxonomies();
     }
 }

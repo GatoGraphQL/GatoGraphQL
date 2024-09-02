@@ -59,6 +59,14 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
     }
 
     /**
+     * @return string[]
+     */
+    protected function getTagTaxonomyNames(): array
+    {
+        return $this->getRegisteredPostTagTaxonomyNames();
+    }
+
+    /**
      * Return all the tag taxonomies registered for the "post"
      * custom post type, that have also been selected as "queryable"
      * in the plugin settings.

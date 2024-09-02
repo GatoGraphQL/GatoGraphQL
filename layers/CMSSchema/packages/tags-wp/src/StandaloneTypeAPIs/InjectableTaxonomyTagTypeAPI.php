@@ -17,4 +17,14 @@ final class InjectableTaxonomyTagTypeAPI extends AbstractTagTypeAPI
     {
         return $this->tagTaxonomy;
     }
+
+    /**
+     * @return string[]
+     */
+    protected function getTagTaxonomyNames(): array
+    {
+        return [
+            $this->tagTaxonomy,
+        ];
+    }
 }
