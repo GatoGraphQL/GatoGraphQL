@@ -2,7 +2,7 @@
 # 
 # Variables:
 #   - urls: The URLs of the external pages to import into WordPress
-#   - contentRegex: The regular expression to extract the content from the HTML. It extracts all content in <body>...</body> by default
+#   - contentMatchRegex: The regular subexpression to extract the content from the HTML, to target a specific tag inside of <body> (eg: `<div id="container">...</div>`). It must have 1 parenthesis `()`, from which it'll capture the content. It is `(.*?)` by default (i.e. it captures all content in <body>)
 #
 # *********************************************************************
 #
@@ -13,7 +13,7 @@
 #
 # From each URL, it retrieves the title from <title>...</title>,
 # and the content from <body>...</body>, or customized to some specific
-# inner <div> using the `$contentRegex` variable.
+# inner <div> using the `$contentMatchRegex` variable.
 #
 ########################################################################
 query GenerateURLInputs(
