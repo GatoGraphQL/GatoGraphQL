@@ -48,6 +48,7 @@ The same behavior applies for all fields that accept the `filter.ids` input:
 - Use `isGutenbergEditorEnabled` in predefined persisted queries ([#2802](https://github.com/GatoGraphQL/GatoGraphQL/pull/2802))
 - Added mutations to assign custom tags/categories to custom posts ([#2803](https://github.com/GatoGraphQL/GatoGraphQL/pull/2803))
 - Support additional taxonomies for mutations on post tags/categories (not only `post_tag` and `category`) ([#2823](https://github.com/GatoGraphQL/GatoGraphQL/pull/2823))
+- Added taxonomy field also to `PostTag` and `PostCategory` types ([#2824](https://github.com/GatoGraphQL/GatoGraphQL/pull/2824))
 
 ### Added Settings option to enable/disable logs ([#2813](https://github.com/GatoGraphQL/GatoGraphQL/pull/2813))
 
