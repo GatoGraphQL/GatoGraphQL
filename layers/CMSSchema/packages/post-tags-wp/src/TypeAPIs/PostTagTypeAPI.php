@@ -7,7 +7,10 @@ namespace PoPCMSSchema\PostTagsWP\TypeAPIs;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPCMSSchema\TagsWP\TypeAPIs\AbstractTagTypeAPI;
+use PoPCMSSchema\Tags\Module;
+use PoPCMSSchema\Tags\ModuleConfiguration;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\App;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -63,7 +66,14 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
      */
     protected function getTagTaxonomyNames(): array
     {
-        return $this->getRegisteredPostTagTaxonomyNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $queryableTagTaxonomies = $moduleConfiguration->getQueryableTagTaxonomies();
+
+        return array_values(array_intersect(
+            $this->getRegisteredPostTagTaxonomyNames(),
+            $queryableTagTaxonomies
+        ));
     }
 
     /**

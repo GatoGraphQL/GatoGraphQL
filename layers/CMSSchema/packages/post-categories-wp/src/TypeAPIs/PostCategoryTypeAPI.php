@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostCategoriesWP\TypeAPIs;
 
 use PoPCMSSchema\CategoriesWP\TypeAPIs\AbstractCategoryTypeAPI;
+use PoPCMSSchema\Categories\Module;
+use PoPCMSSchema\Categories\ModuleConfiguration;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoP\ComponentModel\App;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -63,7 +66,14 @@ class PostCategoryTypeAPI extends AbstractCategoryTypeAPI implements PostCategor
      */
     protected function getCategoryTaxonomyNames(): array
     {
-        return $this->getRegisteredPostCategoryTaxonomyNames();
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        $queryableCategoryTaxonomies = $moduleConfiguration->getQueryableCategoryTaxonomies();
+
+        return array_values(array_intersect(
+            $this->getRegisteredPostCategoryTaxonomyNames(),
+            $queryableCategoryTaxonomies
+        ));
     }
 
     /**
