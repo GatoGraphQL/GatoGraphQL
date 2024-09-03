@@ -22,6 +22,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
      *
+     * @param array<string|int> $taxonomyTermIDs
      * @return array<string,array<string|int>>|null
      */
     protected function getTaxonomyToTaxonomyTermsByID(
@@ -84,6 +85,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
      *
+     * @param string[] $taxonomyTermSlugs
      * @return array<string,array<string|int>>|null
      */
     protected function getTaxonomyToTaxonomyTermsBySlug(
@@ -180,7 +182,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
                     $fieldDataAccessor->getField(),
                 )
             );
-            return null;
+            return;
         }
 
         $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
