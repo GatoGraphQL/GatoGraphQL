@@ -6,15 +6,9 @@ namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\MutationResolvers\SetTagsOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\TagMutations\ObjectModels\TagTermDoesNotExistErrorPayload;
-use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
-use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
-use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -131,6 +125,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         ErrorPayloadInterface $errorPayload,
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
-        return $this->createSetTagsOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback) ?? $errorPayload;
+        return $this->createSetTagsOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
+            ?? $errorPayload;
     }
 }
