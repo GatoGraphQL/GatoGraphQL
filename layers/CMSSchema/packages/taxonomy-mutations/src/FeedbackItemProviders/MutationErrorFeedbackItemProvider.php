@@ -57,7 +57,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E9 => $this->__('On taxonomy \'%s\', there is no term with slug \'%s\'', 'taxonomy-mutations'),
             self::E10 => $this->__('Your user doesn\'t have permission to assign terms to taxonomy \'%s\'.', 'taxonomy-mutations'),
             self::E11 => $this->__('There is no custom post type registered for ID \'%s\'.', 'taxonomy-mutations'),
-            self::E12 => $this->__('Taxonomy \'%s\' (for terms with IDs \'%s\') is not valid for custom post type \'%s\'', 'taxonomy-mutations'),
+            self::E12 => $this->__('Taxonomy \'%s\' (for terms with ID(s) \'%s\') is not valid for custom post type \'%s\'', 'taxonomy-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }
