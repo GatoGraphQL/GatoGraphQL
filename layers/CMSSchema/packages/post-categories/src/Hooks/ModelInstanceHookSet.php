@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\Hooks;
 
-use PoP\Root\App;
-use PoP\ComponentModel\ModelInstance\ModelInstance;
-use PoP\Root\Hooks\AbstractHookSet;
+use PoPCMSSchema\Categories\TypeAPIs\UniversalCategoryTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\Routing\RequestNature;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;
+use PoP\ComponentModel\ModelInstance\ModelInstance;
+use PoP\Root\App;
+use PoP\Root\Hooks\AbstractHookSet;
 
 class ModelInstanceHookSet extends AbstractHookSet
 {
@@ -17,6 +18,7 @@ class ModelInstanceHookSet extends AbstractHookSet
 
     private ?PostTypeAPIInterface $postTypeAPI = null;
     private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
+    private ?UniversalCategoryTypeAPIInterface $universalCategoryTypeAPI = null;
 
     final public function setPostTypeAPI(PostTypeAPIInterface $postTypeAPI): void
     {
@@ -43,6 +45,19 @@ class ModelInstanceHookSet extends AbstractHookSet
             $this->postCategoryTypeAPI = $postCategoryTypeAPI;
         }
         return $this->postCategoryTypeAPI;
+    }
+    final public function setUniversalCategoryTypeAPI(UniversalCategoryTypeAPIInterface $universalCategoryTypeAPI): void
+    {
+        $this->universalCategoryTypeAPI = $universalCategoryTypeAPI;
+    }
+    final protected function getUniversalCategoryTypeAPI(): UniversalCategoryTypeAPIInterface
+    {
+        if ($this->universalCategoryTypeAPI === null) {
+            /** @var UniversalCategoryTypeAPIInterface */
+            $universalCategoryTypeAPI = $this->instanceManager->getInstance(UniversalCategoryTypeAPIInterface::class);
+            $this->universalCategoryTypeAPI = $universalCategoryTypeAPI;
+        }
+        return $this->universalCategoryTypeAPI;
     }
 
     protected function init(): void
@@ -77,12 +92,13 @@ class ModelInstanceHookSet extends AbstractHookSet
                 )
             ) {
                 $postCategoryTypeAPI = $this->getPostCategoryTypeAPI();
+                $universalCategoryTypeAPI = $this->getUniversalCategoryTypeAPI();
                 $postID = App::getState(['routing', 'queried-object-id']);
                 $categories = [];
                 foreach ($postCategoryTypeAPI->getCustomPostCategories($postID) as $cat) {
                     $categoryID = is_object($cat) ? $postCategoryTypeAPI->getCategoryID($cat) : $cat;
                     /** @var string */
-                    $slug = $postCategoryTypeAPI->getCategorySlug($cat);
+                    $slug = $universalCategoryTypeAPI->getCategorySlug($cat);
                     $categories[] = $slug . $categoryID;
                 }
                 $elements[] = $this->__('categories:', 'post-categories') . implode('.', $categories);

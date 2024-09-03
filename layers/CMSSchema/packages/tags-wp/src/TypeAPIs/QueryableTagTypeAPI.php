@@ -15,15 +15,6 @@ class QueryableTagTypeAPI extends AbstractTagTypeAPI implements QueryableTagType
     public const HOOK_QUERY = __CLASS__ . ':query';
 
     /**
-     * There will be more than 1 taxonomies, but this value
-     * will get replaced in the query below
-     */
-    protected function getTagTaxonomyName(): string
-    {
-        return '';
-    }
-
-    /**
      * @return string[]
      */
     protected function getTagTaxonomyNames(): array

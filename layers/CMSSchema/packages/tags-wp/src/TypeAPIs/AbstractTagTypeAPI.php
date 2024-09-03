@@ -21,8 +21,6 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
 
-    abstract protected function getTagTaxonomyName(): string;
-
     /**
      * @return string[]
      */
@@ -50,15 +48,6 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         return false;
     }
 
-    protected function getTagFromObjectOrID(string|int|object $tagObjectOrID): ?WP_Term
-    {
-        /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermFromObjectOrID(
-            $tagObjectOrID,
-            $this->getTagTaxonomyName(),
-        );
-    }
-
     protected function getTaxonomyTermFromObjectOrID(
         string|int|WP_Term $taxonomyTermObjectOrID,
         string $taxonomy = '',
@@ -74,21 +63,9 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
         return $this->isTagTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
     }
 
-    public function getTagName(string|int|object $tagObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermName(
-            $tagObjectOrID,
-            $this->getTagTaxonomyName(),
-        );
-    }
-
     public function getTag(string|int $tagID): ?object
     {
-        $tag = $this->getTaxonomyTerm(
-            $tagID,
-            $this->getTagTaxonomyName(),
-        );
+        $tag = $this->getTaxonomyTerm($tagID);
         if ($tag === null) {
             return null;
         }
@@ -211,51 +188,6 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
     final public function convertTagsQuery(array $query, array $options = []): array
     {
         return $this->convertTaxonomyTermsQuery($query, $options);
-    }
-
-    public function getTagURL(string|int|object $tagObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermURL(
-            $tagObjectOrID,
-            $this->getTagTaxonomyName(),
-        );
-    }
-
-    public function getTagURLPath(string|int|object $tagObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermURLPath(
-            $tagObjectOrID,
-            $this->getTagTaxonomyName(),
-        );
-    }
-
-    public function getTagSlug(string|int|object $tagObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermSlug(
-            $tagObjectOrID,
-            $this->getTagTaxonomyName(),
-        );
-    }
-
-    public function getTagDescription(string|int|object $tagObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermDescription(
-            $tagObjectOrID,
-            $this->getTagTaxonomyName(),
-        );
-    }
-
-    public function getTagItemCount(string|int|object $tagObjectOrID): ?int
-    {
-        /** @var string|int|WP_Term $tagObjectOrID */
-        return $this->getTaxonomyTermItemCount(
-            $tagObjectOrID,
-            $this->getTagTaxonomyName(),
-        );
     }
 
     public function getTagID(object $tag): string|int
