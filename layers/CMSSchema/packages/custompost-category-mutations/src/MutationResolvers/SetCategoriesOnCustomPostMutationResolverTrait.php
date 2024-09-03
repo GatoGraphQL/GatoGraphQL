@@ -115,7 +115,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
      * Retrieve the taxonomy from the queried object's CPT,
      * which works as long as it has only 1 category taxonomy registered.
      */
-    protected function getCategoryTaxonomyName(
+    protected function getCategoryTaxonomyToTaxonomyTermsBySlug(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {

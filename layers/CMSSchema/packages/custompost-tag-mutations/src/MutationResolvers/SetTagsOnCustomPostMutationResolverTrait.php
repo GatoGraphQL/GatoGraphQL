@@ -113,9 +113,9 @@ trait SetTagsOnCustomPostMutationResolverTrait
 
     /**
      * Retrieve the taxonomy from the queried object's CPT,
-     * which works as long as it has only 1 category taxonomy registered.
+     * which works as long as it has only 1 tag taxonomy registered.
      */
-    protected function getTagTaxonomyName(
+    protected function getTagTaxonomyToTaxonomyTermsBySlug(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {

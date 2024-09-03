@@ -118,7 +118,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         /**
          * Validate the taxonomy is valid
          */
-        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $taxonomyName = $this->getCategoryTaxonomyToTaxonomyTermsBySlug($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
             return null;
         }

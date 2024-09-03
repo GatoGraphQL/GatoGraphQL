@@ -117,7 +117,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         /**
          * Validate the taxonomy is valid
          */
-        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $taxonomyName = $this->getTagTaxonomyToTaxonomyTermsBySlug($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
             return null;
         }
