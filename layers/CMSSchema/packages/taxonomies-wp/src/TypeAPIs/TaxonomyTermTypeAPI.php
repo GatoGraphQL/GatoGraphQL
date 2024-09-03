@@ -38,12 +38,15 @@ class TaxonomyTermTypeAPI implements TaxonomyTermTypeAPIInterface
         if ($taxonomyTerm === null) {
             return null;
         }
+
+        /**
+         * Must cast the ID to integer, to avoid a string "34"
+         * from being inserted as a new term.
+         */
         if (is_array($taxonomyTerm)) {
-            /** @var string|int */
-            return $taxonomyTerm['term_id'];
+            return (int) $taxonomyTerm['term_id'];
         }
-        /** @var string|int */
-        return $taxonomyTerm;
+        return (int) $taxonomyTerm;
     }
 
     public function getTaxonomyTermTaxonomy(int|string $taxonomyTermID): string|null
