@@ -186,18 +186,17 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         }
 
         $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
-        if (in_array($taxonomyName, $taxonomyNames)) {
-            return;
+        if (!in_array($taxonomyName, $taxonomyNames)) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    $this->getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
+                        $taxonomyName,
+                        $customPostType,
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
         }
-        $objectTypeFieldResolutionFeedbackStore->addError(
-            new ObjectTypeFieldResolutionFeedback(
-                $this->getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
-                    $taxonomyName,
-                    $customPostType,
-                ),
-                $fieldDataAccessor->getField(),
-            )
-        );
     }
 
     protected function getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
