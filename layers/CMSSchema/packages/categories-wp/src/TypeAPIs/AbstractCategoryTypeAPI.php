@@ -256,15 +256,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         );
     }
 
-    /**
-     * @return array<string|int>|null
-     */
-    public function getCategoryChildIDs(string|int|object $catObjectOrID): ?array
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermChildIDs($this->getCategoryTaxonomyName(), $catObjectOrID);
-    }
-
     public function getCategoryDescription(string|int|object $catObjectOrID): ?string
     {
         /** @var string|int|WP_Term $catObjectOrID */
