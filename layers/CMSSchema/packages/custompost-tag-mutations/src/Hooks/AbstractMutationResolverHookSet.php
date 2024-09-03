@@ -123,7 +123,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         /**
          * Validate the taxonomy is valid
          */
-        $taxonomyName = $this->getTagTaxonomyToTaxonomyTermsBySlug($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $taxonomyName = $this->getTagTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
             return;
         }

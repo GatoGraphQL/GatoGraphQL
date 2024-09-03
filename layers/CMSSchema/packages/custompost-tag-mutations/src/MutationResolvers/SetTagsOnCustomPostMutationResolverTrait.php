@@ -117,7 +117,7 @@ trait SetTagsOnCustomPostMutationResolverTrait
      *
      * @return array<string,array<string|int>>|null
      */
-    protected function getTagTaxonomyToTaxonomyTermsBySlug(
+    protected function getTagTaxonomyToTaxonomyTerms(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {

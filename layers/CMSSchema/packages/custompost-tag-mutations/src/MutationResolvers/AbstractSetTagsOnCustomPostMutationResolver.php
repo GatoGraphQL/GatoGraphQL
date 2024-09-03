@@ -114,26 +114,18 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             return $customPostID;
         }
 
-        /**
-         * Validate the taxonomy is valid
-         */
-        $taxonomyName = $this->getTagTaxonomyToTaxonomyTermsBySlug($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($taxonomyName === null) {
-            return null;
-        }
-
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        $tagTaxonomyToTaxonomyTerms = null;
 
         /** @var stdClass */
         $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
         if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsByIDExist(
-                $taxonomyName,
-                $tagIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
+            // If `null` there was an error (already added to FeedbackStore)
+            $tagTaxonomyToTaxonomyTerms = $this->getTagTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+            if ($tagTaxonomyToTaxonomyTerms === null) {
+                return null;
+            }
         } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
             $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
             $this->validateTagsBySlugExist(
@@ -142,6 +134,11 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
+        }
+
+        // If `null` there was an error (already added to FeedbackStore)
+        if ($tagTaxonomyToTaxonomyTerms === null) {
+            return null;
         }
 
         $this->validateCanLoggedInUserAssignTermsToTaxonomy(
