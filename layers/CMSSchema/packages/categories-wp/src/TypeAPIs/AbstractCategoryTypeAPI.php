@@ -178,24 +178,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         return $this->convertTaxonomyTermsQuery($query, $options);
     }
 
-    public function getCategoryURL(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermURL(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryURLPath(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermURLPath(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
     protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
     {
         /** @var string|int|WP_Term $catObjectOrID */
@@ -218,59 +200,5 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         }
         /** @var WP_Term $taxonomyTerm */
         return $this->isCategoryTaxonomy($taxonomyTerm) ? $taxonomyTerm : null;
-    }
-
-    public function getCategorySlug(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermSlug(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategorySlugPath(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermSlugPath(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryName(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermName(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermParentID(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryDescription(string|int|object $catObjectOrID): ?string
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermDescription(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
-    public function getCategoryItemCount(string|int|object $catObjectOrID): ?int
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermItemCount(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
     }
 }

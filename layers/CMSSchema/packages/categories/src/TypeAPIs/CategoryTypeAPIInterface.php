@@ -41,12 +41,4 @@ interface CategoryTypeAPIInterface extends TaxonomyTypeAPIInterface
      * @param array<string,mixed> $options
      */
     public function getCustomPostCategoryCount(string|int|object $customPostObjectOrID, array $query, array $options = []): ?int;
-    public function getCategorySlug(string|int|object $catObjectOrID): ?string;
-    public function getCategorySlugPath(string|int|object $catObjectOrID): ?string;
-    public function getCategoryName(string|int|object $catObjectOrID): ?string;
-    public function getCategoryParentID(string|int|object $catObjectOrID): string|int|null;
-    public function getCategoryURL(string|int|object $catObjectOrID): ?string;
-    public function getCategoryURLPath(string|int|object $catObjectOrID): ?string;
-    public function getCategoryDescription(string|int|object $catObjectOrID): ?string;
-    public function getCategoryItemCount(string|int|object $catObjectOrID): ?int;
 }
