@@ -35,12 +35,12 @@ trait PayloadableCategoryMutationResolverTrait
             ] => new UserIsNotLoggedInErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new CategoryTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
+            // [
+            //     MutationErrorFeedbackItemProvider::class,
+            //     MutationErrorFeedbackItemProvider::E5,
+            // ] => new TaxonomyDoesNotExistErrorPayload(
+            //     $feedbackItemResolution->getMessage(),
+            // ),
             [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E6,
