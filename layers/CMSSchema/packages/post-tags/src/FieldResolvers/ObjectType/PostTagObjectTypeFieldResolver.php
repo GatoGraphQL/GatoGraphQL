@@ -4,17 +4,20 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\PostTags\TypeResolvers\EnumType\PostTagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\Tags\FieldResolvers\ObjectType\AbstractTagObjectTypeFieldResolver;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
 {
     private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
     private ?PostTagObjectTypeResolver $postTagObjectTypeResolver = null;
+    private ?PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
     {
@@ -42,6 +45,19 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
         }
         return $this->postTagObjectTypeResolver;
     }
+    final public function setPostTagTaxonomyEnumStringScalarTypeResolver(PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getPostTagTaxonomyEnumStringScalarTypeResolver(): PostTagTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->postTagTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var PostTagTaxonomyEnumStringScalarTypeResolver */
+            $postTagTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(PostTagTaxonomyEnumStringScalarTypeResolver::class);
+            $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->postTagTaxonomyEnumStringScalarTypeResolver;
+    }
 
     public function getTagTypeAPI(): TagTypeAPIInterface
     {
@@ -51,6 +67,11 @@ class PostTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
     public function getTagTypeResolver(): TagObjectTypeResolverInterface
     {
         return $this->getPostTagObjectTypeResolver();
+    }
+
+    protected function getTaxonomyFieldTypeResolver(): ConcreteTypeResolverInterface
+    {
+        return $this->getPostTagTaxonomyEnumStringScalarTypeResolver();
     }
 
     /**

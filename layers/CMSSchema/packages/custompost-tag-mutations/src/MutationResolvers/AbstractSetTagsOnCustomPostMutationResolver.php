@@ -10,6 +10,7 @@ use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -18,22 +19,23 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
-use stdClass;
 
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
-    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMutationResolverTrait {
-        CreateOrUpdateCustomPostMutationResolverTrait::validateUserIsLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait;
-        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMutationResolverTrait;
-        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait;
+    use CreateOrUpdateCustomPostMutationResolverTrait, MutateTaxonomyTermMutationResolverTrait, SetTagsOnCustomPostMutationResolverTrait {
+        CreateOrUpdateCustomPostMutationResolverTrait::validateUserIsLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait, SetTagsOnCustomPostMutationResolverTrait;
+        CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMutationResolverTrait, SetTagsOnCustomPostMutationResolverTrait;
+        CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait, SetTagsOnCustomPostMutationResolverTrait;
+        SetTagsOnCustomPostMutationResolverTrait::getTaxonomyTermDoesNotExistError insteadof MutateTaxonomyTermMutationResolverTrait;
+        SetTagsOnCustomPostMutationResolverTrait::getTaxonomyTermBySlugDoesNotExistError insteadof MutateTaxonomyTermMutationResolverTrait;
     }
-    use SetTagsOnCustomPostMutationResolverTrait;
 
     private ?NameResolverInterface $nameResolver = null;
     private ?UserRoleTypeAPIInterface $userRoleTypeAPI = null;
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
     private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
+    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -100,6 +102,19 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
         return $this->customPostTagTypeMutationAPI;
     }
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    {
+        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+    }
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        if ($this->taxonomyTermTypeAPI === null) {
+            /** @var TaxonomyTermTypeAPIInterface */
+            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+        }
+        return $this->taxonomyTermTypeAPI;
+    }
 
     /**
      * @throws AbstractException In case of error
@@ -109,44 +124,13 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        /** @var stdClass|null */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if ($tagsBy === null || ((array) $tagsBy) === []) {
-            return $customPostID;
-        }
-
-        /**
-         * Validate the taxonomy is valid
-         */
-        $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($taxonomyName === null) {
-            return null;
-        }
+        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        /** @var stdClass */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsByIDExist(
-                $taxonomyName,
-                $tagIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
-            $this->validateTagsBySlugExist(
-                $taxonomyName,
-                $tagSlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
-            $taxonomyName,
+        $this->setTagsOnCustomPostOrAddError(
+            $customPostID,
+            $append,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -155,26 +139,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             return null;
         }
 
-        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            /** @var array<string|int> */
-            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
-                $taxonomyName,
-                $customPostID,
-                $tagIDs,
-                $append
-            );
-        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            /** @var string[] */
-            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostTagTypeMutationAPI()->setTagsBySlug(
-                $taxonomyName,
-                $customPostID,
-                $tagSlugs,
-                $append
-            );
-        }
         return $customPostID;
     }
 
@@ -210,23 +174,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
 
         $this->validateCanLoggedInUserEditCustomPost(
-            $customPostID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
-
-    /**
-     * Retrieve the taxonomy from the queried object's CPT,
-     * which works as long as it has only 1 tag taxonomy registered.
-     */
-    protected function getTagTaxonomyName(
-        int|string $customPostID,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?string {
-        return $this->getTaxonomyName(
-            false,
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

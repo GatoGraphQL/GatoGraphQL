@@ -5,16 +5,19 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Categories\FieldResolvers\ObjectType\AbstractCategoryObjectTypeFieldResolver;
-use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
-use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
+use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
+use PoPCMSSchema\Categories\TypeResolvers\ObjectType\GenericCategoryObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFieldResolver
 {
     private ?QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI = null;
     private ?GenericCategoryObjectTypeResolver $genericCategoryObjectTypeResolver = null;
+    private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setQueryableCategoryTypeAPI(QueryableCategoryTypeAPIInterface $queryableCategoryTypeAPI): void
     {
@@ -42,6 +45,19 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
         }
         return $this->genericCategoryObjectTypeResolver;
     }
+    final public function setCategoryTaxonomyEnumStringScalarTypeResolver(CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getCategoryTaxonomyEnumStringScalarTypeResolver(): CategoryTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->categoryTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var CategoryTaxonomyEnumStringScalarTypeResolver */
+            $categoryTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(CategoryTaxonomyEnumStringScalarTypeResolver::class);
+            $this->categoryTaxonomyEnumStringScalarTypeResolver = $categoryTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->categoryTaxonomyEnumStringScalarTypeResolver;
+    }
 
     public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
@@ -51,6 +67,11 @@ class GenericCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeF
     public function getCategoryTypeResolver(): CategoryObjectTypeResolverInterface
     {
         return $this->getGenericCategoryObjectTypeResolver();
+    }
+
+    protected function getTaxonomyFieldTypeResolver(): ConcreteTypeResolverInterface
+    {
+        return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
     }
 
     /**

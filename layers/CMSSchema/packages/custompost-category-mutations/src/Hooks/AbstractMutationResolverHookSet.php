@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostCategoryMutations\Hooks;
 
-use PoPCMSSchema\CategoryMutations\ObjectModels\CategoryTermDoesNotExistErrorPayload;
 use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers\SetCategoriesOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\CustomPostCategoryMutations\TypeAPIs\CustomPostCategoryTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPostMutations\Constants\CustomPostCRUDHookNames;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
-use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
-use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
-use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -28,6 +24,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostCategoryTypeMutationAPIInterface $customPostCategoryTypeMutationAPI = null;
+    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final public function setCustomPostTypeAPI(CustomPostTypeAPIInterface $customPostTypeAPI): void
     {
@@ -54,6 +51,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             $this->customPostCategoryTypeMutationAPI = $customPostCategoryTypeMutationAPI;
         }
         return $this->customPostCategoryTypeMutationAPI;
+    }
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    {
+        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+    }
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        if ($this->taxonomyTermTypeAPI === null) {
+            /** @var TaxonomyTermTypeAPIInterface */
+            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+        }
+        return $this->taxonomyTermTypeAPI;
     }
 
     protected function init(): void
@@ -119,136 +129,19 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        /**
-         * Validate the taxonomy is valid
-         */
-        $taxonomyName = $this->getCategoryTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($taxonomyName === null) {
-            return;
-        }
-
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        /**
-         * Validate the categories are valid for that taxonomy
-         *
-         * @var stdClass
-         */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->validateCategoriesByIDExist(
-                $taxonomyName,
-                $customPostCategoryIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->validateCategoriesBySlugExist(
-                $taxonomyName,
-                $customPostCategorySlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            /** @var array<string|int> */
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
-                $taxonomyName,
-                $customPostID,
-                $customPostCategoryIDs,
-                false
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            /** @var string[] */
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug(
-                $taxonomyName,
-                $customPostID,
-                $customPostCategorySlugs,
-                false
-            );
-        }
+        $this->setCategoriesOnCustomPostOrAddError(
+            $customPostID,
+            false,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ErrorPayloadInterface $errorPayload,
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
-        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match (
-            [
-            $feedbackItemResolution->getFeedbackProviderServiceClass(),
-            $feedbackItemResolution->getCode()
-            ]
-        ) {
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new CategoryTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new CategoryTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E10,
-            ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E11,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E4,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E12,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            default => $errorPayload,
-        };
-    }
-
-    /**
-     * Retrieve the taxonomy from the queried object's CPT,
-     * which works as long as it has only 1 category taxonomy registered.
-     */
-    protected function getCategoryTaxonomyName(
-        int|string $customPostID,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?string {
-        return $this->getTaxonomyName(
-            true,
-            $customPostID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
+        return $this->createSetCategoriesOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
+            ?? $errorPayload;
     }
 }
