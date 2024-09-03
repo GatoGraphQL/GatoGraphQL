@@ -14,6 +14,7 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use stdClass;
 
 trait SetTagsOnCustomPostMutationResolverTrait
 {
@@ -109,6 +110,55 @@ trait SetTagsOnCustomPostMutationResolverTrait
                 $customPostType,
             ]
         );
+    }
+
+    protected function setTagsOnCustomPostOrAddError(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /** @var stdClass|null */
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if ($tagsBy === null || ((array) $tagsBy) === []) {
+            return;
+        }
+
+        // If `null` there was an error (already added to FeedbackStore)
+        $tagTaxonomyToTaxonomyTerms = $this->getTagTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($tagTaxonomyToTaxonomyTerms === null) {
+            return;
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        foreach ($tagTaxonomyToTaxonomyTerms as $taxonomyName => $tagIDs) {
+            $this->validateCanLoggedInUserAssignTermsToTaxonomy(
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+
+            $this->validateTaxonomyIsRegisteredForCustomPost(
+                $customPostID,
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
+        foreach ($tagTaxonomyToTaxonomyTerms as $taxonomyName => $tagIDs) {
+            $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
+                $taxonomyName,
+                $customPostID,
+                $tagIDs,
+                $append
+            );
+        }
     }
 
     /**

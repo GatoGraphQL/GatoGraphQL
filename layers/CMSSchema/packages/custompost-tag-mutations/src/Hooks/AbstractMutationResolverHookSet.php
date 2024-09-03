@@ -120,64 +120,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        /**
-         * Validate the taxonomy is valid
-         */
-        $taxonomyName = $this->getTagTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($taxonomyName === null) {
-            return;
-        }
-
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        /**
-         * Validate the tags are valid for that taxonomy
-         *
-         * @var stdClass
-         */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->validateTagsByIDExist(
-                $taxonomyName,
-                $tagIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
-            $this->validateTagsBySlugExist(
-                $taxonomyName,
-                $tagSlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            /** @var array<string|int> */
-            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
-                $taxonomyName,
-                $customPostID,
-                $tagIDs,
-                false
-            );
-        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            /** @var string[] */
-            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostTagTypeMutationAPI()->setTagsBySlug(
-                $taxonomyName,
-                $customPostID,
-                $tagSlugs,
-                false
-            );
-        }
+        $this->setTagsOnCustomPostOrAddError(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

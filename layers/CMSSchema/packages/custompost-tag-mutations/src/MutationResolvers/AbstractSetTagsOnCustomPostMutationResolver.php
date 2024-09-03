@@ -18,7 +18,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
-use stdClass;
 
 abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutationResolver
 {
@@ -108,69 +107,19 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
-        /** @var stdClass|null */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if ($tagsBy === null || ((array) $tagsBy) === []) {
-            return $customPostID;
-        }
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $tagTaxonomyToTaxonomyTerms = null;
-
-        /** @var stdClass */
-        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            // If `null` there was an error (already added to FeedbackStore)
-            $tagTaxonomyToTaxonomyTerms = $this->getTagTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-            if ($tagTaxonomyToTaxonomyTerms === null) {
-                return null;
-            }
-        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
-            $this->validateTagsBySlugExist(
-                $taxonomyName,
-                $tagSlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        // If `null` there was an error (already added to FeedbackStore)
-        if ($tagTaxonomyToTaxonomyTerms === null) {
-            return null;
-        }
-
-        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
-            $taxonomyName,
+        $this->setTagsOnCustomPostOrAddError(
+            $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
+        
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
-
-        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
-        if (isset($tagsBy->{MutationInputProperties::IDS})) {
-            /** @var array<string|int> */
-            $tagIDs = $tagsBy->{MutationInputProperties::IDS};
-            $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
-                $taxonomyName,
-                $customPostID,
-                $tagIDs,
-                $append
-            );
-        } elseif (isset($tagsBy->{MutationInputProperties::SLUGS})) {
-            /** @var string[] */
-            $tagSlugs = $tagsBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostTagTypeMutationAPI()->setTagsBySlug(
-                $taxonomyName,
-                $customPostID,
-                $tagSlugs,
-                $append
-            );
-        }
+        
         return $customPostID;
     }
 
