@@ -18,7 +18,6 @@ use WP_Term;
 use function esc_sql;
 use function get_term;
 use function get_term_by;
-use function get_term_children;
 use function get_term_link;
 use function get_terms;
 use function wp_get_post_terms;
