@@ -81,6 +81,8 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * Retrieve the taxonomy from the queried entites.
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
+     *
+     * @return array<string,array<string|int>>|null
      */
     protected function getTaxonomyToTaxonomyTermsBySlug(
         array $taxonomyTermSlugs,
