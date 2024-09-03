@@ -15,7 +15,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
 {
     use MutateTaxonomyTermMutationResolverTrait;
-    
+
     /**
      * Retrieve the taxonomy from the queried entites.
      * If the taxonomy is explicitly provided, validate that the
@@ -98,7 +98,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             $taxonomyToTaxonomyTermsIDs = [
                 $taxonomyName => [],
             ];
-            
+
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
             $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();

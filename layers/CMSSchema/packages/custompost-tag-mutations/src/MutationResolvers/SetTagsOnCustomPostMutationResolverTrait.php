@@ -182,7 +182,7 @@ trait SetTagsOnCustomPostMutationResolverTrait
             default => null,
         };
     }
-    
+
     protected function getTaxonomyTermDoesNotExistError(
         ?string $taxonomyName,
         string|int $taxonomyTermID,
