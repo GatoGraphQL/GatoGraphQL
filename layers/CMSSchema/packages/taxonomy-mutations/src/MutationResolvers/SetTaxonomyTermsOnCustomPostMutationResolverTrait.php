@@ -20,7 +20,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
      */
-    protected function getTaxonomyToTaxonomyTermIDs(
+    protected function getTaxonomyToTaxonomyTermsByID(
         array $taxonomyTermIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
@@ -86,20 +86,65 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
      */
-    protected function getTaxonomyToTaxonomyTermSlugs(
+    protected function getTaxonomyToTaxonomyTermsBySlug(
         array $taxonomyTermSlugs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
-
         /** @var string|null */
         $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
         if ($taxonomyName !== null) {
+            $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
+            foreach ($taxonomyTermIDs as $taxonomyTermID) {
+                $this->validateTaxonomyTermByIDExists(
+                    $taxonomyTermID,
+                    $taxonomyName,
+                    $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            }
+
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                return null;
+            }
+
+            return [
+                $taxonomyName => $taxonomyTermIDs,
+            ];
         }
 
-        return [];
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        // Retrieve the taxonomy from the terms
+        $taxonomyToTaxonomyTermsIDs = [];
+        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
+        foreach ($taxonomyTermIDs as $taxonomyTermID) {
+            $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
+            if ($taxonomyName === null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E6,
+                            [
+                                $taxonomyTermID,
+                            ]
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
+                );
+                continue;
+            }
+            $taxonomyToTaxonomyTermsIDs[$taxonomyName] ??= [];
+            $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        return $taxonomyToTaxonomyTermsIDs;
     }
 
     protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
