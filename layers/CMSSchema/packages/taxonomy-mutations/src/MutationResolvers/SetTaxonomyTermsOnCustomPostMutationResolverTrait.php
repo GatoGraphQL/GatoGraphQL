@@ -15,6 +15,8 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
 {
+    use MutateTaxonomyTermMutationResolverTrait;
+    
     /**
      * Retrieve the taxonomy from the queried entites.
      * If the taxonomy is explicitly provided, validate that the
@@ -58,13 +60,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             if ($taxonomyName === null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E6,
-                            [
-                                $taxonomyTermID,
-                            ]
-                        ),
+                        $this->getTaxonomyTermDoesNotExistError($taxonomyName, $taxonomyTermID),
                         $fieldDataAccessor->getField(),
                     )
                 );
@@ -96,13 +92,17 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         if ($taxonomyName !== null) {
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-            foreach ($taxonomyTermIDs as $taxonomyTermID) {
-                $this->validateTaxonomyTermByIDExists(
-                    $taxonomyTermID,
-                    $taxonomyName,
-                    $fieldDataAccessor,
-                    $objectTypeFieldResolutionFeedbackStore,
-                );
+            foreach ($taxonomyTermSlugs as $taxonomyTermSlug) {
+                $taxonomyTermID = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyTermSlug, $taxonomyName);
+                if ($taxonomyTermID === null) {
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            $this->getTaxonomyTermBySlugDoesNotExistError($taxonomyName, $taxonomyTermSlug),
+                            $fieldDataAccessor->getField(),
+                        )
+                    );
+                    continue;
+                }
             }
 
             if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
@@ -194,13 +194,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             )
         );
     }
-
-    abstract protected function validateTaxonomyTermByIDExists(
-        string|int $taxonomyTermID,
-        string|null $taxonomyName,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    );
 
     protected function getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
         string $taxonomyName,
