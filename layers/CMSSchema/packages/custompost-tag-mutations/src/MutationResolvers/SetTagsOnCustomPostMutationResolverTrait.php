@@ -22,15 +22,20 @@ trait SetTagsOnCustomPostMutationResolverTrait
 {
     use SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 
+    /**
+     * @param array<string|int> $taxonomyTermIDs
+     */
     protected function getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
-        string $taxonomyName,
         string $customPostType,
+        string $taxonomyName,
+        array $taxonomyTermIDs,
     ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E4,
             [
                 $taxonomyName,
+                implode('\', \'', $taxonomyTermIDs),
                 $customPostType,
             ]
         );
@@ -66,6 +71,7 @@ trait SetTagsOnCustomPostMutationResolverTrait
             $this->validateTaxonomyIsRegisteredForCustomPost(
                 $customPostID,
                 $taxonomyName,
+                $tagIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );

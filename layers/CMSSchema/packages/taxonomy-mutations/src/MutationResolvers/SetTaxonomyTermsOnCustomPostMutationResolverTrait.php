@@ -158,10 +158,13 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * Retrieve the taxonomy passed via the `taxonomy` input.
      * If that's not possible (eg: on `createCustomPost:input.categoriesBy`),
      * then retrieve it from queried object's CPT.
+     *
+     * @param array<string|int> $taxonomyTermIDs
      */
     protected function validateTaxonomyIsRegisteredForCustomPost(
         string|int $customPostID,
         string $taxonomyName,
+        array $taxonomyTermIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -187,8 +190,9 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             $objectTypeFieldResolutionFeedbackStore->addError(
                 new ObjectTypeFieldResolutionFeedback(
                     $this->getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
-                        $taxonomyName,
                         $customPostType,
+                        $taxonomyName,
+                        $taxonomyTermIDs,
                     ),
                     $fieldDataAccessor->getField(),
                 )
@@ -196,15 +200,20 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         }
     }
 
+    /**
+     * @param array<string|int> $taxonomyTermIDs
+     */
     protected function getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
-        string $taxonomyName,
         string $customPostType,
+        string $taxonomyName,
+        array $taxonomyTermIDs,
     ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E12,
             [
                 $taxonomyName,
+                implode('\', \'', $taxonomyTermIDs),
                 $customPostType,
             ]
         );

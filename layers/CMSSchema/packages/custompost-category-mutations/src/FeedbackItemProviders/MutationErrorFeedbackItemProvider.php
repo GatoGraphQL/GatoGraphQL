@@ -35,7 +35,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::E1 => $this->__('You must be logged in to set categories on custom posts', 'custompost-category-mutations'),
-            self::E4 => $this->__('Category taxonomy \'%s\' is not registered for custom post type \'%s\'', 'custompost-category-mutations'),
+            self::E4 => $this->__('Category taxonomy \'%s\' (for terms with IDs \'%s\') is not registered for custom post type \'%s\'', 'custompost-category-mutations'),
             self::E6 => $this->__('There is no category with ID \'%s\'', 'custompost-category-mutations'),
             self::E7 => $this->__('On taxonomy \'%s\', there is no category with ID \'%s\'', 'custompost-category-mutations'),
             self::E8 => $this->__('There is no category with slug \'%s\'', 'custompost-category-mutations'),
