@@ -38,6 +38,7 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
 
     protected function setCategoriesOnCustomPostOrAddError(
         string|int $customPostID,
+        bool $append,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -74,7 +75,6 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
             return;
         }
 
-        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         foreach ($categoryTaxonomyToTaxonomyTerms as $taxonomyName => $categoryIDs) {
             $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
                 $taxonomyName,

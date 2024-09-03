@@ -122,11 +122,13 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
+        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         $this->setTagsOnCustomPostOrAddError(
             $customPostID,
+            $append,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

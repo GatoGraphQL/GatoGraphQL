@@ -131,6 +131,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
 
         $this->setCategoriesOnCustomPostOrAddError(
             $customPostID,
+            false,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

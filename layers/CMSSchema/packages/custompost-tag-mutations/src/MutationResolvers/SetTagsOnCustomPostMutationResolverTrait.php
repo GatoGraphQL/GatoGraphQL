@@ -38,6 +38,7 @@ trait SetTagsOnCustomPostMutationResolverTrait
 
     protected function setTagsOnCustomPostOrAddError(
         string|int $customPostID,
+        bool $append,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -74,7 +75,6 @@ trait SetTagsOnCustomPostMutationResolverTrait
             return;
         }
 
-        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
         foreach ($tagTaxonomyToTaxonomyTerms as $taxonomyName => $tagIDs) {
             $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
                 $taxonomyName,
