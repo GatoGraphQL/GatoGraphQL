@@ -132,26 +132,26 @@ trait SetTagsOnCustomPostMutationResolverTrait
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E6,
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E6,
             ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E7,
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
             ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E8,
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E8,
             ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E9,
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
             ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
@@ -175,5 +175,51 @@ trait SetTagsOnCustomPostMutationResolverTrait
             ),
             default => null,
         };
+    }
+    
+    protected function getTaxonomyTermDoesNotExistError(
+        ?string $taxonomyName,
+        string|int $taxonomyTermID,
+    ): FeedbackItemResolution {
+        if ($taxonomyName !== null && $taxonomyName !== '') {
+            return new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E7,
+                [
+                    $taxonomyName,
+                    $taxonomyTermID,
+                ]
+            );
+        }
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E6,
+            [
+                $taxonomyTermID,
+            ]
+        );
+    }
+
+    protected function getTaxonomyTermBySlugDoesNotExistError(
+        ?string $taxonomyName,
+        string|int $taxonomyTermSlug,
+    ): FeedbackItemResolution {
+        if ($taxonomyName !== null && $taxonomyName !== '') {
+            return new FeedbackItemResolution(
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E9,
+                [
+                    $taxonomyName,
+                    $taxonomyTermSlug,
+                ]
+            );
+        }
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E8,
+            [
+                $taxonomyTermSlug,
+            ]
+        );
     }
 }
