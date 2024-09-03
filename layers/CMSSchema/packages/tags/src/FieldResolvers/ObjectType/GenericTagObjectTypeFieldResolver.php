@@ -7,14 +7,17 @@ namespace PoPCMSSchema\Tags\FieldResolvers\ObjectType;
 use PoPCMSSchema\Tags\FieldResolvers\ObjectType\AbstractTagObjectTypeFieldResolver;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\GenericTagObjectTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\ObjectType\TagObjectTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolver
 {
     private ?QueryableTagTypeAPIInterface $queryableTagTypeAPI = null;
     private ?GenericTagObjectTypeResolver $genericTagObjectTypeResolver = null;
+    private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setQueryableTagTypeAPI(QueryableTagTypeAPIInterface $queryableTagTypeAPI): void
     {
@@ -42,6 +45,19 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
         }
         return $this->genericTagObjectTypeResolver;
     }
+    final public function setTagTaxonomyEnumStringScalarTypeResolver(TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getTagTaxonomyEnumStringScalarTypeResolver(): TagTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->tagTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var TagTaxonomyEnumStringScalarTypeResolver */
+            $tagTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(TagTaxonomyEnumStringScalarTypeResolver::class);
+            $this->tagTaxonomyEnumStringScalarTypeResolver = $tagTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->tagTaxonomyEnumStringScalarTypeResolver;
+    }
 
     public function getTagTypeAPI(): TagTypeAPIInterface
     {
@@ -51,6 +67,11 @@ class GenericTagObjectTypeFieldResolver extends AbstractTagObjectTypeFieldResolv
     public function getTagTypeResolver(): TagObjectTypeResolverInterface
     {
         return $this->getGenericTagObjectTypeResolver();
+    }
+
+    protected function getTaxonomyFieldTypeResolver(): ConcreteTypeResolverInterface
+    {
+        return $this->getTagTaxonomyEnumStringScalarTypeResolver();
     }
 
     /**

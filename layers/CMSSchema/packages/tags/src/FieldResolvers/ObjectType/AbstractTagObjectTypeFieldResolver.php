@@ -8,10 +8,13 @@ use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTy
 use PoPCMSSchema\Tags\FieldResolvers\InterfaceType\TagInterfaceTypeFieldResolver;
 use PoPCMSSchema\Tags\ModuleContracts\TagAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPCMSSchema\Tags\TypeAPIs\UniversalTagTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
@@ -24,6 +27,7 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
     private ?TagInterfaceTypeFieldResolver $tagInterfaceTypeFieldResolver = null;
     private ?UniversalTagTypeAPIInterface $universalTagTypeAPI = null;
+    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -90,6 +94,19 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
         }
         return $this->universalTagTypeAPI;
     }
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    {
+        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+    }
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        if ($this->taxonomyTermTypeAPI === null) {
+            /** @var TaxonomyTermTypeAPIInterface */
+            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+        }
+        return $this->taxonomyTermTypeAPI;
+    }
 
     /**
      * @return array<InterfaceTypeFieldResolverInterface>
@@ -117,8 +134,21 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             'name',
             'description',
             'count',
+
+            // Own
+            'taxonomy',
         ];
     }
+
+    public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
+    {
+        return match ($fieldName) {
+            'taxonomy' => $this->getTaxonomyFieldTypeResolver(),
+            default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
+        };
+    }
+
+    abstract protected function getTaxonomyFieldTypeResolver(): ConcreteTypeResolverInterface;
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
@@ -126,7 +156,16 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
             'url' => $this->__('Tag URL', 'pop-tags'),
             'urlPath' => $this->__('Tag URL path', 'pop-tags'),
             'slug' => $this->__('Tag slug', 'pop-tags'),
+            'taxonomy' => $this->__('Tag taxonomy', 'pop-tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        return match ($fieldName) {
+            'taxonomy' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -138,6 +177,9 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     ): mixed {
         $tag = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'taxonomy':
+                return $this->getTaxonomyTermTypeAPI()->getTermTaxonomyName($tag);
+
             case 'url':
                 /** @var string */
                 return $this->getUniversalTagTypeAPI()->getTagURL($tag);

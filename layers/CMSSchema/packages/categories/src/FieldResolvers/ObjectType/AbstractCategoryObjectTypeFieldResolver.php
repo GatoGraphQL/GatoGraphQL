@@ -8,10 +8,12 @@ use PoPCMSSchema\Categories\FieldResolvers\InterfaceType\CategoryInterfaceTypeFi
 use PoPCMSSchema\Categories\ModuleContracts\CategoryAPIRequestedContractObjectTypeFieldResolverInterface;
 use PoPCMSSchema\Categories\TypeAPIs\UniversalCategoryTypeAPIInterface;
 use PoPCMSSchema\QueriedObject\FieldResolvers\InterfaceType\QueryableInterfaceTypeFieldResolver;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\InterfaceType\InterfaceTypeFieldResolverInterface;
 use PoP\ComponentModel\FieldResolvers\ObjectType\AbstractObjectTypeFieldResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\IntScalarTypeResolver;
@@ -25,6 +27,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     private ?QueryableInterfaceTypeFieldResolver $queryableInterfaceTypeFieldResolver = null;
     private ?CategoryInterfaceTypeFieldResolver $categoryInterfaceTypeFieldResolver = null;
     private ?UniversalCategoryTypeAPIInterface $universalCategoryTypeAPI = null;
+    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final public function setStringScalarTypeResolver(StringScalarTypeResolver $stringScalarTypeResolver): void
     {
@@ -91,6 +94,19 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
         }
         return $this->universalCategoryTypeAPI;
     }
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    {
+        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+    }
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        if ($this->taxonomyTermTypeAPI === null) {
+            /** @var TaxonomyTermTypeAPIInterface */
+            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+        }
+        return $this->taxonomyTermTypeAPI;
+    }
 
     /**
      * @return array<InterfaceTypeFieldResolverInterface>
@@ -121,6 +137,7 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'slugPath',
 
             // Own
+            'taxonomy',
             'parent',
         ];
     }
@@ -128,10 +145,13 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
+            'taxonomy' => $this->getTaxonomyFieldTypeResolver(),
             'parent' => $this->getCategoryTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
+
+    abstract protected function getTaxonomyFieldTypeResolver(): ConcreteTypeResolverInterface;
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
@@ -139,8 +159,17 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
             'url' => $this->__('Category URL', 'pop-categories'),
             'urlPath' => $this->__('Category URL path', 'pop-categories'),
             'slug' => $this->__('Category slug', 'pop-categories'),
+            'taxonomy' => $this->__('Category taxonomy', 'pop-categories'),
             'parent' => $this->__('Parent category (if this category is a child of another one)', 'pop-categories'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
+        };
+    }
+
+    public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
+    {
+        return match ($fieldName) {
+            'taxonomy' => SchemaTypeModifiers::NON_NULLABLE,
+            default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
 
@@ -152,6 +181,9 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     ): mixed {
         $category = $object;
         switch ($fieldDataAccessor->getFieldName()) {
+            case 'taxonomy':
+                return $this->getTaxonomyTermTypeAPI()->getTermTaxonomyName($category);
+
             case 'url':
                 /** @var string */
                 return $this->getUniversalCategoryTypeAPI()->getCategoryURL($category);
