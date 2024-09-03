@@ -10,6 +10,7 @@ use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\CustomPostTagMutations\TypeAPIs\CustomPostTagTypeMutationAPIInterface;
 use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
+use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\MutateTaxonomyTermMutationResolverTrait;
 use PoPCMSSchema\UserRoles\TypeAPIs\UserRoleTypeAPIInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -32,6 +33,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
     private ?CustomPostTypeMutationAPIInterface $customPostTypeMutationAPI = null;
     private ?CustomPostTagTypeMutationAPIInterface $customPostTagTypeMutationAPI = null;
+    private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
 
     final public function setNameResolver(NameResolverInterface $nameResolver): void
     {
@@ -97,6 +99,19 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
             $this->customPostTagTypeMutationAPI = $customPostTagTypeMutationAPI;
         }
         return $this->customPostTagTypeMutationAPI;
+    }
+    final public function setTaxonomyTermTypeAPI(TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI): void
+    {
+        $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+    }
+    final protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
+    {
+        if ($this->taxonomyTermTypeAPI === null) {
+            /** @var TaxonomyTermTypeAPIInterface */
+            $taxonomyTermTypeAPI = $this->instanceManager->getInstance(TaxonomyTermTypeAPIInterface::class);
+            $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
+        }
+        return $this->taxonomyTermTypeAPI;
     }
 
     /**

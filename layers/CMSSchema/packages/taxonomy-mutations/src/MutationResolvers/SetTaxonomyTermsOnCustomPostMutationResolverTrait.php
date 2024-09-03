@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
-use PoPCMSSchema\Taxonomies\Facades\TaxonomyTermTypeAPIFacade;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
