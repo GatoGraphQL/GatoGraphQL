@@ -50,16 +50,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
                 : !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName),
         ));
 
-        if (count($taxonomyNames) === 0) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $this->getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution($customPostType),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return null;
-        }
-
         return $taxonomyNames[0];
     }
 
@@ -68,8 +58,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         return TaxonomyTermTypeAPIFacade::getInstance();
     }
 
-    abstract protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution;
-
     /**
      * Retrieve the taxonomy passed via the `taxonomy` input.
      * If that's not possible (eg: on `createCustomPost:input.categoriesBy`),
@@ -77,7 +65,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      */
     protected function validateTaxonomyIsRegisteredForCustomPost(
         string|int $customPostID,
-        string $taxonomName,
+        string $taxonomyName,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -99,21 +87,31 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         }
 
         $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
-        if (in_array($taxonomName, $taxonomyNames)) {
+        if (in_array($taxonomyName, $taxonomyNames)) {
             return;
         }
         $objectTypeFieldResolutionFeedbackStore->addError(
             new ObjectTypeFieldResolutionFeedback(
-                new FeedbackItemResolution(
-                    MutationErrorFeedbackItemProvider::class,
-                    MutationErrorFeedbackItemProvider::E12,
-                    [
-                        $taxonomName,
-                        $customPostType,
-                    ]
+                $this->getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
+                    $taxonomyName,
+                    $customPostType,
                 ),
                 $fieldDataAccessor->getField(),
             )
+        );
+    }
+
+    protected function getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
+        string $taxonomyName,
+        string $customPostType,
+    ): FeedbackItemResolution {
+        return new FeedbackItemResolution(
+            MutationErrorFeedbackItemProvider::class,
+            MutationErrorFeedbackItemProvider::E12,
+            [
+                $taxonomyName,
+                $customPostType,
+            ]
         );
     }
 }

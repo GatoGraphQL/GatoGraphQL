@@ -33,7 +33,7 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E1 => $this->__('You must be logged in to set tags on custom posts', 'custompost-tag-mutations'),
             self::E2 => $this->__('There are no tags with ID(s) \'%s\' for taxonomy \'%s\'', 'custompost-tag-mutations'),
             self::E3 => $this->__('There are no tags with slug(s) \'%s\' for taxonomy \'%s\'', 'custompost-tag-mutations'),
-            self::E4 => $this->__('There are no tag taxonomies registered for custom post type \'%s\'', 'custompost-tag-mutations'),
+            self::E4 => $this->__('Tag taxonomy \'%s\' is not registered for custom post type \'%s\'', 'custompost-tag-mutations'),
             default => parent::getMessagePlaceholder($code),
         };
     }

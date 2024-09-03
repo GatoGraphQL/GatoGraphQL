@@ -96,12 +96,15 @@ trait SetTagsOnCustomPostMutationResolverTrait
         }
     }
 
-    protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution
-    {
+    protected function getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
+        string $taxonomyName,
+        string $customPostType,
+    ): FeedbackItemResolution {
         return new FeedbackItemResolution(
             MutationErrorFeedbackItemProvider::class,
             MutationErrorFeedbackItemProvider::E4,
             [
+                $taxonomyName,
                 $customPostType,
             ]
         );
