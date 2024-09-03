@@ -26,6 +26,8 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         CreateOrUpdateCustomPostMutationResolverTrait::validateUserIsLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
         CreateOrUpdateCustomPostMutationResolverTrait::getUserNotLoggedInError insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
         CreateOrUpdateCustomPostMutationResolverTrait::validateIsUserLoggedIn insteadof MutateTaxonomyTermMutationResolverTrait, SetCategoriesOnCustomPostMutationResolverTrait;
+        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermDoesNotExistError  insteadof MutateTaxonomyTermMutationResolverTrait;
+        SetCategoriesOnCustomPostMutationResolverTrait::getTaxonomyTermBySlugDoesNotExistError  insteadof MutateTaxonomyTermMutationResolverTrait;
     }
 
     private ?NameResolverInterface $nameResolver = null;
