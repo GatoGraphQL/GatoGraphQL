@@ -90,6 +90,10 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         /** @var string|null */
         $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
         if ($taxonomyName !== null) {
+            $taxonomyToTaxonomyTermsIDs = [
+                $taxonomyName => [],
+            ];
+            
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
             foreach ($taxonomyTermSlugs as $taxonomyTermSlug) {
@@ -103,15 +107,14 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
                     );
                     continue;
                 }
+                $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
             }
 
             if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
                 return null;
             }
 
-            return [
-                $taxonomyName => $taxonomyTermIDs,
-            ];
+            return $taxonomyToTaxonomyTermsIDs;
         }
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
@@ -119,23 +122,19 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         // Retrieve the taxonomy from the terms
         $taxonomyToTaxonomyTermsIDs = [];
         $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
-        foreach ($taxonomyTermIDs as $taxonomyTermID) {
-            $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
-            if ($taxonomyName === null) {
+        foreach ($taxonomyTermSlugs as $taxonomyTermSlug) {
+            $taxonomyTermID = $taxonomyTermTypeAPI->getTaxonomyTermID($taxonomyTermSlug);
+            if ($taxonomyTermID === null) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
-                        new FeedbackItemResolution(
-                            MutationErrorFeedbackItemProvider::class,
-                            MutationErrorFeedbackItemProvider::E6,
-                            [
-                                $taxonomyTermID,
-                            ]
-                        ),
+                        $this->getTaxonomyTermBySlugDoesNotExistError(null, $taxonomyTermSlug),
                         $fieldDataAccessor->getField(),
                     )
                 );
                 continue;
             }
+            /** @var string */
+            $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
             $taxonomyToTaxonomyTermsIDs[$taxonomyName] ??= [];
             $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
         }
