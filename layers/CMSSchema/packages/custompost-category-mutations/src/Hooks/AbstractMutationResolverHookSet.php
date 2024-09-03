@@ -151,18 +151,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E10,
-            ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E11,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new TaxonomyIsNotValidErrorPayload(
@@ -172,6 +160,36 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E6,
             ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E7,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E8,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E9,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E10,
+            ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E11,
+            ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
