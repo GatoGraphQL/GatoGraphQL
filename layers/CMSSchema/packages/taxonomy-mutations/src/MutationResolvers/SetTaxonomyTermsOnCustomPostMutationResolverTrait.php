@@ -86,7 +86,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
      */
-    protected function getTaxonomyNameByTaxonomyTermSlugs(
+    protected function getTaxonomyToTaxonomyTermSlugs(
         array $taxonomyTermSlugs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
