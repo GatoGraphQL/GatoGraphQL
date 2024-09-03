@@ -118,7 +118,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         /**
          * Validate the taxonomy is valid
          */
-        $taxonomyName = $this->getTagTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $taxonomyName = $this->getTagTaxonomyName($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
             return null;
         }
@@ -210,23 +210,6 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
         }
 
         $this->validateCanLoggedInUserEditCustomPost(
-            $customPostID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
-
-    /**
-     * Retrieve the taxonomy from the queried object's CPT,
-     * which works as long as it has only 1 tag taxonomy registered.
-     */
-    protected function getTagTaxonomyName(
-        int|string $customPostID,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?string {
-        return $this->getTaxonomyName(
-            false,
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostCategoryMutations\MutationResolvers;
 
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
+use PoPCMSSchema\CustomPostCategoryMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostCategoryMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
@@ -108,5 +109,33 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
                 $customPostType,
             ]
         );
+    }
+
+    /**
+     * Retrieve the taxonomy from the queried object's CPT,
+     * which works as long as it has only 1 category taxonomy registered.
+     */
+    protected function getCategoryTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
+            $categoryIDs = $categoriesBy->{MutationInputProperties::IDS};
+            return $this->getTaxonomyToTaxonomyTermIDs(
+                $categoryIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+        if (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
+            $categorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
+            return $this->getTaxonomyNameByTaxonomyTermSlugs(
+                $categorySlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+        return null;
     }
 }

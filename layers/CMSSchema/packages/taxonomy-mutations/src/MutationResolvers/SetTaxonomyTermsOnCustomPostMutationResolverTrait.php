@@ -4,53 +4,103 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMutations\MutationResolvers;
 
+use PoPCMSSchema\Taxonomies\Facades\TaxonomyTermTypeAPIFacade;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoPCMSSchema\Taxonomies\Facades\TaxonomyTermTypeAPIFacade;
 
 trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
 {
     /**
-     * Retrieve the taxonomy from the queried object's CPT,
-     * which works as long as it has only 1 tag taxonomy registered.
+     * Retrieve the taxonomy from the queried entites.
+     * If the taxonomy is explicitly provided, validate that the
+     * entities indeed have that taxonomy.
      */
-    protected function getTaxonomyName(
-        bool $hierarchical,
-        int|string $customPostID,
+    protected function getTaxonomyToTaxonomyTermIDs(
+        array $taxonomyTermIDs,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?string {
-        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
-        if ($customPostType === null) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    new FeedbackItemResolution(
-                        MutationErrorFeedbackItemProvider::class,
-                        MutationErrorFeedbackItemProvider::E11,
-                        [
-                            $customPostID,
-                        ]
-                    ),
-                    $fieldDataAccessor->getField(),
-                )
-            );
+    ): ?array {
+
+        /** @var string|null */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        if ($taxonomyName !== null) {
+            $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+            foreach ($taxonomyTermIDs as $taxonomyTermID) {
+                $this->validateTaxonomyTermByIDExists(
+                    $taxonomyTermID,
+                    $taxonomyName,
+                    $fieldDataAccessor,
+                    $objectTypeFieldResolutionFeedbackStore,
+                );
+            }
+
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                return null;
+            }
+
+            return [
+                $taxonomyName => $taxonomyTermIDs,
+            ];
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        // Retrieve the taxonomy from the terms
+        $taxonomyToTaxonomyTermsIDs = [];
+        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
+        foreach ($taxonomyTermIDs as $taxonomyTermID) {
+            $taxonomyName = $taxonomyTermTypeAPI->getTaxonomyTermTaxonomy($taxonomyTermID);
+            if ($taxonomyName === null) {
+                $objectTypeFieldResolutionFeedbackStore->addError(
+                    new ObjectTypeFieldResolutionFeedback(
+                        new FeedbackItemResolution(
+                            MutationErrorFeedbackItemProvider::class,
+                            MutationErrorFeedbackItemProvider::E6,
+                            [
+                                $taxonomyTermID,
+                            ]
+                        ),
+                        $fieldDataAccessor->getField(),
+                    )
+                );
+                continue;
+            }
+            $taxonomyToTaxonomyTermsIDs[$taxonomyName] ??= [];
+            $taxonomyToTaxonomyTermsIDs[$taxonomyName][] = $taxonomyTermID;
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
-        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
-        $customPostTypeTaxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
-        $taxonomyNames = array_values(array_filter(
-            $customPostTypeTaxonomyNames,
-            fn (string $taxonomyName) => $hierarchical
-                ? $taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName)
-                : !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName),
-        ));
+        return $taxonomyToTaxonomyTermsIDs;
+    }
 
-        return $taxonomyNames[0];
+    /**
+     * Retrieve the taxonomy from the queried entites.
+     * If the taxonomy is explicitly provided, validate that the
+     * entities indeed have that taxonomy.
+     */
+    protected function getTaxonomyNameByTaxonomyTermSlugs(
+        array $taxonomyTermSlugs,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
+
+        /** @var string|null */
+        $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
+        if ($taxonomyName !== null) {
+
+        }
+
+        return [];
     }
 
     protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
@@ -100,6 +150,13 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             )
         );
     }
+
+    abstract protected function validateTaxonomyTermByIDExists(
+        string|int $taxonomyTermID,
+        string|null $taxonomyName,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    );
 
     protected function getTaxonomyIsNotRegisteredInCustomPostTypeFeedbackItemResolution(
         string $taxonomyName,

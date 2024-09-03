@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
@@ -108,5 +109,33 @@ trait SetTagsOnCustomPostMutationResolverTrait
                 $customPostType,
             ]
         );
+    }
+
+    /**
+     * Retrieve the taxonomy from the queried object's CPT,
+     * which works as long as it has only 1 category taxonomy registered.
+     */
+    protected function getTagTaxonomyName(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
+        $tagsBy = $fieldDataAccessor->getValue(MutationInputProperties::TAGS_BY);
+        if (isset($tagsBy->{MutationInputProperties::IDS})) {
+            $categoryIDs = $tagsBy->{MutationInputProperties::IDS};
+            return $this->getTaxonomyToTaxonomyTermIDs(
+                $categoryIDs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+        if (isset($tagsBy->{MutationInputProperties::SLUGS})) {
+            $categorySlugs = $tagsBy->{MutationInputProperties::SLUGS};
+            return $this->getTaxonomyNameByTaxonomyTermSlugs(
+                $categorySlugs,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+        return null;
     }
 }

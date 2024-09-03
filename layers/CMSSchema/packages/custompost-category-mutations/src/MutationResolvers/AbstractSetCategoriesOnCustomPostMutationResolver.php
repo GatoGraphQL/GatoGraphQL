@@ -119,7 +119,7 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         /**
          * Validate the taxonomy is valid
          */
-        $taxonomyName = $this->getCategoryTaxonomyName($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        $taxonomyName = $this->getCategoryTaxonomyName($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($taxonomyName === null) {
             return null;
         }
@@ -207,23 +207,6 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
         }
 
         $this->validateCanLoggedInUserEditCustomPost(
-            $customPostID,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-    }
-
-    /**
-     * Retrieve the taxonomy from the queried object's CPT,
-     * which works as long as it has only 1 category taxonomy registered.
-     */
-    protected function getCategoryTaxonomyName(
-        int|string $customPostID,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?string {
-        return $this->getTaxonomyName(
-            true,
             $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
