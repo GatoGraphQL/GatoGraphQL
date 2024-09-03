@@ -14,6 +14,7 @@ trait PayloadableSetCategoriesOnCustomPostMutationResolverTrait
     use PayloadableCustomPostMutationResolverTrait {
         PayloadableCustomPostMutationResolverTrait::createErrorPayloadFromObjectTypeFieldResolutionFeedback as upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback;
     }
+    use SetCategoriesOnCustomPostMutationResolverTrait;
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback

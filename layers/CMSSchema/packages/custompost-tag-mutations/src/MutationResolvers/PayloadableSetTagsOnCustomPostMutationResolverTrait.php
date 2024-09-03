@@ -14,6 +14,7 @@ trait PayloadableSetTagsOnCustomPostMutationResolverTrait
     use PayloadableCustomPostMutationResolverTrait {
         PayloadableCustomPostMutationResolverTrait::createErrorPayloadFromObjectTypeFieldResolutionFeedback as upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback;
     }
+    use SetTagsOnCustomPostMutationResolverTrait;
 
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
