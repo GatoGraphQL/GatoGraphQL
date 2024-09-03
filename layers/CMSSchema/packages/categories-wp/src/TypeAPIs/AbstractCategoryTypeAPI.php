@@ -178,15 +178,6 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
         return $this->convertTaxonomyTermsQuery($query, $options);
     }
 
-    protected function getCategoryFromObjectOrID(string|int|object $catObjectOrID): ?WP_Term
-    {
-        /** @var string|int|WP_Term $catObjectOrID */
-        return $this->getTaxonomyTermFromObjectOrID(
-            $catObjectOrID,
-            $this->getCategoryTaxonomyName(),
-        );
-    }
-
     protected function getTaxonomyTermFromObjectOrID(
         string|int|WP_Term $taxonomyTermObjectOrID,
         string $taxonomy = '',
