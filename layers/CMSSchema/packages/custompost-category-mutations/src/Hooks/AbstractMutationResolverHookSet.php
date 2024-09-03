@@ -234,12 +234,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 $feedbackItemResolution->getMessage(),
             ),
             [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E5,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E12,
             ] => new TaxonomyIsNotValidErrorPayload(

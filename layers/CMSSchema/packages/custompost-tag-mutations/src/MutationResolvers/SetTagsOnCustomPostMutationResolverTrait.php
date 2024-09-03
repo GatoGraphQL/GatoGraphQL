@@ -106,21 +106,4 @@ trait SetTagsOnCustomPostMutationResolverTrait
             ]
         );
     }
-
-    /**
-     * @param string[] $taxonomyNames
-     */
-    protected function getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(
-        string $customPostType,
-        array $taxonomyNames
-    ): FeedbackItemResolution {
-        return new FeedbackItemResolution(
-            MutationErrorFeedbackItemProvider::class,
-            MutationErrorFeedbackItemProvider::E5,
-            [
-                $customPostType,
-                implode($this->__('\', \''), $taxonomyNames)
-            ]
-        );
-    }
 }

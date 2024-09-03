@@ -60,16 +60,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             return null;
         }
 
-        if (count($taxonomyNames) > 1) {
-            $objectTypeFieldResolutionFeedbackStore->addError(
-                new ObjectTypeFieldResolutionFeedback(
-                    $this->getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution($customPostType, $taxonomyNames),
-                    $fieldDataAccessor->getField(),
-                )
-            );
-            return null;
-        }
-
         return $taxonomyNames[0];
     }
 
@@ -79,13 +69,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
     }
 
     abstract protected function getNoTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(string $customPostType): FeedbackItemResolution;
-    /**
-     * @param string[] $taxonomyNames
-     */
-    abstract protected function getMultipleTaxonomiesRegisteredInCustomPostTypeFeedbackItemResolution(
-        string $customPostType,
-        array $taxonomyNames
-    ): FeedbackItemResolution;
 
     /**
      * Retrieve the taxonomy passed via the `taxonomy` input.
