@@ -120,77 +120,11 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        /**
-         * Validate the taxonomy is valid
-         */
-        $taxonomyName = $this->getCategoryTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($taxonomyName === null) {
-            return;
-        }
-
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        /**
-         * Validate the taxonomy is valid for this CPT
-         */
-        $this->validateTaxonomyIsRegisteredForCustomPost(
+        $this->setCategoriesOnCustomPostOrAddError(
             $customPostID,
-            $taxonomyName,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return null;
-        }
-
-        /**
-         * Validate the categories are valid for that taxonomy
-         *
-         * @var stdClass
-         */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->validateCategoriesByIDExist(
-                $taxonomyName,
-                $customPostCategoryIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->validateCategoriesBySlugExist(
-                $taxonomyName,
-                $customPostCategorySlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            /** @var array<string|int> */
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
-                $taxonomyName,
-                $customPostID,
-                $customPostCategoryIDs,
-                false
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            /** @var string[] */
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug(
-                $taxonomyName,
-                $customPostID,
-                $customPostCategorySlugs,
-                false
-            );
-        }
     }
 
     public function createErrorPayloadFromObjectTypeFieldResolutionFeedback(

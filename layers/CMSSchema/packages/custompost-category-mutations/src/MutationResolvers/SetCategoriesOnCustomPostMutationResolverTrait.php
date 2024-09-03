@@ -14,6 +14,7 @@ use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use stdClass;
 
 trait SetCategoriesOnCustomPostMutationResolverTrait
 {
@@ -109,6 +110,55 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
                 $customPostType,
             ]
         );
+    }
+
+    protected function setCategoriesOnCustomPostOrAddError(
+        string|int $customPostID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /** @var stdClass|null */
+        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
+        if ($categoriesBy === null || ((array) $categoriesBy) === []) {
+            return;
+        }
+
+        // If `null` there was an error (already added to FeedbackStore)
+        $categoryTaxonomyToTaxonomyTerms = $this->getCategoryTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+        if ($categoryTaxonomyToTaxonomyTerms === null) {
+            return;
+        }
+
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
+        foreach ($categoryTaxonomyToTaxonomyTerms as $taxonomyName => $categoryIDs) {
+            $this->validateCanLoggedInUserAssignTermsToTaxonomy(
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+
+            $this->validateTaxonomyIsRegisteredForCustomPost(
+                $customPostID,
+                $taxonomyName,
+                $fieldDataAccessor,
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+        }
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
+        foreach ($categoryTaxonomyToTaxonomyTerms as $taxonomyName => $categoryIDs) {
+            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
+                $taxonomyName,
+                $customPostID,
+                $categoryIDs,
+                $append
+            );
+        }
     }
 
     /**

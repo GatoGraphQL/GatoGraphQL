@@ -18,7 +18,6 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\LooseContracts\NameResolverInterface;
 use PoP\Root\Exception\AbstractException;
-use stdClass;
 
 abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends AbstractMutationResolver
 {
@@ -109,72 +108,18 @@ abstract class AbstractSetCategoriesOnCustomPostMutationResolver extends Abstrac
     ): mixed {
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::CUSTOMPOST_ID);
 
-        /** @var stdClass|null */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        if ($categoriesBy === null || ((array) $categoriesBy) === []) {
-            return $customPostID;
-        }
-
-        /**
-         * Validate the taxonomy is valid
-         */
-        $taxonomyName = $this->getCategoryTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
-        if ($taxonomyName === null) {
-            return null;
-        }
-
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $this->validateCanLoggedInUserAssignTermsToTaxonomy(
-            $taxonomyName,
+        $this->setCategoriesOnCustomPostOrAddError(
+            $customPostID,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
-
-        /** @var stdClass */
-        $categoriesBy = $fieldDataAccessor->getValue(MutationInputProperties::CATEGORIES_BY);
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->validateCategoriesByIDExist(
-                $taxonomyName,
-                $customPostCategoryIDs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->validateCategoriesBySlugExist(
-                $taxonomyName,
-                $customPostCategorySlugs,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
 
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return null;
         }
 
-        $append = $fieldDataAccessor->getValue(MutationInputProperties::APPEND);
-        if (isset($categoriesBy->{MutationInputProperties::IDS})) {
-            /** @var array<string|int> */
-            $customPostCategoryIDs = $categoriesBy->{MutationInputProperties::IDS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
-                $taxonomyName,
-                $customPostID,
-                $customPostCategoryIDs,
-                $append
-            );
-        } elseif (isset($categoriesBy->{MutationInputProperties::SLUGS})) {
-            /** @var string[] */
-            $customPostCategorySlugs = $categoriesBy->{MutationInputProperties::SLUGS};
-            $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesBySlug(
-                $taxonomyName,
-                $customPostID,
-                $customPostCategorySlugs,
-                $append
-            );
-        }
         return $customPostID;
     }
 
