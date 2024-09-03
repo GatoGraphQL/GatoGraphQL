@@ -56,11 +56,6 @@ class PostCategoryTypeAPI extends AbstractCategoryTypeAPI implements PostCategor
         return 'category';
     }
 
-    protected function getCategoryTaxonomyName(): string
-    {
-        return $this->getPostCategoryTaxonomyName();
-    }
-
     /**
      * @return string[]
      */

@@ -13,11 +13,6 @@ final class InjectableTaxonomyCategoryTypeAPI extends AbstractCategoryTypeAPI
     ) {
     }
 
-    protected function getCategoryTaxonomyName(): string
-    {
-        return $this->catTaxonomy;
-    }
-
     /**
      * @return string[]
      */
