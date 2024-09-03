@@ -92,12 +92,29 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
      * If that's not possible (eg: on `createCustomPost:input.categoriesBy`),
      * then retrieve it from queried object's CPT.
      */
-    protected function validateTaxonomyIsRegisteredForCustomPostType(
+    protected function validateTaxonomyIsRegisteredForCustomPost(
+        string|int $customPostID,
         string $taxonomName,
-        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
+        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        if ($customPostType === null) {
+            $objectTypeFieldResolutionFeedbackStore->addError(
+                new ObjectTypeFieldResolutionFeedback(
+                    new FeedbackItemResolution(
+                        MutationErrorFeedbackItemProvider::class,
+                        MutationErrorFeedbackItemProvider::E11,
+                        [
+                            $customPostID,
+                        ]
+                    ),
+                    $fieldDataAccessor->getField(),
+                )
+            );
+            return null;
+        }
+
         $taxonomyNames = $this->getTaxonomyTermTypeAPI()->getCustomPostTypeTaxonomyNames($customPostType);
         if (in_array($taxonomName, $taxonomyNames)) {
             return;

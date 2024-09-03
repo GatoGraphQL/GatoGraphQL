@@ -130,6 +130,20 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
         /**
+         * Validate the taxonomy is valid for this CPT
+         */
+        $this->validateTaxonomyIsRegisteredForCustomPost(
+            $customPostID,
+            $taxonomyName,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        /**
          * Validate the categories are valid for that taxonomy
          *
          * @var stdClass

@@ -5,13 +5,10 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostTagMutations\Hooks;
 
 use PoPCMSSchema\CustomPostMutations\Constants\GenericCustomPostCRUDHookNames;
-use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\Hooks\AbstractMutationResolverHookSet;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 use PoPCMSSchema\Taxonomies\TypeAPIs\TaxonomyTermTypeAPIInterface;
-use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
-use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 
 class MutationResolverHookSet extends AbstractMutationResolverHookSet
 {
@@ -43,55 +40,6 @@ class MutationResolverHookSet extends AbstractMutationResolverHookSet
             $this->taxonomyTermTypeAPI = $taxonomyTermTypeAPI;
         }
         return $this->taxonomyTermTypeAPI;
-    }
-
-    /**
-     * Retrieve the taxonomy passed via the `taxonomy` input.
-     * If that's not possible (eg: on `createCustomPost:input.tagsBy`),
-     * then retrieve it from queried object's CPT.
-     */
-    protected function getTagTaxonomyName(
-        int|string $customPostID,
-        FieldDataAccessorInterface $fieldDataAccessor,
-        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): ?string {
-        /** @var string|null */
-        $taxonomName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
-        if ($taxonomName === null) {
-            return parent::getTagTaxonomyName(
-                $customPostID,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        /**
-         * Validate the taxonomy is valid for this CPT
-         */
-        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
-        if ($customPostType === null) {
-            // Error handled in the parent
-            return parent::getTagTaxonomyName(
-                $customPostID,
-                $fieldDataAccessor,
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-        }
-
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
-        $this->validateTaxonomyIsRegisteredForCustomPostType(
-            $taxonomName,
-            $customPostType,
-            $fieldDataAccessor,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return null;
-        }
-
-        return $taxonomName;
     }
 
     protected function getTagTypeAPI(): TagTypeAPIInterface
