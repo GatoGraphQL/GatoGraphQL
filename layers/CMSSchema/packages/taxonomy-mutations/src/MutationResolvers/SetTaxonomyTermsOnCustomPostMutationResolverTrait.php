@@ -102,8 +102,9 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
             
             $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
+            $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
             foreach ($taxonomyTermSlugs as $taxonomyTermSlug) {
-                $taxonomyTermID = $this->getTaxonomyTermTypeAPI()->getTaxonomyTermID($taxonomyTermSlug, $taxonomyName);
+                $taxonomyTermID = $taxonomyTermTypeAPI->getTaxonomyTermID($taxonomyTermSlug, $taxonomyName);
                 if ($taxonomyTermID === null) {
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
@@ -152,10 +153,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         return $taxonomyToTaxonomyTermsIDs;
     }
 
-    protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface
-    {
-        return TaxonomyTermTypeAPIFacade::getInstance();
-    }
+    abstract protected function getTaxonomyTermTypeAPI(): TaxonomyTermTypeAPIInterface;
 
     /**
      * Retrieve the taxonomy passed via the `taxonomy` input.
