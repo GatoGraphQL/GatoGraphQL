@@ -12,6 +12,9 @@ services:
     
     PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface:
         class: \PoPCMSSchema\TagsWP\TypeAPIs\QueryableTagTypeAPI
+    
+    PoPCMSSchema\Tags\TypeAPIs\UniversalTagTypeAPIInterface:
+        class: \PoPCMSSchema\TagsWP\TypeAPIs\UniversalTagTypeAPI
 
     PoPCMSSchema\Tags\TypeAPIs\QueryableTaxonomyTagListTypeAPIInterface:
         class: \PoPCMSSchema\TagsWP\TypeAPIs\QueryableTaxonomyTagListTypeAPI
