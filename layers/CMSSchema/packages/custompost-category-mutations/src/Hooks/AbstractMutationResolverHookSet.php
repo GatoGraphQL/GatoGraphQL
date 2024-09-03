@@ -14,6 +14,7 @@ use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
+use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -231,6 +232,12 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E6,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [

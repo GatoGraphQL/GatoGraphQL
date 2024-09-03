@@ -25,7 +25,6 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
-
         /** @var string|null */
         $taxonomyName = $fieldDataAccessor->getValue(MutationInputProperties::TAXONOMY);
         if ($taxonomyName !== null) {
