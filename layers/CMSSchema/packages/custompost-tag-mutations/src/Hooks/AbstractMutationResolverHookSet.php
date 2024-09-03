@@ -131,56 +131,6 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         ErrorPayloadInterface $errorPayload,
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
     ): ErrorPayloadInterface {
-        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match (
-            [
-            $feedbackItemResolution->getFeedbackProviderServiceClass(),
-            $feedbackItemResolution->getCode()
-            ]
-        ) {
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new TagTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new TagTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E10,
-            ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E11,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E4,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E6,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E12,
-            ] => new TaxonomyIsNotValidErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            default => $errorPayload,
-        };
+        return $this->createSetTagsOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback) ?? $errorPayload;
     }
 }

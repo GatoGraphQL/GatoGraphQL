@@ -7,11 +7,18 @@ namespace PoPCMSSchema\CustomPostTagMutations\MutationResolvers;
 use PoPCMSSchema\CustomPostTagMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostTagMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
+use PoPCMSSchema\TagMutations\ObjectModels\TagTermDoesNotExistErrorPayload;
 use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
+use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider as TaxonomyMutationErrorFeedbackItemProvider;
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
+use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
+use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
+use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
+use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use stdClass;
@@ -189,5 +196,79 @@ trait SetTagsOnCustomPostMutationResolverTrait
             );
         }
         return null;
+    }
+
+    protected function createSetTagsOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback(
+        ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback,
+    ): ?ErrorPayloadInterface {
+        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
+        return match (
+            [
+            $feedbackItemResolution->getFeedbackProviderServiceClass(),
+            $feedbackItemResolution->getCode()
+            ]
+        ) {
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E2,
+            ] => new TagTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E3,
+            ] => new TagTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                MutationErrorFeedbackItemProvider::class,
+                MutationErrorFeedbackItemProvider::E4,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E6,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E7,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E8,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E9,
+            ] => new TaxonomyTermDoesNotExistErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E10,
+            ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E11,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            [
+                TaxonomyMutationErrorFeedbackItemProvider::class,
+                TaxonomyMutationErrorFeedbackItemProvider::E12,
+            ] => new TaxonomyIsNotValidErrorPayload(
+                $feedbackItemResolution->getMessage(),
+            ),
+            default => null,
+        };
     }
 }

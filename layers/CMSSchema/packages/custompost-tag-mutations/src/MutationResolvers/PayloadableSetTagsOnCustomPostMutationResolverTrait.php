@@ -21,35 +21,8 @@ trait PayloadableSetTagsOnCustomPostMutationResolverTrait
     protected function createErrorPayloadFromObjectTypeFieldResolutionFeedback(
         ObjectTypeFieldResolutionFeedbackInterface $objectTypeFieldResolutionFeedback
     ): ErrorPayloadInterface {
-        $feedbackItemResolution = $objectTypeFieldResolutionFeedback->getFeedbackItemResolution();
-        return match (
-            [
-            $feedbackItemResolution->getFeedbackProviderServiceClass(),
-            $feedbackItemResolution->getCode()
-            ]
-        ) {
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new TagTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new TagTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                TaxonomyMutationErrorFeedbackItemProvider::class,
-                TaxonomyMutationErrorFeedbackItemProvider::E10,
-            ] => new LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            default => $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback(
-                $objectTypeFieldResolutionFeedback
-            ),
-        };
+        return $this->createSetTagsOnCustomPostErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback)
+            ?? $this->upstreamCreateErrorPayloadFromObjectTypeFieldResolutionFeedback($objectTypeFieldResolutionFeedback);
     }
 
     protected function getUserNotLoggedInErrorFeedbackItemProviderClass(): string
