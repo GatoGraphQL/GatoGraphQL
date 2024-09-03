@@ -11,7 +11,6 @@ use PoPCMSSchema\TaxonomyMutations\FeedbackItemProviders\MutationErrorFeedbackIt
 use PoPCMSSchema\TaxonomyMutations\MutationResolvers\SetTaxonomyTermsOnCustomPostMutationResolverTrait;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload;
 use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyIsNotValidErrorPayload;
-use PoPCMSSchema\TaxonomyMutations\ObjectModels\TaxonomyTermDoesNotExistErrorPayload;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackInterface;
@@ -128,18 +127,6 @@ trait SetTagsOnCustomPostMutationResolverTrait
         ) {
             [
                 MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E2,
-            ] => new TagTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E3,
-            ] => new TagTermDoesNotExistErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E4,
             ] => new TaxonomyIsNotValidErrorPayload(
                 $feedbackItemResolution->getMessage(),
@@ -147,25 +134,25 @@ trait SetTagsOnCustomPostMutationResolverTrait
             [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E6,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
+            ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E7,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
+            ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E8,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
+            ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
                 TaxonomyMutationErrorFeedbackItemProvider::class,
                 TaxonomyMutationErrorFeedbackItemProvider::E9,
-            ] => new TaxonomyTermDoesNotExistErrorPayload(
+            ] => new TagTermDoesNotExistErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [
