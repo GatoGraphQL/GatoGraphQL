@@ -492,19 +492,4 @@ abstract class AbstractTaxonomyTypeAPI implements TaxonomyTypeAPIInterface
         }
         return null;
     }
-
-    /**
-     * @return array<string|int>|null
-     */
-    protected function getTaxonomyTermChildIDs(
-        string $taxonomy,
-        string|int|WP_Term $taxonomyTermObjectOrID,
-    ): ?array {
-        $taxonomyTermID = is_object($taxonomyTermObjectOrID) ? $this->getTaxonomyTermID($taxonomyTermObjectOrID) : $taxonomyTermObjectOrID;
-        $childrenIDs = get_term_children((int)$taxonomyTermID, $taxonomy);
-        if ($childrenIDs instanceof WP_Error) {
-            return null;
-        }
-        return $childrenIDs;
-    }
 }
