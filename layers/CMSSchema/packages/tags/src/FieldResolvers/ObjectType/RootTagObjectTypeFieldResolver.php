@@ -212,10 +212,10 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'tag' => $this->__('Retrieve a single post tag', 'pop-post-tags'),
-            'tags' => $this->__(' tags', 'pop-post-tags'),
-            'tagCount' => $this->__('Number of post tags', 'pop-post-tags'),
-            'tagNames' => $this->__('Names of the post tags', 'pop-post-tags'),
+            'tag' => $this->__('Retrieve a single tag', 'tags'),
+            'tags' => $this->__(' tags', 'tags'),
+            'tagCount' => $this->__('Number of tags', 'tags'),
+            'tagNames' => $this->__('Names of the tags', 'tags'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
