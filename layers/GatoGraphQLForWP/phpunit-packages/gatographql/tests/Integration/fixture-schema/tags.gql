@@ -8,7 +8,7 @@
     ...TagData
   }
 
-  allTaxonomyTags: tags(
+  tagsWithoutTaxonomy: tags(
     sort: { by: ID, order: ASC }
     pagination: { limit: 20 }
   ) {
@@ -34,6 +34,14 @@
     ...on GenericCustomPost {
       tags(
         taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
+        __typename
+        id
+        name
+        taxonomy
+      }
+      tagsWithoutTaxonomy: tags(
         sort: { by: ID, order: ASC }
       ) {
         __typename

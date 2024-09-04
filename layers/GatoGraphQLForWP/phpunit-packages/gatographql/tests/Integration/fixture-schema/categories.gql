@@ -8,7 +8,7 @@
     ...CategoryData
   }
 
-  allCategoryTaxonomies: categories(
+  categoriesWithoutTaxonomy: categories(
     sort: { by: ID, order: ASC }
     pagination: { limit: 20 }
   ) {
@@ -34,6 +34,14 @@
     ...on GenericCustomPost {
       categories(
         taxonomy: "dummy-category"
+        sort: { by: ID, order: ASC }
+      ) {
+        __typename
+        id
+        name
+        taxonomy
+      }
+      categoriesWithoutTaxonomy: categories(
         sort: { by: ID, order: ASC }
       ) {
         __typename
