@@ -6,6 +6,7 @@ namespace PoPCMSSchema\PostCategories\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryPaginationInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
+use PoPCMSSchema\PostCategories\TypeResolvers\EnumType\PostCategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\InputObjectType\PostCategoryByOneofInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\InputObjectType\RootPostCategoriesFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
@@ -37,6 +38,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     private ?RootPostCategoriesFilterInputObjectTypeResolver $rootPostCategoriesFilterInputObjectTypeResolver = null;
     private ?CategoryPaginationInputObjectTypeResolver $categoryPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
+    private ?PostCategoryTaxonomyEnumStringScalarTypeResolver $postCategoryTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -142,6 +144,19 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         }
         return $this->taxonomySortInputObjectTypeResolver;
     }
+    final public function setPostCategoryTaxonomyEnumStringScalarTypeResolver(PostCategoryTaxonomyEnumStringScalarTypeResolver $postCategoryTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->postCategoryTaxonomyEnumStringScalarTypeResolver = $postCategoryTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getPostCategoryTaxonomyEnumStringScalarTypeResolver(): PostCategoryTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->postCategoryTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var PostCategoryTaxonomyEnumStringScalarTypeResolver */
+            $postCategoryTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(PostCategoryTaxonomyEnumStringScalarTypeResolver::class);
+            $this->postCategoryTaxonomyEnumStringScalarTypeResolver = $postCategoryTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->postCategoryTaxonomyEnumStringScalarTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -211,9 +226,13 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        $commonFieldArgNameTypeResolvers = [
+            'taxonomy' => $this->getPostCategoryTaxonomyEnumStringScalarTypeResolver(),
+        ];
         return match ($fieldName) {
             'postCategory' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'by' => $this->getPostCategoryByOneofInputObjectTypeResolver(),
                 ]
@@ -221,6 +240,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             'postCategories',
             'postCategoryNames' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'filter' => $this->getRootPostCategoriesFilterInputObjectTypeResolver(),
                     'pagination' => $this->getCategoryPaginationInputObjectTypeResolver(),
@@ -229,6 +249,7 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
             ),
             'postCategoryCount' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'filter' => $this->getRootPostCategoriesFilterInputObjectTypeResolver(),
                 ]
@@ -245,13 +266,46 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         };
     }
 
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        if ($fieldArgName === 'taxonomy') {
+            return $this->__('Taxonomy of the post category', 'post-categories');
+        }
+        return match ([$fieldName => $fieldArgName]) {
+            ['postCategory' => 'by'] => $this->__('Parameter by which to select the post category', 'post-categories'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getQuery(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array {
+        $query = [];
+        
+        /** @var string|null */
+        $postCategoryTaxonomy = $fieldDataAccessor->getValue('taxonomy');
+        if ($postCategoryTaxonomy !== null) {
+            $query['taxonomy'] = $postCategoryTaxonomy;
+        }
+                
+        return $query;
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+            $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
+        );
         switch ($fieldDataAccessor->getFieldName()) {
             case 'postCategory':
                 if ($categories = $this->getPostCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
