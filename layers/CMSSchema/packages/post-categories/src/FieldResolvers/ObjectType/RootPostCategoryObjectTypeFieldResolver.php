@@ -277,6 +277,14 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         };
     }
 
+    public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        if ($fieldArgName === 'taxonomy') {
+            return $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
+        }
+        return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
+    }
+
     /**
      * @return array<string,mixed>
      */
