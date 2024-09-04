@@ -127,6 +127,9 @@
   
   postTagCount
   postTagNames
+  
+  allPostTagCount: postTagCount(taxonomy: null)
+  allPostTagNames: postTagNames(taxonomy: null)
 
   postsByTagByNonExistingID: postTag(by: { id: 8888 }) {
     ...PostTagData

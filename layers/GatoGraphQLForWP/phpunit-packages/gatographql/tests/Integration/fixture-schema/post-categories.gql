@@ -139,6 +139,9 @@
   
   postCategoryCount
   postCategoryNames
+  
+  allPostCategoryCount: postCategoryCount(taxonomy: null)
+  allPostCategoryNames: postCategoryNames(taxonomy: null)
 
   postsByCategoryByNonExistingID: postCategory(by: { id: 8888 }) {
     ...PostCategoryData
