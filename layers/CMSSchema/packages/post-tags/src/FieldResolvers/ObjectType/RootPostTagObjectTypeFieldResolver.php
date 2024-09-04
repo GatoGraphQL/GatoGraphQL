@@ -281,10 +281,9 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     {
         if ($fieldArgName === 'taxonomy') {
             $postTagTaxonomyName = $this->getPostTagTypeAPI()->getPostTagTaxonomyName();
-            if (!in_array($postTagTaxonomyName, $this->getPostTagTaxonomyEnumStringScalarTypeResolver()->getConsolidatedPossibleValues())) {
-                return null;
+            if (in_array($postTagTaxonomyName, $this->getPostTagTaxonomyEnumStringScalarTypeResolver()->getConsolidatedPossibleValues())) {
+                return $postTagTaxonomyName;
             }
-            return $postTagTaxonomyName;
         }
         return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
