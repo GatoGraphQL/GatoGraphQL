@@ -48,6 +48,10 @@ abstract class AbstractCreateOrUpdatePostCategoryTermInputObjectTypeResolver ext
 
     protected function getTaxonomyInputFieldDefaultValue(): mixed
     {
-        return $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
+        $postCategoryTaxonomyName = $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
+        if (!in_array($postCategoryTaxonomyName, $this->getPostCategoryTaxonomyEnumStringScalarTypeResolver()->getConsolidatedPossibleValues())) {
+            return null;
+        }
+        return $postCategoryTaxonomyName;
     }
 }
