@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\FieldResolvers\ObjectType;
 
-use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoPCMSSchema\Categories\FieldResolvers\ObjectType\AbstractCustomPostQueryableObjectTypeFieldResolver;
 use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeResolvers\ObjectType\CategoryObjectTypeResolverInterface;
+use PoPCMSSchema\PostCategories\ComponentProcessors\PostCategoryFilterInputContainerComponentProcessor;
 use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
+use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
 class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableObjectTypeFieldResolver
 {
@@ -52,6 +54,21 @@ class PostQueryableObjectTypeFieldResolver extends AbstractCustomPostQueryableOb
         return [
             PostObjectTypeResolver::class,
         ];
+    }
+
+    public function getFieldFilterInputContainerComponent(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?Component
+    {
+        return match ($fieldName) {
+            'categories',
+            'categoryNames',
+            'categoryCount'
+                => new Component(
+                    PostCategoryFilterInputContainerComponentProcessor::class,
+                    PostCategoryFilterInputContainerComponentProcessor::COMPONENT_FILTERINPUTCONTAINER_POSTCATEGORIES
+                ),
+            default
+                => parent::getFieldFilterInputContainerComponent($objectTypeResolver, $fieldName),
+        };
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
