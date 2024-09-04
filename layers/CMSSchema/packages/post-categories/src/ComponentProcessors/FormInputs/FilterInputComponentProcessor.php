@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostCategories\ComponentProcessors\FormInputs;
 
+use PoPCMSSchema\PostCategories\TypeAPIs\PostCategoryTypeAPIInterface;
 use PoPCMSSchema\PostCategories\TypeResolvers\EnumType\PostCategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Taxonomies\FilterInputs\TaxonomyFilterInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
@@ -18,6 +19,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?TaxonomyFilterInput $taxonomyFilterInput = null;
     private ?PostCategoryTaxonomyEnumStringScalarTypeResolver $postCategoryTaxonomyEnumStringScalarTypeResolver = null;
+    private ?PostCategoryTypeAPIInterface $postCategoryTypeAPI = null;
 
     final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
     {
@@ -44,6 +46,19 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->postCategoryTaxonomyEnumStringScalarTypeResolver = $postCategoryTaxonomyEnumStringScalarTypeResolver;
         }
         return $this->postCategoryTaxonomyEnumStringScalarTypeResolver;
+    }
+    final public function setPostCategoryTypeAPI(PostCategoryTypeAPIInterface $postCategoryTypeAPI): void
+    {
+        $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+    }
+    final protected function getPostCategoryTypeAPI(): PostCategoryTypeAPIInterface
+    {
+        if ($this->postCategoryTypeAPI === null) {
+            /** @var PostCategoryTypeAPIInterface */
+            $postCategoryTypeAPI = $this->instanceManager->getInstance(PostCategoryTypeAPIInterface::class);
+            $this->postCategoryTypeAPI = $postCategoryTypeAPI;
+        }
+        return $this->postCategoryTypeAPI;
     }
 
     /**
@@ -84,6 +99,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_POST_CATEGORY_TAXONOMY => $this->__('Post category taxonomy', 'post-categories'),
+            default => null,
+        };
+    }
+
+    public function getFilterInputDefaultValue(Component $component): mixed
+    {
+        return match ($component->name) {
+            self::COMPONENT_FILTERINPUT_POST_CATEGORY_TAXONOMY => $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName(),
             default => null,
         };
     }

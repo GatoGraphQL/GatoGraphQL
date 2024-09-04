@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostTags\ComponentProcessors\FormInputs;
 
+use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\PostTags\TypeResolvers\EnumType\PostTagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Taxonomies\FilterInputs\TaxonomyFilterInput;
 use PoP\ComponentModel\ComponentProcessors\AbstractFilterInputComponentProcessor;
@@ -18,6 +19,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
 
     private ?TaxonomyFilterInput $taxonomyFilterInput = null;
     private ?PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver = null;
+    private ?PostTagTypeAPIInterface $postTagTypeAPI = null;
 
     final public function setTaxonomyFilterInput(TaxonomyFilterInput $taxonomyFilterInput): void
     {
@@ -44,6 +46,19 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
         }
         return $this->postTagTaxonomyEnumStringScalarTypeResolver;
+    }
+    final public function setPostTagTypeAPI(PostTagTypeAPIInterface $postTagTypeAPI): void
+    {
+        $this->postTagTypeAPI = $postTagTypeAPI;
+    }
+    final protected function getPostTagTypeAPI(): PostTagTypeAPIInterface
+    {
+        if ($this->postTagTypeAPI === null) {
+            /** @var PostTagTypeAPIInterface */
+            $postTagTypeAPI = $this->instanceManager->getInstance(PostTagTypeAPIInterface::class);
+            $this->postTagTypeAPI = $postTagTypeAPI;
+        }
+        return $this->postTagTypeAPI;
     }
 
     /**
@@ -84,6 +99,14 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     {
         return match ($component->name) {
             self::COMPONENT_FILTERINPUT_POST_TAG_TAXONOMY => $this->__('Post tag taxonomy', 'post-tags'),
+            default => null,
+        };
+    }
+
+    public function getFilterInputDefaultValue(Component $component): mixed
+    {
+        return match ($component->name) {
+            self::COMPONENT_FILTERINPUT_POST_TAG_TAXONOMY => $this->getPostTagTypeAPI()->getPostTagTaxonomyName(),
             default => null,
         };
     }
