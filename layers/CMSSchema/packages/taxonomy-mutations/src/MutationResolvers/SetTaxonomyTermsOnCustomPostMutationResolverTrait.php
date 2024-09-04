@@ -17,7 +17,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
     use MutateTaxonomyTermMutationResolverTrait;
 
     /**
-     * Retrieve the taxonomy from the queried entites.
+     * Retrieve the taxonomy from the queried entities.
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
      *
@@ -80,7 +80,7 @@ trait SetTaxonomyTermsOnCustomPostMutationResolverTrait
     }
 
     /**
-     * Retrieve the taxonomy from the queried entites.
+     * Retrieve the taxonomy from the queried entities.
      * If the taxonomy is explicitly provided, validate that the
      * entities indeed have that taxonomy.
      *
