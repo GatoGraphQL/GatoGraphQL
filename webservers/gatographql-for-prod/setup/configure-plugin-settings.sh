@@ -37,6 +37,6 @@ curl -i --insecure \
   --user "admin:$(echo $ADMIN_USER_APP_PASSWORD)" \
   -X POST \
   -H "Content-Type: application/json" \
-  -d '{"jsonEncodedOptionValues": "{\"category-taxonomies\":[\"additional-post-category\",\"category\",\"dummy-category\",\"dummy-category-two\"]}"}' \
+  -d '{"jsonEncodedOptionValues": "{\"category-taxonomies\":[\"additional-post-category\",\"additional-dummy-category\",\"category\",\"dummy-category\",\"dummy-category-two\"]}"}' \
   $(echo $SITE_DOMAIN)/wp-json/gatographql/v1/admin/module-settings/gatographql_gatographql_schema-categories
  
