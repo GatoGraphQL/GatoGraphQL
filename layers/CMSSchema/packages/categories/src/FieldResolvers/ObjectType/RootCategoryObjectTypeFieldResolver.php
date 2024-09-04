@@ -260,9 +260,9 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        if ($fieldArgName === 'taxonomy') {
-            return SchemaTypeModifiers::MANDATORY;
-        }
+        // if ($fieldArgName === 'taxonomy') {
+        //     return SchemaTypeModifiers::MANDATORY;
+        // }
         return match ([$fieldName => $fieldArgName]) {
             ['category' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
