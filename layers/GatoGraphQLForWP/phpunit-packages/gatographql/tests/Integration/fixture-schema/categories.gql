@@ -7,14 +7,22 @@
     ...GenericCategoryData
     ...CategoryData
   }
+
+  allCategoryTaxonomies: categories(
+    sort: { by: ID, order: ASC }
+    pagination: { limit: 20 }
+  ) {
+    __typename
+    ...PostCategoryData
+    ...GenericCategoryData
+    ...CategoryData
+  }
   
   customPosts(
     filter: {
       customPostTypes: ["post","dummy-cpt"]
     }
-    pagination: {
-      limit: 30
-    }
+    pagination: { limit: 30 }
     sort: { by: ID, order: ASC }
   ) {
     __typename
@@ -202,9 +210,16 @@ fragment CategoryData on Category {
 }
 
 fragment GenericCategoryData on GenericCategory {
-  taxonomy   
   customPostCount
   customPosts(sort: {by: ID, order: ASC}) {
+    __typename
+    ...CustomPostData
+  }
+}
+
+fragment PostCategoryData on PostCategory {
+  postCount
+  posts(sort: {by: ID, order: ASC}) {
     __typename
     ...CustomPostData
   }
@@ -214,7 +229,6 @@ fragment CustomPostData on CustomPost {
   id
   title
   categories(
-    taxonomy: "dummy-category"
     sort: { by: ID, order: ASC }
   ) {
     __typename

@@ -7,14 +7,22 @@
     ...GenericTagData
     ...TagData
   }
+
+  allTaxonomyTags: tags(
+    sort: { by: ID, order: ASC }
+    pagination: { limit: 20 }
+  ) {
+    __typename
+    ...PostTagData
+    ...GenericTagData
+    ...TagData
+  }
   
   customPosts(
     filter: {
       customPostTypes: ["post","dummy-cpt"]
     }
-    pagination: {
-      limit: 30
-    }
+    pagination: { limit: 30 }
     sort: { by: ID, order: ASC }
   ) {
     __typename
@@ -204,9 +212,16 @@ fragment TagData on Tag {
 }
 
 fragment GenericTagData on GenericTag {
-  taxonomy   
   customPostCount
   customPosts(sort: { by: ID, order: ASC }) {
+    __typename
+    ...CustomPostData
+  }
+}
+
+fragment PostTagData on PostTag {
+  postCount
+  posts(sort: { by: ID, order: ASC }) {
     __typename
     ...CustomPostData
   }
@@ -216,7 +231,6 @@ fragment CustomPostData on CustomPost {
   id
   title
   tags(
-    taxonomy: "dummy-tag"
     sort: { by: ID, order: ASC }
   ) {
     __typename
