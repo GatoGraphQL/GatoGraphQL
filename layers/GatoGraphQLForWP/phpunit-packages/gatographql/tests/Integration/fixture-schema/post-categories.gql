@@ -39,6 +39,18 @@
         ...PostCategoryData
       }
     }
+    additionalCategories: categories(taxonomy: "additional-post-category") {
+      ...PostCategoryData
+      children {
+        ...PostCategoryData
+      }
+    }
+    allCategories: categories(taxonomy: null) {
+      ...PostCategoryData
+      children {
+        ...PostCategoryData
+      }
+    }
     categoriesByExcludeIDs: categories(filter: { excludeIDs: [2] }) {
       id
     }

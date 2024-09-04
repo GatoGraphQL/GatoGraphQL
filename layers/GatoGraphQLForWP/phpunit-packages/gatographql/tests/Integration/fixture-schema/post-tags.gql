@@ -24,6 +24,12 @@
     tags {
       ...PostTagData
     }
+    additionalTags: tags(taxonomy: "additional-post-tag") {
+      ...PostTagData
+    }
+    allTags: tags(taxonomy: null) {
+      ...PostTagData
+    }
     tagsByExcludeIDs: tags(filter: { excludeIDs: [5] }) {
       id
     }
