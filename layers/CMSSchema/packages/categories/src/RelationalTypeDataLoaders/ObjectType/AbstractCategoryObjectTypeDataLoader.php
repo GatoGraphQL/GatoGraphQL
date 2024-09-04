@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use PoP\ComponentModel\App;
@@ -14,7 +14,7 @@ abstract class AbstractCategoryObjectTypeDataLoader extends AbstractObjectTypeQu
 {
     public const HOOK_ALL_OBJECTS_BY_IDS_QUERY = __CLASS__ . ':all-objects-by-ids-query';
 
-    abstract public function getCategoryTypeAPI(): CategoryListTypeAPIInterface;
+    abstract public function getCategoryTypeAPI(): CategoryTypeAPIInterface;
 
     /**
      * @param array<string|int> $ids
