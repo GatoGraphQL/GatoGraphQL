@@ -280,7 +280,11 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
     public function getFieldArgDefaultValue(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         if ($fieldArgName === 'taxonomy') {
-            return $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
+            $postCategoryTaxonomyName = $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
+            if (!in_array($postCategoryTaxonomyName, $this->getPostCategoryTaxonomyEnumStringScalarTypeResolver()->getConsolidatedPossibleValues())) {
+                return null;
+            }
+            return $postCategoryTaxonomyName;
         }
         return parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName);
     }
