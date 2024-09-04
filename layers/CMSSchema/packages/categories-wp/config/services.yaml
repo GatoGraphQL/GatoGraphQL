@@ -16,6 +16,3 @@ services:
     PoPCMSSchema\Categories\TypeAPIs\UniversalCategoryTypeAPIInterface:
         class: \PoPCMSSchema\CategoriesWP\TypeAPIs\UniversalCategoryTypeAPI
 
-    PoPCMSSchema\Categories\TypeAPIs\InjectableTaxonomyCategoryListTypeAPIInterface:
-        class: \PoPCMSSchema\CategoriesWP\TypeAPIs\InjectableTaxonomyCategoryListTypeAPI
-
