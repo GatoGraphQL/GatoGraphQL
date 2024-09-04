@@ -260,9 +260,6 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
-        // if ($fieldArgName === 'taxonomy') {
-        //     return SchemaTypeModifiers::MANDATORY;
-        // }
         return match ([$fieldName => $fieldArgName]) {
             ['tag' => 'by'] => SchemaTypeModifiers::MANDATORY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
