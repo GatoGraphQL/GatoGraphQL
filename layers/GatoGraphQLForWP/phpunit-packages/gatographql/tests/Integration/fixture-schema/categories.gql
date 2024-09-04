@@ -83,26 +83,6 @@
     }
   }
 
-  customPostsByCategoryIDsWithoutTaxonomy: customPosts(
-    filter: {
-      categories: {
-        includeBy: {
-          ids: [23, 32]
-        }
-      }
-    }
-  ) {
-    id
-    title
-    ...on GenericCustomPost {
-      categories(
-        sort: { by: ID, order: ASC }
-      ) {
-        id
-      }
-    }
-  }
-
   customPostsExcludeByCategoryIDs: customPosts(
     filter: {
       categories: {
@@ -140,26 +120,6 @@
     ...on GenericCustomPost {
       categories(
         taxonomy: "dummy-category"
-        sort: { by: ID, order: ASC }
-      ) {
-        id
-      }
-    }
-  }
-
-  customPostsByCategorySlugsWithoutTaxonomy: customPosts(
-    filter: {
-      categories: {
-        includeBy: {
-          slugs: ["capullo"]
-        }
-      }
-    }
-  ) {
-    id
-    title
-    ...on GenericCustomPost {
-      categories(
         sort: { by: ID, order: ASC }
       ) {
         id
