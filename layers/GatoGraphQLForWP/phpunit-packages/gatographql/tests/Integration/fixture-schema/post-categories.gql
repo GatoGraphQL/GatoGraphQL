@@ -13,6 +13,13 @@
     }
   }
 
+  allPostCategoriesWithTaxonomy: postCategories(taxonomy: null) {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
   nonEmptyPostCategories: postCategories(filter: {hideEmpty: true}) {
     id
     name

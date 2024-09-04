@@ -7,6 +7,10 @@
     ...PostTagData
   }
 
+  allPostTagsWithTaxonomy: postTags(taxonomy: null) {
+    ...PostTagData
+  }
+
   nonEmptyPostTags: postTags(filter: {hideEmpty: true}) {
     id
     name
