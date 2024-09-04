@@ -8,7 +8,7 @@ We can add tags to posts in WordPress (i.e. using the taxonomy with name `"post_
 
 Custom Post Types defined by any theme or plugin (such as `"product"`) can likewise have their own tag taxonomy associated to them (such as `"product-tag"`). As these tag taxonomies don't ship their own specific type for the GraphQL schema (that would require an extension via PHP code), these are resolved via the `GenericTag` type.
 
-We use fields `tag` and `tags` to fetch tag data, which must indicate which taxonomy they refer to via mandatory field argument `taxonomy`. The result is of the union type `TagUnion`, which includes entries from either `PostTag` or `GenericTag` (depending on the entry's taxonomy).
+We use fields `tag` and `tags` to fetch tag data, which indicate which taxonomy they refer to via field argument `taxonomy`. The result is of the union type `TagUnion`, which includes entries from either `PostTag` or `GenericTag` (depending on the entry's taxonomy).
 
 ![TagUnion type in the Interactive Schema](../../images/interactive-schema-tag-union.png "TagUnion type in the Interactive Schema")
 

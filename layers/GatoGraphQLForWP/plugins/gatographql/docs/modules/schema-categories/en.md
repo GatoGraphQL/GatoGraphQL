@@ -8,7 +8,7 @@ We can add categories to posts in WordPress (i.e. using the taxonomy with name `
 
 Custom Post Types defined by any theme or plugin (such as `"product"`) can likewise have their own category taxonomy associated to them (such as `"product-cat"`). As these category taxonomies don't ship their own specific type for the GraphQL schema (that would require an extension via PHP code), these are resolved via the `GenericCategory` type.
 
-We use fields `category` and `categories` to fetch category data, which must indicate which taxonomy they refer to via mandatory field argument `taxonomy`. The result is of the union type `CategoryUnion`, which includes entries from either `PostCategory` or `GenericCategory` (depending on the entry's taxonomy).
+We use fields `category` and `categories` to fetch category data, which indicate which taxonomy they refer to via field argument `taxonomy`. The result is of the union type `CategoryUnion`, which includes entries from either `PostCategory` or `GenericCategory` (depending on the entry's taxonomy).
 
 ![CategoryUnion type in the Interactive Schema](../../images/interactive-schema-category-union.png "CategoryUnion type in the Interactive Schema")
 
