@@ -6,7 +6,7 @@ namespace PoPCMSSchema\PostTags\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
 use PoPCMSSchema\Tags\RelationalTypeDataLoaders\ObjectType\AbstractTagObjectTypeDataLoader;
-use PoPCMSSchema\Tags\TypeAPIs\TagListTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\TagTypeAPIInterface;
 
 class PostTagObjectTypeDataLoader extends AbstractTagObjectTypeDataLoader
 {
@@ -26,7 +26,7 @@ class PostTagObjectTypeDataLoader extends AbstractTagObjectTypeDataLoader
         return $this->postTagTypeAPI;
     }
 
-    public function getTagListTypeAPI(): TagListTypeAPIInterface
+    public function getTagTypeAPI(): TagTypeAPIInterface
     {
         return $this->getPostTagTypeAPI();
     }
