@@ -8,5 +8,8 @@ use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterfa
 
 interface CategoryObjectTypeResolverPickerInterface extends ObjectTypeResolverPickerInterface
 {
-    public function getCategoryTaxonomy(): string;
+    /**
+     * @return string[]
+     */
+    public function getCategoryTaxonomies(): array;
 }
