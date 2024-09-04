@@ -3,7 +3,7 @@
     ...PostTagData
   }
 
-  postTagsWithTaxonomy: postTags(filter: { taxonomy: post_tag }) {
+  postTagsWithTaxonomy: postTags(taxonomy: post_tag) {
     ...PostTagData
   }
 

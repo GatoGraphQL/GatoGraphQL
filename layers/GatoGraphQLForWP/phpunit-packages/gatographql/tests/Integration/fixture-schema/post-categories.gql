@@ -6,7 +6,7 @@
     }
   }
 
-  postCategoriesWithTaxonomy: postCategories(filter: { taxonomy: post }) {
+  postCategoriesWithTaxonomy: postCategories(taxonomy: category) {
     ...PostCategoryData
     children {
       ...PostCategoryData
