@@ -17,6 +17,9 @@ use PoP\ComponentModel\App;
  */
 class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterface
 {
+    /** @var string[] */
+    protected ?array $registeredPostTagTaxonomyNames = null;
+
     private ?TaxonomyTermTypeAPIInterface $taxonomyTermTypeAPI = null;
     private ?PostTypeAPIInterface $postTypeAPI = null;
 
@@ -80,12 +83,15 @@ class PostTagTypeAPI extends AbstractTagTypeAPI implements PostTagTypeAPIInterfa
      */
     public function getRegisteredPostTagTaxonomyNames(): array
     {
-        $customPostType = $this->getPostTypeAPI()->getPostCustomPostType();
-        $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
-        $customPostTypeTaxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
-        return array_values(array_filter(
-            $customPostTypeTaxonomyNames,
-            fn (string $taxonomyName) => !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName)
-        ));
+        if ($this->registeredPostTagTaxonomyNames === null) {
+            $customPostType = $this->getPostTypeAPI()->getPostCustomPostType();
+            $taxonomyTermTypeAPI = $this->getTaxonomyTermTypeAPI();
+            $customPostTypeTaxonomyNames = $taxonomyTermTypeAPI->getCustomPostTypeTaxonomyNames($customPostType);
+            $this->registeredPostTagTaxonomyNames = array_values(array_filter(
+                $customPostTypeTaxonomyNames,
+                fn (string $taxonomyName) => !$taxonomyTermTypeAPI->isTaxonomyHierarchical($taxonomyName)
+            ));
+        }
+        return $this->registeredPostTagTaxonomyNames;
     }
 }
