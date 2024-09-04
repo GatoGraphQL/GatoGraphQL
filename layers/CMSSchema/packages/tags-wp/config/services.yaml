@@ -16,5 +16,5 @@ services:
     PoPCMSSchema\Tags\TypeAPIs\UniversalTagTypeAPIInterface:
         class: \PoPCMSSchema\TagsWP\TypeAPIs\UniversalTagTypeAPI
 
-    PoPCMSSchema\Tags\TypeAPIs\QueryableTaxonomyTagListTypeAPIInterface:
-        class: \PoPCMSSchema\TagsWP\TypeAPIs\QueryableTaxonomyTagListTypeAPI
+    PoPCMSSchema\Tags\TypeAPIs\InjectableTaxonomyTagListTypeAPIInterface:
+        class: \PoPCMSSchema\TagsWP\TypeAPIs\InjectableTaxonomyTagListTypeAPI
