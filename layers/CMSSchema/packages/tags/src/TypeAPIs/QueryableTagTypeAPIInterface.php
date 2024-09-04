@@ -4,6 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Tags\TypeAPIs;
 
-interface QueryableTagTypeAPIInterface extends TagTypeAPIInterface, TagListTypeAPIInterface
+interface QueryableTagTypeAPIInterface extends TagTypeAPIInterface
 {
 }

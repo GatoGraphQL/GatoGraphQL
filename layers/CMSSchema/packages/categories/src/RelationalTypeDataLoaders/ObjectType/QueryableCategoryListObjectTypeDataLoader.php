@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType;
 
 use PoPCMSSchema\Categories\RelationalTypeDataLoaders\ObjectType\AbstractCategoryObjectTypeDataLoader;
-use PoPCMSSchema\Categories\TypeAPIs\CategoryListTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\CategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 
 class QueryableCategoryListObjectTypeDataLoader extends AbstractCategoryObjectTypeDataLoader
@@ -26,7 +26,7 @@ class QueryableCategoryListObjectTypeDataLoader extends AbstractCategoryObjectTy
         return $this->queryableCategoryListTypeAPI;
     }
 
-    public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface
+    public function getCategoryTypeAPI(): CategoryTypeAPIInterface
     {
         return $this->getQueryableCategoryTypeAPI();
     }
