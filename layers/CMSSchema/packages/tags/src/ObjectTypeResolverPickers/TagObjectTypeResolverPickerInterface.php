@@ -8,5 +8,8 @@ use PoP\ComponentModel\ObjectTypeResolverPickers\ObjectTypeResolverPickerInterfa
 
 interface TagObjectTypeResolverPickerInterface extends ObjectTypeResolverPickerInterface
 {
-    public function getTagTaxonomy(): string;
+    /**
+     * @return string[]
+     */
+    public function getTagTaxonomies(): array;
 }
