@@ -292,6 +292,34 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[World Cup]]></wp:term_name>
 	</wp:term>
+	<wp:term>
+		<wp:term_id>41</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-post-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[swimming]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Swimming]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>42</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-post-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[foosball]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Foosball]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>43</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-post-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[racing-cars]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Racing cars]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>44</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-post-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[horses]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Horses]]></wp:term_name>
+	</wp:term>
 		
 			
 	<generator>https://wordpress.org/?v=6.0</generator>
@@ -1640,6 +1668,8 @@
 		<wp:is_sticky>0</wp:is_sticky>
 												<category domain="category" nicename="special-topic"><![CDATA[Special topic]]></category>
 			<category domain="post_format" nicename="post-format-aside"><![CDATA[Aside]]></category>
+		<category domain="additional-post-category" nicename="foosball"><![CDATA[Foosball]]></category>
+		<category domain="additional-post-tag" nicename="horses"><![CDATA[Horses]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[enclosure]]></wp:meta_key>
 		<wp:meta_value><![CDATA[https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3
@@ -1717,6 +1747,8 @@ video/mp4
 		<category domain="post_tag" nicename="features"><![CDATA[features]]></category>
 		<category domain="category" nicename="resource"><![CDATA[Resource]]></category>
 		<category domain="post_tag" nicename="security"><![CDATA[security]]></category>
+		<category domain="additional-post-category" nicename="swimming"><![CDATA[Swimming]]></category>
+		<category domain="additional-post-tag" nicename="racing-cars"><![CDATA[Racing cars]]></category>
   <category domain="post_format" nicename="post-format-chat"><![CDATA[Chat]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_thumbnail_id]]></wp:meta_key>
