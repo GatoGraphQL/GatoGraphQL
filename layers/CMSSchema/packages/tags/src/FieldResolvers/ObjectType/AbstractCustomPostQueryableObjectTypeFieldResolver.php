@@ -175,17 +175,16 @@ abstract class AbstractCustomPostQueryableObjectTypeFieldResolver extends Abstra
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $tagTypeAPI = $this->getTagTypeAPI();
         $customPost = $object;
         $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
         switch ($fieldDataAccessor->getFieldName()) {
             case 'tags':
-                return $tagTypeAPI->getCustomPostTags($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
+                return $this->getTagTypeAPI()->getCustomPostTags($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS]);
             case 'tagNames':
-                return $tagTypeAPI->getCustomPostTags($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
+                return $this->getTagTypeAPI()->getCustomPostTags($customPost, $query, [QueryOptions::RETURN_TYPE => ReturnTypes::NAMES]);
             case 'tagCount':
                 /** @var int */
-                return $tagTypeAPI->getCustomPostTagCount($customPost, $query);
+                return $this->getTagTypeAPI()->getCustomPostTagCount($customPost, $query);
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
