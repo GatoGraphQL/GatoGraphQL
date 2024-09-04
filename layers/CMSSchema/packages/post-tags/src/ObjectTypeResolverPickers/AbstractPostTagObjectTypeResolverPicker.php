@@ -60,8 +60,11 @@ abstract class AbstractPostTagObjectTypeResolverPicker extends AbstractObjectTyp
         return $this->getPostTagTypeAPI()->tagExists($objectID);
     }
 
-    public function getTagTaxonomy(): string
+    /**
+     * @return string[]
+     */
+    public function getTagTaxonomies(): array
     {
-        return $this->getPostTagTypeAPI()->getPostTagTaxonomyName();
+        return $this->getPostTagTypeAPI()->getRegisteredPostTagTaxonomyNames();
     }
 }
