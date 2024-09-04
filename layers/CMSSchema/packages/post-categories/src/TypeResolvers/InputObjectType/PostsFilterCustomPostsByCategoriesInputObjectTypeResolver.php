@@ -35,4 +35,9 @@ class PostsFilterCustomPostsByCategoriesInputObjectTypeResolver extends Abstract
     {
         return $this->getPostCategoryTaxonomyEnumStringScalarTypeResolver();
     }
+
+    protected function getCategoryTaxonomyFilterDefaultValue(): mixed
+    {
+        return null;
+    }
 }

@@ -34,4 +34,9 @@ class CustomPostsFilterCustomPostsByCategoriesInputObjectTypeResolver extends Ab
     {
         return $this->getCategoryTaxonomyEnumStringScalarTypeResolver();
     }
+
+    protected function getCategoryTaxonomyFilterDefaultValue(): mixed
+    {
+        return null;
+    }
 }

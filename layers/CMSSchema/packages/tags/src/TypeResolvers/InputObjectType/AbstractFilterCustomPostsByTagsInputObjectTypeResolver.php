@@ -56,6 +56,16 @@ abstract class AbstractFilterCustomPostsByTagsInputObjectTypeResolver extends Ab
         };
     }
 
+    public function getInputFieldDefaultValue(string $inputFieldName): mixed
+    {
+        return match ($inputFieldName) {
+            'taxonomy' => $this->getTagTaxonomyFilterDefaultValue(),
+            default => parent::getInputFieldDefaultValue($inputFieldName),
+        };
+    }
+
+    abstract protected function getTagTaxonomyFilterDefaultValue(): mixed;
+
     /**
      * @param array<string,mixed> $query
      * @param stdClass|stdClass[]|array<stdClass[]> $inputValue

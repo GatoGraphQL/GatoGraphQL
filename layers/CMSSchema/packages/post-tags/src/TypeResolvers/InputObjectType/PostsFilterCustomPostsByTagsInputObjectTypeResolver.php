@@ -35,4 +35,9 @@ class PostsFilterCustomPostsByTagsInputObjectTypeResolver extends AbstractFilter
     {
         return $this->getPostTagTaxonomyEnumStringScalarTypeResolver();
     }
+
+    protected function getTagTaxonomyFilterDefaultValue(): mixed
+    {
+        return null;
+    }
 }
