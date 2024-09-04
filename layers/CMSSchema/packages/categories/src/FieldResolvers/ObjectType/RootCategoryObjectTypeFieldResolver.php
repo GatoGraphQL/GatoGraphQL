@@ -280,13 +280,35 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
         };
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getQuery(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array {
+        $query = [];
+        
+        /** @var string|null */
+        $categoryTaxonomy = $fieldDataAccessor->getValue('taxonomy');
+        if ($categoryTaxonomy !== null) {
+            $query['taxonomy'] = $categoryTaxonomy;
+        }
+                
+        return $query;
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+            $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
+        );
         switch ($fieldDataAccessor->getFieldName()) {
             case 'category':
                 if ($categories = $this->getQueryableCategoryTypeAPI()->getCategories($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {

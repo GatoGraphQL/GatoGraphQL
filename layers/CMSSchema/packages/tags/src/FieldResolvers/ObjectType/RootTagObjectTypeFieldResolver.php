@@ -280,13 +280,35 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         };
     }
 
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getQuery(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array {
+        $query = [];
+        
+        /** @var string|null */
+        $tagTaxonomy = $fieldDataAccessor->getValue('taxonomy');
+        if ($tagTaxonomy !== null) {
+            $query['taxonomy'] = $tagTaxonomy;
+        }
+                
+        return $query;
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+            $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
+        );
         switch ($fieldDataAccessor->getFieldName()) {
             case 'tag':
                 if ($tags = $this->getQueryableTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {
