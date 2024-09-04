@@ -286,13 +286,13 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         $query = [];
-        
+
         /** @var string|null */
         $tagTaxonomy = $fieldDataAccessor->getValue('taxonomy');
         if ($tagTaxonomy !== null) {
             $query['taxonomy'] = $tagTaxonomy;
         }
-                
+
         return $query;
     }
 

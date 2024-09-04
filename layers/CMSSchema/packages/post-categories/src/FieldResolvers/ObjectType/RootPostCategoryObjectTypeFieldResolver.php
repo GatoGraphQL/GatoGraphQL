@@ -286,13 +286,13 @@ class RootPostCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTyp
         FieldDataAccessorInterface $fieldDataAccessor,
     ): array {
         $query = [];
-        
+
         /** @var string|null */
         $postCategoryTaxonomy = $fieldDataAccessor->getValue('taxonomy');
         if ($postCategoryTaxonomy !== null) {
             $query['taxonomy'] = $postCategoryTaxonomy;
         }
-                
+
         return $query;
     }
 
