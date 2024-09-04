@@ -169,8 +169,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
             self::COMPONENT_FILTERINPUT_TAG_SLUGS,
             self::COMPONENT_FILTERINPUT_TAG_IDS
                 => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
-            self::COMPONENT_FILTERINPUT_GENERIC_TAG_TAXONOMY
-                => SchemaTypeModifiers::MANDATORY,
+            // self::COMPONENT_FILTERINPUT_GENERIC_TAG_TAXONOMY
+            //     => SchemaTypeModifiers::MANDATORY,
             default
                 => SchemaTypeModifiers::NONE,
         };
