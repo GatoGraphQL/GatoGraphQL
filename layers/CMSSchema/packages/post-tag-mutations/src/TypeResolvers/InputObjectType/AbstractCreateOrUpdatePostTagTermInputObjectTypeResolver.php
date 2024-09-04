@@ -49,9 +49,9 @@ abstract class AbstractCreateOrUpdatePostTagTermInputObjectTypeResolver extends 
     protected function getTaxonomyInputFieldDefaultValue(): mixed
     {
         $postTagTaxonomyName = $this->getPostTagTypeAPI()->getPostTagTaxonomyName();
-        if (in_array($postTagTaxonomyName, $this->getPostTagTaxonomyEnumStringScalarTypeResolver()->getConsolidatedPossibleValues())) {
-            return $postTagTaxonomyName;
+        if (!in_array($postTagTaxonomyName, $this->getPostTagTaxonomyEnumStringScalarTypeResolver()->getConsolidatedPossibleValues())) {
+            return null;
         }
-        return null;
+        return $postTagTaxonomyName;
     }
 }
