@@ -320,6 +320,34 @@
 		<wp:term_parent><![CDATA[]]></wp:term_parent>
 		<wp:term_name><![CDATA[Horses]]></wp:term_name>
 	</wp:term>
+	<wp:term>
+		<wp:term_id>45</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-dummy-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[asia]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Asia]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>46</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-dummy-category]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[europe]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Europe]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>47</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-dummy-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[argentina]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Argentina]]></wp:term_name>
+	</wp:term>
+	<wp:term>
+		<wp:term_id>48</wp:term_id>
+		<wp:term_taxonomy><![CDATA[additional-dummy-tag]]></wp:term_taxonomy>
+		<wp:term_slug><![CDATA[brazil]]></wp:term_slug>
+		<wp:term_parent><![CDATA[]]></wp:term_parent>
+		<wp:term_name><![CDATA[Brazil]]></wp:term_name>
+	</wp:term>
 		
 			
 	<generator>https://wordpress.org/?v=6.0</generator>
