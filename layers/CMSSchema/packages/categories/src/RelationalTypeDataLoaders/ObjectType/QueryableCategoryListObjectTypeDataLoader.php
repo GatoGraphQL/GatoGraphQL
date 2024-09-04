@@ -26,7 +26,7 @@ class QueryableCategoryListObjectTypeDataLoader extends AbstractCategoryObjectTy
         return $this->queryableCategoryListTypeAPI;
     }
 
-    public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface
+    public function getCategoryTypeAPI(): CategoryListTypeAPIInterface
     {
         return $this->getQueryableCategoryTypeAPI();
     }

@@ -42,7 +42,7 @@ class PostCategoryObjectTypeDataLoader extends AbstractCategoryObjectTypeDataLoa
         return $this->postCategoryObjectTypeResolver;
     }
 
-    public function getCategoryListTypeAPI(): CategoryListTypeAPIInterface
+    public function getCategoryTypeAPI(): CategoryListTypeAPIInterface
     {
         return $this->getPostCategoryTypeAPI();
     }
