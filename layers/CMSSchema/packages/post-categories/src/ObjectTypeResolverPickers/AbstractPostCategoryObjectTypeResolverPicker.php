@@ -60,8 +60,11 @@ abstract class AbstractPostCategoryObjectTypeResolverPicker extends AbstractObje
         return $this->getPostCategoryTypeAPI()->categoryExists($objectID);
     }
 
-    public function getCategoryTaxonomy(): string
+    /**
+     * @return string[]
+     */
+    public function getCategoryTaxonomies(): array
     {
-        return $this->getPostCategoryTypeAPI()->getPostCategoryTaxonomyName();
+        return $this->getPostCategoryTypeAPI()->getRegisteredPostCategoryTaxonomyNames();
     }
 }
