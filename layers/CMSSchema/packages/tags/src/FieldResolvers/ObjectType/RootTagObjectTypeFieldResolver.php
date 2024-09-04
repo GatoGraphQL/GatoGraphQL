@@ -6,7 +6,6 @@ namespace PoPCMSSchema\Tags\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPCMSSchema\Tags\TypeAPIs\InjectableTaxonomyTagListTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeAPIs\QueryableTagTypeAPIInterface;
 use PoPCMSSchema\Tags\TypeResolvers\EnumType\TagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\RootTagsFilterInputObjectTypeResolver;
@@ -34,7 +33,6 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?TagUnionTypeResolver $tagUnionTypeResolver = null;
-    private ?InjectableTaxonomyTagListTypeAPIInterface $injectableTaxonomyTagListTypeAPI = null;
     private ?TagByOneofInputObjectTypeResolver $tagByOneofInputObjectTypeResolver = null;
     private ?TagTaxonomyEnumStringScalarTypeResolver $tagTaxonomyEnumStringScalarTypeResolver = null;
     private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
@@ -80,19 +78,6 @@ class RootTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldRes
             $this->tagUnionTypeResolver = $tagUnionTypeResolver;
         }
         return $this->tagUnionTypeResolver;
-    }
-    final public function setInjectableTaxonomyTagListTypeAPI(InjectableTaxonomyTagListTypeAPIInterface $injectableTaxonomyTagListTypeAPI): void
-    {
-        $this->injectableTaxonomyTagListTypeAPI = $injectableTaxonomyTagListTypeAPI;
-    }
-    final protected function getInjectableTaxonomyTagListTypeAPI(): InjectableTaxonomyTagListTypeAPIInterface
-    {
-        if ($this->injectableTaxonomyTagListTypeAPI === null) {
-            /** @var InjectableTaxonomyTagListTypeAPIInterface */
-            $injectableTaxonomyTagListTypeAPI = $this->instanceManager->getInstance(InjectableTaxonomyTagListTypeAPIInterface::class);
-            $this->injectableTaxonomyTagListTypeAPI = $injectableTaxonomyTagListTypeAPI;
-        }
-        return $this->injectableTaxonomyTagListTypeAPI;
     }
     final public function setTagByOneofInputObjectTypeResolver(TagByOneofInputObjectTypeResolver $tagByOneofInputObjectTypeResolver): void
     {

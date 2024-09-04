@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Categories\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\Categories\TypeAPIs\InjectableTaxonomyCategoryListTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeAPIs\QueryableCategoryTypeAPIInterface;
 use PoPCMSSchema\Categories\TypeResolvers\EnumType\CategoryTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\Categories\TypeResolvers\InputObjectType\CategoryByOneofInputObjectTypeResolver;
@@ -34,7 +33,6 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?CategoryUnionTypeResolver $categoryUnionTypeResolver = null;
-    private ?InjectableTaxonomyCategoryListTypeAPIInterface $injectableTaxonomyCategoryListTypeAPI = null;
     private ?CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver = null;
     private ?CategoryTaxonomyEnumStringScalarTypeResolver $categoryTaxonomyEnumStringScalarTypeResolver = null;
     private ?RootCategoriesFilterInputObjectTypeResolver $rootCategoriesFilterInputObjectTypeResolver = null;
@@ -80,19 +78,6 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
             $this->categoryUnionTypeResolver = $categoryUnionTypeResolver;
         }
         return $this->categoryUnionTypeResolver;
-    }
-    final public function setInjectableTaxonomyCategoryListTypeAPI(InjectableTaxonomyCategoryListTypeAPIInterface $injectableTaxonomyCategoryListTypeAPI): void
-    {
-        $this->injectableTaxonomyCategoryListTypeAPI = $injectableTaxonomyCategoryListTypeAPI;
-    }
-    final protected function getInjectableTaxonomyCategoryListTypeAPI(): InjectableTaxonomyCategoryListTypeAPIInterface
-    {
-        if ($this->injectableTaxonomyCategoryListTypeAPI === null) {
-            /** @var InjectableTaxonomyCategoryListTypeAPIInterface */
-            $injectableTaxonomyCategoryListTypeAPI = $this->instanceManager->getInstance(InjectableTaxonomyCategoryListTypeAPIInterface::class);
-            $this->injectableTaxonomyCategoryListTypeAPI = $injectableTaxonomyCategoryListTypeAPI;
-        }
-        return $this->injectableTaxonomyCategoryListTypeAPI;
     }
     final public function setCategoryByOneofInputObjectTypeResolver(CategoryByOneofInputObjectTypeResolver $categoryByOneofInputObjectTypeResolver): void
     {
