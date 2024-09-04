@@ -189,6 +189,18 @@ class Plugin
         );
 
         \register_taxonomy(
+            'additional-dummy-tag',
+            [],
+            $this->getTaxonomyArgs(
+                false,
+                __('Additional dummy Tag'),
+                __('Additional dummy Tags'),
+                __('additional dummy tag'),
+                __('additional dummy tags'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-tag-two',
             [],
             $this->getTaxonomyArgs(
@@ -213,6 +225,18 @@ class Plugin
         );
 
         \register_taxonomy(
+            'additional-dummy-category',
+            [],
+            $this->getTaxonomyArgs(
+                true,
+                __('Additional dummy Category'),
+                __('Additional dummy Categories'),
+                __('additional dummy category'),
+                __('additional dummy categories'),
+            )
+        );
+
+        \register_taxonomy(
             'dummy-category-two',
             [],
             $this->getTaxonomyArgs(
@@ -230,6 +254,8 @@ class Plugin
                 [
                     'dummy-tag',
                     'dummy-category',
+                    'additional-dummy-tag',
+                    'additional-dummy-category',
                 ],
                 __('Dummy CPT'),
                 __('Dummy CPTs'),

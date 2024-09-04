@@ -146,6 +146,8 @@ Consequatur.]]></excerpt:encoded>
 		<category domain="dummy-tag" nicename="heavy-metal"><![CDATA[Heavy metal]]></category>
 		<category domain="dummy-tag" nicename="jazz"><![CDATA[Jazz]]></category>
 		<category domain="dummy-tag" nicename="tango"><![CDATA[Tango]]></category>
+		<category domain="additional-dummy-category" nicename="asia"><![CDATA[Asia]]></category>
+		<category domain="additional-dummy-tag" nicename="argentina"><![CDATA[Argentina]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_some_random_int]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1907]]></wp:meta_value>
@@ -197,6 +199,8 @@ Consequatur.]]></excerpt:encoded>
 		<category domain="dummy-tag" nicename="jazz"><![CDATA[Jazz]]></category>
 		<category domain="dummy-category" nicename="perestroika"><![CDATA[Perestroika]]></category>
 		<category domain="dummy-tag" nicename="rock"><![CDATA[Rock]]></category>
+		<category domain="additional-dummy-category" nicename="europe"><![CDATA[Europe]]></category>
+		<category domain="additional-dummy-tag" nicename="brazil"><![CDATA[Brazil]]></category>
 						<wp:postmeta>
 		<wp:meta_key><![CDATA[_some_random_int]]></wp:meta_key>
 		<wp:meta_value><![CDATA[103]]></wp:meta_value>
