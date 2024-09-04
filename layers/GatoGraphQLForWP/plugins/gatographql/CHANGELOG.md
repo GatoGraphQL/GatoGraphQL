@@ -25,6 +25,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
   - [PRO] Import HTML from URLs as new posts in WordPress (#2822)
 - Support additional taxonomies for mutations on post tags/categories (not only `post_tag` and `category`) (#2823)
 - Added taxonomy field also to `PostTag` and `PostCategory` types (#2824)
+- Made taxonomy input not mandatory on `Root.tags/categories` and `CustomPost.tags/categories` fields (#2827)
 
 ### Fixed
 

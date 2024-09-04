@@ -301,6 +301,7 @@ The Gato GraphQL website contains extensive documentation, including [guides](ht
   * [PRO] Import HTML from URLs as new posts in WordPress (#2822)
 * Support additional taxonomies for mutations on post tags/categories (not only `post_tag` and `category`) (#2823)
 * Added taxonomy field also to `PostTag` and `PostCategory` types (#2824)
+* Made taxonomy input not mandatory on `Root.tags/categories` and `CustomPost.tags/categories` fields (#2827)
 * Fixed: Add `featuredImage` field on `GenericCustomPost` (#2806)
 * Fixed: On fields `blocks`, `blockDataItems`, and `blockFlattenedDataItems`, avoid error when post has no content (#2814)
 * [PRO] Updated mapped WordPress hooks for automation

@@ -7,14 +7,22 @@
     ...GenericTagData
     ...TagData
   }
+
+  tagsWithoutTaxonomy: tags(
+    sort: { by: ID, order: ASC }
+    pagination: { limit: 20 }
+  ) {
+    __typename
+    ...PostTagData
+    ...GenericTagData
+    ...TagData
+  }
   
   customPosts(
     filter: {
       customPostTypes: ["post","dummy-cpt"]
     }
-    pagination: {
-      limit: 30
-    }
+    pagination: { limit: 30 }
     sort: { by: ID, order: ASC }
   ) {
     __typename
@@ -26,6 +34,14 @@
     ...on GenericCustomPost {
       tags(
         taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
+        __typename
+        id
+        name
+        taxonomy
+      }
+      tagsWithoutTaxonomy: tags(
         sort: { by: ID, order: ASC }
       ) {
         __typename
@@ -65,6 +81,33 @@
     ...on GenericCustomPost {
       tags(
         taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
+        id
+      }
+    }
+  }
+
+  customPostsByTagIDsWithoutTaxonomy: customPosts(
+    filter: {
+      tags: {
+        includeBy: {
+          ids: [25, 29]
+        }
+      }
+    }
+    pagination: {
+      limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(
         sort: { by: ID, order: ASC }
       ) {
         id
@@ -130,6 +173,33 @@
     }
   }
 
+  customPostsByTagSlugsWithoutTaxonomy: customPosts(
+    filter: {
+      tags: {
+        includeBy: {
+          slugs: ["tango", "rock"]
+        }
+      }
+    }
+    pagination: {
+      limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(
+        sort: { by: ID, order: ASC }
+      ) {
+        slug
+      }
+    }
+  }
+
   customPostsExcludeByTagSlugs: customPosts(
     filter: {
       tags: {
@@ -188,6 +258,15 @@
       }
     }
   }
+
+  postTagCount: tagCount(taxonomy: post_tag)
+  postTagNames: tagNames(taxonomy: post_tag)
+
+  dummyTagCount: tagCount(taxonomy: "dummy-tag")
+  dummyTagNames: tagNames(taxonomy: "dummy-tag")
+
+  allTagCount: tagCount
+  allTagNames: tagNames
 }
 
 fragment TagData on Tag {
@@ -204,9 +283,16 @@ fragment TagData on Tag {
 }
 
 fragment GenericTagData on GenericTag {
-  taxonomy   
   customPostCount
   customPosts(sort: { by: ID, order: ASC }) {
+    __typename
+    ...CustomPostData
+  }
+}
+
+fragment PostTagData on PostTag {
+  postCount
+  posts(sort: { by: ID, order: ASC }) {
     __typename
     ...CustomPostData
   }
@@ -216,7 +302,6 @@ fragment CustomPostData on CustomPost {
   id
   title
   tags(
-    taxonomy: "dummy-tag"
     sort: { by: ID, order: ASC }
   ) {
     __typename

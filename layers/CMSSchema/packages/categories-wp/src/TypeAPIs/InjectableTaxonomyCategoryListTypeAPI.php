@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CategoriesWP\TypeAPIs;
 
 use PoPCMSSchema\CategoriesWP\StandaloneTypeAPIs\InjectableTaxonomyCategoryTypeAPI;
-use PoPCMSSchema\Categories\TypeAPIs\QueryableTaxonomyCategoryListTypeAPIInterface;
+use PoPCMSSchema\Categories\TypeAPIs\InjectableTaxonomyCategoryListTypeAPIInterface;
 
-class QueryableTaxonomyCategoryListTypeAPI implements QueryableTaxonomyCategoryListTypeAPIInterface
+class InjectableTaxonomyCategoryListTypeAPI implements InjectableTaxonomyCategoryListTypeAPIInterface
 {
     /**
      * @var array<string,InjectableTaxonomyCategoryTypeAPI>

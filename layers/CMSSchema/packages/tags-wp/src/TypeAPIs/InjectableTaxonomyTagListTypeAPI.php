@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoPCMSSchema\TagsWP\TypeAPIs;
 
 use PoPCMSSchema\TagsWP\StandaloneTypeAPIs\InjectableTaxonomyTagTypeAPI;
-use PoPCMSSchema\Tags\TypeAPIs\QueryableTaxonomyTagListTypeAPIInterface;
+use PoPCMSSchema\Tags\TypeAPIs\InjectableTaxonomyTagListTypeAPIInterface;
 
-class QueryableTaxonomyTagListTypeAPI implements QueryableTaxonomyTagListTypeAPIInterface
+class InjectableTaxonomyTagListTypeAPI implements InjectableTaxonomyTagListTypeAPIInterface
 {
     /**
      * @var array<string,InjectableTaxonomyTagTypeAPI>

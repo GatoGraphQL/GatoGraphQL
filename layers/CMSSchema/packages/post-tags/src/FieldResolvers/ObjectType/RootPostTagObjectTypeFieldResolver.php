@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace PoPCMSSchema\PostTags\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\PostTags\TypeAPIs\PostTagTypeAPIInterface;
+use PoPCMSSchema\PostTags\TypeResolvers\EnumType\PostTagTaxonomyEnumStringScalarTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\InputObjectType\PostTagByOneofInputObjectTypeResolver;
+use PoPCMSSchema\PostTags\TypeResolvers\InputObjectType\RootPostTagsFilterInputObjectTypeResolver;
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\SchemaCommons\Resolvers\WithLimitFieldArgResolverTrait;
-use PoPCMSSchema\PostTags\TypeResolvers\InputObjectType\RootPostTagsFilterInputObjectTypeResolver;
 use PoPCMSSchema\Tags\TypeResolvers\InputObjectType\TagPaginationInputObjectTypeResolver;
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\TaxonomySortInputObjectTypeResolver;
 use PoPSchema\SchemaCommons\Constants\QueryOptions;
@@ -37,6 +38,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     private ?TagPaginationInputObjectTypeResolver $tagPaginationInputObjectTypeResolver = null;
     private ?TaxonomySortInputObjectTypeResolver $taxonomySortInputObjectTypeResolver = null;
     private ?RootPostTagsFilterInputObjectTypeResolver $rootPostTagsFilterInputObjectTypeResolver = null;
+    private ?PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver = null;
 
     final public function setIntScalarTypeResolver(IntScalarTypeResolver $intScalarTypeResolver): void
     {
@@ -142,6 +144,19 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         }
         return $this->rootPostTagsFilterInputObjectTypeResolver;
     }
+    final public function setPostTagTaxonomyEnumStringScalarTypeResolver(PostTagTaxonomyEnumStringScalarTypeResolver $postTagTaxonomyEnumStringScalarTypeResolver): void
+    {
+        $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
+    }
+    final protected function getPostTagTaxonomyEnumStringScalarTypeResolver(): PostTagTaxonomyEnumStringScalarTypeResolver
+    {
+        if ($this->postTagTaxonomyEnumStringScalarTypeResolver === null) {
+            /** @var PostTagTaxonomyEnumStringScalarTypeResolver */
+            $postTagTaxonomyEnumStringScalarTypeResolver = $this->instanceManager->getInstance(PostTagTaxonomyEnumStringScalarTypeResolver::class);
+            $this->postTagTaxonomyEnumStringScalarTypeResolver = $postTagTaxonomyEnumStringScalarTypeResolver;
+        }
+        return $this->postTagTaxonomyEnumStringScalarTypeResolver;
+    }
 
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
@@ -211,9 +226,13 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
     public function getFieldArgNameTypeResolvers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): array
     {
         $fieldArgNameTypeResolvers = parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName);
+        $commonFieldArgNameTypeResolvers = [
+            'taxonomy' => $this->getPostTagTaxonomyEnumStringScalarTypeResolver(),
+        ];
         return match ($fieldName) {
             'postTag' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'by' => $this->getPostTagByOneofInputObjectTypeResolver(),
                 ]
@@ -221,6 +240,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             'postTags',
             'postTagNames' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'filter' => $this->getRootPostTagsFilterInputObjectTypeResolver(),
                     'pagination' => $this->getTagPaginationInputObjectTypeResolver(),
@@ -229,6 +249,7 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
             ),
             'postTagCount' => array_merge(
                 $fieldArgNameTypeResolvers,
+                $commonFieldArgNameTypeResolvers,
                 [
                     'filter' => $this->getRootPostTagsFilterInputObjectTypeResolver(),
                 ]
@@ -245,13 +266,46 @@ class RootPostTagObjectTypeFieldResolver extends AbstractQueryableObjectTypeFiel
         };
     }
 
+    public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
+    {
+        if ($fieldArgName === 'taxonomy') {
+            return $this->__('Taxonomy of the post tag', 'post-tags');
+        }
+        return match ([$fieldName => $fieldArgName]) {
+            ['postTag' => 'by'] => $this->__('Parameter by which to select the post tag', 'post-tags'),
+            default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    protected function getQuery(
+        ObjectTypeResolverInterface $objectTypeResolver,
+        object $object,
+        FieldDataAccessorInterface $fieldDataAccessor,
+    ): array {
+        $query = [];
+
+        /** @var string|null */
+        $postTagTaxonomy = $fieldDataAccessor->getValue('taxonomy');
+        if ($postTagTaxonomy !== null) {
+            $query['taxonomy'] = $postTagTaxonomy;
+        }
+
+        return $query;
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): mixed {
-        $query = $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor);
+        $query = array_merge(
+            $this->convertFieldArgsToFilteringQueryArgs($objectTypeResolver, $fieldDataAccessor),
+            $this->getQuery($objectTypeResolver, $object, $fieldDataAccessor)
+        );
         switch ($fieldDataAccessor->getFieldName()) {
             case 'postTag':
                 if ($tags = $this->getPostTagTypeAPI()->getTags($query, [QueryOptions::RETURN_TYPE => ReturnTypes::IDS])) {

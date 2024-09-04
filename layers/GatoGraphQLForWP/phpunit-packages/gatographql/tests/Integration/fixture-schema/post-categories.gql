@@ -6,6 +6,20 @@
     }
   }
 
+  postCategoriesWithTaxonomy: postCategories(taxonomy: category) {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
+  allPostCategoriesWithTaxonomy: postCategories(taxonomy: null) {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
   nonEmptyPostCategories: postCategories(filter: {hideEmpty: true}) {
     id
     name
@@ -67,6 +81,19 @@
     }
   }
 
+  postsByCategoryIDsWithTaxonomy: posts(
+    filter: {
+      categories: { includeBy: { ids: [1, 4] } }
+      taxonomy: category
+    }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
+
   postsExcludeByCategoryIDs: posts(
     filter: { categories: { excludeBy: { ids: [1, 4] } } }
   ) {
@@ -79,6 +106,19 @@
 
   postsByCategorySlugs: posts(
     filter: { categories: { includeBy: { slugs: ["resource"] } } }
+  ) {
+    id
+    title
+    categories {
+      id
+    }
+  }
+
+  postsByCategorySlugsWithTaxonomy: posts(
+    filter: {
+      categories: { includeBy: { slugs: ["resource"] } }
+      taxonomy: category
+    }
   ) {
     id
     title
@@ -106,6 +146,9 @@
   
   postCategoryCount
   postCategoryNames
+  
+  allPostCategoryCount: postCategoryCount(taxonomy: null)
+  allPostCategoryNames: postCategoryNames(taxonomy: null)
 
   postsByCategoryByNonExistingID: postCategory(by: { id: 8888 }) {
     ...PostCategoryData
