@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Categories\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\FilterByTaxonomyTermsInputObjectTypeResolver;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use stdClass;
@@ -54,14 +53,6 @@ abstract class AbstractFilterCustomPostsByCategoriesInputObjectTypeResolver exte
             'includeBy' => $this->__('Retrieve custom posts which contain categories', 'categories'),
             'excludeBy' => $this->__('Retrieve custom posts which do not contain categories', 'categories'),
             default => parent::getInputFieldDescription($inputFieldName),
-        };
-    }
-
-    public function getInputFieldTypeModifiers(string $inputFieldName): int
-    {
-        return match ($inputFieldName) {
-            'taxonomy' => SchemaTypeModifiers::MANDATORY,
-            default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 
