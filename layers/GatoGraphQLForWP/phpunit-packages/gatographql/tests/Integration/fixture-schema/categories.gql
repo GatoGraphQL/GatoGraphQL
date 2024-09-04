@@ -241,6 +241,9 @@
   }
   dummyCategoryCount: categoryCount(taxonomy: "dummy-category")
   dummyCategoryNames: categoryNames(taxonomy: "dummy-category")
+
+  allCategoryCount: categoryCount
+  allCategoryNames: categoryNames
 }
 
 fragment CategoryData on Category {

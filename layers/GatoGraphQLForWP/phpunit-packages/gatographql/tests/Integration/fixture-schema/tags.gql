@@ -258,6 +258,15 @@
       }
     }
   }
+
+  postTagCount: tagCount(taxonomy: post_tag)
+  postTagNames: tagNames(taxonomy: post_tag)
+
+  dummyTagCount: tagCount(taxonomy: "dummy-tag")
+  dummyTagNames: tagNames(taxonomy: "dummy-tag")
+
+  allTagCount: tagCount
+  allTagNames: tagNames
 }
 
 fragment TagData on Tag {
