@@ -3,6 +3,10 @@
     ...PostTagData
   }
 
+  postTagsWithTaxonomy: postTags(filter: { taxonomy: post_tag }) {
+    ...PostTagData
+  }
+
   nonEmptyPostTags: postTags(filter: {hideEmpty: true}) {
     id
     name
@@ -58,6 +62,19 @@
     }
   }
 
+  postsByTagIDsWithTaxonomy: posts(
+    filter: {
+      tags: { includeBy: { ids: [15, 14] } }
+      taxonomy: post_tag
+    }
+  ) {
+    id
+    title
+    tags {
+      id
+    }
+  }
+
   postsExcludeByTagIDs: posts(
     filter: { tags: { excludeBy: { ids: [15, 14] } } }
   ) {
@@ -70,6 +87,19 @@
 
   postsByTagSlugs: posts(
     filter: { tags: { includeBy: { slugs: ["release", "plugin"] } } }
+  ) {
+    id
+    title
+    tags {
+      slug
+    }
+  }
+
+  postsByTagSlugsWithTaxonomy: posts(
+    filter: {
+      tags: { includeBy: { slugs: ["release", "plugin"] } }
+      taxonomy: post_tag
+    }
   ) {
     id
     title
