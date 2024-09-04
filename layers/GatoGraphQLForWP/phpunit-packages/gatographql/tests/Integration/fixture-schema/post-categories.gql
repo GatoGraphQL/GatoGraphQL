@@ -13,7 +13,14 @@
     }
   }
 
-  allPostCategoriesWithTaxonomy: postCategories(taxonomy: null) {
+  additionalPostCategories: postCategories(taxonomy: "additional-post-category") {
+    ...PostCategoryData
+    children {
+      ...PostCategoryData
+    }
+  }
+
+  allPostCategories: postCategories(taxonomy: null) {
     ...PostCategoryData
     children {
       ...PostCategoryData

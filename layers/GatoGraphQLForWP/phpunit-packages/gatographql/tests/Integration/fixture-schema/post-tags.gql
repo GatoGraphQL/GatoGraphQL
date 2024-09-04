@@ -7,7 +7,11 @@
     ...PostTagData
   }
 
-  allPostTagsWithTaxonomy: postTags(taxonomy: null) {
+  additionalPostTags: postTags(taxonomy: "additional-post-tag") {
+    ...PostTagData
+  }
+
+  allPostTags: postTags(taxonomy: null) {
     ...PostTagData
   }
 
