@@ -88,6 +88,33 @@
     }
   }
 
+  customPostsByTagIDsWithoutTaxonomy: customPosts(
+    filter: {
+      tags: {
+        includeBy: {
+          ids: [25, 29]
+        }
+      }
+    }
+    pagination: {
+      limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(
+        sort: { by: ID, order: ASC }
+      ) {
+        id
+      }
+    }
+  }
+
   customPostsExcludeByTagIDs: customPosts(
     filter: {
       tags: {
@@ -139,6 +166,33 @@
     ...on GenericCustomPost {
       tags(
         taxonomy: "dummy-tag"
+        sort: { by: ID, order: ASC }
+      ) {
+        slug
+      }
+    }
+  }
+
+  customPostsByTagSlugsWithoutTaxonomy: customPosts(
+    filter: {
+      tags: {
+        includeBy: {
+          slugs: ["tango", "rock"]
+        }
+      }
+    }
+    pagination: {
+      limit: 20
+    },
+    sort: {
+      by: ID,
+      order: ASC
+    }
+  ) {
+    id
+    title
+    ...on GenericCustomPost {
+      tags(
         sort: { by: ID, order: ASC }
       ) {
         slug
