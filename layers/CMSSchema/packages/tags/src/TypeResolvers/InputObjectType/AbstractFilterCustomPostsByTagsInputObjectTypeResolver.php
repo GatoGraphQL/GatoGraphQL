@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Tags\TypeResolvers\InputObjectType;
 
 use PoPCMSSchema\Taxonomies\TypeResolvers\InputObjectType\FilterByTaxonomyTermsInputObjectTypeResolver;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\AbstractQueryableInputObjectTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use stdClass;
@@ -53,6 +54,14 @@ abstract class AbstractFilterCustomPostsByTagsInputObjectTypeResolver extends Ab
             'includeBy' => $this->__('Retrieve custom posts which contain tags', 'tags'),
             'excludeBy' => $this->__('Retrieve custom posts which do not contain tags', 'tags'),
             default => parent::getInputFieldDescription($inputFieldName),
+        };
+    }
+
+    public function getInputFieldTypeModifiers(string $inputFieldName): int
+    {
+        return match ($inputFieldName) {
+            'taxonomy' => SchemaTypeModifiers::MANDATORY,
+            default => parent::getInputFieldTypeModifiers($inputFieldName),
         };
     }
 
