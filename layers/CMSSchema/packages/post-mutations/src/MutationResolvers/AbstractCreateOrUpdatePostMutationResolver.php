@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PostMutations\MutationResolvers;
 
-use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 use PoPCMSSchema\PostMutations\Constants\PostCRUDHookNames;
 use PoPCMSSchema\Posts\TypeAPIs\PostTypeAPIInterface;

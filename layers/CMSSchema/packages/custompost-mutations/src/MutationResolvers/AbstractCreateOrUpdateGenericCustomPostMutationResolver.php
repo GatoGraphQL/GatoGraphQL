@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
 use PoPCMSSchema\CustomPostMutations\Constants\GenericCustomPostCRUDHookNames;
-use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
-use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPCMSSchema\CustomPostMutations\MutationResolvers\AbstractCreateOrUpdateCustomPostMutationResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
