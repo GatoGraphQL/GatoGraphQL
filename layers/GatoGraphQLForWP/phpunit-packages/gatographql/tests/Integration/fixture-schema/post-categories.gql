@@ -202,6 +202,11 @@ fragment PostCategoryData on PostCategory {
     id
     title
   }
+  postCountWithoutTaxonomy: postCount(filter: { taxonomy: null })
+  postsWithoutTaxonomy: posts(filter: { taxonomy: null }) {
+    id
+    title
+  }
   slug
   url
   urlPath
