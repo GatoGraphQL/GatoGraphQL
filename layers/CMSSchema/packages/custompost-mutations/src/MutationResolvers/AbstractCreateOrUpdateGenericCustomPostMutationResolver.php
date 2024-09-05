@@ -70,6 +70,7 @@ abstract class AbstractCreateOrUpdateGenericCustomPostMutationResolver extends A
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
             $customPostType,
+            $customPostID,
         );
     }
 

@@ -162,6 +162,7 @@ abstract class AbstractCreateOrUpdatePageMutationResolver extends AbstractCreate
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
             $customPostType,
+            $customPostID,
         );
     }
 
