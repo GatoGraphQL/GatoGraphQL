@@ -1422,9 +1422,9 @@
         ],
         "tagsWithoutTaxonomy": [
             {
-                "__typename": "GenericTag",
-                "customPostCount": 1,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1121,
@@ -1463,9 +1463,9 @@
                 "urlPath": "\/tag\/advanced\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 4,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 4,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1116,
@@ -1579,9 +1579,9 @@
                 "urlPath": "\/tag\/features\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 1,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1116,
@@ -1626,9 +1626,9 @@
                 "urlPath": "\/tag\/graphql\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 1,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1121,
@@ -1667,9 +1667,9 @@
                 "urlPath": "\/tag\/ideas\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 3,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 3,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1113,
@@ -1758,9 +1758,9 @@
                 "urlPath": "\/tag\/plugin\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 1,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1113,
@@ -1793,9 +1793,9 @@
                 "urlPath": "\/tag\/release\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 1,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1125,
@@ -1828,9 +1828,9 @@
                 "urlPath": "\/tag\/security\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 2,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 2,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1116,
@@ -1900,9 +1900,9 @@
                 "urlPath": "\/tag\/wordpress\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 0,
-                "customPosts": [],
+                "__typename": "PostTag",
+                "postCount": 0,
+                "posts": [],
                 "taxonomy": "post_tag",
                 "count": 0,
                 "description": "",
@@ -1915,9 +1915,9 @@
                 "urlPath": "\/tag\/also-never-used\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 0,
-                "customPosts": [],
+                "__typename": "PostTag",
+                "postCount": 0,
+                "posts": [],
                 "taxonomy": "post_tag",
                 "count": 0,
                 "description": "",
@@ -1930,9 +1930,9 @@
                 "urlPath": "\/tag\/xcel\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 0,
-                "customPosts": [],
+                "__typename": "PostTag",
+                "postCount": 0,
+                "posts": [],
                 "taxonomy": "post_tag",
                 "count": 0,
                 "description": "",
@@ -3363,9 +3363,9 @@
                 "urlPath": "\/dummy-tag\/tango\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 1,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1125,
@@ -3398,9 +3398,9 @@
                 "urlPath": "\/additional-post-tag\/racing-cars\/"
             },
             {
-                "__typename": "GenericTag",
-                "customPostCount": 1,
-                "customPosts": [
+                "__typename": "PostTag",
+                "postCount": 1,
+                "posts": [
                     {
                         "__typename": "Post",
                         "id": 1123,
