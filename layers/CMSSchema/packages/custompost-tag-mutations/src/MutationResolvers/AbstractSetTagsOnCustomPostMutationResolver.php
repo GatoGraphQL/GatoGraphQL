@@ -128,7 +128,7 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
         $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
 
-        $this->setTagsOnCustomPostOrAddError(
+        $this->setTagsOnCustomPost(
             $customPostID,
             $append,
             $fieldDataAccessor,
@@ -175,6 +175,28 @@ abstract class AbstractSetTagsOnCustomPostMutationResolver extends AbstractMutat
 
         $this->validateCanLoggedInUserEditCustomPost(
             $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateCustomPostTypeIsNotEmpty(
+            $customPostID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        /** @var string */
+        $customPostType = $this->getCustomPostTypeAPI()->getCustomPostType($customPostID);
+        $this->validateSetTagsOnCustomPost(
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );

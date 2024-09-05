@@ -41,9 +41,8 @@ trait SetTagsOnCustomPostMutationResolverTrait
         );
     }
 
-    protected function setTagsOnCustomPostOrAddError(
-        string|int $customPostID,
-        bool $append,
+    protected function validateSetTagsOnCustomPost(
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -59,8 +58,6 @@ trait SetTagsOnCustomPostMutationResolverTrait
             return;
         }
 
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
         foreach ($tagTaxonomyToTaxonomyTerms as $taxonomyName => $tagIDs) {
             $this->validateCanLoggedInUserAssignTermsToTaxonomy(
                 $taxonomyName,
@@ -68,19 +65,24 @@ trait SetTagsOnCustomPostMutationResolverTrait
                 $objectTypeFieldResolutionFeedbackStore,
             );
 
-            $this->validateTaxonomyIsRegisteredForCustomPost(
-                $customPostID,
+            $this->validateTaxonomyIsRegisteredForCustomPostType(
+                $customPostType,
                 $taxonomyName,
                 $tagIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
+    }
 
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
+    protected function setTagsOnCustomPost(
+        string|int $customPostID,
+        bool $append,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /** @var array<string,array<string|int>> */
+        $tagTaxonomyToTaxonomyTerms = $this->getTagTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         foreach ($tagTaxonomyToTaxonomyTerms as $taxonomyName => $tagIDs) {
             $this->getCustomPostTagTypeMutationAPI()->setTagsByID(
                 $taxonomyName,

@@ -41,9 +41,8 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
         );
     }
 
-    protected function setCategoriesOnCustomPostOrAddError(
-        string|int $customPostID,
-        bool $append,
+    protected function validateSetCategoriesOnCustomPost(
+        string $customPostType,
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): void {
@@ -59,8 +58,6 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
             return;
         }
 
-        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
-
         foreach ($categoryTaxonomyToTaxonomyTerms as $taxonomyName => $categoryIDs) {
             $this->validateCanLoggedInUserAssignTermsToTaxonomy(
                 $taxonomyName,
@@ -68,19 +65,24 @@ trait SetCategoriesOnCustomPostMutationResolverTrait
                 $objectTypeFieldResolutionFeedbackStore,
             );
 
-            $this->validateTaxonomyIsRegisteredForCustomPost(
-                $customPostID,
+            $this->validateTaxonomyIsRegisteredForCustomPostType(
+                $customPostType,
                 $taxonomyName,
                 $categoryIDs,
                 $fieldDataAccessor,
                 $objectTypeFieldResolutionFeedbackStore,
             );
         }
+    }
 
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return;
-        }
-
+    protected function setCategoriesOnCustomPost(
+        string|int $customPostID,
+        bool $append,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        /** @var array<string,array<string|int>> */
+        $categoryTaxonomyToTaxonomyTerms = $this->getCategoryTaxonomyToTaxonomyTerms($fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         foreach ($categoryTaxonomyToTaxonomyTerms as $taxonomyName => $categoryIDs) {
             $this->getCustomPostCategoryTypeMutationAPI()->setCategoriesByID(
                 $taxonomyName,

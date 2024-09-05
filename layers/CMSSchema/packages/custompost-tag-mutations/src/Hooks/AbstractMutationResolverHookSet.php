@@ -69,10 +69,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            $this->getValidateCreateOrUpdateHookName(),
+            $this->getValidateCreateHookName(),
             $this->maybeValidateTags(...),
             10,
-            2
+            3
+        );
+        App::addAction(
+            $this->getValidateUpdateHookName(),
+            $this->maybeValidateTags(...),
+            10,
+            3
         );
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
@@ -88,7 +94,8 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    abstract protected function getValidateCreateOrUpdateHookName(): string;
+    abstract protected function getValidateCreateHookName(): string;
+    abstract protected function getValidateUpdateHookName(): string;
     abstract protected function getExecuteCreateOrUpdateHookName(): string;
 
     protected function getErrorPayloadHookName(): string
@@ -99,12 +106,25 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     public function maybeValidateTags(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        string $customPostType,
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateSetTagsOnCustomPost(
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -134,7 +154,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        $this->setTagsOnCustomPostOrAddError(
+        $this->setTagsOnCustomPost(
             $customPostID,
             false,
             $fieldDataAccessor,

@@ -69,10 +69,16 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     protected function init(): void
     {
         App::addAction(
-            $this->getValidateCreateOrUpdateHookName(),
+            $this->getValidateCreateHookName(),
             $this->maybeValidateCategories(...),
             10,
-            2
+            3
+        );
+        App::addAction(
+            $this->getValidateUpdateHookName(),
+            $this->maybeValidateCategories(...),
+            10,
+            3
         );
         App::addAction(
             $this->getExecuteCreateOrUpdateHookName(),
@@ -88,7 +94,8 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
         );
     }
 
-    abstract protected function getValidateCreateOrUpdateHookName(): string;
+    abstract protected function getValidateCreateHookName(): string;
+    abstract protected function getValidateUpdateHookName(): string;
     abstract protected function getExecuteCreateOrUpdateHookName(): string;
 
     protected function getErrorPayloadHookName(): string
@@ -99,12 +106,25 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
     public function maybeValidateCategories(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+        string $customPostType,
     ): void {
         if (!$this->canExecuteMutation($fieldDataAccessor)) {
             return;
         }
 
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+
         $this->validateIsUserLoggedIn(
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        $this->validateSetCategoriesOnCustomPost(
+            $customPostType,
             $fieldDataAccessor,
             $objectTypeFieldResolutionFeedbackStore,
         );
@@ -134,7 +154,7 @@ abstract class AbstractMutationResolverHookSet extends AbstractHookSet
             return;
         }
 
-        $this->setCategoriesOnCustomPostOrAddError(
+        $this->setCategoriesOnCustomPost(
             $customPostID,
             false,
             $fieldDataAccessor,
