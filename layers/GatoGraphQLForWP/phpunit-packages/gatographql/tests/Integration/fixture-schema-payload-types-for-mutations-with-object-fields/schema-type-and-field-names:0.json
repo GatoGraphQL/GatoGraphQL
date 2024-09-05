@@ -3,14 +3,6 @@
     "__schema": {
       "types": [
         {
-          "name": "CategoryDoesNotExistErrorPayload",
-          "fields": [
-            {
-              "name": "message"
-            }
-          ]
-        },
-        {
           "name": "CategoryTermDoesNotExistErrorPayload",
           "fields": [
             {
@@ -267,10 +259,16 @@
               "name": "excerpt"
             },
             {
+              "name": "featuredImage"
+            },
+            {
               "name": "globalID"
             },
             {
               "name": "hasComments"
+            },
+            {
+              "name": "hasFeaturedImage"
             },
             {
               "name": "id"
@@ -410,6 +408,14 @@
         },
         {
           "name": "LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ]
+        },
+        {
+          "name": "LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -744,6 +750,12 @@
               "name": "replyComments"
             },
             {
+              "name": "setCategoriesOnCustomPost"
+            },
+            {
+              "name": "setCategoriesOnCustomPosts"
+            },
+            {
               "name": "setCategoriesOnPost"
             },
             {
@@ -754,6 +766,12 @@
             },
             {
               "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
+              "name": "setTagsOnCustomPost"
+            },
+            {
+              "name": "setTagsOnCustomPosts"
             },
             {
               "name": "setTagsOnPost"
@@ -1109,6 +1127,9 @@
               "name": "slugPath"
             },
             {
+              "name": "taxonomy"
+            },
+            {
               "name": "url"
             },
             {
@@ -1151,6 +1172,9 @@
             },
             {
               "name": "slug"
+            },
+            {
+              "name": "taxonomy"
             },
             {
               "name": "url"
@@ -1204,6 +1228,9 @@
             },
             {
               "name": "imageSizeNames"
+            },
+            {
+              "name": "isGutenbergEditorEnabled"
             },
             {
               "name": "isUserLoggedIn"
@@ -1493,6 +1520,9 @@
               "name": "imageSizeNames"
             },
             {
+              "name": "isGutenbergEditorEnabled"
+            },
+            {
               "name": "isUserLoggedIn"
             },
             {
@@ -1643,6 +1673,12 @@
               "name": "self"
             },
             {
+              "name": "setCategoriesOnCustomPost"
+            },
+            {
+              "name": "setCategoriesOnCustomPosts"
+            },
+            {
               "name": "setCategoriesOnPost"
             },
             {
@@ -1653,6 +1689,12 @@
             },
             {
               "name": "setFeaturedImageOnCustomPosts"
+            },
+            {
+              "name": "setTagsOnCustomPost"
+            },
+            {
+              "name": "setTagsOnCustomPosts"
             },
             {
               "name": "setTagsOnPost"
@@ -2006,6 +2048,23 @@
           ]
         },
         {
+          "name": "RootSetCategoriesOnCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
           "name": "RootSetCategoriesOnPostMutationPayload",
           "fields": [
             {
@@ -2024,6 +2083,23 @@
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "customPost"
+            },
+            {
+              "name": "customPostID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ]
+        },
+        {
+          "name": "RootSetTagsOnCustomPostMutationPayload",
           "fields": [
             {
               "name": "customPost"
@@ -2193,7 +2269,7 @@
           ]
         },
         {
-          "name": "TagDoesNotExistErrorPayload",
+          "name": "TagTermDoesNotExistErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -2201,7 +2277,7 @@
           ]
         },
         {
-          "name": "TagTermDoesNotExistErrorPayload",
+          "name": "TaxonomyIsNotValidErrorPayload",
           "fields": [
             {
               "name": "message"
@@ -2700,6 +2776,14 @@
         },
         {
           "name": "Numeric",
+          "fields": null
+        },
+        {
+          "name": "PostCategoryTaxonomyEnumString",
+          "fields": null
+        },
+        {
+          "name": "PostTagTaxonomyEnumString",
           "fields": null
         },
         {
@@ -3241,11 +3325,19 @@
           "fields": null
         },
         {
+          "name": "RootSetCategoriesOnCustomPostInput",
+          "fields": null
+        },
+        {
           "name": "RootSetCategoriesOnPostInput",
           "fields": null
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostInput",
+          "fields": null
+        },
+        {
+          "name": "RootSetTagsOnCustomPostInput",
           "fields": null
         },
         {
@@ -3513,11 +3605,19 @@
           "fields": null
         },
         {
+          "name": "RootSetCategoriesOnCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
           "name": "RootSetCategoriesOnPostMutationErrorPayloadUnion",
           "fields": null
         },
         {
           "name": "RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnion",
+          "fields": null
+        },
+        {
+          "name": "RootSetTagsOnCustomPostMutationErrorPayloadUnion",
           "fields": null
         },
         {

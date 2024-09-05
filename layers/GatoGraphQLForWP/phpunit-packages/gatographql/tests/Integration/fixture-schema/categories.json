@@ -3566,30 +3566,6 @@
                 ]
             },
             {
-                "id": 1656,
-                "title": "Dummy CPT with non-existing block",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 32
-                    }
-                ]
-            },
-            {
-                "id": 1658,
-                "title": "Dummy CPT with no content",
-                "categories": [
-                    {
-                        "id": 19
-                    },
-                    {
-                        "id": 32
-                    }
-                ]
-            },
-            {
                 "id": 1634,
                 "title": "Recusandae vel deleniti est expedita dolores quasi",
                 "categories": [
@@ -3604,6 +3580,30 @@
             {
                 "id": 1654,
                 "title": "Dummy CPT with blocks",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 32
+                    }
+                ]
+            },
+            {
+                "id": 1656,
+                "title": "Dummy CPT with non-existing block",
+                "categories": [
+                    {
+                        "id": 19
+                    },
+                    {
+                        "id": 32
+                    }
+                ]
+            },
+            {
+                "id": 1658,
+                "title": "Dummy CPT with no content",
                 "categories": [
                     {
                         "id": 19
