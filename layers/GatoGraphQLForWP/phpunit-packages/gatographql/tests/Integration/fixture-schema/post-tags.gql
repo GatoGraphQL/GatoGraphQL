@@ -9,6 +9,11 @@
 
   additionalPostTags: postTags(taxonomy: "additional-post-tag") {
     ...PostTagData
+    additionalPostCount: postCount(filter: { tags: { taxonomy: "additional-post-tag" } })
+    additionalPosts: posts(filter: { tags: { taxonomy: "additional-post-tag" } }) {
+      id
+      title
+    }
   }
 
   allPostTags: postTags(taxonomy: null) {
@@ -168,11 +173,6 @@ fragment PostTagData on PostTag {
   name
   postCount
   posts {
-    id
-    title
-  }
-  postCountWithoutTaxonomy: postCount(filter: { tags: { taxonomy: null } })
-  postsWithoutTaxonomy: posts(filter: { tags: { taxonomy: null } }) {
     id
     title
   }
