@@ -71,6 +71,7 @@
         taxonomy: "dummy-category"
       }
     }
+    sort: { by: ID, order: ASC }
   ) {
     id
     title
