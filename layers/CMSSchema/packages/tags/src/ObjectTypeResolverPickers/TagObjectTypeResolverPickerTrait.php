@@ -19,9 +19,9 @@ trait TagObjectTypeResolverPickerTrait
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        return in_array(
+        return array_intersect(
             $this->getTagTaxonomies(),
             $moduleConfiguration->getQueryableTagTaxonomies()
-        );
+        ) !== [];
     }
 }
