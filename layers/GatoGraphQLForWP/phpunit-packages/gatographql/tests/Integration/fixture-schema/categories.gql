@@ -186,7 +186,7 @@
     ...CategoryData
   }
   postCategoryCount: categoryCount(taxonomy: category)
-  postCategoryNames: categoryNames(taxonomy: category)
+  postCategoryNames: categoryNames(taxonomy: category, pagination: { limit: 20 })
 
   dummyCategories: categories(
     taxonomy: "dummy-category"
@@ -201,10 +201,10 @@
     ...CategoryData
   }
   dummyCategoryCount: categoryCount(taxonomy: "dummy-category")
-  dummyCategoryNames: categoryNames(taxonomy: "dummy-category")
+  dummyCategoryNames: categoryNames(taxonomy: "dummy-category", pagination: { limit: 20 })
 
   allCategoryCount: categoryCount
-  allCategoryNames: categoryNames
+  allCategoryNames: categoryNames(pagination: { limit: 20 })
 }
 
 fragment CategoryData on Category {
