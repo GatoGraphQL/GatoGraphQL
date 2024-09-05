@@ -9,11 +9,6 @@
 
   additionalPostTags: postTags(taxonomy: "additional-post-tag") {
     ...PostTagData
-    additionalPostCount: postCount(filter: { tags: { taxonomy: "additional-post-tag" } })
-    additionalPosts: posts(filter: { tags: { taxonomy: "additional-post-tag" } }) {
-      id
-      title
-    }
   }
 
   allPostTags: postTags(taxonomy: null) {

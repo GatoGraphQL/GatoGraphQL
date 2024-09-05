@@ -17,16 +17,7 @@
     ...PostCategoryData
     children {
       ...PostCategoryData
-      additionalPostCount: postCount(filter: { categories: { taxonomy: "additional-post-category" } })
-      additionalPosts: posts(filter: { categories: { taxonomy: "additional-post-category" } }) {
-        id
-        title
       }
-    }
-    additionalPostCount: postCount(filter: { categories: { taxonomy: "additional-post-category" } })
-    additionalPosts: posts(filter: { categories: { taxonomy: "additional-post-category" } }) {
-      id
-      title
     }
   }
 
